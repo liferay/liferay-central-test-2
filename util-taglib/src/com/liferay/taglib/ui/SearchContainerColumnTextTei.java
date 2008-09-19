@@ -29,22 +29,22 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.VariableInfo;
 
 /**
- * <a href="SearchContainerColumnTextTei.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerColumnTextTei.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  *
  */
-public class SearchContainerColumnTextTei
-	extends TagExtraInfo {
+public class SearchContainerColumnTextTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {
-		Object buffer = data.getAttribute("buffer");
+		String buffer = data.getAttributeString("buffer");
 
 		if (Validator.isNotNull(buffer)) {
 			return new VariableInfo[] {
 				new VariableInfo(
-					String.valueOf(buffer), StringBuilder.class.getName(),
-					true, VariableInfo.NESTED)
+					buffer, StringBuilder.class.getName(), true,
+					VariableInfo.NESTED)
 			};
 		}
 		else {

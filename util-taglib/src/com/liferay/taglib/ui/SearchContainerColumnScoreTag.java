@@ -23,7 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.List;
@@ -32,7 +32,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 /**
- * <a href="SearchContainerColumnTextTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerColumnScoreTag.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  *
@@ -40,34 +41,15 @@ import javax.servlet.jsp.JspTagException;
 public class SearchContainerColumnScoreTag
 	extends ParamAndPropertyAncestorTagImpl {
 
-	public int doStartTag() throws JspException {
-		SearchContainerRowTag parent = (SearchContainerRowTag)
-			findAncestorWithClass(this, SearchContainerRowTag.class);
+	private static final String DEFAULT_NAME = "score";
 
-		if (parent == null) {
-			throw new JspTagException(
-				"Requires the liferay-ui:search-container-row tag");
-		}
-
-		if (!parent.isHeaderNamesAssigned()) {
-			SearchContainerTag parentParent = (SearchContainerTag)
-				findAncestorWithClass(this, SearchContainerTag.class);
-
-			List<String> headerNames = parentParent.getSearchContainer()
-				.getHeaderNames();
-
-			headerNames.add(getName());
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
-	public int doEndTag() throws JspException {
-		SearchContainerRowTag parent = (SearchContainerRowTag)
-			findAncestorWithClass(this, SearchContainerRowTag.class);
-
+	public int doEndTag() {
 		try {
-			ResultRow row = parent.getRow();
+			SearchContainerRowTag parentTag =
+				(SearchContainerRowTag)findAncestorWithClass(
+					this, SearchContainerRowTag.class);
+
+			ResultRow row = parentTag.getRow();
 
 			if (_index <= -1) {
 				_index = row.getEntries().size();
@@ -79,44 +61,63 @@ public class SearchContainerColumnScoreTag
 		}
 		finally {
 			_index = -1;
-			_name = null;
+			_name = DEFAULT_NAME;
 			_score = 0;
 		}
+	}
+
+	public int doStartTag() throws JspException {
+		SearchContainerRowTag parentRowTag =
+			(SearchContainerRowTag)findAncestorWithClass(
+				this, SearchContainerRowTag.class);
+
+		if (parentRowTag == null) {
+			throw new JspTagException(
+				"Requires liferay-ui:search-container-row");
+		}
+
+		if (!parentRowTag.isHeaderNamesAssigned()) {
+			SearchContainerTag parentSearchContainerTag =
+				(SearchContainerTag)findAncestorWithClass(
+					this, SearchContainerTag.class);
+
+			SearchContainer searchContainer =
+				parentSearchContainerTag.getSearchContainer();
+
+			List<String> headerNames = searchContainer.getHeaderNames();
+
+			headerNames.add(getName());
+		}
+
+		return EVAL_BODY_INCLUDE;
 	}
 
 	public int getIndex() {
 		return _index;
 	}
 
-	public void setIndex(int index) {
-		_index = index;
-	}
-
 	public String getName() {
-		if (Validator.isNull(_name)) {
-			return SCORE;
-		}
-		else {
-			return _name;
-		}
-	}
-
-	public void setName(String name) {
-		_name = name;
+		return _name;
 	}
 
 	public float getScore() {
 		return _score;
 	}
 
+	public void setIndex(int index) {
+		_index = index;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public void setScore(float score) {
 		_score = score;
 	}
 
-	private static final String SCORE = "score";
-
 	private int _index = -1;
-	private String _name;
+	private String _name = DEFAULT_NAME;
 	private float _score;
 
 }

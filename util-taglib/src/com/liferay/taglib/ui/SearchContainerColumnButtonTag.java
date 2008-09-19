@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -31,47 +32,27 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 import java.util.List;
 
 import javax.portlet.PortletURL;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
-
 /**
- * <a href="SearchContainerColumnButtonTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerColumnButtonTag.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  *
  */
 public class SearchContainerColumnButtonTag
-    extends ParamAndPropertyAncestorTagImpl {
+	extends ParamAndPropertyAncestorTagImpl {
 
-	public int doStartTag() throws JspException {
-		SearchContainerRowTag parent = (SearchContainerRowTag)
-			findAncestorWithClass(this, SearchContainerRowTag.class);
-
-		if (parent == null) {
-			throw new JspTagException(
-				"Requires the liferay-ui:search-container-row tag");
-		}
-
-		if (!parent.isHeaderNamesAssigned()) {
-			SearchContainerTag parentParent = (SearchContainerTag)
-				findAncestorWithClass(this, SearchContainerTag.class);
-
-			List<String> headerNames = parentParent.getSearchContainer()
-				.getHeaderNames();
-
-			headerNames.add(getName());
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
-	public int doEndTag() throws JspException {
-		SearchContainerRowTag parent = (SearchContainerRowTag)
-			findAncestorWithClass(this, SearchContainerRowTag.class);
-
+	public int doEndTag() {
 		try {
-			ResultRow row = parent.getRow();
+			SearchContainerRowTag parentTag =
+				(SearchContainerRowTag)findAncestorWithClass(
+					this, SearchContainerRowTag.class);
+
+			ResultRow row = parentTag.getRow();
 
 			if (_index <= -1) {
 				_index = row.getEntries().size();
@@ -84,92 +65,98 @@ public class SearchContainerColumnButtonTag
 			return EVAL_PAGE;
 		}
 		finally {
-			_align = null;
-			_colspan = -1;
-			_index = -1;
+			_align = SearchEntry.DEFAULT_ALIGN;
+			_colspan = SearchEntry.DEFAULT_COLSPAN;
 			_href = null;
-			_name = null;
-			_valign = null;
+			_index = -1;
+			_name = StringPool.BLANK;
+			_valign = SearchEntry.DEFAULT_VALIGN;
 		}
 	}
 
-   public String getAlign() {
-		if (Validator.isNull(_align)) {
-			return SearchEntry.DEFAULT_ALIGN;
-		}
-		else {
-			return _align;
-		}
-    }
+	public int doStartTag() throws JspException {
+		SearchContainerRowTag parentRowTag =
+			(SearchContainerRowTag)findAncestorWithClass(
+				this, SearchContainerRowTag.class);
 
-    public void setAlign(String align) {
-    	_align = align;
-    }
-
-    public int getColspan() {
-		if (_colspan >= -1) {
-			return SearchEntry.DEFAULT_COLSPAN;
+		if (parentRowTag == null) {
+			throw new JspTagException(
+				"Requires liferay-ui:search-container-row");
 		}
-		else {
-			return _colspan;
+
+		if (!parentRowTag.isHeaderNamesAssigned()) {
+			SearchContainerTag parentSearchContainerTag =
+				(SearchContainerTag)findAncestorWithClass(
+					this, SearchContainerTag.class);
+
+			SearchContainer searchContainer =
+				parentSearchContainerTag.getSearchContainer();
+
+			List<String> headerNames = searchContainer.getHeaderNames();
+
+			headerNames.add(getName());
 		}
-    }
 
-    public void setColspan(int colspan) {
-    	_colspan = colspan;
-    }
+		return EVAL_BODY_INCLUDE;
+	}
 
-    public Object getHref() {
+	public String getAlign() {
+		return _align;
+	}
+
+	public int getColspan() {
+		return _colspan;
+	}
+
+	public Object getHref() {
 		if (Validator.isNotNull(_href) && (_href instanceof PortletURL)) {
 			_href = _href.toString();
 		}
 
-    	return _href;
-    }
+		return _href;
+	}
 
-    public void setHref(Object href) {
-    	_href = href;
-    }
+	public int getIndex() {
+		return _index;
+	}
 
-    public int getIndex() {
-    	return _index;
-    }
+	public String getName() {
+		return _name;
+	}
 
-    public void setIndex(int index) {
-    	_index = index;
-    }
+	public String getValign() {
+		return _valign;
+	}
 
-    public String getName() {
-		if (Validator.isNull(_name)) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _name;
-		}
-    }
+	public void setAlign(String align) {
+		_align = align;
+	}
 
-    public void setName(String name) {
-    	_name = name;
-    }
+	public void setColspan(int colspan) {
+		_colspan = colspan;
+	}
 
-    public String getValign() {
-		if (Validator.isNull(_valign)) {
-			return SearchEntry.DEFAULT_VALIGN;
-		}
-		else {
-			return _valign;
-		}
-    }
+	public void setHref(Object href) {
+		_href = href;
+	}
 
-    public void setValign(String valign) {
-    	_valign = valign;
-    }
+	public void setIndex(int index) {
+		_index = index;
+	}
 
-	private String _align;
-	private int _colspan = -1;
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setValign(String valign) {
+		_valign = valign;
+	}
+
+	private String _align = SearchEntry.DEFAULT_ALIGN;
+	private int _colspan = SearchEntry.DEFAULT_COLSPAN;
 	private Object _href;
 	private int _index = -1;
-	private String _name;
-	private String _valign;
+	private String _name = StringPool.BLANK;
+	private String _valign = SearchEntry.DEFAULT_VALIGN;
 
 }

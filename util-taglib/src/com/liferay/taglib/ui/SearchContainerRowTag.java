@@ -25,7 +25,6 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.lang.reflect.Method;
@@ -39,13 +38,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="SearchContainerResultRowTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerRowTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public class SearchContainerRowTag
-	extends ParamAndPropertyAncestorTagImpl {
+public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
+
+	public static final String DEFAULT_INDEX_VAR = "index";
+
+	public static final String DEFAULT_MODEL_VAR = "model";
+
+	public static final String DEFAULT_ROW_VAR = "row";
 
 	public void addParam(String name, String value) {
 		if (name.equals("className")) {
@@ -62,24 +66,58 @@ public class SearchContainerRowTag
 		}
 	}
 
+	public int doAfterBody() throws JspException {
+		_resultRows.add(_row);
+
+		_headerNamesAssigned = true;
+
+		_rowIndex++;
+
+		if (_rowIndex < (_results.size())) {
+			processRow();
+
+			return EVAL_BODY_AGAIN;
+		}
+		else {
+			return SKIP_BODY;
+		}
+	}
+
+	public int doEndTag() {
+		_bold = false;
+		_className = null;
+		_escapedModel = false;
+		_headerNamesAssigned = false;
+		_indexVar = DEFAULT_INDEX_VAR;
+		_keyProperty = null;
+		_modelVar = DEFAULT_MODEL_VAR;
+		_resultRows = null;
+		_rowIndex = 0;
+		_rowVar = DEFAULT_ROW_VAR;
+		_row = null;
+		_stringKey = false;
+
+		return EVAL_PAGE;
+	}
+
 	public int doStartTag() throws JspException {
-		SearchContainerTag parent = (SearchContainerTag)findAncestorWithClass(
-			this, SearchContainerTag.class);
+		SearchContainerTag parentTag =
+			(SearchContainerTag)findAncestorWithClass(
+				this, SearchContainerTag.class);
 
-		if (parent == null) {
-			throw new JspException(
-				"Requires the liferay-ui:search-container tag");
+		if (parentTag == null) {
+			throw new JspException("Requires liferay-ui:search-container");
 		}
-		else if (!parent.getHasResults()) {
+		else if (!parentTag.isHasResults()) {
 			throw new JspException(
-				"Requires the liferay-ui:search-container-results tag");
+				"Requires liferay-ui:search-container-results");
 		}
 
-		_resultRows = parent.getSearchContainer().getResultRows();
-		_results = parent.getSearchContainer().getResults();
+		_resultRows = parentTag.getSearchContainer().getResultRows();
+		_results = parentTag.getSearchContainer().getResults();
 
 		if ((_results != null) && (!_results.isEmpty())) {
-			_processRow();
+			processRow();
 
 			return EVAL_BODY_INCLUDE;
 		}
@@ -88,42 +126,87 @@ public class SearchContainerRowTag
 		}
 	}
 
-	public int doAfterBody() throws JspException {
-	    _resultRows.add(_row);
-
-	    _headerNamesAssigned = true;
-
-	    _rowIndex++;
-
-		if (_rowIndex < (_results.size())) {
-
-		    _processRow();
-
-		    return EVAL_BODY_AGAIN;
-		}
-		else {
-		    return SKIP_BODY;
-		}
+	public String getClassName() {
+		return _className;
 	}
 
-	public int doEndTag() throws JspException {
-		_bold = false;
-		_className = null;
-		_escapedModel = false;
-		_headerNamesAssigned = false;
-		_indexVar = null;
-		_keyProperty = null;
-		_modelVar = null;
-		_resultRows = null;
-		_rowIndex = 0;
-		_rowVar = null;
-		_row = null;
-		_stringKey = false;
-
-		return EVAL_PAGE;
+	public String getIndexVar() {
+		return _indexVar;
 	}
 
-	private void _processRow() throws JspException {
+	public String getKeyProperty() {
+		return _keyProperty;
+	}
+
+	public String getModelVar() {
+		return _modelVar;
+	}
+
+	public ResultRow getRow() {
+		return _row;
+	}
+
+	public String getRowVar() {
+		return _rowVar;
+	}
+
+	public boolean isBold() {
+		return _bold;
+	}
+
+	public boolean isEscapedModel() {
+		return _escapedModel;
+	}
+
+	public boolean isHeaderNamesAssigned() {
+		return _headerNamesAssigned;
+	}
+
+	public boolean isStringKey() {
+		return _stringKey;
+	}
+
+	public void setBold(boolean bold) {
+		_bold = bold;
+	}
+
+	public void setClassName(String className) {
+		_className = className;
+	}
+
+	public void setEscapedModel(boolean escapedModel) {
+		_escapedModel = escapedModel;
+	}
+
+	public void setHeaderNamesAssigned(boolean headerNamesAssigned) {
+		_headerNamesAssigned = headerNamesAssigned;
+	}
+
+	public void setIndexVar(String indexVar) {
+		_indexVar = indexVar;
+	}
+
+	public void setKeyProperty(String keyProperty) {
+		_keyProperty = keyProperty;
+	}
+
+	public void setModelVar(String var) {
+		_modelVar = var;
+	}
+
+	public void setRow(ResultRow row) {
+		_row = row;
+	}
+
+	public void setRowVar(String rowVar) {
+		_rowVar = rowVar;
+	}
+
+	public void setStringKey(boolean stringKey) {
+		_stringKey = stringKey;
+	}
+
+	protected void processRow() throws JspException {
 		HttpServletRequest request = getServletRequest();
 
 		Object model = _results.get(_rowIndex);
@@ -133,16 +216,15 @@ public class SearchContainerRowTag
 				ClassLoader contextClassLoader =
 					Thread.currentThread().getContextClassLoader();
 
-				Class clazz = contextClassLoader.loadClass(_className);
+				Class<?> classObj = contextClassLoader.loadClass(_className);
 
-				Method method = clazz.getMethod("toEscapedModel", new Class[0]);
+				Method method = classObj.getMethod(
+					"toEscapedModel", new Class[0]);
 
 				model = method.invoke(model, new Object[0]);
 			}
 			catch (Exception e) {
-				throw new JspException(
-					"Class|Interface identified by attribute \"className\" " +
-						"must implement a toEscapedModel() method");
+				throw new JspException(e.getMessage());
 			}
 		}
 
@@ -152,136 +234,36 @@ public class SearchContainerRowTag
 		}
 
 		if (isStringKey()) {
-			String pKey = BeanParamUtil.getString(
+			String primaryKey = BeanParamUtil.getString(
 				model, request, _keyProperty);
 
-			_row = new ResultRow(model, pKey, _rowIndex, _bold);
+			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
 		else {
-			long pKey = BeanParamUtil.getLong(
+			long primaryKey = BeanParamUtil.getLong(
 				model, request, _keyProperty);
 
-			_row = new ResultRow(model, pKey, _rowIndex, _bold);
+			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
 
-		pageContext.setAttribute(getModelVar(), model);
 		pageContext.setAttribute(getIndexVar(), _rowIndex);
+		pageContext.setAttribute(getModelVar(), model);
 		pageContext.setAttribute(getRowVar(), _row);
 	}
 
-	public boolean isBold() {
-		return _bold;
-	}
+	private static Log _log = LogFactory.getLog(SearchContainerRowTag.class);
 
-	public void setBold(boolean bold) {
-		_bold = bold;
-	}
-
-	public String getClassName() {
-		return _className;
-	}
-
-	public void setClassName(String className) {
-		_className = className;
-	}
-
-	public boolean isEscapedModel() {
-		return _escapedModel;
-	}
-
-	public void setEscapedModel(boolean escapedModel) {
-		_escapedModel = escapedModel;
-	}
-
-	public boolean isHeaderNamesAssigned() {
-		return _headerNamesAssigned;
-	}
-
-	public void setHeaderNamesAssigned(boolean headerNamesAssigned) {
-		_headerNamesAssigned = headerNamesAssigned;
-	}
-
-	public String getIndexVar() {
-		if (Validator.isNull(_indexVar)) {
-			return INDEX_VAR;
-		}
-		else {
-			return _indexVar;
-		}
-	}
-
-	public void setIndexVar(String indexVar) {
-		_indexVar = indexVar;
-	}
-
-	public String getKeyProperty() {
-		return _keyProperty;
-	}
-
-	public void setKeyProperty(String keyProperty) {
-		_keyProperty = keyProperty;
-	}
-
-	public String getModelVar() {
-		if (Validator.isNull(_modelVar)) {
-			return MODEL_VAR;
-		}
-		else {
-			return _modelVar;
-		}
-	}
-
-	public void setModelVar(String var) {
-		_modelVar = var;
-	}
-
-	public ResultRow getRow() {
-		return _row;
-	}
-
-	public void setRow(ResultRow row) {
-		_row = row;
-	}
-
-	public String getRowVar() {
-		if (Validator.isNull(_rowVar)) {
-			return ROW_VAR;
-		}
-		else {
-			return _rowVar;
-		}
-	}
-
-	public void setRowVar(String rowVar) {
-		_rowVar = rowVar;
-	}
-
-	public boolean isStringKey() {
-		return _stringKey;
-	}
-
-	public void setStringKey(boolean stringKey) {
-		_stringKey = stringKey;
-	}
-
-	public static final String INDEX_VAR = "index";
-	public static final String MODEL_VAR = "model";
-	public static final String ROW_VAR = "row";
-
-	private static Log _log = LogFactory.getLog(
-		SearchContainerRowTag.class);
-
-	private boolean _bold = false;
+	private boolean _bold;
 	private String _className;
-	private boolean _escapedModel = false;
-	private boolean _headerNamesAssigned = false;
-	private String _indexVar;
+	private boolean _escapedModel;
+	private boolean _headerNamesAssigned;
+	private String _indexVar = DEFAULT_INDEX_VAR;
 	private String _keyProperty;
-	private String _modelVar;
+	private String _modelVar = DEFAULT_MODEL_VAR;
 	private List _results;
-	private List _resultRows;
-	private int _rowIndex = 0;
-	private String _rowVar;
+	private List<ResultRow> _resultRows;
+	private int _rowIndex;
+	private String _rowVar = DEFAULT_ROW_VAR;
 	private ResultRow _row;
 	private boolean _stringKey = false;
 

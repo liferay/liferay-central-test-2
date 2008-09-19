@@ -37,6 +37,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
@@ -48,14 +49,39 @@ import javax.servlet.jsp.JspException;
  */
 public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
+	public static final String DEFAULT_VAR = "searchContainer";
+
+	public int doEndTag() {
+		_curParam = SearchContainer.DEFAULT_CUR_PARAM;
+		_delta = SearchContainer.DEFAULT_DELTA;
+		_displayTerms = null;
+		_emptyResultsMessage = null;
+		_hasResults = false;
+		_headerNames = null;
+		_hover = false;
+		_iteratorURL = null;
+		_orderableHeaders = null;
+		_orderByCol = null;
+		_orderByComparator = null;
+		_orderByType = null;
+		_rowChecker = null;
+		_searchContainer = null;
+		_searchTerms = null;
+		_var = DEFAULT_VAR;
+
+		return EVAL_PAGE;
+	}
+
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request = getServletRequest();
 
-			PortletRequest portletRequest = (PortletRequest)
-				request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
-			PortletResponse portletResponse = (PortletResponse)
-				request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+			PortletRequest portletRequest =
+				(PortletRequest)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_REQUEST);
+			PortletResponse portletResponse =
+				(PortletResponse)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			if (_iteratorURL == null) {
 				_iteratorURL =
@@ -69,6 +95,8 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 					_emptyResultsMessage);
 			}
 
+			_searchContainer.setHover(_hover);
+
 			if (_orderableHeaders != null) {
 				_searchContainer.setOrderableHeaders(_orderableHeaders);
 			}
@@ -77,14 +105,12 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 				_searchContainer.setOrderByCol(_orderByCol);
 			}
 
-			if (Validator.isNotNull(_orderByType)) {
-				_searchContainer.setOrderByType(_orderByType);
-			}
-
-			_searchContainer.setHover(_hover);
-
 			if (_orderByComparator != null) {
 				_searchContainer.setOrderByComparator(_orderByComparator);
+			}
+
+			if (Validator.isNotNull(_orderByType)) {
+				_searchContainer.setOrderByType(_orderByType);
 			}
 
 			if (_rowChecker != null) {
@@ -100,187 +126,149 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public int doEndTag() throws JspException {
-		_curParam = null;
-		_delta = 0;
-		_displayTerms = null;
-		_emptyResultsMessage = null;
-		_hasResults = false;
-		_headerNames = null;
-		_hover = false;
-		_iteratorURL = null;
-		_orderableHeaders = null;
-		_orderByCol = null;
-		_orderByComparator = null;
-		_orderByType = null;
-		_rowChecker = null;
-		_searchContainer = null;
-		_searchTerms = null;
-		_var = null;
-
-		return EVAL_PAGE;
-	}
-
 	public String getCurParam() {
-		if (Validator.isNull(_curParam)) {
-			return SearchContainer.DEFAULT_CUR_PARAM;
-		}
-		else {
-			return _curParam;
-		}
-	}
-
-	public void setCurParam(String curParam) {
-		_curParam = curParam;
+		return _curParam;
 	}
 
 	public int getDelta() {
-		if (_delta <= 0) {
-			return SearchContainer.DEFAULT_DELTA;
-		}
-		else {
-			return _delta;
-		}
-	}
-
-	public void setDelta(int delta) {
-		_delta = delta;
+		return _delta;
 	}
 
 	public DisplayTerms getDisplayTerms() {
 		return _displayTerms;
 	}
 
-	public void setDisplayTerms(DisplayTerms displayTerms) {
-		_displayTerms = displayTerms;
-	}
-
 	public String getEmptyResultsMessage() {
 		return _emptyResultsMessage;
-	}
-
-	public void setEmptyResultsMessage(String emptyResultsMessage) {
-		_emptyResultsMessage = emptyResultsMessage;
-	}
-
-	public boolean getHasResults() {
-		return _hasResults;
-	}
-
-	public void setHasResults(boolean hasResults) {
-		_hasResults = hasResults;
 	}
 
 	public List<String> getHeaderNames() {
 		return _headerNames;
 	}
 
-	public void setHeaderNames(List<String> headerNames) {
-		_headerNames = headerNames;
-	}
-
-	public boolean isHover() {
-		return _hover;
-	}
-
-	public void setHover(boolean hover) {
-		_hover = hover;
-	}
-
 	public PortletURL getIteratorURL() {
 		return _iteratorURL;
-	}
-
-	public void setIteratorURL(PortletURL iteratorURL) {
-		_iteratorURL = iteratorURL;
 	}
 
 	public Map<String, String> getOrderableHeaders() {
 		return _orderableHeaders;
 	}
 
-	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
-		_orderableHeaders = orderableHeaders;
-	}
-
 	public String getOrderByCol() {
 		return _orderByCol;
-	}
-
-	public void setOrderByCol(String orderByCol) {
-		_orderByCol = orderByCol;
 	}
 
 	public OrderByComparator getOrderByComparator() {
 		return _orderByComparator;
 	}
 
-	public void setOrderByComparator(OrderByComparator orderByComparator) {
-		_orderByComparator = orderByComparator;
-	}
-
 	public String getOrderByType() {
 		return _orderByType;
-	}
-
-	public void setOrderByType(String orderByType) {
-		_orderByType = orderByType;
 	}
 
 	public RowChecker getRowChecker() {
 		return _rowChecker;
 	}
 
-	public void setRowChecker(RowChecker rowChecker) {
-		_rowChecker = rowChecker;
-	}
-
-	public SearchContainer<?> getSearchContainer() {
+	public SearchContainer getSearchContainer() {
 		return _searchContainer;
-	}
-
-	public void setSearchContainer(SearchContainer<?> searchContainer) {
-		_searchContainer = searchContainer;
 	}
 
 	public DisplayTerms getSearchTerms() {
 		return _searchTerms;
 	}
 
-	public void setSearchTerms(DisplayTerms searchTerms) {
-		_searchTerms = searchTerms;
+	public String getVar() {
+		return _var;
 	}
 
-	public String getVar() {
-		if (Validator.isNull(_var)) {
-			return SEARCH_CONTAINER_VAR;
-		}
-		else {
-			return _var;
-		}
+	public boolean isHasResults() {
+		return _hasResults;
+	}
+
+	public boolean isHover() {
+		return _hover;
+	}
+
+	public void setCurParam(String curParam) {
+		_curParam = curParam;
+	}
+
+	public void setDelta(int delta) {
+		_delta = delta;
+	}
+
+	public void setDisplayTerms(DisplayTerms displayTerms) {
+		_displayTerms = displayTerms;
+	}
+
+	public void setEmptyResultsMessage(String emptyResultsMessage) {
+		_emptyResultsMessage = emptyResultsMessage;
+	}
+
+	public void setHasResults(boolean hasResults) {
+		_hasResults = hasResults;
+	}
+
+	public void setHeaderNames(List<String> headerNames) {
+		_headerNames = headerNames;
+	}
+
+	public void setHover(boolean hover) {
+		_hover = hover;
+	}
+
+	public void setIteratorURL(PortletURL iteratorURL) {
+		_iteratorURL = iteratorURL;
+	}
+
+	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
+		_orderableHeaders = orderableHeaders;
+	}
+
+	public void setOrderByCol(String orderByCol) {
+		_orderByCol = orderByCol;
+	}
+
+	public void setOrderByComparator(OrderByComparator orderByComparator) {
+		_orderByComparator = orderByComparator;
+	}
+
+	public void setOrderByType(String orderByType) {
+		_orderByType = orderByType;
+	}
+
+	public void setRowChecker(RowChecker rowChecker) {
+		_rowChecker = rowChecker;
+	}
+
+	public void setSearchContainer(SearchContainer searchContainer) {
+		_searchContainer = searchContainer;
+	}
+
+	public void setSearchTerms(DisplayTerms searchTerms) {
+		_searchTerms = searchTerms;
 	}
 
 	public void setVar(String var) {
 		_var = var;
 	}
 
-	public static final String SEARCH_CONTAINER_VAR = "searchContainer";
-
-	private String _curParam;
-	private int _delta = 0;
+	private String _curParam = SearchContainer.DEFAULT_CUR_PARAM;
+	private int _delta = SearchContainer.DEFAULT_DELTA;
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;
 	private boolean _hasResults;
 	private List<String> _headerNames;
-	private boolean _hover = false;
+	private boolean _hover;
 	private PortletURL _iteratorURL;
 	private OrderByComparator _orderByComparator;
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByType;
 	private RowChecker _rowChecker;
-	private SearchContainer<?> _searchContainer;
+	private SearchContainer _searchContainer;
 	private DisplayTerms _searchTerms;
-	private String _var;
+	private String _var = DEFAULT_VAR;
 
 }

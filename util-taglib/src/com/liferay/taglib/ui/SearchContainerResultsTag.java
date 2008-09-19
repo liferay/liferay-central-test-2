@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 
 import java.util.List;
 
@@ -38,26 +38,20 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class SearchContainerResultsTag extends TagSupport {
 
-	public int doStartTag() throws JspException {
-		SearchContainerTag parent = (SearchContainerTag)findAncestorWithClass(
-			this, SearchContainerTag.class);
-
-		if (parent == null) {
-			throw new JspTagException(
-				"Requires the liferay-ui:search-container tag.");
-		}
-
-		return SKIP_BODY;
-	}
+	public static final String DEFAULT_VAR = "results";
 
 	public int doEndTag() throws JspException {
-		SearchContainerTag parent = (SearchContainerTag)findAncestorWithClass(
-			this, SearchContainerTag.class);
-
 		try {
-			parent.getSearchContainer().setResults(_results);
-			parent.getSearchContainer().setTotal(_total);
-			parent.setHasResults(true);
+			SearchContainerTag parentTag =
+				(SearchContainerTag)findAncestorWithClass(
+					this, SearchContainerTag.class);
+
+			SearchContainer searchContainer = parentTag.getSearchContainer();
+
+			searchContainer.setResults(_results);
+			searchContainer.setTotal(_total);
+
+			parentTag.setHasResults(true);
 
 			pageContext.setAttribute(getVar(), _results);
 
@@ -66,41 +60,51 @@ public class SearchContainerResultsTag extends TagSupport {
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+		finally {
+			_results = null;
+			_total = 0;
+			_var = DEFAULT_VAR;
+		}
+	}
+
+	public int doStartTag() throws JspException {
+		SearchContainerTag parentTag =
+			(SearchContainerTag)findAncestorWithClass(
+				this, SearchContainerTag.class);
+
+		if (parentTag == null) {
+			throw new JspTagException("Requires liferay-ui:search-container");
+		}
+
+		return SKIP_BODY;
 	}
 
 	public List getResults() {
 		return _results;
 	}
 
-	public void setResults(List results) {
-		_results = results;
-	}
-
 	public int getTotal() {
 		return _total;
+	}
+
+	public String getVar() {
+		return _var;
+	}
+
+	public void setResults(List results) {
+		_results = results;
 	}
 
 	public void setTotal(int total) {
 		_total = total;
 	}
 
-	public String getVar() {
-		if (Validator.isNull(_var)) {
-			return RESULTS_VAR;
-		}
-		else {
-			return _var;
-		}
-	}
-
 	public void setVar(String var) {
 		_var = var;
 	}
 
-	public static final String RESULTS_VAR = "results";
-
 	private List _results;
 	private int _total;
-	private String _var;
+	private String _var = DEFAULT_VAR;
 
 }

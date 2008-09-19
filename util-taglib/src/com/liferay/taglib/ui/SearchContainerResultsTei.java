@@ -39,13 +39,12 @@ import javax.servlet.jsp.tagext.VariableInfo;
 public class SearchContainerResultsTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {
-		Object var = data.getAttribute("var");
+		String var = data.getAttributeString("var");
 
 		if (Validator.isNotNull(var)) {
 			return new VariableInfo[] {
 				new VariableInfo(
-					String.valueOf(var), List.class.getName(),
-					false, VariableInfo.AT_END)
+					var, List.class.getName(), false, VariableInfo.AT_END)
 			};
 		}
 		else {

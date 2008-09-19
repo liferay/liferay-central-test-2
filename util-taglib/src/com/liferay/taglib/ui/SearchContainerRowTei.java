@@ -30,7 +30,7 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.VariableInfo;
 
 /**
- * <a href="SearchContainerResultRowTei.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerRowTei.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -38,32 +38,32 @@ import javax.servlet.jsp.tagext.VariableInfo;
 public class SearchContainerRowTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {
-		Object className = data.getAttribute("className");
-		Object indexVar = data.getAttribute("indexVar");
+		String className = data.getAttributeString("className");
+
+		String indexVar = data.getAttributeString("indexVar");
 
 		if (Validator.isNull(indexVar)) {
-			indexVar = SearchContainerRowTag.INDEX_VAR;
+			indexVar = SearchContainerRowTag.DEFAULT_INDEX_VAR;
 		}
 
-		Object modelVar = data.getAttribute("modelVar");
+		String modelVar = data.getAttributeString("modelVar");
 
 		if (Validator.isNull(modelVar)) {
-			modelVar = SearchContainerRowTag.MODEL_VAR;
+			modelVar = SearchContainerRowTag.DEFAULT_MODEL_VAR;
 		}
 
-		Object rowVar = data.getAttribute("rowVar");
+		String rowVar = data.getAttributeString("rowVar");
 
 		if (Validator.isNull(rowVar)) {
-			rowVar = SearchContainerRowTag.ROW_VAR;
+			rowVar = SearchContainerRowTag.DEFAULT_ROW_VAR;
 		}
 
 		return new VariableInfo[] {
 			new VariableInfo(
-				String.valueOf(indexVar), Integer.class.getName(), true, VariableInfo.NESTED),
+				indexVar, Integer.class.getName(), true, VariableInfo.NESTED),
+			new VariableInfo(modelVar, className, true, VariableInfo.NESTED),
 			new VariableInfo(
-				String.valueOf(modelVar), String.valueOf(className), true, VariableInfo.NESTED),
-			new VariableInfo(
-				String.valueOf(rowVar), ResultRow.class.getName(), true, VariableInfo.NESTED)
+				rowVar, ResultRow.class.getName(), true, VariableInfo.NESTED)
 		};
 	}
 
