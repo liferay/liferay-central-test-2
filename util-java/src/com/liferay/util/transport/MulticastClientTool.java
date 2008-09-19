@@ -102,8 +102,6 @@ public class MulticastClientTool {
 			}
 			else if (args[i].equals("-s")) {
 				argsMap.put("short", Boolean.TRUE);
-
-				i++;
 			}
 			else if (args[i].equals("-h")) {
 				argsMap.put("host", args[i + 1]);
