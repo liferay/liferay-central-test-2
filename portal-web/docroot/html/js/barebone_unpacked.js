@@ -7548,7 +7548,7 @@ var SWFObject = deconcept.SWFObject;
 
 jQuery.noConflict();
 
-Liferay = {};
+Liferay = Liferay || {};
 
 Liferay.Editor = {};
 
@@ -7829,100 +7829,6 @@ if (!window.Array.prototype.lastIndexOf) {
 		return -1;
 	};
 }
-Liferay.Browser = {
-
-	init: function() {
-		var instance = this;
-
-		var version = instance.version();
-		var exactVersion = instance.version(true);
-
-		instance._browserVars = {
-			agent: '',
-
-			is_firefox: false,
-
-			is_ie: false,
-			is_ie_4: false,
-			is_ie_5: false,
-			is_ie_5_5: false,
-			is_ie_5_up: false,
-			is_ie_6: false,
-			is_ie_7: false,
-
-			is_mozilla: false,
-			is_mozilla_1_3_up: false,
-
-			is_ns_4: false,
-
-			is_rtf: false,
-
-			is_safari: false,
-			is_opera: false
-		};
-
-		instance._browserVars.agent = instance.browser().toLowerCase();
-
-		instance._browserVars.is_firefox = jQuery.browser.firefox;
-
-		instance._browserVars.is_ie = jQuery.browser.msie;
-		instance._browserVars.is_ie_4 = (instance.is_ie && version == 4);
-		instance._browserVars.is_ie_5 = (instance.is_ie && version == 5);
-		instance._browserVars.is_ie_5_5 = (instance.is_ie && exactVersion == 5.5);
-		instance._browserVars.is_ie_5_up = (instance.is_ie && version >= 5);
-		instance._browserVars.is_ie_6 = (instance.is_ie && version == 6);
-		instance._browserVars.is_ie_7 = (instance.is_ie && version == 7);
-
-		instance._browserVars.is_mozilla = (jQuery.browser.mozilla);
-		instance._browserVars.is_mozilla_1_3_up = (instance.is_mozilla && exactVersion > 1.3);
-
-		instance._browserVars.is_ns_4 = (jQuery.browser.netscape && version == 4);
-
-		instance._browserVars.is_rtf = (instance.is_ie_5_5_up || instance.is_mozilla_1_3_up);
-
-		instance._browserVars.is_safari = jQuery.browser.safari;
-		instance._browserVars.is_opera = jQuery.browser.opera;
-
-		jQuery.extend(instance, instance._browserVars);
-	},
-
-	browser: function() {
-		var instance = this;
-
-		return jQuery.browser.browser;
-	},
-
-	compat: function() {
-		var instance = this;
-
-		for (var i in instance._browserVars) {
-			if (!window[i]) {
-				window[i] = instance._browserVars[i];
-			}
-		}
-	},
-
-	version: function(exact) {
-		var instance = this;
-
-		if (!exact) {
-			return jQuery.browser.version.major;
-		}
-		else {
-			return jQuery.browser.version.string;
-		}
-	},
-
-	_browserVars: {}
-};
-
-jQuery(
-	function() {
-		Liferay.Browser.init();
-		//Uncomment the following line if you wish to have the original global variables set (eg. is_ie6, is_mozilla, etc)
-		// Liferay.Browser.compat();
-	}
-);
 Liferay.Util = {
 	submitCountdown: 0,
 
@@ -7980,7 +7886,7 @@ Liferay.Util = {
 				this.selectionEnd = caretPos;
 			}
 
-			if (Liferay.Browser.is_ie && (this != document.activeElement)) {
+			if (Liferay.Browser.isIe() && (this != document.activeElement)) {
 				this.focus();
 			}
 		};
@@ -8017,7 +7923,7 @@ Liferay.Util = {
 		instance.addInputType = function() {
 		};
 
-		if (Liferay.Browser.is_ie && Liferay.Browser.version() < 7) {
+		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
 			instance.addInputType = function(el) {
 				var item;
 
@@ -8194,6 +8100,26 @@ Liferay.Util = {
 		);
 	},
 
+	defaultValue: function(obj, defaultValue) {
+		var input = jQuery(obj).val(defaultValue);
+
+		input.focus(
+			function() {
+				if (this.value == defaultValue) {
+					this.value = '';
+				}
+			}
+		);
+
+		input.blur(
+			function() {
+				if (!this.value) {
+					this.value = defaultValue;
+				}
+			}
+		);
+	},
+
 	disableElements: function(obj) {
 		var el = jQuery(obj);
 		var children = el.find('*');
@@ -8214,7 +8140,7 @@ Liferay.Util = {
 
 		var removeEvents = defaultEvents;
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			removeEvents = function(el) {
 				defaultEvents(el);
 				ieEvents(el);
@@ -8726,7 +8652,7 @@ Liferay.Util = {
 		else {
 			Liferay.Util.submitCountdown = 0;
 
-			if (!Liferay.Browser.is_ns_4) {
+			if (!Liferay.Browser.isMozilla()) {
 				document.body.style.cursor = 'auto';
 			}
 
@@ -8827,7 +8753,7 @@ Liferay.Util = {
 			}
 		);
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			var currentWidth = boxObj.css('width');
 
 			if (currentWidth == 'auto') {
@@ -8904,7 +8830,7 @@ Liferay.Util = {
 		var el = this;
 		var pressedKey = event.which;
 
-		if(pressedKey == 9 || (Liferay.Browser.is_safari && pressedKey == 25)) {
+		if(pressedKey == 9 || (Liferay.Browser.isSafari() && pressedKey == 25)) {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -9066,7 +8992,7 @@ function submitForm(form, action, singleSubmit) {
 			form.action = action;
 		}
 
-		if (!Liferay.Browser.is_ns_4) {
+		if (!Liferay.Browser.isMozilla()) {
 			document.body.style.cursor = 'wait';
 		}
 
@@ -9210,16 +9136,16 @@ Liferay.Popup = function(options) {
 
 			return cache;
 		},
-		dragStart: function(e, ui) {
+		dragStart: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
-				var target = jQuery(e.target);
+				var target = jQuery(event.target);
 
 				checkExternalClick(target);
 				dialog.css('visibility', 'hidden');
 			}
 		},
-		dragStop: function(e, ui) {
+		dragStop: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
 				var helper = ui.helper;
@@ -9236,14 +9162,12 @@ Liferay.Popup = function(options) {
 				);
 			}
 		},
-
 		close: function() {
 			var target = jQuery(this);
 
 			checkExternalClick(target);
 		},
-
-		open: function(e, ui) {
+		open: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(this);
 
@@ -9284,8 +9208,27 @@ Liferay.Popup = function(options) {
 	var dragHelper = config.dragHelper;
 	var dragStart = config.dragStart;
 	var dragStop = config.dragStop;
-	var open = config.open;
-	var close = config.close;
+
+	var open = function(event, ui) {
+		var instance = this;
+
+		defaults.open.apply(instance, arguments);
+
+		if (config.open) {
+			config.open.apply(instance, arguments);
+		}
+	};
+
+	var close = function(event, ui) {
+		var instance = this;
+
+		defaults.close.apply(instance, arguments);
+
+		if (config.close) {
+			config.close.apply(instance, arguments);
+		}
+	};
+
 	var messageId = config.messageId;
 	var resizable = config.resizable;
 	var resizeHelper = config.resizeHelper;
@@ -9882,7 +9825,7 @@ Liferay.Portlet = {
 					link.attr('title', title);
 					img.attr('src', imgSrc);
 
-					if (restore && Liferay.Browser.is_ie) {
+					if (restore && Liferay.Browser.isIe()) {
 						content.css('display', '');
 					}
 				}
@@ -10151,7 +10094,7 @@ Liferay.Dock = {
 				}
 			);
 
-			if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
+			if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() <= 6) {
 				myPlaces.find('> ul').css('zoom', 1);
 			}
 
@@ -10189,7 +10132,7 @@ Liferay.Dock = {
 
 				var top = parseInt(obj.css('top'));
 
-				if (Liferay.Browser.is_safari && isNaN(top)) {
+				if (Liferay.Browser.isSafari() && isNaN(top)) {
 					top = -1;
 				}
 
