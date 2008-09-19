@@ -72,7 +72,8 @@ public class SAXReaderImpl implements SAXReader {
 			newAttributes.add(new AttributeImpl(oldAttribute));
 		}
 
-		return newAttributes;
+		return new NodeList<Attribute, org.dom4j.Attribute>(
+			newAttributes, oldAttributes);
 	}
 
 	public static List<Element> toNewElements(
@@ -84,7 +85,8 @@ public class SAXReaderImpl implements SAXReader {
 			newElements.add(new ElementImpl(oldElement));
 		}
 
-		return newElements;
+		return new NodeList<Element, org.dom4j.Element>(
+			newElements, oldElements);
 	}
 
 	public static List<Namespace> toNewNamespaces(
@@ -97,7 +99,8 @@ public class SAXReaderImpl implements SAXReader {
 			newNamespaces.add(new NamespaceImpl(oldNamespace));
 		}
 
-		return newNamespaces;
+		return new NodeList<Namespace, org.dom4j.Namespace>(
+			newNamespaces, oldNamespaces);
 	}
 
 	public static List<Node> toNewNodes(List<org.dom4j.Node> oldNodes) {
@@ -129,7 +132,9 @@ public class SAXReaderImpl implements SAXReader {
 				new ProcessingInstructionImpl(oldProcessingInstruction));
 		}
 
-		return newProcessingInstructions;
+		return new NodeList
+			<ProcessingInstruction, org.dom4j.ProcessingInstruction>(
+				newProcessingInstructions, oldProcessingInstructions);
 	}
 
 	public static List<org.dom4j.Attribute> toOldAttributes(
