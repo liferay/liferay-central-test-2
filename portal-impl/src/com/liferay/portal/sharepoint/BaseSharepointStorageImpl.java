@@ -22,11 +22,9 @@
 
 package com.liferay.portal.sharepoint;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.io.InputStream;
 
