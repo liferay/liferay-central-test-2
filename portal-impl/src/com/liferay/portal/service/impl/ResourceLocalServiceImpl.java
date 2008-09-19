@@ -125,7 +125,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					companyId, groupId, userId, name, primKey, false,
 					permissionsList);
 
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+
+				// Owner permissions
+
+				Role ownerRole = roleLocalService.getRole(
+					companyId, RoleNames.OWNER);
+
+				rolePersistence.addPermissions(
+					ownerRole.getRoleId(), userPermissionsList);
+			}
+			else {
 
 				// User permissions
 
@@ -201,21 +211,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 
-				// Owner permissions
-
-				Role role = roleLocalService.getRole(
-					companyId, RoleNames.OWNER);
-
-				rolePersistence.addPermissions(
-					role.getRoleId(), userPermissionsList);
-
 				// Guest permissions
 
-				role = roleLocalService.getRole(
+				Role guestRole = roleLocalService.getRole(
 					companyId, RoleImpl.GUEST);
 
 				rolePersistence.addPermissions(
-					role.getRoleId(), guestPermissionsList);
+					guestRole.getRoleId(), guestPermissionsList);
 			}
 			else {
 				userPersistence.addPermissions(
@@ -315,8 +317,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			List<Permission> permissionsList =
 				permissionLocalService.addPermissions(
-					companyId, name, resource.getResourceId(),
-					portletActions);
+					companyId, name, resource.getResourceId(), portletActions);
 
 			logAddResources(name, primKey, stopWatch, 5);
 
@@ -328,7 +329,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					companyId, groupId, userId, name, primKey,
 					portletActions, permissionsList);
 
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+
+				// Owner permissions
+
+				Role ownerRole = roleLocalService.getRole(
+					companyId, RoleNames.OWNER);
+
+				rolePersistence.addPermissions(
+					ownerRole.getRoleId(), userPermissionsList);
+			}
+			else {
 
 				// User permissions
 
@@ -350,17 +361,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			}
 
 			logAddResources(name, primKey, stopWatch, 7);
-
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-
-				// Owner permissions
-
-				Role role = roleLocalService.getRole(
-					companyId, RoleNames.OWNER);
-
-				rolePersistence.addPermissions(
-					role.getRoleId(), userPermissionsList);
-			}
 
 			// Guest permissions
 
