@@ -23,31 +23,6 @@
 %>
 
 <%
-UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-long organizationId = searchTerms.getOrganizationId();
-long roleId = searchTerms.getRoleId();
-long userGroupId = searchTerms.getUserGroupId();
-
-LinkedHashMap userParams = new LinkedHashMap();
-
-if (organizationId > 0) {
-	userParams.put("usersOrgs", new Long(organizationId));
-}
-else {
-	if (filterManageableOrganizations) {
-		userParams.put("usersOrgs", manageableOrganizationIds);
-	}
-}
-
-if (roleId > 0) {
-	userParams.put("usersRoles", new Long(roleId));
-}
-
-if (userGroupId > 0) {
-	userParams.put("usersUserGroups", new Long(userGroupId));
-}
-
 int total = 0;
 
 if (searchTerms.isAdvancedSearch()) {
@@ -57,6 +32,8 @@ else {
 	total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams);
 }
 
+searchContainer.setTotal(total);
+
 List results = null;
 
 if (searchTerms.isAdvancedSearch()) {
@@ -65,4 +42,6 @@ if (searchTerms.isAdvancedSearch()) {
 else {
 	results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 }
+
+searchContainer.setResults(results);
 %>
