@@ -35,6 +35,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.security.permission.comparator.PermissionActionIdComparator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
@@ -46,6 +47,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,10 +80,11 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					PermissionLocalServiceUtil.getRolePermissions(
 						getOwnerRoleId(), resource.getResourceId());
 
-				for (Permission permission : permissions) {
-					if (permission.getActionId().equals(actionId)) {
-						return true;
-					}
+				int pos = Collections.binarySearch(
+					permissions, actionId, new PermissionActionIdComparator());
+
+				if (pos != -1) {
+					return true;
 				}
 			}
 			catch (Exception e) {

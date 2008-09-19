@@ -573,6 +573,8 @@
 			WHERE
 				(Roles_Permissions.roleId = ?) AND
 				(Permission_.resourceId = ?)
+			ORDER BY
+				Permission_.actionId ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByU_R">
