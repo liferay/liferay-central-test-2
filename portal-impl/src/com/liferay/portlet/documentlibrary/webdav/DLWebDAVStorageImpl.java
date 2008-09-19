@@ -95,7 +95,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			DLFolder folder = (DLFolder)resource.getModel();
 
 			long groupId = WebDAVUtil.getGroupId(destination);
-			long plid = getPlid(groupId);
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = folder.getDescription();
 			boolean addCommunityPermissions = true;
@@ -114,12 +113,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			if (depth == 0) {
 				DLFolderServiceUtil.addFolder(
-					plid, parentFolderId, name, description,
+					groupId, parentFolderId, name, description,
 					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				DLFolderServiceUtil.copyFolder(
-					plid, folder.getFolderId(), parentFolderId, name,
+					groupId, folder.getFolderId(), parentFolderId, name,
 					description, addCommunityPermissions, addGuestPermissions);
 			}
 
@@ -372,7 +371,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			String[] pathArray = webDavRequest.getPathArray();
 
-			long plid = getPlid(webDavRequest.getGroupId());
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
@@ -380,7 +378,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			boolean addGuestPermissions = true;
 
 			DLFolderServiceUtil.addFolder(
-				plid, parentFolderId, name, description,
+				webDavRequest.getGroupId(), parentFolderId, name, description,
 				addCommunityPermissions, addGuestPermissions);
 
 			String location = StringUtil.merge(pathArray, StringPool.SLASH);

@@ -58,7 +58,6 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			DLFolder folder = _getFolder(
 				group.getGroupId(), StringPool.SLASH + arg.getCurrentFolder());
 
-			long plid = arg.getPlid();
 			long parentFolderId = folder.getFolderId();
 			String name = arg.getNewFolder();
 			String description = StringPool.BLANK;
@@ -66,7 +65,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			boolean addGuestPermissions = true;
 
 			DLFolderServiceUtil.addFolder(
-				plid, parentFolderId, name, description,
+				group.getGroupId(), parentFolderId, name, description,
 				addCommunityPermissions, addGuestPermissions);
 		}
 		catch (Exception e) {

@@ -88,7 +88,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		}
 
 		_folder = DLFolderServiceUtil.addFolder(
-			TestPropsValues.LAYOUT_PLID, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID,
+			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID,
 			name, description, addCommunityPermissions, addGuestPermissions);
 	}
 
