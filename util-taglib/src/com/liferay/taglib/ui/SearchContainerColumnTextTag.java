@@ -40,6 +40,7 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.BodyContent;
 
 /**
  * <a href="SearchContainerColumnTextTag.java.html"><b><i>View Source</i></b>
@@ -72,7 +73,11 @@ public class SearchContainerColumnTextTag
 					_value = _sb.toString();
 				}
 				else if (Validator.isNull(_value)) {
-					_value = getBodyContent().getString();
+					BodyContent bc = getBodyContent();
+
+					if (bc != null) {
+						_value = bc.getString();
+					}
 				}
 			}
 
@@ -126,7 +131,8 @@ public class SearchContainerColumnTextTag
 			SearchContainer searchContainer =
 				parentSearchContainerTag.getSearchContainer();
 
-			List<String> headerNames = searchContainer.getHeaderNames();
+			List<String> headerNames =
+				parentSearchContainerTag.getHeaderNames();
 
 			String name = getName();
 
@@ -137,6 +143,7 @@ public class SearchContainerColumnTextTag
 			if (headerNames == null) {
 				headerNames = new ArrayList<String>();
 
+				parentSearchContainerTag.setHeaderNames(headerNames);
 				searchContainer.setHeaderNames(headerNames);
 			}
 
