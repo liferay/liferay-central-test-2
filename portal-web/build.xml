@@ -13,6 +13,7 @@
 
 	<property name="fckeditor.file" value="FCKeditor_2.5.1.zip" />
 	<property name="tinymce.file" value="tinymce_2_1_3.zip" />
+	<property name="wsrp.file" value="wsrp.zip" />
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
@@ -24,6 +25,7 @@
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 		<delete dir="docroot/WEB-INF/classes" />
 		<delete dir="docroot/WEB-INF/lib" />
+		<delete dir="docroot/wsrp" />
 		<delete dir="test-classes" />
 		<delete dir="test-results" />
 
@@ -358,6 +360,7 @@
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
+		<antcall target="build-wsrp" />
 
 		<war
 			basedir="docroot"
@@ -372,6 +375,7 @@
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
+		<antcall target="build-wsrp" />
 
 		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" failonerror="false" />
 
@@ -822,6 +826,22 @@
 				<move file="docroot/html/js/editor/tinymce/jscripts/tiny_mce" todir="docroot/html/js/editor" />
 
 				<delete dir="docroot/html/js/editor/tinymce" />
+			</then>
+		</if>
+	</target>
+
+	<target name="build-wsrp">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${wsrp.file}"
+					targetfile="docroot/wsrp"
+				/>
+			</not>
+			<then>
+				<delete dir="docroot/wsrp" />
+
+				<unzip src="third-party/${wsrp.file}" dest="docroot/wsrp" />
 			</then>
 		</if>
 	</target>
