@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
@@ -184,7 +182,7 @@ public class UserAttributes {
 
 	public static final String USER_BUSINESS_INFO_ONLINE_URI = "user.business-info.online.uri";
 
-	public UserAttributes(User user) throws PortalException, SystemException {
+	public UserAttributes(User user) {
 		_user = user;
 
 		/*List addresses = user.getAddresses();

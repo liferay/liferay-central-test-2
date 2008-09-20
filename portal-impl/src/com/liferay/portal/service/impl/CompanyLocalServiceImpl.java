@@ -578,7 +578,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			long companyId, String authType, boolean autoLogin,
 			boolean sendPassword, boolean strangers, boolean strangersWithMx,
 			boolean strangersVerify, boolean communityLogo)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
 

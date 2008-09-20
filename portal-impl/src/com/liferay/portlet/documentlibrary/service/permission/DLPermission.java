@@ -23,7 +23,6 @@
 package com.liferay.portlet.documentlibrary.service.permission;
 
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -37,7 +36,7 @@ public class DLPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, groupId, actionId)) {
 			throw new PrincipalException();

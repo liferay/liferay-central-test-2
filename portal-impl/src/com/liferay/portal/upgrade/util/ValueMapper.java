@@ -39,7 +39,7 @@ public interface ValueMapper {
 
 	public void appendException(Object exception);
 
-	public Iterator iterator() throws Exception;
+	public Iterator<Object> iterator() throws Exception;
 
 	public int size() throws Exception;
 

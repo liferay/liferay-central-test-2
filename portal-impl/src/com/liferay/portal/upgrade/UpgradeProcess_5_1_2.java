@@ -34,6 +34,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Jorge Ferrer
  *
+ * @deprecated
+ *
  */
 public class UpgradeProcess_5_1_2 extends UpgradeProcess {
 

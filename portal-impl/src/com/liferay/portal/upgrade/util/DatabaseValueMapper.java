@@ -22,9 +22,8 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * <a href="DatabaseValueMapper.java.html"><b><i>View Source</i></b></a>
@@ -60,10 +59,8 @@ public class DatabaseValueMapper implements ValueMapper {
 
 	}
 
-	public Iterator iterator() throws Exception {
-		List list = new ArrayList();
-
-		return list.iterator();
+	public Iterator<Object> iterator() throws Exception {
+		return Collections.EMPTY_LIST.iterator();
 	}
 
 	public int size() throws Exception {

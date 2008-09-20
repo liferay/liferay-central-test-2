@@ -248,7 +248,7 @@ public class ExportAction extends Action {
 	}
 
 	protected long getNewPrimaryKey(long pk) {
-		Long newPk = _primaryKeys.get(pk);
+		Long newPk = (Long)_primaryKeys.get(pk);
 
 		if (newPk == null) {
 			newPk = new Long(_primaryKeyCount);
@@ -815,7 +815,7 @@ public class ExportAction extends Action {
 	private static Log _log = LogFactory.getLog(ExportAction.class);
 
 	private MemoryValueMapper _valueMapper = new MemoryValueMapper();
-	private Map<Long, Long> _primaryKeys = _valueMapper.getMap();
+	private Map<Object, Object> _primaryKeys = _valueMapper.getMap();
 	private int _primaryKeyCount;
 
 }

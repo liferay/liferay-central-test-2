@@ -355,8 +355,6 @@ public class EditArticleAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
-		Layout layout = (Layout)uploadRequest.getAttribute(WebKeys.LAYOUT);
-
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 
 		String articleId = ParamUtil.getString(uploadRequest, "articleId");

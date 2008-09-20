@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import java.io.IOException;
-
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 
@@ -43,7 +41,7 @@ public class ActionResponseImpl
 		return PortletRequest.ACTION_PHASE;
 	}
 
-	public void sendRedirect(String location) throws IOException {
+	public void sendRedirect(String location) {
 		if ((location == null) ||
 			(!location.startsWith("/") && (location.indexOf("://") == -1))) {
 
@@ -59,8 +57,7 @@ public class ActionResponseImpl
 		setRedirectLocation(location);
 	}
 
-	public void sendRedirect(String location, String renderUrlParamName)
-		throws IOException {
+	public void sendRedirect(String location, String renderUrlParamName) {
 	}
 
 	protected ActionResponseImpl() {

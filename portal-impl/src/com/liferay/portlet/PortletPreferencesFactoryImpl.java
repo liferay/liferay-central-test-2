@@ -71,7 +71,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getLayoutPortletSetup(
 			Layout layout, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
@@ -82,7 +82,7 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortalPreferences getPortalPreferences(HttpServletRequest request)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -128,7 +128,7 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortalPreferences getPortalPreferences(ActionRequest actionRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
@@ -137,7 +137,7 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortalPreferences getPortalPreferences(RenderRequest renderRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);
@@ -286,7 +286,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getPortletSetup(
 			Layout layout, String portletId, String defaultPreferences)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			layout.getCompanyId(), portletId);
@@ -337,7 +337,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getPortletSetup(request, portletId, null);
 	}
@@ -345,7 +345,7 @@ public class PortletPreferencesFactoryImpl
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId,
 			String defaultPreferences)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
@@ -353,7 +353,7 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortletPreferences getPortletSetup(ActionRequest actionRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
@@ -364,7 +364,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getPortletSetup(
 			ActionRequest actionRequest, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
@@ -373,7 +373,7 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortletPreferences getPortletSetup(RenderRequest renderRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);
@@ -384,7 +384,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getPortletSetup(
 			RenderRequest renderRequest, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.StringPool;
@@ -138,43 +137,43 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		return "Administrator";
 	}
 
-	public String getAuthType() throws PortalException, SystemException {
+	public String getAuthType() throws SystemException {
 		return PrefsPropsUtil.getString(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
 			PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 	}
 
-	public boolean isAutoLogin() throws PortalException, SystemException {
+	public boolean isAutoLogin() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTO_LOGIN,
 			PropsValues.COMPANY_SECURITY_AUTO_LOGIN);
 	}
 
-	public boolean isSendPassword() throws PortalException, SystemException {
+	public boolean isSendPassword() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
 			PropsValues.COMPANY_SECURITY_SEND_PASSWORD);
 	}
 
-	public boolean isStrangers() throws PortalException, SystemException {
+	public boolean isStrangers() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS,
 			PropsValues.COMPANY_SECURITY_STRANGERS);
 	}
 
-	public boolean isStrangersWithMx() throws PortalException, SystemException {
+	public boolean isStrangersWithMx() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
 			PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
 	}
 
-	public boolean isStrangersVerify() throws PortalException, SystemException {
+	public boolean isStrangersVerify() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY,
 			PropsValues.COMPANY_SECURITY_STRANGERS_VERIFY);
 	}
 
-	public boolean isCommunityLogo() throws PortalException, SystemException {
+	public boolean isCommunityLogo() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO,
 			PropsValues.COMPANY_SECURITY_COMMUNITY_LOGO);

@@ -93,7 +93,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				User user = PortalUtil.getUser(request);
 
 				_remoteUser = user.getScreenName();
-				_remoteUserId = user.getUserId();
 				_userPrincipal = new ProtectedPrincipal(_remoteUser);
 			}
 			catch (Exception e) {
@@ -103,12 +102,10 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		else {
 			if ((userId > 0) && (remoteUser == null)) {
 				_remoteUser = String.valueOf(userId);
-				_remoteUserId = userId;
 				_userPrincipal = new ProtectedPrincipal(_remoteUser);
 			}
 			else {
 				_remoteUser = remoteUser;
-				_remoteUserId = GetterUtil.getLong(remoteUser);
 				_userPrincipal = request.getUserPrincipal();
 			}
 		}
@@ -447,7 +444,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private String _pathInfo;
 	private String _queryString;
 	private String _remoteUser;
-	private long _remoteUserId;
 	private String _requestURI;
 	private String _servletPath;
 	private Principal _userPrincipal;

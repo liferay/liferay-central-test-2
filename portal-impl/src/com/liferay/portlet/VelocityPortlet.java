@@ -108,7 +108,7 @@ public class VelocityPortlet extends GenericPortlet {
 
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		try {
 			mergeTemplate(
@@ -121,7 +121,7 @@ public class VelocityPortlet extends GenericPortlet {
 
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		try {
 			mergeTemplate(

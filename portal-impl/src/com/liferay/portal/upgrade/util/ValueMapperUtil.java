@@ -47,7 +47,7 @@ public class ValueMapperUtil {
 			new FileWriter(tmpDir + "/" + fileName + ".txt"));
 
 		try {
-			Iterator itr = valueMapper.iterator();
+			Iterator<Object> itr = valueMapper.iterator();
 
 			while (itr.hasNext()) {
 				Object oldValue = itr.next();

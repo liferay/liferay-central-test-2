@@ -75,10 +75,10 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 		ValueMapper companyIdMapper = AvailableMappersUtil.getCompanyIdMapper();
 
-		Iterator<String> itr = companyIdMapper.iterator();
+		Iterator<Object> itr = companyIdMapper.iterator();
 
 		while (itr.hasNext()) {
-			String webId = itr.next();
+			String webId = (String)itr.next();
 
 			Long companyIdObj = (Long)companyIdMapper.getNewValue(webId);
 

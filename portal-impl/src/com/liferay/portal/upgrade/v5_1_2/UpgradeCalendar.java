@@ -38,6 +38,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Samuel Kong
  *
+ * @deprecated
+ *
  */
 public class UpgradeCalendar extends UpgradeProcess {
 

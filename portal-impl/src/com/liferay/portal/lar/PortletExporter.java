@@ -978,9 +978,10 @@ public class PortletExporter {
 	}
 
 	protected String getRatingPath(
-			PortletDataContext context, String className, String classPK) {
+		PortletDataContext context, String className, String classPK) {
 
 		StringBuilder sb = new StringBuilder();
+
 		sb.append(context.getRootPath());
 		sb.append("/ratings/");
 		sb.append(PortalUtil.getClassNameId(className));
@@ -992,10 +993,11 @@ public class PortletExporter {
 	}
 
 	protected String getRatingPath(
-			PortletDataContext context, String className, String classPK,
-			RatingsEntry rating) {
+		PortletDataContext context, String className, String classPK,
+		RatingsEntry rating) {
 
 		StringBuilder sb = new StringBuilder();
+
 		sb.append(context.getRootPath());
 		sb.append("/ratings/");
 		sb.append(PortalUtil.getClassNameId(className));
@@ -1023,22 +1025,20 @@ public class PortletExporter {
 		sb.append(context.getPortletPath(portletId));
 		sb.append("/preferences/");
 
-		switch(ownerType) {
-			case PortletKeys.PREFS_OWNER_TYPE_COMPANY:
-				sb.append("company/");
-				break;
-			case PortletKeys.PREFS_OWNER_TYPE_GROUP:
-				sb.append("group/");
-				break;
-			case PortletKeys.PREFS_OWNER_TYPE_LAYOUT:
-				sb.append("layout/");
-				break;
-			case PortletKeys.PREFS_OWNER_TYPE_USER:
-				sb.append("user/");
-				break;
-			case PortletKeys.PREFS_OWNER_TYPE_ARCHIVED:
-				sb.append("archived/");
-				break;
+		if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+			sb.append("company/");
+		}
+		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
+			sb.append("group/");
+		}
+		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT) {
+			sb.append("layout/");
+		}
+		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) {
+			sb.append("user/");
+		}
+		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+			sb.append("archived/");
 		}
 
 		sb.append(ownerId);

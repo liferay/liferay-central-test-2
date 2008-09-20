@@ -224,10 +224,10 @@ public class JournalArticleContentUpgradeColumnImpl
 
 		ValueMapper igImageIdMapper = AvailableMappersUtil.getIGImageIdMapper();
 
-		Iterator<String> itr = igImageIdMapper.iterator();
+		Iterator<Object> itr = igImageIdMapper.iterator();
 
 		while (itr.hasNext()) {
-			String oldValue = itr.next();
+			String oldValue = (String)itr.next();
 
 			PKParser oldValuePKParser = new PKParser(oldValue);
 

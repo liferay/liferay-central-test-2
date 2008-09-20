@@ -45,16 +45,16 @@ public interface PortletPreferencesFactory {
 
 	public PortletPreferences getLayoutPortletSetup(
 			Layout layout, String portletId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortalPreferences getPortalPreferences(HttpServletRequest request)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortalPreferences getPortalPreferences(ActionRequest actionRequest)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortalPreferences getPortalPreferences(RenderRequest renderRequest)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletPreferences(
 			HttpServletRequest request, String portletId)
@@ -70,30 +70,30 @@ public interface PortletPreferencesFactory {
 
 	public PortletPreferences getPortletSetup(
 			Layout layout, String portletId, String defaultPreferences)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId,
 			String defaultPreferences)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletSetup(ActionRequest actionRequest)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletSetup(
 			ActionRequest actionRequest, String portletId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletSetup(RenderRequest renderRequest)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPortletSetup(
 			RenderRequest renderRequest, String portletId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest request);
 

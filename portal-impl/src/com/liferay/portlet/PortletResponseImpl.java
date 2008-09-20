@@ -22,7 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
@@ -222,11 +221,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 			if (plid <= 0) {
 				plid = _plid;
-			}
-		}
-		catch (PortalException e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
 			}
 		}
 		catch (SystemException e) {

@@ -52,7 +52,7 @@ public class ValueMapperWrapper implements ValueMapper {
 		_valueMapper.appendException(exception);
 	}
 
-	public Iterator iterator() throws Exception {
+	public Iterator<Object> iterator() throws Exception {
 		return _valueMapper.iterator();
 	}
 

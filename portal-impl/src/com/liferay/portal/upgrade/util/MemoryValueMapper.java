@@ -40,11 +40,11 @@ import java.util.Set;
 public class MemoryValueMapper implements ValueMapper {
 
 	public MemoryValueMapper() {
-		this(new LinkedHashSet());
+		this(new LinkedHashSet<Object>());
 	}
 
-	public MemoryValueMapper(Set exceptions) {
-		_map = new LinkedHashMap();
+	public MemoryValueMapper(Set<Object> exceptions) {
+		_map = new LinkedHashMap<Object, Object>();
 		_exceptions = exceptions;
 	}
 
@@ -71,7 +71,7 @@ public class MemoryValueMapper implements ValueMapper {
 		_exceptions.add(exception);
 	}
 
-	public Iterator iterator() throws Exception {
+	public Iterator<Object> iterator() throws Exception {
 		return _map.keySet().iterator();
 	}
 
@@ -79,11 +79,11 @@ public class MemoryValueMapper implements ValueMapper {
 		return _map.size();
 	}
 
-	public Map getMap() {
+	public Map<Object, Object> getMap() {
 		return _map;
 	}
 
-	private Map _map;
-	private Set _exceptions;
+	private Map<Object, Object> _map;
+	private Set<Object> _exceptions;
 
 }

@@ -34,7 +34,7 @@ import org.springframework.web.context.ContextLoader;
  */
 public class PortletContextLoader extends ContextLoader {
 
-	protected Class determineContextClass(ServletContext servletContext) {
+	protected Class<?> determineContextClass(ServletContext servletContext) {
 		return PortletApplicationContext.class;
 	}
 
