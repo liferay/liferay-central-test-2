@@ -25,10 +25,11 @@
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
 <h1 class="user-greeting">
-	<liferay-ui:message key="welcome" /> <a href="<%= user.getDisplayURL(themeDisplay) %>"><span><%= user.getFullName() %></span></a> <a class="sign-out" href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>
+	<liferay-ui:message key="welcome" /> <a href="<%= user.getDisplayURL(themeDisplay) %>"><%= user.getFullName() %></a> <a class="sign-out" href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>
 </h1>
 
 <div class="portal-add-content">
+
 	<%
 	String ppid = layoutTypePortlet.getStateMaxPortletId();
 
@@ -45,40 +46,44 @@
 			panelCategory = "panel-manage-server";
 		}
 
-		boolean isSelectedCategory = category.equals(PortalUtil.getControlPanelCategory(ppid));
-
 		String cssClass = "lfr-component panel-category";
 
-		if (isSelectedCategory) {
+		if (category.equals(PortalUtil.getControlPanelCategory(ppid))) {
 			cssClass += " selected";
 		}
 
 		cssClass += " " + GetterUtil.getString(SessionClicks.get(request, panelCategory, null), "open");
 	%>
+
 		<div class="<%= cssClass %>" id="<%= panelCategory %>">
 			<ul>
 				<li>
 					<h2>
 						<span><liferay-ui:message key="<%= category %>" /></span>
 					</h2>
+
 					<ul class="category-portlets">
+
 						<%
 						List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category);
 
 						for (Portlet portlet : portlets) {
 							if (!portlet.isInstanceable()) {
 						%>
-							<li class="<%= (ppid.equals(portlet.getPortletId())) ? "selected-portlet" : "" %>">
-								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />&panel_category=<%= panelCategory %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
-							</li>
+								<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
+									<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>"><liferay-portlet:param name="panelCategory" value="<%= panelCategory %>" /></liferay-portlet:renderURL><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+								</li>
+
 						<%
 							}
 						}
 						%>
+
 					</ul>
 				</li>
 			</ul>
 		</div>
+
 	<%
 	}
 	%>

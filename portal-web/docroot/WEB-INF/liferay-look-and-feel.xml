@@ -41,9 +41,6 @@
 	</theme>
 	<theme id="control-panel" name="Control Panel">
 		<root-path>/html/themes/control_panel</root-path>
-		<settings>
-			<setting key="bullet-style-options" value="1,2" />
-		</settings>
 	</theme>
 	<theme id="mobile" name="Mobile">
 		<root-path>/wap/themes/${theme-id}</root-path>

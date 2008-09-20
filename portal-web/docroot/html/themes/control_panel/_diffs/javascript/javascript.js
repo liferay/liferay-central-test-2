@@ -15,6 +15,7 @@ Liferay.ControlPanel = {
 		panelCategories.each(
 			function(i) {
 				var heading = jQuery(this);
+
 				heading.prepend('<a class="toggle-menu" href="javascript: ;"></a>');
 				heading.append('<a class="drag-handle" href="javascript: ;"></a>');
 			}

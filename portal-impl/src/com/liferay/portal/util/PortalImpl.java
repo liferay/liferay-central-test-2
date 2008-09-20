@@ -610,14 +610,14 @@ public class PortalImpl implements Portal {
 			category = PortletCategoryKeys.CONTENT;
 		}
 		else if (ArrayUtil.contains(
-				PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
-				portletId)) {
+					PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
+					portletId)) {
 
 			category = PortletCategoryKeys.PORTAL;
 		}
 		else if (ArrayUtil.contains(
-				PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS,
-				portletId)) {
+					PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS,
+					portletId)) {
 
 			category = PortletCategoryKeys.SERVER;
 		}

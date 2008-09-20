@@ -37,7 +37,7 @@ if (Validator.isNull(category)) {
 	category = "content";
 }
 
-String panelCategory = ParamUtil.getString(request, "panel_category");
+String panelCategory = ParamUtil.getString(request, "panelCategory");
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
@@ -45,15 +45,16 @@ String panelCategory = ParamUtil.getString(request, "panel_category");
 		<table class="lfr-ctrl-panel <%= panelCategory %>">
 		<tr>
 			<td class="panel-menu" valign="top">
-				<liferay-portlet:runtime portletName="87" /><br />
+				<liferay-portlet:runtime portletName="87" />
 			</td>
 			<td class="panel-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" valign="top">
 				<table class="panel-content-menu">
 				<tr>
 					<td>
-						<c:if test='<%= category.equals(PortletCategoryKeys.CONTENT) %>'>
+						<c:if test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
+
 							<%
-							Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
+							Group scopeGroup = themeDisplay.getScopeGroup();
 
 							String currentGroupLabel = "current-community";
 
@@ -71,8 +72,8 @@ String panelCategory = ParamUtil.getString(request, "panel_category");
 						</c:if>
 					</td>
 					<td align="right">
-						<c:if test='<%= !category.equals("server") %>'>
-							<liferay-ui:message key="current-portal-instance" />: <a href="http://www.<%= company.getWebId() %>"><b><%= company.getWebId() %></b></a>
+						<c:if test="<%= !category.equals(PortletCategoryKeys.SERVER) %>">
+							<liferay-ui:message key="current-portal-instance" />: <a href="javascript: ;"><b><%= company.getWebId() %></b></a>
 						</c:if>
 					</td>
 				</tr>
