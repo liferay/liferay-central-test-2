@@ -39,9 +39,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -78,8 +76,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 
@@ -135,6 +131,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
+
+		// Clone this article to make sure changes to its content are never
+		// persisted
+
+		article = (JournalArticle)article.clone();
 
 		Element articleEl = articlesEl.addElement("article");
 
@@ -193,51 +194,14 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				JournalArticle.class, article.getResourcePrimKey());
 		}
 
-		try {
-			Document doc = SAXReaderUtil.read(article.getContent());
+		if (context.getBooleanParameter(_NAMESPACE, "embedded-assets")) {
+			String content = article.getContent();
 
-			Element root = doc.getRootElement();
+			content = exportDLFileEntries(
+				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks, content);
+			content = exportIGImages(context, igFoldersEl, igImagesEl, content);
 
-			if (context.getBooleanParameter(_NAMESPACE, "embedded-assets")) {
-				List<Element> contentEls = root.elements("static-content");
-
-				for (Element contentEl : contentEls) {
-					String text = contentEl.getText();
-
-					text = exportDLFileEntries(
-						context, dlFoldersEl, dlFileEntriesEl, dlFileRanks,
-						text);
-					text = exportIGImages(
-						context, igFoldersEl, igImagesEl, text);
-
-					contentEl.setText(text);
-				}
-
-				XPath xpathSelector = SAXReaderUtil.createXPath(
-					"//dynamic-content");
-
-				List<Node> contentNodes = xpathSelector.selectNodes(doc);
-
-				for (Node contentNode : contentNodes) {
-					String text = contentNode.getText();
-
-					text = exportDLFileEntries(
-						context, dlFoldersEl, dlFileEntriesEl, dlFileRanks,
-						text);
-					text = exportIGImages(
-						context, igFoldersEl, igImagesEl, text);
-
-					contentNode.setText(text);
-				}
-
-			}
-
-			article.setContent(doc.formattedString());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+			article.setContent(content);
 		}
 
 		article.setUserUuid(article.getUserUuid());
@@ -271,32 +235,67 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static String exportDLFileEntries(
 		PortletDataContext context, Element foldersEl, Element fileEntriesEl,
-		Element fileRanks, String text) {
+		Element fileRanks, String content) {
 
-		StringBuffer sb = new StringBuffer(text);
+		StringBuilder sb = new StringBuilder(content);
 
-		Pattern pattern = Pattern.compile("/get_file\\?([^\"']+)[\"']?");
+		int beginPos = content.length();
 
-		Matcher matcher = pattern.matcher(text);
+		while (true) {
+			beginPos = content.lastIndexOf("/get_file?", beginPos);
 
-		while (matcher.find()) {
+			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
+			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
+			int endPos3 = content.indexOf(StringPool.LESS_THAN, beginPos);
+			int endPos4 = content.indexOf(StringPool.QUOTE, beginPos);
+			int endPos5 = content.indexOf(StringPool.SPACE, beginPos);
+
+			int endPos = endPos1;
+
+			if ((endPos == -1) || ((endPos2 != -1) && (endPos2 < endPos))) {
+				endPos = endPos2;
+			}
+
+			if ((endPos == -1) || ((endPos3 != -1) && (endPos3 < endPos))) {
+				endPos = endPos3;
+			}
+
+			if ((endPos == -1) || ((endPos4 != -1) && (endPos4 < endPos))) {
+				endPos = endPos4;
+			}
+
+			if ((endPos == -1) || ((endPos5 != -1) && (endPos5 < endPos))) {
+				endPos = endPos5;
+			}
+
+			if ((beginPos == -1) || (endPos == -1)) {
+				break;
+			}
+
 			try {
-				Map<String, String> detail = MapUtil.toLinkedHashMap(
-					matcher.group(1).replace("&amp;", "&").split("&"),
+				String oldParameters = content.substring(beginPos, endPos);
+
+				oldParameters = oldParameters.substring(
+					oldParameters.indexOf(StringPool.QUESTION) + 1);
+				oldParameters = oldParameters.replace(
+					StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+
+				Map<String, String> map = MapUtil.toLinkedHashMap(
+					oldParameters.split(StringPool.AMPERSAND),
 					StringPool.EQUAL);
 
 				DLFileEntry fileEntry = null;
 
-				if (detail.containsKey("uuid")) {
-					String uuid = detail.get("uuid");
-					long groupId = GetterUtil.getLong(detail.get("groupId"));
+				if (map.containsKey("uuid")) {
+					String uuid = map.get("uuid");
+					long groupId = GetterUtil.getLong(map.get("groupId"));
 
 					fileEntry = DLFileEntryLocalServiceUtil.
 						getFileEntryByUuidAndGroupId(uuid, groupId);
 				}
-				else if (detail.containsKey("folderId")) {
-					long folderId = GetterUtil.getLong(detail.get("folderId"));
-					String name = detail.get("name");
+				else if (map.containsKey("folderId")) {
+					long folderId = GetterUtil.getLong(map.get("folderId"));
+					String name = map.get("name");
 
 					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 						folderId, name);
@@ -309,15 +308,19 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				DLPortletDataHandlerImpl.exportFileEntry(
 					context, foldersEl, fileEntriesEl, fileRanks, fileEntry);
 
-				sb.replace(
-					matcher.start(1), matcher.end(1),
-					"uuid=" + fileEntry.getUuid() + "&amp;groupId=@group_id@");
+				String newParameters =
+					"/get_file?uuid=" + fileEntry.getUuid() +
+						"&amp;groupId=@group_id@";
+
+				sb.replace(beginPos, endPos, newParameters);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(e, e);
 				}
 			}
+
+			beginPos--;
 		}
 
 		return sb.toString();
@@ -325,44 +328,86 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static String exportIGImages(
 		PortletDataContext context, Element foldersEl, Element imagesEl,
-		String text) {
+		String content) {
 
-		StringBuffer sb = new StringBuffer(text);
+		StringBuilder sb = new StringBuilder(content);
 
-		Pattern pattern = Pattern.compile("/image_gallery\\?(.*?)&(amp;)?t=");
+		int beginPos = content.length();
 
-		Matcher matcher = pattern.matcher(text);
+		while (true) {
+			beginPos = content.lastIndexOf("/image/image_gallery?", beginPos);
 
-		while (matcher.find()) {
+			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
+			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
+			int endPos3 = content.indexOf(StringPool.LESS_THAN, beginPos);
+			int endPos4 = content.indexOf(StringPool.QUOTE, beginPos);
+			int endPos5 = content.indexOf(StringPool.SPACE, beginPos);
+
+			int endPos = endPos1;
+
+			if ((endPos == -1) || ((endPos2 != -1) && (endPos2 < endPos))) {
+				endPos = endPos2;
+			}
+
+			if ((endPos == -1) || ((endPos3 != -1) && (endPos3 < endPos))) {
+				endPos = endPos3;
+			}
+
+			if ((endPos == -1) || ((endPos4 != -1) && (endPos4 < endPos))) {
+				endPos = endPos4;
+			}
+
+			if ((endPos == -1) || ((endPos5 != -1) && (endPos5 < endPos))) {
+				endPos = endPos5;
+			}
+
+			if ((beginPos == -1) || (endPos == -1)) {
+				break;
+			}
+
 			try {
-				Map<String, String> detail = MapUtil.toLinkedHashMap(
-					matcher.group(1).replace("&amp;", "&").split("&"),
+				String oldParameters = content.substring(beginPos, endPos);
+
+				oldParameters = oldParameters.substring(
+					oldParameters.indexOf(StringPool.QUESTION) + 1);
+				oldParameters = oldParameters.replace(
+					StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+
+				Map<String, String> map = MapUtil.toLinkedHashMap(
+					oldParameters.split(StringPool.AMPERSAND),
 					StringPool.EQUAL);
 
 				IGImage image = null;
 
-				if (detail.containsKey("uuid")) {
-					String uuid = detail.get("uuid");
-					long groupId = GetterUtil.getLong(detail.get("groupId"));
+				if (map.containsKey("uuid")) {
+					String uuid = map.get("uuid");
+					long groupId = GetterUtil.getLong(map.get("groupId"));
 
 					image = IGImageLocalServiceUtil.getImageByUuidAndGroupId(
 						uuid, groupId);
 				}
-				else if (detail.containsKey("image_id") ||
-						 detail.containsKey("img_id") ||
-						 detail.containsKey("i_id")) {
+				else if (map.containsKey("image_id") ||
+						 map.containsKey("img_id") ||
+						 map.containsKey("i_id")) {
 
-					long imageId = GetterUtil.getLong(detail.get("image_id"));
+					long imageId = GetterUtil.getLong(map.get("image_id"));
 
 					if (imageId <= 0) {
-						imageId = GetterUtil.getLong(detail.get("img_id"));
+						imageId = GetterUtil.getLong(map.get("img_id"));
 
 						if (imageId <= 0) {
-							imageId = GetterUtil.getLong(detail.get("i_id"));
+							imageId = GetterUtil.getLong(map.get("i_id"));
 						}
 					}
 
-					image = IGImageLocalServiceUtil.getIGImage(imageId);
+					try {
+						image = IGImageLocalServiceUtil.getImageByLargeImageId(
+							imageId);
+					}
+					catch (Exception e) {
+						image = IGImageLocalServiceUtil.getImageBySmallImageId(
+							imageId);
+					}
 				}
 
 				if (image == null) {
@@ -372,15 +417,25 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				IGPortletDataHandlerImpl.exportImage(
 					context, foldersEl, imagesEl, image);
 
-				sb.replace(
-					matcher.start(1), matcher.end(1),
-					"uuid=" + image.getUuid() + "&amp;groupId=@group_id@");
+				String timestamp = map.get("t");
+
+				if (timestamp == null) {
+					timestamp =	String.valueOf(System.currentTimeMillis());
+				}
+
+				String newParameters =
+					"/image/image_gallery?uuid=" + image.getUuid() +
+						"&amp;groupId=@group_id@&amp;t=" + timestamp;
+
+				sb.replace(beginPos, endPos, newParameters);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(e, e);
 				}
 			}
+
+			beginPos--;
 		}
 
 		return sb.toString();

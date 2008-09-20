@@ -226,12 +226,12 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				}
 				catch (NoSuchFileEntryException nsfee) {
 					existingFileEntry =
-					DLFileEntryLocalServiceUtil.addFileEntry(
-						fileEntry.getUuid(), userId, folderId,
-						fileEntry.getName(), fileEntry.getTitle(),
-						fileEntry.getDescription(), tagsEntries,
-						fileEntry.getExtraSettings(), bytes,
-						addCommunityPermissions, addGuestPermissions);
+						DLFileEntryLocalServiceUtil.addFileEntry(
+							fileEntry.getUuid(), userId, folderId,
+							fileEntry.getName(), fileEntry.getTitle(),
+							fileEntry.getDescription(), tagsEntries,
+							fileEntry.getExtraSettings(), bytes,
+							addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {
@@ -605,7 +605,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
-		sb.append("/entries/");
+		sb.append("/file-entries/");
 		sb.append(fileEntry.getFileEntryId());
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getVersion());

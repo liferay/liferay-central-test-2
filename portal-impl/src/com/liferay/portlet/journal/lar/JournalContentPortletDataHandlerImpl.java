@@ -292,7 +292,7 @@ public class JournalContentPortletDataHandlerImpl
 			List<Element> dlFileEntryEls = Collections.EMPTY_LIST;
 
 			if (dlFileEntriesEl != null) {
-				dlFileEntryEls = dlFoldersEl.elements("file-entry");
+				dlFileEntryEls = dlFileEntriesEl.elements("file-entry");
 			}
 
 			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
