@@ -431,8 +431,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> folderEls = root.element("folders").elements(
 				"folder");
 
-			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
-				DLFolder.class);
+			Map<Long, Long> folderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
 
 			for (Element folderEl : folderEls) {
 				String path = folderEl.attributeValue("path");
@@ -449,8 +449,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> fileEntryEls = root.element("file-entries").elements(
 				"file-entry");
 
-			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
-				DLFileEntry.class);
+			Map<String, String> fileEntryNames =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					DLFileEntry.class);
 
 			for (Element fileEntryEl : fileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");

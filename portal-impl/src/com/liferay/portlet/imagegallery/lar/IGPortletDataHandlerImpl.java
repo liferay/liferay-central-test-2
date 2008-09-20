@@ -315,8 +315,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> folderEls = root.element("folders").elements(
 				"folder");
 
-			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
-				IGFolder.class);
+			Map<Long, Long> folderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
 			for (Element folderEl : folderEls) {
 				String path = folderEl.attributeValue("path");

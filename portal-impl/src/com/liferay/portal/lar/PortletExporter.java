@@ -101,27 +101,27 @@ public class PortletExporter {
 
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
-		boolean exportUserPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
+		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletData = true;
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
-		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
+		boolean exportUserPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export permissions " + exportPermissions);
-			_log.debug("Export user permissions " + exportUserPermissions);
-			_log.debug("Export portlet data " + exportPortletData);
-			_log.debug("Export portlet setup " + exportPortletSetup);
 			_log.debug(
 				"Export portlet archived setups " +
 					exportPortletArchivedSetups);
+			_log.debug("Export portlet data " + exportPortletData);
+			_log.debug("Export portlet setup " + exportPortletSetup);
 			_log.debug(
 				"Export portlet user preferences " +
 					exportPortletUserPreferences);
+			_log.debug("Export user permissions " + exportUserPermissions);
 		}
 
 		StopWatch stopWatch = null;
@@ -155,7 +155,7 @@ public class PortletExporter {
 		ZipWriter zipWriter = new ZipWriter();
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, layout.getGroupId(), parameterMap, new HashSet(),
+			companyId, layout.getGroupId(), parameterMap, new HashSet<String>(),
 			startDate, endDate, zipWriter);
 
 		context.setPlid(plid);
@@ -232,9 +232,11 @@ public class PortletExporter {
 
 			Element root = doc.addElement("comments");
 
-			Map<String, List> commentsMap = context.getComments();
+			Map<String, List<MBMessage>> commentsMap = context.getComments();
 
-			for (Map.Entry<String, List> entry : commentsMap.entrySet()) {
+			for (Map.Entry<String, List<MBMessage>> entry :
+					commentsMap.entrySet()) {
+
 				String[] comment = entry.getKey().split(StringPool.POUND);
 
 				String path = getCommentPath(context, comment[0], comment[1]);
@@ -290,7 +292,7 @@ public class PortletExporter {
 	protected void exportGroupRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName, Element parentEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Role> roles = layoutCache.getGroupRoles(groupId);
 
@@ -343,7 +345,7 @@ public class PortletExporter {
 	protected void exportInheritedRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName, Element parentEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Element entityRolesEl = SAXReaderUtil.createElement(
 			entityName + "-roles");
@@ -521,7 +523,7 @@ public class PortletExporter {
 			PortletDataContext context, Portlet portlet,
 			javax.portlet.PortletPreferences portletPreferences,
 			Element parentEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String portletDataHandlerClass =
 			portlet.getPortletDataHandlerClass();
@@ -536,7 +538,7 @@ public class PortletExporter {
 			_log.debug("Exporting data for " + portletId);
 		}
 
-		Map parameterMap = context.getParameterMap();
+		Map<String, String[]> parameterMap = context.getParameterMap();
 
 		boolean exportData = false;
 
@@ -593,7 +595,7 @@ public class PortletExporter {
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, long plid, String portletId,
 			Element permissionsEl, boolean exportUserPermissions)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String resourceName = PortletConstants.getRootPortletId(portletId);
 		String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
@@ -719,7 +721,7 @@ public class PortletExporter {
 	protected void exportPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String portletId, Element rolesEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String resourceName = PortletConstants.getRootPortletId(
 			portletId);
@@ -760,15 +762,19 @@ public class PortletExporter {
 
 			Element root = doc.addElement("ratings");
 
-			Map<String, List> ratingsEntriesMap = context.getRatingsEntries();
+			Map<String, List<RatingsEntry>> ratingsEntriesMap =
+				context.getRatingsEntries();
 
-			for (Map.Entry<String, List> entry : ratingsEntriesMap.entrySet()) {
+			for (Map.Entry<String, List<RatingsEntry>> entry :
+					ratingsEntriesMap.entrySet()) {
+
 				String[] ratingsEntry = entry.getKey().split(StringPool.POUND);
 
 				String ratingPath = getRatingPath(
 					context, ratingsEntry[0], ratingsEntry[1]);
 
 				Element asset = root.addElement("asset");
+
 				asset.addAttribute("path", ratingPath);
 				asset.addAttribute("class-name", ratingsEntry[0]);
 				asset.addAttribute("class-pk", ratingsEntry[1]);
@@ -863,7 +869,7 @@ public class PortletExporter {
 	protected void exportUserPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String resourcePrimKey, Element parentEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		StopWatch stopWatch = null;
 
@@ -917,7 +923,7 @@ public class PortletExporter {
 	protected void exportUserRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, Element parentEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Element userRolesEl = SAXReaderUtil.createElement("user-roles");
 

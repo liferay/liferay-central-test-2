@@ -173,8 +173,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> categoryEls = root.element("categories").elements(
 				"category");
 
-			Map<Long, Long> categoryPKs = context.getNewPrimaryKeysMap(
-				MBCategory.class);
+			Map<Long, Long> categoryPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(MBCategory.class);
 
 			for (Element categoryEl : categoryEls) {
 				String path = categoryEl.attributeValue("path");
@@ -192,10 +192,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> messageEls = root.element("messages").elements(
 				"message");
 
-			Map<Long, Long> threadPKs = context.getNewPrimaryKeysMap(
-				MBThread.class);
-			Map<Long, Long> messagePKs = context.getNewPrimaryKeysMap(
-				MBMessage.class);
+			Map<Long, Long> threadPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(MBThread.class);
+			Map<Long, Long> messagePKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(MBMessage.class);
 
 			for (Element messageEl : messageEls) {
 				String path = messageEl.attributeValue("path");

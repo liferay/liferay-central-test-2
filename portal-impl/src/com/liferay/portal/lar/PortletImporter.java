@@ -125,7 +125,7 @@ public class PortletImporter {
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, layout.getGroupId(), parameterMap, new HashSet(),
+			companyId, layout.getGroupId(), parameterMap, new HashSet<String>(),
 			strategy, zipReader);
 
 		context.setPlid(plid);
@@ -246,7 +246,7 @@ public class PortletImporter {
 
 	protected void deletePortletData(
 			PortletDataContext context, String portletId, long plid)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			PortletPreferences portletPreferences =
@@ -271,7 +271,7 @@ public class PortletImporter {
 	protected String deletePortletData(
 			PortletDataContext context, String portletId,
 			PortletPreferences portletPreferences)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			context.getCompanyId(), portletId);
@@ -337,7 +337,7 @@ public class PortletImporter {
 	protected void importPortletData(
 			PortletDataContext context, String portletId, long plid,
 			Element portletDataRefEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			PortletPreferences portletPreferences =
@@ -362,7 +362,7 @@ public class PortletImporter {
 	protected String importPortletData(
 			PortletDataContext context, String portletId,
 			PortletPreferences portletPreferences, Element portletDataRefEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			context.getCompanyId(), portletId);
@@ -569,7 +569,7 @@ public class PortletImporter {
 					}
 				}
 
-				context.addComments(className, new Long(classPK), messages);
+				context.addComments(className, classPK, messages);
 			}
 		}
 		catch (Exception e) {

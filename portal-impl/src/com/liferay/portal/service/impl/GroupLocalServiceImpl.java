@@ -814,9 +814,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
@@ -825,6 +822,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_SETUP,
 			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
 
 		LayoutLocalServiceUtil.importLayouts(
 			defaultUserId, group.getGroupId(), false, parameterMap, larFile);

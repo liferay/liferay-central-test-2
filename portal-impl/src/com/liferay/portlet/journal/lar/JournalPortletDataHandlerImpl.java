@@ -1222,8 +1222,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> structureEls = root.element("structures").elements(
 				"structure");
 
-			Map<String, String> structureIds = context.getNewPrimaryKeysMap(
-				JournalStructure.class);
+			Map<String, String> structureIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalStructure.class);
 
 			for (Element structureEl : structureEls) {
 				importStructure(context, structureIds, structureEl);
@@ -1232,8 +1233,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> templateEls = root.element("templates").elements(
 				"template");
 
-			Map<String, String> templateIds = context.getNewPrimaryKeysMap(
-				JournalTemplate.class);
+			Map<String, String> templateIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalTemplate.class);
 
 			for (Element templateEl : templateEls) {
 				importTemplate(context, structureIds, templateIds, templateEl);
@@ -1241,8 +1243,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			List<Element> feedEls = root.element("feeds").elements("feed");
 
-			Map<String, String> feedIds = context.getNewPrimaryKeysMap(
-				JournalFeed.class);
+			Map<String, String> feedIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalFeed.class);
 
 			for (Element feedEl : feedEls) {
 				importFeed(context, structureIds, templateIds, feedIds, feedEl);
@@ -1252,8 +1255,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				List<Element> articleEls = root.element("articles").elements(
 					"article");
 
-				Map<String, String> articleIds = context.getNewPrimaryKeysMap(
-					JournalArticle.class);
+				Map<String, String> articleIds =
+					(Map<String, String>)context.getNewPrimaryKeysMap(
+						JournalArticle.class);
 
 				for (Element articleEl : articleEls) {
 					importArticle(
@@ -1265,8 +1269,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> dlFolderEls = root.element("dl-folders").elements(
 				"folder");
 
-			Map<Long, Long> dlFolderPKs = context.getNewPrimaryKeysMap(
-				DLFolder.class);
+			Map<Long, Long> dlFolderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
 
 			for (Element folderEl : dlFolderEls) {
 				String path = folderEl.attributeValue("path");
@@ -1284,8 +1288,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> fileEntryEls = root.element(
 				"dl-file-entries").elements("file-entry");
 
-			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
-				DLFileEntry.class);
+			Map<String, String> fileEntryNames =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					DLFileEntry.class);
 
 			for (Element fileEntryEl : fileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");
@@ -1323,8 +1328,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> igFolderEls = root.element("ig-folders").elements(
 				"folder");
 
-			Map<Long, Long> igFolderPKs = context.getNewPrimaryKeysMap(
-				IGFolder.class);
+			Map<Long, Long> igFolderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
 			for (Element folderEl : igFolderEls) {
 				String path = folderEl.attributeValue("path");

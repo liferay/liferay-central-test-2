@@ -143,8 +143,8 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			List<Element> nodeEls = root.element("nodes").elements("node");
 
-			Map<Long, Long> nodePKs = context.getNewPrimaryKeysMap(
-				WikiNode.class);
+			Map<Long, Long> nodePKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(WikiNode.class);
 
 			for (Element nodeEl : nodeEls) {
 				String path = nodeEl.attributeValue("path");

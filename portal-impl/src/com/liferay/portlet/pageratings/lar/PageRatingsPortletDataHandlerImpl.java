@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 
@@ -88,7 +89,8 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			context.importRatingsEntries(
-				Layout.class, data, new Long(context.getPlid()));
+				Layout.class, GetterUtil.getLong(data),
+				new Long(context.getPlid()));
 
 			return null;
 		}

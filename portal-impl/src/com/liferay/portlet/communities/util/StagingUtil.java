@@ -316,11 +316,17 @@ public class StagingUtil {
 			new LinkedHashMap<String, String[]>();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS,
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
@@ -337,17 +343,11 @@ public class StagingUtil {
 			PortletDataHandlerKeys.THEME,
 			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DATA_STRATEGY,
-			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
-		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			new String[] {UserIdStrategy.CURRENT_USER_ID});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
 
 		return parameterMap;
 	}
@@ -358,6 +358,28 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>(
 				actionRequest.getParameterMap());
+
+		if (!parameterMap.containsKey(PortletDataHandlerKeys.DATA_STRATEGY)) {
+			parameterMap.put(
+				PortletDataHandlerKeys.DATA_STRATEGY,
+				new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+				new String[] {Boolean.TRUE.toString()});
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.DELETE_PORTLET_DATA)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+				new String[] {Boolean.FALSE.toString()});
+		}
 
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.PORTLET_DATA)) {
@@ -393,28 +415,6 @@ public class StagingUtil {
 			parameterMap.put(
 				PortletDataHandlerKeys.THEME,
 				new String[] {Boolean.FALSE.toString()});
-		}
-
-		if (!parameterMap.containsKey(
-				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS)) {
-
-			parameterMap.put(
-				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-				new String[] {Boolean.TRUE.toString()});
-		}
-
-		if (!parameterMap.containsKey(
-				PortletDataHandlerKeys.DELETE_PORTLET_DATA)) {
-
-			parameterMap.put(
-				PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-				new String[] {Boolean.FALSE.toString()});
-		}
-
-		if (!parameterMap.containsKey(PortletDataHandlerKeys.DATA_STRATEGY)) {
-			parameterMap.put(
-				PortletDataHandlerKeys.DATA_STRATEGY,
-				new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
 		}
 
 		if (!parameterMap.containsKey(

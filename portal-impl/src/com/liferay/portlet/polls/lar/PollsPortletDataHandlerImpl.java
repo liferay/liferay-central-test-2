@@ -140,8 +140,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> questionEls = root.element("questions").elements(
 				"question");
 
-			Map<Long, Long> questionPKs = context.getNewPrimaryKeysMap(
-				PollsQuestion.class);
+			Map<Long, Long> questionPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(
+					PollsQuestion.class);
 
 			for (Element questionEl : questionEls) {
 				String path = questionEl.attributeValue("path");
@@ -159,8 +160,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			List<Element> choiceEls = root.element("choices").elements(
 				"choice");
 
-			Map<Long, Long> choicePKs = context.getNewPrimaryKeysMap(
-				PollsChoice.class);
+			Map<Long, Long> choicePKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(
+					PollsChoice.class);
 
 			for (Element choiceEl : choiceEls) {
 				String path = choiceEl.attributeValue("path");

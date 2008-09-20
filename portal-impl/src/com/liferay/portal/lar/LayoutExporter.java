@@ -139,8 +139,8 @@ public class LayoutExporter {
 		ZipWriter zipWriter = new ZipWriter();
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, groupId, parameterMap, new HashSet(), startDate, endDate,
-			zipWriter);
+			companyId, groupId, parameterMap, new HashSet<String>(), startDate,
+			endDate, zipWriter);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -357,7 +357,7 @@ public class LayoutExporter {
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout, Element permissionsEl,
 			boolean exportUserPermissions)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String resourceName = Layout.class.getName();
 		String resourcePrimKey = String.valueOf(layout.getPlid());
@@ -394,7 +394,7 @@ public class LayoutExporter {
 	protected void exportLayoutRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String resourceName = Layout.class.getName();
 

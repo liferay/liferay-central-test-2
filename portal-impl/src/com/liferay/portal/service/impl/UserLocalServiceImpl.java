@@ -2343,11 +2343,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new LinkedHashMap<String, String[]>();
 
 		parameterMap.put(
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
+			new String[] {PortletDataHandlerKeys.
+				LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME});
+		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
@@ -2361,28 +2371,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.THEME,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
-			new String[] {PortletDataHandlerKeys.
-				LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME});
-		parameterMap.put(
 			PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
 			new String[] {PortletDataHandlerKeys.
 				PORTLETS_MERGE_MODE_ADD_TO_BOTTOM});
 		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			PortletDataHandlerKeys.THEME,
 			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DATA_STRATEGY,
-			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
 		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			new String[] {UserIdStrategy.CURRENT_USER_ID});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
 
 		return parameterMap;
 	}

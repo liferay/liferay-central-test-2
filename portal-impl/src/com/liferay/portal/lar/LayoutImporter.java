@@ -183,7 +183,7 @@ public class LayoutImporter {
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, groupId, parameterMap, new HashSet(), strategy,
+			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
 			zipReader);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
@@ -297,8 +297,8 @@ public class LayoutImporter {
 
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
-		Map <Long, Long> newLayoutIdPlidMap =
-			context.getNewPrimaryKeysMap(Layout.class);
+		Map<Long, Long> newLayoutIdPlidMap =
+			(Map<Long, Long>)context.getNewPrimaryKeysMap(Layout.class);
 
 		List<Element> layoutEls = root.element("layouts").elements("layout");
 

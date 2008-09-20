@@ -225,8 +225,9 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element structureEl = root.element("structure");
 
-			Map<String, String> structureIds = context.getNewPrimaryKeysMap(
-				JournalStructure.class);
+			Map<String, String> structureIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalStructure.class);
 
 			if (structureEl != null) {
 				JournalPortletDataHandlerImpl.importStructure(
@@ -235,8 +236,9 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element templateEl = root.element("template");
 
-			Map<String, String> templateIds = context.getNewPrimaryKeysMap(
-				JournalTemplate.class);
+			Map<String, String> templateIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalTemplate.class);
 
 			if (templateEl != null) {
 				JournalPortletDataHandlerImpl.importTemplate(
@@ -245,8 +247,9 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element articleEl = root.element("article");
 
-			Map<String, String> articleIds = context.getNewPrimaryKeysMap(
-				JournalArticle.class);
+			Map<String, String> articleIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalArticle.class);
 
 			if (articleEl != null) {
 				JournalPortletDataHandlerImpl.importArticle(
@@ -271,8 +274,8 @@ public class JournalContentPortletDataHandlerImpl
 				dlFolderEls = dlFoldersEl.elements("folder");
 			}
 
-			Map<Long, Long> dlFolderPKs = context.getNewPrimaryKeysMap(
-				DLFolder.class);
+			Map<Long, Long> dlFolderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
 
 			for (Element folderEl : dlFolderEls) {
 				String path = folderEl.attributeValue("path");
@@ -295,8 +298,9 @@ public class JournalContentPortletDataHandlerImpl
 				dlFileEntryEls = dlFileEntriesEl.elements("file-entry");
 			}
 
-			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
-				DLFileEntry.class);
+			Map<String, String> fileEntryNames =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					DLFileEntry.class);
 
 			for (Element fileEntryEl : dlFileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");
@@ -344,8 +348,8 @@ public class JournalContentPortletDataHandlerImpl
 				igFolderEls = igFoldersEl.elements("folder");
 			}
 
-			Map<Long, Long> igFolderPKs = context.getNewPrimaryKeysMap(
-				IGFolder.class);
+			Map<Long, Long> igFolderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
 			for (Element folderEl : igFolderEls) {
 				String path = folderEl.attributeValue("path");

@@ -30,9 +30,32 @@ package com.liferay.portal.kernel.lar;
  */
 public class PortletDataHandlerKeys {
 
+	public static final String DATA_STRATEGY = "DATA_STRATEGY";
+
+	public static final String DATA_STRATEGY_COPY_AS_NEW =
+		"DATA_STRATEGY_COPY_AS_NEW";
+
+	public static final String DATA_STRATEGY_MIRROR = "DATA_STRATEGY_MIRROR";
+
+	public static final String DELETE_MISSING_LAYOUTS =
+		"DELETE_MISSING_LAYOUTS";
+
+	public static final String DELETE_PORTLET_DATA = "DELETE_PORTLET_DATA";
+
+	public static final String LAYOUTS_IMPORT_MODE = "LAYOUTS_IMPORT_MODE";
+
+	public static final String LAYOUTS_IMPORT_MODE_ADD_AS_NEW = "ADD_AS_NEW";
+
+	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID =
+		"MERGE_BY_LAYOUT_ID";
+
+	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME =
+		"MERGE_BY_LAYOUT_NAME";
+
 	public static final String PERMISSIONS = "PERMISSIONS";
 
-	public static final String USER_PERMISSIONS = "USER_PERMISSIONS";
+	public static final String PORTLET_ARCHIVED_SETUPS =
+		"PORTLET_ARCHIVED_SETUPS";
 
 	public static final String PORTLET_DATA = "PORTLET_DATA";
 
@@ -43,47 +66,24 @@ public class PortletDataHandlerKeys {
 
 	public static final String PORTLET_SETUP = "PORTLET_SETUP";
 
-	public static final String PORTLET_ARCHIVED_SETUPS =
-		"PORTLET_ARCHIVED_SETUPS";
-
 	public static final String PORTLET_USER_PREFERENCES =
 		"PORTLET_USER_PREFERENCES";
+
+	public static final String PORTLETS_MERGE_MODE = "PORTLETS_MERGE_MODE";
+
+	public static final String PORTLETS_MERGE_MODE_ADD_TO_BOTTOM =
+		"ADD_TO_BOTTOM";
+
+	public static final String PORTLETS_MERGE_MODE_ADD_TO_TOP = "ADD_TO_TOP";
+
+	public static final String PORTLETS_MERGE_MODE_REPLACE = "REPLACE";
 
 	public static final String SELECTED_LAYOUTS = "SELECTED_LAYOUTS";
 
 	public static final String THEME = "THEME";
 
-	public static final String DELETE_MISSING_LAYOUTS =
-		"DELETE_MISSING_LAYOUTS";
-
-	public static final String DELETE_PORTLET_DATA = "DELETE_PORTLET_DATA";
-
-	public static final String DATA_STRATEGY = "DATA_STRATEGY";
-
-	public static final String DATA_STRATEGY_MIRROR = "DATA_STRATEGY_MIRROR";
-
-	public static final String DATA_STRATEGY_COPY_AS_NEW =
-		"DATA_STRATEGY_COPY_AS_NEW";
-
 	public static final String USER_ID_STRATEGY = "USER_ID_STRATEGY";
 
-	public static final String LAYOUTS_IMPORT_MODE = "LAYOUTS_IMPORT_MODE";
-
-	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME =
-		"MERGE_BY_LAYOUT_NAME";
-
-	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID =
-		"MERGE_BY_LAYOUT_ID";
-
-	public static final String LAYOUTS_IMPORT_MODE_ADD_AS_NEW = "ADD_AS_NEW";
-
-	public static final String PORTLETS_MERGE_MODE = "PORTLETS_MERGE_MODE";
-
-	public static final String PORTLETS_MERGE_MODE_REPLACE = "REPLACE";
-
-	public static final String PORTLETS_MERGE_MODE_ADD_TO_TOP = "ADD_TO_TOP";
-
-	public static final String PORTLETS_MERGE_MODE_ADD_TO_BOTTOM =
-		"ADD_TO_BOTTOM";
+	public static final String USER_PERMISSIONS = "USER_PERMISSIONS";
 
 }
