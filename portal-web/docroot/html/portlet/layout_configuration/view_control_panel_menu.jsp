@@ -71,7 +71,7 @@
 							if (!portlet.isInstanceable()) {
 						%>
 								<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
-									<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>"><liferay-portlet:param name="panelCategory" value="<%= panelCategory %>" /></liferay-portlet:renderURL>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+									<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />&panelCategory=<%= panelCategory %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
 								</li>
 
 						<%
