@@ -53,8 +53,7 @@ body.portlet {
 /* ---------- Panel Page ---------- */
 
 .lfr-panel {
-	margin: 0 auto;
-	width: 90%;
+	width: 100%;
 }
 
 .lfr-panel .portlet-title {
