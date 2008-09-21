@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.job.Scheduler;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -38,6 +37,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;

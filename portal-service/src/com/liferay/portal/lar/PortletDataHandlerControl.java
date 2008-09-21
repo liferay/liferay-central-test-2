@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.lar;
+package com.liferay.portal.lar;
 
 import com.liferay.portal.kernel.util.StringPool;
 

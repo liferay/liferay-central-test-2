@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.sitemap.lar;
 
-import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
-import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.lar.PortletDataContext;
+import com.liferay.portal.lar.PortletDataException;
+import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.lar.PortletDataHandlerControl;
 
 import javax.portlet.PortletPreferences;
 

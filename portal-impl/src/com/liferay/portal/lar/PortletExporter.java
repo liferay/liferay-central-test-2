@@ -26,8 +26,6 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;

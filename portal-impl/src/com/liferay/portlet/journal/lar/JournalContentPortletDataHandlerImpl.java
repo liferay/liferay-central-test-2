@@ -22,17 +22,17 @@
 
 package com.liferay.portlet.journal.lar;
 
-import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
-import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.lar.PortletDataContext;
+import com.liferay.portal.lar.PortletDataException;
+import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.lar.PortletDataHandlerBoolean;
+import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -84,7 +84,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Raymond Augé
  * @author Bruno Farache
  *
- * @see com.liferay.portal.kernel.lar.PortletDataHandler
+ * @see com.liferay.portal.lar.PortletDataHandler
  * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  *

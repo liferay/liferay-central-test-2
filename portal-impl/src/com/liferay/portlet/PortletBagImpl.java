@@ -23,7 +23,6 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.job.Scheduler;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -32,6 +31,7 @@ import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 

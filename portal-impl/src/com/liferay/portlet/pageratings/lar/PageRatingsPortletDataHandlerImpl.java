@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.pageratings.lar;
 
-import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
-import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.lar.PortletDataContext;
+import com.liferay.portal.lar.PortletDataException;
+import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.lar.PortletDataHandlerBoolean;
+import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.model.Layout;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 
