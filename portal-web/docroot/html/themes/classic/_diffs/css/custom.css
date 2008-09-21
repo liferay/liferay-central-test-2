@@ -1,10 +1,4 @@
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
-
-@import url(color_schemes/green.css);
-
-@import url(color_schemes/orange.css);
-
-/* ---------- Base styles ---------- */
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */ @import url(color_schemes/green.css); @import url(color_schemes/orange.css); /* ---------- Base styles ---------- */
 
 html {
 	height: 100%;
@@ -51,7 +45,6 @@ body {
 	zoom: 1;
 }
 
-
 /* ---------- Main navigation ---------- */
 
 #navigation {
@@ -97,7 +90,6 @@ body {
 	background: url(../images/navigation/bullet_selected.png) no-repeat 0 50%;
 	padding-left: 10px;
 }
-
 
 /* ---------- Add/remove page ---------- */
 

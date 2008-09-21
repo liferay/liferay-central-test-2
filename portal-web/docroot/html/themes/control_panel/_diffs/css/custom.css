@@ -100,8 +100,8 @@ body {
 
 .lfr-ctrl-panel .panel-category h2 {
 	font-size: 14px;
-	overflow: hidden;
 	margin: 0;
+	overflow: hidden;
 	padding: 3px 0;
 }
 
@@ -168,9 +168,9 @@ body {
 	border-bottom: 1px solid #ECF0F1;
 }
 
-.lfr-ctrl-panel  .panel-category .selected-portlet a {
+.lfr-ctrl-panel .panel-category .selected-portlet a {
 	background: transparent url(../images/common/selected_portlet_arrow.png) no-repeat right 50%;
-	border: 1px solid #7a8487;
+	border: 1px solid #7A8487;
 	border-left: none;
 	border-right: none;
 	color: #000;
