@@ -266,6 +266,7 @@ public class LayoutExporter {
 				"/layout.xml";
 
 			Element el = layoutsEl.addElement("layout");
+
 			el.addAttribute("layout-id", String.valueOf(layout.getLayoutId()));
 			el.addAttribute("path", layoutPath);
 

@@ -430,7 +430,7 @@ public class PortletImporter {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		List<Element> prefsEls = parentEl.elements("portlet-preference");
+		List<Element> prefsEls = parentEl.elements("portlet-preferences");
 
 		for (Element prefEl : prefsEls) {
 			String path = prefEl.attributeValue("path");

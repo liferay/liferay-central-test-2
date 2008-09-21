@@ -190,8 +190,8 @@ public class PortletExporter {
 
 		exportPortlet(
 			context, layoutCache, portletId, layout, root, defaultUserId,
-			exportPortletData, exportPortletSetup, exportPortletArchivedSetups,
-			exportPortletUserPreferences, exportPermissions,
+			exportPermissions, exportPortletArchivedSetups, exportPortletData,
+			exportPortletSetup, exportPortletUserPreferences,
 			exportUserPermissions);
 
 		// Comments
@@ -239,7 +239,7 @@ public class PortletExporter {
 
 				String[] comment = entry.getKey().split(StringPool.POUND);
 
-				String path = getCommentPath(context, comment[0], comment[1]);
+				String path = getCommentsPath(context, comment[0], comment[1]);
 
 				Element asset = root.addElement("asset");
 				asset.addAttribute("path", path);
@@ -249,7 +249,7 @@ public class PortletExporter {
 				List<MBMessage> messages = entry.getValue();
 
 				for (MBMessage message : messages) {
-					path = getCommentPath(
+					path = getCommentsPath(
 						context, comment[0], comment[1], message);
 
 					context.addZipEntry(path, message);
@@ -385,9 +385,9 @@ public class PortletExporter {
 	protected void exportPortlet(
 			PortletDataContext context, LayoutCache layoutCache,
 			String portletId, Layout layout, Element parentEl,
-			long defaultUserId, boolean exportPortletData,
-			boolean exportPortletSetup, boolean exportPortletArchivedSetups,
-			boolean exportPortletUserPreferences, boolean exportPermissions,
+			long defaultUserId, boolean exportPermissions,
+			boolean exportPortletArchivedSetups, boolean exportPortletData,
+			boolean exportPortletSetup, boolean exportPortletUserPreferences,
 			boolean exportUserPermissions)
 		throws PortalException, SystemException {
 
@@ -407,9 +407,9 @@ public class PortletExporter {
 			return;
 		}
 
-		Document portletDoc = SAXReaderUtil.createDocument();
+		Document doc = SAXReaderUtil.createDocument();
 
-		Element portletEl = portletDoc.addElement("portlet");
+		Element portletEl = doc.addElement("portlet");
 
 		portletEl.addAttribute("portlet-id", portletId);
 		portletEl.addAttribute(
@@ -506,16 +506,19 @@ public class PortletExporter {
 		String portletPath = context.getPortletPath(portletId) + "/portlet.xml";
 
 		Element el = parentEl.addElement("portlet");
+
 		el.addAttribute("portlet-id", portletId);
 		el.addAttribute(
 			"layout-id", String.valueOf(layout.getLayoutId()));
 		el.addAttribute("path", portletPath);
 
 		try {
-			context.addZipEntry(portletPath, portletDoc.formattedString());
+			context.addZipEntry(portletPath, doc.formattedString());
 		}
 		catch (IOException ioe) {
-			throw new SystemException(ioe);
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe.getMessage());
+			}
 		}
 	}
 
@@ -585,8 +588,9 @@ public class PortletExporter {
 
 		String portletDataPath = getPortletDataPath(context, portletId);
 
-		parentEl.addElement("portlet-data").addAttribute(
-			"path", portletDataPath);
+		Element portletDataEl = parentEl.addElement("portlet-data");
+
+		portletDataEl.addAttribute("path", portletDataPath);
 
 		context.addZipEntry(portletDataPath, data);
 	}
@@ -663,7 +667,7 @@ public class PortletExporter {
 				context, portletId, ownerId, ownerType, plid);
 
 			parentEl.addElement(
-				"portlet-preference").addAttribute("path", path);
+				"portlet-preferences").addAttribute("path", path);
 
 			if (context.isPathNotProcessed(path)) {
 				context.addZipEntry(path, prefsDoc.formattedString());
@@ -770,7 +774,7 @@ public class PortletExporter {
 
 				String[] ratingsEntry = entry.getKey().split(StringPool.POUND);
 
-				String ratingPath = getRatingPath(
+				String ratingPath = getRatingsPath(
 					context, ratingsEntry[0], ratingsEntry[1]);
 
 				Element asset = root.addElement("asset");
@@ -782,7 +786,7 @@ public class PortletExporter {
 				List<RatingsEntry> ratingsEntries = entry.getValue();
 
 				for (RatingsEntry rating : ratingsEntries) {
-					ratingPath = getRatingPath(
+					ratingPath = getRatingsPath(
 						context, ratingsEntry[0], ratingsEntry[1], rating);
 
 					context.addZipEntry(ratingPath, rating);
@@ -852,10 +856,11 @@ public class PortletExporter {
 				String[] tagsEntry = entry.getKey().split(StringPool.POUND);
 
 				Element asset = root.addElement("asset");
+
 				asset.addAttribute("class-name", tagsEntry[0]);
 				asset.addAttribute("class-pk", tagsEntry[1]);
 				asset.addAttribute(
-					"entries", StringUtil.merge(entry.getValue(), ","));
+					"entries", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(
@@ -952,10 +957,11 @@ public class PortletExporter {
 		}
 	}
 
-	protected String getCommentPath(
-			PortletDataContext context, String className, String classPK) {
+	protected String getCommentsPath(
+		PortletDataContext context, String className, String classPK) {
 
 		StringBuilder sb = new StringBuilder();
+
 		sb.append(context.getRootPath());
 		sb.append("/comments/");
 		sb.append(PortalUtil.getClassNameId(className));
@@ -966,11 +972,12 @@ public class PortletExporter {
 		return sb.toString();
 	}
 
-	protected String getCommentPath(
-			PortletDataContext context, String className, String classPK,
-			MBMessage message) {
+	protected String getCommentsPath(
+		PortletDataContext context, String className, String classPK,
+		MBMessage message) {
 
 		StringBuilder sb = new StringBuilder();
+
 		sb.append(context.getRootPath());
 		sb.append("/comments/");
 		sb.append(PortalUtil.getClassNameId(className));
@@ -983,41 +990,8 @@ public class PortletExporter {
 		return sb.toString();
 	}
 
-	protected String getRatingPath(
-		PortletDataContext context, String className, String classPK) {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(context.getRootPath());
-		sb.append("/ratings/");
-		sb.append(PortalUtil.getClassNameId(className));
-		sb.append(CharPool.FORWARD_SLASH);
-		sb.append(classPK);
-		sb.append(CharPool.FORWARD_SLASH);
-
-		return sb.toString();
-	}
-
-	protected String getRatingPath(
-		PortletDataContext context, String className, String classPK,
-		RatingsEntry rating) {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(context.getRootPath());
-		sb.append("/ratings/");
-		sb.append(PortalUtil.getClassNameId(className));
-		sb.append(CharPool.FORWARD_SLASH);
-		sb.append(classPK);
-		sb.append(CharPool.FORWARD_SLASH);
-		sb.append(rating.getEntryId());
-		sb.append(".xml");
-
-		return sb.toString();
-	}
-
 	protected String getPortletDataPath(
-			PortletDataContext context, String portletId) {
+		PortletDataContext context, String portletId) {
 
 		return context.getPortletPath(portletId) + "/portlet-data.xml";
 	}
@@ -1056,14 +1030,45 @@ public class PortletExporter {
 		return sb.toString();
 	}
 
+	protected String getRatingsPath(
+		PortletDataContext context, String className, String classPK) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getRootPath());
+		sb.append("/ratings/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
+
+		return sb.toString();
+	}
+
+	protected String getRatingsPath(
+		PortletDataContext context, String className, String classPK,
+		RatingsEntry rating) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getRootPath());
+		sb.append("/ratings/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(rating.getEntryId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
 	protected boolean hasRole(List<Role> roles, String roleName) {
 		if ((roles == null) || (roles.size() == 0)) {
 			return false;
 		}
 
-		for (int i = 0; i < roles.size(); i++) {
-			Role role = roles.get(i);
-
+		for (Role role : roles) {
 			if (role.getName().equals(roleName)) {
 				return true;
 			}
