@@ -72,6 +72,10 @@
 	background-image: url(../images/dock/home.png);
 }
 
+.lfr-dock li.control-panel a {
+	background-image: url(../images/dock/control_panel.png);
+}
+
 .lfr-dock li.my-account a {
 	background-image: url(../images/dock/my_account.png);
 }
