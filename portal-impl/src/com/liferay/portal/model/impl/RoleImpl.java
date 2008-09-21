@@ -23,7 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Role;
-import com.liferay.portal.util.RoleNames;
+import com.liferay.portal.model.RoleConstants;
 
 /**
  * <a href="RoleImpl.java.html"><b><i>View Source</i></b></a>
@@ -32,70 +32,11 @@ import com.liferay.portal.util.RoleNames;
  *
  */
 public class RoleImpl extends RoleModelImpl implements Role {
-
-	public static final String ADMINISTRATOR = RoleNames.ADMINISTRATOR;
-
-	public static final String GUEST = RoleNames.GUEST;
-
-	public static final String OWNER = RoleNames.OWNER;
-
-	public static final String POWER_USER = RoleNames.POWER_USER;
-
-	public static final String USER = RoleNames.USER;
-
-	public static final String[] SYSTEM_ROLES = RoleNames.SYSTEM_ROLES;
-
-	public static final String COMMUNITY_ADMINISTRATOR =
-		RoleNames.COMMUNITY_ADMINISTRATOR;
-
-	public static final String COMMUNITY_MEMBER = RoleNames.COMMUNITY_MEMBER;
-
-	public static final String COMMUNITY_OWNER = RoleNames.COMMUNITY_OWNER;
-
-	public static final String[] SYSTEM_COMMUNITY_ROLES =
-		RoleNames.SYSTEM_COMMUNITY_ROLES;
-
-	public static final String ORGANIZATION_ADMINISTRATOR =
-		RoleNames.ORGANIZATION_ADMINISTRATOR;
-
-	public static final String ORGANIZATION_MEMBER =
-		RoleNames.ORGANIZATION_MEMBER;
-
-	public static final String ORGANIZATION_OWNER =
-		RoleNames.ORGANIZATION_OWNER;
-
-	public static final String[] SYSTEM_ORGANIZATION_ROLES =
-		RoleNames.SYSTEM_ORGANIZATION_ROLES;
-
-	public static final int TYPE_COMMUNITY = 2;
-
-	public static final String TYPE_COMMUNITY_LABEL = "community";
-
-	public static final int TYPE_ORGANIZATION = 3;
-
-	public static final String TYPE_ORGANIZATION_LABEL = "organization";
-
-	public static final int TYPE_REGULAR = 1;
-
-	public static final String TYPE_REGULAR_LABEL = "regular";
-
-	public static String getTypeLabel(int type) {
-		if (type == TYPE_COMMUNITY) {
-			return TYPE_COMMUNITY_LABEL;
-		}
-		else if (type == TYPE_ORGANIZATION) {
-			return TYPE_ORGANIZATION_LABEL;
-		}
-		else {
-			return TYPE_REGULAR_LABEL;
-		}
-	}
-
 	public RoleImpl() {
 	}
 
 	public String getTypeLabel() {
-		return getTypeLabel(getType());
+		return RoleConstants.getTypeLabel(getType());
 	}
 
 }

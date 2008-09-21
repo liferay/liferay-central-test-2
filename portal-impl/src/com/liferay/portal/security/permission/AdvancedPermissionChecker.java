@@ -26,15 +26,15 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.comparator.PermissionActionIdComparator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -192,14 +192,16 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 					if (userGroups.size() > 0) {
 						Role role = RoleLocalServiceUtil.getRole(
-							user.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
+							user.getCompanyId(),
+							RoleConstants.COMMUNITY_MEMBER);
 
 						roles.add(role);
 					}
 
 					if (userOrgs.size() > 0) {
 						Role role = RoleLocalServiceUtil.getRole(
-							user.getCompanyId(), RoleImpl.ORGANIZATION_MEMBER);
+							user.getCompanyId(),
+							RoleConstants.ORGANIZATION_MEMBER);
 
 						roles.add(role);
 					}
@@ -369,7 +371,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			if (groupId > 0) {
 				Resource resource = ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_GROUP_TEMPLATE,
-					String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID));
+					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
 
 				resourceIds[2] = resource.getResourceId();
 			}
@@ -379,7 +381,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
 						ResourceConstants.SCOPE_GROUP_TEMPLATE + " " +
-							GroupImpl.DEFAULT_PARENT_GROUP_ID +
+							GroupConstants.DEFAULT_PARENT_GROUP_ID +
 								" does not exist");
 			}
 		}
@@ -463,7 +465,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			companyId, 0, name, primKey, actionId);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupImpl.GUEST);
+			companyId, GroupConstants.GUEST);
 
 		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
 			defaultUserId, guestGroup.getGroupId());
@@ -599,7 +601,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		if (value == null) {
 			boolean hasAdminRole = RoleLocalServiceUtil.hasUserRole(
-				user.getUserId(), companyId, RoleImpl.ADMINISTRATOR, true);
+				user.getUserId(), companyId, RoleConstants.ADMINISTRATOR, true);
 
 			value = Boolean.valueOf(hasAdminRole);
 

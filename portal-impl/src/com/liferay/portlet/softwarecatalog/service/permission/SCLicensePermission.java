@@ -24,7 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
@@ -74,7 +74,7 @@ public class SCLicensePermission {
 		String actionId) {
 
 		return permissionChecker.hasPermission(
-			GroupImpl.DEFAULT_PARENT_GROUP_ID, SCLicense.class.getName(),
+			GroupConstants.DEFAULT_PARENT_GROUP_ID, SCLicense.class.getName(),
 			license.getLicenseId(), actionId);
 	}
 

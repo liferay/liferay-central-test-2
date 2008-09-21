@@ -25,10 +25,10 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -132,7 +132,7 @@ public class PortletPermissionImpl implements PortletPermission {
 				Group group = GroupLocalServiceUtil.getGroup(
 					layout.getGroupId());
 
-				if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+				if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 					return true;
 				}
 			}

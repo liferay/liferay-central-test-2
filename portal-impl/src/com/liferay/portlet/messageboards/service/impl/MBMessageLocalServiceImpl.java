@@ -42,10 +42,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -427,7 +427,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (files.size() > 0) {
 			long companyId = message.getCompanyId();
 			String portletId = CompanyConstants.SYSTEM_STRING;
-			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
@@ -1168,7 +1168,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		long companyId = message.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
-		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = message.getAttachmentsDir();
 

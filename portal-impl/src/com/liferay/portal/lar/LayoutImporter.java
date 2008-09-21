@@ -50,6 +50,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -62,7 +63,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
@@ -187,7 +187,7 @@ public class LayoutImporter {
 			zipReader);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupImpl.GUEST);
+			companyId, GroupConstants.GUEST);
 
 		// Zip
 

@@ -23,10 +23,10 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.RoleNames;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 
 import javax.portlet.PortletRequest;
@@ -77,7 +77,7 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 					user.getCompanyId());
 
 				this.ownerRole = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleNames.OWNER);
+					user.getCompanyId(), RoleConstants.OWNER);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

@@ -71,10 +71,10 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -134,7 +134,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		Role role = rolePersistence.findByC_N(
-			group.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
+			group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
 
 		for (int i = 0; i < userIds.length; i++) {
 			long userId = userIds[i];
@@ -159,7 +159,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long groupId = group.getGroupId();
 
 		Role role = rolePersistence.findByC_N(
-			group.getCompanyId(), RoleImpl.ORGANIZATION_MEMBER);
+			group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
 		for (int i = 0; i < userIds.length; i++) {
 			long userId = userIds[i];

@@ -23,9 +23,9 @@
 package com.liferay.portal.upgrade.v4_3_5;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -304,7 +304,7 @@ public class UpgradePermission extends UpgradeProcess {
 			ps = con.prepareStatement(_GET_GUEST_GROUP_ID);
 
 			ps.setLong(1, companyId);
-			ps.setString(2, GroupImpl.GUEST);
+			ps.setString(2, GroupConstants.GUEST);
 
 			rs = ps.executeQuery();
 

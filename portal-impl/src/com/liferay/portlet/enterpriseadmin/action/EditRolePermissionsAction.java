@@ -31,10 +31,10 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.comparator.ActionComparator;
@@ -135,12 +135,12 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		if (role.getName().equals(RoleImpl.ADMINISTRATOR) ||
-			role.getName().equals(RoleImpl.OWNER) ||
-			role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) ||
-			role.getName().equals(RoleImpl.COMMUNITY_OWNER) ||
-			role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) ||
-			role.getName().equals(RoleImpl.ORGANIZATION_OWNER)) {
+		if (role.getName().equals(RoleConstants.ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.OWNER) ||
+			role.getName().equals(RoleConstants.COMMUNITY_ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.COMMUNITY_OWNER) ||
+			role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
 
 			throw new RolePermissionsException(role.getName());
 		}
@@ -168,12 +168,12 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		if (role.getName().equals(RoleImpl.ADMINISTRATOR) ||
-			role.getName().equals(RoleImpl.OWNER) ||
-			role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) ||
-			role.getName().equals(RoleImpl.COMMUNITY_OWNER) ||
-			role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) ||
-			role.getName().equals(RoleImpl.ORGANIZATION_OWNER)) {
+		if (role.getName().equals(RoleConstants.ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.OWNER) ||
+			role.getName().equals(RoleConstants.COMMUNITY_ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.COMMUNITY_OWNER) ||
+			role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
 
 			throw new RolePermissionsException(role.getName());
 		}
@@ -222,13 +222,14 @@ public class EditRolePermissionsAction extends PortletAction {
 						actionId);
 				}
 				else if (scope == ResourceConstants.SCOPE_GROUP) {
-					if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
-						(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
+					if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+						(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
 						PermissionServiceUtil.setRolePermission(
 							roleId, themeDisplay.getScopeGroupId(), selResource,
 							ResourceConstants.SCOPE_GROUP_TEMPLATE,
-							String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+							String.valueOf(
+								GroupConstants.DEFAULT_PARENT_GROUP_ID),
 							actionId);
 					}
 					else {

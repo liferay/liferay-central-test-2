@@ -98,15 +98,15 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 				<c:choose>
 					<c:when test="<%= ((role == null) && (type == 0)) %>">
 						<select name="<portlet:namespace/>type">
-							<option value="<%= RoleImpl.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
-							<option value="<%= RoleImpl.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
-							<option value="<%= RoleImpl.TYPE_ORGANIZATION %>"><liferay-ui:message key="organization" /></option>
+							<option value="<%= RoleConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
+							<option value="<%= RoleConstants.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
+							<option value="<%= RoleConstants.TYPE_ORGANIZATION %>"><liferay-ui:message key="organization" /></option>
 						</select>
 					</c:when>
 					<c:when test="<%= (role == null) %>">
 						<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(type) %>" />
 
-						<%= LanguageUtil.get(pageContext, RoleImpl.getTypeLabel(type)) %>
+						<%= LanguageUtil.get(pageContext, RoleConstants.getTypeLabel(type)) %>
 					</c:when>
 					<c:otherwise>
 						<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
@@ -120,13 +120,13 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 			<%
 			String[] subtypes = null;
 
-			if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
+			if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
 				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
 			}
-			else if (role.getType() == RoleImpl.TYPE_ORGANIZATION) {
+			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 				subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
 			}
-			else if (role.getType() == RoleImpl.TYPE_REGULAR) {
+			else if (role.getType() == RoleConstants.TYPE_REGULAR) {
 				subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
 			}
 			else {

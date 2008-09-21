@@ -92,7 +92,7 @@ if (tabs2.equals("current")) {
 	roleParams.put("usersRoles", new Long(user2.getUserId()));
 }
 
-List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_REGULAR), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_REGULAR), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 Iterator itr = results.iterator();
 

@@ -43,10 +43,10 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -713,8 +713,9 @@ public class StagingUtil {
 
 			Group stagingGroup = GroupServiceUtil.addGroup(
 				liveGroup.getGroupId(), liveGroup.getName() + " (Staging)",
-				liveGroup.getDescription(), GroupImpl.TYPE_COMMUNITY_PRIVATE,
-				null, liveGroup.isActive());
+				liveGroup.getDescription(),
+				GroupConstants.TYPE_COMMUNITY_PRIVATE, null,
+				liveGroup.isActive());
 
 			if (liveGroup.hasPrivateLayouts()) {
 				Map<String, String[]> parameterMap = getStagingParameters();

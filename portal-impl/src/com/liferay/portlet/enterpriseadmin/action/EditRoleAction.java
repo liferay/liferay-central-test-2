@@ -29,7 +29,7 @@ import com.liferay.portal.RoleNameException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -130,7 +130,7 @@ public class EditRoleAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		int type = ParamUtil.getInteger(
-			actionRequest, "type", RoleImpl.TYPE_REGULAR);
+			actionRequest, "type", RoleConstants.TYPE_REGULAR);
 		String subtype = ParamUtil.getString(actionRequest, "subtype");
 
 		if (roleId <= 0) {

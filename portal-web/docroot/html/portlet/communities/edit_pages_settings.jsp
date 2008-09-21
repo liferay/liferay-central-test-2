@@ -60,7 +60,7 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDA
 		tabs2Names += ",logo";
 	}
 
-	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
+	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.GUEST);
 
 	if (liveGroup.getGroupId() != guestGroup.getGroupId()) {
 		tabs2Names += ",merge-pages";

@@ -29,8 +29,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
@@ -79,7 +79,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					if (user.getCompanyId() == group.getCompanyId()) {
 						int type = group.getType();
 
-						if (type == GroupImpl.TYPE_COMMUNITY_OPEN) {
+						if (type == GroupConstants.TYPE_COMMUNITY_OPEN) {
 							hasPermission = true;
 						}
 					}
@@ -305,8 +305,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					if (user.getCompanyId() == group.getCompanyId()) {
 						int type = group.getType();
 
-						if ((type == GroupImpl.TYPE_COMMUNITY_OPEN) ||
-							(type == GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
+						if ((type == GroupConstants.TYPE_COMMUNITY_OPEN) ||
+							(type ==
+								GroupConstants.TYPE_COMMUNITY_RESTRICTED)) {
 
 							hasPermission = true;
 						}

@@ -94,10 +94,10 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 						if (reviewers.size() == 0) {
 							if (liveGroup.isCommunity()) {
-								role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+								role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 							}
 							else {
-								role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.ORGANIZATION_OWNER);
+								role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 							}
 
 							userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});

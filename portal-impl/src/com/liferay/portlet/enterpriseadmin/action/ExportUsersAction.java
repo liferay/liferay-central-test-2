@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -84,7 +84,7 @@ public class ExportUsersAction extends Action {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
 				themeDisplay.getUserId(), themeDisplay.getCompanyId(),
-				RoleImpl.ADMINISTRATOR, true)) {
+				RoleConstants.ADMINISTRATOR, true)) {
 
 			return StringPool.BLANK;
 		}

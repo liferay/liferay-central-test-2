@@ -25,7 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
 
@@ -66,7 +66,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
@@ -81,7 +81,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
@@ -93,7 +93,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
@@ -108,7 +108,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}

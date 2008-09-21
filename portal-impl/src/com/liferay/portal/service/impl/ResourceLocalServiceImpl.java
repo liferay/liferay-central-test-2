@@ -27,20 +27,19 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.ResourceActionsException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.PermissionsListFilter;
 import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.RoleNames;
 import com.liferay.portal.util.comparator.ResourceComparator;
 
 import java.util.List;
@@ -87,7 +86,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Guest
 
 		Group guestGroup = groupLocalService.getGroup(
-			companyId, GroupImpl.GUEST);
+			companyId, GroupConstants.GUEST);
 
 		addResource(
 			companyId, name, ResourceConstants.SCOPE_GROUP,
@@ -130,7 +129,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				// Owner permissions
 
 				Role ownerRole = roleLocalService.getRole(
-					companyId, RoleNames.OWNER);
+					companyId, RoleConstants.OWNER);
 
 				rolePersistence.addPermissions(
 					ownerRole.getRoleId(), userPermissionsList);
@@ -175,15 +174,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 					if (group.isCommunity()) {
 						role = roleLocalService.getRole(
-							companyId, RoleNames.COMMUNITY_MEMBER);
+							companyId, RoleConstants.COMMUNITY_MEMBER);
 					}
 					else if (group.isOrganization()) {
 						role = roleLocalService.getRole(
-							companyId, RoleNames.ORGANIZATION_MEMBER);
+							companyId, RoleConstants.ORGANIZATION_MEMBER);
 					}
 					else if (group.isUser() || group.isUserGroup()) {
 						role = roleLocalService.getRole(
-							companyId, RoleNames.POWER_USER);
+							companyId, RoleConstants.POWER_USER);
 					}
 
 					rolePersistence.addPermissions(
@@ -214,7 +213,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				// Guest permissions
 
 				Role guestRole = roleLocalService.getRole(
-					companyId, RoleImpl.GUEST);
+					companyId, RoleConstants.GUEST);
 
 				rolePersistence.addPermissions(
 					guestRole.getRoleId(), guestPermissionsList);
@@ -334,7 +333,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				// Owner permissions
 
 				Role ownerRole = roleLocalService.getRole(
-					companyId, RoleNames.OWNER);
+					companyId, RoleConstants.OWNER);
 
 				rolePersistence.addPermissions(
 					ownerRole.getRoleId(), userPermissionsList);
@@ -537,15 +536,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			if (group.isCommunity()) {
 				role = roleLocalService.getRole(
-					companyId, RoleNames.COMMUNITY_MEMBER);
+					companyId, RoleConstants.COMMUNITY_MEMBER);
 			}
 			else if (group.isOrganization()) {
 				role = roleLocalService.getRole(
-					companyId, RoleNames.ORGANIZATION_MEMBER);
+					companyId, RoleConstants.ORGANIZATION_MEMBER);
 			}
 			else if (group.isUser() || group.isUserGroup()) {
 				role = roleLocalService.getRole(
-					companyId, RoleNames.POWER_USER);
+					companyId, RoleConstants.POWER_USER);
 			}
 
 			rolePersistence.addPermissions(
@@ -590,7 +589,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			Role guestRole = roleLocalService.getRole(
-				companyId, RoleImpl.GUEST);
+				companyId, RoleConstants.GUEST);
 
 			rolePersistence.addPermissions(
 				guestRole.getRoleId(), guestPermissionsList);

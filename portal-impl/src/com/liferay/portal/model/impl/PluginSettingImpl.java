@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -124,14 +125,17 @@ public class PluginSettingImpl
 				return true;
 			}
 			else if (RoleLocalServiceUtil.hasUserRole(
-						userId, getCompanyId(), RoleImpl.ADMINISTRATOR, true)) {
+						userId, getCompanyId(), RoleConstants.ADMINISTRATOR,
+						true)) {
 
 				return true;
 			}
 			else {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				if (user.isDefaultUser() && hasRoleWithName(RoleImpl.GUEST)) {
+				if (user.isDefaultUser() &&
+					hasRoleWithName(RoleConstants.GUEST)) {
+
 					return true;
 				}
 			}

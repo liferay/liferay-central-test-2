@@ -39,7 +39,7 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
-int roleType = RoleImpl.TYPE_COMMUNITY;
+int roleType = RoleConstants.TYPE_COMMUNITY;
 
 Organization organization = null;
 
@@ -48,7 +48,7 @@ if (group.isOrganization()) {
 
 	groupName = organization.getName();
 
-	roleType = RoleImpl.TYPE_ORGANIZATION;
+	roleType = RoleConstants.TYPE_ORGANIZATION;
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();

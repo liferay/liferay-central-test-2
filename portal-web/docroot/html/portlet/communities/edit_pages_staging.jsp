@@ -113,7 +113,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			</tr>
 
 			<%
-			int roleType = liveGroup.isCommunity() ? RoleImpl.TYPE_COMMUNITY : RoleImpl.TYPE_ORGANIZATION;
+			int roleType = liveGroup.isCommunity() ? RoleConstants.TYPE_COMMUNITY : RoleConstants.TYPE_ORGANIZATION;
 
 			List<Role> workflowRoles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, new Integer(roleType), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 

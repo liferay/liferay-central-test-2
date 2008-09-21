@@ -45,7 +45,7 @@ Collections.sort(curActions, new ActionComparator(company.getCompanyId(), locale
 	</th>
 	<th>
 		<c:choose>
-			<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
+			<c:when test="<%= role.getType() == RoleConstants.TYPE_REGULAR %>">
 				<liferay-ui:message key="scope" />
 			</c:when>
 		</c:choose>
@@ -80,9 +80,9 @@ for (int i = 0; i < curActions.size(); i++) {
 		hasGroupScope = (scopeParam == ResourceConstants.SCOPE_GROUP);
 	}
 	else {
-		hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
-		hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-		hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
+		hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
+		hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+		hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
 	}
 %>
 
@@ -92,7 +92,7 @@ for (int i = 0; i < curActions.size(); i++) {
 		</td>
 		<td>
 			<c:choose>
-				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
+				<c:when test="<%= role.getType() == RoleConstants.TYPE_REGULAR %>">
 					<select name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
 						<option value=""></option>
 							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
@@ -102,14 +102,14 @@ for (int i = 0; i < curActions.size(); i++) {
 							</c:if>
 					</select>
 				</c:when>
-				<c:when test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
+				<c:when test="<%= (role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION) %>">
 
 					<%
 					String onClick = "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');";
 
 					boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
 
-					if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
+					if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
 						disabled = false;
 					}
 					%>

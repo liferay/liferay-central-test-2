@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -50,11 +51,10 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -99,8 +99,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addGroup(
-			userId, className, classPK, GroupImpl.DEFAULT_LIVE_GROUP_ID, name,
-			description, type, friendlyURL, active);
+			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			name, description, type, friendlyURL, active);
 	}
 
 	public Group addGroup(
@@ -132,7 +132,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setCreatorUserId(userId);
 		group.setClassNameId(classNameId);
 		group.setClassPK(classPK);
-		group.setParentGroupId(GroupImpl.DEFAULT_PARENT_GROUP_ID);
+		group.setParentGroupId(GroupConstants.DEFAULT_PARENT_GROUP_ID);
 		group.setLiveGroupId(liveGroupId);
 		group.setName(name);
 		group.setDescription(description);
@@ -159,7 +159,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			// Community roles
 
 			Role role = roleLocalService.getRole(
-				group.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+				group.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 
 			userGroupRoleLocalService.addUserGroupRoles(
 				userId, groupId, new long[] {role.getRoleId()});
@@ -198,7 +198,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		Role role = rolePersistence.findByC_N(
-			user.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
+			user.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
 
 		for (int i = 0; i < groupIds.length; i++) {
 			long groupId = groupIds[i];
@@ -224,14 +224,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group = groupFinder.findByC_N(companyId, systemGroups[i]);
 			}
 			catch (NoSuchGroupException nsge) {
-				int type = GroupImpl.TYPE_COMMUNITY_OPEN;
+				int type = GroupConstants.TYPE_COMMUNITY_OPEN;
 				String friendlyURL = null;
 
-				if (systemGroups[i].equals(GroupImpl.CONTROL_PANEL)) {
-					type = GroupImpl.TYPE_COMMUNITY_PRIVATE;
+				if (systemGroups[i].equals(GroupConstants.CONTROL_PANEL)) {
+					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
 					friendlyURL = "/control_panel";
 				}
-				else if (systemGroups[i].equals(GroupImpl.GUEST)) {
+				else if (systemGroups[i].equals(GroupConstants.GUEST)) {
 					friendlyURL = "/guest";
 				}
 
@@ -240,7 +240,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					type, friendlyURL, true);
 			}
 
-			if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 					group.getGroupId(), true);
 
@@ -249,7 +249,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 
-			if (group.getName().equals(GroupImpl.GUEST)) {
+			if (group.getName().equals(GroupConstants.GUEST)) {
 				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 					group.getGroupId(), false);
 

@@ -38,9 +38,9 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
@@ -123,7 +123,7 @@ public class OrganizationLocalServiceImpl
 		// Role
 
 		Role role = roleLocalService.getRole(
-			organization.getCompanyId(), RoleImpl.ORGANIZATION_OWNER);
+			organization.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
 		userGroupRoleLocalService.addUserGroupRoles(
 			userId, group.getGroupId(), new long[] {role.getRoleId()});

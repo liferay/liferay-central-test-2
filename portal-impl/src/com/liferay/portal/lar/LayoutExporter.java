@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -43,7 +44,6 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -143,7 +143,7 @@ public class LayoutExporter {
 			endDate, zipWriter);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupImpl.GUEST);
+			companyId, GroupConstants.GUEST);
 
 		// Build compatibility
 

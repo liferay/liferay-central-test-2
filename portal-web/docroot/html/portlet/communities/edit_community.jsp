@@ -92,9 +92,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
-			<option <%= (type == GroupImpl.TYPE_COMMUNITY_OPEN) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>"><liferay-ui:message key="open" /></option>
-			<option <%= (type == GroupImpl.TYPE_COMMUNITY_RESTRICTED) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_RESTRICTED %>"><liferay-ui:message key="restricted" /></option>
-			<option <%= (type == GroupImpl.TYPE_COMMUNITY_PRIVATE) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_PRIVATE %>"><liferay-ui:message key="private" /></option>
+			<option <%= (type == GroupConstants.TYPE_COMMUNITY_OPEN) ? "selected" : "" %> value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>"><liferay-ui:message key="open" /></option>
+			<option <%= (type == GroupConstants.TYPE_COMMUNITY_RESTRICTED) ? "selected" : "" %> value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>"><liferay-ui:message key="restricted" /></option>
+			<option <%= (type == GroupConstants.TYPE_COMMUNITY_PRIVATE) ? "selected" : "" %> value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>"><liferay-ui:message key="private" /></option>
 		</select>
 	</td>
 </tr>

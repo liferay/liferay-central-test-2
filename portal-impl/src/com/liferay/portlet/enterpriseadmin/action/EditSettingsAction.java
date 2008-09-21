@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyServiceUtil;
@@ -65,7 +65,7 @@ public class EditSettingsAction extends PortletAction {
 		long userId = PortalUtil.getUserId(actionRequest);
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				userId, companyId, RoleImpl.ADMINISTRATOR, true)) {
+				userId, companyId, RoleConstants.ADMINISTRATOR, true)) {
 
 			SessionErrors.add(
 				actionRequest, PrincipalException.class.getName());

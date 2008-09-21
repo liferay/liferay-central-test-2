@@ -906,13 +906,13 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			int roleIdsPos = ParamUtil.getInteger(request, "roleIdsPos");
 
-			int type = RoleImpl.TYPE_REGULAR;
+			int type = RoleConstants.TYPE_REGULAR;
 
 			if (tabs2.equals("community-roles")) {
-				type = RoleImpl.TYPE_COMMUNITY;
+				type = RoleConstants.TYPE_COMMUNITY;
 			}
 			else if (tabs2.equals("organization-roles")) {
-				type = RoleImpl.TYPE_ORGANIZATION;
+				type = RoleConstants.TYPE_ORGANIZATION;
 			}
 			%>
 
@@ -1010,7 +1010,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<%
 					Role role = RoleLocalServiceUtil.getRole(roleIdsArray[roleIdsPos]);
 
-					boolean isGuestRole = role.getName().equals(RoleImpl.GUEST);
+					boolean isGuestRole = role.getName().equals(RoleConstants.GUEST);
 					%>
 
 					<liferay-ui:tabs names="<%= role.getName() %>" />

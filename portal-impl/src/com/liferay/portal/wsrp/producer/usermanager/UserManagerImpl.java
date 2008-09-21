@@ -42,10 +42,10 @@
 package com.liferay.portal.wsrp.producer.usermanager;
 
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.portletcontainer.PortletWindowContextImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -157,7 +157,7 @@ public class UserManagerImpl implements UserManager{
 		themeDisplay.setUser(themeDisplay.getDefaultUser());
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			PortalInstances.getCompanyId(request), GroupImpl.GUEST);
+			PortalInstances.getCompanyId(request), GroupConstants.GUEST);
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			guestGroup.getGroupId(), false,

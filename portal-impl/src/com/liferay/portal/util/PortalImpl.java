@@ -58,6 +58,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -65,10 +66,9 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -264,11 +264,11 @@ public class PortalImpl implements Portal {
 			PropsUtil.getArray(PropsKeys.SYSTEM_GROUPS);
 
 		if ((customSystemGroups == null) || (customSystemGroups.length == 0)) {
-			_allSystemGroups = GroupImpl.SYSTEM_GROUPS;
+			_allSystemGroups = GroupConstants.SYSTEM_GROUPS;
 		}
 		else {
 			_allSystemGroups = ArrayUtil.append(
-				GroupImpl.SYSTEM_GROUPS, customSystemGroups);
+				GroupConstants.SYSTEM_GROUPS, customSystemGroups);
 		}
 
 		_sortedSystemGroups = new String[_allSystemGroups.length];
@@ -284,11 +284,11 @@ public class PortalImpl implements Portal {
 		String customSystemRoles[] = PropsUtil.getArray(PropsKeys.SYSTEM_ROLES);
 
 		if ((customSystemRoles == null) || (customSystemRoles.length == 0)) {
-			_allSystemRoles = RoleImpl.SYSTEM_ROLES;
+			_allSystemRoles = RoleConstants.SYSTEM_ROLES;
 		}
 		else {
 			_allSystemRoles = ArrayUtil.append(
-				RoleImpl.SYSTEM_ROLES, customSystemRoles);
+				RoleConstants.SYSTEM_ROLES, customSystemRoles);
 		}
 
 		_sortedSystemRoles = new String[_allSystemRoles.length];
@@ -306,11 +306,12 @@ public class PortalImpl implements Portal {
 		if ((customSystemCommunityRoles == null) ||
 			(customSystemCommunityRoles.length == 0)) {
 
-			_allSystemCommunityRoles = RoleImpl.SYSTEM_COMMUNITY_ROLES;
+			_allSystemCommunityRoles = RoleConstants.SYSTEM_COMMUNITY_ROLES;
 		}
 		else {
 			_allSystemCommunityRoles = ArrayUtil.append(
-				RoleImpl.SYSTEM_COMMUNITY_ROLES, customSystemCommunityRoles);
+				RoleConstants.SYSTEM_COMMUNITY_ROLES,
+				customSystemCommunityRoles);
 		}
 
 		_sortedSystemCommunityRoles =
@@ -330,11 +331,12 @@ public class PortalImpl implements Portal {
 		if ((customSystemOrganizationRoles == null) ||
 			(customSystemOrganizationRoles.length == 0)) {
 
-			_allSystemOrganizationRoles = RoleImpl.SYSTEM_ORGANIZATION_ROLES;
+			_allSystemOrganizationRoles =
+				RoleConstants.SYSTEM_ORGANIZATION_ROLES;
 		}
 		else {
 			_allSystemOrganizationRoles = ArrayUtil.append(
-				RoleImpl.SYSTEM_ORGANIZATION_ROLES,
+				RoleConstants.SYSTEM_ORGANIZATION_ROLES,
 				customSystemOrganizationRoles);
 		}
 

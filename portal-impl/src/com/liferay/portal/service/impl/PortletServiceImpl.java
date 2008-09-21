@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PortletServiceBaseImpl;
 
@@ -71,7 +71,7 @@ public class PortletServiceImpl extends PortletServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}

@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -38,7 +39,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.GroupNames;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -56,40 +56,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class GroupImpl extends GroupModelImpl implements Group {
-
-	public static final long DEFAULT_PARENT_GROUP_ID = 0;
-
-	public static final long DEFAULT_LIVE_GROUP_ID = 0;
-
-	public static final String CONTROL_PANEL = GroupNames.CONTROL_PANEL;
-
-	public static final String GUEST = GroupNames.GUEST;
-
-	public static final String[] SYSTEM_GROUPS = GroupNames.SYSTEM_GROUPS;
-
-	public static final int TYPE_COMMUNITY_OPEN = 1;
-
-	public static final String TYPE_COMMUNITY_OPEN_LABEL = "open";
-
-	public static final int TYPE_COMMUNITY_PRIVATE = 3;
-
-	public static final String TYPE_COMMUNITY_PRIVATE_LABEL = "private";
-
-	public static final int TYPE_COMMUNITY_RESTRICTED = 2;
-
-	public static final String TYPE_COMMUNITY_RESTRICTED_LABEL = "restricted";
-
-	public static String getTypeLabel(int type) {
-		if (type == TYPE_COMMUNITY_OPEN) {
-			return TYPE_COMMUNITY_OPEN_LABEL;
-		}
-		else if (type == TYPE_COMMUNITY_PRIVATE) {
-			return TYPE_COMMUNITY_PRIVATE_LABEL;
-		}
-		else {
-			return TYPE_COMMUNITY_RESTRICTED_LABEL;
-		}
-	}
 
 	public GroupImpl() {
 	}
@@ -227,7 +193,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isStagingGroup() {
-		if (getLiveGroupId() == DEFAULT_LIVE_GROUP_ID) {
+		if (getLiveGroupId() == GroupConstants.DEFAULT_LIVE_GROUP_ID) {
 			return false;
 		}
 		else {
@@ -272,7 +238,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public String getTypeLabel() {
-		return getTypeLabel(getType());
+		return GroupConstants.getTypeLabel(getType());
 	}
 
 	public String getTypeSettings() {

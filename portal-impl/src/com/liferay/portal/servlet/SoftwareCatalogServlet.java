@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -154,7 +154,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 			long companyId = PortalInstances.getCompanyId(request);
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
-				companyId, GroupImpl.GUEST);
+				companyId, GroupConstants.GUEST);
 
 			groupId = guestGroup.getGroupId();
 		}

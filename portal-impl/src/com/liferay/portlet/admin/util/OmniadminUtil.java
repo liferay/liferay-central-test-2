@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.admin.util;
 
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -80,7 +80,8 @@ public class OmniadminUtil {
 				}
 
 				return RoleLocalServiceUtil.hasUserRole(
-					userId, user.getCompanyId(), RoleImpl.ADMINISTRATOR, true);
+					userId, user.getCompanyId(), RoleConstants.ADMINISTRATOR,
+					true);
 			}
 		}
 		catch (Exception e) {

@@ -77,10 +77,10 @@ int totalSteps = 0;
 if (portletResource.equals(PortletKeys.PORTAL)) {
 	totalSteps = 1;
 }
-else if (role.getType() == RoleImpl.TYPE_REGULAR) {
+else if (role.getType() == RoleConstants.TYPE_REGULAR) {
 	totalSteps = 2;
 }
-else if ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
+else if ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 	totalSteps = 2;
 }
 
@@ -225,7 +225,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		headerNames.add("resource");
 		headerNames.add("action");
 
-		if ((role.getType() == RoleImpl.TYPE_REGULAR)) {
+		if ((role.getType() == RoleConstants.TYPE_REGULAR)) {
 			headerNames.add("scope");
 			headerNames.add("community");
 		}
@@ -307,9 +307,9 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 			ResultRow row = new ResultRow(new Object[]{permission, role}, actionId, i);
 
-			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, actionId);
 
 			PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
 
@@ -353,7 +353,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onclick="<portlet:namespace />addPermissions('portlet');" />
 
-		<c:if test="<%= role.getType() == RoleImpl.TYPE_REGULAR%>">
+		<c:if test="<%= role.getType() == RoleConstants.TYPE_REGULAR%>">
 			<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onclick="<portlet:namespace />addPermissions('portal');" />
 		</c:if>
 
@@ -371,7 +371,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 					<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-portal", portletResourceLabel) %>
 				</c:when>
-				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
+				<c:when test="<%= role.getType() == RoleConstants.TYPE_REGULAR %>">
 					<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", String.valueOf(totalSteps)}) %>
 
 					<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-each-resource-of-x-portlet", portletResourceLabel) %>
@@ -390,7 +390,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			<%= breadcrumbs %>
 		</div>
 
-		<c:if test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
+		<c:if test="<%= (role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION) %>">
 			<table class="lfr-table">
 			<tr>
 				<td>
@@ -437,11 +437,11 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 				boolean selectable = true;
 
-				if ((role.getType() != RoleImpl.TYPE_REGULAR) && ResourceActionsUtil.isPortalModelResource(curModelResource)) {
+				if ((role.getType() != RoleConstants.TYPE_REGULAR) && ResourceActionsUtil.isPortalModelResource(curModelResource)) {
 					selectable = false;
 				}
 
-				if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
+				if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
 					selectable = true;
 				}
 				%>

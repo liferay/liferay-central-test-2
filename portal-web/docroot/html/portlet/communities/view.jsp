@@ -75,7 +75,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	LinkedHashMap groupParams = new LinkedHashMap();
 
 	if (tabs1.equals("communities-owned")) {
-		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 
 		List userGroupRole = new ArrayList();
 
@@ -92,8 +92,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	else if (tabs1.equals("available-communities")) {
 		List types = new ArrayList();
 
-		types.add(new Integer(GroupImpl.TYPE_COMMUNITY_OPEN));
-		types.add(new Integer(GroupImpl.TYPE_COMMUNITY_RESTRICTED));
+		types.add(new Integer(GroupConstants.TYPE_COMMUNITY_OPEN));
+		types.add(new Integer(GroupConstants.TYPE_COMMUNITY_RESTRICTED));
 
 		groupParams.put("types", types);
 		groupParams.put("active", Boolean.TRUE);
@@ -293,7 +293,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		if (tabs1.equals("communities-owned")) {
 			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
 
-			if (group.getType() == GroupImpl.TYPE_COMMUNITY_RESTRICTED) {
+			if (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) {
 				row.addText(String.valueOf(pendingRequests));
 			}
 			else {

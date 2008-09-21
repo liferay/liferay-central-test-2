@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -51,7 +52,6 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -484,7 +484,7 @@ public class PortletExporter {
 		}
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupImpl.GUEST);
+			companyId, GroupConstants.GUEST);
 
 		// Permissions
 

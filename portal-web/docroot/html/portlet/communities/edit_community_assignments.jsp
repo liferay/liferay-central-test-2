@@ -236,11 +236,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					<%
 					RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-					int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY));
+					int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_COMMUNITY));
 
 					searchContainer.setTotal(total);
 
-					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 					searchContainer.setResults(results);
 

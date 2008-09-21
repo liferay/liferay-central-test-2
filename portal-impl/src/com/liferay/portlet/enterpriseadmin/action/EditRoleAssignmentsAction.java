@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -129,7 +129,7 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		if (role.getName().equals(RoleImpl.OWNER)) {
+		if (role.getName().equals(RoleConstants.OWNER)) {
 			throw new RoleAssignmentException(role.getName());
 		}
 
@@ -149,7 +149,7 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		if (role.getName().equals(RoleImpl.OWNER)) {
+		if (role.getName().equals(RoleConstants.OWNER)) {
 			throw new RoleAssignmentException(role.getName());
 		}
 

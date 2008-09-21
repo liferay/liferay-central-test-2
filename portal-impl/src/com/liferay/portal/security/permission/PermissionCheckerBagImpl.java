@@ -28,7 +28,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 
@@ -124,9 +124,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleImpl.COMMUNITY_ADMINISTRATOR) ||
+					RoleConstants.COMMUNITY_ADMINISTRATOR) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					_userId, group.getGroupId(), RoleImpl.COMMUNITY_OWNER)) {
+					_userId, group.getGroupId(),
+					RoleConstants.COMMUNITY_OWNER)) {
 
 				return true;
 			}
@@ -147,10 +148,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						_userId, organizationGroupId,
-						RoleImpl.ORGANIZATION_ADMINISTRATOR) ||
+						RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
 					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						_userId, organizationGroupId,
-						RoleImpl.ORGANIZATION_OWNER)) {
+						RoleConstants.ORGANIZATION_OWNER)) {
 
 					return true;
 				}
@@ -175,7 +176,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					_userId, group.getGroupId(), RoleImpl.COMMUNITY_OWNER)) {
+					_userId, group.getGroupId(),
+					RoleConstants.COMMUNITY_OWNER)) {
 
 				return true;
 			}
@@ -196,7 +198,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						_userId, organizationGroupId,
-						RoleImpl.ORGANIZATION_OWNER)) {
+						RoleConstants.ORGANIZATION_OWNER)) {
 
 					return true;
 				}

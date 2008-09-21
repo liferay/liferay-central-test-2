@@ -30,9 +30,9 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -424,7 +424,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		long companyId = message.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
-		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 		long repositoryId = CompanyConstants.SYSTEM;
 		String newAttachmentsDir = message.getAttachmentsDir();
 

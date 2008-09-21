@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -116,7 +116,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			String roleDescription = PropsUtil.get(
 				"system.role." + StringUtil.replace(roleName, " ", ".") +
 					".description");
-			int roleType = RoleImpl.TYPE_REGULAR;
+			int roleType = RoleConstants.TYPE_REGULAR;
 
 			try {
 				Role role = roleFinder.findByC_N(companyId, roleName);
@@ -141,7 +141,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			String roleDescription = PropsUtil.get(
 				"system.community.role." +
 					StringUtil.replace(roleName, " ", ".") + ".description");
-			int roleType = RoleImpl.TYPE_COMMUNITY;
+			int roleType = RoleConstants.TYPE_COMMUNITY;
 
 			try {
 				Role role = roleFinder.findByC_N(companyId, roleName);
@@ -167,7 +167,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			String roleDescription = PropsUtil.get(
 				"system.organization.role." +
 					StringUtil.replace(roleName, " ", ".") + ".description");
-			int roleType = RoleImpl.TYPE_ORGANIZATION;
+			int roleType = RoleConstants.TYPE_ORGANIZATION;
 
 			try {
 				Role role = roleFinder.findByC_N(companyId, roleName);
@@ -201,8 +201,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				ResourceConstants.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
 
-		if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
-			(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
+		if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+			(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
 			userGroupRoleLocalService.deleteUserGroupRolesByRoleId(
 				role.getRoleId());

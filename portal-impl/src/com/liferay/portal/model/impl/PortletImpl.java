@@ -46,6 +46,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -703,9 +704,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public PortletDataHandler getPortletDataHandlerInstance() {
 		if (Validator.isNotNull(getPortletDataHandlerClass())) {
 			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+				PortletBagImpl portletBagImpl =
+					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
 
-				return portletBag.getPortletDataHandlerInstance();
+				return portletBagImpl.getPortletDataHandlerInstance();
 			}
 			else {
 				return (PortletDataHandler)InstancePool.get(
@@ -1893,14 +1895,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 				return true;
 			}
 			else if (RoleLocalServiceUtil.hasUserRole(
-						userId, getCompanyId(), RoleImpl.ADMINISTRATOR, true)) {
+						userId, getCompanyId(), RoleConstants.ADMINISTRATOR,
+						true)) {
 
 				return true;
 			}
 			else {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				if (user.isDefaultUser() && hasRoleWithName(RoleImpl.GUEST)) {
+				if (user.isDefaultUser() &&
+					hasRoleWithName(RoleConstants.GUEST)) {
+
 					return true;
 				}
 			}

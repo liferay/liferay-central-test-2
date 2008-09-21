@@ -47,15 +47,15 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CountryImpl;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.RegionImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalInstances;
@@ -284,7 +284,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Default user must have the Guest role
 
-		Role guestRole = roleLocalService.getRole(companyId, RoleImpl.GUEST);
+		Role guestRole = roleLocalService.getRole(
+			companyId, RoleConstants.GUEST);
 
 		roleLocalService.setUserRoles(
 			defaultUser.getUserId(), new long[] {guestRole.getRoleId()});
@@ -320,17 +321,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				birthdayDay, birthdayYear, jobTitle, organizationIds, false);
 
 			Group guestGroup = groupLocalService.getGroup(
-				companyId, GroupImpl.GUEST);
+				companyId, GroupConstants.GUEST);
 
 			long[] groupIds = new long[] {guestGroup.getGroupId()};
 
 			groupLocalService.addUserGroups(user.getUserId(), groupIds);
 
 			Role adminRole = roleLocalService.getRole(
-				companyId, RoleImpl.ADMINISTRATOR);
+				companyId, RoleConstants.ADMINISTRATOR);
 
 			Role powerUserRole = roleLocalService.getRole(
-				companyId, RoleImpl.POWER_USER);
+				companyId, RoleConstants.POWER_USER);
 
 			long[] roleIds = new long[] {
 				adminRole.getRoleId(), powerUserRole.getRoleId()

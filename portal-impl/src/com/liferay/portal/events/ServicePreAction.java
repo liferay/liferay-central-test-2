@@ -47,16 +47,17 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
@@ -86,7 +87,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.RoleNames;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Normalizer;
@@ -464,7 +464,7 @@ public class ServicePreAction extends Action {
 			// Check the guest community
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
-				user.getCompanyId(), GroupImpl.GUEST);
+				user.getCompanyId(), GroupConstants.GUEST);
 
 			layouts = LayoutLocalServiceUtil.getLayouts(
 				guestGroup.getGroupId(), false,
@@ -638,7 +638,7 @@ public class ServicePreAction extends Action {
 
 		// Control panel layouts are only viewable by authenticated users
 
-		if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+		if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 			if (user.isDefaultUser()) {
 				return false;
 			}
@@ -706,7 +706,7 @@ public class ServicePreAction extends Action {
 		long layoutGroupId = layout.getGroupId();
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			user.getCompanyId(), GroupImpl.GUEST);
+			user.getCompanyId(), GroupConstants.GUEST);
 
 		if (layoutGroupId != guestGroup.getGroupId()) {
 			Group layoutGroup = GroupLocalServiceUtil.getGroup(layoutGroupId);
@@ -1437,7 +1437,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLPublishToLive(null);
 			}
 
-			if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 				themeDisplay.setShowPageSettingsIcon(false);
 				themeDisplay.setURLPublishToLive(null);
 			}
@@ -1542,7 +1542,7 @@ public class ServicePreAction extends Action {
 
 			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED) {
 				Role powerUserRole = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleNames.POWER_USER);
+					user.getCompanyId(), RoleConstants.POWER_USER);
 
 				if (!UserLocalServiceUtil.hasRoleUser(
 						powerUserRole.getRoleId(), user.getUserId())) {
@@ -1563,7 +1563,7 @@ public class ServicePreAction extends Action {
 		}
 		else if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED) {
 			Role powerUserRole = RoleLocalServiceUtil.getRole(
-				user.getCompanyId(), RoleNames.POWER_USER);
+				user.getCompanyId(), RoleConstants.POWER_USER);
 
 			if (!UserLocalServiceUtil.hasRoleUser(
 					powerUserRole.getRoleId(), user.getUserId())) {
@@ -1587,7 +1587,7 @@ public class ServicePreAction extends Action {
 
 			if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) {
 				Role powerUserRole = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleNames.POWER_USER);
+					user.getCompanyId(), RoleConstants.POWER_USER);
 
 				if (!UserLocalServiceUtil.hasRoleUser(
 						powerUserRole.getRoleId(), user.getUserId())) {
@@ -1608,7 +1608,7 @@ public class ServicePreAction extends Action {
 		}
 		else if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) {
 			Role powerUserRole = RoleLocalServiceUtil.getRole(
-				user.getCompanyId(), RoleNames.POWER_USER);
+				user.getCompanyId(), RoleConstants.POWER_USER);
 
 			if (!UserLocalServiceUtil.hasRoleUser(
 					powerUserRole.getRoleId(), user.getUserId())) {

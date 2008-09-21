@@ -33,10 +33,10 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -287,7 +287,8 @@ public class MembershipRequestLocalServiceImpl
 		List<UserGroupRole> admins = new UniqueList<UserGroupRole>();
 
 		Role communityAdminRole = roleLocalService.getRole(
-			membershipRequest.getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
+			membershipRequest.getCompanyId(),
+			RoleConstants.COMMUNITY_ADMINISTRATOR);
 
 		List<UserGroupRole> communityAdmins =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
@@ -296,7 +297,7 @@ public class MembershipRequestLocalServiceImpl
 		admins.addAll(communityAdmins);
 
 		Role communityOwnerRole = rolePersistence.findByC_N(
-			membershipRequest.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+			membershipRequest.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 
 		List<UserGroupRole> communityOwners =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
