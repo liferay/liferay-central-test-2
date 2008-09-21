@@ -24,8 +24,10 @@ package com.liferay.util.ldap;
 
 import java.util.Hashtable;
 
+import javax.naming.Binding;
 import javax.naming.Context;
 import javax.naming.Name;
+import javax.naming.NameClassPair;
 import javax.naming.NameParser;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -83,7 +85,7 @@ public class DummyContext implements Context {
 		throw new OperationNotSupportedException();
 	}
 
-	public Hashtable getEnvironment() throws NamingException {
+	public Hashtable<?, ?> getEnvironment() throws NamingException {
 		throw new OperationNotSupportedException();
 	}
 
@@ -99,19 +101,25 @@ public class DummyContext implements Context {
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration list(Name name) throws NamingException {
+	public NamingEnumeration<NameClassPair> list(Name name)
+		throws NamingException {
+
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration list(String name) throws NamingException {
+	public NamingEnumeration<NameClassPair> list(String name)
+		throws NamingException {
+
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration listBindings(Name name) throws NamingException {
+	public NamingEnumeration<Binding> listBindings(Name name)
+		throws NamingException {
+
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration listBindings(String name)
+	public NamingEnumeration<Binding> listBindings(String name)
 		throws NamingException {
 
 		throw new OperationNotSupportedException();

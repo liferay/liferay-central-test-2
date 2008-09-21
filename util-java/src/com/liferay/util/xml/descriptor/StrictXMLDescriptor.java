@@ -142,11 +142,35 @@ public class StrictXMLDescriptor implements XMLDescriptor {
 		return -1;
 	}
 
-	private int _contains(List<?> list, Object obj, Comparator comparator) {
+	private int _contains(
+		List<Attribute> list, Attribute obj, Comparator<Attribute> comparator) {
+
 		int firstValue = -1;
 
 		for (int i = 0; i < list.size(); i++) {
-			Object o = list.get(i);
+			Attribute o = list.get(i);
+
+			int value = comparator.compare(obj, o);
+
+			if (i == 0) {
+				firstValue = value;
+			}
+
+			if (value == 0) {
+				return 0;
+			}
+		}
+
+		return firstValue;
+	}
+
+	private int _contains(
+		List<Element> list, Element obj, Comparator<Element> comparator) {
+
+		int firstValue = -1;
+
+		for (int i = 0; i < list.size(); i++) {
+			Element o = list.get(i);
 
 			int value = comparator.compare(obj, o);
 

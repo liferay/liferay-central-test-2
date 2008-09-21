@@ -51,18 +51,19 @@ public class ElementComparator implements Comparator<Element> {
 			return el1Text.compareTo(el2Text);
 		}
 
-		List<Attribute> el1Attrs = el1.attributes();
-		List<Attribute> el2Attrs = el2.attributes();
+		List<Attribute> el1Attributes = el1.attributes();
+		List<Attribute> el2Attributes = el2.attributes();
 
-		if (el1Attrs.size() < el2Attrs.size()) {
+		if (el1Attributes.size() < el2Attributes.size()) {
 			return -1;
 		}
-		else if (el1Attrs.size() > el2Attrs.size()) {
+		else if (el1Attributes.size() > el2Attributes.size()) {
 			return 1;
 		}
 
-		for (Attribute attr : el1Attrs) {
-			int value = _compare(el2Attrs, attr, new AttributeComparator());
+		for (Attribute attr : el1Attributes) {
+			int value = _compare(
+				el2Attributes, attr, new AttributeComparator());
 
 			if (value != 0) {
 				return value;
@@ -90,11 +91,35 @@ public class ElementComparator implements Comparator<Element> {
 		return 0;
 	}
 
-	private int _compare(List<?> list, Object obj, Comparator comparator) {
+	private int _compare(
+		List<Attribute> list, Attribute obj, Comparator<Attribute> comparator) {
+
 		int firstValue = -1;
 
 		for (int i = 0; i < list.size(); i++) {
-			Object o = list.get(i);
+			Attribute o = list.get(i);
+
+			int value = comparator.compare(obj, o);
+
+			if (i == 0) {
+				firstValue = value;
+			}
+
+			if (value == 0) {
+				return 0;
+			}
+		}
+
+		return firstValue;
+	}
+
+	private int _compare(
+		List<Element> list, Element obj, Comparator<Element> comparator) {
+
+		int firstValue = -1;
+
+		for (int i = 0; i < list.size(); i++) {
+			Element o = list.get(i);
 
 			int value = comparator.compare(obj, o);
 

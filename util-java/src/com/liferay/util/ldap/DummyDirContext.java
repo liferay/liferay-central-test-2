@@ -30,6 +30,7 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
 
 /**
  * <a href="DummyDirContext.java.html"><b><i>View Source</i></b></a>
@@ -141,7 +142,7 @@ public class DummyDirContext extends DummyContext implements DirContext {
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(
+	public NamingEnumeration<SearchResult> search(
 			Name name, Attributes matchingAttributes,
 			String[] attributesToReturn)
 		throws NamingException {
@@ -149,7 +150,7 @@ public class DummyDirContext extends DummyContext implements DirContext {
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(
+	public NamingEnumeration<SearchResult> search(
 			String name, Attributes matchingAttributes,
 			String[] attributesToReturn)
 		throws NamingException {
@@ -157,33 +158,35 @@ public class DummyDirContext extends DummyContext implements DirContext {
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(Name name, Attributes matchingAttributes)
+	public NamingEnumeration<SearchResult> search(
+			Name name, Attributes matchingAttributes)
 		throws NamingException {
 
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(String name, Attributes matchingAttributes)
+	public NamingEnumeration<SearchResult> search(
+			String name, Attributes matchingAttributes)
 		throws NamingException {
 
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(
+	public NamingEnumeration<SearchResult> search(
 			Name name, String filter, SearchControls cons)
 		throws NamingException {
 
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(
+	public NamingEnumeration<SearchResult> search(
 			String name, String filter, SearchControls cons)
 		throws NamingException {
 
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(
+	public NamingEnumeration<SearchResult> search(
 			Name name, String filterExpr, Object[] filterArgs,
 			SearchControls cons)
 		throws NamingException {
@@ -191,7 +194,7 @@ public class DummyDirContext extends DummyContext implements DirContext {
 		throw new OperationNotSupportedException();
 	}
 
-	public NamingEnumeration search(
+	public NamingEnumeration<SearchResult> search(
 			String name, String filterExpr, Object[] filterArgs,
 			SearchControls cons)
 		throws NamingException {

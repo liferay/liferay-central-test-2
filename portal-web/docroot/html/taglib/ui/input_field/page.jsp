@@ -36,7 +36,7 @@ Object defaultValue = request.getAttribute("liferay-ui:input-field:defaultValue"
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-field:disabled"));
 
 String type = ModelHintsUtil.getType(model, field);
-Map hints = ModelHintsUtil.getHints(model, field);
+Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 %>
 
 <c:if test="<%= type != null %>">
@@ -51,7 +51,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			}
 			else {
 				if (hints != null) {
-					defaultBoolean = GetterUtil.getBoolean((String)hints.get("default-value"));
+					defaultBoolean = GetterUtil.getBoolean(hints.get("default-value"));
 				}
 			}
 
@@ -86,7 +86,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean monthNullable = false;
 
 			if (hints != null) {
-				monthNullable = GetterUtil.getBoolean((String)hints.get("month-nullable"), monthNullable);
+				monthNullable = GetterUtil.getBoolean(hints.get("month-nullable"), monthNullable);
 			}
 
 			int day = ParamUtil.getInteger(request, fieldParam + "Day", -1);
@@ -98,7 +98,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean dayNullable = false;
 
 			if (hints != null) {
-				dayNullable = GetterUtil.getBoolean((String)hints.get("day-nullable"), dayNullable);
+				dayNullable = GetterUtil.getBoolean(hints.get("day-nullable"), dayNullable);
 			}
 
 			int year = ParamUtil.getInteger(request, fieldParam + "Year", -1);
@@ -110,13 +110,13 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean yearNullable = false;
 
 			if (hints != null) {
-				yearNullable = GetterUtil.getBoolean((String)hints.get("year-nullable"), yearNullable);
+				yearNullable = GetterUtil.getBoolean(hints.get("year-nullable"), yearNullable);
 			}
 
 			int yearRangeDelta = 5;
 
 			if (hints != null) {
-				yearRangeDelta = GetterUtil.getInteger((String)hints.get("year-range-delta"), yearRangeDelta);
+				yearRangeDelta = GetterUtil.getInteger(hints.get("year-range-delta"), yearRangeDelta);
 			}
 
 			int yearRangeStart = year - yearRangeDelta;
@@ -164,7 +164,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean showTime = true;
 
 			if (hints != null) {
-				showTime = GetterUtil.getBoolean((String)hints.get("show-time"), showTime);
+				showTime = GetterUtil.getBoolean(hints.get("show-time"), showTime);
 			}
 			%>
 
@@ -239,7 +239,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean autoEscape = true;
 
 			if (hints != null) {
-				autoEscape = GetterUtil.getBoolean((String)hints.get("auto-escape"), true);
+				autoEscape = GetterUtil.getBoolean(hints.get("auto-escape"), true);
 			}
 
 			if (autoEscape) {
@@ -253,11 +253,11 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean checkTab = false;
 
 			if (hints != null) {
-				displayHeight = GetterUtil.getString((String)hints.get("display-height"), displayHeight);
-				displayWidth = GetterUtil.getString((String)hints.get("display-width"), displayWidth);
-				maxLength = GetterUtil.getString((String)hints.get("max-length"), maxLength);
-				upperCase = GetterUtil.getBoolean((String)hints.get("upper-case"), upperCase);
-				checkTab = GetterUtil.getBoolean((String)hints.get("check-tab"), checkTab);
+				displayHeight = GetterUtil.getString(hints.get("display-height"), displayHeight);
+				displayWidth = GetterUtil.getString(hints.get("display-width"), displayWidth);
+				maxLength = GetterUtil.getString(hints.get("max-length"), maxLength);
+				upperCase = GetterUtil.getBoolean(hints.get("upper-case"), upperCase);
+				checkTab = GetterUtil.getBoolean(hints.get("check-tab"), checkTab);
 			}
 			%>
 

@@ -102,8 +102,8 @@ public class PortalLoginModule implements LoginModule {
 	}
 
 	public void initialize(
-		Subject subject, CallbackHandler callbackHandler, Map sharedState,
-		Map options) {
+		Subject subject, CallbackHandler callbackHandler,
+		Map<String, ?> sharedState, Map<String, ?> options) {
 
 		_loginModule.initialize(subject, callbackHandler, sharedState, options);
 	}

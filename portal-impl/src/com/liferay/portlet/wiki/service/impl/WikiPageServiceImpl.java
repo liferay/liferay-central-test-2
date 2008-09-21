@@ -58,7 +58,6 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
-import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.ArrayList;
@@ -381,9 +380,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		}
 		catch (FeedException fe) {
 			throw new SystemException(fe);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
 		}
 	}
 

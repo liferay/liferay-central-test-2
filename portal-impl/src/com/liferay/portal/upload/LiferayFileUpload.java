@@ -58,7 +58,7 @@ public class LiferayFileUpload extends ServletFileUpload {
 		_session = request.getSession();
 	}
 
-	public List parseRequest(HttpServletRequest request)
+	public List<LiferayFileItem> parseRequest(HttpServletRequest request)
 		throws FileUploadException {
 
 		_session.removeAttribute(LiferayFileUpload.FILE_NAME);
@@ -73,8 +73,8 @@ public class LiferayFileUpload extends ServletFileUpload {
 	protected FileItem createItem(Map headers, boolean formField)
 		throws FileUploadException {
 
-		LiferayFileItem item =
-			(LiferayFileItem)super.createItem(headers, formField);
+		LiferayFileItem item = (LiferayFileItem)super.createItem(
+			headers, formField);
 
 		String fileName = item.getFileName();
 

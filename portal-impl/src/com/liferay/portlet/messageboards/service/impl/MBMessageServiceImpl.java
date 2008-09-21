@@ -57,8 +57,6 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -835,9 +833,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 		catch (FeedException fe) {
 			throw new SystemException(fe);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
 		}
 	}
 

@@ -45,8 +45,6 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -251,9 +249,6 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 		}
 		catch (FeedException fe) {
 			throw new SystemException(fe);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
 		}
 	}
 

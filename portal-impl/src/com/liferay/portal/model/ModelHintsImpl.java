@@ -53,7 +53,7 @@ public class ModelHintsImpl implements ModelHints {
 	public void afterPropertiesSet() {
 		_hintCollections = new HashMap<String, Map<String, String>>();
 		_defaultHints = new HashMap<String, Map<String, String>>();
-		_modelFields = new HashMap();
+		_modelFields = new HashMap<String, Object>();
 		_models = new TreeSet<String>();
 
 		try {
@@ -78,7 +78,8 @@ public class ModelHintsImpl implements ModelHints {
 	public com.liferay.portal.kernel.xml.Element getFieldsEl(
 		String model, String field) {
 
-		Map fields = (Map)_modelFields.get(model);
+		Map<String, Object> fields =
+			(Map<String, Object>)_modelFields.get(model);
 
 		if (fields == null) {
 			return null;
@@ -100,7 +101,8 @@ public class ModelHintsImpl implements ModelHints {
 	}
 
 	public String getType(String model, String field) {
-		Map fields = (Map)_modelFields.get(model);
+		Map<String, Object> fields =
+			(Map<String, Object>)_modelFields.get(model);
 
 		if (fields == null) {
 			return null;
@@ -110,14 +112,15 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
-	public Map getHints(String model, String field) {
-		Map fields = (Map)_modelFields.get(model);
+	public Map<String, String> getHints(String model, String field) {
+		Map<String, Object> fields =
+			(Map<String, Object>)_modelFields.get(model);
 
 		if (fields == null) {
 			return null;
 		}
 		else {
-			return (Map)fields.get(field + _HINTS_SUFFIX);
+			return (Map<String, String>)fields.get(field + _HINTS_SUFFIX);
 		}
 	}
 
@@ -201,10 +204,11 @@ public class ModelHintsImpl implements ModelHints {
 				}
 			}
 
-			Map fields = (Map)_modelFields.get(name);
+			Map<String, Object> fields =
+				(Map<String, Object>)_modelFields.get(name);
 
 			if (fields == null) {
-				fields = new HashMap();
+				fields = new HashMap<String, Object>();
 
 				_modelFields.put(name, fields);
 			}
@@ -291,7 +295,7 @@ public class ModelHintsImpl implements ModelHints {
 
 	private Map<String, Map<String, String>> _hintCollections;
 	private Map<String, Map<String, String>> _defaultHints;
-	private Map _modelFields;
+	private Map<String, Object> _modelFields;
 	private Set<String> _models;
 	private SAXReader _saxReader;
 

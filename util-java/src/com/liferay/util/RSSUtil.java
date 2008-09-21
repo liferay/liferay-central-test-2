@@ -31,8 +31,6 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
-import java.io.IOException;
-
 import java.util.List;
 
 import org.jdom.IllegalDataException;
@@ -70,9 +68,7 @@ public class RSSUtil {
 
 	public static final String DISPLAY_STYLE_TITLE = "title";
 
-	public static String export(SyndFeed feed)
-		throws FeedException, IOException {
-
+	public static String export(SyndFeed feed) throws FeedException {
 		feed.setEncoding(StringPool.UTF8);
 
 		SyndFeedOutput output = new SyndFeedOutput();

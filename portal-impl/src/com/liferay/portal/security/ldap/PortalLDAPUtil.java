@@ -24,7 +24,6 @@ package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -232,7 +231,7 @@ public class PortalLDAPUtil {
 	public static String getAuthSearchFilter(
 			long companyId, String emailAddress, String screenName,
 			String userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String filter = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER);
@@ -846,9 +845,7 @@ public class PortalLDAPUtil {
 		return user;
 	}
 
-	public static boolean isAuthEnabled(long companyId)
-		throws PortalException, SystemException {
-
+	public static boolean isAuthEnabled(long companyId) throws SystemException {
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_AUTH_ENABLED,
 				PropsValues.LDAP_AUTH_ENABLED)) {
@@ -861,7 +858,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean isExportEnabled(long companyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_EXPORT_ENABLED,
@@ -875,7 +872,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean isImportEnabled(long companyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_IMPORT_ENABLED,
@@ -889,7 +886,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean isImportOnStartup(long companyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_IMPORT_ON_STARTUP)) {
@@ -902,7 +899,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean isNtlmEnabled(long companyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!isAuthEnabled(companyId)) {
 			return false;
@@ -917,7 +914,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean isPasswordPolicyEnabled(long companyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_PASSWORD_POLICY_ENABLED,

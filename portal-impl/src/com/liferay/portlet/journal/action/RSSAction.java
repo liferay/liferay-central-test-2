@@ -64,7 +64,6 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.feed.synd.SyndLink;
 import com.sun.syndication.io.FeedException;
 
-import java.io.IOException;
 import java.io.OutputStream;
 
 import java.util.ArrayList;
@@ -184,9 +183,6 @@ public class RSSAction extends PortletAction {
 		}
 		catch (FeedException fe) {
 			throw new SystemException(fe);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
 		}
 	}
 
