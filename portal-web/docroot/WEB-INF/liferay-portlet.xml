@@ -1226,6 +1226,10 @@
 		<render-weight>1</render-weight>
 		<css-class-wrapper>portlet-admin</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>138</portlet-name>
+		<struts-path>wsrp_producer_admin</struts-path>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

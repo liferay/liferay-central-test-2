@@ -2171,6 +2171,27 @@
 			<role-name>administrator</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>138</portlet-name>
+		<display-name>WSRP Producer Admin</display-name>
+		<portlet-class>com.sun.portal.wsrp.producer.portlets.WSRPProducerAdminPortlet</portlet-class>
+		<init-param>
+			<name>jsp-path</name>
+			<value>/html/portlet/wsrp_producer_admin</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>WSRP Producer Admin</title>
+			<short-title>WSRP Producer Admin</short-title>
+			<keywords>WSRP Producer Admin</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>
