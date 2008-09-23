@@ -90,13 +90,24 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 
+import com.sun.saw.Workflow;
+import com.sun.saw.WorkflowException;
+import com.sun.saw.WorkflowFactory;
+import com.sun.saw.vo.OutputVO;
+import com.sun.saw.vo.SaveTaskVO;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
+import java.net.URL;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
@@ -432,59 +443,38 @@ public class JournalArticleLocalServiceImpl
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		// Article
+		Map<String, Object> customAttributes = new HashMap<String, Object>();
+		customAttributes.put("action", "approve");
+		customAttributes.put("userId", userId);
+		customAttributes.put("groupId", groupId);
+		customAttributes.put("articleId", articleId);
+		customAttributes.put("version", version);
+		customAttributes.put("articleURL", articleURL);
+		customAttributes.put("portletPrefs", prefs);
 
-		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
-
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		article.setModifiedDate(now);
-		article.setApproved(true);
-		article.setApprovedByUserId(user.getUserId());
-		article.setApprovedByUserName(user.getFullName());
-		article.setApprovedDate(now);
-		article.setExpired(false);
-
-		if ((article.getExpirationDate() != null) &&
-			(article.getExpirationDate().before(now))) {
-
-			article.setExpirationDate(null);
-		}
-
-		journalArticlePersistence.update(article, false);
-
-		// Email
+		SaveTaskVO saveTaskVO = new SaveTaskVO();
+		saveTaskVO.setCustomAttributesMap(customAttributes);
 
 		try {
-			sendEmail(article, articleURL, prefs, "granted");
+			Workflow workflow = _getWorkflowImpl();
+			OutputVO outputVO = workflow.saveTasks(saveTaskVO);
+
+			Map<String, Object> customOutputMap =
+							outputVO.getCustomResultsMap();
+			return (JournalArticle) customOutputMap.get("journalArticle");
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-
-		// Lucene
-
-		try {
-			if (article.isIndexable()) {
-				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey());
-
-				Indexer.updateArticle(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId(), article.getVersion(),
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(),
-					article.getDisplayDate(), tagsEntries);
+		catch (WorkflowException we) {
+			Throwable cause = we.getCause();
+			if (cause instanceof PortalException) {
+				throw (PortalException) cause;
+			}
+			else if (cause instanceof SystemException) {
+				throw (SystemException) cause;
+			}
+			else {
+				throw new PortalException(we);
 			}
 		}
-		catch (SearchException se) {
-			_log.error("Indexing " + article.getId(), se);
-		}
-
-		return article;
 	}
 
 	public JournalArticle checkArticleResourcePrimKey(
@@ -841,40 +831,30 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle article, String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		// Email
+		Map<String, Object> customAttributes = new HashMap<String, Object>();
+		customAttributes.put("action", "expire");
+		customAttributes.put("article", article);
+		customAttributes.put("articleURL", articleURL);
+		customAttributes.put("portletPrefs", prefs);
 
-		if ((prefs != null) && !article.isApproved() &&
-			isLatestVersion(
-				article.getGroupId(), article.getArticleId(),
-				article.getVersion())) {
-
-			try {
-				sendEmail(article, articleURL, prefs, "denied");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
-		}
-
-		// Article
-
-		article.setExpirationDate(new Date());
-
-		article.setApproved(false);
-		article.setExpired(true);
-
-		journalArticlePersistence.update(article, false);
-
-		// Lucene
+		SaveTaskVO saveTaskVO = new SaveTaskVO();
+		saveTaskVO.setCustomAttributesMap(customAttributes);
 
 		try {
-			if (article.isIndexable()) {
-				Indexer.deleteArticle(
-					article.getCompanyId(), article.getArticleId());
-			}
+			Workflow workflow = _getWorkflowImpl();
+			workflow.saveTasks(saveTaskVO);
 		}
-		catch (SearchException se) {
-			_log.error("Removing index " + article.getId(), se);
+		catch (WorkflowException we) {
+			Throwable cause = we.getCause();
+			if (cause instanceof PortalException) {
+				throw (PortalException) cause;
+			}
+			else if (cause instanceof SystemException) {
+				throw (SystemException) cause;
+			}
+			else {
+				throw new PortalException(we);
+			}
 		}
 	}
 
@@ -2457,6 +2437,31 @@ public class JournalArticleLocalServiceImpl
 				throw new ArticleSmallImageSizeException();
 			}
 		}
+	}
+
+	private Workflow _getWorkflowImpl() throws WorkflowException {
+		Properties props = new Properties();
+
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		try {
+			URL url = classLoader.getResource("journal-workflow.properties");
+
+			if (url != null) {
+				InputStream is = url.openStream();
+
+				props.load(is);
+
+				is.close();
+			}
+		}
+		catch (Exception e) {
+			throw new RuntimeException("Unable to read workflow properties");
+		}
+
+		WorkflowFactory workflowFactory = WorkflowFactory.getInstance();
+
+		return workflowFactory.getWorkflowInstance(props);
 	}
 
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
