@@ -48,6 +48,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
@@ -176,7 +177,8 @@ public class LayoutExporter {
 
 		// Layouts
 
-		Map<String, Long> portletIds = new LinkedHashMap<String, Long>();
+		Map<String, Object[]> portletIds =
+			new LinkedHashMap<String, Object[]>();
 
 		List<Layout> layouts = null;
 
@@ -254,9 +256,11 @@ public class LayoutExporter {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				for (String portletId : layoutTypePortlet.getPortletIds()) {
-					if (!portletIds.containsKey(portletId)) {
-						portletIds.put(portletId, new Long(layout.getPlid()));
-					}
+					String key = PortletPermissionUtil.getPrimaryKey(
+						layout.getPlid(), portletId);
+
+					portletIds.put(key, new Object[] {
+						portletId, new Long(layout.getPlid())});
 				}
 			}
 
@@ -269,7 +273,7 @@ public class LayoutExporter {
 			el.addAttribute("path", layoutPath);
 
 			_portletExporter.exportPortletData(
-				context, layoutConfigurationPortlet, null, layoutEl);
+				context, layoutConfigurationPortlet, layout, null, layoutEl);
 
 			try {
 				context.addZipEntry(layoutPath, layoutDoc.formattedString());
@@ -290,18 +294,22 @@ public class LayoutExporter {
 
 		Element portletsEl = root.addElement("portlets");
 
-		for (Map.Entry<String, Long> portletIdsEntry : portletIds.entrySet()) {
-			Layout layout = LayoutUtil.findByPrimaryKey(
-				portletIdsEntry.getValue());
+		for (Map.Entry<String, Object[]> portletIdsEntry :
+				portletIds.entrySet()) {
+
+			String portletId = (String)portletIdsEntry.getValue()[0];
+			long plid = (Long)portletIdsEntry.getValue()[1];
+
+			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 
 			context.setPlid(layout.getPlid());
+			context.setOldPlid(layout.getPlid());
 
 			_portletExporter.exportPortlet(
-				context, layoutCache, portletIdsEntry.getKey(), layout,
-				portletsEl, defaultUserId, exportPortletData,
-				exportPortletSetup, exportPortletArchivedSetups,
-				exportPortletUserPreferences, exportPermissions,
-				exportUserPermissions);
+				context, layoutCache, portletId, layout, portletsEl,
+				defaultUserId, exportPermissions, exportPortletArchivedSetups,
+				exportPortletData, exportPortletSetup,
+				exportPortletUserPreferences, exportUserPermissions);
 		}
 
 		// Comments

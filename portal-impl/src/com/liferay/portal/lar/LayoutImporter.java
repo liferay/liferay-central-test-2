@@ -334,7 +334,7 @@ public class LayoutImporter {
 						" and parent layout id " + parentLayoutId);
 			}
 
-			long oldPlId = GetterUtil.getInteger(
+			long oldPlid = GetterUtil.getInteger(
 				layoutEl.attributeValue("old-plid"));
 
 			String name = layoutEl.elementText("name");
@@ -475,7 +475,7 @@ public class LayoutImporter {
 			}
 
 			context.setPlid(layout.getPlid());
-			context.setOldPlid(oldPlId);
+			context.setOldPlid(oldPlid);
 
 			newLayoutIdPlidMap.put(oldLayoutId, layout.getPlid());
 
@@ -531,11 +531,14 @@ public class LayoutImporter {
 			String portletId = portletRefEl.attributeValue("portlet-id");
 			long layoutId = GetterUtil.getLong(
 				portletRefEl.attributeValue("layout-id"));
+			long oldPlid = GetterUtil.getLong(
+				portletRefEl.attributeValue("old-plid"));
 			long plid = newLayoutIdPlidMap.get(layoutId);
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 
 			context.setPlid(plid);
+			context.setOldPlid(oldPlid);
 
 			Element portletEl = null;
 

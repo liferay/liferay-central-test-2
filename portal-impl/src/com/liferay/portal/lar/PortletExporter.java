@@ -157,6 +157,7 @@ public class PortletExporter {
 			startDate, endDate, zipWriter);
 
 		context.setPlid(plid);
+		context.setOldPlid(plid);
 
 		// Build compatibility
 
@@ -405,6 +406,13 @@ public class PortletExporter {
 			return;
 		}
 
+		if ((!portlet.isInstanceable()) &&
+			(!portlet.isPreferencesUniquePerLayout()) &&
+			(_notUniquePerLayout.contains(portletId))) {
+
+			return;
+		}
+
 		Document doc = SAXReaderUtil.createDocument();
 
 		Element portletEl = doc.addElement("portlet");
@@ -412,6 +420,7 @@ public class PortletExporter {
 		portletEl.addAttribute("portlet-id", portletId);
 		portletEl.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
+		portletEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
 
 		// Data
 
@@ -420,7 +429,16 @@ public class PortletExporter {
 				layout, portletId, StringPool.BLANK);
 
 		if (exportPortletData) {
-			exportPortletData(context, portlet, jxPrefs, portletEl);
+			if (!portlet.isPreferencesUniquePerLayout()) {
+				if (!_notUniquePerLayout.contains(portletId)) {
+					_notUniquePerLayout.add(portletId);
+
+					exportPortletData(context, portlet, layout, jxPrefs, portletEl);
+				}
+			}
+			else {
+				exportPortletData(context, portlet, layout, jxPrefs, portletEl);
+			}
 		}
 
 		// Portlet preferences
@@ -501,17 +519,26 @@ public class PortletExporter {
 
 		// Zip
 
-		String portletPath = context.getPortletPath(portletId) + "/portlet.xml";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getPortletPath(portletId));
+
+		if (portlet.isPreferencesUniquePerLayout()) {
+			sb.append(StringPool.SLASH);
+			sb.append(layout.getPlid());
+		}
+
+		sb.append("/portlet.xml");
 
 		Element el = parentEl.addElement("portlet");
 
 		el.addAttribute("portlet-id", portletId);
 		el.addAttribute(
 			"layout-id", String.valueOf(layout.getLayoutId()));
-		el.addAttribute("path", portletPath);
+		el.addAttribute("path", sb.toString());
 
 		try {
-			context.addZipEntry(portletPath, doc.formattedString());
+			context.addZipEntry(sb.toString(), doc.formattedString());
 		}
 		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {
@@ -521,7 +548,7 @@ public class PortletExporter {
 	}
 
 	protected void exportPortletData(
-			PortletDataContext context, Portlet portlet,
+			PortletDataContext context, Portlet portlet, Layout layout,
 			javax.portlet.PortletPreferences portletPreferences,
 			Element parentEl)
 		throws SystemException {
@@ -584,13 +611,22 @@ public class PortletExporter {
 			return;
 		}
 
-		String portletDataPath = getPortletDataPath(context, portletId);
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getPortletPath(portletId));
+
+		if (portlet.isPreferencesUniquePerLayout()) {
+			sb.append(StringPool.SLASH);
+			sb.append(layout.getPlid());
+		}
+
+		sb.append("/portlet-data.xml");
 
 		Element portletDataEl = parentEl.addElement("portlet-data");
 
-		portletDataEl.addAttribute("path", portletDataPath);
+		portletDataEl.addAttribute("path", sb.toString());
 
-		context.addZipEntry(portletDataPath, data);
+		context.addZipEntry(sb.toString(), data);
 	}
 
 	protected void exportPortletPermissions(
@@ -1076,5 +1112,7 @@ public class PortletExporter {
 	}
 
 	private static Log _log = LogFactory.getLog(PortletExporter.class);
+
+	private HashSet<String> _notUniquePerLayout = new HashSet<String>();
 
 }
