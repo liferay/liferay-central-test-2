@@ -111,7 +111,9 @@ UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 Layout selLayout = null;
 
 try {
-	selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
+	if (selPlid != LayoutConstants.DEFAULT_PLID) {
+		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
+	}
 }
 catch (NoSuchLayoutException nsle) {
 }
