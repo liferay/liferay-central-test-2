@@ -357,6 +357,8 @@ public class PropsKeys {
 	public static final String DL_LAYOUTS_SYNC_PRIVATE_FOLDER = "dl.layouts.sync.private.folder";
 
 	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
+	
+	public static final String DL_PUBLISH_TO_MESSAGE_BUS = "dl.publish.to.message.bus";
 
 	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
 

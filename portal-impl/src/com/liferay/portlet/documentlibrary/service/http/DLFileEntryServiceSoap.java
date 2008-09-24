@@ -250,6 +250,18 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
+	public static void publishFileEntryToMessageBus(long folderId,
+		java.lang.String name) throws RemoteException {
+		try {
+			DLFileEntryServiceUtil.publishFileEntryToMessageBus(folderId, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.lock.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws RemoteException {

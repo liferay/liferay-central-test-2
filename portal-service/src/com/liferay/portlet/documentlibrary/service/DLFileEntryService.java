@@ -125,6 +125,11 @@ public interface DLFileEntryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public void publishFileEntryToMessageBus(long folderId,
+		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.lock.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException;

@@ -24,6 +24,9 @@
 
 	<!-- Destinations -->
 
+	<bean id="destination.document_library" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/document_library" />
+	</bean>
 	<bean id="destination.global" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/global" />
 	</bean>
@@ -107,6 +110,7 @@
 		</property>
 		<property name="destinations">
 			<list>
+				<ref bean="destination.document_library" />
 				<ref bean="destination.layouts_local_publisher" />
 				<ref bean="destination.layouts_remote_publisher" />
 				<ref bean="destination.live_users" />

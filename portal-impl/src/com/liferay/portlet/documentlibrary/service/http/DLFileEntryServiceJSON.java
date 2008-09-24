@@ -180,6 +180,13 @@ public class DLFileEntryServiceJSON {
 		return returnValue;
 	}
 
+	public static void publishFileEntryToMessageBus(long folderId,
+		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileEntryServiceUtil.publishFileEntryToMessageBus(folderId, name);
+	}
+
 	public static com.liferay.lock.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
