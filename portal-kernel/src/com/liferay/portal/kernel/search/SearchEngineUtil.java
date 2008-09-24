@@ -86,10 +86,10 @@ public class SearchEngineUtil {
 	}
 
 	public static Hits search(
-			long companyId, Query query, Sort[] sort, int start, int end)
+			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
-		return _instance._search(companyId, query, sort, start, end);
+		return _instance._search(companyId, query, sorts, start, end);
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
@@ -162,11 +162,11 @@ public class SearchEngineUtil {
 	}
 
 	private Hits _search(
-			long companyId, Query query, Sort[] sort, int start, int end)
+			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
 		return _messageBusIndexSearcher.search(
-			companyId, query, sort, start, end);
+			companyId, query, sorts, start, end);
 	}
 
 	private void _updateDocument(long companyId, String uid, Document doc)

@@ -60,7 +60,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 	}
 
 	public Hits search(
-			long companyId, Query query, Sort[] sort, int start, int end)
+			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
@@ -76,19 +76,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 			org.apache.lucene.search.Sort luceneSort = null;
 
-			if (sort != null) {
-				SortField[] sortFieldArray = new SortField[sort.length];
+			if (sorts != null) {
+				SortField[] sortFields = new SortField[sorts.length];
 
-				int i = 0;
+				for (int i = 0; i < sorts.length; i++) {
+					Sort sort = sorts[i];
 
-				for (Sort sortField : sort) {
-					sortFieldArray[i] = new SortField(
-						sortField.getFieldName(), sortField.isReverse());
-
-					i++;
+					sortFields[i] = new SortField(
+						sort.getFieldName(), sort.isReverse());
 				}
 
-				luceneSort = new org.apache.lucene.search.Sort(sortFieldArray);
+				luceneSort = new org.apache.lucene.search.Sort(sortFields);
 			}
 
 			org.apache.lucene.search.Hits luceneHits = searcher.search(

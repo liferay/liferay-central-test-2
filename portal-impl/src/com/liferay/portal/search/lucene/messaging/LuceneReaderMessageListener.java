@@ -82,7 +82,7 @@ public class LuceneReaderMessageListener implements MessageListener {
 
 		Hits hits = LuceneSearchEngineUtil.search(
 			searchRequest.getCompanyId(), searchRequest.getQuery(),
-			searchRequest.getSort(), searchRequest.getStart(),
+			searchRequest.getSorts(), searchRequest.getStart(),
 			searchRequest.getEnd());
 
 		message.setPayload(hits);
