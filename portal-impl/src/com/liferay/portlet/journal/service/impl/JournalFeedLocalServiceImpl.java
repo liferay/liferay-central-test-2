@@ -434,7 +434,10 @@ public class JournalFeedLocalServiceImpl
 				throw new FeedIdException();
 			}
 
-			if (journalFeedPersistence.fetchByG_F(groupId, feedId) != null) {
+			JournalFeed feed = journalFeedPersistence.fetchByG_F(
+				groupId, feedId);
+
+			if (feed != null) {
 				throw new DuplicateFeedIdException();
 			}
 		}

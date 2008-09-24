@@ -996,8 +996,7 @@ public class DLFileEntryLocalServiceImpl
 
 			// Ensure folder exists and belongs to the proper company
 
-			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(
-				folderId);
+			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(folderId);
 
 			if ((folder == null) || (companyId != folder.getCompanyId())) {
 				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;

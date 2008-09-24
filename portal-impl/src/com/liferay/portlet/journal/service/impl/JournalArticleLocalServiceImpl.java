@@ -2358,9 +2358,10 @@ public class JournalArticleLocalServiceImpl
 		if (!autoArticleId) {
 			validate(articleId);
 
-			if (journalArticlePersistence.fetchByG_A_V(
-					groupId, articleId, version) != null) {
+			JournalArticle article = journalArticlePersistence.fetchByG_A_V(
+				groupId, articleId, version);
 
+			if (article != null) {
 				throw new DuplicateArticleIdException();
 			}
 		}

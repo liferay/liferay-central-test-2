@@ -111,7 +111,7 @@ public class RatingsEntryLocalServiceImpl
 		Date now = new Date();
 
 		RatingsEntry entry = ratingsEntryPersistence.fetchByU_C_C(
-				userId, classNameId, classPK);
+			userId, classNameId, classPK);
 
 		if (entry != null) {
 			oldScore = entry.getScore();

@@ -636,9 +636,10 @@ public class JournalTemplateLocalServiceImpl
 		if (!autoTemplateId) {
 			validate(templateId);
 
-			if (journalTemplatePersistence.fetchByG_T(
-					groupId, templateId) != null) {
+			JournalTemplate template = journalTemplatePersistence.fetchByG_T(
+				groupId, templateId);
 
+			if (template != null) {
 				throw new DuplicateTemplateIdException();
 			}
 		}

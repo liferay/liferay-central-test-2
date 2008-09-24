@@ -1028,9 +1028,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Ensure parent layout exists
 
-			if (layoutPersistence.fetchByG_P_L(
-					groupId, privateLayout, parentLayoutId) == null) {
+			Layout parentLayout = layoutPersistence.fetchByG_P_L(
+				groupId, privateLayout, parentLayoutId);
 
+			if (parentLayout == null) {
 				parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 			}
 		}

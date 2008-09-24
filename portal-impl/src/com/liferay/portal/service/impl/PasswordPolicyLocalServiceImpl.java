@@ -119,9 +119,11 @@ public class PasswordPolicyLocalServiceImpl
 		String defaultPasswordPolicyName =
 			PropsValues.PASSWORDS_DEFAULT_POLICY_NAME;
 
-		if (passwordPolicyPersistence.fetchByC_N(
-				companyId, defaultPasswordPolicyName) == null) {
+		PasswordPolicy defaultPasswordPolicy =
+			passwordPolicyPersistence.fetchByC_N(
+				companyId, defaultPasswordPolicyName);
 
+		if (defaultPasswordPolicy == null) {
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			addPasswordPolicy(

@@ -108,7 +108,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public Release getRelease() throws SystemException {
 		Release release = releasePersistence.fetchByPrimaryKey(
-				ReleaseImpl.DEFAULT_ID);
+			ReleaseImpl.DEFAULT_ID);
 
 		if (release == null) {
 			release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);

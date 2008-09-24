@@ -586,8 +586,7 @@ public class OrganizationLocalServiceImpl
 			// company
 
 			Organization parentOrganization =
-				organizationPersistence.fetchByPrimaryKey(
-					parentOrganizationId);
+				organizationPersistence.fetchByPrimaryKey(parentOrganizationId);
 
 			if ((parentOrganization == null) ||
 				(companyId != parentOrganization.getCompanyId())) {
@@ -671,8 +670,7 @@ public class OrganizationLocalServiceImpl
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
 			Organization parentOrganization =
-				organizationPersistence.fetchByPrimaryKey(
-					parentOrganizationId);
+				organizationPersistence.fetchByPrimaryKey(parentOrganizationId);
 
 			if ((parentOrganization == null) ||
 				(companyId != parentOrganization.getCompanyId()) ||

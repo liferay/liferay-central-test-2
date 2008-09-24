@@ -58,7 +58,7 @@ public class SocialRelationLocalServiceImpl
 		}
 
 		SocialRelation relation = socialRelationPersistence.fetchByU1_U2_T(
-				userId1, userId2, type);
+			userId1, userId2, type);
 
 		if (relation == null) {
 			long relationId = counterLocalService.increment();
@@ -75,13 +75,14 @@ public class SocialRelationLocalServiceImpl
 		}
 
 		if (SocialRelationConstants.isTypeBi(type)) {
-			if (socialRelationPersistence.fetchByU1_U2_T(
-				userId2, userId1, type) == null) {
+			SocialRelation biRelation =
+				socialRelationPersistence.fetchByU1_U2_T(
+					userId2, userId1, type);
 
+			if (biRelation == null) {
 				long biRelationId = counterLocalService.increment();
 
-				SocialRelation biRelation = socialRelationPersistence.create(
-					biRelationId);
+				biRelation = socialRelationPersistence.create(biRelationId);
 
 				biRelation.setCompanyId(user1.getCompanyId());
 				biRelation.setCreateDate(new Date());

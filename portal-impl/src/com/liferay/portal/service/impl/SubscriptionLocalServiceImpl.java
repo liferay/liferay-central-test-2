@@ -134,9 +134,10 @@ public class SubscriptionLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		if (subscriptionPersistence.fetchByC_U_C_C(
-				companyId, userId, classNameId, classPK) != null) {
+		Subscription subscription = subscriptionPersistence.fetchByC_U_C_C(
+			companyId, userId, classNameId, classPK);
 
+		if (subscription != null) {
 			return true;
 		}
 		else {
