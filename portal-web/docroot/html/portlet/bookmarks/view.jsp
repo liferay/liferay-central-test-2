@@ -37,6 +37,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/bookmarks/view");
 portletURL.setParameter("folderId", String.valueOf(folderId));
+portletURL.setParameter("tabs1", tabs1);
 
 List results = null;
 %>
@@ -402,7 +403,6 @@ List results = null;
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="entry"
-					orderable="<%= true %>"
 					property="name"
 					target="_blank"
 					title="<%= entry.getComments() %>"
@@ -410,7 +410,6 @@ List results = null;
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="url"
-					orderable="<%= true %>"
 					property="url"
 					target="_blank"
 					title="<%= entry.getComments() %>"
@@ -418,7 +417,6 @@ List results = null;
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="visits"
-					orderable="<%= true %>"
 					property="visits"
 					target="_blank"
 					title="<%= entry.getComments() %>"
