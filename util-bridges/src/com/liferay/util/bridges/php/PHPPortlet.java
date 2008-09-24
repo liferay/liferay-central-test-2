@@ -22,8 +22,10 @@
 
 package com.liferay.util.bridges.php;
 
+import com.liferay.portal.kernel.servlet.PortletServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.servlet.DynamicServletConfig;
 
 import java.io.IOException;
@@ -36,6 +38,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletException;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -58,13 +61,17 @@ import org.apache.portals.bridges.common.ScriptPostProcess;
  */
 public class PHPPortlet extends GenericPortlet {
 
-	public void init() throws PortletException {
+	public void init(PortletConfig portletConfig) throws PortletException {
 		editUri = getInitParameter("edit-uri");
 		helpUri = getInitParameter("help-uri");
 		viewUri = getInitParameter("view-uri");
 
-		String servletObjectsFactoryName = getInitParameter(
-			"servlet-objects-factory");
+		addPortletParams = GetterUtil.getBoolean(
+			portletConfig.getInitParameter("add-portlet-params"), true);
+
+		String servletObjectsFactoryName = GetterUtil.getString(
+			getInitParameter("servlet-objects-factory"),
+			PortletServletObjectsFactory.class.getName());
 
 		try {
 			Class<?> servletObjectsFactoryClass = Class.forName(
@@ -181,7 +188,7 @@ public class PHPPortlet extends GenericPortlet {
 
 			PHPServletRequest phpRequest = new PHPServletRequest(
 				request, servletConfig, renderRequest, renderResponse,
-				getPortletConfig(), phpURI);
+				getPortletConfig(), phpURI, addPortletParams);
 
 			StringServletResponse stringResponse = new StringServletResponse(
 				response);
@@ -224,6 +231,7 @@ public class PHPPortlet extends GenericPortlet {
 	protected String editUri;
 	protected String helpUri;
 	protected String viewUri;
+	protected boolean addPortletParams;
 	protected ServletObjectsFactory servletObjectsFactory;
 	protected HttpServlet quercusServlet;
 

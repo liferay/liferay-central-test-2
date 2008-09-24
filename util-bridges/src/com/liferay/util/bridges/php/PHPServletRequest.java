@@ -22,7 +22,6 @@
 
 package com.liferay.util.bridges.php;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -48,7 +47,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 	public PHPServletRequest(
 		HttpServletRequest request, ServletConfig servletConfig,
 		RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig, String phpURI) {
+		PortletConfig portletConfig, String phpURI, boolean addPortletParams) {
 
 		super(request);
 
@@ -70,9 +69,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 			_path = phpURI;
 		}
 
-		if (GetterUtil.getBoolean(
-				portletConfig.getInitParameter("add-portlet-params"), true)) {
-
+		if (addPortletParams) {
 			sb.append(StringPool.AMPERSAND);
 			sb.append("portlet_namespace");
 			sb.append(StringPool.EQUAL);
