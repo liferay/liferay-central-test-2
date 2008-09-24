@@ -392,9 +392,239 @@ String redirect = redirectURL.toString();
 			<input type="button" value=<liferay-ui:message key="cancel" /> onclick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 		</form>
-
 	</c:when>
+	<c:when test="<%= action == AdminPortletAction.LIST_CONSUMER_REGISTRATIONS%>">
+		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />consumerRegForm">
+			<%
+			SearchContainer searchContainer = new SearchContainer();
 
+			ConsumerRegistrationBean[] crBeans = (ConsumerRegistrationBean[])renderRequest.getAttribute("listConsumerRegistrations");
+
+			List resultRows = searchContainer.getResultRows();
+			List<String> headerNames = new ArrayList<String>();
+
+			headerNames.add("name");
+			headerNames.add("registration-handle");
+			headerNames.add("status");
+			headerNames.add(StringPool.BLANK);
+
+			searchContainer.setHeaderNames(headerNames);
+			searchContainer.setEmptyResultsMessage("there-are-no-registered-consumers");
+			int index = 0;
+			if(renderRequest.getAttribute("listConsumerRegistrations") != null){
+
+				for (ConsumerRegistrationBean crBean : crBeans) {
+					index++;
+					String name = crBean.getName();
+					String regHandle = crBean.getRegistrationHandle();
+
+					ResultRow row = new ResultRow(crBean, name, index);
+					// Name
+
+					row.addText(name);
+
+					// Description
+
+					row.addText(regHandle);
+
+					//Status
+
+					row.addText(LanguageUtil.get(pageContext, new Boolean(crBean.getEnabled()).booleanValue()? "enabled" : "disabled"));
+
+					//Consumer Registration Action
+
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer_admin/cons_reg_action.jsp");
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+			}
+			%>
+			<div>
+				<input type="button" value="<liferay-ui:message key="add-consumer-registration" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DEFAULT_CONSUMER_REGISTRATION) %>" /><portlet:param name="producerId" value="<%=ParamUtil.getString(request, "producerId")%>" /></portlet:actionURL>';" />
+			</div>
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+			<div>
+				<input type="button" value="<liferay-ui:message key="back-to-producers" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST) %>" /></portlet:actionURL>';" />
+			</div>
+		</form>
+	</c:when>
+	<c:when test="<%= action == AdminPortletAction.GET_DEFAULT_CONSUMER_REGISTRATION%>">
+		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />addConsumerRegForm">
+			<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="name" />
+					</td>
+					<td>
+						<input type="text" name="<portlet:namespace />name" id="nameId" class="lfr-input-text" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="consumer-agent" />
+					</td>
+					<td>
+						<input type="text" name="<portlet:namespace />agent" id="agentId" class="lfr-input-text" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td><liferay-ui:message key="registration" /></td>
+					<td>
+						<select id="<portlet:namespace />statusId" name="<portlet:namespace />status">
+							<option value="true"><liferay-ui:message key="enabled" /></option>
+							<option value="false"><liferay-ui:message key="disabled" /></option>
+						</select>
+
+					</td>
+				</tr>
+				<tr>
+					<td><liferay-ui:message key="method-get-supported" /></td>
+					<td>
+						<select id="<portlet:namespace />methodGetSupportedId" name="<portlet:namespace />methodGetSupported">
+							<option value="true"><liferay-ui:message key="supported" /></option>
+							<option value="false"><liferay-ui:message key="not-supported" /></option>
+						</select>
+					</td>
+				</tr>
+				<%
+				ProducerBean producerBean = (ProducerBean)renderRequest.getPortletSession().getAttribute("producerBean");
+				String version = producerBean.getVersion();
+				boolean supportsInbandRegistration = producerBean.isInbandRegistrationSupported();
+		 		%>
+				<c:if test='<%= version.contains("V2") && !supportsInbandRegistration %>'>
+					<tr>
+						<td>
+							<liferay-ui:message key="lifetime" />
+						</td>
+						<td>
+							<input id="<portlet:namespace />lifetimeSupplied" name="<portlet:namespace />lifetimeSupplied" type="checkbox" />
+						</td>
+					</tr>
+					<tbody id="<portlet:namespace />lifetimeSettings">
+						<tr>
+							<td>
+								<liferay-ui:message key="valid-days" />
+							</td>
+							<td>
+								<input class="lfr-input-text" name="<portlet:namespace />lifetimeDays" size="5" type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="valid-hours" />
+							</td>
+							<td>
+								<input class="lfr-input-text" name="<portlet:namespace />lifetimeHours" size="5" type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="valid-minutes" />
+							</td>
+							<td>
+								<input class="lfr-input-text" name="<portlet:namespace />lifetimeMins" size="5" type="text" />
+							</td>
+						</tr>
+					</tbody>
+				</c:if>
+				<tr>
+					<td>
+						<liferay-ui:message key="registration-properties" />
+					</td>
+					<td>
+
+					<%
+					List regPropertiesList = (List)renderRequest.getPortletSession(false).getAttribute("regPropertiesList");
+					Iterator iterator = regPropertiesList.iterator();
+
+					SearchContainer searchContainer = new SearchContainer();
+
+					List<String> headerNames = new ArrayList<String>();
+
+					headerNames.add("name");
+					headerNames.add("value");
+					headerNames.add("description");
+
+					searchContainer.setHeaderNames(headerNames);
+					searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
+
+					List<Map.Entry<String, String>> results = null;
+
+					List resultRows = searchContainer.getResultRows();
+
+					int index = 0;
+					while(iterator.hasNext()) {
+						String keyAndDesc = (String)iterator.next();
+						int idx = keyAndDesc.indexOf("=");
+						String propertyName = keyAndDesc.substring(0,idx);
+						String propertyDescription = keyAndDesc.substring(idx+1, keyAndDesc.length());
+
+
+						ResultRow row = new ResultRow(propertyName, propertyName, index);
+
+						// Name
+
+						row.addText(propertyName);
+
+						// Value
+
+						String propertyValue = StringPool.BLANK;
+
+						StringBuilder sb = new StringBuilder();
+
+						sb.append("<input name=\"");
+						sb.append(renderResponse.getNamespace());
+						sb.append("regPropName");
+						sb.append(index);
+						sb.append("\" type=\"hidden\" value=\"");
+						sb.append(propertyName);
+						sb.append("\" />");
+
+						sb.append("<input name=\"");
+						sb.append(renderResponse.getNamespace());
+						sb.append("regPropDescription");
+						sb.append(index);
+						sb.append("\" type=\"hidden\" value=\"");
+						sb.append(propertyDescription);
+						sb.append("\" />");
+
+						sb.append("<input name=\"");
+						sb.append(renderResponse.getNamespace());
+						sb.append("regPropValue");
+						sb.append(index);
+						sb.append("\" type=\"text\" value=\"");
+						sb.append(propertyValue);
+						sb.append("\" />");
+
+						row.addText(sb.toString());
+
+						// Description
+
+						row.addText(propertyDescription);
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+					%>
+
+						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+					</td>
+				</tr>
+			</table>
+			<%
+			PortletURL consRegURL = renderResponse.createActionURL();
+			consRegURL.setParameter("action",String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS));
+			consRegURL.setParameter("producerId",ParamUtil.getString(request, "producerId"));
+			%>
+			<input type="hidden" name="action" value="<%=AdminPortletAction.CREATE_CONSUMER_REGISTRATION%>" />
+			<input type="hidden" name="producerId" value="<%=ParamUtil.getString(request, "producerId")%>" />
+			<input type="submit" value=<liferay-ui:message key="save" />
+			<input type="button" value=<liferay-ui:message key="cancel" /> onclick="location.href = '<%= consRegURL.toString() %>';" />
+		</form>
+	</c:when>
 </c:choose>
 <script type="text/javascript">
 	jQuery(
@@ -427,6 +657,7 @@ String redirect = redirectURL.toString();
 					jQuery("#<portlet:namespace />publishedPortletStringId").val(ppString);
 				}
 			);
+			Liferay.Util.toggleBoxes('<portlet:namespace />lifetimeSupplied', '<portlet:namespace />lifetimeSettings');
 		}
 	);
 

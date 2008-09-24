@@ -48,32 +48,19 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
+ConsumerRegistrationBean crBean = (ConsumerRegistrationBean)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
 
 	<portlet:actionURL var="deleteURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
-		<portlet:param name="redirect" value="<portlet:renderURL/>" />
-		<portlet:param name="selectedProducers" value="<%= producerBean.getProducerKey() %>" />
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE_CONSUMER_REGISTRATION) %>" />
+		<portlet:param name="producerId" value='<%=ParamUtil.getString(request, "producerId")%>' />
+		<portlet:param name="selectedConsumerRegistrations" value="<%= crBean.getRegistrationHandle() %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
 
-	<portlet:renderURL var="editURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
-		<portlet:param name="redirect" value="<portlet:renderURL/>" />
-		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-
-	<portlet:actionURL var="manageRegURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" />
-		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon image="manage_registrations" url="<%= manageRegURL %>" />
 
 </liferay-ui:icon-menu>
