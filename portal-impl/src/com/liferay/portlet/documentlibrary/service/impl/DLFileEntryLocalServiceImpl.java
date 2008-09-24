@@ -47,7 +47,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.util.MathUtil;
 
@@ -890,16 +889,14 @@ public class DLFileEntryLocalServiceImpl
 
 			// Message boards
 
-			try {
-				MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
-					PortalUtil.getClassNameId(DLFileEntry.class.getName()),
-					oldFileEntryId);
+			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
+				PortalUtil.getClassNameId(DLFileEntry.class.getName()),
+				oldFileEntryId);
 
+			if (discussion != null) {
 				discussion.setClassPK(newFileEntryId);
 
 				mbDiscussionPersistence.update(discussion, false);
-			}
-			catch (NoSuchDiscussionException nsde) {
 			}
 		}
 
@@ -999,15 +996,10 @@ public class DLFileEntryLocalServiceImpl
 
 			// Ensure folder exists and belongs to the proper company
 
-			try {
-				DLFolder folder = dlFolderPersistence.findByPrimaryKey(
-					folderId);
+			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(
+				folderId);
 
-				if (companyId != folder.getCompanyId()) {
-					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
-				}
-			}
-			catch (NoSuchFolderException nsfe) {
+			if ((folder == null) || (companyId != folder.getCompanyId())) {
 				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}

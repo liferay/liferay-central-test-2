@@ -135,15 +135,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			parentMessageId, subject, body, themeDisplay);
 
 		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
-			MBDiscussion discussion = null;
+			long classNameId = PortalUtil.getClassNameId(className);
 
-			try {
-				long classNameId = PortalUtil.getClassNameId(className);
+			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
+				classNameId, classPK);
 
-				discussion = mbDiscussionPersistence.findByC_C(
-					classNameId, classPK);
-			}
-			catch (NoSuchDiscussionException nsde) {
+			if (discussion == null) {
 				long discussionId = counterLocalService.increment();
 
 				discussion = mbDiscussionPersistence.create(
@@ -906,17 +903,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = null;
 
-		try {
-			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
-				classNameId, classPK);
+		MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
+			classNameId, classPK);
 
+		if (discussion != null) {
 			List<MBMessage> messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 			message = messages.get(0);
 		}
-		catch (NoSuchDiscussionException nsde) {
+		else {
 			String subject = String.valueOf(classPK);
 			//String body = subject;
 
@@ -924,7 +921,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			long discussionId = counterLocalService.increment();
 
-			MBDiscussion discussion = mbDiscussionPersistence.create(
+			discussion = mbDiscussionPersistence.create(
 				discussionId);
 
 			discussion.setClassNameId(classNameId);

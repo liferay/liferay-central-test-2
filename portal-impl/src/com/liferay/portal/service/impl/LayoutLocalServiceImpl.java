@@ -876,13 +876,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 		if (parentPlid > 0) {
-			try {
-				Layout parentLayout = layoutPersistence.findByPrimaryKey(
-					parentPlid);
+			Layout parentLayout = layoutPersistence.fetchByPrimaryKey(
+				parentPlid);
 
+			if (parentLayout != null) {
 				parentLayoutId = parentLayout.getLayoutId();
-			}
-			catch (NoSuchLayoutException nsle) {
 			}
 		}
 
@@ -1030,11 +1028,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Ensure parent layout exists
 
-			try {
-				layoutPersistence.findByG_P_L(
-					groupId, privateLayout, parentLayoutId);
-			}
-			catch (NoSuchLayoutException nsfe) {
+			if (layoutPersistence.fetchByG_P_L(
+					groupId, privateLayout, parentLayoutId) == null) {
+
 				parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 			}
 		}
@@ -1141,16 +1137,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			throw new LayoutFriendlyURLException(exceptionType);
 		}
 
-		try {
-			Layout layout = layoutPersistence.findByG_P_F(
-				groupId, privateLayout, friendlyURL);
+		Layout layout = layoutPersistence.fetchByG_P_F(
+			groupId, privateLayout, friendlyURL);
 
-			if (layout.getLayoutId() != layoutId) {
-				throw new LayoutFriendlyURLException(
-					LayoutFriendlyURLException.DUPLICATE);
-			}
-		}
-		catch (NoSuchLayoutException nsle) {
+		if ((layout != null) && (layout.getLayoutId() != layoutId)) {
+			throw new LayoutFriendlyURLException(
+				LayoutFriendlyURLException.DUPLICATE);
 		}
 
 		LayoutImpl.validateFriendlyURLKeyword(friendlyURL);

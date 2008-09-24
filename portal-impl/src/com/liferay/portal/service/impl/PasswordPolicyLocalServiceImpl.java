@@ -23,7 +23,6 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.DuplicatePasswordPolicyException;
-import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.PortalException;
@@ -120,11 +119,9 @@ public class PasswordPolicyLocalServiceImpl
 		String defaultPasswordPolicyName =
 			PropsValues.PASSWORDS_DEFAULT_POLICY_NAME;
 
-		try {
-			passwordPolicyPersistence.findByC_N(
-				companyId, defaultPasswordPolicyName);
-		}
-		catch (NoSuchPasswordPolicyException nsppe) {
+		if (passwordPolicyPersistence.fetchByC_N(
+				companyId, defaultPasswordPolicyName) == null) {
+
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			addPasswordPolicy(
@@ -314,17 +311,15 @@ public class PasswordPolicyLocalServiceImpl
 			throw new PasswordPolicyNameException();
 		}
 
-		try {
-			PasswordPolicy passwordPolicy = passwordPolicyPersistence.findByC_N(
-				companyId, name);
+		PasswordPolicy passwordPolicy = passwordPolicyPersistence.fetchByC_N(
+			companyId, name);
 
+		if (passwordPolicy != null) {
 			if ((passwordPolicyId <= 0) ||
 				(passwordPolicy.getPasswordPolicyId() != passwordPolicyId)) {
 
 				throw new DuplicatePasswordPolicyException();
 			}
-		}
-		catch (NoSuchPasswordPolicyException nsge) {
 		}
 	}
 

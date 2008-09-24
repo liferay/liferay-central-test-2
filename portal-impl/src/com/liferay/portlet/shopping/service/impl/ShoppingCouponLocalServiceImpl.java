@@ -38,9 +38,7 @@ import com.liferay.portlet.shopping.CouponLimitSKUsException;
 import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponCodeException;
-import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
-import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -260,12 +258,8 @@ public class ShoppingCouponLocalServiceImpl
 				throw new CouponCodeException();
 			}
 
-			try {
-				shoppingCouponPersistence.findByCode(code);
-
+			if (shoppingCouponPersistence.fetchByCode(code) != null) {
 				throw new DuplicateCouponCodeException();
-			}
-			catch (NoSuchCouponException nsce) {
 			}
 		}
 
@@ -292,15 +286,10 @@ public class ShoppingCouponLocalServiceImpl
 		List<Long> invalidCategoryIds = new ArrayList<Long>();
 
 		for (long categoryId : categoryIds) {
-			try {
-				ShoppingCategory category =
-					shoppingCategoryPersistence.findByPrimaryKey(categoryId);
+			ShoppingCategory category =
+				shoppingCategoryPersistence.fetchByPrimaryKey(categoryId);
 
-				if (category.getGroupId() != groupId) {
-					invalidCategoryIds.add(categoryId);
-				}
-			}
-			catch (NoSuchCategoryException nsce) {
+			if ((category == null) || (category.getGroupId() != groupId)) {
 				invalidCategoryIds.add(categoryId);
 			}
 		}
@@ -321,17 +310,17 @@ public class ShoppingCouponLocalServiceImpl
 		List<String> invalidSkus = new ArrayList<String>();
 
 		for (String sku : skus) {
-			try {
-				ShoppingItem item = shoppingItemPersistence.findByC_S(
-					companyId, sku);
+			ShoppingItem item = shoppingItemPersistence.fetchByC_S(
+				companyId, sku);
 
+			if (item != null) {
 				ShoppingCategory category = item.getCategory();
 
 				if (category.getGroupId() != groupId) {
 					invalidSkus.add(sku);
 				}
 			}
-			catch (NoSuchItemException nsie) {
+			else {
 				invalidSkus.add(sku);
 			}
 		}

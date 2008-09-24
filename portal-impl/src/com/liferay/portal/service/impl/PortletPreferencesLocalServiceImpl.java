@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
@@ -162,17 +161,14 @@ public class PortletPreferencesLocalServiceImpl
 		PortletPreferencesImpl prefs = prefsPool.get(key);
 
 		if (prefs == null) {
-			PortletPreferences portletPreferences = null;
-
 			Portlet portlet = portletLocalService.getPortletById(
 				companyId, portletId);
 
-			try {
-				portletPreferences =
-					portletPreferencesPersistence.findByO_O_P_P(
-						ownerId, ownerType, plid, portletId);
-			}
-			catch (NoSuchPortletPreferencesException nsppe) {
+			PortletPreferences portletPreferences =
+				portletPreferencesPersistence.fetchByO_O_P_P(
+					ownerId, ownerType, plid, portletId);
+
+			if (portletPreferences == null) {
 				long portletPreferencesId = counterLocalService.increment();
 
 				portletPreferences = portletPreferencesPersistence.create(
@@ -213,13 +209,11 @@ public class PortletPreferencesLocalServiceImpl
 			javax.portlet.PortletPreferences prefs)
 		throws SystemException {
 
-		PortletPreferences portletPreferences = null;
-
-		try {
-			portletPreferences = portletPreferencesPersistence.findByO_O_P_P(
+		PortletPreferences portletPreferences =
+			portletPreferencesPersistence.fetchByO_O_P_P(
 				ownerId, ownerType, plid, portletId);
-		}
-		catch (NoSuchPortletPreferencesException nsppe) {
+
+		if (portletPreferences == null) {
 			long portletPreferencesId = counterLocalService.increment();
 
 			portletPreferences = portletPreferencesPersistence.create(

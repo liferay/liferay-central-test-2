@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -278,15 +277,10 @@ public class DLFileShortcutLocalServiceImpl
 
 			// Ensure folder exists and belongs to the proper company
 
-			try {
-				DLFolder folder = dlFolderPersistence.findByPrimaryKey(
-					folderId);
+			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(
+				folderId);
 
-				if (companyId != folder.getCompanyId()) {
-					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
-				}
-			}
-			catch (NoSuchFolderException nsfe) {
+			if ((folder == null) || (companyId != folder.getCompanyId())) {
 				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}

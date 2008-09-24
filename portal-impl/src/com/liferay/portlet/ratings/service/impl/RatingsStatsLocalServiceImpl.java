@@ -68,12 +68,10 @@ public class RatingsStatsLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		RatingsStats stats = null;
+		RatingsStats stats = ratingsStatsPersistence.fetchByC_C(
+			classNameId, classPK);
 
-		try {
-			stats = ratingsStatsPersistence.findByC_C(classNameId, classPK);
-		}
-		catch (NoSuchStatsException nsse) {
+		if (stats == null) {
 			long statsId = counterLocalService.increment();
 
 			stats = ratingsStatsPersistence.create(statsId);

@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
-import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
@@ -300,17 +299,14 @@ public class SCProductVersionLocalServiceImpl
 			throw new ProductVersionDownloadURLException();
 		}
 		else if (Validator.isNotNull(directDownloadURL)) {
-			try {
-				SCProductVersion productVersion =
-					scProductVersionPersistence.findByDirectDownloadURL(
-						directDownloadURL);
+			SCProductVersion productVersion =
+				scProductVersionPersistence.fetchByDirectDownloadURL(
+					directDownloadURL);
 
-				if (productVersion.getProductVersionId() != productVersionId) {
-					throw new
-						DuplicateProductVersionDirectDownloadURLException();
-				}
-			}
-			catch (NoSuchProductVersionException nspve) {
+			if ((productVersion != null) &&
+				(productVersion.getProductVersionId() != productVersionId)) {
+
+				throw new DuplicateProductVersionDirectDownloadURLException();
 			}
 
 			if (testDirectDownloadURL) {

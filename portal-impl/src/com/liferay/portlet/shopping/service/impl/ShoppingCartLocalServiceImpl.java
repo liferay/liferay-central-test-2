@@ -33,9 +33,7 @@ import com.liferay.portlet.shopping.CartMinQuantityException;
 import com.liferay.portlet.shopping.CouponActiveException;
 import com.liferay.portlet.shopping.CouponEndDateException;
 import com.liferay.portlet.shopping.CouponStartDateException;
-import com.liferay.portlet.shopping.NoSuchCartException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
-import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
@@ -85,13 +83,13 @@ public class ShoppingCartLocalServiceImpl
 		String[] itemIdsArray = StringUtil.split(itemIds);
 
 		for (int i = 0; i < itemIdsArray.length; i++) {
-			try {
-				long itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
-				String fields = ShoppingUtil.getItemFields(itemIdsArray[i]);
+			long itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
+			String fields = ShoppingUtil.getItemFields(itemIdsArray[i]);
 
-				ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(
-					itemId);
+			ShoppingItem item = shoppingItemPersistence.fetchByPrimaryKey(
+				itemId);
 
+			if (item != null) {
 				ShoppingCategory category = item.getCategory();
 
 				if (category.getGroupId() == groupId) {
@@ -109,8 +107,6 @@ public class ShoppingCartLocalServiceImpl
 
 					items.put(cartItem, count);
 				}
-			}
-			catch (NoSuchItemException nsie) {
 			}
 		}
 
@@ -207,10 +203,9 @@ public class ShoppingCartLocalServiceImpl
 			cart.setCreateDate(now);
 		}
 		else {
-			try {
-				cart = shoppingCartPersistence.findByG_U(groupId, userId);
-			}
-			catch (NoSuchCartException nsce) {
+			cart = shoppingCartPersistence.fetchByG_U(groupId, userId);
+
+			if (cart == null) {
 				long cartId = counterLocalService.increment();
 
 				cart = shoppingCartPersistence.create(cartId);

@@ -2358,13 +2358,10 @@ public class JournalArticleLocalServiceImpl
 		if (!autoArticleId) {
 			validate(articleId);
 
-			try {
-				journalArticlePersistence.findByG_A_V(
-					groupId, articleId, version);
+			if (journalArticlePersistence.fetchByG_A_V(
+					groupId, articleId, version) != null) {
 
 				throw new DuplicateArticleIdException();
-			}
-			catch (NoSuchArticleException nste) {
 			}
 		}
 

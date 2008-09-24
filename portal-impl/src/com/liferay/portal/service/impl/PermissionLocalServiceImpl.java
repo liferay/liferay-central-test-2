@@ -23,7 +23,6 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchPermissionException;
-import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -230,16 +229,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long groupId, String actionId, long resourceId)
 		throws SystemException {
 
-		Permission permission = null;
+		Permission permission = permissionPersistence.fetchByA_R(
+			actionId, resourceId);
 
-		try {
-			permission = permissionPersistence.findByA_R(actionId, resourceId);
-		}
-		catch (NoSuchPermissionException nspe) {
+		// Return false if there is no permission based on the given action
+		// id and resource id
 
-			// Return false if there is no permission based on the given action
-			// id and resource id
-
+		if (permission == null) {
 			return false;
 		}
 
@@ -259,17 +255,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			resourceCode.getCodeId());
 
 		for (Resource resource : resources) {
-			try {
-				Permission permission = permissionPersistence.findByA_R(
-					actionId, resource.getResourceId());
+			Permission permission = permissionPersistence.fetchByA_R(
+				actionId, resource.getResourceId());
 
+			if (permission != null) {
 				if (rolePersistence.containsPermission(
 						roleId, permission.getPermissionId())) {
 
 					return true;
 				}
-			}
-			catch (NoSuchPermissionException nspe) {
 			}
 		}
 
@@ -281,42 +275,39 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws SystemException {
 
-		try {
-			ResourceCode resourceCode =
-				resourceCodeLocalService.getResourceCode(
-					companyId, name, scope);
+		ResourceCode resourceCode =
+			resourceCodeLocalService.getResourceCode(
+				companyId, name, scope);
 
-			Resource resource = resourcePersistence.findByC_P(
-				resourceCode.getCodeId(), primKey);
+		Resource resource = resourcePersistence.fetchByC_P(
+			resourceCode.getCodeId(), primKey);
 
-			Permission permission = permissionPersistence.findByA_R(
-				actionId, resource.getResourceId());
-
-			return rolePersistence.containsPermission(
-				roleId, permission.getPermissionId());
-		}
-		catch (NoSuchPermissionException nspe) {
-		}
-		catch (NoSuchResourceException nsre) {
+		if (resource == null) {
+			return false;
 		}
 
-		return false;
+		Permission permission = permissionPersistence.fetchByA_R(
+			actionId, resource.getResourceId());
+
+		if (permission == null) {
+			return false;
+		}
+
+		return rolePersistence.containsPermission(
+			roleId, permission.getPermissionId());
 	}
 
 	public boolean hasUserPermission(
 			long userId, String actionId, long resourceId)
 		throws SystemException {
 
-		Permission permission = null;
+		Permission permission = permissionPersistence.fetchByA_R(
+			actionId, resourceId);
 
-		try {
-			permission = permissionPersistence.findByA_R(actionId, resourceId);
-		}
-		catch (NoSuchPermissionException nspe) {
+		// Return false if there is no permission based on the given action
+		// id and resource id
 
-			// Return false if there is no permission based on the given action
-			// id and resource id
-
+		if (permission == null) {
 			return false;
 		}
 
@@ -526,13 +517,10 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		Resource resource = resourceLocalService.addResource(
 			companyId, name, scope, primKey);
 
-		Permission permission = null;
+		Permission permission = permissionPersistence.fetchByA_R(
+			actionId, resource.getResourceId());
 
-		try {
-			permission = permissionPersistence.findByA_R(
-				actionId, resource.getResourceId());
-		}
-		catch (NoSuchPermissionException nspe) {
+		if (permission == null) {
 			long permissionId = counterLocalService.increment(
 				Permission.class.getName());
 
@@ -604,13 +592,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public void unsetRolePermission(long roleId, long permissionId)
 		throws SystemException {
 
-		try {
-			Permission permission = permissionPersistence.findByPrimaryKey(
-				permissionId);
+		Permission permission = permissionPersistence.fetchByPrimaryKey(
+			permissionId);
 
+		if (permission != null) {
 			rolePersistence.removePermission(roleId, permission);
-		}
-		catch (NoSuchPermissionException nspe) {
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -621,22 +607,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws SystemException {
 
-		try {
-			ResourceCode resourceCode =
-				resourceCodeLocalService.getResourceCode(
-					companyId, name, scope);
+		ResourceCode resourceCode =
+			resourceCodeLocalService.getResourceCode(
+				companyId, name, scope);
 
-			Resource resource = resourcePersistence.findByC_P(
-				resourceCode.getCodeId(), primKey);
+		Resource resource = resourcePersistence.fetchByC_P(
+			resourceCode.getCodeId(), primKey);
 
-			Permission permission = permissionPersistence.findByA_R(
+		if (resource != null) {
+			Permission permission = permissionPersistence.fetchByA_R(
 				actionId, resource.getResourceId());
 
-			rolePersistence.removePermission(roleId, permission);
-		}
-		catch (NoSuchPermissionException nspe) {
-		}
-		catch (NoSuchResourceException nsre) {
+			if (permission != null) {
+				rolePersistence.removePermission(roleId, permission);
+			}
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -654,13 +638,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			resourceCode.getCodeId());
 
 		for (Resource resource : resources) {
-			try {
-				Permission permission = permissionPersistence.findByA_R(
-					actionId, resource.getResourceId());
+			Permission permission = permissionPersistence.fetchByA_R(
+				actionId, resource.getResourceId());
 
+			if (permission != null) {
 				rolePersistence.removePermission(roleId, permission);
-			}
-			catch (NoSuchPermissionException nspe) {
 			}
 		}
 

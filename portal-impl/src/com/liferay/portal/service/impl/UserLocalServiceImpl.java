@@ -29,7 +29,6 @@ import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
@@ -1865,12 +1864,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		long contactId = user.getContactId();
 
-		Contact contact = null;
+		Contact contact = contactPersistence.fetchByPrimaryKey(contactId);
 
-		try {
-			contact = contactPersistence.findByPrimaryKey(contactId);
-		}
-		catch (NoSuchContactException nsce) {
+		if (contact == null) {
 			contact = contactPersistence.create(contactId);
 
 			contact.setCompanyId(user.getCompanyId());
@@ -2487,16 +2483,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		validateEmailAddress(emailAddress);
 
 		if (!user.isDefaultUser()) {
-			try {
-				if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
-					if (userPersistence.findByC_EA(
-							user.getCompanyId(), emailAddress) != null) {
+			if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
+				if (userPersistence.fetchByC_EA(
+						user.getCompanyId(), emailAddress) != null) {
 
-						throw new DuplicateUserEmailAddressException();
-					}
+					throw new DuplicateUserEmailAddressException();
 				}
-			}
-			catch (NoSuchUserException nsue) {
 			}
 
 			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
@@ -2544,14 +2536,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		validateEmailAddress(emailAddress);
 
-		try {
-			User user = userPersistence.findByC_EA(companyId, emailAddress);
+		User user = userPersistence.fetchByC_EA(companyId, emailAddress);
 
-			if (user != null) {
-				throw new DuplicateUserEmailAddressException();
-			}
-		}
-		catch (NoSuchUserException nsue) {
+		if (user != null) {
+			throw new DuplicateUserEmailAddressException();
 		}
 
 		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(

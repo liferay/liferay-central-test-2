@@ -46,7 +46,6 @@ import com.liferay.portlet.shopping.ItemNameException;
 import com.liferay.portlet.shopping.ItemSKUException;
 import com.liferay.portlet.shopping.ItemSmallImageNameException;
 import com.liferay.portlet.shopping.ItemSmallImageSizeException;
-import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
@@ -866,10 +865,10 @@ public class ShoppingItemLocalServiceImpl
 			throw new ItemSKUException();
 		}
 
-		try {
-			ShoppingItem item = shoppingItemPersistence.findByC_S(
-				companyId, sku);
+		ShoppingItem item = shoppingItemPersistence.fetchByC_S(
+			companyId, sku);
 
+		if (item != null) {
 			if (itemId > 0) {
 				if (item.getItemId() != itemId) {
 					throw new DuplicateItemSKUException();
@@ -878,8 +877,6 @@ public class ShoppingItemLocalServiceImpl
 			else {
 				throw new DuplicateItemSKUException();
 			}
-		}
-		catch (NoSuchItemException nsie) {
 		}
 
 		if (Validator.isNull(name)) {

@@ -59,11 +59,11 @@ public class WebDAVPropsLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		try {
-			return webDAVPropsPersistence.findByC_C(classNameId, classPK);
-		}
-		catch (NoSuchWebDAVPropsException nswdpe) {
-			WebDAVProps webDavProps = webDAVPropsPersistence.create(
+		WebDAVProps webDavProps = webDAVPropsPersistence.fetchByC_C(
+			classNameId, classPK);
+
+		if (webDavProps == null) {
+			webDavProps = webDAVPropsPersistence.create(
 				counterLocalService.increment());
 
 			Date now = new Date();
@@ -75,9 +75,9 @@ public class WebDAVPropsLocalServiceImpl
 			webDavProps.setClassPK(classPK);
 
 			webDAVPropsPersistence.update(webDavProps, false);
-
-			return webDavProps;
 		}
+
+		return webDavProps;
 	}
 
 	public void storeWebDAVProps(WebDAVProps webDavProps)

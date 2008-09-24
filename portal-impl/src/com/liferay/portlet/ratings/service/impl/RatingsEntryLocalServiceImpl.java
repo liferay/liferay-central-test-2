@@ -28,7 +28,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
-import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
@@ -111,12 +110,10 @@ public class RatingsEntryLocalServiceImpl
 		double oldScore = 0;
 		Date now = new Date();
 
-		RatingsEntry entry = null;
-
-		try {
-			entry = ratingsEntryPersistence.findByU_C_C(
+		RatingsEntry entry = ratingsEntryPersistence.fetchByU_C_C(
 				userId, classNameId, classPK);
 
+		if (entry != null) {
 			oldScore = entry.getScore();
 
 			entry.setModifiedDate(now);
@@ -135,7 +132,7 @@ public class RatingsEntryLocalServiceImpl
 
 			ratingsStatsPersistence.update(stats, false);
 		}
-		catch (NoSuchEntryException nsee) {
+		else {
 			newEntry = true;
 
 			User user = userPersistence.findByPrimaryKey(userId);

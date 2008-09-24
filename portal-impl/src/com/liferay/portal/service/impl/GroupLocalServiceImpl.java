@@ -957,15 +957,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			throw new GroupFriendlyURLException(exceptionType);
 		}
 
-		try {
-			Group group = groupPersistence.findByC_F(companyId, friendlyURL);
+		Group group = groupPersistence.fetchByC_F(companyId, friendlyURL);
 
-			if (group.getGroupId() != groupId) {
-				throw new GroupFriendlyURLException(
-					GroupFriendlyURLException.DUPLICATE);
-			}
-		}
-		catch (NoSuchGroupException nsge) {
+		if ((group != null) && (group.getGroupId() != groupId)) {
+			throw new GroupFriendlyURLException(
+				GroupFriendlyURLException.DUPLICATE);
 		}
 
 		String groupIdFriendlyURL = friendlyURL.substring(1);

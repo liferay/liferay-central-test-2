@@ -25,7 +25,6 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.RelationUserIdException;
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.SocialRelationConstants;
@@ -58,13 +57,10 @@ public class SocialRelationLocalServiceImpl
 			throw new RelationUserIdException();
 		}
 
-		SocialRelation relation = null;
-
-		try {
-			relation = socialRelationPersistence.findByU1_U2_T(
+		SocialRelation relation = socialRelationPersistence.fetchByU1_U2_T(
 				userId1, userId2, type);
-		}
-		catch (NoSuchRelationException nsre) {
+
+		if (relation == null) {
 			long relationId = counterLocalService.increment();
 
 			relation = socialRelationPersistence.create(relationId);
@@ -79,10 +75,9 @@ public class SocialRelationLocalServiceImpl
 		}
 
 		if (SocialRelationConstants.isTypeBi(type)) {
-			try {
-				socialRelationPersistence.findByU1_U2_T(userId2, userId1, type);
-			}
-			catch (NoSuchRelationException nsre) {
+			if (socialRelationPersistence.fetchByU1_U2_T(
+				userId2, userId1, type) == null) {
+
 				long biRelationId = counterLocalService.increment();
 
 				SocialRelation biRelation = socialRelationPersistence.create(

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
@@ -43,12 +42,10 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 	}
 
 	public void deleteContact(long contactId) throws SystemException {
-		try {
-			Contact contact = contactPersistence.findByPrimaryKey(contactId);
+		Contact contact = contactPersistence.fetchByPrimaryKey(contactId);
 
+		if (contact != null) {
 			deleteContact(contact);
-		}
-		catch (NoSuchContactException nsce) {
 		}
 	}
 

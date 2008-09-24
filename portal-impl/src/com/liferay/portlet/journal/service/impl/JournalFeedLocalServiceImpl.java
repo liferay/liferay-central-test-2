@@ -40,7 +40,6 @@ import com.liferay.portlet.journal.FeedDescriptionException;
 import com.liferay.portlet.journal.FeedIdException;
 import com.liferay.portlet.journal.FeedNameException;
 import com.liferay.portlet.journal.FeedTargetLayoutFriendlyUrlException;
-import com.liferay.portlet.journal.NoSuchFeedException;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
@@ -435,12 +434,8 @@ public class JournalFeedLocalServiceImpl
 				throw new FeedIdException();
 			}
 
-			try {
-				journalFeedPersistence.findByG_F(groupId, feedId);
-
+			if (journalFeedPersistence.fetchByG_F(groupId, feedId) != null) {
 				throw new DuplicateFeedIdException();
-			}
-			catch (NoSuchFeedException nsfe) {
 			}
 		}
 

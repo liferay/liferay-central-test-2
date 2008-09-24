@@ -480,12 +480,10 @@ public class JournalStructureLocalServiceImpl
 		if (!autoStructureId) {
 			validateStructureId(structureId);
 
-			try {
-				journalStructurePersistence.findByG_S(groupId, structureId);
+			if (journalStructurePersistence.fetchByG_S(
+					groupId, structureId) != null) {
 
 				throw new DuplicateStructureIdException();
-			}
-			catch (NoSuchStructureException nste) {
 			}
 		}
 

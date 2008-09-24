@@ -107,13 +107,10 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 	}
 
 	public Release getRelease() throws SystemException {
-		Release release = null;
-
-		try {
-			release = releasePersistence.findByPrimaryKey(
+		Release release = releasePersistence.fetchByPrimaryKey(
 				ReleaseImpl.DEFAULT_ID);
-		}
-		catch (NoSuchReleaseException nsre) {
+
+		if (release == null) {
 			release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
 
 			Date now = new Date();

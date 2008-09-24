@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Subscription;
@@ -135,13 +134,12 @@ public class SubscriptionLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		try {
-			subscriptionPersistence.findByC_U_C_C(
-				companyId, userId, classNameId, classPK);
+		if (subscriptionPersistence.fetchByC_U_C_C(
+				companyId, userId, classNameId, classPK) != null) {
 
 			return true;
 		}
-		catch (NoSuchSubscriptionException nsse) {
+		else {
 			return false;
 		}
 	}

@@ -26,7 +26,6 @@ import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
-import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchUserException;
@@ -510,13 +509,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Account
 
-		Account account = null;
+		Account account = accountPersistence.fetchByPrimaryKey(
+			company.getAccountId());
 
-		try {
-			account = accountPersistence.findByPrimaryKey(
-				company.getAccountId());
-		}
-		catch (NoSuchAccountException nsae) {
+		if (account == null) {
 			long accountId = counterLocalService.increment();
 
 			account = accountPersistence.create(accountId);

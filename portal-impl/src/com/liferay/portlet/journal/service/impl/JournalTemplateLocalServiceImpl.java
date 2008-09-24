@@ -636,12 +636,10 @@ public class JournalTemplateLocalServiceImpl
 		if (!autoTemplateId) {
 			validate(templateId);
 
-			try {
-				journalTemplatePersistence.findByG_T(groupId, templateId);
+			if (journalTemplatePersistence.fetchByG_T(
+					groupId, templateId) != null) {
 
 				throw new DuplicateTemplateIdException();
-			}
-			catch (NoSuchTemplateException nste) {
 			}
 		}
 

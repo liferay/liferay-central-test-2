@@ -23,7 +23,6 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.DuplicateOrganizationException;
-import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationNameException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
@@ -277,13 +276,13 @@ public class OrganizationLocalServiceImpl
 	public long getOrganizationId(long companyId, String name)
 		throws SystemException {
 
-		try {
-			Organization organization = organizationPersistence.findByC_N(
-				companyId, name);
+		Organization organization = organizationPersistence.fetchByC_N(
+			companyId, name);
 
+		if (organization != null) {
 			return organization.getOrganizationId();
 		}
-		catch (NoSuchOrganizationException nsoge) {
+		else {
 			return 0;
 		}
 	}
@@ -586,17 +585,13 @@ public class OrganizationLocalServiceImpl
 			// Ensure parent organization exists and belongs to the proper
 			// company
 
-			try {
-				Organization parentOrganization =
-					organizationPersistence.findByPrimaryKey(
-						parentOrganizationId);
+			Organization parentOrganization =
+				organizationPersistence.fetchByPrimaryKey(
+					parentOrganizationId);
 
-				if (companyId != parentOrganization.getCompanyId()) {
-					parentOrganizationId =
-						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
-				}
-			}
-			catch (NoSuchOrganizationException nsoe) {
+			if ((parentOrganization == null) ||
+				(companyId != parentOrganization.getCompanyId())) {
+
 				parentOrganizationId =
 					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 			}
@@ -675,19 +670,15 @@ public class OrganizationLocalServiceImpl
 			(parentOrganizationId !=
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
-			try {
-				Organization parentOrganization =
-					organizationPersistence.findByPrimaryKey(
-						parentOrganizationId);
+			Organization parentOrganization =
+				organizationPersistence.fetchByPrimaryKey(
+					parentOrganizationId);
 
-				if ((companyId != parentOrganization.getCompanyId()) ||
-					(parentOrganizationId == organizationId) ||
-					(parentOrganization.isLocation())) {
+			if ((parentOrganization == null) ||
+				(companyId != parentOrganization.getCompanyId()) ||
+				(parentOrganizationId == organizationId) ||
+				(parentOrganization.isLocation())) {
 
-					throw new OrganizationParentException();
-				}
-			}
-			catch (NoSuchOrganizationException nsoe) {
 				throw new OrganizationParentException();
 			}
 		}
@@ -707,19 +698,17 @@ public class OrganizationLocalServiceImpl
 			throw new OrganizationNameException();
 		}
 		else {
-			try {
-				Organization organization = organizationPersistence.findByC_N(
-					companyId, name);
+			Organization organization = organizationPersistence.fetchByC_N(
+				companyId, name);
 
-				if (organization.getName().equalsIgnoreCase(name)) {
-					if ((organizationId <= 0) ||
-						(organization.getOrganizationId() != organizationId)) {
+			if ((organization != null) &&
+				(organization.getName().equalsIgnoreCase(name))) {
 
-						throw new DuplicateOrganizationException();
-					}
+				if ((organizationId <= 0) ||
+					(organization.getOrganizationId() != organizationId)) {
+
+					throw new DuplicateOrganizationException();
 				}
-			}
-			catch (NoSuchOrganizationException nsoe) {
 			}
 		}
 

@@ -46,7 +46,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
-import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
@@ -830,15 +829,13 @@ public class SCProductEntryLocalServiceImpl
 			throw new ProductEntryAuthorException();
 		}
 
-		try {
-			SCProductEntry productEntry = scProductEntryPersistence.findByRG_RA(
-				repoGroupId, repoArtifactId);
+		SCProductEntry productEntry = scProductEntryPersistence.fetchByRG_RA(
+			repoGroupId, repoArtifactId);
 
-			if (productEntry.getProductEntryId() != productEntryId) {
-				throw new DuplicateProductEntryModuleIdException();
-			}
-		}
-		catch (NoSuchProductEntryException nspee) {
+		if ((productEntry != null) &&
+			(productEntry.getProductEntryId() != productEntryId)) {
+
+			throw new DuplicateProductEntryModuleIdException();
 		}
 
 		if (licenseIds.length == 0) {
