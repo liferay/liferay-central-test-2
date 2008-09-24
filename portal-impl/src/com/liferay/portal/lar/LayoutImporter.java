@@ -531,9 +531,9 @@ public class LayoutImporter {
 			String portletId = portletRefEl.attributeValue("portlet-id");
 			long layoutId = GetterUtil.getLong(
 				portletRefEl.attributeValue("layout-id"));
+			long plid = newLayoutIdPlidMap.get(layoutId);
 			long oldPlid = GetterUtil.getLong(
 				portletRefEl.attributeValue("old-plid"));
-			long plid = newLayoutIdPlidMap.get(layoutId);
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 

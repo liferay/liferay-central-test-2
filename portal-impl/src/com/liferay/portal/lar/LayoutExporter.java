@@ -259,8 +259,8 @@ public class LayoutExporter {
 					String key = PortletPermissionUtil.getPrimaryKey(
 						layout.getPlid(), portletId);
 
-					portletIds.put(key, new Object[] {
-						portletId, new Long(layout.getPlid())});
+					portletIds.put(
+						key, new Object[] {portletId, layout.getPlid()});
 				}
 			}
 

@@ -74,6 +74,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
@@ -433,7 +434,8 @@ public class PortletExporter {
 				if (!_notUniquePerLayout.contains(portletId)) {
 					_notUniquePerLayout.add(portletId);
 
-					exportPortletData(context, portlet, layout, jxPrefs, portletEl);
+					exportPortletData(
+						context, portlet, layout, jxPrefs, portletEl);
 				}
 			}
 			else {
@@ -1113,6 +1115,6 @@ public class PortletExporter {
 
 	private static Log _log = LogFactory.getLog(PortletExporter.class);
 
-	private HashSet<String> _notUniquePerLayout = new HashSet<String>();
+	private Set<String> _notUniquePerLayout = new HashSet<String>();
 
 }
