@@ -81,6 +81,14 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
+		return _instance._search(
+			companyId, query, new Sort[] {sort}, start, end);
+	}
+
+	public static Hits search(
+			long companyId, Query query, Sort[] sort, int start, int end)
+		throws SearchException {
+
 		return _instance._search(companyId, query, sort, start, end);
 	}
 
@@ -154,7 +162,7 @@ public class SearchEngineUtil {
 	}
 
 	private Hits _search(
-			long companyId, Query query, Sort sort, int start, int end)
+			long companyId, Query query, Sort[] sort, int start, int end)
 		throws SearchException {
 
 		return _messageBusIndexSearcher.search(

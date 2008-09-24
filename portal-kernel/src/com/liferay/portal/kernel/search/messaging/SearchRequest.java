@@ -90,11 +90,11 @@ public class SearchRequest {
 		_query = query;
 	}
 
-	public Sort getSort() {
+	public Sort[] getSort() {
 		return _sort;
 	}
 
-	public void setSort(Sort sort) {
+	public void setSort(Sort[] sort) {
 		_sort = sort;
 	}
 
@@ -119,7 +119,7 @@ public class SearchRequest {
 	private String _id;
 	private Document _doc;
 	private Query _query;
-	private Sort _sort;
+	private Sort[] _sort;
 	private int _start;
 	private int _end;
 

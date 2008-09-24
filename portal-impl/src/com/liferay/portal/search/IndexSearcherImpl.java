@@ -46,7 +46,7 @@ public class IndexSearcherImpl implements IndexSearcher {
 	}
 
 	public Hits search(
-			long companyId, Query query, Sort sort, int start, int end)
+			long companyId, Query query, Sort[] sort, int start, int end)
 		throws SearchException {
 
 		try {

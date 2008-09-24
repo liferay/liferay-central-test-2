@@ -78,7 +78,7 @@ public class LuceneSearchEngineUtil {
 	}
 
 	public static Hits search(
-			long companyId, Query query, Sort sort, int start, int end)
+			long companyId, Query query, Sort[] sort, int start, int end)
 		throws SearchException {
 
 		return _engine.getSearcher().search(companyId, query, sort, start, end);
