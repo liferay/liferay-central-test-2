@@ -23,86 +23,56 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
-import com.liferay.portal.kernel.dao.search.SearchEntry;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-
-import java.util.List;
-
-import javax.portlet.PortletURL;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="SearchContainerColumnButtonTag.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="PropertyTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class SearchContainerColumnButtonTag
-	extends SearchContainerColumnTag {
-
-	public int doEndTag() {
-		try {
-			SearchContainerRowTag parentTag =
-				(SearchContainerRowTag)findAncestorWithClass(
-					this, SearchContainerRowTag.class);
-
-			ResultRow row = parentTag.getRow();
-
-			if (_index <= -1) {
-				_index = row.getEntries().size();
-			}
-
-			row.addButton(
-				_index, getAlign(), getValign(), getColspan(), getName(),
-				(String)getHref());
-
-			return EVAL_PAGE;
-		}
-		finally {
-			_align = SearchEntry.DEFAULT_ALIGN;
-			_colspan = SearchEntry.DEFAULT_COLSPAN;
-			_href = null;
-			_index = -1;
-			_name = StringPool.BLANK;
-			_valign = SearchEntry.DEFAULT_VALIGN;
-		}
-	}
+public class SearchContainerRowParameterTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		SearchContainerRowTag parentRowTag =
-			(SearchContainerRowTag)findAncestorWithClass(
-				this, SearchContainerRowTag.class);
+		SearchContainerRowTag parentRowTag = (SearchContainerRowTag)
+			findAncestorWithClass(this, SearchContainerRowTag.class);
 
 		if (parentRowTag == null) {
 			throw new JspTagException(
 				"Requires liferay-ui:search-container-row");
 		}
 
-		if (!parentRowTag.isHeaderNamesAssigned()) {
-			List<String> headerNames = parentRowTag.getHeaderNames();
+		ResultRow row = parentRowTag.getRow();
 
-			headerNames.add(_name);
+		if (_name.equals("className")) {
+			row.setClassName((String)_name);
+		}
+		else if (_name.equals("classHoverName")) {
+			row.setClassHoverName((String)_value);
+		}
+		else if (_name.equals("restricted")) {
+			row.setRestricted(GetterUtil.getBoolean((String)_value, false));
+		}
+		else {
+			row.setParameter(_name, _value);
 		}
 
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public Object getHref() {
-		if (Validator.isNotNull(_href) && (_href instanceof PortletURL)) {
-			_href = _href.toString();
-		}
-
-		return _href;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public void setHref(Object href) {
-		_href = href;
+	public void setValue(Object value) {
+		_value = value;
 	}
 
-	private Object _href;
+	private String _name;
+	private Object _value;
 
 }

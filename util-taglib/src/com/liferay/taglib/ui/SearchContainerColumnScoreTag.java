@@ -23,8 +23,6 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
-import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.List;
 
@@ -39,7 +37,7 @@ import javax.servlet.jsp.JspTagException;
  *
  */
 public class SearchContainerColumnScoreTag
-	extends ParamAndPropertyAncestorTagImpl {
+	extends SearchContainerColumnTag {
 
 	private static final String DEFAULT_NAME = "score";
 
@@ -77,46 +75,22 @@ public class SearchContainerColumnScoreTag
 		}
 
 		if (!parentRowTag.isHeaderNamesAssigned()) {
-			SearchContainerTag parentSearchContainerTag =
-				(SearchContainerTag)findAncestorWithClass(
-					this, SearchContainerTag.class);
+			List<String> headerNames = parentRowTag.getHeaderNames();
 
-			SearchContainer searchContainer =
-				parentSearchContainerTag.getSearchContainer();
-
-			List<String> headerNames = searchContainer.getHeaderNames();
-
-			headerNames.add(getName());
+			headerNames.add(_name);
 		}
 
 		return EVAL_BODY_INCLUDE;
-	}
-
-	public int getIndex() {
-		return _index;
-	}
-
-	public String getName() {
-		return _name;
 	}
 
 	public float getScore() {
 		return _score;
 	}
 
-	public void setIndex(int index) {
-		_index = index;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
 	public void setScore(float score) {
 		_score = score;
 	}
 
-	private int _index = -1;
 	private String _name = DEFAULT_NAME;
 	private float _score;
 

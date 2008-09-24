@@ -22,47 +22,64 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.taglib.util.IncludeTag;
+import com.liferay.portal.kernel.dao.search.SearchEntry;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="SearchFormTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerColumnTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class SearchFormTag extends IncludeTag {
+public abstract class SearchContainerColumnTag
+	extends ParamAndPropertyAncestorTagImpl {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		SearchContainerTag parentTag = (SearchContainerTag)
-			findAncestorWithClass(this, SearchContainerTag.class);
-
-		if (parentTag != null) {
-			_searchContainer = parentTag.getSearchContainer();
-		}
-
-		request.setAttribute(
-			"liferay-ui:search:searchContainer", _searchContainer);
-		request.setAttribute(
-			"liferay-ui:search:showAddButton", String.valueOf(_showAddButton));
-
-		return EVAL_BODY_BUFFERED;
+	public String getAlign() {
+		return _align;
 	}
 
-	public void setSearchContainer(SearchContainer<?> searchContainer) {
-		_searchContainer = searchContainer;
+	public int getColspan() {
+		return _colspan;
 	}
 
-	public void setShowAddButton(boolean showAddButton) {
-		_showAddButton = showAddButton;
+	public int getIndex() {
+		return _index;
 	}
 
-	private SearchContainer<?> _searchContainer;
-	private boolean _showAddButton = false;
+	public String getName() {
+		return _name;
+	}
+
+	public String getValign() {
+		return _valign;
+	}
+
+	public void setAlign(String align) {
+		_align = align;
+	}
+
+	public void setColspan(int colspan) {
+		_colspan = colspan;
+	}
+
+	public void setIndex(int index) {
+		_index = index;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setValign(String valign) {
+		_valign = valign;
+	}
+
+	protected String _align = SearchEntry.DEFAULT_ALIGN;
+	protected int _colspan = SearchEntry.DEFAULT_COLSPAN;
+	protected int _index = -1;
+	protected String _name = StringPool.BLANK;
+	protected String _valign = SearchEntry.DEFAULT_VALIGN;
 
 }

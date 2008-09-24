@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ import javax.servlet.jsp.JspTagException;
  *
  */
 public class SearchContainerColumnJSPTag
-	extends ParamAndPropertyAncestorTagImpl {
+	extends SearchContainerColumnTag {
 
 	public int doEndTag() {
 		try {
@@ -82,74 +81,22 @@ public class SearchContainerColumnJSPTag
 		}
 
 		if (!parentRowTag.isHeaderNamesAssigned()) {
-			SearchContainerTag parentSearchContainerTag =
-				(SearchContainerTag)findAncestorWithClass(
-					this, SearchContainerTag.class);
+			List<String> headerNames = parentRowTag.getHeaderNames();
 
-			SearchContainer searchContainer =
-				parentSearchContainerTag.getSearchContainer();
-
-			List<String> headerNames = searchContainer.getHeaderNames();
-
-			headerNames.add(getName());
+			headerNames.add(_name);
 		}
 
 		return EVAL_BODY_INCLUDE;
-	}
-
-	public String getAlign() {
-		return _align;
-	}
-
-	public int getColspan() {
-		return _colspan;
-	}
-
-	public int getIndex() {
-		return _index;
-	}
-
-	public String getName() {
-		return _name;
 	}
 
 	public String getPath() {
 		return _path;
 	}
 
-	public String getValign() {
-		return _valign;
-	}
-
-	public void setAlign(String align) {
-		_align = align;
-	}
-
-	public void setColspan(int colspan) {
-		_colspan = colspan;
-	}
-
-	public void setIndex(int index) {
-		_index = index;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
 	public void setPath(String path) {
 		_path = path;
 	}
 
-	public void setValign(String valign) {
-		_valign = valign;
-	}
-
-	private String _align = SearchEntry.DEFAULT_ALIGN;
-	private int _colspan = SearchEntry.DEFAULT_COLSPAN;
-	private int _index = -1;
-	private String _name = StringPool.BLANK;
 	private String _path;
-	private String _valign = SearchEntry.DEFAULT_VALIGN;
 
 }

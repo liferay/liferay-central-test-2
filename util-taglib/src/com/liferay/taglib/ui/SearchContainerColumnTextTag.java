@@ -27,9 +27,7 @@ import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.dao.search.TextSearchEntry;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -40,6 +38,7 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.BodyContent;
 
 /**
  * <a href="SearchContainerColumnTextTag.java.html"><b><i>View Source</i></b>
@@ -48,8 +47,7 @@ import javax.servlet.jsp.JspTagException;
  * @author Raymond Augé
  *
  */
-public class SearchContainerColumnTextTag
-	extends ParamAndPropertyAncestorTagImpl {
+public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 
 	public int doAfterBody() {
 		return SKIP_BODY;
@@ -72,7 +70,11 @@ public class SearchContainerColumnTextTag
 					_value = _sb.toString();
 				}
 				else if (Validator.isNull(_value)) {
-					_value = getBodyContent().getString();
+					BodyContent bc = getBodyContent();
+
+					if (bc != null) {
+						_value = bc.getString();
+					}
 				}
 			}
 
@@ -119,14 +121,7 @@ public class SearchContainerColumnTextTag
 		}
 
 		if (!parentRowTag.isHeaderNamesAssigned()) {
-			SearchContainerTag parentSearchContainerTag =
-				(SearchContainerTag)findAncestorWithClass(
-					this, SearchContainerTag.class);
-
-			SearchContainer searchContainer =
-				parentSearchContainerTag.getSearchContainer();
-
-			List<String> headerNames = searchContainer.getHeaderNames();
+			List<String> headerNames = parentRowTag.getHeaderNames();
 
 			String name = getName();
 
@@ -134,29 +129,20 @@ public class SearchContainerColumnTextTag
 				name = _property;
 			}
 
-			if (headerNames == null) {
-				headerNames = new ArrayList<String>();
-
-				searchContainer.setHeaderNames(headerNames);
-			}
-
 			headerNames.add(name);
 
 			if (_orderable) {
 				Map<String,String> orderableHeaders =
-					searchContainer.getOrderableHeaders();
-
-				if (orderableHeaders == null) {
-					orderableHeaders = new LinkedHashMap<String, String>();
-
-					searchContainer.setOrderableHeaders(orderableHeaders);
-				}
+					parentRowTag.getOrderableHeaders();
 
 				if (Validator.isNotNull(_orderableProperty)) {
-					orderableHeaders.put(getName(), _orderableProperty);
+					orderableHeaders.put(name, _orderableProperty);
 				}
 				else if (Validator.isNotNull(_property)) {
-					orderableHeaders.put(getName(), _property);
+					orderableHeaders.put(name, _property);
+				}
+				else if (Validator.isNotNull(name)) {
+					orderableHeaders.put(name, name);
 				}
 			}
 		}
@@ -179,16 +165,8 @@ public class SearchContainerColumnTextTag
 		}
 	}
 
-	public String getAlign() {
-		return _align;
-	}
-
 	public String getBuffer() {
 		return _buffer;
-	}
-
-	public int getColspan() {
-		return _colspan;
 	}
 
 	public Object getHref() {
@@ -197,19 +175,6 @@ public class SearchContainerColumnTextTag
 		}
 
 		return _href;
-	}
-
-	public int getIndex() {
-		return _index;
-	}
-
-	public String getName() {
-		if (Validator.isNull(_name)) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _name;
-		}
 	}
 
 	public String getOrderableProperty() {
@@ -228,10 +193,6 @@ public class SearchContainerColumnTextTag
 		return _title;
 	}
 
-	public String getValign() {
-		return _valign;
-	}
-
 	public String getValue() {
 		return _value;
 	}
@@ -240,28 +201,12 @@ public class SearchContainerColumnTextTag
 		return _orderable;
 	}
 
-	public void setAlign(String align) {
-		_align = align;
-	}
-
 	public void setBuffer(String buffer) {
 		_buffer = buffer;
 	}
 
-	public void setColspan(int colspan) {
-		_colspan = colspan;
-	}
-
 	public void setHref(Object href) {
 		_href = href;
-	}
-
-	public void setIndex(int index) {
-		_index = index;
-	}
-
-	public void setName(String name) {
-		_name = name;
 	}
 
 	public void setOrderable(boolean orderable) {
@@ -284,27 +229,18 @@ public class SearchContainerColumnTextTag
 		_title = title;
 	}
 
-	public void setValign(String valign) {
-		_valign = valign;
-	}
-
 	public void setValue(String value) {
 		_value = value;
 	}
 
-	private String _align = SearchEntry.DEFAULT_ALIGN;
 	private String _buffer;
-	private int _colspan = SearchEntry.DEFAULT_COLSPAN;
 	private Object _href;
-	private int _index = -1;
-	private String _name;
 	private boolean _orderable;
 	private String _orderableProperty;
 	private String _property;
 	private StringBuilder _sb;
 	private String _target;
 	private String _title;
-	private String _valign = SearchEntry.DEFAULT_VALIGN;
 	private String _value;
 
 }

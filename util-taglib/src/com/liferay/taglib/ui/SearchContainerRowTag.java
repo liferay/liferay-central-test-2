@@ -29,7 +29,10 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.lang.reflect.Method;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -62,14 +65,30 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 			_row.setRestricted(GetterUtil.getBoolean(value, false));
 		}
 		else {
-			_row.setParameter(name, value);
+			Object obj = pageContext.getAttribute(value);
+
+			if (obj == null) {
+				obj = value;
+			}
+
+			_row.setParameter(name, obj);
 		}
 	}
 
 	public int doAfterBody() throws JspException {
-		_resultRows.add(_row);
+		if (!_headerNamesAssigned) {
+			SearchContainerTag parentTag =
+				(SearchContainerTag)findAncestorWithClass(
+					this, SearchContainerTag.class);
 
-		_headerNamesAssigned = true;
+			parentTag.getSearchContainer().setHeaderNames(_headerNames);
+			parentTag.getSearchContainer().setOrderableHeaders(
+				_orderableHeaders);
+
+			_headerNamesAssigned = true;
+		}
+
+		_resultRows.add(_row);
 
 		_rowIndex++;
 
@@ -88,9 +107,11 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		_className = null;
 		_escapedModel = false;
 		_headerNamesAssigned = false;
+		_headerNames = null;
 		_indexVar = DEFAULT_INDEX_VAR;
 		_keyProperty = null;
 		_modelVar = DEFAULT_MODEL_VAR;
+		_orderableHeaders = null;
 		_resultRows = null;
 		_rowIndex = 0;
 		_rowVar = DEFAULT_ROW_VAR;
@@ -130,6 +151,14 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		return _className;
 	}
 
+	public List<String> getHeaderNames() {
+		if (_headerNames == null) {
+			_headerNames = new ArrayList<String>();
+		}
+
+		return _headerNames;
+	}
+
 	public String getIndexVar() {
 		return _indexVar;
 	}
@@ -140,6 +169,14 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 
 	public String getModelVar() {
 		return _modelVar;
+	}
+
+	public Map<String, String> getOrderableHeaders() {
+		if (_orderableHeaders == null) {
+			_orderableHeaders = new LinkedHashMap<String, String>();
+		}
+
+		return _orderableHeaders;
 	}
 
 	public ResultRow getRow() {
@@ -182,6 +219,10 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		_headerNamesAssigned = headerNamesAssigned;
 	}
 
+	public void setHeaderNames(List<String> headerNames) {
+		_headerNames = headerNames;
+	}
+
 	public void setIndexVar(String indexVar) {
 		_indexVar = indexVar;
 	}
@@ -192,6 +233,10 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 
 	public void setModelVar(String var) {
 		_modelVar = var;
+	}
+
+	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
+		_orderableHeaders = orderableHeaders;
 	}
 
 	public void setRow(ResultRow row) {
@@ -256,10 +301,12 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	private boolean _bold;
 	private String _className;
 	private boolean _escapedModel;
-	private boolean _headerNamesAssigned;
+	private boolean _headerNamesAssigned = false;
+	private List<String> _headerNames;
 	private String _indexVar = DEFAULT_INDEX_VAR;
 	private String _keyProperty;
 	private String _modelVar = DEFAULT_MODEL_VAR;
+	private Map<String, String> _orderableHeaders;
 	private List _results;
 	private List<ResultRow> _resultRows;
 	private int _rowIndex;

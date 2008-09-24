@@ -30,14 +30,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
@@ -57,10 +53,8 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_displayTerms = null;
 		_emptyResultsMessage = null;
 		_hasResults = false;
-		_headerNames = null;
 		_hover = false;
 		_iteratorURL = null;
-		_orderableHeaders = null;
 		_orderByCol = null;
 		_orderByComparator = null;
 		_orderByType = null;
@@ -91,15 +85,10 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 			if (_searchContainer == null) {
 				_searchContainer = new SearchContainer(
 					portletRequest, _displayTerms, _searchTerms, getCurParam(),
-					getDelta(), _iteratorURL, _headerNames,
-					_emptyResultsMessage);
+					getDelta(), _iteratorURL,  null, _emptyResultsMessage);
 			}
 
 			_searchContainer.setHover(_hover);
-
-			if (_orderableHeaders != null) {
-				_searchContainer.setOrderableHeaders(_orderableHeaders);
-			}
 
 			if (Validator.isNotNull(_orderByCol)) {
 				_searchContainer.setOrderByCol(_orderByCol);
@@ -142,16 +131,8 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		return _emptyResultsMessage;
 	}
 
-	public List<String> getHeaderNames() {
-		return _headerNames;
-	}
-
 	public PortletURL getIteratorURL() {
 		return _iteratorURL;
-	}
-
-	public Map<String, String> getOrderableHeaders() {
-		return _orderableHeaders;
 	}
 
 	public String getOrderByCol() {
@@ -210,20 +191,12 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_hasResults = hasResults;
 	}
 
-	public void setHeaderNames(List<String> headerNames) {
-		_headerNames = headerNames;
-	}
-
 	public void setHover(boolean hover) {
 		_hover = hover;
 	}
 
 	public void setIteratorURL(PortletURL iteratorURL) {
 		_iteratorURL = iteratorURL;
-	}
-
-	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
-		_orderableHeaders = orderableHeaders;
 	}
 
 	public void setOrderByCol(String orderByCol) {
@@ -259,11 +232,9 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;
 	private boolean _hasResults;
-	private List<String> _headerNames;
 	private boolean _hover;
 	private PortletURL _iteratorURL;
 	private OrderByComparator _orderByComparator;
-	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByType;
 	private RowChecker _rowChecker;
