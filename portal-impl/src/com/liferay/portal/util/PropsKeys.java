@@ -513,6 +513,8 @@ public class PropsKeys {
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
+	public static final String JOURNAL_WORKFLOW_IMPL = "journal.workflow.impl";
+
 	public static final String LAST_MODIFIED_CHECK = "last.modified.check";
 
 	public static final String LAST_MODIFIED_PATHS = "last.modified.paths";
