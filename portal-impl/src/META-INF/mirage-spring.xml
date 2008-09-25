@@ -6,62 +6,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="com.liferay.portal.mirage.ArticleImageService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.BinaryContentService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.ArticleImageServiceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ArticleResourceService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.BinaryContentService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.ArticleResourceServiceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentFeedService" class="org.springframework.aop.framework.ProxyFactoryBean"  parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.ContentFeedService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.ContentFeedServiceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentSearchService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.BinaryContentService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.ContentSearchServiceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.ContentService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.ContentServiceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentTypeService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.ContentTypeService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.ContentTypeServiceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.WorkflowService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
-		<property name="proxyInterfaces">
-			<value>com.sun.portal.cms.mirage.service.custom.WorkflowService</value>
-		</property>
-		<property name="target">
-			<bean class="com.liferay.portal.mirage.service.WorkflowServiceImpl" />
-		</property>
-	</bean>
+	<bean id="com.liferay.portal.mirage.ArticleImageService" class="com.liferay.portal.mirage.service.ArticleImageServiceImpl" />
+	<bean id="com.liferay.portal.mirage.ArticleResourceService" class="com.liferay.portal.mirage.service.ArticleResourceServiceImpl" />
+	<bean id="com.liferay.portal.mirage.ContentFeedService" class="com.liferay.portal.mirage.service.ContentFeedServiceImpl" />
+	<bean id="com.liferay.portal.mirage.ContentSearchService" class="com.liferay.portal.mirage.service.ContentSearchServiceImpl" />
+	<bean id="com.liferay.portal.mirage.ContentService" class="com.liferay.portal.mirage.service.ContentServiceImpl" />
+	<bean id="com.liferay.portal.mirage.ContentTypeService" class="com.liferay.portal.mirage.service.ContentTypeServiceImpl" />
+	<bean id="com.liferay.portal.mirage.WorkflowService" class="com.liferay.portal.mirage.service.WorkflowServiceImpl" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect" />
@@ -69,7 +20,10 @@
 	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" />
 	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" />
 	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" />
-	<aop:config>
+	<aop:config>		
+		<aop:aspect id="mirageServiceAspect" ref="logAspect">
+			<aop:around pointcut="bean(com.liferay.portal.mirage.*Service)" method="invoke" />
+		</aop:aspect>
 		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl)" method="invoke" />
 		</aop:aspect>

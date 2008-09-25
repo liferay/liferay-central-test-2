@@ -41,57 +41,52 @@
 
 package com.liferay.portal.spring.aop;
 
-import java.lang.reflect.Method;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.aop.AfterReturningAdvice;
-import org.springframework.aop.MethodBeforeAdvice;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 
 /**
- * <a href="LogInterceptor.java.html"><b><i>View Source</i></b></a>
+ * <a href="LogAspect.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
  * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class LogInterceptor
-	implements AfterReturningAdvice, MethodBeforeAdvice {
+public class LogAspect {
 
-	public void afterReturning(
-			Object returnValue, Method method, Object[] args, Object target)
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		Log log = getLog(method);
+		String typeName = 
+			proceedingJoinPoint.getTarget().getClass().getName();
+
+		Log log = getLog(typeName);
 
 		if (log.isInfoEnabled()) {
-			log.info("After " + method.getName());
+			log.info("Before " + typeName);
 		}
-	}
-
-	public void before(Method method, Object[] args, Object target)
-		throws Throwable {
-
-		Log log = getLog(method);
+	
+		Object returnVal = proceedingJoinPoint.proceed();
 
 		if (log.isInfoEnabled()) {
-			log.info("Before " + method.getName());
+			log.info("After " + typeName);
 		}
+		
+		return returnVal;
 	}
 
-	protected Log getLog(Method method) {
-		Class<?> classObj = method.getDeclaringClass();
-
-		Log log = _logs.get(classObj.getName());
+	protected Log getLog(String typeName) {
+		Log log = _logs.get(typeName);
 
 		if (log == null) {
-			log = LogFactory.getLog(classObj);
+			log = LogFactory.getLog(typeName);
 
-			_logs.put(classObj.getName(), log);
+			_logs.put(typeName, log);
 		}
 
 		return log;
