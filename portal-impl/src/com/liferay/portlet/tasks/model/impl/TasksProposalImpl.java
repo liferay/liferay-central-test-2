@@ -79,7 +79,7 @@ public class TasksProposalImpl
 		}
 
 		return LanguageUtil.format(
-			getCompanyId(), locale, status, String.valueOf(stage));
+			getCompanyId(), locale, status, String.valueOf(stage + 1));
 	}
 
 	protected String getStatus(int stage) throws SystemException {

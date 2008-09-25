@@ -219,7 +219,7 @@ for (int i = 2; i <= workflowStages; i++) {
 			</tr>
 			<tr>
 				<td>
-					<liferay-ui:message key="stage" /> <%= i %>:
+					<liferay-ui:message key="stage" /> <%= i + 1 %>:
 
 					<%= workflowRoleName %>
 				</td>
@@ -423,7 +423,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Stage
 
-	row.addText(String.valueOf(curReview.getStage()));
+	row.addText(String.valueOf(curReview.getStage() + 1));
 
 	// Status
 
