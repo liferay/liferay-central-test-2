@@ -28,13 +28,9 @@ import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
@@ -267,23 +263,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return lockService.lock(
 			DLFileEntry.class.getName(), lockId, getUser().getUserId(), owner,
 			expirationTime);
-	}
-
-	public void publishFileEntryToMessageBus(long folderId, String name)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = getFileEntry(folderId, name);
-
-		if (!PropsValues.DL_PUBLISH_TO_MESSAGE_BUS) {
-			return;
-		}
-
-		Message message = new Message();
-
-		message.put("userId", getUserId());
-		message.put("entryId", fileEntry.getFileEntryId());
-
-		MessageBusUtil.sendMessage(DestinationNames.DOCUMENT_LIBRARY, message);
 	}
 
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)

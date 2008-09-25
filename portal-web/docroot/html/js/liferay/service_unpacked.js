@@ -1519,13 +1519,6 @@ Liferay.Service.DL.DLFileEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	publishFileEntryToMessageBus: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "publishFileEntryToMessageBus";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	refreshFileEntryLock: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "refreshFileEntryLock";

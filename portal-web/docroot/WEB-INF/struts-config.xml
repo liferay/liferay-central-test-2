@@ -335,8 +335,6 @@
 
 		<action path="/document_library/get_folders" type="com.liferay.portlet.documentlibrary.action.GetFoldersAction" />
 
-		<action path="/document_library/publish_to_message_bus" type="com.liferay.portlet.documentlibrary.action.PublishToMessageBusAction" />
-
 		<action path="/document_library/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/document_library/search" forward="portlet.document_library.search" />

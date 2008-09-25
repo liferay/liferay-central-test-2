@@ -396,9 +396,6 @@ public class PropsValues {
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
 
-	public static boolean DL_PUBLISH_TO_MESSAGE_BUS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.DL_PUBLISH_TO_MESSAGE_BUS));
-
 	public static final String EDITOR_WYSIWYG_DEFAULT =
 		PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 

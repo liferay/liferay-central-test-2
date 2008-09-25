@@ -38,28 +38,7 @@ if (result instanceof DLFileEntry) {
 else {
 	fileShortcut = (DLFileShortcut)result;
 }
-
-ResourceURL publishToMessageBusURL = renderResponse.createResourceURL();
-
-publishToMessageBusURL.setParameter("struts_action", "/document_library/publish_to_message_bus");
-publishToMessageBusURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
-publishToMessageBusURL.setParameter("name", HtmlUtil.unescape(fileEntry.getName()));
 %>
-
-<script type="text/javascript">
-	function <portlet:namespace />publishToMessageBus() {
-		jQuery("#<portlet:namespace />publishSuccess").hide();
-
-		jQuery.ajax(
-			{
-				url: '<%= publishToMessageBusURL %>',
-				success: function(html) {
-					jQuery("#<portlet:namespace />publishSuccess").show("slow");
-				}
-			}
-		);
-	}
-</script>
 
 <liferay-ui:icon-menu>
 	<c:choose>
@@ -107,10 +86,6 @@ publishToMessageBusURL.setParameter("name", HtmlUtil.unescape(fileEntry.getName(
 				</portlet:actionURL>
 
 				<liferay-ui:icon-delete url="<%= deleteURL %>" />
-			</c:if>
-
-			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) && PropsValues.DL_PUBLISH_TO_MESSAGE_BUS %>">
-				<liferay-ui:icon image="submit" label="publish" url='<%= "javascript: " + renderResponse.getNamespace() + "publishToMessageBus();" %>' />
 			</c:if>
 		</c:when>
 		<c:otherwise>

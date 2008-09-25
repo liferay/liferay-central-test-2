@@ -160,13 +160,6 @@ public class DLFileEntryServiceUtil {
 		return getService().lockFileEntry(folderId, name, owner, expirationTime);
 	}
 
-	public static void publishFileEntryToMessageBus(long folderId,
-		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		getService().publishFileEntryToMessageBus(folderId, name);
-	}
-
 	public static com.liferay.lock.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException {

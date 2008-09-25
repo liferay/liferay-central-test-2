@@ -88,10 +88,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 	</c:when>
 </c:choose>
 
-<span id="<portlet:namespace />publishSuccess" class="portlet-msg-success" style="display: none;">
-	<liferay-ui:message key="file-successfully-published-to-message-bus" />
-</span>
-
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
 		<c:if test="<%= showBreadcrumbs && (folder != null) %>">

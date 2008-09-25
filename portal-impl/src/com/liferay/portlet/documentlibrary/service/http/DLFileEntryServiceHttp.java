@@ -821,45 +821,6 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
-	public static void publishFileEntryToMessageBus(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(folderId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"publishFileEntryToMessageBus",
-					new Object[] { paramObj0, paramObj1 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.lock.model.Lock refreshFileEntryLock(
 		HttpPrincipal httpPrincipal, java.lang.String lockUuid,
 		long expirationTime)

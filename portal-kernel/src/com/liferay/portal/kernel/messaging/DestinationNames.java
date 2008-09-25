@@ -30,8 +30,6 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface DestinationNames {
 
-	public static final String DOCUMENT_LIBRARY = "liferay/document_library";
-
 	/**
 	 * This is a special destination. Binding a message listener to this
 	 * destination will allow it to listen to messages sent to all destinations.
