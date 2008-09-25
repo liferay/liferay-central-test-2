@@ -1026,8 +1026,10 @@ public class PortalImpl implements Portal {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
+		String portalURL = StringPool.BLANK;
+
 		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-			String portalURL = getPortalURL(
+			portalURL = getPortalURL(
 				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
@@ -1052,6 +1054,19 @@ public class PortalImpl implements Portal {
 				}
 
 				return portalURL + _pathContext + layoutFriendlyURL;
+			}
+		}
+		else {
+			long curLayoutSetId =
+				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+
+			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
+				(portalURL.startsWith(themeDisplay.getPortalURL()))) {
+
+				portalURL = getPortalURL(
+					themeDisplay.getCompany().getVirtualHost(),
+					themeDisplay.getServerPort(),
+					themeDisplay.isSecure());
 			}
 		}
 
@@ -1081,7 +1096,7 @@ public class PortalImpl implements Portal {
 					friendlyURL;
 		}
 
-		return _pathContext + friendlyURL + group.getFriendlyURL() +
+		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL() +
 			layoutFriendlyURL;
 	}
 
