@@ -31,12 +31,12 @@ ConfiguredProducerElementBean configuredProducerBean = (ConfiguredProducerElemen
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL var="editURL">
+	<portlet:actionURL var="editURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="configuredProducerName" value="<%= configuredProducerBean.getName() %>" />
 		<portlet:param name="configuredProducerId" value="<%= configuredProducerBean.getId() %>" />
-	</portlet:renderURL>
+	</portlet:actionURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
