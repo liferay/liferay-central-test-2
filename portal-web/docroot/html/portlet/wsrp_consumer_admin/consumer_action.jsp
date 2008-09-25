@@ -48,6 +48,15 @@ ConfiguredProducerElementBean configuredProducerBean = (ConfiguredProducerElemen
 	</portlet:actionURL>
 
 	<liferay-ui:icon image="add" message="install-portlet" url="<%= installPortletURL %>" />
+	
+	<portlet:actionURL var="updateSDUrl">
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.UPDATE_SD) %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="configuredProducerName" value="<%= configuredProducerBean.getName() %>" />
+		<portlet:param name="configuredProducerId" value="<%= configuredProducerBean.getId() %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon image="view" message="update-service-description" url="<%= updateSDUrl %>" />
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
