@@ -41,8 +41,7 @@ import javax.servlet.jsp.JspTagException;
  * @author Raymond Augé
  *
  */
-public class SearchContainerColumnButtonTag
-	extends SearchContainerColumnTag {
+public class SearchContainerColumnButtonTag extends SearchContainerColumnTag {
 
 	public int doEndTag() {
 		try {

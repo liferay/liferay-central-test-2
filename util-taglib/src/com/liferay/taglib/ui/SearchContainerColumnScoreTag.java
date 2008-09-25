@@ -36,8 +36,7 @@ import javax.servlet.jsp.JspTagException;
  * @author Raymond Augé
  *
  */
-public class SearchContainerColumnScoreTag
-	extends SearchContainerColumnTag {
+public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {
 
 	private static final String DEFAULT_NAME = "score";
 

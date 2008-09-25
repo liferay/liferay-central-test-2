@@ -24,6 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
@@ -81,9 +82,10 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 				(SearchContainerTag)findAncestorWithClass(
 					this, SearchContainerTag.class);
 
-			parentTag.getSearchContainer().setHeaderNames(_headerNames);
-			parentTag.getSearchContainer().setOrderableHeaders(
-				_orderableHeaders);
+			SearchContainer searchContainer = parentTag.getSearchContainer();
+
+			searchContainer.setHeaderNames(_headerNames);
+			searchContainer.setOrderableHeaders(_orderableHeaders);
 
 			_headerNamesAssigned = true;
 		}
@@ -106,8 +108,8 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		_bold = false;
 		_className = null;
 		_escapedModel = false;
-		_headerNamesAssigned = false;
 		_headerNames = null;
+		_headerNamesAssigned = false;
 		_indexVar = DEFAULT_INDEX_VAR;
 		_keyProperty = null;
 		_modelVar = DEFAULT_MODEL_VAR;
@@ -215,12 +217,12 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		_escapedModel = escapedModel;
 	}
 
-	public void setHeaderNamesAssigned(boolean headerNamesAssigned) {
-		_headerNamesAssigned = headerNamesAssigned;
-	}
-
 	public void setHeaderNames(List<String> headerNames) {
 		_headerNames = headerNames;
+	}
+
+	public void setHeaderNamesAssigned(boolean headerNamesAssigned) {
+		_headerNamesAssigned = headerNamesAssigned;
 	}
 
 	public void setIndexVar(String indexVar) {
@@ -301,8 +303,8 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	private boolean _bold;
 	private String _className;
 	private boolean _escapedModel;
-	private boolean _headerNamesAssigned = false;
 	private List<String> _headerNames;
+	private boolean _headerNamesAssigned;
 	private String _indexVar = DEFAULT_INDEX_VAR;
 	private String _keyProperty;
 	private String _modelVar = DEFAULT_MODEL_VAR;

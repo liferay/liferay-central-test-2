@@ -30,7 +30,8 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="PropertyTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchContainerRowParameterTag.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -38,8 +39,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class SearchContainerRowParameterTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		SearchContainerRowTag parentRowTag = (SearchContainerRowTag)
-			findAncestorWithClass(this, SearchContainerRowTag.class);
+		SearchContainerRowTag parentRowTag =
+			(SearchContainerRowTag)findAncestorWithClass(
+			this, SearchContainerRowTag.class);
 
 		if (parentRowTag == null) {
 			throw new JspTagException(
@@ -49,7 +51,7 @@ public class SearchContainerRowParameterTag extends TagSupport {
 		ResultRow row = parentRowTag.getRow();
 
 		if (_name.equals("className")) {
-			row.setClassName((String)_name);
+			row.setClassName(_name);
 		}
 		else if (_name.equals("classHoverName")) {
 			row.setClassHoverName((String)_value);

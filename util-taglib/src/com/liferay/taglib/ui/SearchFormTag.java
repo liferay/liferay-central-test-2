@@ -39,8 +39,9 @@ public class SearchFormTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		SearchContainerTag parentTag = (SearchContainerTag)
-			findAncestorWithClass(this, SearchContainerTag.class);
+		SearchContainerTag parentTag =
+			(SearchContainerTag)findAncestorWithClass(
+				this, SearchContainerTag.class);
 
 		if (parentTag != null) {
 			_searchContainer = parentTag.getSearchContainer();

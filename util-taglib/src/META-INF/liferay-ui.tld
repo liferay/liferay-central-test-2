@@ -1369,86 +1369,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>search-container-results</name>
-		<tag-class>com.liferay.taglib.ui.SearchContainerResultsTag</tag-class>
-		<tei-class>com.liferay.taglib.ui.SearchContainerResultsTei</tei-class>
-		<attribute>
-			<name>results</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>total</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>var</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>search-container-row</name>
-		<tag-class>com.liferay.taglib.ui.SearchContainerRowTag</tag-class>
-		<tei-class>com.liferay.taglib.ui.SearchContainerRowTei</tei-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>bold</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>className</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>escapedModel</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>indexVar</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>keyProperty</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>modelVar</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>rowVar</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>stringKey</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>search-container-row-parameter</name>
-		<tag-class>com.liferay.taglib.ui.SearchContainerRowParameterTag</tag-class>
-		<attribute>
-			<name>name</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>value</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>search-container-column-button</name>
 		<tag-class>com.liferay.taglib.ui.SearchContainerColumnButtonTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1515,6 +1435,26 @@
 		<attribute>
 			<name>valign</name>
 			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>search-container-column-score</name>
+		<tag-class>com.liferay.taglib.ui.SearchContainerColumnScoreTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>index</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>score</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
@@ -1590,21 +1530,81 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>search-container-column-score</name>
-		<tag-class>com.liferay.taglib.ui.SearchContainerColumnScoreTag</tag-class>
+		<name>search-container-results</name>
+		<tag-class>com.liferay.taglib.ui.SearchContainerResultsTag</tag-class>
+		<tei-class>com.liferay.taglib.ui.SearchContainerResultsTei</tei-class>
+		<attribute>
+			<name>results</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>total</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>search-container-row</name>
+		<tag-class>com.liferay.taglib.ui.SearchContainerRowTag</tag-class>
+		<tei-class>com.liferay.taglib.ui.SearchContainerRowTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>index</name>
+			<name>bold</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>escapedModel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>indexVar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>keyProperty</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>modelVar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>rowVar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>stringKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>search-container-row-parameter</name>
+		<tag-class>com.liferay.taglib.ui.SearchContainerRowParameterTag</tag-class>
 		<attribute>
 			<name>name</name>
-			<required>false</required>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>score</name>
+			<name>value</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

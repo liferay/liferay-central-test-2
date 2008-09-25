@@ -24,13 +24,10 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.dao.search.TextSearchEntry;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,10 +67,10 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 					_value = _sb.toString();
 				}
 				else if (Validator.isNull(_value)) {
-					BodyContent bc = getBodyContent();
+					BodyContent bodyContent = getBodyContent();
 
-					if (bc != null) {
-						_value = bc.getString();
+					if (bodyContent != null) {
+						_value = bodyContent.getString();
 					}
 				}
 			}

@@ -23,7 +23,6 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -38,8 +37,7 @@ import javax.servlet.jsp.JspTagException;
  * @author Raymond Augé
  *
  */
-public class SearchContainerColumnJSPTag
-	extends SearchContainerColumnTag {
+public class SearchContainerColumnJSPTag extends SearchContainerColumnTag {
 
 	public int doEndTag() {
 		try {
