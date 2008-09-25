@@ -45,8 +45,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@page import="com.sun.portal.wsrp.producer.portlets.beans.ProducerBean" %>
-<%@page import="com.sun.portal.wsrp.producer.portlets.beans.ConsumerRegistrationBean" %>
-<%@page import="com.sun.portal.wsrp.producer.portlets.AdminPortletAction" %>
-<%@page import="com.sun.portal.wsrp.producer.portlets.AdminPortletConstants" %>
-<%@page import="com.sun.portal.wsrp.producer.portlets.beans.ProducerElementBean" %>
+<%@ page import="com.sun.portal.wsrp.producer.portlets.AdminPortletAction" %>
+<%@ page import="com.sun.portal.wsrp.producer.portlets.AdminPortletConstants" %>
+<%@ page import="com.sun.portal.wsrp.producer.portlets.beans.ConsumerRegistrationBean" %>
+<%@ page import="com.sun.portal.wsrp.producer.portlets.beans.ProducerBean" %>
+<%@ page import="com.sun.portal.wsrp.producer.portlets.beans.ProducerElementBean" %>

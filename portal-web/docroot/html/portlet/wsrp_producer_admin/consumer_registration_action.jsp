@@ -46,21 +46,19 @@
 <%@ include file="/html/portlet/wsrp_producer_admin/init.jsp" %>
 
 <%
+String producerId = ParamUtil.getString(request, "producerId");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-ConsumerRegistrationBean crBean = (ConsumerRegistrationBean)row.getObject();
+ConsumerRegistrationBean consumerRegistrationBean = (ConsumerRegistrationBean)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE_CONSUMER_REGISTRATION) %>" />
-		<portlet:param name="producerId" value='<%=ParamUtil.getString(request, "producerId")%>' />
-		<portlet:param name="selectedConsumerRegistrations" value="<%= crBean.getRegistrationHandle() %>" />
+		<portlet:param name="producerId" value="<%= producerId %>" />
+		<portlet:param name="selectedConsumerRegistrations" value="<%= consumerRegistrationBean.getRegistrationHandle() %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-
-
-
 </liferay-ui:icon-menu>

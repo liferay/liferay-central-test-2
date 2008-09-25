@@ -22,6 +22,27 @@
  */
 %>
 
+<%
+/**
+ * The contents of this file are subject to the terms of the Common Development
+ * and Distribution License (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the License at http://www.sun.com/cddl/cddl.html and
+ * legal/CDDLv1.0.txt. See the License for the specific language governing
+ * permission and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL Header Notice in each file
+ * and include the License file at legal/CDDLv1.0.txt.
+ *
+ * If applicable, add the following below the CDDL Header, with the fields
+ * enclosed by brackets [] replaced by your own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems Inc. All rights reserved.
+ */
+%>
+
 <%@ include file="/html/portlet/wsrp_consumer_admin/init.jsp" %>
 
 <%
@@ -48,15 +69,15 @@ ConfiguredProducerElementBean configuredProducerBean = (ConfiguredProducerElemen
 	</portlet:actionURL>
 
 	<liferay-ui:icon image="add" message="install-portlet" url="<%= installPortletURL %>" />
-	
-	<portlet:actionURL var="updateSDUrl">
+
+	<portlet:actionURL var="updateServiceDescriptionURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.UPDATE_SD) %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="configuredProducerName" value="<%= configuredProducerBean.getName() %>" />
 		<portlet:param name="configuredProducerId" value="<%= configuredProducerBean.getId() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="view" message="update-service-description" url="<%= updateSDUrl %>" />
+	<liferay-ui:icon image="view" message="update-service-description" url="<%= updateServiceDescriptionURL %>" />
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />

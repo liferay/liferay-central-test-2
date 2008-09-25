@@ -46,34 +46,34 @@
 <%@ include file="/html/portlet/wsrp_producer_admin/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-
-	<portlet:actionURL var="deleteURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
-		<portlet:param name="redirect" value="<portlet:renderURL/>" />
-		<portlet:param name="selectedProducers" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-
 	<portlet:renderURL var="editURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
-		<portlet:param name="redirect" value="<portlet:renderURL/>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-	<portlet:actionURL var="manageRegURL">
+	<portlet:actionURL var="manageRegistrationsURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="permissions" message="manage-registrations" url="<%= manageRegURL %>" />
+	<liferay-ui:icon image="permissions" message="manage-registrations" url="<%= manageRegistrationsURL %>" />
 
+	<portlet:actionURL var="deleteURL">
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="selectedProducers" value="<%= producerBean.getProducerKey() %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
 </liferay-ui:icon-menu>
