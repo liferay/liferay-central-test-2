@@ -36,8 +36,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/bookmarks/view");
-portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 
 List results = null;
 %>
