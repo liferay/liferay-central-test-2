@@ -1026,18 +1026,15 @@ public class PortalImpl implements Portal {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
+		long curLayoutSetId =
+			themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+
 		String portalURL = StringPool.BLANK;
 
 		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
 			portalURL = getPortalURL(
 				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
-
-			// Use the layout set's virtual host setting only if the layout set
-			// is already used for the current request
-
-			long curLayoutSetId =
-				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
 
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
 				(portalURL.startsWith(themeDisplay.getPortalURL()))) {
@@ -1057,16 +1054,10 @@ public class PortalImpl implements Portal {
 			}
 		}
 		else {
-			long curLayoutSetId =
-				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
-
-			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-				(portalURL.startsWith(themeDisplay.getPortalURL()))) {
-
+			if (layoutSet.getLayoutSetId() != curLayoutSetId) {
 				portalURL = getPortalURL(
 					themeDisplay.getCompany().getVirtualHost(),
-					themeDisplay.getServerPort(),
-					themeDisplay.isSecure());
+					themeDisplay.getServerPort(), themeDisplay.isSecure());
 			}
 		}
 
