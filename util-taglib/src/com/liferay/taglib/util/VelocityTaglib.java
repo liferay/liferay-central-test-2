@@ -41,7 +41,6 @@ import com.liferay.taglib.portletext.IconPortletTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.IconRefreshTag;
 import com.liferay.taglib.portletext.RuntimeTag;
-import com.liferay.taglib.portletext.TitleTag;
 import com.liferay.taglib.security.DoAsURLTag;
 import com.liferay.taglib.security.PermissionsURLTag;
 import com.liferay.taglib.theme.LayoutIconTag;
@@ -605,22 +604,6 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		StagingTag.doTag(_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String title() throws Exception {
-		_stringResponse.recycle();
-
-		TitleTag.doTag(_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String title(boolean editable) throws Exception {
-		_stringResponse.recycle();
-
-		TitleTag.doTag(editable, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
