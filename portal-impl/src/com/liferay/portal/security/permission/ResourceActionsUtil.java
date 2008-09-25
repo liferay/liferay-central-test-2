@@ -29,16 +29,19 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Location;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
@@ -74,14 +77,13 @@ public class ResourceActionsUtil {
 	public static final String MODEL_RESOURCE_NAME_PREFIX = "model.resource.";
 
 	public static final String[] ORGANIZATION_MODEL_RESOURCES = {
-		Location.class.getName(), Organization.class.getName(),
-		PasswordPolicy.class.getName(), User.class.getName()
+		Organization.class.getName(), PasswordPolicy.class.getName(),
+		User.class.getName()
 	};
 
 	public static final String[] PORTAL_MODEL_RESOURCES = {
-		Location.class.getName(), Organization.class.getName(),
-		PasswordPolicy.class.getName(), Role.class.getName(),
-		User.class.getName(), UserGroup.class.getName()
+		Organization.class.getName(), PasswordPolicy.class.getName(),
+		Role.class.getName(), User.class.getName(), UserGroup.class.getName()
 	};
 
 	public static String getAction(
@@ -273,6 +275,55 @@ public class ResourceActionsUtil {
 		}
 
 		return actions;
+	}
+
+	public static List<Role> getRoles(
+			long companyId, Group group, String modelResource)
+		throws SystemException {
+
+		List<Role> allRoles = RoleLocalServiceUtil.getRoles(companyId);
+
+		int[] roleTypes = new int[]{
+			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY};
+
+		if (isPortalModelResource(modelResource)) {
+			roleTypes = new int[]{RoleConstants.TYPE_REGULAR};
+		}
+		else if (modelResource.equals(Layout.class.getName())) {
+			if (group.isUser()) {
+				roleTypes = new int[]{RoleConstants.TYPE_REGULAR};
+			}
+			else if (group.isOrganization()) {
+				roleTypes = new int[]{
+					RoleConstants.TYPE_REGULAR,
+					RoleConstants.TYPE_ORGANIZATION};
+			}
+
+		}
+		else {
+			if (group.isUser()) {
+				roleTypes = new int[]{RoleConstants.TYPE_REGULAR};
+			}
+			else if (group.isOrganization()) {
+				roleTypes = new int[]{
+					RoleConstants.TYPE_REGULAR,
+					RoleConstants.TYPE_ORGANIZATION};
+			}
+		}
+
+		List<Role> roles = new ArrayList();
+
+		// Filter and group by role type
+
+		for (int roleType : roleTypes) {
+			for (Role role : allRoles) {
+				if (role.getType() == roleType) {
+					roles.add(role);
+				}
+			}
+		}
+
+		return roles;
 	}
 
 	public static boolean isOrganizationModelResource(String modelResource) {

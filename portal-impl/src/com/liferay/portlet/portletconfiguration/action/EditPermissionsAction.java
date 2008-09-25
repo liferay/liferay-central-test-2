@@ -32,14 +32,21 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -149,6 +156,25 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			renderRequest, "portlet.portlet_configuration.edit_permissions"));
 	}
 
+	protected String[] getActionIds(ActionRequest actionRequest, long roleId) {
+		Enumeration<String> paramNames = actionRequest.getParameterNames();
+
+		List<String> actionIds = new ArrayList<String>();
+
+		while (paramNames.hasMoreElements()) {
+			String paramName = paramNames.nextElement();
+
+			if (paramName.startsWith(roleId + "_ACTION_")) {
+				int pos = paramName.indexOf("_ACTION_");
+				String actionId = paramName.substring(pos + 8);
+
+				actionIds.add(actionId);
+			}
+		}
+
+		return actionIds.toArray(new String[actionIds.size()]);
+	}
+
 	protected void updateGroupPermissions(ActionRequest actionRequest)
 		throws Exception {
 
@@ -216,6 +242,16 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	protected void updateRolePermissions(ActionRequest actionRequest)
 		throws Exception {
 
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			updateRolePermissions5(actionRequest);
+		}
+		else {
+			updateRolePermissions1to4(actionRequest);
+		}
+	}
+	protected void updateRolePermissions1to4(ActionRequest actionRequest)
+		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -227,6 +263,29 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		PermissionServiceUtil.setRolePermissions(
 			roleId, themeDisplay.getScopeGroupId(), actionIds, resourceId);
 	}
+
+	protected void updateRolePermissions5(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		String modelResource = ParamUtil.getString(
+			actionRequest, "modelResource");
+
+		List<Role> roles = ResourceActionsUtil.getRoles(
+			themeDisplay.getCompanyId(), themeDisplay.getLayout().getGroup(),
+			modelResource);
+
+		for (Role role : roles) {
+			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
+
+			PermissionServiceUtil.setRolePermissions(
+				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
+				resourceId);
+			}
+		}
 
 	protected void updateUserGroupPermissions(ActionRequest actionRequest)
 		throws Exception {
