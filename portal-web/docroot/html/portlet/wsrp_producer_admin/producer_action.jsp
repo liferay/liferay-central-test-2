@@ -74,6 +74,6 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="manage_registrations" url="<%= manageRegURL %>" />
+	<liferay-ui:icon image="permissions" message="manage-registrations" url="<%= manageRegURL %>" />
 
 </liferay-ui:icon-menu>
