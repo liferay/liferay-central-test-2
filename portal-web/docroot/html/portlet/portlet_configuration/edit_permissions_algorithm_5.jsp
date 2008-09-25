@@ -134,10 +134,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 	RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
-	List results = ResourceActionsUtil.getRoles(company.getCompanyId(), group, modelResource);
-
-	searchContainer.setResults(results);
-
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("role");
@@ -148,10 +144,14 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 	searchContainer.setHeaderNames(headerNames);
 
+	List<Role> results = ResourceActionsUtil.getRoles(group, modelResource);
+
+	searchContainer.setResults(results);
+
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		Role role = (Role)results.get(i);
+		Role role = results.get(i);
 
 		if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
 			continue;
@@ -163,7 +163,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		row.addText(role.getName());
 
-		// Action checkboxes
+		// Actions
 
 		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
 
@@ -174,20 +174,19 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		for (String action : actions) {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("<input type=\"checkbox\" ");
-			sb.append("name=\"");
-			sb.append(role.getRoleId() + "_ACTION_" + action);
-			sb.append("\"");
+			sb.append("<input ");
 
 			if (currentActions.contains(action)) {
-				sb.append(" checked=\"checked\" ");
+				sb.append("checked ");
 			}
 
 			if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(action)) {
-				sb.append(" disabled=\"disabled\" ");
+				sb.append("disabled ");
 			}
 
-			sb.append(" />");
+			sb.append("name=\"");
+			sb.append(role.getRoleId() + "_ACTION_" + action);
+			sb.append("\" type=\"checkbox\" />");
 
 			row.addText(sb.toString());
 		}
@@ -198,7 +197,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="false" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 	<br />
 

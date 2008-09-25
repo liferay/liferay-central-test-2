@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Permission;
@@ -277,47 +276,36 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
-	public static List<Role> getRoles(
-			long companyId, Group group, String modelResource)
+	public static List<Role> getRoles(Group group, String modelResource)
 		throws SystemException {
 
-		List<Role> allRoles = RoleLocalServiceUtil.getRoles(companyId);
+		List<Role> allRoles = RoleLocalServiceUtil.getRoles(
+			group.getCompanyId());
 
-		int[] roleTypes = new int[]{
-			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY};
+		int[] types = new int[] {
+			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY
+		};
 
 		if (isPortalModelResource(modelResource)) {
-			roleTypes = new int[]{RoleConstants.TYPE_REGULAR};
-		}
-		else if (modelResource.equals(Layout.class.getName())) {
-			if (group.isUser()) {
-				roleTypes = new int[]{RoleConstants.TYPE_REGULAR};
-			}
-			else if (group.isOrganization()) {
-				roleTypes = new int[]{
-					RoleConstants.TYPE_REGULAR,
-					RoleConstants.TYPE_ORGANIZATION};
-			}
-
+			types = new int[] {RoleConstants.TYPE_REGULAR};
 		}
 		else {
-			if (group.isUser()) {
-				roleTypes = new int[]{RoleConstants.TYPE_REGULAR};
-			}
-			else if (group.isOrganization()) {
-				roleTypes = new int[]{
+			if (group.isOrganization()) {
+				types = new int[] {
 					RoleConstants.TYPE_REGULAR,
-					RoleConstants.TYPE_ORGANIZATION};
+					RoleConstants.TYPE_ORGANIZATION
+				};
+			}
+			else if (group.isUser()) {
+				types = new int[] {RoleConstants.TYPE_REGULAR};
 			}
 		}
 
 		List<Role> roles = new ArrayList();
 
-		// Filter and group by role type
-
-		for (int roleType : roleTypes) {
+		for (int type : types) {
 			for (Role role : allRoles) {
-				if (role.getType() == roleType) {
+				if (role.getType() == type) {
 					roles.add(role);
 				}
 			}

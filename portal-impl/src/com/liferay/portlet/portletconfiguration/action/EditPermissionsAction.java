@@ -157,16 +157,17 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	}
 
 	protected String[] getActionIds(ActionRequest actionRequest, long roleId) {
-		Enumeration<String> paramNames = actionRequest.getParameterNames();
-
 		List<String> actionIds = new ArrayList<String>();
 
-		while (paramNames.hasMoreElements()) {
-			String paramName = paramNames.nextElement();
+		Enumeration<String> enu = actionRequest.getParameterNames();
 
-			if (paramName.startsWith(roleId + "_ACTION_")) {
-				int pos = paramName.indexOf("_ACTION_");
-				String actionId = paramName.substring(pos + 8);
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			if (name.startsWith(roleId + "_ACTION_")) {
+				int pos = name.indexOf("_ACTION_");
+
+				String actionId = name.substring(pos + 8);
 
 				actionIds.add(actionId);
 			}
@@ -249,6 +250,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			updateRolePermissions1to4(actionRequest);
 		}
 	}
+
 	protected void updateRolePermissions1to4(ActionRequest actionRequest)
 		throws Exception {
 
@@ -270,13 +272,14 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		Layout layout = themeDisplay.getLayout();
+
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
-			themeDisplay.getCompanyId(), themeDisplay.getLayout().getGroup(),
-			modelResource);
+			layout.getGroup(), modelResource);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
@@ -284,8 +287,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			PermissionServiceUtil.setRolePermissions(
 				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
 				resourceId);
-			}
 		}
+	}
 
 	protected void updateUserGroupPermissions(ActionRequest actionRequest)
 		throws Exception {
