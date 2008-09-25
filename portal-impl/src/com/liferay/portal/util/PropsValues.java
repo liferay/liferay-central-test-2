@@ -509,9 +509,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID));
 
-	public static final String JOURNAL_WORKFLOW_IMPL = PropsUtil.get(
-		PropsKeys.JOURNAL_WORKFLOW_IMPL);
-
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LAST_MODIFIED_CHECK));
 
