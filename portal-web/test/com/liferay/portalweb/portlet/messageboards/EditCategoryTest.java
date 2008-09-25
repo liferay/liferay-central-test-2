@@ -20,26 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.communities;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteCommunityTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditCategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteCommunityTest extends BaseTestCase {
-	public void testDeleteCommunity() throws Exception {
+public class EditCategoryTest extends BaseTestCase {
+	public void testEditCategory() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("_134_name")) {
+				if (selenium.isElementPresent("//td[1]/div/a[1]")) {
 					break;
 				}
 			}
@@ -49,47 +49,24 @@ public class DeleteCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Communities']"));
+		selenium.click(RuntimeVariables.replace("//td[1]/div/a[1]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test Community 2 Edited")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//tr[5]/td[6]/ul/li/strong/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//tr[5]/td[6]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[7]/nobr/a"));
+		selenium.click(
+			"//div[@id='portlet-wrapper-19']/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[5]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.typeKeys("_19_name",
+			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory Edit\u00e9d"));
+		selenium.type("_19_name",
+			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory Edit\u00e9d"));
+		selenium.typeKeys("_19_description",
+			RuntimeVariables.replace(
+				"This is a t\u00e9st cat\u00e9gory edited!"));
+		selenium.type("_19_description",
+			RuntimeVariables.replace(
+				"This is a t\u00e9st cat\u00e9gory edited!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -98,7 +75,7 @@ public class DeleteCommunityTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"T\u00e9st Cat\u00e9gory Edit\u00e9d")) {
 					break;
 				}
 			}
@@ -114,7 +91,8 @@ public class DeleteCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isTextPresent("Test Community 2 Edited")) {
+				if (selenium.isTextPresent(
+							"This is a t\u00e9st cat\u00e9gory edited!")) {
 					break;
 				}
 			}
@@ -123,24 +101,5 @@ public class DeleteCommunityTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Community']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

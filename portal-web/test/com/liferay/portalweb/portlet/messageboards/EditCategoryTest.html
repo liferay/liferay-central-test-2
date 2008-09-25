@@ -4,47 +4,52 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddCommunitiesTest</title>
+<title>EditCategoryTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddCommunitiesTest</td></tr>
+<tr><td rowspan="1" colspan="3">EditCategoryTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Community']</td>
+	<td>//td[1]/div/a[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Community']</td>
+	<td>//td[1]/div/a[1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_134_name</td>
+	<td>click</td>
+	<td>//div[@id='portlet-wrapper-19']/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[5]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_134_name</td>
-	<td>Test Communit</td>
+	<td>_19_name</td>
+	<td>Tést Catégory Editéd</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_134_name</td>
-	<td>Test Community</td>
+	<td>_19_name</td>
+	<td>Tést Catégory Editéd</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_134_description</td>
-	<td>This is a test communit!</td>
+	<td>_19_description</td>
+	<td>This is a tést catégory edited!</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_134_description</td>
-	<td>This is a test community!</td>
+	<td>_19_description</td>
+	<td>This is a tést catégory edited!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -53,7 +58,12 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Test Community </td>
+	<td>Tést Catégory Editéd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>This is a tést catégory edited!</td>
 	<td></td>
 </tr>
 

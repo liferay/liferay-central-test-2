@@ -116,11 +116,11 @@ public class UploadLARFileTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Events"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Archived"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Restore"));
+		assertTrue(selenium.isElementPresent("link=Edited Test Event"));
+		assertTrue(selenium.isElementPresent("link=Off to Yosemite!"));
+		assertTrue(selenium.isElementPresent("link=Test Event"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

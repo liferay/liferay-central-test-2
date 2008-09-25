@@ -42,7 +42,7 @@ public class AssignOrganizationsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Organizations']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_29_rowIds");
+		selenium.click("_134_rowIds");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");

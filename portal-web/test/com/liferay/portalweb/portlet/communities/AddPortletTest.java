@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"document.getElementById('Community-Communities')")) {
+							"//div[@id='Undefined-Communities']")) {
 					break;
 				}
 			}
@@ -51,8 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"document.getElementById('Community-Communities').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
+		selenium.click("//div[@id='Undefined-Communities']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,8 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"document.getElementById('portlet-small-icon-bar_29').getElementsByTagName('nobr')[1].getElementsByTagName('a')[0].getElementsByTagName('img')[0]")) {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
 			}

@@ -39,7 +39,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_29_name")) {
+				if (selenium.isElementPresent("_134_name")) {
 					break;
 				}
 			}
@@ -49,8 +49,8 @@ public class AssignCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Communit"));
-		selenium.type("_29_name", RuntimeVariables.replace("Test Community"));
+		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
+		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Communities']"));
 		selenium.waitForPageToLoad("30000");
@@ -109,11 +109,11 @@ public class AssignCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_29_firstName", RuntimeVariables.replace("selen"));
+		selenium.type("_134_firstName", RuntimeVariables.replace("selen"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_29_allRowIds");
+		selenium.click("_134_allRowIds");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");

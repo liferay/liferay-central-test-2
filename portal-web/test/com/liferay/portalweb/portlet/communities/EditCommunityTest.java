@@ -39,7 +39,7 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=All Communities")) {
+				if (selenium.isElementPresent("_134_name")) {
 					break;
 				}
 			}
@@ -49,7 +49,8 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=All Communities"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Communities']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +75,7 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[4]/td[6]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//tr[5]/td[6]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -84,7 +85,7 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[4]/td[6]/ul/li/strong/span");
+		selenium.click("//tr[5]/td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -111,7 +112,7 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_29_name")) {
+				if (selenium.isElementPresent("_134_name")) {
 					break;
 				}
 			}
@@ -121,14 +122,14 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name",
+		selenium.typeKeys("_134_name",
 			RuntimeVariables.replace("Test Communit 2 Edited"));
-		selenium.type("_29_name",
+		selenium.type("_134_name",
 			RuntimeVariables.replace("Test Community 2 Edited"));
-		selenium.typeKeys("_29_description",
+		selenium.typeKeys("_134_description",
 			RuntimeVariables.replace(
 				"This is a second temporar Test Communit! This communit has been edited."));
-		selenium.type("_29_description",
+		selenium.type("_134_description",
 			RuntimeVariables.replace(
 				"This is a second temporary Test Community! This community has been edited."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

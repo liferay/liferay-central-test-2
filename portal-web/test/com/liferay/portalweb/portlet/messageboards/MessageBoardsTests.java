@@ -48,6 +48,8 @@ public class MessageBoardsTests extends BaseTests {
 		addTestSuite(AddDeletableMessageTest.class);
 		addTestSuite(RecentPostsTest.class);
 		addTestSuite(MoveThreadTest.class);
+		addTestSuite(EditCategoryTest.class);
+		addTestSuite(EditMessageTest.class);
 		addTestSuite(DeleteMessageTest.class);
 		addTestSuite(DeletePageTest.class);
 	}

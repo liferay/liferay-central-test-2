@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"Admin-Server-UpdateManager\"]")) {
+							"//div[@id=\"Undefined-UpdateManager\"]")) {
 					break;
 				}
 			}
@@ -51,7 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"Admin-Server-UpdateManager\"]/p/a");
+		selenium.click("//div[@id=\"Undefined-UpdateManager\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

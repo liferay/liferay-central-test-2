@@ -39,7 +39,7 @@ public class MergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=All Communities")) {
+				if (selenium.isElementPresent("_134_name")) {
 					break;
 				}
 			}
@@ -49,7 +49,8 @@ public class MergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=All Communities"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Communities']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

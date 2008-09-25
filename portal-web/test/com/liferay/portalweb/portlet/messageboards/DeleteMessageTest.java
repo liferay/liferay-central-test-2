@@ -39,8 +39,8 @@ public class DeleteMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!")) {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st Cat\u00e9gory Edit\u00e9d")) {
 					break;
 				}
 			}
@@ -49,6 +49,15 @@ public class DeleteMessageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st Cat\u00e9gory Edit\u00e9d"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,23 +88,6 @@ public class DeleteMessageTest extends BaseTestCase {
 			try {
 				if (selenium.isTextPresent(
 							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
 					break;
 				}
 			}
