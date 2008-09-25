@@ -20,7 +20,7 @@
 	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" />
 	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" />
 	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" />
-	<aop:config>		
+	<aop:config>
 		<aop:aspect id="mirageServiceAspect" ref="logAspect">
 			<aop:around pointcut="bean(com.liferay.portal.mirage.*Service)" method="invoke" />
 		</aop:aspect>

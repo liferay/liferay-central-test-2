@@ -46,8 +46,8 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 
 /**
  * <a href="LogAspect.java.html"><b><i>View Source</i></b></a>
@@ -62,21 +62,20 @@ public class LogAspect {
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String typeName = 
-			proceedingJoinPoint.getTarget().getClass().getName();
+		String typeName = proceedingJoinPoint.getTarget().getClass().getName();
 
 		Log log = getLog(typeName);
 
 		if (log.isInfoEnabled()) {
 			log.info("Before " + typeName);
 		}
-	
+
 		Object returnVal = proceedingJoinPoint.proceed();
 
 		if (log.isInfoEnabled()) {
 			log.info("After " + typeName);
 		}
-		
+
 		return returnVal;
 	}
 
