@@ -23,6 +23,7 @@
 package com.liferay.support.tomcat.connector;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.Cookie;
 
@@ -35,6 +36,8 @@ import org.apache.catalina.connector.Request;
  *
  */
 public class PortalRequest extends Request {
+
+	public static String LOCALHOST = "localhost";
 
 	protected void configureSessionCookie(Cookie cookie) {
 		super.configureSessionCookie(cookie);
@@ -52,8 +55,12 @@ public class PortalRequest extends Request {
 
 		// See LEP-4602 and LEP-4645.
 
-		if (host == null) {
+		if (Validator.isNull(host)) {
 			return null;
+		}
+
+		if (host.endsWith(LOCALHOST)) {
+			return LOCALHOST;
 		}
 
 		int x = host.lastIndexOf(StringPool.PERIOD);
