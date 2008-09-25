@@ -41,10 +41,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.mirage.service.MirageServiceFactory;
-
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -54,7 +50,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @author Karthik Sudarshan
  *
  */
-public class JournalArticleImageLocalServiceAspect extends MirageAspect {
+public class JournalArticleImageLocalServiceAspect extends BaseMirageAspect {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
@@ -71,27 +67,24 @@ public class JournalArticleImageLocalServiceAspect extends MirageAspect {
 			ArticleImageInvoker articleImageInvoker = new ArticleImageInvoker(
 				proceedingJoinPoint);
 
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleImageService();
-
 			if (methodName.equals("addArticleImageId")) {
-				binaryContentService.createBinaryContent(articleImageInvoker);
+				articleImageService.createBinaryContent(articleImageInvoker);
 			}
 			else if (methodName.equals("deleteArticleImage")) {
-				binaryContentService.deleteBinaryContent(
+				articleImageService.deleteBinaryContent(
 					articleImageInvoker, null);
 			}
 			else if (methodName.equals("deleteImages")) {
-				binaryContentService.deleteBinaryContents(articleImageInvoker);
+				articleImageService.deleteBinaryContents(articleImageInvoker);
 			}
 			else if (methodName.equals("getArticleImage")) {
-				binaryContentService.getBinaryContent(articleImageInvoker);
+				articleImageService.getBinaryContent(articleImageInvoker);
 			}
 			else if (methodName.equals("getArticleImageId")) {
-				binaryContentService.getBinaryContentId(articleImageInvoker);
+				articleImageService.getBinaryContentId(articleImageInvoker);
 			}
 			else if (methodName.equals("getArticleImages")) {
-				binaryContentService.getBinaryContents(articleImageInvoker);
+				articleImageService.getBinaryContents(articleImageInvoker);
 			}
 
 			return articleImageInvoker.getReturnValue();

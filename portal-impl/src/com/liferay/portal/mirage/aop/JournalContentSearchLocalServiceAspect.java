@@ -41,10 +41,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.mirage.service.MirageServiceFactory;
-
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -54,7 +50,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @author Prakash Reddy
  *
  */
-public class JournalContentSearchLocalServiceAspect extends MirageAspect {
+public class JournalContentSearchLocalServiceAspect extends BaseMirageAspect {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
@@ -72,27 +68,24 @@ public class JournalContentSearchLocalServiceAspect extends MirageAspect {
 			ContentSearchInvoker contentSearchInvoker =
 				new ContentSearchInvoker(proceedingJoinPoint);
 
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getContentSearchService();
-
 			if (methodName.equals("checkContentSearches")) {
-				binaryContentService.createBinaryContent(contentSearchInvoker);
+				contentSearchService.createBinaryContent(contentSearchInvoker);
 			}
 			else if (methodName.equals("deleteArticleContentSearch")) {
-				binaryContentService.deleteBinaryContent(
+				contentSearchService.deleteBinaryContent(
 					contentSearchInvoker, null);
 			}
 			else if (methodName.equals("deleteArticleContentSearches") ||
 					methodName.equals("deleteLayoutContentSearches") ||
 					methodName.equals("deleteOwnerContentSearches")) {
 
-				binaryContentService.deleteBinaryContents(contentSearchInvoker);
+				contentSearchService.deleteBinaryContents(contentSearchInvoker);
 			}
 			else if (methodName.equals("getArticleContentSearches")) {
-				binaryContentService.getBinaryContents(contentSearchInvoker);
+				contentSearchService.getBinaryContents(contentSearchInvoker);
 			}
 			else if (methodName.equals("updateContentSearch")) {
-				binaryContentService.updateBinaryContent(contentSearchInvoker);
+				contentSearchService.updateBinaryContent(contentSearchInvoker);
 			}
 
 			return contentSearchInvoker.getReturnValue();

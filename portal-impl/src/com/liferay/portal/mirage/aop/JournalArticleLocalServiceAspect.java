@@ -22,11 +22,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.mirage.service.MirageServiceFactory;
-
-import com.sun.portal.cms.mirage.service.custom.ContentService;
-import com.sun.portal.cms.mirage.service.custom.WorkflowService;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -36,7 +31,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @author Joshna Reddy
  *
  */
-public class JournalArticleLocalServiceAspect extends MirageAspect {
+public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
@@ -53,9 +48,6 @@ public class JournalArticleLocalServiceAspect extends MirageAspect {
 
 			ContentInvoker contentInvoker = new ContentInvoker(
 				proceedingJoinPoint);
-
-			ContentService contentService =
-				MirageServiceFactory.getContentService();
 
 			if (methodName.equals("addArticle")) {
 				contentService.createContent(contentInvoker);
@@ -83,9 +75,6 @@ public class JournalArticleLocalServiceAspect extends MirageAspect {
 			WorkflowInvoker workflowInvoker = new WorkflowInvoker(
 				proceedingJoinPoint);
 
-			WorkflowService workflowService =
-				MirageServiceFactory.getWorkflowService();
-
 			if (methodName.equals("approveArticle")) {
 				workflowService.updateWorkflowComplete(workflowInvoker);
 			}
@@ -108,9 +97,6 @@ public class JournalArticleLocalServiceAspect extends MirageAspect {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
 				new SearchCriteriaInvoker(proceedingJoinPoint);
-
-			ContentService contentService =
-				MirageServiceFactory.getContentService();
 
 			if (methodName.equals("getArticles") ||
 				methodName.equals("getArticlesBySmallImageId") ||

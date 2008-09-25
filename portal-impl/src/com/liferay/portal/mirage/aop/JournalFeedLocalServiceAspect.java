@@ -22,10 +22,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.mirage.service.MirageServiceFactory;
-
-import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -35,7 +31,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalFeedLocalServiceAspect extends MirageAspect {
+public class JournalFeedLocalServiceAspect extends BaseMirageAspect {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
@@ -47,9 +43,6 @@ public class JournalFeedLocalServiceAspect extends MirageAspect {
 
 			ContentFeedInvoker contentFeedInvoker = new ContentFeedInvoker(
 				proceedingJoinPoint);
-
-			ContentFeedService contentFeedService =
-				MirageServiceFactory.getContentFeedService();
 
 			if (methodName.equals("addFeed")) {
 				contentFeedService.createContentFeed(contentFeedInvoker);
@@ -73,9 +66,6 @@ public class JournalFeedLocalServiceAspect extends MirageAspect {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
 				new SearchCriteriaInvoker(proceedingJoinPoint);
-
-			ContentFeedService contentFeedService =
-				MirageServiceFactory.getContentFeedService();
 
 			if (methodName.equals("getFeeds") || methodName.equals("search")) {
 				contentFeedService.searchContentFeeds(searchCriteriaInvoker);

@@ -41,10 +41,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.mirage.service.MirageServiceFactory;
-
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -54,7 +50,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @author Karthik Sudarshan
  *
  */
-public class JournalArticleResourceLocalServiceAspect extends MirageAspect {
+public class JournalArticleResourceLocalServiceAspect extends BaseMirageAspect {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
@@ -69,21 +65,18 @@ public class JournalArticleResourceLocalServiceAspect extends MirageAspect {
 			ArticleResourceInvoker articleResourceInvoker =
 				new ArticleResourceInvoker(proceedingJoinPoint);
 
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleResourceService();
-
 			if (methodName.equals("deleteArticleResource")) {
-				binaryContentService.deleteBinaryContent(
+				articleResourceService.deleteBinaryContent(
 					articleResourceInvoker, null);
 			}
 			else if (methodName.equals("getArticleResource")) {
-				binaryContentService.getBinaryContent(articleResourceInvoker);
+				articleResourceService.getBinaryContent(articleResourceInvoker);
 			}
 			else if (methodName.equals("getArticleResourcePrimKey")) {
-				binaryContentService.getBinaryContentId(articleResourceInvoker);
+				articleResourceService.getBinaryContentId(articleResourceInvoker);
 			}
 			else if (methodName.equals("getArticleResources")) {
-				binaryContentService.getBinaryContents(articleResourceInvoker);
+				articleResourceService.getBinaryContents(articleResourceInvoker);
 			}
 
 			return articleResourceInvoker.getReturnValue();
