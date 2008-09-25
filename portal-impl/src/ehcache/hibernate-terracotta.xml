@@ -1,7 +1,9 @@
-<!-- 
-This configuration is optimized for Terracotta DSO. maxElementsInMemory has been 
-increased to account for the extra memory that Terracotta provides. 
+<!--
+This configuration is optimized for Terracotta DSO. The attribute
+maxElementsInMemory has been increased to account for the capabilities that
+Terracotta provides.
 -->
+
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
 	<diskStore path="resource.repositories.root/ehcache/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
