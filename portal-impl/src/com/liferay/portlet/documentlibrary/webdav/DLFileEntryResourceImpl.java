@@ -63,10 +63,8 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public boolean isLocked() {
 		try {
-			DLFileEntryServiceUtil.getFileEntryLock(
+			return DLFileEntryServiceUtil.hasFileEntryLock(
 				_fileEntry.getFolderId(), _fileEntry.getName());
-
-			return true;
 		}
 		catch (Exception e) {
 		}

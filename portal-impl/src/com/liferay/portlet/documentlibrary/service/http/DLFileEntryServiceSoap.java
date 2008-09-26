@@ -204,11 +204,27 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
-		java.lang.String name) throws RemoteException {
+	public static boolean hasFileEntryLock(long folderId, java.lang.String name)
+		throws RemoteException {
 		try {
-			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.getFileEntryLock(folderId,
+			boolean returnValue = DLFileEntryServiceUtil.hasFileEntryLock(folderId,
 					name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean verifyFileEntryLock(long folderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
+					name, lockUuid);
 
 			return returnValue;
 		}

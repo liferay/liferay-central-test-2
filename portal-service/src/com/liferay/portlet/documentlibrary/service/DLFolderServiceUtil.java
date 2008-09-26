@@ -119,6 +119,51 @@ public class DLFolderServiceUtil {
 		return getService().getFolders(groupId, parentFolderId);
 	}
 
+	public static boolean hasInheritableLock(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return getService().hasInheritableLock(folderId);
+	}
+
+	public static boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return getService().verifyInheritableLock(folderId, lockUuid);
+	}
+
+	public static com.liferay.lock.model.Lock lockFolder(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return getService().lockFolder(folderId);
+	}
+
+	public static com.liferay.lock.model.Lock lockFolder(long folderId,
+		java.lang.String owner, boolean inheritable, long expirationTime)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return getService()
+				   .lockFolder(folderId, owner, inheritable, expirationTime);
+	}
+
+	public static com.liferay.lock.model.Lock refreshFolderLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		return getService().refreshFolderLock(lockUuid, expirationTime);
+	}
+
+	public static void unlockFolder(long folderId, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		getService().unlockFolder(folderId, lockUuid);
+	}
+
+	public static void unlockFolder(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		getService().unlockFolder(groupId, parentFolderId, name, lockUuid);
+	}
+
 	public static void reIndexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

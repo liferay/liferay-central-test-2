@@ -22,13 +22,20 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.lock.ExpiredLockException;
+import com.liferay.lock.InvalidLockException;
+import com.liferay.lock.NoSuchLockException;
+import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
@@ -37,8 +44,10 @@ import java.io.InputStream;
 
 import java.rmi.RemoteException;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -99,20 +108,44 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public void deleteFolder(long folderId)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
+
+		User user = getUser();
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.DELETE);
 
-		dlFolderLocalService.deleteFolder(folderId);
+		boolean alreadyHasLock = lockService.hasLock(
+			DLFolder.class.getName(), folderId, user.getUserId());
+
+		Lock lock = null;
+
+		if (!alreadyHasLock) {
+
+			// Lock
+
+			lock = lockFolder(folderId);
+		}
+
+		try {
+			dlFolderLocalService.deleteFolder(folderId);
+		}
+		finally {
+			if (!alreadyHasLock) {
+
+				// Unlock
+
+				unlockFolder(folderId, lock.getUuid());
+			}
+		}
 	}
 
 	public void deleteFolder(long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		DLFolder folder = getFolder(groupId, parentFolderId, name);
+		long folderId = getFolderId(groupId, parentFolderId, name);
 
-		deleteFolder(folder.getFolderId());
+		deleteFolder(folderId);
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -166,6 +199,157 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return folders;
 	}
 
+	public boolean hasInheritableLock(long folderId)
+		throws PortalException, SystemException, RemoteException {
+
+		boolean inheritable = false;
+
+		try {
+			Lock lock = lockService.getLock(DLFolder.class.getName(), folderId);
+
+			inheritable = lock.isInheritable();
+		}
+		catch (ExpiredLockException ele) {
+		}
+		catch (NoSuchLockException nsle) {
+		}
+
+		return inheritable;
+	}
+
+	public boolean verifyInheritableLock(long folderId, String lockUuid)
+		throws PortalException, SystemException, RemoteException {
+
+		boolean verified = false;
+
+		try {
+			Lock lock = lockService.getLock(DLFolder.class.getName(), folderId);
+
+			if (!lock.isInheritable()) {
+				throw new NoSuchLockException();
+			}
+
+			verified = lock.getUuid().equals(lockUuid);
+		}
+		catch (ExpiredLockException ele) {
+			throw new NoSuchLockException(ele);
+		}
+
+		return verified;
+	}
+
+	public Lock lockFolder(long folderId)
+		throws PortalException, SystemException, RemoteException {
+
+		return lockFolder(
+			folderId, null, false, DLFolderImpl.LOCK_EXPIRATION_TIME);
+	}
+
+	public Lock lockFolder(
+			long folderId, String owner, boolean inheritable,
+			long expirationTime)
+		throws PortalException, SystemException, RemoteException {
+
+		if ((expirationTime <= 0) ||
+			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
+
+			expirationTime = DLFolderImpl.LOCK_EXPIRATION_TIME;
+		}
+
+		Lock folderLock = lockService.lock(
+			DLFolder.class.getName(), folderId, getUser().getUserId(), owner,
+			inheritable, expirationTime);
+
+		Set<String> fileNames = new HashSet<String>();
+
+		try {
+			List<DLFileEntry> entries =
+				dlFileEntryService.getFileEntries(folderId);
+
+			for (DLFileEntry entry : entries) {
+				dlFileEntryService.lockFileEntry(
+					folderId, entry.getName(), owner, expirationTime);
+
+				fileNames.add(entry.getName());
+			}
+		}
+		catch (Exception e) {
+			for (String name : fileNames) {
+				dlFileEntryService.unlockFileEntry(folderId, name);
+			}
+
+			unlockFolder(folderId, folderLock.getUuid());
+
+			if (e instanceof PortalException) {
+				throw (PortalException)e;
+			}
+			else if (e instanceof SystemException) {
+				throw (SystemException)e;
+			}
+			else if (e instanceof RemoteException) {
+				throw (RemoteException)e;
+			}
+			else {
+				throw new PortalException(e);
+			}
+		}
+
+		return folderLock;
+	}
+
+	public Lock refreshFolderLock(String lockUuid, long expirationTime)
+		throws PortalException, RemoteException {
+
+		return lockService.refresh(lockUuid, expirationTime);
+	}
+
+	public void unlockFolder(long folderId, String lockUuid)
+		throws PortalException, RemoteException {
+
+		if (Validator.isNotNull(lockUuid)) {
+			try {
+				Lock lock = lockService.getLock(
+					DLFolder.class.getName(), folderId);
+
+				if (!lock.getUuid().equals(lockUuid)) {
+					throw new InvalidLockException("UUIDs do not match");
+				}
+			}
+			catch (PortalException pe) {
+				if (pe instanceof ExpiredLockException ||
+					pe instanceof NoSuchLockException) {
+				}
+				else {
+					throw pe;
+				}
+			}
+		}
+
+		lockService.unlock(DLFolder.class.getName(), folderId);
+
+		try {
+			List<DLFileEntry> entries =
+				dlFileEntryService.getFileEntries(folderId);
+
+			for (DLFileEntry entry : entries) {
+				dlFileEntryService.unlockFileEntry(
+					folderId, entry.getName());
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void unlockFolder(
+			long groupId, long parentFolderId, String name, String lockUuid)
+		throws PortalException, RemoteException, SystemException {
+
+		long folderId = getFolderId(groupId, parentFolderId, name);
+
+		unlockFolder(folderId, lockUuid);
+	}
+
 	public void reIndexSearch(long companyId)
 		throws PortalException, SystemException {
 
@@ -180,13 +364,37 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
+
+		User user = getUser();
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
-		return dlFolderLocalService.updateFolder(
-			folderId, parentFolderId, name, description);
+		boolean alreadyHasLock = lockService.hasLock(
+			DLFolder.class.getName(), folderId, user.getUserId());
+
+		Lock lock = null;
+
+		if (!alreadyHasLock) {
+
+			// Lock
+
+			lock = lockFolder(folderId);
+		}
+
+		try {
+			return dlFolderLocalService.updateFolder(
+				folderId, parentFolderId, name, description);
+		}
+		finally {
+			if (!alreadyHasLock) {
+
+				// Unlock
+
+				unlockFolder(folderId, lock.getUuid());
+			}
+		}
 	}
 
 	protected void copyFolder(
@@ -228,9 +436,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			file.delete();
 		}
 
-		long destPlid = layoutLocalService.getDefaultPlid(
-			destFolder.getGroupId());
-
 		List<DLFolder> srcSubfolders = getFolders(
 			srcFolder.getGroupId(), srcFolder.getFolderId());
 
@@ -239,7 +444,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			String description = srcSubfolder.getDescription();
 
 			DLFolder destSubfolder = addFolder(
-				destPlid, destFolder.getFolderId(), name,
+				destFolder.getGroupId(), destFolder.getFolderId(), name,
 				description, addCommunityPermissions, addGuestPermissions);
 
 			copyFolder(

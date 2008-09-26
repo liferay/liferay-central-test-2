@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.lock.DuplicateLockException;
-import com.liferay.lock.ExpiredLockException;
 import com.liferay.lock.InvalidLockException;
 import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
@@ -337,21 +336,36 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		Lock lock = null;
 
-		if (resource instanceof DLFileEntryResourceImpl) {
-			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
+		try {
+			if (resource instanceof DLFileEntryResourceImpl) {
+				DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
-			try {
 				lock = DLFileEntryServiceUtil.lockFileEntry(
 					fileEntry.getFolderId(), fileEntry.getName(), owner,
 					timeout);
 			}
-			catch (Exception e) {
+			else {
+				boolean inheritable = false;
 
-				 // DuplicateLock is 423 not 501
+				long depth = WebDAVUtil.getDepth(
+					webDavRequest.getHttpServletRequest());
 
-				if (!(e instanceof DuplicateLockException)) {
-					throw new WebDAVException(e);
+				if (depth != 0) {
+					inheritable = true;
 				}
+
+				DLFolder folder = (DLFolder)resource.getModel();
+
+				lock = DLFolderServiceUtil.lockFolder(
+					folder.getFolderId(), owner, inheritable, timeout);
+			}
+		}
+		catch (Exception e) {
+
+			 // DuplicateLock is 423 not 501
+
+			if (!(e instanceof DuplicateLockException)) {
+				throw new WebDAVException(e);
 			}
 		}
 
@@ -579,14 +593,17 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		Lock lock = null;
 
-		if (resource instanceof DLFileEntryResourceImpl) {
-			try {
+		try {
+			if (resource instanceof DLFileEntryResourceImpl) {
 				lock = DLFileEntryServiceUtil.refreshFileEntryLock(
 					uuid, timeout);
 			}
-			catch (Exception e) {
-				throw new WebDAVException(e);
+			else {
+				lock = DLFolderServiceUtil.refreshFolderLock(uuid, timeout);
 			}
+		}
+		catch (Exception e) {
+			throw new WebDAVException(e);
 		}
 
 		return lock;
@@ -603,9 +620,16 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				DLFileEntryServiceUtil.unlockFileEntry(
 					fileEntry.getFolderId(), fileEntry.getName(), token);
-
-				return true;
 			}
+			else {
+				DLFolder folder = (DLFolder)resource.getModel();
+
+				DLFolderServiceUtil.unlockFolder(
+					folder.getGroupId(), folder.getParentFolderId(),
+					folder.getName(), token);
+			}
+
+			return true;
 		}
 		catch (Exception e) {
 			if (e instanceof InvalidLockException) {
@@ -741,33 +765,27 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		long parentFolderId = fileEntry.getFolderId();
 		String fileName = fileEntry.getName();
 
-		return isLocked(parentFolderId, fileName, lockUuid);
-	}
+		if (Validator.isNull(lockUuid)) {
 
-	protected boolean isLocked(
-			long parentFolderId, String fileName, String lockUuid)
-		throws Exception {
+			// Client does not claim to know of a lock
 
-		boolean locked = false;
-
-		try {
-			Lock lock = DLFileEntryServiceUtil.getFileEntryLock(
+			return DLFileEntryServiceUtil.hasFileEntryLock(
 				parentFolderId, fileName);
+		}
+		else {
 
-			if (!lock.getUuid().equals(lockUuid)) {
-				locked = true;
+			// Client claims to know of a lock.  Verify the lock UUID.
+
+			try {
+				boolean verified = DLFileEntryServiceUtil.verifyFileEntryLock(
+					parentFolderId, fileName, lockUuid);
+
+				return !verified;
+			}
+			catch (NoSuchLockException nsle) {
+				return false;
 			}
 		}
-		catch (PortalException pe) {
-			if (pe instanceof ExpiredLockException ||
-				pe instanceof NoSuchLockException) {
-			}
-			else {
-				throw pe;
-			}
-		}
-
-		return locked;
 	}
 
 	protected Resource toResource(

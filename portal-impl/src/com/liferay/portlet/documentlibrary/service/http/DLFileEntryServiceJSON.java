@@ -151,11 +151,21 @@ public class DLFileEntryServiceJSON {
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
-		java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.getFileEntryLock(folderId,
+	public static boolean hasFileEntryLock(long folderId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		boolean returnValue = DLFileEntryServiceUtil.hasFileEntryLock(folderId,
 				name);
+
+		return returnValue;
+	}
+
+	public static boolean verifyFileEntryLock(long folderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
+				name, lockUuid);
 
 		return returnValue;
 	}

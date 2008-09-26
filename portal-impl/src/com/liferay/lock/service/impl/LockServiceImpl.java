@@ -58,7 +58,16 @@ public class LockServiceImpl implements LockService {
 			long expirationTime)
 		throws PortalException {
 
-		return LockPool.lock(className, pk, userId, owner, expirationTime);
+		return lock(className, pk, userId, owner, false, expirationTime);
+	}
+
+	public Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
+			boolean inheritable, long expirationTime)
+		throws PortalException {
+
+		return LockPool.lock(
+			className, pk, userId, owner, inheritable, expirationTime);
 	}
 
 	public Lock refresh(String uuid, long expirationTime)

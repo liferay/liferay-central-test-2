@@ -51,6 +51,11 @@ public interface LockService {
 			long expirationTime)
 		throws PortalException, RemoteException;
 
+	public Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
+			boolean inheritable, long expirationTime)
+		throws PortalException, RemoteException;
+
 	public Lock refresh(String uuid, long expirationTime)
 		throws PortalException, RemoteException;
 

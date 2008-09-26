@@ -62,10 +62,11 @@ public class LockPool {
 
 	public static Lock lock(
 			String className, Comparable<?> pk, long userId, String owner,
-			long expirationTime)
+			boolean inheritable, long expirationTime)
 		throws DuplicateLockException {
 
-		return _instance._lock(className, pk, userId, owner, expirationTime);
+		return _instance._lock(
+			className, pk, userId, owner, inheritable, expirationTime);
 	}
 
 	public static Lock refresh(String uuid, long expirationTime)
@@ -152,7 +153,7 @@ public class LockPool {
 
 	private Lock _lock(
 			String className, Comparable<?> pk, long userId, String owner,
-			long expirationTime)
+			boolean inheritable, long expirationTime)
 		throws DuplicateLockException {
 
 		Map<Comparable<?>, Lock> locksByPK = _getLocks(className);
@@ -173,7 +174,9 @@ public class LockPool {
 		if (lock == null) {
 			String uuid = PortalUUIDUtil.generate();
 
-			lock = new Lock(uuid, className, pk, userId, owner, expirationTime);
+			lock = new Lock(
+				uuid, className, pk, userId, owner, inheritable,
+				expirationTime);
 
 			locksByPK.put(pk, lock);
 

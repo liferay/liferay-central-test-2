@@ -70,13 +70,13 @@ public interface DLFolderService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void deleteFolder(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void deleteFolder(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
@@ -98,6 +98,36 @@ public interface DLFolderService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public boolean hasInheritableLock(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.lock.model.Lock lockFolder(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.lock.model.Lock lockFolder(long folderId,
+		java.lang.String owner, boolean inheritable, long expirationTime)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.lock.model.Lock refreshFolderLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public void unlockFolder(long folderId, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public void unlockFolder(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void reIndexSearch(long companyId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -105,6 +135,6 @@ public interface DLFolderService {
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
 }

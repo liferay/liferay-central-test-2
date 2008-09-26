@@ -219,6 +219,107 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static boolean hasInheritableLock(long folderId)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.hasInheritableLock(folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid) throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.verifyInheritableLock(folderId,
+					lockUuid);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock lockFolder(long folderId)
+		throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFolderServiceUtil.lockFolder(folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock lockFolder(long folderId,
+		java.lang.String owner, boolean inheritable, long expirationTime)
+		throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFolderServiceUtil.lockFolder(folderId,
+					owner, inheritable, expirationTime);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock refreshFolderLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFolderServiceUtil.refreshFolderLock(lockUuid,
+					expirationTime);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unlockFolder(long folderId, java.lang.String lockUuid)
+		throws RemoteException {
+		try {
+			DLFolderServiceUtil.unlockFolder(folderId, lockUuid);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unlockFolder(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws RemoteException {
+		try {
+			DLFolderServiceUtil.unlockFolder(groupId, parentFolderId, name,
+				lockUuid);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void reIndexSearch(long companyId) throws RemoteException {
 		try {
 			DLFolderServiceUtil.reIndexSearch(companyId);

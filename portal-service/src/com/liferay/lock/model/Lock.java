@@ -36,18 +36,16 @@ import java.util.Date;
  */
 public class Lock implements Comparable<Lock>, Serializable {
 
-	public Lock() {
-	}
-
 	public Lock(
 		String uuid, String className, Comparable<?> pk, long userId,
-		String owner, long expirationTime) {
+		String owner, boolean inheritable, long expirationTime) {
 
 		_uuid = uuid;
 		_className = className;
 		_pk = pk;
 		_userId = userId;
 		_owner = owner;
+		_inheritable = inheritable;
 		_expirationTime = expirationTime;
 		_date = new Date();
 	}
@@ -58,13 +56,13 @@ public class Lock implements Comparable<Lock>, Serializable {
 		}
 
 		int value = 0;
-		value = getClassName().compareTo(lock.getClassName());
+		value = getUuid().compareTo(lock.getUuid());
 
 		if (value != 0) {
 			return value;
 		}
 
-		value = getUuid().compareTo(lock.getUuid());
+		value = getClassName().compareTo(lock.getClassName());
 
 		if (value != 0) {
 			return value;
@@ -78,6 +76,13 @@ public class Lock implements Comparable<Lock>, Serializable {
 		}
 
 		value = getOwner().compareTo(lock.getOwner());
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = ((Comparable<Boolean>)isInheritable()).compareTo(
+			lock.isInheritable());
 
 		if (value != 0) {
 			return value;
@@ -117,6 +122,10 @@ public class Lock implements Comparable<Lock>, Serializable {
 
 	public long getExpirationTime() {
 		return _expirationTime;
+	}
+
+	public boolean isInheritable() {
+		return _inheritable;
 	}
 
 	public String getOwner() {
@@ -169,11 +178,12 @@ public class Lock implements Comparable<Lock>, Serializable {
 		_uuid = uuid;
 	}
 
+	private String _uuid;
 	private String _className;
 	private Comparable<?> _pk;
 	private long _userId;
 	private String _owner;
-	private String _uuid;
+	private boolean _inheritable;
 	private long _expirationTime;
 	private Date _date;
 

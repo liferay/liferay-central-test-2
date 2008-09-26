@@ -28,6 +28,8 @@ import com.liferay.counter.service.CounterService;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
 
+import com.liferay.lock.service.LockService;
+
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -304,6 +306,14 @@ public abstract class DLFolderLocalServiceBaseImpl
 		this.dlService = dlService;
 	}
 
+	public LockService getLockService() {
+		return lockService;
+	}
+
+	public void setLockService(LockService lockService) {
+		this.lockService = lockService;
+	}
+
 	public LayoutLocalService getLayoutLocalService() {
 		return layoutLocalService;
 	}
@@ -461,6 +471,8 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected DLLocalService dlLocalService;
 	@javax.annotation.Resource(name = "com.liferay.documentlibrary.service.DLService.impl")
 	protected DLService dlService;
+	@javax.annotation.Resource(name = "com.liferay.lock.service.LockService.impl")
+	protected LockService lockService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutService.impl")

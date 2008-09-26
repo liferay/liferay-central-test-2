@@ -73,7 +73,19 @@ public class LockServiceUtil {
 
 		LockService lockService = LockServiceFactory.getService();
 
-		return lockService.lock(className, pk, userId, owner, expirationTime);
+		return lockService.lock(
+			className, pk, userId, owner, expirationTime);
+	}
+
+	public static Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
+			boolean inheritable, long expirationTime)
+		throws PortalException, RemoteException {
+
+		LockService lockService = LockServiceFactory.getService();
+
+		return lockService.lock(
+			className, pk, userId, owner, inheritable, expirationTime);
 	}
 
 	public static Lock refresh(String uuid, long expirationTime)
