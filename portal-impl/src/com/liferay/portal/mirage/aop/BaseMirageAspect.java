@@ -62,7 +62,7 @@ public abstract class BaseMirageAspect {
 	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ArticleImageService")
 	protected BinaryContentService articleImageService;
 	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ArticleResourceService")
-	protected BinaryContentService articleResourceService; 
+	protected BinaryContentService articleResourceService;
 	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ContentFeedService")
 	protected ContentFeedService contentFeedService;
 	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ContentSearchService")
