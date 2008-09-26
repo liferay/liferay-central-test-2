@@ -221,6 +221,7 @@ public class CountryModelImpl extends BaseModelImpl {
 		else {
 			Country model = new CountryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setCountryId(getCountryId());

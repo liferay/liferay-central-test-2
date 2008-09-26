@@ -309,6 +309,7 @@ public class PhoneModelImpl extends BaseModelImpl {
 		else {
 			Phone model = new PhoneImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPhoneId(getPhoneId());

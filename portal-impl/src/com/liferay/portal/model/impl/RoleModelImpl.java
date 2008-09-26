@@ -244,6 +244,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		else {
 			Role model = new RoleImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setRoleId(getRoleId());

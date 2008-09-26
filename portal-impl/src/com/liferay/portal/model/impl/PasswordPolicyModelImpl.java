@@ -525,6 +525,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		else {
 			PasswordPolicy model = new PasswordPolicyImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPasswordPolicyId(getPasswordPolicyId());

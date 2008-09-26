@@ -207,6 +207,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		else {
 			Release model = new ReleaseImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setReleaseId(getReleaseId());

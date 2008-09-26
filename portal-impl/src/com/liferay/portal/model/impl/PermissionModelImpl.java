@@ -172,6 +172,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 		else {
 			Permission model = new PermissionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPermissionId(getPermissionId());

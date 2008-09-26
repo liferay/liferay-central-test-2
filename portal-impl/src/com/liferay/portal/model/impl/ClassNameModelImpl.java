@@ -150,6 +150,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 		else {
 			ClassName model = new ClassNameImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setClassNameId(getClassNameId());

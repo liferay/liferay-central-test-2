@@ -347,6 +347,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		else {
 			OrgLabor model = new OrgLaborImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setOrgLaborId(getOrgLaborId());

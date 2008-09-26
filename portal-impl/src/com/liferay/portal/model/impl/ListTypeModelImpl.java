@@ -156,6 +156,7 @@ public class ListTypeModelImpl extends BaseModelImpl {
 		else {
 			ListType model = new ListTypeImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setListTypeId(getListTypeId());

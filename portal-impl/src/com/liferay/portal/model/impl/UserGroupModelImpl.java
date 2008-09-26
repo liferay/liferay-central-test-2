@@ -186,6 +186,7 @@ public class UserGroupModelImpl extends BaseModelImpl {
 		else {
 			UserGroup model = new UserGroupImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUserGroupId(getUserGroupId());

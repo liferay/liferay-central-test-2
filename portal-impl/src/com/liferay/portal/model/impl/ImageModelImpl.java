@@ -216,6 +216,7 @@ public class ImageModelImpl extends BaseModelImpl {
 		else {
 			Image model = new ImageImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setImageId(getImageId());

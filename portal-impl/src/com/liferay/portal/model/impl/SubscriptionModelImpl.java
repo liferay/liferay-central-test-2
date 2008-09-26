@@ -259,6 +259,7 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		else {
 			Subscription model = new SubscriptionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setSubscriptionId(getSubscriptionId());

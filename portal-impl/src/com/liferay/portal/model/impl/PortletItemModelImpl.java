@@ -275,6 +275,7 @@ public class PortletItemModelImpl extends BaseModelImpl {
 		else {
 			PortletItem model = new PortletItemImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPortletItemId(getPortletItemId());

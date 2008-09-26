@@ -175,6 +175,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 		else {
 			PasswordTracker model = new PasswordTrackerImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPasswordTrackerId(getPasswordTrackerId());

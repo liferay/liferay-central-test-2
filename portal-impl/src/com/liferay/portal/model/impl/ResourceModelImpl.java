@@ -155,6 +155,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 		else {
 			Resource model = new ResourceImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setResourceId(getResourceId());

@@ -188,6 +188,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		else {
 			UserIdMapper model = new UserIdMapperImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUserIdMapperId(getUserIdMapperId());

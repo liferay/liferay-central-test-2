@@ -596,6 +596,7 @@ public class ContactModelImpl extends BaseModelImpl {
 		else {
 			Contact model = new ContactImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setContactId(getContactId());

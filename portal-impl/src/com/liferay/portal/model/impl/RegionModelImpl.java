@@ -189,6 +189,7 @@ public class RegionModelImpl extends BaseModelImpl {
 		else {
 			Region model = new RegionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setRegionId(getRegionId());

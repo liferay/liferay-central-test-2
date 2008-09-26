@@ -201,6 +201,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		else {
 			PortletPreferences model = new PortletPreferencesImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPortletPreferencesId(getPortletPreferencesId());

@@ -168,6 +168,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		else {
 			ResourceCode model = new ResourceCodeImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setCodeId(getCodeId());

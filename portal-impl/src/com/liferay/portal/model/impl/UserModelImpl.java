@@ -620,6 +620,7 @@ public class UserModelImpl extends BaseModelImpl {
 		else {
 			User model = new UserImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

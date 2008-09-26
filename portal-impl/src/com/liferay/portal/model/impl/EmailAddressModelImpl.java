@@ -292,6 +292,7 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 		else {
 			EmailAddress model = new EmailAddressImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setEmailAddressId(getEmailAddressId());

@@ -238,6 +238,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		else {
 			UserTracker model = new UserTrackerImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUserTrackerId(getUserTrackerId());

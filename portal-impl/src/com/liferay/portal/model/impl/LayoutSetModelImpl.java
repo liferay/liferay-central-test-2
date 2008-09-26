@@ -317,6 +317,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		else {
 			LayoutSet model = new LayoutSetImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setLayoutSetId(getLayoutSetId());

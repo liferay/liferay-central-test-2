@@ -154,6 +154,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		else {
 			UserGroupRole model = new UserGroupRoleImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUserId(getUserId());

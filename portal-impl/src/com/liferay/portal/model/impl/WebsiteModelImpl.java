@@ -291,6 +291,7 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		else {
 			Website model = new WebsiteImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setWebsiteId(getWebsiteId());

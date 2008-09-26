@@ -459,6 +459,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		else {
 			Layout model = new LayoutImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPlid(getPlid());

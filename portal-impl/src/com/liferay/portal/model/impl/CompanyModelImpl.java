@@ -216,6 +216,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		else {
 			Company model = new CompanyImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setCompanyId(getCompanyId());

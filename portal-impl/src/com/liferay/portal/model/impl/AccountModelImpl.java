@@ -368,6 +368,7 @@ public class AccountModelImpl extends BaseModelImpl {
 		else {
 			Account model = new AccountImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setAccountId(getAccountId());

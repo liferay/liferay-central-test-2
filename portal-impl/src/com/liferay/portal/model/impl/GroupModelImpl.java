@@ -326,6 +326,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		else {
 			Group model = new GroupImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setGroupId(getGroupId());

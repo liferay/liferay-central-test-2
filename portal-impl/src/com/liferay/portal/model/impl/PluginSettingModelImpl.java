@@ -206,6 +206,7 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		else {
 			PluginSetting model = new PluginSettingImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPluginSettingId(getPluginSettingId());

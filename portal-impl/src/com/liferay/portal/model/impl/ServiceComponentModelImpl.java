@@ -186,6 +186,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		else {
 			ServiceComponent model = new ServiceComponentImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setServiceComponentId(getServiceComponentId());

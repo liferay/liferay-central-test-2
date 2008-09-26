@@ -173,6 +173,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 		else {
 			UserTrackerPath model = new UserTrackerPathImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUserTrackerPathId(getUserTrackerPathId());

@@ -265,6 +265,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		else {
 			MembershipRequest model = new MembershipRequestImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setMembershipRequestId(getMembershipRequestId());

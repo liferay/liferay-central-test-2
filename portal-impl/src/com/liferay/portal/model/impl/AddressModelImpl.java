@@ -404,6 +404,7 @@ public class AddressModelImpl extends BaseModelImpl {
 		else {
 			Address model = new AddressImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setAddressId(getAddressId());

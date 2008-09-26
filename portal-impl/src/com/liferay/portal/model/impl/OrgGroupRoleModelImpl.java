@@ -154,6 +154,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 		else {
 			OrgGroupRole model = new OrgGroupRoleImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setOrganizationId(getOrganizationId());

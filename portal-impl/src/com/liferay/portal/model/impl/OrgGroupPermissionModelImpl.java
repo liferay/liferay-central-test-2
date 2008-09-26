@@ -155,6 +155,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		else {
 			OrgGroupPermission model = new OrgGroupPermissionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setOrganizationId(getOrganizationId());

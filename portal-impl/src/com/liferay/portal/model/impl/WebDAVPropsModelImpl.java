@@ -227,6 +227,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 		else {
 			WebDAVProps model = new WebDAVPropsImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setWebDavPropsId(getWebDavPropsId());
