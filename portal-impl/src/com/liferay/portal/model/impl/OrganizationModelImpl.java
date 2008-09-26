@@ -72,7 +72,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			
 
-			{ "location", new Integer(Types.BOOLEAN) },
+			{ "type_", new Integer(Types.VARCHAR) },
 			
 
 			{ "recursable", new Integer(Types.BOOLEAN) },
@@ -89,7 +89,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,type_ VARCHAR(75) null,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table Organization_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -105,7 +105,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setParentOrganizationId(soapModel.getParentOrganizationId());
 		model.setName(soapModel.getName());
-		model.setLocation(soapModel.getLocation());
+		model.setType(soapModel.getType());
 		model.setRecursable(soapModel.getRecursable());
 		model.setRegionId(soapModel.getRegionId());
 		model.setCountryId(soapModel.getCountryId());
@@ -187,17 +187,15 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public boolean getLocation() {
-		return _location;
+	public String getType() {
+		return GetterUtil.getString(_type);
 	}
 
-	public boolean isLocation() {
-		return _location;
-	}
-
-	public void setLocation(boolean location) {
-		if (location != _location) {
-			_location = location;
+	public void setType(String type) {
+		if (((type == null) && (_type != null)) ||
+				((type != null) && (_type == null)) ||
+				((type != null) && (_type != null) && !type.equals(_type))) {
+			_type = type;
 		}
 	}
 
@@ -271,7 +269,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			model.setCompanyId(getCompanyId());
 			model.setParentOrganizationId(getParentOrganizationId());
 			model.setName(HtmlUtil.escape(getName()));
-			model.setLocation(getLocation());
+			model.setType(HtmlUtil.escape(getType()));
 			model.setRecursable(getRecursable());
 			model.setRegionId(getRegionId());
 			model.setCountryId(getCountryId());
@@ -293,7 +291,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setParentOrganizationId(getParentOrganizationId());
 		clone.setName(getName());
-		clone.setLocation(getLocation());
+		clone.setType(getType());
 		clone.setRecursable(getRecursable());
 		clone.setRegionId(getRegionId());
 		clone.setCountryId(getCountryId());
@@ -353,7 +351,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	private long _companyId;
 	private long _parentOrganizationId;
 	private String _name;
-	private boolean _location;
+	private String _type;
 	private boolean _recursable;
 	private long _regionId;
 	private long _countryId;

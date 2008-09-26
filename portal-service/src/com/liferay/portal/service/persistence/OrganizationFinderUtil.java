@@ -32,8 +32,9 @@ public class OrganizationFinderUtil {
 	public static int countByKeywords(long companyId,
 		long parentOrganizationId,
 		java.lang.String parentOrganizationComparator,
-		java.lang.String keywords, int type, java.lang.Long regionId,
-		java.lang.Long countryId, java.util.LinkedHashMap<String, Object> params)
+		java.lang.String keywords, java.lang.String type,
+		java.lang.Long regionId, java.lang.Long countryId,
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .countByKeywords(companyId, parentOrganizationId,
@@ -44,7 +45,7 @@ public class OrganizationFinderUtil {
 	public static int countByC_PO_N_T_S_C_Z_R_C(long companyId,
 		long parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
-		int type, java.lang.String street, java.lang.String city,
+		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
@@ -58,9 +59,10 @@ public class OrganizationFinderUtil {
 	public static int countByC_PO_N_T_S_C_Z_R_C(long companyId,
 		long parentOrganizationId,
 		java.lang.String parentOrganizationComparator,
-		java.lang.String[] names, int type, java.lang.String[] streets,
-		java.lang.String[] cities, java.lang.String[] zips,
-		java.lang.Long regionId, java.lang.Long countryId,
+		java.lang.String[] names, java.lang.String type,
+		java.lang.String[] streets, java.lang.String[] cities,
+		java.lang.String[] zips, java.lang.Long regionId,
+		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
@@ -72,8 +74,8 @@ public class OrganizationFinderUtil {
 	public static java.util.List<com.liferay.portal.model.Organization> findByKeywords(
 		long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationComparator,
-		java.lang.String keywords, int type, java.lang.Long regionId,
-		java.lang.Long countryId,
+		java.lang.String keywords, java.lang.String type,
+		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -86,7 +88,7 @@ public class OrganizationFinderUtil {
 	public static java.util.List<com.liferay.portal.model.Organization> findByC_PO_N_T_S_C_Z_R_C(
 		long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
-		int type, java.lang.String street, java.lang.String city,
+		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
@@ -101,9 +103,10 @@ public class OrganizationFinderUtil {
 	public static java.util.List<com.liferay.portal.model.Organization> findByC_PO_N_T_S_C_Z_R_C(
 		long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationComparator,
-		java.lang.String[] names, int type, java.lang.String[] streets,
-		java.lang.String[] cities, java.lang.String[] zips,
-		java.lang.Long regionId, java.lang.Long countryId,
+		java.lang.String[] names, java.lang.String type,
+		java.lang.String[] streets, java.lang.String[] cities,
+		java.lang.String[] zips, java.lang.Long regionId,
+		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {

@@ -47,7 +47,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
-	<c:if test="<%= organization.isRegular() %>">
+	<c:if test="<%= organization.hasSuborganizations() %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
 			<portlet:param name="struts_action" value="/directory/view" />
 			<portlet:param name="tabs1" value="organizations" />

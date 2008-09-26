@@ -391,10 +391,6 @@ public class LayoutExporter {
 
 		_portletExporter.exportInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "location");
-
-		_portletExporter.exportInheritedPermissions(
-			layoutCache, companyId, resourceName, resourcePrimKey,
 			permissionsEl, "user-group");
 	}
 
@@ -415,9 +411,6 @@ public class LayoutExporter {
 		_portletExporter.exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "organization",
 			rolesEl);
-
-		_portletExporter.exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
 
 		_portletExporter.exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "user-group",

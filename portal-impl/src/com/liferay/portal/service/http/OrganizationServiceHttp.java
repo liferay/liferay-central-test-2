@@ -153,8 +153,8 @@ public class OrganizationServiceHttp {
 
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
-		java.lang.String name, int type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments)
+		java.lang.String name, java.lang.String type, boolean recursable,
+		long regionId, long countryId, int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -166,7 +166,11 @@ public class OrganizationServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new IntegerWrapper(type);
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
 
 			Object paramObj3 = new BooleanWrapper(recursable);
 
@@ -471,9 +475,9 @@ public class OrganizationServiceHttp {
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		HttpPrincipal httpPrincipal, long organizationId,
-		long parentOrganizationId, java.lang.String name, int type,
-		boolean recursable, long regionId, long countryId, int statusId,
-		java.lang.String comments)
+		long parentOrganizationId, java.lang.String name,
+		java.lang.String type, boolean recursable, long regionId,
+		long countryId, int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -487,7 +491,11 @@ public class OrganizationServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new IntegerWrapper(type);
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
 
 			Object paramObj4 = new BooleanWrapper(recursable);
 

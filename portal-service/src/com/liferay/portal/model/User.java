@@ -111,12 +111,6 @@ public interface User extends UserModel {
 
 	public boolean hasOrganization();
 
-	public com.liferay.portal.model.Organization getLocation();
-
-	public long getLocationId();
-
-	public boolean hasLocation();
-
 	public int getPrivateLayoutsPageCount();
 
 	public boolean hasPrivateLayouts();

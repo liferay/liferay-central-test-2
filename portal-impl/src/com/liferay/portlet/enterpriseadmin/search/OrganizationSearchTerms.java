@@ -38,7 +38,7 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 	public OrganizationSearchTerms(RenderRequest renderRequest) {
 		super(renderRequest);
 
-		type = DAOParamUtil.getInteger(renderRequest, TYPE);
+		type = DAOParamUtil.getString(renderRequest, TYPE);
 		name = DAOParamUtil.getLike(renderRequest, NAME);
 		street = DAOParamUtil.getLike(renderRequest, STREET);
 		city = DAOParamUtil.getLike(renderRequest, CITY);

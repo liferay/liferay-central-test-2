@@ -852,10 +852,6 @@ public class LayoutImporter {
 
 		importInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "location", false);
-
-		importInheritedPermissions(
-			layoutCache, companyId, resourceName, resourcePrimKey,
 			permissionsEl, "user-group", false);
 	}
 
@@ -875,9 +871,6 @@ public class LayoutImporter {
 		importInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "organization",
 			rolesEl);
-
-		importInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
 
 		importInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "user-group",
@@ -935,10 +928,6 @@ public class LayoutImporter {
 
 				importInheritedPermissions(
 					layoutCache, companyId, resourceName, resourcePrimKey,
-					portletEl, "location", true);
-
-				importInheritedPermissions(
-					layoutCache, companyId, resourceName, resourcePrimKey,
 					portletEl, "user-group", true);
 			}
 		}
@@ -972,10 +961,6 @@ public class LayoutImporter {
 			importInheritedRoles(
 				layoutCache, companyId, groupId, resourceName,
 				"organization", rolesEl);
-
-			importInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "location",
-				rolesEl);
 
 			importInheritedRoles(
 				layoutCache, companyId, groupId, resourceName, "user-group",
@@ -1018,10 +1003,6 @@ public class LayoutImporter {
 				importInheritedRoles(
 					layoutCache, companyId, groupId, resourceName,
 					"organization", portletEl);
-
-				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName, "location",
-					portletEl);
 
 				importInheritedRoles(
 					layoutCache, companyId, groupId, resourceName, "user-group",

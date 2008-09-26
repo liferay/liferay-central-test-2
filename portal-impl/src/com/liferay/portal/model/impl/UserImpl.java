@@ -34,7 +34,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -240,7 +239,7 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	/**
-	 * @deprecated Will return the first regular organization of the list in
+	 * @deprecated Will return the first organization of a list in
 	 * alphabetical order.
 	 */
 	public Organization getOrganization() {
@@ -248,13 +247,11 @@ public class UserImpl extends UserModelImpl implements User {
 			List<Organization> organizations =
 				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());
 
-			Collections.sort(
-				organizations, new OrganizationNameComparator(true));
+			if (organizations.size() > 0) {
+				Collections.sort(
+					organizations, new OrganizationNameComparator(true));
 
-			for (Organization organization : organizations) {
-				if (!organization.isLocation()) {
-					return organization;
-				}
+				return organizations.get(0);
 			}
 		}
 		catch (Exception e) {
@@ -298,54 +295,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public boolean hasOrganization() {
 		if (getOrganizations().size() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public Organization getLocation() {
-		try {
-			List<Organization> organizations =
-				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());
-
-			for (Organization organization : organizations) {
-				if (organization.isLocation()) {
-					return organization;
-				}
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to get a location for user " + getUserId());
-			}
-		}
-
-		return new OrganizationImpl();
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public long getLocationId() {
-		Organization location = getLocation();
-
-		if (location == null) {
-			return OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
-		}
-
-		return location.getOrganizationId();
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public boolean hasLocation() {
-		if (getLocation().getOrganizationId() > 0) {
 			return true;
 		}
 		else {

@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.kernel.configuration.Filter" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -35,9 +36,11 @@ if (parentOrganizationId <= 0) {
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
+Organization parentOrganization = null;
+
 if (parentOrganizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 	try {
-		Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
+		parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
 
 		parentOrganizationName = parentOrganization.getName();
 	}
@@ -45,13 +48,32 @@ if (parentOrganizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID
 	}
 }
 
-int type = BeanParamUtil.getInteger(organization, request, "type");
+String type = BeanParamUtil.getString(organization, request, "type");
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />openOrganizationSelector() {
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
+
+		<c:choose>
+			<c:when test="<%= organization == null %>">
+				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
+			</c:when>
+			<c:otherwise>
+				var type = '<%= type %>';
+			</c:otherwise>
+		</c:choose>
+
+		url = Liferay.Util.addParams('childType=' + type, url);
+
+		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		organizationWindow.focus();
+	}
+
 	function <portlet:namespace />removeOrganization() {
 		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = "";
 
@@ -79,7 +101,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-status" />
 <liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-organization" />
+<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
 
 <table class="lfr-table">
 <tr>
@@ -116,7 +138,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /><portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentOrganizationName"><%= parentOrganizationName %></a>
 
 				<c:if test="<%= editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="type" value="<%= String.valueOf(OrganizationConstants.TYPE_REGULAR) %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
+					<input type="button" value="<liferay-ui:message key="select" />" onClick="<portlet:namespace />openOrganizationSelector();" />
 
 					<input <%= (parentOrganizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
 				</c:if>
@@ -167,32 +189,40 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				<c:choose>
 					<c:when test="<%= organization == null %>">
 						<select name="<portlet:namespace />type">
-							<option <%= (type == OrganizationConstants.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
-							<option <%= (type == OrganizationConstants.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationConstants.TYPE_LOCATION %>"><liferay-ui:message key="location" /></option>
+							<%
+							for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+							%>
+								<option <%= (type.equals(curType)) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+							<%
+							}
+							%>
 						</select>
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, organization.getTypeLabel(type)) %>
+						<%= LanguageUtil.get(pageContext, type) %>
 					</c:otherwise>
 				</c:choose>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="country" />
-			</td>
-			<td>
-				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="region" />
-			</td>
-			<td>
-				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
-			</td>
-		</tr>
+
+		<c:if test="<%= (organization == null) || GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_TYPES_COUNTRY_ENABLED, new Filter(String.valueOf(type)))) %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="country" />
+				</td>
+				<td>
+					<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="region" />
+				</td>
+				<td>
+					<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
+				</td>
+			</tr>
+		</c:if>
 		</table>
 	</td>
 </tr>

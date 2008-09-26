@@ -663,10 +663,6 @@ public class PortletExporter {
 
 		exportInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "location");
-
-		exportInheritedPermissions(
-			layoutCache, companyId, resourceName, resourcePrimKey,
 			permissionsEl, "user-group");
 	}
 
@@ -779,10 +775,6 @@ public class PortletExporter {
 
 		exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "organization",
-			portletEl);
-
-		exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "location",
 			portletEl);
 
 		exportInheritedRoles(

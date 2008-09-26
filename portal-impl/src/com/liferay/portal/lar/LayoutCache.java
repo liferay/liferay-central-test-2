@@ -75,25 +75,13 @@ public class LayoutCache {
 					entityGroupId = group.getGroupId();
 				}
 			}
-			else if (entityName.equals("organization") ||
-					 entityName.equals("location")) {
+			else if (entityName.equals("organization")) {
 
-				List<Organization> organizations = null;
-
-				if (entityName.equals("organization")) {
-					organizations = OrganizationLocalServiceUtil.search(
+				List<Organization> organizations =
+					OrganizationLocalServiceUtil.search(
 						companyId,
 						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, name,
-						OrganizationConstants.TYPE_REGULAR, null, null, null,
-						null, null, null, true, 0, 1);
-				}
-				else if (entityName.equals("location")) {
-					organizations = OrganizationLocalServiceUtil.search(
-						companyId,
-						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, name,
-						OrganizationConstants.TYPE_LOCATION, null, null, null,
-						null, null, null, true, 0, 1);
-				}
+						null, null, null, null, null, null, null, true, 0, 1);
 
 				if (organizations.size() > 0) {
 					Organization organization = organizations.get(0);
@@ -134,25 +122,14 @@ public class LayoutCache {
 					entityMap.put(userGroup.getName(), group.getGroupId());
 				}
 			}
-			else if (entityName.equals("organization") ||
-					 entityName.equals("location")) {
+			else if (entityName.equals("organization")) {
 
-				List<Organization> organizations = null;
-
-				if (entityName.equals("organization")) {
-					organizations = OrganizationLocalServiceUtil.search(
+				List<Organization> organizations =
+					OrganizationLocalServiceUtil.search(
 						companyId,
 						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,
 						OrganizationConstants.TYPE_REGULAR, null, null, null,
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-				}
-				else if (entityName.equals("location")) {
-					organizations = OrganizationLocalServiceUtil.search(
-						companyId,
-						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,
-						OrganizationConstants.TYPE_LOCATION, null, null, null,
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-				}
 
 				for (int i = 0; i < organizations.size(); i++) {
 					Organization organization = organizations.get(i);

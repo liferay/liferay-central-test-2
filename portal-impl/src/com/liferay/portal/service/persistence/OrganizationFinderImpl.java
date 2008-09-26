@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -87,7 +86,7 @@ public class OrganizationFinderImpl
 	public int countByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
-			int type, Long regionId, Long countryId,
+			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
@@ -115,7 +114,7 @@ public class OrganizationFinderImpl
 
 	public int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String name, int type,
+			String parentOrganizationComparator, String name, String type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
@@ -131,7 +130,7 @@ public class OrganizationFinderImpl
 	public int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			int type, String[] streets, String[] cities, String[] zips,
+			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws SystemException {
@@ -163,9 +162,7 @@ public class OrganizationFinderImpl
 
 			String sql = null;
 
-			if (type == OrganizationConstants.TYPE_LOCATION ||
-				type == OrganizationConstants.TYPE_REGULAR) {
-
+			if (Validator.isNotNull(type)) {
 				sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C);
 			}
 			else {
@@ -216,11 +213,8 @@ public class OrganizationFinderImpl
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
-			if (type == OrganizationConstants.TYPE_LOCATION) {
-				qPos.add(true);
-			}
-			else if (type == OrganizationConstants.TYPE_REGULAR) {
-				qPos.add(false);
+			if (Validator.isNotNull(type)) {
+				qPos.add(type);
 			}
 
 			qPos.add(names, 2);
@@ -262,7 +256,7 @@ public class OrganizationFinderImpl
 	public List<Organization> findByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
-			int type, Long regionId, Long countryId,
+			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -291,7 +285,7 @@ public class OrganizationFinderImpl
 
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String name, int type,
+			String parentOrganizationComparator, String name, String type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
@@ -307,7 +301,7 @@ public class OrganizationFinderImpl
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			int type, String[] streets, String[] cities, String[] zips,
+			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -339,9 +333,7 @@ public class OrganizationFinderImpl
 
 			String sql = null;
 
-			if (type == OrganizationConstants.TYPE_LOCATION ||
-				type == OrganizationConstants.TYPE_REGULAR) {
-
+			if (Validator.isNotNull(type)) {
 				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C);
 			}
 			else {
@@ -393,11 +385,8 @@ public class OrganizationFinderImpl
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
-			if (type == OrganizationConstants.TYPE_LOCATION) {
-				qPos.add(true);
-			}
-			else if (type == OrganizationConstants.TYPE_REGULAR) {
-				qPos.add(false);
+			if (Validator.isNotNull(type)) {
+				qPos.add(type);
 			}
 
 			qPos.add(names, 2);
@@ -443,7 +432,7 @@ public class OrganizationFinderImpl
 	protected int countByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			int type, String[] streets, String[] cities, String[] zips,
+			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
 			boolean andOperator)
 		throws SystemException {
@@ -457,9 +446,7 @@ public class OrganizationFinderImpl
 
 			sb.append("(");
 
-			if (type == OrganizationConstants.TYPE_LOCATION ||
-				type == OrganizationConstants.TYPE_REGULAR) {
-
+			if (Validator.isNotNull(type)) {
 				sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -487,9 +474,7 @@ public class OrganizationFinderImpl
 
 			sb.append(") UNION (");
 
-			if (type == OrganizationConstants.TYPE_LOCATION ||
-				type == OrganizationConstants.TYPE_REGULAR) {
-
+			if (Validator.isNotNull(type)) {
 				sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -566,11 +551,8 @@ public class OrganizationFinderImpl
 				qPos.add(companyId);
 				qPos.add(parentOrganizationId);
 
-				if (type == OrganizationConstants.TYPE_LOCATION) {
-					qPos.add(true);
-				}
-				else if (type == OrganizationConstants.TYPE_REGULAR) {
-					qPos.add(false);
+				if (Validator.isNotNull(type)) {
+					qPos.add(type);
 				}
 
 				qPos.add(names, 2);
@@ -615,7 +597,7 @@ public class OrganizationFinderImpl
 	protected List<Organization> findByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			int type, String[] streets, String[] cities, String[] zips,
+			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -629,9 +611,7 @@ public class OrganizationFinderImpl
 
 			sb.append("(");
 
-			if (type == OrganizationConstants.TYPE_LOCATION ||
-				type == OrganizationConstants.TYPE_REGULAR) {
-
+			if (Validator.isNotNull(type)) {
 				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -659,9 +639,7 @@ public class OrganizationFinderImpl
 
 			sb.append(") UNION (");
 
-			if (type == OrganizationConstants.TYPE_LOCATION ||
-				type == OrganizationConstants.TYPE_REGULAR) {
-
+			if (Validator.isNotNull(type)) {
 				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -740,11 +718,8 @@ public class OrganizationFinderImpl
 				qPos.add(companyId);
 				qPos.add(parentOrganizationId);
 
-				if (type == OrganizationConstants.TYPE_LOCATION) {
-					qPos.add(true);
-				}
-				else if (type == OrganizationConstants.TYPE_REGULAR) {
-					qPos.add(false);
+				if (Validator.isNotNull(type)) {
+					qPos.add(type);
 				}
 
 				qPos.add(names, 2);

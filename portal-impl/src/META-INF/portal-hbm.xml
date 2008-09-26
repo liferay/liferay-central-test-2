@@ -234,7 +234,7 @@
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="parentOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="location" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="recursable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="regionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

@@ -573,7 +573,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 						// Type
 
-						row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+						row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
 						// City
 

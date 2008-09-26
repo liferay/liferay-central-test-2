@@ -49,17 +49,13 @@ package com.liferay.portal.model;
  *
  */
 public interface Organization extends OrganizationModel {
+	public boolean isParentable();
+
 	public boolean isRoot();
 
-	public boolean isRegular();
+	public java.lang.String[] getChildrenTypes();
 
-	public int getType();
-
-	public int getType(boolean location);
-
-	public java.lang.String getTypeLabel();
-
-	public java.lang.String getTypeLabel(int type);
+	public int getTypeOrder();
 
 	public com.liferay.portal.model.Group getGroup();
 
@@ -70,6 +66,12 @@ public interface Organization extends OrganizationModel {
 	public int getPublicLayoutsPageCount();
 
 	public boolean hasPublicLayouts();
+
+	public int getSuborganizationsCount()
+		throws com.liferay.portal.SystemException;
+
+	public boolean hasSuborganizations()
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address getAddress();
 

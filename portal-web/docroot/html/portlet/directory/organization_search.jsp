@@ -80,9 +80,15 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<tr>
 		<td>
 			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
-				<option <%= (displayTerms.getType() == OrganizationConstants.ANY_TYPE) ? "selected" : "" %> value="<%= OrganizationConstants.ANY_TYPE %>"><liferay-ui:message key="any" /></option>
-				<option <%= (displayTerms.getType() == OrganizationConstants.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
-				<option <%= (displayTerms.getType() == OrganizationConstants.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationConstants.TYPE_LOCATION %>"><liferay-ui:message key="location" /></option>
+				<option <%= (displayTerms.getType() == null) ? "selected" : "" %> value=""><liferay-ui:message key="any" /></option>
+
+				<%
+				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+				%>
+					<option <%= (curType.equals(displayTerms.getType())) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+				<%
+				}
+				%>
 			</select>
 		</td>
 		<td>

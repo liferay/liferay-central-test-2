@@ -262,7 +262,7 @@
 				[$WHERE$]
 				(Organization_.companyId = ?) AND
 				(Organization_.parentOrganizationId [$PARENT_ORGANIZATION_ID_COMPARATOR$] ?) AND
-				(Organization_.location = ?) AND
+				(Organization_.type_ = ?) AND
 				(
 					(lower(Organization_.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(
@@ -280,7 +280,7 @@
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByC_PO_N_L_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
-				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName, Organization_.parentOrganizationId as orgParentId, Organization_.location as orgLocation
+				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName, Organization_.parentOrganizationId as orgParentId, Organization_.type_ as orgType
 			FROM
 				Organization_
 			LEFT JOIN
@@ -292,7 +292,7 @@
 				[$WHERE$]
 				(Organization_.companyId = ?) AND
 				(Organization_.parentOrganizationId [$PARENT_ORGANIZATION_ID_COMPARATOR$] ?) AND
-				(Organization_.location = ?) AND
+				(Organization_.type_ = ?) AND
 				(
 					(lower(Organization_.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(
@@ -310,7 +310,7 @@
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
-				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName, Organization_.parentOrganizationId as orgParentId, Organization_.location as orgLocation
+				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName, Organization_.parentOrganizationId as orgParentId, Organization_.type_ as orgType
 			FROM
 				Organization_
 			LEFT JOIN

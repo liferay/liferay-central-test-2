@@ -51,12 +51,10 @@ public class OrganizationTypeComparator extends OrderByComparator {
 
 		int value = 0;
 
-		if (organization1.isLocation() && !organization2.isLocation()) {
-			value = 1;
-		}
-		else if (!organization1.isLocation() && organization2.isLocation()) {
-			value = -1;
-		}
+		int typeOrder1 = organization1.getTypeOrder();
+		int typeOrder2 = organization2.getTypeOrder();
+
+		value = typeOrder1 - typeOrder2;
 
 		if (value == 0) {
 			value = organization1.getName().compareTo(organization2.getName());

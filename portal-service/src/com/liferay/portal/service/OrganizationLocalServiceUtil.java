@@ -110,8 +110,8 @@ public class OrganizationLocalServiceUtil {
 
 	public static com.liferay.portal.model.Organization addOrganization(
 		long userId, long parentOrganizationId, java.lang.String name,
-		int type, boolean recursable, long regionId, long countryId,
-		int statusId, java.lang.String comments)
+		java.lang.String type, boolean recursable, long regionId,
+		long countryId, int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -211,7 +211,8 @@ public class OrganizationLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
-		int type, java.lang.Long regionId, java.lang.Long countryId,
+		java.lang.String type, java.lang.Long regionId,
+		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService()
@@ -221,7 +222,8 @@ public class OrganizationLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
-		int type, java.lang.Long regionId, java.lang.Long countryId,
+		java.lang.String type, java.lang.Long regionId,
+		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -232,7 +234,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
-		int type, java.lang.String street, java.lang.String city,
+		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
@@ -244,7 +246,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
-		int type, java.lang.String street, java.lang.String city,
+		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
@@ -256,8 +258,9 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static int searchCount(long companyId, long parentOrganizationId,
-		java.lang.String keywords, int type, java.lang.Long regionId,
-		java.lang.Long countryId, java.util.LinkedHashMap<String, Object> params)
+		java.lang.String keywords, java.lang.String type,
+		java.lang.Long regionId, java.lang.Long countryId,
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
 		return getService()
 				   .searchCount(companyId, parentOrganizationId, keywords,
@@ -265,7 +268,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static int searchCount(long companyId, long parentOrganizationId,
-		java.lang.String name, int type, java.lang.String street,
+		java.lang.String name, java.lang.String type, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
@@ -293,8 +296,8 @@ public class OrganizationLocalServiceUtil {
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
-		java.lang.String name, int type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments)
+		java.lang.String name, java.lang.String type, boolean recursable,
+		long regionId, long countryId, int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()

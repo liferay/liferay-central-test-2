@@ -364,7 +364,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 			// Type
 
-			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+			row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
 			// City
 

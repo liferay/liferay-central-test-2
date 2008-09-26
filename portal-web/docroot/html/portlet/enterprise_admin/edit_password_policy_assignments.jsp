@@ -224,7 +224,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 			// Type
 
-			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+			row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
 			// City
 

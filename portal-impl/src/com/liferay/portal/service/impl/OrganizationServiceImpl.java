@@ -66,7 +66,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	}
 
 	public Organization addOrganization(
-			long parentOrganizationId, String name, int type,
+			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
 			String comments)
 		throws PortalException, SystemException {
@@ -150,7 +150,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
-			int type, boolean recursable, long regionId, long countryId,
+			String type, boolean recursable, long regionId, long countryId,
 			int statusId, String comments)
 		throws PortalException, SystemException {
 

@@ -789,9 +789,8 @@ public class PropsValues {
 	public static final int OPENOFFICE_SERVER_PORT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.OPENOFFICE_SERVER_PORT));
 
-	public static boolean ORGANIZATIONS_COUNTRY_REQUIRED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_REQUIRED));
+	public static String[] ORGANIZATIONS_TYPES =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_TYPES);
 
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME =
 		PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_NAME);

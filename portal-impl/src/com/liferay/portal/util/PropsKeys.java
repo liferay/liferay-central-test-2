@@ -817,7 +817,15 @@ public class PropsKeys {
 
 	public static final String OPENOFFICE_SERVER_PORT = "openoffice.server.port";
 
-	public static final String ORGANIZATIONS_COUNTRY_REQUIRED = "organizations.country.required";
+	public static final String ORGANIZATIONS_TYPES = "organizations.types";
+
+	public static final String ORGANIZATIONS_TYPES_ROOTABLE = "organizations.types.rootable";
+
+	public static final String ORGANIZATIONS_TYPES_CHILDREN_TYPES = "organizations.types.children.types";
+
+	public static final String ORGANIZATIONS_TYPES_COUNTRY_ENABLED = "organizations.types.country.enabled";
+	
+	public static final String ORGANIZATIONS_TYPES_COUNTRY_REQUIRED = "organizations.types.country.required";
 
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 

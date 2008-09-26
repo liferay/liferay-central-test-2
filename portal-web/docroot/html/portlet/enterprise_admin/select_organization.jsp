@@ -39,6 +39,14 @@
 <liferay-ui:tabs names="organizations" />
 
 <%
+String childType = ParamUtil.getString(request, "childType");
+
+String[] allowedTypes = null;
+
+if (Validator.isNotNull(childType)) {
+	allowedTypes = OrganizationImpl.getParentTypes(childType);
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/enterprise_admin/select_organization");
@@ -108,7 +116,13 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	Organization organization = (Organization)results.get(i);
 
+	if ((allowedTypes != null) && !ArrayUtil.contains(allowedTypes, organization.getType())) {
+		continue;
+	}
+
 	ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
+
+	String rowHREF = null;
 
 	StringBuilder sb = new StringBuilder();
 
@@ -121,7 +135,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("');");
 	sb.append("window.close();");
 
-	String rowHREF = sb.toString();
+	rowHREF = sb.toString();
 
 	// Name
 
@@ -145,7 +159,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Type
 
-	row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+	row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
 	// Address
 

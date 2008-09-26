@@ -23,13 +23,21 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -44,7 +52,50 @@ import org.apache.commons.logging.LogFactory;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
+	public static String[] getChildrenTypes(String type) {
+		return PropsUtil.getArray(
+			PropsKeys.ORGANIZATIONS_TYPES_CHILDREN_TYPES,
+			new Filter(type));
+	}
+
+	public static String[] getParentTypes(String type) {
+		String[] types = PropsUtil.getArray(
+			PropsKeys.ORGANIZATIONS_TYPES,
+			new Filter(type));
+
+		List<String> parentTypes = new ArrayList<String>();
+
+		for (String curType : types) {
+			if (ArrayUtil.contains(getChildrenTypes(curType), type)) {
+				parentTypes.add(curType);
+			}
+		}
+
+		return parentTypes.toArray(new String[0]);
+	}
+
+	public static boolean isParentable(String type) {
+		String[] childrenTypes = getChildrenTypes(type);
+
+		if (childrenTypes.length > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public OrganizationImpl() {
+	}
+
+	public static boolean isRootable(String type) {
+		return GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.ORGANIZATIONS_TYPES_ROOTABLE,
+			new Filter(type)));
+	}
+
+	public boolean isParentable() {
+		return isParentable(getType());
 	}
 
 	public boolean isRoot() {
@@ -58,40 +109,8 @@ public class OrganizationImpl
 		}
 	}
 
-	public boolean isRegular() {
-		return !isLocation();
-	}
-
-	public int getType() {
-		if (isLocation()) {
-			return OrganizationConstants.TYPE_LOCATION;
-		}
-		else {
-			return OrganizationConstants.TYPE_REGULAR;
-		}
-	}
-
-	public int getType(boolean location) {
-		int type = OrganizationConstants.TYPE_REGULAR;
-
-		if (location) {
-			type = OrganizationConstants.TYPE_LOCATION;
-		}
-
-		return type;
-	}
-
-	public String getTypeLabel() {
-		return getTypeLabel(getType());
-	}
-
-	public String getTypeLabel(int type) {
-		if (type == OrganizationConstants.TYPE_LOCATION) {
-			return OrganizationConstants.TYPE_LOCATION_LABEL;
-		}
-		else {
-			return OrganizationConstants.TYPE_REGULAR_LABEL;
-		}
+	public String[] getChildrenTypes() {
+		return getChildrenTypes(getType());
 	}
 
 	public Group getGroup() {
@@ -126,6 +145,24 @@ public class OrganizationImpl
 		return 0;
 	}
 
+	public int getSuborganizationsCount() throws SystemException {
+		return OrganizationLocalServiceUtil.searchCount(
+			getCompanyId(), getOrganizationId(), null, null, null, null, null,
+			null, null, null, true);
+	}
+
+	public int getTypeOrder() {
+		String[] types = PropsValues.ORGANIZATIONS_TYPES;
+
+		for (int i = 0; i < types.length; i++) {
+			if (types[i].equals(getType())) {
+				return i + 1;
+			}
+		}
+
+		return 0;
+	}
+
 	public boolean hasPrivateLayouts() {
 		if (getPrivateLayoutsPageCount() > 0) {
 			return true;
@@ -155,6 +192,15 @@ public class OrganizationImpl
 
 	public boolean hasPublicLayouts() {
 		if (getPublicLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasSuborganizations() throws SystemException {
+		if (getSuborganizationsCount() > 0) {
 			return true;
 		}
 		else {

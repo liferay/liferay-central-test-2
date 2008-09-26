@@ -55,7 +55,7 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 	public OrganizationDisplayTerms(RenderRequest renderRequest) {
 		super(renderRequest);
 
-		type = ParamUtil.getInteger(renderRequest, TYPE);
+		type = ParamUtil.getString(renderRequest, TYPE);
 		name = ParamUtil.getString(renderRequest, NAME);
 		street = ParamUtil.getString(renderRequest, STREET);
 		city = ParamUtil.getString(renderRequest, CITY);
@@ -66,11 +66,11 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 			renderRequest, PARENT_ORGANIZATION_ID);
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -102,7 +102,7 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 		return parentOrganizationId;
 	}
 
-	protected int type;
+	protected String type;
 	protected String name;
 	protected String street;
 	protected String city;

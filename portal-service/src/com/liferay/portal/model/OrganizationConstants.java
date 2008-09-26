@@ -34,14 +34,8 @@ public class OrganizationConstants {
 
 	public static final int ANY_PARENT_ORGANIZATION_ID = -1;
 
-	public static final int ANY_TYPE = -1;
+	public static final String TYPE_REGULAR = "regular";
 
-	public static final int TYPE_REGULAR = 1;
-
-	public static final String TYPE_REGULAR_LABEL = "regular";
-
-	public static final int TYPE_LOCATION = 2;
-
-	public static final String TYPE_LOCATION_LABEL = "location";
+	public static final String TYPE_LOCATION = "location";
 
 }

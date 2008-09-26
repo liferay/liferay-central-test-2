@@ -53,7 +53,7 @@ public class OrganizationSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setParentOrganizationId(model.getParentOrganizationId());
 		soapModel.setName(model.getName());
-		soapModel.setLocation(model.getLocation());
+		soapModel.setType(model.getType());
 		soapModel.setRecursable(model.getRecursable());
 		soapModel.setRegionId(model.getRegionId());
 		soapModel.setCountryId(model.getCountryId());
@@ -116,16 +116,12 @@ public class OrganizationSoap implements Serializable {
 		_name = name;
 	}
 
-	public boolean getLocation() {
-		return _location;
+	public String getType() {
+		return _type;
 	}
 
-	public boolean isLocation() {
-		return _location;
-	}
-
-	public void setLocation(boolean location) {
-		_location = location;
+	public void setType(String type) {
+		_type = type;
 	}
 
 	public boolean getRecursable() {
@@ -176,7 +172,7 @@ public class OrganizationSoap implements Serializable {
 	private long _companyId;
 	private long _parentOrganizationId;
 	private String _name;
-	private boolean _location;
+	private String _type;
 	private boolean _recursable;
 	private long _regionId;
 	private long _countryId;

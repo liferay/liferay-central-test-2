@@ -28,11 +28,13 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.ResourceConstants;
@@ -40,9 +42,11 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.util.UniqueList;
 
@@ -74,7 +78,7 @@ public class OrganizationLocalServiceImpl
 
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name,
-			int type, boolean recursable, long regionId, long countryId,
+			String type, boolean recursable, long regionId, long countryId,
 			int statusId, String comments)
 		throws PortalException, SystemException {
 
@@ -97,14 +101,7 @@ public class OrganizationLocalServiceImpl
 		organization.setCompanyId(user.getCompanyId());
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
-
-		if (type == OrganizationConstants.TYPE_LOCATION) {
-			organization.setLocation(true);
-		}
-		else {
-			organization.setLocation(false);
-		}
-
+		organization.setType(type);
 		organization.setRecursable(recursable);
 		organization.setRegionId(regionId);
 		organization.setCountryId(countryId);
@@ -142,10 +139,6 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		String name = Organization.class.getName();
-
-		if (organization.isLocation()) {
-			name = Location.class.getName();
-		}
 
 		resourceLocalService.addResources(
 			organization.getCompanyId(), 0, userId, name,
@@ -213,10 +206,6 @@ public class OrganizationLocalServiceImpl
 		// Resources
 
 		String name = Organization.class.getName();
-
-		if (organization.isLocation()) {
-			name = Location.class.getName();
-		}
 
 		resourceLocalService.deleteResource(
 			organization.getCompanyId(), name,
@@ -387,7 +376,7 @@ public class OrganizationLocalServiceImpl
 
 	public List<Organization> search(
 			long companyId, long parentOrganizationId, String keywords,
-			int type, Long regionId, Long countryId,
+			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params,
 			int start, int end)
 		throws SystemException {
@@ -400,7 +389,7 @@ public class OrganizationLocalServiceImpl
 
 	public List<Organization> search(
 			long companyId, long parentOrganizationId, String keywords,
-			int type, Long regionId, Long countryId,
+			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params,
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -420,7 +409,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> search(
-			long companyId, long parentOrganizationId, String name, int type,
+			long companyId, long parentOrganizationId, String name, String type,
 			String street, String city, String zip,
 			Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params, boolean andOperator,
@@ -434,7 +423,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> search(
-			long companyId, long parentOrganizationId, String name, int type,
+			long companyId, long parentOrganizationId, String name, String type,
 			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
@@ -456,7 +445,7 @@ public class OrganizationLocalServiceImpl
 
 	public int searchCount(
 			long companyId, long parentOrganizationId, String keywords,
-			int type, Long regionId, Long countryId,
+			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
@@ -474,7 +463,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public int searchCount(
-			long companyId, long parentOrganizationId, String name, int type,
+			long companyId, long parentOrganizationId, String name, String type,
 			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
@@ -520,7 +509,7 @@ public class OrganizationLocalServiceImpl
 
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
-			String name, int type, boolean recursable, long regionId,
+			String name, String type, boolean recursable, long regionId,
 			long countryId, int statusId, String comments)
 		throws PortalException, SystemException {
 
@@ -537,14 +526,7 @@ public class OrganizationLocalServiceImpl
 
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
-
-		if (type == OrganizationConstants.TYPE_LOCATION) {
-			organization.setLocation(true);
-		}
-		else {
-			organization.setLocation(false);
-		}
-
+		organization.setType(type);
 		organization.setRecursable(recursable);
 		organization.setRegionId(regionId);
 		organization.setCountryId(countryId);
@@ -651,7 +633,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long parentOrganizationId, String name, int type,
+			long companyId, long parentOrganizationId, String name, String type,
 			long countryId, int statusId)
 		throws PortalException, SystemException {
 
@@ -662,22 +644,48 @@ public class OrganizationLocalServiceImpl
 
 	protected void validate(
 			long companyId, long organizationId, long parentOrganizationId,
-			String name, int type, long countryId, int statusId)
+			String name, String type, long countryId, int statusId)
 		throws PortalException, SystemException {
 
-		if ((type == OrganizationConstants.TYPE_LOCATION) ||
-			(parentOrganizationId !=
+		if ((parentOrganizationId ==
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
+			if (!OrganizationImpl.isRootable(type)) {
+				throw new OrganizationParentException(
+					"Organization of type " + type + " cannot be a root");
+			}
+		}
+		else {
+			String[] childrenTypes = OrganizationImpl.getChildrenTypes(type);
 
-			Organization parentOrganization =
-				organizationPersistence.fetchByPrimaryKey(parentOrganizationId);
+			if (childrenTypes.length == 0) {
+				throw new OrganizationParentException(
+					"Organization of type " + type + " cannot have children");
+			}
+			else {
+				Organization parentOrganization =
+					organizationPersistence.fetchByPrimaryKey(
+						parentOrganizationId);
 
-			if ((parentOrganization == null) ||
-				(companyId != parentOrganization.getCompanyId()) ||
-				(parentOrganizationId == organizationId) ||
-				(parentOrganization.isLocation())) {
+				if (parentOrganization != null) {
+					if ((companyId != parentOrganization.getCompanyId()) ||
+						(parentOrganizationId == organizationId)) {
 
-				throw new OrganizationParentException();
+						throw new OrganizationParentException();
+					}
+					else if (!ArrayUtil.contains(
+								childrenTypes,
+								String.valueOf(parentOrganization.getType()))) {
+
+						throw new OrganizationParentException(
+							"Type " + type + " not allowed as child of " +
+								parentOrganization.getType());
+					}
+				}
+				else {
+					throw new OrganizationParentException(
+						"Organization " + parentOrganizationId +
+							" doesn't exist");
+				}
 			}
 		}
 
@@ -710,8 +718,12 @@ public class OrganizationLocalServiceImpl
 			}
 		}
 
+		boolean countryRequired = GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.ORGANIZATIONS_TYPES_COUNTRY_REQUIRED,
+			new Filter(type)));
+
 		try {
-			if ((countryId > 0) || PropsValues.ORGANIZATIONS_COUNTRY_REQUIRED) {
+			if ((countryId > 0) || countryRequired) {
 				countryPersistence.findByPrimaryKey(countryId);
 			}
 

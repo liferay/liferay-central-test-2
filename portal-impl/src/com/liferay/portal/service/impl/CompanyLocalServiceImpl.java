@@ -47,14 +47,9 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CountryImpl;
-import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalInstances;
@@ -337,21 +332,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			};
 
 			roleLocalService.setUserRoles(user.getUserId(), roleIds);
-
-			Organization organization =
-				organizationLocalService.addOrganization(
-					user.getUserId(),
-					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-					"Test Organization", OrganizationConstants.TYPE_REGULAR,
-					true, RegionImpl.DEFAULT_REGION_ID,
-					CountryImpl.DEFAULT_COUNTRY_ID,
-					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
-
-			organizationLocalService.addOrganization(
-				user.getUserId(), organization.getOrganizationId(),
-				"Test Location", OrganizationConstants.TYPE_LOCATION, true,
-				RegionImpl.DEFAULT_REGION_ID, CountryImpl.DEFAULT_COUNTRY_ID,
-				ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
 		}
 
 		return company;

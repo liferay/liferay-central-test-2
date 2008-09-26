@@ -142,7 +142,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 		// Type
 
-		row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+		row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
 		// City
 
