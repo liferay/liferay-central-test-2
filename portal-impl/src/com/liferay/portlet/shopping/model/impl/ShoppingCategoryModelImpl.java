@@ -268,6 +268,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 		else {
 			ShoppingCategory model = new ShoppingCategoryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setCategoryId(getCategoryId());

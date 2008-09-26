@@ -264,6 +264,7 @@ public class IGFolderModelImpl extends BaseModelImpl {
 		else {
 			IGFolder model = new IGFolderImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

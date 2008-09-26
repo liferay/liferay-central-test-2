@@ -314,6 +314,7 @@ public class SocialRequestModelImpl extends BaseModelImpl {
 		else {
 			SocialRequest model = new SocialRequestImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

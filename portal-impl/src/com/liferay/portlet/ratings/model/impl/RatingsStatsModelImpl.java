@@ -205,6 +205,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 		else {
 			RatingsStats model = new RatingsStatsImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setStatsId(getStatsId());

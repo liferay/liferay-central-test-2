@@ -298,6 +298,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 		else {
 			DLFolder model = new DLFolderImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

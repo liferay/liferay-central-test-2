@@ -203,6 +203,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 		else {
 			DLFileRank model = new DLFileRankImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setFileRankId(getFileRankId());

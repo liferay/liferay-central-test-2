@@ -173,6 +173,7 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 		else {
 			TagsSource model = new TagsSourceImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setSourceId(getSourceId());

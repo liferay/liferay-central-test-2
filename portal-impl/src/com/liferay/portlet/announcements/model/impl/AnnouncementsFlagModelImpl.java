@@ -187,6 +187,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 		else {
 			AnnouncementsFlag model = new AnnouncementsFlagImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setFlagId(getFlagId());

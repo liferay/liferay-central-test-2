@@ -284,6 +284,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		else {
 			SocialActivity model = new SocialActivityImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setActivityId(getActivityId());

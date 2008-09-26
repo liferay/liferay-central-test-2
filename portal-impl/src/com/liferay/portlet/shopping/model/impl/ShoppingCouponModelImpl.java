@@ -401,6 +401,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 		else {
 			ShoppingCoupon model = new ShoppingCouponImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setCouponId(getCouponId());

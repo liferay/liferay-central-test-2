@@ -228,6 +228,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		else {
 			MBThread model = new MBThreadImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setThreadId(getThreadId());

@@ -462,6 +462,7 @@ public class CalEventModelImpl extends BaseModelImpl {
 		else {
 			CalEvent model = new CalEventImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

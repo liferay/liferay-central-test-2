@@ -372,6 +372,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		else {
 			SCProductEntry model = new SCProductEntryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setProductEntryId(getProductEntryId());

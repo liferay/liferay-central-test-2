@@ -222,6 +222,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 		else {
 			ExpandoValue model = new ExpandoValueImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setValueId(getValueId());

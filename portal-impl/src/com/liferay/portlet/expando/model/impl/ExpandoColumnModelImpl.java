@@ -170,6 +170,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		else {
 			ExpandoColumn model = new ExpandoColumnImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setColumnId(getColumnId());

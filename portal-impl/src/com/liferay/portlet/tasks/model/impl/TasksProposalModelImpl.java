@@ -329,6 +329,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 		else {
 			TasksProposal model = new TasksProposalImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setProposalId(getProposalId());

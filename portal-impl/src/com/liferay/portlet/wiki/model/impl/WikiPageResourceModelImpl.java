@@ -157,6 +157,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 		else {
 			WikiPageResource model = new WikiPageResourceImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setResourcePrimKey(getResourcePrimKey());

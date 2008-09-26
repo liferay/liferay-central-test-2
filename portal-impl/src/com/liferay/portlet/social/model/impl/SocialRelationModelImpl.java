@@ -214,6 +214,7 @@ public class SocialRelationModelImpl extends BaseModelImpl {
 		else {
 			SocialRelation model = new SocialRelationImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

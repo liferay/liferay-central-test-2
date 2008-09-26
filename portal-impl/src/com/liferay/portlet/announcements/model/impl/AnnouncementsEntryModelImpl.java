@@ -391,6 +391,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 		else {
 			AnnouncementsEntry model = new AnnouncementsEntryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

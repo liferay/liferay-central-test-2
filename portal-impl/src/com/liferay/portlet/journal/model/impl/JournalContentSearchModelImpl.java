@@ -222,6 +222,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		else {
 			JournalContentSearch model = new JournalContentSearchImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setContentSearchId(getContentSearchId());

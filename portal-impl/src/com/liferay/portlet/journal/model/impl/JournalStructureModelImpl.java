@@ -318,6 +318,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		else {
 			JournalStructure model = new JournalStructureImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

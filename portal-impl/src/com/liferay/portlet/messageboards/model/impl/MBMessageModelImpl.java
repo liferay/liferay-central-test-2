@@ -332,6 +332,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		else {
 			MBMessage model = new MBMessageImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

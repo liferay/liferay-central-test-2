@@ -515,6 +515,7 @@ public class MBMailingListModelImpl extends BaseModelImpl {
 		else {
 			MBMailingList model = new MBMailingListImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

@@ -234,6 +234,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 		else {
 			MBBan model = new MBBanImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setBanId(getBanId());

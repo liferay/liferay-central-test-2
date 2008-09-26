@@ -642,6 +642,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		else {
 			ShoppingItem model = new ShoppingItemImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setItemId(getItemId());

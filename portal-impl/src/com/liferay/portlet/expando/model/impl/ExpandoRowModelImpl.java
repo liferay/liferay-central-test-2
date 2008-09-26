@@ -153,6 +153,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 		else {
 			ExpandoRow model = new ExpandoRowImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setRowId(getRowId());

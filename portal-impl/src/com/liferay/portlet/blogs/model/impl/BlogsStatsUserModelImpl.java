@@ -241,6 +241,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		else {
 			BlogsStatsUser model = new BlogsStatsUserImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setStatsUserId(getStatsUserId());

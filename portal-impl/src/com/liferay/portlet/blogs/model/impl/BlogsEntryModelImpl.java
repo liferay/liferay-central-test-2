@@ -355,6 +355,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		else {
 			BlogsEntry model = new BlogsEntryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

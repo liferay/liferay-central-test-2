@@ -224,6 +224,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		else {
 			JournalArticleImage model = new JournalArticleImageImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setArticleImageId(getArticleImageId());

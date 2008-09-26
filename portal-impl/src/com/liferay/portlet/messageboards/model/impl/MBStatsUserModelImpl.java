@@ -185,6 +185,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		else {
 			MBStatsUser model = new MBStatsUserImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setStatsUserId(getStatsUserId());

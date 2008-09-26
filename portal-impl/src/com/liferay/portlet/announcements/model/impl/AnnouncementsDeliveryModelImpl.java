@@ -226,6 +226,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
 		else {
 			AnnouncementsDelivery model = new AnnouncementsDeliveryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setDeliveryId(getDeliveryId());

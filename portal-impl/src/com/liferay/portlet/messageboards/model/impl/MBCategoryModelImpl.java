@@ -298,6 +298,7 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		else {
 			MBCategory model = new MBCategoryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

@@ -258,6 +258,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 		else {
 			RatingsEntry model = new RatingsEntryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setEntryId(getEntryId());

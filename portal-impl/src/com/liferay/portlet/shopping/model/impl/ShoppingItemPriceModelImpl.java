@@ -260,6 +260,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 		else {
 			ShoppingItemPrice model = new ShoppingItemPriceImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setItemPriceId(getItemPriceId());

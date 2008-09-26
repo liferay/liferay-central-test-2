@@ -265,6 +265,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 		else {
 			BookmarksFolder model = new BookmarksFolderImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

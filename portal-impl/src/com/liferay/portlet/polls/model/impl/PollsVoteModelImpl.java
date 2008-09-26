@@ -185,6 +185,7 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 		else {
 			PollsVote model = new PollsVoteImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setVoteId(getVoteId());

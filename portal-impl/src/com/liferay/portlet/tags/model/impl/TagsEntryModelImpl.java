@@ -265,6 +265,7 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		else {
 			TagsEntry model = new TagsEntryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setEntryId(getEntryId());

@@ -215,6 +215,7 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		else {
 			SCLicense model = new SCLicenseImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setLicenseId(getLicenseId());

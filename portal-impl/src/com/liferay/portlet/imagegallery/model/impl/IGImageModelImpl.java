@@ -306,6 +306,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 		else {
 			IGImage model = new IGImageImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

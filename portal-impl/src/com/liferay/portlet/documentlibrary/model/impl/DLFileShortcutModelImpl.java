@@ -265,6 +265,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		else {
 			DLFileShortcut model = new DLFileShortcutImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

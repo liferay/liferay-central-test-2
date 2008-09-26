@@ -159,6 +159,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 		else {
 			JournalArticleResource model = new JournalArticleResourceImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setResourcePrimKey(getResourcePrimKey());

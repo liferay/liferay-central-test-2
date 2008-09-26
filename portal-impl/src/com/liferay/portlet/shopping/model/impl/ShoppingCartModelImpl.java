@@ -286,6 +286,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		else {
 			ShoppingCart model = new ShoppingCartImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setCartId(getCartId());

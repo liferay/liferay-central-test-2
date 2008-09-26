@@ -484,6 +484,7 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 		else {
 			JournalFeed model = new JournalFeedImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

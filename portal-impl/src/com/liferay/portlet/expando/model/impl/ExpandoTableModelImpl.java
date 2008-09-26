@@ -166,6 +166,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 		else {
 			ExpandoTable model = new ExpandoTableImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setTableId(getTableId());

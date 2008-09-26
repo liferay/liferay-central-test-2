@@ -302,6 +302,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		else {
 			PollsQuestion model = new PollsQuestionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

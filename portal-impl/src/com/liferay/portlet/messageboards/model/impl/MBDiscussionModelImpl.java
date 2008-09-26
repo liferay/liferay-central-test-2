@@ -177,6 +177,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 		else {
 			MBDiscussion model = new MBDiscussionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setDiscussionId(getDiscussionId());

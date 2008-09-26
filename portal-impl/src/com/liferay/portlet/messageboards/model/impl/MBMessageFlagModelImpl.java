@@ -167,6 +167,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 		else {
 			MBMessageFlag model = new MBMessageFlagImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setMessageFlagId(getMessageFlagId());

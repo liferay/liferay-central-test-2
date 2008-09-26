@@ -210,6 +210,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 		else {
 			SCProductScreenshot model = new SCProductScreenshotImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setProductScreenshotId(getProductScreenshotId());

@@ -288,6 +288,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		else {
 			SCFrameworkVersion model = new SCFrameworkVersionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setFrameworkVersionId(getFrameworkVersionId());

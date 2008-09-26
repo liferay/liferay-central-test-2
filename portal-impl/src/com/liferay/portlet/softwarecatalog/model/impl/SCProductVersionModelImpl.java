@@ -309,6 +309,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 		else {
 			SCProductVersion model = new SCProductVersionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setProductVersionId(getProductVersionId());

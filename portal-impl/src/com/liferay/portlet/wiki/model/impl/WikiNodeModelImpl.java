@@ -284,6 +284,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		else {
 			WikiNode model = new WikiNodeImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));

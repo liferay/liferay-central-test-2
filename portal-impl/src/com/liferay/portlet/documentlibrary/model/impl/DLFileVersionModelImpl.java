@@ -247,6 +247,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		else {
 			DLFileVersion model = new DLFileVersionImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setFileVersionId(getFileVersionId());

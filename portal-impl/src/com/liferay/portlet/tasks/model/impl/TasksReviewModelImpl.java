@@ -316,6 +316,7 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 		else {
 			TasksReview model = new TasksReviewImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setReviewId(getReviewId());

@@ -373,6 +373,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		else {
 			DLFileEntry model = new DLFileEntryImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));
