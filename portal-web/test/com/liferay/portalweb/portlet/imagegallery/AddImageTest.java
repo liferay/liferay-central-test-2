@@ -121,7 +121,7 @@ public class AddImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[1]/img")) {
+				if (selenium.isElementPresent("//img[@alt='Image']")) {
 					break;
 				}
 			}
