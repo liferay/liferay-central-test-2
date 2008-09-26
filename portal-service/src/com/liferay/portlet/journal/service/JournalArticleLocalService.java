@@ -311,6 +311,13 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.lang.String getArticleContent(
+		com.liferay.portlet.journal.model.JournalArticle article,
+		java.lang.String templateId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -347,6 +354,14 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, double version,
+		java.lang.String templateId, java.lang.String languageId, int page,
+		java.lang.String xmlRequest,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
+		com.liferay.portlet.journal.model.JournalArticle article,
 		java.lang.String templateId, java.lang.String languageId, int page,
 		java.lang.String xmlRequest,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)

@@ -454,6 +454,17 @@ public class JournalArticleLocalServiceUtil {
 			languageId, themeDisplay);
 	}
 
+	public static java.lang.String getArticleContent(
+		com.liferay.portlet.journal.model.JournalArticle article,
+		java.lang.String templateId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getArticleContent(article, templateId, languageId,
+			themeDisplay);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -518,6 +529,18 @@ public class JournalArticleLocalServiceUtil {
 		return getService()
 				   .getArticleDisplay(groupId, articleId, version, templateId,
 			languageId, page, xmlRequest, themeDisplay);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
+		com.liferay.portlet.journal.model.JournalArticle article,
+		java.lang.String templateId, java.lang.String languageId, int page,
+		java.lang.String xmlRequest,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getArticleDisplay(article, templateId, languageId, page,
+			xmlRequest, themeDisplay);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles()

@@ -40,11 +40,10 @@ import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
-import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -86,6 +85,9 @@ public class ViewArticleContentAction extends Action {
 
 			long groupId = ParamUtil.getLong(request, "groupId");
 			String articleId = ParamUtil.getString(request, "articleId");
+			String type = ParamUtil.getString(request, "type");
+			String structureId = ParamUtil.getString(request, "structureId");
+			String templateId = ParamUtil.getString(request, "templateId");
 			double version = ParamUtil.getDouble(
 				request, "version", JournalArticleImpl.DEFAULT_VERSION);
 
@@ -129,31 +131,24 @@ public class ViewArticleContentAction extends Action {
 
 				JournalArticle article = new JournalArticleImpl();
 
+				article.setGroupId(groupId);
+				article.setCompanyId(user.getCompanyId());
 				article.setUserId(user.getUserId());
+				article.setUserName(user.getFullName());
 				article.setCreateDate(createDate);
 				article.setModifiedDate(modifiedDate);
 				article.setArticleId(articleId);
 				article.setVersion(version);
 				article.setTitle(title);
 				article.setDescription(description);
+				article.setContent(xml);
+				article.setType(type);
+				article.setStructureId(structureId);
+				article.setTemplateId(templateId);
 				article.setDisplayDate(displayDate);
 
-				JournalUtil.addAllReservedEls(root, tokens, article);
-
-				xml = JournalUtil.formatXML(doc);
-
-				String templateId = ParamUtil.getString(
-					uploadRequest, "templateId");
-
-				JournalTemplate template =
-					JournalTemplateLocalServiceUtil.getTemplate(
-						groupId, templateId);
-
-				String langType = template.getLangType();
-				String script = template.getXsl();
-
-				output = JournalUtil.transform(
-					tokens, languageId, xml, script, langType);
+				output = JournalArticleLocalServiceUtil.getArticleContent(
+					article, templateId, languageId, themeDisplay);
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(

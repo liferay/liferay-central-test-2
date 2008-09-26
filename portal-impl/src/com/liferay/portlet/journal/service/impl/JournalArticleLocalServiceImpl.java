@@ -951,6 +951,22 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public String getArticleContent(
+			JournalArticle article, String templateId, String languageId,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		JournalArticleDisplay articleDisplay = getArticleDisplay(
+			article, templateId, languageId, 1, null, themeDisplay);
+
+		if (articleDisplay == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return articleDisplay.getContent();
+		}
+	}
+
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String languageId,
 			ThemeDisplay themeDisplay)
@@ -1011,8 +1027,6 @@ public class JournalArticleLocalServiceImpl
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		String content = null;
-
 		Date now = new Date();
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
@@ -1030,6 +1044,17 @@ public class JournalArticleLocalServiceImpl
 			return null;
 		}
 
+		return getArticleDisplay(
+			article, templateId, languageId, page, xmlRequest, themeDisplay);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
+			JournalArticle article, String templateId, String languageId,
+			int page, String xmlRequest, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		String content = null;
+
 		if (page < 1) {
 			page = 1;
 		}
@@ -1041,7 +1066,7 @@ public class JournalArticleLocalServiceImpl
 		boolean cacheable = true;
 
 		Map<String, String> tokens = JournalUtil.getTokens(
-			groupId, themeDisplay, xmlRequest);
+			article.getGroupId(), themeDisplay, xmlRequest);
 
 		tokens.put(
 			"article_resource_pk",
@@ -1125,8 +1150,8 @@ public class JournalArticleLocalServiceImpl
 		try {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Transforming " + articleId + " " + version + " " +
-						languageId);
+					"Transforming " + article.getArticleId() + " " +
+						article.getVersion() + " " + languageId);
 			}
 
 			String script = null;
@@ -1149,12 +1174,12 @@ public class JournalArticleLocalServiceImpl
 
 				try {
 					template = journalTemplatePersistence.findByG_T(
-						groupId, templateId);
+						article.getGroupId(), templateId);
 				}
 				catch (NoSuchTemplateException nste) {
 					if (!defaultTemplateId.equals(templateId)) {
 						template = journalTemplatePersistence.findByG_T(
-							groupId, defaultTemplateId);
+							article.getGroupId(), defaultTemplateId);
 					}
 					else {
 						throw nste;
