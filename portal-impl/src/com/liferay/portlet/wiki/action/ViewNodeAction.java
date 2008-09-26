@@ -70,7 +70,7 @@ public class ViewNodeAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.wiki.edit_node"));
+			getForward(renderRequest, "portlet.wiki.view_node"));
 	}
 
 }

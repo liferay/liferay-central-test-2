@@ -1660,7 +1660,7 @@
 		<action path="/wiki/rss" type="com.liferay.portlet.wiki.action.RSSAction" />
 
 		<action path="/wiki/search" type="com.liferay.portlet.wiki.action.ViewNodeAction">
-			<forward name="portlet.wiki.edit_node" path="portlet.wiki.search" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.search" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
@@ -1670,14 +1670,14 @@
 		</action>
 
 		<action path="/wiki/view_all_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
-			<forward name="portlet.wiki.edit_node" path="portlet.wiki.view_all_pages" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_all_pages" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
 		<action path="/wiki/view_nodes" forward="portlet.wiki.view_nodes" />
 
 		<action path="/wiki/view_orphan_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
-			<forward name="portlet.wiki.edit_node" path="portlet.wiki.view_orphan_pages" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_orphan_pages" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
@@ -1707,12 +1707,12 @@
 		</action>
 
 		<action path="/wiki/view_recent_changes" type="com.liferay.portlet.wiki.action.ViewNodeAction">
-			<forward name="portlet.wiki.edit_node" path="portlet.wiki.view_recent_changes" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_recent_changes" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
 		<action path="/wiki/view_tagged_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
-			<forward name="portlet.wiki.edit_node" path="portlet.wiki.view_tagged_pages" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_tagged_pages" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
