@@ -64,8 +64,6 @@ public class DefaultSynchronousMessageSender
 					" is not configured");
 		}
 
-		message.setDestination(destination);
-
 		String responseId = _portalUUID.generate();
 
 		message.setResponseId(responseId);
