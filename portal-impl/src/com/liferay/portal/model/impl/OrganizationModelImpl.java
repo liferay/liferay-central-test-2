@@ -263,6 +263,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		else {
 			Organization model = new OrganizationImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setOrganizationId(getOrganizationId());
