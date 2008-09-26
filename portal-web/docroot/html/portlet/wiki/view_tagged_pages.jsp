@@ -28,9 +28,14 @@
 String tag = ParamUtil.getString(renderRequest, "tag");
 
 String description = null;
+String title = "pages-with-tag-x";
 
 try {
 	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, tag);
+
+	if (tagsEntry.isCategory()) {
+		title = "pages-with-category-x";
+	}
 
 	TagsProperty tagsProperty = TagsPropertyLocalServiceUtil.getProperty(tagsEntry.getEntryId(), "description");
 
@@ -45,7 +50,7 @@ catch (NoSuchPropertyException nspe) {
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <h1 class="page-title">
-	<%= LanguageUtil.format(pageContext, "pages-with-tag-x", tag) %>
+	<%= LanguageUtil.format(pageContext, title, tag) %>
 </h1>
 
 <c:if test="<%= Validator.isNotNull(description) %>">
