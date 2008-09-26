@@ -53,6 +53,7 @@ public class ExpandoColumnSoap implements Serializable {
 		soapModel.setTableId(model.getTableId());
 		soapModel.setName(model.getName());
 		soapModel.setType(model.getType());
+		soapModel.setDefaultData(model.getDefaultData());
 
 		return soapModel;
 	}
@@ -110,8 +111,17 @@ public class ExpandoColumnSoap implements Serializable {
 		_type = type;
 	}
 
+	public String getDefaultData() {
+		return _defaultData;
+	}
+
+	public void setDefaultData(String defaultData) {
+		_defaultData = defaultData;
+	}
+
 	private long _columnId;
 	private long _tableId;
 	private String _name;
 	private int _type;
+	private String _defaultData;
 }

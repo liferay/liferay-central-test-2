@@ -49,4 +49,5 @@ package com.liferay.portlet.expando.model;
  *
  */
 public interface ExpandoColumn extends ExpandoColumnModel {
+	public java.lang.Object getDefaultValue();
 }

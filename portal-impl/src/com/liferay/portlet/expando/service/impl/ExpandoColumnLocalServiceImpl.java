@@ -33,8 +33,11 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
+import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.portlet.expando.service.base.ExpandoColumnLocalServiceBaseImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,7 +54,14 @@ public class ExpandoColumnLocalServiceImpl
 	public ExpandoColumn addColumn(long tableId, String name, int type)
 		throws PortalException, SystemException {
 
-		validate(0, tableId, name, type);
+		return addColumn(tableId, name, type, null);
+	}
+
+	public ExpandoColumn addColumn(
+			long tableId, String name, int type, Object defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = validate(0, tableId, name, type, defaultData);
 
 		long columnId = counterLocalService.increment();
 
@@ -60,6 +70,7 @@ public class ExpandoColumnLocalServiceImpl
 		column.setTableId(tableId);
 		column.setName(name);
 		column.setType(type);
+		column.setDefaultData(value.getData());
 
 		expandoColumnPersistence.update(column, false);
 
@@ -250,20 +261,31 @@ public class ExpandoColumnLocalServiceImpl
 	public ExpandoColumn updateColumn(long columnId, String name, int type)
 		throws PortalException, SystemException {
 
+		return updateColumn(columnId, name, type, null);
+	}
+
+	public ExpandoColumn updateColumn(
+			long columnId, String name, int type, Object defaultData)
+		throws PortalException, SystemException {
+
 		ExpandoColumn column = expandoColumnPersistence.findByPrimaryKey(
 			columnId);
 
-		validate(columnId, column.getTableId(), name, type);
+		ExpandoValue value = validate(
+			columnId, column.getTableId(), name, type, defaultData);
 
 		column.setName(name);
 		column.setType(type);
+		column.setDefaultData(value.getData());
 
 		expandoColumnPersistence.update(column, false);
 
 		return column;
 	}
 
-	protected void validate(long columnId, long tableId, String name, int type)
+	protected ExpandoValue validate(
+			long columnId, long tableId, String name, int type,
+			Object defaultData)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
@@ -296,6 +318,82 @@ public class ExpandoColumnLocalServiceImpl
 
 			throw new ColumnTypeException();
 		}
+
+		ExpandoValue value = null;
+
+		if (Validator.isNotNull(defaultData)) {
+			value = new ExpandoValueImpl();
+			value.setColumnId(columnId);
+
+			switch (type) {
+				case ExpandoColumnConstants.BOOLEAN: {
+					value.setBoolean((Boolean)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.BOOLEAN_ARRAY: {
+					value.setBooleanArray((boolean[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.DATE: {
+					value.setDate((Date)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.DATE_ARRAY: {
+					value.setDateArray((Date[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.DOUBLE: {
+					value.setDouble((Double)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.DOUBLE_ARRAY: {
+					value.setDoubleArray((double[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.FLOAT: {
+					value.setFloat((Float)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.FLOAT_ARRAY: {
+					value.setFloatArray((float[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.INTEGER: {
+					value.setInteger((Integer)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.INTEGER_ARRAY: {
+					value.setIntegerArray((int[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.LONG: {
+					value.setLong((Long)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.LONG_ARRAY: {
+					value.setLongArray((long[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.SHORT: {
+					value.setShort((Short)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.SHORT_ARRAY: {
+					value.setShortArray((short[])defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.STRING: {
+					value.setString((String)defaultData);
+					break;
+				}
+				case ExpandoColumnConstants.STRING_ARRAY: {
+					value.setStringArray((String[])defaultData);
+					break;
+				}
+			}
+		}
+
+		return value;
 	}
 
 }

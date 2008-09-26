@@ -71,9 +71,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			
 
-			{ "type_", new Integer(Types.INTEGER) }
+			{ "type_", new Integer(Types.INTEGER) },
+			
+
+			{ "defaultData", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,tableId LONG,name VARCHAR(75) null,type_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,tableId LONG,name VARCHAR(75) null,type_ INTEGER,defaultData STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoColumn";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -89,6 +92,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		model.setTableId(soapModel.getTableId());
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
+		model.setDefaultData(soapModel.getDefaultData());
 
 		return model;
 	}
@@ -163,6 +167,19 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getDefaultData() {
+		return GetterUtil.getString(_defaultData);
+	}
+
+	public void setDefaultData(String defaultData) {
+		if (((defaultData == null) && (_defaultData != null)) ||
+				((defaultData != null) && (_defaultData == null)) ||
+				((defaultData != null) && (_defaultData != null) &&
+				!defaultData.equals(_defaultData))) {
+			_defaultData = defaultData;
+		}
+	}
+
 	public ExpandoColumn toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoColumn)this;
@@ -177,6 +194,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 			model.setTableId(getTableId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setType(getType());
+			model.setDefaultData(HtmlUtil.escape(getDefaultData()));
 
 			model = (ExpandoColumn)Proxy.newProxyInstance(ExpandoColumn.class.getClassLoader(),
 					new Class[] { ExpandoColumn.class },
@@ -193,6 +211,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		clone.setTableId(getTableId());
 		clone.setName(getName());
 		clone.setType(getType());
+		clone.setDefaultData(getDefaultData());
 
 		return clone;
 	}
@@ -249,4 +268,5 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 	private long _tableId;
 	private String _name;
 	private int _type;
+	private String _defaultData;
 }

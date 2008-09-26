@@ -65,5 +65,9 @@ public interface ExpandoColumnModel extends BaseModel {
 
 	public void setType(int type);
 
+	public String getDefaultData();
+
+	public void setDefaultData(String defaultData);
+
 	public ExpandoColumn toEscapedModel();
 }

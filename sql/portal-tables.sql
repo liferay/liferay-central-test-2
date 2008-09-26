@@ -331,7 +331,8 @@ create table ExpandoColumn (
 	columnId LONG not null primary key,
 	tableId LONG,
 	name VARCHAR(75) null,
-	type_ INTEGER
+	type_ INTEGER,
+	defaultData STRING null
 );
 
 create table ExpandoRow (

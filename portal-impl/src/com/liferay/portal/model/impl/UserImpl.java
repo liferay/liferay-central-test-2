@@ -44,14 +44,27 @@ import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
+import com.liferay.portlet.expando.NoSuchTableException;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
+import com.liferay.portlet.expando.model.impl.ExpandoColumnImpl;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
+import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,6 +78,147 @@ import org.apache.commons.logging.LogFactory;
 public class UserImpl extends UserModelImpl implements User {
 
 	public UserImpl() {
+	}
+
+	public void addAttribute(String name) {
+		addAttribute(name, ExpandoColumnConstants.STRING, null);
+	}
+
+	public void addAttribute(String name, int type) {
+		addAttribute(name, type, null);
+	}
+
+	public void addAttribute(String name, int type, Object defaultValue) {
+		try {
+			ExpandoTable table = null;
+
+			try {
+				table = ExpandoTableLocalServiceUtil.getDefaultTable(
+					User.class.getName());
+			}
+			catch(NoSuchTableException nste) {
+				table = ExpandoTableLocalServiceUtil.addDefaultTable(
+					User.class.getName());
+			}
+
+			ExpandoColumnLocalServiceUtil.addColumn(
+				table.getTableId(), name, type, defaultValue);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
+
+	public Object getAttribute(String name) {
+		Object data = null;
+
+		try {
+			data = ExpandoValueLocalServiceUtil.getData(
+				User.class.getName(), ExpandoTableConstants.DEFAULT_TABLE_NAME,
+				name, getUserId());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return data;
+	}
+
+	public Map<String, Object> getAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+		List<ExpandoColumn> columns = new ArrayList<ExpandoColumn>();
+
+		try {
+			columns = ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
+				User.class.getName());
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e);
+			}
+		}
+
+		for (ExpandoColumn column : columns) {
+			attributes.put(column.getName(), getAttribute(column.getName()));
+		}
+
+		return attributes;
+	}
+
+	public Enumeration<String> getAttributeNames() {
+		List<ExpandoColumn> columns = new ArrayList<ExpandoColumn>();
+
+		try {
+			columns = ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
+				User.class.getName());
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e);
+			}
+		}
+
+		Vector<String> columnNames = new Vector<String>();
+
+		for (ExpandoColumn column : columns) {
+			columnNames.add(column.getName());
+		}
+
+		return columnNames.elements();
+	}
+
+	public Object getAttributeDefault(String name) {
+		ExpandoColumn column = new ExpandoColumnImpl();
+
+		try {
+			column = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+				User.class.getName(), name);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return column.getDefaultValue();
+	}
+
+	public int getAttributeType(String name) {
+		ExpandoColumn column = new ExpandoColumnImpl();
+
+		try {
+			column = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+				User.class.getName(), name);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return column.getType();
+	}
+
+	public void setAttribute(String name, Object value) {
+		try {
+			ExpandoValueLocalServiceUtil.addValue(
+				User.class.getName(), ExpandoTableConstants.DEFAULT_TABLE_NAME,
+				name, getUserId(), value);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
+
+	public void setAttributeDefault(String name, Object defaultValue) {
+		try {
+			ExpandoColumn column =
+				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+					User.class.getName(), name);
+
+			ExpandoColumnLocalServiceUtil.updateColumn(
+				column.getColumnId(), column.getName(), column.getType(),
+				defaultValue);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
 
 	public String getCompanyMx() {

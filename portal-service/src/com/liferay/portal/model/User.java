@@ -49,6 +49,28 @@ package com.liferay.portal.model;
  *
  */
 public interface User extends UserModel {
+	public void addAttribute(java.lang.String name);
+
+	public void addAttribute(java.lang.String name, int type);
+
+	public void addAttribute(java.lang.String name, int type,
+		java.lang.Object defaultValue);
+
+	public java.lang.Object getAttribute(java.lang.String name);
+
+	public java.util.Map<String, Object> getAttributes();
+
+	public java.util.Enumeration<String> getAttributeNames();
+
+	public java.lang.Object getAttributeDefault(java.lang.String name);
+
+	public int getAttributeType(java.lang.String name);
+
+	public void setAttribute(java.lang.String name, java.lang.Object value);
+
+	public void setAttributeDefault(java.lang.String name,
+		java.lang.Object defaultValue);
+
 	public java.lang.String getCompanyMx();
 
 	public boolean hasCompanyMx();

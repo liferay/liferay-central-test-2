@@ -819,6 +819,9 @@
 		<field name="tableId" type="long" />
 		<field name="name" type="String" />
 		<field name="type" type="int" />
+		<field name="defaultData" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoRow">
 		<field name="rowId" type="long" />

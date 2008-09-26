@@ -23,6 +23,8 @@
 package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoValue;
 
 /**
  * <a href="ExpandoColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,6 +37,68 @@ public class ExpandoColumnImpl
 	extends ExpandoColumnModelImpl implements ExpandoColumn {
 
 	public ExpandoColumnImpl() {
+	}
+
+	public Object getDefaultValue() {
+		ExpandoValue value = new ExpandoValueImpl();
+		value.setColumnId(getColumnId());
+		value.setData(getDefaultData());
+
+		try {
+			switch (getType()) {
+				case ExpandoColumnConstants.BOOLEAN: {
+					return value.getBoolean();
+				}
+				case ExpandoColumnConstants.BOOLEAN_ARRAY: {
+					return value.getBooleanArray();
+				}
+				case ExpandoColumnConstants.DATE: {
+					return value.getDate();
+				}
+				case ExpandoColumnConstants.DATE_ARRAY: {
+					return value.getDateArray();
+				}
+				case ExpandoColumnConstants.DOUBLE: {
+					return value.getDouble();
+				}
+				case ExpandoColumnConstants.DOUBLE_ARRAY: {
+					return value.getDoubleArray();
+				}
+				case ExpandoColumnConstants.FLOAT: {
+					return value.getFloat();
+				}
+				case ExpandoColumnConstants.FLOAT_ARRAY: {
+					return value.getFloatArray();
+				}
+				case ExpandoColumnConstants.INTEGER: {
+					return value.getInteger();
+				}
+				case ExpandoColumnConstants.INTEGER_ARRAY: {
+					return value.getIntegerArray();
+				}
+				case ExpandoColumnConstants.LONG: {
+					return value.getLong();
+				}
+				case ExpandoColumnConstants.LONG_ARRAY: {
+					return value.getLongArray();
+				}
+				case ExpandoColumnConstants.SHORT: {
+					return value.getShort();
+				}
+				case ExpandoColumnConstants.SHORT_ARRAY: {
+					return value.getShortArray();
+				}
+				case ExpandoColumnConstants.STRING_ARRAY: {
+					return value.getStringArray();
+				}
+				default: {
+					return value.getString();
+				}
+			}
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 
 }

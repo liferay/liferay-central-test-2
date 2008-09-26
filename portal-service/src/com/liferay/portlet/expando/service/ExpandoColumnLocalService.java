@@ -91,6 +91,12 @@ public interface ExpandoColumnLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
+		long tableId, java.lang.String name, int type,
+		java.lang.Object defaultData)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteColumn(long columnId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -182,6 +188,12 @@ public interface ExpandoColumnLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
+		long columnId, java.lang.String name, int type,
+		java.lang.Object defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

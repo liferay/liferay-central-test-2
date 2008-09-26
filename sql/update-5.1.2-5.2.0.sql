@@ -1,3 +1,5 @@
+alter table ExpandoColumn add defaultData STRING null;
+
 alter table JournalStructure add parentStructureId VARCHAR(75);
 
 create table MBMailingList (

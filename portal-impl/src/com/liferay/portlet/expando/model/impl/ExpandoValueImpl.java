@@ -273,7 +273,7 @@ public class ExpandoValueImpl
 			throw new ValueDataException(
 				"Column " + getColumnId() + " has type " +
 					ExpandoColumnConstants.getTypeLabel(column.getType()) +
-						" and is not compatbile with type " +
+						" and is not compatible with type " +
 							ExpandoColumnConstants.getTypeLabel(type));
 		}
 	}
