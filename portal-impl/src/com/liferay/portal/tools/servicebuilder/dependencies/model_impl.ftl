@@ -237,6 +237,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		else {
 			${entity.name} model = new ${entity.name}Impl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			<#list entity.regularColList as column>
