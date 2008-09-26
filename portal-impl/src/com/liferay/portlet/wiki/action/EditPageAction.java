@@ -26,12 +26,12 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
@@ -300,8 +300,7 @@ public class EditPageAction extends PortletAction {
 		String parentTitle = ParamUtil.getString(actionRequest, "parentTitle");
 		String redirectTitle = null;
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "tagsEntries"));
+		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,

@@ -44,9 +44,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ViewNodeAction extends PortletAction {
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+	public static ActionForward viewNode(
+			ActionMapping mapping, RenderRequest renderRequest,
+			String defaultForward)
 		throws Exception {
 
 		try {
@@ -69,7 +69,16 @@ public class ViewNodeAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
+		return mapping.findForward(defaultForward);
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		return viewNode(
+			mapping, renderRequest,
 			getForward(renderRequest, "portlet.wiki.view_node"));
 	}
 

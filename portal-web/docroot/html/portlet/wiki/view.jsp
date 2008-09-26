@@ -191,6 +191,14 @@ TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPag
 	className="<%= WikiPage.class.getName() %>"
 	classPK="<%= wikiPage.getResourcePrimKey() %>"
 	portletURL="<%= taggedPagesURL %>"
+	message="categories"
+	folksonomy="false"
+/>
+<liferay-ui:tags-summary
+	className="<%= WikiPage.class.getName() %>"
+	classPK="<%= wikiPage.getResourcePrimKey() %>"
+	portletURL="<%= taggedPagesURL %>"
+	folksonomy="true"
 />
 
 <div>

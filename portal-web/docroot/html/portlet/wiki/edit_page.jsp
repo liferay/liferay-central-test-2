@@ -327,23 +327,40 @@ if (Validator.isNull(redirect)) {
 		</tr>
 	</c:if>
 
+	<%
+	long classPK = 0;
+
+	if (!newPage) {
+		classPK = wikiPage.getResourcePrimKey();
+	}
+	else if (Validator.isNotNull(templatePage)) {
+		classPK = templatePage.getResourcePrimKey();
+	}
+	%>
+
+	<tr>
+			<td>
+				<liferay-ui:message key="categories" />
+			</td>
+			<td>
+				<liferay-ui:tags-selector
+						className="<%= WikiPage.class.getName() %>"
+						classPK="<%= classPK %>"
+						hiddenInput="none"
+						folksonomy="<%= false %>"
+				/>
+			</td>
+	</tr>
+	<tr>
+			<td colspan="2">
+					<br />
+			</td>
+	</tr>
 	<tr>
 		<td class="lfr-label">
 			<liferay-ui:message key="tags" />
 		</td>
 		<td>
-
-			<%
-			long classPK = 0;
-
-			if (!newPage) {
-				classPK = wikiPage.getResourcePrimKey();
-			}
-			else if (Validator.isNotNull(templatePage)) {
-				classPK = templatePage.getResourcePrimKey();
-			}
-			%>
-
 			<liferay-ui:tags-selector
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= classPK %>"

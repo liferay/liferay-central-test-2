@@ -23,6 +23,8 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
@@ -57,6 +59,13 @@ public class ViewPageAction extends PortletAction {
 
 			if (node == null) {
 				ActionUtil.getFirstVisibleNode(renderRequest);
+			}
+
+			String tag = ParamUtil.getString(renderRequest, "tag");
+
+			if (Validator.isNotNull(tag)) {
+				return ViewNodeAction.viewNode(
+					mapping, renderRequest, "portlet.wiki.view_node");
 			}
 
 			ActionUtil.getPage(renderRequest);
