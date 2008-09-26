@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -79,6 +80,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -551,7 +553,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = getPage(nodeId, title);
 
-		List<WikiPage> pages = new UniqueList<WikiPage>();
+		Map<String, WikiPage> pages = new LinkedHashMap<String, WikiPage>();
 
 		Map<String, Boolean> links = WikiCacheUtil.getOutgoingLinks(page);
 
@@ -559,7 +561,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			Boolean exists = links.get(curTitle);
 
 			if (exists) {
-				pages.add(getPage(nodeId, curTitle));
+				if (!pages.containsKey(curTitle)) {
+					pages.put(curTitle, getPage(nodeId, curTitle));
+				}
 			}
 			else {
 				WikiPageImpl newPage = new WikiPageImpl();
@@ -568,11 +572,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				newPage.setNodeId(nodeId);
 				newPage.setTitle(curTitle);
 
-				pages.add(newPage);
+				if (!pages.containsKey(curTitle)) {
+					pages.put(curTitle, newPage);
+				}
 			}
 		}
 
-		return pages;
+		return ListUtil.fromCollection(pages.values());
 	}
 
 	public WikiPage getPage(long nodeId, String title)

@@ -399,6 +399,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		else {
 			WikiPage model = new WikiPageImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setUuid(HtmlUtil.escape(getUuid()));
