@@ -31,7 +31,7 @@ import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="MirageAspect.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseMirageAspect.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
