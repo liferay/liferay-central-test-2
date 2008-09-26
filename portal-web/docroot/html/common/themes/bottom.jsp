@@ -44,20 +44,15 @@
 				yearStatus: '<liferay-ui:message key="show-a-different-year" />',
 				weekHeader: '<liferay-ui:message key="week-abbreviation" />',
 				weekStatus: '<liferay-ui:message key="week-of-the-year" />',
-				dayNames: <%= JS.toScript(CalendarUtil.getDays(locale, "EEEE")) %>,
+				dayNames: <%= JS.toScript(CalendarUtil.getDays(locale)) %>,
+				dayNamesShort: <%= JS.toScript(CalendarUtil.getDays(locale, "EEE")) %>,
 
 				<%
-				String[] calendarDays = CalendarUtil.getDays(locale, "EEEE");
-				%>
+				String[] calendarDays = new String[7];
 
-				dayNamesShort: <%= JS.toScript(calendarDays) %>,
-
-				<%
 				Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 				for (int i = 0; i < calendarDays.length; i++) {
-					String day = calendarDays[i];
-
 					int daysIndex = (cal.getFirstDayOfWeek() + i - 1) % 7;
 
 					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]);
