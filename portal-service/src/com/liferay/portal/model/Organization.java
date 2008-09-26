@@ -55,20 +55,20 @@ public interface Organization extends OrganizationModel {
 
 	public java.lang.String[] getChildrenTypes();
 
-	public int getTypeOrder();
-
 	public com.liferay.portal.model.Group getGroup();
 
 	public int getPrivateLayoutsPageCount();
+
+	public int getSuborganizationsCount()
+		throws com.liferay.portal.SystemException;
+
+	public int getTypeOrder();
 
 	public boolean hasPrivateLayouts();
 
 	public int getPublicLayoutsPageCount();
 
 	public boolean hasPublicLayouts();
-
-	public int getSuborganizationsCount()
-		throws com.liferay.portal.SystemException;
 
 	public boolean hasSuborganizations()
 		throws com.liferay.portal.SystemException;
