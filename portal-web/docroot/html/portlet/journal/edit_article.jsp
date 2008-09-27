@@ -543,7 +543,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 </script>
 
-<form method="post" name="<portlet:namespace />fm2">
+<form method="post" name="<portlet:namespace />fm2" enctype="multipart/form-data">
 <input name="groupId" type="hidden" value="" />
 <input name="articleId" type="hidden" value="" />
 <input name="version" type="hidden" value="" />
