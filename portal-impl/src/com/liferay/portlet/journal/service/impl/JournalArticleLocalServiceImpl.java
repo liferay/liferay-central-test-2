@@ -957,7 +957,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			article, templateId, languageId, 1, "<request/>", themeDisplay);
+			article, templateId, languageId, 1, null, themeDisplay);
 
 		if (articleDisplay == null) {
 			return StringPool.BLANK;
@@ -1017,8 +1017,8 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, languageId, 1,
-			"<request/>", themeDisplay);
+			groupId, articleId, version, templateId, languageId, 1, null,
+			themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -1065,6 +1065,10 @@ public class JournalArticleLocalServiceImpl
 
 		boolean cacheable = true;
 
+		if (Validator.isNull(xmlRequest)) {
+			xmlRequest = "<request/>";
+		}
+
 		Map<String, String> tokens = JournalUtil.getTokens(
 			article.getGroupId(), themeDisplay, xmlRequest);
 
@@ -1084,11 +1088,7 @@ public class JournalArticleLocalServiceImpl
 
 				root = doc.getRootElement();
 
-				Document request = null;
-
-				if (Validator.isNotNull(xmlRequest)) {
-					request = SAXReaderUtil.read(xmlRequest);
-				}
+				Document request = SAXReaderUtil.read(xmlRequest);
 
 				List<Element> pages = root.elements("page");
 
@@ -1131,9 +1131,7 @@ public class JournalArticleLocalServiceImpl
 					}
 				}
 
-				if (request != null) {
-					root.add(request.getRootElement().createCopy());
-				}
+				root.add(request.getRootElement().createCopy());
 
 				JournalUtil.addAllReservedEls(root, tokens, article);
 
