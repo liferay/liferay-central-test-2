@@ -957,7 +957,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			article, templateId, languageId, 1, null, themeDisplay);
+			article, templateId, languageId, 1, "<request/>", themeDisplay);
 
 		if (articleDisplay == null) {
 			return StringPool.BLANK;
@@ -1017,8 +1017,8 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, languageId, 1, null,
-			themeDisplay);
+			groupId, articleId, version, templateId, languageId, 1,
+			"<request/>", themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
