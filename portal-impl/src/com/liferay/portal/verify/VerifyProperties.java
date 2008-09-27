@@ -247,6 +247,10 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"default.user.public.layout.lar",
 			"default.user.public.layouts.lar"
+		},
+		new String[] {
+			"organizations.country.required",
+			"organizations.types.country.required"
 		}
 	};
 
