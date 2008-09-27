@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +91,7 @@ public class JournalArticleTag extends IncludeTag {
 	private long _articleResourcePrimKey;
 	private String _languageId;
 	private int _articlePage = 1;
-	private String _xmlRequest = StringPool.BLANK;
+	private String _xmlRequest;
 	private boolean _showTitle;
 	private boolean _showAvailableLocales;
 
