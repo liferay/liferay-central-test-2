@@ -106,6 +106,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.social.util.FacebookUtil;
+import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
@@ -1952,6 +1953,12 @@ public class PortalImpl implements Portal {
 
 	public String[] getSystemRoles() {
 		return _allSystemRoles;
+	}
+
+	public String[] getTagsEntries(ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		return TagsUtil.getTagsEntries(actionRequest);
 	}
 
 	public UploadPortletRequest getUploadPortletRequest(
