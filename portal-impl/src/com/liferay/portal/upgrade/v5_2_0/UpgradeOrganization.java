@@ -26,10 +26,15 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTypeUpgradeColumnImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,47 +46,34 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeLocationResources.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class UpgradeLocationResources extends UpgradeProcess {
+public class UpgradeOrganization extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading location resources");
+		_log.info("Upgrading");
 
 		try {
-			updateLocationResources();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	protected void updateLocationResources()
-		throws Exception {
+	protected void doUpgrade() throws Exception {
+		UpgradeColumn typeColumn = new OrganizationTypeUpgradeColumnImpl();
 
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
+			typeColumn);
 
-		for (Company company : companies) {
-			for (int scope : _SCOPES) {
-				ResourceCode oldResourceCode =
-					ResourceCodeLocalServiceUtil.getResourceCode(
-						company.getCompanyId(),
-						"com.liferay.portal.model.Location", scope);
+		upgradeTable.updateTable();
 
-				ResourceCode newResourceCode =
-					ResourceCodeLocalServiceUtil.getResourceCode(
-						company.getCompanyId(),
-						"com.liferay.portal.model.Organization", scope);
-
-				updateCodeId(oldResourceCode, newResourceCode);
-
-				ResourceCodeLocalServiceUtil.deleteResourceCode(
-					oldResourceCode);
-			}
-		}
+		updateLocationResources();
 	}
 
 	protected void updateCodeId(
@@ -110,12 +102,29 @@ public class UpgradeLocationResources extends UpgradeProcess {
 		ResourceCodeLocalServiceUtil.deleteResourceCode(oldResourceCode);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeLocationResources.class);
+	protected void updateLocationResources() throws Exception {
+		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
-	private static int[] _SCOPES = {
-		ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP,
-		ResourceConstants.SCOPE_GROUP_TEMPLATE,
-		ResourceConstants.SCOPE_INDIVIDUAL
-	};
+		for (Company company : companies) {
+			for (int scope : ResourceConstants.SCOPES) {
+				ResourceCode oldResourceCode =
+					ResourceCodeLocalServiceUtil.getResourceCode(
+						company.getCompanyId(),
+						"com.liferay.portal.model.Location", scope);
+
+				ResourceCode newResourceCode =
+					ResourceCodeLocalServiceUtil.getResourceCode(
+						company.getCompanyId(),
+						"com.liferay.portal.model.Organization", scope);
+
+				updateCodeId(oldResourceCode, newResourceCode);
+
+				ResourceCodeLocalServiceUtil.deleteResourceCode(
+					oldResourceCode);
+			}
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);
 
 }

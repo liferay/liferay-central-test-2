@@ -20,38 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_2_0.util;
 
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeOrganization;
-import com.liferay.portal.upgrade.v5_2_0.UpgradePortletPermissions;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeTags;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="UpgradeProcess_5_2_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationTypeUpgradeColumnImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_5_2_0 extends UpgradeProcess {
+public class OrganizationTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_2_0_BUILD_NUMBER;
+	public OrganizationTypeUpgradeColumnImpl() {
+		super("type");
 	}
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public Object getNewValue(Object oldValue) throws Exception {
+		Boolean type = (Boolean)oldValue;
 
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeOrganization.class);
-		upgrade(UpgradePortletPermissions.class);
-		upgrade(UpgradeTags.class);
+		if (type) {
+			return "location";
+		}
+		else {
+			return "regular";
+		}
 	}
-
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_2_0.class);
 
 }

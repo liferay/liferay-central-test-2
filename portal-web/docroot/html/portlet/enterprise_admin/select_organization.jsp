@@ -122,8 +122,6 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
 
-	String rowHREF = null;
-
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("javascript: opener.");
@@ -135,7 +133,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("');");
 	sb.append("window.close();");
 
-	rowHREF = sb.toString();
+	String rowHREF = sb.toString();
 
 	// Name
 

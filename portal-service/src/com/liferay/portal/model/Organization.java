@@ -49,9 +49,10 @@ package com.liferay.portal.model;
  *
  */
 public interface Organization extends OrganizationModel {
-	public boolean isParentable();
+	public com.liferay.portal.model.Address getAddress();
 
-	public boolean isRoot();
+	public java.util.List<com.liferay.portal.model.Address> getAddresses()
+		throws com.liferay.portal.SystemException;
 
 	public java.lang.String[] getChildrenTypes();
 
@@ -59,22 +60,21 @@ public interface Organization extends OrganizationModel {
 
 	public int getPrivateLayoutsPageCount();
 
-	public int getSuborganizationsCount()
+	public int getPublicLayoutsPageCount();
+
+	public int getSuborganizationsSize()
 		throws com.liferay.portal.SystemException;
 
 	public int getTypeOrder();
 
 	public boolean hasPrivateLayouts();
 
-	public int getPublicLayoutsPageCount();
-
 	public boolean hasPublicLayouts();
 
 	public boolean hasSuborganizations()
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Address getAddress();
+	public boolean isParentable();
 
-	public java.util.List<com.liferay.portal.model.Address> getAddresses()
-		throws com.liferay.portal.SystemException;
+	public boolean isRoot();
 }

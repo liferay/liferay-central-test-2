@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.kernel.configuration.Filter" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -36,11 +35,9 @@ if (parentOrganizationId <= 0) {
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
-Organization parentOrganization = null;
-
 if (parentOrganizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 	try {
-		parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
+		Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
 
 		parentOrganizationName = parentOrganization.getName();
 	}
@@ -56,8 +53,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 <script type="text/javascript">
 	function <portlet:namespace />openOrganizationSelector() {
-		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
-
 		<c:choose>
 			<c:when test="<%= organization == null %>">
 				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
@@ -66,6 +61,8 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				var type = '<%= type %>';
 			</c:otherwise>
 		</c:choose>
+
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
 
 		url = Liferay.Util.addParams('childType=' + type, url);
 
@@ -101,7 +98,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-status" />
 <liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
+<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent-organization" />
 
 <table class="lfr-table">
 <tr>
@@ -189,13 +186,17 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				<c:choose>
 					<c:when test="<%= organization == null %>">
 						<select name="<portlet:namespace />type">
+
 							<%
 							for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
 							%>
-								<option <%= (type.equals(curType)) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+
+								<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+
 							<%
 							}
 							%>
+
 						</select>
 					</c:when>
 					<c:otherwise>
@@ -205,7 +206,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			</td>
 		</tr>
 
-		<c:if test="<%= (organization == null) || GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_TYPES_COUNTRY_ENABLED, new Filter(String.valueOf(type)))) %>">
+		<c:if test="<%= (organization == null) || GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type)))) %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="country" />
@@ -223,6 +224,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				</td>
 			</tr>
 		</c:if>
+
 		</table>
 	</td>
 </tr>

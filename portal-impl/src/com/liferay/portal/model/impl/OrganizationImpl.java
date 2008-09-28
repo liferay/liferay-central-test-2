@@ -54,14 +54,12 @@ public class OrganizationImpl
 
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
-			PropsKeys.ORGANIZATIONS_TYPES_CHILDREN_TYPES,
-			new Filter(type));
+			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES, new Filter(type));
 	}
 
 	public static String[] getParentTypes(String type) {
 		String[] types = PropsUtil.getArray(
-			PropsKeys.ORGANIZATIONS_TYPES,
-			new Filter(type));
+			PropsKeys.ORGANIZATIONS_TYPES, new Filter(type));
 
 		List<String> parentTypes = new ArrayList<String>();
 
@@ -71,7 +69,7 @@ public class OrganizationImpl
 			}
 		}
 
-		return parentTypes.toArray(new String[0]);
+		return parentTypes.toArray(new String[parentTypes.size()]);
 	}
 
 	public static boolean isParentable(String type) {
@@ -85,28 +83,38 @@ public class OrganizationImpl
 		}
 	}
 
+	public static boolean isRootable(String type) {
+		return GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.ORGANIZATIONS_ROOTABLE, new Filter(type)));
+	}
+
 	public OrganizationImpl() {
 	}
 
-	public static boolean isRootable(String type) {
-		return GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.ORGANIZATIONS_TYPES_ROOTABLE,
-			new Filter(type)));
+	public Address getAddress() {
+		Address address = null;
+
+		try {
+			List<Address> addresses = getAddresses();
+
+			if (addresses.size() > 0) {
+				address = addresses.get(0);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		if (address == null) {
+			address = new AddressImpl();
+		}
+
+		return address;
 	}
 
-	public boolean isParentable() {
-		return isParentable(getType());
-	}
-
-	public boolean isRoot() {
-		if (getParentOrganizationId() ==
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
+	public List<Address> getAddresses() throws SystemException {
+		return AddressLocalServiceUtil.getAddresses(
+			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}
 
 	public String[] getChildrenTypes() {
@@ -145,33 +153,6 @@ public class OrganizationImpl
 		return 0;
 	}
 
-	public int getSuborganizationsCount() throws SystemException {
-		return OrganizationLocalServiceUtil.searchCount(
-			getCompanyId(), getOrganizationId(), null, null, null, null, null,
-			null, null, null, true);
-	}
-
-	public int getTypeOrder() {
-		String[] types = PropsValues.ORGANIZATIONS_TYPES;
-
-		for (int i = 0; i < types.length; i++) {
-			if (types[i].equals(getType())) {
-				return i + 1;
-			}
-		}
-
-		return 0;
-	}
-
-	public boolean hasPrivateLayouts() {
-		if (getPrivateLayoutsPageCount() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public int getPublicLayoutsPageCount() {
 		try {
 			Group group = getGroup();
@@ -190,6 +171,35 @@ public class OrganizationImpl
 		return 0;
 	}
 
+	public int getSuborganizationsSize() throws SystemException {
+		return OrganizationLocalServiceUtil.searchCount(
+			getCompanyId(), getOrganizationId(), null, null, null, null, null,
+			null, null, null, true);
+	}
+
+	public int getTypeOrder() {
+		String[] types = PropsValues.ORGANIZATIONS_TYPES;
+
+		for (int i = 0; i < types.length; i++) {
+			String type = types[i];
+
+			if (type.equals(getType())) {
+				return i + 1;
+			}
+		}
+
+		return 0;
+	}
+
+	public boolean hasPrivateLayouts() {
+		if (getPrivateLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean hasPublicLayouts() {
 		if (getPublicLayoutsPageCount() > 0) {
 			return true;
@@ -200,7 +210,7 @@ public class OrganizationImpl
 	}
 
 	public boolean hasSuborganizations() throws SystemException {
-		if (getSuborganizationsCount() > 0) {
+		if (getSuborganizationsSize() > 0) {
 			return true;
 		}
 		else {
@@ -208,30 +218,19 @@ public class OrganizationImpl
 		}
 	}
 
-	public Address getAddress() {
-		Address address = null;
-
-		try {
-			List<Address> addresses = getAddresses();
-
-			if (addresses.size() > 0) {
-				address = addresses.get(0);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		if (address == null) {
-			address = new AddressImpl();
-		}
-
-		return address;
+	public boolean isParentable() {
+		return isParentable(getType());
 	}
 
-	public List<Address> getAddresses() throws SystemException {
-		return AddressLocalServiceUtil.getAddresses(
-			getCompanyId(), Organization.class.getName(), getOrganizationId());
+	public boolean isRoot() {
+		if (getParentOrganizationId() ==
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(Organization.class);

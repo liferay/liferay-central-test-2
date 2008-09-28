@@ -76,7 +76,6 @@ public class LayoutCache {
 				}
 			}
 			else if (entityName.equals("organization")) {
-
 				List<Organization> organizations =
 					OrganizationLocalServiceUtil.search(
 						companyId,
@@ -123,7 +122,6 @@ public class LayoutCache {
 				}
 			}
 			else if (entityName.equals("organization")) {
-
 				List<Organization> organizations =
 					OrganizationLocalServiceUtil.search(
 						companyId,

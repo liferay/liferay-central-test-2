@@ -38,4 +38,10 @@ public class ResourceConstants {
 
 	public static final int SCOPE_COMPANY = 1;
 
+	public static int[] SCOPES = {
+		ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP,
+		ResourceConstants.SCOPE_GROUP_TEMPLATE,
+		ResourceConstants.SCOPE_INDIVIDUAL
+	};
+
 }

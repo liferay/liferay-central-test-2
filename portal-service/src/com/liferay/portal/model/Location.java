@@ -29,6 +29,8 @@ import java.io.Serializable;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated
+ *
  */
 public interface Location extends Serializable {
 }

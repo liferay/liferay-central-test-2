@@ -649,6 +649,7 @@ public class OrganizationLocalServiceImpl
 
 		if ((parentOrganizationId ==
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
+
 			if (!OrganizationImpl.isRootable(type)) {
 				throw new OrganizationParentException(
 					"Organization of type " + type + " cannot be a root");
@@ -661,31 +662,28 @@ public class OrganizationLocalServiceImpl
 				throw new OrganizationParentException(
 					"Organization of type " + type + " cannot have children");
 			}
-			else {
-				Organization parentOrganization =
-					organizationPersistence.fetchByPrimaryKey(
-						parentOrganizationId);
 
-				if (parentOrganization != null) {
-					if ((companyId != parentOrganization.getCompanyId()) ||
-						(parentOrganizationId == organizationId)) {
+			Organization parentOrganization =
+				organizationPersistence.fetchByPrimaryKey(
+					parentOrganizationId);
 
-						throw new OrganizationParentException();
-					}
-					else if (!ArrayUtil.contains(
-								childrenTypes,
-								String.valueOf(parentOrganization.getType()))) {
+			if (parentOrganization == null) {
+				throw new OrganizationParentException(
+					"Organization " + parentOrganizationId + " doesn't exist");
+			}
 
-						throw new OrganizationParentException(
-							"Type " + type + " not allowed as child of " +
-								parentOrganization.getType());
-					}
-				}
-				else {
-					throw new OrganizationParentException(
-						"Organization " + parentOrganizationId +
-							" doesn't exist");
-				}
+			if ((companyId != parentOrganization.getCompanyId()) ||
+				(parentOrganizationId == organizationId)) {
+
+				throw new OrganizationParentException();
+			}
+
+			if (!ArrayUtil.contains(
+					childrenTypes, parentOrganization.getType())) {
+
+				throw new OrganizationParentException(
+					"Type " + type + " not allowed as child of " +
+						parentOrganization.getType());
 			}
 		}
 
@@ -718,12 +716,12 @@ public class OrganizationLocalServiceImpl
 			}
 		}
 
-		boolean countryRequired = GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.ORGANIZATIONS_TYPES_COUNTRY_REQUIRED,
+		boolean countryRequired = GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_REQUIRED,
 			new Filter(type)));
 
 		try {
-			if ((countryId > 0) || countryRequired) {
+			if (countryRequired || (countryId > 0)) {
 				countryPersistence.findByPrimaryKey(countryId);
 			}
 

@@ -30,6 +30,8 @@ themeDisplay.setIncludeServiceJs(true);
 OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
+
+String type = displayTerms.getType();
 %>
 
 <liferay-ui:search-toggle
@@ -85,10 +87,13 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 				<%
 				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
 				%>
-					<option <%= (curType.equals(displayTerms.getType())) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+
+					<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+
 				<%
 				}
 				%>
+
 			</select>
 		</td>
 		<td>

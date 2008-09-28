@@ -49,12 +49,10 @@ public class OrganizationTypeComparator extends OrderByComparator {
 		Organization organization1 = (Organization)obj1;
 		Organization organization2 = (Organization)obj2;
 
-		int value = 0;
-
 		int typeOrder1 = organization1.getTypeOrder();
 		int typeOrder2 = organization2.getTypeOrder();
 
-		value = typeOrder1 - typeOrder2;
+		int value = typeOrder1 - typeOrder2;
 
 		if (value == 0) {
 			value = organization1.getName().compareTo(organization2.getName());
