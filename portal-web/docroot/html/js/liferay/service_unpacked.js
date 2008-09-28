@@ -1512,13 +1512,6 @@ Liferay.Service.DL.DLFileEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	verifyFileEntryLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "verifyFileEntryLock";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	lockFileEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "lockFileEntry";
@@ -1543,6 +1536,13 @@ Liferay.Service.DL.DLFileEntry = {
 	updateFileEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateFileEntry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	verifyFileEntryLock: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "verifyFileEntryLock";
 
 		return Liferay.Service.ajax(params, callback);
 	}
@@ -1632,13 +1632,6 @@ Liferay.Service.DL.DLFolder = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	verifyInheritableLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "verifyInheritableLock";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	lockFolder: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "lockFolder";
@@ -1653,13 +1646,6 @@ Liferay.Service.DL.DLFolder = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	unlockFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unlockFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	reIndexSearch: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "reIndexSearch";
@@ -1667,9 +1653,23 @@ Liferay.Service.DL.DLFolder = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	unlockFolder: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "unlockFolder";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateFolder: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateFolder";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	verifyInheritableLock: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "verifyInheritableLock";
 
 		return Liferay.Service.ajax(params, callback);
 	}
