@@ -28,6 +28,8 @@ import com.sun.portal.cms.mirage.service.custom.ContentService;
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
+import javax.annotation.Resource;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -59,18 +61,25 @@ public abstract class BaseMirageAspect {
 	protected abstract Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable;
 
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ArticleImageService")
+	@Resource(name = "com.liferay.portal.mirage.ArticleImageService")
 	protected BinaryContentService articleImageService;
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ArticleResourceService")
+
+	@Resource(name = "com.liferay.portal.mirage.ArticleResourceService")
 	protected BinaryContentService articleResourceService;
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ContentFeedService")
+
+	@Resource(name = "com.liferay.portal.mirage.ContentFeedService")
 	protected ContentFeedService contentFeedService;
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ContentSearchService")
+
+	@Resource(name = "com.liferay.portal.mirage.ContentSearchService")
 	protected BinaryContentService contentSearchService;
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ContentService")
+
+	@Resource(name = "com.liferay.portal.mirage.ContentService")
 	protected ContentService contentService;
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.ContentTypeService")
+
+	@Resource(name = "com.liferay.portal.mirage.ContentTypeService")
 	protected ContentTypeService contentTypeService;
-	@javax.annotation.Resource(name = "com.liferay.portal.mirage.WorkflowService")
+
+	@Resource(name = "com.liferay.portal.mirage.WorkflowService")
 	protected WorkflowService workflowService;
+
 }

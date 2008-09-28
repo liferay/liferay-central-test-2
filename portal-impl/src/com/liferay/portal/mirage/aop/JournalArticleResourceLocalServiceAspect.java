@@ -73,10 +73,12 @@ public class JournalArticleResourceLocalServiceAspect extends BaseMirageAspect {
 				articleResourceService.getBinaryContent(articleResourceInvoker);
 			}
 			else if (methodName.equals("getArticleResourcePrimKey")) {
-				articleResourceService.getBinaryContentId(articleResourceInvoker);
+				articleResourceService.getBinaryContentId(
+					articleResourceInvoker);
 			}
 			else if (methodName.equals("getArticleResources")) {
-				articleResourceService.getBinaryContents(articleResourceInvoker);
+				articleResourceService.getBinaryContents(
+					articleResourceInvoker);
 			}
 
 			return articleResourceInvoker.getReturnValue();
