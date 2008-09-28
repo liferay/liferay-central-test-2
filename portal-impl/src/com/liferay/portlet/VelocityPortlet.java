@@ -24,7 +24,9 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.StrutsUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
+import com.liferay.portal.velocity.VelocityVariables;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -139,6 +141,10 @@ public class VelocityPortlet extends GenericPortlet {
 
 		context.put(REQUEST, portletRequest);
 		context.put(RESPONSE, portletResponse);
+
+		VelocityVariables.insertVariables(
+			(VelocityContext)context,
+			PortalUtil.getHttpServletRequest(portletRequest));
 
 		return context;
 	}
