@@ -37,8 +37,6 @@ import org.apache.catalina.connector.Request;
  */
 public class PortalRequest extends Request {
 
-	public static String LOCALHOST = "localhost";
-
 	protected void configureSessionCookie(Cookie cookie) {
 		super.configureSessionCookie(cookie);
 
@@ -59,8 +57,8 @@ public class PortalRequest extends Request {
 			return null;
 		}
 
-		if (host.endsWith(LOCALHOST)) {
-			return LOCALHOST;
+		if (host.endsWith(_LOCALHOST)) {
+			return _LOCALHOST;
 		}
 
 		int x = host.lastIndexOf(StringPool.PERIOD);
@@ -88,5 +86,7 @@ public class PortalRequest extends Request {
 
 		return domain;
 	}
+
+	private static String _LOCALHOST = "localhost";
 
 }
