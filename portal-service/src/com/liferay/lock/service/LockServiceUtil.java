@@ -73,8 +73,7 @@ public class LockServiceUtil {
 
 		LockService lockService = LockServiceFactory.getService();
 
-		return lockService.lock(
-			className, pk, userId, owner, expirationTime);
+		return lockService.lock(className, pk, userId, owner, expirationTime);
 	}
 
 	public static Lock lock(

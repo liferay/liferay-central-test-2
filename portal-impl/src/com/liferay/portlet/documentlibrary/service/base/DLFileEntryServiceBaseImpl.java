@@ -59,6 +59,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFin
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
+import com.liferay.portlet.messageboards.service.MBDiscussionLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
@@ -350,6 +351,15 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
+	public MBDiscussionLocalService getMBDiscussionLocalService() {
+		return mbDiscussionLocalService;
+	}
+
+	public void setMBDiscussionLocalService(
+		MBDiscussionLocalService mbDiscussionLocalService) {
+		this.mbDiscussionLocalService = mbDiscussionLocalService;
+	}
+
 	public MBDiscussionPersistence getMBDiscussionPersistence() {
 		return mbDiscussionPersistence;
 	}
@@ -509,6 +519,8 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl")
+	protected MBDiscussionLocalService mbDiscussionLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl")
 	protected MBDiscussionPersistence mbDiscussionPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService.impl")

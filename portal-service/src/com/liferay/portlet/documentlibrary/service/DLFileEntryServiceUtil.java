@@ -146,13 +146,6 @@ public class DLFileEntryServiceUtil {
 		return getService().hasFileEntryLock(folderId, name);
 	}
 
-	public static boolean verifyFileEntryLock(long folderId,
-		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return getService().verifyFileEntryLock(folderId, name, lockUuid);
-	}
-
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
@@ -195,6 +188,13 @@ public class DLFileEntryServiceUtil {
 				   .updateFileEntry(folderId, newFolderId, name,
 			sourceFileName, title, description, tagsEntries, extraSettings,
 			bytes);
+	}
+
+	public static boolean verifyFileEntryLock(long folderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return getService().verifyFileEntryLock(folderId, name, lockUuid);
 	}
 
 	public static DLFileEntryService getService() {

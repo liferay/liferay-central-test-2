@@ -29,7 +29,6 @@ import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -117,9 +116,9 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
 
-		boolean alreadyHasLock = hasFileEntryLock(folderId, name);
+		boolean hasLock = hasFileEntryLock(folderId, name);
 
-		if (!alreadyHasLock) {
+		if (!hasLock) {
 
 			// Lock
 
@@ -130,7 +129,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			dlFileEntryLocalService.deleteFileEntry(folderId, name);
 		}
 		finally {
-			if (!alreadyHasLock) {
+			if (!hasLock) {
 
 				// Unlock
 
@@ -145,9 +144,9 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
 
-		boolean alreadyHasLock = hasFileEntryLock(folderId, name);
+		boolean hasLock = hasFileEntryLock(folderId, name);
 
-		if (!alreadyHasLock) {
+		if (!hasLock) {
 
 			// Lock
 
@@ -158,7 +157,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			dlFileEntryLocalService.deleteFileEntry(folderId, name, version);
 		}
 		finally {
-			if (!alreadyHasLock) {
+			if (!hasLock) {
 
 				// Unlock
 
@@ -222,47 +221,16 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public boolean hasFileEntryLock(long folderId, String name)
 		throws PortalException, RemoteException, SystemException {
 
-		User user = getUser();
-
 		String lockId = DLUtil.getLockId(folderId, name);
 
 		boolean hasLock = lockService.hasLock(
-			DLFileEntry.class.getName(), lockId, user.getUserId());
+			DLFileEntry.class.getName(), lockId, getUserId());
 
 		if (!hasLock) {
 			hasLock = dlFolderService.hasInheritableLock(folderId);
 		}
 
 		return hasLock;
-	}
-
-	public boolean verifyFileEntryLock(
-			long folderId, String name, String lockUuid)
-		throws PortalException, RemoteException, SystemException {
-
-		boolean verified = false;
-
-		try {
-			String lockId = DLUtil.getLockId(folderId, name);
-
-			Lock lock = lockService.getLock(DLFileEntry.class.getName(), lockId);
-
-			if (lock.getUuid().equals(lockUuid)) {
-				verified = true;
-			}
-		}
-		catch (PortalException pe) {
-			if (pe instanceof NoSuchLockException ||
-				pe instanceof ExpiredLockException) {
-
-				verified = dlFolderService.verifyInheritableLock(folderId, lockUuid);
-			}
-			else {
-				throw pe;
-			}
-		}
-
-		return verified;
 	}
 
 	public Lock lockFileEntry(long folderId, String name)
@@ -339,9 +307,9 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.UPDATE);
 
-		boolean alreadyHasLock = hasFileEntryLock(folderId, name);
+		boolean hasLock = hasFileEntryLock(folderId, name);
 
-		if (!alreadyHasLock) {
+		if (!hasLock) {
 
 			// Lock
 
@@ -356,7 +324,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 				description, tagsEntries, extraSettings, bytes);
 		}
 		finally {
-			if (!alreadyHasLock) {
+			if (!hasLock) {
 
 				// Unlock
 
@@ -365,6 +333,37 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		}
 
 		return fileEntry;
+	}
+
+	public boolean verifyFileEntryLock(
+			long folderId, String name, String lockUuid)
+		throws PortalException, RemoteException, SystemException {
+
+		boolean verified = false;
+
+		try {
+			String lockId = DLUtil.getLockId(folderId, name);
+
+			Lock lock = lockService.getLock(
+				DLFileEntry.class.getName(), lockId);
+
+			if (lock.getUuid().equals(lockUuid)) {
+				verified = true;
+			}
+		}
+		catch (PortalException pe) {
+			if (pe instanceof ExpiredLockException ||
+				pe instanceof NoSuchLockException) {
+
+				verified = dlFolderService.verifyInheritableLock(
+					folderId, lockUuid);
+			}
+			else {
+				throw pe;
+			}
+		}
+
+		return verified;
 	}
 
 }

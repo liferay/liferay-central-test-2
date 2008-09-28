@@ -219,22 +219,6 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static boolean verifyFileEntryLock(long folderId,
-		java.lang.String name, java.lang.String lockUuid)
-		throws RemoteException {
-		try {
-			boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
-					name, lockUuid);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name) throws RemoteException {
 		try {
@@ -317,6 +301,22 @@ public class DLFileEntryServiceSoap {
 					tagsEntries, extraSettings, bytes);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean verifyFileEntryLock(long folderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
+					name, lockUuid);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

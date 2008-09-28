@@ -233,21 +233,6 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static boolean verifyInheritableLock(long folderId,
-		java.lang.String lockUuid) throws RemoteException {
-		try {
-			boolean returnValue = DLFolderServiceUtil.verifyInheritableLock(folderId,
-					lockUuid);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.lock.model.Lock lockFolder(long folderId)
 		throws RemoteException {
 		try {
@@ -294,6 +279,17 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static void reIndexSearch(long companyId) throws RemoteException {
+		try {
+			DLFolderServiceUtil.reIndexSearch(companyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void unlockFolder(long folderId, java.lang.String lockUuid)
 		throws RemoteException {
 		try {
@@ -320,17 +316,6 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static void reIndexSearch(long companyId) throws RemoteException {
-		try {
-			DLFolderServiceUtil.reIndexSearch(companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description) throws RemoteException {
@@ -339,6 +324,21 @@ public class DLFolderServiceSoap {
 					parentFolderId, name, description);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid) throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.verifyInheritableLock(folderId,
+					lockUuid);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

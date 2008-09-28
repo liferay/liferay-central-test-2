@@ -774,7 +774,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		else {
 
-			// Client claims to know of a lock.  Verify the lock UUID.
+			// Client claims to know of a lock. Verify the lock UUID.
 
 			try {
 				boolean verified = DLFileEntryServiceUtil.verifyFileEntryLock(

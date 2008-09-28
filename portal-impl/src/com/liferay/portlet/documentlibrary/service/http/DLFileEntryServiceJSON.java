@@ -160,16 +160,6 @@ public class DLFileEntryServiceJSON {
 		return returnValue;
 	}
 
-	public static boolean verifyFileEntryLock(long folderId,
-		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
-				name, lockUuid);
-
-		return returnValue;
-	}
-
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
@@ -222,5 +212,15 @@ public class DLFileEntryServiceJSON {
 				tagsEntries, extraSettings, bytes);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static boolean verifyFileEntryLock(long folderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
+				name, lockUuid);
+
+		return returnValue;
 	}
 }
