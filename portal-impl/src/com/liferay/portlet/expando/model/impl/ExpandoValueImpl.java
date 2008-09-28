@@ -53,38 +53,16 @@ public class ExpandoValueImpl
 		return GetterUtil.getBoolean(getData());
 	}
 
-	public void setBoolean(boolean data)
-		throws PortalException, SystemException {
-
-		validate(ExpandoColumnConstants.BOOLEAN);
-
-		setData(String.valueOf(data));
-	}
-
 	public boolean[] getBooleanArray() throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.BOOLEAN_ARRAY);
 
 		return GetterUtil.getBooleanValues(StringUtil.split(getData()));
 	}
 
-	public void setBooleanArray(boolean[] data)
-		throws PortalException, SystemException {
-
-		validate(ExpandoColumnConstants.BOOLEAN_ARRAY);
-
-		setData(StringUtil.merge(data));
-	}
-
 	public Date getDate() throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.DATE);
 
 		return new Date(GetterUtil.getLong(getData()));
-	}
-
-	public void setDate(Date data) throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.DATE);
-
-		setData(String.valueOf(data.getTime()));
 	}
 
 	public Date[] getDateArray() throws PortalException, SystemException {
@@ -101,6 +79,100 @@ public class ExpandoValueImpl
 		return dateArray;
 	}
 
+	public double getDouble() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.DOUBLE);
+
+		return GetterUtil.getDouble(getData());
+	}
+
+	public double[] getDoubleArray() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.DOUBLE_ARRAY);
+
+		return GetterUtil.getDoubleValues(StringUtil.split(getData()));
+	}
+
+	public float getFloat() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.FLOAT);
+
+		return GetterUtil.getFloat(getData());
+	}
+
+	public float[] getFloatArray() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.FLOAT_ARRAY);
+
+		return GetterUtil.getFloatValues(StringUtil.split(getData()));
+	}
+
+	public int getInteger() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.INTEGER);
+
+		return GetterUtil.getInteger(getData());
+	}
+
+	public int[] getIntegerArray() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.INTEGER_ARRAY);
+
+		return GetterUtil.getIntegerValues(StringUtil.split(getData()));
+	}
+
+	public long getLong() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.LONG);
+
+		return GetterUtil.getLong(getData());
+	}
+
+	public long[] getLongArray() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.LONG_ARRAY);
+
+		return GetterUtil.getLongValues(StringUtil.split(getData()));
+	}
+
+	public short getShort() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.SHORT);
+
+		return GetterUtil.getShort(getData());
+	}
+
+	public short[] getShortArray() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.SHORT_ARRAY);
+
+		return GetterUtil.getShortValues(StringUtil.split(getData()));
+	}
+
+	public String getString() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.STRING);
+
+		return getData();
+	}
+
+	public String[] getStringArray() throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.STRING_ARRAY);
+
+		return StringUtil.split(getData());
+	}
+
+	public void setBoolean(boolean data)
+		throws PortalException, SystemException {
+
+		validate(ExpandoColumnConstants.BOOLEAN);
+
+		setData(String.valueOf(data));
+	}
+
+	public void setBooleanArray(boolean[] data)
+		throws PortalException, SystemException {
+
+		validate(ExpandoColumnConstants.BOOLEAN_ARRAY);
+
+		setData(StringUtil.merge(data));
+	}
+
+	public void setDate(Date data) throws PortalException, SystemException {
+		validate(ExpandoColumnConstants.DATE);
+
+		setData(String.valueOf(data.getTime()));
+	}
+
 	public void setDateArray(Date[] data)
 		throws PortalException, SystemException {
 
@@ -109,22 +181,10 @@ public class ExpandoValueImpl
 		setData(StringUtil.merge(data));
 	}
 
-	public double getDouble() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.DOUBLE);
-
-		return GetterUtil.getDouble(getData());
-	}
-
 	public void setDouble(double data) throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.DOUBLE);
 
 		setData(String.valueOf(data));
-	}
-
-	public double[] getDoubleArray() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.DOUBLE_ARRAY);
-
-		return GetterUtil.getDoubleValues(StringUtil.split(getData()));
 	}
 
 	public void setDoubleArray(double[] data)
@@ -135,22 +195,10 @@ public class ExpandoValueImpl
 		setData(StringUtil.merge(data));
 	}
 
-	public float getFloat() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.FLOAT);
-
-		return GetterUtil.getFloat(getData());
-	}
-
 	public void setFloat(float data) throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.FLOAT);
 
 		setData(String.valueOf(data));
-	}
-
-	public float[] getFloatArray() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.FLOAT_ARRAY);
-
-		return GetterUtil.getFloatValues(StringUtil.split(getData()));
 	}
 
 	public void setFloatArray(float[] data)
@@ -161,22 +209,10 @@ public class ExpandoValueImpl
 		setData(StringUtil.merge(data));
 	}
 
-	public int getInteger() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.INTEGER);
-
-		return GetterUtil.getInteger(getData());
-	}
-
 	public void setInteger(int data) throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.INTEGER);
 
 		setData(String.valueOf(data));
-	}
-
-	public int[] getIntegerArray() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.INTEGER_ARRAY);
-
-		return GetterUtil.getIntegerValues(StringUtil.split(getData()));
 	}
 
 	public void setIntegerArray(int[] data)
@@ -187,22 +223,10 @@ public class ExpandoValueImpl
 		setData(StringUtil.merge(data));
 	}
 
-	public long getLong() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.LONG);
-
-		return GetterUtil.getLong(getData());
-	}
-
 	public void setLong(long data) throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.LONG);
 
 		setData(String.valueOf(data));
-	}
-
-	public long[] getLongArray() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.LONG_ARRAY);
-
-		return GetterUtil.getLongValues(StringUtil.split(getData()));
 	}
 
 	public void setLongArray(long[] data)
@@ -213,22 +237,10 @@ public class ExpandoValueImpl
 		setData(StringUtil.merge(data));
 	}
 
-	public short getShort() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.SHORT);
-
-		return GetterUtil.getShort(getData());
-	}
-
 	public void setShort(short data) throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.SHORT);
 
 		setData(String.valueOf(data));
-	}
-
-	public short[] getShortArray() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.SHORT_ARRAY);
-
-		return GetterUtil.getShortValues(StringUtil.split(getData()));
 	}
 
 	public void setShortArray(short[] data)
@@ -239,22 +251,10 @@ public class ExpandoValueImpl
 		setData(StringUtil.merge(data));
 	}
 
-	public String getString() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.STRING);
-
-		return getData();
-	}
-
 	public void setString(String data) throws PortalException, SystemException {
 		validate(ExpandoColumnConstants.STRING);
 
 		setData(data);
-	}
-
-	public String[] getStringArray() throws PortalException, SystemException {
-		validate(ExpandoColumnConstants.STRING_ARRAY);
-
-		return StringUtil.split(getData());
 	}
 
 	public void setStringArray(String[] data)

@@ -40,60 +40,61 @@ public class ExpandoColumnImpl
 	}
 
 	public Object getDefaultValue() {
-		ExpandoValue value = new ExpandoValueImpl();
-		value.setColumnId(getColumnId());
-		value.setData(getDefaultData());
-
 		try {
-			switch (getType()) {
-				case ExpandoColumnConstants.BOOLEAN: {
-					return value.getBoolean();
-				}
-				case ExpandoColumnConstants.BOOLEAN_ARRAY: {
-					return value.getBooleanArray();
-				}
-				case ExpandoColumnConstants.DATE: {
-					return value.getDate();
-				}
-				case ExpandoColumnConstants.DATE_ARRAY: {
-					return value.getDateArray();
-				}
-				case ExpandoColumnConstants.DOUBLE: {
-					return value.getDouble();
-				}
-				case ExpandoColumnConstants.DOUBLE_ARRAY: {
-					return value.getDoubleArray();
-				}
-				case ExpandoColumnConstants.FLOAT: {
-					return value.getFloat();
-				}
-				case ExpandoColumnConstants.FLOAT_ARRAY: {
-					return value.getFloatArray();
-				}
-				case ExpandoColumnConstants.INTEGER: {
-					return value.getInteger();
-				}
-				case ExpandoColumnConstants.INTEGER_ARRAY: {
-					return value.getIntegerArray();
-				}
-				case ExpandoColumnConstants.LONG: {
-					return value.getLong();
-				}
-				case ExpandoColumnConstants.LONG_ARRAY: {
-					return value.getLongArray();
-				}
-				case ExpandoColumnConstants.SHORT: {
-					return value.getShort();
-				}
-				case ExpandoColumnConstants.SHORT_ARRAY: {
-					return value.getShortArray();
-				}
-				case ExpandoColumnConstants.STRING_ARRAY: {
-					return value.getStringArray();
-				}
-				default: {
-					return value.getString();
-				}
+			ExpandoValue value = new ExpandoValueImpl();
+
+			value.setColumnId(getColumnId());
+			value.setData(getDefaultData());
+
+			int type = getType();
+
+			if (type == ExpandoColumnConstants.BOOLEAN) {
+				return value.getBoolean();
+			}
+			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+				return value.getBooleanArray();
+			}
+			else if (type == ExpandoColumnConstants.DATE) {
+				return value.getDate();
+			}
+			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+				return value.getDateArray();
+			}
+			else if (type == ExpandoColumnConstants.DOUBLE) {
+				return value.getDouble();
+			}
+			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+				return value.getDoubleArray();
+			}
+			else if (type == ExpandoColumnConstants.FLOAT) {
+				return value.getFloat();
+			}
+			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+				return value.getFloatArray();
+			}
+			else if (type == ExpandoColumnConstants.INTEGER) {
+				return value.getInteger();
+			}
+			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+				return value.getIntegerArray();
+			}
+			else if (type == ExpandoColumnConstants.LONG) {
+				return value.getLong();
+			}
+			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+				return value.getLongArray();
+			}
+			else if (type == ExpandoColumnConstants.SHORT) {
+				return value.getShort();
+			}
+			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+				return value.getShortArray();
+			}
+			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+				return value.getStringArray();
+			}
+			else {
+				return value.getString();
 			}
 		}
 		catch (Exception e) {

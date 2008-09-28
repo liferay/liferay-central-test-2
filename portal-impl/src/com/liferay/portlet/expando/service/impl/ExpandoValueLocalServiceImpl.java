@@ -392,77 +392,77 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			className, tableName, columnName);
 
-		switch (column.getType()) {
-			case ExpandoColumnConstants.BOOLEAN: {
-				return addValue(
-					className, tableName, columnName, classPK,
-					((Boolean)data).booleanValue());
-			}
-			case ExpandoColumnConstants.BOOLEAN_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (boolean[])data);
-			}
-			case ExpandoColumnConstants.DATE: {
-				return addValue(
-					className, tableName, columnName, classPK, (Date)data);
-			}
-			case ExpandoColumnConstants.DATE_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (Date[])data);
-			}
-			case ExpandoColumnConstants.DOUBLE: {
-				return addValue(
-					className, tableName, columnName, classPK,
-					((Double)data).doubleValue());
-			}
-			case ExpandoColumnConstants.DOUBLE_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (double[])data);
-			}
-			case ExpandoColumnConstants.FLOAT: {
-				return addValue(
-					className, tableName, columnName, classPK,
-					((Float)data).floatValue());
-			}
-			case ExpandoColumnConstants.FLOAT_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (float[])data);
-			}
-			case ExpandoColumnConstants.INTEGER: {
-				return addValue(
-					className, tableName, columnName, classPK,
-					((Integer)data).intValue());
-			}
-			case ExpandoColumnConstants.INTEGER_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (int[])data);
-			}
-			case ExpandoColumnConstants.LONG: {
-				return addValue(
-					className, tableName, columnName, classPK,
-					((Long)data).longValue());
-			}
-			case ExpandoColumnConstants.LONG_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (long[])data);
-			}
-			case ExpandoColumnConstants.SHORT: {
-				return addValue(
-					className, tableName, columnName, classPK,
-					((Short)data).shortValue());
-			}
-			case ExpandoColumnConstants.SHORT_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (short[])data);
-			}
-			case ExpandoColumnConstants.STRING_ARRAY: {
-				return addValue(
-					className, tableName, columnName, classPK, (String[])data);
-			}
-			default: {
-				return addValue(
-					className, tableName, columnName, classPK, (String)data);
-			}
+		int type = column.getType();
+
+		if (type == ExpandoColumnConstants.BOOLEAN) {
+			return addValue(
+				className, tableName, columnName, classPK,
+				((Boolean)data).booleanValue());
+		}
+		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (boolean[])data);
+		}
+		else if (type == ExpandoColumnConstants.DATE) {
+			return addValue(
+				className, tableName, columnName, classPK, (Date)data);
+		}
+		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (Date[])data);
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE) {
+			return addValue(
+				className, tableName, columnName, classPK,
+				((Double)data).doubleValue());
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (double[])data);
+		}
+		else if (type == ExpandoColumnConstants.FLOAT) {
+			return addValue(
+				className, tableName, columnName, classPK,
+				((Float)data).floatValue());
+		}
+		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (float[])data);
+		}
+		else if (type == ExpandoColumnConstants.INTEGER) {
+			return addValue(
+				className, tableName, columnName, classPK,
+				((Integer)data).intValue());
+		}
+		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (int[])data);
+		}
+		else if (type == ExpandoColumnConstants.LONG) {
+			return addValue(
+				className, tableName, columnName, classPK,
+				((Long)data).longValue());
+		}
+		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (long[])data);
+		}
+		else if (type == ExpandoColumnConstants.SHORT) {
+			return addValue(
+				className, tableName, columnName, classPK,
+				((Short)data).shortValue());
+		}
+		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (short[])data);
+		}
+		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+			return addValue(
+				className, tableName, columnName, classPK, (String[])data);
+		}
+		else {
+			return addValue(
+				className, tableName, columnName, classPK, (String)data);
 		}
 	}
 
@@ -912,89 +912,83 @@ public class ExpandoValueLocalServiceImpl
 			className, tableName, columnName);
 
 		ExpandoValue value = new ExpandoValueImpl();
+
 		value.setColumnId(column.getColumnId());
 		value.setData(column.getDefaultData());
 
-		switch (column.getType()) {
-			case ExpandoColumnConstants.BOOLEAN: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getBoolean());
-			}
-			case ExpandoColumnConstants.BOOLEAN_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getBooleanArray());
-			}
-			case ExpandoColumnConstants.DATE: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getDate());
-			}
-			case ExpandoColumnConstants.DATE_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getDateArray());
-			}
-			case ExpandoColumnConstants.DOUBLE: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getDouble());
-			}
-			case ExpandoColumnConstants.DOUBLE_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getDoubleArray());
-			}
-			case ExpandoColumnConstants.FLOAT: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getFloat());
-			}
-			case ExpandoColumnConstants.FLOAT_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getFloatArray());
-			}
-			case ExpandoColumnConstants.INTEGER: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getInteger());
-			}
-			case ExpandoColumnConstants.INTEGER_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getIntegerArray());
-			}
-			case ExpandoColumnConstants.LONG: {
-				return getData(
-					className, tableName, columnName, classPK, value.getLong());
-			}
-			case ExpandoColumnConstants.LONG_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getLongArray());
-			}
-			case ExpandoColumnConstants.SHORT: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getShort());
-			}
-			case ExpandoColumnConstants.SHORT_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getShortArray());
-			}
-			case ExpandoColumnConstants.STRING_ARRAY: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getStringArray());
-			}
-			default: {
-				return getData(
-					className, tableName, columnName, classPK,
-					value.getString());
-			}
+		int type = column.getType();
+
+		if (type == ExpandoColumnConstants.BOOLEAN) {
+			return getData(
+				className, tableName, columnName, classPK, value.getBoolean());
+		}
+		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getBooleanArray());
+		}
+		else if (type == ExpandoColumnConstants.DATE) {
+			return getData(
+				className, tableName, columnName, classPK, value.getDate());
+		}
+		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getDateArray());
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE) {
+			return getData(
+				className, tableName, columnName, classPK, value.getDouble());
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getDoubleArray());
+		}
+		else if (type == ExpandoColumnConstants.FLOAT) {
+			return getData(
+				className, tableName, columnName, classPK, value.getFloat());
+		}
+		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getFloatArray());
+		}
+		else if (type == ExpandoColumnConstants.INTEGER) {
+			return getData(
+				className, tableName, columnName, classPK, value.getInteger());
+		}
+		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getIntegerArray());
+		}
+		else if (type == ExpandoColumnConstants.LONG) {
+			return getData(
+				className, tableName, columnName, classPK, value.getLong());
+		}
+		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getLongArray());
+		}
+		else if (type == ExpandoColumnConstants.SHORT) {
+			return getData(
+				className, tableName, columnName, classPK, value.getShort());
+		}
+		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getShortArray());
+		}
+		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+			return getData(
+				className, tableName, columnName, classPK,
+				value.getStringArray());
+		}
+		else {
+			return getData(
+				className, tableName, columnName, classPK, value.getString());
 		}
 	}
 

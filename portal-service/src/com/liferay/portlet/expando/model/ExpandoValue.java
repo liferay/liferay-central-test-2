@@ -53,15 +53,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setBoolean(boolean data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public boolean[] getBooleanArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setBooleanArray(boolean[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -69,15 +61,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setDate(java.util.Date data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public java.util.Date[] getDateArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setDateArray(java.util.Date[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -85,15 +69,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setDouble(double data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public double[] getDoubleArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setDoubleArray(double[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -101,15 +77,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setFloat(float data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public float[] getFloatArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setFloatArray(float[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -117,15 +85,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setInteger(int data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public int[] getIntegerArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setIntegerArray(int[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -133,15 +93,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setLong(long data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public long[] getLongArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setLongArray(long[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -149,15 +101,7 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setShort(short data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public short[] getShortArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setShortArray(short[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -165,11 +109,67 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setString(java.lang.String data)
+	public java.lang.String[] getStringArray()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.lang.String[] getStringArray()
+	public void setBoolean(boolean data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setBooleanArray(boolean[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setDate(java.util.Date data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setDateArray(java.util.Date[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setDouble(double data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setDoubleArray(double[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setFloat(float data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setFloatArray(float[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setInteger(int data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setIntegerArray(int[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setLong(long data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setLongArray(long[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setShort(short data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setShortArray(short[] data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setString(java.lang.String data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

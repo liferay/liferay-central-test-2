@@ -64,7 +64,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -96,7 +95,7 @@ public class UserImpl extends UserModelImpl implements User {
 				table = ExpandoTableLocalServiceUtil.getDefaultTable(
 					User.class.getName());
 			}
-			catch(NoSuchTableException nste) {
+			catch (NoSuchTableException nste) {
 				table = ExpandoTableLocalServiceUtil.addDefaultTable(
 					User.class.getName());
 			}
@@ -105,7 +104,7 @@ public class UserImpl extends UserModelImpl implements User {
 				table.getTableId(), name, type, defaultValue);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
@@ -118,31 +117,24 @@ public class UserImpl extends UserModelImpl implements User {
 				name, getUserId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return data;
 	}
 
-	public Map<String, Object> getAttributes() {
-		Map<String, Object> attributes = new HashMap<String, Object>();
-		List<ExpandoColumn> columns = new ArrayList<ExpandoColumn>();
+	public Object getAttributeDefault(String name) {
+		ExpandoColumn column = new ExpandoColumnImpl();
 
 		try {
-			columns = ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
-				User.class.getName());
+			column = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+				User.class.getName(), name);
 		}
 		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e);
-			}
+			_log.error(e, e);
 		}
 
-		for (ExpandoColumn column : columns) {
-			attributes.put(column.getName(), getAttribute(column.getName()));
-		}
-
-		return attributes;
+		return column.getDefaultValue();
 	}
 
 	public Enumeration<String> getAttributeNames() {
@@ -154,31 +146,39 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(e);
+				_log.debug(e, e);
 			}
 		}
 
-		Vector<String> columnNames = new Vector<String>();
+		List<String> columnNames = new ArrayList<String>();
 
 		for (ExpandoColumn column : columns) {
 			columnNames.add(column.getName());
 		}
 
-		return columnNames.elements();
+		return Collections.enumeration(columnNames);
 	}
 
-	public Object getAttributeDefault(String name) {
-		ExpandoColumn column = new ExpandoColumnImpl();
+	public Map<String, Object> getAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		List<ExpandoColumn> columns = new ArrayList<ExpandoColumn>();
 
 		try {
-			column = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
-				User.class.getName(), name);
+			columns = ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
+				User.class.getName());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
 		}
 
-		return column.getDefaultValue();
+		for (ExpandoColumn column : columns) {
+			attributes.put(column.getName(), getAttribute(column.getName()));
+		}
+
+		return attributes;
 	}
 
 	public int getAttributeType(String name) {
@@ -189,36 +189,14 @@ public class UserImpl extends UserModelImpl implements User {
 				User.class.getName(), name);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return column.getType();
 	}
 
-	public void setAttribute(String name, Object value) {
-		try {
-			ExpandoValueLocalServiceUtil.addValue(
-				User.class.getName(), ExpandoTableConstants.DEFAULT_TABLE_NAME,
-				name, getUserId(), value);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-	}
-
-	public void setAttributeDefault(String name, Object defaultValue) {
-		try {
-			ExpandoColumn column =
-				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
-					User.class.getName(), name);
-
-			ExpandoColumnLocalServiceUtil.updateColumn(
-				column.getColumnId(), column.getName(), column.getType(),
-				defaultValue);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+	public Date getBirthday() {
+		return getContact().getBirthday();
 	}
 
 	public String getCompanyMx() {
@@ -231,28 +209,85 @@ public class UserImpl extends UserModelImpl implements User {
 			companyMx = company.getMx();
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return companyMx;
 	}
 
-	public boolean hasCompanyMx() {
-		return hasCompanyMx(getEmailAddress());
-	}
+	public Contact getContact() {
+		Contact contact = null;
 
-	public boolean hasCompanyMx(String emailAddress) {
 		try {
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				getCompanyId());
-
-			return company.hasCompanyMx(emailAddress);
+			contact = ContactLocalServiceUtil.getContact(getContactId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			contact = new ContactImpl();
+
+			_log.error(e, e);
 		}
 
-		return false;
+		return contact;
+	}
+
+	public String getDisplayURL(ThemeDisplay themeDisplay) {
+		try {
+			Group group = getGroup();
+
+			if (group != null) {
+				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
+
+				if (publicLayoutsPageCount > 0) {
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(themeDisplay.getPortalURL());
+					sb.append(themeDisplay.getPathMain());
+					sb.append("/my_places/view?groupId=");
+					sb.append(group.getGroupId());
+					sb.append("&privateLayout=0");
+
+					return sb.toString();
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return StringPool.BLANK;
+	}
+
+	public boolean getFemale() {
+		return !getMale();
+	}
+
+	public String getFirstName() {
+		return getContact().getFirstName();
+	}
+
+	public String getFullName() {
+		return getContact().getFullName();
+	}
+
+	public Group getGroup() {
+		Group group = null;
+
+		try {
+			group = GroupLocalServiceUtil.getUserGroup(
+				getCompanyId(), getUserId());
+		}
+		catch (Exception e) {
+		}
+
+		return group;
+	}
+
+	public String getLastName() {
+		return getContact().getLastName();
+	}
+
+	public Locale getLocale() {
+		return _locale;
 	}
 
 	public String getLogin() throws PortalException, SystemException {
@@ -274,127 +309,58 @@ public class UserImpl extends UserModelImpl implements User {
 		return login;
 	}
 
-	public PasswordPolicy getPasswordPolicy()
-		throws PortalException, SystemException {
-
-		PasswordPolicy passwordPolicy =
-			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
-				getUserId());
-
-		return passwordPolicy;
-	}
-
-	public String getPasswordUnencrypted() {
-		return _passwordUnencrypted;
-	}
-
-	public void setPasswordUnencrypted(String passwordUnencrypted) {
-		_passwordUnencrypted = passwordUnencrypted;
-	}
-
-	public boolean getPasswordModified() {
-		return _passwordModified;
-	}
-
-	public boolean isPasswordModified() {
-		return _passwordModified;
-	}
-
-	public void setPasswordModified(boolean passwordModified) {
-		_passwordModified = passwordModified;
-	}
-
-	public Locale getLocale() {
-		return _locale;
-	}
-
-	public void setLanguageId(String languageId) {
-		_locale = LocaleUtil.fromLanguageId(languageId);
-
-		super.setLanguageId(LocaleUtil.toLanguageId(_locale));
-	}
-
-	public TimeZone getTimeZone() {
-		return _timeZone;
-	}
-
-	public void setTimeZoneId(String timeZoneId) {
-		if (Validator.isNull(timeZoneId)) {
-			timeZoneId = TimeZoneUtil.getDefault().getID();
-		}
-
-		_timeZone = TimeZone.getTimeZone(timeZoneId);
-
-		super.setTimeZoneId(timeZoneId);
-	}
-
-	public Contact getContact() {
-		Contact contact = null;
-
-		try {
-			contact = ContactLocalServiceUtil.getContact(getContactId());
-		}
-		catch (Exception e) {
-			contact = new ContactImpl();
-
-			_log.error(e);
-		}
-
-		return contact;
-	}
-
-	public String getFirstName() {
-		return getContact().getFirstName();
+	public boolean getMale() {
+		return getContact().getMale();
 	}
 
 	public String getMiddleName() {
 		return getContact().getMiddleName();
 	}
 
-	public String getLastName() {
-		return getContact().getLastName();
-	}
-
-	public String getFullName() {
-		return getContact().getFullName();
-	}
-
-	public boolean getMale() {
-		return getContact().getMale();
-	}
-
-	public boolean isMale() {
-		return getMale();
-	}
-
-	public boolean getFemale() {
-		return !getMale();
-	}
-
-	public boolean isFemale() {
-		return getFemale();
-	}
-
-	public Date getBirthday() {
-		return getContact().getBirthday();
-	}
-
-	public Group getGroup() {
-		Group group = null;
+	public List<Group> getMyPlaces() {
+		List<Group> myPlaces = new ArrayList<Group>();
 
 		try {
-			group = GroupLocalServiceUtil.getUserGroup(
-				getCompanyId(), getUserId());
+			if (isDefaultUser()) {
+				return myPlaces;
+			}
+
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
+
+			groupParams.put("usersGroups", new Long(getUserId()));
+			//groupParams.put("pageCount", StringPool.BLANK);
+
+			myPlaces = GroupLocalServiceUtil.search(
+				getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			List<Organization> userOrgs = getOrganizations();
+
+			for (Organization organization : userOrgs) {
+				myPlaces.add(0, organization.getGroup());
+			}
+
+			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
+				Group userGroup = getGroup();
+
+				myPlaces.add(0, userGroup);
+			}
 		}
 		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 
-		return group;
+		return myPlaces;
 	}
 
 	/**
-	 * @deprecated Will return the first organization of a list in
-	 * alphabetical order.
+	 * @deprecated Will return the first organization of a list in alphabetical
+	 * order.
 	 */
 	public Organization getOrganization() {
 		try {
@@ -447,13 +413,22 @@ public class UserImpl extends UserModelImpl implements User {
 		return new ArrayList<Organization>();
 	}
 
-	public boolean hasOrganization() {
-		if (getOrganizations().size() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public boolean getPasswordModified() {
+		return _passwordModified;
+	}
+
+	public PasswordPolicy getPasswordPolicy()
+		throws PortalException, SystemException {
+
+		PasswordPolicy passwordPolicy =
+			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
+				getUserId());
+
+		return passwordPolicy;
+	}
+
+	public String getPasswordUnencrypted() {
+		return _passwordUnencrypted;
 	}
 
 	public int getPrivateLayoutsPageCount() {
@@ -468,19 +443,10 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return 0;
-	}
-
-	public boolean hasPrivateLayouts() {
-		if (getPrivateLayoutsPageCount() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	public int getPublicLayoutsPageCount() {
@@ -495,60 +461,32 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return 0;
 	}
 
-	public boolean hasPublicLayouts() {
-		if (getPublicLayoutsPageCount() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public TimeZone getTimeZone() {
+		return _timeZone;
 	}
 
-	public List<Group> getMyPlaces() {
-		List<Group> myPlaces = new ArrayList<Group>();
+	public boolean hasCompanyMx() {
+		return hasCompanyMx(getEmailAddress());
+	}
 
+	public boolean hasCompanyMx(String emailAddress) {
 		try {
-			if (isDefaultUser()) {
-				return myPlaces;
-			}
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				getCompanyId());
 
-			LinkedHashMap<String, Object> groupParams =
-				new LinkedHashMap<String, Object>();
-
-			groupParams.put("usersGroups", new Long(getUserId()));
-			//groupParams.put("pageCount", StringPool.BLANK);
-
-			myPlaces = GroupLocalServiceUtil.search(
-				getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-			List<Organization> userOrgs = getOrganizations();
-
-			for (Organization organization : userOrgs) {
-				myPlaces.add(0, organization.getGroup());
-			}
-
-			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
-				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
-
-				Group userGroup = getGroup();
-
-				myPlaces.add(0, userGroup);
-			}
+			return company.hasCompanyMx(emailAddress);
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+			_log.error(e, e);
 		}
 
-		return myPlaces;
+		return false;
 	}
 
 	public boolean hasMyPlaces() {
@@ -592,31 +530,93 @@ public class UserImpl extends UserModelImpl implements User {
 		return false;
 	}
 
-	public String getDisplayURL(ThemeDisplay themeDisplay) {
+	public boolean hasOrganization() {
+		if (getOrganizations().size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasPrivateLayouts() {
+		if (getPrivateLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasPublicLayouts() {
+		if (getPublicLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isFemale() {
+		return getFemale();
+	}
+
+	public boolean isMale() {
+		return getMale();
+	}
+
+	public boolean isPasswordModified() {
+		return _passwordModified;
+	}
+
+	public void setAttribute(String name, Object value) {
 		try {
-			Group group = getGroup();
-
-			if (group != null) {
-				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
-
-				if (publicLayoutsPageCount > 0) {
-					StringBuilder sb = new StringBuilder();
-
-					sb.append(themeDisplay.getPortalURL());
-					sb.append(themeDisplay.getPathMain());
-					sb.append("/my_places/view?groupId=");
-					sb.append(group.getGroupId());
-					sb.append("&privateLayout=0");
-
-					return sb.toString();
-				}
-			}
+			ExpandoValueLocalServiceUtil.addValue(
+				User.class.getName(), ExpandoTableConstants.DEFAULT_TABLE_NAME,
+				name, getUserId(), value);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
+		}
+	}
+
+	public void setAttributeDefault(String name, Object defaultValue) {
+		try {
+			ExpandoColumn column =
+				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+					User.class.getName(), name);
+
+			ExpandoColumnLocalServiceUtil.updateColumn(
+				column.getColumnId(), column.getName(), column.getType(),
+				defaultValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void setLanguageId(String languageId) {
+		_locale = LocaleUtil.fromLanguageId(languageId);
+
+		super.setLanguageId(LocaleUtil.toLanguageId(_locale));
+	}
+
+	public void setPasswordModified(boolean passwordModified) {
+		_passwordModified = passwordModified;
+	}
+
+	public void setPasswordUnencrypted(String passwordUnencrypted) {
+		_passwordUnencrypted = passwordUnencrypted;
+	}
+
+	public void setTimeZoneId(String timeZoneId) {
+		if (Validator.isNull(timeZoneId)) {
+			timeZoneId = TimeZoneUtil.getDefault().getID();
 		}
 
-		return StringPool.BLANK;
+		_timeZone = TimeZone.getTimeZone(timeZoneId);
+
+		super.setTimeZoneId(timeZoneId);
 	}
 
 	private static Log _log = LogFactory.getLog(UserImpl.class);

@@ -58,72 +58,44 @@ public interface User extends UserModel {
 
 	public java.lang.Object getAttribute(java.lang.String name);
 
-	public java.util.Map<String, Object> getAttributes();
+	public java.lang.Object getAttributeDefault(java.lang.String name);
 
 	public java.util.Enumeration<String> getAttributeNames();
 
-	public java.lang.Object getAttributeDefault(java.lang.String name);
+	public java.util.Map<String, Object> getAttributes();
 
 	public int getAttributeType(java.lang.String name);
 
-	public void setAttribute(java.lang.String name, java.lang.Object value);
-
-	public void setAttributeDefault(java.lang.String name,
-		java.lang.Object defaultValue);
+	public java.util.Date getBirthday();
 
 	public java.lang.String getCompanyMx();
 
-	public boolean hasCompanyMx();
+	public com.liferay.portal.model.Contact getContact();
 
-	public boolean hasCompanyMx(java.lang.String emailAddress);
+	public java.lang.String getDisplayURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay);
+
+	public boolean getFemale();
+
+	public java.lang.String getFirstName();
+
+	public java.lang.String getFullName();
+
+	public com.liferay.portal.model.Group getGroup();
+
+	public java.lang.String getLastName();
+
+	public java.util.Locale getLocale();
 
 	public java.lang.String getLogin()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public java.lang.String getPasswordUnencrypted();
-
-	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
-
-	public boolean getPasswordModified();
-
-	public boolean isPasswordModified();
-
-	public void setPasswordModified(boolean passwordModified);
-
-	public java.util.Locale getLocale();
-
-	public void setLanguageId(java.lang.String languageId);
-
-	public java.util.TimeZone getTimeZone();
-
-	public void setTimeZoneId(java.lang.String timeZoneId);
-
-	public com.liferay.portal.model.Contact getContact();
-
-	public java.lang.String getFirstName();
+	public boolean getMale();
 
 	public java.lang.String getMiddleName();
 
-	public java.lang.String getLastName();
-
-	public java.lang.String getFullName();
-
-	public boolean getMale();
-
-	public boolean isMale();
-
-	public boolean getFemale();
-
-	public boolean isFemale();
-
-	public java.util.Date getBirthday();
-
-	public com.liferay.portal.model.Group getGroup();
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
 
 	public com.liferay.portal.model.Organization getOrganization();
 
@@ -131,20 +103,48 @@ public interface User extends UserModel {
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations();
 
-	public boolean hasOrganization();
+	public boolean getPasswordModified();
+
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.lang.String getPasswordUnencrypted();
 
 	public int getPrivateLayoutsPageCount();
 
-	public boolean hasPrivateLayouts();
-
 	public int getPublicLayoutsPageCount();
 
-	public boolean hasPublicLayouts();
+	public java.util.TimeZone getTimeZone();
 
-	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
+	public boolean hasCompanyMx();
+
+	public boolean hasCompanyMx(java.lang.String emailAddress);
 
 	public boolean hasMyPlaces();
 
-	public java.lang.String getDisplayURL(
-		com.liferay.portal.theme.ThemeDisplay themeDisplay);
+	public boolean hasOrganization();
+
+	public boolean hasPrivateLayouts();
+
+	public boolean hasPublicLayouts();
+
+	public boolean isFemale();
+
+	public boolean isMale();
+
+	public boolean isPasswordModified();
+
+	public void setAttribute(java.lang.String name, java.lang.Object value);
+
+	public void setAttributeDefault(java.lang.String name,
+		java.lang.Object defaultValue);
+
+	public void setLanguageId(java.lang.String languageId);
+
+	public void setPasswordModified(boolean passwordModified);
+
+	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
+
+	public void setTimeZoneId(java.lang.String timeZoneId);
 }

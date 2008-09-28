@@ -319,77 +319,58 @@ public class ExpandoColumnLocalServiceImpl
 			throw new ColumnTypeException();
 		}
 
-		ExpandoValue value = null;
+		ExpandoValue value = new ExpandoValueImpl();
 
 		if (Validator.isNotNull(defaultData)) {
-			value = new ExpandoValueImpl();
 			value.setColumnId(columnId);
 
-			switch (type) {
-				case ExpandoColumnConstants.BOOLEAN: {
-					value.setBoolean((Boolean)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.BOOLEAN_ARRAY: {
-					value.setBooleanArray((boolean[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.DATE: {
-					value.setDate((Date)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.DATE_ARRAY: {
-					value.setDateArray((Date[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.DOUBLE: {
-					value.setDouble((Double)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.DOUBLE_ARRAY: {
-					value.setDoubleArray((double[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.FLOAT: {
-					value.setFloat((Float)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.FLOAT_ARRAY: {
-					value.setFloatArray((float[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.INTEGER: {
-					value.setInteger((Integer)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.INTEGER_ARRAY: {
-					value.setIntegerArray((int[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.LONG: {
-					value.setLong((Long)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.LONG_ARRAY: {
-					value.setLongArray((long[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.SHORT: {
-					value.setShort((Short)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.SHORT_ARRAY: {
-					value.setShortArray((short[])defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.STRING: {
-					value.setString((String)defaultData);
-					break;
-				}
-				case ExpandoColumnConstants.STRING_ARRAY: {
-					value.setStringArray((String[])defaultData);
-					break;
-				}
+			if (type == ExpandoColumnConstants.BOOLEAN) {
+				value.setBoolean((Boolean)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+				value.setBooleanArray((boolean[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.DATE) {
+				value.setDate((Date)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+				value.setDateArray((Date[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.DOUBLE) {
+				value.setDouble((Double)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+				value.setDoubleArray((double[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.FLOAT) {
+				value.setFloat((Float)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+				value.setFloatArray((float[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.INTEGER) {
+				value.setInteger((Integer)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+				value.setIntegerArray((int[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.LONG) {
+				value.setLong((Long)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+				value.setLongArray((long[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.SHORT) {
+				value.setShort((Short)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+				value.setShortArray((short[])defaultData);
+			}
+			else if (type == ExpandoColumnConstants.STRING) {
+				value.setString((String)defaultData);
+			}
+			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+				value.setStringArray((String[])defaultData);
 			}
 		}
 
