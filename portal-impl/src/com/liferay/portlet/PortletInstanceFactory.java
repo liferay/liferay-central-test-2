@@ -60,6 +60,18 @@ public class PortletInstanceFactory {
 		_instance._destroy(portlet);
 	}
 
+	public void setInternalInvokerPortletPrototype(
+		InvokerPortlet internalInvokerPortletPrototype) {
+
+		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
+	}
+
+	public void setSunInvokerPortletPrototype(
+		InvokerPortlet sunInvokerPortletPrototype) {
+
+		_sunInvokerPortletPrototype = sunInvokerPortletPrototype;
+	}
+
 	private PortletInstanceFactory() {
 		_pool = new ConcurrentHashMap<String, Map<String, InvokerPortlet>>();
 	}
@@ -222,8 +234,9 @@ public class PortletInstanceFactory {
 
 		try {
 			if ((portletInstance == null) && !portlet.isRemote()) {
-				portletInstance = (javax.portlet.Portlet)
-					Class.forName(portlet.getPortletClass()).newInstance();
+				portletInstance =
+					(javax.portlet.Portlet)Class.forName(
+						portlet.getPortletClass()).newInstance();
 			}
 
 			PortletContext portletContext = portletConfig.getPortletContext();
@@ -234,7 +247,7 @@ public class PortletInstanceFactory {
 			}
 			else {
 				invokerPortlet = _internalInvokerPortletPrototype.create(
-						portlet, portletInstance, portletContext);
+					portlet, portletInstance, portletContext);
 			}
 
 			invokerPortlet.init(portletConfig);
@@ -252,21 +265,10 @@ public class PortletInstanceFactory {
 		return invokerPortlet;
 	}
 
-	public void setInternalInvokerPortletPrototype(
-			InvokerPortlet internalInvokerPortletPrototype) {
-		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
-	}
-
-	public void setSunInvokerPortletPrototype(
-			InvokerPortlet sunInvokerPortletPrototype) {
-		_sunInvokerPortletPrototype = sunInvokerPortletPrototype;
-	}
-
 	private static PortletInstanceFactory _instance =
 		new PortletInstanceFactory();
 
 	private static InvokerPortlet _internalInvokerPortletPrototype;
-
 	private static InvokerPortlet _sunInvokerPortletPrototype;
 
 	private Map<String, Map<String, InvokerPortlet>> _pool;

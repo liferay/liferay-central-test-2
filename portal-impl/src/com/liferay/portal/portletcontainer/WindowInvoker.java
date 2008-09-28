@@ -133,34 +133,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WindowInvoker extends InvokerPortletImpl {
 
-	public void init(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletContext portletContext)
-		throws PortletException {
-
-		super.init(portletModel, portlet, portletContext);
-
-		_portletModel = portletModel;
-		_remotePortlet = portletModel.isRemote();
-		_container = _getContainer();
-	}
-
-	public void init(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
-			boolean strutsBridgePortlet)
-		throws PortletException {
-
-		super.init(
-			portletModel, portlet, portletConfig, portletContext, facesPortlet,
-			strutsPortlet, strutsBridgePortlet);
-
-		_portletModel = portletModel;
-		_remotePortlet = portletModel.isRemote();
-		_container = _getContainer();
-	}
-
 	public void init(PortletConfig portletConfig) throws PortletException {
 		if (_remotePortlet){
 			_portletConfig = portletConfig;
@@ -168,6 +140,34 @@ public class WindowInvoker extends InvokerPortletImpl {
 		else {
 			super.init(portletConfig);
 		}
+	}
+
+	public void prepare(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletContext portletContext)
+		throws PortletException {
+
+		super.prepare(portletModel, portlet, portletContext);
+
+		_portletModel = portletModel;
+		_remotePortlet = portletModel.isRemote();
+		_container = _getContainer();
+	}
+
+	public void prepare(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletConfig portletConfig, PortletContext portletContext,
+			boolean facesPortlet, boolean strutsPortlet,
+			boolean strutsBridgePortlet)
+		throws PortletException {
+
+		super.prepare(
+			portletModel, portlet, portletConfig, portletContext, facesPortlet,
+			strutsPortlet, strutsBridgePortlet);
+
+		_portletModel = portletModel;
+		_remotePortlet = portletModel.isRemote();
+		_container = _getContainer();
 	}
 
 	protected void invokeAction(

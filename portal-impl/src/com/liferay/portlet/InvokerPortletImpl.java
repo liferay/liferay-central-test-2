@@ -79,7 +79,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="InvokerPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvokerPortletImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
@@ -101,47 +101,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 	public static void clearResponses(PortletSession session) {
 		getResponses(session).clear();
-	}
-
-	public InvokerPortlet create(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletContext portletContext)
-		throws PortletException {
-
-		InvokerPortlet invokerPortlet = null;
-
-		try {
-			invokerPortlet = (InvokerPortlet)clone();
-		}
-		catch (CloneNotSupportedException e) {
-			throw new PortletException(e);
-		}
-
-		invokerPortlet.init(portletModel, portlet, portletContext);
-
-		return invokerPortlet;
-	}
-
-	public InvokerPortlet create(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
-			boolean strutsBridgePortlet)
-		throws PortletException {
-
-		InvokerPortlet invokerPortlet = null;
-
-		try {
-			invokerPortlet = (InvokerPortlet)clone();
-		}
-		catch (CloneNotSupportedException e) {
-			throw new PortletException(e);
-		}
-
-		invokerPortlet.init(portletModel, portlet, portletConfig,
-			portletContext, facesPortlet, strutsPortlet, strutsBridgePortlet);
-
-		return invokerPortlet;
 	}
 
 	public static String encodeResponseKey(
@@ -181,6 +140,50 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			((PortletSessionImpl)portletSession).getHttpSession());
 	}
 
+	public InvokerPortlet create(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletContext portletContext)
+		throws PortletException {
+
+		try {
+			InvokerPortlet invokerPortlet = (InvokerPortlet)clone();
+
+			invokerPortlet.prepare(portletModel, portlet, portletContext);
+
+			return invokerPortlet;
+		}
+		catch (PortletException pe) {
+			throw pe;
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+	}
+
+	public InvokerPortlet create(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletConfig portletConfig, PortletContext portletContext,
+			boolean facesPortlet, boolean strutsPortlet,
+			boolean strutsBridgePortlet)
+		throws PortletException {
+
+		try {
+			InvokerPortlet invokerPortlet = (InvokerPortlet)clone();
+
+			invokerPortlet.prepare(
+				portletModel, portlet, portletConfig, portletContext,
+				facesPortlet, strutsPortlet, strutsBridgePortlet);
+
+			return invokerPortlet;
+		}
+		catch (PortletException pe) {
+			throw pe;
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+	}
+
 	public void destroy() {
 		if (_destroyable) {
 			ClassLoader contextClassLoader =
@@ -207,38 +210,23 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_destroyable = false;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#getPortletClassLoader()
-	 */
 	public ClassLoader getPortletClassLoader() {
 		return (ClassLoader)_portletContextImpl.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#getPortletConfig()
-	 */
 	public PortletConfigImpl getPortletConfig() {
 		return _portletConfigImpl;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#getPortletContext()
-	 */
 	public PortletContextImpl getPortletContext() {
 		return _portletContextImpl;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#getPortletInstance()
-	 */
 	public Portlet getPortletInstance() {
 		return _portlet;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#getExpCache()
-	 */
 	public Integer getExpCache() {
 		return _expCache;
 	}
@@ -271,7 +259,23 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_destroyable = true;
 	}
 
-	public void init(
+	public boolean isDestroyable() {
+		return _destroyable;
+	}
+
+	public boolean isFacesPortlet() {
+		return _facesPortlet;
+	}
+
+	public boolean isStrutsBridgePortlet() {
+		return _strutsBridgePortlet;
+	}
+
+	public boolean isStrutsPortlet() {
+		return _strutsPortlet;
+	}
+
+	public void prepare(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletContext portletContext)
 		throws PortletException {
@@ -307,14 +311,14 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		setPortletFilters();
 	}
 
-	public void init(
+	public void prepare(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
 			boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
-		// From constructor
+ 		// From prepare
 
 		_portletModel = portletModel;
 		_portlet = portlet;
@@ -336,34 +340,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_portletConfigImpl = (PortletConfigImpl)portletConfig;
 
 		_portletId = _portletConfigImpl.getPortletId();
-	}
-
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#isDestroyable()
-	 */
-	public boolean isDestroyable() {
-		return _destroyable;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#isFacesPortlet()
-	 */
-	public boolean isFacesPortlet() {
-		return _facesPortlet;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#isStrutsBridgePortlet()
-	 */
-	public boolean isStrutsBridgePortlet() {
-		return _strutsBridgePortlet;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#isStrutsPortlet()
-	 */
-	public boolean isStrutsPortlet() {
-		return _strutsPortlet;
 	}
 
 	public void processAction(
@@ -532,9 +508,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.portlet.InvokerPortlet#setPortletFilters()
-	 */
 	public void setPortletFilters() throws PortletException {
 		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
 			_portletModel.getPortletFilters();

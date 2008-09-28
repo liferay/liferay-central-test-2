@@ -36,7 +36,7 @@ import javax.portlet.ResourceServingPortlet;
  *
  */
 public interface InvokerPortlet
-	extends EventPortlet, Portlet, ResourceServingPortlet, Cloneable {
+	extends Cloneable, EventPortlet, Portlet, ResourceServingPortlet {
 
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
@@ -60,18 +60,6 @@ public interface InvokerPortlet
 
 	public Integer getExpCache();
 
-	public void init(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletContext portletContext)
-		throws PortletException;
-
-	public void init(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
-			boolean strutsBridgePortlet)
-		throws PortletException;
-
 	public boolean isDestroyable();
 
 	public boolean isFacesPortlet();
@@ -80,5 +68,18 @@ public interface InvokerPortlet
 
 	public boolean isStrutsPortlet();
 
+	public void prepare(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletContext portletContext)
+		throws PortletException;
+
+	public void prepare(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletConfig portletConfig, PortletContext portletContext,
+			boolean facesPortlet, boolean strutsPortlet,
+			boolean strutsBridgePortlet)
+		throws PortletException;
+
 	public void setPortletFilters() throws PortletException;
+
 }
