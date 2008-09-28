@@ -23,7 +23,6 @@
 package com.liferay.support.tomcat.connector;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.Cookie;
 
@@ -53,12 +52,8 @@ public class PortalRequest extends Request {
 
 		// See LEP-4602 and LEP-4645.
 
-		if (Validator.isNull(host)) {
+		if (host == null) {
 			return null;
-		}
-
-		if (host.endsWith(_LOCALHOST)) {
-			return _LOCALHOST;
 		}
 
 		int x = host.lastIndexOf(StringPool.PERIOD);
@@ -86,7 +81,5 @@ public class PortalRequest extends Request {
 
 		return domain;
 	}
-
-	private static String _LOCALHOST = "localhost";
 
 }
