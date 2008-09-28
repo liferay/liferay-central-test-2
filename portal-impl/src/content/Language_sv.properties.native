@@ -2141,6 +2141,7 @@ page-url=Sidans URL
 page=Sida
 pager=Personsökare
 pages-file=Sidfil
+pages-with-category-x=Pages with category <i>{0}</i>.
 pages-with-tag-x=Sidor med tagg <i>{0}</i>.
 pages=Sidor
 paginate-if-there-are-two-or-more-articles=Dela upp sidan om det finns två eller flera artiklar.

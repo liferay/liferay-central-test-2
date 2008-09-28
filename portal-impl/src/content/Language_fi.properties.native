@@ -2142,6 +2142,7 @@ page-url=Sivu URL
 page=Sivu
 pager=Hakulaite
 pages-file=Sivun tiedosto
+pages-with-category-x=Pages with category <i>{0}</i>.
 pages-with-tag-x=Sivut, joissa tagi <i>{0}</i>.
 pages=Sivut
 paginate-if-there-are-two-or-more-articles=Sivuta jos enemmän kuin kaksi artikkelia.
