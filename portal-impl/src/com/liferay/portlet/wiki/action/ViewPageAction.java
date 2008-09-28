@@ -54,18 +54,18 @@ public class ViewPageAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
+		String tag = ParamUtil.getString(renderRequest, "tag");
+
+		if (Validator.isNotNull(tag)) {
+			return ViewNodeAction.viewNode(
+				mapping, renderRequest, "portlet.wiki.view_node");
+		}
+
 		try {
 			WikiNode node = ActionUtil.getNode(renderRequest);
 
 			if (node == null) {
 				ActionUtil.getFirstVisibleNode(renderRequest);
-			}
-
-			String tag = ParamUtil.getString(renderRequest, "tag");
-
-			if (Validator.isNotNull(tag)) {
-				return ViewNodeAction.viewNode(
-					mapping, renderRequest, "portlet.wiki.view_node");
 			}
 
 			ActionUtil.getPage(renderRequest);

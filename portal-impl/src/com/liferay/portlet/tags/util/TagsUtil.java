@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -88,36 +89,38 @@ public class TagsUtil {
 
 	public static String[] getTagsEntries(ActionRequest actionRequest)
 		throws PortalException, SystemException {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String tagsEntries = ParamUtil.getString(actionRequest, "tagsEntries");
 
 		List<TagsVocabulary> vocabularies =
 			TagsVocabularyLocalServiceUtil.getCompanyVocabularies(
 				themeDisplay.getCompanyId(), false);
 
-		String tagsEntriesString = ParamUtil.getString(
-			actionRequest, "tagsEntries");
-
 		for (TagsVocabulary vocabulary : vocabularies) {
 			String vocabularyParamName =
 				TagsEntryConstants.VOCABULARY +
-				String.valueOf(vocabulary.getVocabularyId());
+					String.valueOf(vocabulary.getVocabularyId());
 
 			long entryId = ParamUtil.getLong(
 				actionRequest, vocabularyParamName);
 
-			if (Validator.isNotNull(entryId)) {
-				if (Validator.isNotNull(tagsEntriesString)) {
-					tagsEntriesString += ",";
-				}
-
-				TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
-
-				tagsEntriesString += entry.getName();
+			if (entryId <= 0) {
+				continue;
 			}
+
+			if (Validator.isNotNull(tagsEntries)) {
+				tagsEntries += StringPool.COMMA;
+			}
+
+			TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
+
+			tagsEntries += entry.getName();
 		}
 
-		return StringUtil.split(tagsEntriesString);
+		return StringUtil.split(tagsEntries);
 	}
 
 	public static boolean isValidWord(String word) {

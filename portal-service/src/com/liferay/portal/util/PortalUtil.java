@@ -534,11 +534,6 @@ public class PortalUtil {
 		return getPortal().getPreferencesValidator(portlet);
 	}
 
-	public static String[] getTagsEntries(ActionRequest actionRequest)
-		throws PortalException, SystemException {
-		return getPortal().getTagsEntries(actionRequest);
-	}
-
 	public static long getScopeGroupId(long plid) {
 		return getPortal().getScopeGroupId(plid);
 	}
@@ -624,6 +619,12 @@ public class PortalUtil {
 
 	public static String[] getSystemRoles() {
 		return getPortal().getSystemRoles();
+	}
+
+	public static String[] getTagsEntries(ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		return getPortal().getTagsEntries(actionRequest);
 	}
 
 	public static UploadPortletRequest getUploadPortletRequest(

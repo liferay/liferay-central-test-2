@@ -468,6 +468,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		else {
 			TagsAsset model = new TagsAssetImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setAssetId(getAssetId());

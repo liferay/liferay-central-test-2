@@ -252,6 +252,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 		else {
 			TagsProperty model = new TagsPropertyImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setPropertyId(getPropertyId());

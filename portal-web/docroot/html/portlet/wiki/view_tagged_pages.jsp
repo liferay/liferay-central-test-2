@@ -27,8 +27,8 @@
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
 
-String description = null;
 String title = "pages-with-tag-x";
+String description = null;
 
 try {
 	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, tag);

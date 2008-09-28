@@ -271,6 +271,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl {
 		else {
 			TagsVocabulary model = new TagsVocabularyImpl();
 
+			model.setNew(isNew());
 			model.setEscapedModel(true);
 
 			model.setVocabularyId(getVocabularyId());

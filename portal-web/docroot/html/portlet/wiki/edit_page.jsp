@@ -339,22 +339,22 @@ if (Validator.isNull(redirect)) {
 	%>
 
 	<tr>
-			<td>
-				<liferay-ui:message key="categories" />
-			</td>
-			<td>
-				<liferay-ui:tags-selector
-						className="<%= WikiPage.class.getName() %>"
-						classPK="<%= classPK %>"
-						hiddenInput="none"
-						folksonomy="<%= false %>"
-				/>
-			</td>
+		<td>
+			<liferay-ui:message key="categories" />
+		</td>
+		<td>
+			<liferay-ui:tags-selector
+				className="<%= WikiPage.class.getName() %>"
+				classPK="<%= classPK %>"
+				folksonomy="<%= false %>"
+				hiddenInput="none"
+			/>
+		</td>
 	</tr>
 	<tr>
-			<td colspan="2">
-					<br />
-			</td>
+		<td colspan="2">
+			<br />
+		</td>
 	</tr>
 	<tr>
 		<td class="lfr-label">

@@ -40,8 +40,13 @@ public class TagsEntryImpl extends TagsEntryModelImpl implements TagsEntry {
 	public TagsEntryImpl() {
 	}
 
-	public boolean isCategory()
+	public TagsVocabulary getVocabulary()
 		throws PortalException, SystemException {
+
+		return TagsVocabularyLocalServiceUtil.getVocabulary(getVocabularyId());
+	}
+
+	public boolean isCategory() throws PortalException, SystemException {
 		TagsVocabulary vocabulary = getVocabulary();
 
 		if (vocabulary.isFolksonomy()) {
@@ -50,12 +55,6 @@ public class TagsEntryImpl extends TagsEntryModelImpl implements TagsEntry {
 		else {
 			return true;
 		}
-	}
-
-	public TagsVocabulary getVocabulary()
-		throws PortalException, SystemException {
-
-		return TagsVocabularyLocalServiceUtil.getVocabulary(getVocabularyId());
 	}
 
 }
