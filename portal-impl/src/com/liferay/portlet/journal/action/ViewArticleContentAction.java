@@ -85,9 +85,6 @@ public class ViewArticleContentAction extends Action {
 
 			long groupId = ParamUtil.getLong(request, "groupId");
 			String articleId = ParamUtil.getString(request, "articleId");
-			String type = ParamUtil.getString(request, "type");
-			String structureId = ParamUtil.getString(request, "structureId");
-			String templateId = ParamUtil.getString(request, "templateId");
 			double version = ParamUtil.getDouble(
 				request, "version", JournalArticleImpl.DEFAULT_VERSION);
 
@@ -101,6 +98,11 @@ public class ViewArticleContentAction extends Action {
 				String title = ParamUtil.getString(uploadRequest, "title");
 				String description = ParamUtil.getString(
 					uploadRequest, "description");
+				String type = ParamUtil.getString(uploadRequest, "type");
+				String structureId = ParamUtil.getString(
+					uploadRequest, "structureId");
+				String templateId = ParamUtil.getString(
+					uploadRequest, "templateId");
 
 				Date now = new Date();
 

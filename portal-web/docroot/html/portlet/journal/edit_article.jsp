@@ -454,7 +454,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />previewArticle() {
-		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&groupId=<%= String.valueOf(groupId) %>&articleId=<%= HttpUtil.encodeURL(articleId) %>&version=<%= version %>&languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value + "&templateId=" + Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm1.<portlet:namespace />templateId) + "&structureId=" + document.<portlet:namespace />fm1.<portlet:namespace />structureId.value + "&type=" + document.<portlet:namespace />fm1.<portlet:namespace />type.value;
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&groupId=<%= String.valueOf(groupId) %>&articleId=<%= HttpUtil.encodeURL(articleId) %>&version=<%= version %>&languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value + "&type=" + document.<portlet:namespace />fm1.<portlet:namespace />type.value + "&structureId=" + document.<portlet:namespace />fm1.<portlet:namespace />structureId.value + "&templateId=" + Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm1.<portlet:namespace />templateId);
 		document.<portlet:namespace />fm2.target = "_blank";
 		document.<portlet:namespace />fm2.title.value = document.<portlet:namespace />fm1.<portlet:namespace />title.value;
 		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getArticleContent();

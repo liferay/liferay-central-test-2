@@ -1066,7 +1066,7 @@ public class JournalArticleLocalServiceImpl
 		boolean cacheable = true;
 
 		if (Validator.isNull(xmlRequest)) {
-			xmlRequest = "<request/>";
+			xmlRequest = "<request />";
 		}
 
 		Map<String, String> tokens = JournalUtil.getTokens(
