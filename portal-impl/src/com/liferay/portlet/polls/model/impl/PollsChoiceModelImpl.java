@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsChoiceSoap;
 
@@ -204,6 +206,16 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(PollsChoice.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		PollsChoiceImpl clone = new PollsChoiceImpl();
 
@@ -281,4 +293,5 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 	private long _questionId;
 	private String _name;
 	private String _description;
+	private ExpandoBridge _expandoBridge;
 }

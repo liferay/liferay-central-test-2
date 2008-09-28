@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.model.UserIdMapperSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -205,6 +208,16 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(UserIdMapper.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		UserIdMapperImpl clone = new UserIdMapperImpl();
 
@@ -270,4 +283,5 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	private String _type;
 	private String _description;
 	private String _externalUserId;
+	private ExpandoBridge _expandoBridge;
 }

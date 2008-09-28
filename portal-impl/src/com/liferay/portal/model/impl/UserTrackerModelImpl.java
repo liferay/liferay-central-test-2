@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -258,6 +261,16 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(UserTracker.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		UserTrackerImpl clone = new UserTrackerImpl();
 
@@ -329,4 +342,5 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	private String _remoteAddr;
 	private String _remoteHost;
 	private String _userAgent;
+	private ExpandoBridge _expandoBridge;
 }

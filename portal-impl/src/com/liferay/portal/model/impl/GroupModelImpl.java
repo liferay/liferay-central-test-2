@@ -30,6 +30,9 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -350,6 +353,16 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Group.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		GroupImpl clone = new GroupImpl();
 
@@ -429,4 +442,5 @@ public class GroupModelImpl extends BaseModelImpl {
 	private String _typeSettings;
 	private String _friendlyURL;
 	private boolean _active;
+	private ExpandoBridge _expandoBridge;
 }

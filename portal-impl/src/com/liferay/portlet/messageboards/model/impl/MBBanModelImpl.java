@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBBanSoap;
 
@@ -253,6 +255,16 @@ public class MBBanModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MBBan.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MBBanImpl clone = new MBBanImpl();
 
@@ -324,4 +336,5 @@ public class MBBanModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _banUserId;
+	private ExpandoBridge _expandoBridge;
 }

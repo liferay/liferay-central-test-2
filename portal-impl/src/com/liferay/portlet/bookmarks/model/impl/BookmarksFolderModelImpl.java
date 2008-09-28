@@ -29,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderSoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -287,6 +289,16 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(BookmarksFolder.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		BookmarksFolderImpl clone = new BookmarksFolderImpl();
 
@@ -375,4 +387,5 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 	private long _parentFolderId;
 	private String _name;
 	private String _description;
+	private ExpandoBridge _expandoBridge;
 }

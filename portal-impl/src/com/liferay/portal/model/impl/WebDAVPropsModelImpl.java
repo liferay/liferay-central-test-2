@@ -30,6 +30,9 @@ import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.model.WebDAVPropsSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -246,6 +249,16 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(WebDAVProps.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		WebDAVPropsImpl clone = new WebDAVPropsImpl();
 
@@ -315,4 +328,5 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private String _props;
+	private ExpandoBridge _expandoBridge;
 }

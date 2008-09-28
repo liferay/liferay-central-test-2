@@ -29,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -287,6 +289,16 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(DLFileShortcut.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		DLFileShortcutImpl clone = new DLFileShortcutImpl();
 
@@ -362,4 +374,5 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 	private long _folderId;
 	private long _toFolderId;
 	private String _toName;
+	private ExpandoBridge _expandoBridge;
 }

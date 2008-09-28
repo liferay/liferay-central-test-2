@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.PluginSettingSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -224,6 +227,16 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(PluginSetting.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		PluginSettingImpl clone = new PluginSettingImpl();
 
@@ -291,4 +304,5 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 	private String _pluginType;
 	private String _roles;
 	private boolean _active;
+	private ExpandoBridge _expandoBridge;
 }

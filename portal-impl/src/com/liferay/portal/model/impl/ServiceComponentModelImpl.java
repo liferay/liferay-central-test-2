@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.ServiceComponentSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -203,6 +206,16 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(ServiceComponent.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ServiceComponentImpl clone = new ServiceComponentImpl();
 
@@ -285,4 +298,5 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 	private long _buildNumber;
 	private long _buildDate;
 	private String _data;
+	private ExpandoBridge _expandoBridge;
 }

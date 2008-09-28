@@ -29,6 +29,9 @@ import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.PasswordPolicyRelSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -192,6 +195,16 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(PasswordPolicyRel.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		PasswordPolicyRelImpl clone = new PasswordPolicyRelImpl();
 
@@ -255,4 +268,5 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	private long _passwordPolicyId;
 	private long _classNameId;
 	private long _classPK;
+	private ExpandoBridge _expandoBridge;
 }

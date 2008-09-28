@@ -20,33 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portlet.expando.model;
 
-import com.liferay.portlet.expando.model.ExpandoBridge;
+import java.util.Enumeration;
+import java.util.Map;
 
-import java.io.Serializable;
 
 /**
- * <a href="BaseModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoBrige.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public interface BaseModel extends Cloneable, Comparable, Serializable {
+public interface ExpandoBridge {
 
-	public boolean isNew();
+	public void addAttribute(String name);
 
-	public boolean setNew(boolean n);
+	public void addAttribute(String name, int type);
 
-	public boolean isEscapedModel();
+	public void addAttribute(String name, int type, Object defaultValue);
 
-	public void setEscapedModel(boolean escapedModel);
+	public Object getAttribute(String name);
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException;
+	public Object getAttributeDefault(String name);
 
-	public Serializable getPrimaryKeyObj();
+	public Enumeration<String> getAttributeNames();
 
-	public Object clone();
+	public Map<String, Object> getAttributes();
+
+	public int getAttributeType(String name);
+
+	public void setAttribute(String name, Object value);
+
+	public void setAttributeDefault(String name, Object defaultValue);
 
 }

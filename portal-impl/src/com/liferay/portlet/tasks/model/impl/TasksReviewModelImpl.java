@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.model.TasksReviewSoap;
 
@@ -341,6 +343,16 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(TasksReview.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		TasksReviewImpl clone = new TasksReviewImpl();
 
@@ -420,4 +432,5 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 	private int _stage;
 	private boolean _completed;
 	private boolean _rejected;
+	private ExpandoBridge _expandoBridge;
 }

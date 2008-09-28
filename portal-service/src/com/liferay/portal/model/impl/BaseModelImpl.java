@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
  * <a href="BaseModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,6 +50,12 @@ public abstract class BaseModelImpl implements BaseModel {
 
 	public void setEscapedModel(boolean escapedModel) {
 		_escapedModel = escapedModel;
+	}
+
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public abstract Object clone();

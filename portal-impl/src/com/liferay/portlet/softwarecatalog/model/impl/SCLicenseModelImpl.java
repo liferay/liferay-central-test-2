@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCLicenseSoap;
 
@@ -233,6 +235,16 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(SCLicense.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		SCLicenseImpl clone = new SCLicenseImpl();
 
@@ -298,4 +310,5 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	private boolean _openSource;
 	private boolean _active;
 	private boolean _recommended;
+	private ExpandoBridge _expandoBridge;
 }

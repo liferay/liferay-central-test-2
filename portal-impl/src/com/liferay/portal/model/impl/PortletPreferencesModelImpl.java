@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -219,6 +222,16 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(PortletPreferences.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		PortletPreferencesImpl clone = new PortletPreferencesImpl();
 
@@ -286,4 +299,5 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	private long _plid;
 	private String _portletId;
 	private String _preferences;
+	private ExpandoBridge _expandoBridge;
 }

@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshotSoap;
 
@@ -229,6 +231,16 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(SCProductScreenshot.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		SCProductScreenshotImpl clone = new SCProductScreenshotImpl();
 
@@ -318,4 +330,5 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 	private long _thumbnailId;
 	private long _fullImageId;
 	private int _priority;
+	private ExpandoBridge _expandoBridge;
 }

@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBStatsUserSoap;
 
@@ -202,6 +204,16 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MBStatsUser.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MBStatsUserImpl clone = new MBStatsUserImpl();
 
@@ -275,4 +287,5 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	private long _userId;
 	private int _messageCount;
 	private Date _lastPostDate;
+	private ExpandoBridge _expandoBridge;
 }

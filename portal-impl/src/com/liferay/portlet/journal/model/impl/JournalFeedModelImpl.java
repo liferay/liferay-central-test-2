@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalFeedSoap;
 
@@ -520,6 +522,16 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(JournalFeed.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		JournalFeedImpl clone = new JournalFeedImpl();
 
@@ -619,4 +631,5 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 	private String _contentField;
 	private String _feedType;
 	private double _feedVersion;
+	private ExpandoBridge _expandoBridge;
 }

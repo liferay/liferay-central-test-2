@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadSoap;
 
@@ -248,6 +250,16 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MBThread.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MBThreadImpl clone = new MBThreadImpl();
 
@@ -335,4 +347,5 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	private long _lastPostByUserId;
 	private Date _lastPostDate;
 	private double _priority;
+	private ExpandoBridge _expandoBridge;
 }

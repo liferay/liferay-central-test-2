@@ -31,6 +31,9 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.model.WebsiteSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -314,6 +317,16 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Website.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		WebsiteImpl clone = new WebsiteImpl();
 
@@ -389,4 +402,5 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	private String _url;
 	private int _typeId;
 	private boolean _primary;
+	private ExpandoBridge _expandoBridge;
 }

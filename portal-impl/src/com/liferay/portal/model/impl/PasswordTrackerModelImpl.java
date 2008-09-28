@@ -29,6 +29,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.PasswordTrackerSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -191,6 +194,16 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(PasswordTracker.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		PasswordTrackerImpl clone = new PasswordTrackerImpl();
 
@@ -271,4 +284,5 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	private long _userId;
 	private Date _createDate;
 	private String _password;
+	private ExpandoBridge _expandoBridge;
 }

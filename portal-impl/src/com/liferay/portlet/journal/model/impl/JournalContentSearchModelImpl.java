@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.JournalContentSearchSoap;
 
@@ -241,6 +243,16 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(JournalContentSearch.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		JournalContentSearchImpl clone = new JournalContentSearchImpl();
 
@@ -310,4 +322,5 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	private long _layoutId;
 	private String _portletId;
 	private String _articleId;
+	private ExpandoBridge _expandoBridge;
 }

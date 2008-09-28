@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ImageSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -234,6 +237,16 @@ public class ImageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Image.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ImageImpl clone = new ImageImpl();
 
@@ -309,4 +322,5 @@ public class ImageModelImpl extends BaseModelImpl {
 	private int _height;
 	private int _width;
 	private int _size;
+	private ExpandoBridge _expandoBridge;
 }

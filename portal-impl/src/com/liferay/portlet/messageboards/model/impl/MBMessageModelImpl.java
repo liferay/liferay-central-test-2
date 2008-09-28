@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageSoap;
 
@@ -358,6 +360,16 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MBMessage.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MBMessageImpl clone = new MBMessageImpl();
 
@@ -453,4 +465,5 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	private String _body;
 	private boolean _attachments;
 	private boolean _anonymous;
+	private ExpandoBridge _expandoBridge;
 }

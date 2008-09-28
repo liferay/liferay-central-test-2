@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageSoap;
 
@@ -429,6 +431,16 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(WikiPage.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		WikiPageImpl clone = new WikiPageImpl();
 
@@ -547,4 +559,5 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	private boolean _head;
 	private String _parentTitle;
 	private String _redirectTitle;
+	private ExpandoBridge _expandoBridge;
 }

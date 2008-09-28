@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -170,6 +173,16 @@ public class ResourceModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Resource.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ResourceImpl clone = new ResourceImpl();
 
@@ -231,4 +244,5 @@ public class ResourceModelImpl extends BaseModelImpl {
 	private long _resourceId;
 	private long _codeId;
 	private String _primKey;
+	private ExpandoBridge _expandoBridge;
 }

@@ -28,6 +28,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.BlogsStatsUserSoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -262,6 +264,16 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(BlogsStatsUser.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		BlogsStatsUserImpl clone = new BlogsStatsUserImpl();
 
@@ -343,4 +355,5 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 	private int _ratingsTotalEntries;
 	private double _ratingsTotalScore;
 	private double _ratingsAverageScore;
+	private ExpandoBridge _expandoBridge;
 }

@@ -29,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntrySoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -402,6 +404,16 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(DLFileEntry.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		DLFileEntryImpl clone = new DLFileEntryImpl();
 
@@ -503,4 +515,5 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	private int _size;
 	private int _readCount;
 	private String _extraSettings;
+	private ExpandoBridge _expandoBridge;
 }

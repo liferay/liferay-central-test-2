@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap;
 
@@ -311,6 +313,16 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(SCFrameworkVersion.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		SCFrameworkVersionImpl clone = new SCFrameworkVersionImpl();
 
@@ -388,4 +400,5 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	private String _url;
 	private boolean _active;
 	private int _priority;
+	private ExpandoBridge _expandoBridge;
 }

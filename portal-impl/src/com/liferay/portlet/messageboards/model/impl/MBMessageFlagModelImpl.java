@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagSoap;
 
@@ -183,6 +185,16 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MBMessageFlag.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MBMessageFlagImpl clone = new MBMessageFlagImpl();
 
@@ -246,4 +258,5 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 	private long _userId;
 	private long _messageId;
 	private int _flag;
+	private ExpandoBridge _expandoBridge;
 }

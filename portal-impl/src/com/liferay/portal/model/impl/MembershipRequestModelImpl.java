@@ -29,6 +29,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -287,6 +290,16 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MembershipRequest.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MembershipRequestImpl clone = new MembershipRequestImpl();
 
@@ -363,4 +376,5 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 	private Date _replyDate;
 	private long _replierUserId;
 	private int _statusId;
+	private ExpandoBridge _expandoBridge;
 }

@@ -30,6 +30,9 @@ import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ClassNameSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -164,6 +167,16 @@ public class ClassNameModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(ClassName.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ClassNameImpl clone = new ClassNameImpl();
 
@@ -223,4 +236,5 @@ public class ClassNameModelImpl extends BaseModelImpl {
 
 	private long _classNameId;
 	private String _value;
+	private ExpandoBridge _expandoBridge;
 }

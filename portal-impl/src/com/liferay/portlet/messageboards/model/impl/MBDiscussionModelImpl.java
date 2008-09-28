@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBDiscussionSoap;
 
@@ -193,6 +195,16 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MBDiscussion.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		MBDiscussionImpl clone = new MBDiscussionImpl();
 
@@ -256,4 +268,5 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private long _threadId;
+	private ExpandoBridge _expandoBridge;
 }

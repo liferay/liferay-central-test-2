@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -285,6 +288,16 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Organization.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		OrganizationImpl clone = new OrganizationImpl();
 
@@ -358,4 +371,5 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	private long _countryId;
 	private int _statusId;
 	private String _comments;
+	private ExpandoBridge _expandoBridge;
 }

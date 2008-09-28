@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivitySoap;
 
@@ -307,6 +309,16 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(SocialActivity.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		SocialActivityImpl clone = new SocialActivityImpl();
 
@@ -385,4 +397,5 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	private int _type;
 	private String _extraData;
 	private long _receiverUserId;
+	private ExpandoBridge _expandoBridge;
 }

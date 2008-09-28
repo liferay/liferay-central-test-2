@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -342,6 +345,16 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(LayoutSet.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		LayoutSetImpl clone = new LayoutSetImpl();
 
@@ -423,4 +436,5 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private String _css;
 	private int _pageCount;
 	private String _virtualHost;
+	private ExpandoBridge _expandoBridge;
 }

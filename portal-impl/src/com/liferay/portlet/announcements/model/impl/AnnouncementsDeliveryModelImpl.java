@@ -29,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -245,6 +247,16 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(AnnouncementsDelivery.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		AnnouncementsDeliveryImpl clone = new AnnouncementsDeliveryImpl();
 
@@ -314,4 +326,5 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
 	private boolean _email;
 	private boolean _sms;
 	private boolean _website;
+	private ExpandoBridge _expandoBridge;
 }

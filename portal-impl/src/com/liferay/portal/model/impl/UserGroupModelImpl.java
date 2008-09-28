@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -203,6 +206,16 @@ public class UserGroupModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(UserGroup.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		UserGroupImpl clone = new UserGroupImpl();
 
@@ -266,4 +279,5 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	private long _parentUserGroupId;
 	private String _name;
 	private String _description;
+	private ExpandoBridge _expandoBridge;
 }

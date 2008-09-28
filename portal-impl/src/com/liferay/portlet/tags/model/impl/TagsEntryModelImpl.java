@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntrySoap;
 
@@ -287,6 +289,16 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(TagsEntry.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		TagsEntryImpl clone = new TagsEntryImpl();
 
@@ -360,4 +372,5 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	private long _parentEntryId;
 	private String _name;
 	private long _vocabularyId;
+	private ExpandoBridge _expandoBridge;
 }

@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.OrgLaborSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -376,6 +379,16 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(OrgLabor.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		OrgLaborImpl clone = new OrgLaborImpl();
 
@@ -485,4 +498,5 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	private int _friClose;
 	private int _satOpen;
 	private int _satClose;
+	private ExpandoBridge _expandoBridge;
 }

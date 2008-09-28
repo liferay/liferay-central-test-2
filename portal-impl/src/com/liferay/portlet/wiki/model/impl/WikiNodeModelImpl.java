@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiNodeSoap;
 
@@ -307,6 +309,16 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(WikiNode.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		WikiNodeImpl clone = new WikiNodeImpl();
 
@@ -383,4 +395,5 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	private String _name;
 	private String _description;
 	private Date _lastPostDate;
+	private ExpandoBridge _expandoBridge;
 }

@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap;
 
@@ -400,6 +402,16 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(SCProductEntry.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		SCProductEntryImpl clone = new SCProductEntryImpl();
 
@@ -496,4 +508,5 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 	private String _author;
 	private String _repoGroupId;
 	private String _repoArtifactId;
+	private ExpandoBridge _expandoBridge;
 }

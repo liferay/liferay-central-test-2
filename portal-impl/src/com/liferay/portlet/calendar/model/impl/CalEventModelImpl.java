@@ -30,6 +30,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.CalEventSoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -496,6 +498,16 @@ public class CalEventModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(CalEvent.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		CalEventImpl clone = new CalEventImpl();
 
@@ -600,4 +612,5 @@ public class CalEventModelImpl extends BaseModelImpl {
 	private String _remindBy;
 	private int _firstReminder;
 	private int _secondReminder;
+	private ExpandoBridge _expandoBridge;
 }

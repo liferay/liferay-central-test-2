@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.CountrySoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -240,6 +243,16 @@ public class CountryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Country.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		CountryImpl clone = new CountryImpl();
 
@@ -307,4 +320,5 @@ public class CountryModelImpl extends BaseModelImpl {
 	private String _number;
 	private String _idd;
 	private boolean _active;
+	private ExpandoBridge _expandoBridge;
 }

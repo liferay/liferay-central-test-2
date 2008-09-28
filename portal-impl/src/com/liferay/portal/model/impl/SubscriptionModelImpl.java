@@ -30,6 +30,9 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SubscriptionSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -280,6 +283,16 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Subscription.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		SubscriptionImpl clone = new SubscriptionImpl();
 
@@ -353,4 +366,5 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private String _frequency;
+	private ExpandoBridge _expandoBridge;
 }

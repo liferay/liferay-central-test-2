@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsEntrySoap;
 
@@ -279,6 +281,16 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(RatingsEntry.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		RatingsEntryImpl clone = new RatingsEntryImpl();
 
@@ -352,4 +364,5 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private double _score;
+	private ExpandoBridge _expandoBridge;
 }

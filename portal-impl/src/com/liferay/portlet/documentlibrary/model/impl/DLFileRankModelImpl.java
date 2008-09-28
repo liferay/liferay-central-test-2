@@ -30,6 +30,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileRankSoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -221,6 +223,16 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(DLFileRank.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		DLFileRankImpl clone = new DLFileRankImpl();
 
@@ -288,4 +300,5 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private long _folderId;
 	private String _name;
+	private ExpandoBridge _expandoBridge;
 }

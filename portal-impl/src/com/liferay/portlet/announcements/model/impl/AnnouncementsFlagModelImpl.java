@@ -29,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import com.liferay.portlet.announcements.model.AnnouncementsFlagSoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -204,6 +206,16 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(AnnouncementsFlag.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		AnnouncementsFlagImpl clone = new AnnouncementsFlagImpl();
 
@@ -282,4 +294,5 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private long _entryId;
 	private int _value;
+	private ExpandoBridge _expandoBridge;
 }

@@ -31,6 +31,9 @@ import com.liferay.portal.model.Address;
 import com.liferay.portal.model.AddressSoap;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -434,6 +437,16 @@ public class AddressModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Address.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		AddressImpl clone = new AddressImpl();
 
@@ -523,4 +536,5 @@ public class AddressModelImpl extends BaseModelImpl {
 	private int _typeId;
 	private boolean _mailing;
 	private boolean _primary;
+	private ExpandoBridge _expandoBridge;
 }

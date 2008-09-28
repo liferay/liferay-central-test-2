@@ -15,6 +15,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+<#if entity.hasPrimitivePK() && entity.PKClassName == "long" && (!stringUtil.startsWith(entity.name, "Expando"))>
+	import com.liferay.portlet.expando.model.ExpandoBridge;
+	import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+</#if>
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -282,6 +287,16 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		}
 	}
 
+	<#if entity.hasPrimitivePK() && entity.PKClassName == "long" && (!stringUtil.startsWith(entity.name, "Expando"))>
+		public ExpandoBridge getExpandoBridge() throws UnsupportedOperationException {
+			if (_expandoBridge == null) {
+				_expandoBridge = new ExpandoBridgeImpl(${entity.name}.class.getName(), getPrimaryKey());
+			}
+
+			return _expandoBridge;
+		}
+	</#if>
+
 	public Object clone() {
 		 ${entity.name}Impl clone = new ${entity.name}Impl();
 
@@ -414,5 +429,9 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
 	</#list>
+
+	<#if entity.hasPrimitivePK() && entity.PKClassName == "long" && (!stringUtil.startsWith(entity.name, "Expando"))>
+		private ExpandoBridge _expandoBridge;
+	</#if>
 
 }

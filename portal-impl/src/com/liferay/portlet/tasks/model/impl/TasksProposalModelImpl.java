@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksProposalSoap;
 
@@ -354,6 +356,16 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(TasksProposal.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		TasksProposalImpl clone = new TasksProposalImpl();
 
@@ -440,4 +452,5 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 	private String _description;
 	private Date _publishDate;
 	private Date _dueDate;
+	private ExpandoBridge _expandoBridge;
 }

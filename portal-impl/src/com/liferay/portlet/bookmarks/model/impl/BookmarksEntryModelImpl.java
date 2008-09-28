@@ -29,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntrySoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -318,6 +320,16 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(BookmarksEntry.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		BookmarksEntryImpl clone = new BookmarksEntryImpl();
 
@@ -410,4 +422,5 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	private String _comments;
 	private int _visits;
 	private int _priority;
+	private ExpandoBridge _expandoBridge;
 }

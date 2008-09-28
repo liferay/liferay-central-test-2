@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseSoap;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -225,6 +228,16 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(Release.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ReleaseImpl clone = new ReleaseImpl();
 
@@ -292,4 +305,5 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	private int _buildNumber;
 	private Date _buildDate;
 	private boolean _verified;
+	private ExpandoBridge _expandoBridge;
 }

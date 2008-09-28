@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingCouponSoap;
 
@@ -431,6 +433,16 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(ShoppingCoupon.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ShoppingCouponImpl clone = new ShoppingCouponImpl();
 
@@ -521,4 +533,5 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	private double _minOrder;
 	private double _discount;
 	private String _discountType;
+	private ExpandoBridge _expandoBridge;
 }

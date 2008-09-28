@@ -32,6 +32,8 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.AnnouncementsEntrySoap;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
@@ -420,6 +422,16 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(AnnouncementsEntry.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		AnnouncementsEntryImpl clone = new AnnouncementsEntryImpl();
 
@@ -522,4 +534,5 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 	private Date _expirationDate;
 	private int _priority;
 	private boolean _alert;
+	private ExpandoBridge _expandoBridge;
 }

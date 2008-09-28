@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 import com.liferay.portlet.shopping.model.ShoppingOrderItemSoap;
 
@@ -292,6 +294,16 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge()
+		throws UnsupportedOperationException {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(ShoppingOrderItem.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public Object clone() {
 		ShoppingOrderItemImpl clone = new ShoppingOrderItemImpl();
 
@@ -371,4 +383,5 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	private double _price;
 	private int _quantity;
 	private Date _shippedDate;
+	private ExpandoBridge _expandoBridge;
 }
