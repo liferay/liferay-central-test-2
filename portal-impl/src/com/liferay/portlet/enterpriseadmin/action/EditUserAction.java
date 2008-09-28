@@ -51,7 +51,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.InvokerPortlet;
+import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
@@ -366,7 +366,7 @@ public class EditUserAction extends PortletAction {
 				PortletSession portletSession =
 					actionRequest.getPortletSession();
 
-				InvokerPortlet.clearResponses(portletSession);
+				InvokerPortletImpl.clearResponses(portletSession);
 
 				// Password
 

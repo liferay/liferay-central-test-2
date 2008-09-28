@@ -60,7 +60,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.consumer.invoker.WSRPWindowInvoker;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.InvokerPortlet;
+import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.ResourceRequestImpl;
@@ -131,28 +131,28 @@ import org.apache.commons.logging.LogFactory;
  * @author Manish Gupta
  *
  */
-public class WindowInvoker extends InvokerPortlet {
+public class WindowInvoker extends InvokerPortletImpl {
 
-	public WindowInvoker(
+	public void init(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletContext portletContext)
 		throws PortletException {
 
-		super(portletModel, portlet, portletContext);
+		super.init(portletModel, portlet, portletContext);
 
 		_portletModel = portletModel;
 		_remotePortlet = portletModel.isRemote();
 		_container = _getContainer();
 	}
 
-	public WindowInvoker(
+	public void init(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
 			boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
-		super(
+		super.init(
 			portletModel, portlet, portletConfig, portletContext, facesPortlet,
 			strutsPortlet, strutsBridgePortlet);
 
@@ -441,7 +441,7 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	public Locale _getLocale(
+	private Locale _getLocale(
 		HttpServletRequest request, PortletRequest portletRequest) {
 
 		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.portletcontainer.WindowInvoker;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -140,14 +139,18 @@ public class PortletInstanceFactory {
 					rootInvokerPortletInstance.isStrutsBridgePortlet();
 
 				if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-					instanceInvokerPortletInstance = new WindowInvoker(
-						portlet, portletInstance, portletConfig, portletContext,
-						facesPortlet, strutsPortlet, strutsBridgePortlet);
+					instanceInvokerPortletInstance =
+						_sunInvokerPortletPrototype.create(
+							portlet, portletInstance, portletConfig,
+							portletContext, facesPortlet, strutsPortlet,
+							strutsBridgePortlet);
 				}
 				else {
-					instanceInvokerPortletInstance = new InvokerPortlet(
-						portlet, portletInstance, portletConfig, portletContext,
-						facesPortlet, strutsPortlet, strutsBridgePortlet);
+					instanceInvokerPortletInstance =
+						_internalInvokerPortletPrototype.create(
+							portlet, portletInstance, portletConfig,
+							portletContext, facesPortlet, strutsPortlet,
+							strutsBridgePortlet);
 				}
 
 				portletInstances.put(
@@ -226,12 +229,12 @@ public class PortletInstanceFactory {
 			PortletContext portletContext = portletConfig.getPortletContext();
 
 			if (portlet.isRemote() || PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-				invokerPortlet = new WindowInvoker(
+				invokerPortlet = _sunInvokerPortletPrototype.create(
 					portlet, portletInstance, portletContext);
 			}
 			else {
-				invokerPortlet = new InvokerPortlet(
-					portlet, portletInstance, portletContext);
+				invokerPortlet = _internalInvokerPortletPrototype.create(
+						portlet, portletInstance, portletContext);
 			}
 
 			invokerPortlet.init(portletConfig);
@@ -249,8 +252,22 @@ public class PortletInstanceFactory {
 		return invokerPortlet;
 	}
 
+	public void setInternalInvokerPortletPrototype(
+			InvokerPortlet internalInvokerPortletPrototype) {
+		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
+	}
+
+	public void setSunInvokerPortletPrototype(
+			InvokerPortlet sunInvokerPortletPrototype) {
+		_sunInvokerPortletPrototype = sunInvokerPortletPrototype;
+	}
+
 	private static PortletInstanceFactory _instance =
 		new PortletInstanceFactory();
+
+	private static InvokerPortlet _internalInvokerPortletPrototype;
+
+	private static InvokerPortlet _sunInvokerPortletPrototype;
 
 	private Map<String, Map<String, InvokerPortlet>> _pool;
 

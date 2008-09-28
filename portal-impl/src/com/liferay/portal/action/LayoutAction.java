@@ -61,6 +61,7 @@ import com.liferay.portlet.EventRequestImpl;
 import com.liferay.portlet.EventResponseFactory;
 import com.liferay.portlet.EventResponseImpl;
 import com.liferay.portlet.InvokerPortlet;
+import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -569,7 +570,7 @@ public class LayoutAction extends Action {
 			portlet, servletContext);
 
 		if (user != null) {
-			InvokerPortlet.clearResponse(
+			InvokerPortletImpl.clearResponse(
 				session, layout.getPrimaryKey(), portletId,
 				LanguageUtil.getLanguageId(request));
 		}
