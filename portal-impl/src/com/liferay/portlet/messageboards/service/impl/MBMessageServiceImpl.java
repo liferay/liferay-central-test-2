@@ -330,7 +330,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
-			getPermissionChecker(), groupId, className, classPK,
+			getPermissionChecker(), groupId, className, classPK, messageId,
 			ActionKeys.DELETE_DISCUSSION);
 
 		mbMessageLocalService.deleteDiscussionMessage(messageId);
@@ -645,7 +645,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
-			getPermissionChecker(), groupId, className, classPK,
+			getPermissionChecker(), groupId, className, classPK, messageId,
 			ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(

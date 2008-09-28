@@ -27,6 +27,7 @@ import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -78,6 +79,7 @@ import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
+import com.liferay.portlet.social.model.SocialActivity;
 
 import java.io.IOException;
 
@@ -87,8 +89,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 
@@ -640,7 +644,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void deleteDiscussionMessage(long messageId)
 		throws PortalException, SystemException {
 
-		deleteMessage(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		List<MBMessage> messages = new ArrayList<MBMessage>();
+
+		messages.add(message);
+
+		deleteDiscussionSocialActivities(BlogsEntry.class.getName(), messages);
+
+		deleteMessage(message);
 	}
 
 	public void deleteDiscussionMessages(String className, long classPK)
@@ -655,6 +667,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			List<MBMessage> messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, 0, 1);
+
+			deleteDiscussionSocialActivities(
+				BlogsEntry.class.getName(), messages);
 
 			if (messages.size() > 0) {
 				MBMessage message = messages.get(0);
@@ -1345,6 +1360,53 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
 			null, null, null, null, ContentTypes.TEXT_HTML,
 			message.getSubject(), null, null, null, 0, 0, null, false);
+	}
+
+	protected void deleteDiscussionSocialActivities(
+			String className, List<MBMessage> messages)
+		throws PortalException, SystemException {
+
+		if (messages.size() == 0) {
+			return;
+		}
+
+		MBMessage message = messages.get(0);
+
+		MBDiscussion discussion = mbDiscussionPersistence.findByThreadId(
+			message.getThreadId());
+
+		long classNameId = PortalUtil.getClassNameId(className);
+		long classPK = discussion.getClassPK();
+
+		if (discussion.getClassNameId() != classNameId) {
+			return;
+		}
+
+		Set<Long> messageIds = new HashSet<Long>();
+
+		for (MBMessage curMessage : messages) {
+			messageIds.add(curMessage.getMessageId());
+		}
+
+		List<SocialActivity> socialActivities =
+			socialActivityLocalService.getActivities(
+				0, className, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (SocialActivity socialActivity : socialActivities) {
+			if (Validator.isNull(socialActivity.getExtraData())) {
+				continue;
+			}
+
+			JSONObject extraData = JSONFactoryUtil.createJSONObject(
+				socialActivity.getExtraData());
+
+			long extraDataMessageId = extraData.getLong("messageId");
+
+			if (messageIds.contains(extraDataMessageId)) {
+				socialActivityLocalService.deleteActivity(
+					socialActivity.getActivityId());
+			}
+		}
 	}
 
 	protected void logAddMessage(

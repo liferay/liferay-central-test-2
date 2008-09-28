@@ -111,34 +111,30 @@ public class MBCategoryPermission {
 
 			return false;
 		}
-		else {
-			long categoryId = category.getCategoryId();
 
-			while (categoryId !=
-						MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+		long categoryId = category.getCategoryId();
 
-				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+		while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+			category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
-				categoryId = category.getParentCategoryId();
+			categoryId = category.getParentCategoryId();
 
-				if (permissionChecker.hasOwnerPermission(
-						category.getCompanyId(), MBCategory.class.getName(),
-						category.getCategoryId(), category.getUserId(),
-						actionId)) {
+			if (permissionChecker.hasOwnerPermission(
+					category.getCompanyId(), MBCategory.class.getName(),
+					category.getCategoryId(), category.getUserId(), actionId)) {
 
-					return true;
-				}
+				return true;
+			}
 
-				if (permissionChecker.hasPermission(
-						category.getGroupId(), MBCategory.class.getName(),
-						category.getCategoryId(), actionId)) {
+			if (permissionChecker.hasPermission(
+					category.getGroupId(), MBCategory.class.getName(),
+					category.getCategoryId(), actionId)) {
 
-					return true;
-				}
+				return true;
+			}
 
-				if (actionId.equals(ActionKeys.VIEW)) {
-					break;
-				}
+			if (actionId.equals(ActionKeys.VIEW)) {
+				break;
 			}
 		}
 

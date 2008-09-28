@@ -134,6 +134,18 @@ public class MBDiscussionUtil {
 				   .findByClassNameId_PrevAndNext(discussionId, classNameId, obc);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion findByThreadId(
+		long threadId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
+		return getPersistence().findByThreadId(threadId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByThreadId(
+		long threadId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByThreadId(threadId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -180,6 +192,12 @@ public class MBDiscussionUtil {
 		getPersistence().removeByClassNameId(classNameId);
 	}
 
+	public static void removeByThreadId(long threadId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
+		getPersistence().removeByThreadId(threadId);
+	}
+
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
@@ -193,6 +211,11 @@ public class MBDiscussionUtil {
 	public static int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByClassNameId(classNameId);
+	}
+
+	public static int countByThreadId(long threadId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByThreadId(threadId);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)

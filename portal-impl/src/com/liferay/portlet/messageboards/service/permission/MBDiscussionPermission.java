@@ -26,7 +26,12 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 /**
  * <a href="MBDiscussionPermission.java.html"><b><i>View Source</i></b></a>
@@ -48,6 +53,19 @@ public class MBDiscussionPermission {
 		}
 	}
 
+	public static void check(
+			PermissionChecker permissionChecker, long groupId, String className,
+			long classPK, long messageId, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(
+				permissionChecker, groupId, className, classPK, messageId,
+				actionId)) {
+
+			throw new PrincipalException();
+		}
+	}
+
 	public static boolean contains(
 			PermissionChecker permissionChecker, long groupId, String className,
 			long classPK, String actionId)
@@ -58,10 +76,38 @@ public class MBDiscussionPermission {
 
 			return false;
 		}
-		else {
-			return permissionChecker.hasPermission(
-				groupId, className, classPK, actionId);
+
+		return permissionChecker.hasPermission(
+			groupId, className, classPK, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String className,
+			long classPK, long messageId, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(
+				permissionChecker, groupId, className, classPK, actionId)) {
+
+			return false;
 		}
+
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(
+			messageId);
+
+		MBDiscussion discussion =
+			MBDiscussionLocalServiceUtil.getThreadDiscussion(
+				message.getThreadId());
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		if ((discussion.getClassNameId() == classNameId) &&
+			(discussion.getClassPK() == classPK)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }

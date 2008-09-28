@@ -38,6 +38,7 @@ import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
+import com.liferay.portlet.messageboards.service.MBDiscussionLocalService;
 import com.liferay.portlet.messageboards.service.MBMailingListLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagService;
@@ -170,6 +171,15 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 
 	public void setMBCategoryFinder(MBCategoryFinder mbCategoryFinder) {
 		this.mbCategoryFinder = mbCategoryFinder;
+	}
+
+	public MBDiscussionLocalService getMBDiscussionLocalService() {
+		return mbDiscussionLocalService;
+	}
+
+	public void setMBDiscussionLocalService(
+		MBDiscussionLocalService mbDiscussionLocalService) {
+		this.mbDiscussionLocalService = mbDiscussionLocalService;
 	}
 
 	public MBDiscussionPersistence getMBDiscussionPersistence() {
@@ -381,6 +391,8 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 	protected MBCategoryPersistence mbCategoryPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl")
 	protected MBCategoryFinder mbCategoryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl")
+	protected MBDiscussionLocalService mbDiscussionLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl")
 	protected MBDiscussionPersistence mbDiscussionPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMailingListLocalService.impl")

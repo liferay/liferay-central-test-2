@@ -29,11 +29,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 
 /**
  * <a href="BlogsActivityInterpreter.java.html"><b><i>View Source</i></b></a>
@@ -99,9 +101,18 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			long messageId = extraData.getInt("messageId");
 
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+			try {
+				MBMessage message = MBMessageLocalServiceUtil.getMessage(
+					messageId);
 
-			sb.append(cleanContent(message.getBody()));
+				sb.append(cleanContent(message.getBody()));
+			}
+			catch (NoSuchMessageException nsme) {
+				SocialActivityLocalServiceUtil.deleteActivity(
+					activity.getActivityId());
+
+				return null;
+			}
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
 			sb.append(entry.getTitle());

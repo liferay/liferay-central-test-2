@@ -1527,6 +1527,16 @@
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl" class="com.liferay.portlet.messageboards.service.impl.MBDiscussionLocalServiceImpl" />
+	<bean id="com.liferay.portlet.messageboards.service.MBDiscussionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceFactory">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" />

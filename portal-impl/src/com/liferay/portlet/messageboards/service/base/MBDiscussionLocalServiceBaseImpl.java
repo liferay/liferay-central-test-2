@@ -22,22 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.base;
 
-import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
-import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.service.DLService;
-
-import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserPersistence;
-
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
@@ -63,24 +52,70 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenc
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
-import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
-import com.liferay.portlet.social.service.SocialActivityLocalService;
-import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
-import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.tags.service.TagsAssetLocalService;
-import com.liferay.portlet.tags.service.TagsAssetService;
-import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
-import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+
+import java.util.List;
 
 /**
- * <a href="MBThreadServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBDiscussionLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class MBThreadServiceBaseImpl extends PrincipalBean
-	implements MBThreadService {
+public abstract class MBDiscussionLocalServiceBaseImpl
+	implements MBDiscussionLocalService {
+	public MBDiscussion addMBDiscussion(MBDiscussion mbDiscussion)
+		throws SystemException {
+		mbDiscussion.setNew(true);
+
+		return mbDiscussionPersistence.update(mbDiscussion, false);
+	}
+
+	public MBDiscussion createMBDiscussion(long discussionId) {
+		return mbDiscussionPersistence.create(discussionId);
+	}
+
+	public void deleteMBDiscussion(long discussionId)
+		throws PortalException, SystemException {
+		mbDiscussionPersistence.remove(discussionId);
+	}
+
+	public void deleteMBDiscussion(MBDiscussion mbDiscussion)
+		throws SystemException {
+		mbDiscussionPersistence.remove(mbDiscussion);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return mbDiscussionPersistence.findWithDynamicQuery(dynamicQuery);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return mbDiscussionPersistence.findWithDynamicQuery(dynamicQuery,
+			start, end);
+	}
+
+	public MBDiscussion getMBDiscussion(long discussionId)
+		throws PortalException, SystemException {
+		return mbDiscussionPersistence.findByPrimaryKey(discussionId);
+	}
+
+	public List<MBDiscussion> getMBDiscussions(int start, int end)
+		throws SystemException {
+		return mbDiscussionPersistence.findAll(start, end);
+	}
+
+	public int getMBDiscussionsCount() throws SystemException {
+		return mbDiscussionPersistence.countAll();
+	}
+
+	public MBDiscussion updateMBDiscussion(MBDiscussion mbDiscussion)
+		throws SystemException {
+		mbDiscussion.setNew(false);
+
+		return mbDiscussionPersistence.update(mbDiscussion, true);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -295,182 +330,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		this.mbThreadFinder = mbThreadFinder;
 	}
 
-	public CounterLocalService getCounterLocalService() {
-		return counterLocalService;
-	}
-
-	public void setCounterLocalService(CounterLocalService counterLocalService) {
-		this.counterLocalService = counterLocalService;
-	}
-
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
-	public DLLocalService getDLLocalService() {
-		return dlLocalService;
-	}
-
-	public void setDLLocalService(DLLocalService dlLocalService) {
-		this.dlLocalService = dlLocalService;
-	}
-
-	public DLService getDLService() {
-		return dlService;
-	}
-
-	public void setDLService(DLService dlService) {
-		this.dlService = dlService;
-	}
-
-	public ResourceLocalService getResourceLocalService() {
-		return resourceLocalService;
-	}
-
-	public void setResourceLocalService(
-		ResourceLocalService resourceLocalService) {
-		this.resourceLocalService = resourceLocalService;
-	}
-
-	public ResourceService getResourceService() {
-		return resourceService;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourcePersistence getResourcePersistence() {
-		return resourcePersistence;
-	}
-
-	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
-		this.resourcePersistence = resourcePersistence;
-	}
-
-	public ResourceFinder getResourceFinder() {
-		return resourceFinder;
-	}
-
-	public void setResourceFinder(ResourceFinder resourceFinder) {
-		this.resourceFinder = resourceFinder;
-	}
-
-	public UserLocalService getUserLocalService() {
-		return userLocalService;
-	}
-
-	public void setUserLocalService(UserLocalService userLocalService) {
-		this.userLocalService = userLocalService;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	public UserPersistence getUserPersistence() {
-		return userPersistence;
-	}
-
-	public void setUserPersistence(UserPersistence userPersistence) {
-		this.userPersistence = userPersistence;
-	}
-
-	public UserFinder getUserFinder() {
-		return userFinder;
-	}
-
-	public void setUserFinder(UserFinder userFinder) {
-		this.userFinder = userFinder;
-	}
-
-	public RatingsStatsLocalService getRatingsStatsLocalService() {
-		return ratingsStatsLocalService;
-	}
-
-	public void setRatingsStatsLocalService(
-		RatingsStatsLocalService ratingsStatsLocalService) {
-		this.ratingsStatsLocalService = ratingsStatsLocalService;
-	}
-
-	public RatingsStatsPersistence getRatingsStatsPersistence() {
-		return ratingsStatsPersistence;
-	}
-
-	public void setRatingsStatsPersistence(
-		RatingsStatsPersistence ratingsStatsPersistence) {
-		this.ratingsStatsPersistence = ratingsStatsPersistence;
-	}
-
-	public SocialActivityLocalService getSocialActivityLocalService() {
-		return socialActivityLocalService;
-	}
-
-	public void setSocialActivityLocalService(
-		SocialActivityLocalService socialActivityLocalService) {
-		this.socialActivityLocalService = socialActivityLocalService;
-	}
-
-	public SocialActivityPersistence getSocialActivityPersistence() {
-		return socialActivityPersistence;
-	}
-
-	public void setSocialActivityPersistence(
-		SocialActivityPersistence socialActivityPersistence) {
-		this.socialActivityPersistence = socialActivityPersistence;
-	}
-
-	public SocialActivityFinder getSocialActivityFinder() {
-		return socialActivityFinder;
-	}
-
-	public void setSocialActivityFinder(
-		SocialActivityFinder socialActivityFinder) {
-		this.socialActivityFinder = socialActivityFinder;
-	}
-
-	public TagsAssetLocalService getTagsAssetLocalService() {
-		return tagsAssetLocalService;
-	}
-
-	public void setTagsAssetLocalService(
-		TagsAssetLocalService tagsAssetLocalService) {
-		this.tagsAssetLocalService = tagsAssetLocalService;
-	}
-
-	public TagsAssetService getTagsAssetService() {
-		return tagsAssetService;
-	}
-
-	public void setTagsAssetService(TagsAssetService tagsAssetService) {
-		this.tagsAssetService = tagsAssetService;
-	}
-
-	public TagsAssetPersistence getTagsAssetPersistence() {
-		return tagsAssetPersistence;
-	}
-
-	public void setTagsAssetPersistence(
-		TagsAssetPersistence tagsAssetPersistence) {
-		this.tagsAssetPersistence = tagsAssetPersistence;
-	}
-
-	public TagsAssetFinder getTagsAssetFinder() {
-		return tagsAssetFinder;
-	}
-
-	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
-		this.tagsAssetFinder = tagsAssetFinder;
-	}
-
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
@@ -521,46 +380,4 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 	protected MBThreadPersistence mbThreadPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl")
 	protected MBThreadFinder mbThreadFinder;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
-	protected CounterLocalService counterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
-	protected CounterService counterService;
-	@javax.annotation.Resource(name = "com.liferay.documentlibrary.service.DLLocalService.impl")
-	protected DLLocalService dlLocalService;
-	@javax.annotation.Resource(name = "com.liferay.documentlibrary.service.DLService.impl")
-	protected DLService dlService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
-	protected ResourceLocalService resourceLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
-	protected ResourceService resourceService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
-	protected ResourcePersistence resourcePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
-	protected ResourceFinder resourceFinder;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
-	protected UserLocalService userLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
-	protected UserService userService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
-	protected UserPersistence userPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
-	protected UserFinder userFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.ratings.service.RatingsStatsLocalService.impl")
-	protected RatingsStatsLocalService ratingsStatsLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
-	protected RatingsStatsPersistence ratingsStatsPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
-	protected SocialActivityLocalService socialActivityLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
-	protected SocialActivityPersistence socialActivityPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
-	protected SocialActivityFinder socialActivityFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
-	protected TagsAssetLocalService tagsAssetLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
-	protected TagsAssetService tagsAssetService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
-	protected TagsAssetPersistence tagsAssetPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
-	protected TagsAssetFinder tagsAssetFinder;
 }

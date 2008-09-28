@@ -496,6 +496,97 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public MBDiscussion findByThreadId(long threadId)
+		throws NoSuchDiscussionException, SystemException {
+		MBDiscussion mbDiscussion = fetchByThreadId(threadId);
+
+		if (mbDiscussion == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBDiscussion exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchDiscussionException(msg.toString());
+		}
+
+		return mbDiscussion;
+	}
+
+	public MBDiscussion fetchByThreadId(long threadId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
+		String finderClassName = MBDiscussion.class.getName();
+		String finderMethodName = "fetchByThreadId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				List<MBDiscussion> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<MBDiscussion> list = (List<MBDiscussion>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public MBDiscussion findByC_C(long classNameId, long classPK)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = fetchByC_C(classNameId, classPK);
@@ -718,6 +809,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByThreadId(long threadId)
+		throws NoSuchDiscussionException, SystemException {
+		MBDiscussion mbDiscussion = findByThreadId(threadId);
+
+		remove(mbDiscussion);
+	}
+
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByC_C(classNameId, classPK);
@@ -766,6 +864,72 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(classNameId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByThreadId(long threadId) throws SystemException {
+		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
+		String finderClassName = MBDiscussion.class.getName();
+		String finderMethodName = "countByThreadId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
 
 				Long count = null;
 

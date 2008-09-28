@@ -105,6 +105,14 @@ public interface MBDiscussionPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
 
+	public com.liferay.portlet.messageboards.model.MBDiscussion findByThreadId(
+		long threadId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException;
+
+	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByThreadId(
+		long threadId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -135,6 +143,10 @@ public interface MBDiscussionPersistence {
 	public void removeByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByThreadId(long threadId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException;
+
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -142,6 +154,9 @@ public interface MBDiscussionPersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByThreadId(long threadId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)
