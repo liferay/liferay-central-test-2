@@ -105,15 +105,15 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<div>
-	<c:if test='<%= showAddButton %>'>
-		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
-						OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">
+<c:if test="<%= showAddButton %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
+					OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">
 
+		<div>
 			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="<portlet:namespace />addUser();" />
-		</c:if>
+		</div>
 	</c:if>
-</div>
+</c:if>
 
 <script type="text/javascript">
 	function <portlet:namespace />addUser() {

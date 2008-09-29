@@ -154,15 +154,34 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 	<div class="separator"><!-- --></div>
 
+	<%
+	boolean hasButtons = false;
+	%>
+
 	<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
+
+		<%
+		hasButtons = true;
+		%>
+
 		<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 	</c:if>
 
 	<c:if test="<%= !searchTerms.isActive() %>">
+
+		<%
+		hasButtons = true;
+		%>
+
 		<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
 	</c:if>
 
 	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
+
+		<%
+		hasButtons = true;
+		%>
+
 		<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
 
 		<liferay-ui:upload-progress
@@ -172,7 +191,9 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		/>
 	</c:if>
 
-	<br /><br />
+	<c:if test="<%= hasButtons %>">
+		<br />
+	</c:if>
 
 	<%
 	List resultRows = searchContainer.getResultRows();
