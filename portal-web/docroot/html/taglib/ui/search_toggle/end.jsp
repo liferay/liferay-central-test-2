@@ -26,5 +26,11 @@
 
 	<br />
 
+	<c:if test="<%= Validator.isNotNull(buttonLabel) %>">
+		<input type="submit" value="<liferay-ui:message key="<%= buttonLabel %>" />" />
+
+		<br />
+	</c:if>
+
 	<a href="javascript: <%= id %>toggleSearch();" tabindex="-1">&laquo; <liferay-ui:message key="basic" /></a>
 </div>

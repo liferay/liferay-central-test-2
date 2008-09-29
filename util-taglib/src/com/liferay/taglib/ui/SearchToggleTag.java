@@ -46,6 +46,8 @@ public class SearchToggleTag extends TagSupport {
 			request.setAttribute("liferay-ui:search-toggle:id", _id);
 			request.setAttribute(
 				"liferay-ui:search-toggle:displayTerms", _displayTerms);
+			request.setAttribute(
+				"liferay-ui:search-toggle:buttonLabel", _buttonLabel);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -101,6 +103,10 @@ public class SearchToggleTag extends TagSupport {
 		_displayTerms = displayTerms;
 	}
 
+	public void setButtonLabel(String buttonLabel) {
+		_buttonLabel = buttonLabel;
+	}
+
 	private static final String _START_PAGE =
 		"/html/taglib/ui/search_toggle/start.jsp";
 
@@ -111,5 +117,6 @@ public class SearchToggleTag extends TagSupport {
 	private String _endPage;
 	private String _id;
 	private DisplayTerms _displayTerms;
+	private String _buttonLabel;
 
 }

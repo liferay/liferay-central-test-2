@@ -34,6 +34,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <liferay-ui:search-toggle
 	id="toggle_id_enterprise_admin_user_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-users"
 >
 	<table class="lfr-table">
 	<tr>
@@ -105,8 +106,6 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <br />
 
 <div>
-	<input type="submit" value="<liferay-ui:message key="search-users" />" />
-
 	<c:if test='<%= showAddButton %>'>
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
 						OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">

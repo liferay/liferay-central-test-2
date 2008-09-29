@@ -58,11 +58,25 @@
 <input id="<%= id %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
 
 <div id="<%= id %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
-	<label for="<%= id %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
 
-	<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
+	<c:choose>
+		<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
+			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
 
-	&nbsp;<a href="javascript: <%= id %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
+			<input type="submit" value="<liferay-ui:message key="<%= buttonLabel %>" />" />
+
+			<br />
+			&nbsp;<a href="javascript: <%= id %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
+		</c:when>
+		<c:otherwise>
+			<label for="<%= id %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
+
+			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
+
+			&nbsp;<a href="javascript: <%= id %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
+		</c:otherwise>
+	</c:choose>
+
 </div>
 
 <div id="<%= id %>advanced" style="display: <%= !clickValue.equals("basic") ? "block" : "none" %>;">
