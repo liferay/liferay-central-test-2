@@ -48,14 +48,12 @@
 				dayNamesShort: <%= JS.toScript(CalendarUtil.getDays(locale, "EEE")) %>,
 
 				<%
-				String[] calendarDays = new String[7];
+				String[] calendarDays = new String[CalendarUtil.DAYS_ABBREVIATION.length];
 
 				Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-				for (int i = 0; i < calendarDays.length; i++) {
-					int daysIndex = (cal.getFirstDayOfWeek() + i - 1) % 7;
-
-					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]);
+				for (int i = 0; i < CalendarUtil.DAYS_ABBREVIATION.length; i++) {
+					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[i]);
 				}
 				%>
 
