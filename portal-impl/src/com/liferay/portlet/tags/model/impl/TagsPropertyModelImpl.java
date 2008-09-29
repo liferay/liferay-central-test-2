@@ -275,8 +275,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException {
+	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(TagsProperty.class.getName(),
 					getPrimaryKey());

@@ -1024,8 +1024,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException {
+	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(ShoppingOrder.class.getName(),
 					getPrimaryKey());

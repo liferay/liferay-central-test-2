@@ -191,8 +191,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException {
+	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(Permission.class.getName(),
 					getPrimaryKey());

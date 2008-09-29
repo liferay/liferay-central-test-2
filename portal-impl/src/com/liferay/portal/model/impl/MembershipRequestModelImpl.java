@@ -290,8 +290,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException {
+	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(MembershipRequest.class.getName(),
 					getPrimaryKey());

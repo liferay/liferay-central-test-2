@@ -522,8 +522,7 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException {
+	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(JournalFeed.class.getName(),
 					getPrimaryKey());
