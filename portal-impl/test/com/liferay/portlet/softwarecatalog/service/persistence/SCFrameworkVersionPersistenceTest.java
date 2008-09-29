@@ -38,7 +38,8 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -167,7 +168,5 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		return scFrameworkVersion;
 	}
 
-	private static final String _TX_IMPL = SCFrameworkVersionPersistence.class.getName() +
-		".transaction";
 	private SCFrameworkVersionPersistence _persistence;
 }

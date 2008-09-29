@@ -38,7 +38,8 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(IGFolderPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -156,7 +157,5 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		return igFolder;
 	}
 
-	private static final String _TX_IMPL = IGFolderPersistence.class.getName() +
-		".transaction";
 	private IGFolderPersistence _persistence;
 }

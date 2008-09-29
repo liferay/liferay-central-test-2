@@ -38,7 +38,8 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -152,7 +153,5 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		return scProductScreenshot;
 	}
 
-	private static final String _TX_IMPL = SCProductScreenshotPersistence.class.getName() +
-		".transaction";
 	private SCProductScreenshotPersistence _persistence;
 }

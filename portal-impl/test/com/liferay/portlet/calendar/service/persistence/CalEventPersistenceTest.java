@@ -38,7 +38,8 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -197,7 +198,5 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		return calEvent;
 	}
 
-	private static final String _TX_IMPL = CalEventPersistence.class.getName() +
-		".transaction";
 	private CalEventPersistence _persistence;
 }

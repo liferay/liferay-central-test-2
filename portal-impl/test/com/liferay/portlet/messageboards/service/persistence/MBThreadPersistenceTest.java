@@ -38,7 +38,8 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -151,7 +152,5 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		return mbThread;
 	}
 
-	private static final String _TX_IMPL = MBThreadPersistence.class.getName() +
-		".transaction";
 	private MBThreadPersistence _persistence;
 }

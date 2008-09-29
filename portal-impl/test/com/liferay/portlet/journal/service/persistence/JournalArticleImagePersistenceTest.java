@@ -38,7 +38,8 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -151,7 +152,5 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		return journalArticleImage;
 	}
 
-	private static final String _TX_IMPL = JournalArticleImagePersistence.class.getName() +
-		".transaction";
 	private JournalArticleImagePersistence _persistence;
 }

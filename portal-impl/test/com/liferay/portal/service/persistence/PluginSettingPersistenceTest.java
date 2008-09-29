@@ -37,7 +37,8 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PluginSettingPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (PluginSettingPersistence)PortalBeanLocatorUtil.locate(PluginSettingPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -145,7 +146,5 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		return pluginSetting;
 	}
 
-	private static final String _TX_IMPL = PluginSettingPersistence.class.getName() +
-		".transaction";
 	private PluginSettingPersistence _persistence;
 }

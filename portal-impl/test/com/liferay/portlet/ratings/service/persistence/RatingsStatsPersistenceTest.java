@@ -38,7 +38,8 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -146,7 +147,5 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		return ratingsStats;
 	}
 
-	private static final String _TX_IMPL = RatingsStatsPersistence.class.getName() +
-		".transaction";
 	private RatingsStatsPersistence _persistence;
 }

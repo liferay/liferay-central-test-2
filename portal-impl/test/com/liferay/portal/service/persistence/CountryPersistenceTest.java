@@ -37,7 +37,8 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -142,7 +143,5 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		return country;
 	}
 
-	private static final String _TX_IMPL = CountryPersistence.class.getName() +
-		".transaction";
 	private CountryPersistence _persistence;
 }

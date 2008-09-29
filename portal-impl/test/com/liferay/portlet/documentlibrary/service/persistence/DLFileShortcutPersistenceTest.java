@@ -38,7 +38,8 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(DLFileShortcutPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -162,7 +163,5 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		return dlFileShortcut;
 	}
 
-	private static final String _TX_IMPL = DLFileShortcutPersistence.class.getName() +
-		".transaction";
 	private DLFileShortcutPersistence _persistence;
 }

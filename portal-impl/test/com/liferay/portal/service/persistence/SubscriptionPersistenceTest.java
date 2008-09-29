@@ -37,7 +37,8 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(SubscriptionPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -157,7 +158,5 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		return subscription;
 	}
 
-	private static final String _TX_IMPL = SubscriptionPersistence.class.getName() +
-		".transaction";
 	private SubscriptionPersistence _persistence;
 }

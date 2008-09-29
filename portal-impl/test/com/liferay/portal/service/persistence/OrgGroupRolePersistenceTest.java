@@ -37,7 +37,8 @@ public class OrgGroupRolePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (OrgGroupRolePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (OrgGroupRolePersistence)PortalBeanLocatorUtil.locate(OrgGroupRolePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -132,7 +133,5 @@ public class OrgGroupRolePersistenceTest extends BasePersistenceTestCase {
 		return orgGroupRole;
 	}
 
-	private static final String _TX_IMPL = OrgGroupRolePersistence.class.getName() +
-		".transaction";
 	private OrgGroupRolePersistence _persistence;
 }

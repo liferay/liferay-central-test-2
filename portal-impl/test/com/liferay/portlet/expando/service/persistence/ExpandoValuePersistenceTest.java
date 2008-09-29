@@ -38,7 +38,8 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ExpandoValuePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ExpandoValuePersistence)PortalBeanLocatorUtil.locate(ExpandoValuePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -148,7 +149,5 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		return expandoValue;
 	}
 
-	private static final String _TX_IMPL = ExpandoValuePersistence.class.getName() +
-		".transaction";
 	private ExpandoValuePersistence _persistence;
 }

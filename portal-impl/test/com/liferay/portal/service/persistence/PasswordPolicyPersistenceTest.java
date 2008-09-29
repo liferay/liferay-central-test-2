@@ -37,7 +37,8 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -225,7 +226,5 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		return passwordPolicy;
 	}
 
-	private static final String _TX_IMPL = PasswordPolicyPersistence.class.getName() +
-		".transaction";
 	private PasswordPolicyPersistence _persistence;
 }

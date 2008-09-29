@@ -38,7 +38,8 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -144,7 +145,5 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		return dlFileRank;
 	}
 
-	private static final String _TX_IMPL = DLFileRankPersistence.class.getName() +
-		".transaction";
 	private DLFileRankPersistence _persistence;
 }

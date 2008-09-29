@@ -37,7 +37,8 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (OrgGroupPermissionPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (OrgGroupPermissionPersistence)PortalBeanLocatorUtil.locate(OrgGroupPermissionPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -134,7 +135,5 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 		return orgGroupPermission;
 	}
 
-	private static final String _TX_IMPL = OrgGroupPermissionPersistence.class.getName() +
-		".transaction";
 	private OrgGroupPermissionPersistence _persistence;
 }

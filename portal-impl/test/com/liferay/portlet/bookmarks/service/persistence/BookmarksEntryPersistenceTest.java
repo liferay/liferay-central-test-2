@@ -38,7 +38,8 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -169,7 +170,5 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		return bookmarksEntry;
 	}
 
-	private static final String _TX_IMPL = BookmarksEntryPersistence.class.getName() +
-		".transaction";
 	private BookmarksEntryPersistence _persistence;
 }

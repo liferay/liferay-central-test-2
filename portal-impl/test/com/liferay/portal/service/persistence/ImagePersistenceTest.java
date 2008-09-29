@@ -37,7 +37,8 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ImagePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ImagePersistence)PortalBeanLocatorUtil.locate(ImagePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -142,7 +143,5 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		return image;
 	}
 
-	private static final String _TX_IMPL = ImagePersistence.class.getName() +
-		".transaction";
 	private ImagePersistence _persistence;
 }

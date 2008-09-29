@@ -37,7 +37,8 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (OrganizationPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (OrganizationPersistence)PortalBeanLocatorUtil.locate(OrganizationPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -159,7 +160,5 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		return organization;
 	}
 
-	private static final String _TX_IMPL = OrganizationPersistence.class.getName() +
-		".transaction";
 	private OrganizationPersistence _persistence;
 }

@@ -39,7 +39,8 @@ public class JournalArticleResourcePersistenceTest
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -136,7 +137,5 @@ public class JournalArticleResourcePersistenceTest
 		return journalArticleResource;
 	}
 
-	private static final String _TX_IMPL = JournalArticleResourcePersistence.class.getName() +
-		".transaction";
 	private JournalArticleResourcePersistence _persistence;
 }

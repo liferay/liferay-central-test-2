@@ -38,7 +38,8 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ShoppingItemPricePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ShoppingItemPricePersistence)PortalBeanLocatorUtil.locate(ShoppingItemPricePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -163,7 +164,5 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		return shoppingItemPrice;
 	}
 
-	private static final String _TX_IMPL = ShoppingItemPricePersistence.class.getName() +
-		".transaction";
 	private ShoppingItemPricePersistence _persistence;
 }

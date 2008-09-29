@@ -37,7 +37,8 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (WebDAVPropsPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (WebDAVPropsPersistence)PortalBeanLocatorUtil.locate(WebDAVPropsPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -148,7 +149,5 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		return webDAVProps;
 	}
 
-	private static final String _TX_IMPL = WebDAVPropsPersistence.class.getName() +
-		".transaction";
 	private WebDAVPropsPersistence _persistence;
 }

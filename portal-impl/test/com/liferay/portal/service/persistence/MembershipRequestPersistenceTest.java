@@ -37,7 +37,8 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MembershipRequestPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MembershipRequestPersistence)PortalBeanLocatorUtil.locate(MembershipRequestPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -163,7 +164,5 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		return membershipRequest;
 	}
 
-	private static final String _TX_IMPL = MembershipRequestPersistence.class.getName() +
-		".transaction";
 	private MembershipRequestPersistence _persistence;
 }

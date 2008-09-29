@@ -37,7 +37,8 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (LayoutSetPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (LayoutSetPersistence)PortalBeanLocatorUtil.locate(LayoutSetPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -168,7 +169,5 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		return layoutSet;
 	}
 
-	private static final String _TX_IMPL = LayoutSetPersistence.class.getName() +
-		".transaction";
 	private LayoutSetPersistence _persistence;
 }

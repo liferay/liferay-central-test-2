@@ -38,7 +38,8 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(SocialRelationPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -150,7 +151,5 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 		return socialRelation;
 	}
 
-	private static final String _TX_IMPL = SocialRelationPersistence.class.getName() +
-		".transaction";
 	private SocialRelationPersistence _persistence;
 }

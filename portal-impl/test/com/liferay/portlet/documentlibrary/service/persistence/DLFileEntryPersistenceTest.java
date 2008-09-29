@@ -38,7 +38,8 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -185,7 +186,5 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		return dlFileEntry;
 	}
 
-	private static final String _TX_IMPL = DLFileEntryPersistence.class.getName() +
-		".transaction";
 	private DLFileEntryPersistence _persistence;
 }

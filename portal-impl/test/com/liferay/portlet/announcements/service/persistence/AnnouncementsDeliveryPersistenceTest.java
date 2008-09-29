@@ -39,7 +39,8 @@ public class AnnouncementsDeliveryPersistenceTest
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -152,7 +153,5 @@ public class AnnouncementsDeliveryPersistenceTest
 		return announcementsDelivery;
 	}
 
-	private static final String _TX_IMPL = AnnouncementsDeliveryPersistence.class.getName() +
-		".transaction";
 	private AnnouncementsDeliveryPersistence _persistence;
 }

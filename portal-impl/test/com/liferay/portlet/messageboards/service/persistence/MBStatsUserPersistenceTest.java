@@ -38,7 +38,8 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBStatsUserPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBStatsUserPersistence)PortalBeanLocatorUtil.locate(MBStatsUserPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -141,7 +142,5 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		return mbStatsUser;
 	}
 
-	private static final String _TX_IMPL = MBStatsUserPersistence.class.getName() +
-		".transaction";
 	private MBStatsUserPersistence _persistence;
 }

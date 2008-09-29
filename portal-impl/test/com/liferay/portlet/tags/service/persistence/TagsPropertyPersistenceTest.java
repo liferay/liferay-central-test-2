@@ -38,7 +38,8 @@ public class TagsPropertyPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (TagsPropertyPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (TagsPropertyPersistence)PortalBeanLocatorUtil.locate(TagsPropertyPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -156,7 +157,5 @@ public class TagsPropertyPersistenceTest extends BasePersistenceTestCase {
 		return tagsProperty;
 	}
 
-	private static final String _TX_IMPL = TagsPropertyPersistence.class.getName() +
-		".transaction";
 	private TagsPropertyPersistence _persistence;
 }

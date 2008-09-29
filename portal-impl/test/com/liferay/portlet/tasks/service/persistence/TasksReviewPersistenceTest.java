@@ -38,7 +38,8 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -172,7 +173,5 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		return tasksReview;
 	}
 
-	private static final String _TX_IMPL = TasksReviewPersistence.class.getName() +
-		".transaction";
 	private TasksReviewPersistence _persistence;
 }

@@ -37,7 +37,8 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ResourceCodePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ResourceCodePersistence)PortalBeanLocatorUtil.locate(ResourceCodePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -135,7 +136,5 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		return resourceCode;
 	}
 
-	private static final String _TX_IMPL = ResourceCodePersistence.class.getName() +
-		".transaction";
 	private ResourceCodePersistence _persistence;
 }

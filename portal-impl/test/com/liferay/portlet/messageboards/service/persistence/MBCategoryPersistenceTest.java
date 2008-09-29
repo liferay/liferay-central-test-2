@@ -38,7 +38,8 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBCategoryPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBCategoryPersistence)PortalBeanLocatorUtil.locate(MBCategoryPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -166,7 +167,5 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		return mbCategory;
 	}
 
-	private static final String _TX_IMPL = MBCategoryPersistence.class.getName() +
-		".transaction";
 	private MBCategoryPersistence _persistence;
 }

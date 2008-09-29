@@ -37,7 +37,8 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (WebsitePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (WebsitePersistence)PortalBeanLocatorUtil.locate(WebsitePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -156,7 +157,5 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		return website;
 	}
 
-	private static final String _TX_IMPL = WebsitePersistence.class.getName() +
-		".transaction";
 	private WebsitePersistence _persistence;
 }

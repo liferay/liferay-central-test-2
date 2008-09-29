@@ -37,7 +37,8 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PasswordTrackerPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (PasswordTrackerPersistence)PortalBeanLocatorUtil.locate(PasswordTrackerPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -137,7 +138,5 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 		return passwordTracker;
 	}
 
-	private static final String _TX_IMPL = PasswordTrackerPersistence.class.getName() +
-		".transaction";
 	private PasswordTrackerPersistence _persistence;
 }

@@ -38,7 +38,8 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -221,7 +222,5 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		return mbMailingList;
 	}
 
-	private static final String _TX_IMPL = MBMailingListPersistence.class.getName() +
-		".transaction";
 	private MBMailingListPersistence _persistence;
 }

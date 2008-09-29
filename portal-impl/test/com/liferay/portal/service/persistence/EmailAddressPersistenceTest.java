@@ -37,7 +37,8 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (EmailAddressPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (EmailAddressPersistence)PortalBeanLocatorUtil.locate(EmailAddressPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -165,7 +166,5 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 		return emailAddress;
 	}
 
-	private static final String _TX_IMPL = EmailAddressPersistence.class.getName() +
-		".transaction";
 	private EmailAddressPersistence _persistence;
 }

@@ -37,7 +37,8 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -177,7 +178,5 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		return address;
 	}
 
-	private static final String _TX_IMPL = AddressPersistence.class.getName() +
-		".transaction";
 	private AddressPersistence _persistence;
 }

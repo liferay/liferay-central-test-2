@@ -37,7 +37,8 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (UserIdMapperPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (UserIdMapperPersistence)PortalBeanLocatorUtil.locate(UserIdMapperPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -140,7 +141,5 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		return userIdMapper;
 	}
 
-	private static final String _TX_IMPL = UserIdMapperPersistence.class.getName() +
-		".transaction";
 	private UserIdMapperPersistence _persistence;
 }

@@ -37,7 +37,8 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ReleasePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ReleasePersistence)PortalBeanLocatorUtil.locate(ReleasePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -141,7 +142,5 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		return release;
 	}
 
-	private static final String _TX_IMPL = ReleasePersistence.class.getName() +
-		".transaction";
 	private ReleasePersistence _persistence;
 }

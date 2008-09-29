@@ -38,7 +38,8 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (BookmarksFolderPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (BookmarksFolderPersistence)PortalBeanLocatorUtil.locate(BookmarksFolderPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -162,7 +163,5 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		return bookmarksFolder;
 	}
 
-	private static final String _TX_IMPL = BookmarksFolderPersistence.class.getName() +
-		".transaction";
 	private BookmarksFolderPersistence _persistence;
 }

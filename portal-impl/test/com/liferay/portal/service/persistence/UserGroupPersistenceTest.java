@@ -37,7 +37,8 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (UserGroupPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (UserGroupPersistence)PortalBeanLocatorUtil.locate(UserGroupPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -140,7 +141,5 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		return userGroup;
 	}
 
-	private static final String _TX_IMPL = UserGroupPersistence.class.getName() +
-		".transaction";
 	private UserGroupPersistence _persistence;
 }

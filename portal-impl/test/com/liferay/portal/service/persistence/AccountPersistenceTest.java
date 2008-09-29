@@ -37,7 +37,8 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AccountPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (AccountPersistence)PortalBeanLocatorUtil.locate(AccountPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -172,7 +173,5 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 		return account;
 	}
 
-	private static final String _TX_IMPL = AccountPersistence.class.getName() +
-		".transaction";
 	private AccountPersistence _persistence;
 }

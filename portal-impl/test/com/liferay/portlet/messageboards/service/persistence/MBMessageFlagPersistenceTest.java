@@ -38,7 +38,8 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -137,7 +138,5 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		return mbMessageFlag;
 	}
 
-	private static final String _TX_IMPL = MBMessageFlagPersistence.class.getName() +
-		".transaction";
 	private MBMessageFlagPersistence _persistence;
 }

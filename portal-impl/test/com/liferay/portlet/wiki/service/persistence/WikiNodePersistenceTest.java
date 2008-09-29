@@ -38,7 +38,8 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -159,7 +160,5 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		return wikiNode;
 	}
 
-	private static final String _TX_IMPL = WikiNodePersistence.class.getName() +
-		".transaction";
 	private WikiNodePersistence _persistence;
 }

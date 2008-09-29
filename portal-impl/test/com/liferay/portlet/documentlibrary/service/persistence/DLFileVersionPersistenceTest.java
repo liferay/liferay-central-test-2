@@ -38,7 +38,8 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (DLFileVersionPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (DLFileVersionPersistence)PortalBeanLocatorUtil.locate(DLFileVersionPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -156,7 +157,5 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		return dlFileVersion;
 	}
 
-	private static final String _TX_IMPL = DLFileVersionPersistence.class.getName() +
-		".transaction";
 	private DLFileVersionPersistence _persistence;
 }

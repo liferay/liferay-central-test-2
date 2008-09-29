@@ -38,7 +38,8 @@ public class PollsChoicePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PollsChoicePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (PollsChoicePersistence)PortalBeanLocatorUtil.locate(PollsChoicePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -140,7 +141,5 @@ public class PollsChoicePersistenceTest extends BasePersistenceTestCase {
 		return pollsChoice;
 	}
 
-	private static final String _TX_IMPL = PollsChoicePersistence.class.getName() +
-		".transaction";
 	private PollsChoicePersistence _persistence;
 }

@@ -37,7 +37,8 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (OrgLaborPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (OrgLaborPersistence)PortalBeanLocatorUtil.locate(OrgLaborPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -174,7 +175,5 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		return orgLabor;
 	}
 
-	private static final String _TX_IMPL = OrgLaborPersistence.class.getName() +
-		".transaction";
 	private OrgLaborPersistence _persistence;
 }

@@ -38,7 +38,8 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(TagsEntryPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -157,7 +158,5 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 		return tagsEntry;
 	}
 
-	private static final String _TX_IMPL = TagsEntryPersistence.class.getName() +
-		".transaction";
 	private TagsEntryPersistence _persistence;
 }

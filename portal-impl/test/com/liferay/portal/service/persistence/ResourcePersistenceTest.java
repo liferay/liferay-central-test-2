@@ -37,7 +37,8 @@ public class ResourcePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -131,7 +132,5 @@ public class ResourcePersistenceTest extends BasePersistenceTestCase {
 		return resource;
 	}
 
-	private static final String _TX_IMPL = ResourcePersistence.class.getName() +
-		".transaction";
 	private ResourcePersistence _persistence;
 }

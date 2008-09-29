@@ -38,7 +38,8 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(WikiPageResourcePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -134,7 +135,5 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 		return wikiPageResource;
 	}
 
-	private static final String _TX_IMPL = WikiPageResourcePersistence.class.getName() +
-		".transaction";
 	private WikiPageResourcePersistence _persistence;
 }

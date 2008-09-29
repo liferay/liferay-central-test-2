@@ -37,7 +37,8 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(PortletPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -136,7 +137,5 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		return portlet;
 	}
 
-	private static final String _TX_IMPL = PortletPersistence.class.getName() +
-		".transaction";
 	private PortletPersistence _persistence;
 }

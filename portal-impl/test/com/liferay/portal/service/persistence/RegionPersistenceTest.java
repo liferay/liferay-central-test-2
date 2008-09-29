@@ -37,7 +37,8 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (RegionPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (RegionPersistence)PortalBeanLocatorUtil.locate(RegionPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -136,7 +137,5 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 		return region;
 	}
 
-	private static final String _TX_IMPL = RegionPersistence.class.getName() +
-		".transaction";
 	private RegionPersistence _persistence;
 }

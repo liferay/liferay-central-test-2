@@ -37,7 +37,8 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ContactPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ContactPersistence)PortalBeanLocatorUtil.locate(ContactPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -216,7 +217,5 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		return contact;
 	}
 
-	private static final String _TX_IMPL = ContactPersistence.class.getName() +
-		".transaction";
 	private ContactPersistence _persistence;
 }

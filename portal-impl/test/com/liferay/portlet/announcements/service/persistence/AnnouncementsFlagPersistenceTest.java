@@ -38,7 +38,8 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -143,7 +144,5 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		return announcementsFlag;
 	}
 
-	private static final String _TX_IMPL = AnnouncementsFlagPersistence.class.getName() +
-		".transaction";
 	private AnnouncementsFlagPersistence _persistence;
 }

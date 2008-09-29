@@ -38,7 +38,8 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -163,7 +164,5 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		return dlFolder;
 	}
 
-	private static final String _TX_IMPL = DLFolderPersistence.class.getName() +
-		".transaction";
 	private DLFolderPersistence _persistence;
 }

@@ -37,7 +37,8 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(UserTrackerPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -152,7 +153,5 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		return userTracker;
 	}
 
-	private static final String _TX_IMPL = UserTrackerPersistence.class.getName() +
-		".transaction";
 	private UserTrackerPersistence _persistence;
 }

@@ -38,7 +38,8 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -143,7 +144,5 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		return scLicense;
 	}
 
-	private static final String _TX_IMPL = SCLicensePersistence.class.getName() +
-		".transaction";
 	private SCLicensePersistence _persistence;
 }

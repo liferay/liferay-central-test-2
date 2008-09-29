@@ -37,7 +37,8 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (RolePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (RolePersistence)PortalBeanLocatorUtil.locate(RolePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -145,7 +146,5 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		return role;
 	}
 
-	private static final String _TX_IMPL = RolePersistence.class.getName() +
-		".transaction";
 	private RolePersistence _persistence;
 }

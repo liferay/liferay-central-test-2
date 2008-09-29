@@ -37,7 +37,8 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ServiceComponentPersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ServiceComponentPersistence)PortalBeanLocatorUtil.locate(ServiceComponentPersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -141,7 +142,5 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		return serviceComponent;
 	}
 
-	private static final String _TX_IMPL = ServiceComponentPersistence.class.getName() +
-		".transaction";
 	private ServiceComponentPersistence _persistence;
 }

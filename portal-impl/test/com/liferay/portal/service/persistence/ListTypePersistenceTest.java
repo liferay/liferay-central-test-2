@@ -37,7 +37,8 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName() +
+				".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -131,7 +132,5 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		return listType;
 	}
 
-	private static final String _TX_IMPL = ListTypePersistence.class.getName() +
-		".transaction";
 	private ListTypePersistence _persistence;
 }
