@@ -25,9 +25,8 @@ package com.liferay.portlet.expando.model;
 import java.util.Enumeration;
 import java.util.Map;
 
-
 /**
- * <a href="ExpandoBrige.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoBridge.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *

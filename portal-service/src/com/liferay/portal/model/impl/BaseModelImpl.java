@@ -52,9 +52,7 @@ public abstract class BaseModelImpl implements BaseModel {
 		_escapedModel = escapedModel;
 	}
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException {
-
+	public ExpandoBridge getExpandoBridge() {
 		throw new UnsupportedOperationException();
 	}
 

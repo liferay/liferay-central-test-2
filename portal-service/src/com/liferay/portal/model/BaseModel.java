@@ -42,10 +42,9 @@ public interface BaseModel extends Cloneable, Comparable, Serializable {
 
 	public void setEscapedModel(boolean escapedModel);
 
-	public ExpandoBridge getExpandoBridge()
-		throws UnsupportedOperationException;
-
 	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
 
 	public Object clone();
 

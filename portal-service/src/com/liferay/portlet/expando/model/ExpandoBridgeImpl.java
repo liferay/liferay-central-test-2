@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * <a href="ExpandoBridgeImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -168,6 +167,14 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
+	public String getClassName() {
+		return _className;
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
 	public void setAttribute(String name, Object value) {
 		try {
 			ExpandoValueLocalServiceUtil.addValue(
@@ -194,16 +201,8 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public String getClassName() {
-		return _className;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
-	}
-
-	public long getClassPK() {
-		return _classPK;
 	}
 
 	public void setClassPK(long classPK) {

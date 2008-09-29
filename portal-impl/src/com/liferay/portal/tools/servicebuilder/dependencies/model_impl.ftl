@@ -15,7 +15,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
-<#if entity.hasPrimitivePK() && entity.PKClassName == "long" && (!stringUtil.startsWith(entity.name, "Expando"))>
+<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 	import com.liferay.portlet.expando.model.ExpandoBridge;
 	import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 </#if>
@@ -287,8 +287,8 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		}
 	}
 
-	<#if entity.hasPrimitivePK() && entity.PKClassName == "long" && (!stringUtil.startsWith(entity.name, "Expando"))>
-		public ExpandoBridge getExpandoBridge() throws UnsupportedOperationException {
+	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
+		public ExpandoBridge getExpandoBridge() {
 			if (_expandoBridge == null) {
 				_expandoBridge = new ExpandoBridgeImpl(${entity.name}.class.getName(), getPrimaryKey());
 			}
@@ -430,7 +430,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		private ${column.type} _${column.name};
 	</#list>
 
-	<#if entity.hasPrimitivePK() && entity.PKClassName == "long" && (!stringUtil.startsWith(entity.name, "Expando"))>
+	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 		private ExpandoBridge _expandoBridge;
 	</#if>
 
