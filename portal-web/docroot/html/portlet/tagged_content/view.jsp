@@ -38,7 +38,7 @@ if (mergeUrlTags) {
 		titleEntry = compilerEntries[compilerEntries.length - 1];
 	}
 
-	String portletTitle = portletDisplay.getTitle();
+	String portletTitle = HtmlUtil.unescape(portletDisplay.getTitle());
 
 	portletTitle = TagsUtil.substitutePropertyVariables(company.getCompanyId(), titleEntry, portletTitle);
 
