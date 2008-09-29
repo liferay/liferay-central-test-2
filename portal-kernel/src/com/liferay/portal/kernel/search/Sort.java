@@ -86,8 +86,16 @@ public class Sort {
 	}
 
 	public String toString() {
-		return "{fieldName=" + _fieldName + ", type=" + _type + ", reverse=" +
-			_reverse + "}";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{fieldName=");
+		sb.append(_fieldName);
+		sb.append(", type=");
+		sb.append(_type);
+		sb.append(", reverse=");
+		sb.append(_reverse + "}");
+
+		return sb.toString();
 	}
 
 	private String _fieldName;
