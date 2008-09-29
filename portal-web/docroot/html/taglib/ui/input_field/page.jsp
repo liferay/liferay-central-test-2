@@ -213,27 +213,23 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			String value = null;
 
 			if (fieldParam == null) {
-				fieldParam = namespace + field;
-
-				if (type.equals("double")) {
-					value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
-				}
-				else if (type.equals("int")) {
-					value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
-				}
-				else {
-					value = BeanParamUtil.getString(bean, request, field, defaultString);
-
-					String httpValue = request.getParameter(field);
-
-					if (httpValue != null) {
-						value = httpValue;
-					}
-				}
+				fieldParam = field;
+			}
+				
+			if (type.equals("double")) {
+				value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
+			}
+			else if (type.equals("int")) {
+				value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
 			}
 			else {
-				fieldParam = namespace + fieldParam;
-				value = defaultString;
+				value = BeanParamUtil.getString(bean, request, field, defaultString);
+
+				String httpValue = request.getParameter(fieldParam);
+
+				if (httpValue != null) {
+					value = httpValue;
+				}
 			}
 
 			boolean autoEscape = true;
@@ -272,6 +268,8 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 							value = value.substring(0, maxLengthInt);
 						}
 					}
+
+					fieldParam = namespace + fieldParam;
 					%>
 
 					<input <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);">
