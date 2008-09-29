@@ -81,7 +81,7 @@
 		<render-weight>1</render-weight>
 		<header-portlet-css>/html/portlet/calendar/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-calendar</css-class-wrapper>
-</portlet>
+	</portlet>
 	<portlet>
 		<portlet-name>9</portlet-name>
 		<icon>/html/portlet/admin/icon.png</icon>
@@ -519,6 +519,7 @@
 		<render-weight>1</render-weight>
 		<css-class-wrapper>portlet-login</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
+		<system>true</system>
 	</portlet>
 	<portlet>
 		<portlet-name>59</portlet-name>
