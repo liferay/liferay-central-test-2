@@ -49,18 +49,6 @@
 		<property name="service" ref="com.liferay.portal.service.CompanyService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.CompanyService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_ConfiguredProducerService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerService.impl" />
-		<property name="serviceInterface" value="com.liferay.portal.service.ConfiguredProducerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_ConfiguredProducerService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerService.impl" />
-		<property name="serviceInterface" value="com.liferay.portal.service.ConfiguredProducerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_ConfiguredProducerService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerService.impl" />
-		<property name="serviceInterface" value="com.liferay.portal.service.ConfiguredProducerService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_ContactService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.ContactService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.ContactService" />

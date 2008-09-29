@@ -65,27 +65,6 @@
 		<property name="mx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="logoId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.ConfiguredProducerImpl" table="ConfiguredProducer">
-		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.ConfiguredProducerPK">
-			<key-property name="portalId" />
-			<key-property name="configuredProducerId" />
-		</composite-id>
-		<property name="configuredProducerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="namespace" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="producerURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="producerVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="producerMarkupEndpoint" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="producerStatus" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="registrationData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="registrationContext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="serviceDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="userCategoryMapping" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="customUserProfile" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="sdLastModified" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="identityPropagationType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="entityVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-	</class>
 	<class name="com.liferay.portal.model.impl.ContactImpl" table="Contact_">
 		<cache usage="read-write" />
 		<id name="contactId" type="long">

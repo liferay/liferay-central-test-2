@@ -97,30 +97,6 @@
 	<bean id="com.liferay.portal.service.persistence.CompanyUtil" class="com.liferay.portal.service.persistence.CompanyUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.CompanyPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.ConfiguredProducerLocalService.impl" class="com.liferay.portal.service.impl.ConfiguredProducerLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.ConfiguredProducerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portal.service.ConfiguredProducerLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.ConfiguredProducerLocalServiceFactory" class="com.liferay.portal.service.ConfiguredProducerLocalServiceFactory">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.ConfiguredProducerLocalServiceUtil" class="com.liferay.portal.service.ConfiguredProducerLocalServiceUtil">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.ConfiguredProducerService.impl" class="com.liferay.portal.service.impl.ConfiguredProducerServiceImpl" />
-	<bean id="com.liferay.portal.service.ConfiguredProducerService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portal.service.ConfiguredProducerService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.ConfiguredProducerServiceFactory" class="com.liferay.portal.service.ConfiguredProducerServiceFactory">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.ConfiguredProducerServiceUtil" class="com.liferay.portal.service.ConfiguredProducerServiceUtil">
-		<property name="service" ref="com.liferay.portal.service.ConfiguredProducerService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ConfiguredProducerPersistence.impl" class="com.liferay.portal.service.persistence.ConfiguredProducerPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.persistence.ConfiguredProducerUtil" class="com.liferay.portal.service.persistence.ConfiguredProducerUtil">
-		<property name="persistence" ref="com.liferay.portal.service.persistence.ConfiguredProducerPersistence.impl" />
-	</bean>
 	<bean id="com.liferay.portal.service.ContactLocalService.impl" class="com.liferay.portal.service.impl.ContactLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ContactLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.ContactLocalService.impl" />

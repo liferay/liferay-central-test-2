@@ -186,26 +186,6 @@ create table Company (
 	logoId LONG
 );
 
-create table ConfiguredProducer (
-	portalId VARCHAR(75) not null,
-	configuredProducerId VARCHAR(75) not null,
-	configuredProducerName VARCHAR(75) null,
-	namespace VARCHAR(75) null,
-	producerURL VARCHAR(256) null,
-	producerVersion VARCHAR(75) null,
-	producerMarkupEndpoint VARCHAR(256) null,
-	producerStatus INTEGER,
-	registrationData TEXT null,
-	registrationContext TEXT null,
-	serviceDescription TEXT null,
-	userCategoryMapping TEXT null,
-	customUserProfile TEXT null,
-	sdLastModified LONG,
-	identityPropagationType VARCHAR(75) null,
-	entityVersion INTEGER,
-	primary key (portalId, configuredProducerId)
-);
-
 create table Contact_ (
 	contactId LONG not null primary key,
 	companyId LONG,
