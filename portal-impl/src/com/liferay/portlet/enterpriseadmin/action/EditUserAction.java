@@ -35,6 +35,7 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -42,11 +43,13 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -75,6 +78,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditUserAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  *
  */
 public class EditUserAction extends PortletAction {
@@ -170,7 +174,8 @@ public class EditUserAction extends PortletAction {
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
 					 e instanceof UserScreenNameException ||
-					 e instanceof UserSmsException) {
+					 e instanceof UserSmsException ||
+					 e instanceof WebsiteURLException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
@@ -286,6 +291,7 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
+		String websiteIds = ParamUtil.getString(actionRequest,"websiteIds");
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
@@ -309,6 +315,9 @@ public class EditUserAction extends PortletAction {
 			// Update user
 
 			user = PortalUtil.getSelectedUser(actionRequest);
+			Contact contact = user.getContact();
+			long classPK = contact.getContactId();
+			String className = Contact.class.getName();
 
 			String oldPassword = AdminUtil.getUpdateUserPassword(
 				actionRequest, user.getUserId());
@@ -351,6 +360,14 @@ public class EditUserAction extends PortletAction {
 				oldScreenName = tempOldScreenName;
 			}
 
+			// Websites
+
+			String[] websites = websiteIds.split(",");
+
+			for(String id : websites){
+				updateWebsite(actionRequest, id, className, classPK);
+			}
+
 			if (user.getUserId() == themeDisplay.getUserId()) {
 
 				// Reset the locale
@@ -380,5 +397,25 @@ public class EditUserAction extends PortletAction {
 
 		return new Object[] {user, oldScreenName};
 	}
+
+	  protected static void updateWebsite(
+		  	ActionRequest actionRequest, String id, String className,
+			long classPK)
+		  throws Exception {
+
+		  long websiteId = ParamUtil.getLong(actionRequest, "websiteId"+id);
+		  String url = ParamUtil.getString(actionRequest, "url"+id);
+		  int typeId = ParamUtil.getInteger(actionRequest, "typeId"+id);
+		  boolean primary = ParamUtil.getBoolean(actionRequest, "primary"+id);
+
+		  if (websiteId <= 0) {
+			  WebsiteServiceUtil.addWebsite(
+				  className, classPK, url, typeId, primary);
+		  }
+		  else {
+			  WebsiteServiceUtil.updateWebsite(websiteId, url, typeId, primary);
+		  }
+
+	  }
 
 }

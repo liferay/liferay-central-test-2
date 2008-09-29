@@ -25,8 +25,6 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String exportProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 List manageableOrganizations = null;
@@ -61,10 +59,16 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 <input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
+<%
+String toolbarItem = "view-users";
+%>
+
+<%@ include file="/html/portlet/enterprise_admin/user/toolbar.jspf" %>
+
 <liferay-ui:search-form
 	page="/html/portlet/enterprise_admin/user_search.jsp"
 	searchContainer="<%= searchContainer %>"
-	showAddButton="<%= true %>"
+	showAddButton="<%= false %>"
 />
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

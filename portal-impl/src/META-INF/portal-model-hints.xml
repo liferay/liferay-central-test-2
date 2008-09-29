@@ -501,7 +501,7 @@
 		<field name="emailAddress" type="String" />
 		<field name="openId" type="String">
 			<hint name="max-length">1024</hint>
-			<hint name="display-width">512</hint>
+			<hint name="display-width">400</hint>
 		</field>
 		<field name="portraitId" type="long" />
 		<field name="languageId" type="String" />
@@ -509,6 +509,7 @@
 		<field name="greeting" type="String" />
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
+			<hint name="display-width">400</hint>
 		</field>
 		<field name="loginDate" type="Date" />
 		<field name="loginIP" type="String" />
@@ -588,6 +589,7 @@
 		<field name="classPK" type="long" />
 		<field name="url" type="String">
 			<hint-collection name="URL" />
+			<hint name="display-width">150</hint>
 		</field>
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
