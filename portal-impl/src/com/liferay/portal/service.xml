@@ -153,6 +153,36 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="ConfiguredProducer" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="portalId" type="String" primary="true" />
+		<column name="configuredProducerId" type="String" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="configuredProducerName" type="String" />
+		<column name="namespace" type="String" />
+		<column name="producerURL" type="String" />
+		<column name="producerVersion" type="String" />
+		<column name="producerMarkupEndpoint" type="String" />
+		<column name="producerStatus" type="int" />
+		<column name="registrationData" type="String" />
+		<column name="registrationContext" type="String" />
+		<column name="serviceDescription" type="String" />
+		<column name="userCategoryMapping" type="String" />
+		<column name="customUserProfile" type="String" />
+		<column name="sdLastModified" type="long" />
+		<column name="identityPropagationType" type="String" />
+		<column name="entityVersion" type="int" />        
+
+		<finder name="P_N" return-type="Collection">
+			<finder-column name="portalId" />
+			<finder-column name="namespace" />
+		</finder>
+
+	</entity>
 	<entity name="Contact" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

@@ -54,6 +54,8 @@ create index IX_12566EC2 on Company (mx);
 create index IX_975996C0 on Company (virtualHost);
 create index IX_EC00543C on Company (webId);
 
+create index IX_57934D7A on ConfiguredProducer (portalId, namespace);
+
 create index IX_66D496A3 on Contact_ (companyId);
 
 create index IX_717B97E1 on Country (a2);

@@ -82,6 +82,38 @@
 		<field name="mx" type="String" />
 		<field name="logoId" type="long" />
 	</model>
+	<model name="com.liferay.portal.model.ConfiguredProducer">
+		<field name="portalId" type="String" />
+		<field name="configuredProducerId" type="String" />
+		<field name="configuredProducerName" type="String" />
+		<field name="namespace" type="String" />
+		<field name="producerURL" type="String">
+			<hint name="max-length">256</hint>
+		</field>
+		<field name="producerVersion" type="String" />
+		<field name="producerMarkupEndpoint" type="String">
+			<hint name="max-length">256</hint>
+		</field>
+		<field name="producerStatus" type="int" />
+		<field name="registrationData" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="registrationContext" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="serviceDescription" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="userCategoryMapping" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="customUserProfile" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="sdLastModified" type="long" />
+		<field name="identityPropagationType" type="String" />
+		<field name="entityVersion" type="int" />
+	</model>
 	<model name="com.liferay.portal.model.Contact">
 		<default-hints>
 			<hint name="display-width">150</hint>

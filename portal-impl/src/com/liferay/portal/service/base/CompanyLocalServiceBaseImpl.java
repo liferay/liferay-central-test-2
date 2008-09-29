@@ -37,6 +37,8 @@ import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameService;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.ConfiguredProducerLocalService;
+import com.liferay.portal.service.ConfiguredProducerService;
 import com.liferay.portal.service.ContactLocalService;
 import com.liferay.portal.service.ContactService;
 import com.liferay.portal.service.CountryService;
@@ -100,6 +102,7 @@ import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.ConfiguredProducerPersistence;
 import com.liferay.portal.service.persistence.ContactPersistence;
 import com.liferay.portal.service.persistence.CountryPersistence;
 import com.liferay.portal.service.persistence.EmailAddressPersistence;
@@ -304,6 +307,33 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
+	}
+
+	public ConfiguredProducerLocalService getConfiguredProducerLocalService() {
+		return configuredProducerLocalService;
+	}
+
+	public void setConfiguredProducerLocalService(
+		ConfiguredProducerLocalService configuredProducerLocalService) {
+		this.configuredProducerLocalService = configuredProducerLocalService;
+	}
+
+	public ConfiguredProducerService getConfiguredProducerService() {
+		return configuredProducerService;
+	}
+
+	public void setConfiguredProducerService(
+		ConfiguredProducerService configuredProducerService) {
+		this.configuredProducerService = configuredProducerService;
+	}
+
+	public ConfiguredProducerPersistence getConfiguredProducerPersistence() {
+		return configuredProducerPersistence;
+	}
+
+	public void setConfiguredProducerPersistence(
+		ConfiguredProducerPersistence configuredProducerPersistence) {
+		this.configuredProducerPersistence = configuredProducerPersistence;
 	}
 
 	public ContactLocalService getContactLocalService() {
@@ -1264,6 +1294,12 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	protected CompanyService companyService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
 	protected CompanyPersistence companyPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ConfiguredProducerLocalService.impl")
+	protected ConfiguredProducerLocalService configuredProducerLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ConfiguredProducerService.impl")
+	protected ConfiguredProducerService configuredProducerService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ConfiguredProducerPersistence.impl")
+	protected ConfiguredProducerPersistence configuredProducerPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.ContactLocalService.impl")
 	protected ContactLocalService contactLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.ContactService.impl")
