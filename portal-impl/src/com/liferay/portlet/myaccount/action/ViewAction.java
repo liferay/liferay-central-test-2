@@ -54,27 +54,22 @@ public class ViewAction extends PortletAction {
 		if (renderRequest.getRemoteUser() == null) {
 			return mapping.findForward("portlet.my_account.view");
 		}
-		else {
-			if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
 
-				User user = PortalUtil.getUser(renderRequest);
-
-				RenderRequestImpl renderRequestImpl =
-					(RenderRequestImpl)renderRequest;
-
-				DynamicServletRequest dynamicRequest =
-					(DynamicServletRequest)renderRequestImpl.
-						getHttpServletRequest();
-
-				dynamicRequest.setParameter(
-					"p_u_i_d", String.valueOf(user.getUserId()));
-
-				return mapping.findForward("portlet.my_account.edit_user");
-			}
-			else {
-				return mapping.findForward("portlet.my_account.view");
-			}
+		if (!renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+			return mapping.findForward("portlet.my_account.view");
 		}
+
+		User user = PortalUtil.getUser(renderRequest);
+
+		RenderRequestImpl renderRequestImpl = (RenderRequestImpl)renderRequest;
+
+		DynamicServletRequest dynamicRequest =
+			(DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
+
+		dynamicRequest.setParameter(
+			"p_u_i_d", String.valueOf(user.getUserId()));
+
+		return mapping.findForward("portlet.my_account.edit_user");
 	}
 
 }
