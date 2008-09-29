@@ -22,7 +22,11 @@
 
 package com.liferay.portlet.myaccount.action;
 
+import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.util.servlet.DynamicServletRequest;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
@@ -37,6 +41,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class ViewAction extends PortletAction {
@@ -51,6 +56,19 @@ public class ViewAction extends PortletAction {
 		}
 		else {
 			if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+
+				User user = PortalUtil.getUser(renderRequest);
+
+				RenderRequestImpl renderRequestImpl =
+					(RenderRequestImpl)renderRequest;
+
+				DynamicServletRequest dynamicRequest =
+					(DynamicServletRequest)renderRequestImpl.
+						getHttpServletRequest();
+
+				dynamicRequest.setParameter(
+					"p_u_i_d", String.valueOf(user.getUserId()));
+
 				return mapping.findForward("portlet.my_account.edit_user");
 			}
 			else {

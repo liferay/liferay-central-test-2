@@ -39,6 +39,9 @@
 		if (category.equals(PortletCategoryKeys.CONTENT)) {
 			panelCategory = "panel-manage-content";
 		}
+		else if (category.equals(PortletCategoryKeys.MY)) {
+			panelCategory = "panel-manage-my";
+		}
 		else if (category.equals(PortletCategoryKeys.PORTAL)) {
 			panelCategory = "panel-manage-portal";
 		}
@@ -91,5 +94,5 @@
 </div>
 
 <%!
-private static final String[] _PORTLET_CATEGORIES = new String[] {PortletCategoryKeys.CONTENT, PortletCategoryKeys.PORTAL, PortletCategoryKeys.SERVER};
+private static final String[] _PORTLET_CATEGORIES = new String[] {PortletCategoryKeys.MY, PortletCategoryKeys.CONTENT, PortletCategoryKeys.PORTAL, PortletCategoryKeys.SERVER};
 %>

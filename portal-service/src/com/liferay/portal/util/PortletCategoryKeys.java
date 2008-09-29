@@ -32,6 +32,8 @@ public class PortletCategoryKeys {
 
 	public static final String CONTENT = "category.content";
 
+	public static final String MY = "category.my";
+
 	public static final String PORTAL = "category.portal";
 
 	public static final String SERVER = "category.server";

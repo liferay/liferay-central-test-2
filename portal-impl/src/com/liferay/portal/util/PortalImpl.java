@@ -613,6 +613,12 @@ public class PortalImpl implements Portal {
 			category = PortletCategoryKeys.CONTENT;
 		}
 		else if (ArrayUtil.contains(
+					PropsValues.CONTROL_PANEL_CATEGORY_MY_PORTLETS,
+					portletId)) {
+
+			category = PortletCategoryKeys.MY;
+		}
+		else if (ArrayUtil.contains(
 					PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
 					portletId)) {
 
@@ -633,6 +639,9 @@ public class PortalImpl implements Portal {
 
 		if (category.equals(PortletCategoryKeys.CONTENT)) {
 			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS;
+		}
+		else if (category.equals(PortletCategoryKeys.MY)) {
+			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_MY_PORTLETS;
 		}
 		else if (category.equals(PortletCategoryKeys.PORTAL)) {
 			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS;

@@ -1192,6 +1192,7 @@
 		<action path="/my_account/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
 		<action path="/my_account/view" type="com.liferay.portlet.myaccount.action.ViewAction">
+			<forward name="portlet.my_account.edit_user" path="portlet.my_account.edit_user" />
 			<forward name="portlet.my_account.view" path="portlet.my_account.view" />
 		</action>
 

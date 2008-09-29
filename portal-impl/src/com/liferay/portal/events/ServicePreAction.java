@@ -1464,8 +1464,14 @@ public class ServicePreAction extends Action {
 			String myAccountRedirect = ParamUtil.getString(
 				request, myAccountNamespace + "backURL", currentURL);
 
+			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupConstants.CONTROL_PANEL);
+
+			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+				controlPanelGroup.getGroupId(), true);
+
 			PortletURL myAccountURL = new PortletURLImpl(
-				request, PortletKeys.MY_ACCOUNT, plid,
+				request, PortletKeys.MY_ACCOUNT, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
 
 			myAccountURL.setWindowState(WindowState.MAXIMIZED);
