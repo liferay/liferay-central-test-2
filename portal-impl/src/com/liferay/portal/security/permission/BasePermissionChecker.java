@@ -42,6 +42,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class BasePermissionChecker implements PermissionChecker {
 
+	public long getCompanyId() {
+		return user.getCompanyId();
+	}
+
 	public long getOwnerRoleId () {
 		return ownerRole.getRoleId();
 	}

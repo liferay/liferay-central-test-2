@@ -34,6 +34,8 @@ import javax.portlet.PortletRequest;
  */
 public interface PermissionChecker {
 
+	public long getCompanyId();
+
 	public long getOwnerRoleId();
 
 	public long getUserId();
