@@ -94,24 +94,28 @@ boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+<div>
+	<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+</div>
 
-<br /><br />
+<br />
 
-<c:if test="<%= company.isStrangers() %>">
-	<a href="<%= themeDisplay.getURLCreateAccount() %>"><liferay-ui:message key="create-account" /></a>
-</c:if>
+<div>
+	<c:if test="<%= company.isStrangers() %>">
+		<a href="<%= themeDisplay.getURLCreateAccount() %>"><liferay-ui:message key="create-account" /></a>
+	</c:if>
 
-<c:if test="<%= company.isSendPassword() %>">
-	&nbsp; | &nbsp;
-	<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
-		<portlet:param name="struts_action" value="/login/view" />
-		<portlet:param name="<%= Constants.CMD %>" value="forgot-password" />
-	</portlet:renderURL>
+	<c:if test="<%= company.isSendPassword() %>">
+		&nbsp;|&nbsp;
 
-	<a href="<%= forgotPasswordURL.toString() %>"><liferay-ui:message key="forgot-password" />?</a>
-</c:if>
+		<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
+			<portlet:param name="struts_action" value="/login/view" />
+			<portlet:param name="<%= Constants.CMD %>" value="forgot-password" />
+		</portlet:renderURL>
 
+		<a href="<%= forgotPasswordURL.toString() %>"><liferay-ui:message key="forgot-password" />?</a>
+	</c:if>
+</div>
 
 </form>
 
