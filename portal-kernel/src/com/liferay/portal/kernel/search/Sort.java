@@ -30,11 +30,34 @@ package com.liferay.portal.kernel.search;
  */
 public class Sort {
 
+	public static final int AUTO_TYPE = 2;
+
+	public static final int CUSTOM_TYPE = 9;
+
+	public static final int DOC_TYPE = 1;
+
+	public static final int DOUBLE_TYPE = 7;
+
+	public static final int FLOAT_TYPE = 5;
+
+	public static final int INT_TYPE = 4;
+
+	public static final int LONG_TYPE = 6;
+
+	public static final int SCORE_TYPE = 0;
+
+	public static final int STRING_TYPE = 3;
+
 	public Sort() {
 	}
 
 	public Sort(String fieldName, boolean reverse) {
+		this(fieldName, AUTO_TYPE, reverse);
+	}
+
+	public Sort(String fieldName, int type, boolean reverse) {
 		_fieldName = fieldName;
+		_type = type;
 		_reverse = reverse;
 	}
 
@@ -46,6 +69,14 @@ public class Sort {
 		_fieldName = fieldName;
 	}
 
+	public int getType() {
+		return _type;
+	}
+
+	public void setType(int type) {
+		_type = type;
+	}
+
 	public boolean isReverse() {
 		return _reverse;
 	}
@@ -55,10 +86,12 @@ public class Sort {
 	}
 
 	public String toString() {
-		return "{fieldName=" + _fieldName + ", reverse=" + _reverse + "}";
+		return "{fieldName=" + _fieldName + ", type=" + _type + ", reverse=" +
+			_reverse + "}";
 	}
 
 	private String _fieldName;
+	private int _type;
 	private boolean _reverse;
 
 }

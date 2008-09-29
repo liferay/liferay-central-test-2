@@ -83,7 +83,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					Sort sort = sorts[i];
 
 					sortFields[i] = new SortField(
-						sort.getFieldName(), sort.isReverse());
+						sort.getFieldName(), sort.getType(), sort.isReverse());
 				}
 
 				luceneSort = new org.apache.lucene.search.Sort(sortFields);
