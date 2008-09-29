@@ -54,11 +54,11 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL var="editURL">
+	<portlet:actionURL var="editURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:renderURL>
+	</portlet:actionURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
