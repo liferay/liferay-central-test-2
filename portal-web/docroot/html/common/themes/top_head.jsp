@@ -38,11 +38,28 @@
 <%
 List<Portlet> portlets = null;
 
-if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
-	portlets = layoutTypePortlet.getAllPortlets();
+if (layout != null) {
+	String type = layout.getType();
 
-	if (layoutTypePortlet.hasStateMaxPortletId(PortletKeys.PORTLET_CONFIGURATION)) {
-		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
+	if (type.equals(LayoutConstants.TYPE_PORTLET)) {
+		portlets = layoutTypePortlet.getAllPortlets();
+
+		if (layoutTypePortlet.hasStateMaxPortletId(PortletKeys.PORTLET_CONFIGURATION)) {
+			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
+		}
+	}
+	else if (type.equals(LayoutConstants.TYPE_CONTROL_PANEL) || type.equals(LayoutConstants.TYPE_PANEL)) {
+		portlets = new ArrayList<Portlet>();
+
+		String ppid = ParamUtil.getString(request, "p_p_id");
+
+		if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+			ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
+		}
+
+		if (Validator.isNotNull(ppid)) {
+			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
+		}
 	}
 }
 %>
