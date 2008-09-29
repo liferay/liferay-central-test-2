@@ -192,7 +192,9 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 	</c:if>
 
 	<c:if test="<%= hasButtons %>">
-		<br />
+		<div>
+			<br />
+		</div>
 	</c:if>
 
 	<%
