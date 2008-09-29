@@ -106,7 +106,7 @@ else {
 	function <portlet:namespace />saveUser(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 
-		document.<portlet:namespace />fm.<portlet:namespace />websiteIds.value = websiteIdsArray.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes.value = websitePostfixesArray.join(',');
 
 		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>";
 

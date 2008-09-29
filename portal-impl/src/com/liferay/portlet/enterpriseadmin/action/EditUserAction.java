@@ -47,6 +47,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
@@ -58,6 +59,9 @@ import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -291,7 +295,8 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		String websiteIds = ParamUtil.getString(actionRequest,"websiteIds");
+		String websitePostfixes = ParamUtil.getString(
+			actionRequest, "websitePostfixes");
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
@@ -362,11 +367,10 @@ public class EditUserAction extends PortletAction {
 
 			// Websites
 
-			String[] websites = websiteIds.split(",");
+			String[] websitePosfixesArray = websitePostfixes.split(",");
 
-			for(String id : websites){
-				updateWebsite(actionRequest, id, className, classPK);
-			}
+			updateWebsites(
+				actionRequest, websitePosfixesArray, classPK, className);
 
 			if (user.getUserId() == themeDisplay.getUserId()) {
 
@@ -398,24 +402,59 @@ public class EditUserAction extends PortletAction {
 		return new Object[] {user, oldScreenName};
 	}
 
-	  protected static void updateWebsite(
-		  	ActionRequest actionRequest, String id, String className,
-			long classPK)
-		  throws Exception {
+	private void updateWebsites(
+			ActionRequest actionRequest, String[] websitePosfixesArray,
+			long classPK, String className)
+		throws Exception {
 
-		  long websiteId = ParamUtil.getLong(actionRequest, "websiteId"+id);
-		  String url = ParamUtil.getString(actionRequest, "url"+id);
-		  int typeId = ParamUtil.getInteger(actionRequest, "typeId"+id);
-		  boolean primary = ParamUtil.getBoolean(actionRequest, "primary"+id);
+		List<Long> websiteIds = new ArrayList<Long>();
 
-		  if (websiteId <= 0) {
-			  WebsiteServiceUtil.addWebsite(
-				  className, classPK, url, typeId, primary);
-		  }
-		  else {
-			  WebsiteServiceUtil.updateWebsite(websiteId, url, typeId, primary);
-		  }
+		for (String websitePostfix : websitePosfixesArray) {
+			if (Validator.isNull(websitePostfix.trim())) {
+				continue;
+			}
 
+			long websiteId = updateWebsite(
+				actionRequest, websitePostfix, className, classPK);
+			websiteIds.add(websiteId);
+		}
+
+		List<Website> websites = WebsiteServiceUtil.getWebsites(
+			className, classPK);
+
+		for (Website website : websites) {
+			if (!websiteIds.contains(website.getWebsiteId())) {
+				WebsiteServiceUtil.deleteWebsite(website.getWebsiteId());
+			}
+		}
+	}
+
+	protected static long updateWebsite(
+			ActionRequest actionRequest, String websitePostfix,
+			String className,long classPK)
+		throws Exception {
+
+		long websiteId = ParamUtil.getLong(
+			actionRequest, "websiteId" + websitePostfix);
+		String url = ParamUtil.getString(
+			actionRequest, "url" + websitePostfix);
+		int typeId = ParamUtil.getInteger(
+			actionRequest, "typeId" + websitePostfix);
+		boolean primary = ParamUtil.getBoolean(
+			actionRequest, "primary" + websitePostfix);
+
+		Website website = null;
+
+		if (websiteId <= 0) {
+			website = WebsiteServiceUtil.addWebsite(
+				className, classPK, url, typeId, primary);
+		}
+		else {
+			website = WebsiteServiceUtil.updateWebsite(
+				websiteId, url, typeId, primary);
+		}
+
+		return website.getWebsiteId();
 	  }
 
 }

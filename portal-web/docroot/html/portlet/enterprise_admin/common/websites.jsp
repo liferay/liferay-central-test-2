@@ -29,20 +29,20 @@ List<Website> websites = (List<Website>)request.getAttribute("common.websites");
 %>
 
 <script type="text/javascript">
-	var websiteIdsArray = new Array();
+	var websitePostfixesArray = new Array();
 	var lastIndex;
 </script>
 
-<h3><liferay-ui:message key="websites"/></h3>
+<h3><liferay-ui:message key="websites" /></h3>
 
 <fieldset class="block-labels"  >
 
-	<input id="<portlet:namespace />websiteIds" name="<portlet:namespace />websiteIds" type="hidden" />
+	<input id="<portlet:namespace />websitePostfixes" name="<portlet:namespace />websitePostfixes" type="hidden" />
 
 	<%
 	String fieldParam = null;
 
-	for(int i=0;i<websites.size();i++){
+	for(int i=0; i < websites.size(); i++){
 		Website website = websites.get(i);
 		String id = ""+ ((i < 10) ? "0" + i : i);
 	%>
@@ -55,7 +55,7 @@ List<Website> websites = (List<Website>)request.getAttribute("common.websites");
 				%>
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="<%= website.getWebsiteId() %>" />
 				<script type="text/javascript">
-					websiteIdsArray.push('<%=id%>');
+					websitePostfixesArray.push('<%=id%>');
 					lastIndex = <%=i%>;
 				</script>
 
@@ -101,14 +101,14 @@ List<Website> websites = (List<Website>)request.getAttribute("common.websites");
 </fieldset>
 
 <script type="text/javascript">
-	websiteIdsArray = [];
+	websitePostfixesArray = [];
 
 	jQuery(
 		function () {
 			Liferay.Websites = new Liferay.autoFields2({
 				container: '#websites > fieldset',
 				baseRows: '.row-fields',
-				itemsArray: websiteIdsArray
+				itemsArray: websitePostfixesArray
 			});
 		}
 		);
