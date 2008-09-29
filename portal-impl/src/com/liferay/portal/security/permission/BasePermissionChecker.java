@@ -67,6 +67,14 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	public void init(User user, boolean checkGuest) {
 		this.user = user;
 
+		try {
+			this.ownerRole = RoleLocalServiceUtil.getRole(
+				user.getCompanyId(), RoleConstants.OWNER);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		if (user.isDefaultUser()) {
 			this.defaultUserId = user.getUserId();
 			this.signedIn = false;
@@ -75,9 +83,6 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 			try {
 				this.defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 					user.getCompanyId());
-
-				this.ownerRole = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleConstants.OWNER);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
