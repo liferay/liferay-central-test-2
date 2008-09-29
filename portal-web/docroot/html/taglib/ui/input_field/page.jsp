@@ -55,10 +55,14 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				}
 			}
 
+			if (fieldParam == null) {
+				fieldParam = field;
+			}
+
 			boolean value = BeanParamUtil.getBoolean(bean, request, field, defaultBoolean);
 			%>
 
-			<liferay-ui:input-checkbox formName="<%= formName %>" param="<%= field %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
+			<liferay-ui:input-checkbox formName="<%= formName %>" param="<%= fieldParam %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
 		</c:when>
 		<c:when test='<%= type.equals("Date") %>'>
 
