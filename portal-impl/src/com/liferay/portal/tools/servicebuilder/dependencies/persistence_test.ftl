@@ -13,7 +13,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(_TX_IMPL);
+		_persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName() + ".impl");
 	}
 
 	public void testCreate() throws Exception {
@@ -303,8 +303,6 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
 		return ${entity.varName};
 	}
-
-	private static final String _TX_IMPL = ${entity.name}Persistence.class.getName() + ".transaction";
 
 	private ${entity.name}Persistence _persistence;
 
