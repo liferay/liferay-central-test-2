@@ -22,8 +22,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.util.PropsValues;
-
 import com.sun.saw.Workflow;
 import com.sun.saw.WorkflowException;
 import com.sun.saw.WorkflowFactory;
@@ -82,7 +80,7 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 		else if (methodName.equals("approveArticle") ||
 				 methodName.equals("expireArticle")) {
 
-			_processWorkflowThroughSAW(methodName, arguments);
+			processWorkflow();
 
 			WorkflowInvoker workflowInvoker = new WorkflowInvoker(
 				proceedingJoinPoint);
@@ -139,28 +137,28 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 		}
 	}
 
-	private Workflow _getWorkflowImpl() throws WorkflowException {
-		Properties props = new Properties();
-		props.setProperty(
-			"sawworkflowimplclass", PropsValues.JOURNAL_WORKFLOW_IMPL);
+	protected Workflow getWorkflow() throws WorkflowException {
+		Properties properties = new Properties();
+
+		properties.setProperty(
+			"sawworkflowimplclass", "com.sun.saw.impls.osworkflow.OSWorkflow");
 
 		WorkflowFactory workflowFactory = WorkflowFactory.getInstance();
 
-		return workflowFactory.getWorkflowInstance(props);
+		return workflowFactory.getWorkflowInstance(properties);
 	}
 
-	private OutputVO _processWorkflowThroughSAW(
-		String methodName, Object[] args) {
-
+	protected OutputVO processWorkflow() {
 		OutputVO outputVO = null;
 
 		try {
+			Workflow workflow = getWorkflow();
+
 			SaveTaskVO saveTaskVO = new SaveTaskVO();
-			Workflow workflow = _getWorkflowImpl();
+
 			outputVO = workflow.saveTasks(saveTaskVO);
 		}
 		catch (WorkflowException we) {
-			//Do nothing
 		}
 
 		return outputVO;
