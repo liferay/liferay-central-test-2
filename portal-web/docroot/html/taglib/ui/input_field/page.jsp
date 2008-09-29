@@ -219,7 +219,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			if (fieldParam == null) {
 				fieldParam = field;
 			}
-				
+
 			if (type.equals("double")) {
 				value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
 			}
