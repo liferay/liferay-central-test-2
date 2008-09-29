@@ -35,30 +35,30 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <script type="text/javascript">
 	var lengthArray = [
-		new Option(0, '<liferay-ui:message key='meter' />'),
-		new Option(1, '<liferay-ui:message key='millimeter' />'),
-		new Option(2, '<liferay-ui:message key='centimeter' />'),
-		new Option(3, '<liferay-ui:message key='kilometer' />'),
-		new Option(4, '<liferay-ui:message key='foot' />'),
-		new Option(5, '<liferay-ui:message key='inch' />'),
-		new Option(6, '<liferay-ui:message key='yard' />'),
-		new Option(7, '<liferay-ui:message key='mile' />'),
-		new Option(8, '<liferay-ui:message key='cubit' />'),
-		new Option(9, '<liferay-ui:message key='talent' />'),
-		new Option(10, '<liferay-ui:message key='handbreath' />')
+		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "meter") %>'),
+		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "millimeter") %>'),
+		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "centimeter") %>'),
+		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "kilometer") %>'),
+		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "foot") %>'),
+		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "inch") %>'),
+		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "yard") %>'),
+		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "mile") %>'),
+		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "cubit") %>'),
+		new Option(9, '<%= UnicodeLanguageUtil.get(pageContext, "talent") %>'),
+		new Option(10, '<%= UnicodeLanguageUtil.get(pageContext, "handbreath") %>')
 	];
 
 	var areaArray = [
-		new Option(0, '<liferay-ui:message key='square-kilometer' />'),
-		new Option(1, '<liferay-ui:message key='square-meter' />'),
-		new Option(2, '<liferay-ui:message key='square-centimeter' />'),
-		new Option(3, '<liferay-ui:message key='square-millimeter' />'),
-		new Option(4, '<liferay-ui:message key='square-foot' />'),
-		new Option(5, '<liferay-ui:message key='square-inch' />'),
-		new Option(6, '<liferay-ui:message key='square-yard' />'),
-		new Option(7, '<liferay-ui:message key='square-mile' />'),
-		new Option(8, '<liferay-ui:message key='hectare' />'),
-		new Option(9, '<liferay-ui:message key='acre' />')
+		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "square-kilometer") %>'),
+		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "square-meter") %>'),
+		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "square-centimeter") %>'),
+		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "square-millimeter") %>'),
+		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "square-foot") %>'),
+		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "square-inch") %>'),
+		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "square-yard") %>'),
+		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "square-mile") %>'),
+		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "hectare") %>'),
+		new Option(9, '<%= UnicodeLanguageUtil.get(pageContext, "acre") %>')
 	];
 
 	var volumeArray = [
@@ -78,15 +78,15 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	];
 
 	var massArray = [
-		new Option(0, '<liferay-ui:message key='kilogram' />'),
-		new Option(1, '<liferay-ui:message key='pound' />'),
-		new Option(2, '<liferay-ui:message key='ton' />'),
-		new Option(3, '<liferay-ui:message key='talent' />'),
-		new Option(4, '<liferay-ui:message key='mina' />'),
-		new Option(5, '<liferay-ui:message key='shekel' />'),
-		new Option(6, '<liferay-ui:message key='pim' />'),
-		new Option(7, '<liferay-ui:message key='beka' />'),
-		new Option(8, '<liferay-ui:message key='gerah' />')
+		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "kilogram") %>'),
+		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "pound") %>'),
+		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "ton") %>'),
+		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "talent") %>'),
+		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "mina") %>'),
+		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "shekel") %>'),
+		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "pim") %>'),
+		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "beka") %>'),
+		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "gerah") %>')
 	];
 
 	var temperatureArray = [

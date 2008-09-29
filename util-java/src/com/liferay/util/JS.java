@@ -24,6 +24,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeFormatter;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -110,10 +111,12 @@ public class JS {
 		sb.append(StringPool.OPEN_BRACKET);
 
 		for (int i = 0; i < array.length; i++) {
-			sb.append("'" + array[i] + "'");
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(UnicodeFormatter.toString(array[i]));
+			sb.append(StringPool.APOSTROPHE);
 
 			if (i + 1 < array.length) {
-				sb.append(",");
+				sb.append(StringPool.COMMA);
 			}
 		}
 

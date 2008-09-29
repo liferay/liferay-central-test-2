@@ -232,7 +232,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 						var validExtensions = new Array('<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, "', '") %>');
 
 						if (jQuery.inArray(extension, validExtensions) == -1) {
-							alert('<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>');
+							alert('<%= UnicodeLanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>');
 
 							jQuery(this).val("");
 						}

@@ -468,8 +468,8 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<c:if test="<%= !fieldsEditingDisabled %>">
 				var <portlet:namespace/>autoFields = new Liferay.autoFields(
 					{
-						addText: '<liferay-ui:message key="add-another-form-field" />',
-						removeText: '<liferay-ui:message key="remove-the-last-form-field" />',
+						addText: '<%= UnicodeLanguageUtil.get(pageContext, "add-another-form-field") %>',
+						removeText: '<%= UnicodeLanguageUtil.get(pageContext, "remove-the-last-form-field") %>',
 
 						html: '#<portlet:namespace />webFields fieldset:first',
 						container: '#<portlet:namespace />webFields',

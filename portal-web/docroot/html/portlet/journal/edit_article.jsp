@@ -532,13 +532,13 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			deleteState.value = "yes";
 			document.images[img].style.display = "none";
 			document.getElementById(file).disabled = true;
-			button.value = "<liferay-ui:message key="cancel" />";
+			button.value = "<%= UnicodeLanguageUtil.get(pageContext, "cancel") %>";
 		}
 		else {
 			deleteState.value = "no";
 			document.images[img].style.display = "block";
 			document.getElementById(file).disabled = false;
-			button.value = "<liferay-ui:message key="delete" />";
+			button.value = "<%= UnicodeLanguageUtil.get(pageContext, "delete") %>";
 		}
 	}
 </script>

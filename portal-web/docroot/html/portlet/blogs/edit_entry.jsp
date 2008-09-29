@@ -120,7 +120,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 						saveButton.attr('disabled', true);
 
 						saveStatus.attr('class', 'save-status portlet-msg-info pending');
-						saveStatus.html('<liferay-ui:message key="saving-draft" />');
+						saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "saving-draft") %>');
 					},
 					success: function(message) {
 						document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
@@ -148,7 +148,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 					},
 					error: function() {
 						saveStatus.attr('class', 'save-status portlet-msg-error');
-						saveStatus.html('<liferay-ui:message key="could-not-save-draft-to-the-server" />');
+						saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "could-not-save-draft-to-the-server") %>');
 					}
 				}
 			);

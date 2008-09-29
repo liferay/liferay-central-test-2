@@ -74,7 +74,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						<liferay-ui:message key="average" /> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)
 					</div>
 
-					<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= MathUtil.format(stats.getAverageScore(), 1, 1) %> <liferay-ui:message key="stars" />')">
+					<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= MathUtil.format(stats.getAverageScore(), 1, 1) %> <%= UnicodeLanguageUtil.get(pageContext, "stars") %>')">
 						<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 					</div>
 				</td>
@@ -102,7 +102,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 									success: function(message) {
 										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
 
-										var entriesHtml = (message.totalEntries == 1) ? '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="vote" />)' : '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="votes" />)';
+										var entriesHtml = (message.totalEntries == 1) ? '<%= UnicodeLanguageUtil.get(pageContext, "average") %> (' + message.totalEntries + ' <%= UnicodeLanguageUtil.get(pageContext, "vote") %>)' : '<%= UnicodeLanguageUtil.get(pageContext, "average") %> (' + message.totalEntries + ' <%= UnicodeLanguageUtil.get(pageContext, "votes") %>)';
 
 										totalEntries.html(entriesHtml);
 
@@ -199,10 +199,10 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 											}
 
 											if (message.totalEntries == 0) {
-												entriesHtml = '<span class="zero-total">(0 <liferay-ui:message key="votes" />)</span>';
+												entriesHtml = '<span class="zero-total">(0 <%= UnicodeLanguageUtil.get(pageContext, "votes") %>)</span>';
 											}
 											else {
-												entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <liferay-ui:message key="vote" />)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <liferay-ui:message key="votes" />)</span>';
+												entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <%= UnicodeLanguageUtil.get(pageContext, "vote") %>)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <%= UnicodeLanguageUtil.get(pageContext, "votes") %>)</span>';
 											}
 
 											totalRating.html(ratingHtml);

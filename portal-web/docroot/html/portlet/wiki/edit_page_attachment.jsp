@@ -112,7 +112,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 							var validExtensions = new Array("<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, "\", \"") %>");
 
 							if (jQuery.inArray(extension, validExtensions) == -1) {
-								alert('<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
+								alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
 
 								jQuery(this).val("");
 							}

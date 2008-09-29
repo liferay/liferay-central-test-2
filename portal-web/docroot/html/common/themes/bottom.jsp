@@ -28,22 +28,22 @@
 	<script type="text/javascript">
 		jQuery.datepicker.setDefaults(
 			{
-				clearText: '<liferay-ui:message key="clear" />',
-				clearStatus: '<liferay-ui:message key="erase-the-current-date" />',
-				closeText: '<liferay-ui:message key="close" />',
-				closeStatus: '<liferay-ui:message key="cancel" />',
-				prevText: '&#x3c;<liferay-ui:message key="previous" />',
-				prevStatus: '<liferay-ui:message key="previous" />',
-				nextText: '<liferay-ui:message key="next" />&#x3e;',
-				nextStatus: '<liferay-ui:message key="next" />',
-				currentText: '<liferay-ui:message key="today" />',
-				currentStatus: '<liferay-ui:message key="current-month" />',
+				clearText: '<%= UnicodeLanguageUtil.get(pageContext, "clear") %>',
+				clearStatus: '<%= UnicodeLanguageUtil.get(pageContext, "erase-the-current-date") %>',
+				closeText: '<%= UnicodeLanguageUtil.get(pageContext, "close") %>',
+				closeStatus: '<%= UnicodeLanguageUtil.get(pageContext, "cancel") %>',
+				prevText: '&#x3c;<%= UnicodeLanguageUtil.get(pageContext, "previous") %>',
+				prevStatus: '<%= UnicodeLanguageUtil.get(pageContext, "previous") %>',
+				nextText: '<%= UnicodeLanguageUtil.get(pageContext, "next") %>&#x3e;',
+				nextStatus: '<%= UnicodeLanguageUtil.get(pageContext, "next") %>',
+				currentText: '<%= UnicodeLanguageUtil.get(pageContext, "today") %>',
+				currentStatus: '<%= UnicodeLanguageUtil.get(pageContext, "current-month") %>',
 				monthNames: <%= JS.toScript(CalendarUtil.getMonths(locale)) %>,
 				monthNamesShort: <%= JS.toScript(CalendarUtil.getMonths(locale, "MMM")) %>,
-				monthStatus: '<liferay-ui:message key="show-a-different-month" />',
-				yearStatus: '<liferay-ui:message key="show-a-different-year" />',
-				weekHeader: '<liferay-ui:message key="week-abbreviation" />',
-				weekStatus: '<liferay-ui:message key="week-of-the-year" />',
+				monthStatus: '<%= UnicodeLanguageUtil.get(pageContext, "show-a-different-month") %>',
+				yearStatus: '<%= UnicodeLanguageUtil.get(pageContext, "show-a-different-year") %>',
+				weekHeader: '<%= UnicodeLanguageUtil.get(pageContext, "week-abbreviation") %>',
+				weekStatus: '<%= UnicodeLanguageUtil.get(pageContext, "wekk-of-the-year") %>',
 				dayNames: <%= JS.toScript(CalendarUtil.getDays(locale)) %>,
 				dayNamesShort: <%= JS.toScript(CalendarUtil.getDays(locale, "EEE")) %>,
 
@@ -62,7 +62,7 @@
 				dateStatus: '',
 				dateFormat: 'mm/dd/yy',
 				firstDay: <%= (cal.getFirstDayOfWeek() - 1) % 7 %>,
-				initStatus: '<liferay-ui:message key="select-date" />',
+				initStatus: '<%= UnicodeLanguageUtil.get(pageContext, "select-date") %>',
 				isRTL: ('<liferay-ui:message key="lang.dir" />' === 'rtl')
 			}
 		);
