@@ -44,7 +44,7 @@ public class SearchContainerResultsTei extends TagExtraInfo {
 		if (Validator.isNotNull(var)) {
 			return new VariableInfo[] {
 				new VariableInfo(
-					var, List.class.getName(), false, VariableInfo.AT_END)
+					var, List.class.getName(), true, VariableInfo.AT_END)
 			};
 		}
 		else {

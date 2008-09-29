@@ -38,8 +38,6 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/bookmarks/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
-
-List results = null;
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/bookmarks/search" /></liferay-portlet:renderURL>
@@ -62,6 +60,7 @@ List results = null;
 				<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 			</div>
 		</c:if>
+
 		<liferay-ui:search-container
 			curParam="cur1"
 			iteratorURL="<%= portletURL %>"
@@ -172,37 +171,38 @@ List results = null;
 					path="/html/portlet/bookmarks/folder_action.jsp"
 				/>
 			</liferay-ui:search-container-row>
-		</liferay-ui:search-container>
 
-		<%
-		boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
-		%>
+			<%
+			boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+			%>
 
-		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
-			<div>
+			<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
+				<div>
+					<c:if test="<%= results.size() > 0 %>">
+						<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
+
+						<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
+
+						<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+					</c:if>
+
+					<c:if test="<%= showAddFolderButton %>">
+						<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
+					</c:if>
+				</div>
+
 				<c:if test="<%= results.size() > 0 %>">
-					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
-
-					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
-
-					<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+					<br />
 				</c:if>
+			</c:if>
 
-				<c:if test="<%= showAddFolderButton %>">
-					<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
-				</c:if>
-			</div>
+			<liferay-ui:search-iterator />
 
-			<c:if test="<%= results.size() > 0 %>">
+			<c:if test="<%= (folder != null) && (showAddFolderButton || (results.size() > 0)) %>">
 				<br />
 			</c:if>
-		</c:if>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<c:if test="<%= (folder != null) && (showAddFolderButton || (results.size() > 0)) %>">
-			<br />
-		</c:if>
+		</liferay-ui:search-container>
 
 		</form>
 
@@ -319,33 +319,34 @@ List results = null;
 						path="/html/portlet/bookmarks/entry_action.jsp"
 					/>
 				</liferay-ui:search-container-row>
-			</liferay-ui:search-container>
 
-			<%
-			boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY);
-			%>
+				<%
+				boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY);
+				%>
 
-			<c:if test="<%= showAddEntryButton || (results.size() > 0) %>">
-				<div>
+				<c:if test="<%= showAddEntryButton || (results.size() > 0) %>">
+					<div>
+						<c:if test="<%= results.size() > 0 %>">
+							<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+
+							<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+							<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+						</c:if>
+
+						<c:if test="<%= showAddEntryButton %>">
+							<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="<portlet:namespace />addEntry();" />
+						</c:if>
+					</div>
+
 					<c:if test="<%= results.size() > 0 %>">
-						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
-
-						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
-
-						<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+						<br />
 					</c:if>
-
-					<c:if test="<%= showAddEntryButton %>">
-						<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="<portlet:namespace />addEntry();" />
-					</c:if>
-				</div>
-
-				<c:if test="<%= results.size() > 0 %>">
-					<br />
 				</c:if>
-			</c:if>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				<liferay-ui:search-iterator />
+
+			</liferay-ui:search-container>
 
 			</form>
 
@@ -368,18 +369,18 @@ List results = null;
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>
-
-		<%
-		long groupEntriesUserId = 0;
-
-		if (tabs1.equals("my-entries") && themeDisplay.isSignedIn()) {
-			groupEntriesUserId = user.getUserId();
-		}
-		%>
-
 		<liferay-ui:search-container
 			iteratorURL="<%= portletURL %>"
 		>
+
+			<%
+			long groupEntriesUserId = 0;
+
+			if (tabs1.equals("my-entries") && themeDisplay.isSignedIn()) {
+				groupEntriesUserId = user.getUserId();
+			}
+			%>
+
 			<liferay-ui:search-container-results
 				total="<%= BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId) %>"
 				results="<%= BookmarksEntryLocalServiceUtil.getGroupEntries(scopeGroupId, groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
@@ -426,9 +427,9 @@ List results = null;
 					path="/html/portlet/bookmarks/entry_action.jsp"
 				/>
 			</liferay-ui:search-container-row>
-		</liferay-ui:search-container>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-iterator />
+		</liferay-ui:search-container>
 
 		</form>
 	</c:when>
