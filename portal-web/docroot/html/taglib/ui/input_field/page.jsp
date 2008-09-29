@@ -55,14 +55,10 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				}
 			}
 
-			if (fieldParam == null) {
-				fieldParam = field;
-			}
-
 			boolean value = BeanParamUtil.getBoolean(bean, request, field, defaultBoolean);
 			%>
 
-			<liferay-ui:input-checkbox formName="<%= formName %>" param="<%= fieldParam %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
+			<liferay-ui:input-checkbox formName="<%= formName %>" param="<%= field %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
 		</c:when>
 		<c:when test='<%= type.equals("Date") %>'>
 
@@ -217,23 +213,27 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			String value = null;
 
 			if (fieldParam == null) {
-				fieldParam = field;
-			}
+				fieldParam = namespace + field;
 
-			if (type.equals("double")) {
-				value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
-			}
-			else if (type.equals("int")) {
-				value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
+				if (type.equals("double")) {
+					value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
+				}
+				else if (type.equals("int")) {
+					value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
+				}
+				else {
+					value = BeanParamUtil.getString(bean, request, field, defaultString);
+
+					String httpValue = request.getParameter(field);
+
+					if (httpValue != null) {
+						value = httpValue;
+					}
+				}
 			}
 			else {
-				value = BeanParamUtil.getString(bean, request, field, defaultString);
-
-				String httpValue = request.getParameter(fieldParam);
-
-				if (httpValue != null) {
-					value = httpValue;
-				}
+				fieldParam = namespace + fieldParam;
+				value = defaultString;
 			}
 
 			boolean autoEscape = true;
@@ -272,8 +272,6 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 							value = value.substring(0, maxLengthInt);
 						}
 					}
-
-					fieldParam = namespace + fieldParam;
 					%>
 
 					<input <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);">
