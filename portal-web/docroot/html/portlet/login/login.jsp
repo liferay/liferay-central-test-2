@@ -96,13 +96,14 @@ boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 
 <input type="submit" value="<liferay-ui:message key="sign-in" />" />
 
+<br /><br />
+
 <c:if test="<%= company.isStrangers() %>">
-	<input type="button" value="<liferay-ui:message key="create-account" />" onClick="location.href = '<%= themeDisplay.getURLCreateAccount() %>';" />
+	<a href="<%= themeDisplay.getURLCreateAccount() %>"><liferay-ui:message key="create-account" /></a>
 </c:if>
 
 <c:if test="<%= company.isSendPassword() %>">
-	<br /><br />
-
+	&nbsp; | &nbsp;
 	<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
 		<portlet:param name="struts_action" value="/login/view" />
 		<portlet:param name="<%= Constants.CMD %>" value="forgot-password" />
@@ -110,6 +111,7 @@ boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 
 	<a href="<%= forgotPasswordURL.toString() %>"><liferay-ui:message key="forgot-password" />?</a>
 </c:if>
+
 
 </form>
 

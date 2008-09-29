@@ -1074,6 +1074,10 @@
 
 		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
+		<action path="/login/create_account" type="com.liferay.portlet.login.action.AddUserAction">
+			<forward name="portlet.login.create_account" path="portlet.login.create_account" />
+		</action>
+
 		<action path="/login/view" type="com.liferay.portlet.login.action.ViewAction">
 			<forward name="portlet.login.view" path="portlet.login.view" />
 		</action>
@@ -1142,10 +1146,6 @@
 		<!-- My Account -->
 
 		<action path="/my_account/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
-
-		<action path="/my_account/create_account" type="com.liferay.portlet.myaccount.action.AddUserAction">
-			<forward name="portlet.my_account.create_account" path="portlet.my_account.create_account" />
-		</action>
 
 		<action path="/my_account/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">
 			<forward name="portlet.enterprise_admin.edit_address" path="portlet.enterprise_admin.edit_address" />

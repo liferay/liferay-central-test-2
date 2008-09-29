@@ -1315,14 +1315,14 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
 		PortletURL createAccountURL = new PortletURLImpl(
-			request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.ACTION_PHASE);
+			request, PortletKeys.LOGIN, plid, PortletRequest.ACTION_PHASE);
 
 		createAccountURL.setWindowState(WindowState.MAXIMIZED);
 		createAccountURL.setPortletMode(PortletMode.VIEW);
 
 		createAccountURL.setParameter("saveLastPath", "0");
 		createAccountURL.setParameter(
-			"struts_action", "/my_account/create_account");
+			"struts_action", "/login/create_account");
 
 		themeDisplay.setURLCreateAccount(createAccountURL);
 

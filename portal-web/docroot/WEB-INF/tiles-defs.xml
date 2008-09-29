@@ -606,6 +606,10 @@
 
 	<definition name="portlet.login" extends="portlet" />
 
+	<definition name="portlet.login.create_account" extends="portlet.login">
+		<put name="portlet_content" value="/portlet/login/create_account.jsp" />
+	</definition>
+
 	<definition name="portlet.login.view" extends="portlet.login">
 		<put name="portlet_content" value="/portlet/login/view.jsp" />
 	</definition>
@@ -661,10 +665,6 @@
 	<!-- My Account -->
 
 	<definition name="portlet.my_account" extends="portlet" />
-
-	<definition name="portlet.my_account.create_account" extends="portlet.my_account">
-		<put name="portlet_content" value="/portlet/my_account/create_account.jsp" />
-	</definition>
 
 	<definition name="portlet.my_account.edit_user" extends="portlet.my_account">
 		<put name="portlet_content" value="/portlet/my_account/edit_user.jsp" />
