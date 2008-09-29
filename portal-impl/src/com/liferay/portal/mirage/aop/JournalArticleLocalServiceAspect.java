@@ -22,6 +22,16 @@
 
 package com.liferay.portal.mirage.aop;
 
+import com.liferay.portal.util.PropsValues;
+
+import com.sun.saw.Workflow;
+import com.sun.saw.WorkflowException;
+import com.sun.saw.WorkflowFactory;
+import com.sun.saw.vo.OutputVO;
+import com.sun.saw.vo.SaveTaskVO;
+
+import java.util.Properties;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -71,6 +81,8 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 		}
 		else if (methodName.equals("approveArticle") ||
 				 methodName.equals("expireArticle")) {
+
+			_processWorkflowThroughSAW(methodName, arguments);
 
 			WorkflowInvoker workflowInvoker = new WorkflowInvoker(
 				proceedingJoinPoint);
@@ -125,6 +137,33 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 		else {
 			return proceedingJoinPoint.proceed();
 		}
+	}
+
+	private Workflow _getWorkflowImpl() throws WorkflowException {
+		Properties props = new Properties();
+		props.setProperty(
+			"sawworkflowimplclass", PropsValues.JOURNAL_WORKFLOW_IMPL);
+
+		WorkflowFactory workflowFactory = WorkflowFactory.getInstance();
+
+		return workflowFactory.getWorkflowInstance(props);
+	}
+
+	private OutputVO _processWorkflowThroughSAW(
+		String methodName, Object[] args) {
+
+		OutputVO outputVO = null;
+
+		try {
+			SaveTaskVO saveTaskVO = new SaveTaskVO();
+			Workflow workflow = _getWorkflowImpl();
+			outputVO = workflow.saveTasks(saveTaskVO);
+		}
+		catch (WorkflowException we) {
+			//Do nothing
+		}
+
+		return outputVO;
 	}
 
 }
