@@ -100,6 +100,27 @@ if (selUser == null) {
 else {
 	regularRoles = RoleLocalServiceUtil.getUserRoles(selUser.getUserId());
 }
+
+// Form Sections
+
+String[] mainSections = PropsValues.USERS_PROFILE_ADD_MAIN;
+String[] identificationSections = PropsValues.USERS_PROFILE_ADD_IDENTIFICATION;
+String[] miscellaneousSections = PropsValues.USERS_PROFILE_ADD_MISCELLANEOUS;
+
+if (selUser != null) {
+	mainSections = PropsValues.USERS_PROFILE_UPDATE_MAIN;
+	identificationSections = PropsValues.USERS_PROFILE_UPDATE_IDENTIFICATION;
+	miscellaneousSections = PropsValues.USERS_PROFILE_UPDATE_MISCELLANEOUS;
+}
+
+String[] tempSections = new String[mainSections.length + identificationSections.length];
+String[] allSections = new String[mainSections.length + identificationSections.length + miscellaneousSections.length];
+ArrayUtil.combine(mainSections, identificationSections, tempSections);
+ArrayUtil.combine(tempSections, miscellaneousSections, allSections);
+
+String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
+
+String currentSection = mainSections[0];
 %>
 
 <script type="text/javascript">
@@ -157,75 +178,30 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 				request.setAttribute("user.organizationIds", organizationIds);
 				request.setAttribute("user.communities", communities);
 				request.setAttribute("user.regularRoles", regularRoles);
+
+				List<Website> websites = null;
+
+				if (classPK <= 0) {
+					websites = Collections.EMPTY_LIST;
+				}
+				else {
+					websites = WebsiteServiceUtil.getWebsites(className, classPK);
+				}
+
+				request.setAttribute("common.websites", websites);
 				%>
 
-				<div class="form-section selected" id="userDetails">
-					<c:if test="<%= selUser != null %>">
-						<c:if test="<%= (passwordPolicy != null) && selUser.getLockout() %>">
-							<h3><liferay-ui:message key="lockout" /></h3>
-
-							<fieldset class="block-labels">
-
-								<div class="ctrl-holder">
-									<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
-
-									<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />saveUser('unlock');" />
-								</div>
-							</fieldset>
-						</c:if>
-					</c:if>
-
-					<liferay-util:include page="/html/portlet/enterprise_admin/user/details.jsp" />
-				</div>
-
-				<c:if test="<%= selUser != null %>">
-					<div class="form-section" id="password">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/password.jsp" />
+				<%
+				for (String section : allSections) {
+					String sectionId = _getIdName(section);
+					String jspPath = "/html/portlet/enterprise_admin/user/" + _getJspName(section) + ".jsp";
+				%>
+					<div class="form-section <%= currentSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
+						<liferay-util:include page="<%= jspPath %>" />
 					</div>
-
-					<div class="form-section" id="userAssociations">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/user_associations.jsp" />
-					</div>
-
-					<div class="form-section" id="roles">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/roles.jsp" />
-					</div>
-
-					<div class="form-section" id="websites">
-						<%
-							List<Website> websites = WebsiteServiceUtil.getWebsites(className, classPK);
-							request.setAttribute("common.websites", websites);
-
-						%>
-						<liferay-util:include page="/html/portlet/enterprise_admin/common/websites.jsp" />
-					</div>
-
-					<div class="form-section" id="instantMessenger">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/instant_messenger.jsp" />
-					</div>
-
-					<div class="form-section" id="socialNetwork">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/social_network.jsp" />
-					</div>
-
-					<div class="form-section" id="sms">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/sms.jsp" />
-					</div>
-
-					<div class="form-section" id="openId">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/open_id.jsp" />
-					</div>
-
-					<div class="form-section" id="announcements">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/announcements.jsp" />
-					</div>
-					<div class="form-section" id="displaySettings">
-						<liferay-util:include page="/html/portlet/enterprise_admin/user/display_settings.jsp" />
-					</div>
-					<div class="form-section" id="comments">
-						<liferay-util:include page="/html/portlet/enterprise_admin/common/comments.jsp" />
-					</div>
-				</c:if>
+				<%
+				}
+				%>
 
 				<div class="lfr-component form-navigation">
 
@@ -239,45 +215,45 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 						</p>
 					</div>
 
-					<div class="menu-group">
-						<h3><liferay-ui:message key="main-user-info" /></h3>
-						<ul>
-							<li class="selected"><a href="#userDetails" id="userDetailsLink"><liferay-ui:message key="user-details" /></a></li>
-							<c:if test="<%= selUser != null %>">
-								<li><a href="#password" id="passwordLink"><liferay-ui:message key="password" /></a></li>
-								<li><a href="#userAssociations"><liferay-ui:message key="user-associations" /></a></li>
-								<li><a href="#roles"><liferay-ui:message key="roles" /></a></li>
-							</c:if>
-						</ul>
-					</div>
+					<%
+					for (int i = 0; i < _CATEGORY_NAMES.length; i++) {
+						String category = _CATEGORY_NAMES[i];
+						String[] sections = categorySections[i];
 
-					<c:if test="<%= selUser != null %>">
+						if (sections.length > 0) {
+					%>
 						<div class="menu-group">
-							<h3><liferay-ui:message key="identification" /></h3>
+							<h3><liferay-ui:message key="<%= category %>" /></h3>
 							<ul>
-								<li><a href="#websites" id="websiteLink"><liferay-ui:message key="websites" /></a></li>
-								<li><a href="#instantMessenger" id="instantMessengerLink"><liferay-ui:message key="instant-messenger" /></a></li>
-								<li><a href="#socialNetwork" id="socialNetworkLink"><liferay-ui:message key="social-network" /></a></li>
-								<li><a href="#sms" id="smsLink"><liferay-ui:message key="sms" /></a></li>
-								<li><a href="#openId" id="openIdLink"><liferay-ui:message key="openid" /></a></li>
+								<%
+								for (String section : sections) {
+									String sectionId = _getIdName(section);
+								%>
+									<li <%= currentSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>><a href="#<%= sectionId %>" id="<%= sectionId %>Link"><liferay-ui:message key="<%= section %>" /></a></li>
+								<%
+								}
+								%>
 							</ul>
 						</div>
-
-						<div class="menu-group">
-							<h3><liferay-ui:message key="miscellaneous" /></h3>
-							<ul>
-								<li><a href="#announcements" id="announcementsLink"><liferay-ui:message key="alerts-and-announcements" /></a></li>
-								<li><a href="#displaySettings" id="displaySettingsLink"><liferay-ui:message key="display-settings" /></a></li>
-								<li><a href="#comments" id="commentsLink"><liferay-ui:message key="comments" /></a></li>
-							</ul>
-						</div>
-					</c:if>
+					<%
+						}
+					}
+					%>
 
 					<div class="button-holder">
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('<%= selUser == null ? Constants.ADD : Constants.UPDATE %>');" />  &nbsp;
 
 						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HttpUtil.encodeURL(backURL) %>';" /><br />
 					</div>
+
+					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
+						<div class="button-holder">
+							<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
+
+							<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />saveUser('unlock');" />
+						</div>
+					</c:if>
+
 				</div>
 
 			</td>
@@ -358,52 +334,6 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 				li.addClass('selected');
 			};
 
-			var markAsModifiedUserDetails = function() {
-				return markAsModified('#userDetailsLink');
-			}
-			var markAsModifiedPassword = function() {
-				return markAsModified('#passwordLink');
-			}
-
-			var markAsModifiedWebsite = function() {
-				return markAsModified('#websiteLink');
-			}
-
-			var markAsModifiedInstantMessenger = function() {
-				return markAsModified('#instantMessengerLink');
-			}
-
-			var markAsModifiedSocialNetwork = function() {
-				return markAsModified('#socialNetworkLink');
-			}
-
-			var markAsModifiedSms = function() {
-				return markAsModified('#smsLink');
-			}
-
-			var markAsModifiedOpenId = function() {
-				return markAsModified('#openIdLink');
-			}
-
-			var markAsModifiedComments = function() {
-				return markAsModified('#commentsLink')
-			}
-
-			var markAsModifiedAnnouncements = function() {
-				return markAsModified('#announcementsLink')
-			}
-
-			var markAsModifiedDisplaySettings = function() {
-				return markAsModified('#displaySettingsLink')
-			}
-
-			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="modified" />)') == -1) {
-					jQuery(id).append(' <strong class="form-section-modified">(<liferay-ui:message key="modified" />)</strong>');
-					//jQuery(id).style('font-weight: bold');
-				}
-			}
-
 			jQuery('.form-navigation li a').click(
 				function(event) {
 					var li = jQuery(this.parentNode);
@@ -418,18 +348,25 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 
 			revealSection(location.hash);
 
-			jQuery('#userDetails input').change(markAsModifiedUserDetails)
-			jQuery('#userDetails select').change(markAsModifiedUserDetails)
-			jQuery('#password input').change(markAsModifiedPassword)
-			jQuery('#websites select').change(markAsModifiedWebsite)
-			jQuery('#websites input').change(markAsModifiedWebsite)
-			jQuery('#instantMessenger input').change(markAsModifiedInstantMessenger)
-			jQuery('#sms input').change(markAsModifiedSms)
-			jQuery('#openId input').change(markAsModifiedOpenId)
-			jQuery('#socialNetwork input').change(markAsModifiedSocialNetwork)
-			jQuery('#comments textarea').change(markAsModifiedComments)
-			jQuery('#announcements input').change(markAsModifiedAnnouncements)
-			jQuery('#displaySettings input').change(markAsModifiedDisplaySettings)
+			var markAsModified = function(id) {
+				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="modified" />)') == -1) {
+					jQuery(id).append(' <strong class="form-section-modified">(<liferay-ui:message key="modified" />)</strong>');
+					//jQuery(id).style('font-weight: bold');
+				}
+			}
+
+			<%
+			for (String section : allSections) {
+				String sectionId = _getIdName(section);
+			%>
+				var markAsModified_<%= sectionId %> = function() {
+					return markAsModified('#<%= sectionId %>Link');
+				}
+				jQuery('#<%= sectionId %> input').change(markAsModified_<%= sectionId %>)
+				jQuery('#<%= sectionId %> select').change(markAsModified_<%= sectionId %>)
+			<%
+			}
+			%>
 		}
 	);
 
@@ -669,3 +606,27 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />screenName);
 	</script>
 </c:if>
+
+<%!
+private static String[] _CATEGORY_NAMES = {"main-user-info", "identification", "miscellaneous"};
+
+private String _getIdName(String name) {
+	int pos = name.indexOf(StringPool.DASH);
+
+	if (pos == -1) {
+		return name;
+	}
+
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(name.substring(0, pos));
+	sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
+	sb.append(name.substring(pos + 2));
+
+	return _getIdName(sb.toString());
+}
+
+private String _getJspName(String name) {
+	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
+}
+%>

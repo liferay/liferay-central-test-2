@@ -1085,6 +1085,18 @@ public class PropsKeys {
 
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 
+	public static final String USERS_PROFILE_ADD_MAIN = "users.profile.add.main";
+
+	public static final String USERS_PROFILE_ADD_IDENTIFICATION = "users.profile.add.identification";
+
+	public static final String USERS_PROFILE_ADD_MISCELLANEOUS = "users.profile.add.miscellaneous";
+
+	public static final String USERS_PROFILE_UPDATE_MAIN = "users.profile.update.main";
+
+	public static final String USERS_PROFILE_UPDATE_IDENTIFICATION = "users.profile.update.identification";
+	
+	public static final String USERS_PROFILE_UPDATE_MISCELLANEOUS = "users.profile.update.miscellaneous";
+
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 
 	public static final String VELOCITY_ENGINE_LOGGER = "velocity.engine.logger";
