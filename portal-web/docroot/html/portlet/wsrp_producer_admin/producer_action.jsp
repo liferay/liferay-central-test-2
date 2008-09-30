@@ -46,8 +46,6 @@
 <%@ include file="/html/portlet/wsrp_producer_admin/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
@@ -56,22 +54,24 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 <liferay-ui:icon-menu>
 	<portlet:actionURL var="editURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-	<portlet:actionURL var="manageRegistrationsURL">
+	<portlet:actionURL var="consumerRegistrationsURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" />
+		<portlet:param name="tabs1" value="consumer-registrations" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="permissions" message="manage-registrations" url="<%= manageRegistrationsURL %>" />
+	<liferay-ui:icon image="permissions" message="consumer-registrations" url="<%= consumerRegistrationsURL %>" />
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="selectedProducers" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
 

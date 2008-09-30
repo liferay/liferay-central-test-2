@@ -48,18 +48,20 @@
 <%
 int action = ParamUtil.getInteger(request, Constants.ACTION,AdminPortletAction.LIST);
 
-ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAttribute("listProducerBeans");
+String redirect = ParamUtil.getString(request, "redirect");
 %>
-
-<portlet:renderURL var="cancelURL" />
 
 <c:choose>
 	<c:when test="<%= action == AdminPortletAction.LIST %>">
-
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
-		
+
+		<liferay-ui:tabs names="producers" />
+
 		<%
+		ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAttribute("listProducerBeans");
+
 		SearchContainer searchContainer = new SearchContainer();
+
 		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
@@ -70,10 +72,19 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 		searchContainer.setHeaderNames(headerNames);
 		searchContainer.setEmptyResultsMessage("there-are-no-producers");
 
+		List<ProducerElementBean> results = null;
+
+		if (producerBeans != null) {
+			results = ListUtil.fromArray(producerBeans);
+		}
+		else {
+			results = Collections.EMPTY_LIST;
+		}
+
 		List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0;  producerBeans != null && i < producerBeans.length; i++) {
-			ProducerElementBean producerBean = (ProducerElementBean)producerBeans[i];
+		for (int i = 0; i < results.size(); i++) {
+			ProducerElementBean producerBean = results.get(i);
 
 			ResultRow row = new ResultRow(producerBean, producerBean.getProducerKey(), i);
 
@@ -82,6 +93,7 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 			PortletURL portletURL = renderResponse.createActionURL();
 
 			portletURL.setParameter(Constants.ACTION, String.valueOf(AdminPortletAction.GET_DETAILS));
+			portletURL.setParameter("redirect", currentURL);
 			portletURL.setParameter("producerId", producerBean.getProducerKey());
 
 			row.addText(producerBean.getProducerKey(), portletURL);
@@ -90,11 +102,11 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 
 			row.addText(LanguageUtil.get(pageContext, producerBean.getIsEnabled() ? "enabled" : "disabled"), portletURL);
 
-			// Registration Required
+			// Registration
 
 			row.addText(LanguageUtil.get(pageContext, producerBean.getRequiresRegistration() ? "required" : "not-required"), portletURL);
 
-			//Producer Action
+			// Action
 
 			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer_admin/producer_action.jsp");
 
@@ -103,13 +115,13 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 			resultRows.add(row);
 		}
 		%>
-		
+
 		<div>
-			<input type="button" value="<liferay-ui:message key="add-producer" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DEFAULT) %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-producer" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DEFAULT) %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>';" />
 		</div>
-		
+
 		<br />
-		
+
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 		</form>
@@ -117,21 +129,26 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 	<c:when test="<%= action == AdminPortletAction.GET_DETAILS %>">
 
 		<%
-		ProducerBean producerBean = (ProducerBean)renderRequest.getPortletSession(false).getAttribute("producerBean");
-		Map supportedVersions = (Map)renderRequest.getPortletSession(false).getAttribute(AdminPortletConstants.SUPPORTED_VERSIONS);
+		ProducerBean producerBean = (ProducerBean)portletSession.getAttribute("producerBean");
+
+		Map supportedVersions = (Map)portletSession.getAttribute(AdminPortletConstants.SUPPORTED_VERSIONS);
+
 		Set<Map.Entry<String, String>> versions = supportedVersions.entrySet();
 
 		PortletPreferences preferences = renderRequest.getPreferences();
+
 		String producerHost = preferences.getValue("producerHost", "localhost");
 		String producerPort = preferences.getValue("producerPort", "8080");
-		String wsdlURL = "http://" + producerHost + ":" + producerPort + producerBean.getWsdlURL();
+
+		String wsdl = "http://" + producerHost + ":" + producerPort + producerBean.getWsdlURL();
 		%>
 
-		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm" id="<portlet:namespace />detailsForm">
+		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace /><%= Constants.ACTION %>" type="hidden" value="<%= AdminPortletAction.UPDATE %>" />
-		<input name="<portlet:namespace />publishedPortletString" type="hidden" id="<portlet:namespace />publishedPortletStringId" />
-		<input name="<portlet:namespace />producerKey"  type="hidden" value="<%= producerBean.getProducerKey() %>" />
-		
+		<input name="<portlet:namespace />producerKey" type="hidden" value="<%= producerBean.getProducerKey() %>" />
+
+		<liferay-ui:tabs names="producer" />
+
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -143,38 +160,32 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="wsdl-url" />
+				<liferay-ui:message key="url" />
 			</td>
 			<td>
-				<a href="<%= wsdlURL %>"><%= wsdlURL %></a>
+				<a href="<%= HtmlUtil.escape(wsdl) %>" target="_blank"><%= HtmlUtil.escape(wsdl) %></a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="producer-wsdl-version" />
+				<liferay-ui:message key="version" />
 			</td>
 			<td>
 				<select name="<portlet:namespace /><%= AdminPortletConstants.PRODUCER_VERSION %>">
-						
+
 					<%
-					String version = producerBean.getVersion();
+					String version = GetterUtil.getString(producerBean.getVersion());
+
 					for (Map.Entry<String, String> entry : versions) {
-						String selected = "";
-						if (version != null && entry.getValue().equalsIgnoreCase(version)) {
-							selected = "selected";
-						}
 					%>
-					
-						<option value='<%= entry.getValue() %>' <%= selected %>>
-							<%= entry.getKey() %>
-						</option>
-					
+
+						<option <%= version.equalsIgnoreCase(entry.getValue()) ? "selected" : "" %> value="<%= entry.getValue() %>"><%= _formatVersion(entry.getKey()) %></option>
+
 					<%
 					}
 					%>
-					
-				</select>
 
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -182,20 +193,18 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				<liferay-ui:message key="status" />
 			</td>
 			<td>
-				<select name="<portlet:namespace />enabled" id="<portlet:namespace />enabledId">
-				
-				<%
-				if (!producerBean.getPublishedPortlets().isEmpty()) {
-				%>
-					
-					<option value="true" <%= producerBean.isEnabled() ? "selected" : ""  %>><liferay-ui:message key="enabled" /></option>
-					
-				<%
-				}
-				%>
+				<select name="<portlet:namespace />enabled">
+					<c:if test="<%= !producerBean.getPublishedPortlets().isEmpty() %>">
+						<option <%= producerBean.isEnabled() ? "selected" : "" %> value="true"><liferay-ui:message key="enabled" /></option>
+					</c:if>
 
-					<option value="false"<%= !producerBean.isEnabled() ? "selected" : ""  %> %>><liferay-ui:message key="disabled" /></option>
+					<option <%= !producerBean.isEnabled() ? "selected" : "" %> value="false"><liferay-ui:message key="disabled" /></option>
 				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -203,9 +212,9 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				<liferay-ui:message key="registration" />
 			</td>
 			<td>
-				<select name="<portlet:namespace />registrationRequired" id="<portlet:namespace />registrationRequiredId">
-					<option value="true" <%= producerBean.isRegistrationRequired() ? "selected" : ""  %>><liferay-ui:message key="required" /></option>
-					<option value="false"<%= !producerBean.isRegistrationRequired() ? "selected" : ""   %>><liferay-ui:message key="not-required" /></option>
+				<select name="<portlet:namespace />registrationRequired">
+					<option <%= producerBean.isRegistrationRequired() ? "selected" : "" %> value="true"><liferay-ui:message key="required" /></option>
+					<option <%= !producerBean.isRegistrationRequired() ? "selected" : "" %> value="false"><liferay-ui:message key="not-required" /></option>
 				</select>
 			</td>
 		</tr>
@@ -214,11 +223,10 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				<liferay-ui:message key="inband-registration" />
 			</td>
 			<td>
-				<select  name="<portlet:namespace />inbandRegistrationSupported" id="<portlet:namespace />inbandRegistrationSupportedId">
-					<option value="true" <%= producerBean.isInbandRegistrationSupported() ? "selected" : ""  %>><liferay-ui:message key="supported" /></option>
-					<option value="false"<%= !producerBean.isInbandRegistrationSupported() ? "selected" : ""  %>><liferay-ui:message key="not-supported" /></option>
+				<select name="<portlet:namespace />inbandRegistrationSupported">
+					<option <%= producerBean.isInbandRegistrationSupported() ? "selected" : "" %> value="true"><liferay-ui:message key="supported" /></option>
+					<option <%= !producerBean.isInbandRegistrationSupported() ? "selected" : "" %> value="false"><liferay-ui:message key="not-supported" /></option>
 				</select>
-
 			</td>
 		</tr>
 		<tr>
@@ -226,181 +234,7 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				<liferay-ui:message key="registration-validator-class" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />registrationValidatorClass" id="registrationValidatorClassId"  type="text" value="<%= producerBean.getRegistrationValidatorClass() %>">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="registration-properties" />
-			</td>
-			<td>
- 
-			<%
-			List<String> registrationPropertyDescriptions = producerBean.getRegistrationPropertyDescriptions();
-			
-			SearchContainer searchContainer = new SearchContainer();
-			
-	    		List<String> headerNames = new ArrayList<String>();
-
-			headerNames.add("name");
-			headerNames.add("description");
-
-			searchContainer.setHeaderNames(headerNames);
-			searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
-			
-			List resultRows = searchContainer.getResultRows();
-			int index = 0;
-
-			for (String regPropDesc : registrationPropertyDescriptions) {
-				index++;
-				String[] propDescPair = regPropDesc.split("=");
-				String propertyName = propDescPair[0];
-				String propertyDescription = propDescPair[1];
-
-				ResultRow row = new ResultRow(propertyName, propertyName, index);
-
-				// Name
-
-				row.addText(propertyName);
-
-				// Description
-
-				row.addText(propertyDescription);
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-			%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="publish-portlets" />
-			</td>
-			<td>
-				<table>
-				<tr>
-					<td>
-						<liferay-ui:message key="unpublished-portlets" /><br>
-								
-						<select name="<portlet:namespace />unpublishedPortlets" id="<portlet:namespace />unpublishedPortletsId"  size="5" style="width:80%;">
-						
-						<%
-						if (producerBean.getUnpublishedPortlets() != null && !producerBean.getUnpublishedPortlets().isEmpty()) {
-							List unpublishedPortlets = producerBean.getUnpublishedPortlets();
-							for (int i=0; i < unpublishedPortlets.size(); i++) {
-						%>
-						
-								<option value="<%= unpublishedPortlets.get(i) %>"><%= unpublishedPortlets.get(i) %></option>
-						
-						<%
-							}
-						}
-						%>
-						
-						</select>
-					</td>
-					<td>
-						<input  class="lfr-button" type="button" value="<liferay-ui:message key='add'/>"  id="<portlet:namespace />addPortletsBtn"  />
-						<input  class="lfr-button" type="button" value="<liferay-ui:message key='remove'/>" id="<portlet:namespace />removePortletsBtn" />
-					</td>
-					<td>
-						<liferay-ui:message key="published-portlets" /><br>
-						<select name="<portlet:namespace />publishedPortlets" id="<portlet:namespace />publishedPortletsId" size="5" style="width:80%;">
-						
-						<%
-						if (producerBean.getPublishedPortlets() != null && !producerBean.getPublishedPortlets().isEmpty()) {
-							List publishedPortlets = producerBean.getPublishedPortlets();
-							for (int i=0;  i<publishedPortlets.size(); i++) {
-						%>
-						
-							<option value="<%= publishedPortlets.get(i) %>" selected><%= publishedPortlets.get(i) %></option>
-							
-						<%
-							}
-						}
-						%>
-						</select>
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		</table>
-		
-		<input type="submit" value=<liferay-ui:message key="save" />
-		
-		<input type="button" value=<liferay-ui:message key="cancel" /> onclick="location.href = '<%= HtmlUtil.escape(cancelURL) %>';" />
-
-		</form>
-	</c:when>
-	<c:when test="<%= action == AdminPortletAction.GET_DEFAULT %>">
-		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
-		<input name="<portlet:namespace />action" type="hidden" value="<%= AdminPortletAction.CREATE %>" />
-		
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="create-new-producer" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="name" />
-			</td>
-			<td>
-				<input  class="lfr-input-text" name="<portlet:namespace />name" id="<portlet:namespace />nameId" type="text" value="" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="version" />
-			</td>
-			<td>
-				<select name="<portlet:namespace /><%= AdminPortletConstants.PRODUCER_VERSION %>" id="<portlet:namespace />versionId">
-					
-					<%
-					Map supportedVersions = (Map)renderRequest.getPortletSession(false).getAttribute(AdminPortletConstants.SUPPORTED_VERSIONS);
-					Set<Map.Entry<String, String>> versions = supportedVersions.entrySet();
-					for (Map.Entry<String, String> entry : versions) {
-						String selected = "";
-						if (entry.getKey().equalsIgnoreCase("V1andV2")) {
-							selected = "selected";
-						}
-					%>
-					
-					<option value='<%= entry.getValue() %>' <%= selected %>><%= entry.getKey() %></option>
-					
-					<%
-					}
-					%>
-				
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="registration" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />registration" id="<portlet:namespace />registrationId" >
-					<option value="1"><liferay-ui:message key="required" /></option>
-					<option value="2"><liferay-ui:message key="not-required" /></option>
-				</select>
-
-			</td>
-		</tr>
-		<tr>
-			<td><liferay-ui:message key="inband-registration" /></td>
-			<td>
-				<select id="<portlet:namespace />inbandRegistrationId" name="<portlet:namespace />inbandRegistration">
-					<option value="1"><liferay-ui:message key="supported" /></option>
-					<option value="2"><liferay-ui:message key="not-supported" /></option>
-				</select>
-
+				<input class="lfr-input-text" name="<portlet:namespace />registrationValidatorClass" type="text" value="<%= producerBean.getRegistrationValidatorClass() %>" />
 			</td>
 		</tr>
 		<tr>
@@ -410,6 +244,8 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 			<td>
 
 				<%
+				List<String> registrationPropertyDescriptions = producerBean.getRegistrationPropertyDescriptions();
+
 				SearchContainer searchContainer = new SearchContainer();
 
 				List<String> headerNames = new ArrayList<String>();
@@ -419,28 +255,194 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 
 				searchContainer.setHeaderNames(headerNames);
 				searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
+
+				List<String> results = null;
+
+				if (registrationPropertyDescriptions != null) {
+					results = registrationPropertyDescriptions;
+				}
+				else {
+					results = Collections.EMPTY_LIST;
+				}
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					String registrationPropertyDescription = results.get(i);
+
+					String[] propertyArray = registrationPropertyDescription.split(StringPool.EQUAL);
+
+					String propertyName = propertyArray[0];
+					String propertyDescription = propertyArray[1];
+
+					ResultRow row = new ResultRow(propertyName, propertyName, i);
+
+					// Name
+
+					row.addText(propertyName);
+
+					// Description
+
+					row.addText(propertyDescription);
+
+					// Add result row
+
+					resultRows.add(row);
+				}
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="publish-portlets" />
+			</td>
+			<td>
+
+				<%
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				List<String> unpublishedPortlets = producerBean.getUnpublishedPortlets();
+
+				if (unpublishedPortlets != null) {
+					for (String unpublishedPortlet : unpublishedPortlets) {
+						leftList.add(new KeyValuePair(unpublishedPortlet, unpublishedPortlet));
+					}
+				}
+
+				Collections.sort(leftList, new KeyValuePairComparator(false, true));
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				List<String> publishedPortlets = producerBean.getUnpublishedPortlets();
+
+				if (publishedPortlets != null) {
+					for (String publishedPortlet : publishedPortlets) {
+						leftList.add(new KeyValuePair(publishedPortlet, publishedPortlet));
+					}
+				}
+
+				Collections.sort(rightList, new KeyValuePairComparator(false, true));
+				%>
+
+				<liferay-ui:input-move-boxes
+					formName="fm"
+					leftTitle="unpublished"
+					rightTitle="published"
+					leftBoxName="unpublishedPortlets"
+					rightBoxName="publishedPortlets"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
+			</td>
+		</tr>
 		</table>
 
-		<input type="submit" value=<liferay-ui:message key="save" />
-		
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(cancelURL) %>';" />		
+		<br />
+
+		<input type="submit" value="<liferay-ui:message key="save" />" />
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+
+		</form>
+	</c:when>
+	<c:when test="<%= action == AdminPortletAction.GET_DEFAULT %>">
+		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
+		<input name="<portlet:namespace />action" type="hidden" value="<%= AdminPortletAction.CREATE %>" />
+
+		<liferay-ui:tabs names="producer" />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="name" />
+			</td>
+			<td>
+				<input class="lfr-input-text" name="<portlet:namespace />name" type="text" value="" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="version" />
+			</td>
+			<td>
+				<select name="<portlet:namespace /><%= AdminPortletConstants.PRODUCER_VERSION %>">
+
+					<%
+					Map supportedVersions = (Map)portletSession.getAttribute(AdminPortletConstants.SUPPORTED_VERSIONS);
+
+					Set<Map.Entry<String, String>> versions = supportedVersions.entrySet();
+
+					for (Map.Entry<String, String> entry : versions) {
+					%>
+
+						<option <%= entry.getKey().equalsIgnoreCase("V1andV2") ? "selected" : "" %> value="<%= entry.getValue() %>"><%= _formatVersion(entry.getKey()) %></option>
+
+					<%
+					}
+					%>
+
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="registration" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />registration">
+					<option value="1"><liferay-ui:message key="required" /></option>
+					<option value="2"><liferay-ui:message key="not-required" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><liferay-ui:message key="inband-registration" /></td>
+			<td>
+				<select name="<portlet:namespace />inbandRegistration">
+					<option value="1"><liferay-ui:message key="supported" /></option>
+					<option value="2"><liferay-ui:message key="not-supported" /></option>
+				</select>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<input type="submit" value="<liferay-ui:message key="save" />" />
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 		</form>
 	</c:when>
 	<c:when test="<%= action == AdminPortletAction.LIST_CONSUMER_REGISTRATIONS %>">
+
+		<%
+		String producerId = ParamUtil.getString(request, "producerId");
+		%>
+
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
-		
+
+		<liferay-ui:tabs
+			names="producers,consumer-registrations"
+			url0="<%= redirect %>"
+			url1="<%= currentURL %>"
+		/>
+
 		<%
 		SearchContainer searchContainer = new SearchContainer();
 
-		ConsumerRegistrationBean[] crBeans = (ConsumerRegistrationBean[])renderRequest.getAttribute("listConsumerRegistrations");
-
-		List resultRows = searchContainer.getResultRows();
 		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
@@ -449,63 +451,68 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 		headerNames.add(StringPool.BLANK);
 
 		searchContainer.setHeaderNames(headerNames);
-		searchContainer.setEmptyResultsMessage("there-are-no-registered-consumers");
-		int index = 0;
-		if (renderRequest.getAttribute("listConsumerRegistrations") != null) {
+		searchContainer.setEmptyResultsMessage("there-are-no-consumer-registrations");
 
-			for (ConsumerRegistrationBean crBean : crBeans) {
-				index++;
-				String name = crBean.getName();
-				String regHandle = crBean.getRegistrationHandle();
+		List resultRows = searchContainer.getResultRows();
 
-				ResultRow row = new ResultRow(crBean, name, index);
-				// Name
+		ConsumerRegistrationBean[] consumerRegistrations = (ConsumerRegistrationBean[])renderRequest.getAttribute("listConsumerRegistrations");
 
-				row.addText(name);
+		for (int i = 0; (consumerRegistrations != null) && (i < consumerRegistrations.length); i++) {
+			ConsumerRegistrationBean consumerRegistration = consumerRegistrations[i];
 
-				// Description
+			ResultRow row = new ResultRow(consumerRegistration, consumerRegistration.getName(), i);
 
-				row.addText(regHandle);
+			// Name
 
-				//Status
+			row.addText(consumerRegistration.getName());
 
-				row.addText(LanguageUtil.get(pageContext, new Boolean(crBean.getEnabled()).booleanValue()? "enabled" : "disabled"));
+			// Registration handle
 
-				//Consumer Registration Action
+			row.addText(consumerRegistration.getRegistrationHandle());
 
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer_admin/consumer_registration_action.jsp");
+			// Status
 
-				// Add result row
+			row.addText(LanguageUtil.get(pageContext, GetterUtil.getBoolean(consumerRegistration.getEnabled()) ? "enabled" : "disabled"));
 
-				resultRows.add(row);
-			}
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer_admin/consumer_registration_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
 		}
 		%>
-		
+
 		<div>
-			<input type="button" value="<liferay-ui:message key="add-consumer-registration" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DEFAULT_CONSUMER_REGISTRATION) %>" /><portlet:param name="producerId" value="<%= ParamUtil.getString(request, "producerId") %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-consumer-registration" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DEFAULT_CONSUMER_REGISTRATION) %>" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="producerId" value="<%= producerId %>" /></portlet:actionURL>';" />
 		</div>
-		
+
+		<br />
+
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-		
-		<div>
-			<input type="button" value="<liferay-ui:message key="back-to-producers" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST) %>" /></portlet:actionURL>';" />
-		</div>		
 
 		</form>
 	</c:when>
 	<c:when test="<%= action == AdminPortletAction.GET_DEFAULT_CONSUMER_REGISTRATION %>">
+
+		<%
+		String producerId = ParamUtil.getString(request, "producerId");
+		%>
+
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
-		<input type="hidden" name="action" value="<%= AdminPortletAction.CREATE_CONSUMER_REGISTRATION %>" />
-		<input type="hidden" name="producerId" value="<%= ParamUtil.getString(request, "producerId") %>" />
-		
+		<input name="action" type="hidden" value="<%= AdminPortletAction.CREATE_CONSUMER_REGISTRATION %>" />
+		<input name="producerId" type="hidden" value="<%= HtmlUtil.escape(producerId) %>" />
+
+		<liferay-ui:tabs names="consumer-registration" />
+
 		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<input type="text" name="<portlet:namespace />name" id="nameId" class="lfr-input-text" value="" />
+				<input class="lfr-input-text" name="<portlet:namespace />name" type="text" value="" />
 			</td>
 		</tr>
 		<tr>
@@ -513,7 +520,23 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				<liferay-ui:message key="consumer-agent" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />agent" type="text"  id="agentId" value="" />
+				<input class="lfr-input-text" name="<portlet:namespace />agent" type="text" value="" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="http-method" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />methodGetSupported">
+					<option value="false"><liferay-ui:message key="post" /></option>
+					<option value="true"><liferay-ui:message key="get-or-post" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -521,7 +544,7 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				<liferay-ui:message key="registration" />
 			</td>
 			<td>
-				<select  name="<portlet:namespace />status" id="<portlet:namespace />statusId">
+				<select name="<portlet:namespace />status">
 					<option value="true"><liferay-ui:message key="enabled" /></option>
 					<option value="false"><liferay-ui:message key="disabled" /></option>
 				</select>
@@ -529,23 +552,108 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="method-get-supported" />
+				<liferay-ui:message key="registration-properties" />
 			</td>
 			<td>
-				<select id="<portlet:namespace />methodGetSupportedId" name="<portlet:namespace />methodGetSupported">
-					<option value="true"><liferay-ui:message key="supported" /></option>
-					<option value="false"><liferay-ui:message key="not-supported" /></option>
-				</select>
+
+				<%
+				List<String> registrationPropertyDescriptions = (List<String>)portletSession.getAttribute("regPropertiesList");
+
+				SearchContainer searchContainer = new SearchContainer();
+
+				List<String> headerNames = new ArrayList<String>();
+
+				headerNames.add("name");
+				headerNames.add("value");
+				headerNames.add("description");
+
+				searchContainer.setHeaderNames(headerNames);
+				searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
+
+				List<String> results = null;
+
+				if (registrationPropertyDescriptions != null) {
+					results = registrationPropertyDescriptions;
+				}
+				else {
+					results = Collections.EMPTY_LIST;
+				}
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					String registrationPropertyDescription = results.get(i);
+
+					String[] propertyArray = registrationPropertyDescription.split(StringPool.EQUAL);
+
+					String propertyName = propertyArray[0];
+					String propertyDescription = propertyArray[1];
+
+					ResultRow row = new ResultRow(propertyName, propertyName, i);
+
+					// Name
+
+					row.addText(propertyName);
+
+					// Value
+
+					String propertyValue = StringPool.BLANK;
+
+					StringBuilder sb = new StringBuilder();
+
+					sb.append("<input name=\"");
+					sb.append(renderResponse.getNamespace());
+					sb.append("regPropName");
+					sb.append(i);
+					sb.append("\" type=\"hidden\" value=\"");
+					sb.append(propertyName);
+					sb.append("\" />");
+
+					sb.append("<input name=\"");
+					sb.append(renderResponse.getNamespace());
+					sb.append("regPropDescription");
+					sb.append(i);
+					sb.append("\" type=\"hidden\" value=\"");
+					sb.append(propertyDescription);
+					sb.append("\" />");
+
+					sb.append("<input name=\"");
+					sb.append(renderResponse.getNamespace());
+					sb.append("regPropValue");
+					sb.append(i);
+					sb.append("\" type=\"text\" value=\"");
+					sb.append(propertyValue);
+					sb.append("\" />");
+
+					row.addText(sb.toString());
+
+					// Description
+
+					row.addText(propertyDescription);
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 			</td>
 		</tr>
-		
+
 		<%
-		ProducerBean producerBean = (ProducerBean)renderRequest.getPortletSession().getAttribute("producerBean");
+		ProducerBean producerBean = (ProducerBean)portletSession.getAttribute("producerBean");
+
 		String version = producerBean.getVersion();
 		boolean supportsInbandRegistration = producerBean.isInbandRegistrationSupported();
 		%>
-		
+
 		<c:if test='<%= version.contains("V2") && !supportsInbandRegistration %>'>
+			<tr>
+				<td colspan="2">
+					<br />
+				</td>
+			</tr>
 			<tr>
 				<td>
 					<liferay-ui:message key="lifetime" />
@@ -581,96 +689,14 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 				</tr>
 			</tbody>
 		</c:if>
-		<tr>
-			<td>
-				<liferay-ui:message key="registration-properties" />
-			</td>
-			<td>
-
-				<%
-				List regPropertiesList = (List)renderRequest.getPortletSession(false).getAttribute("regPropertiesList");
-				Iterator iterator = regPropertiesList.iterator();
-
-				SearchContainer searchContainer = new SearchContainer();
-
-				List<String> headerNames = new ArrayList<String>();
-
-				headerNames.add("name");
-				headerNames.add("value");
-				headerNames.add("description");
-
-				searchContainer.setHeaderNames(headerNames);
-				searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
-
-				List<Map.Entry<String, String>> results = null;
-
-				List resultRows = searchContainer.getResultRows();
-
-				int index = 0;
-				while(iterator.hasNext()) {
-					String keyAndDesc = (String)iterator.next();
-					int idx = keyAndDesc.indexOf("=");
-					String propertyName = keyAndDesc.substring(0,idx);
-					String propertyDescription = keyAndDesc.substring(idx+1, keyAndDesc.length());
-
-
-					ResultRow row = new ResultRow(propertyName, propertyName, index);
-
-					// Name
-
-					row.addText(propertyName);
-
-					// Value
-
-					String propertyValue = StringPool.BLANK;
-
-					StringBuilder sb = new StringBuilder();
-
-					sb.append("<input name=\"");
-					sb.append(renderResponse.getNamespace());
-					sb.append("regPropName");
-					sb.append(index);
-					sb.append("\" type=\"hidden\" value=\"");
-					sb.append(propertyName);
-					sb.append("\" />");
-
-					sb.append("<input name=\"");
-					sb.append(renderResponse.getNamespace());
-					sb.append("regPropDescription");
-					sb.append(index);
-					sb.append("\" type=\"hidden\" value=\"");
-					sb.append(propertyDescription);
-					sb.append("\" />");
-
-					sb.append("<input name=\"");
-					sb.append(renderResponse.getNamespace());
-					sb.append("regPropValue");
-					sb.append(index);
-					sb.append("\" type=\"text\" value=\"");
-					sb.append(propertyValue);
-					sb.append("\" />");
-
-					row.addText(sb.toString());
-
-					// Description
-
-					row.addText(propertyDescription);
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-			</td>
-		</tr>
 		</table>
 
-		<input type="submit" value=<liferay-ui:message key="save" />
-		
-		<input type="button" value=<liferay-ui:message key="cancel" /> onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" /><portlet:param name="producerId" value="<%= ParamUtil.getString(request, "producerId") %>" /></portlet:actionURL>';" />
-		
+		<br />
+
+		<input type="submit" value="<liferay-ui:message key="save" />" />
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+
 		</form>
 	</c:when>
 </c:choose>
@@ -678,35 +704,24 @@ ProducerElementBean[] producerBeans = (ProducerElementBean[])renderRequest.getAt
 <script type="text/javascript">
 	jQuery(
 		function() {
-			jQuery('#<portlet:namespace />addPortletsBtn').click(
-				function() {
-					var textval = jQuery("#<portlet:namespace />unpublishedPortletsId :selected").text();
-					 jQuery('#<portlet:namespace />publishedPortletsId').append(new Option(textval));
-					 jQuery("#<portlet:namespace />unpublishedPortletsId :selected").remove();
-
-				}
-			);
-
-			jQuery('#<portlet:namespace />removePortletsBtn').click(
-				function() {
-					var textval = jQuery("#<portlet:namespace />publishedPortletsId :selected").text();
-					jQuery('#<portlet:namespace />unpublishedPortletsId').append(new Option(textval));
-					jQuery("#<portlet:namespace />publishedPortletsId :selected").remove();
-				}
-			);
-
-			jQuery('#<portlet:namespace />detailsForm').submit(
-				function() {
-					var publishedPortletsLength = jQuery("#<portlet:namespace />publishedPortletsId").length;
-					var ppString = "";
-					for (var i=0; i < publishedPortletsLength; i++)  {
-						var portletString = jQuery("#<portlet:namespace />publishedPortletsId").val(i).text().trim();
-						ppString = ppString + "$" + portletString;
-					}
-					jQuery("#<portlet:namespace />publishedPortletStringId").val(ppString);
-				}
-			);
 			Liferay.Util.toggleBoxes('<portlet:namespace />lifetimeSupplied', '<portlet:namespace />lifetimeSettings');
 		}
 	);
-</script>    
+</script>
+
+<%!
+private String _formatVersion(String version) throws Exception {
+	if (version.equals("V1")) {
+		return "1.0";
+	}
+	else if (version.equals("V2")) {
+		return "2.0";
+	}
+	else if (version.equals("V1andV2")) {
+		return "1.0 and 2.0";
+	}
+	else {
+		return version;
+	}
+}
+%>

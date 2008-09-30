@@ -2175,7 +2175,7 @@
 	<portlet>
 		<portlet-name>138</portlet-name>
 		<display-name>WSRP Producer Admin</display-name>
-		<portlet-class>com.sun.portal.wsrp.producer.portlets.WSRPProducerAdminPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.wsrpproduceradmin.WSRPProducerAdminPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
 			<value>/html/portlet/wsrp_producer_admin</value>

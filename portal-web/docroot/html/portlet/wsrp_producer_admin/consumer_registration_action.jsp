@@ -56,6 +56,7 @@ ConsumerRegistrationBean consumerRegistrationBean = (ConsumerRegistrationBean)ro
 <liferay-ui:icon-menu>
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE_CONSUMER_REGISTRATION) %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="producerId" value="<%= producerId %>" />
 		<portlet:param name="selectedConsumerRegistrations" value="<%= consumerRegistrationBean.getRegistrationHandle() %>" />
 	</portlet:actionURL>
