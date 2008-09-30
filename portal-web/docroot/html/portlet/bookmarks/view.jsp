@@ -66,10 +66,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			iteratorURL="<%= portletURL %>"
 		>
 			<liferay-ui:search-container-results
-				total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
 				results="<%= BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-				var="results"
+				total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
 			/>
+
 			<liferay-ui:search-container-row
 				className="com.liferay.portlet.bookmarks.model.BookmarksFolder"
 				escapedModel="<%= true %>"
@@ -80,10 +80,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="struts_action" value="/bookmarks/view" />
 					<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 				</liferay-portlet:renderURL>
+
 				<liferay-ui:search-container-column-text
-					name="folder"
 					buffer="sb"
+					name="folder"
 				>
+
 					<%
 					sb.append("<a href=\"");
 					sb.append(rowURL);
@@ -145,7 +147,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 					}
 					%>
+
 				</liferay-ui:search-container-column-text>
+
 				<%
 				List subfolderIds = new ArrayList();
 
@@ -156,16 +160,19 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				int foldersCount = subfolderIds.size() - 1;
 				int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
 				%>
+
 				<liferay-ui:search-container-column-text
 					href="<%= rowURL %>"
 					name="num-of-folders"
 					value="<%= String.valueOf(foldersCount) %>"
 				/>
+
 				<liferay-ui:search-container-column-text
 					href="<%= rowURL %>"
 					name="num-of-entries"
 					value="<%= String.valueOf(entriesCount) %>"
 				/>
+
 				<liferay-ui:search-container-column-jsp
 					align="right"
 					path="/html/portlet/bookmarks/folder_action.jsp"
@@ -201,7 +208,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<c:if test="<%= (folder != null) && (showAddFolderButton || (results.size() > 0)) %>">
 				<br />
 			</c:if>
-
 		</liferay-ui:search-container>
 
 		</form>
@@ -254,16 +260,17 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				orderByType="<%= orderByType %>"
 			>
 				<liferay-ui:search-container-results
-					total="<%= BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId()) %>"
 					results="<%= BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
-					var="results"
+					total="<%= BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId()) %>"
 				/>
+
 				<liferay-ui:search-container-row
 					className="com.liferay.portlet.bookmarks.model.BookmarksEntry"
 					escapedModel="<%= true %>"
 					keyProperty="entryId"
 					modelVar="entry"
 				>
+
 					<%
 					StringBuilder sb = new StringBuilder();
 
@@ -273,6 +280,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					String rowHREF = sb.toString();
 					%>
+
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
 						name="entry"
@@ -281,6 +289,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						target="_blank"
 						title="<%= entry.getComments() %>"
 					/>
+
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
 						name="url"
@@ -289,6 +298,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						target="_blank"
 						title="<%= entry.getComments() %>"
 					/>
+
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
 						name="visits"
@@ -297,6 +307,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						target="_blank"
 						title="<%= entry.getComments() %>"
 					/>
+
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
 						name="priority"
@@ -305,6 +316,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						target="_blank"
 						title="<%= entry.getComments() %>"
 					/>
+
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
 						name="modified-date"
@@ -314,6 +326,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						title="<%= entry.getComments() %>"
 						value="<%= dateFormatDate.format(entry.getModifiedDate()) %>"
 					/>
+
 					<liferay-ui:search-container-column-jsp
 						align="right"
 						path="/html/portlet/bookmarks/entry_action.jsp"
@@ -345,7 +358,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<liferay-ui:search-iterator />
-
 			</liferay-ui:search-container>
 
 			</form>
@@ -382,16 +394,17 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			%>
 
 			<liferay-ui:search-container-results
-				total="<%= BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId) %>"
 				results="<%= BookmarksEntryLocalServiceUtil.getGroupEntries(scopeGroupId, groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-				var="results"
+				total="<%= BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId) %>"
 			/>
+
 			<liferay-ui:search-container-row
 				className="com.liferay.portlet.bookmarks.model.BookmarksEntry"
 				escapedModel="<%= true %>"
 				keyProperty="entryId"
 				modelVar="entry"
 			>
+
 				<%
 				StringBuilder sb = new StringBuilder();
 
@@ -401,6 +414,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				String rowHREF = sb.toString();
 				%>
+
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="entry"
@@ -408,6 +422,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					target="_blank"
 					title="<%= entry.getComments() %>"
 				/>
+
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="url"
@@ -415,6 +430,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					target="_blank"
 					title="<%= entry.getComments() %>"
 				/>
+
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="visits"
@@ -422,6 +438,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					target="_blank"
 					title="<%= entry.getComments() %>"
 				/>
+
 				<liferay-ui:search-container-column-jsp
 					align="right"
 					path="/html/portlet/bookmarks/entry_action.jsp"
