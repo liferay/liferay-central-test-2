@@ -105,6 +105,10 @@ body {
 	padding: 3px 0;
 }
 
+.ie6 .lfr-ctrl-panel .panel-category h2 {
+	padding-bottom: 5px;
+}
+
 .lfr-ctrl-panel .panel-category.closed li ul {
 	display: none;
 }
@@ -112,6 +116,10 @@ body {
 .lfr-ctrl-panel .panel-category {
 	background: transparent url(../images/common/category_bg.png) repeat-x scroll 0 0;
 	margin: 0;
+}
+
+.ie6 .lfr-ctrl-panel .panel-category .category-portlets li {
+	zoom: 1;
 }
 
 .lfr-ctrl-panel .panel-category .category-portlets a {
