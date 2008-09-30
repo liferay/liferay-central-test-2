@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -63,7 +64,19 @@ import org.apache.commons.logging.LogFactory;
 public class ServiceComponentLocalServiceImpl
 	extends ServiceComponentLocalServiceBaseImpl {
 
-	public ServiceComponent updateServiceComponent(
+	public void destroyServiceComponent(
+			ServletContext servletContext, ClassLoader classLoader)
+		throws SystemException {
+
+		try {
+			clearCacheRegistry(servletContext);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	public ServiceComponent initServiceComponent(
 			ServletContext servletContext, ClassLoader classLoader,
 			String buildNamespace, long buildNumber, long buildDate)
 		throws PortalException, SystemException {
@@ -166,13 +179,52 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected String[] getModels(ClassLoader classLoader)
+	protected void clearCacheRegistry(ServletContext servletContext)
+		throws DocumentException, IOException {
+
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource(
+				"/WEB-INF/classes/META-INF/portlet-hbm.xml"));
+
+		if (xml == null) {
+			return;
+		}
+
+		Document doc = SAXReaderUtil.read(xml);
+
+		Element root = doc.getRootElement();
+
+		List<Element> classEls = root.elements("class");
+
+		for (Element classEl : classEls) {
+			String name = classEl.attributeValue("name");
+
+			CacheRegistry.unregister(name);
+		}
+
+		CacheRegistry.clear();
+	}
+
+	protected List<String> getModels(ClassLoader classLoader)
 		throws DocumentException, IOException {
 
 		List<String> models = new ArrayList<String>();
 
 		String xml = StringUtil.read(
 			classLoader, "META-INF/portlet-model-hints.xml");
+
+		models.addAll(getModels(xml));
+
+		xml = StringUtil.read(
+			classLoader, "META-INF/portlet-model-hints-ext.xml");
+
+		models.addAll(getModels(xml));
+
+		return models;
+	}
+
+	protected List<String> getModels(String xml) throws DocumentException {
+		List<String> models = new ArrayList<String>();
 
 		Document doc = SAXReaderUtil.read(xml);
 
@@ -188,7 +240,7 @@ public class ServiceComponentLocalServiceImpl
 			models.add(name);
 		}
 
-		return models.toArray(new String[models.size()]);
+		return models;
 	}
 
 	protected void upgradeDB(
@@ -252,11 +304,9 @@ public class ServiceComponentLocalServiceImpl
 	}
 
 	protected void upgradeModels(ClassLoader classLoader) throws Exception {
-		String[] models = getModels(classLoader);
+		List<String> models = getModels(classLoader);
 
-		for (int i = 0; i < models.length; i++) {
-			String name = models[i];
-
+		for (String name : models) {
 			int pos = name.lastIndexOf(".model.");
 
 			name =

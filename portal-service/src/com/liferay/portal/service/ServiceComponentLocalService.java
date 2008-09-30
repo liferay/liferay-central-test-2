@@ -86,7 +86,12 @@ public interface ServiceComponentLocalService {
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
+	public void destroyServiceComponent(
+		javax.servlet.ServletContext servletContext,
+		java.lang.ClassLoader classLoader)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.ServiceComponent initServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
 		long buildNumber, long buildDate)

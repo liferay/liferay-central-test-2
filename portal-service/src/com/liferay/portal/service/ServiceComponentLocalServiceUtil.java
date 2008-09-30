@@ -103,14 +103,21 @@ public class ServiceComponentLocalServiceUtil {
 		return getService().updateServiceComponent(serviceComponent);
 	}
 
-	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
+	public static void destroyServiceComponent(
+		javax.servlet.ServletContext servletContext,
+		java.lang.ClassLoader classLoader)
+		throws com.liferay.portal.SystemException {
+		getService().destroyServiceComponent(servletContext, classLoader);
+	}
+
+	public static com.liferay.portal.model.ServiceComponent initServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
 		long buildNumber, long buildDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateServiceComponent(servletContext, classLoader,
+				   .initServiceComponent(servletContext, classLoader,
 			buildNamespace, buildNumber, buildDate);
 	}
 

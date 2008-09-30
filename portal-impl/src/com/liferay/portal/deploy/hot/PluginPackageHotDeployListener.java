@@ -22,7 +22,6 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
@@ -32,10 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
-import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
@@ -44,7 +40,6 @@ import com.liferay.util.Version;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.List;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -187,6 +182,14 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
+	protected void destroyServiceComponent(
+			ServletContext servletContext, ClassLoader classLoader)
+		throws Exception {
+
+		ServiceComponentLocalServiceUtil.destroyServiceComponent(
+			servletContext, classLoader);
+	}
+
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
 		ServletContext servletContext = event.getServletContext();
 
@@ -214,10 +217,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
 
-		_processServiceBuilderProperties = false;
-
-		processServiceBuilderProperties(
-			servletContext, event.getContextClassLoader());
+		initServiceComponent(servletContext, event.getContextClassLoader());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -245,7 +245,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
 
-		processCacheRegistry(servletContext);
+		destroyServiceComponent(servletContext, event.getContextClassLoader());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -254,36 +254,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void processCacheRegistry(ServletContext servletContext)
-		throws Exception {
-
-		if (!_processServiceBuilderProperties) {
-			return;
-		}
-
-		String xml = HttpUtil.URLtoString(servletContext.getResource(
-			"/WEB-INF/classes/META-INF/portlet-hbm.xml"));
-
-		if (xml == null) {
-			return;
-		}
-
-		Document doc = SAXReaderUtil.read(xml);
-
-		Element root = doc.getRootElement();
-
-		List<Element> classEls = root.elements("class");
-
-		for (Element classEl : classEls) {
-			String name = classEl.attributeValue("name");
-
-			CacheRegistry.unregister(name);
-		}
-
-		CacheRegistry.clear();
-	}
-
-	protected void processServiceBuilderProperties(
+	protected void initServiceComponent(
 			ServletContext servletContext, ClassLoader classLoader)
 		throws Exception {
 
@@ -322,16 +293,12 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Build date " + buildDate);
 		}
 
-		ServiceComponentLocalServiceUtil.updateServiceComponent(
+		ServiceComponentLocalServiceUtil.initServiceComponent(
 			servletContext, classLoader, buildNamespace, buildNumber,
 			buildDate);
-
-		_processServiceBuilderProperties = true;
 	}
 
 	private static Log _log =
 		LogFactory.getLog(PluginPackageHotDeployListener.class);
-
-	private boolean _processServiceBuilderProperties;
 
 }
