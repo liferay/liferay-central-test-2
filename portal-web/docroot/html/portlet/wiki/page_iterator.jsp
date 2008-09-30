@@ -221,6 +221,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	WikiPage curWikiPage = (WikiPage)results.get(i);
 
+	curWikiPage = curWikiPage.toEscapedModel();
+
 	ResultRow row = new ResultRow(curWikiPage, String.valueOf(curWikiPage.getVersion()), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
@@ -234,13 +236,11 @@ for (int i = 0; i < results.size(); i++) {
 		rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));
 	}
 
-	rowURL.setParameter("title", curWikiPage.getTitle());
+	rowURL.setParameter("title", HtmlUtil.unescape(curWikiPage.getTitle()));
 
 	if (type.equals("history")) {
 		rowURL.setParameter("version", String.valueOf(curWikiPage.getVersion()));
 	}
-
-	curWikiPage = curWikiPage.toEscapedModel();
 
 	// Title
 
