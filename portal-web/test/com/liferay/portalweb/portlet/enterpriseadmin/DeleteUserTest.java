@@ -97,5 +97,7 @@ public class DeleteUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.click("link=\u00ab Basic");
+		selenium.click("link=Return to Full Page");
 	}
 }

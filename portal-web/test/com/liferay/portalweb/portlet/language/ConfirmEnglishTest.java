@@ -22,26 +22,20 @@
 
 package com.liferay.portalweb.portlet.language;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="LanguageTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfirmEnglishTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LanguageTests extends BaseTests {
-
-	public LanguageTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(LanguageTest.class);
-		//addTestSuite(InternationalizationChineseTest.class);
-		addTestSuite(InternationalizationJapaneseTest.class);
-		addTestSuite(InternationalizationSpanishTest.class);
-		addTestSuite(InternationalizationVerifyTest.class);
-		addTestSuite(ConfirmEnglishTest.class);
-		addTestSuite(DeletePageTest.class);
+public class ConfirmEnglishTest extends BaseTestCase {
+	public void testConfirmEnglish() throws Exception {
+		selenium.click("//img[@alt='English (United States)']");
+		selenium.click(RuntimeVariables.replace(
+				"//img[@alt='English (United States)']"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

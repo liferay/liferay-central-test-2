@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteAnnouncementTest.java.html"><b><i>View Source</i></b></a>
@@ -51,5 +52,8 @@ public class DeleteAnnouncementTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
 }
