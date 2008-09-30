@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<resource-action-mapping>
+	<portlet-resource>
+		<portlet-name>139</portlet-name>
+		<supports>
+			<action-key>ADD_EXPANDO</action-key>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ADD_EXPANDO</action-key>
+			<action-key>CONFIGURATION</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<model-resource>
+		<model-name>com.liferay.portlet.expando.model.ExpandoColumn</model-name>
+		<portlet-ref>
+			<portlet-name>139</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+		</guest-unsupported>
+	</model-resource>
+</resource-action-mapping>

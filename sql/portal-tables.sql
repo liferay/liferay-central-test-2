@@ -332,7 +332,8 @@ create table ExpandoColumn (
 	tableId LONG,
 	name VARCHAR(75) null,
 	type_ INTEGER,
-	defaultData STRING null
+	defaultData STRING null,
+	typeSettings TEXT null
 );
 
 create table ExpandoRow (

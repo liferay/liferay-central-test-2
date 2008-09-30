@@ -20,12 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.expando.model;
+package com.liferay.portlet.expando.service.http;
 
-import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
+import com.liferay.portlet.expando.model.ExpandoColumn;
+
+import java.util.List;
 
 /**
- * <a href="ExpandoColumnModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoColumnJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,45 +39,38 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>ExpandoColumn</code>
- * table in the database.
+ * This class is used by
+ * <code>com.liferay.portlet.expando.service.http.ExpandoColumnServiceJSON</code>
+ * to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.model.ExpandoColumn
- * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
- * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ * @see com.liferay.portlet.expando.service.http.ExpandoColumnServiceJSON
  *
  */
-public interface ExpandoColumnModel extends BaseModel {
-	public long getPrimaryKey();
+public class ExpandoColumnJSONSerializer {
+	public static JSONObject toJSONObject(ExpandoColumn model) {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-	public void setPrimaryKey(long pk);
+		jsonObj.put("columnId", model.getColumnId());
+		jsonObj.put("tableId", model.getTableId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("defaultData", model.getDefaultData());
+		jsonObj.put("typeSettings", model.getTypeSettings());
 
-	public long getColumnId();
+		return jsonObj;
+	}
 
-	public void setColumnId(long columnId);
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.expando.model.ExpandoColumn> models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-	public long getTableId();
+		for (ExpandoColumn model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
 
-	public void setTableId(long tableId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public int getType();
-
-	public void setType(int type);
-
-	public String getDefaultData();
-
-	public void setDefaultData(String defaultData);
-
-	public String getTypeSettings();
-
-	public void setTypeSettings(String typeSettings);
-
-	public ExpandoColumn toEscapedModel();
+		return jsonArray;
+	}
 }

@@ -76,6 +76,8 @@ public class PortletKeys {
 
 	public static final String ENTERPRISE_ADMIN_USERS = "125";
 
+	public static final String EXPANDO = "139";
+
 	public static final String IMAGE_GALLERY = "31";
 
 	public static final String INVITATION = "100";

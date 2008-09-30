@@ -255,6 +255,13 @@ public class ExpandoColumnLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
+		long columnId, java.lang.String properties)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateColumn(columnId, properties);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

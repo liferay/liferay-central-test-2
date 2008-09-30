@@ -25,6 +25,8 @@ package com.liferay.portlet.expando.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.ColumnNameException;
 import com.liferay.portlet.expando.ColumnTypeException;
@@ -73,6 +75,17 @@ public class ExpandoColumnLocalServiceImpl
 		column.setDefaultData(value.getData());
 
 		expandoColumnPersistence.update(column, false);
+
+		// Resources
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		long companyId = permissionChecker.getCompanyId();
+
+		resourceLocalService.addResources(
+			companyId, 0, 0, ExpandoColumn.class.getName(),
+			column.getColumnId(), false, false, false);
 
 		return column;
 	}
@@ -256,6 +269,19 @@ public class ExpandoColumnLocalServiceImpl
 
 		return expandoColumnFinder.countByTC_TN(
 			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
+	}
+
+	public ExpandoColumn updateColumn(long columnId, String properties)
+		throws PortalException, SystemException {
+
+		ExpandoColumn column = expandoColumnPersistence.findByPrimaryKey(
+			columnId);
+
+		column.setTypeSettings(properties);
+
+		expandoColumnPersistence.update(column, false);
+
+		return column;
 	}
 
 	public ExpandoColumn updateColumn(long columnId, String name, int type)

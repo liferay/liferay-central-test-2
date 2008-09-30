@@ -824,6 +824,9 @@
 		<field name="defaultData" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="typeSettings" type="String">
+			<hint-collection name="CLOB" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoRow">
 		<field name="rowId" type="long" />

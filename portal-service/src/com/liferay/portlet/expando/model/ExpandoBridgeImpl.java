@@ -24,8 +24,10 @@ package com.liferay.portlet.expando.model;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 
@@ -70,7 +72,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 					_className);
 			}
 
-			ExpandoColumnLocalServiceUtil.addColumn(
+			ExpandoColumnServiceUtil.addColumn(
 				table.getTableId(), name, type, defaultValue);
 		}
 		catch (Exception e) {
@@ -128,6 +130,21 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 
 		return Collections.enumeration(columnNames);
+	}
+
+	public UnicodeProperties getAttributeProperties(String name) {
+		try {
+			ExpandoColumn column =
+				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+					_className, name);
+
+			return column.getTypeSettingsProperties();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
 	}
 
 	public Map<String, Object> getAttributes() {
@@ -192,9 +209,25 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
 					_className, name);
 
-			ExpandoColumnLocalServiceUtil.updateColumn(
+			ExpandoColumnServiceUtil.updateColumn(
 				column.getColumnId(), column.getName(), column.getType(),
 				defaultValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void setAttributeProperties(
+		String name, UnicodeProperties properties) {
+
+		try {
+			ExpandoColumn column =
+				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+					_className, name);
+
+			ExpandoColumnServiceUtil.updateColumn(
+				column.getColumnId(), properties.toString());
 		}
 		catch (Exception e) {
 			_log.error(e, e);

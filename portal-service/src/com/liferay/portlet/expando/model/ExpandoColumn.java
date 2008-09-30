@@ -50,4 +50,9 @@ package com.liferay.portlet.expando.model;
  */
 public interface ExpandoColumn extends ExpandoColumnModel {
 	public java.lang.Object getDefaultValue();
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 }

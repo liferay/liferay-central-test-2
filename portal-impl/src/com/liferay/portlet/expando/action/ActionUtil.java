@@ -20,44 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.expando.model;
+package com.liferay.portlet.expando.action;
 
-import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 
-import java.util.Enumeration;
-import java.util.Map;
+import javax.portlet.ActionRequest;
+import javax.portlet.RenderRequest;
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
- * <a href="ExpandoBridge.java.html"><b><i>View Source</i></b></a>
+ * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public interface ExpandoBridge {
+public class ActionUtil {
 
-	public void addAttribute(String name);
+	public static void getColumn(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-	public void addAttribute(String name, int type);
+		getColumn(request);
+	}
 
-	public void addAttribute(String name, int type, Object defaultValue);
+	public static void getColumn(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-	public Object getAttribute(String name);
+		getColumn(request);
+	}
 
-	public Object getAttributeDefault(String name);
+	public static void getColumn(HttpServletRequest request) throws Exception {
+		long columnId = ParamUtil.getLong(request, "columnId");
 
-	public Enumeration<String> getAttributeNames();
+		ExpandoColumn column = null;
 
-	public UnicodeProperties getAttributeProperties(String name);
+		if (columnId > 0) {
+			column = ExpandoColumnLocalServiceUtil.getColumn(columnId);
+		}
 
-	public Map<String, Object> getAttributes();
-
-	public int getAttributeType(String name);
-
-	public void setAttribute(String name, Object value);
-
-	public void setAttributeDefault(String name, Object defaultValue);
-
-	public void setAttributeProperties(
-		String name, UnicodeProperties properties);
+		request.setAttribute(WebKeys.EXPANDO, column);
+	}
 
 }

@@ -25,11 +25,12 @@ package com.liferay.portlet.expando.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.base.PrincipalBean;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourcePersistence;
 
-import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoColumnService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
@@ -43,69 +44,14 @@ import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
-import java.util.List;
-
 /**
- * <a href="ExpandoTableLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoColumnServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ExpandoTableLocalServiceBaseImpl
-	implements ExpandoTableLocalService {
-	public ExpandoTable addExpandoTable(ExpandoTable expandoTable)
-		throws SystemException {
-		expandoTable.setNew(true);
-
-		return expandoTablePersistence.update(expandoTable, false);
-	}
-
-	public ExpandoTable createExpandoTable(long tableId) {
-		return expandoTablePersistence.create(tableId);
-	}
-
-	public void deleteExpandoTable(long tableId)
-		throws PortalException, SystemException {
-		expandoTablePersistence.remove(tableId);
-	}
-
-	public void deleteExpandoTable(ExpandoTable expandoTable)
-		throws SystemException {
-		expandoTablePersistence.remove(expandoTable);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
-		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
-	}
-
-	public ExpandoTable getExpandoTable(long tableId)
-		throws PortalException, SystemException {
-		return expandoTablePersistence.findByPrimaryKey(tableId);
-	}
-
-	public List<ExpandoTable> getExpandoTables(int start, int end)
-		throws SystemException {
-		return expandoTablePersistence.findAll(start, end);
-	}
-
-	public int getExpandoTablesCount() throws SystemException {
-		return expandoTablePersistence.countAll();
-	}
-
-	public ExpandoTable updateExpandoTable(ExpandoTable expandoTable)
-		throws SystemException {
-		expandoTable.setNew(false);
-
-		return expandoTablePersistence.update(expandoTable, true);
-	}
-
+public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
+	implements ExpandoColumnService {
 	public ExpandoColumnLocalService getExpandoColumnLocalService() {
 		return expandoColumnLocalService;
 	}
@@ -227,6 +173,39 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")
 	protected ExpandoColumnLocalService expandoColumnLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnService.impl")
@@ -255,4 +234,12 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	protected ResourceLocalService resourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
+	protected ResourceService resourceService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected ResourcePersistence resourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	protected ResourceFinder resourceFinder;
 }

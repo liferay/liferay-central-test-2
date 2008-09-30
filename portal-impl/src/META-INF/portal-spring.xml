@@ -1211,6 +1211,16 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoColumnServiceImpl" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoColumnService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnServiceFactory">
+		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoColumnService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnServiceUtil" class="com.liferay.portlet.expando.service.ExpandoColumnServiceUtil">
+		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoColumnService.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />

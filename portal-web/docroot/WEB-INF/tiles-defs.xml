@@ -425,6 +425,18 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin_communities/view.jsp" />
 	</definition>
 
+	<!-- Expando -->
+
+	<definition name="portlet.expando" extends="portlet" />
+
+	<definition name="portlet.expando.edit_expando" extends="portlet.expando">
+		<put name="portlet_content" value="/portlet/expando/edit_expando.jsp" />
+	</definition>
+
+	<definition name="portlet.expando.view" extends="portlet.expando">
+		<put name="portlet_content" value="/portlet/expando/view.jsp" />
+	</definition>
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

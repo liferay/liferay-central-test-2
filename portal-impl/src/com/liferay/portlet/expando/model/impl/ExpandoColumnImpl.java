@@ -22,9 +22,15 @@
 
 package com.liferay.portlet.expando.model.impl;
 
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
+
+import java.io.IOException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ExpandoColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -101,5 +107,32 @@ public class ExpandoColumnImpl
 			return null;
 		}
 	}
+
+	public UnicodeProperties getTypeSettingsProperties() {
+		if (_typeSettingsProperties == null) {
+			_typeSettingsProperties = new UnicodeProperties(true);
+
+			try {
+				_typeSettingsProperties.load(super.getTypeSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
+
+		return _typeSettingsProperties;
+	}
+
+	public void setTypeSettingsProperties(
+		UnicodeProperties typeSettingsProperties) {
+
+		_typeSettingsProperties = typeSettingsProperties;
+
+		super.setTypeSettings(_typeSettingsProperties.toString());
+	}
+
+	private static Log _log = LogFactory.getLog(ExpandoColumnImpl.class);
+
+	private UnicodeProperties _typeSettingsProperties = null;
 
 }

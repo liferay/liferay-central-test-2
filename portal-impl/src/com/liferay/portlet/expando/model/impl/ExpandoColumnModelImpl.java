@@ -74,9 +74,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 			{ "type_", new Integer(Types.INTEGER) },
 			
 
-			{ "defaultData", new Integer(Types.VARCHAR) }
+			{ "defaultData", new Integer(Types.VARCHAR) },
+			
+
+			{ "typeSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,tableId LONG,name VARCHAR(75) null,type_ INTEGER,defaultData STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,tableId LONG,name VARCHAR(75) null,type_ INTEGER,defaultData STRING null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoColumn";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -93,6 +96,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
 		model.setDefaultData(soapModel.getDefaultData());
+		model.setTypeSettings(soapModel.getTypeSettings());
 
 		return model;
 	}
@@ -180,6 +184,19 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getTypeSettings() {
+		return GetterUtil.getString(_typeSettings);
+	}
+
+	public void setTypeSettings(String typeSettings) {
+		if (((typeSettings == null) && (_typeSettings != null)) ||
+				((typeSettings != null) && (_typeSettings == null)) ||
+				((typeSettings != null) && (_typeSettings != null) &&
+				!typeSettings.equals(_typeSettings))) {
+			_typeSettings = typeSettings;
+		}
+	}
+
 	public ExpandoColumn toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoColumn)this;
@@ -195,6 +212,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 			model.setName(HtmlUtil.escape(getName()));
 			model.setType(getType());
 			model.setDefaultData(HtmlUtil.escape(getDefaultData()));
+			model.setTypeSettings(HtmlUtil.escape(getTypeSettings()));
 
 			model = (ExpandoColumn)Proxy.newProxyInstance(ExpandoColumn.class.getClassLoader(),
 					new Class[] { ExpandoColumn.class },
@@ -212,6 +230,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		clone.setName(getName());
 		clone.setType(getType());
 		clone.setDefaultData(getDefaultData());
+		clone.setTypeSettings(getTypeSettings());
 
 		return clone;
 	}
@@ -269,4 +288,5 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 	private String _name;
 	private int _type;
 	private String _defaultData;
+	private String _typeSettings;
 }

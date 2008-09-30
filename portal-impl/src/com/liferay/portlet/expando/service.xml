@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.expando">
 	<namespace>Expando</namespace>
-	<entity name="ExpandoColumn" local-service="true" remote-service="false">
+	<entity name="ExpandoColumn" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -15,6 +15,7 @@
 		<column name="name" type="String" />
 		<column name="type" type="int" />
 		<column name="defaultData" type="String" />
+		<column name="typeSettings" type="String" />
 
 		<!-- Finder methods -->
 
@@ -29,6 +30,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="ExpandoRow" local-service="true" remote-service="false">
 

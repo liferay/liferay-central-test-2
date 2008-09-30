@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
+import com.liferay.portlet.expando.service.ExpandoColumnService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
@@ -112,6 +113,15 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	public void setExpandoColumnLocalService(
 		ExpandoColumnLocalService expandoColumnLocalService) {
 		this.expandoColumnLocalService = expandoColumnLocalService;
+	}
+
+	public ExpandoColumnService getExpandoColumnService() {
+		return expandoColumnService;
+	}
+
+	public void setExpandoColumnService(
+		ExpandoColumnService expandoColumnService) {
+		this.expandoColumnService = expandoColumnService;
 	}
 
 	public ExpandoColumnPersistence getExpandoColumnPersistence() {
@@ -219,6 +229,8 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")
 	protected ExpandoColumnLocalService expandoColumnLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnService.impl")
+	protected ExpandoColumnService expandoColumnService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
 	protected ExpandoColumnPersistence expandoColumnPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl")

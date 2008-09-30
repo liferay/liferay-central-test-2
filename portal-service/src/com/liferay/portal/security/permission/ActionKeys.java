@@ -51,6 +51,8 @@ public class ActionKeys {
 
 	public static final String ADD_EVENT = "ADD_EVENT";
 
+	public static final String ADD_EXPANDO = "ADD_EXPANDO";
+
 	public static final String ADD_FEED = "ADD_FEED";
 
 	public static final String ADD_FILE = "ADD_FILE";

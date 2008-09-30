@@ -1241,6 +1241,20 @@
 		<portlet-name>138</portlet-name>
 		<struts-path>wsrp_producer_admin</struts-path>
 	</portlet>
+	<portlet>
+		<portlet-name>139</portlet-name>
+		<icon>/html/portlet/expando/icon.png</icon>
+		<struts-path>expando</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/expando/css.jsp</header-portlet-css>
+		<css-class-wrapper>expando</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
+		<system>true</system>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

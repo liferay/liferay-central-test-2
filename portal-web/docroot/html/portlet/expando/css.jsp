@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,45 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.expando.model;
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-import com.liferay.portal.kernel.util.UnicodeProperties;
-
-import java.util.Enumeration;
-import java.util.Map;
-
-/**
- * <a href="ExpandoBridge.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
-public interface ExpandoBridge {
-
-	public void addAttribute(String name);
-
-	public void addAttribute(String name, int type);
-
-	public void addAttribute(String name, int type, Object defaultValue);
-
-	public Object getAttribute(String name);
-
-	public Object getAttributeDefault(String name);
-
-	public Enumeration<String> getAttributeNames();
-
-	public UnicodeProperties getAttributeProperties(String name);
-
-	public Map<String, Object> getAttributes();
-
-	public int getAttributeType(String name);
-
-	public void setAttribute(String name, Object value);
-
-	public void setAttributeDefault(String name, Object defaultValue);
-
-	public void setAttributeProperties(
-		String name, UnicodeProperties properties);
-
+.expando {
 }

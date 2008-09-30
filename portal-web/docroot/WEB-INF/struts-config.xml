@@ -865,6 +865,15 @@
 
 		<action path="/enterprise_admin_users/view" forward="portlet.enterprise_admin.view" />
 
+		<!-- Expandos -->
+
+		<action path="/expando/view" forward="portlet.expando.view" />
+
+		<action path="/expando/edit_expando" type="com.liferay.portlet.expando.action.EditExpandoAction">
+			<forward name="portlet.expando.edit_expando" path="portlet.expando.edit_expando" />
+			<forward name="portlet.expando.error" path="portlet.expando.error" />
+		</action>
+
 		<!-- Global Prayer Digest -->
 
 		<action path="/global_prayer_digest/view" type="com.liferay.portlet.globalprayerdigest.action.ViewAction">

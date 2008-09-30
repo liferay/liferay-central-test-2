@@ -75,6 +75,7 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		newExpandoColumn.setName(randomString());
 		newExpandoColumn.setType(nextInt());
 		newExpandoColumn.setDefaultData(randomString());
+		newExpandoColumn.setTypeSettings(randomString());
 
 		_persistence.update(newExpandoColumn, false);
 
@@ -88,6 +89,8 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingExpandoColumn.getType(), newExpandoColumn.getType());
 		assertEquals(existingExpandoColumn.getDefaultData(),
 			newExpandoColumn.getDefaultData());
+		assertEquals(existingExpandoColumn.getTypeSettings(),
+			newExpandoColumn.getTypeSettings());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -135,6 +138,7 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		expandoColumn.setName(randomString());
 		expandoColumn.setType(nextInt());
 		expandoColumn.setDefaultData(randomString());
+		expandoColumn.setTypeSettings(randomString());
 
 		_persistence.update(expandoColumn, false);
 
