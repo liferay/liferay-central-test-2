@@ -1077,6 +1077,18 @@ public class PropsKeys {
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
 
+	public static final String USERS_PROFILE_ADD_IDENTIFICATION = "users.profile.add.identification";
+
+	public static final String USERS_PROFILE_ADD_MAIN = "users.profile.add.main";
+
+	public static final String USERS_PROFILE_ADD_MISCELLANEOUS = "users.profile.add.miscellaneous";
+
+	public static final String USERS_PROFILE_UPDATE_IDENTIFICATION = "users.profile.update.identification";
+
+	public static final String USERS_PROFILE_UPDATE_MAIN = "users.profile.update.main";
+
+	public static final String USERS_PROFILE_UPDATE_MISCELLANEOUS = "users.profile.update.miscellaneous";
+
 	public static final String USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE = "users.screen.name.always.autogenerate";
 
 	public static final String USERS_SCREEN_NAME_GENERATOR = "users.screen.name.generator";
@@ -1084,18 +1096,6 @@ public class PropsKeys {
 	public static final String USERS_SCREEN_NAME_VALIDATOR = "users.screen.name.validator";
 
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
-
-	public static final String USERS_PROFILE_ADD_MAIN = "users.profile.add.main";
-
-	public static final String USERS_PROFILE_ADD_IDENTIFICATION = "users.profile.add.identification";
-
-	public static final String USERS_PROFILE_ADD_MISCELLANEOUS = "users.profile.add.miscellaneous";
-
-	public static final String USERS_PROFILE_UPDATE_MAIN = "users.profile.update.main";
-
-	public static final String USERS_PROFILE_UPDATE_IDENTIFICATION = "users.profile.update.identification";
-	
-	public static final String USERS_PROFILE_UPDATE_MISCELLANEOUS = "users.profile.update.miscellaneous";
 
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 

@@ -1031,6 +1031,24 @@ public class PropsValues {
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 
+	public static final String[] USERS_PROFILE_ADD_IDENTIFICATION =
+		PropsUtil.getArray(PropsKeys.USERS_PROFILE_ADD_IDENTIFICATION);
+
+	public static final String[] USERS_PROFILE_ADD_MAIN =
+		PropsUtil.getArray(PropsKeys.USERS_PROFILE_ADD_MAIN);
+
+	public static final String[] USERS_PROFILE_ADD_MISCELLANEOUS =
+		PropsUtil.getArray(PropsKeys.USERS_PROFILE_ADD_MISCELLANEOUS);
+
+	public static final String[] USERS_PROFILE_UPDATE_IDENTIFICATION =
+		PropsUtil.getArray(PropsKeys.USERS_PROFILE_UPDATE_IDENTIFICATION);
+
+	public static final String[] USERS_PROFILE_UPDATE_MAIN =
+		PropsUtil.getArray(PropsKeys.USERS_PROFILE_UPDATE_MAIN);
+
+	public static final String[] USERS_PROFILE_UPDATE_MISCELLANEOUS =
+		PropsUtil.getArray(PropsKeys.USERS_PROFILE_UPDATE_MISCELLANEOUS);
+
 	public static final boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
@@ -1043,24 +1061,6 @@ public class PropsValues {
 
 	public static final boolean USERS_UPDATE_LAST_LOGIN =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_UPDATE_LAST_LOGIN));
-
-	public static final String[] USERS_PROFILE_ADD_MAIN =
-		PropsUtil.getArray(PropsKeys.USERS_PROFILE_ADD_MAIN);
-
-	public static final String[] USERS_PROFILE_ADD_IDENTIFICATION =
-		PropsUtil.getArray(PropsKeys.USERS_PROFILE_ADD_IDENTIFICATION);
-
-	public static final String[] USERS_PROFILE_ADD_MISCELLANEOUS =
-		PropsUtil.getArray(PropsKeys.USERS_PROFILE_ADD_MISCELLANEOUS);
-
-	public static final String[] USERS_PROFILE_UPDATE_MAIN =
-		PropsUtil.getArray(PropsKeys.USERS_PROFILE_UPDATE_MAIN);
-
-	public static final String[] USERS_PROFILE_UPDATE_IDENTIFICATION =
-		PropsUtil.getArray(PropsKeys.USERS_PROFILE_UPDATE_IDENTIFICATION);
-
-	public static final String[] USERS_PROFILE_UPDATE_MISCELLANEOUS =
-		PropsUtil.getArray(PropsKeys.USERS_PROFILE_UPDATE_MISCELLANEOUS);
 
 	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.WEB_SERVER_DISPLAY_NODE));
