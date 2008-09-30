@@ -55,10 +55,14 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				}
 			}
 
+			if (fieldParam == null) {
+				fieldParam = field;
+			}
+
 			boolean value = BeanParamUtil.getBoolean(bean, request, field, defaultBoolean);
 			%>
 
-			<liferay-ui:input-checkbox formName="<%= formName %>" param="<%= field %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
+			<liferay-ui:input-checkbox formName="<%= formName %>" param="<%= fieldParam %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
 		</c:when>
 		<c:when test='<%= type.equals("Date") %>'>
 
@@ -213,27 +217,23 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			String value = null;
 
 			if (fieldParam == null) {
-				fieldParam = namespace + field;
+				fieldParam = field;
+			}
 
-				if (type.equals("double")) {
-					value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
-				}
-				else if (type.equals("int")) {
-					value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
-				}
-				else {
-					value = BeanParamUtil.getString(bean, request, field, defaultString);
-
-					String httpValue = request.getParameter(field);
-
-					if (httpValue != null) {
-						value = httpValue;
-					}
-				}
+			if (type.equals("double")) {
+				value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
+			}
+			else if (type.equals("int")) {
+				value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
 			}
 			else {
-				fieldParam = namespace + fieldParam;
-				value = defaultString;
+				value = BeanParamUtil.getString(bean, request, field, defaultString);
+
+				String httpValue = request.getParameter(fieldParam);
+
+				if (httpValue != null) {
+					value = httpValue;
+				}
 			}
 
 			boolean autoEscape = true;
@@ -259,6 +259,8 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				upperCase = GetterUtil.getBoolean(hints.get("upper-case"), upperCase);
 				checkTab = GetterUtil.getBoolean(hints.get("check-tab"), checkTab);
 			}
+
+			fieldParam = namespace + fieldParam;
 			%>
 
 			<c:choose>
