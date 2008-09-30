@@ -38,10 +38,14 @@ public class ExpandoAttributeTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:expando-attribute:className", _className);
+		request.setAttribute(
+			"liferay-ui:expando-attribute:className", _className);
 		request.setAttribute(
 			"liferay-ui:expando-attribute:classPK", String.valueOf(_classPK));
-		request.setAttribute("liferay-ui:expando-attribute:editable", String.valueOf(_editable));
+		request.setAttribute(
+			"liferay-ui:expando-attribute:editable", String.valueOf(_editable));
+		request.setAttribute(
+			"liferay-ui:expando-attribute:label", String.valueOf(_label));
 		request.setAttribute("liferay-ui:expando-attribute:name", _name);
 
 		return EVAL_BODY_BUFFERED;
@@ -63,6 +67,10 @@ public class ExpandoAttributeTag extends IncludeTag {
 		_editable = editable;
 	}
 
+	public void setLabel(boolean label) {
+		_label = label;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -72,6 +80,7 @@ public class ExpandoAttributeTag extends IncludeTag {
 	private String _className;
 	private long _classPK;
 	private boolean _editable = false;
+	private boolean _label = false;
 	private String _name;
 
 }
