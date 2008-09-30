@@ -25,7 +25,6 @@ package com.liferay.portalweb.portal;
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portlet.alfrescocontent.AlfrescoContentTests;
 import com.liferay.portalweb.portlet.analogclock.AnalogClockTests;
-import com.liferay.portalweb.portlet.applicationbuilder.ApplicationBuilderTests;
 import com.liferay.portalweb.portlet.chat.ChatTests;
 import com.liferay.portalweb.portlet.flash.FlashTests;
 import com.liferay.portalweb.portlet.googleadsense.GoogleAdSenseTests;
@@ -67,7 +66,7 @@ public class Plugins1TestSuite extends BaseTests {
 		addTestSuite(LoginTests.class);
 		addTestSuite(AlfrescoContentTests.class);
 		addTestSuite(AnalogClockTests.class);
-		addTestSuite(ApplicationBuilderTests.class);
+		//addTestSuite(ApplicationBuilderTests.class);
 		addTestSuite(ChatTests.class);
 		addTestSuite(FlashTests.class);
 		addTestSuite(GoogleAdSenseTests.class);
