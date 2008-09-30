@@ -118,7 +118,7 @@ public class ServiceTestSuite extends TestSuite {
 		addTestSuite(BookmarksEntryServiceTest.class);
 		addTestSuite(DLFileEntryServiceTest.class);
 		addTestSuite(IGImageServiceTest.class);
-		//addTestSuite(MBMessageServiceTest.class);
+		addTestSuite(MBMessageServiceTest.class);
 		addTestSuite(SocialRelationLocalServiceTest.class);
 
 		// Company

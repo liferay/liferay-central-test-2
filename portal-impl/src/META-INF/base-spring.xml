@@ -19,7 +19,7 @@
 	</aop:config>
 	<tx:advice id="counterServiceTransactionAdvice" transaction-manager="liferayTransactionManager">
 		<tx:attributes>
-			<tx:method name="*" propagation="REQUIRES_NEW" />
+			<tx:method name="*" propagation="SUPPORTS" />
   		</tx:attributes>
 	</tx:advice>
 	<tx:advice id="serviceTransactionAdvice" transaction-manager="liferayTransactionManager">
