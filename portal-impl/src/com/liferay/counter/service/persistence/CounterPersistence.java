@@ -60,6 +60,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 	public void afterPropertiesSet() throws SQLException {
 		_connection = getDataSource().getConnection();
+
 		_connection.setAutoCommit(true);
 	}
 
@@ -71,8 +72,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 		Session session = null;
 
 		try {
-			session = new SessionImpl(
-				_hibernateSessionFactory.openSession(_connection));
+			session = new SessionImpl(_sessionFactory.openSession(_connection));
 
 			List<String> list = new ArrayList<String>();
 
@@ -123,7 +123,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 				try {
 					session = new SessionImpl(
-						_hibernateSessionFactory.openSession(_connection));
+						_sessionFactory.openSession(_connection));
 
 					Counter counter = (Counter)session.get(
 						Counter.class, register.getName());
@@ -171,7 +171,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 			try {
 				session = new SessionImpl(
-					_hibernateSessionFactory.openSession(_connection));
+					_sessionFactory.openSession(_connection));
 
 				Counter counter = (Counter)session.load(Counter.class, oldName);
 
@@ -212,7 +212,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 			try {
 				session = new SessionImpl(
-					_hibernateSessionFactory.openSession(_connection));
+					_sessionFactory.openSession(_connection));
 
 				Counter counter = (Counter)session.load(Counter.class, name);
 
@@ -241,10 +241,8 @@ public class CounterPersistence extends BasePersistenceImpl {
 		}
 	}
 
-	public void setHibernateSessionFactory(
-			SessionFactory hibernateSessionFactory) {
-
-		_hibernateSessionFactory = hibernateSessionFactory;
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		_sessionFactory = sessionFactory;
 	}
 
 	protected synchronized CounterRegister getCounterRegister(String name) {
@@ -272,8 +270,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 		Session session = null;
 
 		try {
-			session = new SessionImpl(
-				_hibernateSessionFactory.openSession(_connection));
+			session = new SessionImpl(_sessionFactory.openSession(_connection));
 
 			Counter counter = (Counter)session.get(
 				Counter.class, name, LockMode.UPGRADE);
@@ -323,6 +320,6 @@ public class CounterPersistence extends BasePersistenceImpl {
 		new HashMap<String, CounterRegister>();
 
 	private Connection _connection;
-	private SessionFactory _hibernateSessionFactory;
+	private SessionFactory _sessionFactory;
 
 }

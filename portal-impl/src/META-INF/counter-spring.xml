@@ -14,7 +14,7 @@
 		<property name="service" ref="com.liferay.counter.service.CounterService.impl" />
 	</bean>
 	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence" init-method="afterPropertiesSet" destroy-method="destroy">
-		<property name="hibernateSessionFactory" ref="liferayHibernateSessionFactory" />	
+		<property name="sessionFactory" ref="liferayHibernateSessionFactory" />
 	</bean>
 	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
 		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
