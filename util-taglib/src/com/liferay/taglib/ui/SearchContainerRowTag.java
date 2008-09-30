@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.lang.reflect.Method;
@@ -280,7 +281,12 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 				BeanParamUtil.getBoolean(model, request, "escapedModel"));
 		}
 
-		if (isStringKey()) {
+		if (Validator.isNull(_keyProperty)) {
+			String primaryKey = String.valueOf(model);
+
+			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
+		}
+		else if (isStringKey()) {
 			String primaryKey = BeanParamUtil.getString(
 				model, request, _keyProperty);
 
