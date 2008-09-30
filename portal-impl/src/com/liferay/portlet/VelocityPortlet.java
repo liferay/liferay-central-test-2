@@ -31,8 +31,6 @@ import com.liferay.portal.velocity.VelocityVariables;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.util.Map;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
@@ -64,23 +62,6 @@ import org.apache.velocity.util.SimplePool;
  */
 public class VelocityPortlet extends GenericPortlet {
 
-	/**
-	 * The context key for the portlet request.
-	 * @deprecated
-	 */
-	public static final String REQUEST = "VelocityPortlet.portletRequest";
-
-	/**
-	 * The context key for the portlet response.
-	 * @deprecated
-	 */
-	public static final String RESPONSE = "VelocityPortlet.portletResponse";
-
-	/**
-	 * Cache of writers.
-	 */
-	private static SimplePool writerPool = new SimplePool(40);
-
 	public void init(PortletConfig portletConfig) throws PortletException {
 		super.init(portletConfig);
 
@@ -97,16 +78,19 @@ public class VelocityPortlet extends GenericPortlet {
 
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
-		if (Validator.isNotNull(_actionTemplate)) {
-			try {
-				mergeTemplate(
-					getTemplate(_actionTemplate), actionRequest, actionResponse);
-			}
-			catch (Exception e) {
-				throw new PortletException(e);
-			}
+		if (Validator.isNull(_actionTemplate)) {
+			return;
+		}
+
+		try {
+			Template template = getTemplate(_actionTemplate);
+
+			mergeTemplate(template, actionRequest, actionResponse);
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
 		}
 	}
 
@@ -114,18 +98,19 @@ public class VelocityPortlet extends GenericPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws PortletException, IOException {
 
-		if (Validator.isNotNull(_resourceTemplate)) {
-			try {
-				mergeTemplate(
-					getTemplate(_actionTemplate),
-					resourceRequest, resourceResponse);
-			}
-			catch (Exception e) {
-				throw new PortletException(e);
-			}
-		}
-		else {
+		if (Validator.isNull(_resourceTemplate)) {
 			super.serveResource(resourceRequest, resourceResponse);
+
+			return;
+		}
+
+		try {
+			Template template = getTemplate(_resourceTemplate);
+
+			mergeTemplate(template, resourceRequest, resourceResponse);
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
 		}
 	}
 
@@ -135,15 +120,17 @@ public class VelocityPortlet extends GenericPortlet {
 
 		if (renderRequest.getPreferences() == null) {
 			super.doEdit(renderRequest, renderResponse);
+
+			return;
 		}
-		else {
-			try {
-				mergeTemplate(
-					getTemplate(_editTemplate), renderRequest, renderResponse);
-			}
-			catch (Exception e) {
-				throw new PortletException(e);
-			}
+
+		try {
+			Template template = getTemplate(_editTemplate);
+
+			mergeTemplate(template, renderRequest, renderResponse);
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
 		}
 	}
 
@@ -152,8 +139,9 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException {
 
 		try {
-			mergeTemplate(
-				getTemplate(_helpTemplate), renderRequest, renderResponse);
+			Template template = getTemplate(_helpTemplate);
+
+			mergeTemplate(template, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -165,8 +153,9 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException {
 
 		try {
-			mergeTemplate(
-				getTemplate(_viewTemplate), renderRequest, renderResponse);
+			Template template = getTemplate(_viewTemplate);
+
+			mergeTemplate(template, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -182,15 +171,9 @@ public class VelocityPortlet extends GenericPortlet {
 		context.put("portletContext", getPortletContext());
 		context.put("preferences", portletRequest.getPreferences());
 		context.put(
-			"userInfo",
-			(Map<String, String>)portletRequest.getAttribute(
-				PortletRequest.USER_INFO));
-
-		context.put(REQUEST, portletRequest);
-		context.put(RESPONSE, portletResponse);
+			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
 
 		context.put("portletRequest", portletRequest);
-		context.put("portletResponse", portletResponse);
 
 		if (portletRequest instanceof ActionRequest) {
 			context.put("actionRequest", portletRequest);
@@ -201,6 +184,8 @@ public class VelocityPortlet extends GenericPortlet {
 		else {
 			context.put("resourceRequest", portletRequest);
 		}
+
+		context.put("portletResponse", portletResponse);
 
 		if (portletResponse instanceof ActionResponse) {
 			context.put("actionResponse", portletResponse);
@@ -247,6 +232,7 @@ public class VelocityPortlet extends GenericPortlet {
 
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse)portletResponse;
+
 			mimeResponse.setContentType(
 				portletRequest.getResponseContentType());
 		}
@@ -254,12 +240,13 @@ public class VelocityPortlet extends GenericPortlet {
 		VelocityWriter velocityWriter = null;
 
 		try {
-			velocityWriter = (VelocityWriter)writerPool.get();
+			velocityWriter = (VelocityWriter)_writerPool.get();
 
 			PrintWriter output = null;
 
 			if (portletResponse instanceof MimeResponse) {
 				MimeResponse mimeResponse = (MimeResponse)portletResponse;
+
 				output = mimeResponse.getWriter();
 			}
 			else {
@@ -281,13 +268,15 @@ public class VelocityPortlet extends GenericPortlet {
 					velocityWriter.flush();
 					velocityWriter.recycle(null);
 
-					writerPool.put(velocityWriter);
+					_writerPool.put(velocityWriter);
 				}
 			}
 			catch (Exception e) {
 			}
 		}
 	}
+
+	private static SimplePool _writerPool = new SimplePool(40);
 
 	private String _portletContextName;
 	private String _actionTemplate;
