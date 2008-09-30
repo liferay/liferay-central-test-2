@@ -106,7 +106,9 @@ else {
 	function <portlet:namespace />saveUser(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 
-		document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes.value = websitePostfixesArray.join(',');
+		if (document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes) {
+			document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes.value = websitePostfixesArray.join(',');
+		}
 
 		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>";
 
@@ -435,7 +437,8 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 		initialize: function(options) {
 			var instance = this;
 
-			instance._itemsArray =  options.itemsArray;
+			instance._idSeed = options.lastIndex;
+			instance._itemsArray = options.itemsArray;
 			var container = jQuery(options.container);
 			var baseRows = jQuery(options.baseRows);
 
@@ -573,18 +576,22 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 			deletedElement.hide();
 
 			instance._queueUndo(deletedElement);
-			var index;
+			var postfix;
 			var currentRow = jQuery(el);
 			currentRow.find('select').each(
 				function(){
-				var el = jQuery(this);
-				var oldName = el.attr('name');
-				id = oldName.substring(oldName.length-2,oldName.length)});
+					var el = jQuery(this);
+					var oldName = el.attr('name');
+					postfix = oldName.substring(oldName.length-2, oldName.length);
+				}
+			);
 
-				for(var i=0;i<instance._itemsArray.length;i++){
-					if (id==instance._itemsArray[i]) {
-						instance._itemsArray.splice(i, 1);
-					}
+			instance._undoPostfixes.push(postfix);
+
+			for (var i=0; i<instance._itemsArray.length; i++){
+				if (postfix == instance._itemsArray[i]) {
+					instance._itemsArray.splice(i, 1);
+				}
 			}
 		},
 
@@ -597,6 +604,8 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 				var deletedElement = instance._undoCache.pop();
 
 				deletedElement.show();
+
+				instance._itemsArray.push(instance._undoPostfixes.pop());
 
 				Liferay.trigger('updateUndoList');
 			}
@@ -647,8 +656,9 @@ String toolbarItem = (selUser == null) ? "add-user" : "view-users";
 		},
 
 		_undoCache: [],
-		_idSeed: lastIndex,
-		_itemsArray: []
+		_idSeed: 0,
+		_itemsArray: [],
+		_undoPostfixes: []
 	});
 
 

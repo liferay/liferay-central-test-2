@@ -25,7 +25,17 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-List<Website> websites = (List<Website>)request.getAttribute("common.websites");
+List<Website> currentWebsites = (List<Website>)request.getAttribute("common.websites");
+List<Website> websites = null;
+
+if (!currentWebsites.isEmpty()) {
+	websites = currentWebsites;
+}
+else{
+	websites = new ArrayList<Website>();
+
+	websites.add(new WebsiteImpl());
+}
 %>
 
 <script type="text/javascript">
@@ -108,7 +118,8 @@ List<Website> websites = (List<Website>)request.getAttribute("common.websites");
 			Liferay.Websites = new Liferay.autoFields2({
 				container: '#websites > fieldset',
 				baseRows: '.row-fields',
-				itemsArray: websitePostfixesArray
+				itemsArray: websitePostfixesArray,
+				lastIndex: lastIndex
 			});
 		}
 		);

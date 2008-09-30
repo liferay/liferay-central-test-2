@@ -449,6 +449,10 @@ public class EditUserAction extends PortletAction {
 		Website website = null;
 
 		if (websiteId <= 0) {
+			if (Validator.isNull(url)) {
+				return 0;
+			}
+
 			website = WebsiteServiceUtil.addWebsite(
 				className, classPK, url, typeId, primary);
 		}
