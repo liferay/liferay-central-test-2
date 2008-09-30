@@ -99,16 +99,6 @@ public class ExpandoColumnServiceJSON {
 		ExpandoColumnServiceUtil.deleteColumn(columnId);
 	}
 
-	public static JSONObject updateColumn(long columnId,
-		java.lang.String properties)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.updateColumn(columnId,
-				properties);
-
-		return ExpandoColumnJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static JSONObject updateColumn(long columnId, java.lang.String name,
 		int type)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -125,6 +115,16 @@ public class ExpandoColumnServiceJSON {
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.updateColumn(columnId,
 				name, type, defaultData);
+
+		return ExpandoColumnJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updateTypeSettings(long columnId,
+		java.lang.String typeSettings)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.updateTypeSettings(columnId,
+				typeSettings);
 
 		return ExpandoColumnJSONSerializer.toJSONObject(returnValue);
 	}

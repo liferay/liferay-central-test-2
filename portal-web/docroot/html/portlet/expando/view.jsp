@@ -26,114 +26,100 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
 String modelResource = ParamUtil.getString(request, "modelResource");
-String modelResourceDescription = ParamUtil.getString(request, "modelResourceDescription");
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
-
-long resourcePrimKey = ParamUtil.getLong(request, "resourcePrimKey");
-
-if (resourcePrimKey <= 0) {
-	throw new ResourcePrimKeyException();
-}
-
-String selResource = modelResource;
-String selResourceDescription = modelResourceDescription;
-String selResourceName = modelResourceName;
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/expando/view");
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("modelResource", modelResource);
-portletURL.setParameter("modelResourceDescription", modelResourceDescription);
-portletURL.setParameter("resourcePrimKey", String.valueOf(resourcePrimKey));
 %>
 
-<%@page import="java.util.Comparator"%>
 <script type="text/javascript">
 	function <portlet:namespace />addExpando() {
-		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /><portlet:param name="modelResourceDescription" value="<%= modelResourceDescription %>" /><portlet:param name="resourcePrimKey" value="<%= String.valueOf(resourcePrimKey) %>" /></portlet:renderURL>');
+		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
 	}
 </script>
 
 <div>
-	<liferay-ui:message key="edit-expandos-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(redirect) %>"><%= selResourceDescription %></a>
+	<liferay-ui:message key="edit-custom-attributes-for" />: <a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></a>
 </div>
 
 <br />
 
 <liferay-ui:tabs
-	names="expandos"
+	names="custom-attributes"
 	backURL="<%= redirect %>"
 />
 
 <%
-ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource, resourcePrimKey);
+ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
 
-Map<String, Object> attributes = expandoBridge.getAttributes();
+List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 
-List attributeEntries = Collections.list(Collections.enumeration(attributes.entrySet()));
-
-Collections.sort(attributeEntries, new Comparator(){
-	public int compare(Object left, Object right){
-		String leftKey = (String)((Map.Entry)left).getKey();
-		String rightKey = (String)((Map.Entry)right).getKey();
-
-		return leftKey.compareTo(rightKey);
-	}
-});
+Collections.sort(attributeNames, new StringComparator());
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage="no-expandos-were-found"
+	emptyResultsMessage="no-custom-attributes-were-found"
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
-		total="<%= attributes.size() %>"
-		results="<%= attributeEntries %>"
+		total="<%= attributeNames.size() %>"
+		results="<%= attributeNames %>"
 	/>
+
 	<liferay-ui:search-container-row
-		className="java.util.Map.Entry"
-		keyProperty="key"
-		modelVar="entry"
+		className="java.lang.String"
+		modelVar="name"
 		stringKey="<%= true %>"
 	>
+
 		<%
-		int type = expandoBridge.getAttributeType((String)entry.getKey());
-		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(modelResource, (String)entry.getKey());
+		int type = expandoBridge.getAttributeType(name);
+
+		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(modelResource, name);
 		%>
-		<liferay-ui:search-container-row-parameter name="modelResource" value="<%= modelResource %>" />
-		<liferay-ui:search-container-row-parameter name="modelResourceDescription" value="<%= modelResourceDescription %>" />
-		<liferay-ui:search-container-row-parameter name="resourcePrimKey" value="<%= resourcePrimKey %>" />
-		<liferay-ui:search-container-row-parameter name="expandoColumn" value="<%= expandoColumn %>" />
+
+		<liferay-ui:search-container-row-parameter
+			name="expandoColumn"
+			value="<%= expandoColumn %>"
+		/>
+
+		<liferay-ui:search-container-row-parameter
+			name="modelResource"
+			value="<%= modelResource %>"
+		/>
 
 		<liferay-ui:search-container-column-text
 			name="name"
-			property="key"
+			value="<%= name %>"
 		/>
+
 		<liferay-ui:search-container-column-text
 			name="type"
 			value="<%= LanguageUtil.get(pageContext, ExpandoColumnConstants.getTypeLabel(type)) %>"
 		/>
+
 		<liferay-ui:search-container-column-text
-			name="default"
 			buffer="sb"
+			name="default-value"
 		>
+
 			<%
 			if (type == ExpandoColumnConstants.BOOLEAN) {
-				sb.append((Boolean)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((Boolean)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-				sb.append(StringUtil.merge((boolean[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((boolean[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.DATE) {
-				sb.append(dateFormatDateTime.format((Date)expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(dateFormatDateTime.format((Date)expandoBridge.getAttributeDefault(name)));
 			}
 			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-				Date[] dates = (Date[])expandoBridge.getAttributeDefault((String)entry.getKey());
+				Date[] dates = (Date[])expandoBridge.getAttributeDefault(name);
 
 				for (int i = 0; i < dates.length; i++) {
 					if (i != 0) {
@@ -144,106 +130,45 @@ Collections.sort(attributeEntries, new Comparator(){
 				}
 			}
 			else if (type == ExpandoColumnConstants.DOUBLE) {
-				sb.append((Double)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((Double)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-				sb.append(StringUtil.merge((double[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((double[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.FLOAT) {
-				sb.append((Float)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((Float)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-				sb.append(StringUtil.merge((float[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((float[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.INTEGER) {
-				sb.append((Integer)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((Integer)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-				sb.append(StringUtil.merge((int[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((int[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.LONG) {
-				sb.append((Long)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((Long)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-				sb.append(StringUtil.merge((long[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((long[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.SHORT) {
-				sb.append((Short)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((Short)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-				sb.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-				sb.append(StringUtil.merge((String[])expandoBridge.getAttributeDefault((String)entry.getKey())));
+				sb.append(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else {
-				sb.append((String)expandoBridge.getAttributeDefault((String)entry.getKey()));
+				sb.append((String)expandoBridge.getAttributeDefault(name));
 			}
 			%>
-		</liferay-ui:search-container-column-text>
-		<liferay-ui:search-container-column-text
-			name="value"
-			buffer="sb"
-		>
-			<%
-			if (type == ExpandoColumnConstants.BOOLEAN) {
-				sb.append((Boolean)entry.getValue());
-			}
-			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-				sb.append(StringUtil.merge((boolean[])entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.DATE) {
-				sb.append(dateFormatDateTime.format((Date)entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-				Date[] dates = (Date[])entry.getValue();
 
-				for (int i = 0; i < dates.length; i++) {
-					if (i != 0) {
-						sb.append(StringPool.COMMA_AND_SPACE);
-					}
-
-					sb.append(dateFormatDateTime.format(dates[i]));
-				}
-			}
-			else if (type == ExpandoColumnConstants.DOUBLE) {
-				sb.append((Double)entry.getValue());
-			}
-			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-				sb.append(StringUtil.merge((double[])entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.FLOAT) {
-				sb.append((Float)entry.getValue());
-			}
-			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-				sb.append(StringUtil.merge((float[])entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.INTEGER) {
-				sb.append((Integer)entry.getValue());
-			}
-			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-				sb.append(StringUtil.merge((int[])entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.LONG) {
-				sb.append((Long)entry.getValue());
-			}
-			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-				sb.append(StringUtil.merge((long[])entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.SHORT) {
-				sb.append((Short)entry.getValue());
-			}
-			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-				sb.append(StringUtil.merge((short[])entry.getValue()));
-			}
-			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-				sb.append(StringUtil.merge((String[])entry.getValue()));
-			}
-			else {
-				sb.append((String)entry.getValue());
-			}
-			%>
 		</liferay-ui:search-container-column-text>
+
 		<liferay-ui:search-container-column-jsp
 			align="right"
 			path="/html/portlet/expando/expando_action.jsp"
@@ -252,7 +177,7 @@ Collections.sort(attributeEntries, new Comparator(){
 
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.EXPANDO, ActionKeys.ADD_EXPANDO) %>">
 		<div>
-			<input type="button" value="<liferay-ui:message key='add-expando' />" onClick="<portlet:namespace />addExpando();" />
+			<input type="button" value="<liferay-ui:message key="add-custom-attribute" />" onClick="<portlet:namespace />addExpando();" />
 		</div>
 
 		<br />

@@ -46,6 +46,10 @@ import java.util.Map;
  */
 public class ExpandoBridgeImpl implements ExpandoBridge {
 
+	public ExpandoBridgeImpl(String className) {
+		this(className, 0);
+	}
+
 	public ExpandoBridgeImpl(String className, long classPK) {
 		_className = className;
 		_classPK = classPK;
@@ -81,6 +85,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public Object getAttribute(String name) {
+		if (_classPK <= 0) {
+			throw new UnsupportedOperationException();
+		}
+
 		Object data = null;
 
 		try {
@@ -193,6 +201,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public void setAttribute(String name, Object value) {
+		if (_classPK <= 0) {
+			throw new UnsupportedOperationException();
+		}
+
 		try {
 			ExpandoValueLocalServiceUtil.addValue(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
@@ -226,7 +238,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
 					_className, name);
 
-			ExpandoColumnServiceUtil.updateColumn(
+			ExpandoColumnServiceUtil.updateTypeSettings(
 				column.getColumnId(), properties.toString());
 		}
 		catch (Exception e) {

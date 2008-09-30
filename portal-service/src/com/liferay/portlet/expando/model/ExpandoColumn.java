@@ -51,7 +51,11 @@ package com.liferay.portlet.expando.model;
 public interface ExpandoColumn extends ExpandoColumnModel {
 	public java.lang.Object getDefaultValue();
 
+	public java.lang.String getTypeSettings();
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+
+	public void setTypeSettings(java.lang.String typeSettings);
 
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);

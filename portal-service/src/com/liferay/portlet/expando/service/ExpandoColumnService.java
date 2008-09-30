@@ -64,11 +64,6 @@ public interface ExpandoColumnService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
-		long columnId, java.lang.String properties)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -76,6 +71,11 @@ public interface ExpandoColumnService {
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type,
 		java.lang.Object defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoColumn updateTypeSettings(
+		long columnId, java.lang.String typeSettings)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

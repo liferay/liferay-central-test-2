@@ -83,7 +83,7 @@
 				hourValue="<%= cal.get(Calendar.HOUR) %>"
 				minuteParam="schedulerStartDateMinute"
 				minuteValue="<%= cal.get(Calendar.MINUTE) %>"
-				minuteInterval="1"
+				minuteInterval="<%= 1 %>"
 				amPmParam="schedulerStartDateAmPm"
 				amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 			/>
@@ -127,7 +127,7 @@
 						hourValue="<%= cal.get(Calendar.HOUR) %>"
 						minuteParam="schedulerEndDateMinute"
 						minuteValue="<%= cal.get(Calendar.MINUTE) %>"
-						minuteInterval="1"
+						minuteInterval="<%= 1 %>"
 						amPmParam="schedulerEndDateAmPm"
 						amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 					/>

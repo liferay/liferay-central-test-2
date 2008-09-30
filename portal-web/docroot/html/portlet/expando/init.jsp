@@ -24,22 +24,20 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.ResourcePrimKeyException"%>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil"%>
-<%@ page import="com.liferay.portlet.expando.ColumnNameException"%>
-<%@ page import="com.liferay.portlet.expando.ColumnTypeException"%>
-<%@ page import="com.liferay.portlet.expando.DuplicateColumnNameException"%>
-<%@ page import="com.liferay.portlet.expando.NoSuchColumnException"%>
-<%@ page import="com.liferay.portlet.expando.ValueDataException"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridgeImpl"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants"%>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission"%>
-
-<%@ page import="java.util.Map.Entry"%>
+<%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+<%@ page import="com.liferay.portlet.expando.ColumnNameException" %>
+<%@ page import="com.liferay.portlet.expando.ColumnTypeException" %>
+<%@ page import="com.liferay.portlet.expando.DuplicateColumnNameException" %>
+<%@ page import="com.liferay.portlet.expando.NoSuchColumnException" %>
+<%@ page import="com.liferay.portlet.expando.ValueDataException" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridgeImpl" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
+<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
 
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);

@@ -1701,6 +1701,13 @@ Liferay.Service.Expando.ExpandoColumn = {
 		params.serviceMethodName = "updateColumn";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateTypeSettings: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateTypeSettings";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 

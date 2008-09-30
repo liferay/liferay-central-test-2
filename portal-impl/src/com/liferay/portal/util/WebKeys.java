@@ -79,7 +79,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ENCRYPT = "shuo";
 
-	public static final String EXPANDO = "EXPANDO";
+	public static final String EXPANDO_COLUMN = "EXPANDO_COLUMN";
 
 	public static final String FACEBOOK_CANVAS_PAGE_URL = "FACEBOOK_CANVAS_PAGE_URL";
 

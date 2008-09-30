@@ -60,8 +60,8 @@ public class ExpandoColumnPermission {
 			PermissionChecker permissionChecker, long columnId, String actionId)
 		throws PortalException, SystemException {
 
-		ExpandoColumn column =
-			ExpandoColumnLocalServiceUtil.getColumn(columnId);
+		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
+			columnId);
 
 		return contains(permissionChecker, column, actionId);
 	}

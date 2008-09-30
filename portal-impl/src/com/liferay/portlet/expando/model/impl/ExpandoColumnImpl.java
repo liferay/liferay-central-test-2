@@ -108,6 +108,15 @@ public class ExpandoColumnImpl
 		}
 	}
 
+	public String getTypeSettings() {
+		if (_typeSettingsProperties == null) {
+			return super.getTypeSettings();
+		}
+		else {
+			return _typeSettingsProperties.toString();
+		}
+	}
+
 	public UnicodeProperties getTypeSettingsProperties() {
 		if (_typeSettingsProperties == null) {
 			_typeSettingsProperties = new UnicodeProperties(true);
@@ -116,11 +125,17 @@ public class ExpandoColumnImpl
 				_typeSettingsProperties.load(super.getTypeSettings());
 			}
 			catch (IOException ioe) {
-				_log.error(ioe);
+				_log.error(ioe, ioe);
 			}
 		}
 
 		return _typeSettingsProperties;
+	}
+
+	public void setTypeSettings(String typeSettings) {
+		_typeSettingsProperties = null;
+
+		super.setTypeSettings(typeSettings);
 	}
 
 	public void setTypeSettingsProperties(

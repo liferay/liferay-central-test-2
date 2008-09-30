@@ -264,7 +264,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 				_typeSettingsProperties.load(super.getTypeSettings());
 			}
 			catch (IOException ioe) {
-				_log.error(ioe);
+				_log.error(ioe, ioe);
 			}
 		}
 

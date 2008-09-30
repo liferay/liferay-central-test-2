@@ -1251,7 +1251,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 		<header-portlet-css>/html/portlet/expando/css.jsp</header-portlet-css>
-		<css-class-wrapper>expando</css-class-wrapper>
+		<css-class-wrapper>portlet-expando</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>

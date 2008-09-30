@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
 
@@ -892,6 +893,13 @@ public class PortalUtil {
 
 	public static String transformCustomSQL(String sql) {
 		return getPortal().transformCustomSQL(sql);
+	}
+
+	public static void updateExpandoBridge(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		getPortal().updateExpandoBridge(expandoBridge, actionRequest);
 	}
 
 	public static PortletMode updatePortletMode(

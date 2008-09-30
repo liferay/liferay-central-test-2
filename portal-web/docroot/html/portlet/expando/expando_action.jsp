@@ -31,27 +31,21 @@ String redirect = searchContainer.getIteratorURL().toString();
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Map.Entry entry = (Map.Entry)row.getObject();
-
 ExpandoColumn expandoColumn = (ExpandoColumn)row.getParameter("expandoColumn");
 
 String modelResource = (String)row.getParameter("modelResource");
-String modelResourceDescription = (String)row.getParameter("modelResourceDescription");
-long resourcePrimKey = (Long)row.getParameter("resourcePrimKey");
 %>
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editExpandoURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/expando/edit_expando" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="columnId" value="<%= String.valueOf(expandoColumn.getColumnId()) %>" />
 			<portlet:param name="modelResource" value="<%= modelResource %>" />
-			<portlet:param name="modelResourceDescription" value="<%= modelResourceDescription %>" />
-			<portlet:param name="resourcePrimKey" value="<%= String.valueOf(resourcePrimKey) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editExpandoURL %>" />
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
 	<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.PERMISSIONS) %>">
@@ -59,10 +53,10 @@ long resourcePrimKey = (Long)row.getParameter("resourcePrimKey");
 			modelResource="<%= ExpandoColumn.class.getName() %>"
 			modelResourceDescription="<%= expandoColumn.getName() %>"
 			resourcePrimKey="<%= String.valueOf(expandoColumn.getColumnId()) %>"
-			var="permissionsExpandoURL"
+			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsExpandoURL %>" />
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
 	<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.DELETE) %>">

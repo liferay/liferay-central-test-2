@@ -198,7 +198,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 					hourValue="<%= hour %>"
 					minuteParam='<%= fieldParam + "Minute" %>'
 					minuteValue="<%= minute %>"
-					minuteInterval="1"
+					minuteInterval="<%= 1 %>"
 					amPmParam='<%= fieldParam + "AmPm" %>'
 					amPmValue="<%= amPm %>"
 					disabled="<%= disabled %>"

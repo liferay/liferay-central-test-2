@@ -203,48 +203,6 @@ public class ExpandoColumnServiceHttp {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
-		HttpPrincipal httpPrincipal, long columnId, java.lang.String properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(columnId);
-
-			Object paramObj1 = properties;
-
-			if (properties == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"updateColumn", new Object[] { paramObj0, paramObj1 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.expando.model.ExpandoColumn)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		HttpPrincipal httpPrincipal, long columnId, java.lang.String name,
 		int type)
 		throws com.liferay.portal.PortalException,
@@ -315,6 +273,49 @@ public class ExpandoColumnServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
 					"updateColumn",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.expando.model.ExpandoColumn)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoColumn updateTypeSettings(
+		HttpPrincipal httpPrincipal, long columnId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(columnId);
+
+			Object paramObj1 = typeSettings;
+
+			if (typeSettings == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
+					"updateTypeSettings", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

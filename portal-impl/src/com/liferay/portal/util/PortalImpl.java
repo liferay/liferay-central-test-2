@@ -103,6 +103,8 @@ import com.liferay.portlet.UserAttributes;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.expando.action.EditExpandoAction;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.social.util.FacebookUtil;
@@ -2714,6 +2716,34 @@ public class PortalImpl implements Portal {
 
 		return StringUtil.replace(
 			sql, _customSqlClassNames, _customSqlClassNameIds);
+	}
+
+	public void updateExpandoBridge(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
+
+		List<String> names = new ArrayList<String>();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+
+			if (param.indexOf("ExpandoAttributeName(") != -1) {
+				String name = ParamUtil.getString(actionRequest, param);
+
+				names.add(name);
+			}
+		}
+
+		for (String name : names) {
+			int type = expandoBridge.getAttributeType(name);
+
+			Object value = EditExpandoAction.getValue(
+				actionRequest, "ExpandoAttribute(" + name + ")", type);
+
+			expandoBridge.setAttribute(name, value);
+		}
 	}
 
 	public PortletMode updatePortletMode(

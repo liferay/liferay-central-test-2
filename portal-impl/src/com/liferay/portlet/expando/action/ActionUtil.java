@@ -64,7 +64,7 @@ public class ActionUtil {
 			column = ExpandoColumnLocalServiceUtil.getColumn(columnId);
 		}
 
-		request.setAttribute(WebKeys.EXPANDO, column);
+		request.setAttribute(WebKeys.EXPANDO_COLUMN, column);
 	}
 
 }

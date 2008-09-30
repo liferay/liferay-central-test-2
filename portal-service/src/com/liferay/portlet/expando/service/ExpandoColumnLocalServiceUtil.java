@@ -255,13 +255,6 @@ public class ExpandoColumnLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
-		long columnId, java.lang.String properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().updateColumn(columnId, properties);
-	}
-
-	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -274,6 +267,13 @@ public class ExpandoColumnLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateColumn(columnId, name, type, defaultData);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoColumn updateTypeSettings(
+		long columnId, java.lang.String typeSettings)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateTypeSettings(columnId, typeSettings);
 	}
 
 	public static ExpandoColumnLocalService getService() {

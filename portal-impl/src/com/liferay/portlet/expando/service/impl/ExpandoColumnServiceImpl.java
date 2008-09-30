@@ -39,8 +39,7 @@ import com.liferay.portlet.expando.service.permission.ExpandoColumnPermission;
  */
 public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 
-	public ExpandoColumn addColumn(
-			long tableId, String name, int type)
+	public ExpandoColumn addColumn(long tableId, String name, int type)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -71,15 +70,6 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		expandoColumnLocalService.deleteColumn(columnId);
 	}
 
-	public ExpandoColumn updateColumn(long columnId, String properties)
-		throws PortalException, SystemException {
-
-		ExpandoColumnPermission.check(
-			getPermissionChecker(), columnId, ActionKeys.UPDATE);
-
-		return expandoColumnLocalService.updateColumn(columnId, properties);
-	}
-
 	public ExpandoColumn updateColumn(long columnId, String name, int type)
 		throws PortalException, SystemException {
 
@@ -98,6 +88,16 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 
 		return expandoColumnLocalService.updateColumn(
 			columnId, name, type, defaultData);
+	}
+
+	public ExpandoColumn updateTypeSettings(long columnId, String typeSettings)
+		throws PortalException, SystemException {
+
+		ExpandoColumnPermission.check(
+			getPermissionChecker(), columnId, ActionKeys.UPDATE);
+
+		return expandoColumnLocalService.updateTypeSettings(
+			columnId, typeSettings);
 	}
 
 }

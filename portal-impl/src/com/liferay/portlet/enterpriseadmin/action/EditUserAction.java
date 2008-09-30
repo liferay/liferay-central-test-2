@@ -59,7 +59,6 @@ import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
-import com.liferay.portlet.expando.action.EditExpandoAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -400,7 +399,7 @@ public class EditUserAction extends PortletAction {
 			}
 		}
 
-		EditExpandoAction.updateExpandos(user.getExpandoBridge(), actionRequest);
+		PortalUtil.updateExpandoBridge(user.getExpandoBridge(), actionRequest);
 
 		return new Object[] {user, oldScreenName};
 	}

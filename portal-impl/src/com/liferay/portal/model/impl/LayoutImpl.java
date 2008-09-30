@@ -461,7 +461,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				_typeSettingsProperties.load(super.getTypeSettings());
 			}
 			catch (IOException ioe) {
-				_log.error(ioe);
+				_log.error(ioe, ioe);
 			}
 		}
 
