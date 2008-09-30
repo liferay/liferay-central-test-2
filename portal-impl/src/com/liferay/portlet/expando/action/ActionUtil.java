@@ -30,8 +30,8 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
-import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>

@@ -239,7 +239,7 @@ Object value = expandoBridge.getAttribute(name);
 						<textarea name="<portlet:namespace />ExpandoAttribute(<%= name %>)" style="height: 105px; width: 500px;"><%= (value != null? StringUtil.merge((String[])value, "\n") : "") %></textarea>
 					</c:when>
 					<c:otherwise>
-						<input name="<portlet:namespace />ExpandoAttribute(<%= name %>)" size="30" type="text" value="<%= (value != null? value : "") %>" />
+						<input name="<portlet:namespace />ExpandoAttribute(<%= name %>)" size="30" type="text" value='<%= (value != null? value : "") %>' />
 					</c:otherwise>
 				</c:choose>
 			</c:when>

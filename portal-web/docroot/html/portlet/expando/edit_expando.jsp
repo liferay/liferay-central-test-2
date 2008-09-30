@@ -364,7 +364,7 @@ if (column != null) {
 					<textarea name="<portlet:namespace />defaultValue" style="height: 105px; width: 500px;"><%= (defaultValue != null? StringUtil.merge((String[])defaultValue, "\n") : "") %></textarea>
 				</c:when>
 				<c:otherwise>
-					<input name="<portlet:namespace />defaultValue" size="30" type="text" value="<%= (defaultValue != null? defaultValue : "") %>" />
+					<input name="<portlet:namespace />defaultValue" size="30" type="text" value='<%= (defaultValue != null? defaultValue : "") %>' />
 				</c:otherwise>
 			</c:choose>
 		</td>
@@ -595,7 +595,7 @@ if (column != null) {
 					<textarea name="<portlet:namespace />value" style="height: 105px; width: 500px;"><%= (value != null? StringUtil.merge((String[])value, "\n") : "") %></textarea>
 				</c:when>
 				<c:otherwise>
-					<input name="<portlet:namespace />value" size="30" type="text" value="<%= (value != null? value : "") %>" />
+					<input name="<portlet:namespace />value" size="30" type="text" value='<%= (value != null? value : "") %>' />
 				</c:otherwise>
 			</c:choose>
 		</td>
