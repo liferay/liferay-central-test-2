@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.counter.service.CounterServiceTest;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -117,7 +116,6 @@ public class ServiceTestSuite extends TestSuite {
 
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);
-		addTestSuite(CounterServiceTest.class);
 		addTestSuite(DLFileEntryServiceTest.class);
 		addTestSuite(IGImageServiceTest.class);
 		addTestSuite(MBMessageServiceTest.class);
