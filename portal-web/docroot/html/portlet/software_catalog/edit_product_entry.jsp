@@ -128,7 +128,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 		<liferay-ui:message key="licenses" />
 	</td>
 	<td>
-		<select name="<portlet:namespace/>licenses" multiple="true">
+		<select multiple="true" name="<portlet:namespace/>licenses">
 			<optgroup label="<liferay-ui:message key="recommended-licenses" />">
 
 				<%
