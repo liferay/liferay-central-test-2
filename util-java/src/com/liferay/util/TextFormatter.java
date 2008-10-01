@@ -86,6 +86,10 @@ public class TextFormatter {
 
 	public static final int L = 11;
 
+	// format-id --> formatId
+
+	public static final int M = 12;
+
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
 			return null;
@@ -128,6 +132,9 @@ public class TextFormatter {
 		}
 		else if (style == L) {
 			return _formatL(s);
+		}
+		else if (style == M) {
+			return _formatM(s);
 		}
 		else {
 			return s;
@@ -307,6 +314,25 @@ public class TextFormatter {
 		else {
 			return Character.toLowerCase(s.charAt(0)) + s.substring(1);
 		}
+	}
+
+	private static String _formatM(String s) {
+		StringBuilder sb = new StringBuilder();
+
+		char[] c = s.toCharArray();
+
+		for (int i = 0; i < c.length; i++) {
+			if (c[i] == '-') {
+			}
+			else if ((i > 0) && (c[i - 1] == '-')) {
+				sb.append(Character.toUpperCase(c[i]));
+			}
+			else {
+				sb.append(c[i]);
+			}
+		}
+
+		return sb.toString();
 	}
 
 }
