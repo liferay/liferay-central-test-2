@@ -111,10 +111,18 @@ public class IconListTag extends BodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 
+			request.removeAttribute("liferay-ui:icon-list:showWhenSingleIcon");
+
 			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
+		}
+		finally {
+			_startPage = null;
+			_endPage = null;
+			_showWhenSingleIcon = false;
+			_bodyContentString = StringPool.BLANK;
 		}
 	}
 

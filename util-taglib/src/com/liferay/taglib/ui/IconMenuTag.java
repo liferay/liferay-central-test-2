@@ -114,10 +114,24 @@ public class IconMenuTag extends BodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 
+			request.removeAttribute("liferay-ui:icon-menu:message");
+			request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
+			request.removeAttribute("liferay-ui:icon-menu:align");
+			request.removeAttribute("liferay-ui:icon-menu:cssClass");
+
 			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
+		}
+		finally {
+			_startPage = null;
+			_endPage = null;
+			_message = "actions";
+			_showWhenSingleIcon = false;
+			_align = "right";
+			_cssClass = null;
+			_bodyContentString = StringPool.BLANK;
 		}
 	}
 
