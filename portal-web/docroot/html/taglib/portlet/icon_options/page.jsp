@@ -95,10 +95,13 @@
 			</c:if>
 
 			<c:if test="<%= appShowShareWithFriendsLink %>">
+				<%
+				String portletSharingWithFriendHREF = "javascript: Liferay.PortletSharing.showInvite('" + portlet.getPortletId() + "','" +  portletDisplay.getTitle() + "');";
+				%>
 				<liferay-ui:icon
 					image="share"
 					message="share-this-application-with-friends"
-					url="javascript: ;"
+					url="<%= portletSharingWithFriendHREF %>"
 					method="get"
 					label="<%= true %>"
 				/>

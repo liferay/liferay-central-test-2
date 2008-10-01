@@ -1169,6 +1169,8 @@
 		<portlet-name>133</portlet-name>
 		<icon>/html/portlet/portlet_sharing/icon.png</icon>
 		<struts-path>portlet_sharing</struts-path>
+		<social-activity-interpreter-class>com.liferay.portlet.portletsharing.util.PortalActivityInterpreter</social-activity-interpreter-class>
+		<social-request-interpreter-class>com.liferay.portlet.portletsharing.util.PortalRequestInterpreter</social-request-interpreter-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
