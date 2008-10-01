@@ -36,28 +36,16 @@ if (filterManageableOrganizations) {
 
 	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 }
+
+UserSearch userSearchContainer = new UserSearch(renderRequest, portletURL);
+
+portletURL.setParameter(userSearchContainer.getCurParam(), String.valueOf(userSearchContainer.getCurValue()));
 %>
 
 <input name="<portlet:namespace />deleteUserIds" type="hidden" value="" />
+<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
-
-<%
-UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
-
-List headerNames = searchContainer.getHeaderNames();
-
-headerNames.add(StringPool.BLANK);
-
-RowChecker rowChecker = new RowChecker(renderResponse);
-//RowChecker rowChecker = new RowChecker(renderResponse, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS);
-
-searchContainer.setRowChecker(rowChecker);
-
-portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
-%>
-
-<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 <%
 String toolbarItem = "view-users";
@@ -65,199 +53,227 @@ String toolbarItem = "view-users";
 
 <%@ include file="/html/portlet/enterprise_admin/user/toolbar.jspf" %>
 
-<liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/user_search.jsp"
-	searchContainer="<%= searchContainer %>"
-	showAddButton="<%= false %>"
-/>
+<liferay-ui:search-container
+	searchContainer="<%= userSearchContainer %>"
+	rowChecker="<%= new RowChecker(renderResponse) %>"
+>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/user_search.jsp"
+	/>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-
-	<%
-	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-	long organizationId = searchTerms.getOrganizationId();
-	long roleId = searchTerms.getRoleId();
-	long userGroupId = searchTerms.getUserGroupId();
-
-	LinkedHashMap userParams = new LinkedHashMap();
-
-	if (organizationId > 0) {
-		userParams.put("usersOrgs", new Long(organizationId));
-	}
-	else {
-		if (filterManageableOrganizations) {
-			userParams.put("usersOrgs", manageableOrganizationIds);
-		}
-	}
-
-	if (roleId > 0) {
-		userParams.put("usersRoles", new Long(roleId));
-	}
-
-	if (userGroupId > 0) {
-		userParams.put("usersUserGroups", new Long(userGroupId));
-	}
-	%>
-
-	<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-
-	<%
-	Organization organization = null;
-
-	if ((organizationId > 0)) {
-		try {
-			organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-		}
-		catch (NoSuchOrganizationException nsoe) {
-		}
-	}
-
-	Role role = null;
-
-	if (roleId > 0) {
-		try {
-			role = RoleLocalServiceUtil.getRole(roleId);
-		}
-		catch (NoSuchRoleException nsre) {
-		}
-	}
-
-	UserGroup userGroup = null;
-
-	if (userGroupId > 0) {
-		try {
-			userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
-		}
-		catch (NoSuchUserGroupException nsuge) {
-		}
-	}
-	%>
-
-	<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
-		<br />
-	</c:if>
-
-	<c:if test="<%= organization != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-		<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
-	</c:if>
-
-	<c:if test="<%= role != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
-
-		<liferay-ui:message key="filter-by-role" />: <%= role.getName() %><br />
-	</c:if>
-
-	<c:if test="<%= userGroup != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
-
-		<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
-	</c:if>
-
-	<div class="separator"><!-- --></div>
-
-	<%
-	boolean hasButtons = false;
-	%>
-
-	<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 		<%
-		hasButtons = true;
+		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+		long organizationId = searchTerms.getOrganizationId();
+		long roleId = searchTerms.getRoleId();
+		long userGroupId = searchTerms.getUserGroupId();
+
+		LinkedHashMap userParams = new LinkedHashMap();
+
+		if (organizationId > 0) {
+			userParams.put("usersOrgs", new Long(organizationId));
+		}
+		else {
+			if (filterManageableOrganizations) {
+				userParams.put("usersOrgs", manageableOrganizationIds);
+			}
+		}
+
+		if (roleId > 0) {
+			userParams.put("usersRoles", new Long(roleId));
+		}
+
+		if (userGroupId > 0) {
+			userParams.put("usersUserGroups", new Long(userGroupId));
+		}
 		%>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
-	</c:if>
+		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
-	<c:if test="<%= !searchTerms.isActive() %>">
-
-		<%
-		hasButtons = true;
-		%>
-
-		<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
-	</c:if>
-
-	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
-
-		<%
-		hasButtons = true;
-		%>
-
-		<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
-
-		<liferay-ui:upload-progress
-			id="<%= exportProgressId %>"
-			message="exporting"
-			redirect="<%= HtmlUtil.escape(currentURL) %>"
+		<liferay-ui:search-container-results
+			results="<%= results1 %>"
+			total="<%= total1 %>"
 		/>
-	</c:if>
 
-	<c:if test="<%= hasButtons %>">
-		<div>
-			<br />
-		</div>
-	</c:if>
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.User"
+			keyProperty="userId"
+			modelVar="user2"
+		>
+			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+			</liferay-portlet:renderURL>
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="first-name"
+				orderable="<%= true %>"
+				orderableProperty="first-name"
+				property="firstName"
+			/>
 
-	for (int i = 0; i < results.size(); i++) {
-		User user2 = (User)results.get(i);
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="last-name"
+				orderable="<%= true %>"
+				orderableProperty="last-name"
+				property="lastName"
+			/>
 
-		ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="screen-name"
+				orderable="<%= true %>"
+				orderableProperty="screen-name"
+				property="screenName"
+			/>
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+			<%--liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="email-address"
+				orderable="<%= true %>"
+				orderableProperty="email-address"
+				property="emailAddress"
+			/--%>
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="job-title"
+				orderable="<%= true %>"
+				orderableProperty="job-title"
+				value="<%= user2.getContact().getJobTitle() %>"
+			/>
 
-		rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-		rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
+			<liferay-ui:search-container-column-text
+				buffer="sb"
+				href="<%= rowURL %>"
+				name="organizations"
+			>
 
-		// First name
+				<%
+				List organizations = user2.getOrganizations();
 
-		row.addText(user2.getFirstName(), rowURL);
+				if (filterManageableOrganizations) {
+					organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
+				}
 
-		// Last name
+				sb.append(ListUtil.toString(organizations, "name", ", "));
+				%>
 
-		row.addText(user2.getLastName(), rowURL);
+			</liferay-ui:search-container-column-text>
 
-		// Screen name
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/enterprise_admin/user_action.jsp"
+			>
+				<liferay-ui:param name="currentURL" value="<%= currentURL %>" />
+			</liferay-ui:search-container-column-jsp>
+		</liferay-ui:search-container-row>
 
-		row.addText(user2.getScreenName(), rowURL);
+		<%
+		Organization organization = null;
 
-		// Email address
-
-		//row.addText(user2.getEmailAddress(), rowURL);
-
-		// Job title
-
-		Contact contact2 = user2.getContact();
-
-		row.addText(contact2.getJobTitle(), rowURL);
-
-		// Organizations
-
-		List organizations = user2.getOrganizations();
-
-		if (filterManageableOrganizations) {
-			organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
+		if ((organizationId > 0)) {
+			try {
+				organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+			}
+			catch (NoSuchOrganizationException nsoe) {
+			}
 		}
 
-		row.addText(ListUtil.toString(organizations, "name", ", "), rowURL);
+		Role role = null;
 
-		// Action
+		if (roleId > 0) {
+			try {
+				role = RoleLocalServiceUtil.getRole(roleId);
+			}
+			catch (NoSuchRoleException nsre) {
+			}
+		}
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_action.jsp");
+		UserGroup userGroup = null;
 
-		// Add result row
+		if (userGroupId > 0) {
+			try {
+				userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+			}
+			catch (NoSuchUserGroupException nsuge) {
+			}
+		}
+		%>
 
-		resultRows.add(row);
-	}
-	%>
+		<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
+			<br />
+		</c:if>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+		<c:if test="<%= organization != null %>">
+			<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+
+			<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
+		</c:if>
+
+		<c:if test="<%= role != null %>">
+			<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
+
+			<liferay-ui:message key="filter-by-role" />: <%= role.getName() %><br />
+		</c:if>
+
+		<c:if test="<%= userGroup != null %>">
+			<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+
+			<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
+		</c:if>
+
+		<div class="separator"><!-- --></div>
+
+		<%
+		boolean hasButtons = false;
+		%>
+
+		<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
+
+			<%
+			hasButtons = true;
+			%>
+
+			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
+		</c:if>
+
+		<c:if test="<%= !searchTerms.isActive() %>">
+
+			<%
+			hasButtons = true;
+			%>
+
+			<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
+		</c:if>
+
+		<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
+
+			<%
+			hasButtons = true;
+			%>
+
+			<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
+
+			<liferay-ui:upload-progress
+				id="<%= exportProgressId %>"
+				message="exporting"
+				redirect="<%= HtmlUtil.escape(currentURL) %>"
+			/>
+		</c:if>
+
+		<c:if test="<%= hasButtons %>">
+			<div>
+				<br />
+			</div>
+		</c:if>
+
+		<liferay-ui:search-iterator />
+
+	</c:if>
+</liferay-ui:search-container>
