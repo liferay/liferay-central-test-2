@@ -237,10 +237,16 @@ body.portlet {
 .restricted, .restricted td {
 }
 
+.restricted.alt td {
+}
+
+.restricted.hover td {
+}
+
 .restricted * {
 }
 
-.restricted .col-1 {
+.restricted td.col-1, .restricted.alt td.col-1 {
 }
 
 /* ---------- Miscellaneous component styles ---------- */

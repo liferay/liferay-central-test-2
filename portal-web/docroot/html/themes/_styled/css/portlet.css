@@ -298,11 +298,19 @@ body.portlet {
 	border: none;
 }
 
+.restricted.alt td {
+	background-color: #ffc0c0;
+}
+
+.restricted.hover td {
+	background-color: #d3bdc0;
+}
+
 .restricted * {
 	color: #727C81;
 }
 
-.restricted .col-1 {
+.restricted td.col-1, .restricted.alt td.col-1 {
 	background-image: url(../images/messages/error.png);
 	background-position: 5px 50%;
 	background-repeat: no-repeat;
