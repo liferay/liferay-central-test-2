@@ -1566,6 +1566,15 @@
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.impl" class="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl" />
+	<aop:config>
+		<aop:pointcut id="com.liferay.portlet.messageboards.service.MBMessageLocalService.operation" expression="bean(com.liferay.portlet.messageboards.service.MBMessageLocalService.impl)" />
+		<aop:advisor advice-ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.advice" pointcut-ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.operation" />
+	</aop:config>
+	<tx:advice id="com.liferay.portlet.messageboards.service.MBMessageLocalService.advice" transaction-manager="liferayTransactionManager">
+		<tx:attributes>
+			<tx:method name="getMessageDisplay" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
+		</tx:attributes>
+	</tx:advice>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.impl" />
 	</bean>
@@ -1576,6 +1585,15 @@
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.impl" class="com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl" />
+	<aop:config>
+		<aop:pointcut id="com.liferay.portlet.messageboards.service.MBMessageService.operation" expression="bean(com.liferay.portlet.messageboards.service.MBMessageService.impl)" />
+		<aop:advisor advice-ref="com.liferay.portlet.messageboards.service.MBMessageService.advice" pointcut-ref="com.liferay.portlet.messageboards.service.MBMessageService.operation" />
+	</aop:config>
+	<tx:advice id="com.liferay.portlet.messageboards.service.MBMessageService.advice" transaction-manager="liferayTransactionManager">
+		<tx:attributes>
+			<tx:method name="getMessageDisplay" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
+		</tx:attributes>
+	</tx:advice>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMessageService.impl" />
 	</bean>

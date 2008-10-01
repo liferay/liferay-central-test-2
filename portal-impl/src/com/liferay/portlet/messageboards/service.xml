@@ -243,6 +243,10 @@
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
+
+		<!-- Transactions -->
+
+		<tx-required>getMessageDisplay</tx-required>		
 	</entity>
 	<entity name="MBMessageFlag" local-service="true" remote-service="true">
 
