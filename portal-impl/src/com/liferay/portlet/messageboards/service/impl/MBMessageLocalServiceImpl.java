@@ -1056,7 +1056,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		thread.setViewCount(thread.getViewCount() + 1);
 
-		mbThreadPersistence.update(thread, false);
+		mbThreadPersistence.update(thread, true);
 
 		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message);
 
