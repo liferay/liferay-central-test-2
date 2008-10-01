@@ -84,9 +84,9 @@ portletURL.setParameter(orgSearchContainer.getCurParam(), String.valueOf(orgSear
 			modelVar="organization"
 		>
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL" >
-				<pportlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-				<pportlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<pportlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text
