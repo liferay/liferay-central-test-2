@@ -64,7 +64,7 @@ public class PluginsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Brochure")) {
+				if (selenium.isTextPresent("Classic")) {
 					break;
 				}
 			}
