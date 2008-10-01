@@ -167,8 +167,8 @@ public class EditOrganizationAction extends PortletAction {
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
-		String websitePostfixes = ParamUtil.getString(
-			actionRequest, "websitePostfixes");
+		String websiteSuffixes = ParamUtil.getString(
+			actionRequest, "websiteSuffixes");
 
 		long classPK = organizationId;
 		String className = Organization.class.getName();
@@ -195,11 +195,11 @@ public class EditOrganizationAction extends PortletAction {
 
 		// Update websites
 
-		if (Validator.isNotNull(websitePostfixes)) {
-			String[] websitePostfixesArray = websitePostfixes.split(",");
+		if (Validator.isNotNull(websiteSuffixes)) {
+			String[] websiteSuffixesArray = websiteSuffixes.split(",");
 
 			EnterpriseAdminUtil.updateWebsites(
-				actionRequest, websitePostfixesArray, classPK, className);
+				actionRequest, websiteSuffixesArray, classPK, className);
 		}
 
 		return organization;

@@ -48,8 +48,8 @@ if (parentOrganizationId <= 0) {
 	function <portlet:namespace />saveOrganization(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
 
-		if (document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes) {
-			document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes.value = websitePostfixesArray.join(',');
+		if (document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes) {
+			document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes.value = websiteSuffixesArray.join(',');
 		}
 
 		submitForm(document.<portlet:namespace />fm);

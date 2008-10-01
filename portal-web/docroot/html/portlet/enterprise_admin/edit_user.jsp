@@ -127,8 +127,8 @@ String currentSection = mainSections[0];
 	function <portlet:namespace />saveUser(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 
-		if (document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes) {
-			document.<portlet:namespace />fm.<portlet:namespace />websitePostfixes.value = websitePostfixesArray.join(',');
+		if (document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes) {
+			document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes.value = websiteSuffixesArray.join(',');
 		}
 
 		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>";

@@ -40,7 +40,7 @@ String className = (String)request.getAttribute("className");
 %>
 
 <script type="text/javascript">
-	var websitePostfixesArray = new Array();
+	var websiteSuffixesArray = new Array();
 	var lastIndex;
 </script>
 
@@ -48,7 +48,7 @@ String className = (String)request.getAttribute("className");
 
 <fieldset class="block-labels"  >
 
-	<input id="<portlet:namespace />websitePostfixes" name="<portlet:namespace />websitePostfixes" type="hidden" />
+	<input id="<portlet:namespace />websiteSuffixes" name="<portlet:namespace />websiteSuffixes" type="hidden" />
 
 	<%
 	String fieldParam = null;
@@ -66,7 +66,7 @@ String className = (String)request.getAttribute("className");
 				%>
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="<%= website.getWebsiteId() %>" />
 				<script type="text/javascript">
-					websitePostfixesArray.push('<%=id%>');
+					websiteSuffixesArray.push('<%=id%>');
 					lastIndex = <%=i%>;
 				</script>
 
@@ -112,14 +112,14 @@ String className = (String)request.getAttribute("className");
 </fieldset>
 
 <script type="text/javascript">
-	websitePostfixesArray = [];
+	websiteSuffixesArray = [];
 
 	jQuery(
 		function () {
 			Liferay.Websites = new Liferay.autoFields2({
 				container: '#websites > fieldset',
 				baseRows: '.row-fields',
-				itemsArray: websitePostfixesArray,
+				itemsArray: websiteSuffixesArray,
 				lastIndex: lastIndex
 			});
 		}

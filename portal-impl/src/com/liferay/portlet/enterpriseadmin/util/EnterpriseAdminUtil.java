@@ -228,19 +228,19 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static void updateWebsites(
-			ActionRequest actionRequest, String[] websitePosfixesArray,
+			ActionRequest actionRequest, String[] websiteSuffixesArray,
 			long classPK, String className)
 		throws Exception {
 
 		List<Long> websiteIds = new ArrayList<Long>();
 
-		for (String websitePostfix : websitePosfixesArray) {
-			if (Validator.isNull(websitePostfix.trim())) {
+		for (String websiteSuffix : websiteSuffixesArray) {
+			if (Validator.isNull(websiteSuffix.trim())) {
 				continue;
 			}
 
 			long websiteId = updateWebsite(
-				actionRequest, websitePostfix, className, classPK);
+				actionRequest, websiteSuffix, className, classPK);
 			websiteIds.add(websiteId);
 		}
 
@@ -255,18 +255,18 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static long updateWebsite(
-			ActionRequest actionRequest, String websitePostfix,
+			ActionRequest actionRequest, String websiteSuffix,
 			String className,long classPK)
 		throws Exception {
 
 		long websiteId = ParamUtil.getLong(
-			actionRequest, "websiteId" + websitePostfix);
+			actionRequest, "websiteId" + websiteSuffix);
 		String url = ParamUtil.getString(
-			actionRequest, "url" + websitePostfix);
+			actionRequest, "url" + websiteSuffix);
 		int typeId = ParamUtil.getInteger(
-			actionRequest, "typeId" + websitePostfix);
+			actionRequest, "typeId" + websiteSuffix);
 		boolean primary = ParamUtil.getBoolean(
-			actionRequest, "primary" + websitePostfix);
+			actionRequest, "primary" + websiteSuffix);
 
 		Website website = null;
 

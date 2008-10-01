@@ -291,8 +291,8 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		String websitePostfixes = ParamUtil.getString(
-			actionRequest, "websitePostfixes");
+		String websiteSuffixes = ParamUtil.getString(
+			actionRequest, "websiteSuffixes");
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
@@ -363,10 +363,10 @@ public class EditUserAction extends PortletAction {
 
 			// Websites
 
-			String[] websitePosfixesArray = websitePostfixes.split(",");
+			String[] websiteSuffixesArray = websiteSuffixes.split(",");
 
 			EnterpriseAdminUtil.updateWebsites(
-				actionRequest, websitePosfixesArray, classPK, className);
+				actionRequest, websiteSuffixesArray, classPK, className);
 
 			if (user.getUserId() == themeDisplay.getUserId()) {
 
