@@ -33,7 +33,7 @@ int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
 List resultRows = searchContainer.getResultRows();
-List headerNames = searchContainer.getHeaderNames();
+List<String> headerNames = searchContainer.getHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
@@ -49,7 +49,8 @@ if (rowChecker != null) {
 }
 
 if (resultRows.isEmpty() && (headerNames == null)) {
-	headerNames = new ArrayList();
+	headerNames = new ArrayList<String>();
+
 	headerNames.add(StringPool.BLANK);
 }
 %>
@@ -67,7 +68,7 @@ if (resultRows.isEmpty() && (headerNames == null)) {
 
 		<%
 		for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
-			String headerName = (String)headerNames.get(i);
+			String headerName = headerNames.get(i);
 
 			String orderKey = null;
 			String orderByType = null;
@@ -144,7 +145,7 @@ if (resultRows.isEmpty() && (headerNames == null)) {
 
 		</tr>
 
-		<c:if test="<%= (headerNames != null) && (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
+		<c:if test="<%= (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
 			<tr class="portlet-section-body results-row">
 				<td align="center" colspan="<%= headerNames.size() %>">
 					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
