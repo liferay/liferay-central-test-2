@@ -256,8 +256,7 @@
 
 .uni-form fieldset {
 	border: none;
-	 width:100%;
-
+	width:100%;
 }
 
 .uni-form fieldset.col {
@@ -274,11 +273,11 @@
 }
 
 .lfr-portlet-toolbar {
-  background: #f6f8fb;
-  overflow: hidden;
-  padding: 2px;
+	background: #f6f8fb;
+	overflow: hidden;
+	padding: 2px;
 	margin-bottom: 5px;
- }
+}
 
 .lfr-portlet-toolbar .lfr-toolbar-button a {
 	background: url() no-repeat 5px 50%;
@@ -286,31 +285,36 @@
 	font-weight: bold;
 	display: block;
 	float: left;
-	min-width: 70px;
-	padding: 5px;
-	padding-left: 30px;
+	border:1px solid #f6f8fb;
+	padding: 4px 14px 4px 29px;
 	color: #9ea8ad;
 	text-decoration: none;
-
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button a:hover {
 	color: #346799;
 	border:1px solid #346799;
-	padding: 4px;
-	padding-left: 29px;
+	padding: 4px 14px 4px 29px;
 }
 
 .ie6 .lfr-portlet-toolbar .lfr-toolbar-button a {
-	width: 70px;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.current a {
 	background-color: #cfd5d7;
+	border:1px solid #cfd5d7;
 	color: #000;
 }
 
+.lfr-portlet-toolbar .lfr-toolbar-button.current a:hover {
+	border:1px solid #346799;
+}
+
 .lfr-portlet-toolbar .lfr-toolbar-button.add-button a {
+	background-image: url(<%= themeImagesPath %>/common/add.png);
+}
+
+.lfr-portlet-toolbar .lfr-toolbar-button.custom-attributes-button a {
 	background-image: url(<%= themeImagesPath %>/common/add.png);
 }
 
