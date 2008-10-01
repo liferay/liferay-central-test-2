@@ -100,71 +100,9 @@ String toolbarItem = "view-users";
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.User"
 			keyProperty="userId"
-			modelVar="user2"
+			modelVar="selUser"
 		>
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-			</liferay-portlet:renderURL>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="first-name"
-				orderable="<%= true %>"
-				orderableProperty="first-name"
-				property="firstName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="last-name"
-				orderable="<%= true %>"
-				orderableProperty="last-name"
-				property="lastName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="screen-name"
-				orderable="<%= true %>"
-				orderableProperty="screen-name"
-				property="screenName"
-			/>
-
-			<%--liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="email-address"
-				orderable="<%= true %>"
-				orderableProperty="email-address"
-				property="emailAddress"
-			/--%>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="job-title"
-				orderable="<%= true %>"
-				orderableProperty="job-title"
-				value="<%= user2.getContact().getJobTitle() %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				buffer="sb"
-				href="<%= rowURL %>"
-				name="organizations"
-			>
-
-				<%
-				List organizations = user2.getOrganizations();
-
-				if (filterManageableOrganizations) {
-					organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
-				}
-
-				sb.append(ListUtil.toString(organizations, "name", ", "));
-				%>
-
-			</liferay-ui:search-container-column-text>
+			<%@ include file="/html/portlet/enterprise_admin/user/view_users_columns.jspf" %>
 
 			<liferay-ui:search-container-column-jsp
 				align="right"
