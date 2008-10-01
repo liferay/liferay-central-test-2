@@ -47,11 +47,9 @@ portletURL.setParameter(userSearchContainer.getCurParam(), String.valueOf(userSe
 
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
 
-<%
-String toolbarItem = "view-users";
-%>
-
-<%@ include file="/html/portlet/enterprise_admin/user/toolbar.jspf" %>
+<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
+	<liferay-util:param name="toolbar-item" value="view-users" />
+</liferay-util:include>
 
 <liferay-ui:search-container
 	searchContainer="<%= userSearchContainer %>"
@@ -188,21 +186,6 @@ String toolbarItem = "view-users";
 			%>
 
 			<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
-		</c:if>
-
-		<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
-
-			<%
-			hasButtons = true;
-			%>
-
-			<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
-
-			<liferay-ui:upload-progress
-				id="<%= exportProgressId %>"
-				message="exporting"
-				redirect="<%= HtmlUtil.escape(currentURL) %>"
-			/>
 		</c:if>
 
 		<c:if test="<%= hasButtons %>">

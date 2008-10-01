@@ -140,11 +140,9 @@ String currentSection = mainSections[0];
 	}
 </script>
 
-<%
-String toolbarItem = (selUser == null) ? "add-user" : "view-users";
-%>
-
-<%@ include file="/html/portlet/enterprise_admin/user/toolbar.jspf" %>
+<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
+	<liferay-util:param name="toolbar-item" value="<%= (selUser == null) ? "add-user" : "view-users" %>" />
+</liferay-util:include>
 
 <form class="uni-form" method="post" name="<portlet:namespace />fm" >
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
