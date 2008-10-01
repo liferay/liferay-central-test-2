@@ -27,9 +27,7 @@
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
-
-String formName = randomNamespace + request.getAttribute("liferay-ui:input-permissions:formName");
+String formName = namespace + request.getAttribute("liferay-ui:input-permissions:formName");
 String modelName = (String)request.getAttribute("liferay-ui:input-permissions:modelName");
 %>
 
@@ -56,7 +54,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
 		%>
 
-		<table class="lfr-table" id="<%= randomNamespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
+		<table class="lfr-table" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
 		<tr>
 			<th style="text-align: right;">
 				<liferay-ui:message key="action" />
@@ -104,19 +102,19 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			}
 		%>
 
-			<tr id="<%= randomNamespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
+			<tr id="<%= namespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
 				<td style="text-align: right;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</td>
 
 				<c:if test="<%= group.isCommunity() || group.isOrganization() %>">
 					<td style="text-align: center;">
-						<input <%= communityChecked ? "checked" : "" %> name="<%= randomNamespace %>communityPermissions" type="checkbox" value="<%= action %>">
+						<input <%= communityChecked ? "checked" : "" %> name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
 					</td>
 				</c:if>
 
 				<td style="text-align: right;">
-					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> name="<%= randomNamespace %>guestPermissions" type="checkbox" value="<%= action %>">
+					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
 				</td>
 			</tr>
 
@@ -126,21 +124,21 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		</table>
 
-		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= randomNamespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
-		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= randomNamespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
+		<input id="<%= namespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
+		<input id="<%= namespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
-		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
-		<a href="javascript: <%= randomNamespace %>inputPermissionsConfigure();"><liferay-ui:message key="configure" /> &raquo;</a>
+		<div id="<%= namespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
+		<a href="javascript: <%= namespace %>inputPermissionsConfigure();"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>
 
-		<div id="<%= randomNamespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
-		<a href="javascript: <%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
+		<div id="<%= namespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
+		<a href="javascript: <%= namespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
 		<script type="text/javascript">
-			function <%= randomNamespace %>inputPermissionsConfigure() {
-				document.getElementById("<%= randomNamespace %>inputPermissionsTable").style.display = "";
-				document.getElementById("<%= randomNamespace %>inputPermissionsMoreLink").style.display = "";
+			function <%= namespace %>inputPermissionsConfigure() {
+				document.getElementById("<%= namespace %>inputPermissionsTable").style.display = "";
+				document.getElementById("<%= namespace %>inputPermissionsMoreLink").style.display = "";
 
 				<%
 				for (int i = 0; i < supportedActions.size(); i++) {
@@ -149,18 +147,18 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
 				%>
 
-						document.getElementById("<%= randomNamespace %>inputPermissionsAction<%= action %>").style.display = "";
+						document.getElementById("<%= namespace %>inputPermissionsAction<%= action %>").style.display = "";
 
 				<%
 					}
 				}
 				%>
 
-				document.getElementById("<%= randomNamespace %>inputPermissionsConfigureLink").style.display = "none";
-				document.getElementById("<%= randomNamespace %>inputPermissionsShowConfigure").value = "true";
+				document.getElementById("<%= namespace %>inputPermissionsConfigureLink").style.display = "none";
+				document.getElementById("<%= namespace %>inputPermissionsShowConfigure").value = "true";
 			}
 
-			function <%= randomNamespace %>inputPermissionsMore() {
+			function <%= namespace %>inputPermissionsMore() {
 
 				<%
 				for (int i = 0; i < supportedActions.size(); i++) {
@@ -169,15 +167,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					if (!communityDefaultActions.contains(action) && !guestDefaultActions.contains(action)) {
 				%>
 
-						document.getElementById("<%= randomNamespace %>inputPermissionsAction<%= action %>").style.display = "";
+						document.getElementById("<%= namespace %>inputPermissionsAction<%= action %>").style.display = "";
 
 				<%
 					}
 				}
 				%>
 
-				document.getElementById("<%= randomNamespace %>inputPermissionsMoreLink").style.display = "none";
-				document.getElementById("<%= randomNamespace %>inputPermissionsShowMore").value = "true";
+				document.getElementById("<%= namespace %>inputPermissionsMoreLink").style.display = "none";
+				document.getElementById("<%= namespace %>inputPermissionsShowMore").value = "true";
 			}
 		</script>
 	</c:when>
@@ -188,35 +186,35 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean addGuestPermissions = ParamUtil.getBoolean(request, "addGuestPermissions", true);
 		%>
 
-		<input name="<%= randomNamespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>" />
-		<input name="<%= randomNamespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>" />
+		<input name="<%= namespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>" />
+		<input name="<%= namespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>" />
 
-		<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= randomNamespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= randomNamespace %>addCommunityPermissions.value = this.checked; <%= randomNamespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-community" /><br />
-		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= randomNamespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= randomNamespace %>addGuestPermissions.value = this.checked; <%= randomNamespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-guest" /><br />
-		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= randomNamespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= randomNamespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= randomNamespace %>addGuestPermissions.value = !this.checked; <%= randomNamespace %>checkUserPermissions();"> <liferay-ui:message key="only-assign-permissions-to-me" />
+		<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= namespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-community" /><br />
+		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-guest" /><br />
+		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();"> <liferay-ui:message key="only-assign-permissions-to-me" />
 
 		<script type="text/javascript">
-			function <%= randomNamespace %>checkCommunityAndGuestPermissions() {
-				if (document.<%= formName %>.<%= randomNamespace %>addCommunityPermissionsBox.checked ||
-					document.<%= formName %>.<%= randomNamespace %>addGuestPermissionsBox.checked) {
+			function <%= namespace %>checkCommunityAndGuestPermissions() {
+				if (document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked ||
+					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
 
-					document.<%= formName %>.<%= randomNamespace %>addUserPermissionsBox.checked = false;
+					document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = false;
 				}
-				else if (!document.<%= formName %>.<%= randomNamespace %>addCommunityPermissionsBox.checked &&
-						 !document.<%= formName %>.<%= randomNamespace %>addGuestPermissionsBox.checked) {
+				else if (!document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked &&
+						 !document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
 
-					document.<%= formName %>.<%= randomNamespace %>addUserPermissionsBox.checked = true;
+					document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = true;
 				}
 			}
 
-			function <%= randomNamespace %>checkUserPermissions() {
-				if (document.<%= formName %>.<%= randomNamespace %>addUserPermissionsBox.checked) {
-					document.<%= formName %>.<%= randomNamespace %>addCommunityPermissionsBox.checked = false;
-					document.<%= formName %>.<%= randomNamespace %>addGuestPermissionsBox.checked = false;
+			function <%= namespace %>checkUserPermissions() {
+				if (document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked) {
+					document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = false;
+					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = false;
 				}
 				else {
-					document.<%= formName %>.<%= randomNamespace %>addCommunityPermissionsBox.checked = true;
-					document.<%= formName %>.<%= randomNamespace %>addGuestPermissionsBox.checked = true;
+					document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = true;
+					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = true;
 				}
 			}
 		</script>
