@@ -519,7 +519,6 @@
 		<render-weight>1</render-weight>
 		<css-class-wrapper>portlet-login</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
-		<system>true</system>
 	</portlet>
 	<portlet>
 		<portlet-name>59</portlet-name>
