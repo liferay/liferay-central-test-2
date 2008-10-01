@@ -38,7 +38,7 @@
 
 	<path id="web.classpath">
 		<pathelement location="${project.dir}/ext-service/classes" />
-		<fileset dir="${project.dir}/lib/development" includes="mail.jar,servlet.jar" />
+		<fileset dir="${project.dir}/lib/development" includes="mail.jar,servlet-api.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<path refid="web-lib.classpath" />
 	</path>

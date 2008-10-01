@@ -36,6 +36,7 @@
 	<classpathentry kind="lib" path="lib/development/jsf-facelets.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-impl.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-portlet.jar"/>
+	<classpathentry kind="lib" path="lib/development/jsp-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/jta.jar"/>
 	<classpathentry kind="lib" path="lib/development/junit.jar"/>
 	<classpathentry kind="lib" path="lib/development/just-ice.jar"/>
@@ -58,7 +59,7 @@
 	<classpathentry kind="lib" path="lib/development/sdk-addon-api-0.2.jar"/>
 	<classpathentry kind="lib" path="lib/development/selenium-java-client-driver.jar"/>
 	<classpathentry kind="lib" path="lib/development/selenium-server.jar"/>
-	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
+	<classpathentry kind="lib" path="lib/development/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-coyote.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-util.jar"/>

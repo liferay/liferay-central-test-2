@@ -309,22 +309,22 @@
 	<library>
 		<file-name>development/jms.jar</file-name>
 		<version>1.1</version>
-		<project-name>Java Message Services (JMS)</project-name>
+		<project-name>Java Message Services</project-name>
 		<project-url>http://java.sun.com/products/jms</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for JMS 1.1</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>development/jndi.jar</file-name>
 		<version>1.2.1</version>
-		<project-name>Java Naming and Directory Interface (JNDI)</project-name>
+		<project-name>Java Naming and Directory Interface</project-name>
 		<project-url>http://java.sun.com/products/jndi</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for JNDI 1.2.1</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -398,13 +398,24 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jsp-api.jar</file-name>
+		<version>2.4</version>
+		<project-name>JavaServer Pages</project-name>
+		<project-url>http://java.sun.com/products/jsp</project-url>
+		<licenses>
+			<license>
+				<license-name>Sun Binary Code License Agreement</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jta.jar</file-name>
 		<version>1.1</version>
-		<project-name>Java Transaction API (JTA)</project-name>
+		<project-name>Java Transaction</project-name>
 		<project-url>http://java.sun.com/products/jta</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for JTA 1.1</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -470,7 +481,7 @@
 		<project-url>http://java.sun.com/products/javamail</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun License For JavaMail 1.4</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -495,10 +506,6 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2004-2007 The Apache Software Foundation</copyright-notice>
-			</license>
-			<license>
-				<license-name>Sun DTD License</license-name>
-				<copyright-notice>Copyright (c) 1994-2005 Sun Microsystems, Inc. All Rights Reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -667,13 +674,13 @@
 		</comments>
 	</library>
 	<library>
-		<file-name>development/servlet.jar</file-name>
-		<version></version>
-		<project-name>Apache Tomcat (Servlet API)</project-name>
-		<project-url>http://tomcat.apache.org</project-url>
+		<file-name>development/servlet-api.jar</file-name>
+		<version>2.4</version>
+		<project-name>Java Servlet</project-name>
+		<project-url>http://java.sun.com/products/servlet</project-url>
 		<licenses>
 			<license>
-				<license-name>Apache License 2.0</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -684,7 +691,7 @@
 		<project-url>http://java.sun.com/products/javamail</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun License For JavaMail 1.4</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -943,7 +950,7 @@
 		<project-url>http://java.sun.com/j2ee/ccpp</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for CC/PP Processing 1.0</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -954,7 +961,7 @@
 		<project-url>http://java.sun.com/j2ee/ccpp</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for CC/PP Processing 1.0</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1423,11 +1430,11 @@
 	<library>
 		<file-name>portal/j2ee-management.jar</file-name>
 		<version>1.0</version>
-		<project-name>JSR 77 J2EE Management Specification 1.0</project-name>
+		<project-name>J2EE Management</project-name>
 		<project-url>http://java.sun.com/j2ee/tools/management</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for J2EE Management 1.0</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1696,7 +1703,7 @@
 		<project-url>http://java.sun.com/javase/technologies/core/mntr-mgmt/javamanagement</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for JMX 1.2</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1707,7 +1714,7 @@
 		<project-url>http://java.sun.com/javase/technologies/core/mntr-mgmt/javamanagement</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun Binary Code License Agreement for JMX 1.2</license-name>
+				<license-name>Sun Binary Code License Agreement</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1796,7 +1803,7 @@
 	<library>
 		<file-name>portal/jug.jar</file-name>
 		<version>2.0</version>
-		<project-name>Java Uuid Generator (JUG)</project-name>
+		<project-name>Java Uuid Generator</project-name>
 		<project-url>http://jug.safehaus.org</project-url>
 		<licenses>
 			<license>
@@ -2148,7 +2155,7 @@
 	<library>
 		<file-name>portal/serializer.jar</file-name>
 		<version>2.7.0</version>
-		<project-name>Xalan-Java (Serializer Component)</project-name>
+		<project-name>Xalan-Java</project-name>
 		<project-url>http://xml.apache.org/xalan-j</project-url>
 		<licenses>
 			<license>
@@ -2197,7 +2204,7 @@
 	<library>
 		<file-name>portal/soap.jar</file-name>
 		<version>2.2</version>
-		<project-name>Apache Simple Object Access Protocol (SOAP)</project-name>
+		<project-name>Apache Simple Object Access Protocol</project-name>
 		<project-url>http://archive.apache.org/dist/ws/soap</project-url>
 		<licenses>
 			<license>
