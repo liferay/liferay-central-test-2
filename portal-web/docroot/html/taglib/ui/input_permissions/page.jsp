@@ -27,6 +27,7 @@
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 
 <%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 String formName = namespace + request.getAttribute("liferay-ui:input-permissions:formName");
 String modelName = (String)request.getAttribute("liferay-ui:input-permissions:modelName");
 %>
@@ -54,7 +55,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
 		%>
 
-		<table class="lfr-table" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
+		<table class="lfr-table" id="<%= randomNamespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
 		<tr>
 			<th style="text-align: right;">
 				<liferay-ui:message key="action" />
@@ -102,7 +103,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			}
 		%>
 
-			<tr id="<%= namespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
+			<tr id="<%= randomNamespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
 				<td style="text-align: right;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</td>
@@ -124,21 +125,21 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		</table>
 
-		<input id="<%= namespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
-		<input id="<%= namespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
+		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
+		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
-		<div id="<%= namespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
-		<a href="javascript: <%= namespace %>inputPermissionsConfigure();"><liferay-ui:message key="configure" /> &raquo;</a>
+		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
+		<a href="javascript: <%= randomNamespace %>inputPermissionsConfigure();"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>
 
-		<div id="<%= namespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
-		<a href="javascript: <%= namespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
+		<div id="<%= randomNamespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
+		<a href="javascript: <%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
 		<script type="text/javascript">
-			function <%= namespace %>inputPermissionsConfigure() {
-				document.getElementById("<%= namespace %>inputPermissionsTable").style.display = "";
-				document.getElementById("<%= namespace %>inputPermissionsMoreLink").style.display = "";
+			function <%= randomNamespace %>inputPermissionsConfigure() {
+				jQuery("#<%= randomNamespace %>inputPermissionsTable").show();
+				jQuery("#<%= randomNamespace %>inputPermissionsMoreLink").show();
 
 				<%
 				for (int i = 0; i < supportedActions.size(); i++) {
@@ -147,18 +148,18 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
 				%>
 
-						document.getElementById("<%= namespace %>inputPermissionsAction<%= action %>").style.display = "";
+						jQuery("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
 
 				<%
 					}
 				}
 				%>
 
-				document.getElementById("<%= namespace %>inputPermissionsConfigureLink").style.display = "none";
-				document.getElementById("<%= namespace %>inputPermissionsShowConfigure").value = "true";
+				jQuery("#<%= randomNamespace %>inputPermissionsConfigureLink").hide();
+				jQuery("#<%= randomNamespace %>inputPermissionsShowConfigure").val("true");
 			}
 
-			function <%= namespace %>inputPermissionsMore() {
+			function <%= randomNamespace %>inputPermissionsMore() {
 
 				<%
 				for (int i = 0; i < supportedActions.size(); i++) {
@@ -167,15 +168,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					if (!communityDefaultActions.contains(action) && !guestDefaultActions.contains(action)) {
 				%>
 
-						document.getElementById("<%= namespace %>inputPermissionsAction<%= action %>").style.display = "";
+						jQuery("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
 
 				<%
 					}
 				}
 				%>
 
-				document.getElementById("<%= namespace %>inputPermissionsMoreLink").style.display = "none";
-				document.getElementById("<%= namespace %>inputPermissionsShowMore").value = "true";
+				jQuery("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
+				jQuery("#<%= randomNamespace %>inputPermissionsShowMore").val("true");
 			}
 		</script>
 	</c:when>
