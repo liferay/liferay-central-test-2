@@ -48,16 +48,16 @@ public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {
 
 			ResultRow row = parentTag.getRow();
 
-			if (_index <= -1) {
-				_index = row.getEntries().size();
+			if (index <= -1) {
+				index = row.getEntries().size();
 			}
 
-			row.addScore(_index, getScore());
+			row.addScore(index, getScore());
 
 			return EVAL_PAGE;
 		}
 		finally {
-			_index = -1;
+			index = -1;
 			_name = DEFAULT_NAME;
 			_score = 0;
 		}

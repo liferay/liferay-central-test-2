@@ -24,6 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
@@ -38,10 +39,17 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class SearchContainerResultsTag extends TagSupport {
 
-	public static final String DEFAULT_VAR = "results";
+	public static final String DEFAULT_RESULTS_VAR = "results";
+
+	public static final String DEFAULT_TOTAL_VAR = "total";
 
 	public int doEndTag() throws JspException {
 		try {
+			if (_results == null) {
+				_results = (List)pageContext.getAttribute(_resultsVar);
+				_total = (Integer)pageContext.getAttribute(_totalVar);
+			}
+
 			SearchContainerTag parentTag =
 				(SearchContainerTag)findAncestorWithClass(
 					this, SearchContainerTag.class);
@@ -53,7 +61,8 @@ public class SearchContainerResultsTag extends TagSupport {
 
 			parentTag.setHasResults(true);
 
-			pageContext.setAttribute(getVar(), _results);
+			pageContext.setAttribute(_resultsVar, _results);
+			pageContext.setAttribute(_totalVar, _total);
 
 			return EVAL_PAGE;
 		}
@@ -62,8 +71,9 @@ public class SearchContainerResultsTag extends TagSupport {
 		}
 		finally {
 			_results = null;
+			_resultsVar = DEFAULT_RESULTS_VAR;
 			_total = 0;
-			_var = DEFAULT_VAR;
+			_totalVar = DEFAULT_TOTAL_VAR;
 		}
 	}
 
@@ -76,35 +86,49 @@ public class SearchContainerResultsTag extends TagSupport {
 			throw new JspTagException("Requires liferay-ui:search-container");
 		}
 
-		return SKIP_BODY;
+		if (_results == null) {
+			pageContext.setAttribute(_resultsVar, new ArrayList());
+			pageContext.setAttribute(_totalVar, 0);
+		}
+
+		return EVAL_BODY_INCLUDE;
 	}
 
 	public List getResults() {
 		return _results;
 	}
 
+	public String getResultsVar() {
+		return _resultsVar;
+	}
+
 	public int getTotal() {
 		return _total;
 	}
 
-	public String getVar() {
-		return _var;
+	public String getTotalVar() {
+		return _totalVar;
 	}
 
 	public void setResults(List results) {
 		_results = results;
 	}
 
+	public void setResultsVar(String resultsVar) {
+		_resultsVar = resultsVar;
+	}
+
 	public void setTotal(int total) {
 		_total = total;
 	}
 
-	public void setVar(String var) {
-		_var = var;
+	public void setTotalVar(String totalVar) {
+		_totalVar = totalVar;
 	}
 
 	private List _results;
+	private String _resultsVar = DEFAULT_RESULTS_VAR;
 	private int _total;
-	private String _var = DEFAULT_VAR;
+	private String _totalVar = DEFAULT_TOTAL_VAR;
 
 }

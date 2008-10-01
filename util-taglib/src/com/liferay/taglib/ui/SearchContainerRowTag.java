@@ -299,9 +299,9 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
 
-		pageContext.setAttribute(getIndexVar(), _rowIndex);
-		pageContext.setAttribute(getModelVar(), model);
-		pageContext.setAttribute(getRowVar(), _row);
+		pageContext.setAttribute(_indexVar, _rowIndex);
+		pageContext.setAttribute(_modelVar, model);
+		pageContext.setAttribute(_rowVar, _row);
 	}
 
 	private static Log _log = LogFactory.getLog(SearchContainerRowTag.class);

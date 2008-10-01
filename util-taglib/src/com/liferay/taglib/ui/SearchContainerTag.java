@@ -107,7 +107,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 				_searchContainer.setRowChecker(_rowChecker);
 			}
 
-			pageContext.setAttribute(getVar(), _searchContainer);
+			pageContext.setAttribute(_var, _searchContainer);
 
 			return EVAL_BODY_INCLUDE;
 		}

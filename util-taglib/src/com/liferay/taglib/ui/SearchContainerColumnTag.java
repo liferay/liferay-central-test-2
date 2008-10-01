@@ -36,49 +36,49 @@ public abstract class SearchContainerColumnTag
 	extends ParamAndPropertyAncestorTagImpl {
 
 	public String getAlign() {
-		return _align;
+		return align;
 	}
 
 	public int getColspan() {
-		return _colspan;
+		return colspan;
 	}
 
 	public int getIndex() {
-		return _index;
+		return index;
 	}
 
 	public String getName() {
-		return _name;
+		return name;
 	}
 
 	public String getValign() {
-		return _valign;
+		return valign;
 	}
 
 	public void setAlign(String align) {
-		_align = align;
+		this.align = align;
 	}
 
 	public void setColspan(int colspan) {
-		_colspan = colspan;
+		this.colspan = colspan;
 	}
 
 	public void setIndex(int index) {
-		_index = index;
+		this.index = index;
 	}
 
 	public void setName(String name) {
-		_name = name;
+		this.name = name;
 	}
 
 	public void setValign(String valign) {
-		_valign = valign;
+		this.valign = valign;
 	}
 
-	protected String _align = SearchEntry.DEFAULT_ALIGN;
-	protected int _colspan = SearchEntry.DEFAULT_COLSPAN;
-	protected int _index = -1;
-	protected String _name = StringPool.BLANK;
-	protected String _valign = SearchEntry.DEFAULT_VALIGN;
+	protected String align = SearchEntry.DEFAULT_ALIGN;
+	protected int colspan = SearchEntry.DEFAULT_COLSPAN;
+	protected int index = -1;
+	protected String name = StringPool.BLANK;
+	protected String valign = SearchEntry.DEFAULT_VALIGN;
 
 }

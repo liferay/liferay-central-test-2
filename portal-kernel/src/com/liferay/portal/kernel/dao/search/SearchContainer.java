@@ -59,7 +59,8 @@ public class SearchContainer<R> {
 		_searchTerms = searchTerms;
 
 		_curParam = curParam;
-		_curValue = ParamUtil.get(portletRequest, _curParam, DEFAULT_CUR_VALUE);
+		_curValue = ParamUtil.getInteger(
+			portletRequest, _curParam, DEFAULT_CUR_VALUE);
 
 		if (_curValue < 1) {
 			_curValue = DEFAULT_CUR_VALUE;
@@ -69,6 +70,7 @@ public class SearchContainer<R> {
 
 		_iteratorURL = iteratorURL;
 
+		_iteratorURL.setParameter(_curParam, String.valueOf(_curValue));
 		_iteratorURL.setParameter(
 			DisplayTerms.KEYWORDS,
 			ParamUtil.getString(portletRequest, DisplayTerms.KEYWORDS));

@@ -62,21 +62,19 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 				_value = String.valueOf(
 					BeanPropertiesUtil.getObject(row.getObject(), _property));
 			}
-			else {
-				if (Validator.isNotNull(_buffer)) {
-					_value = _sb.toString();
-				}
-				else if (Validator.isNull(_value)) {
-					BodyContent bodyContent = getBodyContent();
+			else if (Validator.isNotNull(_buffer)) {
+				_value = _sb.toString();
+			}
+			else if (_value == null) {
+				BodyContent bodyContent = getBodyContent();
 
-					if (bodyContent != null) {
-						_value = bodyContent.getString();
-					}
+				if (bodyContent != null) {
+					_value = bodyContent.getString();
 				}
 			}
 
-			if (_index <= -1) {
-				_index = row.getEntries().size();
+			if (index <= -1) {
+				index = row.getEntries().size();
 			}
 
 			if (row.isRestricted()) {
@@ -84,7 +82,7 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			}
 
 			row.addText(
-				_index,
+				index,
 				new TextSearchEntry(
 					getAlign(), getValign(), getColspan(), getValue(),
 					(String)getHref(), getTarget(), getTitle()));
@@ -92,23 +90,27 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
-			_align = SearchEntry.DEFAULT_ALIGN;
+			align = SearchEntry.DEFAULT_ALIGN;
 			_buffer = null;
-			_colspan = SearchEntry.DEFAULT_COLSPAN;
+			colspan = SearchEntry.DEFAULT_COLSPAN;
 			_href = null;
-			_index = -1;
-			_name = null;
+			index = -1;
+			name = null;
 			_orderable = false;
 			_orderableProperty = null;
 			_property = null;
 			_target = null;
 			_title = null;
-			_valign = SearchEntry.DEFAULT_VALIGN;
+			valign = SearchEntry.DEFAULT_VALIGN;
 			_value = null;
 		}
 	}
 
 	public int doStartTag() throws JspException {
+		if (_orderable && Validator.isNull(_orderableProperty)) {
+			_orderableProperty = name;
+		}
+
 		SearchContainerRowTag parentRowTag = (SearchContainerRowTag)
 			findAncestorWithClass(this, SearchContainerRowTag.class);
 

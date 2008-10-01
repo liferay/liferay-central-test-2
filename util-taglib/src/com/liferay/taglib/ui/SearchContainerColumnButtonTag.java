@@ -51,23 +51,23 @@ public class SearchContainerColumnButtonTag extends SearchContainerColumnTag {
 
 			ResultRow row = parentTag.getRow();
 
-			if (_index <= -1) {
-				_index = row.getEntries().size();
+			if (index <= -1) {
+				index = row.getEntries().size();
 			}
 
 			row.addButton(
-				_index, getAlign(), getValign(), getColspan(), getName(),
+				index, getAlign(), getValign(), getColspan(), getName(),
 				(String)getHref());
 
 			return EVAL_PAGE;
 		}
 		finally {
-			_align = SearchEntry.DEFAULT_ALIGN;
-			_colspan = SearchEntry.DEFAULT_COLSPAN;
+			align = SearchEntry.DEFAULT_ALIGN;
+			colspan = SearchEntry.DEFAULT_COLSPAN;
 			_href = null;
-			_index = -1;
-			_name = StringPool.BLANK;
-			_valign = SearchEntry.DEFAULT_VALIGN;
+			index = -1;
+			name = StringPool.BLANK;
+			valign = SearchEntry.DEFAULT_VALIGN;
 		}
 	}
 
@@ -84,7 +84,7 @@ public class SearchContainerColumnButtonTag extends SearchContainerColumnTag {
 		if (!parentRowTag.isHeaderNamesAssigned()) {
 			List<String> headerNames = parentRowTag.getHeaderNames();
 
-			headerNames.add(_name);
+			headerNames.add(name);
 		}
 
 		return EVAL_BODY_INCLUDE;

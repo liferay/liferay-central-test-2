@@ -47,24 +47,24 @@ public class SearchContainerColumnJSPTag extends SearchContainerColumnTag {
 
 			ResultRow row = parentTag.getRow();
 
-			if (_index <= -1) {
-				_index = row.getEntries().size();
+			if (index <= -1) {
+				index = row.getEntries().size();
 			}
 
 			row.addJSP(
-				_index, getAlign(), getValign(), getColspan(), getPath(),
+				index, getAlign(), getValign(), getColspan(), getPath(),
 				pageContext.getServletContext(), getServletRequest(),
 				getServletResponse());
 
 			return EVAL_PAGE;
 		}
 		finally {
-			_align = SearchEntry.DEFAULT_ALIGN;
-			_colspan = SearchEntry.DEFAULT_COLSPAN;
-			_index = -1;
-			_name = StringPool.BLANK;
+			align = SearchEntry.DEFAULT_ALIGN;
+			colspan = SearchEntry.DEFAULT_COLSPAN;
+			index = -1;
+			name = StringPool.BLANK;
 			_path = null;
-			_valign = SearchEntry.DEFAULT_VALIGN;
+			valign = SearchEntry.DEFAULT_VALIGN;
 		}
 	}
 
@@ -81,7 +81,7 @@ public class SearchContainerColumnJSPTag extends SearchContainerColumnTag {
 		if (!parentRowTag.isHeaderNamesAssigned()) {
 			List<String> headerNames = parentRowTag.getHeaderNames();
 
-			headerNames.add(_name);
+			headerNames.add(name);
 		}
 
 		return EVAL_BODY_INCLUDE;

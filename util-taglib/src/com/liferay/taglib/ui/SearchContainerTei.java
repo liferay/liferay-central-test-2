@@ -47,7 +47,7 @@ public class SearchContainerTei extends TagExtraInfo {
 		return new VariableInfo[] {
 			new VariableInfo(
 				var, SearchContainer.class.getName(), true,
-				VariableInfo.AT_BEGIN)
+				VariableInfo.NESTED)
 		};
 	}
 
