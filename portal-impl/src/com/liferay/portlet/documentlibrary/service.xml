@@ -66,6 +66,10 @@
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
+
+		<!-- Transactions -->
+
+		<tx-required>getFileAsStream</tx-required>				
 	</entity>
 	<entity name="DLFileEntryAndShortcut" local-service="false" remote-service="false" />
 	<entity name="DLFileRank" local-service="true" remote-service="false">

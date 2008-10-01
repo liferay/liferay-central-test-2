@@ -1086,6 +1086,15 @@
 		<property name="finder" ref="com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl" />
+	<aop:config>
+		<aop:pointcut id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.operation" expression="bean(com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl)" />
+		<aop:advisor advice-ref="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.advice" pointcut-ref="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.operation" />
+	</aop:config>
+	<tx:advice id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.advice" transaction-manager="liferayTransactionManager">
+		<tx:attributes>
+			<tx:method name="getFileAsStream" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
+		</tx:attributes>
+	</tx:advice>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl" />
 	</bean>
@@ -1096,6 +1105,15 @@
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl" />
+	<aop:config>
+		<aop:pointcut id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.operation" expression="bean(com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl)" />
+		<aop:advisor advice-ref="com.liferay.portlet.documentlibrary.service.DLFileEntryService.advice" pointcut-ref="com.liferay.portlet.documentlibrary.service.DLFileEntryService.operation" />
+	</aop:config>
+	<tx:advice id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.advice" transaction-manager="liferayTransactionManager">
+		<tx:attributes>
+			<tx:method name="getFileAsStream" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
+		</tx:attributes>
+	</tx:advice>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl" />
 	</bean>
