@@ -94,56 +94,64 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<liferay-ui:search-container
-			searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-			rowChecker="<%= new UserPasswordPolicyChecker(renderResponse, passwordPolicy) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/user_search.jsp"
-			/>
+		<%
+		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
-			<%
-			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+		searchContainer.setRowChecker(new UserPasswordPolicyChecker(renderResponse, passwordPolicy));
+		%>
 
-			LinkedHashMap userParams = new LinkedHashMap();
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
-			if (tabs3.equals("current")) {
-				userParams.put("usersPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
-			}
-			%>
+		<%
+		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+		LinkedHashMap userParams = new LinkedHashMap();
 
-			<liferay-ui:search-container-results
-				results="<%= results1 %>"
-				total="<%= total1 %>"
-			/>
+		if (tabs3.equals("current")) {
+			userParams.put("usersPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
+		}
+		%>
 
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.User"
-				keyProperty="userId"
-				modelVar="user2"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					property="fullName"
-				/>
+		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
-				<liferay-ui:search-container-column-text
-					name="screen-name"
-					property="screenName"
-				/>
-			</liferay-ui:search-container-row>
+		<div class="separator"><!-- --></div>
 
-			<div class="separator"><!-- --></div>
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+		<br /><br />
 
-			<br /><br />
+		<%
+		List<String> headerNames = new ArrayList<String>();
 
-			<liferay-ui:search-iterator />
+		headerNames.add("name");
+		headerNames.add("screen-name");
+		//headerNames.add("email-address");
 
-		</liferay-ui:search-container>
+		searchContainer.setHeaderNames(headerNames);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			User user2 = (User)results.get(i);
+
+			ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+
+			// Name, screen name, and email address
+
+			row.addText(user2.getFullName());
+			row.addText(user2.getScreenName());
+			//row.addText(user2.getEmailAddress());
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("organizations") %>'>
 		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="" />
@@ -155,131 +163,114 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<liferay-ui:search-container
-			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
-			rowChecker="<%= new OrganizationPasswordPolicyChecker(renderResponse, passwordPolicy) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/organization_search.jsp"
-			/>
+		<%
+		OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
-			<%
-			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+		searchContainer.setRowChecker(new OrganizationPasswordPolicyChecker(renderResponse, passwordPolicy));
+		%>
 
-			long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/organization_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
-			LinkedHashMap organizationParams = new LinkedHashMap();
+		<%
+		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-			if (tabs3.equals("current")) {
-				organizationParams.put("organizationsPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
+		long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+
+		LinkedHashMap organizationParams = new LinkedHashMap();
+
+		if (tabs3.equals("current")) {
+			organizationParams.put("organizationsPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
+		}
+		%>
+
+		<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+
+		<div class="separator"><!-- --></div>
+
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+
+		<br /><br />
+
+		<%
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			Organization organization = (Organization)results.get(i);
+
+			ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
+
+			// Name
+
+			row.addText(organization.getName());
+
+			// Parent organization
+
+			String parentOrganizationName = StringPool.BLANK;
+
+			if (organization.getParentOrganizationId() > 0) {
+				try {
+					Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+					parentOrganizationName = parentOrganization.getName();
+				}
+				catch (Exception e) {
+				}
 			}
-			%>
 
-			<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+			row.addText(parentOrganizationName);
 
-			<liferay-ui:search-container-results
-				results="<%= results1 %>"
-				total="<%= total1 %>"
-			/>
+			// Type
 
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Organization"
-				keyProperty="organizationId"
-				modelVar="organization"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					orderable="<%= true %>"
-					property="name"
-				/>
+			row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
-				<liferay-ui:search-container-column-text
-					buffer="sb"
-					name="parent-organization"
-				>
+			// City
 
-					<%
-					if (organization.getParentOrganizationId() > 0) {
-						try {
-							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+			Address address = organization.getAddress();
 
-							sb.append(parentOrganization.getName());
-						}
-						catch (Exception e) {
-						}
-					}
-					%>
+			row.addText(address.getCity());
 
-				</liferay-ui:search-container-column-text>
+			// Region
 
-				<liferay-ui:search-container-column-text
-					name="type"
-					orderable="<%= true %>"
-					orderableProperty="type"
-					value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
-				/>
+			String regionName = address.getRegion().getName();
 
-				<liferay-ui:search-container-column-text
-					name="city"
-					value="<%= organization.getAddress().getCity() %>"
-				/>
+			if (Validator.isNull(regionName)) {
+				try {
+					Region region = RegionServiceUtil.getRegion(organization.getRegionId());
 
-				<liferay-ui:search-container-column-text
-					buffer="sb"
-					name="region"
-				>
+					regionName = LanguageUtil.get(pageContext, region.getName());
+				}
+				catch (NoSuchRegionException nsce) {
+				}
+			}
 
-					<%
-					String regionName = organization.getAddress().getRegion().getName();
+			row.addText(regionName);
 
-					if (Validator.isNull(regionName)) {
-						try {
-							Region region = RegionServiceUtil.getRegion(organization.getRegionId());
+			// Country
 
-							regionName = LanguageUtil.get(pageContext, region.getName());
-						}
-						catch (NoSuchRegionException nsce) {
-						}
-					}
+			String countryName = address.getCountry().getName();
 
-					sb.append(regionName);
-					%>
+			if (Validator.isNull(countryName)) {
+				try {
+					Country country = CountryServiceUtil.getCountry(organization.getCountryId());
 
-				</liferay-ui:search-container-column-text>
+					countryName = LanguageUtil.get(pageContext, country.getName());
+				}
+				catch (NoSuchCountryException nsce) {
+				}
+			}
 
-				<liferay-ui:search-container-column-text
-					buffer="sb"
-					name="country"
-				>
+			row.addText(countryName);
 
-					<%
-					String countryName = organization.getAddress().getCountry().getName();
+			// Add result row
 
-					if (Validator.isNull(countryName)) {
-						try {
-							Country country = CountryServiceUtil.getCountry(organization.getCountryId());
+			resultRows.add(row);
+		}
+		%>
 
-							countryName = LanguageUtil.get(pageContext, country.getName());
-						}
-						catch (NoSuchCountryException nsce) {
-						}
-					}
-
-					sb.append(countryName);
-					%>
-
-				</liferay-ui:search-container-column-text>
-			</liferay-ui:search-container-row>
-
-			<div class="separator"><!-- --></div>
-
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-			<br /><br />
-
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
-
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 

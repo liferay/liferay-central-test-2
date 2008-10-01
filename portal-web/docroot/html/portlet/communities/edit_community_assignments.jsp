@@ -124,87 +124,23 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					url="<%= portletURL.toString() %>"
 				/>
 
-				<liferay-ui:search-container
-					searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+				<%
+				LinkedHashMap userParams = new LinkedHashMap();
+
+				if (tabs2.equals("current")) {
+					userParams.put("usersGroups", new Long(group.getGroupId()));
+				}
+				%>
+
+				<liferay-ui:user-search
+					portletURL="<%= portletURL %>"
 					rowChecker="<%= new UserGroupChecker(renderResponse, group) %>"
+					userParams="<%= userParams %>"
 				>
-					<liferay-ui:search-form
-						page="/html/portlet/enterprise_admin/user_search.jsp"
-					/>
 
 					<%
-					UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-					LinkedHashMap userParams = new LinkedHashMap();
-
-					if (tabs2.equals("current")) {
-						userParams.put("usersGroups", new Long(group.getGroupId()));
-					}
+					SearchContainer searchContainer = (SearchContainer)request.getAttribute(WebKeys.SEARCH_CONTAINER);
 					%>
-
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-
-					<liferay-ui:search-container-results
-						results="<%= results1 %>"
-						total="<%= total1 %>"
-					/>
-
-					<liferay-ui:search-container-row
-						className="com.liferay.portal.model.User"
-						keyProperty="userId"
-						modelVar="user2"
-					>
-						<liferay-ui:search-container-column-text
-							name="name"
-							property="fullName"
-						/>
-
-						<liferay-ui:search-container-column-text
-							name="screen-name"
-							orderable="true"
-							orderableProperty="screen-name"
-							property="screenName"
-						/>
-
-						<c:if test='<%= tabs2.equals("current") %>'>
-
-							<liferay-ui:search-container-row-parameter
-								name="group"
-								value="<%= group %>"
-							/>
-
-							<liferay-ui:search-container-column-text
-								name="community-roles"
-								buffer="roleNames"
-							>
-
-								<%
-								List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
-
-								Iterator itr = userGroupRoles.iterator();
-
-								while (itr.hasNext()) {
-									UserGroupRole userGroupRole = (UserGroupRole)itr.next();
-
-									Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
-
-									roleNames.append(role.getName());
-
-									if (itr.hasNext()) {
-										roleNames.append(StringPool.COMMA + StringPool.SPACE);
-									}
-								}
-								%>
-
-							</liferay-ui:search-container-column-text>
-
-							<liferay-ui:search-container-column-jsp
-								align="right"
-								path="/html/portlet/communities/user_action.jsp"
-							/>
-
-						</c:if>
-					</liferay-ui:search-container-row>
 
 					<div class="separator"><!-- --></div>
 
@@ -212,8 +148,68 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					<br /><br />
 
-					<liferay-ui:search-iterator />
-				</liferay-ui:search-container>
+					<%
+					List<String> headerNames = new ArrayList<String>();
+
+					headerNames.add("name");
+					headerNames.add("screen-name");
+					//headerNames.add("email-address");
+
+					if (tabs2.equals("current")) {
+						headerNames.add("community-roles");
+						headerNames.add(StringPool.BLANK);
+					}
+
+					searchContainer.setHeaderNames(headerNames);
+
+					List results = searchContainer.getResults();
+					List resultRows = searchContainer.getResultRows();
+
+					for (int i = 0; i < results.size(); i++) {
+						User user2 = (User)results.get(i);
+
+						ResultRow row = new ResultRow(new Object[] {user2, group}, user2.getUserId(), i);
+
+						// Name, screen name, and email address
+
+						row.addText(user2.getFullName());
+						row.addText(user2.getScreenName());
+						//row.addText(user2.getEmailAddress());
+
+						// Community roles and action
+
+						if (tabs2.equals("current")) {
+							List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
+
+							Iterator itr = userGroupRoles.iterator();
+
+							StringBuilder roleNames = new StringBuilder();
+
+							while (itr.hasNext()) {
+								UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+								Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
+								roleNames.append(role.getName());
+
+								if (itr.hasNext()) {
+									roleNames.append(StringPool.COMMA + StringPool.SPACE);
+								}
+							}
+
+							row.addText(roleNames.toString());
+
+							row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/user_action.jsp");
+						}
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+					%>
+
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</liferay-ui:user-search>
 			</c:when>
 			<c:otherwise>
 				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
@@ -307,130 +303,114 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<liferay-ui:search-container
-			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
-			rowChecker="<%= new OrganizationGroupChecker(renderResponse, group) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/organization_search.jsp"
-			/>
+		<%
+		OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
-			<%
-			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+		searchContainer.setRowChecker(new OrganizationGroupChecker(renderResponse, group));
+		%>
 
-			long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/organization_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
-			LinkedHashMap organizationParams = new LinkedHashMap();
+		<%
+		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-			if (tabs2.equals("current")) {
-				organizationParams.put("organizationsGroups", new Long(group.getGroupId()));
+		long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+
+		LinkedHashMap organizationParams = new LinkedHashMap();
+
+		if (tabs2.equals("current")) {
+			organizationParams.put("organizationsGroups", new Long(group.getGroupId()));
+		}
+		%>
+
+		<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+
+		<div class="separator"><!-- --></div>
+
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+
+		<br /><br />
+
+		<%
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			Organization organization = (Organization)results.get(i);
+
+			ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
+
+			// Name
+
+			row.addText(organization.getName());
+
+			// Parent organization
+
+			String parentOrganizationName = StringPool.BLANK;
+
+			if (organization.getParentOrganizationId() > 0) {
+				try {
+					Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+					parentOrganizationName = parentOrganization.getName();
+				}
+				catch (Exception e) {
+				}
 			}
-			%>
 
-			<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+			row.addText(parentOrganizationName);
 
-			<liferay-ui:search-container-results
-				results="<%= results1 %>"
-				total="<%= total1 %>"
-			/>
+			// Type
 
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Organization"
-				keyProperty="organizationId"
-				modelVar="organization"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					orderable="<%= true %>"
-					property="name"
-				/>
+			row.addText(LanguageUtil.get(pageContext, organization.getType()));
 
-				<liferay-ui:search-container-column-text
-					buffer="sb"
-					name="parent-organization"
-				>
+			// City
 
-					<%
-					if (organization.getParentOrganizationId() > 0) {
-						try {
-							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+			Address address = organization.getAddress();
 
-							sb.append(parentOrganization.getName());
-						}
-						catch (Exception e) {
-						}
-					}
-					%>
+			row.addText(address.getCity());
 
-				</liferay-ui:search-container-column-text>
+			// Region
 
-				<liferay-ui:search-container-column-text
-					name="type"
-					orderable="<%= true %>"
-					orderableProperty="type"
-					value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
-				/>
+			String regionName = address.getRegion().getName();
 
-				<liferay-ui:search-container-column-text
-					name="city"
-					value="<%= organization.getAddress().getCity() %>"
-				/>
+			if (Validator.isNull(regionName)) {
+				try {
+					Region region = RegionServiceUtil.getRegion(organization.getRegionId());
 
-				<liferay-ui:search-container-column-text
-					buffer="sb"
-					name="region"
-				>
+					regionName = LanguageUtil.get(pageContext, region.getName());
+				}
+				catch (NoSuchRegionException nsce) {
+				}
+			}
 
-					<%
-					String regionName = organization.getAddress().getRegion().getName();
+			row.addText(regionName);
 
-					if (Validator.isNull(regionName)) {
-						try {
-							Region region = RegionServiceUtil.getRegion(organization.getRegionId());
+			// Country
 
-							regionName = LanguageUtil.get(pageContext, region.getName());
-						}
-						catch (NoSuchRegionException nsce) {
-						}
-					}
+			String countryName = address.getCountry().getName();
 
-					sb.append(regionName);
-					%>
+			if (Validator.isNull(countryName)) {
+				try {
+					Country country = CountryServiceUtil.getCountry(organization.getCountryId());
 
-				</liferay-ui:search-container-column-text>
+					countryName = LanguageUtil.get(pageContext, country.getName());
+				}
+				catch (NoSuchCountryException nsce) {
+				}
+			}
 
-				<liferay-ui:search-container-column-text
-					buffer="sb"
-					name="country"
-				>
+			row.addText(countryName);
 
-					<%
-					String countryName = organization.getAddress().getCountry().getName();
+			// Add result row
 
-					if (Validator.isNull(countryName)) {
-						try {
-							Country country = CountryServiceUtil.getCountry(organization.getCountryId());
+			resultRows.add(row);
+		}
+		%>
 
-							countryName = LanguageUtil.get(pageContext, country.getName());
-						}
-						catch (NoSuchCountryException nsce) {
-						}
-					}
-
-					sb.append(countryName);
-					%>
-
-				</liferay-ui:search-container-column-text>
-			</liferay-ui:search-container-row>
-
-			<div class="separator"><!-- --></div>
-
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-			<br /><br />
-
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
 		<input name="<portlet:namespace />addUserGroupIds" type="hidden" value="" />

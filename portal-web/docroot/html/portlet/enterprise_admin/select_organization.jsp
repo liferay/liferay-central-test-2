@@ -130,8 +130,6 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append(organization.getOrganizationId());
 	sb.append("', '");
 	sb.append(UnicodeFormatter.toString(organization.getName()));
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(organization.getType()));
 	sb.append("');");
 	sb.append("window.close();");
 

@@ -32,178 +32,92 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
 
-String className = Organization.class.getName();
-long classPK = 0;
+long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
 
-if (organization!=null){
-	classPK = organization.getOrganizationId();
+boolean editable = true;
+
+if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+	editable = false;
 }
 
-themeDisplay.setIncludeServiceJs(true);
+if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || OrganizationPermissionUtil.contains(permissionChecker, parentOrganizationId, ActionKeys.MANAGE_SUBORGANIZATIONS))) {
+	editable = true;
+}
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
+<script type="text/javascript">
+	function <portlet:namespace />saveOrganization(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+</script>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= HttpUtil.encodeURL(backURL) %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
-	<liferay-util:param name="toolbar-item" value='<%= (organization == null) ? "add-organization" : "view-organizations" %>' />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="organization"
+	backURL="<%= backURL %>"
+/>
 
-<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
-<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
-<liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-valid-value-from-the-list" />
-<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
-<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-website-url" />
+<%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jspf" %>
 
-<%
-request.setAttribute("organization.selOrganization", organization);
-request.setAttribute("className", className);
+<c:if test="<%= organization != null %>">
+	<liferay-ui:tabs
+		names="email-addresses,addresses,websites,phone-numbers"
+		param="tabs2"
+		refresh="<%= false %>"
+	>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/email_address_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/address_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/website_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/phone_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
 
-List<Website> websites = null;
+	<liferay-ui:tabs
+		names="services"
+		param="tabs3"
+	>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/org_labor_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
 
-if (classPK <= 0) {
-	websites = Collections.EMPTY_LIST;
-}
-else {
-	websites = WebsiteServiceUtil.getWebsites(className, classPK);
-}
+	<%@ include file="/html/portlet/enterprise_admin/edit_organization_comments.jspf" %>
+</c:if>
 
-request.setAttribute("common.websites", websites);
-%>
-
-<div id="organization">
-	<table class="organization-table" width="100%">
-	<tr>
-		<td>
-			<div class="form-section selected" id="organizationDetails">
-				<liferay-util:include page="/html/portlet/enterprise_admin/organization/organization_details.jsp" />
-			</div>
-
-			<c:if test="<%= organization != null %>">
-				<div class="form-section" id="websites">
-					<liferay-util:include page="/html/portlet/enterprise_admin/common/websites.jsp" />
-				</div>
-
-				<div class="form-section" id="comments">
-					<liferay-util:include page="/html/portlet/enterprise_admin/organization/comments.jsp" />
-				</div>
-			</c:if>
-
-			<div class="lfr-component form-navigation">
-				<div class="organization-info">
-					<p class="float-container">
-						<c:if test="<%= organization != null %>">
-							<img class="avatar" src=" <%=themeDisplay.getPathThemeImages()%>/control_panel/avatar_organization_small.png" alt="<%= organization.getName() %>" />
-
-							<liferay-ui:message key="editing-organization" />: <span><%= organization.getName() %></span>
-						</c:if>
-					</p>
-				</div>
-
-				<div class="menu-group">
-					<h3><liferay-ui:message key="organization-information" /></h3>
-					<ul>
-						<li class="selected"><a href="#organizationDetails" id="organizationDetailsLink"><liferay-ui:message key="organization-details" /></a></li>
-					</ul>
-				</div>
-
-				<c:if test="<%= organization != null %>">
-					<div class="menu-group">
-						<h3><liferay-ui:message key="identification" /></h3>
-						<ul>
-							<li><a href="#websites" id="websiteLink"><liferay-ui:message key="websites" /></a></li>
-						</ul>
-					</div>
-
-					<div class="menu-group">
-						<h3><liferay-ui:message key="miscelaneous" /></h3>
-						<ul>
-							<li><a href="#comments" id="commentsLink"><liferay-ui:message key="comments" /></a></li>
-						</ul>
-					</div>
-				</c:if>
-
-				<div class="button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />  &nbsp;
-
-					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HttpUtil.encodeURL(backURL) %>';" /><br />
-				</div>
-			</div>
-		</td>
-	</tr>
-	</table>
-</div>
-
-<script type="text/javascript">
-	jQuery(
-		function () {
-			var formNav = jQuery('.form-navigation');
-			var formSections = jQuery('#organization .form-section');
-
-			var revealSection = function(id, currentNavItem) {
-				var li = currentNavItem || formNav.find('[@href$=' + id + ']').parent();
-				id = id.split('#');
-
-				if (!id[1]) {
-					return;
-				}
-
-				id = '#' + id[1];
-
-				var section = jQuery(id);
-
-				formNav.find('.selected').removeClass('selected');
-				formSections.removeClass('selected');
-
-				section.addClass('selected');
-				li.addClass('selected');
-			};
-
-			var markAsModifiedUserDetails = function() {
-				return markAsModified('#organizationDetailsLink');
-			}
-
-			var markAsModifiedWebsite = function() {
-				return markAsModified('#websiteLink');
-			}
-
-			var markAsModifiedComments = function() {
-				return markAsModified('#commentsLink')
-			}
-
-			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (Modified)') == -1) {
-					jQuery(id).append(' <b>(Modified)</b>');
-				}
-			}
-
-			jQuery('.form-navigation li a').click(
-				function(event) {
-					var li = jQuery(this.parentNode);
-
-					if (!li.is('.selected')) {
-						revealSection(this.href, li);
-					}
-
-					return false;
-				}
-				);
-
-			revealSection(location.hash);
-
-			jQuery('#organizationDetails input').change(markAsModifiedUserDetails)
-			jQuery('#organizationDetails select').change(markAsModifiedUserDetails)
-			jQuery('#websites select').change(markAsModifiedWebsite)
-			jQuery('#websites input').change(markAsModifiedWebsite)
-			jQuery('#comments textarea').change(markAsModifiedComments)
-		}
-	);
-
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</c:if>
-</script>
+</form>

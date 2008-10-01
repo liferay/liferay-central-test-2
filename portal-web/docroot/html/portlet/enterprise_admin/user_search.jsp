@@ -103,6 +103,8 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</table>
 </liferay-ui:search-toggle>
 
+<br />
+
 <c:if test="<%= showAddButton %>">
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
 					OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">

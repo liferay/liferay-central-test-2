@@ -35,7 +35,6 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
-import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -43,7 +42,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
@@ -57,7 +55,6 @@ import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -78,7 +75,6 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditUserAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Julio Camarero
  *
  */
 public class EditUserAction extends PortletAction {
@@ -174,8 +170,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
 					 e instanceof UserScreenNameException ||
-					 e instanceof UserSmsException ||
-					 e instanceof WebsiteURLException) {
+					 e instanceof UserSmsException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
@@ -291,8 +286,6 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		String websiteSuffixes = ParamUtil.getString(
-			actionRequest, "websiteSuffixes");
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
@@ -316,9 +309,6 @@ public class EditUserAction extends PortletAction {
 			// Update user
 
 			user = PortalUtil.getSelectedUser(actionRequest);
-			Contact contact = user.getContact();
-			long classPK = contact.getContactId();
-			String className = Contact.class.getName();
 
 			String oldPassword = AdminUtil.getUpdateUserPassword(
 				actionRequest, user.getUserId());
@@ -360,13 +350,6 @@ public class EditUserAction extends PortletAction {
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;
 			}
-
-			// Websites
-
-			String[] websiteSuffixesArray = websiteSuffixes.split(",");
-
-			EnterpriseAdminUtil.updateWebsites(
-				actionRequest, websiteSuffixesArray, classPK, className);
 
 			if (user.getUserId() == themeDisplay.getUserId()) {
 

@@ -29,18 +29,15 @@ import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationNameException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredOrganizationException;
-import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -98,8 +95,7 @@ public class EditOrganizationAction extends PortletAction {
 					 e instanceof NoSuchListTypeException ||
 					 e instanceof OrganizationNameException ||
 					 e instanceof OrganizationParentException ||
-					 e instanceof RequiredOrganizationException ||
-					 e instanceof WebsiteURLException) {
+					 e instanceof RequiredOrganizationException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
@@ -167,11 +163,7 @@ public class EditOrganizationAction extends PortletAction {
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
-		String websiteSuffixes = ParamUtil.getString(
-			actionRequest, "websiteSuffixes");
 
-		long classPK = organizationId;
-		String className = Organization.class.getName();
 		Organization organization = null;
 
 		if (organizationId <= 0) {
@@ -181,8 +173,6 @@ public class EditOrganizationAction extends PortletAction {
 			organization = OrganizationServiceUtil.addOrganization(
 				parentOrganizationId, name, type, recursable, regionId,
 				countryId, statusId, comments);
-
-			classPK = organization.getOrganizationId();
 		}
 		else {
 
@@ -191,15 +181,6 @@ public class EditOrganizationAction extends PortletAction {
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
 				recursable, regionId, countryId, statusId, comments);
-		}
-
-		// Update websites
-
-		if (Validator.isNotNull(websiteSuffixes)) {
-			String[] websiteSuffixesArray = websiteSuffixes.split(",");
-
-			EnterpriseAdminUtil.updateWebsites(
-				actionRequest, websiteSuffixesArray, classPK, className);
 		}
 
 		return organization;

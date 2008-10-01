@@ -25,113 +25,62 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "display");
+String tabs3 = ParamUtil.getString(request, "tabs3", "email-addresses");
+String tabs4 = ParamUtil.getString(request, "tabs4", "phone-numbers");
+
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-User selUser = PortalUtil.getSelectedUser(request);
+User user2 = PortalUtil.getSelectedUser(request);
 
-Contact selContact = null;
+boolean editable = false;
 
-if (selUser != null) {
-	selContact = selUser.getContact();
+if ((user2 == null) || user2.isActive()) {
+	editable = true;
+
+	if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), ActionKeys.UPDATE)) {
+		editable = false;
+	}
+}
+
+Contact contact2 = null;
+
+if (user2 != null) {
+	contact2 = user2.getContact();
 }
 
 PasswordPolicy passwordPolicy = null;
 
-if (selUser == null) {
+if (user2 == null) {
 	passwordPolicy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(company.getCompanyId());
 }
 else {
-	passwordPolicy = selUser.getPasswordPolicy();
+	passwordPolicy = user2.getPasswordPolicy();
 }
 
-long classPK=0;
+String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 
-if (selContact != null) {
-	classPK = selContact.getContactId();
-}
-
-String className = Contact.class.getName();
-
-//Organizations
-
-String organizationIds = ParamUtil.getString(request, "organizationIds", null);
-long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
-
-List organizations = new ArrayList();
-
-if (organizationIds == null) {
-	if (selUser != null) {
-		organizations = selUser.getOrganizations();
-	}
-}
-else {
-	try {
-		organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
-	}
-	catch (NoSuchOrganizationException nsoe) {
-	}
-}
-
-//Communities
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
-portletURL.setParameter("struts_action", "/communities/view");
-portletURL.setParameter("tabs1", tabs1);
-
-LinkedHashMap groupParams = new LinkedHashMap();
-
-if (selUser != null) {
-	groupParams.put("usersGroups", new Long(selUser.getUserId()));
-}
-
-List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, 0, 50, new GroupNameComparator(true));
-
-// Roles
-
-List<Role> regularRoles = null;
-
-if (selUser == null) {
-	regularRoles = new ArrayList<Role>();
-}
-else {
-	regularRoles = RoleLocalServiceUtil.getUserRoles(selUser.getUserId());
-}
-
-// Form Sections
-
-String[] mainSections = PropsValues.USERS_PROFILE_ADD_MAIN;
-String[] identificationSections = PropsValues.USERS_PROFILE_ADD_IDENTIFICATION;
-String[] miscellaneousSections = PropsValues.USERS_PROFILE_ADD_MISCELLANEOUS;
-
-if (selUser != null) {
-	mainSections = PropsValues.USERS_PROFILE_UPDATE_MAIN;
-	identificationSections = PropsValues.USERS_PROFILE_UPDATE_IDENTIFICATION;
-	miscellaneousSections = PropsValues.USERS_PROFILE_UPDATE_MISCELLANEOUS;
-}
-
-String[] tempSections = new String[mainSections.length + identificationSections.length];
-String[] allSections = new String[mainSections.length + identificationSections.length + miscellaneousSections.length];
-ArrayUtil.combine(mainSections, identificationSections, tempSections);
-ArrayUtil.combine(tempSections, miscellaneousSections, allSections);
-
-String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
-
-String currentSection = mainSections[0];
+request.setAttribute("edit_user.jsp-user2", user2);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />saveUser(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 
-		if (document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes) {
-			document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes.value = websiteSuffixesArray.join(',');
+		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>";
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />tabs2) {
+			redirect += "&<portlet:namespace />tabs2=" + document.<portlet:namespace />fm.<portlet:namespace />tabs2.value;
 		}
 
-		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>";
+		if (document.<portlet:namespace />fm.<portlet:namespace />tabs3) {
+			redirect += "&<portlet:namespace />tabs3=" + document.<portlet:namespace />fm.<portlet:namespace />tabs3.value;
+		}
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />tabs4) {
+			redirect += "&<portlet:namespace />tabs4=" + document.<portlet:namespace />fm.<portlet:namespace />tabs4.value;
+		}
 
 		redirect += "&<portlet:namespace />backURL=<%= HttpUtil.encodeURL(backURL) %>&<portlet:namespace />p_u_i_d=";
 
@@ -140,262 +89,193 @@ String currentSection = mainSections[0];
 	}
 </script>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
-	<liferay-util:param name="toolbar-item" value='<%= (selUser == null) ? "add-user" : "view-users" %>' />
-</liferay-util:include>
-
-<form class="uni-form" method="post" name="<portlet:namespace />fm" >
+<form method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
+<input name="<portlet:namespace />tabs4" type="hidden" value="<%= HtmlUtil.escape(tabs4) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
-<input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (selUser != null) ? selUser.getUserId() : 0 %>' />
+<input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
-<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
-<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
-<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
-<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
-<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-website-url" />
+<liferay-ui:tabs
+	names="user"
+	backURL="<%= backURL %>"
+/>
 
-<div id="user">
-	<table class="user-table" width="100%">
-		<tr>
-			<td>
-				<%
-				request.setAttribute("user.selUser",selUser);
-				request.setAttribute("user.selContact", selContact);
-				request.setAttribute("className", className);
+<%@ include file="/html/portlet/enterprise_admin/edit_user_profile.jspf" %>
 
-				request.setAttribute("user.organizations", organizations);
-				request.setAttribute("user.organizationIds", organizationIds);
-				request.setAttribute("user.communities", communities);
-				request.setAttribute("user.regularRoles", regularRoles);
+<c:if test="<%= user2 != null %>">
+	<c:if test="<%= (passwordPolicy != null) && user2.getLockout() %>">
+		<liferay-ui:tabs names="lockout" />
 
-				List<Website> websites = null;
+		<%@ include file="/html/portlet/enterprise_admin/edit_user_lockout.jspf" %>
+	</c:if>
 
-				if (classPK <= 0) {
-					websites = Collections.EMPTY_LIST;
-				}
-				else {
-					websites = WebsiteServiceUtil.getWebsites(className, classPK);
-				}
+	<c:if test="<%= editable %>">
+		<liferay-ui:error exception="<%= UserPasswordException.class %>">
 
-				request.setAttribute("common.websites", websites);
-				%>
+			<%
+			UserPasswordException upe = (UserPasswordException)errorException;
+			%>
 
-				<%
-				for (String section : allSections) {
-					String sectionId = _getIdName(section);
-					String jspPath = "/html/portlet/enterprise_admin/user/" + _getJspName(section) + ".jsp";
-				%>
-					<div class="form-section <%= currentSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
-						<liferay-util:include page="<%= jspPath %>" />
-					</div>
-				<%
-				}
-				%>
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
+				<liferay-ui:message key="that-password-has-already-been-used-please-enter-in-a-different-password" />
+			</c:if>
 
-				<div class="lfr-component form-navigation">
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
+				<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
+			</c:if>
 
-					<div class="user-info">
-						<p class="float-container">
-							<c:if test="<%= selUser != null %>">
-								<img alt="<liferay-ui:message key="avatar" />" class="avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' width="34" />
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
+				<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
+			</c:if>
 
-								<liferay-ui:message key="editing-user" /> <span><%= selUser.getFullName() %></span>
-							</c:if>
-						</p>
-					</div>
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
+				<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
+			</c:if>
 
-					<%
-					for (int i = 0; i < _CATEGORY_NAMES.length; i++) {
-						String category = _CATEGORY_NAMES[i];
-						String[] sections = categorySections[i];
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_NOT_CHANGEABLE %>">
+				<liferay-ui:message key="your-password-cannot-be-changed" />
+			</c:if>
 
-						if (sections.length > 0) {
-					%>
-						<div class="menu-group">
-							<h3><liferay-ui:message key="<%= category %>" /></h3>
-							<ul>
-								<%
-								for (String section : sections) {
-									String sectionId = _getIdName(section);
-								%>
-									<li <%= currentSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>><a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /></a></li>
-								<%
-								}
-								%>
-							</ul>
-						</div>
-					<%
-						}
-					}
-					%>
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_SAME_AS_CURRENT %>">
+				<liferay-ui:message key="your-new-password-cannot-be-the-same-as-your-old-password-please-enter-in-a-different-password" />
+			</c:if>
 
-					<div class="button-holder">
-						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('<%= selUser == null ? Constants.ADD : Constants.UPDATE %>');" />  &nbsp;
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_YOUNG %>">
+				<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicy.getMinAge() * 1000), false) %>
+			</c:if>
 
-						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HttpUtil.encodeURL(backURL) %>';" /><br />
-					</div>
-
-					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
-						<div class="button-holder">
-							<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
-
-							<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />saveUser('unlock');" />
-						</div>
-					</c:if>
-
-				</div>
-
-			</td>
-		</tr>
-	</table>
-</div>
-
-<c:if test="<%= selUser != null %>">
-	<liferay-ui:error exception="<%= UserPasswordException.class %>">
+			<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
+				<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
+			</c:if>
+		</liferay-ui:error>
 
 		<%
-		UserPasswordException upe = (UserPasswordException)errorException;
+		String tabs2Names = "display,password,regular-roles,community-roles,organization-roles";
+
+		if ((passwordPolicy != null) && !passwordPolicy.isChangeable()) {
+			tabs2Names = "display,roles";
+		}
 		%>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
-			<liferay-ui:message key="that-password-has-already-been-used-please-enter-in-a-different-password" />
-		</c:if>
+		<liferay-ui:tabs
+			names="<%= tabs2Names %>"
+			formName="fm"
+			param="tabs2"
+			refresh="<%= false %>"
+		>
+			<liferay-ui:section>
+				<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jspf" %>
+			</liferay-ui:section>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
-			<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
-		</c:if>
+			<c:if test="<%= (passwordPolicy == null) || passwordPolicy.isChangeable() %>">
+				<liferay-ui:section>
+					<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>
+				</liferay-ui:section>
+			</c:if>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
-			<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
-		</c:if>
+			<liferay-ui:section>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
-			<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
-		</c:if>
+				<%
+				request.setAttribute("edit_user.jsp-sectionRedirectParams", sectionRedirectParams);
+				%>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_NOT_CHANGEABLE %>">
-			<liferay-ui:message key="your-password-cannot-be-changed" />
-		</c:if>
+				<liferay-util:include page="/html/portlet/enterprise_admin/edit_user_regular_roles.jsp" />
+			</liferay-ui:section>
+			<liferay-ui:section>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_SAME_AS_CURRENT %>">
-			<liferay-ui:message key="your-new-password-cannot-be-the-same-as-your-old-password-please-enter-in-a-different-password" />
-		</c:if>
+				<%
+				request.setAttribute("edit_user.jsp-sectionRedirectParams", sectionRedirectParams);
+				%>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_YOUNG %>">
-			<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicy.getMinAge() * 1000), false) %>
-		</c:if>
+				<liferay-util:include page="/html/portlet/enterprise_admin/edit_user_community_roles.jsp" />
+			</liferay-ui:section>
+			<liferay-ui:section>
 
-		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
-			<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
-		</c:if>
-	</liferay-ui:error>
+				<%
+				request.setAttribute("edit_user.jsp-sectionRedirectParams", sectionRedirectParams);
+				%>
+
+				<liferay-util:include page="/html/portlet/enterprise_admin/edit_user_organization_roles.jsp" />
+			</liferay-ui:section>
+		</liferay-ui:tabs>
+	</c:if>
+
+	<liferay-ui:tabs
+		names="email-addresses,addresses,websites"
+		formName="fm"
+		param="tabs3"
+		refresh="<%= false %>"
+	>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/email_address_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/address_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
+				<liferay-util:param name="organizationIds" value="<%= StringUtil.merge(organizationIdsArray) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/website_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
+
+	<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
+
+	<liferay-ui:tabs
+		names="phone-numbers,open-id,sms-messenger-id,instant-messenger-ids,social-network-ids,alerts-and-announcements"
+		formName="fm"
+		param="tabs4"
+		refresh="<%= false %>"
+	>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/phone_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
+				<liferay-util:param name="organizationIds" value="<%= StringUtil.merge(organizationIdsArray) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_open_id.jspf" %>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jspf" %>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_im.jspf" %>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_social.jspf" %>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_announcements.jspf" %>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
+
+	<%@ include file="/html/portlet/enterprise_admin/edit_user_comments.jspf" %>
 
 	<%
-	PortalUtil.setPageSubtitle(selUser.getFullName(), request);
+	PortalUtil.setPageSubtitle(user2.getFullName(), request);
 	%>
 
 </c:if>
 
 </form>
-
-<script type="text/javascript">
-	jQuery(
-		function () {
-			var formNav = jQuery('.form-navigation');
-			var formSections = jQuery('#user .form-section');
-
-			var revealSection = function(id, currentNavItem) {
-				var li = currentNavItem || formNav.find('[@href$=' + id + ']').parent();
-				id = id.split('#');
-
-				if (!id[1]) {
-					return;
-				}
-
-				id = '#' + id[1];
-
-				var section = jQuery(id);
-
-				formNav.find('.selected').removeClass('selected');
-				formSections.removeClass('selected');
-
-				section.addClass('selected');
-				li.addClass('selected');
-			};
-
-			jQuery('.form-navigation li a').click(
-				function(event) {
-					var li = jQuery(this.parentNode);
-
-					if (!li.is('.selected')) {
-						revealSection(this.href, li);
-					}
-
-					return true;
-				}
-				);
-
-			revealSection(location.hash);
-
-			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="modified" />)') == -1) {
-					jQuery(id).append(' <strong class="form-section-modified">(<liferay-ui:message key="modified" />)</strong>');
-					//jQuery(id).style('font-weight: bold');
-				}
-			}
-
-			<%
-			for (String section : allSections) {
-				String sectionId = _getIdName(section);
-			%>
-				var markAsModified_<%= sectionId %> = function() {
-					return markAsModified('#<%= sectionId %>Link');
-				}
-				jQuery('#<%= sectionId %> input').change(markAsModified_<%= sectionId %>)
-				jQuery('#<%= sectionId %> select').change(markAsModified_<%= sectionId %>)
-			<%
-			}
-			%>
-		}
-	);
-</script>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />screenName);
-	</script>
-</c:if>
-
-<%!
-private static String[] _CATEGORY_NAMES = {"main-user-info", "identification", "miscellaneous"};
-
-private String _getIdName(String name) {
-	int pos = name.indexOf(StringPool.DASH);
-
-	if (pos == -1) {
-		return name;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(name.substring(0, pos));
-	sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
-	sb.append(name.substring(pos + 2));
-
-	return _getIdName(sb.toString());
-}
-
-private String _getJspName(String name) {
-	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
-}
-%>

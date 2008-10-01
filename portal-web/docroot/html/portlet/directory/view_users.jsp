@@ -33,166 +33,151 @@ List manageableOrganizations = null;
 
 Long[] manageableOrganizationIds = null;
 
+UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
-UserSearch userSearchContainer = new UserSearch(renderRequest, portletURL);
+List headerNames = searchContainer.getHeaderNames();
 
-portletURL.setParameter(userSearchContainer.getCurParam(), String.valueOf(userSearchContainer.getCurValue()));
+portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 %>
 
 <input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-<liferay-ui:search-container
-	searchContainer="<%= userSearchContainer %>"
->
-	<liferay-ui:search-form
-		page="/html/portlet/directory/user_search.jsp"
-	/>
+<liferay-ui:search-form
+	page="/html/portlet/directory/user_search.jsp"
+	searchContainer="<%= searchContainer %>"
+/>
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
-		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+	<%
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		long organizationId = searchTerms.getOrganizationId();
-		long roleId = searchTerms.getRoleId();
-		long userGroupId = searchTerms.getUserGroupId();
+	long organizationId = searchTerms.getOrganizationId();
+	long roleId = searchTerms.getRoleId();
+	long userGroupId = searchTerms.getUserGroupId();
 
-		LinkedHashMap userParams = new LinkedHashMap();
+	LinkedHashMap userParams = new LinkedHashMap();
 
-		if (organizationId > 0) {
-			userParams.put("usersOrgs", new Long(organizationId));
+	if (organizationId > 0) {
+		userParams.put("usersOrgs", new Long(organizationId));
+	}
+
+	if (roleId > 0) {
+		userParams.put("usersRoles", new Long(roleId));
+	}
+
+	if (userGroupId > 0) {
+		userParams.put("usersUserGroups", new Long(userGroupId));
+	}
+	%>
+
+	<%@ include file="/html/portlet/directory/user_search_results.jspf" %>
+
+	<%
+	Organization organization = null;
+
+	if ((organizationId > 0)) {
+		try {
+			organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 		}
-
-		if (roleId > 0) {
-			userParams.put("usersRoles", new Long(roleId));
+		catch (NoSuchOrganizationException nsoe) {
 		}
+	}
 
-		if (userGroupId > 0) {
-			userParams.put("usersUserGroups", new Long(userGroupId));
+	Role role = null;
+
+	if (roleId > 0) {
+		try {
+			role = RoleLocalServiceUtil.getRole(roleId);
 		}
-		%>
-
-		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-
-		<liferay-ui:search-container-results
-			results="<%= results1 %>"
-			total="<%= total1 %>"
-		/>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.User"
-			keyProperty="userId"
-			modelVar="user2"
-		>
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
-				<portlet:param name="struts_action" value="/directory/edit_user" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-			</liferay-portlet:renderURL>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="first-name"
-				orderable="<%= true %>"
-				orderableProperty="first-name"
-				property="firstName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="last-name"
-				orderable="<%= true %>"
-				orderableProperty="last-name"
-				property="lastName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="screen-name"
-				orderable="<%= true %>"
-				orderableProperty="screen-name"
-				property="screenName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="job-title"
-				orderable="<%= true %>"
-				orderableProperty="job-title"
-				value="<%= user2.getContact().getJobTitle() %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				buffer="sb"
-				name="organizations"
-			>
-
-				<%
-				List organizations = user2.getOrganizations();
-
-				sb.append(ListUtil.toString(organizations, "name", ", "), rowURL);
-				%>
-
-			</liferay-ui:search-container-column-text>
-		</liferay-ui:search-container-row>
-
-		<%
-		Organization organization = null;
-
-		if ((organizationId > 0)) {
-			try {
-				organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-			}
-			catch (NoSuchOrganizationException nsoe) {
-			}
+		catch (NoSuchRoleException nsre) {
 		}
+	}
 
-		Role role = null;
+	UserGroup userGroup = null;
 
-		if (roleId > 0) {
-			try {
-				role = RoleLocalServiceUtil.getRole(roleId);
-			}
-			catch (NoSuchRoleException nsre) {
-			}
+	if (userGroupId > 0) {
+		try {
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 		}
-
-		UserGroup userGroup = null;
-
-		if (userGroupId > 0) {
-			try {
-				userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
-			}
-			catch (NoSuchUserGroupException nsuge) {
-			}
+		catch (NoSuchUserGroupException nsuge) {
 		}
-		%>
+	}
+	%>
 
-		<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
-			<br />
-		</c:if>
-
-		<c:if test="<%= organization != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-			<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
-		</c:if>
-
-		<c:if test="<%= role != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
-
-			<liferay-ui:message key="filter-by-role" />: <%= role.getName() %><br />
-		</c:if>
-
-		<c:if test="<%= userGroup != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
-
-			<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
-		</c:if>
-
-		<div class="separator"><!-- --></div>
-
-		<liferay-ui:search-iterator />
-
+	<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
+		<br />
 	</c:if>
-</liferay-ui:search-container>
+
+	<c:if test="<%= organization != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+
+		<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
+	</c:if>
+
+	<c:if test="<%= role != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
+
+		<liferay-ui:message key="filter-by-role" />: <%= role.getName() %><br />
+	</c:if>
+
+	<c:if test="<%= userGroup != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+
+		<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
+	</c:if>
+
+	<div class="separator"><!-- --></div>
+
+	<%
+	List resultRows = searchContainer.getResultRows();
+
+	for (int i = 0; i < results.size(); i++) {
+		User user2 = (User)results.get(i);
+
+		ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+
+		PortletURL rowURL = renderResponse.createRenderURL();
+
+		rowURL.setWindowState(WindowState.MAXIMIZED);
+
+		rowURL.setParameter("struts_action", "/directory/edit_user");
+		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
+		rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
+
+		// First name
+
+		row.addText(user2.getFirstName(), rowURL);
+
+		// Last name
+
+		row.addText(user2.getLastName(), rowURL);
+
+		// Screen name
+
+		row.addText(user2.getScreenName(), rowURL);
+
+		// Email address
+
+		//row.addText(user2.getEmailAddress(), rowURL);
+
+		// Job title
+
+		Contact contact2 = user2.getContact();
+
+		row.addText(contact2.getJobTitle(), rowURL);
+
+		// Organizations
+
+		List organizations = user2.getOrganizations();
+
+		row.addText(ListUtil.toString(organizations, "name", ", "), rowURL);
+
+		// Add result row
+
+		resultRows.add(row);
+	}
+	%>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</c:if>

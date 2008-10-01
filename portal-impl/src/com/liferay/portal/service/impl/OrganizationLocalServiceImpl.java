@@ -656,6 +656,13 @@ public class OrganizationLocalServiceImpl
 			}
 		}
 		else {
+			String[] childrenTypes = OrganizationImpl.getChildrenTypes(type);
+
+			if (childrenTypes.length == 0) {
+				throw new OrganizationParentException(
+					"Organization of type " + type + " cannot have children");
+			}
+
 			Organization parentOrganization =
 				organizationPersistence.fetchByPrimaryKey(
 					parentOrganizationId);
@@ -663,14 +670,6 @@ public class OrganizationLocalServiceImpl
 			if (parentOrganization == null) {
 				throw new OrganizationParentException(
 					"Organization " + parentOrganizationId + " doesn't exist");
-			}
-
-			String[] childrenTypes = OrganizationImpl.getChildrenTypes(
-				parentOrganization.getType());
-
-			if (childrenTypes.length == 0) {
-				throw new OrganizationParentException(
-					"Organization of type " + type + " cannot have children");
 			}
 
 			if ((companyId != parentOrganization.getCompanyId()) ||

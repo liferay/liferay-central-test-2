@@ -211,63 +211,71 @@ if (role != null) {
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<liferay-ui:search-container
-			searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-			rowChecker="<%= new UserGroupRoleUserChecker(renderResponse, group, role) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/user_search.jsp"
-			/>
+		<%
+		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
-			<%
-			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+		searchContainer.setRowChecker(new UserGroupRoleUserChecker(renderResponse, group, role));
+		%>
 
-			LinkedHashMap userParams = new LinkedHashMap();
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
-			if (group.isOrganization()) {
-				userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
-			}
-			else {
-				userParams.put("usersGroups", new Long(group.getGroupId()));
-			}
+		<%
+		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-			if (tabs1.equals("current")) {
-				userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
-			}
-			%>
+		LinkedHashMap userParams = new LinkedHashMap();
 
-			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+		if (group.isOrganization()) {
+			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
+		}
+		else {
+			userParams.put("usersGroups", new Long(group.getGroupId()));
+		}
 
-			<liferay-ui:search-container-results
-				results="<%= results1 %>"
-				total="<%= total1 %>"
-			/>
+		if (tabs1.equals("current")) {
+			userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
+		}
+		%>
 
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.User"
-				keyProperty="userId"
-				modelVar="user2"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					property="fullName"
-				/>
+		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
-				<liferay-ui:search-container-column-text
-					name="screen-name"
-					property="screenName"
-				/>
-			</liferay-ui:search-container-row>
+		<div class="separator"><!-- --></div>
 
-			<div class="separator"><!-- --></div>
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+		<br /><br />
 
-			<br /><br />
+		<%
+		List<String> headerNames = new ArrayList<String>();
 
-			<liferay-ui:search-iterator />
+		headerNames.add("name");
+		headerNames.add("screen-name");
+		//headerNames.add("email-address");
 
-		</liferay-ui:search-container>
+		searchContainer.setHeaderNames(headerNames);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			User user2 = (User)results.get(i);
+
+			ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+
+			// Name, screen name, and email address
+
+			row.addText(user2.getFullName());
+			row.addText(user2.getScreenName());
+			//row.addText(user2.getEmailAddress());
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:otherwise>
 </c:choose>
 
