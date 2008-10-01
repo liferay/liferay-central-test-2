@@ -329,7 +329,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		int block = 1;
 
-		// Return false if there is no resources
+		// Return false if there are no resources
 
 		if ((Validator.isNull(actionId)) || (resourceIds == null) ||
 			(resourceIds.length == 0)) {

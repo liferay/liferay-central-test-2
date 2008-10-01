@@ -158,25 +158,27 @@ for (int i = 0; i < curActions.size(); i++) {
 
 				groupIdsArray = new long[groups.size()];
 
-				for (int l = 0; l < groups.size(); l++) {
-					Group group = (Group)groups.get(l);
+				for (int j = 0; j < groups.size(); j++) {
+					Group group = (Group)groups.get(j);
 
-					groupIdsArray[l] = group.getGroupId();
+					groupIdsArray[j] = group.getGroupId();
 
 					groupNames.add(group.getName());
 
 					groupsHTML.append("<span>");
 					groupsHTML.append(group.getName());
 
-					groupsHTML.append("&nbsp;[<a href='javascript: ");
+					groupsHTML.append("&nbsp;[<a href=\"javascript: ");
 					groupsHTML.append(renderResponse.getNamespace());
 					groupsHTML.append("removeGroup(");
-					groupsHTML.append(l);
-					groupsHTML.append(");'>x</a>]");
+					groupsHTML.append(j);
+					groupsHTML.append(", '");
+					groupsHTML.append(target);
+					groupsHTML.append("');\">x</a>]");
 
 					groupsHTML.append("</span>");
 
-					if ((l + 1) != groups.size()) {
+					if ((j + 1) != groups.size()) {
 						groupsHTML.append(",&nbsp;");
 					}
 				}

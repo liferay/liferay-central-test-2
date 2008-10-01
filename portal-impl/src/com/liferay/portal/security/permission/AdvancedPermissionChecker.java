@@ -368,7 +368,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		// Group template
 
 		try {
-			if (groupId > 0) {
+			if (signedIn && (groupId > 0)) {
 				Resource resource = ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
@@ -433,7 +433,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 	}
 
 	protected boolean hasGuestPermission(
-			String name, String primKey, String actionId)
+			long groupId, String name, String primKey, String actionId)
 		throws Exception {
 
 		if (name.indexOf(StringPool.PERIOD) != -1) {
@@ -462,7 +462,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		long companyId = user.getCompanyId();
 
 		long[] resourceIds = getResourceIds(
-			companyId, 0, name, primKey, actionId);
+			companyId, groupId, name, primKey, actionId);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupConstants.GUEST);
@@ -489,7 +489,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		try {
 			return PermissionLocalServiceUtil.hasUserPermissions(
-				defaultUserId, 0, actionId, resourceIds, bag);
+				defaultUserId, groupId, actionId, resourceIds, bag);
 		}
 		catch (Exception e) {
 			return false;
@@ -501,13 +501,14 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		try {
 			if (!signedIn) {
-				return hasGuestPermission(name, primKey, actionId);
+				return hasGuestPermission(groupId, name, primKey, actionId);
 			}
 			else {
 				boolean value = false;
 
 				if (checkGuest) {
-					value = hasGuestPermission(name, primKey, actionId);
+					value = hasGuestPermission(
+						groupId, name, primKey, actionId);
 				}
 
 				if (!value) {
