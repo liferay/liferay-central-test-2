@@ -47,6 +47,11 @@ if (rowChecker != null) {
 		headerNames.add(0, rowChecker.getAllRowsCheckBox());
 	}
 }
+
+if (resultRows.isEmpty() && (headerNames == null)) {
+	headerNames = new ArrayList();
+	headerNames.add(StringPool.BLANK);
+}
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
