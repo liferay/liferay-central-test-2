@@ -85,10 +85,6 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public Object getAttribute(String name) {
-		if (_classPK <= 0) {
-			throw new UnsupportedOperationException();
-		}
-
 		Object data = null;
 
 		try {
