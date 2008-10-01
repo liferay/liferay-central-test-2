@@ -330,82 +330,77 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						url="<%= portletURL.toString() %>"
 					/>
 
-					<%
-					UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+					<liferay-ui:search-container
+						rowChecker="<%= new RowChecker(renderResponse) %>"
+						searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+					>
+						<liferay-ui:search-form
+							page="/html/portlet/enterprise_admin/user_search.jsp"
+						/>
 
-					searchContainer.setRowChecker(new RowChecker(renderResponse));
-					%>
+						<%
+						UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-					<liferay-ui:search-form
-						page="/html/portlet/enterprise_admin/user_search.jsp"
-						searchContainer="<%= searchContainer %>"
-					/>
+						LinkedHashMap userParams = new LinkedHashMap();
 
-					<%
-					UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-					LinkedHashMap userParams = new LinkedHashMap();
-
-					if (tabs3.equals("current")) {
-						userParams.put("permission", new Long(resource.getResourceId()));
-					}
-					else if (tabs3.equals("available")) {
-						if (group.isCommunity()) {
-							userParams.put("usersGroups", new Long(groupId));
+						if (tabs3.equals("current")) {
+							userParams.put("permission", new Long(resource.getResourceId()));
 						}
-						else if (group.isOrganization()) {
-							userParams.put("usersOrgs", new Long(group.getClassPK()));
+						else if (tabs3.equals("available")) {
+							if (group.isCommunity()) {
+								userParams.put("usersGroups", new Long(groupId));
+							}
+							else if (group.isOrganization()) {
+								userParams.put("usersOrgs", new Long(group.getClassPK()));
+							}
 						}
-					}
-					%>
+						%>
 
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+						<liferay-ui:search-container-results>
+							<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+						</liferay-ui:search-container-results>
 
-					<div class="separator"><!-- --></div>
+						<liferay-ui:search-container-row
+							className="com.liferay.portal.model.User"
+							keyProperty="userId"
+							modelVar="user2"
+						>
+							<liferay-ui:search-container-column-text
+								name="name"
+								property="fullName"
+							/>
 
-					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
+							<liferay-ui:search-container-column-text
+								name="screen-name"
+								orderable="true"
+								property="screenName"
+							/>
 
-					<br /><br />
+							<liferay-ui:search-container-column-text
+								buffer="buffer"
+								name="permissions"
+							>
 
-					<%
-					List<String> headerNames = new ArrayList<String>();
+								<%
+								List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
 
-					headerNames.add("name");
-					headerNames.add("screen-name");
-					//headerNames.add("email-address");
-					headerNames.add("permissions");
+								List actions = ResourceActionsUtil.getActions(permissions);
+								List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
-					searchContainer.setHeaderNames(headerNames);
+								buffer.append(StringUtil.merge(actionsNames, ", "));
+								%>
 
-					List resultRows = searchContainer.getResultRows();
+							</liferay-ui:search-container-column-text>
+						</liferay-ui:search-container-row>
 
-					for (int i = 0; i < results.size(); i++) {
-						User user2 = (User)results.get(i);
+						<div class="separator"><!-- --></div>
 
-						ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+						<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
 
-						// Name, screen name, and email address
+						<br /><br />
 
-						row.addText(user2.getFullName());
-						row.addText(user2.getScreenName());
-						//row.addText(user2.getEmailAddress());
-
-						// Permissions
-
-						List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
-
-						List actions = ResourceActionsUtil.getActions(permissions);
-						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
-
-						row.addText(StringUtil.merge(actionsNames, ", "));
-
-						// Add result row
-
-						resultRows.add(row);
-					}
-					%>
-
-					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+						<liferay-ui:search-iterator />
+					</liferay-ui:search-container>
 				</c:when>
 				<c:otherwise>
 
@@ -500,120 +495,115 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						url="<%= portletURL.toString() %>"
 					/>
 
-					<%
-					OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
+					<liferay-ui:search-container
+						rowChecker="<%= new RowChecker(renderResponse) %>"
+						searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+					>
+						<liferay-ui:search-form
+							page="/html/portlet/enterprise_admin/organization_search.jsp"
+						/>
 
-					searchContainer.setRowChecker(new RowChecker(renderResponse));
-					%>
+						<%
+						OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-					<liferay-ui:search-form
-						page="/html/portlet/enterprise_admin/organization_search.jsp"
-						searchContainer="<%= searchContainer %>"
-					/>
+						long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 
-					<%
-					OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+						LinkedHashMap organizationParams = new LinkedHashMap();
 
-					long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-
-					LinkedHashMap organizationParams = new LinkedHashMap();
-
-					if (tabs3.equals("current")) {
-						organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
-						organizationParams.put("permissionsGroupId", new Long(groupId));
-					}
-					%>
-
-					<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
-
-					<div class="separator"><!-- --></div>
-
-					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
-
-					<br /><br />
-
-					<%
-					List<String> headerNames = new ArrayList<String>();
-
-					headerNames.add("name");
-					headerNames.add("parent-organization");
-					headerNames.add("type");
-					headerNames.add("city");
-					headerNames.add("permissions");
-					//headerNames.add("exclusive");
-
-					searchContainer.setHeaderNames(headerNames);
-
-					List resultRows = searchContainer.getResultRows();
-
-					for (int i = 0; i < results.size(); i++) {
-						Organization organization = (Organization)results.get(i);
-
-						ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
-
-						// Name
-
-						row.addText(organization.getName());
-
-						// Parent organization
-
-						String parentOrganizationName = StringPool.BLANK;
-
-						if (organization.getParentOrganizationId() > 0) {
-							try {
-								Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-								parentOrganizationName = parentOrganization.getName();
-							}
-							catch (Exception e) {
-							}
+						if (tabs3.equals("current")) {
+							organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
+							organizationParams.put("permissionsGroupId", new Long(groupId));
 						}
+						%>
 
-						row.addText(parentOrganizationName);
+						<liferay-ui:search-container-results>
+							<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+						</liferay-ui:search-container-results>
 
-						// Type
+						<liferay-ui:search-container-row
+							className="com.liferay.portal.model.Organization"
+							keyProperty="organizationId"
+							modelVar="organization"
+						>
+							<liferay-ui:search-container-column-text
+								name="name"
+								orderable="<%= true %>"
+								property="name"
+							/>
 
-						row.addText(LanguageUtil.get(pageContext, organization.getType()));
+							<liferay-ui:search-container-column-text
+								buffer="buffer"
+								name="parent-organization"
+							>
 
-						// City
+								<%
+								if (organization.getParentOrganizationId() > 0) {
+									try {
+										Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-						Address address = organization.getAddress();
+										buffer.append(parentOrganization.getName());
+									}
+									catch (Exception e) {
+									}
+								}
+								%>
 
-						row.addText(address.getCity());
+							</liferay-ui:search-container-column-text>
 
-						// Permissions
+							<liferay-ui:search-container-column-text
+								name="type"
+								orderable="<%= true %>"
+								value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+							/>
 
-						//boolean organizationIntersection = false;
+							<liferay-ui:search-container-column-text
+								name="city"
+								value="<%= organization.getAddress().getCity() %>"
+							/>
 
-						List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
+							<liferay-ui:search-container-column-text
+								buffer="buffer"
+								name="permissions"
+							>
 
-						/*if (permissions.size() == 0) {
-							permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
+								<%
 
-							if (permissions.size() > 0) {
-								organizationIntersection = true;
-							}
-						}*/
+								//boolean organizationIntersection = false;
 
-						List actions = ResourceActionsUtil.getActions(permissions);
-						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+								List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
-						row.addText(StringUtil.merge(actionsNames, ", "));
+								/*if (permissions.size() == 0) {
+									permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
 
-						/*if (permissions.size() == 0) {
-							row.addText(StringPool.BLANK);
-						}
-						else {
-							row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
-						}*/
+									if (permissions.size() > 0) {
+										organizationIntersection = true;
+									}
+								}*/
 
-						// Add result row
+								List actions = ResourceActionsUtil.getActions(permissions);
+								List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
-						resultRows.add(row);
-					}
-					%>
+								buffer.append(StringUtil.merge(actionsNames, ", "));
 
-					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+								/*if (permissions.size() == 0) {
+									row.addText(StringPool.BLANK);
+								}
+								else {
+									row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
+								}*/
+								%>
+
+							</liferay-ui:search-container-column-text>
+						</liferay-ui:search-container-row>
+
+						<div class="separator"><!-- --></div>
+
+						<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
+
+						<br /><br />
+
+						<liferay-ui:search-iterator />
+					</liferay-ui:search-container>
 				</c:when>
 				<c:otherwise>
 

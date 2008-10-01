@@ -35,6 +35,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <liferay-ui:search-toggle
 	id="toggle_id_directory_user_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-users"
 >
 	<table class="lfr-table">
 	<tr>
@@ -79,12 +80,6 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</tr>
 	</table>
 </liferay-ui:search-toggle>
-
-<br />
-
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-users" />" />
-</div>
 
 <script type="text/javascript">
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

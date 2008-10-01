@@ -38,6 +38,7 @@ String type = displayTerms.getType();
 <liferay-ui:search-toggle
 	id="toggle_id_enterprise_admin_organization_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-organizations"
 >
 	<table class="lfr-table">
 	<tr>
@@ -108,17 +109,15 @@ String type = displayTerms.getType();
 	</table>
 </liferay-ui:search-toggle>
 
-<br />
+<c:if test="<%= showAddButton %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
+		<br />
 
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-organizations" />" />
-
-	<c:if test="<%= showAddButton %>">
-		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
+		<div>
 			<input type="button" value="<liferay-ui:message key="add-organization" />" onClick="<portlet:namespace />addOrganization();" />
-		</c:if>
+		</div>
 	</c:if>
-</div>
+</c:if>
 
 <%
 Organization organization = null;

@@ -29,10 +29,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object[] objArray = (Object[])row.getObject();
+User user2 = (User)row.getObject();
 
-User user2 = (User)objArray[0];
-Group group = (Group)objArray[1];
+Group group = (Group)row.getParameter("group");
 %>
 
 <liferay-ui:icon-menu>

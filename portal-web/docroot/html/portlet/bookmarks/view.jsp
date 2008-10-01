@@ -82,38 +82,38 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</liferay-portlet:renderURL>
 
 				<liferay-ui:search-container-column-text
-					buffer="sb"
+					buffer="buffer"
 					name="folder"
 				>
 
 					<%
-					sb.append("<a href=\"");
-					sb.append(rowURL);
-					sb.append("\">");
-					sb.append("<img alt=\"");
-					sb.append(LanguageUtil.get(pageContext, "folder"));
-					sb.append("\" class=\"label-icon\" src=\"");
-					sb.append(themeDisplay.getPathThemeImages());
-					sb.append("/common/folder.png\">");
-					sb.append("<b>");
-					sb.append(curFolder.getName());
-					sb.append("</b>");
+					buffer.append("<a href=\"");
+					buffer.append(rowURL);
+					buffer.append("\">");
+					buffer.append("<img alt=\"");
+					buffer.append(LanguageUtil.get(pageContext, "folder"));
+					buffer.append("\" class=\"label-icon\" src=\"");
+					buffer.append(themeDisplay.getPathThemeImages());
+					buffer.append("/common/folder.png\">");
+					buffer.append("<b>");
+					buffer.append(curFolder.getName());
+					buffer.append("</b>");
 
 					if (Validator.isNotNull(curFolder.getDescription())) {
-						sb.append("<br />");
-						sb.append(curFolder.getDescription());
+						buffer.append("<br />");
+						buffer.append(curFolder.getDescription());
 					}
 
-					sb.append("</a>");
+					buffer.append("</a>");
 
 					List subfolders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
 					if (subfolders.size() > 0) {
 						int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
-						sb.append("<br /><u>");
-						sb.append(LanguageUtil.get(pageContext, "subfolders"));
-						sb.append("</u>: ");
+						buffer.append("<br /><u>");
+						buffer.append(LanguageUtil.get(pageContext, "subfolders"));
+						buffer.append("</u>: ");
 
 						for (int j = 0; j < subfolders.size(); j++) {
 							BookmarksFolder subfolder = (BookmarksFolder)subfolders.get(j);
@@ -122,26 +122,26 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 							rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
-							sb.append("<a href=\"");
-							sb.append(rowURL);
-							sb.append("\">");
-							sb.append(subfolder.getName());
-							sb.append("</a>");
+							buffer.append("<a href=\"");
+							buffer.append(rowURL);
+							buffer.append("\">");
+							buffer.append(subfolder.getName());
+							buffer.append("</a>");
 
 							if ((j + 1) < subfolders.size()) {
-								sb.append(", ");
+								buffer.append(", ");
 							}
 						}
 
 						if (subfoldersCount > subfolders.size()) {
 							rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-							sb.append(", <a href=\"");
-							sb.append(rowURL);
-							sb.append("\">");
-							sb.append(LanguageUtil.get(pageContext, "more"));
-							sb.append(" &raquo;");
-							sb.append("</a>");
+							buffer.append(", <a href=\"");
+							buffer.append(rowURL);
+							buffer.append("\">");
+							buffer.append(LanguageUtil.get(pageContext, "more"));
+							buffer.append(" &raquo;");
+							buffer.append("</a>");
 						}
 
 						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
@@ -285,6 +285,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						href="<%= rowHREF %>"
 						name="entry"
 						orderable="<%= true %>"
+						orderableProperty="name"
 						property="name"
 						target="_blank"
 						title="<%= entry.getComments() %>"
@@ -321,7 +322,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						href="<%= rowHREF %>"
 						name="modified-date"
 						orderable="<%= true %>"
-						orderableProperty="modifiedDate"
 						target="_blank"
 						title="<%= entry.getComments() %>"
 						value="<%= dateFormatDate.format(entry.getModifiedDate()) %>"

@@ -28,169 +28,164 @@
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 %>
 
-<input name="<portlet:namespace />deleteOrganizationIds" type="hidden" value="" />
-
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
 
-<%
-OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
+<liferay-ui:search-container
+	rowChecker="<%= new RowChecker(renderResponse) %>"
+	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+>
+	<input name="<portlet:namespace />deleteOrganizationIds" type="hidden" value="" />
+	<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-List headerNames = searchContainer.getHeaderNames();
-
-headerNames.add(StringPool.BLANK);
-
-RowChecker rowChecker = new RowChecker(renderResponse);
-
-searchContainer.setRowChecker(rowChecker);
-
-portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
-%>
-
-<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
-
-<liferay-ui:search-form
+	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/organization_search.jsp"
-		searchContainer="<%= searchContainer %>"
 		showAddButton="<%= true %>"
-/>
+	/>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
-	<%
-	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+		<%
+		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-	LinkedHashMap orgParams = new LinkedHashMap();
+		LinkedHashMap organizationParams = new LinkedHashMap();
 
-	if (filterManageableOrganizations) {
-		List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+		if (filterManageableOrganizations) {
+			List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+			Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 
-		Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
-
-		orgParams.put("organizations", manageableOrganizationIds);
-	}
-
-	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-
-	if (parentOrganizationId <= 0) {
-		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-	}
-
-	int total = 0;
-
-	if (searchTerms.isAdvancedSearch()) {
-		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator());
-	}
-	else {
-		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams);
-	}
-
-	searchContainer.setTotal(total);
-
-	List results = null;
-
-	if (searchTerms.isAdvancedSearch()) {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-	}
-	else {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-	}
-
-	searchContainer.setResults(results);
-	%>
-
-	<div class="separator"><!-- --></div>
-
-	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
-
-	<br /><br />
-
-	<%
-	List resultRows = searchContainer.getResultRows();
-
-	for (int i = 0; i < results.size(); i++) {
-		Organization organization = (Organization)results.get(i);
-
-		ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
-
-		PortletURL rowURL = renderResponse.createRenderURL();
-
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
-		rowURL.setParameter("struts_action", "/enterprise_admin/edit_organization");
-		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-		rowURL.setParameter("organizationId", String.valueOf(organization.getOrganizationId()));
-
-		// Name
-
-		row.addText(organization.getName(), rowURL);
-
-		// Parent organization
-
-		String parentOrganizationName = StringPool.BLANK;
-
-		if (organization.getParentOrganizationId() > 0) {
-			try {
-				Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-				parentOrganizationName = parentOrganization.getName();
-			}
-			catch (Exception e) {
-			}
+			organizationParams.put("organizations", manageableOrganizationIds);
 		}
 
-		row.addText(parentOrganizationName);
+		long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
-		// Type
-
-		row.addText(LanguageUtil.get(pageContext, organization.getType()));
-
-		// City
-
-		Address address = organization.getAddress();
-
-		row.addText(address.getCity(), rowURL);
-
-		// Region
-
-		String regionName = address.getRegion().getName();
-
-		if (Validator.isNull(regionName)) {
-			try {
-				Region region = RegionServiceUtil.getRegion(organization.getRegionId());
-
-				regionName = LanguageUtil.get(pageContext, region.getName());
-			}
-			catch (NoSuchRegionException nsce) {
-			}
+		if (parentOrganizationId <= 0) {
+			parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 		}
+		%>
 
-		row.addText(regionName, rowURL);
+		<liferay-ui:search-container-results>
+			<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+		</liferay-ui:search-container-results>
 
-		// Country
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.Organization"
+			keyProperty="organizationId"
+			modelVar="organization"
+		>
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL" >
+				<pportlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+				<pportlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<pportlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+			</portlet:renderURL>
 
-		String countryName = address.getCountry().getName();
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="name"
+				orderable="<%= true %>"
+				property="name"
+			/>
 
-		if (Validator.isNull(countryName)) {
-			try {
-				Country country = CountryServiceUtil.getCountry(organization.getCountryId());
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="parent-organization"
+			>
 
-				countryName = LanguageUtil.get(pageContext, country.getName());
-			}
-			catch (NoSuchCountryException nsce) {
-			}
-		}
+				<%
+				if (organization.getParentOrganizationId() > 0) {
+					try {
+						Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-		row.addText(countryName, rowURL);
+						buffer.append(parentOrganization.getName());
+					}
+					catch (Exception e) {
+					}
+				}
+				%>
 
-		// Action
+			</liferay-ui:search-container-column-text>
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/organization_action.jsp");
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="type"
+				orderable="<%= true %>"
+				value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+			/>
 
-		// Add result row
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="city"
+				value="<%= organization.getAddress().getCity() %>"
+			/>
 
-		resultRows.add(row);
-	}
-	%>
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="region"
+			>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+				<%
+				Address address = organization.getAddress();
+
+				Region region = address.getRegion();
+
+				String regionName = region.getName();
+
+				if (Validator.isNull(regionName)) {
+					try {
+						region = RegionServiceUtil.getRegion(organization.getRegionId());
+
+						regionName = LanguageUtil.get(pageContext, region.getName());
+					}
+					catch (NoSuchRegionException nsce) {
+					}
+				}
+
+				buffer.append(regionName);
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="country"
+			>
+
+				<%
+				Address address = organization.getAddress();
+
+				Country country = address.getCountry();
+
+				String countryName = country.getName();
+
+				if (Validator.isNull(countryName)) {
+					try {
+						country = CountryServiceUtil.getCountry(organization.getCountryId());
+
+						countryName = LanguageUtil.get(pageContext, country.getName());
+					}
+					catch (NoSuchCountryException nsce) {
+					}
+				}
+
+				buffer.append(countryName);
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/enterprise_admin/organization_action.jsp"
+			/>
+		</liferay-ui:search-container-row>
+
+		<div class="separator"><!-- --></div>
+
+		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
+
+		<br /><br />
+
+		<liferay-ui:search-iterator />
+	</c:if>
+</liferay-ui:search-container>

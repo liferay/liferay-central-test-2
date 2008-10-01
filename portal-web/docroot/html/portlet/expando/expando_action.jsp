@@ -32,7 +32,6 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 ExpandoColumn expandoColumn = (ExpandoColumn)row.getParameter("expandoColumn");
-
 String modelResource = (String)row.getParameter("modelResource");
 %>
 

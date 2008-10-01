@@ -37,6 +37,7 @@ String type = displayTerms.getType();
 <liferay-ui:search-toggle
 	id="toggle_id_directory_organization_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-organizations"
 >
 	<table class="lfr-table">
 	<tr>
@@ -106,12 +107,6 @@ String type = displayTerms.getType();
 	</tr>
 	</table>
 </liferay-ui:search-toggle>
-
-<br />
-
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-organizations" />" />
-</div>
 
 <%
 Organization organization = null;

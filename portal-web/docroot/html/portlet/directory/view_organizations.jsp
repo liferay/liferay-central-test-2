@@ -26,148 +26,150 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
-OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
-
-List headerNames = searchContainer.getHeaderNames();
-
-headerNames.add(StringPool.BLANK);
-
-portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 %>
 
-<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+<liferay-ui:search-container
+	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+>
+	<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-<liferay-ui:search-form
+	<liferay-ui:search-form
 		page="/html/portlet/directory/organization_search.jsp"
-		searchContainer="<%= searchContainer %>"
-/>
+	/>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
-	<%
-	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+		<%
+		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-	LinkedHashMap orgParams = new LinkedHashMap();
+		LinkedHashMap organizationParams = new LinkedHashMap();
 
-	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+		long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
-	if (parentOrganizationId <= 0) {
-		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-	}
-
-	int total = 0;
-
-	if (searchTerms.isAdvancedSearch()) {
-		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator());
-	}
-	else {
-		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams);
-	}
-
-	searchContainer.setTotal(total);
-
-	List results = null;
-
-	if (searchTerms.isAdvancedSearch()) {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-	}
-	else {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-	}
-
-	searchContainer.setResults(results);
-	%>
-
-	<div class="separator"><!-- --></div>
-
-	<%
-	List resultRows = searchContainer.getResultRows();
-
-	for (int i = 0; i < results.size(); i++) {
-		Organization organization = (Organization)results.get(i);
-
-		ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
-
-		PortletURL rowURL = renderResponse.createRenderURL();
-
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
-		rowURL.setParameter("struts_action", "/directory/edit_organization");
-		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-		rowURL.setParameter("organizationId", String.valueOf(organization.getOrganizationId()));
-
-		// Name
-
-		row.addText(organization.getName(), rowURL);
-
-		// Parent organization
-
-		String parentOrganizationName = StringPool.BLANK;
-
-		if (organization.getParentOrganizationId() > 0) {
-			try {
-				Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-				parentOrganizationName = parentOrganization.getName();
-			}
-			catch (Exception e) {
-			}
+		if (parentOrganizationId <= 0) {
+			parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 		}
+		%>
 
-		row.addText(parentOrganizationName);
+		<liferay-ui:search-container-results>
+			<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+		</liferay-ui:search-container-results>
 
-		// Type
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.Organization"
+			keyProperty="organizationId"
+			modelVar="organization"
+		>
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL" >
+				<pportlet:param name="struts_action" value="/directory/edit_organization" />
+				<pportlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<pportlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+			</portlet:renderURL>
 
-		row.addText(LanguageUtil.get(pageContext, organization.getType()));
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="name"
+				orderable="<%= true %>"
+				property="name"
+			/>
 
-		// City
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="parent-organization"
+			>
 
-		Address address = organization.getAddress();
+				<%
+				if (organization.getParentOrganizationId() > 0) {
+					try {
+						Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-		row.addText(address.getCity(), rowURL);
+						buffer.append(parentOrganization.getName());
+					}
+					catch (Exception e) {
+					}
+				}
+				%>
 
-		// Region
+			</liferay-ui:search-container-column-text>
 
-		String regionName = address.getRegion().getName();
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="type"
+				orderable="<%= true %>"
+				value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+			/>
 
-		if (Validator.isNull(regionName)) {
-			try {
-				Region region = RegionServiceUtil.getRegion(organization.getRegionId());
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="city"
+				value="<%= organization.getAddress().getCity() %>"
+			/>
 
-				regionName = LanguageUtil.get(pageContext, region.getName());
-			}
-			catch (NoSuchRegionException nsce) {
-			}
-		}
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="region"
+			>
 
-		row.addText(regionName, rowURL);
+				<%
+				Address address = organization.getAddress();
 
-		// Country
+				Region region = address.getRegion();
 
-		String countryName = address.getCountry().getName();
+				String regionName = region.getName();
 
-		if (Validator.isNull(countryName)) {
-			try {
-				Country country = CountryServiceUtil.getCountry(organization.getCountryId());
+				if (Validator.isNull(regionName)) {
+					try {
+						region = RegionServiceUtil.getRegion(organization.getRegionId());
 
-				countryName = LanguageUtil.get(pageContext, country.getName());
-			}
-			catch (NoSuchCountryException nsce) {
-			}
-		}
+						regionName = LanguageUtil.get(pageContext, region.getName());
+					}
+					catch (NoSuchRegionException nsce) {
+					}
+				}
 
-		row.addText(countryName, rowURL);
+				buffer.append(regionName);
+				%>
 
-		// Action
+			</liferay-ui:search-container-column-text>
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/directory/organization_action.jsp");
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="country"
+			>
 
-		// Add result row
+				<%
+				Address address = organization.getAddress();
 
-		resultRows.add(row);
-	}
-	%>
+				Country country = address.getCountry();
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+				String countryName = country.getName();
+
+				if (Validator.isNull(countryName)) {
+					try {
+						country = CountryServiceUtil.getCountry(organization.getCountryId());
+
+						countryName = LanguageUtil.get(pageContext, country.getName());
+					}
+					catch (NoSuchCountryException nsce) {
+					}
+				}
+
+				buffer.append(countryName);
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/directory/organization_action.jsp"
+			/>
+		</liferay-ui:search-container-row>
+
+		<div class="separator"><!-- --></div>
+
+		<liferay-ui:search-iterator />
+	</c:if>
+</liferay-ui:search-container>

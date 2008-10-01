@@ -75,71 +75,58 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 <input name="<portlet:namespace />addUserIds" type="hidden" value="" />
 <input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
-<%
-UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+<liferay-ui:search-container
+	rowChecker="<%= new UserUserGroupChecker(renderResponse, userGroup) %>"
+	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/user_search.jsp"
+	/>
 
-searchContainer.setRowChecker(new UserUserGroupChecker(renderResponse, userGroup));
-%>
+	<%
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-<liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/user_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+	LinkedHashMap userParams = new LinkedHashMap();
 
-<%
-UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+	if (filterManageableOrganizations) {
+		List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+		Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 
-LinkedHashMap userParams = new LinkedHashMap();
+		userParams.put("usersOrgs", manageableOrganizationIds);
+	}
 
-if (filterManageableOrganizations) {
-	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+	if (tabs2.equals("current")) {
+		userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
+	}
+	%>
 
-	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
+	<liferay-ui:search-container-results>
+		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+	</liferay-ui:search-container-results>
 
-	userParams.put("usersOrgs", manageableOrganizationIds);
-}
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.User"
+		keyProperty="userId"
+		modelVar="user2"
+	>
+		<liferay-ui:search-container-column-text
+			name="name"
+			property="fullName"
+		/>
 
-if (tabs2.equals("current")) {
-	userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
-}
-%>
+		<liferay-ui:search-container-column-text
+			name="screen-name"
+			property="screenName"
+		/>
+	</liferay-ui:search-container-row>
 
-<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+	<div class="separator"><!-- --></div>
 
-<div class="separator"><!-- --></div>
+	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
-<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<br /><br />
 
-<br /><br />
-
-<%
-List<String> headerNames = new ArrayList<String>();
-
-headerNames.add("name");
-headerNames.add("screen-name");
-//headerNames.add("email-address");
-
-searchContainer.setHeaderNames(headerNames);
-
-List resultRows = searchContainer.getResultRows();
-
-for (int i = 0; i < results.size(); i++) {
-	User user2 = (User)results.get(i);
-
-	ResultRow row = new ResultRow(user2, user2.getUserId(), i);
-
-	// Name, screen name, and email address
-
-	row.addText(user2.getFullName());
-	row.addText(user2.getScreenName());
-	//row.addText(user2.getEmailAddress());
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
 </form>

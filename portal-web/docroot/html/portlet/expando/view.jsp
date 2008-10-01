@@ -104,66 +104,66 @@ Collections.sort(attributeNames, new StringComparator());
 		/>
 
 		<liferay-ui:search-container-column-text
-			buffer="sb"
+			buffer="buffer"
 			name="default-value"
 		>
 
 			<%
 			if (type == ExpandoColumnConstants.BOOLEAN) {
-				sb.append((Boolean)expandoBridge.getAttributeDefault(name));
+				buffer.append((Boolean)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-				sb.append(StringUtil.merge((boolean[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((boolean[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.DATE) {
-				sb.append(dateFormatDateTime.format((Date)expandoBridge.getAttributeDefault(name)));
+				buffer.append(dateFormatDateTime.format((Date)expandoBridge.getAttributeDefault(name)));
 			}
 			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
 				Date[] dates = (Date[])expandoBridge.getAttributeDefault(name);
 
 				for (int i = 0; i < dates.length; i++) {
 					if (i != 0) {
-						sb.append(StringPool.COMMA_AND_SPACE);
+						buffer.append(StringPool.COMMA_AND_SPACE);
 					}
 
-					sb.append(dateFormatDateTime.format(dates[i]));
+					buffer.append(dateFormatDateTime.format(dates[i]));
 				}
 			}
 			else if (type == ExpandoColumnConstants.DOUBLE) {
-				sb.append((Double)expandoBridge.getAttributeDefault(name));
+				buffer.append((Double)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-				sb.append(StringUtil.merge((double[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((double[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.FLOAT) {
-				sb.append((Float)expandoBridge.getAttributeDefault(name));
+				buffer.append((Float)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-				sb.append(StringUtil.merge((float[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((float[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.INTEGER) {
-				sb.append((Integer)expandoBridge.getAttributeDefault(name));
+				buffer.append((Integer)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-				sb.append(StringUtil.merge((int[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((int[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.LONG) {
-				sb.append((Long)expandoBridge.getAttributeDefault(name));
+				buffer.append((Long)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-				sb.append(StringUtil.merge((long[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((long[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.SHORT) {
-				sb.append((Short)expandoBridge.getAttributeDefault(name));
+				buffer.append((Short)expandoBridge.getAttributeDefault(name));
 			}
 			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-				sb.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-				sb.append(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else {
-				sb.append((String)expandoBridge.getAttributeDefault(name));
+				buffer.append((String)expandoBridge.getAttributeDefault(name));
 			}
 			%>
 
