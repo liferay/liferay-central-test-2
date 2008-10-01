@@ -299,11 +299,11 @@ body.portlet {
 }
 
 .restricted.alt td {
-	background-color: #ffc0c0;
+	background-color: #FFC0C0;
 }
 
 .restricted.hover td {
-	background-color: #d3bdc0;
+	background-color: #D3BDC0;
 }
 
 .restricted * {
