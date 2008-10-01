@@ -228,7 +228,7 @@ String currentSection = mainSections[0];
 								for (String section : sections) {
 									String sectionId = _getIdName(section);
 								%>
-									<li <%= currentSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>><a href="#<%= sectionId %>" id='<%= sectionId %>Link"><liferay-ui:message key="<%= section %>' /></a></li>
+									<li <%= currentSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>><a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /></a></li>
 								<%
 								}
 								%>

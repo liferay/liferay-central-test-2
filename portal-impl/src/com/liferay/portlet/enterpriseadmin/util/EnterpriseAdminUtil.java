@@ -23,10 +23,11 @@
 package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -43,11 +44,11 @@ import com.liferay.portal.util.comparator.UserEmailAddressComparator;
 import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
-import com.liferay.portal.service.WebsiteServiceUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * <a href="EnterpriseAdminUtil.java.html"><b><i>View Source</i></b></a>

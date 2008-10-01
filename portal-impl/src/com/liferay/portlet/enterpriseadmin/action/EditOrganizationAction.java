@@ -37,15 +37,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
-import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
-import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -206,7 +201,6 @@ public class EditOrganizationAction extends PortletAction {
 			EnterpriseAdminUtil.updateWebsites(
 				actionRequest, websitePostfixesArray, classPK, className);
 		}
-
 
 		return organization;
 	}
