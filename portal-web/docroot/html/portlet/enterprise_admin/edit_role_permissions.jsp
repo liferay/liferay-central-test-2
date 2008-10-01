@@ -294,7 +294,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			PermissionDisplay permissionDisplay = (PermissionDisplay) results.get(i);
+			PermissionDisplay permissionDisplay = (PermissionDisplay)results.get(i);
 
 			Permission permission = permissionDisplay.getPermission();
 			Resource resource = permissionDisplay.getResource();
