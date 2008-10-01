@@ -28,8 +28,8 @@
 Organization organization = (Organization)request.getAttribute("organization.selOrganization");
 
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
-long countryId = BeanParamUtil.getInteger(organization, request, "countryId");
-long regionId = BeanParamUtil.getInteger(organization, request, "regionId");
+long countryId = BeanParamUtil.getLong(organization, request, "countryId");
+long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 String type = BeanParamUtil.getString(organization, request, "type", PropsValues.ORGANIZATIONS_TYPES[0]);
 long parentOrganizationId = BeanParamUtil.getLong(organization, request, "parentOrganizationId");
 
