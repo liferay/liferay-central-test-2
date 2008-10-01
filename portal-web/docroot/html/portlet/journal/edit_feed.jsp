@@ -422,7 +422,7 @@ if (feed != null) {
 					for (JournalTemplate currTemplate : templates) {
 					%>
 
-						<option <%= rendererTemplateId.equals(currTemplate.getName()) ? "selected" : "" %> value="<%= JournalFeedImpl.RENDERED_ARTICLE %>" onClick="<portlet:namespace />selectRendererTemplate('<%= currTemplate.getName() %>');"><%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %></option>
+						<option <%= rendererTemplateId.equals(currTemplate.getTemplateId()) ? "selected" : "" %> value="<%= JournalFeedImpl.RENDERED_ARTICLE %>" onClick="<portlet:namespace />selectRendererTemplate('<%= currTemplate.getTemplateId() %>');"><%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %></option>
 
 					<%
 					}
