@@ -110,40 +110,6 @@ if (parentOrganizationId <= 0) {
 
 		nameEl.innerHTML = parentOrganizationHTML;
 	}
-
-	new Liferay.DynamicSelect(
-	[
-		{
-			select: "<portlet:namespace />countryId",
-			selectId: "countryId",
-			selectDesc: "name",
-			selectVal: "<%= countryId %>",
-			selectData: function(callback) {
-				Liferay.Service.Portal.Country.getCountries(
-					{
-						active: true
-					},
-					callback
-				);
-			}
-		},
-		{
-			select: "<portlet:namespace />regionId",
-			selectId: "regionId",
-			selectDesc: "name",
-			selectVal: "<%= regionId %>",
-			selectData: function(callback, selectKey) {
-				Liferay.Service.Portal.Region.getRegions(
-					{
-						countryId: selectKey,
-						active: true
-					},
-					callback
-				);
-			}
-		}
-	]
-	);
 </script>
 
 <h3><liferay-ui:message key="organization-details" /></h3>
@@ -310,5 +276,39 @@ else {
 			}
 			%>
 		}
+	);
+
+	new Liferay.DynamicSelect(
+	[
+		{
+			select: "<portlet:namespace />countryId",
+			selectId: "countryId",
+			selectDesc: "name",
+			selectVal: "<%= countryId %>",
+			selectData: function(callback) {
+				Liferay.Service.Portal.Country.getCountries(
+					{
+						active: true
+					},
+					callback
+				);
+			}
+		},
+		{
+			select: "<portlet:namespace />regionId",
+			selectId: "regionId",
+			selectDesc: "name",
+			selectVal: "<%= regionId %>",
+			selectData: function(callback, selectKey) {
+				Liferay.Service.Portal.Region.getRegions(
+					{
+						countryId: selectKey,
+						active: true
+					},
+					callback
+				);
+			}
+		}
+	]
 	);
 </script>
