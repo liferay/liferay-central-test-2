@@ -98,6 +98,6 @@ Sample custom columns:
 		className="<%= User.class.getName() %>"
 		classPK="<%= selUser.getUserId() %>"
 		editable="<%= false %>"
-		name="company-name"/>
+		name="company-name" />
 </liferay-ui:search-container-column-text>
 --%>

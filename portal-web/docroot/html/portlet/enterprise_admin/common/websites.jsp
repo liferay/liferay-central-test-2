@@ -36,6 +36,7 @@ else{
 
 	websites.add(new WebsiteImpl());
 }
+String className = (String)request.getAttribute("className");
 %>
 
 <script type="text/javascript">
@@ -84,7 +85,7 @@ else{
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 					<select name="<portlet:namespace /><%= fieldParam %>" id="<portlet:namespace /><%= fieldParam %>">
 						<%
-						List<ListType> websiteTypes = ListTypeServiceUtil.getListTypes(Contact.class.getName() + ListTypeImpl.WEBSITE);
+						List<ListType> websiteTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.WEBSITE);
 
 						for (ListType suffix : websiteTypes) {
 						%>

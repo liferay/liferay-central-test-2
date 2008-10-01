@@ -25,34 +25,39 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String toolbarItem = ParamUtil.get(request, "toolbar-item", "view-users");	
+String toolbarItem = ParamUtil.get(request, "toolbar-item", "view-users");
 
 String exportProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-	<portlet:param name="backURL" value="<%= currentURL %>" />
-</portlet:renderURL>
-
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUserURL">
-	<portlet:param name="struts_action" value="/enterprise_admin_users/view" />
-</portlet:renderURL>
-
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandosURL" portletName="<%= PortletKeys.EXPANDO %>">
-	<portlet:param name="struts_action" value="/expando/view" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="modelResource" value="<%= User.class.getName() %>" />
-</liferay-portlet:renderURL>
-
 <div class="lfr-portlet-toolbar">
+
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUserURL">
+		<portlet:param name="struts_action" value="/enterprise_admin_users/view" />
+	</portlet:renderURL>
+
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-users") ? "current" : StringPool.BLANK %>"><a href="<%= viewUserURL %>"><liferay-ui:message key="view-users" /></a></span>
-	<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-user") ? "current" : StringPool.BLANK %> "><a href="<%= addUserURL %>"><liferay-ui:message key="add-user" /></a></span>
+
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+		</portlet:renderURL>
+
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-user") ? "current" : StringPool.BLANK %> "><a href="<%= addUserURL %>"><liferay-ui:message key="add-user" /></a></span>
+	</c:if>
 
 	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandosURL" portletName="<%= PortletKeys.EXPANDO %>">
+			<portlet:param name="struts_action" value="/expando/view" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="modelResource" value="<%= User.class.getName() %>" />
+		</liferay-portlet:renderURL>
+
 		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandosURL %>"><liferay-ui:message key="custom-attributes" /></a></span>
 		<span class="lfr-toolbar-button export-button"><a href="javascript: ;"><liferay-ui:message key="export-users" /></a></span>
 	</c:if>
+
 </div>
 
 <c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">

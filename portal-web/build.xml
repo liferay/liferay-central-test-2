@@ -716,6 +716,10 @@
 		<antcall target="build-javascript-portlet-cmd">
 			<param name="portlet.name" value="tags_admin" />
 		</antcall>
+
+		<antcall target="build-javascript-portlet-cmd">
+			<param name="portlet.name" value="enterprise_admin" />
+		</antcall>
 	</target>
 
 	<target name="build-javascript-cmd">
