@@ -58,6 +58,10 @@ import org.hibernate.SessionFactory;
  */
 public class CounterPersistence extends BasePersistenceImpl {
 
+	public static int getCounterIncrement() {
+		return _COUNTER_INCREMENT;
+	}
+
 	public void afterPropertiesSet() throws SQLException {
 		_connection = getDataSource().getConnection();
 

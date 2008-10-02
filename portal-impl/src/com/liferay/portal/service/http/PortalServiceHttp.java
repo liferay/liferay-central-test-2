@@ -88,5 +88,29 @@ public class PortalServiceHttp {
 		}
 	}
 
+	public static void testCounterRollback(HttpPrincipal httpPrincipal)
+		throws com.liferay.portal.SystemException {
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"testCounterRollback", new Object[0]);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceHttp.class);
 }

@@ -49,6 +49,11 @@ public class PortalServiceUtil {
 		getService().test();
 	}
 
+	public static void testCounterRollback()
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		getService().testCounterRollback();
+	}
+
 	public static PortalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("PortalService is not set");

@@ -74,4 +74,9 @@ public class PortalServiceJSON {
 	public static void test() throws java.rmi.RemoteException {
 		PortalServiceUtil.test();
 	}
+
+	public static void testCounterRollback()
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		PortalServiceUtil.testCounterRollback();
+	}
 }

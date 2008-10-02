@@ -91,5 +91,16 @@ public class PortalServiceSoap {
 		}
 	}
 
+	public static void testCounterRollback() throws RemoteException {
+		try {
+			PortalServiceUtil.testCounterRollback();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceSoap.class);
 }

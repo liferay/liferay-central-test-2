@@ -20,36 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service;
+package com.liferay.counter.service;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.PortalServiceUtil;
 
 /**
- * <a href="PortalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterServiceTestCase.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface defines the service. The default implementation is
- * <code>com.liferay.portal.service.impl.PortalServiceImpl</code>.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
- * </p>
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.PortalServiceUtil
+ * @author Michael Young
  *
  */
-public interface PortalService {
-	public void test() throws java.rmi.RemoteException;
+public class CounterServiceTest extends BaseServiceTestCase {
 
-	public void testCounterRollback()
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+	public void testCounterRollback() throws Exception {
+		long counterValue = nextLong() + 1;
+
+		try {
+			PortalServiceUtil.testCounterRollback();
+		}
+		catch (SystemException e) {
+		}
+
+		assertTrue(nextLong() > counterValue);
+	}
+
 }

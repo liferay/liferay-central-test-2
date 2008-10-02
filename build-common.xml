@@ -271,7 +271,7 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="test-class" depends="compile,compile-test" if="class">
-		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on" showoutput="true">
+		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" outputtoformatters="false" printsummary="on" showoutput="true">
 			<jvmarg value="-Dexternal-properties=portal-test.properties" />
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />

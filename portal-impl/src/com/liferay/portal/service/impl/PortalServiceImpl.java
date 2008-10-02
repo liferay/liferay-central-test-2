@@ -22,6 +22,9 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.counter.service.persistence.CounterPersistence;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.service.base.PortalServiceBaseImpl;
 
 import org.apache.commons.logging.Log;
@@ -48,6 +51,16 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		if (_log.isInfoEnabled()) {
 			_log.info("User id " + userId);
 		}
+	}
+
+	public void testCounterRollback() throws SystemException {
+		int counterIncrement = CounterPersistence.getCounterIncrement();
+
+		for (int i = 0; i < counterIncrement * 2; i++) {
+			CounterLocalServiceUtil.increment();
+		}
+
+		throw new SystemException();
 	}
 
 	private static Log _log = LogFactory.getLog(PortalServiceImpl.class);

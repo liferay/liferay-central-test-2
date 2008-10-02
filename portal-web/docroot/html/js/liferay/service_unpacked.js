@@ -714,6 +714,13 @@ Liferay.Service.Portal.Portal = {
 		params.serviceMethodName = "test";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	testCounterRollback: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "testCounterRollback";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 
