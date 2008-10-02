@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.wsrp.consumer.admin;
+package com.liferay.wsrp.consumer.admin;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.CompanyConstants;

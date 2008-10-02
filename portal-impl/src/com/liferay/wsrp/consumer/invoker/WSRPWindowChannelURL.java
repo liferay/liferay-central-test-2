@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.wsrp.consumer.invoker;
+package com.liferay.wsrp.consumer.invoker;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;

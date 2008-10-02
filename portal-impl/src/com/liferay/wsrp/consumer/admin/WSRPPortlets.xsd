@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-xjc -verbose -p "com.liferay.portal.wsrp.consumer.admin" WSRPPortlets.xsd
+xjc -verbose -p "com.liferay.wsrp.consumer.admin" WSRPPortlets.xsd
 -->
 
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sun.com/portal/wsrp/consumer" xmlns:types="http://www.sun.com/portal/wsrp/consumer" xmlns:tns="http://www.sun.com/portal/wsrp/consumer" elementFormDefault="qualified">

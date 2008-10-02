@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.wsrp.consumer.admin;
+package com.liferay.wsrp.consumer.admin;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -321,7 +321,7 @@ public class WSRPPersistenceHelper {
 			ClassLoader classLoader = getClass().getClassLoader();
 
 			_jaxbContext = JAXBContext.newInstance(
-				"com.liferay.portal.wsrp.consumer.admin", classLoader);
+				"com.liferay.wsrp.consumer.admin", classLoader);
 
 			_marshaller = _jaxbContext.createMarshaller();
 

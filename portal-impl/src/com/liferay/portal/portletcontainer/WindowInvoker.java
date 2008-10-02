@@ -57,7 +57,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.wsrp.consumer.invoker.WSRPWindowInvoker;
+import com.liferay.wsrp.consumer.invoker.WSRPWindowInvoker;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.InvokerPortletImpl;

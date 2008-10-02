@@ -456,10 +456,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.wsrp">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.xml.SAXReaderImpl">
 		<priority value="WARN" />
 	</category>
@@ -593,6 +589,10 @@
 	</category>
 
 	<category name="com.liferay.util.servlet.ServletResponseUtil">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.wsrp">
 		<priority value="ERROR" />
 	</category>
 

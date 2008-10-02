@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.wsrp.producer.usermanager;
+package com.liferay.wsrp.producer.usermanager;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
