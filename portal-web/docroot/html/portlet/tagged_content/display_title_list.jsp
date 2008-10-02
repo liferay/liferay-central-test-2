@@ -50,13 +50,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 
 	summary = entry.getTitle();
 
-	PortletURL entryURL = renderResponse.createRenderURL();
-
-	entryURL.setParameter("struts_action", "/tagged_content/view_content");
-	entryURL.setParameter("redirect", currentURL);
-	entryURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
-
-	viewURL = entryURL.toString();
+	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId();
 
 	viewURLMessage = "read-more";
 }
@@ -138,27 +132,14 @@ else if (className.equals(JournalArticle.class.getName())) {
 else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
 
-	PortletURL pageURL = renderResponse.createRenderURL();
-
-	pageURL.setParameter("struts_action", "/message_boards/view_message");
-	pageURL.setParameter("messageId", String.valueOf(message.getMessageId()));
-
-	viewURL = pageURL.toString();
+	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId();
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
 	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
-
-	pageURL.setWindowState(WindowState.MAXIMIZED);
-	pageURL.setPortletMode(PortletMode.VIEW);
-
-	pageURL.setParameter("struts_action", "/wiki/view");
-	pageURL.setParameter("title", wikiPage.getTitle());
-
-	viewURL = pageURL.toString();
+	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey();
 }
 
 // URLs set through the asset override automatically generated URLs
