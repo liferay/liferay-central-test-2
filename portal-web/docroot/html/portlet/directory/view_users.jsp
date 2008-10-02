@@ -81,7 +81,7 @@ Long[] manageableOrganizationIds = null;
 				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 			</liferay-portlet:renderURL>
 
-			<%@ include file="/html/portlet/enterprise_admin/user_search_columns.jspf" %>
+			<%@ include file="/html/portlet/enterprise_admin/user/search_columns.jspf" %>
 		</liferay-ui:search-container-row>
 
 		<%
