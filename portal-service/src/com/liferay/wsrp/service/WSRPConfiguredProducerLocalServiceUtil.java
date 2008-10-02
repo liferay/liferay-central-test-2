@@ -22,6 +22,7 @@
 
 package com.liferay.wsrp.service;
 
+
 /**
  * <a href="WSRPConfiguredProducerLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *

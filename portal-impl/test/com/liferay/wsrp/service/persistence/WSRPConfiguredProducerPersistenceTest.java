@@ -24,6 +24,7 @@ package com.liferay.wsrp.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
 import com.liferay.wsrp.NoSuchConfiguredProducerException;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 

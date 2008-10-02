@@ -34,18 +34,19 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
 import com.liferay.wsrp.NoSuchConfiguredProducerException;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.model.impl.WSRPConfiguredProducerImpl;
 import com.liferay.wsrp.model.impl.WSRPConfiguredProducerModelImpl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WSRPConfiguredProducerPersistenceImpl.java.html"><b><i>View Source</i></b></a>

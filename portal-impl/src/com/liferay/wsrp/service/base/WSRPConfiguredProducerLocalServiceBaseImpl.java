@@ -25,6 +25,7 @@ package com.liferay.wsrp.service.base;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalService;
 import com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence;
