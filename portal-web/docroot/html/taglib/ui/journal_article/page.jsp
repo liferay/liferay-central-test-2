@@ -31,12 +31,9 @@
 
 <%
 long articleResourcePrimKey = GetterUtil.getLong((String)request.getAttribute("liferay-ui:journal-article:articleResourcePrimKey"));
-
-String articleId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:articleId"));
 long groupId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:journal-article:groupId"));
-
+String articleId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:articleId"));
 String templateId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:templateId"));
-
 String languageId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:languageId"), LanguageUtil.getLanguageId(request));
 int articlePage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:journal-article:articlePage"));
 String xmlRequest = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:xmlRequest"), PortletRequestUtil.toXML(portletRequest, portletResponse));
