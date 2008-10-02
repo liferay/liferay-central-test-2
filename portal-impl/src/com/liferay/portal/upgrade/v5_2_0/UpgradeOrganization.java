@@ -32,6 +32,7 @@ import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTypeUpgradeColumnImpl;
@@ -39,6 +40,7 @@ import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTypeUpgradeColumnImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 
 import java.util.List;
 
@@ -65,11 +67,15 @@ public class UpgradeOrganization extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		UpgradeColumn typeColumn = new OrganizationTypeUpgradeColumnImpl();
+		UpgradeColumn locationColumn = new TempUpgradeColumnImpl(
+			"location", new Integer(Types.BOOLEAN));
+
+		UpgradeColumn typeColumn = new OrganizationTypeUpgradeColumnImpl(
+			locationColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
-			typeColumn);
+			locationColumn, typeColumn);
 
 		upgradeTable.updateTable();
 

@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
  * <a href="OrganizationTypeUpgradeColumnImpl.java.html"><b><i>View Source</i>
@@ -33,12 +34,12 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
  */
 public class OrganizationTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public OrganizationTypeUpgradeColumnImpl() {
+	public OrganizationTypeUpgradeColumnImpl(UpgradeColumn locationColumn) {
 		super("type");
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Boolean type = (Boolean)oldValue;
+		Boolean type = (Boolean)_locationColumn.getOldValue();
 
 		if (type) {
 			return "location";
@@ -47,5 +48,7 @@ public class OrganizationTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			return "regular";
 		}
 	}
+
+	private UpgradeColumn _locationColumn;
 
 }
