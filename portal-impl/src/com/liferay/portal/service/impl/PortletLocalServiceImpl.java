@@ -57,8 +57,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
 
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
 

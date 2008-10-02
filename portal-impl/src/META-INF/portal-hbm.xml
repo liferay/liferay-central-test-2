@@ -1668,4 +1668,11 @@
 		<property name="receiverUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.wsrp.model.impl.WSRPConfiguredProducerImpl" table="WSRPConfiguredProducer">
+		<cache usage="read-write" />
+		<id name="configuredProducerId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 </hibernate-mapping>

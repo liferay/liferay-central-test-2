@@ -701,7 +701,7 @@ public class SourceFormatter {
 				"**\\portal\\service\\**", "**\\portal-client\\**",
 				"**\\portal-web\\test\\**\\*Test.java",
 				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
-				"**\\util-wsrp\\**"
+				"**\\wsrp\\service\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 

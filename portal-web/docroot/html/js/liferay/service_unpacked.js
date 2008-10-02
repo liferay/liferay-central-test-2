@@ -2959,3 +2959,7 @@ Liferay.Service.Wiki.WikiPage = {
 		return Liferay.Service.ajax(params, callback);
 	}
 };
+
+Liferay.Service.WSRP = {
+	servicePackage: "com.liferay.wsrp.service.http."
+};

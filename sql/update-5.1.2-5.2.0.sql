@@ -55,3 +55,8 @@ create table TagsVocabulary (
 	description VARCHAR(75) null,
 	folksonomy BOOLEAN
 );
+
+create table WSRPConfiguredProducer (
+	configuredProducerId LONG not null primary key,
+	name VARCHAR(75) null
+);

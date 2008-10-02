@@ -46,10 +46,10 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletSessionImpl;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowChannelURLFactory;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowInvoker;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowRequestReader;
-import com.liferay.portlet.PortletSessionImpl;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 5.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_5_1_0.dtd">
+
+<service-builder package-path="com.liferay.wsrp">
+	<namespace>WSRP</namespace>
+	<entity name="WSRPConfiguredProducer" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="configuredProducerId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+	</entity>
+</service-builder>

@@ -1682,4 +1682,8 @@
 		<field name="nodeId" type="long" />
 		<field name="title" type="String" />
 	</model>
+	<model name="com.liferay.wsrp.model.WSRPConfiguredProducer">
+		<field name="configuredProducerId" type="long" />
+		<field name="name" type="String" />
+	</model>
 </model-hints>

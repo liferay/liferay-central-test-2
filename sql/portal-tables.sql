@@ -1572,3 +1572,8 @@ create table WikiPageResource (
 	nodeId LONG,
 	title VARCHAR(75) null
 );
+
+create table WSRPConfiguredProducer (
+	configuredProducerId LONG not null primary key,
+	name VARCHAR(75) null
+);
