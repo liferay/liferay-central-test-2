@@ -16,6 +16,14 @@
 							column="${column.DBName}"
 						</#if>
 
+						<#if column.isPrimitiveType() || column.type == "String">
+							type="com.liferay.portal.dao.orm.hibernate.${serviceBuilder.getPrimitiveObj("${column.type}")}Type"
+						</#if>
+
+						<#if column.type == "Date">
+							type="org.hibernate.type.TimestampType"
+						</#if>
+
 						/>
 					</#list>
 				</composite-id>
