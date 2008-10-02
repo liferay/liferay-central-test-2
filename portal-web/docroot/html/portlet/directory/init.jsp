@@ -122,5 +122,7 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 
+boolean filterManageableOrganizations = false;
+
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

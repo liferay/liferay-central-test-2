@@ -96,51 +96,7 @@ if (filterManageableOrganizations) {
 				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 			</liferay-portlet:renderURL>
 
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="first-name"
-				orderable="<%= true %>"
-				property="firstName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="last-name"
-				orderable="<%= true %>"
-				property="lastName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="screen-name"
-				orderable="<%= true %>"
-				property="screenName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="job-title"
-				orderable="<%= true %>"
-				value="<%= user2.getContact().getJobTitle() %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				buffer="buffer"
-				href="<%= rowURL %>"
-				name="organizations"
-			>
-
-				<%
-				List organizations = user2.getOrganizations();
-
-				if (filterManageableOrganizations) {
-					organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
-				}
-
-				buffer.append(ListUtil.toString(organizations, "name", ", "));
-				%>
-
-			</liferay-ui:search-container-column-text>
+			<%@ include file="/html/portlet/enterprise_admin/user_search_columns.jspf" %>
 
 			<liferay-ui:search-container-column-jsp
 				align="right"
