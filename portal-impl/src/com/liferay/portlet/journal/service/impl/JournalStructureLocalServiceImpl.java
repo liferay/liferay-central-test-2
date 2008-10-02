@@ -288,7 +288,7 @@ public class JournalStructureLocalServiceImpl
 
 		addStructureResources(newStructure, true, true);
 
-		return null;
+		return newStructure;
 	}
 
 	public void deleteStructure(long groupId, String structureId)

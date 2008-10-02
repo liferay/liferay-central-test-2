@@ -713,7 +713,7 @@ public class JournalArticleLocalServiceImpl
 
 		updateTagsAsset(userId, newArticle, tagsEntries);
 
-		return null;
+		return newArticle;
 	}
 
 	public void deleteArticle(

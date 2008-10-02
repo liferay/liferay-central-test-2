@@ -342,7 +342,7 @@ public class JournalTemplateLocalServiceImpl
 
 		addTemplateResources(newTemplate, true, true);
 
-		return null;
+		return newTemplate;
 	}
 
 	public void deleteTemplate(long groupId, String templateId)
