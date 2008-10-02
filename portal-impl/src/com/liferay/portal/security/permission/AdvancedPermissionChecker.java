@@ -131,110 +131,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			_log.error(e, e);
 		}
 
-		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
-			user.getUserId(), groupId);
-
-		if (signedIn && (bag == null)) {
-			try {
-
-				// If we are checking permissions on an object that belongs to a
-				// community, then it's only necessary to check the group that
-				// represents the community and not all the groups that the user
-				// belongs to. This is so because an object cannot belong to
-				// more than one community.
-
-				List<Group> userGroups = new ArrayList<Group>();
-				//List<Group> userGroups = UserUtil.getGroups(userId);
-
-				if (groupId > 0) {
-					if (GroupLocalServiceUtil.hasUserGroup(
-							user.getUserId(), groupId)) {
-
-						userGroups.add(group);
-					}
-				}
-
-				List<Organization> userOrgs = getUserOrgs(user.getUserId());
-
-				List<Group> userOrgGroups =
-					GroupLocalServiceUtil.getOrganizationsGroups(userOrgs);
-
-				List<UserGroup> userUserGroups =
-					UserGroupLocalServiceUtil.getUserUserGroups(
-						user.getUserId());
-
-				List<Group> userUserGroupGroups =
-					GroupLocalServiceUtil.getUserGroupsGroups(userUserGroups);
-
-				List<Group> groups = new ArrayList<Group>(
-					userGroups.size() + userOrgGroups.size() +
-						userUserGroupGroups.size());
-
-				groups.addAll(userGroups);
-				groups.addAll(userOrgGroups);
-				groups.addAll(userUserGroupGroups);
-
-				List<Role> roles = new ArrayList<Role>(10);
-
-				if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
-					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
-					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
-
-					if (groups.size() > 0) {
-						roles = RoleLocalServiceUtil.getUserRelatedRoles(
-							user.getUserId(), groups);
-					}
-					else {
-						roles.addAll(
-							RoleLocalServiceUtil.getUserRoles(
-								user.getUserId()));
-					}
-
-					if (userGroups.size() > 0) {
-						Role role = RoleLocalServiceUtil.getRole(
-							user.getCompanyId(),
-							RoleConstants.COMMUNITY_MEMBER);
-
-						roles.add(role);
-					}
-
-					if (userOrgs.size() > 0) {
-						Role role = RoleLocalServiceUtil.getRole(
-							user.getCompanyId(),
-							RoleConstants.ORGANIZATION_MEMBER);
-
-						roles.add(role);
-					}
-
-					List<Role> userGroupRoles =
-						RoleLocalServiceUtil.getUserGroupRoles(
-							user.getUserId(), groupId);
-
-					roles.addAll(userGroupRoles);
-				}
-				else {
-					roles = new ArrayList<Role>();
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Creating bag for " + groupId + " " + name + " " +
-							primKey + " " + actionId + " takes " +
-								stopWatch.getTime() + " ms");
-				}
-
-				bag = new PermissionCheckerBagImpl(
-					user.getUserId(), userGroups, userOrgs, userOrgGroups,
-					userUserGroupGroups, groups, roles);
-
-				PermissionCacheUtil.putBag(
-					user.getUserId(), groupId, bag);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
-
 		Boolean value = PermissionCacheUtil.getPermission(
 			user.getUserId(), groupId, name, primKey, actionId);
 
@@ -407,6 +303,97 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		return resourceIds;
 	}
 
+	protected PermissionCheckerBag getUserBag(long userId, long groupId)
+		throws Exception {
+
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(userId, groupId);
+
+		if (bag != null) {
+			return bag;
+		}
+
+		// If we are checking permissions on an object that belongs to a
+		// community, then it's only necessary to check the group that
+		// represents the community and not all the groups that the user
+		// belongs to. This is so because an object cannot belong to
+		// more than one community.
+
+		List<Group> userGroups = new ArrayList<Group>();
+		//List<Group> userGroups = UserUtil.getGroups(userId);
+
+		if (groupId > 0) {
+			if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				userGroups.add(group);
+			}
+		}
+
+		List<Organization> userOrgs = getUserOrgs(userId);
+
+		List<Group> userOrgGroups =
+			GroupLocalServiceUtil.getOrganizationsGroups(userOrgs);
+
+		List<UserGroup> userUserGroups =
+			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+
+		List<Group> userUserGroupGroups =
+			GroupLocalServiceUtil.getUserGroupsGroups(userUserGroups);
+
+		List<Group> groups = new ArrayList<Group>(
+			userGroups.size() + userOrgGroups.size() +
+				userUserGroupGroups.size());
+
+		groups.addAll(userGroups);
+		groups.addAll(userOrgGroups);
+		groups.addAll(userUserGroupGroups);
+
+		List<Role> roles = new ArrayList<Role>(10);
+
+		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
+
+			if (groups.size() > 0) {
+				roles = RoleLocalServiceUtil.getUserRelatedRoles(
+					userId, groups);
+			}
+			else {
+				roles.addAll(RoleLocalServiceUtil.getUserRoles(userId));
+			}
+
+			if (userGroups.size() > 0) {
+				Role role = RoleLocalServiceUtil.getRole(
+					user.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+
+				roles.add(role);
+			}
+
+			if (userOrgs.size() > 0) {
+				Role role = RoleLocalServiceUtil.getRole(
+					user.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+
+				roles.add(role);
+			}
+
+			List<Role> userGroupRoles = RoleLocalServiceUtil.getUserGroupRoles(
+				userId, groupId);
+
+			roles.addAll(userGroupRoles);
+		}
+		else {
+			roles = new ArrayList<Role>();
+		}
+
+		bag = new PermissionCheckerBagImpl(
+			userId, userGroups, userOrgs, userOrgGroups,
+			userUserGroupGroups, groups, roles);
+
+		PermissionCacheUtil.putBag(userId, groupId, bag);
+
+		return bag;
+	}
+
 	protected List<Organization> getUserOrgs(long userId) throws Exception {
 		List<Organization> userOrgs =
 			OrganizationLocalServiceUtil.getUserOrganizations(userId);
@@ -574,8 +561,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		// individual class, then for the group that the class may belong
 		// to, and then for the company that the class belongs to.
 
-		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
-			user.getUserId(), groupId);
+		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
 
 		boolean value = PermissionLocalServiceUtil.hasUserPermissions(
 			user.getUserId(), groupId, actionId, resourceIds, bag);
@@ -631,8 +617,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return true;
 		}
 
-		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
-			user.getUserId(), groupId);
+		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
 
 		if (bag == null) {
 			_log.error("Bag should never be null");
@@ -665,8 +650,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return true;
 		}
 
-		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
-			user.getUserId(), groupId);
+		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
 
 		if (bag == null) {
 			_log.error("Bag should never be null");
