@@ -978,6 +978,12 @@ public class PropsValues {
 	public static final String[] SHARED_SESSION_ATTRIBUTES =
 		PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES);
 
+	public static final boolean SITEMINDER_AUTH_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.SITEMINDER_AUTH_ENABLED));
+
+	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(
+		PropsKeys.SITEMINDER_USER_HEADER);
+
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsKeys.STRUTS_PORTLET_REQUEST_PROCESSOR);
 
