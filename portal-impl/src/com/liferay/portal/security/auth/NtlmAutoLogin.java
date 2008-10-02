@@ -77,7 +77,7 @@ public class NtlmAutoLogin implements AutoLogin {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage());
+			_log.error(e, e);
 		}
 
 		return credentials;

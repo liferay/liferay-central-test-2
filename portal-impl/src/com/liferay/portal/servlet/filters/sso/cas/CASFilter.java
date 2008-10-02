@@ -67,13 +67,17 @@ public class CASFilter extends BaseFilter {
 				_filterName, _servletContext);
 
 			String serverName = PrefsPropsUtil.getString(
-				companyId, PropsKeys.CAS_SERVER_NAME);
+				companyId, PropsKeys.CAS_SERVER_NAME,
+				PropsValues.CAS_SERVER_NAME);
 			String serviceUrl = PrefsPropsUtil.getString(
-				companyId, PropsKeys.CAS_SERVICE_URL);
+				companyId, PropsKeys.CAS_SERVICE_URL,
+				PropsValues.CAS_SERVICE_URL);
 
 			config.addInitParameter(
 				edu.yale.its.tp.cas.client.filter.CASFilter.LOGIN_INIT_PARAM,
-				PrefsPropsUtil.getString(companyId, PropsKeys.CAS_LOGIN_URL));
+				PrefsPropsUtil.getString(
+					companyId, PropsKeys.CAS_LOGIN_URL,
+					PropsValues.CAS_LOGIN_URL));
 
 			if (Validator.isNotNull(serviceUrl)) {
 				config.addInitParameter(
@@ -91,7 +95,8 @@ public class CASFilter extends BaseFilter {
 			config.addInitParameter(
 				edu.yale.its.tp.cas.client.filter.CASFilter.VALIDATE_INIT_PARAM,
 				PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_VALIDATE_URL));
+					companyId, PropsKeys.CAS_VALIDATE_URL,
+					PropsValues.CAS_VALIDATE_URL));
 
 			casFilter.init(config);
 
@@ -124,7 +129,8 @@ public class CASFilter extends BaseFilter {
 					session.invalidate();
 
 					String logoutUrl = PrefsPropsUtil.getString(
-						companyId, PropsKeys.CAS_LOGOUT_URL);
+						companyId, PropsKeys.CAS_LOGOUT_URL,
+						PropsValues.CAS_LOGOUT_URL);
 
 					response.sendRedirect(logoutUrl);
 				}

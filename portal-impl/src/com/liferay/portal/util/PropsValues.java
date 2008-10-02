@@ -182,6 +182,24 @@ public class PropsValues {
 	public static final boolean CAS_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.CAS_AUTH_ENABLED));
 
+	public static final boolean CAS_IMPORT_FROM_LDAP = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.CAS_IMPORT_FROM_LDAP));
+
+	public static final String CAS_LOGIN_URL =
+		PropsUtil.get(PropsKeys.CAS_LOGIN_URL);
+
+	public static final String CAS_LOGOUT_URL =
+		PropsUtil.get(PropsKeys.CAS_LOGOUT_URL);
+
+	public static final String CAS_SERVER_NAME =
+		PropsUtil.get(PropsKeys.CAS_SERVER_NAME);
+
+	public static final String CAS_SERVICE_URL =
+		PropsUtil.get(PropsKeys.CAS_SERVICE_URL);
+
+	public static final String CAS_VALIDATE_URL =
+		PropsUtil.get(PropsKeys.CAS_VALIDATE_URL);
+
 	public static final boolean COMMONS_POOL_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.COMMONS_POOL_ENABLED));
 
@@ -755,6 +773,15 @@ public class PropsValues {
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT =
 		PropsUtil.get(PropsKeys.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
+	public static final boolean NTLM_AUTH_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.NTLM_AUTH_ENABLED));
+
+	public static final String NTLM_DOMAIN =
+		PropsUtil.get(PropsKeys.NTLM_DOMAIN);
+
+	public static final String NTLM_DOMAIN_CONTROLLER =
+		PropsUtil.get(PropsKeys.NTLM_DOMAIN_CONTROLLER);
+
 	public static final long[] OMNIADMIN_USERS = StringUtil.split(
 		PropsUtil.get(PropsKeys.OMNIADMIN_USERS), 0L);
 
@@ -980,6 +1007,10 @@ public class PropsValues {
 
 	public static final boolean SITEMINDER_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.SITEMINDER_AUTH_ENABLED));
+
+	public static final boolean SITEMINDER_IMPORT_FROM_LDAP =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SITEMINDER_IMPORT_FROM_LDAP));
 
 	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(
 		PropsKeys.SITEMINDER_USER_HEADER);

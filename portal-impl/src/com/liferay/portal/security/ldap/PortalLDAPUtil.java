@@ -905,7 +905,10 @@ public class PortalLDAPUtil {
 			return false;
 		}
 
-		if (PrefsPropsUtil.getBoolean(companyId, PropsKeys.NTLM_AUTH_ENABLED)) {
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.NTLM_AUTH_ENABLED,
+				PropsValues.NTLM_AUTH_ENABLED)) {
+
 			return true;
 		}
 		else {
@@ -919,6 +922,24 @@ public class PortalLDAPUtil {
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_PASSWORD_POLICY_ENABLED,
 				PropsValues.LDAP_PASSWORD_POLICY_ENABLED)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isSiteMinderEnabled(long companyId)
+		throws SystemException {
+
+		if (!isAuthEnabled(companyId)) {
+			return false;
+		}
+
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.SITEMINDER_AUTH_ENABLED,
+				PropsValues.SITEMINDER_AUTH_ENABLED)) {
 
 			return true;
 		}

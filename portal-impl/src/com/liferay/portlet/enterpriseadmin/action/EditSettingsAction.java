@@ -109,6 +109,9 @@ public class EditSettingsAction extends PortletAction {
 		else if (cmd.equals("updateSecurity")) {
 			updateSecurity(actionRequest);
 		}
+		else if (cmd.equals("updateSiteMinder")) {
+			updateSiteMinder(actionRequest, companyId, prefs);
+		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
 			if (!cmd.equals("updateLdap") && !cmd.equals("updateSecurity")) {
@@ -453,6 +456,26 @@ public class EditSettingsAction extends PortletAction {
 			company.getCompanyId(), authType, autoLogin, sendPassword,
 			strangers, strangersWithMx, strangersVerify,
 			company.isCommunityLogo());
+	}
+
+	protected void updateSiteMinder(
+			ActionRequest actionRequest, long companyId,
+			PortletPreferences prefs)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		boolean importFromLdap = ParamUtil.getBoolean(
+			actionRequest, "importFromLdap");
+		String userHeader = ParamUtil.getString(actionRequest, "userHeader");
+
+		prefs.setValue(
+			PropsKeys.SITEMINDER_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(
+			PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
+			String.valueOf(importFromLdap));
+		prefs.setValue(PropsKeys.SITEMINDER_USER_HEADER, userHeader);
+
+		prefs.store();
 	}
 
 }

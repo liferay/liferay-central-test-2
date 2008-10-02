@@ -130,7 +130,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			credentials[2] = Boolean.TRUE.toString();
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return credentials;

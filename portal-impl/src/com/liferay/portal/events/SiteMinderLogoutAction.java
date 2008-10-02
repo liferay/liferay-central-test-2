@@ -20,67 +20,70 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.auth;
+package com.liferay.portal.events;
 
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.OpenIdUtil;
+import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="OpenIdAutoLogin.java.html"><b><i>View Source</i></b></a>
+ * <a href="SiteMinderLogoutAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Mika Koivisto
  *
  */
-public class OpenIdAutoLogin implements AutoLogin {
+public class SiteMinderLogoutAction extends Action {
 
-	public String[] login(
-		HttpServletRequest request, HttpServletResponse response) {
-
-		String[] credentials = null;
-
+	public void run(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			if (!OpenIdUtil.isEnabled(companyId)) {
-				return credentials;
+			if (!PortalLDAPUtil.isSiteMinderEnabled(companyId)) {
+				return;
 			}
 
-			HttpSession session = request.getSession();
+			String domain = CookieKeys.getDomain(request);
 
-			Long userId = (Long)session.getAttribute(WebKeys.OPEN_ID_LOGIN);
+			Cookie smSessionCookie = new Cookie(_SMSESSION, StringPool.BLANK);
 
-			if (userId == null) {
-				return credentials;
+			if (Validator.isNotNull(domain)) {
+				smSessionCookie.setDomain(domain);
 			}
 
-			session.removeAttribute(WebKeys.OPEN_ID_LOGIN);
+			smSessionCookie.setMaxAge(0);
+			smSessionCookie.setPath(StringPool.SLASH);
 
-			User user = UserLocalServiceUtil.getUserById(
-				userId.longValue());
+			Cookie smIdentityCookie = new Cookie(_SMIDENTITY, StringPool.BLANK);
 
-			credentials = new String[3];
+			if (Validator.isNotNull(domain)) {
+				smIdentityCookie.setDomain(domain);
+			}
 
-			credentials[0] = String.valueOf(user.getUserId());
-			credentials[1] = user.getPassword();
-			credentials[2] = Boolean.TRUE.toString();
+			smIdentityCookie.setMaxAge(0);
+			smIdentityCookie.setPath(StringPool.SLASH);
+
+			CookieKeys.addCookie(response, smSessionCookie);
+			CookieKeys.addCookie(response, smIdentityCookie);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		return credentials;
 	}
 
-	private static Log _log = LogFactory.getLog(OpenIdAutoLogin.class);
+	private static final String _SMSESSION = "SMSESSION";
+
+	private static final String _SMIDENTITY = "SMIDENTITY";
+
+	private static Log _log = LogFactory.getLog(SiteMinderLogoutAction.class);
 
 }

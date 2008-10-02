@@ -22,57 +22,77 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.OpenIdUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="OpenIdAutoLogin.java.html"><b><i>View Source</i></b></a>
+ * <a href="SiteMinderAutoLogin.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Mika Koivisto
  *
  */
-public class OpenIdAutoLogin implements AutoLogin {
+public class SiteMinderAutoLogin extends CASAutoLogin {
 
 	public String[] login(
-		HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response)
+		throws AutoLoginException {
 
 		String[] credentials = null;
 
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			if (!OpenIdUtil.isEnabled(companyId)) {
+			if (!PortalLDAPUtil.isSiteMinderEnabled(companyId)) {
 				return credentials;
 			}
 
-			HttpSession session = request.getSession();
+			String screenName = request.getHeader(
+				PrefsPropsUtil.getString(
+					companyId, PropsKeys.SITEMINDER_USER_HEADER,
+					PropsValues.SITEMINDER_USER_HEADER));
 
-			Long userId = (Long)session.getAttribute(WebKeys.OPEN_ID_LOGIN);
-
-			if (userId == null) {
+			if (Validator.isNull(screenName)) {
 				return credentials;
 			}
 
-			session.removeAttribute(WebKeys.OPEN_ID_LOGIN);
+			User user = null;
 
-			User user = UserLocalServiceUtil.getUserById(
-				userId.longValue());
+			try {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
+			}
+			catch (NoSuchUserException nsue) {
+				if (PrefsPropsUtil.getBoolean(
+						companyId, PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
+						PropsValues.SITEMINDER_IMPORT_FROM_LDAP)) {
+
+					user = addUser(companyId, screenName);
+				}
+				else {
+					throw nsue;
+				}
+			}
 
 			credentials = new String[3];
 
 			credentials[0] = String.valueOf(user.getUserId());
 			credentials[1] = user.getPassword();
 			credentials[2] = Boolean.TRUE.toString();
+
+			return credentials;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -81,6 +101,6 @@ public class OpenIdAutoLogin implements AutoLogin {
 		return credentials;
 	}
 
-	private static Log _log = LogFactory.getLog(OpenIdAutoLogin.class);
+	private static Log _log = LogFactory.getLog(SiteMinderAutoLogin.class);
 
 }

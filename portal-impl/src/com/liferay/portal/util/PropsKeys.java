@@ -1002,11 +1002,11 @@ public class PropsKeys {
 	public static final String SHOPPING_ITEM_SHOW_AVAILABILITY = "shopping.item.show.availability";
 
 	public static final String SHUTDOWN_PROGRAMMATICALLY_EXIT = "shutdown.programmatically.exit";
-	
+
 	public static final String SITEMINDER_AUTH_ENABLED = "siteminder.auth.enabled";
 
-	public static final String SITEMINDER_IMPORT_FROM_LDAP = "siteminder.import.from.ldap";	
-	
+	public static final String SITEMINDER_IMPORT_FROM_LDAP = "siteminder.import.from.ldap";
+
 	public static final String SITEMINDER_USER_HEADER = "siteminder.user.header";
 
 	public static final String SOCIAL_BOOKMARK_POST_URL = "social.bookmark.post.url";

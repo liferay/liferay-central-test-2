@@ -40,7 +40,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 <c:choose>
 	<c:when test='<%= tabs2.equals("authentication") %>'>
 		<liferay-ui:tabs
-			names="general,ldap,cas,ntlm,open-id,open-sso"
+			names="general,ldap,cas,ntlm,open-id,open-sso,siteminder"
 			param="tabs3"
 			url="<%= portletURLString %>"
 		/>
@@ -66,7 +66,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_IMPORT_FROM_LDAP) %>' />
+						<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_IMPORT_FROM_LDAP, PropsValues.CAS_IMPORT_FROM_LDAP) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -74,7 +74,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="login-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL, PropsKeys.CAS_LOGIN_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -82,7 +82,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="logout-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL, PropsKeys.CAS_LOGOUT_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -90,7 +90,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="server-name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />serverName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />serverName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsKeys.CAS_SERVER_NAME) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -98,7 +98,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="service-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsKeys.CAS_SERVICE_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -106,7 +106,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="validate-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_VALIDATE_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_VALIDATE_URL, PropsKeys.CAS_VALIDATE_URL) %>" />
 					</td>
 				</tr>
 				</table>
@@ -122,7 +122,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -130,7 +130,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="domain-controller" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -138,7 +138,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="domain" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN) %>" />
 					</td>
 				</tr>
 				</table>
@@ -234,6 +234,40 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				<br />
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateOpenSSO');" />
+			</c:when>
+			<c:when test='<%= tabs3.equals("siteminder") %>'>
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="enabled" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITEMINDER_AUTH_ENABLED, PropsValues.SITEMINDER_AUTH_ENABLED) %>' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="import-siteminder-users-from-ldap" />
+
+						<liferay-ui:icon-help message="import-siteminder-users-from-ldap-help" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITEMINDER_IMPORT_FROM_LDAP, PropsValues.SITEMINDER_IMPORT_FROM_LDAP) %>' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="user-header" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />userHeader" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.SITEMINDER_USER_HEADER, PropsValues.SITEMINDER_USER_HEADER) %>" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateSiteMinder');" />
 			</c:when>
 			<c:otherwise>
 				<table class="lfr-table">

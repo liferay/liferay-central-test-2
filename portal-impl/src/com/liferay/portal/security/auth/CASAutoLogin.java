@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -63,9 +64,9 @@ public class CASAutoLogin implements AutoLogin {
 			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException {
 
-		try {
-			String[] credentials = null;
+		String[] credentials = null;
 
+		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
 			if (!PrefsPropsUtil.getBoolean(
@@ -77,39 +78,44 @@ public class CASAutoLogin implements AutoLogin {
 
 			HttpSession session = request.getSession();
 
-			String screenName =
-				(String)session.getAttribute(CASFilter.CAS_FILTER_USER);
+			String screenName = (String)session.getAttribute(
+				CASFilter.CAS_FILTER_USER);
 
-			if (screenName != null) {
-				User user = null;
-
-				try {
-					user = UserLocalServiceUtil.getUserByScreenName(
-						companyId, screenName);
-				}
-				catch (NoSuchUserException nsue) {
-					if (PrefsPropsUtil.getBoolean(
-							companyId, PropsKeys.CAS_IMPORT_FROM_LDAP)) {
-
-						user = addUser(companyId, screenName);
-					}
-					else {
-						throw nsue;
-					}
-				}
-
-				credentials = new String[3];
-
-				credentials[0] = String.valueOf(user.getUserId());
-				credentials[1] = user.getPassword();
-				credentials[2] = Boolean.TRUE.toString();
+			if (Validator.isNull(screenName)) {
+				return credentials;
 			}
+
+			User user = null;
+
+			try {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
+			}
+			catch (NoSuchUserException nsue) {
+				if (PrefsPropsUtil.getBoolean(
+						companyId, PropsKeys.CAS_IMPORT_FROM_LDAP,
+						PropsValues.CAS_IMPORT_FROM_LDAP)) {
+
+					user = addUser(companyId, screenName);
+				}
+				else {
+					throw nsue;
+				}
+			}
+
+			credentials = new String[3];
+
+			credentials[0] = String.valueOf(user.getUserId());
+			credentials[1] = user.getPassword();
+			credentials[2] = Boolean.TRUE.toString();
 
 			return credentials;
 		}
 		catch (Exception e) {
-			throw new AutoLoginException(e);
+			_log.error(e, e);
 		}
+
+		return credentials;
 	}
 
 	protected User addUser(long companyId, String screenName)
