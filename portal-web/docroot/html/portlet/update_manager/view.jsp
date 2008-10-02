@@ -81,7 +81,7 @@ List updatablePackageIds = new ArrayList();
 					headerNames.add("available-version");
 					headerNames.add(StringPool.BLANK);
 
-					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, pluginInstallerURL, headerNames, null);
+					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, renderResponse.createRenderURL(), headerNames, null);
 
 					List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
 
@@ -171,7 +171,7 @@ List updatablePackageIds = new ArrayList();
 							rowURL.setWindowState(WindowState.MAXIMIZED);
 
 							rowURL.setParameter("struts_action", "/plugin_installer/view");
-							rowURL.setParameter("referer", currentURL);
+							rowURL.setParameter("redirect", currentURL);
 							rowURL.setParameter("tabs1", "browse-repository");
 							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
 							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
