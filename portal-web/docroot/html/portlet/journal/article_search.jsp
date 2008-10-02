@@ -33,6 +33,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <liferay-ui:search-toggle
 	id="toggle_id_journal_article_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-articles"
 >
 	<table class="lfr-table">
 	<tr>
@@ -147,15 +148,13 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</table>
 </liferay-ui:search-toggle>
 
-<br />
+<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
+	<br />
 
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-articles" />" />
-
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
+	<div>
 		<input type="button" value="<liferay-ui:message key="add-article" />" onClick="<portlet:namespace />addArticle();" />
-	</c:if>
-</div>
+	</div>
+</c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<br />

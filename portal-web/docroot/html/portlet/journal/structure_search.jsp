@@ -33,6 +33,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 <liferay-ui:search-toggle
 	id="toggle_id_journal_structure_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-structures"
 >
 	<table class="lfr-table">
 	<tr>
@@ -62,13 +63,11 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 
 <br />
 
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-structures" />" />
-
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) %>">
+<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) %>">
+	<div>
 		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
-	</c:if>
-</div>
+	</div>
+</c:if>
 
 <script type="text/javascript">
 	function <portlet:namespace />addStructure() {

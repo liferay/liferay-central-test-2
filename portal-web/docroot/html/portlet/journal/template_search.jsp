@@ -33,6 +33,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 <liferay-ui:search-toggle
 	id="toggle_id_journal_template_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-templates"
 >
 	<table class="lfr-table">
 	<tr>
@@ -60,15 +61,13 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 	</table>
 </liferay-ui:search-toggle>
 
-<br />
+<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE) %>">
+	<br />
 
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-templates" />" />
-
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE) %>">
+	<div>
 		<input type="button" value="<liferay-ui:message key="add-template" />" onClick="<portlet:namespace />addTemplate();" />
-	</c:if>
-</div>
+	</div>
+</c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<br />

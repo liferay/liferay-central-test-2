@@ -33,6 +33,7 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 <liferay-ui:search-toggle
 	id="toggle_id_journal_feed_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-feeds"
 >
 	<table class="lfr-table">
 	<tr>
@@ -62,13 +63,11 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-feeds" />" />
-
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED) %>">
+<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED) %>">
+	<div>
 		<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
-	</c:if>
-</div>
+	</div>
+</c:if>
 
 <script type="text/javascript">
 	function <portlet:namespace />addFeed() {

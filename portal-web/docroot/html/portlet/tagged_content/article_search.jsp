@@ -45,6 +45,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 <liferay-ui:search-toggle
 	id="toggle_id_journal_article_search"
 	displayTerms="<%= displayTerms %>"
+	buttonLabel="search-articles"
 >
 	<table class="lfr-table">
 	<tr>
@@ -156,15 +157,32 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 	</table>
 </liferay-ui:search-toggle>
 
-<br />
+<script type="text/javascript">
+	var <portlet:namespace />configurationActionURL = "";
 
-<div>
-	<input type="button" value="<liferay-ui:message key="search-articles" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>')" />
-</div>
+	Liferay.Util.actsAsAspect(window);
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	window.before(
+		"<portlet:namespace />selectAsset",
+		function() {
+			var fm = jQuery(document.<portlet:namespace />fm);
+
+			fm.attr("action", <portlet:namespace />configurationActionURL);
+		}
+	);
+
+	jQuery(
+		function() {
+			var fm = jQuery(document.<portlet:namespace />fm);
+
+			<portlet:namespace />configurationActionURL = fm.attr("action");
+
+			fm.attr("action", '<%= portletURL.toString() %>');
+		}
+	);
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.ARTICLE_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
-	</script>
-</c:if>
+	</c:if>
+</script>
