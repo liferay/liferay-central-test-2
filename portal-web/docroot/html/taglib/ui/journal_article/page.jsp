@@ -36,7 +36,11 @@ String articleId = GetterUtil.getString((String)request.getAttribute("liferay-ui
 String templateId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:templateId"));
 String languageId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:languageId"), LanguageUtil.getLanguageId(request));
 int articlePage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:journal-article:articlePage"));
-String xmlRequest = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:xmlRequest"), PortletRequestUtil.toXML(portletRequest, portletResponse));
+String xmlRequest = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:xmlRequest"));
+
+if (Validator.isNull(xmlRequest) && (portletRequest != null) && (portletResponse != null)) {
+	xmlRequest = PortletRequestUtil.toXML(portletRequest, portletResponse);
+}
 
 boolean showTitle = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-article:showTitle"));
 boolean showAvailableLocales = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-article:showAvailableLocales"));
