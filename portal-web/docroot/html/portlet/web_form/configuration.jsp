@@ -56,30 +56,39 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 		var labelA = jQuery('#<portlet:namespace/>fieldLabel' + index);
 		var optionalA = jQuery('#<portlet:namespace/>fieldOptional' + index);
 		var optionsA = jQuery('#<portlet:namespace/>fieldOptions' + index);
-		var validationScriptA = jQuery('#<portlet:namespace/>fieldValidationScript' + index);
-		var validationErrorMessageA = jQuery('#<portlet:namespace/>fieldValidationErrorMessage' + index)
+
+		<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+			var validationScriptA = jQuery('#<portlet:namespace/>fieldValidationScript' + index);
+			var validationErrorMessageA = jQuery('#<portlet:namespace/>fieldValidationErrorMessage' + index)
+		</c:if>
 
 		var legendSpanB = jQuery('#<portlet:namespace/>fieldset' + (index + 1) + ' legend span');
 		var typeB = jQuery('#<portlet:namespace/>fieldType' + (index + 1));
 		var labelB = jQuery('#<portlet:namespace/>fieldLabel' + (index + 1));
 		var optionalB = jQuery('#<portlet:namespace/>fieldOptional' + (index + 1));
 		var optionsB = jQuery('#<portlet:namespace/>fieldOptions' + (index + 1));
-		var validationErrorMessageB = jQuery('#<portlet:namespace/>fieldValidationErrorMessage' + (index + 1));
-		var validationScriptB = jQuery('#<portlet:namespace/>fieldValidationScript' + (index + 1));
+
+		<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+			var validationErrorMessageB = jQuery('#<portlet:namespace/>fieldValidationErrorMessage' + (index + 1));
+			var validationScriptB = jQuery('#<portlet:namespace/>fieldValidationScript' + (index + 1));
+		</c:if>
 
 		if (index < jQuery('#<portlet:namespace/>webFields>fieldset').length) {
 			<portlet:namespace />swapTexts(legendSpanA, legendSpanB);
 			<portlet:namespace />swapValues(typeA, typeB);
 			<portlet:namespace />swapValues(labelA, labelB);
 			<portlet:namespace />swapValues(optionsA, optionsB);
-			<portlet:namespace />swapValues(validationScriptA, validationScriptB);
-			<portlet:namespace />swapValues(validationErrorMessageA, validationErrorMessageB);
 
-			jQuery(".validation-script").each(
-				function() {
-					<portlet:namespace />swapFieldTexts(jQuery(this), "[" + (index + 1) + "]", "[" + index + "]");
-				}
-			);
+			<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+				<portlet:namespace />swapValues(validationScriptA, validationScriptB);
+				<portlet:namespace />swapValues(validationErrorMessageA, validationErrorMessageB);
+
+				jQuery(".validation-script").each(
+					function() {
+						<portlet:namespace />swapFieldTexts(jQuery(this), "[" + (index + 1) + "]", "[" + index + "]");
+					}
+				);
+			</c:if>
 
 			var tmpA = optionalA.attr('checked');
 			var tmpB = optionalB.attr('checked');
@@ -249,8 +258,13 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	String fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
 	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i);
 	String fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
-	String fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
-	String fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+	String fieldValidationScript = StringPool.BLANK;
+	String fieldValidationErrorMessage = StringPool.BLANK;
+
+	if (PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED) {
+		fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
+		fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+	}
 
 	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 	%>
@@ -336,68 +350,70 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				</c:choose>
 			</div>
 
-			<div>
-				<c:choose>
-					<c:when test="<%= !fieldsEditingDisabled %>">
-						<liferay-ui:error key='<%= "invalidValidationDefinition" + i %>' message="please-enter-both-the-validation-code-and-the-error-message" />
+			<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+				<div>
+					<c:choose>
+						<c:when test="<%= !fieldsEditingDisabled %>">
+							<liferay-ui:error key='<%= "invalidValidationDefinition" + i %>' message="please-enter-both-the-validation-code-and-the-error-message" />
 
-						<c:if test="<%= Validator.isNull(fieldValidationScript) %>">
-							<div class="ctrl-holder" id="<portlet:namespace />inputValidationLink<%= i %>" >
-								<a href="javascript: <portlet:namespace />inputValidationConfigure<%= i %>();"><liferay-ui:message key="validation" /> &raquo;</a>
+							<c:if test="<%= Validator.isNull(fieldValidationScript) %>">
+								<div class="ctrl-holder" id="<portlet:namespace />inputValidationLink<%= i %>" >
+									<a href="javascript: <portlet:namespace />inputValidationConfigure<%= i %>();"><liferay-ui:message key="validation" /> &raquo;</a>
+								</div>
+
+								<script type="text/javascript">
+									function <portlet:namespace />inputValidationConfigure<%= i %>() {
+										document.getElementById("<portlet:namespace />inputValidation<%= i %>").style.display = "";
+										document.getElementById("<portlet:namespace />inputValidationLink<%= i %>").style.display = "none";
+									}
+								</script>
+							</c:if>
+
+							<div id='<portlet:namespace />inputValidation<%= i %>' style='<%= Validator.isNull(fieldValidationScript) ? "display:none" : "" %>'>
+								<div class="ctrl-holder">
+									<table>
+									<tr>
+										<td>
+											<label for="<portlet:namespace/>fieldValidationScript<%= i %>"><liferay-ui:message key="validation-script" /></label>
+
+											<textarea class="lfr-textarea validation-script" cols="80" id="<portlet:namespace />fieldValidationScript<%= i %>" name="<portlet:namespace />fieldValidationScript<%= i %>" style="width: 95%" wrap="off"><%= fieldValidationScript %></textarea>
+										</td>
+										<td>
+											<div class="syntax-help"  >
+												<liferay-util:include page="/html/portlet/web_form/script_help.jsp" />
+											</div>
+										</td>
+									</tr>
+									</table>
+								</div>
+								<div class="ctrl-holder">
+									<label for="<portlet:namespace/>fieldValidationErrorMessage<%= i %>"><liferay-ui:message key="validation-error-message" /></label>
+
+									<input class="lfr-input-text" id="<portlet:namespace />fieldValidationErrorMessage<%= i %>" name="<portlet:namespace />fieldValidationErrorMessage<%= i %>" size="80" type="text" value="<%= fieldValidationErrorMessage %>" />
+								</div>
 							</div>
-
-							<script type="text/javascript">
-								function <portlet:namespace />inputValidationConfigure<%= i %>() {
-									document.getElementById("<portlet:namespace />inputValidation<%= i %>").style.display = "";
-									document.getElementById("<portlet:namespace />inputValidationLink<%= i %>").style.display = "none";
-								}
-							</script>
-						</c:if>
-
-						<div id='<portlet:namespace />inputValidation<%= i %>' style='<%= Validator.isNull(fieldValidationScript) ? "display:none" : "" %>'>
+						</c:when>
+						<c:when test="<%= Validator.isNotNull(fieldValidationScript) %>">
 							<div class="ctrl-holder">
-								<table>
-								<tr>
-									<td>
-										<label for="<portlet:namespace/>fieldValidationScript<%= i %>"><liferay-ui:message key="validation-script" /></label>
+								<label class="optional"><liferay-ui:message key="validation" /></label>
 
-										<textarea class="lfr-textarea validation-script" cols="80" id="<portlet:namespace />fieldValidationScript<%= i %>" name="<portlet:namespace />fieldValidationScript<%= i %>" style="width: 95%" wrap="off"><%= fieldValidationScript %></textarea>
-									</td>
-									<td>
-										<div class="syntax-help"  >
-											<liferay-util:include page="/html/portlet/web_form/script_help.jsp" />
-										</div>
-									</td>
-								</tr>
-								</table>
+								<pre><%= fieldValidationScript %></pre>
+
+								<liferay-ui:message key="validation-error-message" />:
+
+								<b><%= fieldValidationErrorMessage %></b>
 							</div>
+						</c:when>
+						<c:otherwise>
 							<div class="ctrl-holder">
-								<label for="<portlet:namespace/>fieldValidationErrorMessage<%= i %>"><liferay-ui:message key="validation-error-message" /></label>
+								<label class="optional"><liferay-ui:message key="validation" /></label>
 
-								<input class="lfr-input-text" id="<portlet:namespace />fieldValidationErrorMessage<%= i %>" name="<portlet:namespace />fieldValidationErrorMessage<%= i %>" size="80" type="text" value="<%= fieldValidationErrorMessage %>" />
+								<b><liferay-ui:message key="this-field-does-not-have-any-specific-validation" /></b>
 							</div>
-						</div>
-					</c:when>
-					<c:when test="<%= Validator.isNotNull(fieldValidationScript) %>">
-						<div class="ctrl-holder">
-							<label class="optional"><liferay-ui:message key="validation" /></label>
-
-							<pre><%= fieldValidationScript %></pre>
-
-							<liferay-ui:message key="validation-error-message" />:
-
-							<b><%= fieldValidationErrorMessage %></b>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="ctrl-holder">
-							<label class="optional"><liferay-ui:message key="validation" /></label>
-
-							<b><liferay-ui:message key="this-field-does-not-have-any-specific-validation" /></b>
-						</div>
-					</c:otherwise>
-				</c:choose>
-			</div>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</c:if>
 		</fieldset>
 
 	<%
@@ -407,8 +423,11 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 		fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
 		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
 		fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
-		fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
-		fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+
+		if (PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED) {
+			fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
+			fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+		}
 	}
 	%>
 

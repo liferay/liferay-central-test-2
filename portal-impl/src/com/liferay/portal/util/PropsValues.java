@@ -1062,6 +1062,10 @@ public class PropsValues {
 	public static final boolean USERS_UPDATE_LAST_LOGIN =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_UPDATE_LAST_LOGIN));
 
+	public static final boolean WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED));
+
 	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.WEB_SERVER_DISPLAY_NODE));
 
