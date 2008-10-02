@@ -244,17 +244,17 @@
 	<class name="com.liferay.portal.model.impl.OrgGroupPermissionImpl" table="OrgGroupPermission">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.OrgGroupPermissionPK">
-			<key-property name="organizationId" />
-			<key-property name="groupId" />
-			<key-property name="permissionId" />
+			<key-property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="permissionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 	</class>
 	<class name="com.liferay.portal.model.impl.OrgGroupRoleImpl" table="OrgGroupRole">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.OrgGroupRolePK">
-			<key-property name="organizationId" />
-			<key-property name="groupId" />
-			<key-property name="roleId" />
+			<key-property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 	</class>
 	<class name="com.liferay.portal.model.impl.OrgLaborImpl" table="OrgLabor">
@@ -524,9 +524,9 @@
 	<class name="com.liferay.portal.model.impl.UserGroupRoleImpl" table="UserGroupRole">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserGroupRolePK">
-			<key-property name="userId" />
-			<key-property name="groupId" />
-			<key-property name="roleId" />
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 	</class>
 	<class name="com.liferay.portal.model.impl.UserIdMapperImpl" table="UserIdMapper">
