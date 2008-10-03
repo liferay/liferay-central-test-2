@@ -25,10 +25,12 @@ package com.liferay.portal.mirage.aop;
 import com.sun.saw.Workflow;
 import com.sun.saw.WorkflowException;
 import com.sun.saw.WorkflowFactory;
-import com.sun.saw.vo.OutputVO;
 import com.sun.saw.vo.SaveTaskVO;
 
 import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -149,9 +151,9 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 		return workflowFactory.getWorkflowInstance(properties);
 	}
 
-	protected OutputVO processWorkflow() {
-		if ((_outputVO != null) || _outputVOCheckFailed) {
-			return _outputVO;
+	protected void processWorkflow() {
+		if (_outputVOError) {
+			return;
 		}
 
 		try {
@@ -159,16 +161,18 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 
 			SaveTaskVO saveTaskVO = new SaveTaskVO();
 
-			_outputVO = workflow.saveTasks(saveTaskVO);
+			workflow.saveTasks(saveTaskVO);
 		}
 		catch (WorkflowException we) {
-			_outputVOCheckFailed = true;
-		}
+			_outputVOError = true;
 
-		return _outputVO;
+			_log.error(we, we);
+		}
 	}
 
-	private static OutputVO _outputVO;
-	private static boolean _outputVOCheckFailed = false;
+	private static Log _log =
+		LogFactory.getLog(JournalArticleLocalServiceAspect.class);
+
+	private boolean _outputVOError;
 
 }
