@@ -25,7 +25,7 @@ $languageUtil.get($company.getCompanyId(), $locale, $lang_key)#end
 $dateUtil.getCurrentDate($date_format, $locale)#end
 
 #macro(ie6_png_fix)
-#if ($browserSniffer.is_ie_6($request) || $browserSniffer.is_ie_5_5($request))
+#if ($browserSniffer.isIe($request) && $browserSniffer.getMajorVersion($request) < 7)
 /* ---------- IE6 PNG image fix ---------- */
 img, .png{
 	position: relative;
