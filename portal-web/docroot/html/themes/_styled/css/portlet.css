@@ -36,17 +36,6 @@ body.portlet {
 	top: 5px;
 }
 
-.portlet-icons nobr {
-	display: block;
-	float: left;
-	min-width: 0;
-	padding: 1px;
-}
-
-.ie .portlet-icons nobr {
-	zoom: 1;
-}
-
 .portlet-content, .portlet-minimized .portlet-content-container {
 	padding: 12px 10px 10px;
 }
@@ -121,8 +110,8 @@ body.portlet {
 /* ---------- Error messages ---------- */
 
 .portlet-msg-error {
-	background: #FDD url(../images/messages/error.png) no-repeat 6px 50%;
-	border: 1px solid #F00;
+	background: #fdd url(../images/messages/error.png) no-repeat 6px 50%;
+	border: 1px solid #f00;
 	display: block;
 	font-weight: bold;
 	margin: 2px auto 14px;
@@ -133,8 +122,8 @@ body.portlet {
 /* ---------- Warning messages ---------- */
 
 .portlet-msg-alert {
-	background: #FFC url(../images/messages/alert.png) no-repeat 6px 20%;
-	border: 1px solid #FC0;
+	background: #ffc url(../images/messages/alert.png) no-repeat 6px 20%;
+	border: 1px solid #fc0;
 	display: block;
 	font-weight: bold;
 	margin: 2px auto 14px;
@@ -194,7 +183,7 @@ body.portlet {
 
 .portlet-section-selected, .portlet-section-selected a {
 	background: #727C81;
-	color: #FFF;
+	color: #fff;
 	font-weight: bold;
 	text-decoration: none;
 }
@@ -305,7 +294,7 @@ body.portlet {
 /* ---------- Miscellaneous portlet styles ---------- */
 
 .restricted, .restricted td {
-	background: #FDD;
+	background: #fdd;
 	border: none;
 }
 
@@ -342,7 +331,7 @@ body.portlet {
 }
 
 .lfr-actions, .lfr-actions ul {
-	background: #FFF url(../images/forms/button.png) repeat-x 0 100%;
+	background: #fff url(../images/forms/button.png) repeat-x 0 100%;
 	border: 1px solid;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 }
@@ -375,7 +364,7 @@ body.portlet {
 
 .lfr-actions .lfr-trigger li a:hover {
 	background-color: #828F95;
-	color: #FFF;
+	color: #fff;
 }
 
 .lfr-actions .lfr-trigger li a img {
@@ -399,7 +388,7 @@ body.portlet {
 
 .lfr-actions.portlet-options .lfr-trigger strong {
 	min-width: 0;
-	padding: 1px;
+	padding: 1px 3px;
 }
 
 .lfr-actions.portlet-options .lfr-trigger strong span {
@@ -424,12 +413,12 @@ body.portlet {
 
 .taglib-calendar tr td a {
 	background-color: #F0F5F7;
-	border: 1px solid #FFF;
+	border: 1px solid #fff;
 	border-bottom: none;
 	border-left: none;
 	display: block;
 	height: 15px;
-	padding: 5px 0;
+	padding: 5px 0pt;
 }
 
 .taglib-calendar table td {
@@ -438,11 +427,11 @@ body.portlet {
 
 .taglib-calendar tr td a:hover {
 	background-color: #727C81;
-	color: #FFF;
+	color: #fff;
 }
 
 .taglib-calendar .calendar-current-day, .taglib-calendar .calendar-current-day a {
-	background-color: #FFF;
+	background-color: #fff;
 }
 
 .taglib-calendar .calendar-current-day a {
@@ -452,12 +441,17 @@ body.portlet {
 }
 
 .taglib-calendar tr td.calendar-inactive {
-	background-color: #FFF;
+	background-color: #fff;
 	color: #B5BFC4;
 }
 
 .taglib-calendar tr th {
 	border-bottom-color: #D7D7D7;
+}
+
+.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
+	border-left: none;
+	border-right: none;
 }
 
 .ie .taglib-calendar tr td.first a {

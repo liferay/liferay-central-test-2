@@ -15,7 +15,7 @@ legend {
 }
 
 input {
-	background: #FFF;
+	background: #fff;
 }
 
 input[type="text"], input[type="password"], input[type="file"],input[type="submit"], input[type="button"], input[type="reset"], select, textarea, .textarea {
@@ -73,6 +73,6 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
 }
 
 input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
-	background: #FFC none;
-	border: 1px solid #FC0;
+	background: #ffc none;
+	border: 1px solid #fc0;
 }
