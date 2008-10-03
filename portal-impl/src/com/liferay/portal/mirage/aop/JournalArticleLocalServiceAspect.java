@@ -37,6 +37,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * </b></a>
  *
  * @author Joshna Reddy
+ * @author Raymond Augé
  *
  */
 public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
@@ -149,19 +150,25 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 	}
 
 	protected OutputVO processWorkflow() {
-		OutputVO outputVO = null;
+		if ((_outputVO != null) || _outputVOCheckFailed) {
+			return _outputVO;
+		}
 
 		try {
 			Workflow workflow = getWorkflow();
 
 			SaveTaskVO saveTaskVO = new SaveTaskVO();
 
-			outputVO = workflow.saveTasks(saveTaskVO);
+			_outputVO = workflow.saveTasks(saveTaskVO);
 		}
 		catch (WorkflowException we) {
+			_outputVOCheckFailed = true;
 		}
 
-		return outputVO;
+		return _outputVO;
 	}
+
+	private static OutputVO _outputVO;
+	private static boolean _outputVOCheckFailed = false;
 
 }
