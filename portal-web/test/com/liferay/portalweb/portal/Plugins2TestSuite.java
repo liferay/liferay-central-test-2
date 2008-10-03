@@ -42,7 +42,6 @@ import com.liferay.portalweb.portlet.sunbookmark.SunBookmarkTests;
 import com.liferay.portalweb.portlet.sunelluminate.SunElluminateTests;
 import com.liferay.portalweb.portlet.sunflickr.SunFlickrTests;
 import com.liferay.portalweb.portlet.suniframe.SunIFrameTests;
-import com.liferay.portalweb.portlet.sunjsr286test.Sunjsr286testTests;
 import com.liferay.portalweb.portlet.sunmashup.SunMashupTests;
 import com.liferay.portalweb.portlet.sunnotepad.SunNotepadTests;
 import com.liferay.portalweb.portlet.sunphotoshowajax.SunPhotoShowAjaxTests;
@@ -58,7 +57,6 @@ import com.liferay.portalweb.portlet.sunyoutube.SunYoutubeTests;
 import com.liferay.portalweb.portlet.twitter.TwitterTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
 import com.liferay.portalweb.portlet.westminstercatechism.WestminsterCatechismTests;
-
 
 /**
  * <a href="Plugins2TestSuite.java.html"><b><i>View Source</i></b></a>
@@ -93,7 +91,6 @@ public class Plugins2TestSuite extends BaseTests {
 		addTestSuite(SunElluminateTests.class);
 		addTestSuite(SunFlickrTests.class);
 		addTestSuite(SunIFrameTests.class);
-            //addTestSuite(Sunjsr286testTests.class);
 		addTestSuite(SunMashupTests.class);
 		addTestSuite(SunNotepadTests.class);
 		addTestSuite(SunPhotoShowAjaxTests.class);
