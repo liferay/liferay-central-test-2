@@ -36,6 +36,17 @@ body.portlet {
 	top: 5px;
 }
 
+.portlet-icons nobr {
+	display: block;
+	float: left;
+	min-width: 0;
+	padding: 1px;
+}
+
+.ie .portlet-icons nobr {
+	zoom: 1;
+}
+
 .portlet-content, .portlet-minimized .portlet-content-container {
 	padding: 12px 10px 10px;
 }
