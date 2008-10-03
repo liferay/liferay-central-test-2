@@ -151,7 +151,7 @@ public class EditExpandoAction extends PortletAction {
 			String[] values = StringUtil.split(
 				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
 
-			value = StringUtil.split(ParamUtil.getString(actionRequest, name));
+			value = StringUtil.merge(values);
 		}
 		else {
 			value = ParamUtil.getString(actionRequest, name);

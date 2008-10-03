@@ -301,7 +301,7 @@ public class ResourceActionsUtil {
 			}
 		}
 
-		List<Role> roles = new ArrayList();
+		List<Role> roles = new ArrayList<Role>();
 
 		for (int type : types) {
 			for (Role role : allRoles) {

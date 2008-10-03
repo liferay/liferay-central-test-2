@@ -77,6 +77,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
+ * @deprecated
+ *
  */
 public class UpgradeResource extends UpgradeProcess {
 

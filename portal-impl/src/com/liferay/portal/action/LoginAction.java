@@ -25,7 +25,6 @@ package com.liferay.portal.action;
 import com.liferay.portal.CookieNotSupportedException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PasswordExpiredException;
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
@@ -87,7 +86,7 @@ public class LoginAction extends Action {
 
 	public static String getLogin(
 			HttpServletRequest request, String paramName, Company company)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String login = request.getParameter(paramName);
 

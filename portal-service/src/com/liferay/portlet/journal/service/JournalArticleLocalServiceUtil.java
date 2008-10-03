@@ -467,8 +467,7 @@ public class JournalArticleLocalServiceUtil {
 		com.liferay.portlet.journal.model.JournalArticle article,
 		java.lang.String templateId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService()
 				   .getArticleContent(article, templateId, languageId,
 			themeDisplay);
@@ -545,8 +544,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String templateId, java.lang.String languageId, int page,
 		java.lang.String xmlRequest,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService()
 				   .getArticleDisplay(article, templateId, languageId, page,
 			xmlRequest, themeDisplay);

@@ -219,7 +219,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public boolean hasFileEntryLock(long folderId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, RemoteException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
@@ -337,7 +337,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public boolean verifyFileEntryLock(
 			long folderId, String name, String lockUuid)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, RemoteException {
 
 		boolean verified = false;
 

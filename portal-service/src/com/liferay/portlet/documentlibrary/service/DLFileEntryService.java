@@ -112,8 +112,7 @@ public interface DLFileEntryService {
 			com.liferay.portal.SystemException;
 
 	public boolean hasFileEntryLock(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
@@ -146,6 +145,5 @@ public interface DLFileEntryService {
 
 	public boolean verifyFileEntryLock(long folderId, java.lang.String name,
 		java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

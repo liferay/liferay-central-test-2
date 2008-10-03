@@ -61,8 +61,7 @@ import org.apache.commons.logging.LogFactory;
 public class CASAutoLogin implements AutoLogin {
 
 	public String[] login(
-			HttpServletRequest request, HttpServletResponse response)
-		throws AutoLoginException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		String[] credentials = null;
 

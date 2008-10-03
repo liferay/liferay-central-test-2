@@ -49,6 +49,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated
+ *
  */
 public class UpgradePermission extends UpgradeProcess {
 
