@@ -137,7 +137,7 @@
 .js .interactive-mode h2 span {
 	background: url(../images/dock/left_bg.png) no-repeat 0 0;
 	border-right: 1px solid #34404F;
-	color: #fff;
+	color: #FFF;
 	display: block;
 	font-size: 1em;
 	height: 15px;
@@ -151,7 +151,7 @@
 }
 
 .js .interactive-mode ul {
-	background: #fff;
+	background: #FFF;
 	border: 1px solid;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 	display: none;
@@ -172,7 +172,7 @@
 	background-repeat: no-repeat;
 	display: block;
 	margin-left: 0;
-	padding: 5px 0px;
+	padding: 5px 0;
 	text-decoration: none;
 }
 
@@ -182,7 +182,7 @@
 }
 
 .js .interactive-mode li a:hover, .js .interactive-mode .my-places li.current a:hover {
-	color: #fff;
+	color: #FFF;
 }
 
 .js .interactive-mode .lfr-dock-list li.first {
@@ -250,12 +250,12 @@
 
 .js .interactive-mode li:hover a:hover, .js .interactive-mode li:hover > a, .js .interactive-mode li:hover > h3 > a {
 	background-color: #828F95;
-	color: #fff;
+	color: #FFF;
 }
 
 .ie6 .js .interactive-mode li a:hover {
 	background-color: #828F95;
-	color: #fff;
+	color: #FFF;
 }
 
 .js .interactive-mode .my-places ul li a.add-page {

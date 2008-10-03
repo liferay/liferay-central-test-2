@@ -10,6 +10,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	clear: both;
 }
 
 fieldset, img {
@@ -35,17 +36,16 @@ q:before, q:after {
 
 abbr, acronym {
 	border: 0;
-}
-
-body {
-	background-color: #fff;
-	font: 62.5%/1.6em Arial,Helvetica,Verdana,sans-serif;
+	border-bottom: 1px dotted #000;
+	cursor: help;
 }
 
 html {
 }
 
 body {
+	background-color: #FFF;
+	font: 62.5%/1.6em Arial,Helvetica,Verdana,sans-serif;
 }
 
 body.portal-popup {
@@ -55,15 +55,6 @@ body.portal-popup {
 
 body.portal-iframe {
 	padding: 0;
-}
-
-table {
-	clear: both;
-}
-
-abbr, acronym {
-	border-bottom: 1px dotted #000;
-	cursor: help;
 }
 
 blockquote, ul, ol, dl {
@@ -115,7 +106,7 @@ a {
 }
 
 a:hover {
-	color: #06c;
+	color: #06C;
 	text-decoration: none;
 }
 
@@ -170,7 +161,7 @@ code, pre {
 /* ---------- Staging area ---------- */
 
 body.staging {
-	border: 10px solid #f00;
+	border: 10px solid #F00;
 }
 
 .portal-iframe.staging {
@@ -195,6 +186,7 @@ body.staging {
 }
 
 #banner .logo {
+	margin: 0;
 }
 
 /* ---------- Alerts and popups ---------- */
@@ -204,19 +196,19 @@ body.staging {
 }
 
 .popup-alert-notice {
-	background-color: #ffc;
-	border-bottom-color: #fc0;
+	background-color: #FFC;
+	border-bottom-color: #FC0;
 }
 
 .popup-alert-warning {
-	background-color: #fdd;
-	border-bottom-color: #f00;
+	background-color: #FDD;
+	border-bottom-color: #F00;
 }
 
 /* ---------- Portal add content ---------- */
 
 .portal-add-content {
-	background: #fff;
+	background: #FFF;
 	text-align: left;
 	z-index: 20;
 }
@@ -228,7 +220,7 @@ body.staging {
 /* ---------- Portal tool tips ---------- */
 
 .portal-tool-tip {
-	background: #fff url(../images/forms/button.png) repeat-x 0 100%;
+	background: #FFF url(../images/forms/button.png) repeat-x 0 100%;
 	border: 1px solid;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 	color: #1E2529;
@@ -262,7 +254,7 @@ hr, .separator {
 /* ---------- Text highlighting ---------- */
 
 .highlight {
-	background: #ffc;
+	background: #FFC;
 	font-weight: bold;
 	padding: 0 1px;
 }

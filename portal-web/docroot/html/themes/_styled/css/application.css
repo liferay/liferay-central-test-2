@@ -30,12 +30,12 @@
 }
 
 .results-header th, .results-header td {
-	color: #fff;
+	color: #FFF;
 	padding: 5px 10px;
 }
 
 .results-header th a, .results-header td a {
-	color: #fff;
+	color: #FFF;
 }
 
 .ui-autocomplete-even, .results-row td {
@@ -66,7 +66,7 @@
 }
 
 .active-area {
-	background: #ffc;
+	background: #FFC;
 }
 
 .ui-proxy {
@@ -284,7 +284,7 @@
 .ui-tabs li a, .tabs li span {
 	background: #878F93 url(../images/application/tabs_bg.png) repeat-x 0 100%;
 	border-right: 1px solid #304049;
-	color: #fff;
+	color: #FFF;
 	display: block;
 	float: left;
 	padding: 10px;
@@ -306,7 +306,7 @@
 }
 
 .ui-tabs li.current a, .ui-tabs li.current span {
-	background: #fff;
+	background: #FFF;
 	border: 1px solid #DEDEDE;
 	border-bottom: none;
 	color: #369;
@@ -314,7 +314,7 @@
 }
 
 .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
-	background-color: #fff;
+	background-color: #FFF;
 }
 
 .ui-tabs .ui-tabs-disabled a {
@@ -344,14 +344,14 @@
 /* ---------- Dialog ---------- */
 
 .ui-dialog {
-	background-color: #fff;
+	background-color: #FFF;
 	border: 2px solid #828F95;
 	padding: 4px;
 }
 
 .ui-dialog .ui-dialog-titlebar {
 	background: #1E2529;
-	color: #fff;
+	color: #FFF;
 	font-size: 14px;
 	font-weight: bold;
 	min-height: 28px;
@@ -419,7 +419,7 @@
 /* ---------- Date picker ---------- */
 
 #ui-datepicker-div, .ui-datepicker-inline {
-	background: #fff;
+	background: #FFF;
 	border: 2px solid #828F95;
 	padding: 3px;
 	width: 185px;
@@ -473,7 +473,7 @@ img.ui-datepicker-trigger {
 }
 
 .ui-datepicker-links a {
-	color: #fff;
+	color: #FFF;
 	display: block;
 	margin: 0 5px;
 }
@@ -541,7 +541,7 @@ img.ui-datepicker-trigger {
 .ui-datepicker-header select {
 	background: #727C81;
 	border: 0;
-	color: #fff;
+	color: #FFF;
 	font-weight: bold;
 }
 
@@ -571,7 +571,7 @@ img.ui-datepicker-trigger {
 }
 
 .ui-datepicker .ui-datepicker-days-row {
-	background: #fff;
+	background: #FFF;
 	color: #727C81;
 }
 
@@ -581,16 +581,16 @@ img.ui-datepicker-trigger {
 
 .ui-datepicker-days-cell a {
 	background: #F0F5F7;
-	border: 1px solid #fff;
+	border: 1px solid #FFF;
 }
 
 .ui-datepicker-days-cell a:hover {
 	background-color: #727C81;
-	color: #fff;
+	color: #FFF;
 }
 
 .ui-datepicker-current-day a {
-	background-color: #fff;
+	background-color: #FFF;
 	border: 1px solid #727C81;
 	color: #369;
 }
@@ -598,7 +598,7 @@ img.ui-datepicker-trigger {
 .ui-datepicker-current-day a:hover {
 	background-color: #DFF4FF;
 	border-color: #AEB8BC;
-	color: #06c;
+	color: #06C;
 }
 
 .ui-datepicker .ui-datepicker-unselectable {
@@ -682,7 +682,7 @@ img.ui-datepicker-trigger {
 }
 
 .ui-colorpicker-current {
-	background: #fff;
+	background: #FFF;
 	border: 2px solid #727C81;
 	height: 60px;
 	position: absolute;
@@ -851,10 +851,6 @@ img.ui-datepicker-trigger {
 	margin-top: 4px;
 }
 
-.treeview li {
-	list-style-type: none;
-}
-
 .treeview .hitarea {
 	background: url(../images/trees/treeview_bg.png) -64px -25px no-repeat;
 	cursor: pointer;
@@ -871,12 +867,13 @@ img.ui-datepicker-trigger {
 
 .treeview li {
 	background: url(../images/trees/treeview_line.png) 0 0 no-repeat;
+	list-style-type: none;
 	margin: 0;
 	padding: 0 0 3px 16px;
 }
 
 .treeview a.selected {
-	background-color: #eee;
+	background-color: #EEE;
 }
 
 .treeview-control {
