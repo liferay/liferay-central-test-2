@@ -53,11 +53,11 @@ public class MBThreadServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, javax.portlet.PortletPreferences prefs,
+		long messageId, javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return getService().splitThread(messageId, prefs, themeDisplay);
+		return getService().splitThread(messageId, preferences, themeDisplay);
 	}
 
 	public static MBThreadService getService() {

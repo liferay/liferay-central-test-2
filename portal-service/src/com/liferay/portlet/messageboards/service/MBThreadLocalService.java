@@ -144,7 +144,7 @@ public interface MBThreadLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, javax.portlet.PortletPreferences prefs,
+		long messageId, javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

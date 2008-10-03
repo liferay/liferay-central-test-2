@@ -90,7 +90,7 @@ public class RoleSearch extends SearchContainer<Role> {
 			RoleDisplayTerms.TYPE, String.valueOf(displayTerms.getType()));
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					renderRequest);
 
@@ -102,17 +102,17 @@ public class RoleSearch extends SearchContainer<Role> {
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {
 
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-col",
 					orderByCol);
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-type",
 					orderByType);
 			}
 			else {
-				orderByCol = prefs.getValue(
+				orderByCol = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-col", "name");
-				orderByType = prefs.getValue(
+				orderByType = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-type", "asc");
 			}
 

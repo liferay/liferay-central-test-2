@@ -50,7 +50,7 @@ public class EventRequestFactory {
 			HttpServletRequest request, Portlet portlet,
 			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
-			PortletPreferences prefs, long plid)
+			PortletPreferences preferences, long plid)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -72,7 +72,7 @@ public class EventRequestFactory {
 
 		eventRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, prefs, plid);
+			portletMode, preferences, plid);
 
 		return eventRequestImpl;
 	}

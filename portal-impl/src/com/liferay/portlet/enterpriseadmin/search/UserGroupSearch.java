@@ -82,7 +82,7 @@ public class UserGroupSearch extends SearchContainer<UserGroup> {
 			UserGroupDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					renderRequest);
 
@@ -94,18 +94,18 @@ public class UserGroupSearch extends SearchContainer<UserGroup> {
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {
 
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-col",
 					orderByCol);
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-type",
 					orderByType);
 			}
 			else {
-				orderByCol = prefs.getValue(
+				orderByCol = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-col",
 					"name");
-				orderByType = prefs.getValue(
+				orderByType = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-type",
 					"asc");
 			}

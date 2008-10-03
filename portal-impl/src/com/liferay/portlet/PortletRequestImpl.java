@@ -276,7 +276,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	public PortletPreferencesImpl getPreferencesImpl() {
-		return (PortletPreferencesImpl)_prefs;
+		return (PortletPreferencesImpl)_preferences;
 	}
 
 	public Map<String, String[]> getPrivateParameterMap() {
@@ -489,7 +489,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		HttpServletRequest request, Portlet portlet,
 		InvokerPortlet invokerPortlet, PortletContext portletContext,
 		WindowState windowState, PortletMode portletMode,
-		PortletPreferences prefs, long plid) {
+		PortletPreferences preferences, long plid) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -618,7 +618,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_portletContext = portletContext;
 		_windowState = windowState;
 		_portletMode = portletMode;
-		_prefs = prefs;
+		_preferences = preferences;
 		_portalSessionId = _request.getRequestedSessionId();
 		_session = new PortletSessionImpl(
 			_request, _portletName, _portletContext, _portalSessionId, plid);
@@ -758,7 +758,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_portletContext = null;
 		_windowState = null;
 		_portletMode = null;
-		_prefs = null;
+		_preferences = null;
 		_session = null;
 		_portalSessionId = null;
 		_remoteUser = null;
@@ -779,7 +779,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	private PortletContext _portletContext;
 	private WindowState _windowState;
 	private PortletMode _portletMode;
-	private PortletPreferences _prefs;
+	private PortletPreferences _preferences;
 	private PortletSessionImpl _session;
 	private String _portalSessionId;
 	private boolean _invalidSession;

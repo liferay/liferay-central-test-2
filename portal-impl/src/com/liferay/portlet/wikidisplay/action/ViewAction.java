@@ -60,13 +60,13 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletPreferences prefs = renderRequest.getPreferences();
+			PortletPreferences preferences = renderRequest.getPreferences();
 
 			long nodeId = GetterUtil.getLong(
-				prefs.getValue("node-id", StringPool.BLANK));
+				preferences.getValue("node-id", StringPool.BLANK));
 			String title = ParamUtil.getString(
 				renderRequest, "title",
-				prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
+				preferences.getValue("title", WikiPageImpl.FRONT_PAGE));
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 

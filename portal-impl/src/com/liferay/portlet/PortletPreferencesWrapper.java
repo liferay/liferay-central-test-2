@@ -45,44 +45,44 @@ public class PortletPreferencesWrapper
 	implements PortletPreferences, Serializable {
 
 	public PortletPreferencesWrapper(
-		PortletPreferences prefs, String lifecycle) {
+		PortletPreferences preferences, String lifecycle) {
 
-		_prefs = prefs;
+		_preferences = preferences;
 		_lifecycle = lifecycle;
 	}
 
 	public Map<String, String[]> getMap() {
-		return _prefs.getMap();
+		return _preferences.getMap();
 	}
 
 	public Enumeration<String> getNames() {
-		return _prefs.getNames();
+		return _preferences.getNames();
 	}
 
 	public String getValue(String key, String def) {
-		return _prefs.getValue(key, def);
+		return _preferences.getValue(key, def);
 	}
 
 	public void setValue(String key, String value) throws ReadOnlyException {
-		_prefs.setValue(key, value);
+		_preferences.setValue(key, value);
 	}
 
 	public String[] getValues(String key, String[] def) {
-		return _prefs.getValues(key, def);
+		return _preferences.getValues(key, def);
 	}
 
 	public void setValues(String key, String[] values)
 		throws ReadOnlyException {
 
-		_prefs.setValues(key, values);
+		_preferences.setValues(key, values);
 	}
 
 	public boolean isReadOnly(String key) {
-		return _prefs.isReadOnly(key);
+		return _preferences.isReadOnly(key);
 	}
 
 	public void reset(String key) throws ReadOnlyException {
-		_prefs.reset(key);
+		_preferences.reset(key);
 	}
 
 	public void store() throws IOException, ValidatorException {
@@ -91,7 +91,7 @@ public class PortletPreferencesWrapper
 			// Be strict to pass the TCK
 
 			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				_prefs.store();
+				_preferences.store();
 			}
 			else {
 				throw new IllegalStateException(
@@ -102,12 +102,12 @@ public class PortletPreferencesWrapper
 
 			// Relax so that poorly written portlets can still work
 
-			_prefs.store();
+			_preferences.store();
 		}
 	}
 
 	public PortletPreferencesImpl getPreferencesImpl() {
-		return (PortletPreferencesImpl)_prefs;
+		return (PortletPreferencesImpl)_preferences;
 	}
 
 	public boolean equals(Object obj) {
@@ -128,7 +128,7 @@ public class PortletPreferencesWrapper
 		}
 	}
 
-	private PortletPreferences _prefs;
+	private PortletPreferences _preferences;
 	private String _lifecycle;
 
 }

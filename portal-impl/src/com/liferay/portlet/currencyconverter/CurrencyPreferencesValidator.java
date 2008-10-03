@@ -41,10 +41,12 @@ import javax.portlet.ValidatorException;
  */
 public class CurrencyPreferencesValidator implements PreferencesValidator {
 
-	public void validate(PortletPreferences prefs) throws ValidatorException {
+	public void validate(PortletPreferences preferences)
+		throws ValidatorException {
+
 		List<String> badSymbols = new ArrayList<String>();
 
-		String[] symbols = prefs.getValues("symbols", new String[0]);
+		String[] symbols = preferences.getValues("symbols", new String[0]);
 
 		for (int i = 0; i < symbols.length; i++) {
 			Currency currency = CurrencyUtil.getCurrency(symbols[i]);

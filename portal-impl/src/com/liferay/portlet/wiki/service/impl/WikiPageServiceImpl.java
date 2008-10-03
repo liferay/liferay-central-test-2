@@ -80,7 +80,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public WikiPage addPage(
 			long nodeId, String title, String content, String summary,
-			boolean minorEdit, PortletPreferences prefs,
+			boolean minorEdit, PortletPreferences preferences,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -88,8 +88,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
 		return wikiPageLocalService.addPage(
-			getUserId(), nodeId, title, content, summary, minorEdit, prefs,
-			themeDisplay);
+			getUserId(), nodeId, title, content, summary, minorEdit,
+			preferences, themeDisplay);
 	}
 
 	public void addPageAttachments(
@@ -105,7 +105,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public void changeParent(
 			long nodeId, String title, String newParentTitle,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -115,7 +115,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		wikiPageLocalService.changeParent(
-			getUserId(), nodeId, title, newParentTitle, prefs, themeDisplay);
+			getUserId(), nodeId, title, newParentTitle, preferences,
+			themeDisplay);
 	}
 
 	public void deletePage(long nodeId, String title)
@@ -228,7 +229,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public void movePage(
 			long nodeId, String title, String newTitle,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -238,19 +239,19 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		wikiPageLocalService.movePage(
-			getUserId(), nodeId, title, newTitle, prefs, themeDisplay);
+			getUserId(), nodeId, title, newTitle, preferences, themeDisplay);
 	}
 
 	public WikiPage revertPage(
-			long nodeId, String title, double version, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			long nodeId, String title, double version,
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.revertPage(
-			getUserId(), nodeId, title, version, prefs, themeDisplay);
+			getUserId(), nodeId, title, version, preferences, themeDisplay);
 	}
 
 	public void subscribePage(long nodeId, String title)
@@ -275,7 +276,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			long nodeId, String title, double version, String content,
 			String summary, boolean minorEdit, String format,
 			String parentTitle, String redirectTitle, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -283,7 +284,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		return wikiPageLocalService.updatePage(
 			getUserId(), nodeId, title, version, content, summary, minorEdit,
-			format, parentTitle, redirectTitle, tagsEntries, prefs,
+			format, parentTitle, redirectTitle, tagsEntries, preferences,
 			themeDisplay);
 	}
 

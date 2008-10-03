@@ -45,20 +45,20 @@ public interface PortletDataHandler {
 
 	/**
 	 * Deletes the data created by the portlet. Can optionally return a modified
-	 * version of <code>prefs</code> if it contains reference to data that
+	 * version of <code>preferences</code> if it contains reference to data that
 	 * does not exist anymore.
 	 *
 	 * @param		context the context of the data deletion
 	 * @param		portletId the portlet id of the portlet
-	 * @param		prefs the portlet preferences of the portlet
+	 * @param		preferences the portlet preferences of the portlet
 	 *
-	 * @return		A modified version of prefs that should be saved. Null if
-	 *				the preferences were unmodified by this data handler.
+	 * @return		A modified version of preferences that should be saved. Null
+	 *				if the preferences were unmodified by this data handler.
 	 * @throws		PortletDataException
 	 */
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException;
 
 	/**
@@ -68,7 +68,7 @@ public interface PortletDataHandler {
 	 *
 	 * @param		context the context of the data export
 	 * @param		portletId the portlet id of the portlet
-	 * @param		prefs the portlet preferences of the portlet
+	 * @param		preferences the portlet preferences of the portlet
 	 * @return		A string of data to be placed in the LAR. It may be XML,
 	 *				but not necessarily. Null should be returned if no portlet
 	 *				data is to be written out.
@@ -76,7 +76,7 @@ public interface PortletDataHandler {
 	 */
 	public String exportData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException;
 
 	/**
@@ -102,21 +102,21 @@ public interface PortletDataHandler {
 	/**
 	 * Handles any special processing of the data when the portlet is imported
 	 * into a new layout. Can optionally return a modified version of
-	 * <code>prefs</code> to be saved in the new portlet.
+	 * <code>preferences</code> to be saved in the new portlet.
 	 *
 	 * @param		context the context of the data import
 	 * @param		portletId the portlet id of the portlet
-	 * @param		prefs the portlet preferences of the portlet
+	 * @param		preferences the portlet preferences of the portlet
 	 * @param		data the string data that was returned by
 	 *				<code>exportData()</code>
-	 * @return		A modified version of prefs that should be
+	 * @return		A modified version of preferences that should be
 	 *				saved. Null if the preferences were unmodified by this data
 	 *				handler.
 	 * @throws		PortletDataException
 	 */
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
+			PortletPreferences preferences, String data)
 		throws PortletDataException;
 
 	/**

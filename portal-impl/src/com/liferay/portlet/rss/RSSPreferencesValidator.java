@@ -40,10 +40,12 @@ import javax.portlet.ValidatorException;
  */
 public class RSSPreferencesValidator implements PreferencesValidator {
 
-	public void validate(PortletPreferences prefs) throws ValidatorException {
+	public void validate(PortletPreferences preferences)
+		throws ValidatorException {
+
 		List<String> badURLs = new ArrayList<String>();
 
-		String[] urls = prefs.getValues("urls", new String[0]);
+		String[] urls = preferences.getValues("urls", new String[0]);
 
 		for (String url : urls) {
 			try {

@@ -50,19 +50,19 @@ public class RenderRequestFactory {
 			HttpServletRequest request, Portlet portlet,
 			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
 		return create(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, prefs, 0);
+			portletMode, preferences, 0);
 	}
 
 	public static RenderRequestImpl create(
 			HttpServletRequest request, Portlet portlet,
 			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
-			PortletPreferences prefs, long plid)
+			PortletPreferences preferences, long plid)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -85,7 +85,7 @@ public class RenderRequestFactory {
 
 		renderRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, prefs, plid);
+			portletMode, preferences, plid);
 
 		return renderRequestImpl;
 	}

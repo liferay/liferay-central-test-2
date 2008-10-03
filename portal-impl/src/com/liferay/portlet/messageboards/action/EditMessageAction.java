@@ -183,7 +183,7 @@ public class EditMessageAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
@@ -242,8 +242,8 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
-					tagsEntries, prefs, communityPermissions, guestPermissions,
-					themeDisplay);
+					tagsEntries, preferences, communityPermissions,
+					guestPermissions, themeDisplay);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -256,7 +256,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, threadId, parentMessageId, subject, body, files,
-					anonymous, priority, tagsEntries, prefs,
+					anonymous, priority, tagsEntries, preferences,
 					communityPermissions, guestPermissions, themeDisplay);
 			}
 		}
@@ -276,7 +276,7 @@ public class EditMessageAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, subject, body, files, existingFiles, priority,
-				tagsEntries, prefs, themeDisplay);
+				tagsEntries, preferences, themeDisplay);
 
 			if (message.isRoot()) {
 				if (question) {

@@ -74,10 +74,10 @@ public class NewsUtil {
 		}
 	}
 
-	public static List<News> getNews(PortletPreferences prefs) {
+	public static List<News> getNews(PortletPreferences preferences) {
 		List<News> news = new ArrayList<News>();
 
-		for (Feed feed : getSelFeeds(prefs)) {
+		for (Feed feed : getSelFeeds(preferences)) {
 			news.add(getNews(feed.getFeedURL()));
 		}
 
@@ -108,12 +108,13 @@ public class NewsUtil {
 		return selCategories;
 	}
 
-	public static Set<Feed> getSelFeeds(PortletPreferences prefs) {
+	public static Set<Feed> getSelFeeds(PortletPreferences preferences) {
 		Map<String, Feed> feedMap = getFeedMap();
 
 		Set<Feed> selFeeds = new LinkedHashSet<Feed>();
 
-		String[] selFeedsArray = prefs.getValues("sel-feeds", new String[0]);
+		String[] selFeedsArray = preferences.getValues(
+			"sel-feeds", new String[0]);
 
 		for (String selFeed : selFeedsArray) {
 			Feed feed = feedMap.get(selFeed);

@@ -1767,16 +1767,16 @@ public class PortalImpl implements Portal {
 		RenderRequest renderRequest = (RenderRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletPreferences prefs = null;
+		PortletPreferences preferences = null;
 
 		if (renderRequest != null) {
-			PortletPreferencesWrapper prefsWrapper =
+			PortletPreferencesWrapper preferencesWrapper =
 				(PortletPreferencesWrapper)renderRequest.getPreferences();
 
-			prefs = prefsWrapper.getPreferencesImpl();
+			preferences = preferencesWrapper.getPreferencesImpl();
 		}
 
-		return prefs;
+		return preferences;
 	}
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
@@ -1789,15 +1789,15 @@ public class PortalImpl implements Portal {
 			return portletBag.getPreferencesValidatorInstance();
 		}
 		else {
-			PreferencesValidator prefsValidator = null;
+			PreferencesValidator preferencesValidator = null;
 
 			if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-				prefsValidator =
+				preferencesValidator =
 					(PreferencesValidator)InstancePool.get(
 						portlet.getPreferencesValidator());
 			}
 
-			return prefsValidator;
+			return preferencesValidator;
 		}
 	}
 
@@ -2696,15 +2696,16 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public void storePreferences(PortletPreferences prefs)
+	public void storePreferences(PortletPreferences preferences)
 		throws IOException, ValidatorException {
 
-		PortletPreferencesWrapper prefsWrapper =
-			(PortletPreferencesWrapper)prefs;
+		PortletPreferencesWrapper preferencesWrapper =
+			(PortletPreferencesWrapper)preferences;
 
-		PortletPreferencesImpl prefsImpl = prefsWrapper.getPreferencesImpl();
+		PortletPreferencesImpl preferencesImpl =
+			preferencesWrapper.getPreferencesImpl();
 
-		prefsImpl.store();
+		preferencesImpl.store();
 	}
 
 	public String transformCustomSQL(String sql) {

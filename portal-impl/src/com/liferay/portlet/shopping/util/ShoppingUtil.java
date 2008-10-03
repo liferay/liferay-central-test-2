@@ -128,7 +128,7 @@ public class ShoppingUtil {
 		double shipping = calculateShipping(items);
 		double alternativeShipping = shipping;
 
-		ShoppingPreferences prefs = null;
+		ShoppingPreferences preferences = null;
 
 		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
 			items.entrySet().iterator();
@@ -140,10 +140,10 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (prefs == null) {
+			if (preferences == null) {
 				ShoppingCategory category = item.getCategory();
 
-				prefs = ShoppingPreferences.getInstance(
+				preferences = ShoppingPreferences.getInstance(
 					category.getCompanyId(), category.getGroupId());
 
 				break;
@@ -153,14 +153,14 @@ public class ShoppingUtil {
 		// Calculate alternative shipping if shopping is configured to use
 		// alternative shipping and shipping price is greater than 0
 
-		if ((prefs != null) &&
-			(prefs.useAlternativeShipping()) && (shipping > 0)) {
+		if ((preferences != null) &&
+			(preferences.useAlternativeShipping()) && (shipping > 0)) {
 
 			double altShippingDelta = 0.0;
 
 			try {
 				altShippingDelta = GetterUtil.getDouble(
-					prefs.getAlternativeShipping()[1][altShipping]);
+					preferences.getAlternativeShipping()[1][altShipping]);
 			}
 			catch (Exception e) {
 				return alternativeShipping;
@@ -325,7 +325,7 @@ public class ShoppingUtil {
 		double insurance = 0.0;
 		double subtotal = 0.0;
 
-		ShoppingPreferences prefs = null;
+		ShoppingPreferences preferences = null;
 
 		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
 			items.entrySet().iterator();
@@ -338,10 +338,10 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (prefs == null) {
+			if (preferences == null) {
 				ShoppingCategory category = item.getCategory();
 
-				prefs = ShoppingPreferences.getInstance(
+				preferences = ShoppingPreferences.getInstance(
 					category.getCompanyId(), category.getGroupId());
 			}
 
@@ -351,7 +351,7 @@ public class ShoppingUtil {
 			subtotal += calculateActualPrice(itemPrice) * count.intValue();
 		}
 
-		if ((prefs != null) && (subtotal > 0)) {
+		if ((preferences != null) && (subtotal > 0)) {
 			double insuranceRate = 0.0;
 
 			double[] range = ShoppingPreferences.INSURANCE_RANGE;
@@ -364,11 +364,11 @@ public class ShoppingUtil {
 					}
 
 					insuranceRate = GetterUtil.getDouble(
-						prefs.getInsurance()[rangeId]);
+						preferences.getInsurance()[rangeId]);
 				}
 			}
 
-			String formula = prefs.getInsuranceFormula();
+			String formula = preferences.getInsuranceFormula();
 
 			if (formula.equals("flat")) {
 				insurance += insuranceRate;
@@ -395,7 +395,7 @@ public class ShoppingUtil {
 		double shipping = 0.0;
 		double subtotal = 0.0;
 
-		ShoppingPreferences prefs = null;
+		ShoppingPreferences preferences = null;
 
 		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
 			items.entrySet().iterator();
@@ -408,10 +408,10 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (prefs == null) {
+			if (preferences == null) {
 				ShoppingCategory category = item.getCategory();
 
-				prefs = ShoppingPreferences.getInstance(
+				preferences = ShoppingPreferences.getInstance(
 					category.getCompanyId(), category.getGroupId());
 			}
 
@@ -429,7 +429,7 @@ public class ShoppingUtil {
 			}
 		}
 
-		if ((prefs != null) && (subtotal > 0)) {
+		if ((preferences != null) && (subtotal > 0)) {
 			double shippingRate = 0.0;
 
 			double[] range = ShoppingPreferences.SHIPPING_RANGE;
@@ -442,11 +442,11 @@ public class ShoppingUtil {
 					}
 
 					shippingRate = GetterUtil.getDouble(
-						prefs.getShipping()[rangeId]);
+						preferences.getShipping()[rangeId]);
 				}
 			}
 
-			String formula = prefs.getShippingFormula();
+			String formula = preferences.getShippingFormula();
 
 			if (formula.equals("flat")) {
 				shipping += shippingRate;
@@ -487,7 +487,7 @@ public class ShoppingUtil {
 
 		double tax = 0.0;
 
-		ShoppingPreferences prefs = null;
+		ShoppingPreferences preferences = null;
 
 		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
 			items.entrySet().iterator();
@@ -499,18 +499,18 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (prefs == null) {
+			if (preferences == null) {
 				ShoppingCategory category = item.getCategory();
 
-				prefs = ShoppingPreferences.getInstance(
+				preferences = ShoppingPreferences.getInstance(
 					category.getCompanyId(), category.getGroupId());
 
 				break;
 			}
 		}
 
-		if ((prefs != null) &&
-			(prefs.getTaxState().equals(stateId))) {
+		if ((preferences != null) &&
+			(preferences.getTaxState().equals(stateId))) {
 
 			double subtotal = 0.0;
 
@@ -529,7 +529,7 @@ public class ShoppingUtil {
 				}
 			}
 
-			tax = prefs.getTaxRate() * subtotal;
+			tax = preferences.getTaxRate() * subtotal;
 		}
 
 		return tax;
@@ -889,11 +889,11 @@ public class ShoppingUtil {
 	}
 
 	public static String getPayPalRedirectURL(
-		ShoppingPreferences prefs, ShoppingOrder order, double total,
+		ShoppingPreferences preferences, ShoppingOrder order, double total,
 		String returnURL, String notifyURL) {
 
 		String payPalEmailAddress = HttpUtil.encodeURL(
-			prefs.getPayPalEmailAddress());
+			preferences.getPayPalEmailAddress());
 
 		NumberFormat doubleFormat = NumberFormat.getNumberInstance(
 			Locale.ENGLISH);
@@ -913,7 +913,7 @@ public class ShoppingUtil {
 		String state = HttpUtil.encodeURL(order.getBillingState());
 		String zip = HttpUtil.encodeURL(order.getBillingZip());
 
-		String currencyCode = prefs.getCurrencyId();
+		String currencyCode = preferences.getCurrencyId();
 
 		StringBuilder sb = new StringBuilder();
 
@@ -1036,11 +1036,12 @@ public class ShoppingUtil {
 	}
 
 	public static boolean meetsMinOrder(
-			ShoppingPreferences prefs, Map<ShoppingCartItem, Integer> items)
+			ShoppingPreferences preferences,
+			Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
-		if ((prefs.getMinOrder() > 0) &&
-			(calculateSubtotal(items) < prefs.getMinOrder())) {
+		if ((preferences.getMinOrder() > 0) &&
+			(calculateSubtotal(items) < preferences.getMinOrder())) {
 
 			return false;
 		}

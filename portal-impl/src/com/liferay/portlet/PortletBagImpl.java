@@ -64,7 +64,7 @@ public class PortletBagImpl implements PortletBag {
 		MessageListener popMessageListenerInstance,
 		SocialActivityInterpreter socialActivityInterpreterInstance,
 		SocialRequestInterpreter socialRequestInterpreterInstance,
-		PreferencesValidator prefsValidatorInstance,
+		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
 		_portletName = portletName;
@@ -80,7 +80,7 @@ public class PortletBagImpl implements PortletBag {
 		_popMessageListenerInstance = popMessageListenerInstance;
 		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
-		_prefsValidatorInstance = prefsValidatorInstance;
+		_preferencesValidatorInstance = preferencesValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
 
@@ -141,7 +141,7 @@ public class PortletBagImpl implements PortletBag {
 	}
 
 	public PreferencesValidator getPreferencesValidatorInstance() {
-		return _prefsValidatorInstance;
+		return _preferencesValidatorInstance;
 	}
 
 	public ResourceBundle getResourceBundle(Locale locale) {
@@ -173,7 +173,7 @@ public class PortletBagImpl implements PortletBag {
 	private MessageListener _popMessageListenerInstance;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;
-	private PreferencesValidator _prefsValidatorInstance;
+	private PreferencesValidator _preferencesValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;
 
 }

@@ -48,13 +48,13 @@ public class WikiPageServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
 		java.lang.String title, java.lang.String content,
 		java.lang.String summary, boolean minorEdit,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addPage(nodeId, title, content, summary, minorEdit, prefs,
-			themeDisplay);
+				   .addPage(nodeId, title, content, summary, minorEdit,
+			preferences, themeDisplay);
 	}
 
 	public static void addPageAttachments(long nodeId, java.lang.String title,
@@ -66,12 +66,13 @@ public class WikiPageServiceUtil {
 
 	public static void changeParent(long nodeId, java.lang.String title,
 		java.lang.String newParentTitle,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		getService()
-			.changeParent(nodeId, title, newParentTitle, prefs, themeDisplay);
+			.changeParent(nodeId, title, newParentTitle, preferences,
+			themeDisplay);
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
@@ -130,21 +131,22 @@ public class WikiPageServiceUtil {
 	}
 
 	public static void movePage(long nodeId, java.lang.String title,
-		java.lang.String newTitle, javax.portlet.PortletPreferences prefs,
+		java.lang.String newTitle,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		getService().movePage(nodeId, title, newTitle, prefs, themeDisplay);
+		getService().movePage(nodeId, title, newTitle, preferences, themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long nodeId, java.lang.String title, double version,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .revertPage(nodeId, title, version, prefs, themeDisplay);
+				   .revertPage(nodeId, title, version, preferences, themeDisplay);
 	}
 
 	public static void subscribePage(long nodeId, java.lang.String title)
@@ -164,14 +166,14 @@ public class WikiPageServiceUtil {
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
 		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
 				   .updatePage(nodeId, title, version, content, summary,
-			minorEdit, format, parentTitle, redirectTitle, tagsEntries, prefs,
-			themeDisplay);
+			minorEdit, format, parentTitle, redirectTitle, tagsEntries,
+			preferences, themeDisplay);
 	}
 
 	public static WikiPageService getService() {

@@ -123,12 +123,12 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public LayoutReference[] getLayoutReferences(
-			long companyId, String portletId, String prefsKey,
-			String prefsValue)
+			long companyId, String portletId, String preferencesKey,
+			String preferencesValue)
 		throws SystemException {
 
 		return layoutLocalService.getLayouts(
-			companyId, portletId, prefsKey, prefsValue);
+			companyId, portletId, preferencesKey, preferencesValue);
 	}
 
 	public byte[] exportLayouts(

@@ -40,10 +40,12 @@ import javax.portlet.ValidatorException;
  */
 public class StocksPreferencesValidator implements PreferencesValidator {
 
-	public void validate(PortletPreferences prefs) throws ValidatorException {
+	public void validate(PortletPreferences preferences)
+		throws ValidatorException {
+
 		List<String> badSymbols = new ArrayList<String>();
 
-		String[] symbols = prefs.getValues("symbols", new String[0]);
+		String[] symbols = preferences.getValues("symbols", new String[0]);
 
 		for (String symbol : symbols) {
 			Stocks stocks = StocksUtil.getStocks(symbol);

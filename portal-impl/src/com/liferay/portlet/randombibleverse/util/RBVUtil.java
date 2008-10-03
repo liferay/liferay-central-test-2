@@ -55,16 +55,20 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RBVUtil {
 
-	public static Bible getBible(PortletPreferences prefs, Locale locale) {
-		return _instance._getBible(prefs, locale);
+	public static Bible getBible(
+		PortletPreferences preferences, Locale locale) {
+
+		return _instance._getBible(preferences, locale);
 	}
 
 	public static Map<String, Bible> getBibles() {
 		return _instance._bibles;
 	}
 
-	public static Verse getVerse(PortletPreferences prefs, Locale locale) {
-		return _instance._getVerse(prefs, locale);
+	public static Verse getVerse(
+		PortletPreferences preferences, Locale locale) {
+
+		return _instance._getVerse(preferences, locale);
 	}
 
 	private RBVUtil() {
@@ -115,8 +119,9 @@ public class RBVUtil {
 		_verses = Collections.unmodifiableList(_verses);
 	}
 
-	private Bible _getBible(PortletPreferences prefs, Locale locale) {
-		Bible bible = _bibles.get(prefs.getValue("language", StringPool.BLANK));
+	private Bible _getBible(PortletPreferences preferences, Locale locale) {
+		Bible bible = _bibles.get(
+			preferences.getValue("language", StringPool.BLANK));
 
 		if (bible == null) {
 			bible = _bibles.get(locale.getLanguage());
@@ -129,8 +134,8 @@ public class RBVUtil {
 		return bible;
 	}
 
-	private Verse _getVerse(PortletPreferences prefs, Locale locale) {
-		Bible bible = _getBible(prefs, locale);
+	private Verse _getVerse(PortletPreferences preferences, Locale locale) {
+		Bible bible = _getBible(preferences, locale);
 
 		int i = Randomizer.getInstance().nextInt(_verses.size());
 

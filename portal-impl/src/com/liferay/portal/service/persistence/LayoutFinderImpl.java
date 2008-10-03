@@ -76,13 +76,13 @@ public class LayoutFinderImpl
 	}
 
 	public List<LayoutReference> findByC_P_P(
-			long companyId, String portletId, String prefsKey,
-			String prefsValue)
+			long companyId, String portletId, String preferencesKey,
+			String preferencesValue)
 		throws SystemException {
 
-		String prefs =
-			"%<preference><name>" + prefsKey + "</name><value>" + prefsValue +
-				"</value>%";
+		String preferences =
+			"%<preference><name>" + preferencesKey + "</name><value>" +
+				preferencesValue + "</value>%";
 
 		Session session = null;
 
@@ -94,14 +94,14 @@ public class LayoutFinderImpl
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar("layoutPlid", Type.LONG);
-			q.addScalar("prefsPortletId", Type.STRING);
+			q.addScalar("preferencesPortletId", Type.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
 			qPos.add(portletId);
 			qPos.add(portletId + "_INSTANCE_%");
-			qPos.add(prefs);
+			qPos.add(preferences);
 
 			List<LayoutReference> layoutReferences =
 				new ArrayList<LayoutReference>();
@@ -112,14 +112,14 @@ public class LayoutFinderImpl
 				Object[] array = itr.next();
 
 				Long layoutPlid = (Long)array[0];
-				String prefsPortletId = (String)array[1];
+				String preferencesPortletId = (String)array[1];
 
 				Layout layout = LayoutUtil.findByPrimaryKey(
 					layoutPlid.longValue());
 
 				layoutReferences.add(
 					new LayoutReference(
-						LayoutSoap.toSoapModel(layout), prefsPortletId));
+						LayoutSoap.toSoapModel(layout), preferencesPortletId));
 			}
 
 			return layoutReferences;

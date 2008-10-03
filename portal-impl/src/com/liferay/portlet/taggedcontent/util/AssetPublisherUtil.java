@@ -78,32 +78,32 @@ public class AssetPublisherUtil {
 		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(
 			className, classPK);
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, referringPortletResource);
 
-		addSelection(className, asset.getAssetId(), assetOrder, prefs);
+		addSelection(className, asset.getAssetId(), assetOrder, preferences);
 
-		prefs.store();
+		preferences.store();
 	}
 
 	public static void addSelection(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String assetType = ParamUtil.getString(actionRequest, "assetType");
 		long assetId = ParamUtil.getLong(actionRequest, "assetId");
 		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
-		addSelection(assetType, assetId, assetOrder, prefs);
+		addSelection(assetType, assetId, assetOrder, preferences);
 	}
 
 	public static void addSelection(
 			String assetType, long assetId, int assetOrder,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
-		String[] manualEntries = prefs.getValues(
+		String[] manualEntries = preferences.getValues(
 			"manual-entries", new String[0]);
 
 		String assetConfig = _assetConfiguration(assetType, assetId);
@@ -115,7 +115,7 @@ public class AssetPublisherUtil {
 			manualEntries = ArrayUtil.append(manualEntries, assetConfig);
 		}
 
-		prefs.setValues("manual-entries", manualEntries);
+		preferences.setValues("manual-entries", manualEntries);
 	}
 
 	public static void addRecentFolderId(
@@ -138,13 +138,14 @@ public class AssetPublisherUtil {
 	}
 
 	public static void removeAndStoreSelection(
-		List<Long> assetIds, PortletPreferences prefs) throws Exception {
+			List<Long> assetIds, PortletPreferences preferences)
+		throws Exception {
 
 		if (assetIds.size() == 0) {
 			return;
 		}
 
-		String[] manualEntries = prefs.getValues(
+		String[] manualEntries = preferences.getValues(
 			"manual-entries", new String[0]);
 
 		List<String> manualEntriesList = ListUtil.fromArray(manualEntries);
@@ -166,11 +167,11 @@ public class AssetPublisherUtil {
 			}
 		}
 
-		prefs.setValues(
+		preferences.setValues(
 			"manual-entries",
 			manualEntriesList.toArray(new String[manualEntriesList.size()]));
 
-		prefs.store();
+		preferences.store();
 	}
 
 	private static String _assetConfiguration(String assetType, long assetId) {

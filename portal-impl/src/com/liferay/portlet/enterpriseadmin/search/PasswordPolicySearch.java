@@ -80,7 +80,7 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 			PasswordPolicyDisplayTerms.NAME, displayTerms.getName());
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					renderRequest);
 
@@ -92,18 +92,18 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {
 
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN,
 					"password-policies-order-by-col", orderByCol);
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN,
 					"password-policies-order-by-type", orderByType);
 			}
 			else {
-				orderByCol = prefs.getValue(
+				orderByCol = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN,
 					"password-policies-order-by-col", "name");
-				orderByType = prefs.getValue(
+				orderByType = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN,
 					"password-policies-order-by-type", "asc");
 			}

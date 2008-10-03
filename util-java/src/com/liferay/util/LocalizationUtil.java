@@ -194,42 +194,42 @@ public class LocalizationUtil {
 	}
 
 	public static String getPrefsValue(
-		PortletPreferences prefs, String key, String languageId) {
+		PortletPreferences preferences, String key, String languageId) {
 
-		return getPrefsValue(prefs, key, languageId, true);
+		return getPrefsValue(preferences, key, languageId, true);
 	}
 
 	public static String getPrefsValue(
-		PortletPreferences prefs, String key, String languageId,
+		PortletPreferences preferences, String key, String languageId,
 		boolean useDefault) {
 
 		String localizedKey = _getPrefsKey(key, languageId);
 
-		String value = prefs.getValue(localizedKey, StringPool.BLANK);
+		String value = preferences.getValue(localizedKey, StringPool.BLANK);
 
 		if (useDefault && Validator.isNull(value)) {
-			value = prefs.getValue(key, StringPool.BLANK);
+			value = preferences.getValue(key, StringPool.BLANK);
 		}
 
 		return value;
 	}
 
 	public static String[] getPrefsValues(
-		PortletPreferences prefs, String key, String languageId) {
+		PortletPreferences preferences, String key, String languageId) {
 
-		return getPrefsValues(prefs, key, languageId, true);
+		return getPrefsValues(preferences, key, languageId, true);
 	}
 
 	public static String[] getPrefsValues(
-		PortletPreferences prefs, String key, String languageId,
+		PortletPreferences preferences, String key, String languageId,
 		boolean useDefault) {
 
 		String localizedKey = _getPrefsKey(key, languageId);
 
-		String[] values = prefs.getValues(localizedKey, new String[0]);
+		String[] values = preferences.getValues(localizedKey, new String[0]);
 
 		if (useDefault && Validator.isNull(values)) {
-			values = prefs.getValues(key, new String[0]);
+			values = preferences.getValues(key, new String[0]);
 		}
 
 		return values;
@@ -330,19 +330,19 @@ public class LocalizationUtil {
 	}
 
 	public static void setPrefsValue(
-			PortletPreferences prefs, String key, String languageId,
+			PortletPreferences preferences, String key, String languageId,
 			String value)
 		throws Exception {
 
-		prefs.setValue(_getPrefsKey(key, languageId), value);
+		preferences.setValue(_getPrefsKey(key, languageId), value);
 	}
 
 	public static void setPrefsValues(
-			PortletPreferences prefs, String key, String languageId,
+			PortletPreferences preferences, String key, String languageId,
 			String[] values)
 		throws Exception {
 
-		prefs.setValues(_getPrefsKey(key, languageId), values);
+		preferences.setValues(_getPrefsKey(key, languageId), values);
 	}
 
 	public static String updateLocalization(

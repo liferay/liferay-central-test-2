@@ -60,15 +60,15 @@ public class EditPreferencesAction extends PortletAction {
 			return;
 		}
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		String[] symbols = StringUtil.split(
 			ParamUtil.getString(actionRequest, "symbols").toUpperCase());
 
-		prefs.setValues("symbols", symbols);
+		preferences.setValues("symbols", symbols);
 
 		try {
-			prefs.store();
+			preferences.store();
 		}
 		catch (ValidatorException ve) {
 			SessionErrors.add(

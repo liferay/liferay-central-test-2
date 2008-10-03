@@ -277,20 +277,20 @@ public class MBUtil {
 		return breadcrumbs;
 	}
 
-	public static String getEmailFromAddress(PortletPreferences prefs) {
+	public static String getEmailFromAddress(PortletPreferences preferences) {
 		String emailFromAddress = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS;
 
-		return prefs.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("email-from-address", emailFromAddress);
 	}
 
-	public static String getEmailFromName(PortletPreferences prefs) {
+	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME;
 
-		return prefs.getValue("email-from-name", emailFromName);
+		return preferences.getValue("email-from-name", emailFromName);
 	}
 
-	public static boolean getEmailHtmlFormat(PortletPreferences prefs) {
-		String emailHtmlFormat = prefs.getValue(
+	public static boolean getEmailHtmlFormat(PortletPreferences preferences) {
+		String emailHtmlFormat = preferences.getValue(
 			"email-html-format", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailHtmlFormat)) {
@@ -302,9 +302,9 @@ public class MBUtil {
 	}
 
 	public static boolean getEmailMessageAddedEnabled(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailMessageAddedEnabled = prefs.getValue(
+		String emailMessageAddedEnabled = preferences.getValue(
 			"email-message-added-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedEnabled)) {
@@ -315,8 +315,10 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageAddedBody(PortletPreferences prefs) {
-		String emailMessageAddedBody = prefs.getValue(
+	public static String getEmailMessageAddedBody(
+		PortletPreferences preferences) {
+
+		String emailMessageAddedBody = preferences.getValue(
 			"email-message-added-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedBody)) {
@@ -329,9 +331,9 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageAddedSignature(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailMessageAddedSignature = prefs.getValue(
+		String emailMessageAddedSignature = preferences.getValue(
 			"email-message-added-signature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSignature)) {
@@ -344,9 +346,9 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageAddedSubjectPrefix(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailMessageAddedSubjectPrefix = prefs.getValue(
+		String emailMessageAddedSubjectPrefix = preferences.getValue(
 			"email-message-added-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSubjectPrefix)) {
@@ -359,9 +361,9 @@ public class MBUtil {
 	}
 
 	public static boolean getEmailMessageUpdatedEnabled(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailMessageUpdatedEnabled = prefs.getValue(
+		String emailMessageUpdatedEnabled = preferences.getValue(
 			"email-message-updated-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
@@ -372,8 +374,10 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageUpdatedBody(PortletPreferences prefs) {
-		String emailMessageUpdatedBody = prefs.getValue(
+	public static String getEmailMessageUpdatedBody(
+		PortletPreferences preferences) {
+
+		String emailMessageUpdatedBody = preferences.getValue(
 			"email-message-updated-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedBody)) {
@@ -386,9 +390,9 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedSignature(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailMessageUpdatedSignature = prefs.getValue(
+		String emailMessageUpdatedSignature = preferences.getValue(
 			"email-message-updated-signature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSignature)) {
@@ -401,9 +405,9 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedSubjectPrefix(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailMessageUpdatedSubject = prefs.getValue(
+		String emailMessageUpdatedSubject = preferences.getValue(
 			"email-message-updated-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSubject)) {
@@ -523,12 +527,12 @@ public class MBUtil {
 	}
 
 	public static String[] getThreadPriority(
-			PortletPreferences prefs, String languageId, double value,
+			PortletPreferences preferences, String languageId, double value,
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
 		String[] priorities = LocalizationUtil.getPrefsValues(
-			prefs, "priorities", languageId);
+			preferences, "priorities", languageId);
 
 		String[] priorityPair = _findThreadPriority(
 			value, themeDisplay, priorities);
@@ -538,7 +542,7 @@ public class MBUtil {
 				LocaleUtil.getDefault());
 
 			priorities = LocalizationUtil.getPrefsValues(
-				prefs, "priorities", defaultLanguageId);
+				preferences, "priorities", defaultLanguageId);
 
 			priorityPair = _findThreadPriority(value, themeDisplay, priorities);
 		}
@@ -559,13 +563,13 @@ public class MBUtil {
 	}
 
 	public static String getUserRank(
-			PortletPreferences prefs, String languageId, int posts)
+			PortletPreferences preferences, String languageId, int posts)
 		throws Exception {
 
 		String rank = StringPool.BLANK;
 
 		String[] ranks = LocalizationUtil.getPrefsValues(
-			prefs, "ranks", languageId);
+			preferences, "ranks", languageId);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
@@ -585,7 +589,8 @@ public class MBUtil {
 	}
 
 	public static String getUserRank(
-			PortletPreferences prefs, String languageId, MBStatsUser statsUser)
+			PortletPreferences preferences, String languageId,
+			MBStatsUser statsUser)
 		throws Exception {
 
 		String rank = StringPool.BLANK;
@@ -596,7 +601,7 @@ public class MBUtil {
 		long companyId = group.getCompanyId();
 
 		String[] ranks = LocalizationUtil.getPrefsValues(
-			prefs, "ranks", languageId);
+			preferences, "ranks", languageId);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
@@ -653,8 +658,10 @@ public class MBUtil {
 		return false;
 	}
 
-	public static boolean isAllowAnonymousPosting(PortletPreferences prefs) {
-		String allowAnonymousPosting = prefs.getValue(
+	public static boolean isAllowAnonymousPosting(
+		PortletPreferences preferences) {
+
+		String allowAnonymousPosting = preferences.getValue(
 			"allow-anonymous-posting", StringPool.BLANK);
 
 		if (Validator.isNotNull(allowAnonymousPosting)) {

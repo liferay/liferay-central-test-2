@@ -281,10 +281,12 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutReference[] getLayouts(
-		long companyId, java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String portletId,
+		java.lang.String preferencesKey, java.lang.String preferencesValue)
+		throws com.liferay.portal.SystemException {
 		return getService()
-				   .getLayouts(companyId, portletId, prefsKey, prefsValue);
+				   .getLayouts(companyId, portletId, preferencesKey,
+			preferencesValue);
 	}
 
 	public static long getNextLayoutId(long groupId, boolean privateLayout)

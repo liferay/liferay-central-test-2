@@ -130,7 +130,7 @@ public class MovePageAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
@@ -138,21 +138,21 @@ public class MovePageAction extends PortletAction {
 			actionRequest, "newParentTitle");
 
 		WikiPageServiceUtil.changeParent(
-			nodeId, title, newParentTitle, prefs, themeDisplay);
+			nodeId, title, newParentTitle, preferences, themeDisplay);
 	}
 
 	protected void renamePage(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		String newTitle = ParamUtil.getString(actionRequest, "newTitle");
 
 		WikiPageServiceUtil.movePage(
-			nodeId, title, newTitle, prefs, themeDisplay);
+			nodeId, title, newTitle, preferences, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

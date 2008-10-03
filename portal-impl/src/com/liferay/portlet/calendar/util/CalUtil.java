@@ -47,24 +47,24 @@ import javax.portlet.PortletPreferences;
  */
 public class CalUtil {
 
-	public static String getEmailFromAddress(PortletPreferences prefs) {
+	public static String getEmailFromAddress(PortletPreferences preferences) {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.CALENDAR_EMAIL_FROM_ADDRESS);
 
-		return prefs.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("email-from-address", emailFromAddress);
 	}
 
-	public static String getEmailFromName(PortletPreferences prefs) {
+	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsUtil.get(
 			PropsKeys.CALENDAR_EMAIL_FROM_NAME);
 
-		return prefs.getValue("email-from-name", emailFromName);
+		return preferences.getValue("email-from-name", emailFromName);
 	}
 
 	public static boolean getEmailEventReminderEnabled(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailEventReminderEnabled = prefs.getValue(
+		String emailEventReminderEnabled = preferences.getValue(
 			"email-event-reminder-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEventReminderEnabled)) {
@@ -76,8 +76,10 @@ public class CalUtil {
 		}
 	}
 
-	public static String getEmailEventReminderBody(PortletPreferences prefs) {
-		String emailEventReminderBody = prefs.getValue(
+	public static String getEmailEventReminderBody(
+		PortletPreferences preferences) {
+
+		String emailEventReminderBody = preferences.getValue(
 			"email-event-reminder-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEventReminderBody)) {
@@ -90,9 +92,9 @@ public class CalUtil {
 	}
 
 	public static String getEmailEventReminderSubject(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailEventReminderSubject = prefs.getValue(
+		String emailEventReminderSubject = preferences.getValue(
 			"email-event-reminder-subject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEventReminderSubject)) {

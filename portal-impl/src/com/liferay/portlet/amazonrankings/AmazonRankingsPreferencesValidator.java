@@ -42,10 +42,12 @@ import javax.portlet.ValidatorException;
 public class AmazonRankingsPreferencesValidator
 	implements PreferencesValidator {
 
-	public void validate(PortletPreferences prefs) throws ValidatorException {
+	public void validate(PortletPreferences preferences)
+		throws ValidatorException {
+
 		List<String> badIsbns = new ArrayList<String>();
 
-		String[] isbns = prefs.getValues("isbns", new String[0]);
+		String[] isbns = preferences.getValues("isbns", new String[0]);
 
 		for (int i = 0; i < isbns.length; i++) {
 			AmazonRankings amazonRankings =

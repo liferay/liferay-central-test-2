@@ -65,19 +65,19 @@ public class ExportDataAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
-		String databaseTableName = prefs.getValue(
+		String databaseTableName = preferences.getValue(
 			"databaseTableName", StringPool.BLANK);
-		String title = prefs.getValue("title", "no-title");
+		String title = preferences.getValue("title", "no-title");
 
 		StringBuilder sb = new StringBuilder();
 
 		List<String> fieldLabels = new ArrayList<String>();
 
 		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
-			String fieldLabel = prefs.getValue(
+			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {

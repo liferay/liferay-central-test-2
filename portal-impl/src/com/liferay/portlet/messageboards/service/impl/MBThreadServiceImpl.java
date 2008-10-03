@@ -57,7 +57,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	}
 
 	public MBThread splitThread(
-			long messageId, PortletPreferences prefs, ThemeDisplay themeDisplay)
+			long messageId, PortletPreferences preferences,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -66,7 +67,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			getPermissionChecker(), message.getCategoryId(),
 			ActionKeys.MOVE_THREAD);
 
-		return mbThreadLocalService.splitThread(messageId, prefs, themeDisplay);
+		return mbThreadLocalService.splitThread(
+			messageId, preferences, themeDisplay);
 	}
 
 }

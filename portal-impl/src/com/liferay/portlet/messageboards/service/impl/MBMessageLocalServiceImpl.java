@@ -179,7 +179,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		boolean anonymous = false;
 		double priority = 0.0;
 		String[] tagsEntries = null;
-		PortletPreferences prefs = null;
+		PortletPreferences preferences = null;
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
@@ -187,7 +187,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = addMessage(
 			userId, userName, categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, tagsEntries, prefs,
+			body, files, anonymous, priority, tagsEntries, preferences,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 
 		if ((className.equals(BlogsEntry.class.getName())) &&
@@ -223,13 +223,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long categoryId, String subject,
 			String body, List<ObjectValuePair<String, byte[]>> files,
 			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, boolean addCommunityPermissions,
+			PortletPreferences preferences, boolean addCommunityPermissions,
 			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, userName, categoryId, subject, body, files, anonymous,
-			priority, tagsEntries, prefs,
+			priority, tagsEntries, preferences,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
@@ -238,21 +238,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long categoryId, String subject,
 			String body, List<ObjectValuePair<String, byte[]>> files,
 			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, String[] communityPermissions,
+			PortletPreferences preferences, String[] communityPermissions,
 			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, userName, categoryId, subject, body, files, anonymous,
-			priority, tagsEntries, prefs, null, null, communityPermissions,
-			guestPermissions, themeDisplay);
+			priority, tagsEntries, preferences, null, null,
+			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public MBMessage addMessage(
 			long userId, String userName, long categoryId, String subject,
 			String body, List<ObjectValuePair<String, byte[]>> files,
 			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, Boolean addCommunityPermissions,
+			PortletPreferences preferences, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -262,7 +262,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			null, userId, userName, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			subject, body, files, anonymous, priority, tagsEntries, preferences,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions, themeDisplay);
 	}
@@ -271,14 +271,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long categoryId, long threadId,
 			long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			null, userId, userName, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			subject, body, files, anonymous, priority, tagsEntries, preferences,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
@@ -287,29 +287,29 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long categoryId, long threadId,
 			long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			null, userId, userName, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs, null,
-			null, communityPermissions, guestPermissions, themeDisplay);
+			subject, body, files, anonymous, priority, tagsEntries, preferences,
+			null, null, communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public MBMessage addMessage(
 			String uuid, long userId, String userName, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			uuid, userId, userName, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			subject, body, files, anonymous, priority, tagsEntries, preferences,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
@@ -318,10 +318,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String uuid, long userId, String userName, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -341,8 +341,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 
-		if (prefs != null) {
-			if (!MBUtil.isAllowAnonymousPosting(prefs)) {
+		if (preferences != null) {
+			if (!MBUtil.isAllowAnonymousPosting(preferences)) {
 				if (anonymous || user.isDefaultUser()) {
 					throw new PrincipalException();
 				}
@@ -518,7 +518,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(category, message, prefs, themeDisplay, false);
+		notifySubscribers(category, message, preferences, themeDisplay, false);
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -1150,19 +1150,19 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		List<String> existingFiles = new ArrayList<String>();
 		double priority = 0.0;
 		String[] tagsEntries = null;
-		PortletPreferences prefs = null;
+		PortletPreferences preferences = null;
 		ThemeDisplay themeDisplay = null;
 
 		return updateMessage(
 			userId, messageId, subject, body, files, existingFiles, priority,
-			tagsEntries, prefs, themeDisplay);
+			tagsEntries, preferences, themeDisplay);
 	}
 
 	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
 			List<String> existingFiles, double priority, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Message
@@ -1259,7 +1259,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(category, message, prefs, themeDisplay, true);
+		notifySubscribers(category, message, preferences, themeDisplay, true);
 
 		// Tags
 
@@ -1424,29 +1424,30 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	protected void notifySubscribers(
-			MBCategory category, MBMessage message, PortletPreferences prefs,
-			ThemeDisplay themeDisplay, boolean update)
+			MBCategory category, MBMessage message,
+			PortletPreferences preferences, ThemeDisplay themeDisplay,
+			boolean update)
 		throws PortalException, SystemException {
 
 		if (category.isDiscussion()) {
 			return;
 		}
 
-		if (prefs == null) {
+		if (preferences == null) {
 			long ownerId = category.getGroupId();
 			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 			long plid = PortletKeys.PREFS_PLID_SHARED;
 			String portletId = PortletKeys.MESSAGE_BOARDS;
 			String defaultPreferences = null;
 
-			prefs = portletPreferencesLocalService.getPreferences(
+			preferences = portletPreferencesLocalService.getPreferences(
 				category.getCompanyId(), ownerId, ownerType, plid, portletId,
 				defaultPreferences);
 		}
 
-		if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
+		if (!update && MBUtil.getEmailMessageAddedEnabled(preferences)) {
 		}
-		else if (update && MBUtil.getEmailMessageUpdatedEnabled(prefs)) {
+		else if (update && MBUtil.getEmailMessageUpdatedEnabled(preferences)) {
 		}
 		else {
 			return;
@@ -1478,8 +1479,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.MESSAGE_BOARDS, user);
 
-		String fromName = MBUtil.getEmailFromName(prefs);
-		String fromAddress = MBUtil.getEmailFromAddress(prefs);
+		String fromName = MBUtil.getEmailFromName(preferences);
+		String fromAddress = MBUtil.getEmailFromAddress(preferences);
 
 		String mailingListAddress = StringPool.BLANK;
 
@@ -1542,17 +1543,19 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String subjectPrefix = null;
 		String body = null;
 		String signature = null;
-		boolean htmlFormat = MBUtil.getEmailHtmlFormat(prefs);
+		boolean htmlFormat = MBUtil.getEmailHtmlFormat(preferences);
 
 		if (update) {
-			subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs);
-			body = MBUtil.getEmailMessageUpdatedBody(prefs);
-			signature = MBUtil.getEmailMessageUpdatedSignature(prefs);
+			subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(
+				preferences);
+			body = MBUtil.getEmailMessageUpdatedBody(preferences);
+			signature = MBUtil.getEmailMessageUpdatedSignature(preferences);
 		}
 		else {
-			subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(prefs);
-			body = MBUtil.getEmailMessageAddedBody(prefs);
-			signature = MBUtil.getEmailMessageAddedSignature(prefs);
+			subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(
+				preferences);
+			body = MBUtil.getEmailMessageAddedBody(preferences);
+			signature = MBUtil.getEmailMessageAddedSignature(preferences);
 		}
 
 		if (Validator.isNotNull(signature)) {

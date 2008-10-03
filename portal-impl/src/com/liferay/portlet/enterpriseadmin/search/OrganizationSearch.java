@@ -99,7 +99,7 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 			String.valueOf(displayTerms.getParentOrganizationId()));
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					renderRequest);
 
@@ -111,18 +111,18 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {
 
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-col",
 					orderByCol);
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-type",
 					orderByType);
 			}
 			else {
-				orderByCol = prefs.getValue(
+				orderByCol = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-col",
 					"name");
-				orderByType = prefs.getValue(
+				orderByType = preferences.getValue(
 					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-type",
 					"asc");
 			}

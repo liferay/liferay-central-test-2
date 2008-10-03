@@ -75,47 +75,48 @@ public class EditSettingsAction extends PortletAction {
 			return;
 		}
 
-		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
+		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+			companyId);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (cmd.equals("updateCAS")) {
-			updateCAS(actionRequest, companyId, prefs);
+			updateCAS(actionRequest, companyId, preferences);
 		}
 		else if (cmd.equals("updateDefaultGroupsAndRoles")) {
-			updateDefaultGroupsAndRoles(actionRequest, prefs);
+			updateDefaultGroupsAndRoles(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateEmails")) {
-			updateEmails(actionRequest, prefs);
+			updateEmails(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateLdap")) {
-			updateLdap(actionRequest, companyId, prefs);
+			updateLdap(actionRequest, companyId, preferences);
 		}
 		else if (cmd.equals("updateMailHostNames")) {
-			updateMailHostNames(actionRequest, prefs);
+			updateMailHostNames(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateNtlm")) {
-			updateNtlm(actionRequest, companyId, prefs);
+			updateNtlm(actionRequest, companyId, preferences);
 		}
 		else if (cmd.equals("updateOpenId")) {
-			updateOpenId(actionRequest, prefs);
+			updateOpenId(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateOpenSSO")) {
-			updateOpenSSO(actionRequest, companyId, prefs);
+			updateOpenSSO(actionRequest, companyId, preferences);
 		}
 		else if (cmd.equals("updateReservedUsers")) {
-			updateReservedUsers(actionRequest, prefs);
+			updateReservedUsers(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateSecurity")) {
 			updateSecurity(actionRequest);
 		}
 		else if (cmd.equals("updateSiteMinder")) {
-			updateSiteMinder(actionRequest, companyId, prefs);
+			updateSiteMinder(actionRequest, companyId, preferences);
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
 			if (!cmd.equals("updateLdap") && !cmd.equals("updateSecurity")) {
-				prefs.store();
+				preferences.store();
 			}
 
 			sendRedirect(actionRequest, actionResponse);
@@ -127,7 +128,7 @@ public class EditSettingsAction extends PortletAction {
 
 	protected void updateCAS(
 			ActionRequest actionRequest, long companyId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
@@ -139,23 +140,23 @@ public class EditSettingsAction extends PortletAction {
 		String serviceUrl = ParamUtil.getString(actionRequest, "serviceUrl");
 		String validateUrl = ParamUtil.getString(actionRequest, "validateUrl");
 
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.CAS_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.CAS_IMPORT_FROM_LDAP, String.valueOf(importFromLdap));
-		prefs.setValue(PropsKeys.CAS_LOGIN_URL, loginUrl);
-		prefs.setValue(PropsKeys.CAS_LOGOUT_URL, logoutUrl);
-		prefs.setValue(PropsKeys.CAS_SERVER_NAME, serverName);
-		prefs.setValue(PropsKeys.CAS_SERVICE_URL, serviceUrl);
-		prefs.setValue(PropsKeys.CAS_VALIDATE_URL, validateUrl);
+		preferences.setValue(PropsKeys.CAS_LOGIN_URL, loginUrl);
+		preferences.setValue(PropsKeys.CAS_LOGOUT_URL, logoutUrl);
+		preferences.setValue(PropsKeys.CAS_SERVER_NAME, serverName);
+		preferences.setValue(PropsKeys.CAS_SERVICE_URL, serviceUrl);
+		preferences.setValue(PropsKeys.CAS_VALIDATE_URL, validateUrl);
 
-		prefs.store();
+		preferences.store();
 
 		CASFilter.reload(companyId);
 	}
 
 	protected void updateDefaultGroupsAndRoles(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String defaultGroupNames = ParamUtil.getString(
@@ -165,14 +166,16 @@ public class EditSettingsAction extends PortletAction {
 		String defaultUserGroupNames = ParamUtil.getString(
 			actionRequest, "defaultUserGroupNames");
 
-		prefs.setValue(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
-		prefs.setValue(PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
-		prefs.setValue(
+		preferences.setValue(
+			PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
+		preferences.setValue(
+			PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
+		preferences.setValue(
 			PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES, defaultUserGroupNames);
 	}
 
 	protected void updateEmails(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String tabs3 = ParamUtil.getString(actionRequest, "tabs3");
@@ -192,13 +195,13 @@ public class EditSettingsAction extends PortletAction {
 				SessionErrors.add(actionRequest, "emailUserAddedBody");
 			}
 			else {
-				prefs.setValue(
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED,
 					emailUserAddedEnabled);
-				prefs.setValue(
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT,
 					emailUserAddedSubject);
-				prefs.setValue(
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY, emailUserAddedBody);
 			}
 		}
@@ -217,13 +220,13 @@ public class EditSettingsAction extends PortletAction {
 				SessionErrors.add(actionRequest, "emailPasswordSentBody");
 			}
 			else {
-				prefs.setValue(
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED,
 					emailPasswordSentEnabled);
-				prefs.setValue(
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT,
 					emailPasswordSentSubject);
-				prefs.setValue(
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY,
 					emailPasswordSentBody);
 			}
@@ -241,8 +244,9 @@ public class EditSettingsAction extends PortletAction {
 				SessionErrors.add(actionRequest, "emailFromAddress");
 			}
 			else {
-				prefs.setValue(PropsKeys.ADMIN_EMAIL_FROM_NAME, emailFromName);
-				prefs.setValue(
+				preferences.setValue(
+					PropsKeys.ADMIN_EMAIL_FROM_NAME, emailFromName);
+				preferences.setValue(
 					PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, emailFromAddress);
 			}
 		}
@@ -250,7 +254,7 @@ public class EditSettingsAction extends PortletAction {
 
 	protected void updateLdap(
 			ActionRequest actionRequest, long companyId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
@@ -321,52 +325,54 @@ public class EditSettingsAction extends PortletAction {
 			return;
 		}
 
-		prefs.setValue(PropsKeys.LDAP_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsKeys.LDAP_AUTH_REQUIRED, String.valueOf(required));
-		prefs.setValue(PropsKeys.LDAP_BASE_PROVIDER_URL, baseProviderURL);
-		prefs.setValue(PropsKeys.LDAP_BASE_DN, baseDN);
-		prefs.setValue(PropsKeys.LDAP_SECURITY_PRINCIPAL, principal);
-		prefs.setValue(PropsKeys.LDAP_SECURITY_CREDENTIALS, credentials);
-		prefs.setValue(PropsKeys.LDAP_AUTH_SEARCH_FILTER, searchFilter);
-		prefs.setValue(
+		preferences.setValue(
+			PropsKeys.LDAP_AUTH_ENABLED, String.valueOf(enabled));
+		preferences.setValue(
+			PropsKeys.LDAP_AUTH_REQUIRED, String.valueOf(required));
+		preferences.setValue(PropsKeys.LDAP_BASE_PROVIDER_URL, baseProviderURL);
+		preferences.setValue(PropsKeys.LDAP_BASE_DN, baseDN);
+		preferences.setValue(PropsKeys.LDAP_SECURITY_PRINCIPAL, principal);
+		preferences.setValue(PropsKeys.LDAP_SECURITY_CREDENTIALS, credentials);
+		preferences.setValue(PropsKeys.LDAP_AUTH_SEARCH_FILTER, searchFilter);
+		preferences.setValue(
 			PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 			userDefaultObjectClasses);
-		prefs.setValue(PropsKeys.LDAP_USER_MAPPINGS, userMappings);
-		prefs.setValue(PropsKeys.LDAP_GROUP_MAPPINGS, groupMappings);
-		prefs.setValue(
+		preferences.setValue(PropsKeys.LDAP_USER_MAPPINGS, userMappings);
+		preferences.setValue(PropsKeys.LDAP_GROUP_MAPPINGS, groupMappings);
+		preferences.setValue(
 			PropsKeys.LDAP_IMPORT_ENABLED, String.valueOf(importEnabled));
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.LDAP_IMPORT_ON_STARTUP, String.valueOf(importOnStartup));
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.LDAP_IMPORT_INTERVAL, String.valueOf(importInterval));
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER, importUserSearchFilter);
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER, importGroupSearchFilter);
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.LDAP_EXPORT_ENABLED, String.valueOf(exportEnabled));
-		prefs.setValue(PropsKeys.LDAP_USERS_DN, usersDN);
-		prefs.setValue(PropsKeys.LDAP_GROUPS_DN, groupsDN);
-		prefs.setValue(
+		preferences.setValue(PropsKeys.LDAP_USERS_DN, usersDN);
+		preferences.setValue(PropsKeys.LDAP_GROUPS_DN, groupsDN);
+		preferences.setValue(
 			PropsKeys.LDAP_PASSWORD_POLICY_ENABLED,
 			String.valueOf(passwordPolicyEnabled));
 
-		prefs.store();
+		preferences.store();
 	}
 
 	protected void updateMailHostNames(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String mailHostNames = ParamUtil.getString(
 			actionRequest, "mailHostNames");
 
-		prefs.setValue(PropsKeys.ADMIN_MAIL_HOST_NAMES, mailHostNames);
+		preferences.setValue(PropsKeys.ADMIN_MAIL_HOST_NAMES, mailHostNames);
 	}
 
 	protected void updateNtlm(
 			ActionRequest actionRequest, long companyId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
@@ -374,28 +380,30 @@ public class EditSettingsAction extends PortletAction {
 			actionRequest, "domainController");
 		String domain = ParamUtil.getString(actionRequest, "domain");
 
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.NTLM_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsKeys.NTLM_DOMAIN_CONTROLLER, domainController);
-		prefs.setValue(PropsKeys.NTLM_DOMAIN, domain);
+		preferences.setValue(
+			PropsKeys.NTLM_DOMAIN_CONTROLLER, domainController);
+		preferences.setValue(PropsKeys.NTLM_DOMAIN, domain);
 
-		prefs.store();
+		preferences.store();
 	}
 
 	protected void updateOpenId(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
 
-		prefs.setValue(PropsKeys.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
+		preferences.setValue(
+			PropsKeys.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
 
-		prefs.store();
+		preferences.store();
 	}
 
 	protected void updateOpenSSO(
 			ActionRequest actionRequest, long companyId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
@@ -409,21 +417,22 @@ public class EditSettingsAction extends PortletAction {
 		String firstName = ParamUtil.getString(actionRequest, "firstNameAttr");
 		String lastName = ParamUtil.getString(actionRequest, "lastNameAttr");
 
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.OPEN_SSO_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsKeys.OPEN_SSO_LOGIN_URL, loginUrl);
-		prefs.setValue(PropsKeys.OPEN_SSO_LOGOUT_URL, logoutUrl);
-		prefs.setValue(PropsKeys.OPEN_SSO_SERVICE_URL, serviceUrl);
-		prefs.setValue(PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR, screenName);
-		prefs.setValue(PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR, emailAddress);
-		prefs.setValue(PropsKeys.OPEN_SSO_FIRST_NAME_ATTR, firstName);
-		prefs.setValue(PropsKeys.OPEN_SSO_LAST_NAME_ATTR, lastName);
+		preferences.setValue(PropsKeys.OPEN_SSO_LOGIN_URL, loginUrl);
+		preferences.setValue(PropsKeys.OPEN_SSO_LOGOUT_URL, logoutUrl);
+		preferences.setValue(PropsKeys.OPEN_SSO_SERVICE_URL, serviceUrl);
+		preferences.setValue(PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR, screenName);
+		preferences.setValue(
+			PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR, emailAddress);
+		preferences.setValue(PropsKeys.OPEN_SSO_FIRST_NAME_ATTR, firstName);
+		preferences.setValue(PropsKeys.OPEN_SSO_LAST_NAME_ATTR, lastName);
 
-		prefs.store();
+		preferences.store();
 	}
 
 	protected void updateReservedUsers(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String reservedScreenNames = ParamUtil.getString(
@@ -431,9 +440,9 @@ public class EditSettingsAction extends PortletAction {
 		String reservedEmailAddresses = ParamUtil.getString(
 			actionRequest, "reservedEmailAddresses");
 
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
 	}
 
@@ -460,7 +469,7 @@ public class EditSettingsAction extends PortletAction {
 
 	protected void updateSiteMinder(
 			ActionRequest actionRequest, long companyId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
@@ -468,14 +477,14 @@ public class EditSettingsAction extends PortletAction {
 			actionRequest, "importFromLdap");
 		String userHeader = ParamUtil.getString(actionRequest, "userHeader");
 
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.SITEMINDER_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
 			String.valueOf(importFromLdap));
-		prefs.setValue(PropsKeys.SITEMINDER_USER_HEADER, userHeader);
+		preferences.setValue(PropsKeys.SITEMINDER_USER_HEADER, userHeader);
 
-		prefs.store();
+		preferences.store();
 	}
 
 }

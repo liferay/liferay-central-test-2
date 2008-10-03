@@ -139,7 +139,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			boolean anonymous = false;
 			double priority = 0.0;
 			String[] tagsEntries = null;
-			PortletPreferences prefs = null;
+			PortletPreferences preferences = null;
 
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
@@ -148,7 +148,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 			MBMessageServiceUtil.addMessage(
 				_category.getCategoryId(), _subject, body, files, anonymous,
-				priority, tagsEntries, prefs, addCommunityPermissions,
+				priority, tagsEntries, preferences, addCommunityPermissions,
 				addGuestPermissions, themeDisplay);
 		}
 

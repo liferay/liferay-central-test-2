@@ -77,7 +77,8 @@ public interface JournalArticleService {
 		int reviewDateMinute, boolean neverReview, boolean indexable,
 		boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -113,7 +114,8 @@ public interface JournalArticleService {
 		int reviewDateMinute, boolean neverReview, boolean indexable,
 		boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -122,7 +124,8 @@ public interface JournalArticleService {
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -152,13 +155,13 @@ public interface JournalArticleService {
 
 	public void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void expireArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -185,7 +188,8 @@ public interface JournalArticleService {
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

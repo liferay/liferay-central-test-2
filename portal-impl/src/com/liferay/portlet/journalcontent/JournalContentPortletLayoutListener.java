@@ -90,11 +90,11 @@ public class JournalContentPortletLayoutListener
 
 		request.setAttribute(WebKeys.LAYOUT, layout);
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				request, portletId, StringPool.BLANK);
 
-		String articleId = prefs.getValue("article-id", null);
+		String articleId = preferences.getValue("article-id", null);
 
 		if (Validator.isNull(articleId)) {
 			return;

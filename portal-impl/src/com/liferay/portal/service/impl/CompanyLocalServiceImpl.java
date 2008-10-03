@@ -177,16 +177,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					companyId, CompanyConstants.AUTH_TYPE_EA, true, true, true,
 					true, false, true);
 
-				PortletPreferences prefs =
-					PrefsPropsUtil.getPreferences(companyId);
+				PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+					companyId);
 
 				try {
-					prefs.setValue(
+					preferences.setValue(
 						PropsKeys.ADMIN_EMAIL_FROM_NAME, "Liferay Demo");
-					prefs.setValue(
+					preferences.setValue(
 						PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.net");
 
-					prefs.store();
+					preferences.store();
 				}
 				catch (IOException ioe) {
 					throw new SystemException(ioe);
@@ -557,30 +557,32 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			boolean strangersVerify, boolean communityLogo)
 		throws SystemException {
 
-		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
+		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+			companyId);
 
 		try {
-			prefs.setValue(PropsKeys.COMPANY_SECURITY_AUTH_TYPE, authType);
-			prefs.setValue(
+			preferences.setValue(
+				PropsKeys.COMPANY_SECURITY_AUTH_TYPE, authType);
+			preferences.setValue(
 				PropsKeys.COMPANY_SECURITY_AUTO_LOGIN,
 				String.valueOf(autoLogin));
-			prefs.setValue(
+			preferences.setValue(
 				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
 				String.valueOf(sendPassword));
-			prefs.setValue(
+			preferences.setValue(
 				PropsKeys.COMPANY_SECURITY_STRANGERS,
 				String.valueOf(strangers));
-			prefs.setValue(
+			preferences.setValue(
 				PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
 				String.valueOf(strangersWithMx));
-			prefs.setValue(
+			preferences.setValue(
 				PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY,
 				String.valueOf(strangersVerify));
-			prefs.setValue(
+			preferences.setValue(
 				PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO,
 				String.valueOf(communityLogo));
 
-			prefs.store();
+			preferences.store();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

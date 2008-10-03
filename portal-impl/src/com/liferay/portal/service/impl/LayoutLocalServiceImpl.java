@@ -507,12 +507,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public LayoutReference[] getLayouts(
-			long companyId, String portletId, String prefsKey,
-			String prefsValue)
+			long companyId, String portletId, String preferencesKey,
+			String preferencesValue)
 		throws SystemException {
 
 		List<LayoutReference> layoutReferences = layoutFinder.findByC_P_P(
-			companyId, portletId, prefsKey, prefsValue);
+			companyId, portletId, preferencesKey, preferencesValue);
 
 		return layoutReferences.toArray(
 			new LayoutReference[layoutReferences.size()]);

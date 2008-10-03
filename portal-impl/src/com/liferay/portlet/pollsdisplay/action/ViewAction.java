@@ -53,10 +53,10 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletPreferences prefs = renderRequest.getPreferences();
+			PortletPreferences preferences = renderRequest.getPreferences();
 
 			long questionId = GetterUtil.getLong(
-				prefs.getValue("question-id", StringPool.BLANK));
+				preferences.getValue("question-id", StringPool.BLANK));
 
 			PollsQuestion question =
 				PollsQuestionServiceUtil.getQuestion(questionId);

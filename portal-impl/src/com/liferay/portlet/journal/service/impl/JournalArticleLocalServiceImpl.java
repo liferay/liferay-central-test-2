@@ -128,8 +128,9 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String articleURL, PortletPreferences preferences,
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
@@ -142,8 +143,9 @@ public class JournalArticleLocalServiceImpl
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
+			smallImage, smallImageURL, smallFile, images, articleURL,
+			preferences, tagsEntries, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -158,8 +160,9 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String articleURL, PortletPreferences preferences,
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addArticle(
@@ -170,8 +173,8 @@ public class JournalArticleLocalServiceImpl
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			smallImage, smallImageURL, smallFile, images, articleURL,
+			preferences, tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -188,7 +191,7 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			PortletPreferences preferences, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -200,8 +203,8 @@ public class JournalArticleLocalServiceImpl
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			smallImage, smallImageURL, smallFile, images, articleURL,
+			preferences, tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -217,8 +220,9 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
+			String articleURL, PortletPreferences preferences,
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
@@ -232,7 +236,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images, articleURL,
-			prefs, tagsEntries, null, null, communityPermissions,
+			preferences, tagsEntries, null, null, communityPermissions,
 			guestPermissions);
 	}
 
@@ -249,7 +253,7 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			PortletPreferences preferences, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -373,7 +377,7 @@ public class JournalArticleLocalServiceImpl
 		// Email
 
 		try {
-			sendEmail(article, articleURL, prefs, "requested");
+			sendEmail(article, articleURL, preferences, "requested");
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -429,7 +433,7 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle approveArticle(
 			long userId, long groupId, String articleId, double version,
-			String articleURL, PortletPreferences prefs)
+			String articleURL, PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		// Article
@@ -458,7 +462,7 @@ public class JournalArticleLocalServiceImpl
 		// Email
 
 		try {
-			sendEmail(article, articleURL, prefs, "granted");
+			sendEmail(article, articleURL, preferences, "granted");
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -567,13 +571,13 @@ public class JournalArticleLocalServiceImpl
 			long plid = PortletKeys.PREFS_PLID_SHARED;
 			String portletId = PortletKeys.JOURNAL;
 
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				portletPreferencesLocalService.getPreferences(
 					article.getCompanyId(), ownerId, ownerType, plid,
 					portletId);
 
 			try {
-				sendEmail(article, articleURL, prefs, "review");
+				sendEmail(article, articleURL, preferences, "review");
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
@@ -718,17 +722,18 @@ public class JournalArticleLocalServiceImpl
 
 	public void deleteArticle(
 			long groupId, String articleId, double version, String articleURL,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		deleteArticle(article, articleURL, prefs);
+		deleteArticle(article, articleURL, preferences);
 	}
 
 	public void deleteArticle(
-			JournalArticle article, String articleURL, PortletPreferences prefs)
+			JournalArticle article, String articleURL,
+			PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		// Lucene
@@ -745,13 +750,13 @@ public class JournalArticleLocalServiceImpl
 
 		// Email
 
-		if ((prefs != null) && !article.isApproved() &&
+		if ((preferences != null) && !article.isApproved() &&
 			isLatestVersion(
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
 			try {
-				sendEmail(article, articleURL, prefs, "denied");
+				sendEmail(article, articleURL, preferences, "denied");
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
@@ -828,28 +833,29 @@ public class JournalArticleLocalServiceImpl
 
 	public void expireArticle(
 			long groupId, String articleId, double version, String articleURL,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		expireArticle(article, articleURL, prefs);
+		expireArticle(article, articleURL, preferences);
 	}
 
 	public void expireArticle(
-			JournalArticle article, String articleURL, PortletPreferences prefs)
+			JournalArticle article, String articleURL,
+			PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		// Email
 
-		if ((prefs != null) && !article.isApproved() &&
+		if ((preferences != null) && !article.isApproved() &&
 			isLatestVersion(
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
 			try {
-				sendEmail(article, articleURL, prefs, "denied");
+				sendEmail(article, articleURL, preferences, "denied");
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
@@ -1632,7 +1638,8 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries)
+			String articleURL, PortletPreferences preferences,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1756,7 +1763,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (incrementVersion) {
 			try {
-				sendEmail(article, articleURL, prefs, "requested");
+				sendEmail(article, articleURL, preferences, "requested");
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
@@ -2245,24 +2252,26 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void sendEmail(
-			JournalArticle article, String articleURL, PortletPreferences prefs,
-			String emailType)
+			JournalArticle article, String articleURL,
+			PortletPreferences preferences, String emailType)
 		throws IOException, PortalException, SystemException {
 
-		if (prefs == null) {
+		if (preferences == null) {
 			return;
 		}
 		else if (emailType.equals("denied") &&
-			JournalUtil.getEmailArticleApprovalDeniedEnabled(prefs)) {
+			JournalUtil.getEmailArticleApprovalDeniedEnabled(preferences)) {
 		}
 		else if (emailType.equals("granted") &&
-				 JournalUtil.getEmailArticleApprovalGrantedEnabled(prefs)) {
+				 JournalUtil.getEmailArticleApprovalGrantedEnabled(
+					preferences)) {
 		}
 		else if (emailType.equals("requested") &&
-				 JournalUtil.getEmailArticleApprovalRequestedEnabled(prefs)) {
+				 JournalUtil.getEmailArticleApprovalRequestedEnabled(
+					preferences)) {
 		}
 		else if (emailType.equals("review") &&
-				 JournalUtil.getEmailArticleReviewEnabled(prefs)) {
+				 JournalUtil.getEmailArticleReviewEnabled(preferences)) {
 		}
 		else {
 			return;
@@ -2280,8 +2289,8 @@ public class JournalArticleLocalServiceImpl
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.JOURNAL, user);
 
-		String fromName = JournalUtil.getEmailFromName(prefs);
-		String fromAddress = JournalUtil.getEmailFromAddress(prefs);
+		String fromName = JournalUtil.getEmailFromName(preferences);
+		String fromAddress = JournalUtil.getEmailFromAddress(preferences);
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
@@ -2304,22 +2313,24 @@ public class JournalArticleLocalServiceImpl
 
 		if (emailType.equals("denied")) {
 			subject =
-				JournalUtil.getEmailArticleApprovalDeniedSubject(prefs);
-			body = JournalUtil.getEmailArticleApprovalDeniedBody(prefs);
+				JournalUtil.getEmailArticleApprovalDeniedSubject(preferences);
+			body = JournalUtil.getEmailArticleApprovalDeniedBody(preferences);
 		}
 		else if (emailType.equals("granted")) {
 			subject =
-				JournalUtil.getEmailArticleApprovalGrantedSubject(prefs);
-			body = JournalUtil.getEmailArticleApprovalGrantedBody(prefs);
+				JournalUtil.getEmailArticleApprovalGrantedSubject(preferences);
+			body = JournalUtil.getEmailArticleApprovalGrantedBody(preferences);
 		}
 		else if (emailType.equals("requested")) {
 			subject =
-				JournalUtil.getEmailArticleApprovalRequestedSubject(prefs);
-			body = JournalUtil.getEmailArticleApprovalRequestedBody(prefs);
+				JournalUtil.getEmailArticleApprovalRequestedSubject(
+				preferences);
+			body = JournalUtil.getEmailArticleApprovalRequestedBody(
+				preferences);
 		}
 		else if (emailType.equals("review")) {
-			subject = JournalUtil.getEmailArticleReviewSubject(prefs);
-			body = JournalUtil.getEmailArticleReviewBody(prefs);
+			subject = JournalUtil.getEmailArticleReviewSubject(preferences);
+			body = JournalUtil.getEmailArticleReviewBody(preferences);
 		}
 
 		subject = StringUtil.replace(

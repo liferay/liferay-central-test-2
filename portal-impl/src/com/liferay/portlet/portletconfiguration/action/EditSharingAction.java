@@ -72,23 +72,23 @@ public class EditSharingAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("any-website")) {
-			updateAnyWebsite(actionRequest, prefs);
+			updateAnyWebsite(actionRequest, preferences);
 		}
 		else if (tabs2.equals("facebook")) {
-			updateFacebook(actionRequest, prefs);
+			updateFacebook(actionRequest, preferences);
 		}
 		else if (tabs2.equals("friends")) {
-			updateFriends(actionRequest, prefs);
+			updateFriends(actionRequest, preferences);
 		}
 
-		prefs.store();
+		preferences.store();
 
 		sendRedirect(actionRequest, actionResponse);
 	}
@@ -117,19 +117,19 @@ public class EditSharingAction extends EditConfigurationAction {
 	}
 
 	protected void updateAnyWebsite(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean widgetShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "widgetShowAddAppLink");
 
-		prefs.setValue(
+		preferences.setValue(
 			"lfr-widget-show-add-app-link",
 			String.valueOf(widgetShowAddAppLink));
 	}
 
 	protected void updateFacebook(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String facebookAPIKey = ParamUtil.getString(
@@ -139,21 +139,22 @@ public class EditSharingAction extends EditConfigurationAction {
 		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "facebookShowAddAppLink");
 
-		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
-		prefs.setValue("lfr-facebook-canvas-page-url", facebookCanvasPageURL);
-		prefs.setValue(
+		preferences.setValue("lfr-facebook-api-key", facebookAPIKey);
+		preferences.setValue(
+			"lfr-facebook-canvas-page-url", facebookCanvasPageURL);
+		preferences.setValue(
 			"lfr-facebook-show-add-app-link",
 			String.valueOf(facebookShowAddAppLink));
 	}
 
 	protected void updateFriends(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean appShowShareWithFriendsLink = ParamUtil.getBoolean(
 			actionRequest, "appShowShareWithFriendsLink");
 
-		prefs.setValue(
+		preferences.setValue(
 			"lfr-app-show-share-with-friends-link",
 			String.valueOf(appShowShareWithFriendsLink));
 	}

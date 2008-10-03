@@ -44,8 +44,8 @@ public class InvitationUtil {
 			PropsKeys.INVITATION_EMAIL_MAX_RECIPIENTS));
 	}
 
-	public static String getEmailMessageBody(PortletPreferences prefs) {
-		String emailMessageBody = prefs.getValue(
+	public static String getEmailMessageBody(PortletPreferences preferences) {
+		String emailMessageBody = preferences.getValue(
 			"email-message-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageBody)) {
@@ -57,8 +57,10 @@ public class InvitationUtil {
 		}
 	}
 
-	public static String getEmailMessageSubject(PortletPreferences prefs) {
-		String emailMessageSubject = prefs.getValue(
+	public static String getEmailMessageSubject(
+		PortletPreferences preferences) {
+
+		String emailMessageSubject = preferences.getValue(
 			"email-message-subject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageSubject)) {

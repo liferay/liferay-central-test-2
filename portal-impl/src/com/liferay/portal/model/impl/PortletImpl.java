@@ -131,8 +131,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String portletDataHandlerClass, String portletLayoutListenerClass,
 		String popMessageListenerClass, String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String defaultPreferences,
-		String prefsValidator, boolean prefsCompanyWide,
-		boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
+		String preferencesValidator, boolean preferencesCompanyWide,
+		boolean preferencesUniquePerLayout, boolean preferencesOwnedByGroup,
 		boolean useDefaultTemplate, boolean showPortletAccessDenied,
 		boolean showPortletInactive, boolean actionURLRedirect,
 		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
@@ -181,10 +181,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_socialActivityInterpreterClass = socialActivityInterpreterClass;
 		_socialRequestInterpreterClass = socialRequestInterpreterClass;
 		_defaultPreferences = defaultPreferences;
-		_prefsValidator = prefsValidator;
-		_prefsCompanyWide = prefsCompanyWide;
-		_prefsUniquePerLayout = prefsUniquePerLayout;
-		_prefsOwnedByGroup = prefsOwnedByGroup;
+		_preferencesValidator = preferencesValidator;
+		_preferencesCompanyWide = preferencesCompanyWide;
+		_preferencesUniquePerLayout = preferencesUniquePerLayout;
+		_preferencesOwnedByGroup = preferencesOwnedByGroup;
 		_useDefaultTemplate = useDefaultTemplate;
 		_showPortletAccessDenied = showPortletAccessDenied;
 		_showPortletInactive = showPortletInactive;
@@ -910,25 +910,25 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the name of the preferences validator class of the portlet
 	 */
 	public String getPreferencesValidator() {
-		return _prefsValidator;
+		return _preferencesValidator;
 	}
 
 	/**
 	 * Sets the name of the preferences validator class of the portlet.
 	 *
-	 * @param		prefsValidator the name of the preferences validator class
-	 *				of the portlet
+	 * @param		preferencesValidator the name of the preferences validator
+	 *				class of the portlet
 	 */
-	public void setPreferencesValidator(String prefsValidator) {
-		if (prefsValidator != null) {
+	public void setPreferencesValidator(String preferencesValidator) {
+		if (preferencesValidator != null) {
 
 			// Trim this because XDoclet generates preferences validators with
 			// extra white spaces
 
-			_prefsValidator = prefsValidator.trim();
+			_preferencesValidator = preferencesValidator.trim();
 		}
 		else {
-			_prefsValidator = null;
+			_preferencesValidator = null;
 		}
 	}
 
@@ -938,7 +938,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if preferences are shared across the entire company
 	 */
 	public boolean getPreferencesCompanyWide() {
-		return _prefsCompanyWide;
+		return _preferencesCompanyWide;
 	}
 
 	/**
@@ -947,17 +947,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if preferences are shared across the entire company
 	 */
 	public boolean isPreferencesCompanyWide() {
-		return _prefsCompanyWide;
+		return _preferencesCompanyWide;
 	}
 
 	/**
 	 * Set to true if preferences are shared across the entire company.
 	 *
-	 * @param		prefsCompanyWide boolean value for whether preferences
+	 * @param		preferencesCompanyWide boolean value for whether preferences
 	 *				are shared across the entire company
 	 */
-	public void setPreferencesCompanyWide(boolean prefsCompanyWide) {
-		_prefsCompanyWide = prefsCompanyWide;
+	public void setPreferencesCompanyWide(boolean preferencesCompanyWide) {
+		_preferencesCompanyWide = preferencesCompanyWide;
 	}
 
 	/**
@@ -966,7 +966,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if preferences are unique per layout
 	 */
 	public boolean getPreferencesUniquePerLayout() {
-		return _prefsUniquePerLayout;
+		return _preferencesUniquePerLayout;
 	}
 
 	/**
@@ -975,17 +975,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if preferences are unique per layout
 	 */
 	public boolean isPreferencesUniquePerLayout() {
-		return _prefsUniquePerLayout;
+		return _preferencesUniquePerLayout;
 	}
 
 	/**
 	 * Set to true if preferences are unique per layout.
 	 *
-	 * @param		prefsUniquePerLayout boolean value for whether preferences
-	 *				are unique per layout
+	 * @param		preferencesUniquePerLayout boolean value for whether
+	 *				preferences are unique per layout
 	 */
-	public void setPreferencesUniquePerLayout(boolean prefsUniquePerLayout) {
-		_prefsUniquePerLayout = prefsUniquePerLayout;
+	public void setPreferencesUniquePerLayout(
+		boolean preferencesUniquePerLayout) {
+
+		_preferencesUniquePerLayout = preferencesUniquePerLayout;
 	}
 
 	/**
@@ -998,7 +1000,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				by the user at all times.
 	 */
 	public boolean getPreferencesOwnedByGroup() {
-		return _prefsOwnedByGroup;
+		return _preferencesOwnedByGroup;
 	}
 
 	/**
@@ -1011,7 +1013,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				by the user at all times.
 	 */
 	public boolean isPreferencesOwnedByGroup() {
-		return _prefsOwnedByGroup;
+		return _preferencesOwnedByGroup;
 	}
 
 	/**
@@ -1019,12 +1021,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * shown in a group layout. Set to false if preferences are owned by the
 	 * user at all times.
 	 *
-	 * @param		prefsOwnedByGroup boolean value for whether preferences are
-	 *				owned by the group when the portlet is shown in a group
-	 *				layout or preferences are owned by the user at all times
+	 * @param		preferencesOwnedByGroup boolean value for whether
+	 *				preferences are owned by the group when the portlet is shown
+	 *				in a group layout or preferences are owned by the user at
+	 *				all times
 	 */
-	public void setPreferencesOwnedByGroup(boolean prefsOwnedByGroup) {
-		_prefsOwnedByGroup = prefsOwnedByGroup;
+	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup) {
+		_preferencesOwnedByGroup = preferencesOwnedByGroup;
 	}
 
 	/**
@@ -2752,23 +2755,23 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The name of the preferences validator class of the portlet.
 	 */
-	private String _prefsValidator;
+	private String _preferencesValidator;
 
 	/**
 	 * True if preferences are shared across the entire company.
 	 */
-	private boolean _prefsCompanyWide;
+	private boolean _preferencesCompanyWide;
 
 	/**
 	 * True if preferences are unique per layout.
 	 */
-	private boolean _prefsUniquePerLayout = true;
+	private boolean _preferencesUniquePerLayout = true;
 
 	/**
 	 * True if preferences are owned by the group when the portlet is shown in a
 	 * group layout. False if preferences are owned by the user at all times.
 	 */
-	private boolean _prefsOwnedByGroup = true;
+	private boolean _preferencesOwnedByGroup = true;
 
 	/**
 	 * True if the portlet uses the default template.

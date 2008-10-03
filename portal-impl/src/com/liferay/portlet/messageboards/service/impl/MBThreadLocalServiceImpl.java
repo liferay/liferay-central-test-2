@@ -303,7 +303,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	public MBThread splitThread(
-			long messageId, PortletPreferences prefs, ThemeDisplay themeDisplay)
+			long messageId, PortletPreferences preferences,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);

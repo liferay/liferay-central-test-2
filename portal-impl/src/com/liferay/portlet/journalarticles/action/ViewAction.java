@@ -51,10 +51,10 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletPreferences prefs = renderRequest.getPreferences();
+			PortletPreferences preferences = renderRequest.getPreferences();
 
 			long groupId = GetterUtil.getLong(
-				prefs.getValue("group-id", StringPool.BLANK));
+				preferences.getValue("group-id", StringPool.BLANK));
 
 			GroupLocalServiceUtil.getGroup(groupId);
 

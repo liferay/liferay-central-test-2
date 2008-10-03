@@ -139,11 +139,12 @@ public class LayoutServiceSoap {
 	}
 
 	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
-		long companyId, java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws RemoteException {
+		long companyId, java.lang.String portletId,
+		java.lang.String preferencesKey, java.lang.String preferencesValue)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.LayoutReference[] returnValue = LayoutServiceUtil.getLayoutReferences(companyId,
-					portletId, prefsKey, prefsValue);
+					portletId, preferencesKey, preferencesValue);
 
 			return returnValue;
 		}

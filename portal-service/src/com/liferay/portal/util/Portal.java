@@ -510,7 +510,7 @@ public interface Portal {
 	 */
 	public void setPortalPort(HttpServletRequest request);
 
-	public void storePreferences(PortletPreferences prefs)
+	public void storePreferences(PortletPreferences preferences)
 		throws IOException, ValidatorException;
 
 	public String transformCustomSQL(String sql);

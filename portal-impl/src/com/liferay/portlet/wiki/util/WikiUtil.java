@@ -89,23 +89,23 @@ public class WikiUtil {
 		return _instance._getEditPage(format);
 	}
 
-	public static String getEmailFromAddress(PortletPreferences prefs) {
+	public static String getEmailFromAddress(PortletPreferences preferences) {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.WIKI_EMAIL_FROM_ADDRESS);
 
-		return prefs.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("email-from-address", emailFromAddress);
 	}
 
-	public static String getEmailFromName(PortletPreferences prefs) {
+	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsUtil.get(PropsKeys.WIKI_EMAIL_FROM_NAME);
 
-		return prefs.getValue("email-from-name", emailFromName);
+		return preferences.getValue("email-from-name", emailFromName);
 	}
 
 	public static boolean getEmailPageAddedEnabled(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailPageAddedEnabled = prefs.getValue(
+		String emailPageAddedEnabled = preferences.getValue(
 			"email-page-added-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedEnabled)) {
@@ -117,8 +117,8 @@ public class WikiUtil {
 		}
 	}
 
-	public static String getEmailPageAddedBody(PortletPreferences prefs) {
-		String emailPageAddedBody = prefs.getValue(
+	public static String getEmailPageAddedBody(PortletPreferences preferences) {
+		String emailPageAddedBody = preferences.getValue(
 			"email-page-added-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedBody)) {
@@ -130,8 +130,10 @@ public class WikiUtil {
 		}
 	}
 
-	public static String getEmailPageAddedSignature(PortletPreferences prefs) {
-		String emailPageAddedSignature = prefs.getValue(
+	public static String getEmailPageAddedSignature(
+		PortletPreferences preferences) {
+
+		String emailPageAddedSignature = preferences.getValue(
 			"email-page-added-signature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedSignature)) {
@@ -144,9 +146,9 @@ public class WikiUtil {
 	}
 
 	public static String getEmailPageAddedSubjectPrefix(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailPageAddedSubjectPrefix = prefs.getValue(
+		String emailPageAddedSubjectPrefix = preferences.getValue(
 			"email-page-added-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedSubjectPrefix)) {
@@ -159,9 +161,9 @@ public class WikiUtil {
 	}
 
 	public static boolean getEmailPageUpdatedEnabled(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailPageUpdatedEnabled = prefs.getValue(
+		String emailPageUpdatedEnabled = preferences.getValue(
 			"email-page-updated-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
@@ -173,8 +175,10 @@ public class WikiUtil {
 		}
 	}
 
-	public static String getEmailPageUpdatedBody(PortletPreferences prefs) {
-		String emailPageUpdatedBody = prefs.getValue(
+	public static String getEmailPageUpdatedBody(
+		PortletPreferences preferences) {
+
+		String emailPageUpdatedBody = preferences.getValue(
 			"email-page-updated-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedBody)) {
@@ -187,9 +191,9 @@ public class WikiUtil {
 	}
 
 	public static String getEmailPageUpdatedSignature(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailPageUpdatedSignature = prefs.getValue(
+		String emailPageUpdatedSignature = preferences.getValue(
 			"email-page-updated-signature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedSignature)) {
@@ -202,9 +206,9 @@ public class WikiUtil {
 	}
 
 	public static String getEmailPageUpdatedSubjectPrefix(
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
-		String emailPageUpdatedSubject = prefs.getValue(
+		String emailPageUpdatedSubject = preferences.getValue(
 			"email-page-updated-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedSubject)) {

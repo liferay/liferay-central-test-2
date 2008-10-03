@@ -61,21 +61,21 @@ public class SaveAction extends JSONAction {
 			themeDisplay.getPermissionChecker(), themeDisplay.getPlid(),
 			portletId, ActionKeys.CONFIGURATION);
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(request, portletId);
 
 		String color = ParamUtil.getString(request, "color");
 		String data = ParamUtil.getString(request, "data");
 
 		if (Validator.isNotNull(color)) {
-			prefs.setValue("color", color);
+			preferences.setValue("color", color);
 		}
 
 		if (Validator.isNotNull(data)) {
-			prefs.setValue("data", data);
+			preferences.setValue("data", data);
 		}
 
-		prefs.store();
+		preferences.store();
 
 		return null;
 	}

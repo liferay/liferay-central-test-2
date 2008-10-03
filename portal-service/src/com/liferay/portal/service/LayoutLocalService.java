@@ -196,8 +196,9 @@ public interface LayoutLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutReference[] getLayouts(
-		long companyId, java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws com.liferay.portal.SystemException;
+		long companyId, java.lang.String portletId,
+		java.lang.String preferencesKey, java.lang.String preferencesValue)
+		throws com.liferay.portal.SystemException;
 
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;

@@ -969,8 +969,6 @@
 
 		<action path="/journal/edit_template_xsl" forward="portlet.journal.edit_template_xsl" />
 
-		<action path="/journal/export" type="com.liferay.portlet.journal.action.ExportAction" />
-
 		<action path="/journal/get_article" type="com.liferay.portlet.journal.action.GetArticleAction" />
 
 		<action path="/journal/get_article_content" type="com.liferay.portlet.journal.action.GetArticleContentAction" />

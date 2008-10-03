@@ -1377,33 +1377,33 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Element portletPreferences = portlet.element("portlet-preferences");
 
 			String defaultPreferences = null;
-			String prefsValidator = null;
+			String preferencesValidator = null;
 
 			if (portletPreferences != null) {
-				Element prefsValidatorEl =
+				Element preferencesValidatorEl =
 					portletPreferences.element("preferences-validator");
 
-				if (prefsValidatorEl != null) {
-					prefsValidator = prefsValidatorEl.getText();
+				if (preferencesValidatorEl != null) {
+					preferencesValidator = preferencesValidatorEl.getText();
 
-					portletPreferences.remove(prefsValidatorEl);
+					portletPreferences.remove(preferencesValidatorEl);
 				}
 
 				defaultPreferences = portletPreferences.asXML();
 			}
 
 			portletModel.setDefaultPreferences(defaultPreferences);
-			portletModel.setPreferencesValidator(prefsValidator);
+			portletModel.setPreferencesValidator(preferencesValidator);
 
 			if (!portletApp.isWARFile() &&
-				Validator.isNotNull(prefsValidator) &&
+				Validator.isNotNull(preferencesValidator) &&
 				PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
 
 				try {
-					PreferencesValidator prefsValidatorObj =
+					PreferencesValidator preferencesValidatorObj =
 						PortalUtil.getPreferencesValidator(portletModel);
 
-					prefsValidatorObj.validate(
+					preferencesValidatorObj.validate(
 						PortletPreferencesSerializer.fromDefaultXML(
 							defaultPreferences));
 				}

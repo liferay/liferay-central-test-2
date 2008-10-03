@@ -33,6 +33,7 @@ public interface LayoutFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.LayoutReference> findByC_P_P(
-		long companyId, java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws com.liferay.portal.SystemException;
+		long companyId, java.lang.String portletId,
+		java.lang.String preferencesKey, java.lang.String preferencesValue)
+		throws com.liferay.portal.SystemException;
 }

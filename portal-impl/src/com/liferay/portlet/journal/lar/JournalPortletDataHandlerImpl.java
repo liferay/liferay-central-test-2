@@ -684,7 +684,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String articleURL = null;
 
-		PortletPreferences prefs = null;
+		PortletPreferences preferences = null;
 
 		String[] tagsEntries = null;
 
@@ -735,7 +735,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
 					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, prefs, tagsEntries,
+					smallFile, images, articleURL, preferences, tagsEntries,
 					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
@@ -754,7 +754,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
 					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, prefs, tagsEntries);
+					smallFile, images, articleURL, preferences, tagsEntries);
 			}
 		}
 		else {
@@ -769,8 +769,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, neverReview, article.getIndexable(),
 				article.getSmallImage(), article.getSmallImageURL(), smallFile,
-				images, articleURL, prefs, tagsEntries, addCommunityPermissions,
-				addGuestPermissions);
+				images, articleURL, preferences, tagsEntries,
+				addCommunityPermissions, addGuestPermissions);
 		}
 
 		long strategyApprovalUserId = creationStrategy.getApprovalUserId(
@@ -789,7 +789,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			JournalArticleLocalServiceUtil.approveArticle(
 				approvedByUserId, groupId, existingArticle.getArticleId(),
-				existingArticle.getVersion(), articleURL, prefs);
+				existingArticle.getVersion(), articleURL, preferences);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
@@ -1117,7 +1117,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
@@ -1134,7 +1134,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					context.getGroupId());
 			}
 
-			return prefs;
+			return preferences;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -1143,7 +1143,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public String exportData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
@@ -1225,7 +1225,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
+			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
 		try {
@@ -1376,7 +1376,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					context, igFolderPKs, image, binPath);
 			}
 
-			return prefs;
+			return preferences;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);

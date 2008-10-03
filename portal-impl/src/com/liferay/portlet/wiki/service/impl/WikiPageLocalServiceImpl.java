@@ -104,7 +104,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage addPage(
 			long userId, long nodeId, String title, String content,
-			String summary, boolean minorEdit, PortletPreferences prefs,
+			String summary, boolean minorEdit, PortletPreferences preferences,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -118,7 +118,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return addPage(
 			uuid, userId, nodeId, title, version, content, summary, minorEdit,
-			format, head, parentTitle, redirectTitle, tagsEntries, prefs,
+			format, head, parentTitle, redirectTitle, tagsEntries, preferences,
 			themeDisplay);
 	}
 
@@ -126,7 +126,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String uuid, long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
 			boolean head, String parentTitle, String redirectTitle,
-			String[] tagsEntries, PortletPreferences prefs,
+			String[] tagsEntries, PortletPreferences preferences,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -186,7 +186,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
-			notifySubscribers(node, page, prefs, themeDisplay, false);
+			notifySubscribers(node, page, preferences, themeDisplay, false);
 		}
 
 		// Tags
@@ -308,7 +308,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void changeParent(
 			long userId, long nodeId, String title, String newParentTitle,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPage page = getPage(nodeId, title);
@@ -327,7 +327,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
-			format, newParentTitle, redirectTitle, tagsEntries, prefs,
+			format, newParentTitle, redirectTitle, tagsEntries, preferences,
 			themeDisplay);
 
 		List<WikiPage> oldPages = wikiPagePersistence.findByN_T_H(
@@ -713,15 +713,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void movePage(
 			long userId, long nodeId, String title, String newTitle,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		movePage(userId, nodeId, title, newTitle, true, prefs, themeDisplay);
+		movePage(
+			userId, nodeId, title, newTitle, true, preferences, themeDisplay);
 	}
 
 	public void movePage(
 			long userId, long nodeId, String title, String newTitle,
-			boolean strict, PortletPreferences prefs, ThemeDisplay themeDisplay)
+			boolean strict, PortletPreferences preferences,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		validateTitle(newTitle);
@@ -796,7 +798,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		addPage(
 			uuid, userId, nodeId, title, version, content, summary, false,
-			format, head, parentTitle, redirectTitle, null, prefs,
+			format, head, parentTitle, redirectTitle, null, preferences,
 			themeDisplay);
 
 		// Move redirects to point to the page with the new title
@@ -831,7 +833,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage revertPage(
 			long userId, long nodeId, String title, double version,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPage oldPage = getPage(nodeId, title, version);
@@ -839,8 +841,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return updatePage(
 			userId, nodeId, title, 0, oldPage.getContent(),
 			WikiPageImpl.REVERTED + " to " + version, false,
-			oldPage.getFormat(), null, oldPage.getRedirectTitle(), null, prefs,
-			themeDisplay);
+			oldPage.getFormat(), null, oldPage.getRedirectTitle(), null,
+			preferences, themeDisplay);
 	}
 
 	public void subscribePage(long userId, long nodeId, String title)
@@ -865,7 +867,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
 			String parentTitle, String redirectTitle, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Page
@@ -884,7 +886,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return addPage(
 				null, userId, nodeId, title, WikiPageImpl.DEFAULT_VERSION,
 				content, summary, minorEdit, format, true, parentTitle,
-				redirectTitle, tagsEntries, prefs, themeDisplay);
+				redirectTitle, tagsEntries, preferences, themeDisplay);
 		}
 
 		double oldVersion = page.getVersion();
@@ -949,7 +951,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
-			notifySubscribers(node, page, prefs, themeDisplay, true);
+			notifySubscribers(node, page, preferences, themeDisplay, true);
 		}
 
 		// Tags
@@ -1054,25 +1056,25 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected void notifySubscribers(
-			WikiNode node, WikiPage page, PortletPreferences prefs,
+			WikiNode node, WikiPage page, PortletPreferences preferences,
 			ThemeDisplay themeDisplay, boolean update)
 		throws PortalException, SystemException {
 
-		if (prefs == null) {
+		if (preferences == null) {
 			long ownerId = node.getGroupId();
 			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 			long plid = PortletKeys.PREFS_PLID_SHARED;
 			String portletId = PortletKeys.WIKI;
 			String defaultPreferences = null;
 
-			prefs = portletPreferencesLocalService.getPreferences(
+			preferences = portletPreferencesLocalService.getPreferences(
 				node.getCompanyId(), ownerId, ownerType, plid, portletId,
 				defaultPreferences);
 		}
 
-		if (!update && WikiUtil.getEmailPageAddedEnabled(prefs)) {
+		if (!update && WikiUtil.getEmailPageAddedEnabled(preferences)) {
 		}
-		else if (update && WikiUtil.getEmailPageUpdatedEnabled(prefs)) {
+		else if (update && WikiUtil.getEmailPageUpdatedEnabled(preferences)) {
 		}
 		else {
 			return;
@@ -1099,8 +1101,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.WIKI, user);
 
-		String fromName = WikiUtil.getEmailFromName(prefs);
-		String fromAddress = WikiUtil.getEmailFromAddress(prefs);
+		String fromName = WikiUtil.getEmailFromName(preferences);
+		String fromAddress = WikiUtil.getEmailFromAddress(preferences);
 
 		String replyToAddress = fromAddress;
 		String mailId = WikiUtil.getMailId(
@@ -1153,14 +1155,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String signature = null;
 
 		if (update) {
-			subjectPrefix = WikiUtil.getEmailPageUpdatedSubjectPrefix(prefs);
-			body = WikiUtil.getEmailPageUpdatedBody(prefs);
-			signature = WikiUtil.getEmailPageUpdatedSignature(prefs);
+			subjectPrefix = WikiUtil.getEmailPageUpdatedSubjectPrefix(
+				preferences);
+			body = WikiUtil.getEmailPageUpdatedBody(preferences);
+			signature = WikiUtil.getEmailPageUpdatedSignature(preferences);
 		}
 		else {
-			subjectPrefix = WikiUtil.getEmailPageAddedSubjectPrefix(prefs);
-			body = WikiUtil.getEmailPageAddedBody(prefs);
-			signature = WikiUtil.getEmailPageAddedSignature(prefs);
+			subjectPrefix = WikiUtil.getEmailPageAddedSubjectPrefix(
+				preferences);
+			body = WikiUtil.getEmailPageAddedBody(preferences);
+			signature = WikiUtil.getEmailPageAddedSignature(preferences);
 		}
 
 		if (Validator.isNotNull(signature)) {

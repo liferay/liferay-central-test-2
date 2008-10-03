@@ -126,7 +126,7 @@ public class SplitThreadAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
@@ -136,7 +136,7 @@ public class SplitThreadAction extends PortletAction {
 		long oldParentMessageId = message.getParentMessageId();
 
 		MBThread newThread = MBThreadServiceUtil.splitThread(
-			messageId, prefs, themeDisplay);
+			messageId, preferences, themeDisplay);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
 			actionRequest, "addExplanationPost");
@@ -164,8 +164,8 @@ public class SplitThreadAction extends PortletAction {
 			MBMessageServiceUtil.addMessage(
 				message.getCategoryId(), oldThreadId, oldParentMessageId,
 				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
-				false, MBThreadImpl.PRIORITY_NOT_GIVEN, null, prefs, true, true,
-				themeDisplay);
+				false, MBThreadImpl.PRIORITY_NOT_GIVEN, null, preferences, true,
+				true, themeDisplay);
 		}
 
 		PortletURL portletURL =

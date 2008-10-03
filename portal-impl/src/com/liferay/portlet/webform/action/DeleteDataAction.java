@@ -50,10 +50,10 @@ public class DeleteDataAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
-		String databaseTableName = prefs.getValue(
+		String databaseTableName = preferences.getValue(
 			"databaseTableName", StringPool.BLANK);
 
 		if (Validator.isNotNull(databaseTableName)) {

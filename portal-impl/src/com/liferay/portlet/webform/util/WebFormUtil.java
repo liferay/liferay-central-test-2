@@ -81,7 +81,7 @@ public class WebFormUtil {
 	}
 
 	public static ExpandoTable checkTable(
-			String tableName, PortletPreferences prefs)
+			String tableName, PortletPreferences preferences)
 		throws Exception {
 
 		ExpandoTable expandoTable = null;
@@ -95,7 +95,7 @@ public class WebFormUtil {
 
 			int i = 1;
 
-			String fieldLabel = prefs.getValue(
+			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
 			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
@@ -105,7 +105,8 @@ public class WebFormUtil {
 
 				i++;
 
-				fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+				fieldLabel = preferences.getValue(
+					"fieldLabel" + i, StringPool.BLANK);
 			}
 		}
 

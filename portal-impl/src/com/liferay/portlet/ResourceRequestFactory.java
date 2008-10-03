@@ -48,7 +48,7 @@ public class ResourceRequestFactory {
 			HttpServletRequest request, Portlet portlet,
 			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
-			PortletPreferences prefs, long plid)
+			PortletPreferences preferences, long plid)
 		throws Exception {
 
 		ResourceRequestImpl resourceRequestImpl = null;
@@ -63,7 +63,7 @@ public class ResourceRequestFactory {
 
 		resourceRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, prefs, plid);
+			portletMode, preferences, plid);
 
 		return resourceRequestImpl;
 	}

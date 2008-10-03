@@ -111,7 +111,7 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
@@ -130,9 +130,10 @@ public class EditScopeAction extends EditConfigurationAction {
 			}
 		}
 
-		prefs.setValue("lfr-scope-layout-id", String.valueOf(scopeLayoutId));
+		preferences.setValue(
+			"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
 
-		prefs.store();
+		preferences.store();
 	}
 
 }

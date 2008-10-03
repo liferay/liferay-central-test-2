@@ -51,9 +51,9 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
-		String initUrl = prefs.getValue("initUrl", StringPool.BLANK);
+		String initUrl = preferences.getValue("initUrl", StringPool.BLANK);
 
 		if (Validator.isNull(initUrl)) {
 			PortletRequestDispatcher portletRequestDispatcher =

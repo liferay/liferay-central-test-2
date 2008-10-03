@@ -155,20 +155,20 @@ public class CheckoutAction extends CartAction {
 		ShoppingOrder order = (ShoppingOrder)actionRequest.getAttribute(
 			WebKeys.SHOPPING_ORDER);
 
-		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
+		ShoppingPreferences preferences = ShoppingPreferences.getInstance(
 			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
 
 		String returnURL = ShoppingUtil.getPayPalReturnURL(
 			((ActionResponseImpl)actionResponse).createActionURL(), order);
 		String notifyURL = ShoppingUtil.getPayPalNotifyURL(themeDisplay);
 
-		if (prefs.usePayPal()) {
+		if (preferences.usePayPal()) {
 			double total = ShoppingUtil.calculateTotal(
 				cart.getItems(), order.getBillingState(), cart.getCoupon(),
 				cart.getAltShipping(), cart.isInsure());
 
 			String redirectURL = ShoppingUtil.getPayPalRedirectURL(
-				prefs, order, total, returnURL, notifyURL);
+				preferences, order, total, returnURL, notifyURL);
 
 			actionResponse.sendRedirect(redirectURL);
 		}

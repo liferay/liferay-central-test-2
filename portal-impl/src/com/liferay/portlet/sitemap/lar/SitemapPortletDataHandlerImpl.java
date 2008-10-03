@@ -41,14 +41,14 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
-			prefs.setValue("rootPlid", "0");
-			prefs.setValue("displayDepth", "0");
+			preferences.setValue("rootPlid", "0");
+			preferences.setValue("displayDepth", "0");
 
-			return prefs;
+			return preferences;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -57,7 +57,7 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 
 	public String exportData(
 		PortletDataContext context, String portletId,
-		PortletPreferences prefs) {
+		PortletPreferences preferences) {
 
 		return StringPool.BLANK;
 	}
@@ -71,10 +71,10 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	public PortletPreferences importData(
-		PortletDataContext context, String portletId, PortletPreferences prefs,
-		String data) {
+		PortletDataContext context, String portletId,
+		PortletPreferences preferences, String data) {
 
-		return prefs;
+		return preferences;
 	}
 
 	public boolean isPublishToLiveByDefault() {

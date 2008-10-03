@@ -315,7 +315,7 @@ public class MBMessageServiceHttp {
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -351,9 +351,9 @@ public class MBMessageServiceHttp {
 				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj7 = prefs;
+			Object paramObj7 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -407,7 +407,7 @@ public class MBMessageServiceHttp {
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -444,9 +444,9 @@ public class MBMessageServiceHttp {
 				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj7 = prefs;
+			Object paramObj7 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -679,7 +679,7 @@ public class MBMessageServiceHttp {
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -719,9 +719,9 @@ public class MBMessageServiceHttp {
 				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj9 = prefs;
+			Object paramObj9 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj9 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -775,7 +775,7 @@ public class MBMessageServiceHttp {
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -816,9 +816,9 @@ public class MBMessageServiceHttp {
 				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj9 = prefs;
+			Object paramObj9 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj9 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -1693,7 +1693,8 @@ public class MBMessageServiceHttp {
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -1732,9 +1733,9 @@ public class MBMessageServiceHttp {
 				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj7 = prefs;
+			Object paramObj7 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 

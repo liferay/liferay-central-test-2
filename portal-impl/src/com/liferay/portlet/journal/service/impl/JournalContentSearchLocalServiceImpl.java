@@ -93,14 +93,14 @@ public class JournalContentSearchLocalServiceImpl
 					portletId);
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
-					PortletPreferences prefs =
+					PortletPreferences preferences =
 						portletPreferencesLocalService.getPreferences(
 							layout.getCompanyId(),
 							PortletKeys.PREFS_OWNER_ID_DEFAULT,
 							PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
 							layout.getPlid(), portletId);
 
-					String articleId = prefs.getValue(
+					String articleId = preferences.getValue(
 						"article-id", StringPool.BLANK);
 
 					if (Validator.isNotNull(articleId)) {

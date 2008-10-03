@@ -78,11 +78,11 @@ public class ResourceRequestImpl
 		HttpServletRequest request, Portlet portlet,
 		InvokerPortlet invokerPortlet, PortletContext portletContext,
 		WindowState windowState, PortletMode portletMode,
-		PortletPreferences prefs, long plid) {
+		PortletPreferences preferences, long plid) {
 
 		super.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, prefs, plid);
+			portletMode, preferences, plid);
 
 		_cacheablity = ParamUtil.getString(request, "p_p_cacheability");
 		_resourceID = request.getParameter("p_p_resource_id");

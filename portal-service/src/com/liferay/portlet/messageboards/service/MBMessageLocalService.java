@@ -111,7 +111,7 @@ public interface MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -122,7 +122,7 @@ public interface MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -134,7 +134,7 @@ public interface MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -148,7 +148,7 @@ public interface MBMessageLocalService {
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -159,7 +159,7 @@ public interface MBMessageLocalService {
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -172,7 +172,7 @@ public interface MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -184,7 +184,7 @@ public interface MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -363,7 +363,8 @@ public interface MBMessageLocalService {
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

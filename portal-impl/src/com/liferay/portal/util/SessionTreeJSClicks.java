@@ -46,14 +46,14 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId, String nodeId) {
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
+			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
 
 			openNodesString = StringUtil.remove(openNodesString, nodeId);
 
-			prefs.setValue(CLASS_NAME, treeId, openNodesString);
+			preferences.setValue(CLASS_NAME, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -62,12 +62,12 @@ public class SessionTreeJSClicks {
 
 	public static void closeNodes(HttpServletRequest request, String treeId) {
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			String openNodesString = StringPool.BLANK;
 
-			prefs.setValue(CLASS_NAME, treeId, openNodesString);
+			preferences.setValue(CLASS_NAME, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -78,10 +78,10 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId) {
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			return prefs.getValue(CLASS_NAME, treeId);
+			return preferences.getValue(CLASS_NAME, treeId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,14 +94,14 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId, String nodeId) {
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
+			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
 
 			openNodesString = StringUtil.add(openNodesString, nodeId);
 
-			prefs.setValue(CLASS_NAME, treeId, openNodesString);
+			preferences.setValue(CLASS_NAME, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -112,16 +112,16 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId, String[] nodeIds) {
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
+			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
 
 			for (int i = 0; i < nodeIds.length; i++) {
 				openNodesString = StringUtil.add(openNodesString, nodeIds[i]);
 			}
 
-			prefs.setValue(CLASS_NAME, treeId, openNodesString);
+			preferences.setValue(CLASS_NAME, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

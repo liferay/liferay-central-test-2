@@ -24,7 +24,6 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.journal.action.ExportAction;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -44,6 +43,8 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class VerifyOracle extends VerifyProcess {
+
+	public static final long DEFAULT_GROUP_ID = 14;
 
 	public static final int NUM_OF_ARTICLES = GetterUtil.getInteger(
 		PropsUtil.get(VerifyOracle.class.getName()), 5);
@@ -75,11 +76,11 @@ public class VerifyOracle extends VerifyProcess {
 			checkNewLine = true;
 
 			articles = JournalArticleLocalServiceUtil.getArticles(
-				ExportAction.DEFAULT_GROUP_ID);
+				DEFAULT_GROUP_ID);
 		}
 		else {
 			articles = JournalArticleLocalServiceUtil.getArticles(
-				ExportAction.DEFAULT_GROUP_ID, 0, NUM_OF_ARTICLES);
+				DEFAULT_GROUP_ID, 0, NUM_OF_ARTICLES);
 		}
 
 		for (int i = 0; i < articles.size(); i++) {
@@ -89,7 +90,7 @@ public class VerifyOracle extends VerifyProcess {
 
 			if ((content != null) && (content.indexOf("\\n") != -1)) {
 				articles = JournalArticleLocalServiceUtil.getArticles(
-					ExportAction.DEFAULT_GROUP_ID);
+					DEFAULT_GROUP_ID);
 
 				for (int j = 0; j < articles.size(); j++) {
 					article = articles.get(j);
@@ -122,7 +123,7 @@ public class VerifyOracle extends VerifyProcess {
 
 		List<JournalStructure> structures =
 			JournalStructureLocalServiceUtil.getStructures(
-				ExportAction.DEFAULT_GROUP_ID, 0, 1);
+				DEFAULT_GROUP_ID, 0, 1);
 
 		if (structures.size() == 1) {
 			JournalStructure structure = structures.get(0);
@@ -131,7 +132,7 @@ public class VerifyOracle extends VerifyProcess {
 
 			if ((xsd != null) && (xsd.indexOf("\\n") != -1)) {
 				structures = JournalStructureLocalServiceUtil.getStructures(
-					ExportAction.DEFAULT_GROUP_ID);
+					DEFAULT_GROUP_ID);
 
 				for (int i = 0; i < structures.size(); i++) {
 					structure = structures.get(i);
@@ -144,7 +145,7 @@ public class VerifyOracle extends VerifyProcess {
 
 		List<JournalTemplate> templates =
 			JournalTemplateLocalServiceUtil.getTemplates(
-				ExportAction.DEFAULT_GROUP_ID, 0, 1);
+				DEFAULT_GROUP_ID, 0, 1);
 
 		if (templates.size() == 1) {
 			JournalTemplate template = templates.get(0);
@@ -153,7 +154,7 @@ public class VerifyOracle extends VerifyProcess {
 
 			if ((xsl != null) && (xsl.indexOf("\\n") != -1)) {
 				templates = JournalTemplateLocalServiceUtil.getTemplates(
-					ExportAction.DEFAULT_GROUP_ID);
+					DEFAULT_GROUP_ID);
 
 				for (int i = 0; i < templates.size(); i++) {
 					template = templates.get(i);

@@ -350,8 +350,9 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
 		HttpPrincipal httpPrincipal, long companyId,
-		java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
+		java.lang.String portletId, java.lang.String preferencesKey,
+		java.lang.String preferencesValue)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -361,15 +362,15 @@ public class LayoutServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = prefsKey;
+			Object paramObj2 = preferencesKey;
 
-			if (prefsKey == null) {
+			if (preferencesKey == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = prefsValue;
+			Object paramObj3 = preferencesValue;
 
-			if (prefsValue == null) {
+			if (preferencesValue == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 

@@ -53,9 +53,9 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getBoolean(companyId, name);
 	}
 
-	public boolean getBoolean(javax.portlet.PortletPreferences prefs,
+	public boolean getBoolean(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name) {
-		return PrefsPropsUtil.getBoolean(prefs, companyId, name);
+		return PrefsPropsUtil.getBoolean(preferences, companyId, name);
 	}
 
 	public boolean getBoolean(java.lang.String name, boolean defaultValue)
@@ -68,9 +68,10 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getBoolean(companyId, name, defaultValue);
 	}
 
-	public boolean getBoolean(javax.portlet.PortletPreferences prefs,
+	public boolean getBoolean(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name, boolean defaultValue) {
-		return PrefsPropsUtil.getBoolean(prefs, companyId, name, defaultValue);
+		return PrefsPropsUtil.getBoolean(preferences, companyId, name,
+			defaultValue);
 	}
 
 	public java.lang.String getContent(java.lang.String name)
@@ -83,9 +84,10 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getContent(companyId, name);
 	}
 
-	public java.lang.String getContent(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name) {
-		return PrefsPropsUtil.getContent(prefs, companyId, name);
+	public java.lang.String getContent(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name) {
+		return PrefsPropsUtil.getContent(preferences, companyId, name);
 	}
 
 	public double getDouble(java.lang.String name)
@@ -98,9 +100,9 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getDouble(companyId, name);
 	}
 
-	public double getDouble(javax.portlet.PortletPreferences prefs,
+	public double getDouble(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name) {
-		return PrefsPropsUtil.getDouble(prefs, companyId, name);
+		return PrefsPropsUtil.getDouble(preferences, companyId, name);
 	}
 
 	public double getDouble(java.lang.String name, double defaultValue)
@@ -113,9 +115,10 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getDouble(companyId, name, defaultValue);
 	}
 
-	public double getDouble(javax.portlet.PortletPreferences prefs,
+	public double getDouble(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name, double defaultValue) {
-		return PrefsPropsUtil.getDouble(prefs, companyId, name, defaultValue);
+		return PrefsPropsUtil.getDouble(preferences, companyId, name,
+			defaultValue);
 	}
 
 	public int getInteger(java.lang.String name)
@@ -128,9 +131,9 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getInteger(companyId, name);
 	}
 
-	public int getInteger(javax.portlet.PortletPreferences prefs,
+	public int getInteger(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name) {
-		return PrefsPropsUtil.getInteger(prefs, companyId, name);
+		return PrefsPropsUtil.getInteger(preferences, companyId, name);
 	}
 
 	public int getInteger(java.lang.String name, int defaultValue)
@@ -143,9 +146,10 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getInteger(companyId, name, defaultValue);
 	}
 
-	public int getInteger(javax.portlet.PortletPreferences prefs,
+	public int getInteger(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name, int defaultValue) {
-		return PrefsPropsUtil.getInteger(prefs, companyId, name, defaultValue);
+		return PrefsPropsUtil.getInteger(preferences, companyId, name,
+			defaultValue);
 	}
 
 	public long getLong(java.lang.String name)
@@ -158,9 +162,9 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getLong(companyId, name);
 	}
 
-	public long getLong(javax.portlet.PortletPreferences prefs, long companyId,
-		java.lang.String name) {
-		return PrefsPropsUtil.getLong(prefs, companyId, name);
+	public long getLong(javax.portlet.PortletPreferences preferences,
+		long companyId, java.lang.String name) {
+		return PrefsPropsUtil.getLong(preferences, companyId, name);
 	}
 
 	public long getLong(java.lang.String name, long defaultValue)
@@ -173,9 +177,9 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getLong(companyId, name, defaultValue);
 	}
 
-	public long getLong(javax.portlet.PortletPreferences prefs, long companyId,
-		java.lang.String name, long defaultValue) {
-		return PrefsPropsUtil.getLong(prefs, companyId, name, defaultValue);
+	public long getLong(javax.portlet.PortletPreferences preferences,
+		long companyId, java.lang.String name, long defaultValue) {
+		return PrefsPropsUtil.getLong(preferences, companyId, name, defaultValue);
 	}
 
 	public short getShort(java.lang.String name)
@@ -188,9 +192,9 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getShort(companyId, name);
 	}
 
-	public short getShort(javax.portlet.PortletPreferences prefs,
+	public short getShort(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name) {
-		return PrefsPropsUtil.getShort(prefs, companyId, name);
+		return PrefsPropsUtil.getShort(preferences, companyId, name);
 	}
 
 	public short getShort(java.lang.String name, short defaultValue)
@@ -203,9 +207,10 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getShort(companyId, name, defaultValue);
 	}
 
-	public short getShort(javax.portlet.PortletPreferences prefs,
+	public short getShort(javax.portlet.PortletPreferences preferences,
 		long companyId, java.lang.String name, short defaultValue) {
-		return PrefsPropsUtil.getShort(prefs, companyId, name, defaultValue);
+		return PrefsPropsUtil.getShort(preferences, companyId, name,
+			defaultValue);
 	}
 
 	public java.lang.String getString(java.lang.String name)
@@ -218,9 +223,10 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getString(companyId, name);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name) {
-		return PrefsPropsUtil.getString(prefs, companyId, name);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name) {
+		return PrefsPropsUtil.getString(preferences, companyId, name);
 	}
 
 	public java.lang.String getString(java.lang.String name,
@@ -235,34 +241,46 @@ public class PrefsPropsUtil_IW {
 		return PrefsPropsUtil.getString(companyId, name, defaultValue);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name, java.lang.String defaultValue) {
-		return PrefsPropsUtil.getString(prefs, companyId, name, defaultValue);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name, java.lang.String defaultValue) {
+		return PrefsPropsUtil.getString(preferences, companyId, name,
+			defaultValue);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name, boolean defaultValue) {
-		return PrefsPropsUtil.getString(prefs, companyId, name, defaultValue);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name, boolean defaultValue) {
+		return PrefsPropsUtil.getString(preferences, companyId, name,
+			defaultValue);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name, double defaultValue) {
-		return PrefsPropsUtil.getString(prefs, companyId, name, defaultValue);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name, double defaultValue) {
+		return PrefsPropsUtil.getString(preferences, companyId, name,
+			defaultValue);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name, int defaultValue) {
-		return PrefsPropsUtil.getString(prefs, companyId, name, defaultValue);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name, int defaultValue) {
+		return PrefsPropsUtil.getString(preferences, companyId, name,
+			defaultValue);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name, long defaultValue) {
-		return PrefsPropsUtil.getString(prefs, companyId, name, defaultValue);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name, long defaultValue) {
+		return PrefsPropsUtil.getString(preferences, companyId, name,
+			defaultValue);
 	}
 
-	public java.lang.String getString(javax.portlet.PortletPreferences prefs,
-		long companyId, java.lang.String name, short defaultValue) {
-		return PrefsPropsUtil.getString(prefs, companyId, name, defaultValue);
+	public java.lang.String getString(
+		javax.portlet.PortletPreferences preferences, long companyId,
+		java.lang.String name, short defaultValue) {
+		return PrefsPropsUtil.getString(preferences, companyId, name,
+			defaultValue);
 	}
 
 	public java.lang.String[] getStringArray(java.lang.String name,
@@ -277,9 +295,10 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public java.lang.String[] getStringArray(
-		javax.portlet.PortletPreferences prefs, long companyId,
+		javax.portlet.PortletPreferences preferences, long companyId,
 		java.lang.String name, java.lang.String delimiter) {
-		return PrefsPropsUtil.getStringArray(prefs, companyId, name, delimiter);
+		return PrefsPropsUtil.getStringArray(preferences, companyId, name,
+			delimiter);
 	}
 
 	public java.lang.String[] getStringArray(java.lang.String name,
@@ -297,11 +316,11 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public java.lang.String[] getStringArray(
-		javax.portlet.PortletPreferences prefs, long companyId,
+		javax.portlet.PortletPreferences preferences, long companyId,
 		java.lang.String name, java.lang.String delimiter,
 		java.lang.String[] defaultValue) {
-		return PrefsPropsUtil.getStringArray(prefs, companyId, name, delimiter,
-			defaultValue);
+		return PrefsPropsUtil.getStringArray(preferences, companyId, name,
+			delimiter, defaultValue);
 	}
 
 	private PrefsPropsUtil_IW() {

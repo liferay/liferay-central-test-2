@@ -540,14 +540,15 @@ public class EditArticleAction extends PortletAction {
 			uploadRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					uploadRequest, portletResource);
 
-			prefs.setValue("group-id", String.valueOf(article.getGroupId()));
-			prefs.setValue("article-id", article.getArticleId());
+			preferences.setValue(
+				"group-id", String.valueOf(article.getGroupId()));
+			preferences.setValue("article-id", article.getArticleId());
 
-			prefs.store();
+			preferences.store();
 
 			updateContentSearch(
 				actionRequest, portletResource, article.getArticleId());

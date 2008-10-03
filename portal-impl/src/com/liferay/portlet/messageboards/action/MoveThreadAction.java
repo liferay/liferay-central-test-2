@@ -123,7 +123,7 @@ public class MoveThreadAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
@@ -142,7 +142,7 @@ public class MoveThreadAction extends PortletAction {
 			MBMessageServiceUtil.addMessage(
 				categoryId, threadId, thread.getRootMessageId(), subject, body,
 				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
-				MBThreadImpl.PRIORITY_NOT_GIVEN, null, prefs, true, true,
+				MBThreadImpl.PRIORITY_NOT_GIVEN, null, preferences, true, true,
 				themeDisplay);
 		}
 

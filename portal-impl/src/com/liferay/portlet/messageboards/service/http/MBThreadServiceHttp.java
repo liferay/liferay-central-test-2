@@ -112,16 +112,16 @@ public class MBThreadServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
 		HttpPrincipal httpPrincipal, long messageId,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
 
-			Object paramObj1 = prefs;
+			Object paramObj1 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj1 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 

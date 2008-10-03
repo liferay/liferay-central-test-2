@@ -116,7 +116,7 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 			ArticleDisplayTerms.STATUS, displayTerms.getStatus());
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					renderRequest);
 
@@ -128,15 +128,15 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {
 
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.JOURNAL, "articles-order-by-col", orderByCol);
-				prefs.setValue(
+				preferences.setValue(
 					PortletKeys.JOURNAL, "articles-order-by-type", orderByType);
 			}
 			else {
-				orderByCol = prefs.getValue(
+				orderByCol = preferences.getValue(
 					PortletKeys.JOURNAL, "articles-order-by-col", "id");
-				orderByType = prefs.getValue(
+				orderByType = preferences.getValue(
 					PortletKeys.JOURNAL, "articles-order-by-type", "asc");
 			}
 

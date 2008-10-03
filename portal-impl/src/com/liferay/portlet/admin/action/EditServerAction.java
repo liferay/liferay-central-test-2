@@ -91,7 +91,7 @@ public class EditServerAction extends PortletAction {
 			return;
 		}
 
-		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -123,7 +123,7 @@ public class EditServerAction extends PortletAction {
 			updateLogLevels(actionRequest);
 		}
 		else if (cmd.equals("updateOpenOffice")) {
-			updateOpenOffice(actionRequest, prefs);
+			updateOpenOffice(actionRequest, preferences);
 		}
 
 		sendRedirect(actionRequest, actionResponse);
@@ -283,17 +283,18 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void updateOpenOffice(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
 		int port = ParamUtil.getInteger(actionRequest, "port");
 
-		prefs.setValue(
+		preferences.setValue(
 			PropsKeys.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
+		preferences.setValue(
+			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
 
-		prefs.store();
+		preferences.store();
 	}
 
 	private static Log _log = LogFactory.getLog(EditServerAction.class);

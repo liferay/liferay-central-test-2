@@ -106,13 +106,13 @@ public class ShoppingPreferences {
 	}
 
 	public String getPayPalEmailAddress() {
-		return _prefs.getValue("paypal-email-address", StringPool.BLANK);
+		return _preferences.getValue("paypal-email-address", StringPool.BLANK);
 	}
 
 	public void setPayPalEmailAddress(String payPalEmailAddress)
 		throws ReadOnlyException {
 
-		_prefs.setValue("paypal-email-address", payPalEmailAddress);
+		_preferences.setValue("paypal-email-address", payPalEmailAddress);
 	}
 
 	public boolean usePayPal() {
@@ -120,15 +120,15 @@ public class ShoppingPreferences {
 	}
 
 	public String getCurrencyId() {
-		return _prefs.getValue("currency-id", "USD");
+		return _preferences.getValue("currency-id", "USD");
 	}
 
 	public void setCurrencyId(String currencyId) throws ReadOnlyException {
-		_prefs.setValue("currency-id", currencyId);
+		_preferences.setValue("currency-id", currencyId);
 	}
 
 	public String[] getCcTypes() {
-		String ccTypes = _prefs.getValue(
+		String ccTypes = _preferences.getValue(
 			"cc-types", StringUtil.merge(CC_TYPES));
 
 		if (ccTypes.equals(CC_NONE)) {
@@ -141,42 +141,42 @@ public class ShoppingPreferences {
 
 	public void setCcTypes(String[] ccTypes) throws ReadOnlyException {
 		if (ccTypes.length == 0) {
-			_prefs.setValue("cc-types", CC_NONE);
+			_preferences.setValue("cc-types", CC_NONE);
 		}
 		else {
-			_prefs.setValue("cc-types", StringUtil.merge(ccTypes));
+			_preferences.setValue("cc-types", StringUtil.merge(ccTypes));
 		}
 	}
 
 	public String getTaxState() {
-		return _prefs.getValue("tax-state", "CA");
+		return _preferences.getValue("tax-state", "CA");
 	}
 
 	public void setTaxState(String taxState) throws ReadOnlyException {
-		_prefs.setValue("tax-state", taxState);
+		_preferences.setValue("tax-state", taxState);
 	}
 
 	public double getTaxRate() {
-		return GetterUtil.getDouble(_prefs.getValue(
+		return GetterUtil.getDouble(_preferences.getValue(
 			"tax-rate", StringPool.BLANK));
 	}
 
 	public void setTaxRate(double taxRate) throws ReadOnlyException {
-		_prefs.setValue("tax-rate", String.valueOf(taxRate));
+		_preferences.setValue("tax-rate", String.valueOf(taxRate));
 	}
 
 	public String getShippingFormula() {
-		return _prefs.getValue("shipping-formula", "flat");
+		return _preferences.getValue("shipping-formula", "flat");
 	}
 
 	public void setShippingFormula(String shippingFormula)
 		throws ReadOnlyException {
 
-		_prefs.setValue("shipping-formula", shippingFormula);
+		_preferences.setValue("shipping-formula", shippingFormula);
 	}
 
 	public String[] getShipping() {
-		String value = _prefs.getValue("shipping", null);
+		String value = _preferences.getValue("shipping", null);
 
 		if (value == null) {
 			return new String[5];
@@ -187,11 +187,11 @@ public class ShoppingPreferences {
 	}
 
 	public void setShipping(String[] shipping) throws ReadOnlyException {
-		_prefs.setValue("shipping", StringUtil.merge(shipping));
+		_preferences.setValue("shipping", StringUtil.merge(shipping));
 	}
 
 	public String[][] getAlternativeShipping() {
-		String value = _prefs.getValue("alternative-shipping", null);
+		String value = _preferences.getValue("alternative-shipping", null);
 
 		if (value == null) {
 			return new String[0][0];
@@ -223,7 +223,7 @@ public class ShoppingPreferences {
 			}
 		}
 
-		_prefs.setValue("alternative-shipping", sb.toString());
+		_preferences.setValue("alternative-shipping", sb.toString());
 	}
 
 	public boolean useAlternativeShipping() {
@@ -257,17 +257,17 @@ public class ShoppingPreferences {
 	}
 
 	public String getInsuranceFormula() {
-		return _prefs.getValue("insurance-formula", "flat");
+		return _preferences.getValue("insurance-formula", "flat");
 	}
 
 	public void setInsuranceFormula(String insuranceFormula)
 		throws ReadOnlyException {
 
-		_prefs.setValue("insurance-formula", insuranceFormula);
+		_preferences.setValue("insurance-formula", insuranceFormula);
 	}
 
 	public String[] getInsurance() {
-		String value = _prefs.getValue("insurance", null);
+		String value = _preferences.getValue("insurance", null);
 
 		if (value == null) {
 			return new String[5];
@@ -278,46 +278,46 @@ public class ShoppingPreferences {
 	}
 
 	public void setInsurance(String[] insurance) throws ReadOnlyException {
-		_prefs.setValue("insurance", StringUtil.merge(insurance));
+		_preferences.setValue("insurance", StringUtil.merge(insurance));
 	}
 
 	public double getMinOrder() {
-		return GetterUtil.getDouble(_prefs.getValue(
+		return GetterUtil.getDouble(_preferences.getValue(
 			"min-order", StringPool.BLANK));
 	}
 
 	public void setMinOrder(double minOrder) throws ReadOnlyException {
-		_prefs.setValue("min-order", String.valueOf(minOrder));
+		_preferences.setValue("min-order", String.valueOf(minOrder));
 	}
 
 	public String getEmailFromAddress() {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.SHOPPING_EMAIL_FROM_ADDRESS);
 
-		return _prefs.getValue("email-from-address", emailFromAddress);
+		return _preferences.getValue("email-from-address", emailFromAddress);
 	}
 
 	public void setEmailFromAddress(String emailFromAddress)
 		throws ReadOnlyException {
 
-		_prefs.setValue("email-from-address", emailFromAddress);
+		_preferences.setValue("email-from-address", emailFromAddress);
 	}
 
 	public String getEmailFromName() {
 		String emailFromName = PropsUtil.get(
 			PropsKeys.SHOPPING_EMAIL_FROM_NAME);
 
-		return _prefs.getValue("email-from-name", emailFromName);
+		return _preferences.getValue("email-from-name", emailFromName);
 	}
 
 	public void setEmailFromName(String emailFromName)
 		throws ReadOnlyException {
 
-		_prefs.setValue("email-from-name", emailFromName);
+		_preferences.setValue("email-from-name", emailFromName);
 	}
 
 	public boolean getEmailOrderConfirmationEnabled() {
-		String emailOrderConfirmationEnabled = _prefs.getValue(
+		String emailOrderConfirmationEnabled = _preferences.getValue(
 			"email-order-confirmation-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailOrderConfirmationEnabled)) {
@@ -333,13 +333,13 @@ public class ShoppingPreferences {
 			boolean emailOrderConfirmationEnabled)
 		throws ReadOnlyException {
 
-		_prefs.setValue(
+		_preferences.setValue(
 			"email-order-confirmation-enabled",
 			String.valueOf(emailOrderConfirmationEnabled));
 	}
 
 	public String getEmailOrderConfirmationBody() {
-		String emailOrderConfirmationBody = _prefs.getValue(
+		String emailOrderConfirmationBody = _preferences.getValue(
 			"email-order-confirmation-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailOrderConfirmationBody)) {
@@ -354,12 +354,12 @@ public class ShoppingPreferences {
 	public void setEmailOrderConfirmationBody(String emailOrderConfirmationBody)
 		throws ReadOnlyException {
 
-		_prefs.setValue(
+		_preferences.setValue(
 			"email-order-confirmation-body", emailOrderConfirmationBody);
 	}
 
 	public String getEmailOrderConfirmationSubject() {
-		String emailOrderConfirmationSubject = _prefs.getValue(
+		String emailOrderConfirmationSubject = _preferences.getValue(
 			"email-order-confirmation-subject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailOrderConfirmationSubject)) {
@@ -375,12 +375,12 @@ public class ShoppingPreferences {
 			String emailOrderConfirmationSubject)
 		throws ReadOnlyException {
 
-		_prefs.setValue(
+		_preferences.setValue(
 			"email-order-confirmation-subject", emailOrderConfirmationSubject);
 	}
 
 	public boolean getEmailOrderShippingEnabled() {
-		String emailOrderShippingEnabled = _prefs.getValue(
+		String emailOrderShippingEnabled = _preferences.getValue(
 			"email-order-shipping-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailOrderShippingEnabled)) {
@@ -395,13 +395,13 @@ public class ShoppingPreferences {
 	public void setEmailOrderShippingEnabled(boolean emailOrderShippingEnabled)
 		throws ReadOnlyException {
 
-		_prefs.setValue(
+		_preferences.setValue(
 			"email-order-shipping-enabled",
 			String.valueOf(emailOrderShippingEnabled));
 	}
 
 	public String getEmailOrderShippingBody() {
-		String emailOrderShippingBody = _prefs.getValue(
+		String emailOrderShippingBody = _preferences.getValue(
 			"email-order-shipping-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailOrderShippingBody)) {
@@ -416,11 +416,12 @@ public class ShoppingPreferences {
 	public void setEmailOrderShippingBody(String emailOrderShippingBody)
 		throws ReadOnlyException {
 
-		_prefs.setValue("email-order-shipping-body", emailOrderShippingBody);
+		_preferences.setValue(
+			"email-order-shipping-body", emailOrderShippingBody);
 	}
 
 	public String getEmailOrderShippingSubject() {
-		String emailOrderShippingSubject = _prefs.getValue(
+		String emailOrderShippingSubject = _preferences.getValue(
 			"email-order-shipping-subject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailOrderShippingSubject)) {
@@ -435,12 +436,12 @@ public class ShoppingPreferences {
 	public void setEmailOrderShippingSubject(String emailOrderShippingSubject)
 		throws ReadOnlyException {
 
-		_prefs.setValue(
+		_preferences.setValue(
 			"email-order-shipping-subject", emailOrderShippingSubject);
 	}
 
 	public void store() throws IOException, ValidatorException {
-		_prefs.store();
+		_preferences.store();
 	}
 
 	protected ShoppingPreferences(long companyId, long groupId)
@@ -451,10 +452,10 @@ public class ShoppingPreferences {
 		long plid = PortletKeys.PREFS_PLID_SHARED;
 		String portletId = PortletKeys.SHOPPING;
 
-		_prefs = PortletPreferencesLocalServiceUtil.getPreferences(
+		_preferences = PortletPreferencesLocalServiceUtil.getPreferences(
 			companyId, ownerId, ownerType, plid, portletId);
 	}
 
-	private PortletPreferences _prefs;
+	private PortletPreferences _preferences;
 
 }

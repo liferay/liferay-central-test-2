@@ -43,9 +43,9 @@ public class ReportsPortlet extends StrutsPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
-		System.out.println(prefs.getValue("test", ""));
+		System.out.println(preferences.getValue("test", ""));
 
 		super.doView(renderRequest, renderResponse);
 	}

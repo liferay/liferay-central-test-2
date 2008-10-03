@@ -67,7 +67,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
@@ -87,7 +87,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 	public String exportData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
@@ -124,7 +124,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
+			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
 		try {

@@ -70,9 +70,9 @@ public class ViewAction extends PortletAction {
 	protected String getSrc(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
-		String src = prefs.getValue("src", StringPool.BLANK);
+		String src = preferences.getValue("src", StringPool.BLANK);
 
 		src = ParamUtil.getString(renderRequest, "src", src);
 
@@ -82,9 +82,9 @@ public class ViewAction extends PortletAction {
 	protected String getUserName(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
-		String userName = prefs.getValue("user-name", StringPool.BLANK);
+		String userName = preferences.getValue("user-name", StringPool.BLANK);
 
 		if (Validator.isNull(userName)) {
 			userName = renderRequest.getRemoteUser();
@@ -96,9 +96,9 @@ public class ViewAction extends PortletAction {
 	protected String getPassword(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
-		String password = prefs.getValue("password", StringPool.BLANK);
+		String password = preferences.getValue("password", StringPool.BLANK);
 
 		if (Validator.isNull(password)) {
 			password = PortalUtil.getUserPassword(renderRequest);
@@ -111,13 +111,13 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws SystemException {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
 		String src = getSrc(renderRequest, renderResponse);
 
 		boolean auth = GetterUtil.getBoolean(
-			prefs.getValue("auth", StringPool.BLANK));
-		String authType = prefs.getValue("auth-type", StringPool.BLANK);
+			preferences.getValue("auth", StringPool.BLANK));
+		String authType = preferences.getValue("auth-type", StringPool.BLANK);
 		String userName = getUserName(renderRequest, renderResponse);
 		String password = getPassword(renderRequest, renderResponse);
 

@@ -176,25 +176,26 @@ public interface Portlet extends PortletModel {
 
 	public java.lang.String getPreferencesValidator();
 
-	public void setPreferencesValidator(java.lang.String prefsValidator);
+	public void setPreferencesValidator(java.lang.String preferencesValidator);
 
 	public boolean getPreferencesCompanyWide();
 
 	public boolean isPreferencesCompanyWide();
 
-	public void setPreferencesCompanyWide(boolean prefsCompanyWide);
+	public void setPreferencesCompanyWide(boolean preferencesCompanyWide);
 
 	public boolean getPreferencesUniquePerLayout();
 
 	public boolean isPreferencesUniquePerLayout();
 
-	public void setPreferencesUniquePerLayout(boolean prefsUniquePerLayout);
+	public void setPreferencesUniquePerLayout(
+		boolean preferencesUniquePerLayout);
 
 	public boolean getPreferencesOwnedByGroup();
 
 	public boolean isPreferencesOwnedByGroup();
 
-	public void setPreferencesOwnedByGroup(boolean prefsOwnedByGroup);
+	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup);
 
 	public boolean getUseDefaultTemplate();
 

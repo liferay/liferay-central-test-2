@@ -92,12 +92,12 @@ public class LayoutServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
-		long companyId, java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue)
+		long companyId, java.lang.String portletId,
+		java.lang.String preferencesKey, java.lang.String preferencesValue)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .getLayoutReferences(companyId, portletId, prefsKey,
-			prefsValue);
+				   .getLayoutReferences(companyId, portletId, preferencesKey,
+			preferencesValue);
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,

@@ -242,7 +242,8 @@ public class JournalArticleServiceHttp {
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -356,9 +357,9 @@ public class JournalArticleServiceHttp {
 				paramObj31 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj32 = prefs;
+			Object paramObj32 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj32 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -588,7 +589,8 @@ public class JournalArticleServiceHttp {
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -703,9 +705,9 @@ public class JournalArticleServiceHttp {
 				paramObj31 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj32 = prefs;
+			Object paramObj32 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj32 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -770,7 +772,7 @@ public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -790,9 +792,9 @@ public class JournalArticleServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = prefs;
+			Object paramObj4 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -1053,7 +1055,8 @@ public class JournalArticleServiceHttp {
 
 	public static void deleteArticle(HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -1073,9 +1076,9 @@ public class JournalArticleServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = prefs;
+			Object paramObj4 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -1109,7 +1112,8 @@ public class JournalArticleServiceHttp {
 
 	public static void expireArticle(HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -1129,9 +1133,9 @@ public class JournalArticleServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = prefs;
+			Object paramObj4 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -1266,7 +1270,8 @@ public class JournalArticleServiceHttp {
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String articleURL,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -1381,9 +1386,9 @@ public class JournalArticleServiceHttp {
 				paramObj32 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj33 = prefs;
+			Object paramObj33 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj33 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 

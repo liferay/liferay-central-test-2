@@ -44,10 +44,10 @@ public class SessionClicks {
 		HttpServletRequest request, String key, String defaultValue) {
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			return prefs.getValue(CLASS_NAME, key, defaultValue);
+			return preferences.getValue(CLASS_NAME, key, defaultValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -60,10 +60,10 @@ public class SessionClicks {
 		HttpServletRequest request, String key, String value) {
 
 		try {
-			PortalPreferences prefs =
+			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			prefs.setValue(CLASS_NAME, key, value);
+			preferences.setValue(CLASS_NAME, key, value);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

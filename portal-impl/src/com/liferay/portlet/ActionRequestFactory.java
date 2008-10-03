@@ -48,7 +48,7 @@ public class ActionRequestFactory {
 			HttpServletRequest request, Portlet portlet,
 			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
-			PortletPreferences prefs, long plid)
+			PortletPreferences preferences, long plid)
 		throws Exception {
 
 		ActionRequestImpl actionRequestImpl = null;
@@ -63,7 +63,7 @@ public class ActionRequestFactory {
 
 		actionRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, prefs, plid);
+			portletMode, preferences, plid);
 
 		return actionRequestImpl;
 	}

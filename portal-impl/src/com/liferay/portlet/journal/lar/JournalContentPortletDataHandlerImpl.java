@@ -94,14 +94,14 @@ public class JournalContentPortletDataHandlerImpl
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
-			prefs.setValue("group-id", StringPool.BLANK);
-			prefs.setValue("article-id", StringPool.BLANK);
+			preferences.setValue("group-id", StringPool.BLANK);
+			preferences.setValue("article-id", StringPool.BLANK);
 
-			return prefs;
+			return preferences;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -110,11 +110,11 @@ public class JournalContentPortletDataHandlerImpl
 
 	public String exportData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
-			String articleId = prefs.getValue("article-id", null);
+			String articleId = preferences.getValue("article-id", null);
 
 			if (articleId == null) {
 				if (_log.isWarnEnabled()) {
@@ -127,7 +127,7 @@ public class JournalContentPortletDataHandlerImpl
 			}
 
 			long articleGroupId = GetterUtil.getLong(
-				prefs.getValue("group-id", StringPool.BLANK));
+				preferences.getValue("group-id", StringPool.BLANK));
 
 			if (articleGroupId <= 0) {
 				if (_log.isWarnEnabled()) {
@@ -211,7 +211,7 @@ public class JournalContentPortletDataHandlerImpl
 
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
+			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
 		try {
@@ -256,14 +256,15 @@ public class JournalContentPortletDataHandlerImpl
 					context, structureIds, templateIds, articleIds, articleEl);
 			}
 
-			String articleId = prefs.getValue("article-id", StringPool.BLANK);
+			String articleId = preferences.getValue(
+				"article-id", StringPool.BLANK);
 
 			if (Validator.isNotNull(articleId)) {
 				articleId = MapUtil.getString(articleIds, articleId, articleId);
 
-				prefs.setValue(
+				preferences.setValue(
 					"group-id", String.valueOf(context.getGroupId()));
-				prefs.setValue("article-id", articleId);
+				preferences.setValue("article-id", articleId);
 			}
 
 			Element dlFoldersEl = root.element("dl-folders");
@@ -387,7 +388,7 @@ public class JournalContentPortletDataHandlerImpl
 					context, igFolderPKs, image, binPath);
 			}
 
-			return prefs;
+			return preferences;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);

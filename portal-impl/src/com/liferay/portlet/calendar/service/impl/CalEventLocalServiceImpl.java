@@ -1041,7 +1041,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			long plid = PortletKeys.PREFS_PLID_SHARED;
 			String portletId = PortletKeys.CALENDAR;
 
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				portletPreferencesLocalService.getPreferences(
 					event.getCompanyId(), ownerId, ownerType, plid, portletId);
 
@@ -1053,8 +1053,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String portletName = PortalUtil.getPortletTitle(
 				PortletKeys.CALENDAR, user);
 
-			String fromName = CalUtil.getEmailFromName(prefs);
-			String fromAddress = CalUtil.getEmailFromAddress(prefs);
+			String fromName = CalUtil.getEmailFromName(preferences);
+			String fromAddress = CalUtil.getEmailFromAddress(preferences);
 
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
@@ -1063,8 +1063,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				toAddress = contact.getSmsSn();
 			}
 
-			String subject = CalUtil.getEmailEventReminderSubject(prefs);
-			String body = CalUtil.getEmailEventReminderBody(prefs);
+			String subject = CalUtil.getEmailEventReminderSubject(preferences);
+			String body = CalUtil.getEmailEventReminderBody(preferences);
 
 			DateFormat dateFormatDateTime = DateFormats.getDateTime(
 				user.getLocale(), user.getTimeZone());

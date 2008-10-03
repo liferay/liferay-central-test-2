@@ -68,11 +68,11 @@ public class ViewAction extends PortletAction {
 		Portlet portlet = (Portlet)renderRequest.getAttribute(
 			WebKeys.RENDER_PORTLET);
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				renderRequest, portlet.getPortletId());
 
-		String layoutTemplateId = prefs.getValue(
+		String layoutTemplateId = preferences.getValue(
 			"layout-template-id",
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 

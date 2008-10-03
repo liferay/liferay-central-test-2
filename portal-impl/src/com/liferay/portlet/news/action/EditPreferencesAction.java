@@ -67,7 +67,7 @@ public class EditPreferencesAction extends PortletAction {
 			return;
 		}
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
@@ -75,7 +75,7 @@ public class EditPreferencesAction extends PortletAction {
 			String categoryName = actionRequest.getParameter("categoryName");
 			String list = actionRequest.getParameter("feeds");
 
-			Set<Feed> selFeeds = NewsUtil.getSelFeeds(prefs);
+			Set<Feed> selFeeds = NewsUtil.getSelFeeds(preferences);
 
 			Iterator<Feed> itr = selFeeds.iterator();
 
@@ -109,13 +109,13 @@ public class EditPreferencesAction extends PortletAction {
 				}
 			}
 
-			prefs.setValues("sel-feeds", NewsUtil.getSelFeeds(selFeeds));
+			preferences.setValues("sel-feeds", NewsUtil.getSelFeeds(selFeeds));
 		}
 		else if (tabs1.equals("display-settings")) {
 			String list = actionRequest.getParameter("feeds");
 			int articlesPerNews = ParamUtil.get(actionRequest, "apn", 4);
 
-			prefs.setValue(
+			preferences.setValue(
 				"articles-per-news", String.valueOf(articlesPerNews));
 
 			Set<Feed> selFeeds = new LinkedHashSet<Feed>();
@@ -132,10 +132,10 @@ public class EditPreferencesAction extends PortletAction {
 				}
 			}
 
-			prefs.setValues("sel-feeds", NewsUtil.getSelFeeds(selFeeds));
+			preferences.setValues("sel-feeds", NewsUtil.getSelFeeds(selFeeds));
 		}
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doEdit");

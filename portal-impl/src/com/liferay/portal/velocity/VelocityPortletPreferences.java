@@ -40,26 +40,26 @@ import org.apache.commons.logging.LogFactory;
 public class VelocityPortletPreferences {
 
 	public VelocityPortletPreferences() {
-		_prefsImpl = new PortletPreferencesImpl();
+		_preferencesImpl = new PortletPreferencesImpl();
 	}
 
 	public void setValue(String key, String value) throws ReadOnlyException {
-		_prefsImpl.setValue(key, value);
+		_preferencesImpl.setValue(key, value);
 	}
 
 	public void setValues(String key, String[] values)
 		throws ReadOnlyException {
 
-		_prefsImpl.setValues(key, values);
+		_preferencesImpl.setValues(key, values);
 	}
 
 	public void reset() {
-		_prefsImpl.reset();
+		_preferencesImpl.reset();
 	}
 
 	public String toString() {
 		try {
-			return PortletPreferencesSerializer.toXML(_prefsImpl);
+			return PortletPreferencesSerializer.toXML(_preferencesImpl);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -71,6 +71,6 @@ public class VelocityPortletPreferences {
 	private static Log _log =
 		LogFactory.getLog(VelocityPortletPreferences.class);
 
-	private PortletPreferencesImpl _prefsImpl;
+	private PortletPreferencesImpl _preferencesImpl;
 
 }

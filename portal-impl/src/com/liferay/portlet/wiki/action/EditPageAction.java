@@ -255,14 +255,14 @@ public class EditPageAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		double version = ParamUtil.getDouble(actionRequest, "version");
 
 		WikiPageServiceUtil.revertPage(
-			nodeId, title, version, prefs, themeDisplay);
+			nodeId, title, version, preferences, themeDisplay);
 	}
 
 	protected void subscribePage(ActionRequest actionRequest) throws Exception {
@@ -287,7 +287,7 @@ public class EditPageAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
@@ -304,7 +304,7 @@ public class EditPageAction extends PortletAction {
 
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,
-			parentTitle, redirectTitle, tagsEntries, prefs, themeDisplay);
+			parentTitle, redirectTitle, tagsEntries, preferences, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

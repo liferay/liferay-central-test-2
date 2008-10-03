@@ -80,24 +80,24 @@ public class ViewAction extends PortletAction {
 
 		String portletId = portletConfigImpl.getPortletId();
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletId);
 
 		boolean requireCaptcha = GetterUtil.getBoolean(
-			prefs.getValue("requireCaptcha", StringPool.BLANK));
+			preferences.getValue("requireCaptcha", StringPool.BLANK));
 		String successURL = GetterUtil.getString(
-			prefs.getValue("successURL", StringPool.BLANK));
+			preferences.getValue("successURL", StringPool.BLANK));
 		boolean sendAsEmail = GetterUtil.getBoolean(
-			prefs.getValue("sendAsEmail", StringPool.BLANK));
+			preferences.getValue("sendAsEmail", StringPool.BLANK));
 		boolean saveToDatabase = GetterUtil.getBoolean(
-			prefs.getValue("saveToDatabase", StringPool.BLANK));
+			preferences.getValue("saveToDatabase", StringPool.BLANK));
 		String databaseTableName = GetterUtil.getString(
-			prefs.getValue("databaseTableName", StringPool.BLANK));
+			preferences.getValue("databaseTableName", StringPool.BLANK));
 		boolean saveToFile = GetterUtil.getBoolean(
-			prefs.getValue("saveToFile", StringPool.BLANK));
+			preferences.getValue("saveToFile", StringPool.BLANK));
 		String fileName = GetterUtil.getString(
-			prefs.getValue("fileName", StringPool.BLANK));
+			preferences.getValue("fileName", StringPool.BLANK));
 
 		if (requireCaptcha) {
 			try {
@@ -120,7 +120,7 @@ public class ViewAction extends PortletAction {
 		Set<String> validationErrors = null;
 
 		try {
-			validationErrors = validate(fieldValues, prefs);
+			validationErrors = validate(fieldValues, preferences);
 		}
 		catch (Exception e) {
 			actionRequest.setAttribute(
@@ -137,7 +137,7 @@ public class ViewAction extends PortletAction {
 			boolean fileSuccess = true;
 
 			if (sendAsEmail) {
-				emailSuccess = sendEmail(fieldValues, prefs);
+				emailSuccess = sendEmail(fieldValues, preferences);
 			}
 
 			if (saveToDatabase) {
@@ -145,17 +145,18 @@ public class ViewAction extends PortletAction {
 					databaseTableName = WebFormUtil.getNewDatabaseTableName(
 						portletId);
 
-					prefs.setValue("databaseTableName", databaseTableName);
+					preferences.setValue(
+						"databaseTableName", databaseTableName);
 
-					prefs.store();
+					preferences.store();
 				}
 
 				databaseSuccess = saveDatabase(
-					fieldValues, prefs, databaseTableName);
+					fieldValues, preferences, databaseTableName);
 			}
 
 			if (saveToFile) {
-				fileSuccess = saveFile(fieldValues, prefs, fileName);
+				fileSuccess = saveFile(fieldValues, preferences, fileName);
 			}
 
 			if (emailSuccess && databaseSuccess && fileSuccess) {
@@ -191,7 +192,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected String getMailBody(
-		List<String> fieldValues, PortletPreferences prefs) {
+		List<String> fieldValues, PortletPreferences preferences) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -200,7 +201,7 @@ public class ViewAction extends PortletAction {
 		for (int i = 1; itr.hasNext(); i++) {
 			String fieldValue = itr.next();
 
-			String fieldLabel = prefs.getValue(
+			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {
@@ -215,11 +216,11 @@ public class ViewAction extends PortletAction {
 	}
 
 	private boolean saveDatabase(
-			List<String> fieldValues, PortletPreferences prefs,
+			List<String> fieldValues, PortletPreferences preferences,
 			String databaseTableName)
 		throws Exception {
 
-		WebFormUtil.checkTable(databaseTableName, prefs);
+		WebFormUtil.checkTable(databaseTableName, preferences);
 
 		long classPK = CounterLocalServiceUtil.increment(
 			WebFormUtil.class.getName());
@@ -230,7 +231,7 @@ public class ViewAction extends PortletAction {
 			for (int i = 1; itr.hasNext(); i++) {
 				String fieldValue = itr.next();
 
-				String fieldLabel = prefs.getValue(
+				String fieldLabel = preferences.getValue(
 					"fieldLabel" + i, StringPool.BLANK);
 
 				if (Validator.isNotNull(fieldLabel)) {
@@ -251,7 +252,8 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected boolean saveFile(
-		List<String> fieldValues, PortletPreferences prefs, String fileName) {
+		List<String> fieldValues, PortletPreferences preferences,
+		String fileName) {
 
 		// Save the file as a standard Excel CSV format. Use ; as a delimiter,
 		// quote each entry with double quotes, and escape double quotes in
@@ -264,7 +266,7 @@ public class ViewAction extends PortletAction {
 		for (int i = 1; itr.hasNext(); i++) {
 			String fieldValue = itr.next();
 
-			String fieldLabel = prefs.getValue(
+			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {
@@ -289,11 +291,11 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected boolean sendEmail(
-		List<String> fieldValues, PortletPreferences prefs) {
+		List<String> fieldValues, PortletPreferences preferences) {
 
 		try {
-			String subject = prefs.getValue("subject", StringPool.BLANK);
-			String emailAddress = prefs.getValue(
+			String subject = preferences.getValue("subject", StringPool.BLANK);
+			String emailAddress = preferences.getValue(
 				"emailAddress", StringPool.BLANK);
 
 			if (Validator.isNull(emailAddress)) {
@@ -304,7 +306,7 @@ public class ViewAction extends PortletAction {
 				return false;
 			}
 
-			String body = getMailBody(fieldValues, prefs);
+			String body = getMailBody(fieldValues, preferences);
 
 			InternetAddress fromAddress = new InternetAddress(emailAddress);
 			InternetAddress toAddress = new InternetAddress(emailAddress);
@@ -324,7 +326,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected Set<String> validate(
-			List<String> fieldValues, PortletPreferences prefs)
+			List<String> fieldValues, PortletPreferences preferences)
 		throws Exception {
 
 		Set<String> validationErrors = new HashSet<String>();
@@ -332,10 +334,10 @@ public class ViewAction extends PortletAction {
 		for (int i = 1; i < WebFormUtil.MAX_FIELDS; i++) {
 			String fieldValue = fieldValues.get(i - 1);
 
-			String fieldLabel = prefs.getValue(
+			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 			boolean fieldOptional = GetterUtil.getBoolean(
-				prefs.getValue("fieldOptional" + i, StringPool.BLANK));
+				preferences.getValue("fieldOptional" + i, StringPool.BLANK));
 
 			if (!fieldOptional && Validator.isNotNull(fieldLabel) &&
 				Validator.isNull(fieldValue)) {
@@ -346,7 +348,8 @@ public class ViewAction extends PortletAction {
 			}
 
 			String validationScript = GetterUtil.getString(
-				prefs.getValue("fieldValidationScript" + i, StringPool.BLANK));
+				preferences.getValue(
+					"fieldValidationScript" + i, StringPool.BLANK));
 
 			if (Validator.isNotNull(validationScript) &&
 				!WebFormUtil.validate(

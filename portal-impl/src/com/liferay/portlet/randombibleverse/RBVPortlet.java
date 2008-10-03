@@ -54,11 +54,11 @@ public class RBVPortlet extends JSPPortlet {
 				String language = ParamUtil.getString(
 					actionRequest, "language");
 
-				PortletPreferences prefs = actionRequest.getPreferences();
+				PortletPreferences preferences = actionRequest.getPreferences();
 
-				prefs.setValue("language", language);
+				preferences.setValue("language", language);
 
-				prefs.store();
+				preferences.store();
 
 				SessionMessages.add(
 					actionRequest,

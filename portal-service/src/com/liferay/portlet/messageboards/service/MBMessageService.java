@@ -76,7 +76,7 @@ public interface MBMessageService {
 		long categoryId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -86,7 +86,7 @@ public interface MBMessageService {
 		long categoryId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -117,7 +117,7 @@ public interface MBMessageService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -128,7 +128,7 @@ public interface MBMessageService {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -224,7 +224,8 @@ public interface MBMessageService {
 		long messageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

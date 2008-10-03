@@ -469,16 +469,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				socialRequestInterpreterInstance);
 		}
 
-		PreferencesValidator prefsValidatorInstance = null;
+		PreferencesValidator preferencesValidatorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-			prefsValidatorInstance =
+			preferencesValidatorInstance =
 				(PreferencesValidator)portletClassLoader.loadClass(
 					portlet.getPreferencesValidator()).newInstance();
 
 			try {
 				if (PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
-					prefsValidatorInstance.validate(
+					preferencesValidatorInstance.validate(
 						PortletPreferencesSerializer.fromDefaultXML(
 							portlet.getDefaultPreferences()));
 				}
@@ -518,7 +518,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			popMessageListenerInstance, socialActivityInterpreterInstance,
-			socialRequestInterpreterInstance, prefsValidatorInstance,
+			socialRequestInterpreterInstance, preferencesValidatorInstance,
 			resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);

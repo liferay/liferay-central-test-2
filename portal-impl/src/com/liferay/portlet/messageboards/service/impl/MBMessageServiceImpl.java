@@ -150,9 +150,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	public MBMessage addMessage(
 			long categoryId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -173,16 +173,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
-			addGuestPermissions, themeDisplay);
+			anonymous, priority, tagsEntries, preferences,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public MBMessage addMessage(
 			long categoryId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -203,7 +203,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, communityPermissions,
+			anonymous, priority, tagsEntries, preferences, communityPermissions,
 			guestPermissions, themeDisplay);
 	}
 
@@ -269,9 +269,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(categoryId, parentMessageId);
@@ -291,7 +291,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			subject, body, files, anonymous, priority, tagsEntries, preferences,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
@@ -299,9 +299,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			double priority, String[] tagsEntries,
+			PortletPreferences preferences, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(categoryId, parentMessageId);
@@ -321,7 +321,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			subject, body, files, anonymous, priority, tagsEntries, preferences,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
 
@@ -689,7 +689,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
 			List<String> existingFiles, double priority, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -716,7 +716,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, subject, body, files, existingFiles,
-			priority, tagsEntries, prefs, themeDisplay);
+			priority, tagsEntries, preferences, themeDisplay);
 	}
 
 	protected void checkReplyToPermission(long categoryId, long parentMessageId)

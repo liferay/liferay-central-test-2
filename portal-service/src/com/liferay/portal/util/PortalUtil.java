@@ -885,10 +885,10 @@ public class PortalUtil {
 		getPortal().setPortalPort(request);
 	}
 
-	public static void storePreferences(PortletPreferences prefs)
+	public static void storePreferences(PortletPreferences preferences)
 		throws IOException, ValidatorException {
 
-		getPortal().storePreferences(prefs);
+		getPortal().storePreferences(preferences);
 	}
 
 	public static String transformCustomSQL(String sql) {

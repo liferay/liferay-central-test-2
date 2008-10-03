@@ -155,18 +155,18 @@ public class TrackbackAction extends PortletAction {
 	protected boolean isCommentsEnabled(ActionRequest actionRequest)
 		throws Exception {
 
-		PortletPreferences prefs = actionRequest.getPreferences();
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			prefs = PortletPreferencesFactoryUtil.getPortletSetup(
+			preferences = PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 		}
 
 		return GetterUtil.getBoolean(
-			prefs.getValue("enable-comments", null), true);
+			preferences.getValue("enable-comments", null), true);
 	}
 
 	protected void sendError(ActionResponse actionResponse, String msg)

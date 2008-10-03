@@ -57,7 +57,7 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		PortletPreferences prefs = renderRequest.getPreferences();
+		PortletPreferences preferences = renderRequest.getPreferences();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -66,7 +66,7 @@ public class ViewAction extends PortletAction {
 
 		if (groupId < 1) {
 			groupId = GetterUtil.getLong(
-				prefs.getValue("group-id", StringPool.BLANK));
+				preferences.getValue("group-id", StringPool.BLANK));
 		}
 
 		String articleId = ParamUtil.getString(renderRequest, "articleId");
@@ -74,9 +74,9 @@ public class ViewAction extends PortletAction {
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
-				prefs.getValue("article-id", StringPool.BLANK));
+				preferences.getValue("article-id", StringPool.BLANK));
 			templateId = GetterUtil.getString(
-				prefs.getValue("template-id", StringPool.BLANK));
+				preferences.getValue("template-id", StringPool.BLANK));
 		}
 
 		String languageId = LanguageUtil.getLanguageId(renderRequest);

@@ -86,7 +86,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
@@ -106,7 +106,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 	public String exportData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		try {
@@ -162,7 +162,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
+			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
 		try {
@@ -615,7 +615,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				MBMessage.class, message.getMessageId());
 		}
 
-		PortletPreferences prefs = null;
+		PortletPreferences preferences = null;
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -643,14 +643,14 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
 						existingFiles, message.getPriority(), tagsEntries,
-						prefs, themeDisplay);
+						preferences, themeDisplay);
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, userName, categoryId,
 						threadId, parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
-						message.getPriority(), tagsEntries, prefs,
+						message.getPriority(), tagsEntries, preferences,
 						addCommunityPermissions, addGuestPermissions,
 						themeDisplay);
 				}
@@ -660,7 +660,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					userId, userName, categoryId, threadId, parentMessageId,
 					message.getSubject(), message.getBody(), files,
 					message.getAnonymous(), message.getPriority(), tagsEntries,
-					prefs, addCommunityPermissions, addGuestPermissions,
+					preferences, addCommunityPermissions, addGuestPermissions,
 					themeDisplay);
 			}
 

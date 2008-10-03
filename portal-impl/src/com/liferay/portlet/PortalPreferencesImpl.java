@@ -37,9 +37,9 @@ import org.apache.commons.logging.LogFactory;
 public class PortalPreferencesImpl implements PortalPreferences {
 
 	public PortalPreferencesImpl(
-		PortletPreferencesImpl prefs, boolean signedIn) {
+		PortletPreferencesImpl preferences, boolean signedIn) {
 
-		_prefs = prefs;
+		_preferences = preferences;
 		_signedIn = signedIn;
 	}
 
@@ -50,7 +50,7 @@ public class PortalPreferencesImpl implements PortalPreferences {
 	public String getValue(String namespace, String key, String defaultValue) {
 		key = _encodeKey(namespace, key);
 
-		return _prefs.getValue(key, defaultValue);
+		return _preferences.getValue(key, defaultValue);
 	}
 
 	public String[] getValues(String namespace, String key) {
@@ -62,7 +62,7 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 		key = _encodeKey(namespace, key);
 
-		return _prefs.getValues(key, defaultValue);
+		return _preferences.getValues(key, defaultValue);
 	}
 
 	public void setValue(String namespace, String key, String value) {
@@ -74,14 +74,14 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 		try {
 			if (value != null) {
-				_prefs.setValue(key, value);
+				_preferences.setValue(key, value);
 			}
 			else {
-				_prefs.reset(key);
+				_preferences.reset(key);
 			}
 
 			if (_signedIn) {
-				_prefs.store();
+				_preferences.store();
 			}
 		}
 		catch (Exception e) {
@@ -98,14 +98,14 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 		try {
 			if (values != null) {
-				_prefs.setValues(key, values);
+				_preferences.setValues(key, values);
 			}
 			else {
-				_prefs.reset(key);
+				_preferences.reset(key);
 			}
 
 			if (_signedIn) {
-				_prefs.store();
+				_preferences.store();
 			}
 		}
 		catch (Exception e) {
@@ -121,7 +121,7 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 	private static Log _log = LogFactory.getLog(PortalPreferences.class);
 
-	private PortletPreferencesImpl _prefs;
+	private PortletPreferencesImpl _preferences;
 	private boolean _signedIn;
 
 }
