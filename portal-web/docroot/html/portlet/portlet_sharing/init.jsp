@@ -23,9 +23,3 @@
 %>
 
 <%@ include file="/html/portlet/init.jsp" %>
-
-<%@ page import="com.liferay.portlet.portletsharing.util.ShareWidgetUtil" %>
-<%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%@ page import="com.liferay.portal.service.*" %>
-<%@ page import="com.liferay.portal.model.User" %>
