@@ -57,6 +57,11 @@ body.portal-iframe {
 	padding: 0;
 }
 
+body.html-editor {
+	background: #FFF;
+	color: #000;
+}
+
 blockquote, ul, ol, dl {
 	margin: 1em;
 }
