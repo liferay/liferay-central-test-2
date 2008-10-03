@@ -61,9 +61,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			modelVar="organization"
 		>
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL" >
-				<pportlet:param name="struts_action" value="/directory/edit_organization" />
-				<pportlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<pportlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+				<portlet:param name="struts_action" value="/directory/edit_organization" />
+				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text

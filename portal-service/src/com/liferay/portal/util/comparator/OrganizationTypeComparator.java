@@ -33,9 +33,9 @@ import com.liferay.portal.model.Organization;
  */
 public class OrganizationTypeComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "orgLocation ASC, orgName ASC";
+	public static String ORDER_BY_ASC = "orgType ASC, orgName ASC";
 
-	public static String ORDER_BY_DESC = "orgLocation DESC, orgName DESC";
+	public static String ORDER_BY_DESC = "orgType DESC, orgName DESC";
 
 	public OrganizationTypeComparator() {
 		this(false);

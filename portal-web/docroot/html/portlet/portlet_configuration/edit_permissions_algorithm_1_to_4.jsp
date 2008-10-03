@@ -707,81 +707,71 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						url="<%= portletURL.toString() %>"
 					/>
 
-					<%
-					UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
+					<liferay-ui:search-container
+						rowChecker="<%= new RowChecker(renderResponse) %>"
+						searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
+					>
+						<liferay-ui:search-form
+							page="/html/portlet/enterprise_admin/user_group_search.jsp"
+						/>
 
-					searchContainer.setRowChecker(new RowChecker(renderResponse));
-					%>
+						<%
+						UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-					<liferay-ui:search-form
-						page="/html/portlet/enterprise_admin/user_group_search.jsp"
-						searchContainer="<%= searchContainer %>"
-					/>
+						LinkedHashMap userGroupParams = new LinkedHashMap();
 
-					<%
-					UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+						if (tabs3.equals("current")) {
+							userGroupParams.put("permissionsResourceId", new Long(resource.getResourceId()));
+						}
+						%>
 
-					LinkedHashMap userGroupParams = new LinkedHashMap();
+						<liferay-ui:search-container-results
+							results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+							total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams) %>"
+						/>
 
-					if (tabs3.equals("current")) {
-						userGroupParams.put("permissionsResourceId", new Long(resource.getResourceId()));
-					}
+						<liferay-ui:search-container-row
+							className="com.liferay.portal.model.UserGroup"
+							keyProperty="userGroupId"
+							modelVar="userGroup"
+						>
+							<liferay-ui:search-container-column-text
+								name="name"
+								orderable="<%= true %>"
+								property="name"
+							/>
 
-					int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+							<liferay-ui:search-container-column-text
+								name="description"
+								orderable="<%= true %>"
+								property="description"
+							/>
 
-					searchContainer.setTotal(total);
+							<liferay-ui:search-container-column-text
+								buffer="buffer"
+								name="permissions"
+							>
 
-					List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+								<%
+								List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
 
-					searchContainer.setResults(results);
-					%>
+								List actions = ResourceActionsUtil.getActions(permissions);
+								List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
-					<div class="separator"><!-- --></div>
+								buffer.append(StringUtil.merge(actionsNames, ", "));
+								%>
 
-					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
+							</liferay-ui:search-container-column-text>
+						</liferay-ui:search-container-row>
 
-					<br /><br />
+						<div class="separator"><!-- --></div>
 
-					<%
-					List<String> headerNames = new ArrayList<String>();
+						<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
 
-					headerNames.add("name");
-					headerNames.add("description");
-					headerNames.add("permissions");
+						<br /><br />
 
-					searchContainer.setHeaderNames(headerNames);
-
-					List resultRows = searchContainer.getResultRows();
-
-					for (int i = 0; i < results.size(); i++) {
-						UserGroup userGroup = (UserGroup)results.get(i);
-
-						ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
-
-						// Name
-
-						row.addText(userGroup.getName());
-
-						// Name
-
-						row.addText(userGroup.getName());
-
-						// Permissions
-
-						List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
-
-						List actions = ResourceActionsUtil.getActions(permissions);
-						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
-
-						row.addText(StringUtil.merge(actionsNames, ", "));
-
-						// Add result row
-
-						resultRows.add(row);
-					}
-					%>
-
-					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+						<liferay-ui:search-iterator />
+					</liferay-ui:search-container>
 				</c:when>
 				<c:otherwise>
 

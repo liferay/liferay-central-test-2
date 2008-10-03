@@ -63,67 +63,54 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		<liferay-util:include page="/html/portlet/directory/view_organizations.jsp" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
-		<%
-		UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
-
-		List headerNames = searchContainer.getHeaderNames();
-
-		headerNames.add(StringPool.BLANK);
-		%>
-
-		<liferay-ui:search-form
-			page="/html/portlet/directory/user_group_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
-
-		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-
-			<%
-			UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-
-			int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null);
-
-			searchContainer.setTotal(total);
-
-			List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-			searchContainer.setResults(results);
-
-			portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
-			%>
-
+		<liferay-ui:search-container
+			searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
+		>
 			<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-			<div class="separator"><!-- --></div>
+			<liferay-ui:search-form
+				page="/html/portlet/directory/user_group_search.jsp"
+			/>
 
-			<%
-			List resultRows = searchContainer.getResultRows();
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
-			for (int i = 0; i < results.size(); i++) {
-				UserGroup userGroup = (UserGroup)results.get(i);
+				<%
+				UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+				%>
 
-				ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
+				<liferay-ui:search-container-results
+					results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+					total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+				/>
 
-				// Name
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.model.UserGroup"
+					keyProperty="userGroupId"
+					modelVar="userGroup"
+				>
+					<liferay-ui:search-container-column-text
+						name="name"
+						orderable="<%= true %>"
+						property="name"
+					/>
 
-				row.addText(userGroup.getName());
+					<liferay-ui:search-container-column-text
+						name="description"
+						orderable="<%= true %>"
+						property="description"
+					/>
 
-				// Description
+					<liferay-ui:search-container-column-jsp
+						align="right"
+						path="/html/portlet/directory/user_group_action.jsp"
+					/>
+				</liferay-ui:search-container-row>
 
-				row.addText(userGroup.getDescription());
+				<div class="separator"><!-- --></div>
 
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/directory/user_group_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</c:if>
+				<liferay-ui:search-iterator />
+			</c:if>
+		</liferay-ui:search-container>
 	</c:when>
 </c:choose>
 

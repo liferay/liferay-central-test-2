@@ -440,65 +440,55 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<%
-		UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
+		<liferay-ui:search-container
+			rowChecker="<%= new UserGroupGroupChecker(renderResponse, group) %>"
+			searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
+		>
+			<liferay-ui:search-form
+				page="/html/portlet/enterprise_admin/user_group_search.jsp"
+			/>
 
-		searchContainer.setRowChecker(new UserGroupGroupChecker(renderResponse, group));
-		%>
+			<%
+			UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_group_search.jsp"
-			searchContainer="<%= searchContainer %>"
-			showAddButton="<%= true %>"
-		/>
+			LinkedHashMap userGroupParams = new LinkedHashMap();
 
-		<%
-		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+			if (tabs2.equals("current")) {
+				userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
+			}
+			%>
 
-		LinkedHashMap userGroupParams = new LinkedHashMap();
+			<liferay-ui:search-container-results
+				results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+				total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams) %>"
+			/>
 
-		if (tabs2.equals("current")) {
-			userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
-		}
+			<liferay-ui:search-container-row
+				className="com.liferay.portal.model.UserGroup"
+				keyProperty="userGroupId"
+				modelVar="userGroup"
+			>
+				<liferay-ui:search-container-column-text
+					name="name"
+					orderable="<%= true %>"
+					property="name"
+				/>
 
-		int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+				<liferay-ui:search-container-column-text
+					name="description"
+					orderable="<%= true %>"
+					property="description"
+				/>
+			</liferay-ui:search-container-row>
 
-		searchContainer.setTotal(total);
+			<div class="separator"><!-- --></div>
 
-		List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
-		searchContainer.setResults(results);
-		%>
+			<br /><br />
 
-		<div class="separator"><!-- --></div>
-
-		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-		<br /><br />
-
-		<%
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			UserGroup userGroup = (UserGroup)results.get(i);
-
-			ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
-
-			// Name
-
-			row.addText(userGroup.getName());
-
-			// Description
-
-			row.addText(userGroup.getDescription());
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-		%>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-iterator />
+		</liferay-ui:search-container>
 	</c:when>
 </c:choose>
 

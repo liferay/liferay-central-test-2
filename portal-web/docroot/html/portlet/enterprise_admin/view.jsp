@@ -236,92 +236,81 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		<liferay-util:include page="/html/portlet/enterprise_admin/view_organizations.jsp" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
-		<input name="<portlet:namespace />deleteUserGroupIds" type="hidden" value="" />
-
 		<liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="you-cannot-delete-user-groups-that-have-users" />
 
 		<%
-		UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
-
-		List headerNames = searchContainer.getHeaderNames();
-
-		headerNames.add(StringPool.BLANK);
+		RowChecker rowChecker = null;
 
 		if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
-			RowChecker rowChecker = new RowChecker(renderResponse);
-
-			searchContainer.setRowChecker(rowChecker);
+			rowChecker = new RowChecker(renderResponse);
 		}
 		%>
 
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_group_search.jsp"
-			searchContainer="<%= searchContainer %>"
-			showAddButton="<%= true %>"
-		/>
-
-		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-
-			<%
-			UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-
-			int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null);
-
-			searchContainer.setTotal(total);
-
-			List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-			searchContainer.setResults(results);
-
-			portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
-			%>
-
+		<liferay-ui:search-container
+			rowChecker="<%= rowChecker %>"
+			searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
+		>
+			<input name="<portlet:namespace />deleteUserGroupIds" type="hidden" value="" />
 			<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-			<div class="separator"><!-- --></div>
+			<liferay-ui:search-form
+				page="/html/portlet/enterprise_admin/user_group_search.jsp"
+				showAddButton="<%= true %>"
+			/>
 
-			<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
-				<br /><br />
+				<%
+				UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+				%>
+
+				<liferay-ui:search-container-results
+					results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+					total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+				/>
+
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.model.UserGroup"
+					keyProperty="userGroupId"
+					modelVar="userGroup"
+				>
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL" >
+						<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
+						<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+						<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+					</portlet:renderURL>
+
+					<liferay-ui:search-container-column-text
+						href="<%= rowURL %>"
+						name="name"
+						orderable="<%= true %>"
+						property="name"
+					/>
+
+					<liferay-ui:search-container-column-text
+						href="<%= rowURL %>"
+						name="description"
+						orderable="<%= true %>"
+						property="description"
+					/>
+
+					<liferay-ui:search-container-column-jsp
+						align="right"
+						path="/html/portlet/directory/user_group_action.jsp"
+					/>
+				</liferay-ui:search-container-row>
+
+				<div class="separator"><!-- --></div>
+
+				<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
+					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
+
+					<br /><br />
+				</c:if>
+
+				<liferay-ui:search-iterator />
 			</c:if>
-
-			<%
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				UserGroup userGroup = (UserGroup)results.get(i);
-
-				ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
-
-				PortletURL rowURL = renderResponse.createRenderURL();
-
-				rowURL.setWindowState(WindowState.MAXIMIZED);
-
-				rowURL.setParameter("struts_action", "/enterprise_admin/edit_user_group");
-				rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-				rowURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
-
-				// Name
-
-				row.addText(userGroup.getName(), rowURL);
-
-				// Description
-
-				row.addText(userGroup.getDescription(), rowURL);
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_group_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</c:if>
+		</liferay-ui:search-container>
 	</c:when>
 	<c:when test='<%= tabs1.equals("roles") %>'>
 		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="you-cannot-delete-a-system-role" />
