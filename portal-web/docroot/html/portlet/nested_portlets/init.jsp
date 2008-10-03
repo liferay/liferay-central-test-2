@@ -28,8 +28,8 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 
 <%@ page import="java.util.MissingResourceException" %>
-<%@ page import="java.util.regex.Pattern" %>
 <%@ page import="java.util.regex.Matcher" %>
+<%@ page import="java.util.regex.Pattern" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
