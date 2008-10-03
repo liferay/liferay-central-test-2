@@ -109,6 +109,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Advanced \u00bb");
 		selenium.type("_134_firstName", RuntimeVariables.replace("selen"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Users']"));
@@ -151,5 +152,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("link=\u00ab Basic");
 	}
 }

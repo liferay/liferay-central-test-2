@@ -93,7 +93,7 @@ public class DeleteUserTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//li[6]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("//li[7]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
