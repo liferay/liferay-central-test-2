@@ -241,9 +241,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		int beginPos = content.length();
 
-		Map<String, String> map;
-		DLFileEntry fileEntry;
-
 		while (true) {
 			beginPos = content.lastIndexOf("/get_file?", beginPos);
 
@@ -290,11 +287,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
 
-				map = MapUtil.toLinkedHashMap(
+				Map<String, String> map = MapUtil.toLinkedHashMap(
 					oldParameters.split(StringPool.AMPERSAND),
 					StringPool.EQUAL);
 
-				fileEntry = null;
+				DLFileEntry fileEntry = null;
 
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
@@ -344,9 +341,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		int beginPos = content.length();
 
-		Map<String, String> map;
-		IGImage image;
-
 		while (true) {
 			beginPos = content.lastIndexOf("/image/image_gallery?", beginPos);
 
@@ -393,11 +387,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
 
-				map = MapUtil.toLinkedHashMap(
+				Map<String, String> map = MapUtil.toLinkedHashMap(
 					oldParameters.split(StringPool.AMPERSAND),
 					StringPool.EQUAL);
 
-				image = null;
+				IGImage image = null;
 
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
