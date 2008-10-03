@@ -241,8 +241,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		int beginPos = content.length();
 
+		Map<String, String> map;
+		DLFileEntry fileEntry;
+
 		while (true) {
 			beginPos = content.lastIndexOf("/get_file?", beginPos);
+
+			if (beginPos == -1) {
+				return sb.toString();
+			}
 
 			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
 			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
@@ -277,14 +284,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 				oldParameters = oldParameters.substring(
 					oldParameters.indexOf(StringPool.QUESTION) + 1);
-				oldParameters = oldParameters.replace(
-					StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 
-				Map<String, String> map = MapUtil.toLinkedHashMap(
+				while (oldParameters.contains(StringPool.AMPERSAND_ENCODED)) {
+					oldParameters = oldParameters.replace(
+						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+				}
+
+				map = MapUtil.toLinkedHashMap(
 					oldParameters.split(StringPool.AMPERSAND),
 					StringPool.EQUAL);
 
-				DLFileEntry fileEntry = null;
+				fileEntry = null;
 
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
@@ -334,8 +344,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		int beginPos = content.length();
 
+		Map<String, String> map;
+		IGImage image;
+
 		while (true) {
 			beginPos = content.lastIndexOf("/image/image_gallery?", beginPos);
+
+			if (beginPos == -1) {
+				return sb.toString();
+			}
 
 			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
 			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
@@ -370,14 +387,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 				oldParameters = oldParameters.substring(
 					oldParameters.indexOf(StringPool.QUESTION) + 1);
-				oldParameters = oldParameters.replace(
-					StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 
-				Map<String, String> map = MapUtil.toLinkedHashMap(
+				while (oldParameters.contains(StringPool.AMPERSAND_ENCODED)) {
+					oldParameters = oldParameters.replace(
+						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+				}
+
+				map = MapUtil.toLinkedHashMap(
 					oldParameters.split(StringPool.AMPERSAND),
 					StringPool.EQUAL);
 
-				IGImage image = null;
+				image = null;
 
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
