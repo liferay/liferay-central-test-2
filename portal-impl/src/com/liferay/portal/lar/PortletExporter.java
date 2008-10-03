@@ -673,10 +673,10 @@ public class PortletExporter {
 		throws SystemException {
 
 		try {
-			Document prefsDoc = SAXReaderUtil.read(
+			Document preferencesDoc = SAXReaderUtil.read(
 				portletPreferences.getPreferences());
 
-			Element root = prefsDoc.getRootElement();
+			Element root = preferencesDoc.getRootElement();
 
 			root.addAttribute("owner-id", String.valueOf(ownerId));
 			root.addAttribute("owner-type", String.valueOf(ownerType));
@@ -702,7 +702,7 @@ public class PortletExporter {
 				"portlet-preferences").addAttribute("path", path);
 
 			if (context.isPathNotProcessed(path)) {
-				context.addZipEntry(path, prefsDoc.formattedString());
+				context.addZipEntry(path, preferencesDoc.formattedString());
 			}
 		}
 		catch (Exception e) {

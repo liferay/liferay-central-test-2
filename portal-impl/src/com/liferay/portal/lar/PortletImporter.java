@@ -252,11 +252,11 @@ public class PortletImporter {
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
 					portletId);
 
-			String preferences = deletePortletData(
+			String xml = deletePortletData(
 				context, portletId, portletPreferences);
 
-			if (preferences != null) {
-				portletPreferences.setPreferences(preferences);
+			if (xml != null) {
+				portletPreferences.setPreferences(xml);
 
 				PortletPreferencesUtil.update(portletPreferences, false);
 			}
@@ -301,24 +301,25 @@ public class PortletImporter {
 			_log.debug("Deleting data for " + portletId);
 		}
 
-		PortletPreferencesImpl prefsImpl =
+		PortletPreferencesImpl preferencesImpl =
 			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
 				portletPreferences.getPreferences());
 
 		try {
-			prefsImpl = (PortletPreferencesImpl)PortletClassInvoker.invoke(
-				portletId, portletDataHandlerClass, "deleteData", context,
-				portletId, prefsImpl);
+			preferencesImpl =
+				(PortletPreferencesImpl)PortletClassInvoker.invoke(
+					portletId, portletDataHandlerClass, "deleteData", context,
+					portletId, preferencesImpl);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 
-		if (prefsImpl == null) {
+		if (preferencesImpl == null) {
 			return null;
 		}
 
-		return PortletPreferencesSerializer.toXML(prefsImpl);
+		return PortletPreferencesSerializer.toXML(preferencesImpl);
 	}
 
 	protected UserIdStrategy getUserIdStrategy(
@@ -343,11 +344,11 @@ public class PortletImporter {
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
 					portletId);
 
-			String preferences = importPortletData(
+			String xml = importPortletData(
 				context, portletId, portletPreferences, portletDataRefEl);
 
-			if (preferences != null) {
-				portletPreferences.setPreferences(preferences);
+			if (xml != null) {
+				portletPreferences.setPreferences(xml);
 
 				PortletPreferencesUtil.update(portletPreferences, false);
 			}
@@ -392,10 +393,10 @@ public class PortletImporter {
 			_log.debug("Importing data for " + portletId);
 		}
 
-		PortletPreferencesImpl prefsImpl = null;
+		PortletPreferencesImpl preferencesImpl = null;
 
 		if (portletPreferences != null) {
-			prefsImpl = (PortletPreferencesImpl)
+			preferencesImpl = (PortletPreferencesImpl)
 				PortletPreferencesSerializer.fromDefaultXML(
 					portletPreferences.getPreferences());
 		}
@@ -404,19 +405,20 @@ public class PortletImporter {
 			portletDataRefEl.attributeValue("path"));
 
 		try {
-			prefsImpl = (PortletPreferencesImpl)PortletClassInvoker.invoke(
-				portletId, portletDataHandlerClass, "importData", context,
-				portletId, prefsImpl, portletData);
+			preferencesImpl =
+				(PortletPreferencesImpl)PortletClassInvoker.invoke(
+					portletId, portletDataHandlerClass, "importData", context,
+					portletId, preferencesImpl, portletData);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 
-		if (prefsImpl == null) {
+		if (preferencesImpl == null) {
 			return null;
 		}
 
-		return PortletPreferencesSerializer.toXML(prefsImpl);
+		return PortletPreferencesSerializer.toXML(preferencesImpl);
 	}
 
 	protected void importPortletPreferences(
@@ -427,21 +429,21 @@ public class PortletImporter {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		List<Element> prefsEls = parentEl.elements("portlet-preferences");
+		List<Element> preferencesEls = parentEl.elements("portlet-preferences");
 
-		for (Element prefEl : prefsEls) {
-			String path = prefEl.attributeValue("path");
+		for (Element preferencesEl : preferencesEls) {
+			String path = preferencesEl.attributeValue("path");
 
 			if (context.isPathNotProcessed(path)) {
 				Element el = null;
-				String preferences = null;
+				String xml = null;
 
 				try {
-					preferences = context.getZipEntryAsString(path);
+					xml = context.getZipEntryAsString(path);
 
-					Document prefsDoc = SAXReaderUtil.read(preferences);
+					Document preferencesDoc = SAXReaderUtil.read(xml);
 
-					el = prefsDoc.getRootElement();
+					el = preferencesDoc.getRootElement();
 				}
 				catch (DocumentException de) {
 					throw new SystemException(de);
@@ -507,11 +509,11 @@ public class PortletImporter {
 					ownerId = defaultUserId;
 				}
 
-				PortletPreferences prefs =
+				PortletPreferences preferences =
 					PortletPreferencesUtil.fetchByO_O_P_P(
 						ownerId, ownerType, plid, portletId);
 
-				if (prefs != null) {
+				if (preferences != null) {
 					PortletPreferencesLocalServiceUtil.deletePortletPreferences(
 						ownerId, ownerType, plid, portletId);
 				}
@@ -526,7 +528,7 @@ public class PortletImporter {
 				portletPreferences.setPlid(plid);
 				portletPreferences.setPortletId(portletId);
 
-				portletPreferences.setPreferences(preferences);
+				portletPreferences.setPreferences(xml);
 
 				PortletPreferencesUtil.update(portletPreferences, true);
 			}
