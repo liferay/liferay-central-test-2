@@ -46,8 +46,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue =
-					(Boolean)PropertyUtils.getSimpleProperty(bean, param);
+				beanValue = (Boolean)PropertyUtils.getProperty(bean, param);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -71,8 +70,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue =
-					(Double)PropertyUtils.getSimpleProperty(bean, param);
+				beanValue = (Double)PropertyUtils.getProperty(bean, param);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -96,8 +94,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue =
-					(Integer)PropertyUtils.getSimpleProperty(bean, param);
+				beanValue = (Integer)PropertyUtils.getProperty(bean, param);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -121,8 +118,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue =
-					(Long)PropertyUtils.getSimpleProperty(bean, param);
+				beanValue = (Long)PropertyUtils.getProperty(bean, param);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -146,7 +142,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = PropertyUtils.getSimpleProperty(bean, param);
+				beanValue = PropertyUtils.getProperty(bean, param);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -170,8 +166,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue =
-					(String)PropertyUtils.getSimpleProperty(bean, param);
+				beanValue = (String)PropertyUtils.getProperty(bean, param);
 			}
 			catch (Exception e) {
 				_log.error(e);
