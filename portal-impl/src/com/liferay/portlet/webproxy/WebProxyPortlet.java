@@ -56,11 +56,11 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 		String initUrl = prefs.getValue("initUrl", StringPool.BLANK);
 
 		if (Validator.isNull(initUrl)) {
-			PortletRequestDispatcher prd =
+			PortletRequestDispatcher portletRequestDispatcher =
 				getPortletContext().getRequestDispatcher(
 					StrutsUtil.TEXT_HTML_DIR + "/portal/portlet_not_setup.jsp");
 
-			prd.include(renderRequest, renderResponse);
+			portletRequestDispatcher.include(renderRequest, renderResponse);
 		}
 		else {
 			super.doView(renderRequest, renderResponse);

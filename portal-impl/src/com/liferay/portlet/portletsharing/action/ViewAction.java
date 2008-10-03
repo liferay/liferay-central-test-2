@@ -47,10 +47,10 @@ public class ViewAction extends PortletAction {
 
 		String path = "/html/portlet/portlet_sharing/view.jsp";
 
-		PortletRequestDispatcher prd =
+		PortletRequestDispatcher portletRequestDispatcher =
 			portletConfig.getPortletContext().getRequestDispatcher(path);
 
-		prd.include(resourceRequest, resourceResponse);
+		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
 }

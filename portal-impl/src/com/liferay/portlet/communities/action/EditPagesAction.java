@@ -274,10 +274,10 @@ public class EditPagesAction extends PortletAction {
 		String path =
 			"/html/portlet/communities/scheduled_publishing_events.jsp";
 
-		PortletRequestDispatcher prd =
+		PortletRequestDispatcher portletRequestDispatcher =
 			portletConfig.getPortletContext().getRequestDispatcher(path);
 
-		prd.include(resourceRequest, resourceResponse);
+		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
 	protected void checkPermissions(PortletRequest portletRequest)

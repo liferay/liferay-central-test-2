@@ -184,14 +184,14 @@ public class JSPPortlet extends LiferayPortlet {
 			PortletResponse portletResponse, String lifecycle)
 		throws IOException, PortletException {
 
-		PortletRequestDispatcher prd =
+		PortletRequestDispatcher portletRequestDispatcher =
 			getPortletContext().getRequestDispatcher(path);
 
-		if (prd == null) {
+		if (portletRequestDispatcher == null) {
 			_log.error(path + " is not a valid include");
 		}
 		else {
-			prd.include(portletRequest, portletResponse);
+			portletRequestDispatcher.include(portletRequest, portletResponse);
 		}
 
 		if (clearRequestParameters) {
