@@ -57,24 +57,25 @@ public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		String portletId = (String)_upgradePortletIdColumn.getOldValue();
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesSerializer.fromDefaultXML(xml);
 
-		processPrefs(portletId, prefs);
+		processPreferences(portletId, preferences);
 
 		return PortletPreferencesSerializer.toXML(
-			(PortletPreferencesImpl)prefs);
+			(PortletPreferencesImpl)preferences);
 	}
 
-	protected void processPrefs(String portletId, PortletPreferences prefs)
+	protected void processPreferences(
+			String portletId, PortletPreferences preferences)
 		throws Exception {
 
 		// Portlet Setup
 
-		String portletCSS = prefs.getValue("portlet-setup-css", null);
+		String portletCSS = preferences.getValue("portlet-setup-css", null);
 
 		if (Validator.isNotNull(portletCSS)) {
-			prefs.reset("portlet-setup-css");
+			preferences.reset("portlet-setup-css");
 		}
 
 		// Journal Articles and Journal Content
@@ -82,39 +83,39 @@ public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		if (portletId.startsWith("62_INSTANCE_") ||
 			portletId.startsWith("56_INSTANCE_")) {
 
-			String groupId = prefs.getValue("group-id", null);
+			String groupId = preferences.getValue("group-id", null);
 
 			if (Validator.isNotNull(groupId)) {
 				groupId = String.valueOf(_groupIdMapper.getNewValue(
 					new Long(GetterUtil.getLong(groupId))));
 
-				prefs.setValue("group-id", groupId);
+				preferences.setValue("group-id", groupId);
 			}
 		}
 
 		// Polls Display
 
 		else if (portletId.startsWith("59_INSTANCE_")) {
-			String questionId = prefs.getValue("question-id", null);
+			String questionId = preferences.getValue("question-id", null);
 
 			if (Validator.isNotNull(questionId)) {
 				questionId = String.valueOf(_pollsQuestionIdMapper.getNewValue(
 					new Long(GetterUtil.getLong(questionId))));
 
-				prefs.setValue("question-id", questionId);
+				preferences.setValue("question-id", questionId);
 			}
 		}
 
 		// Wiki Display
 
 		else if (portletId.startsWith("54_INSTANCE_")) {
-			String nodeId = prefs.getValue("node-id", null);
+			String nodeId = preferences.getValue("node-id", null);
 
 			if (Validator.isNotNull(nodeId)) {
 				nodeId = String.valueOf(_wikiNodeIdMapper.getNewValue(
 					new Long(GetterUtil.getLong(nodeId))));
 
-				prefs.setValue("node-id", nodeId);
+				preferences.setValue("node-id", nodeId);
 			}
 		}
 	}

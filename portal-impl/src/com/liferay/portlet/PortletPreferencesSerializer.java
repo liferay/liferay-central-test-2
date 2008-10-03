@@ -51,13 +51,13 @@ public class PortletPreferencesSerializer {
 	public static PortletPreferences fromDefaultXML(String xml)
 		throws SystemException {
 
-		PortletPreferencesImpl prefs = new PortletPreferencesImpl();
+		PortletPreferencesImpl preferences = new PortletPreferencesImpl();
 
 		if (Validator.isNull(xml)) {
-			return prefs;
+			return preferences;
 		}
 
-		Map<String, Preference> preferences = prefs.getPreferences();
+		Map<String, Preference> preferencesMap = preferences.getPreferences();
 
 		try {
 			Document doc = SAXReaderUtil.read(xml);
@@ -94,10 +94,10 @@ public class PortletPreferencesSerializer {
 				Preference preference = new Preference(
 					name, values.toArray(new String[values.size()]), readOnly);
 
-				preferences.put(name, preference);
+				preferencesMap.put(name, preference);
 			}
 
-			return prefs;
+			return preferences;
 		}
 		catch (DocumentException de) {
 			throw new SystemException(de);
@@ -110,28 +110,28 @@ public class PortletPreferencesSerializer {
 		throws SystemException {
 
 		try {
-			PortletPreferencesImpl prefs =
+			PortletPreferencesImpl preferences =
 				(PortletPreferencesImpl)fromDefaultXML(xml);
 
-			prefs = new PortletPreferencesImpl(
+			preferences = new PortletPreferencesImpl(
 				companyId, ownerId, ownerType, plid, portletId,
-				prefs.getPreferences());
+				preferences.getPreferences());
 
-			return prefs;
+			return preferences;
 		}
 		catch (SystemException se) {
 			throw se;
 		}
 	}
 
-	public static String toXML(PortletPreferencesImpl prefs) {
-		Map<String, Preference> preferences = prefs.getPreferences();
+	public static String toXML(PortletPreferencesImpl preferences) {
+		Map<String, Preference> preferencesMap = preferences.getPreferences();
 
 		Element portletPreferences = SAXReaderUtil.createElement(
 			"portlet-preferences");
 
 		Iterator<Map.Entry<String, Preference>> itr =
-			preferences.entrySet().iterator();
+			preferencesMap.entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry<String, Preference> entry = itr.next();

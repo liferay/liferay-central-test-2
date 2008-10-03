@@ -95,13 +95,13 @@ public class PortletPreferencesFactoryImpl
 		PortalPreferences portalPrefs = null;
 
 		if (themeDisplay.isSignedIn()) {
-			PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
+			PortletPreferencesImpl preferencesImpl = (PortletPreferencesImpl)
 				PortletPreferencesLocalServiceUtil.getPreferences(
 					themeDisplay.getCompanyId(), ownerId, ownerType, plid,
 					portletId);
 
 			portalPrefs = new PortalPreferencesImpl(
-				prefsImpl, themeDisplay.isSignedIn());
+				preferencesImpl, themeDisplay.isSignedIn());
 		}
 		else {
 			HttpSession session = request.getSession();
@@ -110,15 +110,17 @@ public class PortletPreferencesFactoryImpl
 				WebKeys.PORTAL_PREFERENCES);
 
 			if (portalPrefs == null) {
-				PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
-					PortletPreferencesLocalServiceUtil.getPreferences(
-						themeDisplay.getCompanyId(), ownerId, ownerType, plid,
-						portletId);
+				PortletPreferencesImpl preferencesImpl =
+					(PortletPreferencesImpl)
+						PortletPreferencesLocalServiceUtil.getPreferences(
+							themeDisplay.getCompanyId(), ownerId, ownerType,
+							plid, portletId);
 
-				prefsImpl = (PortletPreferencesImpl)prefsImpl.clone();
+				preferencesImpl =
+					(PortletPreferencesImpl)preferencesImpl.clone();
 
 				portalPrefs = new PortalPreferencesImpl(
-					prefsImpl, themeDisplay.isSignedIn());
+					preferencesImpl, themeDisplay.isSignedIn());
 
 				session.setAttribute(WebKeys.PORTAL_PREFERENCES, portalPrefs);
 			}
@@ -396,16 +398,16 @@ public class PortletPreferencesFactoryImpl
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletPreferences prefs = null;
+		PortletPreferences preferences = null;
 
 		if (portletRequest != null) {
-			PortletPreferencesWrapper prefsWrapper =
+			PortletPreferencesWrapper preferencesWrapper =
 				(PortletPreferencesWrapper)portletRequest.getPreferences();
 
-			prefs = prefsWrapper.getPreferencesImpl();
+			preferences = preferencesWrapper.getPreferencesImpl();
 		}
 
-		return prefs;
+		return preferences;
 	}
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
@@ -418,15 +420,15 @@ public class PortletPreferencesFactoryImpl
 			return portletBag.getPreferencesValidatorInstance();
 		}
 		else {
-			PreferencesValidator prefsValidator = null;
+			PreferencesValidator preferencesValidator = null;
 
 			if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-				prefsValidator =
+				preferencesValidator =
 					(PreferencesValidator)InstancePool.get(
 						portlet.getPreferencesValidator());
 			}
 
-			return prefsValidator;
+			return preferencesValidator;
 		}
 	}
 

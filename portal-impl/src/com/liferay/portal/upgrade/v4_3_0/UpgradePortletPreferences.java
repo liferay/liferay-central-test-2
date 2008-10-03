@@ -88,11 +88,13 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 						PortletKeys.PREFS_OWNER_TYPE_COMPANY);
 		}
 
-		Object[][] prefsColumns1 = {{"layoutId", new Integer(Types.VARCHAR)}};
-		Object[][] prefsColumns2 = PortletPreferencesImpl.TABLE_COLUMNS.clone();
+		Object[][] preferencesColumns1 =
+			{{"layoutId", new Integer(Types.VARCHAR)}};
+		Object[][] preferencesColumns2 =
+			PortletPreferencesImpl.TABLE_COLUMNS.clone();
 
-		Object[][] prefsColumns =
-			ArrayUtil.append(prefsColumns1, prefsColumns2);
+		Object[][] preferencesColumns = ArrayUtil.append(
+			preferencesColumns1, preferencesColumns2);
 
 		PrefsOwnerIdUpgradeColumnImpl upgradeOwnerIdColumn =
 			new PrefsOwnerIdUpgradeColumnImpl(
@@ -119,7 +121,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			AvailableMappersUtil.getWikiNodeIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PortletPreferencesImpl.TABLE_NAME, prefsColumns,
+			PortletPreferencesImpl.TABLE_NAME, preferencesColumns,
 			new PKUpgradeColumnImpl("portletPreferencesId", false),
 			upgradeOwnerIdColumn, upgradeOwnerTypeColumn, upgradeLayoutIdColumn,
 			upgradePlidColumn, upgradePortletIdColumn,

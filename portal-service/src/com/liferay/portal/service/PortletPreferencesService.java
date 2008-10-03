@@ -53,13 +53,13 @@ public interface PortletPreferencesService {
 			com.liferay.portal.SystemException;
 
 	public void restoreArchivedPreferences(long groupId, java.lang.String name,
-		java.lang.String portletId, javax.portlet.PortletPreferences prefs)
+		java.lang.String portletId, javax.portlet.PortletPreferences preferences)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void updateArchivePreferences(long userId, long groupId,
 		java.lang.String name, java.lang.String portletId,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

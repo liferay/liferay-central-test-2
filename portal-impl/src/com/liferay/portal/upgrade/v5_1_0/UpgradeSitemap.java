@@ -106,29 +106,30 @@ public class UpgradeSitemap extends UpgradeProcess {
 
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
-			String portletId, String preferences)
+			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl prefs = PortletPreferencesSerializer.fromXML(
-			companyId, ownerId, ownerType, plid, portletId, preferences);
+		PortletPreferencesImpl preferences =
+			PortletPreferencesSerializer.fromXML(
+				companyId, ownerId, ownerType, plid, portletId, xml);
 
 		long rootPlid = GetterUtil.getLong(
-			prefs.getValue("root-plid", StringPool.BLANK));
+			preferences.getValue("root-plid", StringPool.BLANK));
 
 		if (rootPlid > 0) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(rootPlid);
 
-				prefs.setValue(
+				preferences.setValue(
 					"root-layout-id", String.valueOf(layout.getLayoutId()));
 			}
 			catch (NoSuchLayoutException nsle) {
 			}
 		}
 
-		prefs.setValue("root-plid", null);
+		preferences.setValue("root-plid", null);
 
-		return PortletPreferencesSerializer.toXML(prefs);
+		return PortletPreferencesSerializer.toXML(preferences);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeLayout.class);

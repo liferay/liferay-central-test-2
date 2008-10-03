@@ -104,7 +104,7 @@ public class PortletPreferencesServiceHttp {
 
 	public static void restoreArchivedPreferences(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String name, java.lang.String portletId,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -122,9 +122,9 @@ public class PortletPreferencesServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = prefs;
+			Object paramObj3 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
@@ -156,7 +156,7 @@ public class PortletPreferencesServiceHttp {
 
 	public static void updateArchivePreferences(HttpPrincipal httpPrincipal,
 		long userId, long groupId, java.lang.String name,
-		java.lang.String portletId, javax.portlet.PortletPreferences prefs)
+		java.lang.String portletId, javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -176,9 +176,9 @@ public class PortletPreferencesServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = prefs;
+			Object paramObj4 = preferences;
 
-			if (prefs == null) {
+			if (preferences == null) {
 				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 

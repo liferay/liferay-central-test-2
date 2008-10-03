@@ -245,11 +245,11 @@ public class PortletPreferencesImpl
 				_companyId, _portletId);
 
 			if (!_portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
-				PreferencesValidator prefsValidator =
+				PreferencesValidator preferencesValidator =
 					PortalUtil.getPreferencesValidator(portlet);
 
-				if (prefsValidator != null) {
-					prefsValidator.validate(this);
+				if (preferencesValidator != null) {
+					preferencesValidator.validate(this);
 				}
 			}
 

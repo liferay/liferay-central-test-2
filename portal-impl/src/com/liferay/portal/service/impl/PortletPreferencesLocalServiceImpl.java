@@ -152,15 +152,15 @@ public class PortletPreferencesLocalServiceImpl
 			String portletId, String defaultPreferences)
 		throws SystemException {
 
-		Map<String, PortletPreferencesImpl> prefsPool =
+		Map<String, PortletPreferencesImpl> preferencesPool =
 			PortletPreferencesLocalUtil.getPreferencesPool(
 				ownerId, ownerType);
 
 		String key = encodeKey(plid, portletId);
 
-		PortletPreferencesImpl prefs = prefsPool.get(key);
+		PortletPreferencesImpl preferences = preferencesPool.get(key);
 
-		if (prefs == null) {
+		if (preferences == null) {
 			Portlet portlet = portletLocalService.getPortletById(
 				companyId, portletId);
 
@@ -194,19 +194,19 @@ public class PortletPreferencesLocalServiceImpl
 				portletPreferencesPersistence.update(portletPreferences, false);
 			}
 
-			prefs = PortletPreferencesSerializer.fromXML(
+			preferences = PortletPreferencesSerializer.fromXML(
 				companyId, ownerId, ownerType, plid, portletId,
 				portletPreferences.getPreferences());
 
-			prefsPool.put(key, prefs);
+			preferencesPool.put(key, preferences);
 		}
 
-		return (PortletPreferencesImpl)prefs.clone();
+		return (PortletPreferencesImpl)preferences.clone();
 	}
 
 	public PortletPreferences updatePreferences(
 			long ownerId, int ownerType, long plid, String portletId,
-			javax.portlet.PortletPreferences prefs)
+			javax.portlet.PortletPreferences preferences)
 		throws SystemException {
 
 		PortletPreferences portletPreferences =
@@ -225,9 +225,10 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferences.setPortletId(portletId);
 		}
 
-		PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)prefs;
+		PortletPreferencesImpl preferencesImpl =
+			(PortletPreferencesImpl)preferences;
 
-		String xml = PortletPreferencesSerializer.toXML(prefsImpl);
+		String xml = PortletPreferencesSerializer.toXML(preferencesImpl);
 
 		portletPreferences.setPreferences(xml);
 

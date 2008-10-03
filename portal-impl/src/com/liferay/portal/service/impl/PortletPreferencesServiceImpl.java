@@ -74,7 +74,7 @@ public class PortletPreferencesServiceImpl
 
 	public void restoreArchivedPreferences(
 			long groupId, String name, String portletId,
-			javax.portlet.PortletPreferences prefs)
+			javax.portlet.PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -92,12 +92,12 @@ public class PortletPreferencesServiceImpl
 				portletItem.getCompanyId(), ownerId, ownerType, plid,
 				portletId);
 
-		copyPreferences(archivedPrefs, prefs);
+		copyPreferences(archivedPrefs, preferences);
 	}
 
 	public void updateArchivePreferences(
 			long userId, long groupId, String name, String portletId,
-			javax.portlet.PortletPreferences prefs)
+			javax.portlet.PortletPreferences preferences)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -116,7 +116,7 @@ public class PortletPreferencesServiceImpl
 				portletItem.getCompanyId(), ownerId, ownerType, plid,
 				portletId);
 
-		copyPreferences(prefs, archivedPrefs);
+		copyPreferences(preferences, archivedPrefs);
 	}
 
 	protected void copyPreferences(

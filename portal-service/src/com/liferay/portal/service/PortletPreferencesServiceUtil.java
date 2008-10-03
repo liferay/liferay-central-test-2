@@ -53,19 +53,21 @@ public class PortletPreferencesServiceUtil {
 
 	public static void restoreArchivedPreferences(long groupId,
 		java.lang.String name, java.lang.String portletId,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		getService().restoreArchivedPreferences(groupId, name, portletId, prefs);
+		getService()
+			.restoreArchivedPreferences(groupId, name, portletId, preferences);
 	}
 
 	public static void updateArchivePreferences(long userId, long groupId,
 		java.lang.String name, java.lang.String portletId,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		getService()
-			.updateArchivePreferences(userId, groupId, name, portletId, prefs);
+			.updateArchivePreferences(userId, groupId, name, portletId,
+			preferences);
 	}
 
 	public static PortletPreferencesService getService() {

@@ -177,10 +177,11 @@ public class PortletPreferencesLocalServiceUtil {
 
 	public static com.liferay.portal.model.PortletPreferences updatePreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .updatePreferences(ownerId, ownerType, plid, portletId, prefs);
+				   .updatePreferences(ownerId, ownerType, plid, portletId,
+			preferences);
 	}
 
 	public static PortletPreferencesLocalService getService() {

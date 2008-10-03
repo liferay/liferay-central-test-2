@@ -54,11 +54,11 @@ public class PortletPreferencesListener implements ModelListener {
 	}
 
 	protected void clearCache(BaseModel model) {
-		PortletPreferencesModel prefs = (PortletPreferencesModel)model;
+		PortletPreferencesModel preferences = (PortletPreferencesModel)model;
 
 		try {
 			Layout layout = LayoutLocalServiceUtil.getLayout(
-				prefs.getPlid());
+				preferences.getPlid());
 
 			if (!layout.isPrivateLayout()) {
 				LayoutCacheUtil.clearCache(layout.getCompanyId());
