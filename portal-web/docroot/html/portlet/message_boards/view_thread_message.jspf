@@ -43,7 +43,7 @@
 						MBStatsUser statsUser = MBStatsUserLocalServiceUtil.getStatsUser(scopeGroupId, message.getUserId());
 
 						int posts = statsUser.getMessageCount();
-						String rank = MBUtil.getUserRank(prefs, themeDisplay.getLanguageId(), statsUser);
+						String rank = MBUtil.getUserRank(preferences, themeDisplay.getLanguageId(), statsUser);
 						%>
 
 						<c:if test="<%= Validator.isNotNull(rank) %>">

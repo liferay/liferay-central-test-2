@@ -31,17 +31,17 @@
 <%@ page import="com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
-String displayStyle = prefs.getValue("display-style", "user-name-and-image");
-int max = GetterUtil.getInteger(prefs.getValue("max", "10"));
+long organizationId = GetterUtil.getLong(preferences.getValue("organization-id", "0"));
+String displayStyle = preferences.getValue("display-style", "user-name-and-image");
+int max = GetterUtil.getInteger(preferences.getValue("max", "10"));
 
 if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);

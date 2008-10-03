@@ -29,16 +29,16 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String emailFromName = ParamUtil.getString(request, "emailFromName", WikiUtil.getEmailFromName(prefs));
-String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", WikiUtil.getEmailFromAddress(prefs));
+String emailFromName = ParamUtil.getString(request, "emailFromName", WikiUtil.getEmailFromName(preferences));
+String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", WikiUtil.getEmailFromAddress(preferences));
 
-String emailPageAddedSubjectPrefix = ParamUtil.getString(request, "emailPageAddedSubjectPrefix", WikiUtil.getEmailPageAddedSubjectPrefix(prefs));
-String emailPageAddedBody = ParamUtil.getString(request, "emailPageAddedBody", WikiUtil.getEmailPageAddedBody(prefs));
-String emailPageAddedSignature = ParamUtil.getString(request, "emailPageAddedSignature", WikiUtil.getEmailPageAddedSignature(prefs));
+String emailPageAddedSubjectPrefix = ParamUtil.getString(request, "emailPageAddedSubjectPrefix", WikiUtil.getEmailPageAddedSubjectPrefix(preferences));
+String emailPageAddedBody = ParamUtil.getString(request, "emailPageAddedBody", WikiUtil.getEmailPageAddedBody(preferences));
+String emailPageAddedSignature = ParamUtil.getString(request, "emailPageAddedSignature", WikiUtil.getEmailPageAddedSignature(preferences));
 
-String emailPageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailPageUpdatedSubjectPrefix", WikiUtil.getEmailPageUpdatedSubjectPrefix(prefs));
-String emailPageUpdatedBody = ParamUtil.getString(request, "emailPageUpdatedBody", WikiUtil.getEmailPageUpdatedBody(prefs));
-String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdatedSignature", WikiUtil.getEmailPageUpdatedSignature(prefs));
+String emailPageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailPageUpdatedSubjectPrefix", WikiUtil.getEmailPageUpdatedSubjectPrefix(preferences));
+String emailPageUpdatedBody = ParamUtil.getString(request, "emailPageUpdatedBody", WikiUtil.getEmailPageUpdatedBody(preferences));
+String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdatedSignature", WikiUtil.getEmailPageUpdatedSignature(preferences));
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -194,10 +194,10 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("page-added-email") %>'>
-						<liferay-ui:input-checkbox param="emailPageAddedEnabled" defaultValue="<%= WikiUtil.getEmailPageAddedEnabled(prefs) %>" />
+						<liferay-ui:input-checkbox param="emailPageAddedEnabled" defaultValue="<%= WikiUtil.getEmailPageAddedEnabled(preferences) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
-						<liferay-ui:input-checkbox param="emailPageUpdatedEnabled" defaultValue="<%= WikiUtil.getEmailPageUpdatedEnabled(prefs) %>" />
+						<liferay-ui:input-checkbox param="emailPageUpdatedEnabled" defaultValue="<%= WikiUtil.getEmailPageUpdatedEnabled(preferences) %>" />
 					</c:when>
 				</c:choose>
 			</td>

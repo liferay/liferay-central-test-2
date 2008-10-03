@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/random_bible_verse/init.jsp" %>
 
 <%
-Verse verse = RBVUtil.getVerse(prefs, locale);
+Verse verse = RBVUtil.getVerse(preferences, locale);
 %>
 
 <c:choose>

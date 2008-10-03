@@ -25,13 +25,13 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-int displayStyle = GetterUtil.getInteger(prefs.getValue("display-style", StringPool.BLANK));
+int displayStyle = GetterUtil.getInteger(preferences.getValue("display-style", StringPool.BLANK));
 %>

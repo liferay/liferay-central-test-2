@@ -29,7 +29,7 @@
 <%@ page import="com.liferay.portlet.randombibleverse.util.RBVUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
-String language = prefs.getValue("language", StringPool.BLANK);
+String language = preferences.getValue("language", StringPool.BLANK);
 %>

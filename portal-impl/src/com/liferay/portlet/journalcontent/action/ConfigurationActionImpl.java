@@ -74,21 +74,21 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValue("group-id", String.valueOf(groupId));
-		prefs.setValue("article-id", articleId);
-		prefs.setValue("template-id", templateId);
-		prefs.setValue(
+		preferences.setValue("group-id", String.valueOf(groupId));
+		preferences.setValue("article-id", articleId);
+		preferences.setValue("template-id", templateId);
+		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
-		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue(
+		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
+		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
-		prefs.store();
+		preferences.store();
 
 		updateContentSearch(actionRequest, portletResource, articleId);
 

@@ -40,24 +40,24 @@
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
-String pageDisplayStyle = prefs.getValue("page-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK));
+String pageDisplayStyle = preferences.getValue("page-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 int pageAbstractLength = PropsValues.BLOGS_PAGE_ABSTRACT_LENGTH;
-boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null), true);
-boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null), true);
-boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null), true);
+boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
+boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
-int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
-String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
-String rssFormat = prefs.getValue("rss-format", "atom10");
+int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+String rssFormat = preferences.getValue("rss-format", "atom10");
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;

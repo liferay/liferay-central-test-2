@@ -61,35 +61,35 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
+		ShoppingPreferences preferences = ShoppingPreferences.getInstance(
 			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 		String tabs3 = ParamUtil.getString(actionRequest, "tabs3");
 
 		if (tabs2.equals("payment-settings")) {
-			updatePayment(actionRequest, prefs);
+			updatePayment(actionRequest, preferences);
 		}
 		else if (tabs2.equals("shipping-calculation")) {
-			updateShippingCalculation(actionRequest, prefs);
+			updateShippingCalculation(actionRequest, preferences);
 		}
 		else if (tabs2.equals("insurance-calculation")) {
-			updateInsuranceCalculation(actionRequest, prefs);
+			updateInsuranceCalculation(actionRequest, preferences);
 		}
 		else if (tabs2.equals("emails")) {
 			if (tabs3.equals("email-from")) {
-				updateEmailFrom(actionRequest, prefs);
+				updateEmailFrom(actionRequest, preferences);
 			}
 			else if (tabs3.equals("confirmation-email")) {
-				updateEmailOrderConfirmation(actionRequest, prefs);
+				updateEmailOrderConfirmation(actionRequest, preferences);
 			}
 			else if (tabs3.equals("shipping-email")) {
-				updateEmailOrderShipping(actionRequest, prefs);
+				updateEmailOrderShipping(actionRequest, preferences);
 			}
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");
@@ -105,7 +105,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailFrom(
-			ActionRequest actionRequest, ShoppingPreferences prefs)
+			ActionRequest actionRequest, ShoppingPreferences preferences)
 		throws Exception {
 
 		String emailFromName = ParamUtil.getString(
@@ -120,13 +120,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailFromAddress");
 		}
 		else {
-			prefs.setEmailFromName(emailFromName);
-			prefs.setEmailFromAddress(emailFromAddress);
+			preferences.setEmailFromName(emailFromName);
+			preferences.setEmailFromAddress(emailFromAddress);
 		}
 	}
 
 	protected void updateEmailOrderConfirmation(
-			ActionRequest actionRequest, ShoppingPreferences prefs)
+			ActionRequest actionRequest, ShoppingPreferences preferences)
 		throws Exception {
 
 		boolean emailOrderConfirmationEnabled = ParamUtil.getBoolean(
@@ -143,16 +143,17 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailOrderConfirmationBody");
 		}
 		else {
-			prefs.setEmailOrderConfirmationEnabled(
+			preferences.setEmailOrderConfirmationEnabled(
 				emailOrderConfirmationEnabled);
-			prefs.setEmailOrderConfirmationSubject(
+			preferences.setEmailOrderConfirmationSubject(
 				emailOrderConfirmationSubject);
-			prefs.setEmailOrderConfirmationBody(emailOrderConfirmationBody);
+			preferences.setEmailOrderConfirmationBody(
+				emailOrderConfirmationBody);
 		}
 	}
 
 	protected void updateEmailOrderShipping(
-			ActionRequest actionRequest, ShoppingPreferences prefs)
+			ActionRequest actionRequest, ShoppingPreferences preferences)
 		throws Exception {
 
 		boolean emailOrderShippingEnabled = ParamUtil.getBoolean(
@@ -169,14 +170,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailOrderShippingBody");
 		}
 		else {
-			prefs.setEmailOrderShippingEnabled(emailOrderShippingEnabled);
-			prefs.setEmailOrderShippingSubject(emailOrderShippingSubject);
-			prefs.setEmailOrderShippingBody(emailOrderShippingBody);
+			preferences.setEmailOrderShippingEnabled(emailOrderShippingEnabled);
+			preferences.setEmailOrderShippingSubject(emailOrderShippingSubject);
+			preferences.setEmailOrderShippingBody(emailOrderShippingBody);
 		}
 	}
 
 	protected void updateInsuranceCalculation(
-			ActionRequest actionRequest, ShoppingPreferences prefs)
+			ActionRequest actionRequest, ShoppingPreferences preferences)
 		throws Exception {
 
 		String insuranceFormula = ParamUtil.getString(
@@ -189,12 +190,12 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				ParamUtil.getDouble(actionRequest, "insurance" + i));
 		}
 
-		prefs.setInsuranceFormula(insuranceFormula);
-		prefs.setInsurance(insurance);
+		preferences.setInsuranceFormula(insuranceFormula);
+		preferences.setInsurance(insurance);
 	}
 
 	protected void updatePayment(
-			ActionRequest actionRequest, ShoppingPreferences prefs)
+			ActionRequest actionRequest, ShoppingPreferences preferences)
 		throws Exception {
 
 		String payPalEmailAddress = ParamUtil.getString(
@@ -206,16 +207,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		double taxRate = ParamUtil.getDouble(actionRequest, "taxRate") / 100;
 		double minOrder = ParamUtil.getDouble(actionRequest, "minOrder");
 
-		prefs.setPayPalEmailAddress(payPalEmailAddress);
-		prefs.setCcTypes(ccTypes);
-		prefs.setCurrencyId(currencyId);
-		prefs.setTaxState(taxState);
-		prefs.setTaxRate(taxRate);
-		prefs.setMinOrder(minOrder);
+		preferences.setPayPalEmailAddress(payPalEmailAddress);
+		preferences.setCcTypes(ccTypes);
+		preferences.setCurrencyId(currencyId);
+		preferences.setTaxState(taxState);
+		preferences.setTaxRate(taxRate);
+		preferences.setMinOrder(minOrder);
 	}
 
 	protected void updateShippingCalculation(
-			ActionRequest actionRequest, ShoppingPreferences prefs)
+			ActionRequest actionRequest, ShoppingPreferences preferences)
 		throws Exception {
 
 		String shippingFormula = ParamUtil.getString(
@@ -228,8 +229,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				ParamUtil.getDouble(actionRequest, "shipping" + i));
 		}
 
-		prefs.setShippingFormula(shippingFormula);
-		prefs.setShipping(shipping);
+		preferences.setShippingFormula(shippingFormula);
+		preferences.setShipping(shipping);
 	}
 
 }

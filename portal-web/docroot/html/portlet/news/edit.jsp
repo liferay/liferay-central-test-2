@@ -50,7 +50,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<%
 		String categoryName = request.getParameter("categoryName");
 
-		Set selFeeds = NewsUtil.getSelFeeds(prefs);
+		Set selFeeds = NewsUtil.getSelFeeds(preferences);
 		%>
 
 		<input name="<portlet:namespace />categoryName" type="hidden" value="<%= categoryName %>" />
@@ -155,7 +155,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("display-settings") %>'>
 
 		<%
-		Set selFeeds = NewsUtil.getSelFeeds(prefs);
+		Set selFeeds = NewsUtil.getSelFeeds(preferences);
 		%>
 
 		<input name="<portlet:namespace />feeds" type="hidden" value="" />

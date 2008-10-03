@@ -25,9 +25,9 @@
 <%@ include file="/html/portlet/web_form/init.jsp" %>
 
 <%
-String title = prefs.getValue("title", StringPool.BLANK);
-String description = prefs.getValue("description", StringPool.BLANK);
-boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", StringPool.BLANK));
+String title = preferences.getValue("title", StringPool.BLANK);
+String description = preferences.getValue("description", StringPool.BLANK);
+boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCaptcha", StringPool.BLANK));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
@@ -47,16 +47,16 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 	int i = 1;
 
 	String fieldName = "field" + i;
-	String fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
-	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
+	String fieldLabel = preferences.getValue("fieldLabel" + i, StringPool.BLANK);
+	boolean fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + i, false);
 	String fieldValue = ParamUtil.getString(request, fieldName);
 	String[] options = null;
 
 	while ((i == 1) || Validator.isNotNull(fieldLabel)) {
-		String fieldType = prefs.getValue("fieldType" + i, "text");
-		String fieldOptions = prefs.getValue("fieldOptions" + i, "unknown");
-		String fieldValidationScript = prefs.getValue("fieldValidationScript" + i, StringPool.BLANK);
-		String fieldValidationErrorMessage = prefs.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
+		String fieldType = preferences.getValue("fieldType" + i, "text");
+		String fieldOptions = preferences.getValue("fieldOptions" + i, "unknown");
+		String fieldValidationScript = preferences.getValue("fieldValidationScript" + i, StringPool.BLANK);
+		String fieldValidationErrorMessage = preferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
 	%>
 
 		<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
@@ -145,8 +145,8 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 		i++;
 
 		fieldName = "field" + i;
-		fieldLabel = prefs.getValue("fieldLabel" + i, "");
-		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
+		fieldLabel = preferences.getValue("fieldLabel" + i, "");
+		fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + i, false);
 		fieldValue = ParamUtil.getString(request, fieldName);
 	}
 	%>
@@ -177,12 +177,12 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 			<%
 			int fieldIndex = 1;
-			fieldLabel = prefs.getValue("fieldLabel" + fieldIndex, StringPool.BLANK);
+			fieldLabel = preferences.getValue("fieldLabel" + fieldIndex, StringPool.BLANK);
 
 			while ((fieldIndex == 1) || Validator.isNotNull(fieldLabel)) {
-				fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + fieldIndex, false);
-				String fieldValidationScript = prefs.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
-				String fieldValidationErrorMessage = prefs.getValue("fieldValidationErrorMessage" + fieldIndex, StringPool.BLANK);
+				fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + fieldIndex, false);
+				String fieldValidationScript = preferences.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
+				String fieldValidationErrorMessage = preferences.getValue("fieldValidationErrorMessage" + fieldIndex, StringPool.BLANK);
 			%>
 
 				fieldLabels[<%= fieldIndex %>] = "<%= HtmlUtil.escape(fieldLabel) %>";
@@ -205,7 +205,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 			<%
 				fieldIndex++;
-				fieldLabel = prefs.getValue("fieldLabel" + fieldIndex, "");
+				fieldLabel = preferences.getValue("fieldLabel" + fieldIndex, "");
 			}
 			%>
 

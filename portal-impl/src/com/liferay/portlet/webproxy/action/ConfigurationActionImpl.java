@@ -84,24 +84,26 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValue("initUrl", initUrl);
-		prefs.setValue("scope", scope);
-		prefs.setValue("proxyHost", proxyHost);
-		prefs.setValue("proxyPort", proxyPort);
-		prefs.setValue("proxyAuthentication", proxyAuthentication);
-		prefs.setValue(
+		preferences.setValue("initUrl", initUrl);
+		preferences.setValue("scope", scope);
+		preferences.setValue("proxyHost", proxyHost);
+		preferences.setValue("proxyPort", proxyPort);
+		preferences.setValue("proxyAuthentication", proxyAuthentication);
+		preferences.setValue(
 			"proxyAuthenticationUsername", proxyAuthenticationUsername);
-		prefs.setValue(
+		preferences.setValue(
 			"proxyAuthenticationPassword", proxyAuthenticationPassword);
-		prefs.setValue("proxyAuthenticationHost", proxyAuthenticationHost);
-		prefs.setValue("proxyAuthenticationDomain", proxyAuthenticationDomain);
-		prefs.setValue("stylesheet", stylesheet);
+		preferences.setValue(
+			"proxyAuthenticationHost", proxyAuthenticationHost);
+		preferences.setValue(
+			"proxyAuthenticationDomain", proxyAuthenticationDomain);
+		preferences.setValue("stylesheet", stylesheet);
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doConfigure");

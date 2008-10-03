@@ -59,17 +59,17 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
 DLFolder rootFolder = null;
 
-long rootFolderId = PrefsParamUtil.getLong(prefs, request, "rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 String rootFolderName = StringPool.BLANK;
 
 if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
@@ -82,27 +82,27 @@ if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 	}
 }
 
-String folderDisplayStyle = PrefsParamUtil.getString(prefs, request, "folderDisplayStyle", "tree");
+String folderDisplayStyle = PrefsParamUtil.getString(preferences, request, "folderDisplayStyle", "tree");
 
-boolean showBreadcrumbs = PrefsParamUtil.getBoolean(prefs, request, "showBreadcrumbs", true);
-boolean showFoldersSearch = PrefsParamUtil.getBoolean(prefs, request, "showFoldersSearch", true);
-boolean showSubfolders = PrefsParamUtil.getBoolean(prefs, request, "showSubfolders", true);
-int foldersPerPage = PrefsParamUtil.getInteger(prefs, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
+boolean showBreadcrumbs = PrefsParamUtil.getBoolean(preferences, request, "showBreadcrumbs", true);
+boolean showFoldersSearch = PrefsParamUtil.getBoolean(preferences, request, "showFoldersSearch", true);
+boolean showSubfolders = PrefsParamUtil.getBoolean(preferences, request, "showSubfolders", true);
+int foldersPerPage = PrefsParamUtil.getInteger(preferences, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
 
 String defaultFolderColumns = "folder,num-of-folders,num-of-documents,action";
 String allFolderColumns = defaultFolderColumns;
 
-String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(prefs, request, "folderColumns", defaultFolderColumns));
+String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "folderColumns", defaultFolderColumns));
 
-boolean showFileEntriesSearch = PrefsParamUtil.getBoolean(prefs, request, "showFileEntriesSearch", true);
-int fileEntriesPerPage = PrefsParamUtil.getInteger(prefs, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
+boolean showFileEntriesSearch = PrefsParamUtil.getBoolean(preferences, request, "showFileEntriesSearch", true);
+int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
 
 String defaultFileEntryColumns = "document,size,downloads,locked,action";
 String allFileEntryColumns = defaultFileEntryColumns;
 
-String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(prefs, request, "fileEntryColumns", defaultFileEntryColumns));
+String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultFileEntryColumns));
 
-boolean enableCommentRatings = PrefsParamUtil.getBoolean(prefs, request, "enable-comment-ratings", true);
+boolean enableCommentRatings = PrefsParamUtil.getBoolean(preferences, request, "enable-comment-ratings", true);
 
 boolean showTabs = false;
 boolean showButtons = false;

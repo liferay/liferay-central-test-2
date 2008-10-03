@@ -27,20 +27,20 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String title = PrefsParamUtil.getString(prefs, request, "title");
-String description = PrefsParamUtil.getString(prefs, request, "description");
-boolean requireCaptcha = PrefsParamUtil.getBoolean(prefs, request, "requireCaptcha");
-String successURL = PrefsParamUtil.getString(prefs, request, "successURL");
+String title = PrefsParamUtil.getString(preferences, request, "title");
+String description = PrefsParamUtil.getString(preferences, request, "description");
+boolean requireCaptcha = PrefsParamUtil.getBoolean(preferences, request, "requireCaptcha");
+String successURL = PrefsParamUtil.getString(preferences, request, "successURL");
 
-boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail");
-String subject = PrefsParamUtil.getString(prefs, request, "subject");
-String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
+boolean sendAsEmail = PrefsParamUtil.getBoolean(preferences, request, "sendAsEmail");
+String subject = PrefsParamUtil.getString(preferences, request, "subject");
+String emailAddress = PrefsParamUtil.getString(preferences, request, "emailAddress");
 
-boolean saveToDatabase = PrefsParamUtil.getBoolean(prefs, request, "saveToDatabase");
-String databaseTableName = prefs.getValue("databaseTableName", StringPool.BLANK);
+boolean saveToDatabase = PrefsParamUtil.getBoolean(preferences, request, "saveToDatabase");
+String databaseTableName = preferences.getValue("databaseTableName", StringPool.BLANK);
 
-boolean saveToFile = PrefsParamUtil.getBoolean(prefs, request, "saveToFile");
-String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
+boolean saveToFile = PrefsParamUtil.getBoolean(preferences, request, "saveToFile");
+String fileName = PrefsParamUtil.getString(preferences, request, "fileName");
 
 boolean fieldsEditingDisabled = false;
 
@@ -254,16 +254,16 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	<%
 	int i = 1;
 
-	String fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
-	String fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
-	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i);
-	String fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
+	String fieldLabel = PrefsParamUtil.getString(preferences, request, "fieldLabel" + i);
+	String fieldType = PrefsParamUtil.getString(preferences, request, "fieldType" + i);
+	boolean fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + i);
+	String fieldOptions = PrefsParamUtil.getString(preferences, request, "fieldOptions" + i);
 	String fieldValidationScript = StringPool.BLANK;
 	String fieldValidationErrorMessage = StringPool.BLANK;
 
 	if (PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED) {
-		fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
-		fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+		fieldValidationScript = PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + i);
+		fieldValidationErrorMessage = PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + i);
 	}
 
 	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
@@ -419,14 +419,14 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	<%
 		i++;
 
-		fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
-		fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
-		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
-		fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
+		fieldLabel = PrefsParamUtil.getString(preferences, request, "fieldLabel" + i);
+		fieldType = PrefsParamUtil.getString(preferences, request, "fieldType" + i);
+		fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + i, false);
+		fieldOptions = PrefsParamUtil.getString(preferences, request, "fieldOptions" + i);
 
 		if (PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED) {
-			fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
-			fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+			fieldValidationScript = PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + i);
+			fieldValidationErrorMessage = PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + i);
 		}
 	}
 	%>

@@ -35,14 +35,14 @@
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long nodeId = GetterUtil.getLong(prefs.getValue("node-id", StringPool.BLANK));
-String title = GetterUtil.getString(prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
+long nodeId = GetterUtil.getLong(preferences.getValue("node-id", StringPool.BLANK));
+String title = GetterUtil.getString(preferences.getValue("title", WikiPageImpl.FRONT_PAGE));
 %>

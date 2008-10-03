@@ -30,9 +30,9 @@
 <%@ page import="com.liferay.portlet.news.util.NewsUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
-int articlesPerNews = GetterUtil.getInteger(prefs.getValue("articles-per-news", StringPool.BLANK));
+int articlesPerNews = GetterUtil.getInteger(preferences.getValue("articles-per-news", StringPool.BLANK));
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

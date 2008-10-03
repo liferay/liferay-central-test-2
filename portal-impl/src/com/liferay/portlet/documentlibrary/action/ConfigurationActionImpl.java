@@ -87,7 +87,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
@@ -100,27 +100,29 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			}
 		}
 
-		prefs.setValue("folderDisplayStyle", folderDisplayStyle);
+		preferences.setValue("folderDisplayStyle", folderDisplayStyle);
 
-		prefs.setValue("rootFolderId", String.valueOf(rootFolderId));
+		preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
 
-		prefs.setValue("showBreadcrumbs", String.valueOf(showBreadcrumbs));
-		prefs.setValue("showFoldersSearch", String.valueOf(showFoldersSearch));
-		prefs.setValue("showSubfolders", String.valueOf(showSubfolders));
-		prefs.setValue("foldersPerPage", String.valueOf(foldersPerPage));
-		prefs.setValue("folderColumns", folderColumns);
+		preferences.setValue(
+			"showBreadcrumbs", String.valueOf(showBreadcrumbs));
+		preferences.setValue(
+			"showFoldersSearch", String.valueOf(showFoldersSearch));
+		preferences.setValue("showSubfolders", String.valueOf(showSubfolders));
+		preferences.setValue("foldersPerPage", String.valueOf(foldersPerPage));
+		preferences.setValue("folderColumns", folderColumns);
 
-		prefs.setValue(
+		preferences.setValue(
 			"showFileEntriesSearch", String.valueOf(showFileEntriesSearch));
-		prefs.setValue(
+		preferences.setValue(
 			"fileEntriesPerPage", String.valueOf(fileEntriesPerPage));
-		prefs.setValue("fileEntryColumns", fileEntryColumns);
+		preferences.setValue("fileEntryColumns", fileEntryColumns);
 
-		prefs.setValue(
+		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");

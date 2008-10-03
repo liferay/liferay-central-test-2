@@ -59,30 +59,30 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("email-from")) {
-			updateEmailFrom(actionRequest, prefs);
+			updateEmailFrom(actionRequest, preferences);
 		}
 		else if (tabs2.equals("article-approval-denied-email")) {
-			updateEmailArticleApprovalDenied(actionRequest, prefs);
+			updateEmailArticleApprovalDenied(actionRequest, preferences);
 		}
 		else if (tabs2.equals("article-approval-granted-email")) {
-			updateEmailArticleApprovalGranted(actionRequest, prefs);
+			updateEmailArticleApprovalGranted(actionRequest, preferences);
 		}
 		else if (tabs2.equals("article-approval-requested-email")) {
-			updateEmailArticleApprovalRequested(actionRequest, prefs);
+			updateEmailArticleApprovalRequested(actionRequest, preferences);
 		}
 		else if (tabs2.equals("article-review-email")) {
-			updateEmailArticleReview(actionRequest, prefs);
+			updateEmailArticleReview(actionRequest, preferences);
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");
@@ -98,7 +98,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailFrom(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String emailFromName = ParamUtil.getString(
@@ -113,13 +113,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailFromAddress");
 		}
 		else {
-			prefs.setValue("email-from-name", emailFromName);
-			prefs.setValue("email-from-address", emailFromAddress);
+			preferences.setValue("email-from-name", emailFromName);
+			preferences.setValue("email-from-address", emailFromAddress);
 		}
 	}
 
 	protected void updateEmailArticleApprovalDenied(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean emailArticleApprovalDeniedEnabled = ParamUtil.getBoolean(
@@ -137,20 +137,20 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailArticleApprovalDeniedBody");
 		}
 		else {
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-denied-enabled",
 				String.valueOf(emailArticleApprovalDeniedEnabled));
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-denied-subject",
 				emailArticleApprovalDeniedSubject);
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-denied-body",
 				emailArticleApprovalDeniedBody);
 		}
 	}
 
 	protected void updateEmailArticleApprovalGranted(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean emailArticleApprovalGrantedEnabled = ParamUtil.getBoolean(
@@ -168,20 +168,20 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailArticleApprovalGrantedBody");
 		}
 		else {
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-granted-enabled",
 				String.valueOf(emailArticleApprovalGrantedEnabled));
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-granted-subject",
 				emailArticleApprovalGrantedSubject);
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-granted-body",
 				emailArticleApprovalGrantedBody);
 		}
 	}
 
 	protected void updateEmailArticleApprovalRequested(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean emailArticleApprovalRequestedEnabled = ParamUtil.getBoolean(
@@ -200,20 +200,20 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				actionRequest, "emailArticleApprovalRequestedBody");
 		}
 		else {
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-requested-enabled",
 				String.valueOf(emailArticleApprovalRequestedEnabled));
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-requested-subject",
 				emailArticleApprovalRequestedSubject);
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-approval-requested-body",
 				emailArticleApprovalRequestedBody);
 		}
 	}
 
 	protected void updateEmailArticleReview(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean emailArticleReviewEnabled = ParamUtil.getBoolean(
@@ -230,12 +230,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailArticleReviewBody");
 		}
 		else {
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-review-enabled",
 				String.valueOf(emailArticleReviewEnabled));
-			prefs.setValue(
+			preferences.setValue(
 				"email-article-review-subject", emailArticleReviewSubject);
-			prefs.setValue("email-article-review-body", emailArticleReviewBody);
+			preferences.setValue(
+				"email-article-review-body", emailArticleReviewBody);
 		}
 	}
 

@@ -34,7 +34,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
+PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -68,7 +68,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 	<c:when test='<%= tabs2.equals("any-website") %>'>
 
 		<%
-		boolean widgetShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-widget-show-add-app-link", true);
+		boolean widgetShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-widget-show-add-app-link", true);
 		%>
 
 		<div class="portlet-msg-info">
@@ -89,9 +89,9 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 	<c:when test='<%= tabs2.equals("facebook") %>'>
 
 		<%
-		String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
-		String facebookCanvasPageURL = PrefsParamUtil.getString(prefs, request, "lfr-facebook-canvas-page-url");
-		boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link", true);
+		String facebookAPIKey = PrefsParamUtil.getString(preferences, request, "lfr-facebook-api-key");
+		String facebookCanvasPageURL = PrefsParamUtil.getString(preferences, request, "lfr-facebook-canvas-page-url");
+		boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-facebook-show-add-app-link", true);
 
 		String callbackURL = widgetURL;
 
@@ -169,7 +169,7 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 	<c:when test='<%= tabs2.equals("friends") %>'>
 
 		<%
-		boolean appShowShareWithFriendsLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-app-show-share-with-friends-link");
+		boolean appShowShareWithFriendsLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-app-show-share-with-friends-link");
 		%>
 
 		<%= LanguageUtil.format(pageContext, "allow-users-to-share-x-with-friends", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="appShowShareWithFriendsLink" defaultValue="<%= appShowShareWithFriendsLink %>" />

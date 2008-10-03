@@ -29,16 +29,16 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String emailFromName = ParamUtil.getString(request, "emailFromName", MBUtil.getEmailFromName(prefs));
-String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUtil.getEmailFromAddress(prefs));
+String emailFromName = ParamUtil.getString(request, "emailFromName", MBUtil.getEmailFromName(preferences));
+String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUtil.getEmailFromAddress(preferences));
 
-String emailMessageAddedSubjectPrefix = ParamUtil.getString(request, "emailMessageAddedSubjectPrefix", MBUtil.getEmailMessageAddedSubjectPrefix(prefs));
-String emailMessageAddedBody = ParamUtil.getString(request, "emailMessageAddedBody", MBUtil.getEmailMessageAddedBody(prefs));
-String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAddedSignature", MBUtil.getEmailMessageAddedSignature(prefs));
+String emailMessageAddedSubjectPrefix = ParamUtil.getString(request, "emailMessageAddedSubjectPrefix", MBUtil.getEmailMessageAddedSubjectPrefix(preferences));
+String emailMessageAddedBody = ParamUtil.getString(request, "emailMessageAddedBody", MBUtil.getEmailMessageAddedBody(preferences));
+String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAddedSignature", MBUtil.getEmailMessageAddedSignature(preferences));
 
-String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs));
-String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
-String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(prefs));
+String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(preferences));
+String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(preferences));
+String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(preferences));
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -121,7 +121,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				<liferay-ui:message key="html-format" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="emailHtmlFormat" defaultValue="<%= MBUtil.getEmailHtmlFormat(prefs) %>" />
+				<liferay-ui:input-checkbox param="emailHtmlFormat" defaultValue="<%= MBUtil.getEmailHtmlFormat(preferences) %>" />
 			</td>
 		</tr>
 		</table>
@@ -208,10 +208,10 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<liferay-ui:input-checkbox param="emailMessageAddedEnabled" defaultValue="<%= MBUtil.getEmailMessageAddedEnabled(prefs) %>" />
+						<liferay-ui:input-checkbox param="emailMessageAddedEnabled" defaultValue="<%= MBUtil.getEmailMessageAddedEnabled(preferences) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<liferay-ui:input-checkbox param="emailMessageUpdatedEnabled" defaultValue="<%= MBUtil.getEmailMessageUpdatedEnabled(prefs) %>" />
+						<liferay-ui:input-checkbox param="emailMessageUpdatedEnabled" defaultValue="<%= MBUtil.getEmailMessageUpdatedEnabled(preferences) %>" />
 					</c:when>
 				</c:choose>
 			</td>
@@ -462,7 +462,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				</tr>
 
 				<%
-				priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", defaultLanguageId);
+				priorities = LocalizationUtil.getPrefsValues(preferences, "priorities", defaultLanguageId);
 
 				for (int i = 0; i < 10; i++) {
 					String name = StringPool.BLANK;
@@ -546,7 +546,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 						continue;
 					}
 
-					String[] tempPriorities = LocalizationUtil.getPrefsValues(prefs, "priorities", LocaleUtil.toLanguageId(locales[i]));
+					String[] tempPriorities = LocalizationUtil.getPrefsValues(preferences, "priorities", LocaleUtil.toLanguageId(locales[i]));
 
 					for (int j = 0; j < 10; j++) {
 						String name = StringPool.BLANK;
@@ -731,7 +731,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<textarea class="lfr-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
+				<textarea class="lfr-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(preferences, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
 			</td>
 			<td>
 
@@ -742,7 +742,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 					}
 				%>
 
-					<input id="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
+					<input id="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPrefsValues(preferences, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
 
 				<%
 				}
@@ -882,7 +882,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				<liferay-ui:message key="allow-anonymous-posting" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(prefs) %>" />
+				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
 			</td>
 		</tr>
 		</table>

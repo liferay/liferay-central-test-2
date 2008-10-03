@@ -34,20 +34,20 @@
 <%@ page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean showListed = GetterUtil.getBoolean(prefs.getValue("show-listed", "true"));
+boolean showListed = GetterUtil.getBoolean(preferences.getValue("show-listed", "true"));
 
 if (portletName.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 	showListed = PropsValues.JOURNAL_CONTENT_SEARCH_SHOW_LISTED;
 }
 
-String targetPortletId = prefs.getValue("target-portlet-id", StringPool.BLANK);
-String type = prefs.getValue("type", StringPool.BLANK);
+String targetPortletId = preferences.getValue("target-portlet-id", StringPool.BLANK);
+String type = preferences.getValue("type", StringPool.BLANK);
 %>

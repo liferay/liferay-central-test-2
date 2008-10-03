@@ -28,15 +28,15 @@
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long rootLayoutId = GetterUtil.getLong(prefs.getValue("root-layout-id", StringPool.BLANK));
-int displayDepth = GetterUtil.getInteger(prefs.getValue("display-depth", StringPool.BLANK));
-boolean showHiddenPages = GetterUtil.getBoolean(prefs.getValue("show-hidden-pages", StringPool.BLANK));
+long rootLayoutId = GetterUtil.getLong(preferences.getValue("root-layout-id", StringPool.BLANK));
+int displayDepth = GetterUtil.getInteger(preferences.getValue("display-depth", StringPool.BLANK));
+boolean showHiddenPages = GetterUtil.getBoolean(preferences.getValue("show-hidden-pages", StringPool.BLANK));
 %>

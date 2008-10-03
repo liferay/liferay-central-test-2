@@ -69,14 +69,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValues("isbns", isbns);
+		preferences.setValues("isbns", isbns);
 
 		try {
-			prefs.store();
+			preferences.store();
 		}
 		catch (ValidatorException ve) {
 			SessionErrors.add(

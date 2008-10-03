@@ -97,21 +97,21 @@
 <%@ page import="java.io.StringReader" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String selectionStyle = prefs.getValue("selection-style", null);
+String selectionStyle = preferences.getValue("selection-style", null);
 
 if (Validator.isNull(selectionStyle)) {
 	selectionStyle = "dynamic";
 }
 
-long classNameId = GetterUtil.getLong(prefs.getValue("class-name-id", StringPool.BLANK));
+long classNameId = GetterUtil.getLong(preferences.getValue("class-name-id", StringPool.BLANK));
 long[] classNameIds = null;
 
 if (classNameId > 0) {
@@ -121,39 +121,39 @@ else {
 	classNameIds = new long[0];
 }
 
-String category = GetterUtil.getString(prefs.getValue("category", StringPool.BLANK));
-String[] entries = prefs.getValues("entries", new String[0]);
-String[] notEntries = prefs.getValues("not-entries", new String[0]);
-boolean mergeUrlTags = GetterUtil.getBoolean(prefs.getValue("merge-url-tags", null), true);
-boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
+String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
+String[] entries = preferences.getValues("entries", new String[0]);
+String[] notEntries = preferences.getValues("not-entries", new String[0]);
+boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("merge-url-tags", null), true);
+boolean andOperator = GetterUtil.getBoolean(preferences.getValue("and-operator", null), false);
 
-String displayStyle = GetterUtil.getString(prefs.getValue("display-style", "abstracts"));
+String displayStyle = GetterUtil.getString(preferences.getValue("display-style", "abstracts"));
 
 if (Validator.isNull(displayStyle)) {
 	displayStyle = "abstracts";
 }
 
-String orderByColumn1 = GetterUtil.getString(prefs.getValue("order-by-column-1", "modifiedDate"));
-String orderByColumn2 = GetterUtil.getString(prefs.getValue("order-by-column-2", "title"));
-String orderByType1 = GetterUtil.getString(prefs.getValue("order-by-type-1", "DESC"));
-String orderByType2 = GetterUtil.getString(prefs.getValue("order-by-type-2", "ASC"));
-boolean excludeZeroViewCount = GetterUtil.getBoolean(prefs.getValue("exclude-zero-view-count", "0"));
-int delta = GetterUtil.getInteger(prefs.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
-String paginationType = GetterUtil.getString(prefs.getValue("pagination-type", "none"));
-boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic", StringPool.BLANK));
-boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
-boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null));
-boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null));
-boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null));
+String orderByColumn1 = GetterUtil.getString(preferences.getValue("order-by-column-1", "modifiedDate"));
+String orderByColumn2 = GetterUtil.getString(preferences.getValue("order-by-column-2", "title"));
+String orderByType1 = GetterUtil.getString(preferences.getValue("order-by-type-1", "DESC"));
+String orderByType2 = GetterUtil.getString(preferences.getValue("order-by-type-2", "ASC"));
+boolean excludeZeroViewCount = GetterUtil.getBoolean(preferences.getValue("exclude-zero-view-count", "0"));
+int delta = GetterUtil.getInteger(preferences.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String paginationType = GetterUtil.getString(preferences.getValue("pagination-type", "none"));
+boolean showQueryLogic = GetterUtil.getBoolean(preferences.getValue("show-query-logic", StringPool.BLANK));
+boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
+boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
+boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 
 String defaultMetadataFields = "";
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";
 
-String[] metadataFields = StringUtil.split(PrefsParamUtil.getString(prefs, request, "metadata-fields", defaultMetadataFields));
+String[] metadataFields = StringUtil.split(PrefsParamUtil.getString(preferences, request, "metadata-fields", defaultMetadataFields));
 
 Arrays.sort(entries);
 
-String[] manualEntries = prefs.getValues("manual-entries", new String[0]);
+String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

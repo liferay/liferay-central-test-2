@@ -70,23 +70,24 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValue("display-style", displayStyle);
-		prefs.setValue("bullet-style", bulletStyle);
+		preferences.setValue("display-style", displayStyle);
+		preferences.setValue("bullet-style", bulletStyle);
 
 		if (displayStyle.equals("[custom]")) {
-			prefs.setValue("header-type", headerType);
-			prefs.setValue("root-layout-type", rootLayoutType);
-			prefs.setValue(
+			preferences.setValue("header-type", headerType);
+			preferences.setValue("root-layout-type", rootLayoutType);
+			preferences.setValue(
 				"root-layout-level", String.valueOf(rootLayoutLevel));
-			prefs.setValue("included-layouts", includedLayouts);
-			prefs.setValue("nested-children", String.valueOf(nestedChildren));
+			preferences.setValue("included-layouts", includedLayouts);
+			preferences.setValue(
+				"nested-children", String.valueOf(nestedChildren));
 		}
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doConfigure");

@@ -34,7 +34,7 @@
 	<%
 	int CELLS_PER_ROW = 4;
 
-	String layoutTemplateId = prefs.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
+	String layoutTemplateId = preferences.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 	List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
 
@@ -80,7 +80,7 @@
 <%
 boolean portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), true);
 
-boolean portletSetupShowBorders = GetterUtil.getBoolean(prefs.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
+boolean portletSetupShowBorders = GetterUtil.getBoolean(preferences.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
 %>
 
 <fieldset class="block-labels">

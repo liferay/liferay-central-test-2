@@ -66,24 +66,24 @@
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null), true);
-boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null), true);
+boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
 String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(scopeGroupId), "name");
 
-String[] visibleNodes = StringUtil.split(PrefsParamUtil.getString(prefs, request, "visible-nodes", allNodes));
-String[] hiddenNodes = StringUtil.split(PrefsParamUtil.getString(prefs, request, "hidden-nodes", StringPool.BLANK));
+String[] visibleNodes = StringUtil.split(PrefsParamUtil.getString(preferences, request, "visible-nodes", allNodes));
+String[] hiddenNodes = StringUtil.split(PrefsParamUtil.getString(preferences, request, "hidden-nodes", StringPool.BLANK));
 
-int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
-String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 StringBuilder rssURLParams = new StringBuilder();
 

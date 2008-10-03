@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portlet/ext/reports/init.jsp" %>
 
-<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">Test <%= prefs.getValue("test", "") %></a>
+<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">Test <%= preferences.getValue("test", "") %></a>

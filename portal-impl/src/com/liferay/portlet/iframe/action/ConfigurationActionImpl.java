@@ -82,19 +82,19 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValue("src", src);
-		prefs.setValue("relative", String.valueOf(relative));
+		preferences.setValue("src", src);
+		preferences.setValue("relative", String.valueOf(relative));
 
-		prefs.setValue("auth", String.valueOf(auth));
-		prefs.setValue("auth-type", authType);
-		prefs.setValue("form-method", formMethod);
-		prefs.setValue("user-name", userName);
-		prefs.setValue("password", password);
-		prefs.setValue("hidden-variables", hiddenVariables);
+		preferences.setValue("auth", String.valueOf(auth));
+		preferences.setValue("auth-type", authType);
+		preferences.setValue("form-method", formMethod);
+		preferences.setValue("user-name", userName);
+		preferences.setValue("password", password);
+		preferences.setValue("hidden-variables", hiddenVariables);
 
 		for (int i = 0; i < htmlAttributes.length; i++) {
 			int pos = htmlAttributes[i].indexOf("=");
@@ -104,11 +104,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				String value = htmlAttributes[i].substring(
 					pos + 1, htmlAttributes[i].length());
 
-				prefs.setValue(key, value);
+				preferences.setValue(key, value);
 			}
 		}
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doConfigure");

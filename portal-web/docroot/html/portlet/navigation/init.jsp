@@ -25,23 +25,23 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String bulletStyle = PrefsParamUtil.getString(prefs, request, "bullet-style", "1");
-String displayStyle = PrefsParamUtil.getString(prefs, request, "display-style", "1");
+String bulletStyle = PrefsParamUtil.getString(preferences, request, "bullet-style", "1");
+String displayStyle = PrefsParamUtil.getString(preferences, request, "display-style", "1");
 
-String headerType = PrefsParamUtil.getString(prefs, request, "header-type", "root-layout");
+String headerType = PrefsParamUtil.getString(preferences, request, "header-type", "root-layout");
 
-String rootLayoutType = PrefsParamUtil.getString(prefs, request, "root-layout-type", "absolute");
-int rootLayoutLevel = PrefsParamUtil.getInteger(prefs, request, "root-layout-level", 1);
+String rootLayoutType = PrefsParamUtil.getString(preferences, request, "root-layout-type", "absolute");
+int rootLayoutLevel = PrefsParamUtil.getInteger(preferences, request, "root-layout-level", 1);
 
-String includedLayouts = PrefsParamUtil.getString(prefs, request, "included-layouts", "current");
+String includedLayouts = PrefsParamUtil.getString(preferences, request, "included-layouts", "current");
 
-boolean nestedChildren = PrefsParamUtil.getBoolean(prefs, request, "nested-children", true);
+boolean nestedChildren = PrefsParamUtil.getBoolean(preferences, request, "nested-children", true);
 %>

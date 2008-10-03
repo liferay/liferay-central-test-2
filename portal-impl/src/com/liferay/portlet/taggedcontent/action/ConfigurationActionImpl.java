@@ -61,39 +61,39 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String portletResource = ParamUtil.getString(
 				actionRequest, "portletResource");
 
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
 			if (cmd.equals("add-selection")) {
-				AssetPublisherUtil.addSelection(actionRequest, prefs);
+				AssetPublisherUtil.addSelection(actionRequest, preferences);
 			}
 			else if (cmd.equals("move-selection-down")) {
-				moveSelectionDown(actionRequest, prefs);
+				moveSelectionDown(actionRequest, preferences);
 			}
 			else if (cmd.equals("move-selection-up")) {
-				moveSelectionUp(actionRequest, prefs);
+				moveSelectionUp(actionRequest, preferences);
 			}
 			else if (cmd.equals("remove-selection")) {
-				removeSelection(actionRequest, prefs);
+				removeSelection(actionRequest, preferences);
 			}
 			else if (cmd.equals("selection-style")) {
-				setSelectionStyle(actionRequest, prefs);
+				setSelectionStyle(actionRequest, preferences);
 			}
 			else if (cmd.equals(Constants.UPDATE)) {
-				String selectionStyle = prefs.getValue(
+				String selectionStyle = preferences.getValue(
 					"selection-style", "dynamic");
 
 				if (selectionStyle.equals("dynamic")) {
-					updateDynamicSettings(actionRequest, prefs);
+					updateDynamicSettings(actionRequest, preferences);
 				}
 				else if (selectionStyle.equals("manual")) {
-					updateManualSettings(actionRequest, prefs);
+					updateManualSettings(actionRequest, preferences);
 				}
 			}
 
 			if (SessionErrors.isEmpty(actionRequest)) {
-				prefs.store();
+				preferences.store();
 
 				SessionMessages.add(
 					actionRequest,
@@ -119,12 +119,12 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void moveSelectionDown(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
-		String[] manualEntries = prefs.getValues(
+		String[] manualEntries = preferences.getValues(
 			"manual-entries", new String[0]);
 
 		if ((assetOrder >= (manualEntries.length - 1)) || (assetOrder < 0)) {
@@ -136,16 +136,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		manualEntries[assetOrder + 1] = manualEntries[assetOrder];
 		manualEntries[assetOrder] = temp;
 
-		prefs.setValues("manual-entries", manualEntries);
+		preferences.setValues("manual-entries", manualEntries);
 	}
 
 	protected void moveSelectionUp(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
-		String[] manualEntries = prefs.getValues(
+		String[] manualEntries = preferences.getValues(
 			"manual-entries", new String[0]);
 
 		if ((assetOrder >= manualEntries.length) || (assetOrder <= 0)) {
@@ -157,16 +157,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		manualEntries[assetOrder - 1] = manualEntries[assetOrder];
 		manualEntries[assetOrder] = temp;
 
-		prefs.setValues("manual-entries", manualEntries);
+		preferences.setValues("manual-entries", manualEntries);
 	}
 
 	protected void removeSelection(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
-		String[] manualEntries = prefs.getValues(
+		String[] manualEntries = preferences.getValues(
 			"manual-entries", new String[0]);
 
 		if (assetOrder >= manualEntries.length) {
@@ -184,11 +184,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			}
 		}
 
-		prefs.setValues("manual-entries", newEntries);
+		preferences.setValues("manual-entries", newEntries);
 	}
 
 	protected void setSelectionStyle(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String selectionStyle = ParamUtil.getString(
@@ -196,23 +196,23 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String displayStyle = ParamUtil.getString(
 			actionRequest, "displayStyle");
 
-		prefs.setValue("selection-style", selectionStyle);
+		preferences.setValue("selection-style", selectionStyle);
 
 		if (selectionStyle.equals("manual") ||
 			selectionStyle.equals("view-count")) {
 
-			prefs.setValue("show-query-logic", String.valueOf(false));
+			preferences.setValue("show-query-logic", String.valueOf(false));
 		}
 
 		if (!selectionStyle.equals("view-count") &&
 			displayStyle.equals("view-count-details")) {
 
-			prefs.setValue("display-style", "full-content");
+			preferences.setValue("display-style", "full-content");
 		}
 	}
 
 	protected void updateDynamicSettings(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -260,37 +260,38 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String medatadaFields = ParamUtil.getString(
 			actionRequest, "metadataFields");
 
-		prefs.setValues("entries", entries);
-		prefs.setValues("not-entries", notEntries);
-		prefs.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
-		prefs.setValue("and-operator", String.valueOf(andOperator));
+		preferences.setValues("entries", entries);
+		preferences.setValues("not-entries", notEntries);
+		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
+		preferences.setValue("and-operator", String.valueOf(andOperator));
 
-		prefs.setValue("class-name-id", String.valueOf(classNameId));
-		prefs.setValue("category", category);
-		prefs.setValue("display-style", displayStyle);
-		prefs.setValue("order-by-column-1", orderByColumn1);
-		prefs.setValue("order-by-column-2", orderByColumn2);
-		prefs.setValue("order-by-type-1", orderByType1);
-		prefs.setValue("order-by-type-2", orderByType2);
-		prefs.setValue(
+		preferences.setValue("class-name-id", String.valueOf(classNameId));
+		preferences.setValue("category", category);
+		preferences.setValue("display-style", displayStyle);
+		preferences.setValue("order-by-column-1", orderByColumn1);
+		preferences.setValue("order-by-column-2", orderByColumn2);
+		preferences.setValue("order-by-type-1", orderByType1);
+		preferences.setValue("order-by-type-2", orderByType2);
+		preferences.setValue(
 			"exclude-zero-view-count", String.valueOf(excludeZeroViewCount));
-		prefs.setValue("show-query-logic", String.valueOf(showQueryLogic));
-		prefs.setValue("delta", String.valueOf(delta));
-		prefs.setValue("pagination-type", paginationType);
-		prefs.setValue(
+		preferences.setValue(
+			"show-query-logic", String.valueOf(showQueryLogic));
+		preferences.setValue("delta", String.valueOf(delta));
+		preferences.setValue("pagination-type", paginationType);
+		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
-		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue(
+		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
+		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		prefs.setValue("metadata-fields", medatadaFields);
+		preferences.setValue("metadata-fields", medatadaFields);
 
 		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, entries);
 		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, notEntries);
 	}
 
 	protected void updateManualSettings(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String displayStyle = ParamUtil.getString(
@@ -304,13 +305,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 
-		prefs.setValue("display-style", displayStyle);
-		prefs.setValue(
+		preferences.setValue("display-style", displayStyle);
+		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue(
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
+		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 	}
 
 }

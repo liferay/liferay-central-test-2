@@ -60,24 +60,24 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("display-settings")) {
-			updateDisplaySettings(actionRequest, prefs);
+			updateDisplaySettings(actionRequest, preferences);
 		}
 		else if (tabs2.equals("email-from")) {
-			updateEmailFrom(actionRequest, prefs);
+			updateEmailFrom(actionRequest, preferences);
 		}
 		else if (tabs2.equals("event-reminder-email")) {
-			updateEmailEventReminder(actionRequest, prefs);
+			updateEmailEventReminder(actionRequest, preferences);
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");
@@ -93,7 +93,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateDisplaySettings(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String tabs1Default = ParamUtil.getString(
@@ -105,15 +105,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
 			actionRequest, "summaryTabShowTodaysEvents");
 
-		prefs.setValue("tabs1-default", tabs1Default);
-		prefs.setValue("summary-tab-orientation", summaryTabOrientation);
-		prefs.setValue("summary-tab-show-mini-month", summaryTabShowMiniMonth);
-		prefs.setValue(
+		preferences.setValue("tabs1-default", tabs1Default);
+		preferences.setValue("summary-tab-orientation", summaryTabOrientation);
+		preferences.setValue(
+			"summary-tab-show-mini-month", summaryTabShowMiniMonth);
+		preferences.setValue(
 			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 	}
 
 	protected void updateEmailFrom(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String emailFromName = ParamUtil.getString(
@@ -128,13 +129,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailFromAddress");
 		}
 		else {
-			prefs.setValue("email-from-name", emailFromName);
-			prefs.setValue("email-from-address", emailFromAddress);
+			preferences.setValue("email-from-name", emailFromName);
+			preferences.setValue("email-from-address", emailFromAddress);
 		}
 	}
 
 	protected void updateEmailEventReminder(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		boolean emailEventReminderEnabled = ParamUtil.getBoolean(
@@ -151,12 +152,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "emailEventReminderBody");
 		}
 		else {
-			prefs.setValue(
+			preferences.setValue(
 				"email-event-reminder-enabled",
 				String.valueOf(emailEventReminderEnabled));
-			prefs.setValue(
+			preferences.setValue(
 				"email-event-reminder-subject", emailEventReminderSubject);
-			prefs.setValue("email-event-reminder-body", emailEventReminderBody);
+			preferences.setValue(
+				"email-event-reminder-body", emailEventReminderBody);
 		}
 	}
 

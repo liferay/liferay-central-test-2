@@ -63,15 +63,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValue("root-layout-id", String.valueOf(rootLayoutId));
-		prefs.setValue("display-depth", displayDepth);
-		prefs.setValue("show-hidden-pages", String.valueOf(showHiddenPages));
+		preferences.setValue("root-layout-id", String.valueOf(rootLayoutId));
+		preferences.setValue("display-depth", displayDepth);
+		preferences.setValue(
+			"show-hidden-pages", String.valueOf(showHiddenPages));
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doConfigure");

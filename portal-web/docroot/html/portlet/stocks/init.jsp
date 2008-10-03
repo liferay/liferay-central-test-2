@@ -28,9 +28,9 @@
 <%@ page import="com.liferay.portlet.stocks.util.StocksUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
-String[] symbols = prefs.getValues("symbols", new String[0]);
+String[] symbols = preferences.getValues("symbols", new String[0]);
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 

@@ -38,30 +38,30 @@
 <%@ page import="com.sun.syndication.feed.synd.SyndImage" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String[] urls = prefs.getValues("urls", new String[0]);
-String[] titles = prefs.getValues("titles", new String[0]);
-int entriesPerFeed = GetterUtil.getInteger(prefs.getValue("items-per-channel", "8"));
-boolean showFeedTitle = GetterUtil.getBoolean(prefs.getValue("show-feed-title", Boolean.TRUE.toString()));
-boolean showFeedPublishedDate = GetterUtil.getBoolean(prefs.getValue("show-feed-published-date", Boolean.TRUE.toString()));
-boolean showFeedDescription = GetterUtil.getBoolean(prefs.getValue("show-feed-description", Boolean.TRUE.toString()));
-boolean showFeedImage = GetterUtil.getBoolean(prefs.getValue("show-feed-image", Boolean.TRUE.toString()));
-String feedImageAlignment = prefs.getValue("feed-image-alignment", "right");
-boolean showFeedItemAuthor = GetterUtil.getBoolean(prefs.getValue("show-feed-item-author", Boolean.TRUE.toString()));
+String[] urls = preferences.getValues("urls", new String[0]);
+String[] titles = preferences.getValues("titles", new String[0]);
+int entriesPerFeed = GetterUtil.getInteger(preferences.getValue("items-per-channel", "8"));
+boolean showFeedTitle = GetterUtil.getBoolean(preferences.getValue("show-feed-title", Boolean.TRUE.toString()));
+boolean showFeedPublishedDate = GetterUtil.getBoolean(preferences.getValue("show-feed-published-date", Boolean.TRUE.toString()));
+boolean showFeedDescription = GetterUtil.getBoolean(preferences.getValue("show-feed-description", Boolean.TRUE.toString()));
+boolean showFeedImage = GetterUtil.getBoolean(preferences.getValue("show-feed-image", Boolean.TRUE.toString()));
+String feedImageAlignment = preferences.getValue("feed-image-alignment", "right");
+boolean showFeedItemAuthor = GetterUtil.getBoolean(preferences.getValue("show-feed-item-author", Boolean.TRUE.toString()));
 
-String[] headerArticleResouceValues = prefs.getValues("header-article-resource-values", new String[] {"0", ""});
+String[] headerArticleResouceValues = preferences.getValues("header-article-resource-values", new String[] {"0", ""});
 
 long headerArticleResourcePrimKey = GetterUtil.getLong(headerArticleResouceValues[0]);
 String headerArticleResouceTitle = headerArticleResouceValues[1];
 
-String[] footerArticleResouceValues = prefs.getValues("footer-article-resource-values", new String[] {"0", ""});
+String[] footerArticleResouceValues = preferences.getValues("footer-article-resource-values", new String[] {"0", ""});
 
 long footerArticleResourcePrimKey = GetterUtil.getLong(footerArticleResouceValues[0]);
 String footerArticleResouceTitle = footerArticleResouceValues[1];

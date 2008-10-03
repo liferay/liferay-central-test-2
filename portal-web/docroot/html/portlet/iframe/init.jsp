@@ -25,31 +25,31 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String src = prefs.getValue("src", StringPool.BLANK);
-boolean relative = GetterUtil.getBoolean(prefs.getValue("relative", StringPool.BLANK));
+String src = preferences.getValue("src", StringPool.BLANK);
+boolean relative = GetterUtil.getBoolean(preferences.getValue("relative", StringPool.BLANK));
 
-boolean auth = GetterUtil.getBoolean(prefs.getValue("auth", StringPool.BLANK));
-String authType = prefs.getValue("auth-type", StringPool.BLANK);
-String formMethod = prefs.getValue("form-method", StringPool.BLANK);
-String userName = prefs.getValue("user-name", StringPool.BLANK);
-String password = prefs.getValue("password", StringPool.BLANK);
-String hiddenVariables = prefs.getValue("hidden-variables", StringPool.BLANK);
+boolean auth = GetterUtil.getBoolean(preferences.getValue("auth", StringPool.BLANK));
+String authType = preferences.getValue("auth-type", StringPool.BLANK);
+String formMethod = preferences.getValue("form-method", StringPool.BLANK);
+String userName = preferences.getValue("user-name", StringPool.BLANK);
+String password = preferences.getValue("password", StringPool.BLANK);
+String hiddenVariables = preferences.getValue("hidden-variables", StringPool.BLANK);
 
-String border = prefs.getValue("border", "0");
-String bordercolor = prefs.getValue("bordercolor", "#000000");
-String frameborder = prefs.getValue("frameborder", "0");
-String heightMaximized = prefs.getValue("height-maximized", "600");
-String heightNormal = prefs.getValue("height-normal", "300");
-String hspace = prefs.getValue("hspace", "0");
-String scrolling = prefs.getValue("scrolling", "auto");
-String vspace = prefs.getValue("vspace", "0");
-String width = prefs.getValue("width", "100%");
+String border = preferences.getValue("border", "0");
+String bordercolor = preferences.getValue("bordercolor", "#000000");
+String frameborder = preferences.getValue("frameborder", "0");
+String heightMaximized = preferences.getValue("height-maximized", "600");
+String heightNormal = preferences.getValue("height-normal", "300");
+String hspace = preferences.getValue("hspace", "0");
+String scrolling = preferences.getValue("scrolling", "auto");
+String vspace = preferences.getValue("vspace", "0");
+String width = preferences.getValue("width", "100%");
 %>

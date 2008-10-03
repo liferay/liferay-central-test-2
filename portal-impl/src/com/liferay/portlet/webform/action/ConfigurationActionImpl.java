@@ -86,7 +86,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
@@ -132,16 +132,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		prefs.setValue("title", title);
-		prefs.setValue("description", description);
-		prefs.setValue("requireCaptcha", String.valueOf(requireCaptcha));
-		prefs.setValue("successURL", successURL);
-		prefs.setValue("sendAsEmail", String.valueOf(sendAsEmail));
-		prefs.setValue("subject", subject);
-		prefs.setValue("emailAddress", emailAddress);
-		prefs.setValue("saveToDatabase", String.valueOf(saveToDatabase));
-		prefs.setValue("saveToFile", String.valueOf(saveToFile));
-		prefs.setValue("fileName", fileName);
+		preferences.setValue("title", title);
+		preferences.setValue("description", description);
+		preferences.setValue("requireCaptcha", String.valueOf(requireCaptcha));
+		preferences.setValue("successURL", successURL);
+		preferences.setValue("sendAsEmail", String.valueOf(sendAsEmail));
+		preferences.setValue("subject", subject);
+		preferences.setValue("emailAddress", emailAddress);
+		preferences.setValue("saveToDatabase", String.valueOf(saveToDatabase));
+		preferences.setValue("saveToFile", String.valueOf(saveToFile));
+		preferences.setValue("fileName", fileName);
 
 		if (updateFields) {
 			int i = 1;
@@ -149,7 +149,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String databaseTableName = WebFormUtil.getNewDatabaseTableName(
 				portletResource);
 
-			prefs.setValue("databaseTableName", databaseTableName);
+			preferences.setValue("databaseTableName", databaseTableName);
 
 			String fieldLabel = ParamUtil.getString(
 				actionRequest, "fieldLabel" + i);
@@ -172,14 +172,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 						actionRequest, "invalidValidationDefinition" + i);
 				}
 
-				prefs.setValue("fieldLabel" + i, fieldLabel);
-				prefs.setValue("fieldType" + i, fieldType);
-				prefs.setValue(
+				preferences.setValue("fieldLabel" + i, fieldLabel);
+				preferences.setValue("fieldType" + i, fieldType);
+				preferences.setValue(
 					"fieldOptional" + i, String.valueOf(fieldOptional));
-				prefs.setValue("fieldOptions" + i, fieldOptions);
-				prefs.setValue(
+				preferences.setValue("fieldOptions" + i, fieldOptions);
+				preferences.setValue(
 					"fieldValidationScript" + i, fieldValidationScript);
-				prefs.setValue(
+				preferences.setValue(
 					"fieldValidationErrorMessage" + i,
 					fieldValidationErrorMessage);
 
@@ -204,25 +204,28 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			// Clear previous preferences that are now blank
 
-			fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+			fieldLabel = preferences.getValue(
+				"fieldLabel" + i, StringPool.BLANK);
 
 			while (Validator.isNotNull(fieldLabel)) {
-				prefs.setValue("fieldLabel" + i, StringPool.BLANK);
-				prefs.setValue("fieldType" + i, StringPool.BLANK);
-				prefs.setValue("fieldOptional" + i, StringPool.BLANK);
-				prefs.setValue("fieldOptions" + i, StringPool.BLANK);
-				prefs.setValue("fieldValidationScript" + i, StringPool.BLANK);
-				prefs.setValue(
+				preferences.setValue("fieldLabel" + i, StringPool.BLANK);
+				preferences.setValue("fieldType" + i, StringPool.BLANK);
+				preferences.setValue("fieldOptional" + i, StringPool.BLANK);
+				preferences.setValue("fieldOptions" + i, StringPool.BLANK);
+				preferences.setValue(
+					"fieldValidationScript" + i, StringPool.BLANK);
+				preferences.setValue(
 					"fieldValidationErrorMessage" + i, StringPool.BLANK);
 
 				i++;
 
-				fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+				fieldLabel = preferences.getValue(
+					"fieldLabel" + i, StringPool.BLANK);
 			}
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");

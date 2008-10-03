@@ -72,12 +72,12 @@
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
@@ -87,13 +87,13 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-String[] priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", currentLanguageId);
+String[] priorities = LocalizationUtil.getPrefsValues(preferences, "priorities", currentLanguageId);
 
-int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
-String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
-String rssFormat = prefs.getValue("rss-format", "atom10");
-boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(prefs);
-boolean enableMessageRatings = GetterUtil.getBoolean(prefs.getValue("enable-message-ratings", null), true);
+int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+String rssFormat = preferences.getValue("rss-format", "atom10");
+boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(preferences);
+boolean enableMessageRatings = GetterUtil.getBoolean(preferences.getValue("enable-message-ratings", null), true);
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;

@@ -35,14 +35,14 @@
 <%@ page import="java.net.URL" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String xmlURL = ParamUtil.getString(request, "xmlURL", prefs.getValue("xml-url", XSLContentUtil.DEFAULT_XML_URL));
-String xslURL = ParamUtil.getString(request, "xslURL", prefs.getValue("xsl-url", XSLContentUtil.DEFAULT_XSL_URL));
+String xmlURL = ParamUtil.getString(request, "xmlURL", preferences.getValue("xml-url", XSLContentUtil.DEFAULT_XML_URL));
+String xslURL = ParamUtil.getString(request, "xslURL", preferences.getValue("xsl-url", XSLContentUtil.DEFAULT_XSL_URL));
 %>

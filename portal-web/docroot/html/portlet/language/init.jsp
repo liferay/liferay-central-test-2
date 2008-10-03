@@ -27,14 +27,14 @@
 <%@ page import="com.liferay.taglib.ui.LanguageTag" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String[] languageIds = StringUtil.split(prefs.getValue("language-ids", StringUtil.merge(PropsValues.LOCALES)));
-int displayStyle = GetterUtil.getInteger(prefs.getValue("display-style", StringPool.BLANK));
+String[] languageIds = StringUtil.split(preferences.getValue("language-ids", StringUtil.merge(PropsValues.LOCALES)));
+int displayStyle = GetterUtil.getInteger(preferences.getValue("display-style", StringPool.BLANK));
 %>

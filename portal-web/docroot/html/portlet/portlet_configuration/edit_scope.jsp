@@ -30,9 +30,9 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
+PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
-long scopeLayoutId = PrefsParamUtil.getLong(prefs, request, "lfr-scope-layout-id");
+long scopeLayoutId = PrefsParamUtil.getLong(preferences, request, "lfr-scope-layout-id");
 
 Group group = layout.getGroup();
 %>

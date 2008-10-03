@@ -27,10 +27,10 @@
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 
-String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(prefs));
-String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(prefs));
+String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(preferences));
+String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(preferences));
 %>
 
 <script type="text/javascript">

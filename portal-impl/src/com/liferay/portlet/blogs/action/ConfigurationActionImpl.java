@@ -72,22 +72,22 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		prefs.setValue("page-delta", String.valueOf(pageDelta));
-		prefs.setValue("page-display-style", pageDisplayStyle);
-		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue(
+		preferences.setValue("page-delta", String.valueOf(pageDelta));
+		preferences.setValue("page-display-style", pageDisplayStyle);
+		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
+		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
-		prefs.setValue("rss-delta", String.valueOf(rssDelta));
-		prefs.setValue("rss-display-style", rssDisplayStyle);
-		prefs.setValue("rss-format", rssFormat);
+		preferences.setValue("rss-delta", String.valueOf(rssDelta));
+		preferences.setValue("rss-display-style", rssDisplayStyle);
+		preferences.setValue("rss-format", rssFormat);
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doConfigure");

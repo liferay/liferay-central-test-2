@@ -249,7 +249,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							resultRows.add(row);
 						}
 
-						AssetPublisherUtil.removeAndStoreSelection(deletedAssets, prefs);
+						AssetPublisherUtil.removeAndStoreSelection(deletedAssets, preferences);
 						%>
 
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

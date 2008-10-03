@@ -72,18 +72,18 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String portletResource = ParamUtil.getString(
 				actionRequest, "portletResource");
 
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			prefs.setValue("group-id", String.valueOf(groupId));
-			prefs.setValue("type", type);
-			prefs.setValue("page-url", pageURL);
-			prefs.setValue("page-delta", String.valueOf(pageDelta));
-			prefs.setValue("order-by-col", orderByCol);
-			prefs.setValue("order-by-type", orderByType);
+			preferences.setValue("group-id", String.valueOf(groupId));
+			preferences.setValue("type", type);
+			preferences.setValue("page-url", pageURL);
+			preferences.setValue("page-delta", String.valueOf(pageDelta));
+			preferences.setValue("order-by-col", orderByCol);
+			preferences.setValue("order-by-type", orderByType);
 
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");

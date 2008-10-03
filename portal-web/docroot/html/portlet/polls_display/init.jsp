@@ -39,15 +39,15 @@
 <%@ page import="com.liferay.portlet.polls.util.PollsUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long questionId = GetterUtil.getLong(prefs.getValue("question-id", StringPool.BLANK));
+long questionId = GetterUtil.getLong(preferences.getValue("question-id", StringPool.BLANK));
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

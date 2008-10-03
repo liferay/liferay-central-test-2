@@ -55,29 +55,29 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
 		if (cmd.equals("remove-footer-article")) {
-			removeFooterArticle(actionRequest, prefs);
+			removeFooterArticle(actionRequest, preferences);
 		}
 		else if (cmd.equals("remove-header-article")) {
-			removeHeaderArticle(actionRequest, prefs);
+			removeHeaderArticle(actionRequest, preferences);
 		}
 		else if (cmd.equals("set-footer-article")) {
-			setFooterArticle(actionRequest, prefs);
+			setFooterArticle(actionRequest, preferences);
 		}
 		else if (cmd.equals("set-header-article")) {
-			setHeaderArticle(actionRequest, prefs);
+			setHeaderArticle(actionRequest, preferences);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
-			updateConfiguration(actionRequest, prefs);
+			updateConfiguration(actionRequest, preferences);
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
 			try {
-				prefs.store();
+				preferences.store();
 			}
 			catch (ValidatorException ve) {
 				SessionErrors.add(
@@ -100,23 +100,23 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void removeFooterArticle(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		prefs.setValues(
+		preferences.setValues(
 			"footer-article-resource-values", new String[] {"0", ""});
 	}
 
 	protected void removeHeaderArticle(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		prefs.setValues(
+		preferences.setValues(
 			"header-article-resource-values", new String[] {"0", ""});
 	}
 
 	protected void setFooterArticle(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String footerArticleResourcePrimKey = ParamUtil.getString(
@@ -124,7 +124,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String footerArticleResouceTitle = ParamUtil.getString(
 			actionRequest, "resourceTitle");
 
-		prefs.setValues(
+		preferences.setValues(
 			"footer-article-resource-values",
 			new String[] {
 				footerArticleResourcePrimKey, footerArticleResouceTitle
@@ -132,7 +132,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void setHeaderArticle(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String headerArticleResourcePrimKey = ParamUtil.getString(
@@ -140,13 +140,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String headerArticleResouceTitle = ParamUtil.getString(
 			actionRequest, "resourceTitle");
 
-		prefs.setValues(
+		preferences.setValues(
 			"header-article-resource-values",
 		new String[] {headerArticleResourcePrimKey, headerArticleResouceTitle});
 	}
 
 	protected void updateConfiguration(
-			ActionRequest actionRequest, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String[] urls = actionRequest.getParameterValues("url");
@@ -167,24 +167,25 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "showFeedItemAuthor");
 
 		if (urls != null && titles != null) {
-			prefs.setValues("urls", urls);
-			prefs.setValues("titles", titles);
+			preferences.setValues("urls", urls);
+			preferences.setValues("titles", titles);
 		}
 		else {
-			prefs.setValues("urls", new String[0]);
-			prefs.setValues("titles", new String[0]);
+			preferences.setValues("urls", new String[0]);
+			preferences.setValues("titles", new String[0]);
 		}
 
-		prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
-		prefs.setValue("show-feed-title", String.valueOf(showFeedTitle));
-		prefs.setValue(
+		preferences.setValue(
+			"items-per-channel", String.valueOf(entriesPerFeed));
+		preferences.setValue("show-feed-title", String.valueOf(showFeedTitle));
+		preferences.setValue(
 			"show-feed-published-date", String.valueOf(showFeedPublishedDate));
-		prefs.setValue(
+		preferences.setValue(
 			"show-feed-description", String.valueOf(showFeedDescription));
-		prefs.setValue("show-feed-image", String.valueOf(showFeedImage));
-		prefs.setValue(
+		preferences.setValue("show-feed-image", String.valueOf(showFeedImage));
+		preferences.setValue(
 			"feed-image-alignment", String.valueOf(feedImageAlignment));
-		prefs.setValue(
+		preferences.setValue(
 			"show-feed-item-author", String.valueOf(showFeedItemAuthor));
 	}
 

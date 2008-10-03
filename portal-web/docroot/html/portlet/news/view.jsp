@@ -27,7 +27,7 @@
 <%
 String url = ParamUtil.getString(request, "url");
 
-List newsList = NewsUtil.getNews(prefs);
+List newsList = NewsUtil.getNews(preferences);
 %>
 
 <table border="0" cellpadding="0" cellspacing="0">

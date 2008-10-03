@@ -43,21 +43,21 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long groupId = GetterUtil.getLong(prefs.getValue("group-id", scopeGroupId.toString()));
-String articleId = GetterUtil.getString(prefs.getValue("article-id", StringPool.BLANK));
-String templateId = GetterUtil.getString(prefs.getValue("template-id", StringPool.BLANK));
-boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
-boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null));
-boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null));
-boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null));
+long groupId = GetterUtil.getLong(preferences.getValue("group-id", scopeGroupId.toString()));
+String articleId = GetterUtil.getString(preferences.getValue("article-id", StringPool.BLANK));
+String templateId = GetterUtil.getString(preferences.getValue("template-id", StringPool.BLANK));
+boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
+boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
+boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

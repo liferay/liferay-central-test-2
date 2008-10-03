@@ -40,21 +40,21 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long groupId = GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
-String type = prefs.getValue("type", StringPool.BLANK);
-String pageURL = prefs.getValue("page-url", "maximized");
-int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
+long groupId = GetterUtil.getLong(preferences.getValue("group-id", StringPool.BLANK));
+String type = preferences.getValue("type", StringPool.BLANK);
+String pageURL = preferences.getValue("page-url", "maximized");
+int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK));
 
-String orderByCol = prefs.getValue("order-by-col", StringPool.BLANK);
-String orderByType = prefs.getValue("order-by-type", StringPool.BLANK);
+String orderByCol = preferences.getValue("order-by-col", StringPool.BLANK);
+String orderByType = preferences.getValue("order-by-type", StringPool.BLANK);
 
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(orderByCol, orderByType);
 

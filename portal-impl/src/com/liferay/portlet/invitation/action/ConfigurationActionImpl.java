@@ -71,14 +71,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String portletResource = ParamUtil.getString(
 				actionRequest, "portletResource");
 
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			prefs.setValue("email-message-subject", emailMessageSubject);
-			prefs.setValue("email-message-body", emailMessageBody);
+			preferences.setValue("email-message-subject", emailMessageSubject);
+			preferences.setValue("email-message-body", emailMessageBody);
 
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");

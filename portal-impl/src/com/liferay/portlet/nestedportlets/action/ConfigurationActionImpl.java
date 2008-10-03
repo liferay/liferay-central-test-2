@@ -75,11 +75,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences prefs =
+		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		String oldLayoutTemplateId = prefs.getValue(
+		String oldLayoutTemplateId = preferences.getValue(
 			"layout-template-id",
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
@@ -89,10 +89,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				oldLayoutTemplateId);
 		}
 
-		prefs.setValue("layout-template-id", layoutTemplateId);
-		prefs.setValue("portlet-setup-show-borders", portletSetupShowBorders);
+		preferences.setValue("layout-template-id", layoutTemplateId);
+		preferences.setValue(
+			"portlet-setup-show-borders", portletSetupShowBorders);
 
-		prefs.store();
+		preferences.store();
 
 		SessionMessages.add(
 			actionRequest, portletConfig.getPortletName() + ".doConfigure");

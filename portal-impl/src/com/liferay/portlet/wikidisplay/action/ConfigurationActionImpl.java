@@ -67,14 +67,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String portletResource = ParamUtil.getString(
 				actionRequest, "portletResource");
 
-			PortletPreferences prefs =
+			PortletPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			prefs.setValue("node-id", String.valueOf(node.getNodeId()));
-			prefs.setValue("title", title);
+			preferences.setValue("node-id", String.valueOf(node.getNodeId()));
+			preferences.setValue("title", title);
 
-			prefs.store();
+			preferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");

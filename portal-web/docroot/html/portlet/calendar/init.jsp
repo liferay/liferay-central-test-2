@@ -38,23 +38,23 @@
 <%@ page import="com.liferay.portlet.calendar.util.comparator.EventTimeComparator" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
 String tabs1Names = "summary,day,week,month,year,events,export-import";
 
 String[] tabs1NamesArray = StringUtil.split(tabs1Names);
 
-String tabs1Default = prefs.getValue("tabs1-default", tabs1NamesArray[0]);
+String tabs1Default = preferences.getValue("tabs1-default", tabs1NamesArray[0]);
 
-String summaryTabOrientation = prefs.getValue("summary-tab-orientation", "horizontal");
-boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(prefs.getValue("summary-tab-show-mini-month", "true"));
-boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(prefs.getValue("summary-tab-show-todays-events", "true"));
+String summaryTabOrientation = preferences.getValue("summary-tab-orientation", "horizontal");
+boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-mini-month", "true"));
+boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-todays-events", "true"));
 
 String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");
