@@ -22,11 +22,10 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -49,8 +48,6 @@ import org.apache.derby.tools.ij;
 public class DBLoader {
 
 	public static void main(String[] args) {
-		InitUtil.initWithSpring();
-
 		if (args.length == 2) {
 			new DBLoader(args[0], args[1], StringPool.BLANK);
 		}
@@ -101,7 +98,7 @@ public class DBLoader {
 		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(
-			new StringReader(FileUtil.read(fileName)));
+			new StringReader(_fileUtil.read(fileName)));
 
 		String line = null;
 
@@ -180,11 +177,11 @@ public class DBLoader {
 		// Hypersonic will encode unicode characters twice, this will undo
 		// it
 
-		String content = FileUtil.read(_databaseName + ".script");
+		String content = _fileUtil.read(_databaseName + ".script");
 
 		content = StringUtil.replace(content, "\\u005cu", "\\u");
 
-		FileUtil.write(_databaseName + ".script", content);
+		_fileUtil.write(_databaseName + ".script", content);
 	}
 
 	private void _loadHypersonic(Connection con, String fileName)
@@ -193,7 +190,7 @@ public class DBLoader {
 		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(
-			new StringReader(FileUtil.read(fileName)));
+			new StringReader(_fileUtil.read(fileName)));
 
 		String line = null;
 
@@ -233,6 +230,8 @@ public class DBLoader {
 
 		br.close();
 	}
+
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private String _databaseType;
 	private String _databaseName;

@@ -22,9 +22,8 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 
@@ -42,8 +41,6 @@ import java.util.Properties;
 public class ReleaseInfoBuilder {
 
 	public static void main(String[] args) {
-		InitUtil.initWithSpring();
-
 		new ReleaseInfoBuilder();
 	}
 
@@ -53,7 +50,7 @@ public class ReleaseInfoBuilder {
 			// Get version
 
 			Properties releaseProps =
-				FileUtil.toProperties("../release.properties");
+				_fileUtil.toProperties("../release.properties");
 
 			String version = releaseProps.getProperty("lp.version");
 
@@ -61,7 +58,7 @@ public class ReleaseInfoBuilder {
 				"../portal-kernel/src/com/liferay/portal/kernel/util/" +
 					"ReleaseInfo.java");
 
-			String content = FileUtil.read(file);
+			String content = _fileUtil.read(file);
 
 			int x = content.indexOf("String version = \"");
 			x = content.indexOf("\"", x) + 1;
@@ -99,13 +96,13 @@ public class ReleaseInfoBuilder {
 
 			// Update ReleaseInfo.java
 
-			FileUtil.write(file, content);
+			_fileUtil.write(file, content);
 
 			// Update portal-release.sql
 
 			file = new File("../sql/portal-data-release.sql");
 
-			content = FileUtil.read(file);
+			content = _fileUtil.read(file);
 
 			x = content.indexOf("insert into Release_");
 			y = content.indexOf(", FALSE);", x);
@@ -115,11 +112,13 @@ public class ReleaseInfoBuilder {
 				content.substring(0, x) + build +
 				content.substring(y, content.length());
 
-			FileUtil.write(file, content);
+			_fileUtil.write(file, content);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

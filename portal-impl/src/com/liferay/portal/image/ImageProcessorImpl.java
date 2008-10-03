@@ -62,6 +62,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageProcessorImpl implements ImageProcessor {
 
+	public static ImageProcessorImpl getInstance() {
+		return _instance;
+	}
+
 	public BufferedImage convertImageType(BufferedImage sourceImage, int type) {
 		BufferedImage targetImage = new BufferedImage(
 			sourceImage.getWidth(), sourceImage.getHeight(), type);
@@ -250,5 +254,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageProcessorImpl.class);
+
+	private static ImageProcessorImpl _instance = new ImageProcessorImpl();
 
 }
