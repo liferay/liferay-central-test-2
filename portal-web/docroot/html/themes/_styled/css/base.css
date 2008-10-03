@@ -186,6 +186,7 @@ body.staging {
 }
 
 #banner .logo {
+	margin: 0;
 }
 
 /* ---------- Alerts and popups ---------- */
