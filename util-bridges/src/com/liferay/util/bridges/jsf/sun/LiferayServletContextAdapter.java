@@ -22,10 +22,8 @@
 
 package com.liferay.util.bridges.jsf.sun;
 
-import java.io.IOException;
 import java.io.InputStream;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.security.Principal;
@@ -52,7 +50,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		_servletContext = servletContext;
 	}
 
-	public Map getApplicationMap() {
+	public Map<String, Object> getApplicationMap() {
 		if (_applicationMap == null) {
 			_applicationMap = new LiferayApplicationMap(_servletContext);
 		}
@@ -68,7 +66,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public void dispatch(String string) throws IOException {
+	public void dispatch(String string) {
 	}
 
 	public String encodeActionURL(String string) {
@@ -87,7 +85,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public Map getInitParameterMap() {
+	public Map<String, String> getInitParameterMap() {
 		return null;
 	}
 
@@ -97,7 +95,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 	public void log(String string, Throwable throwable) {
 	}
 
-	public void redirect(String string) throws IOException {
+	public void redirect(String string) {
 	}
 
 	public String getRemoteUser() {
@@ -112,15 +110,15 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public Map getRequestCookieMap() {
+	public Map<String, Object> getRequestCookieMap() {
 		return null;
 	}
 
-	public Map getRequestHeaderMap() {
+	public Map<String, String> getRequestHeaderMap() {
 		return null;
 	}
 
-	public Map getRequestHeaderValuesMap() {
+	public Map<String, String[]> getRequestHeaderValuesMap() {
 		return null;
 	}
 
@@ -128,23 +126,23 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public Iterator getRequestLocales() {
+	public Iterator<Locale> getRequestLocales() {
 		return null;
 	}
 
-	public Map getRequestMap() {
+	public Map<String, Object> getRequestMap() {
 		return null;
 	}
 
-	public Map getRequestParameterMap() {
+	public Map<String, String> getRequestParameterMap() {
 		return null;
 	}
 
-	public Iterator getRequestParameterNames() {
+	public Iterator<String> getRequestParameterNames() {
 		return null;
 	}
 
-	public Map getRequestParameterValuesMap() {
+	public Map<String, String[]> getRequestParameterValuesMap() {
 		return null;
 	}
 
@@ -156,7 +154,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public URL getResource(String string) throws MalformedURLException {
+	public URL getResource(String string) {
 		return null;
 	}
 
@@ -164,7 +162,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public Set getResourcePaths(String string) {
+	public Set<String> getResourcePaths(String string) {
 		return null;
 	}
 
@@ -176,7 +174,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	public Map getSessionMap() {
+	public Map<String, Object> getSessionMap() {
 		return null;
 	}
 

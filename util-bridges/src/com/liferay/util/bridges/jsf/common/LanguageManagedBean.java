@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Neil Griffin
  *
  */
-public class LanguageManagedBean implements Map {
+public class LanguageManagedBean implements Map<String, String> {
 
 	public LanguageManagedBean() {
 
@@ -76,12 +76,12 @@ public class LanguageManagedBean implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	public Set entrySet() {
+	public Set<Entry<String, String>> entrySet() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Object get(Object key) {
-		Object value = null;
+	public String get(Object key) {
+		String value = null;
 
 		if (key != null) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -104,19 +104,19 @@ public class LanguageManagedBean implements Map {
 		return value;
 	}
 
-	public Set keySet() {
+	public Set<String> keySet() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Object put(Object key, Object value) {
+	public String put(String key, String value) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void putAll(Map map) {
+	public void putAll(Map<? extends String, ? extends String> map) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Object remove(Object key) {
+	public String remove(Object key) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -124,7 +124,7 @@ public class LanguageManagedBean implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	public Collection values() {
+	public Collection<String> values() {
 		throw new UnsupportedOperationException();
 	}
 

@@ -33,13 +33,13 @@ import javax.servlet.ServletContext;
  * @author Neil Griffin
  *
  */
-public class LiferayApplicationMap extends AbstractMap {
+public class LiferayApplicationMap extends AbstractMap<String, Object> {
 
 	public LiferayApplicationMap(ServletContext servletContext) {
 		_servletContext = servletContext;
 	}
 
-	public Set entrySet() {
+	public Set<Entry<String, Object>> entrySet() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -47,7 +47,7 @@ public class LiferayApplicationMap extends AbstractMap {
 		return _servletContext.getAttribute(key.toString());
 	}
 
-	public Object put(Object key, Object value) {
+	public Object put(String key, Object value) {
 		Object previousValue = get(key);
 
 		_servletContext.setAttribute(key.toString(), value);

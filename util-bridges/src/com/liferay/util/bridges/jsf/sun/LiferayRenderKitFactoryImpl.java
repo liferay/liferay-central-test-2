@@ -26,6 +26,8 @@ import com.sun.faces.renderkit.RenderKitFactoryImpl;
 
 import java.util.HashMap;
 
+import javax.faces.render.RenderKitFactory;
+
 /**
  * <a href="LiferayRenderKitFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,7 +39,7 @@ public class LiferayRenderKitFactoryImpl extends RenderKitFactoryImpl {
 	public LiferayRenderKitFactoryImpl() {
 		super();
 
-		renderKits = new HashMap();
+		renderKits = new HashMap<String, RenderKitFactory>();
 
 		addRenderKit(HTML_BASIC_RENDER_KIT, new LiferayRenderKitImpl());
 	}

@@ -41,7 +41,7 @@ public class WriterWrapper extends Writer {
 		_writer.close();
 	}
 
-	public void flush() throws IOException {
+	public void flush() {
 	}
 
 	public void write(char cbuf) throws IOException {
