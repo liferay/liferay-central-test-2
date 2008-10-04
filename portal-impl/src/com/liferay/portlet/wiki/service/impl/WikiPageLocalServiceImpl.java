@@ -53,6 +53,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
+import com.liferay.portlet.wiki.NoSuchPageResourceException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.PageVersionException;
@@ -420,8 +421,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Resource
 
-		wikiPageResourceLocalService.deletePageResource(
-			page.getNodeId(), page.getTitle());
+		try {
+			wikiPageResourceLocalService.deletePageResource(
+				page.getNodeId(), page.getTitle());
+		}
+		catch (NoSuchPageResourceException nspre) {
+		}
 
 		// All versions
 
