@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -45,7 +46,10 @@ import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -160,6 +164,38 @@ public class EditExpandoAction extends PortletAction {
 		return value;
 	}
 
+	protected void updateProperties(
+			ExpandoBridge expandoBridge, String name,
+			ActionRequest actionRequest)
+		throws Exception {
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
+
+		UnicodeProperties properties = expandoBridge.getAttributeProperties(
+			name);
+
+		List<String> names = new ArrayList<String>();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+
+			if (param.indexOf("PropertyName(") != -1) {
+				String propertyName = ParamUtil.getString(actionRequest, param);
+
+				names.add(propertyName);
+			}
+		}
+
+		for (String propertyName : names) {
+			String value = ParamUtil.getString(
+				actionRequest, "Property(" + propertyName + ")");
+
+			properties.setProperty(propertyName, value);
+		}
+
+		expandoBridge.setAttributeProperties(name, properties);
+	}
+
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -239,6 +275,8 @@ public class EditExpandoAction extends PortletAction {
 			modelResource, resourcePrimKey);
 
 		expandoBridge.addAttribute(name, type);
+
+		updateProperties(expandoBridge, name, actionRequest);
 	}
 
 	protected void deleteExpando(ActionRequest actionRequest) throws Exception {
@@ -264,6 +302,8 @@ public class EditExpandoAction extends PortletAction {
 		if (Validator.isNotNull(defaultValue)) {
 			expandoBridge.setAttributeDefault(name, defaultValue);
 		}
+
+		updateProperties(expandoBridge, name, actionRequest);
 	}
 
 }

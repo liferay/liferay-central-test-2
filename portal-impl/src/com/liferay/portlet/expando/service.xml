@@ -82,7 +82,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="ExpandoValue" local-service="true" remote-service="false">
+	<entity name="ExpandoValue" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

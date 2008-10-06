@@ -1289,6 +1289,16 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoValueLocalService.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoValueService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueServiceFactory">
+		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoValueService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueServiceUtil" class="com.liferay.portlet.expando.service.ExpandoValueServiceUtil">
+		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoValueService.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />

@@ -29,7 +29,7 @@ import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,7 +88,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		Object data = null;
 
 		try {
-			data = ExpandoValueLocalServiceUtil.getData(
+			data = ExpandoValueServiceUtil.getData(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK);
 		}
@@ -147,7 +147,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			return null;
+			return new UnicodeProperties(true);
 		}
 	}
 
@@ -202,7 +202,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 
 		try {
-			ExpandoValueLocalServiceUtil.addValue(
+			ExpandoValueServiceUtil.addValue(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK, value);
 		}

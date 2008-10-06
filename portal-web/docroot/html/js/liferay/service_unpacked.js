@@ -1718,6 +1718,24 @@ Liferay.Service.Expando.ExpandoColumn = {
 	}
 };
 
+Liferay.Service.Expando.ExpandoValue = {
+	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoValue" + Liferay.Service.classNameSuffix,
+
+	addValue: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addValue";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getData: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getData";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.IG = {
 	servicePackage: "com.liferay.portlet.imagegallery.service.http."
 };
