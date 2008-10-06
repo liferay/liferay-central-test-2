@@ -343,7 +343,7 @@ public class WSRPPersistenceHelper {
 					wsrpConsumerFile,
 					StringUtil.read(
 						classLoader,
-						"com/liferay/portal/wsrp/consumer/data/consumer.xml"));
+						"com/liferay/wsrp/consumer/data/consumer.xml"));
 			}
 
 			_wsrpPortletsFileName = wsrpDataDir + "/wsrpportlets.xml";
