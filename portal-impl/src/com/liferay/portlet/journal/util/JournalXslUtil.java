@@ -95,11 +95,10 @@ public class JournalXslUtil {
 			transformer.setParameter(
 				"journalTemplatesPath", journalTemplatesPath);
 			transformer.setParameter("locale", locale);
-			transformer.setParameter("randomNamespace", randomNamespace);
-
 			transformer.setParameter(
 				"permissionChecker",
 				PermissionThreadLocal.getPermissionChecker());
+			transformer.setParameter("randomNamespace", randomNamespace);
 
 			transformer.transform(xmlSource, new StreamResult(bam));
 		}

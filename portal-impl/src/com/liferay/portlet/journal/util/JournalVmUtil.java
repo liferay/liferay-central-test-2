@@ -113,11 +113,10 @@ public class JournalVmUtil {
 			context.put("groupId", String.valueOf(groupId));
 			context.put("journalTemplatesPath", journalTemplatesPath);
 			context.put("locale", LocaleUtil.fromLanguageId(languageId));
-			context.put("randomNamespace", randomNamespace);
-
 			context.put(
 				"permissionChecker",
 				PermissionThreadLocal.getPermissionChecker());
+			context.put("randomNamespace", randomNamespace);
 
 			VelocityVariables.insertHelperUtilities(
 				context, _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
