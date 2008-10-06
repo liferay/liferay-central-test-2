@@ -193,6 +193,19 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 
+		if ((folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(folderId == fileEntry.getFolderId())) {
+
+			String path = getImportFolderPath(context, folderId);
+
+			DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, folder);
+
+			folderId = MapUtil.getLong(
+				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
+		}
+
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -273,6 +286,19 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, rank.getFolderId(), rank.getFolderId());
 
+		if ((folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(folderId == rank.getFolderId())) {
+
+			String path = getImportFolderPath(context, folderId);
+
+			DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, folder);
+
+			folderId = MapUtil.getLong(
+				folderPKs, rank.getFolderId(), rank.getFolderId());
+		}
+
 		String name = fileEntryNames.get(rank.getName());
 
 		if (name == null) {
@@ -301,6 +327,20 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long groupId = context.getGroupId();
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
+
+		if ((parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(parentFolderId == folder.getParentFolderId())) {
+
+			String path = getImportFolderPath(context, parentFolderId);
+
+			DLFolder parentFolder = (DLFolder)context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, parentFolder);
+
+			parentFolderId = MapUtil.getLong(
+				folderPKs, folder.getParentFolderId(),
+				folder.getParentFolderId());
+		}
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -717,6 +757,13 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the folder for shortcut " +
 					fileShortcut.getFileShortcutId());
 		}
+	}
+
+	protected static String getImportFolderPath(
+		PortletDataContext context, long folderId) {
+
+		return context.getImportPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
+			"/folders/" + folderId + ".xml";
 	}
 
 	private static final String _NAMESPACE = "document_library";

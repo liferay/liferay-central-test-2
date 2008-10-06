@@ -117,6 +117,20 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
+		if ((parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(parentFolderId == folder.getParentFolderId())) {
+
+			String path = getImportFolderPath(context, parentFolderId);
+
+			IGFolder parentFolder = (IGFolder)context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, parentFolder);
+
+			parentFolderId = MapUtil.getLong(
+				folderPKs, folder.getParentFolderId(),
+				folder.getParentFolderId());
+		}
+
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
@@ -178,6 +192,19 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		long userId = context.getUserId(image.getUserUuid());
 		long folderId = MapUtil.getLong(
 			folderPKs, image.getFolderId(), image.getFolderId());
+
+		if ((folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(folderId == image.getFolderId())) {
+
+			String path = getImportFolderPath(context, folderId);
+
+			IGFolder parentFolder = (IGFolder)context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, parentFolder);
+
+			folderId = MapUtil.getLong(
+				folderPKs, image.getFolderId(), image.getFolderId());
+		}
 
 		File imageFile = null;
 
@@ -365,7 +392,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
 			exportParentFolder(context, foldersEl, folder.getParentFolderId());
 
-			String path = getFolderPath(context, folder);
+			String path = getFolderPath(context, folder.getFolderId());
 
 			if (context.isPathNotProcessed(path)) {
 				Element folderEl = foldersEl.addElement("folder");
@@ -397,7 +424,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 
-		String path = getFolderPath(context, folder);
+		String path = getFolderPath(context, folder.getFolderId());
 
 		if (context.isPathNotProcessed(path)) {
 			Element folderEl = foldersEl.addElement("folder");
@@ -442,13 +469,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static String getFolderPath(
-		PortletDataContext context, IGFolder folder) {
+		PortletDataContext context, long folderId) {
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/folders/");
-		sb.append(folder.getFolderId());
+		sb.append(folderId);
 		sb.append(".xml");
 
 		return sb.toString();
@@ -476,6 +503,19 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/images/");
 		sb.append(image.getImageId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getImportFolderPath(
+		PortletDataContext context, long folderId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.IMAGE_GALLERY));
+		sb.append("/folders/");
+		sb.append(folderId);
 		sb.append(".xml");
 
 		return sb.toString();

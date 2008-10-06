@@ -296,6 +296,20 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
+		if ((folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(folderId == entry.getFolderId())) {
+
+			String path = getImportFolderPath(context, folderId);
+
+			BookmarksFolder folder = (BookmarksFolder)
+				context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, folder);
+
+			folderId = MapUtil.getLong(
+				folderPKs, entry.getFolderId(), entry.getFolderId());
+		}
+
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -354,6 +368,21 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
+		if ((parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(parentFolderId == folder.getParentFolderId())) {
+
+			String path = getImportFolderPath(context, parentFolderId);
+
+			BookmarksFolder parentFolder = (BookmarksFolder)
+				context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, parentFolder);
+
+			parentFolderId = MapUtil.getLong(
+				folderPKs, folder.getParentFolderId(),
+				folder.getParentFolderId());
+		}
+
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
@@ -398,6 +427,19 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the parent folder for folder " +
 					folder.getFolderId());
 		}
+	}
+
+	protected String getImportFolderPath(
+		PortletDataContext context, long folderId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.BOOKMARKS));
+		sb.append("/folders/");
+		sb.append(folderId);
+		sb.append(".xml");
+
+		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "bookmarks";

@@ -467,6 +467,21 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			categoryPKs, category.getParentCategoryId(),
 			category.getParentCategoryId());
 
+		if ((parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
+			(parentCategoryId == category.getParentCategoryId())) {
+
+			String path = getImportCategoryPath(context, parentCategoryId);
+
+			MBCategory parentCategory = (MBCategory)
+				context.getZipEntryAsObject(path);
+
+			importCategory(context, categoryPKs, parentCategory);
+
+			parentCategoryId = MapUtil.getLong(
+				categoryPKs, category.getParentCategoryId(),
+				category.getParentCategoryId());
+		}
+
 		String emailAddress = null;
 		String inProtocol = null;
 		String inServerName = null;
@@ -582,6 +597,20 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		long parentMessageId = MapUtil.getLong(
 			messagePKs, message.getParentMessageId(),
 			message.getParentMessageId());
+
+		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
+			(categoryId == message.getCategoryId())) {
+
+			String path = getImportCategoryPath(context, categoryId);
+
+			MBCategory parentCategory = (MBCategory)
+				context.getZipEntryAsObject(path);
+
+			importCategory(context, categoryPKs, parentCategory);
+
+			categoryId = MapUtil.getLong(
+				categoryPKs, message.getCategoryId(), message.getCategoryId());
+		}
 
 		List<ObjectValuePair<String, byte[]>> files =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
@@ -699,6 +728,19 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/categories/");
 		sb.append(category.getCategoryId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected String getImportCategoryPath(
+		PortletDataContext context, long categoryId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append("/categories/");
+		sb.append(categoryId);
 		sb.append(".xml");
 
 		return sb.toString();
