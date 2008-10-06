@@ -287,6 +287,19 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		return sb.toString();
 	}
 
+	protected String getImportFolderPath(
+		PortletDataContext context, long folderId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.BOOKMARKS));
+		sb.append("/folders/");
+		sb.append(folderId);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
 	protected void importEntry(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			BookmarksEntry entry)
@@ -301,8 +314,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			String path = getImportFolderPath(context, folderId);
 
-			BookmarksFolder folder = (BookmarksFolder)
-				context.getZipEntryAsObject(path);
+			BookmarksFolder folder =
+				(BookmarksFolder)context.getZipEntryAsObject(path);
 
 			importFolder(context, folderPKs, folder);
 
@@ -373,8 +386,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			String path = getImportFolderPath(context, parentFolderId);
 
-			BookmarksFolder parentFolder = (BookmarksFolder)
-				context.getZipEntryAsObject(path);
+			BookmarksFolder parentFolder =
+				(BookmarksFolder)context.getZipEntryAsObject(path);
 
 			importFolder(context, folderPKs, parentFolder);
 
@@ -427,19 +440,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the parent folder for folder " +
 					folder.getFolderId());
 		}
-	}
-
-	protected String getImportFolderPath(
-		PortletDataContext context, long folderId) {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(context.getImportPortletPath(PortletKeys.BOOKMARKS));
-		sb.append("/folders/");
-		sb.append(folderId);
-		sb.append(".xml");
-
-		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "bookmarks";

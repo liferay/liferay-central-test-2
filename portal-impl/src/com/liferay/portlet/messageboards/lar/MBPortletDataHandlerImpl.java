@@ -472,8 +472,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			String path = getImportCategoryPath(context, parentCategoryId);
 
-			MBCategory parentCategory = (MBCategory)
-				context.getZipEntryAsObject(path);
+			MBCategory parentCategory =
+				(MBCategory)context.getZipEntryAsObject(path);
 
 			importCategory(context, categoryPKs, parentCategory);
 

@@ -689,22 +689,53 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	protected static String getFolderPath(
 		PortletDataContext context, DLFolder folder) {
 
-		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
-			"/folders/" + folder.getFolderId() + ".xml";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/folders/");
+		sb.append(folder.getFolderId());
+		sb.append(".xml");
+
+		return sb.toString();
 	}
 
 	protected static String getFileRankPath(
 		PortletDataContext context, DLFileRank fileRank) {
 
-		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
-			"/ranks/" + fileRank.getFileRankId() + ".xml";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/ranks/");
+		sb.append(fileRank.getFileRankId());
+		sb.append(".xml");
+
+		return sb.toString();
 	}
 
 	protected static String getFileShortcutPath(
 		PortletDataContext context, DLFileShortcut fileShortcut) {
 
-		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
-			"/shortcut/" + fileShortcut.getFileShortcutId() + ".xml";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/shortcuts/");
+		sb.append(fileShortcut.getFileShortcutId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getImportFolderPath(
+		PortletDataContext context, long folderId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/folders/");
+		sb.append(folderId);
+		sb.append(".xml");
+
+		return sb.toString();
 	}
 
 	protected static void importFileShortcut(
@@ -757,13 +788,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the folder for shortcut " +
 					fileShortcut.getFileShortcutId());
 		}
-	}
-
-	protected static String getImportFolderPath(
-		PortletDataContext context, long folderId) {
-
-		return context.getImportPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
-			"/folders/" + folderId + ".xml";
 	}
 
 	private static final String _NAMESPACE = "document_library";
