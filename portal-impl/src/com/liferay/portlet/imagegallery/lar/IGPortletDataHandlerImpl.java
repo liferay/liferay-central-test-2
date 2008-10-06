@@ -79,6 +79,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			return;
 		}
 
+		exportParentFolder(context, foldersEl, image.getFolderId());
+
 		String path = getImagePath(context, image);
 
 		if (context.isPathNotProcessed(path)) {
@@ -103,8 +105,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, image);
 		}
-
-		exportParentFolder(context, foldersEl, image.getFolderId());
 	}
 
 	public static void importFolder(
@@ -363,6 +363,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortalException, SystemException {
 
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
+			exportParentFolder(context, foldersEl, folder.getParentFolderId());
+
 			String path = getFolderPath(context, folder);
 
 			if (context.isPathNotProcessed(path)) {
@@ -374,8 +376,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 				context.addZipEntry(path, folder);
 			}
-
-			exportParentFolder(context, foldersEl, folder.getParentFolderId());
 		}
 
 		List<IGImage> images = IGImageUtil.findByFolderId(folder.getFolderId());
@@ -395,6 +395,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
 
+		exportParentFolder(context, foldersEl, folder.getParentFolderId());
+
 		String path = getFolderPath(context, folder);
 
 		if (context.isPathNotProcessed(path)) {
@@ -406,8 +408,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, folder);
 		}
-
-		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 	}
 
 	protected static String getFolderName(

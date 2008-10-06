@@ -86,6 +86,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			return;
 		}
 
+		exportParentFolder(context, foldersEl, fileEntry.getFolderId());
+
 		String path = getFileEntryPath(context, fileEntry);
 
 		if (context.isPathNotProcessed(path)) {
@@ -138,8 +140,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 		}
-
-		exportParentFolder(context, foldersEl, fileEntry.getFolderId());
 	}
 
 	public static void exportFolder(
@@ -149,6 +149,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortalException, SystemException {
 
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
+			exportParentFolder(context, foldersEl, folder.getParentFolderId());
+
 			String path = getFolderPath(context, folder);
 
 			if (context.isPathNotProcessed(path)) {
@@ -160,8 +162,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				context.addZipEntry(path, folder);
 			}
-
-			exportParentFolder(context, foldersEl, folder.getParentFolderId());
 		}
 
 		List<DLFileEntry> fileEntries = DLFileEntryUtil.findByFolderId(
@@ -543,6 +543,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			Element fileShortcutsEl, DLFileShortcut fileShortcut)
 		throws PortalException, SystemException {
 
+		exportParentFolder(context, foldersEl, fileShortcut.getFolderId());
+
 		String path = getFileShortcutPath(context, fileShortcut);
 
 		if (context.isPathNotProcessed(path)) {
@@ -555,8 +557,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, fileShortcut);
 		}
-
-		exportParentFolder(context, foldersEl, fileShortcut.getFolderId());
 	}
 
 	protected static void exportParentFolder(
@@ -569,6 +569,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
+		exportParentFolder(context, foldersEl, folder.getParentFolderId());
+
 		String path = getFolderPath(context, folder);
 
 		if (context.isPathNotProcessed(path)) {
@@ -580,8 +582,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, folder);
 		}
-
-		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 	}
 
 	protected static String getFileEntryBinPath(

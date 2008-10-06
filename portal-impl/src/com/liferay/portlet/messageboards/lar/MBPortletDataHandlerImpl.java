@@ -264,6 +264,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortalException, SystemException {
 
 		if (context.isWithinDateRange(category.getModifiedDate())) {
+			exportParentCategory(
+				context, categoriesEl, category.getParentCategoryId());
+
 			String path = getCategoryPath(context, category);
 
 			if (context.isPathNotProcessed(path)) {
@@ -275,9 +278,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 				context.addZipEntry(path, category);
 			}
-
-			exportParentCategory(
-				context, categoriesEl, category.getParentCategoryId());
 		}
 
 		List<MBMessage> messages = MBMessageUtil.findByCategoryId(
@@ -297,6 +297,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		if (!context.isWithinDateRange(message.getModifiedDate())) {
 			return;
 		}
+
+		exportParentCategory(context, categoriesEl, message.getCategoryId());
 
 		String path = getMessagePath(context, message);
 
@@ -359,8 +361,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, message);
 		}
-
-		exportParentCategory(context, categoriesEl, message.getCategoryId());
 	}
 
 	protected void exportMessageFlag(
@@ -395,6 +395,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
+		exportParentCategory(
+			context, categoriesEl, category.getParentCategoryId());
+
 		String path = getCategoryPath(context, category);
 
 		if (context.isPathNotProcessed(path)) {
@@ -406,9 +409,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, category);
 		}
-
-		exportParentCategory(
-			context, categoriesEl, category.getParentCategoryId());
 	}
 
 	protected void exportUserBan(

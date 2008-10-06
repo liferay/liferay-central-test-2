@@ -184,6 +184,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortalException, SystemException {
 
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
+			exportParentFolder(context, foldersEl, folder.getParentFolderId());
+
 			String path = getFolderPath(context, folder);
 
 			if (context.isPathNotProcessed(path)) {
@@ -195,8 +197,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				context.addZipEntry(path, folder);
 			}
-
-			exportParentFolder(context, foldersEl, folder.getParentFolderId());
 		}
 
 		List<BookmarksEntry> entries = BookmarksEntryUtil.findByFolderId(
@@ -216,6 +216,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			return;
 		}
 
+		exportParentFolder(context, foldersEl, entry.getFolderId());
+
 		String path = getEntryPath(context, entry);
 
 		if (context.isPathNotProcessed(path)) {
@@ -232,8 +234,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, entry);
 		}
-
-		exportParentFolder(context, foldersEl, entry.getFolderId());
 	}
 
 	protected void exportParentFolder(
@@ -246,6 +246,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
 
+		exportParentFolder(context, foldersEl, folder.getParentFolderId());
+
 		String path = getFolderPath(context, folder);
 
 		if (context.isPathNotProcessed(path)) {
@@ -257,8 +259,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			context.addZipEntry(path, folder);
 		}
-
-		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 	}
 
 	protected String getEntryPath(
