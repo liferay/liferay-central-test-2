@@ -45,10 +45,12 @@ public class JNDIUtil {
 	public static Object lookup(Context ctx, String location)
 		throws NamingException {
 
-		if ( ServerDetector.isGlassfish() && location.equals("mail/MailSession")){
+		if (ServerDetector.isGlassfish() &&
+			location.equals("mail/MailSession")){
+
 			location = "java:comp/env/" + location;
 		}
-		
+
 		return lookup(ctx, location, false);
 	}
 
