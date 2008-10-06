@@ -96,7 +96,9 @@ public class UserPermissionImpl implements UserPermission {
 		PermissionChecker permissionChecker, long userId,
 		long[] organizationIds, String actionId) {
 
-		if (permissionChecker.getUserId() == userId) {
+		if (permissionChecker.hasOwnerPermission(
+				permissionChecker.getCompanyId(), User.class.getName(), userId,
+				userId, actionId)) {
 			return true;
 		}
 		else if (permissionChecker.hasPermission(
