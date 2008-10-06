@@ -309,6 +309,16 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
+		String[] tagsEntries = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			tagsEntries = context.getTagsEntries(
+				BookmarksEntry.class, entry.getEntryId());
+		}
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
 		if ((folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {
 
@@ -322,16 +332,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			folderId = MapUtil.getLong(
 				folderPKs, entry.getFolderId(), entry.getFolderId());
 		}
-
-		String[] tagsEntries = null;
-
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			tagsEntries = context.getTagsEntries(
-				BookmarksEntry.class, entry.getEntryId());
-		}
-
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
 
 		BookmarksEntry existingEntry = null;
 
@@ -381,6 +381,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
 		if ((parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
@@ -395,9 +398,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				folderPKs, folder.getParentFolderId(),
 				folder.getParentFolderId());
 		}
-
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
 
 		BookmarksFolder existingFolder = null;
 

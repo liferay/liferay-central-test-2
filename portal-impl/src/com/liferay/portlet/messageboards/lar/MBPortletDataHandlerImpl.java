@@ -467,21 +467,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			categoryPKs, category.getParentCategoryId(),
 			category.getParentCategoryId());
 
-		if ((parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
-			(parentCategoryId == category.getParentCategoryId())) {
-
-			String path = getImportCategoryPath(context, parentCategoryId);
-
-			MBCategory parentCategory =
-				(MBCategory)context.getZipEntryAsObject(path);
-
-			importCategory(context, categoryPKs, parentCategory);
-
-			parentCategoryId = MapUtil.getLong(
-				categoryPKs, category.getParentCategoryId(),
-				category.getParentCategoryId());
-		}
-
 		String emailAddress = null;
 		String inProtocol = null;
 		String inServerName = null;
@@ -501,6 +486,21 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
+
+		if ((parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
+			(parentCategoryId == category.getParentCategoryId())) {
+
+			String path = getImportCategoryPath(context, parentCategoryId);
+
+			MBCategory parentCategory =
+				(MBCategory)context.getZipEntryAsObject(path);
+
+			importCategory(context, categoryPKs, parentCategory);
+
+			parentCategoryId = MapUtil.getLong(
+				categoryPKs, category.getParentCategoryId(),
+				category.getParentCategoryId());
+		}
 
 		MBCategory existingCategory = null;
 
@@ -598,20 +598,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			messagePKs, message.getParentMessageId(),
 			message.getParentMessageId());
 
-		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
-			(categoryId == message.getCategoryId())) {
-
-			String path = getImportCategoryPath(context, categoryId);
-
-			MBCategory parentCategory = (MBCategory)
-				context.getZipEntryAsObject(path);
-
-			importCategory(context, categoryPKs, parentCategory);
-
-			categoryId = MapUtil.getLong(
-				categoryPKs, message.getCategoryId(), message.getCategoryId());
-		}
-
 		List<ObjectValuePair<String, byte[]>> files =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 		List<String> existingFiles = new ArrayList<String>();
@@ -650,6 +636,19 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		boolean addGuestPermissions = true;
 
 		ThemeDisplay themeDisplay = null;
+
+		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
+			(categoryId == message.getCategoryId())) {
+
+			String path = getImportCategoryPath(context, categoryId);
+
+			MBCategory category = (MBCategory)context.getZipEntryAsObject(path);
+
+			importCategory(context, categoryPKs, category);
+
+			categoryId = MapUtil.getLong(
+				categoryPKs, message.getCategoryId(), message.getCategoryId());
+		}
 
 		MBMessage existingMessage = null;
 

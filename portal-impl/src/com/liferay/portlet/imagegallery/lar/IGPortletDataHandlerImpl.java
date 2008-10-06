@@ -117,6 +117,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
 		if ((parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
@@ -130,9 +133,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				folderPKs, folder.getParentFolderId(),
 				folder.getParentFolderId());
 		}
-
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
 
 		IGFolder existingFolder = null;
 
@@ -193,19 +193,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, image.getFolderId(), image.getFolderId());
 
-		if ((folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
-			(folderId == image.getFolderId())) {
-
-			String path = getImportFolderPath(context, folderId);
-
-			IGFolder parentFolder = (IGFolder)context.getZipEntryAsObject(path);
-
-			importFolder(context, folderPKs, parentFolder);
-
-			folderId = MapUtil.getLong(
-				folderPKs, image.getFolderId(), image.getFolderId());
-		}
-
 		File imageFile = null;
 
 		byte[] bytes = context.getZipEntryAsByteArray(binPath);
@@ -233,6 +220,19 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
+
+		if ((folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+			(folderId == image.getFolderId())) {
+
+			String path = getImportFolderPath(context, folderId);
+
+			IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
+
+			importFolder(context, folderPKs, folder);
+
+			folderId = MapUtil.getLong(
+				folderPKs, image.getFolderId(), image.getFolderId());
+		}
 
 		IGImage existingImage = null;
 

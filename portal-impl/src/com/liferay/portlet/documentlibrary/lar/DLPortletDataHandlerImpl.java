@@ -193,6 +193,18 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 
+		String[] tagsEntries = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			tagsEntries = context.getTagsEntries(
+				DLFileEntry.class, fileEntry.getFileEntryId());
+		}
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		byte[] bytes = context.getZipEntryAsByteArray(binPath);
+
 		if ((folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == fileEntry.getFolderId())) {
 
@@ -205,18 +217,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			folderId = MapUtil.getLong(
 				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 		}
-
-		String[] tagsEntries = null;
-
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			tagsEntries = context.getTagsEntries(
-				DLFileEntry.class, fileEntry.getFileEntryId());
-		}
-
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
-
-		byte[] bytes = context.getZipEntryAsByteArray(binPath);
 
 		DLFileEntry existingFileEntry = null;
 
@@ -286,6 +286,12 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, rank.getFolderId(), rank.getFolderId());
 
+		String name = fileEntryNames.get(rank.getName());
+
+		if (name == null) {
+			name = rank.getName();
+		}
+
 		if ((folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == rank.getFolderId())) {
 
@@ -297,12 +303,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			folderId = MapUtil.getLong(
 				folderPKs, rank.getFolderId(), rank.getFolderId());
-		}
-
-		String name = fileEntryNames.get(rank.getName());
-
-		if (name == null) {
-			name = rank.getName();
 		}
 
 		try {
@@ -328,6 +328,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
 		if ((parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
@@ -341,9 +344,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				folderPKs, folder.getParentFolderId(),
 				folder.getParentFolderId());
 		}
-
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
 
 		DLFolder existingFolder = null;
 
