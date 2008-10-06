@@ -764,7 +764,9 @@ public class BaseDeployer {
 	protected String getDisplayName(File srcFile) {
 		String displayName = srcFile.getName();
 
-		displayName = displayName.substring(0, displayName.length() - 4);
+		if (displayName.toLowerCase().endsWith(".war")) {
+			displayName = displayName.substring(0, displayName.length() - 4);
+		}
 
 		if (appServerType.startsWith("jboss") &&
 			Validator.isNotNull(jbossPrefix) &&
@@ -1006,7 +1008,7 @@ public class BaseDeployer {
 					file.getParent() + "/merge/" + file.getName() +
 						"/WEB-INF/liferay-plugin-package.properties");
 
-				if (pluginPackagePropsFile.exists()) {
+				if (is == null && pluginPackagePropsFile.exists()) {
 					is = new FileInputStream(pluginPackagePropsFile);
 
 					parseProps = true;
@@ -1015,7 +1017,7 @@ public class BaseDeployer {
 					pluginPackagePropsFile = new File(
 						path + "/WEB-INF/liferay-plugin-package.properties");
 
-					if (pluginPackagePropsFile.exists()) {
+					if (is == null && pluginPackagePropsFile.exists()) {
 						is = new FileInputStream(pluginPackagePropsFile);
 
 						parseProps = true;
@@ -1045,7 +1047,7 @@ public class BaseDeployer {
 					file.getParent() + "/merge/" + file.getName() +
 						"/WEB-INF/liferay-plugin-package.properties");
 
-				if (pluginPackagePropsFile.exists()) {
+				if (is == null && pluginPackagePropsFile.exists()) {
 					is = new FileInputStream(pluginPackagePropsFile);
 
 					parseProps = true;
@@ -1054,7 +1056,7 @@ public class BaseDeployer {
 					ZipEntry zipEntry = zipFile.getEntry(
 						"WEB-INF/liferay-plugin-package.properties");
 
-					if (zipEntry != null) {
+					if (is == null && zipEntry != null) {
 						is = zipFile.getInputStream(zipEntry);
 
 						parseProps = true;
