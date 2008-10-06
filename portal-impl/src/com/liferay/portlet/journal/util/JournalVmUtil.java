@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -113,6 +114,10 @@ public class JournalVmUtil {
 			context.put("journalTemplatesPath", journalTemplatesPath);
 			context.put("locale", LocaleUtil.fromLanguageId(languageId));
 			context.put("randomNamespace", randomNamespace);
+
+			context.put(
+				"permissionChecker",
+				PermissionThreadLocal.getPermissionChecker());
 
 			VelocityVariables.insertHelperUtilities(
 				context, _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
