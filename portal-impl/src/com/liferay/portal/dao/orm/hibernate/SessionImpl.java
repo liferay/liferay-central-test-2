@@ -44,9 +44,27 @@ public class SessionImpl implements Session {
 		_session = session;
 	}
 
+	public void clear() throws ORMException {
+		try {
+			_session.clear();
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
 	public Connection close() throws ORMException {
 		try {
 			return _session.close();
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
+	public boolean contains(Object object) throws ORMException {
+		try {
+			return _session.contains(object);
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);
@@ -137,6 +155,15 @@ public class SessionImpl implements Session {
 	public Serializable save(Object object) throws ORMException {
 		try {
 			return _session.save(object);
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
+	public void saveOrUpdate(Object object) throws ORMException {
+		try {
+			_session.saveOrUpdate(object);
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);

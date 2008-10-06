@@ -34,7 +34,11 @@ import java.sql.Connection;
  */
 public interface Session {
 
+	public void clear() throws ORMException;
+
 	public Connection close() throws ORMException;
+
+	public boolean contains(Object object) throws ORMException;
 
 	public Query createQuery(String queryString) throws ORMException;
 
@@ -54,5 +58,7 @@ public interface Session {
 	public Object merge(Object object) throws ORMException;
 
 	public Serializable save(Object object) throws ORMException;
+
+	public void saveOrUpdate(Object object) throws ORMException;
 
 }
