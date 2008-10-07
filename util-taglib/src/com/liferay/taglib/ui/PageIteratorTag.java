@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -53,6 +54,9 @@ public class PageIteratorTag extends TagSupport {
 				"liferay-ui:page-iterator:curValue", String.valueOf(_curValue));
 			request.setAttribute(
 				"liferay-ui:page-iterator:delta", String.valueOf(_delta));
+			request.setAttribute(
+				"liferay-ui:page-iterator:deltaParam",
+				String.valueOf(_deltaParam));
 			request.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
 			request.setAttribute(
 				"liferay-ui:page-iterator:maxPages", String.valueOf(_maxPages));
@@ -130,6 +134,10 @@ public class PageIteratorTag extends TagSupport {
 		_delta = delta;
 	}
 
+	public void setDeltaParam(String deltaParam) {
+		_deltaParam = deltaParam;
+	}
+
 	public void setJsCall(String jsCall) {
 		_jsCall = jsCall;
 	}
@@ -180,7 +188,8 @@ public class PageIteratorTag extends TagSupport {
 	private String _formName = "fm";
 	private String _curParam;
 	private int _curValue;
-	private int _delta = 10;
+	private int _delta = SearchContainer.DEFAULT_DELTA;
+	private String _deltaParam = "delta";
 	private String _jsCall;
 	private int _maxPages = 10;
 	private String _target = "_self";

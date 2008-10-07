@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
@@ -34,7 +35,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
@@ -51,14 +51,17 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	public int doEndTag() {
 		_curParam = SearchContainer.DEFAULT_CUR_PARAM;
 		_delta = SearchContainer.DEFAULT_DELTA;
+		_deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 		_displayTerms = null;
 		_emptyResultsMessage = null;
 		_hasResults = false;
 		_hover = false;
 		_iteratorURL = null;
 		_orderByCol = null;
+		_orderByColParam = SearchContainer.DEFAULT_ORDER_BY_COL_PARAM;
 		_orderByComparator = null;
 		_orderByType = null;
+		_orderByTypeParam = SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM;
 		_rowChecker = null;
 		_searchContainer = null;
 		_searchTerms = null;
@@ -91,12 +94,20 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
 			_searchContainer.setHover(_hover);
 
+			if (Validator.isNotNull(_orderByColParam)) {
+				_searchContainer.setOrderByColParam(_orderByColParam);
+			}
+
 			if (Validator.isNotNull(_orderByCol)) {
 				_searchContainer.setOrderByCol(_orderByCol);
 			}
 
 			if (_orderByComparator != null) {
 				_searchContainer.setOrderByComparator(_orderByComparator);
+			}
+
+			if (Validator.isNotNull(_orderByTypeParam)) {
+				_searchContainer.setOrderByTypeParam(_orderByTypeParam);
 			}
 
 			if (Validator.isNotNull(_orderByType)) {
@@ -124,6 +135,10 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		return _delta;
 	}
 
+	public String getDeltaParam() {
+		return _deltaParam;
+	}
+
 	public DisplayTerms getDisplayTerms() {
 		return _displayTerms;
 	}
@@ -140,12 +155,20 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		return _orderByCol;
 	}
 
+	public String getOrderByColParam() {
+		return _orderByColParam;
+	}
+
 	public OrderByComparator getOrderByComparator() {
 		return _orderByComparator;
 	}
 
 	public String getOrderByType() {
 		return _orderByType;
+	}
+
+	public String getOrderByTypeParam() {
+		return _orderByTypeParam;
 	}
 
 	public RowChecker getRowChecker() {
@@ -180,6 +203,10 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_delta = delta;
 	}
 
+	public void setDeltaParam(String deltaParam) {
+		_deltaParam = deltaParam;
+	}
+
 	public void setDisplayTerms(DisplayTerms displayTerms) {
 		_displayTerms = displayTerms;
 	}
@@ -204,12 +231,20 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_orderByCol = orderByCol;
 	}
 
+	public void setOrderByColParam(String orderByColParam) {
+		_orderByColParam = orderByColParam;
+	}
+
 	public void setOrderByComparator(OrderByComparator orderByComparator) {
 		_orderByComparator = orderByComparator;
 	}
 
 	public void setOrderByType(String orderByType) {
 		_orderByType = orderByType;
+	}
+
+	public void setOrderByTypeParam(String orderByTypeParam) {
+		_orderByTypeParam = orderByTypeParam;
 	}
 
 	public void setRowChecker(RowChecker rowChecker) {
@@ -230,14 +265,19 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
 	private String _curParam = SearchContainer.DEFAULT_CUR_PARAM;
 	private int _delta = SearchContainer.DEFAULT_DELTA;
+	private String _deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;
 	private boolean _hasResults;
-	private boolean _hover;
+	private boolean _hover = true;
 	private PortletURL _iteratorURL;
 	private OrderByComparator _orderByComparator;
 	private String _orderByCol;
+	private String _orderByColParam =
+		SearchContainer.DEFAULT_ORDER_BY_COL_PARAM;
 	private String _orderByType;
+	private String _orderByTypeParam =
+		SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM;
 	private RowChecker _rowChecker;
 	private SearchContainer _searchContainer;
 	private DisplayTerms _searchTerms;

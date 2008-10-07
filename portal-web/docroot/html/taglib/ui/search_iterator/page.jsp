@@ -53,6 +53,10 @@ if (resultRows.isEmpty() && (headerNames == null)) {
 
 	headerNames.add(StringPool.BLANK);
 }
+
+String iteratorURL = searchContainer.getIteratorURL().toString();
+iteratorURL = HttpUtil.removeParameter(iteratorURL, namespace + searchContainer.getOrderByColParam());
+iteratorURL = HttpUtil.removeParameter(iteratorURL, namespace + searchContainer.getOrderByTypeParam());
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
@@ -110,7 +114,7 @@ if (resultRows.isEmpty() && (headerNames == null)) {
 				</c:if>
 			>
 				<c:if test="<%= orderKey != null %>">
-					<a href="<%= searchContainer.getIteratorURL().toString() %>&<%= namespace %>orderByCol=<%= orderKey %>&<%= namespace %>orderByType=<%= orderByType %>">
+					<a href="<%= iteratorURL %>&<%= namespace + searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace + searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
 				</c:if>
 
 				<c:if test="<%= orderCurrentHeader %>">

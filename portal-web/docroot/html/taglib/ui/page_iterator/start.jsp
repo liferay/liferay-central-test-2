@@ -29,6 +29,7 @@ String formName = namespace + request.getAttribute("liferay-ui:page-iterator:for
 String curParam = (String)request.getAttribute("liferay-ui:page-iterator:curParam");
 int curValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:curValue"));
 int delta = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:delta"));
+String deltaParam = (String)request.getAttribute("liferay-ui:page-iterator:deltaParam");
 String jsCall = (String)request.getAttribute("liferay-ui:page-iterator:jsCall");
 int maxPages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:maxPages"));
 String target = (String)request.getAttribute("liferay-ui:page-iterator:target");
@@ -59,15 +60,17 @@ else {
 }
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+
+String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 %>
 
 <c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
-		function <%= namespace %>submitPageIterator<%= curParam %>() {
+		function <%= namespace %>submitPageIteratorCur<%= curParam %>() {
 			var curValue = jQuery("option:selected", this).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= url + curParam %>" + "=" + curValue + "<%= urlAnchor %>";
+				var href = "<%= url + namespace + curParam %>=" + curValue + "<%= urlAnchor %>";
 
 				location.href = href;
 			}
@@ -78,9 +81,30 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			}
 		}
 
+		function <%= namespace %>submitPageIteratorDelta<%= curParam %>() {
+			var deltaValue = jQuery("option:selected", this).val();
+
+			if (<%= Validator.isNotNull(url) %>) {
+				var href = "<%= deltaURL + namespace + deltaParam %>=" + deltaValue + "<%= urlAnchor %>";
+
+				location.href = href;
+			}
+			else {
+				document.<%= formName %>.<%= deltaParam %>.value = deltaValue;
+
+				<%= jsCall %>;
+			}
+		}
+
 		jQuery(
 			function() {
-				jQuery('.<%= namespace %>pageIteratorValue<%= curParam %>').change(<%= namespace %>submitPageIterator<%= curParam %>);
+				jQuery('.<%= namespace %>pageIteratorValue<%= curParam %>').change(<%= namespace %>submitPageIteratorCur<%= curParam %>);
+			}
+		);
+
+		jQuery(
+			function() {
+				jQuery('.<%= namespace %>deltaValue<%= curParam %>').change(<%= namespace %>submitPageIteratorDelta<%= curParam %>);
 			}
 		);
 	</script>
@@ -211,6 +235,31 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 				<%--<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />--%>
 			</div>
+
+			<div class="spacer">&nbsp;<!--//--></div>
+		</c:if>
+
+		<c:if test="<%= (PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES.length > 0) %>">
+			<div class="delta-selector">
+				<liferay-ui:message key="items" />
+
+				<select class="pages <%= namespace %>deltaValue<%= curParam %>">
+					<%
+					for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
+						if (curDelta > SearchContainer.DELTA_MAX) {
+							continue;
+						}
+					%>
+
+						<option <%= ((delta == curDelta) ? "selected=\"selected\"" : "") %> value="<%= curDelta %>"><%= curDelta %></option>
+
+					<%
+					}
+					%>
+				</select>
+			</div>
+
+			<div class="spacer">&nbsp;<!--//--></div>
 		</c:if>
 
 		<div class="page-links">

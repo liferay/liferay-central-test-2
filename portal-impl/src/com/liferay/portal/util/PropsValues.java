@@ -942,6 +942,10 @@ public class PropsValues {
 	public static final boolean SCHEDULER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.SCHEDULER_ENABLED));
 
+	public static final int[] SEARCH_CONTAINER_PAGE_DELTA_VALUES =
+		GetterUtil.getIntegerValues(
+			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
+
 	public static final String[] SERVLET_SERVICE_EVENTS_POST =
 		PropsUtil.getArray(PropsKeys.SERVLET_SERVICE_EVENTS_POST);
 

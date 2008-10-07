@@ -46,6 +46,14 @@ public class SearchContainer<R> {
 
 	public static final int DEFAULT_DELTA = 20;
 
+	public static final String DEFAULT_DELTA_PARAM = "delta";
+
+	public static final String DEFAULT_ORDER_BY_COL_PARAM = "orderByCol";
+
+	public static final String DEFAULT_ORDER_BY_TYPE_PARAM = "orderByType";
+
+	public static final int DELTA_MAX = 200;
+
 	public SearchContainer() {
 	}
 
@@ -66,11 +74,12 @@ public class SearchContainer<R> {
 			_curValue = DEFAULT_CUR_VALUE;
 		}
 
-		setDelta(delta);
+		setDelta(ParamUtil.getInteger(portletRequest, _deltaParam, delta));
 
 		_iteratorURL = iteratorURL;
 
 		_iteratorURL.setParameter(_curParam, String.valueOf(_curValue));
+		_iteratorURL.setParameter(_deltaParam, String.valueOf(_delta));
 		_iteratorURL.setParameter(
 			DisplayTerms.KEYWORDS,
 			ParamUtil.getString(portletRequest, DisplayTerms.KEYWORDS));
@@ -118,11 +127,22 @@ public class SearchContainer<R> {
 		if (delta <= 0) {
 			_delta = DEFAULT_DELTA;
 		}
+		else if (delta > DELTA_MAX) {
+			_delta = DELTA_MAX;
+		}
 		else {
 			_delta = delta;
 		}
 
 		_calculateStartAndEnd();
+	}
+
+	public String getDeltaParam() {
+		return _deltaParam;
+	}
+
+	public void setDeltaParam(String deltaParam) {
+		_deltaParam = deltaParam;
 	}
 
 	public int getStart() {
@@ -193,6 +213,16 @@ public class SearchContainer<R> {
 
 	public void setOrderByCol(String orderByCol) {
 		_orderByCol = orderByCol;
+
+		_iteratorURL.setParameter(_orderByColParam, _orderByCol);
+	}
+
+	public String getOrderByColParam() {
+		return _orderByColParam;
+	}
+
+	public void setOrderByColParam(String orderByColParam) {
+		_orderByColParam = orderByColParam;
 	}
 
 	public String getOrderByType() {
@@ -201,6 +231,16 @@ public class SearchContainer<R> {
 
 	public void setOrderByType(String orderByType) {
 		_orderByType = orderByType;
+
+		_iteratorURL.setParameter(_orderByTypeParam, _orderByType);
+	}
+
+	public String getOrderByTypeParam() {
+		return _orderByTypeParam;
+	}
+
+	public void setOrderByTypeParam(String orderByTypeParam) {
+		_orderByTypeParam = orderByTypeParam;
 	}
 
 	public OrderByComparator getOrderByComparator() {
@@ -251,6 +291,7 @@ public class SearchContainer<R> {
 	private String _curParam = DEFAULT_CUR_PARAM;
 	private int _curValue;
 	private int _delta = DEFAULT_DELTA;
+	private String _deltaParam = DEFAULT_DELTA_PARAM;
 	private int _start;
 	private int _end;
 	private int _resultEnd;
@@ -261,7 +302,9 @@ public class SearchContainer<R> {
 	private List<String> _headerNames;
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
+	private String _orderByColParam = DEFAULT_ORDER_BY_COL_PARAM;
 	private String _orderByType;
+	private String _orderByTypeParam = DEFAULT_ORDER_BY_TYPE_PARAM;
 	private OrderByComparator _orderByComparator;
 	private String _emptyResultsMessage;
 	private RowChecker _rowChecker;

@@ -927,6 +927,8 @@ public class PropsKeys {
 
 	public static final String SCHEMA_RUN_MINIMAL = "schema.run.minimal";
 
+	public static final String SEARCH_CONTAINER_PAGE_DELTA_VALUES = "search.container.page.delta.values";
+
 	public static final String SERVLET_SERVICE_EVENTS_POST = "servlet.service.events.post";
 
 	public static final String SERVLET_SERVICE_EVENTS_PRE = "servlet.service.events.pre";
