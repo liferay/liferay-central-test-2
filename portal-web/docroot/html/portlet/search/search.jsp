@@ -123,7 +123,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	List resultRows = new ArrayList();
 
 	try {
-		String xml = openSearch.search(request, keywords, searchContainer.getCurValue(), searchContainer.getDelta());
+		String xml = openSearch.search(request, keywords, searchContainer.getCur(), searchContainer.getDelta());
 
 		Document doc = SAXReaderUtil.read(xml);
 

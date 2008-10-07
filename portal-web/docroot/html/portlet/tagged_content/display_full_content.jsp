@@ -209,8 +209,8 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				<br />
 
 				<liferay-ui:page-iterator
+					cur="<%= articleDisplay.getCurrentPage() %>"
 					curParam="<%= "page" %>"
-					curValue="<%= articleDisplay.getCurrentPage() %>"
 					delta="<%= 1 %>"
 					maxPages="<%= 25 %>"
 					total="<%= articleDisplay.getNumberOfPages() %>"

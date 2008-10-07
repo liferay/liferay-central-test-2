@@ -26,8 +26,8 @@
 
 <%
 String formName = namespace + request.getAttribute("liferay-ui:page-iterator:formName");
+int cur = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:cur"));
 String curParam = (String)request.getAttribute("liferay-ui:page-iterator:curParam");
-int curValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:curValue"));
 int delta = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:delta"));
 String deltaParam = (String)request.getAttribute("liferay-ui:page-iterator:deltaParam");
 String jsCall = (String)request.getAttribute("liferay-ui:page-iterator:jsCall");
@@ -39,8 +39,8 @@ String url = (String)request.getAttribute("liferay-ui:page-iterator:url");
 String urlAnchor = (String)request.getAttribute("liferay-ui:page-iterator:urlAnchor");
 int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:pages"));
 
-int start = (curValue - 1) * delta;
-int end = curValue * delta;
+int start = (cur - 1) * delta;
+int end = cur * delta;
 
 if (end > total) {
 	end = total;
@@ -52,61 +52,49 @@ if (total < delta) {
 	resultRowsSize = total;
 }
 else {
-	resultRowsSize = total - ((curValue - 1) * delta);
+	resultRowsSize = total - ((cur - 1) * delta);
 
 	if (resultRowsSize > delta) {
 		resultRowsSize = delta;
 	}
 }
 
-NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
-
 String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
+
+NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
 <c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
-		function <%= namespace %>submitPageIteratorCur<%= curParam %>() {
-			var curValue = jQuery("option:selected", this).val();
+		function <%= namespace %><%= curParam %>updateCur(box) {
+			var cur = jQuery("option:selected", box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= url + namespace + curParam %>=" + curValue + "<%= urlAnchor %>";
+				var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
 
 				location.href = href;
 			}
 			else {
-				document.<%= formName %>.<%= curParam %>.value = curValue;
+				document.<%= formName %>.<%= curParam %>.value = cur;
 
 				<%= jsCall %>;
 			}
 		}
 
-		function <%= namespace %>submitPageIteratorDelta<%= curParam %>() {
-			var deltaValue = jQuery("option:selected", this).val();
+		function <%= namespace %><%= deltaParam %>updateDelta(box) {
+			var delta = jQuery("option:selected", box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= deltaURL + namespace + deltaParam %>=" + deltaValue + "<%= urlAnchor %>";
+				var href = "<%= deltaURL %><%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
 
 				location.href = href;
 			}
 			else {
-				document.<%= formName %>.<%= deltaParam %>.value = deltaValue;
+				document.<%= formName %>.<%= deltaParam %>.value = delta;
 
 				<%= jsCall %>;
 			}
 		}
-
-		jQuery(
-			function() {
-				jQuery('.<%= namespace %>pageIteratorValue<%= curParam %>').change(<%= namespace %>submitPageIteratorCur<%= curParam %>);
-			}
-		);
-
-		jQuery(
-			function() {
-				jQuery('.<%= namespace %>deltaValue<%= curParam %>').change(<%= namespace %>submitPageIteratorDelta<%= curParam %>);
-			}
-		);
 	</script>
 </c:if>
 
@@ -144,8 +132,8 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 		int pagesIteratorEnd = pages;
 
 		if (pages > pagesIteratorMax) {
-			pagesIteratorBegin = curValue - pagesIteratorMax;
-			pagesIteratorEnd = curValue + pagesIteratorMax;
+			pagesIteratorBegin = cur - pagesIteratorMax;
+			pagesIteratorEnd = cur + pagesIteratorMax;
 
 			if (pagesIteratorBegin < 1) {
 				pagesIteratorBegin = 1;
@@ -159,7 +147,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
-			if (i == curValue) {
+			if (i == cur) {
 				sb.append("<b class='journal-article-page-number'>");
 			}
 			else {
@@ -170,7 +158,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 
 			sb.append(i);
 
-			if (i == curValue) {
+			if (i == cur) {
 				sb.append("</b>");
 			}
 			else {
@@ -188,15 +176,45 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 <c:if test="<%= total > delta %>">
 	<div class="search-pages">
 		<c:if test='<%= type.equals("regular") %>'>
+			<c:if test="<%= PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES.length > 0 %>">
+				<div class="delta-selector">
+					<liferay-ui:message key="items-per-page" />
+
+					<c:choose>
+						<c:when test="<%= themeDisplay.isFacebook() %>">
+							<%= delta %>
+						</c:when>
+						<c:otherwise>
+							<select onchange="<%= namespace %><%= deltaParam %>updateDelta(this);">
+
+								<%
+								for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
+									if (curDelta > SearchContainer.MAX_DELTA) {
+										continue;
+									}
+								%>
+
+									<option <%= ((delta == curDelta) ? "selected=\"selected\"" : "") %> value="<%= curDelta %>"><%= curDelta %></option>
+
+								<%
+								}
+								%>
+
+							</select>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</c:if>
+
 			<div class="page-selector">
 				<liferay-ui:message key="page" />
 
 				<c:choose>
 					<c:when test="<%= themeDisplay.isFacebook() %>">
-						<%= curValue %>
+						<%= cur %>
 					</c:when>
 					<c:otherwise>
-						<select class="pages <%= namespace %>pageIteratorValue<%= curParam %>">
+						<select onchange="<%= namespace %><%= curParam %>updateCur(this);">
 
 							<%
 							int pagesIteratorMax = maxPages;
@@ -204,8 +222,8 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 							int pagesIteratorEnd = pages;
 
 							if (pages > pagesIteratorMax) {
-								pagesIteratorBegin = curValue - pagesIteratorMax;
-								pagesIteratorEnd = curValue + pagesIteratorMax;
+								pagesIteratorBegin = cur - pagesIteratorMax;
+								pagesIteratorEnd = cur + pagesIteratorMax;
 
 								if (pagesIteratorBegin < 1) {
 									pagesIteratorBegin = 1;
@@ -219,7 +237,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 							for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 							%>
 
-								<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
+								<option <%= (i == cur) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
 
 							<%
 							}
@@ -232,40 +250,13 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 				<liferay-ui:message key="of" />
 
 				<%= numberFormat.format(pages) %>
-
-				<%--<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />--%>
 			</div>
-
-			<div class="spacer">&nbsp;<!--//--></div>
-		</c:if>
-
-		<c:if test="<%= (PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES.length > 0) %>">
-			<div class="delta-selector">
-				<liferay-ui:message key="items" />
-
-				<select class="pages <%= namespace %>deltaValue<%= curParam %>">
-					<%
-					for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
-						if (curDelta > SearchContainer.DELTA_MAX) {
-							continue;
-						}
-					%>
-
-						<option <%= ((delta == curDelta) ? "selected=\"selected\"" : "") %> value="<%= curDelta %>"><%= curDelta %></option>
-
-					<%
-					}
-					%>
-				</select>
-			</div>
-
-			<div class="spacer">&nbsp;<!--//--></div>
 		</c:if>
 
 		<div class="page-links">
 			<c:if test='<%= type.equals("regular") %>'>
 				<c:choose>
-					<c:when test="<%= curValue != 1 %>">
+					<c:when test="<%= cur != 1 %>">
 						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 					</c:when>
 					<c:otherwise>
@@ -276,7 +267,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 				<liferay-ui:message key="first" />
 
 				<c:choose>
-					<c:when test="<%= curValue != 1 %>">
+					<c:when test="<%= cur != 1 %>">
 						</a>
 					</c:when>
 					<c:otherwise>
@@ -286,20 +277,20 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 			</c:if>
 
 			<c:choose>
-				<c:when test="<%= curValue != 1 %>">
-					<a class="previous" href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+				<c:when test="<%= cur != 1 %>">
+					<a class="previous" href="<%= _getHREF(formName, curParam, cur - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 				</c:when>
 				<c:when test='<%= type.equals("regular") %>'>
 					<span class="previous">
 				</c:when>
 			</c:choose>
 
-			<c:if test='<%= (type.equals("regular") || curValue != 1) %>'>
+			<c:if test='<%= (type.equals("regular") || cur != 1) %>'>
 				<liferay-ui:message key="previous" />
 			</c:if>
 
 			<c:choose>
-				<c:when test="<%= curValue != 1 %>">
+				<c:when test="<%= cur != 1 %>">
 					</a>
 				</c:when>
 				<c:when test='<%= type.equals("regular") %>'>
@@ -308,20 +299,20 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 			</c:choose>
 
 			<c:choose>
-				<c:when test="<%= curValue != pages %>">
-					<a class="next" href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+				<c:when test="<%= cur != pages %>">
+					<a class="next" href="<%= _getHREF(formName, curParam, cur + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 				</c:when>
 				<c:when test='<%= type.equals("regular") %>'>
 					<span class="next">
 				</c:when>
 			</c:choose>
 
-			<c:if test='<%= (type.equals("regular") || curValue != pages) %>'>
+			<c:if test='<%= (type.equals("regular") || cur != pages) %>'>
 				<liferay-ui:message key="next" />
 			</c:if>
 
 			<c:choose>
-				<c:when test="<%= curValue != pages %>">
+				<c:when test="<%= cur != pages %>">
 					</a>
 				</c:when>
 				<c:when test='<%= type.equals("regular") %>'>
@@ -331,7 +322,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 
 			<c:if test='<%= type.equals("regular") %>'>
 				<c:choose>
-					<c:when test="<%= curValue != pages %>">
+					<c:when test="<%= cur != pages %>">
 						<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
 					</c:when>
 					<c:otherwise>
@@ -342,7 +333,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 				<liferay-ui:message key="last" />
 
 				<c:choose>
-					<c:when test="<%= curValue != pages %>">
+					<c:when test="<%= cur != pages %>">
 						</a>
 					</c:when>
 					<c:otherwise>
@@ -359,14 +350,14 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 </c:if>
 
 <%!
-private String _getHREF(String formName, String curParam, int curValue, String jsCall, String url, String urlAnchor) throws Exception {
+private String _getHREF(String formName, String curParam, int cur, String jsCall, String url, String urlAnchor) throws Exception {
 	String href = null;
 
 	if (Validator.isNotNull(url)) {
-		href = url + curParam + "=" + curValue + urlAnchor;
+		href = url + curParam + "=" + cur + urlAnchor;
 	}
 	else {
-		href = "javascript: document." + formName + "." + curParam + ".value = '" + curValue + "'; " + jsCall;
+		href = "javascript: document." + formName + "." + curParam + ".value = '" + cur + "'; " + jsCall;
 	}
 
 	return href;

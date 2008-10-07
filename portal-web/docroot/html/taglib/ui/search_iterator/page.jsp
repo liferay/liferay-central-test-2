@@ -54,11 +54,13 @@ if (resultRows.isEmpty() && (headerNames == null)) {
 	headerNames.add(StringPool.BLANK);
 }
 
-PortletURL iteratorURL = searchContainer.getIteratorURL();
 String url = StringPool.BLANK;
 
+PortletURL iteratorURL = searchContainer.getIteratorURL();
+
 if (iteratorURL != null) {
-	url = HttpUtil.removeParameter(iteratorURL.toString(), namespace + searchContainer.getOrderByColParam());
+	url = iteratorURL.toString();
+	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByColParam());
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByTypeParam());
 }
 %>
@@ -118,7 +120,7 @@ if (iteratorURL != null) {
 				</c:if>
 			>
 				<c:if test="<%= orderKey != null %>">
-					<a href="<%= iteratorURL %>&<%= namespace + searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace + searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
+					<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
 				</c:if>
 
 				<c:if test="<%= orderCurrentHeader %>">

@@ -40,9 +40,14 @@ import javax.portlet.PortletURL;
  */
 public class SearchContainer<R> {
 
+	public static final int DEFAULT_CUR = 1;
+
 	public static final String DEFAULT_CUR_PARAM = "cur";
 
-	public static final int DEFAULT_CUR_VALUE = 1;
+	/**
+	 * @deprecated Use <code>DEFAULT_CUR</code>.
+	 */
+	public static final int DEFAULT_CUR_VALUE = DEFAULT_CUR;
 
 	public static final int DEFAULT_DELTA = 20;
 
@@ -52,7 +57,7 @@ public class SearchContainer<R> {
 
 	public static final String DEFAULT_ORDER_BY_TYPE_PARAM = "orderByType";
 
-	public static final int DELTA_MAX = 200;
+	public static final int MAX_DELTA = 200;
 
 	public SearchContainer() {
 	}
@@ -67,18 +72,18 @@ public class SearchContainer<R> {
 		_searchTerms = searchTerms;
 
 		_curParam = curParam;
-		_curValue = ParamUtil.getInteger(
-			portletRequest, _curParam, DEFAULT_CUR_VALUE);
 
-		if (_curValue < 1) {
-			_curValue = DEFAULT_CUR_VALUE;
+		_cur = ParamUtil.getInteger(portletRequest, _curParam, DEFAULT_CUR);
+
+		if (_cur < 1) {
+			_cur = DEFAULT_CUR;
 		}
 
 		setDelta(ParamUtil.getInteger(portletRequest, _deltaParam, delta));
 
 		_iteratorURL = iteratorURL;
 
-		_iteratorURL.setParameter(_curParam, String.valueOf(_curValue));
+		_iteratorURL.setParameter(_curParam, String.valueOf(_cur));
 		_iteratorURL.setParameter(_deltaParam, String.valueOf(_delta));
 		_iteratorURL.setParameter(
 			DisplayTerms.KEYWORDS,
@@ -111,12 +116,19 @@ public class SearchContainer<R> {
 		return _searchTerms;
 	}
 
+	public int getCur() {
+		return _cur;
+	}
+
 	public String getCurParam() {
 		return _curParam;
 	}
 
+	/**
+	 * @deprecated Use <code>getCur</code>.
+	 */
 	public int getCurValue() {
-		return _curValue;
+		return getCur();
 	}
 
 	public int getDelta() {
@@ -127,8 +139,8 @@ public class SearchContainer<R> {
 		if (delta <= 0) {
 			_delta = DEFAULT_DELTA;
 		}
-		else if (delta > DELTA_MAX) {
-			_delta = DELTA_MAX;
+		else if (delta > MAX_DELTA) {
+			_delta = MAX_DELTA;
 		}
 		else {
 			_delta = delta;
@@ -164,8 +176,8 @@ public class SearchContainer<R> {
 	public void setTotal(int total) {
 		_total = total;
 
-		if (((_curValue - 1) * _delta) > _total) {
-			_curValue = DEFAULT_CUR_VALUE;
+		if (((_cur - 1) * _delta) > _total) {
+			_cur = DEFAULT_CUR;
 		}
 
 		_calculateStartAndEnd();
@@ -276,7 +288,7 @@ public class SearchContainer<R> {
 	}
 
 	private void _calculateStartAndEnd() {
-		_start = (_curValue - 1) * _delta;
+		_start = (_cur - 1) * _delta;
 		_end = _start + _delta;
 
 		_resultEnd = _end;
@@ -288,8 +300,8 @@ public class SearchContainer<R> {
 
 	private DisplayTerms _displayTerms;
 	private DisplayTerms _searchTerms;
+	private int _cur;
 	private String _curParam = DEFAULT_CUR_PARAM;
-	private int _curValue;
 	private int _delta = DEFAULT_DELTA;
 	private String _deltaParam = DEFAULT_DELTA_PARAM;
 	private int _start;

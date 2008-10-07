@@ -39,8 +39,8 @@ if (iteratorURL != null) {
 %>
 
 <liferay-ui:page-iterator
+	cur="<%= searchContainer.getCur() %>"
 	curParam="<%= searchContainer.getCurParam() %>"
-	curValue="<%= searchContainer.getCurValue() %>"
 	delta="<%= searchContainer.getDelta() %>"
 	deltaParam="<%= searchContainer.getDeltaParam() %>"
 	maxPages="<%= 25 %>"

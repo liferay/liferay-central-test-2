@@ -1358,13 +1358,15 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	background-position: 100% 100%;
 }
 
-.taglib-page-iterator .search-pages .page-selector, .taglib-page-iterator .search-pages .delta-selector, .taglib-page-iterator .search-pages .page-links, .taglib-page-iterator .search-pages .spacer {
+.taglib-page-iterator .search-pages .delta-selector, .taglib-page-iterator .search-pages .page-selector, .taglib-page-iterator .search-pages .page-links {
 	float: left;
 }
 
-.taglib-page-iterator .search-pages .spacer {
-	margin: 0px 10px 0px 6px;
-	border-right: 1px solid #ccc;
+.taglib-page-iterator .search-pages .page-selector {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 /* ---------- Taglib social activities ---------- */

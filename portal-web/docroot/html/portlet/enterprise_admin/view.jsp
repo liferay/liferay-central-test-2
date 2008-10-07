@@ -342,7 +342,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			searchContainer.setResults(results);
 
-			portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
+			portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 			%>
 
 			<input name="<portlet:namespace />rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -439,7 +439,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			PortletURL passwordPoliciesRedirect = PortletURLUtil.clone(portletURL, renderResponse);
 
-			passwordPoliciesRedirect.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
+			passwordPoliciesRedirect.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 			%>
 
 			<input name="<portlet:namespace />passwordPoliciesRedirect" type="hidden" value="<%= passwordPoliciesRedirect.toString() %>" />

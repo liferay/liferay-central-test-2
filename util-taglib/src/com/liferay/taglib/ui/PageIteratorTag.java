@@ -49,14 +49,13 @@ public class PageIteratorTag extends TagSupport {
 			request.setAttribute(
 				"liferay-ui:page-iterator:formName", _formName);
 			request.setAttribute(
-				"liferay-ui:page-iterator:curParam", _curParam);
+				"liferay-ui:page-iterator:cur", String.valueOf(_cur));
 			request.setAttribute(
-				"liferay-ui:page-iterator:curValue", String.valueOf(_curValue));
+				"liferay-ui:page-iterator:curParam", _curParam);
 			request.setAttribute(
 				"liferay-ui:page-iterator:delta", String.valueOf(_delta));
 			request.setAttribute(
-				"liferay-ui:page-iterator:deltaParam",
-				String.valueOf(_deltaParam));
+				"liferay-ui:page-iterator:deltaParam", _deltaParam);
 			request.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
 			request.setAttribute(
 				"liferay-ui:page-iterator:maxPages", String.valueOf(_maxPages));
@@ -122,12 +121,12 @@ public class PageIteratorTag extends TagSupport {
 		_formName = formName;
 	}
 
-	public void setCurParam(String curParam) {
-		_curParam = curParam;
+	public void setCur(int cur) {
+		_cur = cur;
 	}
 
-	public void setCurValue(int curValue) {
-		_curValue = curValue;
+	public void setCurParam(String curParam) {
+		_curParam = curParam;
 	}
 
 	public void setDelta(int delta) {
@@ -186,10 +185,10 @@ public class PageIteratorTag extends TagSupport {
 	private String _startPage;
 	private String _endPage;
 	private String _formName = "fm";
+	private int _cur;
 	private String _curParam;
-	private int _curValue;
 	private int _delta = SearchContainer.DEFAULT_DELTA;
-	private String _deltaParam = "delta";
+	private String _deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 	private String _jsCall;
 	private int _maxPages = 10;
 	private String _target = "_self";

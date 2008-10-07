@@ -82,8 +82,8 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 				<c:if test="<%= articleDisplay.isPaginate() %>">
 					<liferay-ui:page-iterator
+						cur="<%= articleDisplay.getCurrentPage() %>"
 						curParam='<%= "page" %>'
-						curValue="<%= articleDisplay.getCurrentPage() %>"
 						delta="<%= 1 %>"
 						maxPages="<%= 25 %>"
 						total="<%= articleDisplay.getNumberOfPages() %>"
