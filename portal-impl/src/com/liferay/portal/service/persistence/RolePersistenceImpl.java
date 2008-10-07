@@ -241,16 +241,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(role);
-			}
-			else {
-				if (role.isNew()) {
-					session.save(role);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, role, merge);
 
 			role.setNew(false);
 

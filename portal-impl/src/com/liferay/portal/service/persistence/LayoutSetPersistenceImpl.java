@@ -203,16 +203,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(layoutSet);
-			}
-			else {
-				if (layoutSet.isNew()) {
-					session.save(layoutSet);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, layoutSet, merge);
 
 			layoutSet.setNew(false);
 

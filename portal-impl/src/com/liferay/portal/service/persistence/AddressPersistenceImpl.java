@@ -202,16 +202,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(address);
-			}
-			else {
-				if (address.isNew()) {
-					session.save(address);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, address, merge);
 
 			address.setNew(false);
 

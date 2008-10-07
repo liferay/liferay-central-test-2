@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -216,16 +217,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(igImage);
-			}
-			else {
-				if (igImage.isNew()) {
-					session.save(igImage);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, igImage, merge);
 
 			igImage.setNew(false);
 

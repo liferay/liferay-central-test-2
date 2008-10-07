@@ -202,16 +202,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(company);
-			}
-			else {
-				if (company.isNew()) {
-					session.save(company);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, company, merge);
 
 			company.setNew(false);
 

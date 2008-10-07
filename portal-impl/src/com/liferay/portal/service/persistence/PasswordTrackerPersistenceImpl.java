@@ -207,16 +207,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(passwordTracker);
-			}
-			else {
-				if (passwordTracker.isNew()) {
-					session.save(passwordTracker);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, passwordTracker, merge);
 
 			passwordTracker.setNew(false);
 

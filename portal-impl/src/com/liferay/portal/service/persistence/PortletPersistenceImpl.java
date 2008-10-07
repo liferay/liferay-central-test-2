@@ -201,16 +201,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(portlet);
-			}
-			else {
-				if (portlet.isNew()) {
-					session.save(portlet);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, portlet, merge);
 
 			portlet.setNew(false);
 

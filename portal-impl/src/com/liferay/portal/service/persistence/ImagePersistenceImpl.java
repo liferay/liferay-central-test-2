@@ -200,16 +200,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(image);
-			}
-			else {
-				if (image.isNew()) {
-					session.save(image);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, image, merge);
 
 			image.setNew(false);
 

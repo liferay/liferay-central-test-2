@@ -207,16 +207,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(userGroupRole);
-			}
-			else {
-				if (userGroupRole.isNew()) {
-					session.save(userGroupRole);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, userGroupRole, merge);
 
 			userGroupRole.setNew(false);
 

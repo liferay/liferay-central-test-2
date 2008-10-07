@@ -202,16 +202,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(resource);
-			}
-			else {
-				if (resource.isNew()) {
-					session.save(resource);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, resource, merge);
 
 			resource.setNew(false);
 

@@ -207,16 +207,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(portletItem);
-			}
-			else {
-				if (portletItem.isNew()) {
-					session.save(portletItem);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, portletItem, merge);
 
 			portletItem.setNew(false);
 

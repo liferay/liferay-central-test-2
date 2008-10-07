@@ -275,16 +275,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(user);
-			}
-			else {
-				if (user.isNew()) {
-					session.save(user);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, user, merge);
 
 			user.setNew(false);
 

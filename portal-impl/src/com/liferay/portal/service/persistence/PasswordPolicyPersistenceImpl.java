@@ -207,16 +207,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(passwordPolicy);
-			}
-			else {
-				if (passwordPolicy.isNew()) {
-					session.save(passwordPolicy);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, passwordPolicy, merge);
 
 			passwordPolicy.setNew(false);
 

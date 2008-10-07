@@ -265,16 +265,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(group);
-			}
-			else {
-				if (group.isNew()) {
-					session.save(group);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, group, merge);
 
 			group.setNew(false);
 

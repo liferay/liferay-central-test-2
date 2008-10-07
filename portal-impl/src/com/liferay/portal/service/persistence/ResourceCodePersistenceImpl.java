@@ -206,16 +206,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(resourceCode);
-			}
-			else {
-				if (resourceCode.isNew()) {
-					session.save(resourceCode);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, resourceCode, merge);
 
 			resourceCode.setNew(false);
 

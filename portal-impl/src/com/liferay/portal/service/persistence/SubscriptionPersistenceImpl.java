@@ -207,16 +207,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(subscription);
-			}
-			else {
-				if (subscription.isNew()) {
-					session.save(subscription);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, subscription, merge);
 
 			subscription.setNew(false);
 

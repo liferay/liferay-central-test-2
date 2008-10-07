@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.journal.NoSuchTemplateException;
@@ -219,16 +220,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(journalTemplate);
-			}
-			else {
-				if (journalTemplate.isNew()) {
-					session.save(journalTemplate);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, journalTemplate, merge);
 
 			journalTemplate.setNew(false);
 

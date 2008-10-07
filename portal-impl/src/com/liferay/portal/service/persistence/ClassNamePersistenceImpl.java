@@ -203,16 +203,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(className);
-			}
-			else {
-				if (className.isNew()) {
-					session.save(className);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, className, merge);
 
 			className.setNew(false);
 

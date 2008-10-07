@@ -202,16 +202,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(listType);
-			}
-			else {
-				if (listType.isNew()) {
-					session.save(listType);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, listType, merge);
 
 			listType.setNew(false);
 

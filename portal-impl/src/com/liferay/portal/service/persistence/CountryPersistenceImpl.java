@@ -202,16 +202,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(country);
-			}
-			else {
-				if (country.isNew()) {
-					session.save(country);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, country, merge);
 
 			country.setNew(false);
 

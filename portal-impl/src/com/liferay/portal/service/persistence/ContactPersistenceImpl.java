@@ -202,16 +202,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(contact);
-			}
-			else {
-				if (contact.isNew()) {
-					session.save(contact);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, contact, merge);
 
 			contact.setNew(false);
 

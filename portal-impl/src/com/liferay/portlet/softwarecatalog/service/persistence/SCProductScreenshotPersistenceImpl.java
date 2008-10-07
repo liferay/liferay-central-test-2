@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
@@ -209,16 +210,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(scProductScreenshot);
-			}
-			else {
-				if (scProductScreenshot.isNew()) {
-					session.save(scProductScreenshot);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, scProductScreenshot, merge);
 
 			scProductScreenshot.setNew(false);
 

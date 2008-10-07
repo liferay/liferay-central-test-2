@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.tags.NoSuchSourceException;
@@ -203,16 +204,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(tagsSource);
-			}
-			else {
-				if (tagsSource.isNew()) {
-					session.save(tagsSource);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, tagsSource, merge);
 
 			tagsSource.setNew(false);
 

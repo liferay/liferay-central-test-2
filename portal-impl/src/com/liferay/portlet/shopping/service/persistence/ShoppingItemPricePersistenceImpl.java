@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.shopping.NoSuchItemPriceException;
@@ -209,16 +210,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(shoppingItemPrice);
-			}
-			else {
-				if (shoppingItemPrice.isNew()) {
-					session.save(shoppingItemPrice);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, shoppingItemPrice, merge);
 
 			shoppingItemPrice.setNew(false);
 

@@ -208,16 +208,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(serviceComponent);
-			}
-			else {
-				if (serviceComponent.isNew()) {
-					session.save(serviceComponent);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, serviceComponent, merge);
 
 			serviceComponent.setNew(false);
 

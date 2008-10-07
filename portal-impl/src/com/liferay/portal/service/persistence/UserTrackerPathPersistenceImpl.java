@@ -207,16 +207,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(userTrackerPath);
-			}
-			else {
-				if (userTrackerPath.isNew()) {
-					session.save(userTrackerPath);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, userTrackerPath, merge);
 
 			userTrackerPath.setNew(false);
 

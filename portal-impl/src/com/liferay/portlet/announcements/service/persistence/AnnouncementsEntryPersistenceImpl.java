@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.announcements.NoSuchEntryException;
@@ -221,16 +222,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(announcementsEntry);
-			}
-			else {
-				if (announcementsEntry.isNew()) {
-					session.save(announcementsEntry);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, announcementsEntry, merge);
 
 			announcementsEntry.setNew(false);
 

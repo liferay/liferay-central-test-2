@@ -224,16 +224,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(userGroup);
-			}
-			else {
-				if (userGroup.isNew()) {
-					session.save(userGroup);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, userGroup, merge);
 
 			userGroup.setNew(false);
 

@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
@@ -230,16 +231,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(scFrameworkVersion);
-			}
-			else {
-				if (scFrameworkVersion.isNew()) {
-					session.save(scFrameworkVersion);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, scFrameworkVersion, merge);
 
 			scFrameworkVersion.setNew(false);
 

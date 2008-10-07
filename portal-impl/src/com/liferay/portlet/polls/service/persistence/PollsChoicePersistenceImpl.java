@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.polls.NoSuchChoiceException;
@@ -219,16 +220,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(pollsChoice);
-			}
-			else {
-				if (pollsChoice.isNew()) {
-					session.save(pollsChoice);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, pollsChoice, merge);
 
 			pollsChoice.setNew(false);
 

@@ -207,16 +207,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(webDAVProps);
-			}
-			else {
-				if (webDAVProps.isNew()) {
-					session.save(webDAVProps);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, webDAVProps, merge);
 
 			webDAVProps.setNew(false);
 

@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.journal.NoSuchFeedException;
@@ -219,16 +220,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(journalFeed);
-			}
-			else {
-				if (journalFeed.isNew()) {
-					session.save(journalFeed);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, journalFeed, merge);
 
 			journalFeed.setNew(false);
 

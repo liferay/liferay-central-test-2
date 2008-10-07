@@ -239,16 +239,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(organization);
-			}
-			else {
-				if (organization.isNew()) {
-					session.save(organization);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, organization, merge);
 
 			organization.setNew(false);
 

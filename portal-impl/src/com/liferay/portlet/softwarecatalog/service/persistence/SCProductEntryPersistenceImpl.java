@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -229,16 +230,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(scProductEntry);
-			}
-			else {
-				if (scProductEntry.isNew()) {
-					session.save(scProductEntry);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, scProductEntry, merge);
 
 			scProductEntry.setNew(false);
 

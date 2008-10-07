@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -216,16 +217,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(wikiNode);
-			}
-			else {
-				if (wikiNode.isNew()) {
-					session.save(wikiNode);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, wikiNode, merge);
 
 			wikiNode.setNew(false);
 

@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.expando.NoSuchColumnException;
@@ -207,16 +208,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(expandoColumn);
-			}
-			else {
-				if (expandoColumn.isNew()) {
-					session.save(expandoColumn);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, expandoColumn, merge);
 
 			expandoColumn.setNew(false);
 

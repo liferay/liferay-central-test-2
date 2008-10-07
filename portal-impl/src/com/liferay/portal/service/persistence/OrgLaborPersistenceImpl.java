@@ -202,16 +202,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(orgLabor);
-			}
-			else {
-				if (orgLabor.isNew()) {
-					session.save(orgLabor);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, orgLabor, merge);
 
 			orgLabor.setNew(false);
 

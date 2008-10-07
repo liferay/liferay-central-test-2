@@ -200,16 +200,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(phone);
-			}
-			else {
-				if (phone.isNew()) {
-					session.save(phone);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, phone, merge);
 
 			phone.setNew(false);
 

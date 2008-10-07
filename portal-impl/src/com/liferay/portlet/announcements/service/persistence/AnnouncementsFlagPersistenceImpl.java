@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.announcements.NoSuchFlagException;
@@ -209,16 +210,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(announcementsFlag);
-			}
-			else {
-				if (announcementsFlag.isNew()) {
-					session.save(announcementsFlag);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, announcementsFlag, merge);
 
 			announcementsFlag.setNew(false);
 

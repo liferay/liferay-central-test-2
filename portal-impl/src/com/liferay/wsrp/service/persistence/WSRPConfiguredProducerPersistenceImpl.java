@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.wsrp.NoSuchConfiguredProducerException;
@@ -211,16 +212,7 @@ public class WSRPConfiguredProducerPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(wsrpConfiguredProducer);
-			}
-			else {
-				if (wsrpConfiguredProducer.isNew()) {
-					session.save(wsrpConfiguredProducer);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, wsrpConfiguredProducer, merge);
 
 			wsrpConfiguredProducer.setNew(false);
 

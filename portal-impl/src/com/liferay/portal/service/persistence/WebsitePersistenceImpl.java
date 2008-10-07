@@ -202,16 +202,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(website);
-			}
-			else {
-				if (website.isNew()) {
-					session.save(website);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, website, merge);
 
 			website.setNew(false);
 

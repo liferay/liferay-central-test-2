@@ -207,16 +207,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(orgGroupRole);
-			}
-			else {
-				if (orgGroupRole.isNew()) {
-					session.save(orgGroupRole);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, orgGroupRole, merge);
 
 			orgGroupRole.setNew(false);
 

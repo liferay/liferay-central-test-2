@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
@@ -207,16 +208,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(shoppingOrder);
-			}
-			else {
-				if (shoppingOrder.isNew()) {
-					session.save(shoppingOrder);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, shoppingOrder, merge);
 
 			shoppingOrder.setNew(false);
 

@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.tags.NoSuchVocabularyException;
@@ -208,16 +209,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(tagsVocabulary);
-			}
-			else {
-				if (tagsVocabulary.isNew()) {
-					session.save(tagsVocabulary);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, tagsVocabulary, merge);
 
 			tagsVocabulary.setNew(false);
 

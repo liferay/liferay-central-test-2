@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -220,16 +221,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(pollsQuestion);
-			}
-			else {
-				if (pollsQuestion.isNew()) {
-					session.save(pollsQuestion);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, pollsQuestion, merge);
 
 			pollsQuestion.setNew(false);
 

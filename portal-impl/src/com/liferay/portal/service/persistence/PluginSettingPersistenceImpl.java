@@ -207,16 +207,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(pluginSetting);
-			}
-			else {
-				if (pluginSetting.isNew()) {
-					session.save(pluginSetting);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, pluginSetting, merge);
 
 			pluginSetting.setNew(false);
 

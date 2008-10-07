@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
@@ -208,16 +209,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(dlFileVersion);
-			}
-			else {
-				if (dlFileVersion.isNew()) {
-					session.save(dlFileVersion);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, dlFileVersion, merge);
 
 			dlFileVersion.setNew(false);
 

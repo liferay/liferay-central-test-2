@@ -208,16 +208,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(portletPreferences);
-			}
-			else {
-				if (portletPreferences.isNew()) {
-					session.save(portletPreferences);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, portletPreferences, merge);
 
 			portletPreferences.setNew(false);
 

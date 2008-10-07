@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -216,16 +217,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(wikiPage);
-			}
-			else {
-				if (wikiPage.isNew()) {
-					session.save(wikiPage);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, wikiPage, merge);
 
 			wikiPage.setNew(false);
 

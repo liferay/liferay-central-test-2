@@ -208,16 +208,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(orgGroupPermission);
-			}
-			else {
-				if (orgGroupPermission.isNew()) {
-					session.save(orgGroupPermission);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, orgGroupPermission, merge);
 
 			orgGroupPermission.setNew(false);
 

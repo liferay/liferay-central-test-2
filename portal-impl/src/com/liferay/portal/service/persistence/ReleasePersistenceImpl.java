@@ -200,16 +200,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(release);
-			}
-			else {
-				if (release.isNew()) {
-					session.save(release);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, release, merge);
 
 			release.setNew(false);
 

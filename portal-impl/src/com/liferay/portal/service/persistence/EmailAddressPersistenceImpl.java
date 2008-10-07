@@ -207,16 +207,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(emailAddress);
-			}
-			else {
-				if (emailAddress.isNew()) {
-					session.save(emailAddress);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, emailAddress, merge);
 
 			emailAddress.setNew(false);
 

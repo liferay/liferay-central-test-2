@@ -208,16 +208,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(membershipRequest);
-			}
-			else {
-				if (membershipRequest.isNew()) {
-					session.save(membershipRequest);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, membershipRequest, merge);
 
 			membershipRequest.setNew(false);
 

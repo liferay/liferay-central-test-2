@@ -200,16 +200,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(account);
-			}
-			else {
-				if (account.isNew()) {
-					session.save(account);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, account, merge);
 
 			account.setNew(false);
 

@@ -248,16 +248,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(permission);
-			}
-			else {
-				if (permission.isNew()) {
-					session.save(permission);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, permission, merge);
 
 			permission.setNew(false);
 

@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
@@ -220,16 +221,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(mbMailingList);
-			}
-			else {
-				if (mbMailingList.isNew()) {
-					session.save(mbMailingList);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, mbMailingList, merge);
 
 			mbMailingList.setNew(false);
 

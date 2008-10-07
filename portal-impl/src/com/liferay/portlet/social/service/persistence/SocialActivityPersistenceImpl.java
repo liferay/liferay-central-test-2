@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.social.NoSuchActivityException;
@@ -210,16 +211,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(socialActivity);
-			}
-			else {
-				if (socialActivity.isNew()) {
-					session.save(socialActivity);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, socialActivity, merge);
 
 			socialActivity.setNew(false);
 

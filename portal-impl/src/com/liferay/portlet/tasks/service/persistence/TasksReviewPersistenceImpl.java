@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.tasks.NoSuchReviewException;
@@ -207,16 +208,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(tasksReview);
-			}
-			else {
-				if (tasksReview.isNew()) {
-					session.save(tasksReview);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, tasksReview, merge);
 
 			tasksReview.setNew(false);
 

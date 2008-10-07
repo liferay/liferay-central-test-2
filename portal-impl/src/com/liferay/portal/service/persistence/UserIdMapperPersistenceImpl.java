@@ -207,16 +207,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(userIdMapper);
-			}
-			else {
-				if (userIdMapper.isNew()) {
-					session.save(userIdMapper);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, userIdMapper, merge);
 
 			userIdMapper.setNew(false);
 

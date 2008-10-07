@@ -202,16 +202,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(region);
-			}
-			else {
-				if (region.isNew()) {
-					session.save(region);
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, region, merge);
 
 			region.setNew(false);
 
