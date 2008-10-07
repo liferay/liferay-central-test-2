@@ -58,5 +58,19 @@ create table TagsVocabulary (
 
 create table WSRPConfiguredProducer (
 	configuredProducerId LONG not null primary key,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	portalId VARCHAR(75) null,
+	namespace VARCHAR(75) null,
+	producerURL VARCHAR(256) null,
+	producerVersion VARCHAR(75) null,
+	producerMarkupURL VARCHAR(256) null,
+	status INTEGER,
+	registrationData TEXT null,
+	registrationContext TEXT null,
+	serviceDescription TEXT null,
+	userCategoryMapping TEXT null,
+	customUserProfile TEXT null,
+	sdLastModified LONG,
+	identityPropagationType VARCHAR(75) null,
+	entityVersion INTEGER
 );

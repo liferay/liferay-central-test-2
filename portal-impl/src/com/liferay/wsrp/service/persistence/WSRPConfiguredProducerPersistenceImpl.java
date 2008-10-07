@@ -26,11 +26,13 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
@@ -265,6 +267,307 @@ public class WSRPConfiguredProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<WSRPConfiguredProducer> findByP_N(String portalId,
+		String namespace) throws SystemException {
+		boolean finderClassNameCacheEnabled = WSRPConfiguredProducerModelImpl.CACHE_ENABLED;
+		String finderClassName = WSRPConfiguredProducer.class.getName();
+		String finderMethodName = "findByP_N";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { portalId, namespace };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.wsrp.model.WSRPConfiguredProducer WHERE ");
+
+				if (portalId == null) {
+					query.append("portalId IS NULL");
+				}
+				else {
+					query.append("portalId = ?");
+				}
+
+				query.append(" AND ");
+
+				if (namespace == null) {
+					query.append("namespace IS NULL");
+				}
+				else {
+					query.append("namespace = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (portalId != null) {
+					qPos.add(portalId);
+				}
+
+				if (namespace != null) {
+					qPos.add(namespace);
+				}
+
+				List<WSRPConfiguredProducer> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<WSRPConfiguredProducer>)result;
+		}
+	}
+
+	public List<WSRPConfiguredProducer> findByP_N(String portalId,
+		String namespace, int start, int end) throws SystemException {
+		return findByP_N(portalId, namespace, start, end, null);
+	}
+
+	public List<WSRPConfiguredProducer> findByP_N(String portalId,
+		String namespace, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = WSRPConfiguredProducerModelImpl.CACHE_ENABLED;
+		String finderClassName = WSRPConfiguredProducer.class.getName();
+		String finderMethodName = "findByP_N";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				portalId,
+				
+				namespace,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.wsrp.model.WSRPConfiguredProducer WHERE ");
+
+				if (portalId == null) {
+					query.append("portalId IS NULL");
+				}
+				else {
+					query.append("portalId = ?");
+				}
+
+				query.append(" AND ");
+
+				if (namespace == null) {
+					query.append("namespace IS NULL");
+				}
+				else {
+					query.append("namespace = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (portalId != null) {
+					qPos.add(portalId);
+				}
+
+				if (namespace != null) {
+					qPos.add(namespace);
+				}
+
+				List<WSRPConfiguredProducer> list = (List<WSRPConfiguredProducer>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<WSRPConfiguredProducer>)result;
+		}
+	}
+
+	public WSRPConfiguredProducer findByP_N_First(String portalId,
+		String namespace, OrderByComparator obc)
+		throws NoSuchConfiguredProducerException, SystemException {
+		List<WSRPConfiguredProducer> list = findByP_N(portalId, namespace, 0,
+				1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No WSRPConfiguredProducer exists with the key {");
+
+			msg.append("portalId=" + portalId);
+
+			msg.append(", ");
+			msg.append("namespace=" + namespace);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchConfiguredProducerException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WSRPConfiguredProducer findByP_N_Last(String portalId,
+		String namespace, OrderByComparator obc)
+		throws NoSuchConfiguredProducerException, SystemException {
+		int count = countByP_N(portalId, namespace);
+
+		List<WSRPConfiguredProducer> list = findByP_N(portalId, namespace,
+				count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No WSRPConfiguredProducer exists with the key {");
+
+			msg.append("portalId=" + portalId);
+
+			msg.append(", ");
+			msg.append("namespace=" + namespace);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchConfiguredProducerException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WSRPConfiguredProducer[] findByP_N_PrevAndNext(
+		long configuredProducerId, String portalId, String namespace,
+		OrderByComparator obc)
+		throws NoSuchConfiguredProducerException, SystemException {
+		WSRPConfiguredProducer wsrpConfiguredProducer = findByPrimaryKey(configuredProducerId);
+
+		int count = countByP_N(portalId, namespace);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.wsrp.model.WSRPConfiguredProducer WHERE ");
+
+			if (portalId == null) {
+				query.append("portalId IS NULL");
+			}
+			else {
+				query.append("portalId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (namespace == null) {
+				query.append("namespace IS NULL");
+			}
+			else {
+				query.append("namespace = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (portalId != null) {
+				qPos.add(portalId);
+			}
+
+			if (namespace != null) {
+				qPos.add(namespace);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					wsrpConfiguredProducer);
+
+			WSRPConfiguredProducer[] array = new WSRPConfiguredProducerImpl[3];
+
+			array[0] = (WSRPConfiguredProducer)objArray[0];
+			array[1] = (WSRPConfiguredProducer)objArray[1];
+			array[2] = (WSRPConfiguredProducer)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -377,9 +680,106 @@ public class WSRPConfiguredProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByP_N(String portalId, String namespace)
+		throws SystemException {
+		for (WSRPConfiguredProducer wsrpConfiguredProducer : findByP_N(
+				portalId, namespace)) {
+			remove(wsrpConfiguredProducer);
+		}
+	}
+
 	public void removeAll() throws SystemException {
 		for (WSRPConfiguredProducer wsrpConfiguredProducer : findAll()) {
 			remove(wsrpConfiguredProducer);
+		}
+	}
+
+	public int countByP_N(String portalId, String namespace)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = WSRPConfiguredProducerModelImpl.CACHE_ENABLED;
+		String finderClassName = WSRPConfiguredProducer.class.getName();
+		String finderMethodName = "countByP_N";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { portalId, namespace };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.wsrp.model.WSRPConfiguredProducer WHERE ");
+
+				if (portalId == null) {
+					query.append("portalId IS NULL");
+				}
+				else {
+					query.append("portalId = ?");
+				}
+
+				query.append(" AND ");
+
+				if (namespace == null) {
+					query.append("namespace IS NULL");
+				}
+				else {
+					query.append("namespace = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (portalId != null) {
+					qPos.add(portalId);
+				}
+
+				if (namespace != null) {
+					qPos.add(namespace);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

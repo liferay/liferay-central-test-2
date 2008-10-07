@@ -52,6 +52,20 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 
 		soapModel.setConfiguredProducerId(model.getConfiguredProducerId());
 		soapModel.setName(model.getName());
+		soapModel.setPortalId(model.getPortalId());
+		soapModel.setNamespace(model.getNamespace());
+		soapModel.setProducerURL(model.getProducerURL());
+		soapModel.setProducerVersion(model.getProducerVersion());
+		soapModel.setProducerMarkupURL(model.getProducerMarkupURL());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setRegistrationData(model.getRegistrationData());
+		soapModel.setRegistrationContext(model.getRegistrationContext());
+		soapModel.setServiceDescription(model.getServiceDescription());
+		soapModel.setUserCategoryMapping(model.getUserCategoryMapping());
+		soapModel.setCustomUserProfile(model.getCustomUserProfile());
+		soapModel.setSdLastModified(model.getSdLastModified());
+		soapModel.setIdentityPropagationType(model.getIdentityPropagationType());
+		soapModel.setEntityVersion(model.getEntityVersion());
 
 		return soapModel;
 	}
@@ -94,6 +108,132 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 		_name = name;
 	}
 
+	public String getPortalId() {
+		return _portalId;
+	}
+
+	public void setPortalId(String portalId) {
+		_portalId = portalId;
+	}
+
+	public String getNamespace() {
+		return _namespace;
+	}
+
+	public void setNamespace(String namespace) {
+		_namespace = namespace;
+	}
+
+	public String getProducerURL() {
+		return _producerURL;
+	}
+
+	public void setProducerURL(String producerURL) {
+		_producerURL = producerURL;
+	}
+
+	public String getProducerVersion() {
+		return _producerVersion;
+	}
+
+	public void setProducerVersion(String producerVersion) {
+		_producerVersion = producerVersion;
+	}
+
+	public String getProducerMarkupURL() {
+		return _producerMarkupURL;
+	}
+
+	public void setProducerMarkupURL(String producerMarkupURL) {
+		_producerMarkupURL = producerMarkupURL;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public String getRegistrationData() {
+		return _registrationData;
+	}
+
+	public void setRegistrationData(String registrationData) {
+		_registrationData = registrationData;
+	}
+
+	public String getRegistrationContext() {
+		return _registrationContext;
+	}
+
+	public void setRegistrationContext(String registrationContext) {
+		_registrationContext = registrationContext;
+	}
+
+	public String getServiceDescription() {
+		return _serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		_serviceDescription = serviceDescription;
+	}
+
+	public String getUserCategoryMapping() {
+		return _userCategoryMapping;
+	}
+
+	public void setUserCategoryMapping(String userCategoryMapping) {
+		_userCategoryMapping = userCategoryMapping;
+	}
+
+	public String getCustomUserProfile() {
+		return _customUserProfile;
+	}
+
+	public void setCustomUserProfile(String customUserProfile) {
+		_customUserProfile = customUserProfile;
+	}
+
+	public long getSdLastModified() {
+		return _sdLastModified;
+	}
+
+	public void setSdLastModified(long sdLastModified) {
+		_sdLastModified = sdLastModified;
+	}
+
+	public String getIdentityPropagationType() {
+		return _identityPropagationType;
+	}
+
+	public void setIdentityPropagationType(String identityPropagationType) {
+		_identityPropagationType = identityPropagationType;
+	}
+
+	public int getEntityVersion() {
+		return _entityVersion;
+	}
+
+	public void setEntityVersion(int entityVersion) {
+		_entityVersion = entityVersion;
+	}
+
 	private long _configuredProducerId;
 	private String _name;
+	private String _portalId;
+	private String _namespace;
+	private String _producerURL;
+	private String _producerVersion;
+	private String _producerMarkupURL;
+	private int _status;
+	private String _registrationData;
+	private String _registrationContext;
+	private String _serviceDescription;
+	private String _userCategoryMapping;
+	private String _customUserProfile;
+	private long _sdLastModified;
+	private String _identityPropagationType;
+	private int _entityVersion;
 }

@@ -22,6 +22,9 @@
 
 package com.liferay.wsrp.service.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.service.base.WSRPConfiguredProducerLocalServiceBaseImpl;
 
 /**
@@ -33,4 +36,47 @@ import com.liferay.wsrp.service.base.WSRPConfiguredProducerLocalServiceBaseImpl;
  */
 public class WSRPConfiguredProducerLocalServiceImpl
 	extends WSRPConfiguredProducerLocalServiceBaseImpl {
+
+	public void addWSRPConfiguredProducer(
+			String name, String portalId, String namespace, String producerURL,
+			String producerVersion,	String markupURL, int status,
+			String registrationData, String registrationContext,
+			String serviceDescription, String userCategoryMapping,
+			String customUserProfile, String identityPropagationType,
+			long sdLastModified, int entityVersion)
+		throws PortalException, SystemException {
+
+		long configuredProducerId = counterLocalService.increment();
+
+		WSRPConfiguredProducer configuredProducer =
+				wsrpConfiguredProducerPersistence.create(configuredProducerId);
+
+		configuredProducer.setName(name);
+		configuredProducer.setPortalId(portalId);
+		configuredProducer.setNamespace(namespace);
+		configuredProducer.setProducerURL(producerURL);
+		configuredProducer.setProducerVersion(producerVersion);
+		configuredProducer.setProducerMarkupURL(markupURL);
+		configuredProducer.setStatus(status);
+		configuredProducer.setRegistrationData(registrationData);
+		configuredProducer.setRegistrationContext(registrationContext);
+		configuredProducer.setServiceDescription(serviceDescription);
+		configuredProducer.setUserCategoryMapping(userCategoryMapping);
+		configuredProducer.setCustomUserProfile(customUserProfile);
+		configuredProducer.setSdLastModified(sdLastModified);
+		configuredProducer.setIdentityPropagationType(identityPropagationType);
+		configuredProducer.setEntityVersion(entityVersion);
+
+		wsrpConfiguredProducerPersistence.update(configuredProducer, false);
+
+	}
+
+	public java.util.List<WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace)
+		throws com.liferay.portal.SystemException {
+
+		return wsrpConfiguredProducerPersistence.findByP_N(
+			portalId, namespace);
+	}
+
 }

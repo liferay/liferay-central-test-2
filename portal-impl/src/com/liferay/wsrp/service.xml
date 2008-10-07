@@ -5,12 +5,38 @@
 	<namespace>WSRP</namespace>
 	<entity name="WSRPConfiguredProducer" local-service="true" remote-service="false">
 
-		<!-- PK fields -->
+	<!-- PK fields -->
 
-		<column name="configuredProducerId" type="long" primary="true" />
+	<column name="configuredProducerId" type="long" primary="true" />
 
-		<!-- Other fields -->
+	<!-- Other fields -->
 
-		<column name="name" type="String" />
-	</entity>
+	<column name="name" type="String" />
+	<column name="portalId" type="String" />
+	<column name="namespace" type="String" />
+	<column name="producerURL" type="String" />
+	<column name="producerVersion" type="String" />
+	<column name="producerMarkupURL" type="String" />
+	<column name="status" type="int" />
+	<column name="registrationData" type="String" />
+	<column name="registrationContext" type="String" />
+	<column name="serviceDescription" type="String" />
+	<column name="userCategoryMapping" type="String" />
+	<column name="customUserProfile" type="String" />
+	<column name="sdLastModified" type="long" />
+	<column name="identityPropagationType" type="String" />
+	<column name="entityVersion" type="int" />        
+
+	<!-- Finder methods -->
+
+	<finder name="P_N" return-type="Collection">
+		<finder-column name="portalId" />
+		<finder-column name="namespace" />
+	</finder>
+
+	<!-- References -->
+
+	<reference package-path="com.liferay.counter" entity="Counter" />
+
+    </entity>
 </service-builder>

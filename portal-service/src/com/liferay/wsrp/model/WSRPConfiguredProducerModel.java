@@ -57,5 +57,61 @@ public interface WSRPConfiguredProducerModel extends BaseModel {
 
 	public void setName(String name);
 
+	public String getPortalId();
+
+	public void setPortalId(String portalId);
+
+	public String getNamespace();
+
+	public void setNamespace(String namespace);
+
+	public String getProducerURL();
+
+	public void setProducerURL(String producerURL);
+
+	public String getProducerVersion();
+
+	public void setProducerVersion(String producerVersion);
+
+	public String getProducerMarkupURL();
+
+	public void setProducerMarkupURL(String producerMarkupURL);
+
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public String getRegistrationData();
+
+	public void setRegistrationData(String registrationData);
+
+	public String getRegistrationContext();
+
+	public void setRegistrationContext(String registrationContext);
+
+	public String getServiceDescription();
+
+	public void setServiceDescription(String serviceDescription);
+
+	public String getUserCategoryMapping();
+
+	public void setUserCategoryMapping(String userCategoryMapping);
+
+	public String getCustomUserProfile();
+
+	public void setCustomUserProfile(String customUserProfile);
+
+	public long getSdLastModified();
+
+	public void setSdLastModified(long sdLastModified);
+
+	public String getIdentityPropagationType();
+
+	public void setIdentityPropagationType(String identityPropagationType);
+
+	public int getEntityVersion();
+
+	public void setEntityVersion(int entityVersion);
+
 	public WSRPConfiguredProducer toEscapedModel();
 }

@@ -1674,5 +1674,19 @@
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portalId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="namespace" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="producerURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="producerVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="producerMarkupURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="registrationData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="registrationContext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serviceDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userCategoryMapping" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="customUserProfile" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sdLastModified" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="identityPropagationType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="entityVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

@@ -22,6 +22,9 @@
 
 package com.liferay.wsrp.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterService;
+
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -117,8 +120,28 @@ public abstract class WSRPConfiguredProducerLocalServiceBaseImpl
 		this.wsrpConfiguredProducerPersistence = wsrpConfiguredProducerPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	@javax.annotation.Resource(name = "com.liferay.wsrp.service.WSRPConfiguredProducerLocalService.impl")
 	protected WSRPConfiguredProducerLocalService wsrpConfiguredProducerLocalService;
 	@javax.annotation.Resource(name = "com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence.impl")
 	protected WSRPConfiguredProducerPersistence wsrpConfiguredProducerPersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
+	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
+	protected CounterService counterService;
 }

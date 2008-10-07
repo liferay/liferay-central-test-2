@@ -68,9 +68,51 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 			{ "configuredProducerId", new Integer(Types.BIGINT) },
 			
 
-			{ "name", new Integer(Types.VARCHAR) }
+			{ "name", new Integer(Types.VARCHAR) },
+			
+
+			{ "portalId", new Integer(Types.VARCHAR) },
+			
+
+			{ "namespace", new Integer(Types.VARCHAR) },
+			
+
+			{ "producerURL", new Integer(Types.VARCHAR) },
+			
+
+			{ "producerVersion", new Integer(Types.VARCHAR) },
+			
+
+			{ "producerMarkupURL", new Integer(Types.VARCHAR) },
+			
+
+			{ "status", new Integer(Types.INTEGER) },
+			
+
+			{ "registrationData", new Integer(Types.CLOB) },
+			
+
+			{ "registrationContext", new Integer(Types.CLOB) },
+			
+
+			{ "serviceDescription", new Integer(Types.CLOB) },
+			
+
+			{ "userCategoryMapping", new Integer(Types.CLOB) },
+			
+
+			{ "customUserProfile", new Integer(Types.CLOB) },
+			
+
+			{ "sdLastModified", new Integer(Types.BIGINT) },
+			
+
+			{ "identityPropagationType", new Integer(Types.VARCHAR) },
+			
+
+			{ "entityVersion", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WSRPConfiguredProducer (configuredProducerId LONG not null primary key,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WSRPConfiguredProducer (configuredProducerId LONG not null primary key,name VARCHAR(75) null,portalId VARCHAR(75) null,namespace VARCHAR(75) null,producerURL VARCHAR(256) null,producerVersion VARCHAR(75) null,producerMarkupURL VARCHAR(256) null,status INTEGER,registrationData TEXT null,registrationContext TEXT null,serviceDescription TEXT null,userCategoryMapping TEXT null,customUserProfile TEXT null,sdLastModified LONG,identityPropagationType VARCHAR(75) null,entityVersion INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table WSRPConfiguredProducer";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -85,6 +127,20 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 
 		model.setConfiguredProducerId(soapModel.getConfiguredProducerId());
 		model.setName(soapModel.getName());
+		model.setPortalId(soapModel.getPortalId());
+		model.setNamespace(soapModel.getNamespace());
+		model.setProducerURL(soapModel.getProducerURL());
+		model.setProducerVersion(soapModel.getProducerVersion());
+		model.setProducerMarkupURL(soapModel.getProducerMarkupURL());
+		model.setStatus(soapModel.getStatus());
+		model.setRegistrationData(soapModel.getRegistrationData());
+		model.setRegistrationContext(soapModel.getRegistrationContext());
+		model.setServiceDescription(soapModel.getServiceDescription());
+		model.setUserCategoryMapping(soapModel.getUserCategoryMapping());
+		model.setCustomUserProfile(soapModel.getCustomUserProfile());
+		model.setSdLastModified(soapModel.getSdLastModified());
+		model.setIdentityPropagationType(soapModel.getIdentityPropagationType());
+		model.setEntityVersion(soapModel.getEntityVersion());
 
 		return model;
 	}
@@ -140,6 +196,186 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getPortalId() {
+		return GetterUtil.getString(_portalId);
+	}
+
+	public void setPortalId(String portalId) {
+		if (((portalId == null) && (_portalId != null)) ||
+				((portalId != null) && (_portalId == null)) ||
+				((portalId != null) && (_portalId != null) &&
+				!portalId.equals(_portalId))) {
+			_portalId = portalId;
+		}
+	}
+
+	public String getNamespace() {
+		return GetterUtil.getString(_namespace);
+	}
+
+	public void setNamespace(String namespace) {
+		if (((namespace == null) && (_namespace != null)) ||
+				((namespace != null) && (_namespace == null)) ||
+				((namespace != null) && (_namespace != null) &&
+				!namespace.equals(_namespace))) {
+			_namespace = namespace;
+		}
+	}
+
+	public String getProducerURL() {
+		return GetterUtil.getString(_producerURL);
+	}
+
+	public void setProducerURL(String producerURL) {
+		if (((producerURL == null) && (_producerURL != null)) ||
+				((producerURL != null) && (_producerURL == null)) ||
+				((producerURL != null) && (_producerURL != null) &&
+				!producerURL.equals(_producerURL))) {
+			_producerURL = producerURL;
+		}
+	}
+
+	public String getProducerVersion() {
+		return GetterUtil.getString(_producerVersion);
+	}
+
+	public void setProducerVersion(String producerVersion) {
+		if (((producerVersion == null) && (_producerVersion != null)) ||
+				((producerVersion != null) && (_producerVersion == null)) ||
+				((producerVersion != null) && (_producerVersion != null) &&
+				!producerVersion.equals(_producerVersion))) {
+			_producerVersion = producerVersion;
+		}
+	}
+
+	public String getProducerMarkupURL() {
+		return GetterUtil.getString(_producerMarkupURL);
+	}
+
+	public void setProducerMarkupURL(String producerMarkupURL) {
+		if (((producerMarkupURL == null) && (_producerMarkupURL != null)) ||
+				((producerMarkupURL != null) && (_producerMarkupURL == null)) ||
+				((producerMarkupURL != null) && (_producerMarkupURL != null) &&
+				!producerMarkupURL.equals(_producerMarkupURL))) {
+			_producerMarkupURL = producerMarkupURL;
+		}
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		if (status != _status) {
+			_status = status;
+		}
+	}
+
+	public String getRegistrationData() {
+		return GetterUtil.getString(_registrationData);
+	}
+
+	public void setRegistrationData(String registrationData) {
+		if (((registrationData == null) && (_registrationData != null)) ||
+				((registrationData != null) && (_registrationData == null)) ||
+				((registrationData != null) && (_registrationData != null) &&
+				!registrationData.equals(_registrationData))) {
+			_registrationData = registrationData;
+		}
+	}
+
+	public String getRegistrationContext() {
+		return GetterUtil.getString(_registrationContext);
+	}
+
+	public void setRegistrationContext(String registrationContext) {
+		if (((registrationContext == null) && (_registrationContext != null)) ||
+				((registrationContext != null) &&
+				(_registrationContext == null)) ||
+				((registrationContext != null) &&
+				(_registrationContext != null) &&
+				!registrationContext.equals(_registrationContext))) {
+			_registrationContext = registrationContext;
+		}
+	}
+
+	public String getServiceDescription() {
+		return GetterUtil.getString(_serviceDescription);
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		if (((serviceDescription == null) && (_serviceDescription != null)) ||
+				((serviceDescription != null) && (_serviceDescription == null)) ||
+				((serviceDescription != null) && (_serviceDescription != null) &&
+				!serviceDescription.equals(_serviceDescription))) {
+			_serviceDescription = serviceDescription;
+		}
+	}
+
+	public String getUserCategoryMapping() {
+		return GetterUtil.getString(_userCategoryMapping);
+	}
+
+	public void setUserCategoryMapping(String userCategoryMapping) {
+		if (((userCategoryMapping == null) && (_userCategoryMapping != null)) ||
+				((userCategoryMapping != null) &&
+				(_userCategoryMapping == null)) ||
+				((userCategoryMapping != null) &&
+				(_userCategoryMapping != null) &&
+				!userCategoryMapping.equals(_userCategoryMapping))) {
+			_userCategoryMapping = userCategoryMapping;
+		}
+	}
+
+	public String getCustomUserProfile() {
+		return GetterUtil.getString(_customUserProfile);
+	}
+
+	public void setCustomUserProfile(String customUserProfile) {
+		if (((customUserProfile == null) && (_customUserProfile != null)) ||
+				((customUserProfile != null) && (_customUserProfile == null)) ||
+				((customUserProfile != null) && (_customUserProfile != null) &&
+				!customUserProfile.equals(_customUserProfile))) {
+			_customUserProfile = customUserProfile;
+		}
+	}
+
+	public long getSdLastModified() {
+		return _sdLastModified;
+	}
+
+	public void setSdLastModified(long sdLastModified) {
+		if (sdLastModified != _sdLastModified) {
+			_sdLastModified = sdLastModified;
+		}
+	}
+
+	public String getIdentityPropagationType() {
+		return GetterUtil.getString(_identityPropagationType);
+	}
+
+	public void setIdentityPropagationType(String identityPropagationType) {
+		if (((identityPropagationType == null) &&
+				(_identityPropagationType != null)) ||
+				((identityPropagationType != null) &&
+				(_identityPropagationType == null)) ||
+				((identityPropagationType != null) &&
+				(_identityPropagationType != null) &&
+				!identityPropagationType.equals(_identityPropagationType))) {
+			_identityPropagationType = identityPropagationType;
+		}
+	}
+
+	public int getEntityVersion() {
+		return _entityVersion;
+	}
+
+	public void setEntityVersion(int entityVersion) {
+		if (entityVersion != _entityVersion) {
+			_entityVersion = entityVersion;
+		}
+	}
+
 	public WSRPConfiguredProducer toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WSRPConfiguredProducer)this;
@@ -152,6 +388,23 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 
 			model.setConfiguredProducerId(getConfiguredProducerId());
 			model.setName(HtmlUtil.escape(getName()));
+			model.setPortalId(HtmlUtil.escape(getPortalId()));
+			model.setNamespace(HtmlUtil.escape(getNamespace()));
+			model.setProducerURL(HtmlUtil.escape(getProducerURL()));
+			model.setProducerVersion(HtmlUtil.escape(getProducerVersion()));
+			model.setProducerMarkupURL(HtmlUtil.escape(getProducerMarkupURL()));
+			model.setStatus(getStatus());
+			model.setRegistrationData(HtmlUtil.escape(getRegistrationData()));
+			model.setRegistrationContext(HtmlUtil.escape(
+					getRegistrationContext()));
+			model.setServiceDescription(HtmlUtil.escape(getServiceDescription()));
+			model.setUserCategoryMapping(HtmlUtil.escape(
+					getUserCategoryMapping()));
+			model.setCustomUserProfile(HtmlUtil.escape(getCustomUserProfile()));
+			model.setSdLastModified(getSdLastModified());
+			model.setIdentityPropagationType(HtmlUtil.escape(
+					getIdentityPropagationType()));
+			model.setEntityVersion(getEntityVersion());
 
 			model = (WSRPConfiguredProducer)Proxy.newProxyInstance(WSRPConfiguredProducer.class.getClassLoader(),
 					new Class[] { WSRPConfiguredProducer.class },
@@ -175,6 +428,20 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 
 		clone.setConfiguredProducerId(getConfiguredProducerId());
 		clone.setName(getName());
+		clone.setPortalId(getPortalId());
+		clone.setNamespace(getNamespace());
+		clone.setProducerURL(getProducerURL());
+		clone.setProducerVersion(getProducerVersion());
+		clone.setProducerMarkupURL(getProducerMarkupURL());
+		clone.setStatus(getStatus());
+		clone.setRegistrationData(getRegistrationData());
+		clone.setRegistrationContext(getRegistrationContext());
+		clone.setServiceDescription(getServiceDescription());
+		clone.setUserCategoryMapping(getUserCategoryMapping());
+		clone.setCustomUserProfile(getCustomUserProfile());
+		clone.setSdLastModified(getSdLastModified());
+		clone.setIdentityPropagationType(getIdentityPropagationType());
+		clone.setEntityVersion(getEntityVersion());
 
 		return clone;
 	}
@@ -229,5 +496,19 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 
 	private long _configuredProducerId;
 	private String _name;
+	private String _portalId;
+	private String _namespace;
+	private String _producerURL;
+	private String _producerVersion;
+	private String _producerMarkupURL;
+	private int _status;
+	private String _registrationData;
+	private String _registrationContext;
+	private String _serviceDescription;
+	private String _userCategoryMapping;
+	private String _customUserProfile;
+	private long _sdLastModified;
+	private String _identityPropagationType;
+	private int _entityVersion;
 	private ExpandoBridge _expandoBridge;
 }

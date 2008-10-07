@@ -466,6 +466,8 @@ create index IX_E0422BDA on User_ (uuid_);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
 
+create index IX_D571A4A0 on WSRPConfiguredProducer (portalId, namespace);
+
 create index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 
 create index IX_96F07007 on Website (companyId);

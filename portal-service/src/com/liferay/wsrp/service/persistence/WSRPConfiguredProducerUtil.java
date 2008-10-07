@@ -93,6 +93,52 @@ public class WSRPConfiguredProducerUtil {
 		return getPersistence().fetchByPrimaryKey(configuredProducerId);
 	}
 
+	public static java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByP_N(portalId, namespace);
+	}
+
+	public static java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByP_N(portalId, namespace, start, end);
+	}
+
+	public static java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByP_N(portalId, namespace, start, end, obc);
+	}
+
+	public static com.liferay.wsrp.model.WSRPConfiguredProducer findByP_N_First(
+		java.lang.String portalId, java.lang.String namespace,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.wsrp.NoSuchConfiguredProducerException {
+		return getPersistence().findByP_N_First(portalId, namespace, obc);
+	}
+
+	public static com.liferay.wsrp.model.WSRPConfiguredProducer findByP_N_Last(
+		java.lang.String portalId, java.lang.String namespace,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.wsrp.NoSuchConfiguredProducerException {
+		return getPersistence().findByP_N_Last(portalId, namespace, obc);
+	}
+
+	public static com.liferay.wsrp.model.WSRPConfiguredProducer[] findByP_N_PrevAndNext(
+		long configuredProducerId, java.lang.String portalId,
+		java.lang.String namespace,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.wsrp.NoSuchConfiguredProducerException {
+		return getPersistence()
+				   .findByP_N_PrevAndNext(configuredProducerId, portalId,
+			namespace, obc);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -121,8 +167,18 @@ public class WSRPConfiguredProducerUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByP_N(java.lang.String portalId,
+		java.lang.String namespace) throws com.liferay.portal.SystemException {
+		getPersistence().removeByP_N(portalId, namespace);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByP_N(java.lang.String portalId,
+		java.lang.String namespace) throws com.liferay.portal.SystemException {
+		return getPersistence().countByP_N(portalId, namespace);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

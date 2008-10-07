@@ -77,6 +77,38 @@ public interface WSRPConfiguredProducerPersistence {
 	public com.liferay.wsrp.model.WSRPConfiguredProducer fetchByPrimaryKey(
 		long configuredProducerId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.wsrp.model.WSRPConfiguredProducer findByP_N_First(
+		java.lang.String portalId, java.lang.String namespace,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.wsrp.NoSuchConfiguredProducerException;
+
+	public com.liferay.wsrp.model.WSRPConfiguredProducer findByP_N_Last(
+		java.lang.String portalId, java.lang.String namespace,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.wsrp.NoSuchConfiguredProducerException;
+
+	public com.liferay.wsrp.model.WSRPConfiguredProducer[] findByP_N_PrevAndNext(
+		long configuredProducerId, java.lang.String portalId,
+		java.lang.String namespace,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.wsrp.NoSuchConfiguredProducerException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -95,7 +127,13 @@ public interface WSRPConfiguredProducerPersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByP_N(java.lang.String portalId,
+		java.lang.String namespace) throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByP_N(java.lang.String portalId, java.lang.String namespace)
+		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 

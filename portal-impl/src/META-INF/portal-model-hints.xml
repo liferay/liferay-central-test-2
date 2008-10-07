@@ -1685,5 +1685,33 @@
 	<model name="com.liferay.wsrp.model.WSRPConfiguredProducer">
 		<field name="configuredProducerId" type="long" />
 		<field name="name" type="String" />
+		<field name="portalId" type="String" />
+		<field name="namespace" type="String" />
+		<field name="producerURL" type="String">
+			<hint name="max-length">256</hint>
+		</field>
+		<field name="producerVersion" type="String" />
+		<field name="producerMarkupURL" type="String">
+			<hint name="max-length">256</hint>
+		</field>
+		<field name="status" type="int" />
+		<field name="registrationData" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="registrationContext" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="serviceDescription" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="userCategoryMapping" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="customUserProfile" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="sdLastModified" type="long" />
+		<field name="identityPropagationType" type="String" />
+		<field name="entityVersion" type="int" />
 	</model>
 </model-hints>

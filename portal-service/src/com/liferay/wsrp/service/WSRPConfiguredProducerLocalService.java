@@ -85,4 +85,22 @@ public interface WSRPConfiguredProducerLocalService {
 	public com.liferay.wsrp.model.WSRPConfiguredProducer updateWSRPConfiguredProducer(
 		com.liferay.wsrp.model.WSRPConfiguredProducer wsrpConfiguredProducer)
 		throws com.liferay.portal.SystemException;
+
+	public void addWSRPConfiguredProducer(java.lang.String name,
+		java.lang.String portalId, java.lang.String namespace,
+		java.lang.String producerURL, java.lang.String producerVersion,
+		java.lang.String markupURL, int status,
+		java.lang.String registrationData,
+		java.lang.String registrationContext,
+		java.lang.String serviceDescription,
+		java.lang.String userCategoryMapping,
+		java.lang.String customUserProfile,
+		java.lang.String identityPropagationType, long sdLastModified,
+		int entityVersion)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace)
+		throws com.liferay.portal.SystemException;
 }

@@ -73,6 +73,20 @@ public class WSRPConfiguredProducerPersistenceTest
 		WSRPConfiguredProducer newWSRPConfiguredProducer = _persistence.create(pk);
 
 		newWSRPConfiguredProducer.setName(randomString());
+		newWSRPConfiguredProducer.setPortalId(randomString());
+		newWSRPConfiguredProducer.setNamespace(randomString());
+		newWSRPConfiguredProducer.setProducerURL(randomString());
+		newWSRPConfiguredProducer.setProducerVersion(randomString());
+		newWSRPConfiguredProducer.setProducerMarkupURL(randomString());
+		newWSRPConfiguredProducer.setStatus(nextInt());
+		newWSRPConfiguredProducer.setRegistrationData(randomString());
+		newWSRPConfiguredProducer.setRegistrationContext(randomString());
+		newWSRPConfiguredProducer.setServiceDescription(randomString());
+		newWSRPConfiguredProducer.setUserCategoryMapping(randomString());
+		newWSRPConfiguredProducer.setCustomUserProfile(randomString());
+		newWSRPConfiguredProducer.setSdLastModified(nextLong());
+		newWSRPConfiguredProducer.setIdentityPropagationType(randomString());
+		newWSRPConfiguredProducer.setEntityVersion(nextInt());
 
 		_persistence.update(newWSRPConfiguredProducer, false);
 
@@ -82,6 +96,34 @@ public class WSRPConfiguredProducerPersistenceTest
 			newWSRPConfiguredProducer.getConfiguredProducerId());
 		assertEquals(existingWSRPConfiguredProducer.getName(),
 			newWSRPConfiguredProducer.getName());
+		assertEquals(existingWSRPConfiguredProducer.getPortalId(),
+			newWSRPConfiguredProducer.getPortalId());
+		assertEquals(existingWSRPConfiguredProducer.getNamespace(),
+			newWSRPConfiguredProducer.getNamespace());
+		assertEquals(existingWSRPConfiguredProducer.getProducerURL(),
+			newWSRPConfiguredProducer.getProducerURL());
+		assertEquals(existingWSRPConfiguredProducer.getProducerVersion(),
+			newWSRPConfiguredProducer.getProducerVersion());
+		assertEquals(existingWSRPConfiguredProducer.getProducerMarkupURL(),
+			newWSRPConfiguredProducer.getProducerMarkupURL());
+		assertEquals(existingWSRPConfiguredProducer.getStatus(),
+			newWSRPConfiguredProducer.getStatus());
+		assertEquals(existingWSRPConfiguredProducer.getRegistrationData(),
+			newWSRPConfiguredProducer.getRegistrationData());
+		assertEquals(existingWSRPConfiguredProducer.getRegistrationContext(),
+			newWSRPConfiguredProducer.getRegistrationContext());
+		assertEquals(existingWSRPConfiguredProducer.getServiceDescription(),
+			newWSRPConfiguredProducer.getServiceDescription());
+		assertEquals(existingWSRPConfiguredProducer.getUserCategoryMapping(),
+			newWSRPConfiguredProducer.getUserCategoryMapping());
+		assertEquals(existingWSRPConfiguredProducer.getCustomUserProfile(),
+			newWSRPConfiguredProducer.getCustomUserProfile());
+		assertEquals(existingWSRPConfiguredProducer.getSdLastModified(),
+			newWSRPConfiguredProducer.getSdLastModified());
+		assertEquals(existingWSRPConfiguredProducer.getIdentityPropagationType(),
+			newWSRPConfiguredProducer.getIdentityPropagationType());
+		assertEquals(existingWSRPConfiguredProducer.getEntityVersion(),
+			newWSRPConfiguredProducer.getEntityVersion());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -128,6 +170,20 @@ public class WSRPConfiguredProducerPersistenceTest
 		WSRPConfiguredProducer wsrpConfiguredProducer = _persistence.create(pk);
 
 		wsrpConfiguredProducer.setName(randomString());
+		wsrpConfiguredProducer.setPortalId(randomString());
+		wsrpConfiguredProducer.setNamespace(randomString());
+		wsrpConfiguredProducer.setProducerURL(randomString());
+		wsrpConfiguredProducer.setProducerVersion(randomString());
+		wsrpConfiguredProducer.setProducerMarkupURL(randomString());
+		wsrpConfiguredProducer.setStatus(nextInt());
+		wsrpConfiguredProducer.setRegistrationData(randomString());
+		wsrpConfiguredProducer.setRegistrationContext(randomString());
+		wsrpConfiguredProducer.setServiceDescription(randomString());
+		wsrpConfiguredProducer.setUserCategoryMapping(randomString());
+		wsrpConfiguredProducer.setCustomUserProfile(randomString());
+		wsrpConfiguredProducer.setSdLastModified(nextLong());
+		wsrpConfiguredProducer.setIdentityPropagationType(randomString());
+		wsrpConfiguredProducer.setEntityVersion(nextInt());
 
 		_persistence.update(wsrpConfiguredProducer, false);
 
