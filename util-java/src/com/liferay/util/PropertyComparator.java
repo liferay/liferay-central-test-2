@@ -64,10 +64,10 @@ public class PropertyComparator implements Comparator {
 	public int compare(Object obj1, Object obj2) {
 		try {
 			for (String propertyName : _propertyNames) {
-				Object property1 =
-					PropertyUtils.getProperty(obj1, propertyName);
-				Object property2 =
-					PropertyUtils.getProperty(obj2, propertyName);
+				Object property1 = PropertyUtils.getProperty(
+					obj1, propertyName);
+				Object property2 = PropertyUtils.getProperty(
+					obj2, propertyName);
 
 				if (!_asc) {
 					Object temp = property1;
@@ -117,8 +117,8 @@ public class PropertyComparator implements Comparator {
 
 	private static Log _log = LogFactory.getLog(PropertyComparator.class);
 
+	private String[] _propertyNames;
 	private boolean _asc;
 	private boolean _caseSensitive;
-	private String[] _propertyNames;
 
 }
