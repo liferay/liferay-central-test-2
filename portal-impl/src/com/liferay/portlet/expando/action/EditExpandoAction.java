@@ -164,38 +164,6 @@ public class EditExpandoAction extends PortletAction {
 		return value;
 	}
 
-	protected void updateProperties(
-			ExpandoBridge expandoBridge, String name,
-			ActionRequest actionRequest)
-		throws Exception {
-
-		Enumeration<String> enu = actionRequest.getParameterNames();
-
-		UnicodeProperties properties = expandoBridge.getAttributeProperties(
-			name);
-
-		List<String> names = new ArrayList<String>();
-
-		while (enu.hasMoreElements()) {
-			String param = enu.nextElement();
-
-			if (param.indexOf("PropertyName(") != -1) {
-				String propertyName = ParamUtil.getString(actionRequest, param);
-
-				names.add(propertyName);
-			}
-		}
-
-		for (String propertyName : names) {
-			String value = ParamUtil.getString(
-				actionRequest, "Property(" + propertyName + ")");
-
-			properties.setProperty(propertyName, value);
-		}
-
-		expandoBridge.setAttributeProperties(name, properties);
-	}
-
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -276,7 +244,7 @@ public class EditExpandoAction extends PortletAction {
 
 		expandoBridge.addAttribute(name, type);
 
-		updateProperties(expandoBridge, name, actionRequest);
+		updateProperties(actionRequest, expandoBridge, name);
 	}
 
 	protected void deleteExpando(ActionRequest actionRequest) throws Exception {
@@ -303,7 +271,39 @@ public class EditExpandoAction extends PortletAction {
 			expandoBridge.setAttributeDefault(name, defaultValue);
 		}
 
-		updateProperties(expandoBridge, name, actionRequest);
+		updateProperties(actionRequest, expandoBridge, name);
+	}
+
+	protected void updateProperties(
+			ActionRequest actionRequest, ExpandoBridge expandoBridge,
+			String name)
+		throws Exception {
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
+
+		UnicodeProperties properties = expandoBridge.getAttributeProperties(
+			name);
+
+		List<String> propertyNames = new ArrayList<String>();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+
+			if (param.indexOf("PropertyName(") != -1) {
+				String propertyName = ParamUtil.getString(actionRequest, param);
+
+				propertyNames.add(propertyName);
+			}
+		}
+
+		for (String propertyName : propertyNames) {
+			String value = ParamUtil.getString(
+				actionRequest, "Property(" + propertyName + ")");
+
+			properties.setProperty(propertyName, value);
+		}
+
+		expandoBridge.setAttributeProperties(name, properties);
 	}
 
 }

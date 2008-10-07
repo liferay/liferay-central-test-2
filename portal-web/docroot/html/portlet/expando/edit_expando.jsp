@@ -36,11 +36,11 @@ long columnId = BeanParamUtil.getLong(column, request, "columnId");
 
 ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
 
-UnicodeProperties properties = expandoBridge.getAttributeProperties(column.getName());
-
+UnicodeProperties properties = new UnicodeProperties(true);
 Object defaultValue = null;
 
 if (column != null) {
+	properties = expandoBridge.getAttributeProperties(column.getName());
 	defaultValue = expandoBridge.getAttributeDefault(column.getName());
 }
 %>
@@ -210,7 +210,10 @@ if (column != null) {
 		</td>
 	</tr>
 </c:if>
+
 </table>
+
+<br />
 
 <liferay-ui:tabs names="properties" />
 
@@ -221,13 +224,14 @@ if (column != null) {
 	</td>
 	<td>
 		<input type="hidden" name="<portlet:namespace />PropertyName(hidden)" value="hidden" />
+
 		<%
-		boolean attributeHidden = GetterUtil.getBoolean(properties.get("hidden"), false);
+		boolean propertyHidden = GetterUtil.getBoolean(properties.get("hidden"));
 		%>
 
 		<select name="<portlet:namespace />Property(hidden)">
-			<option <%= attributeHidden ? "selected=\"selected\"" : "" %> value="1"><liferay-ui:message key="true" /></option>
-			<option <%= !attributeHidden ? "selected=\"selected\"" : "" %> value="0"><liferay-ui:message key="false" /></option>
+			<option <%= propertyHidden ? "selected=\"selected\"" : "" %> value="1"><liferay-ui:message key="true" /></option>
+			<option <%= !propertyHidden ? "selected=\"selected\"" : "" %> value="0"><liferay-ui:message key="false" /></option>
 		</select>
 	</td>
 </tr>
