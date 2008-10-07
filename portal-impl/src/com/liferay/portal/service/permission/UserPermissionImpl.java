@@ -98,9 +98,9 @@ public class UserPermissionImpl implements UserPermission {
 		long[] organizationIds, String actionId) {
 
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) &&
-			permissionChecker.hasOwnerPermission(
+			 (permissionChecker.hasOwnerPermission(
 				permissionChecker.getCompanyId(), User.class.getName(), userId,
-				userId, actionId)) ||
+				userId, actionId))) ||
 			(permissionChecker.getUserId() == userId)) {
 
 			return true;
