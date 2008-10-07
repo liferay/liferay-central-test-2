@@ -62,6 +62,7 @@ import org.apache.portals.bridges.common.ScriptPostProcess;
 public class PHPPortlet extends GenericPortlet {
 
 	public void init(PortletConfig portletConfig) throws PortletException {
+		super.init(portletConfig);
 		editUri = getInitParameter("edit-uri");
 		helpUri = getInitParameter("help-uri");
 		viewUri = getInitParameter("view-uri");
