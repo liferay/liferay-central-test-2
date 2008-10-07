@@ -39,26 +39,53 @@ import org.apache.commons.logging.LogFactory;
 public class PropertyComparator implements Comparator {
 
 	public PropertyComparator(String propertyName) {
-		_propertyNames = new String[] {propertyName};
+		this(new String[] {propertyName}, true, false);
 	}
 
 	public PropertyComparator(String[] propertyNames) {
+		this(propertyNames, true, false);
+	}
+
+	public PropertyComparator(
+		String propertyName, boolean asc, boolean caseSensitive) {
+
+		this(new String[] {propertyName}, asc, caseSensitive);
+	}
+
+	public PropertyComparator(
+		String[] propertyNames, boolean asc, boolean caseSensitive) {
+
 		_propertyNames = propertyNames;
+		_asc = asc;
+		_caseSensitive = caseSensitive;
 	}
 
 	public int compare(Object obj1, Object obj2) {
 		try {
-			for (int i = 0; i < _propertyNames.length; i++) {
-				String propertyName = _propertyNames[i];
-
+			for (String propertyName : _propertyNames) {
 				Object property1 =
 					PropertyUtils.getProperty(obj1, propertyName);
 				Object property2 =
 					PropertyUtils.getProperty(obj2, propertyName);
 
+				if (!_asc) {
+					Object temp = property1;
+
+					property1 = property2;
+					property2 = temp;
+				}
+
 				if (property1 instanceof String) {
-					int result = property1.toString().compareToIgnoreCase(
-						property2.toString());
+					int result = 0;
+
+					if (_caseSensitive) {
+						result = property1.toString().compareTo(
+							property2.toString());
+					}
+					else {
+						result = property1.toString().compareToIgnoreCase(
+							property2.toString());
+					}
 
 					if (result != 0) {
 						return result;
@@ -89,6 +116,8 @@ public class PropertyComparator implements Comparator {
 
 	private static Log _log = LogFactory.getLog(PropertyComparator.class);
 
+	private boolean _asc;
+	private boolean _caseSensitive;
 	private String[] _propertyNames;
 
 }
