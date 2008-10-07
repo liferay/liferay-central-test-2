@@ -1748,6 +1748,7 @@ item-information=项目资讯
 item-name=项目名字
 item-total=项目共计
 item=项目
+items-per-page=每页的项目
 items=项目
 ja_en=日语到英语
 jaas-is-not-configured-properly=JAAS 适当地不被配置。

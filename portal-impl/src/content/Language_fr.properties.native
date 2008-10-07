@@ -1748,6 +1748,7 @@ item-information=Information sur l'élément
 item-name=Nom d'article
 item-total=Total d'article(s)
 item=Article
+items-per-page=Articles par la page
 items=Articles
 ja_en=Japonais en Anglais
 jaas-is-not-configured-properly=JAAS n'est pas configuré correctement.

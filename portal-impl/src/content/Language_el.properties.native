@@ -1748,6 +1748,7 @@ item-information=Πληροφορίες Είδους
 item-name=Όνομα είδους
 item-total=Σύνολο είδους
 item=Στοιχείο
+items-per-page=Στοιχεία ανά σελίδα
 items=Είδη
 ja_en=Γιαπωνέζικα σε Αγγλικά
 jaas-is-not-configured-properly=JAAS δεν διαμορφώνεται κατάλληλα.

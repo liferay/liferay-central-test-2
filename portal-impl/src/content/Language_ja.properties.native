@@ -1748,6 +1748,7 @@ item-information=項目情報
 item-name=項目名前
 item-total=項目合計
 item=項目
+items-per-page=ページごとの項目
 items=項目
 ja_en=日本語から英語
 jaas-is-not-configured-properly=JAAS はきちんと形成されない。
