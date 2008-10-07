@@ -158,6 +158,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
@@ -1288,6 +1289,14 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.expandoValueLocalService = expandoValueLocalService;
 	}
 
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
 	public ExpandoValuePersistence getExpandoValuePersistence() {
 		return expandoValuePersistence;
 	}
@@ -1731,6 +1740,8 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	protected ExpandoValueService expandoValueService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
