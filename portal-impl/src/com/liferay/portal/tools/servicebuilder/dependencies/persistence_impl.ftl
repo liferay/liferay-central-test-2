@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.sql.ResultSet;
@@ -233,16 +234,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		try {
 			session = openSession();
 
-			if (merge) {
-				session.merge(${entity.varName});
-			}
-			else {
-				if (${entity.varName}.isNew()) {
-					session.save(${entity.varName});
-				}
-			}
-
-			session.flush();
+			BatchSessionUtil.update(session, ${entity.varName}, merge);
 
 			${entity.varName}.setNew(false);
 
