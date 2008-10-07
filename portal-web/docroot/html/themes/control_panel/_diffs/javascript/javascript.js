@@ -4,7 +4,6 @@ Liferay.ControlPanel = {
 
 		instance._panelMenu = jQuery('#p_p_id_87_');
 		instance._createTogglers();
-		instance._createSortables();
 	},
 
 	_createTogglers: function() {
@@ -17,13 +16,12 @@ Liferay.ControlPanel = {
 				var heading = jQuery(this);
 
 				heading.prepend('<a class="toggle-menu" href="javascript: ;"></a>');
-				heading.append('<a class="drag-handle" href="javascript: ;"></a>');
 			}
 		);
 
 		var toggleButtons = panelCategories.find('.toggle-menu');
 
-		toggleButtons.click(
+		toggleButtons.parent().click(
 			function(event) {
 				var data = {};
 
@@ -45,21 +43,6 @@ Liferay.ControlPanel = {
 						data: data
 					}
 				);
-			}
-		);
-	},
-
-	_createSortables: function() {
-		var instance = this;
-
-		var panelMenu = instance._panelMenu;
-		var panelCats = panelMenu.find('.portal-add-content');
-
-		panelCats.sortable(
-			{
-				handle: '.drag-handle',
-				items: '.panel-category',
-				axis: 'y'
 			}
 		);
 	}

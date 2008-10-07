@@ -92,7 +92,6 @@ body {
 }
 
 .lfr-ctrl-panel .lfr-add-content h2 span {
-	background: url(../images/common/category_menu_icon.png) no-repeat right 50%;
 	display: block;
 	line-height: 26px;
 	margin: 0 5px 0 0;
@@ -103,6 +102,10 @@ body {
 	margin: 0;
 	overflow: hidden;
 	padding: 3px 0;
+}
+
+.js .lfr-ctrl-panel .panel-category h2 {
+	cursor: pointer;
 }
 
 .ie6 .lfr-ctrl-panel .panel-category h2 {
@@ -147,24 +150,6 @@ body {
 .js .lfr-ctrl-panel .panel-category.closed .toggle-menu {
 	background-image: url(../images/arrows/05_right.png);
 	display: block;
-}
-
-.js .lfr-ctrl-panel .panel-category .drag-handle {
-	background: url(../images/common/category_menu_icon.png) no-repeat scroll right 50%;
-	display: block;
-	float: right;
-	height: 20px;
-	margin-right: 5px;
-	padding: 0;
-	width: 16px;
-}
-
-.lfr-ctrl-panel .portal-add-content.ui-sortable {
-	position: relative;
-}
-
-.ui-sortable-helper.panel-category {
-	width: 100%;
 }
 
 .lfr-ctrl-panel .panel-category.selected a {
