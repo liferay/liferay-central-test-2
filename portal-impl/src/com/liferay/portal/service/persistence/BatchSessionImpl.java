@@ -22,26 +22,15 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.Dialect;
-import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.dao.orm.ORMException;
+import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.PropsKeys;
-import javax.sql.DataSource;
 
 /**
  * <a href="BatchSessionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Brian Wing Shun Chan
  *
  */
