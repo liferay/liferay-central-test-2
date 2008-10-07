@@ -574,10 +574,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		BatchSessionUtil.setEnabled(true);
 
-		LayoutImporter layoutImporter = new LayoutImporter();
+		try {
+			LayoutImporter layoutImporter = new LayoutImporter();
 
-		layoutImporter.importLayouts(
-			userId, groupId, privateLayout, parameterMap, is);
+			layoutImporter.importLayouts(
+				userId, groupId, privateLayout, parameterMap, is);
+		}
+		finally {
+			BatchSessionUtil.setEnabled(false);
+		}
 	}
 
 	public void importPortletInfo(
