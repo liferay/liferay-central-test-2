@@ -197,9 +197,7 @@ public class GetArticlesAction extends Action {
 			resultEl.content().add(
 				articleDoc.getRootElement().createCopy());
 
-			if (article.isTemplateDriven()) {
-				resultEl = resultEl.element("root");
-			}
+			resultEl = resultEl.element("root");
 
 			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
