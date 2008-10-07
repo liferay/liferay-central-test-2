@@ -203,21 +203,12 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 				<liferay-ui:message key="show-feed-image" />
 			</td>
 			<td>
-				<%
-				StringBuilder sb = new StringBuilder();
 
-				sb.append("if (this.checked) {document.");
-				sb.append(renderResponse.getNamespace());
-				sb.append("fm.");
-				sb.append(renderResponse.getNamespace());
-				sb.append("feedImageAlignment.disabled = '';}else{document.");
-				sb.append(renderResponse.getNamespace());
-				sb.append("fm.");
-				sb.append(renderResponse.getNamespace());
-				sb.append("feedImageAlignment.disabled = 'disabled';}");
+				<%
+				String jsShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
 				%>
 
-				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= showFeedImage %>" onClick="<%= sb.toString() %>" />
+				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= showFeedImage %>" onClick="<%= jsShowFeedImageOnClick %>" />
 			</td>
 		</tr>
 		<tr>
