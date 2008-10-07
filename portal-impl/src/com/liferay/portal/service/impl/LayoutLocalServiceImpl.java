@@ -50,6 +50,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -570,6 +571,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
+
+		BatchSessionUtil.setEnabled(true);
 
 		LayoutImporter layoutImporter = new LayoutImporter();
 
