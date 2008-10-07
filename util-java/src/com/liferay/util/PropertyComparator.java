@@ -34,6 +34,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="PropertyComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Patrick Brady
+ * @author Raymond Augé
  *
  */
 public class PropertyComparator implements Comparator {
