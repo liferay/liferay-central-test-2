@@ -402,7 +402,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="" />
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
 		<div>
 			<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
 		</div>
