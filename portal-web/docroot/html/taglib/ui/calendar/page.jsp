@@ -57,7 +57,7 @@ int curYear = curCal.get(Calendar.YEAR);
 
 Calendar prevCal = (Calendar)selCal.clone();
 
-prevCal.add(Calendar.DATE, -1);
+prevCal.add(Calendar.MONTH, -1);
 
 int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 int weekNumber = 1;
