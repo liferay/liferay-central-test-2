@@ -296,7 +296,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 					<liferay-ui:search-container-column-jsp
 						align="right"
-						path="/html/portlet/directory/user_group_action.jsp"
+						path="/html/portlet/enterprise_admin/user_group_action.jsp"
 					/>
 				</liferay-ui:search-container-row>
 
