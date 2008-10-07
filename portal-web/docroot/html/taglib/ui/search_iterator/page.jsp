@@ -54,9 +54,13 @@ if (resultRows.isEmpty() && (headerNames == null)) {
 	headerNames.add(StringPool.BLANK);
 }
 
-String iteratorURL = searchContainer.getIteratorURL().toString();
-iteratorURL = HttpUtil.removeParameter(iteratorURL, namespace + searchContainer.getOrderByColParam());
-iteratorURL = HttpUtil.removeParameter(iteratorURL, namespace + searchContainer.getOrderByTypeParam());
+PortletURL iteratorURL = searchContainer.getIteratorURL();
+String url = StringPool.BLANK;
+
+if (iteratorURL != null) {
+	url = HttpUtil.removeParameter(iteratorURL.toString(), namespace + searchContainer.getOrderByColParam());
+	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByTypeParam());
+}
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
