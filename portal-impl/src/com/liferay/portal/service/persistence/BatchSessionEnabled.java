@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-
 /**
  * <a href="BatchSessionEnabled.java.html"><b><i>View Source</i></b></a>
  *
