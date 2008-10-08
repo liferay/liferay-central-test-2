@@ -144,11 +144,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		try {
 			session = openSession();
 
-			session.delete(${entity.varName});
-
 			if (BatchSessionUtil.isEnabled()) {
-				session.evict(${entity.varName});
+				Object staleObject = session.get(${entity.name}Impl.class, ${entity.varName}.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
 			}
+
+			session.delete(${entity.varName});
 
 			session.flush();
 
