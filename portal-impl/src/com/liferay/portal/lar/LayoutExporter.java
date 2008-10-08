@@ -299,8 +299,7 @@ public class LayoutExporter {
 				portletIds.entrySet()) {
 
 			String portletId = (String)portletIdsEntry.getValue()[0];
-			String rootPortletId = PortletConstants.getRootPortletId(
-				portletId);
+			String rootPortletId = PortletConstants.getRootPortletId(portletId);
 			long plid = (Long)portletIdsEntry.getValue()[1];
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
@@ -308,7 +307,7 @@ public class LayoutExporter {
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
 
-			boolean exportThisPortletData = MapUtil.getBoolean(
+			boolean exportCurPortletData = MapUtil.getBoolean(
 				parameterMap,
 				PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
 					rootPortletId);
@@ -316,7 +315,7 @@ public class LayoutExporter {
 			_portletExporter.exportPortlet(
 				context, layoutCache, portletId, layout, portletsEl,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
-				exportPortletData & exportThisPortletData, exportPortletSetup,
+				exportPortletData & exportCurPortletData, exportPortletSetup,
 				exportPortletUserPreferences, exportUserPermissions);
 		}
 
