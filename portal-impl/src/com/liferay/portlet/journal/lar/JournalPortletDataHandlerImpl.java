@@ -481,7 +481,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static void exportTemplate(
 			PortletDataContext context, Element templatesEl,
-			JournalTemplate template)
+			Element dlFoldersEl, Element dlFileEntriesEl, Element dlFileRanks,
+			Element igFoldersEl, Element igImagesEl, JournalTemplate template)
 		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(template.getModifiedDate())) {
@@ -1173,12 +1174,19 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			Element templatesEl = root.addElement("templates");
+			Element dlFoldersEl = root.addElement("dl-folders");
+			Element dlFilesEl = root.addElement("dl-file-entries");
+			Element dlFileRanksEl = root.addElement("dl-file-ranks");
+			Element igFoldersEl = root.addElement("ig-folders");
+			Element igImagesEl = root.addElement("ig-images");
 
 			List<JournalTemplate> templates = JournalTemplateUtil.findByGroupId(
 				context.getGroupId());
 
 			for (JournalTemplate template : templates) {
-				exportTemplate(context, templatesEl, template);
+				exportTemplate(
+					context, templatesEl, dlFoldersEl, dlFilesEl, dlFileRanksEl,
+					igFoldersEl, igImagesEl, template);
 			}
 
 			Element feedsEl = root.addElement("feeds");
@@ -1193,11 +1201,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			Element articlesEl = root.addElement("articles");
-			Element dlFoldersEl = root.addElement("dl-folders");
-			Element dlFilesEl = root.addElement("dl-file-entries");
-			Element dlFileRanksEl = root.addElement("dl-file-ranks");
-			Element igFoldersEl = root.addElement("ig-folders");
-			Element igImagesEl = root.addElement("ig-images");
 
 			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
 				List<JournalArticle> articles =
