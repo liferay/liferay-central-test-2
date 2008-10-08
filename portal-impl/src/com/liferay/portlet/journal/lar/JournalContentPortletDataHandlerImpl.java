@@ -33,6 +33,8 @@ import com.liferay.portal.lar.PortletDataException;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -45,6 +47,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
@@ -257,17 +260,6 @@ public class JournalContentPortletDataHandlerImpl
 					context, structureIds, templateIds, articleIds, articleEl);
 			}
 
-			String articleId = preferences.getValue(
-				"article-id", StringPool.BLANK);
-
-			if (Validator.isNotNull(articleId)) {
-				articleId = MapUtil.getString(articleIds, articleId, articleId);
-
-				preferences.setValue(
-					"group-id", String.valueOf(context.getGroupId()));
-				preferences.setValue("article-id", articleId);
-			}
-
 			Element dlFoldersEl = root.element("dl-folders");
 
 			List<Element> dlFolderEls = Collections.EMPTY_LIST;
@@ -387,6 +379,24 @@ public class JournalContentPortletDataHandlerImpl
 
 				IGPortletDataHandlerImpl.importImage(
 					context, igFolderPKs, image, binPath);
+			}
+
+			String articleId = preferences.getValue(
+				"article-id", StringPool.BLANK);
+
+			if (Validator.isNotNull(articleId)) {
+				articleId = MapUtil.getString(articleIds, articleId, articleId);
+
+				preferences.setValue(
+					"group-id", String.valueOf(context.getGroupId()));
+				preferences.setValue("article-id", articleId);
+
+				Layout layout = LayoutLocalServiceUtil.getLayout(
+					context.getPlid());
+
+				JournalContentSearchLocalServiceUtil.updateContentSearch(
+					context.getGroupId(), layout.isPrivateLayout(),
+					layout.getLayoutId(), StringPool.BLANK, articleId, true);
 			}
 
 			return preferences;
