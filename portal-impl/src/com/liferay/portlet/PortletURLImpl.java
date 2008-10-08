@@ -359,6 +359,14 @@ public class PortletURLImpl
 		_toString = null;
 	}
 
+	public void setDoAsUserLocale(String doAsUserLocale) {
+		_doAsUserLocale = doAsUserLocale;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public void setEncrypt(boolean encrypt) {
 		_encrypt = encrypt;
 
@@ -816,6 +824,19 @@ public class PortletURLImpl
 			}
 		}
 
+		String doAsUserLocale = _doAsUserLocale;
+
+		if (Validator.isNull(doAsUserLocale)) {
+			doAsUserLocale = themeDisplay.getDoAsUserLocale();
+		}
+
+		if (Validator.isNotNull(doAsUserLocale)) {
+			sb.append("doAsUserLocale");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, doAsUserLocale));
+			sb.append(StringPool.AMPERSAND);
+		}
+
 		if (_copyCurrentRenderParameters) {
 			Enumeration<String> enu = _request.getParameterNames();
 
@@ -1010,6 +1031,7 @@ public class PortletURLImpl
 	private String _cacheability = ResourceURL.PAGE;
 	private boolean _copyCurrentRenderParameters;
 	private long _doAsUserId;
+	private String _doAsUserLocale;
 	private boolean _encrypt;
 	private boolean _escapeXml = PropsValues.PORTLET_URL_ESCAPE_XML;
 	private Set<String> _parametersIncludedInPath;

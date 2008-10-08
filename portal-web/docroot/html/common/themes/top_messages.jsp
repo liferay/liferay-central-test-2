@@ -49,5 +49,19 @@
 		</span>
 
 		<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
+
+		<c:if test="<%= !realUser.getLocale().equals(user.getLocale()) %>">
+			&nbsp;| &nbsp;
+			<label for="doAsUserLocale"><liferay-ui:message key="language" /></label>
+
+			<form action="<%= PortalUtil.getCurrentURL(request) %>" method="post" style="display: inline">
+				<select name="doAsUserLocale">
+					<option <%= (locale.getLanguage().equals(realUser.getLocale().getLanguage()) && locale.getCountry().equals(realUser.getLocale().getCountry())) ? "selected" : "" %> value="<%= realUser.getLocale().getLanguage() + "_" + realUser.getLocale().getCountry() %>"><%= realUser.getLocale().getDisplayName(realUser.getLocale()) %></option>
+					<option <%= (locale.getLanguage().equals(user.getLocale().getLanguage()) && locale.getCountry().equals(user.getLocale().getCountry())) ? "selected" : "" %> value="<%= user.getLocale().getLanguage() + "_" + user.getLocale().getCountry() %>"><%= user.getLocale().getDisplayName(user.getLocale()) %></option>
+				</select>
+
+				<input type="submit" value="<liferay-ui:message key="change" />" />
+			</form>
+		</c:if>
 	</div>
 </c:if>

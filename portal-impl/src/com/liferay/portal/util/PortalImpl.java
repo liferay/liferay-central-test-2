@@ -925,12 +925,18 @@ public class PortalImpl implements Portal {
 				layout, themeDisplay);
 
 			if (Validator.isNotNull(layoutFriendlyURL)) {
-				if (doAsUser &&
-					Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+				if (doAsUser) {
+					if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+						layoutFriendlyURL = HttpUtil.addParameter(
+							layoutFriendlyURL, "doAsUserId",
+							themeDisplay.getDoAsUserId());
+					}
 
-					layoutFriendlyURL = HttpUtil.addParameter(
-						layoutFriendlyURL, "doAsUserId",
-						themeDisplay.getDoAsUserId());
+					if (Validator.isNotNull(themeDisplay.getDoAsUserLocale())) {
+						layoutFriendlyURL = HttpUtil.addParameter(
+							layoutFriendlyURL, "doAsUserLocale",
+							themeDisplay.getDoAsUserLocale());
+					}
 				}
 
 				return layoutFriendlyURL;
@@ -939,9 +945,17 @@ public class PortalImpl implements Portal {
 
 		String layoutURL = getLayoutActualURL(layout);
 
-		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-			layoutURL = HttpUtil.addParameter(
-				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
+		if (doAsUser) {
+			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+				layoutURL = HttpUtil.addParameter(
+					layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
+			}
+
+			if (Validator.isNotNull(themeDisplay.getDoAsUserLocale())) {
+				layoutURL = HttpUtil.addParameter(
+					layoutURL, "doAsUserLocale",
+					themeDisplay.getDoAsUserLocale());
+			}
 		}
 
 		return layoutURL;

@@ -229,6 +229,12 @@ public class LayoutAction extends Action {
 				forwardURL = HttpUtil.addParameter(
 					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
 			}
+
+			if (Validator.isNotNull(themeDisplay.getDoAsUserLocale())) {
+				forwardURL = HttpUtil.addParameter(
+					forwardURL, "doAsUserLocale", 
+					themeDisplay.getDoAsUserLocale());
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

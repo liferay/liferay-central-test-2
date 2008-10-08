@@ -75,6 +75,8 @@ public interface LiferayPortletURL
 
 	public void setDoAsUserId(long doAsUserId);
 
+	public void setDoAsUserLocale(String doAsUserLocale);
+
 	public void setEncrypt(boolean encrypt);
 
 	public void setEscapeXml(boolean escapeXml);

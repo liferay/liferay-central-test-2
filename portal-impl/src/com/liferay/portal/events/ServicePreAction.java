@@ -914,6 +914,8 @@ public class ServicePreAction extends Action {
 
 		String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 
+		String doAsUserLocale = ParamUtil.getString(request, "doAsUserLocale");
+
 		// Permission checker
 
 		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
@@ -924,6 +926,10 @@ public class ServicePreAction extends Action {
 		// Locale
 
 		Locale locale = (Locale)session.getAttribute(Globals.LOCALE_KEY);
+
+		if (Validator.isNotNull(doAsUserLocale)) {
+			locale = LocaleUtil.fromLanguageId(doAsUserLocale);
+		}
 
 		if (Validator.isNotNull(i18nLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(i18nLanguageId);
@@ -1254,6 +1260,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setUser(user);
 		themeDisplay.setRealUser(realUser);
 		themeDisplay.setDoAsUserId(doAsUserId);
+		themeDisplay.setDoAsUserLocale(doAsUserLocale);
 		themeDisplay.setLayoutSetLogo(layoutSetLogo);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setLayouts(layouts);
