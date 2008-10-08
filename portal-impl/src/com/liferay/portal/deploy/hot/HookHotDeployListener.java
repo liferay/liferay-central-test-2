@@ -178,7 +178,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		EventsContainer eventsContainer = new EventsContainer();
 
-		_eventsContainerMap.put(servletContextName, new EventsContainer());
+		_eventsContainerMap.put(servletContextName, eventsContainer);
 
 		List<Element> eventEls = root.elements("event");
 
@@ -197,7 +197,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			new ModelListenersContainer();
 
 		_modelListenersContainerMap.put(
-			servletContextName, new ModelListenersContainer());
+			servletContextName, modelListenersContainer);
 
 		List<Element> modelListenerEls = root.elements("model-listener");
 
