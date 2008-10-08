@@ -100,6 +100,15 @@ public class SessionImpl implements Session {
 		}
 	}
 
+	public void evict(Object object) throws ORMException {
+		try {
+			_session.evict(object);
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
 	public void flush() throws ORMException {
 		try {
 			_session.flush();
