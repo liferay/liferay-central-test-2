@@ -1123,7 +1123,9 @@ public class JournalUtil {
 			themeDisplayEl.elementText("path-friendly-url-public"));
 		tokens.put("main_path", themeDisplayEl.elementText("path-main"));
 		tokens.put("portal_ctx", themeDisplayEl.elementText("path-context"));
-		tokens.put("portal_url", themeDisplayEl.elementText("url-portal"));
+		tokens.put(
+			"portal_url",
+			HttpUtil.removeProtocol(themeDisplayEl.elementText("url-portal")));
 		tokens.put("root_path", themeDisplayEl.elementText("path-context"));
 		tokens.put(
 			"theme_image_path",
