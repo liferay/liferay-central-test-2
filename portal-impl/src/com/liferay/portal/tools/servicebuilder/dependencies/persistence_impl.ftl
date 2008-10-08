@@ -145,10 +145,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			session = openSession();
 
 			if (BatchSessionUtil.isEnabled()) {
-				${entity.name} contained = (${entity.name})session.get(${entity.name}Impl.class, ${entity.varName}.getPrimaryKeyObj());
+				Object staleObject = session.get(${entity.name}Impl.class, ${entity.varName}.getPrimaryKeyObj());
 
-				if (contained != null) {
-					session.evict(contained);
+				if (staleObject != null) {
+					session.evict(staleObject);
 				}
 			}
 
