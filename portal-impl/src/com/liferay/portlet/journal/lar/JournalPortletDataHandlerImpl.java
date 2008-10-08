@@ -512,6 +512,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			context.addZipEntry(smallImagePath, smallImage.getTextObj());
 		}
 
+		if (context.getBooleanParameter(_NAMESPACE, "embedded-assets")) {
+			String content = template.getXsl();
+
+			content = exportDLFileEntries(
+				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks, content);
+			content = exportIGImages(context, igFoldersEl, igImagesEl, content);
+
+			template.setXsl(content);
+		}
+
 		template.setUserUuid(template.getUserUuid());
 
 		context.addZipEntry(path, template);
