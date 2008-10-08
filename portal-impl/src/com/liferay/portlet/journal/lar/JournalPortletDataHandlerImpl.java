@@ -495,6 +495,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			return;
 		}
 
+		// Clone this template to make sure changes to its content are never
+		// persisted
+
+		template = (JournalTemplate)template.clone();
+
 		Element templateEl = templatesEl.addElement("template");
 
 		templateEl.addAttribute("path", path);
