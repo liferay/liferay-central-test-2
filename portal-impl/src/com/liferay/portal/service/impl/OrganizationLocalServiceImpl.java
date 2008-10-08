@@ -679,9 +679,7 @@ public class OrganizationLocalServiceImpl
 				throw new OrganizationParentException();
 			}
 
-			if (!ArrayUtil.contains(
-					childrenTypes, parentOrganization.getType())) {
-
+			if (!ArrayUtil.contains(childrenTypes, type)) {
 				throw new OrganizationParentException(
 					"Type " + type + " not allowed as child of " +
 						parentOrganization.getType());
