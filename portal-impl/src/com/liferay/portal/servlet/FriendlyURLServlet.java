@@ -62,13 +62,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class FriendlyURLServlet extends HttpServlet {
 
-	public void init(ServletConfig filterConfig) throws ServletException {
-		super.init(filterConfig);
+	public void init(ServletConfig servletConfig) throws ServletException {
+		super.init(servletConfig);
 
 		_private = GetterUtil.getBoolean(
-			filterConfig.getInitParameter("private"));
+			servletConfig.getInitParameter("private"));
 		_user = GetterUtil.getBoolean(
-			filterConfig.getInitParameter("user"));
+			servletConfig.getInitParameter("user"));
 	}
 
 	public void service(

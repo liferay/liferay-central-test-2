@@ -59,11 +59,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageServlet extends HttpServlet {
 
-	public void init(ServletConfig filterConfig) throws ServletException {
-		super.init(filterConfig);
+	public void init(ServletConfig servletConfig) throws ServletException {
+		super.init(servletConfig);
 
 		_lastModified = GetterUtil.getBoolean(
-			filterConfig.getInitParameter("last_modified"), true);
+			servletConfig.getInitParameter("last_modified"), true);
 	}
 
 	public void service(

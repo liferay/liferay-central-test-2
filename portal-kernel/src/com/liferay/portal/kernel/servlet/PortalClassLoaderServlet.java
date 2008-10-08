@@ -60,8 +60,8 @@ public class PortalClassLoaderServlet
 		}
 	}
 
-	public void init(ServletConfig filterConfig) {
-		_filterConfig = filterConfig;
+	public void init(ServletConfig servletConfig) {
+		_servletConfig = servletConfig;
 
 		PortalInitableUtil.init(this);
 	}
@@ -75,13 +75,13 @@ public class PortalClassLoaderServlet
 		try {
 			Thread.currentThread().setContextClassLoader(portalClassLoader);
 
-			String servletClass = _filterConfig.getInitParameter(
+			String servletClass = _servletConfig.getInitParameter(
 				"servlet-class");
 
 			_servlet = (HttpServlet)portalClassLoader.loadClass(
 				servletClass).newInstance();
 
-			_servlet.init(_filterConfig);
+			_servlet.init(_servletConfig);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -113,6 +113,6 @@ public class PortalClassLoaderServlet
 		LogFactoryUtil.getLog(PortalClassLoaderServlet.class);
 
 	private HttpServlet _servlet;
-	private ServletConfig _filterConfig;
+	private ServletConfig _servletConfig;
 
 }
