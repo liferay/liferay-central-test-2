@@ -82,7 +82,8 @@ public class PortletURLAction extends Action {
 		boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
 			request, "copyCurrentRenderParameters");
 		long doAsUserId = ParamUtil.getLong(request, "doAsUserId");
-		String doAsUserLocale = ParamUtil.getString(request, "doAsUserLocale");
+		String doAsUserLanguageId = ParamUtil.getString(
+			request, "doAsUserLanguageId");
 		boolean encrypt = ParamUtil.getBoolean(request, "encrypt");
 		boolean escapeXml = ParamUtil.getBoolean(request, "escapeXml");
 		String lifecycle = ParamUtil.getString(request, "lifecycle");
@@ -110,8 +111,8 @@ public class PortletURLAction extends Action {
 			portletURL.setDoAsUserId(doAsUserId);
 		}
 
-		if (Validator.isNotNull(doAsUserLocale)) {
-			portletURL.setDoAsUserLocale(doAsUserLocale);
+		if (Validator.isNotNull(doAsUserLanguageId)) {
+			portletURL.setDoAsUserLanguageId(doAsUserLanguageId);
 		}
 
 		portletURL.setEncrypt(encrypt);

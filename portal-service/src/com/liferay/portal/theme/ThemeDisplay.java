@@ -180,12 +180,12 @@ public class ThemeDisplay implements Serializable {
 		_doAsUserId = doAsUserId;
 	}
 
-	public String getDoAsUserLocale() {
-		return _doAsUserLocale;
+	public String getDoAsUserLanguageId() {
+		return _doAsUserLanguageId;
 	}
 
-	public void setDoAsUserLocale(String doAsUserLocale) {
-		_doAsUserLocale = doAsUserLocale;
+	public void setDoAsUserLanguageId(String doAsUserLanguageId) {
+		_doAsUserLanguageId = doAsUserLanguageId;
 	}
 
 	public boolean isImpersonated() {
@@ -995,7 +995,7 @@ public class ThemeDisplay implements Serializable {
 		_user = null;
 		_realUser = null;
 		_doAsUserId = StringPool.BLANK;
-		_doAsUserLocale = StringPool.BLANK;
+		_doAsUserLanguageId = StringPool.BLANK;
 		_layoutSetLogo = StringPool.BLANK;
 		_layout = null;
 		_layouts = null;
@@ -1094,7 +1094,7 @@ public class ThemeDisplay implements Serializable {
 	private User _user;
 	private User _realUser;
 	private String _doAsUserId = StringPool.BLANK;
-	private String _doAsUserLocale = StringPool.BLANK;
+	private String _doAsUserLanguageId = StringPool.BLANK;
 	private Contact _contact;
 	private String _layoutSetLogo = StringPool.BLANK;
 	private Layout _layout;

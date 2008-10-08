@@ -144,7 +144,8 @@ public class UpdatePageAction extends JSONAction {
 		throws Exception {
 
 		String doAsUserId = ParamUtil.getString(request, "doAsUserId");
-		String doAsUserLocale = ParamUtil.getString(request, "doAsUserLocale");
+		String doAsUserLanguageId = ParamUtil.getString(
+			request, "doAsUserLanguageId");
 
 		long groupId = ParamUtil.getLong(request, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
@@ -176,9 +177,10 @@ public class UpdatePageAction extends JSONAction {
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 		}
 
-		if (Validator.isNotNull(doAsUserLocale)) {
+		if (Validator.isNotNull(doAsUserLanguageId)) {
 			layoutURL = HttpUtil.addParameter(
-				layoutURL, "doAsUserLocale", themeDisplay.getDoAsUserLocale());
+				layoutURL, "doAsUserLanguageId",
+				themeDisplay.getDoAsUserLanguageId());
 		}
 
 		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};

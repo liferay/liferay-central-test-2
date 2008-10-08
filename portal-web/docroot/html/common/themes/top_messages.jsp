@@ -50,17 +50,23 @@
 
 		<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
 
-		<c:if test="<%= !realUser.getLocale().equals(user.getLocale()) %>">
-			&nbsp;| &nbsp;
-			<label for="doAsUserLocale"><liferay-ui:message key="language" /></label>
+		<%
+		Locale realUserLocale = realUser.getLocale();
+		Locale userLocale = user.getLocale();
+		%>
 
-			<form action="<%= PortalUtil.getCurrentURL(request) %>" method="post" style="display: inline">
-				<select name="doAsUserLocale">
-					<option <%= (locale.getLanguage().equals(realUser.getLocale().getLanguage()) && locale.getCountry().equals(realUser.getLocale().getCountry())) ? "selected" : "" %> value="<%= realUser.getLocale().getLanguage() + "_" + realUser.getLocale().getCountry() %>"><%= realUser.getLocale().getDisplayName(realUser.getLocale()) %></option>
-					<option <%= (locale.getLanguage().equals(user.getLocale().getLanguage()) && locale.getCountry().equals(user.getLocale().getCountry())) ? "selected" : "" %> value="<%= user.getLocale().getLanguage() + "_" + user.getLocale().getCountry() %>"><%= user.getLocale().getDisplayName(user.getLocale()) %></option>
-				</select>
+		<c:if test="<%= !realUserLocale.equals(userLocale) %>">
+			<label for="doAsUserLanguageId"><liferay-ui:message key="language" /></label>
 
-				<input type="submit" value="<liferay-ui:message key="change" />" />
+			<form action="<%= PortalUtil.getCurrentURL(request) %>" method="post" style="display: inline;">
+
+			<select name="doAsUserLanguageId">
+				<option <%= (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) ? "selected" : "" %> value="<%= realUserLocale.getLanguage() + "_" + realUserLocale.getCountry() %>"><%= realUserLocale.getDisplayName(realUserLocale) %></option>
+				<option <%= (locale.getLanguage().equals(userLocale.getLanguage()) && locale.getCountry().equals(userLocale.getCountry())) ? "selected" : "" %> value="<%= userLocale.getLanguage() + "_" + userLocale.getCountry() %>"><%= userLocale.getDisplayName(userLocale) %></option>
+			</select>
+
+			<input type="submit" value="<liferay-ui:message key="change" />" />
+
 			</form>
 		</c:if>
 	</div>

@@ -230,10 +230,10 @@ public class LayoutAction extends Action {
 					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
 			}
 
-			if (Validator.isNotNull(themeDisplay.getDoAsUserLocale())) {
+			if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
 				forwardURL = HttpUtil.addParameter(
-					forwardURL, "doAsUserLocale", 
-					themeDisplay.getDoAsUserLocale());
+					forwardURL, "doAsUserLanguageId",
+					themeDisplay.getDoAsUserLanguageId());
 			}
 		}
 

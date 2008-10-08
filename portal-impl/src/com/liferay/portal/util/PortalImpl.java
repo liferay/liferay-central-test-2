@@ -932,10 +932,12 @@ public class PortalImpl implements Portal {
 							themeDisplay.getDoAsUserId());
 					}
 
-					if (Validator.isNotNull(themeDisplay.getDoAsUserLocale())) {
+					if (Validator.isNotNull(
+							themeDisplay.getDoAsUserLanguageId())) {
+
 						layoutFriendlyURL = HttpUtil.addParameter(
-							layoutFriendlyURL, "doAsUserLocale",
-							themeDisplay.getDoAsUserLocale());
+							layoutFriendlyURL, "doAsUserLanguageId",
+							themeDisplay.getDoAsUserLanguageId());
 					}
 				}
 
@@ -951,10 +953,10 @@ public class PortalImpl implements Portal {
 					layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 			}
 
-			if (Validator.isNotNull(themeDisplay.getDoAsUserLocale())) {
+			if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
 				layoutURL = HttpUtil.addParameter(
-					layoutURL, "doAsUserLocale",
-					themeDisplay.getDoAsUserLocale());
+					layoutURL, "doAsUserLanguageId",
+					themeDisplay.getDoAsUserLanguageId());
 			}
 		}
 
