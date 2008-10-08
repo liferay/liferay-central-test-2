@@ -270,7 +270,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Group scopeGroup = layout.getScopeGroup();
 
 		if (scopeGroup != null) {
-			groupLocalService.deleteGroup(scopeGroup);
+			groupLocalService.deleteGroup(scopeGroup.getGroupId());
 		}
 
 		// Resources
