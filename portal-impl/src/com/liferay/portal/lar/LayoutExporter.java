@@ -41,6 +41,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
@@ -298,6 +299,8 @@ public class LayoutExporter {
 				portletIds.entrySet()) {
 
 			String portletId = (String)portletIdsEntry.getValue()[0];
+			String rootPortletId = PortletConstants.getRootPortletId(
+				portletId);
 			long plid = (Long)portletIdsEntry.getValue()[1];
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
@@ -305,10 +308,15 @@ public class LayoutExporter {
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
 
+			boolean exportThisPortletData = MapUtil.getBoolean(
+				parameterMap,
+				PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
+					rootPortletId);
+
 			_portletExporter.exportPortlet(
 				context, layoutCache, portletId, layout, portletsEl,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
-				exportPortletData, exportPortletSetup,
+				exportPortletData & exportThisPortletData, exportPortletSetup,
 				exportPortletUserPreferences, exportUserPermissions);
 		}
 
