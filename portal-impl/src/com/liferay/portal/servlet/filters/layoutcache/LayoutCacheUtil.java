@@ -54,8 +54,8 @@ public class LayoutCacheUtil {
 
 		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Cleared layout cache for " + companyId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Cleared layout cache for " + companyId);
 		}
 	}
 
