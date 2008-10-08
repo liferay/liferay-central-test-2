@@ -2355,7 +2355,7 @@ public class PortalImpl implements Portal {
 		FriendlyURLMapper friendlyURLMapper =
 			portlet.getFriendlyURLMapperInstance();
 
-		if (friendlyURLMapper != null) {
+		if ((friendlyURLMapper != null) && (!portlet.isInstanceable())) {
 			sb.append(friendlyURLMapper.getMapping());
 		}
 		else {
