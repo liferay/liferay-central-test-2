@@ -148,6 +148,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(SCProductVersionImpl.class,
+						scProductVersion.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(scProductVersion);
 
 			session.flush();

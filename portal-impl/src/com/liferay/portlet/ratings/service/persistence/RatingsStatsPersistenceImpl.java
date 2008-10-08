@@ -127,6 +127,15 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(RatingsStatsImpl.class,
+						ratingsStats.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(ratingsStats);
 
 			session.flush();

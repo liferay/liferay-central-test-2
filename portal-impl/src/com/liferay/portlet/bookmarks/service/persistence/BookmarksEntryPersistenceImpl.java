@@ -133,6 +133,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(BookmarksEntryImpl.class,
+						bookmarksEntry.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(bookmarksEntry);
 
 			session.flush();

@@ -126,6 +126,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(PasswordPolicyImpl.class,
+						passwordPolicy.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(passwordPolicy);
 
 			session.flush();

@@ -131,6 +131,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(IGFolderImpl.class,
+						igFolder.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(igFolder);
 
 			session.flush();

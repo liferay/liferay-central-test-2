@@ -133,6 +133,15 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(JournalFeedImpl.class,
+						journalFeed.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(journalFeed);
 
 			session.flush();

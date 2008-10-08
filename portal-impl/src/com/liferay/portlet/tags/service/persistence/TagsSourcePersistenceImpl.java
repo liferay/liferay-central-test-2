@@ -124,6 +124,15 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(TagsSourceImpl.class,
+						tagsSource.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(tagsSource);
 
 			session.flush();

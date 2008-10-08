@@ -132,6 +132,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(MBMessageImpl.class,
+						mbMessage.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(mbMessage);
 
 			session.flush();

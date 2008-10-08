@@ -134,6 +134,15 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(DLFileEntryImpl.class,
+						dlFileEntry.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(dlFileEntry);
 
 			session.flush();

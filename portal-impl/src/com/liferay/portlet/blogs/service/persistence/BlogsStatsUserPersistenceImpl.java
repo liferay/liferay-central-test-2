@@ -128,6 +128,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(BlogsStatsUserImpl.class,
+						blogsStatsUser.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(blogsStatsUser);
 
 			session.flush();

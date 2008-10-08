@@ -128,6 +128,15 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(ShoppingCouponImpl.class,
+						shoppingCoupon.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(shoppingCoupon);
 
 			session.flush();

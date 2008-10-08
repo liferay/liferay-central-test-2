@@ -148,6 +148,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(SCFrameworkVersionImpl.class,
+						scFrameworkVersion.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(scFrameworkVersion);
 
 			session.flush();

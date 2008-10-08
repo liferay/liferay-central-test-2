@@ -128,6 +128,15 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(MBStatsUserImpl.class,
+						mbStatsUser.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(mbStatsUser);
 
 			session.flush();

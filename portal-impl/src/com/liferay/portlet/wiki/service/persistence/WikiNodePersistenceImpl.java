@@ -131,6 +131,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(WikiNodeImpl.class,
+						wikiNode.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(wikiNode);
 
 			session.flush();

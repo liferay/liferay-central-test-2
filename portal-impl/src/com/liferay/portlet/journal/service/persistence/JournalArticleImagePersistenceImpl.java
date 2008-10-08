@@ -129,6 +129,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(JournalArticleImageImpl.class,
+						journalArticleImage.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(journalArticleImage);
 
 			session.flush();

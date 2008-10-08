@@ -126,6 +126,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(UserTrackerPathImpl.class,
+						userTrackerPath.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(userTrackerPath);
 
 			session.flush();

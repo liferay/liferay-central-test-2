@@ -129,6 +129,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(JournalContentSearchImpl.class,
+						journalContentSearch.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(journalContentSearch);
 
 			session.flush();

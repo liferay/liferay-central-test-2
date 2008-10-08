@@ -130,6 +130,15 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(SocialActivityImpl.class,
+						socialActivity.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(socialActivity);
 
 			session.flush();

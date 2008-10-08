@@ -128,6 +128,15 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(TagsPropertyImpl.class,
+						tagsProperty.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(tagsProperty);
 
 			session.flush();

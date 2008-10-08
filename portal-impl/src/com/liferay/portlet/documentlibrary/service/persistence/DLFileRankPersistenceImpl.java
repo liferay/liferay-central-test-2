@@ -126,6 +126,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(DLFileRankImpl.class,
+						dlFileRank.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(dlFileRank);
 
 			session.flush();

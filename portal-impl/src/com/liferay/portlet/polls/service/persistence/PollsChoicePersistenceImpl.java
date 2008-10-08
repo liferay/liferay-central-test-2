@@ -133,6 +133,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(PollsChoiceImpl.class,
+						pollsChoice.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(pollsChoice);
 
 			session.flush();

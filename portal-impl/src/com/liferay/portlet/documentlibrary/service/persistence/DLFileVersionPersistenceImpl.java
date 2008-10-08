@@ -128,6 +128,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(DLFileVersionImpl.class,
+						dlFileVersion.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(dlFileVersion);
 
 			session.flush();

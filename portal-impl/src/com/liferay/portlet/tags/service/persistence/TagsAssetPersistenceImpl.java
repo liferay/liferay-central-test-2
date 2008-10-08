@@ -145,6 +145,15 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(TagsAssetImpl.class,
+						tagsAsset.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(tagsAsset);
 
 			session.flush();

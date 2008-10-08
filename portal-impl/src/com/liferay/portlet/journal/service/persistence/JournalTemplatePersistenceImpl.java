@@ -133,6 +133,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(JournalTemplateImpl.class,
+						journalTemplate.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(journalTemplate);
 
 			session.flush();

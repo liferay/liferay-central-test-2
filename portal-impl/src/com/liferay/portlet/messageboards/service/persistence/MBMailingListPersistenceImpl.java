@@ -134,6 +134,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(MBMailingListImpl.class,
+						mbMailingList.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(mbMailingList);
 
 			session.flush();

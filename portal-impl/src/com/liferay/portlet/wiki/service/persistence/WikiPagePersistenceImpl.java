@@ -131,6 +131,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(WikiPageImpl.class,
+						wikiPage.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(wikiPage);
 
 			session.flush();

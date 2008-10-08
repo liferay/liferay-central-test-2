@@ -126,6 +126,15 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(ExpandoRowImpl.class,
+						expandoRow.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(expandoRow);
 
 			session.flush();

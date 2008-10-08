@@ -129,6 +129,15 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(WikiPageResourceImpl.class,
+						wikiPageResource.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(wikiPageResource);
 
 			session.flush();

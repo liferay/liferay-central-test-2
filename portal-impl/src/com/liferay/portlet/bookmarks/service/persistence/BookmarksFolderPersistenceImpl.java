@@ -134,6 +134,15 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(BookmarksFolderImpl.class,
+						bookmarksFolder.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(bookmarksFolder);
 
 			session.flush();

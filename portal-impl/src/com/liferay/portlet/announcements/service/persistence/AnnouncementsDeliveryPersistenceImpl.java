@@ -129,6 +129,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(AnnouncementsDeliveryImpl.class,
+						announcementsDelivery.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(announcementsDelivery);
 
 			session.flush();

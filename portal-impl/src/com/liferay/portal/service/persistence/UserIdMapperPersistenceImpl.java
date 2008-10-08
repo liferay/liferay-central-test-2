@@ -126,6 +126,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(UserIdMapperImpl.class,
+						userIdMapper.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(userIdMapper);
 
 			session.flush();

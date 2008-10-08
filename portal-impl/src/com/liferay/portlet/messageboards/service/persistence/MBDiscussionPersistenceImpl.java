@@ -128,6 +128,15 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(MBDiscussionImpl.class,
+						mbDiscussion.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(mbDiscussion);
 
 			session.flush();

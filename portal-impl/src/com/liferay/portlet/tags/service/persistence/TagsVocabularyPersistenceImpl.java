@@ -128,6 +128,15 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(TagsVocabularyImpl.class,
+						tagsVocabulary.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(tagsVocabulary);
 
 			session.flush();

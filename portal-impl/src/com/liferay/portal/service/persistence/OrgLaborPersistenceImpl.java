@@ -123,6 +123,15 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(OrgLaborImpl.class,
+						orgLabor.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(orgLabor);
 
 			session.flush();

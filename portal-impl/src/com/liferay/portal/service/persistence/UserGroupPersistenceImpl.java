@@ -143,6 +143,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(UserGroupImpl.class,
+						userGroup.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(userGroup);
 
 			session.flush();

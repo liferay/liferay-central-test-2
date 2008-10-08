@@ -134,6 +134,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(SocialRequestImpl.class,
+						socialRequest.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(socialRequest);
 
 			session.flush();

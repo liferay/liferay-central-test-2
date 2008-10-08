@@ -127,6 +127,15 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(MembershipRequestImpl.class,
+						membershipRequest.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(membershipRequest);
 
 			session.flush();

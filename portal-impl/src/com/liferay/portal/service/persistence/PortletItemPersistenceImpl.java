@@ -126,6 +126,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(PortletItemImpl.class,
+						portletItem.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(portletItem);
 
 			session.flush();

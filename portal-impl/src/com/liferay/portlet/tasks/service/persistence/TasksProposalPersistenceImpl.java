@@ -128,6 +128,15 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(TasksProposalImpl.class,
+						tasksProposal.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(tasksProposal);
 
 			session.flush();

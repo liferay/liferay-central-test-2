@@ -127,6 +127,15 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(OrgGroupPermissionImpl.class,
+						orgGroupPermission.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(orgGroupPermission);
 
 			session.flush();

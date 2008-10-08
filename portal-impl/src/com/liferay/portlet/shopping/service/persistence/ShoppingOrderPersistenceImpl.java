@@ -127,6 +127,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(ShoppingOrderImpl.class,
+						shoppingOrder.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(shoppingOrder);
 
 			session.flush();

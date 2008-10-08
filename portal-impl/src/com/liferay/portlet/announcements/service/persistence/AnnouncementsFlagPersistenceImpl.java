@@ -129,6 +129,15 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			if (BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(AnnouncementsFlagImpl.class,
+						announcementsFlag.getPrimaryKeyObj());
+
+				if (staleObject != null) {
+					session.evict(staleObject);
+				}
+			}
+
 			session.delete(announcementsFlag);
 
 			session.flush();
