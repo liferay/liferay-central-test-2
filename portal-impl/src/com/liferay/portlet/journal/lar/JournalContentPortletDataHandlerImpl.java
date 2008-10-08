@@ -186,7 +186,8 @@ public class JournalContentPortletDataHandlerImpl
 					article.getGroupId(), templateId);
 
 				JournalPortletDataHandlerImpl.exportTemplate(
-					context, root, template);
+					context, root, dlFoldersEl, dlFilesEl, dlFileRanksEl,
+					igFoldersEl, igImagesEl, template);
 			}
 
 			return doc.formattedString();
