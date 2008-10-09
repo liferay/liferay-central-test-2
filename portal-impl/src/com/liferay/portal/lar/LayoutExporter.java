@@ -312,10 +312,16 @@ public class LayoutExporter {
 				PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
 					rootPortletId);
 
+			boolean exportCurPortletSetup = MapUtil.getBoolean(
+				parameterMap,
+				PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE +
+					rootPortletId);
+
 			_portletExporter.exportPortlet(
 				context, layoutCache, portletId, layout, portletsEl,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
-				exportPortletData & exportCurPortletData, exportPortletSetup,
+				exportPortletData & exportCurPortletData,
+				exportPortletSetup & exportCurPortletSetup,
 				exportPortletUserPreferences, exportUserPermissions);
 		}
 
