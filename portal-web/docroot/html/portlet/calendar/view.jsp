@@ -39,7 +39,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 <form method="post" name="<portlet:namespace />fm">
 
-<liferay-util:include page="/html/portlet/calendar/tabs1.jsp" />
+<c:if test='<%= windowState.equals(WindowState.MAXIMIZED) || (!tabs1.equals("summary")) || (tabs1.equals("summary") && summaryTabShowTabs) %>'>
+	<liferay-util:include page="/html/portlet/calendar/tabs1.jsp" />
+</c:if>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("summary") %>'>

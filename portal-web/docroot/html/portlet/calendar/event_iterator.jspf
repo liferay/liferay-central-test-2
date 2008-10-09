@@ -22,75 +22,118 @@
  */
 %>
 
-<%
-SearchContainer searchContainer = new SearchContainer();
+<liferay-ui:search-container emptyResultsMessage="there-are-no-events-on-this-day" >
+	<liferay-ui:search-container-results>
 
-List<String> headerNames = new ArrayList<String>();
+		<%
+		results = CalEventLocalServiceUtil.getEvents(scopeGroupId, selCal, eventType);
 
-headerNames.add("time");
-headerNames.add("title");
-headerNames.add("type");
-headerNames.add(StringPool.BLANK);
+		Collections.sort(results, new EventTimeComparator(timeZone, locale));
 
-searchContainer.setHeaderNames(headerNames);
-searchContainer.setEmptyResultsMessage("there-are-no-events-on-this-day");
+		total = results.size();
 
-List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, selCal, eventType);
+		pageContext.setAttribute("results", results);
+		pageContext.setAttribute("total", total);
+		%>
 
-Collections.sort(results, new EventTimeComparator(timeZone, locale));
+	</liferay-ui:search-container-results>
+	<liferay-ui:search-container-row
+		className="com.liferay.portlet.calendar.model.CalEvent"
+		escapedModel="<%= true %>"
+		keyProperty="eventId"
+		modelVar="event"
+	>
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+			<portlet:param name="struts_action" value="/calendar/view_event" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
+		</portlet:renderURL>
 
-List resultRows = searchContainer.getResultRows();
+		<c:choose>
+			<c:when test="<%= showVerticalOrientation %>">
 
-for (int i = 0; i < results.size(); i++) {
-	CalEvent event = (CalEvent)results.get(i);
+				<liferay-ui:search-container-column-text
+					buffer="buffer"
+					name="events"
+					href="<%= rowURL %>"
+				>
 
-	event = event.toEscapedModel();
+					<%
+					boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
 
-	ResultRow row = new ResultRow(event, event.getEventId(), i);
+					if (allDay) {
+						buffer.append(LanguageUtil.get(pageContext, "all-day"));
+					}
+					else {
+						if (event.isTimeZoneSensitive()) {
+							buffer.append(dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) + " &#150; " + dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)));
+						}
+						else {
+							buffer.append(dateFormatTime.format(event.getStartDate()) + " &#150; " + dateFormatTime.format(CalUtil.getEndTime(event)));
+						}
+					}
+					buffer.append("<br />");
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+					buffer.append(event.getTitle());
+					buffer.append(" (");
+					buffer.append(LanguageUtil.get(pageContext, HtmlUtil.unescape(event.getType())));
+					buffer.append(")");
+					%>
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
+				</liferay-ui:search-container-column-text>
 
-	rowURL.setParameter("struts_action", "/calendar/view_event");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("eventId", String.valueOf(event.getEventId()));
+			</c:when>
+			<c:otherwise>
 
-	// Time
+				<liferay-ui:search-container-column-text
+					buffer="buffer"
+					name="time"
+					href="<%= rowURL %>"
+				>
 
-	boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
+					<%
+					boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
 
-	if (allDay) {
-		row.addText(LanguageUtil.get(pageContext, "all-day"), rowURL);
-	}
-	else {
-		if (event.isTimeZoneSensitive()) {
-			row.addText(dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) + " &#150; " + dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)), rowURL);
-		}
-		else {
-			row.addText(dateFormatTime.format(event.getStartDate()) + " &#150; " + dateFormatTime.format(CalUtil.getEndTime(event)), rowURL);
-		}
-	}
+					if (allDay) {
+						buffer.append(LanguageUtil.get(pageContext, "all-day"));
+					}
+					else {
+						if (event.isTimeZoneSensitive()) {
+							buffer.append(dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) + " &#150; " + dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)));
+						}
+						else {
+							buffer.append(dateFormatTime.format(event.getStartDate()) + " &#150; " + dateFormatTime.format(CalUtil.getEndTime(event)));
+						}
+					}
+					%>
 
-	// Title and type
+				</liferay-ui:search-container-column-text>
 
-	row.addText(event.getTitle(), rowURL);
-	row.addText(LanguageUtil.get(pageContext, HtmlUtil.unescape(event.getType())), rowURL);
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					property="title"
+				/>
 
-	// Action
+				<liferay-ui:search-container-column-text
+					name="type"
+					href="<%= rowURL %>"
+					value="<%= LanguageUtil.get(pageContext, HtmlUtil.unescape(event.getType())) %>"
+				/>
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/calendar/event_action.jsp");
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/calendar/event_action.jsp"
+				/>
 
-	// Add result row
+			</c:otherwise>
+		</c:choose>
+	</liferay-ui:search-container-row>
 
-	resultRows.add(row);
-}
-%>
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
+		<input type="button" value="<liferay-ui:message key="add-event" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(selMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(selDay) %>" /><portlet:param name="year" value="<%= String.valueOf(selYear) %>" /></portlet:renderURL>';" />
 
-<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
-	<input type="button" value="<liferay-ui:message key="add-event" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(selMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(selDay) %>" /><portlet:param name="year" value="<%= String.valueOf(selYear) %>" /></portlet:renderURL>';" />
+		<br /><br />
+	</c:if>
 
-	<br /><br />
-</c:if>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>

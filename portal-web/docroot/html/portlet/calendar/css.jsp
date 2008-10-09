@@ -30,6 +30,12 @@
 	width: 400px;
 }
 
+.portlet-calendar .calendar-half-container {
+	background: url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) repeat-x 0 99%;
+	border: 1px solid #D7D7D7;
+	width: 188px;
+}
+
 .ie .portlet-calendar .calendar-container {
 	background-position: 0 98%;
 }
@@ -38,10 +44,20 @@
 	background: none;
 }
 
-.portlet-calendar .calendar-day {
+.portlet-calendar .calendar-container .calendar-day {
 	float:left;
 	text-align: center;
 	width: 209px;
+}
+
+.portlet-calendar .calendar-half-container .calendar-day {
+	float:left;
+	text-align: center;
+	width: 188px;
+}
+
+.portlet-calendar .calendar-half-events .results-grid {
+	width: 190px;
 }
 
 .portlet-calendar .calendar-day h2 {

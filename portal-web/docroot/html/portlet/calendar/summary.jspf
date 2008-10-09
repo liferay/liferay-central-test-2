@@ -49,12 +49,13 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 
 <table width="100%">
 <tr>
-	<c:if test='<%= summaryTabShowMiniMonth %>'>
-		<td style="padding-right: 10px;" valign="top" width="1%">
+	<c:choose>
+		<c:when test="<%= !showVerticalOrientation && summaryTabShowDay && summaryTabShowMiniMonth %>">
+			<td style="padding-right: 10px;" valign="top" width="1%">
 			<div class="calendar-container float-container">
 				<div class="calendar-day">
 					<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
-					<h3 class="day-number"><%= curDay %></h3>
+					<h3 class="day-number"><%= selDay %></h3>
 				</div>
 
 				<liferay-ui:calendar
@@ -65,16 +66,82 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 					data="<%= data %>"
 				/>
 			</div>
-		</td>
-	</c:if>
+			</td>
+		</c:when>
+		<c:when test="<%= !showVerticalOrientation && !summaryTabShowDay && summaryTabShowMiniMonth %>">
+			<td style="padding-right: 10px;" valign="top" width="1%">
+			<div class="float-container">
+				<liferay-ui:calendar
+					month="<%= selMonth %>"
+					day="<%= selDay %>"
+					year="<%= selYear %>"
+					headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
+					data="<%= data %>"
+				/>
+			</div>
+			</td>
+		</c:when>
+		<c:when test="<%= !showVerticalOrientation && summaryTabShowDay && !summaryTabShowMiniMonth %>">
+			<td style="padding-right: 10px;" valign="top" width="1%">
+			<div class="calendar-half-container float-container">
+				<div class="calendar-day">
+					<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
+					<h3 class="day-number"><%= selDay %></h3>
+				</div>
+			</div>
+			</td>
+		</c:when>
+		<c:when test="<%= showVerticalOrientation && summaryTabShowDay && summaryTabShowMiniMonth %>">
+			<td style="padding-right: 10px;" valign="top" width="1%">
+			<div class="calendar-half-container float-container">
+				<div class="calendar-day">
+					<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
+					<h3 class="day-number"><%= selDay %></h3>
+				</div>
+			</div>
+			<div>
+				<liferay-ui:calendar
+					month="<%= selMonth %>"
+					day="<%= selDay %>"
+					year="<%= selYear %>"
+					headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
+					data="<%= data %>"
+				/>
+			</div>
+			</td>
+		</c:when>
+		<c:when test="<%= showVerticalOrientation && !summaryTabShowDay && summaryTabShowMiniMonth %>">
+			<td style="padding-right: 10px;" valign="top" width="1%">
+			<div class="float-container">
+				<liferay-ui:calendar
+					month="<%= selMonth %>"
+					day="<%= selDay %>"
+					year="<%= selYear %>"
+					headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
+					data="<%= data %>"
+				/>
+			</div>
+			</td>
+		</c:when>
+		<c:when test="<%= showVerticalOrientation && summaryTabShowDay && !summaryTabShowMiniMonth %>">
+			<td style="padding-right: 10px; padding-bottom: 10px;" valign="top" width="1%">
+			<div class="calendar-half-container float-container">
+				<div class="calendar-day">
+					<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
+					<h3 class="day-number"><%= selDay %></h3>
+				</div>
+			</div>
+			</td>
+		</c:when>
+	</c:choose>
 
-	<c:if test='<%= summaryTabOrientation.equals("vertical") %>'>
+	<c:if test="<%= showVerticalOrientation %>">
 		</tr>
 		<tr>
 	</c:if>
 
-	<c:if test='<%= summaryTabShowTodaysEvents %>'>
-		<td valign="top">
+	<c:if test="<%= summaryTabShowTodaysEvents %>">
+		<td valign="top" class="<%= (showVerticalOrientation ? "calendar-half-events" : "") %>">
 			<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>
 		</td>
 	</c:if>

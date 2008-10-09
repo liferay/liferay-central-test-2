@@ -53,8 +53,12 @@ String[] tabs1NamesArray = StringUtil.split(tabs1Names);
 String tabs1Default = preferences.getValue("tabs1-default", tabs1NamesArray[0]);
 
 String summaryTabOrientation = preferences.getValue("summary-tab-orientation", "horizontal");
+boolean summaryTabShowDay = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-day", "true"));
 boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-mini-month", "true"));
+boolean summaryTabShowTabs = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-tabs", "true"));
 boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-todays-events", "true"));
+
+boolean showVerticalOrientation = (!windowState.equals(WindowState.MAXIMIZED)) && summaryTabOrientation.equals("vertical");
 
 String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");
