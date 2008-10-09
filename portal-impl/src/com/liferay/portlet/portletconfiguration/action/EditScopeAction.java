@@ -143,13 +143,10 @@ public class EditScopeAction extends EditConfigurationAction {
 				layout, portlet.getPortletId());
 
 		long scopeLayoutId = ParamUtil.getLong(actionRequest, "scopeLayoutId");
-
-		long oldScopeLayoutId = GetterUtil.getLong(preferences.getValue(
-			"lfr-scope-layout-id", "0"));
-
+		long oldScopeLayoutId = GetterUtil.getLong(
+			preferences.getValue("lfr-scope-layout-id", null));
 		String title = getPortletTitle(
 			themeDisplay, portletConfig, preferences);
-
 		String newTitle = title;
 
 		// Remove old scope suffix from the title if present
@@ -199,16 +196,15 @@ public class EditScopeAction extends EditConfigurationAction {
 			newTitle = sb.toString();
 		}
 
+		preferences.setValue(
+			"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
+
 		if (!newTitle.equals(title)) {
 			preferences.setValue(
 				"portlet-setup-title-" + themeDisplay.getLanguageId(),
 				newTitle);
-
 			preferences.setValue("portlet-setup-use-custom-title", "true");
 		}
-
-		preferences.setValue(
-			"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
 
 		preferences.store();
 	}
