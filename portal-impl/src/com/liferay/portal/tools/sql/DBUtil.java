@@ -73,6 +73,7 @@ import org.hibernate.dialect.SybaseDialect;
  * <a href="DBUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Ganesh Ram
  *
  */
 public abstract class DBUtil {
@@ -316,12 +317,18 @@ public abstract class DBUtil {
 		throws IOException, NamingException, SQLException {
 
 		ClassLoader classLoader = getClass().getClassLoader();
-
 		InputStream is = classLoader.getResourceAsStream(
 			"com/liferay/portal/tools/sql/dependencies/" + path);
 
 		if (is == null) {
 			is = classLoader.getResourceAsStream(path);
+		}
+
+		if (is == null){
+			ClassLoader secClassLoader = Thread.currentThread().
+											getContextClassLoader();
+
+			is = secClassLoader.getResourceAsStream(path);
 		}
 
 		String template = StringUtil.read(is);

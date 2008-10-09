@@ -197,6 +197,11 @@
 			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.util.DatabaseUtil" class="com.liferay.portal.kernel.util.DatabaseUtil">
+       <property name="database">
+           <bean class="com.liferay.portal.util.DatabaseImpl" />
+       </property>
+   </bean> 
 	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
 		<property name="diff">
 			<bean class="com.liferay.portal.util.DiffImpl" />
