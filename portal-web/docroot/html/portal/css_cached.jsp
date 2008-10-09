@@ -743,10 +743,6 @@ li.toggle-expand a {
 	padding: 0 15px;
 }
 
-.popup-alert-notice .current-user-language select {
-	vertical-align: middle;
-}
-
 /* ---------- Tag selector styling ---------- */
 
 .ui-dialog.lfr-tag-selector .ui-dialog-container .ui-dialog-content {

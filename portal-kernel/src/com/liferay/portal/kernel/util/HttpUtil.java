@@ -198,6 +198,30 @@ public class HttpUtil {
 		return getHttp().removeProtocol(url);
 	}
 
+	public static String setParameter(String url, String name, boolean value) {
+		return getHttp().setParameter(url, name, value);
+	}
+
+	public static String setParameter(String url, String name, double value) {
+		return getHttp().setParameter(url, name, value);
+	}
+
+	public static String setParameter(String url, String name, int value) {
+		return getHttp().setParameter(url, name, value);
+	}
+
+	public static String setParameter(String url, String name, long value) {
+		return getHttp().setParameter(url, name, value);
+	}
+
+	public static String setParameter(String url, String name, short value) {
+		return getHttp().setParameter(url, name, value);
+	}
+
+	public static String setParameter(String url, String name, String value) {
+		return getHttp().setParameter(url, name, value);
+	}
+
 	public static void submit(String location) throws IOException {
 		getHttp().submit(location);
 	}

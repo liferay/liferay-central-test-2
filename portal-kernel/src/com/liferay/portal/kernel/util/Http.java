@@ -129,6 +129,18 @@ public interface Http {
 
 	public String removeProtocol(String url);
 
+	public String setParameter(String url, String name, boolean value);
+
+	public String setParameter(String url, String name, double value);
+
+	public String setParameter(String url, String name, int value);
+
+	public String setParameter(String url, String name, long value);
+
+	public String setParameter(String url, String name, short value);
+
+	public String setParameter(String url, String name, String value);
+
 	public void submit(String location) throws IOException;
 
 	public void submit(String location, Cookie[] cookies) throws IOException;

@@ -584,6 +584,36 @@ public class HttpImpl implements Http {
 		}
 	}
 
+	public String setParameter(String url, String name, boolean value) {
+		return setParameter(url, name, String.valueOf(value));
+	}
+
+	public String setParameter(String url, String name, double value) {
+		return setParameter(url, name, String.valueOf(value));
+	}
+
+	public String setParameter(String url, String name, int value) {
+		return setParameter(url, name, String.valueOf(value));
+	}
+
+	public String setParameter(String url, String name, long value) {
+		return setParameter(url, name, String.valueOf(value));
+	}
+
+	public String setParameter(String url, String name, short value) {
+		return setParameter(url, name, String.valueOf(value));
+	}
+
+	public String setParameter(String url, String name, String value) {
+		if (url == null) {
+			return null;
+		}
+
+		url = removeParameter(url, name);
+
+		return addParameter(url, name, value);
+	}
+
 	public void submit(String location) throws IOException {
 		submit(location, null);
 	}

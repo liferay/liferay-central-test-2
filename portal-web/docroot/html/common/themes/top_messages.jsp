@@ -57,28 +57,28 @@
 
 		<c:if test="<%= !realUserLocale.equals(userLocale) %>">
 
-		<%
-		boolean isRealUsersLanguage = (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry()));
-		boolean isUsersLanguage = (locale.getLanguage().equals(userLocale.getLanguage()) && locale.getCountry().equals(userLocale.getCountry()));
-		String changeLanguage = "change-to-this-users-language";
+			<%
+			boolean isRealUsersLanguage = (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry()));
 
-		if (!isRealUsersLanguage) {
-			changeLanguage = "change-to-your-language";
-		}
-		%>
+			String changeLanguage = null;
+			String languageId = null;
+			String language = null;
 
-			<form action="<%= PortalUtil.getCurrentURL(request) %>" class="current-user-language" method="post">
+			if (!isRealUsersLanguage) {
+				changeLanguage = "change-to-your-language";
+				languageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
+				language = realUserLocale.getDisplayName(realUserLocale);
+			}
+			else {
+				changeLanguage = "change-to-this-users-language";
+				languageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
+				language = userLocale.getDisplayName(realUserLocale);
+			}
+			%>
 
-			<label for="doAsUserLanguageId"><%= LanguageUtil.get(realUserLocale, changeLanguage) %></label>
-
-			<select name="doAsUserLanguageId">
-				<option <%= isUsersLanguage ? "selected" : "" %> value="<%= realUserLocale.getLanguage() + "_" + realUserLocale.getCountry() %>"><%= realUserLocale.getDisplayName(realUserLocale) %></option>
-				<option <%= isRealUsersLanguage ? "selected" : "" %> value="<%= userLocale.getLanguage() + "_" + userLocale.getCountry() %>"><%= userLocale.getDisplayName(userLocale) %></option>
-			</select>
-
-			<input type="submit" value="<%= LanguageUtil.get(realUserLocale, "change") %>" />
-
-			</form>
+			<div class="current-user-language" >
+				<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", languageId) %>"><%= LanguageUtil.get(realUserLocale, changeLanguage) %>: <%= language %></a>
+			</div>
 		</c:if>
 	</div>
 </c:if>
