@@ -409,7 +409,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<liferay-ui:message key="title" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue='<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>' />
+		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue="<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>" />
 	</td>
 </tr>
 <tr>

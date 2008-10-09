@@ -257,26 +257,10 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 			</tr>
 			<tr>
 				<td class="lfr-label">
-					<liferay-ui:message key="show-day" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="summaryTabShowDay" defaultValue="<%= summaryTabShowDay %>" />
-				</td>
-			</tr>
-			<tr>
-				<td class="lfr-label">
 					<liferay-ui:message key="show-mini-month" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="summaryTabShowMiniMonth" defaultValue="<%= summaryTabShowMiniMonth %>" />
-				</td>
-			</tr>
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="show-tabs" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="summaryTabShowTabs" defaultValue="<%= summaryTabShowTabs %>" />
 				</td>
 			</tr>
 			<tr>

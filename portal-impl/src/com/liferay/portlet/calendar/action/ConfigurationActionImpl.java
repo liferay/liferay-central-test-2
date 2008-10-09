@@ -100,23 +100,15 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "tabs1Default");
 		String summaryTabOrientation = ParamUtil.getString(
 			actionRequest, "summaryTabOrientation");
-		String summaryTabShowDay = ParamUtil.getString(
-			actionRequest, "summaryTabShowDay");
 		String summaryTabShowMiniMonth = ParamUtil.getString(
 			actionRequest, "summaryTabShowMiniMonth");
-		String summaryTabShowTabs = ParamUtil.getString(
-			actionRequest, "summaryTabShowTabs");
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
 			actionRequest, "summaryTabShowTodaysEvents");
 
 		preferences.setValue("tabs1-default", tabs1Default);
 		preferences.setValue("summary-tab-orientation", summaryTabOrientation);
 		preferences.setValue(
-			"summary-tab-show-day", summaryTabShowDay);
-		preferences.setValue(
 			"summary-tab-show-mini-month", summaryTabShowMiniMonth);
-		preferences.setValue(
-			"summary-tab-show-tabs", summaryTabShowTabs);
 		preferences.setValue(
 			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 	}
