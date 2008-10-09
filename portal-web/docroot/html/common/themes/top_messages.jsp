@@ -48,7 +48,7 @@
 			</c:choose>
 		</span>
 
-		<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
+		<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /></a>
 
 		<%
 		Locale realUserLocale = realUser.getLocale();
@@ -58,26 +58,21 @@
 		<c:if test="<%= !realUserLocale.equals(userLocale) %>">
 
 			<%
-			boolean isRealUsersLanguage = (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry()));
+			String doAsUserLanguageId = null;
+			String changeLanguageMessage = null;
 
-			String changeLanguage = null;
-			String languageId = null;
-			String language = null;
-
-			if (!isRealUsersLanguage) {
-				changeLanguage = "change-to-your-language";
-				languageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
-				language = realUserLocale.getDisplayName(realUserLocale);
+			if (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) {
+				doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
+				changeLanguageMessage = LanguageUtil.format(realUserLocale, "change-to-x's-preferred-language-(x)", new String[] {user.getFullName(), userLocale.getDisplayLanguage(realUserLocale)});
 			}
 			else {
-				changeLanguage = "change-to-this-users-language";
-				languageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
-				language = userLocale.getDisplayName(realUserLocale);
+				doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
+				changeLanguageMessage = LanguageUtil.format(realUserLocale, "change-to-your-preferred-language-(x)", realUserLocale.getDisplayLanguage(realUserLocale));
 			}
 			%>
 
-			<div class="current-user-language" >
-				<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", languageId) %>"><%= LanguageUtil.get(realUserLocale, changeLanguage) %>: <%= language %></a>
+			<div class="current-user-language">
+				<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>"><%= changeLanguageMessage %></a>
 			</div>
 		</c:if>
 	</div>
