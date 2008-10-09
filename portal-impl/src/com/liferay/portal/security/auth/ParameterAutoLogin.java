@@ -84,10 +84,17 @@ public class ParameterAutoLogin implements AutoLogin {
 			if (userId > 0) {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				String encPassword = PwdEncryptor.encrypt(
-					password, user.getPassword());
+				String userPassword = user.getPassword();
 
-				if (!user.getPassword().equals(encPassword)) {
+				if (!user.isPasswordEncrypted()) {
+					userPassword = PwdEncryptor.encrypt(userPassword);
+				}
+
+				String encPassword = PwdEncryptor.encrypt(password);
+
+				if (!userPassword.equals(password) &&
+					!userPassword.equals(encPassword)) {
+
 					return null;
 				}
 			}
