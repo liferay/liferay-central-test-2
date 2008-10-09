@@ -56,27 +56,16 @@
 		%>
 
 		<c:if test="<%= !realUserLocale.equals(userLocale) %>">
+			<label for="doAsUserLanguageId"><liferay-ui:message key="language" /></label>
 
-		<%
-		boolean isRealUsersLanguage = (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry()));
-		boolean isUsersLanguage = (locale.getLanguage().equals(userLocale.getLanguage()) && locale.getCountry().equals(userLocale.getCountry()));
-		String changeLanguage = "change-to-this-users-language";
-
-		if (!isRealUsersLanguage) {
-			changeLanguage = "change-to-your-language";
-		}
-		%>
-
-			<form action="<%= PortalUtil.getCurrentURL(request) %>" class="current-user-language" method="post">
-
-			<label for="doAsUserLanguageId"><%= LanguageUtil.get(realUserLocale, changeLanguage) %></label>
+			<form action="<%= PortalUtil.getCurrentURL(request) %>" method="post" style="display: inline;">
 
 			<select name="doAsUserLanguageId">
-				<option <%= isUsersLanguage ? "selected" : "" %> value="<%= realUserLocale.getLanguage() + "_" + realUserLocale.getCountry() %>"><%= realUserLocale.getDisplayName(realUserLocale) %></option>
-				<option <%= isRealUsersLanguage ? "selected" : "" %> value="<%= userLocale.getLanguage() + "_" + userLocale.getCountry() %>"><%= userLocale.getDisplayName(userLocale) %></option>
+				<option <%= (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) ? "selected" : "" %> value="<%= realUserLocale.getLanguage() + "_" + realUserLocale.getCountry() %>"><%= realUserLocale.getDisplayName(realUserLocale) %></option>
+				<option <%= (locale.getLanguage().equals(userLocale.getLanguage()) && locale.getCountry().equals(userLocale.getCountry())) ? "selected" : "" %> value="<%= userLocale.getLanguage() + "_" + userLocale.getCountry() %>"><%= userLocale.getDisplayName(userLocale) %></option>
 			</select>
 
-			<input type="submit" value="<%= LanguageUtil.get(realUserLocale, "change") %>" />
+			<input type="submit" value="<liferay-ui:message key="change" />" />
 
 			</form>
 		</c:if>

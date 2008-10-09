@@ -734,19 +734,6 @@ li.toggle-expand a {
 	margin: 0 10px;
 }
 
-.popup-alert-notice .current-user-language {
-	border: 1px solid #ccc;
-	border-bottom: none;
-	border-top: none;
-	display: inline;
-	margin: 0 10px;
-	padding: 0 15px;
-}
-
-.popup-alert-notice .current-user-language select {
-	vertical-align: middle;
-}
-
 /* ---------- Tag selector styling ---------- */
 
 .ui-dialog.lfr-tag-selector .ui-dialog-container .ui-dialog-content {
