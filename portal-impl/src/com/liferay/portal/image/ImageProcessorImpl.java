@@ -24,8 +24,8 @@ package com.liferay.portal.image;
 
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.JavaProps;
+import com.liferay.portal.util.FileImpl;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
@@ -153,7 +153,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	public ImageBag read(File file) throws IOException {
-		return read(FileUtil.getBytes(file));
+		return read(_fileUtil.getBytes(file));
 	}
 
 	public ImageBag read(byte[] bytes) {
@@ -256,5 +256,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 	private static Log _log = LogFactory.getLog(ImageProcessorImpl.class);
 
 	private static ImageProcessorImpl _instance = new ImageProcessorImpl();
+
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }
