@@ -73,13 +73,14 @@ back-to-x=Back to {0}
 be-sure-to-browse-our-guestbook-for-the-latest-entries=Be sure to {0}browse{1} our guestbook for the latest entries!
 cannot-be-found={0} cannot be found.
 cell-phones-with-sms-text-messaging-capabilities-map-phone-numbers-to-email-addresses=Cell phones with SMS text messaging capabilities map phone numbers to email addresses. For example, a cell phone number of (626) 123-4567 with Sprint PCS as the carrier has an email address (SMS ID) of <i>6261234567@messaging.sprintpcs.com</i>.
+change-to-x's-preferred-language-(x)=Change to {0}'s preferred language ({1}).
+change-to-your-preferred-language-(x)=Change to your preferred language ({0}).
 changed-parent-from-x=Changed parent from "{0}."
 check-your-email-or-configure-email-accounts=<a href="{0}">Check your email</a> or <a href="{1}">configure email accounts.</a>
 choose-a-color-for-each-layer-type=Choose a color for each layer type. Be sure to click {0} when you are done.
 choose-a-color-theme-or-create-your-own-custom-theme=Choose a color theme or create your own {0}custom theme{1}.
 city-or-zip-code=City <b>or</b> Zip Code
 city-state-or-zip=City, State <b>or</b> Zip
-click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 community-x-does-not-have-any-private-pages=Community {0} does not have any private pages.
 could-not-connect-to-address-x.-please-verify-that-the-specified-port-is-correct-and-that-the-remote-server-is-configured-to-accept-requests-from-this-server=Could not connect to address {0}. Please verify that the specified port is correct and that the remote server is configured to accept requests from this server.
 coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount=Coupons can be set to only apply to orders above a minimum amount. Set the minimum order to {0} to add a coupon that applies to any purchase price.
