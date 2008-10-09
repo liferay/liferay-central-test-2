@@ -43,7 +43,7 @@ public class DBBuilder {
 		InitUtil.initWithSpring();
 
 		if (args.length == 1) {
-			new DBBuilder(args[0], DBUtil.DB_TYPE_ALL);
+			new DBBuilder(args[0], DBUtil.TYPE_ALL);
 		}
 		else if (args.length == 2) {
 			new DBBuilder(args[0], StringUtil.split(args[1]));
@@ -84,10 +84,10 @@ public class DBBuilder {
 		for (int i = 0; i < _databaseTypes.length; i++) {
 			String databaseType = _databaseTypes[i];
 
-			if (databaseType.equals(DBUtil.DB_TYPE_HYPERSONIC) ||
-				databaseType.equals(DBUtil.DB_TYPE_INTERBASE) ||
-				databaseType.equals(DBUtil.DB_TYPE_JDATASTORE) ||
-				databaseType.equals(DBUtil.DB_TYPE_SAP)) {
+			if (databaseType.equals(DBUtil.TYPE_HYPERSONIC) ||
+				databaseType.equals(DBUtil.TYPE_INTERBASE) ||
+				databaseType.equals(DBUtil.TYPE_JDATASTORE) ||
+				databaseType.equals(DBUtil.TYPE_SAP)) {
 
 				continue;
 			}
@@ -114,12 +114,11 @@ public class DBBuilder {
 		}
 	}
 
-	private DBUtil _getDBUtil(String dbType) {
-		return DBUtil.getInstance(dbType);
+	private DBUtil _getDBUtil(String type) {
+		return DBUtil.getInstance(type);
 	}
 
 	private String _databaseName;
-
 	private String[] _databaseTypes;
 
 }

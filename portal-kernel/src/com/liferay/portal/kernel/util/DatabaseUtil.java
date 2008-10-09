@@ -41,17 +41,38 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.io.IOException;
+
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
 /**
  * <a href="DatabaseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ganesh Ram
  *
  */
-
 public class DatabaseUtil {
 
 	public static Database getDatabase() {
 		return _database;
+	}
+
+	public static String getType() {
+		return getDatabase().getType();
+	}
+
+	public static void runSQLTemplate(String path)
+		throws IOException, NamingException, SQLException {
+
+		getDatabase().runSQLTemplate(path);
+	}
+
+	public static void runSQLTemplate(String path, boolean failOnError)
+		throws IOException, NamingException, SQLException {
+
+		getDatabase().runSQLTemplate(path, failOnError);
 	}
 
 	public void setDatabase(Database database) {

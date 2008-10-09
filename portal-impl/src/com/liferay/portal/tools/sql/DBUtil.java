@@ -78,37 +78,36 @@ import org.hibernate.dialect.SybaseDialect;
  */
 public abstract class DBUtil {
 
-	public static final String DB_TYPE_DB2 = "db2";
+	public static final String TYPE_DB2 = "db2";
 
-	public static final String DB_TYPE_DERBY = "derby";
+	public static final String TYPE_DERBY = "derby";
 
-	public static final String DB_TYPE_FIREBIRD = "firebird";
+	public static final String TYPE_FIREBIRD = "firebird";
 
-	public static final String DB_TYPE_HYPERSONIC = "hypersonic";
+	public static final String TYPE_HYPERSONIC = "hypersonic";
 
-	public static final String DB_TYPE_INFORMIX = "informix";
+	public static final String TYPE_INFORMIX = "informix";
 
-	public static final String DB_TYPE_INTERBASE = "interbase";
+	public static final String TYPE_INTERBASE = "interbase";
 
-	public static final String DB_TYPE_JDATASTORE = "jdatastore";
+	public static final String TYPE_JDATASTORE = "jdatastore";
 
-	public static final String DB_TYPE_MYSQL = "mysql";
+	public static final String TYPE_MYSQL = "mysql";
 
-	public static final String DB_TYPE_ORACLE = "oracle";
+	public static final String TYPE_ORACLE = "oracle";
 
-	public static final String DB_TYPE_POSTGRESQL = "postgresql";
+	public static final String TYPE_POSTGRESQL = "postgresql";
 
-	public static final String DB_TYPE_SAP = "sap";
+	public static final String TYPE_SAP = "sap";
 
-	public static final String DB_TYPE_SQLSERVER = "sqlserver";
+	public static final String TYPE_SQLSERVER = "sqlserver";
 
-	public static final String DB_TYPE_SYBASE = "sybase";
+	public static final String TYPE_SYBASE = "sybase";
 
-	public static final String[] DB_TYPE_ALL = {
-		DB_TYPE_DB2, DB_TYPE_DERBY, DB_TYPE_FIREBIRD, DB_TYPE_HYPERSONIC,
-		DB_TYPE_INFORMIX, DB_TYPE_INTERBASE, DB_TYPE_JDATASTORE, DB_TYPE_MYSQL,
-		DB_TYPE_ORACLE, DB_TYPE_POSTGRESQL, DB_TYPE_SAP, DB_TYPE_SQLSERVER,
-		DB_TYPE_SYBASE
+	public static final String[] TYPE_ALL = {
+		TYPE_DB2, TYPE_DERBY, TYPE_FIREBIRD, TYPE_HYPERSONIC, TYPE_INFORMIX,
+		TYPE_INTERBASE, TYPE_JDATASTORE, TYPE_MYSQL, TYPE_ORACLE,
+		TYPE_POSTGRESQL, TYPE_SAP, TYPE_SQLSERVER, TYPE_SYBASE
 	};
 
 	public static DBUtil getInstance() {
@@ -131,46 +130,46 @@ public abstract class DBUtil {
 		return _dbUtil;
 	}
 
-	public static DBUtil getInstance(String dbType) {
+	public static DBUtil getInstance(String type) {
 		DBUtil dbUtil = null;
 
-		if (dbType.equals(DB_TYPE_DB2)) {
+		if (type.equals(TYPE_DB2)) {
 			dbUtil = DB2Util.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_DERBY)) {
+		else if (type.equals(TYPE_DERBY)) {
 			dbUtil = DerbyUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_FIREBIRD)) {
+		else if (type.equals(TYPE_FIREBIRD)) {
 			dbUtil = FirebirdUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_HYPERSONIC)) {
+		else if (type.equals(TYPE_HYPERSONIC)) {
 			dbUtil = HypersonicUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_INFORMIX)) {
+		else if (type.equals(TYPE_INFORMIX)) {
 			dbUtil = InformixUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_INTERBASE)) {
+		else if (type.equals(TYPE_INTERBASE)) {
 			dbUtil = InterBaseUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_JDATASTORE)) {
+		else if (type.equals(TYPE_JDATASTORE)) {
 			dbUtil = JDataStoreUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_MYSQL)) {
+		else if (type.equals(TYPE_MYSQL)) {
 			dbUtil = MySQLUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_ORACLE)) {
+		else if (type.equals(TYPE_ORACLE)) {
 			dbUtil = OracleUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_POSTGRESQL)) {
+		else if (type.equals(TYPE_POSTGRESQL)) {
 			dbUtil = PostgreSQLUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_SAP)) {
+		else if (type.equals(TYPE_SAP)) {
 			dbUtil = SAPUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_SQLSERVER)) {
+		else if (type.equals(TYPE_SQLSERVER)) {
 			dbUtil = SQLServerUtil.getInstance();
 		}
-		else if (dbType.equals(DB_TYPE_SYBASE)) {
+		else if (type.equals(TYPE_SYBASE)) {
 			dbUtil = SybaseUtil.getInstance();
 		}
 
@@ -316,19 +315,14 @@ public abstract class DBUtil {
 	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException {
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		ClassLoader classLoader =
+			Thread.currentThread().getContextClassLoader();
+
 		InputStream is = classLoader.getResourceAsStream(
 			"com/liferay/portal/tools/sql/dependencies/" + path);
 
 		if (is == null) {
 			is = classLoader.getResourceAsStream(path);
-		}
-
-		if (is == null){
-			ClassLoader secClassLoader = Thread.currentThread().
-											getContextClassLoader();
-
-			is = secClassLoader.getResourceAsStream(path);
 		}
 
 		String template = StringUtil.read(is);
@@ -366,7 +360,8 @@ public abstract class DBUtil {
 
 					String includeFileName = line.substring(pos + 1);
 
-					ClassLoader classLoader = getClass().getClassLoader();
+					ClassLoader classLoader =
+						Thread.currentThread().getContextClassLoader();
 
 					InputStream is = classLoader.getResourceAsStream(
 						"com/liferay/portal/tools/sql/dependencies/" +

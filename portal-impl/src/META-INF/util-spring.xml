@@ -201,7 +201,7 @@
        <property name="database">
            <bean class="com.liferay.portal.util.DatabaseImpl" />
        </property>
-   </bean> 
+   </bean>
 	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
 		<property name="diff">
 			<bean class="com.liferay.portal.util.DiffImpl" />

@@ -56,62 +56,69 @@ import javax.naming.NamingException;
  * @author Ganesh Ram
  *
  */
-
 public class DatabaseImpl implements Database {
 
-	public String getDBDialect() {
-
+	public String getType() {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		if (dbUtil instanceof MySQLUtil) {
-			return DBUtil.DB_TYPE_MYSQL;
+			return DBUtil.TYPE_MYSQL;
 		}
 		else if (dbUtil instanceof HypersonicUtil) {
-			return DBUtil.DB_TYPE_HYPERSONIC;
+			return DBUtil.TYPE_HYPERSONIC;
 		}
 		else if (dbUtil instanceof DB2Util) {
-			return DBUtil.DB_TYPE_DB2;
+			return DBUtil.TYPE_DB2;
 		}
 		else if (dbUtil instanceof DerbyUtil) {
-			return DBUtil.DB_TYPE_DERBY;
+			return DBUtil.TYPE_DERBY;
 		}
 		else if (dbUtil instanceof FirebirdUtil) {
-			return DBUtil.DB_TYPE_FIREBIRD;
+			return DBUtil.TYPE_FIREBIRD;
 		}
 		else if (dbUtil instanceof InformixUtil) {
-			return DBUtil.DB_TYPE_INFORMIX;
+			return DBUtil.TYPE_INFORMIX;
 		}
 		else if (dbUtil instanceof InterBaseUtil) {
-			return DBUtil.DB_TYPE_INTERBASE;
+			return DBUtil.TYPE_INTERBASE;
 		}
 		else if (dbUtil instanceof JDataStoreUtil) {
-			return DBUtil.DB_TYPE_JDATASTORE;
+			return DBUtil.TYPE_JDATASTORE;
 		}
 		else if (dbUtil instanceof OracleUtil) {
-			return DBUtil.DB_TYPE_ORACLE;
+			return DBUtil.TYPE_ORACLE;
 		}
 		else if (dbUtil instanceof PostgreSQLUtil) {
-			return DBUtil.DB_TYPE_POSTGRESQL;
+			return DBUtil.TYPE_POSTGRESQL;
 		}
 		else if (dbUtil instanceof SAPUtil) {
-			return DBUtil.DB_TYPE_SAP;
+			return DBUtil.TYPE_SAP;
 		}
 		else if (dbUtil instanceof SQLServerUtil) {
-			return DBUtil.DB_TYPE_SQLSERVER;
+			return DBUtil.TYPE_SQLSERVER;
 		}
 		else if (dbUtil instanceof SybaseUtil) {
-			return DBUtil.DB_TYPE_SYBASE;
+			return DBUtil.TYPE_SYBASE;
 		}
-
-		return "Not Supported.";
+		else {
+			return null;
+		}
 	}
 
 	public void runSQLTemplate(String path)
 		throws IOException, NamingException, SQLException {
 
 		DBUtil dbUtil = DBUtil.getInstance();
-		dbUtil.runSQLTemplate(path, false);
 
+		dbUtil.runSQLTemplate(path);
+	}
+
+	public void runSQLTemplate(String path, boolean failOnError)
+		throws IOException, NamingException, SQLException {
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		dbUtil.runSQLTemplate(path, failOnError);
 	}
 
 }

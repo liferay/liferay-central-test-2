@@ -53,12 +53,14 @@ import javax.naming.NamingException;
  * @author Ganesh Ram
  *
  */
-
 public interface Database {
 
-	public String getDBDialect();
+	public String getType();
 
 	public void runSQLTemplate(String path)
+		throws IOException, NamingException, SQLException;
+
+	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException;
 
 }
