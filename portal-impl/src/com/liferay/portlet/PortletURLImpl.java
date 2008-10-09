@@ -875,7 +875,7 @@ public class PortletURLImpl
 				if (publicRenderParameter != null) {
 					QName qName = publicRenderParameter.getQName();
 
-					if (!_copyCurrentRenderParameters) {
+					if (_copyCurrentRenderParameters) {
 						String[] oldValues = _request.getParameterValues(name);
 
 						if (oldValues != null) {
