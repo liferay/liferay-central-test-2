@@ -24,7 +24,11 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -33,6 +37,9 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
+
+import java.util.ResourceBundle;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -74,7 +81,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (cmd.equals(Constants.SAVE)) {
-			updateScope(actionRequest, portlet);
+			updateScope(actionRequest, portletConfig, portlet);
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -103,7 +110,27 @@ public class EditScopeAction extends EditConfigurationAction {
 			renderRequest, "portlet.portlet_configuration.edit_scope"));
 	}
 
-	protected void updateScope(ActionRequest actionRequest, Portlet portlet)
+	protected String getPortletTitle(
+		ThemeDisplay themeDisplay, PortletConfig portletConfig,
+		PortletPreferences preferences) {
+
+		String portletTitle = PortletConfigurationUtil.getPortletTitle(
+			preferences, themeDisplay.getLanguageId());
+
+		if (Validator.isNull(portletTitle)) {
+			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+				themeDisplay.getLocale());
+
+			portletTitle = resourceBundle.getString(
+				JavaConstants.JAVAX_PORTLET_TITLE);
+		}
+
+		return portletTitle;
+	}
+
+	protected void updateScope(
+			ActionRequest actionRequest, PortletConfig portletConfig,
+			Portlet portlet)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -117,6 +144,38 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		long scopeLayoutId = ParamUtil.getLong(actionRequest, "scopeLayoutId");
 
+		long oldScopeLayoutId = GetterUtil.getLong(preferences.getValue(
+			"lfr-scope-layout-id", "0"));
+
+		String title = getPortletTitle(
+			themeDisplay, portletConfig, preferences);
+
+		String newTitle = title;
+
+		// Remove old scope suffix from the title if present
+
+		if (oldScopeLayoutId > 0) {
+			Layout oldScopeLayout = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				oldScopeLayoutId);
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(oldScopeLayout.getName(themeDisplay.getLocale()));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			String suffix = sb.toString();
+
+			if (newTitle.endsWith(suffix)) {
+				newTitle = newTitle.substring(
+					0, title.length() - suffix.length());
+			}
+		}
+
+		// Add new scope suffix to the title
+
 		if (scopeLayoutId > 0) {
 			Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
 				layout.getGroupId(), layout.isPrivateLayout(), scopeLayoutId);
@@ -128,6 +187,24 @@ public class EditScopeAction extends EditConfigurationAction {
 					themeDisplay.getUserId(), Layout.class.getName(),
 					scopeLayout.getPlid(), name, null, 0, null, true);
 			}
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(newTitle);
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(scopeLayout.getName(themeDisplay.getLocale()));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			newTitle = sb.toString();
+		}
+
+		if (!newTitle.equals(title)) {
+			preferences.setValue(
+				"portlet-setup-title-" + themeDisplay.getLanguageId(),
+				newTitle);
+
+			preferences.setValue("portlet-setup-use-custom-title", "true");
 		}
 
 		preferences.setValue(
