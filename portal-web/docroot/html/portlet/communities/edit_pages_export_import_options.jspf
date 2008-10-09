@@ -331,11 +331,11 @@
 												<li class="tree-item">
 													<input <%= portletDataHandler.isPublishToLiveByDefault() ? "checked" : "" %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" type="checkbox" />
 
-													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>"><liferay-ui:message key="setup" /></label>
+													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %> <liferay-ui:message key="setup" /></label>
 
 													<input <%= portletDataHandler.isPublishToLiveByDefault() ? "checked" : "" %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>');" type="checkbox" />
 
-													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
+													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %> <liferay-ui:message key="data" /></label>
 
 													<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
 														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
