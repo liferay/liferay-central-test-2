@@ -98,6 +98,10 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
 		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 		setAttribute(PortletRequest.LIFECYCLE_PHASE, getLifecycle());
+
+		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
+
+		setAttribute(WebKeys.PORTLET_ID, portletConfigImpl.getPortletId());
 	}
 
 	public Object getAttribute(String name) {

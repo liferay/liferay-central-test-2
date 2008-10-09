@@ -36,6 +36,8 @@ public interface WebKeys {
 
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
 
+	public static final String PORTLET_ID = "PORTLET_ID";
+
 	public static final String SEARCH_CONTAINER = "SEARCH_CONTAINER";
 
 	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";

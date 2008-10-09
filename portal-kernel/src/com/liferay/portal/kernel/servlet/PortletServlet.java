@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 import com.liferay.portal.kernel.portlet.PortletFilterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -79,12 +80,16 @@ public class PortletServlet extends HttpServlet {
 		FilterChain filterChain = (FilterChain)request.getAttribute(
 			PORTLET_SERVLET_FILTER_CHAIN);
 
+		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
+
 		LiferayPortletSession portletSession =
 			(LiferayPortletSession)portletRequest.getPortletSession();
 
 		portletRequest.setAttribute(PORTLET_SERVLET_CONFIG, getServletConfig());
 		portletRequest.setAttribute(PORTLET_SERVLET_REQUEST, request);
 		portletRequest.setAttribute(PORTLET_SERVLET_RESPONSE, response);
+
+		portletRequest.setAttribute(WebKeys.PORTLET_ID, portletId);
 
 		HttpSession session = request.getSession();
 
