@@ -68,6 +68,8 @@ public class PortletServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
+		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
+
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
@@ -80,16 +82,13 @@ public class PortletServlet extends HttpServlet {
 		FilterChain filterChain = (FilterChain)request.getAttribute(
 			PORTLET_SERVLET_FILTER_CHAIN);
 
-		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
-
 		LiferayPortletSession portletSession =
 			(LiferayPortletSession)portletRequest.getPortletSession();
 
+		portletRequest.setAttribute(WebKeys.PORTLET_ID, portletId);
 		portletRequest.setAttribute(PORTLET_SERVLET_CONFIG, getServletConfig());
 		portletRequest.setAttribute(PORTLET_SERVLET_REQUEST, request);
 		portletRequest.setAttribute(PORTLET_SERVLET_RESPONSE, response);
-
-		portletRequest.setAttribute(WebKeys.PORTLET_ID, portletId);
 
 		HttpSession session = request.getSession();
 
