@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -77,6 +79,17 @@ public class ParameterAutoLogin implements AutoLogin {
 			}
 			else {
 				return null;
+			}
+
+			if (userId > 0) {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				String encPassword = PwdEncryptor.encrypt(
+					password, user.getPassword());
+
+				if (!user.getPassword().equals(encPassword)) {
+					return null;
+				}
 			}
 
 			String[] credentials = new String[] {
