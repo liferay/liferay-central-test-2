@@ -378,6 +378,13 @@
 					/>
 				</copy>
 
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="webservices-api.jar,webservices-extra.jar,webservices-extra-api.jar,webservices-rt.jar,webservices-tools.jar"
+					/>
+				</delete>
+
 				<if>
 					<equals arg1="${app.server.version}" arg2="3" />
 					<then>
