@@ -35,11 +35,32 @@ long organizationId = BeanParamUtil.getLong(organization, request, "organization
 String className = Organization.class.getName();
 long classPK = 0;
 
-if (organization!=null){
+if (organization!=null) {
 	classPK = organization.getOrganizationId();
 }
 
 themeDisplay.setIncludeServiceJs(true);
+
+// Form Sections
+
+String[] mainSections = PropsValues.ORGANIZATIONS_PROFILE_ADD_MAIN;
+String[] identificationSections = PropsValues.ORGANIZATIONS_PROFILE_ADD_IDENTIFICATION;
+String[] miscellaneousSections = PropsValues.ORGANIZATIONS_PROFILE_ADD_MISCELLANEOUS;
+
+if (organization != null) {
+	mainSections = PropsValues.ORGANIZATIONS_PROFILE_UPDATE_MAIN;
+	identificationSections = PropsValues.ORGANIZATIONS_PROFILE_UPDATE_IDENTIFICATION;
+	miscellaneousSections = PropsValues.ORGANIZATIONS_PROFILE_UPDATE_MISCELLANEOUS;
+}
+
+String[] tempSections = new String[mainSections.length + identificationSections.length];
+String[] allSections = new String[mainSections.length + identificationSections.length + miscellaneousSections.length];
+ArrayUtil.combine(mainSections, identificationSections, tempSections);
+ArrayUtil.combine(tempSections, miscellaneousSections, allSections);
+
+String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
+
+String currentSection = mainSections[0];
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
@@ -59,39 +80,35 @@ themeDisplay.setIncludeServiceJs(true);
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-website-url" />
 
-<%
-request.setAttribute("organization.selOrganization", organization);
-request.setAttribute("className", className);
-
-List<Website> websites = null;
-
-if (classPK <= 0) {
-	websites = Collections.EMPTY_LIST;
-}
-else {
-	websites = WebsiteServiceUtil.getWebsites(className, classPK);
-}
-
-request.setAttribute("common.websites", websites);
-%>
-
 <div id="organization">
 	<table class="organization-table" width="100%">
 	<tr>
 		<td>
-			<div class="form-section selected" id="organizationDetails">
-				<liferay-util:include page="/html/portlet/enterprise_admin/organization/organization_details.jsp" />
-			</div>
+			<%
+			request.setAttribute("organization.selOrganization", organization);
+			request.setAttribute("className", className);
 
-			<c:if test="<%= organization != null %>">
-				<div class="form-section" id="websites">
-					<liferay-util:include page="/html/portlet/enterprise_admin/common/websites.jsp" />
-				</div>
+			List<Website> websites = null;
 
-				<div class="form-section" id="comments">
-					<liferay-util:include page="/html/portlet/enterprise_admin/organization/comments.jsp" />
+			if (classPK <= 0) {
+				websites = Collections.EMPTY_LIST;
+			}
+			else {
+				websites = WebsiteServiceUtil.getWebsites(className, classPK);
+			}
+
+			request.setAttribute("common.websites", websites);
+
+			for (String section : allSections) {
+				String sectionId = _getIdName(section);
+				String jspPath = "/html/portlet/enterprise_admin/organization/" + _getJspName(section) + ".jsp";
+			%>
+				<div class="form-section <%= currentSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
+					<liferay-util:include page="<%= jspPath %>" />
 				</div>
-			</c:if>
+			<%
+			}
+			%>
 
 			<div class="lfr-component form-navigation">
 				<div class="organization-info">
@@ -104,28 +121,30 @@ request.setAttribute("common.websites", websites);
 					</p>
 				</div>
 
-				<div class="menu-group">
-					<h3><liferay-ui:message key="organization-information" /></h3>
-					<ul>
-						<li class="selected"><a href="#organizationDetails" id="organizationDetailsLink"><liferay-ui:message key="organization-details" /></a></li>
-					</ul>
-				</div>
+				<%
+				for (int i = 0; i < _CATEGORY_NAMES.length; i++) {
+					String category = _CATEGORY_NAMES[i];
+					String[] sections = categorySections[i];
 
-				<c:if test="<%= organization != null %>">
-					<div class="menu-group">
-						<h3><liferay-ui:message key="identification" /></h3>
-						<ul>
-							<li><a href="#websites" id="websiteLink"><liferay-ui:message key="websites" /></a></li>
-						</ul>
-					</div>
-
-					<div class="menu-group">
-						<h3><liferay-ui:message key="miscelaneous" /></h3>
-						<ul>
-							<li><a href="#comments" id="commentsLink"><liferay-ui:message key="comments" /></a></li>
-						</ul>
-					</div>
-				</c:if>
+					if (sections.length > 0) {
+				%>
+						<div class="menu-group">
+							<h3><liferay-ui:message key="<%= category %>" /></h3>
+							<ul>
+								<%
+								for (String section : sections) {
+									String sectionId = _getIdName(section);
+								%>
+									<li <%= currentSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>><a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /></a></li>
+								<%
+								}
+								%>
+							</ul>
+						</div>
+				<%
+					}
+				}
+				%>
 
 				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />  &nbsp;
@@ -163,24 +182,6 @@ request.setAttribute("common.websites", websites);
 				li.addClass('selected');
 			};
 
-			var markAsModifiedUserDetails = function() {
-				return markAsModified('#organizationDetailsLink');
-			}
-
-			var markAsModifiedWebsite = function() {
-				return markAsModified('#websiteLink');
-			}
-
-			var markAsModifiedComments = function() {
-				return markAsModified('#commentsLink')
-			}
-
-			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="Modified"/>)') == -1) {
-					jQuery(id).append(' <b>(<liferay-ui:message key="Modified"/>)</b>');
-				}
-			}
-
 			jQuery('.form-navigation li a').click(
 				function(event) {
 					var li = jQuery(this.parentNode);
@@ -195,11 +196,26 @@ request.setAttribute("common.websites", websites);
 
 			revealSection(location.hash);
 
-			jQuery('#organizationDetails input').change(markAsModifiedUserDetails)
-			jQuery('#organizationDetails select').change(markAsModifiedUserDetails)
-			jQuery('#websites select').change(markAsModifiedWebsite)
-			jQuery('#websites input').change(markAsModifiedWebsite)
-			jQuery('#comments textarea').change(markAsModifiedComments)
+			var markAsModified = function(id) {
+				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="Modified"/>)') == -1) {
+					jQuery(id).append(' <b>(<liferay-ui:message key="Modified"/>)</b>');
+				}
+			}
+
+			<%
+			for (String section : allSections) {
+				String sectionId = _getIdName(section);
+			%>
+				var markAsModified_<%= sectionId %> = function() {
+					return markAsModified('#<%= sectionId %>Link');
+				}
+
+				jQuery('#<%= sectionId %> input').change(markAsModified_<%= sectionId %>)
+				jQuery('#<%= sectionId %> select').change(markAsModified_<%= sectionId %>)
+				jQuery('#<%= sectionId %> textarea').change(markAsModified_<%= sectionId %>)
+			<%
+			}
+			%>
 		}
 	);
 
@@ -207,3 +223,27 @@ request.setAttribute("common.websites", websites);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</c:if>
 </script>
+
+<%!
+private static String[] _CATEGORY_NAMES = {"organization-information", "identification", "miscellaneous"};
+
+private String _getIdName(String name) {
+	int pos = name.indexOf(StringPool.DASH);
+
+	if (pos == -1) {
+		return name;
+	}
+
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(name.substring(0, pos));
+	sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
+	sb.append(name.substring(pos + 2));
+
+	return _getIdName(sb.toString());
+}
+
+private String _getJspName(String name) {
+	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
+}
+%>

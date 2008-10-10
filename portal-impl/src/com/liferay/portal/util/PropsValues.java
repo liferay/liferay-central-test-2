@@ -825,6 +825,24 @@ public class PropsValues {
 	public static String[] ORGANIZATIONS_TYPES =
 		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_TYPES);
 
+	public static final String[] ORGANIZATIONS_PROFILE_ADD_IDENTIFICATION =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_PROFILE_ADD_IDENTIFICATION);
+
+	public static final String[] ORGANIZATIONS_PROFILE_ADD_MAIN =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_PROFILE_ADD_MAIN);
+
+	public static final String[] ORGANIZATIONS_PROFILE_ADD_MISCELLANEOUS =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_PROFILE_ADD_MISCELLANEOUS);
+
+	public static final String[] ORGANIZATIONS_PROFILE_UPDATE_IDENTIFICATION =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_PROFILE_UPDATE_IDENTIFICATION);
+
+	public static final String[] ORGANIZATIONS_PROFILE_UPDATE_MAIN =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_PROFILE_UPDATE_MAIN);
+
+	public static final String[] ORGANIZATIONS_PROFILE_UPDATE_MISCELLANEOUS =
+		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_PROFILE_UPDATE_MISCELLANEOUS);
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME =
 		PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_NAME);
 

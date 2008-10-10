@@ -831,6 +831,18 @@ public class PropsKeys {
 
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
+	public static final String ORGANIZATIONS_PROFILE_ADD_IDENTIFICATION = "organizations.profile.add.identification";
+
+	public static final String ORGANIZATIONS_PROFILE_ADD_MAIN = "organizations.profile.add.main";
+
+	public static final String ORGANIZATIONS_PROFILE_ADD_MISCELLANEOUS = "organizations.profile.add.miscellaneous";
+
+	public static final String ORGANIZATIONS_PROFILE_UPDATE_IDENTIFICATION = "organizations.profile.update.identification";
+
+	public static final String ORGANIZATIONS_PROFILE_UPDATE_MAIN = "organizations.profile.update.main";
+
+	public static final String ORGANIZATIONS_PROFILE_UPDATE_MISCELLANEOUS = "organizations.profile.update.miscellaneous";
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
 	public static final String PASSWORDS_DIGEST_ENCODING = "passwords.digest.encoding";

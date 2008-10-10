@@ -43,7 +43,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/organization_search.jsp"
-		showAddButton="<%= true %>"
+		showAddButton="<%= false %>"
 	/>
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
