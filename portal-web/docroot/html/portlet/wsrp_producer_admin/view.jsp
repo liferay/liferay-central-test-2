@@ -144,6 +144,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		%>
 
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
+		<input name="<portlet:namespace />publishedPortletString" type="hidden" value="" />
 		<input name="<portlet:namespace /><%= Constants.ACTION %>" type="hidden" value="<%= AdminPortletAction.UPDATE %>" />
 		<input name="<portlet:namespace />producerKey" type="hidden" value="<%= producerBean.getProducerKey() %>" />
 
@@ -325,11 +326,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				List rightList = new ArrayList();
 
-				List<String> publishedPortlets = producerBean.getUnpublishedPortlets();
+				List<String> publishedPortlets = producerBean.getPublishedPortlets();
 
 				if (publishedPortlets != null) {
 					for (String publishedPortlet : publishedPortlets) {
-						leftList.add(new KeyValuePair(publishedPortlet, publishedPortlet));
+						rightList.add(new KeyValuePair(publishedPortlet, publishedPortlet));
 					}
 				}
 
@@ -351,7 +352,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br />
 
-		<input type="submit" value="<liferay-ui:message key="save" />" />
+		<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />publishedPortletString.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />publishedPortlets,'$'); submitForm(document.<portlet:namespace />fm);" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
