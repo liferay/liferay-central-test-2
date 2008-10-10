@@ -201,12 +201,19 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
-				<copy todir="${app.server.glassfish.lib.global.dir}">
+				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/portal"
 						includes="log4j.jar,xercesImpl.jar"
 					/>
 				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="webservices-api.jar,webservices-extra.jar,webservices-extra-api.jar,webservices-rt.jar,webservices-tools.jar"
+					/>
+				</delete>
 			</then>
 		</if>
 
