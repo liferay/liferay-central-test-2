@@ -320,12 +320,42 @@ public class LanguageImpl implements Language {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+
 		String value = null;
 
 		if (themeDisplay != null) {
+			if ((portletConfig != null) && (key != null) &&
+				!key.endsWith(StringPool.CLOSE_BRACKET)) {
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(key);
+				sb.append(StringPool.OPEN_BRACKET);
+				sb.append(portletConfig.getPortletName());
+				sb.append(StringPool.CLOSE_BRACKET);
+
+				key = sb.toString(); 
+			}
+
 			value = get(
 				themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
 				defaultValue);
+
+			if (((value == null) || value.equals(defaultValue)) &&
+				(key != null) && key.endsWith(StringPool.CLOSE_BRACKET)) {
+
+				int pos = key.lastIndexOf(StringPool.OPEN_BRACKET);
+
+				if (pos != -1) {
+					key = key.substring(0, pos);
+
+					value = get(
+						themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+						key, defaultValue);
+				}
+			}
 
 			// LEP-7292
 
@@ -349,9 +379,6 @@ public class LanguageImpl implements Language {
 		if (value == null) {
 
 			// LEP-2849
-
-			PortletConfig portletConfig = (PortletConfig)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			if (portletConfig != null) {
 				Locale locale = request.getLocale();
