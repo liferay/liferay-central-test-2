@@ -44,14 +44,8 @@ if (layout != null) {
 	if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 		portlets = layoutTypePortlet.getAllPortlets();
 
-		if (layoutTypePortlet.hasStateMax()) {
-			String ppid = layoutTypePortlet.getStateMaxPortletId();
-
-			Portlet maximizedPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
-
-			if (!portlets.contains(maximizedPortlet)) {
-				portlets.add(maximizedPortlet);
-			}
+		if (layoutTypePortlet.hasStateMaxPortletId(PortletKeys.PORTLET_CONFIGURATION)) {
+			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
 		}
 	}
 	else if (type.equals(LayoutConstants.TYPE_CONTROL_PANEL) || type.equals(LayoutConstants.TYPE_PANEL)) {
