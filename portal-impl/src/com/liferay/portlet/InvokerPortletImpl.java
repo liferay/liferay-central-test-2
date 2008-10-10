@@ -308,7 +308,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			portlet.getClass(),
 			"org.apache.portals.bridges.struts.StrutsPortlet");
 		_expCache = portletModel.getExpCache();
-		_clearPortletFilters();
 		setPortletFilters();
 	}
 
@@ -328,7 +327,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_strutsPortlet = strutsPortlet;
 		_strutsBridgePortlet = strutsBridgePortlet;
 		_expCache = portletModel.getExpCache();
-		_clearPortletFilters();
 		setPortletFilters();
 
 		if (_log.isDebugEnabled()) {
@@ -511,6 +509,11 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	}
 
 	public void setPortletFilters() throws PortletException {
+		_actionFilters.clear();
+		_eventFilters.clear();
+		_renderFilters.clear();
+		_resourceFilters.clear();
+
 		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
 			_portletModel.getPortletFilters();
 
@@ -671,13 +674,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		invoke(
 			portletRequest, portletResponse, PortletRequest.RESOURCE_PHASE,
 			_resourceFilters);
-	}
-
-	private void _clearPortletFilters() {
-		_actionFilters.clear();
-		_eventFilters.clear();
-		_renderFilters.clear();
-		_resourceFilters.clear();
 	}
 
 	private static Log _log = LogFactory.getLog(InvokerPortletImpl.class);
