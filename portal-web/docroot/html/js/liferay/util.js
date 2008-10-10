@@ -586,7 +586,7 @@ Liferay.Util = {
 			return '';
 		}
 		else {
-			return s.join(',');
+			return s.join(delimeter);
 		}
 	},
 

@@ -8417,7 +8417,7 @@ Liferay.Util = {
 			return '';
 		}
 		else {
-			return s.join(',');
+			return s.join(delimeter);
 		}
 	},
 
@@ -9013,6 +9013,7 @@ Liferay.zIndex = {
 	DRAG_ITEM:		460,
 	TOOLTIP:		470
 };
+
 Liferay.Events = {
 	bind: function(event, func, scope) {
 		var instance = this;
