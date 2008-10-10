@@ -1587,7 +1587,7 @@ create table WSRPConfiguredProducer (
 	serviceDescription TEXT null,
 	userCategoryMapping TEXT null,
 	customUserProfile TEXT null,
-	sdLastModified LONG,
 	identityPropagationType VARCHAR(75) null,
+	sdLastModified LONG,
 	entityVersion INTEGER
 );

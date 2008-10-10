@@ -1710,8 +1710,8 @@
 		<field name="customUserProfile" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="sdLastModified" type="long" />
 		<field name="identityPropagationType" type="String" />
+		<field name="sdLastModified" type="long" />
 		<field name="entityVersion" type="int" />
 	</model>
 </model-hints>

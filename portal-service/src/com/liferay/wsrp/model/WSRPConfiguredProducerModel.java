@@ -101,13 +101,13 @@ public interface WSRPConfiguredProducerModel extends BaseModel {
 
 	public void setCustomUserProfile(String customUserProfile);
 
-	public long getSdLastModified();
-
-	public void setSdLastModified(long sdLastModified);
-
 	public String getIdentityPropagationType();
 
 	public void setIdentityPropagationType(String identityPropagationType);
+
+	public long getSdLastModified();
+
+	public void setSdLastModified(long sdLastModified);
 
 	public int getEntityVersion();
 

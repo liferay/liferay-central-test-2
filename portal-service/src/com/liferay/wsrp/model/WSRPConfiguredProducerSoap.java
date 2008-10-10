@@ -63,8 +63,8 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 		soapModel.setServiceDescription(model.getServiceDescription());
 		soapModel.setUserCategoryMapping(model.getUserCategoryMapping());
 		soapModel.setCustomUserProfile(model.getCustomUserProfile());
-		soapModel.setSdLastModified(model.getSdLastModified());
 		soapModel.setIdentityPropagationType(model.getIdentityPropagationType());
+		soapModel.setSdLastModified(model.getSdLastModified());
 		soapModel.setEntityVersion(model.getEntityVersion());
 
 		return soapModel;
@@ -196,20 +196,20 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 		_customUserProfile = customUserProfile;
 	}
 
-	public long getSdLastModified() {
-		return _sdLastModified;
-	}
-
-	public void setSdLastModified(long sdLastModified) {
-		_sdLastModified = sdLastModified;
-	}
-
 	public String getIdentityPropagationType() {
 		return _identityPropagationType;
 	}
 
 	public void setIdentityPropagationType(String identityPropagationType) {
 		_identityPropagationType = identityPropagationType;
+	}
+
+	public long getSdLastModified() {
+		return _sdLastModified;
+	}
+
+	public void setSdLastModified(long sdLastModified) {
+		_sdLastModified = sdLastModified;
 	}
 
 	public int getEntityVersion() {
@@ -233,7 +233,7 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 	private String _serviceDescription;
 	private String _userCategoryMapping;
 	private String _customUserProfile;
-	private long _sdLastModified;
 	private String _identityPropagationType;
+	private long _sdLastModified;
 	private int _entityVersion;
 }

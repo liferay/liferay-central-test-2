@@ -42,6 +42,8 @@
 package com.liferay.wsrp.consumer.producermanager;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalServiceUtil;
 
@@ -71,15 +73,15 @@ import java.util.Set;
  * @author Manish Gupta
  *
  */
-public class ProducerEntityManagerImpl extends AbstractProducerEntityManager
-	implements ProducerEntityManager {
+public class ProducerEntityManagerImpl
+	extends AbstractProducerEntityManager implements ProducerEntityManager {
 
-	public String getConsumerName() throws WSRPConsumerException {
+	public String getConsumerName() {
 		return _DEFAULT_CONSUMER_NAME;
 	}
 
 	public RegistrationData getDefaultRegistrationData()
-			throws WSRPConsumerException {
+		throws WSRPConsumerException {
 
 		String globalXML = getGlobalRegistrationDataXML();
 
@@ -87,56 +89,50 @@ public class ProducerEntityManagerImpl extends AbstractProducerEntityManager
 			globalXML = DEFAULT_REGISTRATION_DATA;
 		}
 
-		RegistrationData defaultRegistrationData =
-				getRegistrationDataFromXML(globalXML);
+		RegistrationData defaultRegistrationData = getRegistrationDataFromXML(
+			globalXML);
 
 		String consumerName = getConsumerName();
 
-		if (consumerName == null || consumerName.trim().length() == 0) {
+		if (Validator.isNull(consumerName)) {
 			consumerName = defaultRegistrationData.getConsumerName();
 		}
 
-		RegistrationData registrationData =  new RegistrationData();
+		RegistrationData registrationData = new RegistrationData();
 
 		registrationData.setConsumerName(consumerName);
 		registrationData.setConsumerAgent(_DEFAULT_CONSUMER_AGENT);
 		registrationData.setMethodGetSupported(
-				defaultRegistrationData.isMethodGetSupported());
+			defaultRegistrationData.isMethodGetSupported());
 
 		registrationData.getConsumerModes().addAll(
-				defaultRegistrationData.getConsumerModes());
+			defaultRegistrationData.getConsumerModes());
 
 		registrationData.getConsumerWindowStates().addAll(
-				defaultRegistrationData.getConsumerWindowStates());
+			defaultRegistrationData.getConsumerWindowStates());
 
 		registrationData.getConsumerUserScopes().addAll(
-				defaultRegistrationData.getConsumerUserScopes());
+			defaultRegistrationData.getConsumerUserScopes());
 
 		registrationData.getRegistrationProperties().addAll(
-				defaultRegistrationData.getRegistrationProperties());
+			defaultRegistrationData.getRegistrationProperties());
 
 		registrationData.getExtensions().addAll(
-				defaultRegistrationData.getExtensions());
+			defaultRegistrationData.getExtensions());
 
 		return registrationData;
 	}
 
-	private String getGlobalRegistrationDataXML(){
-		//TODO: global data integration
-		return null;
-	}
-
 	public ProducerEntity getProducerEntity(String producerEntityId)
-			throws WSRPConsumerException {
+		throws WSRPConsumerException {
 
-		WSRPConfiguredProducer configuredProducer =
-				fetchConfiguredProducer(producerEntityId);;
+		WSRPConfiguredProducer configuredProducer = getConfiguredProducer(
+			producerEntityId);
 
 		if (configuredProducer == null){
 			throw new WSRPConsumerException(
-					"ProducerEntityManagerDBImpl.getProducerEntity(): " +
-						"failed to load producer entity id=" +
-							producerEntityId);
+				"No configured producer exists for producer entity id " +
+					producerEntityId);
 		}
 
 		return populateConfiguredProducer(configuredProducer);
@@ -147,97 +143,95 @@ public class ProducerEntityManagerImpl extends AbstractProducerEntityManager
 
 		try {
 			List<WSRPConfiguredProducer> configuredProducers =
-					WSRPConfiguredProducerLocalServiceUtil.findByP_N(
-						_portalId, _namespace);
+				WSRPConfiguredProducerLocalServiceUtil.getConfiguredProducers(
+					_portalId, _namespace);
 
-			for(WSRPConfiguredProducer configProducer : configuredProducers){
+			for (WSRPConfiguredProducer configuredProducer :
+					configuredProducers){
+
 				producerEntityIds.add(
-					Long.toString(configProducer.getConfiguredProducerId()));
+					String.valueOf(
+						configuredProducer.getConfiguredProducerId()));
 			}
 		}
-		catch (SystemException e) {
-			throw new WSRPConsumerException(e.getMessage());
+		catch (SystemException se) {
+			throw new WSRPConsumerException(se.getMessage());
 		}
 
 		return producerEntityIds;
 	}
 
-	public Map<String, String> getStandardUserProfileMapping()
-			throws WSRPConsumerException {
-
+	public Map<String, String> getStandardUserProfileMapping() {
 		return Collections.EMPTY_MAP;
 	}
 
-	public void init(String portalId, String namespace)
-			throws WSRPConsumerException {
-
-		this._portalId = portalId;
-		this._namespace = namespace;
+	public void init(String portalId, String namespace) {
+		_portalId = portalId;
+		_namespace = namespace;
 	}
 
-	public boolean isActivated() throws WSRPConsumerException {
+	public boolean isActivated() {
 		return true;
 	}
 
-	public void setActivated(boolean status) throws WSRPConsumerException {
-		//TODO : Global data
-	}
-
-	public void setAllowedUserProfileMapping(String producerEntityId,
-		Map<String, String> allowedUserProfileMap)
-				throws WSRPConsumerException {
-
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public void setConsumerName(String consumerName)
-		throws WSRPConsumerException {
-		//TODO: Global data
-	}
-
-	public void setCustomUserProfileMapping(String producerEntityId,
-		Map<String, String> customUserProfileMap)
-				throws WSRPConsumerException {
-
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public void setDefaultRegistrationData(RegistrationData regisData)
+	public void purgeProducerEntity(String producerEntityId)
 		throws WSRPConsumerException {
 
-		//TODO: Global data
+		try {
+			WSRPConfiguredProducerLocalServiceUtil.deleteWSRPConfiguredProducer(
+				GetterUtil.getLong(producerEntityId));
+		}
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage());
+		}
 	}
 
-	public void setIdentityPropagationType(String producerEntityId, String type)
-			throws WSRPConsumerException {
-
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void setActivated(boolean status) {
 	}
 
-	public void setName(String producerEntityId, String name)
-		throws WSRPConsumerException {
+	public void setAllowedUserProfileMapping(
+		String producerEntityId, Map<String, String> allowedUserProfileMap) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
+	}
+
+	public void setConsumerName(String consumerName) {
+	}
+
+	public void setCustomUserProfileMapping(
+		String producerEntityId, Map<String, String> customUserProfileMap) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void setDefaultRegistrationData(RegistrationData registrationData) {
+	}
+
+	public void setIdentityPropagationType(
+		String producerEntityId, String type) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void setName(String producerEntityId, String name) {
+		throw new UnsupportedOperationException();
 	}
 
 	public void setStandardUserProfileMapping(
-			Map<String, String> standardUserProfileMap)
-				throws WSRPConsumerException {
-
-		//TODO: Global data
+		Map<String, String> standardUserProfileMap) {
 	}
 
 	public void setStatus(String producerEntityId, ProducerEntityStatus status)
-			throws WSRPConsumerException {
+		throws WSRPConsumerException {
 
-		WSRPConfiguredProducer configuredProducer =	fetchConfiguredProducer(
-				producerEntityId);
+		WSRPConfiguredProducer configuredProducer =	getConfiguredProducer(
+			producerEntityId);
 
 		configuredProducer.setStatus(status.getValue());
 
 		try {
 			WSRPConfiguredProducerLocalServiceUtil.updateWSRPConfiguredProducer(
-					configuredProducer);
+				configuredProducer);
 		}
 		catch (Exception e) {
 			throw new WSRPConsumerException(e.getMessage());
@@ -245,27 +239,25 @@ public class ProducerEntityManagerImpl extends AbstractProducerEntityManager
 	}
 
 	public void setUserCategoryMapping(
-			String producerEntityId, Map<String, String> userCategoryMap)
-				throws WSRPConsumerException {
+		String producerEntityId, Map<String, String> userCategoryMap) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void storeModifiedRegistration(
-			String producerEntityId, String registrationDataXML,
-				String registrationContextXML)
-					throws WSRPConsumerException {
+			String producerEntityId, String registrationData,
+			String registrationContext)
+		throws WSRPConsumerException {
 
-		WSRPConfiguredProducer configuredProducer =
-				fetchConfiguredProducer(producerEntityId);
+		WSRPConfiguredProducer configuredProducer = getConfiguredProducer(
+			producerEntityId);
 
-		configuredProducer.setRegistrationData(registrationDataXML);
-		configuredProducer.setRegistrationContext(registrationContextXML);
+		configuredProducer.setRegistrationData(registrationData);
+		configuredProducer.setRegistrationContext(registrationContext);
 
 		try {
 			WSRPConfiguredProducerLocalServiceUtil.updateWSRPConfiguredProducer(
-					configuredProducer);
-
+				configuredProducer);
 		}
 		catch (Exception e) {
 			throw new WSRPConsumerException(e.getMessage());
@@ -275,146 +267,120 @@ public class ProducerEntityManagerImpl extends AbstractProducerEntityManager
 	public void storeProducerEntity(ProducerEntity producerEntity)
 		throws WSRPConsumerException {
 
-		String registrationDataXML = getRegistrationDataXMLFromRD(
-				producerEntity.getRegistrationData());
-
-		String registrationContextXML = getRegistrationContextXMLFromRC(
-				producerEntity.getRegistrationContext());
-
-		String serviceDescriptionXML = getServiceDescriptionXMLFromSD(
-				producerEntity.getServiceDescription());
+		String registrationData = getRegistrationDataXMLFromRD(
+			producerEntity.getRegistrationData());
+		String registrationContext = getRegistrationContextXMLFromRC(
+			producerEntity.getRegistrationContext());
+		String serviceDescription = getServiceDescriptionXMLFromSD(
+			producerEntity.getServiceDescription());
 
 		try {
-			WSRPConfiguredProducerLocalServiceUtil.addWSRPConfiguredProducer(
-					producerEntity.getName(), _portalId, _namespace,
-						producerEntity.getURL().toString(),
-						producerEntity.getVersion().value(),
-						producerEntity.getMarkupEndpoint(),
-						producerEntity.getStatus().getValue(),
-						registrationDataXML, registrationContextXML,
-						serviceDescriptionXML, null, null,
-						producerEntity.getIdentityPropagationType(),
-						producerEntity.getServiceDescriptionLastModified(),
-						1);
-
+			WSRPConfiguredProducerLocalServiceUtil.addConfiguredProducer(
+				producerEntity.getName(), _portalId, _namespace,
+				producerEntity.getURL().toString(),
+				producerEntity.getVersion().value(),
+				producerEntity.getMarkupEndpoint(),
+				producerEntity.getStatus().getValue(), registrationData,
+				registrationContext, serviceDescription, null, null,
+				producerEntity.getIdentityPropagationType(),
+				producerEntity.getServiceDescriptionLastModified(), 1);
 		}
 		catch (Exception e) {
 			throw new WSRPConsumerException(e.getMessage());
 		}
-
 	}
 
 	public void storeUpdatedServiceDescription(
-			String producerEntityId, String serviceDescriptionXML)
-				throws WSRPConsumerException {
+			String producerEntityId, String serviceDescription)
+		throws WSRPConsumerException {
 
-		WSRPConfiguredProducer configuredProducer =	fetchConfiguredProducer(
-				producerEntityId);
+		WSRPConfiguredProducer configuredProducer =	getConfiguredProducer(
+			producerEntityId);
 
-		configuredProducer.setServiceDescription(serviceDescriptionXML);
+		configuredProducer.setServiceDescription(serviceDescription);
 
 		try {
 			WSRPConfiguredProducerLocalServiceUtil.updateWSRPConfiguredProducer(
-					configuredProducer);
-
+				configuredProducer);
 		}
 		catch (Exception e) {
 			throw new WSRPConsumerException(e.getMessage());
 		}
-
 	}
 
-	public void purgeProducerEntity(String producerEntityId)
-			throws WSRPConsumerException {
+	protected WSRPConfiguredProducer getConfiguredProducer(
+			String configuredProducerId)
+		throws WSRPConsumerException {
 
 		try {
-			WSRPConfiguredProducerLocalServiceUtil.deleteWSRPConfiguredProducer(
-				Long.parseLong(producerEntityId));
+			WSRPConfiguredProducer configuredProducer =
+				WSRPConfiguredProducerLocalServiceUtil.getConfiguredProducer(
+					GetterUtil.getLong(configuredProducerId));
 
+			return configuredProducer;
 		}
-		catch (Exception se) {
-			throw new WSRPConsumerException(se.getMessage());
-		}
-	}
-
-	private WSRPConfiguredProducer fetchConfiguredProducer(
-			String configuredProducerId) throws WSRPConsumerException{
-
-		try {
-			return WSRPConfiguredProducerLocalServiceUtil.
-						getWSRPConfiguredProducer(
-							Long.parseLong(configuredProducerId));
-
-		}
-		catch (Exception se) {
-			throw new WSRPConsumerException(se.getMessage());
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage());
 		}
 	}
 
-	private ProducerEntity populateConfiguredProducer(
+	protected String getGlobalRegistrationDataXML(){
+		return null;
+	}
+
+	protected ProducerEntity populateConfiguredProducer(
 			WSRPConfiguredProducer producer)
-				throws WSRPConsumerException{
+		throws WSRPConsumerException {
 
-		long id = producer.getConfiguredProducerId();
+		String id = String.valueOf(producer.getConfiguredProducerId());
 		String name = producer.getName();
-		String urlString = producer.getProducerURL();
-		String markupURL = producer.getProducerMarkupURL();
-		String version = producer.getProducerVersion();
-		String identityPropagationType = producer.getIdentityPropagationType();
-		int status = producer.getStatus();
-		ProducerEntityStatus entityStatus =
-				ProducerEntityStatus.getProducerEntityStatus((short)status);
-
-		String registrationDataXML = producer.getRegistrationData();
-		String registrationContextXML = producer.getRegistrationContext();
-		String serviceDescriptionXML = producer.getServiceDescription();
-		String userCategoryXML = producer.getUserCategoryMapping();
-		long sdLastModified = -1;
-		String lastModified = null;
-
-		sdLastModified = producer.getSdLastModified();
-		lastModified = Long.toString(sdLastModified);
 
 		URL url = null;
+
 		try {
-			url = new URL(urlString);
-		} catch (MalformedURLException mfue) {
-			throw new WSRPConsumerException(
-					"ProducerEntityManagerImpl failed to create URL urlString="
-						+ urlString, mfue);
+			url = new URL(producer.getProducerURL());
+		}
+		catch (MalformedURLException mfue) {
+			throw new WSRPConsumerException(mfue.getMessage());
 		}
 
-		RegistrationData registrationData =
-				getRegistrationDataFromXML(registrationDataXML);
+		WSRPVersion producerVersion = WSRPVersion.fromValue(
+			producer.getProducerVersion());
+		String producerMarkupURL = producer.getProducerMarkupURL();
 
-		RegistrationContext registrationContext =
-				getRegistrationContextFromXML(registrationContextXML);
+		short status = (short)producer.getStatus();
 
-		ServiceDescription serviceDescription =
-				getServiceDesctionFromXML(serviceDescriptionXML);
+		ProducerEntityStatus entityStatus =
+			ProducerEntityStatus.getProducerEntityStatus(status);
 
-		Map userCategoryMap =
-				getConsumerObjectFactory().getMap(userCategoryXML);
+		RegistrationData registrationData = getRegistrationDataFromXML(
+			producer.getRegistrationData());
+		RegistrationContext registrationContext = getRegistrationContextFromXML(
+			producer.getRegistrationContext());
+		ServiceDescription serviceDescription = getServiceDesctionFromXML(
+			producer.getServiceDescription());
+		Map userCategoryMap = getConsumerObjectFactory().getMap(
+			producer.getUserCategoryMapping());
+		long sdLastModified = producer.getSdLastModified();
+		String lastModified = String.valueOf(sdLastModified);
+		String identityPropagationType = producer.getIdentityPropagationType();
 
-		ProducerEntity pe = new ProducerEntityImpl(
-				Long.toString(id), name, url, WSRPVersion.fromValue(version),
-					markupURL, entityStatus, registrationData,
-						registrationContext, serviceDescription,
-							userCategoryMap, null, null, sdLastModified,
-								lastModified, producer.getEntityVersion(),
-									identityPropagationType, null);
+		ProducerEntity producerEntity = new ProducerEntityImpl(
+			id, name, url, producerVersion, producerMarkupURL, entityStatus,
+			registrationData, registrationContext, serviceDescription,
+			userCategoryMap, null, null, sdLastModified, lastModified,
+			producer.getEntityVersion(), identityPropagationType, null);
 
-		return pe;
-
+		return producerEntity;
 	}
 
-	private String _namespace = null;
-	private String _portalId = null;
-
 	private static final String _DEFAULT_CONSUMER_AGENT =
-			"Liferay Portal Consumer";
+		"Liferay Portal Consumer";
 
 	private static final String _DEFAULT_CONSUMER_NAME =
-			"Liferay WSRP Consumer";
+		"Liferay WSRP Consumer";
+
+	private String _portalId;
+	private String _namespace;
 
 }

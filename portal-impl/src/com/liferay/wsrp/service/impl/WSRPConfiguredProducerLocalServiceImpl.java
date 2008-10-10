@@ -27,6 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.service.base.WSRPConfiguredProducerLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
  * <a href="WSRPConfiguredProducerLocalServiceImpl.java.html"><b><i>View Source
  * </i></b></a>
@@ -37,9 +39,9 @@ import com.liferay.wsrp.service.base.WSRPConfiguredProducerLocalServiceBaseImpl;
 public class WSRPConfiguredProducerLocalServiceImpl
 	extends WSRPConfiguredProducerLocalServiceBaseImpl {
 
-	public void addWSRPConfiguredProducer(
+	public void addConfiguredProducer(
 			String name, String portalId, String namespace, String producerURL,
-			String producerVersion,	String markupURL, int status,
+			String producerVersion,	String producerMarkupURL, int status,
 			String registrationData, String registrationContext,
 			String serviceDescription, String userCategoryMapping,
 			String customUserProfile, String identityPropagationType,
@@ -49,34 +51,39 @@ public class WSRPConfiguredProducerLocalServiceImpl
 		long configuredProducerId = counterLocalService.increment();
 
 		WSRPConfiguredProducer configuredProducer =
-				wsrpConfiguredProducerPersistence.create(configuredProducerId);
+			wsrpConfiguredProducerPersistence.create(configuredProducerId);
 
 		configuredProducer.setName(name);
 		configuredProducer.setPortalId(portalId);
 		configuredProducer.setNamespace(namespace);
 		configuredProducer.setProducerURL(producerURL);
 		configuredProducer.setProducerVersion(producerVersion);
-		configuredProducer.setProducerMarkupURL(markupURL);
+		configuredProducer.setProducerMarkupURL(producerMarkupURL);
 		configuredProducer.setStatus(status);
 		configuredProducer.setRegistrationData(registrationData);
 		configuredProducer.setRegistrationContext(registrationContext);
 		configuredProducer.setServiceDescription(serviceDescription);
 		configuredProducer.setUserCategoryMapping(userCategoryMapping);
 		configuredProducer.setCustomUserProfile(customUserProfile);
-		configuredProducer.setSdLastModified(sdLastModified);
 		configuredProducer.setIdentityPropagationType(identityPropagationType);
+		configuredProducer.setSdLastModified(sdLastModified);
 		configuredProducer.setEntityVersion(entityVersion);
 
 		wsrpConfiguredProducerPersistence.update(configuredProducer, false);
-
 	}
 
-	public java.util.List<WSRPConfiguredProducer> findByP_N(
-		java.lang.String portalId, java.lang.String namespace)
-		throws com.liferay.portal.SystemException {
+	public WSRPConfiguredProducer getConfiguredProducer(long configuredProducer)
+		throws PortalException, SystemException {
 
-		return wsrpConfiguredProducerPersistence.findByP_N(
-			portalId, namespace);
+		return wsrpConfiguredProducerPersistence.findByPrimaryKey(
+			configuredProducer);
+	}
+
+	public List<WSRPConfiguredProducer> getConfiguredProducers(
+			String portalId, String namespace)
+		throws SystemException {
+
+		return wsrpConfiguredProducerPersistence.findByP_N(portalId, namespace);
 	}
 
 }

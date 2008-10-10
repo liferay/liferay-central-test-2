@@ -103,10 +103,10 @@ public class WSRPConfiguredProducerLocalServiceUtil {
 		return getService().updateWSRPConfiguredProducer(wsrpConfiguredProducer);
 	}
 
-	public static void addWSRPConfiguredProducer(java.lang.String name,
+	public static void addConfiguredProducer(java.lang.String name,
 		java.lang.String portalId, java.lang.String namespace,
 		java.lang.String producerURL, java.lang.String producerVersion,
-		java.lang.String markupURL, int status,
+		java.lang.String producerMarkupURL, int status,
 		java.lang.String registrationData,
 		java.lang.String registrationContext,
 		java.lang.String serviceDescription,
@@ -117,17 +117,24 @@ public class WSRPConfiguredProducerLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addWSRPConfiguredProducer(name, portalId, namespace, producerURL,
-			producerVersion, markupURL, status, registrationData,
+			.addConfiguredProducer(name, portalId, namespace, producerURL,
+			producerVersion, producerMarkupURL, status, registrationData,
 			registrationContext, serviceDescription, userCategoryMapping,
 			customUserProfile, identityPropagationType, sdLastModified,
 			entityVersion);
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
+	public static com.liferay.wsrp.model.WSRPConfiguredProducer getConfiguredProducer(
+		long configuredProducer)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getConfiguredProducer(configuredProducer);
+	}
+
+	public static java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> getConfiguredProducers(
 		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException {
-		return getService().findByP_N(portalId, namespace);
+		return getService().getConfiguredProducers(portalId, namespace);
 	}
 
 	public static WSRPConfiguredProducerLocalService getService() {

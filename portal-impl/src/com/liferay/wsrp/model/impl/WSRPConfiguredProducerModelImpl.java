@@ -104,15 +104,15 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 			{ "customUserProfile", new Integer(Types.CLOB) },
 			
 
-			{ "sdLastModified", new Integer(Types.BIGINT) },
+			{ "identityPropagationType", new Integer(Types.VARCHAR) },
 			
 
-			{ "identityPropagationType", new Integer(Types.VARCHAR) },
+			{ "sdLastModified", new Integer(Types.BIGINT) },
 			
 
 			{ "entityVersion", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WSRPConfiguredProducer (configuredProducerId LONG not null primary key,name VARCHAR(75) null,portalId VARCHAR(75) null,namespace VARCHAR(75) null,producerURL VARCHAR(256) null,producerVersion VARCHAR(75) null,producerMarkupURL VARCHAR(256) null,status INTEGER,registrationData TEXT null,registrationContext TEXT null,serviceDescription TEXT null,userCategoryMapping TEXT null,customUserProfile TEXT null,sdLastModified LONG,identityPropagationType VARCHAR(75) null,entityVersion INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table WSRPConfiguredProducer (configuredProducerId LONG not null primary key,name VARCHAR(75) null,portalId VARCHAR(75) null,namespace VARCHAR(75) null,producerURL VARCHAR(256) null,producerVersion VARCHAR(75) null,producerMarkupURL VARCHAR(256) null,status INTEGER,registrationData TEXT null,registrationContext TEXT null,serviceDescription TEXT null,userCategoryMapping TEXT null,customUserProfile TEXT null,identityPropagationType VARCHAR(75) null,sdLastModified LONG,entityVersion INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table WSRPConfiguredProducer";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -138,8 +138,8 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		model.setServiceDescription(soapModel.getServiceDescription());
 		model.setUserCategoryMapping(soapModel.getUserCategoryMapping());
 		model.setCustomUserProfile(soapModel.getCustomUserProfile());
-		model.setSdLastModified(soapModel.getSdLastModified());
 		model.setIdentityPropagationType(soapModel.getIdentityPropagationType());
+		model.setSdLastModified(soapModel.getSdLastModified());
 		model.setEntityVersion(soapModel.getEntityVersion());
 
 		return model;
@@ -340,16 +340,6 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getSdLastModified() {
-		return _sdLastModified;
-	}
-
-	public void setSdLastModified(long sdLastModified) {
-		if (sdLastModified != _sdLastModified) {
-			_sdLastModified = sdLastModified;
-		}
-	}
-
 	public String getIdentityPropagationType() {
 		return GetterUtil.getString(_identityPropagationType);
 	}
@@ -363,6 +353,16 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 				(_identityPropagationType != null) &&
 				!identityPropagationType.equals(_identityPropagationType))) {
 			_identityPropagationType = identityPropagationType;
+		}
+	}
+
+	public long getSdLastModified() {
+		return _sdLastModified;
+	}
+
+	public void setSdLastModified(long sdLastModified) {
+		if (sdLastModified != _sdLastModified) {
+			_sdLastModified = sdLastModified;
 		}
 	}
 
@@ -401,9 +401,9 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 			model.setUserCategoryMapping(HtmlUtil.escape(
 					getUserCategoryMapping()));
 			model.setCustomUserProfile(HtmlUtil.escape(getCustomUserProfile()));
-			model.setSdLastModified(getSdLastModified());
 			model.setIdentityPropagationType(HtmlUtil.escape(
 					getIdentityPropagationType()));
+			model.setSdLastModified(getSdLastModified());
 			model.setEntityVersion(getEntityVersion());
 
 			model = (WSRPConfiguredProducer)Proxy.newProxyInstance(WSRPConfiguredProducer.class.getClassLoader(),
@@ -439,8 +439,8 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		clone.setServiceDescription(getServiceDescription());
 		clone.setUserCategoryMapping(getUserCategoryMapping());
 		clone.setCustomUserProfile(getCustomUserProfile());
-		clone.setSdLastModified(getSdLastModified());
 		clone.setIdentityPropagationType(getIdentityPropagationType());
+		clone.setSdLastModified(getSdLastModified());
 		clone.setEntityVersion(getEntityVersion());
 
 		return clone;
@@ -507,8 +507,8 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 	private String _serviceDescription;
 	private String _userCategoryMapping;
 	private String _customUserProfile;
-	private long _sdLastModified;
 	private String _identityPropagationType;
+	private long _sdLastModified;
 	private int _entityVersion;
 	private ExpandoBridge _expandoBridge;
 }
