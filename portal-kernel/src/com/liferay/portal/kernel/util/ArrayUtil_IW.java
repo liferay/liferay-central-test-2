@@ -315,6 +315,34 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(list);
 	}
 
+	public java.lang.String[] toStringArray(boolean[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(double[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(float[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(int[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(long[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(short[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(java.lang.Object[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
 	private ArrayUtil_IW() {
 	}
 
