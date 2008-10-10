@@ -45,6 +45,8 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.struts.MultiMessageResources;
+import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -53,8 +55,11 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.WebDirDetector;
 
 import java.io.File;
+import java.io.InputStream;
 
 import java.lang.reflect.Field;
+
+import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +78,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="HookHotDeployListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class HookHotDeployListener extends BaseHotDeployListener {
@@ -250,6 +256,41 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		LanguagesContainer languagesContainer = new LanguagesContainer();
+
+		_languagesContainerMap.put(
+			servletContextName, languagesContainer);
+
+		List<Element> languagePropertiesEls = root.elements(
+			"language-properties");
+
+		for (Element languagePropertiesEl : languagePropertiesEls) {
+			String languagePropertiesLocation = languagePropertiesEl.getText();
+
+			try {
+				URL url = portletClassLoader.getResource(
+					languagePropertiesLocation);
+
+				if (url != null) {
+					InputStream is = url.openStream();
+
+					Properties props = new Properties();
+					props.load(is);
+
+					is.close();
+
+					String localeKey = getLocaleKey(languagePropertiesLocation);
+
+					if (localeKey != null) {
+						languagesContainer.addLanguage(localeKey, props);
+					}
+				}
+			}
+			catch (Exception e) {
+				_log.error("Unable to read " + languagePropertiesLocation, e);
+			}
+		}
+
 		String customJspDir = root.elementText("custom-jsp-dir");
 
 		if (Validator.isNotNull(customJspDir)) {
@@ -322,12 +363,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			eventsContainer.unregisterEvents();
 		}
 
+		_eventsContainerMap.remove(servletContextName);
+
 		ModelListenersContainer modelListenersContainer =
 			_modelListenersContainerMap.get(servletContextName);
 
 		if (modelListenersContainer != null) {
 			modelListenersContainer.unregisterModelListeners();
 		}
+
+		_modelListenersContainerMap.remove(servletContextName);
 
 		Properties portalProperties = _portalPropertiesMap.get(
 			servletContextName);
@@ -336,11 +381,24 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			destroyPortalProperties(portalProperties);
 		}
 
+		_portalPropertiesMap.remove(servletContextName);
+
+		LanguagesContainer languagesContainer =
+			_languagesContainerMap.get(servletContextName);
+
+		if (languagesContainer != null) {
+			languagesContainer.unregisterLanguages();
+		}
+
+		_languagesContainerMap.remove(servletContextName);
+
 		CustomJspBag customJspBag = _customJspBagsMap.get(servletContextName);
 
 		if (customJspBag != null) {
 			destroyCustomJspBag(customJspBag);
 		}
+
+		_customJspBagsMap.remove(servletContextName);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -370,6 +428,22 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				customJsps.add(customJsp);
 			}
 		}
+	}
+
+	protected String getLocaleKey(String languagePropertiesLocation) {
+		String localeKey = null;
+
+		int underlinePos = languagePropertiesLocation.indexOf(
+			StringPool.UNDERLINE);
+
+		int propertiesPos = languagePropertiesLocation.indexOf(".properties");
+
+		if (underlinePos != -1 && propertiesPos != 1) {
+			localeKey = languagePropertiesLocation.substring(
+				underlinePos + 1, propertiesPos);
+		}
+
+		return localeKey;
 	}
 
 	protected BasePersistence getPersistence(String modelName) {
@@ -653,6 +727,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
+	private Map<String, LanguagesContainer> _languagesContainerMap =
+		new HashMap<String, LanguagesContainer>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
 		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
@@ -689,6 +765,33 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		private Map<String, List<Object>> _eventsMap =
 			new HashMap<String, List<Object>>();
+
+	}
+
+	private class LanguagesContainer {
+
+		public void addLanguage(String localeKey, Properties props) {
+			_multiMessageResources.putLocale(localeKey);
+
+			Properties oldProps = _multiMessageResources.putMessages(
+				props, localeKey);
+
+			_languagesMap.put(localeKey, oldProps);
+		}
+
+		public void unregisterLanguages() {
+			for (String key : _languagesMap.keySet()) {
+				Properties props = _languagesMap.get(key);
+
+				_multiMessageResources.putMessages(props, key);
+			}
+		}
+
+		private MultiMessageResources _multiMessageResources =
+			MultiMessageResourcesFactory.getInstance();
+
+		private Map<String, Properties> _languagesMap =
+			new HashMap<String, Properties>();
 
 	}
 

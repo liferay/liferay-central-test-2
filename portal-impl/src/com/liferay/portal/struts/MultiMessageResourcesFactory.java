@@ -35,7 +35,15 @@ import org.apache.struts.util.MessageResourcesFactory;
 public class MultiMessageResourcesFactory extends MessageResourcesFactory {
 
 	public MessageResources createResources(String config) {
-		return new MultiMessageResources(this, config, this.returnNull);
+		_instance = new MultiMessageResources(this, config, this.returnNull);
+
+		return _instance;
 	}
+
+	public static MultiMessageResources getInstance() {
+		return _instance;
+	}
+
+	private static MultiMessageResources _instance;
 
 }
