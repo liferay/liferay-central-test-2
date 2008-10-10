@@ -327,7 +327,7 @@ public class LanguageImpl implements Language {
 
 		if (themeDisplay != null) {
 			if ((portletConfig != null) && (key != null) &&
-				!key.endsWith(StringPool.CLOSE_BRACKET)) {
+				(!key.endsWith(StringPool.CLOSE_BRACKET))) {
 
 				StringBuilder sb = new StringBuilder();
 
@@ -336,15 +336,15 @@ public class LanguageImpl implements Language {
 				sb.append(portletConfig.getPortletName());
 				sb.append(StringPool.CLOSE_BRACKET);
 
-				key = sb.toString(); 
+				key = sb.toString();
 			}
 
 			value = get(
 				themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
 				defaultValue);
 
-			if (((value == null) || value.equals(defaultValue)) &&
-				(key != null) && key.endsWith(StringPool.CLOSE_BRACKET)) {
+			if (((value == null) || (value.equals(defaultValue))) &&
+				((key != null) && (key.endsWith(StringPool.CLOSE_BRACKET)))) {
 
 				int pos = key.lastIndexOf(StringPool.OPEN_BRACKET);
 
