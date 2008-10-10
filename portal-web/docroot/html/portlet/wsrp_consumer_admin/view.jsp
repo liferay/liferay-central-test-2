@@ -429,7 +429,7 @@ if (configuredProducerBeans == null) {
 			<td>
 				<select name="<portlet:namespace />enabled">
 					<option <%= configuredProducerBean.isStatus() ? "checked" : "" %> value="true"><liferay-ui:message key="yes" /></option>
-					<option <%= !configuredProducerBean.isStatus() ? "checked" : "" %> value="true"><liferay-ui:message key="no" /></option>
+					<option <%= !configuredProducerBean.isStatus() ? "checked" : "" %> value="false"><liferay-ui:message key="no" /></option>
 				</select>
 			</td>
 		</tr>
