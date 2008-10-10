@@ -505,7 +505,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<header-portal-css>/html/portlet/journal/css.jsp</header-portal-css>
 		<css-class-wrapper>portlet-journal-content</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
