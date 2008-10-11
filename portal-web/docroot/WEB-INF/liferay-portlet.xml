@@ -655,6 +655,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1079,6 +1081,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1091,6 +1095,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1103,6 +1109,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1115,6 +1122,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1127,6 +1135,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1139,6 +1148,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1151,6 +1161,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1163,6 +1174,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1187,6 +1199,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
