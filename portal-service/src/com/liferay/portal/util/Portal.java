@@ -364,9 +364,6 @@ public interface Portal {
 
 	public String[] getSystemRoles();
 
-	public String[] getTagsEntries(ActionRequest actionRequest)
-		throws PortalException, SystemException;
-
 	public UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest);
 

@@ -165,6 +165,15 @@ if (Validator.isNull(redirect)) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />getSuggestionsContent() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value + ' ';
+		content += document.<portlet:namespace />fm.<portlet:namespace />content.value;
+
+		return content;
+	}
+
 	function <portlet:namespace />previewPage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />preview.value = "true";
@@ -346,8 +355,8 @@ if (Validator.isNull(redirect)) {
 			<liferay-ui:tags-selector
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= classPK %>"
-				folksonomy="<%= false %>"
-				hiddenInput="none"
+				hiddenInput="categoriesEntries"
+				folksonomy="false"
 			/>
 		</td>
 	</tr>
@@ -365,6 +374,8 @@ if (Validator.isNull(redirect)) {
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= classPK %>"
 				hiddenInput="tagsEntries"
+				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
+				folksonomy="true"
 			/>
 		</td>
 	</tr>
