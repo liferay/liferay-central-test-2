@@ -205,7 +205,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		else if (role.getType() == 3) {
 			row.setClassName("lfr-role-organization");
 		}
-		
+
 		row.setClassName("lfr-role " + row.getClassName());
 		row.setClassHoverName("lfr-role " + row.getClassName());
 

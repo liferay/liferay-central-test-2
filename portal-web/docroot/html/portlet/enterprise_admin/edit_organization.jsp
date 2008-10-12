@@ -197,8 +197,8 @@ String currentSection = mainSections[0];
 			revealSection(location.hash);
 
 			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="Modified"/>)') == -1) {
-					jQuery(id).append(' <b>(<liferay-ui:message key="Modified"/>)</b>');
+				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="Modified" />)') == -1) {
+					jQuery(id).append(' <b>(<liferay-ui:message key="Modified" />)</b>');
 				}
 			}
 
