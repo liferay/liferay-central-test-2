@@ -191,6 +191,24 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			row.addText(sb.toString());
 		}
 
+		// Row css classname
+
+		if (role.getName().equals(RoleConstants.GUEST)) {
+			row.setClassName("lfr-role-guest");
+		}
+		else if (role.getType() == 1) {
+			row.setClassName("lfr-role-regular");
+		}
+		else if (role.getType() == 2) {
+			row.setClassName("lfr-role-community");
+		}
+		else if (role.getType() == 3) {
+			row.setClassName("lfr-role-organization");
+		}
+		
+		row.setClassName("lfr-role " + row.getClassName());
+		row.setClassHoverName("lfr-role " + row.getClassName());
+
 		// Add result row
 
 		resultRows.add(row);

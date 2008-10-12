@@ -328,6 +328,31 @@ body.portlet {
 	padding-left: 28px;
 }
 
+/* ---------- Permissions ---------- */
+
+.results-row.lfr-role .col-1, .results-row.hover.lfr-role .col-1 {
+	background-image: url();
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	padding-left: 30px;
+}
+
+.results-row.lfr-role-guest .col-1, .results-row.hover.lfr-role-guest .col-1 {
+	background-image: url(../images/common/guest_icon.png);
+}
+
+.results-row.lfr-role-regular .col-1, .results-row.hover.lfr-role-regular .col-1 {
+	background-image: url(../images/common/user_icon.png);
+}
+
+.results-row.lfr-role-community .col-1, .results-row.hover.lfr-role-community .col-1 {
+	background-image: url(../images/common/community_icon.png);
+}
+
+.results-row.lfr-role-organization .col-1, .results-row.hover.lfr-role-organization .col-1 {
+	background-image: url(../images/common/organization_icon.png);
+}
+
 /* ---------- Miscellaneous component styles ---------- */
 
 /* ---------- Add content dialog ---------- */

@@ -23,6 +23,12 @@ body.portlet {
 .portlet-icons {
 }
 
+.portlet-icons nobr {
+}
+
+.ie .portlet-icons nobr {
+}
+
 .portlet-content, .portlet-minimized .portlet-content-container {
 }
 
@@ -247,6 +253,23 @@ body.portlet {
 }
 
 .restricted td.col-1, .restricted.alt td.col-1 {
+}
+
+/* ---------- Permissions ---------- */
+
+.results-row.lfr-role .col-1, .results-row.hover.lfr-role .col-1 {
+}
+
+.results-row.lfr-role-guest .col-1, .results-row.hover.lfr-role-guest .col-1 {
+}
+
+.results-row.lfr-role-regular .col-1, .results-row.hover.lfr-role-regular .col-1 {
+}
+
+.results-row.lfr-role-community .col-1, .results-row.hover.lfr-role-community .col-1 {
+}
+
+.results-row.lfr-role-organization .col-1, .results-row.hover.lfr-role-organization .col-1 {
 }
 
 /* ---------- Miscellaneous component styles ---------- */
