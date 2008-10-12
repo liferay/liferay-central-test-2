@@ -205,13 +205,12 @@ Liferay.TagsSelector = new Class({
 					modal: false,
 					position: 'center',
 					resizable: false,
+					title: Liferay.Language.get('tags'),
 					width: 400,
 					open: function() {
  						var inputSearch = jQuery('.lfr-tag-search-input');
 
 						Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
-
-						inputSearch.trigger('focus');
 					},
 					onClose: function() {
 						instance._popupVisible = false;
@@ -364,51 +363,59 @@ Liferay.TagsSelector = new Class({
 			function(vocabularies) {
 				var buffer = [];
 
-				jQuery.each(
-					vocabularies,
-					function(i) {
-						var tagset = this;
-						var tagsetName = tagset.name;
+				if (vocabularies.length == 0) {
+					buffer.push('<fieldset class="no-matches"><legend>' + Liferay.Language.get('tag-sets') + '</legend>');
+					buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
+					buffer.push('</fieldset>');
 
-						instance._getVocabularyEntries(
-							tagsetName,
-							function(entries) {
+					container.html(buffer.join(''));
+				}
+				else {
+					jQuery.each(
+						vocabularies,
+						function(i) {
+							var tagset = this;
+							var tagsetName = tagset.name;
 
-								buffer.push('<fieldset>');
-								buffer.push('<legend class="lfr-tag-set-title">');
-								buffer.push(tagsetName);
-								buffer.push('</legend>');
+							instance._getVocabularyEntries(
+								tagsetName,
+								function(entries) {
+									buffer.push('<fieldset>');
+									buffer.push('<legend class="lfr-tag-set-title">');
+									buffer.push(tagsetName);
+									buffer.push('</legend>');
 
-								jQuery.each(
-									entries,
-									function(i) {
-										var entry = this;
-										var entryName = entry.name;
-										var entryId = entry.entryId;
-										var checked = (instance._curTags.indexOf(entryName) > -1) ? ' checked="checked" ' : '';
-										buffer.push('<label title="');
-										buffer.push(entryName);
-										buffer.push('">');
-										buffer.push('<input type="checkbox" value="');
-										buffer.push(entryName);
-										buffer.push('" ');
-										buffer.push(checked);
-										buffer.push('> ');
-										buffer.push(entryName);
-										buffer.push('</label>');
-									}
-								);
+									jQuery.each(
+										entries,
+										function(i) {
+											var entry = this;
+											var entryName = entry.name;
+											var entryId = entry.entryId;
+											var checked = (instance._curTags.indexOf(entryName) > -1) ? ' checked="checked" ' : '';
+											buffer.push('<label title="');
+											buffer.push(entryName);
+											buffer.push('">');
+											buffer.push('<input type="checkbox" value="');
+											buffer.push(entryName);
+											buffer.push('" ');
+											buffer.push(checked);
+											buffer.push('> ');
+											buffer.push(entryName);
+											buffer.push('</label>');
+										}
+									);
 
-								buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
-								buffer.push('</fieldset>');
+									buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
+									buffer.push('</fieldset>');
 
-								container.html(buffer.join(''));
+									container.html(buffer.join(''));
 
-								instance._initializeSearch(container);
-							}
-						);
-					}
-				);
+									instance._initializeSearch(container);
+								}
+							);
+						}
+					);
+				}
 			}
 		);
 
