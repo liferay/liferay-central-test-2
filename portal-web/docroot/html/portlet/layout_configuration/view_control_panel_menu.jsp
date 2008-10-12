@@ -49,7 +49,7 @@
 			panelCategory = "panel-manage-server";
 		}
 
-		String cssClass = "lfr-component panel-category";
+		String cssClass = "lfr-component panel-page-category";
 
 		if (category.equals(PortalUtil.getControlPanelCategory(ppid))) {
 			cssClass += " selected";

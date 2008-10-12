@@ -28,7 +28,7 @@ body {
 	width: auto;
 }
 
-.lfr-ctrl-panel .panel-menu {
+.lfr-ctrl-panel .panel-page-menu {
 	background-color: #DBE1E3;
 	width: 225px;
 }
@@ -62,21 +62,21 @@ body {
 	font-weight: bold;
 }
 
-.lfr-ctrl-panel .panel-content.panel-frontpage h2 {
+.lfr-ctrl-panel .panel-page-content.panel-page-frontpage h2 {
 	margin-top: 0;
 }
 
-.lfr-ctrl-panel .panel-content.panel-frontpage .portlet-msg-info {
+.lfr-ctrl-panel .panel-page-content.panel-page-frontpage .portlet-msg-info {
 	margin-left: 15px;
 }
 
-.lfr-ctrl-panel .panel-content-menu {
+.lfr-ctrl-panel .panel-page-content-menu {
 	background-color: #F3F5F5;
 	margin-bottom: 10px;
 	width: 100%;
 }
 
-.lfr-ctrl-panel .panel-content-menu td {
+.lfr-ctrl-panel .panel-page-content-menu td {
 	line-height: 34px;
 	padding: 0 15px;
 }
@@ -97,35 +97,35 @@ body {
 	margin: 0 5px 0 0;
 }
 
-.lfr-ctrl-panel .panel-category h2 {
+.lfr-ctrl-panel .panel-page-category h2 {
 	font-size: 14px;
 	margin: 0;
 	overflow: hidden;
 	padding: 3px 0;
 }
 
-.js .lfr-ctrl-panel .panel-category h2 {
+.js .lfr-ctrl-panel .panel-page-category h2 {
 	cursor: pointer;
 }
 
-.ie6 .lfr-ctrl-panel .panel-category h2 {
+.ie6 .lfr-ctrl-panel .panel-page-category h2 {
 	padding-bottom: 5px;
 }
 
-.lfr-ctrl-panel .panel-category.closed li ul {
+.lfr-ctrl-panel .panel-page-category.closed li ul {
 	display: none;
 }
 
-.lfr-ctrl-panel .panel-category {
+.lfr-ctrl-panel .panel-page-category {
 	background: transparent url(../images/common/category_bg.png) repeat-x scroll 0 0;
 	margin: 0;
 }
 
-.ie6 .lfr-ctrl-panel .panel-category .category-portlets li {
+.ie6 .lfr-ctrl-panel .panel-page-category .category-portlets li {
 	zoom: 1;
 }
 
-.lfr-ctrl-panel .panel-category .category-portlets a {
+.lfr-ctrl-panel .panel-page-category .category-portlets a {
 	color: #888;
 	display: block;
 	font-size: 12px;
@@ -142,26 +142,26 @@ body {
 	width: 20px;
 }
 
-.lfr-ctrl-panel .panel-category h2 span {
+.lfr-ctrl-panel .panel-page-category h2 span {
 	float: left;
 	line-height: 20px;
 }
 
-.js .lfr-ctrl-panel .panel-category.closed .toggle-menu {
+.js .lfr-ctrl-panel .panel-page-category.closed .toggle-menu {
 	background-image: url(../images/arrows/05_right.png);
 	display: block;
 }
 
-.lfr-ctrl-panel .panel-category.selected a {
+.lfr-ctrl-panel .panel-page-category.selected a {
 	color: #000;
 }
 
-.lfr-ctrl-panel .panel-category .selected-portlet {
+.lfr-ctrl-panel .panel-page-category .selected-portlet {
 	background: #BCC7CA url(../images/common/selected_portlet_bg.png) repeat-x 0 0;
 	border-bottom: 1px solid #ECF0F1;
 }
 
-.lfr-ctrl-panel .panel-category .selected-portlet a {
+.lfr-ctrl-panel .panel-page-category .selected-portlet a {
 	background: transparent url(../images/common/selected_portlet_arrow.png) no-repeat right 50%;
 	border: 1px solid #7A8487;
 	border-left: none;
@@ -211,7 +211,7 @@ body {
 	background-color: #9BAA95;
 }
 
-.lfr-ctrl-panel.panel-manage-portal .panel-menu {
+.lfr-ctrl-panel.panel-manage-portal .panel-page-menu {
 	background-color: #DCE3DB;
 }
 
@@ -229,7 +229,7 @@ body {
 	background-color: #CABCC9;
 }
 
-.lfr-ctrl-panel.panel-manage-server .panel-menu {
+.lfr-ctrl-panel.panel-manage-server .panel-page-menu {
 	background-color: #E3DBE3;
 }
 

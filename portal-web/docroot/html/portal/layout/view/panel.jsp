@@ -25,12 +25,12 @@
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 	<div id="content-wrapper">
-		<table class="lfr-panel">
+		<table class="lfr-panel-page">
 		<tr>
-			<td class="panel-menu" valign="top" width="200">
+			<td class="panel-page-menu" valign="top" width="200">
 				<liferay-portlet:runtime portletName="87" />
 			</td>
-			<td class="panel-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" valign="top">
+			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
 </c:if>
 
 <%

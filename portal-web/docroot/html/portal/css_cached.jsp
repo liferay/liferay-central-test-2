@@ -168,39 +168,39 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Panel Page styles ---------- */
 
-.lfr-panel .portal-add-content {
+.lfr-panel-page .portal-add-content {
 	padding: 0;
 	padding-left: 4px;
 }
 
-.lfr-panel .panel-content {
+.lfr-panel-page .panel-page-content {
 	border-left: 1px solid #ccc;
 	padding-left: 1em;
 }
 
-.lfr-panel .lfr-add-content h2 {
+.lfr-panel-page .lfr-add-content h2 {
 	border: 1px solid #ccc;
 	border-right: none;
 	padding: 1px;
 }
 
-.lfr-panel .lfr-add-content h2 span {
+.lfr-panel-page .lfr-add-content h2 span {
 	background: #efefef;
 	display: block;
 	padding: 2px;
 	padding-left: 5px;
 }
 
-.lfr-panel .lfr-add-content .lfr-content-category h2 {
+.lfr-panel-page .lfr-add-content .lfr-content-category h2 {
 	border: none;
 	border-bottom: 1px solid #ccc;
 }
 
-.lfr-panel .lfr-add-content .lfr-content-category h2 span {
+.lfr-panel-page .lfr-add-content .lfr-content-category h2 span {
 	background: none;
 }
 
-.lfr-panel.panel-frontpage .panel-content h2 {
+.lfr-panel-page.panel-page-frontpage .panel-page-content h2 {
 	margin-top: 0;
 }
 

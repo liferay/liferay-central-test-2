@@ -63,20 +63,20 @@ body.portlet {
 
 /* ---------- Panel Page ---------- */
 
-.lfr-panel {
+.lfr-panel-page {
 	width: 100%;
 }
 
-.lfr-panel .portlet-title {
+.lfr-panel-page .portlet-title {
 	font-size: 13px;
 }
 
-.lfr-panel #content-wrapper {
+.lfr-panel-page #content-wrapper {
 	margin: 0;
 	width: auto;
 }
 
-.lfr-panel .lfr-add-content h2 span {
+.lfr-panel-page .lfr-add-content h2 span {
 	background-color: #D3DADD;
 }
 

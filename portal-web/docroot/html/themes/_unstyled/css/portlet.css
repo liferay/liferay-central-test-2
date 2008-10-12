@@ -34,16 +34,16 @@ body.portlet {
 
 /* ---------- Panel Page ---------- */
 
-.lfr-panel {
+.lfr-panel-page {
 }
 
-.lfr-panel .portlet-title {
+.lfr-panel-page .portlet-title {
 }
 
-.lfr-panel #content-wrapper {
+.lfr-panel-page #content-wrapper {
 }
 
-.lfr-panel .lfr-add-content h2 span {
+.lfr-panel-page .lfr-add-content h2 span {
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */
@@ -330,9 +330,6 @@ body.portlet {
 }
 
 .taglib-calendar tr th {
-}
-
-.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
 }
 
 .ie .taglib-calendar tr td.first a {

@@ -44,11 +44,11 @@ String panelCategory = ParamUtil.getString(request, "panelCategory");
 	<div id="content-wrapper">
 		<table class="lfr-ctrl-panel <%= panelCategory %>">
 		<tr>
-			<td class="panel-menu" valign="top">
+			<td class="panel-page-menu" valign="top">
 				<liferay-portlet:runtime portletName="87" />
 			</td>
-			<td class="panel-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" valign="top">
-				<table class="panel-content-menu">
+			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
+				<table class="panel-page-content-menu">
 				<tr>
 					<td>
 						<c:if test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
