@@ -36,6 +36,42 @@ Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 %>
 
+<script type="text/javascript">
+	jQuery(
+		function () {
+			var panel = jQuery('.lfr-panel');
+
+			if (panel.is('.lfr-collapsible')) {
+				panel.find('.lfr-panel-titlebar').click(
+					function(event) {
+						panel.find('.lfr-panel-content').toggle();
+						panel.toggleClass('lfr-collapsed');
+
+						var panelId = panel.attr('id');
+
+						if (panelId) {
+							var state = 'closed';
+							var data = {};
+
+							if (!panel.is('.lfr-collapsed')) {
+								state = 'open';
+							}
+
+							data[panelId] = state;
+							jQuery.ajax(
+								{
+									url: themeDisplay.getPathMain() + '/portal/session_click',
+									data: data
+								}
+							);
+						}
+					}
+				)
+			}
+		}
+	);
+</script>
+
 <liferay-ui:tabs
 	names="regular-browsers,mobile-devices"
 	param="tabs4"
@@ -79,64 +115,119 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		</c:if>
 
 		<liferay-ui:tabs
-			names="themes,color-schemes,css"
+			names="themes,css"
 			param="tabs5"
 			refresh="<%= false %>"
 		>
 			<liferay-ui:section>
-
 				<%
 				List themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
-				%>
-
-				<liferay-ui:table-iterator
-					list="<%= themes %>"
-					listType="com.liferay.portal.model.Theme"
-					rowLength="2"
-					rowPadding="30"
-					rowValign="top"
-				>
-					<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td align="center">
-							<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"><br />
-
-							<a href="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/screenshot.png" target="_blank"><img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0" /></a>
-						</td>
-					</tr>
-					</table>
-				</liferay-ui:table-iterator>
-			</liferay-ui:section>
-			<liferay-ui:section>
-
-				<%
+				PluginPackage selPluginPackage = selTheme.getPluginPackage();
 				List colorSchemes = selTheme.getColorSchemes();
 				%>
 
-				<c:choose>
-					<c:when test="<%= colorSchemes.size() > 0 %>">
-						<liferay-ui:table-iterator
-							list="<%= colorSchemes %>"
-							listType="com.liferay.portal.model.ColorScheme"
-							rowLength="2"
-							rowPadding="30"
-							rowValign="top"
-						>
-							<table border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td align="center">
-									<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= sectionParam %>', '<%= sectionName %>')"><br />
+				<input name="<portlet:namespace />themeId" type="hidden" value="<%= selTheme.getThemeId() %>" />
+				<input name="<portlet:namespace />colorSchemeId" type="hidden" value="<%= selColorScheme.getColorSchemeId() %>" />
 
-									<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeThumbnailPath() %>/thumbnail.png" vspace="0" />
-								</td>
-							</tr>
-							</table>
-						</liferay-ui:table-iterator>
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:message key="this-theme-does-not-have-any-color-schemes" />
-					</c:otherwise>
-				</c:choose>
+				<div class="lfr-theme-list">
+					<div class="float-container lfr-current-theme">
+						<h3><liferay-ui:message key="current-theme" /></h3>
+							<img alt="<%= selTheme.getName() %>" class="theme-screenshot" src="<%= selTheme.getContextPath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
+							<div class="theme-details">
+								<h4 class="theme-title"><%= selTheme.getName() %></h4>
+								<dl>
+									<c:if test="<%= Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
+										<dt><liferay-ui:message key="description" /></dt>
+										<dd><%= selPluginPackage.getShortDescription() %></dd>
+									</c:if>
+									<c:if test="<%= Validator.isNotNull(selPluginPackage.getAuthor()) %>">
+										<dt><liferay-ui:message key="author" /></dt>
+										<dd><a href="<%= selPluginPackage.getPageURL() %>"><%= selPluginPackage.getAuthor() %></a></dd>
+									</c:if>
+								</dl>
+
+								<c:if test="<%= colorSchemes.size() > 0 %>">
+
+									<%
+										String panelCssClass = "";
+										String panelId = renderResponse.getNamespace() + "colorSchemes";
+										String panelViewState = GetterUtil.getString(SessionClicks.get(request, panelId, null), "closed");
+
+										if (panelViewState.equalsIgnoreCase("closed")) {
+											panelCssClass = "lfr-collapsed";
+										}
+									 %>
+
+									<div class="lfr-panel lfr-collapsible <%= panelCssClass %>" id="<%= panelId %>">
+										<h4 class="lfr-panel-titlebar">
+											<span class="lfr-panel-title">
+												<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>
+											</span>
+										</h4>
+										<div class="lfr-panel-content">
+											<ul class="lfr-component lfr-theme-list">
+											<%
+												Iterator<ColorScheme> itr = colorSchemes.iterator();
+
+												while (itr.hasNext()) {
+													ColorScheme currentColorScheme = itr.next();
+													String cssClass = "";
+
+													if (selColorScheme.getColorSchemeId().equals(currentColorScheme.getColorSchemeId())) {
+														cssClass = "selected-color-scheme";
+													}
+												%>
+													<li class="<%= cssClass %>">
+														<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= currentColorScheme.getColorSchemeId() %>', '');">
+															<span class="theme-title"><%= currentColorScheme.getName() %></span>
+															<img alt="<%= currentColorScheme.getName() %>" class="theme-thumbnail" class="" src="<%= selTheme.getContextPath() %><%= selColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= currentColorScheme.getName() %>" />
+														</a>
+													</li>
+												<%
+												}
+											 %>
+											</ul>
+										</div>
+									</div>
+								</c:if>
+							</div>
+					</div>
+
+					<div class="float-container lfr-available-themes">
+						<h3>
+							<span class="header-title">
+								<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
+							</span>
+							<span class="download-themes">
+								<a href="javascript: ;">
+									<liferay-ui:message key="download-more" />
+								</a>
+							</span>
+						</h3>
+						<c:if test="<%= themes.size() > 1 %>">
+							<ul class="lfr-component lfr-theme-list">
+								<%
+									Iterator<Theme> itr = themes.iterator();
+
+									while (itr.hasNext()) {
+										Theme currentTheme = itr.next();
+
+										if (!selTheme.getThemeId().equals(currentTheme.getThemeId())) {
+									%>
+										<li>
+											<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= currentTheme.getThemeId() %>', '');">
+												<span class="theme-title"><%= currentTheme.getName() %></span>
+												<img alt="<%= currentTheme.getName() %>" class="theme-thumbnail" src="<%= currentTheme.getContextPath() %><%= currentTheme.getImagesPath() %>/thumbnail.png" title="<%= currentTheme.getName() %>" />
+											</a>
+										</li>
+									<%
+										}
+									}
+								 %>
+							</ul>
+						</c:if>
+					</div>
+				</div>
 			</liferay-ui:section>
 			<liferay-ui:section>
 
@@ -167,7 +258,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 				<br /><br />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorSchemeId %>', '<%= sectionParam %>', '<%= sectionName %>');" />
+				<input type="button" value="<liferay-ui:message key="save" />" onclick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorSchemeId %>', '<%= sectionParam %>', '<%= sectionName %>');" />
 			</liferay-ui:section>
 		</liferay-ui:tabs>
 	</c:when>
@@ -210,24 +301,112 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 		<%
 		List themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
+		List colorSchemes = selTheme.getColorSchemes();
+		PluginPackage selPluginPackage = selTheme.getPluginPackage();
 		%>
 
-		<liferay-ui:table-iterator
-			list="<%= themes %>"
-			listType="com.liferay.portal.model.Theme"
-			rowLength="2"
-			rowPadding="30"
-			rowValign="top"
-		>
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td align="center">
-					<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '');"><br />
+		<input name="<portlet:namespace />themeId" type="hidden" value="<%= selTheme.getThemeId() %>" />
+		<input name="<portlet:namespace />colorSchemeId" type="hidden" value="<%= selColorScheme.getColorSchemeId() %>" />
 
-					<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0" />
-				</td>
-			</tr>
-			</table>
-		</liferay-ui:table-iterator>
+		<div class="lfr-theme-list">
+			<div class="float-container lfr-current-theme">
+				<h3><liferay-ui:message key="current-theme" /></h3>
+					<img alt="<%= selTheme.getName() %>" class="theme-screenshot" src="<%= selTheme.getContextPath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
+					<div class="theme-details">
+						<h4 class="theme-title"><%= selTheme.getName() %></h4>
+						<dl>
+							<c:if test="<%= Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
+								<dt><liferay-ui:message key="description" /></dt>
+								<dd><%= selPluginPackage.getShortDescription() %></dd>
+							</c:if>
+							<c:if test="<%= Validator.isNotNull(selPluginPackage.getAuthor()) %>">
+								<dt><liferay-ui:message key="author" /></dt>
+								<dd><a href="<%= selPluginPackage.getPageURL() %>"><%= selPluginPackage.getAuthor() %></a></dd>
+							</c:if>
+						</dl>
+
+						<c:if test="<%= colorSchemes.size() > 0 %>">
+
+							<%
+								String panelCssClass = "";
+								String panelId = renderResponse.getNamespace() + "colorSchemes";
+								String panelViewState = GetterUtil.getString(SessionClicks.get(request, panelId, null), "closed");
+
+								if (panelViewState.equalsIgnoreCase("closed")) {
+									panelCssClass = "lfr-collapsed";
+								}
+							 %>
+
+							<div class="lfr-panel lfr-collapsible <%= panelCssClass %>" id="<%= panelId %>">
+								<h4 class="lfr-panel-titlebar">
+									<span class="lfr-panel-title">
+										<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>
+									</span>
+								</h4>
+								<div class="lfr-panel-content">
+									<ul class="lfr-component lfr-theme-list">
+									<%
+										Iterator<ColorScheme> itr = colorSchemes.iterator();
+
+										while (itr.hasNext()) {
+											ColorScheme currentColorScheme = itr.next();
+											String cssClass = "";
+
+											if (selColorScheme.getColorSchemeId().equals(currentColorScheme.getColorSchemeId())) {
+												cssClass = "selected-color-scheme";
+											}
+										%>
+											<li class="<%= cssClass %>">
+												<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= currentColorScheme.getColorSchemeId() %>', '');">
+													<span class="theme-title"><%= currentColorScheme.getName() %></span>
+													<img alt="<%= currentColorScheme.getName() %>" class="theme-thumbnail" class="" src="<%= selTheme.getContextPath() %><%= selColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= currentColorScheme.getName() %>" />
+												</a>
+											</li>
+										<%
+										}
+									 %>
+									</ul>
+								</div>
+							</div>
+						</c:if>
+					</div>
+			</div>
+
+			<div class="float-container lfr-available-themes">
+				<h3>
+					<span class="header-title">
+						<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
+					</span>
+					<span class="download-themes">
+						<a href="javascript: ;">
+							<liferay-ui:message key="download-more" />
+						</a>
+					</span>
+				</h3>
+
+				<c:if test="<%= themes.size() > 1 %>">
+					<ul class="lfr-component lfr-theme-list">
+						<%
+							Iterator<Theme> itr = themes.iterator();
+
+							while (itr.hasNext()) {
+								Theme currentTheme = itr.next();
+
+								if (!selTheme.getThemeId().equals(currentTheme.getThemeId())) {
+							%>
+								<li>
+									<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= currentTheme.getThemeId() %>', '');">
+										<span class="theme-title"><%= currentTheme.getName() %></span>
+										<img alt="<%= currentTheme.getName() %>" class="theme-thumbnail" src="<%= currentTheme.getContextPath() %><%= currentTheme.getImagesPath() %>/thumbnail.png" title="<%= currentTheme.getName() %>" />
+									</a>
+								</li>
+							<%
+								}
+							}
+						 %>
+					</ul>
+				</c:if>
+			</div>
+		</div>
 	</c:when>
 </c:choose>

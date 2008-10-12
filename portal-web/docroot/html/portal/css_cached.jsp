@@ -166,6 +166,39 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	right: auto;
 }
 
+/* ---------- Panel component ---------- */
+
+.lfr-panel {
+}
+
+.lfr-panel-titlebar {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 2px 50%;
+	margin-bottom: 0.5em;
+	overflow: hidden;
+	padding-left: 15px;
+}
+
+.lfr-panel.lfr-collapsible .lfr-panel-titlebar {
+	cursor: pointer;
+}
+
+.lfr-panel-titlebar .lfr-panel-title {
+	float: left;
+}
+
+.lfr-panel-titlebar .lfr-tool {
+	float: right;
+}
+
+.lfr-panel.lfr-collapsed .lfr-panel-titlebar {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_right.png);
+	margin-bottom: 0;
+}
+
+.lfr-panel.lfr-collapsed .lfr-panel-content {
+	display: none;
+}
+
 /* ---------- Panel Page styles ---------- */
 
 .lfr-panel-page .portal-add-content {

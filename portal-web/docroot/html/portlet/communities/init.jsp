@@ -46,6 +46,7 @@
 <%@ page import="com.liferay.portal.RemoteExportException" %>
 <%@ page import="com.liferay.portal.RequiredGroupException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
+<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest" %>
 <%@ page import="com.liferay.portal.lar.PortletDataException" %>
