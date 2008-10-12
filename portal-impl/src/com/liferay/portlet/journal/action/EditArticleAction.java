@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -443,6 +444,9 @@ public class EditArticleAction extends PortletAction {
 
 		String articleURL = ParamUtil.getString(uploadRequest, "articleURL");
 
+		String[] categoriesEntries = StringUtil.split(
+				ParamUtil.getString(uploadRequest, "categoriesEntries"));
+
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(uploadRequest, "tagsEntries"));
 
@@ -454,6 +458,8 @@ public class EditArticleAction extends PortletAction {
 		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
 
 		JournalArticle article = null;
+
+		tagsEntries = ArrayUtil.append(tagsEntries, categoriesEntries);
 
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(structureId)) {

@@ -203,7 +203,7 @@
 		<td>
 			<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
-			<liferay-ui:message key="type" /><br />
+			<liferay-ui:message key="article-type" />
 
 			<select name="<portlet:namespace />type">
 				<option value=""></option>
@@ -222,23 +222,16 @@
 
 			<br /><br />
 
-			<liferay-ui:message key="tags" /><br />
-
-			<%
-			long classPK = 0;
-
-			if (article != null) {
-				classPK = article.getResourcePrimKey();
-			}
-			%>
+			<liferay-ui:message key="categories" />
 
 			<liferay-ui:tags-selector
 				className="<%= JournalArticle.class.getName() %>"
 				classPK="<%= classPK %>"
-				hiddenInput="tagsEntries"
+				hiddenInput="categoriesEntries"
+				folksonomy="false"
 			/>
 
-			<br />
+			<br /><br />
 
 			<liferay-ui:message key="searchable" />
 
