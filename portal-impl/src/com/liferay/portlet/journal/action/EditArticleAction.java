@@ -446,9 +446,10 @@ public class EditArticleAction extends PortletAction {
 
 		String[] categoriesEntries = StringUtil.split(
 				ParamUtil.getString(uploadRequest, "categoriesEntries"));
-
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(uploadRequest, "tagsEntries"));
+
+		tagsEntries = ArrayUtil.append(tagsEntries, categoriesEntries);
 
 		String[] communityPermissions = uploadRequest.getParameterValues(
 			"communityPermissions");
@@ -458,8 +459,6 @@ public class EditArticleAction extends PortletAction {
 		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
 
 		JournalArticle article = null;
-
-		tagsEntries = ArrayUtil.append(tagsEntries, categoriesEntries);
 
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(structureId)) {
