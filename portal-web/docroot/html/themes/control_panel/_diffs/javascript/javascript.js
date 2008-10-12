@@ -9,7 +9,7 @@ Liferay.ControlPanel = {
 	_createTogglers: function() {
 		var instance = this;
 
-		var panelCategories = jQuery('.panel-category li h2');
+		var panelCategories = jQuery('.panel-page-category li h2');
 
 		panelCategories.each(
 			function(i) {
@@ -25,7 +25,7 @@ Liferay.ControlPanel = {
 			function(event) {
 				var data = {};
 
-				var panel = jQuery(this).parents('.panel-category:first');
+				var panel = jQuery(this).parents('.panel-page-category:first');
 				var panelId = panel.attr('id');
 				var state = 'open';
 
