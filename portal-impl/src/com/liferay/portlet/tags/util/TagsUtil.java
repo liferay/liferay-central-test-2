@@ -85,12 +85,12 @@ public class TagsUtil {
 	public static String[] getTagsEntries(ActionRequest actionRequest)
 		throws PortalException, SystemException {
 
-		String[] categoriesEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "categoriesEntries"));
+		String[] tagsCategoriesEntries = StringUtil.split(
+			ParamUtil.getString(actionRequest, "tagsCategoriesEntries"));
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(actionRequest, "tagsEntries"));
 
-		return ArrayUtil.append(tagsEntries, categoriesEntries);
+		return ArrayUtil.append(tagsEntries, tagsCategoriesEntries);
 	}
 
 	public static boolean isValidWord(String word) {
