@@ -63,6 +63,7 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -714,7 +715,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
 
-	private List<String> _servletContextNames = new ArrayList<String>();
+	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
