@@ -25,7 +25,7 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.tools.HookDeployer;
+import com.liferay.portal.tools.BaseDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class HookAutoDeployer extends HookDeployer implements AutoDeployer {
+public class HookAutoDeployer extends BaseDeployer implements AutoDeployer {
 
 	public HookAutoDeployer() {
 		try {
