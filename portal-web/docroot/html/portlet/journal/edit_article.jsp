@@ -449,15 +449,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		return null;
 	}
 
-	function <portlet:namespace />getSuggestionsContent() {
-		var content = '';
-
-		content += document.<portlet:namespace />fm1.<portlet:namespace/>title.value + ' ';
-		content += window.<portlet:namespace />editor.getHTML();
-
-		return content;
-	}
-
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
@@ -812,11 +803,36 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</c:otherwise>
 		</c:choose>
 
+		<c:if test="<%= article == null %>">
+			<table class="lfr-table">
+			<tr>
+				<td colspan="2">
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="permissions" />
+				</td>
+				<td>
+					<liferay-ui:input-permissions
+						modelName="<%= JournalArticle.class.getName() %>"
+					/>
+				</td>
+			</tr>
+			</table>
+		</c:if>
+
 		<br />
 
-		<table class="lfr-table" width="100%">
+		<table class="journal-edit-article-extra">
+		<tr class="portlet-section-header results-header">
+			<td>
+				<b><liferay-ui:message key="abstract" /></b>
+			</td>
+		</tr>
 		<tr>
-			<td valign="top">
+			<td>
 				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
 					<%
@@ -825,26 +841,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 					<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 				</liferay-ui:error>
+
 				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
 
 				<table class="lfr-table">
-				<c:if test="<%= article == null %>">
-					<tr>
-						<td>
-							<liferay-ui:message key="permissions" />
-						</td>
-						<td>
-							<liferay-ui:input-permissions
-								modelName="<%= JournalArticle.class.getName() %>"
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<br />
-						</td>
-					</tr>
-				</c:if>
 				<tr>
 					<td>
 						<liferay-ui:message key="description" />
@@ -882,42 +882,13 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImage" />
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="tags" />
-					</td>
-					<td>
-
-						<%
-						long classPK = 0;
-
-						if (article != null) {
-							classPK = article.getResourcePrimKey();
-						}
-						%>
-
-						<liferay-ui:tags-selector
-							className="<%= JournalArticle.class.getName() %>"
-							classPK="<%= classPK %>"
-							hiddenInput="tagsEntries"
-							contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
-							folksonomy="true"
-						/>
-					</td>
-				</tr>
 				</table>
 			</td>
 		</tr>
 		</table>
 
-		<br />
-
 		<div>
+			<br />
 
 			<%
 			boolean hasSavePermission = false;
