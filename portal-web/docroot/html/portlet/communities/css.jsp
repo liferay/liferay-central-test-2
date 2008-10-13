@@ -133,7 +133,7 @@
 	float: left;
 }
 
-.portlet-communities .lfr-available-themes .download-themes {
+.portlet-communities .lfr-available-themes .install-themes {
 	float: right;
 	font-size: 11px;
 }

@@ -133,8 +133,8 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 				installPluginsURL.setParameter("tabs2", "theme-plugins");
 				%>
 
-				<span class="download-themes">
-					<a href="<%= installPluginsURL %>"><liferay-ui:message key="download-more" /></a>
+				<span class="install-themes">
+					<a href="<%= installPluginsURL %>"><liferay-ui:message key="install-more" /></a>
 				</span>
 			</c:if>
 		</h3>
