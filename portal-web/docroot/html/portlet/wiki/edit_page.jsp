@@ -356,7 +356,7 @@ if (Validator.isNull(redirect)) {
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= classPK %>"
 				folksonomy="<%= false %>"
-				hiddenInput="tagsCategoriesEntries"
+				hiddenInput="tagsCategories"
 			/>
 		</td>
 	</tr>
@@ -373,8 +373,8 @@ if (Validator.isNull(redirect)) {
 			<liferay-ui:tags-selector
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= classPK %>"
-				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 				hiddenInput="tagsEntries"
+				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 		</td>
 	</tr>
