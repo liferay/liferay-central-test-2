@@ -96,308 +96,98 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</div>
 		</c:if>
 
-		<c:choose>
-			<c:when test='<%= folderDisplayStyle.equals("classic") %>'>
-				<c:if test="<%= showSubfolders %>">
+		<c:if test="<%= showSubfolders %>">
 
-					<%
-					List<String> headerNames = new ArrayList<String>();
+			<%
+			List<String> headerNames = new ArrayList<String>();
 
-					for (int i = 0; i < folderColumns.length; i++) {
-						String folderColumn = folderColumns[i];
+			for (int i = 0; i < folderColumns.length; i++) {
+				String folderColumn = folderColumns[i];
 
-						if (folderColumn.equals("action")) {
-							folderColumn = StringPool.BLANK;
-						}
+				if (folderColumn.equals("action")) {
+					folderColumn = StringPool.BLANK;
+				}
 
-						headerNames.add(folderColumn);
-					}
+				headerNames.add(folderColumn);
+			}
 
-					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", foldersPerPage, portletURL, headerNames, null);
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", foldersPerPage, portletURL, headerNames, null);
 
-					int total = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+			int total = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
-					searchContainer.setTotal(total);
+			searchContainer.setTotal(total);
 
-					List results = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+			List results = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-					searchContainer.setResults(results);
+			searchContainer.setResults(results);
 
-					List resultRows = searchContainer.getResultRows();
+			List resultRows = searchContainer.getResultRows();
 
-					for (int i = 0; i < results.size(); i++) {
-						DLFolder curFolder = (DLFolder)results.get(i);
+			for (int i = 0; i < results.size(); i++) {
+				DLFolder curFolder = (DLFolder)results.get(i);
 
-						curFolder = curFolder.toEscapedModel();
+				curFolder = curFolder.toEscapedModel();
 
-						ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
+				ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
-						PortletURL rowURL = renderResponse.createRenderURL();
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-						rowURL.setWindowState(WindowState.MAXIMIZED);
+				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-						rowURL.setParameter("struts_action", "/document_library/view");
-						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+				rowURL.setParameter("struts_action", "/document_library/view");
+				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-						List subfolderIds = new ArrayList();
+				List subfolderIds = new ArrayList();
 
-						subfolderIds.add(new Long(curFolder.getFolderId()));
+				subfolderIds.add(new Long(curFolder.getFolderId()));
 
-						DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+				DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
-						int foldersCount = subfolderIds.size() - 1;
-						int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
-					%>
+				int foldersCount = subfolderIds.size() - 1;
+				int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
+			%>
 
-						<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
+				<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
 
-					<%
+			<%
 
-						// Add result row
+				// Add result row
 
-						resultRows.add(row);
-					}
+				resultRows.add(row);
+			}
 
-					boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
-					boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
-					%>
+			boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+			boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
+			%>
 
-					<c:if test="<%= showAddFolderButton || showCurFolderSearch %>">
-						<div>
-							<c:if test="<%= showCurFolderSearch %>">
-								<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
+			<c:if test="<%= showAddFolderButton || showCurFolderSearch %>">
+				<div>
+					<c:if test="<%= showCurFolderSearch %>">
+						<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
-								<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
+						<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
 
-								<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
-							</c:if>
-
-							<c:if test="<%= showAddFolderButton %>">
-								<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
-							</c:if>
-						</div>
-
-						<c:if test="<%= results.size() > 0 %>">
-							<br />
-						</c:if>
+						<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
 					</c:if>
 
-					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-					<c:if test="<%= showAddFolderButton || showCurFolderSearch || (results.size() > 0) %>">
-						<br />
+					<c:if test="<%= showAddFolderButton %>">
+						<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
 					</c:if>
+				</div>
 
-					</form>
-				</c:if>
-			</c:when>
-			<c:otherwise>
-
-				<%
-				List folders = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId);
-
-				boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
-				boolean showCurFolderSearch = showFoldersSearch && (folders.size() > 0);
-				%>
-
-				<c:if test="<%= showAddFolderButton || showCurFolderSearch %>">
-					<div>
-						<c:if test="<%= showCurFolderSearch %>">
-							<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
-
-							<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
-
-							<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
-						</c:if>
-
-						<c:if test="<%= showAddFolderButton %>">
-							<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
-						</c:if>
-					</div>
-				</c:if>
-
-				<c:if test="<%= folders.size() > 0 %>">
-					<link type="text/css" rel="stylesheet" href="<%= themeDisplay.getPathContext() %>/html/portlet/document_library/css.jsp">
-
-					<style type="text/css">
-
-						/* This CSS fixes the display of the liferay-actions-menu button. It must be included in view.jsp to work correctly in the Freeform layout on IE6. */
-
-						.portlet-document-library li .lfr-actions {
-							display: inline;
-							float: none;
-							position: absolute;
-							right: 0%;
-						}
-
-						.ie .portlet-document-library li .lfr-actions {
-							display: block;
-						}
-					</style>
-
-					<br />
-
-					<ul class="lfr-component">
-						<li class="header">
-							<span class="col-name"><liferay-ui:message key="name" /></span>
-							<span class="col-folders"><liferay-ui:message key="num-of-folders" /></span>
-							<span class="col-documents"><liferay-ui:message key="num-of-documents" /></span>
-						</li>
-
-						<%
-						PortletURL folderURL = renderResponse.createRenderURL();
-
-						folderURL.setParameter("struts_action", "/document_library/view");
-
-						for (int i = 0; i < folders.size(); i++) {
-							DLFolder curFolder = (DLFolder)folders.get(i);
-
-							curFolder = curFolder.toEscapedModel();
-
-							ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
-
-							request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
-
-							List subfolderIds = new ArrayList();
-
-							subfolderIds.add(new Long(curFolder.getFolderId()));
-
-							DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
-
-							int foldersCount = subfolderIds.size() - 1;
-							int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
-
-							folderURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-						%>
-
-						<li class="top-row">
-							<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />
-
-							<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />
-
-							<a href="<%= folderURL %>"><%= curFolder.getName() %></a>
-
-							<span class="col-folders"><%= foldersCount %></span>
-
-							<span class="col-documents"><%= fileEntriesCount %></span>
-
-							<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
-						</li>
-
-						<%
-						}
-						%>
-
-					</ul>
-
-					<%
-					PortletURL actionMenuURL = renderResponse.createRenderURL();
-
-					actionMenuURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-
-					actionMenuURL.setParameter("struts_action", "/document_library/folder_action_ajax");
-					actionMenuURL.setParameter("folderId", "");
-
-					folderURL.setParameter("folderId", "");
-					%>
-
-					<script type="text/javascript">
-						function <portlet:namespace />getFolders(imageId) {
-							var folderId = imageId.substr(imageId.lastIndexOf('-') + 1);
-
-							var expandImage = jQuery('#<portlet:namespace />expand-image-' + folderId);
-							var folderImage = jQuery('#<portlet:namespace />folder-image-' + folderId);
-
-							jQuery.ajax(
-								{
-									url: themeDisplay.getPathMain() + '/document_library/get_folders',
-									data: {
-										groupId: '<%= scopeGroupId %>',
-										folderId: folderId
-									},
-									dataType: 'json',
-									type: 'get',
-									success: function(json) {
-										if (json.length > 0) {
-											var ulId = '<portlet:namespace />ul-' + json[0].parentFolderId;
-
-											expandImage.parent('li').append('<ul id="' + ulId + '"></ul>');
-
-											var ul = jQuery('#' + ulId);
-											var folderURL = '<%= folderURL %>';
-											var actionMenuURL = '<%= actionMenuURL %>';
-
-											for (var i = 0; i < json.length; i++) {
-												ul.append(
-													'<li class="list-item">' +
-														'<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
-														'<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
-														'<a href="' + folderURL + '&<portlet:namespace />folderId=' + json[i].folderId + '">' + json[i].name + '</a>\n' +
-														'<span class="col-folders">' + json[i].subFoldersCount + '</span>\n' +
-														'<span class="col-documents">' + json[i].fileEntriesCount + '</span>\n' +
-														'<span id="span-' + json[i].folderId + '"></span>' +
-													'</li>'
-												);
-
-												jQuery('#span-' + json[i].folderId).load(
-													actionMenuURL + '&<portlet:namespace />folderId=' + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL
-												);
-											}
-										}
-
-										if (Liferay.Browser.isIe()) {
-
-											// Must create a new element to change the onclick attribute for IE
-
-											expandImage.after(document.createElement('<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/minus.png" vspace="0" />'));
-											expandImage.remove();
-
-											folderImage.after(document.createElement('<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png" vspace="0" />'));
-											folderImage.remove();
-										}
-										else {
-											expandImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/trees/minus.png");
-											expandImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
-
-											folderImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png");
-											folderImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
-										}
-									}
-								}
-							);
-						}
-
-						function <portlet:namespace />toggle(imageId) {
-							var folderId = imageId.substr(imageId.lastIndexOf('-') + 1);
-
-							var selId = document.getElementById('<portlet:namespace />ul-' + folderId);
-
-							if (selId != null) {
-								var expandImage = jQuery('#<portlet:namespace />expand-image-' + folderId);
-								var folderImage = jQuery('#<portlet:namespace />folder-image-' + folderId);
-
-								if (selId.style.display == '') {
-									selId.style.display = 'none';
-									expandImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png');
-									folderImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/common/folder.png');
-								}
-								else {
-									selId.style.display = '';
-									expandImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png');
-									folderImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png');
-								}
-							}
-						}
-					</script>
-				</c:if>
-
-				<c:if test="<%= showAddFolderButton || showCurFolderSearch || (folders.size() > 0) %>">
+				<c:if test="<%= results.size() > 0 %>">
 					<br />
 				</c:if>
+			</c:if>
 
-				</form>
-			</c:otherwise>
-		</c:choose>
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+			<c:if test="<%= showAddFolderButton || showCurFolderSearch || (results.size() > 0) %>">
+				<br />
+			</c:if>
+
+			</form>
+		</c:if>
 
 		<script type="text/javascript">
 			function <portlet:namespace />addFolder() {

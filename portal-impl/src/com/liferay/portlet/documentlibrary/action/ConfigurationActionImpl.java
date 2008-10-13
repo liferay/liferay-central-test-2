@@ -58,9 +58,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		String folderDisplayStyle = ParamUtil.getString(
-			actionRequest, "folderDisplayStyle");
-
 		long rootFolderId = ParamUtil.getLong(actionRequest, "rootFolderId");
 
 		boolean showBreadcrumbs = ParamUtil.getBoolean(
@@ -99,8 +96,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				SessionErrors.add(actionRequest, "rootFolderIdInvalid");
 			}
 		}
-
-		preferences.setValue("folderDisplayStyle", folderDisplayStyle);
 
 		preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
 

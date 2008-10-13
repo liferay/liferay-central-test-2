@@ -329,8 +329,6 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
-		<action path="/document_library/folder_action_ajax" forward="/portlet/document_library/folder_action_ajax.jsp" />
-
 		<action path="/document_library/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />
 
 		<action path="/document_library/get_folders" type="com.liferay.portlet.documentlibrary.action.GetFoldersAction" />

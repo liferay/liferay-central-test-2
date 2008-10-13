@@ -63,29 +63,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
-<liferay-ui:tabs names="display-style" />
-
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="classic" />
-	</td>
-	<td>
-		<input <%= folderDisplayStyle.equals("classic") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="classic" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="tree-view" />
-	</td>
-	<td>
-		<input <%= folderDisplayStyle.equals("tree") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="tree" />
-	</td>
-</tr>
-</table>
-
-<br />
-
 <liferay-ui:tabs names="folders-listing" />
 
 <table class="lfr-table">
