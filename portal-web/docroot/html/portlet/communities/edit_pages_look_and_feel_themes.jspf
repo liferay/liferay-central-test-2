@@ -1,0 +1,172 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%
+List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
+
+PluginPackage selPluginPackage = selTheme.getPluginPackage();
+%>
+
+<input name="<portlet:namespace />themeId" type="hidden" value="<%= selTheme.getThemeId() %>" />
+<input name="<portlet:namespace />colorSchemeId" type="hidden" value="<%= selColorScheme.getColorSchemeId() %>" />
+
+<div class="lfr-theme-list">
+	<div class="float-container lfr-current-theme">
+		<h3><liferay-ui:message key="current-theme" /></h3>
+
+		<img alt="<%= selTheme.getName() %>" class="theme-screenshot" src="<%= selTheme.getContextPath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
+
+		<div class="theme-details">
+			<h4 class="theme-title"><%= selTheme.getName() %></h4>
+
+			<dl>
+				<c:if test="<%= Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
+					<dt>
+						<liferay-ui:message key="description" />
+					</dt>
+					<dd>
+						<%= selPluginPackage.getShortDescription() %>
+					</dd>
+				</c:if>
+
+				<c:if test="<%= Validator.isNotNull(selPluginPackage.getAuthor()) %>">
+					<dt>
+						<liferay-ui:message key="author" />
+					</dt>
+					<dd>
+						<a href="<%= selPluginPackage.getPageURL() %>"><%= selPluginPackage.getAuthor() %></a>
+					</dd>
+				</c:if>
+			</dl>
+
+			<c:if test="<%= colorSchemes.size() > 0 %>">
+
+				<%
+				String panelCssClass = StringPool.BLANK;
+				String panelId = renderResponse.getNamespace() + "colorSchemes";
+				String panelViewState = GetterUtil.getString(SessionClicks.get(request, panelId, null), "closed");
+
+				if (panelViewState.equalsIgnoreCase("closed")) {
+					panelCssClass = "lfr-collapsed";
+				}
+				%>
+
+				<div class="lfr-panel lfr-collapsible <%= panelCssClass %>" id="<%= panelId %>">
+					<h4 class="lfr-panel-titlebar">
+						<span class="lfr-panel-title">
+							<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>
+						</span>
+					</h4>
+					<div class="lfr-panel-content">
+						<ul class="lfr-component lfr-theme-list">
+
+							<%
+							Iterator<ColorScheme> itr = colorSchemes.iterator();
+
+							while (itr.hasNext()) {
+								ColorScheme curColorScheme = itr.next();
+
+								String cssClass = StringPool.BLANK;
+
+								if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
+									cssClass = "selected-color-scheme";
+								}
+							%>
+
+								<li class="<%= cssClass %>">
+									<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= curColorScheme.getColorSchemeId() %>', '');">
+										<span class="theme-title">
+											<%= curColorScheme.getName() %>
+										</span>
+
+										<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getContextPath() %><%= selColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
+									</a>
+								</li>
+
+							<%
+							}
+							%>
+
+						</ul>
+					</div>
+				</div>
+			</c:if>
+		</div>
+	</div>
+
+	<div class="float-container lfr-available-themes">
+		<h3>
+			<span class="header-title">
+				<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
+			</span>
+
+			<c:if test="<%= permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
+
+				<%
+				PortletURL installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+
+				installPluginsURL.setWindowState(WindowState.MAXIMIZED);
+
+				installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
+				installPluginsURL.setParameter("backURL", currentURL);
+				installPluginsURL.setParameter("tabs2", "theme-plugins");
+				%>
+
+				<span class="download-themes">
+					<a href="<%= installPluginsURL %>"><liferay-ui:message key="download-more" /></a>
+				</span>
+			</c:if>
+		</h3>
+
+		<c:if test="<%= themes.size() > 1 %>">
+			<ul class="lfr-component lfr-theme-list">
+
+				<%
+				Iterator<Theme> itr = themes.iterator();
+
+				while (itr.hasNext()) {
+					Theme curTheme = itr.next();
+
+					if (!selTheme.getThemeId().equals(curTheme.getThemeId())) {
+				%>
+
+						<li>
+							<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= curTheme.getThemeId() %>', '');">
+								<span class="theme-title">
+									<%= curTheme.getName() %>
+								</span>
+
+								<img alt="<%= curTheme.getName() %>" class="theme-thumbnail" src="<%= curTheme.getContextPath() %><%= curTheme.getImagesPath() %>/thumbnail.png" title="<%= curTheme.getName() %>" />
+							</a>
+						</li>
+
+				<%
+					}
+				}
+				%>
+
+			</ul>
+		</c:if>
+	</div>
+</div>
