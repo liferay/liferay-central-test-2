@@ -34,13 +34,13 @@ import org.apache.struts.util.MessageResourcesFactory;
  */
 public class MultiMessageResourcesFactory extends MessageResourcesFactory {
 
-	public MessageResources createResources(String config) {
-		_instance = new MultiMessageResources(this, config, this.returnNull);
-
+	public static MultiMessageResources getInstance() {
 		return _instance;
 	}
 
-	public static MultiMessageResources getInstance() {
+	public MessageResources createResources(String config) {
+		_instance = new MultiMessageResources(this, config, this.returnNull);
+
 		return _instance;
 	}
 

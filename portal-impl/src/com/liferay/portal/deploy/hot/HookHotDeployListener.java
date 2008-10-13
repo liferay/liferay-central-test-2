@@ -258,8 +258,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		LanguagesContainer languagesContainer = new LanguagesContainer();
 
-		_languagesContainerMap.put(
-			servletContextName, languagesContainer);
+		_languagesContainerMap.put(servletContextName, languagesContainer);
 
 		List<Element> languagePropertiesEls = root.elements(
 			"language-properties");
@@ -271,19 +270,22 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				URL url = portletClassLoader.getResource(
 					languagePropertiesLocation);
 
-				if (url != null) {
-					InputStream is = url.openStream();
+				if (url == null) {
+					continue;
+				}
 
-					Properties props = new Properties();
-					props.load(is);
+				InputStream is = url.openStream();
 
-					is.close();
+				Properties properties = new Properties();
 
-					String localeKey = getLocaleKey(languagePropertiesLocation);
+				properties.load(is);
 
-					if (localeKey != null) {
-						languagesContainer.addLanguage(localeKey, props);
-					}
+				is.close();
+
+				String localeKey = getLocaleKey(languagePropertiesLocation);
+
+				if (localeKey != null) {
+					languagesContainer.addLanguage(localeKey, properties);
 				}
 			}
 			catch (Exception e) {
@@ -356,49 +358,40 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
-		EventsContainer eventsContainer = _eventsContainerMap.get(
+		EventsContainer eventsContainer = _eventsContainerMap.remove(
 			servletContextName);
 
 		if (eventsContainer != null) {
 			eventsContainer.unregisterEvents();
 		}
 
-		_eventsContainerMap.remove(servletContextName);
-
 		ModelListenersContainer modelListenersContainer =
-			_modelListenersContainerMap.get(servletContextName);
+			_modelListenersContainerMap.remove(servletContextName);
 
 		if (modelListenersContainer != null) {
 			modelListenersContainer.unregisterModelListeners();
 		}
 
-		_modelListenersContainerMap.remove(servletContextName);
-
-		Properties portalProperties = _portalPropertiesMap.get(
+		Properties portalProperties = _portalPropertiesMap.remove(
 			servletContextName);
 
 		if (portalProperties != null) {
 			destroyPortalProperties(portalProperties);
 		}
 
-		_portalPropertiesMap.remove(servletContextName);
-
-		LanguagesContainer languagesContainer =
-			_languagesContainerMap.get(servletContextName);
+		LanguagesContainer languagesContainer = _languagesContainerMap.remove(
+			servletContextName);
 
 		if (languagesContainer != null) {
 			languagesContainer.unregisterLanguages();
 		}
 
-		_languagesContainerMap.remove(servletContextName);
-
-		CustomJspBag customJspBag = _customJspBagsMap.get(servletContextName);
+		CustomJspBag customJspBag = _customJspBagsMap.remove(
+			servletContextName);
 
 		if (customJspBag != null) {
 			destroyCustomJspBag(customJspBag);
 		}
-
-		_customJspBagsMap.remove(servletContextName);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -433,14 +426,11 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	protected String getLocaleKey(String languagePropertiesLocation) {
 		String localeKey = null;
 
-		int underlinePos = languagePropertiesLocation.indexOf(
-			StringPool.UNDERLINE);
+		int x = languagePropertiesLocation.indexOf(StringPool.UNDERLINE);
+		int y = languagePropertiesLocation.indexOf(".properties");
 
-		int propertiesPos = languagePropertiesLocation.indexOf(".properties");
-
-		if (underlinePos != -1 && propertiesPos != 1) {
-			localeKey = languagePropertiesLocation.substring(
-				underlinePos + 1, propertiesPos);
+		if ((x != -1) && (y != 1)) {
+			localeKey = languagePropertiesLocation.substring(x + 1, y);
 		}
 
 		return localeKey;
@@ -727,12 +717,12 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
-	private Map<String, LanguagesContainer> _languagesContainerMap =
-		new HashMap<String, LanguagesContainer>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
 		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
 		new HashMap<String, Properties>();
+	private Map<String, LanguagesContainer> _languagesContainerMap =
+		new HashMap<String, LanguagesContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
 
@@ -770,26 +760,25 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private class LanguagesContainer {
 
-		public void addLanguage(String localeKey, Properties props) {
+		public void addLanguage(String localeKey, Properties properties) {
 			_multiMessageResources.putLocale(localeKey);
 
-			Properties oldProps = _multiMessageResources.putMessages(
-				props, localeKey);
+			Properties oldProperties = _multiMessageResources.putMessages(
+				properties, localeKey);
 
-			_languagesMap.put(localeKey, oldProps);
+			_languagesMap.put(localeKey, oldProperties);
 		}
 
 		public void unregisterLanguages() {
 			for (String key : _languagesMap.keySet()) {
-				Properties props = _languagesMap.get(key);
+				Properties properties = _languagesMap.get(key);
 
-				_multiMessageResources.putMessages(props, key);
+				_multiMessageResources.putMessages(properties, key);
 			}
 		}
 
 		private MultiMessageResources _multiMessageResources =
 			MultiMessageResourcesFactory.getInstance();
-
 		private Map<String, Properties> _languagesMap =
 			new HashMap<String, Properties>();
 
