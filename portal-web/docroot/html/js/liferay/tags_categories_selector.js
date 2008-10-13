@@ -4,16 +4,16 @@ Liferay.TagsCategoriesSelector = new Class({
 	 * OPTIONS
 	 *
 	 * Required
-	 * curTags (string): The current tags.
+	 * curTagsCategories (string): The current categories.
 	 * instanceVar {string}: The instance variable for this class.
-	 * hiddenInput {string}: The hidden input used to pass in the current tags.
-	 * summarySpan {string}: The summary span to show the current tags.
+	 * hiddenInput {string}: The hidden input used to pass in the current categories.
+	 * summarySpan {string}: The summary span to show the current categories.
 	 */
 
 	initialize: function(options) {
 		var instance = this;
 
-		instance._curTags = [];
+		instance._curTagsCategories = [];
 
 		instance.options = options;
 		instance._ns = instance.options.instanceVar || '';
@@ -29,8 +29,8 @@ Liferay.TagsCategoriesSelector = new Class({
 
 		instance._setupSelectTagsCategories();
 
-		if (options.curTags != '') {
-			instance._curTags = options.curTags.split(',');
+		if (options.curTagsCategories != '') {
+			instance._curTagsCategories = options.curTagsCategories.split(',');
 
 			instance._update();
 		}
@@ -40,14 +40,14 @@ Liferay.TagsCategoriesSelector = new Class({
 		var instance = this;
 
 		var options = instance.options;
-		var curTags = instance._curTags;
+		var curTagsCategories = instance._curTagsCategories;
 
 		jQuery('#' + instance._ns + 'CurTags' + id).remove();
 
-		var value = curTags.splice(id, 1);
+		var value = curTagsCategories.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagPopup).attr('checked', false);
+			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagCategoryPopup).attr('checked', false);
 		}
 
 		instance._update();
@@ -62,7 +62,7 @@ Liferay.TagsCategoriesSelector = new Class({
 				var entry = this;
 				var entryName = entry.name;
 				var entryId = entry.entryId;
-				var checked = (instance._curTags.indexOf(entryName) > -1) ? ' checked="checked" ' : '';
+				var checked = (instance._curTagsCategories.indexOf(entryName) > -1) ? ' checked="checked" ' : '';
 
 				buffer.push('<label title="');
 				buffer.push(entryName);
@@ -107,32 +107,32 @@ Liferay.TagsCategoriesSelector = new Class({
 
 		saveBtn.click(
 			function() {
-				instance._curTags = instance._curTags.length ? instance._curTags : [];
+				instance._curTagsCategories = instance._curTagsCategories.length ? instance._curTagsCategories : [];
 
 				container.find('input[@type=checkbox]').each(
 					function() {
-						var currentIndex = instance._curTags.indexOf(this.value);
+						var currentIndex = instance._curTagsCategories.indexOf(this.value);
 						if (this.checked) {
 							if (currentIndex == -1) {
-								instance._curTags.push(this.value);
+								instance._curTagsCategories.push(this.value);
 							}
 						}
 						else {
 							if (currentIndex > -1) {
-								instance._curTags.splice(currentIndex, 1);
+								instance._curTagsCategories.splice(currentIndex, 1);
 							}
 						}
 					}
 				);
 
 				instance._update();
-				Liferay.Popup.close(instance.selectTagPopup);
+				Liferay.Popup.close(instance.selectTagCategoryPopup);
 			}
 		);
 
 		mainContainer.append(searchContainer).append(container).append(saveBtn);
 
-		if (!instance.selectTagPopup) {
+		if (!instance.selectTagCategoryPopup) {
 			var popup = Liferay.Popup(
 				{
 					className: 'lfr-tag-selector',
@@ -149,11 +149,11 @@ Liferay.TagsCategoriesSelector = new Class({
 					},
 					onClose: function() {
 						instance._popupVisible = false;
-						instance.selectTagPopup = null;
+						instance.selectTagCategoryPopup = null;
 					}
 				}
 			);
-			instance.selectTagPopup = popup;
+			instance.selectTagCategoryPopup = popup;
 		}
 		instance._popupVisible = true;
 
@@ -248,24 +248,22 @@ Liferay.TagsCategoriesSelector = new Class({
 					jQuery.each(
 						vocabularies,
 						function(i) {
-							var tagset = this;
-							var tagsetName = tagset.name;
-							var tagsetId = tagset.groupId;
+							var tagCategorySet = this;
+							var tagCategorySetName = tagCategorySet.name;
+							var tagCategorySetId = tagCategorySet.groupId;
 
 							Liferay.Service.Tags.TagsEntry.getGroupVocabularyRootEntries(
 								{
-									groupId: tagsetId,
-									name: tagsetName
+									groupId: tagCategorySetId,
+									name: tagCategorySetName
 								},
 								function(entries) {
-									var buffer2 = [];
-
 									buffer.push('<fieldset>');
 									buffer.push('<legend class="lfr-tag-set-title">');
-									buffer.push(tagsetName);
+									buffer.push(tagCategorySetName);
 									buffer.push('</legend>');
 
-									instance._tagCategoryIterator(entries, tagsetName, buffer, 0);
+									instance._tagCategoryIterator(entries, tagCategorySetName, buffer, 0);
 
 									buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
 									buffer.push('</fieldset>');
@@ -295,39 +293,39 @@ Liferay.TagsCategoriesSelector = new Class({
 		var instance = this;
 
 		var options = instance.options;
-		var curTags = instance._curTags;
+		var curTagsCategories = instance._curTagsCategories;
 
 		var hiddenInput = jQuery('#' + options.hiddenInput);
 
-		hiddenInput.val(curTags.join(','));
+		hiddenInput.val(curTagsCategories.join(','));
 	},
 
 	_updateSummarySpan: function() {
 		var instance = this;
 
 		var options = instance.options;
-		var curTags = instance._curTags;
+		var curTagsCategories = instance._curTagsCategories;
 
 		var html = '';
 
-		jQuery(curTags).each(
-			function(i, curTag) {
+		jQuery(curTagsCategories).each(
+			function(i, curTagCategory) {
 				html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
-				html += curTag;
+				html += curTagCategory;
 				html += '<a class="ui-tag-delete" href="javascript: ' + instance._ns + '.deleteTagCategory(' + i + ');"><span>x</span></a>';
 				html += '</span>';
 			}
 		);
 
-		var tagsSummary = jQuery('#' + options.summarySpan);
+		var tagsCategoriesSummary = jQuery('#' + options.summarySpan);
 
-		if (curTags.length) {
-			tagsSummary.removeClass('empty');
+		if (curTagsCategories.length) {
+			tagsCategoriesSummary.removeClass('empty');
 		}
 		else {
-			tagsSummary.addClass('empty');
+			tagsCategoriesSummary.addClass('empty');
 		}
 
-		tagsSummary.html(html);
+		tagsCategoriesSummary.html(html);
 	}
 });

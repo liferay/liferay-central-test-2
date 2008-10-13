@@ -78,7 +78,7 @@ if (curTagsParam != null) {
 					hiddenInput: "<%= namespace + hiddenInput %>",
 					textInput: "<%= randomNamespace %>tags",
 					summarySpan: "<%= randomNamespace %>tagsSummary",
-					curTags: "<%= curTags %>",
+					curTagsEntries: "<%= curTags %>",
 					focus: <%= focus %>,
 					contentCallback: function() {
 						return <%= contentCallback %>();

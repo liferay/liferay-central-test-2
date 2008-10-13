@@ -63,7 +63,7 @@ if (curTagsParam != null) {
 					instanceVar: "<%= randomNamespace %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
 					summarySpan: "<%= randomNamespace %>tagsCategoriesSummary",
-					curTags: "<%= curTags %>"
+					curTagsCategories: "<%= curTags %>"
 				}
 			);
 		}
