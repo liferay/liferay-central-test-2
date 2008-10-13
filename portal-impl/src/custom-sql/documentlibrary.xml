@@ -199,7 +199,7 @@
 		<![CDATA[
 			(
 				SELECT
-					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileEntry' AS className
+					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileEntry
 				WHERE
@@ -208,7 +208,7 @@
 			UNION ALL
 			(
 				SELECT
-					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileShortcut' AS className
+					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileShortcut
 				INNER JOIN
@@ -219,14 +219,14 @@
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY
-				title ASC
+				modelFolder ASC, title ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_FE_FS_ByFolderIds">
 		<![CDATA[
 			(
 				SELECT
-					folderId AS folderId, name AS name, name AS title, 0 AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFolder' AS className
+					folderId AS folderId, name AS name, name AS title, 0 AS fileShortcutId, 1 AS modelFolder
 				FROM
 					DLFolder
 				WHERE
@@ -235,7 +235,7 @@
 			UNION ALL
 			(
 				SELECT
-					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileEntry' AS className
+					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileEntry
 				WHERE
@@ -244,7 +244,7 @@
 			UNION ALL
 			(
 				SELECT
-					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileShortcut' AS className
+					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileShortcut
 				INNER JOIN
@@ -255,7 +255,7 @@
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY
-				title ASC
+				modelFolder ASC, title ASC
 		]]>
 	</sql>
 </custom-sql>

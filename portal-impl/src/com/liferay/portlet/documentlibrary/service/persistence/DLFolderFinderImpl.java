@@ -198,7 +198,6 @@ public class DLFolderFinderImpl
 			q.addScalar("name", Type.STRING);
 			q.addScalar("title", Type.STRING);
 			q.addScalar("fileShortcutId", Type.LONG);
-			q.addScalar("className", Type.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -218,24 +217,21 @@ public class DLFolderFinderImpl
 			while (itr.hasNext()) {
 				Object[] array = itr.next();
 
-				Long folderId = (Long)array[0];
+				long folderId = (Long)array[0];
 				String name = (String)array[1];
 				//String title = (String)array[2];
-				long fileShortcutId = ((Long)array[3]).longValue();
-				String className = (String)array[4];
+				long fileShortcutId = (Long)array[3];
 
 				Object obj = null;
 
-				if (className.equals(DLFileEntry.class.getName())) {
-					obj = DLFileEntryUtil.findByF_N(folderId.longValue(), name);
-				}
-				else if (className.equals(DLFileShortcut.class.getName())) {
+				if (fileShortcutId > 0) {
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
-
-				if (obj != null) {
-					models.add(obj);
+				else {
+					obj = DLFileEntryUtil.findByF_N(folderId, name);
 				}
+
+				models.add(obj);
 			}
 
 			return models;
@@ -275,7 +271,7 @@ public class DLFolderFinderImpl
 			q.addScalar("name", Type.STRING);
 			q.addScalar("title", Type.STRING);
 			q.addScalar("fileShortcutId", Type.LONG);
-			q.addScalar("className", Type.STRING);
+			q.addScalar("modelFolder", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -299,27 +295,25 @@ public class DLFolderFinderImpl
 			while (itr.hasNext()) {
 				Object[] array = itr.next();
 
-				Long folderId = (Long)array[0];
+				long folderId = (Long)array[0];
 				String name = (String)array[1];
 				//String title = (String)array[2];
-				long fileShortcutId = ((Long)array[3]).longValue();
-				String className = (String)array[4];
+				long fileShortcutId = (Long)array[3];
+				long modelFolder = (Long)array[4];
 
 				Object obj = null;
 
-				if (className.equals(DLFolder.class.getName())) {
-					obj = DLFolderUtil.findByPrimaryKey(folderId.longValue());
+				if (modelFolder == 1) {
+					obj = DLFolderUtil.findByPrimaryKey(folderId);
 				}
-				else if (className.equals(DLFileEntry.class.getName())) {
-					obj = DLFileEntryUtil.findByF_N(folderId.longValue(), name);
-				}
-				else if (className.equals(DLFileShortcut.class.getName())) {
+				else if (fileShortcutId > 0) {
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
-
-				if (obj != null) {
-					models.add(obj);
+				else {
+					obj = DLFileEntryUtil.findByF_N(folderId, name);
 				}
+
+				models.add(obj);
 			}
 
 			return models;
