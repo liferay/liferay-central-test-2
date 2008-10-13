@@ -622,6 +622,12 @@ public class PortalUtil {
 		return getPortal().getSystemRoles();
 	}
 
+	public static String[] getTagsEntries(ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		return getPortal().getTagsEntries(actionRequest);
+	}
+
 	public static UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest) {
 
