@@ -18,7 +18,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Organization']</td>
+	<td>link=Add Organization</td>
 	<td></td>
 </tr>
 <tr>
@@ -37,63 +37,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_79_countryId</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_79_regionId</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>_79_type</td>
 	<td>label=Regular</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_79_countryId</td>
-	<td>label=United States</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_79_regionId</td>
-	<td>label=California</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add']</td>
+	<td>click</td>
+	<td>websitesLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_79_url00</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_79_address</td>
-	<td>Selenium@selenium.com</td>
+	<td>_79_url00</td>
+	<td>http://www.selenium.com</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_79_typeId</td>
-	<td>label=E-mail</td>
+	<td>waitForElementPresent</td>
+	<td>_79_primary00Checkbox</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>_79_primaryCheckbox</td>
+	<td>_79_primary00Checkbox</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commentsLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_79_comments</td>
 	<td></td>
 </tr>
 <tr>

@@ -35,8 +35,7 @@ public class AddOrganizationTest extends BaseTestCase {
 	public void testAddOrganization() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Organization']"));
+		selenium.click(RuntimeVariables.replace("link=Add Organization"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", RuntimeVariables.replace("Selenium"));
 		selenium.type("_79_name", RuntimeVariables.replace("Selenium"));
@@ -57,54 +56,67 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_79_countryId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_79_regionId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_79_type", RuntimeVariables.replace("label=Regular"));
-		selenium.select("_79_countryId",
-			RuntimeVariables.replace("label=United States"));
-		Thread.sleep(5000);
-		selenium.select("_79_regionId",
-			RuntimeVariables.replace("label=California"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_79_address",
-			RuntimeVariables.replace("Selenium@selenium.com"));
-		selenium.select("_79_typeId", RuntimeVariables.replace("label=E-mail"));
-		selenium.click("_79_primaryCheckbox");
+		selenium.click("websitesLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_79_url00")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_79_url00",
+			RuntimeVariables.replace("http://www.selenium.com"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_79_primary00Checkbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_79_primary00Checkbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("commentsLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_79_comments")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_79_comments",
 			RuntimeVariables.replace("This is a test comment!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

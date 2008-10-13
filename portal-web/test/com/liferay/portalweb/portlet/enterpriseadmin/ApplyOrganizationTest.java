@@ -85,7 +85,7 @@ public class ApplyOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Liferay, Inc.")) {
+				if (selenium.isElementPresent("link=Selenium")) {
 					break;
 				}
 			}
@@ -97,7 +97,7 @@ public class ApplyOrganizationTest extends BaseTestCase {
 
 		Thread.sleep(2000);
 		selenium.selectWindow("name=organization");
-		selenium.click("link=Liferay, Inc.");
+		selenium.click("link=Selenium");
 		selenium.selectWindow("null");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
@@ -108,7 +108,7 @@ public class ApplyOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Liferay, Inc.")) {
+				if (selenium.isTextPresent("Selenium")) {
 					break;
 				}
 			}
