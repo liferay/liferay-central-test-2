@@ -235,8 +235,8 @@
 			<liferay-ui:tags-selector
 				className="<%= JournalArticle.class.getName() %>"
 				classPK="<%= classPK %>"
-				hiddenInput="categoriesEntries"
-				folksonomy="false"
+				folksonomy="<%= false %>"
+				hiddenInput="tagsCategoriesEntries"
 			/>
 
 			<br />
@@ -246,8 +246,8 @@
 			<liferay-ui:tags-selector
 				className="<%= JournalArticle.class.getName() %>"
 				classPK="<%= classPK %>"
-				hiddenInput="tagsEntries"
 				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
+				hiddenInput="tagsEntries"
 			/>
 
 			<br /><br />
