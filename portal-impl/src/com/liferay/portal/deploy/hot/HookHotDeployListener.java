@@ -176,6 +176,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			_log.info("Registering hook for " + servletContextName);
 		}
 
+		_servletContextNames.add(servletContextName);
+
 		ClassLoader portletClassLoader = event.getContextClassLoader();
 
 		Document doc = SAXReaderUtil.read(xml, true);
@@ -351,10 +353,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking undeploy for " + servletContextName);
 		}
 
-		String xml = HttpUtil.URLtoString(
-			servletContext.getResource("/WEB-INF/liferay-hook.xml"));
-
-		if (xml == null) {
+		if (!_servletContextNames.remove(servletContextName)) {
 			return;
 		}
 
@@ -715,6 +714,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
 
+	private List<String> _servletContextNames = new ArrayList<String>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
