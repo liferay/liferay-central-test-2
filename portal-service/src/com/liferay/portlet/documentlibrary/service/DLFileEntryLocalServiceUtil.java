@@ -359,29 +359,6 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getFileEntries(folderId, start, end, obc);
 	}
 
-	public static java.util.List<Object> getFileEntriesAndShortcuts(
-		long folderId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService().getFileEntriesAndShortcuts(folderId, start, end);
-	}
-
-	public static java.util.List<Object> getFileEntriesAndShortcuts(
-		java.util.List<Long> folderIds, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService().getFileEntriesAndShortcuts(folderIds, start, end);
-	}
-
-	public static int getFileEntriesAndShortcutsCount(long folderId)
-		throws com.liferay.portal.SystemException {
-		return getService().getFileEntriesAndShortcutsCount(folderId);
-	}
-
-	public static int getFileEntriesAndShortcutsCount(
-		java.util.List<Long> folderIds)
-		throws com.liferay.portal.SystemException {
-		return getService().getFileEntriesAndShortcutsCount(folderIds);
-	}
-
 	public static int getFileEntriesCount(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getService().getFileEntriesCount(folderId);

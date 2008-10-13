@@ -153,6 +153,21 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.util.List<Object> getFileEntriesAndFileShortcuts(
+		long folderId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<Object> getFileEntriesAndFileShortcuts(
+		java.util.List<Long> folderIds, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getFileEntriesAndFileShortcutsCount(long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public int getFileEntriesAndFileShortcutsCount(
+		java.util.List<Long> folderIds)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
@@ -162,6 +177,21 @@ public interface DLFolderLocalService {
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long folderId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+		java.util.List<Long> folderIds, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+		java.util.List<Long> folderIds)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long companyId) throws com.liferay.portal.SystemException;

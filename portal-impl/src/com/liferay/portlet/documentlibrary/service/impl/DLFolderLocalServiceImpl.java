@@ -280,6 +280,40 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
+	public List<Object> getFileEntriesAndFileShortcuts(
+			long folderId, int start, int end)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return dlFolderFinder.findFE_FS_ByFolderIds(folderIds, start, end);
+	}
+
+	public List<Object> getFileEntriesAndFileShortcuts(
+			List<Long> folderIds, int start, int end)
+		throws SystemException {
+
+		return dlFolderFinder.findFE_FS_ByFolderIds(folderIds, start, end);
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(long folderId)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return dlFolderFinder.countFE_FS_ByFolderIds(folderIds);
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(List<Long> folderIds)
+		throws SystemException {
+
+		return dlFolderFinder.countFE_FS_ByFolderIds(folderIds);
+	}
+
 	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -290,6 +324,41 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long folderId, int start, int end)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return dlFolderFinder.findF_FE_FS_ByFolderIds(folderIds, start, end);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			List<Long> folderIds, int start, int end)
+		throws SystemException {
+
+		return dlFolderFinder.findF_FE_FS_ByFolderIds(folderIds, start, end);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(long folderId)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return dlFolderFinder.countF_FE_FS_ByFolderIds(folderIds);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			List<Long> folderIds)
+		throws SystemException {
+
+		return dlFolderFinder.countF_FE_FS_ByFolderIds(folderIds);
 	}
 
 	public List<DLFolder> getFolders(long companyId) throws SystemException {

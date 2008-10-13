@@ -565,42 +565,6 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByFolderId(folderId, start, end, obc);
 	}
 
-	public List<Object> getFileEntriesAndShortcuts(
-			long folderId, int start, int end)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return dlFileEntryAndShortcutFinder.findByFolderIds(
-			folderIds, start, end);
-	}
-
-	public List<Object> getFileEntriesAndShortcuts(
-			List<Long> folderIds, int start, int end)
-		throws SystemException {
-
-		return dlFileEntryAndShortcutFinder.findByFolderIds(
-			folderIds, start, end);
-	}
-
-	public int getFileEntriesAndShortcutsCount(long folderId)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
-	}
-
-	public int getFileEntriesAndShortcutsCount(List<Long> folderIds)
-		throws SystemException {
-
-		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
-	}
-
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		return dlFileEntryPersistence.countByFolderId(folderId);
 	}

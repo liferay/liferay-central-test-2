@@ -71,7 +71,6 @@
 
 		<tx-required>getFileAsStream</tx-required>
 	</entity>
-	<entity name="DLFileEntryAndShortcut" local-service="false" remote-service="false" />
 	<entity name="DLFileRank" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

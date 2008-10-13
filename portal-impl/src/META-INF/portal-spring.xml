@@ -1131,10 +1131,6 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl" />
-	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileRankLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl" />
@@ -1218,6 +1214,10 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinderUtil">
+		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoColumnLocalServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

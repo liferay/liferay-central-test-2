@@ -1,54 +1,6 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.countByFolderIds">
-		<![CDATA[
-			(
-				SELECT
-					COUNT(*) AS COUNT_VALUE
-				FROM
-					DLFileEntry
-				WHERE
-					[$FILE_ENTRY_FOLDER_ID$]
-			)
-			UNION ALL
-			(
-				SELECT
-					COUNT(*) AS COUNT_VALUE
-				FROM
-					DLFileShortcut
-				WHERE
-					[$FILE_SHORTCUT_FOLDER_ID$]
-			)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.findByFolderIds">
-		<![CDATA[
-			(
-				SELECT
-					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId
-				FROM
-					DLFileEntry
-				WHERE
-					[$FILE_ENTRY_FOLDER_ID$]
-			)
-			UNION ALL
-			(
-				SELECT
-					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId
-				FROM
-					DLFileShortcut
-				INNER JOIN
-					DLFileEntry ON
-						(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
-						(DLFileEntry.name = DLFileShortcut.toName)
-				WHERE
-					[$FILE_SHORTCUT_FOLDER_ID$]
-			)
-			ORDER BY
-				title ASC
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByFolderIds">
 		<![CDATA[
 			SELECT
@@ -190,6 +142,120 @@
 			WHERE
 				(DLFileShortcut.uuid_ = ?) AND
 				(DLFolder.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countFE_FS_ByFolderIds">
+		<![CDATA[
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFileEntry
+				WHERE
+					[$FILE_ENTRY_FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFileShortcut
+				WHERE
+					[$FILE_SHORTCUT_FOLDER_ID$]
+			)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countF_FE_FS_ByFolderIds">
+		<![CDATA[
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFolder
+				WHERE
+					[$FOLDER_PARENT_FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFileEntry
+				WHERE
+					[$FILE_ENTRY_FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFileShortcut
+				WHERE
+					[$FILE_SHORTCUT_FOLDER_ID$]
+			)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findFE_FS_ByFolderIds">
+		<![CDATA[
+			(
+				SELECT
+					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileEntry' AS className
+				FROM
+					DLFileEntry
+				WHERE
+					[$FILE_ENTRY_FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileShortcut' AS className
+				FROM
+					DLFileShortcut
+				INNER JOIN
+					DLFileEntry ON
+						(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
+						(DLFileEntry.name = DLFileShortcut.toName)
+				WHERE
+					[$FILE_SHORTCUT_FOLDER_ID$]
+			)
+			ORDER BY
+				title ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_FE_FS_ByFolderIds">
+		<![CDATA[
+			(
+				SELECT
+					folderId AS folderId, name AS name, name AS title, 0 AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFolder' AS className
+				FROM
+					DLFolder
+				WHERE
+					[$FOLDER_PARENT_FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileEntry' AS className
+				FROM
+					DLFileEntry
+				WHERE
+					[$FILE_ENTRY_FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 'com.liferay.portlet.documentlibrary.model.DLFileShortcut' AS className
+				FROM
+					DLFileShortcut
+				INNER JOIN
+					DLFileEntry ON
+						(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
+						(DLFileEntry.name = DLFileShortcut.toName)
+				WHERE
+					[$FILE_SHORTCUT_FOLDER_ID$]
+			)
+			ORDER BY
+				title ASC
 		]]>
 	</sql>
 </custom-sql>

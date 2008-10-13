@@ -54,7 +54,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
@@ -62,6 +61,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersist
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 
 /**
@@ -104,15 +104,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 
 	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
 		this.dlFileEntryFinder = dlFileEntryFinder;
-	}
-
-	public DLFileEntryAndShortcutFinder getDLFileEntryAndShortcutFinder() {
-		return dlFileEntryAndShortcutFinder;
-	}
-
-	public void setDLFileEntryAndShortcutFinder(
-		DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
-		this.dlFileEntryAndShortcutFinder = dlFileEntryAndShortcutFinder;
 	}
 
 	public DLFileRankLocalService getDLFileRankLocalService() {
@@ -218,6 +209,14 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 
 	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
 		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	public DLFolderFinder getDLFolderFinder() {
+		return dlFolderFinder;
+	}
+
+	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
+		this.dlFolderFinder = dlFolderFinder;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -383,8 +382,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl")
 	protected DLFileEntryFinder dlFileEntryFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl")
-	protected DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder;
 	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl")
 	protected DLFileRankLocalService dlFileRankLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
@@ -409,6 +406,8 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLFolderService dlFolderService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected DLFolderPersistence dlFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
+	protected DLFolderFinder dlFolderFinder;
 	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
 	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")

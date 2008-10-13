@@ -144,7 +144,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 				int foldersCount = subfolderIds.size() - 1;
-				int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
+				int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(subfolderIds);
 			%>
 
 				<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
@@ -271,11 +271,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", fileEntriesPerPage, portletURL, headerNames, null);
 
-			int total = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(folder.getFolderId());
+			int total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(folder.getFolderId());
 
 			searchContainer.setTotal(total);
 
-			List results = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
