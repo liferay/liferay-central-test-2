@@ -22,79 +22,50 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/tags_selector/init.jsp"%>
+<%@ include file="/html/taglib/ui/tags_selector/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+
 String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_selector:classPK"));
+String hiddenInput = (String)request.getAttribute("liferay-ui:tags_selector:hiddenInput");
+String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:curTags"));
 
-TagsAsset asset = null;
-Set<TagsEntry> assetEntries = Collections.EMPTY_SET;
+if (Validator.isNotNull(className) && (classPK > 0)) {
+	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, false);
 
-if (classPK > 0) {
-	asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
-	assetEntries = SetUtil.fromList(TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), false));
+	curTags = ListUtil.toString(entries, "name");
 }
 
-List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, false);
+String curTagsParam = request.getParameter(hiddenInput);
+
+if (curTagsParam != null) {
+	curTags = curTagsParam;
+}
 %>
 
-<div>
+<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-	<%
-	StringBuilder sb = new StringBuilder();
+<span class="ui-tags empty" id="<%= randomNamespace %>tagsCategoriesSummary"></span>
 
-	sb.append("<table>");
+<input id="<%= randomNamespace %>selectTagsCategories" type="button" value="<liferay-ui:message key="select-categories" />" />
 
-	for (TagsVocabulary vocabulary : vocabularies) {
-		String vocabularyName = vocabulary.getName();
+<script type="text/javascript">
+	var <%= randomNamespace %> = null;
 
-		sb.append("<tr><td>");
-		sb.append(vocabularyName);
-		sb.append("</td><td><select name=\"");
-		sb.append(TagsEntryConstants.VOCABULARY);
-		sb.append(vocabulary.getVocabularyId());
-		sb.append("\"><option value=\"\"></option>");
-
-		List<TagsEntry> entries = TagsEntryLocalServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
-
-		for (TagsEntry entry : entries) {
-			_buildTree(entry, vocabularyName, assetEntries, StringPool.BLANK, sb);
+	jQuery(
+		function() {
+			<%= randomNamespace %> = new Liferay.TagsCategoriesSelector(
+				{
+					instanceVar: "<%= randomNamespace %>",
+					hiddenInput: "<%= namespace + hiddenInput %>",
+					summarySpan: "<%= randomNamespace %>tagsCategoriesSummary",
+					curTags: "<%= curTags %>"
+				}
+			);
 		}
-
-		sb.append("</select></td></tr>");
-	}
-
-	sb.append("</table>");
-	%>
-
-	<%= sb.toString() %>
-</div>
-
-<%!
-private void _buildTree(TagsEntry entry, String vocabularyName, Set<TagsEntry> assetEntries, String level, StringBuilder sb)
-	throws SystemException, PortalException, java.rmi.RemoteException {
-
-	String entryName = entry.getName();
-
-	sb.append("<option ");
-
-	if (assetEntries.contains(entry)) {
-		sb.append("selected=\"selected\" ");
-	}
-
-	sb.append("value=\"");
-	sb.append(entry.getEntryId());
-	sb.append("\">");
-	sb.append(level);
-	sb.append(StringPool.SPACE);
-	sb.append(entryName);
-	sb.append("</option>");
-
-	List<TagsEntry> entryChildren = TagsEntryLocalServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
-
-	for (TagsEntry entryChild : entryChildren) {
-		_buildTree(entryChild, vocabularyName, assetEntries, level + StringPool.DASH, sb);
-	}
-}
-%>
+	);
+</script>

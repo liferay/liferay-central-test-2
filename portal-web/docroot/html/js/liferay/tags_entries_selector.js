@@ -1,4 +1,4 @@
-Liferay.TagsSelector = new Class({
+Liferay.TagsEntriesSelector = new Class({
 
 	/**
 	 * OPTIONS

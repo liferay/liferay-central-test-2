@@ -72,7 +72,7 @@ if (curTagsParam != null) {
 
 	jQuery(
 		function() {
-			<%= randomNamespace %> = new Liferay.TagsSelector(
+			<%= randomNamespace %> = new Liferay.TagsEntriesSelector(
 				{
 					instanceVar: "<%= randomNamespace %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
