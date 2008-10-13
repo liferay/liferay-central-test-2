@@ -449,6 +449,15 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		return null;
 	}
 
+	function <portlet:namespace />getSuggestionsContent() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm1.<portlet:namespace/>title.value + ' ';
+		content += window.<portlet:namespace />editor.getHTML();
+
+		return content;
+	}
+
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
@@ -887,9 +896,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		</tr>
 		</table>
 
-		<div>
-			<br />
+		<br />
 
+		<div>
 			<%
 			boolean hasSavePermission = false;
 

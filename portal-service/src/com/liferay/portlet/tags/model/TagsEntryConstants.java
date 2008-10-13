@@ -32,5 +32,4 @@ public class TagsEntryConstants {
 
 	public static final long DEFAULT_PARENT_ENTRY_ID = 0;
 
-	public static final String VOCABULARY = "VOCABULARY";
 }

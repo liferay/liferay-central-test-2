@@ -222,8 +222,6 @@
 
 			<br /><br />
 
-			<liferay-ui:message key="tags" /><br />
-
 			<%
 			long classPK = 0;
 
@@ -232,13 +230,27 @@
 			}
 			%>
 
+			<liferay-ui:message key="categories" /><br />
+
+			<liferay-ui:tags-selector
+				className="<%= JournalArticle.class.getName() %>"
+				classPK="<%= classPK %>"
+				hiddenInput="categoriesEntries"
+				folksonomy="false"
+			/>
+
+			<br />
+
+			<liferay-ui:message key="tags" /><br />
+
 			<liferay-ui:tags-selector
 				className="<%= JournalArticle.class.getName() %>"
 				classPK="<%= classPK %>"
 				hiddenInput="tagsEntries"
+				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 
-			<br />
+			<br /><br />
 
 			<liferay-ui:message key="searchable" />
 

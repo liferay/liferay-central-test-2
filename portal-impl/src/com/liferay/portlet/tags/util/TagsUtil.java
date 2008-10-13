@@ -24,14 +24,12 @@ package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -40,12 +38,9 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.util.List;
@@ -90,37 +85,12 @@ public class TagsUtil {
 	public static String[] getTagsEntries(ActionRequest actionRequest)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		String[] categoriesEntries = StringUtil.split(
+			ParamUtil.getString(actionRequest, "categoriesEntries"));
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(actionRequest, "tagsEntries"));
 
-		String tagsEntries = ParamUtil.getString(actionRequest, "tagsEntries");
-
-		List<TagsVocabulary> vocabularies =
-			TagsVocabularyLocalServiceUtil.getCompanyVocabularies(
-				themeDisplay.getCompanyId(), false);
-
-		for (TagsVocabulary vocabulary : vocabularies) {
-			String vocabularyParamName =
-				TagsEntryConstants.VOCABULARY +
-					String.valueOf(vocabulary.getVocabularyId());
-
-			long entryId = ParamUtil.getLong(
-				actionRequest, vocabularyParamName);
-
-			if (entryId <= 0) {
-				continue;
-			}
-
-			if (Validator.isNotNull(tagsEntries)) {
-				tagsEntries += StringPool.COMMA;
-			}
-
-			TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
-
-			tagsEntries += entry.getName();
-		}
-
-		return StringUtil.split(tagsEntries);
+		return ArrayUtil.append(tagsEntries, categoriesEntries);
 	}
 
 	public static boolean isValidWord(String word) {

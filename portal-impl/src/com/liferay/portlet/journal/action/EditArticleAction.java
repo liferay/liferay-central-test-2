@@ -443,8 +443,7 @@ public class EditArticleAction extends PortletAction {
 
 		String articleURL = ParamUtil.getString(uploadRequest, "articleURL");
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(uploadRequest, "tagsEntries"));
+		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
 		String[] communityPermissions = uploadRequest.getParameterValues(
 			"communityPermissions");
