@@ -22,9 +22,11 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/tags_selector/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:folksonomy"));
 %>
 

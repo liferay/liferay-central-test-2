@@ -9013,6 +9013,7 @@ Liferay.zIndex = {
 	DRAG_ITEM:		460,
 	TOOLTIP:		470
 };
+
 Liferay.Events = {
 	bind: function(event, func, scope) {
 		var instance = this;
