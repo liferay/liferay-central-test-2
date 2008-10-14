@@ -56,6 +56,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_emptyResultsMessage = null;
 		_hasResults = false;
 		_hover = false;
+		_id = null;
 		_iteratorURL = null;
 		_orderByCol = null;
 		_orderByColParam = SearchContainer.DEFAULT_ORDER_BY_COL_PARAM;
@@ -92,6 +93,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 					getDelta(), _iteratorURL,  null, _emptyResultsMessage);
 			}
 
+			_searchContainer.setId(_id);
 			_searchContainer.setHover(_hover);
 
 			if (Validator.isNotNull(_orderByColParam)) {
@@ -223,6 +225,10 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_hover = hover;
 	}
 
+	public void setId(String id) {
+		_id = id;
+	}
+
 	public void setIteratorURL(PortletURL iteratorURL) {
 		_iteratorURL = iteratorURL;
 	}
@@ -270,6 +276,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	private String _emptyResultsMessage;
 	private boolean _hasResults;
 	private boolean _hover = true;
+	private String _id;
 	private PortletURL _iteratorURL;
 	private OrderByComparator _orderByComparator;
 	private String _orderByCol;

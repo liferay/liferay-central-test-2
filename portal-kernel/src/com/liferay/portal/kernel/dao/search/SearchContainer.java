@@ -108,6 +108,14 @@ public class SearchContainer<R> {
 		_emptyResultsMessage = emptyResultsMessage;
 	}
 
+	public String getId() {
+		return _id;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
 	public DisplayTerms getDisplayTerms() {
 		return _displayTerms;
 	}
@@ -298,6 +306,7 @@ public class SearchContainer<R> {
 		}
 	}
 
+	private String _id;
 	private DisplayTerms _displayTerms;
 	private DisplayTerms _searchTerms;
 	private int _cur;
