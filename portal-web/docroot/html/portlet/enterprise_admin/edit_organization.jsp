@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
@@ -33,34 +35,28 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
 
 String className = Organization.class.getName();
+
 long classPK = 0;
 
-if (organization!=null) {
+if (organization != null) {
 	classPK = organization.getOrganizationId();
 }
 
-themeDisplay.setIncludeServiceJs(true);
-
-// Form Sections
-
-String[] mainSections = PropsValues.ORGANIZATIONS_PROFILE_ADD_MAIN;
-String[] identificationSections = PropsValues.ORGANIZATIONS_PROFILE_ADD_IDENTIFICATION;
-String[] miscellaneousSections = PropsValues.ORGANIZATIONS_PROFILE_ADD_MISCELLANEOUS;
+String[] mainSections = PropsValues.ORGANIZATIONS_FORM_ADD_MAIN;
+String[] identificationSections = PropsValues.ORGANIZATIONS_FORM_ADD_IDENTIFICATION;
+String[] miscellaneousSections = PropsValues.ORGANIZATIONS_FORM_ADD_MISCELLANEOUS;
 
 if (organization != null) {
-	mainSections = PropsValues.ORGANIZATIONS_PROFILE_UPDATE_MAIN;
-	identificationSections = PropsValues.ORGANIZATIONS_PROFILE_UPDATE_IDENTIFICATION;
-	miscellaneousSections = PropsValues.ORGANIZATIONS_PROFILE_UPDATE_MISCELLANEOUS;
+	mainSections = PropsValues.ORGANIZATIONS_FORM_UPDATE_MAIN;
+	identificationSections = PropsValues.ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION;
+	miscellaneousSections = PropsValues.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS;
 }
 
-String[] tempSections = new String[mainSections.length + identificationSections.length];
-String[] allSections = new String[mainSections.length + identificationSections.length + miscellaneousSections.length];
-ArrayUtil.combine(mainSections, identificationSections, tempSections);
-ArrayUtil.combine(tempSections, miscellaneousSections, allSections);
+String[] allSections = ArrayUtil.append(mainSections, ArrayUtil.append(identificationSections, miscellaneousSections));
 
 String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
 
-String currentSection = mainSections[0];
+String curSection = mainSections[0];
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
@@ -70,7 +66,7 @@ String currentSection = mainSections[0];
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
-	<liferay-util:param name="toolbar-item" value='<%= (organization == null) ? "add-organization" : "view-organizations" %>' />
+	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add-organization" : "view-organizations" %>' />
 </liferay-util:include>
 
 <liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
@@ -84,16 +80,14 @@ String currentSection = mainSections[0];
 	<table class="organization-table" width="100%">
 	<tr>
 		<td>
+
 			<%
 			request.setAttribute("organization.selOrganization", organization);
-			request.setAttribute("className", className);
+			request.setAttribute("common.className", className);
 
-			List<Website> websites = null;
+			List<Website> websites = Collections.EMPTY_LIST;
 
-			if (classPK <= 0) {
-				websites = Collections.EMPTY_LIST;
-			}
-			else {
+			if (classPK > 0) {
 				websites = WebsiteServiceUtil.getWebsites(className, classPK);
 			}
 
@@ -101,11 +95,13 @@ String currentSection = mainSections[0];
 
 			for (String section : allSections) {
 				String sectionId = _getIdName(section);
-				String jspPath = "/html/portlet/enterprise_admin/organization/" + _getJspName(section) + ".jsp";
+				String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getJspName(section) + ".jsp";
 			%>
-				<div class="form-section <%= currentSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
-					<liferay-util:include page="<%= jspPath %>" />
+
+				<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
+					<liferay-util:include page="<%= sectionJsp %>" />
 				</div>
+
 			<%
 			}
 			%>
@@ -114,9 +110,9 @@ String currentSection = mainSections[0];
 				<div class="organization-info">
 					<p class="float-container">
 						<c:if test="<%= organization != null %>">
-							<img class="avatar" src=" <%=themeDisplay.getPathThemeImages()%>/control_panel/avatar_organization_small.png" alt="<%= organization.getName() %>" />
+							<img alt="<%= organization.getName() %>" class="avatar" src=" <%=themeDisplay.getPathThemeImages()%>/control_panel/avatar_organization_small.png" />
 
-							<liferay-ui:message key="editing-organization" />: <span><%= organization.getName() %></span>
+							<span><%= organization.getName() %></span>
 						</c:if>
 					</p>
 				</div>
@@ -128,28 +124,37 @@ String currentSection = mainSections[0];
 
 					if (sections.length > 0) {
 				%>
+
 						<div class="menu-group">
 							<h3><liferay-ui:message key="<%= category %>" /></h3>
+
 							<ul>
+
 								<%
 								for (String section : sections) {
 									String sectionId = _getIdName(section);
 								%>
-									<li <%= currentSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>><a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /></a></li>
+
+									<li <%= curSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>>
+										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /></a>
+									</li>
+
 								<%
 								}
 								%>
+
 							</ul>
 						</div>
+
 				<%
 					}
 				}
 				%>
 
 				<div class="button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />  &nbsp;
+					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />
 
-					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HttpUtil.encodeURL(backURL) %>';" /><br />
+					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= backURL %>';" />
 				</div>
 			</div>
 		</td>
@@ -165,6 +170,7 @@ String currentSection = mainSections[0];
 
 			var revealSection = function(id, currentNavItem) {
 				var li = currentNavItem || formNav.find('[@href$=' + id + ']').parent();
+
 				id = id.split('#');
 
 				if (!id[1]) {
@@ -192,13 +198,13 @@ String currentSection = mainSections[0];
 
 					return false;
 				}
-				);
+			);
 
 			revealSection(location.hash);
 
 			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="Modified" />)') == -1) {
-					jQuery(id).append(' <b>(<liferay-ui:message key="Modified" />)</b>');
+				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="modified" />)') == -1) {
+					jQuery(id).append(' <b>(<liferay-ui:message key="modified" />)</b>');
 				}
 			}
 
@@ -206,6 +212,7 @@ String currentSection = mainSections[0];
 			for (String section : allSections) {
 				String sectionId = _getIdName(section);
 			%>
+
 				var markAsModified_<%= sectionId %> = function() {
 					return markAsModified('#<%= sectionId %>Link');
 				}
@@ -216,6 +223,7 @@ String currentSection = mainSections[0];
 			<%
 			}
 			%>
+
 		}
 	);
 

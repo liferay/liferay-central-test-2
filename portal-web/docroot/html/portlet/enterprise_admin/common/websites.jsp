@@ -25,18 +25,15 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-List<Website> currentWebsites = (List<Website>)request.getAttribute("common.websites");
-List<Website> websites = null;
+List<Website> websites = (List<Website>)request.getAttribute("common.websites");
 
-if (!currentWebsites.isEmpty()) {
-	websites = currentWebsites;
-}
-else{
+if (websites.isEmpty()) {
 	websites = new ArrayList<Website>();
 
 	websites.add(new WebsiteImpl());
 }
-String className = (String)request.getAttribute("className");
+
+String className = (String)request.getAttribute("common.className");
 %>
 
 <script type="text/javascript">

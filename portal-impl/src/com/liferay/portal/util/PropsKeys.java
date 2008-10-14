@@ -831,17 +831,17 @@ public class PropsKeys {
 
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
-	public static final String ORGANIZATIONS_PROFILE_ADD_IDENTIFICATION = "organizations.profile.add.identification";
+	public static final String ORGANIZATIONS_FORM_ADD_IDENTIFICATION = "organizations.form.add.identification";
 
-	public static final String ORGANIZATIONS_PROFILE_ADD_MAIN = "organizations.profile.add.main";
+	public static final String ORGANIZATIONS_FORM_ADD_MAIN = "organizations.form.add.main";
 
-	public static final String ORGANIZATIONS_PROFILE_ADD_MISCELLANEOUS = "organizations.profile.add.miscellaneous";
+	public static final String ORGANIZATIONS_FORM_ADD_MISCELLANEOUS = "organizations.form.add.miscellaneous";
 
-	public static final String ORGANIZATIONS_PROFILE_UPDATE_IDENTIFICATION = "organizations.profile.update.identification";
+	public static final String ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION = "organizations.form.update.identification";
 
-	public static final String ORGANIZATIONS_PROFILE_UPDATE_MAIN = "organizations.profile.update.main";
+	public static final String ORGANIZATIONS_FORM_UPDATE_MAIN = "organizations.form.update.main";
 
-	public static final String ORGANIZATIONS_PROFILE_UPDATE_MISCELLANEOUS = "organizations.profile.update.miscellaneous";
+	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
@@ -1099,17 +1099,17 @@ public class PropsKeys {
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
 
-	public static final String USERS_PROFILE_ADD_IDENTIFICATION = "users.profile.add.identification";
+	public static final String USERS_FORM_ADD_IDENTIFICATION = "users.form.add.identification";
 
-	public static final String USERS_PROFILE_ADD_MAIN = "users.profile.add.main";
+	public static final String USERS_FORM_ADD_MAIN = "users.form.add.main";
 
-	public static final String USERS_PROFILE_ADD_MISCELLANEOUS = "users.profile.add.miscellaneous";
+	public static final String USERS_FORM_ADD_MISCELLANEOUS = "users.form.add.miscellaneous";
 
-	public static final String USERS_PROFILE_UPDATE_IDENTIFICATION = "users.profile.update.identification";
+	public static final String USERS_FORM_UPDATE_IDENTIFICATION = "users.form.update.identification";
 
-	public static final String USERS_PROFILE_UPDATE_MAIN = "users.profile.update.main";
+	public static final String USERS_FORM_UPDATE_MAIN = "users.form.update.main";
 
-	public static final String USERS_PROFILE_UPDATE_MISCELLANEOUS = "users.profile.update.miscellaneous";
+	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
 
 	public static final String USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE = "users.screen.name.always.autogenerate";
 
