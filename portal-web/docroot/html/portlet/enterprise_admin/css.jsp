@@ -48,8 +48,8 @@
 }
 
 .avatar {
-	float: left;
 	clear: both;
+	float: left;
 	padding: 15px 0 5px;
 }
 
@@ -89,7 +89,6 @@
 	font-size: 14px;
 	font-weight: bold;
 	margin: 0;
-
 }
 
 .form-navigation ul {
@@ -100,13 +99,13 @@
 }
 
 .form-navigation li a {
-	display: block;
 	cursor: pointer;
+	display: block;
 	padding: 2px 0 2px 5px;
 }
 
 .form-navigation li a:hover {
-	background-color: #88c5d9;
+	background-color: #88C5D9;
 	text-decoration: none;
 }
 
@@ -119,7 +118,7 @@
 
 .form-navigation li.selected a {
 	background-color: #5C696E;
-	color: #fff;
+	color: #FFF;
 	display: block;
 	margin: 0 0 0 15px;
 	padding: 2px 10px;
@@ -147,26 +146,26 @@
 	margin-top: 20px;
 }
 
-.form-row{
-	width:97%;
+.form-row {
+	border-bottom: 1px solid #CCC;
 	margin-right: 10px;
-	padding: 5px;
 	overflow: hidden;
-	padding-top:1px;
-	border-bottom: 1px solid #ccc;
+	padding: 5px;
+	padding-top: 1px;
 	position: relative;
+	width: 97%;
 }
 
-.form-row:hover{
-	background-color:#DFFCCB;
-	padding-top:0px;
-	border-top: 1px solid #B2FF3A;
+.form-row:hover {
+	background-color: #DFFCCB;
 	border-bottom: 1px solid #B2FF3A;
+	border-top: 1px solid #B2FF3A;
+	padding-top: 0;
 }
 
-.form-row .ctrl-holder{
-	float: left;
+.form-row .ctrl-holder {
 	clear: none;
+	float: left;
 }
 
 .form-row .row-controls {
@@ -207,17 +206,17 @@
 
 .form-section h3 {
 	border-bottom: 1px solid #000;
+	clear: both;
 	font-size: 14px;
 	font-weight: 700;
-	clear: both;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .portlet-msg-info.undo-queue {
 	overflow: hidden;
 }
 
-.row-container{
+.row-container {
 	margin-top: -15px;
 }
 
@@ -241,12 +240,9 @@
 	font-weight: bold;
 }
 
-.uni-form .block-labels .label {
-	/*display: block;
-	float: none;  */
-}
+/*display: block;float: none;*/
 
-.uni-form .block-labels label input {
+}.uni-form .block-labels label input {
 	vertical-align: middle;
 }
 
@@ -256,7 +252,7 @@
 
 .uni-form fieldset {
 	border: none;
-	width:100%;
+	width: 100%;
 }
 
 .uni-form fieldset.col {
@@ -273,27 +269,27 @@
 }
 
 .lfr-portlet-toolbar {
-	background: #f6f8fb;
+	background: #F6F8FB;
+	margin-bottom: 5px;
 	overflow: hidden;
 	padding: 2px;
-	margin-bottom: 5px;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button a {
 	background: url() no-repeat 5px 50%;
-	font-size: 12px;
-	font-weight: bold;
+	border: 1px solid #F6F8FB;
+	color: #9EA8AD;
 	display: block;
 	float: left;
-	border:1px solid #f6f8fb;
+	font-size: 12px;
+	font-weight: bold;
 	padding: 4px 14px 4px 29px;
-	color: #9ea8ad;
 	text-decoration: none;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button a:hover {
+	border: 1px solid #346799;
 	color: #346799;
-	border:1px solid #346799;
 	padding: 4px 14px 4px 29px;
 }
 
@@ -301,13 +297,13 @@
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.current a {
-	background-color: #cfd5d7;
-	border:1px solid #cfd5d7;
+	background-color: #CFD5D7;
+	border: 1px solid #CFD5D7;
 	color: #000;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.current a:hover {
-	border:1px solid #346799;
+	border: 1px solid #346799;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.add-button a {
