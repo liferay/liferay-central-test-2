@@ -219,7 +219,7 @@
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY
-				modelFolder ASC, title ASC
+				modelFolder DESC, title ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_FE_FS_ByFolderIds">
@@ -255,7 +255,7 @@
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY
-				modelFolder ASC, title ASC
+				modelFolder DESC, title ASC
 		]]>
 	</sql>
 </custom-sql>
