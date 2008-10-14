@@ -25,24 +25,50 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String toolbarItem = ParamUtil.get(request, "toolbar-item", "view-organizations");
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-organizations");
+
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 %>
 
 <div class="lfr-portlet-toolbar">
-
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOrganizationURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOrganizationsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin_organizations/view" />
 	</portlet:renderURL>
 
-	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-organizations") ? "current" : StringPool.BLANK %>"><a href="<%= viewOrganizationURL %>"><liferay-ui:message key="view-organizations" /></a></span>
+	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-organizations") ? "current" : StringPool.BLANK %>">
+		<a href="<%= viewOrganizationsURL %>"><liferay-ui:message key="view-organizations" /></a>
+	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addOrganizationURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-			<portlet:param name="backURL" value="<%= currentURL %>" />
-		</portlet:renderURL>
-
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %> "><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add-organization" /></a></span>
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %> ">
+			<a href="javascript: <portlet:namespace />addOrganization();"><liferay-ui:message key="add-organization" /></a>
+		</span>
 	</c:if>
-
 </div>
+
+<script type="text/javascript">
+	function <portlet:namespace />addOrganization() {
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:renderURL>';
+
+		if (toggle_id_enterprise_admin_organization_searchcurClickValue == 'basic') {
+			url += '&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);
+
+			<c:if test="<%= organization != null %>">
+				url += '&<portlet:namespace />parentOrganizationId=<%= organization.getOrganizationId() %>';
+			</c:if>
+
+			url += '&<portlet:namespace /><%= OrganizationDisplayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.KEYWORDS %>.value;
+
+			submitForm(document.hrefFm, url);
+		}
+		else {
+			<c:if test="<%= organization != null %>">
+				url += '&<portlet:namespace />parentOrganizationId=<%= organization.getOrganizationId() %>';
+			</c:if>
+
+			document.<portlet:namespace />fm.method = 'post';
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
+			submitForm(document.<portlet:namespace />fm, url);
+		}
+	}
+</script>
