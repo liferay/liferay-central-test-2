@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTests;
 
