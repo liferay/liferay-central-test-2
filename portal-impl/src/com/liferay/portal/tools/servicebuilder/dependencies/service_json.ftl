@@ -93,23 +93,21 @@ public class ${entity.name}ServiceJSON {
 					</#if>
 				</#list>
 
-				) throws
-
-				<#if !method.exceptions?seq_contains("java.rmi.RemoteException")>
-					java.rmi.RemoteException
-
-					<#if method.exceptions?size gt 0>
-						,
-					</#if>
-				</#if>
+				)
 
 				<#list method.exceptions as exception>
+					<#if exception_index == 0>
+						throws
+					</#if>
+
 					${exception.value}
 
 					<#if exception_has_next>
 						,
 					</#if>
-				</#list>{
+				</#list>
+
+				{
 
 				<#if returnValueName != "void">
 					${returnValueName}${method.returnsGenericsName}${returnValueDimension} returnValue =
