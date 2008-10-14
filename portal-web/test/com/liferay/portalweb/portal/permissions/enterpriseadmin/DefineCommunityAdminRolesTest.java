@@ -35,7 +35,6 @@ public class DefineCommunityAdminRolesTest extends BaseTestCase {
 	public void testDefineCommunityAdminRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.selectWindow("name=null");
 		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
 		selenium.click("//div[2]/ul/li[3]/nobr/a");
 
