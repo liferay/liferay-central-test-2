@@ -152,6 +152,7 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
@@ -1279,6 +1280,14 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
+	public DLFolderFinder getDLFolderFinder() {
+		return dlFolderFinder;
+	}
+
+	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
+		this.dlFolderFinder = dlFolderFinder;
+	}
+
 	public JournalContentSearchLocalService getJournalContentSearchLocalService() {
 		return journalContentSearchLocalService;
 	}
@@ -1634,6 +1643,8 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	protected DLFolderService dlFolderService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected DLFolderPersistence dlFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
+	protected DLFolderFinder dlFolderFinder;
 	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalContentSearchLocalService.impl")
 	protected JournalContentSearchLocalService journalContentSearchLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl")

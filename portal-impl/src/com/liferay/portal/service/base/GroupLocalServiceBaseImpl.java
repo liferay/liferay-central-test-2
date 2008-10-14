@@ -166,6 +166,7 @@ import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
@@ -1455,6 +1456,14 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
+	public DLFolderFinder getDLFolderFinder() {
+		return dlFolderFinder;
+	}
+
+	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
+		this.dlFolderFinder = dlFolderFinder;
+	}
+
 	public IGFolderLocalService getIGFolderLocalService() {
 		return igFolderLocalService;
 	}
@@ -2199,6 +2208,8 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	protected DLFolderService dlFolderService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected DLFolderPersistence dlFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
+	protected DLFolderFinder dlFolderFinder;
 	@javax.annotation.Resource(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")
 	protected IGFolderLocalService igFolderLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portlet.imagegallery.service.IGFolderService.impl")
