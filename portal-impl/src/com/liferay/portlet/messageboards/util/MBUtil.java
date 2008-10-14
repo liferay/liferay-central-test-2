@@ -498,6 +498,23 @@ public class MBUtil {
 		return parentMessageId;
 	}
 
+	public static String getSubjectWithoutMessageId(Message message)
+		throws Exception {
+
+		String subject = message.getSubject();
+		String parentMessageId = _getParentMessageIdFromSubject(message);
+
+		if (Validator.isNotNull(parentMessageId)) {
+			int endIndex = subject.indexOf(parentMessageId);
+
+			if (endIndex != -1) {
+				subject = subject.substring(0, endIndex);
+			}
+		}
+
+		return subject;
+	}
+
 	public static String getParentMessageIdString(Message message)
 		throws Exception {
 
@@ -521,6 +538,10 @@ public class MBUtil {
 			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
 				parentHeader = inReplyToHeaders[0];
 			}
+		}
+
+		if (parentHeader == null) {
+			parentHeader = _getParentMessageIdFromSubject(message);
 		}
 
 		return parentHeader;
@@ -698,6 +719,22 @@ public class MBUtil {
 		}
 
 		return null;
+	}
+
+	private static String _getParentMessageIdFromSubject(Message message)
+		throws Exception {
+
+		String parentMessageId = null;
+		String subject = StringUtil.reverse(message.getSubject());
+
+		int endIndex = subject.indexOf(StringPool.LESS_THAN);
+
+		if (endIndex != -1) {
+			parentMessageId = StringUtil.reverse(
+				subject.substring(0, endIndex+1));
+		}
+
+		return parentMessageId;
 	}
 
 	private static boolean _isEntityRank(

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
@@ -85,6 +86,8 @@ public class MBMessageListener implements MessageListener {
 		String inReplyTo = message.getString("inReplyTo");
 		boolean htmlFormat = message.getBoolean("htmlFormat");
 		boolean sourceMailingList = message.getBoolean("sourceMailingList");
+
+		subject = subject + StringPool.SPACE + mailId;
 
 		Set<Long> sent = new HashSet<Long>();
 

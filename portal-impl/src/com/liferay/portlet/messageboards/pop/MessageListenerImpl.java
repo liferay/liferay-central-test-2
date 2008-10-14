@@ -158,17 +158,18 @@ public class MessageListenerImpl implements MessageListener {
 
 			PermissionCheckerUtil.setThreadValues(user);
 
+			String subject = MBUtil.getSubjectWithoutMessageId(message);
+
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
-					categoryId, message.getSubject(), collector.getBody(),
+					categoryId, subject, collector.getBody(),
 					collector.getFiles(), false, 0.0, null, true, true);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
 					categoryId, parentMessage.getThreadId(),
-					parentMessage.getMessageId(), message.getSubject(),
-					collector.getBody(), collector.getFiles(), false, 0.0, null,
-					true, true);
+					parentMessage.getMessageId(), subject, collector.getBody(),
+					collector.getFiles(), false, 0.0, null, true, true);
 			}
 
 			if (_log.isDebugEnabled()) {

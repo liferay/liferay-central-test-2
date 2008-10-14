@@ -213,17 +213,18 @@ public class MailingListMessageListener implements MessageListener {
 
 		MailingListThreadLocal.setSourceMailingList(true);
 
+		String subject = MBUtil.getSubjectWithoutMessageId(mailMessage);
+
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
-				categoryId, mailMessage.getSubject(), collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, null, true, true);
+				categoryId, subject, collector.getBody(), collector.getFiles(),
+				anonymous, 0.0, null, true, true);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
 				categoryId, parentMessage.getThreadId(),
-				parentMessage.getMessageId(), mailMessage.getSubject(),
-				collector.getBody(), collector.getFiles(), anonymous, 0.0,
-				null, true, true);
+				parentMessage.getMessageId(), subject, collector.getBody(),
+				collector.getFiles(), anonymous, 0.0, null, true, true);
 		}
 	}
 
