@@ -29,6 +29,7 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 
 boolean paginate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search-iterator:paginate"));
 
+String id = searchContainer.getId();
 int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
@@ -63,8 +64,6 @@ if (iteratorURL != null) {
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByColParam());
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByTypeParam());
 }
-
-String id = "abcd";
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
@@ -74,7 +73,11 @@ String id = "abcd";
 		</div>
 	</c:if>
 
-	<div class="results-grid" id="<%= id %>searchContainer">
+	<div class="results-grid"
+		<c:if test="<%= Validator.isNotNull(id) %>">
+			id="<%= id %>searchContainer"
+		</c:if>
+	>
 		<table class="taglib-search-iterator">
 		<tr class="portlet-section-header results-header">
 
@@ -259,12 +262,14 @@ String id = "abcd";
 	</c:if>
 </c:if>
 
-<script type="text/javascript">
-	jQuery(
-		function () {
-			new Liferay.SearchContainer({
-				id: '<%= id %>'
-			})
-		}
-	);
-</script>
+<c:if test="<%= Validator.isNotNull(id) %>">
+	<script type="text/javascript">
+		jQuery(
+			function () {
+				new Liferay.SearchContainer({
+					id: '<%= id %>'
+				})
+			}
+		);
+	</script>
+</c:if>

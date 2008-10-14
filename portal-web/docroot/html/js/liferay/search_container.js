@@ -45,6 +45,7 @@ jQuery.extend(
 			var instance = this;
 
 			var el;
+
 			if (obj.nodeName) {
 				el = jQuery(obj);
 			}
