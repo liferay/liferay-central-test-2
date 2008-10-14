@@ -25,45 +25,76 @@
 <%
 for (int j = 0; j < fileEntryColumns.length; j++) {
 	String fileEntryColumn = fileEntryColumns[j];
+%>
 
-	if (fileEntryColumn.equals("action")) {
-		String align = SearchEntry.DEFAULT_ALIGN;
+	<c:choose>
+		<c:when test="<%= fileEntryColumn.equals("action") %>">
 
-		if ((j + 1) == fileEntryColumns.length) {
-			align = "right";
-		}
+			<%
+			String align = SearchEntry.DEFAULT_ALIGN;
 
-		String valign = SearchEntry.DEFAULT_VALIGN;
+			if ((j + 1) == fileEntryColumns.length) {
+				align = "right";
+			}
+			%>
 
-		row.addJSP(align, valign, "/html/portlet/document_library/file_entry_action.jsp");
-	}
-	else if (fileEntryColumn.equals("document")) {
-		StringBuilder sb = new StringBuilder();
+			<liferay-ui:search-container-column-jsp
+				align="<%= align %>"
+				path="/html/portlet/document_library/file_entry_action.jsp"
+			/>
 
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/document_library/");
-		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sb.append(".png\">");
-		sb.append(fileEntry.getTitleWithExtension());
+		</c:when>
+		<c:when test="<%= fileEntryColumn.equals("document") %>">
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowHREF %>"
+				name="<%= fileEntryColumn %>"
+			>
 
-		if (Validator.isNotNull(fileEntry.getDescription())) {
-			sb.append("<br />");
-			sb.append(fileEntry.getDescription());
-		}
+				<%
+				buffer.append("<img align=\"left\" border=\"0\" src=\"");
+				buffer.append(themeDisplay.getPathThemeImages());
+				buffer.append("/document_library/");
+				buffer.append(DLUtil.getFileExtension(fileEntry.getName()));
+				buffer.append(".png\">");
+				buffer.append(fileEntry.getTitleWithExtension());
 
-		row.addText(sb.toString(), rowHREF);
-	}
-	else if (fileEntryColumn.equals("downloads")) {
-		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
-	}
-	else if (fileEntryColumn.equals("locked")) {
-		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
+				if (Validator.isNotNull(fileEntry.getDescription())) {
+					buffer.append("<br />");
+					buffer.append(fileEntry.getDescription());
+				}
+				%>
 
-		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
-	}
-	else if (fileEntryColumn.equals("size")) {
-		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-	}
+			</liferay-ui:search-container-column-text>
+		</c:when>
+		<c:when test="<%= fileEntryColumn.equals("downloads") %>">
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="<%= fileEntryColumn %>"
+				value="<%= String.valueOf(fileEntry.getReadCount()) %>"
+			/>
+		</c:when>
+		<c:when test="<%= fileEntryColumn.equals("locked") %>">
+
+			<%
+			boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
+			%>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="<%= fileEntryColumn %>"
+				value='<%= LanguageUtil.get(pageContext, isLocked ? "yes" : "no") %>'
+			/>
+		</c:when>
+		<c:when test="<%= fileEntryColumn.equals("size") %>">
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="<%= fileEntryColumn %>"
+				value='<%= TextFormatter.formatKB(fileEntry.getSize(), locale) + "k" %>'
+			/>
+		</c:when>
+	</c:choose>
+
+<%
 }
 %>

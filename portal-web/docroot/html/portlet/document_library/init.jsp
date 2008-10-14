@@ -112,3 +112,5 @@ if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
+
+<%@ include file="/html/portlet/enterprise_admin/init-ext.jsp" %>
