@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class EnterpriseAdminTests extends BaseTests {
 
-	public LoginTests() {
+	public EnterpriseAdminTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(CreateRolesTest.class);
@@ -46,6 +46,7 @@ public class EnterpriseAdminTests extends BaseTests {
 		addTestSuite(AddMemberTest.class);
 		addTestSuite(AddPublisherTest.class);
 		addTestSuite(AddWriterTest.class);
+		addTestSuite(LoginUsersTest.class);
 	}
 
 }

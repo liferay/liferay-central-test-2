@@ -58,6 +58,11 @@ public class AddPublisherTest extends BaseTestCase {
 		selenium.type("_79_jobTitle", RuntimeVariables.replace("Publisher"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Password");
+		selenium.type("_79_password1", RuntimeVariables.replace("test"));
+		selenium.type("_79_password2", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Regular Roles");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Assign Regular Roles']"));
