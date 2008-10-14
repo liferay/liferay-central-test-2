@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
@@ -32,6 +33,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments)
+			String comments, List<Website> websites)
 		throws PortalException, SystemException {
 
 		if (!OrganizationPermissionUtil.contains(
@@ -82,9 +84,15 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 					"an organization with parent " + parentOrganizationId);
 		}
 
-		return organizationLocalService.addOrganization(
+		Organization organization = organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId, comments);
+
+		EnterpriseAdminUtil.updateWebsites(
+			Organization.class.getName(), organization.getOrganizationId(),
+			websites);
+
+		return organization;
 	}
 
 	public void deleteOrganization(long organizationId)
@@ -151,15 +159,20 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments)
+			int statusId, String comments, List<Website> websites)
 		throws PortalException, SystemException {
 
 		OrganizationPermissionUtil.check(
 			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
 
-		return organizationLocalService.updateOrganization(
+		Organization organization = organizationLocalService.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments);
+
+		EnterpriseAdminUtil.updateWebsites(
+			Organization.class.getName(), organizationId, websites);
+
+		return organization;
 	}
 
 }

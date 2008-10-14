@@ -22,11 +22,13 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
@@ -45,8 +47,12 @@ import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
 
+import java.rmi.RemoteException;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 
@@ -227,63 +233,70 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static void updateWebsites(
-			ActionRequest actionRequest, String[] websiteSuffixesArray,
-			long classPK, String className)
-		throws Exception {
+	public static List<Website> getWebsites(ActionRequest actionRequest) {
+		List<Website> websites = new ArrayList<Website>();
 
-		List<Long> websiteIds = new ArrayList<Long>();
+		for (int i = 0;; i++) {
+			long websiteId = ParamUtil.getLong(
+				actionRequest, "websiteId" + i, -1);
 
-		for (String websiteSuffix : websiteSuffixesArray) {
-			if (Validator.isNull(websiteSuffix.trim())) {
-				continue;
+			if (websiteId < 0) {
+				break;
 			}
 
-			long websiteId = updateWebsite(
-				actionRequest, websiteSuffix, className, classPK);
+			String url = ParamUtil.getString(actionRequest, "websiteUrl" + i);
+			int typeId = ParamUtil.getInteger(
+				actionRequest, "websiteTypeId" + i);
+			boolean primary = ParamUtil.getBoolean(
+				actionRequest, "websitePrimary" + i);
+
+			Website website = new WebsiteImpl();
+
+			website.setWebsiteId(websiteId);
+			website.setUrl(url);
+			website.setTypeId(typeId);
+			website.setPrimary(primary);
+
+			websites.add(website);
+		}
+
+		return websites;
+	}
+
+	public static void updateWebsites(
+			String className, long classPK, List<Website> websites)
+		throws PortalException, RemoteException, SystemException {
+
+		Set<Long> websiteIds = new HashSet<Long>();
+
+		for (Website website : websites) {
+			long websiteId = website.getWebsiteId();
+
+			String url = website.getUrl();
+			int typeId = website.getTypeId();
+			boolean primary = website.isPrimary();
+
+			if (websiteId <= 0) {
+				website = WebsiteServiceUtil.addWebsite(
+					className, classPK, url, typeId, primary);
+
+				websiteId = website.getWebsiteId();
+			}
+			else {
+				WebsiteServiceUtil.updateWebsite(
+					websiteId, url, typeId, primary);
+			}
+
 			websiteIds.add(websiteId);
 		}
 
-		List<Website> websites = WebsiteServiceUtil.getWebsites(
-			className, classPK);
+		websites = WebsiteServiceUtil.getWebsites(className, classPK);
 
 		for (Website website : websites) {
 			if (!websiteIds.contains(website.getWebsiteId())) {
 				WebsiteServiceUtil.deleteWebsite(website.getWebsiteId());
 			}
 		}
-	}
-
-	public static long updateWebsite(
-			ActionRequest actionRequest, String websiteSuffix,
-			String className,long classPK)
-		throws Exception {
-
-		long websiteId = ParamUtil.getLong(
-			actionRequest, "websiteId" + websiteSuffix);
-		String url = ParamUtil.getString(
-			actionRequest, "url" + websiteSuffix);
-		int typeId = ParamUtil.getInteger(
-			actionRequest, "typeId" + websiteSuffix);
-		boolean primary = ParamUtil.getBoolean(
-			actionRequest, "primary" + websiteSuffix);
-
-		Website website = null;
-
-		if (websiteId <= 0) {
-			if (Validator.isNull(url)) {
-				return 0;
-			}
-
-			website = WebsiteServiceUtil.addWebsite(
-				className, classPK, url, typeId, primary);
-		}
-		else {
-			website = WebsiteServiceUtil.updateWebsite(
-				websiteId, url, typeId, primary);
-		}
-
-		return website.getWebsiteId();
 	}
 
 }

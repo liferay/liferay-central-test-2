@@ -34,13 +34,15 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -167,11 +169,8 @@ public class EditOrganizationAction extends PortletAction {
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
-		String websiteSuffixes = ParamUtil.getString(
-			actionRequest, "websiteSuffixes");
+		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 
-		long classPK = organizationId;
-		String className = Organization.class.getName();
 		Organization organization = null;
 
 		if (organizationId <= 0) {
@@ -180,9 +179,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.addOrganization(
 				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId, comments);
-
-			classPK = organization.getOrganizationId();
+				countryId, statusId, comments, websites);
 		}
 		else {
 
@@ -190,16 +187,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
-				recursable, regionId, countryId, statusId, comments);
-		}
-
-		// Update websites
-
-		if (Validator.isNotNull(websiteSuffixes)) {
-			String[] websiteSuffixesArray = websiteSuffixes.split(",");
-
-			EnterpriseAdminUtil.updateWebsites(
-				actionRequest, websiteSuffixesArray, classPK, className);
+				recursable, regionId, countryId, statusId, comments, websites);
 		}
 
 		return organization;

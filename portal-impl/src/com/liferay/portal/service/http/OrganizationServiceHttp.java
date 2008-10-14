@@ -154,7 +154,8 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
-		long regionId, long countryId, int statusId, java.lang.String comments)
+		long regionId, long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -186,11 +187,17 @@ public class OrganizationServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj8 = websites;
+
+			if (websites == null) {
+				paramObj8 = new NullWrapper("java.util.List");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -477,7 +484,8 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long organizationId,
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments)
+		long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -511,11 +519,17 @@ public class OrganizationServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj9 = websites;
+
+			if (websites == null) {
+				paramObj9 = new NullWrapper("java.util.List");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
