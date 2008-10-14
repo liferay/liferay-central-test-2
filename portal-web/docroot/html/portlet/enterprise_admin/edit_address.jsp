@@ -140,13 +140,12 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 					<option value=""></option>
 
 					<%
-					List addressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.ADDRESS);
+					List<ListType> addressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.ADDRESS);
 
-					for (int i = 0; i < addressTypes.size(); i++) {
-						ListType suffix = (ListType)addressTypes.get(i);
+					for (ListType suffix : addressTypes) {
 					%>
 
-						<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+						<option <%= (suffix.getListTypeId() == typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 					<%
 					}

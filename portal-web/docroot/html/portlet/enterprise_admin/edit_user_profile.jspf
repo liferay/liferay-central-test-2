@@ -212,13 +212,12 @@ if (organizations != null) {
 					<option value=""></option>
 
 					<%
-					List prefixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_PREFIX);
+					List<ListType> prefixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_PREFIX);
 
-					for (int i = 0; i < prefixes.size(); i++) {
-						ListType prefix = (ListType)prefixes.get(i);
+					for (ListType prefix : prefixes) {
 					%>
 
-						<option <%= prefix.getListTypeId() == prefixId ? "selected" : "" %> value="<%= String.valueOf(prefix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, prefix.getName()) %></option>
+						<option <%= (prefix.getListTypeId() == prefixId) ? "selected" : "" %> value="<%= String.valueOf(prefix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, prefix.getName()) %></option>
 
 					<%
 					}
@@ -256,17 +255,17 @@ if (organizations != null) {
 				<liferay-ui:message key="suffix" />
 			</td>
 			<td>
+
 				<select name="<portlet:namespace />suffixId">
 					<option value=""></option>
 
 					<%
-					List suffixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_SUFFIX);
+					List<ListType> suffixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_SUFFIX);
 
-					for (int i = 0; i < suffixes.size(); i++) {
-						ListType suffix = (ListType)suffixes.get(i);
+					for (ListType suffix : suffixes) {
 					%>
 
-						<option <%= suffix.getListTypeId() == suffixId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+						<option <%= (suffix.getListTypeId() == suffixId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 					<%
 					}

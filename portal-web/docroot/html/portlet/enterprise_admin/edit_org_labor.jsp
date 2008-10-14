@@ -81,13 +81,12 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 			<option value=""></option>
 
 			<%
-			List orgLaborTypes = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_SERVICE);
+			List<ListType> orgLaborTypes = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_SERVICE);
 
-			for (int i = 0; i < orgLaborTypes.size(); i++) {
-				ListType suffix = (ListType)orgLaborTypes.get(i);
+			for (ListType suffix : orgLaborTypes) {
 			%>
 
-				<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+				<option <%= (suffix.getListTypeId() == typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 			<%
 			}

@@ -81,13 +81,12 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 			<option value=""></option>
 
 			<%
-			List phoneTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.PHONE);
+			List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.PHONE);
 
-			for (int i = 0; i < phoneTypes.size(); i++) {
-				ListType suffix = (ListType)phoneTypes.get(i);
+			for (ListType suffix : phoneTypes) {
 			%>
 
-				<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+				<option <%= (suffix.getListTypeId() == typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 			<%
 			}
