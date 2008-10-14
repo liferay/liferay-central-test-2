@@ -239,7 +239,7 @@
 				hiddenInput="tagsCategories"
 			/>
 
-			<br />
+			<br /><br />
 
 			<liferay-ui:message key="tags" /><br />
 
