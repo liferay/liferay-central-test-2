@@ -57,7 +57,7 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 
 			</c:when>
 			<c:otherwise>
-				<%= ListUtil.toString(entries, "name", ", ") %>
+				<%= ListUtil.toString(entries, "name", StringPool.COMMA_AND_SPACE) %>
 			</c:otherwise>
 		</c:choose>
 	</div>
