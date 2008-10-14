@@ -79,7 +79,7 @@ public class PollsQuestionServiceJSON {
 		int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
 				title, description, expirationDateMonth, expirationDateDay,
@@ -97,7 +97,7 @@ public class PollsQuestionServiceJSON {
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
 				title, description, expirationDateMonth, expirationDateDay,
@@ -108,13 +108,13 @@ public class PollsQuestionServiceJSON {
 	}
 
 	public static void deleteQuestion(long questionId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PollsQuestionServiceUtil.deleteQuestion(questionId);
 	}
 
 	public static JSONObject getQuestion(long questionId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.getQuestion(questionId);
 
@@ -126,7 +126,7 @@ public class PollsQuestionServiceJSON {
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.updateQuestion(questionId,
 				title, description, expirationDateMonth, expirationDateDay,

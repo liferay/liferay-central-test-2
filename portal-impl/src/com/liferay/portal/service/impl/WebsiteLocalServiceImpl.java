@@ -35,8 +35,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -158,12 +156,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			classPK = website.getClassPK();
 		}
 
-		try {
-			listTypeService.validate(typeId, classNameId, ListTypeImpl.WEBSITE);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
+		listTypeService.validate(typeId, classNameId, ListTypeImpl.WEBSITE);
 
 		validate(websiteId, companyId, classNameId, classPK, primary);
 	}

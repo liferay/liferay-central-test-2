@@ -48,8 +48,7 @@ package com.liferay.portal.service;
  *
  */
 public interface PortalService {
-	public void test() throws java.rmi.RemoteException;
+	public void test();
 
-	public void testCounterRollback()
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+	public void testCounterRollback() throws com.liferay.portal.SystemException;
 }

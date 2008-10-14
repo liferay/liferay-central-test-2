@@ -55,7 +55,7 @@ public interface BlogsEntryService {
 		java.lang.String[] trackbacks, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
@@ -66,49 +66,49 @@ public interface BlogsEntryService {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.lang.String getCompanyEntriesRSS(long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long groupId,
 		java.lang.String urlTitle)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
 		long organizationId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.lang.String getOrganizationEntriesRSS(long organizationId,
@@ -116,7 +116,7 @@ public interface BlogsEntryService {
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
@@ -126,6 +126,6 @@ public interface BlogsEntryService {
 		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

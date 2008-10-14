@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 
 import java.io.File;
 
-import java.rmi.RemoteException;
-
 /**
  * <a href="DLService.java.html"><b><i>View Source</i></b></a>
  *
@@ -38,66 +36,66 @@ import java.rmi.RemoteException;
 public interface DLService {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries, File file)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries,
 			byte[] bytes)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName, double versionNumber)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public byte[] getFile(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public long getFileSize(
 			long companyId, long repositoryId, String fileName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
-	public void reIndex(String[] ids) throws RemoteException, SystemException;
+	public void reIndex(String[] ids) throws SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			String properties, String[] tagsEntries, File file)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			String properties, String[] tagsEntries, byte[] bytes)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 }

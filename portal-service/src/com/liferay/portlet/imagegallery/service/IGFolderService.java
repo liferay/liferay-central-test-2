@@ -52,14 +52,14 @@ public interface IGFolderService {
 		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder copyFolder(
@@ -67,30 +67,30 @@ public interface IGFolderService {
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public void deleteFolder(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		long groupId, long parentFolderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

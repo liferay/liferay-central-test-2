@@ -53,7 +53,7 @@ public class AnnouncementsEntryServiceUtil {
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority, boolean alert)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(plid, classNameId, classPK, title, content, url,
 			type, displayDateMonth, displayDateDay, displayDateYear,
@@ -64,7 +64,7 @@ public class AnnouncementsEntryServiceUtil {
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteEntry(entryId);
 	}
 
@@ -76,7 +76,7 @@ public class AnnouncementsEntryServiceUtil {
 		int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(entryId, title, content, url, type,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,

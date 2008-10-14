@@ -50,7 +50,7 @@ public class ShoppingOrderServiceUtil {
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService()
 			.completeOrder(plid, number, ppTxnId, ppPaymentStatus,
 			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
@@ -58,21 +58,21 @@ public class ShoppingOrderServiceUtil {
 
 	public static void deleteOrder(long plid, long orderId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteOrder(plid, orderId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		long plid, long orderId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getOrder(plid, orderId);
 	}
 
 	public static void sendEmail(long plid, long orderId,
 		java.lang.String emailType)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().sendEmail(plid, orderId, emailType);
 	}
 
@@ -92,7 +92,7 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateOrder(plid, orderId, billingFirstName,
 			billingLastName, billingEmailAddress, billingCompany,
@@ -109,7 +109,7 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateOrder(plid, orderId, ppTxnId, ppPaymentStatus,
 			ppPaymentGross, ppReceiverEmail, ppPayerEmail);

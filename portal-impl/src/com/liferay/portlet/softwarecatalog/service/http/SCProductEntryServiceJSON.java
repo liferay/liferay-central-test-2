@@ -81,7 +81,7 @@ public class SCProductEntryServiceJSON {
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
 		java.util.List<byte[]> fullImages, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(plid,
 				name, type, tags, shortDescription, longDescription, pageURL,
@@ -100,7 +100,7 @@ public class SCProductEntryServiceJSON {
 		java.util.List<byte[]> fullImages,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(plid,
 				name, type, tags, shortDescription, longDescription, pageURL,
@@ -111,13 +111,13 @@ public class SCProductEntryServiceJSON {
 	}
 
 	public static void deleteProductEntry(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryServiceUtil.deleteProductEntry(productEntryId);
 	}
 
 	public static JSONObject getProductEntry(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.getProductEntry(productEntryId);
 
@@ -131,7 +131,7 @@ public class SCProductEntryServiceJSON {
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
 		java.util.List<byte[]> fullImages)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.updateProductEntry(productEntryId,
 				name, type, tags, shortDescription, longDescription, pageURL,

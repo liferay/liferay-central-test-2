@@ -58,8 +58,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.List;
 
@@ -838,14 +836,9 @@ public class DLFileEntryLocalServiceImpl
 			dlFileShortcutLocalService.updateFileShortcuts(
 				folderId, name, newFolderId, name);
 
-			try {
-				dlService.updateFile(
-					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-					folder.getGroupId(), folderId, newFolderId, name);
-			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
-			}
+			dlService.updateFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getGroupId(), folderId, newFolderId, name);
 
 			folderId = newFolderId;
 			folder = newFolder;

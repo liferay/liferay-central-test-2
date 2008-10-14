@@ -49,7 +49,7 @@ public class ResourceServiceUtil {
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getResource(companyId, name, scope, primKey);
 	}
 

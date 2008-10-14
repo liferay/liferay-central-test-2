@@ -73,8 +73,6 @@ import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.MathUtil;
 import com.liferay.util.UniqueList;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -231,34 +229,29 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String dirName = page.getAttachmentsDir();
 
 		try {
-			try {
-				dlService.addDirectory(companyId, repositoryId, dirName);
-			}
-			catch (DuplicateDirectoryException dde) {
-			}
-
-			for (int i = 0; i < files.size(); i++) {
-				ObjectValuePair<String, byte[]> ovp = files.get(i);
-
-				String fileName = ovp.getKey();
-				byte[] bytes = ovp.getValue();
-
-				if (Validator.isNull(fileName)) {
-					continue;
-				}
-
-				try {
-					dlService.addFile(
-						companyId, portletId, groupId, repositoryId,
-						dirName + "/" + fileName, StringPool.BLANK,
-						new String[0], bytes);
-				}
-				catch (DuplicateFileException dfe) {
-				}
-			}
+			dlService.addDirectory(companyId, repositoryId, dirName);
 		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
+		catch (DuplicateDirectoryException dde) {
+		}
+
+		for (int i = 0; i < files.size(); i++) {
+			ObjectValuePair<String, byte[]> ovp = files.get(i);
+
+			String fileName = ovp.getKey();
+			byte[] bytes = ovp.getValue();
+
+			if (Validator.isNull(fileName)) {
+				continue;
+			}
+
+			try {
+				dlService.addFile(
+					companyId, portletId, groupId, repositoryId,
+					dirName + "/" + fileName, StringPool.BLANK, new String[0],
+					bytes);
+			}
+			catch (DuplicateFileException dfe) {
+			}
 		}
 	}
 
@@ -389,9 +382,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 		catch (NoSuchDirectoryException nsde) {
 		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
 
 		// Tags
 
@@ -458,9 +448,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
 		}
 		catch (NoSuchFileException nsfe) {
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
 		}
 	}
 

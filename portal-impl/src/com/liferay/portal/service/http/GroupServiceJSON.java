@@ -76,7 +76,7 @@ public class GroupServiceJSON {
 	public static JSONObject addGroup(java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
 				description, type, friendlyURL, active);
@@ -87,7 +87,7 @@ public class GroupServiceJSON {
 	public static JSONObject addGroup(long liveGroupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
 				name, description, type, friendlyURL, active);
@@ -96,19 +96,19 @@ public class GroupServiceJSON {
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupServiceUtil.addRoleGroups(roleId, groupIds);
 	}
 
 	public static void deleteGroup(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupServiceUtil.deleteGroup(groupId);
 	}
 
 	public static JSONObject getGroup(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(groupId);
 
@@ -116,7 +116,7 @@ public class GroupServiceJSON {
 	}
 
 	public static JSONObject getGroup(long companyId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(companyId,
 				name);
@@ -125,23 +125,21 @@ public class GroupServiceJSON {
 	}
 
 	public static JSONArray getOrganizationsGroups(
-		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws java.rmi.RemoteException {
+		java.util.List<com.liferay.portal.model.Organization> organizations) {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getOrganizationsGroups(organizations);
 
 		return GroupJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getUserGroupsGroups(
-		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws java.rmi.RemoteException {
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups) {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserGroupsGroups(userGroups);
 
 		return GroupJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static boolean hasUserGroup(long userId, long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		boolean returnValue = GroupServiceUtil.hasUserGroup(userId, groupId);
 
 		return returnValue;
@@ -149,8 +147,7 @@ public class GroupServiceJSON {
 
 	public static JSONArray search(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.String[] params, int start,
-		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.search(companyId,
 				name, description, params, start, end);
 
@@ -159,7 +156,7 @@ public class GroupServiceJSON {
 
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.String[] params)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		int returnValue = GroupServiceUtil.searchCount(companyId, name,
 				description, params);
 
@@ -167,20 +164,20 @@ public class GroupServiceJSON {
 	}
 
 	public static void setRoleGroups(long roleId, long[] groupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupServiceUtil.setRoleGroups(roleId, groupIds);
 	}
 
 	public static void unsetRoleGroups(long roleId, long[] groupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupServiceUtil.unsetRoleGroups(roleId, groupIds);
 	}
 
 	public static JSONObject updateFriendlyURL(long groupId,
 		java.lang.String friendlyURL)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateFriendlyURL(groupId,
 				friendlyURL);
@@ -191,7 +188,7 @@ public class GroupServiceJSON {
 	public static JSONObject updateGroup(long groupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 				name, description, type, friendlyURL, active);
@@ -201,7 +198,7 @@ public class GroupServiceJSON {
 
 	public static JSONObject updateGroup(long groupId,
 		java.lang.String typeSettings)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 				typeSettings);
@@ -212,7 +209,7 @@ public class GroupServiceJSON {
 	public static JSONObject updateWorkflow(long groupId,
 		boolean workflowEnabled, int workflowStages,
 		java.lang.String workflowRoleNames)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateWorkflow(groupId,
 				workflowEnabled, workflowStages, workflowRoleNames);

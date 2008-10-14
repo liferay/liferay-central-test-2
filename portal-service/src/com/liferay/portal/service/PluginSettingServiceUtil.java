@@ -49,7 +49,7 @@ public class PluginSettingServiceUtil {
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updatePluginSetting(companyId, pluginId, pluginType, roles,
 			active);

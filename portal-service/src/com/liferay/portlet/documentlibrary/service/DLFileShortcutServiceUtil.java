@@ -49,7 +49,7 @@ public class DLFileShortcutServiceUtil {
 		long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addFileShortcut(folderId, toFolderId, toName,
 			addCommunityPermissions, addGuestPermissions);
@@ -60,7 +60,7 @@ public class DLFileShortcutServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addFileShortcut(folderId, toFolderId, toName,
 			communityPermissions, guestPermissions);
@@ -68,14 +68,14 @@ public class DLFileShortcutServiceUtil {
 
 	public static void deleteFileShortcut(long fileShortcutId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteFileShortcut(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFileShortcut(fileShortcutId);
 	}
 
@@ -83,7 +83,7 @@ public class DLFileShortcutServiceUtil {
 		long fileShortcutId, long folderId, long toFolderId,
 		java.lang.String toName)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateFileShortcut(fileShortcutId, folderId, toFolderId,
 			toName);

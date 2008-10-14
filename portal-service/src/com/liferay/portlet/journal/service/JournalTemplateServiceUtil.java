@@ -53,7 +53,7 @@ public class JournalTemplateServiceUtil {
 		java.lang.String smallImageURL, java.io.File smallFile,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addTemplate(groupId, templateId, autoTemplateId,
 			structureId, name, description, xsl, formatXsl, langType,
@@ -70,7 +70,7 @@ public class JournalTemplateServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addTemplate(groupId, templateId, autoTemplateId,
 			structureId, name, description, xsl, formatXsl, langType,
@@ -82,7 +82,7 @@ public class JournalTemplateServiceUtil {
 		long groupId, java.lang.String oldTemplateId,
 		java.lang.String newTemplateId, boolean autoTemplateId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .copyTemplate(groupId, oldTemplateId, newTemplateId,
 			autoTemplateId);
@@ -90,21 +90,21 @@ public class JournalTemplateServiceUtil {
 
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteTemplate(groupId, templateId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getStructureTemplates(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getTemplate(groupId, templateId);
 	}
 
@@ -115,7 +115,7 @@ public class JournalTemplateServiceUtil {
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateTemplate(groupId, templateId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,

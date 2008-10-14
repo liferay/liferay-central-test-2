@@ -79,7 +79,7 @@ public class DLFileEntryServiceJSON {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
 				name, title, description, tagsEntries, extraSettings, bytes,
@@ -93,7 +93,7 @@ public class DLFileEntryServiceJSON {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
 				name, title, description, tagsEntries, extraSettings, bytes,
@@ -124,7 +124,7 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static JSONArray getFileEntries(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
 			DLFileEntryServiceUtil.getFileEntries(folderId);
@@ -133,7 +133,7 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static JSONObject getFileEntry(long folderId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntry(folderId,
 				name);
@@ -143,7 +143,7 @@ public class DLFileEntryServiceJSON {
 
 	public static JSONObject getFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntryByTitle(folderId,
 				titleWithExtension);
@@ -162,7 +162,7 @@ public class DLFileEntryServiceJSON {
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
 				name);
 
@@ -172,7 +172,7 @@ public class DLFileEntryServiceJSON {
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
 				name, owner, expirationTime);
 
@@ -181,21 +181,19 @@ public class DLFileEntryServiceJSON {
 
 	public static com.liferay.lock.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(lockUuid,
 				expirationTime);
 
 		return returnValue;
 	}
 
-	public static void unlockFileEntry(long folderId, java.lang.String name)
-		throws java.rmi.RemoteException {
+	public static void unlockFileEntry(long folderId, java.lang.String name) {
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.lang.String lockUuid) throws com.liferay.portal.PortalException {
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name, lockUuid);
 	}
 

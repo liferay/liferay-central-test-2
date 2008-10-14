@@ -47,20 +47,20 @@ package com.liferay.portlet.announcements.service;
 public class AnnouncementsFlagServiceUtil {
 	public static void addFlag(long entryId, int value)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().addFlag(entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long entryId, int value)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFlag(entryId, value);
 	}
 
 	public static void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteFlag(flagId);
 	}
 

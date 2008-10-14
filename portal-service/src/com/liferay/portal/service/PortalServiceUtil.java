@@ -45,12 +45,12 @@ package com.liferay.portal.service;
  *
  */
 public class PortalServiceUtil {
-	public static void test() throws java.rmi.RemoteException {
+	public static void test() {
 		getService().test();
 	}
 
 	public static void testCounterRollback()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException {
 		getService().testCounterRollback();
 	}
 

@@ -37,8 +37,6 @@ import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -191,18 +189,11 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			classPK = address.getClassPK();
 		}
 
-		try {
-			if ((classNameId == PortalUtil.getClassNameId(Account.class)) ||
-				(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
-				(classNameId ==
-					PortalUtil.getClassNameId(Organization.class))) {
+		if ((classNameId == PortalUtil.getClassNameId(Account.class)) ||
+			(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
+			(classNameId == PortalUtil.getClassNameId(Organization.class))) {
 
-				listTypeService.validate(
-					typeId, classNameId, ListTypeImpl.ADDRESS);
-			}
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
+			listTypeService.validate(typeId, classNameId, ListTypeImpl.ADDRESS);
 		}
 
 		validate(addressId, companyId, classNameId, classPK, mailing, primary);

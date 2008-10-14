@@ -48,7 +48,7 @@ public class PollsVoteServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().addVote(questionId, choiceId);
 	}
 

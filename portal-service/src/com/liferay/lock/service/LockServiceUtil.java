@@ -25,8 +25,6 @@ package com.liferay.lock.service;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 
-import java.rmi.RemoteException;
-
 /**
  * <a href="LockServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,14 +33,14 @@ import java.rmi.RemoteException;
  */
 public class LockServiceUtil {
 
-	public static void clear() throws RemoteException {
+	public static void clear() {
 		LockService lockService = LockServiceFactory.getService();
 
 		lockService.clear();
 	}
 
 	public static Lock getLock(String className, Comparable<?> pk)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -50,17 +48,14 @@ public class LockServiceUtil {
 	}
 
 	public static boolean hasLock(
-			String className, Comparable<?> pk, long userId)
-		throws RemoteException {
+		String className, Comparable<?> pk, long userId) {
 
 		LockService lockService = LockServiceFactory.getService();
 
 		return lockService.hasLock(className, pk, userId);
 	}
 
-	public static boolean isLocked(String className, Comparable<?> pk)
-		throws RemoteException {
-
+	public static boolean isLocked(String className, Comparable<?> pk) {
 		LockService lockService = LockServiceFactory.getService();
 
 		return lockService.isLocked(className, pk);
@@ -69,7 +64,7 @@ public class LockServiceUtil {
 	public static Lock lock(
 			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -79,7 +74,7 @@ public class LockServiceUtil {
 	public static Lock lock(
 			String className, Comparable<?> pk, long userId, String owner,
 			boolean inheritable, long expirationTime)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -88,16 +83,14 @@ public class LockServiceUtil {
 	}
 
 	public static Lock refresh(String uuid, long expirationTime)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		LockService lockService = LockServiceFactory.getService();
 
 		return lockService.refresh(uuid, expirationTime);
 	}
 
-	public static void unlock(String className, Comparable<?> pk)
-		throws RemoteException {
-
+	public static void unlock(String className, Comparable<?> pk) {
 		LockService lockService = LockServiceFactory.getService();
 
 		lockService.unlock(className, pk);

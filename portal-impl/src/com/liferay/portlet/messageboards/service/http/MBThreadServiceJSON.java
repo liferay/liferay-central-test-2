@@ -74,7 +74,7 @@ import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
  */
 public class MBThreadServiceJSON {
 	public static JSONObject moveThread(long categoryId, long threadId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBThread returnValue = MBThreadServiceUtil.moveThread(categoryId,
 				threadId);

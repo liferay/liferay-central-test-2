@@ -28,8 +28,6 @@ import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.OrgLaborLocalServiceBaseImpl;
 
-import java.rmi.RemoteException;
-
 import java.util.List;
 
 /**
@@ -128,12 +126,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 	protected void validate(int typeId)
 		throws PortalException, SystemException {
 
-		try {
-			listTypeService.validate(typeId, ListTypeImpl.ORGANIZATION_SERVICE);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
+		listTypeService.validate(typeId, ListTypeImpl.ORGANIZATION_SERVICE);
 	}
 
 }

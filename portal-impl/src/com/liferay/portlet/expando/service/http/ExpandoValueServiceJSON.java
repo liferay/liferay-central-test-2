@@ -76,7 +76,7 @@ public class ExpandoValueServiceJSON {
 	public static JSONObject addValue(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.lang.Object data)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(className,
 				tableName, columnName, classPK, data);
@@ -86,7 +86,7 @@ public class ExpandoValueServiceJSON {
 
 	public static java.lang.Object getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.lang.Object returnValue = ExpandoValueServiceUtil.getData(className,
 				tableName, columnName, classPK);

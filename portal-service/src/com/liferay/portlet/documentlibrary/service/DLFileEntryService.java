@@ -53,7 +53,7 @@ public interface DLFileEntryService {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, java.io.File file,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -61,7 +61,7 @@ public interface DLFileEntryService {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] bytes,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -70,7 +70,7 @@ public interface DLFileEntryService {
 		java.lang.String extraSettings, java.io.File file,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -79,7 +79,7 @@ public interface DLFileEntryService {
 		java.lang.String extraSettings, byte[] bytes,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteFileEntry(long folderId, java.lang.String name)
@@ -98,17 +98,17 @@ public interface DLFileEntryService {
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long folderId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long folderId, java.lang.String titleWithExtension)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public boolean hasFileEntryLock(long folderId, java.lang.String name)
@@ -117,23 +117,21 @@ public interface DLFileEntryService {
 	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public com.liferay.lock.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws com.liferay.portal.PortalException;
 
-	public void unlockFileEntry(long folderId, java.lang.String name)
-		throws java.rmi.RemoteException;
+	public void unlockFileEntry(long folderId, java.lang.String name);
 
 	public void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
+		java.lang.String lockUuid) throws com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long folderId, long newFolderId, java.lang.String name,

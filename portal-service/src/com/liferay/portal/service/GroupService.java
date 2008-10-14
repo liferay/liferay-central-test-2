@@ -51,79 +51,77 @@ public interface GroupService {
 	public com.liferay.portal.model.Group addGroup(java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group addGroup(long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addRoleGroups(long roleId, long[] groupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteGroup(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getGroup(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
-		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws java.rmi.RemoteException;
+		java.util.List<com.liferay.portal.model.Organization> organizations);
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
-		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws java.rmi.RemoteException;
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
 
 	public boolean hasUserGroup(long userId, long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.String[] params, int start, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.String[] params)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void setRoleGroups(long roleId, long[] groupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void unsetRoleGroups(long roleId, long[] groupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateFriendlyURL(long groupId,
 		java.lang.String friendlyURL)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String typeSettings)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateWorkflow(long groupId,
 		boolean workflowEnabled, int workflowStages,
 		java.lang.String workflowRoleNames)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

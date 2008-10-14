@@ -33,8 +33,6 @@ import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.format.PhoneNumberUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -156,12 +154,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			classPK = phone.getClassPK();
 		}
 
-		try {
-			listTypeService.validate(typeId, classNameId, ListTypeImpl.PHONE);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
+		listTypeService.validate(typeId, classNameId, ListTypeImpl.PHONE);
 
 		validate(phoneId, companyId, classNameId, classPK, primary);
 	}

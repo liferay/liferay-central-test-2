@@ -77,7 +77,7 @@ public class DLFolderServiceJSON {
 	public static JSONObject addFolder(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
 				parentFolderId, name, description, addCommunityPermissions,
@@ -90,7 +90,7 @@ public class DLFolderServiceJSON {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
 				parentFolderId, name, description, communityPermissions,
@@ -126,7 +126,7 @@ public class DLFolderServiceJSON {
 	}
 
 	public static JSONObject getFolder(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
 
@@ -135,7 +135,7 @@ public class DLFolderServiceJSON {
 
 	public static JSONObject getFolder(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(groupId,
 				parentFolderId, name);
@@ -145,7 +145,7 @@ public class DLFolderServiceJSON {
 
 	public static long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		long returnValue = DLFolderServiceUtil.getFolderId(groupId,
 				parentFolderId, name);
@@ -154,7 +154,7 @@ public class DLFolderServiceJSON {
 	}
 
 	public static JSONArray getFolders(long groupId, long parentFolderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
 			DLFolderServiceUtil.getFolders(groupId, parentFolderId);
@@ -163,7 +163,7 @@ public class DLFolderServiceJSON {
 	}
 
 	public static boolean hasInheritableLock(long folderId)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		boolean returnValue = DLFolderServiceUtil.hasInheritableLock(folderId);
 
 		return returnValue;
@@ -189,7 +189,7 @@ public class DLFolderServiceJSON {
 
 	public static com.liferay.lock.model.Lock refreshFolderLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		com.liferay.lock.model.Lock returnValue = DLFolderServiceUtil.refreshFolderLock(lockUuid,
 				expirationTime);
 
@@ -197,20 +197,20 @@ public class DLFolderServiceJSON {
 	}
 
 	public static void reIndexSearch(long companyId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderServiceUtil.reIndexSearch(companyId);
 	}
 
 	public static void unlockFolder(long folderId, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		DLFolderServiceUtil.unlockFolder(folderId, lockUuid);
 	}
 
 	public static void unlockFolder(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		DLFolderServiceUtil.unlockFolder(groupId, parentFolderId, name, lockUuid);
 	}
 
@@ -225,8 +225,7 @@ public class DLFolderServiceJSON {
 	}
 
 	public static boolean verifyInheritableLock(long folderId,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.lang.String lockUuid) throws com.liferay.portal.PortalException {
 		boolean returnValue = DLFolderServiceUtil.verifyInheritableLock(folderId,
 				lockUuid);
 

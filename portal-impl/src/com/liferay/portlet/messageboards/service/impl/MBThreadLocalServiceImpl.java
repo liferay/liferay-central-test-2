@@ -42,8 +42,6 @@ import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
 
-import java.rmi.RemoteException;
-
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -95,9 +93,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				companyId, portletId, repositoryId, dirName);
 		}
 		catch (NoSuchDirectoryException nsde) {
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
 		}
 
 		// Messages
@@ -430,40 +425,32 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		String newAttachmentsDir = message.getAttachmentsDir();
 
 		try {
-			try {
-				dlService.addDirectory(
-					companyId, repositoryId, newAttachmentsDir);
-			}
-			catch (DuplicateDirectoryException dde) {
-			}
-
-			String[] fileNames = dlService.getFileNames(
-				companyId, repositoryId, oldAttachmentsDir);
-
-			for (String fileName : fileNames) {
-				String name = StringUtil.extractLast(
-					fileName, StringPool.SLASH);
-				byte[] fileBytes = dlService.getFile(
-					companyId, repositoryId, fileName);
-
-				dlService.addFile(
-					companyId, portletId, groupId, repositoryId,
-					newAttachmentsDir + "/" + name, StringPool.BLANK,
-					new String[0], fileBytes);
-
-				dlService.deleteFile(
-					companyId, portletId, repositoryId, fileName);
-			}
-
-			try {
-				dlService.deleteDirectory(
-					companyId, portletId, repositoryId, oldAttachmentsDir);
-			}
-			catch (NoSuchDirectoryException nsde) {
-			}
+			dlService.addDirectory(companyId, repositoryId, newAttachmentsDir);
 		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
+		catch (DuplicateDirectoryException dde) {
+		}
+
+		String[] fileNames = dlService.getFileNames(
+			companyId, repositoryId, oldAttachmentsDir);
+
+		for (String fileName : fileNames) {
+			String name = StringUtil.extractLast(fileName, StringPool.SLASH);
+			byte[] fileBytes = dlService.getFile(
+				companyId, repositoryId, fileName);
+
+			dlService.addFile(
+				companyId, portletId, groupId, repositoryId,
+				newAttachmentsDir + "/" + name, StringPool.BLANK, new String[0],
+				fileBytes);
+
+			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
+		}
+
+		try {
+			dlService.deleteDirectory(
+				companyId, portletId, repositoryId, oldAttachmentsDir);
+		}
+		catch (NoSuchDirectoryException nsde) {
 		}
 	}
 

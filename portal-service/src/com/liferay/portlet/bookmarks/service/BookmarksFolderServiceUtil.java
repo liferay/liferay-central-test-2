@@ -50,7 +50,7 @@ public class BookmarksFolderServiceUtil {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addFolder(plid, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
@@ -61,7 +61,7 @@ public class BookmarksFolderServiceUtil {
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addFolder(plid, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
@@ -69,14 +69,14 @@ public class BookmarksFolderServiceUtil {
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteFolder(folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFolder(folderId);
 	}
 
@@ -84,7 +84,7 @@ public class BookmarksFolderServiceUtil {
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateFolder(folderId, parentFolderId, name, description,
 			mergeWithParentFolder);

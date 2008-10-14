@@ -208,7 +208,7 @@ public class IGFolderServiceHttp {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -251,10 +251,6 @@ public class IGFolderServiceHttp {
 
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

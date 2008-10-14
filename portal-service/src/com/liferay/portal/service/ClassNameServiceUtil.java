@@ -48,13 +48,12 @@ public class ClassNameServiceUtil {
 	public static com.liferay.portal.model.ClassName getClassName(
 		long classNameId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getClassName(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.lang.String value) throws com.liferay.portal.SystemException {
 		return getService().getClassName(value);
 	}
 

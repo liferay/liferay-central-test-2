@@ -49,10 +49,10 @@ package com.liferay.portlet.messageboards.service;
  */
 public interface MBMessageFlagService {
 	public void addAnswerFlag(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteAnswerFlag(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

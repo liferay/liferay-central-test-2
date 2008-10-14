@@ -49,21 +49,21 @@ public class SCLicenseServiceUtil {
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addLicense(name, url, openSource, active, recommended);
 	}
 
 	public static void deleteLicense(long licenseId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteLicense(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getLicense(licenseId);
 	}
 
@@ -71,7 +71,7 @@ public class SCLicenseServiceUtil {
 		long licenseId, java.lang.String name, java.lang.String url,
 		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateLicense(licenseId, name, url, openSource, active,
 			recommended);

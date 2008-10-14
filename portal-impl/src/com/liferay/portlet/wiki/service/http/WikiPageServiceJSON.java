@@ -76,26 +76,26 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 public class WikiPageServiceJSON {
 	public static void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageServiceUtil.deletePage(nodeId, title);
 	}
 
 	public static void deletePageAttachment(long nodeId,
 		java.lang.String title, java.lang.String fileName)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageServiceUtil.deletePageAttachment(nodeId, title, fileName);
 	}
 
 	public static JSONArray getNodePages(long nodeId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getNodePages(nodeId,
 				max);
@@ -106,7 +106,7 @@ public class WikiPageServiceJSON {
 	public static java.lang.String getNodePagesRSS(long nodeId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.lang.String returnValue = WikiPageServiceUtil.getNodePagesRSS(nodeId,
 				max, type, version, displayStyle, feedURL, entryURL);
@@ -115,7 +115,7 @@ public class WikiPageServiceJSON {
 	}
 
 	public static JSONObject getPage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 				title);
@@ -125,7 +125,7 @@ public class WikiPageServiceJSON {
 
 	public static JSONObject getPage(long nodeId, java.lang.String title,
 		double version)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 				title, version);
@@ -137,7 +137,7 @@ public class WikiPageServiceJSON {
 		java.lang.String title, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL, String locale)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.lang.String returnValue = WikiPageServiceUtil.getPagesRSS(companyId,
 				nodeId, title, max, type, version, displayStyle, feedURL,
@@ -147,13 +147,13 @@ public class WikiPageServiceJSON {
 	}
 
 	public static void subscribePage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageServiceUtil.subscribePage(nodeId, title);
 	}
 
 	public static void unsubscribePage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageServiceUtil.unsubscribePage(nodeId, title);
 	}

@@ -50,69 +50,66 @@ package com.liferay.portal.service;
 public interface RoleService {
 	public com.liferay.portal.model.Role addRole(java.lang.String name,
 		java.lang.String description, int type)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addUserRoles(long userId, long[] roleIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteRole(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role getGroupRole(long companyId,
 		long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getGroupRoles(
-		long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		long groupId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role getRole(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
-		long userId, long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		long userId, long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
 		long userId, java.util.List<com.liferay.portal.model.Group> groups)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getUserRoles(
-		long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		long userId) throws com.liferay.portal.SystemException;
 
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names, boolean inherited)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void unsetUserRoles(long userId, long[] roleIds)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name, java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String subtype)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

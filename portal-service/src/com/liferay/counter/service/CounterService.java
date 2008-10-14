@@ -24,8 +24,6 @@ package com.liferay.counter.service;
 
 import com.liferay.portal.SystemException;
 
-import java.rmi.RemoteException;
-
 import java.util.List;
 
 /**
@@ -36,22 +34,18 @@ import java.util.List;
  */
 public interface CounterService {
 
-	public List<String> getNames() throws RemoteException, SystemException;
+	public List<String> getNames() throws SystemException;
 
-	public long increment() throws RemoteException, SystemException;
+	public long increment() throws SystemException;
 
-	public long increment(String name)
-		throws RemoteException, SystemException;
+	public long increment(String name) throws SystemException;
 
-	public long increment(String name, int size)
-		throws RemoteException, SystemException;
+	public long increment(String name, int size) throws SystemException;
 
-	public void rename(String oldName, String newName)
-		throws RemoteException, SystemException;
+	public void rename(String oldName, String newName) throws SystemException;
 
-	public void reset(String name) throws RemoteException, SystemException;
+	public void reset(String name) throws SystemException;
 
-	public void reset(String name, long size)
-		throws RemoteException, SystemException;
+	public void reset(String name, long size) throws SystemException;
 
 }

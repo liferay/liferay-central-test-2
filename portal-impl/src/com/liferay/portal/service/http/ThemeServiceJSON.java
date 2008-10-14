@@ -71,8 +71,7 @@ import com.liferay.portal.service.ThemeServiceUtil;
  *
  */
 public class ThemeServiceJSON {
-	public static java.util.List getThemes(long companyId)
-		throws java.rmi.RemoteException {
+	public static java.util.List getThemes(long companyId) {
 		java.util.List<com.liferay.portal.model.Theme> returnValue = ThemeServiceUtil.getThemes(companyId);
 
 		return returnValue;

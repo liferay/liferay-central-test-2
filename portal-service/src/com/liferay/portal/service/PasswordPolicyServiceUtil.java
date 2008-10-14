@@ -53,7 +53,7 @@ public class PasswordPolicyServiceUtil {
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
 		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addPasswordPolicy(name, description, changeable,
 			changeRequired, minAge, checkSyntax, allowDictionaryWords,
@@ -63,7 +63,7 @@ public class PasswordPolicyServiceUtil {
 
 	public static void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deletePasswordPolicy(passwordPolicyId);
 	}
 
@@ -76,7 +76,7 @@ public class PasswordPolicyServiceUtil {
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updatePasswordPolicy(passwordPolicyId, name, description,
 			changeable, changeRequired, minAge, checkSyntax,

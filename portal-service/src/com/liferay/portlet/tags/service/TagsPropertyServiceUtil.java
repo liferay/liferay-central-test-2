@@ -48,39 +48,38 @@ public class TagsPropertyServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().addProperty(entryId, key, value);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		java.lang.String entryName, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().addProperty(entryName, key, value);
 	}
 
 	public static void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteProperty(propertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
-		long entryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		long entryId) throws com.liferay.portal.SystemException {
 		return getService().getProperties(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		long companyId, java.lang.String key)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException {
 		return getService().getPropertyValues(companyId, key);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().updateProperty(propertyId, key, value);
 	}
 

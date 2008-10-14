@@ -49,11 +49,11 @@ package com.liferay.portlet.tags.service;
  */
 public interface TagsAssetService {
 	public void deleteAsset(long assetId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(long assetId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
@@ -63,14 +63,14 @@ public interface TagsAssetService {
 		java.lang.String orderByType2, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public int getAssetsCount(long groupId, long[] classNameIds,
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.lang.String getAssetsRSS(long groupId, long[] classNameIds,
@@ -81,42 +81,41 @@ public interface TagsAssetService {
 		java.util.Date expirationDate, int max, java.lang.String type,
 		double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
-		java.lang.String languageId) throws java.rmi.RemoteException;
+		java.lang.String languageId);
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
 		long companyId, int start, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public int getCompanyAssetsCount(long companyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getCompanyAssetsRSS(long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public int searchAssetDisplaysCount(long companyId,
 		java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long groupId,
 		java.lang.String className, long classPK,
@@ -126,6 +125,6 @@ public interface TagsAssetService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

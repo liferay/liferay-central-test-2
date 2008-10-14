@@ -71,12 +71,12 @@ import com.liferay.portal.service.PortalServiceUtil;
  *
  */
 public class PortalServiceJSON {
-	public static void test() throws java.rmi.RemoteException {
+	public static void test() {
 		PortalServiceUtil.test();
 	}
 
 	public static void testCounterRollback()
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PortalServiceUtil.testCounterRollback();
 	}
 }

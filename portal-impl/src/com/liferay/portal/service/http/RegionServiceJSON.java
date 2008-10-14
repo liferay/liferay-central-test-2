@@ -75,7 +75,7 @@ import com.liferay.portal.service.RegionServiceUtil;
 public class RegionServiceJSON {
 	public static JSONObject addRegion(long countryId,
 		java.lang.String regionCode, java.lang.String name, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Region returnValue = RegionServiceUtil.addRegion(countryId,
 				regionCode, name, active);
@@ -84,28 +84,28 @@ public class RegionServiceJSON {
 	}
 
 	public static JSONArray getRegions()
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Region> returnValue = RegionServiceUtil.getRegions();
 
 		return RegionJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getRegions(long countryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Region> returnValue = RegionServiceUtil.getRegions(countryId);
 
 		return RegionJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getRegions(boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Region> returnValue = RegionServiceUtil.getRegions(active);
 
 		return RegionJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getRegions(long countryId, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Region> returnValue = RegionServiceUtil.getRegions(countryId,
 				active);
 
@@ -113,7 +113,7 @@ public class RegionServiceJSON {
 	}
 
 	public static JSONObject getRegion(long regionId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Region returnValue = RegionServiceUtil.getRegion(regionId);
 

@@ -32,8 +32,6 @@ import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.EmailAddressLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -156,13 +154,8 @@ public class EmailAddressLocalServiceImpl
 			classPK = emailAddress.getClassPK();
 		}
 
-		try {
-			listTypeService.validate(
-				typeId, classNameId, ListTypeImpl.EMAIL_ADDRESS);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
+		listTypeService.validate(
+			typeId, classNameId, ListTypeImpl.EMAIL_ADDRESS);
 
 		validate(emailAddressId, companyId, classNameId, classPK, primary);
 	}

@@ -75,7 +75,7 @@ import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 public class ExpandoColumnServiceJSON {
 	public static JSONObject addColumn(long tableId, java.lang.String name,
 		int type)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.addColumn(tableId,
 				name, type);
@@ -85,7 +85,7 @@ public class ExpandoColumnServiceJSON {
 
 	public static JSONObject addColumn(long tableId, java.lang.String name,
 		int type, java.lang.Object defaultData)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.addColumn(tableId,
 				name, type, defaultData);
@@ -94,14 +94,14 @@ public class ExpandoColumnServiceJSON {
 	}
 
 	public static void deleteColumn(long columnId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoColumnServiceUtil.deleteColumn(columnId);
 	}
 
 	public static JSONObject updateColumn(long columnId, java.lang.String name,
 		int type)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.updateColumn(columnId,
 				name, type);
@@ -111,7 +111,7 @@ public class ExpandoColumnServiceJSON {
 
 	public static JSONObject updateColumn(long columnId, java.lang.String name,
 		int type, java.lang.Object defaultData)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.updateColumn(columnId,
 				name, type, defaultData);
@@ -121,7 +121,7 @@ public class ExpandoColumnServiceJSON {
 
 	public static JSONObject updateTypeSettings(long columnId,
 		java.lang.String typeSettings)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.updateTypeSettings(columnId,
 				typeSettings);

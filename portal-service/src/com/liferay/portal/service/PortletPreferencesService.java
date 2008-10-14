@@ -49,17 +49,17 @@ package com.liferay.portal.service;
  */
 public interface PortletPreferencesService {
 	public void deleteArchivedPreferences(long portletItemId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void restoreArchivedPreferences(long groupId, java.lang.String name,
 		java.lang.String portletId, javax.portlet.PortletPreferences preferences)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void updateArchivePreferences(long userId, long groupId,
 		java.lang.String name, java.lang.String portletId,
 		javax.portlet.PortletPreferences preferences)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

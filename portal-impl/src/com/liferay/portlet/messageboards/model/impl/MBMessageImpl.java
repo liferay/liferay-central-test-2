@@ -35,8 +35,6 @@ import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
-import java.rmi.RemoteException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -147,9 +145,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
 		}
 		catch (NoSuchDirectoryException nsde) {
-		}
-		catch (RemoteException re) {
-			_log.error(re);
 		}
 
 		return fileNames;

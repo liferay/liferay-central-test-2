@@ -57,7 +57,7 @@ public class MBCategoryServiceUtil {
 		boolean mailingListActive, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addCategory(plid, parentCategoryId, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
@@ -78,7 +78,7 @@ public class MBCategoryServiceUtil {
 		boolean mailingListActive, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addCategory(plid, parentCategoryId, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
@@ -89,38 +89,38 @@ public class MBCategoryServiceUtil {
 
 	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
 		long categoryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCategory(categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCategories(groupId, parentCategoryId, start, end);
 	}
 
 	public static int getCategoriesCount(long groupId, long parentCategoryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException {
 		return getService().getCategoriesCount(groupId, parentCategoryId);
 	}
 
 	public static void subscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().subscribeCategory(categoryId);
 	}
 
 	public static void unsubscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().unsubscribeCategory(categoryId);
 	}
 
@@ -135,7 +135,7 @@ public class MBCategoryServiceUtil {
 		java.lang.String outUserName, java.lang.String outPassword,
 		boolean mailingListActive, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(categoryId, parentCategoryId, name,
 			description, emailAddress, inProtocol, inServerName, inServerPort,

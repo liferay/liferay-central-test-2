@@ -47,7 +47,7 @@ package com.liferay.portlet.shopping.service;
 public class ShoppingItemServiceUtil {
 	public static void addBookItems(long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().addBookItems(categoryId, isbns);
 	}
 
@@ -65,7 +65,7 @@ public class ShoppingItemServiceUtil {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addItem(categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
@@ -89,7 +89,7 @@ public class ShoppingItemServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addItem(categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
@@ -100,14 +100,14 @@ public class ShoppingItemServiceUtil {
 
 	public static void deleteItem(long itemId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		long itemId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getItem(itemId);
 	}
 
@@ -124,7 +124,7 @@ public class ShoppingItemServiceUtil {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateItem(itemId, categoryId, sku, name, description,
 			properties, fieldsQuantities, requiresShipping, stockQuantity,

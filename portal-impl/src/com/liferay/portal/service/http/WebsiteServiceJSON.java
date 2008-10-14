@@ -75,7 +75,7 @@ import com.liferay.portal.service.WebsiteServiceUtil;
 public class WebsiteServiceJSON {
 	public static JSONObject addWebsite(java.lang.String className,
 		long classPK, java.lang.String url, int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.addWebsite(className,
 				classPK, url, typeId, primary);
@@ -84,13 +84,13 @@ public class WebsiteServiceJSON {
 	}
 
 	public static void deleteWebsite(long websiteId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WebsiteServiceUtil.deleteWebsite(websiteId);
 	}
 
 	public static JSONObject getWebsite(long websiteId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.getWebsite(websiteId);
 
@@ -98,7 +98,7 @@ public class WebsiteServiceJSON {
 	}
 
 	public static JSONArray getWebsites(java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Website> returnValue = WebsiteServiceUtil.getWebsites(className,
 				classPK);
@@ -108,7 +108,7 @@ public class WebsiteServiceJSON {
 
 	public static JSONObject updateWebsite(long websiteId,
 		java.lang.String url, int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.updateWebsite(websiteId,
 				url, typeId, primary);

@@ -47,13 +47,13 @@ package com.liferay.portlet.messageboards.service;
 public class MBMessageFlagServiceUtil {
 	public static void addAnswerFlag(long messageId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().addAnswerFlag(messageId);
 	}
 
 	public static void deleteAnswerFlag(long messageId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteAnswerFlag(messageId);
 	}
 

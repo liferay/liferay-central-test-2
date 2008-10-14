@@ -50,8 +50,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.util.UniqueList;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -719,17 +717,11 @@ public class OrganizationLocalServiceImpl
 			PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_REQUIRED,
 			new Filter(type)));
 
-		try {
-			if (countryRequired || (countryId > 0)) {
-				countryPersistence.findByPrimaryKey(countryId);
-			}
+		if (countryRequired || (countryId > 0)) {
+			countryPersistence.findByPrimaryKey(countryId);
+		}
 
-			listTypeService.validate(
-				statusId, ListTypeImpl.ORGANIZATION_STATUS);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
+		listTypeService.validate(statusId, ListTypeImpl.ORGANIZATION_STATUS);
 	}
 
 }

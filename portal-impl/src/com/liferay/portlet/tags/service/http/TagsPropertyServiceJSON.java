@@ -76,7 +76,7 @@ import com.liferay.portlet.tags.service.TagsPropertyServiceUtil;
 public class TagsPropertyServiceJSON {
 	public static JSONObject addProperty(long entryId, java.lang.String key,
 		java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryId,
 				key, value);
@@ -86,7 +86,7 @@ public class TagsPropertyServiceJSON {
 
 	public static JSONObject addProperty(java.lang.String entryName,
 		java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryName,
 				key, value);
@@ -95,21 +95,20 @@ public class TagsPropertyServiceJSON {
 	}
 
 	public static void deleteProperty(long propertyId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyServiceUtil.deleteProperty(propertyId);
 	}
 
 	public static JSONArray getProperties(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsProperty> returnValue = TagsPropertyServiceUtil.getProperties(entryId);
 
 		return TagsPropertyJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getPropertyValues(long companyId,
-		java.lang.String key)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.lang.String key) throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsProperty> returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
 				key);
 
@@ -118,7 +117,7 @@ public class TagsPropertyServiceJSON {
 
 	public static JSONObject updateProperty(long propertyId,
 		java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.updateProperty(propertyId,
 				key, value);

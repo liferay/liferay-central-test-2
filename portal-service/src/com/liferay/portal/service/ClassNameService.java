@@ -49,10 +49,9 @@ package com.liferay.portal.service;
  */
 public interface ClassNameService {
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		java.lang.String value) throws com.liferay.portal.SystemException;
 }

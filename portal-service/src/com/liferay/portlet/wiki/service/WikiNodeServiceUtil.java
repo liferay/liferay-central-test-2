@@ -49,7 +49,7 @@ public class WikiNodeServiceUtil {
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addNode(plid, name, description, addCommunityPermissions,
 			addGuestPermissions);
@@ -60,7 +60,7 @@ public class WikiNodeServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addNode(plid, name, description, communityPermissions,
 			guestPermissions);
@@ -68,46 +68,46 @@ public class WikiNodeServiceUtil {
 
 	public static void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getNode(groupId, name);
 	}
 
 	public static void importPages(long nodeId, java.lang.String importer,
 		java.io.File[] files, java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().importPages(nodeId, importer, files, options);
 	}
 
 	public static void subscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().subscribeNode(nodeId);
 	}
 
 	public static void unsubscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().unsubscribeNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().updateNode(nodeId, name, description);
 	}
 

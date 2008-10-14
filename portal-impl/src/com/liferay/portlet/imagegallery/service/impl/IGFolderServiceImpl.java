@@ -35,8 +35,6 @@ import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 
 import java.io.File;
 
-import java.rmi.RemoteException;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -83,7 +81,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			long plid, long sourceFolderId, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		IGFolder srcFolder = getFolder(sourceFolderId);
 
@@ -165,7 +163,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	protected void copyFolder(
 			IGFolder srcFolder, IGFolder destFolder,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		List<IGImage> srcImages = igImageService.getImages(
 			srcFolder.getFolderId());

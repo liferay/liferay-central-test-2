@@ -59,7 +59,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleURL, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addArticle(groupId, articleId, autoArticleId, title,
 			description, content, type, structureId, templateId,
@@ -90,7 +90,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addArticle(groupId, articleId, autoArticleId, title,
 			description, content, type, structureId, templateId,
@@ -119,7 +119,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addArticle(groupId, articleId, autoArticleId, title,
 			description, content, type, structureId, templateId,
@@ -150,7 +150,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addArticle(groupId, articleId, autoArticleId, title,
 			description, content, type, structureId, templateId,
@@ -168,7 +168,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .approveArticle(groupId, articleId, version, articleURL,
 			preferences);
@@ -178,7 +178,7 @@ public class JournalArticleServiceUtil {
 		long groupId, java.lang.String oldArticleId,
 		java.lang.String newArticleId, boolean autoArticleId, double version)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .copyArticle(groupId, oldArticleId, newArticleId,
 			autoArticleId, version);
@@ -187,7 +187,7 @@ public class JournalArticleServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getArticle(groupId, articleId, version);
 	}
 
@@ -195,7 +195,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .getArticleContent(groupId, articleId, languageId,
 			themeDisplay);
@@ -206,7 +206,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .getArticleContent(groupId, articleId, version, languageId,
 			themeDisplay);
@@ -216,7 +216,7 @@ public class JournalArticleServiceUtil {
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService()
 			.deleteArticle(groupId, articleId, version, articleURL, preferences);
 	}
@@ -225,7 +225,7 @@ public class JournalArticleServiceUtil {
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService()
 			.expireArticle(groupId, articleId, version, articleURL, preferences);
 	}
@@ -233,7 +233,7 @@ public class JournalArticleServiceUtil {
 	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().removeArticleLocale(companyId, languageId);
 	}
 
@@ -241,7 +241,7 @@ public class JournalArticleServiceUtil {
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .removeArticleLocale(groupId, articleId, version, languageId);
 	}
@@ -263,7 +263,7 @@ public class JournalArticleServiceUtil {
 		javax.portlet.PortletPreferences preferences,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateArticle(groupId, articleId, version,
 			incrementVersion, title, description, content, type, structureId,
@@ -280,7 +280,7 @@ public class JournalArticleServiceUtil {
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().updateContent(groupId, articleId, version, content);
 	}
 

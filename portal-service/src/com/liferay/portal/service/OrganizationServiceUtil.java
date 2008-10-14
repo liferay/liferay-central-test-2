@@ -48,14 +48,14 @@ public class OrganizationServiceUtil {
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService()
 			.addPasswordPolicyOrganizations(passwordPolicyId, organizationIds);
 	}
@@ -66,7 +66,7 @@ public class OrganizationServiceUtil {
 		long countryId, int statusId, java.lang.String comments,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addOrganization(parentOrganizationId, name, type,
 			recursable, regionId, countryId, statusId, comments, websites);
@@ -74,46 +74,45 @@ public class OrganizationServiceUtil {
 
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteOrganization(organizationId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getOrganization(organizationId);
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException {
 		return getService().getOrganizationId(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		long userId) throws com.liferay.portal.SystemException {
 		return getService().getUserOrganizations(userId);
 	}
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService()
 			.unsetPasswordPolicyOrganizations(passwordPolicyId, organizationIds);
 	}
@@ -124,7 +123,7 @@ public class OrganizationServiceUtil {
 		long countryId, int statusId, java.lang.String comments,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateOrganization(organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments,

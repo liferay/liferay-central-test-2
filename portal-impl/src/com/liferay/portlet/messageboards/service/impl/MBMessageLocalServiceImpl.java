@@ -83,8 +83,6 @@ import com.liferay.portlet.social.model.SocialActivity;
 
 import java.io.IOException;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -433,39 +431,34 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String dirName = message.getAttachmentsDir();
 
 			try {
-				try {
-					dlService.deleteDirectory(
-						companyId, portletId, repositoryId, dirName);
-				}
-				catch (NoSuchDirectoryException nsde) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(nsde.getMessage());
-					}
-				}
-
-				dlService.addDirectory(companyId, repositoryId, dirName);
-
-				for (int i = 0; i < files.size(); i++) {
-					ObjectValuePair<String, byte[]> ovp = files.get(i);
-
-					String fileName = ovp.getKey();
-					byte[] bytes = ovp.getValue();
-
-					try {
-						dlService.addFile(
-							companyId, portletId, groupId, repositoryId,
-							dirName + "/" + fileName, StringPool.BLANK,
-							new String[0], bytes);
-					}
-					catch (DuplicateFileException dfe) {
-						if (_log.isDebugEnabled()) {
-							_log.debug(dfe.getMessage());
-						}
-					}
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsde.getMessage());
 				}
 			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
+
+			dlService.addDirectory(companyId, repositoryId, dirName);
+
+			for (int i = 0; i < files.size(); i++) {
+				ObjectValuePair<String, byte[]> ovp = files.get(i);
+
+				String fileName = ovp.getKey();
+				byte[] bytes = ovp.getValue();
+
+				try {
+					dlService.addFile(
+						companyId, portletId, groupId, repositoryId,
+						dirName + "/" + fileName, StringPool.BLANK,
+						new String[0], bytes);
+				}
+				catch (DuplicateFileException dfe) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(dfe.getMessage());
+					}
+				}
 			}
 		}
 
@@ -724,9 +717,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					_log.debug(nsde.getMessage());
 				}
 			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
-			}
 		}
 
 		// Thread
@@ -757,9 +747,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				if (_log.isDebugEnabled()) {
 					_log.debug(nsde.getMessage());
 				}
-			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
 			}
 
 			// Subscriptions
@@ -1184,51 +1171,46 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = message.getAttachmentsDir();
 
-		try {
-			if (!files.isEmpty() || !existingFiles.isEmpty()) {
-				try {
-					dlService.addDirectory(companyId, repositoryId, dirName);
-				}
-				catch (DuplicateDirectoryException dde) {
-				}
+		if (!files.isEmpty() || !existingFiles.isEmpty()) {
+			try {
+				dlService.addDirectory(companyId, repositoryId, dirName);
+			}
+			catch (DuplicateDirectoryException dde) {
+			}
 
-				String[] fileNames = dlService.getFileNames(
-					companyId, repositoryId, dirName);
+			String[] fileNames = dlService.getFileNames(
+				companyId, repositoryId, dirName);
 
-				for (String fileName: fileNames) {
-					if (!existingFiles.contains(fileName)) {
-						dlService.deleteFile(
-							companyId, portletId, repositoryId, fileName);
-					}
-				}
-
-				for (int i = 0; i < files.size(); i++) {
-					ObjectValuePair<String, byte[]> ovp = files.get(i);
-
-					String fileName = ovp.getKey();
-					byte[] bytes = ovp.getValue();
-
-					try {
-						dlService.addFile(
-							companyId, portletId, groupId, repositoryId,
-							dirName + "/" + fileName, StringPool.BLANK,
-							new String[0], bytes);
-					}
-					catch (DuplicateFileException dfe) {
-					}
+			for (String fileName: fileNames) {
+				if (!existingFiles.contains(fileName)) {
+					dlService.deleteFile(
+						companyId, portletId, repositoryId, fileName);
 				}
 			}
-			else {
+
+			for (int i = 0; i < files.size(); i++) {
+				ObjectValuePair<String, byte[]> ovp = files.get(i);
+
+				String fileName = ovp.getKey();
+				byte[] bytes = ovp.getValue();
+
 				try {
-					dlService.deleteDirectory(
-						companyId, portletId, repositoryId, dirName);
+					dlService.addFile(
+						companyId, portletId, groupId, repositoryId,
+						dirName + "/" + fileName, StringPool.BLANK,
+						new String[0], bytes);
 				}
-				catch (NoSuchDirectoryException nsde) {
+				catch (DuplicateFileException dfe) {
 				}
 			}
 		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
+		else {
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+			}
 		}
 
 		// Message

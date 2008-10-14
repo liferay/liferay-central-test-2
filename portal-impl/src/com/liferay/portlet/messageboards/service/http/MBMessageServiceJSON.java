@@ -79,7 +79,7 @@ public class MBMessageServiceJSON {
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				subject, body, files, anonymous, priority, tagsEntries,
@@ -94,7 +94,7 @@ public class MBMessageServiceJSON {
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				subject, body, files, anonymous, priority, tagsEntries,
@@ -108,7 +108,7 @@ public class MBMessageServiceJSON {
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
@@ -124,7 +124,7 @@ public class MBMessageServiceJSON {
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
@@ -135,21 +135,21 @@ public class MBMessageServiceJSON {
 
 	public static void deleteDiscussionMessage(long groupId,
 		java.lang.String className, long classPK, long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageServiceUtil.deleteDiscussionMessage(groupId, className,
 			classPK, messageId);
 	}
 
 	public static void deleteMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
 	public static JSONArray getCategoryMessages(long categoryId, int start,
 		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
 			MBMessageServiceUtil.getCategoryMessages(categoryId, start, end);
@@ -158,14 +158,14 @@ public class MBMessageServiceJSON {
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		int returnValue = MBMessageServiceUtil.getCategoryMessagesCount(categoryId);
 
 		return returnValue;
 	}
 
 	public static JSONObject getMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.getMessage(messageId);
 
@@ -174,7 +174,7 @@ public class MBMessageServiceJSON {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue = MBMessageServiceUtil.getMessageDisplay(messageId);
 
@@ -182,13 +182,13 @@ public class MBMessageServiceJSON {
 	}
 
 	public static void subscribeMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageServiceUtil.subscribeMessage(messageId);
 	}
 
 	public static void unsubscribeMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
@@ -196,7 +196,7 @@ public class MBMessageServiceJSON {
 	public static JSONObject updateDiscussionMessage(long groupId,
 		java.lang.String className, long classPK, long messageId,
 		java.lang.String subject, java.lang.String body)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 				className, classPK, messageId, subject, body);
@@ -209,7 +209,7 @@ public class MBMessageServiceJSON {
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
 				subject, body, files, existingFiles, priority, tagsEntries);

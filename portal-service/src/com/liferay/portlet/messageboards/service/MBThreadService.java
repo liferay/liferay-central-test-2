@@ -50,12 +50,12 @@ package com.liferay.portlet.messageboards.service;
 public interface MBThreadService {
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

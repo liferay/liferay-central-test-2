@@ -78,7 +78,7 @@ public class JournalStructureServiceJSON {
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(groupId,
 				structureId, autoStructureId, parentStructureId, name,
@@ -93,7 +93,7 @@ public class JournalStructureServiceJSON {
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(groupId,
 				structureId, autoStructureId, parentStructureId, name,
@@ -105,7 +105,7 @@ public class JournalStructureServiceJSON {
 	public static JSONObject copyStructure(long groupId,
 		java.lang.String oldStructureId, java.lang.String newStructureId,
 		boolean autoStructureId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.copyStructure(groupId,
 				oldStructureId, newStructureId, autoStructureId);
@@ -115,14 +115,14 @@ public class JournalStructureServiceJSON {
 
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureServiceUtil.deleteStructure(groupId, structureId);
 	}
 
 	public static JSONObject getStructure(long groupId,
 		java.lang.String structureId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.getStructure(groupId,
 				structureId);
@@ -134,7 +134,7 @@ public class JournalStructureServiceJSON {
 		java.lang.String structureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(groupId,
 				structureId, parentStructureId, name, description, xsd);

@@ -54,7 +54,7 @@ public class BlogsEntryServiceUtil {
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
@@ -72,7 +72,7 @@ public class BlogsEntryServiceUtil {
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
@@ -82,14 +82,14 @@ public class BlogsEntryServiceUtil {
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int max)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCompanyEntries(companyId, max);
 	}
 
@@ -99,7 +99,7 @@ public class BlogsEntryServiceUtil {
 		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .getCompanyEntriesRSS(companyId, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
@@ -108,21 +108,21 @@ public class BlogsEntryServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getEntry(groupId, urlTitle);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, int max)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getGroupEntries(groupId, max);
 	}
 
@@ -131,7 +131,7 @@ public class BlogsEntryServiceUtil {
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .getGroupEntriesRSS(groupId, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
@@ -140,7 +140,7 @@ public class BlogsEntryServiceUtil {
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
 		long organizationId, int max)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getOrganizationEntries(organizationId, max);
 	}
 
@@ -150,7 +150,7 @@ public class BlogsEntryServiceUtil {
 		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .getOrganizationEntriesRSS(organizationId, max, type,
 			version, displayStyle, feedURL, entryURL, themeDisplay);
@@ -164,7 +164,7 @@ public class BlogsEntryServiceUtil {
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,

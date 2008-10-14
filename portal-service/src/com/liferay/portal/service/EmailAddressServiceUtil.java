@@ -49,28 +49,28 @@ public class EmailAddressServiceUtil {
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEmailAddress(className, classPK, address, typeId, primary);
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteEmailAddress(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getEmailAddresses(className, classPK);
 	}
 
@@ -78,7 +78,7 @@ public class EmailAddressServiceUtil {
 		long emailAddressId, java.lang.String address, int typeId,
 		boolean primary)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEmailAddress(emailAddressId, address, typeId, primary);
 	}

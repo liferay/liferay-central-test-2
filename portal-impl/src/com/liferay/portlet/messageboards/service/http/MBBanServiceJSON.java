@@ -74,7 +74,7 @@ import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
  */
 public class MBBanServiceJSON {
 	public static JSONObject addBan(long plid, long banUserId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(plid,
 				banUserId);
@@ -83,7 +83,7 @@ public class MBBanServiceJSON {
 	}
 
 	public static void deleteBan(long plid, long banUserId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBBanServiceUtil.deleteBan(plid, banUserId);
 	}

@@ -76,7 +76,7 @@ public class WikiNodeServiceJSON {
 	public static JSONObject addNode(long plid, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
 				name, description, addCommunityPermissions, addGuestPermissions);
@@ -87,7 +87,7 @@ public class WikiNodeServiceJSON {
 	public static JSONObject addNode(long plid, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
 				name, description, communityPermissions, guestPermissions);
@@ -96,13 +96,13 @@ public class WikiNodeServiceJSON {
 	}
 
 	public static void deleteNode(long nodeId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiNodeServiceUtil.deleteNode(nodeId);
 	}
 
 	public static JSONObject getNode(long nodeId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.getNode(nodeId);
 
@@ -110,7 +110,7 @@ public class WikiNodeServiceJSON {
 	}
 
 	public static JSONObject getNode(long groupId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.getNode(groupId,
 				name);
@@ -119,20 +119,20 @@ public class WikiNodeServiceJSON {
 	}
 
 	public static void subscribeNode(long nodeId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiNodeServiceUtil.subscribeNode(nodeId);
 	}
 
 	public static void unsubscribeNode(long nodeId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiNodeServiceUtil.unsubscribeNode(nodeId);
 	}
 
 	public static JSONObject updateNode(long nodeId, java.lang.String name,
 		java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.updateNode(nodeId,
 				name, description);

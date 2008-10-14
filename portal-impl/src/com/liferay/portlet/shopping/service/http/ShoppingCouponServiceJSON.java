@@ -82,7 +82,7 @@ public class ShoppingCouponServiceJSON {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.addCoupon(plid,
 				code, autoCode, name, description, startDateMonth,
@@ -95,13 +95,13 @@ public class ShoppingCouponServiceJSON {
 	}
 
 	public static void deleteCoupon(long plid, long couponId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCouponServiceUtil.deleteCoupon(plid, couponId);
 	}
 
 	public static JSONObject getCoupon(long plid, long couponId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(plid,
 				couponId);
@@ -112,7 +112,7 @@ public class ShoppingCouponServiceJSON {
 	public static JSONArray search(long plid, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator, int start, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> returnValue =
 			ShoppingCouponServiceUtil.search(plid, companyId, code, active,
@@ -129,7 +129,7 @@ public class ShoppingCouponServiceJSON {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateCoupon(plid,
 				couponId, name, description, startDateMonth, startDateDay,

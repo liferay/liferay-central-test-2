@@ -77,7 +77,7 @@ public class OrgLaborServiceJSON {
 		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
 		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
 		int friOpen, int friClose, int satOpen, int satClose)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.addOrgLabor(organizationId,
 				typeId, sunOpen, sunClose, monOpen, monClose, tueOpen,
@@ -88,13 +88,13 @@ public class OrgLaborServiceJSON {
 	}
 
 	public static void deleteOrgLabor(long orgLaborId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrgLaborServiceUtil.deleteOrgLabor(orgLaborId);
 	}
 
 	public static JSONObject getOrgLabor(long orgLaborId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.getOrgLabor(orgLaborId);
 
@@ -102,7 +102,7 @@ public class OrgLaborServiceJSON {
 	}
 
 	public static JSONArray getOrgLabors(long organizationId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.OrgLabor> returnValue = OrgLaborServiceUtil.getOrgLabors(organizationId);
 
@@ -113,7 +113,7 @@ public class OrgLaborServiceJSON {
 		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
 		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
 		int friOpen, int friClose, int satOpen, int satClose)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.updateOrgLabor(orgLaborId,
 				typeId, sunOpen, sunClose, monOpen, monClose, tueOpen,

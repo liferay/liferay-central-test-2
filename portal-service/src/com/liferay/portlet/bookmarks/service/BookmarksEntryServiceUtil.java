@@ -50,7 +50,7 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String comments, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(folderId, name, url, comments, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
@@ -62,7 +62,7 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(folderId, name, url, comments, tagsEntries,
 			communityPermissions, guestPermissions);
@@ -70,21 +70,21 @@ public class BookmarksEntryServiceUtil {
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().openEntry(entryId);
 	}
 
@@ -93,7 +93,7 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(entryId, folderId, name, url, comments,
 			tagsEntries);

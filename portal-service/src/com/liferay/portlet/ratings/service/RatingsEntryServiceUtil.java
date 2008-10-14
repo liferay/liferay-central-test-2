@@ -47,14 +47,14 @@ package com.liferay.portlet.ratings.service;
 public class RatingsEntryServiceUtil {
 	public static void deleteEntry(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteEntry(className, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().updateEntry(className, classPK, score);
 	}
 

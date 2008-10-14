@@ -50,7 +50,7 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addCategory(plid, parentCategoryId, name, description,
 			addCommunityPermissions, addGuestPermissions);
@@ -61,7 +61,7 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addCategory(plid, parentCategoryId, name, description,
 			communityPermissions, guestPermissions);
@@ -69,14 +69,14 @@ public class ShoppingCategoryServiceUtil {
 
 	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		long categoryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCategory(categoryId);
 	}
 
@@ -84,7 +84,7 @@ public class ShoppingCategoryServiceUtil {
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(categoryId, parentCategoryId, name,
 			description, mergeWithParentCategory);

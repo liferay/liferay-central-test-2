@@ -52,7 +52,7 @@ public class PollsQuestionServiceUtil {
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addQuestion(plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
@@ -68,7 +68,7 @@ public class PollsQuestionServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addQuestion(plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
@@ -78,14 +78,14 @@ public class PollsQuestionServiceUtil {
 
 	public static void deleteQuestion(long questionId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteQuestion(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		long questionId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getQuestion(questionId);
 	}
 
@@ -95,7 +95,7 @@ public class PollsQuestionServiceUtil {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateQuestion(questionId, title, description,
 			expirationDateMonth, expirationDateDay, expirationDateYear,

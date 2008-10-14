@@ -74,13 +74,13 @@ import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil;
  */
 public class AnnouncementsFlagServiceJSON {
 	public static void addFlag(long entryId, int value)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementsFlagServiceUtil.addFlag(entryId, value);
 	}
 
 	public static JSONObject getFlag(long entryId, int value)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.announcements.model.AnnouncementsFlag returnValue = AnnouncementsFlagServiceUtil.getFlag(entryId,
 				value);
@@ -89,7 +89,7 @@ public class AnnouncementsFlagServiceJSON {
 	}
 
 	public static void deleteFlag(long flagId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementsFlagServiceUtil.deleteFlag(flagId);
 	}

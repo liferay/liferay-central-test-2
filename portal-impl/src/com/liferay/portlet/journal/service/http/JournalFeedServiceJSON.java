@@ -83,7 +83,7 @@ public class JournalFeedServiceJSON {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 				feedId, autoFeedId, name, description, type, structureId,
@@ -106,7 +106,7 @@ public class JournalFeedServiceJSON {
 		java.lang.String feedType, double feedVersion,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 				feedId, autoFeedId, name, description, type, structureId,
@@ -118,19 +118,19 @@ public class JournalFeedServiceJSON {
 	}
 
 	public static void deleteFeed(long groupId, long feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedServiceUtil.deleteFeed(groupId, feedId);
 	}
 
 	public static void deleteFeed(long groupId, java.lang.String feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedServiceUtil.deleteFeed(groupId, feedId);
 	}
 
 	public static JSONObject getFeed(long groupId, long feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.getFeed(groupId,
 				feedId);
@@ -139,7 +139,7 @@ public class JournalFeedServiceJSON {
 	}
 
 	public static JSONObject getFeed(long groupId, java.lang.String feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.getFeed(groupId,
 				feedId);
@@ -155,7 +155,7 @@ public class JournalFeedServiceJSON {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.updateFeed(groupId,
 				feedId, name, description, type, structureId, templateId,

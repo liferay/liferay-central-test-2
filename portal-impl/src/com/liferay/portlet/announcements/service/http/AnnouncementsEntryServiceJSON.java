@@ -80,7 +80,7 @@ public class AnnouncementsEntryServiceJSON {
 		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
 		int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority, boolean alert)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry returnValue = AnnouncementsEntryServiceUtil.addEntry(plid,
 				classNameId, classPK, title, content, url, type,
@@ -93,7 +93,7 @@ public class AnnouncementsEntryServiceJSON {
 	}
 
 	public static void deleteEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementsEntryServiceUtil.deleteEntry(entryId);
 	}
@@ -104,7 +104,7 @@ public class AnnouncementsEntryServiceJSON {
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry returnValue = AnnouncementsEntryServiceUtil.updateEntry(entryId,
 				title, content, url, type, displayDateMonth, displayDateDay,

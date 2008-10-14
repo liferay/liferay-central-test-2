@@ -196,9 +196,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return folders;
 	}
 
-	public boolean hasInheritableLock(long folderId)
-		throws PortalException, RemoteException {
-
+	public boolean hasInheritableLock(long folderId) throws PortalException {
 		boolean inheritable = false;
 
 		try {
@@ -274,7 +272,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public Lock refreshFolderLock(String lockUuid, long expirationTime)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		return lockService.refresh(lockUuid, expirationTime);
 	}
@@ -292,7 +290,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public void unlockFolder(long folderId, String lockUuid)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
@@ -331,7 +329,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	public void unlockFolder(
 			long groupId, long parentFolderId, String name, String lockUuid)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		long folderId = getFolderId(groupId, parentFolderId, name);
 
@@ -372,7 +370,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public boolean verifyInheritableLock(long folderId, String lockUuid)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		boolean verified = false;
 

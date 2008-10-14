@@ -72,13 +72,13 @@ import com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil;
  */
 public class MBMessageFlagServiceJSON {
 	public static void addAnswerFlag(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageFlagServiceUtil.addAnswerFlag(messageId);
 	}
 
 	public static void deleteAnswerFlag(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageFlagServiceUtil.deleteAnswerFlag(messageId);
 	}

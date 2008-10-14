@@ -48,20 +48,20 @@ public class TasksReviewServiceUtil {
 	public static com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().approveReview(proposalId, stage);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().rejectReview(proposalId, stage);
 	}
 
 	public static void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().updateReviews(proposalId, userIdsPerStage);
 	}
 

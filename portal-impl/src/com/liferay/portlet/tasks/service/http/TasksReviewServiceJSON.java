@@ -74,7 +74,7 @@ import com.liferay.portlet.tasks.service.TasksReviewServiceUtil;
  */
 public class TasksReviewServiceJSON {
 	public static JSONObject approveReview(long proposalId, int stage)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.approveReview(proposalId,
 				stage);
@@ -83,7 +83,7 @@ public class TasksReviewServiceJSON {
 	}
 
 	public static JSONObject rejectReview(long proposalId, int stage)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.rejectReview(proposalId,
 				stage);
@@ -92,7 +92,7 @@ public class TasksReviewServiceJSON {
 	}
 
 	public static void updateReviews(long proposalId, long[][] userIdsPerStage)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TasksReviewServiceUtil.updateReviews(proposalId, userIdsPerStage);
 	}

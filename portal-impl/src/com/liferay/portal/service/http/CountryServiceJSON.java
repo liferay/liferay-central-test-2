@@ -76,7 +76,7 @@ public class CountryServiceJSON {
 	public static JSONObject addCountry(java.lang.String name,
 		java.lang.String a2, java.lang.String a3, java.lang.String number,
 		java.lang.String idd, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.addCountry(name,
 				a2, a3, number, idd, active);
@@ -85,21 +85,21 @@ public class CountryServiceJSON {
 	}
 
 	public static JSONArray getCountries()
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Country> returnValue = CountryServiceUtil.getCountries();
 
 		return CountryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getCountries(boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Country> returnValue = CountryServiceUtil.getCountries(active);
 
 		return CountryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getCountry(long countryId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountry(countryId);
 
@@ -107,7 +107,7 @@ public class CountryServiceJSON {
 	}
 
 	public static JSONObject getCountryByA2(java.lang.String a2)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByA2(a2);
 
@@ -115,7 +115,7 @@ public class CountryServiceJSON {
 	}
 
 	public static JSONObject getCountryByA3(java.lang.String a3)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByA3(a3);
 
@@ -123,7 +123,7 @@ public class CountryServiceJSON {
 	}
 
 	public static JSONObject getCountryByName(java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByName(name);
 

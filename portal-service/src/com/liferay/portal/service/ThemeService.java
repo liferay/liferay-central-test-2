@@ -49,5 +49,5 @@ package com.liferay.portal.service;
  */
 public interface ThemeService {
 	public java.util.List<com.liferay.portal.model.Theme> getThemes(
-		long companyId) throws java.rmi.RemoteException;
+		long companyId);
 }

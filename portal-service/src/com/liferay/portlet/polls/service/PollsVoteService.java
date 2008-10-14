@@ -50,6 +50,6 @@ package com.liferay.portlet.polls.service;
 public interface PollsVoteService {
 	public com.liferay.portlet.polls.model.PollsVote addVote(long questionId,
 		long choiceId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

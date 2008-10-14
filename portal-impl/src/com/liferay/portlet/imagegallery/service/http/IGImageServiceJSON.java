@@ -75,21 +75,21 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
  */
 public class IGImageServiceJSON {
 	public static void deleteImage(long imageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGImageServiceUtil.deleteImage(imageId);
 	}
 
 	public static void deleteImageByFolderIdAndNameWithExtension(
 		long folderId, java.lang.String nameWithExtension)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(folderId,
 			nameWithExtension);
 	}
 
 	public static JSONObject getImage(long imageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
 
@@ -98,7 +98,7 @@ public class IGImageServiceJSON {
 
 	public static JSONObject getImageByFolderIdAndNameWithExtension(
 		long folderId, java.lang.String nameWithExtension)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(folderId,
 				nameWithExtension);
@@ -107,7 +107,7 @@ public class IGImageServiceJSON {
 	}
 
 	public static JSONObject getImageByLargeImageId(long largeImageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByLargeImageId(largeImageId);
 
@@ -115,7 +115,7 @@ public class IGImageServiceJSON {
 	}
 
 	public static JSONObject getImageBySmallImageId(long smallImageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageBySmallImageId(smallImageId);
 
@@ -123,7 +123,7 @@ public class IGImageServiceJSON {
 	}
 
 	public static JSONArray getImages(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
 			IGImageServiceUtil.getImages(folderId);

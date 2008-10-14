@@ -52,8 +52,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.util.MapUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -276,15 +274,11 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					attachmentEl.addAttribute("name", name);
 					attachmentEl.addAttribute("bin-path", binPath);
 
-					try {
-						byte[] bytes = DLServiceUtil.getFile(
-							context.getCompanyId(), CompanyConstants.SYSTEM,
-							attachment);
+					byte[] bytes = DLServiceUtil.getFile(
+						context.getCompanyId(), CompanyConstants.SYSTEM,
+						attachment);
 
-						context.addZipEntry(binPath, bytes);
-					}
-					catch (RemoteException re) {
-					}
+					context.addZipEntry(binPath, bytes);
 				}
 
 				page.setAttachmentsDir(page.getAttachmentsDir());

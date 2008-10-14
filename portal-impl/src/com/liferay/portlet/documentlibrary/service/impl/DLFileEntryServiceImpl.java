@@ -234,7 +234,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public Lock lockFileEntry(long folderId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return lockFileEntry(
 			folderId, name, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
@@ -242,7 +242,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public Lock lockFileEntry(
 			long folderId, String name, String owner, long expirationTime)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
@@ -258,21 +258,19 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		return lockService.refresh(lockUuid, expirationTime);
 	}
 
-	public void unlockFileEntry(long folderId, String name)
-		throws RemoteException {
-
+	public void unlockFileEntry(long folderId, String name) {
 		String lockId = DLUtil.getLockId(folderId, name);
 
 		lockService.unlock(DLFileEntry.class.getName(), lockId);
 	}
 
 	public void unlockFileEntry(long folderId, String name, String lockUuid)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 

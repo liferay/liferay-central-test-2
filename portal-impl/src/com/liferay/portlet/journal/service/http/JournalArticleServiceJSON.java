@@ -86,7 +86,7 @@ public class JournalArticleServiceJSON {
 		int reviewDateMinute, boolean neverReview, boolean indexable,
 		java.lang.String articleURL, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(groupId,
 				articleId, autoArticleId, title, description, content, type,
@@ -115,7 +115,7 @@ public class JournalArticleServiceJSON {
 		java.lang.String articleURL, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(groupId,
 				articleId, autoArticleId, title, description, content, type,
@@ -133,7 +133,7 @@ public class JournalArticleServiceJSON {
 	public static JSONObject copyArticle(long groupId,
 		java.lang.String oldArticleId, java.lang.String newArticleId,
 		boolean autoArticleId, double version)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.copyArticle(groupId,
 				oldArticleId, newArticleId, autoArticleId, version);
@@ -143,7 +143,7 @@ public class JournalArticleServiceJSON {
 
 	public static JSONObject getArticle(long groupId,
 		java.lang.String articleId, double version)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(groupId,
 				articleId, version);
@@ -153,14 +153,14 @@ public class JournalArticleServiceJSON {
 
 	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalArticleServiceUtil.removeArticleLocale(companyId, languageId);
 	}
 
 	public static JSONObject removeArticleLocale(long groupId,
 		java.lang.String articleId, double version, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.removeArticleLocale(groupId,
 				articleId, version, languageId);
@@ -170,7 +170,7 @@ public class JournalArticleServiceJSON {
 
 	public static JSONObject updateContent(long groupId,
 		java.lang.String articleId, double version, java.lang.String content)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateContent(groupId,
 				articleId, version, content);

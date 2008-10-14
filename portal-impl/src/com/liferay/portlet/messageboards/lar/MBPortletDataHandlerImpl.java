@@ -63,8 +63,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.util.MapUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -335,15 +333,11 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					attachmentEl.addAttribute("name", name);
 					attachmentEl.addAttribute("bin-path", binPath);
 
-					try {
-						byte[] bytes = DLServiceUtil.getFile(
-							context.getCompanyId(), CompanyConstants.SYSTEM,
-							attachment);
+					byte[] bytes = DLServiceUtil.getFile(
+						context.getCompanyId(), CompanyConstants.SYSTEM,
+						attachment);
 
-						context.addZipEntry(binPath, bytes);
-					}
-					catch (RemoteException re) {
-					}
+					context.addZipEntry(binPath, bytes);
 				}
 
 				message.setAttachmentsDir(message.getAttachmentsDir());

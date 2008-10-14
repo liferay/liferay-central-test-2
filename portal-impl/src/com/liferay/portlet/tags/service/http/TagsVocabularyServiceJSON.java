@@ -77,7 +77,7 @@ public class TagsVocabularyServiceJSON {
 	public static JSONObject addVocabulary(long plid, java.lang.String name,
 		boolean folksonomy, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(plid,
 				name, folksonomy, addCommunityPermissions, addGuestPermissions);
@@ -88,7 +88,7 @@ public class TagsVocabularyServiceJSON {
 	public static JSONObject addVocabulary(long plid, java.lang.String name,
 		boolean folksonomy, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(plid,
 				name, folksonomy, communityPermissions, guestPermissions);
@@ -97,14 +97,14 @@ public class TagsVocabularyServiceJSON {
 	}
 
 	public static void deleteVocabulary(long vocabularyId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsVocabularyServiceUtil.deleteVocabulary(vocabularyId);
 	}
 
 	public static JSONArray getCompanyVocabularies(long companyId,
 		boolean folksonomy)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
 			TagsVocabularyServiceUtil.getCompanyVocabularies(companyId,
@@ -115,7 +115,7 @@ public class TagsVocabularyServiceJSON {
 
 	public static JSONArray getGroupVocabularies(long groupId,
 		boolean folksonomy)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
 			TagsVocabularyServiceUtil.getGroupVocabularies(groupId, folksonomy);
@@ -124,7 +124,7 @@ public class TagsVocabularyServiceJSON {
 	}
 
 	public static JSONObject getVocabulary(long vocabularyId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.getVocabulary(vocabularyId);
 
@@ -133,7 +133,7 @@ public class TagsVocabularyServiceJSON {
 
 	public static JSONObject updateVocabulary(long vocabularyId,
 		java.lang.String name, boolean folksonomy)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.updateVocabulary(vocabularyId,
 				name, folksonomy);

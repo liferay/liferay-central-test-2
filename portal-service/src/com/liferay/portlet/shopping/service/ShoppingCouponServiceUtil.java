@@ -55,7 +55,7 @@ public class ShoppingCouponServiceUtil {
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addCoupon(plid, code, autoCode, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
@@ -66,14 +66,14 @@ public class ShoppingCouponServiceUtil {
 
 	public static void deleteCoupon(long plid, long couponId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteCoupon(plid, couponId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long plid, long couponId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCoupon(plid, couponId);
 	}
 
@@ -81,7 +81,7 @@ public class ShoppingCouponServiceUtil {
 		long plid, long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .search(plid, companyId, code, active, discountType,
 			andOperator, start, end);
@@ -96,7 +96,7 @@ public class ShoppingCouponServiceUtil {
 		java.lang.String limitCategories, java.lang.String limitSkus,
 		double minOrder, double discount, java.lang.String discountType)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCoupon(plid, couponId, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,

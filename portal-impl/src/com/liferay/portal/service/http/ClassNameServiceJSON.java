@@ -73,7 +73,7 @@ import com.liferay.portal.service.ClassNameServiceUtil;
  */
 public class ClassNameServiceJSON {
 	public static JSONObject getClassName(long classNameId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.ClassName returnValue = ClassNameServiceUtil.getClassName(classNameId);
 
@@ -81,7 +81,7 @@ public class ClassNameServiceJSON {
 	}
 
 	public static JSONObject getClassName(java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		com.liferay.portal.model.ClassName returnValue = ClassNameServiceUtil.getClassName(value);
 
 		return ClassNameJSONSerializer.toJSONObject(returnValue);

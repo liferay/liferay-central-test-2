@@ -47,8 +47,6 @@ import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -265,7 +263,7 @@ public class EnterpriseAdminUtil {
 
 	public static void updateWebsites(
 			String className, long classPK, List<Website> websites)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		Set<Long> websiteIds = new HashSet<Long>();
 

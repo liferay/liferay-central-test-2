@@ -50,7 +50,7 @@ public class DLFolderServiceUtil {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addFolder(groupId, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
@@ -61,7 +61,7 @@ public class DLFolderServiceUtil {
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addFolder(groupId, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
@@ -94,33 +94,33 @@ public class DLFolderServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFolder(groupId, parentFolderId, name);
 	}
 
 	public static long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFolderId(groupId, parentFolderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getFolders(groupId, parentFolderId);
 	}
 
 	public static boolean hasInheritableLock(long folderId)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		return getService().hasInheritableLock(folderId);
 	}
 
@@ -140,25 +140,25 @@ public class DLFolderServiceUtil {
 
 	public static com.liferay.lock.model.Lock refreshFolderLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		return getService().refreshFolderLock(lockUuid, expirationTime);
 	}
 
 	public static void reIndexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().reIndexSearch(companyId);
 	}
 
 	public static void unlockFolder(long folderId, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		getService().unlockFolder(folderId, lockUuid);
 	}
 
 	public static void unlockFolder(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().unlockFolder(groupId, parentFolderId, name, lockUuid);
 	}
 
@@ -172,8 +172,7 @@ public class DLFolderServiceUtil {
 	}
 
 	public static boolean verifyInheritableLock(long folderId,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.lang.String lockUuid) throws com.liferay.portal.PortalException {
 		return getService().verifyInheritableLock(folderId, lockUuid);
 	}
 

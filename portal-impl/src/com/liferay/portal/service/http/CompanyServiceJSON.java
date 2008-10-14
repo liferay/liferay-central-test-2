@@ -74,7 +74,7 @@ import com.liferay.portal.service.CompanyServiceUtil;
 public class CompanyServiceJSON {
 	public static JSONObject addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
 				virtualHost, mx);
@@ -84,7 +84,7 @@ public class CompanyServiceJSON {
 
 	public static JSONObject updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
 				virtualHost, mx);
@@ -98,7 +98,7 @@ public class CompanyServiceJSON {
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
 				virtualHost, mx, name, legalName, legalId, legalType, sicCode,
@@ -109,7 +109,7 @@ public class CompanyServiceJSON {
 
 	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId);
 	}
@@ -118,7 +118,7 @@ public class CompanyServiceJSON {
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
 		boolean strangers, boolean strangersWithMx, boolean strangersVerify,
 		boolean communityLogo)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CompanyServiceUtil.updateSecurity(companyId, authType, autoLogin,
 			sendPassword, strangers, strangersWithMx, strangersVerify,

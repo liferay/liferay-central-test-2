@@ -49,45 +49,44 @@ public class CountryServiceUtil {
 		java.lang.String name, java.lang.String a2, java.lang.String a3,
 		java.lang.String number, java.lang.String idd, boolean active)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().addCountry(name, a2, a3, number, idd, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> getCountries()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException {
 		return getService().getCountries();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> getCountries(
-		boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		boolean active) throws com.liferay.portal.SystemException {
 		return getService().getCountries(active);
 	}
 
 	public static com.liferay.portal.model.Country getCountry(long countryId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCountry(countryId);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByA2(
 		java.lang.String a2)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCountryByA2(a2);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByA3(
 		java.lang.String a3)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCountryByA3(a3);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByName(
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getCountryByName(name);
 	}
 

@@ -36,8 +36,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,9 +181,6 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
 		}
 		catch (NoSuchDirectoryException nsde) {
-		}
-		catch (RemoteException re) {
-			_log.error(re);
 		}
 
 		return fileNames;

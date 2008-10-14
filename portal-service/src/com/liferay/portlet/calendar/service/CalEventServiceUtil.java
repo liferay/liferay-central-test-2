@@ -56,7 +56,7 @@ public class CalEventServiceUtil {
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEvent(plid, title, description, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,
@@ -78,7 +78,7 @@ public class CalEventServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .addEvent(plid, title, description, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,
@@ -90,33 +90,33 @@ public class CalEventServiceUtil {
 
 	public static void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteEvent(eventId);
 	}
 
 	public static java.io.File exportEvent(long eventId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().exportEvent(eventId);
 	}
 
 	public static java.io.File exportGroupEvents(long plid,
 		java.lang.String fileName)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().exportGroupEvents(plid, fileName);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		long eventId)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().getEvent(eventId);
 	}
 
 	public static void importICal4j(long plid, java.io.File file)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().importICal4j(plid, file);
 	}
 
@@ -130,7 +130,7 @@ public class CalEventServiceUtil {
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEvent(eventId, title, description, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,

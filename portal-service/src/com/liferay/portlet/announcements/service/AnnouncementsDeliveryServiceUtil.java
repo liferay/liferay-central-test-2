@@ -49,7 +49,7 @@ public class AnnouncementsDeliveryServiceUtil {
 		long userId, java.lang.String type, boolean email, boolean sms,
 		boolean website)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService().updateDelivery(userId, type, email, sms, website);
 	}
 

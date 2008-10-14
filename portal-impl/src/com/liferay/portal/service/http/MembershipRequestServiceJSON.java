@@ -74,7 +74,7 @@ import com.liferay.portal.service.MembershipRequestServiceUtil;
 public class MembershipRequestServiceJSON {
 	public static JSONObject addMembershipRequest(long groupId,
 		java.lang.String comments)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.MembershipRequest returnValue = MembershipRequestServiceUtil.addMembershipRequest(groupId,
 				comments);
@@ -83,13 +83,13 @@ public class MembershipRequestServiceJSON {
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MembershipRequestServiceUtil.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static JSONObject getMembershipRequest(long membershipRequestId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.MembershipRequest returnValue = MembershipRequestServiceUtil.getMembershipRequest(membershipRequestId);
 
@@ -98,7 +98,7 @@ public class MembershipRequestServiceJSON {
 
 	public static void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MembershipRequestServiceUtil.updateStatus(membershipRequestId,
 			reviewComments, statusId);
