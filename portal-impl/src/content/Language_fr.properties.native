@@ -517,6 +517,7 @@ all-data=Tout le contenu
 all-day-event=Événement sur la journée complète
 all-day=Toute la journée
 all-discount-types=Tous les types de réduction
+all-documents=Tous les documents
 all-email-from-x-is-being-forwarded-to-x=Tout les courriels provenant de {0} ont été transférés à {1}.
 all-email-will-be-forwarded-to-the-email-address-below=Tous les courriels seront transférés à l'adresse courriel ci-dessous.
 all-email-will-be-forwarded-to-the-email-addresses-below=Tous les courriels seront expédiés aux adresses courriel ci-dessous.

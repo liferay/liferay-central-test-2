@@ -517,6 +517,7 @@ all-data=すべてのデータ
 all-day-event=1 日中でき事
 all-day=1 日中
 all-discount-types=割引すべてはタイプする
+all-documents=すべての文書
 all-email-from-x-is-being-forwarded-to-x=All email from {0} is being forwarded to {1}.
 all-email-will-be-forwarded-to-the-email-address-below=電子メールすべてはeメールアドレスへ下進む。
 all-email-will-be-forwarded-to-the-email-addresses-below=電子メールすべてはEメールアドレスに次に進む。

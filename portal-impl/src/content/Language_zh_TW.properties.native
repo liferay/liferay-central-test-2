@@ -517,6 +517,7 @@ all-data=所有資料
 all-day-event=整天的事項
 all-day=整天
 all-discount-types=所有折扣類型
+all-documents=所有文件
 all-email-from-x-is-being-forwarded-to-x=從 {0} 的信正在轉送到 {1}.
 all-email-will-be-forwarded-to-the-email-address-below=所有電子郵件將批轉對電子郵件如下。
 all-email-will-be-forwarded-to-the-email-addresses-below=所有電子郵件將批轉對電子郵件如下。

@@ -517,6 +517,7 @@ all-data=Todos los datos
 all-day-event=Evento de día completo
 all-day=Todo el dia
 all-discount-types=Todos los tipos de descuento
+all-documents=Todos los documentos
 all-email-from-x-is-being-forwarded-to-x=Todos los correos de {0} se reenviarán a {1}
 all-email-will-be-forwarded-to-the-email-address-below=Todos los correos serán redireccionados a la dirección de correo siguiente
 all-email-will-be-forwarded-to-the-email-addresses-below=Todos los correos serán redireccionados a las direcciones de correo siguientes
