@@ -228,12 +228,12 @@ if (configuredProducerBeans == null) {
 					</td>
 					<td>
 						<select id="<portlet:namespace />inbandRegistration" name="<portlet:namespace />inbandRegistration">
-							<option value="true"><liferay-ui:message key="inband" /></option>
+							<option <%= !supportsInbandRegistration ? "disabled" : "" %> value="true"><liferay-ui:message key="inband" /></option>
 							<option value="false"><liferay-ui:message key="outband" /></option>
 						</select>
 					</td>
 				</tr>
-				<tbody id="<portlet:namespace />registrationHandleSettings" style="display: none;">
+				<tbody id="<portlet:namespace />registrationHandleSettings" <%= supportsInbandRegistration ? "style='display: none;'" : "" %>>
 					<tr>
 						<td>
 							<liferay-ui:message key="registration-handle" />
@@ -243,7 +243,7 @@ if (configuredProducerBeans == null) {
 						</td>
 					</tr>
 				</tbody>
-				<tbody id="<portlet:namespace />registrationPropertiesSettings">
+				<tbody id="<portlet:namespace />registrationPropertiesSettings" <%= !supportsInbandRegistration ? "style='display: none;'" : "" %>>
 					<tr>
 						<td>
 							<liferay-ui:message key="registration-properties" />
