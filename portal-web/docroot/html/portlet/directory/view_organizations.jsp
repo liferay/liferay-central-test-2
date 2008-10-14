@@ -60,7 +60,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			keyProperty="organizationId"
 			modelVar="organization"
 		>
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL" >
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
 				<portlet:param name="struts_action" value="/directory/edit_organization" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />

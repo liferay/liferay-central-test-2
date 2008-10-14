@@ -307,7 +307,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					sb.append(threadPriority[1]);
 					sb.append("\" title=\"");
 					sb.append(threadPriority[0]);
-					sb.append("\" >");
+					sb.append("\" />");
 				}
 
 				sb.append(message.getSubject());
@@ -630,7 +630,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				sb.append(threadPriority[1]);
 				sb.append("\" title=\"");
 				sb.append(threadPriority[0]);
-				sb.append("\" >");
+				sb.append("\" />");
 			}
 
 			sb.append(message.getSubject());

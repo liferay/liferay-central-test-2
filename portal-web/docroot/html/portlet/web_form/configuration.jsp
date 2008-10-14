@@ -57,7 +57,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 		var optionalA = jQuery('#<portlet:namespace/>fieldOptional' + index);
 		var optionsA = jQuery('#<portlet:namespace/>fieldOptions' + index);
 
-		<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+		<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>">
 			var validationScriptA = jQuery('#<portlet:namespace/>fieldValidationScript' + index);
 			var validationErrorMessageA = jQuery('#<portlet:namespace/>fieldValidationErrorMessage' + index)
 		</c:if>
@@ -68,7 +68,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 		var optionalB = jQuery('#<portlet:namespace/>fieldOptional' + (index + 1));
 		var optionsB = jQuery('#<portlet:namespace/>fieldOptions' + (index + 1));
 
-		<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+		<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>">
 			var validationErrorMessageB = jQuery('#<portlet:namespace/>fieldValidationErrorMessage' + (index + 1));
 			var validationScriptB = jQuery('#<portlet:namespace/>fieldValidationScript' + (index + 1));
 		</c:if>
@@ -79,7 +79,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<portlet:namespace />swapValues(labelA, labelB);
 			<portlet:namespace />swapValues(optionsA, optionsB);
 
-			<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+			<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>">
 				<portlet:namespace />swapValues(validationScriptA, validationScriptB);
 				<portlet:namespace />swapValues(validationErrorMessageA, validationErrorMessageB);
 
@@ -269,7 +269,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 	%>
 
-		<fieldset id="<portlet:namespace/>fieldset<%= i %>" >
+		<fieldset id="<portlet:namespace/>fieldset<%= i %>">
 			<legend>
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(fieldLabel) %>">
@@ -350,14 +350,14 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				</c:choose>
 			</div>
 
-			<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>" >
+			<c:if test="<%= PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED %>">
 				<div>
 					<c:choose>
 						<c:when test="<%= !fieldsEditingDisabled %>">
 							<liferay-ui:error key='<%= "invalidValidationDefinition" + i %>' message="please-enter-both-the-validation-code-and-the-error-message" />
 
 							<c:if test="<%= Validator.isNull(fieldValidationScript) %>">
-								<div class="ctrl-holder" id="<portlet:namespace />inputValidationLink<%= i %>" >
+								<div class="ctrl-holder" id="<portlet:namespace />inputValidationLink<%= i %>">
 									<a href="javascript: <portlet:namespace />inputValidationConfigure<%= i %>();"><liferay-ui:message key="validation" /> &raquo;</a>
 								</div>
 

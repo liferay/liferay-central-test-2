@@ -185,7 +185,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 <liferay-ui:tabs names="mailing-list" />
 
-<table class="lfr-table" >
+<table class="lfr-table">
 <tr>
 	<td class="lfr-label">
 		<liferay-ui:message key="active" />

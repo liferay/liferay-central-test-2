@@ -31,7 +31,7 @@
 			<portlet:param name="struts_action" value="/login/view" />
 		</portlet:actionURL>
 
-		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL" >
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
 			<portlet:param name="struts_action" value="/login/captcha" />
 		</portlet:actionURL>
 

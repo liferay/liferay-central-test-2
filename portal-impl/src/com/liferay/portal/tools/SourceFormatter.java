@@ -515,8 +515,8 @@ public class SourceFormatter {
 
 			newContent = StringUtil.replace(
 				newContent,
-				new String[] {"<br/>", "\"/>"},
-				new String[] {"<br />", "\" />"});
+				new String[] {"<br/>", "\"/>", "\" >"},
+				new String[] {"<br />", "\" />", "\">"});
 
 			if (files[i].endsWith(".jsp")) {
 				if (newContent.indexOf(copyright) == -1) {

@@ -75,7 +75,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 
 		<c:choose>
 			<c:when test='<%= fieldType.equals("paragraph") %>'>
-				<p class="lfr-webform" id="<portlet:namespace /><%= fieldName %>" ><%= fieldOptions %></p>
+				<p class="lfr-webform" id="<portlet:namespace /><%= fieldName %>"><%= fieldOptions %></p>
 			</c:when>
 			<c:when test='<%= fieldType.equals("text") %>'>
 				<div class="ctrl-holder">
