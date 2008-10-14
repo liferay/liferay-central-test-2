@@ -63,6 +63,8 @@ if (iteratorURL != null) {
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByColParam());
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByTypeParam());
 }
+
+String id = "abcd";
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
@@ -72,7 +74,7 @@ if (iteratorURL != null) {
 		</div>
 	</c:if>
 
-	<div class="results-grid">
+	<div class="results-grid" id="<%= id %>searchContainer">
 		<table class="taglib-search-iterator">
 		<tr class="portlet-section-header results-header">
 
@@ -256,3 +258,13 @@ if (iteratorURL != null) {
 		</script>
 	</c:if>
 </c:if>
+
+<script type="text/javascript">
+	jQuery(
+		function () {
+			new Liferay.SearchContainer({
+				id: '<%= id %>'
+			})
+		}
+	);
+</script>
