@@ -28,7 +28,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 %>
 
 	<c:choose>
-		<c:when test="<%= fileEntryColumn.equals("action") %>">
+		<c:when test='<%= fileEntryColumn.equals("action") %>'>
 
 			<%
 			String align = SearchEntry.DEFAULT_ALIGN;
@@ -44,7 +44,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 			/>
 
 		</c:when>
-		<c:when test="<%= fileEntryColumn.equals("document") %>">
+		<c:when test='<%= fileEntryColumn.equals("document") %>'>
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
 				href="<%= rowHREF %>"
@@ -67,14 +67,14 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 
 			</liferay-ui:search-container-column-text>
 		</c:when>
-		<c:when test="<%= fileEntryColumn.equals("downloads") %>">
+		<c:when test='<%= fileEntryColumn.equals("downloads") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="<%= fileEntryColumn %>"
 				value="<%= String.valueOf(fileEntry.getReadCount()) %>"
 			/>
 		</c:when>
-		<c:when test="<%= fileEntryColumn.equals("locked") %>">
+		<c:when test='<%= fileEntryColumn.equals("locked") %>'>
 
 			<%
 			boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
@@ -86,11 +86,23 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				value='<%= LanguageUtil.get(pageContext, isLocked ? "yes" : "no") %>'
 			/>
 		</c:when>
-		<c:when test="<%= fileEntryColumn.equals("size") %>">
+		<c:when test='<%= fileEntryColumn.equals("size") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="<%= fileEntryColumn %>"
 				value='<%= TextFormatter.formatKB(fileEntry.getSize(), locale) + "k" %>'
+			/>
+		</c:when>
+		<c:when test='<%= fileEntryColumn.equals("tags") %>'>
+
+			<%
+			List<TagsEntry> tagsEntries = TagsEntryLocalServiceUtil.getEntries(DLFileEntry.class.getName(), fileEntry.getFileEntryId(), true);
+			%>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="<%= fileEntryColumn %>"
+				value='<%= ListUtil.toString(tagsEntries, "name", StringPool.COMMA_AND_SPACE) %>'
 			/>
 		</c:when>
 	</c:choose>

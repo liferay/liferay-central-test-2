@@ -23,12 +23,21 @@
 %>
 
 <%
+List subfolderIds = new ArrayList();
+
+subfolderIds.add(new Long(curFolder.getFolderId()));
+
+DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+
+int foldersCount = subfolderIds.size() - 1;
+int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(subfolderIds);
+
 for (int j = 0; j < folderColumns.length; j++) {
 	String folderColumn = folderColumns[j];
 %>
 
 	<c:choose>
-		<c:when test="<%= folderColumn.equals("action") %>">
+		<c:when test='<%= folderColumn.equals("action") %>'>
 
 			<%
 			String align = SearchEntry.DEFAULT_ALIGN;
@@ -44,7 +53,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 			/>
 
 		</c:when>
-		<c:when test="<%= folderColumn.equals("folder") %>">
+		<c:when test='<%= folderColumn.equals("document") || folderColumn.equals("folder") %>'>
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
 				href="<%= rowURL %>"
@@ -111,18 +120,48 @@ for (int j = 0; j < folderColumns.length; j++) {
 
 			</liferay-ui:search-container-column-text>
 		</c:when>
-		<c:when test="<%= folderColumn.equals("num-of-folders") %>">
+		<c:when test='<%= folderColumn.equals("downloads") %>'>
+			<liferay-ui:search-container-column-text
+				name="<%= folderColumn %>"
+				value="--"
+			/>
+		</c:when>
+		<c:when test='<%= folderColumn.equals("locked") %>'>
+
+			<%
+			boolean isLocked = LockServiceUtil.isLocked(DLFolder.class.getName(), DLUtil.getLockId(curFolder.getFolderId(), HtmlUtil.unescape(curFolder.getName())));
+			%>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="<%= folderColumn %>"
+				value='<%= LanguageUtil.get(pageContext, isLocked ? "yes" : "no") %>'
+			/>
+		</c:when>
+		<c:when test='<%= folderColumn.equals("num-of-documents") %>'>
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="<%= folderColumn %>"
+				value="<%= String.valueOf(fileEntriesCount) %>"
+			/>
+		</c:when>
+		<c:when test='<%= folderColumn.equals("num-of-folders") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowURL %>"
 				name="<%= folderColumn %>"
 				value="<%= String.valueOf(foldersCount) %>"
 			/>
 		</c:when>
-		<c:when test="<%= folderColumn.equals("num-of-documents") %>">
+		<c:when test='<%= folderColumn.equals("size") %>'>
 			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
 				name="<%= folderColumn %>"
-				value="<%= String.valueOf(fileEntriesCount) %>"
+				value="--"
+			/>
+		</c:when>
+		<c:when test='<%= folderColumn.equals("tags") %>'>
+			<liferay-ui:search-container-column-text
+				name="<%= folderColumn %>"
+				value="--"
 			/>
 		</c:when>
 	</c:choose>

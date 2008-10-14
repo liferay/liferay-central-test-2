@@ -57,6 +57,8 @@
 <%@ page import="com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
@@ -113,4 +115,4 @@ if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/init-ext.jsp" %>
+<%@ include file="/html/portlet/document_library/init-ext.jsp" %>
