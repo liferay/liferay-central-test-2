@@ -112,24 +112,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					keyProperty="folderId"
 					modelVar="curFolder"
 				>
-
-					<%
-					PortletURL rowURL = renderResponse.createRenderURL();
-
-					rowURL.setWindowState(WindowState.MAXIMIZED);
-
-					rowURL.setParameter("struts_action", "/document_library/view");
-					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-					List subfolderIds = new ArrayList();
-
-					subfolderIds.add(new Long(curFolder.getFolderId()));
-
-					DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
-
-					int foldersCount = subfolderIds.size() - 1;
-					int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(subfolderIds);
-					%>
+					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+						<portlet:param name="struts_action" value="/document_library/view" />
+						<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+					</liferay-portlet:renderURL>
 
 					<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
 				</liferay-ui:search-container-row>
