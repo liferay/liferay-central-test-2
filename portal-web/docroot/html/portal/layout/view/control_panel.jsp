@@ -41,20 +41,20 @@ if (Validator.isNull(category)) {
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 
 	<%
-		String panelCategory = StringPool.BLANK;
+	String panelCategory = StringPool.BLANK;
 
-		if (category.equals(PortletCategoryKeys.CONTENT)) {
-			panelCategory = "panel-manage-content";
-		}
-		else if (category.equals(PortletCategoryKeys.MY)) {
-			panelCategory = "panel-manage-my";
-		}
-		else if (category.equals(PortletCategoryKeys.PORTAL)) {
-			panelCategory = "panel-manage-portal";
-		}
-		else if (category.equals(PortletCategoryKeys.SERVER)) {
-			panelCategory = "panel-manage-server";
-		}
+	if (category.equals(PortletCategoryKeys.CONTENT)) {
+		panelCategory = "panel-manage-content";
+	}
+	else if (category.equals(PortletCategoryKeys.MY)) {
+		panelCategory = "panel-manage-my";
+	}
+	else if (category.equals(PortletCategoryKeys.PORTAL)) {
+		panelCategory = "panel-manage-portal";
+	}
+	else if (category.equals(PortletCategoryKeys.SERVER)) {
+		panelCategory = "panel-manage-server";
+	}
 	%>
 
 	<div id="content-wrapper">
