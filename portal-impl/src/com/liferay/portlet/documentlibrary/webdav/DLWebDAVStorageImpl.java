@@ -328,7 +328,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return true;
 	}
 
-	public Lock lockResource(
+	public Status lockResource(
 			WebDAVRequest webDavRequest, String owner, long timeout)
 		throws WebDAVException {
 
@@ -336,7 +336,37 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		Lock lock = null;
 
+		int status = HttpServletResponse.SC_OK;
+
 		try {
+			if (resource == null) {
+				status = HttpServletResponse.SC_CREATED;
+
+				String[] pathArray = webDavRequest.getPathArray();
+
+				long parentFolderId = getParentFolderId(pathArray);
+				String name = WebDAVUtil.getResourceName(pathArray);
+
+				String title = name;
+				String description = StringPool.BLANK;
+				String[] tagsEntries = null;
+				String extraSettings = StringPool.BLANK;
+				boolean addCommunityPermissions = true;
+				boolean addGuestPermissions = true;
+
+				File file =
+					FileUtil.createTempFile(FileUtil.getExtension(name));
+
+				file.createNewFile();
+
+				DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
+					parentFolderId, name, title, description, tagsEntries,
+					extraSettings, file, addCommunityPermissions,
+					addGuestPermissions);
+
+				resource = toResource(webDavRequest, fileEntry, false);
+			}
+
 			if (resource instanceof DLFileEntryResourceImpl) {
 				DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
@@ -362,14 +392,16 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (Exception e) {
 
-			 // DuplicateLock is 423 not 501
+			// DuplicateLock is 423 not 501
 
 			if (!(e instanceof DuplicateLockException)) {
 				throw new WebDAVException(e);
 			}
+
+			status = WebDAVUtil.SC_LOCKED;
 		}
 
-		return lock;
+		return new Status(lock, status);
 	}
 
 	public Status makeCollection(WebDAVRequest webDavRequest)

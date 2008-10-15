@@ -288,8 +288,8 @@ public abstract class BasePropMethodImpl implements Method {
 	protected String getResponseXML(Document doc) throws Exception {
 		String xml = doc.formattedString(StringPool.FOUR_SPACES);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Response XML\n" + xml);
+		if (_log.isInfoEnabled()) {
+			_log.info("Response XML\n" + xml);
 		}
 
 		return xml;

@@ -100,9 +100,17 @@ public class WebDAVServlet extends HttpServlet {
 				storage, request, response, permissionChecker);
 
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Remote user " + remoteUser + " " + request.getMethod() +
-						" " + request.getRequestURI());
+				_log.info(request.getMethod() + " " + request.getRequestURI());
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("|User Agent:  " + request.getHeader("User-Agent"));
+				_log.debug("|Remote user: " + remoteUser);
+				_log.debug("|Depth:       " + request.getHeader("Depth"));
+				_log.debug("|Destination: " + request.getHeader("Destination"));
+				_log.debug("|If:          " + request.getHeader("If"));
+				_log.debug("|Overwrite:   " + request.getHeader("Overwrite"));
+				_log.debug("|Timeout:     " + request.getHeader("Timeout"));
 			}
 
 			status = method.process(webDavRequest);
@@ -114,8 +122,8 @@ public class WebDAVServlet extends HttpServlet {
 			if (status > 0) {
 				response.setStatus(status);
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Returning status code " + status);
+				if (_log.isInfoEnabled()) {
+					_log.info("Status code " + status);
 				}
 			}
 
@@ -133,13 +141,7 @@ public class WebDAVServlet extends HttpServlet {
 		sb.append(WebDAVUtil.fixPath(request.getContextPath()));
 		sb.append(WebDAVUtil.fixPath(request.getServletPath()));
 
-		String rootPath = sb.toString();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Root path " + rootPath);
-		}
-
-		return rootPath;
+		return sb.toString();
 	}
 
 	protected WebDAVStorage getStorage(HttpServletRequest request)
@@ -176,7 +178,9 @@ public class WebDAVServlet extends HttpServlet {
 		for (String ignore : PropsValues.WEBDAV_IGNORE) {
 			if (ignore.equals(resourceName)) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Skipping over resource " + resourceName);
+					_log.debug(
+						"Skipping over " + request.getMethod() + " " +
+						request.getPathInfo());
 				}
 
 				return true;

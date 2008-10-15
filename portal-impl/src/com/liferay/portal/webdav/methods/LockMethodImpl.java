@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
@@ -73,28 +74,24 @@ public class LockMethodImpl implements Method {
 			return HttpServletResponse.SC_METHOD_NOT_ALLOWED;
 		}
 
-		int statusCode = HttpServletResponse.SC_PRECONDITION_FAILED;
-
 		HttpServletRequest request = webDavRequest.getHttpServletRequest();
 		HttpServletResponse response = webDavRequest.getHttpServletResponse();
 
+		Status status = null;
 		Lock lock = null;
 
 		String lockUuid = webDavRequest.getLockUuid();
 		long timeout = WebDAVUtil.getTimeout(request);
 
 		if (Validator.isNull(lockUuid)) {
-			String owner = null;
 
+			// Create new lock
+
+			String owner = null;
 			String xml = new String(
 				FileUtil.getBytes(request.getInputStream()));
 
-			if (Validator.isNull(xml)) {
-				_log.error("Empty request XML");
-
-				return statusCode;
-			}
-			else {
+			if (Validator.isNotNull(xml)) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Request XML\n" + XMLFormatter.toString(xml));
@@ -136,42 +133,63 @@ public class LockMethodImpl implements Method {
 					}
 				}
 			}
+			else {
+				_log.error("Empty request XML");
 
-			lock = storage.lockResource(webDavRequest, owner, timeout);
+				return HttpServletResponse.SC_PRECONDITION_FAILED;
+			}
+
+			status = storage.lockResource(webDavRequest, owner, timeout);
+
+			lock = (Lock)status.getObject();
 		}
 		else {
+
+			// Refresh existing lock
+
 			lock = storage.refreshResourceLock(
 				webDavRequest, lockUuid, timeout);
+
+			status = new Status(HttpServletResponse.SC_OK);
 		}
 
-		if (lock == null) {
-			return WebDAVUtil.SC_LOCKED;
-		}
+		// Return lock details
 
-		long depth = WebDAVUtil.getDepth(request);
+		if (lock != null) {
+			long depth = WebDAVUtil.getDepth(request);
 
-		String xml = getResponseXML(lock, depth);
+			String xml = getResponseXML(lock, depth);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Response XML\n" + xml);
-		}
-
-		response.setContentType(ContentTypes.TEXT_XML_UTF8);
-		response.setStatus(HttpServletResponse.SC_OK);
-
-		response.setHeader(
-			"Lock-Token", "<" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() + ">");
-
-		try {
-			ServletResponseUtil.write(response, xml);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Response XML\n" + xml);
 			}
-		}
 
-		return -1;
+			String lockToken =
+				"<" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() + ">";
+
+			response.setContentType(ContentTypes.TEXT_XML_UTF8);
+			response.setHeader("Lock-Token", lockToken);
+			response.setStatus(status.getCode());
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Returning lock token " + lockToken);
+				_log.info("Status code " + status.getCode());
+			}
+
+			try {
+				ServletResponseUtil.write(response, xml);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+
+			return -1;
+		}
+		else {
+			return status.getCode();
+		}
 	}
 
 	protected String getResponseXML(Lock lock, long depth) throws Exception {

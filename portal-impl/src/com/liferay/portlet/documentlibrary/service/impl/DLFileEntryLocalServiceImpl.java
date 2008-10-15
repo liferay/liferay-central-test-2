@@ -154,8 +154,10 @@ public class DLFileEntryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		if ((file == null) || (file.length() == 0)) {
-			throw new FileSizeException();
+		if (!PropsValues.WEBDAV_LITMUS) {
+			if ((file == null) || (file.length() == 0)) {
+				throw new FileSizeException();
+			}
 		}
 
 		InputStream is = null;
@@ -191,8 +193,10 @@ public class DLFileEntryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		if ((bytes == null) || (bytes.length == 0)) {
-			throw new FileSizeException();
+		if (!PropsValues.WEBDAV_LITMUS) {
+			if ((bytes == null) || (bytes.length == 0)) {
+				throw new FileSizeException();
+			}
 		}
 
 		InputStream is = new ByteArrayInputStream(bytes);

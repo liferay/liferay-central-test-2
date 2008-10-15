@@ -81,7 +81,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		return false;
 	}
 
-	public Lock lockResource(
+	public Status lockResource(
 			WebDAVRequest webDavRequest, String owner, long timeout)
 		throws WebDAVException {
 

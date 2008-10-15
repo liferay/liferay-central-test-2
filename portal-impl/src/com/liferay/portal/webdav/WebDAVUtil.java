@@ -99,8 +99,8 @@ public class WebDAVUtil {
 	public static long getDepth(HttpServletRequest request) {
 		String value = GetterUtil.getString(request.getHeader("Depth"));
 
-		if (_log.isInfoEnabled()) {
-			_log.info("\"Depth\" header is " + value);
+		if (_log.isDebugEnabled()) {
+			_log.debug("\"Depth\" header is " + value);
 		}
 
 		if (value.equals("0")) {
@@ -178,8 +178,8 @@ public class WebDAVUtil {
 
 		String value = GetterUtil.getString(request.getHeader("If"));
 
-		if (_log.isInfoEnabled()) {
-			_log.info("\"If\" header is " + value);
+		if (_log.isDebugEnabled()) {
+			_log.debug("\"If\" header is " + value);
 		}
 
 		if (value.contains("(<DAV:no-lock>)")) {
@@ -249,8 +249,8 @@ public class WebDAVUtil {
 
 		String value = GetterUtil.getString(request.getHeader("Timeout"));
 
-		if (_log.isInfoEnabled()) {
-			_log.info("\"Timeout\" header is " + value);
+		if (_log.isDebugEnabled()) {
+			_log.debug("\"Timeout\" header is " + value);
 		}
 
 		int index = value.indexOf(TIME_PREFIX);

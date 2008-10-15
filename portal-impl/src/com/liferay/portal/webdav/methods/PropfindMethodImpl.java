@@ -69,6 +69,10 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
 			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
+			if (_log.isInfoEnabled()) {
+				_log.info("Status code " + WebDAVUtil.SC_MULTI_STATUS);
+			}
+
 			try {
 				ServletResponseUtil.write(response, xml);
 			}
@@ -107,8 +111,8 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 				return generateProps(props);
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
+			if (_log.isInfoEnabled()) {
+				_log.info(
 					"Request XML: \n" +
 						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}

@@ -34,20 +34,20 @@ public class Status {
 		this(null, code);
 	}
 
-	public Status(String location, int code) {
-		_location = location;
+	public Status(Object object, int code) {
+		_object = object;
 		_code = code;
 	}
 
-	public String getLocation() {
-		return _location;
+	public Object getObject() {
+		return _object;
 	}
 
 	public int getCode() {
 		return _code;
 	}
 
-	private String _location;
+	private Object _object;
 	private int _code;
 
 }

@@ -78,6 +78,10 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
 			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
+			if (_log.isInfoEnabled()) {
+				_log.info("Status code " + WebDAVUtil.SC_MULTI_STATUS);
+			}
+
 			try {
 				ServletResponseUtil.write(response, xml);
 			}
@@ -148,8 +152,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 				return newProps;
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
+			if (_log.isInfoEnabled()) {
+				_log.info(
 					"Request XML: \n" +
 						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}

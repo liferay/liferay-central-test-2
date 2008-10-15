@@ -61,7 +61,7 @@ public interface WebDAVStorage {
 
 	public boolean isSupportsClassTwo();
 
-	public Lock lockResource(
+	public Status lockResource(
 			WebDAVRequest webDavRequest, String owner, long timeout)
 		throws WebDAVException;
 
