@@ -212,7 +212,7 @@
 
 .portlet-enterprise-admin .uni-form fieldset.col {
 	margin-right: 10px;
-	width: 32.7%;
+	width: auto;
 }
 
 .portlet-enterprise-admin .uni-form .row-container .lfr-form-row {
