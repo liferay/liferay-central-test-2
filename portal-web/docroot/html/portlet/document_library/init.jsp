@@ -106,12 +106,16 @@ boolean enableCommentRatings = PrefsParamUtil.getBoolean(preferences, request, "
 
 boolean mergedView = false;
 
+boolean showAddFileEntryButton = false;
+boolean showAddFileShortcutButton = false;
+boolean showAddFolderButton = false;
 boolean showTabs = false;
-boolean showButtons = false;
 
 if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
+	showAddFileEntryButton = true;
+	showAddFileShortcutButton = true;
+	showAddFolderButton = true;
 	showTabs = true;
-	showButtons = true;
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

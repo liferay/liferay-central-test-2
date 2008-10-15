@@ -94,7 +94,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</liferay-ui:search-container-row>
 
 				<%
-				boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+				showAddFolderButton = showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 				boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
 				%>
 
@@ -259,9 +259,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</liferay-ui:search-container-row>
 
 				<%
-				boolean showAddFileEntryButton = showButtons && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
-				boolean showAddFileShortcutButton = showButtons && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
-				boolean showAddFolderButton = mergedView && showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+				showAddFileEntryButton = showAddFileEntryButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
+				showAddFileShortcutButton = showAddFileShortcutButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
+				showAddFolderButton = mergedView && showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 				boolean showCurDocumentSearch = showFileEntriesSearch && (results.size() > 0);
 				%>
 
