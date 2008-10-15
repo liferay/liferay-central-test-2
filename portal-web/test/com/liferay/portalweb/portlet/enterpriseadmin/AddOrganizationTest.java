@@ -86,7 +86,7 @@ public class AddOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_79_primary00Checkbox")) {
+				if (selenium.isElementPresent("_79_primary00")) {
 					break;
 				}
 			}
@@ -96,7 +96,7 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_79_primary00Checkbox");
+		selenium.click("_79_primary00");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("commentsLink");
