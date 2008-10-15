@@ -51,4 +51,5 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(EditSecondFolderTest.class);
 		addTestSuite(DeletePageTest.class);
 	}
+
 }
