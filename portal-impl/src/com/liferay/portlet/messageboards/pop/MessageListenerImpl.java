@@ -152,13 +152,13 @@ public class MessageListenerImpl implements MessageListener {
 				_log.debug("Parent message " + parentMessage);
 			}
 
+			String subject = MBUtil.getSubjectWithoutMessageId(message);
+
 			MBMailMessage collector = new MBMailMessage();
 
 			MBUtil.collectPartContent(message, collector);
 
 			PermissionCheckerUtil.setThreadValues(user);
-
-			String subject = MBUtil.getSubjectWithoutMessageId(message);
 
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(

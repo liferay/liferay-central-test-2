@@ -498,23 +498,6 @@ public class MBUtil {
 		return parentMessageId;
 	}
 
-	public static String getSubjectWithoutMessageId(Message message)
-		throws Exception {
-
-		String subject = message.getSubject();
-		String parentMessageId = _getParentMessageIdFromSubject(message);
-
-		if (Validator.isNotNull(parentMessageId)) {
-			int endIndex = subject.indexOf(parentMessageId);
-
-			if (endIndex != -1) {
-				subject = subject.substring(0, endIndex);
-			}
-		}
-
-		return subject;
-	}
-
 	public static String getParentMessageIdString(Message message)
 		throws Exception {
 
@@ -545,6 +528,24 @@ public class MBUtil {
 		}
 
 		return parentHeader;
+	}
+
+	public static String getSubjectWithoutMessageId(Message message)
+		throws Exception {
+
+		String subject = message.getSubject();
+
+		String parentMessageId = _getParentMessageIdFromSubject(message);
+
+		if (Validator.isNotNull(parentMessageId)) {
+			int pos = subject.indexOf(parentMessageId);
+
+			if (pos != -1) {
+				subject = subject.substring(0, pos);
+			}
+		}
+
+		return subject;
 	}
 
 	public static String[] getThreadPriority(
@@ -725,13 +726,13 @@ public class MBUtil {
 		throws Exception {
 
 		String parentMessageId = null;
+
 		String subject = StringUtil.reverse(message.getSubject());
 
-		int endIndex = subject.indexOf(StringPool.LESS_THAN);
+		int pos = subject.indexOf(StringPool.LESS_THAN);
 
-		if (endIndex != -1) {
-			parentMessageId = StringUtil.reverse(
-				subject.substring(0, endIndex+1));
+		if (pos != -1) {
+			parentMessageId = StringUtil.reverse(subject.substring(0, pos + 1));
 		}
 
 		return parentMessageId;
