@@ -199,7 +199,7 @@ if (layout != null) {
 				if (!PropsValues.JAVASCRIPT_FAST_LOAD && headerPortletJavaScriptPath.endsWith("packed.js")) {
 					StringBuilder sb = new StringBuilder();
 
-					sb.append(headerPortletJavaScriptPath.substring(0, headerPortletJavaScriptPath.length() - "packed.js".length()));
+					sb.append(headerPortletJavaScriptPath.substring(0, headerPortletJavaScriptPath.length() - 9));
 					sb.append("unpacked.js");
 
 					headerPortletJavaScriptPath = sb.toString();

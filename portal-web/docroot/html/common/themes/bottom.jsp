@@ -161,6 +161,15 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 			String footerPortletJavaScriptPath = portlet.getContextPath() + footerPortletJavaScript;
 
 			if (!footerPortletJavaScriptPaths.contains(footerPortletJavaScriptPath)) {
+				if (!PropsValues.JAVASCRIPT_FAST_LOAD && footerPortletJavaScriptPath.endsWith("packed.js")) {
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(footerPortletJavaScriptPath.substring(0, footerPortletJavaScriptPath.length() - 9));
+					sb.append("unpacked.js");
+
+					footerPortletJavaScriptPath = sb.toString();
+				}
+
 				footerPortletJavaScriptPaths.add(footerPortletJavaScriptPath);
 	%>
 
