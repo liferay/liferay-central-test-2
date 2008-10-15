@@ -197,6 +197,14 @@ Liferay.autoFields = new Class({
 		return '';
 	},
 
+	_queueUndo: function(deletedElement) {
+		var instance = this;
+
+		instance._undoCache.push(deletedElement);
+
+		Liferay.trigger('updateUndoList');
+	},
+
 	_updateUndoList: function() {
 		var instance = this;
 
@@ -218,14 +226,6 @@ Liferay.autoFields = new Class({
 		}
 
 		instance._undoItemsLeft.text('(' + itemsLeft + ')');
-	},
-
-	_queueUndo: function(deletedElement) {
-		var instance = this;
-
-		instance._undoCache.push(deletedElement);
-
-		Liferay.trigger('updateUndoList');
 	},
 
 	_undoCache: [],
