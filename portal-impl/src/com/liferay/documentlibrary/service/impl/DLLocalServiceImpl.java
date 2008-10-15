@@ -183,7 +183,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void validate(String fileName, File file) throws PortalException {
 		validate(fileName);
 
-		if ((PropsValues.WEBDAV_LITMUS || PropsValues.DL_FILE_MAX_SIZE > 0) &&
+		if (((PropsValues.WEBDAV_LITMUS) ||
+			 (PropsValues.DL_FILE_MAX_SIZE > 0)) &&
 			((file == null) ||
 			 (file.length() > PropsValues.DL_FILE_MAX_SIZE))) {
 
@@ -194,7 +195,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void validate(String fileName, byte[] bytes) throws PortalException {
 		validate(fileName);
 
-		if ((PropsValues.WEBDAV_LITMUS || PropsValues.DL_FILE_MAX_SIZE > 0) &&
+		if (((PropsValues.WEBDAV_LITMUS) ||
+			 (PropsValues.DL_FILE_MAX_SIZE > 0)) &&
 			((bytes == null) ||
 			 (bytes.length > PropsValues.DL_FILE_MAX_SIZE))) {
 
@@ -210,7 +212,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 		// LEP-4851
 
 		try {
-			if ((PropsValues.WEBDAV_LITMUS || PropsValues.DL_FILE_MAX_SIZE > 0) &&
+			if (((PropsValues.WEBDAV_LITMUS) ||
+				 (PropsValues.DL_FILE_MAX_SIZE > 0)) &&
 				((is == null) ||
 				 (is.available() > PropsValues.DL_FILE_MAX_SIZE))) {
 

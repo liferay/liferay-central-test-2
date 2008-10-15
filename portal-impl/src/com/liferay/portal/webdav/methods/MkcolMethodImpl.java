@@ -54,7 +54,7 @@ public class MkcolMethodImpl implements Method {
 		if (groupId != 0) {
 			Status status = storage.makeCollection(webDavRequest);
 
-			if (Validator.isNotNull((String)status.getObject())) {
+			if (Validator.isNotNull(status.getObject())) {
 				response.setHeader(
 					HttpHeaders.LOCATION,
 					PortalUtil.getPortalURL(request) +

@@ -103,16 +103,6 @@ public class WebDAVServlet extends HttpServlet {
 				_log.info(request.getMethod() + " " + request.getRequestURI());
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("|User Agent:  " + request.getHeader("User-Agent"));
-				_log.debug("|Remote user: " + remoteUser);
-				_log.debug("|Depth:       " + request.getHeader("Depth"));
-				_log.debug("|Destination: " + request.getHeader("Destination"));
-				_log.debug("|If:          " + request.getHeader("If"));
-				_log.debug("|Overwrite:   " + request.getHeader("Overwrite"));
-				_log.debug("|Timeout:     " + request.getHeader("Timeout"));
-			}
-
 			status = method.process(webDavRequest);
 		}
 		catch (Exception e) {
@@ -180,7 +170,7 @@ public class WebDAVServlet extends HttpServlet {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Skipping over " + request.getMethod() + " " +
-						request.getPathInfo());
+							request.getPathInfo());
 				}
 
 				return true;

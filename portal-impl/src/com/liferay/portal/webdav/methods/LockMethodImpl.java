@@ -77,8 +77,8 @@ public class LockMethodImpl implements Method {
 		HttpServletRequest request = webDavRequest.getHttpServletRequest();
 		HttpServletResponse response = webDavRequest.getHttpServletResponse();
 
-		Status status = null;
 		Lock lock = null;
+		Status status = null;
 
 		String lockUuid = webDavRequest.getLockUuid();
 		long timeout = WebDAVUtil.getTimeout(request);
@@ -155,41 +155,39 @@ public class LockMethodImpl implements Method {
 
 		// Return lock details
 
-		if (lock != null) {
-			long depth = WebDAVUtil.getDepth(request);
-
-			String xml = getResponseXML(lock, depth);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Response XML\n" + xml);
-			}
-
-			String lockToken =
-				"<" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() + ">";
-
-			response.setContentType(ContentTypes.TEXT_XML_UTF8);
-			response.setHeader("Lock-Token", lockToken);
-			response.setStatus(status.getCode());
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Returning lock token " + lockToken);
-				_log.info("Status code " + status.getCode());
-			}
-
-			try {
-				ServletResponseUtil.write(response, xml);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
-				}
-			}
-
-			return -1;
-		}
-		else {
+		if (lock == null) {
 			return status.getCode();
 		}
+
+		long depth = WebDAVUtil.getDepth(request);
+
+		String xml = getResponseXML(lock, depth);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Response XML\n" + xml);
+		}
+
+		String lockToken = "<" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() + ">";
+
+		response.setContentType(ContentTypes.TEXT_XML_UTF8);
+		response.setHeader("Lock-Token", lockToken);
+		response.setStatus(status.getCode());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Returning lock token " + lockToken);
+			_log.info("Status code " + status.getCode());
+		}
+
+		try {
+			ServletResponseUtil.write(response, xml);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		return -1;
 	}
 
 	protected String getResponseXML(Lock lock, long depth) throws Exception {

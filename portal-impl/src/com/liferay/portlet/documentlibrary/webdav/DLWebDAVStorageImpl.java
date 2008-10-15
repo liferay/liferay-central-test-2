@@ -335,7 +335,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		Resource resource = getResource(webDavRequest);
 
 		Lock lock = null;
-
 		int status = HttpServletResponse.SC_OK;
 
 		try {
@@ -354,8 +353,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				File file =
-					FileUtil.createTempFile(FileUtil.getExtension(name));
+				File file = FileUtil.createTempFile(
+					FileUtil.getExtension(name));
 
 				file.createNewFile();
 
