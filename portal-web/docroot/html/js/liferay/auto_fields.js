@@ -8,7 +8,7 @@ Liferay.autoFields = new Class({
 	 * baseRows {string|object}: A jQuery selector that defines which fields are duplicated.
 
 	 * Optional
-	 * fieldIndexes {string|object}: A jQuery selector that points to a hidden field to store the order of the fields.
+	 * fieldIndexes {string}: The name of the POST parameter that will contain a list of the order for the fields.
 	 */
 
 	initialize: function(options) {
@@ -27,7 +27,18 @@ Liferay.autoFields = new Class({
 
 		instance._baseContainer = fullContainer;
 		instance._idSeed = baseRows.length;
-		instance._fieldIndexes = jQuery(options.fieldIndexes || []);
+
+		if (options.fieldIndexes) {
+			instance._fieldIndexes = jQuery('[@name=' + options.fieldIndexes + ']');
+
+			if (!instance._fieldIndexes.length) {
+				instance._fieldIndexes = jQuery('<input name="' + options.fieldIndexes + '" type="hidden" />')
+				instance._baseContainer.append(instance._fieldIndexes);
+			}
+		}
+		else {
+			instance._fieldIndexes = jQuery([]);
+		}
 
 		fullContainer.click(
 			function(event) {
