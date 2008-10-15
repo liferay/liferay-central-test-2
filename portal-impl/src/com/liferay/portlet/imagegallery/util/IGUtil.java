@@ -134,7 +134,8 @@ public class IGUtil {
 						folder.getName() + "</a>";
 
 				if (i == 0) {
-					breadcrumbs = folderLink;
+					breadcrumbs =
+						"<span class=\"last\">" + folderLink + "</span>";
 				}
 				else {
 					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
@@ -149,7 +150,9 @@ public class IGUtil {
 			}
 		}
 
-		breadcrumbs = foldersLink + " &raquo; " + breadcrumbs;
+		breadcrumbs =
+			"<span class=\"first\">" + foldersLink + " &raquo; </span>" +
+				breadcrumbs;
 
 		if (image != null) {
 			image = image.toEscapedModel();

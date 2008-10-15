@@ -239,7 +239,8 @@ public class MBUtil {
 					category.getName() + "</a>";
 
 			if (i == 0) {
-				breadcrumbs = categoryLink;
+				breadcrumbs =
+					"<span class=\"last\">" + categoryLink + "</span>";
 			}
 			else {
 				breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
@@ -253,7 +254,9 @@ public class MBUtil {
 				category.getParentCategoryId());
 		}
 
-		breadcrumbs = categoriesLink + " &raquo; " + breadcrumbs;
+		breadcrumbs =
+			"<span class=\"first\">" + categoriesLink + " &raquo; </span>" +
+				breadcrumbs;
 
 		if (message != null) {
 			message = message.toEscapedModel();

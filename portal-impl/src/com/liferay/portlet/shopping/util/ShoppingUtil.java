@@ -656,7 +656,8 @@ public class ShoppingUtil {
 						category.getName() + "</a>";
 
 				if (i == 0) {
-					breadcrumbs = categoryLink;
+					breadcrumbs =
+						"<span class=\"last\">" + categoryLink + "</span>";
 				}
 				else {
 					breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
@@ -671,7 +672,9 @@ public class ShoppingUtil {
 			}
 		}
 
-		breadcrumbs = categoriesLink + " &raquo; " + breadcrumbs;
+		breadcrumbs =
+			"<span class=\"first\">" + categoriesLink + " &raquo; </span>" +
+				breadcrumbs;
 
 		return breadcrumbs;
 	}

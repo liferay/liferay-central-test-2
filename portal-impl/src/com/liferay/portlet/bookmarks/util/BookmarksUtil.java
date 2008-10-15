@@ -145,7 +145,8 @@ public class BookmarksUtil {
 						folder.getName() + "</a>";
 
 				if (i == 0) {
-					breadcrumbs = folderLink;
+					breadcrumbs =
+						"<span class=\"last\">" + folderLink + "</span>";
 				}
 				else {
 					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
@@ -160,7 +161,9 @@ public class BookmarksUtil {
 			}
 		}
 
-		breadcrumbs = foldersLink + " &raquo; " + breadcrumbs;
+		breadcrumbs =
+			"<span class=\"first\">" + foldersLink + " &raquo; </span>" +
+				breadcrumbs;
 
 		if (entry != null) {
 			entry = entry.toEscapedModel();
