@@ -6,6 +6,9 @@ Liferay.autoFields = new Class({
 	 * Required
 	 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
 	 * baseRows {string|object}: A jQuery selector that defines which fields are duplicated.
+
+	 * Optional
+	 * fieldIndexes {string|object}: A jQuery selector that points to a hidden field to store the order of the fields.
 	 */
 
 	initialize: function(options) {
@@ -22,7 +25,9 @@ Liferay.autoFields = new Class({
 		var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row">' + Liferay.Language.get('delete-row') + '</a></span>');
 		var undoManager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
 
+		instance._baseContainer = fullContainer;
 		instance._idSeed = baseRows.length;
+		instance._fieldIndexes = jQuery(options.fieldIndexes || []);
 
 		fullContainer.click(
 			function(event) {
@@ -106,6 +111,10 @@ Liferay.autoFields = new Class({
 				var form = jQuery(data.form);
 
 				form.find('.lfr-form-row:hidden').remove();
+
+				var fieldOrder = instance.serialize();
+
+				instance._fieldIndexes.val(fieldOrder);
 			}
 		);
 	},
@@ -118,15 +127,11 @@ Liferay.autoFields = new Class({
 
 		var newSeed = (++instance._idSeed);
 
-		if (newSeed < 10) {
-			newSeed = '0' + newSeed;
-		}
-
 		clone.find('input, select').each(
 			function() {
 				var el = jQuery(this);
 				var oldName = el.attr('name');
-				var originalName = oldName.substring(0, oldName.length-2);
+				var originalName = oldName.replace(/([0-9]+)$/, '');
 				var newName = originalName + newSeed;
 
 				if (!el.is(':radio')) {
@@ -187,14 +192,31 @@ Liferay.autoFields = new Class({
 	serialize: function(filter) {
 		var instance = this;
 
-		var fields = instance.baseContainer('.lfr-form-row:visible :input');
-		var serializedData = '';
+		var rows = instance._baseContainer.find('.lfr-form-row:visible');
+		var serializedData = [];
 
 		if (filter) {
-			filter.apply(instance, [fields]);
+			serializedData = filter.apply(instance, [rows]) || [];
+		}
+		else {
+			rows.each(
+				function(i) {
+					var formField = jQuery(this).find(':input:first');
+					var fieldId = formField.attr('id');
+
+					if (!fieldId) {
+						fieldId = formField.attr('name');
+					}
+					fieldId = (fieldId || '').match(/([0-9]+)$/);
+
+					if (fieldId && fieldId[0]) {
+						serializedData.push(fieldId[0]);
+					}
+				}
+			)
 		}
 
-		return '';
+		return serializedData.join(',');
 	},
 
 	_queueUndo: function(deletedElement) {
