@@ -125,6 +125,15 @@
 	text-decoration: none;
 }
 
+.portlet-enterprise-admin .form-navigation .modified-notice {
+	display: none;
+	font-weight: bold;
+}
+
+.portlet-enterprise-admin .form-navigation .section-modified .modified-notice {
+	display: inline;
+}
+
 .portlet-enterprise-admin .form-navigation .user-info, .portlet-enterprise-admin .form-navigation .organization-info {
 	font-weight: bold;
 	margin-bottom: 15px;

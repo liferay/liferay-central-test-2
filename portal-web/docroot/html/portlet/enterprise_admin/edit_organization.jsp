@@ -136,7 +136,7 @@ String curSection = mainSections[0];
 								%>
 
 									<li <%= curSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>>
-										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /></a>
+										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /><span class="modified-notice">(<liferay-ui:message key="modified" />)</span></a>
 									</li>
 
 								<%
@@ -165,65 +165,9 @@ String curSection = mainSections[0];
 <script type="text/javascript">
 	jQuery(
 		function () {
-			var formNav = jQuery('.form-navigation');
-			var formSections = jQuery('#organization .form-section');
-
-			var revealSection = function(id, currentNavItem) {
-				var li = currentNavItem || formNav.find('[@href$=' + id + ']').parent();
-
-				id = id.split('#');
-
-				if (!id[1]) {
-					return;
-				}
-
-				id = '#' + id[1];
-
-				var section = jQuery(id);
-
-				formNav.find('.selected').removeClass('selected');
-				formSections.removeClass('selected');
-
-				section.addClass('selected');
-				li.addClass('selected');
-			};
-
-			jQuery('.form-navigation li a').click(
-				function(event) {
-					var li = jQuery(this.parentNode);
-
-					if (!li.is('.selected')) {
-						revealSection(this.href, li);
-					}
-
-					return false;
-				}
-			);
-
-			revealSection(location.hash);
-
-			var markAsModified = function(id) {
-				if (jQuery(id).text().indexOf(' (<liferay-ui:message key="modified" />)') == -1) {
-					jQuery(id).append(' <b>(<liferay-ui:message key="modified" />)</b>');
-				}
-			}
-
-			<%
-			for (String section : allSections) {
-				String sectionId = _getIdName(section);
-			%>
-
-				var markAsModified_<%= sectionId %> = function() {
-					return markAsModified('#<%= sectionId %>Link');
-				}
-
-				jQuery('#<%= sectionId %> input').change(markAsModified_<%= sectionId %>)
-				jQuery('#<%= sectionId %> select').change(markAsModified_<%= sectionId %>)
-				jQuery('#<%= sectionId %> textarea').change(markAsModified_<%= sectionId %>)
-			<%
-			}
-			%>
-
+			new Liferay.EnterpriseAdmin.FormNavigator({
+				container: '#organization'
+			});
 		}
 	);
 
