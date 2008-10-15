@@ -165,11 +165,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		sb = new StringBuilder();
 
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/document_library/");
-		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sb.append(".png\">");
+		sb.append(_getFileEntryImage(fileEntry, themeDisplay));
 		sb.append(fileEntry.getTitleWithExtension());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {

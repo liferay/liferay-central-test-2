@@ -122,3 +122,17 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/document_library/init-ext.jsp" %>
+
+<%!
+private static final String _getFileEntryImage(DLFileEntry fileEntry, ThemeDisplay themeDisplay) {
+	StringBuilder sb = new StringBuilder();
+
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/document_library/");
+	sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+	sb.append(".png\">");
+
+	return sb.toString();
+}
+%>
