@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCommentsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondSubfolderTest extends BaseTestCase {
-	public void testAddSecondSubfolder() throws Exception {
+public class AddCommentsTest extends BaseTestCase {
+	public void testAddComments() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another")) {
+				if (selenium.isElementPresent("//td[5]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -49,12 +49,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Another"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name", RuntimeVariables.replace("Another1"));
+		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +57,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
 			}
@@ -72,10 +67,8 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +76,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another1")) {
+				if (selenium.isElementPresent("link=Comments")) {
 					break;
 				}
 			}
@@ -93,8 +86,64 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("link=Comments"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Post Reply")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Post Reply");
+		selenium.typeKeys("_20_postReplyBody0",
+			RuntimeVariables.replace("EditCommentsTest!!!"));
+		selenium.type("_20_postReplyBody0",
+			RuntimeVariables.replace("EditCommentsTest!!!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Reply']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("EditCommentsTest!!!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

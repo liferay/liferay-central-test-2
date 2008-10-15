@@ -73,10 +73,6 @@ public class AddSubfolderTest extends BaseTestCase {
 
 		selenium.typeKeys("_20_name", RuntimeVariables.replace("Test Subfolder"));
 		selenium.type("_20_name", RuntimeVariables.replace("Test Subfolder"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This is a test subfolder!"));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("This is a test subfolder!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 

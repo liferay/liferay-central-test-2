@@ -26,75 +26,27 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSecondFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondSubfolderTest extends BaseTestCase {
-	public void testAddSecondSubfolder() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Another")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Another"));
+public class EditSecondFolderTest extends BaseTestCase {
+	public void testEditSecondFolder() throws Exception {
+		selenium.click("//li[2]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name", RuntimeVariables.replace("Another1"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.typeKeys("_20_name",
+			RuntimeVariables.replace("EditSecondFolderTest"));
+		selenium.type("_20_name",
+			RuntimeVariables.replace("EditSecondFolderTest"));
+		selenium.typeKeys("_20_description",
+			RuntimeVariables.replace("This second folder was edited!"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Another1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]"));
-		selenium.waitForPageToLoad("30000");
+				"Your request processed successfully. "));
 	}
 }

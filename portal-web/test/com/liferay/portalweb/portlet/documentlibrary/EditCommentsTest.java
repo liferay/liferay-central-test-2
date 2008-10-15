@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditCommentsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondSubfolderTest extends BaseTestCase {
-	public void testAddSecondSubfolder() throws Exception {
+public class EditCommentsTest extends BaseTestCase {
+	public void testEditComments() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another")) {
+				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
 			}
@@ -49,12 +49,9 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Another"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name", RuntimeVariables.replace("Another1"));
+		selenium.click("link=Edit");
+		selenium.typeKeys("_20_postReplyBody0", RuntimeVariables.replace(""));
+		selenium.type("_20_postReplyBody0", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +59,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("_20_updateReplyButton1")) {
 					break;
 				}
 			}
@@ -72,29 +69,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Another1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("_20_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

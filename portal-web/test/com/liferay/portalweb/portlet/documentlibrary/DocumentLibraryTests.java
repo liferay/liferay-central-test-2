@@ -38,12 +38,17 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(AddFolderTest.class);
 		addTestSuite(AddSubfolderTest.class);
 		addTestSuite(AddDocumentTest.class);
-		addTestSuite(SearchTest.class);
+		addTestSuite(AddCommentsTest.class);
+		addTestSuite(EditCommentsTest.class);
+		addTestSuite(DeleteCommentsTest.class);
+		addTestSuite(CompareVersionsTest.class);
+		addTestSuite(DeleteCompareVersionsTest.class);
+ 		addTestSuite(SearchTest.class);
 		addTestSuite(GetDocumentsTest.class);
 		addTestSuite(AddSecondFolderTest.class);
 		addTestSuite(AddSecondSubfolderTest.class);
 		addTestSuite(MoveDocumentTest.class);
+		addTestSuite(EditSecondFolderTest.class);
 		addTestSuite(DeletePageTest.class);
 	}
-
 }

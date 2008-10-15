@@ -37,10 +37,6 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name", RuntimeVariables.replace("Test Folder"));
 		selenium.type("_20_name", RuntimeVariables.replace("Test Folder"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This is a test folder!"));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("This is a test folder!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 

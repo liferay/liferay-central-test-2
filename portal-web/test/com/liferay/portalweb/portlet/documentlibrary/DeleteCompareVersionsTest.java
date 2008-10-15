@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteCompareVersionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondSubfolderTest extends BaseTestCase {
-	public void testAddSecondSubfolder() throws Exception {
+public class DeleteCompareVersionsTest extends BaseTestCase {
+	public void testDeleteCompareVersions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another")) {
+				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
 			}
@@ -49,12 +49,10 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Another"));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name", RuntimeVariables.replace("Another1"));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +60,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
 			}
@@ -72,10 +70,10 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +81,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another1")) {
+				if (selenium.isElementPresent("_20_tabs1TabsBack")) {
 					break;
 				}
 			}
@@ -93,8 +91,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("_20_tabs1TabsBack"));
 		selenium.waitForPageToLoad("30000");
 	}
 }
