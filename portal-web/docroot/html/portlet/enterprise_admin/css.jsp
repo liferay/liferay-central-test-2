@@ -24,13 +24,13 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-#header-bottom {
+.portlet-enterprise-admin #header-bottom {
 	background-color: #F6F8FB;
 	height: 34px;
 	margin: 0 0 10px;
 }
 
-#header-menu {
+.portlet-enterprise-admin #header-menu {
 	background-color: #F3F5F5;
 	font-size: 11px;
 	line-height: 34px;
@@ -39,7 +39,7 @@
 	text-align: right;
 }
 
-#header-title {
+.portlet-enterprise-admin #header-title {
 	background-color: #C1CABC;
 	font-size: 20px;
 	font-weight: 500;
@@ -47,35 +47,35 @@
 	padding: 7px 10px;
 }
 
-.avatar {
+.portlet-enterprise-admin .avatar {
 	clear: both;
 	float: left;
 	padding: 15px 0 5px;
 }
 
-.avatar img {
+.portlet-enterprise-admin .avatar img {
 	display: block;
 }
 
-.avatar .change-avatar {
+.portlet-enterprise-admin .avatar .change-avatar {
 	display: block;
 	text-align: center;
 }
 
-.ctrl-holder.primary-ctrl, .ctrl-holder.action-ctrl {
+.portlet-enterprise-admin .ctrl-holder.primary-ctrl, .portlet-enterprise-admin .ctrl-holder.action-ctrl {
 	margin: 1.8em 0;
 }
 
-.label-holder {
+.portlet-enterprise-admin .label-holder {
 	font-weight: 700;
 	padding: 15px 0 5px;
 }
 
-.radio-holder {
+.portlet-enterprise-admin .radio-holder {
 	line-height: 12px;
 }
 
-.form-navigation {
+.portlet-enterprise-admin .form-navigation {
 	background-color: #D7F1FF;
 	border: 1px solid #88C5D9;
 	float: right;
@@ -84,39 +84,39 @@
 	width: 230px;
 }
 
-.form-navigation h3 {
+.portlet-enterprise-admin .form-navigation h3 {
 	color: #036;
 	font-size: 14px;
 	font-weight: bold;
 	margin: 0;
 }
 
-.form-navigation ul {
+.portlet-enterprise-admin .form-navigation ul {
 	margin-bottom: 10px;
 }
 
-.form-navigation li {
+.portlet-enterprise-admin .form-navigation li {
 }
 
-.form-navigation li a {
+.portlet-enterprise-admin .form-navigation li a {
 	cursor: pointer;
 	display: block;
 	padding: 2px 0 2px 5px;
 }
 
-.form-navigation li a:hover {
+.portlet-enterprise-admin .form-navigation li a:hover {
 	background-color: #88C5D9;
 	text-decoration: none;
 }
 
-.form-navigation li.selected {
+.portlet-enterprise-admin .form-navigation li.selected {
 	background: url(<%= themeImagesPath %>/control_panel/selected.png) no-repeat 0 0;
 	font-weight: bold;
 	margin: 0 0 0 -23px;
 	padding: 0;
 }
 
-.form-navigation li.selected a {
+.portlet-enterprise-admin .form-navigation li.selected a {
 	background-color: #5C696E;
 	color: #FFF;
 	display: block;
@@ -125,86 +125,54 @@
 	text-decoration: none;
 }
 
-.form-navigation .user-info, .form-navigation .organization-info {
+.portlet-enterprise-admin .form-navigation .user-info, .portlet-enterprise-admin .form-navigation .organization-info {
 	font-weight: bold;
 	margin-bottom: 15px;
 }
 
-.form-navigation .user-info p span, .form-navigation .organization-info p span {
+.portlet-enterprise-admin .form-navigation .user-info p span, .portlet-enterprise-admin .form-navigation .organization-info p span {
 	color: #036;
 	display: block;
 	font-size: 14px;
 }
 
-.form-navigation .user-info .avatar, .form-navigation .organization-info .avatar {
+.portlet-enterprise-admin .form-navigation .user-info .avatar, .portlet-enterprise-admin .form-navigation .organization-info .avatar {
 	float: left;
 	margin-right: 10px;
 	padding: 0;
 }
 
-.form-navigation .button-holder {
+.portlet-enterprise-admin .form-navigation .button-holder {
 	margin-top: 20px;
 }
 
-.form-row {
-	border-bottom: 1px solid #CCC;
-	margin-right: 10px;
-	overflow: hidden;
-	padding: 5px;
-	padding-top: 1px;
-	position: relative;
+.portlet-enterprise-admin .lfr-form-row {
 	width: 97%;
 }
 
-.form-row:hover {
+.portlet-enterprise-admin .lfr-form-row:hover {
 	background-color: #DFFCCB;
 	border-bottom: 1px solid #B2FF3A;
 	border-top: 1px solid #B2FF3A;
 	padding-top: 0;
 }
 
-.form-row .ctrl-holder {
+.portlet-enterprise-admin .lfr-form-row .ctrl-holder {
 	clear: none;
 	float: left;
 }
 
-.form-row .row-controls {
-	bottom: 5px;
-	float: right;
-	position: absolute;
-	right: 0;
-}
-
-.form-row .row-controls a {
-	background: url() no-repeat 2px 50%;
-	display: block;
-	float: left;
-	font-size: 0;
-	height: 16px;
-	padding: 2px;
-	text-indent: -9999em;
-	width: 16px;
-}
-
-.form-row .row-controls .add-row {
-	background-image: url(<%= themeImagesPath %>/common/add.png);
-}
-
-.form-row .row-controls .delete-row {
-	background-image: url(<%= themeImagesPath %>/common/delete.png);
-}
-
-.form-section {
+.portlet-enterprise-admin .form-section {
 	display: none;
 }
 
-.form-section.selected {
+.portlet-enterprise-admin .form-section.selected {
 	display: block;
 	float: left;
 	width: 63%;
 }
 
-.form-section h3 {
+.portlet-enterprise-admin .form-section h3 {
 	border-bottom: 1px solid #000;
 	clear: both;
 	font-size: 14px;
@@ -212,59 +180,37 @@
 	margin-top: 10px;
 }
 
-.portlet-msg-info.undo-queue {
-	overflow: hidden;
-}
-
-.row-container {
+.portlet-enterprise-admin .row-container {
 	margin-top: -15px;
 }
 
-.undo-queue.queue-empty {
-	visibility: hidden;
-}
-
-.undo-queue .undo-action {
-	float: left;
-}
-
-.undo-queue .clear-undos {
-	float: right;
-}
-
-.undo-queue.queue-single .clear-undos {
-	display: none;
-}
-
-.uni-form .block-labels label, .uni-form .block-labels .label {
+.portlet-enterprise-admin .uni-form .block-labels label, .portlet-enterprise-admin .uni-form .block-labels .label {
 	font-weight: bold;
 }
 
-/*display: block;float: none;*/
-
-}.uni-form .block-labels label input {
+.portlet-enterprise-admin .uni-form .block-labels label input {
 	vertical-align: middle;
 }
 
-.uni-form .block-labels .ctrl-holder {
+.portlet-enterprise-admin .uni-form .block-labels .ctrl-holder {
 	margin-bottom: 10px;
 }
 
-.uni-form fieldset {
+.portlet-enterprise-admin .uni-form fieldset {
 	border: none;
 	width: 100%;
 }
 
-.uni-form fieldset.col {
+.portlet-enterprise-admin .uni-form fieldset.col {
 	margin-right: 10px;
 	width: 32.7%;
 }
 
-.uni-form .row-container .form-row {
+.portlet-enterprise-admin .uni-form .row-container .lfr-form-row {
 	margin-bottom: 10px;
 }
 
-.user-table, organization-table {
+.portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
 	border-collapse: collapse;
 }
 

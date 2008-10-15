@@ -36,11 +36,6 @@ if (websites.isEmpty()) {
 String className = (String)request.getAttribute("common.className");
 %>
 
-<script type="text/javascript">
-	var websiteSuffixesArray = new Array();
-	var lastIndex;
-</script>
-
 <h3><liferay-ui:message key="websites" /></h3>
 
 <fieldset class="block-labels"  >
@@ -55,17 +50,13 @@ String className = (String)request.getAttribute("common.className");
 		String id = ""+ ((i < 10) ? "0" + i : i);
 	%>
 
-		<div class="form-row"  style="display:none;">
+		<div class="lfr-form-row">
 			<div class="row-fields">
 
 				<%
 				fieldParam = "websiteId" + id ;
 				%>
-				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="<%= website.getWebsiteId() %>" />
-				<script type="text/javascript">
-					websiteSuffixesArray.push('<%=id%>');
-					lastIndex = <%=i%>;
-				</script>
+				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
 				fieldParam = "url" + id ;
@@ -97,9 +88,10 @@ String className = (String)request.getAttribute("common.className");
 				fieldParam = "primary" + id ;
 				%>
 				<div class="ctrl-holder primary-ctrl">
-					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="primary" /></label>
-
-					<liferay-ui:input-field model="<%=Website.class %>" bean="<%= website %>" field="primary" fieldParam="<%=fieldParam%>" />
+					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
+						<liferay-ui:message key="primary" />
+						<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />primary" type="radio" value="1" />
+					</label>
 				</div>
 			</div>
 		</div>
@@ -109,16 +101,13 @@ String className = (String)request.getAttribute("common.className");
 </fieldset>
 
 <script type="text/javascript">
-	websiteSuffixesArray = [];
 
 	jQuery(
 		function () {
-			Liferay.Websites = new Liferay.autoFields2({
+			new Liferay.autoFields({
 				container: '#websites > fieldset',
-				baseRows: '.row-fields',
-				itemsArray: websiteSuffixesArray,
-				lastIndex: lastIndex
+				baseRows: '.lfr-form-row'
 			});
 		}
-		);
+	);
 </script>

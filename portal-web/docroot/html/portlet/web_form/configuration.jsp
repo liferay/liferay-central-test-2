@@ -342,7 +342,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 					<c:when test="<%= !fieldsEditingDisabled %>">
 						<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span><br />
 
-						<input class="lfr-input-text" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" value="<%= fieldOptions %>" />
+						<input class="lfr-input-text" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" type="text" value="<%= fieldOptions %>" />
 					</c:when>
 					<c:otherwise>
 						<b><%= fieldOptions %></b>
@@ -485,93 +485,10 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			selects.each(toggleOptions);
 
 			<c:if test="<%= !fieldsEditingDisabled %>">
-				var <portlet:namespace/>autoFields = new Liferay.autoFields(
-					{
-						addText: '<%= UnicodeLanguageUtil.get(pageContext, "add-another-form-field") %>',
-						removeText: '<%= UnicodeLanguageUtil.get(pageContext, "remove-the-last-form-field") %>',
-
-						html: '#<portlet:namespace />webFields fieldset:first',
-						container: '#<portlet:namespace />webFields',
-						rowType: 'fieldset',
-						init: function() {
-							var instance = this;
-
-							instance._numField = <%= (i - 1) %>;
-
-							if (instance._numField > 1) {
-								var removeLink = instance._controlLinks.find('a:eq(1)');
-
-								if (removeLink.is(':hidden')) {
-									removeLink.show();
-								}
-							}
-						},
-						onAdd: function(newField) {
-							var instance = this;
-
-							var numField = instance._numField;
-							var inputs = newField.find('[@class$=lfr-input-text]');
-							var selects = newField.find('select');
-							var label = newField.find('label');
-							var selectId = '<portlet:namespace/>fieldType' + numField;
-							var legend = newField.find('legend');
-							var legText = legend.text();
-							var re = /([0-9])+$/;
-							var links = newField.find('a');
-
-							legText = legText.replace(re, numField);
-							legend.text(legText);
-
-							label.each(
-								function() {
-									var label = jQuery(this);
-									var labelFor = label.attr('for');
-
-									labelFor = labelFor.replace(re, numField);
-									label.attr('for', labelFor);
-								}
-							);
-
-							inputs.each(
-								function() {
-									var input = jQuery(this);
-									var inputAttr = input.attr('name');
-
-									inputAttr = inputAttr.replace(re, numField);
-
-									this.value = '';
-
-									input.attr(
-										{
-											id: inputAttr,
-											name: inputAttr
-										}
-									);
-								}
-							);
-
-							links.each(
-								function() {
-									var link = jQuery(this);
-									var linkHref = link.attr('href');
-
-									linkHref = linkHref.replace(/([0-9])+\)/, numField + ')');
-									link.attr('href', linkHref);
-								}
-							);
-
-							selects.attr(
-								{
-									id: selectId,
-									name: selectId
-								}
-							);
-
-							selects.change(toggleOptions);
-							selects.each(toggleOptions);
-						}
-					}
-				);
+				new Liferay.autoFields({
+					container: '#<portlet:namespace />webFields',
+					baseRows: '#<portlet:namespace />webFields > fieldset'
+				});
 			</c:if>
 		}
 	);
