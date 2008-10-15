@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddCommunityAdminTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCATest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddCommunityAdminTest extends BaseTestCase {
-	public void testAddCommunityAdmin() throws Exception {
+public class AddCATest extends BaseTestCase {
+	public void testAddCA() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Users"));

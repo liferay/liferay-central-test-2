@@ -22,32 +22,37 @@
 
 package com.liferay.portalweb.portal.permissions.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefineCARolesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
+public class DefineCARolesTest extends BaseTestCase {
+	public void testDefineCARoles() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
+		selenium.click("//div[2]/ul/li[3]/nobr/a");
 
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Portlet Permissions']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }

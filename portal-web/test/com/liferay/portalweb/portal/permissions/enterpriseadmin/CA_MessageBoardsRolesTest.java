@@ -26,14 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CommunityAdmin_MessageBoardsRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_MessageBoardsRolesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CommunityAdmin_MessageBoardsRolesTest extends BaseTestCase {
-	public void testCommunityAdmin_MessageBoardsRoles()
-		throws Exception {
+public class CA_MessageBoardsRolesTest extends BaseTestCase {
+	public void testCA_MessageBoardsRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");

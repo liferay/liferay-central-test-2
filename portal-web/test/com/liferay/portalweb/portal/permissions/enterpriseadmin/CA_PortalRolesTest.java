@@ -26,33 +26,19 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DefineCommunityAdminRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DefineCommunityAdminRolesTest extends BaseTestCase {
-	public void testDefineCommunityAdminRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+public class CA_PortalRolesTest extends BaseTestCase {
+	public void testCA_PortalRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Portal Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
-		selenium.click("//div[2]/ul/li[3]/nobr/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Portlet Permissions']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 	}
 }
