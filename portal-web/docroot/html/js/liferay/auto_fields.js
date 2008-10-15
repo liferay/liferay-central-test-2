@@ -4,164 +4,230 @@ Liferay.autoFields = new Class({
 	 * OPTIONS
 	 *
 	 * Required
-	 * addText {string}: The text you wish to use for the "Add" link.
-	 * clearText {string}: The text you wish to use for the "Clear" link (this link removes all of the added forms except the very first one).
-	 * container {string|object}: A jQuery selector that specifies where you wish to append the HTML to.
-	 * confirmText {string}: the text you wish to use to confirm that the user wishes to clear all of the added buttons (leave empty to not confirm).
-	 * html {string}: HTML to append to the end of the container.
-	 * removeText {string}: The text you wish to use for the "Remove" link.
-	 * rowType {string}: The html tag for the row of fields (eg. fieldset, div or tr).
-	 *
-	 * Callbacks
-	 * init {function}: Called after the class has fully initialized.
-	 * onAdd {function}: Called after new fields have been added.
-	 * onRemove {function}: Called after fields have been removed.
-	 * onClear {function}: Called after the form fields have been returned.
+	 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
+	 * baseRows {string|object}: A jQuery selector that defines which fields are duplicated.
 	 */
 
 	initialize: function(options) {
 		var instance = this;
 
-		options = jQuery.extend(options, {});
+		var container = jQuery(options.container);
+		var baseRows = jQuery(options.baseRows);
 
-		instance._html = jQuery(options.html || '');
-		instance._container = jQuery(options.container || '');
-		instance._addText = options.addText || '';
-		instance._removeText = options.removeText || '';
-		instance._clearText = options.clearText || '';
-		instance._confirmText = options.confirmText || '';
-		instance._rowType = options.rowType || '';
-		instance._onAdd = options.onAdd;
-		instance._onRemove = options.onRemove;
-		instance._onClear = options.onClear;
-		instance._init = options.init || false;
+		var fullContainer = jQuery('<div class="row-container"></div>');
+		var baseContainer = jQuery('<div class="lfr-form-row"></div>');
+		var undoText = Liferay.Language.get('undo-x', ['[$SPAN$]']);
+		undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
 
-		instance._numField = 1;
+		var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row">' + Liferay.Language.get('delete-row') + '</a></span>');
+		var undoManager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
 
-		instance._run();
+		instance._idSeed = baseRows.length;
 
-		if (instance._init) {
-			instance._init();
-		}
-	},
+		fullContainer.click(
+			function(event) {
+				if (event.target.parentNode.className.indexOf('row-controls') > -1) {
+					var target = jQuery(event.target);
+					var currentRow = target.parents('.lfr-form-row:first')[0];
 
-	_run: function() {
-		var instance = this;
+					if (target.is('.add-row')) {
+						instance.addRow(currentRow);
+					}
 
-		var container = instance._container;
-
-		if (container.length) {
-			var html = instance._html;
-
-			var addLink, removeLink, clearLink;
-			var links = jQuery('<span class="lfr-control-links"></span>');
-
-			if (instance._addText) {
-				addLink = jQuery('<a href="javascript:;">' + instance._addText + '</a>');
-
-				addLink.click(
-				   function() {
-					   var newField = instance._addFields();
-					   if (instance._onAdd) {
-							   instance._onAdd(newField);
-					   }
-				   }
-				);
-
-				links.append(addLink);
+					if (target.is('.delete-row')) {
+						instance.deleteRow(currentRow);
+					}
+				}
 			}
+		);
 
-			if (instance._removeText) {
-				removeLink = jQuery('<a href="javascript:;">' + instance._removeText + '</a>');
+		instance._container = container;
+		instance._rowContainer = fullContainer;
 
-				removeLink.hide();
+		instance._undoManager = undoManager;
 
-				removeLink.click(
-				   function() {
-					   instance._removeFields();
-					   if (instance._onRemove) {
-							   instance._onRemove();
-					   }
-				   }
-				);
+		instance._undoItemsLeft = undoManager.find('.items-left');
+		instance._undoButton = undoManager.find('.undo-action');
+		instance._clearUndos = undoManager.find('.clear-undos');
 
-				links.append(removeLink);
+		instance._clearUndos.click(
+			function(event) {
+				instance._undoCache = [];
+				instance._rowContainer.find('.lfr-form-row:hidden').remove();
+
+				Liferay.trigger('updateUndoList');
 			}
+		);
 
-			if (instance._clearText) {
-				clearLink = jQuery('<a href="javascript:;">' + instance._clearText + '</a>');
-
-				clearLink.click(
-				   function() {
-					   instance._clearFields();
-					   if (instance._onClear) {
-							   instance._onClear();
-					   }
-				   }
-				);
-
-				links.append(clearLink);
+		instance._undoButton.click(
+			function(event) {
+				instance.undoLast();
 			}
+		);
 
-			container.after(links);
-			instance._controlLinks = links;
+		fullContainer.prepend(undoManager);
+
+		baseRows.each(
+			function(i) {
+				var formRow;
+				var controls = rowControls.clone();
+				var currentRow = jQuery(this);
+
+				if (currentRow.is('.lfr-form-row')) {
+					formRow = currentRow;
+				}
+				else {
+					formRow = baseContainer.clone();
+					formRow.append(this);
+				}
+
+				formRow.append(controls);
+				fullContainer.append(formRow);
+
+				if (i == 0) {
+					instance._rowTemplate = formRow.clone();
+					instance._rowTemplate.clearForm();
+				}
+			}
+		);
+
+		var rows = fullContainer.find('.lfr-form-row');
+
+		container.append(fullContainer);
+
+		Liferay.bind('updateUndoList',
+			function(event) {
+				instance._updateUndoList();
+			}
+		);
+
+		Liferay.bind('submitForm',
+			function(event, data) {
+				var form = jQuery(data.form);
+
+				form.find('.lfr-form-row:hidden').remove();
+			}
+		);
+	},
+
+	addRow: function(el) {
+		var instance = this;
+
+		var currentRow = jQuery(el);
+		var clone = currentRow.clone(true);
+
+		var newSeed = (++instance._idSeed);
+
+		if (newSeed < 10) {
+			newSeed = '0' + newSeed;
+		}
+
+		clone.find('input, select').each(
+			function() {
+				var el = jQuery(this);
+				var oldName = el.attr('name');
+				var originalName = oldName.substring(0, oldName.length-2);
+				var newName = originalName + newSeed;
+
+				if (!el.is(':radio')) {
+					el.attr('name', newName);
+				}
+				else {
+					oldName = el.attr('id');
+				}
+
+				el.attr('id', newName);
+				clone.find('label[for=' + oldName + ']').attr('for', newName);
+			}
+		);
+
+		clone.clearForm();
+
+		clone.find("input[type=hidden]").each(
+			function() {
+				this.value = '';
+			}
+		);
+
+		currentRow.after(clone);
+
+		clone.find('input:text:first').trigger('focus');
+	},
+
+	deleteRow: function(el) {
+		var instance = this;
+
+		var visibleRows = instance._rowContainer.find('.lfr-form-row:visible');
+
+		if (visibleRows.length == 1) {
+			instance.addRow(el);
+		}
+
+		var deletedElement = jQuery(el);
+
+		deletedElement.hide();
+
+		instance._queueUndo(deletedElement);
+	},
+
+	undoLast: function() {
+		var instance = this;
+
+		var itemsLeft = instance._undoCache.length;
+
+		if (itemsLeft > 0) {
+			var deletedElement = instance._undoCache.pop();
+
+			deletedElement.show();
+
+			Liferay.trigger('updateUndoList');
 		}
 	},
 
-	_addFields: function() {
+	serialize: function(filter) {
 		var instance = this;
 
-		var container = instance._container;
-		var html = instance._html.clone();
+		var fields = instance.baseContainer('.lfr-form-row:visible :input');
+		var serializedData = '';
 
-		container.append(html);
-
-		instance._numField++;
-
-		var removeLink = instance._controlLinks.find('a:eq(1)');
-
-		if (removeLink.is(':hidden')) {
-			removeLink.show();
+		if (filter) {
+			filter.apply(instance, [fields]);
 		}
 
-		return html;
+		return '';
 	},
 
-	_clearFields: function() {
+	_updateUndoList: function() {
 		var instance = this;
 
-		var container = instance._container;
-		var rows = container.find(instance._rowType).not(':first');
+		var itemsLeft = instance._undoCache.length;
+		var undoManager = instance._undoManager;
 
-		var confirmBox = true;
-
-		if (instance._confirmText) {
-			   confirmBox = confirm(instance._confirmText);
+		if (itemsLeft == 1) {
+			undoManager.addClass('queue-single');
+		}
+		else {
+			undoManager.removeClass('queue-single');
 		}
 
-		if (confirmBox) {
-			   rows.remove();
-			   instance._numField = 1;
+		if (itemsLeft > 0) {
+			undoManager.removeClass('queue-empty');
 		}
+		else {
+			undoManager.addClass('queue-empty');
+		}
+
+		instance._undoItemsLeft.text('(' + itemsLeft + ')');
 	},
 
-	_removeFields: function() {
+	_queueUndo: function(deletedElement) {
 		var instance = this;
 
-		var container = instance._container;
-		var lastRow = container.find(instance._rowType + ':last');
+		instance._undoCache.push(deletedElement);
 
-		if (instance._numField > 1) {
-			   lastRow.remove();
-			   --instance._numField;
-		}
+		Liferay.trigger('updateUndoList');
+	},
 
-		if (instance._numField <= 1) {
-		   var removeLink = instance._controlLinks.find('a:eq(1)');
-
-		   if (removeLink.is(':visible')) {
-				   removeLink.hide();
-		   }
-		}
-	}
+	_undoCache: [],
+	_idSeed: 0
 });
