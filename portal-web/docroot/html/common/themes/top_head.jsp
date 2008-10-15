@@ -196,6 +196,15 @@ if (layout != null) {
 			String headerPortletJavaScriptPath = portlet.getContextPath() + headerPortletJavaScript;
 
 			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
+				if (!PropsValues.JAVASCRIPT_FAST_LOAD && headerPortletJavaScriptPath.endsWith("packed.js")) {
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(headerPortletJavaScriptPath.substring(0, headerPortletJavaScriptPath.length() - "packed.js".length()));
+					sb.append("unpacked.js");
+
+					headerPortletJavaScriptPath = sb.toString();
+				}
+
 				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
 	%>
 
