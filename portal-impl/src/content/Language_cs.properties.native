@@ -1523,6 +1523,7 @@ type-name=Vložte jméno:
 type=Vložte
 ukrainian=Ukrajinský
 undefined=Nedefinovaný
+undo-x=Undo {0}
 unlock=Odemkni
 unscramble=Unscramble
 up=Nahoru

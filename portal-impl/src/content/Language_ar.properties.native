@@ -2431,6 +2431,7 @@ unban-date=تاريخ فك الحظر
 unban-this-user=فك حظر المستخدم
 unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view=عدم إختيار هذا الحقل سيزيل بيانات مترجمة من لغات غير ظاهرة هنا. هل تريد المتابعة؟
 undefined=غير معرف
+undo-x=Undo {0}
 unlimited=غير محدد
 unlock=فك قفل
 unpack-war=Unpack WAR

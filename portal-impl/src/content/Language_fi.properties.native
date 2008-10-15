@@ -3367,6 +3367,7 @@ unban-this-user=Bannaa tämä käyttäjä
 unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view=Jos poistat rastin tästä ruudusta, samalla poistuu lokalisoitu data, mikä ei ole näkyvistä. Haluatko jatkaa?
 undefined=Määrittelemätön
 underline=Alleviivaa
+undo-x=Undo {0}
 unignore=Poista huomiottajättäminen
 uninstall=Poista
 united-states-phone-format=USA puhelinnumero muoto

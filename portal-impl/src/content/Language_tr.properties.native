@@ -1037,6 +1037,7 @@ type-name-or-select-from-list=Bir isim yazınız veya listeden seçiniz:
 type-name=İsim Yazınız:
 type=Yazınız
 ukrainian=Ukranya
+undo-x=Undo {0}
 unscramble=Şifrelenmemiş
 up=Yukarı
 update-cart=Sepeti Güncelle

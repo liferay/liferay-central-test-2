@@ -1978,6 +1978,7 @@ type=Тип
 ukrainian=Украинский
 unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view=Уберите отметку с этого поля для удаления локализованных данных для языков не показанных на этом представлении. Вы желаете продолжить?
 undefined=Неопределенно
+undo-x=Undo {0}
 unlock=Разлокировать
 unpack-war=Распаковать WAR
 unscramble=Unscramble

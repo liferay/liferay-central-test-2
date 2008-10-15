@@ -2060,6 +2060,7 @@ ukrainian=اکراينی
 unassociate=غير متصل
 unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view=عدم انتخاب اين فيلد، داده های محلی را برای زبانهايی که در اين ليست نمی باشند حذف می کند، ادامه می دهيد؟
 undefined=تعريف نشده
+undo-x=Undo {0}
 unlock=بازکردن قفل
 unpack-war=بازکردن WAR
 unscramble=Unscramble
