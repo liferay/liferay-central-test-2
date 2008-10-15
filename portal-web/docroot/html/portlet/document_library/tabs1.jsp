@@ -28,14 +28,16 @@
 	<c:when test="<%= showTabs && (rootFolder == null) %>">
 
 		<%
-		PortletURL portletURL = renderResponse.createRenderURL();
+		String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
+		PortletURL tabs1URL = renderResponse.createRenderURL();
 
-		String tabsNames = "folders,my-documents,recent-documents";
+		tabs1URL.setWindowState(WindowState.MAXIMIZED);
+
+		String tabs1Names = "folders,my-documents,recent-documents";
 
 		if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-			tabsNames += ",permissions";
+			tabs1Names += ",permissions";
 		}
 		%>
 
@@ -47,8 +49,8 @@
 		/>
 
 		<liferay-ui:tabs
-			names="<%= tabsNames %>"
-			url="<%= portletURL.toString() %>"
+			names="<%= tabs1Names %>"
+			url="<%= tabs1URL.toString() %>"
 			url3="<%= permissionsURL %>"
 		/>
 	</c:when>

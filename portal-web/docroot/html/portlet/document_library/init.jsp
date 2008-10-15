@@ -104,6 +104,8 @@ String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(preference
 
 boolean enableCommentRatings = PrefsParamUtil.getBoolean(preferences, request, "enable-comment-ratings", true);
 
+boolean mergedView = false;
+
 boolean showTabs = false;
 boolean showButtons = false;
 
