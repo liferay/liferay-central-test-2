@@ -213,6 +213,22 @@ public class VerifyProperties extends VerifyProcess {
 
 	private static final String[][] _RENAMED_PORTAL_KEYS = new String[][] {
 		new String[] {
+			"amazon.license.0",
+			"amazon.access.key.id"
+		},
+		new String[] {
+			"amazon.license.1",
+			"amazon.access.key.id"
+		},
+		new String[] {
+			"amazon.license.2",
+			"amazon.access.key.id"
+		},
+		new String[] {
+			"amazon.license.3",
+			"amazon.access.key.id"
+		},
+		new String[] {
 			"default.guest.friendly.url",
 			"default.guest.public.layout.friendly.url"
 		},

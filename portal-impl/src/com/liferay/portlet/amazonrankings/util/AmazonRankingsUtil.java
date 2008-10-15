@@ -23,14 +23,12 @@
 package com.liferay.portlet.amazonrankings.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
-
-import java.util.List;
-import java.util.Vector;
 
 /**
  * <a href="AmazonRankingsUtil.java.html"><b><i>View Source</i></b></a>
@@ -40,50 +38,23 @@ import java.util.Vector;
  */
 public class AmazonRankingsUtil {
 
-	public static String getAmazonKey() {
-		return _instance._getAmazonKey();
+	public static String getAmazonAccessKeyId() {
+		return PropsUtil.get(PropsKeys.AMAZON_ACCESS_KEY_ID);
+	}
+
+	public static String getAmazonAssociateTag() {
+		return PropsUtil.get(PropsKeys.AMAZON_ASSOCIATE_TAG);
 	}
 
 	public static AmazonRankings getAmazonRankings(String isbn) {
+		if (!Validator.isDigit(isbn)) {
+			return null;
+		}
+
 		WebCacheItem wci = new AmazonRankingsWebCacheItem(isbn);
 
 		return (AmazonRankings)WebCachePoolUtil.get(
 			AmazonRankingsUtil.class.getName() + StringPool.PERIOD + isbn, wci);
 	}
-
-	private AmazonRankingsUtil() {
-		_amazonLicenseKeys = new Vector<String>();
-
-		for (int i = 0; i < 1000; i++) {
-			String key = PropsUtil.get(PropsKeys.AMAZON_LICENSE + i);
-
-			if (key == null) {
-				break;
-			}
-			else {
-				_amazonLicenseKeys.add(key);
-			}
-		}
-	}
-
-	private String _getAmazonKey() {
-		if (_amazonLicenseKeys.size() > 0) {
-			_amazonLicenseCount++;
-
-			if (_amazonLicenseCount >= _amazonLicenseKeys.size()) {
-				_amazonLicenseCount = 0;
-			}
-
-			return _amazonLicenseKeys.get(_amazonLicenseCount);
-		}
-		else {
-			return null;
-		}
-	}
-
-	private static AmazonRankingsUtil _instance = new AmazonRankingsUtil();
-
-	private List<String> _amazonLicenseKeys;
-	private int _amazonLicenseCount;
 
 }

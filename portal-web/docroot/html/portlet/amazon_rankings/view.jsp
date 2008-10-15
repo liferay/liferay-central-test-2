@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/amazon_rankings/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= Validator.isNull(AmazonRankingsUtil.getAmazonKey()) %>">
+	<c:when test="<%= Validator.isNull(AmazonRankingsUtil.getAmazonAccessKeyId()) %>">
 		<liferay-ui:message key="please-contact-the-administrator-to-configure-an-amazon-license" />
 	</c:when>
 	<c:otherwise>
