@@ -1148,7 +1148,7 @@ function submitForm(form, action, singleSubmit) {
 
 		setTimeout('Liferay.Util.resubmitCountdown("' + form.name + '")', 1000);
 
-		if (singleSubmit == null || singleSubmit) {
+		if ((singleSubmit == null) || singleSubmit) {
 			Liferay.Util.submitCountdown++;
 
 			var inputs = jQuery('input[@type=button], input[@type=reset], input[@type=submit]', form);

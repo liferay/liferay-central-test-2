@@ -6,7 +6,7 @@ Liferay.autoFields = new Class({
 	 * Required
 	 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
 	 * baseRows {string|object}: A jQuery selector that defines which fields are duplicated.
-
+	 *
 	 * Optional
 	 * fieldIndexes {string}: The name of the POST parameter that will contain a list of the order for the fields.
 	 */
@@ -111,13 +111,15 @@ Liferay.autoFields = new Class({
 
 		container.append(fullContainer);
 
-		Liferay.bind('updateUndoList',
+		Liferay.bind(
+			'updateUndoList',
 			function(event) {
 				instance._updateUndoList();
 			}
 		);
 
-		Liferay.bind('submitForm',
+		Liferay.bind(
+			'submitForm',
 			function(event, data) {
 				var form = jQuery(data.form);
 
