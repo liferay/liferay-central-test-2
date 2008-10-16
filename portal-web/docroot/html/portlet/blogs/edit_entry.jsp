@@ -78,7 +78,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 		var cancelButton = jQuery('#<portlet:namespace />cancelButton');
 
 		var saveStatus = jQuery('#<portlet:namespace />saveStatus');
-		var saveText = '<%= LanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]") %>';
+		var saveText = '<%= UnicodeLanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]", false) %>';
 
 		if (draft) {
 			if ((title == '') || (content == '')) {
