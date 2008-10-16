@@ -185,23 +185,6 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		Element root = doc.getRootElement();
 
-		EventsContainer eventsContainer = new EventsContainer();
-
-		_eventsContainerMap.put(servletContextName, eventsContainer);
-
-		List<Element> eventEls = root.elements("event");
-
-		for (Element eventEl : eventEls) {
-			String eventClass = eventEl.elementText("event-class");
-			String eventType = eventEl.elementText("event-type");
-
-			Object obj = initEvent(eventClass, eventType, portletClassLoader);
-
-			if (obj != null) {
-				eventsContainer.addEvent(eventType, obj);
-			}
-		}
-
 		ModelListenersContainer modelListenersContainer =
 			new ModelListenersContainer();
 
@@ -339,6 +322,23 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		EventsContainer eventsContainer = new EventsContainer();
+
+		_eventsContainerMap.put(servletContextName, eventsContainer);
+
+		List<Element> eventEls = root.elements("event");
+
+		for (Element eventEl : eventEls) {
+			String eventClass = eventEl.elementText("event-class");
+			String eventType = eventEl.elementText("event-type");
+
+			Object obj = initEvent(eventClass, eventType, portletClassLoader);
+
+			if (obj != null) {
+				eventsContainer.addEvent(eventType, obj);
+			}
+		}
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Hook for " + servletContextName + " registered successfully");
@@ -356,13 +356,6 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		if (!_servletContextNames.remove(servletContextName)) {
 			return;
-		}
-
-		EventsContainer eventsContainer = _eventsContainerMap.remove(
-			servletContextName);
-
-		if (eventsContainer != null) {
-			eventsContainer.unregisterEvents();
 		}
 
 		ModelListenersContainer modelListenersContainer =
@@ -391,6 +384,13 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		if (customJspBag != null) {
 			destroyCustomJspBag(customJspBag);
+		}
+
+		EventsContainer eventsContainer = _eventsContainerMap.remove(
+			servletContextName);
+
+		if (eventsContainer != null) {
+			eventsContainer.unregisterEvents();
 		}
 
 		if (_log.isInfoEnabled()) {
