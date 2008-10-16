@@ -167,75 +167,79 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 </form>
 
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery('#<portlet:namespace />fm').submit(function() {
-			var fieldLabels = new Array();
-			var fieldOptional = new Array();
-			var fieldValidationErrorMessages = new Array();
-			var fieldValidationFunctions = new Array();
-			var fieldValues = new Array();
+	jQuery(document).ready(
+		function() {
+			jQuery('#<portlet:namespace />fm').submit(
+				function() {
+					var fieldLabels = new Array();
+					var fieldOptional = new Array();
+					var fieldValidationErrorMessages = new Array();
+					var fieldValidationFunctions = new Array();
+					var fieldValues = new Array();
 
-			<%
-			int fieldIndex = 1;
-			fieldLabel = preferences.getValue("fieldLabel" + fieldIndex, StringPool.BLANK);
+					<%
+					int fieldIndex = 1;
+					fieldLabel = preferences.getValue("fieldLabel" + fieldIndex, StringPool.BLANK);
 
-			while ((fieldIndex == 1) || Validator.isNotNull(fieldLabel)) {
-				fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + fieldIndex, false);
-				String fieldValidationScript = preferences.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
-				String fieldValidationErrorMessage = preferences.getValue("fieldValidationErrorMessage" + fieldIndex, StringPool.BLANK);
-			%>
+					while ((fieldIndex == 1) || Validator.isNotNull(fieldLabel)) {
+						fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + fieldIndex, false);
+						String fieldValidationScript = preferences.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
+						String fieldValidationErrorMessage = preferences.getValue("fieldValidationErrorMessage" + fieldIndex, StringPool.BLANK);
+					%>
 
-				fieldLabels[<%= fieldIndex %>] = "<%= HtmlUtil.escape(fieldLabel) %>";
-				fieldValidationErrorMessages[<%= fieldIndex %>] = "<%= fieldValidationErrorMessage %>";
+						fieldLabels[<%= fieldIndex %>] = "<%= HtmlUtil.escape(fieldLabel) %>";
+						fieldValidationErrorMessages[<%= fieldIndex %>] = "<%= fieldValidationErrorMessage %>";
 
-				function fieldValidationFunction<%= fieldIndex %>(thisFieldValue, fieldValues) {
-					<c:choose>
-						<c:when test='<%= Validator.isNotNull(fieldValidationScript) %>'>
-							<%= fieldValidationScript %>
-						</c:when>
-						<c:otherwise>
-							return true;
-						</c:otherwise>
-					</c:choose>
-				};
+						function fieldValidationFunction<%= fieldIndex %>(thisFieldValue, fieldValues) {
+							<c:choose>
+								<c:when test='<%= Validator.isNotNull(fieldValidationScript) %>'>
+									<%= fieldValidationScript %>
+								</c:when>
+								<c:otherwise>
+									return true;
+								</c:otherwise>
+							</c:choose>
+						};
 
-				fieldOptional[<%= fieldIndex %>] = <%= fieldOptional %>;
-				fieldValidationFunctions[<%= fieldIndex %>] = fieldValidationFunction<%= fieldIndex %>;
-				fieldValues[<%= fieldIndex %>] = jQuery("#<portlet:namespace />" + "field<%= fieldIndex %>")[0].value;
+						fieldOptional[<%= fieldIndex %>] = <%= fieldOptional %>;
+						fieldValidationFunctions[<%= fieldIndex %>] = fieldValidationFunction<%= fieldIndex %>;
+						fieldValues[<%= fieldIndex %>] = jQuery("#<portlet:namespace />" + "field<%= fieldIndex %>")[0].value;
 
-			<%
-				fieldIndex++;
-				fieldLabel = preferences.getValue("fieldLabel" + fieldIndex, "");
-			}
-			%>
+					<%
+						fieldIndex++;
+						fieldLabel = preferences.getValue("fieldLabel" + fieldIndex, "");
+					}
+					%>
 
-			var validationErrors = false;
+					var validationErrors = false;
 
-			for (var i = 1; i < fieldValidationFunctions.length; i++) {
-				var thisFieldValue = fieldValues[i];
+					for (var i = 1; i < fieldValidationFunctions.length; i++) {
+						var thisFieldValue = fieldValues[i];
 
-				if (!fieldOptional[i] && thisFieldValue.match(/^\s*$/)) {
-					validationErrors = true;
+						if (!fieldOptional[i] && thisFieldValue.match(/^\s*$/)) {
+							validationErrors = true;
 
-					jQuery(".portlet-msg-success").slideUp();
-					jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideDown();
-			   }
-			   else if (!fieldValidationFunctions[i](thisFieldValue, fieldValues)) {
-					validationErrors = true;
+							jQuery(".portlet-msg-success").slideUp();
+							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideDown();
+					   }
+					   else if (!fieldValidationFunctions[i](thisFieldValue, fieldValues)) {
+							validationErrors = true;
 
-					jQuery(".portlet-msg-success").slideUp();
-					jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
-					jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideDown();
+							jQuery(".portlet-msg-success").slideUp();
+							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
+							jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideDown();
+						}
+						else {
+							jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideUp();
+							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
+						}
+					}
+
+					if (validationErrors) {
+						return false;
+					}
 				}
-				else {
-					jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideUp();
-					jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
-				}
-			}
-
-			if (validationErrors) {
-				return false;
-			}
-		});
-	});
+			);
+		}
+	);
 </script>
