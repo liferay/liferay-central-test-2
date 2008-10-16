@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.WebsiteImpl;
@@ -234,19 +235,19 @@ public class EnterpriseAdminUtil {
 	public static List<Website> getWebsites(ActionRequest actionRequest) {
 		List<Website> websites = new ArrayList<Website>();
 
-		for (int i = 0;; i++) {
+		int[] websiteIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "websiteIndexes"), 0);
+
+		for (int websiteIndex : websiteIndexes) {
 			long websiteId = ParamUtil.getLong(
-				actionRequest, "websiteId" + i, -1);
+				actionRequest, "websiteId" + websiteIndex);
 
-			if (websiteId < 0) {
-				break;
-			}
-
-			String url = ParamUtil.getString(actionRequest, "websiteUrl" + i);
+			String url = ParamUtil.getString(
+				actionRequest, "websiteUrl" + websiteIndex);
 			int typeId = ParamUtil.getInteger(
-				actionRequest, "websiteTypeId" + i);
+				actionRequest, "websiteTypeId" + websiteIndex);
 			boolean primary = ParamUtil.getBoolean(
-				actionRequest, "websitePrimary" + i);
+				actionRequest, "websitePrimary" + websiteIndex);
 
 			Website website = new WebsiteImpl();
 

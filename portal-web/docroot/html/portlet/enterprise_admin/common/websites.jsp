@@ -38,76 +38,88 @@ String className = (String)request.getAttribute("common.className");
 
 <h3><liferay-ui:message key="websites" /></h3>
 
-<fieldset class="block-labels"  >
-
-	<input id="<portlet:namespace />websiteSuffixes" name="<portlet:namespace />websiteSuffixes" type="hidden" />
+<fieldset class="block-labels">
 
 	<%
 	String fieldParam = null;
 
-	for(int i=0; i < websites.size(); i++){
+	for (int i = 0; i < websites.size(); i++){
 		Website website = websites.get(i);
-		String id = ""+ ((i < 10) ? "0" + i : i);
 	%>
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
 				<%
-				fieldParam = "websiteId" + id ;
+				fieldParam = "websiteId" + i;
 				%>
+
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
-				fieldParam = "url" + id ;
+				fieldParam = "websiteUrl" + i;
 				%>
-				<div class="ctrl-holder" >
+
+				<div class="ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="url" /></label>
+
 					<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" fieldParam="<%= fieldParam %>" />
 				</div>
 
 				<%
-				fieldParam = "typeId" + id ;
+				fieldParam = "websiteTypeId" + i;
 				%>
-				<div class="ctrl-holder"  >
+
+				<div class="ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
-					<select name="<portlet:namespace /><%= fieldParam %>" id="<portlet:namespace /><%= fieldParam %>">
+
+					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
+
 						<%
 						List<ListType> websiteTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.WEBSITE);
 
 						for (ListType suffix : websiteTypes) {
 						%>
-							<option <%= suffix.getListTypeId() == website.getTypeId() ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+
+							<option <%= (suffix.getListTypeId() == website.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
+
 						<%
 						}
 						%>
+
 					</select>
 				</div>
 
 				<%
-				fieldParam = "primary" + id ;
+				fieldParam = "websitePrimary" + i;
 				%>
+
 				<div class="ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
+
 						<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />primary" type="radio" value="1" />
 					</label>
 				</div>
 			</div>
 		</div>
+
 	<%
 	}
 	%>
+
 </fieldset>
 
 <script type="text/javascript">
-
 	jQuery(
 		function () {
-			new Liferay.autoFields({
-				container: '#websites > fieldset',
-				baseRows: '.lfr-form-row'
-			});
+			new Liferay.autoFields(
+				{
+					container: '#websites > fieldset',
+					baseRows: '.lfr-form-row',
+					fieldIndexes: '<portlet:namespace />websiteIndexes'
+				}
+			);
 		}
 	);
 </script>

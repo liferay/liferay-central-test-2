@@ -16,6 +16,7 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 
 				if (!li.is('.selected')) {
 					instance._revealSection(this.href, li);
+
 					var currentSection = this.href.split('#');
 
 					if (currentSection[1]) {

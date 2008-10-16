@@ -165,9 +165,11 @@ String curSection = mainSections[0];
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.EnterpriseAdmin.FormNavigator({
-				container: '#organization'
-			});
+			new Liferay.EnterpriseAdmin.FormNavigator(
+				{
+					container: '#organization'
+				}
+			);
 		}
 	);
 

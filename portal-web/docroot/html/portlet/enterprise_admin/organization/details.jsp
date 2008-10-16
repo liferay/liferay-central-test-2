@@ -45,74 +45,6 @@ long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />openOrganizationSelector() {
-		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
-
-		<c:choose>
-			<c:when test="<%= organization == null %>">
-				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
-			</c:when>
-			<c:otherwise>
-				var type = '<%= type %>';
-			</c:otherwise>
-		</c:choose>
-
-		url = Liferay.Util.addParams('childType=' + type, url);
-
-		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-		organizationWindow.focus();
-	}
-
-	function <portlet:namespace />removeOrganization() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationHTML");
-
-		nameEl.href = "#";
-
-		var parentOrganizationHTML = '';
-
-		parentOrganizationHTML += '<tr class="portlet-section-body results-row">';
-		parentOrganizationHTML += '<td align="center" class="col-1" colspan="3" valign="middle"><liferay-ui:message key="this-organization-does-not-have-a-parent" /></td></tr>';
-
-		nameEl.innerHTML = parentOrganizationHTML;
-
-		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
-	}
-
-	function <portlet:namespace />saveOrganization(cmd) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
-
-		if (document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes) {
-			document.<portlet:namespace />fm.<portlet:namespace />websiteSuffixes.value = websiteSuffixesArray.join(',');
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = organizationId;
-
-		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationHTML");
-
-		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
-
-		var parentOrganizationHTML = '';
-
-		parentOrganizationHTML += '<tr class="portlet-section-body results-row" onmouseover="this.className = \'portlet-section-body-hover results-row hover\';" onmouseout="this.className = \'portlet-section-body results-row\';">';
-		parentOrganizationHTML += '<td align="left" class="col-1" colspan="1" valign="middle">';
-		parentOrganizationHTML += '<a href="' + href + '">' + name +'</a></td>';
-		parentOrganizationHTML += '<td align="left" class="col-2" colspan="1" valign="middle">' + type + '</td>';
-		parentOrganizationHTML += '<td align="right" class="col-3" colspan="1" valign="middle">';
-		parentOrganizationHTML += '[<a href="javascript: <portlet:namespace />removeOrganization();">x</a>]</div>';
-		parentOrganizationHTML += '</td></tr>';
-
-		nameEl.innerHTML = parentOrganizationHTML;
-	}
-</script>
-
 <h3><liferay-ui:message key="details" /></h3>
 
 <fieldset class="block-labels col">
@@ -154,8 +86,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			<label for="<portlet:namespace />groupId"><liferay-ui:message key="group-id" /></label>
 
 			<%= organization.getGroup().getGroupId() %>
-
-			<input name="<portlet:namespace />groupId" type="hidden" value="<%= organization.getGroup().getGroupId() %>" />
 		</div>
 	</c:if>
 </fieldset>
@@ -170,13 +100,12 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 					<option value=""></option>
 
 					<%
-					List statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
+					List<ListType> statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
 
-					for (int i = 0; i < statuses.size(); i++) {
-						ListType status = (ListType)statuses.get(i);
+					for (ListType status : statuses) {
 					%>
 
-					<option <%= status.getListTypeId() == statusId ? "selected" : "" %> value="<%= String.valueOf(status.getListTypeId()) %>"><liferay-ui:message key="<%= status.getName() %>" /></option>
+						<option <%= (status.getListTypeId() == statusId) ? "selected" : "" %> value="<%= status.getListTypeId() %>"><liferay-ui:message key="<%= status.getName() %>" /></option>
 
 					<%
 					}
@@ -220,107 +149,173 @@ if (parentOrganizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID
 	}
 }
 
-StringBuilder parentOrganizationHTML = new StringBuilder();
+List<Organization> parentOrganizations = new ArrayList<Organization>();
 
 if (parentOrganization != null) {
-	PortletURL parentOrganizationURL = renderResponse.createRenderURL();
-	parentOrganizationURL.setParameter("struts_action", "/enterprise_admin/edit_organization");
-	parentOrganizationURL.setParameter("backURL", currentURL);
-	parentOrganizationURL.setParameter("organizationId", String.valueOf(parentOrganization.getOrganizationId()));
-
-	parentOrganizationHTML.append("<tr class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\">");
-
-	parentOrganizationHTML.append("<td align=\"left\" class=\"col-2\" colspan=\"1\" valign=\"middle\"><a href=\"");
-	parentOrganizationHTML.append(parentOrganizationURL.toString());
-	parentOrganizationHTML.append("\">");
-	parentOrganizationHTML.append(parentOrganization.getName());
-	parentOrganizationHTML.append("</a></td>");
-	parentOrganizationHTML.append("<td align=\"left\" class=\"col-1\" colspan=\"1\" valign=\"middle\">");
-	parentOrganizationHTML.append(parentOrganization.getType());
-	parentOrganizationHTML.append("</td>");
-	parentOrganizationHTML.append("<td align=\"right\" class=\"col-3\" colspan=\"1\" valign=\"middle\">");
-
-	parentOrganizationHTML.append("[<a href='javascript: ");
-	parentOrganizationHTML.append(renderResponse.getNamespace());
-	parentOrganizationHTML.append("removeOrganization();'>x</a>]");
-
-	parentOrganizationHTML.append("</td></tr>");
-}
-else {
-	parentOrganizationHTML.append("<tr class=\"portlet-section-body results-row\">");
-	parentOrganizationHTML.append("<td align=\"center\" class=\"col-1\" colspan=\"3\" valign=\"middle\">");
-	parentOrganizationHTML.append(LanguageUtil.get(pageContext, "this-organization-does-not-have-a-parent"));
-	parentOrganizationHTML.append("</td></tr>");
+	parentOrganizations.add(parentOrganization);
 }
 %>
 
 <input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
 
-<div class="results-grid">
-	<table class="taglib-search-iterator">
-	<tr class="portlet-section-header results-header">
-		<th class="col-1"><liferay-ui:message key="name" /></th>
-		<th class="col-2"><liferay-ui:message key="type" /></th>
-		<th class="col-3"></th>
-	</tr>
-	<tbody id="<portlet:namespace />parentOrganizationHTML">
-		<%= parentOrganizationHTML.toString() %>
-	</tbody>
-	</table>
-</div>
+<liferay-ui:search-container
+	id="xxx"
+>
+	<liferay-ui:search-container-results
+		results="<%= parentOrganizations %>"
+		total="<%= parentOrganizations.size() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Organization"
+		keyProperty="organizationId"
+		modelVar="curOrganization"
+	>
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="name"
+			property="name"
+		/>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="type"
+			value="<%= LanguageUtil.get(pageContext, curOrganization.getType()) %>"
+		/>
+
+		<liferay-ui:search-container-column-text>
+			<a href="javascript: Liferay.SearchContainer.deleteRow(this);">X</a>
+		</liferay-ui:search-container-column-text>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+
+<c:if test="<%= parentOrganizations.size() > 0 %>">
+	<br />
+</c:if>
 
 <input type="button" value="<liferay-ui:message key="select" />" onClick="<portlet:namespace />openOrganizationSelector();" />
 
 <script type="text/javascript">
-	jQuery('#<portlet:namespace />type').change(
-		function(event) {
+	function <portlet:namespace />openOrganizationSelector() {
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
 
-			<%
-			for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
-			%>
+		<c:choose>
+			<c:when test="<%= organization == null %>">
+				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
+			</c:when>
+			<c:otherwise>
+				var type = '<%= type %>';
+			</c:otherwise>
+		</c:choose>
 
-			if (this.value == '<%= curType %>') {
-					jQuery('#<portlet:namespace />countryDiv').<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(curType)))) ? "show" : "hide" %>();
+		url = Liferay.Util.addParams('childType=' + type, url);
+
+		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		organizationWindow.focus();
+	}
+
+	function <portlet:namespace />removeOrganization() {
+		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationHTML");
+
+		nameEl.href = "#";
+
+		var parentOrganizationHTML = '';
+
+		parentOrganizationHTML += '<tr class="portlet-section-body results-row">';
+		parentOrganizationHTML += '<td align="center" class="col-1" colspan="3" valign="middle"><liferay-ui:message key="this-organization-does-not-have-a-parent" /></td></tr>';
+
+		nameEl.innerHTML = parentOrganizationHTML;
+
+		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
+	}
+
+	function <portlet:namespace />saveOrganization(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectOrganization(organizationId, name, type) {
+		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = organizationId;
+
+		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationHTML");
+
+		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+
+		var parentOrganizationHTML = '';
+
+		parentOrganizationHTML += '<tr class="portlet-section-body results-row" onmouseover="this.className = \'portlet-section-body-hover results-row hover\';" onmouseout="this.className = \'portlet-section-body results-row\';">';
+		parentOrganizationHTML += '<td align="left" class="col-1" colspan="1" valign="middle">';
+		parentOrganizationHTML += '<a href="' + href + '">' + name +'</a></td>';
+		parentOrganizationHTML += '<td align="left" class="col-2" colspan="1" valign="middle">' + type + '</td>';
+		parentOrganizationHTML += '<td align="right" class="col-3" colspan="1" valign="middle">';
+		parentOrganizationHTML += '[<a href="javascript: <portlet:namespace />removeOrganization();">x</a>]</div>';
+		parentOrganizationHTML += '</td></tr>';
+
+		nameEl.innerHTML = parentOrganizationHTML;
+	}
+
+	<c:if test="<%= organization == null %>">
+		jQuery('#<portlet:namespace />type').change(
+			function(event) {
+
+				<%
+				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+				%>
+
+					if (this.value == '<%= curType %>') {
+						jQuery('#<portlet:namespace />countryDiv').<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(curType)))) ? "show" : "hide" %>();
+					}
+
+				<%
 				}
+				%>
 
-			<%
 			}
-			%>
-
-		}
-	);
+		);
+	</c:if>
 
 	new Liferay.DynamicSelect(
-	[
-		{
-			select: "<portlet:namespace />countryId",
-			selectId: "countryId",
-			selectDesc: "name",
-			selectVal: "<%= countryId %>",
-			selectData: function(callback) {
-				Liferay.Service.Portal.Country.getCountries(
-					{
-						active: true
-					},
-					callback
-				);
+		[
+			{
+				select: "<portlet:namespace />countryId",
+				selectId: "countryId",
+				selectDesc: "name",
+				selectVal: "<%= countryId %>",
+				selectData: function(callback) {
+					Liferay.Service.Portal.Country.getCountries(
+						{
+							active: true
+						},
+						callback
+					);
+				}
+			},
+			{
+				select: "<portlet:namespace />regionId",
+				selectId: "regionId",
+				selectDesc: "name",
+				selectVal: "<%= regionId %>",
+				selectData: function(callback, selectKey) {
+					Liferay.Service.Portal.Region.getRegions(
+						{
+							countryId: selectKey,
+							active: true
+						},
+						callback
+					);
+				}
 			}
-		},
-		{
-			select: "<portlet:namespace />regionId",
-			selectId: "regionId",
-			selectDesc: "name",
-			selectVal: "<%= regionId %>",
-			selectData: function(callback, selectKey) {
-				Liferay.Service.Portal.Region.getRegions(
-					{
-						countryId: selectKey,
-						active: true
-					},
-					callback
-				);
-			}
-		}
-	]
+		]
 	);
 </script>
