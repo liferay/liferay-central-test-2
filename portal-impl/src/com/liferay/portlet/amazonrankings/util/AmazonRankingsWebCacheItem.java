@@ -30,8 +30,11 @@ import com.amazonaws.a2s.model.Item;
 import com.amazonaws.a2s.model.ItemAttributes;
 import com.amazonaws.a2s.model.ItemLookupRequest;
 import com.amazonaws.a2s.model.ItemLookupResponse;
+import com.amazonaws.a2s.model.Items;
+import com.amazonaws.a2s.model.Offer;
 import com.amazonaws.a2s.model.OfferListing;
 import com.amazonaws.a2s.model.OfferSummary;
+import com.amazonaws.a2s.model.Offers;
 import com.amazonaws.a2s.model.Price;
 
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -65,27 +68,26 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
 		AmazonRankings amazonRankings = null;
 
-		AmazonA2S a2service = new AmazonA2SClient(
-			AmazonRankingsUtil.getAmazonAccessKeyId(),
-			AmazonRankingsUtil.getAmazonAssociateTag(), AmazonA2SLocale.US);
-
-		ItemLookupRequest itemLookupRequest = getItemLookupRequest(isbn);
-
 		try {
+			AmazonA2S a2service = new AmazonA2SClient(
+				AmazonRankingsUtil.getAmazonAccessKeyId(),
+				AmazonRankingsUtil.getAmazonAssociateTag(), AmazonA2SLocale.US);
+
+			ItemLookupRequest itemLookupRequest = getItemLookupRequest(isbn);
+
 			ItemLookupResponse itemLookupResponse = a2service.itemLookup(
 				itemLookupRequest);
 
 			Item item = getItem(itemLookupResponse);
 
-			// Item attributes
-
 			if (!item.isSetItemAttributes()) {
-				throw new AmazonA2SException("Item attributes not set");
+				throw new AmazonA2SException("Item attributes is not set");
 			}
 
 			ItemAttributes itemAttributes = item.getItemAttributes();
 
-			// Author
+			String productName = itemAttributes.getTitle();
+			String catalog = StringPool.BLANK;
 
 			String[] authors = null;
 
@@ -95,45 +97,44 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 				authorsList.toArray(new String[authorsList.size()]);
 			}
 
-			// Release date
-
-			String releaseDateAsString = null;
 			Date releaseDate = null;
+			String releaseDateAsString = null;
 
 			if (itemAttributes.isSetPublicationDate()) {
 				releaseDateAsString = itemAttributes.getPublicationDate();
 
-				SimpleDateFormat df = null;
+				SimpleDateFormat dateFormat = null;
 
 				if (releaseDateAsString.length() > 7) {
-					df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+					dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 				}
 				else {
-					df = new SimpleDateFormat("yyyy-MM", Locale.US);
+					dateFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
 				}
 
-				releaseDate = GetterUtil.getDate(releaseDateAsString, df);
+				releaseDate = GetterUtil.getDate(
+					releaseDateAsString, dateFormat);
 			}
 
-			// Image URL
+			String manufacturer = itemAttributes.getManufacturer();
 
 			String smallImageURL = null;
-			String mediumImageURL = null;
-			String largeImageURL = null;
 
 			if (item.isSetSmallImage()) {
 				smallImageURL = item.getSmallImage().getURL();
 			}
 
+			String mediumImageURL = null;
+
 			if (item.isSetMediumImage()) {
 				mediumImageURL = item.getMediumImage().getURL();
 			}
 
+			String largeImageURL = null;
+
 			if (item.isSetLargeImage()) {
 				largeImageURL = item.getLargeImage().getURL();
 			}
-
-			// Prices
 
 			double listPrice = 0;
 			double ourPrice = 0;
@@ -160,21 +161,14 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
 			}
 
-			// Availability
+			int salesRank = GetterUtil.getInteger(item.getSalesRank());
+			String media = StringPool.BLANK;
 
 			String availability = null;
 
 			if (offerListing != null) {
 				availability = offerListing.getAvailability();
 			}
-
-			// Other
-
-			String productName = itemAttributes.getTitle();
-			String catalog = StringPool.BLANK;
-			String manufacturer = itemAttributes.getManufacturer();
-			int salesRank = GetterUtil.getInteger(item.getSalesRank());
-			String media = StringPool.BLANK;
 
 			amazonRankings = new AmazonRankings(
 				isbn, productName, catalog, authors, releaseDate,
@@ -183,8 +177,8 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 				collectiblePrice, thirdPartyNewPrice, salesRank, media,
 				availability);
 		}
-		catch (AmazonA2SException ae) {
-			throw new WebCacheException(isbn + " " + ae.toString());
+		catch (Exception e) {
+			throw new WebCacheException(isbn + " " + e.toString());
 		}
 
 		return amazonRankings;
@@ -195,14 +189,23 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 	}
 
 	protected Item getItem(ItemLookupResponse itemLookupResponse)
-		throws AmazonA2SException {
+		throws Exception {
 
-		try {
-			return itemLookupResponse.getItems().get(0).getItem().get(0);
+		List<Items> itemsList = itemLookupResponse.getItems();
+
+		if (itemsList.isEmpty()) {
+			throw new AmazonA2SException("Items list is empty");
 		}
-		catch (Exception e) {
-			throw new AmazonA2SException(e.toString());
+
+		Items items = itemsList.get(0);
+
+		List<Item> itemList = items.getItem();
+
+		if (itemList.isEmpty()) {
+			throw new AmazonA2SException("Item list is empty");
 		}
+
+		return itemList.get(0);
 	}
 
 	protected ItemLookupRequest getItemLookupRequest(String isbn) {
@@ -231,12 +234,23 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 	}
 
 	protected OfferListing getOfferListing(Item item) {
-		try {
-			return item.getOffers().getOffer().get(0).getOfferListing().get(0);
-		}
-		catch (Exception e) {
+		Offers offers = item.getOffers();
+
+		List<Offer> offersList = offers.getOffer();
+
+		if (offersList.isEmpty()) {
 			return null;
 		}
+
+		Offer offer = offersList.get(0);
+
+		List<OfferListing> offerListings = offer.getOfferListing();
+
+		if (offerListings.isEmpty()) {
+			return null;
+		}
+
+		return offerListings.get(0);
 	}
 
 	protected double getPrice(Price price) {
