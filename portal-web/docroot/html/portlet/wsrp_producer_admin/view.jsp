@@ -135,10 +135,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		Set<Map.Entry<String, String>> versions = supportedVersions.entrySet();
 
-		PortletPreferences preferences = renderRequest.getPreferences();
-
-		String producerHost = preferences.getValue("producerHost", "localhost");
-		String producerPort = preferences.getValue("producerPort", "8080");
+		String producerHost = renderRequest.getServerName();
+		int producerPort = renderRequest.getServerPort();
 
 		String wsdl = "http://" + producerHost + ":" + producerPort + producerBean.getWsdlURL();
 		%>

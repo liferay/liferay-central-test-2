@@ -47,7 +47,11 @@ public class WSRPConsumerAdminPortlet
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
 
-		super.processAction(actionRequest, actionResponse);
+		String paramAction = ParamUtil.getString(actionRequest, "action", null);
+		
+		if (Validator.isNotNull(paramAction)) {			
+			super.processAction(actionRequest, actionResponse);
+		}
 
 		int action = ParamUtil.getInteger(actionRequest, "action");
 
