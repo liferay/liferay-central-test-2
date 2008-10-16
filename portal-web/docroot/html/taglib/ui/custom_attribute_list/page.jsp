@@ -43,9 +43,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
 
-List<String> attributeNamesList = Collections.list(expandoBridge.getAttributeNames());
+List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 
-for (String attributeName : attributeNamesList) {
+for (String attributeName : attributeNames) {
 %>
 
 	<div class="ctrl-holder">
@@ -62,7 +62,7 @@ for (String attributeName : attributeNamesList) {
 }
 %>
 
-<c:if test="<%= attributeNamesList.isEmpty() %>">
+<c:if test="<%= attributeNames.isEmpty() %>">
 	<div class="ctrl-holder">
 		<label><%= LanguageUtil.format(pageContext, "no-custom-attributes-are-defined-for-x", modelResourceName) %></label>
 	</div>
