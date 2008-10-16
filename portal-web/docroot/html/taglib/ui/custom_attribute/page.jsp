@@ -25,16 +25,14 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.expando.model.ExpandoBridge"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridgeImpl"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumn"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants"%>
+<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl"%>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission"%>
 
 <%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:custom-attribute:className");
@@ -59,16 +57,19 @@ String localizedName = LanguageUtil.get(pageContext, name);
 if (name.equals(localizedName)) {
 	localizedName = TextFormatter.format(name, TextFormatter.J);
 }
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
 <c:if test="<%= !attributeHidden && ExpandoColumnPermission.contains(permissionChecker, column, ActionKeys.VIEW) %>">
 	<c:if test="<%= label %>">
-		<label for="<%= randomNamespace + name %>"><%= localizedName %></label>
+		<label for="<%= randomNamespace %><%= name %>"><%= localizedName %></label>
 	</c:if>
 
 	<c:choose>
 		<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, column, ActionKeys.UPDATE) %>">
 			<input type="hidden" name="<portlet:namespace />ExpandoAttributeName(<%= name %>)" value="<%= name %>" />
+
 			<c:choose>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.BOOLEAN %>">
 
@@ -76,15 +77,15 @@ if (name.equals(localizedName)) {
 					boolean curValue = ((Boolean)value).booleanValue();
 					%>
 
-					<select id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
-						<option <%= curValue ? "selected=\"selected\"" : "" %> value="1"><liferay-ui:message key="true" /></option>
-						<option <%= !curValue ? "selected=\"selected\"" : "" %> value="0"><liferay-ui:message key="false" /></option>
+					<select id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+						<option <%= curValue ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
+						<option <%= !curValue ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 					</select>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.DATE %>">
-					<span id="<%= randomNamespace + name %>">
+					<span id="<%= randomNamespace %><%= name %>">
 
 						<%
 						Calendar valueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -124,94 +125,95 @@ if (name.equals(localizedName)) {
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.DATE_ARRAY %>">
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.DOUBLE_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((double[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((double[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.FLOAT_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.INTEGER_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((int[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((int[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.LONG_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((long[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((long[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.FLOAT_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.SHORT_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((short[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((short[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.STRING_ARRAY %>">
-					<textarea class="lfr-textarea" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((String[])value, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((String[])value, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:otherwise>
-					<input class="lfr-input-text" id="<%= randomNamespace + name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)" type="text" value="<%= String.valueOf(value) %>" />
+					<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)" type="text" value="<%= String.valueOf(value) %>" />
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
-				<%
-				StringBuilder sb = new StringBuilder();
 
-				if (type == ExpandoColumnConstants.BOOLEAN) {
-					sb.append((Boolean)value);
-				}
-				else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-					sb.append(StringUtil.merge((boolean[])value));
-				}
-				else if (type == ExpandoColumnConstants.DATE) {
-					sb.append(dateFormatDateTime.format((Date)value));
-				}
-				else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-					Date[] dates = (Date[])value;
+			<%
+			StringBuilder sb = new StringBuilder();
 
-					for (int i = 0; i < dates.length; i++) {
-						if (i != 0) {
-							sb.append(StringPool.COMMA_AND_SPACE);
-						}
+			if (type == ExpandoColumnConstants.BOOLEAN) {
+				sb.append((Boolean)value);
+			}
+			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+				sb.append(StringUtil.merge((boolean[])value));
+			}
+			else if (type == ExpandoColumnConstants.DATE) {
+				sb.append(dateFormatDateTime.format((Date)value));
+			}
+			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+				Date[] dates = (Date[])value;
 
-						sb.append(dateFormatDateTime.format(dates[i]));
+				for (int i = 0; i < dates.length; i++) {
+					if (i != 0) {
+						sb.append(StringPool.COMMA_AND_SPACE);
 					}
-				}
-				else if (type == ExpandoColumnConstants.DOUBLE) {
-					sb.append((Double)value);
-				}
-				else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-					sb.append(StringUtil.merge((double[])value));
-				}
-				else if (type == ExpandoColumnConstants.FLOAT) {
-					sb.append((Float)value);
-				}
-				else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-					sb.append(StringUtil.merge((float[])value));
-				}
-				else if (type == ExpandoColumnConstants.INTEGER) {
-					sb.append((Integer)value);
-				}
-				else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-					sb.append(StringUtil.merge((int[])value));
-				}
-				else if (type == ExpandoColumnConstants.LONG) {
-					sb.append((Long)value);
-				}
-				else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-					sb.append(StringUtil.merge((long[])value));
-				}
-				else if (type == ExpandoColumnConstants.SHORT) {
-					sb.append((Short)value);
-				}
-				else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-					sb.append(StringUtil.merge((short[])value));
-				}
-				else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-					sb.append(StringUtil.merge((String[])value));
-				}
-				else {
-					sb.append((String)value);
-				}
-				%>
 
-				<span id="<%= randomNamespace + name %>"><%= sb.toString() %></span>
+					sb.append(dateFormatDateTime.format(dates[i]));
+				}
+			}
+			else if (type == ExpandoColumnConstants.DOUBLE) {
+				sb.append((Double)value);
+			}
+			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+				sb.append(StringUtil.merge((double[])value));
+			}
+			else if (type == ExpandoColumnConstants.FLOAT) {
+				sb.append((Float)value);
+			}
+			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+				sb.append(StringUtil.merge((float[])value));
+			}
+			else if (type == ExpandoColumnConstants.INTEGER) {
+				sb.append((Integer)value);
+			}
+			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+				sb.append(StringUtil.merge((int[])value));
+			}
+			else if (type == ExpandoColumnConstants.LONG) {
+				sb.append((Long)value);
+			}
+			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+				sb.append(StringUtil.merge((long[])value));
+			}
+			else if (type == ExpandoColumnConstants.SHORT) {
+				sb.append((Short)value);
+			}
+			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+				sb.append(StringUtil.merge((short[])value));
+			}
+			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+				sb.append(StringUtil.merge((String[])value));
+			}
+			else {
+				sb.append((String)value);
+			}
+			%>
+
+			<span id="<%= randomNamespace %><%= name %>"><%= sb.toString() %></span>
 		</c:otherwise>
 	</c:choose>
 </c:if>

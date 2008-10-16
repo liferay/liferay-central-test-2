@@ -27,7 +27,7 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="RatingsTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="CustomAttributeTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -59,10 +59,6 @@ public class CustomAttributeTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
 	public void setEditable(boolean editable) {
 		_editable = editable;
 	}
@@ -75,7 +71,12 @@ public class CustomAttributeTag extends IncludeTag {
 		_name = name;
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/custom-attribute/page.jsp";
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE =
+		"/html/taglib/ui/custom_attribute/page.jsp";
 
 	private String _className;
 	private long _classPK;

@@ -26,10 +26,10 @@
 
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoBridge"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridgeImpl"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumn"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants"%>
+<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl"%>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission"%>
 
@@ -40,16 +40,14 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute-list:label"));
 
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
+
 ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 Enumeration<String> attributeNames = expandoBridge.getAttributeNames();
 
-List<String> attributeNamesList = Collections.list(attributeNames);
+for (String attributeName : attributeNames) {
+%>
 
-Collections.sort(attributeNamesList);
-
-for (String attributeName : attributeNamesList) {
-	%>
 	<div class="ctrl-holder">
 		<liferay-ui:custom-attribute
 			 className="<%= className %>"
@@ -59,7 +57,8 @@ for (String attributeName : attributeNamesList) {
 			 name="<%= attributeName %>"
 		/>
 	</div>
-	<%
+
+<%
 }
 %>
 
