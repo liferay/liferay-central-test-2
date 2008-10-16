@@ -4,7 +4,7 @@ Liferay.SearchContainer = new Class({
 
 		instance._id = options.id || '';
 		instance._container = jQuery('#' + instance._id + 'searchContainer');
-		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
+		instance._dataStore = jQuery('#' + instance._id + 'primaryKeys');
 
 		instance._table = instance._container.find('table');
 
