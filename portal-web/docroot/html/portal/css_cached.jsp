@@ -303,6 +303,12 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-top: 0;
 }
 
+/* ---------- Javascript template styles ---------- */
+
+.lfr-template {
+	display: none;
+}
+
 /* ---------- Portlet item ---------- */
 
 .lfr-portlet-item {

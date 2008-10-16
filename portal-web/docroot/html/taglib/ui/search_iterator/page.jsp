@@ -39,6 +39,8 @@ Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
 
+List<String> primaryKeys = new ArrayList<String>();
+
 if (end > total) {
 	end = total;
 }
@@ -160,13 +162,26 @@ if (iteratorURL != null) {
 
 		</tr>
 
-		<c:if test="<%= (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
-			<tr class="portlet-section-body results-row">
-				<td align="center" colspan="<%= headerNames.size() %>">
-					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
-				</td>
-			</tr>
-		</c:if>
+		<c:choose >
+			<c:when test="<%= (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
+				<tr class="portlet-section-body results-row">
+					<td align="center" colspan="<%= headerNames.size() %>">
+						<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<tr class="lfr-template portlet-section-body results-row">
+					<%
+						for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
+					%>
+						<td></td>
+					<%
+						}
+					%>
+				</tr>
+			</c:otherwise>
+		</c:choose>
 
 		<%
 		boolean allRowsIsChecked = true;
@@ -176,6 +191,8 @@ if (iteratorURL != null) {
 
 			String className = "portlet-section-alternate results-row alt";
 			String classHoverName = "portlet-section-alternate-hover results-row alt hover";
+			
+			primaryKeys.add(row.getPrimaryKey());
 
 			if (MathUtil.isEven(i)) {
 				className = "portlet-section-body results-row";
@@ -263,12 +280,17 @@ if (iteratorURL != null) {
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(id) %>">
+
+	<input id="<%= id %>PrimaryKeys" name="<%= id %>PrimaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
+
 	<script type="text/javascript">
 		jQuery(
 			function () {
-				new Liferay.SearchContainer({
-					id: '<%= id %>'
-				})
+				new Liferay.SearchContainer(
+					{
+						id: '<%= id %>'
+					}
+				);
 			}
 		);
 	</script>

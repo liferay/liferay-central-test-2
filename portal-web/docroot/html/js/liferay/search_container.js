@@ -4,18 +4,27 @@ Liferay.SearchContainer = new Class({
 
 		instance._id = options.id || '';
 		instance._container = jQuery('#' + instance._id + 'searchContainer');
+		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
+
 		instance._table = instance._container.find('table');
 
 		instance._table.attr('data-searchContainerId', instance._id);
 
 		Liferay.SearchContainer.register(instance._id, instance);
+
+		var initialIds = instance._dataStore.val() || '';
+
+		initialIds = initialIds.split(',');
+		instance.updateDataStore(initialIds);
 	},
 
 	addRow: function(arr, id) {
 		var instance = this;
 
-		var row = instance._table.find('tr:last').clone();
+		var row = instance._table.find('.lfr-template').clone();
 		var cells = row.find('> td');
+
+		cells.empty();
 
 		jQuery.each(
 			arr,
@@ -27,10 +36,13 @@ Liferay.SearchContainer = new Class({
 		);
 
 		instance._table.append(row);
+		row.removeClass('lfr-template');
 
 		if (id) {
 			instance._ids.push(id);
 		}
+
+		instance.updateDataStore();
 
 		instance.trigger('addRow', {ids: instance._ids, rowData: arr});
 	},
@@ -45,7 +57,7 @@ Liferay.SearchContainer = new Class({
 		var instance = this;
 
 		if (typeof obj == 'number' || typeof obj == 'string') {
-			obj = instance._table.find('tr').eq(obj);
+			obj = instance._table.find('tr').not('.lfr-template').eq(obj);
 		}
 
 		if (id) {
@@ -56,14 +68,37 @@ Liferay.SearchContainer = new Class({
 			}
 		}
 
+		instance.updateDataStore();
+
 		instance.trigger('deleteRow', {ids: instance._ids, row: obj});
+
 		return Liferay.SearchContainer.deleteRow(obj);
 	},
 
-	trigger: function(event) {
+	getData: function() {
 		var instance = this;
 
-		instance._container.trigger(event);
+		return instance._ids.join(',');
+	},
+
+	updateDataStore: function(ids) {
+		var instance = this;
+
+		if (ids) {
+			if (typeof ids == 'string') {
+				ids = ids.split(',');
+			}
+
+			instance._ids = ids;
+		}
+
+		instance._dataStore.val(instance._ids.join(','));
+	},
+
+	trigger: function(event, data) {
+		var instance = this;
+
+		instance._container.trigger(event, data);
 	},
 
 	_ids: []

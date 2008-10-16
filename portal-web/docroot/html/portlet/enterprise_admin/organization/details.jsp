@@ -277,8 +277,6 @@ if (parentOrganization != null) {
 	}
 
 	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = organizationId;
-
 		var createUrl = function(href, value, onClick) {
 			var anchorText = '<a href="' + href + '"' + (onClick ? ' onclick="' + onClick + '" ' : '') + '>' + value + '</a>';
 
@@ -297,6 +295,7 @@ if (parentOrganization != null) {
 
 		searchContainer.addRow(rowColumns);
 		searchContainer.deleteRow(1);
+		searchContainer.updateDataStore(organizationId);
 	}
 
 	<c:if test="<%= organization == null %>">
