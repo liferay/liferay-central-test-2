@@ -1413,6 +1413,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>headerNames</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>hover</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

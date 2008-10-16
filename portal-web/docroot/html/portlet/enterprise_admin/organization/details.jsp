@@ -189,7 +189,16 @@ if (parentOrganization != null) {
 
 <input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
 
+<%
+List<String> headerNames = new ArrayList<String>();
+
+headerNames.add("name");
+headerNames.add("type");
+%>
+
 <liferay-ui:search-container
+	emptyResultsMessage="there-is-no-parent-organizaton"
+	headerNames="<%= headerNames %>"
 	id="parentOrganizationHTML"
 >
 	<liferay-ui:search-container-results

@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
+import java.util.List;
+
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
@@ -55,6 +57,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_displayTerms = null;
 		_emptyResultsMessage = null;
 		_hasResults = false;
+		_headerNames = null;
 		_hover = false;
 		_id = null;
 		_iteratorURL = null;
@@ -94,6 +97,11 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 			}
 
 			_searchContainer.setId(_id);
+
+			if (_headerNames != null) {
+				_searchContainer.setHeaderNames(_headerNames);
+			}
+
 			_searchContainer.setHover(_hover);
 
 			if (Validator.isNotNull(_orderByColParam)) {
@@ -221,6 +229,10 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_hasResults = hasResults;
 	}
 
+	public void setHeaderNames(List<String> headerNames) {
+		_headerNames = headerNames;
+	}
+
 	public void setHover(boolean hover) {
 		_hover = hover;
 	}
@@ -275,6 +287,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;
 	private boolean _hasResults;
+	private List<String> _headerNames;
 	private boolean _hover = true;
 	private String _id;
 	private PortletURL _iteratorURL;
