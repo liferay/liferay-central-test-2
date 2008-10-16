@@ -36,13 +36,13 @@ public class ReleaseInfo {
 
 	static String name = "Liferay Portal";
 
-	static String version = "5.1.2";
+	static String version = "5.2.0";
 
-	static String codeName = "Calvin";
+	static String codeName = "Augustine";
 
-	static String build = "5102";
+	static String build = "5200";
 
-	static String date = "October 3, 2008";
+	static String date = "October 16, 2008";
 
 	static String releaseInfo =
 		name + " " + version + " (" + codeName + " / Build " + build + " / " +
