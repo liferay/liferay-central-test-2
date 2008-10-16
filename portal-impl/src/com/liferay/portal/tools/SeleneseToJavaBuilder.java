@@ -220,6 +220,20 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\"));");
 			}
+			else if (param1.equals("assertTextPresent") ||
+					 param1.equals("assertTextNotPresent")) {
+
+				if (param1.equals("assertTextPresent")) {
+					sb.append("assertTrue");
+				}
+				else if (param1.equals("assertTextNotPresent")) {
+					sb.append("assertFalse");
+				}
+
+				sb.append("(selenium.isTextPresent(\"");
+				sb.append(param2);
+				sb.append("\"));");
+			}
 			else if (param1.equals("captureEntirePageScreenshot")) {
 				int pos = param2.lastIndexOf("\\");
 
