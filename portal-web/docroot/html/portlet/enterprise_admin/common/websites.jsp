@@ -98,7 +98,7 @@ String className = (String)request.getAttribute("common.className");
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />primary" type="radio" value="1" />
+						<input <%= website.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />websitePrimary" type="radio" value="<%= i %>" />
 					</label>
 				</div>
 			</div>

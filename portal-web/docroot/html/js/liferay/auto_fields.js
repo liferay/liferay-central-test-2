@@ -152,6 +152,8 @@ Liferay.autoFields = new Class({
 				}
 				else {
 					oldName = el.attr('id');
+					el.attr('value', newSeed);
+					el.attr('checked', '');
 				}
 
 				el.attr('id', newName);
