@@ -2117,6 +2117,7 @@ no-categories-found=Κατηγορία που βρίσκεται καμία.
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=Κανένα ζευγάρι πόλεων και κράτους δεν βρέθηκε συνδεμένο με το δεδομένο ταχυδρομικό κώδικα.
 no-communities-were-found=Καμία κοινότητα δεν βρέθηκε.
 no-coupons-were-found=Κανένα δελτίο δεν βρέθηκε.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=Κανένας ορισμός δεν βρέθηκε.
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-documents-were-found-that-matched-the-keywords=Κανένα έγγραφο δεν βρέθηκε που ταιρίαξε με τις εισαγώμενες λέξεις:

@@ -1974,6 +1974,7 @@ no-banner=Ei banneria
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=Ei löytynyt kaupunkia ja osavaltiota, jotka vastaavat annettua postinumeroa.
 no-communities-were-found=Yhtään yhteisöä ei löytynyt.
 no-coupons-were-found=Yhtään kuponkia ei löytynyt.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=Yhtään määrittelyä ei löytynyt.
 no-documents-were-found-that-matched-the-keywords-x=Yhtään dokumenttia ei löytynyt, joka vastaa avainsanoja: {0}.
 no-documents-were-found-that-matched-the-keywords=Yhtään dokumenttia ei löytynyt, joka vastaa avainsanoja:

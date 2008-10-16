@@ -845,6 +845,7 @@ no-articles-were-found-that-matches-the-given-search-criteria=Žádné články 
 no-articles-were-found-that-matches-the-id=Žádné články neodpovídají ID:
 no-articles-were-found-that-matches-the-url=Žádné články neodpovídají URL:
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=Nenalezena žádná města a země s daným PSČ.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-documents-were-found-that-matched-the-keywords=nenalezeny žádné dokumenty se slovy:
 no-download=Žádný download

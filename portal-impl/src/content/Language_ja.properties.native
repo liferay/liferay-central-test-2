@@ -2117,6 +2117,7 @@ no-categories-found=見つけられる部門無し。
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=都市及び州の組はある特定のジッパーと準見つけられなかった。
 no-communities-were-found=コミュニティは見つけられなかった。
 no-coupons-were-found=クーポンは見つけられなかった。
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=定義は見つけられなかった。
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-documents-were-found-that-matched-the-keywords=キーワードに一致させた文書は見つけられなかった:

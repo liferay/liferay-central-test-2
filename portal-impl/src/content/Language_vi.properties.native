@@ -870,6 +870,7 @@ no-articles-were-found-that-matches-the-given-search-criteria=Không có bài vi
 no-articles-were-found-that-matches-the-id=Không có bài viết nào tìm thấy có ID:
 no-articles-were-found-that-matches-the-url=Không có bài viết nào tìm thấy có URL:
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=Không có cặp thành phố và bang nào tìm thấy có mã vùng 
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-documents-were-found-that-matched-the-keywords=Không có tài liệu nào tìm thấy chứa từ khóa :
 no-download=Không Download

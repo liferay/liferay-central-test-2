@@ -2117,6 +2117,7 @@ no-categories-found=아무 종류도 찾아내지 않았다.
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=도시와 국가 쌍은 준 지퍼에 연합했던
 no-communities-were-found=지역 사회는 발견하지 않았다.
 no-coupons-were-found=쿠폰은 발견하지 않았다.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=정의는 발견하지 않았다.
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-documents-were-found-that-matched-the-keywords=키워드를 일치한 문서는 발견하지 않았다:

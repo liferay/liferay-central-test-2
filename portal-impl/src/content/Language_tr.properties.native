@@ -611,6 +611,7 @@ new-mail-notification=Yeni Posta Bildirimi
 new=Yeni
 news-selections=Yeni Seçimler
 next=Sonraki
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-download=Karşı Sistemden Aktarım Yok.
 no-due-date=Termin yok.

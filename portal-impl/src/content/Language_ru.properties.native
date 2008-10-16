@@ -1152,6 +1152,7 @@ no-articles-were-found-that-matches-the-url=Не найдено статей, с
 no-articles-were-found=Статьи не найдены.
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=Не найдено пары Город/Штат ассоциированной и указанным почтовым индексом.
 no-communities-were-found=Сообщества не найдены.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-documents-were-found-that-matched-the-keywords-x=Документы не найдены по указанным ключевым словам: {0}.
 no-documents-were-found-that-matched-the-keywords=Не найдено документов по указанным ключевым словам:
 no-download=Не скачано

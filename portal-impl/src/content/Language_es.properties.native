@@ -2117,6 +2117,7 @@ no-categories-found=Ningunas categorías encontraron.
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=No se ha encontrado ningun par de ciudad y estado con ese código postal
 no-communities-were-found=No se ha encontrado ninguna comunidad.
 no-coupons-were-found=No se ha encontrado ningún cupón.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=No se ha encontrado ninguna definición.
 no-documents-were-found-that-matched-the-keywords-x=No se ha encontrado ningún documento con las palabras clave: {0}.
 no-documents-were-found-that-matched-the-keywords=No se ha encontrado ningún documento con las palabras clave:

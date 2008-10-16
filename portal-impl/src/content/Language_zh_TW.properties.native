@@ -2117,6 +2117,7 @@ no-categories-found=沒有找到的類別。
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=找不到相關聯的郵遞區號。
 no-communities-were-found=社區未找到。
 no-coupons-were-found=優惠券未被發現。
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=定義未被發現。
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-documents-were-found-that-matched-the-keywords=找不到吻合關鍵字的文件:

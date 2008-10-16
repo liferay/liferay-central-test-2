@@ -2117,6 +2117,7 @@ no-categories-found=Geen gevonden categorieën.
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=Geen stad gevonden die aan deze postcode verbonden is.
 no-communities-were-found=Geen communities gevonden.
 no-coupons-were-found=Geen coupons gevonden.
+no-custom-attributes-are-defined-for-x=No custom attributes are defined for <i>{0}</i>.
 no-definitions-were-found=Geen definities gevonden.
 no-documents-were-found-that-matched-the-keywords-x=Geen artikelen gevonden die overeenkomen met de sleutelwoorden: {0}.
 no-documents-were-found-that-matched-the-keywords=Geen artikelen gevonden die overeenkomen met de sleutelwoorden:
