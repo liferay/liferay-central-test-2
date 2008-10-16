@@ -137,7 +137,7 @@ if (iteratorURL != null) {
 				%>
 
 				<c:choose>
-					<c:when test="<%= headerNameValue.equals(StringPool.BLANK) %>">
+					<c:when test="<%= Validator.isNull(headerNameValue) %>">
 						<%= StringPool.NBSP %>
 					</c:when>
 					<c:otherwise>
