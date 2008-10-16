@@ -33,6 +33,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
@@ -1068,14 +1069,31 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout, Map<Locale, String> localeNamesMap,
 		Map<Locale, String> localeTitlesMap) {
 
-		Locale[] locales = LanguageUtil.getAvailableLocales();
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
-		for (Locale locale : locales) {
-			String name = localeNamesMap.get(locale);
-			String title = localeTitlesMap.get(locale);
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
 
-			layout.setName(name, locale);
-			layout.setTitle(title, locale);
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				Thread.currentThread().setContextClassLoader(portalClassLoader);
+			}
+
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (Locale locale : locales) {
+				String name = localeNamesMap.get(locale);
+				String title = localeTitlesMap.get(locale);
+
+				layout.setName(name, locale);
+				layout.setTitle(title, locale);
+			}
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
 		}
 	}
 
