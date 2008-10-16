@@ -121,7 +121,7 @@ for (int i = 0; i < results.size(); i++) {
 	resultRows.add(row);
 }
 
-boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+showAddFolderButton = showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 %>
 
 <c:if test="<%= showAddFolderButton %>">
