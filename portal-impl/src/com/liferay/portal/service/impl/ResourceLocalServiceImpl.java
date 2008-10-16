@@ -385,7 +385,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			deleteResource(resource);
 		}
 		catch (NoSuchResourceException nsre) {
-			_log.warn(nsre);
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsre);
+			}
 		}
 	}
 
@@ -425,7 +427,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			deleteResource(resource.getResourceId());
 		}
 		catch (NoSuchResourceException nsre) {
-			_log.warn(nsre);
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsre);
+			}
 		}
 	}
 
