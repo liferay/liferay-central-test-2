@@ -40,35 +40,11 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %> ">
-			<a href="javascript: <portlet:namespace />addOrganization();"><liferay-ui:message key="add-organization" /></a>
-		</span>
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addOrganizationURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+		</portlet:renderURL>
+
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %> "><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add-organization" /></a></span>
 	</c:if>
 </div>
-
-<script type="text/javascript">
-	function <portlet:namespace />addOrganization() {
-		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:renderURL>';
-
-		if (toggle_id_enterprise_admin_organization_searchcurClickValue == 'basic') {
-			url += '&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);
-
-			<c:if test="<%= organization != null %>">
-				url += '&<portlet:namespace />parentOrganizationId=<%= organization.getOrganizationId() %>';
-			</c:if>
-
-			url += '&<portlet:namespace /><%= OrganizationDisplayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.KEYWORDS %>.value;
-
-			submitForm(document.hrefFm, url);
-		}
-		else {
-			<c:if test="<%= organization != null %>">
-				url += '&<portlet:namespace />parentOrganizationId=<%= organization.getOrganizationId() %>';
-			</c:if>
-
-			document.<portlet:namespace />fm.method = 'post';
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
-			submitForm(document.<portlet:namespace />fm, url);
-		}
-	}
-</script>
