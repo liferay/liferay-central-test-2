@@ -7333,6 +7333,9 @@ Liferay.autoFields = new Class({
 				}
 				else {
 					oldName = el.attr('id');
+
+					el.attr('checked', '');
+					el.attr('value', newSeed);
 				}
 
 				el.attr('id', newName);
@@ -9037,10 +9040,12 @@ Liferay.SearchContainer = new Class({
 		instance._container = jQuery('#' + instance._id + 'searchContainer');
 		instance._table = instance._container.find('table');
 
+		instance._table.attr('data-searchContainerId', instance._id);
+
 		Liferay.SearchContainer.register(instance._id, instance);
 	},
 
-	addRow: function(arr) {
+	addRow: function(arr, id) {
 		var instance = this;
 
 		var row = instance._table.find('tr:last').clone();
@@ -9056,17 +9061,46 @@ Liferay.SearchContainer = new Class({
 		);
 
 		instance._table.append(row);
+
+		if (id) {
+			instance._ids.push(id);
+		}
+
+		instance.trigger('addRow', {ids: instance._ids, rowData: arr});
 	},
 
-	deleteRow: function(obj) {
+	bind: function(event, func) {
+		var instance = this;
+
+		instance._container.bind(event, func);
+	},
+
+	deleteRow: function(obj, id) {
 		var instance = this;
 
 		if (typeof obj == 'number' || typeof obj == 'string') {
-			obj = instance.table.find('tr').eq(obj - 1);
+			obj = instance._table.find('tr').eq(obj);
 		}
 
+		if (id) {
+			var pos = instance._ids.indexOf(id);
+
+			if (pos > -1) {
+				instance._ids.splice(pos, 1);
+			}
+		}
+
+		instance.trigger('deleteRow', {ids: instance._ids, row: obj});
 		return Liferay.SearchContainer.deleteRow(obj);
-	}
+	},
+
+	trigger: function(event) {
+		var instance = this;
+
+		instance._container.trigger(event);
+	},
+
+	_ids: []
 });
 
 jQuery.extend(
