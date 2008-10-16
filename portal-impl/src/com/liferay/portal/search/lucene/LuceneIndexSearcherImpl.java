@@ -128,6 +128,11 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			}
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("search found " + hits.getLength() + " results in " +
+				hits.getSearchTime() + "ms");
+		}
+
 		return hits;
 	}
 

@@ -31,6 +31,8 @@ import java.io.IOException;
 
 import java.util.Collection;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 
 /**
@@ -52,6 +54,10 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 			writer = LuceneUtil.getWriter(companyId);
 
 			writer.addDocument(_getLuceneDocument(doc));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("wrote document " + doc.get(Field.UID));
+			}
 		}
 		catch (IOException ioe) {
 			throw new SearchException(ioe);
@@ -68,6 +74,10 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 		try {
 			LuceneUtil.deleteDocuments(companyId, new Term(Field.UID, uid));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("deleted document " + uid);
+			}
 		}
 		catch (IOException ioe) {
 			throw new SearchException(ioe);
@@ -117,5 +127,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 		return luceneDoc;
 	}
+
+	private static Log _log = LogFactory.getLog(LuceneIndexWriterImpl.class);
 
 }
