@@ -161,31 +161,27 @@ List<String> primaryKeys = new ArrayList<String>();
 		%>
 
 		</tr>
+		<tr class="lfr-template portlet-section-body results-row">
 
-		<c:choose >
-			<c:when test="<%= (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
-				<tr class="portlet-section-body results-row">
-					<td align="center" colspan="<%= headerNames.size() %>">
-						<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<tr class="lfr-template portlet-section-body results-row">
+			<%
+			for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
+			%>
 
-					<%
-					for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
-					%>
+				<td></td>
 
-						<td></td>
+			<%
+			}
+			%>
 
-					<%
-					}
-					%>
+		</tr>
 
-				</tr>
-			</c:otherwise>
-		</c:choose>
+		<c:if test="<%= (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
+			<tr class="portlet-section-body results-row">
+				<td align="center" colspan="<%= headerNames.size() %>">
+					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
+				</td>
+			</tr>
+		</c:if>
 
 		<%
 		boolean allRowsIsChecked = true;
