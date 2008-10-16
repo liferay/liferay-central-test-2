@@ -52,14 +52,14 @@ public class WSRPPortletLocalServiceUtil {
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet createWSRPPortlet(
-		long wsrpPortletId) {
-		return getService().createWSRPPortlet(wsrpPortletId);
+		long portletId) {
+		return getService().createWSRPPortlet(portletId);
 	}
 
-	public static void deleteWSRPPortlet(long wsrpPortletId)
+	public static void deleteWSRPPortlet(long portletId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteWSRPPortlet(wsrpPortletId);
+		getService().deleteWSRPPortlet(portletId);
 	}
 
 	public static void deleteWSRPPortlet(
@@ -81,10 +81,10 @@ public class WSRPPortletLocalServiceUtil {
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet getWSRPPortlet(
-		long wsrpPortletId)
+		long portletId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getWSRPPortlet(wsrpPortletId);
+		return getService().getWSRPPortlet(portletId);
 	}
 
 	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets(
@@ -103,28 +103,28 @@ public class WSRPPortletLocalServiceUtil {
 		return getService().updateWSRPPortlet(wsrpPortlet);
 	}
 
-	public static com.liferay.wsrp.model.WSRPPortlet getWSRPPortlet(
+	public static com.liferay.wsrp.model.WSRPPortlet getPortlet(
 		java.lang.String portletName)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException {
-		return getService().getWSRPPortlet(portletName);
+		return getService().getPortlet(portletName);
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets()
+	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets()
 		throws com.liferay.portal.SystemException {
-		return getService().getWSRPPortlets();
+		return getService().getPortlets();
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets(
+	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets(
 		java.lang.String producerEntityId)
 		throws com.liferay.portal.SystemException {
-		return getService().getWSRPPortlets(producerEntityId);
+		return getService().getPortlets(producerEntityId);
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets(
+	public static java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets(
 		java.lang.String producerEntityId, java.lang.String portletHandle)
 		throws com.liferay.portal.SystemException {
-		return getService().getWSRPPortlets(producerEntityId, portletHandle);
+		return getService().getPortlets(producerEntityId, portletHandle);
 	}
 
 	public static WSRPPortletLocalService getService() {

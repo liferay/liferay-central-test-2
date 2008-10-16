@@ -29,14 +29,14 @@ package com.liferay.wsrp.service.persistence;
  *
  */
 public class WSRPPortletUtil {
-	public static com.liferay.wsrp.model.WSRPPortlet create(long wsrpPortletId) {
-		return getPersistence().create(wsrpPortletId);
+	public static com.liferay.wsrp.model.WSRPPortlet create(long portletId) {
+		return getPersistence().create(portletId);
 	}
 
-	public static com.liferay.wsrp.model.WSRPPortlet remove(long wsrpPortletId)
+	public static com.liferay.wsrp.model.WSRPPortlet remove(long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException {
-		return getPersistence().remove(wsrpPortletId);
+		return getPersistence().remove(portletId);
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet remove(
@@ -80,15 +80,15 @@ public class WSRPPortletUtil {
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet findByPrimaryKey(
-		long wsrpPortletId)
+		long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException {
-		return getPersistence().findByPrimaryKey(wsrpPortletId);
+		return getPersistence().findByPrimaryKey(portletId);
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet fetchByPrimaryKey(
-		long wsrpPortletId) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(wsrpPortletId);
+		long portletId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(portletId);
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet findByPortletName(
@@ -143,12 +143,12 @@ public class WSRPPortletUtil {
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet[] findByProducerEntityId_PrevAndNext(
-		long wsrpPortletId, java.lang.String producerEntityId,
+		long portletId, java.lang.String producerEntityId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException {
 		return getPersistence()
-				   .findByProducerEntityId_PrevAndNext(wsrpPortletId,
+				   .findByProducerEntityId_PrevAndNext(portletId,
 			producerEntityId, obc);
 	}
 
@@ -192,13 +192,13 @@ public class WSRPPortletUtil {
 	}
 
 	public static com.liferay.wsrp.model.WSRPPortlet[] findByP_P_PrevAndNext(
-		long wsrpPortletId, java.lang.String producerEntityId,
+		long portletId, java.lang.String producerEntityId,
 		java.lang.String portletHandle,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException {
 		return getPersistence()
-				   .findByP_P_PrevAndNext(wsrpPortletId, producerEntityId,
+				   .findByP_P_PrevAndNext(portletId, producerEntityId,
 			portletHandle, obc);
 	}
 

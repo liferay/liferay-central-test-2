@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -50,31 +51,29 @@ import java.util.List;
 /**
  * <a href="WSRPPortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Rajesh Thiagarajan
  *
  */
 public class WSRPPortletLocalServiceImpl
-		extends WSRPPortletLocalServiceBaseImpl {
+	extends WSRPPortletLocalServiceBaseImpl {
 
-	public WSRPPortlet getWSRPPortlet( String portletName )
-		throws SystemException, NoSuchPortletException {
+	public WSRPPortlet getPortlet(String portletName)
+		throws NoSuchPortletException, SystemException {
 
 		return wsrpPortletPersistence.findByPortletName(portletName);
 	}
 
-	public List<WSRPPortlet> getWSRPPortlets() throws SystemException {
-
+	public List<WSRPPortlet> getPortlets() throws SystemException {
 		return wsrpPortletPersistence.findAll();
 	}
 
-	public List<WSRPPortlet> getWSRPPortlets( String producerEntityId )
+	public List<WSRPPortlet> getPortlets(String producerEntityId)
 		throws SystemException {
 
 		return wsrpPortletPersistence.findByProducerEntityId(producerEntityId);
 	}
 
-	public List<WSRPPortlet> getWSRPPortlets(
+	public List<WSRPPortlet> getPortlets(
 			String producerEntityId, String portletHandle)
 		throws SystemException {
 

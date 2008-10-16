@@ -1691,7 +1691,7 @@
 	</class>
 	<class name="com.liferay.wsrp.model.impl.WSRPPortletImpl" table="WSRPPortlet">
 		<cache usage="read-write" />
-		<id name="wsrpPortletId" type="long">
+		<id name="portletId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />

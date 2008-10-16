@@ -52,10 +52,9 @@ public interface WSRPPortletLocalService {
 		com.liferay.wsrp.model.WSRPPortlet wsrpPortlet)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.wsrp.model.WSRPPortlet createWSRPPortlet(
-		long wsrpPortletId);
+	public com.liferay.wsrp.model.WSRPPortlet createWSRPPortlet(long portletId);
 
-	public void deleteWSRPPortlet(long wsrpPortletId)
+	public void deleteWSRPPortlet(long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -71,7 +70,7 @@ public interface WSRPPortletLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.wsrp.model.WSRPPortlet getWSRPPortlet(long wsrpPortletId)
+	public com.liferay.wsrp.model.WSRPPortlet getWSRPPortlet(long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -84,19 +83,19 @@ public interface WSRPPortletLocalService {
 		com.liferay.wsrp.model.WSRPPortlet wsrpPortlet)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.wsrp.model.WSRPPortlet getWSRPPortlet(
+	public com.liferay.wsrp.model.WSRPPortlet getPortlet(
 		java.lang.String portletName)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException;
 
-	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets()
+	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets(
+	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets(
 		java.lang.String producerEntityId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets(
+	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets(
 		java.lang.String producerEntityId, java.lang.String portletHandle)
 		throws com.liferay.portal.SystemException;
 }

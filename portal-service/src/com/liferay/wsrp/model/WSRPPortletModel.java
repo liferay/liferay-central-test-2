@@ -49,9 +49,9 @@ public interface WSRPPortletModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
-	public long getWsrpPortletId();
+	public long getPortletId();
 
-	public void setWsrpPortletId(long wsrpPortletId);
+	public void setPortletId(long portletId);
 
 	public String getName();
 

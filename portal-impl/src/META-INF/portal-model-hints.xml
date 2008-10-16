@@ -1718,7 +1718,7 @@
 		<field name="entityVersion" type="int" />
 	</model>
 	<model name="com.liferay.wsrp.model.WSRPPortlet">
-		<field name="wsrpPortletId" type="long" />
+		<field name="portletId" type="long" />
 		<field name="name" type="String" />
 		<field name="channelName" type="String" />
 		<field name="title" type="String" />

@@ -31,7 +31,7 @@ import com.liferay.wsrp.model.WSRPPortlet;
  *
  */
 public class WSRPPortletImpl
-		extends WSRPPortletModelImpl implements WSRPPortlet {
+	extends WSRPPortletModelImpl implements WSRPPortlet {
 
 	public WSRPPortletImpl() {
 	}

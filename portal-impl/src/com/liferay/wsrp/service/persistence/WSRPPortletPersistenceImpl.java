@@ -59,16 +59,16 @@ import java.util.List;
  */
 public class WSRPPortletPersistenceImpl extends BasePersistenceImpl
 	implements WSRPPortletPersistence {
-	public WSRPPortlet create(long wsrpPortletId) {
+	public WSRPPortlet create(long portletId) {
 		WSRPPortlet wsrpPortlet = new WSRPPortletImpl();
 
 		wsrpPortlet.setNew(true);
-		wsrpPortlet.setPrimaryKey(wsrpPortletId);
+		wsrpPortlet.setPrimaryKey(portletId);
 
 		return wsrpPortlet;
 	}
 
-	public WSRPPortlet remove(long wsrpPortletId)
+	public WSRPPortlet remove(long portletId)
 		throws NoSuchPortletException, SystemException {
 		Session session = null;
 
@@ -76,17 +76,16 @@ public class WSRPPortletPersistenceImpl extends BasePersistenceImpl
 			session = openSession();
 
 			WSRPPortlet wsrpPortlet = (WSRPPortlet)session.get(WSRPPortletImpl.class,
-					new Long(wsrpPortletId));
+					new Long(portletId));
 
 			if (wsrpPortlet == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No WSRPPortlet exists with the primary key " +
-						wsrpPortletId);
+						portletId);
 				}
 
 				throw new NoSuchPortletException(
-					"No WSRPPortlet exists with the primary key " +
-					wsrpPortletId);
+					"No WSRPPortlet exists with the primary key " + portletId);
 			}
 
 			return remove(wsrpPortlet);
@@ -234,24 +233,24 @@ public class WSRPPortletPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WSRPPortlet findByPrimaryKey(long wsrpPortletId)
+	public WSRPPortlet findByPrimaryKey(long portletId)
 		throws NoSuchPortletException, SystemException {
-		WSRPPortlet wsrpPortlet = fetchByPrimaryKey(wsrpPortletId);
+		WSRPPortlet wsrpPortlet = fetchByPrimaryKey(portletId);
 
 		if (wsrpPortlet == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No WSRPPortlet exists with the primary key " +
-					wsrpPortletId);
+					portletId);
 			}
 
 			throw new NoSuchPortletException(
-				"No WSRPPortlet exists with the primary key " + wsrpPortletId);
+				"No WSRPPortlet exists with the primary key " + portletId);
 		}
 
 		return wsrpPortlet;
 	}
 
-	public WSRPPortlet fetchByPrimaryKey(long wsrpPortletId)
+	public WSRPPortlet fetchByPrimaryKey(long portletId)
 		throws SystemException {
 		Session session = null;
 
@@ -259,7 +258,7 @@ public class WSRPPortletPersistenceImpl extends BasePersistenceImpl
 			session = openSession();
 
 			return (WSRPPortlet)session.get(WSRPPortletImpl.class,
-				new Long(wsrpPortletId));
+				new Long(portletId));
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -554,10 +553,10 @@ public class WSRPPortletPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WSRPPortlet[] findByProducerEntityId_PrevAndNext(
-		long wsrpPortletId, String producerEntityId, OrderByComparator obc)
+	public WSRPPortlet[] findByProducerEntityId_PrevAndNext(long portletId,
+		String producerEntityId, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
-		WSRPPortlet wsrpPortlet = findByPrimaryKey(wsrpPortletId);
+		WSRPPortlet wsrpPortlet = findByPrimaryKey(portletId);
 
 		int count = countByProducerEntityId(producerEntityId);
 
@@ -838,10 +837,10 @@ public class WSRPPortletPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WSRPPortlet[] findByP_P_PrevAndNext(long wsrpPortletId,
+	public WSRPPortlet[] findByP_P_PrevAndNext(long portletId,
 		String producerEntityId, String portletHandle, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
-		WSRPPortlet wsrpPortlet = findByPrimaryKey(wsrpPortletId);
+		WSRPPortlet wsrpPortlet = findByPrimaryKey(portletId);
 
 		int count = countByP_P(producerEntityId, portletHandle);
 

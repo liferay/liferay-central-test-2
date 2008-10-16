@@ -87,8 +87,8 @@ public class WSRPPortletPersistenceTest extends BasePersistenceTestCase {
 
 		WSRPPortlet existingWSRPPortlet = _persistence.findByPrimaryKey(newWSRPPortlet.getPrimaryKey());
 
-		assertEquals(existingWSRPPortlet.getWsrpPortletId(),
-			newWSRPPortlet.getWsrpPortletId());
+		assertEquals(existingWSRPPortlet.getPortletId(),
+			newWSRPPortlet.getPortletId());
 		assertEquals(existingWSRPPortlet.getName(), newWSRPPortlet.getName());
 		assertEquals(existingWSRPPortlet.getChannelName(),
 			newWSRPPortlet.getChannelName());

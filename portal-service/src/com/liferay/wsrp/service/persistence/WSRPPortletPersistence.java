@@ -29,9 +29,9 @@ package com.liferay.wsrp.service.persistence;
  *
  */
 public interface WSRPPortletPersistence {
-	public com.liferay.wsrp.model.WSRPPortlet create(long wsrpPortletId);
+	public com.liferay.wsrp.model.WSRPPortlet create(long portletId);
 
-	public com.liferay.wsrp.model.WSRPPortlet remove(long wsrpPortletId)
+	public com.liferay.wsrp.model.WSRPPortlet remove(long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException;
 
@@ -67,13 +67,12 @@ public interface WSRPPortletPersistence {
 		com.liferay.wsrp.model.WSRPPortlet wsrpPortlet, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.wsrp.model.WSRPPortlet findByPrimaryKey(
-		long wsrpPortletId)
+	public com.liferay.wsrp.model.WSRPPortlet findByPrimaryKey(long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException;
 
-	public com.liferay.wsrp.model.WSRPPortlet fetchByPrimaryKey(
-		long wsrpPortletId) throws com.liferay.portal.SystemException;
+	public com.liferay.wsrp.model.WSRPPortlet fetchByPrimaryKey(long portletId)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.wsrp.model.WSRPPortlet findByPortletName(
 		java.lang.String name)
@@ -109,7 +108,7 @@ public interface WSRPPortletPersistence {
 			com.liferay.wsrp.NoSuchPortletException;
 
 	public com.liferay.wsrp.model.WSRPPortlet[] findByProducerEntityId_PrevAndNext(
-		long wsrpPortletId, java.lang.String producerEntityId,
+		long portletId, java.lang.String producerEntityId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException;
@@ -140,7 +139,7 @@ public interface WSRPPortletPersistence {
 			com.liferay.wsrp.NoSuchPortletException;
 
 	public com.liferay.wsrp.model.WSRPPortlet[] findByP_P_PrevAndNext(
-		long wsrpPortletId, java.lang.String producerEntityId,
+		long portletId, java.lang.String producerEntityId,
 		java.lang.String portletHandle,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,

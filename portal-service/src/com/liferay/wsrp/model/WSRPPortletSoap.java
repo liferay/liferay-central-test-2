@@ -49,7 +49,7 @@ public class WSRPPortletSoap implements Serializable {
 	public static WSRPPortletSoap toSoapModel(WSRPPortlet model) {
 		WSRPPortletSoap soapModel = new WSRPPortletSoap();
 
-		soapModel.setWsrpPortletId(model.getWsrpPortletId());
+		soapModel.setPortletId(model.getPortletId());
 		soapModel.setName(model.getName());
 		soapModel.setChannelName(model.getChannelName());
 		soapModel.setTitle(model.getTitle());
@@ -79,19 +79,19 @@ public class WSRPPortletSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _wsrpPortletId;
+		return _portletId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setWsrpPortletId(pk);
+		setPortletId(pk);
 	}
 
-	public long getWsrpPortletId() {
-		return _wsrpPortletId;
+	public long getPortletId() {
+		return _portletId;
 	}
 
-	public void setWsrpPortletId(long wsrpPortletId) {
-		_wsrpPortletId = wsrpPortletId;
+	public void setPortletId(long portletId) {
+		_portletId = portletId;
 	}
 
 	public String getName() {
@@ -182,7 +182,7 @@ public class WSRPPortletSoap implements Serializable {
 		_mimeTypes = mimeTypes;
 	}
 
-	private long _wsrpPortletId;
+	private long _portletId;
 	private String _name;
 	private String _channelName;
 	private String _title;

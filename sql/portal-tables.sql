@@ -1509,7 +1509,7 @@ create table Vocabulary (
 );
 
 create table WSRPPortlet (
-	wsrpPortletId LONG not null primary key,
+	portletId LONG not null primary key,
 	name VARCHAR(75) null,
 	channelName VARCHAR(75) null,
 	title VARCHAR(75) null,

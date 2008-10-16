@@ -52,13 +52,13 @@ public abstract class WSRPPortletLocalServiceBaseImpl
 		return wsrpPortletPersistence.update(wsrpPortlet, false);
 	}
 
-	public WSRPPortlet createWSRPPortlet(long wsrpPortletId) {
-		return wsrpPortletPersistence.create(wsrpPortletId);
+	public WSRPPortlet createWSRPPortlet(long portletId) {
+		return wsrpPortletPersistence.create(portletId);
 	}
 
-	public void deleteWSRPPortlet(long wsrpPortletId)
+	public void deleteWSRPPortlet(long portletId)
 		throws PortalException, SystemException {
-		wsrpPortletPersistence.remove(wsrpPortletId);
+		wsrpPortletPersistence.remove(portletId);
 	}
 
 	public void deleteWSRPPortlet(WSRPPortlet wsrpPortlet)
@@ -77,9 +77,9 @@ public abstract class WSRPPortletLocalServiceBaseImpl
 			end);
 	}
 
-	public WSRPPortlet getWSRPPortlet(long wsrpPortletId)
+	public WSRPPortlet getWSRPPortlet(long portletId)
 		throws PortalException, SystemException {
-		return wsrpPortletPersistence.findByPrimaryKey(wsrpPortletId);
+		return wsrpPortletPersistence.findByPrimaryKey(portletId);
 	}
 
 	public List<WSRPPortlet> getWSRPPortlets(int start, int end)

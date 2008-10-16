@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -41,7 +42,6 @@
 package com.liferay.wsrp.consumer.admin;
 
 import com.liferay.counter.service.CounterServiceUtil;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
@@ -67,7 +67,6 @@ import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
@@ -102,7 +101,6 @@ public class WSRPPersistenceHelper {
 			wsrpPortlet.setName(portlet.getPortletId());
 			wsrpPortlet.setProducerEntityId(
 				portlet.getRemoteProducerEntityId());
-
 			wsrpPortlet.setShortTitle(portletInfo.getShortTitle());
 			wsrpPortlet.setStatus(portlet.isActive() ? 1 : 0);
 			wsrpPortlet.setTitle(portletInfo.getTitle());
@@ -124,13 +122,12 @@ public class WSRPPersistenceHelper {
 				mimeHolder.getMimeType().add(mimeTypeModel);
 			}
 
-			wsrpPortlet.setMimeTypes(marshalMimeTypes(mimeHolder));
+			wsrpPortlet.setMimeTypes(_marshalMimeTypes(mimeHolder));
 
 			WSRPPortletLocalServiceUtil.updateWSRPPortlet(wsrpPortlet);
-
 		}
-		catch (SystemException ex) {
-			throw new WSRPConsumerException(ex.getMessage(), ex);
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage(), e);
 		}
 	}
 
@@ -138,22 +135,20 @@ public class WSRPPersistenceHelper {
 		throws WSRPConsumerException {
 
 		try {
-			WSRPPortlet wsrpPortlet =
-				WSRPPortletLocalServiceUtil.getWSRPPortlet(
-					portlet.getPortletId());
+			WSRPPortlet wsrpPortlet = WSRPPortletLocalServiceUtil.getPortlet(
+				portlet.getPortletId());
 
 			WSRPPortletLocalServiceUtil.deleteWSRPPortlet(wsrpPortlet);
-
 		}
-		catch (Exception ex) {
-			throw new WSRPConsumerException(ex.getMessage(), ex);
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage(), e);
 		}
 	}
 
 	public List<Portlet> getWSRPPortlets() throws WSRPConsumerException {
 		try {
 			List<WSRPPortlet> wsrpPortlets =
-				WSRPPortletLocalServiceUtil.getWSRPPortlets();
+				WSRPPortletLocalServiceUtil.getPortlets();
 
 			if ((wsrpPortlets == null) || (wsrpPortlets.size() == 0)) {
 				return Collections.EMPTY_LIST;
@@ -162,11 +157,11 @@ public class WSRPPersistenceHelper {
 			List<Portlet> portlets = new ArrayList<Portlet>();
 
 			for (WSRPPortlet wsrpPortlet : wsrpPortlets) {
-				String portletId =
-					PortalUtil.getJsSafePortletId(wsrpPortlet.getName());
+				String portletId = PortalUtil.getJsSafePortletId(
+					wsrpPortlet.getName());
 
-				Portlet portlet =
-					new PortletImpl(CompanyConstants.SYSTEM, portletId);
+				Portlet portlet = new PortletImpl(
+					CompanyConstants.SYSTEM, portletId);
 
 				portlet.setPortletId(portletId);
 				portlet.setTimestamp(System.currentTimeMillis());
@@ -181,8 +176,8 @@ public class WSRPPersistenceHelper {
 				portlet.setRemotePortletHandle(wsrpPortlet.getPortletHandle());
 				portlet.setRemotePortletId(wsrpPortlet.getPortletHandle());
 
-				MimeTypes mimeTypes =
-					unmarshallMimeTypes(wsrpPortlet.getMimeTypes());
+				MimeTypes mimeTypes = _unmarshallMimeTypes(
+					wsrpPortlet.getMimeTypes());
 
 				List<MimeType> mimes = mimeTypes.getMimeType();
 
@@ -190,8 +185,8 @@ public class WSRPPersistenceHelper {
 					new HashMap<String, Set<String>>();
 
 				for (MimeType mimeType : mimes) {
-					Set<String> modes =
-						new HashSet<String>(mimeType.getModes());
+					Set<String> modes = new HashSet<String>(
+						mimeType.getModes());
 
 					portletModes.put(mimeType.getMime(), modes);
 				}
@@ -199,8 +194,8 @@ public class WSRPPersistenceHelper {
 				portlet.setPortletModes(portletModes);
 
 				PortletInfo portletInfo = new PortletInfo(
-						wsrpPortlet.getTitle(), wsrpPortlet.getShortTitle(),
-						wsrpPortlet.getKeywords());
+					wsrpPortlet.getTitle(), wsrpPortlet.getShortTitle(),
+					wsrpPortlet.getKeywords());
 
 				portlet.setPortletInfo(portletInfo);
 
@@ -208,10 +203,9 @@ public class WSRPPersistenceHelper {
 			}
 
 			return portlets;
-
 		}
-		catch (SystemException ex) {
-			throw new WSRPConsumerException(ex.getMessage(), ex);
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage(), e);
 		}
 	}
 
@@ -219,10 +213,8 @@ public class WSRPPersistenceHelper {
 		throws WSRPConsumerException {
 
 		try {
-
-			WSRPPortlet wsrpPortlet =
-				WSRPPortletLocalServiceUtil.getWSRPPortlet(
-					portlet.getPortletId());
+			WSRPPortlet wsrpPortlet = WSRPPortletLocalServiceUtil.getPortlet(
+				portlet.getPortletId());
 
 			PortletInfo portletInfo = portlet.getPortletInfo();
 
@@ -234,7 +226,6 @@ public class WSRPPersistenceHelper {
 			wsrpPortlet.setName(portlet.getPortletId());
 			wsrpPortlet.setProducerEntityId(
 				portlet.getRemoteProducerEntityId());
-
 			wsrpPortlet.setShortTitle(portletInfo.getShortTitle());
 			wsrpPortlet.setStatus(portlet.isActive() ? 1 : 0);
 			wsrpPortlet.setTitle(portletInfo.getTitle());
@@ -252,54 +243,16 @@ public class WSRPPersistenceHelper {
 
 				mimeTypeModel.setMime(mimeType);
 				mimeTypeModel.getModes().addAll(mimeTypeModes);
+
 				mimeHolder.getMimeType().add(mimeTypeModel);
 			}
 
-			wsrpPortlet.setMimeTypes(marshalMimeTypes(mimeHolder));
+			wsrpPortlet.setMimeTypes(_marshalMimeTypes(mimeHolder));
 
 			WSRPPortletLocalServiceUtil.updateWSRPPortlet(wsrpPortlet);
-
 		}
-		catch (Exception ex) {
-			throw new WSRPConsumerException(ex.getMessage(), ex);
-		}
-	}
-
-	private String marshalMimeTypes(MimeTypes mimeTypes)
-		throws WSRPConsumerException {
-
-		try {
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-			JAXBElement<MimeTypes> rootElement =
-				_objectFactory.createMimeTypes(mimeTypes);
-
-			_marshaller.marshal(rootElement, outputStream);
-
-			return new String(outputStream.toByteArray());
-
-		}
-		catch (JAXBException ex) {
-			throw new WSRPConsumerException(ex.getMessage(), ex);
-		}
-	}
-
-	private MimeTypes unmarshallMimeTypes(String mimeString)
-		throws WSRPConsumerException {
-
-		try {
-			ByteArrayInputStream inputStream =
-				new ByteArrayInputStream(mimeString.getBytes());
-
-			JAXBElement<MimeTypes> rootElement =
-				(JAXBElement<MimeTypes>)
-					_unmarshaller.unmarshal(inputStream);
-
-			return rootElement.getValue();
-
-		}
-		catch (JAXBException ex) {
-			throw new WSRPConsumerException(ex.getMessage(), ex);
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage(), e);
 		}
 	}
 
@@ -322,10 +275,44 @@ public class WSRPPersistenceHelper {
 			String wsrpDataDir = WSRPConfig.getWSRPDataDirectory();
 
 			FileUtil.mkdirs(wsrpDataDir);
-
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+	}
+
+	private String _marshalMimeTypes(MimeTypes mimeTypes)
+		throws WSRPConsumerException {
+
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+			JAXBElement<MimeTypes> element = _objectFactory.createMimeTypes(
+				mimeTypes);
+
+			_marshaller.marshal(element, baos);
+
+			return new String(baos.toByteArray());
+		}
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage(), e);
+		}
+	}
+
+	private MimeTypes _unmarshallMimeTypes(String mimeString)
+		throws WSRPConsumerException {
+
+		try {
+			ByteArrayInputStream bais = new ByteArrayInputStream(
+				mimeString.getBytes());
+
+			JAXBElement<MimeTypes> element =
+				(JAXBElement<MimeTypes>)_unmarshaller.unmarshal(bais);
+
+			return element.getValue();
+		}
+		catch (Exception e) {
+			throw new WSRPConsumerException(e.getMessage(), e);
 		}
 	}
 

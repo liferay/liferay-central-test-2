@@ -65,7 +65,7 @@ import java.util.List;
 public class WSRPPortletModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "WSRPPortlet";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "wsrpPortletId", new Integer(Types.BIGINT) },
+			{ "portletId", new Integer(Types.BIGINT) },
 			
 
 			{ "name", new Integer(Types.VARCHAR) },
@@ -100,7 +100,7 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 
 			{ "mimeTypes", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WSRPPortlet (wsrpPortletId LONG not null primary key,name VARCHAR(75) null,channelName VARCHAR(75) null,title VARCHAR(75) null,shortTitle VARCHAR(75) null,displayName VARCHAR(75) null,keywords VARCHAR(75) null,status INTEGER,producerEntityId VARCHAR(75) null,consumerId VARCHAR(75) null,portletHandle VARCHAR(75) null,mimeTypes STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table WSRPPortlet (portletId LONG not null primary key,name VARCHAR(75) null,channelName VARCHAR(75) null,title VARCHAR(75) null,shortTitle VARCHAR(75) null,displayName VARCHAR(75) null,keywords VARCHAR(75) null,status INTEGER,producerEntityId VARCHAR(75) null,consumerId VARCHAR(75) null,portletHandle VARCHAR(75) null,mimeTypes STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table WSRPPortlet";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -112,7 +112,7 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 	public static WSRPPortlet toModel(WSRPPortletSoap soapModel) {
 		WSRPPortlet model = new WSRPPortletImpl();
 
-		model.setWsrpPortletId(soapModel.getWsrpPortletId());
+		model.setPortletId(soapModel.getPortletId());
 		model.setName(soapModel.getName());
 		model.setChannelName(soapModel.getChannelName());
 		model.setTitle(soapModel.getTitle());
@@ -145,24 +145,24 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 	}
 
 	public long getPrimaryKey() {
-		return _wsrpPortletId;
+		return _portletId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setWsrpPortletId(pk);
+		setPortletId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_wsrpPortletId);
+		return new Long(_portletId);
 	}
 
-	public long getWsrpPortletId() {
-		return _wsrpPortletId;
+	public long getPortletId() {
+		return _portletId;
 	}
 
-	public void setWsrpPortletId(long wsrpPortletId) {
-		if (wsrpPortletId != _wsrpPortletId) {
-			_wsrpPortletId = wsrpPortletId;
+	public void setPortletId(long portletId) {
+		if (portletId != _portletId) {
+			_portletId = portletId;
 		}
 	}
 
@@ -314,7 +314,7 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
-			model.setWsrpPortletId(getWsrpPortletId());
+			model.setPortletId(getPortletId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setChannelName(HtmlUtil.escape(getChannelName()));
 			model.setTitle(HtmlUtil.escape(getTitle()));
@@ -347,7 +347,7 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 	public Object clone() {
 		WSRPPortletImpl clone = new WSRPPortletImpl();
 
-		clone.setWsrpPortletId(getWsrpPortletId());
+		clone.setPortletId(getPortletId());
 		clone.setName(getName());
 		clone.setChannelName(getChannelName());
 		clone.setTitle(getTitle());
@@ -411,7 +411,7 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
-	private long _wsrpPortletId;
+	private long _portletId;
 	private String _name;
 	private String _channelName;
 	private String _title;
