@@ -29,7 +29,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 

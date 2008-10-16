@@ -33,7 +33,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.AnnouncementsEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 

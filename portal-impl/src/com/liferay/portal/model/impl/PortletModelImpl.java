@@ -29,7 +29,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 

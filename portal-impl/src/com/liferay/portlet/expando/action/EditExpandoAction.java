@@ -42,8 +42,8 @@ import com.liferay.portlet.expando.DuplicateColumnNameException;
 import com.liferay.portlet.expando.NoSuchColumnException;
 import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 
 import java.util.ArrayList;
