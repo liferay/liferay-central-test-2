@@ -17,6 +17,12 @@
 		<column name="defaultData" type="String" />
 		<column name="typeSettings" type="String" />
 
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
 		<!-- Finder methods -->
 
 		<finder name="TableId" return-type="Collection">

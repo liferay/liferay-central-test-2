@@ -242,17 +242,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 
 		ExpandoColumnImpl expandoColumn = (ExpandoColumnImpl)obj;
 
-		long pk = expandoColumn.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < pk) {
-			return -1;
+		value = getName().compareTo(expandoColumn.getName());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > pk) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	public boolean equals(Object obj) {
