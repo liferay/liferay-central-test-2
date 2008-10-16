@@ -64,7 +64,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Query: " + query);
+			_log.debug("Query " + query);
 		}
 
 		Hits hits = null;
@@ -129,8 +129,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("search found " + hits.getLength() + " results in " +
-				hits.getSearchTime() + "ms");
+			_log.debug(
+				"Search found " + hits.getLength() + " results in " +
+					hits.getSearchTime() + "ms");
 		}
 
 		return hits;

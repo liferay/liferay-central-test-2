@@ -56,7 +56,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 			writer.addDocument(_getLuceneDocument(doc));
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("wrote document " + doc.get(Field.UID));
+				_log.debug("Wrote document " + doc.get(Field.UID));
 			}
 		}
 		catch (IOException ioe) {
@@ -76,7 +76,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 			LuceneUtil.deleteDocuments(companyId, new Term(Field.UID, uid));
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("deleted document " + uid);
+				_log.debug("Deleted document " + uid);
 			}
 		}
 		catch (IOException ioe) {
