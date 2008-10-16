@@ -53,6 +53,10 @@ public interface ExpandoBridge {
 
 	public int getAttributeType(String name);
 
+	public String getClassName();
+
+	public long getClassPK();
+
 	public void setAttribute(String name, Object value);
 
 	public void setAttributeDefault(String name, Object defaultValue);
