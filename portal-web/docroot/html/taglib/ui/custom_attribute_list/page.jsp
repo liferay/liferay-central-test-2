@@ -43,9 +43,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
 
-Enumeration<String> attributeNames = expandoBridge.getAttributeNames();
+List<String> attributeNamesList = Collections.list(expandoBridge.getAttributeNames());
 
-for (String attributeName : attributeNames) {
+for (String attributeName : attributeNamesList) {
 %>
 
 	<div class="ctrl-holder">
