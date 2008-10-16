@@ -1717,4 +1717,20 @@
 		<field name="sdLastModified" type="long" />
 		<field name="entityVersion" type="int" />
 	</model>
+	<model name="com.liferay.wsrp.model.WSRPPortlet">
+		<field name="wsrpPortletId" type="long" />
+		<field name="name" type="String" />
+		<field name="channelName" type="String" />
+		<field name="title" type="String" />
+		<field name="shortTitle" type="String" />
+		<field name="displayName" type="String" />
+		<field name="keywords" type="String" />
+		<field name="status" type="int" />
+		<field name="producerEntityId" type="String" />
+		<field name="consumerId" type="String" />
+		<field name="portletHandle" type="String" />
+		<field name="mimeTypes" type="String">
+			<hint-collection name="URL" />
+		</field>
+	</model>
 </model-hints>

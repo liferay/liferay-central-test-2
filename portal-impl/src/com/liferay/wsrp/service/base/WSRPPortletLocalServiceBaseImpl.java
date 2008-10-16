@@ -29,7 +29,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
-import com.liferay.wsrp.model.WSRPConfiguredProducer;
+import com.liferay.wsrp.model.WSRPPortlet;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalService;
 import com.liferay.wsrp.service.WSRPPortletLocalService;
 import com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence;
@@ -38,70 +38,64 @@ import com.liferay.wsrp.service.persistence.WSRPPortletPersistence;
 import java.util.List;
 
 /**
- * <a href="WSRPConfiguredProducerLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WSRPPortletLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class WSRPConfiguredProducerLocalServiceBaseImpl
-	implements WSRPConfiguredProducerLocalService {
-	public WSRPConfiguredProducer addWSRPConfiguredProducer(
-		WSRPConfiguredProducer wsrpConfiguredProducer)
+public abstract class WSRPPortletLocalServiceBaseImpl
+	implements WSRPPortletLocalService {
+	public WSRPPortlet addWSRPPortlet(WSRPPortlet wsrpPortlet)
 		throws SystemException {
-		wsrpConfiguredProducer.setNew(true);
+		wsrpPortlet.setNew(true);
 
-		return wsrpConfiguredProducerPersistence.update(wsrpConfiguredProducer,
-			false);
+		return wsrpPortletPersistence.update(wsrpPortlet, false);
 	}
 
-	public WSRPConfiguredProducer createWSRPConfiguredProducer(
-		long configuredProducerId) {
-		return wsrpConfiguredProducerPersistence.create(configuredProducerId);
+	public WSRPPortlet createWSRPPortlet(long wsrpPortletId) {
+		return wsrpPortletPersistence.create(wsrpPortletId);
 	}
 
-	public void deleteWSRPConfiguredProducer(long configuredProducerId)
+	public void deleteWSRPPortlet(long wsrpPortletId)
 		throws PortalException, SystemException {
-		wsrpConfiguredProducerPersistence.remove(configuredProducerId);
+		wsrpPortletPersistence.remove(wsrpPortletId);
 	}
 
-	public void deleteWSRPConfiguredProducer(
-		WSRPConfiguredProducer wsrpConfiguredProducer)
+	public void deleteWSRPPortlet(WSRPPortlet wsrpPortlet)
 		throws SystemException {
-		wsrpConfiguredProducerPersistence.remove(wsrpConfiguredProducer);
+		wsrpPortletPersistence.remove(wsrpPortlet);
 	}
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return wsrpConfiguredProducerPersistence.findWithDynamicQuery(dynamicQuery);
+		return wsrpPortletPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
-		return wsrpConfiguredProducerPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+		return wsrpPortletPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
-	public WSRPConfiguredProducer getWSRPConfiguredProducer(
-		long configuredProducerId) throws PortalException, SystemException {
-		return wsrpConfiguredProducerPersistence.findByPrimaryKey(configuredProducerId);
+	public WSRPPortlet getWSRPPortlet(long wsrpPortletId)
+		throws PortalException, SystemException {
+		return wsrpPortletPersistence.findByPrimaryKey(wsrpPortletId);
 	}
 
-	public List<WSRPConfiguredProducer> getWSRPConfiguredProducers(int start,
-		int end) throws SystemException {
-		return wsrpConfiguredProducerPersistence.findAll(start, end);
-	}
-
-	public int getWSRPConfiguredProducersCount() throws SystemException {
-		return wsrpConfiguredProducerPersistence.countAll();
-	}
-
-	public WSRPConfiguredProducer updateWSRPConfiguredProducer(
-		WSRPConfiguredProducer wsrpConfiguredProducer)
+	public List<WSRPPortlet> getWSRPPortlets(int start, int end)
 		throws SystemException {
-		wsrpConfiguredProducer.setNew(false);
+		return wsrpPortletPersistence.findAll(start, end);
+	}
 
-		return wsrpConfiguredProducerPersistence.update(wsrpConfiguredProducer,
-			true);
+	public int getWSRPPortletsCount() throws SystemException {
+		return wsrpPortletPersistence.countAll();
+	}
+
+	public WSRPPortlet updateWSRPPortlet(WSRPPortlet wsrpPortlet)
+		throws SystemException {
+		wsrpPortlet.setNew(false);
+
+		return wsrpPortletPersistence.update(wsrpPortlet, true);
 	}
 
 	public WSRPConfiguredProducerLocalService getWSRPConfiguredProducerLocalService() {

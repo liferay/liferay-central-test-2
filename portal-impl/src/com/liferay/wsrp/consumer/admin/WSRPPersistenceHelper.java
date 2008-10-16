@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -41,28 +40,27 @@
 
 package com.liferay.wsrp.consumer.admin;
 
+import com.liferay.counter.service.CounterServiceUtil;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.wsrp.model.WSRPPortlet;
+import com.liferay.wsrp.service.WSRPPortletLocalServiceUtil;
 
 import com.sun.portal.wsrp.common.WSRPConfig;
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -89,231 +87,220 @@ public class WSRPPersistenceHelper {
 	}
 
 	public void addWSRPPortlet(Portlet portlet) throws WSRPConsumerException {
-		WSRPPortlet wsrpPortlet = new WSRPPortlet();
+		try {
+			WSRPPortlet wsrpPortlet =
+				WSRPPortletLocalServiceUtil.createWSRPPortlet(
+					CounterServiceUtil.increment());
 
-		PortletInfo portletInfo = portlet.getPortletInfo();
+			PortletInfo portletInfo = portlet.getPortletInfo();
 
-		wsrpPortlet.setChannelName(portlet.getPortletId());
-		wsrpPortlet.setConsumerId(portlet.getRemoteConsumerId());
-		wsrpPortlet.setDisplayName(portlet.getDisplayName());
-		wsrpPortlet.setKeywords(portletInfo.getKeywords());
-		wsrpPortlet.setPortletHandle(portlet.getRemotePortletHandle());
-		wsrpPortlet.setPortletId(portlet.getPortletId());
-		wsrpPortlet.setProducerEntityId(portlet.getRemoteProducerEntityId());
-		wsrpPortlet.setShortTitle(portletInfo.getShortTitle());
-		wsrpPortlet.setStatus(portlet.isActive());
-		wsrpPortlet.setTitle(portletInfo.getTitle());
+			wsrpPortlet.setChannelName(portlet.getPortletId());
+			wsrpPortlet.setConsumerId(portlet.getRemoteConsumerId());
+			wsrpPortlet.setDisplayName(portlet.getDisplayName());
+			wsrpPortlet.setKeywords(portletInfo.getKeywords());
+			wsrpPortlet.setPortletHandle(portlet.getRemotePortletHandle());
+			wsrpPortlet.setName(portlet.getPortletId());
+			wsrpPortlet.setProducerEntityId(
+				portlet.getRemoteProducerEntityId());
 
-		Map<String, Set<String>> portletModes = portlet.getPortletModes();
+			wsrpPortlet.setShortTitle(portletInfo.getShortTitle());
+			wsrpPortlet.setStatus(portlet.isActive() ? 1 : 0);
+			wsrpPortlet.setTitle(portletInfo.getTitle());
 
-		Set<String> mimeTypes = portletModes.keySet();
+			Map<String, Set<String>> portletModes = portlet.getPortletModes();
 
-		for (String mimeType : mimeTypes) {
-			Set<String> mimeTypeModes = portletModes.get(mimeType);
+			Set<String> mimeTypes = portletModes.keySet();
 
-			MimeType mimeTypeModel = new MimeType();
+			MimeTypes mimeHolder = new MimeTypes();
 
-			mimeTypeModel.setMime(mimeType);
-			mimeTypeModel.getModes().addAll(mimeTypeModes);
+			for (String mimeType : mimeTypes) {
+				Set<String> mimeTypeModes = portletModes.get(mimeType);
 
-			wsrpPortlet.getMimeTypes().add(mimeTypeModel);
+				MimeType mimeTypeModel = new MimeType();
+
+				mimeTypeModel.setMime(mimeType);
+				mimeTypeModel.getModes().addAll(mimeTypeModes);
+
+				mimeHolder.getMimeType().add(mimeTypeModel);
+			}
+
+			wsrpPortlet.setMimeTypes(marshalMimeTypes(mimeHolder));
+
+			WSRPPortletLocalServiceUtil.updateWSRPPortlet(wsrpPortlet);
+
 		}
-
-		WSRPPortlets rootNode = getRootNode();
-
-		updatePortlet(rootNode, wsrpPortlet);
+		catch (SystemException ex) {
+			throw new WSRPConsumerException(ex.getMessage(), ex);
+		}
 	}
 
 	public void deleteWSRPPortlet(Portlet portlet)
 		throws WSRPConsumerException {
 
-		WSRPPortlets rootNode = getRootNode();
+		try {
+			WSRPPortlet wsrpPortlet =
+				WSRPPortletLocalServiceUtil.getWSRPPortlet(
+					portlet.getPortletId());
 
-		if (rootNode == null) {
-			return;
+			WSRPPortletLocalServiceUtil.deleteWSRPPortlet(wsrpPortlet);
+
 		}
-
-		Iterator<WSRPPortlet> itr = rootNode.getWSRPPortlet().iterator();
-
-		while (itr.hasNext()) {
-			WSRPPortlet wsrpPortlet = itr.next();
-
-			if (portlet.getPortletId().equals(wsrpPortlet.getChannelName())) {
-				itr.remove();
-
-				break;
-			}
+		catch (Exception ex) {
+			throw new WSRPConsumerException(ex.getMessage(), ex);
 		}
-
-		persistWSRPPortlets(rootNode);
 	}
 
 	public List<Portlet> getWSRPPortlets() throws WSRPConsumerException {
-		WSRPPortlets rootNode = getRootNode();
+		try {
+			List<WSRPPortlet> wsrpPortlets =
+				WSRPPortletLocalServiceUtil.getWSRPPortlets();
 
-		if ((rootNode == null) || (rootNode.getWSRPPortlet().size() == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Portlet> portlets = new ArrayList<Portlet>();
-
-		List<WSRPPortlet> wsrpPortlets = rootNode.getWSRPPortlet();
-
-		for (WSRPPortlet wsrpPortlet : wsrpPortlets) {
-			String portletId = PortalUtil.getJsSafePortletId(
-					wsrpPortlet.getPortletId());
-
-			Portlet portlet = new PortletImpl(
-				CompanyConstants.SYSTEM, portletId);
-
-			portlet.setPortletId(portletId);
-			portlet.setTimestamp(System.currentTimeMillis());
-			portlet.setPortletName(portletId);
-			portlet.setInstanceable(true);
-			portlet.setActive(true);
-			portlet.setRemote(true);
-			portlet.setRemoteConsumerId(wsrpPortlet.getConsumerId());
-			portlet.setRemoteProducerEntityId(
-				wsrpPortlet.getProducerEntityId());
-			portlet.setRemotePortletHandle(wsrpPortlet.getPortletHandle());
-			portlet.setRemotePortletId(wsrpPortlet.getPortletHandle());
-
-			List<MimeType> mimeTypes = wsrpPortlet.getMimeTypes();
-
-			Map<String, Set<String>> portletModes =
-				new HashMap<String, Set<String>>();
-
-			for (MimeType mimeType : mimeTypes) {
-				Set<String> modes = new HashSet<String>(mimeType.getModes());
-				portletModes.put(mimeType.getMime(), modes);
+			if ((wsrpPortlets == null) || (wsrpPortlets.size() == 0)) {
+				return Collections.EMPTY_LIST;
 			}
 
-			portlet.setPortletModes(portletModes);
+			List<Portlet> portlets = new ArrayList<Portlet>();
 
-			PortletInfo portletInfo = new PortletInfo(
-				wsrpPortlet.getTitle(), wsrpPortlet.getShortTitle(),
-				wsrpPortlet.getKeywords());
+			for (WSRPPortlet wsrpPortlet : wsrpPortlets) {
+				String portletId =
+					PortalUtil.getJsSafePortletId(wsrpPortlet.getName());
 
-			portlet.setPortletInfo(portletInfo);
+				Portlet portlet =
+					new PortletImpl(CompanyConstants.SYSTEM, portletId);
 
-			portlets.add(portlet);
+				portlet.setPortletId(portletId);
+				portlet.setTimestamp(System.currentTimeMillis());
+				portlet.setPortletName(portletId);
+				portlet.setInstanceable(true);
+				portlet.setActive(true);
+				portlet.setRemote(true);
+				portlet.setRemoteConsumerId(wsrpPortlet.getConsumerId());
+				portlet.setRemoteProducerEntityId(
+					wsrpPortlet.getProducerEntityId());
+
+				portlet.setRemotePortletHandle(wsrpPortlet.getPortletHandle());
+				portlet.setRemotePortletId(wsrpPortlet.getPortletHandle());
+
+				MimeTypes mimeTypes =
+					unmarshallMimeTypes(wsrpPortlet.getMimeTypes());
+
+				List<MimeType> mimes = mimeTypes.getMimeType();
+
+				Map<String, Set<String>> portletModes =
+					new HashMap<String, Set<String>>();
+
+				for (MimeType mimeType : mimes) {
+					Set<String> modes =
+						new HashSet<String>(mimeType.getModes());
+
+					portletModes.put(mimeType.getMime(), modes);
+				}
+
+				portlet.setPortletModes(portletModes);
+
+				PortletInfo portletInfo = new PortletInfo(
+						wsrpPortlet.getTitle(), wsrpPortlet.getShortTitle(),
+						wsrpPortlet.getKeywords());
+
+				portlet.setPortletInfo(portletInfo);
+
+				portlets.add(portlet);
+			}
+
+			return portlets;
+
 		}
-
-		return portlets;
+		catch (SystemException ex) {
+			throw new WSRPConsumerException(ex.getMessage(), ex);
+		}
 	}
 
 	public void updateWSRPPortlet(Portlet portlet)
 		throws WSRPConsumerException {
 
-		addWSRPPortlet(portlet);
-	}
+		try {
 
-	protected synchronized WSRPPortlets getRootNode()
-		throws WSRPConsumerException {
+			WSRPPortlet wsrpPortlet =
+				WSRPPortletLocalServiceUtil.getWSRPPortlet(
+					portlet.getPortletId());
 
-		synchronized (this) {
-			if (_wsrpPortlets == null || !_dirty) {
-				FileInputStream fis = null;
+			PortletInfo portletInfo = portlet.getPortletInfo();
 
-				try {
-					File wsrpPortletsFile = new File(_wsrpPortletsFileName);
+			wsrpPortlet.setChannelName(portlet.getPortletId());
+			wsrpPortlet.setConsumerId(portlet.getRemoteConsumerId());
+			wsrpPortlet.setDisplayName(portlet.getDisplayName());
+			wsrpPortlet.setKeywords(portletInfo.getKeywords());
+			wsrpPortlet.setPortletHandle(portlet.getRemotePortletHandle());
+			wsrpPortlet.setName(portlet.getPortletId());
+			wsrpPortlet.setProducerEntityId(
+				portlet.getRemoteProducerEntityId());
 
-					if (wsrpPortletsFile.length() == 0) {
-						return _objectFactory.createWSRPPortlets();
-					}
-					else {
-						fis = new FileInputStream(_wsrpPortletsFileName);
+			wsrpPortlet.setShortTitle(portletInfo.getShortTitle());
+			wsrpPortlet.setStatus(portlet.isActive() ? 1 : 0);
+			wsrpPortlet.setTitle(portletInfo.getTitle());
 
-						JAXBElement<WSRPPortlets> rootElement =
-							(JAXBElement<WSRPPortlets>)_unmarshaller.unmarshal(
-								fis);
+			Map<String, Set<String>> portletModes = portlet.getPortletModes();
 
-						_wsrpPortlets = rootElement.getValue();
-					}
-				}
-				catch (Exception e) {
-					throw new WSRPConsumerException(e.getMessage(), e);
-				}
-				finally {
-					if (fis != null) {
-						try {
-							fis.close();
-						}
-						catch (IOException ioe) {
-						}
-					}
-				}
+			Set<String> mimeTypes = portletModes.keySet();
 
-				_dirty = true;
+			MimeTypes mimeHolder = new MimeTypes();
+
+			for (String mimeType : mimeTypes) {
+				Set<String> mimeTypeModes = portletModes.get(mimeType);
+
+				MimeType mimeTypeModel = new MimeType();
+
+				mimeTypeModel.setMime(mimeType);
+				mimeTypeModel.getModes().addAll(mimeTypeModes);
+				mimeHolder.getMimeType().add(mimeTypeModel);
 			}
-		}
 
-		return _wsrpPortlets;
+			wsrpPortlet.setMimeTypes(marshalMimeTypes(mimeHolder));
+
+			WSRPPortletLocalServiceUtil.updateWSRPPortlet(wsrpPortlet);
+
+		}
+		catch (Exception ex) {
+			throw new WSRPConsumerException(ex.getMessage(), ex);
+		}
 	}
 
-	protected synchronized void persistWSRPPortlets(WSRPPortlets wsrpPortlets)
+	private String marshalMimeTypes(MimeTypes mimeTypes)
 		throws WSRPConsumerException {
-
-		FileOutputStream fos = null;
 
 		try {
-			synchronized (this) {
-				fos = new FileOutputStream(_wsrpPortletsFileName);
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-				JAXBElement<WSRPPortlets> rootElement =
-					_objectFactory.createWSRPPortlets(wsrpPortlets);
+			JAXBElement<MimeTypes> rootElement =
+				_objectFactory.createMimeTypes(mimeTypes);
 
-				_marshaller.marshal(rootElement, fos);
+			_marshaller.marshal(rootElement, outputStream);
 
-				_dirty = false;
-			}
+			return new String(outputStream.toByteArray());
+
 		}
-		catch (FileNotFoundException fnfe) {
-			_log.error(fnfe, fnfe);
-
-			throw new WSRPConsumerException(fnfe.getMessage(), fnfe);
-		}
-		catch (JAXBException jaxbe) {
-			_log.error(jaxbe, jaxbe);
-
-			throw new WSRPConsumerException(jaxbe.getMessage(), jaxbe);
-		}
-		finally {
-			if (fos != null) {
-				try {
-					fos.close();
-				}
-				catch (IOException ioe) {
-				}
-			}
+		catch (JAXBException ex) {
+			throw new WSRPConsumerException(ex.getMessage(), ex);
 		}
 	}
 
-	protected void updatePortlet(
-			WSRPPortlets wsrpPortlets, WSRPPortlet wsrpPortlet)
+	private MimeTypes unmarshallMimeTypes(String mimeString)
 		throws WSRPConsumerException {
 
-		if (wsrpPortlets == null) {
-			return;
+		try {
+			ByteArrayInputStream inputStream =
+				new ByteArrayInputStream(mimeString.getBytes());
+
+			JAXBElement<MimeTypes> rootElement =
+				(JAXBElement<MimeTypes>)
+					_unmarshaller.unmarshal(inputStream);
+
+			return rootElement.getValue();
+
 		}
-
-		Iterator<WSRPPortlet> itr = wsrpPortlets.getWSRPPortlet().iterator();
-
-		while (itr.hasNext()) {
-			WSRPPortlet curWSRPPortlet = itr.next();
-
-			if (curWSRPPortlet.getChannelName().equals(
-					wsrpPortlet.getChannelName())) {
-
-				itr.remove();
-
-				break;
-			}
+		catch (JAXBException ex) {
+			throw new WSRPConsumerException(ex.getMessage(), ex);
 		}
-
-		wsrpPortlets.getWSRPPortlet().add(wsrpPortlet);
-
-		persistWSRPPortlets(wsrpPortlets);
 	}
 
 	private WSRPPersistenceHelper() {
@@ -336,23 +323,6 @@ public class WSRPPersistenceHelper {
 
 			FileUtil.mkdirs(wsrpDataDir);
 
-			File wsrpConsumerFile = new File(wsrpDataDir + "/consumer.xml");
-
-			if (!wsrpConsumerFile.exists()) {
-				FileUtil.write(
-					wsrpConsumerFile,
-					StringUtil.read(
-						classLoader,
-						"com/liferay/wsrp/consumer/data/consumer.xml"));
-			}
-
-			_wsrpPortletsFileName = wsrpDataDir + "/wsrpportlets.xml";
-
-			File wsrpPortletsFile = new File(_wsrpPortletsFileName);
-
-			if (!wsrpPortletsFile.exists()) {
-				wsrpPortletsFile.createNewFile();
-			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -368,8 +338,5 @@ public class WSRPPersistenceHelper {
 	private Marshaller _marshaller;
 	private Unmarshaller _unmarshaller;
 	private ObjectFactory _objectFactory;
-	private String _wsrpPortletsFileName;
-	private boolean _dirty;
-	private WSRPPortlets _wsrpPortlets;
 
 }

@@ -1508,6 +1508,21 @@ create table Vocabulary (
 	folksonomy BOOLEAN
 );
 
+create table WSRPPortlet (
+	wsrpPortletId LONG not null primary key,
+	name VARCHAR(75) null,
+	channelName VARCHAR(75) null,
+	title VARCHAR(75) null,
+	shortTitle VARCHAR(75) null,
+	displayName VARCHAR(75) null,
+	keywords VARCHAR(75) null,
+	status INTEGER,
+	producerEntityId VARCHAR(75) null,
+	consumerId VARCHAR(75) null,
+	portletHandle VARCHAR(75) null,
+	mimeTypes STRING null
+);
+
 create table WebDAVProps (
 	webDavPropsId LONG not null primary key,
 	companyId LONG,

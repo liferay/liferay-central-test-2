@@ -468,6 +468,10 @@ create index LIFERAY_003 on Users_Permissions (permissionId);
 
 create index IX_D571A4A0 on WSRPConfiguredProducer (portalId, namespace);
 
+create index IX_C9AAD85 on WSRPPortlet (name);
+create index IX_806BDBCA on WSRPPortlet (producerEntityId);
+create index IX_80290BE8 on WSRPPortlet (producerEntityId, portletHandle);
+
 create index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 
 create index IX_96F07007 on Website (companyId);

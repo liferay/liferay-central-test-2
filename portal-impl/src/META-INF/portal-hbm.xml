@@ -1689,4 +1689,21 @@
 		<property name="sdLastModified" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="entityVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.wsrp.model.impl.WSRPPortletImpl" table="WSRPPortlet">
+		<cache usage="read-write" />
+		<id name="wsrpPortletId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="channelName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shortTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="displayName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="producerEntityId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="consumerId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portletHandle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mimeTypes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 </hibernate-mapping>
