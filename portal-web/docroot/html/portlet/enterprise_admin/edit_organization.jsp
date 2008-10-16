@@ -69,13 +69,6 @@ String curSection = mainSections[0];
 	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add-organization" : "view-organizations" %>' />
 </liferay-util:include>
 
-<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
-<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
-<liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-valid-value-from-the-list" />
-<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
-<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-website-url" />
-
 <div id="organization">
 	<table class="organization-table" width="100%">
 	<tr>
@@ -131,12 +124,24 @@ String curSection = mainSections[0];
 							<ul>
 
 								<%
+								String errorSection = (String)request.getAttribute("organization.errorSection");
+								if(Validator.isNotNull(errorSection)){
+									  curSection = StringPool.BLANK;
+								}
 								for (String section : sections) {
+
 									String sectionId = _getIdName(section);
+									boolean error = false;
+
+									if (sectionId.equals(errorSection)) {
+										error = true;
+										curSection = section;
+									}
+
 								%>
 
 									<li <%= curSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>>
-										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /><span class="modified-notice">(<liferay-ui:message key="modified" />)</span></a>
+										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /><span class="modified-notice"> (<liferay-ui:message key="modified" />) </span><c:if test="<%= error %>"><span class="error-notice"> (<liferay-ui:message key="error" />) </span></c:if></a>
 									</li>
 
 								<%
@@ -163,13 +168,30 @@ String curSection = mainSections[0];
 </div>
 
 <script type="text/javascript">
+
 	jQuery(
 		function () {
-			new Liferay.EnterpriseAdmin.FormNavigator(
+			var navigator = new Liferay.EnterpriseAdmin.FormNavigator(
 				{
 					container: '#organization'
 				}
 			);
+
+			<%
+			String errorSection = (String)request.getAttribute("organization.errorSection");
+			if(Validator.isNotNull(errorSection)){
+			%>
+			navigator._revealSection('#<%= errorSection %>','');
+			<%
+			}
+			%>
+
+
+
+
+
+
+
 		}
 	);
 

@@ -52,9 +52,9 @@ public class ListTypeServiceImpl extends ListTypeServiceBaseImpl {
 	public void validate(int listTypeId, String type)
 		throws PortalException, SystemException {
 
-		ListType listType = listTypePersistence.findByPrimaryKey(listTypeId);
+		ListType listType = listTypePersistence.fetchByPrimaryKey(listTypeId);
 
-		if (!listType.getType().equals(type)) {
+		if (listType == null || !listType.getType().equals(type)) {
 			NoSuchListTypeException nslte = new NoSuchListTypeException();
 
 			nslte.setType(type);

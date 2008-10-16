@@ -47,7 +47,30 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 <h3><liferay-ui:message key="details" /></h3>
 
+<%
+boolean ListError = false;
+if (SessionErrors.contains(renderRequest, DuplicateOrganizationException.class.getName()) ||
+	SessionErrors.contains(renderRequest, OrganizationNameException.class.getName()) ||
+	SessionErrors.contains(renderRequest, NoSuchCountryException.class.getName()) ||
+	SessionErrors.contains(renderRequest, OrganizationParentException.class.getName())){
+
+	request.setAttribute("organization.errorSection", "details");
+}
+else if(SessionErrors.contains(renderRequest, NoSuchListTypeException.class.getName())){
+	NoSuchListTypeException e = (NoSuchListTypeException)SessionErrors.get(renderRequest, NoSuchListTypeException.class.getName() );
+	if (Validator.equals(e.getType(), Organization.class.getName()+ListTypeImpl.ORGANIZATION_STATUS)){
+
+		request.setAttribute("organization.errorSection", "details");
+		ListError = true;
+	}
+}
+%>
+
 <fieldset class="block-labels col">
+
+	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
+	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
+
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />name"><liferay-ui:message key="name" /></label>
 
@@ -93,6 +116,11 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <fieldset class="block-labels col">
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
+
+			<c:if test="<%= ListError %>">
+				<liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-valid-value-from-the-list" />
+			</c:if>
+
 			<div class="ctrl-holder">
 				<label for="<portlet:namespace />statusId"><liferay-ui:message key="status" /></label>
 
@@ -119,6 +147,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		</c:otherwise>
 	</c:choose>
 
+	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
@@ -155,6 +184,8 @@ if (parentOrganization != null) {
 	parentOrganizations.add(parentOrganization);
 }
 %>
+
+<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
 
 <input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
 

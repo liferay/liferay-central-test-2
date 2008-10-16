@@ -132,6 +132,22 @@
 
 .portlet-enterprise-admin .form-navigation .section-modified .modified-notice {
 	display: inline;
+	color: #63CD55;
+}
+
+.portlet-enterprise-admin .form-navigation .section-modified.selected .modified-notice {
+	display: inline;
+	color: #B2FF3A;
+}
+
+.portlet-enterprise-admin .form-navigation .error-notice {
+	font-weight: bold;
+	color: #FF4F4F;
+}
+
+.portlet-enterprise-admin .form-navigation li.selected a .error-notice {
+	font-weight: bold;
+	color: #FF9F9F;
 }
 
 .portlet-enterprise-admin .form-navigation .user-info, .portlet-enterprise-admin .form-navigation .organization-info {

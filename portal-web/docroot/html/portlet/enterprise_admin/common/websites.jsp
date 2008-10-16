@@ -38,6 +38,28 @@ String className = (String)request.getAttribute("common.className");
 
 <h3><liferay-ui:message key="websites" /></h3>
 
+
+<%
+boolean ListError = false;
+if (SessionErrors.contains(renderRequest, WebsiteURLException.class.getName())){
+
+	request.setAttribute("organization.errorSection", "websites");
+}
+else if(SessionErrors.contains(renderRequest, NoSuchListTypeException.class.getName())){
+
+	NoSuchListTypeException e = (NoSuchListTypeException)SessionErrors.get(renderRequest, NoSuchListTypeException.class.getName() );
+
+	if (Validator.equals(e.getType(), Organization.class.getName()+ListTypeImpl.WEBSITE)){
+		request.setAttribute("organization.errorSection", "websites");
+		ListError = true;
+	}
+}
+%>
+
+<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-website-url" />
+<c:if test="<%= ListError %>">
+	<liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-valid-value-from-the-list" />
+</c:if>
 <fieldset class="block-labels">
 
 	<%
@@ -122,4 +144,5 @@ String className = (String)request.getAttribute("common.className");
 			);
 		}
 	);
+
 </script>

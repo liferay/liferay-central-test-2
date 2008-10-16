@@ -103,7 +103,7 @@ public class EditOrganizationAction extends PortletAction {
 					 e instanceof RequiredOrganizationException ||
 					 e instanceof WebsiteURLException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
 				if (e instanceof RequiredOrganizationException) {
 					actionResponse.sendRedirect(
