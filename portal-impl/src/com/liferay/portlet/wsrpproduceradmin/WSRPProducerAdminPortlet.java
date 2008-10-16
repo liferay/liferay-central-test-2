@@ -42,12 +42,10 @@ public class WSRPProducerAdminPortlet
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
 
-		String action = ParamUtil.getString(actionRequest, "action", null);
-		
-		if (Validator.isNotNull(action)) {			
+		if (Validator.isNotNull(actionRequest.getParameter("action"))) {
 			super.processAction(actionRequest, actionResponse);
 		}
-		
+
 		setRenderParameters(actionRequest, actionResponse);
 	}
 

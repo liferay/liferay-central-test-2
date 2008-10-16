@@ -135,10 +135,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		Set<Map.Entry<String, String>> versions = supportedVersions.entrySet();
 
-		String producerHost = renderRequest.getServerName();
-		int producerPort = renderRequest.getServerPort();
-
-		String wsdl = "http://" + producerHost + ":" + producerPort + producerBean.getWsdlURL();
+		String wsdl = "http://" + renderRequest.getServerName() + ":" + renderRequest.getServerPort() + producerBean.getWsdlURL();
 		%>
 
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
