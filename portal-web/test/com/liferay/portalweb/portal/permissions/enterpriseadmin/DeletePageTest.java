@@ -26,18 +26,31 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='banner']/div/div/ul/li[9]/ul/li[4]/ul/li[1]/a[1]/span"));
+public class DeletePageTest extends BaseTestCase {
+	public void testDeletePage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Manage Pages")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(
-			"document.getElementById('add-page').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -45,29 +58,8 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Enterprise Admin Test Page"));
-		selenium.type("new_page",
-			RuntimeVariables.replace("Enterprise Admin Test Page"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Enterprise Admin Test Page")) {
+				if (selenium.isElementPresent(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span")) {
 					break;
 				}
 			}
@@ -78,7 +70,13 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Enterprise Admin Test Page"));
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

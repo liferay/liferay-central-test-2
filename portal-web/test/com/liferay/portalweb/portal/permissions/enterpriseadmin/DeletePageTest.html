@@ -4,51 +4,46 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddPageTest</title>
+<title>DeletePageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPageTest</td></tr>
+<tr><td rowspan="1" colspan="3">DeletePageTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='banner']/div/div/ul/li[9]/ul/li[4]/ul/li[1]/a[1]/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>document.getElementById('add-page').getElementsByTagName('a')[0].getElementsByTagName('span')[0]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>new_page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>new_page</td>
-	<td>Enterprise Admin Test Page</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>new_page</td>
-	<td>Enterprise Admin Test Page</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Enterprise Admin Test Page</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Enterprise Admin Test Page</td>
+	<td>link=Manage Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

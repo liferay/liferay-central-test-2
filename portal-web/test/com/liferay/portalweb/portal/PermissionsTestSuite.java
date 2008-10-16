@@ -20,35 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.login.LoginTests;
+import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
+public class PermissionsTestSuite extends BaseTests {
 
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
-		addTestSuite(DeletePageTest.class);
+	public PermissionsTestSuite() {
+		addTestSuite(LoginTests.class);
+		addTestSuite(EnterpriseAdminTests.class);
+
+		//addTestSuite(StopSeleniumTest.class);
 	}
 
 }
