@@ -267,9 +267,7 @@ public class EditExpandoAction extends PortletAction {
 		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
 			modelResource, resourcePrimKey);
 
-		if (Validator.isNotNull(defaultValue)) {
-			expandoBridge.setAttributeDefault(name, defaultValue);
-		}
+		expandoBridge.setAttributeDefault(name, defaultValue);
 
 		updateProperties(actionRequest, expandoBridge, name);
 	}
