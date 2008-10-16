@@ -38,37 +38,6 @@ import java.util.Map;
  */
 public class ServiceContext {
 
-	public ServiceContext() {
-		this(null, null, null);
-	}
-
-	public ServiceContext(Map<String, Object> expandoBridgeAttributes) {
-		this(expandoBridgeAttributes, null, null);
-	}
-
-	public ServiceContext(PortletPreferencesIds portletPreferencesIds) {
-		this(null, portletPreferencesIds, null);
-	}
-
-	public ServiceContext(ThemeDisplay themeDisplay) {
-		this(null, null, themeDisplay);
-	}
-
-	public ServiceContext(
-		Map<String, Object> expandoBridgeAttributes,
-		PortletPreferencesIds portletPreferencesIds,
-		ThemeDisplay themeDisplay) {
-
-		_expandoBridgeAttributes = expandoBridgeAttributes;
-
-		if (_expandoBridgeAttributes == null) {
-			_expandoBridgeAttributes = new HashMap<String, Object>();
-		}
-
-		_portletPreferencesIds = portletPreferencesIds;
-		_themeDisplay = themeDisplay;
-	}
-
 	public Serializable getAttribute(String name) {
 		return _attributes.get(name);
 	}
@@ -77,12 +46,16 @@ public class ServiceContext {
 		return _attributes;
 	}
 
+	public Map<String, Object> getExpandoBridgeAttributes() {
+		return _expandoBridgeAttributes;
+	}
+
 	public void setAttribute(String name, Serializable value) {
 		_attributes.put(name, value);
 	}
 
-	public Map<String, Object> getExpandoBridgeAttributes() {
-		return _expandoBridgeAttributes;
+	public void setAttributes(Map<String, Serializable> attributes) {
+		_attributes = attributes;
 	}
 
 	public void setExpandoBridgeAttributes(
@@ -101,7 +74,8 @@ public class ServiceContext {
 
 	protected Map<String, Serializable> _attributes =
 		new HashMap<String, Serializable>();
-	protected Map<String, Object> _expandoBridgeAttributes;
+	protected Map<String, Object> _expandoBridgeAttributes
+		= new HashMap<String, Object>();
 	protected PortletPreferencesIds _portletPreferencesIds;
 	protected ThemeDisplay _themeDisplay;
 
