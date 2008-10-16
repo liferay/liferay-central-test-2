@@ -80,11 +80,11 @@ plugins.includes=${plugins.includes}</echo>
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
 
 		<antcall target="test-tomcat-runtime">
-			<param name="test.class" value="PermissionsTestSuite" />
-		</antcall>
-		
-		<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="PortalWebTestSuite" />
+		</antcall>
+
+		<antcall target="test-tomcat-runtime">
+			<param name="test.class" value="PermissionsTestSuite" />
 		</antcall>
 
 		<antcall target="test-tomcat-runtime">

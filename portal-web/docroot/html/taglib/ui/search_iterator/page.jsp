@@ -39,8 +39,6 @@ Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
 
-List<String> primaryKeys = new ArrayList<String>();
-
 if (end > total) {
 	end = total;
 }
@@ -66,6 +64,8 @@ if (iteratorURL != null) {
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByColParam());
 	url = HttpUtil.removeParameter(url, namespace + searchContainer.getOrderByTypeParam());
 }
+
+List<String> primaryKeys = new ArrayList<String>();
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
@@ -172,13 +172,17 @@ if (iteratorURL != null) {
 			</c:when>
 			<c:otherwise>
 				<tr class="lfr-template portlet-section-body results-row">
+
 					<%
-						for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
+					for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
 					%>
+
 						<td></td>
+
 					<%
-						}
+					}
 					%>
+
 				</tr>
 			</c:otherwise>
 		</c:choose>
@@ -191,7 +195,7 @@ if (iteratorURL != null) {
 
 			String className = "portlet-section-alternate results-row alt";
 			String classHoverName = "portlet-section-alternate-hover results-row alt hover";
-			
+
 			primaryKeys.add(row.getPrimaryKey());
 
 			if (MathUtil.isEven(i)) {
@@ -280,8 +284,7 @@ if (iteratorURL != null) {
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(id) %>">
-
-	<input id="<%= id %>PrimaryKeys" name="<%= id %>PrimaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
+	<input id="<%= id %>primaryKeys" name="<%= id %>primaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
 
 	<script type="text/javascript">
 		jQuery(

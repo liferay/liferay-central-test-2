@@ -45,6 +45,6 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %> "><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add-organization" /></a></span>
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %>"><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add-organization" /></a></span>
 	</c:if>
 </div>
