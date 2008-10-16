@@ -24,13 +24,13 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants"%>
-<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl"%>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission"%>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
+<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
+<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
 
 <%
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
@@ -50,7 +50,7 @@ Object value = expandoBridge.getAttribute(name);
 
 UnicodeProperties properties = expandoBridge.getAttributeProperties(name);
 
-boolean attributeHidden = GetterUtil.getBoolean(properties.get("hidden"));
+boolean propertyHidden = GetterUtil.getBoolean(properties.get("hidden"));
 
 String localizedName = LanguageUtil.get(pageContext, name);
 
@@ -61,7 +61,7 @@ if (name.equals(localizedName)) {
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
-<c:if test="<%= !attributeHidden && ExpandoColumnPermission.contains(permissionChecker, column, ActionKeys.VIEW) %>">
+<c:if test="<%= !propertyHidden && ExpandoColumnPermission.contains(permissionChecker, column, ActionKeys.VIEW) %>">
 	<c:if test="<%= label %>">
 		<label for="<%= randomNamespace %><%= name %>"><%= localizedName %></label>
 	</c:if>

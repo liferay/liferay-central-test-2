@@ -24,14 +24,14 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants"%>
-<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl"%>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission"%>
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
+<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
+<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:custom-attribute-list:className");
@@ -39,9 +39,9 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:custo
 boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute-list:editable"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute-list:label"));
 
-String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
-
 ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
+
+String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
 
 Enumeration<String> attributeNames = expandoBridge.getAttributeNames();
 
@@ -64,6 +64,6 @@ for (String attributeName : attributeNames) {
 
 <c:if test="<%= attributeNamesList.isEmpty() %>">
 	<div class="ctrl-holder">
-		<label><%= LanguageUtil.format(pageContext, "no-attributes-are-defined-for-x", modelResourceName) %></label>
+		<label><%= LanguageUtil.format(pageContext, "no-custom-attributes-are-defined-for-x", modelResourceName) %></label>
 	</div>
 </c:if>
