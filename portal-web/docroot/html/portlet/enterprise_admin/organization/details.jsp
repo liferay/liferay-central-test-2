@@ -159,7 +159,7 @@ if (parentOrganization != null) {
 <input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
 
 <liferay-ui:search-container
-	id="xxx"
+	id="parentOrganizationHTML"
 >
 	<liferay-ui:search-container-results
 		results="<%= parentOrganizations %>"
@@ -190,7 +190,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: Liferay.SearchContainer.deleteRow(this);">X</a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.deleteRow(this);">X</a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -248,21 +248,24 @@ if (parentOrganization != null) {
 	function <portlet:namespace />selectOrganization(organizationId, name, type) {
 		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = organizationId;
 
-		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationHTML");
+		var createUrl = function(href, value, onClick) {
+			var anchorText = '<a href="' + href + '"' + (onClick ? ' onclick="' + onClick + '" ' : '') + '>' + value + '</a>';
+
+			return anchorText;
+		};
 
 		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
 
-		var parentOrganizationHTML = '';
+		var rowColumns = [];
 
-		parentOrganizationHTML += '<tr class="portlet-section-body results-row" onmouseover="this.className = \'portlet-section-body-hover results-row hover\';" onmouseout="this.className = \'portlet-section-body results-row\';">';
-		parentOrganizationHTML += '<td align="left" class="col-1" colspan="1" valign="middle">';
-		parentOrganizationHTML += '<a href="' + href + '">' + name +'</a></td>';
-		parentOrganizationHTML += '<td align="left" class="col-2" colspan="1" valign="middle">' + type + '</td>';
-		parentOrganizationHTML += '<td align="right" class="col-3" colspan="1" valign="middle">';
-		parentOrganizationHTML += '[<a href="javascript: <portlet:namespace />removeOrganization();">x</a>]</div>';
-		parentOrganizationHTML += '</td></tr>';
+		rowColumns.push(createUrl(href, name));
+		rowColumns.push(createUrl(href, Liferay.Language.get(type)));
+		rowColumns.push(createUrl('javascript: ;', 'X', 'Liferay.SearchContainer.deleteRow(this)'));
 
-		nameEl.innerHTML = parentOrganizationHTML;
+		var searchContainer = Liferay.SearchContainer.get('parentOrganizationHTML');
+
+		searchContainer.addRow(rowColumns);
+		searchContainer.deleteRow(1);
 	}
 
 	<c:if test="<%= organization == null %>">
