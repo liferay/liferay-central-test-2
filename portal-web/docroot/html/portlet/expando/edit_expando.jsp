@@ -141,8 +141,8 @@ if (column != null) {
 					%>
 
 					<select name="<portlet:namespace />defaultValue">
-						<option <%= curValue ? "selected=\"selected\"" : "" %> value="1"><liferay-ui:message key="true" /></option>
-						<option <%= !curValue ? "selected=\"selected\"" : "" %> value="0"><liferay-ui:message key="false" /></option>
+						<option <%= curValue ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+						<option <%= !curValue ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
 					</select>
 				</c:when>
 				<c:when test="<%= column.getType() == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
@@ -230,8 +230,8 @@ if (column != null) {
 		%>
 
 		<select name="<portlet:namespace />Property(hidden)">
-			<option <%= propertyHidden ? "selected=\"selected\"" : "" %> value="1"><liferay-ui:message key="true" /></option>
-			<option <%= !propertyHidden ? "selected=\"selected\"" : "" %> value="0"><liferay-ui:message key="false" /></option>
+			<option <%= propertyHidden ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+			<option <%= !propertyHidden ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
 		</select>
 	</td>
 </tr>

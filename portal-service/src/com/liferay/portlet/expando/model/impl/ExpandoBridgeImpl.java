@@ -20,12 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.expando.model;
+package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.NoSuchTableException;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;

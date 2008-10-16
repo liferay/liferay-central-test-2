@@ -17,7 +17,7 @@ import com.liferay.portal.util.PortalUtil;
 
 <#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 	import com.liferay.portlet.expando.model.ExpandoBridge;
-	import com.liferay.portlet.expando.model.ExpandoBridgeImpl;
+	import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 </#if>
 
 import java.io.Serializable;
