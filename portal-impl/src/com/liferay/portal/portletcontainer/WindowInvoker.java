@@ -319,10 +319,10 @@ public class WindowInvoker extends InvokerPortletImpl {
 			_populateContainerRequest(
 				request, response, getMarkupRequest, renderRequest);
 
-			if (_portletModel.getPublishingEvents().size() > 0 ) {
+			if (!_portletModel.getPublishingEvents().isEmpty()) {
 				getMarkupRequest.setPortletNamespaces(
 					_getPortletNamespaces(
-					getMarkupRequest.getPortletWindowContext()));
+						getMarkupRequest.getPortletWindowContext()));
 			}
 
 			GetMarkupResponse getMarkupResponse =
@@ -472,41 +472,51 @@ public class WindowInvoker extends InvokerPortletImpl {
 		return locale;
 	}
 
+	private long _getPlid(PortletRequest portletRequest) {
+		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);
+
+		return themeDisplay.getPlid();
+	}
+
 	private Map<PortletID, List<String>> _getPortletNamespaces(
 		PortletWindowContext portletWindowContext) {
 
 		Map<PortletID, List<String>> portletNamespaces =
 			new HashMap<PortletID, List<String>>();
+
 		try {
 			List<EntityID> portletEntityIDs =
 				portletWindowContext.getPortletWindows(
-				PortletType.LOCAL, DistributionType.ALL_PORTLETS_ON_PAGE);
+					PortletType.LOCAL, DistributionType.ALL_PORTLETS_ON_PAGE);
 
-			if (portletEntityIDs != null) {
-				List<String> namespaces = null;
-				for(EntityID portletEntityID : portletEntityIDs) {
-					namespaces = portletNamespaces.get(
-						portletEntityID.getPortletID());
-
-					if (namespaces == null) {
-						namespaces = new ArrayList<String>();
-						portletNamespaces.put(
-							portletEntityID.getPortletID(), namespaces);
-					}
-					namespaces.add(PortalUtil.getPortletNamespace(
-						portletEntityID.getPortletWindowName()));
-				}
+			if (portletEntityIDs == null) {
+				return portletNamespaces;
 			}
-		} catch (PortletWindowContextException ex) {
-			_log.warn(ex.toString());
+
+			for (EntityID portletEntityID : portletEntityIDs) {
+				List<String> namespaces = portletNamespaces.get(
+					portletEntityID.getPortletID());
+
+				if (namespaces == null) {
+					namespaces = new ArrayList<String>();
+
+					portletNamespaces.put(
+						portletEntityID.getPortletID(), namespaces);
+				}
+
+				String namespace = PortalUtil.getPortletNamespace(
+					portletEntityID.getPortletWindowName());
+
+				namespaces.add(namespace);
+			}
 		}
+		catch (PortletWindowContextException pwce) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pwce, pwce);
+			}
+		}
+
 		return portletNamespaces;
-	}
-
-	private long _getPlid(PortletRequest portletRequest) {
-		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);
-
-		return themeDisplay.getPlid();
 	}
 
 	private List<String> _getRoles(HttpServletRequest request) {
