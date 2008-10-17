@@ -74,13 +74,19 @@ import com.sun.portal.container.Container;
 import com.sun.portal.container.ContainerFactory;
 import com.sun.portal.container.ContainerRequest;
 import com.sun.portal.container.ContainerType;
+import com.sun.portal.container.EntityID;
 import com.sun.portal.container.ExecuteActionRequest;
 import com.sun.portal.container.ExecuteActionResponse;
 import com.sun.portal.container.GetMarkupRequest;
 import com.sun.portal.container.GetMarkupResponse;
 import com.sun.portal.container.GetResourceRequest;
 import com.sun.portal.container.GetResourceResponse;
+import com.sun.portal.container.PortletID;
+import com.sun.portal.container.PortletType;
+import com.sun.portal.container.PortletWindowContext;
+import com.sun.portal.container.PortletWindowContextException;
 import com.sun.portal.container.WindowRequestReader;
+import com.sun.portal.container.service.policy.DistributionType;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
 import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
@@ -94,6 +100,7 @@ import java.security.Principal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -312,6 +319,12 @@ public class WindowInvoker extends InvokerPortletImpl {
 			_populateContainerRequest(
 				request, response, getMarkupRequest, renderRequest);
 
+			if (_portletModel.getPublishingEvents().size() > 0 ) {
+				getMarkupRequest.setPortletNamespaces(
+					_getPortletNamespaces(
+					getMarkupRequest.getPortletWindowContext()));
+			}
+
 			GetMarkupResponse getMarkupResponse =
 				ContainerResponseFactory.createGetMarkUpResponse(response);
 
@@ -457,6 +470,37 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		return locale;
+	}
+
+	private Map<PortletID, List<String>> _getPortletNamespaces(
+		PortletWindowContext portletWindowContext) {
+
+		Map<PortletID, List<String>> portletNamespaces =
+			new HashMap<PortletID, List<String>>();
+		try {
+			List<EntityID> portletEntityIDs =
+				portletWindowContext.getPortletWindows(
+				PortletType.LOCAL, DistributionType.ALL_PORTLETS_ON_PAGE);
+
+			if (portletEntityIDs != null) {
+				List<String> namespaces = null;
+				for(EntityID portletEntityID : portletEntityIDs) {
+					namespaces = portletNamespaces.get(
+						portletEntityID.getPortletID());
+
+					if (namespaces == null) {
+						namespaces = new ArrayList<String>();
+						portletNamespaces.put(
+							portletEntityID.getPortletID(), namespaces);
+					}
+					namespaces.add(PortalUtil.getPortletNamespace(
+						portletEntityID.getPortletWindowName()));
+				}
+			}
+		} catch (PortletWindowContextException ex) {
+			_log.warn(ex.toString());
+		}
+		return portletNamespaces;
 	}
 
 	private long _getPlid(PortletRequest portletRequest) {
