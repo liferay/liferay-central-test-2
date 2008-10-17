@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -567,64 +568,97 @@ public class SourceFormatter {
 	private static String _formatJSPContent(String fileName, String content)
 		throws IOException {
 
-		StringBuilder sb = new StringBuilder();
+		content = _formatTaglibQuotes(fileName, content, StringPool.QUOTE);
+		content = _formatTaglibQuotes(fileName, content, StringPool.APOSTROPHE);
+		
+		return content;
+	}
 
-		BufferedReader br =
-			new BufferedReader(new StringReader(content));
+	private static String _formatTaglibQuotes(
+			String fileName, String content, String quoteType)
+		throws IOException {
 
-		int lineCount = 0;
+		StringBuilder regexpSB = new StringBuilder();
 
-		String line = null;
+	    String quoteFix = StringPool.APOSTROPHE;
 
-		while ((line = br.readLine()) != null) {
-			lineCount++;
+	    if (quoteFix == quoteType) {
+	    	quoteFix = StringPool.QUOTE;
+	    }
 
-			int x = line.indexOf("\"<%=");
-			int y = line.indexOf("%>\"", x);
+	    regexpSB.append("<(");
 
-			boolean hasTagLibrary = false;
+		for (int i = 0; i < _TAG_LIBRARIES.length; i++) {
+			regexpSB.append(_TAG_LIBRARIES[i]);
+			regexpSB.append(StringPool.PIPE);
+		}
 
-			for (int i = 0; i < _TAG_LIBRARIES.length; i++) {
-				if (line.indexOf("<" + _TAG_LIBRARIES[i] + ":") != -1) {
-					hasTagLibrary = true;
+		regexpSB.deleteCharAt(regexpSB.length() - 1);
+		regexpSB.append("):([^>]|%>)*");
+		regexpSB.append(quoteType);
+		regexpSB.append("<%=[^>]*");
+		regexpSB.append(quoteType);
+		regexpSB.append("[^>]*");
+		regexpSB.append(quoteType);
+		regexpSB.append("[^>]*%>");
+		regexpSB.append(quoteType);
+		regexpSB.append("([^>]|%>)*>");
 
-					break;
-				}
-			}
+		Pattern pattern = Pattern.compile(regexpSB.toString());
+		Matcher matcher = pattern.matcher(content);
 
-			if ((x != -1) && (y != -1) && hasTagLibrary) {
-				String regexp = line.substring(x, y + 3);
+		while (matcher.find()) {
+			int x = content.indexOf(quoteType + "<%=", matcher.start());
+			int y = content.indexOf("%>" + quoteType, x);
 
-				if (regexp.indexOf("\\\"") == -1) {
-					regexp = regexp.substring(1, regexp.length() - 1);
+			while (x != -1 && y != -1) {
+				String regexpResult = content.substring(x + 1, y + 2);
 
-					if (regexp.indexOf("\"") != -1) {
-						line =
-							line.substring(0, x) + "'" + regexp + "'" +
-								line.substring(y + 3, line.length());
+				if (regexpResult.indexOf(quoteType) != -1) {
+					int line = 1;
+
+					char charContent[] = content.toCharArray();
+
+					for (int i = 0; i < x; i++) {
+						if (charContent[i] == CharPool.NEW_LINE) {
+							line++;
+						}
+					}
+
+					if (regexpResult.indexOf(quoteFix) == -1) {
+						StringBuilder contentSB = new StringBuilder();
+
+						contentSB.append(content.substring(0, x));
+						contentSB.append(quoteFix);
+						contentSB.append(regexpResult);
+						contentSB.append(quoteFix);
+						contentSB.append(
+							content.substring(y+3, content.length()));
+
+						content = contentSB.toString();
+					}
+					else {
+						StringBuilder warningSB = new StringBuilder();
+
+						warningSB.append("(taglibQuotes): ");
+						warningSB.append(fileName);
+						warningSB.append(": Line ");
+						warningSB.append(line);
+						System.out.println(warningSB.toString());
 					}
 				}
+
+				x = content.indexOf(quoteType + "<%=", y);
+
+				if (x > matcher.end()) {
+					break;
+				}
+
+				y = content.indexOf("%>" + quoteType, x);
 			}
-
-			if (line.trim().length() == 0) {
-				line = StringPool.BLANK;
-			}
-
-			line = StringUtil.trimTrailing(line);
-
-			sb.append(line);
-			sb.append("\n");
 		}
 
-		br.close();
-
-		String newContent = sb.toString();
-
-		if (newContent.endsWith("\n")) {
-			newContent = newContent.substring(0, newContent.length() -1);
-		}
-
-		return newContent;
+		return content;
 	}
 
 	private static String _getCopyright() throws IOException {
@@ -768,5 +802,4 @@ public class SourceFormatter {
 	private static Properties _exclusions;
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
-
 }

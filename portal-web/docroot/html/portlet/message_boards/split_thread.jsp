@@ -154,7 +154,7 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 		<liferay-ui:message key="subject" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="<%= LanguageUtil.get(pageContext, "thread-splitted") %>" />
+		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue='<%= LanguageUtil.get(pageContext, "thread-splitted") %>' />
 	</td>
 </tr>
 <tr>
