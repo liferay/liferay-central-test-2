@@ -106,9 +106,7 @@ public abstract class AbstractMessagingConfigurator
 
 	private List<DestinationEventListener> _destinationEventListeners =
 		new ArrayList<DestinationEventListener>();
-
 	private List<Destination> _destinations = new ArrayList<Destination>();
-
 	private Map<String, List<MessageListener>> _messageListeners  =
 		new HashMap<String, List<MessageListener>>();
 
