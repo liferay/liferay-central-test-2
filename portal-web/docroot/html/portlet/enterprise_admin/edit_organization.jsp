@@ -130,6 +130,7 @@ String curSection = mainSections[0];
 
 								for (String section : sections) {
 									String sectionId = _getIdName(section);
+									String cssClass = "";
 
 									boolean error = false;
 
@@ -138,9 +139,17 @@ String curSection = mainSections[0];
 
 										curSection = section;
 									}
+
+									if (curSection.equals(section)) {
+										cssClass += "selected";
+									}
+
+									if (error) {
+										cssClass += " section-error";
+									}
 								%>
 
-									<li <%= curSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>>
+									<li class="<%= cssClass %>">
 										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'>
 
 										<liferay-ui:message key="<%= section %>" />

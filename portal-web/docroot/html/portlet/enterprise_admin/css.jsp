@@ -110,9 +110,9 @@
 }
 
 .portlet-enterprise-admin .form-navigation li.selected {
-	background: url(<%= themeImagesPath %>/control_panel/selected.png) no-repeat 0 0;
+	background: url(<%= themeImagesPath %>/control_panel/selected.png) no-repeat 0 50%;
 	font-weight: bold;
-	margin: 0 0 0 -23px;
+	margin: 0 0 0 -22px;
 	padding: 0;
 }
 
@@ -120,7 +120,7 @@
 	background-color: #5C696E;
 	color: #FFF;
 	display: block;
-	margin: 0 0 0 15px;
+	margin: 0 0 0 11px;
 	padding: 2px 10px;
 	text-decoration: none;
 }
@@ -131,23 +131,33 @@
 }
 
 .portlet-enterprise-admin .form-navigation .section-modified .modified-notice {
-	color: #63CD55;
+	color: #090;
 	display: inline;
 }
 
 .portlet-enterprise-admin .form-navigation .section-modified.selected .modified-notice {
-	color: #B2FF3A;
+	color: #9f3;
 	display: inline;
 }
 
-.portlet-enterprise-admin .form-navigation .error-notice {
-	color: #FF4F4F;
+.portlet-enterprise-admin .form-navigation li.section-error a {
+	background-image: url(<%= themeImagesPath %>/messages/alert.png);
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	color: #f00;
 	font-weight: bold;
+	padding-left: 25px;
 }
 
-.portlet-enterprise-admin .form-navigation li.selected a .error-notice {
-	color: #FF9F9F;
-	font-weight: bold;
+.portlet-enterprise-admin .form-navigation li.selected.section-error a {
+	background-position: 15px 50%;
+	color: #f99;
+	margin-left: 11px;
+	padding-left: 35px;
+}
+
+.portlet-enterprise-admin .form-navigation li a .error-notice {
+	display: none;
 }
 
 .portlet-enterprise-admin .form-navigation .user-info, .portlet-enterprise-admin .form-navigation .organization-info {
