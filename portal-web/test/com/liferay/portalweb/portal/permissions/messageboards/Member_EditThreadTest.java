@@ -20,36 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.messageboards;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="Member_EditThreadTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
+public class Member_EditThreadTest extends BaseTestCase {
+	public void testMember_EditThread() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
-		addTestSuite(DeletePageTest.class);
-		addTestSuite(LogoutTest.class);
+			try {
+				if (selenium.isElementPresent("link=Categories")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("link=Edit"));
+		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_subject",
+			RuntimeVariables.replace("Test Thread 2 Edited"));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("Test Thread 2 Edited"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Thread 2 Edited"));
 	}
-
 }

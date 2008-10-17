@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
+import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
 
 /**
  * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
@@ -36,6 +37,7 @@ public class PermissionsTestSuite extends BaseTests {
 	public PermissionsTestSuite() {
 		addTestSuite(LoginTests.class);
 		addTestSuite(EnterpriseAdminTests.class);
+		addTestSuite(MessageBoardsTests.class);
 
 		addTestSuite(StopSeleniumTest.class);
 	}

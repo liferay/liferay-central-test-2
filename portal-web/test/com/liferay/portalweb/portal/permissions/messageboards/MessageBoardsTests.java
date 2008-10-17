@@ -20,36 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
+public class MessageBoardsTests extends BaseTests {
 
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
+	public MessageBoardsTests() {
+		addTestSuite(CA_LoginTest.class);
+		addTestSuite(CA_AddPageTest.class);
+		addTestSuite(CA_AddPortletTest.class);
+		addTestSuite(CA_AddCategoryTest.class);
+		addTestSuite(CA_AddMessageTest.class);
+		addTestSuite(CA_AssertActionsTest.class);
+		addTestSuite(CA_DeleteMessageTest.class);
+		addTestSuite(CA_DeleteCategoryTest.class);
+		addTestSuite(CA_AddCategoryTest.class);
+		addTestSuite(CA_AddMessageTest.class);
+		addTestSuite(CA_LogoutTest.class);
+		addTestSuite(Member_LoginTest.class);
+		addTestSuite(Member_AssertActionsTest.class);
+		addTestSuite(Member_ViewMessageTest.class);
+		addTestSuite(Member_ReplyMessageTest.class);
+		addTestSuite(Member_PostNewThreadTest.class);
+		addTestSuite(Member_EditThreadTest.class);
+		addTestSuite(Member_DeleteMessageTest.class);
+		addTestSuite(Member_LogoutTest.class);
+		addTestSuite(Guest_ViewTest.class);
+		addTestSuite(Guest_AssertActionsTest.class);
 		addTestSuite(DeletePageTest.class);
-		addTestSuite(LogoutTest.class);
 	}
 
 }
