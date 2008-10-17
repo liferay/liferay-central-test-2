@@ -1187,6 +1187,7 @@ document-path=Dokument Pfad
 document-profile=Dokument Profil
 document-properties=Dokumenten-Eigenschaften
 document=Dokument
+documents-home=Dokumente steuern automatisch an
 documents-listing=Dokumentenaufzählung
 documents-per-page=Dokumente pro Seite
 documents-require-at-least-one-read-role=Dokument benötigt mindestens eine Lese-Rolle.

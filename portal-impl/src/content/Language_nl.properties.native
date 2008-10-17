@@ -1187,6 +1187,7 @@ document-path=Document pad
 document-profile=Document profiel
 document-properties=De Eigenschappen van het document
 document=Document
+documents-home=Het Huis van documenten
 documents-listing=Documenten lijst
 documents-per-page=Documenten per pagina
 documents-require-at-least-one-read-role=De documenten vereisen minstens één rol met leesrechten.

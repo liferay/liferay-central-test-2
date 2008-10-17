@@ -1187,6 +1187,7 @@ document-path=문서 경로
 document-profile=문서 단면도
 document-properties=문서 재산
 document=문서
+documents-home=문서는 집으로 돌아온다
 documents-listing=문서 목록으로 만들
 documents-per-page=페이지당 문서
 documents-require-at-least-one-read-role=문서는 가장 작은 한 읽은 역할에 요구한다.

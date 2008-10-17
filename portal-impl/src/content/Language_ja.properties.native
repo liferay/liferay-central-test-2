@@ -1187,6 +1187,7 @@ document-path=文書道
 document-profile=文書のプロフィール
 document-properties=文書の特性
 document=文書
+documents-home=文書は家へ帰る
 documents-listing=文書のリスト
 documents-per-page=1 ページ毎の文書数
 documents-require-at-least-one-read-role=文書は少なくとも1 つの読まれた役割を要求する。

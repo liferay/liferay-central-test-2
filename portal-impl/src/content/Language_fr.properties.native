@@ -1187,6 +1187,7 @@ document-path=Chemin du document
 document-profile=Profil du document
 document-properties=Propriétés de document
 document=Document
+documents-home=Les documents autoguident
 documents-listing=Liste des documents
 documents-per-page=Documents par page
 documents-require-at-least-one-read-role=Les documents doivent être associés avec au moins un rôle autorisé à les lire.

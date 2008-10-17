@@ -1187,6 +1187,7 @@ document-path=文件路徑
 document-profile=文件概況
 document-properties=文件物產
 document=文件
+documents-home=文件回家
 documents-listing=文件列出
 documents-per-page=文件每頁
 documents-require-at-least-one-read-role=文件要求至少一個讀取的角色。
