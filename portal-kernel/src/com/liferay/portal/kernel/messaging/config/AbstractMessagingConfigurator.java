@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.messaging.DestinationEventListener;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,8 +104,12 @@ public abstract class AbstractMessagingConfigurator
 
 	protected abstract MessageBus getMessageBus();
 
-	private List<DestinationEventListener> _destinationEventListeners;
-	private List<Destination> _destinations;
-	private Map<String, List<MessageListener>> _messageListeners;
+	private List<DestinationEventListener> _destinationEventListeners =
+		new ArrayList<DestinationEventListener>();
+
+	private List<Destination> _destinations = new ArrayList<Destination>();
+
+	private Map<String, List<MessageListener>> _messageListeners  =
+		new HashMap<String, List<MessageListener>>();
 
 }
