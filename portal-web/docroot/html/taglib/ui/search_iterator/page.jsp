@@ -49,12 +49,6 @@ if (rowChecker != null) {
 	}
 }
 
-if (resultRows.isEmpty() && (headerNames == null)) {
-	headerNames = new ArrayList<String>();
-
-	headerNames.add(StringPool.BLANK);
-}
-
 String url = StringPool.BLANK;
 
 PortletURL iteratorURL = searchContainer.getIteratorURL();
@@ -68,7 +62,7 @@ if (iteratorURL != null) {
 List<String> primaryKeys = new ArrayList<String>();
 %>
 
-<c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
+<c:if test="<%= !resultRows.isEmpty() || ((headerNames != null) && !headerNames.isEmpty()) || (emptyResultsMessage != null) %>">
 	<c:if test="<%= paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
@@ -175,7 +169,7 @@ List<String> primaryKeys = new ArrayList<String>();
 
 		</tr>
 
-		<c:if test="<%= (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
+		<c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
 			<tr class="portlet-section-body results-row">
 				<td align="center" colspan="<%= headerNames.size() %>">
 					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
@@ -272,7 +266,7 @@ List<String> primaryKeys = new ArrayList<String>();
 		</div>
 	</c:if>
 
-	<c:if test="<%= (rowChecker != null) && (resultRows.size() > 0) && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
+	<c:if test="<%= (rowChecker != null) && !resultRows.isEmpty() && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
 		<script type="text/javascript">
 			document.<%= rowChecker.getFormName() %>.<%= rowChecker.getAllRowsId() %>.checked = true;
 		</script>
