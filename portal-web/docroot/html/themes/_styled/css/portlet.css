@@ -309,11 +309,11 @@ body.portlet {
 	border: none;
 }
 
-.restricted.alt td {
+.alt.restricted td {
 	background-color: #FFC0C0;
 }
 
-.restricted.hover td {
+.hover.restricted td {
 	background-color: #D3BDC0;
 }
 
@@ -321,7 +321,7 @@ body.portlet {
 	color: #727C81;
 }
 
-.restricted td.col-1, .restricted.alt td.col-1 {
+.restricted td.col-1, .alt.restricted td.col-1 {
 	background-image: url(../images/messages/error.png);
 	background-position: 5px 50%;
 	background-repeat: no-repeat;
@@ -437,7 +437,7 @@ body.portlet {
 	width: 16px;
 }
 
-.portlet-options.visible .lfr-trigger strong span {
+.visible.portlet-options .lfr-trigger strong span {
 	background-image: url(../images/portlet/options_selected.png);
 }
 

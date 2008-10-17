@@ -243,16 +243,16 @@ body.portlet {
 .restricted, .restricted td {
 }
 
-.restricted.alt td {
+.alt.restricted td {
 }
 
-.restricted.hover td {
+.hover.restricted td {
 }
 
 .restricted * {
 }
 
-.restricted td.col-1, .restricted.alt td.col-1 {
+.restricted td.col-1, .alt.restricted td.col-1 {
 }
 
 /* ---------- Permissions ---------- */
@@ -326,7 +326,7 @@ body.portlet {
 .lfr-actions.portlet-options .lfr-trigger strong span {
 }
 
-.portlet-options.visible .lfr-trigger strong span {
+.visible.portlet-options .lfr-trigger strong span {
 }
 
 /* ---------- Calendar taglib ---------- */
