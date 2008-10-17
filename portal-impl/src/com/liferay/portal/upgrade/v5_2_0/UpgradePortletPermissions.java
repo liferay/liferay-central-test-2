@@ -23,7 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.dao.jdbc.ResultSetWrapper;
+import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
@@ -182,13 +182,13 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			rs = new ResultSetWrapper(rs);
+			SmartResultSet srs = new SmartResultSet(rs);
 
-			while (rs.next()) {
-				long permissionId = rs.getLong("Permission_.permissionId");
-				String actionId = rs.getString("Permission_.actionId");
-				String primKey = rs.getString("Resource_.primKey");
-				int scope = rs.getInt("ResourceCode.scope");
+			while (srs.next()) {
+				long permissionId = srs.getLong("Permission_.permissionId");
+				String actionId = srs.getString("Permission_.actionId");
+				String primKey = srs.getString("Resource_.primKey");
+				int scope = srs.getInt("ResourceCode.scope");
 
 				try {
 					updatePortletPermission(

@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.dao.jdbc.ResultSetWrapper;
+import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -274,14 +274,14 @@ public class UpgradeTags extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			rs = new ResultSetWrapper(rs);
+			SmartResultSet srs = new SmartResultSet(rs);
 
-			while (rs.next()) {
-				long entryId = rs.getLong("TE.entryId");
-				long groupId = rs.getLong("TE.groupId");
-				long userId = rs.getLong("TE.userId");
-				long propertyId = rs.getLong("TP.propertyId");
-				String value = rs.getString("TP.value");
+			while (srs.next()) {
+				long entryId = srs.getLong("TE.entryId");
+				long groupId = srs.getLong("TE.groupId");
+				long userId = srs.getLong("TE.userId");
+				long propertyId = srs.getLong("TP.propertyId");
+				String value = srs.getString("TP.value");
 
 				long vocabularyId = getVocabularyId(userId, groupId, value);
 
@@ -325,12 +325,12 @@ public class UpgradeTags extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			rs = new ResultSetWrapper(rs);
+			SmartResultSet srs = new SmartResultSet(rs);
 
-			while (rs.next()) {
-				long assetId = rs.getLong("TA.assetId");
-				long groupId = rs.getLong("TA.groupId");
-				long entryId = rs.getLong("TA_TE.entryId");
+			while (srs.next()) {
+				long assetId = srs.getLong("TA.assetId");
+				long groupId = srs.getLong("TA.groupId");
+				long entryId = srs.getLong("TA_TE.entryId");
 
 				long newEntryId = copyEntry(groupId, entryId);
 
