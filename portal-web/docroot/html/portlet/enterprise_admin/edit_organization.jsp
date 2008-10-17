@@ -125,23 +125,35 @@ String curSection = mainSections[0];
 
 								<%
 								String errorSection = (String)request.getAttribute("organization.errorSection");
-								if(Validator.isNotNull(errorSection)){
-									  curSection = StringPool.BLANK;
-								}
-								for (String section : sections) {
 
+								if (Validator.isNotNull(errorSection)){
+									curSection = StringPool.BLANK;
+								}
+
+								for (String section : sections) {
 									String sectionId = _getIdName(section);
+
 									boolean error = false;
 
 									if (sectionId.equals(errorSection)) {
 										error = true;
+
 										curSection = section;
 									}
-
 								%>
 
 									<li <%= curSection.equals(section)? "class=\"selected\"" : StringPool.BLANK %>>
-										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'><liferay-ui:message key="<%= section %>" /><span class="modified-notice"> (<liferay-ui:message key="modified" />) </span><c:if test="<%= error %>"><span class="error-notice"> (<liferay-ui:message key="error" />) </span></c:if></a>
+										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'>
+
+										<liferay-ui:message key="<%= section %>" />
+
+										<span class="modified-notice"> (<liferay-ui:message key="modified" />) </span>
+
+										<c:if test="<%= error %>">
+											<span class="error-notice"> (<liferay-ui:message key="error" />) </span>
+										</c:if>
+
+										</a>
 									</li>
 
 								<%
@@ -168,10 +180,9 @@ String curSection = mainSections[0];
 </div>
 
 <script type="text/javascript">
-
 	jQuery(
 		function () {
-			var navigator = new Liferay.EnterpriseAdmin.FormNavigator(
+			var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
 				{
 					container: '#organization'
 				}
@@ -179,19 +190,11 @@ String curSection = mainSections[0];
 
 			<%
 			String errorSection = (String)request.getAttribute("organization.errorSection");
-			if(Validator.isNotNull(errorSection)){
-			%>
-			navigator._revealSection('#<%= errorSection %>','');
-			<%
-			}
 			%>
 
-
-
-
-
-
-
+			<c:if test="<%= Validator.isNotNull(errorSection) %>">
+				<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
+			</c:if>
 		}
 	);
 

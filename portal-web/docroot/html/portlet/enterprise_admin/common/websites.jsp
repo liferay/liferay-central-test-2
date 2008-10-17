@@ -36,30 +36,13 @@ if (websites.isEmpty()) {
 String className = (String)request.getAttribute("common.className");
 %>
 
+<liferay-ui:error-marker key="organization.errorSection" value="websites" />
+
 <h3><liferay-ui:message key="websites" /></h3>
 
+<liferay-ui:error key="<%= NoSuchListTypeException.class + Organization.class.getName() + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
+<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
-<%
-boolean ListError = false;
-if (SessionErrors.contains(renderRequest, WebsiteURLException.class.getName())){
-
-	request.setAttribute("organization.errorSection", "websites");
-}
-else if(SessionErrors.contains(renderRequest, NoSuchListTypeException.class.getName())){
-
-	NoSuchListTypeException e = (NoSuchListTypeException)SessionErrors.get(renderRequest, NoSuchListTypeException.class.getName() );
-
-	if (Validator.equals(e.getType(), Organization.class.getName()+ListTypeImpl.WEBSITE)){
-		request.setAttribute("organization.errorSection", "websites");
-		ListError = true;
-	}
-}
-%>
-
-<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-website-url" />
-<c:if test="<%= ListError %>">
-	<liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-valid-value-from-the-list" />
-</c:if>
 <fieldset class="block-labels">
 
 	<%

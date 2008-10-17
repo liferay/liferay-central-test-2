@@ -103,7 +103,16 @@ public class EditOrganizationAction extends PortletAction {
 					 e instanceof RequiredOrganizationException ||
 					 e instanceof WebsiteURLException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				if (e instanceof NoSuchListTypeException) {
+					NoSuchListTypeException nslte = (NoSuchListTypeException)e;
+
+					SessionErrors.add(
+						actionRequest,
+						e.getClass().getName() + nslte.getType());
+				}
+				else {
+					SessionErrors.add(actionRequest, e.getClass().getName());
+				}
 
 				if (e instanceof RequiredOrganizationException) {
 					actionResponse.sendRedirect(

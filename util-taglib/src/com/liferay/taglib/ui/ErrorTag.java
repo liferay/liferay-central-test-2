@@ -101,6 +101,17 @@ public class ErrorTag extends TagSupport {
 
 			if (includeEndPage) {
 				PortalIncludeUtil.include(pageContext, getEndPage());
+
+				String errorMarkerKey = (String)request.getAttribute(
+					"liferay-ui:error-marker:key");
+				String errorMarkerValue = (String)request.getAttribute(
+					"liferay-ui:error-marker:value");
+
+				if (Validator.isNotNull(errorMarkerKey) &&
+					Validator.isNotNull(errorMarkerValue)) {
+
+					request.setAttribute(errorMarkerKey, errorMarkerValue);
+				}
 			}
 
 			return EVAL_PAGE;
