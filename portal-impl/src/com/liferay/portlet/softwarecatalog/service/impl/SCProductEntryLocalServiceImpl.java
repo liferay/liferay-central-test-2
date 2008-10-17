@@ -459,17 +459,16 @@ public class SCProductEntryLocalServiceImpl
 
 				try {
 					Indexer.updateProductEntry(
-							companyId, productEntry.getGroupId(),
-							productEntry.getUserId(),
-							productEntry.getUserName(),
-							productEntryId, productEntry.getName(),
-							productEntry.getModifiedDate(), version,
-							productEntry.getType(),
-							productEntry.getShortDescription(),
-							productEntry.getLongDescription(),
-							productEntry.getPageURL(),
-							productEntry.getRepoGroupId(),
-							productEntry.getRepoArtifactId());
+						companyId, productEntry.getGroupId(),
+						productEntry.getUserId(), productEntry.getUserName(),
+						productEntryId, productEntry.getName(),
+						productEntry.getModifiedDate(), version,
+						productEntry.getType(),
+						productEntry.getShortDescription(),
+						productEntry.getLongDescription(),
+						productEntry.getPageURL(),
+						productEntry.getRepoGroupId(),
+						productEntry.getRepoArtifactId());
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + productEntryId, e1);
