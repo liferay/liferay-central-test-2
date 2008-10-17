@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.bean.BeanParamUtil;
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -36,7 +36,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 import org.apache.commons.logging.Log;
@@ -255,8 +254,6 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	protected void processRow() throws JspException {
-		HttpServletRequest request = getServletRequest();
-
 		Object model = _results.get(_rowIndex);
 
 		if (isEscapedModel()) {
@@ -277,8 +274,7 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				BeanParamUtil.getBoolean(model, request, "escapedModel"));
+			_log.debug(BeanPropertiesUtil.getBoolean(model, "escapedModel"));
 		}
 
 		if (Validator.isNull(_keyProperty)) {
@@ -287,14 +283,13 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
 		else if (isStringKey()) {
-			String primaryKey = BeanParamUtil.getString(
-				model, request, _keyProperty);
+			String primaryKey = BeanPropertiesUtil.getString(
+				model, _keyProperty);
 
 			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
 		else {
-			long primaryKey = BeanParamUtil.getLong(
-				model, request, _keyProperty);
+			long primaryKey = BeanPropertiesUtil.getLong(model, _keyProperty);
 
 			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
