@@ -22,13 +22,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusException;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.messaging.SearchRequest;
-
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,42 +39,42 @@ public class SearchEngineUtil {
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		_instance._addDocument(companyId, doc);
+		getSearchEngine().getWriter().addDocument(companyId, doc);
 	}
 
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		_instance._deleteDocument(companyId, uid);
+		getSearchEngine().getWriter().deleteDocument(companyId, uid);
 	}
 
 	public static void deletePortletDocuments(long companyId, String portletId)
 		throws SearchException {
 
-		_instance._deletePortletDocuments(companyId, portletId);
+		getSearchEngine().getWriter().deletePortletDocuments(
+			companyId, portletId);
 	}
 
-	public static void init(
-		IndexSearcher defaultIndexSearcher, IndexWriter defaultIndexWriter) {
-
-		_instance._init(defaultIndexSearcher, defaultIndexWriter);
+	public static SearchEngine getSearchEngine() {
+		return _searchEngine;
 	}
 
 	public static boolean isIndexReadOnly() {
-		return _instance._isIndexReadOnly();
+		return getSearchEngine().isIndexReadOnly();
 	}
 
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
-		return _instance._search(companyId, query, start, end);
+		return getSearchEngine().getSearcher().search(
+			companyId, query, start, end);
 	}
 
 	public static Hits search(
 			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
-		return _instance._search(
+		return getSearchEngine().getSearcher().search(
 			companyId, query, new Sort[] {sort}, start, end);
 	}
 
@@ -89,98 +82,24 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
-		return _instance._search(companyId, query, sorts, start, end);
+		return getSearchEngine().getSearcher().search(
+			companyId, query, sorts, start, end);
+	}
+
+	public static void unregister(String name) {
+		getSearchEngine().unregister(name);
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		_instance._updateDocument(companyId, uid, doc);
+		getSearchEngine().getWriter().updateDocument(companyId, uid, doc);
 	}
 
-	private SearchEngineUtil() {
+	public void setSearchEngine(SearchEngine searchEngine) {
+		_searchEngine = searchEngine;
 	}
 
-	private void _addDocument(long companyId, Document doc)
-		throws SearchException {
-
-		_messageBusIndexWriter.addDocument(companyId, doc);
-	}
-
-	private void _deleteDocument(long companyId, String uid)
-		throws SearchException {
-
-		_messageBusIndexWriter.deleteDocument(companyId, uid);
-	}
-
-	private void _deletePortletDocuments(long companyId, String portletId)
-		throws SearchException {
-
-		_messageBusIndexWriter.deletePortletDocuments(companyId, portletId);
-	}
-
-	private void _init(
-		IndexSearcher messageBusIndexSearcher,
-		IndexWriter messageBusIndexWriter) {
-
-		_messageBusIndexSearcher = messageBusIndexSearcher;
-		_messageBusIndexWriter = messageBusIndexWriter;
-	}
-
-	private boolean _isIndexReadOnly() {
-		if (_indexReadOnly != null) {
-			return _indexReadOnly.booleanValue();
-		}
-
-		try {
-			SearchRequest searchRequest = new SearchRequest();
-
-			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
-
-			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronousMessage(
-				DestinationNames.SEARCH_READER, searchRequest);
-
-			if (_indexReadOnly == null) {
-				_indexReadOnly = Boolean.FALSE;
-			}
-
-			return _indexReadOnly.booleanValue();
-		}
-		catch (MessageBusException mbe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to check index status", mbe);
-			}
-
-			return false;
-		}
-	}
-
-	private Hits _search(long companyId, Query query, int start, int end)
-		throws SearchException {
-
-		return _messageBusIndexSearcher.search(companyId, query, start, end);
-	}
-
-	private Hits _search(
-			long companyId, Query query, Sort[] sorts, int start, int end)
-		throws SearchException {
-
-		return _messageBusIndexSearcher.search(
-			companyId, query, sorts, start, end);
-	}
-
-	private void _updateDocument(long companyId, String uid, Document doc)
-		throws SearchException {
-
-		_messageBusIndexWriter.updateDocument(companyId, uid, doc);
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
-
-	private static SearchEngineUtil _instance = new SearchEngineUtil();
-
-	private IndexSearcher _messageBusIndexSearcher;
-	private IndexWriter _messageBusIndexWriter;
-	private Boolean _indexReadOnly;
+	private static SearchEngine _searchEngine;
 
 }

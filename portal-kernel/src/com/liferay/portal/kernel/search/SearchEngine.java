@@ -38,4 +38,6 @@ public interface SearchEngine {
 
 	public boolean isIndexReadOnly();
 
+	public void unregister(String name);
+
 }

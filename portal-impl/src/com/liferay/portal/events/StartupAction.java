@@ -33,16 +33,12 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
-import com.liferay.portal.search.IndexSearcherImpl;
-import com.liferay.portal.search.IndexWriterImpl;
-import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
@@ -258,12 +254,6 @@ public class StartupAction extends SimpleAction {
 		SchedulerEngineUtil.init(new SchedulerEngineProxy());
 
 		SchedulerEngineUtil.start();
-
-		// Search
-
-		LuceneSearchEngineUtil.init();
-
-		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 
 		// Verify
 

@@ -20,30 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.search.lucene;
+package com.liferay.portal.search;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.kernel.search.messaging.SearchRequest;
 
 /**
- * <a href="LuceneSearchEngineImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class LuceneSearchEngineImpl implements SearchEngine {
+public class SearchEngineImpl implements SearchEngine {
 
 	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
+		throw new IllegalStateException();
 	}
 
 	public IndexSearcher getSearcher() {
@@ -63,35 +61,47 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 	}
 
 	public boolean isIndexReadOnly() {
-		return PropsValues.INDEX_READ_ONLY;
-	}
+		if (_indexReadOnly != null) {
+			return _indexReadOnly.booleanValue();
+		}
 
-	public void setSearchReaderMessageListener(
-			MessageListener searchReaderMessageListener) {
+		try {
+			SearchRequest searchRequest = new SearchRequest();
 
-		_searchReaderMessageListener = searchReaderMessageListener;
-	}
+			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
 
-	public void setSearchWriterMessageListener(
-			MessageListener searchWriterMessageListener) {
+			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronousMessage(
+				DestinationNames.SEARCH_READER, searchRequest);
 
-		_searchWriterMessageListener = searchWriterMessageListener;
-	}
+			if (_indexReadOnly == null) {
+				_indexReadOnly = Boolean.FALSE;
+			}
 
-	public void unregister(String name) {
-		if (!_name.equals(name)) {
-			MessageBusUtil.unregisterMessageListener(
-				DestinationNames.SEARCH_READER, _searchReaderMessageListener);
+			return _indexReadOnly.booleanValue();
+		}
+		catch (MessageBusException mbe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to check index status", mbe);
+			}
 
-			MessageBusUtil.unregisterMessageListener(
-				DestinationNames.SEARCH_WRITER, _searchWriterMessageListener);
+			return false;
 		}
 	}
 
-	private String _name;
+	public void unregister(String name) {
+		SearchRequest searchRequest = new SearchRequest();
+
+		searchRequest.setCommand(SearchRequest.COMMAND_UNREGISTER);
+		searchRequest.setId(name);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SEARCH_WRITER, searchRequest);
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(SearchEngineImpl.class);
+
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
-	private MessageListener _searchReaderMessageListener;
-	private MessageListener _searchWriterMessageListener;
+	private Boolean _indexReadOnly;
 
 }

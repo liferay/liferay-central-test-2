@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngine;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 
@@ -35,62 +36,72 @@ import com.liferay.portal.kernel.search.Sort;
  * @author Bruno Farache
  *
  */
-public class LuceneSearchEngineUtil {
+public class LuceneSearchEngineUtil extends SearchEngineUtil {
 
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		_engine.getWriter().addDocument(companyId, doc);
+		getSearchEngine().getWriter().addDocument(companyId, doc);
 	}
 
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		_engine.getWriter().deleteDocument(companyId, uid);
+		getSearchEngine().getWriter().deleteDocument(companyId, uid);
 	}
 
 	public static void deletePortletDocuments(long companyId, String portletId)
 		throws SearchException {
 
-		_engine.getWriter().deletePortletDocuments(companyId, portletId);
+		getSearchEngine().getWriter().deletePortletDocuments(
+			companyId, portletId);
 	}
 
 	public static SearchEngine getSearchEngine() {
-		return _engine;
-	}
-
-	public static void init() {
-		if (_engine != null) {
-			return;
-		}
-
-		_engine = new LuceneSearchEngineImpl();
+		return _searchEngine;
 	}
 
 	public static boolean isIndexReadOnly() {
-		return _engine.isIndexReadOnly();
+		return getSearchEngine().isIndexReadOnly();
 	}
 
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
-		return _engine.getSearcher().search(companyId, query, start, end);
+		return getSearchEngine().getSearcher().search(
+			companyId, query, start, end);
+	}
+
+	public static Hits search(
+			long companyId, Query query, Sort sort, int start, int end)
+		throws SearchException {
+
+		return getSearchEngine().getSearcher().search(
+			companyId, query, new Sort[] {sort}, start, end);
 	}
 
 	public static Hits search(
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
-		return _engine.getSearcher().search(
+		return getSearchEngine().getSearcher().search(
 			companyId, query, sorts, start, end);
+	}
+
+	public static void unregister(String name) {
+		getSearchEngine().unregister(name);
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		_engine.getWriter().updateDocument(companyId, uid, doc);
+		getSearchEngine().getWriter().updateDocument(companyId, uid, doc);
 	}
 
-	private static SearchEngine _engine;
+	public void setSearchEngine(SearchEngine searchEngine) {
+		_searchEngine = searchEngine;
+	}
+
+	private static SearchEngine _searchEngine;
 
 }

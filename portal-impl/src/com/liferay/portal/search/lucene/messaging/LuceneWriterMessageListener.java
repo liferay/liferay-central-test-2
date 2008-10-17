@@ -66,6 +66,9 @@ public class LuceneWriterMessageListener implements MessageListener {
 		else if (command.equals(SearchRequest.COMMAND_DELETE_PORTLET_DOCS)) {
 			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
 		}
+		else if (command.equals(SearchRequest.COMMAND_UNREGISTER)) {
+			LuceneSearchEngineUtil.unregister(id);
+		}
 		else if (command.equals(SearchRequest.COMMAND_UPDATE)) {
 			LuceneSearchEngineUtil.updateDocument(companyId, id, doc);
 		}

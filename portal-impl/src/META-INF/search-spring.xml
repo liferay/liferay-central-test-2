@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+	<!-- Portal search engine -->
+	
+	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
+	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
+
+	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
+		<property name="searchEngine">
+			<bean class="com.liferay.portal.search.SearchEngineImpl">
+				<property name="searcher" ref="indexSearcher.portal" />
+				<property name="writer" ref="indexWriter.portal" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- Lucene search engine plugin -->
+	
+	<bean id="indexSearcher.lucene" class="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
+	<bean id="indexWriter.lucene" class="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
+
+	<bean id="com.liferay.portal.search.lucene.LuceneSearchEngineUtil" class="com.liferay.portal.search.lucene.LuceneSearchEngineUtil">
+		<property name="searchEngine">
+			<bean class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
+				<property name="name" value="Lucene" />
+				<property name="searcher" ref="indexSearcher.lucene" />
+				<property name="writer" ref="indexWriter.lucene" />
+				<property name="searchReaderMessageListener" ref="messageListener.lucene_reader" />
+				<property name="searchWriterMessageListener" ref="messageListener.lucene_writer" />
+			</bean>
+		</property>
+	</bean>
+</beans>

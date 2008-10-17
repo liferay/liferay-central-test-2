@@ -45,6 +45,8 @@ public class SearchRequest {
 
 	public static final String COMMAND_SEARCH = "SEARCH";
 
+	public static final String COMMAND_UNREGISTER = "UNREGISTER";
+
 	public static final String COMMAND_UPDATE = "UPDATE";
 
 	public SearchRequest() {

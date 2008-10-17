@@ -84,10 +84,10 @@
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<constructor-arg index="1" type="com.liferay.portal.kernel.scheduler.SchedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
 	</bean>
-	<bean id="messageListener.search_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
+	<bean id="messageListener.lucene_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
-	<bean id="messageListener.search_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener" />
+	<bean id="messageListener.lucene_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener" />
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->
@@ -163,12 +163,12 @@
 				</entry>
 				<entry key="liferay/search_reader">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.search_reader" />
+						<ref bean="messageListener.lucene_reader" />
 					</list>
 				</entry>
 				<entry key="liferay/search_writer">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.search_writer" />
+						<ref bean="messageListener.lucene_writer" />
 					</list>
 				</entry>
 				<entry key="liferay/wiki">
