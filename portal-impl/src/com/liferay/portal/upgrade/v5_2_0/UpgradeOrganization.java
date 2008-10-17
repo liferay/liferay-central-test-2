@@ -94,10 +94,10 @@ public class UpgradeOrganization extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"update Resource_ where codeId = ? set codeId = ?");
+				"update Resource_ set codeId = ? where codeId = ?");
 
-			ps.setLong(1, oldResourceCode.getCodeId());
-			ps.setLong(2, newResourceCode.getCodeId());
+			ps.setLong(1, newResourceCode.getCodeId());
+			ps.setLong(2, oldResourceCode.getCodeId());
 
 			ps.executeUpdate();
 		}
