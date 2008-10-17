@@ -130,7 +130,6 @@ String curSection = mainSections[0];
 
 								for (String section : sections) {
 									String sectionId = _getIdName(section);
-									String cssClass = "";
 
 									boolean error = false;
 
@@ -139,6 +138,8 @@ String curSection = mainSections[0];
 
 										curSection = section;
 									}
+
+									String cssClass = StringPool.BLANK;
 
 									if (curSection.equals(section)) {
 										cssClass += "selected";
