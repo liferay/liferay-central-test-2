@@ -59,7 +59,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><%= removeOrganizationAction %></a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
