@@ -230,7 +230,7 @@ headerNames.add("type");
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.deleteRow(this);">X</a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('parentOrganizationHTML').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);">X</a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -298,12 +298,12 @@ headerNames.add("type");
 
 		rowColumns.push(createUrl(href, name));
 		rowColumns.push(createUrl(href, Liferay.Language.get(type)));
-		rowColumns.push(createUrl('javascript: ;', 'X', 'Liferay.SearchContainer.deleteRow(this)'));
+		rowColumns.push(createUrl('javascript: ;', 'X', 'Liferay.SearchContainer.get(\'parentOrganizationHTML\').deleteRow(this, ' + organizationId + ')'));
 
 		var searchContainer = Liferay.SearchContainer.get('parentOrganizationHTML');
 
-		searchContainer.addRow(rowColumns);
-		searchContainer.deleteRow(1);
+		searchContainer.deleteRow(1, searchContainer.getData());
+		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore(organizationId);
 	}
 
