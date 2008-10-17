@@ -158,7 +158,12 @@ List<String> primaryKeys = new ArrayList<String>();
 		<tr class="lfr-template portlet-section-body results-row">
 
 			<%
-			for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
+			int size = 0;
+
+			if (headerNames != null) {
+				size = headerNames.size();
+			}
+			for (int i = 0; (headerNames != null) && (i < size); i++) {
 			%>
 
 				<td></td>
@@ -171,7 +176,7 @@ List<String> primaryKeys = new ArrayList<String>();
 
 		<c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
 			<tr class="portlet-section-body results-row">
-				<td align="center" colspan="<%= headerNames.size() %>">
+				<td align="center" colspan="<%= size %>">
 					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
 				</td>
 			</tr>
