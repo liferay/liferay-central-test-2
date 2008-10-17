@@ -48,16 +48,8 @@ public class SearchEngineImpl implements SearchEngine {
 		return _searcher;
 	}
 
-	public void setSearcher(IndexSearcher searcher) {
-		_searcher = searcher;
-	}
-
 	public IndexWriter getWriter() {
 		return _writer;
-	}
-
-	public void setWriter(IndexWriter writer) {
-		_writer = writer;
 	}
 
 	public boolean isIndexReadOnly() {
@@ -86,6 +78,14 @@ public class SearchEngineImpl implements SearchEngine {
 
 			return false;
 		}
+	}
+
+	public void setSearcher(IndexSearcher searcher) {
+		_searcher = searcher;
+	}
+
+	public void setWriter(IndexWriter writer) {
+		_writer = writer;
 	}
 
 	public void unregister(String name) {

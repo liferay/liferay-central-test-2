@@ -42,40 +42,40 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		return _name;
 	}
 
-	public void setName(String name) {
-		_name = name;
-	}
-
 	public IndexSearcher getSearcher() {
 		return _searcher;
-	}
-
-	public void setSearcher(IndexSearcher searcher) {
-		_searcher = searcher;
 	}
 
 	public IndexWriter getWriter() {
 		return _writer;
 	}
 
-	public void setWriter(IndexWriter writer) {
-		_writer = writer;
-	}
-
 	public boolean isIndexReadOnly() {
 		return PropsValues.INDEX_READ_ONLY;
 	}
 
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setSearcher(IndexSearcher searcher) {
+		_searcher = searcher;
+	}
+
 	public void setSearchReaderMessageListener(
-			MessageListener searchReaderMessageListener) {
+		MessageListener searchReaderMessageListener) {
 
 		_searchReaderMessageListener = searchReaderMessageListener;
 	}
 
 	public void setSearchWriterMessageListener(
-			MessageListener searchWriterMessageListener) {
+		MessageListener searchWriterMessageListener) {
 
 		_searchWriterMessageListener = searchWriterMessageListener;
+	}
+
+	public void setWriter(IndexWriter writer) {
+		_writer = writer;
 	}
 
 	public void unregister(String name) {
