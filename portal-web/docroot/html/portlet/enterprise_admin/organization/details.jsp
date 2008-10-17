@@ -45,6 +45,10 @@ long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 %>
 
+<liferay-util:buffer var="removeOrganizationIcon">
+	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
+</liferay-util:buffer>
+
 <script type="text/javascript">
 	function <portlet:namespace />openOrganizationSelector() {
 		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
@@ -81,7 +85,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 		rowColumns.push(createURL(href, name));
 		rowColumns.push(createURL(href, Liferay.Language.get(type)));
-		rowColumns.push(createURL('javascript: ;', 'X', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+		rowColumns.push(createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
 		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
 
@@ -246,7 +250,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><liferay-ui:icon image="unlink" message="remove" /></a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
