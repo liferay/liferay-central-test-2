@@ -71,7 +71,7 @@ List<String> primaryKeys = new ArrayList<String>();
 
 	<div class="results-grid"
 		<c:if test="<%= Validator.isNotNull(id) %>">
-			id="<%= id %>searchContainer"
+			id="<%= id %>SearchContainer"
 		</c:if>
 	>
 		<table class="taglib-search-iterator">

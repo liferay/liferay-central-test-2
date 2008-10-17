@@ -3,8 +3,8 @@ Liferay.SearchContainer = new Class({
 		var instance = this;
 
 		instance._id = options.id || '';
-		instance._container = jQuery('#' + instance._id + 'searchContainer');
-		instance._dataStore = jQuery('#' + instance._id + 'primaryKeys');
+		instance._container = jQuery('#' + instance._id + 'SearchContainer');
+		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
 
 		instance._table = instance._container.find('table');
 
@@ -120,7 +120,7 @@ jQuery.extend(
 		get: function(id) {
 			var instance = this;
 
-			var searchContainer;
+			var searchContainer = null;
 
 			if (instance._cache[id]) {
 				searchContainer = instance._cache[id];

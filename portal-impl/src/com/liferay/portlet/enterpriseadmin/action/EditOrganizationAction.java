@@ -169,7 +169,7 @@ public class EditOrganizationAction extends PortletAction {
 			actionRequest, "organizationId");
 
 		long parentOrganizationId = ParamUtil.getLong(
-			actionRequest, "parentOrganizationSearchContainerprimaryKeys",
+			actionRequest, "parentOrganizationSearchContainerPrimaryKeys",
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 		String name = ParamUtil.getString(actionRequest, "name");
 		boolean recursable = ParamUtil.getBoolean(actionRequest, "recursable");
