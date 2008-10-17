@@ -28,7 +28,6 @@
 themeDisplay.setIncludeServiceJs(true);
 
 String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
@@ -61,8 +60,7 @@ String curSection = mainSections[0];
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= HttpUtil.encodeURL(backURL) %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
-<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
@@ -171,7 +169,7 @@ String curSection = mainSections[0];
 				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />
 
-					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= backURL %>';" />
+					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 				</div>
 			</div>
 		</td>
