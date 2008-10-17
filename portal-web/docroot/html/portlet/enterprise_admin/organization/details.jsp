@@ -45,6 +45,52 @@ long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 %>
 
+<script type="text/javascript">
+	function <portlet:namespace />openOrganizationSelector() {
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
+
+		<c:choose>
+			<c:when test="<%= organization == null %>">
+				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
+			</c:when>
+			<c:otherwise>
+				var type = '<%= type %>';
+			</c:otherwise>
+		</c:choose>
+
+		url = Liferay.Util.addParams('childType=' + type, url);
+
+		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		organizationWindow.focus();
+	}
+
+	function <portlet:namespace />saveOrganization(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectOrganization(organizationId, name, type) {
+		var createURL = function(href, value, onclick) {
+			return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
+		};
+
+		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+
+		var rowColumns = [];
+
+		rowColumns.push(createURL(href, name));
+		rowColumns.push(createURL(href, Liferay.Language.get(type)));
+		rowColumns.push(createURL('javascript: ;', 'X', 'Liferay.SearchContainer.get(\'parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+
+		var searchContainer = Liferay.SearchContainer.get('parentOrganizationSearchContainer');
+
+		searchContainer.deleteRow(1, searchContainer.getData());
+		searchContainer.addRow(rowColumns, organizationId);
+		searchContainer.updateDataStore(organizationId);
+	}
+</script>
+
 <liferay-ui:error-marker key="organization.errorSection" value="details" />
 
 <h3><liferay-ui:message key="details" /></h3>
@@ -143,8 +189,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 	</div>
 </fieldset>
 
-<h3><liferay-ui:message key="parent-organization" /></h3>
-
 <%
 Organization parentOrganization = null;
 
@@ -165,20 +209,15 @@ if (parentOrganization != null) {
 }
 %>
 
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
-
 <input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
 
-<%
-List<String> headerNames = new ArrayList<String>();
+<h3><liferay-ui:message key="parent-organization" /></h3>
 
-headerNames.add("name");
-headerNames.add("type");
-%>
+<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
 
 <liferay-ui:search-container
-	headerNames="<%= headerNames %>"
-	id="parentOrganizationHTML"
+	headerNames="name,type"
+	id="parentOrganizationSearchContainer"
 >
 	<liferay-ui:search-container-results
 		results="<%= parentOrganizations %>"
@@ -209,7 +248,7 @@ headerNames.add("type");
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('parentOrganizationHTML').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);">X</a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('parentOrganizationSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><liferay-ui:icon image="unlink" message="remove" /></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -218,72 +257,9 @@ headerNames.add("type");
 
 <br />
 
-<input type="button" value="<liferay-ui:message key="select" />" onClick="<portlet:namespace />openOrganizationSelector();" />
+<input onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
 
 <script type="text/javascript">
-	function <portlet:namespace />openOrganizationSelector() {
-		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
-
-		<c:choose>
-			<c:when test="<%= organization == null %>">
-				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
-			</c:when>
-			<c:otherwise>
-				var type = '<%= type %>';
-			</c:otherwise>
-		</c:choose>
-
-		url = Liferay.Util.addParams('childType=' + type, url);
-
-		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-		organizationWindow.focus();
-	}
-
-	function <portlet:namespace />removeOrganization() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationHTML");
-
-		nameEl.href = "#";
-
-		var parentOrganizationHTML = '';
-
-		parentOrganizationHTML += '<tr class="portlet-section-body results-row">';
-		parentOrganizationHTML += '<td align="center" class="col-1" colspan="3" valign="middle"><liferay-ui:message key="this-organization-does-not-have-a-parent" /></td></tr>';
-
-		nameEl.innerHTML = parentOrganizationHTML;
-
-		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
-	}
-
-	function <portlet:namespace />saveOrganization(cmd) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		var createUrl = function(href, value, onClick) {
-			var anchorText = '<a href="' + href + '"' + (onClick ? ' onclick="' + onClick + '" ' : '') + '>' + value + '</a>';
-
-			return anchorText;
-		};
-
-		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
-
-		var rowColumns = [];
-
-		rowColumns.push(createUrl(href, name));
-		rowColumns.push(createUrl(href, Liferay.Language.get(type)));
-		rowColumns.push(createUrl('javascript: ;', 'X', 'Liferay.SearchContainer.get(\'parentOrganizationHTML\').deleteRow(this, ' + organizationId + ')'));
-
-		var searchContainer = Liferay.SearchContainer.get('parentOrganizationHTML');
-
-		searchContainer.deleteRow(1, searchContainer.getData());
-		searchContainer.addRow(rowColumns, organizationId);
-		searchContainer.updateDataStore(organizationId);
-	}
-
 	<c:if test="<%= organization == null %>">
 		jQuery('#<portlet:namespace />type').change(
 			function(event) {

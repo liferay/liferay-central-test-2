@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
@@ -229,8 +231,8 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_hasResults = hasResults;
 	}
 
-	public void setHeaderNames(List<String> headerNames) {
-		_headerNames = headerNames;
+	public void setHeaderNames(String headerNames) {
+		_headerNames = ListUtil.toList(StringUtil.split(headerNames));
 	}
 
 	public void setHover(boolean hover) {
