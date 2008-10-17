@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -153,10 +154,23 @@ public class ExportPageAction extends PortletAction {
 
 			StringBuilder sb = new StringBuilder();
 
+			sb.append("<html>");
+
+			sb.append("<head>");
+			sb.append("<meta content=\"");
+			sb.append(ContentTypes.TEXT_HTML_UTF8);
+			sb.append("\" http-equiv=\"content-type\" />");
+			sb.append("</head>");
+
+			sb.append("<body>");
+
 			sb.append("<h1>");
 			sb.append(title);
 			sb.append("</h1>");
 			sb.append(content);
+
+			sb.append("</body>");
+			sb.append("</html>");
 
 			is = new ByteArrayInputStream(
 				sb.toString().getBytes(StringPool.UTF8));
