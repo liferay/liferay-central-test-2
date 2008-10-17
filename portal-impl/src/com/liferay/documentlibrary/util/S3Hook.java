@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -301,7 +302,8 @@ public class S3Hook extends BaseHook {
 					Document doc = Indexer.getFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
-					SearchEngineUtil.addDocument(companyId, doc);
+					SearchEngineUtil.updateDocument(
+						companyId, doc.get(Field.UID), doc);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);

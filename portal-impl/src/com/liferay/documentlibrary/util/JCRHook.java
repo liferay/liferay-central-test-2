@@ -32,6 +32,7 @@ import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -545,7 +546,8 @@ public class JCRHook extends BaseHook {
 							companyId, portletId, groupId, repositoryId,
 							node.getName());
 
-						SearchEngineUtil.addDocument(companyId, doc);
+						SearchEngineUtil.updateDocument(
+							companyId, doc.get(Field.UID), doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + node.getName(), e1);

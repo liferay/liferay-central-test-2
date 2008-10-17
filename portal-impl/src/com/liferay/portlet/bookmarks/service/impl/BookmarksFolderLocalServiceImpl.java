@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -300,11 +299,9 @@ public class BookmarksFolderLocalServiceImpl
 						BookmarksEntry.class.getName(), entryId);
 
 					try {
-						Document doc = Indexer.getEntryDocument(
-							companyId, groupId, folderId, entryId, name,
-							url, comments, tagsEntries);
-
-						SearchEngineUtil.addDocument(companyId, doc);
+						Indexer.updateEntry(
+							companyId, groupId, folderId, entryId, name, url,
+							comments, tagsEntries);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + entryId, e1);

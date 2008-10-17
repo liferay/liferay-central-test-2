@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -328,11 +327,9 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 						IGImage.class.getName(), imageId);
 
 					try {
-						Document doc = Indexer.getImageDocument(
+						Indexer.updateImage(
 							companyId, groupId, folderId, imageId, name,
 							description, tagsEntries);
-
-						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + imageId, e1);

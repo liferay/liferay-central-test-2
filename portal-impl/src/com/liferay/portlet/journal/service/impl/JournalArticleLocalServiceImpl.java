@@ -1445,13 +1445,10 @@ public class JournalArticleLocalServiceImpl
 						JournalArticle.class.getName(), resourcePrimKey);
 
 					try {
-						com.liferay.portal.kernel.search.Document doc =
-							Indexer.getArticleDocument(
-								companyId, groupId, articleId, version, title,
-								description, content, type, displayDate,
-								tagsEntries);
-
-						SearchEngineUtil.addDocument(companyId, doc);
+						Indexer.updateArticle(
+							companyId, groupId, articleId, version, title,
+							description, content, type, displayDate,
+							tagsEntries);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + article.getId(), e1);

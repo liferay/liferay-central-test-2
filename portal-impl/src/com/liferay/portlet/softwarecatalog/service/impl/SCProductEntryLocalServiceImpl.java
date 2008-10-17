@@ -458,8 +458,7 @@ public class SCProductEntryLocalServiceImpl
 				}
 
 				try {
-					com.liferay.portal.kernel.search.Document doc =
-						Indexer.getProductEntryDocument(
+					Indexer.updateProductEntry(
 							companyId, productEntry.getGroupId(),
 							productEntry.getUserId(),
 							productEntry.getUserName(),
@@ -471,8 +470,6 @@ public class SCProductEntryLocalServiceImpl
 							productEntry.getPageURL(),
 							productEntry.getRepoGroupId(),
 							productEntry.getRepoArtifactId());
-
-					SearchEngineUtil.addDocument(companyId, doc);
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + productEntryId, e1);

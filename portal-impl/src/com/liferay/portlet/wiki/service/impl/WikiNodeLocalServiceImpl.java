@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -298,8 +297,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 				long nodeId = node.getNodeId();
 
-				Iterator<WikiPage> pagesItr = wikiPagePersistence.findByNodeId(
-					nodeId).iterator();
+				Iterator<WikiPage> pagesItr = wikiPagePersistence.findByN_H(
+					nodeId, true).iterator();
 
 				while (pagesItr.hasNext()) {
 					WikiPage page = pagesItr.next();
@@ -312,11 +311,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 						WikiPage.class.getName(), page.getResourcePrimKey());
 
 					try {
-						Document doc = Indexer.getPageDocument(
+						Indexer.updatePage(
 							companyId, groupId, nodeId, title, content,
 							tagsEntries);
-
-						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + page.getPrimaryKey(), e1);
