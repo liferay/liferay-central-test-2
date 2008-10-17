@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-Organization selOrganization = (Organization)request.getAttribute("organization.selOrganization");
+User selUser = (User)request.getAttribute("user.selUser");
 %>
 
 <h3><liferay-ui:message key="comments" /></h3>
@@ -34,6 +34,6 @@ Organization selOrganization = (Organization)request.getAttribute("organization.
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />comments"><liferay-ui:message key="comments" /></label>
 
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= selOrganization %>" field="comments" />
+		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="comments" />
 	</div>
 </fieldset>

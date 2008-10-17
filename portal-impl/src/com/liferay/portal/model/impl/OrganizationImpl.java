@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -117,6 +118,45 @@ public class OrganizationImpl
 			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}
 
+	public List<Organization> getAncestors()
+		throws PortalException, SystemException {
+
+		List<Organization> organizations = new ArrayList<Organization>();
+
+		Organization organization = this;
+
+		while (true) {
+			if (!organization.isRoot()) {
+				organization = OrganizationLocalServiceUtil.getOrganization(
+					organization.getParentOrganizationId());
+
+				organizations.add(organization);
+			}
+			else {
+				break;
+			}
+		}
+
+		return organizations;
+	}
+
+	public String getAncestorsBreadcrumb()
+		throws PortalException, SystemException {
+
+		StringBuilder sb = new StringBuilder();
+
+		List<Organization> ancestors = getAncestors();
+
+		for (int i = ancestors.size(); i > 0; i--) {
+			Organization curOrganization = ancestors.get(i - 1);
+
+			sb.append(curOrganization.getName());
+			sb.append("&nbsp;&raquo; ");
+		}
+
+		return sb.toString();
+	}
+
 	public String[] getChildrenTypes() {
 		return getChildrenTypes(getType());
 	}
@@ -133,6 +173,17 @@ public class OrganizationImpl
 		}
 
 		return new GroupImpl();
+	}
+
+	public String getOrganizationBreadcrumb()
+		throws PortalException, SystemException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(getAncestorsBreadcrumb());
+		sb.append(getName());
+
+		return sb.toString();
 	}
 
 	public int getPrivateLayoutsPageCount() {

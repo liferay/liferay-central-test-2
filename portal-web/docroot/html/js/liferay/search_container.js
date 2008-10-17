@@ -91,6 +91,12 @@ Liferay.SearchContainer = new Class({
 		return instance._ids.join(',');
 	},
 
+	getIds: function() {
+		var instance = this;
+
+		return instance._ids;
+	},
+
 	updateDataStore: function(ids) {
 		var instance = this;
 

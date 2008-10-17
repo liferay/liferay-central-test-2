@@ -639,6 +639,12 @@ public class UserLocalServiceUtil {
 		return getService().updateCreateDate(userId, createDate);
 	}
 
+	public static void updateGroups(long userId, long[] newGroupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateGroups(userId, newGroupIds);
+	}
+
 	public static com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)
 		throws com.liferay.portal.PortalException,
@@ -735,6 +741,12 @@ public class UserLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().updatePortrait(userId, bytes);
+	}
+
+	public static void updateRoles(long userId, long[] newRoleIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateRoles(userId, newRoleIds);
 	}
 
 	public static void updateScreenName(long userId, java.lang.String screenName)

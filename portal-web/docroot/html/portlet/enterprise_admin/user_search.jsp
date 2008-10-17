@@ -36,71 +36,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search-users"
 >
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="first-name" />
-		</td>
-		<td>
-			<liferay-ui:message key="middle-name" />
-		</td>
-		<td>
-			<liferay-ui:message key="last-name" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFirstName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getMiddleName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getLastName()) %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="screen-name" />
-		</td>
-		<td>
-			<liferay-ui:message key="email-address" />
-		</td>
-
-		<c:choose>
-			<c:when test="<%= showActiveUserSelect %>">
-				<td>
-					<liferay-ui:message key="active" />
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getScreenName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
-		</td>
-
-		<c:choose>
-			<c:when test="<%= showActiveUserSelect %>">
-				<td>
-					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
-						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-						<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-					</select>
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose>
-	</tr>
-	</table>
+	<%@ include file="/html/portlet/enterprise_admin/user/user_search_advanced.jspf" %>
 </liferay-ui:search-toggle>
 
 <c:if test="<%= showAddButton %>">

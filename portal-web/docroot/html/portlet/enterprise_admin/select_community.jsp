@@ -42,10 +42,6 @@
 
 <liferay-ui:tabs names="communities" />
 
-<liferay-ui:message key="please-select-at-least-one-community" />
-
-<br /><br />
-
 <%
 String target = ParamUtil.getString(request, "target");
 
@@ -69,6 +65,8 @@ searchContainer.setHeaderNames(headerNames);
 	searchContainer="<%= searchContainer %>"
 />
 
+<liferay-ui:message key="please-select-at-least-one-community" />
+
 <%
 GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
@@ -79,6 +77,8 @@ int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerm
 searchContainer.setTotal(total);
 
 List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+
+results = EnterpriseAdminUtil.filterCommunities(permissionChecker, results);
 
 searchContainer.setResults(results);
 %>
@@ -136,6 +136,8 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close(); " />
 
 </form>
 

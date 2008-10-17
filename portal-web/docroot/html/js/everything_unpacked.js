@@ -9038,7 +9038,7 @@ Liferay.SearchContainer = new Class({
 		instance._id = options.id || '';
 		instance._container = jQuery('#' + instance._id + 'SearchContainer');
 		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
-
+console.log(instance._dataStore.length, instance._dataStore[0], instance._dataStore.val());
 		instance._table = instance._container.find('table');
 
 		instance._table.attr('data-searchContainerId', instance._id);
@@ -9122,6 +9122,12 @@ Liferay.SearchContainer = new Class({
 		var instance = this;
 
 		return instance._ids.join(',');
+	},
+
+	getIds: function() {
+		var instance = this;
+
+		return instance._ids;
 	},
 
 	updateDataStore: function(ids) {

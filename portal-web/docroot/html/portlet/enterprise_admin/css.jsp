@@ -50,7 +50,7 @@
 .portlet-enterprise-admin .avatar {
 	clear: both;
 	float: left;
-	padding: 15px 0 5px;
+	padding: 5px 0;
 }
 
 .portlet-enterprise-admin .avatar img {
@@ -247,6 +247,12 @@
 
 .portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
 	border-collapse: collapse;
+}
+
+.lfr-social-icon, .lfr-im-icon {
+	position: relative;
+	top: 9px;
+	margin-left: 10px;
 }
 
 .lfr-portlet-toolbar {

@@ -267,6 +267,12 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void updateGroups(long userId, long[] groupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserServiceUtil.updateGroups(userId, groupIds);
+	}
+
 	public static JSONObject updateLockout(long userId, boolean lockout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -297,6 +303,12 @@ public class UserServiceJSON {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserServiceUtil.updatePortrait(userId, bytes);
+	}
+
+	public static void updateRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserServiceUtil.updateRoles(userId, roleIds);
 	}
 
 	public static void updateScreenName(long userId, java.lang.String screenName)
@@ -362,6 +374,39 @@ public class UserServiceJSON {
 				male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 				facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
 				twitterSn, ymSn, jobTitle, organizationIds);
+
+		return UserJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updateUser(com.liferay.portal.model.User user,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String comments, java.lang.String smsSn,
+		java.lang.String aimSn, java.lang.String facebookSn,
+		java.lang.String icqSn, java.lang.String jabberSn,
+		java.lang.String msnSn, java.lang.String mySpaceSn,
+		java.lang.String skypeSn, java.lang.String twitterSn,
+		java.lang.String ymSn, java.lang.String jobTitle,
+		long[] organizationsIds, java.lang.String oldPassword,
+		java.lang.String newPassword1, java.lang.String newPassword2,
+		boolean passwordReset, java.lang.String openId,
+		java.util.ArrayList<com.liferay.portlet.announcements.model.AnnouncementsDelivery> deliveries,
+		long[] communityIds, long[] regularRoleIds, java.lang.String className,
+		long classPK,
+		java.util.ArrayList<com.liferay.portal.model.Website> websites)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(user,
+				screenName, emailAddress, languageId, timeZoneId, greeting,
+				firstName, middleName, lastName, prefixId, suffixId, male,
+				birthdayMonth, birthdayDay, birthdayYear, comments, smsSn,
+				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
+				twitterSn, ymSn, jobTitle, organizationsIds, oldPassword,
+				newPassword1, newPassword2, passwordReset, openId, deliveries,
+				communityIds, regularRoleIds, className, classPK, websites);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}

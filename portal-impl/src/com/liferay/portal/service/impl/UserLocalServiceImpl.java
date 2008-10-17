@@ -1462,6 +1462,38 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public void updateGroups(long userId, long[] newGroupIds)
+		throws PortalException, SystemException {
+
+		List<Group> oldGroups = userPersistence.getGroups(
+			userId);
+
+		List<Long> oldGroupIds = new ArrayList<Long>(
+			oldGroups.size());
+
+		for (int i = 0; i < oldGroups.size(); i++) {
+			Group oldGroup = oldGroups.get(i);
+
+			long oldGroupId = oldGroup.getGroupId();
+
+			oldGroupIds.add(oldGroupId);
+
+			if (!ArrayUtil.contains(newGroupIds, oldGroupId)) {
+				unsetGroupUsers(oldGroupId, new long[] {userId});
+			}
+		}
+
+		for (int i = 0; i < newGroupIds.length; i++) {
+			long newGroupId = newGroupIds[i];
+
+			if (!oldGroupIds.contains(newGroupId)) {
+				addGroupUsers(newGroupId, new long[] {userId});
+			}
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public User updateLastLogin(long userId, String loginIP)
 		throws PortalException, SystemException {
 
@@ -1561,8 +1593,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 	}
 
-	public void updateOrganizations(
-			long userId, long[] newOrganizationIds)
+	public void updateOrganizations(long userId, long[] newOrganizationIds)
 		throws PortalException, SystemException {
 
 		List<Organization> oldOrganizations = userPersistence.getOrganizations(
@@ -1721,6 +1752,38 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		imageLocalService.updateImage(portraitId, bytes);
+	}
+
+	public void updateRoles(long userId, long[] newRoleIds)
+		throws PortalException, SystemException {
+
+		List<Role> oldRoles = userPersistence.getRoles(
+			userId);
+
+		List<Long> oldRoleIds = new ArrayList<Long>(
+			oldRoles.size());
+
+		for (int i = 0; i < oldRoles.size(); i++) {
+			Role oldRole = oldRoles.get(i);
+
+			long oldRoleId = oldRole.getRoleId();
+
+			oldRoleIds.add(oldRoleId);
+
+			if (!ArrayUtil.contains(newRoleIds, oldRoleId)) {
+				unsetRoleUsers(oldRoleId, new long[] {userId});
+			}
+		}
+
+		for (int i = 0; i < newRoleIds.length; i++) {
+			long newRoleId = newRoleIds[i];
+
+			if (!oldRoleIds.contains(newRoleId)) {
+				addRoleUsers(newRoleId, new long[] {userId});
+			}
+		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void updateScreenName(long userId, String screenName)

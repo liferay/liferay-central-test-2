@@ -38,6 +38,10 @@ if (filterManageableOrganizations) {
 }
 %>
 
+<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
+	<liferay-util:param name="toolbar-item" value="view-users" />
+</liferay-util:include>
+
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
 
 <liferay-ui:search-container
@@ -49,7 +53,7 @@ if (filterManageableOrganizations) {
 
 	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/user_search.jsp"
-		showAddButton="<%= true %>"
+		showAddButton="<%= false %>"
 	/>
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

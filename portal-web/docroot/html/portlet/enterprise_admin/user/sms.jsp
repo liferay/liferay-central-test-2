@@ -25,15 +25,19 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-Organization selOrganization = (Organization)request.getAttribute("organization.selOrganization");
+Contact selContact = (Contact)request.getAttribute("user.selContact");
 %>
 
-<h3><liferay-ui:message key="comments" /></h3>
+<liferay-ui:error-marker key="user.errorSection" value="sms" />
+
+<h3><liferay-ui:message key="sms" /></h3>
+
+<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-valid-sms-number" />
 
 <fieldset class="block-labels">
 	<div class="ctrl-holder">
-		<label for="<portlet:namespace />comments"><liferay-ui:message key="comments" /></label>
+		<label for="<portlet:namespace />smsSn"><liferay-ui:message key="sms" /></label>
 
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= selOrganization %>" field="comments" />
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="smsSn" />
 	</div>
 </fieldset>

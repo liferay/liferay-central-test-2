@@ -24,16 +24,6 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<%
-Organization selOrganization = (Organization)request.getAttribute("organization.selOrganization");
-%>
+<liferay-ui:error-marker key="user.errorSection" value="websites" />
 
-<h3><liferay-ui:message key="comments" /></h3>
-
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />comments"><liferay-ui:message key="comments" /></label>
-
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= selOrganization %>" field="comments" />
-	</div>
-</fieldset>
+<%@ include file="/html/portlet/enterprise_admin/common/websites.jsp" %>

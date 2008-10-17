@@ -54,9 +54,21 @@ public interface Organization extends OrganizationModel {
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Organization> getAncestors()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.lang.String getAncestorsBreadcrumb()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public java.lang.String[] getChildrenTypes();
 
 	public com.liferay.portal.model.Group getGroup();
+
+	public java.lang.String getOrganizationBreadcrumb()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public int getPrivateLayoutsPageCount();
 

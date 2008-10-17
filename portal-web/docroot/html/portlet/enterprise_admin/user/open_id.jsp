@@ -25,15 +25,15 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-Organization selOrganization = (Organization)request.getAttribute("organization.selOrganization");
+User selUser = (User)request.getAttribute("user.selUser");
 %>
 
-<h3><liferay-ui:message key="comments" /></h3>
+<h3><liferay-ui:message key="openid" /></h3>
 
 <fieldset class="block-labels">
 	<div class="ctrl-holder">
-		<label for="<portlet:namespace />comments"><liferay-ui:message key="comments" /></label>
+		<label for="<portlet:namespace />openId"><liferay-ui:message key="open-id" /></label>
 
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= selOrganization %>" field="comments" />
+		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="openId" />
 	</div>
 </fieldset>

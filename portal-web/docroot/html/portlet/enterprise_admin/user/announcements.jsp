@@ -22,6 +22,14 @@
  */
 %>
 
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
+<%
+User selUser = (User)request.getAttribute("user.selUser");
+%>
+
+<h3><liferay-ui:message key="alerts-and-announcements" /></h3>
+
 <liferay-ui:message key="select-the-delivery-options-for-alerts-and-announcements" />
 
 <br /><br />
@@ -38,7 +46,7 @@ headerNames.add("website");
 
 searchContainer.setHeaderNames(headerNames);
 
-List<AnnouncementsDelivery> results = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(user2.getUserId());
+List<AnnouncementsDelivery> results = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId());
 List<ResultRow> resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
@@ -69,5 +77,3 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<br />
