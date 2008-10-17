@@ -71,7 +71,7 @@ public class AddMemberTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[5]/td[1]/input");
+		selenium.click("//tr[6]/td[1]/input");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");

@@ -72,7 +72,7 @@ public class AddCATest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[3]/td[1]/input");
+		selenium.click("//tr[4]/td[1]/input");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");

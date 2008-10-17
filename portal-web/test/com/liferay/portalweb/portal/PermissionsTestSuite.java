@@ -37,7 +37,7 @@ public class PermissionsTestSuite extends BaseTests {
 		addTestSuite(LoginTests.class);
 		addTestSuite(EnterpriseAdminTests.class);
 
-		//addTestSuite(StopSeleniumTest.class);
+		addTestSuite(StopSeleniumTest.class);
 	}
 
 }

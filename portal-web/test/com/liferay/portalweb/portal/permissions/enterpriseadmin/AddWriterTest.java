@@ -69,7 +69,7 @@ public class AddWriterTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[10]/td[1]/input");
+		selenium.click("//tr[11]/td[1]/input");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");

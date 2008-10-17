@@ -35,7 +35,7 @@ public class DefineMemberRolesTest extends BaseTestCase {
 	public void testDefineMemberRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[8]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[9]/td[4]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 

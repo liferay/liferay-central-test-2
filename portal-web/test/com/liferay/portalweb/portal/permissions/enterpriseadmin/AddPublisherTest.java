@@ -69,7 +69,7 @@ public class AddPublisherTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[8]/td[1]/input");
+		selenium.click("//tr[9]/td[1]/input");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
