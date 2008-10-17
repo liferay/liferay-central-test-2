@@ -570,7 +570,7 @@ public class SourceFormatter {
 
 		content = _formatTaglibQuotes(fileName, content, StringPool.QUOTE);
 		content = _formatTaglibQuotes(fileName, content, StringPool.APOSTROPHE);
-		
+
 		return content;
 	}
 
@@ -578,73 +578,48 @@ public class SourceFormatter {
 			String fileName, String content, String quoteType)
 		throws IOException {
 
-		StringBuilder regexpSB = new StringBuilder();
+		String quoteFix = StringPool.APOSTROPHE;
 
-	    String quoteFix = StringPool.APOSTROPHE;
-
-	    if (quoteFix == quoteType) {
+	    if (quoteFix.equals(quoteType)) {
 	    	quoteFix = StringPool.QUOTE;
 	    }
 
-	    regexpSB.append("<(");
+	    Pattern pattern = Pattern.compile(_getTaglibRegex(quoteType));
 
-		for (int i = 0; i < _TAG_LIBRARIES.length; i++) {
-			regexpSB.append(_TAG_LIBRARIES[i]);
-			regexpSB.append(StringPool.PIPE);
-		}
-
-		regexpSB.deleteCharAt(regexpSB.length() - 1);
-		regexpSB.append("):([^>]|%>)*");
-		regexpSB.append(quoteType);
-		regexpSB.append("<%=[^>]*");
-		regexpSB.append(quoteType);
-		regexpSB.append("[^>]*");
-		regexpSB.append(quoteType);
-		regexpSB.append("[^>]*%>");
-		regexpSB.append(quoteType);
-		regexpSB.append("([^>]|%>)*>");
-
-		Pattern pattern = Pattern.compile(regexpSB.toString());
 		Matcher matcher = pattern.matcher(content);
 
 		while (matcher.find()) {
 			int x = content.indexOf(quoteType + "<%=", matcher.start());
 			int y = content.indexOf("%>" + quoteType, x);
 
-			while (x != -1 && y != -1) {
-				String regexpResult = content.substring(x + 1, y + 2);
+			while ((x != -1) && (y != -1)) {
+				String result = content.substring(x + 1, y + 2);
 
-				if (regexpResult.indexOf(quoteType) != -1) {
-					int line = 1;
+				if (result.indexOf(quoteType) != -1) {
+					int lineCount = 1;
 
-					char charContent[] = content.toCharArray();
+					char contentCharArray[] = content.toCharArray();
 
 					for (int i = 0; i < x; i++) {
-						if (charContent[i] == CharPool.NEW_LINE) {
-							line++;
+						if (contentCharArray[i] == CharPool.NEW_LINE) {
+							lineCount++;
 						}
 					}
 
-					if (regexpResult.indexOf(quoteFix) == -1) {
-						StringBuilder contentSB = new StringBuilder();
+					if (result.indexOf(quoteFix) == -1) {
+						StringBuilder sb = new StringBuilder();
 
-						contentSB.append(content.substring(0, x));
-						contentSB.append(quoteFix);
-						contentSB.append(regexpResult);
-						contentSB.append(quoteFix);
-						contentSB.append(
-							content.substring(y+3, content.length()));
+						sb.append(content.substring(0, x));
+						sb.append(quoteFix);
+						sb.append(result);
+						sb.append(quoteFix);
+						sb.append(content.substring(y + 3, content.length()));
 
-						content = contentSB.toString();
+						content = sb.toString();
 					}
 					else {
-						StringBuilder warningSB = new StringBuilder();
-
-						warningSB.append("(taglibQuotes): ");
-						warningSB.append(fileName);
-						warningSB.append(": Line ");
-						warningSB.append(line);
-						System.out.println(warningSB.toString());
+						System.out.println(
+							"taglib: " + fileName + " " + lineCount);
 					}
 				}
 
@@ -770,6 +745,30 @@ public class SourceFormatter {
 		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
 		return list.toArray(new String[list.size()]);
+	}
+
+	private static String _getTaglibRegex(String quoteType) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<(");
+
+		for (int i = 0; i < _TAG_LIBRARIES.length; i++) {
+			sb.append(_TAG_LIBRARIES[i]);
+			sb.append(StringPool.PIPE);
+		}
+
+		sb.deleteCharAt(sb.length() - 1);
+		sb.append("):([^>]|%>)*");
+		sb.append(quoteType);
+		sb.append("<%=[^>]*");
+		sb.append(quoteType);
+		sb.append("[^>]*");
+		sb.append(quoteType);
+		sb.append("[^>]*%>");
+		sb.append(quoteType);
+		sb.append("([^>]|%>)*>");
+
+		return sb.toString();
 	}
 
 	private static void _readExclusions() throws IOException {
