@@ -144,7 +144,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <fieldset class="block-labels col">
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
-			<liferay-ui:error key="<%= NoSuchListTypeException.class + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
+			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
 
 			<div class="ctrl-holder">
 				<label for="<portlet:namespace />statusId"><liferay-ui:message key="status" /></label>

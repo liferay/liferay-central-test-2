@@ -40,7 +40,7 @@ String className = (String)request.getAttribute("common.className");
 
 <h3><liferay-ui:message key="websites" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class + Organization.class.getName() + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
 <fieldset class="block-labels">
