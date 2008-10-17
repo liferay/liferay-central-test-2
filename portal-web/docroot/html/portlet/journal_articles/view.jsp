@@ -72,14 +72,7 @@ double version = ParamUtil.getDouble(request, "version");
 		ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
 		searchTerms.setGroupId(groupId);
-
-		if ("structure".equals(filterArticlesBy) && Validator.isNotNull(structureId)) {
-			searchTerms.setStructureId(structureId);
-		}
-		else {
-			searchTerms.setType(type);
-		}
-
+		searchTerms.setType(type);
 		searchTerms.setStatus("approved");
 		%>
 
