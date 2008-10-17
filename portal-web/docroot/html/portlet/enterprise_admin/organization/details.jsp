@@ -81,9 +81,9 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 		rowColumns.push(createURL(href, name));
 		rowColumns.push(createURL(href, Liferay.Language.get(type)));
-		rowColumns.push(createURL('javascript: ;', 'X', 'Liferay.SearchContainer.get(\'parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+		rowColumns.push(createURL('javascript: ;', 'X', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
-		var searchContainer = Liferay.SearchContainer.get('parentOrganizationSearchContainer');
+		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
 
 		searchContainer.deleteRow(1, searchContainer.getData());
 		searchContainer.addRow(rowColumns, organizationId);
@@ -209,15 +209,13 @@ if (parentOrganization != null) {
 }
 %>
 
-<input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
-
 <h3><liferay-ui:message key="parent-organization" /></h3>
 
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
 
 <liferay-ui:search-container
 	headerNames="name,type"
-	id="parentOrganizationSearchContainer"
+	id='<%= renderResponse.getNamespace() + "parentOrganizationSearchContainer" %>'
 >
 	<liferay-ui:search-container-results
 		results="<%= parentOrganizations %>"
@@ -248,7 +246,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('parentOrganizationSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><liferay-ui:icon image="unlink" message="remove" /></a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><liferay-ui:icon image="unlink" message="remove" /></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
