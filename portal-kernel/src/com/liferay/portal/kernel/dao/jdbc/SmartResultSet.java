@@ -24,9 +24,11 @@ package com.liferay.portal.kernel.dao.jdbc;
 
 import com.liferay.portal.kernel.util.CharPool;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,6 +99,36 @@ public class SmartResultSet {
 		return _rs.first();
 	}
 
+	public Date getDate(int columnIndex) throws SQLException {
+		return _rs.getDate(columnIndex);
+	}
+
+	public Date getDate(String columnName) throws SQLException {
+		int columnIndex = findColumn(columnName);
+
+		return _rs.getDate(columnIndex);
+	}
+
+	public double getDouble(int columnIndex) throws SQLException {
+		return _rs.getDouble(columnIndex);
+	}
+
+	public double getDouble(String columnName) throws SQLException {
+		int columnIndex = findColumn(columnName);
+
+		return _rs.getDouble(columnIndex);
+	}
+
+	public float getFloat(int columnIndex) throws SQLException {
+		return _rs.getFloat(columnIndex);
+	}
+
+	public float getFloat(String columnName) throws SQLException {
+		int columnIndex = findColumn(columnName);
+
+		return _rs.getFloat(columnIndex);
+	}
+
 	public int getInt(int columnIndex) throws SQLException {
 		return _rs.getInt(columnIndex);
 	}
@@ -117,6 +149,16 @@ public class SmartResultSet {
 		return _rs.getLong(columnIndex);
 	}
 
+	public short getShort(int columnIndex) throws SQLException {
+		return _rs.getShort(columnIndex);
+	}
+
+	public short getShort(String columnName) throws SQLException {
+		int columnIndex = findColumn(columnName);
+
+		return _rs.getShort(columnIndex);
+	}
+
 	public String getString(int columnIndex) throws SQLException {
 		return _rs.getString(columnIndex);
 	}
@@ -125,6 +167,16 @@ public class SmartResultSet {
 		int columnIndex = findColumn(columnName);
 
 		return _rs.getString(columnIndex);
+	}
+
+	public Timestamp getTimestamp(int columnIndex) throws SQLException {
+		return _rs.getTimestamp(columnIndex);
+	}
+
+	public Timestamp getTimestamp(String columnName) throws SQLException {
+		int columnIndex = findColumn(columnName);
+
+		return _rs.getTimestamp(columnIndex);
 	}
 
 	public boolean last() throws SQLException {
