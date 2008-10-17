@@ -75,6 +75,10 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		this.status = status;
 	}
 
+	public void setStructureId(String structureId) {
+		this.structureId = structureId;
+	}
+
 	public Boolean getApprovedObj() {
 		if (status.equals("approved")) {
 			return Boolean.TRUE;

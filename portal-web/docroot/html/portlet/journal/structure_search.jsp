@@ -63,7 +63,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 
 <br />
 
-<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) %>">
+<c:if test='<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) && portletDisplay.getPortletName().equals("15") %>'>
 	<div>
 		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
 	</div>
