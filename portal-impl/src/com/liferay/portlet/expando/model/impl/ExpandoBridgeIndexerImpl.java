@@ -26,15 +26,13 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Enumeration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,33 +50,33 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 			return;
 		}
 
-		List<String> attributeNames = Collections.list(
-			expandoBridge.getAttributeNames());
+		Enumeration<String> enu = expandoBridge.getAttributeNames();
 
-		for (String attributeName : attributeNames) {
-			int attributeType = expandoBridge.getAttributeType(attributeName);
-			UnicodeProperties attributeProperties =
-				expandoBridge.getAttributeProperties(attributeName);
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
 
-			boolean propertyIndexable = GetterUtil.getBoolean(
-				attributeProperties.get(ExpandoBridgeIndexer.INDEXABLE));
+			int type = expandoBridge.getAttributeType(name);
 
-			if ((attributeType == ExpandoColumnConstants.STRING) &&
-				(propertyIndexable)) {
+			UnicodeProperties properties = expandoBridge.getAttributeProperties(
+				name);
 
-				try {
-					String attributeValue =
-						ExpandoValueLocalServiceUtil.getData(
-							expandoBridge.getClassName(),
-							ExpandoTableConstants.DEFAULT_TABLE_NAME,
-							attributeName, expandoBridge.getClassPK(),
-							StringPool.BLANK);
+			boolean indexable = GetterUtil.getBoolean(
+				properties.get(ExpandoBridgeIndexer.INDEXABLE));
 
-					doc.addText(attributeName, attributeValue);
-				}
-				catch (Exception e) {
-					_log.error("Indexing " + attributeName, e);
-				}
+			if (!indexable || (type != ExpandoColumnConstants.STRING)) {
+				continue;
+			}
+
+			try {
+				String value = ExpandoValueLocalServiceUtil.getData(
+					expandoBridge.getClassName(),
+					ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
+					expandoBridge.getClassPK(), StringPool.BLANK);
+
+				doc.addText(name, value);
+			}
+			catch (Exception e) {
+				_log.error("Indexing " + name, e);
 			}
 		}
 	}

@@ -75,12 +75,14 @@ if (column != null) {
 <liferay-ui:error exception="<%= ValueDataException.class %>" message="please-enter-a-valid-value" />
 
 <table class="lfr-table">
+
 <c:if test="<%= column != null %>">
 	<tr>
 		<td>
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
+
 			<%
 			String name = column.getName();
 			String localizedName = LanguageUtil.get(pageContext, name);
@@ -99,6 +101,7 @@ if (column != null) {
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="key" />
