@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.dao.jdbc.ResultSetWrapper;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -273,6 +274,8 @@ public class UpgradeTags extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
+			rs = new ResultSetWrapper(rs);
+
 			while (rs.next()) {
 				long entryId = rs.getLong("TE.entryId");
 				long groupId = rs.getLong("TE.groupId");
@@ -321,6 +324,8 @@ public class UpgradeTags extends UpgradeProcess {
 						"TA.assetId = TA_TE.assetId");
 
 			rs = ps.executeQuery();
+
+			rs = new ResultSetWrapper(rs);
 
 			while (rs.next()) {
 				long assetId = rs.getLong("TA.assetId");

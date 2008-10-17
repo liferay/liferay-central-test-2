@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.dao.jdbc.ResultSetWrapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
@@ -180,6 +181,8 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
 
 			rs = ps.executeQuery();
+
+			rs = new ResultSetWrapper(rs);
 
 			while (rs.next()) {
 				long permissionId = rs.getLong("Permission_.permissionId");
