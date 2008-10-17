@@ -285,22 +285,23 @@ String curSection = mainSections[0];
 </c:if>
 
 <script type="text/javascript">
-	var <portlet:namespace />formNavigator;
 	jQuery(
 		function () {
-			<portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator({
-				container: '#user'
-			});
+			var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
+				{
+					container: '#user'
+				}
+			);
+
+			<%
+			String errorSection = (String)request.getAttribute("user.errorSection");
+			%>
+
+			<c:if test="<%= Validator.isNotNull(errorSection) %>">
+				<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
+			</c:if>
 		}
 	);
-
-	<%
-	String errorSection = (String)request.getAttribute("user.errorSection");
-	%>
-
-	<c:if test="<%= Validator.isNotNull(errorSection) %>">
-		<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
-	</c:if>
 </script>
 
 <%!
