@@ -35,7 +35,9 @@ Liferay.SearchContainer = new Class({
 					}
 				}
 			);
+
 			instance._table.append(row);
+
 			row.removeClass('lfr-template');
 
 			instance._ids.push(id);
