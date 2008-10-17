@@ -75,9 +75,33 @@ if (column != null) {
 <liferay-ui:error exception="<%= ValueDataException.class %>" message="please-enter-a-valid-value" />
 
 <table class="lfr-table">
+<c:if test="<%= column != null %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="name" />
+		</td>
+		<td>
+			<%
+			String name = column.getName();
+			String localizedName = LanguageUtil.get(pageContext, name);
+
+			if (name.equals(localizedName)) {
+				localizedName = TextFormatter.format(name, TextFormatter.J);
+			}
+			%>
+
+			<%= localizedName %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+</c:if>
 <tr>
 	<td>
-		<liferay-ui:message key="name" />
+		<liferay-ui:message key="key" />
 	</td>
 	<td>
 		<c:choose>
@@ -90,6 +114,8 @@ if (column != null) {
 				<liferay-ui:input-field model="<%= ExpandoColumn.class %>" bean="<%= column %>" field="name" />
 			</c:otherwise>
 		</c:choose>
+
+		<liferay-ui:icon-help message="custom-attribute-key-help" />
 	</td>
 </tr>
 <tr>
@@ -233,8 +259,33 @@ if (column != null) {
 			<option <%= propertyHidden ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
 			<option <%= !propertyHidden ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
 		</select>
+
+		<liferay-ui:icon-help message="custom-attribute-hidden-help" />
 	</td>
 </tr>
+
+<c:if test="<%= (column != null) && (column.getType() == ExpandoColumnConstants.STRING) %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="searchable" />
+		</td>
+		<td>
+			<input type="hidden" name="<portlet:namespace />PropertyName(indexable)" value="indexable" />
+
+			<%
+			boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIndexer.INDEXABLE));
+			%>
+
+			<select name="<portlet:namespace />Property(indexable)">
+				<option <%= propertyIndexable ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+				<option <%= !propertyIndexable ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+			</select>
+
+			<liferay-ui:icon-help message="custom-attribute-indexable-help" />
+		</td>
+	</tr>
+</c:if>
+
 </table>
 
 <br />

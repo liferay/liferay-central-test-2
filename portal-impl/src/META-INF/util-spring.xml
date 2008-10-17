@@ -198,9 +198,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.DatabaseUtil" class="com.liferay.portal.kernel.util.DatabaseUtil">
-       <property name="database">
-           <bean class="com.liferay.portal.util.DatabaseImpl" />
-       </property>
+	   <property name="database">
+		   <bean class="com.liferay.portal.util.DatabaseImpl" />
+	   </property>
    </bean>
 	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
 		<property name="diff">
@@ -210,6 +210,11 @@
 	<bean id="com.liferay.portal.kernel.util.DigesterUtil" class="com.liferay.portal.kernel.util.DigesterUtil">
 		<property name="digester">
 			<bean class="com.liferay.portal.util.DigesterImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
+		<property name="expandoBridgeIndexer">
+			<bean class="com.liferay.portlet.expando.model.impl.ExpandoBridgeIndexerImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.FileUtil" class="com.liferay.portal.kernel.util.FileUtil">

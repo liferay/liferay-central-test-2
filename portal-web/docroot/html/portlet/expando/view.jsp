@@ -83,6 +83,13 @@ Collections.sort(attributeNames, new StringComparator());
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(modelResource, name);
 		%>
 
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+			<portlet:param name="struts_action" value="/expando/edit_expando" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="columnId" value="<%= String.valueOf(expandoColumn.getColumnId()) %>" />
+			<portlet:param name="modelResource" value="<%= modelResource %>" />
+		</portlet:renderURL>
+
 		<liferay-ui:search-container-row-parameter
 			name="expandoColumn"
 			value="<%= expandoColumn %>"
@@ -94,17 +101,38 @@ Collections.sort(attributeNames, new StringComparator());
 		/>
 
 		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			buffer="buffer"
 			name="name"
+		>
+
+			<%
+			String localizedName = LanguageUtil.get(pageContext, name);
+
+			if (name.equals(localizedName)) {
+				localizedName = TextFormatter.format(name, TextFormatter.J);
+			}
+
+			buffer.append(localizedName);
+			%>
+
+		</liferay-ui:search-container-column-text>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="key"
 			value="<%= name %>"
 		/>
 
 		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
 			name="type"
 			value="<%= LanguageUtil.get(pageContext, ExpandoColumnConstants.getTypeLabel(type)) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
+			href="<%= rowURL %>"
 			name="default-value"
 		>
 

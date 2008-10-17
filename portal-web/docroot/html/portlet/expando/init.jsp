@@ -38,6 +38,7 @@
 <%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
+<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
 
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
