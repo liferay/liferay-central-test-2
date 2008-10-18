@@ -151,7 +151,7 @@ String curSection = mainSections[0];
 								%>
 
 									<li class="<%= cssClass %>">
-										<a href="#<%= sectionId %>" id='<%= sectionId %>Link'>
+										<a href="#<%= sectionId %>" id="<%= sectionId %>Link">
 
 										<liferay-ui:message key="<%= section %>" />
 

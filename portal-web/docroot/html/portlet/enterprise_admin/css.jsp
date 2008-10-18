@@ -50,7 +50,7 @@
 .portlet-enterprise-admin .avatar {
 	clear: both;
 	float: left;
-	padding: 5px 0;
+	padding: 15px 0 5px;
 }
 
 .portlet-enterprise-admin .avatar img {
@@ -81,7 +81,7 @@
 	float: right;
 	margin: 0 0 0 15px;
 	padding: 10px;
-	width: 230px;
+	width: 30%;
 }
 
 .portlet-enterprise-admin .form-navigation h3 {
@@ -112,8 +112,10 @@
 .portlet-enterprise-admin .form-navigation li.selected {
 	background: url(<%= themeImagesPath %>/control_panel/selected.png) no-repeat 0 50%;
 	font-weight: bold;
-	margin: 0 0 0 -22px;
+	left: -22px;
+	margin-right: -22px;
 	padding: 0;
+	position: relative;
 }
 
 .portlet-enterprise-admin .form-navigation li.selected a {
@@ -123,6 +125,10 @@
 	margin: 0 0 0 11px;
 	padding: 2px 10px;
 	text-decoration: none;
+}
+
+.ie6 .portlet-enterprise-admin .form-navigation li.selected a:hover {
+	background-color: #5C696E;	
 }
 
 .portlet-enterprise-admin .form-navigation .modified-notice {
@@ -135,7 +141,7 @@
 	display: inline;
 }
 
-.portlet-enterprise-admin .form-navigation .section-modified.selected .modified-notice {
+.portlet-enterprise-admin .form-navigation .selected.section-modified .modified-notice {
 	color: #9f3;
 	display: inline;
 }
@@ -182,7 +188,12 @@
 }
 
 .portlet-enterprise-admin .lfr-form-row {
-	width: 97%;
+	margin-top: 10px;
+	padding-top: 1px;
+}
+
+.ie .portlet-enterprise-admin .lfr-form-row {
+	width: 100%;
 }
 
 .portlet-enterprise-admin .lfr-form-row:hover {
@@ -199,12 +210,16 @@
 
 .portlet-enterprise-admin .form-section {
 	display: none;
+	float: left;
+	width: 63%;
+}
+
+.ie6 .portlet-enterprise-admin .form-section {
+	width: 60%;
 }
 
 .portlet-enterprise-admin .form-section.selected {
 	display: block;
-	float: left;
-	width: 63%;
 }
 
 .portlet-enterprise-admin .form-section h3 {
@@ -212,11 +227,7 @@
 	clear: both;
 	font-size: 14px;
 	font-weight: 700;
-	margin-top: 10px;
-}
-
-.portlet-enterprise-admin .row-container {
-	margin-top: -15px;
+	margin: 10px 0 0;
 }
 
 .portlet-enterprise-admin .uni-form .block-labels label, .portlet-enterprise-admin .uni-form .block-labels .label {
@@ -233,6 +244,7 @@
 
 .portlet-enterprise-admin .uni-form fieldset {
 	border: none;
+	padding: 0;
 	width: 100%;
 }
 
@@ -241,8 +253,11 @@
 	width: auto;
 }
 
-.portlet-enterprise-admin .uni-form .row-container .lfr-form-row {
-	margin-bottom: 10px;
+.ie6 .portlet-enterprise-admin .uni-form fieldset.col {
+	width: 33%;
+}
+
+.portlet-enterprise-admin .uni-form .row-container {
 }
 
 .portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {

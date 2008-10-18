@@ -203,10 +203,8 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .lfr-form-row {
 	border-bottom: 1px solid #CCC;
-	margin-right: 10px;
 	overflow: hidden;
 	padding: 5px;
-	padding-top: 1px;
 	position: relative;
 	margin-bottom: 10px;
 }
@@ -249,6 +247,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	display: none;
 }
 
+.ie6 .undo-queue.queue-empty {
+	display: none;
+}
+
 .undo-queue .undo-action {
 	float: left;
 }
@@ -263,6 +265,12 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .portlet-msg-info.undo-queue {
 	overflow: hidden;
+	margin: 10px auto;
+}
+
+.ie6 .portlet-msg-info.undo-queue {
+	zoom: 1;
+	overflow: visible;
 }
 
 /* ---------- Panel Page styles ---------- */
