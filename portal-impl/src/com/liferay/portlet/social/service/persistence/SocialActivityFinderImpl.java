@@ -49,8 +49,14 @@ public class SocialActivityFinderImpl
 	public static String COUNT_BY_GROUP_ID =
 		SocialActivityFinder.class.getName() + ".countByGroupId";
 
+	public static String COUNT_BY_GROUP_USERS =
+		SocialActivityFinder.class.getName() + ".countByGroupUsers";
+
 	public static String COUNT_BY_ORGANIZATION_ID =
 		SocialActivityFinder.class.getName() + ".countByOrganizationId";
+
+	public static String COUNT_BY_ORGANIZATION_USERS =
+		SocialActivityFinder.class.getName() + ".countByOrganizationUsers";
 
 	public static String COUNT_BY_RELATION =
 		SocialActivityFinder.class.getName() + ".countByRelation";
@@ -71,8 +77,14 @@ public class SocialActivityFinderImpl
 	public static String FIND_BY_GROUP_ID =
 		SocialActivityFinder.class.getName() + ".findByGroupId";
 
+	public static String FIND_BY_GROUP_USERS =
+		SocialActivityFinder.class.getName() + ".findByGroupUsers";
+
 	public static String FIND_BY_ORGANIZATION_ID =
 		SocialActivityFinder.class.getName() + ".findByOrganizationId";
+
+	public static String FIND_BY_ORGANIZATION_USERS =
+		SocialActivityFinder.class.getName() + ".findByOrganizationUsers";
 
 	public static String FIND_BY_RELATION =
 		SocialActivityFinder.class.getName() + ".findByRelation";
@@ -126,6 +138,42 @@ public class SocialActivityFinderImpl
 		}
 	}
 
+	public int countByGroupUsers(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_USERS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 
@@ -135,6 +183,44 @@ public class SocialActivityFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(organizationId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByOrganizationUsers(long organizationId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_USERS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -382,6 +468,36 @@ public class SocialActivityFinderImpl
 		}
 	}
 
+	public List<SocialActivity> findByGroupUsers(
+			long groupId, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_USERS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<SocialActivity> findByOrganizationId(
 			long organizationId, int start, int end)
 		throws SystemException {
@@ -392,6 +508,36 @@ public class SocialActivityFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(organizationId);
+
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<SocialActivity> findByOrganizationUsers(
+			long organizationId, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_USERS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

@@ -12,6 +12,20 @@
 				(mirrorActivityId = 0)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByGroupUsers">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				SocialActivity
+			INNER JOIN
+				Users_Groups ON
+					(Users_Groups.userId = SocialActivity.userId)
+			WHERE
+				(SocialActivity.mirrorActivityId = 0) AND
+				(Users_Groups.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByOrganizationId">
 		<![CDATA[
 			SELECT
@@ -27,6 +41,20 @@
 			WHERE
 				(SocialActivity.mirrorActivityId = 0) AND
 				(Organization_.organizationId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByOrganizationUsers">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				SocialActivity
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = SocialActivity.userId)
+			WHERE
+				(SocialActivity.mirrorActivityId = 0) AND
+				(Users_Orgs.organizationId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByRelation">
@@ -163,6 +191,22 @@
 				createDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByGroupUsers">
+		<![CDATA[
+			SELECT
+				{SocialActivity.*}
+			FROM
+				SocialActivity
+			INNER JOIN
+				Users_Groups ON
+					(Users_Groups.userId = SocialActivity.userId)
+			WHERE
+				(SocialActivity.mirrorActivityId = 0) AND
+				(Users_Groups.groupId = ?)
+			ORDER BY
+				SocialActivity.createDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByOrganizationId">
 		<![CDATA[
 			SELECT
@@ -178,6 +222,22 @@
 			WHERE
 				(SocialActivity.mirrorActivityId = 0) AND
 				(Organization_.organizationId = ?)
+			ORDER BY
+				SocialActivity.createDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByOrganizationUsers">
+		<![CDATA[
+			SELECT
+				{SocialActivity.*}
+			FROM
+				SocialActivity
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = SocialActivity.userId)
+			WHERE
+				(SocialActivity.mirrorActivityId = 0) AND
+				(Users_Orgs.organizationId = ?)
 			ORDER BY
 				SocialActivity.createDate DESC
 		]]>

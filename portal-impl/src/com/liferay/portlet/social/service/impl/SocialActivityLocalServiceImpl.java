@@ -263,6 +263,19 @@ public class SocialActivityLocalServiceImpl
 		return socialActivityFinder.countByGroupId(groupId);
 	}
 
+	public List<SocialActivity> getGroupUsersActivities(
+			long groupId, int start, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByGroupUsers(groupId, start, end);
+	}
+
+	public int getGroupUsersActivitiesCount(long groupId)
+		throws SystemException {
+
+		return socialActivityFinder.countByGroupUsers(groupId);
+	}
+
 	public SocialActivity getMirrorActivity(long mirrorActivityId)
 		throws PortalException, SystemException {
 
@@ -282,6 +295,20 @@ public class SocialActivityLocalServiceImpl
 		throws SystemException {
 
 		return socialActivityFinder.countByOrganizationId(organizationId);
+	}
+
+	public List<SocialActivity> getOrganizationUsersActivities(
+			long organizationId, int start, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByOrganizationUsers(
+			organizationId, start, end);
+	}
+
+	public int getOrganizationUsersActivitiesCount(long organizationId)
+		throws SystemException {
+
+		return socialActivityFinder.countByOrganizationUsers(organizationId);
 	}
 
 	public List<SocialActivity> getRelationActivities(
