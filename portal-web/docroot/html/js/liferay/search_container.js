@@ -12,10 +12,13 @@ Liferay.SearchContainer = new Class({
 
 		Liferay.SearchContainer.register(instance._id, instance);
 
-		var initialIds = instance._dataStore.val() || '';
+		var initialIds = instance._dataStore.val();
 
-		initialIds = initialIds.split(',');
-		instance.updateDataStore(initialIds);
+		if (initialIds) {
+			initialIds = initialIds.split(',');
+
+			instance.updateDataStore(initialIds);
+		}
 	},
 
 	addRow: function(arr, id) {
@@ -85,16 +88,16 @@ Liferay.SearchContainer = new Class({
 		obj.remove();
 	},
 
-	getData: function() {
+	getData: function(toArray) {
 		var instance = this;
 
-		return instance._ids.join(',');
-	},
+		var ids = instance._ids;
 
-	getIds: function() {
-		var instance = this;
+		if (!toArray) {
+			ids = ids.join(',');
+		}
 
-		return instance._ids;
+		return ids;
 	},
 
 	updateDataStore: function(ids) {

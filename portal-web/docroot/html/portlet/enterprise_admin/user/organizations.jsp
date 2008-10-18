@@ -77,7 +77,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	function <portlet:namespace />getSelectedOrganizationIds() {
 		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
 
-		return searchContainer.getIds().join(',');
+		return searchContainer.getData();
 	}
 
 	function <portlet:namespace />openOrganizationSelector() {
