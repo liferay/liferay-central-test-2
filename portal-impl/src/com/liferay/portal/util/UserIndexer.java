@@ -57,20 +57,6 @@ public class UserIndexer implements Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.ENTERPRISE_ADMIN_USERS;
 
-	public static void addUser(
-			long companyId, long userId, String firstName, String middleName,
-			String lastName, String jobTitle, String screenName,
-			String emailAddress, Boolean active, long[] organizationIds,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document doc = getUserDocument(
-			companyId, userId, firstName, middleName, lastName, screenName,
-			emailAddress, jobTitle, active, organizationIds, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, doc);
-	}
-
 	public static void deleteUser(long companyId, long userId)
 		throws SearchException {
 
@@ -147,6 +133,10 @@ public class UserIndexer implements Indexer {
 
 	public static void updateUser(User user)
 		throws SearchException {
+
+		if (user.isDefaultUser()) {
+			return;
+		}
 
 		try {
 			Contact contact = ContactLocalServiceUtil.getContact(
