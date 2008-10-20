@@ -9038,17 +9038,20 @@ Liferay.SearchContainer = new Class({
 		instance._id = options.id || '';
 		instance._container = jQuery('#' + instance._id + 'SearchContainer');
 		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
-console.log(instance._dataStore.length, instance._dataStore[0], instance._dataStore.val());
+
 		instance._table = instance._container.find('table');
 
 		instance._table.attr('data-searchContainerId', instance._id);
 
 		Liferay.SearchContainer.register(instance._id, instance);
 
-		var initialIds = instance._dataStore.val() || '';
+		var initialIds = instance._dataStore.val();
 
-		initialIds = initialIds.split(',');
-		instance.updateDataStore(initialIds);
+		if (initialIds) {
+			initialIds = initialIds.split(',');
+
+			instance.updateDataStore(initialIds);
+		}
 	},
 
 	addRow: function(arr, id) {
@@ -9118,16 +9121,16 @@ console.log(instance._dataStore.length, instance._dataStore[0], instance._dataSt
 		obj.remove();
 	},
 
-	getData: function() {
+	getData: function(toArray) {
 		var instance = this;
 
-		return instance._ids.join(',');
-	},
+		var ids = instance._ids;
 
-	getIds: function() {
-		var instance = this;
+		if (!toArray) {
+			ids = ids.join(',');
+		}
 
-		return instance._ids;
+		return ids;
 	},
 
 	updateDataStore: function(ids) {
