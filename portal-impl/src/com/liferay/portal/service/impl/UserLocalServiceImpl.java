@@ -478,10 +478,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			UserIndexer.addUser(
-				user.getCompanyId(), userId, firstName, middleName, lastName,
-				jobTitle, screenName, emailAddress, true, organizationIds,
-				expandoBridge);
+			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + userId, se);
