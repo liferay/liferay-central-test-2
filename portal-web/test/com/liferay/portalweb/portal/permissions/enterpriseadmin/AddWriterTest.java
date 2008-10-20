@@ -35,7 +35,7 @@ public class AddWriterTest extends BaseTestCase {
 	public void testAddWriter() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add User']"));
+		selenium.click(RuntimeVariables.replace("link=Add User"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_screenName", RuntimeVariables.replace("Writer"));
 		selenium.type("_79_screenName", RuntimeVariables.replace("Writer"));
@@ -54,26 +54,20 @@ public class AddWriterTest extends BaseTestCase {
 		selenium.select("_79_birthdayYear",
 			RuntimeVariables.replace("label=1985"));
 		selenium.select("_79_male", RuntimeVariables.replace("label=Male"));
-		selenium.typeKeys("_79_jobTitle", RuntimeVariables.replace("Writer"));
-		selenium.type("_79_jobTitle", RuntimeVariables.replace("Writer"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Password");
+		selenium.click("passwordLink");
 		selenium.type("_79_password1", RuntimeVariables.replace("test"));
 		selenium.type("_79_password2", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Regular Roles");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Assign Regular Roles']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Available"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[11]/td[1]/input");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("_79_tabs2TabsBack"));
+		selenium.click("rolesLink");
+		selenium.click("//div[@id='roles']/nobr/a[2]");
+		selenium.waitForPopUp("regularRole", RuntimeVariables.replace("30000"));
+		selenium.selectWindow("name=regularRole");
+		selenium.click("link=Writer");
+		selenium.selectWindow("name=null");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");

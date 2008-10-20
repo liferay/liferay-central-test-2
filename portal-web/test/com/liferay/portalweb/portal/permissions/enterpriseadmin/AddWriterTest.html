@@ -18,7 +18,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add User']</td>
+	<td>link=Add User</td>
 	<td></td>
 </tr>
 <tr>
@@ -92,23 +92,13 @@
 	<td>label=Male</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_79_jobTitle</td>
-	<td>Writer</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_79_jobTitle</td>
-	<td>Writer</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Password</td>
+	<td>passwordLink</td>
 	<td></td>
 </tr>
 <tr>
@@ -128,32 +118,37 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Regular Roles</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Assign Regular Roles']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Available</td>
+	<td>rolesLink</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[11]/td[1]/input</td>
+	<td>//div[@id='roles']/nobr/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>regularRole</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=regularRole</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Writer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=null</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Update Associations']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>_79_tabs2TabsBack</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
