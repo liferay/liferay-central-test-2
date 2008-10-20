@@ -676,8 +676,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private List<Portlet> _initRemotePortlets() throws WSRPConsumerException {
-		Properties portalProperties = PropsUtil.getProperties();
-		WSRPConfig.init(portalProperties, "portal1");
+		Properties properties = PropsUtil.getProperties();
+
+		WSRPConfig.init(properties, "portal1");
 
 		WSRPPersistenceHelper wsrpPersistence =
 			WSRPPersistenceHelper.getInstance();
