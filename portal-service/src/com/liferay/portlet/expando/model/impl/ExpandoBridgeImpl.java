@@ -98,7 +98,9 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				_classPK);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
 		}
 
 		return data;
