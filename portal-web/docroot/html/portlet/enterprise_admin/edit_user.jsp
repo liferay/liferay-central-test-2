@@ -258,7 +258,7 @@ String curSection = mainSections[0];
 					<div class="button-holder">
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('<%= selUser == null ? Constants.ADD : Constants.UPDATE %>');" />  &nbsp;
 
-						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HttpUtil.encodeURL(backURL) %>';" /><br />
+						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= backURL %>';" /><br />
 					</div>
 
 					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
