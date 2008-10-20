@@ -478,7 +478,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				addMessageResources(category, message, true, true);
 			}
 			else if ((addCommunityPermissions != null) &&
-					 (addGuestPermissions != null)) {
+					(addGuestPermissions != null)) {
 
 				addMessageResources(
 					category, message, addCommunityPermissions.booleanValue(),
@@ -1454,7 +1454,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
 			messageURL =
-				portalURL + layoutURL + "/message_boards/message/" +
+				portalURL + layoutURL + "/-/message_boards/message/" +
 					message.getMessageId();
 		}
 
