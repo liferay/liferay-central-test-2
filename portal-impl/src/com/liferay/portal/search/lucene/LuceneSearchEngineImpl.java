@@ -22,9 +22,6 @@
 
 package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
@@ -54,6 +51,10 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		return PropsValues.INDEX_READ_ONLY;
 	}
 
+	public boolean isRegistered() {
+		return _registered;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -62,36 +63,19 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		_searcher = searcher;
 	}
 
-	public void setSearchReaderMessageListener(
-		MessageListener searchReaderMessageListener) {
-
-		_searchReaderMessageListener = searchReaderMessageListener;
-	}
-
-	public void setSearchWriterMessageListener(
-		MessageListener searchWriterMessageListener) {
-
-		_searchWriterMessageListener = searchWriterMessageListener;
-	}
-
 	public void setWriter(IndexWriter writer) {
 		_writer = writer;
 	}
 
 	public void unregister(String name) {
 		if (!_name.equals(name)) {
-			MessageBusUtil.unregisterMessageListener(
-				DestinationNames.SEARCH_READER, _searchReaderMessageListener);
-
-			MessageBusUtil.unregisterMessageListener(
-				DestinationNames.SEARCH_WRITER, _searchWriterMessageListener);
+			_registered = false;
 		}
 	}
 
 	private String _name;
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
-	private MessageListener _searchReaderMessageListener;
-	private MessageListener _searchWriterMessageListener;
+	private boolean _registered = true;
 
 }

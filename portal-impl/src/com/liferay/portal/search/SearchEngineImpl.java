@@ -80,6 +80,10 @@ public class SearchEngineImpl implements SearchEngine {
 		}
 	}
 
+	public boolean isRegistered() {
+		throw new IllegalStateException();
+	}
+
 	public void setSearcher(IndexSearcher searcher) {
 		_searcher = searcher;
 	}

@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngine;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 
@@ -36,7 +35,7 @@ import com.liferay.portal.kernel.search.Sort;
  * @author Bruno Farache
  *
  */
-public class LuceneSearchEngineUtil extends SearchEngineUtil {
+public class LuceneSearchEngineUtil {
 
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
@@ -63,6 +62,10 @@ public class LuceneSearchEngineUtil extends SearchEngineUtil {
 
 	public static boolean isIndexReadOnly() {
 		return getSearchEngine().isIndexReadOnly();
+	}
+
+	public static boolean isRegistered() {
+		return getSearchEngine().isRegistered();
 	}
 
 	public static Hits search(long companyId, Query query, int start, int end)

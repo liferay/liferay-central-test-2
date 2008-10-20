@@ -29,8 +29,6 @@
 				<property name="name" value="Lucene" />
 				<property name="searcher" ref="indexSearcher.lucene" />
 				<property name="writer" ref="indexWriter.lucene" />
-				<property name="searchReaderMessageListener" ref="messageListener.lucene_reader" />
-				<property name="searchWriterMessageListener" ref="messageListener.lucene_writer" />
 			</bean>
 		</property>
 	</bean>

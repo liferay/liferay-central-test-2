@@ -54,7 +54,15 @@ public class LuceneReaderMessageListener implements MessageListener {
 	}
 
 	public void doReceive(Message message) throws Exception {
-		SearchRequest searchRequest = (SearchRequest)message.getPayload();
+		Object payload = message.getPayload();
+
+		if (!LuceneSearchEngineUtil.isRegistered() ||
+			!(payload instanceof SearchRequest)) {
+
+			return;
+		}
+
+		SearchRequest searchRequest = (SearchRequest)payload;
 
 		String command = searchRequest.getCommand();
 
