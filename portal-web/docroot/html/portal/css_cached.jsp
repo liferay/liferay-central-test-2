@@ -990,6 +990,10 @@ li.toggle-expand a {
 	display: none;
 }
 
+.js .page-maximized .portlet-icons {
+	display: block;
+}
+
 .float-container:after {
 	clear: both;
 	content: ".";

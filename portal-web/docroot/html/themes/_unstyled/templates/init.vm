@@ -24,6 +24,10 @@
 	#set ($css_class = $css_class + " controls-hidden")
 #end
 
+#if ($layoutTypePortlet.hasStateMax())
+	#set ($css_class = $css_class + " page-maximized")
+#end
+
 #set ($css_folder = "$theme_display.getPathThemeCss()")
 #set ($images_folder = "$theme_display.getPathThemeImages()")
 #set ($javascript_folder = "$theme_display.getPathThemeJavaScript()")
