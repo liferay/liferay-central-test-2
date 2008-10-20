@@ -347,7 +347,7 @@
 							<liferay-ui:message key="lifetime" />
 						</td>
 						<td>
-							<input id="<portlet:namespace />lifetimeSupplied" name="<portlet:namespace />lifetimeSupplied" type="checkbox" />
+							<input id="<portlet:namespace />lifetimeSupplied" name="<portlet:namespace />lifetimeSupplied" type="checkbox" value="true" />
 						</td>
 					</tr>
 					<tbody id="<portlet:namespace />lifetimeSettings">
