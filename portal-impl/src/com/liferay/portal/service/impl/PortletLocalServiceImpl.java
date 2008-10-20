@@ -53,6 +53,7 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
@@ -60,6 +61,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
 
+import com.sun.portal.wsrp.common.WSRPConfig;
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
 
 import java.util.ArrayList;
@@ -69,6 +71,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -673,6 +676,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private List<Portlet> _initRemotePortlets() throws WSRPConsumerException {
+		Properties portalProperties = PropsUtil.getProperties();
+		WSRPConfig.init(portalProperties, "portal1");
+
 		WSRPPersistenceHelper wsrpPersistence =
 			WSRPPersistenceHelper.getInstance();
 
