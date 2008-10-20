@@ -731,6 +731,39 @@ public class PortalImpl implements Portal {
 		return (String)portletRequest.getAttribute(WebKeys.CURRENT_URL);
 	}
 
+	public Map<String, Object> getCustomAttributes(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		Map<String, Object> customAttributes =
+			new HashMap<String, Object>();
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
+
+		List<String> names = new ArrayList<String>();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+
+			if (param.indexOf("ExpandoAttributeName(") != -1) {
+				String name = ParamUtil.getString(actionRequest, param);
+
+				names.add(name);
+			}
+		}
+
+		for (String name : names) {
+			int type = expandoBridge.getAttributeType(name);
+
+			Object value = EditExpandoAction.getValue(
+				actionRequest, "ExpandoAttribute(" + name + ")", type);
+
+			customAttributes.put(name, value);
+		}
+
+		return customAttributes;
+	}
+
 	public String getCustomSQLFunctionIsNotNull() {
 		return PropsValues.CUSTOM_SQL_FUNCTION_ISNOTNULL;
 	}
@@ -2733,34 +2766,6 @@ public class PortalImpl implements Portal {
 
 		return StringUtil.replace(
 			sql, _customSqlClassNames, _customSqlClassNameIds);
-	}
-
-	public void updateExpandoBridge(
-			ExpandoBridge expandoBridge, ActionRequest actionRequest)
-		throws PortalException, SystemException {
-
-		Enumeration<String> enu = actionRequest.getParameterNames();
-
-		List<String> names = new ArrayList<String>();
-
-		while (enu.hasMoreElements()) {
-			String param = enu.nextElement();
-
-			if (param.indexOf("ExpandoAttributeName(") != -1) {
-				String name = ParamUtil.getString(actionRequest, param);
-
-				names.add(name);
-			}
-		}
-
-		for (String name : names) {
-			int type = expandoBridge.getAttributeType(name);
-
-			Object value = EditExpandoAction.getValue(
-				actionRequest, "ExpandoAttribute(" + name + ")", type);
-
-			expandoBridge.setAttribute(name, value);
-		}
 	}
 
 	public PortletMode updatePortletMode(

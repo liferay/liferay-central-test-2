@@ -1080,6 +1080,7 @@
 		<portlet-name>125</portlet-name>
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_users</struts-path>
+		<indexer-class>com.liferay.portal.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

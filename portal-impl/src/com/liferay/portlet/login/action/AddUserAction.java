@@ -50,6 +50,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -57,6 +58,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -173,6 +176,13 @@ public class AddUserAction extends PortletAction {
 			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setExpandoBridgeAttributes(
+			PortalUtil.getCustomAttributes(
+				new ExpandoBridgeImpl(User.class.getName(), 0L),
+				actionRequest));
+
 		String openId = ParamUtil.getString(actionRequest, "openId");
 		boolean openIdAuth = false;
 
@@ -196,7 +206,7 @@ public class AddUserAction extends PortletAction {
 			autoScreenName, screenName, emailAddress, themeDisplay.getLocale(),
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationIds,
-			sendEmail);
+			sendEmail, serviceContext);
 
 		if (openIdAuth) {
 			UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
