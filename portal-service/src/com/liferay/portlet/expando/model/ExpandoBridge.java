@@ -57,6 +57,8 @@ public interface ExpandoBridge {
 
 	public long getClassPK();
 
+	public boolean hasAttribute(String name);
+
 	public void setAttribute(String name, Object value);
 
 	public void setAttributeDefault(String name, Object defaultValue);

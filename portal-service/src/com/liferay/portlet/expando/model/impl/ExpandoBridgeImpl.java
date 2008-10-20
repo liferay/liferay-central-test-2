@@ -201,6 +201,15 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		return _classPK;
 	}
 
+	public boolean hasAttribute(String name) {
+		if (getAttribute(name) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public void setAttribute(String name, Object value) {
 		if (_classPK <= 0) {
 			throw new UnsupportedOperationException();
