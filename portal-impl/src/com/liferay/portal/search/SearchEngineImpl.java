@@ -41,7 +41,7 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
 public class SearchEngineImpl implements SearchEngine {
 
 	public String getName() {
-		throw new IllegalStateException();
+		throw new UnsupportedOperationException();
 	}
 
 	public IndexSearcher getSearcher() {
@@ -81,7 +81,7 @@ public class SearchEngineImpl implements SearchEngine {
 	}
 
 	public boolean isRegistered() {
-		throw new IllegalStateException();
+		throw new UnsupportedOperationException();
 	}
 
 	public void setSearcher(IndexSearcher searcher) {
