@@ -114,6 +114,12 @@
 				<input name="<portlet:namespace />wsdl" type="hidden" value="<%= HtmlUtil.escape(wsdl) %>" />
 
 				<liferay-ui:tabs names="producer" />
+				
+				<c:if test='<%= request.getAttribute("CONSUMER_ADMIN_ERROR") != null %>'>
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="cannot-connect-to-producer-please-check-logs" />
+					</span>
+				</c:if>
 
 				<table class="lfr-table">
 				<tr>
