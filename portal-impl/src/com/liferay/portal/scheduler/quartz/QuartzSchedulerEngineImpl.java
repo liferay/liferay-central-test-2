@@ -224,7 +224,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portal.service.QuartzLocalService.impl")
+	@javax.annotation.Resource(
+		name = "com.liferay.portal.service.QuartzLocalService.impl"
+	)
 	protected QuartzLocalService quartzLocalService;
 
 	private Log _log = LogFactory.getLog(QuartzSchedulerEngineImpl.class);
