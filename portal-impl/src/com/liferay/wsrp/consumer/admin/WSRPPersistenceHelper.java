@@ -42,7 +42,6 @@
 package com.liferay.wsrp.consumer.admin;
 
 import com.liferay.counter.service.CounterServiceUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
@@ -272,9 +271,6 @@ public class WSRPPersistenceHelper {
 
 			_objectFactory = new ObjectFactory();
 
-			String wsrpDataDir = WSRPConfig.getWSRPDataDirectory();
-
-			FileUtil.mkdirs(wsrpDataDir);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
