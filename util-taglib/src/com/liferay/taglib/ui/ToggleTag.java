@@ -72,12 +72,6 @@ public class ToggleTag extends IncludeTag {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			Object pageWrapper = page;
-
-			if (pageWrapper == null) {
-				pageWrapper = new NullWrapper(String.class.getName());
-			}
-
 			Object idWrapper = id;
 
 			if (idWrapper == null) {
@@ -117,7 +111,7 @@ public class ToggleTag extends IncludeTag {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					pageWrapper, idWrapper, showImageWrapper, hideImageWrapper,
+					page, idWrapper, showImageWrapper, hideImageWrapper,
 					showMessageWrapper, hideMessageWrapper,
 					new BooleanWrapper(defaultShowContent), stateVarWrapper,
 					servletContext, request, response
@@ -142,9 +136,9 @@ public class ToggleTag extends IncludeTag {
 			StringServletResponse response = getServletResponse();
 
 			doTag(
-				_id, _showImage, _hideImage, _showMessage, _hideMessage,
-				_defaultShowContent, _stateVar, servletContext, request,
-				response);
+				getPage(), _id, _showImage, _hideImage, _showMessage,
+				_hideMessage, _defaultShowContent, _stateVar, servletContext,
+				request, response);
 
 			pageContext.getOut().print(response.getString());
 

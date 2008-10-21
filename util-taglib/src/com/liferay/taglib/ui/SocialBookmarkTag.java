@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,10 +42,18 @@ import org.apache.commons.logging.LogFactory;
  * @author Jorge Ferrer
  *
  */
-public class SocialBookmarkTag extends TagSupport {
+public class SocialBookmarkTag extends IncludeTag {
 
 	public static String doTag(
 			String type, String url, String title, String target,
+			PageContext pageContext)
+		throws Exception {
+
+		return doTag(_PAGE, type, url, title, target, pageContext);
+	}
+
+	public static String doTag(
+			String page, String type, String url, String title, String target,
 			PageContext pageContext)
 		throws Exception {
 
@@ -67,7 +75,7 @@ public class SocialBookmarkTag extends TagSupport {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					_PAGE, type, url, title, targetWrapper, pageContext
+					page, type, url, title, targetWrapper, pageContext
 				});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);
@@ -89,7 +97,7 @@ public class SocialBookmarkTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(_type, _url, _title, _target, pageContext);
+			doTag(getPage(), _type, _url, _title, _target, pageContext);
 		}
 		catch (Exception e) {
 			if (e instanceof JspException) {
@@ -117,6 +125,10 @@ public class SocialBookmarkTag extends TagSupport {
 
 	public void setTarget(String target) {
 		_target = target;
+	}
+
+	protected String getDefaultPage() {
+		return _PAGE;
 	}
 
 	private static final String _TAG_CLASS =

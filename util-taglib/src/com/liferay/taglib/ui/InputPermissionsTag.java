@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,10 +41,18 @@ import org.apache.commons.logging.LogFactory;
  * @author Wilson S. Man
  *
  */
-public class InputPermissionsTag extends TagSupport {
+public class InputPermissionsTag extends IncludeTag {
 
 	public static String doTag(
 			String formName, String modelName, PageContext pageContext)
+		throws Exception {
+
+		return doTag(_PAGE, formName, modelName, pageContext);
+	}
+
+	public static String doTag(
+			String page, String formName, String modelName,
+			PageContext pageContext)
 		throws Exception {
 
 		Object returnObj = null;
@@ -58,7 +66,7 @@ public class InputPermissionsTag extends TagSupport {
 
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {_PAGE, formName, modelName, pageContext});
+				new Object[] {page, formName, modelName, pageContext});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);
 		}
@@ -79,7 +87,7 @@ public class InputPermissionsTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(_formName, _modelName, pageContext);
+			doTag(getPage(), _formName, _modelName, pageContext);
 		}
 		catch (Exception e) {
 			if (e instanceof JspException) {
