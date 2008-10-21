@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,39 +19,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="first-name"
-	orderable="<%= true %>"
-	property="firstName"
-/>
+package com.liferay.portal.servlet.taglib.ui;
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="last-name"
-	orderable="<%= true %>"
-	property="lastName"
-/>
+import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.Validator;
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="screen-name"
-	orderable="<%= true %>"
-	property="screenName"
-/>
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="job-title"
-	orderable="<%= true %>"
-	value="<%= user2.getContact().getJobTitle() %>"
-/>
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="organizations"
->
-	<liferay-ui:write bean="<%= user2 %>" property="organizations" />
-</liferay-ui:search-container-column-text>
+/**
+ * <a href="WriteTagUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class WriteTagUtil {
+
+	public static void doEndTag(
+			String page, Object bean, String property, PageContext pageContext)
+		throws JspException {
+
+		try {
+			if ((bean == null) || Validator.isNull(property)) {
+				return;
+			}
+
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("liferay-ui:write:bean", bean);
+			request.setAttribute("liferay-ui:write:property", property);
+
+			PortalIncludeUtil.include(pageContext, page);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new JspException(e);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(WriteTagUtil.class);
+
+}

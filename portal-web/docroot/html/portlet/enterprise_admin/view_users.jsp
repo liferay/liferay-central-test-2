@@ -29,11 +29,11 @@ String exportProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
-List manageableOrganizations = null;
+List<Organization> manageableOrganizations = null;
 Long[] manageableOrganizationIds = null;
 
 if (filterManageableOrganizations) {
-	manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+	manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
 	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 }
 %>

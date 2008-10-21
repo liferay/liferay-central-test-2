@@ -107,59 +107,17 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			/>
 
 			<liferay-ui:search-container-column-text
-				buffer="buffer"
 				href="<%= rowURL %>"
 				name="region"
 			>
-
-				<%
-				Address address = organization.getAddress();
-
-				Region region = address.getRegion();
-
-				String regionName = region.getName();
-
-				if (Validator.isNull(regionName)) {
-					try {
-						region = RegionServiceUtil.getRegion(organization.getRegionId());
-
-						regionName = LanguageUtil.get(pageContext, region.getName());
-					}
-					catch (NoSuchRegionException nsce) {
-					}
-				}
-
-				buffer.append(regionName);
-				%>
-
+				<liferay-ui:write bean="<%= organization %>" property="region" />
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
-				buffer="buffer"
 				href="<%= rowURL %>"
 				name="country"
 			>
-
-				<%
-				Address address = organization.getAddress();
-
-				Country country = address.getCountry();
-
-				String countryName = country.getName();
-
-				if (Validator.isNull(countryName)) {
-					try {
-						country = CountryServiceUtil.getCountry(organization.getCountryId());
-
-						countryName = LanguageUtil.get(pageContext, country.getName());
-					}
-					catch (NoSuchCountryException nsce) {
-					}
-				}
-
-				buffer.append(countryName);
-				%>
-
+				<liferay-ui:write bean="<%= organization %>" property="country" />
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-jsp

@@ -78,7 +78,7 @@ OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.g
 LinkedHashMap organizationParams = new LinkedHashMap();
 
 if (filterManageableOrganizations) {
-	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+	List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
 	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 
 	organizationParams.put("organizations", manageableOrganizationIds);
