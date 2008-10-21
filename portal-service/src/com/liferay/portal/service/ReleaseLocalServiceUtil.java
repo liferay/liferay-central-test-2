@@ -100,21 +100,10 @@ public class ReleaseLocalServiceUtil {
 		return getService().updateRelease(release);
 	}
 
-	public static int bootstrapDatabase()
+	public static int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().bootstrapDatabase();
-	}
-
-	public static void deleteTemporaryImages()
-		throws com.liferay.portal.SystemException {
-		getService().deleteTemporaryImages();
-	}
-
-	public static int getBuildNumber()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getBuildNumber();
+		return getService().getBuildNumberOrCreate();
 	}
 
 	public static com.liferay.portal.model.Release getRelease()

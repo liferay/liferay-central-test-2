@@ -51,13 +51,43 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
-	public static final int NO_BUILD_NUMBER = -1;
 
-	public int bootstrapDatabase() throws PortalException, SystemException {
+	public int getBuildNumberOrCreate()
+		throws PortalException, SystemException {
+
+		// Get release build number
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_BUILD_NUMBER);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int buildNumber = rs.getInt("buildNumber");
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Build number " + buildNumber);
+				}
+
+				return buildNumber;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 
 		// Create tables and populate with default data
-
-		int buildNumber = NO_BUILD_NUMBER;
 
 		if (GetterUtil.getBoolean(
 				PropsUtil.get(PropsKeys.SCHEMA_RUN_ENABLED))) {
@@ -68,71 +98,30 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 			createTablesAndPopulate();
 
-			Release release = getRelease();
-
-			if (release == null) {
-				release = addRelease();
-			}
-
-			buildNumber = release.getBuildNumber();
+			return getRelease().getBuildNumber();
 		}
 		else {
 			throw new NoSuchReleaseException(
 				"The database needs to be populated");
 		}
-
-		return buildNumber;
-	}
-
-	public void deleteTemporaryImages() throws SystemException {
-		DBUtil dbUtil = DBUtil.getInstance();
-
-		try {
-			dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
-			dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public int getBuildNumber()
-		throws PortalException, SystemException {
-
-		// Get release build number
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int buildNumber = NO_BUILD_NUMBER;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(_GET_BUILD_NUMBER);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				buildNumber = rs.getInt("buildNumber");
-
-				if (_log.isDebugEnabled()) {
-					_log.debug("Build number " + buildNumber);
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return buildNumber;
 	}
 
 	public Release getRelease() throws SystemException {
-		return releasePersistence.fetchByPrimaryKey(ReleaseImpl.DEFAULT_ID);
+		Release release = releasePersistence.fetchByPrimaryKey(
+			ReleaseImpl.DEFAULT_ID);
+
+		if (release == null) {
+			release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
+
+			Date now = new Date();
+
+			release.setCreateDate(now);
+			release.setModifiedDate(now);
+
+			releasePersistence.update(release, false);
+		}
+
+		return release;
 	}
 
 	public Release updateRelease(boolean verified) throws SystemException {
@@ -142,19 +131,6 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		release.setBuildNumber(ReleaseInfo.getBuildNumber());
 		release.setBuildDate(ReleaseInfo.getBuildDate());
 		release.setVerified(verified);
-
-		releasePersistence.update(release, false);
-
-		return release;
-	}
-
-	protected Release addRelease() throws SystemException {
-		Release release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
-
-		Date now = new Date();
-
-		release.setCreateDate(now);
-		release.setModifiedDate(now);
 
 		releasePersistence.update(release, false);
 
@@ -186,13 +162,6 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			throw new SystemException(e);
 		}
 	}
-
-	private static final String _DELETE_TEMP_IMAGES_1 =
-		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
-			"JournalArticleImage WHERE tempImage = TRUE)";
-
-	private static final String _DELETE_TEMP_IMAGES_2 =
-		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
 	private static final String _GET_BUILD_NUMBER =
 		"select buildNumber from Release_";

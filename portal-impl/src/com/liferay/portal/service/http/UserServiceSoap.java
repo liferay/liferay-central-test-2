@@ -188,7 +188,7 @@ public class UserServiceSoap {
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
 					organizationIds, roleIds, sendEmail,
-					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
+					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
 						announcementsDelivers));
@@ -597,7 +597,7 @@ public class UserServiceSoap {
 					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
 					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
 					groupIds, organizationIds, roleIds,
-					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
+					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
 						announcementsDelivers));

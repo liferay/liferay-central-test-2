@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
@@ -14,5 +15,5 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" init-method="afterPropertiesSet" />
+	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
 </beans>

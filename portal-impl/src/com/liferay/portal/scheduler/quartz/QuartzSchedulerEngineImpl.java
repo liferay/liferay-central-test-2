@@ -84,7 +84,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				_scheduler = schedulerFactory.getScheduler();
 			}
 			catch (Exception e1) {
-				quartzLocalService.bootstrapQuartzDatabase();
+				quartzLocalService.checkQuartzTables();
 
 				_scheduler = schedulerFactory.getScheduler();
 			}

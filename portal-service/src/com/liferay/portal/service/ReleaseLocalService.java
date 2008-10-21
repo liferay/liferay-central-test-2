@@ -82,14 +82,7 @@ public interface ReleaseLocalService {
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
 
-	public int bootstrapDatabase()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteTemporaryImages()
-		throws com.liferay.portal.SystemException;
-
-	public int getBuildNumber()
+	public int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

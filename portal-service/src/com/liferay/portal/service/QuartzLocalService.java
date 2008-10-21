@@ -48,6 +48,5 @@ package com.liferay.portal.service;
  *
  */
 public interface QuartzLocalService {
-	public void bootstrapQuartzDatabase()
-		throws com.liferay.portal.SystemException;
+	public void checkQuartzTables() throws com.liferay.portal.SystemException;
 }

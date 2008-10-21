@@ -45,9 +45,9 @@ package com.liferay.portal.service;
  *
  */
 public class QuartzLocalServiceUtil {
-	public static void bootstrapQuartzDatabase()
+	public static void checkQuartzTables()
 		throws com.liferay.portal.SystemException {
-		getService().bootstrapQuartzDatabase();
+		getService().checkQuartzTables();
 	}
 
 	public static QuartzLocalService getService() {

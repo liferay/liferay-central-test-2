@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
@@ -13,7 +14,7 @@
 	<bean id="com.liferay.counter.service.CounterServiceFactory" class="com.liferay.counter.service.CounterServiceFactory">
 		<property name="service" ref="com.liferay.counter.service.CounterService.impl" />
 	</bean>
-	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence" init-method="afterPropertiesSet" destroy-method="destroy">
+	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence" destroy-method="destroy">
 		<property name="sessionFactory" ref="liferayHibernateSessionFactory" />
 	</bean>
 	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">

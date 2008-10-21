@@ -42,7 +42,6 @@ import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
-import com.liferay.portal.service.impl.ReleaseLocalServiceImpl;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsKeys;
@@ -81,6 +80,13 @@ public class StartupAction extends SimpleAction {
 
 			LuceneUtil.checkLuceneDir(CompanyConstants.SYSTEM);
 		}
+	}
+
+	protected void deleteTemporaryImages() throws Exception {
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
 	}
 
 	protected void doRun(String[] ids) throws Exception {
@@ -150,20 +156,7 @@ public class StartupAction extends SimpleAction {
 
 		// Upgrade
 
-		int buildNumber = ReleaseLocalServiceImpl.NO_BUILD_NUMBER;
-
-		try {
-			buildNumber = ReleaseLocalServiceUtil.getBuildNumber();
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		if (buildNumber == ReleaseLocalServiceImpl.NO_BUILD_NUMBER) {
-			buildNumber = ReleaseLocalServiceUtil.bootstrapDatabase();
-		}
+		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
 		if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
 			String msg = "You must first upgrade to Liferay Portal 4.2.1";
@@ -224,7 +217,7 @@ public class StartupAction extends SimpleAction {
 
 		// Delete temporary images
 
-		ReleaseLocalServiceUtil.deleteTemporaryImages();
+		deleteTemporaryImages();
 
 		// Update indexes
 
@@ -313,6 +306,13 @@ public class StartupAction extends SimpleAction {
 
 		ReleaseLocalServiceUtil.updateRelease(verified);
 	}
+
+	private static final String _DELETE_TEMP_IMAGES_1 =
+		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
+			"JournalArticleImage WHERE tempImage = TRUE)";
+
+	private static final String _DELETE_TEMP_IMAGES_2 =
+		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
 	private static Log _log = LogFactory.getLog(StartupAction.class);
 

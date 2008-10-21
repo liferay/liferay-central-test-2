@@ -34,7 +34,7 @@ import com.liferay.portal.tools.sql.DBUtil;
  */
 public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
-	public void bootstrapQuartzDatabase() throws SystemException {
+	public void checkQuartzTables() throws SystemException {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		try {
