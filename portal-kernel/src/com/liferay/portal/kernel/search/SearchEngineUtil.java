@@ -112,7 +112,7 @@ public class SearchEngineUtil {
 		_searchEngine = searchEngine;
 	}
 
-	private static SearchEngine _searchEngine;
 	private static String _defaultSearchEngineName;
+	private static SearchEngine _searchEngine;
 
 }

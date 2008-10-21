@@ -14,13 +14,13 @@
 	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
 	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
+		<property name="defaultSearchEngineName" ref="defaultSearchEngineName" />
 		<property name="searchEngine">
 			<bean class="com.liferay.portal.search.SearchEngineImpl">
 				<property name="searcher" ref="indexSearcher.portal" />
 				<property name="writer" ref="indexWriter.portal" />
 			</bean>
 		</property>
-		<property name="defaultSearchEngineName" ref="defaultSearchEngineName" />
 	</bean>
 
 	<!-- Lucene search engine -->
