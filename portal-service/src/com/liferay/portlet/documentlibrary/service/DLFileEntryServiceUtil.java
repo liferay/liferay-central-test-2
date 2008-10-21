@@ -101,21 +101,21 @@ public class DLFileEntryServiceUtil {
 
 	public static void deleteFileEntry(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteFileEntry(folderId, name, version);
 	}
 
 	public static void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		getService().deleteFileEntryByTitle(folderId, titleWithExtension);
 	}
 
@@ -141,7 +141,7 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static boolean hasFileEntryLock(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		return getService().hasFileEntryLock(folderId, name);
 	}
 
@@ -180,7 +180,7 @@ public class DLFileEntryServiceUtil {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] bytes)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		return getService()
 				   .updateFileEntry(folderId, newFolderId, name,
 			sourceFileName, title, description, tagsEntries, extraSettings,
@@ -189,7 +189,7 @@ public class DLFileEntryServiceUtil {
 
 	public static boolean verifyFileEntryLock(long folderId,
 		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		return getService().verifyFileEntryLock(folderId, name, lockUuid);
 	}
 

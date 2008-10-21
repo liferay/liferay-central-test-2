@@ -84,17 +84,17 @@ public interface DLFileEntryService {
 
 	public void deleteFileEntry(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long folderId)
@@ -112,7 +112,7 @@ public interface DLFileEntryService {
 			com.liferay.portal.SystemException;
 
 	public boolean hasFileEntryLock(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws com.liferay.portal.PortalException;
 
 	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
@@ -139,9 +139,8 @@ public interface DLFileEntryService {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] bytes)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+			com.liferay.portal.SystemException;
 
 	public boolean verifyFileEntryLock(long folderId, java.lang.String name,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
+		java.lang.String lockUuid) throws com.liferay.portal.PortalException;
 }

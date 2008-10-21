@@ -429,7 +429,7 @@ public class DLFileEntryServiceHttp {
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -454,10 +454,6 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 		}
@@ -471,7 +467,7 @@ public class DLFileEntryServiceHttp {
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -499,10 +495,6 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 		}
@@ -516,7 +508,7 @@ public class DLFileEntryServiceHttp {
 	public static void deleteFileEntryByTitle(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -540,10 +532,6 @@ public class DLFileEntryServiceHttp {
 
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -680,7 +668,7 @@ public class DLFileEntryServiceHttp {
 	public static boolean hasFileEntryLock(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -701,10 +689,6 @@ public class DLFileEntryServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -930,7 +914,7 @@ public class DLFileEntryServiceHttp {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -999,10 +983,6 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -1018,7 +998,7 @@ public class DLFileEntryServiceHttp {
 	public static boolean verifyFileEntryLock(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name, java.lang.String lockUuid)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -1046,10 +1026,6 @@ public class DLFileEntryServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof java.rmi.RemoteException) {
-					throw (java.rmi.RemoteException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

@@ -104,21 +104,21 @@ public class DLFileEntryServiceJSON {
 
 	public static void deleteFileEntry(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		DLFileEntryServiceUtil.deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		DLFileEntryServiceUtil.deleteFileEntry(folderId, name, version);
 	}
 
 	public static void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		DLFileEntryServiceUtil.deleteFileEntryByTitle(folderId,
 			titleWithExtension);
 	}
@@ -152,7 +152,7 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static boolean hasFileEntryLock(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		boolean returnValue = DLFileEntryServiceUtil.hasFileEntryLock(folderId,
 				name);
 
@@ -203,7 +203,7 @@ public class DLFileEntryServiceJSON {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 				newFolderId, name, sourceFileName, title, description,
 				tagsEntries, extraSettings, bytes);
@@ -213,7 +213,7 @@ public class DLFileEntryServiceJSON {
 
 	public static boolean verifyFileEntryLock(long folderId,
 		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException {
 		boolean returnValue = DLFileEntryServiceUtil.verifyFileEntryLock(folderId,
 				name, lockUuid);
 
