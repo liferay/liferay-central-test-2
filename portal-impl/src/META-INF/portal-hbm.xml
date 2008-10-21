@@ -1689,24 +1689,6 @@
 		<property name="sdLastModified" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="entityVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.wsrp.model.impl.WSRPConsumerRegistrationImpl" table="WSRPConsumerRegistration">
-		<cache usage="read-write" />
-		<id name="registrationId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="status" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="consumerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="registrationHandle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="consumerAgent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="methodGetSupported" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="consumerModes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="consumerWindowStates" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="consumerUserScopes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="customUserProfileData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="registrationProperties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="lifetimeTerminationTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="producerKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
 	<class name="com.liferay.wsrp.model.impl.WSRPPortletImpl" table="WSRPPortlet">
 		<cache usage="read-write" />
 		<id name="portletId" type="long">
@@ -1723,22 +1705,5 @@
 		<property name="consumerId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="portletHandle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mimeTypes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.wsrp.model.impl.WSRPProducerImpl" table="WSRPProducer">
-		<cache usage="read-write" />
-		<id name="producerId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="portalId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="status" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="namespace" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="instanceName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="requiresRegistration" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="supportsInbandRegistration" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="offeredPortlets" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="producerProfileMap" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="registrationProperties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="registrationValidatorClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

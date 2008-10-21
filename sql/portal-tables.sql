@@ -1508,37 +1508,6 @@ create table Vocabulary (
 	folksonomy BOOLEAN
 );
 
-create table WSRPConsumerRegistration (
-	registrationId LONG not null primary key,
-	status BOOLEAN,
-	consumerName VARCHAR(100) null,
-	registrationHandle VARCHAR(75) null,
-	consumerAgent VARCHAR(200) null,
-	methodGetSupported BOOLEAN,
-	consumerModes VARCHAR(200) null,
-	consumerWindowStates VARCHAR(200) null,
-	consumerUserScopes VARCHAR(200) null,
-	customUserProfileData VARCHAR(75) null,
-	registrationProperties STRING null,
-	lifetimeTerminationTime VARCHAR(75) null,
-	producerKey VARCHAR(75) null
-);
-
-create table WSRPProducer (
-	producerId LONG not null primary key,
-	portalId VARCHAR(75) null,
-	status BOOLEAN,
-	namespace VARCHAR(75) null,
-	instanceName VARCHAR(75) null,
-	requiresRegistration BOOLEAN,
-	supportsInbandRegistration BOOLEAN,
-	version VARCHAR(75) null,
-	offeredPortlets STRING null,
-	producerProfileMap VARCHAR(75) null,
-	registrationProperties STRING null,
-	registrationValidatorClass VARCHAR(200) null
-);
-
 create table WebDAVProps (
 	webDavPropsId LONG not null primary key,
 	companyId LONG,

@@ -31,13 +31,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.wsrp.model.WSRPPortlet;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalService;
-import com.liferay.wsrp.service.WSRPConsumerRegistrationLocalService;
 import com.liferay.wsrp.service.WSRPPortletLocalService;
-import com.liferay.wsrp.service.WSRPProducerLocalService;
 import com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence;
-import com.liferay.wsrp.service.persistence.WSRPConsumerRegistrationPersistence;
 import com.liferay.wsrp.service.persistence.WSRPPortletPersistence;
-import com.liferay.wsrp.service.persistence.WSRPProducerPersistence;
 
 import java.util.List;
 
@@ -120,24 +116,6 @@ public abstract class WSRPPortletLocalServiceBaseImpl
 		this.wsrpConfiguredProducerPersistence = wsrpConfiguredProducerPersistence;
 	}
 
-	public WSRPConsumerRegistrationLocalService getWSRPConsumerRegistrationLocalService() {
-		return wsrpConsumerRegistrationLocalService;
-	}
-
-	public void setWSRPConsumerRegistrationLocalService(
-		WSRPConsumerRegistrationLocalService wsrpConsumerRegistrationLocalService) {
-		this.wsrpConsumerRegistrationLocalService = wsrpConsumerRegistrationLocalService;
-	}
-
-	public WSRPConsumerRegistrationPersistence getWSRPConsumerRegistrationPersistence() {
-		return wsrpConsumerRegistrationPersistence;
-	}
-
-	public void setWSRPConsumerRegistrationPersistence(
-		WSRPConsumerRegistrationPersistence wsrpConsumerRegistrationPersistence) {
-		this.wsrpConsumerRegistrationPersistence = wsrpConsumerRegistrationPersistence;
-	}
-
 	public WSRPPortletLocalService getWSRPPortletLocalService() {
 		return wsrpPortletLocalService;
 	}
@@ -154,24 +132,6 @@ public abstract class WSRPPortletLocalServiceBaseImpl
 	public void setWSRPPortletPersistence(
 		WSRPPortletPersistence wsrpPortletPersistence) {
 		this.wsrpPortletPersistence = wsrpPortletPersistence;
-	}
-
-	public WSRPProducerLocalService getWSRPProducerLocalService() {
-		return wsrpProducerLocalService;
-	}
-
-	public void setWSRPProducerLocalService(
-		WSRPProducerLocalService wsrpProducerLocalService) {
-		this.wsrpProducerLocalService = wsrpProducerLocalService;
-	}
-
-	public WSRPProducerPersistence getWSRPProducerPersistence() {
-		return wsrpProducerPersistence;
-	}
-
-	public void setWSRPProducerPersistence(
-		WSRPProducerPersistence wsrpProducerPersistence) {
-		this.wsrpProducerPersistence = wsrpProducerPersistence;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -194,18 +154,10 @@ public abstract class WSRPPortletLocalServiceBaseImpl
 	protected WSRPConfiguredProducerLocalService wsrpConfiguredProducerLocalService;
 	@javax.annotation.Resource(name = "com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence.impl")
 	protected WSRPConfiguredProducerPersistence wsrpConfiguredProducerPersistence;
-	@javax.annotation.Resource(name = "com.liferay.wsrp.service.WSRPConsumerRegistrationLocalService.impl")
-	protected WSRPConsumerRegistrationLocalService wsrpConsumerRegistrationLocalService;
-	@javax.annotation.Resource(name = "com.liferay.wsrp.service.persistence.WSRPConsumerRegistrationPersistence.impl")
-	protected WSRPConsumerRegistrationPersistence wsrpConsumerRegistrationPersistence;
 	@javax.annotation.Resource(name = "com.liferay.wsrp.service.WSRPPortletLocalService.impl")
 	protected WSRPPortletLocalService wsrpPortletLocalService;
 	@javax.annotation.Resource(name = "com.liferay.wsrp.service.persistence.WSRPPortletPersistence.impl")
 	protected WSRPPortletPersistence wsrpPortletPersistence;
-	@javax.annotation.Resource(name = "com.liferay.wsrp.service.WSRPProducerLocalService.impl")
-	protected WSRPProducerLocalService wsrpProducerLocalService;
-	@javax.annotation.Resource(name = "com.liferay.wsrp.service.persistence.WSRPProducerPersistence.impl")
-	protected WSRPProducerPersistence wsrpProducerPersistence;
 	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
 	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
