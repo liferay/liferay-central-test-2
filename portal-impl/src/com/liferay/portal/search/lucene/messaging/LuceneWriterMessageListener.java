@@ -51,15 +51,19 @@ public class LuceneWriterMessageListener implements MessageListener {
 	public void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 
-		if (!LuceneSearchEngineUtil.isRegistered() ||
-			!(payload instanceof SearchRequest)) {
-
+		if (!(payload instanceof SearchRequest)) {
 			return;
 		}
 
 		SearchRequest searchRequest = (SearchRequest)payload;
 
 		String command = searchRequest.getCommand();
+
+		if (!LuceneSearchEngineUtil.isRegistered() &&
+			!command.equals(SearchRequest.COMMAND_REGISTER)) {
+
+			return;
+		}
 
 		long companyId = searchRequest.getCompanyId();
 		String id = searchRequest.getId();
@@ -73,6 +77,9 @@ public class LuceneWriterMessageListener implements MessageListener {
 		}
 		else if (command.equals(SearchRequest.COMMAND_DELETE_PORTLET_DOCS)) {
 			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
+		}
+		else if (command.equals(SearchRequest.COMMAND_REGISTER)) {
+			LuceneSearchEngineUtil.register(id);
 		}
 		else if (command.equals(SearchRequest.COMMAND_UNREGISTER)) {
 			LuceneSearchEngineUtil.unregister(id);

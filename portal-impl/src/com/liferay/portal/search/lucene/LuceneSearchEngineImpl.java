@@ -55,6 +55,12 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		return _registered;
 	}
 
+	public void register(String name) {
+		if (_name.equals(name)) {
+			_registered = true;
+		}
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}

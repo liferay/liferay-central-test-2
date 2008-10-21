@@ -8,6 +8,9 @@
 
 	<!-- Portal search engine -->
 
+	<bean id="defaultSearchEngineName" class="java.lang.String">
+		<constructor-arg index="0" type="java.lang.String" value="Lucene" />
+	</bean>
 	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
 	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
@@ -17,6 +20,7 @@
 				<property name="writer" ref="indexWriter.portal" />
 			</bean>
 		</property>
+		<property name="defaultSearchEngineName" ref="defaultSearchEngineName" />
 	</bean>
 
 	<!-- Lucene search engine -->
@@ -26,7 +30,7 @@
 	<bean id="com.liferay.portal.search.lucene.LuceneSearchEngineUtil" class="com.liferay.portal.search.lucene.LuceneSearchEngineUtil">
 		<property name="searchEngine">
 			<bean class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
-				<property name="name" value="Lucene" />
+				<property name="name" ref="defaultSearchEngineName" />
 				<property name="searcher" ref="indexSearcher.lucene" />
 				<property name="writer" ref="indexWriter.lucene" />
 			</bean>

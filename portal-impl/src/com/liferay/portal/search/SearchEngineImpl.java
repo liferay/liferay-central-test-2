@@ -84,6 +84,16 @@ public class SearchEngineImpl implements SearchEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	public void register(String name) {
+		SearchRequest searchRequest = new SearchRequest();
+
+		searchRequest.setCommand(SearchRequest.COMMAND_REGISTER);
+		searchRequest.setId(name);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SEARCH_WRITER, searchRequest);
+	}
+
 	public void setSearcher(IndexSearcher searcher) {
 		_searcher = searcher;
 	}

@@ -63,6 +63,14 @@ public class SearchEngineUtil {
 		return getSearchEngine().isIndexReadOnly();
 	}
 
+	public static void register(String name) {
+		getSearchEngine().register(name);
+	}
+
+	public static void registerDefaultSearchEngine() {
+		SearchEngineUtil.register(_defaultSearchEngineName);
+	}
+
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
@@ -96,10 +104,15 @@ public class SearchEngineUtil {
 		getSearchEngine().getWriter().updateDocument(companyId, uid, doc);
 	}
 
+	public void setDefaultSearchEngineName(String defaultSearchEngineName) {
+		_defaultSearchEngineName = defaultSearchEngineName;
+	}
+
 	public void setSearchEngine(SearchEngine searchEngine) {
 		_searchEngine = searchEngine;
 	}
 
 	private static SearchEngine _searchEngine;
+	private static String _defaultSearchEngineName;
 
 }

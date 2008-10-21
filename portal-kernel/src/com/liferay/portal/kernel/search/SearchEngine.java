@@ -40,6 +40,8 @@ public interface SearchEngine {
 
 	public boolean isRegistered();
 
+	public void register(String name);
+
 	public void unregister(String name);
 
 }
