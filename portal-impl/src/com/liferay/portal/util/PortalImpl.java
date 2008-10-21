@@ -118,8 +118,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -1894,14 +1892,14 @@ public class PortalImpl implements Portal {
 	}
 
 	public User getSelectedUser(HttpServletRequest request)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getSelectedUser(request, true);
 	}
 
 	public User getSelectedUser(
 			HttpServletRequest request, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		long userId = ParamUtil.getLong(request, "p_u_i_d");
 
@@ -1922,28 +1920,28 @@ public class PortalImpl implements Portal {
 	}
 
 	public User getSelectedUser(ActionRequest actionRequest)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getSelectedUser(actionRequest, true);
 	}
 
 	public User getSelectedUser(
 			ActionRequest actionRequest, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getSelectedUser(
 			getHttpServletRequest(actionRequest), checkPermission);
 	}
 
 	public User getSelectedUser(RenderRequest renderRequest)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getSelectedUser(renderRequest, true);
 	}
 
 	public User getSelectedUser(
 			RenderRequest renderRequest, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getSelectedUser(
 			getHttpServletRequest(renderRequest), checkPermission);

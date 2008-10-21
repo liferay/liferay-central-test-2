@@ -35,8 +35,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.IOException;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -333,25 +331,25 @@ public interface Portal {
 	public long getScopeGroupId(RenderRequest renderRequest);
 
 	public User getSelectedUser(HttpServletRequest request)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public User getSelectedUser(
 			HttpServletRequest request, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public User getSelectedUser(ActionRequest actionRequest)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public User getSelectedUser(
 			ActionRequest actionRequest, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public User getSelectedUser(RenderRequest renderRequest)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public User getSelectedUser(
 			RenderRequest renderRequest, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public String getStrutsAction(HttpServletRequest request);
 

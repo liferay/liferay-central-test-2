@@ -35,8 +35,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.IOException;
 
-import java.rmi.RemoteException;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -563,40 +561,40 @@ public class PortalUtil {
 	}
 
 	public static User getSelectedUser(HttpServletRequest request)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(request);
 	}
 
 	public static User getSelectedUser(
 			HttpServletRequest request, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(request, checkPermission);
 	}
 
 	public static User getSelectedUser(ActionRequest actionRequest)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(actionRequest);
 	}
 
 	public static User getSelectedUser(
 			ActionRequest actionRequest, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(actionRequest, checkPermission);
 	}
 
 	public static User getSelectedUser(RenderRequest renderRequest)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(renderRequest);
 	}
 
 	public static User getSelectedUser(
 			RenderRequest renderRequest, boolean checkPermission)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(renderRequest, checkPermission);
 	}
