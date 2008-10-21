@@ -295,6 +295,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String screenName = PropsValues.DEFAULT_ADMIN_SCREEN_NAME;
 			String emailAddress =
 				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" + mx;
+			String openId = StringPool.BLANK;
 			Locale locale = defaultUser.getLocale();
 			String firstName = PropsValues.DEFAULT_ADMIN_FIRST_NAME;
 			String middleName = PropsValues.DEFAULT_ADMIN_MIDDLE_NAME;
@@ -306,20 +307,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = StringPool.BLANK;
-			long[] organizationIds = new long[0];
-
-			User user = userLocalService.addUser(
-				creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, locale, firstName,
-				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-				birthdayDay, birthdayYear, jobTitle, organizationIds, false);
 
 			Group guestGroup = groupLocalService.getGroup(
 				companyId, GroupConstants.GUEST);
 
 			long[] groupIds = new long[] {guestGroup.getGroupId()};
 
-			groupLocalService.addUserGroups(user.getUserId(), groupIds);
+			long[] organizationIds = new long[0];
 
 			Role adminRole = roleLocalService.getRole(
 				companyId, RoleConstants.ADMINISTRATOR);
@@ -331,7 +325,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				adminRole.getRoleId(), powerUserRole.getRoleId()
 			};
 
-			roleLocalService.setUserRoles(user.getUserId(), roleIds);
+			boolean sendEmail = false;
+
+			userLocalService.addUser(
+				creatorUserId, companyId, autoPassword, password1, password2,
+				autoScreenName, screenName, emailAddress, openId, locale,
+				firstName, middleName, lastName, prefixId, suffixId, male,
+				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+				organizationIds, roleIds, sendEmail);
 		}
 
 		return company;

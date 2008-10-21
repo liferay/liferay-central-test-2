@@ -90,6 +90,17 @@ public class OrganizationServiceJSON {
 
 	public static JSONObject addOrganization(long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
+		long regionId, long countryId, int statusId, java.lang.String comments)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
+				name, type, recursable, regionId, countryId, statusId, comments);
+
+		return OrganizationJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject addOrganization(long parentOrganizationId,
+		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
@@ -150,6 +161,19 @@ public class OrganizationServiceJSON {
 			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
+	}
+
+	public static JSONObject updateOrganization(long organizationId,
+		long parentOrganizationId, java.lang.String name,
+		java.lang.String type, boolean recursable, long regionId,
+		long countryId, int statusId, java.lang.String comments)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
+				parentOrganizationId, name, type, recursable, regionId,
+				countryId, statusId, comments);
+
+		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject updateOrganization(long organizationId,

@@ -44,13 +44,11 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -158,6 +156,7 @@ public class AddUserAction extends PortletAction {
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
+		String openId = ParamUtil.getString(actionRequest, "openId");
 		String firstName = ParamUtil.getString(actionRequest, "firstName");
 		String middleName = ParamUtil.getString(actionRequest, "middleName");
 		String lastName = ParamUtil.getString(actionRequest, "lastName");
@@ -169,22 +168,22 @@ public class AddUserAction extends PortletAction {
 		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		long[] organizationIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
 		boolean sendEmail = true;
 
-		String openId = ParamUtil.getString(actionRequest, "openId");
-		boolean openIdAuth = false;
+		boolean openIdPending = false;
 
 		Boolean openIdLoginPending = (Boolean)session.getAttribute(
 			WebKeys.OPEN_ID_LOGIN_PENDING);
 
 		if ((openIdLoginPending != null) &&
-				(openIdLoginPending.booleanValue()) &&
-					(Validator.isNotNull(openId))) {
+			(openIdLoginPending.booleanValue()) &&
+			(Validator.isNotNull(openId))) {
 
 			sendEmail = false;
-			openIdAuth = true;
+			openIdPending = true;
 		}
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
@@ -193,14 +192,12 @@ public class AddUserAction extends PortletAction {
 
 		User user = UserServiceUtil.addUser(
 			company.getCompanyId(), autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, themeDisplay.getLocale(),
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationIds,
-			sendEmail);
+			autoScreenName, screenName, emailAddress, openId,
+			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,
+			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+			groupIds, organizationIds, roleIds, sendEmail);
 
-		if (openIdAuth) {
-			UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
-
+		if (openIdPending) {
 			session.setAttribute(
 				WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
 

@@ -109,6 +109,25 @@ public class OrganizationServiceSoap {
 	public static com.liferay.portal.model.OrganizationSoap addOrganization(
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
+		long countryId, int statusId, java.lang.String comments)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
+					name, type, recursable, regionId, countryId, statusId,
+					comments);
+
+			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.OrganizationSoap addOrganization(
+		long parentOrganizationId, java.lang.String name,
+		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.model.WebsiteSoap[] websites)
 		throws RemoteException {
@@ -214,6 +233,25 @@ public class OrganizationServiceSoap {
 		try {
 			OrganizationServiceUtil.unsetPasswordPolicyOrganizations(passwordPolicyId,
 				organizationIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.OrganizationSoap updateOrganization(
+		long organizationId, long parentOrganizationId, java.lang.String name,
+		java.lang.String type, boolean recursable, long regionId,
+		long countryId, int statusId, java.lang.String comments)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
+					parentOrganizationId, name, type, recursable, regionId,
+					countryId, statusId, comments);
+
+			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

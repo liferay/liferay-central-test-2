@@ -93,6 +93,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
+import com.liferay.util.SetUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -107,6 +108,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.internet.InternetAddress;
@@ -119,7 +121,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Jorge Ferrer
  *
  */
@@ -198,11 +200,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User addUser(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean autoScreenName,
-			String screenName, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, long[] organizationIds,
-			boolean sendEmail)
+			String screenName, String emailAddress, String openId,
+			Locale locale, String firstName, String middleName, String lastName,
+			int prefixId, int suffixId, boolean male, int birthdayMonth,
+			int birthdayDay, int birthdayYear, String jobTitle, long[] groupIds,
+			long[] organizationIds, long[] roleIds, boolean sendEmail)
 		throws PortalException, SystemException {
 
 		// User
@@ -210,6 +212,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
+		openId = openId.trim();
 		Date now = new Date();
 
 		if (PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) {
@@ -262,6 +265,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordReset(false);
 		user.setScreenName(screenName);
 		user.setEmailAddress(emailAddress);
+		user.setOpenId(openId);
 		user.setLanguageId(locale.toString());
 		user.setTimeZoneId(defaultUser.getTimeZoneId());
 		user.setGreeting(greeting);
@@ -325,59 +329,64 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		contactPersistence.update(contact, false);
 
-		// Organizations
-
-		updateOrganizations(userId, organizationIds);
-
 		// Group
 
 		groupLocalService.addGroup(
 			user.getUserId(), User.class.getName(), user.getUserId(), null,
 			null, 0, StringPool.SLASH + screenName, true);
 
-		// Default groups
+		// Groups
+
+		Set<Long> groupIdsSet = SetUtil.fromArray(groupIds);
 
 		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
 			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
 
-		long[] groupIds = new long[defaultGroupNames.length];
-
-		for (int i = 0; i < defaultGroupNames.length; i++) {
+		for (String defaultGroupName : defaultGroupNames) {
 			try {
 				Group group = groupFinder.findByC_N(
-					companyId, defaultGroupNames[i]);
+					companyId, defaultGroupName);
 
-				groupIds[i] = group.getGroupId();
+				groupIdsSet.add(group.getGroupId());
 			}
 			catch (NoSuchGroupException nsge) {
 			}
 		}
 
+		groupIds = ArrayUtil.toArray(
+			groupIdsSet.toArray(new Long[groupIdsSet.size()]));
+
 		groupLocalService.addUserGroups(userId, groupIds);
 
-		// Default roles
+		// Organizations
 
-		List<Role> roles = new ArrayList<Role>();
+		updateOrganizations(userId, organizationIds);
+
+		// Roles
+
+		Set<Long> roleIdsSet = SetUtil.fromArray(roleIds);
 
 		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
 			PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
 
-		for (int i = 0; i < defaultRoleNames.length; i++) {
+		for (String defaultRoleName : defaultRoleNames) {
 			try {
-				Role role = roleFinder.findByC_N(
-					companyId, defaultRoleNames[i]);
+				Role role = roleFinder.findByC_N(companyId, defaultRoleName);
 
-				roles.add(role);
+				roleIdsSet.add(role.getRoleId());
 			}
 			catch (NoSuchRoleException nsge) {
 			}
 		}
 
-		userPersistence.setRoles(userId, roles);
+		roleIds = ArrayUtil.toArray(
+			roleIdsSet.toArray(new Long[roleIdsSet.size()]));
 
-		// Default user groups
+		userPersistence.setRoles(userId, roleIds);
+
+		// User groups
 
 		List<UserGroup> userGroups = new ArrayList<UserGroup>();
 
@@ -1462,6 +1471,36 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public void updateGroups(long userId, long[] newGroupIds)
+		throws PortalException, SystemException {
+
+		if (newGroupIds == null) {
+			return;
+		}
+
+		List<Group> oldGroups = userPersistence.getGroups(userId);
+
+		List<Long> oldGroupIds = new ArrayList<Long>(oldGroups.size());
+
+		for (Group oldGroup : oldGroups) {
+			long oldGroupId = oldGroup.getGroupId();
+
+			oldGroupIds.add(oldGroupId);
+
+			if (!ArrayUtil.contains(newGroupIds, oldGroupId)) {
+				unsetGroupUsers(oldGroupId, new long[] {userId});
+			}
+		}
+
+		for (long newGroupId : newGroupIds) {
+			if (!oldGroupIds.contains(newGroupId)) {
+				addGroupUsers(newGroupId, new long[] {userId});
+			}
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public User updateLastLogin(long userId, String loginIP)
 		throws PortalException, SystemException {
 
@@ -1554,6 +1593,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void updateOpenId(long userId, String openId)
 		throws PortalException, SystemException {
 
+		openId = openId.trim();
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		user.setOpenId(openId);
@@ -1561,9 +1602,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 	}
 
-	public void updateOrganizations(
-			long userId, long[] newOrganizationIds)
+	public void updateOrganizations(long userId, long[] newOrganizationIds)
 		throws PortalException, SystemException {
+
+		if (newOrganizationIds == null) {
+			return;
+		}
 
 		List<Organization> oldOrganizations = userPersistence.getOrganizations(
 			userId);
@@ -1571,9 +1615,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		List<Long> oldOrganizationIds = new ArrayList<Long>(
 			oldOrganizations.size());
 
-		for (int i = 0; i < oldOrganizations.size(); i++) {
-			Organization oldOrganization = oldOrganizations.get(i);
-
+		for (Organization oldOrganization : oldOrganizations) {
 			long oldOrganizationId = oldOrganization.getOrganizationId();
 
 			oldOrganizationIds.add(oldOrganizationId);
@@ -1583,9 +1625,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		for (int i = 0; i < newOrganizationIds.length; i++) {
-			long newOrganizationId = newOrganizationIds[i];
-
+		for (long newOrganizationId : newOrganizationIds) {
 			if (!oldOrganizationIds.contains(newOrganizationId)) {
 				addOrganizationUsers(newOrganizationId, new long[] {userId});
 			}
@@ -1749,40 +1789,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public User updateUser(
-			long userId, String oldPassword, boolean passwordReset,
-			String screenName, String emailAddress, String languageId,
+			long userId, String oldPassword, String newPassword1,
+			String newPassword2, boolean passwordReset, String screenName,
+			String emailAddress, String openId, String languageId,
 			String timeZoneId, String greeting, String comments,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String smsSn, String aimSn, String facebookSn,
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds)
-		throws PortalException, SystemException {
-
-		String newPassword1 = StringPool.BLANK;
-		String newPassword2 = StringPool.BLANK;
-
-		return updateUser(
-			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds);
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String facebookSn, String icqSn,
-			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds)
+			long[] groupIds, long[] organizationIds, long[] roleIds)
 		throws PortalException, SystemException {
 
 		// User
@@ -1790,6 +1806,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String password = oldPassword;
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
+		openId = openId.trim();
 		aimSn.trim().toLowerCase();
 		facebookSn.trim().toLowerCase();
 		icqSn.trim().toLowerCase();
@@ -1849,6 +1866,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setEmailAddress(emailAddress);
 		}
 
+		user.setOpenId(openId);
 		user.setLanguageId(languageId);
 		user.setTimeZoneId(timeZoneId);
 		user.setGreeting(greeting);
@@ -1899,10 +1917,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		contactPersistence.update(contact, false);
 
-		// Organizations
-
-		updateOrganizations(userId, organizationIds);
-
 		// Group
 
 		Group group = groupLocalService.getUserGroup(
@@ -1911,6 +1925,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
+
+		// Groups
+
+		updateGroups(userId, groupIds);
+
+		// Organizations
+
+		updateOrganizations(userId, organizationIds);
+
+		// Roles
+
+		if (roleIds != null) {
+			userPersistence.setRoles(userId, roleIds);
+		}
 
 		// Announcements
 

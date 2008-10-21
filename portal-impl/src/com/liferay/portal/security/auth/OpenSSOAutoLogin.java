@@ -146,6 +146,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 		String password1 = PwdGenerator.getPassword();
 		String password2 = password1;
 		boolean autoScreenName = false;
+		String openId = StringPool.BLANK;
 		String middleName = StringPool.BLANK;
 		int prefixId = 0;
 		int suffixId = 0;
@@ -154,14 +155,17 @@ public class OpenSSOAutoLogin implements AutoLogin {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = StringPool.BLANK;
-		long[] organizationIds = new long[0];
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
 		boolean sendEmail = false;
 
 		return UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, locale, firstName,
+			autoScreenName, screenName, emailAddress, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
+			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+			roleIds, sendEmail);
 	}
 
 	private static Log _log = LogFactory.getLog(OpenSSOAutoLogin.class);

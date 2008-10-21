@@ -26,11 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
@@ -40,7 +40,10 @@ import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -134,10 +137,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public User addUser(
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
-			String emailAddress, Locale locale, String firstName,
+			String emailAddress, String openId, Locale locale, String firstName,
 			String middleName, String lastName, int prefixId, int suffixId,
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, long[] organizationIds, boolean sendEmail)
+			String jobTitle, long[] groupIds, long[] organizationIds,
+			long[] roleIds, boolean sendEmail)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -166,9 +170,36 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		return userLocalService.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, locale, firstName,
+			autoScreenName, screenName, emailAddress, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
+			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+			roleIds, sendEmail);
+	}
+
+	public User addUser(
+			long companyId, boolean autoPassword, String password1,
+			String password2, boolean autoScreenName, String screenName,
+			String emailAddress, String openId, Locale locale, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, long[] groupIds, long[] organizationIds,
+			long[] roleIds, boolean sendEmail, List<Website> websites,
+			List<AnnouncementsDelivery> announcementsDelivers)
+		throws PortalException, SystemException {
+
+		User user = addUser(
+			companyId, autoPassword, password1, password2, autoScreenName,
+			screenName, emailAddress, openId, locale, firstName, middleName,
+			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+			birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
+			sendEmail);
+
+		EnterpriseAdminUtil.updateWebsites(
+			User.class.getName(), user.getUserId(), websites);
+
+		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
+
+		return user;
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
@@ -442,40 +473,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	public User updateUser(
-			long userId, String oldPassword, boolean passwordReset,
-			String screenName, String emailAddress, String languageId,
+			long userId, String oldPassword, String newPassword1,
+			String newPassword2, boolean passwordReset, String screenName,
+			String emailAddress, String openId, String languageId,
 			String timeZoneId, String greeting, String comments,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String smsSn, String aimSn, String facebookSn,
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds)
-		throws PortalException, SystemException {
-
-		String newPassword1 = StringPool.BLANK;
-		String newPassword2 = StringPool.BLANK;
-
-		return updateUser(
-			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds);
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String facebookSn, String icqSn,
-			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds)
+			long[] groupIds, long[] organizationIds, long[] roleIds)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -502,11 +509,57 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		return userLocalService.updateUser(
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, languageId, timeZoneId, greeting,
+			screenName, emailAddress, openId, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds);
+			jobTitle, groupIds, organizationIds, roleIds);
+	}
+
+	public User updateUser(
+			long userId, String oldPassword, String newPassword1,
+			String newPassword2, boolean passwordReset, String screenName,
+			String emailAddress, String openId, String languageId,
+			String timeZoneId, String greeting, String comments,
+			String firstName, String middleName, String lastName, int prefixId,
+			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+			int birthdayYear, String smsSn, String aimSn, String facebookSn,
+			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
+			String skypeSn, String twitterSn, String ymSn, String jobTitle,
+			long[] groupIds, long[] organizationIds, long[] roleIds,
+			List<Website> websites,
+			List<AnnouncementsDelivery> announcementsDelivers)
+		throws PortalException, SystemException {
+
+		User user = updateUser(
+			userId, oldPassword, newPassword1, newPassword2, passwordReset,
+			screenName, emailAddress, openId, languageId, timeZoneId, greeting,
+			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, groupIds, organizationIds, roleIds);
+
+		EnterpriseAdminUtil.updateWebsites(
+			User.class.getName(), user.getUserId(), websites);
+
+		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
+
+		return user;
+	}
+
+	protected void updateAnnouncementsDeliveries(
+			long userId, List<AnnouncementsDelivery> announcementsDeliveries)
+		throws PortalException, SystemException {
+
+		for (AnnouncementsDelivery announcementsDelivery :
+				announcementsDeliveries) {
+
+			announcementsDeliveryService.updateDelivery(
+				userId, announcementsDelivery.getType(),
+				announcementsDelivery.getEmail(),
+				announcementsDelivery.getSms(),
+				announcementsDelivery.getWebsite());
+		}
 	}
 
 }

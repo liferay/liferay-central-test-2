@@ -70,7 +70,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, List<Website> websites)
+			String comments)
 		throws PortalException, SystemException {
 
 		if (!OrganizationPermissionUtil.contains(
@@ -84,9 +84,20 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 					"an organization with parent " + parentOrganizationId);
 		}
 
-		Organization organization = organizationLocalService.addOrganization(
+		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId, comments);
+	}
+
+	public Organization addOrganization(
+			long parentOrganizationId, String name, String type,
+			boolean recursable, long regionId, long countryId, int statusId,
+			String comments, List<Website> websites)
+		throws PortalException, SystemException {
+
+		Organization organization = addOrganization(
+			parentOrganizationId, name, type, recursable, regionId, countryId,
+			statusId, comments);
 
 		EnterpriseAdminUtil.updateWebsites(
 			Organization.class.getName(), organization.getOrganizationId(),
@@ -159,15 +170,26 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments, List<Website> websites)
+			int statusId, String comments)
 		throws PortalException, SystemException {
 
 		OrganizationPermissionUtil.check(
 			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
 
-		Organization organization = organizationLocalService.updateOrganization(
+		return organizationLocalService.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments);
+	}
+
+	public Organization updateOrganization(
+			long organizationId, long parentOrganizationId, String name,
+			String type, boolean recursable, long regionId, long countryId,
+			int statusId, String comments, List<Website> websites)
+		throws PortalException, SystemException {
+
+		Organization organization = updateOrganization(
+			organizationId, parentOrganizationId, name, type, recursable,
+			regionId, countryId, statusId, comments);
 
 		EnterpriseAdminUtil.updateWebsites(
 			Organization.class.getName(), organizationId, websites);

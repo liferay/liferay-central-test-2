@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -53,8 +54,13 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
+import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
+import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
-import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -236,6 +242,33 @@ public class EditUserAction extends PortletAction {
 		}
 	}
 
+	protected List<AnnouncementsDelivery> getAnnouncementsDeliveries(
+		ActionRequest actionRequest) {
+
+		List<AnnouncementsDelivery> announcementsDeliveries =
+			new ArrayList<AnnouncementsDelivery>();
+
+		for (String type : AnnouncementsEntryImpl.TYPES) {
+			boolean email = ParamUtil.getBoolean(
+				actionRequest, "announcementsType" + type + "Email");
+			boolean sms = ParamUtil.getBoolean(
+				actionRequest, "announcementsType" + type + "Sms");
+			boolean website = ParamUtil.getBoolean(
+				actionRequest, "announcementsType" + type + "Website");
+
+			AnnouncementsDelivery announcementsDelivery =
+				new AnnouncementsDeliveryImpl();
+
+			announcementsDelivery.setEmail(email);
+			announcementsDelivery.setSms(sms);
+			announcementsDelivery.setWebsite(website);
+
+			announcementsDeliveries.add(announcementsDelivery);
+		}
+
+		return announcementsDeliveries;
+	}
+
 	protected User updateLockout(ActionRequest actionRequest) throws Exception {
 		User user = PortalUtil.getSelectedUser(actionRequest);
 
@@ -261,6 +294,7 @@ public class EditUserAction extends PortletAction {
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
+		String openId = ParamUtil.getString(actionRequest, "openId");
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
 		String greeting = ParamUtil.getString(actionRequest, "greeting");
@@ -286,9 +320,16 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
+		long[] groupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "groupIds"), 0L);
 		long[] organizationIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
+			ParamUtil.getString(actionRequest, "organizationIds"), 0L);
+		long[] roleIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "roleIds"), 0L);
 		boolean sendEmail = true;
+		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
+		List<AnnouncementsDelivery> announcementsDeliveries =
+			getAnnouncementsDeliveries(actionRequest);
 
 		User user = null;
 		String oldScreenName = StringPool.BLANK;
@@ -299,10 +340,11 @@ public class EditUserAction extends PortletAction {
 
 			user = UserServiceUtil.addUser(
 				themeDisplay.getCompanyId(), autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress,
+				autoScreenName, screenName, emailAddress, openId,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationIds, sendEmail);
+				birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
+				sendEmail, websites, announcementsDeliveries);
 		}
 		else {
 
@@ -323,29 +365,12 @@ public class EditUserAction extends PortletAction {
 
 			user = UserServiceUtil.updateUser(
 				user.getUserId(), oldPassword, newPassword1, newPassword2,
-				passwordReset, screenName, emailAddress, languageId, timeZoneId,
-				greeting, comments, firstName, middleName, lastName, prefixId,
-				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
-				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				twitterSn, ymSn, jobTitle, organizationIds);
-
-			String openId = ParamUtil.getString(actionRequest, "openId");
-
-			if (!openId.equals(user.getOpenId())) {
-				UserServiceUtil.updateOpenId(user.getUserId(), openId);
-			}
-
-			for (String type : AnnouncementsEntryImpl.TYPES) {
-				boolean email = ParamUtil.getBoolean(
-					actionRequest, "announcementsType" + type + "Email");
-				boolean sms = ParamUtil.getBoolean(
-					actionRequest, "announcementsType" + type + "Sms");
-				boolean website = ParamUtil.getBoolean(
-					actionRequest, "announcementsType" + type + "Website");
-
-				AnnouncementsDeliveryServiceUtil.updateDelivery(
-					user.getUserId(), type,	email, sms, website);
-			}
+				passwordReset, screenName, emailAddress, openId, languageId,
+				timeZoneId, greeting, comments, firstName, middleName, lastName,
+				prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
+				mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
+				organizationIds, roleIds, websites, announcementsDeliveries);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;
@@ -377,8 +402,6 @@ public class EditUserAction extends PortletAction {
 				}
 			}
 		}
-
-		PortalUtil.updateExpandoBridge(user.getExpandoBridge(), actionRequest);
 
 		return new Object[] {user, oldScreenName};
 	}

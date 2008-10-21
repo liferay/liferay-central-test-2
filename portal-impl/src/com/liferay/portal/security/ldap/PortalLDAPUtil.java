@@ -646,6 +646,7 @@ public class PortalLDAPUtil {
 			attrs, userMappings.getProperty("screenName")).toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("emailAddress"));
+		String openId = StringPool.BLANK;
 		Locale locale = defaultUser.getLocale();
 		String firstName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("firstName"));
@@ -673,7 +674,9 @@ public class PortalLDAPUtil {
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("jobTitle"));
-		long[] organizationIds = new long[0];
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
 		boolean sendEmail = false;
 
 		if (_log.isDebugEnabled()) {
@@ -784,16 +787,17 @@ public class PortalLDAPUtil {
 			}
 
 			user = UserLocalServiceUtil.updateUser(
-				user.getUserId(), password, user.isPasswordReset(), screenName,
-				emailAddress, user.getLanguageId(), user.getTimeZoneId(),
-				user.getGreeting(), user.getComments(), firstName, middleName,
-				lastName, contact.getPrefixId(), contact.getSuffixId(),
-				contact.getMale(), birthdayMonth, birthdayDay, birthdayYear,
-				contact.getSmsSn(), contact.getAimSn(), contact.getFacebookSn(),
-				contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
+				user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
+				user.isPasswordReset(), screenName, emailAddress, openId,
+				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+				user.getComments(), firstName, middleName, lastName,
+				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
+				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
+				contact.getAimSn(), contact.getFacebookSn(), contact.getIcqSn(),
+				contact.getJabberSn(), contact.getMsnSn(),
 				contact.getMySpaceSn(), contact.getSkypeSn(),
-				contact.getTwitterSn(), contact.getYmSn(), jobTitle,
-				user.getOrganizationIds());
+				contact.getTwitterSn(), contact.getYmSn(), jobTitle, groupIds,
+				organizationIds, roleIds);
 
 			if (ldapUserModifiedDate != null) {
 				UserLocalServiceUtil.updateModifiedDate(
@@ -814,10 +818,10 @@ public class PortalLDAPUtil {
 
 				user = UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoPassword, password, password,
-					autoScreenName, screenName, emailAddress, locale, firstName,
-					middleName, lastName, prefixId, suffixId, male,
+					autoScreenName, screenName, emailAddress, openId, locale,
+					firstName, middleName, lastName, prefixId, suffixId, male,
 					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationIds, sendEmail);
+					groupIds, organizationIds, roleIds, sendEmail);
 			}
 			catch (Exception e) {
 				_log.error(

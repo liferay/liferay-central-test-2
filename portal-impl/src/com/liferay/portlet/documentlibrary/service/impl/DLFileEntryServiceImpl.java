@@ -39,8 +39,6 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.File;
 
-import java.rmi.RemoteException;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -111,7 +109,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public void deleteFileEntry(long folderId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
@@ -139,7 +137,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public void deleteFileEntry(long folderId, String name, double version)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
@@ -167,7 +165,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public void deleteFileEntryByTitle(long folderId, String titleWithExtension)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = getFileEntryByTitle(
 			folderId, titleWithExtension);
@@ -219,7 +217,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public boolean hasFileEntryLock(long folderId, String name)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
@@ -300,7 +298,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			long folderId, long newFolderId, String name, String sourceFileName,
 			String title, String description, String[] tagsEntries,
 			String extraSettings, byte[] bytes)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.UPDATE);
@@ -335,7 +333,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public boolean verifyFileEntryLock(
 			long folderId, String name, String lockUuid)
-		throws PortalException, RemoteException {
+		throws PortalException {
 
 		boolean verified = false;
 

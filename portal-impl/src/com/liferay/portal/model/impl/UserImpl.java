@@ -35,18 +35,18 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.comparator.OrganizationNameComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -154,6 +154,33 @@ public class UserImpl extends UserModelImpl implements User {
 		return group;
 	}
 
+	public long[] getGroupIds() {
+		List<Group> groups = getGroups();
+
+		long[] groupIds = new long[groups.size()];
+
+		for (int i = 0; i < groups.size(); i++) {
+			Group group = groups.get(i);
+
+			groupIds[i] = group.getGroupId();
+		}
+
+		return groupIds;
+	}
+
+	public List<Group> getGroups() {
+		try {
+			return GroupLocalServiceUtil.getUserGroups(getUserId());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to get groups for user " + getUserId());
+			}
+		}
+
+		return new ArrayList<Group>();
+	}
+
 	public String getLastName() {
 		return getContact().getLastName();
 	}
@@ -228,32 +255,6 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return myPlaces;
-	}
-
-	/**
-	 * @deprecated Will return the first organization of a list in alphabetical
-	 * order.
-	 */
-	public Organization getOrganization() {
-		try {
-			List<Organization> organizations =
-				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());
-
-			if (organizations.size() > 0) {
-				Collections.sort(
-					organizations, new OrganizationNameComparator(true));
-
-				return organizations.get(0);
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to get an organization for user " + getUserId());
-			}
-		}
-
-		return new OrganizationImpl();
 	}
 
 	public long[] getOrganizationIds() {
@@ -337,6 +338,33 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return 0;
+	}
+
+	public long[] getRoleIds() {
+		List<Role> roles = getRoles();
+
+		long[] roleIds = new long[roles.size()];
+
+		for (int i = 0; i < roles.size(); i++) {
+			Role role = roles.get(i);
+
+			roleIds[i] = role.getRoleId();
+		}
+
+		return roleIds;
+	}
+
+	public List<Role> getRoles() {
+		try {
+			return RoleLocalServiceUtil.getUserRoles(getUserId());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to get roles for user " + getUserId());
+			}
+		}
+
+		return new ArrayList<Role>();
 	}
 
 	public TimeZone getTimeZone() {

@@ -144,18 +144,54 @@ public class UserServiceSoap {
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
-		String locale, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long[] organizationIds, boolean sendEmail)
+		java.lang.String openId, String locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
+		long[] organizationIds, long[] roleIds, boolean sendEmail)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoPassword, password1, password2, autoScreenName,
-					screenName, emailAddress, new java.util.Locale(locale),
-					firstName, middleName, lastName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationIds, sendEmail);
+					screenName, emailAddress, openId,
+					new java.util.Locale(locale), firstName, middleName,
+					lastName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, groupIds,
+					organizationIds, roleIds, sendEmail);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.UserSoap addUser(long companyId,
+		boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String openId, String locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
+		long[] organizationIds, long[] roleIds, boolean sendEmail,
+		com.liferay.portal.model.WebsiteSoap[] websites,
+		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
+					autoPassword, password1, password2, autoScreenName,
+					screenName, emailAddress, openId,
+					new java.util.Locale(locale), firstName, middleName,
+					lastName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, groupIds,
+					organizationIds, roleIds, sendEmail,
+					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
+						websites),
+					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
+						announcementsDelivers));
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -500,28 +536,30 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
-		java.lang.String oldPassword, boolean passwordReset,
+		java.lang.String oldPassword, java.lang.String newPassword1,
+		java.lang.String newPassword2, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds)
-		throws RemoteException {
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
-					oldPassword, passwordReset, screenName, emailAddress,
-					languageId, timeZoneId, greeting, comments, firstName,
-					middleName, lastName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-					facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-					twitterSn, ymSn, jobTitle, organizationIds);
+					oldPassword, newPassword1, newPassword2, passwordReset,
+					screenName, emailAddress, openId, languageId, timeZoneId,
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					groupIds, organizationIds, roleIds);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -536,27 +574,33 @@ public class UserServiceSoap {
 		java.lang.String oldPassword, java.lang.String newPassword1,
 		java.lang.String newPassword2, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, com.liferay.portal.model.WebsiteSoap[] websites,
+		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
-					screenName, emailAddress, languageId, timeZoneId, greeting,
-					comments, firstName, middleName, lastName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
-					organizationIds);
+					screenName, emailAddress, openId, languageId, timeZoneId,
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					groupIds, organizationIds, roleIds,
+					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
+						websites),
+					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
+						announcementsDelivers));
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

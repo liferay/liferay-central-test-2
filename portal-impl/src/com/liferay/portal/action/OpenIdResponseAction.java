@@ -144,16 +144,17 @@ public class OpenIdResponseAction extends Action {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = StringPool.BLANK;
-		long[] organizationIds = new long[0];
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
 		boolean sendEmail = false;
 
 		User user = UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, locale, firstName,
+			autoScreenName, screenName, emailAddress, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
-
-		UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
+			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+			roleIds, sendEmail);
 
 		return user;
 	}

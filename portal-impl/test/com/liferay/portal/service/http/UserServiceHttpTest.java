@@ -23,6 +23,7 @@
 package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.TestPropsValues;
 
@@ -57,15 +58,16 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 
 	protected User addUser() throws Exception {
 		boolean autoPassword = true;
-		String password1 = null;
-		String password2 = null;
+		String password1 = StringPool.BLANK;
+		String password2 = StringPool.BLANK;
 		boolean autoScreenName = true;
-		String screenName = "";
+		String screenName = StringPool.BLANK;
 		String emailAddress =
 			"UserServiceHttpTest." + nextLong() + "@liferay.com";
+		String openId = StringPool.BLANK;
 		Locale locale = LocaleUtil.getDefault();
 		String firstName = "UserServiceHttpTest";
-		String middleName = "";
+		String middleName = StringPool.BLANK;
 		String lastName = "UserServiceHttpTest";
 		int prefixId = 0;
 		int suffixId = 0;
@@ -73,16 +75,18 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 		int birthdayMonth = Calendar.JANUARY;
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
-		String jobTitle = null;
-		long[] organizationIds = new long[0];
+		String jobTitle = StringPool.BLANK;
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
 		boolean sendMail = false;
 
 		return UserServiceHttp.addUser(
 			getHttpPrincipal(), TestPropsValues.COMPANY_ID, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
-			locale, firstName, middleName, lastName, prefixId, suffixId,
-			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			organizationIds, sendMail);
+			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
+			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, sendMail);
 	}
 
 }

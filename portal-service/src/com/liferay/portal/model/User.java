@@ -66,6 +66,10 @@ public interface User extends UserModel {
 
 	public com.liferay.portal.model.Group getGroup();
 
+	public long[] getGroupIds();
+
+	public java.util.List<com.liferay.portal.model.Group> getGroups();
+
 	public java.lang.String getLastName();
 
 	public java.util.Locale getLocale();
@@ -79,8 +83,6 @@ public interface User extends UserModel {
 	public java.lang.String getMiddleName();
 
 	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
-
-	public com.liferay.portal.model.Organization getOrganization();
 
 	public long[] getOrganizationIds();
 
@@ -97,6 +99,10 @@ public interface User extends UserModel {
 	public int getPrivateLayoutsPageCount();
 
 	public int getPublicLayoutsPageCount();
+
+	public long[] getRoleIds();
+
+	public java.util.List<com.liferay.portal.model.Role> getRoles();
 
 	public java.util.TimeZone getTimeZone();
 

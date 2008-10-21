@@ -32,8 +32,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
-import java.rmi.RemoteException;
-
 import java.util.Calendar;
 
 import javax.portlet.ActionRequest;
@@ -71,11 +69,12 @@ public class AdminUtil {
 
 	public static User updateUser(
 			HttpServletRequest request, long userId, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String smsSn, String aimSn,
-			String facebookSn, String icqSn, String jabberSn, String msnSn,
-			String mySpaceSn, String skypeSn, String twitterSn, String ymSn)
-		throws PortalException, RemoteException, SystemException {
+			String emailAddress, String openId, String languageId,
+			String timeZoneId, String greeting, String comments, String smsSn,
+			String aimSn, String facebookSn, String icqSn, String jabberSn,
+			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
+			String ymSn)
+		throws PortalException, SystemException {
 
 		String password = getUpdateUserPassword(request, userId);
 
@@ -91,31 +90,37 @@ public class AdminUtil {
 		int birthdayDay = birthdayCal.get(Calendar.DATE);
 		int birthdayYear = birthdayCal.get(Calendar.YEAR);
 
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
+
 		return UserServiceUtil.updateUser(
-			userId, password, user.isPasswordReset(), screenName, emailAddress,
+			userId, password, StringPool.BLANK, StringPool.BLANK,
+			user.isPasswordReset(), screenName, emailAddress, openId,
 			languageId, timeZoneId, greeting, comments, contact.getFirstName(),
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			contact.getJobTitle(), user.getOrganizationIds());
+			contact.getJobTitle(), groupIds, organizationIds, roleIds);
 	}
 
 	public static User updateUser(
 			ActionRequest actionRequest, long userId, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String smsSn, String aimSn,
-			String facebookSn, String icqSn, String jabberSn, String msnSn,
-			String mySpaceSn, String skypeSn, String twitterSn, String ymSn)
-		throws PortalException, RemoteException, SystemException {
+			String emailAddress, String openId, String languageId,
+			String timeZoneId, String greeting, String comments, String smsSn,
+			String aimSn, String facebookSn, String icqSn, String jabberSn,
+			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
+			String ymSn)
+		throws PortalException, SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
 
 		return updateUser(
-			request, userId, screenName, emailAddress, languageId, timeZoneId,
-			greeting, comments, smsSn, aimSn, facebookSn, icqSn, jabberSn,
-			msnSn, mySpaceSn, skypeSn, twitterSn, ymSn);
+			request, userId, screenName, emailAddress, openId, languageId,
+			timeZoneId, greeting, comments, smsSn, aimSn, facebookSn, icqSn,
+			jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn);
 	}
 
 }
