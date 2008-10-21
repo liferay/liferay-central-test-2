@@ -41,8 +41,7 @@ public class AddWriterTest extends BaseTestCase {
 		selenium.type("_79_screenName", RuntimeVariables.replace("Writer"));
 		selenium.type("_79_emailAddress",
 			RuntimeVariables.replace("Writer@liferay.com"));
-		selenium.typeKeys("_79_prefixId", RuntimeVariables.replace("label=Mr."));
-		selenium.type("_79_prefixId", RuntimeVariables.replace("label=Mr."));
+		selenium.select("_79_prefixId", RuntimeVariables.replace("label=Mr."));
 		selenium.typeKeys("_79_firstName", RuntimeVariables.replace("Writer"));
 		selenium.type("_79_firstName", RuntimeVariables.replace("Writer"));
 		selenium.typeKeys("_79_lastName", RuntimeVariables.replace("Liferay"));
@@ -63,10 +62,28 @@ public class AddWriterTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("rolesLink");
 		selenium.click("//div[@id='roles']/nobr/a[2]");
+		Thread.sleep(5000);
 		selenium.waitForPopUp("regularRole", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=regularRole");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Writer")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Writer");
-		selenium.selectWindow("name=null");
+		selenium.selectWindow("null");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
