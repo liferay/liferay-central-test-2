@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.lock.service.LockService;
+
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
@@ -60,6 +62,7 @@ import com.liferay.portal.service.PhoneLocalService;
 import com.liferay.portal.service.PhoneService;
 import com.liferay.portal.service.PluginSettingLocalService;
 import com.liferay.portal.service.PluginSettingService;
+import com.liferay.portal.service.PortalLocalService;
 import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.PortletItemLocalService;
 import com.liferay.portal.service.PortletLocalService;
@@ -699,6 +702,14 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 		this.phonePersistence = phonePersistence;
 	}
 
+	public PortalLocalService getPortalLocalService() {
+		return portalLocalService;
+	}
+
+	public void setPortalLocalService(PortalLocalService portalLocalService) {
+		this.portalLocalService = portalLocalService;
+	}
+
 	public PortalService getPortalService() {
 		return portalService;
 	}
@@ -1176,6 +1187,14 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
+	public LockService getLockService() {
+		return lockService;
+	}
+
+	public void setLockService(LockService lockService) {
+		this.lockService = lockService;
+	}
+
 	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountLocalService.impl")
 	protected AccountLocalService accountLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountService.impl")
@@ -1306,6 +1325,8 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 	protected PhoneService phoneService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
 	protected PhonePersistence phonePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortalLocalService.impl")
+	protected PortalLocalService portalLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.PortalService.impl")
 	protected PortalService portalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.PluginSettingLocalService.impl")
@@ -1418,4 +1439,6 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 	protected WebsiteService websiteService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
+	@javax.annotation.Resource(name = "com.liferay.lock.service.LockService.impl")
+	protected LockService lockService;
 }

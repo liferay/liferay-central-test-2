@@ -477,6 +477,16 @@
 	<bean id="com.liferay.portal.service.persistence.PhoneUtil" class="com.liferay.portal.service.persistence.PhoneUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PhonePersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.PortalLocalService.impl" class="com.liferay.portal.service.impl.PortalLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.PortalLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.PortalLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalLocalServiceFactory" class="com.liferay.portal.service.PortalLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.PortalLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalLocalServiceUtil" class="com.liferay.portal.service.PortalLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.PortalLocalService.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.PortalService.impl" class="com.liferay.portal.service.impl.PortalServiceImpl" />
 	<bean id="com.liferay.portal.service.PortalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.PortalService.impl" />

@@ -946,7 +946,12 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="Portal" local-service="false" remote-service="true" />
+	<entity name="Portal" local-service="true" remote-service="true">
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.lock" entity="Lock" />
+	</entity>
 	<entity name="PluginSetting" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

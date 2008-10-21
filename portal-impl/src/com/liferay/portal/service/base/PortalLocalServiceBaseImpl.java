@@ -22,8 +22,7 @@
 
 package com.liferay.portal.service.base;
 
-import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
+import com.liferay.lock.service.LockService;
 
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
@@ -149,13 +148,12 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 
 /**
- * <a href="ClassNameServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ClassNameServiceBaseImpl extends PrincipalBean
-	implements ClassNameService {
+public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1188,20 +1186,12 @@ public abstract class ClassNameServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
-	public CounterLocalService getCounterLocalService() {
-		return counterLocalService;
+	public LockService getLockService() {
+		return lockService;
 	}
 
-	public void setCounterLocalService(CounterLocalService counterLocalService) {
-		this.counterLocalService = counterLocalService;
-	}
-
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
+	public void setLockService(LockService lockService) {
+		this.lockService = lockService;
 	}
 
 	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountLocalService.impl")
@@ -1448,8 +1438,6 @@ public abstract class ClassNameServiceBaseImpl extends PrincipalBean
 	protected WebsiteService websiteService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
-	protected CounterLocalService counterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
-	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.lock.service.LockService.impl")
+	protected LockService lockService;
 }

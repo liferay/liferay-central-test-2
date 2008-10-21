@@ -69,6 +69,7 @@ import com.liferay.portal.service.PhoneLocalService;
 import com.liferay.portal.service.PhoneService;
 import com.liferay.portal.service.PluginSettingLocalService;
 import com.liferay.portal.service.PluginSettingService;
+import com.liferay.portal.service.PortalLocalService;
 import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.PortletItemLocalService;
 import com.liferay.portal.service.PortletLocalService;
@@ -783,6 +784,14 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 
 	public void setPhonePersistence(PhonePersistence phonePersistence) {
 		this.phonePersistence = phonePersistence;
+	}
+
+	public PortalLocalService getPortalLocalService() {
+		return portalLocalService;
+	}
+
+	public void setPortalLocalService(PortalLocalService portalLocalService) {
+		this.portalLocalService = portalLocalService;
 	}
 
 	public PortalService getPortalService() {
@@ -1670,6 +1679,8 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	protected PhoneService phoneService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
 	protected PhonePersistence phonePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortalLocalService.impl")
+	protected PortalLocalService portalLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.PortalService.impl")
 	protected PortalService portalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.PluginSettingLocalService.impl")

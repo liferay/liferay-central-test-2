@@ -120,10 +120,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.events.StartupAction">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.portal.image.ImageProcessorImpl">
 		<priority value="ERROR" />
 	</category>
@@ -218,6 +214,10 @@
 
 	<category name="com.liferay.portal.service.impl.PermissionLocalServiceImpl">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.service.impl.PortalLocalServiceImpl">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.service.impl.PortalServiceImpl">
