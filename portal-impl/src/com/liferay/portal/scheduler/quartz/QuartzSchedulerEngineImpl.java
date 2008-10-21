@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.scheduler.job.MessageSenderJob;
-import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -58,7 +58,7 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
-	public QuartzSchedulerEngineImpl() {
+	public void afterPropertiesSet() {
 		try {
 			if (!PropsValues.SCHEDULER_ENABLED) {
 				return;
@@ -84,9 +84,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				_scheduler = schedulerFactory.getScheduler();
 			}
 			catch (Exception e1) {
-				DBUtil dbUtil = DBUtil.getInstance();
-
-				dbUtil.runSQLTemplate("quartz-tables.sql", false);
+				quartzLocalService.bootstrapQuartzDatabase();
 
 				_scheduler = schedulerFactory.getScheduler();
 			}
@@ -225,6 +223,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				se);
 		}
 	}
+
+	@javax.annotation.Resource(name = "com.liferay.portal.service.QuartzLocalService.impl")
+	protected QuartzLocalService quartzLocalService;
 
 	private Log _log = LogFactory.getLog(QuartzSchedulerEngineImpl.class);
 

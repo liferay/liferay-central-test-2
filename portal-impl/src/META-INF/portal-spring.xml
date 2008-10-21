@@ -563,6 +563,16 @@
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesFinderUtil" class="com.liferay.portal.service.persistence.PortletPreferencesFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.PortletPreferencesFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.QuartzLocalService.impl" class="com.liferay.portal.service.impl.QuartzLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.QuartzLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.QuartzLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.QuartzLocalServiceFactory" class="com.liferay.portal.service.QuartzLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.QuartzLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.QuartzLocalServiceUtil" class="com.liferay.portal.service.QuartzLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.QuartzLocalService.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.RegionService.impl" class="com.liferay.portal.service.impl.RegionServiceImpl" />
 	<bean id="com.liferay.portal.service.RegionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.RegionService.impl" />
