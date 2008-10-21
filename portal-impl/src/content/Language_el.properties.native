@@ -576,6 +576,7 @@ an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Έ
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Ένα απροσδόκητο σφάλμα βάσης δεδομένων εμφανίστηκε κατα την αναζήτηση της δοσμένης οδού, πόλης, και το κράτους.
 an-unexpected-database-error-occurred-while-querying-the-given-zip=Ένα απροσδόκητο λάθος βάσης δεδομένων εμφανίστηκε κατα την αναζήτηση του δοσμένου Τ.Κ.
 an-unexpected-error-occurred-while-connecting-to-google=Απρόσμενο σφάλμα κατά την διάρκεια της σύνδεσης με το Google.
+an-unexpected-error-occurred-while-connecting-to-the-producer=Ένα απροσδόκητο λάθος εμφανίστηκε συνδέοντας με τον παραγωγό.
 an-unexpected-error-occurred-while-connecting-to-the-repository=Ένα απροσδόκητο λάθος εμφανίστηκε συνδέοντας με την αποθήκη.
 an-unexpected-error-occurred-while-connecting-to-the-specified-url=Ένα απροσδόκητο λάθος εμφανίστηκε συνδέοντας με το διευκρινισμένο URL.
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=Απρόσμενο σφάλμα στην αναζήτηση κατευθύνσεων μεταξύ των παρακάτω διευθύνσεων:

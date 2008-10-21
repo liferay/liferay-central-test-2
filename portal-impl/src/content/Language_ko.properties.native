@@ -576,6 +576,7 @@ an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=�
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=준 거리, 도시, 및 국가를 질문하고 있는 동안
 an-unexpected-database-error-occurred-while-querying-the-given-zip=준 지퍼를 질문하고 있는 동안 의외
 an-unexpected-error-occurred-while-connecting-to-google=Google에 연결하고 있는 동안 의외 과실은 일어났다.
+an-unexpected-error-occurred-while-connecting-to-the-producer=의외 과실은 생산자에 연결하고 있는 동안 발생했다.
 an-unexpected-error-occurred-while-connecting-to-the-repository=창고와 연결하고 있는 동안 의외 과실은 일어났다.
 an-unexpected-error-occurred-while-connecting-to-the-specified-url=지정한URL과 연결하고 있는 동안 의외 과실은 일어났다.
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=뒤에 오는 주소사이 방향을 발견하고 있는 동안 의외 과실은 일

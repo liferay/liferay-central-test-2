@@ -576,6 +576,7 @@ an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=�
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=當查詢指定的街道、城市, 和州時產生一個資料庫例外錯誤。
 an-unexpected-database-error-occurred-while-querying-the-given-zip=當詢問指定的郵編時產生一個例外錯誤。
 an-unexpected-error-occurred-while-connecting-to-google=當連接到Google時產生一個例外錯誤 。
+an-unexpected-error-occurred-while-connecting-to-the-producer=一個意想不到的錯誤生成了，当連接到生產商时。
 an-unexpected-error-occurred-while-connecting-to-the-repository=一個意想不到的錯誤發生了當連接到貯藏庫。
 an-unexpected-error-occurred-while-connecting-to-the-specified-url=一個意想不到的錯誤發生了當連接到指定的URL 。
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=當查詢以下地址間方向時產生一個例外錯誤:

@@ -576,6 +576,7 @@ an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Ei
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Ein unerwarteter Datenbankfehler ist bei der Abfrage der eingegebenen Straße-, Stadt- und Staatanfrage aufgetreten.
 an-unexpected-database-error-occurred-while-querying-the-given-zip=Ein unerwarteter Datenbankfehler ist bei der Abfrage der eingegebenen PLZ aufgetreten.
 an-unexpected-error-occurred-while-connecting-to-google=Ein unerwarteter Fehler ist beim Zugriff auf Google aufgetreten.
+an-unexpected-error-occurred-while-connecting-to-the-producer=Eine unerwartete Störung trat bei der Verbindung an den Produzenten auf.
 an-unexpected-error-occurred-while-connecting-to-the-repository=Unerwarteter Fehler beim Verbindungsversuch zum Repository.
 an-unexpected-error-occurred-while-connecting-to-the-specified-url=Unerwarteter Fehler beim Verbindungsversuch zum angegebenen URL.
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=Ein unerwarteter Fehler ist bei der Abfrage der Wegbeschreibung zwischen den zwei folgenden eingegebenen Adressen aufgetreten:

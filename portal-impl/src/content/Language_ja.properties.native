@@ -576,6 +576,7 @@ an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=�
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=予想外のデータベースの間違いはある特定の通り、都市、および州をただしている間生じた。
 an-unexpected-database-error-occurred-while-querying-the-given-zip=予想外のデータベースの間違いはある特定のジッパーをただしている間生じた。
 an-unexpected-error-occurred-while-connecting-to-google=Google に接続している間予想外の間違いは発生した。
+an-unexpected-error-occurred-while-connecting-to-the-producer=予想外の間違いは生産者に接続している間生じた。
 an-unexpected-error-occurred-while-connecting-to-the-repository=予想外の間違いは貯蔵場所に接続している間生じた。
 an-unexpected-error-occurred-while-connecting-to-the-specified-url=予想外の間違いは指定URL に接続している間生じた。
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=次の住所間の方向を見つけている間予想外の間違いは発生した:

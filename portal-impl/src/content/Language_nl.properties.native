@@ -576,6 +576,7 @@ an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Er
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Er trad een gegevensbestandsfout op bij het zoeken naar een straat,stad en provincie/staat.
 an-unexpected-database-error-occurred-while-querying-the-given-zip=Er trad een gegevensbestandsfout op bij het zoeken naar een postcode.
 an-unexpected-error-occurred-while-connecting-to-google=Er trad een onverwachte fout op bij de verbinding met Google.
+an-unexpected-error-occurred-while-connecting-to-the-producer=Een onverwachte fout kwam terwijl het verbinden met de producent voor.
 an-unexpected-error-occurred-while-connecting-to-the-repository=Er trad een onverwachte fout op tijdens het verbinden met de repository.
 an-unexpected-error-occurred-while-connecting-to-the-specified-url=Er trad een onverwachte fout op tijdens het verbinden met de URL.
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=Er trad een onverwachte fout op bij het zoeken naar een routebeschrijving tussen de volgende adressen:
