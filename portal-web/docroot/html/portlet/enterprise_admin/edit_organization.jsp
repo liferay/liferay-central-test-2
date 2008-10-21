@@ -85,8 +85,8 @@ String curSection = mainSections[0];
 			request.setAttribute("common.websites", websites);
 
 			for (String section : allSections) {
-				String sectionId = EnterpriseAdminUtil.getIdName(section);
-				String sectionJsp = "/html/portlet/enterprise_admin/organization/" + EnterpriseAdminUtil.getJspName(section) + ".jsp";
+				String sectionId = _getIdName(section);
+				String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getJspName(section) + ".jsp";
 			%>
 
 				<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
@@ -129,7 +129,7 @@ String curSection = mainSections[0];
 								}
 
 								for (String section : sections) {
-									String sectionId = EnterpriseAdminUtil.getIdName(section);
+									String sectionId = _getIdName(section);
 
 									boolean error = false;
 
@@ -213,4 +213,24 @@ String curSection = mainSections[0];
 
 <%!
 private static String[] _CATEGORY_NAMES = {"organization-information", "identification", "miscellaneous"};
+
+private String _getIdName(String name) {
+	int pos = name.indexOf(StringPool.DASH);
+
+	if (pos == -1) {
+		return name;
+	}
+
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(name.substring(0, pos));
+	sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
+	sb.append(name.substring(pos + 2));
+
+	return _getIdName(sb.toString());
+}
+
+private String _getJspName(String name) {
+	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
+}
 %>

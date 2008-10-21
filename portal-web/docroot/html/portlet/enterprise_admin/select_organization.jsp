@@ -104,8 +104,6 @@ else {
 	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 }
 
-results = EnterpriseAdminUtil.filterOrganizations(permissionChecker, results);
-
 searchContainer.setResults(results);
 %>
 
@@ -130,7 +128,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("selectOrganization('");
 	sb.append(organization.getOrganizationId());
 	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(organization.getOrganizationBreadcrumb()));
+	sb.append(UnicodeFormatter.toString(organization.getName()));
 	sb.append("', '");
 	sb.append(UnicodeFormatter.toString(organization.getType()));
 	sb.append("');");

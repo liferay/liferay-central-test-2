@@ -429,10 +429,6 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void updateGroups(long userId, long[] newGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)
 		throws com.liferay.portal.PortalException,
@@ -494,10 +490,6 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updatePortrait(long userId, byte[] bytes)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateRoles(long userId, long[] newRoleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

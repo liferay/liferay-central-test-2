@@ -81,7 +81,6 @@
 <%@ page import="com.liferay.portal.service.permission.UserGroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.UserPermissionUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.comparator.GroupNameComparator" %>
 <%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
 <%@ page import="com.liferay.portlet.announcements.model.AnnouncementsDelivery" %>
 <%@ page import="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil" %>

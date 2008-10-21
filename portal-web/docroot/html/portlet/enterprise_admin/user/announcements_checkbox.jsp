@@ -31,7 +31,6 @@ SearchEntry entry = (SearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_R
 AnnouncementsDelivery delivery = (AnnouncementsDelivery)row.getObject();
 
 int index = entry.getIndex();
-boolean disabled = false;
 
 String param = "announcementsType" + delivery.getType();
 
@@ -43,7 +42,6 @@ else if (index == 2) {
 }
 else if (index == 3) {
 	param += "Website";
-	disabled = true;
 }
 
 boolean defaultValue = false;
@@ -59,4 +57,4 @@ else if (index == 3) {
 }
 %>
 
-<liferay-ui:input-checkbox param="<%= param %>" defaultValue="<%= defaultValue %>" disabled="<%= disabled %>" />
+<liferay-ui:input-checkbox param="<%= param %>" defaultValue="<%= defaultValue %>" />

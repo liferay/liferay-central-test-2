@@ -22,9 +22,4 @@
  */
 %>
 
-
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
-
-<liferay-ui:error-marker key="organization.errorSection" value="websites" />
-
 <%@ include file="/html/portlet/enterprise_admin/common/websites.jsp" %>

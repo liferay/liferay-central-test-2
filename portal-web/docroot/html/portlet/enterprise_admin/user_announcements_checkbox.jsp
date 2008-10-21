@@ -24,6 +24,37 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<liferay-ui:error-marker key="user.errorSection" value="websites" />
+<%
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+SearchEntry entry = (SearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 
-<%@ include file="/html/portlet/enterprise_admin/common/websites.jsp" %>
+AnnouncementsDelivery delivery = (AnnouncementsDelivery)row.getObject();
+
+int index = entry.getIndex();
+
+String param = "announcementsType" + delivery.getType();
+
+if (index == 1) {
+	param += "Email";
+}
+else if (index == 2) {
+	param += "Sms";
+}
+else if (index == 3) {
+	param += "Website";
+}
+
+boolean defaultValue = false;
+
+if (index == 1) {
+	defaultValue = delivery.isEmail();
+}
+else if (index == 2) {
+	defaultValue = delivery.isSms();
+}
+else if (index == 3) {
+	defaultValue = delivery.isWebsite();
+}
+%>
+
+<liferay-ui:input-checkbox param="<%= param %>" defaultValue="<%= defaultValue %>" />

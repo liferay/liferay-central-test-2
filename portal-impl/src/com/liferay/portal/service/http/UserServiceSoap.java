@@ -420,18 +420,6 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateGroups(long userId, long[] groupIds)
-		throws RemoteException {
-		try {
-			UserServiceUtil.updateGroups(userId, groupIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.UserSoap updateLockout(long userId,
 		boolean lockout) throws RemoteException {
 		try {
@@ -479,18 +467,6 @@ public class UserServiceSoap {
 		throws RemoteException {
 		try {
 			UserServiceUtil.updatePortrait(userId, bytes);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void updateRoles(long userId, long[] roleIds)
-		throws RemoteException {
-		try {
-			UserServiceUtil.updateRoles(userId, roleIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -581,47 +557,6 @@ public class UserServiceSoap {
 					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
 					organizationIds);
-
-			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portal.model.UserSoap updateUser(
-		com.liferay.portal.model.UserSoap user, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String comments, java.lang.String smsSn,
-		java.lang.String aimSn, java.lang.String facebookSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String mySpaceSn,
-		java.lang.String skypeSn, java.lang.String twitterSn,
-		java.lang.String ymSn, java.lang.String jobTitle,
-		long[] organizationsIds, java.lang.String oldPassword,
-		java.lang.String newPassword1, java.lang.String newPassword2,
-		boolean passwordReset, java.lang.String openId,
-		java.util.ArrayList<com.liferay.portlet.announcements.model.AnnouncementsDelivery> deliveries,
-		long[] communityIds, long[] regularRoleIds, java.lang.String className,
-		long classPK,
-		java.util.ArrayList<com.liferay.portal.model.Website> websites)
-		throws RemoteException {
-		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(com.liferay.portal.model.impl.UserModelImpl.toModel(
-						user), screenName, emailAddress, languageId,
-					timeZoneId, greeting, firstName, middleName, lastName,
-					prefixId, suffixId, male, birthdayMonth, birthdayDay,
-					birthdayYear, comments, smsSn, aimSn, facebookSn, icqSn,
-					jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-					jobTitle, organizationsIds, oldPassword, newPassword1,
-					newPassword2, passwordReset, openId, deliveries,
-					communityIds, regularRoleIds, className, classPK, websites);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

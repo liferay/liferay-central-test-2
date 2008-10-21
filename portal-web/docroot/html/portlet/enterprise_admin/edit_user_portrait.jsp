@@ -25,51 +25,39 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 long userId = ParamUtil.getLong(request, "p_u_i_d");
 %>
 
-<c:choose>
-	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
-		<script type="text/javascript">
-			jQuery(window).unload(function() {
-				opener.<portlet:namespace />changeImage();
-			});
-		</script>
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= userId %>" />
 
-		<div class="portlet-msg-success">
-			<liferay-ui:message key="the-user-portrait-has-been-loaded-sucessfully"></liferay-ui:message>
-		</div>
+<liferay-ui:tabs
+	names="user-portrait"
+	backURL="<%= redirect %>"
+/>
 
-		<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close(); " />
-	</c:when>
-	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+<liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-			<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= userId %>" />
+<%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %>
 
-		<liferay-ui:tabs
-			names="user-portrait"
-		/>
+<br /><br />
 
-		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
-		<liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+<input name="<portlet:namespace />fileName" size="50" type="file" />
 
-		<%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %>
+<br /><br />
 
-		<br /><br />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-		<input name="<portlet:namespace />fileName" size="50" type="file" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
-		<br /><br />
+</form>
 
-		<input type="submit" value="<liferay-ui:message key="save" />" />
-
-		<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close(); " />
-
-		</form>
-
-		<script type="text/javascript">
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
-		</script>
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
+	</script>
+</c:if>

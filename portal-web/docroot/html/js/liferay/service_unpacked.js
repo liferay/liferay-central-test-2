@@ -1084,13 +1084,6 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	updateGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	updateLockout: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateLockout";
@@ -1115,13 +1108,6 @@ Liferay.Service.Portal.User = {
 	updatePortrait: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updatePortrait";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateRoles";
 
 		return Liferay.Service.ajax(params, callback);
 	},

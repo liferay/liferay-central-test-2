@@ -35,7 +35,6 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
-import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -43,11 +42,9 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -56,10 +53,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
-import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-
-import java.util.ArrayList;
+import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -80,8 +75,6 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditUserAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Julio Camarero
- * @author Jorge Ferrer
  *
  */
 public class EditUserAction extends PortletAction {
@@ -177,8 +170,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
 					 e instanceof UserScreenNameException ||
-					 e instanceof UserSmsException ||
-					 e instanceof WebsiteURLException) {
+					 e instanceof UserSmsException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
@@ -294,8 +286,8 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		long[] organizationIds = EnterpriseAdminUtil.getPrimaryKeys(
-			actionRequest, "organizationsSearchContainer");
+		long[] organizationIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
 		User user = null;
@@ -317,9 +309,6 @@ public class EditUserAction extends PortletAction {
 			// Update user
 
 			user = PortalUtil.getSelectedUser(actionRequest);
-			Contact contact = user.getContact();
-			long classPK = contact.getContactId();
-			String className = Contact.class.getName();
 
 			String oldPassword = AdminUtil.getUpdateUserPassword(
 				actionRequest, user.getUserId());
@@ -332,30 +321,31 @@ public class EditUserAction extends PortletAction {
 
 			String tempOldScreenName = user.getScreenName();
 
+			user = UserServiceUtil.updateUser(
+				user.getUserId(), oldPassword, newPassword1, newPassword2,
+				passwordReset, screenName, emailAddress, languageId, timeZoneId,
+				greeting, comments, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
+				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
+				twitterSn, ymSn, jobTitle, organizationIds);
+
 			String openId = ParamUtil.getString(actionRequest, "openId");
 
-			ArrayList<AnnouncementsDelivery> deliveries =
-				EnterpriseAdminUtil.getAnnouncementsDeliveries(actionRequest);
+			if (!openId.equals(user.getOpenId())) {
+				UserServiceUtil.updateOpenId(user.getUserId(), openId);
+			}
 
-			// Communities
+			for (String type : AnnouncementsEntryImpl.TYPES) {
+				boolean email = ParamUtil.getBoolean(
+					actionRequest, "announcementsType" + type + "Email");
+				boolean sms = ParamUtil.getBoolean(
+					actionRequest, "announcementsType" + type + "Sms");
+				boolean website = ParamUtil.getBoolean(
+					actionRequest, "announcementsType" + type + "Website");
 
-			long[] communityIds = EnterpriseAdminUtil.getPrimaryKeys(
-				actionRequest, "communitiesSearchContainer");
-
-			long[] regularRolesIds = EnterpriseAdminUtil.getPrimaryKeys(
-				actionRequest, "regularRolesSearchContainer");
-
-			ArrayList<Website> websites = EnterpriseAdminUtil.getWebsites(
-				actionRequest);
-
-			user = UserServiceUtil.updateUser(
-				user, screenName, emailAddress, languageId, timeZoneId,
-				greeting, firstName, middleName, lastName, prefixId, suffixId,
-				male, birthdayMonth, birthdayDay, birthdayYear, comments, smsSn,
-				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				twitterSn, ymSn, jobTitle, organizationIds, oldPassword,
-				newPassword1, newPassword2, passwordReset, openId, deliveries,
-				communityIds, regularRolesIds, className, classPK, websites);
+				AnnouncementsDeliveryServiceUtil.updateDelivery(
+					user.getUserId(), type,	email, sms, website);
+			}
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

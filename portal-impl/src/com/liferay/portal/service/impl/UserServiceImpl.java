@@ -26,15 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
@@ -44,11 +40,7 @@ import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
-import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -392,32 +384,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, agreedToTermsOfUse);
 	}
 
-	public void updateGroups(long userId, long[] groupIds)
-		throws PortalException, SystemException {
-
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.UPDATE);
-
-		for (long groupId : groupIds) {
-			GroupPermissionUtil.check(
-				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
-		}
-
-		List<Group> oldGroups = groupLocalService.getUserGroups(userId);
-
-		for (Group group : oldGroups) {
-			if (!ArrayUtil.contains(groupIds, group.getGroupId()) &&
-				!GroupPermissionUtil.contains(
-					getPermissionChecker(), group.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-
-				groupIds = ArrayUtil.append(groupIds, group.getGroupId());
-			}
-		}
-
-		userLocalService.updateGroups(userId, groupIds);
-	}
-
 	public User updateLockout(long userId, boolean lockout)
 		throws PortalException, SystemException {
 
@@ -455,32 +421,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		userLocalService.updatePortrait(userId, bytes);
-	}
-
-	public void updateRoles(long userId, long[] roleIds)
-		throws PortalException, SystemException {
-
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.UPDATE);
-
-		for (long roleId : roleIds) {
-			RolePermissionUtil.check(
-				getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
-		}
-
-		List<Role> oldRoles = roleLocalService.getUserRoles(userId);
-
-		for (Role role : oldRoles) {
-			if (!ArrayUtil.contains(roleIds, role.getRoleId()) &&
-				!RolePermissionUtil.contains(
-					getPermissionChecker(), role.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-
-				roleIds = ArrayUtil.append(roleIds, role.getRoleId());
-			}
-		}
-
-		userLocalService.updateRoles(userId, roleIds);
 	}
 
 	public void updateScreenName(long userId, String screenName)
@@ -560,27 +500,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		for (long organizationId : organizationIds) {
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId,
-				ActionKeys.ASSIGN_MEMBERS);
-		}
-
-		List<Organization> oldOrganizations =
-			organizationLocalService.getUserOrganizations(userId);
-
-		for (Organization organization : oldOrganizations) {
-			if (!ArrayUtil.contains(
-					organizationIds, organization.getOrganizationId()) &&
-				!OrganizationPermissionUtil.contains(
-					getPermissionChecker(), organization.getOrganizationId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-
-				organizationIds = ArrayUtil.append(
-					organizationIds, organization.getOrganizationId());
-			}
-		}
-
 		return userLocalService.updateUser(
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
 			screenName, emailAddress, languageId, timeZoneId, greeting,
@@ -588,45 +507,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			jobTitle, organizationIds);
-	}
-
-	public User updateUser(
-			User user, String screenName, String emailAddress,
-			String languageId, String timeZoneId, String greeting,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String comments, String smsSn, String aimSn,
-			String facebookSn, String icqSn, String jabberSn, String msnSn,
-			String mySpaceSn, String skypeSn, String twitterSn, String ymSn,
-			String jobTitle, long[] organizationsIds, String oldPassword,
-			String newPassword1, String newPassword2, boolean passwordReset,
-			String openId, ArrayList<AnnouncementsDelivery> deliveries,
-			long[] communityIds, long[] regularRoleIds, String className,
-			long classPK, ArrayList<Website> websites)
-		throws PortalException, SystemException {
-
-		User updatedUser = updateUser(
-			user.getUserId(), oldPassword, newPassword1, newPassword2,
-			passwordReset, screenName, emailAddress, languageId, timeZoneId,
-			greeting, comments, firstName, middleName, lastName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-			twitterSn, ymSn, jobTitle, organizationsIds);
-
-		if (!openId.equals(user.getOpenId())) {
-			userService.updateOpenId(user.getUserId(), openId);
-		}
-
-		EnterpriseAdminUtil.updateAnnouncementsDeliveries(
-			user.getUserId(), deliveries);
-
-		updateGroups(user.getUserId(), communityIds);
-
-		updateRoles(user.getUserId(), regularRoleIds);
-
-		EnterpriseAdminUtil.updateWebsites(className, classPK, websites);
-
-		return updatedUser;
 	}
 
 }

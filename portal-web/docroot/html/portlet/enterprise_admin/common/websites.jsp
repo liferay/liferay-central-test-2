@@ -22,6 +22,8 @@
  */
 %>
 
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
 <%
 List<Website> websites = (List<Website>)request.getAttribute("common.websites");
 
@@ -33,6 +35,8 @@ if (websites.isEmpty()) {
 
 String className = (String)request.getAttribute("common.className");
 %>
+
+<liferay-ui:error-marker key="organization.errorSection" value="websites" />
 
 <h3><liferay-ui:message key="websites" /></h3>
 

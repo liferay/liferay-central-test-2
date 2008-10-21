@@ -30,7 +30,7 @@ Organization selOrganization = (Organization)request.getAttribute("organization.
 
 <h3><liferay-ui:message key="comments" /></h3>
 
-<fieldset class="block-labels">
+<fieldset class="block-labels col">
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />comments"><liferay-ui:message key="comments" /></label>
 

@@ -264,12 +264,6 @@
 	border-collapse: collapse;
 }
 
-.lfr-social-icon, .lfr-im-icon {
-	position: relative;
-	top: 9px;
-	margin-left: 10px;
-}
-
 .lfr-portlet-toolbar {
 	background: #F6F8FB;
 	margin-bottom: 5px;

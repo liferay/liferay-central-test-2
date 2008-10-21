@@ -24,25 +24,14 @@ package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.WebsiteImpl;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.WebsiteServiceUtil;
-import com.liferay.portal.service.permission.GroupPermissionUtil;
-import com.liferay.portal.service.permission.OrganizationPermissionUtil;
-import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -59,10 +48,6 @@ import com.liferay.portal.util.comparator.UserEmailAddressComparator;
 import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
-import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
-import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
-import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
-import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -75,116 +60,9 @@ import javax.portlet.ActionRequest;
  * <a href="EnterpriseAdminUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
  *
  */
 public class EnterpriseAdminUtil {
-
-	public static List<Group> filterCommunities(
-			PermissionChecker permissionChecker, List<Group> communities)
-		throws PortalException, SystemException {
-
-		if (permissionChecker.isCompanyAdmin()) {
-			return communities;
-		}
-
-		List<Group> filteredCommunities = new ArrayList<Group>();
-
-		for (Group community : communities) {
-			if (community.getName().equals(GroupConstants.CONTROL_PANEL)) {
-				continue;
-			}
-
-			if (!GroupPermissionUtil.contains(
-					permissionChecker, community.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-				continue;
-			}
-
-			filteredCommunities.add(community);
-		}
-
-		return filteredCommunities;
-	}
-
-	public static List<Organization> filterOrganizations(
-			PermissionChecker permissionChecker,
-			List<Organization> organizations)
-		throws PortalException, SystemException {
-
-		if (permissionChecker.isCompanyAdmin()) {
-			return organizations;
-		}
-
-		List<Organization> filteredOrganizations =
-			new ArrayList<Organization>();
-
-		for (Organization organization : organizations) {
-			if (!OrganizationPermissionUtil.contains(
-					permissionChecker, organization.getOrganizationId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-				continue;
-			}
-
-			filteredOrganizations.add(organization);
-		}
-
-		return filteredOrganizations;
-	}
-
-	public static List<Role> filterRoles(
-		PermissionChecker permissionChecker, List<Role> roles) {
-
-		if (permissionChecker.isCompanyAdmin()) {
-			return roles;
-		}
-
-		List<Role> filteredRoles = new ArrayList<Role>();
-
-		for (Role role : roles) {
-			if (role.getName().equals(RoleConstants.GUEST) ||
-				role.getName().equals(RoleConstants.OWNER) ||
-				role.getName().equals(RoleConstants.USER)) {
-				continue;
-			}
-
-			if (!RolePermissionUtil.contains(
-					permissionChecker, role.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-				continue;
-			}
-
-			filteredRoles.add(role);
-		}
-
-		return filteredRoles;
-	}
-
-	public static ArrayList<AnnouncementsDelivery> getAnnouncementsDeliveries(
-		ActionRequest actionRequest) {
-
-		ArrayList<AnnouncementsDelivery> deliveries =
-			new ArrayList<AnnouncementsDelivery>();
-
-		for (String type : AnnouncementsEntryImpl.TYPES) {
-			boolean email = ParamUtil.getBoolean(
-				actionRequest, "announcementsType" + type + "Email");
-			boolean sms = ParamUtil.getBoolean(
-				actionRequest, "announcementsType" + type + "Sms");
-			boolean website = ParamUtil.getBoolean(
-				actionRequest, "announcementsType" + type + "Website");
-
-			AnnouncementsDelivery delivery = new AnnouncementsDeliveryImpl();
-
-			delivery.setEmail(email);
-			delivery.setSms(sms);
-			delivery.setWebsite(website);
-
-			deliveries.add(delivery);
-		}
-
-		return deliveries;
-	}
 
 	public static OrderByComparator getGroupOrderByComparator(
 		String orderByCol, String orderByType) {
@@ -208,26 +86,6 @@ public class EnterpriseAdminUtil {
 		}
 
 		return orderByComparator;
-	}
-
-	public static String getIdName(String name) {
-		int pos = name.indexOf(StringPool.DASH);
-
-		if (pos == -1) {
-			return name;
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(name.substring(0, pos));
-		sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
-		sb.append(name.substring(pos + 2));
-
-		return getIdName(sb.toString());
-	}
-
-	public static String getJspName(String name) {
-		return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
 	}
 
 	public static Long[] getOrganizationIds(List<Organization> organizations) {
@@ -291,27 +149,6 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static long[] getPrimaryKeys(
-		ActionRequest actionRequest, String name) {
-
-		long[] primKeys = StringUtil.split(ParamUtil.getString(
-			actionRequest, name + "PrimaryKeys"),  0L);
-
-		// Temporal fix until the frontend UI gets fixed
-
-		List<Long> filteredKeys = new ArrayList<Long>();
-
-		for (long primKey : primKeys) {
-			if (primKey > 0) {
-				filteredKeys.add(primKey);
-			}
-		}
-
-		primKeys = ArrayUtil.toArray(
-			filteredKeys.toArray(new Long[filteredKeys.size()]));
-
-		return primKeys;
-	}
 	public static OrderByComparator getRoleOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -396,8 +233,8 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static ArrayList<Website> getWebsites(ActionRequest actionRequest) {
-		ArrayList<Website> websites = new ArrayList<Website>();
+	public static List<Website> getWebsites(ActionRequest actionRequest) {
+		List<Website> websites = new ArrayList<Website>();
 
 		int[] websiteIndexes = StringUtil.split(
 			ParamUtil.getString(actionRequest, "websiteIndexes"), 0);
@@ -471,17 +308,6 @@ public class EnterpriseAdminUtil {
 			if (!websiteIds.contains(website.getWebsiteId())) {
 				WebsiteServiceUtil.deleteWebsite(website.getWebsiteId());
 			}
-		}
-	}
-
-	public static void updateAnnouncementsDeliveries(
-			long userId, List<AnnouncementsDelivery> deliveries)
-		throws PortalException, SystemException {
-
-		for (AnnouncementsDelivery delivery : deliveries) {
-			AnnouncementsDeliveryServiceUtil.updateDelivery(
-				userId, delivery.getType(), delivery.getEmail(),
-				delivery.getSms(), delivery.getWebsite());
 		}
 	}
 
