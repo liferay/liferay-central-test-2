@@ -146,26 +146,6 @@ public class UserLocalServiceUtil {
 			organizationIds, sendEmail);
 	}
 
-	public static com.liferay.portal.model.User addUser(long creatorUserId,
-		long companyId, boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean autoScreenName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.util.Locale locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle, long[] organizationIds,
-		boolean sendEmail,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addUser(creatorUserId, companyId, autoPassword, password1,
-			password2, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			organizationIds, sendEmail, serviceContext);
-	}
-
 	public static int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
 		java.util.Map<String, String[]> headerMap,
@@ -545,44 +525,6 @@ public class UserLocalServiceUtil {
 		return getService().isPasswordExpiringSoon(user);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		java.lang.String orderByCol, java.lang.String orberByType)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, active, params, start, end, orderByCol,
-			orberByType);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		java.lang.String orderByCol, java.lang.String orberByType)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, keywords, active, params, start, end,
-			orderByCol, orberByType);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
-		int start, int end, java.lang.String orderByCol,
-		java.lang.String orberByType) throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, firstName, middleName, lastName,
-			screenName, emailAddress, active, params, andSearch, start, end,
-			orderByCol, orberByType);
-	}
-
 	public static java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
@@ -839,32 +781,6 @@ public class UserLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
-		java.lang.String oldPassword, boolean passwordReset,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String facebookSn, java.lang.String icqSn,
-		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String twitterSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .updateUser(userId, oldPassword, passwordReset, screenName,
-			emailAddress, languageId, timeZoneId, greeting, comments,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds, serviceContext);
-	}
-
-	public static com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String oldPassword, java.lang.String newPassword1,
 		java.lang.String newPassword2, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -888,33 +804,6 @@ public class UserLocalServiceUtil {
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 			aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
 			twitterSn, ymSn, jobTitle, organizationIds);
-	}
-
-	public static com.liferay.portal.model.User updateUser(long userId,
-		java.lang.String oldPassword, java.lang.String newPassword1,
-		java.lang.String newPassword2, boolean passwordReset,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String facebookSn, java.lang.String icqSn,
-		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String twitterSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .updateUser(userId, oldPassword, newPassword1, newPassword2,
-			passwordReset, screenName, emailAddress, languageId, timeZoneId,
-			greeting, comments, firstName, middleName, lastName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-			twitterSn, ymSn, jobTitle, organizationIds, serviceContext);
 	}
 
 	public static UserLocalService getService() {

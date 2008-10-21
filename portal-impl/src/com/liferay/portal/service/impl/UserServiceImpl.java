@@ -37,7 +37,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -149,23 +148,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String jobTitle, long[] organizationIds, boolean sendEmail)
 		throws PortalException, SystemException {
 
-		return addUser(
-			companyId, autoPassword, password1, password2, autoScreenName,
-			screenName, emailAddress, locale, firstName, middleName, lastName,
-			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			jobTitle, organizationIds, sendEmail, new ServiceContext());
-	}
-
-	public User addUser(
-			long companyId, boolean autoPassword, String password1,
-			String password2, boolean autoScreenName, String screenName,
-			String emailAddress, Locale locale, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, long[] organizationIds, boolean sendEmail,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		if (!company.isStrangers()) {
@@ -194,8 +176,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail,
-			serviceContext);
+			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
@@ -532,27 +513,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
-		return updateUser(
-			userId, oldPassword, passwordReset, screenName, emailAddress,
-			languageId, timeZoneId, greeting, comments, firstName, middleName,
-			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-			mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, organizationIds,
-			new ServiceContext());
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, boolean passwordReset,
-			String screenName, String emailAddress, String languageId,
-			String timeZoneId, String greeting, String comments,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String facebookSn,
-			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		String newPassword1 = StringPool.BLANK;
 		String newPassword2 = StringPool.BLANK;
 
@@ -562,7 +522,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds, serviceContext);
+			jobTitle, organizationIds);
 	}
 
 	public User updateUser(
@@ -576,28 +536,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
 			String twitterSn, String ymSn, String jobTitle,
 			long[] organizationIds)
-		throws PortalException, SystemException {
-
-		return updateUser(
-			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds, new ServiceContext());
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String facebookSn, String icqSn,
-			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -649,7 +587,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds, serviceContext);
+			jobTitle, organizationIds);
 	}
 
 	public User updateUser(
@@ -667,39 +605,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long classPK, ArrayList<Website> websites)
 		throws PortalException, SystemException {
 
-		return updateUser(
-			user, screenName, emailAddress, languageId, timeZoneId, greeting,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, comments, smsSn, aimSn,
-			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
-			ymSn, jobTitle, organizationsIds, oldPassword, newPassword1,
-			newPassword2, passwordReset, openId, deliveries, communityIds,
-			regularRoleIds, className, classPK, websites, new ServiceContext());
-	}
-
-	public User updateUser(
-			User user, String screenName, String emailAddress,
-			String languageId, String timeZoneId, String greeting,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String comments, String smsSn, String aimSn,
-			String facebookSn, String icqSn, String jabberSn, String msnSn,
-			String mySpaceSn, String skypeSn, String twitterSn, String ymSn,
-			String jobTitle, long[] organizationsIds, String oldPassword,
-			String newPassword1, String newPassword2, boolean passwordReset,
-			String openId, ArrayList<AnnouncementsDelivery> deliveries,
-			long[] communityIds, long[] regularRoleIds, String className,
-			long classPK, ArrayList<Website> websites,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		User updatedUser = updateUser(
 			user.getUserId(), oldPassword, newPassword1, newPassword2,
 			passwordReset, screenName, emailAddress, languageId, timeZoneId,
 			greeting, comments, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 			aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-			twitterSn, ymSn, jobTitle, organizationsIds, serviceContext);
+			twitterSn, ymSn, jobTitle, organizationsIds);
 
 		if (!openId.equals(user.getOpenId())) {
 			userService.updateOpenId(user.getUserId(), openId);

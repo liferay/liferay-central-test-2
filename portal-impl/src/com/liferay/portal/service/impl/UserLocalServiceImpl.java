@@ -48,16 +48,6 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.ParseException;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
@@ -68,7 +58,6 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.lar.UserIdStrategy;
@@ -94,7 +83,6 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -102,13 +90,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.UserIndexer;
-
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
-
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -121,7 +102,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -187,15 +167,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -211,15 +182,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.addUsers(roleId, userIds);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -229,15 +191,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -250,24 +203,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String jobTitle, long[] organizationIds,
 			boolean sendEmail)
-		throws PortalException, SystemException {
-
-		return addUser(
-			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, locale, firstName,
-			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail,
-			new ServiceContext());
-	}
-
-	public User addUser(
-			long creatorUserId, long companyId, boolean autoPassword,
-			String password1, String password2, boolean autoScreenName,
-			String screenName, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, long[] organizationIds,
-			boolean sendEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -465,24 +400,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		userPersistence.setUserGroups(userId, userGroups);
-
-		// Custom Attributes
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		for (Map.Entry<String, Object> entry:
-				serviceContext.getExpandoBridgeAttributes().entrySet()) {
-			expandoBridge.setAttribute(entry.getKey(), entry.getValue());
-		}
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUser(user);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
 
 		// Email
 
@@ -758,34 +675,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.clearUsers(organizationId);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(
-				userLocalService.getOrganizationUsers(organizationId));
-		}
-		catch (SearchException se) {
-			_log.error(
-				"Indexing users of org " + String.valueOf(organizationId), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
 	public void clearUserGroupUsers(long userGroupId) throws SystemException {
 		userGroupPersistence.clearUsers(userGroupId);
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(
-				userLocalService.getUserGroupUsers(userGroupId));
-		}
-		catch (SearchException se) {
-			_log.error(
-				"Indexing users of user group " +
-					String.valueOf(userGroupId), se);
-		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -842,15 +736,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUser(roleId, userId);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUser(userPersistence.findByPrimaryKey(userId));
-		}
-		catch (Exception e) {
-			_log.error("Indexing " + userId, e);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -905,15 +790,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Expando
 
 		expandoValueLocalService.deleteValues(User.class.getName(), userId);
-
-		// Indexer
-
-		try {
-			UserIndexer.deleteUser(user.getCompanyId(), user.getUserId());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
 
 		// Message boards
 
@@ -1416,192 +1292,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return false;
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			for (User user : userPersistence.findByCompanyId(companyId)) {
-				if (user.isDefaultUser()) {
-					continue;
-				}
-
-				long userId = user.getUserId();
-				String screenName = user.getScreenName();
-				String emailAddress = user.getEmailAddress();
-
-				Contact contact = contactLocalService.getContact(
-					user.getContactId());
-
-				String firstName = contact.getFirstName();
-				String middleName = contact.getMiddleName();
-				String lastName = contact.getLastName();
-				String jobTitle = contact.getJobTitle();
-				long[] organizationIds = user.getOrganizationIds();
-				boolean active = user.getActive();
-
-				try {
-					Document doc = UserIndexer.getUserDocument(
-						companyId, userId, firstName, middleName, lastName,
-						jobTitle, screenName, emailAddress, active,
-						organizationIds, user.getExpandoBridge());
-
-					SearchEngineUtil.addDocument(companyId, doc);
-				}
-				catch (SearchException se) {
-					_log.error("Reindexing " + userId, se);
-				}
-			}
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
-		}
-	}
-
-	public Hits search(
-			long companyId, Boolean active,
-			LinkedHashMap<String, Object> params, int start, int end,
-			String orderByCol, String orberByType)
-		throws SystemException {
-
-		return search(
-			companyId, null, null, null, null, null, active, params,
-			true, start, end, orderByCol, orberByType);
-	}
-
-	public Hits search(
-			long companyId, String keywords, Boolean active,
-			LinkedHashMap<String, Object> params, int start, int end,
-			String orderByCol, String orberByType)
-		throws SystemException {
-
-		String firstName = null;
-		String middleName = null;
-		String lastName = null;
-		String screenName = null;
-		String emailAddresse = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			firstName = keywords;
-			middleName = keywords;
-			lastName = keywords;
-			screenName = keywords;
-			emailAddresse = keywords;
-		}
-		else {
-			andOperator = true;
-		}
-
-		return search(
-			companyId, firstName, middleName, lastName, screenName,
-			emailAddresse, active, params, andOperator, start, end, orderByCol,
-			orberByType);
-	}
-
-	public Hits search(
-			long companyId, String firstName, String middleName,
-			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap<String, Object> params,
-			boolean andSearch, int start, int end, String orderByCol,
-			String orberByType)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, UserIndexer.PORTLET_ID);
-			contextQuery.addRequiredTerm("active", active.toString());
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(firstName)) {
-				firstName = firstName.replace(
-					StringPool.PERCENT, StringPool.BLANK);
-
-				if (andSearch) {
-					searchQuery.addRequiredTerm("firstName", firstName);
-				}
-				else {
-					searchQuery.addTerm("firstName", firstName);
-				}
-			}
-
-			if (Validator.isNotNull(middleName)) {
-				middleName = middleName.replace(
-					StringPool.PERCENT, StringPool.BLANK);
-
-				if (andSearch) {
-					searchQuery.addRequiredTerm("middleName", middleName);
-				}
-				else {
-					searchQuery.addTerm("middleName", middleName);
-				}
-			}
-
-			if (Validator.isNotNull(lastName)) {
-				lastName = lastName.replace(
-					StringPool.PERCENT, StringPool.BLANK);
-
-				if (andSearch) {
-					searchQuery.addRequiredTerm("lastName", lastName);
-				}
-				else {
-					searchQuery.addTerm("lastName", lastName);
-				}
-			}
-
-			if (Validator.isNotNull(screenName)) {
-				screenName = screenName.replace(
-					StringPool.PERCENT, StringPool.BLANK);
-
-				if (andSearch) {
-					searchQuery.addRequiredTerm("screenName", screenName);
-				}
-				else {
-					searchQuery.addTerm("screenName", screenName);
-				}
-			}
-
-			if (Validator.isNotNull(emailAddress)) {
-				emailAddress = emailAddress.replace(
-					StringPool.PERCENT, StringPool.BLANK);
-
-				if (andSearch) {
-					searchQuery.addRequiredTerm("emailAddress", emailAddress);
-				}
-				else {
-					searchQuery.addTerm("emailAddress", emailAddress);
-				}
-			}
-
-			getQueryParams(contextQuery, searchQuery, params);
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			Sort sort = getSort(orderByCol, orberByType);
-
-			return SearchEngineUtil.search(
-				companyId, fullQuery, sort, start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public List<User> search(
 			long companyId, String keywords, Boolean active,
 			LinkedHashMap<String, Object> params, int start, int end,
@@ -1663,15 +1353,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.setUsers(roleId, userIds);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1681,15 +1362,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.setUsers(userGroupId, userIds);
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1718,15 +1390,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.removeUsers(organizationId, userIds);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1743,15 +1406,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, userIds);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1760,15 +1414,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, users);
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(users);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(users), se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1776,15 +1421,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		userGroupPersistence.removeUsers(userGroupId, userIds);
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
-		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1797,15 +1433,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setActive(active);
 
 		userPersistence.update(user, false);
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUser(user);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + user.getUserId(), se);
-		}
 
 		return user;
 	}
@@ -1995,15 +1622,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		// Indexer
-
-		try {
-			UserIndexer.updateUser(userPersistence.findByPrimaryKey(userId));
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
-
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -2191,15 +1809,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUser(user);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + user.getUserId(), se);
-		}
 	}
 
 	public User updateUser(
@@ -2212,27 +1821,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
 			long[] organizationIds)
-		throws PortalException, SystemException {
-
-		return updateUser(
-			userId, oldPassword, passwordReset, screenName, emailAddress,
-			languageId, timeZoneId, greeting, comments, firstName, middleName,
-			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-			mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, organizationIds,
-			new ServiceContext());
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, boolean passwordReset,
-			String screenName, String emailAddress, String languageId,
-			String timeZoneId, String greeting, String comments,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String facebookSn,
-			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		String newPassword1 = StringPool.BLANK;
@@ -2244,7 +1832,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, organizationIds, serviceContext);
+			jobTitle, organizationIds);
 	}
 
 	public User updateUser(
@@ -2258,28 +1846,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
 			String twitterSn, String ymSn, String jobTitle,
 			long[] organizationIds)
-		throws PortalException, SystemException {
-
-		return updateUser(
-			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId,
-			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
-			ymSn, jobTitle, organizationIds, new ServiceContext());
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String facebookSn, String icqSn,
-			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String twitterSn, String ymSn, String jobTitle,
-			long[] organizationIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -2412,24 +1978,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Announcements
 
 		announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
-
-		// Custom Attributes
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		for (Map.Entry<String, Object> entry:
-				serviceContext.getExpandoBridgeAttributes().entrySet()) {
-			expandoBridge.setAttribute(entry.getKey(), entry.getValue());
-		}
-
-		// Indexer
-
-		try {
-			UserIndexer.updateUser(user);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + user.getUserId(), se);
-		}
 
 		// Permission cache
 
@@ -2847,105 +2395,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
-	}
-
-	protected Sort getSort(String orderByCol, String orberByType) {
-		String sortField = "firstName";
-
-		if (Validator.isNotNull(orderByCol)) {
-			if (orderByCol.equals("email-address")) {
-				sortField = "emailAddress";
-			}
-			else if (orderByCol.equals("first-name")) {
-				sortField = "firstName";
-			}
-			else if (orderByCol.equals("job-title")) {
-				sortField = "jobTitle";
-			}
-			else if (orderByCol.equals("last-name")) {
-				sortField = "lastName";
-			}
-			else if (orderByCol.equals("screen-name")) {
-				sortField = "screenName";
-			}
-			else {
-				sortField = orderByCol;
-			}
-		}
-
-		if (Validator.isNull(orberByType)) {
-			orberByType = "ASC";
-		}
-
-		return new Sort(
-			sortField, Sort.STRING_TYPE, !orberByType.equalsIgnoreCase("ASC"));
-	}
-
-	protected void getQueryParams(
-			BooleanQuery contextQuery, BooleanQuery searchQuery,
-			LinkedHashMap<String, Object> params)
-		throws ParseException {
-
-		if (params == null) {
-			return;
-		}
-
-		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
-			User.class.getName(), 0);
-
-		List<String> attributeNames = Collections.list(
-			expandoBridge.getAttributeNames());
-
-		for (Map.Entry<String, Object> entry : params.entrySet()) {
-			if (Validator.isNotNull(entry.getValue())) {
-				getQueryParam(
-					contextQuery, searchQuery, expandoBridge, attributeNames,
-					entry.getKey(),
-					entry.getValue());
-			}
-		}
-	}
-
-	protected void getQueryParam(
-			BooleanQuery contextQuery, BooleanQuery searchQuery,
-			ExpandoBridge expandoBridge, List<String> attributeNames,
-			String key, Object value)
-		throws ParseException {
-
-		if (key.equals("usersRoles") ||
-			key.equals("usersUserGroups")) {
-
-			contextQuery.addRequiredTerm(key, String.valueOf(value));
-		}
-		else if (key.equals("usersOrgs")) {
-			if (value instanceof Long[]) {
-				Long[] values = (Long[])value;
-				BooleanQuery usersOrgsQuery = BooleanQueryFactoryUtil.create();
-
-				for (long curValue : values) {
-					usersOrgsQuery.addTerm(key, curValue);
-				}
-
-				contextQuery.add(usersOrgsQuery, BooleanClauseOccur.MUST);
-			}
-			else {
-				contextQuery.addRequiredTerm(key, String.valueOf(value));
-			}
-		}
-		else if (attributeNames.contains(key)) {
-			UnicodeProperties properties = expandoBridge.getAttributeProperties(
-				key);
-
-			if (GetterUtil.getBoolean(
-					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
-
-				int type = expandoBridge.getAttributeType(key);
-
-				if (type == ExpandoColumnConstants.STRING) {
-					searchQuery.addTerm(key, (String)value);
-				}
-			}
-		}
 	}
 
 	protected Map<String, String[]> getLayoutTemplatesParameters() {

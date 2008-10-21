@@ -136,10 +136,6 @@ public interface Portal {
 
 	public String getCurrentURL(PortletRequest portletRequest);
 
-	public Map<String, Object> getCustomAttributes(
-			ExpandoBridge expandoBridge, ActionRequest actionRequest)
-		throws PortalException, SystemException;
-
 	public String getCustomSQLFunctionIsNotNull();
 
 	public String getCustomSQLFunctionIsNull();
@@ -518,6 +514,10 @@ public interface Portal {
 		throws IOException, ValidatorException;
 
 	public String transformCustomSQL(String sql);
+
+	public void updateExpandoBridge(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException;
 
 	public PortletMode updatePortletMode(
 		String portletId, User user, Layout layout, PortletMode portletMode,

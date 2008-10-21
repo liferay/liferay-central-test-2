@@ -177,13 +177,6 @@ public class PortalUtil {
 		return getPortal().getCurrentURL(portletRequest);
 	}
 
-	public static Map<String, Object> getCustomAttributes(
-			ExpandoBridge expandoBridge, ActionRequest actionRequest)
-		throws PortalException, SystemException {
-
-		return getPortal().getCustomAttributes(expandoBridge, actionRequest);
-	}
-
 	public static String getCustomSQLFunctionIsNotNull() {
 		return getPortal().getCustomSQLFunctionIsNotNull();
 	}
@@ -900,6 +893,13 @@ public class PortalUtil {
 
 	public static String transformCustomSQL(String sql) {
 		return getPortal().transformCustomSQL(sql);
+	}
+
+	public static void updateExpandoBridge(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		getPortal().updateExpandoBridge(expandoBridge, actionRequest);
 	}
 
 	public static PortletMode updatePortletMode(

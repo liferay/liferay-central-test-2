@@ -49,7 +49,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -61,7 +60,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.ArrayList;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -84,7 +82,6 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  * @author Jorge Ferrer
- * @author Raymond Augé
  *
  */
 public class EditUserAction extends PortletAction {
@@ -107,8 +104,8 @@ public class EditUserAction extends PortletAction {
 				oldScreenName = ((String)returnValue[1]);
 			}
 			else if (cmd.equals(Constants.DEACTIVATE) ||
-					cmd.equals(Constants.DELETE) ||
-					cmd.equals(Constants.RESTORE)) {
+					 cmd.equals(Constants.DELETE) ||
+					 cmd.equals(Constants.RESTORE)) {
 
 				deleteUsers(actionRequest);
 			}
@@ -170,18 +167,18 @@ public class EditUserAction extends PortletAction {
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof ContactFirstNameException ||
-					e instanceof ContactLastNameException ||
-					e instanceof DuplicateUserEmailAddressException ||
-					e instanceof DuplicateUserScreenNameException ||
-					e instanceof RequiredUserException ||
-					e instanceof ReservedUserEmailAddressException ||
-					e instanceof ReservedUserScreenNameException ||
-					e instanceof UserEmailAddressException ||
-					e instanceof UserIdException ||
-					e instanceof UserPasswordException ||
-					e instanceof UserScreenNameException ||
-					e instanceof UserSmsException ||
-					e instanceof WebsiteURLException) {
+					 e instanceof ContactLastNameException ||
+					 e instanceof DuplicateUserEmailAddressException ||
+					 e instanceof DuplicateUserScreenNameException ||
+					 e instanceof RequiredUserException ||
+					 e instanceof ReservedUserEmailAddressException ||
+					 e instanceof ReservedUserScreenNameException ||
+					 e instanceof UserEmailAddressException ||
+					 e instanceof UserIdException ||
+					 e instanceof UserPasswordException ||
+					 e instanceof UserScreenNameException ||
+					 e instanceof UserSmsException ||
+					 e instanceof WebsiteURLException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
@@ -304,12 +301,6 @@ public class EditUserAction extends PortletAction {
 		User user = null;
 		String oldScreenName = StringPool.BLANK;
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setExpandoBridgeAttributes(
-			PortalUtil.getCustomAttributes(
-				new ExpandoBridgeImpl(User.class.getName(), 0), actionRequest));
-
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add user
@@ -319,8 +310,7 @@ public class EditUserAction extends PortletAction {
 				autoScreenName, screenName, emailAddress,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationIds, sendEmail,
-				serviceContext);
+				birthdayYear, jobTitle, organizationIds, sendEmail);
 		}
 		else {
 
@@ -365,8 +355,7 @@ public class EditUserAction extends PortletAction {
 				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
 				twitterSn, ymSn, jobTitle, organizationIds, oldPassword,
 				newPassword1, newPassword2, passwordReset, openId, deliveries,
-				communityIds, regularRolesIds, className, classPK, websites,
-				serviceContext);
+				communityIds, regularRolesIds, className, classPK, websites);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;
@@ -398,6 +387,8 @@ public class EditUserAction extends PortletAction {
 				}
 			}
 		}
+
+		PortalUtil.updateExpandoBridge(user.getExpandoBridge(), actionRequest);
 
 		return new Object[] {user, oldScreenName};
 	}
