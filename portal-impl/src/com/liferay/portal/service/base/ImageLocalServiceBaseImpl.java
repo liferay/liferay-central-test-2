@@ -70,6 +70,7 @@ import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesService;
 import com.liferay.portal.service.PortletService;
+import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.service.RegionService;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.service.ResourceCodeLocalService;
@@ -845,6 +846,14 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
+	public QuartzLocalService getQuartzLocalService() {
+		return quartzLocalService;
+	}
+
+	public void setQuartzLocalService(QuartzLocalService quartzLocalService) {
+		this.quartzLocalService = quartzLocalService;
+	}
+
 	public RegionService getRegionService() {
 		return regionService;
 	}
@@ -1371,6 +1380,8 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
 	protected PortletPreferencesFinder portletPreferencesFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.QuartzLocalService.impl")
+	protected QuartzLocalService quartzLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.RegionService.impl")
 	protected RegionService regionService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")

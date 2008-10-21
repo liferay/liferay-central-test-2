@@ -22,15 +22,6 @@
 
 package com.liferay.portal.service.base;
 
-import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
-
-import com.liferay.mail.service.MailService;
-
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
@@ -153,69 +144,13 @@ import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 
-import java.util.List;
-
 /**
- * <a href="MembershipRequestLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="QuartzLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class MembershipRequestLocalServiceBaseImpl
-	implements MembershipRequestLocalService {
-	public MembershipRequest addMembershipRequest(
-		MembershipRequest membershipRequest) throws SystemException {
-		membershipRequest.setNew(true);
-
-		return membershipRequestPersistence.update(membershipRequest, false);
-	}
-
-	public MembershipRequest createMembershipRequest(long membershipRequestId) {
-		return membershipRequestPersistence.create(membershipRequestId);
-	}
-
-	public void deleteMembershipRequest(long membershipRequestId)
-		throws PortalException, SystemException {
-		membershipRequestPersistence.remove(membershipRequestId);
-	}
-
-	public void deleteMembershipRequest(MembershipRequest membershipRequest)
-		throws SystemException {
-		membershipRequestPersistence.remove(membershipRequest);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
-		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
-	}
-
-	public MembershipRequest getMembershipRequest(long membershipRequestId)
-		throws PortalException, SystemException {
-		return membershipRequestPersistence.findByPrimaryKey(membershipRequestId);
-	}
-
-	public List<MembershipRequest> getMembershipRequests(int start, int end)
-		throws SystemException {
-		return membershipRequestPersistence.findAll(start, end);
-	}
-
-	public int getMembershipRequestsCount() throws SystemException {
-		return membershipRequestPersistence.countAll();
-	}
-
-	public MembershipRequest updateMembershipRequest(
-		MembershipRequest membershipRequest) throws SystemException {
-		membershipRequest.setNew(false);
-
-		return membershipRequestPersistence.update(membershipRequest, true);
-	}
-
+public abstract class QuartzLocalServiceBaseImpl implements QuartzLocalService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1240,30 +1175,6 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		this.websitePersistence = websitePersistence;
 	}
 
-	public CounterLocalService getCounterLocalService() {
-		return counterLocalService;
-	}
-
-	public void setCounterLocalService(CounterLocalService counterLocalService) {
-		this.counterLocalService = counterLocalService;
-	}
-
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
-	public MailService getMailService() {
-		return mailService;
-	}
-
-	public void setMailService(MailService mailService) {
-		this.mailService = mailService;
-	}
-
 	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountLocalService.impl")
 	protected AccountLocalService accountLocalService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountService.impl")
@@ -1506,10 +1417,4 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	protected WebsiteService websiteService;
 	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
-	protected CounterLocalService counterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
-	protected CounterService counterService;
-	@javax.annotation.Resource(name = "com.liferay.mail.service.MailService.impl")
-	protected MailService mailService;
 }
