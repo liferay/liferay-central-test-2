@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
-import com.liferay.portal.util.InitUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -511,7 +510,7 @@ public class SourceFormatter {
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
 
-			String content = _fileUtil.read(file, true);
+			String content = _fileUtil.read(file);
 			String newContent = _formatJSPContent(files[i], content);
 
 			newContent = StringUtil.replace(
@@ -565,9 +564,7 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String _formatJSPContent(String fileName, String content)
-		throws IOException {
-
+	private static String _formatJSPContent(String fileName, String content) {
 		content = _formatTaglibQuotes(fileName, content, StringPool.QUOTE);
 		content = _formatTaglibQuotes(fileName, content, StringPool.APOSTROPHE);
 
@@ -575,8 +572,7 @@ public class SourceFormatter {
 	}
 
 	private static String _formatTaglibQuotes(
-			String fileName, String content, String quoteType)
-		throws IOException {
+		String fileName, String content, String quoteType) {
 
 		String quoteFix = StringPool.APOSTROPHE;
 
