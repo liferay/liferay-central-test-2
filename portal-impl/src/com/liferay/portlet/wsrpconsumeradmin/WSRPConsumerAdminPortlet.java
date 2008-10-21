@@ -80,17 +80,8 @@ public class WSRPConsumerAdminPortlet
 				}
 			}
 		}
-		else if (action == AdminPortletAction.GET_PRODUCER_INFO) {
-
-			if (actionRequest.getAttribute("CONSUMER_ADMIN_ERROR") != null) {
-				setRenderParameters(actionRequest, actionResponse);
-
-				return;
-			}
-		}
 
 		setRenderParameters(actionRequest, actionResponse);
-
 	}
 
 	protected void setRenderParameters(
@@ -101,7 +92,6 @@ public class WSRPConsumerAdminPortlet
 		if (Validator.isNotNull(redirect)) {
 			actionResponse.setRenderParameter("redirect", redirect);
 		}
-
 	}
 
 }
