@@ -14,8 +14,4 @@
 	<bean id="mailSession" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="mail/MailSession" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
-		<property name="dataSource" ref="liferayDataSource" />
-		<property name="mailSession" ref="mailSession" />
-	</bean>
 </beans>
