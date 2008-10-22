@@ -75,7 +75,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 
-		doc.addText(Field.NAME, name);
+		doc.addText(Field.TITLE, name);
 		doc.addText(Field.DESCRIPTION, description);
 
 		doc.addModifiedDate();

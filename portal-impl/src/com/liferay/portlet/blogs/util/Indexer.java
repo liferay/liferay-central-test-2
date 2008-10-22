@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -49,12 +50,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.BLOGS;
 
 	public static void addEntry(
-			long companyId, long groupId, long userId, long entryId,
-			String title, String content, String[] tagsEntries)
+			long companyId, long groupId, long userId, String userName,
+			long entryId, String title, String content, String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
-			companyId, groupId, userId, entryId, title, content, tagsEntries);
+			companyId, groupId, userId, userName, entryId, title, content,
+			tagsEntries);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -66,29 +68,30 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getEntryDocument(
-		long companyId, long groupId, long userId, long entryId, String title,
-		String content, String[] tagsEntries) {
+		long companyId, long groupId, long userId, String userName,
+		long entryId, String title, String content, String[] tagsEntries) {
 
+		userName = PortalUtil.getUserName(userId, userName);
 		content = HtmlUtil.extractText(content);
 
 		Document doc = new DocumentImpl();
 
 		doc.addUID(PORTLET_ID, entryId);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 		doc.addKeyword(Field.USER_ID, userId);
+		doc.addText(Field.USER_NAME, userName);
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
-
-		doc.addModifiedDate();
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, BlogsEntry.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, entryId);
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
 	}
@@ -102,12 +105,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateEntry(
-			long companyId, long groupId, long userId, long entryId,
-			String title, String content, String[] tagsEntries)
+			long companyId, long groupId, long userId, String userName,
+			long entryId, String title, String content, String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
-			companyId, groupId, userId, entryId, title, content, tagsEntries);
+			companyId, groupId, userId, userName, entryId, title, content,
+			tagsEntries);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

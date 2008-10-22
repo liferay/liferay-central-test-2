@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
@@ -78,6 +79,7 @@ public class Indexer
 		String type, String shortDescription, String longDescription,
 		String pageURL, String repoGroupId, String repoArtifactId) {
 
+		userName = PortalUtil.getUserName(userId, userName);
 		shortDescription = HtmlUtil.extractText(shortDescription);
 		longDescription = HtmlUtil.extractText(longDescription);
 
@@ -90,20 +92,24 @@ public class Indexer
 
 		doc.addUID(PORTLET_ID, productEntryId);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 		doc.addKeyword(Field.USER_ID, userId);
+		doc.addText(Field.USER_NAME, userName);
 
-		doc.addText(Field.NAME, name);
+		doc.addText(Field.TITLE, name);
 		doc.addText(Field.CONTENT, content);
 
-		doc.addModifiedDate();
-
 		doc.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
-		doc.addDate("modified-date", modifiedDate);
-		doc.addText("version", version);
+		doc.addDate("modifiedDate", modifiedDate);
+		doc.addKeyword("version", version);
 		doc.addKeyword("type", type);
+		doc.addText("shortDescription", shortDescription);
+		doc.addText("longDescription", longDescription);
+		doc.addText("pageURL", pageURL);
 		doc.addKeyword("repoGroupId", repoGroupId);
 		doc.addKeyword("repoArtifactId", repoArtifactId);
 

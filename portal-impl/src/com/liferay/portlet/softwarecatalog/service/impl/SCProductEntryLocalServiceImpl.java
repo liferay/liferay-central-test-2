@@ -501,7 +501,8 @@ public class SCProductEntryLocalServiceImpl
 			if (Validator.isNotNull(keywords)) {
 				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				searchQuery.addTerm(Field.NAME, keywords);
+				searchQuery.addTerm(Field.USER_NAME, keywords);
+				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
 
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);

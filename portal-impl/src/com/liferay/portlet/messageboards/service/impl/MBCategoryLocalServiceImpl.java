@@ -397,6 +397,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				for (MBMessage message : messages) {
 					long groupId = category.getGroupId();
+					long userId = message.getUserId();
 					String userName = message.getUserName();
 					long threadId = message.getThreadId();
 					long messageId = message.getMessageId();
@@ -408,8 +409,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 					try {
 						Document doc = Indexer.getMessageDocument(
-							companyId, groupId, userName, categoryId, threadId,
-							messageId, title, content, tagsEntries);
+							companyId, groupId, userId, userName, categoryId,
+							threadId, messageId, title, content, tagsEntries);
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
@@ -639,10 +640,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 						Indexer.updateMessage(
 							message.getCompanyId(), fromCategory.getGroupId(),
-							message.getUserName(), toCategoryId,
-							message.getThreadId(), message.getMessageId(),
-							message.getSubject(), message.getBody(),
-							tagsEntries);
+							message.getUserId(), message.getUserName(),
+							toCategoryId, message.getThreadId(),
+							message.getMessageId(), message.getSubject(),
+							message.getBody(), tagsEntries);
 					}
 				}
 				catch (SearchException se) {

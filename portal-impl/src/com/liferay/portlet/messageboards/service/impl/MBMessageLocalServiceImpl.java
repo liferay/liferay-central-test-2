@@ -553,8 +553,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (!category.isDiscussion()) {
 				Indexer.addMessage(
 					message.getCompanyId(), category.getGroupId(),
-					user.getFullName(), category.getCategoryId(), threadId,
-					messageId, subject, body, tagsEntries);
+					message.getUserId(), message.getUserName(),
+					category.getCategoryId(), threadId, messageId, subject,
+					body, tagsEntries);
 			}
 		}
 		catch (SearchException se) {
@@ -1253,9 +1254,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
 					message.getCompanyId(), category.getGroupId(),
-					message.getUserName(), category.getCategoryId(),
-					message.getThreadId(), messageId, subject, body,
-					tagsEntries);
+					message.getUserId(), message.getUserName(),
+					category.getCategoryId(), message.getThreadId(), messageId,
+					subject, body, tagsEntries);
 			}
 		}
 		catch (SearchException se) {

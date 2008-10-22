@@ -103,18 +103,17 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, nodeId, title);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
-
-		doc.addModifiedDate();
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_PK, nodeId);
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
 	}

@@ -92,21 +92,19 @@ public class PluginPackageIndexer implements Indexer {
 
 		doc.addUID(PORTLET_ID, moduleId);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
 
 		doc.addText(Field.TITLE, name);
 		doc.addText(Field.CONTENT, content);
 
-		doc.addModifiedDate();
-
 		doc.addKeyword("moduleId", moduleId);
 		doc.addKeyword("artifactId", moduleIdObj.getArtifactId());
 		doc.addKeyword("version", version);
-		doc.addDate("modified-date", modifiedDate);
-		doc.addKeyword("shortDescription", shortDescription);
-		doc.addKeyword("changeLog", changeLog);
-		doc.addKeyword("repositoryURL", repositoryURL);
+		doc.addDate("modifiedDate", modifiedDate);
+		doc.addText("author", author);
 		doc.addKeyword("type", types.toArray(new String[0]));
 		doc.addKeyword("tag", tags.toArray(new String[0]));
 
@@ -126,11 +124,13 @@ public class PluginPackageIndexer implements Indexer {
 
 		doc.addKeyword("license", licenseNames);
 		doc.addKeyword("osi-approved-license", String.valueOf(osiLicense));
+		doc.addText("shortDescription", shortDescription);
+		doc.addText("longDescription", longDescription);
+		doc.addText("changeLog", changeLog);
+		doc.addText("pageURL", pageURL);
+		doc.addKeyword("repositoryURL", repositoryURL);
 		doc.addKeyword("status", status);
-
-		if (installedVersion != null) {
-			doc.addKeyword("installedVersion", installedVersion);
-		}
+		doc.addKeyword("installedVersion", installedVersion);
 
 		return doc;
 	}

@@ -194,11 +194,11 @@ try {
 		String pluginPackageGroupId = doc.get("groupId");
 		String pluginPackageArtifactId = doc.get("artifactId");
 		String pluginPackageAvailableVersion = doc.get("version");
-		Date pluginPackageModifiedDate = doc.getDate("modified-date");
+		Date pluginPackageModifiedDate = doc.getDate("modifiedDate");
+		String pluginPackageTags = StringUtil.merge(doc.getValues("tag"), StringPool.COMMA + StringPool.SPACE);
 		String pluginPackageShortDescription = doc.get("shortDescription");
 		String pluginPackageChangeLog = doc.get("changeLog");
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
-		String pluginPackageTags = StringUtil.merge(doc.getValues("tag"), StringPool.COMMA + StringPool.SPACE);
 
 		// The value for pluginPackage should never be null except when Lucene
 		// is out of sync as in LEP-4783 or when the plugin was not installed

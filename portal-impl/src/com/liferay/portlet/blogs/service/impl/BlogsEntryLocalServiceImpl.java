@@ -214,8 +214,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			if (!draft) {
 				Indexer.addEntry(
-					entry.getCompanyId(), entry.getGroupId(), userId, entryId,
-					title, content, tagsEntries);
+					entry.getCompanyId(), entry.getGroupId(), userId,
+					entry.getUserName(), entryId, title, content, tagsEntries);
 			}
 		}
 		catch (SearchException se) {
@@ -557,6 +557,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				long groupId = entry.getGroupId();
 				long userId = entry.getUserId();
+				String userName = entry.getUserName();
 				long entryId = entry.getEntryId();
 				String title = entry.getTitle();
 				String content = entry.getContent();
@@ -566,8 +567,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				try {
 					Indexer.updateEntry(
-						companyId, groupId, userId, entryId, title, content,
-						tagsEntries);
+						companyId, groupId, userId, userName, entryId, title,
+						content, tagsEntries);
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + entryId, e1);
@@ -603,6 +604,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
+				searchQuery.addTerm(Field.USER_NAME, keywords);
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
@@ -682,8 +684,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			if (!draft) {
 				Indexer.updateEntry(
-					entry.getCompanyId(), entry.getGroupId(), userId, entryId,
-					title, content, tagsEntries);
+					entry.getCompanyId(), entry.getGroupId(), userId,
+					entry.getUserName(), entryId, title, content, tagsEntries);
 			}
 		}
 		catch (SearchException se) {

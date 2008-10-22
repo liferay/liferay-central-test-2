@@ -70,20 +70,19 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, entryId);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 
-		doc.addText(Field.NAME, name);
-		doc.addText(Field.URL, url);
-		doc.addText(Field.COMMENTS, comments);
-
-		doc.addModifiedDate();
+		doc.addText(Field.TITLE, name);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword("folderId", folderId);
 		doc.addKeyword(Field.ENTRY_CLASS_PK, entryId);
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+		doc.addText(Field.URL, url);
+		doc.addText(Field.COMMENTS, comments);
 
 		return doc;
 	}
@@ -111,9 +110,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public DocumentSummary getDocumentSummary(
 		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
-		// Name
+		// Title
 
-		String name = doc.get(Field.NAME);
+		String title = doc.get(Field.TITLE);
 
 		// URL
 
@@ -126,7 +125,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
 		portletURL.setParameter("entryId", entryId);
 
-		return new DocumentSummary(name, url, portletURL);
+		return new DocumentSummary(title, url, portletURL);
 	}
 
 	public void reIndex(String[] ids) throws SearchException {

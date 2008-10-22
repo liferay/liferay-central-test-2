@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -56,14 +57,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 	public static void addMessage(
-			long companyId, long groupId, String userName, long categoryId,
-			long threadId, long messageId, String title, String content,
-			String[] tagsEntries)
+			long companyId, long groupId, long userId, String userName,
+			long categoryId, long threadId, long messageId, String title,
+			String content, String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
-			companyId, groupId, userName, categoryId, threadId, messageId,
-			title, content, tagsEntries);
+			companyId, groupId, userId, userName, categoryId, threadId,
+			messageId, title, content, tagsEntries);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -94,9 +95,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getMessageDocument(
-		long companyId, long groupId, String userName, long categoryId,
-		long threadId, long messageId, String title, String content,
-		String[] tagsEntries) {
+		long companyId, long groupId, long userId, String userName,
+		long categoryId, long threadId, long messageId, String title,
+		String content, String[] tagsEntries) {
+
+		userName = PortalUtil.getUserName(userId, userName);
 
 		try {
 			content = BBCodeUtil.getHTML(content);
@@ -112,23 +115,22 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, messageId);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
-
+		doc.addKeyword(Field.USER_ID, userId);
 		doc.addText(Field.USER_NAME, userName);
+
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
-
-		doc.addModifiedDate();
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword("categoryId", categoryId);
 		doc.addKeyword("threadId", threadId);
-
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, messageId);
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
 	}
@@ -142,14 +144,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateMessage(
-			long companyId, long groupId, String userName, long categoryId,
-			long threadId, long messageId, String title, String content,
-			String[] tagsEntries)
+			long companyId, long groupId, long userId, String userName,
+			long categoryId, long threadId, long messageId, String title,
+			String content, String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
-			companyId, groupId, userName, categoryId, threadId, messageId,
-			title, content, tagsEntries);
+			companyId, groupId, userId, userName, categoryId, threadId,
+			messageId, title, content, tagsEntries);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

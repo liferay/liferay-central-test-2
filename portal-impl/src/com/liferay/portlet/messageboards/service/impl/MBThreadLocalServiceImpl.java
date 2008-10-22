@@ -277,10 +277,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				if (!category.isDiscussion()) {
 					Indexer.updateMessage(
 						message.getCompanyId(), category.getGroupId(),
-						message.getUserName(), category.getCategoryId(),
-						message.getThreadId(), message.getMessageId(),
-						message.getSubject(), message.getBody(),
-						message.getTagsEntries());
+						message.getUserId(), message.getUserName(),
+						category.getCategoryId(), message.getThreadId(),
+						message.getMessageId(), message.getSubject(),
+						message.getBody(), message.getTagsEntries());
 				}
 			}
 			catch (SearchException se) {
@@ -334,10 +334,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
 					message.getCompanyId(), category.getGroupId(),
-					message.getUserName(), category.getCategoryId(),
-					message.getThreadId(), message.getMessageId(),
-					message.getSubject(), message.getBody(),
-					message.getTagsEntries());
+					message.getUserId(), message.getUserName(),
+					category.getCategoryId(), message.getThreadId(),
+					message.getMessageId(), message.getSubject(),
+					message.getBody(), message.getTagsEntries());
 			}
 		}
 		catch (SearchException se) {
@@ -478,10 +478,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				if (!category.isDiscussion()) {
 					Indexer.updateMessage(
 						message.getCompanyId(), category.getGroupId(),
-						message.getUserName(), category.getCategoryId(),
-						message.getThreadId(), message.getMessageId(),
-						message.getSubject(), message.getBody(),
-						message.getTagsEntries());
+						message.getUserId(), message.getUserName(),
+						category.getCategoryId(), message.getThreadId(),
+						message.getMessageId(), message.getSubject(),
+						message.getBody(), message.getTagsEntries());
 				}
 			}
 			catch (SearchException se) {

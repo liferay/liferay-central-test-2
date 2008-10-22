@@ -347,10 +347,10 @@ public class BookmarksFolderLocalServiceImpl
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.NAME, keywords);
+				searchQuery.addTerm(Field.TITLE, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 				searchQuery.addTerm(Field.URL, keywords);
 				searchQuery.addTerm(Field.COMMENTS, keywords);
-				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();

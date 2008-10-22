@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -211,6 +210,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(portletId, repositoryId, fileName);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, portletId);
 		doc.addKeyword(Field.GROUP_ID, groupId);
@@ -224,16 +225,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 					" " + groupId + " " + repositoryId + " " + fileName);
 		}
 
-		if (Validator.isNotNull(properties)) {
-			doc.addText(Field.PROPERTIES, properties);
-		}
-
-		doc.addModifiedDate();
+		doc.addText(Field.PROPERTIES, properties);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword("repositoryId", repositoryId);
 		doc.addKeyword("path", fileName);
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
