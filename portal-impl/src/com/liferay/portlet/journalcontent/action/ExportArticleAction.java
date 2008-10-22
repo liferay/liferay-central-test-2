@@ -70,13 +70,14 @@ public class ExportArticleAction extends PortletAction {
 		try {
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			String articleId = ParamUtil.getString(actionRequest, "articleId");
+
 			String targetExtension = ParamUtil.getString(
 				actionRequest, "targetExtension");
 
 			PortletPreferences preferences = actionRequest.getPreferences();
 
 			String[] allowedExtensions = preferences.getValues(
-				"extensions", new String[] {});
+				"extensions", null);
 
 			String languageId = LanguageUtil.getLanguageId(actionRequest);
 

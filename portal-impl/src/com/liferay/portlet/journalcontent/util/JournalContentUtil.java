@@ -131,8 +131,7 @@ public class JournalContentUtil {
 		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
-		return getDisplay(
-			groupId, articleId, languageId, themeDisplay, 1);
+		return getDisplay(groupId, articleId, languageId, themeDisplay, 1);
 	}
 
 	public static JournalArticleDisplay getDisplay(

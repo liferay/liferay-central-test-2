@@ -56,15 +56,15 @@ long groupId = GetterUtil.getLong(preferences.getValue("group-id", scopeGroupId.
 String articleId = GetterUtil.getString(preferences.getValue("article-id", StringPool.BLANK));
 String templateId = GetterUtil.getString(preferences.getValue("template-id", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
+String[] extensions = preferences.getValues("extensions", null);
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 
 String[] conversions = DocumentConversionUtil.getConversions("html");
-String[] extensions = preferences.getValues("extensions", new String[] {});
 
 boolean openOfficeServerEnabled = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED);
-boolean enableConversions = openOfficeServerEnabled && (extensions != null && extensions.length > 0);
+boolean enableConversions = openOfficeServerEnabled && (extensions != null) && (extensions.length > 0);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

@@ -153,7 +153,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 			<div class="lfr-meta-actions article-controls">
 				<c:if test="<%= enableConversions %>">
 
-					<%				
+					<%
 					PortletURL exportArticleURL = renderResponse.createActionURL();
 
 					exportArticleURL.setWindowState(LiferayWindowState.EXCLUSIVE);
@@ -165,24 +165,25 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 					<liferay-ui:icon-list>
 
-					<%
-					for (String extension : extensions) {
-						exportArticleURL.setParameter("targetExtension", extension);
-					%>
-		
-						<liferay-ui:icon
-							image='<%= "../document_library/" + extension %>'
-							message="<%= extension.toUpperCase() %>"
-							url="<%= exportArticleURL.toString() %>"
-							label="<%= true %>"
-						/>
-		
-					<%
-					}
-					%>
+						<%
+						for (String extension : extensions) {
+							exportArticleURL.setParameter("targetExtension", extension);
+						%>
+
+							<liferay-ui:icon
+								image='<%= "../document_library/" + extension %>'
+								message="<%= extension.toUpperCase() %>"
+								url="<%= exportArticleURL.toString() %>"
+								label="<%= true %>"
+							/>
+
+						<%
+						}
+						%>
 
 					</liferay-ui:icon-list>
 				</c:if>
+
 				<c:if test="<%= enableRatings %>">
 					<liferay-ui:ratings
 						className="<%= JournalArticle.class.getName() %>"
