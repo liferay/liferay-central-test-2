@@ -94,6 +94,13 @@ public interface WSRPConsumerRegistrationLocalService {
 		java.lang.String customUserProfileData,
 		java.lang.String registrationProperties,
 		java.lang.String lifetimeTerminationTime, java.lang.String producerKey)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.wsrp.model.WSRPConsumerRegistration getConsumerRegistration(
+		java.lang.String registrationHandle, java.lang.String producerKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.wsrp.model.WSRPConsumerRegistration> getConsumerRegistrations(
+		java.lang.String producerKey) throws com.liferay.portal.SystemException;
 }

@@ -41,10 +41,12 @@
 
 package com.liferay.wsrp.producer.impl;
 
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.SetUtil;
 import com.liferay.wsrp.model.WSRPConsumerRegistration;
 import com.liferay.wsrp.model.WSRPProducer;
 import com.liferay.wsrp.service.WSRPConsumerRegistrationLocalServiceUtil;
-import com.liferay.wsrp.service.persistence.WSRPConsumerRegistrationUtil;
 
 import com.sun.portal.wsrp.common.KeyGenerator;
 import com.sun.portal.wsrp.common.LeaseTime;
@@ -60,10 +62,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <a href="ProducerImpl.java.html"><b><i>View Source</i></b></a>
@@ -73,8 +75,8 @@ import javax.xml.datatype.DatatypeFactory;
  */
 public class ProducerImpl extends AbstractProducer {
 
-	public ProducerImpl(WSRPProducer wsrpProducer){
-		_wsrpProducer = wsrpProducer;
+	public ProducerImpl(WSRPProducer wsrpProducer) {
+		_producerModel = wsrpProducer;
 	}
 
 	public String addRegistration(RegistrationRecord registrationRecord)
@@ -82,27 +84,26 @@ public class ProducerImpl extends AbstractProducer {
 
 		String registrationHandle = KeyGenerator.generateKey();
 
-		String consumerModes = _getCommaSeperatedString(
+		String consumerModes = StringUtil.merge(
 			registrationRecord.getConsumerModes());
-
-		String consumerWindowStates = _getCommaSeperatedString(
+		String consumerWindowStates = StringUtil.merge(
 			registrationRecord.getConsumerWindowStates());
-
-		String customUserProfileData = _getCommaSeperatedString(
+		String customUserProfileData = StringUtil.merge(
 			registrationRecord.getCustomUserProfileData());
-
-		String consumerUserScopes = _getCommaSeperatedString(
+		String consumerUserScopes = StringUtil.merge(
 			registrationRecord.getConsumerUserScopes());
-
 		String registrationProperties = null;
+
 		String lifeTime = null;
 
 		if (registrationRecord.getLifetime() != null) {
 			LeaseTime leaseTime = registrationRecord.getLifetime();
 
-			if (leaseTime.getTerminationTime() != null) {
-				lifeTime = registrationRecord.getLifetime()
-							.getTerminationTime().toXMLFormat();
+			XMLGregorianCalendar terminationTime =
+				leaseTime.getTerminationTime();
+
+			if (terminationTime != null) {
+				lifeTime = terminationTime.toXMLFormat();
 			}
 		}
 
@@ -112,13 +113,9 @@ public class ProducerImpl extends AbstractProducer {
 				registrationRecord.isEnabled(), registrationHandle,
 				registrationRecord.getConsumerAgent(),
 				registrationRecord.isMethodGetSupported(),
-				consumerModes,
-				consumerWindowStates,
-				consumerUserScopes,
-				customUserProfileData,
-				registrationProperties,
-				lifeTime,
-				_wsrpProducer.getInstanceName());
+				consumerModes, consumerWindowStates, consumerUserScopes,
+				customUserProfileData, registrationProperties, lifeTime,
+				_producerModel.getInstanceName());
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
@@ -128,34 +125,30 @@ public class ProducerImpl extends AbstractProducer {
 	}
 
 	public void addRegistrationPropertyDescription(
-			PropertyDescription propertyDescription)
-		throws ProducerException {
+		PropertyDescription propertyDescription) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	WSRPProducer getModel(){
-		return _wsrpProducer;
+		throw new UnsupportedOperationException();
 	}
 
 	public String getNamespace() {
-		return _wsrpProducer.getNamespace();
+		return _producerModel.getNamespace();
 	}
 
-	public Set<String> getOfferedPortletNames() throws ProducerException {
-		return _getOfferedPortletSet(_wsrpProducer.getOfferedPortlets());
+	public Set<String> getOfferedPortletNames() {
+		return SetUtil.fromArray(
+			StringUtil.split(_producerModel.getOfferedPortlets()));
 	}
 
 	public String getPortalId() {
-		return _wsrpProducer.getPortalId();
+		return _producerModel.getPortalId();
 	}
 
 	public String getProducerKey() {
-		return _wsrpProducer.getInstanceName();
+		return _producerModel.getInstanceName();
 	}
 
-	public ProfileMapManager getProfileMapManager() throws ProducerException {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public ProfileMapManager getProfileMapManager() {
+		throw new UnsupportedOperationException();
 	}
 
 	public LeaseTime getRegistrationLifetime(String registrationHandle)
@@ -164,31 +157,30 @@ public class ProducerImpl extends AbstractProducer {
 		LeaseTime leaseTime = null;
 
 		WSRPConsumerRegistration consumerRegistration =
-			_getConsumerRegistrationByHandle(registrationHandle);
+			getConsumerRegistrationByHandle(registrationHandle);
 
 		String terminationTime =
 			consumerRegistration.getLifetimeTerminationTime();
 
-		if (terminationTime != null && !terminationTime.isEmpty()) {
-
+		if ((terminationTime != null) && Validator.isNotNull(terminationTime)) {
 			try {
-				DatatypeFactory df = DatatypeFactory.newInstance();
+				DatatypeFactory datetypeFactory = DatatypeFactory.newInstance();
 
 				leaseTime = new LeaseTime();
-				leaseTime.setTerminationTime(
-					df.newXMLGregorianCalendar(terminationTime));
 
+				leaseTime.setTerminationTime(
+					datetypeFactory.newXMLGregorianCalendar(terminationTime));
 			}
-			catch (DatatypeConfigurationException e) {
-				throw new ProducerException(
-					"Could not create LeaseTime object", e);
+			catch (DatatypeConfigurationException dce) {
+				throw new ProducerException(dce);
 			}
 		}
+
 		return leaseTime;
 	}
 
 	public Set<PropertyDescription> getRegistrationPropertyDescriptions(
-			Set<String> desiredLocales) throws ProducerException {
+		Set<String> desiredLocales) {
 
 		return Collections.EMPTY_SET;
 	}
@@ -197,9 +189,9 @@ public class ProducerImpl extends AbstractProducer {
 		throws ProducerException {
 
 		WSRPConsumerRegistration consumerRegistration =
-			_getConsumerRegistrationByHandle(registrationHandle);
+			getConsumerRegistrationByHandle(registrationHandle);
 
-		return _getRegistrationRecord(consumerRegistration);
+		return getRegistrationRecord(consumerRegistration);
 	}
 
 	public Set<RegistrationRecord> getRegistrationRecords()
@@ -207,17 +199,17 @@ public class ProducerImpl extends AbstractProducer {
 
 		try{
 			List<WSRPConsumerRegistration> consumerRegistrations =
-				WSRPConsumerRegistrationUtil.findByProducerKey(
-					_wsrpProducer.getInstanceName());
+				WSRPConsumerRegistrationLocalServiceUtil.
+					getConsumerRegistrations(_producerModel.getInstanceName());
 
 			Set<RegistrationRecord> registrationRecords =
 				new HashSet<RegistrationRecord>();
 
 			for (WSRPConsumerRegistration consumerRegistration :
-				consumerRegistrations) {
+					consumerRegistrations) {
 
-				RegistrationRecord registrationRecord =
-					_getRegistrationRecord(consumerRegistration);
+				RegistrationRecord registrationRecord = getRegistrationRecord(
+					consumerRegistration);
 
 				registrationRecords.add(registrationRecord);
 			}
@@ -233,54 +225,48 @@ public class ProducerImpl extends AbstractProducer {
 		throws ProducerException {
 
 		WSRPConsumerRegistration consumerRegistration =
-			_getConsumerRegistrationByHandle(registrationHandle);
+			getConsumerRegistrationByHandle(registrationHandle);
 
 		return consumerRegistration.getStatus();
 	}
 
-	public String getRegistrationValidatorClassName()
-		throws ProducerException {
-
-		return _wsrpProducer.getRegistrationValidatorClass();
+	public String getRegistrationValidatorClassName() {
+		return _producerModel.getRegistrationValidatorClass();
 	}
 
-	public ProducerVersion getVersion() throws ProducerException {
-		return ProducerVersion.fromValue(_wsrpProducer.getVersion());
+	public ProducerVersion getVersion() {
+		return ProducerVersion.fromValue(_producerModel.getVersion());
 	}
 
-	public boolean inbandRegistrationSupported() throws ProducerException {
-		return _wsrpProducer.isSupportsInbandRegistration();
+	public boolean inbandRegistrationSupported() {
+		return _producerModel.isSupportsInbandRegistration();
 	}
 
-	public boolean isEnabled() throws ProducerException {
-		return _wsrpProducer.getStatus();
+	public boolean isEnabled() {
+		return _producerModel.getStatus();
 	}
 
-	public boolean isValidRegistration(String registrationHandle)
-		throws ProducerException {
-
-		boolean valid = true;
+	public boolean isValidRegistration(String registrationHandle) {
+		boolean validRegistration = true;
 
 		try {
-			_getConsumerRegistrationByHandle(registrationHandle);
+			getConsumerRegistrationByHandle(registrationHandle);
 		}
 		catch (Exception e) {
-			valid = false;
+			validRegistration = false;
 		}
-		return valid;
+
+		return validRegistration;
 	}
 
-	public void modifyRegistration(RegistrationRecord registrationRecord)
-		throws ProducerException {
-
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void modifyRegistration(RegistrationRecord registrationRecord) {
+		throw new UnsupportedOperationException();
 	}
 
 	public void removeRegistrationPropertyDescriptions(
-			Set<String> propertyNames)
-		throws ProducerException {
+		Set<String> propertyNames) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void removeRegistrations(Set<String> registrationHandles)
@@ -289,169 +275,101 @@ public class ProducerImpl extends AbstractProducer {
 		try {
 			for (String registrationHandle : registrationHandles) {
 				WSRPConsumerRegistration consumerRegistration =
-					_getConsumerRegistrationByHandle(registrationHandle);
+					getConsumerRegistrationByHandle(registrationHandle);
 
 				WSRPConsumerRegistrationLocalServiceUtil.
-						deleteWSRPConsumerRegistration(consumerRegistration);
+					deleteWSRPConsumerRegistration(consumerRegistration);
 			}
 		}
 		catch (Exception e) {
 			throw new ProducerException(
-					"Unable to delete consumer registration", e);
+				"Unable to delete consumer registration", e);
 		}
-
 	}
 
-	public boolean requiresRegistration() throws ProducerException {
-		return _wsrpProducer.getRequiresRegistration();
+	public boolean requiresRegistration() {
+		return _producerModel.getRequiresRegistration();
 	}
 
-	public void setInbandRegistrationSupported(boolean value)
-		throws ProducerException {
-
-		_wsrpProducer.setSupportsInbandRegistration(value);
+	public void setInbandRegistrationSupported(boolean value) {
+		_producerModel.setSupportsInbandRegistration(value);
 	}
 
-	public void setIsEnabled(boolean status) throws ProducerException {
-		_wsrpProducer.setStatus(status);
+	public void setIsEnabled(boolean status) {
+		_producerModel.setStatus(status);
 	}
 
-	public void setOfferedPortletNames(Set<String> offeredPortlets)
-			throws ProducerException {
+	public void setOfferedPortletNames(Set<String> offeredPortlets) {
+		String offeredPortletsString = StringUtil.merge(offeredPortlets);
 
-		String offeredPortletsString = _getOfferedPortletString(
-			offeredPortlets);
-
-		_wsrpProducer.setOfferedPortlets(offeredPortletsString);
+		_producerModel.setOfferedPortlets(offeredPortletsString);
 	}
 
 	public void setPortalId(String portalId) {
-		_wsrpProducer.setPortalId(portalId);
+		_producerModel.setPortalId(portalId);
 	}
 
 	public void setRegistrationLifetime(
-			String registrationHandle, LeaseTime lifetime)
-		throws ProducerException {
+		String registrationHandle, LeaseTime lifetime) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
-	public void setRegistrationStatus(String registrationHandle, boolean value)
-		throws ProducerException {
+	public void setRegistrationStatus(
+		String registrationHandle, boolean value) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
-	public void setRegistrationValidatorClassName(String validatorClassName)
-		throws ProducerException {
-
-		_wsrpProducer.setRegistrationValidatorClass(validatorClassName);
+	public void setRegistrationValidatorClassName(String validatorClassName) {
+		_producerModel.setRegistrationValidatorClass(validatorClassName);
 	}
 
-	public void setRequiresRegistration(boolean value)
-		throws ProducerException {
-
-		_wsrpProducer.setRequiresRegistration(value);
+	public void setRequiresRegistration(boolean value) {
+		_producerModel.setRequiresRegistration(value);
 	}
 
-	public void setVersion(ProducerVersion version) throws ProducerException {
-		_wsrpProducer.setVersion(version.value());
+	public void setVersion(ProducerVersion version) {
+		_producerModel.setVersion(version.value());
 	}
 
-	private String _getCommaSeperatedString(List values){
-
-		if (values == null || values.size() == 0) {
-			return null;
-		}
-
-		StringBuffer sb = new StringBuffer();
-		boolean prependComma = false;
-
-		for(int i=0; i<values.size(); i++) {
-			if (prependComma) {
-				sb.append(",");
-			}
-			sb.append(values.get(i).toString());
-			prependComma = true;
-		}
-		return sb.toString();
-	}
-
-	private WSRPConsumerRegistration _getConsumerRegistrationByHandle(
-			String registrationHandle) throws ProducerException{
+	protected WSRPConsumerRegistration getConsumerRegistrationByHandle(
+			String registrationHandle)
+		throws ProducerException{
 
 		try {
-			return WSRPConsumerRegistrationUtil.fetchByR_P(
-				registrationHandle, _wsrpProducer.getInstanceName());
+			return WSRPConsumerRegistrationLocalServiceUtil.
+				getConsumerRegistration(
+					registrationHandle, _producerModel.getInstanceName());
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
 		}
 	}
 
-	private String _getOfferedPortletString(Set<String> portlets) {
-		StringBuffer sb = new StringBuffer();
-
-		if (portlets.isEmpty()) {
-			return sb.toString();
-		}
-
-		boolean prependComma = false;
-		for (String portlet : portlets) {
-
-			if (!prependComma) {
-				sb.append(portlet);
-			}
-			else {
-				sb.append(",").append(portlet);
-			}
-
-			prependComma = true;
-		}
-		return sb.toString();
+	protected WSRPProducer getProducerModel() {
+		return _producerModel;
 	}
 
-	private Set<String> _getOfferedPortletSet(String offeredPortlets) {
+	protected RegistrationRecord getRegistrationRecord(
+		WSRPConsumerRegistration consumerRegistration) {
 
-		if (offeredPortlets == null || offeredPortlets.trim().length() == 0) {
-			return Collections.EMPTY_SET;
-		}
+		RegistrationData registrationData = new RegistrationData();
 
-		Set<String> offeredPortletSet = new HashSet<String>();
+		registrationData.setConsumerAgent(
+			consumerRegistration.getConsumerAgent());
+		registrationData.setConsumerName(
+			consumerRegistration.getConsumerName());
+		registrationData.setMethodGetSupported(
+			consumerRegistration.getMethodGetSupported());
 
-		if (offeredPortlets.indexOf(",") == -1) {
-			offeredPortletSet.add(offeredPortlets);
-		}
-		else {
-			StringTokenizer st = new StringTokenizer(offeredPortlets, ",");
+		RegistrationRecord registrationRecord = new RegistrationRecord(
+			consumerRegistration.getRegistrationHandle(),
+			consumerRegistration.getStatus(), registrationData, null);
 
-			while (st.hasMoreTokens()) {
-				String portletName = st.nextToken();
-				offeredPortletSet.add(portletName);
-			}
-		}
-		return offeredPortletSet;
+		return registrationRecord;
 	}
 
-	private RegistrationRecord _getRegistrationRecord(
-			WSRPConsumerRegistration consumerRegistrationModel){
-
-		String handle = consumerRegistrationModel.getRegistrationHandle();
-		boolean enabled = consumerRegistrationModel.getStatus();
-
-		RegistrationData data = new RegistrationData();
-
-		data.setConsumerAgent(consumerRegistrationModel.getConsumerAgent());
-		data.setConsumerName(consumerRegistrationModel.getConsumerName());
-		data.setMethodGetSupported(
-				consumerRegistrationModel.getMethodGetSupported());
-
-		RegistrationRecord regRecord =
-				new RegistrationRecord(handle, enabled, data, null);
-
-		return regRecord;
-	}
-
-	private WSRPProducer _wsrpProducer = null;
+	private WSRPProducer _producerModel;
 
 }

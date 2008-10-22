@@ -269,7 +269,6 @@ public class WSRPPersistenceHelper {
 			_unmarshaller = _jaxbContext.createUnmarshaller();
 
 			_objectFactory = new ObjectFactory();
-
 		}
 		catch (Exception e) {
 			_log.error(e, e);

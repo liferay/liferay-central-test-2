@@ -110,8 +110,7 @@ public class WSRPProducerLocalServiceUtil {
 		java.lang.String producerProfileMap,
 		java.lang.String registrationProperties,
 		java.lang.String registrationValidatorClass)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService()
 			.addProducer(portalId, status, namespace, instanceName,
 			requiresRegistration, supportsInbandRegistration, version,
@@ -119,17 +118,17 @@ public class WSRPProducerLocalServiceUtil {
 			registrationValidatorClass);
 	}
 
-	public static com.liferay.wsrp.model.WSRPProducer getProducerByKey(
-		java.lang.String producerKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.wsrp.NoSuchProducerException {
-		return getService().getProducerByKey(producerKey);
+	public static com.liferay.wsrp.model.WSRPProducer getProducer(
+		java.lang.String instanceName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getProducer(instanceName);
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> getProducersByNamespace(
+	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> getProducers(
 		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException {
-		return getService().getProducersByNamespace(portalId, namespace);
+		return getService().getProducers(portalId, namespace);
 	}
 
 	public static WSRPProducerLocalService getService() {

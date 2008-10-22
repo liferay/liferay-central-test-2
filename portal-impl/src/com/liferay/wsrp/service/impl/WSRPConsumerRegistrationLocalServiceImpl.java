@@ -27,6 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.wsrp.model.WSRPConsumerRegistration;
 import com.liferay.wsrp.service.base.WSRPConsumerRegistrationLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
  * <a href="WSRPConsumerRegistrationLocalServiceImpl.java.html">
  * <b><i>View Source</i></b></a>
@@ -45,13 +47,12 @@ public class WSRPConsumerRegistrationLocalServiceImpl
 			String consumerUserScopes, String customUserProfileData,
 			String registrationProperties, String lifetimeTerminationTime,
 			String producerKey)
-		throws PortalException,	SystemException {
+		throws SystemException {
 
 		long consumerRegistrationId = counterLocalService.increment();
 
 		WSRPConsumerRegistration consumerRegistration =
-				wsrpConsumerRegistrationPersistence.create(
-					consumerRegistrationId);
+			wsrpConsumerRegistrationPersistence.create(consumerRegistrationId);
 
 		consumerRegistration.setConsumerName(consumerName);
 		consumerRegistration.setStatus(status);
@@ -65,10 +66,25 @@ public class WSRPConsumerRegistrationLocalServiceImpl
 		consumerRegistration.setRegistrationProperties(registrationProperties);
 		consumerRegistration.setLifetimeTerminationTime(
 			lifetimeTerminationTime);
-
 		consumerRegistration.setProducerKey(producerKey);
 
 		wsrpConsumerRegistrationPersistence.update(consumerRegistration, false);
+	}
+
+	public WSRPConsumerRegistration getConsumerRegistration(
+			String registrationHandle, String producerKey)
+		throws PortalException, SystemException {
+
+		return wsrpConsumerRegistrationPersistence.findByR_P(
+			registrationHandle, producerKey);
+	}
+
+	public List<WSRPConsumerRegistration> getConsumerRegistrations(
+			String producerKey)
+		throws SystemException {
+
+		return wsrpConsumerRegistrationPersistence.findByProducerKey(
+			producerKey);
 	}
 
 }

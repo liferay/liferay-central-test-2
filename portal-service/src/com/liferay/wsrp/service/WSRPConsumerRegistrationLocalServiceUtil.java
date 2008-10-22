@@ -114,13 +114,25 @@ public class WSRPConsumerRegistrationLocalServiceUtil {
 		java.lang.String customUserProfileData,
 		java.lang.String registrationProperties,
 		java.lang.String lifetimeTerminationTime, java.lang.String producerKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService()
 			.addConsumerRegistration(consumerName, status, registrationHandle,
 			consumerAgent, methodGetSupported, consumerModes,
 			consumerWindowStates, consumerUserScopes, customUserProfileData,
 			registrationProperties, lifetimeTerminationTime, producerKey);
+	}
+
+	public static com.liferay.wsrp.model.WSRPConsumerRegistration getConsumerRegistration(
+		java.lang.String registrationHandle, java.lang.String producerKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getConsumerRegistration(registrationHandle, producerKey);
+	}
+
+	public static java.util.List<com.liferay.wsrp.model.WSRPConsumerRegistration> getConsumerRegistrations(
+		java.lang.String producerKey) throws com.liferay.portal.SystemException {
+		return getService().getConsumerRegistrations(producerKey);
 	}
 
 	public static WSRPConsumerRegistrationLocalService getService() {

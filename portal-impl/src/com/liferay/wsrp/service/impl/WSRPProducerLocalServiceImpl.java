@@ -24,7 +24,6 @@ package com.liferay.wsrp.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.wsrp.NoSuchProducerException;
 import com.liferay.wsrp.model.WSRPProducer;
 import com.liferay.wsrp.service.base.WSRPProducerLocalServiceBaseImpl;
 
@@ -47,12 +46,12 @@ public class WSRPProducerLocalServiceImpl
 			boolean supportsInbandRegistration, String version,
 			String offeredPortlets,	String producerProfileMap,
 			String registrationProperties, String registrationValidatorClass)
-		throws PortalException,	SystemException {
+		throws SystemException {
 
 		long configuredProducerId = counterLocalService.increment();
 
 		WSRPProducer producer =	wsrpProducerPersistence.create(
-				configuredProducerId);
+			configuredProducerId);
 
 		producer.setPortalId(portalId);
 		producer.setStatus(status);
@@ -67,19 +66,18 @@ public class WSRPProducerLocalServiceImpl
 		producer.setRegistrationValidatorClass(registrationValidatorClass);
 
 		wsrpProducerPersistence.update(producer, false);
-
 	}
 
-	public WSRPProducer getProducerByKey(String producerKey)
-			throws NoSuchProducerException, SystemException {
+	public WSRPProducer getProducer(String instanceName)
+		throws PortalException, SystemException {
 
-		return wsrpProducerPersistence.findByInstanceName(producerKey);
+		return wsrpProducerPersistence.findByInstanceName(instanceName);
 	}
 
-	public List<WSRPProducer> getProducersByNamespace(
-			String portalId, String namespace) throws SystemException {
+	public List<WSRPProducer> getProducers(String portalId, String namespace)
+		throws SystemException {
 
-		return wsrpProducerPersistence.findByNamespace(namespace);
+		return wsrpProducerPersistence.findByP_N(portalId, namespace);
 	}
 
 }

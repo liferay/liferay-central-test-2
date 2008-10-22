@@ -83,32 +83,33 @@ public interface WSRPProducerPersistence {
 		java.lang.String instanceName)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.wsrp.model.WSRPProducer> findByNamespace(
-		java.lang.String namespace) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.wsrp.model.WSRPProducer> findByNamespace(
-		java.lang.String namespace, int start, int end)
+	public java.util.List<com.liferay.wsrp.model.WSRPProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.wsrp.model.WSRPProducer> findByNamespace(
-		java.lang.String namespace, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.wsrp.model.WSRPProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.wsrp.model.WSRPProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.wsrp.model.WSRPProducer findByNamespace_First(
-		java.lang.String namespace,
+	public com.liferay.wsrp.model.WSRPProducer findByP_N_First(
+		java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException;
 
-	public com.liferay.wsrp.model.WSRPProducer findByNamespace_Last(
-		java.lang.String namespace,
+	public com.liferay.wsrp.model.WSRPProducer findByP_N_Last(
+		java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException;
 
-	public com.liferay.wsrp.model.WSRPProducer[] findByNamespace_PrevAndNext(
-		long producerId, java.lang.String namespace,
+	public com.liferay.wsrp.model.WSRPProducer[] findByP_N_PrevAndNext(
+		long producerId, java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException;
@@ -135,15 +136,15 @@ public interface WSRPProducerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException;
 
-	public void removeByNamespace(java.lang.String namespace)
-		throws com.liferay.portal.SystemException;
+	public void removeByP_N(java.lang.String portalId,
+		java.lang.String namespace) throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByInstanceName(java.lang.String instanceName)
 		throws com.liferay.portal.SystemException;
 
-	public int countByNamespace(java.lang.String namespace)
+	public int countByP_N(java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

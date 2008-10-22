@@ -70,6 +70,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.portlet.PortletPreferences;
@@ -311,7 +312,9 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		return null;
 	}
 
-	public Map getPortletResourceMap(String portletName) {
+	public Map<String, ResourceBundle> getPortletResourceMap(
+		String portletName) {
+
 		return null;
 	}
 

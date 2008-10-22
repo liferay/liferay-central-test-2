@@ -25,8 +25,8 @@ package com.liferay.wsrp;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="NoSuchConsumerRegistrationException.java.html">
- * <b><i>View Source</i></b></a>
+ * <a href="NoSuchConsumerRegistrationException.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *

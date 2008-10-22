@@ -92,15 +92,14 @@ public interface WSRPProducerLocalService {
 		java.lang.String producerProfileMap,
 		java.lang.String registrationProperties,
 		java.lang.String registrationValidatorClass)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.wsrp.model.WSRPProducer getProducer(
+		java.lang.String instanceName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.wsrp.model.WSRPProducer getProducerByKey(
-		java.lang.String producerKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.wsrp.NoSuchProducerException;
-
-	public java.util.List<com.liferay.wsrp.model.WSRPProducer> getProducersByNamespace(
+	public java.util.List<com.liferay.wsrp.model.WSRPProducer> getProducers(
 		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException;
 }

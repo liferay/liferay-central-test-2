@@ -96,9 +96,7 @@ public interface WSRPConfiguredProducerLocalService {
 		java.lang.String userCategoryMapping,
 		java.lang.String customUserProfile,
 		java.lang.String identityPropagationType, long sdLastModified,
-		int entityVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		int entityVersion) throws com.liferay.portal.SystemException;
 
 	public com.liferay.wsrp.model.WSRPConfiguredProducer getConfiguredProducer(
 		long configuredProducer)

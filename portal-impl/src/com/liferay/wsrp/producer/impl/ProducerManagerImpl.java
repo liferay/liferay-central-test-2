@@ -41,8 +41,6 @@
 
 package com.liferay.wsrp.producer.impl;
 
-import com.liferay.portal.SystemException;
-import com.liferay.wsrp.NoSuchProducerException;
 import com.liferay.wsrp.model.WSRPProducer;
 import com.liferay.wsrp.service.WSRPProducerLocalServiceUtil;
 
@@ -50,6 +48,7 @@ import com.sun.portal.wsrp.common.stubs.v2.ModelDescription;
 import com.sun.portal.wsrp.producer.Producer;
 import com.sun.portal.wsrp.producer.ProducerException;
 import com.sun.portal.wsrp.producer.ProducerManager;
+import com.sun.portal.wsrp.producer.registration.validator.impl.DefaultRegistrationValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,7 @@ import java.util.List;
  */
 public class ProducerManagerImpl implements ProducerManager {
 
-	public ProducerManagerImpl(String portalId){
+	public ProducerManagerImpl(String portalId) {
 		_portalId = portalId;
 	}
 
@@ -74,49 +73,51 @@ public class ProducerManagerImpl implements ProducerManager {
 
 		try {
 			WSRPProducerLocalServiceUtil.addProducer(
-				_portalId, true, namespace, instanceName,
-				requiresRegistration, supportsInBandRegistration, version,
-				null, null, null, _DEFAULT_REGISTRATION_VALIDATOR);
+				_portalId, true, namespace, instanceName, requiresRegistration,
+				supportsInBandRegistration, version, null, null, null,
+				_DEFAULT_REGISTRATION_VALIDATOR);
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
 		}
 	}
 
-	public boolean areAllProducersDisabled() throws ProducerException {
-		//TODO: Global data
+	public boolean areAllProducersDisabled() {
 		return false;
 	}
 
 	public List<Producer> getAllProducers(String namespace)
 		throws ProducerException {
 
-		List<Producer> producerImpls = new ArrayList<Producer>();
+		List<Producer> producers = new ArrayList<Producer>();
 
 		if (namespace == null) {
 			namespace = _DEFAULT_NAMESPACE;
 		}
 
 		try {
-			List<WSRPProducer> producers =
-				WSRPProducerLocalServiceUtil.getProducersByNamespace(
-				_portalId, namespace);
+			List<WSRPProducer> producerModels =
+				WSRPProducerLocalServiceUtil.getProducers(_portalId, namespace);
 
-			for (WSRPProducer producer : producers) {
-				producerImpls.add(new ProducerImpl(producer));
+			for (WSRPProducer producerModel : producerModels) {
+				Producer producer = new ProducerImpl(producerModel);
+
+				producers.add(producer);
 			}
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
 		}
 
-		return producerImpls;
+		return producers;
 	}
 
 	public Producer getProducer(String producerKey) throws ProducerException {
 		try {
-			WSRPProducer producer = _fetchWSRPProducer(producerKey);
-			return new ProducerImpl(producer);
+			WSRPProducer producerModel =
+				WSRPProducerLocalServiceUtil.getProducer(producerKey);
+
+			return new ProducerImpl(producerModel);
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
@@ -133,29 +134,28 @@ public class ProducerManagerImpl implements ProducerManager {
 		throws ProducerException {
 
 		try {
-			for (int i = 0; i < instanceNames.length; i++) {
-				WSRPProducer producer = _fetchWSRPProducer(instanceNames[i]);
-				WSRPProducerLocalServiceUtil.deleteWSRPProducer(producer);
+			for (String instanceName : instanceNames) {
+				WSRPProducer producerModel =
+					WSRPProducerLocalServiceUtil.getProducer(instanceName);
+
+				WSRPProducerLocalServiceUtil.deleteWSRPProducer(producerModel);
 			}
 		}
-		catch(Exception e){
+		catch (Exception e) {
 			throw new ProducerException(e);
 		}
 	}
 
-	public void setAllProducersDisabled(boolean value)
-			throws ProducerException {
-
-		//TODO: Global data
+	public void setAllProducersDisabled(boolean value) {
 	}
 
 	public void updateProducer(Producer producer) throws ProducerException {
-
 		if (producer instanceof ProducerImpl) {
-			WSRPProducer wsrpProducer = ((ProducerImpl)producer).getModel();
+			WSRPProducer producerModel =
+				((ProducerImpl)producer).getProducerModel();
 
 			try {
-				WSRPProducerLocalServiceUtil.updateWSRPProducer(wsrpProducer);
+				WSRPProducerLocalServiceUtil.updateWSRPProducer(producerModel);
 			}
 			catch (Exception e) {
 				throw new ProducerException(e.getMessage());
@@ -163,20 +163,11 @@ public class ProducerManagerImpl implements ProducerManager {
 		}
 	}
 
-	private WSRPProducer _fetchWSRPProducer(String key)
-		throws SystemException, NoSuchProducerException {
+	private static final String _DEFAULT_NAMESPACE = "defaultNamespace";
 
-		WSRPProducer producer =
-			WSRPProducerLocalServiceUtil.getProducerByKey(key);
-
-		return producer;
-	}
-
-	private static final String _DEFAULT_NAMESPACE = "dummyNamespace";
 	private static final String _DEFAULT_REGISTRATION_VALIDATOR =
-		"com.sun.portal.wsrp.producer." +
-			"registration.validator.impl.DefaultRegistrationValidator";
+		DefaultRegistrationValidator.class.getName();
 
-	private String _portalId = null;
+	private String _portalId;
 
 }

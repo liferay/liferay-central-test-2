@@ -104,47 +104,48 @@ public class WSRPProducerUtil {
 		return getPersistence().fetchByInstanceName(instanceName);
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> findByNamespace(
-		java.lang.String namespace) throws com.liferay.portal.SystemException {
-		return getPersistence().findByNamespace(namespace);
-	}
-
-	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> findByNamespace(
-		java.lang.String namespace, int start, int end)
+	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByNamespace(namespace, start, end);
+		return getPersistence().findByP_N(portalId, namespace);
 	}
 
-	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> findByNamespace(
-		java.lang.String namespace, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByP_N(portalId, namespace, start, end);
+	}
+
+	public static java.util.List<com.liferay.wsrp.model.WSRPProducer> findByP_N(
+		java.lang.String portalId, java.lang.String namespace, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByNamespace(namespace, start, end, obc);
+		return getPersistence().findByP_N(portalId, namespace, start, end, obc);
 	}
 
-	public static com.liferay.wsrp.model.WSRPProducer findByNamespace_First(
-		java.lang.String namespace,
+	public static com.liferay.wsrp.model.WSRPProducer findByP_N_First(
+		java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException {
-		return getPersistence().findByNamespace_First(namespace, obc);
+		return getPersistence().findByP_N_First(portalId, namespace, obc);
 	}
 
-	public static com.liferay.wsrp.model.WSRPProducer findByNamespace_Last(
-		java.lang.String namespace,
+	public static com.liferay.wsrp.model.WSRPProducer findByP_N_Last(
+		java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException {
-		return getPersistence().findByNamespace_Last(namespace, obc);
+		return getPersistence().findByP_N_Last(portalId, namespace, obc);
 	}
 
-	public static com.liferay.wsrp.model.WSRPProducer[] findByNamespace_PrevAndNext(
-		long producerId, java.lang.String namespace,
+	public static com.liferay.wsrp.model.WSRPProducer[] findByP_N_PrevAndNext(
+		long producerId, java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchProducerException {
 		return getPersistence()
-				   .findByNamespace_PrevAndNext(producerId, namespace, obc);
+				   .findByP_N_PrevAndNext(producerId, portalId, namespace, obc);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(
@@ -181,9 +182,9 @@ public class WSRPProducerUtil {
 		getPersistence().removeByInstanceName(instanceName);
 	}
 
-	public static void removeByNamespace(java.lang.String namespace)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByNamespace(namespace);
+	public static void removeByP_N(java.lang.String portalId,
+		java.lang.String namespace) throws com.liferay.portal.SystemException {
+		getPersistence().removeByP_N(portalId, namespace);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -195,9 +196,9 @@ public class WSRPProducerUtil {
 		return getPersistence().countByInstanceName(instanceName);
 	}
 
-	public static int countByNamespace(java.lang.String namespace)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByNamespace(namespace);
+	public static int countByP_N(java.lang.String portalId,
+		java.lang.String namespace) throws com.liferay.portal.SystemException {
+		return getPersistence().countByP_N(portalId, namespace);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

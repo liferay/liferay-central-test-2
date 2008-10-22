@@ -25,8 +25,8 @@ package com.liferay.wsrp.model.impl;
 import com.liferay.wsrp.model.WSRPConsumerRegistration;
 
 /**
- * <a href="WSRPConsumerRegistrationImpl.java.html">
- * <b><i>View Source</i></b></a>
+ * <a href="WSRPConsumerRegistrationImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -34,6 +34,8 @@ import com.liferay.wsrp.model.WSRPConsumerRegistration;
 public class WSRPConsumerRegistrationImpl
 	extends WSRPConsumerRegistrationModelImpl
 	implements WSRPConsumerRegistration {
+
 	public WSRPConsumerRegistrationImpl() {
 	}
+
 }

@@ -45,7 +45,7 @@
 
 		<!-- Other fields -->
 
-		<column name="consumerName" type="String" />		
+		<column name="consumerName" type="String" />
 		<column name="status" type="boolean" />
 		<column name="registrationHandle" type="String" />
 		<column name="consumerAgent" type="String" />
@@ -63,7 +63,6 @@
 		<finder name="ProducerKey" return-type="Collection">
 			<finder-column name="producerKey" />
 		</finder>
-
 		<finder name="R_P" return-type="WSRPConsumerRegistration">
 			<finder-column name="registrationHandle" />
 			<finder-column name="producerKey" />
@@ -72,7 +71,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-	</entity>	
+	</entity>
 	<entity name="WSRPPortlet" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -135,13 +134,13 @@
 		<finder name="InstanceName" return-type="WSRPProducer">
 			<finder-column name="instanceName" />
 		</finder>
-
-		<finder name="Namespace" return-type="Collection">
+		<finder name="P_N" return-type="Collection">
+			<finder-column name="portalId" />
 			<finder-column name="namespace" />
 		</finder>
 
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-	</entity>	
+	</entity>
 </service-builder>

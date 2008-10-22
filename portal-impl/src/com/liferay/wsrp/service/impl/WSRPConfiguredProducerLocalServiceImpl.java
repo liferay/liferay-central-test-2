@@ -47,7 +47,7 @@ public class WSRPConfiguredProducerLocalServiceImpl
 			String serviceDescription, String userCategoryMapping,
 			String customUserProfile, String identityPropagationType,
 			long sdLastModified, int entityVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long configuredProducerId = counterLocalService.increment();
 

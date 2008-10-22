@@ -366,13 +366,15 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<WSRPProducer> findByNamespace(String namespace)
+	public List<WSRPProducer> findByP_N(String portalId, String namespace)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WSRPProducerModelImpl.CACHE_ENABLED;
 		String finderClassName = WSRPProducer.class.getName();
-		String finderMethodName = "findByNamespace";
-		String[] finderParams = new String[] { String.class.getName() };
-		Object[] finderArgs = new Object[] { namespace };
+		String finderMethodName = "findByP_N";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { portalId, namespace };
 
 		Object result = null;
 
@@ -391,6 +393,15 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 
 				query.append("FROM com.liferay.wsrp.model.WSRPProducer WHERE ");
 
+				if (portalId == null) {
+					query.append("portalId IS NULL");
+				}
+				else {
+					query.append("portalId = ?");
+				}
+
+				query.append(" AND ");
+
 				if (namespace == null) {
 					query.append("namespace IS NULL");
 				}
@@ -403,6 +414,10 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (portalId != null) {
+					qPos.add(portalId);
+				}
 
 				if (namespace != null) {
 					qPos.add(namespace);
@@ -428,23 +443,25 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<WSRPProducer> findByNamespace(String namespace, int start,
-		int end) throws SystemException {
-		return findByNamespace(namespace, start, end, null);
+	public List<WSRPProducer> findByP_N(String portalId, String namespace,
+		int start, int end) throws SystemException {
+		return findByP_N(portalId, namespace, start, end, null);
 	}
 
-	public List<WSRPProducer> findByNamespace(String namespace, int start,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<WSRPProducer> findByP_N(String portalId, String namespace,
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WSRPProducerModelImpl.CACHE_ENABLED;
 		String finderClassName = WSRPProducer.class.getName();
-		String finderMethodName = "findByNamespace";
+		String finderMethodName = "findByP_N";
 		String[] finderParams = new String[] {
-				String.class.getName(),
+				String.class.getName(), String.class.getName(),
 				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
+				portalId,
+				
 				namespace,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
@@ -467,6 +484,15 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 
 				query.append("FROM com.liferay.wsrp.model.WSRPProducer WHERE ");
 
+				if (portalId == null) {
+					query.append("portalId IS NULL");
+				}
+				else {
+					query.append("portalId = ?");
+				}
+
+				query.append(" AND ");
+
 				if (namespace == null) {
 					query.append("namespace IS NULL");
 				}
@@ -484,6 +510,10 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (portalId != null) {
+					qPos.add(portalId);
+				}
 
 				if (namespace != null) {
 					qPos.add(namespace);
@@ -510,15 +540,18 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WSRPProducer findByNamespace_First(String namespace,
+	public WSRPProducer findByP_N_First(String portalId, String namespace,
 		OrderByComparator obc) throws NoSuchProducerException, SystemException {
-		List<WSRPProducer> list = findByNamespace(namespace, 0, 1, obc);
+		List<WSRPProducer> list = findByP_N(portalId, namespace, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WSRPProducer exists with the key {");
 
+			msg.append("portalId=" + portalId);
+
+			msg.append(", ");
 			msg.append("namespace=" + namespace);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -530,18 +563,21 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WSRPProducer findByNamespace_Last(String namespace,
+	public WSRPProducer findByP_N_Last(String portalId, String namespace,
 		OrderByComparator obc) throws NoSuchProducerException, SystemException {
-		int count = countByNamespace(namespace);
+		int count = countByP_N(portalId, namespace);
 
-		List<WSRPProducer> list = findByNamespace(namespace, count - 1, count,
-				obc);
+		List<WSRPProducer> list = findByP_N(portalId, namespace, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WSRPProducer exists with the key {");
 
+			msg.append("portalId=" + portalId);
+
+			msg.append(", ");
 			msg.append("namespace=" + namespace);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -553,12 +589,12 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WSRPProducer[] findByNamespace_PrevAndNext(long producerId,
-		String namespace, OrderByComparator obc)
+	public WSRPProducer[] findByP_N_PrevAndNext(long producerId,
+		String portalId, String namespace, OrderByComparator obc)
 		throws NoSuchProducerException, SystemException {
 		WSRPProducer wsrpProducer = findByPrimaryKey(producerId);
 
-		int count = countByNamespace(namespace);
+		int count = countByP_N(portalId, namespace);
 
 		Session session = null;
 
@@ -568,6 +604,15 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.wsrp.model.WSRPProducer WHERE ");
+
+			if (portalId == null) {
+				query.append("portalId IS NULL");
+			}
+			else {
+				query.append("portalId = ?");
+			}
+
+			query.append(" AND ");
 
 			if (namespace == null) {
 				query.append("namespace IS NULL");
@@ -586,6 +631,10 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 			Query q = session.createQuery(query.toString());
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (portalId != null) {
+				qPos.add(portalId);
+			}
 
 			if (namespace != null) {
 				qPos.add(namespace);
@@ -728,8 +777,9 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		remove(wsrpProducer);
 	}
 
-	public void removeByNamespace(String namespace) throws SystemException {
-		for (WSRPProducer wsrpProducer : findByNamespace(namespace)) {
+	public void removeByP_N(String portalId, String namespace)
+		throws SystemException {
+		for (WSRPProducer wsrpProducer : findByP_N(portalId, namespace)) {
 			remove(wsrpProducer);
 		}
 	}
@@ -813,12 +863,15 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByNamespace(String namespace) throws SystemException {
+	public int countByP_N(String portalId, String namespace)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = WSRPProducerModelImpl.CACHE_ENABLED;
 		String finderClassName = WSRPProducer.class.getName();
-		String finderMethodName = "countByNamespace";
-		String[] finderParams = new String[] { String.class.getName() };
-		Object[] finderArgs = new Object[] { namespace };
+		String finderMethodName = "countByP_N";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { portalId, namespace };
 
 		Object result = null;
 
@@ -838,6 +891,15 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.wsrp.model.WSRPProducer WHERE ");
 
+				if (portalId == null) {
+					query.append("portalId IS NULL");
+				}
+				else {
+					query.append("portalId = ?");
+				}
+
+				query.append(" AND ");
+
 				if (namespace == null) {
 					query.append("namespace IS NULL");
 				}
@@ -850,6 +912,10 @@ public class WSRPProducerPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (portalId != null) {
+					qPos.add(portalId);
+				}
 
 				if (namespace != null) {
 					qPos.add(namespace);

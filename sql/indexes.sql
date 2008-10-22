@@ -476,7 +476,7 @@ create index IX_806BDBCA on WSRPPortlet (producerEntityId);
 create index IX_80290BE8 on WSRPPortlet (producerEntityId, portletHandle);
 
 create index IX_60638BC6 on WSRPProducer (instanceName);
-create index IX_CEF9DA79 on WSRPProducer (namespace);
+create index IX_5A0B5E3E on WSRPProducer (portalId, namespace);
 
 create index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 
