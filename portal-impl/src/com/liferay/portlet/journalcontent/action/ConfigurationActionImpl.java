@@ -64,6 +64,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "templateId").toUpperCase();
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			actionRequest, "showAvailableLocales");
+		String[] extensions = actionRequest.getParameterValues("extensions");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 		boolean enableComments = ParamUtil.getBoolean(
@@ -83,6 +84,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue("template-id", templateId);
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
+		preferences.setValues("extensions", extensions);
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(

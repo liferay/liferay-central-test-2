@@ -132,7 +132,15 @@ public class JournalContentUtil {
 		ThemeDisplay themeDisplay) {
 
 		return getDisplay(
-			groupId, articleId, null, languageId, themeDisplay, 1, null);
+			groupId, articleId, languageId, themeDisplay, 1);
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String languageId,
+		ThemeDisplay themeDisplay, int page) {
+
+		return getDisplay(
+			groupId, articleId, null, languageId, themeDisplay, page, null);
 	}
 
 	public static JournalArticleDisplay getDisplay(

@@ -74,10 +74,10 @@ public class DocumentConversionUtil {
 		return _instance._getConversions(extension);
 	}
 
-	public static String getTempFileId(long fileEntryId, double version) {
+	public static String getTempFileId(long id, double version) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(fileEntryId);
+		sb.append(id);
 		sb.append(StringPool.PERIOD);
 		sb.append(version);
 

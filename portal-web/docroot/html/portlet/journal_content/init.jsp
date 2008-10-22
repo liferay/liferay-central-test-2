@@ -24,6 +24,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
@@ -58,6 +59,12 @@ boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
+
+String[] conversions = DocumentConversionUtil.getConversions("html");
+String[] extensions = preferences.getValues("extensions", new String[] {});
+
+boolean openOfficeServerEnabled = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED);
+boolean enableConversions = openOfficeServerEnabled && (extensions != null && extensions.length > 0);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

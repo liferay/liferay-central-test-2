@@ -156,6 +156,36 @@ type = ParamUtil.getString(request, "type", type);
 	</tr>
 	<tr>
 		<td>
+			<liferay-ui:message key="convert-to" />
+			
+			<c:if test="<%= !openOfficeServerEnabled %>">
+				<liferay-ui:icon-help message="enabling-openoffice-integration-provides-document-conversion-functionality" />
+			</c:if>
+		</td>
+		<td>
+			<table class="lfr-table">
+			<tr valign="middle">
+
+				<%
+				for (String conversion : conversions) {
+				%>
+					<td>
+						<input type="checkbox" <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> name="<portlet:namespace />extensions" value="<%= conversion %>" <%= !openOfficeServerEnabled ? "disabled" : "" %> onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+					</td>
+					<td>
+						<%= conversion.toUpperCase() %>
+					</td>
+
+				<%
+				}
+				%>
+
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>

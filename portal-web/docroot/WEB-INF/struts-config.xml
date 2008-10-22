@@ -1020,6 +1020,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.journal_content.error" />
 		</action>
 
+		<action path="/journal_content/export_article" type="com.liferay.portlet.journalcontent.action.ExportArticleAction" />
+
 		<action path="/journal_content/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/journal_content/update_article_field" type="com.liferay.portlet.journalcontent.action.UpdateArticleFieldAction" />
