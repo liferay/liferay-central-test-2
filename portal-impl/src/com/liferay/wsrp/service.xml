@@ -37,6 +37,42 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="WSRPConsumerRegistration" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="consumerRegistrationId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="consumerName" type="String" />		
+		<column name="status" type="boolean" />
+		<column name="registrationHandle" type="String" />
+		<column name="consumerAgent" type="String" />
+		<column name="methodGetSupported" type="boolean" />
+		<column name="consumerModes" type="String" />
+		<column name="consumerWindowStates" type="String" />
+		<column name="consumerUserScopes" type="String" />
+		<column name="customUserProfileData" type="String" />
+		<column name="registrationProperties" type="String" />
+		<column name="lifetimeTerminationTime" type="String" />
+		<column name="producerKey" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="ProducerKey" return-type="Collection">
+			<finder-column name="producerKey" />
+		</finder>
+
+		<finder name="R_P" return-type="WSRPConsumerRegistration">
+			<finder-column name="registrationHandle" />
+			<finder-column name="producerKey" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>	
 	<entity name="WSRPPortlet" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -74,4 +110,38 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="WSRPProducer" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="producerId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="portalId" type="String" />
+		<column name="status" type="boolean" />
+		<column name="namespace" type="String" />
+		<column name="instanceName" type="String" />
+		<column name="requiresRegistration" type="boolean" />
+		<column name="supportsInbandRegistration" type="boolean" />
+		<column name="version" type="String" />
+		<column name="offeredPortlets" type="String" />
+		<column name="producerProfileMap" type="String" />
+		<column name="registrationProperties" type="String" />
+		<column name="registrationValidatorClass" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="InstanceName" return-type="WSRPProducer">
+			<finder-column name="instanceName" />
+		</finder>
+
+		<finder name="Namespace" return-type="Collection">
+			<finder-column name="namespace" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>	
 </service-builder>

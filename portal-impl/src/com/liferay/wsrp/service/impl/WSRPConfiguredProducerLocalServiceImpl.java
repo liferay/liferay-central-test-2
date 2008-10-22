@@ -34,6 +34,7 @@ import java.util.List;
  * </i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Manish Gupta
  *
  */
 public class WSRPConfiguredProducerLocalServiceImpl
