@@ -35,14 +35,14 @@ import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleLocalServiceAspect.java.html"><b><i>View Source</i>
+ * <a href="JournalArticleLocalServiceAdvice.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Joshna Reddy
  * @author Raymond Augé
  *
  */
-public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
+public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
@@ -171,7 +171,7 @@ public class JournalArticleLocalServiceAspect extends BaseMirageAspect {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(JournalArticleLocalServiceAspect.class);
+		LogFactory.getLog(JournalArticleLocalServiceAdvice.class);
 
 	private boolean _outputVOError;
 

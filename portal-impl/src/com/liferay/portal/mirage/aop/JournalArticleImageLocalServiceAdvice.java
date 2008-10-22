@@ -44,44 +44,50 @@ package com.liferay.portal.mirage.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleResourceLocalServiceAspect.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="JournalArticleImageLocalServiceAdvice.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Karthik Sudarshan
  *
  */
-public class JournalArticleResourceLocalServiceAspect extends BaseMirageAspect {
+public class JournalArticleImageLocalServiceAdvice extends BaseMirageAdvice {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
-		if (methodName.equals("deleteArticleResource") ||
-			methodName.equals("getArticleResource") ||
-			methodName.equals("getArticleResourcePrimKey") ||
-			methodName.equals("getArticleResources")) {
+		if (methodName.equals("addArticleImageId") ||
+			methodName.equals("deleteArticleImage") ||
+			methodName.equals("deleteImages") ||
+			methodName.equals("getArticleImage") ||
+			methodName.equals("getArticleImageId") ||
+			methodName.equals("getArticleImages")) {
 
-			ArticleResourceInvoker articleResourceInvoker =
-				new ArticleResourceInvoker(proceedingJoinPoint);
+			ArticleImageInvoker articleImageInvoker = new ArticleImageInvoker(
+				proceedingJoinPoint);
 
-			if (methodName.equals("deleteArticleResource")) {
-				articleResourceService.deleteBinaryContent(
-					articleResourceInvoker, null);
+			if (methodName.equals("addArticleImageId")) {
+				articleImageService.createBinaryContent(articleImageInvoker);
 			}
-			else if (methodName.equals("getArticleResource")) {
-				articleResourceService.getBinaryContent(articleResourceInvoker);
+			else if (methodName.equals("deleteArticleImage")) {
+				articleImageService.deleteBinaryContent(
+					articleImageInvoker, null);
 			}
-			else if (methodName.equals("getArticleResourcePrimKey")) {
-				articleResourceService.getBinaryContentId(
-					articleResourceInvoker);
+			else if (methodName.equals("deleteImages")) {
+				articleImageService.deleteBinaryContents(articleImageInvoker);
 			}
-			else if (methodName.equals("getArticleResources")) {
-				articleResourceService.getBinaryContents(
-					articleResourceInvoker);
+			else if (methodName.equals("getArticleImage")) {
+				articleImageService.getBinaryContent(articleImageInvoker);
+			}
+			else if (methodName.equals("getArticleImageId")) {
+				articleImageService.getBinaryContentId(articleImageInvoker);
+			}
+			else if (methodName.equals("getArticleImages")) {
+				articleImageService.getBinaryContents(articleImageInvoker);
 			}
 
-			return articleResourceInvoker.getReturnValue();
+			return articleImageInvoker.getReturnValue();
 		}
 		else {
 			return proceedingJoinPoint.proceed();

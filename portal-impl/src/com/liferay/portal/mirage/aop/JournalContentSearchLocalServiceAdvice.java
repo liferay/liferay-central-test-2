@@ -39,58 +39,60 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.spring.aop;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package com.liferay.portal.mirage.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="LogAspect.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalContentSearchLocalServiceAdvice.java.html"><b><i>View Source
+ * </i></b></a>
  *
- * @author Karthik Sudarshan
- * @author Brian Wing Shun Chan
- * @author Michael Young
+ * @author Prakash Reddy
  *
  */
-public class LogAspect {
+public class JournalContentSearchLocalServiceAdvice extends BaseMirageAdvice {
 
-	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String typeName = proceedingJoinPoint.getTarget().getClass().getName();
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
-		Log log = getLog(typeName);
+		if (methodName.equals("checkContentSearches") ||
+			methodName.equals("deleteArticleContentSearch") ||
+			methodName.equals("deleteArticleContentSearches") ||
+			methodName.equals("deleteLayoutContentSearches") ||
+			methodName.equals("deleteOwnerContentSearches") ||
+			methodName.equals("getArticleContentSearches") ||
+			methodName.equals("updateContentSearch")) {
 
-		if (log.isInfoEnabled()) {
-			log.info("Before " + typeName);
+			ContentSearchInvoker contentSearchInvoker =
+				new ContentSearchInvoker(proceedingJoinPoint);
+
+			if (methodName.equals("checkContentSearches")) {
+				contentSearchService.createBinaryContent(contentSearchInvoker);
+			}
+			else if (methodName.equals("deleteArticleContentSearch")) {
+				contentSearchService.deleteBinaryContent(
+					contentSearchInvoker, null);
+			}
+			else if (methodName.equals("deleteArticleContentSearches") ||
+					methodName.equals("deleteLayoutContentSearches") ||
+					methodName.equals("deleteOwnerContentSearches")) {
+
+				contentSearchService.deleteBinaryContents(contentSearchInvoker);
+			}
+			else if (methodName.equals("getArticleContentSearches")) {
+				contentSearchService.getBinaryContents(contentSearchInvoker);
+			}
+			else if (methodName.equals("updateContentSearch")) {
+				contentSearchService.updateBinaryContent(contentSearchInvoker);
+			}
+
+			return contentSearchInvoker.getReturnValue();
 		}
-
-		Object returnVal = proceedingJoinPoint.proceed();
-
-		if (log.isInfoEnabled()) {
-			log.info("After " + typeName);
+		else {
+			return proceedingJoinPoint.proceed();
 		}
-
-		return returnVal;
 	}
-
-	protected Log getLog(String typeName) {
-		Log log = _logs.get(typeName);
-
-		if (log == null) {
-			log = LogFactory.getLog(typeName);
-
-			_logs.put(typeName, log);
-		}
-
-		return log;
-	}
-
-	private static Map<String, Log> _logs = new HashMap<String, Log>();
 
 }

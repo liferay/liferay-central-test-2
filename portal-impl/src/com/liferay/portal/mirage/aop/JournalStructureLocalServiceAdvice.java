@@ -44,13 +44,13 @@ package com.liferay.portal.mirage.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalStructureLocalServiceAspect.java.html"><b><i>View Source</i>
+ * <a href="JournalStructureLocalServiceAdvice.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Prakash Reddy
  *
  */
-public class JournalStructureLocalServiceAspect extends BaseMirageAspect {
+public class JournalStructureLocalServiceAdvice extends BaseMirageAdvice {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {

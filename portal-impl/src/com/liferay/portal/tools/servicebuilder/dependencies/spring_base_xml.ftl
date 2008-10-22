@@ -33,7 +33,7 @@
 	</tx:advice>
 	<bean id="portletBeanFactoryPostProcessor" class="com.liferay.portal.spring.context.PortletBeanFactoryPostProcessor" />
 	<bean id="portletClassLoader" class="com.liferay.portal.kernel.portlet.PortletClassLoaderUtil" factory-method="getClassLoader" />
-	<bean id="logAspect" class="com.liferay.portal.spring.aop.LogAspect" />
+	<bean id="logAdvice" class="com.liferay.portal.spring.aop.LogAdvice" />
 	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
 		<property name="classLoader" ref="portletClassLoader" />
 		<property name="exceptionSafe" value="true" />

@@ -38,7 +38,7 @@
 			<tx:method name="*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
   		</tx:attributes>
 	</tx:advice>
-	<bean id="logAspect" class="com.liferay.portal.spring.aop.LogAspect" />
+	<bean id="logAdvice" class="com.liferay.portal.spring.aop.LogAdvice" />
 	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
 		<property name="exceptionSafe" value="true" />
 	</bean>

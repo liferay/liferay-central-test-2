@@ -44,78 +44,44 @@ package com.liferay.portal.mirage.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalTemplateLocalServiceAspect.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="JournalArticleResourceLocalServiceAdvice.java.html"><b><i>View
+ * Source</i></b></a>
  *
- * @author Prakash Reddy
+ * @author Karthik Sudarshan
  *
  */
-public class JournalTemplateLocalServiceAspect extends BaseMirageAspect {
+public class JournalArticleResourceLocalServiceAdvice extends BaseMirageAdvice {
 
 	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
-		if (methodName.equals("addTemplate") ||
-			methodName.equals("addTemplateToGroup") ||
-			methodName.equals("deleteTemplate") ||
-			methodName.equals("deleteTemplates") ||
-			methodName.equals("getTemplate") ||
-			methodName.equals("getTemplateBySmallImageId") ||
-			methodName.equals("updateTemplate")) {
+		if (methodName.equals("deleteArticleResource") ||
+			methodName.equals("getArticleResource") ||
+			methodName.equals("getArticleResourcePrimKey") ||
+			methodName.equals("getArticleResources")) {
 
-			TemplateInvoker templateInvoker = new TemplateInvoker(
-				proceedingJoinPoint);
+			ArticleResourceInvoker articleResourceInvoker =
+				new ArticleResourceInvoker(proceedingJoinPoint);
 
-			if (methodName.equals("addTemplate") ||
-				methodName.equals("addTemplateToGroup")) {
-
-				contentTypeService.addTemplateToContentType(
-					templateInvoker, null);
+			if (methodName.equals("deleteArticleResource")) {
+				articleResourceService.deleteBinaryContent(
+					articleResourceInvoker, null);
 			}
-			else if (methodName.equals("deleteTemplate")) {
-				contentTypeService.deleteTemplateOfContentType(
-					null, templateInvoker);
+			else if (methodName.equals("getArticleResource")) {
+				articleResourceService.getBinaryContent(articleResourceInvoker);
 			}
-			else if (methodName.equals("deleteTemplates")) {
-				contentTypeService.deleteTemplatesOfContentType(
-					null, new TemplateInvoker[] {templateInvoker});
+			else if (methodName.equals("getArticleResourcePrimKey")) {
+				articleResourceService.getBinaryContentId(
+					articleResourceInvoker);
 			}
-			else if (methodName.equals("getTemplate") ||
-					 methodName.equals("getTemplateBySmallImageId")) {
-
-				contentTypeService.getTemplate(templateInvoker, null);
-			}
-			else if (methodName.equals("updateTemplate")) {
-				contentTypeService.updateTemplateOfContentType(
-					templateInvoker, null);
+			else if (methodName.equals("getArticleResources")) {
+				articleResourceService.getBinaryContents(
+					articleResourceInvoker);
 			}
 
-			return templateInvoker.getReturnValue();
-		}
-		else if (methodName.equals("getStructureTemplates") ||
-				 methodName.equals("getTemplates") ||
-				 methodName.equals("getTemplatesCount") ||
-				 methodName.equals("search") ||
-				 methodName.equals("searchCount")) {
-
-			SearchCriteriaInvoker searchCriteriaInvoker =
-				new SearchCriteriaInvoker(proceedingJoinPoint);
-
-			if (methodName.equals("getStructureTemplates") ||
-				methodName.equals("getTemplates") ||
-				methodName.equals("search")) {
-
-				contentTypeService.searchTemplates(searchCriteriaInvoker);
-			}
-			else if (methodName.equals("getTemplatesCount") ||
-					 methodName.equals("searchCount")) {
-
-				contentTypeService.searchTemplatesCount(searchCriteriaInvoker);
-			}
-
-			return searchCriteriaInvoker.getReturnValue();
+			return articleResourceInvoker.getReturnValue();
 		}
 		else {
 			return proceedingJoinPoint.proceed();

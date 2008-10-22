@@ -39,59 +39,58 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.aop;
+package com.liferay.portal.spring.aop;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleImageLocalServiceAspect.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="LogAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class JournalArticleImageLocalServiceAspect extends BaseMirageAspect {
+public class LogAdvice {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
+		String typeName = proceedingJoinPoint.getTarget().getClass().getName();
 
-		if (methodName.equals("addArticleImageId") ||
-			methodName.equals("deleteArticleImage") ||
-			methodName.equals("deleteImages") ||
-			methodName.equals("getArticleImage") ||
-			methodName.equals("getArticleImageId") ||
-			methodName.equals("getArticleImages")) {
+		Log log = getLog(typeName);
 
-			ArticleImageInvoker articleImageInvoker = new ArticleImageInvoker(
-				proceedingJoinPoint);
-
-			if (methodName.equals("addArticleImageId")) {
-				articleImageService.createBinaryContent(articleImageInvoker);
-			}
-			else if (methodName.equals("deleteArticleImage")) {
-				articleImageService.deleteBinaryContent(
-					articleImageInvoker, null);
-			}
-			else if (methodName.equals("deleteImages")) {
-				articleImageService.deleteBinaryContents(articleImageInvoker);
-			}
-			else if (methodName.equals("getArticleImage")) {
-				articleImageService.getBinaryContent(articleImageInvoker);
-			}
-			else if (methodName.equals("getArticleImageId")) {
-				articleImageService.getBinaryContentId(articleImageInvoker);
-			}
-			else if (methodName.equals("getArticleImages")) {
-				articleImageService.getBinaryContents(articleImageInvoker);
-			}
-
-			return articleImageInvoker.getReturnValue();
+		if (log.isInfoEnabled()) {
+			log.info("Before " + typeName);
 		}
-		else {
-			return proceedingJoinPoint.proceed();
+
+		Object returnVal = proceedingJoinPoint.proceed();
+
+		if (log.isInfoEnabled()) {
+			log.info("After " + typeName);
 		}
+
+		return returnVal;
 	}
+
+	protected Log getLog(String typeName) {
+		Log log = _logs.get(typeName);
+
+		if (log == null) {
+			log = LogFactory.getLog(typeName);
+
+			_logs.put(typeName, log);
+		}
+
+		return log;
+	}
+
+	private static Map<String, Log> _logs = new HashMap<String, Log>();
 
 }

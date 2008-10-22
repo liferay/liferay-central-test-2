@@ -33,12 +33,12 @@ import javax.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="BaseMirageAspect.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseMirageAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public abstract class BaseMirageAspect {
+public abstract class BaseMirageAdvice {
 
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {

@@ -13,36 +13,36 @@
 	<bean id="com.liferay.portal.mirage.ContentService" class="com.liferay.portal.mirage.service.ContentServiceImpl" />
 	<bean id="com.liferay.portal.mirage.ContentTypeService" class="com.liferay.portal.mirage.service.ContentTypeServiceImpl" />
 	<bean id="com.liferay.portal.mirage.WorkflowService" class="com.liferay.portal.mirage.service.WorkflowServiceImpl" />
-	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect" />
-	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect" />
-	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect" />
-	<bean id="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAspect" />
-	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" />
-	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" />
-	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAdvice" />
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAdvice" />
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAdvice" />
+	<bean id="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAdvice" />
+	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAdvice" />
+	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAdvice" />
+	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAdvice" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAdvice" />
 	<aop:config>
-		<aop:aspect id="mirageServiceAspect" ref="logAspect">
+		<aop:aspect id="mirageLogAspect" ref="logAdvice">
 			<aop:around pointcut="bean(com.liferay.portal.mirage.*Service)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleLocalService.impl)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleResourceLocalService.impl)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalContentSearchLocalService.impl)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalFeedLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalFeedLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalFeedLocalService.impl)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalStructureLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalStructureLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalStructureLocalService.impl)" method="invoke" />
 		</aop:aspect>
-		<aop:aspect id="com.liferay.portlet.journal.service.JournalTemplateLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect">
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalTemplateLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAdvice">
 			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalTemplateLocalService.impl)" method="invoke" />
 		</aop:aspect>
 	</aop:config>
