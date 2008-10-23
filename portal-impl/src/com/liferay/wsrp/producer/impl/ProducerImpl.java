@@ -88,14 +88,8 @@ public class ProducerImpl extends AbstractProducer {
 			registrationRecord.getConsumerModes());
 		String consumerWindowStates = StringUtil.merge(
 			registrationRecord.getConsumerWindowStates());
-
-		String customUserProfileData = null;
-
-		if (registrationRecord.getCustomUserProfileData() != null) {
-			customUserProfileData = StringUtil.merge(
-				registrationRecord.getCustomUserProfileData());
-		}
-
+		String customUserProfileData = StringUtil.merge(
+			registrationRecord.getCustomUserProfileData());
 		String consumerUserScopes = StringUtil.merge(
 			registrationRecord.getConsumerUserScopes());
 
