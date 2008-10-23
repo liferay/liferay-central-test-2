@@ -517,7 +517,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return true;
 		}
 		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
-				(_endDate.after(modifiedDate))) {
+				 (_endDate.after(modifiedDate))) {
 
 			return true;
 		}
@@ -637,11 +637,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private XStream _xStream;
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
-	private Set<String> _notUniquePerLayout = new HashSet<String>();
 	private Map<String, String[]> _parameterMap;
 	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
 		new HashMap<String, List<RatingsEntry>>();
 	private Map<String, String[]> _tagsEntriesMap =
 		new HashMap<String, String[]>();
+	private Set<String> _notUniquePerLayout = new HashSet<String>();
 
 }
