@@ -73,7 +73,9 @@ public class CommonPermissionImpl implements CommonPermission {
 				permissionChecker, classPK, actionId);
 		}
 		else {
-			_log.warn("Invalid className: " + className);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Invalid class name " + className);
+			}
 
 			throw new PrincipalException();
 		}
