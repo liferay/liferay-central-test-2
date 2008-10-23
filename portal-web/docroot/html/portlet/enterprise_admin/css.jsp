@@ -275,6 +275,7 @@
 	margin-bottom: 5px;
 	overflow: hidden;
 	padding: 2px;
+	width: 100%;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button a {
