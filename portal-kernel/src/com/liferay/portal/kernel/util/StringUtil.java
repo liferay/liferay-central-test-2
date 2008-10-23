@@ -453,6 +453,10 @@ public class StringUtil {
 	}
 
 	public static String merge(Collection<?> col, String delimiter) {
+		if (col == null) {
+			return null;
+		}
+
 		return merge(col.toArray(new Object[col.size()]), delimiter);
 	}
 
