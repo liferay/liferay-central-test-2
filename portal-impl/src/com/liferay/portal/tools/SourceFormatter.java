@@ -564,7 +564,35 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String _formatJSPContent(String fileName, String content) {
+	private static String _formatJSPContent(String fileName, String content) 
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		BufferedReader br =
+			new BufferedReader(new StringReader(content));
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			if (line.trim().length() == 0) {
+				line = StringPool.BLANK;
+			}
+
+			line = StringUtil.trimTrailing(line);
+
+			sb.append(line);
+			sb.append("\n");
+		}
+
+		br.close();
+
+		content = sb.toString();
+
+		if (content.endsWith("\n")) {
+			content = content.substring(0, content.length() -1);
+		}
+
 		content = _formatTaglibQuotes(fileName, content, StringPool.QUOTE);
 		content = _formatTaglibQuotes(fileName, content, StringPool.APOSTROPHE);
 
@@ -757,8 +785,6 @@ public class SourceFormatter {
 		sb.append("):([^>]|%>)*");
 		sb.append(quoteType);
 		sb.append("<%=[^>]*");
-		sb.append(quoteType);
-		sb.append("[^>]*");
 		sb.append(quoteType);
 		sb.append("[^>]*%>");
 		sb.append(quoteType);
