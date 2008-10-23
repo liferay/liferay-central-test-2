@@ -27,7 +27,7 @@
 <%
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
-long parentOrganizationId = BeanParamUtil.getLong(organization, request, "parentOrganizationSearchContainerPrimaryKeys", (organization != null) ? organization.getParentOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationSearchContainerPrimaryKeys", (organization != null) ? organization.getParentOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
@@ -90,7 +90,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<fieldset class="block-labels">
+<fieldset class="block-labels col">
 	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
 	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -136,7 +136,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 	</c:if>
 </fieldset>
 
-<fieldset class="block-labels">
+<fieldset class="block-labels col">
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
