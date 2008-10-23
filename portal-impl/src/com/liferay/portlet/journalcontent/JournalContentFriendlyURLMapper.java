@@ -52,10 +52,9 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 		WindowState windowState = portletURL.getWindowState();
 
-		if (strutsAction.equals("/journal_content/view") &&
-			(windowState == null ||
-			(windowState != null &&
-			!windowState.equals(LiferayWindowState.EXCLUSIVE)))) {
+		if ((strutsAction.equals("/journal_content/view")) &&
+			((windowState == null) ||
+			 (!windowState.equals(LiferayWindowState.EXCLUSIVE)))) {
 
 			String portletId = portletURL.getPortletId();
 			String groupId = portletURL.getParameter("groupId");
