@@ -40,10 +40,9 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
@@ -67,6 +66,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Daniel Weisser
  * @author Jorge Ferrer
  * @author Alberto Montero
+ * @author Julio Camarero Puras
  *
  */
 public class ViewAction extends PortletAction {
@@ -111,16 +111,24 @@ public class ViewAction extends PortletAction {
 			}
 		}
 
-		List<String> fieldValues = new ArrayList<String>();
+		Map<String,String> fieldsMap = new LinkedHashMap<String,String>();
 
-		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
-			fieldValues.add(actionRequest.getParameter("field" + i));
+		for (int i = 1; true; i++) {
+			String fieldLabel = preferences.getValue(
+				"fieldLabel" + i, StringPool.BLANK);
+
+			if (Validator.isNull(fieldLabel)){
+				break;
+			}
+
+			fieldsMap.put(
+				fieldLabel, actionRequest.getParameter("field" + i));
 		}
 
 		Set<String> validationErrors = null;
 
 		try {
-			validationErrors = validate(fieldValues, preferences);
+			validationErrors = validate(fieldsMap, preferences);
 		}
 		catch (Exception e) {
 			actionRequest.setAttribute(
@@ -137,7 +145,7 @@ public class ViewAction extends PortletAction {
 			boolean fileSuccess = true;
 
 			if (sendAsEmail) {
-				emailSuccess = sendEmail(fieldValues, preferences);
+				emailSuccess = sendEmail(fieldsMap, preferences);
 			}
 
 			if (saveToDatabase) {
@@ -152,11 +160,11 @@ public class ViewAction extends PortletAction {
 				}
 
 				databaseSuccess = saveDatabase(
-					fieldValues, preferences, databaseTableName);
+					fieldsMap, preferences, databaseTableName);
 			}
 
 			if (saveToFile) {
-				fileSuccess = saveFile(fieldValues, preferences, fileName);
+				fileSuccess = saveFile(fieldsMap, fileName);
 			}
 
 			if (emailSuccess && databaseSuccess && fileSuccess) {
@@ -191,32 +199,24 @@ public class ViewAction extends PortletAction {
 			getForward(renderRequest, "portlet.web_form.view"));
 	}
 
-	protected String getMailBody(
-		List<String> fieldValues, PortletPreferences preferences) {
+	protected String getMailBody(Map<String,String> fieldsMap) {
 
 		StringBuilder sb = new StringBuilder();
 
-		Iterator<String> itr = fieldValues.iterator();
+		for (String fieldLabel : fieldsMap.keySet()) {
+			String fieldValue = fieldsMap.get(fieldLabel);
 
-		for (int i = 1; itr.hasNext(); i++) {
-			String fieldValue = itr.next();
-
-			String fieldLabel = preferences.getValue(
-				"fieldLabel" + i, StringPool.BLANK);
-
-			if (Validator.isNotNull(fieldLabel)) {
-				sb.append(fieldLabel);
-				sb.append(" : ");
-				sb.append(fieldValue);
-				sb.append("\n");
-			}
+			sb.append(fieldLabel);
+			sb.append(" : ");
+			sb.append(fieldValue);
+			sb.append("\n");
 		}
 
 		return sb.toString();
 	}
 
 	private boolean saveDatabase(
-			List<String> fieldValues, PortletPreferences preferences,
+			Map<String,String> fieldsMap, PortletPreferences preferences,
 			String databaseTableName)
 		throws Exception {
 
@@ -225,20 +225,14 @@ public class ViewAction extends PortletAction {
 		long classPK = CounterLocalServiceUtil.increment(
 			WebFormUtil.class.getName());
 
-		Iterator<String> itr = fieldValues.iterator();
-
 		try {
-			for (int i = 1; itr.hasNext(); i++) {
-				String fieldValue = itr.next();
 
-				String fieldLabel = preferences.getValue(
-					"fieldLabel" + i, StringPool.BLANK);
+			for (String fieldLabel : fieldsMap.keySet()) {
+				String fieldValue = fieldsMap.get(fieldLabel);
 
-				if (Validator.isNotNull(fieldLabel)) {
-					ExpandoValueLocalServiceUtil.addValue(
+				ExpandoValueLocalServiceUtil.addValue(
 						WebFormUtil.class.getName(), databaseTableName,
 						fieldLabel, classPK, fieldValue);
-				}
 			}
 
 			return true;
@@ -252,8 +246,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected boolean saveFile(
-		List<String> fieldValues, PortletPreferences preferences,
-		String fileName) {
+		Map<String,String> fieldsMap, String fileName) {
 
 		// Save the file as a standard Excel CSV format. Use ; as a delimiter,
 		// quote each entry with double quotes, and escape double quotes in
@@ -261,19 +254,12 @@ public class ViewAction extends PortletAction {
 
 		StringBuilder sb = new StringBuilder();
 
-		Iterator<String> itr = fieldValues.iterator();
+		for (String fieldLabel : fieldsMap.keySet()) {
+			String fieldValue = fieldsMap.get(fieldLabel);
 
-		for (int i = 1; itr.hasNext(); i++) {
-			String fieldValue = itr.next();
-
-			String fieldLabel = preferences.getValue(
-				"fieldLabel" + i, StringPool.BLANK);
-
-			if (Validator.isNotNull(fieldLabel)) {
-				sb.append("\"");
-				sb.append(StringUtil.replace(fieldValue, "\"", "\"\""));
-				sb.append("\";");
-			}
+			sb.append("\"");
+			sb.append(StringUtil.replace(fieldValue, "\"", "\"\""));
+			sb.append("\";");
 		}
 
 		String s = sb.substring(0, sb.length() - 1) + "\n";
@@ -291,7 +277,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected boolean sendEmail(
-		List<String> fieldValues, PortletPreferences preferences) {
+		Map<String,String> fieldsMap, PortletPreferences preferences) {
 
 		try {
 			String subject = preferences.getValue("subject", StringPool.BLANK);
@@ -306,7 +292,7 @@ public class ViewAction extends PortletAction {
 				return false;
 			}
 
-			String body = getMailBody(fieldValues, preferences);
+			String body = getMailBody(fieldsMap);
 
 			InternetAddress fromAddress = new InternetAddress(emailAddress);
 			InternetAddress toAddress = new InternetAddress(emailAddress);
@@ -326,18 +312,19 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected Set<String> validate(
-			List<String> fieldValues, PortletPreferences preferences)
+			Map<String,String> fieldsMap, PortletPreferences preferences)
 		throws Exception {
 
 		Set<String> validationErrors = new HashSet<String>();
 
-		for (int i = 1; i < WebFormUtil.MAX_FIELDS; i++) {
-			String fieldValue = fieldValues.get(i - 1);
-
+		for (int i = 0; i < fieldsMap.size(); i++) {
 			String fieldLabel = preferences.getValue(
-				"fieldLabel" + i, StringPool.BLANK);
+				"fieldLabel" + (i + 1), StringPool.BLANK);
+			String fieldValue = fieldsMap.get(fieldLabel);
+
 			boolean fieldOptional = GetterUtil.getBoolean(
-				preferences.getValue("fieldOptional" + i, StringPool.BLANK));
+				preferences.getValue(
+					"fieldOptional" + (i + 1), StringPool.BLANK));
 
 			if (!fieldOptional && Validator.isNotNull(fieldLabel) &&
 				Validator.isNull(fieldValue)) {
@@ -349,12 +336,11 @@ public class ViewAction extends PortletAction {
 
 			String validationScript = GetterUtil.getString(
 				preferences.getValue(
-					"fieldValidationScript" + i, StringPool.BLANK));
+					"fieldValidationScript" + (i + 1), StringPool.BLANK));
 
 			if (Validator.isNotNull(validationScript) &&
 				!WebFormUtil.validate(
-					fieldValue, fieldValues, validationScript)) {
-
+					fieldValue, fieldsMap, validationScript)) {
 				validationErrors.add(fieldLabel);
 
 				continue;

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
@@ -47,6 +48,7 @@ import javax.portlet.RenderResponse;
  *
  * @author Jorge Ferrer
  * @author Alberto Montero
+ * @author Julio Camarero Puras
  *
  */
 public class ConfigurationActionImpl implements ConfigurationAction {
@@ -150,21 +152,29 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				portletResource);
 
 			preferences.setValue("databaseTableName", databaseTableName);
+			int[] formFieldsIndexes = StringUtil.split(
+				ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
 
-			String fieldLabel = ParamUtil.getString(
-				actionRequest, "fieldLabel" + i);
-			String fieldType = ParamUtil.getString(
-				actionRequest, "fieldType" + i);
-			boolean fieldOptional = ParamUtil.getBoolean(
-				actionRequest, "fieldOptional" + i);
-			String fieldOptions = ParamUtil.getString(
-				actionRequest, "fieldOptions" + i);
-			String fieldValidationScript = ParamUtil.getString(
-				actionRequest, "fieldValidationScript" + i);
-			String fieldValidationErrorMessage = ParamUtil.getString(
-				actionRequest, "fieldValidationErrorMessage" + i);
+			for (int formFieldIndex : formFieldsIndexes) {
+				String fieldLabel = ParamUtil.getString(
+					actionRequest, "fieldLabel" + formFieldIndex);
 
-			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
+				if (Validator.isNull(fieldLabel)){
+					continue;
+				}
+
+				String fieldType = ParamUtil.getString(
+					actionRequest, "fieldType" + formFieldIndex);
+				boolean fieldOptional = ParamUtil.getBoolean(
+					actionRequest, "fieldOptional" + formFieldIndex);
+				String fieldOptions = ParamUtil.getString(
+					actionRequest, "fieldOptions" + formFieldIndex);
+				String fieldValidationScript = ParamUtil.getString(
+					actionRequest, "fieldValidationScript" + formFieldIndex);
+				String fieldValidationErrorMessage = ParamUtil.getString(
+					actionRequest, "fieldValidationErrorMessage" +
+						formFieldIndex);
+
 				if ((Validator.isNotNull(fieldValidationScript) ^
 					(Validator.isNotNull(fieldValidationErrorMessage)))) {
 
@@ -185,17 +195,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 				i++;
 
-				fieldLabel = ParamUtil.getString(
-					actionRequest, "fieldLabel" + i);
-				fieldType = ParamUtil.getString(actionRequest, "fieldType" + i);
-				fieldOptional = ParamUtil.getBoolean(
-					actionRequest, "fieldOptional" + i);
-				fieldOptions = ParamUtil.getString(
-					actionRequest, "fieldOptions" + i);
-				fieldValidationScript = ParamUtil.getString(
-					actionRequest, "fieldValidationScript" + i);
-				fieldValidationErrorMessage = ParamUtil.getString(
-					actionRequest, "fieldValidationErrorMessage" + i);
 			}
 
 			if (!SessionErrors.isEmpty(actionRequest)) {
@@ -204,7 +203,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			// Clear previous preferences that are now blank
 
-			fieldLabel = preferences.getValue(
+			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
 			while (Validator.isNotNull(fieldLabel)) {

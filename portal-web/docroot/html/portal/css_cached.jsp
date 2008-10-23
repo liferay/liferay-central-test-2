@@ -235,6 +235,31 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/delete.png);
 }
 
+.lfr-form-row legend .fieldLabel{
+	float:left;
+	margin-right: 10px;
+}
+
+.lfr-form-row .lfr-arrow-controls a {
+	background: url() no-repeat 2px 50%;
+	clear: none;
+	display: block;
+	float: left;
+	font-size: 0;
+	height: 16px;
+	padding: 2px;
+	text-indent: -9999em;
+	width: 16px;
+}
+
+.lfr-form-row .lfr-arrow-controls .move-up {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png);
+}
+
+.lfr-form-row .lfr-arrow-controls .move-down {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png);
+}
+
 .uni-form .lfr-form-row fieldset {
 	border: none;
 	margin: 0;
@@ -1064,6 +1089,10 @@ fieldset, .uni-form fieldset {
 
 fieldset:last-child, .uni-form fieldset:last-child {
 	margin-bottom: 0;
+}
+
+.uni-form .portlet-msg-error{
+	margin:20px auto 0px;
 }
 
 /* ---------- Separator ---------- */

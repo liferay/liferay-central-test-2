@@ -76,17 +76,19 @@ public class ExportDataAction extends PortletAction {
 
 		List<String> fieldLabels = new ArrayList<String>();
 
-		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
+		for (int i = 1; true; i++) {
 			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
-			if (Validator.isNotNull(fieldLabel)) {
-				fieldLabels.add(fieldLabel);
-
-				sb.append("\"");
-				sb.append(fieldLabel.replaceAll("\"", "\\\""));
-				sb.append("\";");
+			if (Validator.isNull(fieldLabel)){
+				break;
 			}
+
+			fieldLabels.add(fieldLabel);
+			sb.append("\"");
+			sb.append(fieldLabel.replaceAll("\"", "\\\""));
+			sb.append("\";");
+
 		}
 
 		sb.deleteCharAt(sb.length() - 1);

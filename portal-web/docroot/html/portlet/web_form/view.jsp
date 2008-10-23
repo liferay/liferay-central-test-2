@@ -171,11 +171,12 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 		function() {
 			jQuery('#<portlet:namespace />fm').submit(
 				function() {
-					var fieldLabels = new Array();
-					var fieldOptional = new Array();
-					var fieldValidationErrorMessages = new Array();
-					var fieldValidationFunctions = new Array();
-					var fieldValues = new Array();
+					var keys = new Array ();
+					var fieldLabels = {};
+					var fieldOptional = {};
+					var fieldValidationErrorMessages = {};
+					var fieldValidationFunctions = {};
+					var fieldsMap = {};
 
 					<%
 					int fieldIndex = 1;
@@ -183,14 +184,18 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 
 					while ((fieldIndex == 1) || Validator.isNotNull(fieldLabel)) {
 						fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + fieldIndex, false);
+						String fieldType = preferences.getValue("fieldType" + fieldIndex, "text");
 						String fieldValidationScript = preferences.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
 						String fieldValidationErrorMessage = preferences.getValue("fieldValidationErrorMessage" + fieldIndex, StringPool.BLANK);
 					%>
 
-						fieldLabels[<%= fieldIndex %>] = "<%= HtmlUtil.escape(fieldLabel) %>";
-						fieldValidationErrorMessages[<%= fieldIndex %>] = "<%= fieldValidationErrorMessage %>";
+						var key = "<%= HtmlUtil.escape(fieldLabel) %>";
+						keys[<%= fieldIndex %>] = key;
 
-						function fieldValidationFunction<%= fieldIndex %>(thisFieldValue, fieldValues) {
+						fieldLabels[key] = "<%= HtmlUtil.escape(fieldLabel) %>";
+						fieldValidationErrorMessages[key] = "<%= fieldValidationErrorMessage %>";
+
+						function fieldValidationFunction<%= fieldIndex %>(thisFieldValue, fieldsMap) {
 							<c:choose>
 								<c:when test='<%= Validator.isNotNull(fieldValidationScript) %>'>
 									<%= fieldValidationScript %>
@@ -201,9 +206,20 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 							</c:choose>
 						};
 
-						fieldOptional[<%= fieldIndex %>] = <%= fieldOptional %>;
-						fieldValidationFunctions[<%= fieldIndex %>] = fieldValidationFunction<%= fieldIndex %>;
-						fieldValues[<%= fieldIndex %>] = jQuery("#<portlet:namespace />" + "field<%= fieldIndex %>")[0].value;
+						fieldOptional[key] = <%= fieldOptional %>;
+						fieldValidationFunctions[key] = fieldValidationFunction<%= fieldIndex %>;
+
+						<c:choose>
+							<c:when test='<%= fieldType.equals("radio") %>'>
+								fieldsMap[key] = jQuery("input[@name='<portlet:namespace />field<%= fieldIndex %>']:checked").val();
+								if (!fieldsMap[key]) {
+									fieldsMap[key] = '';
+								}
+							</c:when>
+							<c:otherwise>
+								fieldsMap[key] = jQuery("#<portlet:namespace />field<%= fieldIndex %>")[0].value;
+							</c:otherwise>
+						</c:choose>
 
 					<%
 						fieldIndex++;
@@ -213,25 +229,26 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 
 					var validationErrors = false;
 
-					for (var i = 1; i < fieldValidationFunctions.length; i++) {
-						var thisFieldValue = fieldValues[i];
+					for (var i = 1; i < keys.length; i++) {
+						var key = keys [i];
+						var thisFieldValue = fieldsMap[key];
 
-						if (!fieldOptional[i] && thisFieldValue.match(/^\s*$/)) {
+						if (!fieldOptional[key] && thisFieldValue.match(/^\s*$/)) {
 							validationErrors = true;
 
 							jQuery(".portlet-msg-success").slideUp();
-							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideDown();
-					   }
-					   else if (!fieldValidationFunctions[i](thisFieldValue, fieldValues)) {
+							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[key]).slideDown();
+						}
+						else if (!fieldValidationFunctions[key](thisFieldValue, fieldsMap)) {
 							validationErrors = true;
 
 							jQuery(".portlet-msg-success").slideUp();
-							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
-							jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideDown();
+							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[key]).slideUp();
+							jQuery("#<portlet:namespace />validationError" + fieldLabels[key]).slideDown();
 						}
 						else {
-							jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideUp();
-							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
+							jQuery("#<portlet:namespace />validationError" + fieldLabels[key]).slideUp();
+							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[key]).slideUp();
 						}
 					}
 

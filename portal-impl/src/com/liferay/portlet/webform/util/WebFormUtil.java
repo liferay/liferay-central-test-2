@@ -25,11 +25,8 @@ package com.liferay.portlet.webform.util;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -43,6 +40,7 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -59,12 +57,10 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Daniel Weisser
  * @author Jorge Ferrer
  * @author Alberto Montero
+ * @author Julio Camarero Puras
  *
  */
 public class WebFormUtil {
-
-	public static final int MAX_FIELDS = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.WEB_FORM_PORTLET_MAX_FIELDS));
 
 	public static ExpandoTable addTable(String tableName)
 		throws PortalException, SystemException {
@@ -187,7 +183,7 @@ public class WebFormUtil {
 	}
 
 	public static boolean validate(
-			String thisFieldValue, List<String> fieldValues,
+			String thisFieldValue, Map<String,String> fieldsMap,
 			String validationScript)
 		throws Exception {
 
@@ -199,27 +195,28 @@ public class WebFormUtil {
 
 		sb.append("thisFieldValue = String('" + thisFieldValue + "');\n");
 
-		sb.append("var fieldValues = new Array();\n");
+		sb.append("var fieldsMap = {};\n");
 
-		for (int i =  1; i <= fieldValues.size(); i++) {
-			sb.append(
-				"fieldValues[" + i + "] = '" + fieldValues.get(i - 1) + "';\n");
+		for (String key : fieldsMap.keySet()) {
+			 sb.append(
+				"fieldsMap['" + key + "'] = '" +
+					fieldsMap.get(key) + "';\n");
 		}
 
-		sb.append("function validation(thisFieldValue, fieldValues) {\n");
+		sb.append("function validation(thisFieldValue, fieldsMap) {\n");
 		sb.append(validationScript);
 		sb.append("};\n");
 		sb.append("internalValidationResult = ");
-		sb.append("validation(thisFieldValue, fieldValues);");
+		sb.append("validation(thisFieldValue, fieldsMap);");
 
 		String script = sb.toString();
 
 		try {
 			Scriptable scope = context.initStandardObjects();
 
-			Object jsFieldValues = Context.javaToJS(fieldValues, scope);
+			Object jsfieldsMap = Context.javaToJS(fieldsMap, scope);
 
-			ScriptableObject.putProperty(scope, "jsFieldValues", jsFieldValues);
+			ScriptableObject.putProperty(scope, "jsfieldsMap", jsfieldsMap);
 
 			context.evaluateString(scope, script, "Validation Script", 1, null);
 

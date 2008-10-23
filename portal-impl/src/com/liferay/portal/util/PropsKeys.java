@@ -1075,10 +1075,6 @@ public class PropsKeys {
 
 	public static final String TCK_URL = "tck.url";
 
-	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_ID = "terms.of.use.journal.article.id";
-
-	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID = "terms.of.use.journal.article.group.id";
-
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
 	public static final String THEME_CSS_FAST_LOAD = "theme.css.fast.load";
@@ -1150,8 +1146,6 @@ public class PropsKeys {
 	public static final String VIRTUAL_HOSTS_IGNORE_HOSTS = "virtual.hosts.ignore.hosts";
 
 	public static final String VIRTUAL_HOSTS_IGNORE_PATHS = "virtual.hosts.ignore.paths";
-
-	public static final String WEB_FORM_PORTLET_MAX_FIELDS = "web.form.portlet.max.fields";
 
 	public static final String WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED = "web.form.portlet.validation.script.enabled";
 
