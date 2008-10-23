@@ -68,6 +68,7 @@ import java.io.IOException;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -299,7 +300,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getDataStrategy() {
-		 return _dataStrategy;
+		return _dataStrategy;
 	}
 
 	public Date getEndDate() {
@@ -446,6 +447,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public boolean hasNotUniquePerLayout(String portletId) {
+		return _notUniquePerLayout.contains(portletId);
+	}
+
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
@@ -512,13 +517,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return true;
 		}
 		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
-				 (_endDate.after(modifiedDate))) {
+				(_endDate.after(modifiedDate))) {
 
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+
+	public void putNotUniquePerLayout(String portletId) {
+		_notUniquePerLayout.add(portletId);
 	}
 
 	public void setImportGroupId(long importGroupId) {
@@ -628,6 +637,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private XStream _xStream;
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
+	private Set<String> _notUniquePerLayout = new HashSet<String>();
 	private Map<String, String[]> _parameterMap;
 	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
 		new HashMap<String, List<RatingsEntry>>();

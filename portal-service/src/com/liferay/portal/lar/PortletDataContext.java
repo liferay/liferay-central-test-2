@@ -159,6 +159,8 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean hasDateRange();
 
+	public boolean hasNotUniquePerLayout(String portletId);
+
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey);
 
 	public void importComments(
@@ -172,6 +174,8 @@ public interface PortletDataContext extends Serializable {
 	public boolean isPathNotProcessed(String path);
 
 	public boolean isWithinDateRange(Date modifiedDate);
+
+	public void putNotUniquePerLayout(String portletId);
 
 	public void setImportGroupId(long importGroupId);
 

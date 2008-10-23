@@ -409,7 +409,7 @@ public class PortletExporter {
 
 		if ((!portlet.isInstanceable()) &&
 			(!portlet.isPreferencesUniquePerLayout()) &&
-			(_notUniquePerLayout.contains(portletId))) {
+			(context.hasNotUniquePerLayout(portletId))) {
 
 			return;
 		}
@@ -431,8 +431,8 @@ public class PortletExporter {
 
 		if (exportPortletData) {
 			if (!portlet.isPreferencesUniquePerLayout()) {
-				if (!_notUniquePerLayout.contains(portletId)) {
-					_notUniquePerLayout.add(portletId);
+				if (!context.hasNotUniquePerLayout(portletId)) {
+					context.putNotUniquePerLayout(portletId);
 
 					exportPortletData(
 						context, portlet, layout, jxPrefs, portletEl);
@@ -1106,7 +1106,5 @@ public class PortletExporter {
 	}
 
 	private static Log _log = LogFactory.getLog(PortletExporter.class);
-
-	private Set<String> _notUniquePerLayout = new HashSet<String>();
 
 }
