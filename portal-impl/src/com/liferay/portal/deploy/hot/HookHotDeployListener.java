@@ -44,7 +44,9 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.MultiMessageResourcesFactory;
@@ -213,7 +215,15 @@ public class HookHotDeployListener
 					_portalPropertiesMap.put(
 						servletContextName, portalProperties);
 
+					// Initialize properties, auto logins, model listeners, and
+					// events in that specific order. Events have to be loaded
+					// last because they may require model listeners to have
+					// been registered.
+
 					initPortalProperties(portalProperties);
+					initAutoLogins(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initModelListeners(
 						servletContextName, portletClassLoader,
 						portalProperties);
@@ -306,6 +316,28 @@ public class HookHotDeployListener
 
 		// Begin backwards compatibility for 5.1.0
 
+		EventsContainer eventsContainer = _eventsContainerMap.get(
+			servletContextName);
+
+		if (eventsContainer == null) {
+			eventsContainer = new EventsContainer();
+
+			_eventsContainerMap.put(servletContextName, eventsContainer);
+		}
+
+		List<Element> eventEls = root.elements("event");
+
+		for (Element eventEl : eventEls) {
+			String eventName = eventEl.elementText("event-type");
+			String eventClass = eventEl.elementText("event-class");
+
+			Object obj = initEvent(eventName, eventClass, portletClassLoader);
+
+			if (obj != null) {
+				eventsContainer.registerEvent(eventName, obj);
+			}
+		}
+
 		ModelListenersContainer modelListenersContainer =
 			_modelListenersContainerMap.get(servletContextName);
 
@@ -327,30 +359,8 @@ public class HookHotDeployListener
 				modelName, modelListenerClass, portletClassLoader);
 
 			if (modelListener != null) {
-				modelListenersContainer.addModelListener(
+				modelListenersContainer.registerModelListener(
 					modelName, modelListener);
-			}
-		}
-
-		EventsContainer eventsContainer = _eventsContainerMap.get(
-			servletContextName);
-
-		if (eventsContainer == null) {
-			eventsContainer = new EventsContainer();
-
-			_eventsContainerMap.put(servletContextName, eventsContainer);
-		}
-
-		List<Element> eventEls = root.elements("event");
-
-		for (Element eventEl : eventEls) {
-			String eventName = eventEl.elementText("event-type");
-			String eventClass = eventEl.elementText("event-class");
-
-			Object obj = initEvent(eventName, eventClass, portletClassLoader);
-
-			if (obj != null) {
-				eventsContainer.addEvent(eventName, obj);
 			}
 		}
 
@@ -375,18 +385,11 @@ public class HookHotDeployListener
 			return;
 		}
 
-		Properties portalProperties = _portalPropertiesMap.remove(
-			servletContextName);
+		AutoLoginsContainer autoLoginsContainer =
+			_autoLoginsContainerMap.remove(servletContextName);
 
-		if (portalProperties != null) {
-			destroyPortalProperties(portalProperties);
-		}
-
-		LanguagesContainer languagesContainer = _languagesContainerMap.remove(
-			servletContextName);
-
-		if (languagesContainer != null) {
-			languagesContainer.unregisterLanguages();
+		if (autoLoginsContainer != null) {
+			autoLoginsContainer.unregisterAutoLogins();
 		}
 
 		CustomJspBag customJspBag = _customJspBagsMap.remove(
@@ -396,6 +399,20 @@ public class HookHotDeployListener
 			destroyCustomJspBag(customJspBag);
 		}
 
+		EventsContainer eventsContainer = _eventsContainerMap.remove(
+			servletContextName);
+
+		if (eventsContainer != null) {
+			eventsContainer.unregisterEvents();
+		}
+
+		LanguagesContainer languagesContainer = _languagesContainerMap.remove(
+			servletContextName);
+
+		if (languagesContainer != null) {
+			languagesContainer.unregisterLanguages();
+		}
+
 		ModelListenersContainer modelListenersContainer =
 			_modelListenersContainerMap.remove(servletContextName);
 
@@ -403,11 +420,11 @@ public class HookHotDeployListener
 			modelListenersContainer.unregisterModelListeners();
 		}
 
-		EventsContainer eventsContainer = _eventsContainerMap.remove(
+		Properties portalProperties = _portalPropertiesMap.remove(
 			servletContextName);
 
-		if (eventsContainer != null) {
-			eventsContainer.unregisterEvents();
+		if (portalProperties != null) {
+			destroyPortalProperties(portalProperties);
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -465,6 +482,28 @@ public class HookHotDeployListener
 		return (BasePersistence)PortalBeanLocatorUtil.locate(
 			packagePath + ".service.persistence." + entityName +
 				"Persistence.impl");
+	}
+
+	protected void initAutoLogins(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		AutoLoginsContainer autoLoginsContainer = new AutoLoginsContainer();
+
+		_autoLoginsContainerMap.put(servletContextName, autoLoginsContainer);
+
+		String[] autoLoginClasses = StringUtil.split(
+			portalProperties.getProperty(PropsKeys.AUTO_LOGIN_HOOKS));
+
+		for (String autoLoginClass : autoLoginClasses) {
+			AutoLogin autoLogin = (AutoLogin)portletClassLoader.loadClass(
+				autoLoginClass).newInstance();
+
+			if (autoLogin != null) {
+				autoLoginsContainer.registerAutoLogin(autoLogin);
+			}
+		}
 	}
 
 	protected void initCustomJspBag(CustomJspBag customJspBag)
@@ -547,7 +586,7 @@ public class HookHotDeployListener
 			}
 
 			String eventName = key;
-			String eventClasses[] = StringUtil.split(
+			String[] eventClasses = StringUtil.split(
 				portalProperties.getProperty(key));
 
 			for (String eventClass : eventClasses) {
@@ -558,7 +597,7 @@ public class HookHotDeployListener
 					continue;
 				}
 
-				eventsContainer.addEvent(eventName, obj);
+				eventsContainer.registerEvent(eventName, obj);
 			}
 		}
 	}
@@ -606,7 +645,7 @@ public class HookHotDeployListener
 				modelName, modelListenerClass, portletClassLoader);
 
 			if (modelListener != null) {
-				modelListenersContainer.addModelListener(
+				modelListenersContainer.registerModelListener(
 					modelName, modelListener);
 			}
 		}
@@ -800,41 +839,33 @@ public class HookHotDeployListener
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
 
-	private Set<String> _servletContextNames = new HashSet<String>();
-	private Map<String, Properties> _portalPropertiesMap =
-		new HashMap<String, Properties>();
-	private Map<String, LanguagesContainer> _languagesContainerMap =
-		new HashMap<String, LanguagesContainer>();
+	private Map<String, AutoLoginsContainer> _autoLoginsContainerMap =
+		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
-	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
-		new HashMap<String, ModelListenersContainer>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
+	private Map<String, LanguagesContainer> _languagesContainerMap =
+		new HashMap<String, LanguagesContainer>();
+	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
+		new HashMap<String, ModelListenersContainer>();
+	private Map<String, Properties> _portalPropertiesMap =
+		new HashMap<String, Properties>();
+	private Set<String> _servletContextNames = new HashSet<String>();
 
-	private class LanguagesContainer {
+	private class AutoLoginsContainer {
 
-		public void addLanguage(String localeKey, Properties properties) {
-			_multiMessageResources.putLocale(localeKey);
-
-			Properties oldProperties = _multiMessageResources.putMessages(
-				properties, localeKey);
-
-			_languagesMap.put(localeKey, oldProperties);
+		public void registerAutoLogin(AutoLogin autoLogin) {
+			_autoLogins.add(autoLogin);
 		}
 
-		public void unregisterLanguages() {
-			for (String key : _languagesMap.keySet()) {
-				Properties properties = _languagesMap.get(key);
-
-				_multiMessageResources.putMessages(properties, key);
+		public void unregisterAutoLogins() {
+			for (AutoLogin autoLogin : _autoLogins) {
+				AutoLoginFilter.unregisterAutoLogin(autoLogin);
 			}
 		}
 
-		private MultiMessageResources _multiMessageResources =
-			MultiMessageResourcesFactory.getInstance();
-		private Map<String, Properties> _languagesMap =
-			new HashMap<String, Properties>();
+		List<AutoLogin> _autoLogins = new ArrayList<AutoLogin>();
 
 	}
 
@@ -864,9 +895,67 @@ public class HookHotDeployListener
 
 	}
 
+	private class EventsContainer {
+
+		public void registerEvent(String eventName, Object event) {
+			List<Object> events = _eventsMap.get(eventName);
+
+			if (events == null) {
+				events = new ArrayList<Object>();
+
+				_eventsMap.put(eventName, events);
+			}
+
+			events.add(event);
+		}
+
+		public void unregisterEvents() {
+			for (Map.Entry<String, List<Object>> entry :
+					_eventsMap.entrySet()) {
+
+				String eventName = entry.getKey();
+				List<Object> events = entry.getValue();
+
+				for (Object event : events) {
+					EventsProcessor.unregisterEvent(eventName, event);
+				}
+			}
+		}
+
+		private Map<String, List<Object>> _eventsMap =
+			new HashMap<String, List<Object>>();
+
+	}
+
+	private class LanguagesContainer {
+
+		public void addLanguage(String localeKey, Properties properties) {
+			_multiMessageResources.putLocale(localeKey);
+
+			Properties oldProperties = _multiMessageResources.putMessages(
+				properties, localeKey);
+
+			_languagesMap.put(localeKey, oldProperties);
+		}
+
+		public void unregisterLanguages() {
+			for (String key : _languagesMap.keySet()) {
+				Properties properties = _languagesMap.get(key);
+
+				_multiMessageResources.putMessages(properties, key);
+			}
+		}
+
+		private MultiMessageResources _multiMessageResources =
+			MultiMessageResourcesFactory.getInstance();
+		private Map<String, Properties> _languagesMap =
+			new HashMap<String, Properties>();
+
+	}
+
 	private class ModelListenersContainer {
 
-		public void addModelListener(
+		public void registerModelListener(
 			String modelName, ModelListener modelListener) {
 
 			List<ModelListener> modelListeners = _modelListenersMap.get(
@@ -898,38 +987,6 @@ public class HookHotDeployListener
 
 		private Map<String, List<ModelListener>> _modelListenersMap =
 			new HashMap<String, List<ModelListener>>();
-
-	}
-
-	private class EventsContainer {
-
-		public void addEvent(String eventName, Object event) {
-			List<Object> events = _eventsMap.get(eventName);
-
-			if (events == null) {
-				events = new ArrayList<Object>();
-
-				_eventsMap.put(eventName, events);
-			}
-
-			events.add(event);
-		}
-
-		public void unregisterEvents() {
-			for (Map.Entry<String, List<Object>> entry :
-					_eventsMap.entrySet()) {
-
-				String eventName = entry.getKey();
-				List<Object> events = entry.getValue();
-
-				for (Object event : events) {
-					EventsProcessor.unregisterEvent(eventName, event);
-				}
-			}
-		}
-
-		private Map<String, List<Object>> _eventsMap =
-			new HashMap<String, List<Object>>();
 
 	}
 

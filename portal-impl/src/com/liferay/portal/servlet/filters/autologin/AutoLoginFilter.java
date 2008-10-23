@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -41,6 +42,9 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -56,6 +60,47 @@ import javax.servlet.http.HttpSession;
  *
  */
 public class AutoLoginFilter extends BasePortalFilter {
+
+	public static void registerAutoLogin(AutoLogin autoLogin) {
+		if (_autoLogins == null) {
+			_log.error("AutoLoginFilter is not initialized yet");
+
+			return;
+		}
+
+		List<AutoLogin> autoLogins = ListUtil.fromArray(_autoLogins);
+
+		autoLogins.add(autoLogin);
+
+		_autoLogins = autoLogins.toArray(new AutoLogin[autoLogins.size()]);
+	}
+
+	public static void unregisterAutoLogin(AutoLogin autoLogin) {
+		if (_autoLogins == null) {
+			_log.error("AutoLoginFilter is not initialized yet");
+
+			return;
+		}
+
+		List<AutoLogin> autoLogins = ListUtil.fromArray(_autoLogins);
+
+		if (autoLogins.remove(autoLogin)) {
+			_autoLogins = autoLogins.toArray(new AutoLogin[autoLogins.size()]);
+		}
+	}
+
+	public AutoLoginFilter() {
+		List<AutoLogin> autoLogins = new ArrayList<AutoLogin>();
+
+		for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
+			AutoLogin autoLogin = (AutoLogin)InstancePool.get(
+				autoLoginHook);
+
+			autoLogins.add(autoLogin);
+		}
+
+		_autoLogins = autoLogins.toArray(new AutoLogin[autoLogins.size()]);
+	}
 
 	protected String getLoginRemoteUser(
 			HttpServletRequest request, HttpServletResponse response,
@@ -190,7 +235,10 @@ public class AutoLoginFilter extends BasePortalFilter {
 					}
 				}
 				catch (Exception e) {
-					_log.warn(e, e);
+					if (_log.isWarnEnabled()) {
+						_log.warn(e, e);
+					}
+
 					_log.error(e.getMessage());
 				}
 			}
@@ -200,5 +248,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);
+
+	private static AutoLogin[] _autoLogins;
 
 }
