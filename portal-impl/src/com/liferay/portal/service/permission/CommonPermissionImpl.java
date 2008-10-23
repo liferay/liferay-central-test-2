@@ -33,6 +33,9 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CommonPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -70,8 +73,12 @@ public class CommonPermissionImpl implements CommonPermission {
 				permissionChecker, classPK, actionId);
 		}
 		else {
+			_log.warn("Invalid className: " + className);
+
 			throw new PrincipalException();
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(CommonPermissionImpl.class);
 
 }

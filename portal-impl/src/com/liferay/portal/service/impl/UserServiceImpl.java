@@ -27,6 +27,7 @@ import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.User;
@@ -195,7 +196,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			sendEmail);
 
 		EnterpriseAdminUtil.updateWebsites(
-			User.class.getName(), user.getUserId(), websites);
+			Contact.class.getName(), user.getContactId(), websites);
 
 		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
 
@@ -540,7 +541,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			jobTitle, groupIds, organizationIds, roleIds);
 
 		EnterpriseAdminUtil.updateWebsites(
-			User.class.getName(), user.getUserId(), websites);
+			Contact.class.getName(), user.getContactId(), websites);
 
 		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
 
