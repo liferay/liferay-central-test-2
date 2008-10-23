@@ -564,13 +564,12 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String _formatJSPContent(String fileName, String content) 
+	private static String _formatJSPContent(String fileName, String content)
 		throws IOException {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br =
-			new BufferedReader(new StringReader(content));
+		BufferedReader br = new BufferedReader(new StringReader(content));
 
 		String line = null;
 
