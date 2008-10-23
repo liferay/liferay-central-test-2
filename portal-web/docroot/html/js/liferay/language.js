@@ -15,7 +15,7 @@ Liferay.Language = {
 
 		var value = instance._cache[url];
 
-		if (value != null) {
+		if (value) {
 			return value;
 		}
 
