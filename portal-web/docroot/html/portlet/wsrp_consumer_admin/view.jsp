@@ -587,6 +587,12 @@
 				<input name="<portlet:namespace />configuredProducerId" type="hidden" value="<%= HtmlUtil.escape(id) %>" />
 
 				<liferay-ui:tabs names="portlet" />
+				
+				<c:if test='<%= request.getAttribute("CONSUMER_ADMIN_ERROR") != null %>'>
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="you-have-entered-invalid-data" />
+					</span>
+				</c:if>
 
 				<table class="lfr-table">
 				<tr>
