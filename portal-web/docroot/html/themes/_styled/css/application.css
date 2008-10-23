@@ -293,10 +293,6 @@
 	top: 1px;
 }
 
-.ie6 .ui-tabs li a, .ie6 .tabs li span{
-	background: #878F93;
-}
-
 .ui-tabs li a:hover {
 	text-decoration: underline;
 }
