@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -82,7 +83,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Bruno Farache
  *
  */
-public class HookHotDeployListener extends BaseHotDeployListener {
+public class HookHotDeployListener
+	extends BaseHotDeployListener implements PropsKeys {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
 		try {
@@ -141,17 +143,13 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		PropsUtil.removeProperties(portalProperties);
 
-		if (_log.isDebugEnabled() &&
-			portalProperties.containsKey(PropsKeys.LOCALES)) {
-
+		if (_log.isDebugEnabled() && portalProperties.containsKey(LOCALES)) {
 			_log.debug(
-				"Portlet locales " +
-					portalProperties.getProperty(PropsKeys.LOCALES));
-			_log.debug(
-				"Original locales " + PropsUtil.get(PropsKeys.LOCALES));
+				"Portlet locales " + portalProperties.getProperty(LOCALES));
+			_log.debug("Original locales " + PropsUtil.get(LOCALES));
 			_log.debug(
 				"Original locales array length " +
-					PropsUtil.getArray(PropsKeys.LOCALES).length);
+					PropsUtil.getArray(LOCALES).length);
 		}
 
 		resetPortalProperties(portalProperties);
@@ -185,28 +183,6 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		Element root = doc.getRootElement();
 
-		ModelListenersContainer modelListenersContainer =
-			new ModelListenersContainer();
-
-		_modelListenersContainerMap.put(
-			servletContextName, modelListenersContainer);
-
-		List<Element> modelListenerEls = root.elements("model-listener");
-
-		for (Element modelListenerEl : modelListenerEls) {
-			String modelListenerClass = modelListenerEl.elementText(
-				"model-listener-class");
-			String modelName = modelListenerEl.elementText("model-name");
-
-			ModelListener modelListener = initModelListener(
-				modelListenerClass, modelName, portletClassLoader);
-
-			if (modelListener != null) {
-				modelListenersContainer.addModelListener(
-					modelName, modelListener);
-			}
-		}
-
 		String portalPropertiesLocation = root.elementText("portal-properties");
 
 		if (Validator.isNotNull(portalPropertiesLocation)) {
@@ -238,6 +214,12 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 						servletContextName, portalProperties);
 
 					initPortalProperties(portalProperties);
+					initModelListeners(
+						servletContextName, portletClassLoader,
+						portalProperties);
+					initEvents(
+						servletContextName, portletClassLoader,
+						portalProperties);
 				}
 			}
 		}
@@ -322,22 +304,57 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		EventsContainer eventsContainer = new EventsContainer();
+		// Begin backwards compatibility for 5.1.0
 
-		_eventsContainerMap.put(servletContextName, eventsContainer);
+		ModelListenersContainer modelListenersContainer =
+			_modelListenersContainerMap.get(servletContextName);
+
+		if (modelListenersContainer == null) {
+			modelListenersContainer = new ModelListenersContainer();
+
+			_modelListenersContainerMap.put(
+				servletContextName, modelListenersContainer);
+		}
+
+		List<Element> modelListenerEls = root.elements("model-listener");
+
+		for (Element modelListenerEl : modelListenerEls) {
+			String modelName = modelListenerEl.elementText("model-name");
+			String modelListenerClass = modelListenerEl.elementText(
+				"model-listener-class");
+
+			ModelListener modelListener = initModelListener(
+				modelName, modelListenerClass, portletClassLoader);
+
+			if (modelListener != null) {
+				modelListenersContainer.addModelListener(
+					modelName, modelListener);
+			}
+		}
+
+		EventsContainer eventsContainer = _eventsContainerMap.get(
+			servletContextName);
+
+		if (eventsContainer == null) {
+			eventsContainer = new EventsContainer();
+
+			_eventsContainerMap.put(servletContextName, eventsContainer);
+		}
 
 		List<Element> eventEls = root.elements("event");
 
 		for (Element eventEl : eventEls) {
+			String eventName = eventEl.elementText("event-type");
 			String eventClass = eventEl.elementText("event-class");
-			String eventType = eventEl.elementText("event-type");
 
-			Object obj = initEvent(eventClass, eventType, portletClassLoader);
+			Object obj = initEvent(eventName, eventClass, portletClassLoader);
 
 			if (obj != null) {
-				eventsContainer.addEvent(eventType, obj);
+				eventsContainer.addEvent(eventName, obj);
 			}
 		}
+
+		// End backwards compatibility for 5.1.0
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -356,13 +373,6 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		if (!_servletContextNames.remove(servletContextName)) {
 			return;
-		}
-
-		ModelListenersContainer modelListenersContainer =
-			_modelListenersContainerMap.remove(servletContextName);
-
-		if (modelListenersContainer != null) {
-			modelListenersContainer.unregisterModelListeners();
 		}
 
 		Properties portalProperties = _portalPropertiesMap.remove(
@@ -384,6 +394,13 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		if (customJspBag != null) {
 			destroyCustomJspBag(customJspBag);
+		}
+
+		ModelListenersContainer modelListenersContainer =
+			_modelListenersContainerMap.remove(servletContextName);
+
+		if (modelListenersContainer != null) {
+			modelListenersContainer.unregisterModelListeners();
 		}
 
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
@@ -480,10 +497,10 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected Object initEvent(
-			String eventClass, String eventType, ClassLoader portletClassLoader)
+			String eventName, String eventClass, ClassLoader portletClassLoader)
 		throws Exception {
 
-		if (eventType.equals(PropsKeys.APPLICATION_STARTUP_EVENTS)) {
+		if (eventName.equals(APPLICATION_STARTUP_EVENTS)) {
 			SimpleAction simpleAction = new InvokerSimpleAction(
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClass).newInstance());
@@ -497,17 +514,11 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			return null;
 		}
 
-		if (eventType.equals(PropsKeys.LOGIN_EVENTS_POST) ||
-			eventType.equals(PropsKeys.LOGIN_EVENTS_PRE) ||
-			eventType.equals(PropsKeys.LOGOUT_EVENTS_POST) ||
-			eventType.equals(PropsKeys.LOGOUT_EVENTS_PRE) ||
-			eventType.equals(PropsKeys.SERVLET_SERVICE_EVENTS_POST) ||
-			eventType.equals(PropsKeys.SERVLET_SERVICE_EVENTS_PRE)) {
-
+		if (ArrayUtil.contains(_PROPS_KEYS_EVENTS, eventName)) {
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClass).newInstance();
 
-			EventsProcessor.registerEvent(eventType, action);
+			EventsProcessor.registerEvent(eventName, action);
 
 			return action;
 		}
@@ -515,8 +526,45 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		return null;
 	}
 
+	protected void initEvents(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		EventsContainer eventsContainer = new EventsContainer();
+
+		_eventsContainerMap.put(servletContextName, eventsContainer);
+
+		Iterator<Object> itr = portalProperties.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String key = (String)itr.next();
+
+			if (!key.equals(APPLICATION_STARTUP_EVENTS) &&
+				!ArrayUtil.contains(_PROPS_KEYS_EVENTS, key)) {
+
+				continue;
+			}
+
+			String eventName = key;
+			String eventClasses[] = StringUtil.split(
+				portalProperties.getProperty(key));
+
+			for (String eventClass : eventClasses) {
+				Object obj = initEvent(
+					eventName, eventClass, portletClassLoader);
+
+				if (obj == null) {
+					continue;
+				}
+
+				eventsContainer.addEvent(eventName, obj);
+			}
+		}
+	}
+
 	protected ModelListener initModelListener(
-			String modelListenerClass, String modelName,
+			String modelName, String modelListenerClass,
 			ClassLoader portletClassLoader)
 		throws Exception {
 
@@ -531,22 +579,51 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		return modelListener;
 	}
 
+	protected void initModelListeners(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		ModelListenersContainer modelListenersContainer =
+			new ModelListenersContainer();
+
+		_modelListenersContainerMap.put(
+			servletContextName, modelListenersContainer);
+
+		Iterator<Object> itr = portalProperties.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String key = (String)itr.next();
+
+			if (!key.startsWith(VALUE_OBJECT_LISTENER)) {
+				continue;
+			}
+
+			String modelName = key.substring(VALUE_OBJECT_LISTENER.length());
+			String modelListenerClass = portalProperties.getProperty(key);
+
+			ModelListener modelListener = initModelListener(
+				modelName, modelListenerClass, portletClassLoader);
+
+			if (modelListener != null) {
+				modelListenersContainer.addModelListener(
+					modelName, modelListener);
+			}
+		}
+	}
+
 	protected void initPortalProperties(Properties portalProperties)
 		throws Exception {
 
 		PropsUtil.addProperties(portalProperties);
 
-		if (_log.isDebugEnabled() &&
-			portalProperties.containsKey(PropsKeys.LOCALES)) {
-
+		if (_log.isDebugEnabled() && portalProperties.containsKey(LOCALES)) {
 			_log.debug(
-				"Portlet locales " +
-					portalProperties.getProperty(PropsKeys.LOCALES));
-			_log.debug(
-				"Merged locales " + PropsUtil.get(PropsKeys.LOCALES));
+				"Portlet locales " + portalProperties.getProperty(LOCALES));
+			_log.debug("Merged locales " + PropsUtil.get(LOCALES));
 			_log.debug(
 				"Merged locales array length " +
-					PropsUtil.getArray(PropsKeys.LOCALES).length);
+					PropsUtil.getArray(LOCALES).length);
 		}
 
 		resetPortalProperties(portalProperties);
@@ -668,8 +745,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		if (containsKey(portalProperties, PropsKeys.LOCALES)) {
-			PropsValues.LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
+		if (containsKey(portalProperties, LOCALES)) {
+			PropsValues.LOCALES = PropsUtil.getArray(LOCALES);
 
 			LanguageUtil.init();
 		}
@@ -678,24 +755,32 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	}
 
 	private static final String[] _PROPS_KEYS_BOOLEAN = new String[] {
-		"AUTH_FORWARD_BY_LAST_PATH",
-		"JAVASCRIPT_FAST_LOAD",
-		"LAYOUT_TEMPLATE_CACHE_ENABLED",
-		"LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE",
-		"LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED",
-		"LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE",
-		"LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE",
-		"LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED",
-		"LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE",
-		"MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS",
-		"ORGANIZATIONS_COUNTRY_REQUIRED",
-		"TERMS_OF_USE_REQUIRED",
-		"THEME_CSS_FAST_LOAD"
+		AUTH_FORWARD_BY_LAST_PATH,
+		JAVASCRIPT_FAST_LOAD,
+		LAYOUT_TEMPLATE_CACHE_ENABLED,
+		LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE,
+		LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED,
+		LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE,
+		LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE,
+		LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED,
+		LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE,
+		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS,
+		MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS,
+		MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS,
+		MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS,
+		MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS,
+		MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS,
+		TERMS_OF_USE_REQUIRED,
+		THEME_CSS_FAST_LOAD
+	};
+
+	private static final String[] _PROPS_KEYS_EVENTS = new String[] {
+		LOGIN_EVENTS_POST,
+		LOGIN_EVENTS_PRE,
+		LOGOUT_EVENTS_POST,
+		LOGOUT_EVENTS_PRE,
+		SERVLET_SERVICE_EVENTS_POST,
+		SERVLET_SERVICE_EVENTS_PRE
 	};
 
 	private static final String[] _PROPS_KEYS_INTEGER = new String[] {
@@ -705,59 +790,27 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	};
 
 	private static final String[] _PROPS_KEYS_STRING = new String[] {
-		"PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR",
-		"PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC"
+		PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR,
+		PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC
 	};
 
 	private static final String[] _PROPS_KEYS_STRING_ARRAY = new String[] {
-		"LAYOUT_STATIC_PORTLETS_ALL"
+		LAYOUT_STATIC_PORTLETS_ALL
 	};
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
 
 	private Set<String> _servletContextNames = new HashSet<String>();
-	private Map<String, EventsContainer> _eventsContainerMap =
-		new HashMap<String, EventsContainer>();
-	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
-		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
 		new HashMap<String, Properties>();
 	private Map<String, LanguagesContainer> _languagesContainerMap =
 		new HashMap<String, LanguagesContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
-
-	private class EventsContainer {
-
-		public void addEvent(String eventType, Object event) {
-			List<Object> events = _eventsMap.get(eventType);
-
-			if (events == null) {
-				events = new ArrayList<Object>();
-
-				_eventsMap.put(eventType, events);
-			}
-
-			events.add(event);
-		}
-
-		public void unregisterEvents() {
-			for (Map.Entry<String, List<Object>> entry :
-					_eventsMap.entrySet()) {
-
-				String eventType = entry.getKey();
-				List<Object> events = entry.getValue();
-
-				for (Object event : events) {
-					EventsProcessor.unregisterEvent(eventType, event);
-				}
-			}
-		}
-
-		private Map<String, List<Object>> _eventsMap =
-			new HashMap<String, List<Object>>();
-
-	}
+	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
+		new HashMap<String, ModelListenersContainer>();
+	private Map<String, EventsContainer> _eventsContainerMap =
+		new HashMap<String, EventsContainer>();
 
 	private class LanguagesContainer {
 
@@ -782,6 +835,32 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			MultiMessageResourcesFactory.getInstance();
 		private Map<String, Properties> _languagesMap =
 			new HashMap<String, Properties>();
+
+	}
+
+	private class CustomJspBag {
+
+		public CustomJspBag(String customJspDir, List<String> customJsps) {
+			_customJspDir = customJspDir;
+			_customJsps = customJsps;
+			_timestamp = Time.getTimestamp();
+		}
+
+		public String getCustomJspDir() {
+			return _customJspDir;
+		}
+
+		public List<String> getCustomJsps() {
+			return _customJsps;
+		}
+
+		public String getTimestamp() {
+			return _timestamp;
+		}
+
+		private String _customJspDir;
+		private List<String> _customJsps;
+		private String _timestamp;
 
 	}
 
@@ -822,29 +901,35 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	}
 
-	private class CustomJspBag {
+	private class EventsContainer {
 
-		public CustomJspBag(String customJspDir, List<String> customJsps) {
-			_customJspDir = customJspDir;
-			_customJsps = customJsps;
-			_timestamp = Time.getTimestamp();
+		public void addEvent(String eventName, Object event) {
+			List<Object> events = _eventsMap.get(eventName);
+
+			if (events == null) {
+				events = new ArrayList<Object>();
+
+				_eventsMap.put(eventName, events);
+			}
+
+			events.add(event);
 		}
 
-		public String getCustomJspDir() {
-			return _customJspDir;
+		public void unregisterEvents() {
+			for (Map.Entry<String, List<Object>> entry :
+					_eventsMap.entrySet()) {
+
+				String eventName = entry.getKey();
+				List<Object> events = entry.getValue();
+
+				for (Object event : events) {
+					EventsProcessor.unregisterEvent(eventName, event);
+				}
+			}
 		}
 
-		public List<String> getCustomJsps() {
-			return _customJsps;
-		}
-
-		public String getTimestamp() {
-			return _timestamp;
-		}
-
-		private String _customJspDir;
-		private List<String> _customJsps;
-		private String _timestamp;
+		private Map<String, List<Object>> _eventsMap =
+			new HashMap<String, List<Object>>();
 
 	}
 

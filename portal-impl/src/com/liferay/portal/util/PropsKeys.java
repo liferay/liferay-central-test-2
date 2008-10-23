@@ -28,7 +28,7 @@ package com.liferay.portal.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsKeys {
+public interface PropsKeys {
 
 	public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";
 
@@ -1126,6 +1126,8 @@ public class PropsKeys {
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
+
+	public static final String VALUE_OBJECT_LISTENER = "value.object.listener.";
 
 	public static final String VELOCITY_ENGINE_LOGGER = "velocity.engine.logger";
 

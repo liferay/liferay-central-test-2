@@ -714,8 +714,8 @@ public class OrganizationLocalServiceImpl
 		}
 
 		boolean countryRequired = GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_REQUIRED,
-			new Filter(type)));
+			PropsUtil.get(
+				PropsKeys.ORGANIZATIONS_COUNTRY_REQUIRED, new Filter(type)));
 
 		if (countryRequired || (countryId > 0)) {
 			countryPersistence.findByPrimaryKey(countryId);
