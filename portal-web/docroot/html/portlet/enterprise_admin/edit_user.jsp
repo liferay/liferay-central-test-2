@@ -131,7 +131,7 @@ String curSection = mainSections[0];
 				<div class="user-info">
 					<p class="float-container">
 						<c:if test="<%= selUser != null %>">
-							<img alt="<%= selUser.getFullName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>" />
+							<img alt="<%= selUser.getFullName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>" width="35"/>
 
 							<span><%= selUser.getFullName() %></span>
 						</c:if>
