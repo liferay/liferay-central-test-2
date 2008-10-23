@@ -33,28 +33,22 @@ AnnouncementsDelivery delivery = (AnnouncementsDelivery)row.getObject();
 int index = entry.getIndex();
 
 String param = "announcementsType" + delivery.getType();
+boolean defaultValue = false;
+boolean disabled = false;
 
 if (index == 1) {
 	param += "Email";
-}
-else if (index == 2) {
-	param += "Sms";
-}
-else if (index == 3) {
-	param += "Website";
-}
-
-boolean defaultValue = false;
-
-if (index == 1) {
 	defaultValue = delivery.isEmail();
 }
 else if (index == 2) {
+	param += "Sms";
 	defaultValue = delivery.isSms();
 }
 else if (index == 3) {
+	param += "Website";
 	defaultValue = delivery.isWebsite();
+	disabled = true;
 }
 %>
 
-<liferay-ui:input-checkbox param="<%= param %>" defaultValue="<%= defaultValue %>" />
+<liferay-ui:input-checkbox param="<%= param %>" defaultValue="<%= defaultValue %>" disabled="<%= disabled %>" />

@@ -25,9 +25,9 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-Organization organization = (Organization)request.getAttribute("organization.selOrganization");
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
-long parentOrganizationId = BeanParamUtil.getLong(organization, request, "parentOrganizationId");
+long parentOrganizationId = BeanParamUtil.getLong(organization, request, "parentOrganizationSearchContainerPrimaryKeys", (organization != null) ? organization.getParentOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
@@ -51,7 +51,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 <script type="text/javascript">
 	function <portlet:namespace />openOrganizationSelector() {
-		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="parentType" value="" /></portlet:renderURL>';
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>';
 
 		<c:choose>
 			<c:when test="<%= organization == null %>">
@@ -69,25 +69,16 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		organizationWindow.focus();
 	}
 
-	function <portlet:namespace />saveOrganization(cmd) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		var createURL = function(href, value, onclick) {
-			return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
-		};
-
-		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
 
 		var rowColumns = [];
 
-		rowColumns.push(createURL(href, name));
-		rowColumns.push(createURL(href, Liferay.Language.get(type)));
-		rowColumns.push(createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
 
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
+		rowColumns.push(<portlet:namespace />createURL(href, name));
+		rowColumns.push(<portlet:namespace />createURL(href, Liferay.Language.get(type)));
+		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
 		searchContainer.deleteRow(1, searchContainer.getData());
 		searchContainer.addRow(rowColumns, organizationId);
@@ -95,11 +86,11 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 	}
 </script>
 
-<liferay-ui:error-marker key="organization.errorSection" value="details" />
+<liferay-ui:error-marker key="errorSection" value="details" />
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<fieldset class="block-labels col">
+<fieldset class="block-labels">
 	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
 	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -145,7 +136,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 	</c:if>
 </fieldset>
 
-<fieldset class="block-labels col">
+<fieldset class="block-labels">
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />

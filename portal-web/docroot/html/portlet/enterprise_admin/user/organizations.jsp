@@ -32,58 +32,10 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
-<h3><liferay-ui:message key="organizations" /></h3>
-
-<liferay-ui:search-container
-	id='<%= renderResponse.getNamespace() + "organizationsSearchContainer" %>'
-	headerNames="organization,type"
->
-	<liferay-ui:search-container-results
-		results="<%= organizations %>"
-		total="<%= organizations.size() %>"
-	/>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.Organization"
-		keyProperty="organizationId"
-		modelVar="curOrganization"
-	>
-		<liferay-ui:search-container-column-text
-			name="organization"
-			property="organizationBreadcrumb"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="type"
-			value="<%= LanguageUtil.get(pageContext, curOrganization.getType()) %>"
-		/>
-
-		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= String.valueOf(curOrganization.getOrganizationId()) %>);"><%= removeOrganizationAction %></a>
-		</liferay-ui:search-container-column-text>
-	</liferay-ui:search-container-row>
-
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
-
-<liferay-ui:icon image="add" label="true" message="add" url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'/>
-
-<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectOrganizationURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/select_organization" />
-	<portlet:param name="tabs1" value="organizations" />
-</portlet:renderURL>
-
 <script type="text/javascript">
-	function <portlet:namespace />getSelectedOrganizationIds() {
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
-
-		return searchContainer.getData();
-	}
-
 	function <portlet:namespace />openOrganizationSelector() {
-		var organizationWindow = window.open('<%= selectOrganizationURL %>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+		var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
-		void('');
 		organizationWindow.focus();
 	}
 
@@ -100,3 +52,41 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		searchContainer.updateDataStore();
 	}
 </script>
+
+<h3><liferay-ui:message key="organizations" /></h3>
+
+<liferay-ui:search-container
+	id='<%= renderResponse.getNamespace() + "organizationsSearchContainer" %>'
+	headerNames="name,type"
+>
+	<liferay-ui:search-container-results
+		results="<%= organizations %>"
+		total="<%= organizations.size() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Organization"
+		keyProperty="organizationId"
+		modelVar="curOrganization"
+	>
+		<liferay-ui:search-container-column-text
+			name="name"
+			property="name"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="type"
+			value="<%= LanguageUtil.get(pageContext, curOrganization.getType()) %>"
+		/>
+
+		<liferay-ui:search-container-column-text>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+		</liferay-ui:search-container-column-text>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+
+<br />
+
+<input onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />

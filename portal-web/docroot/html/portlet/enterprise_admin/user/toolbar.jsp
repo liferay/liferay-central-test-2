@@ -22,15 +22,27 @@
  */
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="sms" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="smsSn" />
-	</td>
-</tr>
-</table>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<br />
+<%
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-users");
+%>
+
+<div class="lfr-portlet-toolbar">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+		<portlet:param name="struts_action" value="/enterprise_admin_users/view" />
+	</portlet:renderURL>
+
+	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-users") ? "current" : StringPool.BLANK %>">
+		<a href="<%= viewUsersURL %>"><liferay-ui:message key="view-users" /></a>
+	</span>
+
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</portlet:renderURL>
+
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-user") ? "current" : StringPool.BLANK %>"><a href="<%= addUserURL %>"><liferay-ui:message key="add-user" /></a></span>
+	</c:if>
+</div>

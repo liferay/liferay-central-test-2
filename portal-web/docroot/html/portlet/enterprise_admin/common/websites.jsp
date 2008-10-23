@@ -25,22 +25,27 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-List<Website> websites = (List<Website>)request.getAttribute("common.websites");
+String className = (String)request.getAttribute("websites.className");
+long classPK = (Long)request.getAttribute("websites.classPK");
+
+List<Website> websites = Collections.EMPTY_LIST;
+
+if (classPK > 0) {
+	websites = WebsiteServiceUtil.getWebsites(className, classPK);
+}
 
 if (websites.isEmpty()) {
 	websites = new ArrayList<Website>();
 
 	websites.add(new WebsiteImpl());
 }
-
-String className = (String)request.getAttribute("common.className");
 %>
 
-<liferay-ui:error-marker key="organization.errorSection" value="websites" />
+<liferay-ui:error-marker key="errorSection" value="websites" />
 
 <h3><liferay-ui:message key="websites" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
 <fieldset class="block-labels">
@@ -127,5 +132,4 @@ String className = (String)request.getAttribute("common.className");
 			);
 		}
 	);
-
 </script>

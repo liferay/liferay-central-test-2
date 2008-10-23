@@ -128,7 +128,7 @@
 }
 
 .ie6 .portlet-enterprise-admin .form-navigation li.selected a:hover {
-	background-color: #5C696E;	
+	background-color: #5C696E;
 }
 
 .portlet-enterprise-admin .form-navigation .modified-notice {
@@ -262,6 +262,12 @@
 
 .portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
 	border-collapse: collapse;
+}
+
+.portlet-enterprise-admin .instant-messenger-logo, .portlet-enterprise-admin .social-network-logo {
+	margin-left: 10px;
+	position: relative;
+	top: 9px;
 }
 
 .lfr-portlet-toolbar {

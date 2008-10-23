@@ -22,11 +22,51 @@
  */
 %>
 
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
+<%
+User selUser = (User)request.getAttribute("user.selUser");
+%>
+
+<h3><liferay-ui:message key="alerts-and-announcements" /></h3>
+
 <liferay-ui:message key="select-the-delivery-options-for-alerts-and-announcements" />
 
 <br /><br />
 
-<%
+<liferay-ui:search-container>
+	<liferay-ui:search-container-results
+		results="<%= AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId()) %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portlet.announcements.model.AnnouncementsDelivery"
+		escapedModel="<%= true %>"
+		keyProperty="deliveryId"
+		modelVar="delivery"
+	>
+		<liferay-ui:search-container-column-text
+			name="type"
+			value="<%= LanguageUtil.get(pageContext, delivery.getType()) %>"
+		/>
+		<liferay-ui:search-container-column-jsp
+			name="email"
+			path="/html/portlet/enterprise_admin/user/announcements_checkbox.jsp"
+		/>
+		<liferay-ui:search-container-column-jsp
+			name="sms"
+			path="/html/portlet/enterprise_admin/user/announcements_checkbox.jsp"
+		/>
+		<liferay-ui:search-container-column-jsp
+			name="website"
+			path="/html/portlet/enterprise_admin/user/announcements_checkbox.jsp"
+		/>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+
+<%--
 SearchContainer searchContainer = new SearchContainer();
 
 List<String> headerNames = new ArrayList<String>();
@@ -38,7 +78,7 @@ headerNames.add("website");
 
 searchContainer.setHeaderNames(headerNames);
 
-List<AnnouncementsDelivery> results = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(user2.getUserId());
+List<AnnouncementsDelivery> results = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId());
 List<ResultRow> resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
@@ -52,15 +92,15 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Email
 
-	row.addJSP("/html/portlet/enterprise_admin/user_announcements_checkbox.jsp");
+	row.addJSP("/html/portlet/enterprise_admin/user/announcements_checkbox.jsp");
 
 	// SMS
 
-	row.addJSP("/html/portlet/enterprise_admin/user_announcements_checkbox.jsp");
+	row.addJSP("/html/portlet/enterprise_admin/user/announcements_checkbox.jsp");
 
 	// Website
 
-	row.addJSP("/html/portlet/enterprise_admin/user_announcements_checkbox.jsp");
+	row.addJSP("/html/portlet/enterprise_admin/user/announcements_checkbox.jsp");
 
 	// Add result row
 
@@ -68,6 +108,4 @@ for (int i = 0; i < results.size(); i++) {
 }
 %>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<br />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />--%>

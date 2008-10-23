@@ -33,14 +33,6 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
 
-String className = Organization.class.getName();
-
-long classPK = 0;
-
-if (organization != null) {
-	classPK = organization.getOrganizationId();
-}
-
 String[] mainSections = PropsValues.ORGANIZATIONS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.ORGANIZATIONS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.ORGANIZATIONS_FORM_ADD_MISCELLANEOUS;
@@ -58,35 +50,38 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 String curSection = mainSections[0];
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
+<script type="text/javascript">
+	function <portlet:namespace />createURL(href, value, onclick) {
+		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
+	};
+
+	function <portlet:namespace />saveOrganization() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (organization == null) ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+</script>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add-organization" : "view-organizations" %>' />
 </liferay-util:include>
 
-<div id="organization">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
+
+<div id="<portlet:namespace />sectionsContainer">
 	<table class="organization-table" width="100%">
 	<tr>
 		<td>
 
 			<%
-			request.setAttribute("organization.selOrganization", organization);
-			request.setAttribute("common.className", className);
-
-			List<Website> websites = Collections.EMPTY_LIST;
-
-			if (classPK > 0) {
-				websites = WebsiteServiceUtil.getWebsites(className, classPK);
-			}
-
-			request.setAttribute("common.websites", websites);
+			request.setAttribute("websites.className", Organization.class.getName());
+			request.setAttribute("websites.classPK", organizationId);
 
 			for (String section : allSections) {
-				String sectionId = _getIdName(section);
-				String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getJspName(section) + ".jsp";
+				String sectionId = _getSectionId(section);
+				String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getSectionJsp(section) + ".jsp";
 			%>
 
 				<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
@@ -101,7 +96,7 @@ String curSection = mainSections[0];
 				<div class="organization-info">
 					<p class="float-container">
 						<c:if test="<%= organization != null %>">
-							<img alt="<%= organization.getName() %>" class="avatar" src=" <%=themeDisplay.getPathThemeImages()%>/control_panel/avatar_organization_small.png" />
+							<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathThemeImages() %>/control_panel/avatar_organization_small.png" />
 
 							<span><%= organization.getName() %></span>
 						</c:if>
@@ -109,72 +104,10 @@ String curSection = mainSections[0];
 				</div>
 
 				<%
-				for (int i = 0; i < _CATEGORY_NAMES.length; i++) {
-					String category = _CATEGORY_NAMES[i];
-					String[] sections = categorySections[i];
-
-					if (sections.length > 0) {
+				String[] categoryNames = _CATEGORY_NAMES;
 				%>
 
-						<div class="menu-group">
-							<h3><liferay-ui:message key="<%= category %>" /></h3>
-
-							<ul>
-
-								<%
-								String errorSection = (String)request.getAttribute("organization.errorSection");
-
-								if (Validator.isNotNull(errorSection)){
-									curSection = StringPool.BLANK;
-								}
-
-								for (String section : sections) {
-									String sectionId = _getIdName(section);
-
-									boolean error = false;
-
-									if (sectionId.equals(errorSection)) {
-										error = true;
-
-										curSection = section;
-									}
-
-									String cssClass = StringPool.BLANK;
-
-									if (curSection.equals(section)) {
-										cssClass += "selected";
-									}
-
-									if (error) {
-										cssClass += " section-error";
-									}
-								%>
-
-									<li class="<%= cssClass %>">
-										<a href="#<%= sectionId %>" id="<%= sectionId %>Link">
-
-										<liferay-ui:message key="<%= section %>" />
-
-										<span class="modified-notice"> (<liferay-ui:message key="modified" />) </span>
-
-										<c:if test="<%= error %>">
-											<span class="error-notice"> (<liferay-ui:message key="error" />) </span>
-										</c:if>
-
-										</a>
-									</li>
-
-								<%
-								}
-								%>
-
-							</ul>
-						</div>
-
-				<%
-					}
-				}
-				%>
+				<%@ include file="/html/portlet/enterprise_admin/common/categories.jspf" %>
 
 				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />
@@ -187,50 +120,12 @@ String curSection = mainSections[0];
 	</table>
 </div>
 
-<script type="text/javascript">
-	jQuery(
-		function () {
-			var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
-				{
-					container: '#organization'
-				}
-			);
-
-			<%
-			String errorSection = (String)request.getAttribute("organization.errorSection");
-			%>
-
-			<c:if test="<%= Validator.isNotNull(errorSection) %>">
-				<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
-			</c:if>
-		}
-	);
-
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</c:if>
-</script>
+	</script>
+</c:if>
 
 <%!
 private static String[] _CATEGORY_NAMES = {"organization-information", "identification", "miscellaneous"};
-
-private String _getIdName(String name) {
-	int pos = name.indexOf(StringPool.DASH);
-
-	if (pos == -1) {
-		return name;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(name.substring(0, pos));
-	sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
-	sb.append(name.substring(pos + 2));
-
-	return _getIdName(sb.toString());
-}
-
-private String _getJspName(String name) {
-	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
-}
 %>

@@ -22,18 +22,4 @@
  */
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" />
-	</td>
-</tr>
-</table>
-
-<c:if test="<%= editable %>">
-	<br />
-
-	<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />saveUser('unlock');" />
-</c:if>
-
-<br /><br />
+<%@ include file="/html/portlet/enterprise_admin/common/websites.jsp" %>

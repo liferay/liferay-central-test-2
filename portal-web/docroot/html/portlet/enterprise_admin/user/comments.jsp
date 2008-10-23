@@ -22,6 +22,16 @@
  */
 %>
 
-<liferay-ui:tabs names="comments">
-	<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="comments" />
-</liferay-ui:tabs>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
+<%
+User selUser = (User)request.getAttribute("user.selUser");
+%>
+
+<h3><liferay-ui:message key="comments" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="comments" />
+	</div>
+</fieldset>

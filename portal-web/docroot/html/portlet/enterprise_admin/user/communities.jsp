@@ -22,15 +22,4 @@
  */
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="open-id" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="openId" />
-	</td>
-</tr>
-</table>
-
-<br />
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>

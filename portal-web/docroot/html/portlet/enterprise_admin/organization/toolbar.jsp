@@ -26,8 +26,6 @@
 
 <%
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-organizations");
-
-Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 %>
 
 <div class="lfr-portlet-toolbar">

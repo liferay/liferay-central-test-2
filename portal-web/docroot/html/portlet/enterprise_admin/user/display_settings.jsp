@@ -22,52 +22,49 @@
  */
 %>
 
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
 <%
-String languageId = BeanParamUtil.getString(user2, request, "languageId");
-String timeZoneId = BeanParamUtil.getString(user2, request, "timeZoneId");
+User selUser = (User)request.getAttribute("user.selUser");
+
+String languageId = BeanParamUtil.getString(selUser, request, "languageId");
+String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId");
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="language" />
-	</td>
-	<td>
+<h3><liferay-ui:message key="display-settings" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />languageId"><liferay-ui:message key="language" /></label>
+
 		<select name="<portlet:namespace />languageId">
 
 			<%
-			Locale locale2 = LocaleUtil.fromLanguageId(languageId);
+			Locale selLocale = LocaleUtil.fromLanguageId(languageId);
 
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
-			for (int i = 0; i < locales.length; i++) {
+			for (Locale curLocale : locales) {
 			%>
 
-				<option <%= (locale2.getLanguage().equals(locales[i].getLanguage()) && locale2.getCountry().equals(locales[i].getCountry())) ? "selected" : "" %> value="<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+				<option <%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) ? "selected" : "" %> value="<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>"><%= curLocale.getDisplayName(locale) %></option>
 
 			<%
 			}
 			%>
 
 		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="time-zone" />
-	</td>
-	<td>
-		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="greeting" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="greeting" />
-	</td>
-</tr>
-</table>
+	</div>
 
-<br />
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />timeZoneId"><liferay-ui:message key="time-zone" /></label>
+
+		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />greeting"><liferay-ui:message key="greeting" /></label>
+
+		<liferay-ui:input-field  model="<%= User.class %>" bean="<%= selUser %>" field="greeting" />
+	</div>
+</fieldset>

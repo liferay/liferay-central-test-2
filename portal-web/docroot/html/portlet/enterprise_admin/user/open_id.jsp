@@ -22,31 +22,16 @@
  */
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="facebook" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="facebookSn" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="myspace" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="mySpaceSn" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="twitter" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="twitterSn" />
-	</td>
-</tr>
-</table>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<br />
+<%
+User selUser = (User)request.getAttribute("user.selUser");
+%>
+
+<h3><liferay-ui:message key="open-id" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="openId" />
+	</div>
+</fieldset>

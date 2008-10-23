@@ -22,43 +22,20 @@
  */
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="password" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />password1" size="30" type="password" value="" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="enter-again" />
-	</td>
-	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<input name="<portlet:namespace />password2" size="30" type="password" value="" />
-			</td>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-			<c:if test="<%= user.getUserId() != user2.getUserId() %>">
+<%
+Contact selContact = (Contact)request.getAttribute("user.selContact");
+%>
 
-				<%
-				boolean passwordReset = BeanParamUtil.getBoolean(user2, request, "passwordReset");
-				%>
+<liferay-ui:error-marker key="errorSection" value="sms" />
 
-				<td></td>
-				<td>
-					<liferay-ui:input-checkbox param="passwordReset" defaultValue="<%= passwordReset %>" />
+<h3><liferay-ui:message key="sms" /></h3>
 
-					<liferay-ui:message key="password-reset-required" />
-				</td>
-			</c:if>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
 
-<br />
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="smsSn" />
+	</div>
+</fieldset>

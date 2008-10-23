@@ -50,6 +50,12 @@ public class SearchContainerResultsTag extends TagSupport {
 				_total = (Integer)pageContext.getAttribute(_totalVar);
 			}
 
+			if (_results != null) {
+				if (_total < _results.size()) {
+					_total = _results.size();
+				}
+			}
+
 			SearchContainerTag parentTag =
 				(SearchContainerTag)findAncestorWithClass(
 					this, SearchContainerTag.class);

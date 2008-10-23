@@ -25,13 +25,33 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+Contact selContact = (Contact)request.getAttribute("user.selContact");
 %>
 
-<h3><liferay-ui:message key="comments" /></h3>
+<h3><liferay-ui:message key="social-network" /></h3>
 
 <fieldset class="block-labels">
 	<div class="ctrl-holder">
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="comments" />
+		<label for="<portlet:namespace />facebookSn"><liferay-ui:message key="facebook" /></label>
+
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="facebookSn" />
+
+		<img alt="<liferay-ui:message key="facebook" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/facebook.jpg" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />mySpaceSn"><liferay-ui:message key="myspace" /></label>
+
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="mySpaceSn" />
+
+		<img alt="<liferay-ui:message key="myspace" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/myspace.jpg" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />twitterSn"><liferay-ui:message key="twitter" /></label>
+
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="twitterSn" />
+
+		<img alt="<liferay-ui:message key="twitter" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/twitter.jpg" />
 	</div>
 </fieldset>
