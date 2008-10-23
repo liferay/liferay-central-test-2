@@ -6425,7 +6425,7 @@ Liferay.Language = {
 
 		var value = instance._cache[url];
 
-		if (value != null) {
+		if (value) {
 			return value;
 		}
 
@@ -7190,6 +7190,9 @@ Liferay.autoFields = new Class({
 	 *
 	 * Optional
 	 * fieldIndexes {string}: The name of the POST parameter that will contain a list of the order for the fields.
+	 * arrowContainer{string}: A jQuery selector which defines where to show the arrows to move up and down the rows. The arrows
+	 * 		are not shown if this option is not used
+	 *
 	 */
 
 	initialize: function(options) {
@@ -7299,6 +7302,10 @@ Liferay.autoFields = new Class({
 			}
 		);
 
+		if (options.arrowContainer){
+			instance._showArrows(options.arrowContainer);
+		}
+
 		Liferay.bind(
 			'submitForm',
 			function(event, data) {
@@ -7321,7 +7328,7 @@ Liferay.autoFields = new Class({
 
 		var newSeed = (++instance._idSeed);
 
-		clone.find('input, select').each(
+		clone.find('input, select, textarea').each(
 			function() {
 				var el = jQuery(this);
 				var oldName = el.attr('name');
@@ -7416,12 +7423,56 @@ Liferay.autoFields = new Class({
 		return serializedData.join(',');
 	},
 
+	_moveDown: function(target) {
+		var element = jQuery(target);
+
+		while (!element.is('.lfr-form-row')) {
+			element = element.parent();
+		}
+
+		element.next().after(element);
+	},
+
+	_moveUp: function(target) {
+		var element = jQuery(target);
+		
+		while(!element.is('.lfr-form-row')) {
+			element = element.parent();
+		}
+
+		element.prev().before(element);
+	},
+
 	_queueUndo: function(deletedElement) {
 		var instance = this;
 
 		instance._undoCache.push(deletedElement);
 
 		Liferay.trigger('updateUndoList');
+	},
+
+	_showArrows: function(arrowContainer) {
+		var instance = this;
+		var arrowControls = jQuery('<a href="javascript: ;" class="move-up">' + Liferay.Language.get('move-up') + '</a><a href="javascript: ;" class="move-down">' + Liferay.Language.get('move-down') + '</a>');
+
+		var arrowContainers = jQuery(arrowContainer);
+		arrowContainers.append(arrowControls);
+		
+		arrowContainers.click(
+			function(event) {
+				if (event.target.parentNode.className.indexOf('lfr-arrow-controls') > -1) {
+					var target = jQuery(event.target);
+
+					if (target.is('.move-up')) {
+						instance._moveUp(target);
+					}
+
+					if (target.is('.move-down')) {
+						instance._moveDown(target);
+					}
+				}
+			}
+		);
 	},
 
 	_updateUndoList: function() {
