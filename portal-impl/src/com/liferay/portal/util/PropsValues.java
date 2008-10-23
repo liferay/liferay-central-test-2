@@ -1064,6 +1064,13 @@ public class PropsValues {
 	public static final boolean TCK_URL = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.TCK_URL));
 
+	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_ID = PropsUtil.get(
+		PropsKeys.TERMS_OF_USE_JOURNAL_ARTICLE_ID);
+
+	public static final long TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsKeys.TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID));
+
 	public static boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.TERMS_OF_USE_REQUIRED));
 
