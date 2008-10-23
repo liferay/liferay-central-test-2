@@ -1075,6 +1075,10 @@ public class PropsKeys {
 
 	public static final String TCK_URL = "tck.url";
 
+	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_ID = "terms.of.use.journal.article.id";
+
+	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID = "terms.of.use.journal.article.group.id";
+
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
 	public static final String THEME_CSS_FAST_LOAD = "theme.css.fast.load";
