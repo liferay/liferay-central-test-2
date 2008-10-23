@@ -24,6 +24,7 @@ package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -116,6 +117,16 @@ public class ExportArticleAction extends PortletAction {
 
 			StringBuilder sb = new StringBuilder();
 
+			sb.append("<html>");
+
+			sb.append("<head>");
+			sb.append("<meta content=\"");
+			sb.append(ContentTypes.TEXT_HTML_UTF8);
+			sb.append("\" http-equiv=\"content-type\" />");
+			sb.append("</head>");
+
+			sb.append("<body>");
+
 			sb.append(articleDisplay.getContent());
 
 			int pages = articleDisplay.getNumberOfPages();
@@ -126,6 +137,9 @@ public class ExportArticleAction extends PortletAction {
 
 				sb.append(articleDisplay.getContent());
 			}
+
+			sb.append("</body>");
+			sb.append("</html>");
 
 			is = new ByteArrayInputStream(
 				sb.toString().getBytes(StringPool.UTF8));
