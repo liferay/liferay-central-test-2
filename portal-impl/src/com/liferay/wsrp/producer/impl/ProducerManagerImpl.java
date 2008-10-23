@@ -163,7 +163,7 @@ public class ProducerManagerImpl implements ProducerManager {
 		}
 	}
 
-	private static final String _DEFAULT_NAMESPACE = "defaultNamespace";
+	private static final String _DEFAULT_NAMESPACE = "dummyNamespace";
 
 	private static final String _DEFAULT_REGISTRATION_VALIDATOR =
 		DefaultRegistrationValidator.class.getName();
