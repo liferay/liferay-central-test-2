@@ -278,6 +278,10 @@
 	padding: 2px;
 }
 
+.ie6 .lfr-portlet-toolbar {
+	width: 100%;
+}
+
 .lfr-portlet-toolbar .lfr-toolbar-button a {
 	background: url() no-repeat 5px 50%;
 	border: 1px solid #F6F8FB;

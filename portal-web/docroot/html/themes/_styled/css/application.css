@@ -293,6 +293,12 @@
 	top: 1px;
 }
 
+.ie6 .ui-tabs li a, .ie6 .tabs li span {
+	background-image: none;
+	border-bottom: 3px solid #304049;
+	padding-bottom: 7px;	
+}
+
 .ui-tabs li a:hover {
 	text-decoration: underline;
 }
@@ -311,6 +317,10 @@
 	border-bottom: none;
 	color: #369;
 	font-weight: bold;
+}
+
+.ie6 .ui-tabs li.current a, .ie6 .ui-tabs li.current span {
+	padding-bottom: 10px;
 }
 
 .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
