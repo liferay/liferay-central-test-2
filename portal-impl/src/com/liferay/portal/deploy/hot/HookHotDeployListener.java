@@ -316,28 +316,6 @@ public class HookHotDeployListener
 
 		// Begin backwards compatibility for 5.1.0
 
-		EventsContainer eventsContainer = _eventsContainerMap.get(
-			servletContextName);
-
-		if (eventsContainer == null) {
-			eventsContainer = new EventsContainer();
-
-			_eventsContainerMap.put(servletContextName, eventsContainer);
-		}
-
-		List<Element> eventEls = root.elements("event");
-
-		for (Element eventEl : eventEls) {
-			String eventName = eventEl.elementText("event-type");
-			String eventClass = eventEl.elementText("event-class");
-
-			Object obj = initEvent(eventName, eventClass, portletClassLoader);
-
-			if (obj != null) {
-				eventsContainer.registerEvent(eventName, obj);
-			}
-		}
-
 		ModelListenersContainer modelListenersContainer =
 			_modelListenersContainerMap.get(servletContextName);
 
@@ -361,6 +339,28 @@ public class HookHotDeployListener
 			if (modelListener != null) {
 				modelListenersContainer.registerModelListener(
 					modelName, modelListener);
+			}
+		}
+
+		EventsContainer eventsContainer = _eventsContainerMap.get(
+			servletContextName);
+
+		if (eventsContainer == null) {
+			eventsContainer = new EventsContainer();
+
+			_eventsContainerMap.put(servletContextName, eventsContainer);
+		}
+
+		List<Element> eventEls = root.elements("event");
+
+		for (Element eventEl : eventEls) {
+			String eventName = eventEl.elementText("event-type");
+			String eventClass = eventEl.elementText("event-class");
+
+			Object obj = initEvent(eventName, eventClass, portletClassLoader);
+
+			if (obj != null) {
+				eventsContainer.registerEvent(eventName, obj);
 			}
 		}
 
