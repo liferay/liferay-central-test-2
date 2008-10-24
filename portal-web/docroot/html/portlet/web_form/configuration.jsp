@@ -53,6 +53,10 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	.ctrl-holder label {
 		font-weight: bold;
 	}
+
+	.lfr-form-row .row-controls {
+		right: 10px;
+	}
 </style>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" id="<portlet:namespace />fm" name="<portlet:namespace />fm">
@@ -203,16 +207,12 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<legend>
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(fieldLabel) %>">
-						<span class="fieldLabel"><%= fieldLabel %></span>
+						<span class="field-label"><%= fieldLabel %></span>
 					</c:when>
 					<c:otherwise>
 						<liferay-ui:message key="field" /> <%= index %>
 					</c:otherwise>
 				</c:choose>
-
-				<c:if test="<%= !fieldsEditingDisabled %>">
-					<span class="lfr-arrow-controls"></span>
-				</c:if>
 			</legend>
 
 			<div class="ctrl-holder">
@@ -402,7 +402,8 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 						container: '#<portlet:namespace />webFields',
 						baseRows: '#<portlet:namespace />webFields > fieldset',
 						fieldIndexes: '<portlet:namespace />formFieldsIndexes',
-						arrowContainer: '.lfr-arrow-controls'
+						sortable: true,
+						sortableHandle: '.field-label'
 					}
 				);
 			</c:if>

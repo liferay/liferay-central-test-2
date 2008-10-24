@@ -235,7 +235,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/delete.png);
 }
 
-.lfr-form-row legend .fieldLabel{
+.lfr-form-row legend .field-label{
 	float:left;
 	margin-right: 10px;
 }
@@ -252,12 +252,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	width: 16px;
 }
 
-.lfr-form-row .lfr-arrow-controls .move-up {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png);
-}
-
-.lfr-form-row .lfr-arrow-controls .move-down {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png);
+.lfr-form-row .handle-sort-vertical {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/application/handle_sort_vertical.png) no-repeat 0 50%;
+	cursor: move;
+	padding-left: 20px;
 }
 
 .uni-form .lfr-form-row fieldset {
