@@ -719,8 +719,8 @@ public class SourceFormatter {
 		ds.setExcludes(
 			new String[] {
 				"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
-				"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
-				"**\\JSMin.java", "**\\PropsKeys.java",
+				"**\\BeanReference.java", "**\\EARXMLBuilder.java",
+				"**\\EJBXMLBuilder.java", "**\\PropsKeys.java",
 				"**\\InstanceWrapperBuilder.java",
 				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
 				"**\\UserAttributes.java", "**\\WebKeys.java",
