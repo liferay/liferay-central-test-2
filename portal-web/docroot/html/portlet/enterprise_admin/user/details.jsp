@@ -88,11 +88,22 @@ if (selContact != null) {
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />screenName"><liferay-ui:message key="screen-name" /></label>
+	<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE || (selUser != null) %>">
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />screenName"><liferay-ui:message key="screen-name" /></label>
 
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="screenName" />
-	</div>
+			<c:choose>
+				<c:when test="<%= PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
+					<%= selUser.getScreenName() %>
+
+					<input name="< portlet:namespace />screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="screenName" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</c:if>
 
 	<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
