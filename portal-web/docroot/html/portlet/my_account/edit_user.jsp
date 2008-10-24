@@ -110,7 +110,7 @@ request.setAttribute("edit_user.jsp-user2", user2);
 	<c:if test="<%= (passwordPolicy != null) && user2.getLockout() %>">
 		<liferay-ui:tabs names="lockout" />
 
-		<%@ include file="/html/portlet/enterprise_admin/edit_user_lockout.jspf" %>
+		<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_lockout.jspf" %>--%>
 	</c:if>
 
 	<c:if test="<%= editable %>">
@@ -168,12 +168,12 @@ request.setAttribute("edit_user.jsp-user2", user2);
 			refresh="<%= false %>"
 		>
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jspf" %>
+				<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jspf" %>--%>
 			</liferay-ui:section>
 
 			<c:if test="<%= (passwordPolicy == null) || passwordPolicy.isChangeable() %>">
 				<liferay-ui:section>
-					<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>
+					<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>--%>
 				</liferay-ui:section>
 			</c:if>
 
@@ -255,23 +255,23 @@ request.setAttribute("edit_user.jsp-user2", user2);
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_open_id.jspf" %>
+			<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_open_id.jspf" %>--%>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jspf" %>
+			<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jspf" %>--%>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_im.jspf" %>
+			<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_im.jspf" %>--%>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_social.jspf" %>
+			<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_social.jspf" %>--%>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_announcements.jspf" %>
+			<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_announcements.jspf" %>--%>
 		</liferay-ui:section>
 	</liferay-ui:tabs>
 
-	<%@ include file="/html/portlet/enterprise_admin/edit_user_comments.jspf" %>
+	<%--<%@ include file="/html/portlet/enterprise_admin/edit_user_comments.jspf" %>--%>
 
 	<%
 	PortalUtil.setPageSubtitle(user2.getFullName(), request);

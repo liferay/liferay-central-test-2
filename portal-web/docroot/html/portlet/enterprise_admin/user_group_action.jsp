@@ -79,11 +79,6 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 		<portlet:param name="tabs1" value="users" />
-
-		<c:if test="<%= filterManageableOrganizations %>">
-			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
-		</c:if>
-
 		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:renderURL>
 
