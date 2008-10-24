@@ -30,21 +30,21 @@ my.places.show.user.public.sites.with.no.layouts
 terms.of.use.required
 theme.css.fast.load
 
+passwords.passwordpolicytoolkit.generator
+passwords.passwordpolicytoolkit.static
+
+layout.static.portlets.all
+
+auto.login.hooks
+
+application.startup.events
+
 login.events.post
 login.events.pre
 logout.events.post
 logout.events.pre
 servlet.service.events.post
 servlet.service.events.pre
-
-passwords.passwordpolicytoolkit.generator
-passwords.passwordpolicytoolkit.static
-
-layout.static.portlets.all
-
-application.startup.events
-
-auto.login.hooks
 -->
 <!ELEMENT portal-properties (#PCDATA)>
 

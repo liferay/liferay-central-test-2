@@ -494,7 +494,7 @@ public class HookHotDeployListener
 		_autoLoginsContainerMap.put(servletContextName, autoLoginsContainer);
 
 		String[] autoLoginClasses = StringUtil.split(
-			portalProperties.getProperty(PropsKeys.AUTO_LOGIN_HOOKS));
+			portalProperties.getProperty(AUTO_LOGIN_HOOKS));
 
 		for (String autoLoginClass : autoLoginClasses) {
 			AutoLogin autoLogin = (AutoLogin)portletClassLoader.loadClass(
@@ -671,7 +671,7 @@ public class HookHotDeployListener
 	protected void resetPortalProperties(Properties portalProperties)
 		throws Exception {
 
-		for (String fieldName : _PROPS_KEYS_BOOLEAN) {
+		for (String fieldName : _PROPS_VALUES_BOOLEAN) {
 			String key = StringUtil.replace(
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
@@ -694,7 +694,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_KEYS_INTEGER) {
+		for (String fieldName : _PROPS_VALUES_INTEGER) {
 			String key = StringUtil.replace(
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
@@ -717,7 +717,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_KEYS_LONG) {
+		for (String fieldName : _PROPS_VALUES_LONG) {
 			String key = StringUtil.replace(
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
@@ -740,7 +740,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_KEYS_STRING) {
+		for (String fieldName : _PROPS_VALUES_STRING) {
 			String key = StringUtil.replace(
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
@@ -762,7 +762,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_KEYS_STRING_ARRAY) {
+		for (String fieldName : _PROPS_VALUES_STRING_ARRAY) {
 			String key = StringUtil.replace(
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
@@ -793,26 +793,6 @@ public class HookHotDeployListener
 		LayoutCacheUtil.clearCache();
 	}
 
-	private static final String[] _PROPS_KEYS_BOOLEAN = new String[] {
-		AUTH_FORWARD_BY_LAST_PATH,
-		JAVASCRIPT_FAST_LOAD,
-		LAYOUT_TEMPLATE_CACHE_ENABLED,
-		LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE,
-		LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED,
-		LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE,
-		LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE,
-		LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED,
-		LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE,
-		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS,
-		MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS,
-		MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS,
-		MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS,
-		MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS,
-		MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS,
-		TERMS_OF_USE_REQUIRED,
-		THEME_CSS_FAST_LOAD
-	};
-
 	private static final String[] _PROPS_KEYS_EVENTS = new String[] {
 		LOGIN_EVENTS_POST,
 		LOGIN_EVENTS_PRE,
@@ -822,19 +802,39 @@ public class HookHotDeployListener
 		SERVLET_SERVICE_EVENTS_PRE
 	};
 
-	private static final String[] _PROPS_KEYS_INTEGER = new String[] {
+	private static final String[] _PROPS_VALUES_BOOLEAN = new String[] {
+		"AUTH_FORWARD_BY_LAST_PATH",
+		"JAVASCRIPT_FAST_LOAD",
+		"LAYOUT_TEMPLATE_CACHE_ENABLED",
+		"LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE",
+		"LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED",
+		"LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE",
+		"LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE",
+		"LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED",
+		"LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE",
+		"MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS",
+		"TERMS_OF_USE_REQUIRED",
+		"THEME_CSS_FAST_LOAD
 	};
 
-	private static final String[] _PROPS_KEYS_LONG = new String[] {
+	private static final String[] _PROPS_VALUES_INTEGER = new String[] {
 	};
 
-	private static final String[] _PROPS_KEYS_STRING = new String[] {
-		PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR,
-		PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC
+	private static final String[] _PROPS_VALUES_LONG = new String[] {
 	};
 
-	private static final String[] _PROPS_KEYS_STRING_ARRAY = new String[] {
-		LAYOUT_STATIC_PORTLETS_ALL
+	private static final String[] _PROPS_VALUES_STRING = new String[] {
+		"PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR",
+		"PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC"
+	};
+
+	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
+		"LAYOUT_STATIC_PORTLETS_ALL"
 	};
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
