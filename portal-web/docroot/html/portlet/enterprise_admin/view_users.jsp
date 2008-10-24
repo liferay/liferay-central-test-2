@@ -40,6 +40,10 @@ if (filterManageableOrganizations) {
 
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
 
+<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value="view-users" />
+</liferay-util:include>
+
 <liferay-ui:search-container
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
