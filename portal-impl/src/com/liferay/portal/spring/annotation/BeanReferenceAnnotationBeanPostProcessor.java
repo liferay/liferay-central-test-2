@@ -22,18 +22,13 @@
 
 package com.liferay.portal.spring.annotation;
 
-import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.annotation.BeanReferenceCallback;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Field;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanCreationException;
@@ -43,59 +38,37 @@ import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
-import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * <a href="BeanReferenceAnnotationBeanPostProcessor.java.html"><b><i>View Source</i></b></a>
+ * <a href="BeanReferenceAnnotationBeanPostProcessor.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class BeanReferenceAnnotationBeanPostProcessor implements
-		InstantiationAwareBeanPostProcessor, MergedBeanDefinitionPostProcessor,
-		BeanFactoryAware {
-
-	protected InjectionMetadata findResourceMetadata(Class clazz) {
-		InjectionMetadata metadata = _injectionMetadataCache.get(clazz);
-
-		if (metadata == null) {
-			synchronized (_injectionMetadataCache) {
-				metadata = _injectionMetadataCache.get(clazz);
-
-				if (metadata == null) {
-					metadata = new InjectionMetadata(clazz);
-
-					BeanReferenceCallback callback = new BeanReferenceCallback(
-							metadata, clazz);
-
-					ReflectionUtils.doWithFields(clazz, callback);
-					ReflectionUtils.doWithMethods(clazz, callback);
-
-					_injectionMetadataCache.put(clazz, metadata);
-				}
-			}
-		}
-
-		return metadata;
-	}
+public class BeanReferenceAnnotationBeanPostProcessor
+	implements BeanFactoryAware, InstantiationAwareBeanPostProcessor,
+		MergedBeanDefinitionPostProcessor {
 
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 		throws BeansException {
 
 		return bean;
 	}
-	
+
 	public boolean postProcessAfterInstantiation(Object bean, String beanName)
 		throws BeansException {
 
-		InjectionMetadata metadata = findResourceMetadata(bean.getClass());
-	
+		InjectionMetadata injectionMetadata = findResourceMetadata(
+			bean.getClass());
+
 		try {
-			metadata.injectFields(bean, beanName);
-		} catch (Throwable ex) {
-			throw new BeanCreationException(beanName,
-					"Injection of BeanReference fields failed", ex);
+			injectionMetadata.injectFields(bean, beanName);
+		}
+		catch (Throwable t) {
+			throw new BeanCreationException(
+				beanName, "Injection of BeanReference fields failed", t);
 		}
 
 		return true;
@@ -108,120 +81,77 @@ public class BeanReferenceAnnotationBeanPostProcessor implements
 	}
 
 	public Object postProcessBeforeInstantiation(
-			Class beanClass, String beanName) 
+			Class beanClass, String beanName)
 		throws BeansException {
-		
+
 		return null;
 	}
 
 	public void postProcessMergedBeanDefinition(
-			RootBeanDefinition beanDefinition, Class beanType, 
+			RootBeanDefinition beanDefinition, Class beanType,
 			String beanName) {
-	
-		if (beanType != null) {
-			InjectionMetadata metadata = findResourceMetadata(beanType);	
-			metadata.checkConfigMembers(beanDefinition);
+
+		if (beanType == null) {
+			return;
 		}
+
+		InjectionMetadata injectionMetadata = findResourceMetadata(beanType);
+
+		injectionMetadata.checkConfigMembers(beanDefinition);
 	}
 
 	public PropertyValues postProcessPropertyValues(
-			PropertyValues pvs, PropertyDescriptor[] pds, Object bean, 
-			String beanName) 
+			PropertyValues propertyValues,
+			PropertyDescriptor[] propertyDescriptors, Object bean,
+			String beanName)
 		throws BeansException {
 
 		InjectionMetadata metadata = findResourceMetadata(bean.getClass());
-	
+
 		try {
-			metadata.injectMethods(bean, beanName, pvs);
-		} catch (Throwable ex) {
-			throw new BeanCreationException(
-				beanName, "Injection of BeanReference methods failed", ex);
+			metadata.injectMethods(bean, beanName, propertyValues);
 		}
-		
-		return pvs;
+		catch (Throwable t) {
+			throw new BeanCreationException(
+				beanName, "Injection of BeanReference methods failed", t);
+		}
+
+		return propertyValues;
 	}
 
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		_beanFactory = beanFactory;
 	}
 
-	protected class BeanReferenceElement extends
-			InjectionMetadata.InjectedElement {
+	protected InjectionMetadata findResourceMetadata(Class clazz) {
+		InjectionMetadata injectionMetadata = _injectionMetadataMap.get(clazz);
 
-		public BeanReferenceElement(Member member, PropertyDescriptor pd) {
-			super(member, pd);
-
-			AnnotatedElement ae = (AnnotatedElement) member;
-			BeanReference reference = ae.getAnnotation(BeanReference.class);
-
-			_name = reference.name();
+		if (injectionMetadata != null) {
+			return injectionMetadata;
 		}
 
-		protected Object getResourceToInject(
-				Object target, String requestingBeanName) {
+		synchronized (_injectionMetadataMap) {
+			injectionMetadata = _injectionMetadataMap.get(clazz);
 
-			return _beanFactory.getBean(_name, getResourceType());
-		}
+			if (injectionMetadata == null) {
+				injectionMetadata = new InjectionMetadata(clazz);
 
-		private String _name;
+				BeanReferenceCallback callback = new BeanReferenceCallback(
+					_beanFactory, injectionMetadata, clazz);
 
-	}
+				ReflectionUtils.doWithFields(clazz, callback);
+				ReflectionUtils.doWithMethods(clazz, callback);
 
-	protected class BeanReferenceCallback implements
-			ReflectionUtils.FieldCallback, ReflectionUtils.MethodCallback {
-
-		public BeanReferenceCallback(
-				InjectionMetadata injectionMetadata, Class clazz) {
-
-			_injectionMetadata = injectionMetadata;
-			_class = clazz;
-		}
-
-		public void doWith(Field field) {
-			if (field.isAnnotationPresent(BeanReference.class)) {
-				if (Modifier.isStatic(field.getModifiers())) {
-					throw new IllegalStateException(
-						"@BeanReference annotation is not supported on "
-						+ "static fields");
-				}
-
-				_injectionMetadata.addInjectedField(
-					new BeanReferenceElement(field, null));
+				_injectionMetadataMap.put(clazz, injectionMetadata);
 			}
 		}
 
-		public void doWith(Method method) {
-			if (method.isAnnotationPresent(BeanReference.class)
-					&& method.equals(ClassUtils.getMostSpecificMethod(method,
-							_class))) {
-
-				if (Modifier.isStatic(method.getModifiers())) {
-					throw new IllegalStateException(
-						"@BeanReference annotation is not supported on "
-						+ "static methods");
-				}
-
-				Class[] paramTypes = method.getParameterTypes();
-
-				if (paramTypes.length != 1) {
-					throw new IllegalStateException(
-						"@BeanReference annotation requires a single-arg "
-						+ "method: " + method);
-				}
-
-				PropertyDescriptor pd = BeanUtils.findPropertyForMethod(method);
-
-				_injectionMetadata.addInjectedMethod(
-						new BeanReferenceElement(method, pd));
-			}
-		}
-
-		private InjectionMetadata _injectionMetadata;
-		private Class _class;
+		return injectionMetadata;
 	}
 
 	private BeanFactory _beanFactory;
 
-	private Map<Class<?>, InjectionMetadata> _injectionMetadataCache = 
+	private Map<Class<?>, InjectionMetadata> _injectionMetadataMap =
 		new ConcurrentHashMap<Class<?>, InjectionMetadata>();
+
 }

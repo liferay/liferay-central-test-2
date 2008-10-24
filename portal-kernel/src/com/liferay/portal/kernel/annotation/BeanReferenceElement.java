@@ -22,23 +22,44 @@
 
 package com.liferay.portal.kernel.annotation;
 
-import com.liferay.portal.kernel.util.StringPool;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.InjectionMetadata;
+import java.lang.reflect.Member;
+import java.beans.PropertyDescriptor;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.reflect.AnnotatedElement;
 
 /**
- * <a href="BeanReference.java.html"><b><i>View Source</i></b></a>
+ * <a href="BeanReferenceElement.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-@Target({ElementType.FIELD, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface BeanReference {
+public class BeanReferenceElement extends InjectionMetadata.InjectedElement {
 
-	String name() default StringPool.BLANK;
+	public BeanReferenceElement(
+		BeanFactory beanFactory, Member member,
+		PropertyDescriptor propertyDescriptor) {
+
+		super(member, propertyDescriptor);
+
+		_beanFactory = beanFactory;
+
+		AnnotatedElement annotatedElement = (AnnotatedElement)member;
+
+		BeanReference beanReference = annotatedElement.getAnnotation(
+			BeanReference.class);
+
+		_name = beanReference.name();
+	}
+
+	protected Object getResourceToInject(
+		Object target, String requestingBeanName) {
+
+		return _beanFactory.getBean(_name, getResourceType());
+	}
+
+	private BeanFactory _beanFactory;
+	private String _name;
 
 }
