@@ -22,6 +22,7 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -224,9 +225,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	@javax.annotation.Resource(
-		name = "com.liferay.portal.service.QuartzLocalService.impl"
-	)
+	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService.impl")
 	protected QuartzLocalService quartzLocalService;
 
 	private Log _log = LogFactory.getLog(QuartzSchedulerEngineImpl.class);
