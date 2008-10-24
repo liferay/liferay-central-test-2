@@ -167,7 +167,7 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 			_outputVOError = true;
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(we);
+				_log.warn(we, we);
 			}
 		}
 	}
