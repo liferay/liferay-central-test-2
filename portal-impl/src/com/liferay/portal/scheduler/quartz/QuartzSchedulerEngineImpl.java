@@ -22,7 +22,6 @@
 
 package com.liferay.portal.scheduler.quartz;
 
-import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -33,6 +32,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -41,6 +41,7 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.quartz.CronTrigger;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -223,7 +224,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService.impl")
+	@javax.annotation.Resource(
+		name = "com.liferay.portal.service.QuartzLocalService.impl"
+	)
 	protected QuartzLocalService quartzLocalService;
 
 	private Log _log = LogFactory.getLog(QuartzSchedulerEngineImpl.class);

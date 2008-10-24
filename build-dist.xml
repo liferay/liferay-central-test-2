@@ -691,7 +691,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
 			<zipfileset
 				dir="lib/global"
-				includes="container.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar"
 				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
