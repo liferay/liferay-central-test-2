@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.spring.annotation;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 
@@ -31,7 +31,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import org.springframework.beans.BeanUtils;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.util.ClassUtils;
@@ -72,7 +71,7 @@ public class BeanReferenceCallback
 	public void doWith(Method method) {
 		if (!method.isAnnotationPresent(BeanReference.class) ||
 			!method.equals(ClassUtils.getMostSpecificMethod(method, _class))) {
-			
+
 			return;
 		}
 

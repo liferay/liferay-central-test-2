@@ -22,8 +22,6 @@
 
 package com.liferay.portal.spring.annotation;
 
-import com.liferay.portal.kernel.annotation.BeanReferenceCallback;
-
 import java.beans.PropertyDescriptor;
 
 import java.util.Map;

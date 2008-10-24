@@ -20,14 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.spring.annotation;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.InjectionMetadata;
-import java.lang.reflect.Member;
+import com.liferay.portal.kernel.annotation.BeanReference;
+
 import java.beans.PropertyDescriptor;
 
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Member;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.InjectionMetadata;
 
 /**
  * <a href="BeanReferenceElement.java.html"><b><i>View Source</i></b></a>
