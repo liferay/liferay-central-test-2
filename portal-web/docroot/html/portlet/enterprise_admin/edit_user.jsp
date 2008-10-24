@@ -74,9 +74,18 @@ String curSection = mainSections[0];
 	}
 </script>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add-user" : "view-users" %>' />
-</liferay-util:include>
+<c:choose>
+	<c:when test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+		<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
+			<liferay-util:param name="tabs1" value="profile" />
+		</liferay-util:include>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add-user" : "view-users" %>' />
+		</liferay-util:include>
+	</c:otherwise>
+</c:choose>
 
 <form class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -150,6 +159,12 @@ String curSection = mainSections[0];
 </div>
 
 </form>
+
+<%
+if (selUser != null) {
+	PortalUtil.setPageSubtitle(selUser.getFullName(), request);
+}
+%>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
