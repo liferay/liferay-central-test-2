@@ -166,7 +166,9 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 		catch (WorkflowException we) {
 			_outputVOError = true;
 
-			_log.error(we, we);
+			if (_log.isWarnEnabled()) {
+				_log.warn(we);
+			}
 		}
 	}
 
