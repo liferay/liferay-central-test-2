@@ -26,6 +26,7 @@ import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
@@ -35,6 +36,7 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -169,6 +171,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof ContactLastNameException ||
 					 e instanceof DuplicateUserEmailAddressException ||
 					 e instanceof DuplicateUserScreenNameException ||
+					 e instanceof NoSuchListTypeException ||
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
 					 e instanceof ReservedUserScreenNameException ||
@@ -176,9 +179,19 @@ public class EditUserAction extends PortletAction {
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
 					 e instanceof UserScreenNameException ||
-					 e instanceof UserSmsException) {
+					 e instanceof UserSmsException ||
+					 e instanceof WebsiteURLException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				if (e instanceof NoSuchListTypeException) {
+					NoSuchListTypeException nslte = (NoSuchListTypeException)e;
+
+					SessionErrors.add(
+						actionRequest,
+						e.getClass().getName() + nslte.getType());
+				}
+				else {
+					SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				}
 
 				if (e instanceof RequiredUserException) {
 					actionResponse.sendRedirect(
