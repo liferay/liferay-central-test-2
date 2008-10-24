@@ -319,52 +319,52 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.TasksReviewLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewLocalService.impl")
 	protected TasksReviewLocalService tasksReviewLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.TasksReviewService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewService.impl")
 	protected TasksReviewService tasksReviewService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
 	protected TasksReviewPersistence tasksReviewPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
 	protected TasksProposalLocalService tasksProposalLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
 	protected TasksProposalService tasksProposalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
 	protected TasksProposalPersistence tasksProposalPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
 	protected TasksProposalFinder tasksProposalFinder;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService.impl")
 	protected MBMessageLocalService mbMessageLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageService.impl")
 	protected MBMessageService mbMessageService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
 	protected MBMessagePersistence mbMessagePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl")
 	protected MBMessageFinder mbMessageFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
 	protected SocialActivityLocalService socialActivityLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected SocialActivityPersistence socialActivityPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
 }

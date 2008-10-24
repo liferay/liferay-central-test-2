@@ -269,54 +269,54 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.CalEventLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.CalEventLocalService.impl")
 	protected CalEventLocalService calEventLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.CalEventService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.CalEventService.impl")
 	protected CalEventService calEventService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl")
 	protected CalEventPersistence calEventPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl")
 	protected CalEventFinder calEventFinder;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@javax.annotation.Resource(name = "com.liferay.mail.service.MailService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.mail.service.MailService.impl")
 	protected MailService mailService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.CompanyLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.CompanyLocalService.impl")
 	protected CompanyLocalService companyLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.CompanyService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.CompanyService.impl")
 	protected CompanyService companyService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
 	protected CompanyPersistence companyPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletPreferencesService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletPreferencesService.impl")
 	protected PortletPreferencesService portletPreferencesService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
 	protected PortletPreferencesFinder portletPreferencesFinder;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
 	protected SocialActivityLocalService socialActivityLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected SocialActivityPersistence socialActivityPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
 }

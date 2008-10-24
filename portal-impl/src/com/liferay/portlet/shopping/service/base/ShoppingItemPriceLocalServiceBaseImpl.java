@@ -318,50 +318,50 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		this.shoppingOrderItemPersistence = shoppingOrderItemPersistence;
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService.impl")
 	protected ShoppingCartLocalService shoppingCartLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl")
 	protected ShoppingCartPersistence shoppingCartPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.impl")
 	protected ShoppingCategoryLocalService shoppingCategoryLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCategoryService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryService.impl")
 	protected ShoppingCategoryService shoppingCategoryService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl")
 	protected ShoppingCategoryPersistence shoppingCategoryPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCouponLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponLocalService.impl")
 	protected ShoppingCouponLocalService shoppingCouponLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCouponService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponService.impl")
 	protected ShoppingCouponService shoppingCouponService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl")
 	protected ShoppingCouponPersistence shoppingCouponPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl")
 	protected ShoppingCouponFinder shoppingCouponFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingItemLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemLocalService.impl")
 	protected ShoppingItemLocalService shoppingItemLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingItemService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemService.impl")
 	protected ShoppingItemService shoppingItemService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl")
 	protected ShoppingItemPersistence shoppingItemPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder.impl")
 	protected ShoppingItemFinder shoppingItemFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.impl")
 	protected ShoppingItemFieldLocalService shoppingItemFieldLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl")
 	protected ShoppingItemFieldPersistence shoppingItemFieldPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.impl")
 	protected ShoppingItemPriceLocalService shoppingItemPriceLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl")
 	protected ShoppingItemPricePersistence shoppingItemPricePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingOrderLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderLocalService.impl")
 	protected ShoppingOrderLocalService shoppingOrderLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingOrderService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderService.impl")
 	protected ShoppingOrderService shoppingOrderService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl")
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl")
 	protected ShoppingOrderFinder shoppingOrderFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.impl")
 	protected ShoppingOrderItemLocalService shoppingOrderItemLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl")
 	protected ShoppingOrderItemPersistence shoppingOrderItemPersistence;
 }

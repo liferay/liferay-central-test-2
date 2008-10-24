@@ -274,42 +274,42 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		this.tagsVocabularyPersistence = tagsVocabularyPersistence;
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
 	protected TagsAssetLocalService tagsAssetLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
 	protected TagsAssetService tagsAssetService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
 	protected TagsAssetPersistence tagsAssetPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
 	protected TagsAssetFinder tagsAssetFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
 	protected TagsEntryLocalService tagsEntryLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
 	protected TagsEntryService tagsEntryService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
 	protected TagsEntryPersistence tagsEntryPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
 	protected TagsEntryFinder tagsEntryFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsPropertyLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsPropertyLocalService.impl")
 	protected TagsPropertyLocalService tagsPropertyLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsPropertyService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsPropertyService.impl")
 	protected TagsPropertyService tagsPropertyService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl")
 	protected TagsPropertyPersistence tagsPropertyPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl")
 	protected TagsPropertyFinder tagsPropertyFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl")
 	protected TagsPropertyKeyFinder tagsPropertyKeyFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsSourceLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsSourceLocalService.impl")
 	protected TagsSourceLocalService tagsSourceLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsSourceService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsSourceService.impl")
 	protected TagsSourceService tagsSourceService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl")
 	protected TagsSourcePersistence tagsSourcePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsVocabularyLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsVocabularyLocalService.impl")
 	protected TagsVocabularyLocalService tagsVocabularyLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsVocabularyService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsVocabularyService.impl")
 	protected TagsVocabularyService tagsVocabularyService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl")
 	protected TagsVocabularyPersistence tagsVocabularyPersistence;
 }

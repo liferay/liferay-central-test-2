@@ -236,34 +236,34 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")
 	protected ExpandoColumnLocalService expandoColumnLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnService.impl")
 	protected ExpandoColumnService expandoColumnService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
 	protected ExpandoColumnPersistence expandoColumnPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl")
 	protected ExpandoColumnFinder expandoColumnFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoRowLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.ExpandoRowLocalService.impl")
 	protected ExpandoRowLocalService expandoRowLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
 	protected ExpandoRowPersistence expandoRowPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl")
 	protected ExpandoRowFinder expandoRowFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoTableLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.ExpandoTableLocalService.impl")
 	protected ExpandoTableLocalService expandoTableLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
 	protected ExpandoTablePersistence expandoTablePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
 	protected ExpandoValueService expandoValueService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
 	protected ExpandoValueFinder expandoValueFinder;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }

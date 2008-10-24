@@ -121,22 +121,22 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 		this.socialRequestInterpreterLocalService = socialRequestInterpreterLocalService;
 	}
 
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
 	protected SocialActivityLocalService socialActivityLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected SocialActivityPersistence socialActivityPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl")
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialRelationLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialRelationLocalService.impl")
 	protected SocialRelationLocalService socialRelationLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl")
 	protected SocialRelationPersistence socialRelationPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialRequestLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialRequestLocalService.impl")
 	protected SocialRequestLocalService socialRequestLocalService;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl")
 	protected SocialRequestPersistence socialRequestPersistence;
-	@javax.annotation.Resource(name = "com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl")
+	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl")
 	protected SocialRequestInterpreterLocalService socialRequestInterpreterLocalService;
 }
