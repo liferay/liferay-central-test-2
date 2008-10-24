@@ -45,6 +45,45 @@ else {
 	passwordPolicy = selUser.getPasswordPolicy();
 }
 
+String groupIds = ParamUtil.getString(request, "groupsSearchContainerPrimaryKeys");
+
+List<Group> groups = Collections.EMPTY_LIST;
+
+if (Validator.isNotNull(groupIds)) {
+	long[] groupIdsArray = StringUtil.split(groupIds, 0L);
+
+	groups = GroupLocalServiceUtil.getGroups(groupIdsArray);
+}
+else if (selUser != null) {
+	groups = selUser.getGroups();
+}
+
+String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
+
+List<Organization> organizations = Collections.EMPTY_LIST;
+
+if (Validator.isNotNull(organizationIds)) {
+	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
+
+	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
+}
+else if (selUser != null) {
+	organizations = selUser.getOrganizations();
+}
+
+String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
+
+List<Role> roles = Collections.EMPTY_LIST;
+
+if (Validator.isNotNull(roleIds)) {
+	long[] roleIdsArray = StringUtil.split(roleIds, 0L);
+
+	roles = RoleLocalServiceUtil.getRoles(roleIdsArray);
+}
+else if (selUser != null) {
+	roles = selUser.getRoles();
+}
+
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.USERS_FORM_ADD_MISCELLANEOUS;
@@ -102,6 +141,9 @@ String curSection = mainSections[0];
 			request.setAttribute("user.selUser", selUser);
 			request.setAttribute("user.selContact", selContact);
 			request.setAttribute("user.passwordPolicy", passwordPolicy);
+			request.setAttribute("user.groups", groups);
+			request.setAttribute("user.organizations", organizations);
+			request.setAttribute("user.roles", roles);
 
 			request.setAttribute("websites.className", Contact.class.getName());
 

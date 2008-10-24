@@ -25,20 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-User selUser = (User)request.getAttribute("user.selUser");
-
-String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
-
-List<Role> roles = Collections.EMPTY_LIST;
-
-if (Validator.isNotNull(roleIds)) {
-	long[] roleIdsArray = StringUtil.split(roleIds, 0L);
-
-	roles = RoleLocalServiceUtil.getRoles(roleIdsArray);
-}
-else if (selUser != null) {
-	roles = selUser.getRoles();
-}
+List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 %>
 
 <liferay-util:buffer var="removeRoleIcon">

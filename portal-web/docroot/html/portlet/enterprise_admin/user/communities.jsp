@@ -25,20 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-User selUser = (User)request.getAttribute("user.selUser");
-
-String groupIds = ParamUtil.getString(request, "groupsSearchContainerPrimaryKeys");
-
-List<Group> groups = Collections.EMPTY_LIST;
-
-if (Validator.isNotNull(groupIds)) {
-	long[] groupIdsArray = StringUtil.split(groupIds, 0L);
-
-	groups = GroupLocalServiceUtil.getGroups(groupIdsArray);
-}
-else if (selUser != null) {
-	groups = selUser.getGroups();
-}
+List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 %>
 
 <liferay-util:buffer var="removeGroupIcon">

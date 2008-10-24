@@ -25,20 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-User selUser = (User)request.getAttribute("user.selUser");
-
-String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
-
-List<Organization> organizations = Collections.EMPTY_LIST;
-
-if (Validator.isNotNull(organizationIds)) {
-	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
-
-	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
-}
-else if (selUser != null) {
-	organizations = selUser.getOrganizations();
-}
+List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
