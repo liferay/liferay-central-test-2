@@ -17,14 +17,14 @@
 		<property name="jndiName" value="mail/MailSession" />
 	</bean>
 	<bean name="dynamicDataSourceTargetSource" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTargetSource">
-		<property name="readOnlyDataSource">
+		<property name="readDataSource">
 			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="jdbc/LiferayReadOnlyPool" />
+				<property name="jndiName" value="jdbc/LiferayReadPool" />
 			</bean>
 		</property>
-		<property name="transactionalDataSource">
+		<property name="writeDataSource">
 			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="jdbc/LiferayTransactionalPool" />
+				<property name="jndiName" value="jdbc/LiferayWritePool" />
 			</bean>
 		</property>
 	</bean>

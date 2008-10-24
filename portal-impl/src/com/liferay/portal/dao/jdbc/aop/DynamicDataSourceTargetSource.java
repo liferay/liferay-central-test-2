@@ -56,7 +56,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		Operation operation = _operationTypeThreadLocal.get();
 
 		if (operation == null) {
-			operation = Operation.TRANSACTIONAL;
+			operation = Operation.WRITE;
 
 			_operationTypeThreadLocal.set(operation);
 		}
@@ -67,19 +67,19 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 	public Object getTarget() throws Exception {
 		Operation operationType = getOperation();
 
-		if (operationType == Operation.READ_ONLY) {
+		if (operationType == Operation.READ) {
 			if (_log.isTraceEnabled()) {
-				_log.trace("Returning read only data source");
+				_log.trace("Returning read data source");
 			}
 
-			return _readOnlyDataSource;
+			return _readDataSource;
 		}
 		else {
 			if (_log.isTraceEnabled()) {
-				_log.trace("Returning transactional data source");
+				_log.trace("Returning write data source");
 			}
 
-			return _transactionalDataSource;
+			return _writeDataSource;
 		}
 	}
 
@@ -96,7 +96,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 
 		String method = methodStack.pop();
 
-		setOperation(Operation.TRANSACTIONAL);
+		setOperation(Operation.WRITE);
 
 		return method;
 	}
@@ -120,12 +120,12 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		}
 	}
 
-	public void setReadOnlyDataSource(DataSource readOnlyDataSource) {
-		_readOnlyDataSource = readOnlyDataSource;
+	public void setReadDataSource(DataSource readDataSource) {
+		_readDataSource = readDataSource;
 	}
 
-	public void setTransactionalDataSource(DataSource transactionalDataSource) {
-		_transactionalDataSource = transactionalDataSource;
+	public void setWriteDataSource(DataSource writeDataSource) {
+		_writeDataSource = writeDataSource;
 	}
 
 	protected boolean inOperation() {
@@ -142,7 +142,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 	private static ThreadLocal<Operation> _operationTypeThreadLocal =
 		new ThreadLocal<Operation>();
 
-	private DataSource _readOnlyDataSource;
-	private DataSource _transactionalDataSource;
+	private DataSource _readDataSource;
+	private DataSource _writeDataSource;
 
 }

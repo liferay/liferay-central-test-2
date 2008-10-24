@@ -42,12 +42,11 @@ public class DynamicDataSourceAdvice {
 
 		String methodName = signature.getName();
 
-		if (isReadOnlyMethod(methodName)) {
-			_dynamicDataSourceTargetSource.setOperation(Operation.READ_ONLY);
+		if (isReadMethod(methodName)) {
+			_dynamicDataSourceTargetSource.setOperation(Operation.READ);
 		}
 		else {
-			_dynamicDataSourceTargetSource.setOperation(
-				Operation.TRANSACTIONAL);
+			_dynamicDataSourceTargetSource.setOperation(Operation.WRITE);
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -70,7 +69,7 @@ public class DynamicDataSourceAdvice {
 		return returnValue;
 	}
 
-	public boolean isReadOnlyMethod(String methodName) {
+	public boolean isReadMethod(String methodName) {
 		if ((methodName.startsWith("get") || methodName.startsWith("search")) &&
 			!methodName.startsWith("getPreferences") &&
 			!methodName.startsWith("getResource")) {

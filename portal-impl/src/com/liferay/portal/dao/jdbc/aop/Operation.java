@@ -30,7 +30,6 @@ package com.liferay.portal.dao.jdbc.aop;
  */
 public enum Operation {
 
-	READ_ONLY,
-	TRANSACTIONAL;
+	READ, WRITE;
 
 }
