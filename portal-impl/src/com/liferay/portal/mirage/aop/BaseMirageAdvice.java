@@ -22,13 +22,12 @@
 
 package com.liferay.portal.mirage.aop;
 
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
 import com.sun.portal.cms.mirage.service.custom.ContentService;
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
-
-import javax.annotation.Resource;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -61,25 +60,25 @@ public abstract class BaseMirageAdvice {
 	protected abstract Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable;
 
-	@Resource(name = "com.liferay.portal.mirage.ArticleImageService")
+	@BeanReference(name = "com.liferay.portal.mirage.ArticleImageService")
 	protected BinaryContentService articleImageService;
 
-	@Resource(name = "com.liferay.portal.mirage.ArticleResourceService")
+	@BeanReference(name = "com.liferay.portal.mirage.ArticleResourceService")
 	protected BinaryContentService articleResourceService;
 
-	@Resource(name = "com.liferay.portal.mirage.ContentFeedService")
+	@BeanReference(name = "com.liferay.portal.mirage.ContentFeedService")
 	protected ContentFeedService contentFeedService;
 
-	@Resource(name = "com.liferay.portal.mirage.ContentSearchService")
+	@BeanReference(name = "com.liferay.portal.mirage.ContentSearchService")
 	protected BinaryContentService contentSearchService;
 
-	@Resource(name = "com.liferay.portal.mirage.ContentService")
+	@BeanReference(name = "com.liferay.portal.mirage.ContentService")
 	protected ContentService contentService;
 
-	@Resource(name = "com.liferay.portal.mirage.ContentTypeService")
+	@BeanReference(name = "com.liferay.portal.mirage.ContentTypeService")
 	protected ContentTypeService contentTypeService;
 
-	@Resource(name = "com.liferay.portal.mirage.WorkflowService")
+	@BeanReference(name = "com.liferay.portal.mirage.WorkflowService")
 	protected WorkflowService workflowService;
 
 }

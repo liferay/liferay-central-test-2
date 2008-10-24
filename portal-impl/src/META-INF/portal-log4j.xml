@@ -8,6 +8,10 @@
 		</layout>
 	</appender>
 
+	<category name="com.liferay.portal.dao.jdbc.aop">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.ecyrd.jspwiki">
 		<priority value="ERROR" />
 	</category>
