@@ -412,6 +412,20 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupFinder.findByC_N(companyId, name);
 	}
 
+	public List<Group> getGroups(long[] groupIds)
+		throws PortalException, SystemException {
+
+		List<Group> groups = new ArrayList<Group>();
+
+		for (long groupId : groupIds) {
+			Group group = getGroup(groupId);
+
+			groups.add(group);
+		}
+
+		return groups;
+	}
+
 	public Group getLayoutGroup(long companyId, long plid)
 		throws PortalException, SystemException {
 

@@ -41,6 +41,7 @@ import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -248,6 +249,20 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public List<Role> getRoles(long companyId) throws SystemException {
 		return rolePersistence.findByCompanyId(companyId);
+	}
+
+	public List<Role> getRoles(long[] roleIds)
+		throws PortalException, SystemException {
+
+		List<Role> roles = new ArrayList<Role>();
+
+		for (long roleId : roleIds) {
+			Role role = getRole(roleId);
+
+			roles.add(role);
+		}
+
+		return roles;
 	}
 
 	public List<Role> getUserGroupRoles(long userId, long groupId)

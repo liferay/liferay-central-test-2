@@ -279,8 +279,8 @@ public class OrganizationLocalServiceImpl
 
 		List<Organization> organizations = new ArrayList<Organization>();
 
-		for (int i = 0; i < organizationIds.length; i++) {
-			Organization organization = getOrganization(organizationIds[i]);
+		for (long organizationId : organizationIds) {
+			Organization organization = getOrganization(organizationId);
 
 			organizations.add(organization);
 		}

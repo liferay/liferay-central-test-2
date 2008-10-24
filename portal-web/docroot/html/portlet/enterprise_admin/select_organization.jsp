@@ -24,16 +24,6 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<script type="text/javascript">
-	function <portlet:namespace/>setOrgType(url, type) {
-		if (type == 'locations') {
-			url += '&<portlet:namespace/>parentOrganizationIds=' + opener.<portlet:namespace/>getSelectedOrganizationIds();
-		}
-
-		location.href = url;
-	}
-</script>
-
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs names="organizations" />

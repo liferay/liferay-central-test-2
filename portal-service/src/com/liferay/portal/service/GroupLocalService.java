@@ -117,6 +117,11 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Group> getGroups(
+		long[] groupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group getLayoutGroup(long companyId,
 		long plid)
 		throws com.liferay.portal.PortalException,

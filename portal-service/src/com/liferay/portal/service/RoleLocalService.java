@@ -120,6 +120,11 @@ public interface RoleLocalService {
 	public java.util.List<com.liferay.portal.model.Role> getRoles(
 		long companyId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Role> getRoles(
+		long[] roleIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		long userId, long groupId) throws com.liferay.portal.SystemException;
 

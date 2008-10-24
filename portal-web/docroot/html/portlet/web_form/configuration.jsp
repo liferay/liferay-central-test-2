@@ -175,7 +175,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	}
 	else {
 		formFieldsIndexes = new int[0];
-		
+
 		for (int i = 1; true; i++) {
 			String fieldLabel = PrefsParamUtil.getString(preferences, request, "fieldLabel" + i);
 			if (Validator.isNull(fieldLabel)) {

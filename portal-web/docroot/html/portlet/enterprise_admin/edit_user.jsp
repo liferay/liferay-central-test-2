@@ -45,19 +45,6 @@ else {
 	passwordPolicy = selUser.getPasswordPolicy();
 }
 
-String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
-
-List<Organization> organizations = new ArrayList<Organization>();
-
-if (Validator.isNotNull(organizationIds)) {
-	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
-
-	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
-}
-else if (selUser != null) {
-	organizations = selUser.getOrganizations();
-}
-
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.USERS_FORM_ADD_MISCELLANEOUS;
@@ -106,7 +93,6 @@ String curSection = mainSections[0];
 			request.setAttribute("user.selUser", selUser);
 			request.setAttribute("user.selContact", selContact);
 			request.setAttribute("user.passwordPolicy", passwordPolicy);
-			request.setAttribute("user.organizations", organizations);
 
 			request.setAttribute("websites.className", Contact.class.getName());
 
@@ -142,7 +128,7 @@ String curSection = mainSections[0];
 				String[] categoryNames = _CATEGORY_NAMES;
 				%>
 
-				<%@ include file="/html/portlet/enterprise_admin/common/categories.jspf" %>
+				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
 				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser();" />

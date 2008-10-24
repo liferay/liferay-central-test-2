@@ -107,7 +107,7 @@ String curSection = mainSections[0];
 				String[] categoryNames = _CATEGORY_NAMES;
 				%>
 
-				<%@ include file="/html/portlet/enterprise_admin/common/categories.jspf" %>
+				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
 				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />

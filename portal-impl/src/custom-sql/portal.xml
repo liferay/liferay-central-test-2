@@ -27,6 +27,7 @@
 				(Group_.classNameId = 0) AND
 				(Group_.classPK = 0) AND
 				(Group_.liveGroupId = 0) AND
+				(Group_.name != 'Control Panel') AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
@@ -66,6 +67,7 @@
 				(Group_.classNameId = 0) AND
 				(Group_.classPK = 0) AND
 				(Group_.liveGroupId = 0) AND
+				(Group_.name != 'Control Panel') AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>

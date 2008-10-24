@@ -25,7 +25,20 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
+User selUser = (User)request.getAttribute("user.selUser");
+
+String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
+
+List<Organization> organizations = Collections.EMPTY_LIST;
+
+if (Validator.isNotNull(organizationIds)) {
+	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
+
+	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
+}
+else if (selUser != null) {
+	organizations = selUser.getOrganizations();
+}
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
@@ -67,7 +80,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Organization"
 		keyProperty="organizationId"
-		modelVar="curOrganization"
+		modelVar="organization"
 	>
 		<liferay-ui:search-container-column-text
 			name="name"
@@ -76,11 +89,11 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		<liferay-ui:search-container-column-text
 			name="type"
-			value="<%= LanguageUtil.get(pageContext, curOrganization.getType()) %>"
+			value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 

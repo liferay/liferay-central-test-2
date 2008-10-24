@@ -158,6 +158,13 @@ public class RoleLocalServiceUtil {
 		return getService().getRoles(companyId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Role> getRoles(
+		long[] roleIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getRoles(roleIds);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		long userId, long groupId) throws com.liferay.portal.SystemException {
 		return getService().getUserGroupRoles(userId, groupId);

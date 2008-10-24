@@ -23,3 +23,77 @@
 %>
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
+<%
+User selUser = (User)request.getAttribute("user.selUser");
+
+String groupIds = ParamUtil.getString(request, "groupsSearchContainerPrimaryKeys");
+
+List<Group> groups = Collections.EMPTY_LIST;
+
+if (Validator.isNotNull(groupIds)) {
+	long[] groupIdsArray = StringUtil.split(groupIds, 0L);
+
+	groups = GroupLocalServiceUtil.getGroups(groupIdsArray);
+}
+else if (selUser != null) {
+	groups = selUser.getGroups();
+}
+%>
+
+<liferay-util:buffer var="removeGroupIcon">
+	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
+</liferay-util:buffer>
+
+<script type="text/javascript">
+	function <portlet:namespace />openGroupSelector() {
+		var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /></portlet:renderURL>', 'group', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		groupWindow.focus();
+	}
+
+	function <portlet:namespace />selectGroup(groupId, name) {
+		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer');
+
+		var rowColumns = [];
+
+		rowColumns.push(name);
+		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeGroupIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />groupsSearchContainer\').deleteRow(this, ' + groupId + ')'));
+
+		searchContainer.addRow(rowColumns, groupId);
+		searchContainer.updateDataStore();
+	}
+</script>
+
+<h3><liferay-ui:message key="groups" /></h3>
+
+<liferay-ui:search-container
+	id='<%= renderResponse.getNamespace() + "groupsSearchContainer" %>'
+	headerNames="name"
+>
+	<liferay-ui:search-container-results
+		results="<%= groups %>"
+		total="<%= groups.size() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Group"
+		keyProperty="groupId"
+		modelVar="group"
+	>
+		<liferay-ui:search-container-column-text
+			name="name"
+			property="name"
+		/>
+
+		<liferay-ui:search-container-column-text>
+			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
+		</liferay-ui:search-container-column-text>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+
+<br />
+
+<input onclick="<portlet:namespace />openGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />

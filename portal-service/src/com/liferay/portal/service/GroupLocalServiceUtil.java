@@ -153,6 +153,13 @@ public class GroupLocalServiceUtil {
 		return getService().getGroup(companyId, name);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long[] groupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getGroups(groupIds);
+	}
+
 	public static com.liferay.portal.model.Group getLayoutGroup(
 		long companyId, long plid)
 		throws com.liferay.portal.PortalException,

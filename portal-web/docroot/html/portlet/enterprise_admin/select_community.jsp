@@ -24,27 +24,9 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<script type="text/javascript">
-	var <portlet:namespace />selectedCommunities = [];
-
-	function <portlet:namespace />selectGroup(groupId, name, target) {
-		opener.<portlet:namespace />selectGroup(groupId, name, target);
-
-		<portlet:namespace />selectedCommunities[<portlet:namespace />selectedCommunities.length] = name;
-
-		var selectedCommunities = document.getElementById('<portlet:namespace />selectedCommunitiesDiv')
-
-		selectedCommunities.innerHTML = '<bean:message key="selected" />: <b>' + <portlet:namespace />selectedCommunities.join(', ') + '</b><br /><br />';
-	}
-</script>
-
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs names="communities" />
-
-<liferay-ui:message key="please-select-at-least-one-community" />
-
-<br /><br />
 
 <%
 String target = ParamUtil.getString(request, "target");
@@ -85,8 +67,6 @@ searchContainer.setResults(results);
 
 <div class="separator"><!-- --></div>
 
-<div id="<portlet:namespace/>selectedCommunitiesDiv"></div>
-
 <%
 List resultRows = searchContainer.getResultRows();
 
@@ -99,7 +79,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("javascript: ");
+	sb.append("javascript: opener.");
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectGroup('");
 	sb.append(group.getGroupId());
@@ -108,6 +88,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("', '");
 	sb.append(target);
 	sb.append("');");
+	sb.append("window.close();");
 
 	String rowHREF = sb.toString();
 

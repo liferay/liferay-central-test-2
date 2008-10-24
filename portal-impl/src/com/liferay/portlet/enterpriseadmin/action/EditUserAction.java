@@ -320,12 +320,12 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		long[] groupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "groupIds"), 0L);
-		long[] organizationIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "organizationIds"), 0L);
-		long[] roleIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "roleIds"), 0L);
+		long[] groupIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "groupsSearchContainerPrimaryKeys"), 0L);
+		long[] organizationIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
+		long[] roleIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 		boolean sendEmail = true;
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
