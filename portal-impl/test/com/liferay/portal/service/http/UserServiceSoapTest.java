@@ -26,6 +26,7 @@ import com.liferay.client.soap.portal.model.UserSoap;
 import com.liferay.client.soap.portal.service.http.UserServiceSoap;
 import com.liferay.client.soap.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.TestPropsValues;
 
 import java.util.Calendar;
@@ -60,12 +61,13 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		String password1 = null;
 		String password2 = null;
 		boolean autoScreenName = true;
-		String screenName = "";
+		String screenName = StringPool.BLANK;;
 		String emailAddress =
 			"UserServiceSoapTest." + nextLong() + "@liferay.com";
+		String openId = StringPool.BLANK;
 		String locale = LocaleUtil.getDefault().toString();
 		String firstName = "UserServiceSoapTest";
-		String middleName = "";
+		String middleName = StringPool.BLANK;;
 		String lastName = "UserServiceSoapTest";
 		int prefixId = 0;
 		int suffixId = 0;
@@ -74,15 +76,17 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = null;
-		long[] organizationIds = new long[0];
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
 		boolean sendMail = false;
 
 		return getUserServiceSoap().addUser(
 			TestPropsValues.COMPANY_ID, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
-			locale, firstName, middleName, lastName, prefixId, suffixId,
+			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			organizationIds, sendMail);
+			groupIds, organizationIds, roleIds, sendMail);
 	}
 
 	protected UserServiceSoap getUserServiceSoap() throws Exception {
