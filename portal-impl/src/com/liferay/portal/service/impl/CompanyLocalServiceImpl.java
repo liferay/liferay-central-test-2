@@ -203,6 +203,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		checkCompanyKey(companyId);
 
+		// Lucene
+
+		LuceneUtil.checkLuceneDir(companyId);
+
 		// Default user
 
 		User defaultUser = null;
