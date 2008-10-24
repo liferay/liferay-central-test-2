@@ -51,6 +51,7 @@
 	clear: both;
 	float: left;
 	padding: 15px 0 5px;
+	width: 35px;
 }
 
 .portlet-enterprise-admin .avatar img {
