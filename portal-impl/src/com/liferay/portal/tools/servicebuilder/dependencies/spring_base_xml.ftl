@@ -8,7 +8,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
 >
-	<context:annotation-config/>
+	<bean id="beanReferenceAnnotationBeanPostProcessor" class="com.liferay.portal.spring.annotation.BeanReferenceAnnotationBeanPostProcessor" />
 	<aop:config>
 		<aop:pointcut id="serviceOperation" expression="bean(*Service.impl)" />
 		<aop:pointcut id="persistenceOperation" expression="bean(*Persistence.impl)" />
