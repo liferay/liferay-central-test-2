@@ -148,6 +148,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					<liferay-ui:search-container-row
 						className="com.liferay.portal.model.User"
+						escapedModel="<%= true %>"
 						keyProperty="userId"
 						modelVar="user2"
 					>
@@ -327,6 +328,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 			<liferay-ui:search-container-row
 				className="com.liferay.portal.model.Organization"
+				escapedModel="<%= true %>"
 				keyProperty="organizationId"
 				modelVar="organization"
 			>
@@ -423,6 +425,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 			<liferay-ui:search-container-row
 				className="com.liferay.portal.model.UserGroup"
+				escapedModel="<%= true %>"
 				keyProperty="userGroupId"
 				modelVar="userGroup"
 			>

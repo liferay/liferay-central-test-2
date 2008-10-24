@@ -31,7 +31,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="view-organizations" />
+	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
 <liferay-ui:search-container
@@ -72,6 +72,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Organization"
+			escapedModel="<%= true %>"
 			keyProperty="organizationId"
 			modelVar="organization"
 		>

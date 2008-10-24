@@ -29,81 +29,59 @@
 <liferay-ui:tabs names="roles" />
 
 <%
-String target = ParamUtil.getString(request, "target");
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
-
-RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
-
-List<String> headerNames = new ArrayList<String>();
-
-headerNames.add("name");
-headerNames.add("subtype");
-
-searchContainer.setHeaderNames(headerNames);
 %>
 
-<liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/role_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+<liferay-ui:search-container
+	headerNames="name"
+	searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
+>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/role_search.jsp"
+	/>
 
-<%
-RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+	<%
+	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+	%>
 
-int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj());
+	<liferay-ui:search-container-results
+		results="<%= RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+		total="<%= RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR) %>"
+	/>
 
-searchContainer.setTotal(total);
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Role"
+		escapedModel="<%= true %>"
+		keyProperty="roleId"
+		modelVar="role"
+	>
 
-List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+		<%
+		StringBuilder sb = new StringBuilder();
 
-searchContainer.setResults(results);
-%>
+		sb.append("javascript: opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectRole('");
+		sb.append(role.getRoleId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(role.getName()));
+		sb.append("');");
+		sb.append("window.close();");
 
-<div class="separator"><!-- --></div>
+		String rowHREF = sb.toString();
+		%>
 
-<%
-List resultRows = searchContainer.getResultRows();
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="name"
+			property="name"
+		/>
+	</liferay-ui:search-container-row>
 
-for (int i = 0; i < results.size(); i++) {
-	Role role = (Role)results.get(i);
-
-	role = role.toEscapedModel();
-
-	ResultRow row = new ResultRow(role, role.getRoleId(), i);
-
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectRole('");
-	sb.append(role.getRoleId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(role.getName()));
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(LanguageUtil.get(pageContext, role.getSubtype())));
-	sb.append("');");
-	sb.append("window.close();");
-
-	String rowHREF = sb.toString();
-
-	// Name
-
-	row.addText(role.getName(), rowHREF);
-
-	// Subtype
-
-	row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowHREF);
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
 </form>
 

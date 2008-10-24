@@ -118,6 +118,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 			<liferay-ui:search-container-row
 				className="com.liferay.portal.model.User"
+				escapedModel="<%= true %>"
 				keyProperty="userId"
 				modelVar="user2"
 			>
@@ -177,6 +178,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 			<liferay-ui:search-container-row
 				className="com.liferay.portal.model.Organization"
+				escapedModel="<%= true %>"
 				keyProperty="organizationId"
 				modelVar="organization"
 			>

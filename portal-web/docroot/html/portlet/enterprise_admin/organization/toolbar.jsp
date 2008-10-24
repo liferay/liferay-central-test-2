@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-organizations");
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 %>
 
 <div class="lfr-portlet-toolbar">
@@ -33,8 +33,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-organizat
 		<portlet:param name="struts_action" value="/enterprise_admin_organizations/view" />
 	</portlet:renderURL>
 
-	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-organizations") ? "current" : StringPool.BLANK %>">
-		<a href="<%= viewOrganizationsURL %>"><liferay-ui:message key="view-organizations" /></a>
+	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
+		<a href="<%= viewOrganizationsURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
@@ -43,6 +43,6 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-organizat
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %>"><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add-organization" /></a></span>
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add" /></a></span>
 	</c:if>
 </div>

@@ -34,89 +34,65 @@ String target = ParamUtil.getString(request, "target");
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
-
-GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
-
-List<String> headerNames = new ArrayList<String>();
-
-headerNames.add("name");
-headerNames.add("type");
-headerNames.add("members");
-
-searchContainer.setHeaderNames(headerNames);
 %>
 
-<liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/group_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+<liferay-ui:search-container
+	searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
+>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/group_search.jsp"
+	/>
 
-<%
-GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
+	<%
+	GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-LinkedHashMap groupParams = new LinkedHashMap();
+	LinkedHashMap groupParams = new LinkedHashMap();
+	%>
 
-int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+	<liferay-ui:search-container-results
+		results="<%= GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+		total="<%= GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams) %>"
+	/>
 
-searchContainer.setTotal(total);
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Group"
+		escapedModel="<%= true %>"
+		keyProperty="groupId"
+		modelVar="group"
+	>
 
-List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+		<%
+		StringBuilder sb = new StringBuilder();
 
-searchContainer.setResults(results);
-%>
+		sb.append("javascript: opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectGroup('");
+		sb.append(group.getGroupId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(group.getName()));
+		sb.append("', '");
+		sb.append(target);
+		sb.append("');");
+		sb.append("window.close();");
 
-<div class="separator"><!-- --></div>
+		String rowHREF = sb.toString();
+		%>
 
-<%
-List resultRows = searchContainer.getResultRows();
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="name"
+			property="name"
+		/>
 
-for (int i = 0; i < results.size(); i++) {
-	Group group = (Group)results.get(i);
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="type"
+			value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
+		/>
+	</liferay-ui:search-container-row>
 
-	group = group.toEscapedModel();
-
-	ResultRow row = new ResultRow(group, group.getGroupId(), i);
-
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectGroup('");
-	sb.append(group.getGroupId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(group.getName()));
-	sb.append("', '");
-	sb.append(target);
-	sb.append("');");
-	sb.append("window.close();");
-
-	String rowHREF = sb.toString();
-
-	// Name
-
-	row.addText(group.getName(), rowHREF);
-
-	// Type
-
-	row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowHREF);
-
-	// Members
-
-	LinkedHashMap userParams = new LinkedHashMap();
-
-	userParams.put("usersGroups", new Long(group.getGroupId()));
-
-	int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, Boolean.TRUE, userParams);
-
-	row.addText(String.valueOf(membersCount));
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
 </form>
 

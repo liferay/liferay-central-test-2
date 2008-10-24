@@ -183,10 +183,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />exportUsers(exportProgressId) {
-		submitForm(document.hrefFm, '<%= themeDisplay.getPathMain() %>/enterprise_admin/export_users?exportProgressId=' + exportProgressId);
-	}
-
 	function <portlet:namespace />getUsersCount(className, ids, active, callback) {
 		jQuery.ajax(
 			{
@@ -271,6 +267,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				<liferay-ui:search-container-row
 					className="com.liferay.portal.model.UserGroup"
+					escapedModel="<%= true %>"
 					keyProperty="userGroupId"
 					modelVar="userGroup"
 				>

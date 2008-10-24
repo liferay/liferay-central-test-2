@@ -99,6 +99,7 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
 		keyProperty="userId"
 		modelVar="user2"
 	>

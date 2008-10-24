@@ -39,13 +39,12 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 		roleWindow.focus();
 	}
 
-	function <portlet:namespace />selectRole(roleId, name, type) {
+	function <portlet:namespace />selectRole(roleId, name) {
 		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer');
 
 		var rowColumns = [];
 
 		rowColumns.push(name);
-		rowColumns.push(Liferay.Language.get(type));
 		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeRoleIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />rolesSearchContainer\').deleteRow(this, ' + roleId + ')'));
 
 		searchContainer.addRow(rowColumns, roleId);
@@ -57,7 +56,7 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 
 <liferay-ui:search-container
 	id='<%= renderResponse.getNamespace() + "rolesSearchContainer" %>'
-	headerNames="name,subtype"
+	headerNames="name"
 >
 	<liferay-ui:search-container-results
 		results="<%= roles %>"
@@ -66,17 +65,13 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Role"
+		escapedModel="<%= true %>"
 		keyProperty="roleId"
 		modelVar="role"
 	>
 		<liferay-ui:search-container-column-text
 			name="name"
 			property="name"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="subtype"
-			value="<%= LanguageUtil.get(pageContext, role.getSubtype()) %>"
 		/>
 
 		<liferay-ui:search-container-column-text>

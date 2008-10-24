@@ -106,6 +106,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
 		keyProperty="userId"
 		modelVar="user2"
 	>

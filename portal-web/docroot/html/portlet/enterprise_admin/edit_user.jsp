@@ -121,7 +121,7 @@ String curSection = mainSections[0];
 	</c:when>
 	<c:otherwise>
 		<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
-			<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add-user" : "view-users" %>' />
+			<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add" : "view-all" %>' />
 		</liferay-util:include>
 	</c:otherwise>
 </c:choose>

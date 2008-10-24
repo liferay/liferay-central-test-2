@@ -62,8 +62,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			</c:otherwise>
 		</c:choose>
 
-		url = Liferay.Util.addParams('childType=' + type, url);
-
 		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
 		organizationWindow.focus();
@@ -219,6 +217,7 @@ if (parentOrganization != null) {
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Organization"
+		escapedModel="<%= true %>"
 		keyProperty="organizationId"
 		modelVar="curOrganization"
 	>

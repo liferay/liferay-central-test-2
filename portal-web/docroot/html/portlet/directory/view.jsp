@@ -85,6 +85,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				<liferay-ui:search-container-row
 					className="com.liferay.portal.model.UserGroup"
+					escapedModel="<%= true %>"
 					keyProperty="userGroupId"
 					modelVar="userGroup"
 				>

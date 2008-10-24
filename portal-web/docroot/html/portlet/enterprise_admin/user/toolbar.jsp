@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-users");
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 %>
 
 <div class="lfr-portlet-toolbar">
@@ -33,8 +33,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-users");
 		<portlet:param name="struts_action" value="/enterprise_admin_users/view" />
 	</portlet:renderURL>
 
-	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-users") ? "current" : StringPool.BLANK %>">
-		<a href="<%= viewUsersURL %>"><liferay-ui:message key="view-users" /></a>
+	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
+		<a href="<%= viewUsersURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
@@ -43,6 +43,19 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-users");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-user") ? "current" : StringPool.BLANK %>"><a href="<%= addUserURL %>"><liferay-ui:message key="add-user" /></a></span>
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addUserURL %>"><liferay-ui:message key="add" /></a></span>
+	</c:if>
+
+
+	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandoURL" portletName="<%= PortletKeys.EXPANDO %>">
+			<portlet:param name="struts_action" value="/expando/view" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="modelResource" value="<%= User.class.getName() %>" />
+		</liferay-portlet:renderURL>
+
+		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-attributes" /></a></span>
+
+		<span class="lfr-toolbar-button export-button"><a href="javascript: submitForm(document.hrefFm, '<%= themeDisplay.getPathMain() %>/enterprise_admin/export_users');"><liferay-ui:message key="export" /></a></span>
 	</c:if>
 </div>

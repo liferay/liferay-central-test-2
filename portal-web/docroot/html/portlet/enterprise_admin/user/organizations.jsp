@@ -66,6 +66,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Organization"
+		escapedModel="<%= true %>"
 		keyProperty="organizationId"
 		modelVar="organization"
 	>

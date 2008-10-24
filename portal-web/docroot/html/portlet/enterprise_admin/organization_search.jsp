@@ -37,7 +37,7 @@ String type = displayTerms.getType();
 <liferay-ui:search-toggle
 	id="toggle_id_enterprise_admin_organization_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search-organizations"
+	buttonLabel="search"
 >
 	<table class="lfr-table">
 	<tr>

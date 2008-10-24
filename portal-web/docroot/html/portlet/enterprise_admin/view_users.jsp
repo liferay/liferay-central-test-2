@@ -25,8 +25,6 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String exportProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 List<Organization> manageableOrganizations = null;
@@ -41,7 +39,7 @@ if (filterManageableOrganizations) {
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="view-users" />
+	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
 <liferay-ui:search-container
@@ -53,7 +51,6 @@ if (filterManageableOrganizations) {
 
 	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/user_search.jsp"
-		showAddButton="<%= true %>"
 	/>
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -91,6 +88,7 @@ if (filterManageableOrganizations) {
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.User"
+			escapedModel="<%= true %>"
 			keyProperty="userId"
 			modelVar="user2"
 		>
@@ -184,21 +182,6 @@ if (filterManageableOrganizations) {
 			%>
 
 			<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
-		</c:if>
-
-		<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
-
-			<%
-			hasButtons = true;
-			%>
-
-			<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
-
-			<liferay-ui:upload-progress
-				id="<%= exportProgressId %>"
-				message="exporting"
-				redirect="<%= HtmlUtil.escape(currentURL) %>"
-			/>
 		</c:if>
 
 		<c:if test="<%= hasButtons %>">

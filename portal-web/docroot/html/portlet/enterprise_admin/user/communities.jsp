@@ -65,6 +65,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Group"
+		escapedModel="<%= true %>"
 		keyProperty="groupId"
 		modelVar="group"
 	>

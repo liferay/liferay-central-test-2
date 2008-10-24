@@ -62,7 +62,7 @@ String curSection = mainSections[0];
 </script>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add-organization" : "view-organizations" %>' />
+	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add" : "view-all" %>' />
 </liferay-util:include>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">

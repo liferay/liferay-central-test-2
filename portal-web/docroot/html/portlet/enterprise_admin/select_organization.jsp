@@ -29,142 +29,137 @@
 <liferay-ui:tabs names="organizations" />
 
 <%
-String childType = ParamUtil.getString(request, "childType");
-
-String[] allowedTypes = null;
-
-if (Validator.isNotNull(childType)) {
-	allowedTypes = OrganizationImpl.getParentTypes(childType);
-}
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/enterprise_admin/select_organization");
-
-OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
-
-List<String> headerNames = new ArrayList<String>();
-
-headerNames.add("name");
-
-headerNames.add("parent-organization");
-
-headerNames.add("type");
-headerNames.add("city");
-headerNames.add("region");
-headerNames.add("country");
-
-searchContainer.setHeaderNames(headerNames);
 %>
 
-<liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/organization_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+<liferay-ui:search-container
+	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/organization_search.jsp"
+	/>
 
-<%
-OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+	<%
+	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-LinkedHashMap organizationParams = new LinkedHashMap();
+	LinkedHashMap organizationParams = new LinkedHashMap();
 
-if (filterManageableOrganizations) {
-	List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
-	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
+	if (filterManageableOrganizations) {
+		List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
+		Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 
-	organizationParams.put("organizations", manageableOrganizationIds);
-}
-
-int total = 0;
-
-if (searchTerms.isAdvancedSearch()) {
-	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
-}
-else {
-	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams);
-}
-
-searchContainer.setTotal(total);
-
-List results = null;
-
-if (searchTerms.isAdvancedSearch()) {
-	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-}
-else {
-	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-}
-
-searchContainer.setResults(results);
-%>
-
-<div class="separator"><!-- --></div>
-
-<%
-List resultRows = searchContainer.getResultRows();
-
-for (int i = 0; i < results.size(); i++) {
-	Organization organization = (Organization)results.get(i);
-
-	if ((allowedTypes != null) && !ArrayUtil.contains(allowedTypes, organization.getType())) {
-		continue;
+		organizationParams.put("organizations", manageableOrganizationIds);
 	}
+	%>
 
-	ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
+	<liferay-ui:search-container-results>
 
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectOrganization('");
-	sb.append(organization.getOrganizationId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(organization.getName()));
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(organization.getType()));
-	sb.append("');");
-	sb.append("window.close();");
-
-	String rowHREF = sb.toString();
-
-	// Name
-
-	row.addText(organization.getName(), rowHREF);
-
-	// Parent organization
-
-	String parentOrganizationName = StringPool.BLANK;
-
-	if (organization.getParentOrganizationId() > 0) {
-		try {
-			Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-			parentOrganizationName = parentOrganization.getName();
+		<%
+		if (searchTerms.isAdvancedSearch()) {
+			results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 		}
-		catch (Exception e) {
+		else {
+			results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 		}
-	}
 
-	row.addText(parentOrganizationName);
+		if (searchTerms.isAdvancedSearch()) {
+			total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
+		}
+		else {
+			total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams);
+		}
 
-	// Type
+		pageContext.setAttribute("results", results);
+		pageContext.setAttribute("total", total);
+		%>
 
-	row.addText(LanguageUtil.get(pageContext, organization.getType()));
+	</liferay-ui:search-container-results>
 
-	// Address
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Organization"
+		escapedModel="<%= true %>"
+		keyProperty="organizationId"
+		modelVar="organization"
+	>
 
-	Address address = organization.getAddress();
+		<%
+		StringBuilder sb = new StringBuilder();
 
-	row.addText(address.getCity(), rowHREF);
-	row.addText(address.getRegion().getName(), rowHREF);
-	row.addText(address.getCountry().getName(), rowHREF);
+		sb.append("javascript: opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectOrganization('");
+		sb.append(organization.getOrganizationId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(organization.getName()));
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(organization.getType()));
+		sb.append("');");
+		sb.append("window.close();");
 
-	// Add result row
+		String rowHREF = sb.toString();
+		%>
 
-	resultRows.add(row);
-}
-%>
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="name"
+			orderable="<%= true %>"
+			property="name"
+		/>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			href="<%= rowHREF %>"
+			name="parent-organization"
+		>
+
+			<%
+			String parentOrganizationName = StringPool.BLANK;
+
+			if (organization.getParentOrganizationId() > 0) {
+				try {
+					Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+					parentOrganizationName = parentOrganization.getName();
+				}
+				catch (Exception e) {
+				}
+			}
+
+			buffer.append(parentOrganizationName);
+			%>
+
+		</liferay-ui:search-container-column-text>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="type"
+			orderable="<%= true %>"
+			value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+		/>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="city"
+			property="address.city"
+		/>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="region"
+			property="address.region.name"
+		/>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowHREF %>"
+			name="country"
+			property="address.country.name"
+		/>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
 </form>
 

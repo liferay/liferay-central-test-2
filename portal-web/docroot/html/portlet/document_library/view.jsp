@@ -82,6 +82,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				<liferay-ui:search-container-row
 					className="com.liferay.portlet.documentlibrary.model.DLFolder"
+					escapedModel="<%= true %>"
 					keyProperty="folderId"
 					modelVar="curFolder"
 				>
@@ -329,6 +330,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<liferay-ui:search-container-row
 				className="com.liferay.portlet.documentlibrary.model.DLFileEntry"
+				escapedModel="<%= true %>"
 				keyProperty="fileEntryId"
 				modelVar="fileEntry"
 			>
