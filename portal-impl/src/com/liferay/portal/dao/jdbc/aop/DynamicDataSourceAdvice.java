@@ -35,18 +35,6 @@ import org.aspectj.lang.Signature;
  */
 public class DynamicDataSourceAdvice {
 
-	public boolean isReadOnlyMethod(String methodName) {
-		if ((methodName.startsWith("get") ||
-			methodName.startsWith("search")) &&
-			!methodName.startsWith("getPreferences") &&
-			!methodName.startsWith("getResource")) {
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
@@ -70,20 +58,32 @@ public class DynamicDataSourceAdvice {
 
 		_dynamicDataSourceTargetSource.pushMethod(sb.toString());
 
-		Object returnVal = null;
+		Object returnValue = null;
 
 		try {
-			returnVal = proceedingJoinPoint.proceed();
+			returnValue = proceedingJoinPoint.proceed();
 		}
 		finally {
 			_dynamicDataSourceTargetSource.popMethod();
 		}
 
-		return returnVal;
+		return returnValue;
+	}
+
+	public boolean isReadOnlyMethod(String methodName) {
+		if ((methodName.startsWith("get") || methodName.startsWith("search")) &&
+			!methodName.startsWith("getPreferences") &&
+			!methodName.startsWith("getResource")) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public void setDynamicDataSourceTargetSource(
-			DynamicDataSourceTargetSource dynamicDataSourceTargetSource) {
+		DynamicDataSourceTargetSource dynamicDataSourceTargetSource) {
+
 		_dynamicDataSourceTargetSource = dynamicDataSourceTargetSource;
 	}
 

@@ -32,18 +32,20 @@ import javax.sql.DataSource;
 import org.springframework.aop.TargetSource;
 
 /**
- * <a href="DynamicDataSourceTargetSource.java.html"><b><i>View Source</i></b></a>
+ * <a href="DynamicDataSourceTargetSource.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael Young
  *
  */
 public class DynamicDataSourceTargetSource implements TargetSource {
-	
+
 	public Stack<String> getMethodStack() {
 		Stack<String> methodStack = _methodStackThreadLocal.get();
 
 		if (methodStack == null) {
 			methodStack = new Stack<String>();
+
 			_methodStackThreadLocal.set(methodStack);
 		}
 
@@ -55,6 +57,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 
 		if (operation == null) {
 			operation = Operation.TRANSACTIONAL;
+
 			_operationTypeThreadLocal.set(operation);
 		}
 
@@ -66,14 +69,16 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 
 		if (operationType == Operation.READ_ONLY) {
 			if (_log.isTraceEnabled()) {
-				_log.trace("Returning Read-Only Data Source");
+				_log.trace("Returning read only data source");
 			}
+
 			return _readOnlyDataSource;
 		}
 		else {
 			if (_log.isTraceEnabled()) {
-				_log.trace("Returning Transactional Data Source");
+				_log.trace("Returning transactional data source");
 			}
+
 			return _transactionalDataSource;
 		}
 	}
@@ -84,9 +89,6 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 
 	public boolean isStatic() {
 		return false;
-	}
-
-	public void releaseTarget(Object target) throws Exception {
 	}
 
 	public String popMethod() {
@@ -103,6 +105,9 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		Stack<String> methodStack = getMethodStack();
 
 		methodStack.push(method);
+	}
+
+	public void releaseTarget(Object target) throws Exception {
 	}
 
 	public void setOperation(Operation operation) {
@@ -129,14 +134,13 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		return !methodStack.empty();
 	}
 
-	private static ThreadLocal<Stack<String>> _methodStackThreadLocal =
-		new ThreadLocal<Stack<String>>();
-
-	private static ThreadLocal<Operation> _operationTypeThreadLocal =
-		new ThreadLocal<Operation>();
-
 	private static Log _log =
 		LogFactoryUtil.getLog(DynamicDataSourceTargetSource.class);
+
+	private static ThreadLocal<Stack<String>> _methodStackThreadLocal =
+		new ThreadLocal<Stack<String>>();
+	private static ThreadLocal<Operation> _operationTypeThreadLocal =
+		new ThreadLocal<Operation>();
 
 	private DataSource _readOnlyDataSource;
 	private DataSource _transactionalDataSource;

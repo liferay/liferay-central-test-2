@@ -21,12 +21,12 @@
 			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
 				<property name="jndiName" value="jdbc/LiferayReadOnlyPool" />
 			</bean>
-		</property>	
+		</property>
 		<property name="transactionalDataSource">
 			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
 				<property name="jndiName" value="jdbc/LiferayTransactionalPool" />
 			</bean>
-		</property>	
+		</property>
 	</bean>
 	<aop:config>
 		<aop:aspect id="dynamicDataSourceAspect" ref="dynamicDataSourceAdvice">
