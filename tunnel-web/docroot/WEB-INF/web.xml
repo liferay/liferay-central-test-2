@@ -6,10 +6,6 @@
 		<param-name>axis.servicesPath</param-name>
 		<param-value>/axis/</param-value>
 	</context-param>
-	<context-param>
-		<param-name>company_web_id</param-name>
-		<param-value>liferay.com</param-value>
-	</context-param>
 	<filter>
 		<filter-name>Axis Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>

@@ -567,28 +567,6 @@ public class PortalImpl implements Portal {
 		return getCompanyId(getHttpServletRequest(renderRequest));
 	}
 
-	public long getCompanyIdByWebId(ServletContext servletContext) {
-		String webId = GetterUtil.getString(
-			servletContext.getInitParameter("company_web_id"));
-
-		return getCompanyIdByWebId(webId);
-	}
-
-	public long getCompanyIdByWebId(String webId) {
-		long companyId = 0;
-
-		try {
-			Company company = CompanyLocalServiceUtil.getCompanyByWebId(webId);
-
-			companyId = company.getCompanyId();
-		}
-		catch (Exception e) {
-			_log.error(e.getMessage());
-		}
-
-		return companyId;
-	}
-
 	public long[] getCompanyIds() {
 		return PortalInstances.getCompanyIds();
 	}

@@ -115,10 +115,6 @@ public interface Portal {
 
 	public long getCompanyId(RenderRequest renderRequest);
 
-	public long getCompanyIdByWebId(ServletContext servletContext);
-
-	public long getCompanyIdByWebId(String webId);
-
 	public long[] getCompanyIds();
 
 	public String getComputerAddress();

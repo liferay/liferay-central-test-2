@@ -138,14 +138,6 @@ public class PortalUtil {
 		return getPortal().getCompanyId(renderRequest);
 	}
 
-	public static long getCompanyIdByWebId(ServletContext servletContext) {
-		return getPortal().getCompanyIdByWebId(servletContext);
-	}
-
-	public static long getCompanyIdByWebId(String webId) {
-		return getPortal().getCompanyIdByWebId(webId);
-	}
-
 	public static long[] getCompanyIds() {
 		return getPortal().getCompanyIds();
 	}
