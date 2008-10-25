@@ -23,7 +23,7 @@
 %>
 
 <script type="text/javascript">
-	// <![CDATA
+	// <![CDATA[
 		var Liferay = {
 			Browser: {
 				acceptsGzip: function() {
@@ -228,7 +228,7 @@
 </c:if>
 
 <script type="text/javascript">
-	// <![CDATA
+	// <![CDATA[
 
 		<%@ include file="/html/portal/layout/view/portlet_js.jspf" %>
 
