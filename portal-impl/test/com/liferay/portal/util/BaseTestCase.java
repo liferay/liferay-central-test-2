@@ -41,6 +41,9 @@ import junit.framework.TestCase;
 public class BaseTestCase extends TestCase {
 
 	public BaseTestCase() {
+		if(System.getProperty("external-properties") == null){
+			System.setProperty("external-properties","portal-test.properties");
+		}
 		InitUtil.initWithSpring();
 	}
 
