@@ -44,8 +44,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -340,6 +343,11 @@ public class EditUserAction extends PortletAction {
 		long[] roleIds = StringUtil.split(ParamUtil.getString(
 			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 		boolean sendEmail = true;
+		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
+			actionRequest);
+		List<EmailAddress> emailAddresses =
+			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
+		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest);
@@ -357,7 +365,8 @@ public class EditUserAction extends PortletAction {
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
-				sendEmail, websites, announcementsDeliveries);
+				sendEmail, addresses, emailAddresses, phones, websites,
+				announcementsDeliveries);
 		}
 		else {
 
@@ -383,7 +392,8 @@ public class EditUserAction extends PortletAction {
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 				mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-				organizationIds, roleIds, websites, announcementsDeliveries);
+				organizationIds, roleIds, addresses, emailAddresses, phones,
+				websites, announcementsDeliveries);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

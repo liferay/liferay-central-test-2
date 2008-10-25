@@ -28,9 +28,18 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.model.impl.AddressImpl;
+import com.liferay.portal.model.impl.EmailAddressImpl;
+import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.WebsiteImpl;
+import com.liferay.portal.service.AddressServiceUtil;
+import com.liferay.portal.service.EmailAddressServiceUtil;
+import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
@@ -64,6 +73,116 @@ import javax.portlet.ActionRequest;
  *
  */
 public class EnterpriseAdminUtil {
+
+	public static List<Address> getAddresses(ActionRequest actionRequest) {
+		List<Address> addresses = new ArrayList<Address>();
+
+		int[] addressIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addressIndexes"), 0);
+
+		int addressPrimary = ParamUtil.getInteger(
+			actionRequest, "addressPrimary");
+
+		for (int addressIndex : addressIndexes) {
+			long addressId = ParamUtil.getLong(
+				actionRequest, "addressId" + addressIndex);
+
+			String street1 = ParamUtil.getString(
+				actionRequest, "addressStreet1" + addressIndex);
+			String street2 = ParamUtil.getString(
+				actionRequest, "addressStreet2" + addressIndex);
+			String street3 = ParamUtil.getString(
+				actionRequest, "addressStreet3" + addressIndex);
+			String city = ParamUtil.getString(
+				actionRequest, "addressCity" + addressIndex);
+			String zip = ParamUtil.getString(
+				actionRequest, "addressZip" + addressIndex);
+
+			if (Validator.isNull(street1) && Validator.isNull(street2) &&
+				Validator.isNull(street3) && Validator.isNull(city) &&
+				Validator.isNull(zip)){
+
+				continue;
+			}
+
+			long regionId = ParamUtil.getLong(
+				actionRequest, "addressRegionId" + addressIndex);
+			long countryId = ParamUtil.getLong(
+				actionRequest, "addressCountryId" + addressIndex);
+			int typeId = ParamUtil.getInteger(
+				actionRequest, "addressTypeId" + addressIndex);
+			boolean mailing = ParamUtil.getBoolean(
+				actionRequest, "addressMailing" + addressIndex);
+
+			boolean primary = false;
+
+			if (addressIndex == addressPrimary){
+				primary = true;
+			}
+
+			Address address = new AddressImpl();
+
+			address.setAddressId(addressId);
+			address.setStreet1(street1);
+			address.setStreet2(street2);
+			address.setStreet3(street3);
+			address.setCity(city);
+			address.setZip(zip);
+			address.setRegionId(regionId);
+			address.setCountryId(countryId);
+			address.setTypeId(typeId);
+			address.setMailing(mailing);
+			address.setPrimary(primary);
+
+			addresses.add(address);
+		}
+
+		return addresses;
+	}
+
+	public static List<EmailAddress> getEmailAddresses(
+		ActionRequest actionRequest) {
+
+		List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
+
+		int[] emailAddressIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "emailAddressIndexes"), 0);
+
+		int emailAddressPrimary = ParamUtil.getInteger(
+			actionRequest, "emailAddressPrimary");
+
+		for (int emailAddressIndex : emailAddressIndexes) {
+			long emailAddressId = ParamUtil.getLong(
+				actionRequest, "emailAddressId" + emailAddressIndex);
+
+			String address = ParamUtil.getString(
+				actionRequest, "emailAddressAddress" + emailAddressIndex);
+
+			if (Validator.isNull(address)){
+				continue;
+			}
+
+			int typeId = ParamUtil.getInteger(
+				actionRequest, "emailAddressTypeId" + emailAddressIndex);
+
+			boolean primary = false;
+
+			if (emailAddressIndex == emailAddressPrimary){
+				primary = true;
+			}
+
+			EmailAddress emailAddress = new EmailAddressImpl();
+
+			emailAddress.setEmailAddressId(emailAddressId);
+			emailAddress.setAddress(address);
+			emailAddress.setTypeId(typeId);
+			emailAddress.setPrimary(primary);
+
+			emailAddresses.add(emailAddress);
+		}
+
+		return emailAddresses;
+	}
 
 	public static OrderByComparator getGroupOrderByComparator(
 		String orderByCol, String orderByType) {
@@ -148,6 +267,50 @@ public class EnterpriseAdminUtil {
 		}
 
 		return orderByComparator;
+	}
+
+	public static List<Phone> getPhones(ActionRequest actionRequest) {
+		List<Phone> phones = new ArrayList<Phone>();
+
+		int[] phoneIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "phoneIndexes"), 0);
+
+		int phonePrimary = ParamUtil.getInteger(actionRequest, "phonePrimary");
+
+		for (int phoneIndex : phoneIndexes) {
+			long phoneId = ParamUtil.getLong(
+				actionRequest, "phoneId" + phoneIndex);
+
+			String number = ParamUtil.getString(
+				actionRequest, "phoneNumber" + phoneIndex);
+			String extension = ParamUtil.getString(
+				actionRequest, "phoneExtension" + phoneIndex);
+
+			if (Validator.isNull(number) && Validator.isNull(extension)){
+				continue;
+			}
+
+			int typeId = ParamUtil.getInteger(
+				actionRequest, "phoneTypeId" + phoneIndex);
+
+			boolean primary = false;
+
+			if (phoneIndex == phonePrimary){
+				primary = true;
+			}
+
+			Phone phone = new PhoneImpl();
+
+			phone.setPhoneId(phoneId);
+			phone.setNumber(number);
+			phone.setExtension(extension);
+			phone.setTypeId(typeId);
+			phone.setPrimary(primary);
+
+			phones.add(phone);
+		}
+
+		return phones;
 	}
 
 	public static OrderByComparator getRoleOrderByComparator(
@@ -274,6 +437,126 @@ public class EnterpriseAdminUtil {
 		}
 
 		return websites;
+	}
+
+	public static void updateAddresses(
+			String className, long classPK, List<Address> addresses)
+		throws PortalException, SystemException {
+
+		Set<Long> addressIds = new HashSet<Long>();
+
+		for (Address address : addresses) {
+			long addressId = address.getAddressId();
+
+			String street1 = address.getStreet1();
+			String street2 = address.getStreet2();
+			String street3 = address.getStreet3();
+			String city = address.getCity();
+			String zip = address.getZip();
+			long regionId = address.getRegionId();
+			long countryId = address.getCountryId();
+			int typeId = address.getTypeId();
+			boolean mailing = address.isMailing();
+			boolean primary = address.isPrimary();
+
+			if (addressId <= 0) {
+				address = AddressServiceUtil.addAddress(
+					className, classPK, street1, street2, street3, city, zip,
+					regionId, countryId, typeId, mailing, primary);
+
+				addressId = address.getAddressId();
+			}
+			else {
+				AddressServiceUtil.updateAddress(
+					addressId, street1, street2, street3, city, zip, regionId,
+					countryId, typeId, mailing, primary);
+			}
+
+			addressIds.add(addressId);
+		}
+
+		addresses = AddressServiceUtil.getAddresses(className, classPK);
+
+		for (Address address : addresses) {
+			if (!addressIds.contains(address.getAddressId())) {
+				AddressServiceUtil.deleteAddress(address.getAddressId());
+			}
+		}
+	}
+
+	public static void updateEmailAddresses(
+			String className, long classPK, List<EmailAddress> emailAddresses)
+		throws PortalException, SystemException {
+
+		Set<Long> emailAddressIds = new HashSet<Long>();
+
+		for (EmailAddress emailAddress : emailAddresses) {
+			long emailAddressId = emailAddress.getEmailAddressId();
+
+			String address = emailAddress.getAddress();
+			int typeId = emailAddress.getTypeId();
+			boolean primary = emailAddress.isPrimary();
+
+			if (emailAddressId <= 0) {
+				emailAddress = EmailAddressServiceUtil.addEmailAddress(
+					className, classPK, address, typeId, primary);
+
+				emailAddressId = emailAddress.getEmailAddressId();
+			}
+			else {
+				EmailAddressServiceUtil.updateEmailAddress(
+					emailAddressId, address, typeId, primary);
+			}
+
+			emailAddressIds.add(emailAddressId);
+		}
+
+		emailAddresses = EmailAddressServiceUtil.getEmailAddresses(
+			className, classPK);
+
+		for (EmailAddress emailAddress : emailAddresses) {
+			if (!emailAddressIds.contains(emailAddress.getEmailAddressId())) {
+				EmailAddressServiceUtil.deleteEmailAddress(
+					emailAddress.getEmailAddressId());
+			}
+		}
+	}
+
+	public static void updatePhones(
+			String className, long classPK, List<Phone> phones)
+		throws PortalException, SystemException {
+
+		Set<Long> phoneIds = new HashSet<Long>();
+
+		for (Phone phone : phones) {
+			long phoneId = phone.getPhoneId();
+
+			String number = phone.getNumber();
+			String extension = phone.getExtension();
+			int typeId = phone.getTypeId();
+			boolean primary = phone.isPrimary();
+
+			if (phoneId <= 0) {
+				phone = PhoneServiceUtil.addPhone(
+					className, classPK, number, extension, typeId, primary);
+
+				phoneId = phone.getPhoneId();
+			}
+			else {
+				PhoneServiceUtil.updatePhone(
+					phoneId, number, extension, typeId, primary);
+			}
+
+			phoneIds.add(phoneId);
+		}
+
+		phones = PhoneServiceUtil.getPhones(className, classPK);
+
+		for (Phone phone : phones) {
+			if (!phoneIds.contains(phone.getPhoneId())) {
+				PhoneServiceUtil.deletePhone(phone.getPhoneId());
+			}
+		}
 	}
 
 	public static void updateWebsites(

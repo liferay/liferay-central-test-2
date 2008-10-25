@@ -177,6 +177,9 @@ public class UserServiceSoap {
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
 		long[] organizationIds, long[] roleIds, boolean sendEmail,
+		com.liferay.portal.model.AddressSoap[] addresses,
+		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
+		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
 		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers)
 		throws RemoteException {
@@ -188,6 +191,12 @@ public class UserServiceSoap {
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
 					organizationIds, roleIds, sendEmail,
+					com.liferay.portal.model.impl.AddressModelImpl.toModels(
+						addresses),
+					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
+						emailAddresses),
+					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
+						phones),
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
@@ -585,7 +594,10 @@ public class UserServiceSoap {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, com.liferay.portal.model.WebsiteSoap[] websites,
+		long[] roleIds, com.liferay.portal.model.AddressSoap[] addresses,
+		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
+		com.liferay.portal.model.PhoneSoap[] phones,
+		com.liferay.portal.model.WebsiteSoap[] websites,
 		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers)
 		throws RemoteException {
 		try {
@@ -597,6 +609,12 @@ public class UserServiceSoap {
 					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
 					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
 					groupIds, organizationIds, roleIds,
+					com.liferay.portal.model.impl.AddressModelImpl.toModels(
+						addresses),
+					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
+						emailAddresses),
+					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
+						phones),
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(

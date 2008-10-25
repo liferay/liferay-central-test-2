@@ -133,6 +133,9 @@ public class UserServiceJSON {
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds, boolean sendEmail,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
 		throws com.liferay.portal.PortalException,
@@ -142,7 +145,8 @@ public class UserServiceJSON {
 				emailAddress, openId, new java.util.Locale(locale), firstName,
 				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 				birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-				roleIds, sendEmail, websites, announcementsDelivers);
+				roleIds, sendEmail, addresses, emailAddresses, phones,
+				websites, announcementsDelivers);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
@@ -382,6 +386,9 @@ public class UserServiceJSON {
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
 		throws com.liferay.portal.PortalException,
@@ -393,7 +400,8 @@ public class UserServiceJSON {
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 				smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 				skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-				roleIds, websites, announcementsDelivers);
+				roleIds, addresses, emailAddresses, phones, websites,
+				announcementsDelivers);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}

@@ -422,6 +422,9 @@ public class UserServiceHttp {
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
 		long[] organizationIds, long[] roleIds, boolean sendEmail,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
 		throws com.liferay.portal.PortalException,
@@ -525,16 +528,34 @@ public class UserServiceHttp {
 
 			Object paramObj22 = new BooleanWrapper(sendEmail);
 
-			Object paramObj23 = websites;
+			Object paramObj23 = addresses;
 
-			if (websites == null) {
+			if (addresses == null) {
 				paramObj23 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj24 = announcementsDelivers;
+			Object paramObj24 = emailAddresses;
+
+			if (emailAddresses == null) {
+				paramObj24 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj25 = phones;
+
+			if (phones == null) {
+				paramObj25 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj26 = websites;
+
+			if (websites == null) {
+				paramObj26 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj27 = announcementsDelivers;
 
 			if (announcementsDelivers == null) {
-				paramObj24 = new NullWrapper("java.util.List");
+				paramObj27 = new NullWrapper("java.util.List");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -545,7 +566,8 @@ public class UserServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24
+						paramObj22, paramObj23, paramObj24, paramObj25,
+						paramObj26, paramObj27
 					});
 
 			Object returnObj = null;
@@ -1789,6 +1811,9 @@ public class UserServiceHttp {
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
 		throws com.liferay.portal.PortalException,
@@ -1972,16 +1997,34 @@ public class UserServiceHttp {
 				paramObj34 = new NullWrapper("[J");
 			}
 
-			Object paramObj35 = websites;
+			Object paramObj35 = addresses;
 
-			if (websites == null) {
+			if (addresses == null) {
 				paramObj35 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj36 = announcementsDelivers;
+			Object paramObj36 = emailAddresses;
+
+			if (emailAddresses == null) {
+				paramObj36 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj37 = phones;
+
+			if (phones == null) {
+				paramObj37 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj38 = websites;
+
+			if (websites == null) {
+				paramObj38 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj39 = announcementsDelivers;
 
 			if (announcementsDelivers == null) {
-				paramObj36 = new NullWrapper("java.util.List");
+				paramObj39 = new NullWrapper("java.util.List");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1995,7 +2038,8 @@ public class UserServiceHttp {
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
-						paramObj34, paramObj35, paramObj36
+						paramObj34, paramObj35, paramObj36, paramObj37,
+						paramObj38, paramObj39
 					});
 
 			Object returnObj = null;

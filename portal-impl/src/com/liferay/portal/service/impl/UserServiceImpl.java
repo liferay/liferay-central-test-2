@@ -26,10 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -184,7 +187,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String middleName, String lastName, int prefixId, int suffixId,
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, long[] groupIds, long[] organizationIds,
-			long[] roleIds, boolean sendEmail, List<Website> websites,
+			long[] roleIds, boolean sendEmail, List<Address> addresses,
+			List<EmailAddress> emailAddresses, List<Phone> phones,
+			List<Website> websites,
 			List<AnnouncementsDelivery> announcementsDelivers)
 		throws PortalException, SystemException {
 
@@ -194,6 +199,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
 			birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
 			sendEmail);
+
+		EnterpriseAdminUtil.updateAddresses(
+			Contact.class.getName(), user.getContactId(), addresses);
+
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Contact.class.getName(), user.getContactId(), emailAddresses);
+
+		EnterpriseAdminUtil.updatePhones(
+			Contact.class.getName(), user.getContactId(), phones);
 
 		EnterpriseAdminUtil.updateWebsites(
 			Contact.class.getName(), user.getContactId(), websites);
@@ -528,7 +542,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
 			long[] groupIds, long[] organizationIds, long[] roleIds,
-			List<Website> websites,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<Phone> phones, List<Website> websites,
 			List<AnnouncementsDelivery> announcementsDelivers)
 		throws PortalException, SystemException {
 
@@ -539,6 +554,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			jobTitle, groupIds, organizationIds, roleIds);
+
+		EnterpriseAdminUtil.updateAddresses(
+			Contact.class.getName(), user.getContactId(), addresses);
+
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Contact.class.getName(), user.getContactId(), emailAddresses);
+
+		EnterpriseAdminUtil.updatePhones(
+			Contact.class.getName(), user.getContactId(), phones);
 
 		EnterpriseAdminUtil.updateWebsites(
 			Contact.class.getName(), user.getContactId(), websites);
