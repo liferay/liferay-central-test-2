@@ -35,7 +35,7 @@ public class AddWriterTest extends BaseTestCase {
 	public void testAddWriter() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add User"));
+		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_screenName", RuntimeVariables.replace("Writer"));
 		selenium.type("_79_screenName", RuntimeVariables.replace("Writer"));
