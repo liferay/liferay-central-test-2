@@ -37,12 +37,14 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 
@@ -365,6 +367,33 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return new ArrayList<Role>();
+	}
+
+	public long[] getUserGroupIds() {
+		List<UserGroup> userGroups = getUserGroups();
+
+		long[] userGroupIds = new long[userGroups.size()];
+
+		for (int i = 0; i < userGroups.size(); i++) {
+			UserGroup userGroup = userGroups.get(i);
+
+			userGroupIds[i] = userGroup.getUserGroupId();
+		}
+
+		return userGroupIds;
+	}
+
+	public List<UserGroup> getUserGroups() {
+		try {
+			return UserGroupLocalServiceUtil.getUserUserGroups(getUserId());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to get user groups for user " + getUserId());
+			}
+		}
+
+		return new ArrayList<UserGroup>();
 	}
 
 	public TimeZone getTimeZone() {

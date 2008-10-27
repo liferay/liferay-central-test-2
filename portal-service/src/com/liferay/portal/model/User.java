@@ -104,6 +104,10 @@ public interface User extends UserModel {
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles();
 
+	public long[] getUserGroupIds();
+
+	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups();
+
 	public java.util.TimeZone getTimeZone();
 
 	public boolean hasCompanyMx();

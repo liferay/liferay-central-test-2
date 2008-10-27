@@ -48,6 +48,8 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
@@ -90,6 +92,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -1299,6 +1302,35 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return false;
+	}
+
+	public void reIndex(String[] ids) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		try {
+			for (User user : userPersistence.findByCompanyId(companyId)) {
+				if (user.isDefaultUser()) {
+					continue;
+				}
+
+				try {
+					UserIndexer.updateUser(user);
+				}
+				catch (SearchException se) {
+					_log.error("Reindexing " + user.getUserId(), se);
+				}
+			}
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public List<User> search(

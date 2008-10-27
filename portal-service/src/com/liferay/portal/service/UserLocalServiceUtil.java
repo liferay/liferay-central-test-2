@@ -526,6 +526,11 @@ public class UserLocalServiceUtil {
 		return getService().isPasswordExpiringSoon(user);
 	}
 
+	public static void reIndex(java.lang.String[] ids)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(ids);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
