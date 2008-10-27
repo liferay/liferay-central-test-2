@@ -20,24 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.myaccount.util;
+
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.BaseControlPanelEntry;
 
 /**
- * <a href="PortletCategoryKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="MyAccountControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class PortletCategoryKeys {
+public class MyAccountControlPanelEntry extends BaseControlPanelEntry {
 
-	public static final String CONTENT = "content";
+	public boolean isVisible(
+		PermissionChecker permissionChecker, Portlet portlet) throws Exception {
 
-	public static final String MY = "my";
-
-	public static final String PORTAL = "portal";
-
-	public static final String SERVER = "server";
-
-	public static final String[] ALL = {MY, CONTENT, PORTAL, SERVER};
+		return true;
+	}
 
 }

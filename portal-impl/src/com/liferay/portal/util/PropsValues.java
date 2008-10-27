@@ -246,18 +246,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
-	public static final String[] CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS =
-		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS);
-
-	public static final String[] CONTROL_PANEL_CATEGORY_MY_PORTLETS =
-		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_MY_PORTLETS);
-
-	public static final String[] CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS =
-		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS);
-
-	public static final String[] CONTROL_PANEL_CATEGORY_SERVER_PORTLETS =
-		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS);
-
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 

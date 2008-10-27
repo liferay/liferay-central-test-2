@@ -7,6 +7,8 @@
 		<icon>/html/portlet/my_account/icon.png</icon>
 		<struts-path>my_account</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>my</control-panel-entry-category>
+		<control-panel-entry-weight>1</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -74,6 +76,8 @@
 		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.calendar.social.CalendarActivityInterpreter</social-activity-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>5</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>true</show-portlet-access-denied>
 		<show-portlet-inactive>true</show-portlet-inactive>
@@ -146,6 +150,8 @@
 		<friendly-url-mapper-class>com.liferay.portlet.journal.JournalFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>1</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -181,6 +187,8 @@
 		<pop-message-listener-class>com.liferay.portlet.messageboards.pop.MessageListenerImpl</pop-message-listener-class>
 		<social-activity-interpreter-class>com.liferay.portlet.messageboards.social.MBActivityInterpreter</social-activity-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>6</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<!--<user-principal-strategy>screenName</user-principal-strategy>-->
@@ -200,6 +208,8 @@
 		<indexer-class>com.liferay.portlet.documentlibrary.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl</portlet-data-handler-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>2</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -247,6 +257,8 @@
 		<icon>/html/portlet/polls/icon.png</icon>
 		<struts-path>polls</struts-path>
 		<portlet-data-handler-class>com.liferay.portlet.polls.lar.PollsPortletDataHandlerImpl</portlet-data-handler-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>9</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -281,6 +293,8 @@
 		<indexer-class>com.liferay.portlet.bookmarks.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.bookmarks.util.BookmarksOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.bookmarks.lar.BookmarksPortletDataHandlerImpl</portlet-data-handler-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>4</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -319,6 +333,8 @@
 		<indexer-class>com.liferay.portlet.imagegallery.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.imagegallery.util.IGOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl</portlet-data-handler-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>3</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -341,6 +357,8 @@
 		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.blogs.social.BlogsActivityInterpreter</social-activity-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>7</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -374,6 +392,8 @@
 		<friendly-url-mapper-class>com.liferay.portlet.wiki.WikiFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.wiki.lar.WikiPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.wiki.social.WikiActivityInterpreter</social-activity-interpreter-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>8</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -802,6 +822,8 @@
 		<portlet-name>99</portlet-name>
 		<icon>/html/portlet/tags_admin/icon.png</icon>
 		<struts-path>tags_admin</struts-path>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>10</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1069,6 +1091,8 @@
 	<portlet>
 		<portlet-name>123</portlet-name>
 		<struts-path>wsrp_consumer_admin</struts-path>
+		<control-panel-entry-category>server</control-panel-entry-category>
+		<control-panel-entry-weight>4</control-panel-entry-weight>
 	</portlet>
 	<portlet>
 		<portlet-name>124</portlet-name>
@@ -1083,6 +1107,9 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_users</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>1</control-panel-entry-weight>
+		<control-panel-entry-class>com.liferay.portlet.enterpriseadmin.util.UsersControlPanelEntry</control-panel-entry-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1097,6 +1124,9 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_organizations</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>2</control-panel-entry-weight>
+		<control-panel-entry-class>com.liferay.portlet.enterpriseadmin.util.UsersControlPanelEntry</control-panel-entry-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1111,6 +1141,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_user_groups</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>4</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1124,6 +1156,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_roles</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>5</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1137,6 +1171,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_password_policies</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>6</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1150,6 +1186,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_settings</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>7</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1163,6 +1201,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_monitoring</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>8</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1176,6 +1216,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_plugins</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>9</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1201,6 +1243,8 @@
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_communities</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>3</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1215,6 +1259,8 @@
 		<icon>/html/portlet/admin/icon.png</icon>
 		<struts-path>admin_instances</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>server</control-panel-entry-category>
+		<control-panel-entry-weight>2</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1227,6 +1273,8 @@
 		<icon>/html/portlet/admin/icon.png</icon>
 		<struts-path>admin_plugins</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>server</control-panel-entry-category>
+		<control-panel-entry-weight>3</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1239,6 +1287,8 @@
 		<icon>/html/portlet/admin/icon.png</icon>
 		<struts-path>admin_server</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>server</control-panel-entry-category>
+		<control-panel-entry-weight>1</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1249,6 +1299,8 @@
 	<portlet>
 		<portlet-name>138</portlet-name>
 		<struts-path>wsrp_producer_admin</struts-path>
+		<control-panel-entry-category>server</control-panel-entry-category>
+		<control-panel-entry-weight>5</control-panel-entry-weight>
 	</portlet>
 	<portlet>
 		<portlet-name>139</portlet-name>

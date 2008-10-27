@@ -23,21 +23,10 @@
 package com.liferay.portal.util;
 
 /**
- * <a href="PortletCategoryKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- *
+ * @author Jorge Ferrer
  */
-public class PortletCategoryKeys {
-
-	public static final String CONTENT = "content";
-
-	public static final String MY = "my";
-
-	public static final String PORTAL = "portal";
-
-	public static final String SERVER = "server";
-
-	public static final String[] ALL = {MY, CONTENT, PORTAL, SERVER};
+public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 
 }

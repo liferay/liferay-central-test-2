@@ -240,14 +240,6 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SECURITY_STRANGERS_WITH_MX = "company.security.strangers.with.mx";
 
-	public static final String CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS = "control.panel.category.content.portlets";
-
-	public static final String CONTROL_PANEL_CATEGORY_MY_PORTLETS = "control.panel.category.my.portlets";
-
-	public static final String CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS = "control.panel.category.portal.portlets";
-
-	public static final String CONTROL_PANEL_CATEGORY_SERVER_PORTLETS = "control.panel.category.server.portlets";
-
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
 
 	public static final String CONTROL_PANEL_LAYOUT_NAME = "control.panel.layout.name";

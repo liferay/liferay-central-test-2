@@ -20,24 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.util.comparator;
+
+import com.liferay.portal.model.Portlet;
+
+import java.util.Comparator;
 
 /**
- * <a href="PortletCategoryKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletControlPanelWeigthComparator.java.html"><b><i>View Source
+ * </i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class PortletCategoryKeys {
+public class PortletControlPanelWeigthComparator implements Comparator {
 
-	public static final String CONTENT = "content";
+	public int compare(Object obj1, Object obj2) {
+		Portlet portlet1 = (Portlet)obj1;
+		Portlet portlet2 = (Portlet)obj2;
 
-	public static final String MY = "my";
+		int value = Double.compare(
+			portlet1.getControlPanelEntryWeigth(),
+			portlet2.getControlPanelEntryWeigth());
 
-	public static final String PORTAL = "portal";
-
-	public static final String SERVER = "server";
-
-	public static final String[] ALL = {MY, CONTENT, PORTAL, SERVER};
+		return value;
+	}
 
 }

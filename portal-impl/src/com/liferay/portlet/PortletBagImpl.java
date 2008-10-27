@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.util.ControlPanelEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
@@ -64,6 +65,7 @@ public class PortletBagImpl implements PortletBag {
 		MessageListener popMessageListenerInstance,
 		SocialActivityInterpreter socialActivityInterpreterInstance,
 		SocialRequestInterpreter socialRequestInterpreterInstance,
+		ControlPanelEntry controlPanelEntryInstance,
 		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -80,6 +82,7 @@ public class PortletBagImpl implements PortletBag {
 		_popMessageListenerInstance = popMessageListenerInstance;
 		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
+		_controlPanelEntryInstance = controlPanelEntryInstance;
 		_preferencesValidatorInstance = preferencesValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
@@ -140,6 +143,10 @@ public class PortletBagImpl implements PortletBag {
 		return _socialRequestInterpreterInstance;
 	}
 
+	public ControlPanelEntry getControlPanelEntryInstance() {
+		return _controlPanelEntryInstance;
+	}
+
 	public PreferencesValidator getPreferencesValidatorInstance() {
 		return _preferencesValidatorInstance;
 	}
@@ -173,6 +180,7 @@ public class PortletBagImpl implements PortletBag {
 	private MessageListener _popMessageListenerInstance;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;
+	private ControlPanelEntry _controlPanelEntryInstance;
 	private PreferencesValidator _preferencesValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;
 

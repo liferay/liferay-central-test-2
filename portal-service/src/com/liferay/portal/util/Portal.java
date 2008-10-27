@@ -121,9 +121,11 @@ public interface Portal {
 
 	public String getComputerName();
 
-	public String getControlPanelCategory(String portletId);
+	public String getControlPanelCategory(String portletId)
+		throws SystemException;
 
-	public List<Portlet> getControlPanelPortlets(String category);
+	public List<Portlet> getControlPanelPortlets(String category)
+		throws SystemException;
 
 	public String getCurrentURL(HttpServletRequest request);
 

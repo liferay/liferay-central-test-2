@@ -150,11 +150,15 @@ public class PortalUtil {
 		return getPortal().getComputerName();
 	}
 
-	public static String getControlPanelCategory(String portletId) {
+	public static String getControlPanelCategory(String portletId)
+		throws SystemException {
+
 		return getPortal().getControlPanelCategory(portletId);
 	}
 
-	public static List<Portlet> getControlPanelPortlets(String category) {
+	public static List<Portlet> getControlPanelPortlets(String category)
+		throws SystemException {
+
 		return getPortal().getControlPanelPortlets(category);
 	}
 

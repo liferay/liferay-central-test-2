@@ -55,6 +55,7 @@ import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.ControlPanelEntry;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
@@ -469,6 +470,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				socialRequestInterpreterInstance);
 		}
 
+		ControlPanelEntry controlPanelEntryInstance = null;
+
+		if (Validator.isNotNull(portlet.getControlPanelEntryClass())) {
+			controlPanelEntryInstance =
+				(ControlPanelEntry)portletClassLoader.loadClass(
+					portlet.getControlPanelEntryClass()).newInstance();
+		}
+
 		PreferencesValidator preferencesValidatorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -518,8 +527,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			popMessageListenerInstance, socialActivityInterpreterInstance,
-			socialRequestInterpreterInstance, preferencesValidatorInstance,
-			resourceBundles);
+			socialRequestInterpreterInstance, controlPanelEntryInstance,
+			preferencesValidatorInstance, resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

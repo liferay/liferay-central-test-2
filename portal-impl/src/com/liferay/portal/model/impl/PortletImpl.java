@@ -50,6 +50,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.ControlPanelEntry;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
@@ -133,14 +134,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String socialRequestInterpreterClass, String defaultPreferences,
 		String preferencesValidator, boolean preferencesCompanyWide,
 		boolean preferencesUniquePerLayout, boolean preferencesOwnedByGroup,
-		boolean useDefaultTemplate, boolean showPortletAccessDenied,
-		boolean showPortletInactive, boolean actionURLRedirect,
-		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
-		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
-		boolean scopeable, String userPrincipalStrategy,
-		boolean privateRequestAttributes, boolean privateSessionAttributes,
-		int renderWeight, boolean ajaxable, List<String> headerPortalCss,
-		List<String> headerPortletCss, List<String> headerPortalJavaScript,
+		String controlPanelEntryCategory, double controlPanelEntryWeigth,
+		String controlPanelClass, boolean useDefaultTemplate,
+		boolean showPortletAccessDenied, boolean showPortletInactive,
+		boolean actionURLRedirect, boolean restoreCurrentView,
+		boolean maximizeEdit, boolean maximizeHelp, boolean popUpPrint,
+		boolean layoutCacheable, boolean instanceable, boolean scopeable,
+		String userPrincipalStrategy, boolean privateRequestAttributes,
+		boolean privateSessionAttributes, int renderWeight, boolean ajaxable,
+		List<String> headerPortalCss, List<String> headerPortletCss,
+		List<String> headerPortalJavaScript,
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
 		List<String> footerPortletJavaScript, String cssClassWrapper,
@@ -185,6 +188,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_preferencesCompanyWide = preferencesCompanyWide;
 		_preferencesUniquePerLayout = preferencesUniquePerLayout;
 		_preferencesOwnedByGroup = preferencesOwnedByGroup;
+		_controlPanelEntryCategory = controlPanelEntryCategory;
+		_controlPanelEntryWeigth = controlPanelEntryWeigth;
+		_controlPanelEntryClass = controlPanelClass;
 		_useDefaultTemplate = useDefaultTemplate;
 		_showPortletAccessDenied = showPortletAccessDenied;
 		_showPortletInactive = showPortletInactive;
@@ -1028,6 +1034,97 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup) {
 		_preferencesOwnedByGroup = preferencesOwnedByGroup;
+	}
+
+	/**
+	 * Gets the name of the cateogry of the Control Panel where this portlet
+	 * will be shown
+	 *
+	 * @return          The name of the cateogry of the Control Panel where
+	 *                  this portlet will be shown
+	 */
+	public String getControlPanelEntryCategory() {
+		return _controlPanelEntryCategory;
+	}
+
+	/**
+	 * Set the name of the cateogry of the Control Panel where this portlet
+	 * will be shown
+	 *
+	 * @param controlPanelEntryCategory  The name of the cateogry of the Control
+	 *                              Panel where this portlet will be shown
+	 */
+	public void setControlPanelEntryCategory(String controlPanelEntryCategory) {
+		_controlPanelEntryCategory = controlPanelEntryCategory;
+	}
+
+	/**
+	 * Gets the relative weight of this portlet with respect to the other
+	 * portlets in the same category of the Control Panel
+	 *
+	 * @return      the relative weight of this portlet with respect to the
+	 *              other portlets in the same category of the Control Panel
+	 */
+	public double getControlPanelEntryWeigth() {
+		return _controlPanelEntryWeigth;
+	}
+
+	/**
+	 * Set the relative weight of this portlet with respect to the other
+	 * portlets in the same category of the Control Panel
+	 *
+	 * @param   controlPanelEntryWeigth the relative weight of this portlet with
+	 *          respect to the other portlets in the same category of the
+	 *          Control Panel
+	 */
+	public void setControlPanelEntryWeigth(double controlPanelEntryWeigth) {
+		_controlPanelEntryWeigth = controlPanelEntryWeigth;
+	}
+
+	/**
+	 * Gets the name of the class that will control when this portlet will be
+	 * shown in the Control Panel
+	 *
+	 * @return      the name of the class that will control when this portlet
+	 *              will be shown in the Control Panel
+	 */
+	public String getControlPanelEntryClass() {
+		return _controlPanelEntryClass;
+	}
+
+	/**
+	 * Gets an instance of the class that will control when this portlet will be
+	 * shown in the Control Panel
+	 *
+	 * @return		the instance of the class that will control when this
+	 *              portlet will be shown in the Control Panel
+	 */
+	public ControlPanelEntry getControlPanelEntryInstance() {
+		if (Validator.isNotNull(getControlPanelEntryClass())) {
+			if (_portletApp.isWARFile()) {
+				PortletBagImpl portletBag =
+					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
+
+				return portletBag.getControlPanelEntryInstance();
+			}
+			else {
+				return (ControlPanelEntry)InstancePool.get(
+					getControlPanelEntryClass());
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Set the name of the class that will control when this portlet will be
+	 * shown in the Control Panel
+	 *
+	 * @param controlPanelEntryClass the name of the class that will control when
+	 *                          this portlet will be shown in the Control Panel
+	 */
+	public void setControlPanelEntryClass(String controlPanelEntryClass) {
+		_controlPanelEntryClass = controlPanelEntryClass;
 	}
 
 	/**
@@ -2589,11 +2686,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getSocialRequestInterpreterClass(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isActionURLRedirect(),
-			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
-			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
-			isScopeable(), getUserPrincipalStrategy(),
+			getControlPanelEntryCategory(), getControlPanelEntryWeigth(),
+			getControlPanelEntryClass(), isUseDefaultTemplate(),
+			isShowPortletAccessDenied(), isShowPortletInactive(),
+			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
+			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
+			isInstanceable(), isScopeable(), getUserPrincipalStrategy(),
 			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
 			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
 			getHeaderPortletCss(), getHeaderPortalJavaScript(),
@@ -2772,6 +2870,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * group layout. False if preferences are owned by the user at all times.
 	 */
 	private boolean _preferencesOwnedByGroup = true;
+
+	/**
+	 * The name of the cateogry of the Control Panel where this portlet will be
+	 * shown
+	 */
+	private String _controlPanelEntryCategory;
+
+	/**
+	 * The relative weight of this portlet with respect to the other portlets
+	 * in the same category of the Control Panel
+	 */
+	private double _controlPanelEntryWeigth = 100;
+
+	/**
+	 * The name of the class that will control when this portlet will be shown
+	 * in the Control Panel
+	 */
+	private String _controlPanelEntryClass;
 
 	/**
 	 * True if the portlet uses the default template.

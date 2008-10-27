@@ -197,6 +197,22 @@ public interface Portlet extends PortletModel {
 
 	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup);
 
+	public java.lang.String getControlPanelEntryClass();
+
+	public com.liferay.portal.util.ControlPanelEntry getControlPanelEntryInstance();
+
+	public void setControlPanelEntryClass(
+		java.lang.String controlPanelEntryClass);
+
+	public java.lang.String getControlPanelEntryCategory();
+
+	public void setControlPanelEntryCategory(
+		java.lang.String controlPanelEntryCategory);
+
+	public double getControlPanelEntryWeigth();
+
+	public void setControlPanelEntryWeigth(double controlPanelEntryWeigth);
+
 	public boolean getUseDefaultTemplate();
 
 	public boolean isUseDefaultTemplate();

@@ -87,6 +87,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
 import com.liferay.portal.upload.UploadServletRequestImpl;
+import com.liferay.portal.util.comparator.PortletControlPanelWeigthComparator;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigFactory;
@@ -132,7 +133,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TimeZone;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
@@ -579,77 +582,41 @@ public class PortalImpl implements Portal {
 		return _computerName;
 	}
 
-	public String getControlPanelCategory(String portletId) {
-		String category = null;
+	public String getControlPanelCategory(String portletId)
+		throws SystemException {
 
-		if (ArrayUtil.contains(
-				PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS,
-				portletId)) {
+		for (int i = 0; i < PortletCategoryKeys.ALL.length; i++) {
+			String curCategory = PortletCategoryKeys.ALL[i];
 
-			category = PortletCategoryKeys.CONTENT;
-		}
-		else if (ArrayUtil.contains(
-					PropsValues.CONTROL_PANEL_CATEGORY_MY_PORTLETS,
-					portletId)) {
+			List<Portlet> portlets = getControlPanelPortlets(curCategory);
 
-			category = PortletCategoryKeys.MY;
-		}
-		else if (ArrayUtil.contains(
-					PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
-					portletId)) {
+			for (Portlet portlet : portlets) {
+				if (portlet.getPortletId().equals(portletId)) {
+					return curCategory;
 
-			category = PortletCategoryKeys.PORTAL;
-		}
-		else if (ArrayUtil.contains(
-					PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS,
-					portletId)) {
-
-			category = PortletCategoryKeys.SERVER;
+				}
+			}
 		}
 
-		return category;
+		return null;
 	}
 
-	public List<Portlet> getControlPanelPortlets(String category) {
-		String[] portletIds = null;
+	public List<Portlet> getControlPanelPortlets(String category)
+		throws SystemException {
 
-		if (category.equals(PortletCategoryKeys.CONTENT)) {
-			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS;
-		}
-		else if (category.equals(PortletCategoryKeys.MY)) {
-			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_MY_PORTLETS;
-		}
-		else if (category.equals(PortletCategoryKeys.PORTAL)) {
-			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS;
-		}
-		else if (category.equals(PortletCategoryKeys.SERVER)) {
-			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS;
-		}
-		else {
-			portletIds = new String[0];
-		}
+		List<Portlet> allPortlets = PortletLocalServiceUtil.getPortlets(
+			CompanyThreadLocal.getCompanyId());
 
-		List<Portlet> portlets = new ArrayList<Portlet>();
+		SortedSet<Portlet> portlets = new TreeSet<Portlet>(
+			new PortletControlPanelWeigthComparator());
 
-		for (String portletId : portletIds) {
-			Portlet portlet = null;
-
-			try {
-				portlet = PortletLocalServiceUtil.getPortletById(
-					CompanyThreadLocal.getCompanyId(), portletId);
-
-				if (portlet != null) {
-					portlets.add(portlet);
-				}
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
-				}
+		for (Portlet portlet : allPortlets) {
+			if (category.equals(portlet.getControlPanelEntryCategory())) {
+				portlets.add(portlet);
 			}
 		}
 
-		return portlets;
+		return new ArrayList(portlets);
 	}
 
 	public String getCurrentURL(HttpServletRequest request) {

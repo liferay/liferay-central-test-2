@@ -22,22 +22,19 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.permission.PermissionChecker;
+
 /**
- * <a href="PortletCategoryKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="ControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class PortletCategoryKeys {
+public interface ControlPanelEntry {
 
-	public static final String CONTENT = "content";
-
-	public static final String MY = "my";
-
-	public static final String PORTAL = "portal";
-
-	public static final String SERVER = "server";
-
-	public static final String[] ALL = {MY, CONTENT, PORTAL, SERVER};
+	public boolean isVisible(
+			PermissionChecker permissionChecker, Portlet portlet)
+		throws Exception;
 
 }
