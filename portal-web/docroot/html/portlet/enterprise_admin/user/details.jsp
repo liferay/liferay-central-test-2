@@ -159,7 +159,7 @@ if (selContact != null) {
 </fieldset>
 
 <fieldset class="block-labels col">
-	<div class="ctrl-holder">
+	<div class="change-avatar">
 		<c:if test="<%= selUser != null %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeAvatarURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" />
@@ -168,10 +168,10 @@ if (selContact != null) {
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeAvatarURL %>');">
-				<div><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></div>
+			<a href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeAvatarURL %>');">
+				<img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' />
 
-				<div><liferay-ui:message key="change" /></div>
+				<span><liferay-ui:message key="change" /></span>
 			</a>
 		</c:if>
 	</div>

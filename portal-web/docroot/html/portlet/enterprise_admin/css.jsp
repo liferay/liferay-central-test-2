@@ -58,8 +58,12 @@
 }
 
 .portlet-enterprise-admin .change-avatar {
-	display: block;
 	text-align: center;
+}
+
+.portlet-enterprise-admin .change-avatar img {
+	display: block;
+	margin: 0 auto;
 }
 
 .portlet-enterprise-admin .ctrl-holder.primary-ctrl, .portlet-enterprise-admin .ctrl-holder.action-ctrl {
