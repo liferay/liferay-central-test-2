@@ -1107,6 +1107,7 @@
 		<portlet-name>125</portlet-name>
 		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_users</struts-path>
+		<indexer-class>com.liferay.portlet.enterpriseadmin.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>

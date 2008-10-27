@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
 
@@ -204,6 +205,14 @@ public class PortalUtil {
 		throws PortalException {
 
 		return getPortal().getDate(month, day, year, hour, min, timeZone, pe);
+	}
+
+	public Map<String, Object> getExpandoBridgeAttributes(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException {
+
+		return getPortal().getExpandoBridgeAttributes(
+			expandoBridge, actionRequest);
 	}
 
 	public static String getFirstPageLayoutTypes(PageContext pageContext) {

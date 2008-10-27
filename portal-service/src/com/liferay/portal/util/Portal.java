@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
 
@@ -150,6 +151,10 @@ public interface Portal {
 			int month, int day, int year, int hour, int min, TimeZone timeZone,
 			PortalException pe)
 		throws PortalException;
+
+	public Map<String, Object> getExpandoBridgeAttributes(
+			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+		throws PortalException, SystemException;
 
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
