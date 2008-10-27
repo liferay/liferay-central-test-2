@@ -25,7 +25,8 @@ package com.liferay.portlet.journal.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 
 import java.util.Date;
 
@@ -66,8 +67,10 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public ArticleDisplayTerms(RenderRequest renderRequest) {
 		super(renderRequest);
 
-		groupId = ParamUtil.getLong(
-			renderRequest, GROUP_ID, PortalUtil.getScopeGroupId(renderRequest));
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		groupId = themeDisplay.getScopeGroupId();
 		articleId = ParamUtil.getString(renderRequest, ARTICLE_ID);
 		version = ParamUtil.getDouble(renderRequest, VERSION);
 		title = ParamUtil.getString(renderRequest, TITLE);

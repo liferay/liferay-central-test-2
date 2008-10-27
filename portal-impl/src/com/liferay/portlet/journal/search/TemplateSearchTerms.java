@@ -23,8 +23,8 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.RenderRequest;
 
@@ -39,8 +39,10 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 	public TemplateSearchTerms(RenderRequest renderRequest) {
 		super(renderRequest);
 
-		groupId = ParamUtil.getLong(
-			renderRequest, GROUP_ID, PortalUtil.getScopeGroupId(renderRequest));
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		groupId = themeDisplay.getScopeGroupId();
 		templateId = DAOParamUtil.getLike(renderRequest, TEMPLATE_ID);
 		structureId = DAOParamUtil.getString(renderRequest, STRUCTURE_ID);
 		name = DAOParamUtil.getLike(renderRequest, NAME);
