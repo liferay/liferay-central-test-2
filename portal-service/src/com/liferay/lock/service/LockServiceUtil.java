@@ -34,31 +34,23 @@ import com.liferay.portal.PortalException;
 public class LockServiceUtil {
 
 	public static void clear() {
-		LockService lockService = LockServiceFactory.getService();
-
-		lockService.clear();
+		_service.clear();
 	}
 
 	public static Lock getLock(String className, Comparable<?> pk)
 		throws PortalException {
 
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.getLock(className, pk);
+		return _service.getLock(className, pk);
 	}
 
 	public static boolean hasLock(
 		String className, Comparable<?> pk, long userId) {
 
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.hasLock(className, pk, userId);
+		return _service.hasLock(className, pk, userId);
 	}
 
 	public static boolean isLocked(String className, Comparable<?> pk) {
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.isLocked(className, pk);
+		return _service.isLocked(className, pk);
 	}
 
 	public static Lock lock(
@@ -66,9 +58,7 @@ public class LockServiceUtil {
 			long expirationTime)
 		throws PortalException {
 
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.lock(className, pk, userId, owner, expirationTime);
+		return _service.lock(className, pk, userId, owner, expirationTime);
 	}
 
 	public static Lock lock(
@@ -76,24 +66,23 @@ public class LockServiceUtil {
 			boolean inheritable, long expirationTime)
 		throws PortalException {
 
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.lock(
+		return _service.lock(
 			className, pk, userId, owner, inheritable, expirationTime);
 	}
 
 	public static Lock refresh(String uuid, long expirationTime)
 		throws PortalException {
 
-		LockService lockService = LockServiceFactory.getService();
+		return _service.refresh(uuid, expirationTime);
+	}
 
-		return lockService.refresh(uuid, expirationTime);
+	public void setService(LockService service) {
+		_service = service;
 	}
 
 	public static void unlock(String className, Comparable<?> pk) {
-		LockService lockService = LockServiceFactory.getService();
-
-		lockService.unlock(className, pk);
+		_service.unlock(className, pk);
 	}
 
+	private static LockService _service;
 }

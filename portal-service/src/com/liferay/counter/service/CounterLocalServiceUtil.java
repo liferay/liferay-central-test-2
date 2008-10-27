@@ -35,54 +35,39 @@ import java.util.List;
 public class CounterLocalServiceUtil {
 
 	public static List<String> getNames() throws SystemException {
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		return counterService.getNames();
+		return _service.getNames();
 	}
 
 	public static long increment() throws SystemException {
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		return counterService.increment();
+		return _service.increment();
 	}
 
 	public static long increment(String name) throws SystemException {
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		return counterService.increment(name);
+		return _service.increment(name);
 	}
 
 	public static long increment(String name, int size) throws SystemException {
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		return counterService.increment(name, size);
+		return _service.increment(name, size);
 	}
 
 	public static void rename(String oldName, String newName)
 		throws SystemException {
 
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		counterService.rename(oldName, newName);
+		_service.rename(oldName, newName);
 	}
 
 	public static void reset(String name) throws SystemException {
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		counterService.reset(name);
+		_service.reset(name);
 	}
 
 	public static void reset(String name, long size) throws SystemException {
-		CounterLocalService counterService =
-			CounterLocalServiceFactory.getService();
-
-		counterService.reset(name, size);
+		_service.reset(name, size);
 	}
+
+	public void setService(CounterLocalService service) {
+		_service = service;
+	}
+
+	private static CounterLocalService _service;
 
 }

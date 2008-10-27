@@ -9,4 +9,7 @@
 	<bean id="com.liferay.lock.service.LockServiceFactory" class="com.liferay.lock.service.LockServiceFactory">
 		<property name="service" ref="com.liferay.lock.service.LockService.impl" />
 	</bean>
+	<bean id="com.liferay.lock.service.LockServiceUtil" class="com.liferay.lock.service.LockServiceUtil">
+		<property name="service" ref="com.liferay.lock.service.LockService.impl" />
+	</bean>
 </beans>

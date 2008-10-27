@@ -39,63 +39,50 @@ public class MailServiceUtil {
 		long userId, List<Filter> filters, List<String> emailAddresses,
 		boolean leaveCopy) {
 
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.addForward(userId, filters, emailAddresses, leaveCopy);
+		_service.addForward(userId, filters, emailAddresses, leaveCopy);
 	}
 
 	public static void addUser(
 		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress) {
 
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.addUser(
+		_service.addUser(
 			userId, password, firstName, middleName, lastName, emailAddress);
 	}
 
 	public static void addVacationMessage(
 		long userId, String emailAddress, String vacationMessage) {
 
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.addVacationMessage(userId, emailAddress, vacationMessage);
+		_service.addVacationMessage(userId, emailAddress, vacationMessage);
 	}
 
 	public static void deleteEmailAddress(long userId) {
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.deleteEmailAddress(userId);
+		_service.deleteEmailAddress(userId);
 	}
 
 	public static void deleteUser(long userId) {
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.deleteUser(userId);
+		_service.deleteUser(userId);
 	}
 
 	public static void sendEmail(MailMessage mailMessage) {
-		MailService mailService = MailServiceFactory.getService();
+		_service.sendEmail(mailMessage);
+	}
 
-		mailService.sendEmail(mailMessage);
+	public void setService(MailService service) {
+		_service = service;
 	}
 
 	public static void updateBlocked(long userId, List<String> blocked) {
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.updateBlocked(userId, blocked);
+		_service.updateBlocked(userId, blocked);
 	}
 
 	public static void updateEmailAddress(long userId, String emailAddress) {
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.updateEmailAddress(userId, emailAddress);
+		_service.updateEmailAddress(userId, emailAddress);
 	}
 
 	public static void updatePassword(long userId, String password) {
-		MailService mailService = MailServiceFactory.getService();
-
-		mailService.updatePassword(userId, password);
+		_service.updatePassword(userId, password);
 	}
 
+	private static MailService _service;
 }

@@ -43,26 +43,20 @@ public class DLLocalServiceUtil {
 			InputStream is)
 		throws PortalException, SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.addFile(
+		_service.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries, is);
 	}
 
 	public static void checkRoot(long companyId) throws SystemException {
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.checkRoot(companyId);
+		_service.checkRoot(companyId);
 	}
 
 	public static InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		return dlLocalService.getFileAsStream(
+		return _service.getFileAsStream(
 			companyId, repositoryId, fileName);
 	}
 
@@ -71,9 +65,7 @@ public class DLLocalServiceUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		return dlLocalService.getFileAsStream(
+		return _service.getFileAsStream(
 			companyId, repositoryId, fileName, versionNumber);
 	}
 
@@ -82,18 +74,14 @@ public class DLLocalServiceUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		return dlLocalService.hasFile(
+		return _service.hasFile(
 			companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public static void move(String srcDir, String destDir)
 		throws SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.move(srcDir, destDir);
+		_service.move(srcDir, destDir);
 	}
 
 	public static Hits search(
@@ -101,10 +89,12 @@ public class DLLocalServiceUtil {
 			long[] repositoryIds, String keywords, int start, int end)
 		throws SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		return dlLocalService.search(
+		return _service.search(
 			companyId, portletId, groupId, repositoryIds, keywords, start, end);
+	}
+
+	public void setService(DLLocalService service) {
+		_service = service;
 	}
 
 	public static void updateFile(
@@ -113,9 +103,7 @@ public class DLLocalServiceUtil {
 			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.updateFile(
+		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, properties, tagsEntries, is);
 	}
@@ -123,34 +111,28 @@ public class DLLocalServiceUtil {
 	public static void validate(String fileName, File file)
 		throws PortalException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.validate(fileName, file);
+		_service.validate(fileName, file);
 	}
 
 	public static void validate(String fileName, byte[] bytes)
 		throws PortalException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.validate(fileName, bytes);
+		_service.validate(fileName, bytes);
 	}
 
 	public static void validate(String fileName, InputStream is)
 		throws PortalException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.validate(fileName, is);
+		_service.validate(fileName, is);
 	}
 
 	public static void validate(
 			String fileName, String sourceFileName, InputStream is)
 		throws PortalException {
 
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.validate(fileName, sourceFileName, is);
+		_service.validate(fileName, sourceFileName, is);
 	}
+
+	private static DLLocalService _service;
 
 }

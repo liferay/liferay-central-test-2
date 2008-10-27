@@ -39,9 +39,7 @@ public class DLServiceUtil {
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.addDirectory(companyId, repositoryId, dirName);
+		_service.addDirectory(companyId, repositoryId, dirName);
 	}
 
 	public static void addFile(
@@ -49,9 +47,7 @@ public class DLServiceUtil {
 			String fileName, String properties, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.addFile(
+		_service.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries, file);
 	}
@@ -62,9 +58,7 @@ public class DLServiceUtil {
 			byte[] bytes)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.addFile(
+		_service.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries, bytes);
 	}
@@ -73,9 +67,9 @@ public class DLServiceUtil {
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
+		DLService _service = DLServiceFactory.getService();
 
-		dlService.deleteDirectory(companyId, portletId, repositoryId, dirName);
+		_service.deleteDirectory(companyId, portletId, repositoryId, dirName);
 	}
 
 	public static void deleteFile(
@@ -83,9 +77,7 @@ public class DLServiceUtil {
 			String fileName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.deleteFile(companyId, portletId, repositoryId, fileName);
+		_service.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
 	public static void deleteFile(
@@ -93,9 +85,7 @@ public class DLServiceUtil {
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.deleteFile(
+		_service.deleteFile(
 			companyId, portletId, repositoryId, fileName, versionNumber);
 	}
 
@@ -103,9 +93,7 @@ public class DLServiceUtil {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		return dlService.getFile(companyId, repositoryId, fileName);
+		return _service.getFile(companyId, repositoryId, fileName);
 	}
 
 	public static byte[] getFile(
@@ -113,9 +101,9 @@ public class DLServiceUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
+		DLService _service = DLServiceFactory.getService();
 
-		return dlService.getFile(
+		return _service.getFile(
 			companyId, repositoryId, fileName, versionNumber);
 	}
 
@@ -123,24 +111,22 @@ public class DLServiceUtil {
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		return dlService.getFileNames(companyId, repositoryId, dirName);
+		return _service.getFileNames(companyId, repositoryId, dirName);
 	}
 
 	public static long getFileSize(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		return dlService.getFileSize(companyId, repositoryId, fileName);
+		return _service.getFileSize(companyId, repositoryId, fileName);
 	}
 
 	public static void reIndex(String[] ids) throws SystemException {
-		DLService dlService = DLServiceFactory.getService();
+		_service.reIndex(ids);
+	}
 
-		dlService.reIndex(ids);
+	public void setService(DLService service) {
+		_service = service;
 	}
 
 	public static void updateFile(
@@ -149,9 +135,7 @@ public class DLServiceUtil {
 			String properties, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.updateFile(
+		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, properties, tagsEntries, file);
 	}
@@ -162,9 +146,9 @@ public class DLServiceUtil {
 			String properties, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
+		DLService _service = DLServiceFactory.getService();
 
-		dlService.updateFile(
+		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, properties, tagsEntries, bytes);
 	}
@@ -174,11 +158,10 @@ public class DLServiceUtil {
 			long newRepositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		DLService dlService = DLServiceFactory.getService();
-
-		dlService.updateFile(
+		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, newRepositoryId,
 			fileName);
 	}
 
+	private static DLService _service;
 }

@@ -9,6 +9,9 @@
 	<bean id="com.liferay.mail.service.MailServiceFactory" class="com.liferay.mail.service.MailServiceFactory">
 		<property name="service" ref="com.liferay.mail.service.MailService.impl" />
 	</bean>
+	<bean id="com.liferay.mail.service.MailServiceUtil" class="com.liferay.mail.service.MailServiceUtil">
+		<property name="service" ref="com.liferay.mail.service.MailService.impl" />
+	</bean>
 	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistence" parent="basePersistence" />
 	<bean id="com.liferay.mail.service.persistence.CyrusUserUtil" class="com.liferay.mail.service.persistence.CyrusUserUtil">
 		<property name="persistence" ref="com.liferay.mail.service.persistence.CyrusUserPersistence" />
