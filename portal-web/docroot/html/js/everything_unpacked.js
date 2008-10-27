@@ -7190,8 +7190,8 @@ Liferay.autoFields = new Class({
 	 *
 	 * Optional
 	 * fieldIndexes {string}: The name of the POST parameter that will contain a list of the order for the fields.
-	 * arrowContainer{string}: A jQuery selector which defines where to show the arrows to move up and down the rows. The arrows
-	 * 		are not shown if this option is not used
+	 * sortable{boolean}: Whether or not the rows should be sortable
+	 * sortableHandle{string}: A jQuery selector that defines a handle for the sortables
 	 *
 	 */
 
@@ -7302,8 +7302,8 @@ Liferay.autoFields = new Class({
 			}
 		);
 
-		if (options.arrowContainer){
-			instance._showArrows(options.arrowContainer);
+		if (options.sortable){
+			instance._makeSortable(options.sortableHandle);
 		}
 
 		Liferay.bind(
@@ -7435,7 +7435,7 @@ Liferay.autoFields = new Class({
 
 	_moveUp: function(target) {
 		var element = jQuery(target);
-		
+
 		while(!element.is('.lfr-form-row')) {
 			element = element.parent();
 		}
@@ -7451,26 +7451,35 @@ Liferay.autoFields = new Class({
 		Liferay.trigger('updateUndoList');
 	},
 
-	_showArrows: function(arrowContainer) {
+	_makeSortable: function(sortableHandle) {
 		var instance = this;
-		var arrowControls = jQuery('<a href="javascript: ;" class="move-up">' + Liferay.Language.get('move-up') + '</a><a href="javascript: ;" class="move-down">' + Liferay.Language.get('move-down') + '</a>');
 
-		var arrowContainers = jQuery(arrowContainer);
-		arrowContainers.append(arrowControls);
-		
-		arrowContainers.click(
-			function(event) {
-				if (event.target.parentNode.className.indexOf('lfr-arrow-controls') > -1) {
-					var target = jQuery(event.target);
+		var rows = instance._rowContainer.find('.lfr-form-row');
 
-					if (target.is('.move-up')) {
-						instance._moveUp(target);
-					}
+		if (sortableHandle) {
+			rows.find(sortableHandle).addClass('handle-sort-vertical');
+		}
 
-					if (target.is('.move-down')) {
-						instance._moveDown(target);
-					}
-				}
+		instance._rowContainer.sortable(
+			{
+				axis: 'y',
+				helper: function(event, obj) {
+					var height = obj.height();
+					var width = obj.width();
+
+					var helper = obj.clone();
+
+					helper.css(
+						{
+							height: height,
+							width: width
+						}
+					);
+
+					return helper[0];
+				},
+				items: '.lfr-form-row',
+				handle: sortableHandle
 			}
 		);
 	},
