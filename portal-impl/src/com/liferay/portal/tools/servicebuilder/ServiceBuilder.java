@@ -2178,9 +2178,14 @@ public class ServiceBuilder {
 		else {
 			x = content.indexOf("</beans>");
 
-			newContent =
-				content.substring(0, x) + sb.toString() +
-					content.substring(x, content.length());
+			if (x != -1) {
+				newContent =
+					content.substring(0, x) + sb.toString() +
+						content.substring(x, content.length());
+			}
+			else {
+				newContent = "<beans>" + sb.toString() + "</beans>";
+			}
 		}
 
 		newContent = _formatXml(newContent);
