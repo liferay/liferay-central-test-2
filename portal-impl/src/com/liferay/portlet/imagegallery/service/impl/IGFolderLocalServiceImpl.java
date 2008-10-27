@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -331,8 +332,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 							companyId, groupId, folderId, imageId, name,
 							description, tagsEntries);
 					}
-					catch (Exception e1) {
-						_log.error("Reindexing " + imageId, e1);
+					catch (SearchException se) {
+						_log.error("Reindexing " + imageId, se);
 					}
 				}
 			}
@@ -340,8 +341,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		catch (SystemException se) {
 			throw se;
 		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

@@ -470,16 +470,16 @@ public class SCProductEntryLocalServiceImpl
 						productEntry.getRepoGroupId(),
 						productEntry.getRepoArtifactId());
 				}
-				catch (Exception e1) {
-					_log.error("Reindexing " + productEntryId, e1);
+				catch (SearchException se) {
+					_log.error("Reindexing " + productEntryId, se);
 				}
 			}
 		}
 		catch (SystemException se) {
 			throw se;
 		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

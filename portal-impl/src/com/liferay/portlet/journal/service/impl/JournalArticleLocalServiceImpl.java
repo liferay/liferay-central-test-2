@@ -1450,8 +1450,8 @@ public class JournalArticleLocalServiceImpl
 							description, content, type, displayDate,
 							tagsEntries);
 					}
-					catch (Exception e1) {
-						_log.error("Reindexing " + article.getId(), e1);
+					catch (SearchException se) {
+						_log.error("Reindexing " + article.getId(), se);
 					}
 				}
 			}
@@ -1459,8 +1459,8 @@ public class JournalArticleLocalServiceImpl
 		catch (SystemException se) {
 			throw se;
 		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

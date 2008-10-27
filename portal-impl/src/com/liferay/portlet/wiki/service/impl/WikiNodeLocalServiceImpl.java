@@ -315,8 +315,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 							companyId, groupId, nodeId, title, content,
 							tagsEntries);
 					}
-					catch (Exception e1) {
-						_log.error("Reindexing " + page.getPrimaryKey(), e1);
+					catch (SearchException se) {
+						_log.error("Reindexing " + page.getPrimaryKey(), se);
 					}
 				}
 			}
@@ -324,8 +324,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		catch (SystemException se) {
 			throw se;
 		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

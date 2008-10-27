@@ -414,8 +414,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
-					catch (Exception e1) {
-						_log.error("Reindexing " + messageId, e1);
+					catch (SearchException se) {
+						_log.error("Reindexing " + messageId, se);
 					}
 				}
 			}
@@ -423,8 +423,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		catch (SystemException se) {
 			throw se;
 		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
