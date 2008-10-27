@@ -2184,7 +2184,12 @@ public class ServiceBuilder {
 						content.substring(x, content.length());
 			}
 			else {
-				newContent = "<beans>" + sb.toString() + "</beans>";
+				x = content.indexOf("<beans/>");
+				y = x + 8;
+
+				newContent =
+					content.substring(0, x) + "<beans>" + sb.toString() +
+						"</beans>" + content.substring(y, content.length());
 			}
 		}
 
