@@ -67,7 +67,9 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -486,9 +488,20 @@ public class LayoutImporter {
 			// Layout permissions
 
 			if (importPermissions) {
-				importLayoutPermissions(
-					layoutCache, companyId, groupId, guestGroup, layout,
-					permissionsEl, importUserPermissions);
+				String resourceName = Layout.class.getName();
+				String resourcePrimKey = String.valueOf(layout.getPlid());
+
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+					importLayoutPermissions5(
+						layoutCache, companyId, groupId, userId, resourceName,
+						resourcePrimKey, permissionsEl);
+				}
+				else {
+					importLayoutPermissions4(
+						layoutCache, companyId, groupId, guestGroup, layout,
+						resourceName, resourcePrimKey, permissionsEl,
+						importUserPermissions);
+				}
 			}
 
 			_portletImporter.importPortletData(
@@ -601,12 +614,14 @@ public class LayoutImporter {
 			}
 		}
 
-		Element rolesEl = root.element("roles");
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+			Element rolesEl = root.element("roles");
 
-		// Layout roles
+			// Layout roles
 
-		if (importPermissions) {
-			importLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+			if (importPermissions) {
+				importLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+			}
 		}
 
 		// Delete missing layouts
@@ -821,14 +836,12 @@ public class LayoutImporter {
 		}
 	}
 
-	protected void importLayoutPermissions(
+	protected void importLayoutPermissions4(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, Layout layout, Element permissionsEl,
+			Group guestGroup, Layout layout, String resourceName,
+			String resourcePrimKey, Element permissionsEl,
 			boolean importUserPermissions)
 		throws PortalException, SystemException {
-
-		String resourceName = Layout.class.getName();
-		String resourcePrimKey = String.valueOf(layout.getPlid());
 
 		importGroupPermissions(
 			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
@@ -853,6 +866,39 @@ public class LayoutImporter {
 		importInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
 			permissionsEl, "user-group", false);
+	}
+
+	protected void importLayoutPermissions5(
+			LayoutCache layoutCache, long companyId, long groupId, long userId,
+			String resourceName, String resourcePrimKey, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		Resource resource = layoutCache.getResource(
+			companyId, groupId, resourceName,
+			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
+
+		List<Element> roleEls = permissionsEl.elements("role");
+
+		for (Element roleEl : roleEls) {
+			String name = roleEl.attributeValue("name");
+
+			Role role = layoutCache.getRole(companyId, name);
+
+			if (role == null) {
+				String description = roleEl.attributeValue("description");
+				int type = Integer.valueOf(roleEl.attributeValue("type"));
+
+				role = RoleLocalServiceUtil.addRole(
+					userId, companyId, name, description, type);
+			}
+
+			List<String> actions = getActions(roleEl);
+
+			PermissionServiceUtil.setRolePermissions(
+				role.getRoleId(), groupId,
+				actions.toArray(new String[actions.size()]),
+				resource.getResourceId());
+		}
 	}
 
 	protected void importLayoutRoles(

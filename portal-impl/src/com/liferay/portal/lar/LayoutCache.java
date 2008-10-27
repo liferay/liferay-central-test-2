@@ -29,12 +29,15 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -144,11 +147,29 @@ public class LayoutCache {
 		return entityMap;
 	}
 
-	protected List<Role> getGroupRoles(long groupId) throws SystemException {
+	protected List<Role> getGroupRolesAlgorithm4(long groupId)
+		throws SystemException {
+
 		List<Role> roles = groupRolesMap.get(groupId);
 
 		if (roles == null) {
 			roles = RoleLocalServiceUtil.getGroupRoles(groupId);
+
+			groupRolesMap.put(groupId, roles);
+		}
+
+		return roles;
+	}
+
+	protected List<Role> getGroupRolesAlgorithm5(long groupId)
+		throws PortalException, SystemException {
+
+		List<Role> roles = groupRolesMap.get(groupId);
+
+		if (roles == null) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			roles = ResourceActionsUtil.getRoles(group, Layout.class.getName());
 
 			groupRolesMap.put(groupId, roles);
 		}

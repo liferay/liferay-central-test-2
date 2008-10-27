@@ -293,7 +293,7 @@ public class PortletExporter {
 			String resourceName, String entityName, Element parentEl)
 		throws SystemException {
 
-		List<Role> roles = layoutCache.getGroupRoles(groupId);
+		List<Role> roles = layoutCache.getGroupRolesAlgorithm4(groupId);
 
 		Element groupEl = exportRoles(
 			companyId, resourceName, ResourceConstants.SCOPE_GROUP,
@@ -361,7 +361,8 @@ public class PortletExporter {
 
 			long entityGroupId = entry.getValue();
 
-			List<Role> entityRoles = layoutCache.getGroupRoles(entityGroupId);
+			List<Role> entityRoles = layoutCache.getGroupRolesAlgorithm4(
+				entityGroupId);
 
 			Element entityEl = exportRoles(
 				companyId, resourceName, ResourceConstants.SCOPE_GROUP,
