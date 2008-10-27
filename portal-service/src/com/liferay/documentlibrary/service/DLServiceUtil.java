@@ -125,10 +125,6 @@ public class DLServiceUtil {
 		_service.reIndex(ids);
 	}
 
-	public void setService(DLService service) {
-		_service = service;
-	}
-
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
@@ -163,5 +159,10 @@ public class DLServiceUtil {
 			fileName);
 	}
 
+	public void setService(DLService service) {
+		_service = service;
+	}
+
 	private static DLService _service;
+
 }

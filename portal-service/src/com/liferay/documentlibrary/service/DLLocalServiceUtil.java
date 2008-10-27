@@ -56,8 +56,7 @@ public class DLLocalServiceUtil {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return _service.getFileAsStream(
-			companyId, repositoryId, fileName);
+		return _service.getFileAsStream(companyId, repositoryId, fileName);
 	}
 
 	public static InputStream getFileAsStream(
@@ -91,10 +90,6 @@ public class DLLocalServiceUtil {
 
 		return _service.search(
 			companyId, portletId, groupId, repositoryIds, keywords, start, end);
-	}
-
-	public void setService(DLLocalService service) {
-		_service = service;
 	}
 
 	public static void updateFile(
@@ -131,6 +126,10 @@ public class DLLocalServiceUtil {
 		throws PortalException {
 
 		_service.validate(fileName, sourceFileName, is);
+	}
+
+	public void setService(DLLocalService service) {
+		_service = service;
 	}
 
 	private static DLLocalService _service;

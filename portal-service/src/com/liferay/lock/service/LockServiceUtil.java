@@ -76,13 +76,14 @@ public class LockServiceUtil {
 		return _service.refresh(uuid, expirationTime);
 	}
 
-	public void setService(LockService service) {
-		_service = service;
-	}
-
 	public static void unlock(String className, Comparable<?> pk) {
 		_service.unlock(className, pk);
 	}
 
+	public void setService(LockService service) {
+		_service = service;
+	}
+
 	private static LockService _service;
+
 }

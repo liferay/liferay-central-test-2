@@ -68,10 +68,6 @@ public class MailServiceUtil {
 		_service.sendEmail(mailMessage);
 	}
 
-	public void setService(MailService service) {
-		_service = service;
-	}
-
 	public static void updateBlocked(long userId, List<String> blocked) {
 		_service.updateBlocked(userId, blocked);
 	}
@@ -84,5 +80,10 @@ public class MailServiceUtil {
 		_service.updatePassword(userId, password);
 	}
 
+	public void setService(MailService service) {
+		_service = service;
+	}
+
 	private static MailService _service;
+
 }
