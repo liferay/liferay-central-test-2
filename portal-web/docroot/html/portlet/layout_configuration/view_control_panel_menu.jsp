@@ -93,7 +93,7 @@ public static final List<Portlet> filterPortlets(PermissionChecker permissionChe
 		return portlets;
 	}
 
-	if (category.equals(PortletCategoryKeys.CONTENT) && (permissionChecker.isCommunityAdmin(groupId.longValue())) {
+	if (category.equals(PortletCategoryKeys.CONTENT) && (permissionChecker.isCommunityAdmin(groupId.longValue()))) {
 		return portlets;
 	}
 
