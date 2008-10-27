@@ -22,9 +22,9 @@ open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, pop-message-listener-class?,
 social-activity-interpreter-class?, social-request-interpreter-class?,
-preferences-company-wide?, preferences-unique-per-layout?,
-preferences-owned-by-group?, control-panel-entry-category?,
-control-panel-entry-weight?, control-panel-entry-class?,
+control-panel-entry-category?, control-panel-entry-weight?,
+control-panel-entry-class?, preferences-company-wide?,
+preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
 pop-up-print?, layout-cacheable?, instanceable?, scopeable?,
@@ -218,6 +218,31 @@ http://docs.liferay.com/5.2/javadocs/portal-service/com/liferay/portlet/social/m
 <!ELEMENT social-request-interpreter-class (#PCDATA)>
 
 <!--
+Set the control-panel-entry-category value to "my", "content", "portal" or
+"server" to make this portlet available in the Control Panel under that
+category. Note that the portlet will only be visible to the Adminisitrator
+unless a control-panel-entry-class is specified.
+-->
+<!ELEMENT control-panel-entry-category (#PCDATA)>
+
+<!--
+Set the control-panel-entry-weight value to a double number to control the
+position of the entry within its Control Panel category. Higher values mean
+that the entry will appear lower in the Control Panel menu.
+-->
+<!ELEMENT control-panel-entry-weight (#PCDATA)>
+
+<!--
+The control-panel-entry-class value must be a class that implements
+com.liferay.portlet.ControlPanelEntry and is called by the Control Panel.
+
+See:
+
+http://docs.liferay.com/5.2/javadocs/portal-service/com/liferay/portlet/ControlPanelEntry.html
+-->
+<!ELEMENT control-panel-entry-class (#PCDATA)>
+
+<!--
 Set the preferences-company-wide value to true if the preferences for the
 portlet are across the entire company. Setting this value to true means
 the value for preferences-unique-per-layout and preferences-owned-by-group are
@@ -276,31 +301,6 @@ users in a community page. Administrators can set one list of stocks to be
 shared by all users across a community's set of pages.
 -->
 <!ELEMENT preferences-owned-by-group (#PCDATA)>
-
-<!--
-Set the control-panel-entry-category value to "my", "content", "portal" or
-"server" to make this portlet available in the Control Panel under that
-category. Note that the portlet will only be visible to the Adminisitrator
-unless a control-panel-entry-class is specified.
--->
-<!ELEMENT control-panel-entry-category (#PCDATA)>
-
-<!--
-Set the control-panel-entry-weight value to a double number to control the
-position of the entry within its Control Panel category. Higher values mean
-that the entry will appear lower in the Control Panel menu.
--->
-<!ELEMENT control-panel-entry-weight (#PCDATA)>
-
-<!--
-The control-panel-entry-class value must be a class that implements
-com.liferay.portal.util.ControlPanelEntry and is called by the Control Panel.
-
-See:
-
-http://docs.liferay.com/5.2/javadocs/portal-service/com/liferay/portal/util/ControlPanelEntry.html
--->
-<!ELEMENT control-panel-entry-class (#PCDATA)>
 
 <!--
 Set the use-default-template value to true if the portlet uses the default

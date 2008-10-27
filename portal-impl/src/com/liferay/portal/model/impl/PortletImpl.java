@@ -50,10 +50,10 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.ControlPanelEntry;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
+import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
@@ -131,11 +131,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String friendlyURLMapperClass, String urlEncoderClass,
 		String portletDataHandlerClass, String portletLayoutListenerClass,
 		String popMessageListenerClass, String socialActivityInterpreterClass,
-		String socialRequestInterpreterClass, String defaultPreferences,
-		String preferencesValidator, boolean preferencesCompanyWide,
-		boolean preferencesUniquePerLayout, boolean preferencesOwnedByGroup,
-		String controlPanelEntryCategory, double controlPanelEntryWeigth,
-		String controlPanelClass, boolean useDefaultTemplate,
+		String socialRequestInterpreterClass, String controlPanelEntryCategory,
+		double controlPanelEntryWeight, String controlPanelClass,
+		String defaultPreferences, String preferencesValidator,
+		boolean preferencesCompanyWide, boolean preferencesUniquePerLayout,
+		boolean preferencesOwnedByGroup, boolean useDefaultTemplate,
 		boolean showPortletAccessDenied, boolean showPortletInactive,
 		boolean actionURLRedirect, boolean restoreCurrentView,
 		boolean maximizeEdit, boolean maximizeHelp, boolean popUpPrint,
@@ -183,14 +183,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_popMessageListenerClass = popMessageListenerClass;
 		_socialActivityInterpreterClass = socialActivityInterpreterClass;
 		_socialRequestInterpreterClass = socialRequestInterpreterClass;
+		_controlPanelEntryCategory = controlPanelEntryCategory;
+		_controlPanelEntryWeight = controlPanelEntryWeight;
+		_controlPanelEntryClass = controlPanelClass;
 		_defaultPreferences = defaultPreferences;
 		_preferencesValidator = preferencesValidator;
 		_preferencesCompanyWide = preferencesCompanyWide;
 		_preferencesUniquePerLayout = preferencesUniquePerLayout;
 		_preferencesOwnedByGroup = preferencesOwnedByGroup;
-		_controlPanelEntryCategory = controlPanelEntryCategory;
-		_controlPanelEntryWeigth = controlPanelEntryWeigth;
-		_controlPanelEntryClass = controlPanelClass;
 		_useDefaultTemplate = useDefaultTemplate;
 		_showPortletAccessDenied = showPortletAccessDenied;
 		_showPortletInactive = showPortletInactive;
@@ -474,19 +474,18 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the configuration action instance of the portlet
 	 */
 	public ConfigurationAction getConfigurationActionInstance() {
-		if (Validator.isNotNull(getConfigurationActionClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getConfigurationActionInstance();
-			}
-			else {
-				return (ConfigurationAction)InstancePool.get(
-					getConfigurationActionClass());
-			}
+		if (Validator.isNull(getConfigurationActionClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getConfigurationActionInstance();
+		}
+
+		return (ConfigurationAction)InstancePool.get(
+			getConfigurationActionClass());
 	}
 
 	/**
@@ -513,18 +512,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the indexer instance of the portlet
 	 */
 	public Indexer getIndexerInstance() {
-		if (Validator.isNotNull(getIndexerClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getIndexerInstance();
-			}
-			else {
-				return (Indexer)InstancePool.get(getIndexerClass());
-			}
+		if (Validator.isNull(getIndexerClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getIndexerInstance();
+		}
+
+		return (Indexer)InstancePool.get(getIndexerClass());
 	}
 
 	/**
@@ -571,18 +569,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the scheduler instance of the portlet
 	 */
 	public Scheduler getSchedulerInstance() {
-		if (Validator.isNotNull(getSchedulerClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getSchedulerInstance();
-			}
-			else {
-				return (Scheduler)InstancePool.get(getSchedulerClass());
-			}
+		if (Validator.isNull(getSchedulerClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getSchedulerInstance();
+		}
+
+		return (Scheduler)InstancePool.get(getSchedulerClass());
 	}
 
 	/**
@@ -629,19 +626,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the friendly URL mapper instance of the portlet
 	 */
 	public FriendlyURLMapper getFriendlyURLMapperInstance() {
-		if (Validator.isNotNull(getFriendlyURLMapperClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getFriendlyURLMapperInstance();
-			}
-			else {
-				return (FriendlyURLMapper)InstancePool.get(
-					getFriendlyURLMapperClass());
-			}
+		if (Validator.isNull(getFriendlyURLMapperClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getFriendlyURLMapperInstance();
+		}
+
+		return (FriendlyURLMapper)InstancePool.get(getFriendlyURLMapperClass());
 	}
 
 	/**
@@ -669,18 +664,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the URL encoder instance of the portlet
 	 */
 	public URLEncoder getURLEncoderInstance() {
-		if (Validator.isNotNull(getURLEncoderClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getURLEncoderInstance();
-			}
-			else {
-				return (URLEncoder)InstancePool.get(getURLEncoderClass());
-			}
+		if (Validator.isNull(getURLEncoderClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getURLEncoderInstance();
+		}
+
+		return (URLEncoder)InstancePool.get(getURLEncoderClass());
 	}
 
 	/**
@@ -708,20 +702,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the portlet data handler instance of the portlet
 	 */
 	public PortletDataHandler getPortletDataHandlerInstance() {
-		if (Validator.isNotNull(getPortletDataHandlerClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBagImpl portletBagImpl =
-					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
-
-				return portletBagImpl.getPortletDataHandlerInstance();
-			}
-			else {
-				return (PortletDataHandler)InstancePool.get(
-					getPortletDataHandlerClass());
-			}
+		if (Validator.isNull(getPortletDataHandlerClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getPortletDataHandlerInstance();
+		}
+
+		return (PortletDataHandler)InstancePool.get(
+			getPortletDataHandlerClass());
 	}
 
 	/**
@@ -784,19 +777,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the POP message listener instance of the portlet
 	 */
 	public MessageListener getPopMessageListenerInstance() {
-		if (Validator.isNotNull(getPopMessageListenerClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getPopMessageListenerInstance();
-			}
-			else {
-				return (MessageListener)InstancePool.get(
-					getPopMessageListenerClass());
-			}
+		if (Validator.isNull(getPopMessageListenerClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getPopMessageListenerInstance();
+		}
+
+		return (MessageListener)InstancePool.get(getPopMessageListenerClass());
 	}
 
 	/**
@@ -827,20 +818,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the name of the activity interpreter instance of the portlet
 	 */
 	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
-		if (Validator.isNotNull(getSocialActivityInterpreterClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBagImpl portletBagImpl =
-					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
-
-				return portletBagImpl.getSocialActivityInterpreterInstance();
-			}
-			else {
-				return (SocialActivityInterpreter)InstancePool.get(
-					getSocialActivityInterpreterClass());
-			}
+		if (Validator.isNull(getSocialActivityInterpreterClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getSocialActivityInterpreterInstance();
+		}
+
+		return (SocialActivityInterpreter)InstancePool.get(
+			getSocialActivityInterpreterClass());
 	}
 
 	/**
@@ -871,20 +861,108 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the name of the request interpreter instance of the portlet
 	 */
 	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
-		if (Validator.isNotNull(getSocialRequestInterpreterClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBagImpl portletBag =
-					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getSocialRequestInterpreterInstance();
-			}
-			else {
-				return (SocialRequestInterpreter)InstancePool.get(
-					getSocialRequestInterpreterClass());
-			}
+		if (Validator.isNull(getSocialRequestInterpreterClass())) {
+			return null;
 		}
 
-		return null;
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getSocialRequestInterpreterInstance();
+		}
+
+		return (SocialRequestInterpreter)InstancePool.get(
+			getSocialRequestInterpreterClass());
+	}
+
+	/**
+	 * Gets the name of the category of the Control Panel where the portlet
+	 * will be shown.
+	 *
+	 * @return		the name of of the category of the Control Panel where the
+	 *				portlet will be shown
+	 */
+	public String getControlPanelEntryCategory() {
+		return _controlPanelEntryCategory;
+	}
+
+	/**
+	 * Set the name of the category of the Control Panel where the portlet will
+	 * be shown.
+	 *
+	 * @param		controlPanelEntryCategory the name of the category of the
+	 *				Control Panel where the portlet will be shown
+	 */
+	public void setControlPanelEntryCategory(String controlPanelEntryCategory) {
+		_controlPanelEntryCategory = controlPanelEntryCategory;
+	}
+
+	/**
+	 * Gets the relative weight of the portlet with respect to the other
+	 * portlets in the same category of the Control Panel.
+	 *
+	 * @return		the relative weight of the portlet with respect to the
+	 *				other portlets in the same category of the Control Panel
+	 */
+	public double getControlPanelEntryWeight() {
+		return _controlPanelEntryWeight;
+	}
+
+	/**
+	 * Sets the relative weight of the portlet with respect to the other
+	 * portlets in the same category of the Control Panel.
+	 *
+	 * @param		controlPanelEntryWeight the relative weight of the portlet
+	 *				with respect to the other portlets in the same category of
+	 *				the Control Panel
+	 */
+	public void setControlPanelEntryWeight(double controlPanelEntryWeight) {
+		_controlPanelEntryWeight = controlPanelEntryWeight;
+	}
+
+	/**
+	 * Gets the name of the class that will control when the portlet will be
+	 * shown in the Control Panel.
+	 *
+	 * @return		the name of the class that will control when the portlet
+	 *				will be shown in the Control Panel
+	 */
+	public String getControlPanelEntryClass() {
+		return _controlPanelEntryClass;
+	}
+
+	/**
+	 * Sets the name of the class that will control when the portlet will be
+	 * shown in the Control Panel.
+	 *
+	 * @param		controlPanelEntryClass the name of the class that will
+	 *				control when the portlet will be shown in the Control Panel
+	 */
+	public void setControlPanelEntryClass(String controlPanelEntryClass) {
+		_controlPanelEntryClass = controlPanelEntryClass;
+	}
+
+	/**
+	 * Gets an instance of the class that will control when the portlet will be
+	 * shown in the Control Panel
+	 *
+	 * @return		the instance of the class that will control when the portlet
+	 *				will be shown in the Control Panel
+	 */
+	public ControlPanelEntry getControlPanelEntryInstance() {
+		if (Validator.isNull(getControlPanelEntryClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getControlPanelEntryInstance();
+		}
+
+		return (ControlPanelEntry)InstancePool.get(getControlPanelEntryClass());
 	}
 
 	/**
@@ -1034,97 +1112,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup) {
 		_preferencesOwnedByGroup = preferencesOwnedByGroup;
-	}
-
-	/**
-	 * Gets the name of the cateogry of the Control Panel where this portlet
-	 * will be shown
-	 *
-	 * @return          The name of the cateogry of the Control Panel where
-	 *                  this portlet will be shown
-	 */
-	public String getControlPanelEntryCategory() {
-		return _controlPanelEntryCategory;
-	}
-
-	/**
-	 * Set the name of the cateogry of the Control Panel where this portlet
-	 * will be shown
-	 *
-	 * @param controlPanelEntryCategory  The name of the cateogry of the Control
-	 *                              Panel where this portlet will be shown
-	 */
-	public void setControlPanelEntryCategory(String controlPanelEntryCategory) {
-		_controlPanelEntryCategory = controlPanelEntryCategory;
-	}
-
-	/**
-	 * Gets the relative weight of this portlet with respect to the other
-	 * portlets in the same category of the Control Panel
-	 *
-	 * @return      the relative weight of this portlet with respect to the
-	 *              other portlets in the same category of the Control Panel
-	 */
-	public double getControlPanelEntryWeigth() {
-		return _controlPanelEntryWeigth;
-	}
-
-	/**
-	 * Set the relative weight of this portlet with respect to the other
-	 * portlets in the same category of the Control Panel
-	 *
-	 * @param   controlPanelEntryWeigth the relative weight of this portlet with
-	 *          respect to the other portlets in the same category of the
-	 *          Control Panel
-	 */
-	public void setControlPanelEntryWeigth(double controlPanelEntryWeigth) {
-		_controlPanelEntryWeigth = controlPanelEntryWeigth;
-	}
-
-	/**
-	 * Gets the name of the class that will control when this portlet will be
-	 * shown in the Control Panel
-	 *
-	 * @return      the name of the class that will control when this portlet
-	 *              will be shown in the Control Panel
-	 */
-	public String getControlPanelEntryClass() {
-		return _controlPanelEntryClass;
-	}
-
-	/**
-	 * Gets an instance of the class that will control when this portlet will be
-	 * shown in the Control Panel
-	 *
-	 * @return		the instance of the class that will control when this
-	 *              portlet will be shown in the Control Panel
-	 */
-	public ControlPanelEntry getControlPanelEntryInstance() {
-		if (Validator.isNotNull(getControlPanelEntryClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBagImpl portletBag =
-					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getControlPanelEntryInstance();
-			}
-			else {
-				return (ControlPanelEntry)InstancePool.get(
-					getControlPanelEntryClass());
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * Set the name of the class that will control when this portlet will be
-	 * shown in the Control Panel
-	 *
-	 * @param controlPanelEntryClass the name of the class that will control when
-	 *                          this portlet will be shown in the Control Panel
-	 */
-	public void setControlPanelEntryClass(String controlPanelEntryClass) {
-		_controlPanelEntryClass = controlPanelEntryClass;
 	}
 
 	/**
@@ -2683,11 +2670,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getFriendlyURLMapperClass(), getURLEncoderClass(),
 			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
 			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
-			getSocialRequestInterpreterClass(), getDefaultPreferences(),
-			getPreferencesValidator(), isPreferencesCompanyWide(),
-			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			getControlPanelEntryCategory(), getControlPanelEntryWeigth(),
-			getControlPanelEntryClass(), isUseDefaultTemplate(),
+			getSocialRequestInterpreterClass(), getControlPanelEntryCategory(),
+			getControlPanelEntryWeight(), getControlPanelEntryClass(),
+			getDefaultPreferences(), getPreferencesValidator(),
+			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
+			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
 			isShowPortletAccessDenied(), isShowPortletInactive(),
 			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
 			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
@@ -2872,7 +2859,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _preferencesOwnedByGroup = true;
 
 	/**
-	 * The name of the cateogry of the Control Panel where this portlet will be
+	 * The name of the category of the Control Panel where this portlet will be
 	 * shown
 	 */
 	private String _controlPanelEntryCategory;
@@ -2881,7 +2868,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The relative weight of this portlet with respect to the other portlets
 	 * in the same category of the Control Panel
 	 */
-	private double _controlPanelEntryWeigth = 100;
+	private double _controlPanelEntryWeight = 100;
 
 	/**
 	 * The name of the class that will control when this portlet will be shown

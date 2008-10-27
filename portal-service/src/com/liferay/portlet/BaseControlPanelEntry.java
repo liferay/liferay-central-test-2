@@ -20,30 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
-
-import com.liferay.portal.model.Portlet;
-
-import java.util.Comparator;
+package com.liferay.portlet;
 
 /**
- * <a href="PortletControlPanelWeigthComparator.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="BaseControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class PortletControlPanelWeigthComparator implements Comparator {
-
-	public int compare(Object obj1, Object obj2) {
-		Portlet portlet1 = (Portlet)obj1;
-		Portlet portlet2 = (Portlet)obj2;
-
-		int value = Double.compare(
-			portlet1.getControlPanelEntryWeigth(),
-			portlet2.getControlPanelEntryWeigth());
-
-		return value;
-	}
-
+public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 }

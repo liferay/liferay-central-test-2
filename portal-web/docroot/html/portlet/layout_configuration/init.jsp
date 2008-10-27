@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portal.util.ControlPanelEntry" %>
+<%@ page import="com.liferay.portlet.ControlPanelEntry" %>
 
 <%@ page import="java.util.MissingResourceException" %>
 <%@ page import="java.util.regex.Matcher" %>

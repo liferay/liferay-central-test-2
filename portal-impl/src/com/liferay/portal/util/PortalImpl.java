@@ -87,7 +87,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
 import com.liferay.portal.upload.UploadServletRequestImpl;
-import com.liferay.portal.util.comparator.PortletControlPanelWeigthComparator;
+import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigFactory;
@@ -133,7 +133,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -585,15 +584,12 @@ public class PortalImpl implements Portal {
 	public String getControlPanelCategory(String portletId)
 		throws SystemException {
 
-		for (int i = 0; i < PortletCategoryKeys.ALL.length; i++) {
-			String curCategory = PortletCategoryKeys.ALL[i];
-
-			List<Portlet> portlets = getControlPanelPortlets(curCategory);
+		for (String category : PortletCategoryKeys.ALL) {
+			List<Portlet> portlets = getControlPanelPortlets(category);
 
 			for (Portlet portlet : portlets) {
 				if (portlet.getPortletId().equals(portletId)) {
-					return curCategory;
-
+					return category;
 				}
 			}
 		}
@@ -604,19 +600,19 @@ public class PortalImpl implements Portal {
 	public List<Portlet> getControlPanelPortlets(String category)
 		throws SystemException {
 
-		List<Portlet> allPortlets = PortletLocalServiceUtil.getPortlets(
+		Set<Portlet> portletsSet = new TreeSet<Portlet>(
+			new PortletControlPanelWeightComparator());
+
+		List<Portlet> portletsList = PortletLocalServiceUtil.getPortlets(
 			CompanyThreadLocal.getCompanyId());
 
-		SortedSet<Portlet> portlets = new TreeSet<Portlet>(
-			new PortletControlPanelWeigthComparator());
-
-		for (Portlet portlet : allPortlets) {
+		for (Portlet portlet : portletsList) {
 			if (category.equals(portlet.getControlPanelEntryCategory())) {
-				portlets.add(portlet);
+				portletsSet.add(portlet);
 			}
 		}
 
-		return new ArrayList(portlets);
+		return new ArrayList<Portlet>(portletsSet);
 	}
 
 	public String getCurrentURL(HttpServletRequest request) {

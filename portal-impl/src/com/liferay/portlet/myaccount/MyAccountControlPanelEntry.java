@@ -20,41 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.enterpriseadmin.util;
+package com.liferay.portlet.myaccount;
 
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.util.BaseControlPanelEntry;
-
-import java.util.List;
+import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
- * <a href="UsersControlPanelEntry.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MyAccountControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class UsersControlPanelEntry extends BaseControlPanelEntry {
+public class MyAccountControlPanelEntry extends BaseControlPanelEntry {
 
 	public boolean isVisible(
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		List<Organization> organizations =
-			OrganizationLocalServiceUtil.getManageableOrganizations(
-				permissionChecker.getUserId());
-
-		for (Organization organization : organizations) {
-			if (permissionChecker.isCommunityAdmin(
-					organization.getGroup().getGroupId())) {
-				return true;
-			}
-		}
-
-		return false;
+		return true;
 	}
 
 }

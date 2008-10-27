@@ -170,6 +170,22 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portlet.social.model.SocialRequestInterpreter getSocialRequestInterpreterInstance();
 
+	public java.lang.String getControlPanelEntryCategory();
+
+	public void setControlPanelEntryCategory(
+		java.lang.String controlPanelEntryCategory);
+
+	public double getControlPanelEntryWeight();
+
+	public void setControlPanelEntryWeight(double controlPanelEntryWeight);
+
+	public java.lang.String getControlPanelEntryClass();
+
+	public void setControlPanelEntryClass(
+		java.lang.String controlPanelEntryClass);
+
+	public com.liferay.portlet.ControlPanelEntry getControlPanelEntryInstance();
+
 	public java.lang.String getDefaultPreferences();
 
 	public void setDefaultPreferences(java.lang.String defaultPreferences);
@@ -196,22 +212,6 @@ public interface Portlet extends PortletModel {
 	public boolean isPreferencesOwnedByGroup();
 
 	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup);
-
-	public java.lang.String getControlPanelEntryClass();
-
-	public com.liferay.portal.util.ControlPanelEntry getControlPanelEntryInstance();
-
-	public void setControlPanelEntryClass(
-		java.lang.String controlPanelEntryClass);
-
-	public java.lang.String getControlPanelEntryCategory();
-
-	public void setControlPanelEntryCategory(
-		java.lang.String controlPanelEntryCategory);
-
-	public double getControlPanelEntryWeigth();
-
-	public void setControlPanelEntryWeigth(double controlPanelEntryWeigth);
 
 	public boolean getUseDefaultTemplate();
 

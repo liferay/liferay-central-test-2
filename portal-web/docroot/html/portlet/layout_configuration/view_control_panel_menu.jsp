@@ -86,23 +86,19 @@
 </div>
 
 <%!
-public static final List<Portlet> filterPortlets(PermissionChecker permissionChecker, Long groupId, String category, List<Portlet> portlets)
-	throws Exception {
-
+public static final List<Portlet> filterPortlets(PermissionChecker permissionChecker, Long groupId, String category, List<Portlet> portlets) throws Exception {
 	if (permissionChecker.isCompanyAdmin()) {
 		return portlets;
 	}
 
-	if (category.equals(PortletCategoryKeys.CONTENT) && (permissionChecker.isCommunityAdmin(groupId.longValue()))) {
+	if (category.equals(PortletCategoryKeys.CONTENT) && permissionChecker.isCommunityAdmin(groupId)) {
 		return portlets;
 	}
 
 	List<Portlet> filteredPortlets = new ArrayList<Portlet>();
 
 	for (Portlet portlet : portlets) {
-		if (portlet.hasAddPortletPermission(permissionChecker.getUserId()) ||
-			showPortlet(permissionChecker, portlet)) {
-
+		if (portlet.hasAddPortletPermission(permissionChecker.getUserId()) || isShowPortlet(permissionChecker, portlet)) {
 			filteredPortlets.add(portlet);
 		}
 	}
@@ -110,9 +106,7 @@ public static final List<Portlet> filterPortlets(PermissionChecker permissionChe
 	return filteredPortlets;
 }
 
-public static boolean showPortlet(PermissionChecker permissionChecker, Portlet portlet)
-	throws Exception {
-
+public static boolean isShowPortlet(PermissionChecker permissionChecker, Portlet portlet) throws Exception {
 	ControlPanelEntry controlPanelEntry = portlet.getControlPanelEntryInstance();
 
 	if ((controlPanelEntry != null) && controlPanelEntry.isVisible(permissionChecker, portlet)) {

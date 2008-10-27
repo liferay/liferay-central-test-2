@@ -962,6 +962,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						portlet.elementText(
 							"social-request-interpreter-class"),
 							portletModel.getSocialRequestInterpreterClass()));
+				portletModel.setControlPanelEntryCategory(GetterUtil.getString(
+					portlet.elementText("control-panel-entry-category"),
+					portletModel.getControlPanelEntryCategory()));
+				portletModel.setControlPanelEntryWeight(GetterUtil.getDouble(
+					portlet.elementText("control-panel-entry-weight"),
+					portletModel.getControlPanelEntryWeight()));
+				portletModel.setControlPanelEntryClass(GetterUtil.getString(
+					portlet.elementText("control-panel-entry-class"),
+					portletModel.getControlPanelEntryClass()));
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));
@@ -972,15 +981,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setPreferencesOwnedByGroup(GetterUtil.getBoolean(
 					portlet.elementText("preferences-owned-by-group"),
 					portletModel.isPreferencesOwnedByGroup()));
-				portletModel.setControlPanelEntryCategory(GetterUtil.getString(
-					portlet.elementText("control-panel-entry-category"),
-					portletModel.getControlPanelEntryCategory()));
-				portletModel.setControlPanelEntryWeigth(GetterUtil.getDouble(
-					portlet.elementText("control-panel-entry-weight"),
-					portletModel.getControlPanelEntryWeigth()));
-				portletModel.setControlPanelEntryClass(GetterUtil.getString(
-					portlet.elementText("control-panel-entry-class"),
-					portletModel.getControlPanelEntryClass()));
 				portletModel.setUseDefaultTemplate(GetterUtil.getBoolean(
 					portlet.elementText("use-default-template"),
 					portletModel.isUseDefaultTemplate()));

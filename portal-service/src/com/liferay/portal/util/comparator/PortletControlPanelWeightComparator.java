@@ -20,24 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.myaccount.util;
+package com.liferay.portal.util.comparator;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.util.BaseControlPanelEntry;
+
+import java.util.Comparator;
 
 /**
- * <a href="MyAccountControlPanelEntry.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletControlPanelWeightComparator.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class MyAccountControlPanelEntry extends BaseControlPanelEntry {
+public class PortletControlPanelWeightComparator
+	implements Comparator<Portlet> {
 
-	public boolean isVisible(
-		PermissionChecker permissionChecker, Portlet portlet) throws Exception {
-
-		return true;
+	public int compare(Portlet portlet1, Portlet portlet2) {
+		return Double.compare(
+			portlet1.getControlPanelEntryWeight(),
+			portlet2.getControlPanelEntryWeight());
 	}
 
 }
