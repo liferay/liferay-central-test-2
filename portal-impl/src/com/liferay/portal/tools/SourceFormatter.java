@@ -470,6 +470,11 @@ public class SourceFormatter {
 				StringUtil.replace(fileName, "\\", "/") + StringPool.AT +
 					lineCount);
 
+			if (excluded == null) {
+				excluded = _exclusions.getProperty(
+					StringUtil.replace(fileName, "\\", "/"));
+			}
+
 			if ((excluded == null) && ((line.length() - 1) > 79) &&
 				(!line.startsWith("import "))) {
 
