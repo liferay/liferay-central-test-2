@@ -47,7 +47,7 @@ List invalidWords = WordsUtil.checkSpelling(text);
 	</style>
 
 	<script type="text/javascript">
-		// <![CDATA
+		// <![CDATA[
 			var themeDisplay = {
 				getPathContext: function() {
 					return "<%= PortalUtil.getPathContext() %>";
