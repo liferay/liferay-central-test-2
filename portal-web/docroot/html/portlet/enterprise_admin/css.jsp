@@ -49,16 +49,15 @@
 
 .portlet-enterprise-admin .avatar {
 	clear: both;
-	float: left;
 	padding: 15px 0 5px;
-	width: 35px;
+	width: 100px;
 }
 
 .portlet-enterprise-admin .avatar img {
 	display: block;
 }
 
-.portlet-enterprise-admin .avatar .change-avatar {
+.portlet-enterprise-admin .change-avatar {
 	display: block;
 	text-align: center;
 }
@@ -182,6 +181,7 @@
 	float: left;
 	margin-right: 10px;
 	padding: 0;
+	width: 35px;
 }
 
 .portlet-enterprise-admin .form-navigation .button-holder {
