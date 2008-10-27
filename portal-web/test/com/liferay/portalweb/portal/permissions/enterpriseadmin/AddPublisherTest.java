@@ -62,10 +62,11 @@ public class AddPublisherTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("rolesLink");
-		selenium.click("//div[@id='roles']/nobr/a[2]");
+		selenium.click(
+			"//input[@value='Select' and @type='button' and @onclick='_79_openRoleSelector();']");
+		selenium.waitForPopUp("role", RuntimeVariables.replace("30000"));
 		Thread.sleep(5000);
-		selenium.waitForPopUp("regularRole", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=regularRole");
+		selenium.selectWindow("name=role");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

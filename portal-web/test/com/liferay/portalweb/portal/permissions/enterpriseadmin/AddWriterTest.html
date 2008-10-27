@@ -118,8 +118,13 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='roles']/nobr/a[2]</td>
+	<td>//input[@value='Select' and @type='button' and @onclick='_79_openRoleSelector();']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>role</td>
+	<td>30000</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -127,13 +132,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPopUp</td>
-	<td>regularRole</td>
-	<td>30000</td>
-</tr>
-<tr>
 	<td>selectWindow</td>
-	<td>name=regularRole</td>
+	<td>name=role</td>
 	<td></td>
 </tr>
 <tr>
