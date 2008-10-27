@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,10 +62,6 @@ public class DocumentImpl implements Document {
 		addKeyword(name, _sdf.format(value));
 	}
 
-	public void addFile(String name, InputStream is, String fileExt) {
-		addText(name, FileUtil.extractText(is, fileExt));
-	}
-
 	public void addFile(String name, byte[] bytes, String fileExt) {
 		InputStream is = new BufferedInputStream(
 			new ByteArrayInputStream(bytes));
@@ -80,16 +77,72 @@ public class DocumentImpl implements Document {
 		addFile(name, is, fileExt);
 	}
 
+	public void addFile(String name, InputStream is, String fileExt) {
+		addText(name, FileUtil.extractText(is, fileExt));
+	}
+
+	public void addKeyword(String name, boolean value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, Boolean value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, boolean[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addKeyword(String name, Boolean[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
 	public void addKeyword(String name, double value) {
 		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, Double value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, double[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addKeyword(String name, Double[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
 	public void addKeyword(String name, int value) {
 		addKeyword(name, String.valueOf(value));
 	}
 
+	public void addKeyword(String name, int[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addKeyword(String name, Integer value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, Integer[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
 	public void addKeyword(String name, long value) {
 		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, Long value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, long[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addKeyword(String name, Long[] values) {
+		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
 	public void addKeyword(String name, String value) {
@@ -118,24 +171,24 @@ public class DocumentImpl implements Document {
 		addUID(portletId, String.valueOf(field1));
 	}
 
-	public void addUID(String portletId, Long field1) {
-		addUID(portletId, field1.longValue());
-	}
-
-	public void addUID(String portletId, String field1) {
-		addUID(portletId, field1, null);
-	}
-
 	public void addUID(
 		String portletId, long field1, String field2) {
 
 		addUID(portletId, String.valueOf(field1), field2);
 	}
 
+	public void addUID(String portletId, Long field1) {
+		addUID(portletId, field1.longValue());
+	}
+
 	public void addUID(
 		String portletId, Long field1, String field2) {
 
 		addUID(portletId, field1.longValue(), field2);
+	}
+
+	public void addUID(String portletId, String field1) {
+		addUID(portletId, field1, null);
 	}
 
 	public void addUID(
@@ -185,6 +238,10 @@ public class DocumentImpl implements Document {
 		return _sdf.parse(get(name));
 	}
 
+	public Map<String, Field> getFields() {
+		return _fields;
+	}
+
 	public String[] getValues(String name) {
 		Field field = _fields.get(name);
 
@@ -193,10 +250,6 @@ public class DocumentImpl implements Document {
 		}
 
 		return field.getValues();
-	}
-
-	public Map<String, Field> getFields() {
-		return _fields;
 	}
 
 	public void setFields(Map<String, Field> fields) {
@@ -228,9 +281,9 @@ public class DocumentImpl implements Document {
 
 	private static final String _DATE_FORMAT_PATTERN = "yyyyMMddHHmmss";
 
-	private static final String _UID_PORTLET = "_PORTLET_";
-
 	private static final String _UID_FIELD = "_FIELD_";
+
+	private static final String _UID_PORTLET = "_PORTLET_";
 
 	private Map<String, Field> _fields = new HashMap<String, Field>();
 	private SimpleDateFormat _sdf = new SimpleDateFormat(_DATE_FORMAT_PATTERN);

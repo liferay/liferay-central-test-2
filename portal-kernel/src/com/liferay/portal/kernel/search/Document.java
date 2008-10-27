@@ -44,20 +44,46 @@ public interface Document {
 
 	public void addDate(String name, Date value);
 
-	public void addFile(String name, InputStream is, String fileExt)
-		throws IOException;
-
 	public void addFile(String name, byte[] bytes, String fileExt)
 		throws IOException;
 
 	public void addFile(String name, File file, String fileExt)
 		throws IOException;
 
+	public void addFile(String name, InputStream is, String fileExt)
+		throws IOException;
+
+	public void addKeyword(String name, boolean value);
+
+	public void addKeyword(String name, Boolean value);
+
+	public void addKeyword(String name, boolean[] values);
+
+	public void addKeyword(String name, Boolean[] values);
+
 	public void addKeyword(String name, double value);
+
+	public void addKeyword(String name, Double value);
+
+	public void addKeyword(String name, double[] values);
+
+	public void addKeyword(String name, Double[] values);
 
 	public void addKeyword(String name, int value);
 
+	public void addKeyword(String name, int[] values);
+
+	public void addKeyword(String name, Integer value);
+
+	public void addKeyword(String name, Integer[] values);
+
 	public void addKeyword(String name, long value);
+
+	public void addKeyword(String name, Long value);
+
+	public void addKeyword(String name, long[] values);
+
+	public void addKeyword(String name, Long[] values);
 
 	public void addKeyword(String name, String value);
 
@@ -69,13 +95,13 @@ public interface Document {
 
 	public void addUID(String portletId, long field1);
 
-	public void addUID(String portletId, Long field1);
-
-	public void addUID(String portletId, String field1);
-
 	public void addUID(String portletId, long field1, String field2);
 
+	public void addUID(String portletId, Long field1);
+
 	public void addUID(String portletId, Long field1, String field2);
+
+	public void addUID(String portletId, String field1);
 
 	public void addUID(String portletId, String field1, String field2);
 
@@ -90,8 +116,8 @@ public interface Document {
 
 	public Date getDate(String name) throws ParseException;
 
-	public String[] getValues(String name);
-
 	public Map<String, Field> getFields();
+
+	public String[] getValues(String name);
 
 }
