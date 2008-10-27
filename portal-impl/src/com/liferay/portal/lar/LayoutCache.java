@@ -147,9 +147,7 @@ public class LayoutCache {
 		return entityMap;
 	}
 
-	protected List<Role> getGroupRolesAlgorithm4(long groupId)
-		throws SystemException {
-
+	protected List<Role> getGroupRoles_4(long groupId) throws SystemException {
 		List<Role> roles = groupRolesMap.get(groupId);
 
 		if (roles == null) {
@@ -161,7 +159,7 @@ public class LayoutCache {
 		return roles;
 	}
 
-	protected List<Role> getGroupRolesAlgorithm5(long groupId)
+	protected List<Role> getGroupRoles_5(long groupId)
 		throws PortalException, SystemException {
 
 		List<Role> roles = groupRolesMap.get(groupId);

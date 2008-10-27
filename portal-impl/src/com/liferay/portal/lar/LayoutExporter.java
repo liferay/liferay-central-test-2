@@ -259,12 +259,12 @@ public class LayoutExporter {
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-					exportLayoutPermissions5(
+					exportLayoutPermissions_5(
 						layoutCache, companyId, groupId, resourceName,
 						resourcePrimKey, permissionsEl);
 				}
 				else {
-					exportLayoutPermissions4(
+					exportLayoutPermissions_4(
 						layoutCache, companyId, groupId, guestGroup,
 						resourceName, resourcePrimKey, permissionsEl,
 						exportUserPermissions);
@@ -394,7 +394,7 @@ public class LayoutExporter {
 		}
 	}
 
-	protected void exportLayoutPermissions4(
+	protected void exportLayoutPermissions_4(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, String resourceName, String resourcePrimKey,
 			Element permissionsEl, boolean exportUserPermissions)
@@ -425,7 +425,7 @@ public class LayoutExporter {
 			permissionsEl, "user-group");
 	}
 
-	protected void exportLayoutPermissions5(
+	protected void exportLayoutPermissions_5(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String resourcePrimKey, Element permissionsEl)
 		throws PortalException, SystemException {
@@ -434,7 +434,7 @@ public class LayoutExporter {
 			companyId, groupId, resourceName,
 			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
 
-		List<Role> roles = layoutCache.getGroupRolesAlgorithm5(groupId);
+		List<Role> roles = layoutCache.getGroupRoles_5(groupId);
 
 		for (Role role : roles) {
 			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {

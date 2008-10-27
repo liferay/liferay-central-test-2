@@ -492,12 +492,12 @@ public class LayoutImporter {
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-					importLayoutPermissions5(
+					importLayoutPermissions_5(
 						layoutCache, companyId, groupId, userId, resourceName,
 						resourcePrimKey, permissionsEl);
 				}
 				else {
-					importLayoutPermissions4(
+					importLayoutPermissions_4(
 						layoutCache, companyId, groupId, guestGroup, layout,
 						resourceName, resourcePrimKey, permissionsEl,
 						importUserPermissions);
@@ -836,7 +836,7 @@ public class LayoutImporter {
 		}
 	}
 
-	protected void importLayoutPermissions4(
+	protected void importLayoutPermissions_4(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout, String resourceName,
 			String resourcePrimKey, Element permissionsEl,
@@ -868,7 +868,7 @@ public class LayoutImporter {
 			permissionsEl, "user-group", false);
 	}
 
-	protected void importLayoutPermissions5(
+	protected void importLayoutPermissions_5(
 			LayoutCache layoutCache, long companyId, long groupId, long userId,
 			String resourceName, String resourcePrimKey, Element permissionsEl)
 		throws PortalException, SystemException {
