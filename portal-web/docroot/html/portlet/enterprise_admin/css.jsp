@@ -299,7 +299,8 @@
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button a:hover {
-	border: 1px solid #346799;
+	border: 1px solid #A7CEDF;
+	background-color: #DFF4FF;
 	color: #346799;
 	padding: 4px 14px 4px 29px;
 }
@@ -314,7 +315,8 @@
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.current a:hover {
-	border: 1px solid #346799;
+	background-color: #d6dcdd;
+	border-color: #B7C0C2;
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.add-button a {
@@ -322,7 +324,7 @@
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.custom-attributes-button a {
-	background-image: url(<%= themeImagesPath %>/common/add.png);
+	background-image: url(<%= themeImagesPath %>/common/attributes.png);
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.view-button a {
