@@ -2346,6 +2346,7 @@ percentage=パーセンテージ
 performance=公演
 permission-exclusive-to-members-of-current-location-and-community=現在の支部およびコミュニティ限定にしますか？
 permissions-assigned-to-organizations-user-groups-roles-and-communities=組織、ユーザグループ、ロール、コミュニティへの配属権限
+permissions-assigned-to-roles=許可は役割に割り当てた
 permissions-assigned-to-users=ユーザへの配属権限
 permissions=権限設定
 person=個人

@@ -2346,6 +2346,7 @@ percentage=百分比
 performance=表现
 permission-exclusive-to-members-of-current-location-and-community=允许专属对当前地点的成员和社区?
 permissions-assigned-to-organizations-user-groups-roles-and-communities=允许被分配到组织、用户群、角色, 和公共
+permissions-assigned-to-roles=允许被分配到角色
 permissions-assigned-to-users=允许被分配到用户
 permissions=允许
 person=人

@@ -2346,6 +2346,7 @@ percentage=Pourcentage
 performance=Performance
 permission-exclusive-to-members-of-current-location-and-community=Permission exclusive aux membres de la localisation courante et à la communauté ?
 permissions-assigned-to-organizations-user-groups-roles-and-communities=Permissions assignées aux organisations, aux groupes d'utilisateur, aux rôles, et aux Communautés
+permissions-assigned-to-roles=Permissions assignées aux rôles
 permissions-assigned-to-users=Permissions assignées aux utilisateurs
 permissions=Permissions
 person=Personne
