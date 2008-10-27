@@ -183,7 +183,7 @@ public class WebFormUtil {
 	}
 
 	public static boolean validate(
-			String thisFieldValue, Map<String,String> fieldsMap,
+			String currentFieldValue, Map<String,String> fieldsMap,
 			String validationScript)
 		throws Exception {
 
@@ -193,30 +193,32 @@ public class WebFormUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("thisFieldValue = String('" + thisFieldValue + "');\n");
+		sb.append("currentFieldValue = String('" + currentFieldValue + "');\n");
 
 		sb.append("var fieldsMap = {};\n");
 
 		for (String key : fieldsMap.keySet()) {
-			 sb.append(
-				"fieldsMap['" + key + "'] = '" +
-					fieldsMap.get(key) + "';\n");
+			sb.append("fieldsMap['");
+			sb.append(key);
+			sb.append("'] = '");
+			sb.append(fieldsMap.get(key));
+			sb.append("';\n");
 		}
 
-		sb.append("function validation(thisFieldValue, fieldsMap) {\n");
+		sb.append("function validation(currentFieldValue, fieldsMap) {\n");
 		sb.append(validationScript);
 		sb.append("};\n");
 		sb.append("internalValidationResult = ");
-		sb.append("validation(thisFieldValue, fieldsMap);");
+		sb.append("validation(currentFieldValue, fieldsMap);");
 
 		String script = sb.toString();
 
 		try {
 			Scriptable scope = context.initStandardObjects();
 
-			Object jsfieldsMap = Context.javaToJS(fieldsMap, scope);
+			Object jsFieldsMap = Context.javaToJS(fieldsMap, scope);
 
-			ScriptableObject.putProperty(scope, "jsfieldsMap", jsfieldsMap);
+			ScriptableObject.putProperty(scope, "jsFieldsMap", jsFieldsMap);
 
 			context.evaluateString(scope, script, "Validation Script", 1, null);
 

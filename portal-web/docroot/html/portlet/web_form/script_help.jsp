@@ -30,7 +30,7 @@
 
 <ul>
 	<li>
-		<b>thisFieldValue</b>: <liferay-ui:message key="the-value-being-validated" />
+		<b>currentFieldValue</b>: <liferay-ui:message key="the-value-being-validated" />
 	</li>
 	<li>
 		<b>fieldValues</b>: <liferay-ui:message key="the-array-of-all-form-values-indexed-by-name" />

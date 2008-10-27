@@ -171,7 +171,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 		function() {
 			jQuery('#<portlet:namespace />fm').submit(
 				function() {
-					var keys = new Array ();
+					var keys = [];
 					var fieldLabels = {};
 					var fieldOptional = {};
 					var fieldValidationErrorMessages = {};
@@ -190,12 +190,13 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 					%>
 
 						var key = "<%= HtmlUtil.escape(fieldLabel) %>";
+
 						keys[<%= fieldIndex %>] = key;
 
 						fieldLabels[key] = "<%= HtmlUtil.escape(fieldLabel) %>";
 						fieldValidationErrorMessages[key] = "<%= fieldValidationErrorMessage %>";
 
-						function fieldValidationFunction<%= fieldIndex %>(thisFieldValue, fieldsMap) {
+						function fieldValidationFunction<%= fieldIndex %>(currentFieldValue, fieldsMap) {
 							<c:choose>
 								<c:when test='<%= Validator.isNotNull(fieldValidationScript) %>'>
 									<%= fieldValidationScript %>
@@ -212,6 +213,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 						<c:choose>
 							<c:when test='<%= fieldType.equals("radio") %>'>
 								fieldsMap[key] = jQuery("input[@name='<portlet:namespace />field<%= fieldIndex %>']:checked").val();
+
 								if (!fieldsMap[key]) {
 									fieldsMap[key] = '';
 								}
@@ -231,15 +233,16 @@ boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCapt
 
 					for (var i = 1; i < keys.length; i++) {
 						var key = keys [i];
-						var thisFieldValue = fieldsMap[key];
 
-						if (!fieldOptional[key] && thisFieldValue.match(/^\s*$/)) {
+						var currentFieldValue = fieldsMap[key];
+
+						if (!fieldOptional[key] && currentFieldValue.match(/^\s*$/)) {
 							validationErrors = true;
 
 							jQuery(".portlet-msg-success").slideUp();
 							jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[key]).slideDown();
 						}
-						else if (!fieldValidationFunctions[key](thisFieldValue, fieldsMap)) {
+						else if (!fieldValidationFunctions[key](currentFieldValue, fieldsMap)) {
 							validationErrors = true;
 
 							jQuery(".portlet-msg-success").slideUp();

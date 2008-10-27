@@ -85,10 +85,10 @@ public class ExportDataAction extends PortletAction {
 			}
 
 			fieldLabels.add(fieldLabel);
+
 			sb.append("\"");
 			sb.append(fieldLabel.replaceAll("\"", "\\\""));
 			sb.append("\";");
-
 		}
 
 		sb.deleteCharAt(sb.length() - 1);

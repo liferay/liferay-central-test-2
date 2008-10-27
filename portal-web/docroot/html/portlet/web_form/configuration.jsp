@@ -171,8 +171,8 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 
 	<%
 	String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes") ;
-	int[] formFieldsIndexes = null;
 
+	int[] formFieldsIndexes = null;
 
 	if (Validator.isNotNull(formFieldsIndexesParam)){
 		formFieldsIndexes = StringUtil.split(formFieldsIndexesParam, 0);
@@ -182,45 +182,47 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 
 		for (int i = 1; true; i++) {
 			String fieldLabel = PrefsParamUtil.getString(preferences, request, "fieldLabel" + i);
+
 			if (Validator.isNull(fieldLabel)) {
 				break;
 			}
+
 			formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, i);
 		}
 	}
 
-	for (int index : formFieldsIndexes) {
-		String fieldLabel = PrefsParamUtil.getString(preferences, request, "fieldLabel" + index);
-		String fieldType = PrefsParamUtil.getString(preferences, request, "fieldType" + index);
-		boolean fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + index);
-		String fieldOptions = PrefsParamUtil.getString(preferences, request, "fieldOptions" + index);
+	for (int formFieldsIndex : formFieldsIndexes) {
+		String fieldLabel = PrefsParamUtil.getString(preferences, request, "fieldLabel" + formFieldsIndex);
+		String fieldType = PrefsParamUtil.getString(preferences, request, "fieldType" + formFieldsIndex);
+		boolean fieldOptional = PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + formFieldsIndex);
+		String fieldOptions = PrefsParamUtil.getString(preferences, request, "fieldOptions" + formFieldsIndex);
 		String fieldValidationScript = StringPool.BLANK;
 		String fieldValidationErrorMessage = StringPool.BLANK;
 
 		if (PropsValues.WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED) {
-			fieldValidationScript = PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + index);
-			fieldValidationErrorMessage = PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + index);
+			fieldValidationScript = PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + formFieldsIndex);
+			fieldValidationErrorMessage = PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
 		}
 	%>
 
-		<fieldset class="lfr-form-row" id="<portlet:namespace/>fieldset<%= index %>">
+		<fieldset class="lfr-form-row" id="<portlet:namespace/>fieldset<%= formFieldsIndex %>">
 			<legend>
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(fieldLabel) %>">
 						<span class="field-label"><%= fieldLabel %></span>
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:message key="field" /> <%= index %>
+						<liferay-ui:message key="field" /> <%= formFieldsIndex %>
 					</c:otherwise>
 				</c:choose>
 			</legend>
 
 			<div class="ctrl-holder">
-				<label for="<portlet:namespace/>fieldLabel<%= index %>"><liferay-ui:message key="name" /></label>
+				<label for="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>"><liferay-ui:message key="name" /></label>
 
 				<c:choose>
 					<c:when test="<%= !fieldsEditingDisabled %>">
-						<input class="lfr-input-text" id="<portlet:namespace/>fieldLabel<%= index %>" name="<portlet:namespace/>fieldLabel<%= index %>" size="50" type="text" value="<%= fieldLabel %>" onchange="jQuery(this).parent().prev().children('.fieldLabel').html(jQuery(this).val())" />
+						<input class="lfr-input-text" id="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>" name="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>" size="50" type="text" value="<%= fieldLabel %>" onchange="jQuery(this).parent().prev().children('.fieldLabel').html(jQuery(this).val())" />
 					</c:when>
 					<c:otherwise>
 						<%= fieldLabel %>
@@ -231,7 +233,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<div class="ctrl-holder">
 				<c:choose>
 					<c:when test="<%= !fieldsEditingDisabled %>">
-						<label><liferay-ui:message key="optional" /> <input <c:if test="<%= fieldOptional %>">checked</c:if> id="<portlet:namespace/>fieldOptional<%= index %>" name="<portlet:namespace/>fieldOptional<%= index %>" type="checkbox" /></label>
+						<label><liferay-ui:message key="optional" /> <input <c:if test="<%= fieldOptional %>">checked</c:if> id="<portlet:namespace/>fieldOptional<%= formFieldsIndex %>" name="<portlet:namespace/>fieldOptional<%= formFieldsIndex %>" type="checkbox" /></label>
 					</c:when>
 					<c:otherwise>
 						<label><liferay-ui:message key="optional" /></label>
@@ -242,11 +244,11 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			</div>
 
 			<div class="ctrl-holder">
-				<label for="<portlet:namespace/>fieldType<%= index %>"><liferay-ui:message key="type" /></label>
+				<label for="<portlet:namespace/>fieldType<%= formFieldsIndex %>"><liferay-ui:message key="type" /></label>
 
 				<c:choose>
 					<c:when test="<%= !fieldsEditingDisabled %>">
-						<select id="<portlet:namespace/>fieldType<%= index %>" name="<portlet:namespace/>fieldType<%= index %>">
+						<select id="<portlet:namespace/>fieldType<%= formFieldsIndex %>" name="<portlet:namespace/>fieldType<%= formFieldsIndex %>">
 							<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
 							<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
 							<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
@@ -261,14 +263,14 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				</c:choose>
 			</div>
 
-			<div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= index %>">
-				<label for="<portlet:namespace/>fieldOptions<%= index %>"><liferay-ui:message key="options" /></label>
+			<div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= formFieldsIndex %>">
+				<label for="<portlet:namespace/>fieldOptions<%= formFieldsIndex %>"><liferay-ui:message key="options" /></label>
 
 				<c:choose>
 					<c:when test="<%= !fieldsEditingDisabled %>">
 						<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span><br />
 
-						<input class="lfr-input-text" id="<portlet:namespace/>fieldOptions<%= index %>" name="<portlet:namespace/>fieldOptions<%= index %>" type="text" value="<%= fieldOptions %>" />
+						<input class="lfr-input-text" id="<portlet:namespace/>fieldOptions<%= formFieldsIndex %>" name="<portlet:namespace/>fieldOptions<%= formFieldsIndex %>" type="text" value="<%= fieldOptions %>" />
 					</c:when>
 					<c:otherwise>
 						<%= fieldOptions %>
@@ -280,20 +282,20 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				<div>
 					<c:choose>
 						<c:when test="<%= !fieldsEditingDisabled %>">
-							<liferay-ui:error key='<%= "invalidValidationDefinition" + index %>' message="please-enter-both-the-validation-code-and-the-error-message" />
+							<liferay-ui:error key='<%= "invalidValidationDefinition" + formFieldsIndex %>' message="please-enter-both-the-validation-code-and-the-error-message" />
 
 							<div class="ctrl-holder">
-								<a class="validationLink" href="javascript:;"><liferay-ui:message key="validation" /> &raquo;</a>
+								<a class="validation-link" href="javascript:;"><liferay-ui:message key="validation" /> &raquo;</a>
 							</div>
 
-							<div class="validationInput" style='<%= Validator.isNull(fieldValidationScript) ? "display:none" : "" %>'>
+							<div class="validation-input" style='<%= Validator.isNull(fieldValidationScript) ? "display:none" : "" %>'>
 								<div class="ctrl-holder">
 									<table>
 										<tr>
 											<td>
-												<label for="<portlet:namespace/>fieldValidationScript<%= index %>"><liferay-ui:message key="validation-script" /></label>
+												<label for="<portlet:namespace/>fieldValidationScript<%= formFieldsIndex %>"><liferay-ui:message key="validation-script" /></label>
 
-												<textarea class="lfr-textarea validation-script" cols="80" id="<portlet:namespace />fieldValidationScript<%= index %>" name="<portlet:namespace />fieldValidationScript<%= index %>" style="width: 95%" wrap="off"><%= fieldValidationScript %></textarea>
+												<textarea class="lfr-textarea validation-script" cols="80" id="<portlet:namespace />fieldValidationScript<%= formFieldsIndex %>" name="<portlet:namespace />fieldValidationScript<%= formFieldsIndex %>" style="width: 95%" wrap="off"><%= fieldValidationScript %></textarea>
 											</td>
 											<td>
 												<div class="syntax-help">
@@ -304,9 +306,9 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 									</table>
 								</div>
 								<div class="ctrl-holder">
-								<label for="<portlet:namespace/>fieldValidationErrorMessage<%= index %>"><liferay-ui:message key="validation-error-message" /></label>
+								<label for="<portlet:namespace/>fieldValidationErrorMessage<%= formFieldsIndex %>"><liferay-ui:message key="validation-error-message" /></label>
 
-									<input class="lfr-input-text" id="<portlet:namespace />fieldValidationErrorMessage<%= index %>" name="<portlet:namespace />fieldValidationErrorMessage<%= index %>" size="80" type="text" value="<%= fieldValidationErrorMessage %>" />
+									<input class="lfr-input-text" id="<portlet:namespace />fieldValidationErrorMessage<%= formFieldsIndex %>" name="<portlet:namespace />fieldValidationErrorMessage<%= formFieldsIndex %>" size="80" type="text" value="<%= fieldValidationErrorMessage %>" />
 								</div>
 							</div>
 						</c:when>
@@ -342,7 +344,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 <br />
 
 <div class="button-holder">
-	<input type="submit" value="<liferay-ui:message key="save" />" onclick="submitForm(document.<portlet:namespace />fm)" />
+	<input type="submit" value="<liferay-ui:message key="save" />" />
 
 	<input type="button" value="<liferay-ui:message key="cancel" />" onclick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 </div>
@@ -390,9 +392,9 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			selects.change(toggleOptions);
 			selects.each(toggleOptions);
 
-			jQuery('.validationLink').click(
+			jQuery('.validation-link').click(
 				function(event){
-						jQuery(this).parent().next().toggle();
+					jQuery(this).parent().next().toggle();
 				}
 			);
 

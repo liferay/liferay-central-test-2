@@ -152,6 +152,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				portletResource);
 
 			preferences.setValue("databaseTableName", databaseTableName);
+
 			int[] formFieldsIndexes = StringUtil.split(
 				ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
 
@@ -172,8 +173,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				String fieldValidationScript = ParamUtil.getString(
 					actionRequest, "fieldValidationScript" + formFieldIndex);
 				String fieldValidationErrorMessage = ParamUtil.getString(
-					actionRequest, "fieldValidationErrorMessage" +
-						formFieldIndex);
+					actionRequest,
+					"fieldValidationErrorMessage" + formFieldIndex);
 
 				if ((Validator.isNotNull(fieldValidationScript) ^
 					(Validator.isNotNull(fieldValidationErrorMessage)))) {
@@ -194,7 +195,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 					fieldValidationErrorMessage);
 
 				i++;
-
 			}
 
 			if (!SessionErrors.isEmpty(actionRequest)) {

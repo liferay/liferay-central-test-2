@@ -121,8 +121,7 @@ public class ViewAction extends PortletAction {
 				break;
 			}
 
-			fieldsMap.put(
-				fieldLabel, actionRequest.getParameter("field" + i));
+			fieldsMap.put(fieldLabel, actionRequest.getParameter("field" + i));
 		}
 
 		Set<String> validationErrors = null;
@@ -200,7 +199,6 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected String getMailBody(Map<String,String> fieldsMap) {
-
 		StringBuilder sb = new StringBuilder();
 
 		for (String fieldLabel : fieldsMap.keySet()) {
@@ -226,13 +224,12 @@ public class ViewAction extends PortletAction {
 			WebFormUtil.class.getName());
 
 		try {
-
 			for (String fieldLabel : fieldsMap.keySet()) {
 				String fieldValue = fieldsMap.get(fieldLabel);
 
 				ExpandoValueLocalServiceUtil.addValue(
-						WebFormUtil.class.getName(), databaseTableName,
-						fieldLabel, classPK, fieldValue);
+					WebFormUtil.class.getName(), databaseTableName, fieldLabel,
+					classPK, fieldValue);
 			}
 
 			return true;
@@ -245,8 +242,7 @@ public class ViewAction extends PortletAction {
 		}
 	}
 
-	protected boolean saveFile(
-		Map<String,String> fieldsMap, String fileName) {
+	protected boolean saveFile(Map<String,String> fieldsMap, String fileName) {
 
 		// Save the file as a standard Excel CSV format. Use ; as a delimiter,
 		// quote each entry with double quotes, and escape double quotes in
@@ -341,6 +337,7 @@ public class ViewAction extends PortletAction {
 			if (Validator.isNotNull(validationScript) &&
 				!WebFormUtil.validate(
 					fieldValue, fieldsMap, validationScript)) {
+
 				validationErrors.add(fieldLabel);
 
 				continue;
