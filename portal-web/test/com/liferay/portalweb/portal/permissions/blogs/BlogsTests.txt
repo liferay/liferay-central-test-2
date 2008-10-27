@@ -1,0 +1,33 @@
+CA - can write posts, view, delete, edit, comment, edit comment, delete comment, portlet permissions, configuration, post permissions
+Member - can comment, edit comments, delete comments, view
+Guest - can view
+
+EnterpriseAdmin Needed Tests
+		addTestSuite(CA_BlogsRolesTest.class);
+		addTestSuite(Member_BlogsRolesTest.class);
+
+
+
+CA_LoginTest
+CA_AddPageTest
+CA_AddPortletTest
+CA_AddEntryTest
+CA_AddCommentTest
+CA_AssertActionsTest (assert the following - can delete post, can edit post, can edit portlet permissiosn, can edit permissions for entry, can edit comment, can delete comment)
+
+CA_LogoutTest
+
+Member_LoginTest
+Member_ViewEntryTest
+Member_AddCommentTest
+
+Member_EditCommentTest (can't figure out how to do this yet. members can't edit their own comments?) [[Currently Skipped]]
+
+Member_AssertActionsTest (assert the following - cannot delete post, cannot add post, cannot change permissions, cannot edit post, can add comment, can edit own comment, cannot edit any other comment)
+
+Member_LogoutTest
+
+Guest_ViewEntryTest
+Guest_ViewCommentsTest
+Guest_AssertActionsTest (assert the following - cannot do anything but view post, view comments)
+DeletePageTest.html

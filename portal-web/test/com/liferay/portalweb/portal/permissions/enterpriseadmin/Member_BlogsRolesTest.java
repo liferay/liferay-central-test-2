@@ -22,36 +22,29 @@
 
 package com.liferay.portalweb.portal.permissions.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="Member_BlogsRolesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_BlogsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(Member_BlogsRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
-		addTestSuite(DeletePageTest.class);
-		addTestSuite(LogoutTest.class);
+public class Member_BlogsRolesTest extends BaseTestCase {
+	public void testMember_BlogsRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Portlet Permissions']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.waitForPageToLoad("30000");
+		selenium.select("_79_scope33VIEW",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryVIEW",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

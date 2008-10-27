@@ -20,38 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.blogs;
 
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
+public class BlogsTests extends BaseTests {
 
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_BlogsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(Member_BlogsRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
+	public BlogsTests() {
+		addTestSuite(CA_LoginTest.class);
+		addTestSuite(CA_AddPageTest.class);
+		addTestSuite(CA_AddPortletTest.class);
+		addTestSuite(CA_AddEntryTest.class);
+		addTestSuite(CA_AddCommentTest.class);
+		addTestSuite(CA_AssertActionsTest.class);
+		addTestSuite(CA_LogoutTest.class);
+		addTestSuite(Member_LoginTest.class);
+		addTestSuite(Member_ViewEntryTest.class);
+		addTestSuite(Member_AddCommentTest.class);
+		addTestSuite(Member_AssertActionsTest.class);
+		addTestSuite(Member_LogoutTest.class);
+		addTestSuite(Guest_ViewEntryTest.class);
+		addTestSuite(Guest_ViewCommentsTest.class);
+		addTestSuite(Guest_AssertActionsTest.class);
 		addTestSuite(DeletePageTest.class);
-		addTestSuite(LogoutTest.class);
 	}
 
 }
