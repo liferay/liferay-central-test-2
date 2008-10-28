@@ -2071,6 +2071,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userPersistence.update(user, false);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Contact
 
 		Date birthday = PortalUtil.getDate(
