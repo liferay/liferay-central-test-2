@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
@@ -145,10 +147,10 @@ String curSection = mainSections[0];
 			request.setAttribute("user.organizations", organizations);
 			request.setAttribute("user.roles", roles);
 
-			request.setAttribute("websites.className", Contact.class.getName());
+			request.setAttribute("common.className", Contact.class.getName());
 
 			if (selContact != null) {
-				request.setAttribute("websites.classPK", selContact.getContactId());
+				request.setAttribute("common.classPK", selContact.getContactId());
 			}
 
 			for (String section : allSections) {

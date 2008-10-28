@@ -365,10 +365,10 @@
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="number" type="String">
-			<hint name="display-width">60</hint>
+			<hint name="display-width">100</hint>
 		</field>
 		<field name="extension" type="String">
-			<hint name="display-width">20</hint>
+			<hint name="display-width">50</hint>
 		</field>
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />

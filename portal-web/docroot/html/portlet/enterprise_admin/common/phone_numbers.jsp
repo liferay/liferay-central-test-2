@@ -28,70 +28,80 @@
 String className = (String)request.getAttribute("common.className");
 long classPK = (Long)request.getAttribute("common.classPK");
 
-List<Website> websites = Collections.EMPTY_LIST;
+List<Phone> phoneNumbers = Collections.EMPTY_LIST;
 
 if (classPK > 0) {
-	websites = WebsiteServiceUtil.getWebsites(className, classPK);
+	phoneNumbers = PhoneServiceUtil.getPhones(className, classPK);
 }
 
-if (websites.isEmpty()) {
-	websites = new ArrayList<Website>();
+if (phoneNumbers.isEmpty()) {
+	phoneNumbers = new ArrayList<Phone>();
 
-	websites.add(new WebsiteImpl());
+	phoneNumbers.add(new PhoneImpl());
 }
 %>
 
-<liferay-ui:error-marker key="errorSection" value="websites" />
+<liferay-ui:error-marker key="errorSection" value="phoneNumbers" />
 
-<h3><liferay-ui:message key="websites" /></h3>
+<h3><liferay-ui:message key="phone-numbers" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
-<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.PHONE %>" message="please-select-a-type" />
+<liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 
 <fieldset class="block-labels">
 
-	<%
+   <%
 	String fieldParam = null;
 
-	for (int i = 0; i < websites.size(); i++){
-		Website website = websites.get(i);
+	for (int i = 0; i < phoneNumbers.size(); i++) {
+		Phone phone = phoneNumbers.get(i);
 	%>
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
 				<%
-				fieldParam = "websiteId" + i;
+				fieldParam = "phoneId" + i;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
-				fieldParam = "websiteUrl" + i;
+				fieldParam = "phoneNumber" + i;
 				%>
 
-				<div class="ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="url" /></label>
+				<div class="ctrl-holder ">
+					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="phone-number" /></label>
 
-					<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" fieldParam="<%= fieldParam %>" />
+					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="number" fieldParam="<%= fieldParam %>" />
 				</div>
 
 				<%
-				fieldParam = "websiteTypeId" + i;
+				fieldParam = "phoneExtension" + i;
 				%>
 
-				<div class="ctrl-holder">
+				<div class="ctrl-holder ">
+					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="extension" /></label>
+
+					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="extension" fieldParam="<%= fieldParam %>" />
+				</div>
+
+				<%
+				fieldParam = "phoneTypeId" + i;
+				%>
+
+				<div class="ctrl-holder ">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
-					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
+					<select name="<portlet:namespace /><%= fieldParam %>">
 
 						<%
-						List<ListType> websiteTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.WEBSITE);
+						List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(Contact.class.getName() + ListTypeImpl.PHONE);
 
-						for (ListType suffix : websiteTypes) {
+						for (ListType suffix : phoneTypes) {
 						%>
 
-							<option <%= (suffix.getListTypeId() == website.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
+							<option <%= suffix.getListTypeId() == phone.getTypeId() ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 						<%
 						}
@@ -101,17 +111,17 @@ if (websites.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "websitePrimary" + i;
+				fieldParam = "phonePrimary" + i;
 				%>
 
 				<div class="ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input <%= website.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />websitePrimary" type="radio" value="<%= i %>" />
+						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phoneNumberPrimary" type="radio" value="<%= i %>" />
 					</label>
 				</div>
-			</div>
+			 </div>
 		</div>
 
 	<%
@@ -125,9 +135,9 @@ if (websites.isEmpty()) {
 		function () {
 			new Liferay.autoFields(
 				{
-					container: '#websites > fieldset',
-					baseRows: '#websites > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />websiteIndexes'
+					container: '#phoneNumbers > fieldset',
+					baseRows: '#phoneNumbers > fieldset .lfr-form-row',
+					fieldIndexes: '<portlet:namespace />phoneIndexes'
 				}
 			);
 		}

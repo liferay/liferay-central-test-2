@@ -24,74 +24,75 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+
 <%
 String className = (String)request.getAttribute("common.className");
 long classPK = (Long)request.getAttribute("common.classPK");
 
-List<Website> websites = Collections.EMPTY_LIST;
+List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
 
 if (classPK > 0) {
-	websites = WebsiteServiceUtil.getWebsites(className, classPK);
+	emailAddresses = EmailAddressServiceUtil.getEmailAddresses(className, classPK);
 }
 
-if (websites.isEmpty()) {
-	websites = new ArrayList<Website>();
+if (emailAddresses.isEmpty()) {
+	emailAddresses = new ArrayList<EmailAddress>();
 
-	websites.add(new WebsiteImpl());
+	emailAddresses.add(new EmailAddressImpl());
 }
 %>
 
-<liferay-ui:error-marker key="errorSection" value="websites" />
+<liferay-ui:error-marker key="errorSection" value="additionalEmailAddresses" />
 
-<h3><liferay-ui:message key="websites" /></h3>
+<h3><liferay-ui:message key="additional-email-addresses" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
-<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
+<liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.EMAIL_ADDRESS %>" message="please-select-a-type" />
 
-<fieldset class="block-labels">
+<fieldset class="block-labels"  >
 
 	<%
 	String fieldParam = null;
 
-	for (int i = 0; i < websites.size(); i++){
-		Website website = websites.get(i);
+	for (int i = 0; i < emailAddresses.size(); i++) {
+		EmailAddress emailAddress = emailAddresses.get(i);
 	%>
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
 				<%
-				fieldParam = "websiteId" + i;
+				fieldParam = "emailAddressId" + i;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
-				fieldParam = "websiteUrl" + i;
+				fieldParam = "emailAddressAddress" + i;
 				%>
 
 				<div class="ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="url" /></label>
+					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="email-address" /></label>
 
-					<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" fieldParam="<%= fieldParam %>" />
+					<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="address" fieldParam="<%= fieldParam %>" />
 				</div>
 
 				<%
-				fieldParam = "websiteTypeId" + i;
+				fieldParam = "emailAddressTypeId" + i;
 				%>
 
 				<div class="ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
-					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
+					<select name="<portlet:namespace /><%= fieldParam %>" id="<portlet:namespace /><%= fieldParam %>">
 
 						<%
-						List<ListType> websiteTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.WEBSITE);
+						List<ListType> emailAddressTypes = ListTypeServiceUtil.getListTypes(Contact.class.getName() + ListTypeImpl.EMAIL_ADDRESS);
 
-						for (ListType suffix : websiteTypes) {
+						for (ListType suffix : emailAddressTypes) {
 						%>
 
-							<option <%= (suffix.getListTypeId() == website.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
+							<option <%= suffix.getListTypeId() == emailAddress.getTypeId() ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 						<%
 						}
@@ -101,14 +102,14 @@ if (websites.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "websitePrimary" + i;
+				fieldParam = "emailAddressPrimary" + i;
 				%>
 
 				<div class="ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input <%= website.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />websitePrimary" type="radio" value="<%= i %>" />
+						<input <%= emailAddress.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />additionalEmailAddressPrimary" type="radio" value="<%= i %>" />
 					</label>
 				</div>
 			</div>
@@ -125,9 +126,9 @@ if (websites.isEmpty()) {
 		function () {
 			new Liferay.autoFields(
 				{
-					container: '#websites > fieldset',
-					baseRows: '#websites > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />websiteIndexes'
+					container: '#additionalEmailAddresses > fieldset',
+					baseRows: '#additionalEmailAddresses > fieldset .lfr-form-row',
+					fieldIndexes: '<portlet:namespace />emailAddressIndexes'
 				}
 			);
 		}

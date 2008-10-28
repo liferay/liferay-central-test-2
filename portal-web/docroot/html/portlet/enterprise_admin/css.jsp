@@ -66,7 +66,7 @@
 	margin: 0 auto;
 }
 
-.portlet-enterprise-admin .ctrl-holder.primary-ctrl, .portlet-enterprise-admin .ctrl-holder.action-ctrl {
+.portlet-enterprise-admin .ctrl-holder.primary-ctrl, .portlet-enterprise-admin .ctrl-holder.action-ctrl, .portlet-enterprise-admin .ctrl-holder.mailing-ctrl {
 	margin: 1.8em 0;
 }
 
@@ -235,6 +235,14 @@
 	margin: 10px 0 0;
 }
 
+.portlet-enterprise-admin table.org-labor-table {
+	margin-bottom: 30px;
+}
+
+.portlet-enterprise-admin table.org-labor-table td {
+	padding: 2px;
+}
+
 .portlet-enterprise-admin .uni-form .block-labels label, .portlet-enterprise-admin .uni-form .block-labels .label {
 	font-weight: bold;
 }
@@ -245,6 +253,10 @@
 
 .portlet-enterprise-admin .uni-form .block-labels .ctrl-holder {
 	margin-bottom: 10px;
+}
+
+.portlet-enterprise-admin .uni-form .block-labels .ctrl-holder.mailing-ctrl {
+	clear: both;
 }
 
 .portlet-enterprise-admin .uni-form fieldset {
