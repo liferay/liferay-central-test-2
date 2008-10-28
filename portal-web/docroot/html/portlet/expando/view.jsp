@@ -73,7 +73,6 @@ Collections.sort(attributeNames, new StringComparator());
 
 	<liferay-ui:search-container-row
 		className="java.lang.String"
-		escapedModel="<%= true %>"
 		modelVar="name"
 		stringKey="<%= true %>"
 	>

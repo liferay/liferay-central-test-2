@@ -60,16 +60,6 @@ long userId = user2.getUserId();
 		<liferay-ui:icon image="permissions" url="<%= permissionsUserURL %>" />
 	</c:if>
 
-	<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandoURL" portletName="<%= PortletKeys.EXPANDO %>">
-		<portlet:param name="struts_action" value="/expando/view" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="modelResource" value="<%= User.class.getName() %>" />
-		<portlet:param name="modelResourceDescription" value="<%= user2.getFullName() %>" />
-		<portlet:param name="resourcePrimKey" value="<%= String.valueOf(userId) %>" />
-	</liferay-portlet:renderURL>
-
-	<liferay-ui:icon image="custom_attributes" url="<%= expandoURL %>" />
-
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
