@@ -46,13 +46,19 @@ public class Field {
 
 	public static final String GROUP_ID = "groupId";
 
+	public static final String GROUP_IDS = "groupIds";
+
 	public static final String MODIFIED = "modified";
 
 	public static final String NAME = "name";
 
+	public static final String ORGANIZATION_IDS = "organizationIds";
+
 	public static final String PORTLET_ID = "portletId";
 
 	public static final String PROPERTIES = "properties";
+
+	public static final String ROLE_IDS = "roleIds";
 
 	public static final String TAGS_ENTRIES = "tagsEntries";
 
@@ -63,6 +69,8 @@ public class Field {
 	public static final String UID = "uid";
 
 	public static final String URL = "url";
+
+	public static final String USER_GROUP_IDS = "userGroupIds";
 
 	public static final String USER_ID = "userId";
 
