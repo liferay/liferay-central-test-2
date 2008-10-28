@@ -263,7 +263,7 @@ for (int i = 2; i <= workflowStages; i++) {
 					userParams.put("usersGroups", new Long(groupId));
 					userParams.put("userGroupRole", new Long[] {new Long(groupId), new Long(role.getRoleId())});
 
-					List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+					List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 					for (User reviewer : reviewers) {
 						KeyValuePair kvp = new KeyValuePair(String.valueOf(reviewer.getUserId()), reviewer.getFullName());

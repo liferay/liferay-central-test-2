@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-List<User> users = UserLocalServiceUtil.search(company.getCompanyId(), null, Boolean.TRUE, null, 0, 10, null);
+List<User> users = UserLocalServiceUtil.search(company.getCompanyId(), null, Boolean.TRUE, null, 0, 10, (OrderByComparator)null);
 
 request.setAttribute("users", users);
 %>

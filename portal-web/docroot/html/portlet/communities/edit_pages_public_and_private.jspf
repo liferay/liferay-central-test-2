@@ -90,7 +90,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 						userParams.put("usersGroups", new Long(liveGroupId));
 						userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 						if (reviewers.size() == 0) {
 							if (liveGroup.isCommunity()) {
@@ -102,7 +102,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 							userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-							reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+							reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 						}
 
 						for (User reviewer : reviewers) {
