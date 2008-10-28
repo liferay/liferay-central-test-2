@@ -48,8 +48,15 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
@@ -60,6 +67,7 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.lar.UserIdStrategy;
@@ -95,6 +103,10 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
+import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -436,10 +448,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			UserIndexer.addUser(
-				user.getCompanyId(), userId, screenName, emailAddress,
-				firstName, middleName, lastName, jobTitle, true, groupIds,
-				organizationIds, roleIds, userGroupIds, expandoBridge);
+			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + userId, se);
@@ -780,6 +789,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		User user = userPersistence.findByPrimaryKey(userId);
+
+		// Indexer
+
+		try {
+			UserIndexer.deleteUser(user.getCompanyId(), user.getUserId());
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + userId, se);
+		}
 
 		// Group
 
@@ -1348,6 +1366,131 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 		catch (SystemException se) {
 			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	public Hits search(
+			long companyId, String keywords, Boolean active,
+			LinkedHashMap<String, Object> params, int start, int end,
+			String sortField, int sortType)
+		throws SystemException {
+
+		String firstName = null;
+		String middleName = null;
+		String lastName = null;
+		String screenName = null;
+		String emailAddresse = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			firstName = keywords;
+			middleName = keywords;
+			lastName = keywords;
+			screenName = keywords;
+			emailAddresse = keywords;
+		}
+		else {
+			andOperator = true;
+		}
+
+		return search(
+			companyId, firstName, middleName, lastName, screenName,
+			emailAddresse, active, params, andOperator, start, end, sortField,
+			sortType);
+	}
+
+	public Hits search(
+			long companyId, String firstName, String middleName,
+			String lastName, String screenName, String emailAddress,
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andSearch, int start, int end,
+			String sortField, int sortType)
+		throws SystemException {
+
+		try {
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
+
+			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			if (Validator.isNotNull(firstName)) {
+				firstName = StringUtil.replace(
+					firstName, StringPool.PERCENT, StringPool.BLANK);
+
+				if (andSearch) {
+					searchQuery.addRequiredTerm("firstName", firstName);
+				}
+				else {
+					searchQuery.addTerm("firstName", firstName);
+				}
+			}
+
+			if (Validator.isNotNull(middleName)) {
+				middleName = StringUtil.replace(
+					middleName, StringPool.PERCENT, StringPool.BLANK);
+
+				if (andSearch) {
+					searchQuery.addRequiredTerm("middleName", middleName);
+				}
+				else {
+					searchQuery.addTerm("middleName", middleName);
+				}
+			}
+
+			if (Validator.isNotNull(lastName)) {
+				lastName = StringUtil.replace(
+					lastName, StringPool.PERCENT, StringPool.BLANK);
+
+				if (andSearch) {
+					searchQuery.addRequiredTerm("lastName", lastName);
+				}
+				else {
+					searchQuery.addTerm("lastName", lastName);
+				}
+			}
+
+			if (Validator.isNotNull(screenName)) {
+				screenName = StringUtil.replace(
+					screenName, StringPool.PERCENT, StringPool.BLANK);
+
+				if (andSearch) {
+					searchQuery.addRequiredTerm("screenName", screenName);
+				}
+				else {
+					searchQuery.addTerm("screenName", screenName);
+				}
+			}
+
+			if (Validator.isNotNull(emailAddress)) {
+				emailAddress = StringUtil.replace(
+					emailAddress, StringPool.PERCENT, StringPool.BLANK);
+
+				if (andSearch) {
+					searchQuery.addRequiredTerm("emailAddress", emailAddress);
+				}
+				else {
+					searchQuery.addTerm("emailAddress", emailAddress);
+				}
+			}
+
+			populateQuery(contextQuery, searchQuery, params);
+
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
+
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
+
+			if (searchQuery.clauses().size() > 0) {
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+			}
+
+			Sort sort = new Sort(sortField, sortType, true);
+
+			return SearchEngineUtil.search(
+				companyId, fullQuery, sort, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -2004,6 +2147,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUser(user);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + userId, se);
+		}
+
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
@@ -2473,6 +2625,76 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected String getScreenName(String screenName) {
 		return Normalizer.normalizeToAscii(screenName.trim().toLowerCase());
+	}
+
+	protected void populateQuery(
+			BooleanQuery contextQuery, BooleanQuery searchQuery,
+			LinkedHashMap<String, Object> params)
+		throws ParseException {
+
+		if (params == null) {
+			return;
+		}
+
+		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
+			User.class.getName(), 0);
+
+		Set<String> attributeNames = SetUtil.fromEnumeration(
+			expandoBridge.getAttributeNames());
+
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			if (value == null) {
+				continue;
+			}
+
+			populateQuery(
+				contextQuery, searchQuery, expandoBridge, attributeNames,
+				key, value);
+		}
+	}
+
+	protected void populateQuery(
+			BooleanQuery contextQuery, BooleanQuery searchQuery,
+			ExpandoBridge expandoBridge, Set<String> attributeNames,
+			String key, Object value)
+		throws ParseException {
+
+		if (key.equals("usersRoles") || key.equals("usersUserGroups")) {
+			contextQuery.addRequiredTerm(key, String.valueOf(value));
+		}
+		else if (key.equals("usersOrgs")) {
+			if (value instanceof Long[]) {
+				Long[] values = (Long[])value;
+
+				BooleanQuery usersOrgsQuery = BooleanQueryFactoryUtil.create();
+
+				for (long organizationId : values) {
+					usersOrgsQuery.addTerm(key, organizationId);
+				}
+
+				contextQuery.add(usersOrgsQuery, BooleanClauseOccur.MUST);
+			}
+			else {
+				contextQuery.addRequiredTerm(key, String.valueOf(value));
+			}
+		}
+		else if (attributeNames.contains(key)) {
+			UnicodeProperties properties = expandoBridge.getAttributeProperties(
+				key);
+
+			if (GetterUtil.getBoolean(
+					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+
+				int type = expandoBridge.getAttributeType(key);
+
+				if (type == ExpandoColumnConstants.STRING) {
+					searchQuery.addTerm(key, (String)value);
+				}
+			}
+		}
 	}
 
 	protected void sendEmail(User user, String password)

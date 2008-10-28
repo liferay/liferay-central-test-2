@@ -532,6 +532,29 @@ public class UserLocalServiceUtil {
 		getService().reIndex(ids);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String keywords, java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
+		java.lang.String sortField, int sortType)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, keywords, active, params, start, end,
+			sortField, sortType);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String screenName,
+		java.lang.String emailAddress, java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
+		int start, int end, java.lang.String sortField, int sortType)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, firstName, middleName, lastName,
+			screenName, emailAddress, active, params, andSearch, start, end,
+			sortField, sortType);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
