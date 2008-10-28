@@ -405,7 +405,7 @@ public class AnnouncementsEntryLocalServiceImpl
 		else {
 			users = userLocalService.search(
 				company.getCompanyId(), null, Boolean.TRUE, params,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator) null);
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 		}
 
 		if (_log.isDebugEnabled()) {

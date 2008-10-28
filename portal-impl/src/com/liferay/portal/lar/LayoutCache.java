@@ -255,7 +255,7 @@ public class LayoutCache {
 
 			users = UserLocalServiceUtil.search(
 				companyId, null, null, null, null, emailAddress, Boolean.TRUE,
-				params, true, 0, 1, (OrderByComparator) null);
+				params, true, 0, 1, (OrderByComparator)null);
 
 			usersMap.put(emailAddress, users);
 		}

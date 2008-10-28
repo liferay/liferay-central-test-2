@@ -100,7 +100,7 @@ public class ExportUsersAction extends Action {
 
 		List<User> users = UserLocalServiceUtil.search(
 			themeDisplay.getCompanyId(), null, Boolean.TRUE, null,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator) null);
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 		int percentage = 10;
 		int total = users.size();
