@@ -24,11 +24,15 @@
 
 <%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
 
+<%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+%>
+
 <div class="taglib-social-bookmarks-wrapper">
 
-<a id="<portlet:namespace />showSocialBookmarks" href="javascript:void(0);"><liferay-ui:message key="bookmarks" /> &raquo;</a>
+<a id="<%= randomNamespace %>showSocialBookmarks" href="javascript:void(0);"><liferay-ui:message key="bookmarks" /> &raquo;</a>
 
-<ul id="<portlet:namespace />socialBookmarks" class="lfr-component taglib-social-bookmarks">
+<ul id="<%= randomNamespace %>socialBookmarks" class="lfr-component taglib-social-bookmarks">
 
 	<%
 	for (int i = 0; i < typesArray.length; i++) {
@@ -46,20 +50,20 @@
 </div>
 
 <script>
-	var linkSocialBookmarks = jQuery('#<portlet:namespace />showSocialBookmarks');
-	var socialBookmarks = jQuery('#<portlet:namespace />socialBookmarks');
-	var openedLinkLabel = '<liferay-ui:message key="bookmarks" /> &laquo;';
-	var closedLinkLabel = '<liferay-ui:message key="bookmarks" /> &raquo;';
+	var <%= randomNamespace %>linkSocialBookmarks = jQuery('#<%= randomNamespace %>showSocialBookmarks');
+	var <%= randomNamespace %>socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
+	var <%= randomNamespace %>openedLinkLabel = '<liferay-ui:message key="bookmarks" /> &laquo;';
+	var <%= randomNamespace %>closedLinkLabel = '<liferay-ui:message key="bookmarks" /> &raquo;';
 
-	linkSocialBookmarks.toggle(
+	<%= randomNamespace %>linkSocialBookmarks.toggle(
 		function() {
-			linkSocialBookmarks.html(openedLinkLabel);
-			socialBookmarks.show('fast');
+			<%= randomNamespace %>linkSocialBookmarks.html(<%= randomNamespace %>openedLinkLabel);
+			<%= randomNamespace %>socialBookmarks.show('fast');
 			return false;
 		},
 		function() {
-			linkSocialBookmarks.html(closedLinkLabel);
-			socialBookmarks.hide();
+			<%= randomNamespace %>linkSocialBookmarks.html(<%= randomNamespace %>closedLinkLabel);
+			<%= randomNamespace %>socialBookmarks.hide();
 			return false;
 		}
 	);
