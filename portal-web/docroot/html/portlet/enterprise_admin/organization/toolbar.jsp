@@ -45,4 +45,14 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add" /></a></span>
 	</c:if>
+
+	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandoURL" portletName="<%= PortletKeys.EXPANDO %>">
+			<portlet:param name="struts_action" value="/expando/view" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="modelResource" value="<%= Organization.class.getName() %>" />
+		</liferay-portlet:renderURL>
+
+		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-attributes" /></a></span>
+	</c:if>
 </div>

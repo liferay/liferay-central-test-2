@@ -50,7 +50,7 @@ if (showReindexButton) {
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
 Collections.sort(portlets, new PortletTitleComparator(application, locale));
 
@@ -58,14 +58,14 @@ int total = portlets.size();
 
 searchContainer.setTotal(total);
 
-List results = ListUtil.subList(portlets, searchContainer.getStart(), searchContainer.getEnd());
+List<Portlet> results = ListUtil.subList(portlets, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
-	Portlet portlet = (Portlet)results.get(i);
+	Portlet portlet = results.get(i);
 
 	PluginPackage pluginPackage = portlet.getPluginPackage();
 	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), portlet.getPortletId(), Plugin.TYPE_PORTLET);

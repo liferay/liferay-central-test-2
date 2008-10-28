@@ -1,0 +1,90 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.Field" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
+<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
+<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
+
+<%
+ExpandoBridge expandoBridge = new ExpandoBridgeImpl(User.class.getName(), 0);
+
+Enumeration<String> enu = expandoBridge.getAttributeNames();
+
+while (enu.hasMoreElements()) {
+	String attributeName = enu.nextElement();
+
+	UnicodeProperties properties = expandoBridge.getAttributeProperties(attributeName);
+
+	if (GetterUtil.getBoolean(properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+		int type = expandoBridge.getAttributeType(attributeName);
+
+		if (type == ExpandoColumnConstants.STRING) {
+			if (searchTerms.isAdvancedSearch()) {
+				userParams.put(attributeName, ParamUtil.getString(request, attributeName));
+			}
+			else {
+				userParams.put(attributeName, searchTerms.getKeywords());
+			}
+		}
+	}
+}
+
+String sortField = null;
+int sortType = 0;
+
+Hits hits = null;
+
+if (searchTerms.isAdvancedSearch()) {
+	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sortField, sortType);
+}
+else {
+	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams, searchContainer.getStart(), searchContainer.getEnd(), sortField, sortType);
+}
+
+results = getResults(hits);
+total = hits.getLength();
+
+pageContext.setAttribute("results", results);
+pageContext.setAttribute("total", total);
+%>
+
+<%!
+private List<User> getResults(Hits hits) throws Exception {
+	List<User> users = new ArrayList<User>();
+
+	List<Document> hitsList = hits.toList();
+
+	for (Document doc : hitsList) {
+		long userId = GetterUtil.getLong(doc.get(Field.USER_ID));
+
+		users.add(UserLocalServiceUtil.getUserById(userId));
+	}
+
+	return users;
+}
+%>

@@ -83,7 +83,7 @@ if (filterManageableOrganizations) {
 		%>
 
 		<liferay-ui:search-container-results>
-			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+			<%@ include file="/html/portlet/enterprise_admin/user_search_results_index.jspf" %>
 		</liferay-ui:search-container-results>
 
 		<liferay-ui:search-container-row

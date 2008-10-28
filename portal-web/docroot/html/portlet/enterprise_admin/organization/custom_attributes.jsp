@@ -22,4 +22,6 @@
  */
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/user_search_results_database.jspf" %>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
+<h3><liferay-ui:message key="custom-attributes" /></h3>
