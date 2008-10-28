@@ -25,6 +25,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.kernel.search.Sort" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 <%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
@@ -54,8 +55,8 @@ while (enu.hasMoreElements()) {
 	}
 }
 
-String sortField = null;
-int sortType = 0;
+String sortField = "emailAddress";
+int sortType = Sort.STRING_TYPE;
 
 Hits hits = null;
 

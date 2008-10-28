@@ -24,4 +24,17 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<%
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+%>
+
 <h3><liferay-ui:message key="custom-attributes" /></h3>
+
+<fieldset class="block-labels">
+	<liferay-ui:custom-attribute-list
+		className="<%= Organization.class.getName() %>"
+		classPK="<%= (organization != null) ? organization.getOrganizationId() : 0 %>"
+		editable="<%= true %>"
+		label="<%= true %>"
+	/>
+</fieldset>
