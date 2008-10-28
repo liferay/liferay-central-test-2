@@ -72,7 +72,9 @@
 }
 
 .portlet-blogs .taglib-social-bookmarks {
-	margin-top: 1.5em;
+	display: none;
+	margin-top: 1em;
+	padding-left: 1em;
 }
 
 .portlet-blogs .view-count {
