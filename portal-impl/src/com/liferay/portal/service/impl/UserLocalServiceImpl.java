@@ -1373,15 +1373,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public Hits search(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap<String, Object> params, int start, int end,
-			String sortField, boolean reverse)
+			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
 		throws SystemException {
 
 		String firstName = null;
 		String middleName = null;
 		String lastName = null;
 		String screenName = null;
-		String emailAddresse = null;
+		String emailAddress = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -1389,7 +1388,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			middleName = keywords;
 			lastName = keywords;
 			screenName = keywords;
-			emailAddresse = keywords;
+			emailAddress = keywords;
 		}
 		else {
 			andOperator = true;
@@ -1397,16 +1396,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		return search(
 			companyId, firstName, middleName, lastName, screenName,
-			emailAddresse, active, params, andOperator, start, end, sortField,
-			reverse);
+			emailAddress, active, params, andOperator, start, end, sort);
 	}
 
 	public Hits search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap<String, Object> params,
-			boolean andSearch, int start, int end,
-			String sortField, boolean reverse)
+			boolean andSearch, int start, int end, Sort sort)
 		throws SystemException {
 
 		try {
@@ -1486,8 +1483,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (searchQuery.clauses().size() > 0) {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
-
-			Sort sort = new Sort(sortField, Sort.STRING_TYPE, reverse);
 
 			return SearchEngineUtil.search(
 				companyId, fullQuery, sort, start, end);
