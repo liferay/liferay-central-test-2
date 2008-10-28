@@ -146,7 +146,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateTagsAsset(userId, entry, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.addEntry(
@@ -235,7 +235,7 @@ public class BookmarksEntryLocalServiceImpl
 	public void deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
@@ -372,7 +372,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateTagsAsset(userId, entry, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.updateEntry(

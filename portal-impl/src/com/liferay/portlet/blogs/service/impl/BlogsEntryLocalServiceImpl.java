@@ -209,7 +209,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateTagsAsset(userId, entry, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (!draft) {
@@ -293,7 +293,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void deleteEntry(BlogsEntry entry)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
@@ -679,7 +679,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateTagsAsset(userId, entry, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (!draft) {

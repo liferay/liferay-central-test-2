@@ -547,7 +547,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			throw new SystemException("Testing roll back");
 		}*/
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (!category.isDiscussion()) {
@@ -691,7 +691,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void deleteMessage(MBMessage message)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteMessage(
@@ -1248,7 +1248,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		updateTagsAsset(userId, message, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (!category.isDiscussion()) {

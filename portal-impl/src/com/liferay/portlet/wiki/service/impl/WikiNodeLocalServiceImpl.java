@@ -203,7 +203,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public void deleteNode(WikiNode node)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deletePages(node.getCompanyId(), node.getNodeId());

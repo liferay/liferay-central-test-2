@@ -192,7 +192,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateTagsAsset(userId, page, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.addPage(
@@ -359,7 +359,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			deletePage(curPage);
 		}
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deletePage(
@@ -811,7 +811,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateTagsAsset(userId, page, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.updatePage(
@@ -950,7 +950,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateTagsAsset(userId, page, tagsEntries);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.updatePage(

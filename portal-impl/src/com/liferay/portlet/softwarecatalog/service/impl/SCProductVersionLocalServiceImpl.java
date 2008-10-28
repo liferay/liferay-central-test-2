@@ -143,7 +143,7 @@ public class SCProductVersionLocalServiceImpl
 		scProductVersionPersistence.setSCFrameworkVersions(
 			productVersionId, frameworkVersionIds);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.updateProductEntry(
@@ -261,7 +261,7 @@ public class SCProductVersionLocalServiceImpl
 		scProductVersionPersistence.setSCFrameworkVersions(
 			productVersionId, frameworkVersionIds);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.updateProductEntry(

@@ -182,7 +182,7 @@ public class SCProductEntryLocalServiceImpl
 
 		saveProductScreenshots(productEntry, thumbnails, fullImages);
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.addProductEntry(
@@ -269,7 +269,7 @@ public class SCProductEntryLocalServiceImpl
 	public void deleteProductEntry(SCProductEntry productEntry)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteProductEntry(
@@ -589,7 +589,7 @@ public class SCProductEntryLocalServiceImpl
 			version = productVersion.getVersion();
 		}
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.updateProductEntry(

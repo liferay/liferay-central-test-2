@@ -48,9 +48,6 @@ public class StartupAction extends SimpleAction {
 			throw new ActionException(e);
 		}
 		finally {
-
-			// Lucene
-
 			LuceneUtil.checkLuceneDir(CompanyConstants.SYSTEM);
 		}
 	}

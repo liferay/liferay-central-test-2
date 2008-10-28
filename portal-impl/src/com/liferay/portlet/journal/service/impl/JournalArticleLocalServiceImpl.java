@@ -468,7 +468,7 @@ public class JournalArticleLocalServiceImpl
 			throw new SystemException(ioe);
 		}
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (article.isIndexable()) {
@@ -736,7 +736,7 @@ public class JournalArticleLocalServiceImpl
 			PortletPreferences preferences)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (article.isApproved() && article.isIndexable()) {
@@ -871,7 +871,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (article.isIndexable()) {
@@ -1767,7 +1767,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (article.isIndexable()) {

@@ -268,7 +268,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			deleteCategory(curCategory);
 		}
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteMessages(
@@ -629,7 +629,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				mbMessagePersistence.update(message, false);
 
-				// Lucene
+				// Indexer
 
 				try {
 					if (!fromCategory.isDiscussion()) {

@@ -195,7 +195,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			updateTagsAsset(userId, image, tagsEntries);
 
-			// Lucene
+			// Indexer
 
 			try {
 				Indexer.addImage(
@@ -270,7 +270,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImage(IGImage image)
 		throws PortalException, SystemException {
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteImage(image.getCompanyId(), image.getImageId());
@@ -492,7 +492,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			updateTagsAsset(userId, image, tagsEntries);
 
-			// Lucene
+			// Indexer
 
 			try {
 				Indexer.updateImage(

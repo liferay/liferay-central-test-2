@@ -71,7 +71,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
 			thread.getRootMessageId());
 
-		// Lucene
+		// Indexer
 
 		try {
 			Indexer.deleteMessages(
@@ -271,7 +271,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			mbMessagePersistence.update(message, false);
 
-			// Lucene
+			// Indexer
 
 			try {
 				if (!category.isDiscussion()) {
@@ -328,7 +328,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		moveAttachmentsFromOldThread(message, oldAttachmentsDir);
 
-		// Lucene
+		// Indexer
 
 		try {
 			if (!category.isDiscussion()) {
