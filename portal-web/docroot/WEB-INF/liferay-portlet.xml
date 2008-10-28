@@ -1318,6 +1318,22 @@
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
+	<portlet>
+		<portlet-name>140</portlet-name>
+		<icon>/html/portlet/my_account/icon.png</icon>
+		<struts-path>my_pages</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>my</control-panel-entry-category>
+		<control-panel-entry-weight>2.0</control-panel-entry-weight>
+		<control-panel-entry-class>com.liferay.portlet.mypages.MyPagesControlPanelEntry</control-panel-entry-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<system>true</system>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

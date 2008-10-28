@@ -31,15 +31,17 @@
 	%>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="publicPagesURL">
-		<portlet:param name="struts_action" value="/my_account/edit_pages" />
+		<portlet:param name="struts_action" value="/my_pages/edit_pages" />
 		<portlet:param name="tabs1" value="public-pages" />
+		<portlet:param name="privateLayout" value="<%= String.valueOf(false) %>" />
 		<portlet:param name="backURL" value="<%= backURL %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="privatePagesURL">
-		<portlet:param name="struts_action" value="/my_account/edit_pages" />
+		<portlet:param name="struts_action" value="/my_pages/edit_pages" />
 		<portlet:param name="tabs1" value="private-pages" />
+		<portlet:param name="privateLayout" value="<%= String.valueOf(true) %>" />
 		<portlet:param name="backURL" value="<%= backURL %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
@@ -47,27 +49,24 @@
 	<c:choose>
 		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
 			<liferay-ui:tabs
-				names="profile,public-pages,private-pages"
+				names="public-pages,private-pages"
 				param="tabs1"
-				url0="<%= themeDisplay.getURLMyAccount().toString() %>"
-				url1="<%= publicPagesURL %>"
-				url2="<%= privatePagesURL %>"
+				url0="<%= publicPagesURL %>"
+				url1="<%= privatePagesURL %>"
 			/>
 		</c:when>
 		<c:when test="<%= PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
 			<liferay-ui:tabs
-				names="profile,public-pages"
+				names="public-pages"
 				param="tabs1"
-				url0="<%= themeDisplay.getURLMyAccount().toString() %>"
-				url1="<%= publicPagesURL %>"
+				url0="<%= publicPagesURL %>"
 			/>
 		</c:when>
 		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE %>">
 			<liferay-ui:tabs
-				names="profile,private-pages"
+				names="private-pages"
 				param="tabs1"
-				url0="<%= themeDisplay.getURLMyAccount().toString() %>"
-				url1="<%= privatePagesURL %>"
+				url0="<%= privatePagesURL %>"
 			/>
 		</c:when>
 	</c:choose>

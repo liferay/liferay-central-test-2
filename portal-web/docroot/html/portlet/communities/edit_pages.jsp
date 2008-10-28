@@ -401,7 +401,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="" />
 
-<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.MY_PAGES) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
 		<div>
 			<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
@@ -428,8 +428,8 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<br />
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-		<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
+	<c:if test="<%= portletName.equals(PortletKeys.MY_PAGES) %>">
+		<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
 			<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
 		</liferay-util:include>
 	</c:if>

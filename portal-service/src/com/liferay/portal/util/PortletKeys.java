@@ -104,6 +104,8 @@ public class PortletKeys {
 
 	public static final String MY_ACCOUNT = "2";
 
+	public static final String MY_PAGES = "140";
+
 	public static final String MY_PLACES = "49";
 
 	public static final String NESTED_PORTLETS = "118";
