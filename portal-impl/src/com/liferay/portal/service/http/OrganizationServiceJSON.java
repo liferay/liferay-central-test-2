@@ -102,12 +102,16 @@ public class OrganizationServiceJSON {
 	public static JSONObject addOrganization(long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
 				name, type, recursable, regionId, countryId, statusId,
-				comments, websites);
+				comments, addresses, emailAddresses, orgLabors, phones, websites);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
@@ -180,12 +184,17 @@ public class OrganizationServiceJSON {
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId, comments, websites);
+				countryId, statusId, comments, addresses, emailAddresses,
+				orgLabors, phones, websites);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}

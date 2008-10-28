@@ -24,7 +24,11 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -42,6 +46,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Julio Camarero Puras
  *
  */
 public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
@@ -92,12 +97,29 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, List<Website> websites)
+			String comments, List<Address> addresses,
+			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
+			List<Phone> phones, List<Website> websites)
 		throws PortalException, SystemException {
 
 		Organization organization = addOrganization(
 			parentOrganizationId, name, type, recursable, regionId, countryId,
 			statusId, comments);
+
+		EnterpriseAdminUtil.updateAddresses(
+			Organization.class.getName(), organization.getOrganizationId(),
+			addresses);
+
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Organization.class.getName(), organization.getOrganizationId(),
+			emailAddresses);
+
+		EnterpriseAdminUtil.updateOrgLabors(organization.getOrganizationId(),
+			orgLabors);
+
+		EnterpriseAdminUtil.updatePhones(
+			Organization.class.getName(), organization.getOrganizationId(),
+			phones);
 
 		EnterpriseAdminUtil.updateWebsites(
 			Organization.class.getName(), organization.getOrganizationId(),
@@ -184,12 +206,25 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments, List<Website> websites)
+			int statusId, String comments, List<Address> addresses,
+			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
+			List<Phone> phones, List<Website> websites)
 		throws PortalException, SystemException {
 
 		Organization organization = updateOrganization(
 			organizationId, parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId, comments);
+
+		EnterpriseAdminUtil.updateAddresses(
+			Organization.class.getName(), organizationId, addresses);
+
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Organization.class.getName(), organizationId, emailAddresses);
+
+		EnterpriseAdminUtil.updateOrgLabors(organizationId, orgLabors);
+
+		EnterpriseAdminUtil.updatePhones(
+			Organization.class.getName(), organizationId, phones);
 
 		EnterpriseAdminUtil.updateWebsites(
 			Organization.class.getName(), organizationId, websites);

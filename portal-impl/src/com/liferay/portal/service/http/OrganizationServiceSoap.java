@@ -129,12 +129,24 @@ public class OrganizationServiceSoap {
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.model.AddressSoap[] addresses,
+		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
+		com.liferay.portal.model.OrgLaborSoap[] orgLabors,
+		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
 					name, type, recursable, regionId, countryId, statusId,
 					comments,
+					com.liferay.portal.model.impl.AddressModelImpl.toModels(
+						addresses),
+					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
+						emailAddresses),
+					com.liferay.portal.model.impl.OrgLaborModelImpl.toModels(
+						orgLabors),
+					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
+						phones),
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites));
 
@@ -264,12 +276,24 @@ public class OrganizationServiceSoap {
 		long organizationId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.model.AddressSoap[] addresses,
+		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
+		com.liferay.portal.model.OrgLaborSoap[] orgLabors,
+		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 					parentOrganizationId, name, type, recursable, regionId,
 					countryId, statusId, comments,
+					com.liferay.portal.model.impl.AddressModelImpl.toModels(
+						addresses),
+					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
+						emailAddresses),
+					com.liferay.portal.model.impl.OrgLaborModelImpl.toModels(
+						orgLabors),
+					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
+						phones),
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites));
 

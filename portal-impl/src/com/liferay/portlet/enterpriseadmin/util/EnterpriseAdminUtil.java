@@ -30,15 +30,18 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.EmailAddressImpl;
+import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
+import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
@@ -70,6 +73,7 @@ import javax.portlet.ActionRequest;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Julio Camarero Puras
  *
  */
 public class EnterpriseAdminUtil {
@@ -243,6 +247,90 @@ public class EnterpriseAdminUtil {
 
 		return orderByComparator;
 	}
+
+	public static List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
+			List<OrgLabor> orgLabors = new ArrayList<OrgLabor>();
+
+			int[] orgLaborIndexes = StringUtil.split(
+				ParamUtil.getString(actionRequest, "orgLaborIndexes"), 0);
+
+			for (int index : orgLaborIndexes) {
+				long orgLaborId = ParamUtil.getLong(
+					actionRequest, "orgLaborId" + index);
+
+				int typeId = ParamUtil.getInteger(
+					actionRequest, "orgLaborTypeId" + index, -1);
+
+				if (typeId == -1){
+					continue;
+				}
+
+				int sunOpen = ParamUtil.getInteger(
+					actionRequest, "sunOpen" + index, -1);
+				int sunClose = ParamUtil.getInteger(
+					actionRequest, "sunClose" + index, -1);
+
+				int monOpen = ParamUtil.getInteger(
+					actionRequest, "monOpen" + index, -1);
+				int monClose = ParamUtil.getInteger(
+					actionRequest, "monClose" + index, -1);
+
+				int tueOpen = ParamUtil.getInteger(
+					actionRequest, "tueOpen" + index, -1);
+				int tueClose = ParamUtil.getInteger(
+					actionRequest, "tueClose" + index, -1);
+
+				int wedOpen = ParamUtil.getInteger(
+					actionRequest, "wedOpen" + index, -1);
+				int wedClose = ParamUtil.getInteger(
+					actionRequest, "wedClose" + index, -1);
+
+				int thuOpen = ParamUtil.getInteger(
+					actionRequest, "thuOpen" + index, -1);
+				int thuClose = ParamUtil.getInteger(
+					actionRequest, "thuClose" + index, -1);
+
+				int friOpen = ParamUtil.getInteger(
+					actionRequest, "friOpen" + index, -1);
+				int friClose = ParamUtil.getInteger(
+					actionRequest, "friClose" + index, -1);
+
+				int satOpen = ParamUtil.getInteger(
+					actionRequest, "satOpen" + index, -1);
+				int satClose = ParamUtil.getInteger(
+					actionRequest, "satClose" + index, -1);
+
+				OrgLabor orgLabor = new OrgLaborImpl();
+
+				orgLabor.setOrgLaborId(orgLaborId);
+				orgLabor.setTypeId(typeId);
+
+				orgLabor.setSunOpen(sunOpen);
+				orgLabor.setSunClose(sunClose);
+
+				orgLabor.setMonOpen(monOpen);
+				orgLabor.setMonClose(monClose);
+
+				orgLabor.setTueOpen(tueOpen);
+				orgLabor.setTueClose(tueClose);
+
+				orgLabor.setWedOpen(wedOpen);
+				orgLabor.setWedClose(wedClose);
+
+				orgLabor.setThuOpen(thuOpen);
+				orgLabor.setThuClose(thuClose);
+
+				orgLabor.setFriOpen(friOpen);
+				orgLabor.setFriClose(friClose);
+
+				orgLabor.setSatOpen(satOpen);
+				orgLabor.setSatClose(satClose);
+
+				orgLabors.add(orgLabor);
+			}
+
+			return orgLabors;
+		}
 
 	public static OrderByComparator getPasswordPolicyOrderByComparator(
 		String orderByCol, String orderByType) {
@@ -518,6 +606,65 @@ public class EnterpriseAdminUtil {
 			if (!emailAddressIds.contains(emailAddress.getEmailAddressId())) {
 				EmailAddressServiceUtil.deleteEmailAddress(
 					emailAddress.getEmailAddressId());
+			}
+		}
+	}
+
+	public static void updateOrgLabors(
+			long classPK, List<OrgLabor> orgLabors)
+		throws PortalException, SystemException {
+
+		Set<Long> orgLaborsIds = new HashSet<Long>();
+
+		for (OrgLabor orgLabor : orgLabors) {
+
+			long orgLaborId = orgLabor.getOrgLaborId();
+			int typeId = orgLabor.getTypeId();
+
+			int sunOpen = orgLabor.getSunOpen();
+			int sunClose = orgLabor.getSunClose();
+
+			int monOpen = orgLabor.getMonOpen();
+			int monClose = orgLabor.getMonClose();
+
+			int tueOpen = orgLabor.getTueOpen();
+			int tueClose = orgLabor.getTueClose();
+
+			int wedOpen = orgLabor.getWedOpen();
+			int wedClose = orgLabor.getWedClose();
+
+			int thuOpen = orgLabor.getThuOpen();
+			int thuClose = orgLabor.getThuClose();
+
+			int friOpen = orgLabor.getFriOpen();
+			int friClose = orgLabor.getFriClose();
+
+			int satOpen = orgLabor.getSatOpen();
+			int satClose = orgLabor.getSatClose();
+
+			if (orgLaborId <= 0) {
+				orgLabor = OrgLaborServiceUtil.addOrgLabor(
+				classPK, typeId, sunOpen, sunClose, monOpen, monClose,
+				tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
+				friOpen, friClose, satOpen, satClose);
+
+				orgLaborId = orgLabor.getOrgLaborId();
+			}
+			else {
+				OrgLaborServiceUtil.updateOrgLabor(
+				orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
+				tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
+				friOpen, friClose, satOpen, satClose);
+			}
+
+			orgLaborsIds.add(orgLaborId);
+		}
+
+		orgLabors = OrgLaborServiceUtil.getOrgLabors(classPK);
+
+		for (OrgLabor orgLabor : orgLabors) {
+			if (!orgLaborsIds.contains(orgLabor.getOrgLaborId())) {
+				OrgLaborServiceUtil.deleteOrgLabor(orgLabor.getOrgLaborId());
 			}
 		}
 	}

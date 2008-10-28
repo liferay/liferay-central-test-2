@@ -223,6 +223,10 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -255,17 +259,42 @@ public class OrganizationServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = websites;
+			Object paramObj8 = addresses;
+
+			if (addresses == null) {
+				paramObj8 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj9 = emailAddresses;
+
+			if (emailAddresses == null) {
+				paramObj9 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj10 = orgLabors;
+
+			if (orgLabors == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = phones;
+
+			if (phones == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = websites;
 
 			if (websites == null) {
-				paramObj8 = new NullWrapper("java.util.List");
+				paramObj12 = new NullWrapper("java.util.List");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;
@@ -624,6 +653,10 @@ public class OrganizationServiceHttp {
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -658,17 +691,42 @@ public class OrganizationServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = websites;
+			Object paramObj9 = addresses;
+
+			if (addresses == null) {
+				paramObj9 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj10 = emailAddresses;
+
+			if (emailAddresses == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = orgLabors;
+
+			if (orgLabors == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = phones;
+
+			if (phones == null) {
+				paramObj12 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj13 = websites;
 
 			if (websites == null) {
-				paramObj9 = new NullWrapper("java.util.List");
+				paramObj13 = new NullWrapper("java.util.List");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13
 					});
 
 			Object returnObj = null;

@@ -75,12 +75,17 @@ public class OrganizationServiceUtil {
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addOrganization(parentOrganizationId, name, type,
-			recursable, regionId, countryId, statusId, comments, websites);
+			recursable, regionId, countryId, statusId, comments, addresses,
+			emailAddresses, orgLabors, phones, websites);
 	}
 
 	public static void deleteOrganization(long organizationId)
@@ -143,13 +148,17 @@ public class OrganizationServiceUtil {
 		long organizationId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
+		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateOrganization(organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments,
-			websites);
+			addresses, emailAddresses, orgLabors, phones, websites);
 	}
 
 	public static OrganizationService getService() {

@@ -22,20 +22,29 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.AddressCityException;
+import com.liferay.portal.AddressStreetException;
 import com.liferay.portal.DuplicateOrganizationException;
+import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchOrganizationException;
+import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.OrganizationNameException;
 import com.liferay.portal.OrganizationParentException;
+import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
@@ -58,6 +67,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditOrganizationAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero Puras
  *
  */
 public class EditOrganizationAction extends PortletAction {
@@ -95,11 +105,16 @@ public class EditOrganizationAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
-			else if (e instanceof DuplicateOrganizationException ||
+			else if (e instanceof AddressCityException ||
+					 e instanceof AddressStreetException ||
+					 e instanceof DuplicateOrganizationException ||
+					 e instanceof EmailAddressException ||
 					 e instanceof NoSuchCountryException ||
 					 e instanceof NoSuchListTypeException ||
+					 e instanceof NoSuchRegionException ||
 					 e instanceof OrganizationNameException ||
 					 e instanceof OrganizationParentException ||
+					 e instanceof PhoneNumberException ||
 					 e instanceof RequiredOrganizationException ||
 					 e instanceof WebsiteURLException) {
 
@@ -178,6 +193,13 @@ public class EditOrganizationAction extends PortletAction {
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
+		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
+			actionRequest);
+		List<EmailAddress> emailAddresses =
+			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
+		List<OrgLabor> orgLabors = EnterpriseAdminUtil.getOrgLabors(
+			actionRequest);
+		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 
 		Organization organization = null;
@@ -188,7 +210,8 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.addOrganization(
 				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId, comments, websites);
+				countryId, statusId, comments, addresses, emailAddresses,
+				orgLabors, phones, websites);
 		}
 		else {
 
@@ -196,7 +219,8 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
-				recursable, regionId, countryId, statusId, comments, websites);
+				recursable, regionId, countryId, statusId, comments, addresses,
+				emailAddresses, orgLabors, phones, websites);
 		}
 
 		return organization;
