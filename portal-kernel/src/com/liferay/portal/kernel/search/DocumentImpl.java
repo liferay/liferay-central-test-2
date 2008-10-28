@@ -90,10 +90,18 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, boolean[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
 	public void addKeyword(String name, Boolean[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
@@ -106,10 +114,18 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, double[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
 	public void addKeyword(String name, Double[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
@@ -118,6 +134,10 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, int[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
@@ -126,6 +146,10 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, Integer[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
@@ -138,10 +162,18 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, long[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
 	public void addKeyword(String name, Long[] values) {
+		if (values == null) {
+			return;
+		}
+
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
