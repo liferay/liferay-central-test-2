@@ -68,6 +68,10 @@
 }
 
 .portlet-blogs .taglib-ratings.stars {
+	margin-top: 0.5em;
+}
+
+.portlet-blogs .taglib-social-bookmarks-wrapper {
 	margin-top: 1.5em;
 }
 
