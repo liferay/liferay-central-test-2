@@ -85,6 +85,7 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -93,6 +94,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -207,7 +209,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			Locale locale, String firstName, String middleName, String lastName,
 			int prefixId, int suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] roleIds, boolean sendEmail)
+			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			boolean sendEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -297,6 +300,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		resourceLocalService.addResources(
 			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
 			false, false, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Mail
 
@@ -422,6 +431,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
 			}
+		}
+
+		// Indexer
+
+		try {
+			UserIndexer.addUser(
+				user.getCompanyId(), userId, screenName, emailAddress,
+				firstName, middleName, lastName, jobTitle, true, groupIds,
+				organizationIds, roleIds, userGroupIds, expandoBridge);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + userId, se);
 		}
 
 		return user;
@@ -1830,7 +1851,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int birthdayYear, String smsSn, String aimSn, String facebookSn,
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] groupIds, long[] organizationIds, long[] roleIds)
+			long[] groupIds, long[] organizationIds, long[] roleIds,
+			long[] userGroupIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -1970,6 +1992,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (roleIds != null) {
 			userPersistence.setRoles(userId, roleIds);
+		}
+
+		// User groups
+
+		if (userGroupIds != null) {
+			userPersistence.setUserGroups(userId, userGroupIds);
 		}
 
 		// Announcements

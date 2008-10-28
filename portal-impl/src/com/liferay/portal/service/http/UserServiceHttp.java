@@ -273,7 +273,9 @@ public class UserServiceHttp {
 		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
-		long[] organizationIds, long[] roleIds, boolean sendEmail)
+		long[] organizationIds, long[] roleIds, long[] userGroupIds,
+		boolean sendEmail,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -373,7 +375,20 @@ public class UserServiceHttp {
 				paramObj21 = new NullWrapper("[J");
 			}
 
-			Object paramObj22 = new BooleanWrapper(sendEmail);
+			Object paramObj22 = userGroupIds;
+
+			if (userGroupIds == null) {
+				paramObj22 = new NullWrapper("[J");
+			}
+
+			Object paramObj23 = new BooleanWrapper(sendEmail);
+
+			Object paramObj24 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj24 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"addUser",
@@ -383,7 +398,7 @@ public class UserServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22
+						paramObj22, paramObj23, paramObj24
 					});
 
 			Object returnObj = null;
@@ -421,12 +436,14 @@ public class UserServiceHttp {
 		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
-		long[] organizationIds, long[] roleIds, boolean sendEmail,
+		long[] organizationIds, long[] roleIds, long[] userGroupIds,
+		boolean sendEmail,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -526,36 +543,49 @@ public class UserServiceHttp {
 				paramObj21 = new NullWrapper("[J");
 			}
 
-			Object paramObj22 = new BooleanWrapper(sendEmail);
+			Object paramObj22 = userGroupIds;
 
-			Object paramObj23 = addresses;
-
-			if (addresses == null) {
-				paramObj23 = new NullWrapper("java.util.List");
+			if (userGroupIds == null) {
+				paramObj22 = new NullWrapper("[J");
 			}
 
-			Object paramObj24 = emailAddresses;
+			Object paramObj23 = new BooleanWrapper(sendEmail);
 
-			if (emailAddresses == null) {
+			Object paramObj24 = addresses;
+
+			if (addresses == null) {
 				paramObj24 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj25 = phones;
+			Object paramObj25 = emailAddresses;
 
-			if (phones == null) {
+			if (emailAddresses == null) {
 				paramObj25 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj26 = websites;
+			Object paramObj26 = phones;
 
-			if (websites == null) {
+			if (phones == null) {
 				paramObj26 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj27 = announcementsDelivers;
+			Object paramObj27 = websites;
+
+			if (websites == null) {
+				paramObj27 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj28 = announcementsDelivers;
 
 			if (announcementsDelivers == null) {
-				paramObj27 = new NullWrapper("java.util.List");
+				paramObj28 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj29 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj29 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -567,7 +597,7 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27
+						paramObj26, paramObj27, paramObj28, paramObj29
 					});
 
 			Object returnObj = null;
@@ -1572,7 +1602,8 @@ public class UserServiceHttp {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds)
+		long[] roleIds, long[] userGroupIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -1754,6 +1785,19 @@ public class UserServiceHttp {
 				paramObj34 = new NullWrapper("[J");
 			}
 
+			Object paramObj35 = userGroupIds;
+
+			if (userGroupIds == null) {
+				paramObj35 = new NullWrapper("[J");
+			}
+
+			Object paramObj36 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj36 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"updateUser",
 					new Object[] {
@@ -1765,7 +1809,7 @@ public class UserServiceHttp {
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
-						paramObj34
+						paramObj34, paramObj35, paramObj36
 					});
 
 			Object returnObj = null;
@@ -1810,12 +1854,13 @@ public class UserServiceHttp {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds,
+		long[] roleIds, long[] userGroupIds,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -1997,34 +2042,47 @@ public class UserServiceHttp {
 				paramObj34 = new NullWrapper("[J");
 			}
 
-			Object paramObj35 = addresses;
+			Object paramObj35 = userGroupIds;
 
-			if (addresses == null) {
-				paramObj35 = new NullWrapper("java.util.List");
+			if (userGroupIds == null) {
+				paramObj35 = new NullWrapper("[J");
 			}
 
-			Object paramObj36 = emailAddresses;
+			Object paramObj36 = addresses;
 
-			if (emailAddresses == null) {
+			if (addresses == null) {
 				paramObj36 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj37 = phones;
+			Object paramObj37 = emailAddresses;
 
-			if (phones == null) {
+			if (emailAddresses == null) {
 				paramObj37 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj38 = websites;
+			Object paramObj38 = phones;
 
-			if (websites == null) {
+			if (phones == null) {
 				paramObj38 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj39 = announcementsDelivers;
+			Object paramObj39 = websites;
+
+			if (websites == null) {
+				paramObj39 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj40 = announcementsDelivers;
 
 			if (announcementsDelivers == null) {
-				paramObj39 = new NullWrapper("java.util.List");
+				paramObj40 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj41 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj41 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -2039,7 +2097,7 @@ public class UserServiceHttp {
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
 						paramObj34, paramObj35, paramObj36, paramObj37,
-						paramObj38, paramObj39
+						paramObj38, paramObj39, paramObj40, paramObj41
 					});
 
 			Object returnObj = null;

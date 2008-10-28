@@ -54,7 +54,7 @@ public class UserIndexer implements Indexer {
 	public static void addUser(
 			long companyId, long userId, String screenName, String emailAddress,
 			String firstName, String middleName, String lastName,
-			String jobTitle, Boolean active, long[] groupIds,
+			String jobTitle, boolean active, long[] groupIds,
 			long[] organizationIds, long[] roleIds, long[] userGroupIds,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
@@ -76,7 +76,7 @@ public class UserIndexer implements Indexer {
 	public static Document getUserDocument(
 		long companyId, long userId, String screenName, String emailAddress,
 		String firstName, String middleName, String lastName, String jobTitle,
-		Boolean active, long[] groupIds, long[] organizationIds,
+		boolean active, long[] groupIds, long[] organizationIds,
 		long[] roleIds, long[] userGroupIds, ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();

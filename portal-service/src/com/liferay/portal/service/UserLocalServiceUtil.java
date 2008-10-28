@@ -136,7 +136,8 @@ public class UserLocalServiceUtil {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, boolean sendEmail)
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -144,7 +145,7 @@ public class UserLocalServiceUtil {
 			password2, autoScreenName, screenName, emailAddress, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, sendEmail);
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
 	public static int authenticateByEmailAddress(long companyId,
@@ -770,7 +771,8 @@ public class UserLocalServiceUtil {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds)
+		long[] roleIds, long[] userGroupIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -780,7 +782,7 @@ public class UserLocalServiceUtil {
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-			roleIds);
+			roleIds, userGroupIds, serviceContext);
 	}
 
 	public static UserLocalService getService() {

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.http;
 
 import com.liferay.client.soap.portal.model.UserSoap;
+import com.liferay.client.soap.portal.service.ServiceContext;
 import com.liferay.client.soap.portal.service.http.UserServiceSoap;
 import com.liferay.client.soap.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -79,14 +80,17 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
+		long[] userGroupIds = null;
 		boolean sendMail = false;
+		ServiceContext serviceContext = null;
 
 		return getUserServiceSoap().addUser(
 			TestPropsValues.COMPANY_ID, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
 			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			groupIds, organizationIds, roleIds, sendMail);
+			groupIds, organizationIds, roleIds, userGroupIds, sendMail,
+			serviceContext);
 	}
 
 	protected UserServiceSoap getUserServiceSoap() throws Exception {

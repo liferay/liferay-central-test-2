@@ -53,6 +53,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -315,7 +316,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			long[] groupIds = new long[] {guestGroup.getGroupId()};
 
-			long[] organizationIds = new long[0];
+			long[] organizationIds = null;
 
 			Role adminRole = roleLocalService.getRole(
 				companyId, RoleConstants.ADMINISTRATOR);
@@ -327,14 +328,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				adminRole.getRoleId(), powerUserRole.getRoleId()
 			};
 
+			long[] userGroupIds = null;
 			boolean sendEmail = false;
+			ServiceContext serviceContext = null;
 
 			userLocalService.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, openId, locale,
 				firstName, middleName, lastName, prefixId, suffixId, male,
 				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-				organizationIds, roleIds, sendEmail);
+				organizationIds, roleIds, userGroupIds, sendEmail,
+				serviceContext);
 		}
 
 		return company;

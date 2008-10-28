@@ -85,7 +85,8 @@ public class UserServiceUtil {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, boolean sendEmail)
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -93,7 +94,7 @@ public class UserServiceUtil {
 			autoScreenName, screenName, emailAddress, openId, locale,
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, sendEmail);
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
 	public static com.liferay.portal.model.User addUser(long companyId,
@@ -105,12 +106,13 @@ public class UserServiceUtil {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, boolean sendEmail,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -118,8 +120,9 @@ public class UserServiceUtil {
 			autoScreenName, screenName, emailAddress, openId, locale,
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, sendEmail, addresses, emailAddresses,
-			phones, websites, announcementsDelivers);
+			organizationIds, roleIds, userGroupIds, sendEmail, addresses,
+			emailAddresses, phones, websites, announcementsDelivers,
+			serviceContext);
 	}
 
 	public static void deleteRoleUser(long roleId, long userId)
@@ -297,7 +300,8 @@ public class UserServiceUtil {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds)
+		long[] roleIds, long[] userGroupIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -307,7 +311,7 @@ public class UserServiceUtil {
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-			roleIds);
+			roleIds, userGroupIds, serviceContext);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
@@ -325,12 +329,13 @@ public class UserServiceUtil {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds,
+		long[] roleIds, long[] userGroupIds,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers)
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -340,8 +345,8 @@ public class UserServiceUtil {
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-			roleIds, addresses, emailAddresses, phones, websites,
-			announcementsDelivers);
+			roleIds, userGroupIds, addresses, emailAddresses, phones, websites,
+			announcementsDelivers, serviceContext);
 	}
 
 	public static UserService getService() {

@@ -39,6 +39,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -677,7 +678,9 @@ public class PortalLDAPUtil {
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
+		long[] userGroupIds = null;
 		boolean sendEmail = false;
+		ServiceContext serviceContext = null;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -797,7 +800,7 @@ public class PortalLDAPUtil {
 				contact.getJabberSn(), contact.getMsnSn(),
 				contact.getMySpaceSn(), contact.getSkypeSn(),
 				contact.getTwitterSn(), contact.getYmSn(), jobTitle, groupIds,
-				organizationIds, roleIds);
+				organizationIds, roleIds, userGroupIds, serviceContext);
 
 			if (ldapUserModifiedDate != null) {
 				UserLocalServiceUtil.updateModifiedDate(
@@ -821,7 +824,8 @@ public class PortalLDAPUtil {
 					autoScreenName, screenName, emailAddress, openId, locale,
 					firstName, middleName, lastName, prefixId, suffixId, male,
 					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					groupIds, organizationIds, roleIds, sendEmail);
+					groupIds, organizationIds, roleIds, userGroupIds,
+					sendEmail, serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(

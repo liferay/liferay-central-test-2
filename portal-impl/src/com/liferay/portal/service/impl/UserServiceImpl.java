@@ -37,6 +37,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -145,7 +146,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String middleName, String lastName, int prefixId, int suffixId,
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, long[] groupIds, long[] organizationIds,
-			long[] roleIds, boolean sendEmail)
+			long[] roleIds, long[] userGroupIds, boolean sendEmail,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -177,7 +179,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			autoScreenName, screenName, emailAddress, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, sendEmail);
+			roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
 	public User addUser(
@@ -187,10 +189,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String middleName, String lastName, int prefixId, int suffixId,
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, long[] groupIds, long[] organizationIds,
-			long[] roleIds, boolean sendEmail, List<Address> addresses,
-			List<EmailAddress> emailAddresses, List<Phone> phones,
-			List<Website> websites,
-			List<AnnouncementsDelivery> announcementsDelivers)
+			long[] roleIds, long[] userGroupIds, boolean sendEmail,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<Phone> phones, List<Website> websites,
+			List<AnnouncementsDelivery> announcementsDelivers,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = addUser(
@@ -198,7 +201,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			screenName, emailAddress, openId, locale, firstName, middleName,
 			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
 			birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
-			sendEmail);
+			userGroupIds, sendEmail, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
@@ -497,7 +500,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			int birthdayYear, String smsSn, String aimSn, String facebookSn,
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] groupIds, long[] organizationIds, long[] roleIds)
+			long[] groupIds, long[] organizationIds, long[] roleIds,
+			long[] userGroupIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -528,7 +532,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds);
+			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+			serviceContext);
 	}
 
 	public User updateUser(
@@ -542,9 +547,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
 			String skypeSn, String twitterSn, String ymSn, String jobTitle,
 			long[] groupIds, long[] organizationIds, long[] roleIds,
-			List<Address> addresses, List<EmailAddress> emailAddresses,
-			List<Phone> phones, List<Website> websites,
-			List<AnnouncementsDelivery> announcementsDelivers)
+			long[] userGroupIds, List<Address> addresses,
+			List<EmailAddress> emailAddresses, List<Phone> phones,
+			List<Website> websites,
+			List<AnnouncementsDelivery> announcementsDelivers,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = updateUser(
@@ -553,7 +560,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds);
+			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+			serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);

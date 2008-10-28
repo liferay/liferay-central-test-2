@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.OpenIdUtil;
@@ -147,14 +148,16 @@ public class OpenIdResponseAction extends Action {
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
+		long[] userGroupIds = null;
 		boolean sendEmail = false;
+		ServiceContext serviceContext = null;
 
 		User user = UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, sendEmail);
+			roleIds, userGroupIds, sendEmail, serviceContext);
 
 		return user;
 	}

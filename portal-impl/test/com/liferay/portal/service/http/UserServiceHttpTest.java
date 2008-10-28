@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.TestPropsValues;
 
 import java.util.Calendar;
@@ -79,14 +80,16 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
+		long[] userGroupIds = null;
 		boolean sendMail = false;
+		ServiceContext serviceContext = null;
 
 		return UserServiceHttp.addUser(
 			getHttpPrincipal(), TestPropsValues.COMPANY_ID, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
 			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, sendMail);
+			organizationIds, roleIds, userGroupIds, sendMail, serviceContext);
 	}
 
 }

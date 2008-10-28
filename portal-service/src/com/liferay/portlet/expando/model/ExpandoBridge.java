@@ -23,6 +23,7 @@
 package com.liferay.portlet.expando.model;
 
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -65,5 +66,9 @@ public interface ExpandoBridge {
 
 	public void setAttributeProperties(
 		String name, UnicodeProperties properties);
+
+	public void setAttributes(Map<String, Object> attributes);
+
+	public void setAttributes(ServiceContext serviceContext);
 
 }

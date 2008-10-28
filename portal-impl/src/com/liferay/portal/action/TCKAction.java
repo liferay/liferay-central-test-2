@@ -31,6 +31,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -155,14 +156,17 @@ public class TCKAction extends Action {
 			long[] groupIds = null;
 			long[] organizationIds = null;
 			long[] roleIds = null;
+			long[] userGroupIds = null;
 			boolean sendEmail = false;
+			ServiceContext serviceContext = null;
 
 			return UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, openId, locale,
 				firstName, middleName, lastName, prefixId, suffixId, male,
 				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-				organizationIds, roleIds, sendEmail);
+				organizationIds, roleIds, userGroupIds, sendEmail,
+				serviceContext);
 		}
 	}
 

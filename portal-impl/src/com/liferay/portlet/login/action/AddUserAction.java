@@ -49,6 +49,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -171,7 +172,9 @@ public class AddUserAction extends PortletAction {
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
+		long[] userGroupIds = null;
 		boolean sendEmail = true;
+		ServiceContext serviceContext = null;
 
 		boolean openIdPending = false;
 
@@ -195,7 +198,8 @@ public class AddUserAction extends PortletAction {
 			autoScreenName, screenName, emailAddress, openId,
 			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			groupIds, organizationIds, roleIds, sendEmail);
+			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+			serviceContext);
 
 		if (openIdPending) {
 			session.setAttribute(

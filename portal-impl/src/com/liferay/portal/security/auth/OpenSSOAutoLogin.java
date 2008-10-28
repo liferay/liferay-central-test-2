@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.opensso.OpenSSOUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -158,14 +159,16 @@ public class OpenSSOAutoLogin implements AutoLogin {
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
+		long[] userGroupIds = null;
 		boolean sendEmail = false;
+		ServiceContext serviceContext = null;
 
 		return UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, sendEmail);
+			roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
 	private static Log _log = LogFactory.getLog(OpenSSOAutoLogin.class);

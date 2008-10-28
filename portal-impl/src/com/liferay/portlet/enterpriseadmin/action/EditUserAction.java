@@ -52,6 +52,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -342,6 +343,7 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
 		long[] roleIds = StringUtil.split(ParamUtil.getString(
 			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
+		long[] userGroupIds = null;
 		boolean sendEmail = true;
 		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
 			actionRequest);
@@ -351,6 +353,7 @@ public class EditUserAction extends PortletAction {
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest);
+		ServiceContext serviceContext = null;
 
 		User user = null;
 		String oldScreenName = StringPool.BLANK;
@@ -365,8 +368,8 @@ public class EditUserAction extends PortletAction {
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
-				sendEmail, addresses, emailAddresses, phones, websites,
-				announcementsDeliveries);
+				userGroupIds, sendEmail, addresses, emailAddresses, phones,
+				websites, announcementsDeliveries, serviceContext);
 		}
 		else {
 
@@ -392,8 +395,9 @@ public class EditUserAction extends PortletAction {
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 				mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-				organizationIds, roleIds, addresses, emailAddresses, phones,
-				websites, announcementsDeliveries);
+				organizationIds, roleIds, userGroupIds, addresses,
+				emailAddresses, phones, websites, announcementsDeliveries,
+				serviceContext);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

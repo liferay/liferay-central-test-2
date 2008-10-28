@@ -25,6 +25,7 @@ package com.liferay.portlet.expando.model.impl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -256,6 +257,24 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public void setAttributes(Map<String, Object> attributes) {
+		if (attributes == null) {
+			return;
+		}
+
+		for (Map.Entry<String, Object> entry : attributes.entrySet()) {
+			setAttribute(entry.getKey(), entry.getValue());
+		}
+	}
+
+	public void setAttributes(ServiceContext serviceContext) {
+		if (serviceContext == null) {
+			return;
+		}
+
+		setAttributes(serviceContext.getExpandoBridgeAttributes());
 	}
 
 	public void setClassName(String className) {

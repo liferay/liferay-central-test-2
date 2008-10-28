@@ -23,7 +23,6 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.model.PortletPreferencesIds;
-import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.Serializable;
 
@@ -64,19 +63,10 @@ public class ServiceContext {
 		_expandoBridgeAttributes = expandoBridgeAttributes;
 	}
 
-	public ThemeDisplay getThemeDisplay() {
-		return _themeDisplay;
-	}
-
-	public void setThemeDisplay(ThemeDisplay themeDisplay) {
-		_themeDisplay = themeDisplay;
-	}
-
 	protected Map<String, Serializable> _attributes =
 		new HashMap<String, Serializable>();
-	protected Map<String, Object> _expandoBridgeAttributes
-		= new HashMap<String, Object>();
+	protected Map<String, Object> _expandoBridgeAttributes =
+		new HashMap<String, Object>();
 	protected PortletPreferencesIds _portletPreferencesIds;
-	protected ThemeDisplay _themeDisplay;
 
 }
