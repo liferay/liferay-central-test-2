@@ -618,6 +618,7 @@ public class LayoutImporter {
 				importPortletUserPreferences);
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+
 				// Portlet roles
 
 				Element rolesEl = portletEl.element("roles");
