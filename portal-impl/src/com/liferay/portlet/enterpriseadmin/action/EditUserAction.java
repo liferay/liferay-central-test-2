@@ -22,12 +22,18 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.AddressCityException;
+import com.liferay.portal.AddressStreetException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.EmailAddressException;
+import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchListTypeException;
+import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
@@ -172,11 +178,17 @@ public class EditUserAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
-			else if (e instanceof ContactFirstNameException ||
+			else if (e instanceof AddressCityException ||
+					 e instanceof AddressStreetException ||
+					 e instanceof ContactFirstNameException ||
 					 e instanceof ContactLastNameException ||
 					 e instanceof DuplicateUserEmailAddressException ||
 					 e instanceof DuplicateUserScreenNameException ||
+					 e instanceof EmailAddressException ||
+					 e instanceof NoSuchCountryException ||
 					 e instanceof NoSuchListTypeException ||
+					 e instanceof NoSuchRegionException ||
+					 e instanceof PhoneNumberException ||
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
 					 e instanceof ReservedUserScreenNameException ||
