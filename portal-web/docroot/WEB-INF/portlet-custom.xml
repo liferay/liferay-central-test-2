@@ -1925,20 +1925,20 @@
 	</portlet>
 	<portlet>
 		<portlet-name>123</portlet-name>
-		<display-name>WSRP Consumer Admin</display-name>
+		<display-name>WSRP Consumer</display-name>
 		<portlet-class>com.liferay.portlet.wsrpconsumeradmin.WSRPConsumerAdminPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
-			<value>/html/portlet/wsrp_consumer_admin</value>
+			<value>/html/portlet/wsrp_consumer</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>WSRP Consumer Admin</title>
-			<short-title>WSRP Consumer Admin</short-title>
-			<keywords>WSRP Consumer Admin</keywords>
+			<title>WSRP Consumer</title>
+			<short-title>WSRP Consumer</short-title>
+			<keywords>WSRP Consumer</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
@@ -2174,20 +2174,20 @@
 	</portlet>
 	<portlet>
 		<portlet-name>138</portlet-name>
-		<display-name>WSRP Producer Admin</display-name>
+		<display-name>WSRP Producer</display-name>
 		<portlet-class>com.liferay.portlet.wsrpproduceradmin.WSRPProducerAdminPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
-			<value>/html/portlet/wsrp_producer_admin</value>
+			<value>/html/portlet/wsrp_producer</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>WSRP Producer Admin</title>
-			<short-title>WSRP Producer Admin</short-title>
-			<keywords>WSRP Producer Admin</keywords>
+			<title>WSRP Producer</title>
+			<short-title>WSRP Producer</short-title>
+			<keywords>WSRP Producer</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>

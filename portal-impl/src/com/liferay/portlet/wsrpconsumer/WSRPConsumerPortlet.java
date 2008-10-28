@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wsrpconsumeradmin;
+package com.liferay.portlet.wsrpconsumer;
 
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -35,12 +35,12 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 
 /**
- * <a href="WSRPConsumerAdminPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="WSRPConsumerPortlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WSRPConsumerAdminPortlet
+public class WSRPConsumerPortlet
 	extends com.sun.portal.wsrp.consumer.portlets.WSRPConsumerAdminPortlet {
 
 	public void processAction(

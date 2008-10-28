@@ -43,7 +43,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/wsrp_consumer_admin/init.jsp" %>
+<%@ include file="/html/portlet/wsrp_consumer/init.jsp" %>
 
 <c:choose>
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
@@ -660,7 +660,7 @@
 				</form>
 			</c:when>
 			<c:when test="<%= action == AdminPortletAction.LIST_CHANNELS %>">
-				<liferay-util:include page="/html/portlet/wsrp_consumer_admin/tabs1.jsp">
+				<liferay-util:include page="/html/portlet/wsrp_consumer/tabs1.jsp">
 					<liferay-util:param name="tabs1" value="portlets" />
 				</liferay-util:include>
 
@@ -694,7 +694,7 @@
 
 					// Action
 
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_consumer_admin/channel_action.jsp");
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_consumer/channel_action.jsp");
 
 					// Add result row
 
@@ -705,7 +705,7 @@
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 			</c:when>
 			<c:when test='<%= tabs1.equals("producers") %>'>
-				<liferay-util:include page="/html/portlet/wsrp_consumer_admin/tabs1.jsp" />
+				<liferay-util:include page="/html/portlet/wsrp_consumer/tabs1.jsp" />
 
 				<%
 				SearchContainer searchContainer = new SearchContainer();
@@ -747,7 +747,7 @@
 
 					// Action
 
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_consumer_admin/consumer_action.jsp");
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_consumer/consumer_action.jsp");
 
 					// Add result row
 

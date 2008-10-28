@@ -43,23 +43,20 @@
  */
 %>
 
-<%@ include file="/html/portlet/wsrp_producer_admin/init.jsp" %>
+<%@ include file="/html/portlet/wsrp_consumer/init.jsp" %>
 
-<%
-String producerId = ParamUtil.getString(request, "producerId");
+<portlet:renderURL var="tabs1URL0">
+	<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST) %>" />
+	<portlet:param name="tabs1" value="producers" />
+</portlet:renderURL>
 
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+<portlet:actionURL var="tabs1URL1">
+	<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CHANNELS) %>" />
+	<portlet:param name="tabs1" value="portlets" />
+</portlet:actionURL>
 
-ConsumerRegistrationBean consumerRegistrationBean = (ConsumerRegistrationBean)row.getObject();
-%>
-
-<liferay-ui:icon-menu>
-	<portlet:actionURL var="deleteURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE_CONSUMER_REGISTRATION) %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="producerId" value="<%= producerId %>" />
-		<portlet:param name="selectedConsumerRegistrations" value="<%= consumerRegistrationBean.getRegistrationHandle() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</liferay-ui:icon-menu>
+<liferay-ui:tabs
+	names="producers,portlets"
+	url0="<%= tabs1URL0 %>"
+	url1="<%= tabs1URL1 %>"
+/>

@@ -43,7 +43,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/wsrp_producer_admin/init.jsp" %>
+<%@ include file="/html/portlet/wsrp_producer/init.jsp" %>
 
 <c:choose>
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
@@ -111,7 +111,7 @@
 
 					// Action
 
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer_admin/producer_action.jsp");
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer/producer_action.jsp");
 
 					// Add result row
 
@@ -475,7 +475,7 @@
 
 					// Action
 
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer_admin/consumer_registration_action.jsp");
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer/consumer_registration_action.jsp");
 
 					// Add result row
 

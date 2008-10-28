@@ -1091,7 +1091,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>123</portlet-name>
-		<struts-path>wsrp_consumer_admin</struts-path>
+		<struts-path>wsrp_consumer</struts-path>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>4.0</control-panel-entry-weight>
 	</portlet>
@@ -1300,7 +1300,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>138</portlet-name>
-		<struts-path>wsrp_producer_admin</struts-path>
+		<struts-path>wsrp_producer</struts-path>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>5.0</control-panel-entry-weight>
 	</portlet>

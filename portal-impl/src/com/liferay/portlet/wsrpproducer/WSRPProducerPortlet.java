@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wsrpproduceradmin;
+package com.liferay.portlet.wsrpproducer;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,12 +30,12 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 
 /**
- * <a href="WSRPProducerAdminPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="WSRPProducerPortlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WSRPProducerAdminPortlet
+public class WSRPProducerPortlet
 	extends com.sun.portal.wsrp.producer.portlets.WSRPProducerAdminPortlet {
 
 	public void processAction(

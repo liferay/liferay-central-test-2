@@ -425,7 +425,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>123</portlet-name>
-		<struts-path>wsrp_consumer_admin</struts-path>
+		<struts-path>wsrp_consumer</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
@@ -471,6 +471,41 @@
 	<portlet>
 		<portlet-name>132</portlet-name>
 		<struts-path>enterprise_admin_plugins</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>133</portlet-name>
+		<struts-path>portlet_sharing</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>134</portlet-name>
+		<struts-path>enterprise_admin_communities</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>135</portlet-name>
+		<struts-path>admin_instances</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>136</portlet-name>
+		<struts-path>admin_plugins</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>137</portlet-name>
+		<struts-path>admin_server</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>138</portlet-name>
+		<struts-path>wsrp_producer</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>139</portlet-name>
+		<struts-path>expando</struts-path>
 		<include>true</include>
 	</portlet>
 	-->

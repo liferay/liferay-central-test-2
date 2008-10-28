@@ -43,7 +43,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/wsrp_consumer_admin/init.jsp" %>
+<%@ include file="/html/portlet/wsrp_consumer/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
