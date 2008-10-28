@@ -20,30 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.permissions.announcements;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.permissions.announcements.AnnouncementsTests;
-import com.liferay.portalweb.portal.permissions.blogs.BlogsTests;
-import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
-import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="Member_AssertActionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionsTestSuite extends BaseTests {
+public class Member_AssertActionsTest extends BaseTestCase {
+	public void testMember_AssertActions() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public PermissionsTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
-		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(MessageBoardsTests.class);
+			try {
+				if (selenium.isElementPresent("link=Entries")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		addTestSuite(StopSeleniumTest.class);
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("link=Manage Entries"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		selenium.click(RuntimeVariables.replace("link=Old Entries"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Manage Entries"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

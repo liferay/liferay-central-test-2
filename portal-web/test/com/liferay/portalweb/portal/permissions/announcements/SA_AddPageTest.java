@@ -20,33 +20,78 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_PortalRolesTest extends BaseTestCase {
-	public void testCA_PortalRoles() throws Exception {
+public class SA_AddPageTest extends BaseTestCase {
+	public void testSA_AddPage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div/a/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("new_page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("Announcements Permissions Page"));
+		selenium.type("new_page",
+			RuntimeVariables.replace("Announcements Permissions Page"));
+		selenium.click("link=Save");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portal Permissions']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+				"link=Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

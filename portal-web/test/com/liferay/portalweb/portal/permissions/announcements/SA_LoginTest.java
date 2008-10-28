@@ -20,30 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.permissions.announcements;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.permissions.announcements.AnnouncementsTests;
-import com.liferay.portalweb.portal.permissions.blogs.BlogsTests;
-import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
-import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_LoginTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionsTestSuite extends BaseTests {
-
-	public PermissionsTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
-		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(MessageBoardsTests.class);
-
-		addTestSuite(StopSeleniumTest.class);
+public class SA_LoginTest extends BaseTestCase {
+	public void testSA_Login() throws Exception {
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

@@ -20,33 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="Member_DismissAnnouncementTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_PortalRolesTest extends BaseTestCase {
-	public void testCA_PortalRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portal Permissions']"));
+public class Member_DismissAnnouncementTest extends BaseTestCase {
+	public void testMember_DismissAnnouncement() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Entries")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//img[@alt='Hide']");
+		Thread.sleep(3000);
+		assertFalse(selenium.isTextPresent("Test General Announcement"));
+		selenium.click(RuntimeVariables.replace("link=Old Entries"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		assertTrue(selenium.isTextPresent("Test General Announcement"));
+		assertTrue(selenium.isTextPresent(
+				"This is a test General Announcement."));
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -20,30 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.permissions.announcements;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.permissions.announcements.AnnouncementsTests;
-import com.liferay.portalweb.portal.permissions.blogs.BlogsTests;
-import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
-import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_AddGuestAnnouncementTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionsTestSuite extends BaseTests {
-
-	public PermissionsTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
-		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(MessageBoardsTests.class);
-
-		addTestSuite(StopSeleniumTest.class);
+public class SA_AddGuestAnnouncementTest extends BaseTestCase {
+	public void testSA_AddGuestAnnouncement() throws Exception {
+		selenium.select("_84_distributionScope", "label=Guest");
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_84_title",
+			RuntimeVariables.replace("Test Guest Announcement"));
+		selenium.type("_84_content",
+			RuntimeVariables.replace("This is a test Guest Announcement."));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Guest Announcement"));
 	}
-
 }

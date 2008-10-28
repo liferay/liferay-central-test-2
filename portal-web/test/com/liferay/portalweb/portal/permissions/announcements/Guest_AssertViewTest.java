@@ -20,30 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.permissions.announcements;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.permissions.announcements.AnnouncementsTests;
-import com.liferay.portalweb.portal.permissions.blogs.BlogsTests;
-import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
-import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="Guest_AssertViewTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionsTestSuite extends BaseTests {
-
-	public PermissionsTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
-		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(MessageBoardsTests.class);
-
-		addTestSuite(StopSeleniumTest.class);
+public class Guest_AssertViewTest extends BaseTestCase {
+	public void testGuest_AssertView() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"link=Announcements Permissions Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test General Announcement"));
+		assertTrue(selenium.isTextPresent(
+				"This is a test General Announcement."));
+		assertFalse(selenium.isTextPresent("Test CA Announcement"));
+		assertFalse(selenium.isTextPresent("Test Member Announcement"));
+		selenium.click(RuntimeVariables.replace("link=Old Entries"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No entries were found."));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

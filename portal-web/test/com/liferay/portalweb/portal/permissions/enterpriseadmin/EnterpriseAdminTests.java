@@ -38,10 +38,12 @@ public class EnterpriseAdminTests extends BaseTests {
 		addTestSuite(CreateRolesTest.class);
 		addTestSuite(DefineCARolesTest.class);
 		addTestSuite(CA_MessageBoardsRolesTest.class);
+		addTestSuite(CA_AnnouncementsRolesTest.class);
 		addTestSuite(CA_BlogsRolesTest.class);
 		addTestSuite(CA_PortalRolesTest.class);
 		addTestSuite(DefineMemberRolesTest.class);
 		addTestSuite(Member_MessageBoardsRolesTest.class);
+		addTestSuite(Member_AnnouncementsRolesTest.class);
 		addTestSuite(Member_BlogsRolesTest.class);
 		addTestSuite(DefinePublisherRolesTest.class);
 		addTestSuite(DefineWriterRolesTest.class);

@@ -20,33 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="Guest_AssertActionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_PortalRolesTest extends BaseTestCase {
-	public void testCA_PortalRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portal Permissions']"));
+public class Guest_AssertActionsTest extends BaseTestCase {
+	public void testGuest_AssertActions() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		assertFalse(selenium.isElementPresent("link=Manage Entries"));
+		assertFalse(selenium.isElementPresent("//img[@alt='Hide']"));
+		selenium.click(RuntimeVariables.replace("link=Old Entries"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		assertFalse(selenium.isElementPresent("//img[@alt='Hide']"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

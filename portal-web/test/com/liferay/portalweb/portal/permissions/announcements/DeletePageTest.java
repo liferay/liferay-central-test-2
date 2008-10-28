@@ -20,33 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.enterpriseadmin;
+package com.liferay.portalweb.portal.permissions.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_PortalRolesTest extends BaseTestCase {
-	public void testCA_PortalRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portal Permissions']"));
+public class DeletePageTest extends BaseTestCase {
+	public void testDeletePage() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div/ul/li[2]/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

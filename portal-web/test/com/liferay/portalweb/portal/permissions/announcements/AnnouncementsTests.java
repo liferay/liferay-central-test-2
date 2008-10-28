@@ -20,30 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.permissions.announcements;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.permissions.announcements.AnnouncementsTests;
-import com.liferay.portalweb.portal.permissions.blogs.BlogsTests;
-import com.liferay.portalweb.portal.permissions.enterpriseadmin.EnterpriseAdminTests;
-import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionsTestSuite extends BaseTests {
+public class AnnouncementsTests extends BaseTests {
 
-	public PermissionsTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
-		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(MessageBoardsTests.class);
-
-		addTestSuite(StopSeleniumTest.class);
+	public AnnouncementsTests() {
+		addTestSuite(SA_LoginTest.class);
+		addTestSuite(SA_AddPageTest.class);
+		addTestSuite(SA_AddPortletTest.class);
+		addTestSuite(SA_AddGeneralAnnouncementTest.class);
+		addTestSuite(SA_AddCAAnnouncementTest.class);
+		addTestSuite(SA_AddMemberAnnouncementTest.class);
+		addTestSuite(SA_AddGuestAnnouncementTest.class);
+		addTestSuite(SA_LogoutTest.class);
+		addTestSuite(CA_LoginTest.class);
+		addTestSuite(CA_AssertViewTest.class);
+		addTestSuite(CA_AssertActionsTest.class);
+		addTestSuite(CA_LogoutTest.class);
+		addTestSuite(Member_LoginTest.class);
+		addTestSuite(Member_AssertViewTest.class);
+		addTestSuite(Member_DismissAnnouncementTest.class);
+		addTestSuite(Member_AssertActionsTest.class);
+		addTestSuite(Member_LogoutTest.class);
+		addTestSuite(Guest_AssertViewTest.class);
+		addTestSuite(Guest_AssertActionsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

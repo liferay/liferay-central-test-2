@@ -26,25 +26,29 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_AnnouncementsRolesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_PortalRolesTest extends BaseTestCase {
-	public void testCA_PortalRoles() throws Exception {
+public class CA_AnnouncementsRolesTest extends BaseTestCase {
+	public void testCA_AnnouncementsRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portal Permissions']"));
+				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
+		selenium.click(RuntimeVariables.replace("link=Announcements"));
+		selenium.waitForPageToLoad("30000");
+		selenium.select("_79_scope84ADD_ENTRY",
 			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS",
+		selenium.select("_79_scope84CONFIGURATION",
 			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS",
+		selenium.select("_79_scope84VIEW",
 			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS",
+		selenium.select("_79_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryDELETE",
 			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_79_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS",
+		selenium.select("_79_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryUPDATE",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_79_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
