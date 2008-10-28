@@ -156,25 +156,25 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			int[] formFieldsIndexes = StringUtil.split(
 				ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
 
-			for (int formFieldIndex : formFieldsIndexes) {
+			for (int formFieldsIndex : formFieldsIndexes) {
 				String fieldLabel = ParamUtil.getString(
-					actionRequest, "fieldLabel" + formFieldIndex);
+					actionRequest, "fieldLabel" + formFieldsIndex);
 
 				if (Validator.isNull(fieldLabel)){
 					continue;
 				}
 
 				String fieldType = ParamUtil.getString(
-					actionRequest, "fieldType" + formFieldIndex);
+					actionRequest, "fieldType" + formFieldsIndex);
 				boolean fieldOptional = ParamUtil.getBoolean(
-					actionRequest, "fieldOptional" + formFieldIndex);
+					actionRequest, "fieldOptional" + formFieldsIndex);
 				String fieldOptions = ParamUtil.getString(
-					actionRequest, "fieldOptions" + formFieldIndex);
+					actionRequest, "fieldOptions" + formFieldsIndex);
 				String fieldValidationScript = ParamUtil.getString(
-					actionRequest, "fieldValidationScript" + formFieldIndex);
+					actionRequest, "fieldValidationScript" + formFieldsIndex);
 				String fieldValidationErrorMessage = ParamUtil.getString(
 					actionRequest,
-					"fieldValidationErrorMessage" + formFieldIndex);
+					"fieldValidationErrorMessage" + formFieldsIndex);
 
 				if ((Validator.isNotNull(fieldValidationScript) ^
 					(Validator.isNotNull(fieldValidationErrorMessage)))) {
