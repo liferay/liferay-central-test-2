@@ -754,6 +754,7 @@ public class SourceFormatter {
 			});
 		ds.setIncludes(
 			new String[] {
+				"**\\com\\liferay\\portal\\service\\ServiceContext*.java",
 				"**\\service\\http\\*HttpTest.java",
 				"**\\service\\http\\*SoapTest.java",
 				"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",

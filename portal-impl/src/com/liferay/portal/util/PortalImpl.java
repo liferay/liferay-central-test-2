@@ -534,41 +534,18 @@ public class PortalImpl implements Portal {
 		return company;
 	}
 
-	public Company getCompany(ActionRequest actionRequest)
+	public Company getCompany(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		return getCompany(getHttpServletRequest(actionRequest));
-	}
-
-	public Company getCompany(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
-		return getCompany(getHttpServletRequest(renderRequest));
+		return getCompany(getHttpServletRequest(portletRequest));
 	}
 
 	public long getCompanyId(HttpServletRequest request) {
 		return PortalInstances.getCompanyId(request);
 	}
 
-	public long getCompanyId(ActionRequest actionRequest) {
-		return getCompanyId(getHttpServletRequest(actionRequest));
-	}
-
 	public long getCompanyId(PortletRequest portletRequest) {
-		long companyId = 0;
-
-		if (portletRequest instanceof ActionRequest) {
-			companyId = getCompanyId((ActionRequest)portletRequest);
-		}
-		else {
-			companyId = getCompanyId((RenderRequest)portletRequest);
-		}
-
-		return companyId;
-	}
-
-	public long getCompanyId(RenderRequest renderRequest) {
-		return getCompanyId(getHttpServletRequest(renderRequest));
+		return getCompanyId(getHttpServletRequest(portletRequest));
 	}
 
 	public long[] getCompanyIds() {
@@ -738,20 +715,20 @@ public class PortalImpl implements Portal {
 	}
 
 	public Map<String, Object> getExpandoBridgeAttributes(
-			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		List<String> names = new ArrayList<String>();
 
-		Enumeration<String> enu = actionRequest.getParameterNames();
+		Enumeration<String> enu = portletRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
 
 			if (param.indexOf("ExpandoAttributeName(") != -1) {
-				String name = ParamUtil.getString(actionRequest, param);
+				String name = ParamUtil.getString(portletRequest, param);
 
 				names.add(name);
 			}
@@ -761,7 +738,7 @@ public class PortalImpl implements Portal {
 			int type = expandoBridge.getAttributeType(name);
 
 			Object value = EditExpandoAction.getValue(
-				actionRequest, "ExpandoAttribute(" + name + ")", type);
+				portletRequest, "ExpandoAttribute(" + name + ")", type);
 
 			attributes.put(name, value);
 		}
@@ -807,12 +784,8 @@ public class PortalImpl implements Portal {
 		return host;
 	}
 
-	public String getHost(ActionRequest actionRequest) {
-		return getHost(getHttpServletRequest(actionRequest));
-	}
-
-	public String getHost(RenderRequest renderRequest) {
-		return getHost(getHttpServletRequest(renderRequest));
+	public String getHost(PortletRequest portletRequest) {
+		return getHost(getHttpServletRequest(portletRequest));
 	}
 
 	public HttpServletRequest getHttpServletRequest(
@@ -1644,22 +1617,9 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String getPortletId(ActionRequest actionRequest) {
+	public String getPortletId(PortletRequest portletRequest) {
 		PortletConfigImpl portletConfigImpl =
-			(PortletConfigImpl)actionRequest.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
-
-		if (portletConfigImpl != null) {
-			return portletConfigImpl.getPortletId();
-		}
-		else {
-			return null;
-		}
-	}
-
-	public String getPortletId(RenderRequest renderRequest) {
-		PortletConfigImpl portletConfigImpl =
-			(PortletConfigImpl)renderRequest.getAttribute(
+			(PortletConfigImpl)portletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		if (portletConfigImpl != null) {
@@ -1858,12 +1818,8 @@ public class PortalImpl implements Portal {
 		return getScopeGroupId(layout, portletId);
 	}
 
-	public long getScopeGroupId(ActionRequest actionRequest) {
-		return getScopeGroupId(getHttpServletRequest(actionRequest));
-	}
-
-	public long getScopeGroupId(RenderRequest renderRequest) {
-		return getScopeGroupId(getHttpServletRequest(renderRequest));
+	public long getScopeGroupId(PortletRequest portletRequest) {
+		return getScopeGroupId(getHttpServletRequest(portletRequest));
 	}
 
 	public User getSelectedUser(HttpServletRequest request)
@@ -1894,32 +1850,18 @@ public class PortalImpl implements Portal {
 		return user;
 	}
 
-	public User getSelectedUser(ActionRequest actionRequest)
+	public User getSelectedUser(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		return getSelectedUser(actionRequest, true);
+		return getSelectedUser(portletRequest, true);
 	}
 
 	public User getSelectedUser(
-			ActionRequest actionRequest, boolean checkPermission)
+			PortletRequest portletRequest, boolean checkPermission)
 		throws PortalException, SystemException {
 
 		return getSelectedUser(
-			getHttpServletRequest(actionRequest), checkPermission);
-	}
-
-	public User getSelectedUser(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
-		return getSelectedUser(renderRequest, true);
-	}
-
-	public User getSelectedUser(
-			RenderRequest renderRequest, boolean checkPermission)
-		throws PortalException, SystemException {
-
-		return getSelectedUser(
-			getHttpServletRequest(renderRequest), checkPermission);
+			getHttpServletRequest(portletRequest), checkPermission);
 	}
 
 	public String getStrutsAction(HttpServletRequest request) {
@@ -1953,10 +1895,8 @@ public class PortalImpl implements Portal {
 		return _allSystemRoles;
 	}
 
-	public String[] getTagsEntries(ActionRequest actionRequest)
-		throws PortalException, SystemException {
-
-		return TagsUtil.getTagsEntries(actionRequest);
+	public String[] getTagsEntries(PortletRequest portletRequest) {
+		return TagsUtil.getTagsEntries(portletRequest);
 	}
 
 	public UploadPortletRequest getUploadPortletRequest(
@@ -2104,16 +2044,10 @@ public class PortalImpl implements Portal {
 		return user;
 	}
 
-	public User getUser(ActionRequest actionRequest)
+	public User getUser(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		return getUser(getHttpServletRequest(actionRequest));
-	}
-
-	public User getUser(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
-		return getUser(getHttpServletRequest(renderRequest));
+		return getUser(getHttpServletRequest(portletRequest));
 	}
 
 	public long getUserId(HttpServletRequest request) {
@@ -2159,12 +2093,8 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public long getUserId(ActionRequest actionRequest) {
-		return getUserId(getHttpServletRequest(actionRequest));
-	}
-
-	public long getUserId(RenderRequest renderRequest) {
-		return getUserId(getHttpServletRequest(renderRequest));
+	public long getUserId(PortletRequest portletRequest) {
+		return getUserId(getHttpServletRequest(portletRequest));
 	}
 
 	public String getUserName(long userId, String defaultUserName) {
@@ -2237,12 +2167,8 @@ public class PortalImpl implements Portal {
 		return getUserPassword(session);
 	}
 
-	public String getUserPassword(ActionRequest actionRequest) {
-		return getUserPassword(getHttpServletRequest(actionRequest));
-	}
-
-	public String getUserPassword(RenderRequest renderRequest) {
-		return getUserPassword(getHttpServletRequest(renderRequest));
+	public String getUserPassword(PortletRequest portletRequest) {
+		return getUserPassword(getHttpServletRequest(portletRequest));
 	}
 
 	public String getUserValue(long userId, String param, String defaultValue)

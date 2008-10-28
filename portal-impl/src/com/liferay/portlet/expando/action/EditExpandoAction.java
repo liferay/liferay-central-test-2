@@ -53,6 +53,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -69,31 +70,31 @@ import org.apache.struts.action.ActionMapping;
 public class EditExpandoAction extends PortletAction {
 
 	public static Object getValue(
-			ActionRequest actionRequest, String name, int type)
+			PortletRequest portletRequest, String name, int type)
 		throws PortalException, SystemException {
 
 		Object value = null;
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
-			value = ParamUtil.getBoolean(actionRequest, name);
+			value = ParamUtil.getBoolean(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
-			User user = PortalUtil.getUser(actionRequest);
+			User user = PortalUtil.getUser(portletRequest);
 
 			int valueDateMonth = ParamUtil.getInteger(
-				actionRequest, name + "Month");
+				portletRequest, name + "Month");
 			int valueDateDay = ParamUtil.getInteger(
-				actionRequest, name + "Day");
+				portletRequest, name + "Day");
 			int valueDateYear = ParamUtil.getInteger(
-				actionRequest, name + "Year");
+				portletRequest, name + "Year");
 			int valueDateHour = ParamUtil.getInteger(
-				actionRequest, name + "Hour");
+				portletRequest, name + "Hour");
 			int valueDateMinute = ParamUtil.getInteger(
-				actionRequest, name + "Minute");
+				portletRequest, name + "Minute");
 			int valueDateAmPm = ParamUtil.getInteger(
-				actionRequest, name + "AmPm");
+				portletRequest, name + "AmPm");
 
 			if (valueDateAmPm == Calendar.PM) {
 				valueDateHour += 12;
@@ -106,58 +107,58 @@ public class EditExpandoAction extends PortletAction {
 		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE) {
-			value = ParamUtil.getDouble(actionRequest, name);
+			value = ParamUtil.getDouble(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
 			String[] values = StringUtil.split(
-				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
+				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
 
 			value = GetterUtil.getDoubleValues(values);
 		}
 		else if (type == ExpandoColumnConstants.FLOAT) {
-			value = ParamUtil.getFloat(actionRequest, name);
+			value = ParamUtil.getFloat(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
 			String[] values = StringUtil.split(
-				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
+				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
 
 			value = GetterUtil.getFloatValues(values);
 		}
 		else if (type == ExpandoColumnConstants.INTEGER) {
-			value = ParamUtil.getInteger(actionRequest, name);
+			value = ParamUtil.getInteger(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
 			String[] values = StringUtil.split(
-				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
+				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
 
 			value = GetterUtil.getIntegerValues(values);
 		}
 		else if (type == ExpandoColumnConstants.LONG) {
-			value = ParamUtil.getLong(actionRequest, name);
+			value = ParamUtil.getLong(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
 			String[] values = StringUtil.split(
-				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
+				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
 
 			value = GetterUtil.getLongValues(values);
 		}
 		else if (type == ExpandoColumnConstants.SHORT) {
-			value = ParamUtil.getShort(actionRequest, name);
+			value = ParamUtil.getShort(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
 			String[] values = StringUtil.split(
-				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
+				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
 
 			value = GetterUtil.getShortValues(values);
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			String[] values = StringUtil.split(
-				ParamUtil.getString(actionRequest, name), StringPool.NEW_LINE);
+				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
 
 			value = StringUtil.merge(values);
 		}
 		else {
-			value = ParamUtil.getString(actionRequest, name);
+			value = ParamUtil.getString(portletRequest, name);
 		}
 
 		return value;

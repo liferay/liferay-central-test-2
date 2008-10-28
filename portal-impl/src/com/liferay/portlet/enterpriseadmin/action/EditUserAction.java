@@ -53,6 +53,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -353,7 +354,9 @@ public class EditUserAction extends PortletAction {
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest);
-		ServiceContext serviceContext = null;
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			User.class.getName(), actionRequest);
 
 		User user = null;
 		String oldScreenName = StringPool.BLANK;

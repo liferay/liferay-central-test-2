@@ -102,19 +102,12 @@ public interface Portal {
 	public Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException;
 
-	public Company getCompany(ActionRequest actionRequest)
-		throws PortalException, SystemException;
-
-	public Company getCompany(RenderRequest renderRequest)
+	public Company getCompany(PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
 	public long getCompanyId(HttpServletRequest requestuest);
 
-	public long getCompanyId(ActionRequest actionRequest);
-
 	public long getCompanyId(PortletRequest portletRequest);
-
-	public long getCompanyId(RenderRequest renderRequest);
 
 	public long[] getCompanyIds();
 
@@ -153,16 +146,14 @@ public interface Portal {
 		throws PortalException;
 
 	public Map<String, Object> getExpandoBridgeAttributes(
-			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
 	public String getHost(HttpServletRequest request);
 
-	public String getHost(ActionRequest actionRequest);
-
-	public String getHost(RenderRequest renderRequest);
+	public String getHost(PortletRequest portletRequest);
 
 	public HttpServletRequest getHttpServletRequest(
 		PortletRequest portletRequest);
@@ -287,9 +278,7 @@ public interface Portal {
 
 	public String getPortletId(HttpServletRequest request);
 
-	public String getPortletId(ActionRequest actionRequest);
-
-	public String getPortletId(RenderRequest renderRequest);
+	public String getPortletId(PortletRequest portletRequest);
 
 	public String getPortletNamespace(String portletId);
 
@@ -329,9 +318,7 @@ public interface Portal {
 
 	public long getScopeGroupId(HttpServletRequest request);
 
-	public long getScopeGroupId(ActionRequest actionRequest);
-
-	public long getScopeGroupId(RenderRequest renderRequest);
+	public long getScopeGroupId(PortletRequest portletRequest);
 
 	public User getSelectedUser(HttpServletRequest request)
 		throws PortalException, SystemException;
@@ -340,18 +327,11 @@ public interface Portal {
 			HttpServletRequest request, boolean checkPermission)
 		throws PortalException, SystemException;
 
-	public User getSelectedUser(ActionRequest actionRequest)
+	public User getSelectedUser(PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
 	public User getSelectedUser(
-			ActionRequest actionRequest, boolean checkPermission)
-		throws PortalException, SystemException;
-
-	public User getSelectedUser(RenderRequest renderRequest)
-		throws PortalException, SystemException;
-
-	public User getSelectedUser(
-			RenderRequest renderRequest, boolean checkPermission)
+			PortletRequest portletRequest, boolean checkPermission)
 		throws PortalException, SystemException;
 
 	public String getStrutsAction(HttpServletRequest request);
@@ -364,8 +344,7 @@ public interface Portal {
 
 	public String[] getSystemRoles();
 
-	public String[] getTagsEntries(ActionRequest actionRequest)
-		throws PortalException, SystemException;
+	public String[] getTagsEntries(PortletRequest portletRequest);
 
 	public UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest);
@@ -380,17 +359,12 @@ public interface Portal {
 	public User getUser(HttpServletRequest request)
 		throws PortalException, SystemException;
 
-	public User getUser(ActionRequest actionRequest)
-		throws PortalException, SystemException;
-
-	public User getUser(RenderRequest renderRequest)
+	public User getUser(PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
 	public long getUserId(HttpServletRequest request);
 
-	public long getUserId(ActionRequest actionRequest);
-
-	public long getUserId(RenderRequest renderRequest);
+	public long getUserId(PortletRequest portletRequest);
 
 	public String getUserName(long userId, String defaultUserName);
 
@@ -408,9 +382,7 @@ public interface Portal {
 
 	public String getUserPassword(HttpServletRequest request);
 
-	public String getUserPassword(ActionRequest actionRequest);
-
-	public String getUserPassword(RenderRequest renderRequest);
+	public String getUserPassword(PortletRequest portletRequest);
 
 	public String getUserValue(long userId, String param, String defaultValue)
 		throws SystemException;

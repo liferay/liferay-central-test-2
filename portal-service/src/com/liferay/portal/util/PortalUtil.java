@@ -111,32 +111,18 @@ public class PortalUtil {
 		return getPortal().getCompany(request);
 	}
 
-	public static Company getCompany(ActionRequest actionRequest)
+	public static Company getCompany(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		return getPortal().getCompany(actionRequest);
-	}
-
-	public static Company getCompany(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
-		return getPortal().getCompany(renderRequest);
+		return getPortal().getCompany(portletRequest);
 	}
 
 	public static long getCompanyId(HttpServletRequest request) {
 		return getPortal().getCompanyId(request);
 	}
 
-	public static long getCompanyId(ActionRequest actionRequest) {
-		return getPortal().getCompanyId(actionRequest);
-	}
-
 	public static long getCompanyId(PortletRequest portletRequest) {
 		return getPortal().getCompanyId(portletRequest);
-	}
-
-	public static long getCompanyId(RenderRequest renderRequest) {
-		return getPortal().getCompanyId(renderRequest);
 	}
 
 	public static long[] getCompanyIds() {
@@ -207,12 +193,12 @@ public class PortalUtil {
 		return getPortal().getDate(month, day, year, hour, min, timeZone, pe);
 	}
 
-	public Map<String, Object> getExpandoBridgeAttributes(
-			ExpandoBridge expandoBridge, ActionRequest actionRequest)
+	public static Map<String, Object> getExpandoBridgeAttributes(
+			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
 		return getPortal().getExpandoBridgeAttributes(
-			expandoBridge, actionRequest);
+			expandoBridge, portletRequest);
 	}
 
 	public static String getFirstPageLayoutTypes(PageContext pageContext) {
@@ -223,12 +209,8 @@ public class PortalUtil {
 		return getPortal().getHost(request);
 	}
 
-	public static String getHost(ActionRequest actionRequest) {
-		return getPortal().getHost(actionRequest);
-	}
-
-	public static String getHost(RenderRequest renderRequest) {
-		return getPortal().getHost(renderRequest);
+	public static String getHost(PortletRequest portletRequest) {
+		return getPortal().getHost(portletRequest);
 	}
 
 	public static HttpServletRequest getHttpServletRequest(
@@ -471,12 +453,8 @@ public class PortalUtil {
 		return getPortal().getPortletId(request);
 	}
 
-	public static String getPortletId(ActionRequest actionRequest) {
-		return getPortal().getPortletId(actionRequest);
-	}
-
-	public static String getPortletId(RenderRequest renderRequest) {
-		return getPortal().getPortletId(renderRequest);
+	public static String getPortletId(PortletRequest portletRequest) {
+		return getPortal().getPortletId(portletRequest);
 	}
 
 	public static String getPortletNamespace(String portletId) {
@@ -557,12 +535,8 @@ public class PortalUtil {
 		return getPortal().getScopeGroupId(request);
 	}
 
-	public static long getScopeGroupId(ActionRequest actionRequest) {
-		return getPortal().getScopeGroupId(actionRequest);
-	}
-
-	public static long getScopeGroupId(RenderRequest renderRequest) {
-		return getPortal().getScopeGroupId(renderRequest);
+	public static long getScopeGroupId(PortletRequest portletRequest) {
+		return getPortal().getScopeGroupId(portletRequest);
 	}
 
 	public static User getSelectedUser(HttpServletRequest request)
@@ -578,30 +552,17 @@ public class PortalUtil {
 		return getPortal().getSelectedUser(request, checkPermission);
 	}
 
-	public static User getSelectedUser(ActionRequest actionRequest)
+	public static User getSelectedUser(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		return getPortal().getSelectedUser(actionRequest);
+		return getPortal().getSelectedUser(portletRequest);
 	}
 
 	public static User getSelectedUser(
-			ActionRequest actionRequest, boolean checkPermission)
+			PortletRequest portletRequest, boolean checkPermission)
 		throws PortalException, SystemException {
 
-		return getPortal().getSelectedUser(actionRequest, checkPermission);
-	}
-
-	public static User getSelectedUser(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
-		return getPortal().getSelectedUser(renderRequest);
-	}
-
-	public static User getSelectedUser(
-			RenderRequest renderRequest, boolean checkPermission)
-		throws PortalException, SystemException {
-
-		return getPortal().getSelectedUser(renderRequest, checkPermission);
+		return getPortal().getSelectedUser(portletRequest, checkPermission);
 	}
 
 	public static String getStrutsAction(HttpServletRequest request) {
@@ -624,10 +585,8 @@ public class PortalUtil {
 		return getPortal().getSystemRoles();
 	}
 
-	public static String[] getTagsEntries(ActionRequest actionRequest)
-		throws PortalException, SystemException {
-
-		return getPortal().getTagsEntries(actionRequest);
+	public static String[] getTagsEntries(PortletRequest portletRequest) {
+		return getPortal().getTagsEntries(portletRequest);
 	}
 
 	public static UploadPortletRequest getUploadPortletRequest(
@@ -656,28 +615,18 @@ public class PortalUtil {
 		return getPortal().getUser(request);
 	}
 
-	public static User getUser(ActionRequest actionRequest)
+	public static User getUser(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		return getPortal().getUser(actionRequest);
-	}
-
-	public static User getUser(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
-		return getPortal().getUser(renderRequest);
+		return getPortal().getUser(portletRequest);
 	}
 
 	public static long getUserId(HttpServletRequest request) {
 		return getPortal().getUserId(request);
 	}
 
-	public static long getUserId(ActionRequest actionRequest) {
-		return getPortal().getUserId(actionRequest);
-	}
-
-	public static long getUserId(RenderRequest renderRequest) {
-		return getPortal().getUserId(renderRequest);
+	public static long getUserId(PortletRequest portletRequest) {
+		return getPortal().getUserId(portletRequest);
 	}
 
 	public static String getUserName(long userId, String defaultUserName) {
@@ -712,12 +661,8 @@ public class PortalUtil {
 		return getPortal().getUserPassword(request);
 	}
 
-	public static String getUserPassword(ActionRequest actionRequest) {
-		return getPortal().getUserPassword(actionRequest);
-	}
-
-	public static String getUserPassword(RenderRequest renderRequest) {
-		return getPortal().getUserPassword(renderRequest);
+	public static String getUserPassword(PortletRequest portletRequest) {
+		return getPortal().getUserPassword(portletRequest);
 	}
 
 	public static String getUserValue(

@@ -45,7 +45,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.util.List;
 
-import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,13 +82,11 @@ public class TagsUtil {
 		CharPool.STAR, CharPool.TILDE
 	};
 
-	public static String[] getTagsEntries(ActionRequest actionRequest)
-		throws PortalException, SystemException {
-
+	public static String[] getTagsEntries(PortletRequest portletRequest) {
 		String[] tagsCategories = StringUtil.split(
-			ParamUtil.getString(actionRequest, "tagsCategories"));
+			ParamUtil.getString(portletRequest, "tagsCategories"));
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "tagsEntries"));
+			ParamUtil.getString(portletRequest, "tagsEntries"));
 
 		return ArrayUtil.append(tagsEntries, tagsCategories);
 	}
