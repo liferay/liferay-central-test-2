@@ -24,6 +24,7 @@ package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -99,7 +100,7 @@ public class ExportUsersAction extends Action {
 
 		List<User> users = UserLocalServiceUtil.search(
 			themeDisplay.getCompanyId(), null, Boolean.TRUE, null,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator) null);
 
 		int percentage = 10;
 		int total = users.size();

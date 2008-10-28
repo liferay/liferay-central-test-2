@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -404,7 +405,7 @@ public class AnnouncementsEntryLocalServiceImpl
 		else {
 			users = userLocalService.search(
 				company.getCompanyId(), null, Boolean.TRUE, params,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator) null);
 		}
 
 		if (_log.isDebugEnabled()) {

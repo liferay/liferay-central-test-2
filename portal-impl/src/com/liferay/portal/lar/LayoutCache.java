@@ -27,6 +27,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -254,7 +255,7 @@ public class LayoutCache {
 
 			users = UserLocalServiceUtil.search(
 				companyId, null, null, null, null, emailAddress, Boolean.TRUE,
-				params, true, 0, 1, null);
+				params, true, 0, 1, (OrderByComparator) null);
 
 			usersMap.put(emailAddress, users);
 		}
