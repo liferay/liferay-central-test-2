@@ -55,19 +55,18 @@ while (enu.hasMoreElements()) {
 	}
 }
 
-String sortField = "emailAddress";
-int sortType = Sort.STRING_TYPE;
+Sort sort = _getSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 Hits hits = null;
 
 if (searchTerms.isAdvancedSearch()) {
-	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sortField, sortType);
+	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort.getFieldName(), sort.getType());
 }
 else {
-	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams, searchContainer.getStart(), searchContainer.getEnd(), sortField, sortType);
+	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams, searchContainer.getStart(), searchContainer.getEnd(), sort.getFieldName(), sort.getType());
 }
 
-results = getResults(hits);
+results = _getResults(hits);
 total = hits.getLength();
 
 pageContext.setAttribute("results", results);
@@ -75,7 +74,7 @@ pageContext.setAttribute("total", total);
 %>
 
 <%!
-private List<User> getResults(Hits hits) throws Exception {
+private static List<User> _getResults(Hits hits) throws Exception {
 	List<User> users = new ArrayList<User>();
 
 	List<Document> hitsList = hits.toList();
@@ -87,5 +86,36 @@ private List<User> getResults(Hits hits) throws Exception {
 	}
 
 	return users;
+}
+
+private static Sort _getSort(String orderByCol, String orderByType) {
+	String sortField = "firstName";
+
+	if (Validator.isNotNull(orderByCol)) {
+		if (orderByCol.equals("email-address")) {
+			sortField = "emailAddress";
+		}
+		else if (orderByCol.equals("first-name")) {
+			sortField = "firstName";
+		}
+		else if (orderByCol.equals("job-title")) {
+			sortField = "jobTitle";
+		}
+		else if (orderByCol.equals("last-name")) {
+			sortField = "lastName";
+		}
+		else if (orderByCol.equals("screen-name")) {
+			sortField = "screenName";
+		}
+		else {
+			sortField = orderByCol;
+		}
+	}
+
+	if (Validator.isNull(orderByType)) {
+		orderByType = "asc";
+	}
+
+	return new Sort(sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 }
 %>
