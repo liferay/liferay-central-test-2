@@ -1926,7 +1926,7 @@
 	<portlet>
 		<portlet-name>123</portlet-name>
 		<display-name>WSRP Consumer</display-name>
-		<portlet-class>com.liferay.portlet.wsrpconsumeradmin.WSRPConsumerAdminPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.wsrpconsumer.WSRPConsumerPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
 			<value>/html/portlet/wsrp_consumer</value>
@@ -2175,7 +2175,7 @@
 	<portlet>
 		<portlet-name>138</portlet-name>
 		<display-name>WSRP Producer</display-name>
-		<portlet-class>com.liferay.portlet.wsrpproduceradmin.WSRPProducerAdminPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.wsrpproducer.WSRPProducerPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
 			<value>/html/portlet/wsrp_producer</value>
