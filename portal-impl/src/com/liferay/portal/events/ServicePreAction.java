@@ -915,6 +915,7 @@ public class ServicePreAction extends Action {
 		String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 		String doAsUserLanguageId = ParamUtil.getString(
 			request, "doAsUserLanguageId");
+		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 
 		// Permission checker
 
@@ -1059,6 +1060,11 @@ public class ServicePreAction extends Action {
 						layout.getGroupId(), layout.isPrivateLayout(),
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 				}
+
+				if (!layout.getGroup().getName().equals(
+						GroupConstants.CONTROL_PANEL)) {
+					doAsGroupId = 0;
+				}
 			}
 			catch (NoSuchLayoutException nsle) {
 			}
@@ -1082,10 +1088,6 @@ public class ServicePreAction extends Action {
 		layouts = (List<Layout>)viewableLayouts[1];
 
 		LayoutTypePortlet layoutTypePortlet = null;
-
-		long scopeGroupId = PortalUtil.getScopeGroupId(layout);
-
-		rememberVisitedGroupIds(request, scopeGroupId);
 
 		layouts = mergeAdditionalLayouts(
 			request, user, permissionChecker, layout, layouts);
@@ -1170,6 +1172,12 @@ public class ServicePreAction extends Action {
 				permissionChecker.setCheckGuest(false);
 			}
 		}
+
+		// Scope
+
+		long scopeGroupId = PortalUtil.getScopeGroupId(request);
+
+		rememberVisitedGroupIds(request, scopeGroupId);
 
 		// Theme and color scheme
 
@@ -1261,6 +1269,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setRealUser(realUser);
 		themeDisplay.setDoAsUserId(doAsUserId);
 		themeDisplay.setDoAsUserLanguageId(doAsUserLanguageId);
+		themeDisplay.setDoAsGroupId(doAsGroupId);
 		themeDisplay.setLayoutSetLogo(layoutSetLogo);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setLayouts(layouts);
@@ -1317,6 +1326,11 @@ public class ServicePreAction extends Action {
 		if (Validator.isNotNull(doAsUserId)) {
 			urlControlPanel = HttpUtil.addParameter(
 				urlControlPanel, "doAsUserId", doAsUserId);
+		}
+
+		if (scopeGroupId > 0) {
+			urlControlPanel = HttpUtil.addParameter(
+				urlControlPanel, "doAsGroupId", scopeGroupId);
 		}
 
 		themeDisplay.setURLControlPanel(urlControlPanel);

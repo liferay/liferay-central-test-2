@@ -327,7 +327,7 @@ if (denyAccess) {
 	showPrintIcon = false;
 }
 
-themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(layout, portletId));
+themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request, portletId));
 
 portletDisplay.recycle();
 
@@ -645,6 +645,14 @@ if (themeDisplay.isWidget()) {
 	portletDisplay.setShowBackIcon(false);
 }
 
+if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+	portletDisplay.setShowBackIcon(false);
+	portletDisplay.setShowConfigurationIcon(false);
+	portletDisplay.setShowMaxIcon(false);
+	portletDisplay.setShowMinIcon(false);
+	portletDisplay.setShowPortletCssIcon(false);
+}
+
 // Make sure the Tiles context is reset for the next portlet
 
 if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
@@ -854,7 +862,7 @@ else {
 </c:if>
 
 <%
-themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(layout));
+themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request));
 
 if (showPortletCssIcon) {
 	themeDisplay.setIncludePortletCssJs(true);

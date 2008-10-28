@@ -31,6 +31,17 @@ if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
 }
 
+if (ppid.equals(PortletKeys.EXPANDO)) {
+	String modelResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "modelResource");
+
+	if (modelResource.equals(User.class.getName())) {
+		ppid = PortletKeys.ENTERPRISE_ADMIN_USERS;
+	}
+	else if (modelResource.equals(Organization.class.getName())) {
+		ppid = PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS;
+	}
+}
+
 String category = PortalUtil.getControlPanelCategory(ppid);
 
 if (Validator.isNull(category)) {
@@ -67,29 +78,30 @@ if (Validator.isNull(category)) {
 				<table class="panel-page-content-menu">
 				<tr>
 					<td>
-						<c:if test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
+						<%
+						String title = null;
 
-							<%
-							Group scopeGroup = themeDisplay.getScopeGroup();
+						if (category.equals(PortletCategoryKeys.MY)) {
+							title = user.getFullName();
+						}
+						else if (category.equals(PortletCategoryKeys.CONTENT)) {
+							title = themeDisplay.getScopeGroup().getDescriptiveName();
+						}
+						else if (category.equals(PortletCategoryKeys.PORTAL)) {
+							title = company.getName();
+						}
+						else if (category.equals(PortletCategoryKeys.SERVER)) {
+							title = LanguageUtil.get(pageContext, "server");
+						}
+						%>
 
-							String currentGroupLabel = "current-community";
-
-							if (scopeGroup.isOrganization()) {
-								currentGroupLabel = "current-organization";
-							}
-							else if (scopeGroup.isUser()) {
-								currentGroupLabel = "current-user";
-							}
-							%>
-
-							<h4 class="current-community">
-								<liferay-ui:message key="<%= currentGroupLabel %>" />: <span><%= scopeGroup.getDescriptiveName() %></span>
-							</h4>
-						</c:if>
+						<h4 class="current-community">
+							<span><%= title %></span>
+						</h4>
 					</td>
 					<td align="right">
 						<c:if test="<%= !category.equals(PortletCategoryKeys.SERVER) %>">
-							<liferay-ui:message key="current-portal-instance" />: <a href="javascript: ;"><b><%= company.getWebId() %></b></a>
+							<liferay-ui:message key="current-portal-instance" />: <b><%= company.getName() %></b>
 						</c:if>
 					</td>
 				</tr>

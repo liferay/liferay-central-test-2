@@ -318,6 +318,8 @@ public interface Portal {
 
 	public long getScopeGroupId(HttpServletRequest request);
 
+	public long getScopeGroupId(HttpServletRequest request, String portletId);
+
 	public long getScopeGroupId(PortletRequest portletRequest);
 
 	public User getSelectedUser(HttpServletRequest request)

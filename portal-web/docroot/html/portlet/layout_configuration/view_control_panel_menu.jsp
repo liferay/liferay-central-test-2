@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
 <h1 class="user-greeting">
-	<liferay-ui:message key="welcome" /> <a href="<%= user.getDisplayURL(themeDisplay) %>"><%= user.getFullName() %></a> <a class="sign-out" href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>
+	<liferay-ui:message key="control-panel" />
 </h1>
 
 <div class="portal-add-content">
@@ -49,13 +49,31 @@
 		portlets = filterPortlets(permissionChecker, scopeGroupId, category, portlets);
 
 		if (portlets.size() > 0) {
+			String title = null;
+
+			if (category.equals(PortletCategoryKeys.MY)) {
+				title = StringUtil.shorten(user.getFullName(), 25);
+			}
+			else if (category.equals(PortletCategoryKeys.CONTENT)) {
+				Group scopeGroup = themeDisplay.getScopeGroup();
+
+				title = LanguageUtil.get(pageContext, "content") + ": " + StringUtil.shorten(scopeGroup.getDescriptiveName(), 18);
+			}
+			else if (category.equals(PortletCategoryKeys.PORTAL)) {
+				Group scopeGroup = themeDisplay.getScopeGroup();
+
+				title = LanguageUtil.get(pageContext, "portal") + ": " + StringUtil.shorten(company.getName(), 18);
+			}
+			else {
+				title = LanguageUtil.get(pageContext, "category." + category);
+			}
 	%>
 
 			<div class="<%= cssClass %>" id="<%= panelCategory %>">
 				<ul>
 					<li>
 						<h2>
-							<span><liferay-ui:message key='<%= "category." + category %>' /></span>
+							<span><%= title %></span>
 						</h2>
 
 						<ul class="category-portlets">

@@ -567,7 +567,7 @@ public class LayoutAction extends Action {
 			WebKeys.THEME_DISPLAY);
 
 		themeDisplay.setScopeGroupId(
-			PortalUtil.getScopeGroupId(layout, portletId));
+			PortalUtil.getScopeGroupId(request, portletId));
 
 		ServletContext servletContext = (ServletContext)request.getAttribute(
 			WebKeys.CTX);

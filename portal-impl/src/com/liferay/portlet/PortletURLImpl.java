@@ -367,6 +367,14 @@ public class PortletURLImpl
 		_toString = null;
 	}
 
+	public void setDoAsGroupId(long doAsGroupId) {
+		_doAsGroupId = doAsGroupId;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public void setEncrypt(boolean encrypt) {
 		_encrypt = encrypt;
 
@@ -837,6 +845,19 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
+		long doAsGroupId = _doAsGroupId;
+
+		if (doAsGroupId <= 0) {
+			doAsGroupId = themeDisplay.getDoAsGroupId();
+		}
+
+		if (doAsGroupId > 0) {
+			sb.append("doAsGroupId");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, doAsGroupId));
+			sb.append(StringPool.AMPERSAND);
+		}
+
 		if (_copyCurrentRenderParameters) {
 			Enumeration<String> enu = _request.getParameterNames();
 
@@ -1032,6 +1053,7 @@ public class PortletURLImpl
 	private boolean _copyCurrentRenderParameters;
 	private long _doAsUserId;
 	private String _doAsUserLanguageId;
+	private long _doAsGroupId;
 	private boolean _encrypt;
 	private boolean _escapeXml = PropsValues.PORTLET_URL_ESCAPE_XML;
 	private Set<String> _parametersIncludedInPath;

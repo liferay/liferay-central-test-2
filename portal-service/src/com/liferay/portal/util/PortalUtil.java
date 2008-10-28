@@ -535,6 +535,12 @@ public class PortalUtil {
 		return getPortal().getScopeGroupId(request);
 	}
 
+	public static long getScopeGroupId(
+		HttpServletRequest request, String portletId) {
+
+		return getPortal().getScopeGroupId(request, portletId);
+	}
+
 	public static long getScopeGroupId(PortletRequest portletRequest) {
 		return getPortal().getScopeGroupId(portletRequest);
 	}

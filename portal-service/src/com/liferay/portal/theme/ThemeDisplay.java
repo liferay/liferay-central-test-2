@@ -188,6 +188,14 @@ public class ThemeDisplay implements Serializable {
 		_doAsUserLanguageId = doAsUserLanguageId;
 	}
 
+	public long getDoAsGroupId() {
+		return _doAsGroupId;
+	}
+
+	public void setDoAsGroupId(long doAsGroupId) {
+		_doAsGroupId = doAsGroupId;
+	}
+
 	public boolean isImpersonated() {
 		if (getUserId() == getRealUserId()) {
 			return false;
@@ -996,6 +1004,7 @@ public class ThemeDisplay implements Serializable {
 		_realUser = null;
 		_doAsUserId = StringPool.BLANK;
 		_doAsUserLanguageId = StringPool.BLANK;
+		_doAsGroupId = 0;
 		_layoutSetLogo = StringPool.BLANK;
 		_layout = null;
 		_layouts = null;
@@ -1095,6 +1104,7 @@ public class ThemeDisplay implements Serializable {
 	private User _realUser;
 	private String _doAsUserId = StringPool.BLANK;
 	private String _doAsUserLanguageId = StringPool.BLANK;
+	private long _doAsGroupId = 0;
 	private Contact _contact;
 	private String _layoutSetLogo = StringPool.BLANK;
 	private Layout _layout;

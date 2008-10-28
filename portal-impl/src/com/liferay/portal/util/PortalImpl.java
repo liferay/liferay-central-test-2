@@ -1806,16 +1806,40 @@ public class PortalImpl implements Portal {
 				catch (Exception e) {
 				}
 			}
+			else {
+				return layout.getGroupId();
+			}
 
 			return layout.getGroupId();
 		}
 	}
 
 	public long getScopeGroupId(HttpServletRequest request) {
-		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 		String portletId = getPortletId(request);
 
-		return getScopeGroupId(layout, portletId);
+		return getScopeGroupId(request, portletId);
+	}
+
+	public long getScopeGroupId(HttpServletRequest request, String portletId) {
+		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+		long scopeGroupId = 0;
+
+		if ((layout != null) &&
+			layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+
+			long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
+
+			if (doAsGroupId > 0) {
+				scopeGroupId = doAsGroupId;
+			}
+		}
+
+		if (scopeGroupId <= 0) {
+			scopeGroupId = getScopeGroupId(layout, portletId);
+		}
+
+		return scopeGroupId;
 	}
 
 	public long getScopeGroupId(PortletRequest portletRequest) {
