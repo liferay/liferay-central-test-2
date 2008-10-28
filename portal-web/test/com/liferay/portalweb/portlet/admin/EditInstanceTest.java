@@ -22,27 +22,26 @@
 
 package com.liferay.portalweb.portlet.admin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditInstanceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AdminTests extends BaseTests {
-
-	public AdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCategoryTest.class);
-		addTestSuite(EditCategoryTest.class);
-		addTestSuite(BrowseServerTest.class);
-		addTestSuite(BrowseInstanceTest.class);
-		addTestSuite(BrowsePluginsTest.class);
-		addTestSuite(AddInstanceTest.class);
-		addTestSuite(EditInstanceTest.class);
-		addTestSuite(DeletePageTest.class);
+public class EditInstanceTest extends BaseTestCase {
+	public void testEditInstance() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=test.com"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_9_virtualHost", RuntimeVariables.replace("edited"));
+		selenium.type("_9_virtualHost", RuntimeVariables.replace("edited"));
+		selenium.typeKeys("_9_mx", RuntimeVariables.replace("Edited.com"));
+		selenium.type("_9_mx", RuntimeVariables.replace("Edited.com"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

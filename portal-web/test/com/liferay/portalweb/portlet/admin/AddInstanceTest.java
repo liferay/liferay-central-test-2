@@ -22,27 +22,28 @@
 
 package com.liferay.portalweb.portlet.admin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddInstanceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AdminTests extends BaseTests {
-
-	public AdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCategoryTest.class);
-		addTestSuite(EditCategoryTest.class);
-		addTestSuite(BrowseServerTest.class);
-		addTestSuite(BrowseInstanceTest.class);
-		addTestSuite(BrowsePluginsTest.class);
-		addTestSuite(AddInstanceTest.class);
-		addTestSuite(EditInstanceTest.class);
-		addTestSuite(DeletePageTest.class);
+public class AddInstanceTest extends BaseTestCase {
+	public void testAddInstance() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Instances"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_9_webId", RuntimeVariables.replace("test.com"));
+		selenium.type("_9_webId", RuntimeVariables.replace("test.com"));
+		selenium.typeKeys("_9_virtualHost", RuntimeVariables.replace("guest"));
+		selenium.type("_9_virtualHost", RuntimeVariables.replace("guest"));
+		selenium.typeKeys("_9_mx", RuntimeVariables.replace("test.com"));
+		selenium.type("_9_mx", RuntimeVariables.replace("test.com"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

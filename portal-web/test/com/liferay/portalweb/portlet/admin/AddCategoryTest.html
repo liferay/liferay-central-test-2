@@ -4,66 +4,61 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>BrowsePluginsTest</title>
+<title>AddCategoryTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">BrowsePluginsTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddCategoryTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Server</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//a[contains(text(),'Plugins')]</td>
+	<td>link=Server</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//input[@value='Install More Portlets']</td>
+	<td>link=Log Levels</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>//div[2]/select</td>
-	<td>label=4</td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Wiki</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Theme Plugins</td>
+	<td>click</td>
+	<td>link=Log Levels</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//input[@value='Install More Themes']</td>
+	<td>link=Add Category</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Layout Template Plugins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Install More Layout Templates']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Web Plugins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>click</td>
+	<td>link=Add Category</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>_9_loggerName</td>
+	<td>CategoryTest!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_9_loggerName</td>
+	<td>CategoryTest!</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 

@@ -26,25 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="BrowsePluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BrowsePluginsTest extends BaseTestCase {
-	public void testBrowsePlugins() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//a[contains(text(),'Plugins')]"));
-		selenium.waitForPageToLoad("30000");
-
+public class AddCategoryTest extends BaseTestCase {
+	public void testAddCategory() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Install More Portlets']")) {
+				if (selenium.isElementPresent("link=Server")) {
 					break;
 				}
 			}
@@ -54,9 +49,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//div[2]/select", RuntimeVariables.replace("label=4"));
-		verifyTrue(selenium.isTextPresent("Wiki"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Server"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -65,8 +58,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Install More Themes']")) {
+				if (selenium.isElementPresent("link=Log Levels")) {
 					break;
 				}
 			}
@@ -76,8 +68,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Log Levels");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -85,8 +76,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Install More Layout Templates']")) {
+				if (selenium.isElementPresent("link=Add Category")) {
 					break;
 				}
 			}
@@ -96,10 +86,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Add Category");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -107,7 +94,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("_9_loggerName")) {
 					break;
 				}
 			}
@@ -116,5 +103,26 @@ public class BrowsePluginsTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.type("_9_loggerName", RuntimeVariables.replace("CategoryTest!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 	}
 }
