@@ -1544,12 +1544,37 @@ fieldset:last-child, .uni-form fieldset:last-child {
 
 /* ---------- Taglib social bookmark ---------- */
 
+.js .taglib-social-bookmarks.visible {
+	background: #F0F5F7;
+}
+
+.js .taglib-social-bookmarks .show-bookmarks {
+	background: #D3DADD url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_right.png) no-repeat 2px 50%;
+	display: block;
+	padding-left: 15px;
+}
+
+.js .taglib-social-bookmarks.visible .show-bookmarks {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png);
+}
+
+.js .taglib-social-bookmarks ul {
+	border: 1px solid #828F95;
+	border-left: none;
+	border-right: none;
+	display: none;
+}
+
+.js .taglib-social-bookmarks.visible ul {
+	display: block;
+}
+
 .taglib-social-bookmarks li {
 	float: left;
 	margin-right: 1em;
 }
 
-.taglib-social-bookmarks:after {
+.taglib-social-bookmarks ul:after {
 	clear: both;
 	content: ".";
 	display: block;
@@ -1557,44 +1582,44 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	visibility: hidden;
 }
 
-.ie .taglib-social-bookmarks {
+.ie .taglib-social-bookmarks ul {
 	height: 1%;
 }
 
-.taglib-social-bookmarks a {
+.taglib-social-bookmarks li a {
 	background: url() no-repeat 0 50%;
 	padding: 3px 2px 3px 20px;
 }
 
-a.taglib-social-bookmark-blinklist {
+.taglib-social-bookmarks a.taglib-social-bookmark-blinklist {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/blinklist.png);
 }
 
-a.taglib-social-bookmark-delicious {
+.taglib-social-bookmarks a.taglib-social-bookmark-delicious {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png);
 }
 
-a.taglib-social-bookmark-digg {
+.taglib-social-bookmarks a.taglib-social-bookmark-digg {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png);
 }
 
-a.taglib-social-bookmark-facebook {
+.taglib-social-bookmarks a.taglib-social-bookmark-facebook {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/facebook.png);
 }
 
-a.taglib-social-bookmark-furl {
+.taglib-social-bookmarks a.taglib-social-bookmark-furl {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png);
 }
 
-a.taglib-social-bookmark-newsvine {
+.taglib-social-bookmarks a.taglib-social-bookmark-newsvine {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/newsvine.png);
 }
 
-a.taglib-social-bookmark-reddit {
+.taglib-social-bookmarks a.taglib-social-bookmark-reddit {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/reddit.png);
 }
 
-a.taglib-social-bookmark-technorati {
+.taglib-social-bookmarks a.taglib-social-bookmark-technorati {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/technorati.png);
 }
 

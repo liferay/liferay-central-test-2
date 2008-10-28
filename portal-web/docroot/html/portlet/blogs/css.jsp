@@ -71,14 +71,12 @@
 	margin-top: 0.5em;
 }
 
-.portlet-blogs .taglib-social-bookmarks-wrapper {
+.portlet-blogs .taglib-social-bookmarks {
 	margin-top: 1.5em;
 }
 
-.portlet-blogs .taglib-social-bookmarks {
-	display: none;
-	margin-top: 1em;
-	padding-left: 1em;
+.portlet-blogs .taglib-social-bookmarks ul {
+	padding: 1em;
 }
 
 .portlet-blogs .view-count {

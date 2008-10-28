@@ -28,11 +28,11 @@
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 %>
 
-<div class="taglib-social-bookmarks-wrapper">
+<div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">
 
-<a id="<%= randomNamespace %>showSocialBookmarks" href="javascript:void(0);"><liferay-ui:message key="bookmarks" /> &raquo;</a>
+<a class="show-bookmarks" href="javascript: ;"><liferay-ui:message key="social-bookmarks" /></a>
 
-<ul id="<%= randomNamespace %>socialBookmarks" class="lfr-component taglib-social-bookmarks">
+<ul class="lfr-component">
 
 	<%
 	for (int i = 0; i < typesArray.length; i++) {
@@ -50,21 +50,16 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 </div>
 
 <script>
-	var <%= randomNamespace %>linkSocialBookmarks = jQuery('#<%= randomNamespace %>showSocialBookmarks');
-	var <%= randomNamespace %>socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
-	var <%= randomNamespace %>openedLinkLabel = '<liferay-ui:message key="bookmarks" /> &laquo;';
-	var <%= randomNamespace %>closedLinkLabel = '<liferay-ui:message key="bookmarks" /> &raquo;';
+	jQuery(
+		function () {
+			var socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
+			var linkSocialBookmarks = socialBookmarks.find('.show-bookmarks');
 
-	<%= randomNamespace %>linkSocialBookmarks.toggle(
-		function() {
-			<%= randomNamespace %>linkSocialBookmarks.html(<%= randomNamespace %>openedLinkLabel);
-			<%= randomNamespace %>socialBookmarks.show('fast');
-			return false;
-		},
-		function() {
-			<%= randomNamespace %>linkSocialBookmarks.html(<%= randomNamespace %>closedLinkLabel);
-			<%= randomNamespace %>socialBookmarks.hide();
-			return false;
+			linkSocialBookmarks.click(
+				function(event) {
+					socialBookmarks.toggleClass('visible');
+				}
+			);
 		}
 	);
 </script>
