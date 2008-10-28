@@ -2664,11 +2664,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws ParseException {
 
 		if (key.equals("usersRoles")) {
-			contextQuery.addRequiredTerm(Field.ROLE_IDS, String.valueOf(value));
+			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
 		}
 		else if (key.equals("usersUserGroups")) {
-			contextQuery.addRequiredTerm(
-				Field.USER_GROUP_IDS, String.valueOf(value));
+			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
 		}
 		else if (key.equals("usersOrgs")) {
 			if (value instanceof Long[]) {
@@ -2677,15 +2676,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				BooleanQuery usersOrgsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long organizationId : values) {
-					usersOrgsQuery.addTerm(
-						Field.ORGANIZATION_IDS, organizationId);
+					usersOrgsQuery.addTerm("organizationIds", organizationId);
 				}
 
 				contextQuery.add(usersOrgsQuery, BooleanClauseOccur.MUST);
 			}
 			else {
 				contextQuery.addRequiredTerm(
-					Field.ORGANIZATION_IDS, String.valueOf(value));
+					"organizationIds", String.valueOf(value));
 			}
 		}
 		else if (attributeNames.contains(key)) {

@@ -80,10 +80,10 @@ public class UserIndexer implements Indexer {
 		doc.addText("lastName", lastName);
 		doc.addText("jobTitle", jobTitle);
 		doc.addKeyword("active", active);
-		doc.addKeyword(Field.GROUP_IDS, groupIds);
-		doc.addKeyword(Field.ORGANIZATION_IDS, organizationIds);
-		doc.addKeyword(Field.ROLE_IDS, roleIds);
-		doc.addKeyword(Field.USER_GROUP_IDS, userGroupIds);
+		doc.addKeyword("groupIds", groupIds);
+		doc.addKeyword("organizationIds", organizationIds);
+		doc.addKeyword("roleIds", roleIds);
+		doc.addKeyword("userGroupIds", userGroupIds);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
