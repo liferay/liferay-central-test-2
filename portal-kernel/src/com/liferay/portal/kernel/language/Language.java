@@ -40,13 +40,25 @@ public interface Language {
 
 	public String format(Locale locale, String pattern, Object argument);
 
+	public String format(
+		Locale locale, String pattern, Object argument,
+		boolean translateArguments);
+
 	public String format(Locale locale, String pattern, Object[] arguments);
 
 	public String format(
 		long companyId, Locale locale, String pattern, Object argument);
 
 	public String format(
+		long companyId, Locale locale, String pattern, Object argument,
+		boolean translateArguments);
+
+	public String format(
 		long companyId, Locale locale, String pattern, Object[] arguments);
+
+	public String format(
+		long companyId, Locale locale, String pattern, Object[] arguments,
+		boolean translateArguments);
 
 	public String format(
 		PageContext pageContext, String pattern, Object argument);

@@ -81,23 +81,51 @@ public class LanguageImpl implements Language {
 	public String format(Locale locale, String pattern, Object argument) {
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return format(companyId, locale, pattern, new Object[] {argument});
+		return format(
+			companyId, locale, pattern, new Object[] {argument}, true);
+	}
+
+	public String format(Locale locale, String pattern, Object argument,
+		boolean translateArguments) {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return format(
+			companyId, locale, pattern, new Object[] {argument},
+			translateArguments);
 	}
 
 	public String format(Locale locale, String pattern, Object[] arguments) {
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return format(companyId, locale, pattern, arguments);
+		return format(companyId, locale, pattern, arguments, true);
 	}
 
 	public String format(
 		long companyId, Locale locale, String pattern, Object argument) {
 
-		return format(companyId, locale, pattern, new Object[] {argument});
+		return format(
+			companyId, locale, pattern, new Object[] {argument}, true);
+	}
+
+	public String format(
+		long companyId, Locale locale, String pattern, Object argument,
+		boolean translateArguments) {
+
+		return format(
+			companyId, locale, pattern, new Object[] {argument},
+			translateArguments);
 	}
 
 	public String format(
 		long companyId, Locale locale, String pattern, Object[] arguments) {
+
+		return format(companyId, locale, pattern, arguments, true);
+	}
+
+	public String format(
+		long companyId, Locale locale, String pattern, Object[] arguments,
+		boolean translateArguments) {
 
 		String value = null;
 
@@ -110,8 +138,13 @@ public class LanguageImpl implements Language {
 				Object[] formattedArguments = new Object[arguments.length];
 
 				for (int i = 0; i < arguments.length; i++) {
-					formattedArguments[i] = get(
-						companyId, locale, arguments[i].toString());
+					if (translateArguments) {
+						formattedArguments[i] = get(
+							companyId, locale, arguments[i].toString());
+					}
+					else {
+						formattedArguments[i] = arguments[i];
+					}
 				}
 
 				value = MessageFormat.format(pattern, formattedArguments);

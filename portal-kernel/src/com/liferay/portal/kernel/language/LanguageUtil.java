@@ -45,6 +45,14 @@ public class LanguageUtil {
 	}
 
 	public static String format(
+		Locale locale, String pattern, Object argument,
+		boolean translateArguments) {
+
+		return getLanguage().format(
+			locale, pattern, argument, translateArguments);
+	}
+
+	public static String format(
 		Locale locale, String pattern, Object[] arguments) {
 
 		return getLanguage().format(locale, pattern, arguments);
@@ -57,9 +65,25 @@ public class LanguageUtil {
 	}
 
 	public static String format(
+		long companyId, Locale locale, String pattern, Object argument,
+		boolean translateArguments) {
+
+		return getLanguage().format(
+			companyId, locale, pattern, argument, translateArguments);
+	}
+
+	public static String format(
 		long companyId, Locale locale, String pattern, Object[] arguments) {
 
 		return getLanguage().format(companyId, locale, pattern, arguments);
+	}
+
+	public static String format(
+		long companyId, Locale locale, String pattern, Object[] arguments,
+		boolean translateArguments) {
+
+		return getLanguage().format(
+			companyId, locale, pattern, arguments, translateArguments);
 	}
 
 	public static String format(
