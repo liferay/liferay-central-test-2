@@ -702,12 +702,11 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, java.lang.String sortField,
-		int sortType, int start, int end)
+		long groupId, java.lang.String keywords,
+		com.liferay.portal.kernel.search.Sort sort, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, groupId, keywords, sortField, sortType,
-			start, end);
+				   .search(companyId, groupId, keywords, sort, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

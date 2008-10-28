@@ -474,8 +474,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, java.lang.String sortField,
-		int sortType, int start, int end)
+		long groupId, java.lang.String keywords,
+		com.liferay.portal.kernel.search.Sort sort, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

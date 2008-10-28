@@ -1492,14 +1492,14 @@ public class JournalArticleLocalServiceImpl
 			long companyId, long groupId, String keywords, int start, int end)
 		throws SystemException {
 
-		return search(
-			companyId, groupId, keywords, "displayDate", Sort.LONG_TYPE, start,
-			end);
+		Sort sort = new Sort("displayDate", Sort.LONG_TYPE, true);
+
+		return search(companyId, groupId, keywords, sort, start, end);
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords, String sortField,
-			int sortType, int start, int end)
+			long companyId, long groupId, String keywords, Sort sort, int start,
+			int end)
 		throws SystemException {
 
 		try {
@@ -1527,8 +1527,6 @@ public class JournalArticleLocalServiceImpl
 			if (searchQuery.clauses().size() > 0) {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
-
-			Sort sort = new Sort(sortField, sortType, true);
 
 			return SearchEngineUtil.search(
 				companyId, fullQuery, sort, start, end);
