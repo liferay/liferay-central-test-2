@@ -40,20 +40,15 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -250,11 +245,11 @@ public class LayoutExporter {
 			layoutEl.addElement("priority").addText(
 				String.valueOf(layout.getPriority()));
 
-			Element permissionsEl = layoutEl.addElement("permissions");
-
 			// Layout permissions
 
 			if (exportPermissions) {
+				Element permissionsEl = layoutEl.addElement("permissions");
+
 				String resourceName = Layout.class.getName();
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
@@ -430,35 +425,16 @@ public class LayoutExporter {
 			String resourceName, String resourcePrimKey, Element permissionsEl)
 		throws PortalException, SystemException {
 
+		boolean portletActions = false;
+
 		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName,
-			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
+			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
+			portletActions);
 
-		List<Role> roles = layoutCache.getGroupRoles_5(groupId);
-
-		for (Role role : roles) {
-			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
-				continue;
-			}
-
-			Element roleEl = permissionsEl.addElement("role");
-
-			roleEl.addAttribute("name", role.getName());
-			roleEl.addAttribute("description", role.getDescription());
-			roleEl.addAttribute("type", String.valueOf(role.getType()));
-
-			List<Permission> permissions =
-				PermissionLocalServiceUtil.getRolePermissions(
-					role.getRoleId(), resource.getResourceId());
-
-			List<String> actions = ResourceActionsUtil.getActions(permissions);
-
-			for (String action : actions) {
-				Element actionKeyEl = roleEl.addElement("action-key");
-
-				actionKeyEl.addText(action);
-			}
-		}
+		_portletExporter.exportPermissions_5(
+			layoutCache, groupId, resourceName, resource.getResourceId(),
+			permissionsEl);
 	}
 
 	protected void exportLayoutRoles(

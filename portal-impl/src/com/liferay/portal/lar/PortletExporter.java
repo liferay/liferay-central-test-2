@@ -47,8 +47,10 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -62,6 +64,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
@@ -381,6 +384,38 @@ public class PortletExporter {
 		}
 	}
 
+	protected void exportPermissions_5(
+			LayoutCache layoutCache, long groupId, String resourceName,
+			long resourceId, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		List<Role> roles = layoutCache.getGroupRoles_5(groupId, resourceName);
+
+		for (Role role : roles) {
+			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
+				continue;
+			}
+
+			Element roleEl = permissionsEl.addElement("role");
+
+			roleEl.addAttribute("name", role.getName());
+			roleEl.addAttribute("description", role.getDescription());
+			roleEl.addAttribute("type", String.valueOf(role.getType()));
+
+			List<Permission> permissions =
+				PermissionLocalServiceUtil.getRolePermissions(
+					role.getRoleId(), resourceId);
+
+			List<String> actions = ResourceActionsUtil.getActions(permissions);
+
+			for (String action : actions) {
+				Element actionKeyEl = roleEl.addElement("action-key");
+
+				actionKeyEl.addText(action);
+			}
+		}
+	}
+
 	protected void exportPortlet(
 			PortletDataContext context, LayoutCache layoutCache,
 			String portletId, Layout layout, Element parentEl,
@@ -508,14 +543,25 @@ public class PortletExporter {
 		if (exportPermissions) {
 			Element permissionsEl = portletEl.addElement("permissions");
 
-			exportPortletPermissions(
-				layoutCache, companyId, groupId, guestGroup, layout.getPlid(),
-				portletId, permissionsEl, exportUserPermissions);
+			String resourceName = PortletConstants.getRootPortletId(portletId);
+			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+				layout.getPlid(), portletId);
 
-			Element rolesEl = portletEl.addElement("roles");
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				exportPortletPermissions_5(
+					layoutCache, companyId, groupId, resourceName,
+					resourcePrimKey, permissionsEl);
+			}
+			else {
+				exportPortletPermissions_4(
+					layoutCache, companyId, groupId, guestGroup, resourceName,
+					resourcePrimKey, permissionsEl, exportUserPermissions);
 
-			exportPortletRoles(
-				layoutCache, companyId, groupId, portletId, rolesEl);
+				Element rolesEl = portletEl.addElement("roles");
+
+				exportPortletRoles(
+					layoutCache, companyId, groupId, portletId, rolesEl);
+			}
 		}
 
 		// Zip
@@ -630,15 +676,11 @@ public class PortletExporter {
 		context.addZipEntry(sb.toString(), data);
 	}
 
-	protected void exportPortletPermissions(
+	protected void exportPortletPermissions_4(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, long plid, String portletId,
+			Group guestGroup, String resourceName, String resourcePrimKey,
 			Element permissionsEl, boolean exportUserPermissions)
 		throws SystemException {
-
-		String resourceName = PortletConstants.getRootPortletId(portletId);
-		String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
-			plid, portletId);
 
 		exportGroupPermissions(
 			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
@@ -663,6 +705,23 @@ public class PortletExporter {
 		exportInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
 			permissionsEl, "user-group");
+	}
+
+	protected void exportPortletPermissions_5(
+			LayoutCache layoutCache, long companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		boolean portletActions = true;
+
+		Resource resource = layoutCache.getResource(
+			companyId, groupId, resourceName,
+			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
+			portletActions);
+
+		exportPermissions_5(
+			layoutCache, groupId, resourceName, resource.getResourceId(),
+			permissionsEl);
 	}
 
 	protected void exportPortletPreference(

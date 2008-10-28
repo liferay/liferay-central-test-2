@@ -29,7 +29,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Resource;
@@ -159,7 +158,7 @@ public class LayoutCache {
 		return roles;
 	}
 
-	protected List<Role> getGroupRoles_5(long groupId)
+	protected List<Role> getGroupRoles_5(long groupId, String resourceName)
 		throws PortalException, SystemException {
 
 		List<Role> roles = groupRolesMap.get(groupId);
@@ -167,7 +166,7 @@ public class LayoutCache {
 		if (roles == null) {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			roles = ResourceActionsUtil.getRoles(group, Layout.class.getName());
+			roles = ResourceActionsUtil.getRoles(group, resourceName);
 
 			groupRolesMap.put(groupId, roles);
 		}

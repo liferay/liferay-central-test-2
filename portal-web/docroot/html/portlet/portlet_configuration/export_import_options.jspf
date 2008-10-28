@@ -256,16 +256,27 @@
 			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>"><liferay-ui:message key="permissions" /></label> <liferay-ui:icon-help message="export-import-portlet-permissions-help" />
 
 			<ul id="<portlet:namespace />permissionsUl">
-				<li class="tree-item">
-					<input checked class="disabled" disabled="disabled" type="checkbox" />
+				<c:choose>
+					<c:when test="<%= PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5 %>">
+						<li class="tree-item">
+							<input checked class="disabled" disabled="disabled" type="checkbox" />
 
-					<label><liferay-ui:message key="permissions-assigned-to-organizations-user-groups-roles-and-communities" /></label>
-				</li>
-				<li class="tree-item">
-					<input disabled="disabled" id="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
+							<label><liferay-ui:message key="permissions-assigned-to-roles" /></label>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="tree-item">
+							<input checked class="disabled" disabled="disabled" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>"><liferay-ui:message key="permissions-assigned-to-users" /></label> <liferay-ui:icon-help message="export-import-permissions-assigned-to-users-help" />
-				</li>
+							<label><liferay-ui:message key="permissions-assigned-to-organizations-user-groups-roles-and-communities" /></label>
+						</li>
+						<li class="tree-item">
+							<input disabled="disabled" id="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>"><liferay-ui:message key="permissions-assigned-to-users" /></label> <liferay-ui:icon-help message="export-import-permissions-assigned-to-users-help" />
+						</li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</li>
 	</c:if>
