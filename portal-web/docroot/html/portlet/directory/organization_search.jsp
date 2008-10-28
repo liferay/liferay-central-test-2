@@ -129,38 +129,42 @@ if (displayTerms.getParentOrganizationId() > 0) {
 </c:if>
 
 <script type="text/javascript">
-	new Liferay.DynamicSelect(
-		[
-			{
-				select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
-				selectId: 'countryId',
-				selectDesc: 'name',
-				selectVal: '<%= displayTerms.getCountryId() %>',
-				selectData: function(callback) {
-					Liferay.Service.Portal.Country.getCountries(
-						{
-							active: true
-						},
-						callback
-					);
-				}
-			},
-			{
-				select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
-				selectId: 'regionId',
-				selectDesc: 'name',
-				selectVal: '<%= displayTerms.getRegionId() %>',
-				selectData: function(callback, selectKey) {
-					Liferay.Service.Portal.Region.getRegions(
-						{
-							countryId: selectKey,
-							active: true
-						},
-						callback
-					);
-				}
-			}
-		]
+	jQuery(
+		function () {
+			new Liferay.DynamicSelect(
+				[
+					{
+						select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
+						selectId: 'countryId',
+						selectDesc: 'name',
+						selectVal: '<%= displayTerms.getCountryId() %>',
+						selectData: function(callback) {
+							Liferay.Service.Portal.Country.getCountries(
+								{
+									active: true
+								},
+								callback
+							);
+						}
+					},
+					{
+						select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
+						selectId: 'regionId',
+						selectDesc: 'name',
+						selectVal: '<%= displayTerms.getRegionId() %>',
+						selectData: function(callback, selectKey) {
+							Liferay.Service.Portal.Region.getRegions(
+								{
+									countryId: selectKey,
+									active: true
+								},
+								callback
+							);
+						}
+					}
+				]
+			);
+		}
 	);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

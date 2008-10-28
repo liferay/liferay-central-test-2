@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String className = (String)request.getAttribute("common.className");
-long classPK = (Long)request.getAttribute("common.classPK");
+String className = (String)request.getAttribute("websites.className");
+long classPK = (Long)request.getAttribute("websites.classPK");
 
 List<Website> websites = Collections.EMPTY_LIST;
 
@@ -51,8 +51,6 @@ if (websites.isEmpty()) {
 <fieldset class="block-labels">
 
 	<%
-	String fieldParam = null;
-
 	for (int i = 0; i < websites.size(); i++){
 		Website website = websites.get(i);
 	%>
@@ -61,7 +59,7 @@ if (websites.isEmpty()) {
 			<div class="row-fields">
 
 				<%
-				fieldParam = "websiteId" + i;
+				String fieldParam = "websiteId" + i;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
@@ -123,11 +121,11 @@ if (websites.isEmpty()) {
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.autoFields(
+			new Liferay.AutoFields(
 				{
 					container: '#websites > fieldset',
 					baseRows: '#websites > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />websiteIndexes'
+					fieldIndexes: '<portlet:namespace />websitesIndexes'
 				}
 			);
 		}

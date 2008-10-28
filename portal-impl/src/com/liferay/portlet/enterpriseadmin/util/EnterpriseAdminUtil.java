@@ -81,26 +81,26 @@ public class EnterpriseAdminUtil {
 	public static List<Address> getAddresses(ActionRequest actionRequest) {
 		List<Address> addresses = new ArrayList<Address>();
 
-		int[] addressIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "addressIndexes"), 0);
+		int[] addressesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addressesIndexes"), 0);
 
 		int addressPrimary = ParamUtil.getInteger(
 			actionRequest, "addressPrimary");
 
-		for (int addressIndex : addressIndexes) {
+		for (int addressesIndex : addressesIndexes) {
 			long addressId = ParamUtil.getLong(
-				actionRequest, "addressId" + addressIndex);
+				actionRequest, "addressId" + addressesIndex);
 
 			String street1 = ParamUtil.getString(
-				actionRequest, "addressStreet1" + addressIndex);
+				actionRequest, "addressStreet1" + addressesIndex);
 			String street2 = ParamUtil.getString(
-				actionRequest, "addressStreet2" + addressIndex);
+				actionRequest, "addressStreet2" + addressesIndex);
 			String street3 = ParamUtil.getString(
-				actionRequest, "addressStreet3" + addressIndex);
+				actionRequest, "addressStreet3" + addressesIndex);
 			String city = ParamUtil.getString(
-				actionRequest, "addressCity" + addressIndex);
+				actionRequest, "addressCity" + addressesIndex);
 			String zip = ParamUtil.getString(
-				actionRequest, "addressZip" + addressIndex);
+				actionRequest, "addressZip" + addressesIndex);
 
 			if (Validator.isNull(street1) && Validator.isNull(street2) &&
 				Validator.isNull(street3) && Validator.isNull(city) &&
@@ -110,17 +110,17 @@ public class EnterpriseAdminUtil {
 			}
 
 			long regionId = ParamUtil.getLong(
-				actionRequest, "addressRegionId" + addressIndex);
+				actionRequest, "addressRegionId" + addressesIndex);
 			long countryId = ParamUtil.getLong(
-				actionRequest, "addressCountryId" + addressIndex);
+				actionRequest, "addressCountryId" + addressesIndex);
 			int typeId = ParamUtil.getInteger(
-				actionRequest, "addressTypeId" + addressIndex);
+				actionRequest, "addressTypeId" + addressesIndex);
 			boolean mailing = ParamUtil.getBoolean(
-				actionRequest, "addressMailing" + addressIndex);
+				actionRequest, "addressMailing" + addressesIndex);
 
 			boolean primary = false;
 
-			if (addressIndex == addressPrimary){
+			if (addressesIndex == addressPrimary){
 				primary = true;
 			}
 
@@ -149,29 +149,29 @@ public class EnterpriseAdminUtil {
 
 		List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
 
-		int[] emailAddressIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "emailAddressIndexes"), 0);
+		int[] emailAddressesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "emailAddressesIndexes"), 0);
 
 		int emailAddressPrimary = ParamUtil.getInteger(
 			actionRequest, "emailAddressPrimary");
 
-		for (int emailAddressIndex : emailAddressIndexes) {
+		for (int emailAddressesIndex : emailAddressesIndexes) {
 			long emailAddressId = ParamUtil.getLong(
-				actionRequest, "emailAddressId" + emailAddressIndex);
+				actionRequest, "emailAddressId" + emailAddressesIndex);
 
 			String address = ParamUtil.getString(
-				actionRequest, "emailAddressAddress" + emailAddressIndex);
+				actionRequest, "emailAddressAddress" + emailAddressesIndex);
 
 			if (Validator.isNull(address)){
 				continue;
 			}
 
 			int typeId = ParamUtil.getInteger(
-				actionRequest, "emailAddressTypeId" + emailAddressIndex);
+				actionRequest, "emailAddressTypeId" + emailAddressesIndex);
 
 			boolean primary = false;
 
-			if (emailAddressIndex == emailAddressPrimary){
+			if (emailAddressesIndex == emailAddressPrimary){
 				primary = true;
 			}
 
@@ -249,88 +249,75 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
-			List<OrgLabor> orgLabors = new ArrayList<OrgLabor>();
+		List<OrgLabor> orgLabors = new ArrayList<OrgLabor>();
 
-			int[] orgLaborIndexes = StringUtil.split(
-				ParamUtil.getString(actionRequest, "orgLaborIndexes"), 0);
+		int[] orgLaborsIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "orgLaborsIndexes"), 0);
 
-			for (int index : orgLaborIndexes) {
-				long orgLaborId = ParamUtil.getLong(
-					actionRequest, "orgLaborId" + index);
+		for (int orgLaborsIndex : orgLaborsIndexes) {
+			long orgLaborId = ParamUtil.getLong(
+				actionRequest, "orgLaborId" + orgLaborsIndex);
 
-				int typeId = ParamUtil.getInteger(
-					actionRequest, "orgLaborTypeId" + index, -1);
+			int typeId = ParamUtil.getInteger(
+				actionRequest, "orgLaborTypeId" + orgLaborsIndex, -1);
 
-				if (typeId == -1){
-					continue;
-				}
-
-				int sunOpen = ParamUtil.getInteger(
-					actionRequest, "sunOpen" + index, -1);
-				int sunClose = ParamUtil.getInteger(
-					actionRequest, "sunClose" + index, -1);
-
-				int monOpen = ParamUtil.getInteger(
-					actionRequest, "monOpen" + index, -1);
-				int monClose = ParamUtil.getInteger(
-					actionRequest, "monClose" + index, -1);
-
-				int tueOpen = ParamUtil.getInteger(
-					actionRequest, "tueOpen" + index, -1);
-				int tueClose = ParamUtil.getInteger(
-					actionRequest, "tueClose" + index, -1);
-
-				int wedOpen = ParamUtil.getInteger(
-					actionRequest, "wedOpen" + index, -1);
-				int wedClose = ParamUtil.getInteger(
-					actionRequest, "wedClose" + index, -1);
-
-				int thuOpen = ParamUtil.getInteger(
-					actionRequest, "thuOpen" + index, -1);
-				int thuClose = ParamUtil.getInteger(
-					actionRequest, "thuClose" + index, -1);
-
-				int friOpen = ParamUtil.getInteger(
-					actionRequest, "friOpen" + index, -1);
-				int friClose = ParamUtil.getInteger(
-					actionRequest, "friClose" + index, -1);
-
-				int satOpen = ParamUtil.getInteger(
-					actionRequest, "satOpen" + index, -1);
-				int satClose = ParamUtil.getInteger(
-					actionRequest, "satClose" + index, -1);
-
-				OrgLabor orgLabor = new OrgLaborImpl();
-
-				orgLabor.setOrgLaborId(orgLaborId);
-				orgLabor.setTypeId(typeId);
-
-				orgLabor.setSunOpen(sunOpen);
-				orgLabor.setSunClose(sunClose);
-
-				orgLabor.setMonOpen(monOpen);
-				orgLabor.setMonClose(monClose);
-
-				orgLabor.setTueOpen(tueOpen);
-				orgLabor.setTueClose(tueClose);
-
-				orgLabor.setWedOpen(wedOpen);
-				orgLabor.setWedClose(wedClose);
-
-				orgLabor.setThuOpen(thuOpen);
-				orgLabor.setThuClose(thuClose);
-
-				orgLabor.setFriOpen(friOpen);
-				orgLabor.setFriClose(friClose);
-
-				orgLabor.setSatOpen(satOpen);
-				orgLabor.setSatClose(satClose);
-
-				orgLabors.add(orgLabor);
+			if (typeId == -1){
+				continue;
 			}
 
-			return orgLabors;
+			int sunOpen = ParamUtil.getInteger(
+				actionRequest, "sunOpen" + orgLaborsIndex, -1);
+			int sunClose = ParamUtil.getInteger(
+				actionRequest, "sunClose" + orgLaborsIndex, -1);
+			int monOpen = ParamUtil.getInteger(
+				actionRequest, "monOpen" + orgLaborsIndex, -1);
+			int monClose = ParamUtil.getInteger(
+				actionRequest, "monClose" + orgLaborsIndex, -1);
+			int tueOpen = ParamUtil.getInteger(
+				actionRequest, "tueOpen" + orgLaborsIndex, -1);
+			int tueClose = ParamUtil.getInteger(
+				actionRequest, "tueClose" + orgLaborsIndex, -1);
+			int wedOpen = ParamUtil.getInteger(
+				actionRequest, "wedOpen" + orgLaborsIndex, -1);
+			int wedClose = ParamUtil.getInteger(
+				actionRequest, "wedClose" + orgLaborsIndex, -1);
+			int thuOpen = ParamUtil.getInteger(
+				actionRequest, "thuOpen" + orgLaborsIndex, -1);
+			int thuClose = ParamUtil.getInteger(
+				actionRequest, "thuClose" + orgLaborsIndex, -1);
+			int friOpen = ParamUtil.getInteger(
+				actionRequest, "friOpen" + orgLaborsIndex, -1);
+			int friClose = ParamUtil.getInteger(
+				actionRequest, "friClose" + orgLaborsIndex, -1);
+			int satOpen = ParamUtil.getInteger(
+				actionRequest, "satOpen" + orgLaborsIndex, -1);
+			int satClose = ParamUtil.getInteger(
+				actionRequest, "satClose" + orgLaborsIndex, -1);
+
+			OrgLabor orgLabor = new OrgLaborImpl();
+
+			orgLabor.setOrgLaborId(orgLaborId);
+			orgLabor.setTypeId(typeId);
+			orgLabor.setSunOpen(sunOpen);
+			orgLabor.setSunClose(sunClose);
+			orgLabor.setMonOpen(monOpen);
+			orgLabor.setMonClose(monClose);
+			orgLabor.setTueOpen(tueOpen);
+			orgLabor.setTueClose(tueClose);
+			orgLabor.setWedOpen(wedOpen);
+			orgLabor.setWedClose(wedClose);
+			orgLabor.setThuOpen(thuOpen);
+			orgLabor.setThuClose(thuClose);
+			orgLabor.setFriOpen(friOpen);
+			orgLabor.setFriClose(friClose);
+			orgLabor.setSatOpen(satOpen);
+			orgLabor.setSatClose(satClose);
+
+			orgLabors.add(orgLabor);
 		}
+
+		return orgLabors;
+	}
 
 	public static OrderByComparator getPasswordPolicyOrderByComparator(
 		String orderByCol, String orderByType) {
@@ -360,30 +347,30 @@ public class EnterpriseAdminUtil {
 	public static List<Phone> getPhones(ActionRequest actionRequest) {
 		List<Phone> phones = new ArrayList<Phone>();
 
-		int[] phoneIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "phoneIndexes"), 0);
+		int[] phonesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "phonesIndexes"), 0);
 
 		int phonePrimary = ParamUtil.getInteger(actionRequest, "phonePrimary");
 
-		for (int phoneIndex : phoneIndexes) {
+		for (int phonesIndex : phonesIndexes) {
 			long phoneId = ParamUtil.getLong(
-				actionRequest, "phoneId" + phoneIndex);
+				actionRequest, "phoneId" + phonesIndex);
 
 			String number = ParamUtil.getString(
-				actionRequest, "phoneNumber" + phoneIndex);
+				actionRequest, "phoneNumber" + phonesIndex);
 			String extension = ParamUtil.getString(
-				actionRequest, "phoneExtension" + phoneIndex);
+				actionRequest, "phoneExtension" + phonesIndex);
 
 			if (Validator.isNull(number) && Validator.isNull(extension)){
 				continue;
 			}
 
 			int typeId = ParamUtil.getInteger(
-				actionRequest, "phoneTypeId" + phoneIndex);
+				actionRequest, "phoneTypeId" + phonesIndex);
 
 			boolean primary = false;
 
-			if (phoneIndex == phonePrimary){
+			if (phonesIndex == phonePrimary){
 				primary = true;
 			}
 
@@ -488,29 +475,29 @@ public class EnterpriseAdminUtil {
 	public static List<Website> getWebsites(ActionRequest actionRequest) {
 		List<Website> websites = new ArrayList<Website>();
 
-		int[] websiteIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "websiteIndexes"), 0);
+		int[] websitesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "websitesIndexes"), 0);
 
 		int websitePrimary = ParamUtil.getInteger(
 			actionRequest, "websitePrimary");
 
-		for (int websiteIndex : websiteIndexes) {
+		for (int websitesIndex : websitesIndexes) {
 			long websiteId = ParamUtil.getLong(
-				actionRequest, "websiteId" + websiteIndex);
+				actionRequest, "websiteId" + websitesIndex);
 
 			String url = ParamUtil.getString(
-				actionRequest, "websiteUrl" + websiteIndex);
+				actionRequest, "websiteUrl" + websitesIndex);
 
 			if (Validator.isNull(url)){
 				continue;
 			}
 
 			int typeId = ParamUtil.getInteger(
-				actionRequest, "websiteTypeId" + websiteIndex);
+				actionRequest, "websiteTypeId" + websitesIndex);
 
 			boolean primary = false;
 
-			if (websiteIndex == websitePrimary){
+			if (websitesIndex == websitePrimary){
 				primary = true;
 			}
 
@@ -610,51 +597,43 @@ public class EnterpriseAdminUtil {
 		}
 	}
 
-	public static void updateOrgLabors(
-			long classPK, List<OrgLabor> orgLabors)
+	public static void updateOrgLabors(long classPK, List<OrgLabor> orgLabors)
 		throws PortalException, SystemException {
 
 		Set<Long> orgLaborsIds = new HashSet<Long>();
 
 		for (OrgLabor orgLabor : orgLabors) {
-
 			long orgLaborId = orgLabor.getOrgLaborId();
-			int typeId = orgLabor.getTypeId();
 
+			int typeId = orgLabor.getTypeId();
 			int sunOpen = orgLabor.getSunOpen();
 			int sunClose = orgLabor.getSunClose();
-
 			int monOpen = orgLabor.getMonOpen();
 			int monClose = orgLabor.getMonClose();
-
 			int tueOpen = orgLabor.getTueOpen();
 			int tueClose = orgLabor.getTueClose();
-
 			int wedOpen = orgLabor.getWedOpen();
 			int wedClose = orgLabor.getWedClose();
-
 			int thuOpen = orgLabor.getThuOpen();
 			int thuClose = orgLabor.getThuClose();
-
 			int friOpen = orgLabor.getFriOpen();
 			int friClose = orgLabor.getFriClose();
-
 			int satOpen = orgLabor.getSatOpen();
 			int satClose = orgLabor.getSatClose();
 
 			if (orgLaborId <= 0) {
 				orgLabor = OrgLaborServiceUtil.addOrgLabor(
-				classPK, typeId, sunOpen, sunClose, monOpen, monClose,
-				tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
-				friOpen, friClose, satOpen, satClose);
+					classPK, typeId, sunOpen, sunClose, monOpen, monClose,
+					tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
+					friOpen, friClose, satOpen, satClose);
 
 				orgLaborId = orgLabor.getOrgLaborId();
 			}
 			else {
 				OrgLaborServiceUtil.updateOrgLabor(
-				orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
-				tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
-				friOpen, friClose, satOpen, satClose);
+					orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
+					tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
+					friOpen, friClose, satOpen, satClose);
 			}
 
 			orgLaborsIds.add(orgLaborId);

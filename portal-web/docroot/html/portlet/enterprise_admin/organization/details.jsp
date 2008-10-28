@@ -252,6 +252,44 @@ if (parentOrganization != null) {
 <input onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
 
 <script type="text/javascript">
+	jQuery(
+		function () {
+			new Liferay.DynamicSelect(
+				[
+					{
+						select: "<portlet:namespace />countryId",
+						selectId: "countryId",
+						selectDesc: "name",
+						selectVal: "<%= countryId %>",
+						selectData: function(callback) {
+							Liferay.Service.Portal.Country.getCountries(
+								{
+									active: true
+								},
+								callback
+							);
+						}
+					},
+					{
+						select: "<portlet:namespace />regionId",
+						selectId: "regionId",
+						selectDesc: "name",
+						selectVal: "<%= regionId %>",
+						selectData: function(callback, selectKey) {
+							Liferay.Service.Portal.Region.getRegions(
+								{
+									countryId: selectKey,
+									active: true
+								},
+								callback
+							);
+						}
+					}
+				]
+			);
+		}
+	);
+
 	<c:if test="<%= organization == null %>">
 		jQuery('#<portlet:namespace />type').change(
 			function(event) {
@@ -271,38 +309,4 @@ if (parentOrganization != null) {
 			}
 		);
 	</c:if>
-
-	new Liferay.DynamicSelect(
-		[
-			{
-				select: "<portlet:namespace />countryId",
-				selectId: "countryId",
-				selectDesc: "name",
-				selectVal: "<%= countryId %>",
-				selectData: function(callback) {
-					Liferay.Service.Portal.Country.getCountries(
-						{
-							active: true
-						},
-						callback
-					);
-				}
-			},
-			{
-				select: "<portlet:namespace />regionId",
-				selectId: "regionId",
-				selectDesc: "name",
-				selectVal: "<%= regionId %>",
-				selectData: function(callback, selectKey) {
-					Liferay.Service.Portal.Region.getRegions(
-						{
-							countryId: selectKey,
-							active: true
-						},
-						callback
-					);
-				}
-			}
-		]
-	);
 </script>

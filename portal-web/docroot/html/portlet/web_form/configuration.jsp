@@ -399,7 +399,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			);
 
 			<c:if test="<%= !fieldsEditingDisabled %>">
-				new Liferay.autoFields(
+				new Liferay.AutoFields(
 					{
 						container: '#<portlet:namespace />webFields',
 						baseRows: '#<portlet:namespace />webFields > fieldset',

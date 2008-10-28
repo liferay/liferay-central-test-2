@@ -24,56 +24,55 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-
 <%
-String className = (String)request.getAttribute("common.className");
-long classPK = (Long)request.getAttribute("common.classPK");
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+
+long organizationId = (organization != null) ? organization.getOrganizationId() : 0;
 
 List<OrgLabor> orgLabors = Collections.EMPTY_LIST;
 
-if (classPK > 0) {
-	orgLabors = OrgLaborServiceUtil.getOrgLabors(classPK);
+if (organizationId > 0) {
+	orgLabors = OrgLaborServiceUtil.getOrgLabors(organizationId);
 }
 
 if (orgLabors.isEmpty()) {
 	orgLabors = new ArrayList<OrgLabor>();
-	OrgLabor empty = new OrgLaborImpl();
-	empty.setSunOpen(-1);
-	empty.setSunClose(-1);
-	empty.setMonOpen(-1);
-	empty.setMonClose(-1);
-	empty.setTueOpen(-1);
-	empty.setTueClose(-1);
-	empty.setWedOpen(-1);
-	empty.setWedClose(-1);
-	empty.setThuOpen(-1);
-	empty.setThuClose(-1);
-	empty.setFriOpen(-1);
-	empty.setFriClose(-1);
-	empty.setSatOpen(-1);
-	empty.setSatClose(-1);
 
-	orgLabors.add(empty);
+	OrgLabor orgLabor = new OrgLaborImpl();
+
+	orgLabor.setSunOpen(-1);
+	orgLabor.setSunClose(-1);
+	orgLabor.setMonOpen(-1);
+	orgLabor.setMonClose(-1);
+	orgLabor.setTueOpen(-1);
+	orgLabor.setTueClose(-1);
+	orgLabor.setWedOpen(-1);
+	orgLabor.setWedClose(-1);
+	orgLabor.setThuOpen(-1);
+	orgLabor.setThuClose(-1);
+	orgLabor.setFriOpen(-1);
+	orgLabor.setFriClose(-1);
+	orgLabor.setSatOpen(-1);
+	orgLabor.setSatClose(-1);
+
+	orgLabors.add(orgLabor);
 }
 
 DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
-
-String[] days = CalendarUtil.getDays(locale);
-Calendar cal = CalendarFactoryUtil.getCalendar();
-
-String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 %>
 
 <liferay-ui:error-marker key="errorSection" value="services" />
 
 <h3><liferay-ui:message key="services" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
 
 <fieldset class="block-labels">
 
 	<%
-	String fieldParam = null;
+	Calendar cal = CalendarFactoryUtil.getCalendar();
+	String[] days = CalendarUtil.getDays(locale);
+	String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 
 	for (int i = 0; i < orgLabors.size(); i++){
 		OrgLabor orgLabor = orgLabors.get(i);
@@ -95,7 +94,7 @@ String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 			<div class="row-fields">
 
 				<%
-				fieldParam = "orgLaborId" + i;
+				String fieldParam = "orgLaborId" + i;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
@@ -126,111 +125,111 @@ String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 				</div>
 
 				<table class="org-labor-table">
-					<tr>
-						<td>&nbsp;</td>
+				<tr>
+					<td></td>
 
-						<%
-						int today = 0;
-						String curParam = null;
-						int curOpen = 0;
-						int curClose = 0;
+					<%
+					for (String day : days) {
+					%>
 
-						for (String day : days) {
-						%>
+						<th>
+							<label><%= day %></label>
+						</th>
 
-							<th><label><%= day %></label></th>
+					<%
+					}
+					%>
 
-						<%
-						}
-						%>
+				</tr>
+				<tr>
+					<td>
+						<label><liferay-ui:message key="open" /></label>
+					</td>
 
-					</tr>
-					<tr>
-						<td><label><liferay-ui:message key="open" /></label></td>
+					<%
+					for (int j = 0; j < days.length; j++) {
+						String curParam = paramPrefixes[j];
+						int curOpen = openArray[j];
+					%>
 
-						<%
-						for (int j = 0; j < days.length; j++) {
-							curOpen = openArray[j];
-							curParam = paramPrefixes[j];
-						%>
+						<td>
+							<select name="<portlet:namespace /><%= curParam %>Open<%= i %>">
+								<option value="-1"></option>
 
-							<td>
-								<select name="<portlet:namespace /><%= curParam %>Open<%= i %>">
-									<option value="-1">&nbsp;</option>
+								<%
+								cal.set(Calendar.HOUR_OF_DAY, 0);
+								cal.set(Calendar.MINUTE, 0);
+								cal.set(Calendar.SECOND, 0);
+								cal.set(Calendar.MILLISECOND, 0);
 
-									<%
-									cal.set(Calendar.HOUR_OF_DAY, 0);
-									cal.set(Calendar.MINUTE, 0);
-									cal.set(Calendar.SECOND, 0);
-									cal.set(Calendar.MILLISECOND, 0);
+								int today = cal.get(Calendar.DATE);
 
-									today = cal.get(Calendar.DATE);
+								while (cal.get(Calendar.DATE) == today) {
+									String timeOfDayDisplay = timeFormat.format(cal.getTime());
+									int timeOfDayValue = GetterUtil.getInteger(StringUtil.replace(timeOfDayDisplay, StringPool.COLON, StringPool.BLANK));
 
-									while (cal.get(Calendar.DATE) == today) {
-										String timeOfDayDisplay = timeFormat.format(cal.getTime());
-										int timeOfDayValue = GetterUtil.getInteger(StringUtil.replace(timeOfDayDisplay, StringPool.COLON, StringPool.BLANK));
+									cal.add(Calendar.MINUTE, 30);
+								%>
 
-										cal.add(Calendar.MINUTE, 30);
-									%>
+									<option <%= (curOpen == timeOfDayValue) ? "selected" : "" %> value="<%= timeOfDayValue %>"><%= timeOfDayDisplay %></option>
 
-										<option <%= curOpen == timeOfDayValue ? "selected" : "" %> value="<%= timeOfDayValue %>"><%= timeOfDayDisplay %></option>
+								<%
+								}
+								%>
 
-									<%
-									}
-									%>
+							</select>
+						</td>
 
-								</select>
-							</td>
+					<%
+					}
+					%>
 
-						<%
-						}
-						%>
+				</tr>
+				<tr>
+					<td>
+						<label><liferay-ui:message key="close" /></label>
+					</td>
 
-					</tr>
-					<tr>
-						<td><label><liferay-ui:message key="close" /></label></td>
+					<%
+					for (int j = 0; j < days.length; j++) {
+						String curParam = paramPrefixes[j];
+						int curClose = closeArray[j];
+					%>
 
-						<%
-						for (int j = 0; j < days.length; j++) {
-							curClose = closeArray[j];
-							curParam = paramPrefixes[j];
-						%>
+						<td>
+							<select name="<portlet:namespace /><%= curParam %>Close<%= i %>">
+								<option value="-1"></option>
 
-							<td>
-								<select name="<portlet:namespace /><%= curParam %>Close<%= i %>">
-										<option value="-1"></option>
+								<%
+								cal.set(Calendar.HOUR_OF_DAY, 0);
+								cal.set(Calendar.MINUTE, 0);
+								cal.set(Calendar.SECOND, 0);
+								cal.set(Calendar.MILLISECOND, 0);
 
-										<%
-										cal.set(Calendar.HOUR_OF_DAY, 0);
-										cal.set(Calendar.MINUTE, 0);
-										cal.set(Calendar.SECOND, 0);
-										cal.set(Calendar.MILLISECOND, 0);
+								int today = cal.get(Calendar.DATE);
 
-										today = cal.get(Calendar.DATE);
+								while (cal.get(Calendar.DATE) == today) {
+									String timeOfDayDisplay = timeFormat.format(cal.getTime());
+									int timeOfDayValue = GetterUtil.getInteger(StringUtil.replace(timeOfDayDisplay, StringPool.COLON, StringPool.BLANK));
 
-										while (cal.get(Calendar.DATE) == today) {
-											String timeOfDayDisplay = timeFormat.format(cal.getTime());
-											int timeOfDayValue = GetterUtil.getInteger(StringUtil.replace(timeOfDayDisplay, StringPool.COLON, StringPool.BLANK));
+									cal.add(Calendar.MINUTE, 30);
+								%>
 
-											cal.add(Calendar.MINUTE, 30);
-										%>
+									<option <%= (curClose == timeOfDayValue) ? "selected" : "" %> value="<%= timeOfDayValue %>"><%= timeOfDayDisplay %></option>
 
-											<option <%= curClose == timeOfDayValue ? "selected" : "" %> value="<%= timeOfDayValue %>"><%= timeOfDayDisplay %></option>
+								<%
+								}
+								%>
 
-										<%
-										}
-										%>
+							</select>
+						</td>
 
-								</select>
-							</td>
+					<%
+					}
+					%>
 
-						<%
-						}
-						%>
-
-					</tr>
+				</tr>
 				</table>
-
 			</div>
 		</div>
 
@@ -243,11 +242,11 @@ String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.autoFields(
+			new Liferay.AutoFields(
 				{
 					container: '#services > fieldset',
 					baseRows: '#services > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />orgLaborIndexes'
+					fieldIndexes: '<portlet:namespace />orgLaborsIndexes'
 				}
 			);
 		}

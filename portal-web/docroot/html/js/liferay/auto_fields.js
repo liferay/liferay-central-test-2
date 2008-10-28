@@ -1,4 +1,4 @@
-Liferay.autoFields = new Class({
+Liferay.AutoFields = new Class({
 
 	/**
 	 * OPTIONS

@@ -66,7 +66,7 @@
 	margin: 0 auto;
 }
 
-.portlet-enterprise-admin .ctrl-holder.primary-ctrl, .portlet-enterprise-admin .ctrl-holder.action-ctrl, .portlet-enterprise-admin .ctrl-holder.mailing-ctrl {
+.portlet-enterprise-admin .ctrl-holder.action-ctrl, .portlet-enterprise-admin .ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .ctrl-holder.primary-ctrl {
 	margin: 1.8em 0;
 }
 

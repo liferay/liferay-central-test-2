@@ -25,19 +25,19 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String className = (String)request.getAttribute("common.className");
-long classPK = (Long)request.getAttribute("common.classPK");
+String className = (String)request.getAttribute("phones.className");
+long classPK = (Long)request.getAttribute("phones.classPK");
 
-List<Phone> phoneNumbers = Collections.EMPTY_LIST;
+List<Phone> phones = Collections.EMPTY_LIST;
 
 if (classPK > 0) {
-	phoneNumbers = PhoneServiceUtil.getPhones(className, classPK);
+	phones = PhoneServiceUtil.getPhones(className, classPK);
 }
 
-if (phoneNumbers.isEmpty()) {
-	phoneNumbers = new ArrayList<Phone>();
+if (phones.isEmpty()) {
+	phones = new ArrayList<Phone>();
 
-	phoneNumbers.add(new PhoneImpl());
+	phones.add(new PhoneImpl());
 }
 %>
 
@@ -51,17 +51,15 @@ if (phoneNumbers.isEmpty()) {
 <fieldset class="block-labels">
 
    <%
-	String fieldParam = null;
-
-	for (int i = 0; i < phoneNumbers.size(); i++) {
-		Phone phone = phoneNumbers.get(i);
+	for (int i = 0; i < phones.size(); i++) {
+		Phone phone = phones.get(i);
 	%>
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
 				<%
-				fieldParam = "phoneId" + i;
+				String fieldParam = "phoneId" + i;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
@@ -70,8 +68,8 @@ if (phoneNumbers.isEmpty()) {
 				fieldParam = "phoneNumber" + i;
 				%>
 
-				<div class="ctrl-holder ">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="phone-number" /></label>
+				<div class="ctrl-holder">
+					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="number" /></label>
 
 					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="number" fieldParam="<%= fieldParam %>" />
 				</div>
@@ -80,7 +78,7 @@ if (phoneNumbers.isEmpty()) {
 				fieldParam = "phoneExtension" + i;
 				%>
 
-				<div class="ctrl-holder ">
+				<div class="ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="extension" /></label>
 
 					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="extension" fieldParam="<%= fieldParam %>" />
@@ -90,7 +88,7 @@ if (phoneNumbers.isEmpty()) {
 				fieldParam = "phoneTypeId" + i;
 				%>
 
-				<div class="ctrl-holder ">
+				<div class="ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
 					<select name="<portlet:namespace /><%= fieldParam %>">
@@ -101,7 +99,7 @@ if (phoneNumbers.isEmpty()) {
 						for (ListType suffix : phoneTypes) {
 						%>
 
-							<option <%= suffix.getListTypeId() == phone.getTypeId() ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
+							<option <%= (suffix.getListTypeId() == phone.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 						<%
 						}
@@ -121,7 +119,7 @@ if (phoneNumbers.isEmpty()) {
 						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phoneNumberPrimary" type="radio" value="<%= i %>" />
 					</label>
 				</div>
-			 </div>
+			</div>
 		</div>
 
 	<%
@@ -133,11 +131,11 @@ if (phoneNumbers.isEmpty()) {
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.autoFields(
+			new Liferay.AutoFields(
 				{
 					container: '#phoneNumbers > fieldset',
 					baseRows: '#phoneNumbers > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />phoneIndexes'
+					fieldIndexes: '<portlet:namespace />phonesIndexes'
 				}
 			);
 		}

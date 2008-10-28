@@ -76,8 +76,14 @@ String curSection = mainSections[0];
 		<td>
 
 			<%
-			request.setAttribute("common.className", Organization.class.getName());
-			request.setAttribute("common.classPK", organizationId);
+			request.setAttribute("addresses.className", Organization.class.getName());
+			request.setAttribute("addresses.classPK", organizationId);
+			request.setAttribute("emailAddresses.className", Organization.class.getName());
+			request.setAttribute("emailAddresses.classPK", organizationId);
+			request.setAttribute("phones.className", Organization.class.getName());
+			request.setAttribute("phones.classPK", organizationId);
+			request.setAttribute("websites.className", Organization.class.getName());
+			request.setAttribute("websites.classPK", organizationId);
 
 			for (String section : allSections) {
 				String sectionId = _getSectionId(section);

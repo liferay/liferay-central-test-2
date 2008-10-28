@@ -24,10 +24,9 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-
 <%
-String className = (String)request.getAttribute("common.className");
-long classPK = (Long)request.getAttribute("common.classPK");
+String className = (String)request.getAttribute("emailAddresses.className");
+long classPK = (Long)request.getAttribute("emailAddresses.classPK");
 
 List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
 
@@ -49,11 +48,9 @@ if (emailAddresses.isEmpty()) {
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.EMAIL_ADDRESS %>" message="please-select-a-type" />
 
-<fieldset class="block-labels"  >
+<fieldset class="block-labels">
 
 	<%
-	String fieldParam = null;
-
 	for (int i = 0; i < emailAddresses.size(); i++) {
 		EmailAddress emailAddress = emailAddresses.get(i);
 	%>
@@ -62,7 +59,7 @@ if (emailAddresses.isEmpty()) {
 			<div class="row-fields">
 
 				<%
-				fieldParam = "emailAddressId" + i;
+				String fieldParam = "emailAddressId" + i;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
@@ -84,7 +81,7 @@ if (emailAddresses.isEmpty()) {
 				<div class="ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
-					<select name="<portlet:namespace /><%= fieldParam %>" id="<portlet:namespace /><%= fieldParam %>">
+					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
 
 						<%
 						List<ListType> emailAddressTypes = ListTypeServiceUtil.getListTypes(Contact.class.getName() + ListTypeImpl.EMAIL_ADDRESS);
@@ -92,7 +89,7 @@ if (emailAddresses.isEmpty()) {
 						for (ListType suffix : emailAddressTypes) {
 						%>
 
-							<option <%= suffix.getListTypeId() == emailAddress.getTypeId() ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
+							<option <%= (suffix.getListTypeId() == emailAddress.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 						<%
 						}
@@ -124,11 +121,11 @@ if (emailAddresses.isEmpty()) {
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.autoFields(
+			new Liferay.AutoFields(
 				{
 					container: '#additionalEmailAddresses > fieldset',
 					baseRows: '#additionalEmailAddresses > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />emailAddressIndexes'
+					fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
 				}
 			);
 		}

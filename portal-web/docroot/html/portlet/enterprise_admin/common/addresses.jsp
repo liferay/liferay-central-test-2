@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String className = (String)request.getAttribute("common.className");
-long classPK = (Long)request.getAttribute("common.classPK");
+String className = (String)request.getAttribute("addresses.className");
+long classPK = (Long)request.getAttribute("addresses.classPK");
 
 List<Address> addresses = Collections.EMPTY_LIST;
 
@@ -52,11 +52,9 @@ if (addresses.isEmpty()) {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.ADDRESS %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 
-<fieldset class="block-labels"  >
+<fieldset class="block-labels">
 
 	<%
-	String fieldParam = null;
-
 	for (int i = 0; i < addresses.size(); i++) {
 		Address address = addresses.get(i);
 	%>
@@ -66,7 +64,7 @@ if (addresses.isEmpty()) {
 				<div class="col">
 
 					<%
-					fieldParam = "addressId" + i;
+					String fieldParam = "addressId" + i;
 					%>
 
 					<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
@@ -139,7 +137,7 @@ if (addresses.isEmpty()) {
 						for (ListType suffix : addressTypes) {
 						%>
 
-							<option <%= suffix.getListTypeId() == address.getTypeId() ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
+							<option <%= (suffix.getListTypeId() == address.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
 
 						<%
 						}
@@ -188,7 +186,7 @@ if (addresses.isEmpty()) {
 						<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 							<liferay-ui:message key="mailing" />
 
-							<liferay-ui:input-field model="<%=Address.class %>" bean="<%= address %>" field="mailing" fieldParam="<%= fieldParam %>" />
+							<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="mailing" fieldParam="<%= fieldParam %>" />
 						</label>
 					</div>
 				</div>
@@ -196,38 +194,42 @@ if (addresses.isEmpty()) {
 		</div>
 
 		<script type="text/javascript">
-			new Liferay.DynamicSelect(
-				[
-					{
-						select: "<portlet:namespace />addressCountryId<%= i %>",
-						selectId: "countryId",
-						selectDesc: "name",
-						selectVal: "<%= address.getCountryId() %>",
-						selectData: function(callback) {
-							Liferay.Service.Portal.Country.getCountries(
-								{
-									active: true
-								},
-								callback
-							);
-						}
-					},
-					{
-						select: "<portlet:namespace />addressRegionId<%= i %>",
-						selectId: "regionId",
-						selectDesc: "name",
-						selectVal: "<%= address.getRegionId() %>",
-						selectData: function(callback, selectKey) {
-							Liferay.Service.Portal.Region.getRegions(
-								{
-									countryId: selectKey,
-									active: true
-								},
-								callback
-							);
-						}
-					}
-				]
+			jQuery(
+				function () {
+					new Liferay.DynamicSelect(
+						[
+							{
+								select: "<portlet:namespace />addressCountryId<%= i %>",
+								selectId: "countryId",
+								selectDesc: "name",
+								selectVal: "<%= address.getCountryId() %>",
+								selectData: function(callback) {
+									Liferay.Service.Portal.Country.getCountries(
+										{
+											active: true
+										},
+										callback
+									);
+								}
+							},
+							{
+								select: "<portlet:namespace />addressRegionId<%= i %>",
+								selectId: "regionId",
+								selectDesc: "name",
+								selectVal: "<%= address.getRegionId() %>",
+								selectData: function(callback, selectKey) {
+									Liferay.Service.Portal.Region.getRegions(
+										{
+											countryId: selectKey,
+											active: true
+										},
+										callback
+									);
+								}
+							}
+						]
+					);
+				}
 			);
 		</script>
 
@@ -240,11 +242,11 @@ if (addresses.isEmpty()) {
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.autoFields(
+			new Liferay.AutoFields(
 				{
 					container: '#addresses > fieldset',
 					baseRows: '#addresses > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />addressIndexes'
+					fieldIndexes: '<portlet:namespace />addressesIndexes'
 				}
 			);
 		}
