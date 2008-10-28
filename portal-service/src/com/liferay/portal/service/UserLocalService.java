@@ -363,7 +363,7 @@ public interface UserLocalService {
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		java.lang.String sortField, int sortType)
+		java.lang.String sortField, boolean reverse)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
@@ -371,7 +371,7 @@ public interface UserLocalService {
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
-		int start, int end, java.lang.String sortField, int sortType)
+		int start, int end, java.lang.String sortField, boolean reverse)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> search(

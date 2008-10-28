@@ -106,7 +106,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
-import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -138,7 +137,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Jorge Ferrer
  *
  */
@@ -1375,7 +1374,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public Hits search(
 			long companyId, String keywords, Boolean active,
 			LinkedHashMap<String, Object> params, int start, int end,
-			String sortField, int sortType)
+			String sortField, boolean reverse)
 		throws SystemException {
 
 		String firstName = null;
@@ -1399,7 +1398,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return search(
 			companyId, firstName, middleName, lastName, screenName,
 			emailAddresse, active, params, andOperator, start, end, sortField,
-			sortType);
+			reverse);
 	}
 
 	public Hits search(
@@ -1407,13 +1406,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap<String, Object> params,
 			boolean andSearch, int start, int end,
-			String sortField, int sortType)
+			String sortField, boolean reverse)
 		throws SystemException {
 
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, UserIndexer.PORTLET_ID);
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
@@ -1487,7 +1487,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			Sort sort = new Sort(sortField, sortType, true);
+			Sort sort = new Sort(sortField, Sort.STRING_TYPE, reverse);
 
 			return SearchEngineUtil.search(
 				companyId, fullQuery, sort, start, end);
