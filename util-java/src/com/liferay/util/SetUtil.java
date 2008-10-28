@@ -30,7 +30,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -65,6 +69,46 @@ public class SetUtil {
 
 		for (int i = 0; i < array.length; i++) {
 			set.add(array[i]);
+		}
+
+		return set;
+	}
+
+	public static Set fromCollection(Collection c) {
+		if ((c != null) && (c instanceof Set)) {
+			return (Set)c;
+		}
+
+		if ((c == null) || (c.size() == 0)) {
+			return new HashSet();
+		}
+
+		Set set = new HashSet(c.size());
+
+		Iterator itr = c.iterator();
+
+		while (itr.hasNext()) {
+			set.add(itr.next());
+		}
+
+		return set;
+	}
+
+	public static Set fromEnumeration(Enumeration enu) {
+		Set set = new HashSet();
+
+		while (enu.hasMoreElements()) {
+			set.add(enu.nextElement());
+		}
+
+		return set;
+	}
+
+	public static Set fromIterator(Iterator itr) {
+		Set set = new HashSet();
+
+		while (itr.hasNext()) {
+			set.add(itr.next());
 		}
 
 		return set;
