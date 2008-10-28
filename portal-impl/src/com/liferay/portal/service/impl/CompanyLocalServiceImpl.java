@@ -316,7 +316,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			long[] groupIds = new long[] {guestGroup.getGroupId()};
 
-			long[] organizationIds = null;
+			long[] organizationIds = new long[0];
 
 			Role adminRole = roleLocalService.getRole(
 				companyId, RoleConstants.ADMINISTRATOR);
@@ -328,7 +328,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				adminRole.getRoleId(), powerUserRole.getRoleId()
 			};
 
-			long[] userGroupIds = null;
+			long[] userGroupIds = new long[0];
 			boolean sendEmail = false;
 			ServiceContext serviceContext = null;
 
