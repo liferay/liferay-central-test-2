@@ -1030,7 +1030,8 @@ public class PortalImpl implements Portal {
 				(layout.getGroup().getClassPK() != themeDisplay.getUserId())) {
 
 				String virtualHost = themeDisplay.getCompany().getVirtualHost();
-				if (!virtualHost.equalsIgnoreCase(_LOCAL_HOST_NAME)) {
+
+				if (!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
 					portalURL = getPortalURL(
 						virtualHost, themeDisplay.getServerPort(),
 						themeDisplay.isSecure());
@@ -3135,7 +3136,7 @@ public class PortalImpl implements Portal {
 
 	private static final String _JSESSIONID = ";jsessionid=";
 
-	private static final String _LOCAL_HOST_NAME = "localhost";
+	private static final String _LOCALHOST = "localhost";
 
 	private static final String  _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
