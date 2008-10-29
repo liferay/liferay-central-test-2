@@ -37,7 +37,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,12 +61,6 @@ public class CounterPersistence extends BasePersistenceImpl {
 		return _COUNTER_INCREMENT;
 	}
 
-	public void afterPropertiesSet() throws SQLException {
-		_connection = getDataSource().getConnection();
-
-		_connection.setAutoCommit(true);
-	}
-
 	public void destroy() {
 		DataAccess.cleanUp(_connection);
 	}
@@ -76,7 +69,9 @@ public class CounterPersistence extends BasePersistenceImpl {
 		Session session = null;
 
 		try {
-			session = new SessionImpl(_sessionFactory.openSession(_connection));
+			Connection connection = getConnection();
+
+			session = new SessionImpl(_sessionFactory.openSession(connection));
 
 			List<String> list = new ArrayList<String>();
 
@@ -126,8 +121,10 @@ public class CounterPersistence extends BasePersistenceImpl {
 				Session session = null;
 
 				try {
+					Connection connection = getConnection();
+
 					session = new SessionImpl(
-						_sessionFactory.openSession(_connection));
+						_sessionFactory.openSession(connection));
 
 					Counter counter = (Counter)session.get(
 						Counter.class, register.getName());
@@ -174,8 +171,10 @@ public class CounterPersistence extends BasePersistenceImpl {
 			Session session = null;
 
 			try {
+				Connection connection = getConnection();
+
 				session = new SessionImpl(
-					_sessionFactory.openSession(_connection));
+					_sessionFactory.openSession(connection));
 
 				Counter counter = (Counter)session.load(Counter.class, oldName);
 
@@ -215,8 +214,10 @@ public class CounterPersistence extends BasePersistenceImpl {
 			Session session = null;
 
 			try {
+				Connection connection = getConnection();
+
 				session = new SessionImpl(
-					_sessionFactory.openSession(_connection));
+					_sessionFactory.openSession(connection));
 
 				Counter counter = (Counter)session.load(Counter.class, name);
 
@@ -237,7 +238,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 		}
 	}
 
-	public void reset(String name, long size) {
+	public void reset(String name, long size) throws SystemException {
 		CounterRegister register = createCounterRegister(name, size);
 
 		synchronized (register) {
@@ -249,7 +250,9 @@ public class CounterPersistence extends BasePersistenceImpl {
 		_sessionFactory = sessionFactory;
 	}
 
-	protected synchronized CounterRegister getCounterRegister(String name) {
+	protected synchronized CounterRegister getCounterRegister(String name)
+		throws SystemException {
+
 		CounterRegister register = _registerLookup.get(name);
 
 		if (register == null) {
@@ -261,12 +264,14 @@ public class CounterPersistence extends BasePersistenceImpl {
 		return register;
 	}
 
-	protected synchronized CounterRegister createCounterRegister(String name) {
+	protected synchronized CounterRegister createCounterRegister(String name)
+		throws SystemException{
+
 		return createCounterRegister(name, -1);
 	}
 
 	protected synchronized CounterRegister createCounterRegister(
-		String name, long size) {
+		String name, long size) throws SystemException {
 
 		long rangeMin = 0;
 		long rangeMax = 0;
@@ -274,7 +279,10 @@ public class CounterPersistence extends BasePersistenceImpl {
 		Session session = null;
 
 		try {
-			session = new SessionImpl(_sessionFactory.openSession(_connection));
+			Connection connection = getConnection();
+
+			session = new SessionImpl(
+				_sessionFactory.openSession(connection));
 
 			Counter counter = (Counter)session.get(
 				Counter.class, name, LockMode.UPGRADE);
@@ -301,6 +309,9 @@ public class CounterPersistence extends BasePersistenceImpl {
 			session.save(counter);
 			session.flush();
 		}
+		catch (Exception e) {
+			throw processException(e);
+		}
 		finally {
 			session.close();
 		}
@@ -309,6 +320,16 @@ public class CounterPersistence extends BasePersistenceImpl {
 			name, rangeMin, rangeMax, _COUNTER_INCREMENT);
 
 		return register;
+	}
+
+	protected Connection getConnection() throws Exception {
+		if (_connection == null || _connection.isClosed()) {
+			_connection = getDataSource().getConnection();
+
+			_connection.setAutoCommit(true);
+		}
+
+		return _connection;
 	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
