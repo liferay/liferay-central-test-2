@@ -1059,12 +1059,12 @@ public class ServicePreAction extends Action {
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						layout.getGroupId(), layout.isPrivateLayout(),
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-				}
 
-				if (!layout.getGroup().getName().equals(
-						GroupConstants.CONTROL_PANEL)) {
+					if (!layout.getGroup().getName().equals(
+							GroupConstants.CONTROL_PANEL)) {
 
-					doAsGroupId = 0;
+						doAsGroupId = 0;
+					}
 				}
 			}
 			catch (NoSuchLayoutException nsle) {
