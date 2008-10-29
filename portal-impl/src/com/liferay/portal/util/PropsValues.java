@@ -1106,6 +1106,16 @@ public class PropsValues {
 	public static final String[] USERS_FORM_UPDATE_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_UPDATE_MISCELLANEOUS);
 
+	public static final boolean USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsKeys.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED));
+
+	public static final boolean USERS_REMINDER_QUERIES_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsKeys.USERS_REMINDER_QUERIES_ENABLED));
+
 	public static final boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));

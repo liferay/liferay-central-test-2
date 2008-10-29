@@ -516,6 +516,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateReminderQuery(long userId, java.lang.String question,
+		java.lang.String answer)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void updateScreenName(long userId, java.lang.String screenName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -523,13 +528,15 @@ public interface UserLocalService {
 	public com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String oldPassword, java.lang.String newPassword1,
 		java.lang.String newPassword2, boolean passwordReset,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String openId, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String comments, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String reminderQueryQuestion,
+		java.lang.String reminderQueryAnswer, java.lang.String screenName,
+		java.lang.String emailAddress, java.lang.String openId,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String comments,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,

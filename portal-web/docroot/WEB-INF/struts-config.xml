@@ -32,8 +32,8 @@
 
 		<!-- Portal -->
 
-		<action path="/portal/change_password" type="com.liferay.portal.action.ChangePasswordAction">
-			<forward name="portal.change_password" path="portal.change_password" />
+		<action path="/portal/change_credentials" type="com.liferay.portal.action.ChangeCredentialsAction">
+			<forward name="portal.change_credentials" path="portal.change_credentials" />
 		</action>
 
 		<action path="/portal/css_cached" type="com.liferay.portal.action.CSSCachedAction">
@@ -68,6 +68,7 @@
 
 		<action path="/portal/login" type="com.liferay.portal.action.LoginAction">
 			<forward name="portal.login" path="portal.login" />
+			<forward name="portal.reminder_query" path="portal.reminder_query" />
 			<forward name="/portal/touch_protected.jsp" path="/portal/touch_protected.jsp" />
 		</action>
 
@@ -1097,6 +1098,7 @@
 
 		<action path="/login/view" type="com.liferay.portlet.login.action.ViewAction">
 			<forward name="portlet.login.view" path="portlet.login.view" />
+			<forward name="portlet.login.reminder_query" path="portlet.login.reminder_query" />
 		</action>
 
 		<!-- Maps -->
@@ -1161,8 +1163,6 @@
 		</action>
 
 		<!-- My Account -->
-
-		<action path="/my_account/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
 		<action path="/my_account/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">
 			<forward name="portlet.enterprise_admin.edit_address" path="portlet.enterprise_admin.edit_address" />

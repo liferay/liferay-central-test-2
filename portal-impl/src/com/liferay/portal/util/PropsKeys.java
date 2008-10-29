@@ -837,6 +837,12 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
+	public static final String USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = "users.reminder.queries.custom.question.enabled";
+
+	public static final String USERS_REMINDER_QUERIES_ENABLED = "users.reminder.queries.enabled";
+
+	public static final String USERS_REMINDER_QUERIES_QUESTIONS = "users.reminder.queries.questions";
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
 	public static final String PASSWORDS_DIGEST_ENCODING = "passwords.digest.encoding";

@@ -22,19 +22,36 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portal/init.jsp" %>
 
-<%@ page import="com.liferay.portal.CookieNotSupportedException" %>
-<%@ page import="com.liferay.portal.EmptyUserReminderQueryException" %>
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
-<%@ page import="com.liferay.portal.NoSuchUserException" %>
-<%@ page import="com.liferay.portal.PasswordExpiredException" %>
-<%@ page import="com.liferay.portal.SendPasswordException" %>
-<%@ page import="com.liferay.portal.UserActiveException" %>
-<%@ page import="com.liferay.portal.UserEmailAddressException" %>
-<%@ page import="com.liferay.portal.UserLockoutException" %>
-<%@ page import="com.liferay.portal.UserPasswordException" %>
-<%@ page import="com.liferay.portal.UserReminderQueryException" %>
-<%@ page import="com.liferay.portal.UserScreenNameException" %>
-<%@ page import="com.liferay.portal.action.LoginAction" %>
-<%@ page import="com.liferay.portal.security.auth.AuthException" %>
+<%
+String emailAddress = ParamUtil.getString(request, "emailAddress");
+
+User user2 = UserLocalServiceUtil.getUserByEmailAddress(company.getPrimaryKey(), emailAddress);
+
+String backURL = ParamUtil.getString(request, "backURL");
+%>
+
+<liferay-ui:tabs
+	names="reminder-query"
+	backURL="<%= backURL %>" />
+
+<form action="<%= themeDisplay.getPathMain() + "/portal/login" %>" method="post" name="fm3">
+	<input name="<%= Constants.CMD %>" type="hidden" value="forgot-password-reminder-query" />
+	<input name="emailAddress" type="hidden" value="<%= HtmlUtil.escape(emailAddress) %>" />
+
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" />
+		</td>
+		<td>
+			<input name="reminderQueryAnswer" type="text"  />
+		</td>
+	</tr>
+	</table>
+
+	<br />
+
+	<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+</form>

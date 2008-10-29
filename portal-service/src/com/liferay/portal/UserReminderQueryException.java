@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,21 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal;
 
-<%@ page import="com.liferay.portal.CookieNotSupportedException" %>
-<%@ page import="com.liferay.portal.EmptyUserReminderQueryException" %>
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
-<%@ page import="com.liferay.portal.NoSuchUserException" %>
-<%@ page import="com.liferay.portal.PasswordExpiredException" %>
-<%@ page import="com.liferay.portal.SendPasswordException" %>
-<%@ page import="com.liferay.portal.UserActiveException" %>
-<%@ page import="com.liferay.portal.UserEmailAddressException" %>
-<%@ page import="com.liferay.portal.UserLockoutException" %>
-<%@ page import="com.liferay.portal.UserPasswordException" %>
-<%@ page import="com.liferay.portal.UserReminderQueryException" %>
-<%@ page import="com.liferay.portal.UserScreenNameException" %>
-<%@ page import="com.liferay.portal.action.LoginAction" %>
-<%@ page import="com.liferay.portal.security.auth.AuthException" %>
+/**
+ * <a href="UserReminderQueryException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Julio Camarero Puras
+ *
+ */
+public class UserReminderQueryException extends PortalException {
+
+	public UserReminderQueryException() {
+		super();
+	}
+
+	public UserReminderQueryException(String msg) {
+		super(msg);
+	}
+
+	public UserReminderQueryException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public UserReminderQueryException(Throwable cause) {
+		super(cause);
+	}
+
+}

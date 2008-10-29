@@ -43,7 +43,7 @@ String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 	</c:when>
 	<c:otherwise>
 		<c:choose>
-			<c:when test='<%= cmd.equals("forgot-password") %>'>
+			<c:when test='<%= cmd.equals("forgot-password-email") %>'>
 				<liferay-util:include page="/html/portlet/login/forgot_password.jsp" />
 			</c:when>
 			<c:otherwise>

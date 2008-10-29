@@ -40,6 +40,7 @@ import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.WebsiteURLException;
@@ -94,6 +95,8 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditUserAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ * @author Julio Camarero
  *
  */
 public class EditUserAction extends PortletAction {
@@ -195,6 +198,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof UserEmailAddressException ||
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
+					 e instanceof UserReminderQueryException ||
 					 e instanceof UserScreenNameException ||
 					 e instanceof UserSmsException ||
 					 e instanceof WebsiteURLException) {
@@ -319,6 +323,17 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "autoPassword", true);
 		String password1 = ParamUtil.getString(actionRequest, "password1");
 		String password2 = ParamUtil.getString(actionRequest, "password2");
+		String reminderQueryQuestion = ParamUtil.getString(
+			actionRequest, "reminderQueryQuestion");
+
+		if (reminderQueryQuestion.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
+			reminderQueryQuestion = ParamUtil.getString(
+				actionRequest, "reminderQueryCustomQuestion");
+		}
+
+		String reminderQueryAnswer = ParamUtil.getString(
+			actionRequest, "reminderQueryAnswer");
+
 		boolean autoScreenName = ParamUtil.getBoolean(
 			actionRequest, "autoScreenName");
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
@@ -405,7 +420,8 @@ public class EditUserAction extends PortletAction {
 
 			user = UserServiceUtil.updateUser(
 				user.getUserId(), oldPassword, newPassword1, newPassword2,
-				passwordReset, screenName, emailAddress, openId, languageId,
+				passwordReset, reminderQueryQuestion, reminderQueryAnswer,
+				screenName, emailAddress, openId, languageId,
 				timeZoneId, greeting, comments, firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,

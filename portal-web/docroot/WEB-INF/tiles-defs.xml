@@ -18,9 +18,9 @@
 		<put name="selectable" value="false" />
 	</definition>
 
-	<definition name="portal.change_password" extends="portal">
-		<put name="title" value="change-password" />
-		<put name="content" value="/portal/change_password.jsp" />
+	<definition name="portal.change_credentials" extends="portal">
+		<put name="title" value="change-credentials" />
+		<put name="content" value="/portal/change_credentials.jsp" />
 	</definition>
 
 	<definition name="portal.error" extends="portal">
@@ -41,6 +41,11 @@
 	<definition name="portal.login" extends="portal">
 		<put name="title" value="sign-in" />
 		<put name="content" value="/portal/login.jsp" />
+	</definition>
+
+	<definition name="portal.reminder_query" extends="portal">
+		<put name="title" value="reminder-query" />
+		<put name="content" value="/portal/reminder_query.jsp" />
 	</definition>
 
 	<definition name="portal.portlet_access_denied" extends="portlet">
@@ -628,6 +633,10 @@
 
 	<definition name="portlet.login.view" extends="portlet.login">
 		<put name="portlet_content" value="/portlet/login/view.jsp" />
+	</definition>
+
+	<definition name="portlet.login.reminder_query" extends="portlet.login">
+		<put name="portlet_content" value="/portlet/login/reminder_query.jsp" />
 	</definition>
 
 	<!-- Maps -->

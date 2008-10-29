@@ -96,3 +96,74 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 		</div>
 	</c:if>
 </fieldset>
+
+<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED && portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+
+	<h3><liferay-ui:message key="reminder-query" /></h3>
+
+	<fieldset class="block-labels">
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />reminderQueryQuestion"><liferay-ui:message key="question" /></label>
+
+			<select name="<portlet:namespace />reminderQueryQuestion" id="<portlet:namespace />reminderQueryQuestion">
+
+				<%
+				String[] questions = PropsUtil.getArray(PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS);
+				boolean isCustomQuestion = true;
+
+				for (String question : questions) {
+					if (selUser.getReminderQueryQuestion().equals(question)) {
+						isCustomQuestion = false;
+				%>
+						<option selected value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
+				<%
+					}
+					else {
+				%>
+						<option value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
+				<%
+					}
+				}
+
+				if (isCustomQuestion && Validator.isNull(selUser.getReminderQueryQuestion())) {
+					isCustomQuestion = false;
+				}
+				%>
+
+				<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+					<option <%= isCustomQuestion ? "selected" : "" %> value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>"><liferay-ui:message key="write-my-own-question" /></option>
+				</c:if>
+			</select>
+
+			<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+				<div id="<portlet:namespace />customQuestionDiv" <%= isCustomQuestion ? StringPool.BLANK : "style='display:none;'" %>>
+					<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
+				</div>
+			</c:if>
+		</div>
+
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
+
+			<input name="<portlet:namespace />reminderQueryAnswer" size="50" type="text" value="<%= selUser.getReminderQueryAnswer() %>" />
+		</div>
+	</fieldset>
+
+</c:if>
+
+<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+	<script type="text/javascript">
+		jQuery('#<portlet:namespace />reminderQueryQuestion').change(
+			function(event){
+				if(this.value == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+					jQuery('#<portlet:namespace />customQuestionDiv').show('slow');
+					Liferay.Util.focusFormField(jQuery('#<portlet:namespace />reminderQueryCustomQuestion'));
+				}
+				else{
+					jQuery('#<portlet:namespace />customQuestionDiv').hide('slow');
+					Liferay.Util.focusFormField(jQuery('#<portlet:namespace />reminderQueryAnswer'));
+				}
+			}
+		);
+	</script>
+</c:if>

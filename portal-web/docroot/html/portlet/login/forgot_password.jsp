@@ -1,4 +1,3 @@
-
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -25,24 +24,58 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<liferay-ui:tabs names="forgot-password">
-	<liferay-ui:section>
-		<portlet:actionURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
-			<portlet:param name="struts_action" value="/login/view" />
-		</portlet:actionURL>
+<%
+String emailAddress = ParamUtil.getString(renderRequest, "emailAddress");
+String backURL = ParamUtil.getString(renderRequest, "backURL");
+%>
 
-		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-			<portlet:param name="struts_action" value="/login/captcha" />
-		</portlet:actionURL>
+<liferay-ui:tabs
+	names="forgot-password"
+	backURL="<%= backURL %>" />
 
-		<%
-		String forgotPasswordHREF = forgotPasswordURL.toString();
-		String captchaHREF = captchaURL.toString();
-		%>
+<form action="<portlet:actionURL windowState="<%= WindowState.NORMAL.toString() %>"><portlet:param name="struts_action" value="/login/view" /></portlet:actionURL>" method="post" name="fm3">
+	<input name="<%= Constants.CMD %>" type="hidden" value="forgot-password-email" />
+	<input name="backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
+	<input name="redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
 
-		<%@ include file="/html/portal/login_forgot_password.jspf" %>
-	</liferay-ui:section>
-</liferay-ui:tabs>
+	<liferay-ui:success key="request_processed" message="your-request-processed-successfully" />
+
+	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+	<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="the-email-address-you-requested-is-not-registered-in-our-database" />
+	<liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
+	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+
+	<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="email-address" />
+			</td>
+			<td>
+				<input name="emailAddress" size="30" type="text" value="<%= HtmlUtil.escape(emailAddress) %>" />
+			</td>
+		</tr>
+	</table>
+
+	<br />
+
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+		<portlet:param name="struts_action" value="/login/captcha" />
+	</portlet:actionURL>
+
+	<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+		<liferay-ui:captcha url='<%= captchaURL.toString() %>' />
+	</c:if>
+
+	<c:choose>
+		<c:when test="<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED %>">
+			<input type="submit" value="<liferay-ui:message key="next" />" />
+
+		</c:when>
+		<c:otherwise>
+			<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+		</c:otherwise>
+	</c:choose>
+</form>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.fm3.emailAddress);

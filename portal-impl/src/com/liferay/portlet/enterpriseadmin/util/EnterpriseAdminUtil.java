@@ -78,6 +78,8 @@ import javax.portlet.ActionRequest;
  */
 public class EnterpriseAdminUtil {
 
+	public static final String CUSTOM_QUESTION = "write-my-own-question";
+
 	public static List<Address> getAddresses(ActionRequest actionRequest) {
 		List<Address> addresses = new ArrayList<Address>();
 

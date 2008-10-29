@@ -80,6 +80,8 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setPasswordEncrypted(randomBoolean());
 		newUser.setPasswordReset(randomBoolean());
 		newUser.setPasswordModifiedDate(nextDate());
+		newUser.setReminderQueryQuestion(randomString());
+		newUser.setReminderQueryAnswer(randomString());
 		newUser.setGraceLoginCount(nextInt());
 		newUser.setScreenName(randomString());
 		newUser.setEmailAddress(randomString());
@@ -117,6 +119,10 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUser.getPasswordReset(), newUser.getPasswordReset());
 		assertEquals(existingUser.getPasswordModifiedDate(),
 			newUser.getPasswordModifiedDate());
+		assertEquals(existingUser.getReminderQueryQuestion(),
+			newUser.getReminderQueryQuestion());
+		assertEquals(existingUser.getReminderQueryAnswer(),
+			newUser.getReminderQueryAnswer());
 		assertEquals(existingUser.getGraceLoginCount(),
 			newUser.getGraceLoginCount());
 		assertEquals(existingUser.getScreenName(), newUser.getScreenName());
@@ -193,6 +199,8 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setPasswordEncrypted(randomBoolean());
 		user.setPasswordReset(randomBoolean());
 		user.setPasswordModifiedDate(nextDate());
+		user.setReminderQueryQuestion(randomString());
+		user.setReminderQueryAnswer(randomString());
 		user.setGraceLoginCount(nextInt());
 		user.setScreenName(randomString());
 		user.setEmailAddress(randomString());

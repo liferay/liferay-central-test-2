@@ -23,6 +23,7 @@
 package com.liferay.portlet.login.action;
 
 import com.liferay.portal.CookieNotSupportedException;
+import com.liferay.portal.EmptyUserReminderQueryException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.SendPasswordException;
@@ -30,14 +31,18 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.action.LoginAction;
 import com.liferay.portal.captcha.CaptchaTextException;
+import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AuthException;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -61,6 +66,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero Puras
  *
  */
 public class ViewAction extends PortletAction {
@@ -72,25 +78,83 @@ public class ViewAction extends PortletAction {
 
 		String cmd = actionRequest.getParameter(Constants.CMD);
 
-		if (cmd.equals("forgot-password")) {
+		if (cmd.equals("forgot-password-email")) {
+			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED){
+				try{
+					if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+						CaptchaUtil.check(actionRequest);
+					}
+					String emailAddress = ParamUtil.getString(
+						actionRequest, "emailAddress");
+					User user = UserLocalServiceUtil.getUserByEmailAddress(
+						PortalUtil.getCompanyId(actionRequest), emailAddress);
+					if (Validator.isNull(user.getReminderQueryQuestion())){
+						throw new EmptyUserReminderQueryException();
+					}
+				}
+				catch (Exception e) {
+					if (e instanceof CaptchaTextException||
+						e instanceof EmptyUserReminderQueryException ||
+						e instanceof NoSuchUserException ||
+						e instanceof SendPasswordException ||
+						e instanceof UserEmailAddressException) {
+						SessionErrors.add(
+							actionRequest, e.getClass().getName());
+
+						setForward(actionRequest, "portlet.login.view");
+						return;
+					}
+					else {
+						PortalUtil.sendError(e, actionRequest, actionResponse);
+
+					}
+				}
+
+				 setForward(actionRequest,"portlet.login.reminder_query");
+			}
+			else{
+				try {
+					sendPassword(actionRequest);
+
+					actionResponse.setRenderParameter(
+						Constants.CMD, "already-registered");
+				}
+				catch (Exception e) {
+					if (e instanceof CaptchaTextException ||
+						e instanceof NoSuchUserException ||
+						e instanceof SendPasswordException ||
+						e instanceof UserEmailAddressException) {
+
+						SessionErrors.add(
+							actionRequest, e.getClass().getName());
+					}
+					else {
+						PortalUtil.sendError(e, actionRequest, actionResponse);
+					}
+				}
+			}
+		}
+		else if (cmd.equals("forgot-password-reminder-query")) {
 			try {
 				sendPassword(actionRequest);
-
-				actionResponse.setRenderParameter(
-					Constants.CMD, "already-registered");
+				setForward(actionRequest,"portlet.login.view");
 			}
-			catch (Exception e) {
-				if (e instanceof CaptchaTextException ||
-					e instanceof NoSuchUserException ||
-					e instanceof SendPasswordException ||
-					e instanceof UserEmailAddressException) {
+				catch (Exception e) {
+					if (e instanceof CaptchaTextException ||
+						e instanceof NoSuchUserException ||
+						e instanceof UserReminderQueryException ||
+						e instanceof SendPasswordException ||
+						e instanceof UserEmailAddressException) {
 
-					SessionErrors.add(actionRequest, e.getClass().getName());
+						SessionErrors.add(
+							actionRequest, e.getClass().getName());
+
+						setForward(actionRequest,"portlet.login.view");
+					}
+					else {
+						PortalUtil.sendError(e, actionRequest, actionResponse);
+					}
 				}
-				else {
-					PortalUtil.sendError(e, actionRequest, actionResponse);
-				}
-			}
 		}
 		else {
 			ThemeDisplay themeDisplay =
@@ -143,7 +207,8 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward("portlet.login.view");
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.login.view"));
 	}
 
 	protected void login(

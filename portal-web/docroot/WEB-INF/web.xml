@@ -203,7 +203,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/c/portal/change_password</url-pattern>
+		<url-pattern>/c/portal/change_credentials</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
