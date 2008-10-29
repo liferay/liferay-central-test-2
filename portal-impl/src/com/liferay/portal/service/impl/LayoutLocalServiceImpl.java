@@ -606,10 +606,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
-		PortletImporter portletImporter = new PortletImporter();
+		BatchSessionUtil.setEnabled(true);
 
-		portletImporter.importPortletInfo(
-			userId, plid, portletId, parameterMap, is);
+		try {
+			PortletImporter portletImporter = new PortletImporter();
+
+			portletImporter.importPortletInfo(
+				userId, plid, portletId, parameterMap, is);
+		}
+		finally {
+			BatchSessionUtil.setEnabled(false);
+		}
 	}
 
 	public void setLayouts(
