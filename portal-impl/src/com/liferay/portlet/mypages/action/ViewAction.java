@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mypages.action;
 
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
@@ -69,8 +70,6 @@ public class ViewAction extends PortletAction {
 
 		dynamicRequest.setParameter(
 			"p_u_i_d", String.valueOf(user.getUserId()));
-		dynamicRequest.setParameter(
-			"groupId", String.valueOf(user.getGroup().getGroupId()));
 
 		String tabs1 = "public-pages";
 
@@ -79,6 +78,11 @@ public class ViewAction extends PortletAction {
 		}
 
 		dynamicRequest.setParameter("tabs1", tabs1);
+
+		Group group = user.getGroup();
+
+		dynamicRequest.setParameter(
+			"groupId", String.valueOf(group.getGroupId()));
 
 		ActionUtil.getGroup(renderRequest);
 

@@ -508,6 +508,11 @@
 		<struts-path>expando</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>140</portlet-name>
+		<struts-path>my_pages</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
