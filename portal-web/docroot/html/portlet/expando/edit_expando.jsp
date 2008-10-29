@@ -137,9 +137,12 @@ if (column != null) {
 
 					<%
 					for (int type : ExpandoColumnConstants.TYPES) {
+						if ((type == ExpandoColumnConstants.BOOLEAN_ARRAY) || (type == ExpandoColumnConstants.DATE_ARRAY)) {
+							continue;
+						}
 					%>
 
-						<option value="<%= type %>"><liferay-ui:message key="<%= ExpandoColumnConstants.getTypeLabel(type) %>" /></option>
+						<option value="<%= type %>"><%= ExpandoColumnConstants.getTypeLabel(type) %></option>
 
 					<%
 					}
