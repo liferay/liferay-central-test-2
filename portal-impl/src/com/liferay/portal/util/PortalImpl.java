@@ -1806,9 +1806,6 @@ public class PortalImpl implements Portal {
 				catch (Exception e) {
 				}
 			}
-			else {
-				return layout.getGroupId();
-			}
 
 			return layout.getGroupId();
 		}
@@ -1825,13 +1822,15 @@ public class PortalImpl implements Portal {
 
 		long scopeGroupId = 0;
 
-		if ((layout != null) &&
-			layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+		if (layout != null) {
+			Group group = layout.getGroup();
 
-			long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
+			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+				long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 
-			if (doAsGroupId > 0) {
-				scopeGroupId = doAsGroupId;
+				if (doAsGroupId > 0) {
+					scopeGroupId = doAsGroupId;
+				}
 			}
 		}
 

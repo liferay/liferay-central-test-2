@@ -78,6 +78,7 @@ if (Validator.isNull(category)) {
 				<table class="panel-page-content-menu">
 				<tr>
 					<td>
+
 						<%
 						String title = null;
 

@@ -1063,6 +1063,7 @@ public class ServicePreAction extends Action {
 
 				if (!layout.getGroup().getName().equals(
 						GroupConstants.CONTROL_PANEL)) {
+
 					doAsGroupId = 0;
 				}
 			}

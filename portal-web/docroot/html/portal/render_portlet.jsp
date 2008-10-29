@@ -645,7 +645,7 @@ if (themeDisplay.isWidget()) {
 	portletDisplay.setShowBackIcon(false);
 }
 
-if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 	portletDisplay.setShowBackIcon(false);
 	portletDisplay.setShowConfigurationIcon(false);
 	portletDisplay.setShowMaxIcon(false);
