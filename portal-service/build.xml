@@ -13,15 +13,34 @@
 			<pathelement path="${project.dir}/portal-kernel/classes" />
 		</path>
 
-		<javac
-			classpathref="web.classpath"
-			compiler="${javac.compiler}"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="classes"
-			nowarn="${javac.nowarn}"
-			srcdir="src"
-		/>
+		<if>
+			<equals arg1="${javac.compiler}" arg2="modern" />
+			<then>
+				<javac
+					classpathref="web.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="classes"
+					fork="${javac.fork}"
+					memoryMaximumSize="${javac.memoryMaximumSize}"
+					nowarn="${javac.nowarn}"
+					srcdir="src"
+				/>
+			</then>
+			<else>
+				<javac
+					classpathref="web.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="classes"
+					nowarn="${javac.nowarn}"
+					srcdir="src"
+				/>
+			</else>
+		</if>
+
 	</target>
 
 	<target name="deploy">
