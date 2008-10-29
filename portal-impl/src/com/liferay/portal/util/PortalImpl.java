@@ -1834,6 +1834,17 @@ public class PortalImpl implements Portal {
 			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 				long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 
+				if (doAsGroupId <= 0) {
+					try {
+						Group guestGroup = GroupLocalServiceUtil.getGroup(
+							group.getCompanyId(), GroupConstants.GUEST);
+
+						doAsGroupId = guestGroup.getGroupId();
+					}
+					catch (Exception e) {
+					}
+				}
+
 				if (doAsGroupId > 0) {
 					scopeGroupId = doAsGroupId;
 				}
