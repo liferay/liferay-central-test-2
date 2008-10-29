@@ -63,6 +63,7 @@
 				Group scopeGroup = themeDisplay.getScopeGroup();
 
 				StringBuilder sb = new StringBuilder();
+
 				sb.append(LanguageUtil.get(pageContext, "portal"));
 
 				if (CompanyLocalServiceUtil.getCompaniesCount() > 1) {
@@ -70,7 +71,7 @@
 					sb.append(StringPool.SPACE);
 					sb.append(StringUtil.shorten(company.getName(), 18));
 				}
-				
+
 				title = sb.toString();
 			}
 			else {
