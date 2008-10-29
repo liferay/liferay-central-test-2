@@ -62,7 +62,7 @@ public class CounterUtil {
 		getPersistence().reset(name);
 	}
 
-	public static void reset(String name, long size) {
+	public static void reset(String name, long size) throws SystemException {
 		getPersistence().reset(name, size);
 	}
 
