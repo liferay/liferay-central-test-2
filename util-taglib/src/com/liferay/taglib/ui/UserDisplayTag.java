@@ -55,6 +55,10 @@ public class UserDisplayTag extends TagSupport {
 			try {
 				user = UserLocalServiceUtil.getUserById(_userId);
 
+				if (user.isDefaultUser()) {
+					user = null;
+				}
+
 				request.setAttribute("liferay-ui:user-display:user", user);
 
 				pageContext.setAttribute("userDisplay", user);
