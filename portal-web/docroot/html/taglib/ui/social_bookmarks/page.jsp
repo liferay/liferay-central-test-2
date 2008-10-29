@@ -29,24 +29,23 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 %>
 
 <div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">
+	<a class="show-bookmarks" href="javascript: ;"><liferay-ui:message key="social-bookmarks" /></a>
 
-<a class="show-bookmarks" href="javascript: ;"><liferay-ui:message key="social-bookmarks" /></a>
+	<ul class="lfr-component">
 
-<ul class="lfr-component">
+		<%
+		for (int i = 0; i < typesArray.length; i++) {
+		%>
 
-	<%
-	for (int i = 0; i < typesArray.length; i++) {
-	%>
+			<li>
+				<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
+			</li>
 
-		<li>
-			<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-		</li>
+		<%
+		}
+		%>
 
-	<%
-	}
-	%>
-
-</ul>
+	</ul>
 </div>
 
 <script>
