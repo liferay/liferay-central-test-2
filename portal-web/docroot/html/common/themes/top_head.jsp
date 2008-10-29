@@ -27,13 +27,14 @@
 <%@ include file="/html/common/themes/top_meta.jspf" %>
 <%@ include file="/html/common/themes/top_meta-ext.jsp" %>
 
+<%@ page import="com.liferay.portal.util.Portal" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchTemplateException" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalTemplate" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
 
-<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&amp;colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
+<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %><%= Portal.PATH_MAIN %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&amp;colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
 
 <%
 List<Portlet> portlets = null;
