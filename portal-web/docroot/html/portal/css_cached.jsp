@@ -1626,14 +1626,15 @@ fieldset:last-child, .uni-form fieldset:last-child {
 /* ---------- Taglib user display ---------- */
 
 .taglib-user-display .user-details .user-name {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/status_offline.png) no-repeat 0 50%;
-	display: block;
 	clear: both;
-	padding-left: 20px;
+	display: block;
 }
 
 .taglib-user-display .user-details.user-online .user-name {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/status_offline.png);
+}
+
+.taglib-user-display .user-details .network-list {
+	margin: 10px 0;
 }
 
 .taglib-user-display .user-details .network-list a {
@@ -1642,12 +1643,8 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	padding-left: 20px;
 }
 
-.taglib-user-display .user-details .network-list .call-user a {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/call_user.png);
-}
-
-.taglib-user-display .user-details .network-list .message-user a {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/message_user.png);
+.taglib-user-display .user-details .network-list .chat-user {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/conversation.png);
 }
 
 /* ---------- jQuery plugins ---------- */

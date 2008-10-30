@@ -27,22 +27,36 @@
 <%
 long portraitId = 0;
 String tokenId = StringPool.BLANK;
-List<Presence> presences = null;
 
 if (userDisplay != null) {
 	portraitId = userDisplay.getPortraitId();
 	tokenId = ImageServletTokenUtil.getToken(userDisplay.getPortraitId());
-	presences = RUONUtil.getPresences(userId, locale);
+}
+
+if (Validator.isNull(url) && (userDisplay != null)) {
+	url = userDisplay.getDisplayURL(themeDisplay);
+}
+
+List<Presence> presences = null;
+
+if (themeDisplay.isSignedIn() && (userDisplay != null) && (userId != user.getUserId())) {
+	presences = (List<Presence>)request.getAttribute(_REQUEST_ATTRIBUTE_PREFIX + userId);
+
+	if (presences == null) {
+		presences = RUONUtil.getPresences(userId, locale);
+
+		if (presences == null) {
+			presences = new ArrayList<Presence>();
+		}
+
+		request.setAttribute(_REQUEST_ATTRIBUTE_PREFIX + userId, presences);
+	}
 }
 
 boolean online = false;
 
 if ((presences != null) && (presences.size() > 0)) {
 	online = true;
-}
-
-if (Validator.isNull(url) && (userDisplay != null)) {
-	url = userDisplay.getDisplayURL(themeDisplay);
 }
 %>
 
@@ -83,7 +97,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 
 				<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
 
-				<c:if test="<%= online && (userId != user.getUserId()) %>">
+				<c:if test="<%= online %>">
 					<ul class="lfr-component network-list">
 
 						<%
@@ -103,3 +117,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 				<%= userName %>
 			</c:otherwise>
 		</c:choose>
+
+<%!
+private static final String _REQUEST_ATTRIBUTE_PREFIX = "taglib:ui:user_display:";
+%>
