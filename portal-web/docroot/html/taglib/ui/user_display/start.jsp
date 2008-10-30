@@ -27,6 +27,7 @@
 <%
 long portraitId = 0;
 String tokenId = StringPool.BLANK;
+boolean isOnline = false;
 
 if (userDisplay != null) {
 	portraitId = userDisplay.getPortraitId();
@@ -66,7 +67,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	<c:if test="<%= displayStyle == 2 %>">
 	</c:if>
 
-	<div class="user-details">
+	<div class="user-details <%= isOnline ? "user-online" : "user-offline" %>">
 		<c:choose>
 			<c:when test="<%= userDisplay != null %>">
 				<c:if test="<%= Validator.isNotNull(url) %>"><a class="user-name" href="<%= url %>"></c:if>
@@ -74,6 +75,13 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 				<%= userDisplay.getFullName() %>
 
 				<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
+
+				<c:if test="<%= isOnline %>">
+					<ul class="lfr-component network-list">
+						<li class="call-user"><a href="javascript: ;"><liferay-ui:message key="call-me" /></a></li>
+						<li class="message-user"><a href="javascript: ;"><liferay-ui:message key="im-me" /></a></li>
+					</ul>
+				</c:if>
 			</c:when>
 			<c:otherwise>
 				<%= userName %>
