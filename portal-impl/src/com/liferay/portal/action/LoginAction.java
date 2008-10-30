@@ -23,7 +23,6 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.CookieNotSupportedException;
-import com.liferay.portal.EmptyUserReminderQueryException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.SendPasswordException;
@@ -32,7 +31,6 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
-import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
@@ -317,31 +315,16 @@ public class LoginAction extends Action {
 			WebKeys.THEME_DISPLAY);
 
 		Company company = themeDisplay.getCompany();
-		String emailAddress = ParamUtil.getString(request, "emailAddress");
 
 		if (!company.isSendPassword()) {
 			return;
 		}
 
-		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED){
-			User user = UserLocalServiceUtil.getUserByEmailAddress(
-				PortalUtil.getCompanyId(request), emailAddress);
-			String realAnswer = user.getReminderQueryAnswer();
-			String userAnswer = ParamUtil.getString(
-				request, "reminderQueryAnswer");
-
-			if (!Validator.equals(
-					realAnswer.toLowerCase(), userAnswer.toLowerCase())){
-
-				throw new UserReminderQueryException(
-					"Invalid reminder query answer");
-			}
+		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+			CaptchaUtil.check(request);
 		}
-		else{
-			if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-				CaptchaUtil.check(request);
-			}
-		}
+
+		String emailAddress = ParamUtil.getString(request, "emailAddress");
 
 		String remoteAddr = request.getRemoteAddr();
 		String remoteHost = request.getRemoteHost();
@@ -450,91 +433,28 @@ public class LoginAction extends Action {
 				}
 			}
 		}
-		else if (cmd.equals("forgot-password-email")) {
-			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
-				try{
-					if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-						CaptchaUtil.check(request);
-					}
-
-					String emailAddress = ParamUtil.getString(
-						request, "emailAddress");
-
-					User user = UserLocalServiceUtil.getUserByEmailAddress(
-						PortalUtil.getCompanyId(request), emailAddress);
-
-					if (Validator.isNull(user.getReminderQueryQuestion())){
-						throw new EmptyUserReminderQueryException();
-					}
-				}
-				catch (Exception e) {
-					if (e instanceof CaptchaTextException||
-						e instanceof EmptyUserReminderQueryException ||
-						e instanceof NoSuchUserException ||
-						e instanceof SendPasswordException ||
-						e instanceof UserEmailAddressException) {
-
-						SessionErrors.add(request, e.getClass().getName());
-
-						return mapping.findForward("portal.login");
-					}
-					else {
-						PortalUtil.sendError(e, request, response);
-
-						return null;
-					}
-				}
-
-				return mapping.findForward("portal.reminder_query");
-			}
-			else{
-				try {
-					sendPassword(request);
-
-					return mapping.findForward("portal.login");
-				}
-				catch (Exception e) {
-					if (e instanceof CaptchaTextException ||
-						e instanceof NoSuchUserException ||
-						e instanceof SendPasswordException ||
-						e instanceof UserEmailAddressException) {
-
-						SessionErrors.add(request, e.getClass().getName());
-
-						return mapping.findForward("portal.login");
-					}
-					else {
-						PortalUtil.sendError(e, request, response);
-
-						return null;
-					}
-				}
-			}
-		}
-		else if (cmd.equals("forgot-password-reminder-query")) {
-
+		else if (cmd.equals("forgot-password")) {
 			try {
 				sendPassword(request);
 
 				return mapping.findForward("portal.login");
 			}
-				catch (Exception e) {
-					if (e instanceof CaptchaTextException ||
-						e instanceof NoSuchUserException ||
-						e instanceof UserReminderQueryException ||
-						e instanceof SendPasswordException ||
-						e instanceof UserEmailAddressException) {
+			catch (Exception e) {
+				if (e instanceof CaptchaTextException ||
+					e instanceof NoSuchUserException ||
+					e instanceof SendPasswordException ||
+					e instanceof UserEmailAddressException) {
 
-						SessionErrors.add(request, e.getClass().getName());
+					SessionErrors.add(request, e.getClass().getName());
 
-						return mapping.findForward("portal.login");
-					}
-					else {
-						PortalUtil.sendError(e, request, response);
-
-						return null;
-					}
+					return mapping.findForward("portal.login");
 				}
+				else {
+					PortalUtil.sendError(e, request, response);
+
+					return null;
+				}
+			}
 		}
 		else {
 			String authLoginURL = PortalUtil.getCommunityLoginURL(themeDisplay);

@@ -654,16 +654,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
-		// Authenticated users must have a reminder query set that is not empty
-
-		if ((user != null) &&
-			(Validator.isNull(user.getReminderQueryQuestion())||
-				Validator.isNull(user.getReminderQueryAnswer())) &&
-			PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
-
-				return _PATH_PORTAL_CHANGE_CREDENTIALS;
-		}
-
 		// Authenticated users must be active
 
 		if ((user != null) && (!user.isActive())) {
@@ -675,7 +665,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must have a current password
 
 		if ((user != null) && (user.isPasswordReset())) {
-			return _PATH_PORTAL_CHANGE_CREDENTIALS;
+			return _PATH_PORTAL_CHANGE_PASSWORD;
 		}
 
 		// Authenticated users must have at least one personalized page
@@ -874,8 +864,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static String _PATH_PORTAL = "/portal";
 
-	private static String _PATH_PORTAL_CHANGE_CREDENTIALS =
-		"/portal/change_credentials";
+	private static String _PATH_PORTAL_CHANGE_PASSWORD =
+		"/portal/change_password";
 
 	private static String _PATH_PORTAL_CSS = "/portal/css";
 

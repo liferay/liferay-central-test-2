@@ -45,7 +45,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
-
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
 
@@ -792,12 +791,11 @@ public class PortalLDAPUtil {
 
 			user = UserLocalServiceUtil.updateUser(
 				user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
-				user.isPasswordReset(), StringPool.BLANK, StringPool.BLANK,
-				screenName, emailAddress, openId, user.getLanguageId(),
-				user.getTimeZoneId(), user.getGreeting(), user.getComments(),
-				firstName, middleName, lastName, contact.getPrefixId(),
-				contact.getSuffixId(), contact.getMale(), birthdayMonth,
-				birthdayDay, birthdayYear, contact.getSmsSn(),
+				user.isPasswordReset(), screenName, emailAddress, openId,
+				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+				user.getComments(), firstName, middleName, lastName,
+				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
+				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
 				contact.getAimSn(), contact.getFacebookSn(), contact.getIcqSn(),
 				contact.getJabberSn(), contact.getMsnSn(),
 				contact.getMySpaceSn(), contact.getSkypeSn(),

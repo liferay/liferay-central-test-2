@@ -524,19 +524,6 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateReminderQuery(long userId,
-		java.lang.String question, java.lang.String answer)
-		throws RemoteException {
-		try {
-			UserServiceUtil.updateReminderQuery(userId, question, answer);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void updateScreenName(long userId, java.lang.String screenName)
 		throws RemoteException {
 		try {
@@ -564,15 +551,13 @@ public class UserServiceSoap {
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
 		java.lang.String oldPassword, java.lang.String newPassword1,
 		java.lang.String newPassword2, boolean passwordReset,
-		java.lang.String reminderQueryQuestion,
-		java.lang.String reminderQueryAnswer, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
@@ -584,13 +569,13 @@ public class UserServiceSoap {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
-					reminderQueryQuestion, reminderQueryAnswer, screenName,
-					emailAddress, openId, languageId, timeZoneId, greeting,
-					comments, firstName, middleName, lastName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-					organizationIds, roleIds, userGroupIds, serviceContext);
+					screenName, emailAddress, openId, languageId, timeZoneId,
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					groupIds, organizationIds, roleIds, userGroupIds,
+					serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -604,15 +589,13 @@ public class UserServiceSoap {
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
 		java.lang.String oldPassword, java.lang.String newPassword1,
 		java.lang.String newPassword2, boolean passwordReset,
-		java.lang.String reminderQueryQuestion,
-		java.lang.String reminderQueryAnswer, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
@@ -629,13 +612,12 @@ public class UserServiceSoap {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
-					reminderQueryQuestion, reminderQueryAnswer, screenName,
-					emailAddress, openId, languageId, timeZoneId, greeting,
-					comments, firstName, middleName, lastName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-					organizationIds, roleIds, userGroupIds,
+					screenName, emailAddress, openId, languageId, timeZoneId,
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					groupIds, organizationIds, roleIds, userGroupIds,
 					com.liferay.portal.model.impl.AddressModelImpl.toModels(
 						addresses),
 					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(

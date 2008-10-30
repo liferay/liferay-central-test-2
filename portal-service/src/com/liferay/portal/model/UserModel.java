@@ -99,14 +99,6 @@ public interface UserModel extends BaseModel {
 
 	public void setPasswordModifiedDate(Date passwordModifiedDate);
 
-	public String getReminderQueryQuestion();
-
-	public void setReminderQueryQuestion(String reminderQueryQuestion);
-
-	public String getReminderQueryAnswer();
-
-	public void setReminderQueryAnswer(String reminderQueryAnswer);
-
 	public int getGraceLoginCount();
 
 	public void setGraceLoginCount(int graceLoginCount);

@@ -24,7 +24,6 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.UserPasswordException;
-import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -33,7 +32,6 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,13 +43,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ChangeCredentialsAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ChangePasswordAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Julio Camarero Puras
  *
  */
-public class ChangeCredentialsAction extends Action {
+public class ChangePasswordAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -60,25 +57,19 @@ public class ChangeCredentialsAction extends Action {
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		if (cmd.equals(Constants.UPDATE)) {
+		if (cmd.equals("password")) {
 			try {
-				if (ParamUtil.getBoolean(request, "updatePassword")) {
-					updatePassword(request, response);
-				}
-
-				if (ParamUtil.getBoolean(request, "updateReminderQuery")) {
-					updateReminderQuery(request, response);
-				}
+				updatePassword(request, response);
 
 				return mapping.findForward(ActionConstants.COMMON_REFERER);
 			}
 			catch (Exception e) {
-				if (e instanceof UserPasswordException ||
-					e instanceof UserReminderQueryException) {
+				if (e instanceof UserPasswordException) {
+					UserPasswordException upe = (UserPasswordException)e;
 
-					SessionErrors.add(request, e.getClass().getName(), e);
+					SessionErrors.add(request, e.getClass().getName(), upe);
 
-					return mapping.findForward("portal.change_credentials");
+					return mapping.findForward("portal.change_password");
 				}
 				else if (e instanceof NoSuchUserException ||
 						 e instanceof PrincipalException) {
@@ -95,7 +86,7 @@ public class ChangeCredentialsAction extends Action {
 			}
 		}
 		else {
-			return mapping.findForward("portal.change_credentials");
+			return mapping.findForward("portal.change_password");
 		}
 	}
 
@@ -114,22 +105,6 @@ public class ChangeCredentialsAction extends Action {
 			userId, password1, password2, passwordReset);
 
 		session.setAttribute(WebKeys.USER_PASSWORD, password1);
-	}
-
-	protected void updateReminderQuery(
-			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
-
-		long userId = PortalUtil.getUserId(request);
-		String question = ParamUtil.getString(request, "reminderQueryQuestion");
-		String answer = ParamUtil.getString(request, "reminderQueryAnswer");
-
-		if (question.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
-			question = ParamUtil.getString(
-				request, "reminderQueryCustomQuestion");
-		}
-
-		UserServiceUtil.updateReminderQuery(userId, question, answer);
 	}
 
 }

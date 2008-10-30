@@ -1403,8 +1403,6 @@ create table User_ (
 	passwordEncrypted BOOLEAN,
 	passwordReset BOOLEAN,
 	passwordModifiedDate DATE null,
-	reminderQueryQuestion VARCHAR(75) null,
-	reminderQueryAnswer VARCHAR(75) null,
 	graceLoginCount INTEGER,
 	screenName VARCHAR(75) null,
 	emailAddress VARCHAR(75) null,

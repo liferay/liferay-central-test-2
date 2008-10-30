@@ -1357,8 +1357,6 @@
 		<column name="passwordEncrypted" type="boolean" />
 		<column name="passwordReset" type="boolean" />
 		<column name="passwordModifiedDate" type="Date" />
-		<column name="reminderQueryQuestion" type="String" />
-		<column name="reminderQueryAnswer" type="String" />
 		<column name="graceLoginCount" type="int" />
 		<column name="screenName" type="String" />
 		<column name="emailAddress" type="String" />
@@ -1767,7 +1765,6 @@
 		<exception>UserLockout</exception>
 		<exception>UserPassword</exception>
 		<exception>UserPortrait</exception>
-		<exception>UserReminderQuery</exception>
 		<exception>UserScreenName</exception>
 		<exception>UserSms</exception>
 		<exception>WebsiteURL</exception>

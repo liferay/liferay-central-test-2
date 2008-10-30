@@ -99,14 +99,14 @@ public class AdminUtil {
 
 		return UserServiceUtil.updateUser(
 			userId, password, StringPool.BLANK, StringPool.BLANK,
-			user.isPasswordReset(), StringPool.BLANK, StringPool.BLANK,
-			screenName, emailAddress, openId, languageId, timeZoneId, greeting,
-			comments, contact.getFirstName(), contact.getMiddleName(),
-			contact.getLastName(), contact.getPrefixId(), contact.getSuffixId(),
-			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-			twitterSn, ymSn, contact.getJobTitle(), groupIds, organizationIds,
-			roleIds, userGroupIds, serviceContext);
+			user.isPasswordReset(), screenName, emailAddress, openId,
+			languageId, timeZoneId, greeting, comments, contact.getFirstName(),
+			contact.getMiddleName(), contact.getLastName(),
+			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			contact.getJobTitle(), groupIds, organizationIds, roleIds,
+			userGroupIds, serviceContext);
 	}
 
 	public static User updateUser(
