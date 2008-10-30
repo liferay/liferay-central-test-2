@@ -265,13 +265,14 @@ public class CounterPersistence extends BasePersistenceImpl {
 	}
 
 	protected synchronized CounterRegister createCounterRegister(String name)
-		throws SystemException{
+		throws SystemException {
 
 		return createCounterRegister(name, -1);
 	}
 
 	protected synchronized CounterRegister createCounterRegister(
-		String name, long size) throws SystemException {
+			String name, long size)
+		throws SystemException {
 
 		long rangeMin = 0;
 		long rangeMax = 0;
@@ -323,7 +324,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 	}
 
 	protected Connection getConnection() throws Exception {
-		if (_connection == null || _connection.isClosed()) {
+		if ((_connection == null) || _connection.isClosed()) {
 			_connection = getDataSource().getConnection();
 
 			_connection.setAutoCommit(true);
