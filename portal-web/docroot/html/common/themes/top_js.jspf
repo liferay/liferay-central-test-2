@@ -176,13 +176,7 @@
 					return "<%= session.getId() %>";
 				},
 				getPortletSetupShowBordersDefault: function() {
-					<%
-						String portletSetupShowBordersDefault = 
-							themeDisplay.getTheme().getSetting("portlet-setup-show-borders-default");
-						if( portletSetupShowBordersDefault == null )
-							portletSetupShowBordersDefault = "true";
-					%>
-					return <%= portletSetupShowBordersDefault %>;
+					return <%= GetterUtil.getString(theme.getSetting("portlet-setup-show-borders-default"), "true") %>;
 				}
 			}
 		};
