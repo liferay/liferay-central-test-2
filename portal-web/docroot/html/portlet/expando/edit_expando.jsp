@@ -149,6 +149,8 @@ if (column != null) {
 					%>
 
 				</select>
+
+				<liferay-ui:icon-help message="custom-attribute-type-help" />
 			</c:otherwise>
 		</c:choose>
 	</td>
