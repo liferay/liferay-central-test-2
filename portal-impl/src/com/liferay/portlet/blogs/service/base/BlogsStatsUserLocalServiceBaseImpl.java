@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -214,30 +215,30 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
 	protected BlogsEntryLocalService blogsEntryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
 	protected BlogsEntryService blogsEntryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
 	protected BlogsEntryPersistence blogsEntryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl")
 	protected BlogsEntryFinder blogsEntryFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.impl")
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl")
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
 	protected GroupLocalService groupLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
 	protected GroupService groupService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
 	protected GroupPersistence groupPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
 	protected GroupFinder groupFinder;
 }

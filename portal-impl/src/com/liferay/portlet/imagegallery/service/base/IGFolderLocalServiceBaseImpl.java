@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.LayoutLocalService;
@@ -335,58 +336,58 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")
 	protected IGFolderLocalService igFolderLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderService.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderService.impl")
 	protected IGFolderService igFolderService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
 	protected IGFolderPersistence igFolderPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.IGImageLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGImageLocalService.impl")
 	protected IGImageLocalService igImageLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.IGImageService.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGImageService.impl")
 	protected IGImageService igImageService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl")
 	protected IGImagePersistence igImagePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.impl")
 	protected IGImageFinder igImageFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
 	protected ImageLocalService imageLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected ImagePersistence imagePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutService.impl")
 	protected LayoutService layoutService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
 	protected LayoutPersistence layoutPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
 	protected LayoutFinder layoutFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
 	protected TagsEntryLocalService tagsEntryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
 	protected TagsEntryService tagsEntryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
 	protected TagsEntryPersistence tagsEntryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
 	protected TagsEntryFinder tagsEntryFinder;
 }

@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
@@ -244,36 +245,36 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewLocalService.impl")
 	protected TasksReviewLocalService tasksReviewLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewService.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewService.impl")
 	protected TasksReviewService tasksReviewService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
 	protected TasksReviewPersistence tasksReviewPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
 	protected TasksProposalLocalService tasksProposalLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
 	protected TasksProposalService tasksProposalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
 	protected TasksProposalPersistence tasksProposalPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
 	protected TasksProposalFinder tasksProposalFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
 	protected SocialActivityLocalService socialActivityLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected SocialActivityPersistence socialActivityPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
 }

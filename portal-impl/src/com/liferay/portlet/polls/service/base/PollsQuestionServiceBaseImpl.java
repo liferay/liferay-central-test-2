@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -213,42 +214,42 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsChoiceLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsChoiceLocalService.impl")
 	protected PollsChoiceLocalService pollsChoiceLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl")
 	protected PollsChoicePersistence pollsChoicePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl")
 	protected PollsChoiceFinder pollsChoiceFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
 	protected PollsQuestionLocalService pollsQuestionLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
 	protected PollsQuestionService pollsQuestionService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
 	protected PollsQuestionPersistence pollsQuestionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteLocalService.impl")
 	protected PollsVoteLocalService pollsVoteLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteService.impl")
 	protected PollsVoteService pollsVoteService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
 	protected PollsVotePersistence pollsVotePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
 }

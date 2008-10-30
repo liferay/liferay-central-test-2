@@ -25,6 +25,7 @@ package com.liferay.portlet.announcements.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
@@ -152,28 +153,28 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl")
 	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.impl")
 	protected AnnouncementsDeliveryService announcementsDeliveryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.impl")
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryService.impl")
 	protected AnnouncementsEntryService announcementsEntryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl")
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl")
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.impl")
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagService.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagService.impl")
 	protected AnnouncementsFlagService announcementsFlagService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl")
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }

@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
@@ -195,26 +196,26 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
 	protected WikiNodeLocalService wikiNodeLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
 	protected WikiNodeService wikiNodeService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
 	protected WikiNodePersistence wikiNodePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageLocalService.impl")
 	protected WikiPageLocalService wikiPageLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageService.impl")
 	protected WikiPageService wikiPageService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
 	protected WikiPagePersistence wikiPagePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl")
 	protected WikiPageFinder wikiPageFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageResourceLocalService.impl")
 	protected WikiPageResourceLocalService wikiPageResourceLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }
