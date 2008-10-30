@@ -152,13 +152,14 @@ public class OrganizationServiceUtil {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites)
+		java.util.List<com.liferay.portal.model.Website> websites,
+		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateOrganization(organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments,
-			addresses, emailAddresses, orgLabors, phones, websites);
+			addresses, emailAddresses, orgLabors, phones, websites, preferences);
 	}
 
 	public static OrganizationService getService() {

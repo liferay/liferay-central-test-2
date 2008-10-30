@@ -49,6 +49,14 @@ package com.liferay.portal.model;
  *
  */
 public interface Organization extends OrganizationModel {
+	public java.util.Set<String> getAvailableReminderQueryQuestions()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Organization getParentOrganization()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Address getAddress();
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()

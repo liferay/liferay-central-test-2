@@ -23,9 +23,12 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -36,21 +39,44 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * <a href="OrganizationImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
+
+	public Set<String> getAvailableReminderQueryQuestions()
+		throws PortalException, SystemException {
+
+		Set<String> questions = new TreeSet<String>();
+
+		PortletPreferences preferences =
+			PrefsPropsUtil.getOrganizationPreferences(getOrganizationId());
+
+		String[] questionsArray = StringUtil.split(
+			preferences.getValue("reminderQueries", null), StringPool.NEW_LINE);
+
+		questions.addAll(SetUtil.fromArray(questionsArray));
+
+		return questions;
+	}
 
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
@@ -135,6 +161,18 @@ public class OrganizationImpl
 		return new GroupImpl();
 	}
 
+	public Organization getParentOrganization()
+		throws PortalException, SystemException {
+
+		if (getParentOrganizationId() !=
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+			return null;
+		}
+
+		return OrganizationLocalServiceUtil.getOrganization(
+			getParentOrganizationId());
+	}
+
 	public int getPrivateLayoutsPageCount() {
 		try {
 			Group group = getGroup();
@@ -174,7 +212,7 @@ public class OrganizationImpl
 	public List<Organization> getSuborganizations() throws SystemException {
 		return OrganizationLocalServiceUtil.search(
 			getCompanyId(), getOrganizationId(), null, null, null, null, null,
-			0, getSuborganizationsSize());		
+			0, getSuborganizationsSize());
 	}
 
 	public int getSuborganizationsSize() throws SystemException {
