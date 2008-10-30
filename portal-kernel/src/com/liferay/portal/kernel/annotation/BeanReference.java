@@ -36,9 +36,9 @@ import java.lang.annotation.Target;
  * @author Michael Young
  *
  */
-@Target({ElementType.FIELD, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.METHOD})
 public @interface BeanReference {
 
 	String name() default StringPool.BLANK;
