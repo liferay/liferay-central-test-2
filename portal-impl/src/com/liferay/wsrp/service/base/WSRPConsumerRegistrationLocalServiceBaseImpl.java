@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.wsrp.model.WSRPConsumerRegistration;
@@ -196,24 +197,24 @@ public abstract class WSRPConsumerRegistrationLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.WSRPConfiguredProducerLocalService.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.WSRPConfiguredProducerLocalService.impl")
 	protected WSRPConfiguredProducerLocalService wsrpConfiguredProducerLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistence.impl")
 	protected WSRPConfiguredProducerPersistence wsrpConfiguredProducerPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.WSRPConsumerRegistrationLocalService.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.WSRPConsumerRegistrationLocalService.impl")
 	protected WSRPConsumerRegistrationLocalService wsrpConsumerRegistrationLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPConsumerRegistrationPersistence.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPConsumerRegistrationPersistence.impl")
 	protected WSRPConsumerRegistrationPersistence wsrpConsumerRegistrationPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.WSRPPortletLocalService.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.WSRPPortletLocalService.impl")
 	protected WSRPPortletLocalService wsrpPortletLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPPortletPersistence.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPPortletPersistence.impl")
 	protected WSRPPortletPersistence wsrpPortletPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.WSRPProducerLocalService.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.WSRPProducerLocalService.impl")
 	protected WSRPProducerLocalService wsrpProducerLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPProducerPersistence.impl")
+	@BeanReference(name = "com.liferay.wsrp.service.persistence.WSRPProducerPersistence.impl")
 	protected WSRPProducerPersistence wsrpProducerPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }
