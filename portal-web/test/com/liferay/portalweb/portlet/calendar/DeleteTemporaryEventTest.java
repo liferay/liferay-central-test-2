@@ -38,7 +38,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Event 2")) {
+				if (selenium.isElementPresent("link=Temporary Event")) {
 					break;
 				}
 			}
@@ -54,7 +54,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//tr[5]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -64,7 +64,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
 		selenium.click("//div[2]/ul/li[4]/nobr/a");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -75,7 +75,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Test Event 2")) {
+				if (!selenium.isElementPresent("link=Temporary Event")) {
 					break;
 				}
 			}

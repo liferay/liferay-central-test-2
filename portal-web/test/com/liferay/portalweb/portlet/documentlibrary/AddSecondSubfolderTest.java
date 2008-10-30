@@ -93,8 +93,7 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

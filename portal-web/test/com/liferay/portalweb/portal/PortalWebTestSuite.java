@@ -33,13 +33,11 @@ import com.liferay.portalweb.portlet.blogsaggregator.BlogsAggregatorTests;
 import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portlet.breadcrumb.BreadcrumbTests;
 import com.liferay.portalweb.portlet.calendar.CalendarTests;
-import com.liferay.portalweb.portlet.communities.CommunitiesTests;
 import com.liferay.portalweb.portlet.currencyconverter.CurrencyConverterTests;
 import com.liferay.portalweb.portlet.dictionary.DictionaryTests;
 import com.liferay.portalweb.portlet.directory.DirectoryTests;
 import com.liferay.portalweb.portlet.documentlibrary.DocumentLibraryTests;
 import com.liferay.portalweb.portlet.documentlibrarydisplay.DocumentLibraryDisplayTests;
-import com.liferay.portalweb.portlet.enterpriseadmin.EnterpriseAdminTests;
 import com.liferay.portalweb.portlet.globalprayerdigest.GlobalPrayerDigestTests;
 import com.liferay.portalweb.portlet.gospelforasia.GospelForAsiaTests;
 import com.liferay.portalweb.portlet.hellovelocity.HelloVelocityTests;
@@ -94,7 +92,7 @@ public class PortalWebTestSuite extends BaseTests {
 
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
+//		addTestSuite(EnterpriseAdminTests.class);
 		addTestSuite(AdminTests.class);
 		addTestSuite(AnnouncementsTests.class);
 		addTestSuite(BibleGatewayTests.class);
@@ -104,7 +102,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(BookmarksTests.class);
 		addTestSuite(BreadcrumbTests.class);
 		addTestSuite(CalendarTests.class);
-		addTestSuite(CommunitiesTests.class);
+//		addTestSuite(CommunitiesTests.class);
 		addTestSuite(CurrencyConverterTests.class);
 		addTestSuite(DictionaryTests.class);
 		addTestSuite(DirectoryTests.class);

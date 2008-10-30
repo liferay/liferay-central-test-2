@@ -33,13 +33,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditSecondFolderTest extends BaseTestCase {
 	public void testEditSecondFolder() throws Exception {
-		selenium.click("//li[2]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("link=Another"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("//nobr/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("EditSecondFolderTest"));
+			RuntimeVariables.replace("Edit Second Folder Test"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("EditSecondFolderTest"));
+			RuntimeVariables.replace("Edit Second Folder Test"));
 		selenium.typeKeys("_20_description",
 			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.type("_20_description",
@@ -47,6 +49,7 @@ public class EditSecondFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Edit Second Folder Test"));
 	}
 }

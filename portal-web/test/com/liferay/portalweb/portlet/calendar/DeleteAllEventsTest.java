@@ -55,7 +55,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Event")) {
+				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
 					break;
 				}
 			}
@@ -126,7 +126,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
+				if (!selenium.isElementPresent("link=Caedmon's Call Concert!")) {
 					break;
 				}
 			}
@@ -181,7 +181,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Test Event")) {
+				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
 					break;
 				}
 			}

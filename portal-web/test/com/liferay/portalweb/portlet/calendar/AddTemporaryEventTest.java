@@ -53,9 +53,9 @@ public class AddTemporaryEventTest extends BaseTestCase {
 		}
 
 		selenium.click("_8_timeZoneSensitiveCheckbox");
-		selenium.type("_8_title", RuntimeVariables.replace("Test Event 2"));
+		selenium.type("_8_title", RuntimeVariables.replace("Temporary Event"));
 		selenium.type("_8_description",
-			RuntimeVariables.replace("This is a test event!"));
+			RuntimeVariables.replace("This is a temporary event!"));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Appointment"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
@@ -66,7 +66,7 @@ public class AddTemporaryEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("Link=Test Event 2")) {
+				if (selenium.isElementPresent("Link=Temporary Event")) {
 					break;
 				}
 			}

@@ -50,8 +50,27 @@ public class EditCommentsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Edit");
-		selenium.typeKeys("_20_postReplyBody0", RuntimeVariables.replace(""));
-		selenium.type("_20_postReplyBody0", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_editBody1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_20_editBody1",
+			RuntimeVariables.replace("This comment has been edited!"));
+		selenium.type("_20_editBody1",
+			RuntimeVariables.replace("This comment has been edited!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,5 +90,6 @@ public class EditCommentsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_20_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This comment has been edited!"));
 	}
 }

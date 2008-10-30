@@ -55,7 +55,7 @@ public class EditEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//tr[5]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -65,7 +65,7 @@ public class EditEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
 		selenium.click("//div[2]/ul/li[1]/nobr/a");
 
 		for (int second = 0;; second++) {

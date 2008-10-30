@@ -140,7 +140,7 @@ public class CompareVersionsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"There are no differences between Test Document.txt 1.0 and Test Document.txt 1.1. ")) {
+							"There are no differences between Test Document.txt 1.0 and Test Document.txt 1.1.")) {
 					break;
 				}
 			}

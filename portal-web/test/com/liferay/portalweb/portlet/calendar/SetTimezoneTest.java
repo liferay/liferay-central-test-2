@@ -89,7 +89,7 @@ public class SetTimezoneTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -91,8 +91,7 @@ public class MoveEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id=\"p_p_id_28_\"]/div/form/div[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

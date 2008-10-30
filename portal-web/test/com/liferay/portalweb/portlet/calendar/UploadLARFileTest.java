@@ -120,7 +120,7 @@ public class UploadLARFileTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Edited Test Event"));
 		assertTrue(selenium.isElementPresent("link=Off to Yosemite!"));
-		assertTrue(selenium.isElementPresent("link=Test Event"));
+		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
