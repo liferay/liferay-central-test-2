@@ -60,7 +60,7 @@ else if (selUser != null) {
 	groups = selUser.getGroups();
 
 	if (filterManageableGroups) {
-		groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+		EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
 	}
 }
 
@@ -77,7 +77,7 @@ else if (selUser != null) {
 	organizations = selUser.getOrganizations();
 
 	if (filterManageableOrganizations) {
-		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
+		EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
 	}
 }
 
@@ -94,7 +94,7 @@ else if (selUser != null) {
 	roles = selUser.getRoles();
 
 	if (filterManageableRoles) {
-		roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+		EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 	}
 }
 

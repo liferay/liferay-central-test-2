@@ -71,6 +71,7 @@ import com.liferay.portal.util.comparator.UserScreenNameComparator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -86,80 +87,75 @@ import javax.portlet.ActionRequest;
  */
 public class EnterpriseAdminUtil {
 
-	public static List<Group> filterGroups(
+	public static void filterGroups(
 			PermissionChecker permissionChecker, List<Group> groups)
 		throws PortalException, SystemException {
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return groups;
+			return;
 		}
 
-		List<Group> filteredGroups = new ArrayList<Group>();
+		Iterator<Group> itr = groups.iterator();
 
-		for (Group group : groups) {
+		while (itr.hasNext()) {
+			Group group = itr.next();
+
 			if (!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
-				continue;
+
+				itr.remove();
 			}
-
-			filteredGroups.add(group);
 		}
-
-		return filteredGroups;
 	}
 
-	public static List<Organization> filterOrganizations(
+	public static void filterOrganizations(
 			PermissionChecker permissionChecker,
 			List<Organization> organizations)
 		throws PortalException, SystemException {
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return organizations;
+			return;
 		}
 
-		List<Organization> filteredOrganizations =
-			new ArrayList<Organization>();
+		Iterator<Organization> itr = organizations.iterator();
 
-		for (Organization organization : organizations) {
+		while (itr.hasNext()) {
+			Organization organization = itr.next();
+
 			if (!OrganizationPermissionUtil.contains(
 					permissionChecker, organization.getOrganizationId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
-				continue;
+
+				itr.remove();
 			}
-
-			filteredOrganizations.add(organization);
 		}
-
-		return filteredOrganizations;
 	}
 
-	public static List<Role> filterRoles(
+	public static void filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return roles;
+			return;
 		}
 
-		List<Role> filteredRoles = new ArrayList<Role>();
+		Iterator<Role> itr = roles.iterator();
 
-		for (Role role : roles) {
-			if (role.getName().equals(RoleConstants.GUEST) ||
-				role.getName().equals(RoleConstants.OWNER) ||
-				role.getName().equals(RoleConstants.USER)) {
-				continue;
-			}
+		while (itr.hasNext()) {
+			Role role = itr.next();
 
-			if (!RolePermissionUtil.contains(
+			String name = role.getName();
+
+			if (name.equals(RoleConstants.GUEST) ||
+				name.equals(RoleConstants.OWNER) ||
+				name.equals(RoleConstants.USER) ||
+				!RolePermissionUtil.contains(
 					permissionChecker, role.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
-				continue;
+
+				itr.remove();
 			}
-
-			filteredRoles.add(role);
 		}
-
-		return filteredRoles;
 	}
 
 	public static List<Address> getAddresses(ActionRequest actionRequest) {

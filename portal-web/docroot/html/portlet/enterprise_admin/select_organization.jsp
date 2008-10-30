@@ -51,10 +51,9 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 		if (filterManageableOrganizations) {
 			List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
 
-			manageableOrganizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, manageableOrganizations);
+			EnterpriseAdminUtil.filterOrganizations(permissionChecker, manageableOrganizations);
 
 			total = manageableOrganizations.size();
-
 			results = ListUtil.subList(manageableOrganizations, searchContainer.getStart(), searchContainer.getEnd());
 		}
 		else {

@@ -52,15 +52,13 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 		if (filterManageableRoles) {
 			List<Role> roles = RoleLocalServiceUtil.getRoles(company.getCompanyId());
 
-			roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+			EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
 			total = roles.size();
-
 			results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 		}
 		else {
 			results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
 			total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR);
 		}
 

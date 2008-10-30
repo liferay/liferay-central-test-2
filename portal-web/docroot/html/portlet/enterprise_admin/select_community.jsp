@@ -55,15 +55,13 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
 		if (filterManageableGroups) {
 			List<Group> groups = user.getGroups();
 
-			groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+			EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
 
 			total = groups.size();
-
 			results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
 		}
 		else {
 			results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
 			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
 		}
 
