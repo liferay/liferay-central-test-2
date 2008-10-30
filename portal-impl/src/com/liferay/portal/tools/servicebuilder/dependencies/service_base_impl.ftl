@@ -1,5 +1,6 @@
 package ${packagePath}.service.base;
 
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
 
@@ -138,22 +139,22 @@ import ${beanLocatorUtil};
 
 <#list referenceList as tempEntity>
 	<#if tempEntity.hasLocalService()>
-		@com.liferay.portal.kernel.annotation.BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl")
 		protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
 	</#if>
 
 	<#if tempEntity.hasRemoteService()>
-		@com.liferay.portal.kernel.annotation.BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl")
 		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
 	</#if>
 
 	<#if tempEntity.hasColumns()>
-		@com.liferay.portal.kernel.annotation.BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl")
 		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 	</#if>
 
 	<#if tempEntity.hasFinderClass()>
-		@com.liferay.portal.kernel.annotation.BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl")
 		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 	</#if>
 </#list>
