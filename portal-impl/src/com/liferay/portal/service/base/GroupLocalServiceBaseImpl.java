@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.AccountLocalService;
@@ -1948,394 +1949,394 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		this.wikiNodePersistence = wikiNodePersistence;
 	}
 
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")
 	protected AccountLocalService accountLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.AccountService.impl")
+	@BeanReference(name = "com.liferay.portal.service.AccountService.impl")
 	protected AccountService accountService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
 	protected AccountPersistence accountPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.AddressLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.AddressLocalService.impl")
 	protected AddressLocalService addressLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.AddressService.impl")
+	@BeanReference(name = "com.liferay.portal.service.AddressService.impl")
 	protected AddressService addressService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
 	protected AddressPersistence addressPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ClassNameLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ClassNameLocalService.impl")
 	protected ClassNameLocalService classNameLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ClassNameService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ClassNameService.impl")
 	protected ClassNameService classNameService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ClassNamePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ClassNamePersistence.impl")
 	protected ClassNamePersistence classNamePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.CompanyLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.CompanyLocalService.impl")
 	protected CompanyLocalService companyLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.CompanyService.impl")
+	@BeanReference(name = "com.liferay.portal.service.CompanyService.impl")
 	protected CompanyService companyService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
 	protected CompanyPersistence companyPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ContactLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ContactLocalService.impl")
 	protected ContactLocalService contactLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ContactService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ContactService.impl")
 	protected ContactService contactService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ContactPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ContactPersistence.impl")
 	protected ContactPersistence contactPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.CountryService.impl")
+	@BeanReference(name = "com.liferay.portal.service.CountryService.impl")
 	protected CountryService countryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.CountryPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.CountryPersistence.impl")
 	protected CountryPersistence countryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.EmailAddressLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.EmailAddressLocalService.impl")
 	protected EmailAddressLocalService emailAddressLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.EmailAddressService.impl")
+	@BeanReference(name = "com.liferay.portal.service.EmailAddressService.impl")
 	protected EmailAddressService emailAddressService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.EmailAddressPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.EmailAddressPersistence.impl")
 	protected EmailAddressPersistence emailAddressPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
 	protected GroupLocalService groupLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
 	protected GroupService groupService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
 	protected GroupPersistence groupPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
 	protected GroupFinder groupFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
 	protected ImageLocalService imageLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected ImagePersistence imagePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutService.impl")
 	protected LayoutService layoutService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
 	protected LayoutPersistence layoutPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
 	protected LayoutFinder layoutFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutSetLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutSetLocalService.impl")
 	protected LayoutSetLocalService layoutSetLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutSetService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutSetService.impl")
 	protected LayoutSetService layoutSetService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
 	protected LayoutSetPersistence layoutSetPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.LayoutTemplateLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutTemplateLocalService.impl")
 	protected LayoutTemplateLocalService layoutTemplateLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ListTypeService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ListTypeService.impl")
 	protected ListTypeService listTypeService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
 	protected ListTypePersistence listTypePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.MembershipRequestLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.MembershipRequestLocalService.impl")
 	protected MembershipRequestLocalService membershipRequestLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.MembershipRequestService.impl")
+	@BeanReference(name = "com.liferay.portal.service.MembershipRequestService.impl")
 	protected MembershipRequestService membershipRequestService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")
 	protected MembershipRequestPersistence membershipRequestPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.OrganizationLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.OrganizationLocalService.impl")
 	protected OrganizationLocalService organizationLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.OrganizationService.impl")
+	@BeanReference(name = "com.liferay.portal.service.OrganizationService.impl")
 	protected OrganizationService organizationService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")
 	protected OrganizationPersistence organizationPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.OrganizationFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationFinder.impl")
 	protected OrganizationFinder organizationFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl")
 	protected OrgGroupPermissionPersistence orgGroupPermissionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionFinder.impl")
 	protected OrgGroupPermissionFinder orgGroupPermissionFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl")
 	protected OrgGroupRolePersistence orgGroupRolePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.OrgLaborLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.OrgLaborLocalService.impl")
 	protected OrgLaborLocalService orgLaborLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.OrgLaborService.impl")
+	@BeanReference(name = "com.liferay.portal.service.OrgLaborService.impl")
 	protected OrgLaborService orgLaborService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.OrgLaborPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgLaborPersistence.impl")
 	protected OrgLaborPersistence orgLaborPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PasswordPolicyLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PasswordPolicyLocalService.impl")
 	protected PasswordPolicyLocalService passwordPolicyLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PasswordPolicyService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PasswordPolicyService.impl")
 	protected PasswordPolicyService passwordPolicyService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl")
 	protected PasswordPolicyPersistence passwordPolicyPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyFinder.impl")
 	protected PasswordPolicyFinder passwordPolicyFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PasswordPolicyRelLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PasswordPolicyRelLocalService.impl")
 	protected PasswordPolicyRelLocalService passwordPolicyRelLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl")
 	protected PasswordPolicyRelPersistence passwordPolicyRelPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PasswordTrackerLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PasswordTrackerLocalService.impl")
 	protected PasswordTrackerLocalService passwordTrackerLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl")
 	protected PasswordTrackerPersistence passwordTrackerPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PermissionLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PermissionLocalService.impl")
 	protected PermissionLocalService permissionLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PermissionService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PermissionService.impl")
 	protected PermissionService permissionService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PermissionPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionPersistence.impl")
 	protected PermissionPersistence permissionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PermissionFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionFinder.impl")
 	protected PermissionFinder permissionFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PermissionUserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionUserFinder.impl")
 	protected PermissionUserFinder permissionUserFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PhoneLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PhoneLocalService.impl")
 	protected PhoneLocalService phoneLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PhoneService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PhoneService.impl")
 	protected PhoneService phoneService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
 	protected PhonePersistence phonePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortalLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortalLocalService.impl")
 	protected PortalLocalService portalLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortalService.impl")
 	protected PortalService portalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PluginSettingLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PluginSettingLocalService.impl")
 	protected PluginSettingLocalService pluginSettingLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PluginSettingService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PluginSettingService.impl")
 	protected PluginSettingService pluginSettingService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
 	protected PluginSettingPersistence pluginSettingPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortletLocalService.impl")
 	protected PortletLocalService portletLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortletService.impl")
 	protected PortletService portletService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
 	protected PortletPersistence portletPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletPreferencesService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesService.impl")
 	protected PortletPreferencesService portletPreferencesService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
 	protected PortletPreferencesFinder portletPreferencesFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.QuartzLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService.impl")
 	protected QuartzLocalService quartzLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.RegionService.impl")
+	@BeanReference(name = "com.liferay.portal.service.RegionService.impl")
 	protected RegionService regionService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
 	protected RegionPersistence regionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ReleaseLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ReleaseLocalService.impl")
 	protected ReleaseLocalService releaseLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ReleasePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ReleasePersistence.impl")
 	protected ReleasePersistence releasePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ResourceCodeLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceCodeLocalService.impl")
 	protected ResourceCodeLocalService resourceCodeLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
 	protected ResourceCodePersistence resourceCodePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.RoleLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.RoleLocalService.impl")
 	protected RoleLocalService roleLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.RoleService.impl")
+	@BeanReference(name = "com.liferay.portal.service.RoleService.impl")
 	protected RoleService roleService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
 	protected RolePersistence rolePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.RoleFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.RoleFinder.impl")
 	protected RoleFinder roleFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ServiceComponentLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ServiceComponentLocalService.impl")
 	protected ServiceComponentLocalService serviceComponentLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected ServiceComponentPersistence serviceComponentPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.PortletItemLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.PortletItemLocalService.impl")
 	protected PortletItemLocalService portletItemLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
 	protected PortletItemPersistence portletItemPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected SubscriptionPersistence subscriptionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ThemeLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ThemeLocalService.impl")
 	protected ThemeLocalService themeLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.ThemeService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ThemeService.impl")
 	protected ThemeService themeService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserGroupLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserGroupLocalService.impl")
 	protected UserGroupLocalService userGroupLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserGroupService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserGroupService.impl")
 	protected UserGroupService userGroupService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
 	protected UserGroupPersistence userGroupPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserGroupFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupFinder.impl")
 	protected UserGroupFinder userGroupFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserGroupRoleLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserGroupRoleLocalService.impl")
 	protected UserGroupRoleLocalService userGroupRoleLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserGroupRoleService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserGroupRoleService.impl")
 	protected UserGroupRoleService userGroupRoleService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected UserGroupRolePersistence userGroupRolePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserIdMapperLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserIdMapperLocalService.impl")
 	protected UserIdMapperLocalService userIdMapperLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")
 	protected UserIdMapperPersistence userIdMapperPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserTrackerLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserTrackerLocalService.impl")
 	protected UserTrackerLocalService userTrackerLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPersistence.impl")
 	protected UserTrackerPersistence userTrackerPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.UserTrackerPathLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserTrackerPathLocalService.impl")
 	protected UserTrackerPathLocalService userTrackerPathLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl")
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.WebDAVPropsLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.WebDAVPropsLocalService.impl")
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.WebsiteLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.WebsiteLocalService.impl")
 	protected WebsiteLocalService websiteLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.WebsiteService.impl")
+	@BeanReference(name = "com.liferay.portal.service.WebsiteService.impl")
 	protected WebsiteService websiteService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
 	protected BlogsEntryLocalService blogsEntryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
 	protected BlogsEntryService blogsEntryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
 	protected BlogsEntryPersistence blogsEntryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl")
 	protected BlogsEntryFinder blogsEntryFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.impl")
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl")
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.impl")
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderService.impl")
+	@BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderService.impl")
 	protected BookmarksFolderService bookmarksFolderService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl")
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.CalEventLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.calendar.service.CalEventLocalService.impl")
 	protected CalEventLocalService calEventLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.CalEventService.impl")
+	@BeanReference(name = "com.liferay.portlet.calendar.service.CalEventService.impl")
 	protected CalEventService calEventService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl")
 	protected CalEventPersistence calEventPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl")
 	protected CalEventFinder calEventFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService.impl")
 	protected DLFolderLocalService dlFolderLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderService.impl")
 	protected DLFolderService dlFolderService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected DLFolderPersistence dlFolderPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
 	protected DLFolderFinder dlFolderFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")
 	protected IGFolderLocalService igFolderLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderService.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderService.impl")
 	protected IGFolderService igFolderService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
 	protected IGFolderPersistence igFolderPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.JournalArticleLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.JournalArticleLocalService.impl")
 	protected JournalArticleLocalService journalArticleLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.JournalArticleService.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.JournalArticleService.impl")
 	protected JournalArticleService journalArticleService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
 	protected JournalArticlePersistence journalArticlePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl")
 	protected JournalArticleFinder journalArticleFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.JournalStructureLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.JournalStructureLocalService.impl")
 	protected JournalStructureLocalService journalStructureLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.JournalStructureService.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.JournalStructureService.impl")
 	protected JournalStructureService journalStructureService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
 	protected JournalStructurePersistence journalStructurePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl")
 	protected JournalStructureFinder journalStructureFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.JournalTemplateLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.JournalTemplateLocalService.impl")
 	protected JournalTemplateLocalService journalTemplateLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.JournalTemplateService.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.JournalTemplateService.impl")
 	protected JournalTemplateService journalTemplateService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
 	protected JournalTemplatePersistence journalTemplatePersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl")
 	protected JournalTemplateFinder journalTemplateFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
 	protected MBBanService mbBanService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl")
 	protected MBBanPersistence mbBanPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryLocalService.impl")
 	protected MBCategoryLocalService mbCategoryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryService.impl")
 	protected MBCategoryService mbCategoryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl")
 	protected MBCategoryPersistence mbCategoryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl")
 	protected MBCategoryFinder mbCategoryFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl")
 	protected MBStatsUserLocalService mbStatsUserLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
 	protected MBStatsUserPersistence mbStatsUserPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
 	protected PollsQuestionLocalService pollsQuestionLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
 	protected PollsQuestionService pollsQuestionService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
 	protected PollsQuestionPersistence pollsQuestionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService.impl")
 	protected ShoppingCartLocalService shoppingCartLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl")
 	protected ShoppingCartPersistence shoppingCartPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.impl")
 	protected ShoppingCategoryLocalService shoppingCategoryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryService.impl")
 	protected ShoppingCategoryService shoppingCategoryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl")
 	protected ShoppingCategoryPersistence shoppingCategoryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponLocalService.impl")
 	protected ShoppingCouponLocalService shoppingCouponLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponService.impl")
 	protected ShoppingCouponService shoppingCouponService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl")
 	protected ShoppingCouponPersistence shoppingCouponPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl")
 	protected ShoppingCouponFinder shoppingCouponFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderLocalService.impl")
 	protected ShoppingOrderLocalService shoppingOrderLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderService.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderService.impl")
 	protected ShoppingOrderService shoppingOrderService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl")
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl")
 	protected ShoppingOrderFinder shoppingOrderFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.impl")
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl")
 	protected SCFrameworkVersionService scFrameworkVersionService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.impl")
 	protected SCProductEntryLocalService scProductEntryLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl")
 	protected SCProductEntryService scProductEntryService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
 	protected SCProductEntryPersistence scProductEntryPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
 	protected TasksProposalLocalService tasksProposalLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
 	protected TasksProposalService tasksProposalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
 	protected TasksProposalPersistence tasksProposalPersistence;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
 	protected TasksProposalFinder tasksProposalFinder;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
 	protected WikiNodeLocalService wikiNodeLocalService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
 	protected WikiNodeService wikiNodeService;
-	@com.liferay.portal.kernel.annotation.BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
 	protected WikiNodePersistence wikiNodePersistence;
 }
