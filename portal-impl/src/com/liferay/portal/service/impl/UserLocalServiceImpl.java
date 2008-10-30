@@ -160,6 +160,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -185,6 +194,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -200,6 +218,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.addUsers(roleId, userIds);
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -209,6 +236,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
+
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -316,6 +352,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ExpandoBridge expandoBridge = user.getExpandoBridge();
 
+		UserIndexer.setReIndex(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Mail
@@ -447,6 +484,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		try {
+			UserIndexer.setReIndex(true);
 			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
@@ -1573,6 +1611,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.removeUsers(groupId, userIds);
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1590,6 +1637,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.removeUsers(organizationId, userIds);
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1606,6 +1662,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, userIds);
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1614,6 +1679,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, users);
 
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(users);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + users.size(), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1621,6 +1695,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		userGroupPersistence.removeUsers(userGroupId, userIds);
+
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + String.valueOf(userIds), se);
+		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1687,6 +1770,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (!oldGroupIds.contains(newGroupId)) {
 				addGroupUsers(newGroupId, new long[] {userId});
 			}
+		}
+
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(new long[] {userId});
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + userId, se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1820,6 +1912,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (!oldOrganizationIds.contains(newOrganizationId)) {
 				addOrganizationUsers(newOrganizationId, new long[] {userId});
 			}
+		}
+
+		// Indexer
+
+		try {
+			UserIndexer.updateUsers(new long[] {userId});
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + userId, se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -2070,6 +2171,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ExpandoBridge expandoBridge = user.getExpandoBridge();
 
+		UserIndexer.setReIndex(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Contact
@@ -2151,6 +2253,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		try {
+			UserIndexer.setReIndex(true);
 			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {

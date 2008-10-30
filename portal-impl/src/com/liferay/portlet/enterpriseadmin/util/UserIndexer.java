@@ -99,6 +99,10 @@ public class UserIndexer implements Indexer {
 	}
 
 	public static void updateUser(User user) throws SearchException {
+		if (!_reIndex.get()) {
+			return;
+		}
+
 		try {
 			if (user.isDefaultUser()) {
 				return;
@@ -176,5 +180,11 @@ public class UserIndexer implements Indexer {
 			throw new SearchException(e);
 		}
 	}
+
+	public static void setReIndex(boolean reIndex) {
+		_reIndex.set(reIndex);
+	}
+
+	protected static ReIndexThreadLocal _reIndex = new ReIndexThreadLocal();
 
 }
