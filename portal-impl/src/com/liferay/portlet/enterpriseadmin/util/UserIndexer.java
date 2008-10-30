@@ -75,10 +75,10 @@ public class UserIndexer implements Indexer {
 
 		doc.addKeyword("screenName", screenName);
 		doc.addKeyword("emailAddress", emailAddress);
-		doc.addText("firstName", firstName);
-		doc.addText("middleName", middleName);
-		doc.addText("lastName", lastName);
-		doc.addText("jobTitle", jobTitle);
+		doc.addKeyword("firstName", firstName);
+		doc.addKeyword("middleName", middleName);
+		doc.addKeyword("lastName", lastName);
+		doc.addKeyword("jobTitle", jobTitle);
 		doc.addKeyword("active", active);
 		doc.addKeyword("groupIds", groupIds);
 		doc.addKeyword("organizationIds", organizationIds);
