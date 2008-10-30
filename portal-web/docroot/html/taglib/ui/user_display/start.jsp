@@ -27,11 +27,18 @@
 <%
 long portraitId = 0;
 String tokenId = StringPool.BLANK;
-boolean isOnline = false;
+List<Presence> presences = null;
 
 if (userDisplay != null) {
 	portraitId = userDisplay.getPortraitId();
 	tokenId = ImageServletTokenUtil.getToken(userDisplay.getPortraitId());
+	presences = RUONUtil.getPresences(userId, locale);
+}
+
+boolean online = false;
+
+if ((presences != null) && (presences.size() > 0)) {
+	online = true;
 }
 
 if (Validator.isNull(url) && (userDisplay != null)) {
@@ -67,7 +74,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	<c:if test="<%= displayStyle == 2 %>">
 	</c:if>
 
-	<div class="user-details <%= isOnline ? "user-online" : "user-offline" %>">
+	<div class="user-details <%= online ? "user-online" : "user-offline" %>">
 		<c:choose>
 			<c:when test="<%= userDisplay != null %>">
 				<c:if test="<%= Validator.isNotNull(url) %>"><a class="user-name" href="<%= url %>"></c:if>
@@ -76,10 +83,19 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 
 				<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
 
-				<c:if test="<%= isOnline %>">
+				<c:if test="<%= online && (userId != user.getUserId()) %>">
 					<ul class="lfr-component network-list">
-						<li class="call-user"><a href="javascript: ;"><liferay-ui:message key="call-me" /></a></li>
-						<li class="message-user"><a href="javascript: ;"><liferay-ui:message key="im-me" /></a></li>
+
+						<%
+						for (Presence presence : presences) {
+						%>
+
+							<li><%= presence.getOutput() %></li>
+
+						<%
+						}
+						%>
+
 					</ul>
 				</c:if>
 			</c:when>
