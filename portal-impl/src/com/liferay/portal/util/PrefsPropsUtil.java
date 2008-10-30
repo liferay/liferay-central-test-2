@@ -55,19 +55,6 @@ public class PrefsPropsUtil {
 			companyId, ownerId, ownerType, plid, portletId);
 	}
 
-	public static PortletPreferences getOrganizationPreferences(
-			long organizationId)
-		throws SystemException {
-
-		long ownerId = organizationId;
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ORGANIZATION;
-		long plid = PortletKeys.PREFS_PLID_SHARED;
-		String portletId = PortletKeys.LIFERAY_PORTAL;
-
-		return PortletPreferencesLocalServiceUtil.getPreferences(
-			organizationId, ownerId, ownerType, plid, portletId);
-	}
-
 	public static boolean getBoolean(String name) throws SystemException {
 		PortletPreferences preferences = getPreferences();
 

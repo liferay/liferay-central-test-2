@@ -35,12 +35,10 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.WebsiteURLException;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.OrgLabor;
@@ -60,7 +58,6 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.PortletPreferences;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -220,19 +217,10 @@ public class EditOrganizationAction extends PortletAction {
 
 			// Update organization
 
-			PortletPreferences preferences =
-				PrefsPropsUtil.getOrganizationPreferences(organizationId);
-
-			String reminderQueries = ParamUtil.getString(
-				actionRequest, "reminderQueries");
-
-			preferences.setValue("reminderQueries", reminderQueries);
-			
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
-				recursable, regionId, countryId, statusId, comments,
-				addresses, emailAddresses, orgLabors, phones, websites,
-				preferences);
+				recursable, regionId, countryId, statusId, comments, addresses,
+				emailAddresses, orgLabors, phones, websites);
 		}
 
 		return organization;

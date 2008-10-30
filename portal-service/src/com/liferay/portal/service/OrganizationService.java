@@ -119,8 +119,7 @@ public interface OrganizationService {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites,
-		javax.portlet.PortletPreferences preferences)
+		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

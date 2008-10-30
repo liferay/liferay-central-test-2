@@ -39,10 +39,7 @@ import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
-import javax.portlet.PortletPreferences;
-import javax.portlet.ValidatorException;
 import java.util.List;
-import java.io.IOException;
 
 /**
  * <a href="OrganizationServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -211,8 +208,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			String type, boolean recursable, long regionId, long countryId,
 			int statusId, String comments, List<Address> addresses,
 			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
-			List<Phone> phones, List<Website> websites,
-			PortletPreferences preferences)
+			List<Phone> phones, List<Website> websites)
 		throws PortalException, SystemException {
 
 		Organization organization = updateOrganization(
@@ -232,13 +228,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		EnterpriseAdminUtil.updateWebsites(
 			Organization.class.getName(), organizationId, websites);
-
-		try {
-			preferences.store();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 
 		return organization;
 	}

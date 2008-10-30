@@ -657,8 +657,7 @@ public class OrganizationServiceHttp {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites,
-		javax.portlet.PortletPreferences preferences)
+		java.util.List<com.liferay.portal.model.Website> websites)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -722,19 +721,12 @@ public class OrganizationServiceHttp {
 				paramObj13 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj14 = preferences;
-
-			if (preferences == null) {
-				paramObj14 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
+						paramObj10, paramObj11, paramObj12, paramObj13
 					});
 
 			Object returnObj = null;
