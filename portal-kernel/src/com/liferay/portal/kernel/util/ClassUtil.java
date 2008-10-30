@@ -29,8 +29,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <a href="ClassUtil.java.html"><b><i>View Source</i></b></a>
@@ -40,6 +44,12 @@ import java.util.Set;
  *
  */
 public class ClassUtil {
+
+	private static final Pattern _ANNOTATION_NAME_REGEXP =
+		Pattern.compile("@(\\w+)$");
+
+	private static final Pattern _ANNOTATION_PARAMS_REGEXP =
+		Pattern.compile("@(\\w+)\\({0,1}\\{{0,1}([^)}]+)\\}{0,1}\\){0,1}");
 
 	public static Set<String> getClasses(File file) throws IOException {
 		String fileName = file.getName();
@@ -58,19 +68,21 @@ public class ClassUtil {
 
 		StreamTokenizer st = new StreamTokenizer(new BufferedReader(reader));
 
-		_setupParseTable(st);
-
-		st.wordChars('@', '@');
+		_setupParseTableForAnnotationProcessing(st);
 
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
 			if (st.ttype == StreamTokenizer.TT_WORD) {
-				if (st.sval.equals("class") || st.sval.equals("interface")) {
+				if (st.sval.equals("class") || st.sval.equals("interface") ||
+					st.sval.equals("@interface")) {
 					break;
 				}
 				else if (st.sval.startsWith("@")) {
-					String token = StringUtil.replace(st.sval, '@', "");
-
-					classes.add(token);
+					st.ordinaryChar(' ');
+					String []las = _processAnnotation(st.sval);
+					for (int i = 0; i < las.length; i++) {
+						classes.add(las[i]);
+					}
+					_setupParseTableForAnnotationProcessing(st);
 				}
 			}
 		}
@@ -154,6 +166,47 @@ public class ClassUtil {
 		return false;
 	}
 
+	private static String[] _processAnnotation(
+		String sval) throws IOException {
+
+		List<String> tokens = new ArrayList<String>();
+		String annotationName , annotationParams;
+
+		sval = sval.trim();
+
+		Matcher mSimpleAnnotation = _ANNOTATION_NAME_REGEXP.matcher(sval);
+		Matcher mAnnotationWithParams = _ANNOTATION_PARAMS_REGEXP.matcher(sval);
+
+		if (mSimpleAnnotation.matches()) {
+			annotationName = mSimpleAnnotation.group();
+			tokens.add(annotationName.replace("@", ""));
+		} else if (mAnnotationWithParams.matches()) {
+			annotationName = mAnnotationWithParams.group(1);
+			tokens.add(annotationName.replace("@", ""));
+			annotationParams = mAnnotationWithParams.group(2);
+
+			// Further process the params
+
+			tokens = _processAnnotationParams(annotationParams,tokens);
+		}
+		return (String[])tokens.toArray(new String[0]);
+	}
+
+	private static List<String> _processAnnotationParams(
+			String toMatch, List<String> tokens) {
+
+		String []allParams = toMatch.split(",");
+		Pattern cp = Pattern.compile("(.+)\\..+");
+
+		for (int i = 0; i < allParams.length; i++) {
+			Matcher m = cp.matcher(allParams[i]);
+			if (m.find()) {
+				tokens.add(m.group(1));
+			}
+		}
+		return tokens;
+	}
+
 	private static void _setupParseTable(StreamTokenizer st) {
 		st.resetSyntax();
 		st.slashSlashComments(true);
@@ -168,6 +221,18 @@ public class ClassUtil {
 		st.quoteChar('"');
 		st.quoteChar('\'');
 		st.parseNumbers();
+	}
+
+	private static void _setupParseTableForAnnotationProcessing(
+		StreamTokenizer st) {
+		_setupParseTable(st);
+
+		st.wordChars('@', '@');
+		st.wordChars('(', '(');
+		st.wordChars(')', ')');
+		st.wordChars('{', '{');
+		st.wordChars('}', '}');
+		st.wordChars(',',',');
 	}
 
 }
