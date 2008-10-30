@@ -80,14 +80,18 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 			value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
 		/>
 
-		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
-		</liferay-ui:search-container-column-text>
+		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+			<liferay-ui:search-container-column-text>
+				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+			</liferay-ui:search-container-column-text>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
-<br />
+<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<br />
 
-<input onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<input onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
+</c:if>

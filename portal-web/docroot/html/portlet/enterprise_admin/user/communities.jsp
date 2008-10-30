@@ -74,14 +74,18 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 			property="name"
 		/>
 
-		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
-		</liferay-ui:search-container-column-text>
+		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+			<liferay-ui:search-container-column-text>
+				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
+			</liferay-ui:search-container-column-text>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
-<br />
+<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<br />
 
-<input onclick="<portlet:namespace />openGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<input onclick="<portlet:namespace />openGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
+</c:if>

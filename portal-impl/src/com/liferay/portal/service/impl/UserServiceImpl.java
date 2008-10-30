@@ -592,23 +592,30 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	protected long[] checkGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		// Check permissions for group assignments and add back any groups that
-		// the administrator doesn't have the rights to remove
-
-		for (long groupId : groupIds) {
-			GroupPermissionUtil.check(
-				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
-		}
+		// Add back any groups that the administrator doesn't have the rights to
+		// remove and check that he has the permission to add any new group
 
 		List<Group> oldGroups = groupLocalService.getUserGroups(userId);
+		long[] oldGroupIds = new long[oldGroups.size()];
 
-		for (Group group : oldGroups) {
+		for (int i = 0; i < oldGroups.size(); i++) {
+			Group group = oldGroups.get(i);
+
 			if (!ArrayUtil.contains(groupIds, group.getGroupId()) &&
 				!GroupPermissionUtil.contains(
 					getPermissionChecker(), group.getGroupId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
 
 				groupIds = ArrayUtil.append(groupIds, group.getGroupId());
+			}
+
+			oldGroupIds[i] = group.getGroupId();
+		}
+
+		for (long groupId : groupIds) {
+			if (!ArrayUtil.contains(oldGroupIds, groupId)) {
+				GroupPermissionUtil.check(
+					getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 			}
 		}
 
@@ -618,20 +625,17 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	protected long[] checkOrganizations(long userId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		// Check permissions for organization assignments and add back any
-		// organizations that the administrator doesn't have the rights to
-		// remove
-
-		for (long organizationId : organizationIds) {
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId,
-				ActionKeys.ASSIGN_MEMBERS);
-		}
+		// Add back any organizations that the administrator doesn't have the
+		// rights to remove and check that he has the permission to add any new
+		// organization
 
 		List<Organization> oldOrganizations =
 			organizationLocalService.getUserOrganizations(userId);
+		long[] oldOrganizationIds = new long[oldOrganizations.size()];
 
-		for (Organization organization : oldOrganizations) {
+		for (int i = 0; i < oldOrganizations.size(); i++) {
+			Organization organization = oldOrganizations.get(i);
+
 			if (!ArrayUtil.contains(
 					organizationIds, organization.getOrganizationId()) &&
 				!OrganizationPermissionUtil.contains(
@@ -641,6 +645,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				organizationIds = ArrayUtil.append(
 					organizationIds, organization.getOrganizationId());
 			}
+
+			oldOrganizationIds[i] = organization.getOrganizationId();
+		}
+
+		for (long organizationId : organizationIds) {
+			if (!ArrayUtil.contains(oldOrganizationIds, organizationId)) {
+				OrganizationPermissionUtil.check(
+					getPermissionChecker(), organizationId,
+					ActionKeys.ASSIGN_MEMBERS);
+			}
 		}
 
 		return organizationIds;
@@ -649,23 +663,30 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	protected long[] checkRoles(long userId, long[] roleIds)
 		throws PrincipalException, SystemException {
 
-		// Check permissions for role assignments and add back any roles that
-		// the administrator doesn't have the rights to remove
-
-		for (long roleId : roleIds) {
-			RolePermissionUtil.check(
-				getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
-		}
+		// Add back any roles that the administrator doesn't have the rights to
+		// remove and check that he has the permission to add any new role
 
 		List<Role> oldRoles = roleLocalService.getUserRoles(userId);
+		long[] oldRoleIds = new long[oldRoles.size()];
 
-		for (Role role : oldRoles) {
+		for (int i = 0; i < oldRoles.size(); i++) {
+			Role role = oldRoles.get(i);
+
 			if (!ArrayUtil.contains(roleIds, role.getRoleId()) &&
 				!RolePermissionUtil.contains(
 					getPermissionChecker(), role.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
 
 				roleIds = ArrayUtil.append(roleIds, role.getRoleId());
+			}
+
+			oldRoleIds[i] = role.getRoleId();
+		}
+
+		for (long roleId : roleIds) {
+			if (!ArrayUtil.contains(oldRoleIds, roleId)) {
+				RolePermissionUtil.check(
+					getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 			}
 		}
 

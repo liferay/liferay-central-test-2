@@ -59,7 +59,9 @@ if (Validator.isNotNull(groupIds)) {
 else if (selUser != null) {
 	groups = selUser.getGroups();
 
-	groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+	if (filterManageableGroups) {
+		groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+	}
 }
 
 String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
@@ -74,7 +76,9 @@ if (Validator.isNotNull(organizationIds)) {
 else if (selUser != null) {
 	organizations = selUser.getOrganizations();
 
-	organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
+	if (filterManageableOrganizations) {
+		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
+	}
 }
 
 String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
@@ -89,7 +93,9 @@ if (Validator.isNotNull(roleIds)) {
 else if (selUser != null) {
 	roles = selUser.getRoles();
 
-	roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+	if (filterManageableRoles) {
+		roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+	}
 }
 
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;

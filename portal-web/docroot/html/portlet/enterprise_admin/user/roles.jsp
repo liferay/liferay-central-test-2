@@ -74,14 +74,18 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 			property="name"
 		/>
 
-		<liferay-ui:search-container-column-text>
-			<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer').deleteRow(this, <%= role.getRoleId() %>);"><%= removeRoleIcon %></a>
-		</liferay-ui:search-container-column-text>
+		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+			<liferay-ui:search-container-column-text>
+				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer').deleteRow(this, <%= role.getRoleId() %>);"><%= removeRoleIcon %></a>
+			</liferay-ui:search-container-column-text>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
-<br />
+<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<br />
 
-<input onclick="<portlet:namespace />openRoleSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<input onclick="<portlet:namespace />openRoleSelector();" type="button" value="<liferay-ui:message key="select" />" />
+</c:if>
