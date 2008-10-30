@@ -41,6 +41,7 @@ public class EditInstanceTest extends BaseTestCase {
 		selenium.type("_9_mx", RuntimeVariables.replace("Edited.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Edited.com"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -41,6 +41,6 @@ public class DisplayStylesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		verifyFalse(selenium.isTextPresent("This is a test entry!"));
+		assertFalse(selenium.isTextPresent("This is a test entry!"));
 	}
 }

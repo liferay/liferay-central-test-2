@@ -54,7 +54,8 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//div[2]/select", RuntimeVariables.replace("label=4"));
+		selenium.select("//div[2]/select", "label=4");
+		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Wiki"));
 		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");

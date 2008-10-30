@@ -45,5 +45,6 @@ public class AddInstanceTest extends BaseTestCase {
 		selenium.type("_9_mx", RuntimeVariables.replace("test.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=test.com"));
 	}
 }
