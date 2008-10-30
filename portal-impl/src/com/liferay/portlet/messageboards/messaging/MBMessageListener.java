@@ -87,7 +87,9 @@ public class MBMessageListener implements MessageListener {
 		boolean htmlFormat = message.getBoolean("htmlFormat");
 		boolean sourceMailingList = message.getBoolean("sourceMailingList");
 
-		subject = subject + StringPool.SPACE + mailId;
+		if (sourceMailingList) {
+			subject = getMailingListSubject(subject, mailId);
+		}
 
 		Set<Long> sent = new HashSet<Long>();
 
@@ -140,6 +142,10 @@ public class MBMessageListener implements MessageListener {
 		}
 	}
 
+	protected String getMailingListSubject(String subject, String mailId) {
+		return subject + StringPool.SPACE + mailId;
+	}
+
 	protected void notifyMailingList(
 			String subject, String body, String replyToAddress, String mailId,
 			String inReplyTo, boolean htmlFormat, long categoryId)
@@ -151,6 +157,8 @@ public class MBMessageListener implements MessageListener {
 		if (!mailingList.isActive()) {
 			return;
 		}
+
+		subject = getMailingListSubject(subject, mailId);
 
 		String fromAddress = mailingList.getOutEmailAddress();
 
