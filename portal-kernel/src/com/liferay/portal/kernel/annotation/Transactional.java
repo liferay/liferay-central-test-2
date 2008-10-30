@@ -20,35 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service;
+package com.liferay.portal.kernel.annotation;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
-import java.util.List;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="Transactional.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public interface CounterLocalService {
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Transactional {
 
-	public List<String> getNames() throws SystemException;
+	Propagation propagation() default Propagation.REQUIRED;
 
-	public long increment() throws SystemException;
+	Isolation isolation() default Isolation.DEFAULT;
 
-	public long increment(String name) throws SystemException;
+	int timeout() default TransactionDefinition.TIMEOUT_DEFAULT;
 
-	public long increment(String name, int size) throws SystemException;
+	boolean readOnly() default false;
 
-	public void rename(String oldName, String newName) throws SystemException;
+	Class<? extends Throwable>[] rollbackFor() default {};
 
-	public void reset(String name) throws SystemException;
+	String[] rollbackForClassName() default {};
 
-	public void reset(String name, long size) throws SystemException;
+	Class<? extends Throwable>[] noRollbackFor() default {};
+
+	String[] noRollbackForClassName() default {};
 
 }

@@ -1,7 +1,11 @@
 package ${packagePath}.service.persistence;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
+
 import java.util.Date;
 
+@Transactional
 public interface ${entity.name}Persistence {
 
 	<#list methods as method>
@@ -28,6 +32,9 @@ public interface ${entity.name}Persistence {
 				</#if>
 			</#if>
 
+			<#if serviceBuilder.isPersistenceReadOnlyMethod(method, entity.txRequiredList)>
+				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+			</#if>
 			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#assign parameters = method.parameters>

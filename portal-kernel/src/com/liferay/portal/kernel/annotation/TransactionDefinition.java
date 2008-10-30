@@ -20,35 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service;
+package com.liferay.portal.kernel.annotation;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
-import java.util.List;
+import java.sql.Connection;
 
 /**
- * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="TransactionDefinition.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public interface CounterLocalService {
+public interface TransactionDefinition {
 
-	public List<String> getNames() throws SystemException;
+	int PROPAGATION_REQUIRED = 0;
 
-	public long increment() throws SystemException;
+	int PROPAGATION_SUPPORTS = 1;
 
-	public long increment(String name) throws SystemException;
+	int PROPAGATION_MANDATORY = 2;
 
-	public long increment(String name, int size) throws SystemException;
+	int PROPAGATION_REQUIRES_NEW = 3;
 
-	public void rename(String oldName, String newName) throws SystemException;
+	int PROPAGATION_NOT_SUPPORTED = 4;
 
-	public void reset(String name) throws SystemException;
+	int PROPAGATION_NEVER = 5;
 
-	public void reset(String name, long size) throws SystemException;
+	int PROPAGATION_NESTED = 6;
+
+	int ISOLATION_DEFAULT = -1;
+
+	int ISOLATION_READ_UNCOMMITTED = Connection.TRANSACTION_READ_UNCOMMITTED;
+
+	int ISOLATION_READ_COMMITTED = Connection.TRANSACTION_READ_COMMITTED;
+
+	int ISOLATION_REPEATABLE_READ = Connection.TRANSACTION_REPEATABLE_READ;
+
+	int ISOLATION_SERIALIZABLE = Connection.TRANSACTION_SERIALIZABLE;
+
+	int TIMEOUT_DEFAULT = -1;
 
 }

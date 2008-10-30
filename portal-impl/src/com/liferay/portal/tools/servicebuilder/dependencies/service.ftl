@@ -1,5 +1,8 @@
 package ${packagePath}.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
+
 /**
  * <a href="${entity.name}${sessionTypeName}Service.java.html"><b><i>View Source</i></b></a>
  *
@@ -24,10 +27,14 @@ package ${packagePath}.service;
  * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil
  *
  */
+@Transactional
 public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isDuplicateMethod(method, tempMap)>
+			<#if serviceBuilder.isServiceReadOnlyMethod(method, entity.txRequiredList)>
+				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+			</#if>
 			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list method.parameters as parameter>

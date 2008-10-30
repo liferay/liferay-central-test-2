@@ -23,6 +23,7 @@
 package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.mail.MailMessage;
 
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional
 public interface MailService {
 
 	public void addForward(

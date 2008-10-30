@@ -935,6 +935,10 @@ public interface PropsKeys {
 
 	public static final String SEARCH_CONTAINER_PAGE_DELTA_VALUES = "search.container.page.delta.values";
 
+	public static final String SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES = "service.builder.persistence.read.only.prefixes";
+
+	public static final String SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES = "service.builder.service.read.only.prefixes";
+
 	public static final String SERVLET_SERVICE_EVENTS_POST = "servlet.service.events.post";
 
 	public static final String SERVLET_SERVICE_EVENTS_PRE = "servlet.service.events.pre";

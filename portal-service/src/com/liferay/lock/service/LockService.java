@@ -24,6 +24,7 @@ package com.liferay.lock.service;
 
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="LockService.java.html"><b><i>View Source</i></b></a>
@@ -31,6 +32,7 @@ import com.liferay.portal.PortalException;
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional
 public interface LockService {
 
 	public void clear();

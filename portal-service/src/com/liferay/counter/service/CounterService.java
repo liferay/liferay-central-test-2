@@ -23,6 +23,8 @@
 package com.liferay.counter.service;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public interface CounterService {
 
 	public List<String> getNames() throws SystemException;

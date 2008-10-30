@@ -20,35 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service;
-
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
-import java.util.List;
+package com.liferay.portal.kernel.annotation;
 
 /**
- * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="Isolation.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public interface CounterLocalService {
+public enum Isolation {
 
-	public List<String> getNames() throws SystemException;
+	DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),
+	READ_UNCOMMITTED(TransactionDefinition.ISOLATION_READ_UNCOMMITTED),
+	READ_COMMITTED(TransactionDefinition.ISOLATION_READ_COMMITTED),
+	REPEATABLE_READ(TransactionDefinition.ISOLATION_REPEATABLE_READ),
+	SERIALIZABLE(TransactionDefinition.ISOLATION_SERIALIZABLE);
 
-	public long increment() throws SystemException;
+	Isolation(int value) {
+		_value = value;
+	}
 
-	public long increment(String name) throws SystemException;
+	public int value() {
+		return _value;
+	}
 
-	public long increment(String name, int size) throws SystemException;
-
-	public void rename(String oldName, String newName) throws SystemException;
-
-	public void reset(String name) throws SystemException;
-
-	public void reset(String name, long size) throws SystemException;
+	private int _value;
 
 }

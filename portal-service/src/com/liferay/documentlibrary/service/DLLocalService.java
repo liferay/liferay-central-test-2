@@ -24,6 +24,7 @@ package com.liferay.documentlibrary.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.search.Hits;
 
 import java.io.File;
@@ -35,6 +36,7 @@ import java.io.InputStream;
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional
 public interface DLLocalService {
 
 	public void addFile(

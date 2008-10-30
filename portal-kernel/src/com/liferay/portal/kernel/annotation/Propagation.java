@@ -20,35 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service;
-
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
-import java.util.List;
+package com.liferay.portal.kernel.annotation;
 
 /**
- * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="Propagation.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public interface CounterLocalService {
+public enum Propagation {
 
-	public List<String> getNames() throws SystemException;
+	REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),
+	SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS),
+	MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),
+	REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),
+	NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),
+	NEVER(TransactionDefinition.PROPAGATION_NEVER),
+	NESTED(TransactionDefinition.PROPAGATION_NESTED);
 
-	public long increment() throws SystemException;
+	Propagation(int value) {
+		_value = value;
+	}
 
-	public long increment(String name) throws SystemException;
+	public int value() {
+		return _value;
+	}
 
-	public long increment(String name, int size) throws SystemException;
-
-	public void rename(String oldName, String newName) throws SystemException;
-
-	public void reset(String name) throws SystemException;
-
-	public void reset(String name, long size) throws SystemException;
+	private int _value;
 
 }

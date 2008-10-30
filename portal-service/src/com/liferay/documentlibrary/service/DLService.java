@@ -24,6 +24,7 @@ package com.liferay.documentlibrary.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 import java.io.File;
 
@@ -33,6 +34,7 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional
 public interface DLService {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
