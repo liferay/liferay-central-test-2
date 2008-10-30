@@ -62,6 +62,9 @@ public interface Organization extends OrganizationModel {
 
 	public int getPublicLayoutsPageCount();
 
+	public java.util.List<com.liferay.portal.model.Organization> getSuborganizations()
+		throws com.liferay.portal.SystemException;
+
 	public int getSuborganizationsSize()
 		throws com.liferay.portal.SystemException;
 
