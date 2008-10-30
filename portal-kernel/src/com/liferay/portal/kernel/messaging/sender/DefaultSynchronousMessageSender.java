@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging.sender;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusException;
@@ -59,9 +61,13 @@ public class DefaultSynchronousMessageSender
 		String responseDestination = message.getResponseDestination();
 
 		if (!_messageBus.hasDestination(responseDestination)) {
-			throw new MessageBusException(
-				"Response destination " + responseDestination +
-					" is not configured");
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Response destination " + responseDestination +
+						" is not configured");
+			}
+
+			return null;
 		}
 
 		String responseId = _portalUUID.generate();
@@ -73,6 +79,9 @@ public class DefaultSynchronousMessageSender
 
 		return synchronousMessageListener.send();
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(DefaultSynchronousMessageSender.class);
 
 	private MessageBus _messageBus;
 	private PortalUUID _portalUUID;
