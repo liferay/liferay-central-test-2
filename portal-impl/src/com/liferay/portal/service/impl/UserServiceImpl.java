@@ -26,13 +26,16 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -526,6 +529,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
+		organizationIds = checkOrganizations(userId, organizationIds);
+
+		roleIds = checkRoles(userId, roleIds);
+
+		groupIds = checkGroups(userId, groupIds);
+
 		return userLocalService.updateUser(
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
 			screenName, emailAddress, openId, languageId, timeZoneId, greeting,
@@ -578,6 +587,89 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
 
 		return user;
+	}
+
+	protected long[] checkGroups(long userId, long[] groupIds)
+		throws PortalException, SystemException {
+
+		// Check permissions for group assignments and add back any groups that
+		// the administrator doesn't have the rights to remove
+
+		for (long groupId : groupIds) {
+			GroupPermissionUtil.check(
+				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
+		}
+
+		List<Group> oldGroups = groupLocalService.getUserGroups(userId);
+
+		for (Group group : oldGroups) {
+			if (!ArrayUtil.contains(groupIds, group.getGroupId()) &&
+				!GroupPermissionUtil.contains(
+					getPermissionChecker(), group.getGroupId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				groupIds = ArrayUtil.append(groupIds, group.getGroupId());
+			}
+		}
+
+		return groupIds;
+	}
+
+	protected long[] checkOrganizations(long userId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		// Check permissions for organization assignments and add back any
+		// organizations that the administrator doesn't have the rights to
+		// remove
+
+		for (long organizationId : organizationIds) {
+			OrganizationPermissionUtil.check(
+				getPermissionChecker(), organizationId,
+				ActionKeys.ASSIGN_MEMBERS);
+		}
+
+		List<Organization> oldOrganizations =
+			organizationLocalService.getUserOrganizations(userId);
+
+		for (Organization organization : oldOrganizations) {
+			if (!ArrayUtil.contains(
+					organizationIds, organization.getOrganizationId()) &&
+				!OrganizationPermissionUtil.contains(
+					getPermissionChecker(), organization.getOrganizationId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				organizationIds = ArrayUtil.append(
+					organizationIds, organization.getOrganizationId());
+			}
+		}
+
+		return organizationIds;
+	}
+
+	protected long[] checkRoles(long userId, long[] roleIds)
+		throws PrincipalException, SystemException {
+
+		// Check permissions for role assignments and add back any roles that
+		// the administrator doesn't have the rights to remove
+
+		for (long roleId : roleIds) {
+			RolePermissionUtil.check(
+				getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
+		}
+
+		List<Role> oldRoles = roleLocalService.getUserRoles(userId);
+
+		for (Role role : oldRoles) {
+			if (!ArrayUtil.contains(roleIds, role.getRoleId()) &&
+				!RolePermissionUtil.contains(
+					getPermissionChecker(), role.getRoleId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				roleIds = ArrayUtil.append(roleIds, role.getRoleId());
+			}
+		}
+
+		return roleIds;
 	}
 
 	protected void updateAnnouncementsDeliveries(

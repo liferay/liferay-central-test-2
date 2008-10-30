@@ -30,20 +30,28 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.WebsiteImpl;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -77,6 +85,82 @@ import javax.portlet.ActionRequest;
  *
  */
 public class EnterpriseAdminUtil {
+
+	public static List<Group> filterGroups(
+			PermissionChecker permissionChecker, List<Group> groups)
+		throws PortalException, SystemException {
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return groups;
+		}
+
+		List<Group> filteredGroups = new ArrayList<Group>();
+
+		for (Group group : groups) {
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+				continue;
+			}
+
+			filteredGroups.add(group);
+		}
+
+		return filteredGroups;
+	}
+
+	public static List<Organization> filterOrganizations(
+			PermissionChecker permissionChecker,
+			List<Organization> organizations)
+		throws PortalException, SystemException {
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return organizations;
+		}
+
+		List<Organization> filteredOrganizations =
+			new ArrayList<Organization>();
+
+		for (Organization organization : organizations) {
+			if (!OrganizationPermissionUtil.contains(
+					permissionChecker, organization.getOrganizationId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+				continue;
+			}
+
+			filteredOrganizations.add(organization);
+		}
+
+		return filteredOrganizations;
+	}
+
+	public static List<Role> filterRoles(
+		PermissionChecker permissionChecker, List<Role> roles) {
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return roles;
+		}
+
+		List<Role> filteredRoles = new ArrayList<Role>();
+
+		for (Role role : roles) {
+			if (role.getName().equals(RoleConstants.GUEST) ||
+				role.getName().equals(RoleConstants.OWNER) ||
+				role.getName().equals(RoleConstants.USER)) {
+				continue;
+			}
+
+			if (!RolePermissionUtil.contains(
+					permissionChecker, role.getRoleId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+				continue;
+			}
+
+			filteredRoles.add(role);
+		}
+
+		return filteredRoles;
+	}
 
 	public static List<Address> getAddresses(ActionRequest actionRequest) {
 		List<Address> addresses = new ArrayList<Address>();

@@ -46,10 +46,29 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 	%>
 
-	<liferay-ui:search-container-results
-		results="<%= RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-		total="<%= RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR) %>"
-	/>
+	<liferay-ui:search-container-results>
+
+		<%
+		if (filterManageableRoles) {
+			List<Role> roles = RoleLocalServiceUtil.getRoles(company.getCompanyId());
+
+			roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+
+			total = roles.size();
+
+			results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
+		}
+		else {
+			results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+
+			total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_REGULAR);
+		}
+
+		pageContext.setAttribute("results", results);
+		pageContext.setAttribute("total", total);
+		%>
+
+	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Role"

@@ -49,10 +49,29 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
 	LinkedHashMap groupParams = new LinkedHashMap();
 	%>
 
-	<liferay-ui:search-container-results
-		results="<%= GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-		total="<%= GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams) %>"
-	/>
+	<liferay-ui:search-container-results>
+
+		<%
+		if (filterManageableGroups) {
+			List<Group> groups = user.getGroups();
+
+			groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+
+			total = groups.size();
+
+			results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
+		}
+		else {
+			results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+
+			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+		}
+
+		pageContext.setAttribute("results", results);
+		pageContext.setAttribute("total", total);
+		%>
+
+	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Group"

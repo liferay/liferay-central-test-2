@@ -174,10 +174,14 @@ if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	showUnlinkUserRoleIcon = false;
 }
 
+boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
+boolean filterManageableRoles = true;
 
 if (permissionChecker.isCompanyAdmin()) {
+	filterManageableGroups = false;
 	filterManageableOrganizations = false;
+	filterManageableRoles = false;
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
