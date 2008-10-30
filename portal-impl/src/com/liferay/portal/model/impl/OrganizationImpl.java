@@ -174,7 +174,7 @@ public class OrganizationImpl
 	public List<Organization> getSuborganizations() throws SystemException {
 		return OrganizationLocalServiceUtil.search(
 			getCompanyId(), getOrganizationId(), null, null, null, null, null,
-			0, getSuborganizationsSize());		
+			0, getSuborganizationsSize());
 	}
 
 	public int getSuborganizationsSize() throws SystemException {
