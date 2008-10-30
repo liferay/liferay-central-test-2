@@ -26,7 +26,6 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "already-registered");
-String currentURL = PortalUtil.getCurrentURL(request);
 
 String tabs1Names = "already-registered";
 
@@ -42,7 +41,6 @@ if (tabs1Names.equals("already-registered")) {
 	tabs1Names = StringPool.BLANK;
 }
 
-String emailAddress2 = ParamUtil.getString(request, "emailAddress");
 String redirect = ParamUtil.getString(request, "redirect");
 
 PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
@@ -55,24 +53,6 @@ String captchaHREF = themeDisplay.getPathMain() + "/portal/login_captcha";
 	<span class="portlet-msg-error">
 		<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
 		<liferay-ui:message key="please-sign-in-to-continue" />
-	</span>
-</c:if>
-
-<c:if test="<%= SessionErrors.contains(request, UserReminderQueryException.class.getName()) %>">
-	<span class="portlet-msg-error">
-		<liferay-ui:message key="wrong-answer-for-reminder-query,-please-start-the-process-again" />
-	</span>
-</c:if>
-
-<c:if test="<%= SessionErrors.contains(request, EmptyUserReminderQueryException.class.getName()) %>">
-	<span class="portlet-msg-error">
-		<liferay-ui:message key="sorry,-a-new-password-can't-be-sent-as-there-is-not-a-valid-reminder-query-for-this-user.-Please-contact-the-administrator" />
-	</span>
-</c:if>
-
-<c:if test='<%= SessionMessages.contains(request, "request_processed") %>'>
-	<span class="portlet-msg-success">
-		<%= LanguageUtil.format(pageContext, "congratulations-your-new-password-was-sent-to-x", emailAddress2)%>
 	</span>
 </c:if>
 

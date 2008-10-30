@@ -25,7 +25,6 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.CookieNotSupportedException" %>
-<%@ page import="com.liferay.portal.EmptyUserReminderQueryException" %>
 <%@ page import="com.liferay.portal.NoSuchResourceException" %>
 <%@ page import="com.liferay.portal.NoSuchUserException" %>
 <%@ page import="com.liferay.portal.PasswordExpiredException" %>
@@ -34,7 +33,6 @@
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserLockoutException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
-<%@ page import="com.liferay.portal.UserReminderQueryException" %>
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
 <%@ page import="com.liferay.portal.action.LoginAction" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>

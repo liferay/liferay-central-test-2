@@ -152,7 +152,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT %>">
 		<td valign="top">
 			<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-				<portlet:param name="struts_action" value="/login/captcha" />
+				<portlet:param name="struts_action" value="/my_account/captcha" />
 			</portlet:actionURL>
 
 			<liferay-ui:captcha url="<%= captchaURL %>" />

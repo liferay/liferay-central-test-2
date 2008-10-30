@@ -35,7 +35,6 @@ String redirect = ParamUtil.getString(renderRequest, "redirect");
 String login = LoginAction.getLogin(request, "login", company);
 String password = StringPool.BLANK;
 boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-String emailAddress = ParamUtil.getString(request, "emailAddress");
 %>
 
 <form action="<portlet:actionURL secure="<%= secure %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
@@ -44,21 +43,12 @@ String emailAddress = ParamUtil.getString(request, "emailAddress");
 
 <liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 <liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
-<liferay-ui:error exception="<%= EmptyUserReminderQueryException.class %>" message="sorry,-a-new-password-can't-be-sent-as-there-is-not-a-valid-reminder-query-for-this-user.-Please-contact-the-administrator" />
 <liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
 <liferay-ui:error exception="<%= PasswordExpiredException.class %>" message="your-password-has-expired" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
 <liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
 <liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
-<liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="wrong-answer-for-reminder-query,-please-start-the-process-again" />
 <liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
-
-<c:if test='<%= SessionMessages.contains(request, "request_processed") %>'>
-	<span class="portlet-msg-success">
-		<%= LanguageUtil.format(pageContext, "congratulations-your-new-password-was-sent-to-x", emailAddress)%>
-	</span>
-</c:if>
 
 <table class="lfr-table">
 <tr>
@@ -120,8 +110,7 @@ String emailAddress = ParamUtil.getString(request, "emailAddress");
 
 		<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
 			<portlet:param name="struts_action" value="/login/view" />
-			<portlet:param name="<%= Constants.CMD %>" value="forgot-password-email" />
-			<portlet:param name="backURL" value="<%= currentURL %>" />
+			<portlet:param name="<%= Constants.CMD %>" value="forgot-password" />
 		</portlet:renderURL>
 
 		<a href="<%= forgotPasswordURL.toString() %>"><liferay-ui:message key="forgot-password" />?</a>

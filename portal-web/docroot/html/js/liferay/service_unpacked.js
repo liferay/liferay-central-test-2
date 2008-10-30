@@ -1112,13 +1112,6 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	updateReminderQuery: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateReminderQuery";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	updateScreenName: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateScreenName";
