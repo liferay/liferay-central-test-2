@@ -790,7 +790,7 @@ Liferay.PortletCSS = {
 			portletData: {
 				language: 'en_US',
 				portletLinksTarget: '',
-				showBorders: true,
+				showBorders: themeDisplay.getPortletSetupShowBordersDefault(),
 				title: '',
 				titles: {},
 				useCustomTitle: false
