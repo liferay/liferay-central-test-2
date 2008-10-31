@@ -196,11 +196,12 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		}
 
 		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, plid, categoryId, ActionKeys.ADD_CATEGORY);
+		showSearch = showSearch && (results.size() > 0);
 		%>
 
-		<c:if test="<%= showAddCategoryButton || (results.size() > 0) %>">
+		<c:if test="<%= showAddCategoryButton ||  showSearch %>">
 			<div>
-				<c:if test="<%= results.size() > 0 %>">
+				<c:if test="<%= showSearch %>">
 					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
 					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -213,9 +214,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				</c:if>
 			</div>
 
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
+			<br />
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
