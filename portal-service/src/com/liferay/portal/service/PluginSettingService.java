@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PluginSettingService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PluginSettingServiceUtil
  *
  */
+@Transactional
 public interface PluginSettingService {
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,

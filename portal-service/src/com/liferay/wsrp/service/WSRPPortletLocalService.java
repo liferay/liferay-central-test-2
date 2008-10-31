@@ -22,6 +22,8 @@
 
 package com.liferay.wsrp.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WSRPPortletLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.wsrp.service;
  * @see com.liferay.wsrp.service.WSRPPortletLocalServiceUtil
  *
  */
+@Transactional
 public interface WSRPPortletLocalService {
 	public com.liferay.wsrp.model.WSRPPortlet addWSRPPortlet(
 		com.liferay.wsrp.model.WSRPPortlet wsrpPortlet)
@@ -70,31 +73,38 @@ public interface WSRPPortletLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPPortlet getWSRPPortlet(long portletId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getWSRPPortlets(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWSRPPortletsCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.wsrp.model.WSRPPortlet updateWSRPPortlet(
 		com.liferay.wsrp.model.WSRPPortlet wsrpPortlet)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPPortlet getPortlet(
 		java.lang.String portletName)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchPortletException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets(
 		java.lang.String producerEntityId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPPortlet> getPortlets(
 		java.lang.String producerEntityId, java.lang.String portletHandle)
 		throws com.liferay.portal.SystemException;

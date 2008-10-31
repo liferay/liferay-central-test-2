@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AnnouncementsFlagService.java.html"><b><i>View Source</i></b></a>
@@ -47,11 +49,13 @@ package com.liferay.portlet.announcements.service;
  * @see com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil
  *
  */
+@Transactional
 public interface AnnouncementsFlagService {
 	public void addFlag(long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long entryId, int value)
 		throws com.liferay.portal.PortalException,

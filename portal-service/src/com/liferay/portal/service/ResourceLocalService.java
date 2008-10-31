@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ResourceLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ResourceLocalServiceUtil
  *
  */
+@Transactional
 public interface ResourceLocalService {
 	public com.liferay.portal.model.Resource addResource(
 		com.liferay.portal.model.Resource resource)
@@ -69,13 +72,16 @@ public interface ResourceLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> getResources(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getResourcesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource updateResource(
@@ -131,11 +137,14 @@ public interface ResourceLocalService {
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getLatestResourceId() throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> getResources()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException,

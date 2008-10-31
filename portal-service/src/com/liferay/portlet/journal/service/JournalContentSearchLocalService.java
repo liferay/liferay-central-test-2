@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="JournalContentSearchLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.journal.service;
  * @see com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil
  *
  */
+@Transactional
 public interface JournalContentSearchLocalService {
 	public com.liferay.portlet.journal.model.JournalContentSearch addJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
@@ -71,14 +74,17 @@ public interface JournalContentSearchLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalContentSearch getJournalContentSearch(
 		long contentSearchId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getJournalContentSearchs(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getJournalContentSearchsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -105,17 +111,21 @@ public interface JournalContentSearchLocalService {
 	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getArticleContentSearches()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getArticleContentSearches(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Long> getLayoutIds(long groupId,
 		boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getLayoutIdsCount(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="CompanyService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.CompanyServiceUtil
  *
  */
+@Transactional
 public interface CompanyService {
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)

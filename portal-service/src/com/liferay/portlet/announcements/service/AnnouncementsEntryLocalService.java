@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AnnouncementsEntryLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.announcements.service;
  * @see com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil
  *
  */
+@Transactional
 public interface AnnouncementsEntryLocalService {
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry addAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
@@ -71,14 +74,17 @@ public interface AnnouncementsEntryLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry getAnnouncementsEntry(
 		long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getAnnouncementsEntries(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAnnouncementsEntriesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -104,15 +110,18 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getEntries(
 		long classNameId, long classPK, boolean alert, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getEntries(
 		long userId, long classNameId, long[] classPKs, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
@@ -121,11 +130,13 @@ public interface AnnouncementsEntryLocalService {
 		int expirationDateMinute, boolean alert, int flagValue, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getEntries(
 		long userId, java.util.LinkedHashMap<Long, long[]> scopes,
 		boolean alert, int flagValue, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getEntries(
 		long userId, java.util.LinkedHashMap<Long, long[]> scopes,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -134,12 +145,15 @@ public interface AnnouncementsEntryLocalService {
 		int expirationDateMinute, boolean alert, int flagValue, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEntriesCount(long classNameId, long classPK, boolean alert)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEntriesCount(long userId, long classNameId, long[] classPKs,
 		boolean alert, int flagValue) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEntriesCount(long userId, long classNameId, long[] classPKs,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
@@ -147,10 +161,12 @@ public interface AnnouncementsEntryLocalService {
 		int expirationDateMinute, boolean alert, int flagValue)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEntriesCount(long userId,
 		java.util.LinkedHashMap<Long, long[]> scopes, boolean alert,
 		int flagValue) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEntriesCount(long userId,
 		java.util.LinkedHashMap<Long, long[]> scopes, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
@@ -159,10 +175,12 @@ public interface AnnouncementsEntryLocalService {
 		int expirationDateMinute, boolean alert, int flagValue)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getUserEntries(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserEntriesCount(long userId)
 		throws com.liferay.portal.SystemException;
 

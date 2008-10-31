@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="JournalTemplateService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.journal.service;
  * @see com.liferay.portlet.journal.service.JournalTemplateServiceUtil
  *
  */
+@Transactional
 public interface JournalTemplateService {
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long groupId, java.lang.String templateId, boolean autoTemplateId,
@@ -79,11 +82,13 @@ public interface JournalTemplateService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="LayoutSetService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.LayoutSetServiceUtil
  *
  */
+@Transactional
 public interface LayoutSetService {
 	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
 		java.io.File file)

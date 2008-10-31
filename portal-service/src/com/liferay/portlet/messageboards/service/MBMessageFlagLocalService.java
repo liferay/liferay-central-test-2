@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MBMessageFlagLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.messageboards.service;
  * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil
  *
  */
+@Transactional
 public interface MBMessageFlagLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessageFlag addMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
@@ -71,14 +74,17 @@ public interface MBMessageFlagLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageFlag getMBMessageFlag(
 		long messageFlagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> getMBMessageFlags(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getMBMessageFlagsCount()
 		throws com.liferay.portal.SystemException;
 

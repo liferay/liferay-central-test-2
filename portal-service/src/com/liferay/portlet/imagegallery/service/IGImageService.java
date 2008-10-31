@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="IGImageService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.imagegallery.service;
  * @see com.liferay.portlet.imagegallery.service.IGImageServiceUtil
  *
  */
+@Transactional
 public interface IGImageService {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long folderId, java.lang.String name, java.lang.String description,
@@ -74,25 +77,30 @@ public interface IGImageService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
 		long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long folderId)
 		throws com.liferay.portal.PortalException,

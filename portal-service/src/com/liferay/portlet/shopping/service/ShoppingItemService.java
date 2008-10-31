@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingItemService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingItemServiceUtil
  *
  */
+@Transactional
 public interface ShoppingItemService {
 	public void addBookItems(long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,
@@ -89,6 +92,7 @@ public interface ShoppingItemService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

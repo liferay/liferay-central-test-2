@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MBMailingListLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.messageboards.service;
  * @see com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil
  *
  */
+@Transactional
 public interface MBMailingListLocalService {
 	public com.liferay.portlet.messageboards.model.MBMailingList addMBMailingList(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
@@ -71,14 +74,17 @@ public interface MBMailingListLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMailingList getMBMailingList(
 		long mailingListId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> getMBMailingLists(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getMBMailingListsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -111,6 +117,7 @@ public interface MBMailingListLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMailingList getCategoryMailingList(
 		long categoryId)
 		throws com.liferay.portal.PortalException,

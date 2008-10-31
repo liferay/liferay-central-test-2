@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="UserTrackerLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.UserTrackerLocalServiceUtil
  *
  */
+@Transactional
 public interface UserTrackerLocalService {
 	public com.liferay.portal.model.UserTracker addUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
@@ -71,14 +74,17 @@ public interface UserTrackerLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserTracker getUserTracker(
 		long userTrackerId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserTrackersCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTracker updateUserTracker(
@@ -92,6 +98,7 @@ public interface UserTrackerLocalService {
 		java.util.List<com.liferay.portal.model.UserTrackerPath> userTrackerPaths)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;

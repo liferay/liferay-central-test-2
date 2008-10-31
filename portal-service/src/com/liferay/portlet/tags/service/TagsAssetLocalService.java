@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TagsAssetLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tags.service;
  * @see com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil
  *
  */
+@Transactional
 public interface TagsAssetLocalService {
 	public com.liferay.portlet.tags.model.TagsAsset addTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
@@ -71,13 +74,16 @@ public interface TagsAssetLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsAsset getTagsAsset(long assetId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTagsAssetsCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
@@ -94,40 +100,48 @@ public interface TagsAssetLocalService {
 	public void deleteAsset(com.liferay.portlet.tags.model.TagsAsset asset)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		java.lang.String orderByCol1, java.lang.String orderByCol2,
@@ -136,6 +150,7 @@ public interface TagsAssetLocalService {
 		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, java.lang.String orderByCol1,
@@ -144,40 +159,49 @@ public interface TagsAssetLocalService {
 		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAssetsCount(long groupId, long[] entryIds,
 		long[] notEntryIds, boolean andOperator, boolean excludeZeroViewCount)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAssetsCount(long groupId, long[] classNameIds,
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
 		java.lang.String className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
 		java.lang.String[] className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException;
@@ -186,15 +210,18 @@ public interface TagsAssetLocalService {
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String portletId, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchAssetDisplaysCount(long companyId,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId) throws com.liferay.portal.SystemException;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="BookmarksEntryService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.bookmarks.service;
  * @see com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil
  *
  */
+@Transactional
 public interface BookmarksEntryService {
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long folderId, java.lang.String name, java.lang.String url,
@@ -67,6 +70,7 @@ public interface BookmarksEntryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,

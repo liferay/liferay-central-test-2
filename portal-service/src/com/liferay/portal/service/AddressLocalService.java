@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AddressLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.AddressLocalServiceUtil
  *
  */
+@Transactional
 public interface AddressLocalService {
 	public com.liferay.portal.model.Address addAddress(
 		com.liferay.portal.model.Address address)
@@ -69,13 +72,16 @@ public interface AddressLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAddressesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address updateAddress(
@@ -93,9 +99,11 @@ public interface AddressLocalService {
 	public void deleteAddresses(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.social.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="SocialRelationLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.social.service;
  * @see com.liferay.portlet.social.service.SocialRelationLocalServiceUtil
  *
  */
+@Transactional
 public interface SocialRelationLocalService {
 	public com.liferay.portlet.social.model.SocialRelation addSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
@@ -71,14 +74,17 @@ public interface SocialRelationLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialRelation getSocialRelation(
 		long relationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getSocialRelations(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getSocialRelationsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -102,20 +108,24 @@ public interface SocialRelationLocalService {
 	public void deleteRelations(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long relationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
 		long userId, int type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRelationsCount(long userId, int type)
 		throws com.liferay.portal.SystemException;
 

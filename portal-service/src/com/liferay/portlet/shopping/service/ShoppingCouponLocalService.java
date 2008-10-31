@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingCouponLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil
  *
  */
+@Transactional
 public interface ShoppingCouponLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addShoppingCoupon(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
@@ -71,14 +74,17 @@ public interface ShoppingCouponLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getShoppingCoupon(
 		long couponId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> getShoppingCoupons(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getShoppingCouponsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -105,21 +111,25 @@ public interface ShoppingCouponLocalService {
 	public void deleteCoupons(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long couponId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		java.lang.String code)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
 		long plid, long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long groupId, long companyId, java.lang.String code,
 		boolean active, java.lang.String discountType, boolean andOperator)
 		throws com.liferay.portal.SystemException;

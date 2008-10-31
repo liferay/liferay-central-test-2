@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ListTypeService.java.html"><b><i>View Source</i></b></a>
@@ -47,11 +49,14 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ListTypeServiceUtil
  *
  */
+@Transactional
 public interface ListTypeService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ListType getListType(int listTypeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ListType> getListTypes(
 		java.lang.String type) throws com.liferay.portal.SystemException;
 

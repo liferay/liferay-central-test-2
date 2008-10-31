@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WikiNodeLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.wiki.service;
  * @see com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil
  *
  */
+@Transactional
 public interface WikiNodeLocalService {
 	public com.liferay.portlet.wiki.model.WikiNode addWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
@@ -69,13 +72,16 @@ public interface WikiNodeLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getWikiNode(long nodeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWikiNodesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
@@ -146,22 +152,27 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getNode(long groupId,
 		java.lang.String nodeName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getNodesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -174,6 +185,7 @@ public interface WikiNodeLocalService {
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] nodeIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException;

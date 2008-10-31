@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TagsSourceService.java.html"><b><i>View Source</i></b></a>
@@ -47,5 +48,6 @@ package com.liferay.portlet.tags.service;
  * @see com.liferay.portlet.tags.service.TagsSourceServiceUtil
  *
  */
+@Transactional
 public interface TagsSourceService {
 }

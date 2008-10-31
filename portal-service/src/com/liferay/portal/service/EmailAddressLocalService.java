@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="EmailAddressLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.EmailAddressLocalServiceUtil
  *
  */
+@Transactional
 public interface EmailAddressLocalService {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
@@ -71,14 +74,17 @@ public interface EmailAddressLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEmailAddressesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -96,9 +102,11 @@ public interface EmailAddressLocalService {
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

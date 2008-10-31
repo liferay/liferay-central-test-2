@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PortletPreferencesService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PortletPreferencesServiceUtil
  *
  */
+@Transactional
 public interface PortletPreferencesService {
 	public void deleteArchivedPreferences(long portletItemId)
 		throws com.liferay.portal.PortalException,

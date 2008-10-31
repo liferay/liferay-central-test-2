@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ExpandoColumnService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.expando.service;
  * @see com.liferay.portlet.expando.service.ExpandoColumnServiceUtil
  *
  */
+@Transactional
 public interface ExpandoColumnService {
 	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type)

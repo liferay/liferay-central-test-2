@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WikiPageResourceLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.wiki.service;
  * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil
  *
  */
+@Transactional
 public interface WikiPageResourceLocalService {
 	public com.liferay.portlet.wiki.model.WikiPageResource addWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
@@ -71,14 +74,17 @@ public interface WikiPageResourceLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiPageResource getWikiPageResource(
 		long resourcePrimKey)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> getWikiPageResources(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWikiPageResourcesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -90,11 +96,13 @@ public interface WikiPageResourceLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
 		long pageResourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getPageResourcePrimKey(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException;
 }

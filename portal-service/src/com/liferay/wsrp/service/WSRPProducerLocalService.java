@@ -22,6 +22,8 @@
 
 package com.liferay.wsrp.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WSRPProducerLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.wsrp.service;
  * @see com.liferay.wsrp.service.WSRPProducerLocalServiceUtil
  *
  */
+@Transactional
 public interface WSRPProducerLocalService {
 	public com.liferay.wsrp.model.WSRPProducer addWSRPProducer(
 		com.liferay.wsrp.model.WSRPProducer wsrpProducer)
@@ -71,13 +74,16 @@ public interface WSRPProducerLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPProducer getWSRPProducer(long producerId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPProducer> getWSRPProducers(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWSRPProducersCount()
 		throws com.liferay.portal.SystemException;
 
@@ -94,11 +100,13 @@ public interface WSRPProducerLocalService {
 		java.lang.String registrationValidatorClass)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPProducer getProducer(
 		java.lang.String instanceName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPProducer> getProducers(
 		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TasksProposalLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tasks.service;
  * @see com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil
  *
  */
+@Transactional
 public interface TasksProposalLocalService {
 	public com.liferay.portlet.tasks.model.TasksProposal addTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
@@ -71,14 +74,17 @@ public interface TasksProposalLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksProposal getTasksProposal(
 		long proposalId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getTasksProposals(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTasksProposalsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -159,39 +165,48 @@ public interface TasksProposalLocalService {
 	public void deleteProposals(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getProposals(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getProposalsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getReviewProposals(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getReviewProposalsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getUserProposals(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserProposalsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 

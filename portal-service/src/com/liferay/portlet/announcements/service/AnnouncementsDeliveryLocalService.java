@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AnnouncementsDeliveryLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.announcements.service;
  * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil
  *
  */
+@Transactional
 public interface AnnouncementsDeliveryLocalService {
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery addAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
@@ -71,14 +74,17 @@ public interface AnnouncementsDeliveryLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getAnnouncementsDelivery(
 		long deliveryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getAnnouncementsDeliveries(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAnnouncementsDeliveriesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -96,16 +102,19 @@ public interface AnnouncementsDeliveryLocalService {
 	public void deleteDelivery(long userId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getDelivery(
 		long deliveryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getUserDeliveries(
 		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getUserDelivery(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.PortalException,

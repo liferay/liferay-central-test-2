@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ThemeService.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +49,9 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ThemeServiceUtil
  *
  */
+@Transactional
 public interface ThemeService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId);
 }

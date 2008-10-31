@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.social.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="SocialRequestLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.social.service;
  * @see com.liferay.portlet.social.service.SocialRequestLocalServiceUtil
  *
  */
+@Transactional
 public interface SocialRequestLocalService {
 	public com.liferay.portlet.social.model.SocialRequest addSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
@@ -71,14 +74,17 @@ public interface SocialRequestLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialRequest getSocialRequest(
 		long requestId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getSocialRequestsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -102,31 +108,39 @@ public interface SocialRequestLocalService {
 	public void deleteUserRequests(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getReceiverUserRequestsCount(long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getReceiverUserRequestsCount(long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserRequestsCount(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserRequestsCount(long userId, int status)
 		throws com.liferay.portal.SystemException;
 

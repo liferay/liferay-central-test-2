@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingOrderService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil
  *
  */
+@Transactional
 public interface ShoppingOrderService {
 	public void completeOrder(long plid, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
@@ -59,6 +62,7 @@ public interface ShoppingOrderService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		long plid, long orderId)
 		throws com.liferay.portal.PortalException,

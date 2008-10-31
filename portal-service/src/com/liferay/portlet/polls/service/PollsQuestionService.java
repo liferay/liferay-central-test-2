@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.polls.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PollsQuestionService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.polls.service;
  * @see com.liferay.portlet.polls.service.PollsQuestionServiceUtil
  *
  */
+@Transactional
 public interface PollsQuestionService {
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long plid, java.lang.String title, java.lang.String description,
@@ -71,6 +74,7 @@ public interface PollsQuestionService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		long questionId)
 		throws com.liferay.portal.PortalException,

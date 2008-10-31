@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MembershipRequestLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.MembershipRequestLocalServiceUtil
  *
  */
+@Transactional
 public interface MembershipRequestLocalService {
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
@@ -71,14 +74,17 @@ public interface MembershipRequestLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.MembershipRequest> getMembershipRequests(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getMembershipRequestsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -97,10 +103,12 @@ public interface MembershipRequestLocalService {
 	public void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.MembershipRequest> search(
 		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long groupId, int status)
 		throws com.liferay.portal.SystemException;
 

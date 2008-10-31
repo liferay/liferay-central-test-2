@@ -22,6 +22,8 @@
 
 package com.liferay.wsrp.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WSRPConsumerRegistrationLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.wsrp.service;
  * @see com.liferay.wsrp.service.WSRPConsumerRegistrationLocalServiceUtil
  *
  */
+@Transactional
 public interface WSRPConsumerRegistrationLocalService {
 	public com.liferay.wsrp.model.WSRPConsumerRegistration addWSRPConsumerRegistration(
 		com.liferay.wsrp.model.WSRPConsumerRegistration wsrpConsumerRegistration)
@@ -71,14 +74,17 @@ public interface WSRPConsumerRegistrationLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPConsumerRegistration getWSRPConsumerRegistration(
 		long consumerRegistrationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConsumerRegistration> getWSRPConsumerRegistrations(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWSRPConsumerRegistrationsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -96,11 +102,13 @@ public interface WSRPConsumerRegistrationLocalService {
 		java.lang.String lifetimeTerminationTime, java.lang.String producerKey)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPConsumerRegistration getConsumerRegistration(
 		java.lang.String registrationHandle, java.lang.String producerKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConsumerRegistration> getConsumerRegistrations(
 		java.lang.String producerKey) throws com.liferay.portal.SystemException;
 }

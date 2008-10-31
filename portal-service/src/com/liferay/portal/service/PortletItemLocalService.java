@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PortletItemLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PortletItemLocalServiceUtil
  *
  */
+@Transactional
 public interface PortletItemLocalService {
 	public com.liferay.portal.model.PortletItem addPortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
@@ -71,14 +74,17 @@ public interface PortletItemLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletItem getPortletItem(
 		long portletItemId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPortletItemsCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletItem updatePortletItem(
@@ -91,16 +97,19 @@ public interface PortletItemLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletItem getPortletItem(long groupId,
 		java.lang.String name, java.lang.String portletId,
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String className)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.SystemException;

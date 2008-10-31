@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PortletService.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +49,9 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PortletServiceUtil
  *
  */
+@Transactional
 public interface PortletService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONArray getWARPortlets();
 
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,

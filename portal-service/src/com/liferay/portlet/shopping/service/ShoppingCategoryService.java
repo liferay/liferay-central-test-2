@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingCategoryService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil
  *
  */
+@Transactional
 public interface ShoppingCategoryService {
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
 		long plid, long parentCategoryId, java.lang.String name,
@@ -66,6 +69,7 @@ public interface ShoppingCategoryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		long categoryId)
 		throws com.liferay.portal.PortalException,

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ResourceCodeLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ResourceCodeLocalServiceUtil
  *
  */
+@Transactional
 public interface ResourceCodeLocalService {
 	public com.liferay.portal.model.ResourceCode addResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
@@ -70,13 +73,16 @@ public interface ResourceCodeLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getResourceCodesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -84,6 +90,7 @@ public interface ResourceCodeLocalService {
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingOrderItemLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil
  *
  */
+@Transactional
 public interface ShoppingOrderItemLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem addShoppingOrderItem(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
@@ -71,14 +74,17 @@ public interface ShoppingOrderItemLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem getShoppingOrderItem(
 		long orderItemId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getShoppingOrderItems(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getShoppingOrderItemsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -86,6 +92,7 @@ public interface ShoppingOrderItemLocalService {
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getOrderItems(
 		long orderId) throws com.liferay.portal.SystemException;
 }

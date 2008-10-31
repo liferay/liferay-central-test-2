@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="QuartzLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.QuartzLocalServiceUtil
  *
  */
+@Transactional
 public interface QuartzLocalService {
 	public void checkQuartzTables() throws com.liferay.portal.SystemException;
 }

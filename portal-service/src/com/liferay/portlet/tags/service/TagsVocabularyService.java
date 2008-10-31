@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TagsVocabularyService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tags.service;
  * @see com.liferay.portlet.tags.service.TagsVocabularyServiceUtil
  *
  */
+@Transactional
 public interface TagsVocabularyService {
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
 		long plid, java.lang.String name, boolean folksonomy,
@@ -65,16 +68,19 @@ public interface TagsVocabularyService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
 		long companyId, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
 		long groupId, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
 		long vocabularyId)
 		throws com.liferay.portal.PortalException,

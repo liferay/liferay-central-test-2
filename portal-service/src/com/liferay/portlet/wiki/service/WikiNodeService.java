@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WikiNodeService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.wiki.service;
  * @see com.liferay.portlet.wiki.service.WikiNodeServiceUtil
  *
  */
+@Transactional
 public interface WikiNodeService {
 	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
 		java.lang.String name, java.lang.String description,
@@ -65,10 +68,12 @@ public interface WikiNodeService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getNode(long groupId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,

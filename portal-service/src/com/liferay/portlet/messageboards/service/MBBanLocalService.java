@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MBBanLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.messageboards.service;
  * @see com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil
  *
  */
+@Transactional
 public interface MBBanLocalService {
 	public com.liferay.portlet.messageboards.model.MBBan addMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
@@ -69,13 +72,16 @@ public interface MBBanLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBBan getMBBan(long banId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> getMBBans(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getMBBansCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBBan updateMBBan(
@@ -102,10 +108,12 @@ public interface MBBanLocalService {
 
 	public void expireBans() throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> getBans(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBansCount(long groupId)
 		throws com.liferay.portal.SystemException;
 

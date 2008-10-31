@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TagsPropertyLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tags.service;
  * @see com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil
  *
  */
+@Transactional
 public interface TagsPropertyLocalService {
 	public com.liferay.portlet.tags.model.TagsProperty addTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
@@ -71,14 +74,17 @@ public interface TagsPropertyLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsProperty getTagsProperty(
 		long propertyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getTagsProperties(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTagsPropertiesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -108,25 +114,31 @@ public interface TagsPropertyLocalService {
 		com.liferay.portlet.tags.model.TagsProperty property)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
 		long entryId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long entryId, java.lang.String key)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String[] getPropertyKeys(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException;

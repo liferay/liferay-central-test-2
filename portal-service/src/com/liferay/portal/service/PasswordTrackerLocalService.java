@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PasswordTrackerLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PasswordTrackerLocalServiceUtil
  *
  */
+@Transactional
 public interface PasswordTrackerLocalService {
 	public com.liferay.portal.model.PasswordTracker addPasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
@@ -71,14 +74,17 @@ public interface PasswordTrackerLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordTracker getPasswordTracker(
 		long passwordTrackerId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordTracker> getPasswordTrackers(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPasswordTrackersCount()
 		throws com.liferay.portal.SystemException;
 

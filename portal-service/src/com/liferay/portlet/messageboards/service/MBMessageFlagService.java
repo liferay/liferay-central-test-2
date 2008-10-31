@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MBMessageFlagService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.messageboards.service;
  * @see com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
  *
  */
+@Transactional
 public interface MBMessageFlagService {
 	public void addAnswerFlag(long messageId)
 		throws com.liferay.portal.PortalException,

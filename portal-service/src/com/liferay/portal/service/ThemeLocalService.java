@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ThemeLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,17 +49,22 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ThemeLocalServiceUtil
  *
  */
+@Transactional
 public interface ThemeLocalService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ColorScheme getColorScheme(long companyId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
 		boolean wapTheme);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Theme getTheme(long companyId,
 		java.lang.String themeId, boolean wapTheme);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId, long groupId, long userId, boolean wapTheme)
 		throws com.liferay.portal.PortalException,

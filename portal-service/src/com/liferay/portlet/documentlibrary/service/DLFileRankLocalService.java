@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="DLFileRankLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.documentlibrary.service;
  * @see com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil
  *
  */
+@Transactional
 public interface DLFileRankLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileRank addDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
@@ -71,14 +74,17 @@ public interface DLFileRankLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileRank getDLFileRank(
 		long fileRankId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getDLFileRanks(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getDLFileRanksCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
@@ -91,9 +97,11 @@ public interface DLFileRankLocalService {
 	public void deleteFileRanks(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;

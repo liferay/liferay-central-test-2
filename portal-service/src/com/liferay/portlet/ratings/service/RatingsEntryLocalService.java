@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.ratings.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="RatingsEntryLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.ratings.service;
  * @see com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil
  *
  */
+@Transactional
 public interface RatingsEntryLocalService {
 	public com.liferay.portlet.ratings.model.RatingsEntry addRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
@@ -71,14 +74,17 @@ public interface RatingsEntryLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry getRatingsEntry(
 		long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getRatingsEntries(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRatingsEntriesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -91,11 +97,13 @@ public interface RatingsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.polls.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PollsVoteLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.polls.service;
  * @see com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil
  *
  */
+@Transactional
 public interface PollsVoteLocalService {
 	public com.liferay.portlet.polls.model.PollsVote addPollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
@@ -71,13 +74,16 @@ public interface PollsVoteLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.polls.model.PollsVote getPollsVote(long voteId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getPollsVotes(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPollsVotesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsVote updatePollsVote(
@@ -89,22 +95,27 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(
 		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getChoiceVotesCount(long choiceId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
 		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
 		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getQuestionVotesCount(long questionId)
 		throws com.liferay.portal.SystemException;
 }

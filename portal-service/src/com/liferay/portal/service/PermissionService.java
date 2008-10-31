@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PermissionService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PermissionServiceUtil
  *
  */
+@Transactional
 public interface PermissionService {
 	public void checkPermission(long groupId, java.lang.String name,
 		java.lang.String primKey)

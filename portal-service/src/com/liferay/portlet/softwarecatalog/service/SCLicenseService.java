@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="SCLicenseService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.softwarecatalog.service;
  * @see com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil
  *
  */
+@Transactional
 public interface SCLicenseService {
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
@@ -58,6 +61,7 @@ public interface SCLicenseService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.PortalException,

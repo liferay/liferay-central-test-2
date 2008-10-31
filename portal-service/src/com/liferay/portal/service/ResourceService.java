@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ResourceService.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +49,9 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ResourceServiceUtil
  *
  */
+@Transactional
 public interface ResourceService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException,

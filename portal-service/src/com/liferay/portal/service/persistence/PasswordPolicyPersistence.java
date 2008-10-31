@@ -22,12 +22,16 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
+
 /**
  * <a href="PasswordPolicyPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional
 public interface PasswordPolicyPersistence {
 	public com.liferay.portal.model.PasswordPolicy create(long passwordPolicyId);
 
@@ -67,6 +71,7 @@ public interface PasswordPolicyPersistence {
 		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordPolicy findByPrimaryKey(
 		long passwordPolicyId)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
@@ -75,6 +80,7 @@ public interface PasswordPolicyPersistence {
 	public com.liferay.portal.model.PasswordPolicy fetchByPrimaryKey(
 		long passwordPolicyId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordPolicy findByC_DP(long companyId,
 		boolean defaultPolicy)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
@@ -83,6 +89,7 @@ public interface PasswordPolicyPersistence {
 	public com.liferay.portal.model.PasswordPolicy fetchByC_DP(long companyId,
 		boolean defaultPolicy) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordPolicy findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
@@ -91,20 +98,25 @@ public interface PasswordPolicyPersistence {
 	public com.liferay.portal.model.PasswordPolicy fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> findAll()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -119,12 +131,15 @@ public interface PasswordPolicyPersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_DP(long companyId, boolean defaultPolicy)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public void registerListener(

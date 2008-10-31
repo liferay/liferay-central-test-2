@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="RatingsEntryService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.ratings.service;
  * @see com.liferay.portlet.ratings.service.RatingsEntryServiceUtil
  *
  */
+@Transactional
 public interface RatingsEntryService {
 	public void deleteEntry(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.expando.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ExpandoValueService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.expando.service;
  * @see com.liferay.portlet.expando.service.ExpandoValueServiceUtil
  *
  */
+@Transactional
 public interface ExpandoValueService {
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
@@ -54,6 +57,7 @@ public interface ExpandoValueService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.Object getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,

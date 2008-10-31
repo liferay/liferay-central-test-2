@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TagsSourceLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tags.service;
  * @see com.liferay.portlet.tags.service.TagsSourceLocalServiceUtil
  *
  */
+@Transactional
 public interface TagsSourceLocalService {
 	public com.liferay.portlet.tags.model.TagsSource addTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
@@ -71,14 +74,17 @@ public interface TagsSourceLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tags.model.TagsSource getTagsSource(
 		long sourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsSource> getTagsSources(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTagsSourcesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsSource updateTagsSource(

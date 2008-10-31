@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AnnouncementsFlagLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.announcements.service;
  * @see com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceUtil
  *
  */
+@Transactional
 public interface AnnouncementsFlagLocalService {
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag addAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
@@ -71,14 +74,17 @@ public interface AnnouncementsFlagLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
 		long flagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAnnouncementsFlagsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -90,6 +96,7 @@ public interface AnnouncementsFlagLocalService {
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.PortalException,

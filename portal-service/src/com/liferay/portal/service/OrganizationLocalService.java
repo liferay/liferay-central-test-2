@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="OrganizationLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.OrganizationLocalServiceUtil
  *
  */
+@Transactional
 public interface OrganizationLocalService {
 	public com.liferay.portal.model.Organization addOrganization(
 		com.liferay.portal.model.Organization organization)
@@ -71,14 +74,17 @@ public interface OrganizationLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getOrganizationsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -104,41 +110,51 @@ public interface OrganizationLocalService {
 	public void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
 		long groupId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
 		long userId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganization(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getParentOrganizations(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getSuborganizations(
 		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getSubsetOrganizations(
 		java.util.List<com.liferay.portal.model.Organization> allOrganizations,
 		java.util.List<com.liferay.portal.model.Organization> availableOrganizations);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserOrganizationsCount(long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -151,6 +167,7 @@ public interface OrganizationLocalService {
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
 		java.lang.String type, java.lang.Long regionId,
@@ -158,6 +175,7 @@ public interface OrganizationLocalService {
 		java.util.LinkedHashMap<String, Object> params, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
 		java.lang.String type, java.lang.Long regionId,
@@ -166,6 +184,7 @@ public interface OrganizationLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
@@ -174,6 +193,7 @@ public interface OrganizationLocalService {
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
@@ -183,12 +203,14 @@ public interface OrganizationLocalService {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TasksReviewLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tasks.service;
  * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil
  *
  */
+@Transactional
 public interface TasksReviewLocalService {
 	public com.liferay.portlet.tasks.model.TasksReview addTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
@@ -71,14 +74,17 @@ public interface TasksReviewLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview getTasksReview(
 		long reviewId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTasksReviewsCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
@@ -105,25 +111,31 @@ public interface TasksReviewLocalService {
 	public void deleteReviews(long proposalId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview getReview(long reviewId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview getReview(long userId,
 		long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed, boolean rejected)
 		throws com.liferay.portal.SystemException;

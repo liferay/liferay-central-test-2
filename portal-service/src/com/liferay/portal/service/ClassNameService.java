@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ClassNameService.java.html"><b><i>View Source</i></b></a>
@@ -47,11 +49,14 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ClassNameServiceUtil
  *
  */
+@Transactional
 public interface ClassNameService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value) throws com.liferay.portal.SystemException;
 }

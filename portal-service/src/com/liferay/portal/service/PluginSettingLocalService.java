@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PluginSettingLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PluginSettingLocalServiceUtil
  *
  */
+@Transactional
 public interface PluginSettingLocalService {
 	public com.liferay.portal.model.PluginSetting addPluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
@@ -71,14 +74,17 @@ public interface PluginSettingLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		long pluginSettingId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PluginSetting> getPluginSettings(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPluginSettingsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -89,8 +95,10 @@ public interface PluginSettingLocalService {
 	public void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PluginSetting getDefaultPluginSetting();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
 		throws com.liferay.portal.SystemException;

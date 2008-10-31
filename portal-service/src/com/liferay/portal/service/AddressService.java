@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AddressService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.AddressServiceUtil
  *
  */
+@Transactional
 public interface AddressService {
 	public com.liferay.portal.model.Address addAddress(
 		java.lang.String className, long classPK, java.lang.String street1,
@@ -60,10 +63,12 @@ public interface AddressService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

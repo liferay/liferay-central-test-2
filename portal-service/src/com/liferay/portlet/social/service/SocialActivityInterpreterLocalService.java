@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="SocialActivityInterpreterLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.social.service;
  * @see com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil
  *
  */
+@Transactional
 public interface SocialActivityInterpreterLocalService {
 	public void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter);

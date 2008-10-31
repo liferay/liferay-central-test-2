@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="AnnouncementsDeliveryService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.announcements.service;
  * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil
  *
  */
+@Transactional
 public interface AnnouncementsDeliveryService {
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery updateDelivery(
 		long userId, java.lang.String type, boolean email, boolean sms,

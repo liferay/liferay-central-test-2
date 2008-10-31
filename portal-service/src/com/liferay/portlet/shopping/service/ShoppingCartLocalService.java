@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingCartLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil
  *
  */
+@Transactional
 public interface ShoppingCartLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingCart addShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
@@ -71,14 +74,17 @@ public interface ShoppingCartLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCart getShoppingCart(
 		long cartId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> getShoppingCarts(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getShoppingCartsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -92,11 +98,13 @@ public interface ShoppingCartLocalService {
 	public void deleteUserCarts(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		long userId, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
 		long groupId, java.lang.String itemIds)
 		throws com.liferay.portal.SystemException;

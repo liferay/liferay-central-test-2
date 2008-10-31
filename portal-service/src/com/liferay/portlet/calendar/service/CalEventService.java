@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.calendar.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="CalEventService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.calendar.service;
  * @see com.liferay.portlet.calendar.service.CalEventServiceUtil
  *
  */
+@Transactional
 public interface CalEventService {
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long plid,
 		java.lang.String title, java.lang.String description,
@@ -87,6 +90,7 @@ public interface CalEventService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

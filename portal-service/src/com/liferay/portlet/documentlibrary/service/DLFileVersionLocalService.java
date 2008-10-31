@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="DLFileVersionLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.documentlibrary.service;
  * @see com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil
  *
  */
+@Transactional
 public interface DLFileVersionLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion addDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
@@ -71,14 +74,17 @@ public interface DLFileVersionLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getDLFileVersion(
 		long fileVersionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getDLFileVersions(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getDLFileVersionsCount()
 		throws com.liferay.portal.SystemException;
 
@@ -86,6 +92,7 @@ public interface DLFileVersionLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;

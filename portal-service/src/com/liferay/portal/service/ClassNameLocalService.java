@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ClassNameLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ClassNameLocalServiceUtil
  *
  */
+@Transactional
 public interface ClassNameLocalService {
 	public com.liferay.portal.model.ClassName addClassName(
 		com.liferay.portal.model.ClassName className)
@@ -69,13 +72,16 @@ public interface ClassNameLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ClassName> getClassNames(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getClassNamesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName updateClassName(
@@ -84,6 +90,7 @@ public interface ClassNameLocalService {
 
 	public void checkClassNames() throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value) throws com.liferay.portal.SystemException;
 }

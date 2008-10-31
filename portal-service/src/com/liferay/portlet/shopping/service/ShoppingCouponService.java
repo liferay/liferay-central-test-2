@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingCouponService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil
  *
  */
+@Transactional
 public interface ShoppingCouponService {
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		long plid, java.lang.String code, boolean autoCode,
@@ -64,11 +67,13 @@ public interface ShoppingCouponService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long plid, long couponId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
 		long plid, long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int start, int end)

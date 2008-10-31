@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ShoppingOrderLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.shopping.service;
  * @see com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil
  *
  */
+@Transactional
 public interface ShoppingOrderLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingOrder addShoppingOrder(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
@@ -71,14 +74,17 @@ public interface ShoppingOrderLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getShoppingOrder(
 		long orderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> getShoppingOrders(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getShoppingOrdersCount()
 		throws com.liferay.portal.SystemException;
 
@@ -106,21 +112,25 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
 		long userId, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		java.lang.String number)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getPayPalTxnIdOrder(
 		java.lang.String ppTxnId)
 		throws com.liferay.portal.PortalException,
@@ -131,6 +141,7 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> search(
 		long groupId, long companyId, long userId, java.lang.String number,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
@@ -140,6 +151,7 @@ public interface ShoppingOrderLocalService {
 		java.lang.String ppPaymentStatus, boolean andOperator, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long groupId, long companyId, long userId,
 		java.lang.String number, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,

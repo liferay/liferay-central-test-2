@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TasksReviewService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.tasks.service;
  * @see com.liferay.portlet.tasks.service.TasksReviewServiceUtil
  *
  */
+@Transactional
 public interface TasksReviewService {
 	public com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long proposalId, int stage)

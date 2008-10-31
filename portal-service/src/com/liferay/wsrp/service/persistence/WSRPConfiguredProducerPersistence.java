@@ -22,12 +22,16 @@
 
 package com.liferay.wsrp.service.persistence;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
+
 /**
  * <a href="WSRPConfiguredProducerPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
+@Transactional
 public interface WSRPConfiguredProducerPersistence {
 	public com.liferay.wsrp.model.WSRPConfiguredProducer create(
 		long configuredProducerId);
@@ -69,6 +73,7 @@ public interface WSRPConfiguredProducerPersistence {
 		com.liferay.wsrp.model.WSRPConfiguredProducer wsrpConfiguredProducer,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPConfiguredProducer findByPrimaryKey(
 		long configuredProducerId)
 		throws com.liferay.portal.SystemException,
@@ -77,31 +82,37 @@ public interface WSRPConfiguredProducerPersistence {
 	public com.liferay.wsrp.model.WSRPConfiguredProducer fetchByPrimaryKey(
 		long configuredProducerId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
 		java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
 		java.lang.String portalId, java.lang.String namespace, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findByP_N(
 		java.lang.String portalId, java.lang.String namespace, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPConfiguredProducer findByP_N_First(
 		java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchConfiguredProducerException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPConfiguredProducer findByP_N_Last(
 		java.lang.String portalId, java.lang.String namespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchConfiguredProducerException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPConfiguredProducer[] findByP_N_PrevAndNext(
 		long configuredProducerId, java.lang.String portalId,
 		java.lang.String namespace,
@@ -109,20 +120,25 @@ public interface WSRPConfiguredProducerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.wsrp.NoSuchConfiguredProducerException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findAll()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.wsrp.model.WSRPConfiguredProducer> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -132,9 +148,11 @@ public interface WSRPConfiguredProducerPersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByP_N(java.lang.String portalId, java.lang.String namespace)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public void registerListener(

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="LayoutTemplateLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,20 +49,26 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.LayoutTemplateLocalServiceUtil
  *
  */
+@Transactional
 public interface LayoutTemplateLocalService {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getContent(java.lang.String layoutTemplateId,
 		boolean standard, java.lang.String themeId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.LayoutTemplate getLayoutTemplate(
 		java.lang.String layoutTemplateId, boolean standard,
 		java.lang.String themeId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.LayoutTemplate> getLayoutTemplates();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.LayoutTemplate> getLayoutTemplates(
 		java.lang.String themeId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getWapContent(java.lang.String layoutTemplateId,
 		boolean standard, java.lang.String themeId)
 		throws com.liferay.portal.SystemException;

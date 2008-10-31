@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="IGFolderService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.imagegallery.service;
  * @see com.liferay.portlet.imagegallery.service.IGFolderServiceUtil
  *
  */
+@Transactional
 public interface IGFolderService {
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long plid, long parentFolderId, java.lang.String name,
@@ -73,16 +76,19 @@ public interface IGFolderService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.PortalException,

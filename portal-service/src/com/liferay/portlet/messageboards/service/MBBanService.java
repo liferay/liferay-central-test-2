@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MBBanService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.messageboards.service;
  * @see com.liferay.portlet.messageboards.service.MBBanServiceUtil
  *
  */
+@Transactional
 public interface MBBanService {
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long plid,
 		long banUserId)

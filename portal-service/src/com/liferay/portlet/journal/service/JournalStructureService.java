@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="JournalStructureService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.journal.service;
  * @see com.liferay.portlet.journal.service.JournalStructureServiceUtil
  *
  */
+@Transactional
 public interface JournalStructureService {
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long groupId, java.lang.String structureId, boolean autoStructureId,
@@ -75,6 +78,7 @@ public interface JournalStructureService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,

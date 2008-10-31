@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TagsPropertyService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.tags.service;
  * @see com.liferay.portlet.tags.service.TagsPropertyServiceUtil
  *
  */
+@Transactional
 public interface TagsPropertyService {
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long entryId, java.lang.String key, java.lang.String value)
@@ -62,9 +65,11 @@ public interface TagsPropertyService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
 		long entryId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="TasksProposalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.tasks.service;
  * @see com.liferay.portlet.tasks.service.TasksProposalServiceUtil
  *
  */
+@Transactional
 public interface TasksProposalService {
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		long groupId, java.lang.String className, java.lang.String classPK,

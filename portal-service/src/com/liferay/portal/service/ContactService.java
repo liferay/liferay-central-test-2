@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ContactService.java.html"><b><i>View Source</i></b></a>
@@ -47,5 +48,6 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ContactServiceUtil
  *
  */
+@Transactional
 public interface ContactService {
 }

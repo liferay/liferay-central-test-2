@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="OrgLaborService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.OrgLaborServiceUtil
  *
  */
+@Transactional
 public interface OrgLaborService {
 	public com.liferay.portal.model.OrgLabor addOrgLabor(long organizationId,
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
@@ -59,10 +62,12 @@ public interface OrgLaborService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		long organizationId)
 		throws com.liferay.portal.PortalException,

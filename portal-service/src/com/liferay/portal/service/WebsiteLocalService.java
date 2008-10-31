@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="WebsiteLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.WebsiteLocalServiceUtil
  *
  */
+@Transactional
 public interface WebsiteLocalService {
 	public com.liferay.portal.model.Website addWebsite(
 		com.liferay.portal.model.Website website)
@@ -69,13 +72,16 @@ public interface WebsiteLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Website> getWebsites(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWebsitesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website updateWebsite(
@@ -91,9 +97,11 @@ public interface WebsiteLocalService {
 	public void deleteWebsites(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Website> getWebsites()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Website> getWebsites(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

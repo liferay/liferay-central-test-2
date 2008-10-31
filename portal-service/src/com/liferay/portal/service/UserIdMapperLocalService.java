@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="UserIdMapperLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.UserIdMapperLocalServiceUtil
  *
  */
+@Transactional
 public interface UserIdMapperLocalService {
 	public com.liferay.portal.model.UserIdMapper addUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
@@ -71,14 +74,17 @@ public interface UserIdMapperLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		long userIdMapperId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserIdMappersCount()
 		throws com.liferay.portal.SystemException;
 
@@ -89,16 +95,19 @@ public interface UserIdMapperLocalService {
 	public void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(long userId,
 		java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapperByExternalUserId(
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
 		long userId) throws com.liferay.portal.SystemException;
 

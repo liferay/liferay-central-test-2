@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="MBStatsUserLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.messageboards.service;
  * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil
  *
  */
+@Transactional
 public interface MBStatsUserLocalService {
 	public com.liferay.portlet.messageboards.model.MBStatsUser addMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
@@ -71,14 +74,17 @@ public interface MBStatsUserLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBStatsUser getMBStatsUser(
 		long statsUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsUsers(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getMBStatsUsersCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
@@ -91,13 +97,16 @@ public interface MBStatsUserLocalService {
 	public void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException;
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="ServiceComponentLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.ServiceComponentLocalServiceUtil
  *
  */
+@Transactional
 public interface ServiceComponentLocalService {
 	public com.liferay.portal.model.ServiceComponent addServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
@@ -71,14 +74,17 @@ public interface ServiceComponentLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getServiceComponentsCount()
 		throws com.liferay.portal.SystemException;
 

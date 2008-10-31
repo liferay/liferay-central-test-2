@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="SCProductEntryService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.softwarecatalog.service;
  * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil
  *
  */
+@Transactional
 public interface SCProductEntryService {
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long plid, java.lang.String name, java.lang.String type,
@@ -75,6 +78,7 @@ public interface SCProductEntryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.PortalException,

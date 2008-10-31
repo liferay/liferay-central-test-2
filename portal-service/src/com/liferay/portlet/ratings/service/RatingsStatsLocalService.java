@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.ratings.service;
 
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="RatingsStatsLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,7 @@ package com.liferay.portlet.ratings.service;
  * @see com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil
  *
  */
+@Transactional
 public interface RatingsStatsLocalService {
 	public com.liferay.portlet.ratings.model.RatingsStats addRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
@@ -71,14 +74,17 @@ public interface RatingsStatsLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getRatingsStats(
 		long statsId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatses(
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRatingsStatsesCount()
 		throws com.liferay.portal.SystemException;
 
@@ -89,10 +95,12 @@ public interface RatingsStatsLocalService {
 	public void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(long statsId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PortalLocalService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portal.service;
  * @see com.liferay.portal.service.PortalLocalServiceUtil
  *
  */
+@Transactional
 public interface PortalLocalService {
 	public void startup(java.lang.String[] ids)
 		throws com.liferay.portal.PortalException,

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.service;
 
+import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
  * <a href="PollsVoteService.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,7 @@ package com.liferay.portlet.polls.service;
  * @see com.liferay.portlet.polls.service.PollsVoteServiceUtil
  *
  */
+@Transactional
 public interface PollsVoteService {
 	public com.liferay.portlet.polls.model.PollsVote addVote(long questionId,
 		long choiceId)
