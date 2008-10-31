@@ -1453,62 +1453,48 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(firstName)) {
-				firstName = StringUtil.replace(
-					firstName, StringPool.PERCENT, StringPool.BLANK);
-
 				if (andSearch) {
-					searchQuery.addRequiredTerm("firstName", firstName);
+					searchQuery.addRequiredTerm("firstName", firstName, true);
 				}
 				else {
-					searchQuery.addTerm("firstName", firstName);
+					searchQuery.addTerm("firstName", firstName, true);
 				}
 			}
 
 			if (Validator.isNotNull(middleName)) {
-				middleName = StringUtil.replace(
-					middleName, StringPool.PERCENT, StringPool.BLANK);
-
 				if (andSearch) {
-					searchQuery.addRequiredTerm("middleName", middleName);
+					searchQuery.addRequiredTerm("middleName", middleName, true);
 				}
 				else {
-					searchQuery.addTerm("middleName", middleName);
+					searchQuery.addTerm("middleName", middleName, true);
 				}
 			}
 
 			if (Validator.isNotNull(lastName)) {
-				lastName = StringUtil.replace(
-					lastName, StringPool.PERCENT, StringPool.BLANK);
-
 				if (andSearch) {
-					searchQuery.addRequiredTerm("lastName", lastName);
+					searchQuery.addRequiredTerm("lastName", lastName, true);
 				}
 				else {
-					searchQuery.addTerm("lastName", lastName);
+					searchQuery.addTerm("lastName", lastName, true);
 				}
 			}
 
 			if (Validator.isNotNull(screenName)) {
-				screenName = StringUtil.replace(
-					screenName, StringPool.PERCENT, StringPool.BLANK);
-
 				if (andSearch) {
-					searchQuery.addRequiredTerm("screenName", screenName);
+					searchQuery.addRequiredTerm("screenName", screenName, true);
 				}
 				else {
-					searchQuery.addTerm("screenName", screenName);
+					searchQuery.addTerm("screenName", screenName, true);
 				}
 			}
 
 			if (Validator.isNotNull(emailAddress)) {
-				emailAddress = StringUtil.replace(
-					emailAddress, StringPool.PERCENT, StringPool.BLANK);
-
 				if (andSearch) {
-					searchQuery.addRequiredTerm("emailAddress", emailAddress);
+					searchQuery.addRequiredTerm(
+						"emailAddress", emailAddress, true);
 				}
 				else {
-					searchQuery.addTerm("emailAddress", emailAddress);
+					searchQuery.addTerm("emailAddress", emailAddress, true);
 				}
 			}
 

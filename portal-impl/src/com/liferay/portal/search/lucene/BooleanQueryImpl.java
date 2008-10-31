@@ -65,6 +65,10 @@ public class BooleanQueryImpl implements BooleanQuery {
 		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
 	}
 
+	public void addRequiredTerm(String field, String value, boolean like) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value, like);
+	}
+
 	public void addTerm(String field, long value) throws ParseException {
 		try {
 			LuceneUtil.addTerm(_booleanQuery, field, value);
@@ -77,6 +81,17 @@ public class BooleanQueryImpl implements BooleanQuery {
 	public void addTerm(String field, String value) throws ParseException {
 		try {
 			LuceneUtil.addTerm(_booleanQuery, field, value);
+		}
+		catch (org.apache.lucene.queryParser.ParseException pe) {
+			throw new ParseException(pe.getMessage());
+		}
+	}
+
+	public void addTerm(String field, String value, boolean like)
+		throws ParseException {
+
+		try {
+			LuceneUtil.addTerm(_booleanQuery, field, value, like);
 		}
 		catch (org.apache.lucene.queryParser.ParseException pe) {
 			throw new ParseException(pe.getMessage());

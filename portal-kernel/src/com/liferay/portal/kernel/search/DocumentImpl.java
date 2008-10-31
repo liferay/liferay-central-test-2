@@ -178,6 +178,14 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, String value) {
+		addKeyword(name, value, false);
+	}
+
+	public void addKeyword(String name, String value, boolean lowercase) {
+		if (lowercase && Validator.isNotNull(value)) {
+			value = value.toLowerCase();
+		}
+
 		_fields.put(name, new Field(name, value, false));
 	}
 
