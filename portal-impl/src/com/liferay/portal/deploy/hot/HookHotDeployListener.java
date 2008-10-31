@@ -492,7 +492,7 @@ public class HookHotDeployListener
 		}
 		else if (fileName.endsWith(".jspf")) {
 			fileName =
-				fileName.substring(0, fileName.length() - 5) + ".portal.jsp";
+				fileName.substring(0, fileName.length() - 5) + ".portal.jspf";
 		}
 
 		return new File(fileName);
