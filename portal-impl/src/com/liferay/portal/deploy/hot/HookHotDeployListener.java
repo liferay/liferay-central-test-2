@@ -129,8 +129,7 @@ public class HookHotDeployListener
 				pos + customJspDir.length(), customJsp.length());
 
 			File portalJspFile = new File(portalWebDir + portalJsp);
-			File portalJspBackupFile = new File(
-				portalWebDir + portalJsp + ".portal");
+			File portalJspBackupFile = getPortalJspBackupFile(portalJspFile);
 
 			if (portalJspBackupFile.exists()) {
 				FileUtil.copyFile(portalJspBackupFile, portalJspFile);
@@ -484,6 +483,21 @@ public class HookHotDeployListener
 				"Persistence.impl");
 	}
 
+	protected File getPortalJspBackupFile(File portalJspFile) {
+		String fileName = portalJspFile.toString();
+
+		if (fileName.endsWith(".jsp")) {
+			fileName =
+				fileName.substring(0, fileName.length() - 4) + ".portal.jsp";
+		}
+		else if (fileName.endsWith(".jspf")) {
+			fileName =
+				fileName.substring(0, fileName.length() - 5) + ".portal.jsp";
+		}
+
+		return new File(fileName);
+	}
+
 	protected void initAutoLogins(
 			String servletContextName, ClassLoader portletClassLoader,
 			Properties portalProperties)
@@ -522,8 +536,7 @@ public class HookHotDeployListener
 				pos + customJspDir.length(), customJsp.length());
 
 			File portalJspFile = new File(portalWebDir + portalJsp);
-			File portalJspBackupFile = new File(
-				portalWebDir + portalJsp + ".portal");
+			File portalJspBackupFile = getPortalJspBackupFile(portalJspFile);
 
 			if (portalJspFile.exists() && !portalJspBackupFile.exists()) {
 				FileUtil.copyFile(portalJspFile, portalJspBackupFile);
