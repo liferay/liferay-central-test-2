@@ -74,14 +74,15 @@ public class UpgradeOrganization extends UpgradeProcess {
 		UpgradeColumn typeColumn = new OrganizationTypeUpgradeColumnImpl(
 			locationColumn);
 
-		Object[][] layoutColumns1 = {{"location", new Integer(Types.BOOLEAN)}};
-		Object[][] layoutColumns2 = OrganizationImpl.TABLE_COLUMNS.clone();
+		Object[][] organizationColumns1 =
+			{{"location", new Integer(Types.BOOLEAN)}};
+		Object[][] organizationColumns2 = OrganizationImpl.TABLE_COLUMNS.clone();
 
-		Object[][] layoutColumns = ArrayUtil.append(
-			layoutColumns1, layoutColumns2);
-                
+		Object[][] organizationColumns = ArrayUtil.append(
+			organizationColumns1, organizationColumns2);
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			OrganizationImpl.TABLE_NAME, layoutColumns,
+			OrganizationImpl.TABLE_NAME, organizationColumns,
 			locationColumn, typeColumn);
 
 		upgradeTable.updateTable();

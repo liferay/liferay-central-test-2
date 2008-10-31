@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v5_2_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-import java.sql.Types;
 
 /**
  * <a href="OrganizationTypeUpgradeColumnImpl.java.html"><b><i>View Source</i>
@@ -37,6 +36,7 @@ public class OrganizationTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public OrganizationTypeUpgradeColumnImpl(UpgradeColumn locationColumn) {
 		super("type_");
+
 		_locationColumn = locationColumn;
 	}
 
