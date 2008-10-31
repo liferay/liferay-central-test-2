@@ -63,7 +63,7 @@ List<String> primaryKeys = new ArrayList<String>();
 %>
 
 <c:if test="<%= !resultRows.isEmpty() || ((headerNames != null) && !headerNames.isEmpty()) || (emptyResultsMessage != null) %>">
-	<c:if test="<%= paginate %>">
+	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</div>
@@ -260,7 +260,7 @@ List<String> primaryKeys = new ArrayList<String>();
 		</table>
 	</div>
 
-	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
+	<c:if test="<%= paginate %>">
 		<div class="taglib-search-iterator-page-iterator-bottom">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</div>
