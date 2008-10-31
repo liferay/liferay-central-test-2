@@ -87,7 +87,7 @@ public interface Document {
 
 	public void addKeyword(String name, String value);
 
-	public void addKeyword(String name, String value, boolean lowercase);
+	public void addKeyword(String name, String value, boolean lowerCase);
 
 	public void addKeyword(String name, String[] values);
 

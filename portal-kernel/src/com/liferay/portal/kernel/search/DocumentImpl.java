@@ -181,8 +181,8 @@ public class DocumentImpl implements Document {
 		addKeyword(name, value, false);
 	}
 
-	public void addKeyword(String name, String value, boolean lowercase) {
-		if (lowercase && Validator.isNotNull(value)) {
+	public void addKeyword(String name, String value, boolean lowerCase) {
+		if (lowerCase && Validator.isNotNull(value)) {
 			value = value.toLowerCase();
 		}
 

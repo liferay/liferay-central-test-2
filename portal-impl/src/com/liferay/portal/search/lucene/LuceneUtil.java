@@ -156,9 +156,10 @@ public class LuceneUtil {
 
 			value = value.toLowerCase();
 
-			booleanQuery.add(
-				new WildcardQuery(
-					new Term(field, value)), BooleanClause.Occur.MUST);
+			WildcardQuery wildcardQuery = new WildcardQuery(
+				new Term(field, value));
+
+			booleanQuery.add(wildcardQuery, BooleanClause.Occur.MUST);
 		}
 		else {
 			//text = KeywordsUtil.escape(value);
@@ -193,44 +194,45 @@ public class LuceneUtil {
 			boolean like)
 		throws ParseException {
 
-		if (Validator.isNotNull(value)) {
-			if (like) {
-				value = value.toLowerCase();
+		if (Validator.isNull(value)) {
+			return;
+		}
 
-				StringBuilder sb = new StringBuilder();
+		if (like) {
+			value = value.toLowerCase();
 
-				sb.append(StringPool.STAR);
-				sb.append(value);
-				sb.append(StringPool.STAR);
+			StringBuilder sb = new StringBuilder();
 
-				booleanQuery.add(
-					new WildcardQuery(
-						new Term(field, sb.toString())),
-						BooleanClause.Occur.SHOULD);
+			sb.append(StringPool.STAR);
+			sb.append(value);
+			sb.append(StringPool.STAR);
+
+			WildcardQuery wildcardQuery = new WildcardQuery(
+				new Term(field, sb.toString()));
+
+			booleanQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
+		}
+		else {
+			QueryParser queryParser = new QueryParser(
+				field, LuceneUtil.getAnalyzer());
+
+			try {
+				Query query = queryParser.parse(value);
+
+				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
-			else {
-				QueryParser queryParser = new QueryParser(
-					field, LuceneUtil.getAnalyzer());
-
-				try {
-					Query query = queryParser.parse(value);
-
-					booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+			catch (ParseException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"ParseException thrown, reverting to literal search",
+						pe);
 				}
-				catch (ParseException pe) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"ParseException thrown, reverting to literal " +
-								"search",
-							pe);
-					}
 
-					value = KeywordsUtil.escape(value);
+				value = KeywordsUtil.escape(value);
 
-					Query query = queryParser.parse(value);
+				Query query = queryParser.parse(value);
 
-					booleanQuery.add(query, BooleanClause.Occur.SHOULD);
-				}
+				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
 		}
 	}
