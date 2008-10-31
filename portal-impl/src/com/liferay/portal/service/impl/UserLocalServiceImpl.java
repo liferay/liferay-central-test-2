@@ -101,11 +101,13 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
+
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -1498,7 +1500,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 
-			populateQuery(contextQuery, searchQuery, params);
+			populateQuery(contextQuery, searchQuery, params, andSearch);
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
@@ -2719,7 +2721,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected void populateQuery(
 			BooleanQuery contextQuery, BooleanQuery searchQuery,
-			LinkedHashMap<String, Object> params)
+			LinkedHashMap<String, Object> params, boolean andSearch)
 		throws ParseException {
 
 		if (params == null) {
@@ -2742,14 +2744,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			populateQuery(
 				contextQuery, searchQuery, expandoBridge, attributeNames,
-				key, value);
+				key, value, andSearch);
 		}
 	}
 
 	protected void populateQuery(
 			BooleanQuery contextQuery, BooleanQuery searchQuery,
 			ExpandoBridge expandoBridge, Set<String> attributeNames,
-			String key, Object value)
+			String key, Object value, boolean andSearch)
 		throws ParseException {
 
 		if (key.equals("usersRoles")) {
@@ -2785,7 +2787,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				int type = expandoBridge.getAttributeType(key);
 
 				if (type == ExpandoColumnConstants.STRING) {
-					searchQuery.addTerm(key, (String)value);
+					if (andSearch) {
+						searchQuery.addRequiredTerm(key, (String)value);
+					}
+					else {
+						searchQuery.addTerm(key, (String)value);
+					}
 				}
 			}
 		}
