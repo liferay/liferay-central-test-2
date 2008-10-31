@@ -1052,6 +1052,10 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+
+		<!-- Transactions -->
+
+		<tx-required>getPreferences</tx-required>
 	</entity>
 	<entity name="Quartz" local-service="true" remote-service="false" />
 	<entity name="Region" local-service="false" remote-service="true">
@@ -1131,6 +1135,11 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+
+		<!-- Transactions -->
+
+		<tx-required>getResource</tx-required>
+		
 	</entity>
 	<entity name="ResourceCode" local-service="true" remote-service="false">
 

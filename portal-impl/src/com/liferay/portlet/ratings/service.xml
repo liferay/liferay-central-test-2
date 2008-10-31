@@ -66,5 +66,9 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+
+		<!-- Transactions -->
+
+		<tx-required>getStats</tx-required>
 	</entity>
 </service-builder>

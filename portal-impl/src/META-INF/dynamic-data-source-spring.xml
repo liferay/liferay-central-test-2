@@ -13,9 +13,6 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="mailSession" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="mail/MailSession" />
-	</bean>
 	<bean name="dynamicDataSourceTargetSource" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTargetSource">
 		<property name="readDataSource">
 			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
@@ -28,16 +25,15 @@
 			</bean>
 		</property>
 	</bean>
-	<aop:config>
-		<aop:aspect id="dynamicDataSourceAspect" ref="dynamicDataSourceAdvice">
-			<aop:around pointcut-ref="serviceOperation" method="invoke" />
-		</aop:aspect>
-	</aop:config>
-	<bean id="dynamicDataSourceAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceAdvice">
-		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
-		<property name="dataSource" ref="liferayDataSource" />
-		<property name="mailSession" ref="mailSession" />
+	<bean id="transactionAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTransactionInterceptor">
+		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />	
+		<property name="transactionManager" ref="liferayTransactionManager" />
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource">
+		        <constructor-arg>
+		            <bean class="com.liferay.portal.spring.annotation.PortalTransactionAnnotationParser" />
+		        </constructor-arg>
+			</bean>
+		</property>
 	</bean>
 </beans>

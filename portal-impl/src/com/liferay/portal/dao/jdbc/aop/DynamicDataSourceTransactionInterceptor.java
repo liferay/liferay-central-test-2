@@ -24,25 +24,40 @@ package com.liferay.portal.dao.jdbc.aop;
 
 import com.liferay.portal.kernel.util.StringPool;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
+import java.lang.reflect.Method;
+
+import org.aopalliance.intercept.MethodInvocation;
+
+import org.springframework.transaction.interceptor.TransactionAttribute;
+import org.springframework.transaction.interceptor.TransactionAttributeSource;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 /**
- * <a href="DynamicDataSourceAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="DynamicDataSourceTransactionInterceptor.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class DynamicDataSourceAdvice {
+public class DynamicDataSourceTransactionInterceptor
+	extends TransactionInterceptor {
 
-	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
+	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+		Class<?> targetClass = null;
 
-		Signature signature = proceedingJoinPoint.getSignature();
+		if (methodInvocation.getThis() != null) {
+			targetClass = methodInvocation.getThis().getClass();
+		}
 
-		String methodName = signature.getName();
+		Method targetMethod = methodInvocation.getMethod();
 
-		if (isReadMethod(methodName)) {
+		TransactionAttributeSource transactionAttributeSource =
+			getTransactionAttributeSource();
+
+		TransactionAttribute transactionAttribute =
+			transactionAttributeSource.getTransactionAttribute(
+				targetMethod, targetClass);
+
+		if (transactionAttribute.isReadOnly()) {
 			_dynamicDataSourceTargetSource.setOperation(Operation.READ);
 		}
 		else {
@@ -51,33 +66,22 @@ public class DynamicDataSourceAdvice {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(signature.getDeclaringType().getName());
+		sb.append(targetClass.getName());
 		sb.append(StringPool.PERIOD);
-		sb.append(methodName);
+		sb.append(targetMethod.getName());
 
 		_dynamicDataSourceTargetSource.pushMethod(sb.toString());
 
 		Object returnValue = null;
 
 		try {
-			returnValue = proceedingJoinPoint.proceed();
+			returnValue = super.invoke(methodInvocation);
 		}
 		finally {
 			_dynamicDataSourceTargetSource.popMethod();
 		}
 
 		return returnValue;
-	}
-
-	public boolean isReadMethod(String methodName) {
-		if ((methodName.startsWith("get") || methodName.startsWith("search")) &&
-			!methodName.startsWith("getPreferences") &&
-			!methodName.startsWith("getResource")) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	public void setDynamicDataSourceTargetSource(
