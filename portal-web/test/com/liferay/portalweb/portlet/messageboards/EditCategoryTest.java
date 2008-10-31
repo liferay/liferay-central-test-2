@@ -39,7 +39,7 @@ public class EditCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/a[1]")) {
+				if (selenium.isElementPresent("//span[1]/a")) {
 					break;
 				}
 			}
@@ -49,10 +49,9 @@ public class EditCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//td[1]/div/a[1]"));
+		selenium.click(RuntimeVariables.replace("//span[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(
-			"//div[@id='portlet-wrapper-19']/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[5]/ul/li/strong/span");
+		selenium.click("//td[5]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_19_name",

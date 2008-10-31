@@ -82,8 +82,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='portlet-wrapper-31']/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[1]/a/b")) {
+				if (selenium.isElementPresent("//tr[4]/td[1]/a/b")) {
 					break;
 				}
 			}
@@ -93,8 +92,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='portlet-wrapper-31']/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[1]/a/b"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
@@ -128,8 +126,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='portlet-wrapper-31']/div[2]/div/div/form[1]/div[4]/table/tbody/tr[2]/td[1]/a/b")) {
+				if (selenium.isElementPresent("//b")) {
 					break;
 				}
 			}
