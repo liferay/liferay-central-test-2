@@ -1090,7 +1090,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				portalURL + layoutURL + "/-/wiki/" + node.getNodeId() + "/" +
 					HttpUtil.encodeURL(page.getTitle());
 		}
-		
+
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.WIKI, user);
 
