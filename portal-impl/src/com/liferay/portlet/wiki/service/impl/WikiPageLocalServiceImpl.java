@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -1086,9 +1087,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
 			pageURL =
-				portalURL + layoutURL + "/wiki/" + node.getNodeId() + "/" +
-					page.getTitle();
-		}
+				portalURL + layoutURL + "/-/wiki/" + node.getNodeId() + "/" +
+					HttpUtil.encodeURL(page.getTitle());
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.WIKI, user);
