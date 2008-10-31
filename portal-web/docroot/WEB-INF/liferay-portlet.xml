@@ -14,7 +14,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
@@ -55,7 +55,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-reverend-fun</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -65,7 +65,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-bible-gateway</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -85,7 +85,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/calendar/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-calendar</css-class-wrapper>
 	</portlet>
@@ -99,7 +99,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -110,7 +110,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-address-book</css-class-wrapper>
 		<include>false</include>
 	</portlet>
@@ -124,7 +124,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-directory</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -158,7 +158,7 @@
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/journal/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-journal</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -195,7 +195,7 @@
 		<!--<user-principal-strategy>screenName</user-principal-strategy>-->
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/message_boards/css.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/message_boards/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
@@ -216,7 +216,7 @@
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/document_library/css.jsp</header-portlet-css>
 		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
@@ -240,7 +240,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-dictionary</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -250,7 +250,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-sms</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -264,7 +264,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-polls</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -274,7 +274,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-translator</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -284,7 +284,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-unit-converter</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -300,7 +300,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-bookmarks</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -312,7 +312,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-communities</css-class-wrapper>
 	</portlet>
@@ -324,7 +324,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-network</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -340,7 +340,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/image_gallery/css.jsp</header-portlet-css>
 		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
 		<css-class-wrapper>portlet-image-gallery</css-class-wrapper>
@@ -365,7 +365,7 @@
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/blogs/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-blogs</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -380,7 +380,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-shopping</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -399,7 +399,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
 		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
@@ -413,7 +413,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-words</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -438,7 +438,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-gospel-for-asia</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -448,7 +448,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-hello-world</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -461,7 +461,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-iframe</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -474,7 +474,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
@@ -485,7 +485,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-hello-velocity</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -496,7 +496,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-global-prayer-digest</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -510,7 +510,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
 		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
@@ -529,7 +529,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-journal-content</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -541,7 +541,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-login</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -555,7 +555,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-polls-display</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -565,7 +565,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-loan-calculator</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -578,7 +578,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-journal-articles</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -589,7 +589,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-recent-documents</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -601,7 +601,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-web-proxy</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -623,7 +623,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-password-generator</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -637,7 +637,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-navigation</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -652,7 +652,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-breadcrumb</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -666,7 +666,7 @@
 		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-journal-content-search</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -679,7 +679,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
@@ -694,7 +694,7 @@
 		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-language</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -709,7 +709,7 @@
 		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/announcements/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-alerts</css-class-wrapper>
 	</portlet>
@@ -725,7 +725,7 @@
 		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/announcements/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-announcements</css-class-wrapper>
 	</portlet>
@@ -741,7 +741,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-site-map</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -753,7 +753,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/portlet_configuration/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-configuration</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -769,7 +769,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<system>true</system>
 	</portlet>
 	<portlet>
@@ -781,7 +781,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-communities</css-class-wrapper>
 		<system>true</system>
@@ -802,7 +802,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/quick_note/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-quick-note</css-class-wrapper>
 	</portlet>
@@ -816,7 +816,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-software-catalog</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -829,7 +829,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/tags_admin/css.jsp</header-portlet-css>
 		<header-portal-javascript>/html/js/liferay/service_packed.js</header-portal-javascript>
@@ -845,7 +845,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-invitation</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -859,7 +859,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>25</render-weight>
 		<css-class-wrapper>portlet-tagged-content</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -873,7 +873,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-xsl-content</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -899,7 +899,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/update_manager/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-update-manager</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -913,7 +913,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-page-comments</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -925,7 +925,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-page-ratings</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -938,7 +938,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-web-form</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -952,7 +952,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/document_library/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 	</portlet>
@@ -965,7 +965,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-plugin-installer</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -977,7 +977,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-open-id</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -989,7 +989,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
@@ -1001,7 +1001,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-recent-bloggers</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1013,7 +1013,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/blogs_aggregator/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-blogs-aggregator</css-class-wrapper>
 	</portlet>
@@ -1025,7 +1025,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-activities</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1038,7 +1038,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-nested-portlets</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1049,7 +1049,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<system>true</system>
 	</portlet>
 	<portlet>
@@ -1062,7 +1062,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<system>true</system>
 	</portlet>
 	<portlet>
@@ -1072,7 +1072,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-activities</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1086,7 +1086,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-tags-navigation</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1116,7 +1116,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
@@ -1133,7 +1133,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/enterprise_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
@@ -1149,7 +1149,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1164,7 +1164,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1179,7 +1179,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1194,7 +1194,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1209,7 +1209,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1224,7 +1224,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1236,7 +1236,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
@@ -1251,7 +1251,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -1267,7 +1267,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1281,7 +1281,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1295,7 +1295,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1312,7 +1312,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/expando/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-expando</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -1330,7 +1330,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
+		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<system>true</system>
 	</portlet>
