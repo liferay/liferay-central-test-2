@@ -31,6 +31,7 @@ create table MBMailingList (
 	active_ BOOLEAN
 );
 
+alter table Organization_ add type_ VARCHAR(75);
 alter table Role_ add subtype VARCHAR(75);
 
 alter table TagsEntry add groupId LONG;
