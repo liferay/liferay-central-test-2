@@ -24,17 +24,26 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <a href="ServiceContextFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class ServiceContextFactory {
@@ -45,10 +54,64 @@ public class ServiceContextFactory {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		// Theme display
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		serviceContext.setCompanyId(themeDisplay.getCompanyId());
+		serviceContext.setLanguageId(themeDisplay.getLanguageId());
+		serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
+		serviceContext.setPathMain(PortalUtil.getPathMain());
+		serviceContext.setPlid(themeDisplay.getPlid());
+		serviceContext.setPortalURL(PortalUtil.getPortalURL(portletRequest));
+		serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+		serviceContext.setUserDisplayURL(
+			themeDisplay.getUser().getDisplayURL(themeDisplay));
+		serviceContext.setUserId(themeDisplay.getUserId());
+
+		// Expando
+
 		Map<String, Object> attributes = PortalUtil.getExpandoBridgeAttributes(
 			new ExpandoBridgeImpl(className, 0), portletRequest);
 
 		serviceContext.setExpandoBridgeAttributes(attributes);
+
+		// Permissions
+
+		boolean addCommunityPermissions = ParamUtil.getBoolean(
+			portletRequest, "addCommunityPermissions");
+		boolean addGuestPermissions = ParamUtil.getBoolean(
+			portletRequest, "addGuestPermissions");
+		String[] communityPermissions = portletRequest.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = portletRequest.getParameterValues(
+			"guestPermissions");
+
+		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGuestPermissions(addGuestPermissions);
+		serviceContext.setCommunityPermissions(communityPermissions);
+		serviceContext.setGuestPermissions(guestPermissions);
+
+		// Portlet preferences ids
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		String portletId = ParamUtil.getString(request, "p_p_id");
+
+		PortletPreferencesIds portletPreferencesIds =
+			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
+				request, portletId);
+
+		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
+
+		// Tags entries
+
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(portletRequest, "tagsEntries"));
+
+		serviceContext.setTagsEntries(tagsEntries);
 
 		return serviceContext;
 	}
