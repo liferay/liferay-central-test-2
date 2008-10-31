@@ -23,12 +23,12 @@
 package com.liferay.portlet.enterpriseadmin.util;
 
 /**
- * <a href="ReIndexThreadLocal.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserIndexerEnabled.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public class ReIndexThreadLocal extends ThreadLocal<Boolean> {
+public class UserIndexerEnabled extends ThreadLocal<Boolean> {
 
 	protected Boolean initialValue() {
 		return Boolean.TRUE;

@@ -98,8 +98,12 @@ public class UserIndexer implements Indexer {
 		return doc.get(Field.UID);
 	}
 
+	public static void setEnabled(boolean enabled) {
+		_enabled.set(enabled);
+	}
+
 	public static void updateUser(User user) throws SearchException {
-		if (!_reIndex.get()) {
+		if (!_enabled.get()) {
 			return;
 		}
 
@@ -181,10 +185,6 @@ public class UserIndexer implements Indexer {
 		}
 	}
 
-	public static void setReIndex(boolean reIndex) {
-		_reIndex.set(reIndex);
-	}
-
-	protected static ReIndexThreadLocal _reIndex = new ReIndexThreadLocal();
+	private static UserIndexerEnabled _enabled = new UserIndexerEnabled();
 
 }

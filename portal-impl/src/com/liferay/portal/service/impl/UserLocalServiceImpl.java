@@ -64,6 +64,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -160,13 +161,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -194,13 +193,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -218,13 +215,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.addUsers(roleId, userIds);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -237,13 +232,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -350,9 +343,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Expando
 
+		UserIndexer.setEnabled(false);
+
 		ExpandoBridge expandoBridge = user.getExpandoBridge();
 
-		UserIndexer.setReIndex(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Mail
@@ -484,7 +478,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			UserIndexer.setReIndex(true);
+			UserIndexer.setEnabled(true);
 			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
@@ -1597,13 +1591,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.removeUsers(groupId, userIds);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1623,13 +1615,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.removeUsers(organizationId, userIds);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1648,13 +1638,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, userIds);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1665,13 +1653,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, users);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(users);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + users.size(), se);
+			_log.error("Indexing " + ListUtil.toString(users, "userId"), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1682,13 +1668,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.removeUsers(userGroupId, userIds);
 
-		// Indexer
-
 		try {
 			UserIndexer.updateUsers(userIds);
 		}
 		catch (SearchException se) {
-			_log.error("Indexing " + String.valueOf(userIds), se);
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1757,8 +1741,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				addGroupUsers(newGroupId, new long[] {userId});
 			}
 		}
-
-		// Indexer
 
 		try {
 			UserIndexer.updateUsers(new long[] {userId});
@@ -1899,8 +1881,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				addOrganizationUsers(newOrganizationId, new long[] {userId});
 			}
 		}
-
-		// Indexer
 
 		try {
 			UserIndexer.updateUsers(new long[] {userId});
@@ -2155,9 +2135,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Expando
 
+		UserIndexer.setEnabled(false);
+
 		ExpandoBridge expandoBridge = user.getExpandoBridge();
 
-		UserIndexer.setReIndex(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Contact
@@ -2239,7 +2220,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			UserIndexer.setReIndex(true);
+			UserIndexer.setEnabled(true);
 			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
