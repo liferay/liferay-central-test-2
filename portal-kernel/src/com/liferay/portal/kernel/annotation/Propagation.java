@@ -30,13 +30,13 @@ package com.liferay.portal.kernel.annotation;
  */
 public enum Propagation {
 
-	REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),
-	SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS),
 	MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),
-	REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),
-	NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),
 	NEVER(TransactionDefinition.PROPAGATION_NEVER),
-	NESTED(TransactionDefinition.PROPAGATION_NESTED);
+	NESTED(TransactionDefinition.PROPAGATION_NESTED),
+	NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),
+	REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),
+	REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),
+	SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS);
 
 	Propagation(int value) {
 		_value = value;

@@ -35,26 +35,26 @@ import java.lang.annotation.Target;
  * @author Michael Young
  *
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
 @Documented
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Transactional {
 
-	Propagation propagation() default Propagation.REQUIRED;
+	public Isolation isolation() default Isolation.DEFAULT;
 
-	Isolation isolation() default Isolation.DEFAULT;
+	public Class<? extends Throwable>[] noRollbackFor() default {};
 
-	int timeout() default TransactionDefinition.TIMEOUT_DEFAULT;
+	public String[] noRollbackForClassName() default {};
 
-	boolean readOnly() default false;
+	public Propagation propagation() default Propagation.REQUIRED;
 
-	Class<? extends Throwable>[] rollbackFor() default {};
+	public boolean readOnly() default false;
 
-	String[] rollbackForClassName() default {};
+	public Class<? extends Throwable>[] rollbackFor() default {};
 
-	Class<? extends Throwable>[] noRollbackFor() default {};
+	public String[] rollbackForClassName() default {};
 
-	String[] noRollbackForClassName() default {};
+	public int timeout() default TransactionDefinition.TIMEOUT_DEFAULT;
 
 }

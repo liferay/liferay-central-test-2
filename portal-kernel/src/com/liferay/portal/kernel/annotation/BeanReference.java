@@ -41,6 +41,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface BeanReference {
 
-	String name() default StringPool.BLANK;
+	public String name() default StringPool.BLANK;
 
 }

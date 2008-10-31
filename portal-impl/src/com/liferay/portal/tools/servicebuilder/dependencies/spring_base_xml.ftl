@@ -18,8 +18,8 @@
 		<property name="transactionAttributeSource">
 			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource">
 		        <constructor-arg>
-		            <bean class="com.liferay.portal.spring.annotation.TransactionAnnotationParser"/>
-		        </constructor-arg>				
+		            <bean class="com.liferay.portal.spring.annotation.PortalTransactionAnnotationParser" />
+		        </constructor-arg>
 			</bean>
 		</property>
 	</bean>

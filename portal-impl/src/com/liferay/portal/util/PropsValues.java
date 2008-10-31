@@ -952,6 +952,14 @@ public class PropsValues {
 		GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
 
+	public static final String[]
+		SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES = PropsUtil.getArray(
+			PropsKeys.SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES);
+
+	public static final String[] SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES =
+		PropsUtil.getArray(
+			PropsKeys.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);
+
 	public static final String[] SERVLET_SERVICE_EVENTS_POST =
 		PropsUtil.getArray(PropsKeys.SERVLET_SERVICE_EVENTS_POST);
 

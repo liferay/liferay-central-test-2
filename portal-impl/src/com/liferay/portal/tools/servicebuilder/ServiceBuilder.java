@@ -35,8 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SetUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.portal.kernel.util.Time;
@@ -1402,34 +1401,36 @@ public class ServiceBuilder {
 	}
 
 	public boolean isPersistenceReadOnlyMethod(
-			JavaMethod method, List<String> txRequiredList) {
-		
+		JavaMethod method, List<String> txRequiredList) {
+
 		return isReadOnlyMethod(
-				method, txRequiredList, _PERSISTENCE_READ_ONLY_PREFIXES);
+			method, txRequiredList,
+			PropsValues.SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES);
 	}
 
 	public boolean isServiceReadOnlyMethod(
-			JavaMethod method, List<String> txRequiredList) {
-		
+		JavaMethod method, List<String> txRequiredList) {
+
 		return isReadOnlyMethod(
-				method, txRequiredList, _SERVICE_READ_ONLY_PREFIXES);
+			method, txRequiredList,
+			PropsValues.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);
 	}
-	
+
 	public boolean isReadOnlyMethod(
-			JavaMethod method, List<String> txRequiredList, String[] prefixes) {
-		
+		JavaMethod method, List<String> txRequiredList, String[] prefixes) {
+
 		String methodName = method.getName();
 
 		if (isTxRequiredMethod(method, txRequiredList)) {
 			return false;
 		}
-		
+
 		for (String prefix : prefixes) {
 			if (methodName.startsWith(prefix)) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -1470,10 +1471,10 @@ public class ServiceBuilder {
 
 		return true;
 	}
-	
+
 	public boolean isTxRequiredMethod(
-			JavaMethod method, List<String> txRequiredList) {
-		
+		JavaMethod method, List<String> txRequiredList) {
+
 		String methodName = method.getName();
 
 		for (String txRequired : txRequiredList) {
@@ -1481,7 +1482,7 @@ public class ServiceBuilder {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -3589,12 +3590,6 @@ public class ServiceBuilder {
 
 	private static final String _AUTHOR = "Brian Wing Shun Chan";
 
-	private String[] _PERSISTENCE_READ_ONLY_PREFIXES = PropsUtil.getArray(
-		PropsKeys.SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES);
-
-	private String[] _SERVICE_READ_ONLY_PREFIXES = PropsUtil.getArray(
-			PropsKeys.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);
-
 	private static final int _SESSION_TYPE_REMOTE = 0;
 
 	private static final int _SESSION_TYPE_LOCAL = 1;
@@ -3680,5 +3675,5 @@ public class ServiceBuilder {
 	private List<Entity> _ejbList;
 	private Map<String, EntityMapping> _entityMappings;
 	private Map<String, Entity> _entityPool = new HashMap<String, Entity>();
-	
+
 }
