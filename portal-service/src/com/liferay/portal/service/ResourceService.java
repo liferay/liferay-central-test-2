@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -51,7 +50,6 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional
 public interface ResourceService {
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException,

@@ -1139,7 +1139,6 @@
 		<!-- Transactions -->
 
 		<tx-required>getResource</tx-required>
-		
 	</entity>
 	<entity name="ResourceCode" local-service="true" remote-service="false">
 

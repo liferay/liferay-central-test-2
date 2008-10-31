@@ -95,12 +95,10 @@ public interface RatingsStatsLocalService {
 	public void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(long statsId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

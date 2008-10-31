@@ -72,7 +72,6 @@ public interface ResourceLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -144,7 +143,6 @@ public interface ResourceLocalService {
 	public java.util.List<com.liferay.portal.model.Resource> getResources()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException,

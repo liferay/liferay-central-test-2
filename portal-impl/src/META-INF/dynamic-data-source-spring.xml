@@ -9,7 +9,7 @@
 	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="targetSource" ref="dynamicDataSourceTargetSource"/>
+				<property name="targetSource" ref="dynamicDataSourceTargetSource" />
 			</bean>
 		</property>
 	</bean>
@@ -26,7 +26,7 @@
 		</property>
 	</bean>
 	<bean id="transactionAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTransactionInterceptor">
-		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />	
+		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />
 		<property name="transactionManager" ref="liferayTransactionManager" />
 		<property name="transactionAttributeSource">
 			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource">
