@@ -102,11 +102,11 @@ public class SearchEngineImpl implements SearchEngine {
 		_writer = writer;
 	}
 
-	public void unregister(String name) {
+	public void unregister(String fromName) {
 		SearchRequest searchRequest = new SearchRequest();
 
 		searchRequest.setCommand(SearchRequest.COMMAND_UNREGISTER);
-		searchRequest.setId(name);
+		searchRequest.setId(fromName);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);

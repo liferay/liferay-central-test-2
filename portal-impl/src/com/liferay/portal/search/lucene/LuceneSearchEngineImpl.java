@@ -73,8 +73,8 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		_writer = writer;
 	}
 
-	public void unregister(String name) {
-		if (!_name.equals(name)) {
+	public void unregister(String fromName) {
+		if (!_name.equals(fromName)) {
 			_registered = false;
 		}
 	}

@@ -42,6 +42,6 @@ public interface SearchEngine {
 
 	public void register(String name);
 
-	public void unregister(String name);
+	public void unregister(String fromName);
 
 }
