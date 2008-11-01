@@ -37,6 +37,7 @@ import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
@@ -92,7 +93,9 @@ public class EditOrganizationAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (organization != null) {
-				redirect += organization.getOrganizationId();
+				redirect = HttpUtil.setParameter(
+					redirect, "organizationId",
+					String.valueOf(organization.getOrganizationId()));
 			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
