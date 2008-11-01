@@ -28,6 +28,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
+import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -73,8 +74,9 @@ public class ClassUtil {
 				}
 				else if (st.sval.startsWith("@")) {
 					st.ordinaryChar(' ');
+					st.wordChars('=', '=');
 
-					String[] las = _processAnnotation(st.sval);
+					String[] las = _processAnnotation(st.sval, st);
 
 					for (int i = 0; i < las.length; i++) {
 						classes.add(las[i]);
@@ -164,7 +166,9 @@ public class ClassUtil {
 		return false;
 	}
 
-	private static String[] _processAnnotation(String s) throws IOException {
+	private static String[] _processAnnotation(
+		String s, StreamTokenizer st) throws IOException {
+
 		s = s.trim();
 
 		List<String> tokens = new ArrayList<String>();
@@ -179,29 +183,58 @@ public class ClassUtil {
 			tokens.add(annotationName.replace("@", ""));
 		}
 		else if (annotationParametersMatcher.matches()) {
-			String annotationName = annotationParametersMatcher.group(1);
-			String annotationParameters = annotationParametersMatcher.group(2);
+			if (!s.trim().endsWith(")")) {
+				// read till end of annotation is reached
+				while (st.nextToken() != StreamTokenizer.TT_EOF) {
 
-			tokens.add(annotationName.replace("@", ""));
+					if (st.ttype == StreamTokenizer.TT_WORD) {
+						s += st.sval;
+						if (s.trim().endsWith(")")) {
+							break;
+						}
+					}
+				}
+			}
 
-			tokens = _processAnnotationParameters(annotationParameters,tokens);
+			annotationParametersMatcher =
+				_ANNOTATION_PARAMETERS_REGEXP.matcher(s);
+
+			if (annotationParametersMatcher.matches()) {
+				String annotationName =
+					annotationParametersMatcher.group(1);
+				String annotationParameters =
+					annotationParametersMatcher.group(2);
+				tokens.add(annotationName.replace("@", ""));
+
+				tokens = _processAnnotationParameters(
+					annotationParameters,tokens);
+			}
 		}
 
 		return (String[])tokens.toArray(new String[tokens.size()]);
 	}
 
 	private static List<String> _processAnnotationParameters(
-		String s, List<String> tokens) {
+		String s, List<String> tokens) throws IOException {
 
-		String[] parameters = s.split(",");
+		StreamTokenizer st = new StreamTokenizer(new StringReader(s));
+		_setupParseTable(st);
 
-		Pattern pattern = Pattern.compile("(.+)\\..+");
+		while (st.nextToken() != StreamTokenizer.TT_EOF) {
+			if (st.ttype == StreamTokenizer.TT_WORD) {
+				if (st.sval.indexOf('.') >= 0) {
+					tokens.add(st.sval.substring(0, st.sval.indexOf('.')));
+				}
+				else {
+					tokens.add(st.sval);
+				}
+			}
+			else if (st.ttype != StreamTokenizer.TT_NUMBER &&
+					 st.ttype != StreamTokenizer.TT_EOL) {
 
-		for (int i = 0; i < parameters.length; i++) {
-			Matcher matcher = pattern.matcher(parameters[i]);
-
-			if (matcher.find()) {
-				tokens.add(matcher.group(1));
+				if (Character.isUpperCase((char)st.ttype)) {
+					tokens.add(String.valueOf((char)st.ttype));
+				}
 			}
 		}
 
