@@ -185,11 +185,12 @@ List scores = null;
 		}
 
 		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+		boolean showSearch = (results.size() > 0);
 		%>
 
-		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
+		<c:if test="<%= showAddFolderButton || showSearch %>">
 			<div>
-				<c:if test="<%= results.size() > 0 %>">
+				<c:if test="<%= showSearch %>">
 					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
 					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -202,16 +203,10 @@ List scores = null;
 				</c:if>
 			</div>
 
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
+			<br />
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
-			<br />
-		</c:if>
 
 		</form>
 
@@ -299,11 +294,12 @@ List scores = null;
 			searchContainer.setResults(results);
 
 			boolean showAddImageButton = IGFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_IMAGE);
+			showSearch = (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddImageButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddImageButton || showSearch %>">
 				<div>
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= showSearch %>">
 						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
 
 						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -315,14 +311,12 @@ List scores = null;
 						<input type="button" value="<liferay-ui:message key="add-image" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 					</c:if>
 
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= showSearch %>">
 						<input type="button" value="<liferay-ui:message key="view-slide-show" />" onClick="<portlet:namespace />viewSlideShow();" />
 					</c:if>
 				</div>
 
-				<c:if test="<%= results.size() > 0 %>">
-					<br />
-				</c:if>
+				<br />
 			</c:if>
 
 			<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>

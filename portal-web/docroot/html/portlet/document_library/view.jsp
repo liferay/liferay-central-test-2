@@ -114,9 +114,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						</c:if>
 					</div>
 
-					<c:if test="<%= results.size() > 0 %>">
-						<br />
-					</c:if>
+					<br />
 				</c:if>
 
 				<liferay-ui:search-iterator />
@@ -291,9 +289,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						</c:if>
 					</div>
 
-					<c:if test="<%= results.size() > 0 %>">
-						<br />
-					</c:if>
+					<br />
 				</c:if>
 
 				<liferay-ui:search-iterator />

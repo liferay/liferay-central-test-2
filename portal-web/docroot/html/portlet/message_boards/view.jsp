@@ -219,7 +219,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<c:if test="<%= (category != null) && (showAddCategoryButton || (results.size() > 0)) %>">
+		<c:if test="<%= (category != null) && (showAddCategoryButton || showSearch) %>">
 			<br />
 		</c:if>
 
@@ -383,11 +383,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					showAddMessageButton = false;
 				}
 			}
+
+			showSearch = showSearch && (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddMessageButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddMessageButton || showSearch %>">
 				<div>
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= showSearch %>">
 						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
 
 						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -400,9 +402,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					</c:if>
 				</div>
 
-				<c:if test="<%= results.size() > 0 %>">
-					<br />
-				</c:if>
+				<br />
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

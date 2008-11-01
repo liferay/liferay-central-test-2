@@ -104,16 +104,12 @@ for (int i = 0; i < results.size(); i++) {
 boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.WIKI, ActionKeys.ADD_NODE);
 %>
 
-<c:if test="<%= showAddNodeButton || (results.size() > 0) %>">
+<c:if test="<%= showAddNodeButton %>">
 	<div>
-		<c:if test="<%= showAddNodeButton %>">
-			<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-		</c:if>
+		<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</div>
 
-	<c:if test="<%= results.size() > 0 %>">
-		<br />
-	</c:if>
+	<br />
 </c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

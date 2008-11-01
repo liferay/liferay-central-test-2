@@ -63,6 +63,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		<liferay-ui:search-container
 			curParam="cur1"
+			headerNames="folder,num-of-folders,num-of-entries"
 			iteratorURL="<%= portletURL %>"
 		>
 			<liferay-ui:search-container-results
@@ -181,11 +182,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<%
 			boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+			boolean showSearch = (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddFolderButton || showSearch %>">
 				<div>
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= showSearch %>">
 						<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
 						<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -198,14 +200,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					</c:if>
 				</div>
 
-				<c:if test="<%= results.size() > 0 %>">
-					<br />
-				</c:if>
+				<br />
 			</c:if>
 
 			<liferay-ui:search-iterator />
 
-			<c:if test="<%= (folder != null) && (showAddFolderButton || (results.size() > 0)) %>">
+			<c:if test="<%= (folder != null) && (showAddFolderButton || showSearch) %>">
 				<br />
 			</c:if>
 		</liferay-ui:search-container>
@@ -255,6 +255,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<liferay-ui:search-container
 				curParam="cur2"
+				headerNames="name,url,visits,priority,modified-date"
 				iteratorURL="<%= portletURL %>"
 				orderByCol="<%= orderByCol %>"
 				orderByType="<%= orderByType %>"
@@ -335,11 +336,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				<%
 				boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY);
+				boolean showSearch = (results.size() > 0);
 				%>
 
-				<c:if test="<%= showAddEntryButton || (results.size() > 0) %>">
+				<c:if test="<%= showAddEntryButton || showSearch %>">
 					<div>
-						<c:if test="<%= results.size() > 0 %>">
+						<c:if test="<%= showSearch %>">
 							<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
 
 							<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -352,9 +354,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						</c:if>
 					</div>
 
-					<c:if test="<%= results.size() > 0 %>">
-						<br />
-					</c:if>
+					<br />
 				</c:if>
 
 				<liferay-ui:search-iterator />
