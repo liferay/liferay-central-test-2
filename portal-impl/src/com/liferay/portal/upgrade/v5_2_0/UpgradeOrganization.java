@@ -76,7 +76,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		Object[][] organizationColumns1 =
 			{{"location", new Integer(Types.BOOLEAN)}};
-		Object[][] organizationColumns2 = OrganizationImpl.TABLE_COLUMNS.clone();
+		Object[][] organizationColumns2 =
+			OrganizationImpl.TABLE_COLUMNS.clone();
 
 		Object[][] organizationColumns = ArrayUtil.append(
 			organizationColumns1, organizationColumns2);
