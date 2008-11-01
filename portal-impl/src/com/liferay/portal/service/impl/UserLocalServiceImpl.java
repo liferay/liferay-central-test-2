@@ -1571,6 +1571,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.setUsers(roleId, userIds);
 
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
@@ -1580,6 +1587,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.setUsers(userGroupId, userIds);
+
+		try {
+			UserIndexer.updateUsers(userIds);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + StringUtil.merge(userIds), se);
+		}
 
 		PermissionCacheUtil.clearCache();
 	}
