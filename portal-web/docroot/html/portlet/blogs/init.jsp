@@ -99,5 +99,8 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil
 	}
 }
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+boolean showSearch = true;
+boolean showEditEntryPermissions = true;
 %>
+
+<%@ include file="/html/portlet/blogs/init-ext.jsp" %>

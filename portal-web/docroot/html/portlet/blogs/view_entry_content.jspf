@@ -42,6 +42,15 @@
 				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 			</portlet:renderURL>
 
+			<div class="entry-date">
+
+				<%
+				DateFormat entryDisplayDateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, locale);
+				%>
+
+				<%= entryDisplayDateFormat.format(entry.getDisplayDate()) %>
+			</div>
+
 			<div class="entry-title">
 
 			<c:choose>
@@ -56,7 +65,7 @@
 			</div>
 
 			<div class="entry-author">
-				<liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+				<liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>
 			</div>
 
 			<liferay-ui:tags-summary
@@ -81,7 +90,7 @@
 						</td>
 					</c:if>
 
-					<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
+					<c:if test="<%= showEditEntryPermissions && BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
 						<td>
 							<liferay-security:permissionsURL
 								modelResource="<%= BlogsEntry.class.getName() %>"
@@ -134,56 +143,58 @@
 			<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:social-bookmarks
-			url="<%= bookmarkURL.toString() %>"
-			title="<%= entry.getTitle() %>"
-			target="_blank"
-		/>
-
-		<c:if test="<%= enableRatings %>">
-			<liferay-ui:ratings
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-				url='<%= themeDisplay.getPathMain() + "/blogs/rate_entry" %>'
+		<div class="entry-footer">
+			<liferay-ui:social-bookmarks
+				url="<%= bookmarkURL.toString() %>"
+				title="<%= entry.getTitle() %>"
+				target="_blank"
 			/>
-		</c:if>
 
-		<div class="stats">
-			<span class="view-count">
+			<c:if test="<%= enableRatings %>">
+				<liferay-ui:ratings
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= entry.getEntryId() %>"
+					url='<%= themeDisplay.getPathMain() + "/blogs/rate_entry" %>'
+				/>
+			</c:if>
 
-				<%
-				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
-				%>
-
-				<c:choose>
-					<c:when test="<%= asset.getViewCount() == 1 %>">
-						<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
-					</c:when>
-					<c:when test="<%= asset.getViewCount() > 1 %>">
-						<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
-					</c:when>
-				</c:choose>
-			</span>
-
-			<c:if test="<%= enableComments %>">
-				<span class="comments">
+			<div class="stats">
+				<span class="view-count">
 
 					<%
-					long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
-
-					int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+					TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 					%>
 
 					<c:choose>
-						<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-							<%= messagesCount %> <liferay-ui:message key="comments" />
+						<c:when test="<%= asset.getViewCount() == 1 %>">
+							<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
 						</c:when>
-						<c:otherwise>
-							<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
-						</c:otherwise>
+						<c:when test="<%= asset.getViewCount() > 1 %>">
+							<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
+						</c:when>
 					</c:choose>
 				</span>
-			</c:if>
+
+				<c:if test="<%= enableComments %>">
+					<span class="comments">
+
+						<%
+						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+
+						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+						%>
+
+						<c:choose>
+							<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+								<%= messagesCount %> <liferay-ui:message key="comments" />
+							</c:when>
+							<c:otherwise>
+								<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+							</c:otherwise>
+						</c:choose>
+					</span>
+				</c:if>
+			</div>
 		</div>
 	</div>
 </c:if>
