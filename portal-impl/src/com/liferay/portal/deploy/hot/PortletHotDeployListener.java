@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -106,6 +107,7 @@ import org.apache.portals.bridges.struts.StrutsPortlet;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Ivica Cardic
+ * @author Raymond Augé
  *
  */
 public class PortletHotDeployListener extends BaseHotDeployListener {
@@ -146,6 +148,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			PortletURLListenerFactory.destroy(portletURLListener);
+		}
+
+		Indexer indexerInstance = portlet.getIndexerInstance();
+
+		if (indexerInstance != null) {
+			for (String className : indexerInstance.getIndexedClasses()) {
+				IndexerRegistryUtil.unRegisterIndexer(className);
+			}
 		}
 
 		Scheduler scheduler = portlet.getSchedulerInstance();
@@ -387,6 +397,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (Validator.isNotNull(portlet.getIndexerClass())) {
 			indexerInstance = (Indexer)portletClassLoader.loadClass(
 				portlet.getIndexerClass()).newInstance();
+
+			for (String className : indexerInstance.getIndexedClasses()) {
+				IndexerRegistryUtil.registerIndexer(className, indexerInstance);
+			}
 		}
 
 		Scheduler schedulerInstance = null;

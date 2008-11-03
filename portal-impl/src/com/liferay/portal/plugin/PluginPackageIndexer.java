@@ -45,6 +45,7 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class PluginPackageIndexer implements Indexer {
@@ -192,6 +193,13 @@ public class PluginPackageIndexer implements Indexer {
 		portletURL.setParameter("repositoryURL", repositoryURL);
 
 		return new DocumentSummary(title, content, portletURL);
+	}
+
+	public String[] getIndexedClasses() {
+		return new String[0];
+	}
+
+	public void reIndex(String className, long classPK) throws SearchException {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {

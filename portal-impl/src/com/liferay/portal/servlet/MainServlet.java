@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
@@ -255,6 +257,35 @@ public class MainServlet extends ActionServlet {
 
 			ThemeLocalServiceUtil.init(
 				servletContext, null, true, xmls, pluginPackage);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Indexer
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Indexer");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				String className = portlet.getIndexerClass();
+
+				if (portlet.isActive() && Validator.isNotNull(className)) {
+					Indexer indexer = (Indexer)InstancePool.get(
+						className);
+
+					for (String modelClassName : indexer.getIndexedClasses()) {
+						IndexerRegistryUtil.registerIndexer(
+							modelClassName, indexer);
+					}
+				}
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -180,6 +180,11 @@
 			<bean class="com.liferay.portal.service.persistence.BatchSessionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.search.IndexerRegistryUtil" class="com.liferay.portal.kernel.search.IndexerRegistryUtil">
+		<property name="indexerRegistry">
+			<bean class="com.liferay.portal.search.IndexerRegistryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil">
 		<property name="browserSniffer">
 			<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" />
@@ -201,7 +206,7 @@
 		<property name="database">
 			<bean class="com.liferay.portal.util.DatabaseImpl" />
 		</property>
-   </bean>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
 		<property name="diff">
 			<bean class="com.liferay.portal.util.DiffImpl" />
