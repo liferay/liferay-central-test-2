@@ -237,8 +237,7 @@
 							</td>
 							<td>
 								<select id="<portlet:namespace />inbandRegistration" name="<portlet:namespace />inbandRegistration">
-
-									<c:if test='<%= supportsInbandRegistration %>'>
+									<c:if test="<%= supportsInbandRegistration %>">
 										<option value="true"><liferay-ui:message key="inband" /></option>
 									</c:if>
 
