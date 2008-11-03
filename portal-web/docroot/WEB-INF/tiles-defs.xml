@@ -401,6 +401,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.select_user_group" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/select_user_group.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.select_role" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_role.jsp" />
 	</definition>

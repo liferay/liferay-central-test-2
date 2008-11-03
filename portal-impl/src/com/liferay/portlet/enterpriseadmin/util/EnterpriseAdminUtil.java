@@ -36,6 +36,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.EmailAddressImpl;
@@ -52,6 +53,7 @@ import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -151,6 +153,28 @@ public class EnterpriseAdminUtil {
 				name.equals(RoleConstants.USER) ||
 				!RolePermissionUtil.contains(
 					permissionChecker, role.getRoleId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				itr.remove();
+			}
+		}
+	}
+
+	public static void filterUserGroups(
+			PermissionChecker permissionChecker, List<UserGroup> userGroups)
+		throws PortalException, SystemException {
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return;
+		}
+
+		Iterator<UserGroup> itr = userGroups.iterator();
+
+		while (itr.hasNext()) {
+			UserGroup userGroup = itr.next();
+
+			if (!UserGroupPermissionUtil.contains(
+					permissionChecker, userGroup.getUserGroupId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
 
 				itr.remove();

@@ -132,6 +132,13 @@ public class UserGroupLocalServiceUtil {
 		return getService().getUserGroups(companyId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
+		long[] userGroupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserGroups(userGroupIds);
+	}
+
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
 		long userId) throws com.liferay.portal.SystemException {
 		return getService().getUserUserGroups(userId);

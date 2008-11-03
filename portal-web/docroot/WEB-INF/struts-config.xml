@@ -529,6 +529,8 @@
 
 		<action path="/enterprise_admin/select_role" forward="portlet.enterprise_admin.select_role" />
 
+		<action path="/enterprise_admin/select_user_group" forward="portlet.enterprise_admin.select_user_group" />
+
 		<action path="/enterprise_admin/test_ldap_connection" forward="portlet.enterprise_admin.test_ldap_connection" />
 
 		<action path="/enterprise_admin/test_ldap_groups" forward="portlet.enterprise_admin.test_ldap_groups" />
@@ -870,6 +872,8 @@
 		<action path="/enterprise_admin_users/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
 		<action path="/enterprise_admin_users/select_role" forward="portlet.enterprise_admin.select_role" />
+
+		<action path="/enterprise_admin_users/select_user_group" forward="portlet.enterprise_admin.select_user_group" />
 
 		<action path="/enterprise_admin_users/view" forward="portlet.enterprise_admin.view" />
 

@@ -177,6 +177,7 @@ if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 boolean filterManageableRoles = true;
+boolean filterManageableUserGroups = true;
 
 if (permissionChecker.isCompanyAdmin() || portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	filterManageableGroups = false;

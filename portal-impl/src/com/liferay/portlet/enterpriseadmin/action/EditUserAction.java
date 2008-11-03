@@ -356,7 +356,8 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
 		long[] roleIds = StringUtil.split(ParamUtil.getString(
 			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
-		long[] userGroupIds = null;
+		long[] userGroupIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "userGroupsSearchContainerPrimaryKeys"), 0L);
 		boolean sendEmail = true;
 		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
 			actionRequest);

@@ -25,49 +25,49 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-List<Group> groups = (List<Group>)request.getAttribute("user.groups");
+List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGroups");
 %>
 
-<liferay-util:buffer var="removeGroupIcon">
+<liferay-util:buffer var="removeUserGroupIcon">
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
 <script type="text/javascript">
-	function <portlet:namespace />openGroupSelector() {
-		var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /></portlet:renderURL>', 'group', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+	function <portlet:namespace />openUserGroupSelector() {
+		var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_user_group" /></portlet:renderURL>', 'user group', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
 		groupWindow.focus();
 	}
 
-	function <portlet:namespace />selectGroup(groupId, name) {
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer');
+	function <portlet:namespace />selectUserGroup(userGroupId, name) {
+		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
 
 		var rowColumns = [];
 
 		rowColumns.push(name);
-		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeGroupIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />groupsSearchContainer\').deleteRow(this, ' + groupId + ')'));
+		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeUserGroupIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />userGroupsSearchContainer\').deleteRow(this, ' + userGroupId + ')'));
 
-		searchContainer.addRow(rowColumns, groupId);
+		searchContainer.addRow(rowColumns, userGroupId);
 		searchContainer.updateDataStore();
 	}
 </script>
 
-<h3><liferay-ui:message key="communities" /></h3>
+<h3><liferay-ui:message key="user-groups" /></h3>
 
 <liferay-ui:search-container
-	id='<%= renderResponse.getNamespace() + "groupsSearchContainer" %>'
+	id='<%= renderResponse.getNamespace() + "userGroupsSearchContainer" %>'
 	headerNames="name"
 >
 	<liferay-ui:search-container-results
-		results="<%= groups %>"
-		total="<%= groups.size() %>"
+		results="<%= userGroups %>"
+		total="<%= userGroups.size() %>"
 	/>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.Group"
+		className="com.liferay.portal.model.UserGroup"
 		escapedModel="<%= true %>"
-		keyProperty="groupId"
-		modelVar="group"
+		keyProperty="userGroupId"
+		modelVar="userGroup"
 	>
 		<liferay-ui:search-container-column-text
 			name="name"
@@ -76,7 +76,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
+				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer').deleteRow(this, <%= userGroup.getUserGroupId() %>);"><%= removeUserGroupIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -87,5 +87,5 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input onclick="<portlet:namespace />openGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<input onclick="<portlet:namespace />openUserGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
 </c:if>

@@ -38,6 +38,7 @@ import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -149,6 +150,20 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return userGroupPersistence.findByCompanyId(companyId);
+	}
+
+	public List<UserGroup> getUserGroups(long[] userGroupIds)
+		throws PortalException, SystemException {
+
+		List<UserGroup> userGroups = new ArrayList<UserGroup>();
+
+		for (long userGroupId : userGroupIds) {
+			UserGroup userGroup = getUserGroup(userGroupId);
+
+			userGroups.add(userGroup);
+		}
+
+		return userGroups;
 	}
 
 	public List<UserGroup> getUserUserGroups(long userId)

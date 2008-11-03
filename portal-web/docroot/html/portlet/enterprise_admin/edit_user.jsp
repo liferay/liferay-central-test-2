@@ -98,6 +98,23 @@ else if (selUser != null) {
 	}
 }
 
+String userGroupIds = ParamUtil.getString(request, "userGroupsSearchContainerPrimaryKeys");
+
+List<UserGroup> userGroups = Collections.EMPTY_LIST;
+
+if (Validator.isNotNull(userGroupIds)) {
+	long[] userGroupIdsArray = StringUtil.split(userGroupIds, 0L);
+
+	userGroups = UserGroupLocalServiceUtil.getUserGroups(userGroupIdsArray);
+}
+else if (selUser != null) {
+	userGroups = selUser.getUserGroups();
+
+	if (filterManageableUserGroups) {
+		EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
+	}
+}
+
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.USERS_FORM_ADD_MISCELLANEOUS;
@@ -149,6 +166,7 @@ String curSection = mainSections[0];
 			request.setAttribute("user.selContact", selContact);
 			request.setAttribute("user.passwordPolicy", passwordPolicy);
 			request.setAttribute("user.groups", groups);
+			request.setAttribute("user.userGroups", userGroups);
 			request.setAttribute("user.organizations", organizations);
 			request.setAttribute("user.roles", roles);
 
