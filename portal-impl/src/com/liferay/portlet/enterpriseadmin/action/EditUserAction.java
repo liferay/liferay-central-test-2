@@ -165,7 +165,9 @@ public class EditUserAction extends PortletAction {
 					}
 				}
 
-				redirect += user.getUserId();
+				redirect = HttpUtil.setParameter(
+					redirect, actionResponse.getNamespace() + "userId",
+					user.getUserId());
 			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
