@@ -68,7 +68,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 	<c:when test='<%= tabs2.equals("any-website") %>'>
 
 		<%
-		boolean widgetShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-widget-show-add-app-link", true);
+		boolean widgetShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-widget-show-add-app-link", PropsValues.THEME_PORTLET_SHARING_DEFAULT);
 		%>
 
 		<div class="portlet-msg-info">

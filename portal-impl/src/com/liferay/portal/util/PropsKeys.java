@@ -1085,6 +1085,8 @@ public interface PropsKeys {
 
 	public static final String THEME_PORTLET_DECORATE_DEFAULT = "theme.portlet.decorate.default";
 
+	public static final String THEME_PORTLET_SHARING_DEFAULT = "theme.portlet.sharing.default";
+
 	public static final String THEME_SHORTCUT_ICON = "theme.shortcut.icon";
 
 	public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";

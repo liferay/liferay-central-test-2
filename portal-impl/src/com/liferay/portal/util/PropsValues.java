@@ -1084,6 +1084,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.THEME_PORTLET_DECORATE_DEFAULT));
 
+	public static final boolean THEME_PORTLET_SHARING_DEFAULT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.THEME_PORTLET_SHARING_DEFAULT));
+
 	public static final String THEME_SHORTCUT_ICON = PropsUtil.get(
 		PropsKeys.THEME_SHORTCUT_ICON);
 
