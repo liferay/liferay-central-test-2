@@ -100,8 +100,8 @@ public class ServiceContextFactory {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		PortletConfig portletConfig = (PortletConfig)
-			portletRequest.getAttribute(
+		PortletConfig portletConfig =
+			(PortletConfig)portletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		String portletId = portletConfig.getPortletName();
