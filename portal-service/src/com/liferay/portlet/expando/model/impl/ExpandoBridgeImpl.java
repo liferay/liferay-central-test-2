@@ -276,7 +276,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return;
 		}
 
-		boolean indexEnabledTemp = isIndexEnabled();
+		boolean indexEnabled = isIndexEnabled();
 
 		setIndexEnabled(false);
 
@@ -284,7 +284,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			setAttribute(entry.getKey(), entry.getValue());
 		}
 
-		setIndexEnabled(indexEnabledTemp);
+		setIndexEnabled(indexEnabled);
 
 		reIndex();
 	}
@@ -329,12 +329,11 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return;
 		}
 
-		Indexer indexerInstance =
-			IndexerRegistryUtil.getRegisteredIndexer(_className);
+		Indexer indexer = IndexerRegistryUtil.getRegisteredIndexer(_className);
 
-		if (indexerInstance != null) {
+		if (indexer != null) {
 			try {
-				indexerInstance.reIndex(_className, _classPK);
+				indexer.reIndex(_className, _classPK);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

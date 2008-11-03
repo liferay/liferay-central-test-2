@@ -73,6 +73,6 @@ public interface ExpandoBridge {
 
 	public void setAttributes(ServiceContext serviceContext);
 
-	public void setIndexEnabled(boolean reIndex);
+	public void setIndexEnabled(boolean indexEnabled);
 
 }
