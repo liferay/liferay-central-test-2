@@ -514,6 +514,14 @@ public class PortletURLImpl
 		}
 	}
 
+	public void setRefererPlid(long refererPlid) {
+		_refererPlid = refererPlid;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public void setResourceID(String resourceID) {
 		_resourceID = resourceID;
 	}
@@ -858,6 +866,19 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
+		long refererPlid = _refererPlid;
+
+		if (refererPlid <= 0) {
+			refererPlid = themeDisplay.getRefererPlid();
+		}
+
+		if (refererPlid > 0) {
+			sb.append("refererPlid");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, refererPlid));
+			sb.append(StringPool.AMPERSAND);
+		}
+
 		if (_copyCurrentRenderParameters) {
 			Enumeration<String> enu = _request.getParameterNames();
 
@@ -1054,6 +1075,7 @@ public class PortletURLImpl
 	private long _doAsUserId;
 	private String _doAsUserLanguageId;
 	private long _doAsGroupId;
+	private long _refererPlid;
 	private boolean _encrypt;
 	private boolean _escapeXml = PropsValues.PORTLET_URL_ESCAPE_XML;
 	private Set<String> _parametersIncludedInPath;

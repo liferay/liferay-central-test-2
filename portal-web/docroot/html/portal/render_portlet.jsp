@@ -650,6 +650,7 @@ if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 	portletDisplay.setShowConfigurationIcon(false);
 	portletDisplay.setShowMaxIcon(false);
 	portletDisplay.setShowMinIcon(false);
+	portletDisplay.setShowMoveIcon(false);
 	portletDisplay.setShowPortletCssIcon(false);
 }
 
@@ -681,6 +682,10 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 		LogUtil.log(_log, e);
 	}
+}
+
+if (layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 %>
 

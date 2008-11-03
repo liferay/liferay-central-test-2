@@ -54,26 +54,6 @@
 			if (category.equals(PortletCategoryKeys.MY)) {
 				title = StringUtil.shorten(user.getFullName(), 25);
 			}
-			else if (category.equals(PortletCategoryKeys.CONTENT)) {
-				Group scopeGroup = themeDisplay.getScopeGroup();
-
-				title = LanguageUtil.get(pageContext, "content") + ": " + StringUtil.shorten(scopeGroup.getDescriptiveName(), 18);
-			}
-			else if (category.equals(PortletCategoryKeys.PORTAL)) {
-				Group scopeGroup = themeDisplay.getScopeGroup();
-
-				StringBuilder sb = new StringBuilder();
-
-				sb.append(LanguageUtil.get(pageContext, "portal"));
-
-				if (CompanyLocalServiceUtil.getCompaniesCount() > 1) {
-					sb.append(StringPool.COLON);
-					sb.append(StringPool.SPACE);
-					sb.append(StringUtil.shorten(company.getName(), 18));
-				}
-
-				title = sb.toString();
-			}
 			else {
 				title = LanguageUtil.get(pageContext, "category." + category);
 			}

@@ -104,5 +104,47 @@
 				/>
 			</c:if>
 		</c:if>
+		<c:if test="<%= layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL) %>">
+			<%
+				PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+
+				portletURL.setWindowState(WindowState.NORMAL);
+				portletURL.setPortletMode(PortletMode.VIEW);
+
+				portletURL.setParameter("struts_action", "/my_places/view");
+				portletURL.setParameter("groupId", String.valueOf(themeDisplay.getScopeGroupId()));
+				portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+
+				String viewPublicPagesURL = portletURL.toString();
+
+				portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+
+				String viewPrivatePagesURL = portletURL.toString();
+
+				int publicLayoutsPageCount = themeDisplay.getScopeGroup().getPublicLayoutsPageCount();
+				int privateLayoutsPageCount = themeDisplay.getScopeGroup().getPrivateLayoutsPageCount();
+
+			%>
+
+			<c:if test="<%= publicLayoutsPageCount > 0 %>">
+				<liferay-ui:icon
+					image="view"
+					message="view-public-pages"
+					url="<%= viewPublicPagesURL%>"
+					method="get"
+					label="<%= true %>"
+				/>
+			</c:if>
+
+			<c:if test="<%= privateLayoutsPageCount > 0 %>">
+				<liferay-ui:icon
+					image="view"
+					message="view-private-pages"
+					url="<%= viewPrivatePagesURL%>"
+					method="get"
+					label="<%= true %>"
+				/>
+			</c:if>
+		</c:if>
 	</c:if>
 </liferay-ui:icon-menu>

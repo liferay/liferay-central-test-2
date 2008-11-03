@@ -75,6 +75,31 @@ if (Validator.isNull(portletTitle)) {
 
 portletDisplay.setTitle(portletTitle);
 
+if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+	String category = PortalUtil.getControlPanelCategory(portletDisplay.getId());
+
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(portletTitle);
+
+	if ((category != null) && category.equals(PortletCategoryKeys.CONTENT)) {
+		sb.append(StringPool.SPACE);
+		sb.append(LanguageUtil.get(pageContext, "in"));
+		sb.append(StringPool.SPACE);
+		sb.append(themeDisplay.getScopeGroup().getDescriptiveName());
+	}
+	else if ((category != null) && category.equals(PortletCategoryKeys.PORTAL)) {
+		if (CompanyLocalServiceUtil.getCompaniesCount() > 1) {
+			sb.append(StringPool.SPACE);
+			sb.append(LanguageUtil.get(pageContext, "in"));
+			sb.append(StringPool.SPACE);
+			sb.append(StringUtil.shorten(company.getName(), 18));
+		}
+	}
+
+	portletDisplay.setTitle(sb.toString());
+}
+
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();

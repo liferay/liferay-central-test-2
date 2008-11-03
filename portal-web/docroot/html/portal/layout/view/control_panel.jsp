@@ -77,33 +77,24 @@ if (Validator.isNull(category)) {
 			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
 				<table class="panel-page-content-menu">
 				<tr>
-					<td>
-
+					<td align="right">
 						<%
-						String title = null;
+						if (themeDisplay.getRefererPlid() > 0) {
+							Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
 
-						if (category.equals(PortletCategoryKeys.MY)) {
-							title = user.getFullName();
-						}
-						else if (category.equals(PortletCategoryKeys.CONTENT)) {
-							title = themeDisplay.getScopeGroup().getDescriptiveName();
-						}
-						else if (category.equals(PortletCategoryKeys.PORTAL)) {
-							title = company.getName();
-						}
-						else if (category.equals(PortletCategoryKeys.SERVER)) {
-							title = LanguageUtil.get(pageContext, "server");
+							String backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
+							String backTitle = themeDisplay.getScopeGroup().getDescriptiveName();
+
+							if (refererLayout.getGroup().isUser()) {
+								backTitle = LanguageUtil.get(pageContext, "my-community");
+							}
+						%>
+							<div >
+								<a class="portlet-icon-back" href="<%= backURL %>"><liferay-ui:message key="back-to" /> <%= backTitle %></a>
+							</div>
+						<%
 						}
 						%>
-
-						<h4 class="current-community">
-							<span><%= title %></span>
-						</h4>
-					</td>
-					<td align="right">
-						<c:if test="<%= !category.equals(PortletCategoryKeys.SERVER) %>">
-							<liferay-ui:message key="current-portal-instance" />: <b><%= company.getName() %></b>
-						</c:if>
 					</td>
 				</tr>
 				</table>

@@ -916,6 +916,7 @@ public class ServicePreAction extends Action {
 		String doAsUserLanguageId = ParamUtil.getString(
 			request, "doAsUserLanguageId");
 		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
+		long refererPlid = ParamUtil.getLong(request, "refererPlid");
 
 		// Permission checker
 
@@ -1271,6 +1272,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setDoAsUserId(doAsUserId);
 		themeDisplay.setDoAsUserLanguageId(doAsUserLanguageId);
 		themeDisplay.setDoAsGroupId(doAsGroupId);
+		themeDisplay.setRefererPlid(refererPlid);
 		themeDisplay.setLayoutSetLogo(layoutSetLogo);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setLayouts(layouts);
@@ -1332,6 +1334,11 @@ public class ServicePreAction extends Action {
 		if (scopeGroupId > 0) {
 			urlControlPanel = HttpUtil.addParameter(
 				urlControlPanel, "doAsGroupId", scopeGroupId);
+		}
+
+		if (plid > 0) {
+			urlControlPanel = HttpUtil.addParameter(
+				urlControlPanel, "refererPlid", plid);
 		}
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
