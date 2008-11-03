@@ -263,14 +263,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
+	public String[] getClassNames() {
+		return _CLASS_NAMES;
+	}
+
 	public DocumentSummary getDocumentSummary(
 		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
 		return null;
-	}
-
-	public String[] getIndexedClasses() {
-		return new String[0];
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {
@@ -285,6 +285,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		hook.reIndex(ids);
 	}
+
+	private static final String[] _CLASS_NAMES = new String[0];
 
 	private static Log _log = LogFactory.getLog(Indexer.class);
 

@@ -168,6 +168,10 @@ public class PluginPackageIndexer implements Indexer {
 			CompanyConstants.SYSTEM, doc.get(Field.UID), doc);
 	}
 
+	public String[] getClassNames() {
+		return _CLASS_NAMES;
+	}
+
 	public DocumentSummary getDocumentSummary(
 		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
@@ -195,10 +199,6 @@ public class PluginPackageIndexer implements Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public String[] getIndexedClasses() {
-		return new String[0];
-	}
-
 	public void reIndex(String className, long classPK) throws SearchException {
 	}
 
@@ -210,5 +210,7 @@ public class PluginPackageIndexer implements Indexer {
 			throw new SearchException(e);
 		}
 	}
+
+	private static final String[] _CLASS_NAMES = new String[0];
 
 }

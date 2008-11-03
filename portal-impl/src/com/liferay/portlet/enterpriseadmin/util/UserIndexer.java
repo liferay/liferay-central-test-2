@@ -150,6 +150,10 @@ public class UserIndexer implements Indexer {
 		}
 	}
 
+	public String[] getClassNames() {
+		return _CLASS_NAMES;
+	}
+
 	public DocumentSummary getDocumentSummary(
 		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
@@ -176,10 +180,6 @@ public class UserIndexer implements Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public String[] getIndexedClasses() {
-		return new String[]{User.class.getName()};
-	}
-
 	public void reIndex(String className, long classPK) throws SearchException {
 		try {
 			UserLocalServiceUtil.reIndex(classPK);
@@ -197,6 +197,10 @@ public class UserIndexer implements Indexer {
 			throw new SearchException(e);
 		}
 	}
+
+	private static final String[] _CLASS_NAMES = new String[] {
+		User.class.getName()
+	};
 
 	private static UserIndexerEnabled _enabled = new UserIndexerEnabled();
 

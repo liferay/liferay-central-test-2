@@ -33,13 +33,13 @@ import javax.portlet.PortletURL;
  */
 public interface Indexer {
 
+	public String[] getClassNames();
+
 	public DocumentSummary getDocumentSummary(
 		Document doc, PortletURL portletURL);
 
-	public String[] getIndexedClasses();
+	public void reIndex(String className, long classPK) throws SearchException;
 
 	public void reIndex(String[] ids) throws SearchException;
-
-	public void reIndex(String className, long classPK) throws SearchException;
 
 }

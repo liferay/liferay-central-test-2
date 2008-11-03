@@ -44,6 +44,10 @@ import javax.portlet.WindowStateException;
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
+	public String[] getClassNames() {
+		return _CLASS_NAMES;
+	}
+
 	public DocumentSummary getDocumentSummary(
 		Document doc, PortletURL portletURL) {
 
@@ -79,10 +83,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public String[] getIndexedClasses() {
-		return new String[0];
-	}
-
 	public void reIndex(String className, long classPK) throws SearchException {
 	}
 
@@ -94,5 +94,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			throw new SearchException(e);
 		}
 	}
+
+	private static final String[] _CLASS_NAMES = new String[0];
 
 }
