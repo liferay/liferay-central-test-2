@@ -111,7 +111,7 @@ public class ProducerImpl extends AbstractProducer {
 		try {
 			WSRPConsumerRegistrationLocalServiceUtil.addConsumerRegistration(
 				registrationRecord.getConsumerName(),
-				registrationRecord.isEnabled(), registrationHandle,
+				true, registrationHandle,
 				registrationRecord.getConsumerAgent(),
 				registrationRecord.isMethodGetSupported(),
 				consumerModes, consumerWindowStates, consumerUserScopes,

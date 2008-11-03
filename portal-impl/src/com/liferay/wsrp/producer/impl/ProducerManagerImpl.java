@@ -73,9 +73,9 @@ public class ProducerManagerImpl implements ProducerManager {
 
 		try {
 			WSRPProducerLocalServiceUtil.addProducer(
-				_portalId, true, namespace, instanceName, requiresRegistration,
-				supportsInBandRegistration, version, null, null, null,
-				_DEFAULT_REGISTRATION_VALIDATOR);
+				_portalId, status, namespace, instanceName,
+				requiresRegistration, supportsInBandRegistration, version, null,
+				null, null, _DEFAULT_REGISTRATION_VALIDATOR);
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
