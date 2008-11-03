@@ -60,7 +60,7 @@ public interface ExpandoBridge {
 
 	public boolean hasAttribute(String name);
 
-	public boolean isReIndex();
+	public boolean isIndexEnabled();
 
 	public void setAttribute(String name, Object value);
 

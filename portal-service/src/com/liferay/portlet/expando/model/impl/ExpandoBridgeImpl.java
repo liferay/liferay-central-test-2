@@ -217,7 +217,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public boolean isReIndex() {
+	public boolean isIndexEnabled() {
 		return _indexEnabled;
 	}
 
@@ -276,7 +276,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return;
 		}
 
-		boolean reIndex = isReIndex();
+		boolean indexEnabledTemp = isIndexEnabled();
 
 		setIndexEnabled(false);
 
@@ -284,7 +284,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			setAttribute(entry.getKey(), entry.getValue());
 		}
 
-		setIndexEnabled(reIndex);
+		setIndexEnabled(indexEnabledTemp);
 
 		reIndex();
 	}
