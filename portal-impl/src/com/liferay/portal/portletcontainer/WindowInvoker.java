@@ -367,7 +367,9 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			pw.print(sb);
 
-			return getMarkupResponse.getTitle();
+			String title = getMarkupResponse.getTitle();
+			renderResponseImpl.setTitle(title);
+			return title;
 
 		}
 		catch (Exception e) {
