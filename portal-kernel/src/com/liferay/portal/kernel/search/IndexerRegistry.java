@@ -32,12 +32,12 @@ import java.util.List;
  */
 public interface IndexerRegistry {
 
-	public Indexer getRegisteredIndexer(String className);
+	public Indexer getIndexer(String className);
 
-	public List<Indexer> getRegisteredIndexers();
+	public List<Indexer> getIndexers();
 
-	public void registerIndexer(String className, Indexer indexerInstance);
+	public void register(String className, Indexer indexer);
 
-	public void unRegisterIndexer(String className);
+	public void unregister(String className);
 
 }

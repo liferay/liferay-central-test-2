@@ -26,10 +26,9 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistry;
 import com.liferay.portal.kernel.util.ListUtil;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="IndexerRegistryImpl.java.html"><b><i>View Source</i></b></a>
@@ -39,23 +38,23 @@ import java.util.Map;
  */
 public class IndexerRegistryImpl implements IndexerRegistry {
 
-	public Indexer getRegisteredIndexer(String className) {
-		return _registry.get(className);
+	public Indexer getIndexer(String className) {
+		return _indexers.get(className);
 	}
 
-	public List<Indexer> getRegisteredIndexers() {
-		return ListUtil.fromCollection(_registry.values());
+	public List<Indexer> getIndexers() {
+		return ListUtil.fromCollection(_indexers.values());
 	}
 
-	public void registerIndexer(String className, Indexer indexerInstance) {
-		_registry.put(className, indexerInstance);
+	public void register(String className, Indexer indexerInstance) {
+		_indexers.put(className, indexerInstance);
 	}
 
-	public void unRegisterIndexer(String className) {
-		_registry.remove(className);
+	public void unregister(String className) {
+		_indexers.remove(className);
 	}
 
-	private Map<String, Indexer> _registry =
-		Collections.synchronizedMap(new HashMap<String, Indexer>());
+	private Map<String, Indexer> _indexers =
+		new ConcurrentHashMap<String, Indexer>();
 
 }

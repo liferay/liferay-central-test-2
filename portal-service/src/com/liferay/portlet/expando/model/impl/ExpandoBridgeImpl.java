@@ -329,7 +329,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return;
 		}
 
-		Indexer indexer = IndexerRegistryUtil.getRegisteredIndexer(_className);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(_className);
 
 		if (indexer != null) {
 			try {

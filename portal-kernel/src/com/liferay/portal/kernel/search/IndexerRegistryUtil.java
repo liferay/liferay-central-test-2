@@ -32,30 +32,30 @@ import java.util.List;
  */
 public class IndexerRegistryUtil {
 
+	public static Indexer getIndexer(String className) {
+		return getIndexerRegistry().getIndexer(className);
+	}
+
 	public static IndexerRegistry getIndexerRegistry() {
 		return _indexerRegistry;
 	}
 
-	public static List<Indexer> getRegisteredIndexers() {
-		return getIndexerRegistry().getRegisteredIndexers();
+	public static List<Indexer> getIndexers() {
+		return getIndexerRegistry().getIndexers();
 	}
 
-	public static Indexer getRegisteredIndexer(String className) {
-		return getIndexerRegistry().getRegisteredIndexer(className);
+	public static void register(
+		String className, Indexer indexer) {
+
+		getIndexerRegistry().register(className, indexer);
 	}
 
-	public static void registerIndexer(
-		String className, Indexer indexerInstance) {
-
-		getIndexerRegistry().registerIndexer(className, indexerInstance);
+	public static void unregister(String className) {
+		getIndexerRegistry().unregister(className);
 	}
 
 	public void setIndexerRegistry(IndexerRegistry indexerRegistry) {
 		_indexerRegistry = indexerRegistry;
-	}
-
-	public static void unRegisterIndexer(String className) {
-		getIndexerRegistry().unRegisterIndexer(className);
 	}
 
 	private static IndexerRegistry _indexerRegistry;

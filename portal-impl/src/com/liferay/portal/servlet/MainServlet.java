@@ -274,16 +274,16 @@ public class MainServlet extends ActionServlet {
 			while (itr.hasNext()) {
 				Portlet portlet = itr.next();
 
-				String className = portlet.getIndexerClass();
+				String indexerClass = portlet.getIndexerClass();
 
-				if (portlet.isActive() && Validator.isNotNull(className)) {
-					Indexer indexer = (Indexer)InstancePool.get(
-						className);
+				if (!portlet.isActive() || Validator.isNull(indexerClass)) {
+					continue;
+				}
 
-					for (String modelClassName : indexer.getClassNames()) {
-						IndexerRegistryUtil.registerIndexer(
-							modelClassName, indexer);
-					}
+				Indexer indexer = (Indexer)InstancePool.get(indexerClass);
+
+				for (String modelClassName : indexer.getClassNames()) {
+					IndexerRegistryUtil.register(modelClassName, indexer);
 				}
 			}
 		}
@@ -313,12 +313,14 @@ public class MainServlet extends ActionServlet {
 
 					String className = portlet.getSchedulerClass();
 
-					if (portlet.isActive() && Validator.isNotNull(className)) {
-						Scheduler scheduler = (Scheduler)InstancePool.get(
-							className);
-
-						scheduler.schedule();
+					if (!portlet.isActive() || Validator.isNull(className)) {
+						continue;
 					}
+
+					Scheduler scheduler = (Scheduler)InstancePool.get(
+						className);
+
+					scheduler.schedule();
 				}
 			}
 		}
@@ -341,9 +343,11 @@ public class MainServlet extends ActionServlet {
 				MessageListener popMessageListener =
 					portlet.getPopMessageListenerInstance();
 
-				if (portlet.isActive() && (popMessageListener != null)) {
-					POPServerUtil.addListener(popMessageListener);
+				if (!portlet.isActive() || (popMessageListener == null)) {
+					continue;
 				}
+
+				POPServerUtil.addListener(popMessageListener);
 			}
 		}
 		catch (Exception e) {
@@ -365,14 +369,17 @@ public class MainServlet extends ActionServlet {
 				SocialActivityInterpreter socialActivityInterpreter =
 					portlet.getSocialActivityInterpreterInstance();
 
-				if (portlet.isActive() && (socialActivityInterpreter != null)) {
-					socialActivityInterpreter =
-						new SocialActivityInterpreterImpl(
-							portlet.getPortletId(), socialActivityInterpreter);
+				if (!portlet.isActive() ||
+					(socialActivityInterpreter == null)) {
 
-					SocialActivityInterpreterLocalServiceUtil.
-						addActivityInterpreter(socialActivityInterpreter);
+					continue;
 				}
+
+				socialActivityInterpreter = new SocialActivityInterpreterImpl(
+					portlet.getPortletId(), socialActivityInterpreter);
+
+				SocialActivityInterpreterLocalServiceUtil.
+					addActivityInterpreter(socialActivityInterpreter);
 			}
 		}
 		catch (Exception e) {
@@ -394,13 +401,15 @@ public class MainServlet extends ActionServlet {
 				SocialRequestInterpreter socialRequestInterpreter =
 					portlet.getSocialRequestInterpreterInstance();
 
-				if (portlet.isActive() && (socialRequestInterpreter != null)) {
-					socialRequestInterpreter = new SocialRequestInterpreterImpl(
-						portlet.getPortletId(), socialRequestInterpreter);
-
-					SocialRequestInterpreterLocalServiceUtil.
-						addRequestInterpreter(socialRequestInterpreter);
+				if (!portlet.isActive() || (socialRequestInterpreter == null)) {
+					continue;
 				}
+
+				socialRequestInterpreter = new SocialRequestInterpreterImpl(
+					portlet.getPortletId(), socialRequestInterpreter);
+
+				SocialRequestInterpreterLocalServiceUtil.
+					addRequestInterpreter(socialRequestInterpreter);
 			}
 		}
 		catch (Exception e) {
@@ -789,12 +798,14 @@ public class MainServlet extends ActionServlet {
 
 					String className = portlet.getSchedulerClass();
 
-					if (portlet.isActive() && Validator.isNotNull(className)) {
-						Scheduler scheduler = (Scheduler)InstancePool.get(
-							className);
-
-						scheduler.unschedule();
+					if (!portlet.isActive() || Validator.isNull(className)) {
+						continue;
 					}
+
+					Scheduler scheduler = (Scheduler)InstancePool.get(
+						className);
+
+					scheduler.unschedule();
 				}
 			}
 		}
