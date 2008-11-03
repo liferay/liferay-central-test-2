@@ -78,23 +78,28 @@ if (Validator.isNull(category)) {
 				<table class="panel-page-content-menu">
 				<tr>
 					<td align="right">
+
 						<%
 						if (themeDisplay.getRefererPlid() > 0) {
 							Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
 
-							String backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
-							String backTitle = themeDisplay.getScopeGroup().getDescriptiveName();
+							Group refererGroup = refererLayout.getGroup();
 
-							if (refererLayout.getGroup().isUser()) {
-								backTitle = LanguageUtil.get(pageContext, "my-community");
+							String refererGroupDescriptiveName = refererGroup.getDescriptiveName();
+
+							if (refererGroup.isUser()) {
+								refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-community");
 							}
 						%>
-							<div >
-								<a class="portlet-icon-back" href="<%= backURL %>"><liferay-ui:message key="back-to" /> <%= backTitle %></a>
+
+							<div>
+								<a class="portlet-icon-back" href="<%= PortalUtil.getLayoutURL(refererLayout, themeDisplay) %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a>
 							</div>
+
 						<%
 						}
 						%>
+
 					</td>
 				</tr>
 				</table>

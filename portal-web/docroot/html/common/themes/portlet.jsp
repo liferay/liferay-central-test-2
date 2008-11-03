@@ -73,32 +73,24 @@ if (Validator.isNull(portletTitle)) {
 	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
 }
 
-portletDisplay.setTitle(portletTitle);
+Group group = layout.getGroup();
 
-if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
-	String category = PortalUtil.getControlPanelCategory(portletDisplay.getId());
+if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+	String controlPanelCategory = GetterUtil.getString(PortalUtil.getControlPanelCategory(portletDisplay.getId()));
 
-	StringBuilder sb = new StringBuilder();
+	if (controlPanelCategory.equals(PortletCategoryKeys.CONTENT)) {
+		Group scopeGroup = themeDisplay.getScopeGroup();
 
-	sb.append(portletTitle);
-
-	if ((category != null) && category.equals(PortletCategoryKeys.CONTENT)) {
-		sb.append(StringPool.SPACE);
-		sb.append(LanguageUtil.get(pageContext, "in"));
-		sb.append(StringPool.SPACE);
-		sb.append(themeDisplay.getScopeGroup().getDescriptiveName());
+		portletTitle = LanguageUtil.format(pageContext, "x-in-x", new Object[] {portletTitle, scopeGroup.getDescriptiveName()});
 	}
-	else if ((category != null) && category.equals(PortletCategoryKeys.PORTAL)) {
+	else if (controlPanelCategory.equals(PortletCategoryKeys.PORTAL)) {
 		if (CompanyLocalServiceUtil.getCompaniesCount() > 1) {
-			sb.append(StringPool.SPACE);
-			sb.append(LanguageUtil.get(pageContext, "in"));
-			sb.append(StringPool.SPACE);
-			sb.append(StringUtil.shorten(company.getName(), 18));
+			portletTitle = LanguageUtil.format(pageContext, "x-in-x", new Object[] {portletTitle, company.getName()});
 		}
 	}
-
-	portletDisplay.setTitle(sb.toString());
 }
+
+portletDisplay.setTitle(portletTitle);
 
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 
