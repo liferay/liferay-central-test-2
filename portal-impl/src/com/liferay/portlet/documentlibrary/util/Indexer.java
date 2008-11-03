@@ -39,6 +39,7 @@ import javax.portlet.WindowStateException;
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -76,6 +77,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		portletURL.setParameter("name", fileName);
 
 		return new DocumentSummary(title, content, portletURL);
+	}
+
+	public String[] getIndexedClasses() {
+		return new String[0];
+	}
+
+	public void reIndex(String className, long classPK) throws SearchException {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {

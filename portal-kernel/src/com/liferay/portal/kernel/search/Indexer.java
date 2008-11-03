@@ -28,6 +28,7 @@ import javax.portlet.PortletURL;
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public interface Indexer {
@@ -35,6 +36,10 @@ public interface Indexer {
 	public DocumentSummary getDocumentSummary(
 		Document doc, PortletURL portletURL);
 
+	public String[] getIndexedClasses();
+
 	public void reIndex(String[] ids) throws SearchException;
+
+	public void reIndex(String className, long classPK) throws SearchException;
 
 }

@@ -139,6 +139,19 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return new DocumentSummary(title, url, portletURL);
 	}
 
+	public String[] getIndexedClasses() {
+		return new String[] {BookmarksEntry.class.getName()};
+	}
+
+	public void reIndex(String className, long classPK) throws SearchException {
+		try {
+			BookmarksEntryLocalServiceUtil.reIndex(classPK);
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
+	}
+
 	public void reIndex(String[] ids) throws SearchException {
 		try {
 			BookmarksFolderLocalServiceUtil.reIndex(ids);

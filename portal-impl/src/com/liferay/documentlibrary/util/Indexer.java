@@ -57,6 +57,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -266,6 +267,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
 		return null;
+	}
+
+	public String[] getIndexedClasses() {
+		return new String[0];
+	}
+
+	public void reIndex(String className, long classPK) throws SearchException {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {

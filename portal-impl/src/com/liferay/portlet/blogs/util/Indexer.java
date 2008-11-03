@@ -147,6 +147,19 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
+	public String[] getIndexedClasses() {
+		return new String[]{BlogsEntry.class.getName()};
+	}
+
+	public void reIndex(String className, long classPK) throws SearchException {
+		try {
+			BlogsEntryLocalServiceUtil.reIndex(classPK);
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
+	}
+
 	public void reIndex(String[] ids) throws SearchException {
 		try {
 			BlogsEntryLocalServiceUtil.reIndex(ids);
