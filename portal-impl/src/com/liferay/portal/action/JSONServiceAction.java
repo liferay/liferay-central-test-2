@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
@@ -236,6 +237,18 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
 			return StringUtil.split(ParamUtil.getString(request, parameter));
+		}
+		else if (parameterTypeName.equals(ServiceContext.class.getName())) {
+			String value = ParamUtil.getString(request, parameter);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			jsonObject.put("javaClass", ServiceContext.class.getName());
+
+			ServiceContext serviceContext = (ServiceContext)
+				JSONFactoryUtil.deserialize(jsonObject);
+
+			return serviceContext;
 		}
 		else {
 			_log.error(
