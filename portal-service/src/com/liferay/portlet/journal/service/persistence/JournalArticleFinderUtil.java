@@ -122,7 +122,8 @@ public class JournalArticleFinderUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByR_D(
 		long resourcePrimKey, java.util.Date displayDate)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getFinder().findByR_D(resourcePrimKey, displayDate);
 	}
 

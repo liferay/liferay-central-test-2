@@ -54,14 +54,14 @@ public class WikiPageFinderImpl
 	public static String COUNT_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".countByCreateDate";
 
+	public static String FIND_BY_RESOURCE_PRIM_KEY =
+		WikiPageFinder.class.getName() + ".findByResourcePrimKey";
+
 	public static String FIND_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".findByCreateDate";
 
 	public static String FIND_BY_NO_ASSETS =
 		WikiPageFinder.class.getName() + ".findByNoAssets";
-
-	public static String FIND_BY_RESSOURCE_PRIM_KEY =
-		WikiPageFinder.class.getName() + ".findByResourcePrimKey";
 
 	public static String FIND_BY_UUID_G =
 		WikiPageFinder.class.getName() + ".findByUuid_G";
@@ -114,6 +114,47 @@ public class WikiPageFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public WikiPage findByResourcePrimKey(long resourcePrimKey)
+		throws NoSuchPageException, SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_RESOURCE_PRIM_KEY);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("WikiPage", WikiPageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(resourcePrimKey);
+
+			List<WikiPage> list = q.list();
+
+			if (list.size() == 0) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("No WikiPage exists with the key {resourcePrimKey");
+				sb.append(resourcePrimKey);
+				sb.append("}");
+
+				throw new NoSuchPageException(sb.toString());
+			}
+			else {
+				return list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -185,42 +226,6 @@ public class WikiPageFinderImpl
 			q.addEntity("WikiPage", WikiPageImpl.class);
 
 			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public WikiPage findByResourcePrimKey(long resourcePrimKey)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_RESSOURCE_PRIM_KEY);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("WikiPage", WikiPageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(resourcePrimKey);
-			qPos.add(true);
-
-			List<WikiPage> results = q.list();
-
-			if (!results.isEmpty()) {
-				return results.get(0);
-			}
-			else {
-				return null;
-			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -449,8 +449,7 @@ public class SCProductEntryLocalServiceImpl
 
 		String version = StringPool.BLANK;
 
-		SCProductVersion latestProductVersion =
-			productEntry.getLatestVersion();
+		SCProductVersion latestProductVersion = productEntry.getLatestVersion();
 
 		if (latestProductVersion != null) {
 			version = latestProductVersion.getVersion();
@@ -464,8 +463,7 @@ public class SCProductEntryLocalServiceImpl
 				productEntry.getModifiedDate(), version, productEntry.getType(),
 				productEntry.getShortDescription(),
 				productEntry.getLongDescription(), productEntry.getPageURL(),
-				productEntry.getRepoGroupId(),
-				productEntry.getRepoArtifactId(),
+				productEntry.getRepoGroupId(), productEntry.getRepoArtifactId(),
 				productEntry.getExpandoBridge());
 		}
 		catch (SearchException se) {

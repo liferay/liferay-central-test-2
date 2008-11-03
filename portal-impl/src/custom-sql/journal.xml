@@ -61,9 +61,9 @@
 			WHERE
 				(resourcePrimKey = ?) AND
 				(displayDate <= ?) AND
-				(approved = ?) AND
-				(expired = ?) AND
-				(indexable = ?)
+				(approved = TRUE) AND
+				(expired = FALSE) AND
+				(indexable = TRUE)
 			ORDER BY
 				version DESC
 		]]>

@@ -49,10 +49,15 @@ package com.liferay.portlet.wiki.model;
  *
  */
 public interface WikiPage extends WikiPageModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
+	public java.lang.String getAttachmentsDir();
 
-	public void setUserUuid(java.lang.String userUuid);
+	public java.lang.String[] getAttachmentsFiles()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildPages();
+
+	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
 
 	public com.liferay.portlet.wiki.model.WikiNode getNode();
 
@@ -60,17 +65,12 @@ public interface WikiPage extends WikiPageModel {
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getParentPages();
 
-	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildPages();
-
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectPage();
 
-	public java.lang.String getAttachmentsDir();
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
 
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 
-	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
+	public void setUserUuid(java.lang.String userUuid);
 }

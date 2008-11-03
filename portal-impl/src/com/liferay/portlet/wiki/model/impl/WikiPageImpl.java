@@ -53,16 +53,16 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
-	public static final String FRONT_PAGE =
-		PropsUtil.get(PropsKeys.WIKI_FRONT_PAGE_NAME);
-
-	public static final double DEFAULT_VERSION = 1.0;
-
 	public static final String DEFAULT_FORMAT =
 		PropsUtil.get(PropsKeys.WIKI_FORMATS_DEFAULT);
 
+	public static final double DEFAULT_VERSION = 1.0;
+
 	public static final String[] FORMATS =
 		PropsUtil.getArray(PropsKeys.WIKI_FORMATS);
+
+	public static final String FRONT_PAGE =
+		PropsUtil.get(PropsKeys.WIKI_FRONT_PAGE_NAME);
 
 	public static final String MOVED = "Moved";
 
@@ -73,12 +73,52 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	public WikiPageImpl() {
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	public String getAttachmentsDir() {
+		if (_attachmentDirs == null) {
+			_attachmentDirs = "wiki/" + getResourcePrimKey();
+		}
+
+		return _attachmentDirs;
 	}
 
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
+	public String[] getAttachmentsFiles()
+		throws PortalException, SystemException {
+
+		String[] fileNames = new String[0];
+
+		try {
+			fileNames = DLServiceUtil.getFileNames(
+				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+
+		return fileNames;
+	}
+
+	public List<WikiPage> getChildPages() {
+		List<WikiPage> pages = null;
+
+		try {
+			pages = WikiPageLocalServiceUtil.getChildren(
+				getNodeId(), true, getTitle());
+		}
+		catch (Exception e) {
+			pages = new ArrayList<WikiPage>();
+
+			_log.error(e);
+		}
+
+		return pages;
+	}
+
+	public ExpandoBridge getExpandoBridge() {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(
+				WikiPage.class.getName(), getResourcePrimKey());
+		}
+
+		return _expandoBridge;
 	}
 
 	public WikiNode getNode() {
@@ -127,22 +167,6 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return parentPages;
 	}
 
-	public List<WikiPage> getChildPages() {
-		List<WikiPage> pages = null;
-
-		try {
-			pages = WikiPageLocalServiceUtil.getChildren(
-				getNodeId(), true, getTitle());
-		}
-		catch (Exception e) {
-			pages = new ArrayList<WikiPage>();
-
-			_log.error(e);
-		}
-
-		return pages;
-	}
-
 	public WikiPage getRedirectPage() {
 		if (Validator.isNull(getRedirectTitle())) {
 			return null;
@@ -161,46 +185,22 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return page;
 	}
 
-	public String getAttachmentsDir() {
-		if (_attachmentDirs == null) {
-			_attachmentDirs = "wiki/" + getResourcePrimKey();
-		}
-
-		return _attachmentDirs;
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
 	public void setAttachmentsDir(String attachmentsDir) {
 		_attachmentDirs = attachmentsDir;
 	}
 
-	public String[] getAttachmentsFiles()
-		throws PortalException, SystemException {
-
-		String[] fileNames = new String[0];
-
-		try {
-			fileNames = DLServiceUtil.getFileNames(
-				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
-		}
-		catch (NoSuchDirectoryException nsde) {
-		}
-
-		return fileNames;
-	}
-
-	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(
-				WikiPage.class.getName(), getResourcePrimKey());
-		}
-
-		return _expandoBridge;
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
 
-	private String _userUuid;
 	private String _attachmentDirs;
 	private ExpandoBridge _expandoBridge;
+	private String _userUuid;
 
 }

@@ -40,6 +40,13 @@ public class WikiPageFinderUtil {
 		return getFinder().countByCreateDate(nodeId, createDate, before);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage findByResourcePrimKey(
+		long resourcePrimKey)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getFinder().findByResourcePrimKey(resourcePrimKey);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
 		long nodeId, java.util.Date createDate, boolean before, int start,
 		int end) throws com.liferay.portal.SystemException {
@@ -57,11 +64,6 @@ public class WikiPageFinderUtil {
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPage findByResourcePrimKey(
-		long resourcePrimKey) throws com.liferay.portal.SystemException {
-		return getFinder().findByResourcePrimKey(resourcePrimKey);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_G(

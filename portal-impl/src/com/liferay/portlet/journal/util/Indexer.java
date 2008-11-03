@@ -76,10 +76,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getArticleDocument(
-		long companyId, long groupId, String articleId,
-		double version, String title, String description, String content,
-		String type, Date displayDate, String[] tagsEntries,
-		ExpandoBridge expandoBridge) {
+		long companyId, long groupId, String articleId, double version,
+		String title, String description, String content, String type,
+		Date displayDate, String[] tagsEntries, ExpandoBridge expandoBridge) {
 
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content>") != -1) ||

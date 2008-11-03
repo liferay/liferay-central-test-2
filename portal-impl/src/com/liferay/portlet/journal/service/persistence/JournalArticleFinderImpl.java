@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -63,12 +64,12 @@ public class JournalArticleFinderImpl
 	public static String FIND_BY_REVIEW_DATE =
 		JournalArticleFinder.class.getName() + ".findByReviewDate";
 
+	public static String FIND_BY_R_D =
+		JournalArticleFinder.class.getName() + ".findByR_D";
+
 	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
 			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
-
-	public static String FIND_BY_R_D =
-		JournalArticleFinder.class.getName() + ".findByR_D";
 
 	public int countByKeywords(
 			long companyId, long groupId, String keywords, Double version,
@@ -356,13 +357,13 @@ public class JournalArticleFinderImpl
 		}
 	}
 
-	public JournalArticle findByR_D(
-			long resourcePrimKey, Date displayDate)
-		throws SystemException {
+	public JournalArticle findByR_D(long resourcePrimKey, Date displayDate)
+		throws NoSuchArticleException, SystemException {
 
 		Timestamp displayDate_TS = CalendarUtil.getTimestamp(displayDate);
 
 		Session session = null;
+
 		try {
 			session = openSession();
 
@@ -376,17 +377,23 @@ public class JournalArticleFinderImpl
 
 			qPos.add(resourcePrimKey);
 			qPos.add(displayDate_TS);
-			qPos.add(true);
-			qPos.add(false);
-			qPos.add(true);
 
-			List<JournalArticle> results = q.list();
+			List<JournalArticle> list = q.list();
 
-			if (!results.isEmpty()) {
-				return results.get(0);
+			if (list.size() == 0) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("No JournalArticle exists with the key ");
+				sb.append("{resourcePrimKey=");
+				sb.append(resourcePrimKey);
+				sb.append(", displayDate=");
+				sb.append(displayDate);
+				sb.append("}");
+
+				throw new NoSuchArticleException(sb.toString());
 			}
 			else {
-				return null;
+				return list.get(0);
 			}
 		}
 		catch (Exception e) {

@@ -1138,8 +1138,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		try {
 			Document doc = Indexer.getMessageDocument(
-				companyId, groupId, userId, userName, categoryId,
-				threadId, messageId, title, content, tagsEntries,
+				companyId, groupId, userId, userName, categoryId, threadId,
+				messageId, title, content, tagsEntries,
 				message.getExpandoBridge());
 
 			SearchEngineUtil.addDocument(companyId, doc);

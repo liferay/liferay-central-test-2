@@ -13,6 +13,17 @@
 				(head = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByResourcePrimKey">
+		<![CDATA[
+			SELECT
+				{WikiPage.*}
+			FROM
+				WikiPage
+			WHERE
+				(resourcePrimKey = ?) AND
+				(head = TRUE)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByCreateDate">
 		<![CDATA[
 			SELECT
@@ -42,17 +53,6 @@
 					WHERE
 						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]
 				))
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByResourcePrimKey">
-		<![CDATA[
-			SELECT
-				{WikiPage.*}
-			FROM
-				WikiPage
-			WHERE
-				(resourcePrimKey = ?) AND
-				(head = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByUuid_G">

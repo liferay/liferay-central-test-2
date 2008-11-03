@@ -49,22 +49,19 @@ public class JournalArticleImpl
 
 	public static final double DEFAULT_VERSION = 1.0;
 
-	public static final String[] TYPES =
-		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_TYPES);
-
 	public static final String PORTLET = "portlet";
 
 	public static final String STAND_ALONE = "stand-alone";
 
+	public static final String[] TYPES =
+		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_TYPES);
+
 	public JournalArticleImpl() {
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
+	public String getApprovedByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(
+			getApprovedByUserId(), "uuid", _approvedByUserUuid);
 	}
 
 	public String[] getAvailableLocales() {
@@ -107,24 +104,6 @@ public class JournalArticleImpl
 		return _expandoBridge;
 	}
 
-	public boolean isTemplateDriven() {
-		if (Validator.isNull(getStructureId())) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	public String getApprovedByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(
-			getApprovedByUserId(), "uuid", _approvedByUserUuid);
-	}
-
-	public void setApprovedByUserUuid(String approvedByUserUuid) {
-		_approvedByUserUuid = approvedByUserUuid;
-	}
-
 	public String getSmallImageType() throws PortalException, SystemException {
 		if (_smallImageType == null && isSmallImage()) {
 			Image smallImage =  ImageLocalServiceUtil.getImage(
@@ -136,13 +115,34 @@ public class JournalArticleImpl
 		return _smallImageType;
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public boolean isTemplateDriven() {
+		if (Validator.isNull(getStructureId())) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public void setApprovedByUserUuid(String approvedByUserUuid) {
+		_approvedByUserUuid = approvedByUserUuid;
+	}
+
 	public void setSmallImageType(String smallImageType) {
 		_smallImageType = smallImageType;
 	}
 
-	private String _userUuid;
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	private String _approvedByUserUuid;
-	private String _smallImageType;
 	private ExpandoBridge _expandoBridge;
+	private String _smallImageType;
+	private String _userUuid;
 
 }

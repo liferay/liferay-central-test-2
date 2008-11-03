@@ -1426,36 +1426,41 @@ public class JournalArticleLocalServiceImpl
 			return;
 		}
 
-		JournalArticle article = journalArticleFinder.findByR_D(
-			resourcePrimKey, new Date());
+		JournalArticle article = null;
 
-		if (article == null) {
+		try {
+			article = journalArticleFinder.findByR_D(
+				resourcePrimKey, new Date());
+		}
+		catch (NoSuchArticleException nsae) {
 			return;
 		}
 
-		if (article.isApproved() && article.isIndexable()) {
-			long companyId = article.getCompanyId();
-			long groupId = article.getGroupId();
-			String articleId = article.getArticleId();
-			double version = article.getVersion();
-			String title = article.getTitle();
-			String description = article.getDescription();
-			String content = article.getContent();
-			String type = article.getType();
-			Date displayDate = article.getDisplayDate();
+		if (!article.isApproved() || !article.isIndexable()) {
+			return;
+		}
 
-			String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-				JournalArticle.class.getName(), resourcePrimKey);
+		long companyId = article.getCompanyId();
+		long groupId = article.getGroupId();
+		String articleId = article.getArticleId();
+		double version = article.getVersion();
+		String title = article.getTitle();
+		String description = article.getDescription();
+		String content = article.getContent();
+		String type = article.getType();
+		Date displayDate = article.getDisplayDate();
 
-			try {
-				Indexer.updateArticle(
-					companyId, groupId, articleId, version, title, description,
-					content, type, displayDate, tagsEntries,
-					article.getExpandoBridge());
-			}
-			catch (SearchException se) {
-				_log.error("Reindexing " + article.getId(), se);
-			}
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			JournalArticle.class.getName(), resourcePrimKey);
+
+		try {
+			Indexer.updateArticle(
+				companyId, groupId, articleId, version, title, description,
+				content, type, displayDate, tagsEntries,
+				article.getExpandoBridge());
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + article.getId(), se);
 		}
 	}
 
@@ -1470,29 +1475,31 @@ public class JournalArticleLocalServiceImpl
 			for (JournalArticle article :
 					journalArticlePersistence.findByCompanyId(companyId)) {
 
-				if (article.isApproved() && article.isIndexable()) {
-					long resourcePrimKey = article.getResourcePrimKey();
-					long groupId = article.getGroupId();
-					String articleId = article.getArticleId();
-					double version = article.getVersion();
-					String title = article.getTitle();
-					String description = article.getDescription();
-					String content = article.getContent();
-					String type = article.getType();
-					Date displayDate = article.getDisplayDate();
+				if (!article.isApproved() || !article.isIndexable()) {
+					continue;
+				}
 
-					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						JournalArticle.class.getName(), resourcePrimKey);
+				long resourcePrimKey = article.getResourcePrimKey();
+				long groupId = article.getGroupId();
+				String articleId = article.getArticleId();
+				double version = article.getVersion();
+				String title = article.getTitle();
+				String description = article.getDescription();
+				String content = article.getContent();
+				String type = article.getType();
+				Date displayDate = article.getDisplayDate();
 
-					try {
-						Indexer.updateArticle(
-							companyId, groupId, articleId, version, title,
-							description, content, type, displayDate,
-							tagsEntries, article.getExpandoBridge());
-					}
-					catch (SearchException se) {
-						_log.error("Reindexing " + article.getId(), se);
-					}
+				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+					JournalArticle.class.getName(), resourcePrimKey);
+
+				try {
+					Indexer.updateArticle(
+						companyId, groupId, articleId, version, title,
+						description, content, type, displayDate,
+						tagsEntries, article.getExpandoBridge());
+				}
+				catch (SearchException se) {
+					_log.error("Reindexing " + article.getId(), se);
 				}
 			}
 		}

@@ -93,8 +93,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
-		ExpandoBridgeIndexerUtil.addAttributes(
-			doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
 		return doc;
 	}

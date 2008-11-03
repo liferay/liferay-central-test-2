@@ -831,9 +831,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
-		WikiPage page = wikiPageFinder.findByResourcePrimKey(resourcePrimKey);
+		WikiPage page = null;
 
-		if (page == null) {
+		try {
+			page = wikiPageFinder.findByResourcePrimKey(resourcePrimKey);
+		}
+		catch (NoSuchPageException nspe) {
 			return;
 		}
 
