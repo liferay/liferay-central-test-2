@@ -74,6 +74,7 @@ import com.sun.portal.container.Container;
 import com.sun.portal.container.ContainerFactory;
 import com.sun.portal.container.ContainerRequest;
 import com.sun.portal.container.ContainerType;
+import com.sun.portal.container.ContainerUtil;
 import com.sun.portal.container.EntityID;
 import com.sun.portal.container.ExecuteActionRequest;
 import com.sun.portal.container.ExecuteActionResponse;
@@ -86,7 +87,6 @@ import com.sun.portal.container.PortletType;
 import com.sun.portal.container.PortletWindowContext;
 import com.sun.portal.container.PortletWindowContextException;
 import com.sun.portal.container.WindowRequestReader;
-import com.sun.portal.container.service.policy.DistributionType;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
 import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
@@ -224,14 +224,24 @@ public class WindowInvoker extends InvokerPortletImpl {
 				}
 			}
 
+			long plid = _getPlid(actionRequest);
+
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
 					request, _portletModel, currentWindowState,
-					currentPortletMode, _getPlid(actionRequest),
+					currentPortletMode, plid,
 					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
 				request, response, executeActionRequest, actionRequest);
+
+			if (!_portletModel.getPublishingEvents().isEmpty()) {
+				executeActionRequest.setPortletNamespaces(
+					_getPortletNamespaces(executeActionRequest));
+
+				executeActionRequest.setPortletWindowIDs(
+					_getPortletWindowIDs(executeActionRequest, plid));
+			}
 
 			ExecuteActionResponse executeActionResponse =
 				ContainerResponseFactory.createExecuteActionResponse(response);
@@ -310,10 +320,12 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			_initUser(request, _portletModel);
 
+			long plid = _getPlid(renderRequest);
+
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
 					request, _portletModel, renderRequestImpl.getWindowState(),
-					renderRequestImpl.getPortletMode(), _getPlid(renderRequest),
+					renderRequestImpl.getPortletMode(), plid,
 					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
@@ -321,8 +333,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			if (!_portletModel.getPublishingEvents().isEmpty()) {
 				getMarkupRequest.setPortletNamespaces(
-					_getPortletNamespaces(
-						getMarkupRequest.getPortletWindowContext()));
+					_getPortletNamespaces(getMarkupRequest));
 			}
 
 			GetMarkupResponse getMarkupResponse =
@@ -390,13 +401,14 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			_initUser(request, _portletModel);
 
+			long plid = _getPlid(resourceRequest);
+
 			GetResourceRequest getResourceRequest =
 				ContainerRequestFactory.createGetResourceRequest(
 					request, _portletModel,
 					resourceRequestImpl.getWindowState(),
 					resourceRequestImpl.getPortletMode(),
-					_getPlid(resourceRequest), isFacesPortlet(),
-					_remotePortlet);
+					plid, isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
 				request, response, getResourceRequest, resourceRequest);
@@ -479,15 +491,19 @@ public class WindowInvoker extends InvokerPortletImpl {
 	}
 
 	private Map<PortletID, List<String>> _getPortletNamespaces(
-		PortletWindowContext portletWindowContext) {
+		ContainerRequest containerRequest) {
 
 		Map<PortletID, List<String>> portletNamespaces =
 			new HashMap<PortletID, List<String>>();
 
 		try {
+			PortletWindowContext portletWindowContext =
+				containerRequest.getPortletWindowContext();
+
 			List<EntityID> portletEntityIDs =
 				portletWindowContext.getPortletWindows(
-					PortletType.LOCAL, DistributionType.ALL_PORTLETS_ON_PAGE);
+					PortletType.LOCAL,
+					ContainerUtil.getEventDistributionType(containerRequest));
 
 			if (portletEntityIDs == null) {
 				return portletNamespaces;
@@ -504,8 +520,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 						portletEntityID.getPortletID(), namespaces);
 				}
 
-				String namespace = PortalUtil.getPortletNamespace(
-					portletEntityID.getPortletWindowName());
+				String namespace = WindowInvokerUtil.getPortletNamespace(
+					portletEntityID);
 
 				namespaces.add(namespace);
 			}
@@ -517,6 +533,51 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		return portletNamespaces;
+	}
+
+	private Map<PortletID, List<String>> _getPortletWindowIDs(
+		ContainerRequest containerRequest, long plid) {
+
+		Map<PortletID, List<String>> portletWindowIDs =
+			new HashMap<PortletID, List<String>>();
+
+		try {
+			PortletWindowContext portletWindowContext =
+				containerRequest.getPortletWindowContext();
+
+			List<EntityID> portletEntityIDs =
+				portletWindowContext.getPortletWindows(
+					PortletType.LOCAL,
+					ContainerUtil.getEventDistributionType(containerRequest));
+
+			if (portletEntityIDs == null) {
+				return portletWindowIDs;
+			}
+
+			for (EntityID portletEntityID : portletEntityIDs) {
+				List<String> windowIDs = portletWindowIDs.get(
+					portletEntityID.getPortletID());
+
+				if (windowIDs == null) {
+					windowIDs = new ArrayList<String>();
+
+					portletWindowIDs.put(
+						portletEntityID.getPortletID(), windowIDs);
+				}
+
+				String windowID = WindowInvokerUtil.getPortletWindowID(
+					portletEntityID, plid);
+
+				windowIDs.add(windowID);
+			}
+		}
+		catch (PortletWindowContextException pwce) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pwce, pwce);
+			}
+		}
+
+		return portletWindowIDs;
 	}
 
 	private List<String> _getRoles(HttpServletRequest request) {

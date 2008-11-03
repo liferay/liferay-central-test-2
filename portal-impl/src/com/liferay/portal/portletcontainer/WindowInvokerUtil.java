@@ -43,6 +43,8 @@ package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletSessionImpl;
 
 import com.sun.portal.container.EntityID;
 import com.sun.portal.container.PortletID;
@@ -71,6 +73,20 @@ public class WindowInvokerUtil {
 		portletEntityId.setPortletWindowName(portlet.getPortletId());
 
 		return portletEntityId;
+	}
+
+	public static String getPortletNamespace(EntityID entityID) {
+		return PortalUtil.getPortletNamespace(entityID.getPortletWindowName());
+	}
+
+	public static String getPortletWindowID(EntityID entityID, long plid) {
+		StringBuilder windowID = new StringBuilder();
+
+		windowID.append(entityID.getPortletWindowName());
+		windowID.append(PortletSessionImpl.LAYOUT_SEPARATOR);
+		windowID.append(plid);
+
+		return windowID.toString();
 	}
 
 }

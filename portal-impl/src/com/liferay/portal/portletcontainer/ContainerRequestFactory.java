@@ -45,8 +45,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletSessionImpl;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowChannelURLFactory;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowInvoker;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowRequestReader;
@@ -229,20 +227,17 @@ public class ContainerRequestFactory {
 		}
 
 		if (containerRequest != null) {
-			String namespace = PortalUtil.getPortletNamespace(
-				portlet.getPortletId());
+			String namespace = WindowInvokerUtil.getPortletNamespace(
+				entityID);
 
-			StringBuilder windowID = new StringBuilder();
-
-			windowID.append(portlet.getPortletId());
-			windowID.append(PortletSessionImpl.LAYOUT_SEPARATOR);
-			windowID.append(plid);
+			String windowID = WindowInvokerUtil.getPortletWindowID(
+				entityID, plid);
 
 			containerRequest.setAllowableWindowStates(windowStates);
 			containerRequest.setAllowableChannelModes(portletModes);
 			containerRequest.setNamespace(namespace);
 			containerRequest.setPortalInfo(ReleaseInfo.getReleaseInfo());
-			containerRequest.setWindowID(windowID.toString());
+			containerRequest.setWindowID(windowID);
 		}
 
 		return containerRequest;

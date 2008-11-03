@@ -260,7 +260,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		try {
 			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					_request, _portlet.getPortletId());
+					_request, portletWindowName);
 
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
