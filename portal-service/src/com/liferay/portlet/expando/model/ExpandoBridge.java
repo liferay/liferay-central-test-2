@@ -60,6 +60,8 @@ public interface ExpandoBridge {
 
 	public boolean hasAttribute(String name);
 
+	public boolean isReIndex();
+
 	public void setAttribute(String name, Object value);
 
 	public void setAttributeDefault(String name, Object defaultValue);
@@ -70,5 +72,7 @@ public interface ExpandoBridge {
 	public void setAttributes(Map<String, Object> attributes);
 
 	public void setAttributes(ServiceContext serviceContext);
+
+	public void setReIndex(boolean reIndex);
 
 }

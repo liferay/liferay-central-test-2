@@ -24,6 +24,9 @@ package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.NoSuchTableException;
@@ -36,6 +39,7 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -213,6 +217,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
+	public boolean isReIndex() {
+		return _reIndex;
+	}
+
 	public void setAttribute(String name, Object value) {
 		if (_classPK <= 0) {
 			throw new UnsupportedOperationException();
@@ -222,6 +230,8 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			ExpandoValueServiceUtil.addValue(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK, value);
+
+			checkIndex(name);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -253,6 +263,8 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 			ExpandoColumnServiceUtil.updateTypeSettings(
 				column.getColumnId(), properties.toString());
+
+			checkIndex(name);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -264,9 +276,17 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return;
 		}
 
+		boolean reIndex = isReIndex();
+
+		setReIndex(false);
+
 		for (Map.Entry<String, Object> entry : attributes.entrySet()) {
 			setAttribute(entry.getKey(), entry.getValue());
 		}
+
+		setReIndex(reIndex);
+
+		reIndex();
 	}
 
 	public void setAttributes(ServiceContext serviceContext) {
@@ -285,9 +305,47 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		_classPK = classPK;
 	}
 
+	public void setReIndex(boolean reIndex) {
+		_reIndex = reIndex;
+	}
+
+	protected void checkIndex(String name) {
+		if (!_reIndex) {
+			return;
+		}
+
+		UnicodeProperties properties = getAttributeProperties(name);
+
+		if ((getAttributeType(name) == ExpandoColumnConstants.STRING) &&
+			GetterUtil.getBoolean(
+				properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+
+			reIndex();
+		}
+	}
+
+	protected void reIndex() {
+		if (!_reIndex) {
+			return;
+		}
+
+		Indexer indexerInstance =
+			IndexerRegistryUtil.getRegisteredIndexer(_className);
+
+		if (indexerInstance != null) {
+			try {
+				indexerInstance.reIndex(_className, _classPK);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ExpandoBridgeImpl.class);
 
 	private String _className;
 	private long _classPK;
+	private boolean _reIndex = true;
 
 }
