@@ -80,6 +80,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class SCProductEntryLocalServiceImpl
@@ -189,7 +190,7 @@ public class SCProductEntryLocalServiceImpl
 				productEntry.getCompanyId(), groupId, userId,
 				user.getFullName(), productEntryId, name, now, StringPool.BLANK,
 				type, shortDescription, longDescription, pageURL, repoGroupId,
-				repoArtifactId);
+				repoArtifactId, productEntry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + productEntryId, se);
@@ -434,6 +435,44 @@ public class SCProductEntryLocalServiceImpl
 		return doc.asXML();
 	}
 
+	public void reIndex(long productEntryId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		SCProductEntry productEntry =
+			scProductEntryPersistence.fetchByPrimaryKey(productEntryId);
+
+		if (productEntry == null) {
+			return;
+		}
+
+		String version = StringPool.BLANK;
+
+		SCProductVersion latestProductVersion =
+			productEntry.getLatestVersion();
+
+		if (latestProductVersion != null) {
+			version = latestProductVersion.getVersion();
+		}
+
+		try {
+			Indexer.updateProductEntry(
+				productEntry.getCompanyId(), productEntry.getGroupId(),
+				productEntry.getUserId(), productEntry.getUserName(),
+				productEntryId, productEntry.getName(),
+				productEntry.getModifiedDate(), version, productEntry.getType(),
+				productEntry.getShortDescription(),
+				productEntry.getLongDescription(), productEntry.getPageURL(),
+				productEntry.getRepoGroupId(),
+				productEntry.getRepoArtifactId(),
+				productEntry.getExpandoBridge());
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + productEntryId, se);
+		}
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -468,7 +507,8 @@ public class SCProductEntryLocalServiceImpl
 						productEntry.getLongDescription(),
 						productEntry.getPageURL(),
 						productEntry.getRepoGroupId(),
-						productEntry.getRepoArtifactId());
+						productEntry.getRepoArtifactId(),
+						productEntry.getExpandoBridge());
 				}
 				catch (SearchException se) {
 					_log.error("Reindexing " + productEntryId, se);
@@ -596,7 +636,8 @@ public class SCProductEntryLocalServiceImpl
 				productEntry.getCompanyId(), productEntry.getGroupId(),
 				productEntry.getUserId(), productEntry.getUserName(),
 				productEntryId, name, now, version, type, shortDescription,
-				longDescription, pageURL, repoGroupId, repoArtifactId);
+				longDescription, pageURL, repoGroupId, repoArtifactId,
+				productEntry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + productEntryId, se);

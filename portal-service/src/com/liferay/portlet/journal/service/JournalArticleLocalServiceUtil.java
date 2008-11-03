@@ -681,6 +681,11 @@ public class JournalArticleLocalServiceUtil {
 		return getService().isLatestVersion(groupId, articleId, version, active);
 	}
 
+	public static void reIndex(long resourcePrimKey)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(resourcePrimKey);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);

@@ -111,6 +111,7 @@ import org.apache.commons.logging.LogFactory;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalArticleLocalServiceImpl
@@ -481,7 +482,8 @@ public class JournalArticleLocalServiceImpl
 					article.getArticleId(), article.getVersion(),
 					article.getTitle(), article.getDescription(),
 					article.getContent(), article.getType(),
-					article.getDisplayDate(), tagsEntries);
+					article.getDisplayDate(), tagsEntries,
+					article.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -1419,6 +1421,44 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public void reIndex(long resourcePrimKey) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		JournalArticle article = journalArticleFinder.findByR_D(
+			resourcePrimKey, new Date());
+
+		if (article == null) {
+			return;
+		}
+
+		if (article.isApproved() && article.isIndexable()) {
+			long companyId = article.getCompanyId();
+			long groupId = article.getGroupId();
+			String articleId = article.getArticleId();
+			double version = article.getVersion();
+			String title = article.getTitle();
+			String description = article.getDescription();
+			String content = article.getContent();
+			String type = article.getType();
+			Date displayDate = article.getDisplayDate();
+
+			String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+				JournalArticle.class.getName(), resourcePrimKey);
+
+			try {
+				Indexer.updateArticle(
+					companyId, groupId, articleId, version, title, description,
+					content, type, displayDate, tagsEntries,
+					article.getExpandoBridge());
+			}
+			catch (SearchException se) {
+				_log.error("Reindexing " + article.getId(), se);
+			}
+		}
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -1448,7 +1488,7 @@ public class JournalArticleLocalServiceImpl
 						Indexer.updateArticle(
 							companyId, groupId, articleId, version, title,
 							description, content, type, displayDate,
-							tagsEntries);
+							tagsEntries, article.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + article.getId(), se);
@@ -1775,7 +1815,8 @@ public class JournalArticleLocalServiceImpl
 						article.getArticleId(), article.getVersion(),
 						article.getTitle(), article.getDescription(),
 						article.getContent(), article.getType(),
-						article.getDisplayDate(), tagsEntries);
+						article.getDisplayDate(), tagsEntries,
+						article.getExpandoBridge());
 				}
 				else {
 					Indexer.deleteArticle(

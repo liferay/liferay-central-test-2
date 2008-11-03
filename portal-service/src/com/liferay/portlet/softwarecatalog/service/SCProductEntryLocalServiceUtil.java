@@ -280,6 +280,11 @@ public class SCProductEntryLocalServiceUtil {
 			oldestDate, maxNumOfVersions, repoSettings);
 	}
 
+	public static void reIndex(long productEntryId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(productEntryId);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);

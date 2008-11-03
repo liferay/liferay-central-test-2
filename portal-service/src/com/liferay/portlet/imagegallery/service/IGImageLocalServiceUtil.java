@@ -325,6 +325,11 @@ public class IGImageLocalServiceUtil {
 		return getService().getNoAssetImages();
 	}
 
+	public static void reIndex(long imageId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(imageId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

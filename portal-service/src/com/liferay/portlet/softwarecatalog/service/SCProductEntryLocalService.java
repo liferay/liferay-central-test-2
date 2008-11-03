@@ -215,6 +215,9 @@ public interface SCProductEntryLocalService {
 		java.util.Properties repoSettings)
 		throws com.liferay.portal.SystemException;
 
+	public void reIndex(long productEntryId)
+		throws com.liferay.portal.SystemException;
+
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

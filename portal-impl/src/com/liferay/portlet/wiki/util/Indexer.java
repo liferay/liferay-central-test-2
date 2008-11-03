@@ -35,7 +35,12 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 
@@ -45,6 +50,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -53,7 +59,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addPage(
 			long companyId, long groupId, long nodeId, String title,
-			String content, String[] tagsEntries)
+			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		try {
@@ -63,7 +69,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		Document doc = getPageDocument(
-			companyId, groupId, nodeId, title, content, tagsEntries);
+			companyId, groupId, nodeId, title, content, tagsEntries,
+			expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -94,8 +101,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getPageDocument(
-		long companyId, long groupId, long nodeId, String title,
-		String content, String[] tagsEntries) {
+		long companyId, long groupId, long nodeId, String title, String content,
+		String[] tagsEntries, ExpandoBridge expandoBridge) {
 
 		content = HtmlUtil.extractText(content);
 
@@ -113,7 +120,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.CONTENT, content);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, nodeId);
+
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
 		return doc;
 	}
@@ -128,11 +138,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updatePage(
 			long companyId, long groupId, long nodeId, String title,
-			String content, String[] tagsEntries)
+			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getPageDocument(
-			companyId, groupId, nodeId, title, content, tagsEntries);
+			companyId, groupId, nodeId, title, content, tagsEntries,
+			expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

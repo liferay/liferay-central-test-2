@@ -30,7 +30,12 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 
@@ -39,6 +44,7 @@ import javax.portlet.PortletURL;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -47,12 +53,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String name, String description, String[] tagsEntries)
+			String name, String description, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
-			tagsEntries);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -65,7 +72,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getImageDocument(
 		long companyId, long groupId, long folderId, long imageId,
-		String name, String description, String[] tagsEntries) {
+		String name, String description, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();
 
@@ -81,9 +89,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addModifiedDate();
 
 		doc.addKeyword("folderId", folderId);
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, imageId);
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+
+		ExpandoBridgeIndexerUtil.addAttributes(
+			doc, expandoBridge);
 
 		return doc;
 	}
@@ -98,12 +110,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String name, String description, String[] tagsEntries)
+			String name, String description, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
-			tagsEntries);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

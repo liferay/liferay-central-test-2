@@ -527,6 +527,11 @@ public class UserLocalServiceUtil {
 		return getService().isPasswordExpiringSoon(user);
 	}
 
+	public static void reIndex(long userId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(userId);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);

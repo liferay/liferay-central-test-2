@@ -277,6 +277,9 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void reIndex(long resourcePrimKey)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version,
 		javax.portlet.PortletPreferences preferences,

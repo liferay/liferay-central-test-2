@@ -330,7 +330,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					try {
 						Indexer.updateImage(
 							companyId, groupId, folderId, imageId, name,
-							description, tagsEntries);
+							description, tagsEntries, image.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + imageId, se);

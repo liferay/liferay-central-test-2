@@ -410,7 +410,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					try {
 						Document doc = Indexer.getMessageDocument(
 							companyId, groupId, userId, userName, categoryId,
-							threadId, messageId, title, content, tagsEntries);
+							threadId, messageId, title, content, tagsEntries,
+							message.getExpandoBridge());
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
@@ -643,7 +644,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 							message.getUserId(), message.getUserName(),
 							toCategoryId, message.getThreadId(),
 							message.getMessageId(), message.getSubject(),
-							message.getBody(), tagsEntries);
+							message.getBody(), tagsEntries,
+							message.getExpandoBridge());
 					}
 				}
 				catch (SearchException se) {

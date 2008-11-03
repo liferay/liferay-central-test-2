@@ -33,6 +33,8 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -104,6 +106,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
@@ -555,7 +558,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), category.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), threadId, messageId, subject,
-					body, tagsEntries);
+					body, tagsEntries, message.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -1107,6 +1110,45 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessagePersistence.countByThreadId(threadId);
 	}
 
+	public void reIndex(long messageId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		MBMessage message = mbMessagePersistence.fetchByPrimaryKey(messageId);
+
+		if (message == null) {
+			return;
+		}
+
+		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
+			message.getCategoryId());
+
+		long companyId = category.getCompanyId();
+		long groupId = category.getGroupId();
+		long userId = message.getUserId();
+		String userName = message.getUserName();
+		long categoryId = category.getCategoryId();
+		long threadId = message.getThreadId();
+		String title = message.getSubject();
+		String content = message.getBody();
+
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			MBMessage.class.getName(), messageId);
+
+		try {
+			Document doc = Indexer.getMessageDocument(
+				companyId, groupId, userId, userName, categoryId,
+				threadId, messageId, title, content, tagsEntries,
+				message.getExpandoBridge());
+
+			SearchEngineUtil.addDocument(companyId, doc);
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + messageId, se);
+		}
+	}
+
 	public void subscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
@@ -1256,7 +1298,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), category.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), message.getThreadId(), messageId,
-					subject, body, tagsEntries);
+					subject, body, tagsEntries, message.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {

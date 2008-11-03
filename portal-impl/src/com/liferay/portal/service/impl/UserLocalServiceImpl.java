@@ -1374,6 +1374,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return false;
 	}
 
+	public void reIndex(long userId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		try {
+			UserIndexer.updateUsers(new long[]{userId});
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
+		}
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;

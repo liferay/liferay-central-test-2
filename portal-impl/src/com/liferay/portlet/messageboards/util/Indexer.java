@@ -36,8 +36,11 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 
@@ -50,6 +53,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -59,12 +63,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addMessage(
 			long companyId, long groupId, long userId, String userName,
 			long categoryId, long threadId, long messageId, String title,
-			String content, String[] tagsEntries)
+			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, tagsEntries);
+			messageId, title, content, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -97,7 +101,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getMessageDocument(
 		long companyId, long groupId, long userId, String userName,
 		long categoryId, long threadId, long messageId, String title,
-		String content, String[] tagsEntries) {
+		String content, String[] tagsEntries, ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 
@@ -132,6 +136,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, messageId);
 
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+
 		return doc;
 	}
 
@@ -146,12 +152,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateMessage(
 			long companyId, long groupId, long userId, String userName,
 			long categoryId, long threadId, long messageId, String title,
-			String content, String[] tagsEntries)
+			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, tagsEntries);
+			messageId, title, content, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

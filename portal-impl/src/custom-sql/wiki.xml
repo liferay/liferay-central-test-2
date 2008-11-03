@@ -44,6 +44,17 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByResourcePrimKey">
+		<![CDATA[
+			SELECT
+				{WikiPage.*}
+			FROM
+				WikiPage
+			WHERE
+				(resourcePrimKey = ?) AND
+				(head = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByUuid_G">
 		<![CDATA[
 			SELECT

@@ -86,6 +86,10 @@ public interface JournalArticleFinder {
 		java.util.Date reviewDateLT, java.util.Date reviewDateGT)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticle findByR_D(
+		long resourcePrimKey, java.util.Date displayDate)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 		long companyId, long groupId, java.lang.String articleId,
 		java.lang.Double version, java.lang.String title,

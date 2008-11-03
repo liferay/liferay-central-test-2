@@ -67,6 +67,9 @@ public class JournalArticleFinderImpl
 		JournalArticleFinder.class.getName() +
 			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
+	public static String FIND_BY_R_D =
+		JournalArticleFinder.class.getName() + ".findByR_D";
+
 	public int countByKeywords(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
@@ -344,6 +347,47 @@ public class JournalArticleFinderImpl
 			qPos.add(reviewDateLT_TS);
 
 			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalArticle findByR_D(
+			long resourcePrimKey, Date displayDate)
+		throws SystemException {
+
+		Timestamp displayDate_TS = CalendarUtil.getTimestamp(displayDate);
+
+		Session session = null;
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_R_D);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("JournalArticle", JournalArticleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(resourcePrimKey);
+			qPos.add(displayDate_TS);
+			qPos.add(true);
+			qPos.add(false);
+			qPos.add(true);
+
+			List<JournalArticle> results = q.list();
+
+			if (!results.isEmpty()) {
+				return results.get(0);
+			}
+			else {
+				return null;
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -80,6 +80,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
+ * @author Raymond Augé
  *
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
@@ -215,7 +216,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if (!draft) {
 				Indexer.addEntry(
 					entry.getCompanyId(), entry.getGroupId(), userId,
-					entry.getUserName(), entryId, title, content, tagsEntries);
+					entry.getUserName(), entryId, title, content, tagsEntries,
+					entry.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -544,6 +546,37 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return urlTitle;
 	}
 
+	public void reIndex(long entryId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		BlogsEntry entry = blogsEntryPersistence.fetchByPrimaryKey(entryId);
+
+		if (entry == null) {
+			return;
+		}
+
+		long companyId = entry.getCompanyId();
+		long groupId = entry.getGroupId();
+		long userId = entry.getUserId();
+		String userName = entry.getUserName();
+		String title = entry.getTitle();
+		String content = entry.getContent();
+
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			BlogsEntry.class.getName(), entryId);
+
+		try {
+			Indexer.updateEntry(
+				companyId, groupId, userId, userName, entryId, title, content,
+				tagsEntries, entry.getExpandoBridge());
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + entryId, se);
+		}
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -568,7 +601,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				try {
 					Indexer.updateEntry(
 						companyId, groupId, userId, userName, entryId, title,
-						content, tagsEntries);
+						content, tagsEntries, entry.getExpandoBridge());
 				}
 				catch (SearchException se) {
 					_log.error("Reindexing " + entryId, se);
@@ -685,7 +718,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if (!draft) {
 				Indexer.updateEntry(
 					entry.getCompanyId(), entry.getGroupId(), userId,
-					entry.getUserName(), entryId, title, content, tagsEntries);
+					entry.getUserName(), entryId, title, content, tagsEntries,
+					entry.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {

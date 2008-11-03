@@ -372,6 +372,9 @@ public interface MBMessageLocalService {
 	public int getThreadMessagesCount(long threadId)
 		throws com.liferay.portal.SystemException;
 
+	public void reIndex(long messageId)
+		throws com.liferay.portal.SystemException;
+
 	public void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

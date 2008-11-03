@@ -59,6 +59,11 @@ public class WikiPageFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage findByResourcePrimKey(
+		long resourcePrimKey) throws com.liferay.portal.SystemException {
+		return getFinder().findByResourcePrimKey(resourcePrimKey);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException,

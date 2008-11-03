@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -70,6 +71,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="IGImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
@@ -200,7 +202,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			try {
 				Indexer.addImage(
 					image.getCompanyId(), folder.getGroupId(), folderId,
-					imageId, name, description, tagsEntries);
+					imageId, name, description, tagsEntries,
+					image.getExpandoBridge());
 			}
 			catch (SearchException se) {
 				_log.error("Indexing " + imageId, se);
@@ -437,6 +440,39 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImageFinder.findByNoAssets();
 	}
 
+	public void reIndex(long imageId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		IGImage image = igImagePersistence.fetchByPrimaryKey(imageId);
+
+		if (image == null) {
+			return;
+		}
+
+		IGFolder folder = igFolderPersistence.fetchByPrimaryKey(
+			image.getFolderId());
+
+		long companyId = folder.getCompanyId();
+		long groupId = folder.getGroupId();
+		long folderId = folder.getFolderId();
+		String name = image.getName();
+		String description = image.getDescription();
+
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			IGImage.class.getName(), imageId);
+
+		try {
+			Indexer.updateImage(
+				companyId, groupId, folderId, imageId, name,
+				description, tagsEntries, image.getExpandoBridge());
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + imageId, se);
+		}
+	}
+
 	public IGImage updateImage(
 			long userId, long imageId, long folderId, String name,
 			String description, File file, String contentType,
@@ -498,7 +534,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				Indexer.updateImage(
 					image.getCompanyId(), folder.getGroupId(),
 					folder.getFolderId(), imageId, name, description,
-					tagsEntries);
+					tagsEntries, image.getExpandoBridge());
 			}
 			catch (SearchException se) {
 				_log.error("Indexing " + imageId, se);

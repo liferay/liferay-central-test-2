@@ -34,6 +34,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
@@ -46,6 +49,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -55,12 +59,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
-			Date displayDate, String[] tagsEntries)
+			Date displayDate, String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate, tagsEntries);
+			type, displayDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -72,9 +76,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getArticleDocument(
-		long companyId, long groupId, String articleId, double version,
-		String title, String description, String content, String type,
-		Date displayDate, String[] tagsEntries) {
+		long companyId, long groupId, String articleId,
+		double version, String title, String description, String content,
+		String type, Date displayDate, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content>") != -1) ||
@@ -108,10 +113,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.DESCRIPTION, description);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, articleId);
 		doc.addKeyword("version", version);
 		doc.addKeyword("type", type);
 		doc.addDate("displayDate", displayDate);
+
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
 		return doc;
 	}
@@ -127,12 +135,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
-			Date displayDate, String[] tagsEntries)
+			Date displayDate, String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate, tagsEntries);
+			type, displayDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

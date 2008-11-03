@@ -252,6 +252,8 @@ public interface IGImageLocalService {
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getNoAssetImages()
 		throws com.liferay.portal.SystemException;
 
+	public void reIndex(long imageId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

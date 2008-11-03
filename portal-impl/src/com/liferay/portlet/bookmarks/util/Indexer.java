@@ -29,7 +29,11 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import javax.portlet.PortletURL;
 
@@ -38,6 +42,7 @@ import javax.portlet.PortletURL;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -46,12 +51,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String name, String url, String comments, String[] tagsEntries)
+			String name, String url, String comments, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
-			tagsEntries);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -64,7 +70,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getEntryDocument(
 		long companyId, long groupId, long folderId, long entryId, String name,
-		String url, String comments, String[] tagsEntries) {
+		String url, String comments, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();
 
@@ -80,9 +87,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword("folderId", folderId);
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, entryId);
 		doc.addText(Field.URL, url);
 		doc.addText(Field.COMMENTS, comments);
+
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
 		return doc;
 	}
@@ -97,12 +107,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String name, String url, String comments, String[] tagsEntries)
+			String name, String url, String comments, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
-			tagsEntries);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

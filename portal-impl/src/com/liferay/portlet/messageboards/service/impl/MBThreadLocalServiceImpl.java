@@ -280,7 +280,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						message.getUserId(), message.getUserName(),
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
-						message.getBody(), message.getTagsEntries());
+						message.getBody(), message.getTagsEntries(),
+						message.getExpandoBridge());
 				}
 			}
 			catch (SearchException se) {
@@ -337,7 +338,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), message.getThreadId(),
 					message.getMessageId(), message.getSubject(),
-					message.getBody(), message.getTagsEntries());
+					message.getBody(), message.getTagsEntries(),
+					message.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -481,7 +483,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						message.getUserId(), message.getUserName(),
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
-						message.getBody(), message.getTagsEntries());
+						message.getBody(), message.getTagsEntries(),
+						message.getExpandoBridge());
 				}
 			}
 			catch (SearchException se) {

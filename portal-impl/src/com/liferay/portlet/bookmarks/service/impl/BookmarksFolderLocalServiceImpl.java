@@ -302,7 +302,7 @@ public class BookmarksFolderLocalServiceImpl
 					try {
 						Indexer.updateEntry(
 							companyId, groupId, folderId, entryId, name, url,
-							comments, tagsEntries);
+							comments, tagsEntries, entry.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + entryId, se);

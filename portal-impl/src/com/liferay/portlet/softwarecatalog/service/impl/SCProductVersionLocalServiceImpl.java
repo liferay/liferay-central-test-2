@@ -154,7 +154,8 @@ public class SCProductVersionLocalServiceImpl
 				productEntry.getShortDescription(),
 				productEntry.getLongDescription(), productEntry.getPageURL(),
 				productEntry.getRepoGroupId(),
-				productEntry.getRepoArtifactId());
+				productEntry.getRepoArtifactId(),
+				productEntry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + productEntry.getProductEntryId(), se);
@@ -272,7 +273,8 @@ public class SCProductVersionLocalServiceImpl
 				productEntry.getShortDescription(),
 				productEntry.getLongDescription(), productEntry.getPageURL(),
 				productEntry.getRepoGroupId(),
-				productEntry.getRepoArtifactId());
+				productEntry.getRepoArtifactId(),
+				productEntry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + productEntry.getProductEntryId(), se);

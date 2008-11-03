@@ -281,6 +281,11 @@ public class BookmarksEntryLocalServiceUtil {
 		return getService().openEntry(entryId);
 	}
 
+	public static void reIndex(long entryId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(entryId);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long userId, long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,

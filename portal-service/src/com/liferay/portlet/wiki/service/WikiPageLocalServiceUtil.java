@@ -361,6 +361,11 @@ public class WikiPageLocalServiceUtil {
 			themeDisplay);
 	}
 
+	public static void reIndex(long resourcePrimKey)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(resourcePrimKey);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long userId, long nodeId, java.lang.String title, double version,
 		javax.portlet.PortletPreferences preferences,

@@ -24,6 +24,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -51,6 +52,7 @@ import org.apache.commons.logging.LogFactory;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class BookmarksEntryLocalServiceImpl
@@ -151,7 +153,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.addEntry(
 				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
-				name, url, comments, tagsEntries);
+				name, url, comments, tagsEntries, entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + entryId, se);
@@ -342,6 +344,41 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	public void reIndex(long entryId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		BookmarksEntry entry = bookmarksEntryPersistence.fetchByPrimaryKey(
+			entryId);
+
+		if (entry == null) {
+			return;
+		}
+
+		BookmarksFolder folder = bookmarksFolderPersistence.fetchByPrimaryKey(
+			entry.getFolderId());
+
+		long companyId = folder.getCompanyId();
+		long groupId = folder.getGroupId();
+		long folderId = folder.getFolderId();
+		String name = entry.getName();
+		String url = entry.getUrl();
+		String comments = entry.getComments();
+
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			BookmarksEntry.class.getName(), entryId);
+
+		try {
+			Indexer.updateEntry(
+				companyId, groupId, folderId, entryId, name, url,
+				comments, tagsEntries, entry.getExpandoBridge());
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + entryId, se);
+		}
+	}
+
 	public BookmarksEntry updateEntry(
 			long userId, long entryId, long folderId, String name, String url,
 			String comments, String[] tagsEntries)
@@ -377,7 +414,8 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.updateEntry(
 				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
-				entry.getEntryId(), name, url, comments, tagsEntries);
+				entry.getEntryId(), name, url, comments, tagsEntries,
+				entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + entryId, se);

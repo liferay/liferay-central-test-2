@@ -31,6 +31,8 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
@@ -186,9 +188,19 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return fileNames;
 	}
 
+	public ExpandoBridge getExpandoBridge() {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(
+				WikiPage.class.getName(), getResourcePrimKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
 
 	private String _userUuid;
 	private String _attachmentDirs;
+	private ExpandoBridge _expandoBridge;
 
 }

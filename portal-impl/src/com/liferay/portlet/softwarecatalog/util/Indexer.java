@@ -32,6 +32,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
 import java.util.Date;
@@ -45,6 +48,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer
@@ -56,13 +60,14 @@ public class Indexer
 			long companyId, long groupId, long userId, String userName,
 			long productEntryId, String name, Date modifiedDate, String version,
 			String type, String shortDescription, String longDescription,
-			String pageURL, String repoGroupId, String repoArtifactId)
+			String pageURL, String repoGroupId, String repoArtifactId,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getProductEntryDocument(
 			companyId, groupId, userId, userName, productEntryId, name,
 			modifiedDate, version, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId);
+			pageURL, repoGroupId, repoArtifactId, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -77,7 +82,8 @@ public class Indexer
 		long companyId, long groupId, long userId, String userName,
 		long productEntryId, String name, Date modifiedDate, String version,
 		String type, String shortDescription, String longDescription,
-		String pageURL, String repoGroupId, String repoArtifactId) {
+		String pageURL, String repoGroupId, String repoArtifactId,
+		ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 		shortDescription = HtmlUtil.extractText(shortDescription);
@@ -103,6 +109,7 @@ public class Indexer
 		doc.addText(Field.TITLE, name);
 		doc.addText(Field.CONTENT, content);
 
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
 		doc.addDate("modifiedDate", modifiedDate);
 		doc.addKeyword("version", version);
@@ -112,6 +119,8 @@ public class Indexer
 		doc.addText("pageURL", pageURL);
 		doc.addKeyword("repoGroupId", repoGroupId);
 		doc.addKeyword("repoArtifactId", repoArtifactId);
+
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
 		return doc;
 	}
@@ -128,13 +137,14 @@ public class Indexer
 			long companyId, long groupId, long userId, String userName,
 			long productEntryId, String name, Date modifiedDate, String version,
 			String type, String shortDescription, String longDescription,
-			String pageURL, String repoGroupId, String repoArtifactId)
+			String pageURL, String repoGroupId, String repoArtifactId,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getProductEntryDocument(
 			companyId, groupId, userId, userName, productEntryId, name,
 			modifiedDate, version, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId);
+			pageURL, repoGroupId, repoArtifactId, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

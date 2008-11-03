@@ -71,4 +71,6 @@ public interface WikiPage extends WikiPageModel {
 	public java.lang.String[] getAttachmentsFiles()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
 }

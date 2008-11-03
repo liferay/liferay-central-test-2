@@ -66,6 +66,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Charles May
+ * @author Raymond Augé
  *
  */
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
@@ -313,7 +314,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					try {
 						Indexer.updatePage(
 							companyId, groupId, nodeId, title, content,
-							tagsEntries);
+							tagsEntries, page.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + page.getPrimaryKey(), se);

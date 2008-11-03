@@ -32,6 +32,8 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocalizationUtil;
@@ -96,6 +98,15 @@ public class JournalArticleImpl
 		}
 	}
 
+	public ExpandoBridge getExpandoBridge() {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(
+				JournalArticle.class.getName(), getResourcePrimKey());
+		}
+
+		return _expandoBridge;
+	}
+
 	public boolean isTemplateDriven() {
 		if (Validator.isNull(getStructureId())) {
 			return false;
@@ -132,5 +143,6 @@ public class JournalArticleImpl
 	private String _userUuid;
 	private String _approvedByUserUuid;
 	private String _smallImageType;
+	private ExpandoBridge _expandoBridge;
 
 }

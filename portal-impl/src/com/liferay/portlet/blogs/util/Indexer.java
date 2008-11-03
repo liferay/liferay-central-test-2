@@ -34,6 +34,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import javax.portlet.PortletURL;
 
@@ -43,6 +45,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -51,12 +54,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addEntry(
 			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, String[] tagsEntries)
+			long entryId, String title, String content, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, userId, userName, entryId, title, content,
-			tagsEntries);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -69,7 +73,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getEntryDocument(
 		long companyId, long groupId, long userId, String userName,
-		long entryId, String title, String content, String[] tagsEntries) {
+		long entryId, String title, String content, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 		content = HtmlUtil.extractText(content);
@@ -93,6 +98,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, BlogsEntry.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, entryId);
 
+		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+
 		return doc;
 	}
 
@@ -106,12 +113,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateEntry(
 			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, String[] tagsEntries)
+			long entryId, String title, String content, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, userId, userName, entryId, title, content,
-			tagsEntries);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
