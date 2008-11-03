@@ -278,13 +278,13 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 		boolean reIndex = isReIndex();
 
-		setReIndex(false);
+		setIndexEnabled(false);
 
 		for (Map.Entry<String, Object> entry : attributes.entrySet()) {
 			setAttribute(entry.getKey(), entry.getValue());
 		}
 
-		setReIndex(reIndex);
+		setIndexEnabled(reIndex);
 
 		reIndex();
 	}
@@ -305,7 +305,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		_classPK = classPK;
 	}
 
-	public void setReIndex(boolean reIndex) {
+	public void setIndexEnabled(boolean reIndex) {
 		_reIndex = reIndex;
 	}
 
