@@ -166,8 +166,8 @@ public class ClassUtil {
 		return false;
 	}
 
-	private static String[] _processAnnotation(
-		String s, StreamTokenizer st) throws IOException {
+	private static String[] _processAnnotation(String s, StreamTokenizer st)
+		throws IOException {
 
 		s = s.trim();
 
@@ -184,9 +184,7 @@ public class ClassUtil {
 		}
 		else if (annotationParametersMatcher.matches()) {
 			if (!s.trim().endsWith(")")) {
-				// read till end of annotation is reached
 				while (st.nextToken() != StreamTokenizer.TT_EOF) {
-
 					if (st.ttype == StreamTokenizer.TT_WORD) {
 						s += st.sval;
 						if (s.trim().endsWith(")")) {
@@ -204,6 +202,7 @@ public class ClassUtil {
 					annotationParametersMatcher.group(1);
 				String annotationParameters =
 					annotationParametersMatcher.group(2);
+
 				tokens.add(annotationName.replace("@", ""));
 
 				tokens = _processAnnotationParameters(
@@ -215,9 +214,11 @@ public class ClassUtil {
 	}
 
 	private static List<String> _processAnnotationParameters(
-		String s, List<String> tokens) throws IOException {
+			String s, List<String> tokens)
+		throws IOException {
 
 		StreamTokenizer st = new StreamTokenizer(new StringReader(s));
+
 		_setupParseTable(st);
 
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
@@ -229,8 +230,8 @@ public class ClassUtil {
 					tokens.add(st.sval);
 				}
 			}
-			else if (st.ttype != StreamTokenizer.TT_NUMBER &&
-					 st.ttype != StreamTokenizer.TT_EOL) {
+			else if ((st.ttype != StreamTokenizer.TT_NUMBER) &&
+					 (st.ttype != StreamTokenizer.TT_EOL)) {
 
 				if (Character.isUpperCase((char)st.ttype)) {
 					tokens.add(String.valueOf((char)st.ttype));
