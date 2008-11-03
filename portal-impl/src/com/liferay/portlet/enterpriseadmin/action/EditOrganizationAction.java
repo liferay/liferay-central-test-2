@@ -94,7 +94,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			if (organization != null) {
 				redirect = HttpUtil.setParameter(
-					redirect, "organizationId",
+					redirect, actionResponse.getNamespace() + "organizationId",
 					String.valueOf(organization.getOrganizationId()));
 			}
 
