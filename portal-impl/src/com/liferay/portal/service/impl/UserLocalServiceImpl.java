@@ -2794,12 +2794,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 				int type = expandoBridge.getAttributeType(key);
 
-				if (type == ExpandoColumnConstants.STRING) {
+				if ((type == ExpandoColumnConstants.STRING) &&
+					Validator.isNotNull((String)value)) {
+
 					if (andSearch) {
-						searchQuery.addRequiredTerm(key, (String)value);
+						searchQuery.addRequiredTerm(key, (String)value, true);
 					}
 					else {
-						searchQuery.addTerm(key, (String)value);
+						searchQuery.addTerm(key, (String)value, true);
 					}
 				}
 			}
