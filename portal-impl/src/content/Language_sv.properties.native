@@ -3621,6 +3621,7 @@ x-has-not-configured-his-jira-login={0} har inte konfigurerat sin JIRA-login.
 x-has-not-configured-his-sourceforge-login={0} har inte konfigurerat sin SourceForge-login.
 x-has-x-friends={0} has {1} friends.
 x-hours={0} hours
+x-in-x={0} in {1}
 x-is-a-required-system-role=<b>{0}</b> är en nödvändig systemroll.
 x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} har utgått, är inte godkänd, har inget innehåll, eller existerar inte längre.
 x-is-not-a-display-type={0} är ingen display-typ.
