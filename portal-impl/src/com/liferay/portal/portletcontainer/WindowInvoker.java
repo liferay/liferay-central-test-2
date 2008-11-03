@@ -229,8 +229,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
 					request, _portletModel, currentWindowState,
-					currentPortletMode, plid,
-					isFacesPortlet(), _remotePortlet);
+					currentPortletMode, plid, isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
 				request, response, executeActionRequest, actionRequest);
@@ -238,7 +237,6 @@ public class WindowInvoker extends InvokerPortletImpl {
 			if (!_portletModel.getPublishingEvents().isEmpty()) {
 				executeActionRequest.setPortletNamespaces(
 					_getPortletNamespaces(executeActionRequest));
-
 				executeActionRequest.setPortletWindowIDs(
 					_getPortletWindowIDs(executeActionRequest, plid));
 			}
@@ -325,8 +323,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
 					request, _portletModel, renderRequestImpl.getWindowState(),
-					renderRequestImpl.getPortletMode(), plid,
-					isFacesPortlet(), _remotePortlet);
+					renderRequestImpl.getPortletMode(), plid, isFacesPortlet(),
+					_remotePortlet);
 
 			_populateContainerRequest(
 				request, response, getMarkupRequest, renderRequest);
@@ -409,8 +407,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 				ContainerRequestFactory.createGetResourceRequest(
 					request, _portletModel,
 					resourceRequestImpl.getWindowState(),
-					resourceRequestImpl.getPortletMode(),
-					plid, isFacesPortlet(), _remotePortlet);
+					resourceRequestImpl.getPortletMode(), plid,
+					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
 				request, response, getResourceRequest, resourceRequest);
