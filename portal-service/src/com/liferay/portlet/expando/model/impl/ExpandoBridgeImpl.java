@@ -218,7 +218,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public boolean isReIndex() {
-		return _reIndex;
+		return _indexEnabled;
 	}
 
 	public void setAttribute(String name, Object value) {
@@ -305,12 +305,12 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		_classPK = classPK;
 	}
 
-	public void setIndexEnabled(boolean reIndex) {
-		_reIndex = reIndex;
+	public void setIndexEnabled(boolean indexEnabled) {
+		_indexEnabled = indexEnabled;
 	}
 
 	protected void checkIndex(String name) {
-		if (!_reIndex) {
+		if (!_indexEnabled) {
 			return;
 		}
 
@@ -325,7 +325,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	protected void reIndex() {
-		if (!_reIndex) {
+		if (!_indexEnabled) {
 			return;
 		}
 
@@ -346,6 +346,6 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 	private String _className;
 	private long _classPK;
-	private boolean _reIndex = true;
+	private boolean _indexEnabled = true;
 
 }
