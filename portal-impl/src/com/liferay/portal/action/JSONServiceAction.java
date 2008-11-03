@@ -232,12 +232,6 @@ public class JSONServiceAction extends JSONAction {
 		else if (parameterTypeName.equals(Date.class.getName())) {
 			return new Date(ParamUtil.getLong(request, parameter));
 		}
-		else if (parameterTypeName.equals(String.class.getName())) {
-			return ParamUtil.getString(request, parameter);
-		}
-		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
-			return StringUtil.split(ParamUtil.getString(request, parameter));
-		}
 		else if (parameterTypeName.equals(ServiceContext.class.getName())) {
 			String value = ParamUtil.getString(request, parameter);
 
@@ -245,10 +239,13 @@ public class JSONServiceAction extends JSONAction {
 
 			jsonObject.put("javaClass", ServiceContext.class.getName());
 
-			ServiceContext serviceContext = (ServiceContext)
-				JSONFactoryUtil.deserialize(jsonObject);
-
-			return serviceContext;
+			return (ServiceContext)JSONFactoryUtil.deserialize(jsonObject);
+		}
+		else if (parameterTypeName.equals(String.class.getName())) {
+			return ParamUtil.getString(request, parameter);
+		}
+		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
+			return StringUtil.split(ParamUtil.getString(request, parameter));
 		}
 		else {
 			_log.error(
