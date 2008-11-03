@@ -1381,7 +1381,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		try {
-			UserIndexer.updateUsers(new long[]{userId});
+			UserIndexer.updateUsers(new long[] {userId});
 		}
 		catch (SearchException se) {
 			throw new SystemException(se);
@@ -2795,7 +2795,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				int type = expandoBridge.getAttributeType(key);
 
 				if ((type == ExpandoColumnConstants.STRING) &&
-					Validator.isNotNull((String)value)) {
+					(Validator.isNotNull((String)value))) {
 
 					if (andSearch) {
 						searchQuery.addRequiredTerm(key, (String)value, true);
