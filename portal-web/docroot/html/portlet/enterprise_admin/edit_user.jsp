@@ -166,9 +166,9 @@ String curSection = mainSections[0];
 			request.setAttribute("user.selContact", selContact);
 			request.setAttribute("user.passwordPolicy", passwordPolicy);
 			request.setAttribute("user.groups", groups);
-			request.setAttribute("user.userGroups", userGroups);
 			request.setAttribute("user.organizations", organizations);
 			request.setAttribute("user.roles", roles);
+			request.setAttribute("user.userGroups", userGroups);
 
 			request.setAttribute("addresses.className", Contact.class.getName());
 			request.setAttribute("emailAddresses.className", Contact.class.getName());

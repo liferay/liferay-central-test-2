@@ -254,7 +254,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public List<Role> getRoles(long[] roleIds)
 		throws PortalException, SystemException {
 
-		List<Role> roles = new ArrayList<Role>();
+		List<Role> roles = new ArrayList<Role>(roleIds.length);
 
 		for (long roleId : roleIds) {
 			Role role = getRole(roleId);

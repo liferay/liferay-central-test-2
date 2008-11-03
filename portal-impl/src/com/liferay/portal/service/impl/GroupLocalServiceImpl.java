@@ -415,7 +415,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public List<Group> getGroups(long[] groupIds)
 		throws PortalException, SystemException {
 
-		List<Group> groups = new ArrayList<Group>();
+		List<Group> groups = new ArrayList<Group>(groupIds.length);
 
 		for (long groupId : groupIds) {
 			Group group = getGroup(groupId);

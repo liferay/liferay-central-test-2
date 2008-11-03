@@ -155,7 +155,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public List<UserGroup> getUserGroups(long[] userGroupIds)
 		throws PortalException, SystemException {
 
-		List<UserGroup> userGroups = new ArrayList<UserGroup>();
+		List<UserGroup> userGroups = new ArrayList<UserGroup>(
+			userGroupIds.length);
 
 		for (long userGroupId : userGroupIds) {
 			UserGroup userGroup = getUserGroup(userGroupId);

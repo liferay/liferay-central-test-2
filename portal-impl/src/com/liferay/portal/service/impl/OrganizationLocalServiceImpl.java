@@ -277,7 +277,8 @@ public class OrganizationLocalServiceImpl
 	public List<Organization> getOrganizations(long[] organizationIds)
 		throws PortalException, SystemException {
 
-		List<Organization> organizations = new ArrayList<Organization>();
+		List<Organization> organizations = new ArrayList<Organization>(
+			organizationIds.length);
 
 		for (long organizationId : organizationIds) {
 			Organization organization = getOrganization(organizationId);
