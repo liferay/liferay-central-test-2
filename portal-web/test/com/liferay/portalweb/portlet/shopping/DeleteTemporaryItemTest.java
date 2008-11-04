@@ -39,7 +39,7 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[3]/td[5]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//tr[4]/td[5]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -49,26 +49,11 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[3]/td[5]/ul/li/strong/span");
+		selenium.click("//tr[4]/td[5]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent("The Prodigal Project")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertFalse(selenium.isTextPresent("The Prodigal Project"));
 	}
 }

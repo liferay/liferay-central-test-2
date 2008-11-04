@@ -44,7 +44,7 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[3]/td[7]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//tr[4]/td[7]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -54,8 +54,7 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[3]/td[7]/ul/li/strong/span");
-		Thread.sleep(1000);
+		selenium.click("//tr[4]/td[7]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +62,7 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[2]/nobr/a")) {
+				if (selenium.isElementPresent("//div[2]/ul/li[2]/nobr/a/img")) {
 					break;
 				}
 			}
@@ -73,7 +72,9 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//li[2]/nobr/a");
+		selenium.click("//div[2]/ul/li[2]/nobr/a/img");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -99,6 +100,22 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 
 			try {
 				if (!selenium.isTextPresent("Temporary Coupon")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
 					break;
 				}
 			}

@@ -39,8 +39,7 @@ public class AddItemToCartTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a")) {
+				if (selenium.isElementPresent("//td[1]/a")) {
 					break;
 				}
 			}
@@ -50,9 +49,9 @@ public class AddItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a"));
+		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +59,7 @@ public class AddItemToCartTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Jona Lyons - Wheel")) {
+				if (selenium.isElementPresent("//td[2]/a")) {
 					break;
 				}
 			}
@@ -70,26 +69,10 @@ public class AddItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[2]/td[2]/a"));
+		selenium.click(RuntimeVariables.replace("//td[2]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Sounds like: The middle of a vacation.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Sounds like: The middle of a vacation."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
