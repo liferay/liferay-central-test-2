@@ -203,10 +203,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/c/portal/change_password</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/c/portal/fckeditor</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -220,6 +216,14 @@
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/c/portal/render_portlet</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Auto Login Filter</filter-name>
+		<url-pattern>/c/portal/update_password</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Auto Login Filter</filter-name>
+		<url-pattern>/c/portal/update_reminder_query</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>

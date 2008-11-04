@@ -23,19 +23,19 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -43,12 +43,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ChangePasswordAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpdateReminderQueryAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ChangePasswordAction extends Action {
+public class UpdateReminderQueryAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -57,54 +57,50 @@ public class ChangePasswordAction extends Action {
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		if (cmd.equals("password")) {
-			try {
-				updatePassword(request, response);
-
-				return mapping.findForward(ActionConstants.COMMON_REFERER);
-			}
-			catch (Exception e) {
-				if (e instanceof UserPasswordException) {
-					UserPasswordException upe = (UserPasswordException)e;
-
-					SessionErrors.add(request, e.getClass().getName(), upe);
-
-					return mapping.findForward("portal.change_password");
-				}
-				else if (e instanceof NoSuchUserException ||
-						 e instanceof PrincipalException) {
-
-					SessionErrors.add(request, e.getClass().getName());
-
-					return mapping.findForward("portal.error");
-				}
-				else {
-					PortalUtil.sendError(e, request, response);
-
-					return null;
-				}
-			}
+		if (Validator.isNull(cmd)) {
+			return mapping.findForward("portal.update_reminder_query");
 		}
-		else {
-			return mapping.findForward("portal.change_password");
+
+		try {
+			updateReminderQuery(request, response);
+
+			return mapping.findForward(ActionConstants.COMMON_REFERER);
+		}
+		catch (Exception e) {
+			if (e instanceof UserReminderQueryException) {
+				SessionErrors.add(request, e.getClass().getName());
+
+				return mapping.findForward("portal.update_reminder_query");
+			}
+			else if (e instanceof NoSuchUserException ||
+					 e instanceof PrincipalException) {
+
+				SessionErrors.add(request, e.getClass().getName());
+
+				return mapping.findForward("portal.error");
+			}
+			else {
+				PortalUtil.sendError(e, request, response);
+
+				return null;
+			}
 		}
 	}
 
-	protected void updatePassword(
+	protected void updateReminderQuery(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		HttpSession session = request.getSession();
-
 		long userId = PortalUtil.getUserId(request);
-		String password1 = ParamUtil.getString(request, "password1");
-		String password2 = ParamUtil.getString(request, "password2");
-		boolean passwordReset = ParamUtil.getBoolean(request, "passwordReset");
+		String question = ParamUtil.getString(request, "reminderQueryQuestion");
+		String answer = ParamUtil.getString(request, "reminderQueryAnswer");
 
-		UserServiceUtil.updatePassword(
-			userId, password1, password2, passwordReset);
+		if (question.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
+			question = ParamUtil.getString(
+				request, "reminderQueryCustomQuestion");
+		}
 
-		session.setAttribute(WebKeys.USER_PASSWORD, password1);
+		UserServiceUtil.updateReminderQuery(userId, question, answer);
 	}
 
 }

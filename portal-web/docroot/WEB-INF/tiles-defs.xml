@@ -18,11 +18,6 @@
 		<put name="selectable" value="false" />
 	</definition>
 
-	<definition name="portal.change_password" extends="portal">
-		<put name="title" value="change-password" />
-		<put name="content" value="/portal/change_password.jsp" />
-	</definition>
-
 	<definition name="portal.error" extends="portal">
 		<put name="title" value="error" />
 		<put name="content" value="/portal/error.jsp" />
@@ -68,6 +63,16 @@
 	<definition name="portal.test" extends="portal">
 		<put name="title" value="test" />
 		<put name="content" value="/portal/test.jsp" />
+	</definition>
+
+	<definition name="portal.update_password" extends="portal">
+		<put name="title" value="new-password" />
+		<put name="content" value="/portal/update_password.jsp" />
+	</definition>
+
+	<definition name="portal.update_reminder_query" extends="portal">
+		<put name="title" value="password-reminder" />
+		<put name="content" value="/portal/update_reminder_query.jsp" />
 	</definition>
 
 	<definition name="portal.upload_progress_poller" path="/portal/upload_progress_poller.jsp" />

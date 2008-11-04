@@ -646,9 +646,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_LOGOUT;
 		}
 
-		// Authenticated users must agree to Terms of Use
+		// Authenticated users should agree to Terms of Use
 
-		if ((user != null) && (!user.isAgreedToTermsOfUse())) {
+		if ((user != null) && !user.isAgreedToTermsOfUse()) {
 			if (PropsValues.TERMS_OF_USE_REQUIRED) {
 				return _PATH_PORTAL_TERMS_OF_USE;
 			}
@@ -656,7 +656,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users must be active
 
-		if ((user != null) && (!user.isActive())) {
+		if ((user != null) && !user.isActive()) {
 			SessionErrors.add(request, UserActiveException.class.getName());
 
 			return _PATH_PORTAL_ERROR;
@@ -664,8 +664,19 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users must have a current password
 
-		if ((user != null) && (user.isPasswordReset())) {
-			return _PATH_PORTAL_CHANGE_PASSWORD;
+		if ((user != null) && user.isPasswordReset()) {
+			return _PATH_PORTAL_UPDATE_PASSWORD;
+		}
+
+		// Authenticated users should have a reminder query
+
+		if ((user != null) &&
+			(Validator.isNull(user.getReminderQueryQuestion()) ||
+			 Validator.isNull(user.getReminderQueryAnswer()))) {
+
+			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+				return _PATH_PORTAL_UPDATE_REMINDER_QUERY;
+			}
 		}
 
 		// Authenticated users must have at least one personalized page
@@ -864,9 +875,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static String _PATH_PORTAL = "/portal";
 
-	private static String _PATH_PORTAL_CHANGE_PASSWORD =
-		"/portal/change_password";
-
 	private static String _PATH_PORTAL_CSS = "/portal/css";
 
 	private static String _PATH_PORTAL_CSS_CACHED = "/portal/css_cached";
@@ -904,6 +912,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_TCK = "/portal/tck";
 
 	private static String _PATH_PORTAL_TERMS_OF_USE = "/portal/terms_of_use";
+
+	private static String _PATH_PORTAL_UPDATE_PASSWORD =
+		"/portal/update_password";
+
+	private static String _PATH_PORTAL_UPDATE_REMINDER_QUERY =
+		"/portal/update_reminder_query";
 
 	private static String _PATH_PORTAL_UPDATE_TERMS_OF_USE =
 		"/portal/update_terms_of_use";

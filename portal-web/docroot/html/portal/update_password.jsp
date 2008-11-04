@@ -28,14 +28,13 @@
 PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 %>
 
-<form action="<%= themeDisplay.getPathMain() %>/portal/change_password" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
+<form action="<%= themeDisplay.getPathMain() %>/portal/update_password" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
 <input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
-<input name="<%= Constants.CMD %>" type="hidden" value="password" />
+<input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
-<input name="passwordReset" type="hidden" value="false" />
 
-<span class="portlet-msg-error">
-	<liferay-ui:message key="please-change-your-password" />
+<span class="portlet-msg-info">
+	<liferay-ui:message key="please-set-a-new-password" />
 </span>
 
 <c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
@@ -79,24 +78,21 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	</span>
 </c:if>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="password" />
-	</td>
-	<td>
+<fieldset class="block-labels">
+	<legend><liferay-ui:message key="new-password" /></legend>
+
+	<div class="ctrl-holder">
+		<label for="password1"><liferay-ui:message key="password" /></label>
+
 		<input name="password1" size="30" type="password" value="" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="enter-again" />
-	</td>
-	<td>
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="password2"><liferay-ui:message key="enter-again" /></label>
+
 		<input name="password2" size="30" type="password" value="" />
-	</td>
-</tr>
-</table>
+	</div>
+</fieldset>
 
 <br />
 
