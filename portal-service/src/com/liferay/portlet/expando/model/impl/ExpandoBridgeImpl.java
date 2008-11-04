@@ -218,7 +218,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public boolean isIndexEnabled() {
-		return _indexEnabled;
+		return _indexEnabled && (_classPK > 0);
 	}
 
 	public void setAttribute(String name, Object value) {
@@ -263,8 +263,6 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 			ExpandoColumnServiceUtil.updateTypeSettings(
 				column.getColumnId(), properties.toString());
-
-			checkIndex(name);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -310,7 +308,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	protected void checkIndex(String name) {
-		if (!_indexEnabled) {
+		if (!isIndexEnabled()) {
 			return;
 		}
 
@@ -325,7 +323,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	protected void reIndex() {
-		if (!_indexEnabled) {
+		if (!isIndexEnabled()) {
 			return;
 		}
 
