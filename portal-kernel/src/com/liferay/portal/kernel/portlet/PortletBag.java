@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.portlet;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 
 import java.util.Locale;
@@ -54,6 +55,8 @@ public interface PortletBag {
 	public ConfigurationAction getConfigurationActionInstance();
 
 	public Indexer getIndexerInstance();
+
+	public OpenSearch getOpenSearchInstance();
 
 	public Scheduler getSchedulerInstance();
 

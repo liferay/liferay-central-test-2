@@ -60,7 +60,7 @@ while (itr.hasNext()) {
 		itr.remove();
 	}
 	else {
-		OpenSearch openSearch = (OpenSearch)InstancePool.get(portlet.getOpenSearchClass());
+		OpenSearch openSearch = portlet.getOpenSearchInstance();
 
 		if (!openSearch.isEnabled()) {
 			itr.remove();
@@ -96,7 +96,7 @@ if (Validator.isNotNull(primarySearch)) {
 for (int i = 0; i < portlets.size(); i++) {
 	Portlet portlet = (Portlet)portlets.get(i);
 
-	OpenSearch openSearch = (OpenSearch)InstancePool.get(portlet.getOpenSearchClass());
+	OpenSearch openSearch = portlet.getOpenSearchInstance();
 
 	PortletURL portletURL = renderResponse.createRenderURL();
 

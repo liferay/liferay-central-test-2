@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -542,6 +543,25 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setOpenSearchClass(String openSearchClass) {
 		_openSearchClass = openSearchClass;
+	}
+
+	/**
+	 * Gets the indexer instance of the portlet.
+	 *
+	 * @return		the indexer instance of the portlet
+	 */
+	public OpenSearch getOpenSearchInstance() {
+		if (Validator.isNull(getOpenSearchClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getOpenSearchInstance();
+		}
+
+		return (OpenSearch)InstancePool.get(getOpenSearchClass());
 	}
 
 	/**

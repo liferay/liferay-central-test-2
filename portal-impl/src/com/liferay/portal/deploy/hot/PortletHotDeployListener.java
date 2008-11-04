@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -403,6 +404,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		OpenSearch openSearchInstance = null;
+
+		if (Validator.isNotNull(portlet.getOpenSearchClass())) {
+			openSearchInstance = (OpenSearch)portletClassLoader.loadClass(
+				portlet.getOpenSearchClass()).newInstance();
+		}
+
 		Scheduler schedulerInstance = null;
 
 		if (PropsValues.SCHEDULER_ENABLED &&
@@ -537,8 +545,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), servletContext, portletInstance,
-			configurationActionInstance, indexerInstance, schedulerInstance,
-			friendlyURLMapperInstance, urlEncoderInstance,
+			configurationActionInstance, indexerInstance, openSearchInstance,
+			schedulerInstance, friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			popMessageListenerInstance, socialActivityInterpreterInstance,
 			socialRequestInterpreterInstance, controlPanelEntryInstance,

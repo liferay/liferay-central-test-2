@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.lar.PortletDataHandler;
@@ -56,7 +57,8 @@ public class PortletBagImpl implements PortletBag {
 		String portletName, ServletContext	servletContext,
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,
-		Indexer indexerInstance, Scheduler schedulerInstance,
+		Indexer indexerInstance, OpenSearch openSearchInstance,
+		Scheduler schedulerInstance,
 		FriendlyURLMapper friendlyURLMapperInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
@@ -73,6 +75,7 @@ public class PortletBagImpl implements PortletBag {
 		_portletInstance = portletInstance;
 		_configurationActionInstance = configurationActionInstance;
 		_indexerInstance = indexerInstance;
+		_openSearchInstance = openSearchInstance;
 		_schedulerInstance = schedulerInstance;
 		_friendlyURLMapperInstance = friendlyURLMapperInstance;
 		_urlEncoderInstance = urlEncoderInstance;
@@ -108,6 +111,10 @@ public class PortletBagImpl implements PortletBag {
 
 	public Indexer getIndexerInstance() {
 		return _indexerInstance;
+	}
+
+	public OpenSearch getOpenSearchInstance() {
+		return _openSearchInstance;
 	}
 
 	public Scheduler getSchedulerInstance() {
@@ -171,6 +178,7 @@ public class PortletBagImpl implements PortletBag {
 	private Portlet _portletInstance;
 	private ConfigurationAction _configurationActionInstance;
 	private Indexer _indexerInstance;
+	private OpenSearch _openSearchInstance;
 	private Scheduler _schedulerInstance;
 	private FriendlyURLMapper _friendlyURLMapperInstance;
 	private URLEncoder _urlEncoderInstance;
