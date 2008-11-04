@@ -35,6 +35,23 @@ public class OldEntriesTest extends BaseTestCase {
 	public void testOldEntries() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Entries"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@alt='Hide']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//img[@alt='Hide']");
 		selenium.click(RuntimeVariables.replace("link=Old Entries"));
 		selenium.waitForPageToLoad("30000");

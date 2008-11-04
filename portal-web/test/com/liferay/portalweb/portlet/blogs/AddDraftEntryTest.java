@@ -167,7 +167,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Pacific Daylight Time")) {
+				if (selenium.isTextPresent("Pacific Standard Time")) {
 					break;
 				}
 			}
@@ -177,23 +177,8 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Draft Test")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=Draft Test"));
 	}
 }
