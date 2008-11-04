@@ -234,6 +234,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		_strutsBridges = false;
 
+		_portletAppInitialized = false;
+
 		Iterator<Portlet> portletsItr = portlets.iterator();
 
 		while (portletsItr.hasNext()) {
@@ -554,8 +556,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 
-		if (!portletsItr.hasNext()) {
+		if (!_portletAppInitialized) {
 			initPortletApp(portlet, servletContext, portletClassLoader);
+			_portletAppInitialized = true;
 		}
 
 		try {
@@ -704,6 +707,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
 		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
 
+	private boolean _portletAppInitialized;
 	private boolean _strutsBridges;
 
 }
