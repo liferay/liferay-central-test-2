@@ -268,11 +268,15 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 						</td>
 					</tr>
 					<tr>
+								<%
+								String inPassword = BeanParamUtil.getString(mailingList, request, "inPassword", "");
+								%>
+
 						<td class="lfr-label">
 							<liferay-ui:message key="password" />
 						</td>
 						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inPassword" />
+							<input id="<portlet:namespace />inPassword" name="<portlet:namespace />inPassword" style="width: 350px;" type="password" value="<%= inPassword %>" onKeyPress="Liferay.Util.checkMaxLength(this, 75);"/>
 						</td>
 					</tr>
 					<tr>
