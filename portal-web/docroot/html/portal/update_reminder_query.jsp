@@ -93,7 +93,7 @@
 			}
 
 			reminderQueryQuestion.change(
-				function(event){
+				function(event) {
 					if (this.value == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
 						<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
 							customQuestionDiv.show();
