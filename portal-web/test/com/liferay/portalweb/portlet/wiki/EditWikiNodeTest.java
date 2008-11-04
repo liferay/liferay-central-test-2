@@ -55,7 +55,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[3]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -65,7 +65,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a/img"));
 		selenium.waitForPageToLoad("30000");
 
@@ -109,20 +109,6 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Second Edited Wiki Test")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=Second Edited Wiki Test"));
 	}
 }
