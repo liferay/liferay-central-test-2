@@ -791,7 +791,8 @@ public class PortalLDAPUtil {
 
 			user = UserLocalServiceUtil.updateUser(
 				user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
-				user.isPasswordReset(), screenName, emailAddress, openId,
+				user.isPasswordReset(), user.getReminderQueryQuestion(),
+				user.getReminderQueryAnswer(), screenName, emailAddress, openId,
 				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
 				user.getComments(), firstName, middleName, lastName,
 				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),

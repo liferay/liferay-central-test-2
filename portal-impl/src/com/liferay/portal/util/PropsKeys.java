@@ -1115,6 +1115,12 @@ public interface PropsKeys {
 
 	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
 
+	public static final String USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = "users.reminder.queries.custom.question.enabled";
+
+	public static final String USERS_REMINDER_QUERIES_ENABLED = "users.reminder.queries.enabled";
+
+	public static final String USERS_REMINDER_QUERIES_QUESTIONS = "users.reminder.queries.questions";
+
 	public static final String USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE = "users.screen.name.always.autogenerate";
 
 	public static final String USERS_SCREEN_NAME_GENERATOR = "users.screen.name.generator";

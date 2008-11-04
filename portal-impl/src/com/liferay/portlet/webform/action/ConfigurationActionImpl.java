@@ -48,7 +48,7 @@ import javax.portlet.RenderResponse;
  *
  * @author Jorge Ferrer
  * @author Alberto Montero
- * @author Julio Camarero Puras
+ * @author Julio Camarero
  *
  */
 public class ConfigurationActionImpl implements ConfigurationAction {

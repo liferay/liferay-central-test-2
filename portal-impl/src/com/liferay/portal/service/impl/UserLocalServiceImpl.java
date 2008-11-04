@@ -40,6 +40,7 @@ import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
@@ -140,6 +141,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Scott Lee
  * @author Raymond Augé
  * @author Jorge Ferrer
+ * @author Julio Camarero
  *
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
@@ -2049,6 +2051,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		imageLocalService.updateImage(portraitId, bytes);
 	}
 
+	public void updateReminderQuery(long userId, String question, String answer)
+		throws PortalException, SystemException {
+
+		validateReminderQuery(question, answer) ;
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setReminderQueryQuestion(question);
+		user.setReminderQueryAnswer(answer);
+
+		userPersistence.update(user, false);
+	}
+
 	public void updateScreenName(long userId, String screenName)
 		throws PortalException, SystemException {
 
@@ -2076,16 +2091,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public User updateUser(
 			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String openId, String languageId,
-			String timeZoneId, String greeting, String comments,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String facebookSn,
-			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] groupIds, long[] organizationIds, long[] roleIds,
-			long[] userGroupIds, ServiceContext serviceContext)
+			String newPassword2, boolean passwordReset,
+			String reminderQueryQuestion, String reminderQueryAnswer,
+			String screenName, String emailAddress, String openId,
+			String languageId, String timeZoneId, String greeting,
+			String comments, String firstName, String middleName,
+			String lastName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear, String smsSn,
+			String aimSn, String facebookSn, String icqSn, String jabberSn,
+			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
+			String ymSn, String jobTitle, long[] groupIds,
+			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -2126,6 +2143,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		user.setPasswordReset(passwordReset);
+
+		if (Validator.isNotNull(reminderQueryQuestion) &&
+			Validator.isNotNull(reminderQueryAnswer)) {
+
+			user.setReminderQueryQuestion(reminderQueryQuestion);
+			user.setReminderQueryAnswer(reminderQueryAnswer);
+		}
+
 		user.setScreenName(screenName);
 
 		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
@@ -3011,6 +3036,22 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		PwdToolkitUtil.validate(
 			companyId, userId, password1, password2, passwordPolicy);
+	}
+
+	protected void validateReminderQuery(String question, String answer)
+		throws PortalException {
+
+		if (!PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+			return;
+		}
+
+		if (Validator.isNull(question)) {
+			throw new UserReminderQueryException("Question cannot be null");
+		}
+
+		if (Validator.isNull(answer)) {
+			throw new UserReminderQueryException("Answer cannot be null");
+		}
 	}
 
 	protected void validateScreenName(

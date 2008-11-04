@@ -1091,6 +1091,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateOpenId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateOpenId";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateOrganizations: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateOrganizations";
@@ -1112,16 +1119,16 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	updateScreenName: function(params, callback) {
+	updateReminderQuery: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateScreenName";
+		params.serviceMethodName = "updateReminderQuery";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	updateOpenId: function(params, callback) {
+	updateScreenName: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOpenId";
+		params.serviceMethodName = "updateScreenName";
 
 		return Liferay.Service.ajax(params, callback);
 	},

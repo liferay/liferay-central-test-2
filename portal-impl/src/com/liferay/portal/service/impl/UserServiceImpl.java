@@ -61,6 +61,7 @@ import java.util.Locale;
  * @author Brian Myunghun Kim
  * @author Scott Lee
  * @author Jorge Ferrer
+ * @author Julio Camarero
  *
  */
 public class UserServiceImpl extends UserServiceBaseImpl {
@@ -445,6 +446,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.updateLockoutById(userId, lockout);
 	}
 
+	public void updateOpenId(long userId, String openId)
+		throws PortalException, SystemException {
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
+
+		userLocalService.updateOpenId(userId, openId);
+	}
+
 	public void updateOrganizations(long userId, long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -475,6 +485,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.updatePortrait(userId, bytes);
 	}
 
+	public void updateReminderQuery(
+			long userId, String question, String answer)
+		throws PortalException, SystemException {
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
+
+		userLocalService.updateReminderQuery(userId, question, answer);
+	}
+
 	public void updateScreenName(long userId, String screenName)
 		throws PortalException, SystemException {
 
@@ -484,27 +504,20 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.updateScreenName(userId, screenName);
 	}
 
-	public void updateOpenId(long userId, String openId)
-		throws PortalException, SystemException {
-
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.UPDATE);
-
-		userLocalService.updateOpenId(userId, openId);
-	}
-
 	public User updateUser(
 			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String openId, String languageId,
-			String timeZoneId, String greeting, String comments,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String facebookSn,
-			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] groupIds, long[] organizationIds, long[] roleIds,
-			long[] userGroupIds, ServiceContext serviceContext)
+			String newPassword2, boolean passwordReset,
+			String reminderQueryQuestion, String reminderQueryAnswer,
+			String screenName, String emailAddress, String openId,
+			String languageId, String timeZoneId, String greeting,
+			String comments, String firstName, String middleName,
+			String lastName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear, String smsSn,
+			String aimSn, String facebookSn, String icqSn, String jabberSn,
+			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
+			String ymSn, String jobTitle, long[] groupIds,
+			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -537,8 +550,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		return userLocalService.updateUser(
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, openId, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			reminderQueryQuestion, reminderQueryAnswer, screenName,
+			emailAddress, openId, languageId, timeZoneId, greeting, comments,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
@@ -547,26 +561,28 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 	public User updateUser(
 			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset, String screenName,
-			String emailAddress, String openId, String languageId,
-			String timeZoneId, String greeting, String comments,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String facebookSn,
-			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String twitterSn, String ymSn, String jobTitle,
-			long[] groupIds, long[] organizationIds, long[] roleIds,
-			long[] userGroupIds, List<Address> addresses,
-			List<EmailAddress> emailAddresses, List<Phone> phones,
-			List<Website> websites,
+			String newPassword2, boolean passwordReset,
+			String reminderQueryQuestion, String reminderQueryAnswer,
+			String screenName, String emailAddress, String openId,
+			String languageId, String timeZoneId, String greeting,
+			String comments, String firstName, String middleName,
+			String lastName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear, String smsSn,
+			String aimSn, String facebookSn, String icqSn, String jabberSn,
+			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
+			String ymSn, String jobTitle, long[] groupIds,
+			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<Phone> phones, List<Website> websites,
 			List<AnnouncementsDelivery> announcementsDelivers,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = updateUser(
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			screenName, emailAddress, openId, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			reminderQueryQuestion, reminderQueryAnswer, screenName,
+			emailAddress, openId, languageId, timeZoneId, greeting, comments,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,

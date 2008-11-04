@@ -58,6 +58,9 @@ create table TagsVocabulary (
 	folksonomy BOOLEAN
 );
 
+alter table User_ add reminderQueryQuestion STRING null;
+alter table User_ add reminderQueryAnswer STRING null;
+
 create table WSRPConfiguredProducer (
 	configuredProducerId LONG not null primary key,
 	name VARCHAR(75) null,

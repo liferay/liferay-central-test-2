@@ -32,8 +32,12 @@ import java.io.Serializable;
  */
 public class PortletPreferencesIds implements Serializable {
 
-	public PortletPreferencesIds(long companyId, long ownerId, int ownerType,
-								 long plid, String portletId) {
+	public PortletPreferencesIds() {
+	}
+
+	public PortletPreferencesIds(
+		long companyId, long ownerId, int ownerType, long plid,
+		String portletId) {
 
 		_companyId = companyId;
 		_ownerId = ownerId;

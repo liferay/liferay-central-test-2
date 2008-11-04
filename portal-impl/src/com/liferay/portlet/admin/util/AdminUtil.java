@@ -99,7 +99,8 @@ public class AdminUtil {
 
 		return UserServiceUtil.updateUser(
 			userId, password, StringPool.BLANK, StringPool.BLANK,
-			user.isPasswordReset(), screenName, emailAddress, openId,
+			user.isPasswordReset(), user.getReminderQueryQuestion(),
+			user.getReminderQueryAnswer(), screenName, emailAddress, openId,
 			languageId, timeZoneId, greeting, comments, contact.getFirstName(),
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),

@@ -28,7 +28,6 @@ import com.liferay.portal.model.PortletPreferencesIds;
 import java.io.Serializable;
 
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -77,26 +76,6 @@ public class ServiceContext implements Serializable {
 
 	public String getLayoutURL() {
 		return _layoutURL;
-	}
-
-	public Locale getLocale() {
-		if (_locale != null) {
-			return _locale;
-		}
-
-		Locale locale = Locale.getDefault();
-
-		if ((_languageId != null) &&
-			(_languageId.indexOf(StringPool.UNDERLINE) != -1)) {
-
-			String parts[] = _languageId.split(StringPool.UNDERLINE);
-
-			locale = new Locale(parts[0], parts[1]);
-		}
-
-		_locale = locale;
-
-		return _locale;
 	}
 
 	public String getPathMain() {
@@ -218,7 +197,6 @@ public class ServiceContext implements Serializable {
 	private String[] _guestPermissions;
 	private String _languageId;
 	private String _layoutURL;
-	private Locale _locale;
 	private String _pathMain;
 	private String _portalURL;
 	private PortletPreferencesIds _portletPreferencesIds;

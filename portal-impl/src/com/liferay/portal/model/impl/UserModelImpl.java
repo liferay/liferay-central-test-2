@@ -97,6 +97,12 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "passwordModifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
+			{ "reminderQueryQuestion", new Integer(Types.VARCHAR) },
+			
+
+			{ "reminderQueryAnswer", new Integer(Types.VARCHAR) },
+			
+
 			{ "graceLoginCount", new Integer(Types.INTEGER) },
 			
 
@@ -153,7 +159,7 @@ public class UserModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -176,6 +182,8 @@ public class UserModelImpl extends BaseModelImpl {
 		model.setPasswordEncrypted(soapModel.getPasswordEncrypted());
 		model.setPasswordReset(soapModel.getPasswordReset());
 		model.setPasswordModifiedDate(soapModel.getPasswordModifiedDate());
+		model.setReminderQueryQuestion(soapModel.getReminderQueryQuestion());
+		model.setReminderQueryAnswer(soapModel.getReminderQueryAnswer());
 		model.setGraceLoginCount(soapModel.getGraceLoginCount());
 		model.setScreenName(soapModel.getScreenName());
 		model.setEmailAddress(soapModel.getEmailAddress());
@@ -370,6 +378,37 @@ public class UserModelImpl extends BaseModelImpl {
 				(_passwordModifiedDate != null) &&
 				!passwordModifiedDate.equals(_passwordModifiedDate))) {
 			_passwordModifiedDate = passwordModifiedDate;
+		}
+	}
+
+	public String getReminderQueryQuestion() {
+		return GetterUtil.getString(_reminderQueryQuestion);
+	}
+
+	public void setReminderQueryQuestion(String reminderQueryQuestion) {
+		if (((reminderQueryQuestion == null) &&
+				(_reminderQueryQuestion != null)) ||
+				((reminderQueryQuestion != null) &&
+				(_reminderQueryQuestion == null)) ||
+				((reminderQueryQuestion != null) &&
+				(_reminderQueryQuestion != null) &&
+				!reminderQueryQuestion.equals(_reminderQueryQuestion))) {
+			_reminderQueryQuestion = reminderQueryQuestion;
+		}
+	}
+
+	public String getReminderQueryAnswer() {
+		return GetterUtil.getString(_reminderQueryAnswer);
+	}
+
+	public void setReminderQueryAnswer(String reminderQueryAnswer) {
+		if (((reminderQueryAnswer == null) && (_reminderQueryAnswer != null)) ||
+				((reminderQueryAnswer != null) &&
+				(_reminderQueryAnswer == null)) ||
+				((reminderQueryAnswer != null) &&
+				(_reminderQueryAnswer != null) &&
+				!reminderQueryAnswer.equals(_reminderQueryAnswer))) {
+			_reminderQueryAnswer = reminderQueryAnswer;
 		}
 	}
 
@@ -637,6 +676,10 @@ public class UserModelImpl extends BaseModelImpl {
 			model.setPasswordEncrypted(getPasswordEncrypted());
 			model.setPasswordReset(getPasswordReset());
 			model.setPasswordModifiedDate(getPasswordModifiedDate());
+			model.setReminderQueryQuestion(HtmlUtil.escape(
+					getReminderQueryQuestion()));
+			model.setReminderQueryAnswer(HtmlUtil.escape(
+					getReminderQueryAnswer()));
 			model.setGraceLoginCount(getGraceLoginCount());
 			model.setScreenName(HtmlUtil.escape(getScreenName()));
 			model.setEmailAddress(HtmlUtil.escape(getEmailAddress()));
@@ -687,6 +730,8 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setPasswordEncrypted(getPasswordEncrypted());
 		clone.setPasswordReset(getPasswordReset());
 		clone.setPasswordModifiedDate(getPasswordModifiedDate());
+		clone.setReminderQueryQuestion(getReminderQueryQuestion());
+		clone.setReminderQueryAnswer(getReminderQueryAnswer());
 		clone.setGraceLoginCount(getGraceLoginCount());
 		clone.setScreenName(getScreenName());
 		clone.setEmailAddress(getEmailAddress());
@@ -769,6 +814,8 @@ public class UserModelImpl extends BaseModelImpl {
 	private boolean _passwordEncrypted;
 	private boolean _passwordReset;
 	private Date _passwordModifiedDate;
+	private String _reminderQueryQuestion;
+	private String _reminderQueryAnswer;
 	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;

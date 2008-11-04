@@ -57,7 +57,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Daniel Weisser
  * @author Jorge Ferrer
  * @author Alberto Montero
- * @author Julio Camarero Puras
+ * @author Julio Camarero
  *
  */
 public class WebFormUtil {

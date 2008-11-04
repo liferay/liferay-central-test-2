@@ -46,7 +46,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Julio Camarero Puras
+ * @author Julio Camarero
  *
  */
 public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {

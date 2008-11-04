@@ -84,10 +84,12 @@ import javax.portlet.ActionRequest;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Julio Camarero Puras
+ * @author Julio Camarero
  *
  */
 public class EnterpriseAdminUtil {
+
+	public static final String CUSTOM_QUESTION = "write-my-own-question";
 
 	public static void filterGroups(
 			PermissionChecker permissionChecker, List<Group> groups)
@@ -161,8 +163,7 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static void filterUserGroups(
-			PermissionChecker permissionChecker, List<UserGroup> userGroups)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, List<UserGroup> userGroups) {
 
 		if (permissionChecker.isCompanyAdmin()) {
 			return;
