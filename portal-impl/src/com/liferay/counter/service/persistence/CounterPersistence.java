@@ -31,12 +31,16 @@ import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -324,13 +328,35 @@ public class CounterPersistence extends BasePersistenceImpl {
 	}
 
 	protected Connection getConnection() throws Exception {
-		if ((_connection == null) || _connection.isClosed()) {
+		if ((_connection == null) || _connection.isClosed() ||
+			!isValidConnection()) {
+
 			_connection = getDataSource().getConnection();
 
 			_connection.setAutoCommit(true);
 		}
 
 		return _connection;
+	}
+
+	protected boolean isValidConnection() {
+		try {
+			PreparedStatement preparedStatement = _connection.prepareStatement(
+				_COUNT_COUNTER);
+
+			preparedStatement.execute();
+		}
+		catch (SQLException e) {
+			DataAccess.cleanUp(_connection);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
@@ -341,6 +367,11 @@ public class CounterPersistence extends BasePersistenceImpl {
 		PropsUtil.get(PropsKeys.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
 
 	private static final String _NAME = Counter.class.getName();
+
+	private static final String _COUNT_COUNTER = "SELECT COUNT(*) FROM Counter";
+
+	private static final Log _log =
+		LogFactoryUtil.getLog(CounterPersistence.class);
 
 	private static Map<String, CounterRegister> _registerLookup =
 		new HashMap<String, CounterRegister>();
