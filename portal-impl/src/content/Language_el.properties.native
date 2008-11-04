@@ -2749,6 +2749,7 @@ release-date=Ημερομηνία απελευθέρωσης
 remember-me=Θυμήσου με
 remind-me=Υπενθυμίσέ μου
 reminder-query-and-answer-cannot-be-empty=Η ερώτηση και η απάντηση υπενθυμίσεων δεν μπορούν να είναι κενές.
+reminder=Υπενθύμιση
 reminders=Υπενθυμίσεις
 remote-group-id=Μακρινή ταυτότητα ομάδας
 remote-group-with-id-x-does-not-exist=Remote group with ID {0} does not exist.

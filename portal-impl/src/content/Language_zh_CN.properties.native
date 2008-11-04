@@ -2749,6 +2749,7 @@ release-date=发行日期
 remember-me=记住
 remind-me=提醒我
 reminder-query-and-answer-cannot-be-empty=提示询问和答复不可能是空的。
+reminder=提示
 reminders=提示
 remote-group-id=遥远的组标识
 remote-group-with-id-x-does-not-exist=Remote group with ID {0} does not exist.

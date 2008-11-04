@@ -2749,6 +2749,7 @@ release-date=보도 시한
 remember-me=나에게를 생각하십시요
 remind-me=나에게를 남으십시요
 reminder-query-and-answer-cannot-be-empty=신호 질문과 응답은 빌 수 없다.
+reminder=신호
 reminders=신호
 remote-group-id=먼 그룹 ID
 remote-group-with-id-x-does-not-exist=Remote group with ID {0} does not exist.

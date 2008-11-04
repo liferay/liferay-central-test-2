@@ -2749,6 +2749,7 @@ release-date=Libérer la date
 remember-me=Auto-connexion?
 remind-me=Se souvenir de moi
 reminder-query-and-answer-cannot-be-empty=La question et la réponse de rappel ne peuvent pas être vides.
+reminder=Rappel
 reminders=Rappels
 remote-group-id=Identification du groupe à distance
 remote-group-with-id-x-does-not-exist=Remote group with ID {0} does not exist.

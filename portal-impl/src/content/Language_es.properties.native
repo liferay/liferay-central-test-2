@@ -2749,6 +2749,7 @@ release-date=Fecha de lanzamiento
 remember-me=Recuérdame
 remind-me=Envíame un recordatorio
 reminder-query-and-answer-cannot-be-empty=La pregunta y la respuesta del recordatorio no pueden ser vacías.
+reminder=Recordatorio
 reminders=Recordatorios
 remote-group-id=Identificador del grupo remoto
 remote-group-with-id-x-does-not-exist=No existe un grupo en el portal indicado con identificador {0}.

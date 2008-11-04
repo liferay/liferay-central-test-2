@@ -2749,6 +2749,7 @@ release-date=Liberi La Data
 remember-me=Ricordami
 remind-me=Ricordami
 reminder-query-and-answer-cannot-be-empty=La domanda e la risposta di ricordo non possono essere vuote.
+reminder=Ricordo
 reminders=Promemoria
 remote-group-id=Identificazione del gruppo a distanza
 remote-group-with-id-x-does-not-exist=Remote group with ID {0} does not exist.

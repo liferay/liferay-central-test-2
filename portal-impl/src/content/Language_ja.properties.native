@@ -2749,6 +2749,7 @@ release-date=公開日
 remember-me=ログイン状態を保存する
 remind-me=私に思い出させなさい
 reminder-query-and-answer-cannot-be-empty=メモの問い合わせおよび答えは空である場合もない。
+reminder=メモ
 reminders=通知
 remote-group-id=遠隔グループID
 remote-group-with-id-x-does-not-exist=Remote group with ID {0} does not exist.
