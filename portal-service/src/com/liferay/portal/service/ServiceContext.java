@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletPreferencesIds;
 
 import java.io.Serializable;
