@@ -32,14 +32,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface OpenSearch {
 
-	public Boolean isEnabled();
+	public boolean isEnabled();
 
 	public String search(HttpServletRequest request, String url)
 		throws SearchException;
 
 	public String search(
-			HttpServletRequest request, String keywords, Integer startPage,
-			Integer itemsPerPage)
+			HttpServletRequest request, String keywords, int startPage,
+			int itemsPerPage)
 		throws SearchException;
 
 }

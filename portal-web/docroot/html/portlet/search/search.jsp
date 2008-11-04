@@ -23,7 +23,6 @@
 %>
 
 <%@ include file="/html/portlet/search/init.jsp" %>
-<%@ page import="com.liferay.portal.kernel.search.OpenSearchImplInvoker" %>
 
 <%
 String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
@@ -61,7 +60,7 @@ while (itr.hasNext()) {
 		itr.remove();
 	}
 	else {
-		OpenSearch openSearch = OpenSearchImplInvoker.getOpenSearchInstance(portlet.getOpenSearchClass(), portlet.getPortletId());
+		OpenSearch openSearch = (OpenSearch)InstancePool.get(portlet.getOpenSearchClass());
 
 		if (!openSearch.isEnabled()) {
 			itr.remove();
@@ -97,7 +96,7 @@ if (Validator.isNotNull(primarySearch)) {
 for (int i = 0; i < portlets.size(); i++) {
 	Portlet portlet = (Portlet)portlets.get(i);
 
-	OpenSearch openSearch = OpenSearchImplInvoker.getOpenSearchInstance(portlet.getOpenSearchClass(), portlet.getPortletId());
+	OpenSearch openSearch = (OpenSearch)InstancePool.get(portlet.getOpenSearchClass());
 
 	PortletURL portletURL = renderResponse.createRenderURL();
 

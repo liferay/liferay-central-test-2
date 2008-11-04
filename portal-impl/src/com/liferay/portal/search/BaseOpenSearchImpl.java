@@ -59,7 +59,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseOpenSearchImpl implements OpenSearch {
 
-	public Boolean isEnabled() {
+	public boolean isEnabled() {
 		return true;
 	}
 
@@ -81,13 +81,6 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException;
-
-	public String search(
-			HttpServletRequest request, String keywords, Integer startPage,
-			Integer itemsPerPage)
-		throws SearchException {
-            return search(request, keywords, startPage.intValue(), itemsPerPage.intValue());
-        }
 
 	protected void addSearchResult(
 		Element root, String title, String link, Date updated,
