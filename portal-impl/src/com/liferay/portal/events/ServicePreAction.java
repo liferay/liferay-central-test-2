@@ -1499,10 +1499,12 @@ public class ServicePreAction extends Action {
 			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
 				controlPanelGroup.getGroupId(), true);
 
-			PortletURL myAccountURL = new PortletURLImpl(
+			PortletURLImpl myAccountURL = new PortletURLImpl(
 				request, PortletKeys.MY_ACCOUNT, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
 
+			myAccountURL.setRefererPlid(plid);
+			
 			myAccountURL.setWindowState(WindowState.MAXIMIZED);
 			myAccountURL.setPortletMode(PortletMode.VIEW);
 
