@@ -44,7 +44,7 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-roles" />" />
 
-	<c:if test='<%= showAddButton && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view")) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>'>
+	<c:if test='<%= showAddButton && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin_roles/view")) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>'>
 		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="<portlet:namespace />addRole();" />
 	</c:if>
 </div>
