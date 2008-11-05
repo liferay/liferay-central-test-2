@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+User selUser = (User)request.getAttribute("user.selUser");
 List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 %>
 
@@ -45,6 +46,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 		var rowColumns = [];
 
 		rowColumns.push(name);
+		rowColumns.push('<%= RoleConstants.COMMUNITY_MEMBER %>');
 		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeGroupIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />groupsSearchContainer\').deleteRow(this, ' + groupId + ')'));
 
 		searchContainer.addRow(rowColumns, groupId);
@@ -73,6 +75,31 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 			name="name"
 			property="name"
 		/>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="roles"
+		>
+
+			<%
+			List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), group.getGroupId());
+
+			Iterator itr = userGroupRoles.iterator();
+
+			while (itr.hasNext()) {
+				UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+				Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
+				buffer.append(role.getName());
+
+				if (itr.hasNext()) {
+					buffer.append(StringPool.COMMA_AND_SPACE);
+				}
+			}
+			%>
+
+		</liferay-ui:search-container-column-text>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>

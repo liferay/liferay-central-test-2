@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+User selUser = (User)request.getAttribute("user.selUser");
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 %>
 
@@ -46,6 +47,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		rowColumns.push(name);
 		rowColumns.push(Liferay.Language.get(type));
+		rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
 		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />organizationsSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
 		searchContainer.addRow(rowColumns, organizationId);
@@ -79,6 +81,31 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 			name="type"
 			value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
 		/>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="roles"
+		>
+
+			<%
+			List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), organization.getGroup().getGroupId());
+
+			Iterator itr = userGroupRoles.iterator();
+
+			while (itr.hasNext()) {
+				UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+				Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
+				buffer.append(role.getName());
+
+				if (itr.hasNext()) {
+					buffer.append(StringPool.COMMA_AND_SPACE);
+				}
+			}
+			%>
+
+		</liferay-ui:search-container-column-text>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
