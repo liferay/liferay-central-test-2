@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -65,15 +66,17 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		_classPK = classPK;
 	}
 
-	public void addAttribute(String name) {
+	public void addAttribute(String name) throws PortalException {
 		addAttribute(name, ExpandoColumnConstants.STRING, null);
 	}
 
-	public void addAttribute(String name, int type) {
+	public void addAttribute(String name, int type) throws PortalException {
 		addAttribute(name, type, null);
 	}
 
-	public void addAttribute(String name, int type, Object defaultValue) {
+	public void addAttribute(String name, int type, Object defaultValue)
+		throws PortalException {
+
 		try {
 			ExpandoTable table = null;
 
@@ -90,7 +93,12 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				table.getTableId(), name, type, defaultValue);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (e instanceof PortalException) {
+				throw (PortalException)e;
+			}
+			else {
+				_log.error(e, e);
+			}
 		}
 	}
 
@@ -157,7 +165,9 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return column.getTypeSettingsProperties();
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Properties for " + name, e);
+			}
 
 			return new UnicodeProperties(true);
 		}

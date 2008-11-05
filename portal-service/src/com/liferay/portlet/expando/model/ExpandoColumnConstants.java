@@ -96,6 +96,16 @@ public class ExpandoColumnConstants {
 
 	public static final String UNKNOWN_LABEL = "Unknown";
 
+	public static final String PROPERTY_HIDDEN = "hidden";
+
+	public static final String PROPERTY_HEIGHT = "height";
+
+	public static final String PROPERTY_SECRET = "secret";
+
+	public static final String PROPERTY_SELECTION = "selection";
+
+	public static final String PROPERTY_WIDTH = "width";
+
 	public static final int[] TYPES = new int[] {
 		BOOLEAN, BOOLEAN_ARRAY, DATE, DATE_ARRAY, DOUBLE, DOUBLE_ARRAY, FLOAT,
 		FLOAT_ARRAY, INTEGER, INTEGER_ARRAY, LONG, LONG_ARRAY, SHORT,

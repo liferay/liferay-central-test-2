@@ -44,6 +44,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -152,10 +153,8 @@ public class EditExpandoAction extends PortletAction {
 			value = GetterUtil.getShortValues(values);
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-			String[] values = StringUtil.split(
+			value = StringUtil.split(
 				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-
-			value = StringUtil.merge(values);
 		}
 		else {
 			value = ParamUtil.getString(portletRequest, name);
@@ -237,14 +236,82 @@ public class EditExpandoAction extends PortletAction {
 			actionRequest, "resourcePrimKey");
 
 		String name = ParamUtil.getString(actionRequest, "name");
-		int type = ParamUtil.getInteger(actionRequest, "type");
+
+		String preset = ParamUtil.getString(actionRequest, "type");
 
 		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
 			modelResource, resourcePrimKey);
 
+		if (preset.startsWith("Preset")) {
+			createFromPreset(actionRequest, expandoBridge, preset, name);
+		}
+		else {
+			int type = ParamUtil.getInteger(actionRequest, "type");
+
+			expandoBridge.addAttribute(name, type);
+
+			updateProperties(actionRequest, expandoBridge, name);
+		}
+	}
+
+	protected void createFromPreset(
+			ActionRequest actionRequest, ExpandoBridge expandoBridge,
+			String preset, String name)
+		throws Exception {
+
+		int type = 0;
+		UnicodeProperties properties = expandoBridge.getAttributeProperties(
+			name);
+
+		if (preset.equals("PresetSelectionIntegerArray()")) {
+			type = ExpandoColumnConstants.INTEGER_ARRAY;
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_SELECTION,
+				Boolean.TRUE.toString());
+		}
+		else if (preset.equals("PresetSelectionDoubleArray()")) {
+			type = ExpandoColumnConstants.DOUBLE_ARRAY;
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_SELECTION,
+				Boolean.TRUE.toString());
+		}
+		else if (preset.equals("PresetSelectionStringArray()")) {
+			type = ExpandoColumnConstants.STRING_ARRAY;
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_SELECTION,
+				Boolean.TRUE.toString());
+		}
+		else if (preset.equals("PresetTextBox()")) {
+			type = ExpandoColumnConstants.STRING;
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_HEIGHT, "105");
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_WIDTH, "500");
+		}
+		else if (preset.equals("PresetTextBoxIndexed()")) {
+			type = ExpandoColumnConstants.STRING;
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_HEIGHT, "105");
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_WIDTH, "500");
+			properties.setProperty(
+				ExpandoBridgeIndexer.INDEXABLE, Boolean.TRUE.toString());
+		}
+		else if (preset.equals("PresetTextFieldSecret()")) {
+			type = ExpandoColumnConstants.STRING;
+			properties.setProperty(
+				ExpandoColumnConstants.PROPERTY_SECRET,
+				Boolean.TRUE.toString());
+		}
+		else {
+			type = ExpandoColumnConstants.STRING;
+			properties.setProperty(
+				ExpandoBridgeIndexer.INDEXABLE, Boolean.TRUE.toString());
+		}
+
 		expandoBridge.addAttribute(name, type);
 
-		updateProperties(actionRequest, expandoBridge, name);
+		expandoBridge.setAttributeProperties(name, properties);
 	}
 
 	protected void deleteExpando(ActionRequest actionRequest) throws Exception {

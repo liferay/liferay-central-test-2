@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
 
@@ -36,11 +37,12 @@ import java.util.Map;
  */
 public interface ExpandoBridge {
 
-	public void addAttribute(String name);
+	public void addAttribute(String name) throws PortalException;
 
-	public void addAttribute(String name, int type);
+	public void addAttribute(String name, int type) throws PortalException;
 
-	public void addAttribute(String name, int type, Object defaultValue);
+	public void addAttribute(String name, int type, Object defaultValue)
+		throws PortalException;
 
 	public Object getAttribute(String name);
 

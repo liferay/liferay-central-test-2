@@ -914,7 +914,6 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoValue value = new ExpandoValueImpl();
 
 		value.setColumnId(column.getColumnId());
-		value.setData(column.getDefaultData());
 
 		int type = column.getType();
 

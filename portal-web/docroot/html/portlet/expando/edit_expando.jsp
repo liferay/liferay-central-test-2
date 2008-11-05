@@ -33,6 +33,7 @@ String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, mod
 ExpandoColumn column = (ExpandoColumn)request.getAttribute(WebKeys.EXPANDO_COLUMN);
 
 long columnId = BeanParamUtil.getLong(column, request, "columnId");
+int type = BeanParamUtil.getInteger(column, request, "type");
 
 ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
 
@@ -43,6 +44,13 @@ if (column != null) {
 	properties = expandoBridge.getAttributeProperties(column.getName());
 	defaultValue = expandoBridge.getAttributeDefault(column.getName());
 }
+
+boolean propertyHidden = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_HIDDEN));
+boolean propertySelection = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SELECTION));
+boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIndexer.INDEXABLE));
+boolean propertySecret = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SECRET));
+int propertyHeight = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.PROPERTY_HEIGHT));
+int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.PROPERTY_WIDTH));
 %>
 
 <script type="text/javascript">
@@ -122,32 +130,48 @@ if (column != null) {
 	</td>
 </tr>
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
 		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<c:choose>
 			<c:when test="<%= column != null %>">
-				<input name="<portlet:namespace />type" type="hidden" value="<%= column.getType() %>" />
+				<input name="<portlet:namespace />type" type="hidden" value="<%= type %>" />
 
-				<liferay-ui:message key="<%= ExpandoColumnConstants.getTypeLabel(column.getType()) %>" />
+				<liferay-ui:message key="<%= ExpandoColumnConstants.getTypeLabel(type) %>" />
 			</c:when>
 			<c:otherwise>
 				<select name="<portlet:namespace />type">
+					<optgroup label='<liferay-ui:message key="presets" />'>
+						<option value='PresetSelectionIntegerArray()'>Selection of Integer Values</option>
+						<option value='PresetSelectionDoubleArray()'>Selection of Decimal Values</option>
+						<option value='PresetSelectionStringArray()'>Selection of Text Values</option>
+						<option value='PresetTextBox()'>Text Box</option>
+						<option value='PresetTextBoxIndexed()'>Text Box - Indexed</option>
+						<option value='PresetTextFieldSecret()'>Text Field - Secret</option>
+						<option selected='selected' value='PresetTextFieldIndexed()'>Text Field - Indexed</option>
+					</optgroup>
+					<optgroup label='<liferay-ui:message key="primitives" />'>
 
-					<%
-					for (int type : ExpandoColumnConstants.TYPES) {
-						if ((type == ExpandoColumnConstants.BOOLEAN_ARRAY) || (type == ExpandoColumnConstants.DATE_ARRAY)) {
-							continue;
+						<%
+						for (int columnType : ExpandoColumnConstants.TYPES) {
+							if ((columnType == ExpandoColumnConstants.BOOLEAN_ARRAY) || (columnType == ExpandoColumnConstants.DATE_ARRAY)) {
+								continue;
+							}
+						%>
+
+							<option value="<%= columnType %>"><%= ExpandoColumnConstants.getTypeLabel(columnType) %></option>
+
+						<%
 						}
-					%>
+						%>
 
-						<option value="<%= type %>"><%= ExpandoColumnConstants.getTypeLabel(type) %></option>
-
-					<%
-					}
-					%>
-
+					</optgroup>
 				</select>
 
 				<liferay-ui:icon-help message="custom-attribute-type-help" />
@@ -168,7 +192,7 @@ if (column != null) {
 		</td>
 		<td>
 			<c:choose>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.BOOLEAN %>">
+				<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN %>">
 
 					<%
 					boolean curValue = ((Boolean)defaultValue).booleanValue();
@@ -179,9 +203,9 @@ if (column != null) {
 						<option <%= !curValue ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
 					</select>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.DATE %>">
+				<c:when test="<%= type == ExpandoColumnConstants.DATE %>">
 
 					<%
 					Calendar defaultValueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -217,24 +241,24 @@ if (column != null) {
 						disabled="<%= false %>"
 					/>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.DATE_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.DATE_ARRAY %>">
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.DOUBLE_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.DOUBLE_ARRAY %>">
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((double[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.FLOAT_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.FLOAT_ARRAY %>">
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((float[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.INTEGER_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.INTEGER_ARRAY %>">
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((int[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.LONG_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.LONG_ARRAY %>">
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((long[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.SHORT_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.SHORT_ARRAY %>">
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((short[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
-				<c:when test="<%= column.getType() == ExpandoColumnConstants.STRING_ARRAY %>">
+				<c:when test="<%= type == ExpandoColumnConstants.STRING_ARRAY %>">
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((String[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:otherwise>
@@ -243,57 +267,104 @@ if (column != null) {
 			</c:choose>
 		</td>
 	</tr>
-</c:if>
+	</table>
 
-</table>
+	<br />
 
-<br />
+	<liferay-ui:tabs names="properties" />
 
-<liferay-ui:tabs names="properties" />
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="hidden" />
-	</td>
-	<td>
-		<input type="hidden" name="<portlet:namespace />PropertyName(hidden)" value="hidden" />
-
-		<%
-		boolean propertyHidden = GetterUtil.getBoolean(properties.get("hidden"));
-		%>
-
-		<select name="<portlet:namespace />Property(hidden)">
-			<option <%= propertyHidden ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-			<option <%= !propertyHidden ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
-		</select>
-
-		<liferay-ui:icon-help message="custom-attribute-hidden-help" />
-	</td>
-</tr>
-
-<c:if test="<%= (column != null) && (column.getType() == ExpandoColumnConstants.STRING) %>">
+	<table class="lfr-table">
 	<tr>
 		<td>
-			<liferay-ui:message key="searchable" />
+			<liferay-ui:message key="hidden" />
 		</td>
 		<td>
-			<input type="hidden" name="<portlet:namespace />PropertyName(indexable)" value="indexable" />
+			<input type="hidden" name="<portlet:namespace />PropertyName(hidden)" value="hidden" />
 
-			<%
-			boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIndexer.INDEXABLE));
-			%>
-
-			<select name="<portlet:namespace />Property(indexable)">
-				<option <%= propertyIndexable ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-				<option <%= !propertyIndexable ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+			<select name="<portlet:namespace />Property(hidden)">
+				<option <%= propertyHidden ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+				<option <%= !propertyHidden ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
 			</select>
 
-			<liferay-ui:icon-help message="custom-attribute-indexable-help" />
+			<liferay-ui:icon-help message="custom-attribute-hidden-help" />
 		</td>
 	</tr>
-</c:if>
 
+	<c:if test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) || (type == ExpandoColumnConstants.FLOAT_ARRAY) || (type == ExpandoColumnConstants.INTEGER_ARRAY) || (type == ExpandoColumnConstants.LONG_ARRAY) || (type == ExpandoColumnConstants.SHORT_ARRAY) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="selection" />
+			</td>
+			<td>
+				<input type="hidden" name="<portlet:namespace />PropertyName(selection)" value="selection" />
+
+				<select name="<portlet:namespace />Property(selection)">
+					<option <%= propertySelection ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+					<option <%= !propertySelection ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+				</select>
+
+				<liferay-ui:icon-help message="custom-attribute-selection-help" />
+			</td>
+		</tr>
+	</c:if>
+
+	<c:if test="<%= (type == ExpandoColumnConstants.STRING) %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="searchable" />
+			</td>
+			<td>
+				<input type="hidden" name="<portlet:namespace />PropertyName(indexable)" value="indexable" />
+
+				<select name="<portlet:namespace />Property(indexable)">
+					<option <%= propertyIndexable ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+					<option <%= !propertyIndexable ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+				</select>
+
+				<liferay-ui:icon-help message="custom-attribute-indexable-help" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="secret" />
+			</td>
+			<td>
+				<input type="hidden" name="<portlet:namespace />PropertyName(secret)" value="secret" />
+
+				<select name="<portlet:namespace />Property(secret)">
+					<option <%= propertySecret ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
+					<option <%= !propertySecret ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+				</select>
+
+				<liferay-ui:icon-help message="custom-attribute-secret-help" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="height" />
+			</td>
+			<td>
+				<input type="hidden" name="<portlet:namespace />PropertyName(height)" value="height" />
+
+				<input class="lfr-input-text" style="width: 25;" name="<portlet:namespace />Property(height)" type="text" value="<%= propertyHeight %>" />
+
+				<liferay-ui:icon-help message="custom-attribute-height-help" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="width" />
+			</td>
+			<td>
+				<input type="hidden" name="<portlet:namespace />PropertyName(width)" value="width" />
+
+				<input class="lfr-input-text" style="width: 25;" name="<portlet:namespace />Property(width)" type="text" value="<%= propertyWidth %>" />
+
+				<liferay-ui:icon-help message="custom-attribute-height-help" />
+			</td>
+		</tr>
+	</c:if>
+</c:if>
 </table>
 
 <br />
