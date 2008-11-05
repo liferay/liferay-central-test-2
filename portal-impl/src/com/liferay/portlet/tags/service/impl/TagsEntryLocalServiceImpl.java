@@ -110,7 +110,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		name = name.trim().toLowerCase();
+		name = name.trim();
 
 		if (Validator.isNull(vocabularyName)) {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
@@ -121,13 +121,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		Date now = new Date();
-
-		validate(name);
-
-		if (hasEntry(groupId, name)) {
-			throw new DuplicateEntryException(
-				"A tag entry with the name " + name + " already exists");
-		}
 
 		long entryId = counterLocalService.increment();
 
@@ -150,8 +143,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
 		}
 
-		entry.setName(name);
-
 		TagsVocabulary vocabulary = null;
 
 		try {
@@ -170,6 +161,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		entry.setVocabularyId(vocabulary.getVocabularyId());
+
+		if (vocabulary.isFolksonomy()) {
+			name = name.toLowerCase();
+		}
+
+		validate(name);
+
+		if (hasEntry(groupId, name)) {
+			throw new DuplicateEntryException(
+				"A tag entry with the name " + name + " already exists");
+		}
+
+		entry.setName(name);
 
 		tagsEntryPersistence.update(entry, false);
 
@@ -528,21 +532,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		// Entry
 
-		name = name.trim().toLowerCase();
+		name = name.trim();
 
 		if (Validator.isNull(vocabularyName)) {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
 		}
 
-		validate(name);
-
 		TagsEntry entry = tagsEntryPersistence.findByPrimaryKey(entryId);
-
-		if (!entry.getName().equals(name) &&
-			hasEntry(entry.getGroupId(), name)) {
-
-			throw new DuplicateEntryException();
-		}
 
 		entry.setModifiedDate(new Date());
 
@@ -555,8 +551,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		else {
 			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
 		}
-
-		entry.setName(name);
 
 		TagsVocabulary vocabulary = null;
 
@@ -576,6 +570,32 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		entry.setVocabularyId(vocabulary.getVocabularyId());
+
+		if (vocabulary.isFolksonomy()) {
+			name = name.toLowerCase();
+
+			if (!entry.getName().equals(name) &&
+				hasEntry(entry.getGroupId(), name)) {
+
+				throw new DuplicateEntryException();
+			}
+		}
+		else {
+			if (!entry.getName().equals(name)) {
+				TagsEntry existingEntry = tagsEntryPersistence.fetchByG_N(
+					entry.getGroupId(), name);
+
+				if (existingEntry != null &&
+				   (existingEntry.getEntryId() != entry.getEntryId())) {
+
+					throw new DuplicateEntryException();
+				}
+			}
+		}
+
+		validate(name);
+
+		entry.setName(name);
 
 		tagsEntryPersistence.update(entry, false);
 
