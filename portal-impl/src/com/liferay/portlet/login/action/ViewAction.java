@@ -36,17 +36,20 @@ import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -182,7 +185,14 @@ public class ViewAction extends PortletAction {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
 
-		LoginAction.sendPassword(request);
+		PortletPreferences prefs = actionRequest.getPreferences();
+
+		String subject = prefs.getValue(
+			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT, StringPool.BLANK);
+		String body = prefs.getValue(
+			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY, StringPool.BLANK);
+
+		LoginAction.sendPassword(request, subject, body);
 	}
 
 }

@@ -311,6 +311,13 @@ public class LoginAction extends Action {
 	public static void sendPassword(HttpServletRequest request)
 		throws Exception {
 
+		sendPassword(request, null, null);
+	}
+
+	public static void sendPassword(
+			HttpServletRequest request, String subject, String body)
+		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -332,7 +339,7 @@ public class LoginAction extends Action {
 
 		UserLocalServiceUtil.sendPassword(
 			PortalUtil.getCompanyId(request), emailAddress, remoteAddr,
-			remoteHost, userAgent);
+			remoteHost, userAgent, subject, body);
 
 		SessionMessages.add(request, "request_processed", emailAddress);
 	}

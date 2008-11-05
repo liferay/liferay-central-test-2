@@ -1570,12 +1570,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void sendPassword(
 			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent)
+			String remoteHost, String userAgent, String subject, String body)
 		throws PortalException, SystemException {
 
 		try {
 			doSendPassword(
-				companyId, emailAddress, remoteAddr, remoteHost, userAgent);
+				companyId, emailAddress, remoteAddr, remoteHost, userAgent,
+				subject, body);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -2566,7 +2567,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected void doSendPassword(
 			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent)
+			String remoteHost, String userAgent, String subject, String body)
 		throws IOException, PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
@@ -2627,10 +2628,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
-		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
-		String body = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY);
+		if (Validator.isNull(subject)) {
+			subject = PrefsPropsUtil.getContent(
+				companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
+		}
+
+		if (Validator.isNull(body)) {
+			body = PrefsPropsUtil.getContent(
+				companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY);
+		}
 
 		subject = StringUtil.replace(
 			subject,
