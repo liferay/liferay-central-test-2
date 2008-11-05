@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -47,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="OrganizationImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationImpl
@@ -54,12 +56,14 @@ public class OrganizationImpl
 
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
-			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES, new Filter(type));
+			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES,
+			new Filter(HtmlUtil.unescape(type)));
 	}
 
 	public static String[] getParentTypes(String type) {
 		String[] types = PropsUtil.getArray(
-			PropsKeys.ORGANIZATIONS_TYPES, new Filter(type));
+			PropsKeys.ORGANIZATIONS_TYPES,
+			new Filter(HtmlUtil.unescape(type)));
 
 		List<String> parentTypes = new ArrayList<String>();
 
@@ -85,7 +89,8 @@ public class OrganizationImpl
 
 	public static boolean isRootable(String type) {
 		return GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.ORGANIZATIONS_ROOTABLE, new Filter(type)));
+			PropsUtil.get(PropsKeys.ORGANIZATIONS_ROOTABLE,
+			new Filter(HtmlUtil.unescape(type))));
 	}
 
 	public OrganizationImpl() {
