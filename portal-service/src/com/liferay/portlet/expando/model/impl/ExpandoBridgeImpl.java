@@ -228,7 +228,12 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public boolean isIndexEnabled() {
-		return _indexEnabled && (_classPK > 0);
+		if (_indexEnabled && (_classPK > 0)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void setAttribute(String name, Object value) {
