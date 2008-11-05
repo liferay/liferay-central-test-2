@@ -109,15 +109,28 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
 	<c:if test="<%= organization.isParentable() %>">
-		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-			</portlet:renderURL>
 
-			<liferay-ui:icon image="add_location" message="add-suborganization" url="<%= addSuborganizationURL %>" />
-		</c:if>
+		<%
+		String[] childrenTypes = organization.getChildrenTypes();
+
+		for (String type : childrenTypes) {
+			String message = LanguageUtil.format(pageContext, "add-x", new String[]{LanguageUtil.get(pageContext, type)});
+		%>
+
+			<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
+					<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+					<portlet:param name="parentOrganizationSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
+					<portlet:param name="type" value="<%= type %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon image="add_location" message="<%= message %>" url="<%= addSuborganizationURL %>" />
+			</c:if>
+
+		<%
+		}
+		%>
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
