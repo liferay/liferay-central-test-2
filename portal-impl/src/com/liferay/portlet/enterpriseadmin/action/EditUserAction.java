@@ -169,7 +169,7 @@ public class EditUserAction extends PortletAction {
 				}
 
 				redirect = HttpUtil.setParameter(
-					redirect, actionResponse.getNamespace() + "userId",
+					redirect, actionResponse.getNamespace() + "p_u_i_d",
 					user.getUserId());
 			}
 
