@@ -2968,6 +2968,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		if (company.getVirtualHost()
+				.equals(CompanyConstants.WSRP_VIRTUAL_HOST)) {
+			return;
+		}
+
 		if (!autoScreenName) {
 			validateScreenName(companyId, userId, screenName);
 		}

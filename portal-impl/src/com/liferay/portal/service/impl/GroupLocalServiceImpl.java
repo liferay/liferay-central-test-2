@@ -41,6 +41,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -56,6 +58,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
@@ -960,6 +963,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			long groupId, long companyId, long classNameId, long classPK,
 			String friendlyURL)
 		throws PortalException, SystemException {
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+
+		if (company.getVirtualHost()
+				.equals(CompanyConstants.WSRP_VIRTUAL_HOST)) {
+			return;
+		}
 
 		if (Validator.isNull(friendlyURL)) {
 			return;

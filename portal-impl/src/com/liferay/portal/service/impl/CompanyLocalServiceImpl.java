@@ -362,7 +362,26 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public List<Company> getCompanies() throws SystemException {
-		return companyPersistence.findAll();
+
+		List<Company> companies =  companyPersistence.findAll();
+
+		Company wsrpCompany = null;
+		for(Company company : companies) {
+
+			//Filter out WSRP Company
+			if (company.getVirtualHost()
+					.equals(CompanyConstants.WSRP_VIRTUAL_HOST)) {
+
+				wsrpCompany = company;
+				break;
+			}
+		}
+
+		if (wsrpCompany != null) {
+			companies.remove(wsrpCompany);
+		}
+
+		return companies;
 	}
 
 	public Company getCompanyById(long companyId)
