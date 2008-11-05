@@ -346,11 +346,11 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 			preparedStatement.execute();
 		}
-		catch (SQLException e) {
+		catch (SQLException sqle) {
 			DataAccess.cleanUp(_connection);
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
+				_log.debug(sqle, sqle);
 			}
 
 			return false;
