@@ -249,6 +249,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			String displayHeight = ModelHintsConstants.TEXT_DISPLAY_HEIGHT;
 			String displayWidth = ModelHintsConstants.TEXT_DISPLAY_WIDTH;
 			String maxLength = ModelHintsConstants.TEXT_MAX_LENGTH;
+			boolean password = false;
 			boolean upperCase = false;
 			boolean checkTab = false;
 
@@ -256,6 +257,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				displayHeight = GetterUtil.getString(hints.get("display-height"), displayHeight);
 				displayWidth = GetterUtil.getString(hints.get("display-width"), displayWidth);
 				maxLength = GetterUtil.getString(hints.get("max-length"), maxLength);
+				password = GetterUtil.getBoolean(hints.get("password"), password);
 				upperCase = GetterUtil.getBoolean(hints.get("upper-case"), upperCase);
 				checkTab = GetterUtil.getBoolean(hints.get("check-tab"), checkTab);
 			}
@@ -276,7 +278,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 					}
 					%>
 
-					<input <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);">
+					<input <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="<%= password ? "password" : "text" %>" value="<%= value %>" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);">
 				</c:when>
 				<c:otherwise>
 					<textarea <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="height: <%= displayHeight %><%= Validator.isDigit(displayHeight) ? "px" : "" %>; width: <%= displayWidth %><%= Validator.isDigit(displayWidth) ? "px" : "" %>;" wrap="soft" onKeyDown="<%= checkTab ? "Liferay.Util.checkTab(this); " : "" %> Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>

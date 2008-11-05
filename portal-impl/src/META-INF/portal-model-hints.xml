@@ -894,8 +894,8 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="articleId" type="String">
-			<hint name="upper-case">true</hint>
 			<hint name="auto-escape">false</hint>
+			<hint name="upper-case">true</hint>
 		</field>
 		<field name="version" type="double" />
 		<field name="title" type="String">
@@ -1087,7 +1087,9 @@
 		<field name="inServerPort" type="int" />
 		<field name="inUseSSL" type="boolean" />
 		<field name="inUserName" type="String" />
-		<field name="inPassword" type="String" />
+		<field name="inPassword" type="String">
+			<hint name="password">true</hint>
+		</field>
 		<field name="inReadInterval" type="int" />
 		<field name="outEmailAddress" type="String" />
 		<field name="outCustom" type="boolean" />
