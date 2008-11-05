@@ -232,9 +232,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Portlet context wrapper
 
-		_strutsBridges = false;
-
 		_portletAppInitialized = false;
+		_strutsBridges = false;
 
 		Iterator<Portlet> portletsItr = portlets.iterator();
 
@@ -558,6 +557,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (!_portletAppInitialized) {
 			initPortletApp(portlet, servletContext, portletClassLoader);
+
 			_portletAppInitialized = true;
 		}
 
