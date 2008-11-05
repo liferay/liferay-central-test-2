@@ -25,6 +25,7 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
@@ -33,6 +34,7 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
@@ -642,9 +644,12 @@ public class PortalLDAPUtil {
 
 		long creatorUserId = 0;
 		boolean passwordReset = false;
-		boolean autoScreenName = false;
 		String screenName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("screenName")).toLowerCase();
+		boolean autoScreenName = false;
+		if (Validator.isNull(screenName)) {
+			autoScreenName = true;
+		}
 		String emailAddress = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("emailAddress"));
 		String openId = StringPool.BLANK;
@@ -789,6 +794,14 @@ public class PortalLDAPUtil {
 					true);
 			}
 
+			if (autoScreenName) {
+				ScreenNameGenerator screenNameGenerator =
+				(ScreenNameGenerator) InstancePool.get(
+					PropsValues.USERS_SCREEN_NAME_GENERATOR);
+
+				screenName = screenNameGenerator.generate(
+					companyId, user.getUserId(), emailAddress);
+			}
 			user = UserLocalServiceUtil.updateUser(
 				user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
 				user.isPasswordReset(), user.getReminderQueryQuestion(),

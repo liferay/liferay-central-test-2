@@ -49,6 +49,7 @@
 	</target>
 
 	<target name="rebuild-database">
+		<echo>${executable}</echo>
 		<exec executable="${executable}" output="log/${log}">
 			<arg line="${arg.line}" />
 		</exec>
