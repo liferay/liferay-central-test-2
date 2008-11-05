@@ -644,12 +644,9 @@ public class PortalLDAPUtil {
 
 		long creatorUserId = 0;
 		boolean passwordReset = false;
+		boolean autoScreenName = false;
 		String screenName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("screenName")).toLowerCase();
-		boolean autoScreenName = false;
-		if (Validator.isNull(screenName)) {
-			autoScreenName = true;
-		}
 		String emailAddress = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("emailAddress"));
 		String openId = StringPool.BLANK;
@@ -776,6 +773,21 @@ public class PortalLDAPUtil {
 				_log.debug(pe, pe);
 			}
 
+			// LPS-443
+
+			if (Validator.isNull(screenName)) {
+				autoScreenName = true;
+			}
+
+			if (autoScreenName) {
+				ScreenNameGenerator screenNameGenerator =
+					(ScreenNameGenerator)InstancePool.get(
+						PropsValues.USERS_SCREEN_NAME_GENERATOR);
+
+				screenName = screenNameGenerator.generate(
+					companyId, user.getUserId(), emailAddress);
+			}
+
 			Contact contact = user.getContact();
 
 			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
@@ -794,14 +806,6 @@ public class PortalLDAPUtil {
 					true);
 			}
 
-			if (autoScreenName) {
-				ScreenNameGenerator screenNameGenerator =
-				(ScreenNameGenerator) InstancePool.get(
-					PropsValues.USERS_SCREEN_NAME_GENERATOR);
-
-				screenName = screenNameGenerator.generate(
-					companyId, user.getUserId(), emailAddress);
-			}
 			user = UserLocalServiceUtil.updateUser(
 				user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
 				user.isPasswordReset(), user.getReminderQueryQuestion(),
