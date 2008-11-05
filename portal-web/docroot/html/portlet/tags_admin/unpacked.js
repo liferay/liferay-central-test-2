@@ -304,7 +304,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		var treeOptions = {
 			sortOn: 'li',
-			distance: 3,
+			distance: 10,
 			dropOn: 'span.folder',
 			dropHoverClass: 'hover-folder',
 			drop: function(event, ui) {
@@ -557,6 +557,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 									if (exception.indexOf('auth.PrincipalException') > -1) {
 										instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
 									}
+								}
+								else {
+									instance._displayList(
+										folksonomy,
+										function() {
+											var vocabulary = instance._selectVocabulary(message.vocabularyId);
+											instance._displayVocabularyEntries(instance._selectedVocabularyName);
+										}
+									);
 								}
 							}
 						);
@@ -1088,6 +1097,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var toEntryName = instance._getEntryName(droppable);
 		var vocabularyId = instance._getVocabularyId(droppable);
 		var vocabularyName = instance._getVocabularyName(droppable);
+		var folksonomy = (instance._selectedVocabulary == 'tag');
 
 		var isChangingVocabulary = !!vocabularyName;
 		var destination = isChangingVocabulary ? vocabularyName : toEntryName;
@@ -1104,7 +1114,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		if (confirm(mergeText)) {
+		if (!folksonomy || confirm(mergeText)) {
 			if (instance._selectedVocabulary == 'tag') {
 				if (isChangingVocabulary) {
 					var properties = instance._buildProperties();
@@ -1201,6 +1211,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var vocabularyName = instance._selectedVocabularyName;
 
 		instance._updateEntry(entryId, entryName, parentCategoryName, properties, vocabularyName);
+		instance._displayVocabularyEntries(instance._selectedVocabularyName);
 	},
 
 	_selectCurrentVocabulary: function(value) {
@@ -1383,7 +1394,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		jQuery(instance._vocabularyListClass).removeClass('selected');
 	},
 
-	_updateEntry: function(entryId, name, parentEntryName, properties, vocabularyName) {
+	_updateEntry: function(entryId, name, parentEntryName, properties, vocabularyName, callback) {
 		var instance = this;
 
 		Liferay.Service.Tags.TagsEntry.updateEntry(
@@ -1422,6 +1433,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 					else if (exception.indexOf('Exception') > -1) {
 						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
 					}
+				}
+
+				if (callback) {
+					callback(message);
 				}
 			}
 		);

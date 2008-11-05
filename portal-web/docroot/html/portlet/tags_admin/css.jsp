@@ -334,3 +334,7 @@
 .portlet-tags-admin .treeview .hover-folder {
 	background: #ffc url(<%= themeImagesPath %>/trees/folder.png) no-repeat scroll 0 0;
 }
+
+.portlet-tags-admin .vocabulary-select-list {
+	width: 100px;
+}
