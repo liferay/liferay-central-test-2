@@ -1503,10 +1503,9 @@ public class ServicePreAction extends Action {
 				request, PortletKeys.MY_ACCOUNT, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
 
-			myAccountURL.setRefererPlid(plid);
-			
 			myAccountURL.setWindowState(WindowState.MAXIMIZED);
 			myAccountURL.setPortletMode(PortletMode.VIEW);
+			myAccountURL.setRefererPlid(plid);
 
 			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
 			myAccountURL.setParameter("backURL", myAccountRedirect);
