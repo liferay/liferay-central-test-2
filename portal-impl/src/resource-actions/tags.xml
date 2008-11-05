@@ -9,15 +9,13 @@
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_ENTRY</action-key>
 			<action-key>ADD_VOCABULARY</action-key>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<model-resource>
