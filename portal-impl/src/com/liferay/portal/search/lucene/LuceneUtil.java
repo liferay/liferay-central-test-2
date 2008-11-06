@@ -96,7 +96,61 @@ public class LuceneUtil {
 	}
 
 	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, boolean value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, Boolean value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, double value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, Double value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, int value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, Integer value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
 		BooleanQuery booleanQuery, String field, long value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, Long value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, short value) {
+
+		addExactTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addExactTerm(
+		BooleanQuery booleanQuery, String field, Short value) {
 
 		addExactTerm(booleanQuery, field, String.valueOf(value));
 	}
@@ -136,7 +190,61 @@ public class LuceneUtil {
 	}
 
 	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, boolean value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, Boolean value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, double value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, Double value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, int value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, Integer value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, long value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, Long value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, short value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, Short value) {
 
 		addRequiredTerm(booleanQuery, field, String.valueOf(value));
 	}

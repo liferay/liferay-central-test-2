@@ -49,7 +49,43 @@ public class BooleanQueryImpl implements BooleanQuery {
 			BooleanClauseOccurTranslator.translate(occur));
 	}
 
+	public void addExactTerm(String field, boolean value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, Boolean value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, double value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, Double value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, int value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, Integer value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
 	public void addExactTerm(String field, long value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, Long value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, short value) {
+		LuceneUtil.addExactTerm(_booleanQuery, field, value);
+	}
+
+	public void addExactTerm(String field, Short value) {
 		LuceneUtil.addExactTerm(_booleanQuery, field, value);
 	}
 
@@ -57,7 +93,43 @@ public class BooleanQueryImpl implements BooleanQuery {
 		LuceneUtil.addExactTerm(_booleanQuery, field, value);
 	}
 
+	public void addRequiredTerm(String field, boolean value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, Boolean value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, double value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, Double value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, int value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, Integer value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
 	public void addRequiredTerm(String field, long value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, Long value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, short value) {
+		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
+	}
+
+	public void addRequiredTerm(String field, Short value) {
 		LuceneUtil.addRequiredTerm(_booleanQuery, field, value);
 	}
 

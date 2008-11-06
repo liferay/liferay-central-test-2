@@ -34,11 +34,47 @@ public interface BooleanQuery extends Query {
 
 	public void add(Query query, BooleanClauseOccur occur);
 
+	public void addExactTerm(String field, boolean value);
+
+	public void addExactTerm(String field, Boolean value);
+
+	public void addExactTerm(String field, double value);
+
+	public void addExactTerm(String field, Double value);
+
+	public void addExactTerm(String field, int value);
+
+	public void addExactTerm(String field, Integer value);
+
 	public void addExactTerm(String field, long value);
+
+	public void addExactTerm(String field, Long value);
+
+	public void addExactTerm(String field, short value);
+
+	public void addExactTerm(String field, Short value);
 
 	public void addExactTerm(String field, String value);
 
+	public void addRequiredTerm(String field, boolean value);
+
+	public void addRequiredTerm(String field, Boolean value);
+
+	public void addRequiredTerm(String field, double value);
+
+	public void addRequiredTerm(String field, Double value);
+
+	public void addRequiredTerm(String field, int value);
+
+	public void addRequiredTerm(String field, Integer value);
+
 	public void addRequiredTerm(String field, long value);
+
+	public void addRequiredTerm(String field, Long value);
+
+	public void addRequiredTerm(String field, short value);
+
+	public void addRequiredTerm(String field, Short value);
 
 	public void addRequiredTerm(String field, String value);
 

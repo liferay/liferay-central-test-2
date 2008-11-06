@@ -177,6 +177,30 @@ public class DocumentImpl implements Document {
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
+	public void addKeyword(String name, short value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, Short value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, short[] values) {
+		if (values == null) {
+			return;
+		}
+
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addKeyword(String name, Short[] values) {
+		if (values == null) {
+			return;
+		}
+
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
 	public void addKeyword(String name, String value) {
 		addKeyword(name, value, false);
 	}
