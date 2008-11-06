@@ -26,6 +26,7 @@
 
 <%
 User selUser = (User)request.getAttribute("user.selUser");
+
 List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 %>
 
@@ -60,7 +61,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 
 <liferay-ui:search-container
 	id='<%= renderResponse.getNamespace() + "groupsSearchContainer" %>'
-	headerNames="name"
+	headerNames="name,roles"
 >
 	<liferay-ui:search-container-results
 		results="<%= groups %>"
@@ -84,21 +85,9 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 		>
 
 			<%
-			List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), group.getGroupId());
+			List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), group.getGroupId());
 
-			Iterator itr = userGroupRoles.iterator();
-
-			while (itr.hasNext()) {
-				UserGroupRole userGroupRole = (UserGroupRole)itr.next();
-
-				Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
-
-				buffer.append(role.getName());
-
-				if (itr.hasNext()) {
-					buffer.append(StringPool.COMMA_AND_SPACE);
-				}
-			}
+			buffer.append(ListUtil.toString(userGroupRoles, "role.name", StringPool.COMMA_AND_SPACE));
 			%>
 
 		</liferay-ui:search-container-column-text>
