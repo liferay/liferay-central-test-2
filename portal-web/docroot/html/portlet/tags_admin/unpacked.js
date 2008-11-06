@@ -563,6 +563,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 										folksonomy,
 										function() {
 											var vocabulary = instance._selectVocabulary(message.vocabularyId);
+
 											instance._displayVocabularyEntries(instance._selectedVocabularyName);
 										}
 									);
