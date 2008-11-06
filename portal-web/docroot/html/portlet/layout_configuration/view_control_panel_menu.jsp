@@ -106,7 +106,7 @@ public static final List<Portlet> filterPortlets(PermissionChecker permissionChe
 	List<Portlet> filteredPortlets = new ArrayList<Portlet>();
 
 	for (Portlet portlet : portlets) {
-		if (((!category.equals(PortletCategoryKeys.CONTENT)) && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
+		if ((!category.equals(PortletCategoryKeys.CONTENT) && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
 			filteredPortlets.add(portlet);
 		}
 	}
