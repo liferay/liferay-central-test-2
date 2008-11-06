@@ -52,6 +52,8 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore();
+
+		jQuery(".selected .modify-link:button").change();
 	}
 </script>
 
@@ -109,7 +111,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+				<a class="modify-link" href="javascript: ;" onclick="jQuery(this).change(); Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -120,5 +122,5 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<input class="modify-link" onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
 </c:if>

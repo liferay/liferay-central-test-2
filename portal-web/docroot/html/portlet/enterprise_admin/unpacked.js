@@ -30,7 +30,7 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 
 		instance._revealSection(location.hash);
 
-		instance._container.find('input, select, textarea').change(
+		instance._container.find('input, select, textarea, .modify-link').change(
 			function(event) {
 				instance._trackChanges(this);
 			}

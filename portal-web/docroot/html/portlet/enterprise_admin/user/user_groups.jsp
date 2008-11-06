@@ -49,6 +49,8 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 
 		searchContainer.addRow(rowColumns, userGroupId);
 		searchContainer.updateDataStore();
+
+		jQuery(".selected .modify-link:button").change();
 	}
 </script>
 
@@ -76,7 +78,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a href="javascript: ;" onclick="Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer').deleteRow(this, <%= userGroup.getUserGroupId() %>);"><%= removeUserGroupIcon %></a>
+				<a class="modify-link" href="javascript: ;" onclick="jQuery(this).change(); Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer').deleteRow(this, <%= userGroup.getUserGroupId() %>);"><%= removeUserGroupIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -87,5 +89,5 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input onclick="<portlet:namespace />openUserGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<input class="modify-link" onclick="<portlet:namespace />openUserGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
 </c:if>
