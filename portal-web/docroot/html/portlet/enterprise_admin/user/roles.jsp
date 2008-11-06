@@ -50,7 +50,7 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 		searchContainer.addRow(rowColumns, roleId);
 		searchContainer.updateDataStore();
 
-		jQuery(".selected .modify-link:button").change();
+		jQuery('.selected .modify-link:button').trigger('change');
 	}
 </script>
 
@@ -78,7 +78,7 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript: ;" onclick="jQuery(this).change(); Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer').deleteRow(this, <%= role.getRoleId() %>);"><%= removeRoleIcon %></a>
+				<a class="modify-link" href="javascript: ;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer').deleteRow(this, <%= role.getRoleId() %>);"><%= removeRoleIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>

@@ -82,7 +82,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore(organizationId);
 
-		jQuery(".selected .modify-link:button").change();
+		jQuery('.selected .modify-link:button').trigger('change');
 	}
 </script>
 
@@ -242,7 +242,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a class="modify-link" href="javascript: ;" onclick="jQuery(this).change(); Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+			<a class="modify-link" href="javascript: ;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
