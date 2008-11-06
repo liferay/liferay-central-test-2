@@ -1459,7 +1459,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			contextQuery.addRequiredTerm(
 				Field.PORTLET_ID, UserIndexer.PORTLET_ID);
-			contextQuery.addRequiredTerm("active", active.toString());
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
@@ -1508,6 +1507,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					searchQuery.addTerm("emailAddress", emailAddress, true);
 				}
 			}
+
+			searchQuery.addRequiredTerm("active", active);
 
 			populateQuery(contextQuery, searchQuery, params, andSearch);
 
