@@ -234,6 +234,10 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
 		<liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="you-cannot-delete-user-groups-that-have-users" />
 
+		<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value="view-all" />
+		</liferay-util:include>
+
 		<%
 		RowChecker rowChecker = null;
 
@@ -251,7 +255,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			<liferay-ui:search-form
 				page="/html/portlet/enterprise_admin/user_group_search.jsp"
-				showAddButton="<%= true %>"
 			/>
 
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -312,6 +315,10 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	<c:when test='<%= tabs1.equals("roles") %>'>
 		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="you-cannot-delete-a-system-role" />
 
+		<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value="view-all" />
+		</liferay-util:include>
+
 		<%
 		RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
@@ -323,7 +330,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/role_search.jsp"
 			searchContainer="<%= searchContainer %>"
-			showAddButton="<%= true %>"
 		/>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -403,8 +409,14 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		%>
 
 		<c:if test="<%= passwordPolicyEnabled %>">
-			<liferay-ui:message key="you-are-using-ldaps-password-policy" />
+			<span class="portlet-msg-info">
+				<liferay-ui:message key="you-are-using-ldaps-password-policy" />
+			</span>
 		</c:if>
+
+		<liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value="view-all" />
+		</liferay-util:include>
 
 		<%
 		PasswordPolicySearch searchContainer = new PasswordPolicySearch(renderRequest, portletURL);

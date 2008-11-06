@@ -25,10 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String strutsAction = ParamUtil.getString(request, "struts_action");
-
 RoleSearch searchContainer = (RoleSearch)request.getAttribute("liferay-ui:search:searchContainer");
-boolean showAddButton = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search:showAddButton"));
 
 RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerms();
 %>
@@ -37,26 +34,6 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
 
 	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+
+	<input type="submit" value="<liferay-ui:message key="search" />" />
 </div>
-
-<br />
-
-<div>
-	<input type="submit" value="<liferay-ui:message key="search-roles" />" />
-
-	<c:if test='<%= showAddButton && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin_roles/view")) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>'>
-		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="<portlet:namespace />addRole();" />
-	</c:if>
-</div>
-
-<script type="text/javascript">
-	function <portlet:namespace />addRole() {
-		document.<portlet:namespace />fm.method = 'post';
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />rolesRedirect.value;
-		submitForm(document.<portlet:namespace />fm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:renderURL>');
-	}
-
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</c:if>
-</script>

@@ -30,7 +30,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOrganizationsURL">
-		<portlet:param name="struts_action" value="/enterprise_admin_organizations/view" />
+		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">

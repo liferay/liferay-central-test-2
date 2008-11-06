@@ -25,15 +25,24 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-PasswordPolicySearch searchContainer = (PasswordPolicySearch)request.getAttribute("liferay-ui:search:searchContainer");
-
-PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchContainer.getDisplayTerms();
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 %>
 
-<div>
-	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
+<div class="lfr-portlet-toolbar">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewRolesURL">
+		<portlet:param name="struts_action" value="/enterprise_admin/view" />
+	</portlet:renderURL>
 
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
+		<a href="<%= viewRolesURL %>"><liferay-ui:message key="view-all" /></a>
+	</span>
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addRoleURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</portlet:renderURL>
+
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addRoleURL %>"><liferay-ui:message key="add" /></a></span>
+	</c:if>
 </div>
