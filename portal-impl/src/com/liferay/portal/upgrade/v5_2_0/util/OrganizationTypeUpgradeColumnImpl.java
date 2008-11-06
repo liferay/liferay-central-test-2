@@ -47,7 +47,7 @@ public class OrganizationTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			return "location";
 		}
 		else {
-			return "regular";
+			return "regular-organization";
 		}
 	}
 

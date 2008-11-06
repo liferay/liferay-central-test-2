@@ -113,8 +113,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<%
 		String[] childrenTypes = organization.getChildrenTypes();
 
-		for (String type : childrenTypes) {
-			String message = LanguageUtil.format(pageContext, "add-x", new String[]{LanguageUtil.get(pageContext, type)});
+		for (String childrenType : childrenTypes) {
 		%>
 
 			<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
@@ -122,10 +121,10 @@ long organizationGroupId = organization.getGroup().getGroupId();
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="parentOrganizationSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
-					<portlet:param name="type" value="<%= type %>" />
+					<portlet:param name="type" value="<%= childrenType %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="add_location" message="<%= message %>" url="<%= addSuborganizationURL %>" />
+				<liferay-ui:icon image="add_location" message="<%= LanguageUtil.format(pageContext, "add-x", new String[] {LanguageUtil.get(pageContext, childrenType)}) %>" url="<%= addSuborganizationURL %>" />
 			</c:if>
 
 		<%
