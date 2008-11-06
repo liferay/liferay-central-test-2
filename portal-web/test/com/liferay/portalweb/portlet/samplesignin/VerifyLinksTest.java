@@ -52,24 +52,8 @@ public class VerifyLinksTest extends BaseTestCase {
 		verifyTrue(selenium.isTextPresent("You are signed in as Joe Bloggs."));
 		selenium.click(RuntimeVariables.replace("link=Joe Bloggs"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_2_screenName")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		assertTrue(selenium.isTextPresent(""));
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
 	}
 }
