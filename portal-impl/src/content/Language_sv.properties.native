@@ -436,6 +436,7 @@ add-user-group=Lägg till användargrupp
 add-user=Lägg till användare
 add-website=Lägg till webbsida
 add-wiki=Lägg till Wiki
+add-x=Add {0}
 add=Lägg till
 additional-notes=Extra anteckningar
 address-book=Adressbok

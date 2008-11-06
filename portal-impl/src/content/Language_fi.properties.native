@@ -435,6 +435,7 @@ add-user-group=Lisää käyttäjäryhmä
 add-user=Lisää käyttäjä
 add-website=Lisää websivu
 add-wiki=Lisää wiki
+add-x=Add {0}
 add=Lisää
 additional-notes=Lisätietoa
 address-book=Osoitekirja
