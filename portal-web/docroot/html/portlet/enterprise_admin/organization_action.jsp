@@ -124,7 +124,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 					<portlet:param name="type" value="<%= childrenType %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="add_location" message="<%= LanguageUtil.format(pageContext, "add-x", new String[] {LanguageUtil.get(pageContext, childrenType)}) %>" url="<%= addSuborganizationURL %>" />
+				<liferay-ui:icon image="add_location" message='<%= LanguageUtil.format(pageContext, "add-x", new String[] {LanguageUtil.get(pageContext, childrenType)}) %>' url="<%= addSuborganizationURL %>" />
 			</c:if>
 
 		<%
