@@ -45,8 +45,6 @@ String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, cla
 
 List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 
-Collections.sort(attributeNames, new StringComparator());
-
 for (String attributeName : attributeNames) {
 %>
 
