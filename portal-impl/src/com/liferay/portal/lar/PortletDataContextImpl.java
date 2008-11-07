@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
@@ -419,6 +420,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public List<ObjectValuePair<String, byte[]>> getZipFolderEntries(
 		String path) {
+
+		if (Validator.isNull(path)) {
+			return null;
+		}
 
 		List<ObjectValuePair<String, byte[]>> folderEntries =
 			getZipReader().getFolderEntries(path);

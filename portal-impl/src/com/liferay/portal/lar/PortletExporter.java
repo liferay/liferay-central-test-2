@@ -648,7 +648,7 @@ public class PortletExporter {
 			throw new SystemException(e);
 		}
 
-		if (data == null) {
+		if (Validator.isNull(data)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Not exporting data for " + portletId +
