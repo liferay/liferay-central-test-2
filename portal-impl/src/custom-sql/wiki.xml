@@ -21,7 +21,7 @@
 				WikiPage
 			WHERE
 				(resourcePrimKey = ?) AND
-				(head = TRUE)
+				(head = [$TRUE$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByCreateDate">
