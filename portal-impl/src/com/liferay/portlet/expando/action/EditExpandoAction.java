@@ -285,14 +285,14 @@ public class EditExpandoAction extends PortletAction {
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_HEIGHT, "105");
 			properties.setProperty(
-				ExpandoColumnConstants.PROPERTY_WIDTH, "500");
+				ExpandoColumnConstants.PROPERTY_WIDTH, "450");
 		}
 		else if (preset.equals("PresetTextBoxIndexed()")) {
 			type = ExpandoColumnConstants.STRING;
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_HEIGHT, "105");
 			properties.setProperty(
-				ExpandoColumnConstants.PROPERTY_WIDTH, "500");
+				ExpandoColumnConstants.PROPERTY_WIDTH, "450");
 			properties.setProperty(
 				ExpandoBridgeIndexer.INDEXABLE, Boolean.TRUE.toString());
 		}
