@@ -1088,7 +1088,7 @@
 		<field name="inUseSSL" type="boolean" />
 		<field name="inUserName" type="String" />
 		<field name="inPassword" type="String">
-			<hint name="password">true</hint>
+			<hint name="secret">true</hint>
 		</field>
 		<field name="inReadInterval" type="int" />
 		<field name="outEmailAddress" type="String" />
