@@ -44,7 +44,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -86,69 +86,31 @@ import org.apache.commons.logging.LogFactory;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long userId, long plid, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			long userId, String title, String content, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, boolean draft, boolean allowTrackbacks,
+			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, plid, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, allowTrackbacks, trackbacks, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
+			null, userId, title, content, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute, draft,
+			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public BlogsEntry addEntry(
-			String uuid, long userId, long plid, String title, String content,
+			String uuid, long userId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			uuid, userId, plid, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, allowTrackbacks, trackbacks, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
-	}
-
-	public BlogsEntry addEntry(
-			long userId, long plid, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			null, userId, plid, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, allowTrackbacks, trackbacks, tagsEntries, null, null,
-			communityPermissions, guestPermissions, themeDisplay);
-	}
-
-	public BlogsEntry addEntry(
-			String uuid, long userId, long plid, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			boolean allowTrackbacks, String[] trackbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid, PortletKeys.BLOGS);
+		long groupId = PortalUtil.getScopeGroupId(
+			serviceContext.getPlid(), PortletKeys.BLOGS);
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
@@ -181,15 +143,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addEntryResources(
-				entry, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				entry, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
-			addEntryResources(entry, communityPermissions, guestPermissions);
+			addEntryResources(
+				entry, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		// Statistics
@@ -208,7 +172,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(userId, entry, tagsEntries);
+		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -216,8 +180,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if (!draft) {
 				Indexer.addEntry(
 					entry.getCompanyId(), entry.getGroupId(), userId,
-					entry.getUserName(), entryId, title, content, tagsEntries,
-					entry.getExpandoBridge());
+					entry.getUserName(), entryId, title, content,
+					serviceContext.getTagsEntries(), entry.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -227,8 +191,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Ping
 
 		if (!draft) {
-			pingGoogle(entry, themeDisplay);
-			pingTrackbacks(entry, trackbacks, false, themeDisplay);
+			pingGoogle(entry, serviceContext);
+			pingTrackbacks(entry, trackbacks, false, serviceContext);
 		}
 
 		return entry;
@@ -662,8 +626,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long entryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			ThemeDisplay themeDisplay)
+			boolean allowTrackbacks, String[] trackbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -710,7 +674,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(userId, entry, tagsEntries);
+		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -718,8 +682,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if (!draft) {
 				Indexer.updateEntry(
 					entry.getCompanyId(), entry.getGroupId(), userId,
-					entry.getUserName(), entryId, title, content, tagsEntries,
-					entry.getExpandoBridge());
+					entry.getUserName(), entryId, title, content,
+					serviceContext.getTagsEntries(), entry.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -729,15 +693,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Ping
 
 		if (!draft) {
-			pingGoogle(entry, themeDisplay);
+			pingGoogle(entry, serviceContext);
 
 			String urlTitle = entry.getUrlTitle();
 
 			if (!oldDraft && !oldUrlTitle.equals(urlTitle)) {
-				pingTrackbacks(entry, trackbacks, true, themeDisplay);
+				pingTrackbacks(entry, trackbacks, true, serviceContext);
 			}
 			else {
-				pingTrackbacks(entry, trackbacks, false, themeDisplay);
+				pingTrackbacks(entry, trackbacks, false, serviceContext);
 			}
 		}
 
@@ -778,16 +742,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return newUrlTitle;
 	}
 
-	protected void pingGoogle(BlogsEntry entry, ThemeDisplay themeDisplay)
+	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (themeDisplay == null) {
+		if (Validator.isNull(serviceContext.getPortalURL()) &&
+			Validator.isNull(serviceContext.getLayoutURL())) {
+
 			return;
 		}
 
 		Group group = groupPersistence.findByPrimaryKey(entry.getGroupId());
 
-		String portalURL = PortalUtil.getPortalURL(themeDisplay);
+		String portalURL = serviceContext.getPortalURL();
 
 		if ((portalURL.indexOf("://localhost") != -1) ||
 			(portalURL.indexOf("://127.0.0.1") != -1)) {
@@ -795,7 +761,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
-		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+		String layoutURL = serviceContext.getLayoutURL();
 
 		StringBuilder sb = new StringBuilder();
 
@@ -888,10 +854,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	protected void pingTrackbacks(
 			BlogsEntry entry, String[] trackbacks, boolean pingOldTrackbacks,
-			ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws SystemException {
 
-		if (themeDisplay == null) {
+		if (Validator.isNull(serviceContext.getPortalURL()) &&
+			Validator.isNull(serviceContext.getLayoutURL())) {
+
 			return;
 		}
 
@@ -901,7 +869,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			HtmlUtil.extractText(entry.getContent()),
 			PropsValues.BLOGS_TRACKBACK_EXCERPT_LENGTH);
 		String url =
-			themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay)
+			serviceContext.getPortalURL() + serviceContext.getLayoutURL()
 				+ "/-/blogs/" + entry.getUrlTitle();
 
 		parts.put("title", entry.getTitle());

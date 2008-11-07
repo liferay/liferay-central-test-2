@@ -76,65 +76,51 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
  */
 public class BlogsEntryServiceHttp {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String title,
+		HttpPrincipal httpPrincipal, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = title;
+			Object paramObj0 = title;
 
 			if (title == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = content;
+
+			if (content == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = content;
+			Object paramObj2 = new IntegerWrapper(displayDateMonth);
 
-			if (content == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
+			Object paramObj3 = new IntegerWrapper(displayDateDay);
 
-			Object paramObj3 = new IntegerWrapper(displayDateMonth);
+			Object paramObj4 = new IntegerWrapper(displayDateYear);
 
-			Object paramObj4 = new IntegerWrapper(displayDateDay);
+			Object paramObj5 = new IntegerWrapper(displayDateHour);
 
-			Object paramObj5 = new IntegerWrapper(displayDateYear);
+			Object paramObj6 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj6 = new IntegerWrapper(displayDateHour);
+			Object paramObj7 = new BooleanWrapper(draft);
 
-			Object paramObj7 = new IntegerWrapper(displayDateMinute);
+			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
 
-			Object paramObj8 = new BooleanWrapper(draft);
-
-			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
-
-			Object paramObj10 = trackbacks;
+			Object paramObj9 = trackbacks;
 
 			if (trackbacks == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = tagsEntries;
+			Object paramObj10 = serviceContext;
 
-			if (tagsEntries == null) {
-				paramObj11 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj12 = new BooleanWrapper(addCommunityPermissions);
-
-			Object paramObj13 = new BooleanWrapper(addGuestPermissions);
-
-			Object paramObj14 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj14 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj10 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
@@ -142,114 +128,7 @@ public class BlogsEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.blogs.model.BlogsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
-		java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = title;
-
-			if (title == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = content;
-
-			if (content == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new IntegerWrapper(displayDateMonth);
-
-			Object paramObj4 = new IntegerWrapper(displayDateDay);
-
-			Object paramObj5 = new IntegerWrapper(displayDateYear);
-
-			Object paramObj6 = new IntegerWrapper(displayDateHour);
-
-			Object paramObj7 = new IntegerWrapper(displayDateMinute);
-
-			Object paramObj8 = new BooleanWrapper(draft);
-
-			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
-
-			Object paramObj10 = trackbacks;
-
-			if (trackbacks == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj11 = tagsEntries;
-
-			if (tagsEntries == null) {
-				paramObj11 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj12 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj12 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj13 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj13 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj14 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj14 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
-					"addEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
+						paramObj10
 					});
 
 			Object returnObj = null;
@@ -741,8 +620,7 @@ public class BlogsEntryServiceHttp {
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
-		java.lang.String[] tagsEntries,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -780,17 +658,11 @@ public class BlogsEntryServiceHttp {
 				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = tagsEntries;
+			Object paramObj11 = serviceContext;
 
-			if (tagsEntries == null) {
-				paramObj11 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj12 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj12 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj11 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
@@ -798,7 +670,7 @@ public class BlogsEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
+						paramObj10, paramObj11
 					});
 
 			Object returnObj = null;

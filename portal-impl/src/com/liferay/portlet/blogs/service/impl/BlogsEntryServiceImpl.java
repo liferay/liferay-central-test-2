@@ -32,6 +32,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -65,43 +66,20 @@ import java.util.List;
 public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long plid, String title, String content, int displayDateMonth,
+			String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.BLOGS,
+			getPermissionChecker(), serviceContext.getPlid(), PortletKeys.BLOGS,
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
+			getUserId(), title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbacks, tagsEntries, addCommunityPermissions,
-			addGuestPermissions, themeDisplay);
-	}
-
-	public BlogsEntry addEntry(
-			long plid, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.BLOGS,
-			ActionKeys.ADD_ENTRY);
-
-		return blogsEntryLocalService.addEntry(
-			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbacks, tagsEntries, communityPermissions,
-			guestPermissions, themeDisplay);
+			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -287,8 +265,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			long entryId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, String[] tagsEntries,
-			ThemeDisplay themeDisplay)
+			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -297,7 +274,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, allowTrackbacks, trackbacks, tagsEntries, themeDisplay);
+			draft, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	protected String exportToRSS(

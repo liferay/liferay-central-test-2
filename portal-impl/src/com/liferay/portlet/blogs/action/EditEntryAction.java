@@ -31,9 +31,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -217,11 +218,6 @@ public class EditEntryAction extends PortletAction {
 	protected Object[] updateEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Layout layout = themeDisplay.getLayout();
-
 		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
 		String title = ParamUtil.getString(actionRequest, "title");
@@ -250,11 +246,8 @@ public class EditEntryAction extends PortletAction {
 		String[] trackbacks = StringUtil.split(
 			ParamUtil.getString(actionRequest, "trackbacks"));
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "tagsEntries"));
-
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			BlogsEntry.class.getName(), actionRequest);
 
 		BlogsEntry entry = null;
 		String oldUrlTitle = StringPool.BLANK;
@@ -264,11 +257,9 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			entry = BlogsEntryServiceUtil.addEntry(
-				layout.getPlid(), title, content, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, draft, allowTrackbacks, trackbacks,
-				tagsEntries, addCommunityPermissions, addGuestPermissions,
-				themeDisplay);
+				title, content, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute, draft,
+				allowTrackbacks, trackbacks, serviceContext);
 
 			if (!draft) {
 				AssetPublisherUtil.addAndStoreSelection(
@@ -288,7 +279,7 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute, draft,
-				allowTrackbacks, trackbacks, tagsEntries, themeDisplay);
+				allowTrackbacks, trackbacks, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

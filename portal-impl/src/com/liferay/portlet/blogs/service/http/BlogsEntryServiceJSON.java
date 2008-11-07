@@ -74,6 +74,21 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
  *
  */
 public class BlogsEntryServiceJSON {
+	public static JSONObject addEntry(java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(title,
+				content, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, draft, allowTrackbacks,
+				trackbacks, serviceContext);
+
+		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -122,5 +137,20 @@ public class BlogsEntryServiceJSON {
 				max);
 
 		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONObject updateEntry(long entryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.updateEntry(entryId,
+				title, content, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute, draft,
+				allowTrackbacks, trackbacks, serviceContext);
+
+		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 }

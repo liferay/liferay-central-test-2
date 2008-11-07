@@ -81,6 +81,28 @@ import java.rmi.RemoteException;
  *
  */
 public class BlogsEntryServiceSoap {
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, boolean draft, boolean allowTrackbacks,
+		java.lang.String[] trackbacks,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(title,
+					content, displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, draft, allowTrackbacks,
+					trackbacks, serviceContext);
+
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteEntry(long entryId) throws RemoteException {
 		try {
 			BlogsEntryServiceUtil.deleteEntry(entryId);
@@ -158,6 +180,28 @@ public class BlogsEntryServiceSoap {
 				BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap updateEntry(
+		long entryId, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean draft,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.updateEntry(entryId,
+					title, content, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute, draft,
+					allowTrackbacks, trackbacks, serviceContext);
+
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

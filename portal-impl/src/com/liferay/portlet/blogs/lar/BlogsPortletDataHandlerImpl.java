@@ -35,7 +35,7 @@ import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -200,7 +200,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
-		long plid = context.getPlid();
 
 		Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
 
@@ -227,10 +226,12 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				BlogsEntry.class, entry.getEntryId());
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
 
-		ThemeDisplay themeDisplay = null;
+		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setPlid(context.getPlid());
 
 		BlogsEntry existingEntry = null;
 
@@ -242,28 +243,25 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEntry == null) {
 				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), userId, plid, entry.getTitle(),
+					entry.getUuid(), userId, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					draft, allowTrackbacks, trackbacks, tagsEntries,
-					addCommunityPermissions, addGuestPermissions, themeDisplay);
+					draft, allowTrackbacks, trackbacks, serviceContext);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					draft, allowTrackbacks, trackbacks, tagsEntries,
-					themeDisplay);
+					draft, allowTrackbacks, trackbacks, serviceContext);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, plid, entry.getTitle(), entry.getContent(),
+				userId, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, draft, allowTrackbacks,
-				trackbacks, tagsEntries, addCommunityPermissions,
-				addGuestPermissions, themeDisplay);
+				trackbacks, serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
