@@ -236,14 +236,13 @@ public class EditExpandoAction extends PortletAction {
 			actionRequest, "resourcePrimKey");
 
 		String name = ParamUtil.getString(actionRequest, "name");
-
 		String preset = ParamUtil.getString(actionRequest, "type");
 
 		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
 			modelResource, resourcePrimKey);
 
 		if (preset.startsWith("Preset")) {
-			createFromPreset(actionRequest, expandoBridge, preset, name);
+			addPresetExpando(actionRequest, expandoBridge, preset, name);
 		}
 		else {
 			int type = ParamUtil.getInteger(actionRequest, "type");
@@ -254,7 +253,7 @@ public class EditExpandoAction extends PortletAction {
 		}
 	}
 
-	protected void createFromPreset(
+	protected void addPresetExpando(
 			ActionRequest actionRequest, ExpandoBridge expandoBridge,
 			String preset, String name)
 		throws Exception {

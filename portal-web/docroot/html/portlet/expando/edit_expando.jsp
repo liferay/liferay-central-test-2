@@ -147,25 +147,25 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 			</c:when>
 			<c:otherwise>
 				<select name="<portlet:namespace />type">
-					<optgroup label='<liferay-ui:message key="presets" />'>
-						<option value='PresetSelectionIntegerArray()'>Selection of Integer Values</option>
-						<option value='PresetSelectionDoubleArray()'>Selection of Decimal Values</option>
-						<option value='PresetSelectionStringArray()'>Selection of Text Values</option>
-						<option value='PresetTextBox()'>Text Box</option>
-						<option value='PresetTextBoxIndexed()'>Text Box - Indexed</option>
-						<option value='PresetTextFieldSecret()'>Text Field - Secret</option>
-						<option selected='selected' value='PresetTextFieldIndexed()'>Text Field - Indexed</option>
+					<optgroup label="<liferay-ui:message key="presets" />">
+						<option value="PresetSelectionIntegerArray()">Selection of Integer Values</option>
+						<option value="PresetSelectionDoubleArray()">Selection of Decimal Values</option>
+						<option value="PresetSelectionStringArray()">Selection of Text Values</option>
+						<option value="PresetTextBox()">Text Box</option>
+						<option value="PresetTextBoxIndexed()">Text Box - Indexed</option>
+						<option value="PresetTextFieldSecret()">Text Field - Secret</option>
+						<option selected value="PresetTextFieldIndexed()">Text Field - Indexed</option>
 					</optgroup>
-					<optgroup label='<liferay-ui:message key="primitives" />'>
+					<optgroup label="<liferay-ui:message key="primitives" />">
 
 						<%
-						for (int columnType : ExpandoColumnConstants.TYPES) {
-							if ((columnType == ExpandoColumnConstants.BOOLEAN_ARRAY) || (columnType == ExpandoColumnConstants.DATE_ARRAY)) {
+						for (int curType : ExpandoColumnConstants.TYPES) {
+							if ((curType == ExpandoColumnConstants.BOOLEAN_ARRAY) || (curType == ExpandoColumnConstants.DATE_ARRAY)) {
 								continue;
 							}
 						%>
 
-							<option value="<%= columnType %>"><%= ExpandoColumnConstants.getTypeLabel(columnType) %></option>
+							<option value="<%= curType %>"><%= ExpandoColumnConstants.getTypeLabel(curType) %></option>
 
 						<%
 						}
@@ -199,8 +199,8 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 					%>
 
 					<select name="<portlet:namespace />defaultValue">
-						<option <%= curValue ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-						<option <%= !curValue ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+						<option <%= curValue ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
+						<option <%= !curValue ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 					</select>
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
@@ -282,8 +282,8 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 			<input type="hidden" name="<portlet:namespace />PropertyName(hidden)" value="hidden" />
 
 			<select name="<portlet:namespace />Property(hidden)">
-				<option <%= propertyHidden ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-				<option <%= !propertyHidden ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+				<option <%= propertyHidden ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
+				<option <%= !propertyHidden ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 			</select>
 
 			<liferay-ui:icon-help message="custom-attribute-hidden-help" />
@@ -299,8 +299,8 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 				<input type="hidden" name="<portlet:namespace />PropertyName(selection)" value="selection" />
 
 				<select name="<portlet:namespace />Property(selection)">
-					<option <%= propertySelection ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-					<option <%= !propertySelection ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+					<option <%= propertySelection ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
+					<option <%= !propertySelection ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 				</select>
 
 				<liferay-ui:icon-help message="custom-attribute-selection-help" />
@@ -308,7 +308,7 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 		</tr>
 	</c:if>
 
-	<c:if test="<%= (type == ExpandoColumnConstants.STRING) %>">
+	<c:if test="<%= type == ExpandoColumnConstants.STRING %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="searchable" />
@@ -317,8 +317,8 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 				<input type="hidden" name="<portlet:namespace />PropertyName(indexable)" value="indexable" />
 
 				<select name="<portlet:namespace />Property(indexable)">
-					<option <%= propertyIndexable ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-					<option <%= !propertyIndexable ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+					<option <%= propertyIndexable ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
+					<option <%= !propertyIndexable ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 				</select>
 
 				<liferay-ui:icon-help message="custom-attribute-indexable-help" />
@@ -332,8 +332,8 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 				<input type="hidden" name="<portlet:namespace />PropertyName(secret)" value="secret" />
 
 				<select name="<portlet:namespace />Property(secret)">
-					<option <%= propertySecret ? "selected=" : "" %> value="1"><liferay-ui:message key="true" /></option>
-					<option <%= !propertySecret ? "selected=" : "" %> value="0"><liferay-ui:message key="false" /></option>
+					<option <%= propertySecret ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
+					<option <%= !propertySecret ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 				</select>
 
 				<liferay-ui:icon-help message="custom-attribute-secret-help" />
@@ -346,7 +346,7 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 			<td>
 				<input type="hidden" name="<portlet:namespace />PropertyName(height)" value="height" />
 
-				<input class="lfr-input-text" style="width: 25;" name="<portlet:namespace />Property(height)" type="text" value="<%= propertyHeight %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />Property(height)" style="width: 25;" type="text" value="<%= propertyHeight %>" />
 
 				<liferay-ui:icon-help message="custom-attribute-height-help" />
 			</td>
@@ -358,13 +358,14 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 			<td>
 				<input type="hidden" name="<portlet:namespace />PropertyName(width)" value="width" />
 
-				<input class="lfr-input-text" style="width: 25;" name="<portlet:namespace />Property(width)" type="text" value="<%= propertyWidth %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />Property(width)" style="width: 25;" type="text" value="<%= propertyWidth %>" />
 
 				<liferay-ui:icon-help message="custom-attribute-height-help" />
 			</td>
 		</tr>
 	</c:if>
 </c:if>
+
 </table>
 
 <br />

@@ -77,7 +77,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 				<input type="hidden" name="<portlet:namespace />ExpandoAttributeName(<%= name %>)" value="<%= name %>" />
 
 				<c:choose>
-					<c:when test="<%= (type == ExpandoColumnConstants.BOOLEAN) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN %>">
 
 						<%
 						Boolean curValue = (Boolean)value;
@@ -92,9 +92,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							<option <%= !curValue ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 						</select>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.BOOLEAN_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.DATE) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.DATE %>">
 						<span id="<%= randomNamespace %><%= name %>">
 
 							<%
@@ -135,9 +135,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							/>
 						</span>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.DATE_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.DATE_ARRAY %>">
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.DOUBLE_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
 								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
@@ -147,7 +147,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 									for (double curDefaultValue : (double[])defaultValue) {
 									%>
-										<option <%= ((curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "") %>><%= curDefaultValue %></option>
+
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+
 									<%
 									}
 									%>
@@ -155,6 +157,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								</select>
 							</c:when>
 							<c:otherwise>
+
 								<%
 								if (value == null) {
 									value = defaultValue;
@@ -165,7 +168,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.FLOAT_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.FLOAT_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
 								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
@@ -175,7 +178,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 									for (float curDefaultValue : (float[])defaultValue) {
 									%>
-										<option <%= ((curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "") %>><%= curDefaultValue %></option>
+
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+
 									<%
 									}
 									%>
@@ -183,6 +188,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								</select>
 							</c:when>
 							<c:otherwise>
+
 								<%
 								if (value == null) {
 									value = defaultValue;
@@ -193,7 +199,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.INTEGER_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.INTEGER_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
 								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
@@ -203,7 +209,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 									for (int curDefaultValue : (int[])defaultValue) {
 									%>
-										<option <%= ((curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "") %>><%= curDefaultValue %></option>
+
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+
 									<%
 									}
 									%>
@@ -211,6 +219,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								</select>
 							</c:when>
 							<c:otherwise>
+
 								<%
 								if (value == null) {
 									value = defaultValue;
@@ -221,7 +230,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.LONG_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.LONG_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
 								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
@@ -231,7 +240,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 									for (long curDefaultValue : (long[])defaultValue) {
 									%>
-										<option <%= ((curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "") %>><%= curDefaultValue %></option>
+
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+
 									<%
 									}
 									%>
@@ -239,6 +250,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								</select>
 							</c:when>
 							<c:otherwise>
+
 								<%
 								if (value == null) {
 									value = defaultValue;
@@ -249,7 +261,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.SHORT_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.SHORT_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
 								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
@@ -259,7 +271,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 									for (short curDefaultValue : (short[])defaultValue) {
 									%>
-										<option <%= ((curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "") %>><%= curDefaultValue %></option>
+
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+
 									<%
 									}
 									%>
@@ -267,6 +281,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								</select>
 							</c:when>
 							<c:otherwise>
+
 								<%
 								if (value == null) {
 									value = defaultValue;
@@ -277,7 +292,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="<%= (type == ExpandoColumnConstants.STRING_ARRAY) %>">
+					<c:when test="<%= type == ExpandoColumnConstants.STRING_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
 								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
@@ -287,7 +302,9 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 									for (String curDefaultValue : (String[])defaultValue) {
 									%>
-										<option <%= ((curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "") %>><%= curDefaultValue %></option>
+
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+
 									<%
 									}
 									%>
@@ -295,6 +312,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								</select>
 							</c:when>
 							<c:otherwise>
+
 								<%
 								if (value == null) {
 									value = defaultValue;
@@ -306,26 +324,24 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 						</c:choose>
 					</c:when>
 					<c:otherwise>
+
 						<%
 						if (Validator.isNull(String.valueOf(value))) {
 							value = defaultValue;
 						}
 						%>
 
-						<c:choose>
-							<c:when test="<%= propertySecret %>">
-								<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)" type="password" value="<%= String.valueOf(value) %>" />
-							</c:when>
-							<c:when test="<%= (propertyHeight > 0) && (propertyWidth > 0) %>">
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)" style='height: <%= propertyHeight %>; width:<%= propertyWidth %>;'><%= String.valueOf(value) %></textarea>
-							</c:when>
-							<c:when test="<%= (propertyWidth > 0) %>">
-								<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)" style='width:<%= propertyWidth %>;' type="text" value="<%= String.valueOf(value) %>" />
-							</c:when>
-							<c:otherwise>
-								<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)" type="text" value="<%= String.valueOf(value) %>" />
-							</c:otherwise>
-						</c:choose>
+						<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
+							style="
+								<c:if test="<%= (propertyHeight > 0) %>">
+									height: <%= propertyHeight %>;
+								</c:if>
+
+								<c:if test="<%= (propertyWidth > 0) %>">
+									width: <%= propertyWidth %>;
+								</c:if>"
+							type="<%= secret ? "password" : "text" %>" value="<%= value %>"
+						/>
 					</c:otherwise>
 				</c:choose>
 			</c:when>
