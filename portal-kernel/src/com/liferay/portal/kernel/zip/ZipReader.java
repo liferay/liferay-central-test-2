@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -128,6 +129,10 @@ public class ZipReader implements Serializable {
 	}
 
 	public byte[] getEntryAsByteArray(String name) {
+		if (Validator.isNull(name)) {
+			return null;
+		}
+
 		byte[] bytes = _entries.get(name);
 
 		if ((bytes == null) && name.startsWith(StringPool.SLASH)) {
@@ -154,6 +159,10 @@ public class ZipReader implements Serializable {
 	}
 
 	public List<ObjectValuePair<String, byte[]>> getFolderEntries(String path) {
+		if (Validator.isNull(path)) {
+			return null;
+		}
+
 		return _folderEntries.get(path);
 	}
 
