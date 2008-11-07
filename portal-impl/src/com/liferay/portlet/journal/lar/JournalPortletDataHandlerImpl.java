@@ -736,6 +736,35 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		JournalArticle existingArticle = null;
 
+		if (Validator.isNotNull(article.getStructureId())) {
+			JournalStructure structure = JournalStructureUtil.fetchByG_S(
+				context.getGroupId(), article.getStructureId());
+
+			if (structure == null) {
+				String structurePath = getImportStructurePath(
+					context, article.getStructureId());
+
+				importStructure(context, structureIds, structurePath);
+			}
+		}
+
+		if (Validator.isNotNull(article.getTemplateId())) {
+			JournalTemplate template = JournalTemplateUtil.fetchByG_T(
+				context.getGroupId(), article.getTemplateId());
+
+			if (template == null) {
+				String templatePath = getImportTemplatePath(
+					context, article.getTemplateId());
+
+				String smallImagePath = templatePath.replace(
+					article.getTemplateId() + ".xml", StringPool.BLANK);
+
+				importTemplate(
+					context, structureIds, templateIds, smallImagePath,
+					templatePath);
+			}
+		}
+
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
@@ -945,6 +974,13 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = structureEl.attributeValue("path");
 
+		importStructure(context, structureIds, path);
+	}
+
+	protected static void importStructure(
+			PortletDataContext context, Map structureIds, String path)
+		throws Exception {
+
 		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
@@ -1031,6 +1067,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = templateEl.attributeValue("path");
 
+		importTemplate(
+			context, structureIds, templateIds,
+			templateEl.attributeValue("small-image-path"), path);
+	}
+
+	protected static void importTemplate(
+			PortletDataContext context, Map structureIds, Map templateIds,
+			String smallImagePath, String path)
+		throws Exception {
+
 		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
@@ -1071,17 +1117,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		File smallFile = null;
 
-		if (template.isSmallImage()) {
-			String smallImagePath = templateEl.attributeValue(
-				"small-image-path");
-
+		if (template.isSmallImage() && (Validator.isNotNull(smallImagePath))) {
 			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
 
-			smallFile = File.createTempFile(
-				String.valueOf(template.getSmallImageId()),
-				StringPool.PERIOD + template.getSmallImageType());
+			if (bytes != null) {
+				smallFile = File.createTempFile(
+					String.valueOf(template.getSmallImageId()),
+					StringPool.PERIOD + template.getSmallImageType());
 
-			FileUtil.write(smallFile, bytes);
+				FileUtil.write(smallFile, bytes);
+			}
 		}
 
 		JournalTemplate existingTemplate = null;
@@ -1482,6 +1527,32 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/feeds/");
 		sb.append(feed.getFeedId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getImportStructurePath(
+		PortletDataContext context, String structureId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.JOURNAL));
+		sb.append("/structures/");
+		sb.append(structureId);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getImportTemplatePath(
+		PortletDataContext context, String templateId) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getImportPortletPath(PortletKeys.JOURNAL));
+		sb.append("/templates/");
+		sb.append(templateId);
 		sb.append(".xml");
 
 		return sb.toString();
