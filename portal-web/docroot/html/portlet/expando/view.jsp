@@ -58,8 +58,6 @@ portletURL.setParameter("modelResource", modelResource);
 ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
 
 List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
-
-Collections.sort(attributeNames, new StringComparator());
 %>
 
 <liferay-ui:search-container

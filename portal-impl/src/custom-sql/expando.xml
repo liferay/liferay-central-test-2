@@ -27,6 +27,8 @@
 			WHERE
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?)
+			ORDER BY
+				ExpandoColumn.name ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN_CN">
