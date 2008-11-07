@@ -78,7 +78,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 <input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
 <liferay-ui:tabs
-	names="category"
+	names="<%= (category == null) ? Constants.ADD : Constants.UPDATE + "-category" %>"
 	backURL="<%= redirect %>"
 />
 
