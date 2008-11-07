@@ -1400,11 +1400,9 @@ public class ServiceBuilder {
 		}
 	}
 
-	public boolean isPersistenceReadOnlyMethod(
-		JavaMethod method, List<String> txRequiredList) {
-
+	public boolean isPersistenceReadOnlyMethod(JavaMethod method) {
 		return isReadOnlyMethod(
-			method, txRequiredList,
+			method, null,
 			PropsValues.SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES);
 	}
 
@@ -1475,6 +1473,10 @@ public class ServiceBuilder {
 	public boolean isTxRequiredMethod(
 		JavaMethod method, List<String> txRequiredList) {
 
+		if (txRequiredList == null) {
+			return false;
+		}
+		
 		String methodName = method.getName();
 
 		for (String txRequired : txRequiredList) {

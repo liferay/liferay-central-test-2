@@ -24,6 +24,7 @@ package com.liferay.lock.service;
 
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -32,7 +33,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface LockService {
 
 	public void clear();

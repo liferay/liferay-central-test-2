@@ -23,6 +23,8 @@
 package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.mail.MailMessage;
 
@@ -34,7 +36,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface MailService {
 
 	public void addForward(

@@ -1,5 +1,7 @@
 package ${packagePath}.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -27,7 +29,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>

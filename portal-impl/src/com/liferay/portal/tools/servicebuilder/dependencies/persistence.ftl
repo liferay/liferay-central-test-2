@@ -1,11 +1,13 @@
 package ${packagePath}.service.persistence;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 import java.util.Date;
 
-@Transactional
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface ${entity.name}Persistence {
 
 	<#list methods as method>
@@ -32,7 +34,7 @@ public interface ${entity.name}Persistence {
 				</#if>
 			</#if>
 
-			<#if serviceBuilder.isPersistenceReadOnlyMethod(method, entity.txRequiredList)>
+			<#if serviceBuilder.isPersistenceReadOnlyMethod(method)>
 				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 			</#if>
 

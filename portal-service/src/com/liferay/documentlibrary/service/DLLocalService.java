@@ -36,7 +36,7 @@ import java.io.InputStream;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface DLLocalService {
 
 	public void addFile(

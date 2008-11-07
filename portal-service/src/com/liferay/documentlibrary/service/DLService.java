@@ -34,7 +34,7 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface DLService {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
