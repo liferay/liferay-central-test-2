@@ -41,7 +41,7 @@ public class TimeZoneUtil {
 	}
 
 	private TimeZoneUtil() {
-		_timeZone = TimeZone.getTimeZone("GMT");
+		_timeZone = TimeZone.getTimeZone(StringPool.UTC);
 	}
 
 	private TimeZone _getDefault() {

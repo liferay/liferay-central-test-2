@@ -169,7 +169,7 @@ public class DateUtil {
 
 		DateFormat dateFormat = new SimpleDateFormat(pattern);
 
-		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		dateFormat.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 
 		return dateFormat;
 	}

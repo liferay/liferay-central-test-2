@@ -1178,7 +1178,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			cal = Calendar.getInstance();
 		}
 		else if (!timeZoneSensitive) {
-			cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+			cal = Calendar.getInstance(TimeZone.getTimeZone(StringPool.UTC));
 		}
 		else {
 			cal = Calendar.getInstance(timeZone);

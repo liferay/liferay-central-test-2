@@ -53,6 +53,7 @@
 package com.liferay.util.cal;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
@@ -221,7 +222,7 @@ public class Recurrence implements Serializable {
 
 		if (start == null) {
 			dtStart = CalendarFactoryUtil.getCalendar(
-				TimeZone.getTimeZone("GMT"));
+				TimeZone.getTimeZone(StringPool.UTC));
 
 			dtStart.setTime(new Date(0L));
 		}
@@ -230,7 +231,7 @@ public class Recurrence implements Serializable {
 
 			dtStart.clear(Calendar.ZONE_OFFSET);
 			dtStart.clear(Calendar.DST_OFFSET);
-			dtStart.setTimeZone(TimeZone.getTimeZone("GMT"));
+			dtStart.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 		}
 
 		dtStart.setMinimalDaysInFirstWeek(4);
@@ -292,7 +293,7 @@ public class Recurrence implements Serializable {
 
 		tempEnd.clear(Calendar.ZONE_OFFSET);
 		tempEnd.clear(Calendar.DST_OFFSET);
-		tempEnd.setTimeZone(TimeZone.getTimeZone("GMT"));
+		tempEnd.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 		duration.setInterval(tempEnd.getTime().getTime()
 							 - dtStart.getTime().getTime());
 	}
@@ -398,7 +399,7 @@ public class Recurrence implements Serializable {
 
 		until.clear(Calendar.ZONE_OFFSET);
 		until.clear(Calendar.DST_OFFSET);
-		until.setTimeZone(TimeZone.getTimeZone("GMT"));
+		until.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 	}
 
 	/**
@@ -655,7 +656,7 @@ public class Recurrence implements Serializable {
 
 		myCurrent.clear(Calendar.ZONE_OFFSET);
 		myCurrent.clear(Calendar.DST_OFFSET);
-		myCurrent.setTimeZone(TimeZone.getTimeZone("GMT"));
+		myCurrent.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 		myCurrent.setMinimalDaysInFirstWeek(4);
 		myCurrent.setFirstDayOfWeek(dtStart.getFirstDayOfWeek());
 
@@ -832,7 +833,7 @@ public class Recurrence implements Serializable {
 
 			candidate.clear(Calendar.ZONE_OFFSET);
 			candidate.clear(Calendar.DST_OFFSET);
-			candidate.setTimeZone(TimeZone.getTimeZone("GMT"));
+			candidate.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 			candidate.setMinimalDaysInFirstWeek(4);
 			candidate.setFirstDayOfWeek(dtStart.getFirstDayOfWeek());
 		}

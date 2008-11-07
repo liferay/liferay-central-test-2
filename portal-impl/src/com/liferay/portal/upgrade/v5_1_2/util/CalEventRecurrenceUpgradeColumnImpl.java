@@ -119,7 +119,7 @@ public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		recurrenceJSON.put("javaClass", TZSRecurrence.class.getName());
 
-		TimeZone timeZone = TimeZone.getTimeZone("GMT");
+		TimeZone timeZone = TimeZone.getTimeZone(StringPool.UTC);
 
 		JSONObject timeZoneJSON = JSONFactoryUtil.createJSONObject(
 			JSONFactoryUtil.serialize(timeZone));
