@@ -228,10 +228,10 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setTagsEntries(tagsEntries);
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setPlid(context.getPlid());
+		serviceContext.setTagsEntries(tagsEntries);
 
 		BlogsEntry existingEntry = null;
 
