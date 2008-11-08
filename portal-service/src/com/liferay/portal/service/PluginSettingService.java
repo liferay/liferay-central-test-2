@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -48,7 +50,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portal.service.PluginSettingServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface PluginSettingService {
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,

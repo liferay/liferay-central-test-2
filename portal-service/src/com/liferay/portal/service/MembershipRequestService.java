@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portal.service.MembershipRequestServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface MembershipRequestService {
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long groupId, java.lang.String comments)

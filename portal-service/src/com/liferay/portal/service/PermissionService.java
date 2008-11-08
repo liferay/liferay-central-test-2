@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -48,7 +50,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portal.service.PermissionServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface PermissionService {
 	public void checkPermission(long groupId, java.lang.String name,
 		java.lang.String primKey)
