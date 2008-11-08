@@ -22,6 +22,8 @@
 
 package com.liferay.wsrp.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.wsrp.service.WSRPProducerLocalServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface WSRPProducerLocalService {
 	public com.liferay.wsrp.model.WSRPProducer addWSRPProducer(
 		com.liferay.wsrp.model.WSRPProducer wsrpProducer)
