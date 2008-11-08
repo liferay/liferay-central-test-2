@@ -1476,7 +1476,7 @@ public class ServiceBuilder {
 		if (txRequiredList == null) {
 			return false;
 		}
-		
+
 		String methodName = method.getName();
 
 		for (String txRequired : txRequiredList) {
