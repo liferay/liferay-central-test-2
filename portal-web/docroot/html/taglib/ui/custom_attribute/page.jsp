@@ -340,7 +340,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								<c:if test="<%= (propertyWidth > 0) %>">
 									width: <%= propertyWidth %>;
 								</c:if>"
-							type="<%= secret ? "password" : "text" %>" value="<%= value %>"
+							type="<%= propertySecret ? "password" : "text" %>" value="<%= value %>"
 						/>
 					</c:otherwise>
 				</c:choose>
