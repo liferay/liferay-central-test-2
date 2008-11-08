@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface JournalContentSearchLocalService {
 	public com.liferay.portlet.journal.model.JournalContentSearch addJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)

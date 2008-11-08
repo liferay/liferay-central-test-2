@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -31,7 +33,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface AnnouncementsEntryPersistence {
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry create(
 		long entryId);

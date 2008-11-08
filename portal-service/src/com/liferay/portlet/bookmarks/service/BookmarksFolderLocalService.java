@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface BookmarksFolderLocalService {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)

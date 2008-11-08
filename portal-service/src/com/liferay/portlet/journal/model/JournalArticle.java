@@ -49,10 +49,8 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalArticle extends JournalArticleModel {
-	public java.lang.String getUserUuid()
+	public java.lang.String getApprovedByUserUuid()
 		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
 
 	public java.lang.String[] getAvailableLocales();
 
@@ -62,16 +60,18 @@ public interface JournalArticle extends JournalArticleModel {
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
 
-	public boolean isTemplateDriven();
-
-	public java.lang.String getApprovedByUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setApprovedByUserUuid(java.lang.String approvedByUserUuid);
-
 	public java.lang.String getSmallImageType()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public boolean isTemplateDriven();
+
+	public void setApprovedByUserUuid(java.lang.String approvedByUserUuid);
+
 	public void setSmallImageType(java.lang.String smallImageType);
+
+	public void setUserUuid(java.lang.String userUuid);
 }

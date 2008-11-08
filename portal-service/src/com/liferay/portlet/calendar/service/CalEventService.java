@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.calendar.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.calendar.service.CalEventServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface CalEventService {
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long plid,
 		java.lang.String title, java.lang.String description,

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addDLFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -48,7 +50,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface AnnouncementsEntryService {
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry addEntry(
 		long plid, long classNameId, long classPK, java.lang.String title,

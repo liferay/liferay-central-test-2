@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.blogs.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.blogs.service.BlogsEntryServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface BlogsEntryService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String title, java.lang.String content, int displayDateMonth,

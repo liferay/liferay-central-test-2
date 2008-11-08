@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.expando.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface ExpandoValueLocalService {
 	public com.liferay.portlet.expando.model.ExpandoValue addExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)

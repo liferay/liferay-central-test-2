@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -31,7 +33,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface JournalTemplatePersistence {
 	public com.liferay.portlet.journal.model.JournalTemplate create(long id);
 
