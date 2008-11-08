@@ -77,11 +77,6 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 <input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
-<liferay-ui:tabs
-	names="category"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= MailingListEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
@@ -91,11 +86,11 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 <liferay-ui:error exception="<%= MailingListOutServerNameException.class %>" message="please-enter-a-valid-outgoing-server-name" />
 <liferay-ui:error exception="<%= MailingListOutUserNameException.class %>" message="please-enter-a-valid-outgoing-user-name" />
 
-<c:if test="<%= parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
-	<div class="breadcrumbs">
-		<%= MBUtil.getBreadcrumbs(parentCategoryId, 0, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+<div class="breadcrumbs">
+	<%= MBUtil.getBreadcrumbs(parentCategoryId, 0, pageContext, renderRequest, renderResponse) %> &raquo;
+
+	<span class="current-action"><liferay-ui:message key="<%= ((category == null) ? Constants.ADD : Constants.UPDATE) + "-category" %>" /></span>
+</div>
 
 <table class="lfr-table">
 
