@@ -89,7 +89,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 <div class="breadcrumbs">
 	<%= MBUtil.getBreadcrumbs(parentCategoryId, 0, pageContext, renderRequest, renderResponse) %> &raquo;
 
-	<span class="current-action"><liferay-ui:message key="<%= ((category == null) ? Constants.ADD : Constants.UPDATE) + "-category" %>" /></span>
+	<span class="current-action"><liferay-ui:message key='<%= ((category == null) ? Constants.ADD : Constants.UPDATE) + "-category" %>' /></span>
 </div>
 
 <table class="lfr-table">
