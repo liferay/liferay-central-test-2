@@ -296,12 +296,12 @@ public class LoginAction extends Action {
 			screenNameCookie.setMaxAge(loginMaxAge);
 			screenNameCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(response, companyIdCookie);
-			CookieKeys.addCookie(response, idCookie);
-			CookieKeys.addCookie(response, passwordCookie);
-			CookieKeys.addCookie(response, rememberMeCookie);
-			CookieKeys.addCookie(response, loginCookie);
-			CookieKeys.addCookie(response, screenNameCookie);
+			CookieKeys.addCookie(request, response, companyIdCookie);
+			CookieKeys.addCookie(request, response, idCookie);
+			CookieKeys.addCookie(request, response, passwordCookie);
+			CookieKeys.addCookie(request, response, rememberMeCookie);
+			CookieKeys.addCookie(request, response, loginCookie);
+			CookieKeys.addCookie(request, response, screenNameCookie);
 		}
 		else {
 			throw new AuthException();

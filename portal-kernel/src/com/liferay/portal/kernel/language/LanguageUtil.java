@@ -215,9 +215,10 @@ public class LanguageUtil {
 	}
 
 	public static void updateCookie(
-		HttpServletResponse response, Locale locale) {
+		HttpServletRequest request, HttpServletResponse response,
+		Locale locale) {
 
-		getLanguage().updateCookie(response, locale);
+		getLanguage().updateCookie(request, response, locale);
 	}
 
 	public void setLanguage(Language language) {

@@ -72,8 +72,8 @@ public class SiteMinderLogoutAction extends Action {
 			smIdentityCookie.setMaxAge(0);
 			smIdentityCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(response, smSessionCookie);
-			CookieKeys.addCookie(response, smIdentityCookie);
+			CookieKeys.addCookie(request, response, smSessionCookie);
+			CookieKeys.addCookie(request, response, smIdentityCookie);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

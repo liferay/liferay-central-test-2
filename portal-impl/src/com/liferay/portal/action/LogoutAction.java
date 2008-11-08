@@ -92,9 +92,9 @@ public class LogoutAction extends Action {
 			passwordCookie.setMaxAge(0);
 			passwordCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(response, companyIdCookie);
-			CookieKeys.addCookie(response, idCookie);
-			CookieKeys.addCookie(response, passwordCookie);
+			CookieKeys.addCookie(request, response, companyIdCookie);
+			CookieKeys.addCookie(request, response, idCookie);
+			CookieKeys.addCookie(request, response, passwordCookie);
 
 			try {
 				session.invalidate();

@@ -66,46 +66,53 @@ public class CookieKeys {
 
 	public static final int VERSION = 0;
 
-	public static void addCookie(HttpServletResponse response, Cookie cookie) {
-		if (PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
-			if (!PropsValues.TCK_URL) {
+	public static void addCookie(
+		HttpServletRequest request, HttpServletResponse response,
+		Cookie cookie) {
 
-				// LEP-5175
+		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES ||
+			PropsValues.TCK_URL) {
 
-				String name = cookie.getName();
+			return;
+		}
 
-				String originalValue = cookie.getValue();
-				String encodedValue = originalValue;
+		// LEP-5175
 
-				if (isEncodedCookie(name)) {
-					encodedValue = new String(
-						Hex.encodeHex(originalValue.getBytes()));
+		String name = cookie.getName();
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Add encoded cookie " + name);
-						_log.debug("Original value " + originalValue);
-						_log.debug("Hex encoded value " + encodedValue);
-					}
-				}
+		String originalValue = cookie.getValue();
+		String encodedValue = originalValue;
 
-				cookie.setValue(encodedValue);
-				cookie.setVersion(VERSION);
+		if (isEncodedCookie(name)) {
+			encodedValue = new String(
+				Hex.encodeHex(originalValue.getBytes()));
 
-				// Setting a cookie will cause the TCK to lose its ability
-				// to track sessions
-
-				response.addCookie(cookie);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Add encoded cookie " + name);
+				_log.debug("Original value " + originalValue);
+				_log.debug("Hex encoded value " + encodedValue);
 			}
 		}
+
+		cookie.setSecure(request.isSecure());
+		cookie.setValue(encodedValue);
+		cookie.setVersion(VERSION);
+
+		// Setting a cookie will cause the TCK to lose its ability
+		// to track sessions
+
+		response.addCookie(cookie);
 	}
 
-	public static void addSupportCookie(HttpServletResponse response) {
+	public static void addSupportCookie(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		Cookie cookieSupportCookie = new Cookie(COOKIE_SUPPORT, "true");
 
 		cookieSupportCookie.setPath(StringPool.SLASH);
 		cookieSupportCookie.setMaxAge(MAX_AGE);
 
-		addCookie(response, cookieSupportCookie);
+		addCookie(request, response, cookieSupportCookie);
 	}
 
 	public static String getCookie(HttpServletRequest request, String name) {

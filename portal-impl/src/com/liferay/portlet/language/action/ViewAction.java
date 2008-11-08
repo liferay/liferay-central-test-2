@@ -105,7 +105,7 @@ public class ViewAction extends PortletAction {
 
 			session.setAttribute(Globals.LOCALE_KEY, locale);
 
-			LanguageUtil.updateCookie(response, locale);
+			LanguageUtil.updateCookie(request, response, locale);
 		}
 
 		// Send redirect

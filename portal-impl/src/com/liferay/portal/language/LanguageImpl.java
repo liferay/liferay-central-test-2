@@ -514,7 +514,10 @@ public class LanguageImpl implements Language {
 		return _localesSet.contains(locale);
 	}
 
-	public void updateCookie(HttpServletResponse response, Locale locale) {
+	public void updateCookie(
+		HttpServletRequest request, HttpServletResponse response,
+		Locale locale) {
+
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		Cookie languageIdCookie = new Cookie(
@@ -523,7 +526,7 @@ public class LanguageImpl implements Language {
 		languageIdCookie.setPath(StringPool.SLASH);
 		languageIdCookie.setMaxAge(CookieKeys.MAX_AGE);
 
-		CookieKeys.addCookie(response, languageIdCookie);
+		CookieKeys.addCookie(request, response, languageIdCookie);
 	}
 
 	private static LanguageImpl _getInstance() {

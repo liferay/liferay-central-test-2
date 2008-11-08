@@ -977,7 +977,7 @@ public class ServicePreAction extends Action {
 
 			session.setAttribute(Globals.LOCALE_KEY, locale);
 
-			LanguageUtil.updateCookie(response, locale);
+			LanguageUtil.updateCookie(request, response, locale);
 		}
 
 		// Cookie support
@@ -989,7 +989,7 @@ public class ServicePreAction extends Action {
 			CookieKeys.validateSupportCookie(request);
 		}
 		catch (Exception e) {
-			CookieKeys.addSupportCookie(response);
+			CookieKeys.addSupportCookie(request, response);
 		}
 
 		// Time zone

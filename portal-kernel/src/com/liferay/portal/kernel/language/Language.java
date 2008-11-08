@@ -121,6 +121,8 @@ public interface Language {
 
 	public boolean isAvailableLocale(Locale locale);
 
-	public void updateCookie(HttpServletResponse response, Locale locale);
+	public void updateCookie(
+		HttpServletRequest request, HttpServletResponse response,
+		Locale locale);
 
 }

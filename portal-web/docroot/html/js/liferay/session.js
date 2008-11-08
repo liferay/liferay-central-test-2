@@ -156,7 +156,12 @@ Liferay.Session = {
 		var instance = this;
 
 		var currentTime = new Date().getTime();
-		jQuery.cookie(instance._cookieKey, status || currentTime);
+
+		var options = {
+			secure : (window.location.protocol.indexOf('https') > -1)
+		};
+
+		jQuery.cookie(instance._cookieKey, status || currentTime, options);
 	},
 
 	warn: function() {
