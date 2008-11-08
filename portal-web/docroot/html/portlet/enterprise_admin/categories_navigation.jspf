@@ -103,7 +103,7 @@ for (int i = 0; i < categoryNames.length; i++) {
 				{
 					container: '#<portlet:namespace />sectionsContainer',
 					modifiedSections: '<portlet:namespace />modifiedSections',
-					defaultModifiedSections: <%= _getJsArray(modifiedSections) %>
+					defaultModifiedSections: <%= JS.toScript(modifiedSections) %>
 				}
 			);
 
@@ -137,22 +137,5 @@ private String _getSectionId(String name) {
 
 private String _getSectionJsp(String name) {
 	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
-}
-
-private String _getJsArray(String[] array) {
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(StringPool.OPEN_BRACKET);
-
-	for (String item : array) {
-		sb.append(StringPool.APOSTROPHE);
-		sb.append(item);
-		sb.append(StringPool.APOSTROPHE);
-		sb.append(StringPool.COMMA);
-	}
-
-	sb.append(StringPool.CLOSE_BRACKET);
-
-	return sb.toString();
 }
 %>

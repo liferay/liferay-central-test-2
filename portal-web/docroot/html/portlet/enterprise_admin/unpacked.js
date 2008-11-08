@@ -97,7 +97,7 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 
 		instance._addModifiedSection(currentSection);
 	},
-	
+
 	_addModifiedSection: function (section) {
 		var instance = this;
 
