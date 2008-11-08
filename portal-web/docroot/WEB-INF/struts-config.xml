@@ -62,12 +62,7 @@
 			<forward name="portal.layout" path="portal.layout" />
 		</action>
 
-		<action path="/portal/login" type="com.liferay.portal.action.LoginAction">
-			<forward name="portal.login" path="portal.login" />
-			<forward name="/portal/touch_protected.jsp" path="/portal/touch_protected.jsp" />
-		</action>
-
-		<action path="/portal/login_captcha" type="com.liferay.portal.captcha.CaptchaPortalAction" />
+		<action path="/portal/login" type="com.liferay.portal.action.LoginAction" />
 
 		<action path="/portal/logout" type="com.liferay.portal.action.LogoutAction" />
 
@@ -1099,12 +1094,16 @@
 
 		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
-		<action path="/login/create_account" type="com.liferay.portlet.login.action.AddUserAction">
+		<action path="/login/create_account" type="com.liferay.portlet.login.action.CreateAccountAction">
 			<forward name="portlet.login.create_account" path="portlet.login.create_account" />
 		</action>
 
-		<action path="/login/view" type="com.liferay.portlet.login.action.ViewAction">
-			<forward name="portlet.login.view" path="portlet.login.view" />
+		<action path="/login/forgot_password" type="com.liferay.portlet.login.action.ForgotPasswordAction">
+			<forward name="portlet.login.forgot_password" path="portlet.login.forgot_password" />
+		</action>
+
+		<action path="/login/login" type="com.liferay.portlet.login.action.LoginAction">
+			<forward name="portlet.login.login" path="portlet.login.login" />
 		</action>
 
 		<!-- Maps -->

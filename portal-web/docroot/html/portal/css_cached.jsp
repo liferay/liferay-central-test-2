@@ -1665,7 +1665,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 
 /* ----------- OpenID ---------- */
 
-input[type="text"].openid_login {
+input[type="text"].openid-login {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
@@ -1673,7 +1673,7 @@ input[type="text"].openid_login {
 	padding-left: 18px;
 }
 
-.ie6 input.text.openid_login {
+.ie6 input.text.openid-login {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;

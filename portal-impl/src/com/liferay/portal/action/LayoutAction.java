@@ -77,6 +77,7 @@ import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseFactory;
 import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.StateAwareResponseImpl;
+import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -136,8 +137,8 @@ public class LayoutAction extends Action {
 			WebKeys.LAYOUT_DEFAULT);
 
 		if ((layoutDefault != null) && (layoutDefault.booleanValue())) {
-			Layout requestedLayout =
-				(Layout)request.getAttribute(WebKeys.REQUESTED_LAYOUT);
+			Layout requestedLayout = (Layout)request.getAttribute(
+				WebKeys.REQUESTED_LAYOUT);
 
 			if (requestedLayout != null) {
 				String redirectParam = "redirect";
@@ -161,8 +162,12 @@ public class LayoutAction extends Action {
 				String url = PortalUtil.getLayoutURL(
 					requestedLayout, themeDisplay);
 
-				String redirect = HttpUtil.addParameter(
-					themeDisplay.getURLSignIn(), redirectParam, url);
+				PortletURL loginURL = LoginUtil.getLoginURL(
+					request, themeDisplay.getPlid());
+
+				loginURL.setParameter(redirectParam, url);
+
+				String redirect = loginURL.toString();
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Redirect requested layout to " + redirect);

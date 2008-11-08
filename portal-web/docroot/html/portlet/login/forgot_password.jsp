@@ -25,25 +25,42 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<liferay-ui:tabs names="forgot-password">
-	<liferay-ui:section>
-		<portlet:actionURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
-			<portlet:param name="struts_action" value="/login/view" />
-		</portlet:actionURL>
+<%
+String emailAddress = ParamUtil.getString(request, "emailAddress");
+%>
 
-		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-			<portlet:param name="struts_action" value="/login/captcha" />
-		</portlet:actionURL>
+<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 
-		<%
-		String forgotPasswordHREF = forgotPasswordURL.toString();
-		String captchaHREF = captchaURL.toString();
-		%>
+<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="the-email-address-you-requested-is-not-registered-in-our-database" />
+<liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
+<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 
-		<%@ include file="/html/portal/login_forgot_password.jspf" %>
-	</liferay-ui:section>
-</liferay-ui:tabs>
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="email-address" />
+	</td>
+	<td>
+		<input name="emailAddress" size="30" type="text" value="<%= HtmlUtil.escape(emailAddress) %>" />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+		<portlet:param name="struts_action" value="/login/captcha" />
+	</portlet:actionURL>
+
+	<liferay-ui:captcha url="<%= captchaURL %>" />
+</c:if>
+
+<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+
+</form>
 
 <script type="text/javascript">
-	Liferay.Util.focusFormField(document.fm3.emailAddress);
+	Liferay.Util.focusFormField(document.<portlet:namespace />fm.emailAddress);
 </script>

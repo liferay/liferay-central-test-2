@@ -24,113 +24,144 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<%
-boolean secure = request.isSecure();
+<c:choose>
+	<c:when test="<%= themeDisplay.isSignedIn() %>">
 
-if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS && !secure) {
-	secure = true;
-}
+		<%
+		String signedInAs = user.getFullName();
 
-String redirect = ParamUtil.getString(renderRequest, "redirect");
-String login = LoginAction.getLogin(request, "login", company);
-String password = StringPool.BLANK;
-boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-%>
+		if (themeDisplay.isShowMyAccountIcon()) {
+			signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
+		}
+		%>
 
-<form action="<portlet:actionURL secure="<%= secure %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
+		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
+	</c:when>
+	<c:otherwise>
 
-<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
-<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
-<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
-<liferay-ui:error exception="<%= PasswordExpiredException.class %>" message="your-password-has-expired" />
-<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
-<liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
-<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
-<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
+		<%
+		String redirect = ParamUtil.getString(renderRequest, "redirect");
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="login" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="password" />
-	</td>
-	<td>
-		<input id="<portlet:namespace />password" name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>" />
+		String login = LoginUtil.getLogin(request, "login", company);
+		String password = StringPool.BLANK;
+		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+		%>
 
-		<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
-	</td>
-</tr>
+		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm1">
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 
-<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
-	<tr>
-		<td>
-			<span style="font-size: xx-small;">
-				<liferay-ui:message key="remember-me" />
-			</span>
-		</td>
-		<td>
-			<input <%= rememberMe ? "checked" : "" %> type="checkbox" onClick="
-				if (this.checked) {
-					document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'on';
-				}
-				else {
-					document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'off';
-				}"
-			>
-		</td>
-	</tr>
-</c:if>
+		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
+		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
+		<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
+		<liferay-ui:error exception="<%= PasswordExpiredException.class %>" message="your-password-has-expired" />
+		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
+		<liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
+		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
+		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-</table>
+		<fieldset class="block-labels">
+			<c:choose>
+				<c:when test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+					<legend><liferay-ui:message key="sign-in-with-a-regular-account" /></legend>
+				</c:when>
+				<c:otherwise>
+					<legend><liferay-ui:message key="sign-in" /></legend>
+				</c:otherwise>
+			</c:choose>
 
-<br />
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />login"><liferay-ui:message key="login" /></label>
 
-<div>
-	<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-</div>
+				<input class="lfr-input-text" name="<portlet:namespace />login" type="text" value="<%= HtmlUtil.escape(login) %>" />
+			</div>
 
-<br />
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />password"><liferay-ui:message key="password" /></label>
 
-<div>
-	<c:if test="<%= company.isStrangers() %>">
-		<a href="<%= themeDisplay.getURLCreateAccount() %>"><liferay-ui:message key="create-account" /></a>
-	</c:if>
+				<input class="lfr-input-text" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
 
-	<c:if test="<%= company.isSendPassword() %>">
-		&nbsp;|&nbsp;
+				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
+			</div>
 
-		<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="forgotPasswordURL">
-			<portlet:param name="struts_action" value="/login/view" />
-			<portlet:param name="<%= Constants.CMD %>" value="forgot-password" />
-		</portlet:renderURL>
+			<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
+				<div class="ctrl-holder inline-label">
+					<label for="<portlet:namespace />rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
 
-		<a href="<%= forgotPasswordURL.toString() %>"><liferay-ui:message key="forgot-password" />?</a>
-	</c:if>
-</div>
+					<input <%= rememberMe ? "checked" : "" %> id="<portlet:namespace />rememberMeCheckbox" type="checkbox" />
+				</div>
+			</c:if>
 
-</form>
+			<div class="button-holder">
+				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+			</div>
+		</fieldset>
 
-<script type="text/javascript">
-	jQuery(
-		function() {
-			jQuery('#<portlet:namespace />password').keypress(
-				function(event) {
-					Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
+		</form>
+
+		<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+
+			<%
+			String openId = ParamUtil.getString(request, "openId");
+			%>
+
+			<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" class="uni-form" method="post" name="fm2">
+
+			<fieldset class="block-labels">
+				<legend><liferay-ui:message key="sign-in-with-an-open-id-provider" /></legend>
+
+				<div class="ctrl-holder">
+					<label for="<portlet:namespace />openId"><liferay-ui:message key="open-id" /></label>
+
+					<input class="openid-login" name="<portlet:namespace />openId" type="text" value="<%= HtmlUtil.escape(openId) %>" />
+				</div>
+
+				<div class="button-holder">
+					<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+				</div>
+			</fieldset>
+
+			</form>
+		</c:if>
+
+		<div>
+			<c:if test="<%= company.isStrangers() %>">
+				<a href="<%= themeDisplay.getURLCreateAccount() %>"><liferay-ui:message key="create-account" /></a>
+			</c:if>
+
+			<c:if test="<%= company.isSendPassword() %>">
+				&nbsp;|&nbsp;
+
+				<a href="<portlet:renderURL><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:renderURL>"><liferay-ui:message key="forgot-password" />?</a>
+			</c:if>
+		</div>
+
+		<script type="text/javascript">
+			jQuery(
+				function() {
+					jQuery('#<portlet:namespace />password').keypress(
+						function(event) {
+							Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
+						}
+					);
+
+					jQuery('#<portlet:namespace />rememberMeCheckbox').click(
+						function() {
+							var checked = 'off';
+
+							if (this.checked) {
+								checked = 'on';
+							}
+
+							jQuery('#<portlet:namespace />rememberMe').val(checked);
+						}
+					);
 				}
 			);
-		}
-	);
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />login);
-	</c:if>
-</script>
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />login);
+			</c:if>
+		</script>
+	</c:otherwise>
+</c:choose>

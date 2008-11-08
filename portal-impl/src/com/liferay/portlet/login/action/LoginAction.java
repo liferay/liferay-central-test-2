@@ -25,30 +25,25 @@ package com.liferay.portlet.login.action;
 import com.liferay.portal.CookieNotSupportedException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PasswordExpiredException;
-import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
-import com.liferay.portal.action.LoginAction;
-import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -60,82 +55,57 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="LoginAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewAction extends PortletAction {
+public class LoginAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = actionRequest.getParameter(Constants.CMD);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		if (cmd.equals("forgot-password")) {
-			try {
-				sendPassword(actionRequest);
+		if (actionRequest.getRemoteUser() != null) {
+			actionResponse.sendRedirect(themeDisplay.getPathMain());
 
-				actionResponse.setRenderParameter(
-					Constants.CMD, "already-registered");
-			}
-			catch (Exception e) {
-				if (e instanceof CaptchaTextException ||
-					e instanceof NoSuchUserException ||
-					e instanceof SendPasswordException ||
-					e instanceof UserEmailAddressException) {
+			return;
+		}
 
-					SessionErrors.add(actionRequest, e.getClass().getName());
+		try {
+			login(themeDisplay, actionRequest, actionResponse);
+		}
+		catch (Exception e) {
+			if (e instanceof AuthException) {
+				Throwable cause = e.getCause();
+
+				if (cause instanceof PasswordExpiredException ||
+					cause instanceof UserLockoutException) {
+
+					SessionErrors.add(
+						actionRequest, cause.getClass().getName());
 				}
 				else {
-					PortalUtil.sendError(e, actionRequest, actionResponse);
+					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 			}
-		}
-		else {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			else if (e instanceof CookieNotSupportedException ||
+					 e instanceof NoSuchUserException ||
+					 e instanceof PasswordExpiredException ||
+					 e instanceof UserEmailAddressException ||
+					 e instanceof UserIdException ||
+					 e instanceof UserLockoutException ||
+					 e instanceof UserPasswordException ||
+					 e instanceof UserScreenNameException) {
 
-			if (actionRequest.getRemoteUser() != null) {
-				actionResponse.sendRedirect(themeDisplay.getPathMain());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (Validator.isNotNull(cmd)) {
-				try {
-					login(themeDisplay, actionRequest, actionResponse);
-				}
-				catch (Exception e) {
-					if (e instanceof AuthException) {
-						Throwable cause = e.getCause();
-
-						if (cause instanceof PasswordExpiredException ||
-							cause instanceof UserLockoutException) {
-
-							SessionErrors.add(
-								actionRequest, cause.getClass().getName());
-						}
-						else {
-							SessionErrors.add(
-								actionRequest, e.getClass().getName());
-						}
-					}
-					else if (e instanceof CookieNotSupportedException ||
-							 e instanceof NoSuchUserException ||
-							 e instanceof PasswordExpiredException ||
-							 e instanceof UserEmailAddressException ||
-							 e instanceof UserIdException ||
-							 e instanceof UserLockoutException ||
-							 e instanceof UserPasswordException ||
-							 e instanceof UserScreenNameException) {
-
-						SessionErrors.add(
-							actionRequest, e.getClass().getName());
-					}
-					else {
-						PortalUtil.sendError(e, actionRequest, actionResponse);
-					}
-				}
+			else {
+				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}
 		}
 	}
@@ -145,7 +115,11 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward("portlet.login.view");
+		return mapping.findForward("portlet.login.login");
+	}
+
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
 	protected void login(
@@ -162,7 +136,7 @@ public class ViewAction extends PortletAction {
 		String password = ParamUtil.getString(actionRequest, "password");
 		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
 
-		LoginAction.login(request, response, login, password, rememberMe);
+		LoginUtil.login(request, response, login, password, rememberMe);
 
 		if (PropsValues.PORTAL_JAAS_ENABLE) {
 			actionResponse.sendRedirect(
@@ -180,18 +154,6 @@ public class ViewAction extends PortletAction {
 		}
 	}
 
-	protected void sendPassword(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
-
-		String subject = preferences.getValue(
-			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT, null);
-		String body = preferences.getValue(
-			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY, null);
-
-		LoginAction.sendPassword(request, subject, body);
-	}
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }

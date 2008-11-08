@@ -918,7 +918,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/login/view</value>
+			<value>/login/login</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

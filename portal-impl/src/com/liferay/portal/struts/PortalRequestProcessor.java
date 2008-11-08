@@ -129,7 +129,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_JAVASCRIPT_CACHED);
 		_publicPaths.add(_PATH_PORTAL_LAYOUT);
 		_publicPaths.add(_PATH_PORTAL_LOGIN);
-		_publicPaths.add(_PATH_PORTAL_LOGIN_CAPTCHA);
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
 
@@ -899,8 +898,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_LAYOUT = "/portal/layout";
 
 	private static String _PATH_PORTAL_LOGIN = "/portal/login";
-
-	private static String _PATH_PORTAL_LOGIN_CAPTCHA = "/portal/login_captcha";
 
 	private static String _PATH_PORTAL_LOGOUT = "/portal/logout";
 

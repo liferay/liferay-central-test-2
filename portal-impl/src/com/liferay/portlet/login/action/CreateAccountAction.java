@@ -41,8 +41,6 @@ import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -56,10 +54,12 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -71,24 +71,20 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="AddUserAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="CreateAccountAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddUserAction extends PortletAction {
+public class CreateAccountAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
 		try {
-			if (cmd.equals(Constants.ADD)) {
-				addUser(actionRequest, actionResponse);
-			}
+			addUser(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof CaptchaTextException ||
@@ -230,8 +226,12 @@ public class AddUserAction extends PortletAction {
 			login = user.getEmailAddress();
 		}
 
-		String redirect = HttpUtil.addParameter(
-			themeDisplay.getURLSignIn(), "login", login);
+		PortletURL loginURL = LoginUtil.getLoginURL(
+			request, themeDisplay.getPlid());
+
+		loginURL.setParameter("login", login);
+
+		String redirect = loginURL.toString();
 
 		actionResponse.sendRedirect(redirect);
 	}
