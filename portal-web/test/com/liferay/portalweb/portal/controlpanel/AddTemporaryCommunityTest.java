@@ -39,6 +39,25 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Communities")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//input[@value='Add Community']")) {
 					break;
 				}

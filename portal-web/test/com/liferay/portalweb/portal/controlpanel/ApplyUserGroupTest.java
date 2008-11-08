@@ -55,8 +55,7 @@ public class ApplyUserGroupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_127_keywords", RuntimeVariables.replace("selen"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Users']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_127_allRowIds");
 		selenium.click(RuntimeVariables.replace(
