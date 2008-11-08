@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.polls.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -49,7 +51,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.polls.service.PollsQuestionServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface PollsQuestionService {
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long plid, java.lang.String title, java.lang.String description,

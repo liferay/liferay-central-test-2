@@ -118,7 +118,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addDiscussionMessage(userId, userName, groupId, className,
+				   .addDiscussionMessage(userId, userName, groupId, className,
 			classPK, threadId, parentMessageId, subject, body);
 	}
 
@@ -130,7 +130,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addDiscussionMessage(userId, userName, groupId, className,
+				   .addDiscussionMessage(userId, userName, groupId, className,
 			classPK, threadId, parentMessageId, subject, body, themeDisplay);
 	}
 
@@ -145,7 +145,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(userId, userName, categoryId, subject, body,
+				   .addMessage(userId, userName, categoryId, subject, body,
 			files, anonymous, priority, tagsEntries, preferences,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
@@ -162,7 +162,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(userId, userName, categoryId, subject, body,
+				   .addMessage(userId, userName, categoryId, subject, body,
 			files, anonymous, priority, tagsEntries, preferences,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
@@ -181,7 +181,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(userId, userName, categoryId, subject, body,
+				   .addMessage(userId, userName, categoryId, subject, body,
 			files, anonymous, priority, tagsEntries, preferences,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions, themeDisplay);
@@ -198,7 +198,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(userId, userName, categoryId, threadId,
+				   .addMessage(userId, userName, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
 			tagsEntries, preferences, addCommunityPermissions,
 			addGuestPermissions, themeDisplay);
@@ -216,7 +216,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(userId, userName, categoryId, threadId,
+				   .addMessage(userId, userName, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
 			tagsEntries, preferences, communityPermissions, guestPermissions,
 			themeDisplay);
@@ -234,7 +234,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(uuid, userId, userName, categoryId, threadId,
+				   .addMessage(uuid, userId, userName, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
 			tagsEntries, preferences, addCommunityPermissions,
 			addGuestPermissions, themeDisplay);
@@ -255,7 +255,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.addMessage(uuid, userId, userName, categoryId, threadId,
+				   .addMessage(uuid, userId, userName, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
 			tagsEntries, preferences, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions,
@@ -398,7 +398,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.getDiscussionMessageDisplay(userId, className, classPK);
+				   .getDiscussionMessageDisplay(userId, className, classPK);
 	}
 
 	public static int getDiscussionMessagesCount(long classNameId, long classPK)
@@ -519,7 +519,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.updateDiscussionMessage(userId, messageId, subject, body);
+				   .updateDiscussionMessage(userId, messageId, subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -533,7 +533,7 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				.updateMessage(userId, messageId, subject, body, files,
+				   .updateMessage(userId, messageId, subject, body, files,
 			existingFiles, priority, tagsEntries, preferences, themeDisplay);
 	}
 

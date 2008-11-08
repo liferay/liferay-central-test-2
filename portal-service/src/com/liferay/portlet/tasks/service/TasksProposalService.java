@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -48,7 +50,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tasks.service.TasksProposalServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface TasksProposalService {
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		long groupId, java.lang.String className, java.lang.String classPK,
