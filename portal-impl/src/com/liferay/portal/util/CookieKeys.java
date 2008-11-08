@@ -84,8 +84,7 @@ public class CookieKeys {
 		String encodedValue = originalValue;
 
 		if (isEncodedCookie(name)) {
-			encodedValue = new String(
-				Hex.encodeHex(originalValue.getBytes()));
+			encodedValue = new String(Hex.encodeHex(originalValue.getBytes()));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Add encoded cookie " + name);
@@ -98,8 +97,8 @@ public class CookieKeys {
 		cookie.setValue(encodedValue);
 		cookie.setVersion(VERSION);
 
-		// Setting a cookie will cause the TCK to lose its ability
-		// to track sessions
+		// Setting a cookie will cause the TCK to lose its ability to track
+		// sessions
 
 		response.addCookie(cookie);
 	}
