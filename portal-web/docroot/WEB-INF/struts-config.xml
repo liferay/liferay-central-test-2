@@ -1170,8 +1170,6 @@
 
 		<!-- My Account -->
 
-		<action path="/my_account/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
-
 		<action path="/my_account/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">
 			<forward name="portlet.enterprise_admin.edit_address" path="portlet.enterprise_admin.edit_address" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
