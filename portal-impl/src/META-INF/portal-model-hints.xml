@@ -1097,7 +1097,9 @@
 		<field name="outServerPort" type="int" />
 		<field name="outUseSSL" type="boolean" />
 		<field name="outUserName" type="String" />
-		<field name="outPassword" type="String" />
+                <field name="outPassword" type="String">
+			<hint name="secret">true</hint>
+		</field>
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
