@@ -2274,6 +2274,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User groups
 
 		if (userGroupIds != null) {
+			copyUserGroupLayouts(userGroupIds, userId);
+
 			userPersistence.setUserGroups(userId, userGroupIds);
 		}
 
@@ -2568,6 +2570,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (long userId : userIds) {
+			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+				copyUserGroupLayouts(userGroupId, userId);
+			}
+		}
+	}
+
+	protected void copyUserGroupLayouts(long userGroupIds[], long userId)
+		throws PortalException, SystemException {
+
+		for (long userGroupId : userGroupIds) {
 			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
 				copyUserGroupLayouts(userGroupId, userId);
 			}
