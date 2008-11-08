@@ -344,11 +344,14 @@ public class SourceFormatter {
 				File.separator + "src" + File.separator);
 			int packagePathY = packagePath.lastIndexOf(File.separator);
 
-			if (packagePathX + 5 >= packagePathY) {
-				packagePathY = packagePathX + 5;
+			if ((packagePathX + 5) >= packagePathY) {
+				packagePath = StringPool.BLANK;
+			}
+			else {
+				packagePath = packagePath.substring(
+					packagePathX + 5, packagePathY);
 			}
 
-			packagePath = packagePath.substring(packagePathX + 5, packagePathY);
 			packagePath = StringUtil.replace(
 				packagePath, File.separator, StringPool.PERIOD);
 
