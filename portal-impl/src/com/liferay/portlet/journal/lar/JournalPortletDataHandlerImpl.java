@@ -1117,7 +1117,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		File smallFile = null;
 
-		if (template.isSmallImage() && (Validator.isNotNull(smallImagePath))) {
+		if (template.isSmallImage() && Validator.isNotNull(smallImagePath)) {
 			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
 
 			if (bytes != null) {
