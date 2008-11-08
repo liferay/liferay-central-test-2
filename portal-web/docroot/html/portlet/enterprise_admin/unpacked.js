@@ -28,11 +28,39 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 			}
 		);
 
+		if (options.modifiedSections) {
+			instance._modifiedSections = jQuery('[@name=' + options.modifiedSections+ ']');
+
+			if (!instance._modifiedSections.length) {
+				instance._modifiedSections = jQuery('<input name="' + options.modifiedSections+ '" type="hidden" />')
+				instance._container.append(instance._modifiedSections);
+			}
+		}
+		else {
+			instance._modifiedSections = jQuery([]);
+		}
+
+		if (options.defaultModifiedSections) {
+			instance._modifiedSectionsArray = options.defaultModifiedSections;
+		}
+		else {
+			instance._modifiedSectionsArray = [];
+		}
+
 		instance._revealSection(location.hash);
 
 		instance._container.find('input, select, textarea, .modify-link').change(
 			function(event) {
 				instance._trackChanges(this);
+			}
+		);
+
+		Liferay.bind(
+			'submitForm',
+			function(event, data) {
+				var form = jQuery(data.form);
+
+				instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
 			}
 		);
 	},
@@ -66,5 +94,15 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 
 		var currentSectionLink = jQuery('#' + currentSection + 'Link');
 		currentSectionLink.parent().addClass('section-modified');
+
+		instance._addModifiedSection(currentSection);
+	},
+	
+	_addModifiedSection: function (section) {
+		var instance = this;
+
+		if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
+			instance._modifiedSectionsArray.push(section);
+		}
 	}
 });
