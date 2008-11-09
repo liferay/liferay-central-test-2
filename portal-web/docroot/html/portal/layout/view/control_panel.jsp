@@ -80,25 +80,33 @@ if (Validator.isNull(category)) {
 					<td align="right">
 
 						<%
+						String refererGroupDescriptiveName;
+
+						String backURL;
+
 						if (themeDisplay.getRefererPlid() > 0) {
 							Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
 
 							Group refererGroup = refererLayout.getGroup();
 
-							String refererGroupDescriptiveName = refererGroup.getDescriptiveName();
+							refererGroupDescriptiveName = refererGroup.getDescriptiveName();
 
 							if (refererGroup.isUser()) {
 								refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-community");
 							}
-						%>
 
-							<div>
-								<a class="portlet-icon-back" href="<%= PortalUtil.getLayoutURL(refererLayout, themeDisplay) %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a>
-							</div>
+							backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
+						}
+						else {
+							refererGroupDescriptiveName = "Guest";
 
-						<%
+							backURL = themeDisplay.getURLPortal() + PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING + "/guest";
 						}
 						%>
+
+						<div>
+							<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a>
+						</div>
 
 					</td>
 				</tr>
