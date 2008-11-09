@@ -72,7 +72,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
 
-<liferay-ui:message key="edit-assignments-for-role" />: <%= role.getName() %>
+<liferay-ui:message key="edit-assignments-for-role" />: <%= role.getTitle(locale) %>
 
 <br /><br />
 

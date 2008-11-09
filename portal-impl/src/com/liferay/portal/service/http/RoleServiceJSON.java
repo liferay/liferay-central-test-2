@@ -187,14 +187,4 @@ public class RoleServiceJSON {
 
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}
-
-	public static JSONObject updateRole(long roleId, java.lang.String name,
-		java.lang.String description, java.lang.String subtype)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-				name, description, subtype);
-
-		return RoleJSONSerializer.toJSONObject(returnValue);
-	}
 }

@@ -74,6 +74,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		newRole.setClassNameId(nextLong());
 		newRole.setClassPK(nextLong());
 		newRole.setName(randomString());
+		newRole.setTitle(randomString());
 		newRole.setDescription(randomString());
 		newRole.setType(nextInt());
 		newRole.setSubtype(randomString());
@@ -87,6 +88,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingRole.getClassNameId(), newRole.getClassNameId());
 		assertEquals(existingRole.getClassPK(), newRole.getClassPK());
 		assertEquals(existingRole.getName(), newRole.getName());
+		assertEquals(existingRole.getTitle(), newRole.getTitle());
 		assertEquals(existingRole.getDescription(), newRole.getDescription());
 		assertEquals(existingRole.getType(), newRole.getType());
 		assertEquals(existingRole.getSubtype(), newRole.getSubtype());
@@ -137,6 +139,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		role.setClassNameId(nextLong());
 		role.setClassPK(nextLong());
 		role.setName(randomString());
+		role.setTitle(randomString());
 		role.setDescription(randomString());
 		role.setType(nextInt());
 		role.setSubtype(randomString());

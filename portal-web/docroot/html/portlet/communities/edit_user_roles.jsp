@@ -77,7 +77,7 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + groupName + "<
 if (role != null) {
 	breadcrumbsURL.setParameter("roleId", String.valueOf(roleId));
 
-	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + role.getName() + "</a>";
+	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + role.getTitle(locale) + "</a>";
 }
 %>
 
@@ -164,7 +164,7 @@ if (role != null) {
 
 				// Name
 
-				row.addText(curRole.getName(), rowURL);
+				row.addText(curRole.getTitle(locale), rowURL);
 
 				// Type
 
@@ -192,7 +192,7 @@ if (role != null) {
 
 			<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
 
-			<i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
+			<i>Current</i> signifies current users associated with the <i><%= role.getTitle(locale) %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
 		</div>
 
 		<br />

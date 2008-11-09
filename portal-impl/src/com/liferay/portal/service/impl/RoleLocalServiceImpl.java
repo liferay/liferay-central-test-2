@@ -28,7 +28,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,6 +46,7 @@ import com.liferay.portal.util.PropsUtil;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -408,11 +411,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public Role updateRole(long roleId, String name, String description)
 		throws PortalException, SystemException {
 
-		return updateRole(roleId, name, description, null);
+		return updateRole(roleId, name, null, description, null);
 	}
 
 	public Role updateRole(
-			long roleId, String name, String description, String subtype)
+			long roleId, String name, Map localeTitlesMap, String description,
+			String subtype)
 		throws PortalException, SystemException {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
@@ -427,9 +431,44 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setDescription(description);
 		role.setSubtype(subtype);
 
+		setLocalizedAttributes(role, localeTitlesMap);
+
 		rolePersistence.update(role, false);
 
 		return role;
+	}
+
+	protected void setLocalizedAttributes(
+		Role role, Map<Locale, String> localeTitlesMap) {
+
+		if (localeTitlesMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				Thread.currentThread().setContextClassLoader(portalClassLoader);
+			}
+
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (Locale locale : locales) {
+				String title = localeTitlesMap.get(locale);
+
+				role.setTitle(title, locale);
+			}
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
+		}
 	}
 
 	protected void validate(long roleId, long companyId, String name)

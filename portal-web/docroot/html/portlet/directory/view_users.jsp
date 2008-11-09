@@ -130,7 +130,7 @@ Long[] manageableOrganizationIds = null;
 		<c:if test="<%= role != null %>">
 			<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
 
-			<liferay-ui:message key="filter-by-role" />: <%= role.getName() %><br />
+			<liferay-ui:message key="filter-by-role" />: <%= role.getTitle(locale) %><br />
 		</c:if>
 
 		<c:if test="<%= userGroup != null %>">

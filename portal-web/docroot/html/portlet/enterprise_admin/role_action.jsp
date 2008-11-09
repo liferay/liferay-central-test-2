@@ -48,7 +48,7 @@ Role role = (Role)row.getObject();
 	<c:if test="<%= !role.getName().equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= Role.class.getName() %>"
-			modelResourceDescription="<%= role.getName() %>"
+			modelResourceDescription="<%= role.getTitle(locale) %>"
 			resourcePrimKey="<%= String.valueOf(role.getRoleId()) %>"
 			var="permissionsURL"
 		/>

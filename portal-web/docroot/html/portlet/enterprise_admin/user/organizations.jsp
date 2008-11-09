@@ -94,7 +94,19 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 			if (selUser != null) {
 				List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), organization.getGroup().getGroupId());
 
-				buffer.append(ListUtil.toString(userGroupRoles, "role.name", StringPool.COMMA_AND_SPACE));
+				Iterator itr = userGroupRoles.iterator();
+
+				while (itr.hasNext()) {
+					UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+					Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
+					buffer.append(role.getTitle(locale));
+
+					if (itr.hasNext()) {
+						buffer.append(StringPool.COMMA_AND_SPACE);
+					}
+				}
 			}
 			%>
 

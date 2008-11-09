@@ -22,9 +22,11 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -34,9 +36,11 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -66,6 +70,7 @@ import org.apache.commons.collections.map.ReferenceMap;
  * </p>
  *
  * @author Alexander Chow
+ * @author Jorge Ferrer
  *
  */
 public class LocalizationUtil {
@@ -191,6 +196,25 @@ public class LocalizationUtil {
 		_setCachedValue(xml, requestedLanguageId, useDefault, value);
 
 		return value;
+	}
+
+	public static Map getLocalizedParameter(
+		PortletRequest portletRequest, String param) {
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		Map<Locale, String> valuesMap = new HashMap<Locale, String>();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			String localeParam = param + StringPool.UNDERLINE + languageId;
+
+			valuesMap.put(
+				locale, ParamUtil.getString(portletRequest, localeParam));
+		}
+
+		return valuesMap;
 	}
 
 	public static String getPrefsValue(

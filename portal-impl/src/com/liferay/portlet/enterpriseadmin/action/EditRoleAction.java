@@ -33,6 +33,10 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.util.LocalizationUtil;
+
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -128,6 +132,8 @@ public class EditRoleAction extends PortletAction {
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
+		Map<Locale, String> localeTitlesMap =
+			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 		int type = ParamUtil.getInteger(
 			actionRequest, "type", RoleConstants.TYPE_REGULAR);
@@ -143,7 +149,8 @@ public class EditRoleAction extends PortletAction {
 
 			// Update role
 
-			RoleServiceUtil.updateRole(roleId, name, description, subtype);
+			RoleServiceUtil.updateRole(
+				roleId, name, localeTitlesMap, description, subtype);
 		}
 	}
 

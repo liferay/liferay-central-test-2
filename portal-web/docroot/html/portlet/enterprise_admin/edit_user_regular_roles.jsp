@@ -58,7 +58,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	row.addText(role.getName());
+	row.addText(role.getTitle(locale));
 
 	// Action
 

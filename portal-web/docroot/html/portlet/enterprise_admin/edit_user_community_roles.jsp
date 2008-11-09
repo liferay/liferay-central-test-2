@@ -68,7 +68,7 @@ for (int i = 0; i < groups.size(); i++) {
 
 		// Name
 
-		row.addText(role.getName());
+		row.addText(role.getTitle(locale));
 
 		// Community
 

@@ -67,13 +67,13 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Role"
-		escapedModel="<%= true %>"
+		escapedModel="<%= false %>"
 		keyProperty="roleId"
 		modelVar="role"
 	>
 		<liferay-ui:search-container-column-text
-			name="name"
-			property="name"
+			name="title"
+			value="<%= role.getTitle(locale) %>"
 		/>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">

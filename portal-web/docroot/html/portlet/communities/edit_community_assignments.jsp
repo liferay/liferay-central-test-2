@@ -177,7 +177,19 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 								<%
 								List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
 
-								buffer.append(ListUtil.toString(userGroupRoles, "role.name", StringPool.COMMA_AND_SPACE));
+								Iterator itr = userGroupRoles.iterator();
+
+								while (itr.hasNext()) {
+									UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+									Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
+									buffer.append(role.getTitle(locale));
+
+									if (itr.hasNext()) {
+										buffer.append(StringPool.COMMA_AND_SPACE);
+									}
+								}
 								%>
 
 							</liferay-ui:search-container-column-text>
@@ -259,7 +271,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 						// Name
 
-						row.addText(role.getName());
+						row.addText(role.getTitle(locale));
 
 						// Type
 

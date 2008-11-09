@@ -70,7 +70,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Role"
-		escapedModel="<%= true %>"
+		escapedModel="<%= false %>"
 		keyProperty="roleId"
 		modelVar="role"
 	>
@@ -83,7 +83,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 		sb.append("selectRole('");
 		sb.append(role.getRoleId());
 		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(role.getName()));
+		sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
 		sb.append("');");
 		sb.append("window.close();");
 
@@ -92,8 +92,8 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 
 		<liferay-ui:search-container-column-text
 			href="<%= rowHREF %>"
-			name="name"
-			property="name"
+			name="title"
+			value="<%= role.getTitle(locale) %>"
 		/>
 	</liferay-ui:search-container-row>
 

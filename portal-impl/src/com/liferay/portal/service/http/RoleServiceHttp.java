@@ -623,7 +623,8 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role updateRole(
 		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
-		java.lang.String description, java.lang.String subtype)
+		java.util.Map localeTitlesMap, java.lang.String description,
+		java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -635,21 +636,29 @@ public class RoleServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = localeTitlesMap;
 
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+			if (localeTitlesMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj3 = subtype;
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = subtype;
 
 			if (subtype == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
 					"updateRole",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

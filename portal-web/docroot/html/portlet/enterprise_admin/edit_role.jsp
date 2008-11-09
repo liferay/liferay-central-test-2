@@ -33,6 +33,13 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 int type = ParamUtil.getInteger(request, "type");
 String subtype = BeanParamUtil.getString(role, request, "subtype");
+
+String currentLanguageId = LanguageUtil.getLanguageId(request);
+Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
+Locale defaultLocale = LocaleUtil.getDefault();
+String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
 <liferay-ui:tabs
@@ -42,12 +49,17 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 
 <c:choose>
 	<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
-		<%= LanguageUtil.format(pageContext, "x-is-a-required-system-role", role.getName()) %>
+		<%= LanguageUtil.format(pageContext, "x-is-a-required-system-role", role.getTitle(locale)) %>
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
 			function <portlet:namespace />saveRole() {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
+
+				<c:if test="<%= role != null %>">
+					<portlet:namespace />updateLanguage();
+				</c:if>
+
 				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
 			}
 		</script>
@@ -82,6 +94,77 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
 			</td>
 		</tr>
+		<c:if test="<%= role != null %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="title" />
+				</td>
+				<td>
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
+						</td>
+						<td>
+							<liferay-ui:message key="localized-language" />:
+
+							<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
+								<option value="" />
+
+								<%
+								for (int i = 0; i < locales.length; i++) {
+									if (locales[i].equals(defaultLocale)) {
+										continue;
+									}
+
+									String optionStyle = StringPool.BLANK;
+
+									if (Validator.isNotNull(role.getTitle(locales[i], false))) {
+
+										optionStyle = "style=\"font-weight: bold\"";
+									}
+								%>
+
+									<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+								<%
+								}
+								%>
+
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
+						</td>
+						<td>
+
+							<%
+							for (int i = 0; i < locales.length; i++) {
+								if (locales[i].equals(defaultLocale)) {
+									continue;
+								}
+							%>
+
+								<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= role.getTitle(locales[i], false) %>" />
+
+							<%
+							}
+							%>
+
+							<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<br />
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+		</c:if>
 		<tr>
 			<td>
 				<liferay-ui:message key="description" />
@@ -176,3 +259,71 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 		</c:if>
 	</c:otherwise>
 </c:choose>
+
+<script type="text/javascript">
+	var titleChanged = false;
+	var lastLanguageId = "<%= currentLanguageId %>";
+
+	function <portlet:namespace />onTitleChanged() {
+		titleChanged = true;
+	}
+
+	function <portlet:namespace />updateLanguage() {
+		if (lastLanguageId != "<%= defaultLanguageId %>") {
+			if (titleChanged) {
+				var titleValue = jQuery("#<portlet:namespace />title_temp").attr("value");
+
+				if (titleValue == null) {
+					titleValue = "";
+				}
+
+				jQuery("#<portlet:namespace />title_" + lastLanguageId).attr("value", titleValue);
+
+				titleChanged = false;
+			}
+		}
+
+		var selLanguageId = "";
+
+		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+			if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+				selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+				break;
+			}
+		}
+
+		if (selLanguageId != "") {
+			<portlet:namespace />updateLanguageTemps(selLanguageId);
+
+			jQuery("#<portlet:namespace />title_temp").show();
+		}
+		else {
+			jQuery("#<portlet:namespace />title_temp").hide();
+		}
+
+		lastLanguageId = selLanguageId;
+
+		return null;
+	}
+
+	function <portlet:namespace />updateLanguageTemps(lang) {
+		if (lang != "<%= defaultLanguageId %>") {
+			var titleValue = jQuery("#<portlet:namespace />title_" + lang).attr("value");
+			var defaultTitleValue = jQuery("#<portlet:namespace />title_<%= defaultLanguageId %>").attr("value");
+
+			if (defaultTitleValue == null) {
+				defaultTitleValue = "";
+			}
+
+			if ((titleValue == null) || (titleValue == "")) {
+				jQuery("#<portlet:namespace />title_temp").attr("value", defaultTitleValue);
+			}
+			else {
+				jQuery("#<portlet:namespace />title_temp").attr("value", titleValue);
+			}
+		}
+	}
+
+	<portlet:namespace />updateLanguageTemps(lastLanguageId);
+</script>

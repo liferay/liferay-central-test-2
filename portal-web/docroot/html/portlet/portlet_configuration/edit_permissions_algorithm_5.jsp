@@ -161,7 +161,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		// Name
 
-		row.addText(role.getName());
+		row.addText(role.getTitle(locale));
 
 		// Actions
 

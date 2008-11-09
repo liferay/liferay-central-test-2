@@ -370,7 +370,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				// Name
 
-				row.addText(role.getName(), rowURL);
+				row.addText(role.getTitle(locale), rowURL);
 
 				// Type
 

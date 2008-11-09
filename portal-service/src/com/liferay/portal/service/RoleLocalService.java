@@ -211,8 +211,8 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String subtype)
+		java.lang.String name, java.util.Map localeTitlesMap,
+		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

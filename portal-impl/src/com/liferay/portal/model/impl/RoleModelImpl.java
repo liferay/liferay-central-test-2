@@ -80,6 +80,9 @@ public class RoleModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			
 
+			{ "title", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
 			
 
@@ -88,7 +91,7 @@ public class RoleModelImpl extends BaseModelImpl {
 
 			{ "subtype", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,subtype VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,title VARCHAR(75) null,description STRING null,type_ INTEGER,subtype VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Role_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -105,6 +108,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setName(soapModel.getName());
+		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setType(soapModel.getType());
 		model.setSubtype(soapModel.getSubtype());
@@ -204,6 +208,18 @@ public class RoleModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getTitle() {
+		return GetterUtil.getString(_title);
+	}
+
+	public void setTitle(String title) {
+		if (((title == null) && (_title != null)) ||
+				((title != null) && (_title == null)) ||
+				((title != null) && (_title != null) && !title.equals(_title))) {
+			_title = title;
+		}
+	}
+
 	public String getDescription() {
 		return GetterUtil.getString(_description);
 	}
@@ -255,6 +271,7 @@ public class RoleModelImpl extends BaseModelImpl {
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
 			model.setName(HtmlUtil.escape(getName()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setType(getType());
 			model.setSubtype(HtmlUtil.escape(getSubtype()));
@@ -283,6 +300,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setName(getName());
+		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setType(getType());
 		clone.setSubtype(getSubtype());
@@ -341,6 +359,7 @@ public class RoleModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private String _name;
+	private String _title;
 	private String _description;
 	private int _type;
 	private String _subtype;

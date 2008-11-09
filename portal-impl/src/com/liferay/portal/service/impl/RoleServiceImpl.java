@@ -33,6 +33,7 @@ import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="RoleServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -141,13 +142,15 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	}
 
 	public Role updateRole(
-			long roleId, String name, String description, String subtype)
+			long roleId, String name, Map localeTitlesMap, String description,
+			String subtype)
 		throws PortalException, SystemException {
 
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return roleLocalService.updateRole(roleId, name, description, subtype);
+		return roleLocalService.updateRole(
+			roleId, name, localeTitlesMap, description, subtype);
 	}
 
 	protected void checkUserRolesPermission(long userId, long[] roleIds)

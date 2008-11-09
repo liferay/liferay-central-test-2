@@ -57,6 +57,7 @@ public class RoleJSONSerializer {
 		jsonObj.put("classNameId", model.getClassNameId());
 		jsonObj.put("classPK", model.getClassPK());
 		jsonObj.put("name", model.getName());
+		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());
 		jsonObj.put("type", model.getType());
 		jsonObj.put("subtype", model.getSubtype());

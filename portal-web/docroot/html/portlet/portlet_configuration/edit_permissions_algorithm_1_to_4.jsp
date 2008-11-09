@@ -926,7 +926,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 						// Name
 
-						row.addText(role.getName());
+						row.addText(role.getTitle(locale));
 
 						// Type
 
@@ -957,7 +957,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					boolean isGuestRole = role.getName().equals(RoleConstants.GUEST);
 					%>
 
-					<liferay-ui:tabs names="<%= role.getName() %>" />
+					<liferay-ui:tabs names="<%= role.getTitle(locale) %>" />
 
 					<%
 					List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());

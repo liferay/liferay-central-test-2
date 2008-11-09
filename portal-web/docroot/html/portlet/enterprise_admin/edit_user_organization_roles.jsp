@@ -70,7 +70,7 @@ for (int i = 0; i < userOrganizations.size(); i++) {
 
 		// Name
 
-		row.addText(role.getName());
+		row.addText(role.getTitle(locale));
 
 		// Organization
 
