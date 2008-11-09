@@ -156,18 +156,18 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		if (!company.isStrangers()) {
-			UserPermissionUtil.check(
-				getPermissionChecker(), 0, organizationIds,
-				ActionKeys.ADD_USER);
-		}
-
 		long creatorUserId = 0;
 
 		try {
 			creatorUserId = getUserId();
 		}
 		catch (PrincipalException pe) {
+		}
+
+		if ((creatorUserId != 0) || !company.isStrangers()) {
+			UserPermissionUtil.check(
+				getPermissionChecker(), 0, organizationIds,
+				ActionKeys.ADD_USER);
 		}
 
 		if (creatorUserId == 0) {
