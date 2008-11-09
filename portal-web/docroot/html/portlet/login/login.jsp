@@ -71,7 +71,18 @@
 			</c:choose>
 
 			<div class="ctrl-holder">
-				<label for="<portlet:namespace />login"><liferay-ui:message key="login" /></label>
+				<%
+				String loginLabel = "screen-name";
+
+				if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
+					loginLabel = "email";
+				}
+				else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+					loginLabel = "user-id";
+				}
+				%>
+
+				<label for="<portlet:namespace />login"><liferay-ui:message key="<%= loginLabel %>" /></label>
 
 				<input class="lfr-input-text" name="<portlet:namespace />login" type="text" value="<%= HtmlUtil.escape(login) %>" />
 			</div>
