@@ -49,7 +49,7 @@
 
 		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm1">
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
+		<input id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 
 		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
@@ -149,6 +149,7 @@
 						function() {
 							var checked = 'off';
 
+							console.log("rememberMe: " + this.checked);
 							if (this.checked) {
 								checked = 'on';
 							}
