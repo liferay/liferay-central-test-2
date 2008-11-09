@@ -91,9 +91,11 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		>
 
 			<%
-			List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), organization.getGroup().getGroupId());
+			if (selUser != null) {
+				List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), organization.getGroup().getGroupId());
 
-			buffer.append(ListUtil.toString(userGroupRoles, "role.name", StringPool.COMMA_AND_SPACE));
+				buffer.append(ListUtil.toString(userGroupRoles, "role.name", StringPool.COMMA_AND_SPACE));
+			}
 			%>
 
 		</liferay-ui:search-container-column-text>

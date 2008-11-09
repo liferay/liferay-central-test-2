@@ -94,7 +94,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="organizationIds" value="<%= String.valueOf(organizationId) %>" />
+			<portlet:param name="organizationsSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
