@@ -24,8 +24,10 @@ package com.liferay.portlet.enterpriseadmin;
 
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portlet.BaseControlPanelEntry;
 
 import java.util.List;
@@ -50,6 +52,18 @@ public class UsersControlPanelEntry extends BaseControlPanelEntry {
 			if (permissionChecker.isCommunityAdmin(
 					organization.getGroup().getGroupId())) {
 
+				return true;
+			}
+
+			if (OrganizationPermissionUtil.contains(
+					permissionChecker, organization.getOrganizationId(),
+			        ActionKeys.MANAGE_USERS)) {
+				return true;
+			}
+
+			if (OrganizationPermissionUtil.contains(
+					permissionChecker, organization.getOrganizationId(),
+			        ActionKeys.MANAGE_SUBORGANIZATIONS)) {
 				return true;
 			}
 		}
