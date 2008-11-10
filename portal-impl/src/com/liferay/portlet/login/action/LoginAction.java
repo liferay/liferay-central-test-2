@@ -74,14 +74,6 @@ public class LoginAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
-
-		String portletId = portletConfigImpl.getPortletId();
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletId);
-
 		if (actionRequest.getRemoteUser() != null) {
 			actionResponse.sendRedirect(themeDisplay.getPathMain());
 
@@ -89,6 +81,9 @@ public class LoginAction extends PortletAction {
 		}
 
 		try {
+			PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
+
 			login(themeDisplay, actionRequest, actionResponse, preferences);
 		}
 		catch (Exception e) {
@@ -148,7 +143,7 @@ public class LoginAction extends PortletAction {
 		String password = ParamUtil.getString(actionRequest, "password");
 		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
 
-		String authType = preferences.getValue("authType", StringPool.BLANK);
+		String authType = preferences.getValue("authType", null);
 
 		LoginUtil.login(
 			request, response, login, password, rememberMe, authType);

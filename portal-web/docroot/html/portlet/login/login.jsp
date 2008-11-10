@@ -45,6 +45,10 @@
 		String login = LoginUtil.getLogin(request, "login", company);
 		String password = StringPool.BLANK;
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+
+		if (Validator.isNull(authType)) {
+			authType = company.getAuthType();
+		}
 		%>
 
 		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
@@ -66,10 +70,10 @@
 				<%
 				String loginLabel = "screen-name";
 
-				if (prefAuthType.equals(CompanyConstants.AUTH_TYPE_EA) || (Validator.isNull(prefAuthType) && company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA))) {
+				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 					loginLabel = "email-address";
 				}
-				else if (prefAuthType.equals(CompanyConstants.AUTH_TYPE_ID) || (Validator.isNull(prefAuthType) && company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID))) {
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 					loginLabel = "user-id";
 				}
 				%>
