@@ -1344,6 +1344,52 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void updateEmailAddress(HttpPrincipal httpPrincipal,
+		long userId, java.lang.String emailAddress1,
+		java.lang.String emailAddress2)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = emailAddress1;
+
+			if (emailAddress1 == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = emailAddress2;
+
+			if (emailAddress2 == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"updateEmailAddress",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.User updateLockout(
 		HttpPrincipal httpPrincipal, long userId, boolean lockout)
 		throws com.liferay.portal.PortalException,

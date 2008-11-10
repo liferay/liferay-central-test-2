@@ -400,7 +400,9 @@ public class AnnouncementsEntryLocalServiceImpl
 
 			users = new ArrayList<User>();
 
-			users.add(user);
+			if (Validator.isNotNull(toAddress)) {
+				users.add(user);
+			}
 		}
 		else {
 			users = userLocalService.search(

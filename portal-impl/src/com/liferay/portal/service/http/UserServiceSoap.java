@@ -469,6 +469,20 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void updateEmailAddress(long userId,
+		java.lang.String emailAddress1, java.lang.String emailAddress2)
+		throws RemoteException {
+		try {
+			UserServiceUtil.updateEmailAddress(userId, emailAddress1,
+				emailAddress2);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap updateLockout(long userId,
 		boolean lockout) throws RemoteException {
 		try {

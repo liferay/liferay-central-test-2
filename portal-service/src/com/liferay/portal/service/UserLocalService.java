@@ -366,6 +366,11 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.User getUserByUuid(java.lang.String uuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,
@@ -497,6 +502,11 @@ public interface UserLocalService {
 
 	public com.liferay.portal.model.User updateCreateDate(long userId,
 		java.util.Date createDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updateEmailAddress(long userId, java.lang.String emailAddress1,
+		java.lang.String emailAddress2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

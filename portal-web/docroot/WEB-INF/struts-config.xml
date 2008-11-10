@@ -94,6 +94,10 @@
 
 		<action path="/portal/touch_protected" forward="/portal/touch_protected.jsp" />
 
+		<action path="/portal/update_email_address" type="com.liferay.portal.action.UpdateEmailAddressAction">
+			<forward name="portal.update_email_address" path="portal.update_email_address" />
+		</action>
+
 		<action path="/portal/update_layout" type="com.liferay.portal.action.UpdateLayoutAction" />
 
 		<action path="/portal/update_password" type="com.liferay.portal.action.UpdatePasswordAction">

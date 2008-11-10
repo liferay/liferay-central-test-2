@@ -976,7 +976,7 @@ public class PortletExporter {
 		List<User> users = layoutCache.getGroupUsers(groupId);
 
 		for (User user : users) {
-			String emailAddress = user.getEmailAddress();
+			String uuid = user.getUuid();
 
 			Element userActionsEl = SAXReaderUtil.createElement("user-actions");
 
@@ -994,7 +994,7 @@ public class PortletExporter {
 			}
 
 			if (!userActionsEl.elements().isEmpty()) {
-				userActionsEl.addAttribute("email-address", emailAddress);
+				userActionsEl.addAttribute("uuid", uuid);
 				userPermissionsEl.add(userActionsEl);
 			}
 		}
@@ -1022,7 +1022,7 @@ public class PortletExporter {
 
 		for (User user : users) {
 			long userId = user.getUserId();
-			String emailAddress = user.getEmailAddress();
+			String uuid = user.getUuid();
 
 			List<Role> userRoles = layoutCache.getUserRoles(userId);
 
@@ -1034,7 +1034,7 @@ public class PortletExporter {
 				userRolesEl.remove(userEl);
 			}
 			else {
-				userEl.addAttribute("email-address", emailAddress);
+				userEl.addAttribute("uuid", uuid);
 			}
 		}
 

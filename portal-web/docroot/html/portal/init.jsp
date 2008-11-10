@@ -24,6 +24,8 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %>
+<%@ page import="com.liferay.portal.EmailAddressException" %>
 <%@ page import="com.liferay.portal.LayoutFriendlyURLException" %>
 <%@ page import="com.liferay.portal.LayoutHiddenException" %>
 <%@ page import="com.liferay.portal.LayoutNameException" %>
@@ -34,7 +36,9 @@
 <%@ page import="com.liferay.portal.PortletActiveException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
 <%@ page import="com.liferay.portal.RequiredRoleException" %>
+<%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserActiveException" %>
+<%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
 <%@ page import="com.liferay.portal.UserReminderQueryException" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>

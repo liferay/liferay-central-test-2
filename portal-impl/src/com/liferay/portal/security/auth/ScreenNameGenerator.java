@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -41,18 +42,25 @@ public class ScreenNameGenerator {
 	public String generate(long companyId, long userId, String emailAddress)
 		throws Exception {
 
-		String screenName = StringUtil.extractFirst(
-			emailAddress, StringPool.AT).toLowerCase();
+		String screenName = null;
 
-		screenName = StringUtil.replace(
-			screenName,
-			new String[] {StringPool.SLASH, StringPool.UNDERLINE},
-			new String[] {StringPool.PERIOD, StringPool.PERIOD});
+		if (Validator.isNotNull(emailAddress)) {
+			StringUtil.extractFirst(
+				emailAddress, StringPool.AT).toLowerCase();
 
-		if (screenName.equals(ScreenNameValidator.CYRUS) ||
-			screenName.equals(ScreenNameValidator.POSTFIX)) {
+			screenName = StringUtil.replace(
+				screenName,
+				new String[] {StringPool.SLASH, StringPool.UNDERLINE},
+				new String[] {StringPool.PERIOD, StringPool.PERIOD});
 
-			screenName += StringPool.PERIOD + userId;
+			if (screenName.equals(ScreenNameValidator.CYRUS) ||
+				screenName.equals(ScreenNameValidator.POSTFIX)) {
+
+				screenName += StringPool.PERIOD + userId;
+			}
+		}
+		else {
+			screenName = String.valueOf(userId);
 		}
 
 		try {

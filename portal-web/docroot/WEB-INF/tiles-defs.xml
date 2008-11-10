@@ -60,6 +60,11 @@
 		<put name="content" value="/portal/test.jsp" />
 	</definition>
 
+	<definition name="portal.update_email_address" extends="portal">
+		<put name="title" value="new-email-address" />
+		<put name="content" value="/portal/update_email_address.jsp" />
+	</definition>
+
 	<definition name="portal.update_password" extends="portal">
 		<put name="title" value="new-password" />
 		<put name="content" value="/portal/update_password.jsp" />

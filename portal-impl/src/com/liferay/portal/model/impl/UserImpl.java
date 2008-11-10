@@ -405,6 +405,10 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public boolean hasCompanyMx(String emailAddress) {
+		if (Validator.isNull(emailAddress)) {
+			return false;
+		}
+
 		try {
 			Company company = CompanyLocalServiceUtil.getCompanyById(
 				getCompanyId());

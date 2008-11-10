@@ -85,8 +85,10 @@ public class LDAPUser extends DummyDirContext {
 				_user.getPasswordUnencrypted());
 		}
 
-		_attrs.put(
-			userMappings.getProperty("emailAddress"), _user.getEmailAddress());
+		if (Validator.isNotNull(_user.getEmailAddress())) {
+			_attrs.put(
+				userMappings.getProperty("emailAddress"), _user.getEmailAddress());
+		}
 
 		// Optional attributes
 

@@ -22,9 +22,12 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.NoSuchEmailAddressException;
-import com.liferay.portal.NoSuchListTypeException;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.ReservedUserEmailAddressException;
+import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -45,8 +48,8 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="EditEmailAddressAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
+ * @author Julio Camarero
+ * @author Jorge Ferrer
  *
  */
 public class EditEmailAddressAction extends PortletAction {
@@ -69,7 +72,7 @@ public class EditEmailAddressAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchEmailAddressException ||
+			if (e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -77,7 +80,10 @@ public class EditEmailAddressAction extends PortletAction {
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof EmailAddressException ||
-					 e instanceof NoSuchListTypeException) {
+					 e instanceof DuplicateUserEmailAddressException ||
+					 e instanceof NoSuchEmailAddressException ||
+					 e instanceof ReservedUserEmailAddressException ||
+					 e instanceof UserEmailAddressException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}

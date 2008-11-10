@@ -298,6 +298,13 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void updateEmailAddress(long userId,
+		java.lang.String emailAddress1, java.lang.String emailAddress2)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserServiceUtil.updateEmailAddress(userId, emailAddress1, emailAddress2);
+	}
+
 	public static JSONObject updateLockout(long userId, boolean lockout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

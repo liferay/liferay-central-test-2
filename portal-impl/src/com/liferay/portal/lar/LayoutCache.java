@@ -242,10 +242,10 @@ public class LayoutCache {
 		return role;
 	}
 
-	protected User getUser(long companyId, long groupId, String emailAddress)
+	protected User getUser(long companyId, long groupId, String uuid)
 		throws SystemException {
 
-		List<User> users = usersMap.get(emailAddress);
+		List<User> users = usersMap.get(uuid);
 
 		if (users == null) {
 			LinkedHashMap<String, Object> params =
@@ -253,11 +253,18 @@ public class LayoutCache {
 
 			params.put("usersGroups", new Long(groupId));
 
-			users = UserLocalServiceUtil.search(
-				companyId, null, null, null, null, emailAddress, Boolean.TRUE,
-				params, true, 0, 1, (OrderByComparator)null);
+			try {
+				User user = UserLocalServiceUtil.getUserByUuid(uuid);
 
-			usersMap.put(emailAddress, users);
+				users = UserLocalServiceUtil.search(
+					companyId, null, null, null, user.getScreenName(), null,
+					Boolean.TRUE, params, true, 0, 1, (OrderByComparator)null);
+
+			}
+			catch (PortalException pe) {
+			}
+
+			usersMap.put(uuid, users);
 		}
 
 		if (users.size() == 0) {

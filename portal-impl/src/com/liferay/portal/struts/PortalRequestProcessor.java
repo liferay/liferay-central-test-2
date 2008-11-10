@@ -667,6 +667,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_UPDATE_PASSWORD;
 		}
 
+		// Authenticated users must have an email address
+
+		if ((user != null) && (Validator.isNull(user.getEmailAddress()))) {
+			return _PATH_PORTAL_UPDATE_EMAIL;
+		}
+
 		// Authenticated users should have a reminder query
 
 		if ((user != null) &&
@@ -909,6 +915,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_TCK = "/portal/tck";
 
 	private static String _PATH_PORTAL_TERMS_OF_USE = "/portal/terms_of_use";
+
+	private static String _PATH_PORTAL_UPDATE_EMAIL =
+		"/portal/update_email_address";
 
 	private static String _PATH_PORTAL_UPDATE_PASSWORD =
 		"/portal/update_password";

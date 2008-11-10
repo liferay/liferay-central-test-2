@@ -213,9 +213,11 @@ public class PortalLDAPUtil {
 					user.getPasswordUnencrypted());
 			}
 
-			mods.addItem(
-				userMappings.getProperty("emailAddress"),
-				user.getEmailAddress());
+			if (Validator.isNotNull(user.getEmailAddress())) {
+				mods.addItem(
+					userMappings.getProperty("emailAddress"),
+					user.getEmailAddress());
+			}
 
 			String jobTitleMapping = userMappings.getProperty("jobTitle");
 

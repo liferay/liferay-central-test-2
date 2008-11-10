@@ -1266,6 +1266,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userPersistence.findByC_SN(companyId, screenName);
 	}
 
+	public User getUserByUuid(String uuid)
+		throws PortalException, SystemException {
+
+		List<User> users = userPersistence.findByUuid(uuid);
+
+		if (users.isEmpty()) {
+			throw new NoSuchUserException();
+		}
+		else {
+			return users.get(0);
+		}
+	}
+
 	public long getUserIdByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
@@ -1753,6 +1766,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 
 		return user;
+	}
+
+	public void updateEmailAddress(
+			long userId, String emailAddress1, String emailAddress2)
+		throws PortalException, SystemException {
+
+		if (!emailAddress1.equals(emailAddress2)){
+			throw new UserEmailAddressException();
+		}
+
+		validateEmailAddress(emailAddress1, StringPool.DASH);
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		checkInvalidEmailAddresses(user.getCompanyId(), emailAddress1);
+
+		user.setEmailAddress(emailAddress1);
+
+		userPersistence.update(user, false);
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
@@ -2531,6 +2563,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return authResult;
 	}
 
+	protected void checkInvalidEmailAddresses(
+			long companyId, String emailAddress)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(emailAddress)) {
+			return;
+		}
+
+		User user = userPersistence.fetchByC_EA(companyId, emailAddress);
+
+		if (user != null) {
+			throw new DuplicateUserEmailAddressException();
+		}
+
+		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
+			companyId, PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
+
+		for (int i = 0; i < reservedEmailAddresses.length; i++) {
+			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
+				throw new ReservedUserEmailAddressException();
+			}
+		}
+	}
+
 	protected void copyUserGroupLayouts(long userGroupId, long userId)
 		throws PortalException, SystemException {
 
@@ -2953,26 +3010,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			validateScreenName(user.getCompanyId(), userId, screenName);
 		}
 
-		validateEmailAddress(emailAddress);
+		validateEmailAddress(emailAddress, user.getEmailAddress());
 
 		if (!user.isDefaultUser()) {
 			if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
-				if (userPersistence.fetchByC_EA(
-						user.getCompanyId(), emailAddress) != null) {
 
-					throw new DuplicateUserEmailAddressException();
-				}
-			}
-
-			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-				user.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
-				StringPool.NEW_LINE,
-				PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
-
-			for (int i = 0; i < reservedEmailAddresses.length; i++) {
-				if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
-					throw new ReservedUserEmailAddressException();
-				}
+				checkInvalidEmailAddresses(
+					user.getCompanyId(), emailAddress);
 			}
 
 			if (Validator.isNull(firstName)) {
@@ -3014,23 +3058,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				companyId, 0, password1, password2, passwordPolicy);
 		}
 
-		validateEmailAddress(emailAddress);
+		validateEmailAddress(emailAddress, StringPool.BLANK);
 
-		User user = userPersistence.fetchByC_EA(companyId, emailAddress);
-
-		if (user != null) {
-			throw new DuplicateUserEmailAddressException();
-		}
-
-		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
-			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
-
-		for (int i = 0; i < reservedEmailAddresses.length; i++) {
-			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
-				throw new ReservedUserEmailAddressException();
-			}
-		}
+		checkInvalidEmailAddresses(companyId, emailAddress);
 
 		if (Validator.isNull(firstName)) {
 			throw new ContactFirstNameException();
@@ -3040,8 +3070,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateEmailAddress(String emailAddress)
+	protected void validateEmailAddress(
+			String emailAddress, String oldEmailAddress)
 		throws PortalException {
+
+		if (Validator.isNull(emailAddress)) {
+			if (Validator.isNotNull(oldEmailAddress) ||
+				PropsValues.USERS_ALLOW_EMPTY_EMAIL_ADDRESS) {
+
+				throw new UserEmailAddressException();
+			}
+			else {
+				return;
+			}
+		}
 
 		if (!Validator.isEmailAddress(emailAddress) ||
 			emailAddress.startsWith("root@") ||

@@ -1240,15 +1240,14 @@ public class LayoutImporter {
 		for (int i = 0; i < userActionsEls.size(); i++) {
 			Element userActionsEl = userActionsEls.get(i);
 
-			String emailAddress = userActionsEl.attributeValue("email-address");
+			String uuid = userActionsEl.attributeValue("uuid");
 
-			User user = layoutCache.getUser(companyId, groupId, emailAddress);
+			User user = layoutCache.getUser(companyId, groupId, uuid);
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Ignoring permissions for user with email address " +
-							emailAddress);
+						"Ignoring permissions for user with uuid " + uuid);
 				}
 			}
 			else {
@@ -1283,15 +1282,13 @@ public class LayoutImporter {
 		for (int i = 0; i < userEls.size(); i++) {
 			Element userEl = userEls.get(i);
 
-			String emailAddress = userEl.attributeValue("email-address");
+			String uuid = userEl.attributeValue("uuid");
 
-			User user = layoutCache.getUser(companyId, groupId, emailAddress);
+			User user = layoutCache.getUser(companyId, groupId, uuid);
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Ignoring roles for user with email address " +
-							emailAddress);
+					_log.warn("Ignoring roles for user with uuid " + uuid);
 				}
 			}
 			else {
