@@ -40,7 +40,4 @@ public class CompanyConstants {
 
 	public static final String SYSTEM_STRING = String.valueOf(SYSTEM);
 
-	public static final String WSRP_VIRTUAL_HOST =
-			"hidden.wsrp.host.liferay.com";
-
 }
