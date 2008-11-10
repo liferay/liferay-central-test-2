@@ -156,6 +156,9 @@ public class WikiPageFinderImpl
 				return list.get(0);
 			}
 		}
+		catch (NoSuchPageException nspe) {
+			throw nspe;
+		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}

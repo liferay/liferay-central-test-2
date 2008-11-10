@@ -423,6 +423,12 @@ public class LuceneUtil {
 		return _instance._getAnalyzer();
 	}
 
+	public static FSDirectory getDirectory(String path, boolean create)
+		throws IOException {
+
+		return FSDirectory.getDirectory(path, false);
+	}
+
 	public static Directory getLuceneDir(long companyId) {
 		return _instance._getLuceneDir(companyId);
 	}
@@ -548,7 +554,7 @@ public class LuceneUtil {
 		String path = _getPath(companyId);
 
 		try {
-			Directory directory = FSDirectory.getDirectory(path, false);
+			Directory directory = getDirectory(path, false);
 
 			directory.close();
 		}
@@ -637,7 +643,7 @@ public class LuceneUtil {
 		String path = _getPath(companyId);
 
 		try {
-			directory = FSDirectory.getDirectory(path, false);
+			directory = getDirectory(path, false);
 		}
 		catch (IOException ioe1) {
 			try {
@@ -645,7 +651,7 @@ public class LuceneUtil {
 					directory.close();
 				}
 
-				directory = FSDirectory.getDirectory(path, true);
+				directory = getDirectory(path, true);
 			}
 			catch (IOException ioe2) {
 				throw new RuntimeException(ioe2);

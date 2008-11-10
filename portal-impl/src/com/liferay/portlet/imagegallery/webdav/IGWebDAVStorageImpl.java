@@ -51,8 +51,6 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import java.io.File;
 import java.io.InputStream;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -497,7 +495,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	protected boolean deleteResource(
 			long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException, RemoteException {
+		throws PortalException, SystemException {
 
 		try {
 			IGFolder folder = IGFolderServiceUtil.getFolder(

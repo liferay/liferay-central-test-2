@@ -350,7 +350,7 @@ public class IndexWriterFactory {
 
 			dir.mkdir();
 
-			_readOnlyLuceneDir = FSDirectory.getDirectory(dir.getPath(), false);
+			_readOnlyLuceneDir = LuceneUtil.getDirectory(dir.getPath(), false);
 		}
 
 		return _readOnlyLuceneDir;
