@@ -353,7 +353,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onclick="<portlet:namespace />addPermissions('portlet');" />
 
-		<c:if test="<%= (role.getType() == RoleConstants.TYPE_REGULAR) || (role.getType() == RoleConstants.TYPE_ORGANIZATION) %>">
+		<c:if test="<%= (role.getType() == RoleConstants.TYPE_ORGANIZATION) || (role.getType() == RoleConstants.TYPE_REGULAR) %>">
 			<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onclick="<portlet:namespace />addPermissions('portal');" />
 		</c:if>
 
