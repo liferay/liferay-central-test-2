@@ -138,7 +138,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "wordpress")) {
-				WordpressImporter.importData(context);
+				WordPressImporter.importData(context);
 			}
 
 			return null;
