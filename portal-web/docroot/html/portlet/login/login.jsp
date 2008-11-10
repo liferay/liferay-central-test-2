@@ -74,10 +74,10 @@
 				<%
 				String loginLabel = "screen-name";
 
-				if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
+				if (prefAuthType.equals(CompanyConstants.AUTH_TYPE_EA) || (Validator.isNull(prefAuthType) && company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA))) {
 					loginLabel = "email";
 				}
-				else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+				else if (prefAuthType.equals(CompanyConstants.AUTH_TYPE_ID) || (Validator.isNull(prefAuthType) && company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID))) {
 					loginLabel = "user-id";
 				}
 				%>

@@ -116,7 +116,7 @@ public class LoginUtil {
 
 	public static void login(
 			HttpServletRequest request, HttpServletResponse response,
-			String login, String password, boolean rememberMe)
+			String login, String password, boolean rememberMe, String authType)
 		throws Exception {
 
 		CookieKeys.validateSupportCookie(request);
@@ -151,7 +151,11 @@ public class LoginUtil {
 
 		Map<String, String[]> parameterMap = request.getParameterMap();
 
-		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
+		if (Validator.isNull(authType)) {
+			authType = company.getAuthType();
+		}
+
+		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);
@@ -159,7 +163,7 @@ public class LoginUtil {
 			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
 				company.getCompanyId(), login);
 		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = UserLocalServiceUtil.authenticateByScreenName(
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);
@@ -167,7 +171,7 @@ public class LoginUtil {
 			userId = UserLocalServiceUtil.getUserIdByScreenName(
 				company.getCompanyId(), login);
 		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
 				company.getCompanyId(), userId, password, headerMap,
 				parameterMap);

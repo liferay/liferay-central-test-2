@@ -33,17 +33,21 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -70,6 +74,14 @@ public class LoginAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
+
+		String portletId = portletConfigImpl.getPortletId();
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletId);
+
 		if (actionRequest.getRemoteUser() != null) {
 			actionResponse.sendRedirect(themeDisplay.getPathMain());
 
@@ -77,7 +89,7 @@ public class LoginAction extends PortletAction {
 		}
 
 		try {
-			login(themeDisplay, actionRequest, actionResponse);
+			login(themeDisplay, actionRequest, actionResponse, preferences);
 		}
 		catch (Exception e) {
 			if (e instanceof AuthException) {
@@ -124,7 +136,7 @@ public class LoginAction extends PortletAction {
 
 	protected void login(
 			ThemeDisplay themeDisplay, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+			ActionResponse actionResponse, PortletPreferences preferences)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -136,7 +148,10 @@ public class LoginAction extends PortletAction {
 		String password = ParamUtil.getString(actionRequest, "password");
 		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
 
-		LoginUtil.login(request, response, login, password, rememberMe);
+		String authType = preferences.getValue("authType", StringPool.BLANK);
+
+		LoginUtil.login(
+			request, response, login, password, rememberMe, authType);
 
 		if (PropsValues.PORTAL_JAAS_ENABLE) {
 			actionResponse.sendRedirect(

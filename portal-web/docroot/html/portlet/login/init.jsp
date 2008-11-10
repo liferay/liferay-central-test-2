@@ -32,6 +32,19 @@
 <%@ page import="com.liferay.portal.UserLockoutException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
+<%@ page import="com.liferay.portal.model.CompanyConstants" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>
 <%@ page import="com.liferay.portal.util.OpenIdUtil" %>
 <%@ page import="com.liferay.portlet.login.util.LoginUtil" %>
+
+<%
+PortletPreferences preferences = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+
+String prefAuthType = GetterUtil.getString(preferences.getValue("authType", StringPool.BLANK));
+%>
