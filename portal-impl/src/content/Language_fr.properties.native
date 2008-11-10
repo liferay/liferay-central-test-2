@@ -2092,6 +2092,7 @@ never-auto-expire=N'expire jamais automatiquement
 never-expire=N'expire jamais
 never-review=Jamais Revue
 never=Jamais
+new-email-address=Nouvel email address
 new-event=Nouvel Événement
 new-friendly-url=Nouvel URL simplifié
 new-game=Nouveau jeu

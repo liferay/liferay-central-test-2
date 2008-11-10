@@ -2092,6 +2092,7 @@ never-auto-expire=公開終了日時を設定しない
 never-expire=期限を設定しない
 never-review=レビュー日時を設定しない
 never=なし
+new-email-address=新しい電子メールアドレス
 new-event=新規イベント
 new-friendly-url=新規フレンドリーURL
 new-game=新規ゲーム
