@@ -199,7 +199,7 @@ public class PluginPackageIndexer implements Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public void reIndex(String className, long classPK) throws SearchException {
+	public void reIndex(String className, long classPK) {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {

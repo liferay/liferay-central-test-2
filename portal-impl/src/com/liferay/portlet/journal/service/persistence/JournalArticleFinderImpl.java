@@ -396,6 +396,9 @@ public class JournalArticleFinderImpl
 				return list.get(0);
 			}
 		}
+		catch (NoSuchArticleException nsae) {
+			throw nsae;
+		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}

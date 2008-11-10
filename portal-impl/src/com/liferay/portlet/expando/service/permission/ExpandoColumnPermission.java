@@ -61,7 +61,7 @@ public class ExpandoColumnPermission {
 	public static void check(
 			PermissionChecker permissionChecker, ExpandoColumn column,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, column, actionId)) {
 			throw new PrincipalException();
@@ -71,7 +71,7 @@ public class ExpandoColumnPermission {
 	public static boolean contains(
 			PermissionChecker permissionChecker, String className,
 			String tableName, String columnName, String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
 			className, tableName, columnName);
@@ -90,9 +90,8 @@ public class ExpandoColumnPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, ExpandoColumn column,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, ExpandoColumn column,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			0, ExpandoColumn.class.getName(), column.getColumnId(), actionId);

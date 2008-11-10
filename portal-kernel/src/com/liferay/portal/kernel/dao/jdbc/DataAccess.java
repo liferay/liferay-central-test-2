@@ -45,9 +45,7 @@ import javax.sql.DataSource;
  */
 public class DataAccess {
 
-	public static Connection getConnection()
-		throws NamingException, SQLException {
-
+	public static Connection getConnection() throws SQLException {
 		DataSource ds = InfrastructureUtil.getDataSource();
 
 		return ds.getConnection();

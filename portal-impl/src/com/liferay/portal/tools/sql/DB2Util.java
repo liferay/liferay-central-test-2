@@ -162,9 +162,7 @@ public class DB2Util extends DBUtil {
 		return sb.toString();
 	}
 
-	private void _reorgTables(String[] templates)
-		throws NamingException, SQLException {
-
+	private void _reorgTables(String[] templates) throws SQLException {
 		Set<String> tableNames = new HashSet<String>();
 
 		for (String template : templates) {

@@ -39,6 +39,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated
+ *
  */
 public class UpgradeProcess_4_4_0 extends UpgradeProcess {
 

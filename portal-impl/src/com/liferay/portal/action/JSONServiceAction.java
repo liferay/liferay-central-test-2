@@ -239,7 +239,7 @@ public class JSONServiceAction extends JSONAction {
 
 			jsonObject.put("javaClass", ServiceContext.class.getName());
 
-			return (ServiceContext)JSONFactoryUtil.deserialize(jsonObject);
+			return JSONFactoryUtil.deserialize(jsonObject);
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
 			return ParamUtil.getString(request, parameter);

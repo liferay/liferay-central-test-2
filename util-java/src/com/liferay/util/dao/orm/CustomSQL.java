@@ -47,8 +47,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.naming.NamingException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -82,7 +80,7 @@ public class CustomSQL {
 	public static final String SYBASE_FUNCTION_IS_NOT_NULL =
 		"ISNULL(?, '1') = '0'";
 
-	public CustomSQL() throws NamingException, SQLException {
+	public CustomSQL() throws SQLException {
 		Connection con = DataAccess.getConnection();
 
 		String functionIsNull = PortalUtil.getCustomSQLFunctionIsNull();

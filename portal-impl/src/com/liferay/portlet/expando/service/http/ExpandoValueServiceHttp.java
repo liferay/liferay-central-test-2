@@ -184,7 +184,7 @@ public class ExpandoValueServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.lang.Object)returnObj;
+			return returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

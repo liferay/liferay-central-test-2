@@ -172,6 +172,8 @@ public class ${entity.name}ServiceHttp {
 							return ((Long)returnObj).longValue();
 						<#elseif returnTypeName == "short">
 							return ((Short)returnObj).shortValue();
+						<#elseif returnTypeName == "java.lang.Object">
+							return returnObj;
 						<#else>
 							return (${returnTypeName})returnObj;
 						</#if>

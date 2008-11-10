@@ -210,7 +210,7 @@ public class ClassUtil {
 			}
 		}
 
-		return (String[])tokens.toArray(new String[tokens.size()]);
+		return tokens.toArray(new String[tokens.size()]);
 	}
 
 	private static List<String> _processAnnotationParameters(

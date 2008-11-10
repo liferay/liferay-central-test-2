@@ -978,7 +978,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void importStructure(
-			PortletDataContext context, Map structureIds, String path)
+			PortletDataContext context, Map<String, String> structureIds,
+			String path)
 		throws Exception {
 
 		if (!context.isPathNotProcessed(path)) {
@@ -1073,8 +1074,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void importTemplate(
-			PortletDataContext context, Map structureIds, Map templateIds,
-			String smallImagePath, String path)
+			PortletDataContext context, Map<String, String> structureIds,
+			Map<String, String> templateIds, String smallImagePath, String path)
 		throws Exception {
 
 		if (!context.isPathNotProcessed(path)) {

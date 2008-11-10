@@ -273,7 +273,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return null;
 	}
 
-	public void reIndex(String className, long classPK) throws SearchException {
+	public void reIndex(String className, long classPK) {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
