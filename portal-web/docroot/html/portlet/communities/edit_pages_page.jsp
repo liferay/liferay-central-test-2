@@ -30,15 +30,15 @@ long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue(
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
+String type = BeanParamUtil.getString(selLayout, request, "type");
+String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
+
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
-
-String type = BeanParamUtil.getString(selLayout, request, "type");
-String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 %>
 
 <liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">

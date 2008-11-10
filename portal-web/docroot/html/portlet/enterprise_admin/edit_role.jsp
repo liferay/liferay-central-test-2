@@ -94,6 +94,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
 			</td>
 		</tr>
+
 		<c:if test="<%= role != null %>">
 			<tr>
 				<td>
