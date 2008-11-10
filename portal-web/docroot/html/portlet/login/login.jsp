@@ -116,7 +116,6 @@
 						function() {
 							var checked = 'off';
 
-							console.log("rememberMe: " + this.checked);
 							if (this.checked) {
 								checked = 'on';
 							}
