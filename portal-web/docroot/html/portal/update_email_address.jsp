@@ -24,6 +24,11 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<%
+String emailAddress1 = ParamUtil.getString(request, "emailAddress1");
+String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
+%>
+
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_email_address" class="uni-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
 <input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -33,11 +38,6 @@
 	<c:when test="<%= SessionErrors.contains(request, DuplicateUserEmailAddressException.class.getName()) %>">
 		<span class="portlet-msg-error">
 			<liferay-ui:message key="the-email-address-you-requested-is-already-taken" />
-		</span>
-	</c:when>
-	<c:when test="<%= SessionErrors.contains(request, EmailAddressException.class.getName()) %>">
-		<span class="portlet-msg-error">
-			<liferay-ui:message key="please-enter-a-valid-email-address" />
 		</span>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, ReservedUserEmailAddressException.class.getName()) %>">
@@ -52,7 +52,7 @@
 	</c:when>
 	<c:otherwise>
 		<span class="portlet-msg-info">
-			<liferay-ui:message key="please-set-a-valid-email-address" />
+			<liferay-ui:message key="please-enter-a-valid-email-address" />
 		</span>
 	</c:otherwise>
 </c:choose>
@@ -63,13 +63,13 @@
 	<div class="ctrl-holder">
 		<label for="emailAddress1"><liferay-ui:message key="email-address" /></label>
 
-		<input name="emailAddress1" size="50" type="text" value="" />
+		<input class="lfr-input-text" name="emailAddress1" type="text" value="<%= emailAddress1 %>" />
 	</div>
 
 	<div class="ctrl-holder">
 		<label for="emailAddress2"><liferay-ui:message key="enter-again" /></label>
 
-		<input name="emailAddress2" size="50" type="text" value="" />
+		<input class="lfr-input-text" name="emailAddress2" type="text" value="<%= emailAddress2 %>" />
 	</div>
 </fieldset>
 

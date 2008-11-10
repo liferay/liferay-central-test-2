@@ -87,7 +87,8 @@ public class LDAPUser extends DummyDirContext {
 
 		if (Validator.isNotNull(_user.getEmailAddress())) {
 			_attrs.put(
-				userMappings.getProperty("emailAddress"), _user.getEmailAddress());
+				userMappings.getProperty("emailAddress"),
+				_user.getEmailAddress());
 		}
 
 		// Optional attributes

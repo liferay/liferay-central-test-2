@@ -299,10 +299,12 @@ public class UserServiceJSON {
 	}
 
 	public static void updateEmailAddress(long userId,
-		java.lang.String emailAddress1, java.lang.String emailAddress2)
+		java.lang.String password, java.lang.String emailAddress1,
+		java.lang.String emailAddress2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserServiceUtil.updateEmailAddress(userId, emailAddress1, emailAddress2);
+		UserServiceUtil.updateEmailAddress(userId, password, emailAddress1,
+			emailAddress2);
 	}
 
 	public static JSONObject updateLockout(long userId, boolean lockout)

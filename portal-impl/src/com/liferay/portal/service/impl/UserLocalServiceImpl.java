@@ -1768,9 +1768,38 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	public void updateEmailAddress(
-			long userId, String emailAddress1, String emailAddress2)
+	public User updateEmailAddress(
+			long userId, String password, String emailAddress1,
+			String emailAddress2)
 		throws PortalException, SystemException {
+
+		emailAddress1 = emailAddress1.trim().toLowerCase();
+		emailAddress2 = emailAddress2.trim().toLowerCase();
+
+		if (!emailAddress1.equals(emailAddress2)) {
+			throw new UserEmailAddressException();
+		}
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		validateEmailAddress(user.getCompanyId(), emailAddress1);
+		validateEmailAddress(user.getCompanyId(), emailAddress2);
+
+		if (!user.getEmailAddress().equalsIgnoreCase(emailAddress1)) {
+			if (userPersistence.fetchByC_EA(
+					user.getCompanyId(), emailAddress1) != null) {
+
+				throw new DuplicateUserEmailAddressException();
+			}
+		}
+
+		setEmailAddress(
+			user, password, user.getFirstName(), user.getMiddleName(),
+			user.getLastName(), emailAddress1);
+
+		userPersistence.update(user, false);
+
+		return user;
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
@@ -2181,30 +2210,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setScreenName(screenName);
 
-		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
-
-			// test@test.com -> test@liferay.com
-
-			if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-				mailService.addUser(
-					userId, password, firstName, middleName, lastName,
-					emailAddress);
-			}
-
-			// test@liferay.com -> bob@liferay.com
-
-			else if (user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-				mailService.updateEmailAddress(userId, emailAddress);
-			}
-
-			// test@liferay.com -> test@test.com
-
-			else if (user.hasCompanyMx() && !user.hasCompanyMx(emailAddress)) {
-				mailService.deleteEmailAddress(userId);
-			}
-
-			user.setEmailAddress(emailAddress);
-		}
+		setEmailAddress(
+			user, password, firstName, middleName, lastName, emailAddress);
 
 		user.setOpenId(openId);
 		user.setLanguageId(languageId);
@@ -2960,6 +2967,39 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		mailService.sendEmail(message);
 	}
 
+	protected void setEmailAddress(
+		User user, String password, String firstName, String middleName,
+		String lastName, String emailAddress) {
+
+		if (emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
+			return;
+		}
+
+		long userId = user.getUserId();
+
+		// test@test.com -> test@liferay.com
+
+		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+			mailService.addUser(
+				userId, password, firstName, middleName, lastName,
+				emailAddress);
+		}
+
+		// test@liferay.com -> bob@liferay.com
+
+		else if (user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+			mailService.updateEmailAddress(userId, emailAddress);
+		}
+
+		// test@liferay.com -> test@test.com
+
+		else if (user.hasCompanyMx() && !user.hasCompanyMx(emailAddress)) {
+			mailService.deleteEmailAddress(userId);
+		}
+
+		user.setEmailAddress(emailAddress);
+	}
+
 	protected void validate(
 			long userId, String screenName, String emailAddress,
 			String firstName, String lastName, String smsSn)
@@ -2971,25 +3011,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			validateScreenName(user.getCompanyId(), userId, screenName);
 		}
 
-		validateEmailAddress(emailAddress);
+		validateEmailAddress(user.getCompanyId(), emailAddress);
 
 		if (!user.isDefaultUser()) {
-			if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
+			if (Validator.isNotNull(emailAddress) &&
+				!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
+
 				if (userPersistence.fetchByC_EA(
 						user.getCompanyId(), emailAddress) != null) {
 
 					throw new DuplicateUserEmailAddressException();
-				}
-			}
-
-			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-				user.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
-				StringPool.NEW_LINE,
-				PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
-
-			for (int i = 0; i < reservedEmailAddresses.length; i++) {
-				if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
-					throw new ReservedUserEmailAddressException();
 				}
 			}
 
@@ -3025,21 +3056,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				companyId, 0, password1, password2, passwordPolicy);
 		}
 
-		validateEmailAddress(emailAddress);
+		validateEmailAddress(companyId, emailAddress);
 
-		User user = userPersistence.fetchByC_EA(companyId, emailAddress);
+		if (Validator.isNotNull(emailAddress)) {
+			User user = userPersistence.fetchByC_EA(companyId, emailAddress);
 
-		if (user != null) {
-			throw new DuplicateUserEmailAddressException();
-		}
-
-		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
-			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
-
-		for (int i = 0; i < reservedEmailAddresses.length; i++) {
-			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
-				throw new ReservedUserEmailAddressException();
+			if (user != null) {
+				throw new DuplicateUserEmailAddressException();
 			}
 		}
 
@@ -3051,14 +3074,30 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateEmailAddress(String emailAddress)
-		throws PortalException {
+	protected void validateEmailAddress(long companyId, String emailAddress)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(emailAddress) &&
+			!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) {
+
+			return;
+		}
 
 		if (!Validator.isEmailAddress(emailAddress) ||
 			emailAddress.startsWith("root@") ||
 			emailAddress.startsWith("postmaster@")) {
 
 			throw new UserEmailAddressException();
+		}
+
+		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
+			companyId, PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
+
+		for (int i = 0; i < reservedEmailAddresses.length; i++) {
+			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
+				throw new ReservedUserEmailAddressException();
+			}
 		}
 	}
 

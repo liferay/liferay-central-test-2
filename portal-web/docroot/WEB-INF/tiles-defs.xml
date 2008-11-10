@@ -61,7 +61,7 @@
 	</definition>
 
 	<definition name="portal.update_email_address" extends="portal">
-		<put name="title" value="new-email-address" />
+		<put name="title" value="email-address" />
 		<put name="content" value="/portal/update_email_address.jsp" />
 	</definition>
 

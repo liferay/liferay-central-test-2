@@ -246,10 +246,12 @@ public class UserServiceUtil {
 	}
 
 	public static void updateEmailAddress(long userId,
-		java.lang.String emailAddress1, java.lang.String emailAddress2)
+		java.lang.String password, java.lang.String emailAddress1,
+		java.lang.String emailAddress2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateEmailAddress(userId, emailAddress1, emailAddress2);
+		getService()
+			.updateEmailAddress(userId, password, emailAddress1, emailAddress2);
 	}
 
 	public static com.liferay.portal.model.User updateLockout(long userId,

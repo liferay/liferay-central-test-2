@@ -438,14 +438,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	public void updateEmailAddress(
-		long userId, String emailAddress1, String emailAddress2)
+			long userId, String password, String emailAddress1,
+			String emailAddress2)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		userLocalService.updateEmailAddress(
-			userId, emailAddress1, emailAddress2);
+			userId, password, emailAddress1, emailAddress2);
 	}
 
 	public User updateLockout(long userId, boolean lockout)

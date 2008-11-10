@@ -1345,28 +1345,34 @@ public class UserServiceHttp {
 	}
 
 	public static void updateEmailAddress(HttpPrincipal httpPrincipal,
-		long userId, java.lang.String emailAddress1,
+		long userId, java.lang.String password, java.lang.String emailAddress1,
 		java.lang.String emailAddress2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
 
-			Object paramObj1 = emailAddress1;
+			Object paramObj1 = password;
 
-			if (emailAddress1 == null) {
+			if (password == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = emailAddress2;
+			Object paramObj2 = emailAddress1;
+
+			if (emailAddress1 == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = emailAddress2;
 
 			if (emailAddress2 == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"updateEmailAddress",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

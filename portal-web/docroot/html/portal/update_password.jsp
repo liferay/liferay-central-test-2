@@ -84,13 +84,13 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	<div class="ctrl-holder">
 		<label for="password1"><liferay-ui:message key="password" /></label>
 
-		<input name="password1" size="30" type="password" value="" />
+		<input class="lfr-input-text" name="password1" type="password" />
 	</div>
 
 	<div class="ctrl-holder">
 		<label for="password2"><liferay-ui:message key="enter-again" /></label>
 
-		<input name="password2" size="30" type="password" value="" />
+		<input class="lfr-input-text" name="password2" type="password" />
 	</div>
 </fieldset>
 

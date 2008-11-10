@@ -1100,6 +1100,10 @@ public class PropsValues {
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 
+	public static final boolean USERS_EMAIL_ADDRESS_REQUIRED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED));
+
 	public static final String[] USERS_FORM_ADD_IDENTIFICATION =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_ADD_IDENTIFICATION);
 
@@ -1138,10 +1142,6 @@ public class PropsValues {
 
 	public static final String USERS_SCREEN_NAME_VALIDATOR = PropsUtil.get(
 		PropsKeys.USERS_SCREEN_NAME_VALIDATOR);
-
-	public static final boolean USERS_ALLOW_EMPTY_EMAIL_ADDRESS =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.USERS_ALLOW_EMPTY_EMAIL_ADDRESS));
 
 	public static final boolean USERS_UPDATE_LAST_LOGIN =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_UPDATE_LAST_LOGIN));

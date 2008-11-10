@@ -1127,7 +1127,7 @@ public interface PropsKeys {
 
 	public static final String USERS_SCREEN_NAME_VALIDATOR = "users.screen.name.validator";
 
-	public static final String USERS_ALLOW_EMPTY_EMAIL_ADDRESS = "users.allow.empty.email.address";
+	public static final String USERS_EMAIL_ADDRESS_REQUIRED = "users.email.address.required";
 
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 

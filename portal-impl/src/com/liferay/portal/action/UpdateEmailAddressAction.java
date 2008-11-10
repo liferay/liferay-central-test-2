@@ -22,7 +22,9 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
@@ -32,6 +34,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.admin.util.AdminUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +49,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Julio Camarero
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpdateEmailAddressAction extends Action {
@@ -67,7 +71,10 @@ public class UpdateEmailAddressAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		catch (Exception e) {
-			if (e instanceof UserEmailAddressException) {
+			if (e instanceof DuplicateUserEmailAddressException ||
+				e instanceof ReservedUserEmailAddressException ||
+				e instanceof UserEmailAddressException) {
+
 				SessionErrors.add(request, e.getClass().getName());
 
 				return mapping.findForward("portal.update_email_address");
@@ -91,11 +98,12 @@ public class UpdateEmailAddressAction extends Action {
 		throws Exception {
 
 		long userId = PortalUtil.getUserId(request);
+		String password = AdminUtil.getUpdateUserPassword(request, userId);
 		String emailAddress1 = ParamUtil.getString(request, "emailAddress1");
 		String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 
 		UserServiceUtil.updateEmailAddress(
-			userId, emailAddress1, emailAddress2);
+			userId, password, emailAddress1, emailAddress2);
 	}
 
 }

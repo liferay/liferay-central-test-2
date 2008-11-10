@@ -46,9 +46,9 @@ import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
