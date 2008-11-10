@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -48,6 +50,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tags.service.TagsSourceServiceUtil
  *
  */
-@Transactional
+@Transactional(rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface TagsSourceService {
 }

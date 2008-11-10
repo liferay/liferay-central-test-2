@@ -2728,20 +2728,6 @@ Liferay.Service.Tags.TagsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	searchAutocomplete: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "searchAutocomplete";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	searchCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "searchCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	updateEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateEntry";
