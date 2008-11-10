@@ -7206,7 +7206,7 @@ Liferay.AutoFields = new Class({
 		var undoText = Liferay.Language.get('undo-x', ['[$SPAN$]']);
 		undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
 
-		var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row">' + Liferay.Language.get('delete-row') + '</a></span>');
+		var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row modify-link">' + Liferay.Language.get('delete-row') + '</a></span>');
 		var undoManager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
 
 		instance._baseContainer = fullContainer;
@@ -7235,6 +7235,8 @@ Liferay.AutoFields = new Class({
 					}
 
 					if (target.is('.delete-row')) {
+						target.trigger('change');
+
 						instance.deleteRow(currentRow);
 					}
 				}
@@ -10089,7 +10091,7 @@ Liferay.TagsEntriesSelector = new Class({
 		var beginning = 0;
 		var end = 20;
 
-		var data = Liferay.Service.Tags.TagsEntry.searchAutocomplete(
+		var data = Liferay.Service.Tags.TagsEntry.search(
 			{
 				groupId: themeDisplay.getScopeGroupId(),
 				name: "%" + term + "%",
