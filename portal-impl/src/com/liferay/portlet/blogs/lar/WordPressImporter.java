@@ -80,10 +80,10 @@ public class WordPressImporter {
 			return;
 		}
 
-		Document wordpressDoc = null;
+		Document wordPressDoc = null;
 
 		try {
-			wordpressDoc = SAXReaderUtil.read(fileData);
+			wordPressDoc = SAXReaderUtil.read(fileData);
 		}
 		catch (DocumentException de) {
 			_log.error("Reading " + path, de);
@@ -94,15 +94,16 @@ public class WordPressImporter {
 		User defaultUser = UserLocalServiceUtil.getDefaultUser(
 			context.getCompanyId());
 
-		Element root = wordpressDoc.getRootElement();
+		Element root = wordPressDoc.getRootElement();
 
 		List<Element> entryEls = root.element("channel").elements("item");
 
-		DateFormat dateFormater = new SimpleDateFormat(_DATE_FORMAT);
-		dateFormater.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
+		DateFormat dateFormat = new SimpleDateFormat(_DATE_FORMAT);
+
+		dateFormat.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 
 		for (Element entryEl : entryEls) {
-			importEntry(context, defaultUser, userMap, dateFormater, entryEl);
+			importEntry(context, defaultUser, userMap, dateFormat, entryEl);
 		}
 	}
 
@@ -152,9 +153,7 @@ public class WordPressImporter {
 					context.getCompanyId(),
 					userEl.attributeValue("email-address"));
 
-				userMap.put(
-					userEl.getTextTrim(),
-					user.getUserId());
+				userMap.put(userEl.getTextTrim(), user.getUserId());
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
@@ -203,20 +202,18 @@ public class WordPressImporter {
 			commentParentId = messageIdMap.get(commentParentId);
 		}
 
-		MBMessage message =
-			MBMessageLocalServiceUtil.addDiscussionMessage(
-				defaultUser.getUserId(), commentAuthor,
-				context.getGroupId(), BlogsEntry.class.getName(),
-				entry.getEntryId(),
-				messageDisplay.getThread().getThreadId(),
-				commentParentId, null, commentContent);
+		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
+			defaultUser.getUserId(), commentAuthor, context.getGroupId(),
+			BlogsEntry.class.getName(), entry.getEntryId(),
+			messageDisplay.getThread().getThreadId(), commentParentId, null,
+			commentContent);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}
 
 	protected static void importEntry(
 			PortletDataContext context, User defaultUser,
-			Map<String, Long> userMap, DateFormat dateFormater, Element entryEl)
+			Map<String, Long> userMap, DateFormat dateFormat, Element entryEl)
 		throws PortalException, SystemException {
 
 		long userId = context.getUserId(null);
@@ -246,13 +243,14 @@ public class WordPressImporter {
 		Date postDate = new Date();
 
 		try {
-			postDate = dateFormater.parse(dateText);
+			postDate = dateFormat.parse(dateText);
 		}
 		catch (ParseException pe) {
 			_log.warn("Parse " + dateText, pe);
 		}
 
 		Calendar cal = Calendar.getInstance();
+
 		cal.setTime(postDate);
 
 		int displayDateMonth = cal.get(Calendar.MONTH);
@@ -269,8 +267,7 @@ public class WordPressImporter {
 		String pingStatusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("ping_status", _NS_WP));
 
-		boolean allowTrackbacks =
-			pingStatusText.equalsIgnoreCase("open");
+		boolean allowTrackbacks = pingStatusText.equalsIgnoreCase("open");
 
 		String[] tagsEntries = null;
 
@@ -282,10 +279,10 @@ public class WordPressImporter {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setTagsEntries(tagsEntries);
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setPlid(context.getPlid());
+		serviceContext.setTagsEntries(tagsEntries);
 
 		BlogsEntry entry = null;
 
