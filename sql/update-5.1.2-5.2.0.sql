@@ -3,8 +3,6 @@ alter table ExpandoColumn add typeSettings TEXT null;
 
 alter table JournalStructure add parentStructureId VARCHAR(75);
 
-alter table Role_ add title STRING null;
-
 create table MBMailingList (
 	uuid_ VARCHAR(75) null,
 	mailingListId LONG not null primary key,
@@ -35,6 +33,7 @@ create table MBMailingList (
 
 alter table Organization_ add type_ VARCHAR(75);
 
+alter table Role_ add title STRING null;
 alter table Role_ add subtype VARCHAR(75);
 
 alter table TagsEntry add groupId LONG;

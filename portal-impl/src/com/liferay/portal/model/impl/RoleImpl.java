@@ -38,6 +38,7 @@ import java.util.Locale;
  *
  */
 public class RoleImpl extends RoleModelImpl implements Role {
+
 	public RoleImpl() {
 	}
 
@@ -45,6 +46,12 @@ public class RoleImpl extends RoleModelImpl implements Role {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
 		return getTitle(localeLanguageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(localeLanguageId, useDefault);
 	}
 
 	public String getTitle(String localeLanguageId) {
@@ -58,15 +65,13 @@ public class RoleImpl extends RoleModelImpl implements Role {
 		return title;
 	}
 
-	public String getTitle(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getTitle(localeLanguageId, useDefault);
-	}
-
 	public String getTitle(String localeLanguageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(
 			getTitle(), localeLanguageId, useDefault);
+	}
+
+	public String getTypeLabel() {
+		return RoleConstants.getTypeLabel(getType());
 	}
 
 	public void setTitle(String title, Locale locale) {
@@ -82,10 +87,6 @@ public class RoleImpl extends RoleModelImpl implements Role {
 				LocalizationUtil.removeLocalization(
 					getTitle(), "title", localeLanguageId));
 		}
-	}
-
-	public String getTypeLabel() {
-		return RoleConstants.getTypeLabel(getType());
 	}
 
 }

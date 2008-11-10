@@ -408,15 +408,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public Role updateRole(long roleId, String name, String description)
-		throws PortalException, SystemException {
-
-		return updateRole(roleId, name, null, description, null);
-	}
-
 	public Role updateRole(
-			long roleId, String name, Map localeTitlesMap, String description,
-			String subtype)
+			long roleId, String name, Map<Locale, String> localeTitlesMap,
+			String description, String subtype)
 		throws PortalException, SystemException {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);

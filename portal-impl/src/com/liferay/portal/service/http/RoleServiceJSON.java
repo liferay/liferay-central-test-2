@@ -177,14 +177,4 @@ public class RoleServiceJSON {
 			com.liferay.portal.SystemException {
 		RoleServiceUtil.unsetUserRoles(userId, roleIds);
 	}
-
-	public static JSONObject updateRole(long roleId, java.lang.String name,
-		java.lang.String description)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-				name, description);
-
-		return RoleJSONSerializer.toJSONObject(returnValue);
-	}
 }

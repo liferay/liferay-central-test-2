@@ -140,8 +140,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap<Locale, String>(), description, type, hidden,
-			friendlyURL, dlFolderId);
+			null, description, type, hidden, friendlyURL, dlFolderId);
 	}
 
 	public Layout addLayout(
@@ -1075,6 +1074,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected void setLocalizedAttributes(
 		Layout layout, Map<Locale, String> localeNamesMap,
 		Map<Locale, String> localeTitlesMap) {
+
+		if (localeNamesMap == null) {
+			return;
+		}
+
+		if (localeTitlesMap == null) {
+			return;
+		}
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 

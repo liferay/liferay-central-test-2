@@ -573,58 +573,8 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role updateRole(
 		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
-		java.lang.String description)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"updateRole",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Role)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.model.Role updateRole(
-		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
-		java.util.Map localeTitlesMap, java.lang.String description,
-		java.lang.String subtype)
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {

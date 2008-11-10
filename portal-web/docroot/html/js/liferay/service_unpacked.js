@@ -885,13 +885,6 @@ Liferay.Service.Portal.Role = {
 		params.serviceMethodName = "unsetUserRoles";
 
 		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateRole: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateRole";
-
-		return Liferay.Service.ajax(params, callback);
 	}
 };
 

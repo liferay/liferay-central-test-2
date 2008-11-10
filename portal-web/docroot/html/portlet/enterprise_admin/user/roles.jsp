@@ -67,7 +67,6 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.Role"
-		escapedModel="<%= false %>"
 		keyProperty="roleId"
 		modelVar="role"
 	>

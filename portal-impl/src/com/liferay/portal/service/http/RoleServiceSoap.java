@@ -265,21 +265,5 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleSoap updateRole(long roleId,
-		java.lang.String name, java.lang.String description)
-		throws RemoteException {
-		try {
-			com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-					name, description);
-
-			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(RoleServiceSoap.class);
 }
