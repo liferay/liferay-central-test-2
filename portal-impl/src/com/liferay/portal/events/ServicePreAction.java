@@ -1336,7 +1336,11 @@ public class ServicePreAction extends Action {
 				urlControlPanel, "doAsGroupId", scopeGroupId);
 		}
 
-		if (plid > 0) {
+		if (refererPlid > 0) {
+			urlControlPanel = HttpUtil.addParameter(
+				urlControlPanel, "refererPlid", refererPlid);
+		}
+		else if (plid > 0) {
 			urlControlPanel = HttpUtil.addParameter(
 				urlControlPanel, "refererPlid", plid);
 		}
