@@ -62,11 +62,12 @@
 
 		<fieldset class="block-labels">
 			<div class="ctrl-holder">
+
 				<%
 				String loginLabel = "screen-name";
 
 				if (prefAuthType.equals(CompanyConstants.AUTH_TYPE_EA) || (Validator.isNull(prefAuthType) && company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA))) {
-					loginLabel = "email";
+					loginLabel = "email-address";
 				}
 				else if (prefAuthType.equals(CompanyConstants.AUTH_TYPE_ID) || (Validator.isNull(prefAuthType) && company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID))) {
 					loginLabel = "user-id";
