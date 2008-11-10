@@ -47,7 +47,7 @@
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 		%>
 
-		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm1">
+		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 		<input id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 
@@ -61,15 +61,6 @@
 		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 		<fieldset class="block-labels">
-			<c:choose>
-				<c:when test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
-					<legend><liferay-ui:message key="sign-in-with-a-regular-account" /></legend>
-				</c:when>
-				<c:otherwise>
-					<legend><liferay-ui:message key="sign-in" /></legend>
-				</c:otherwise>
-			</c:choose>
-
 			<div class="ctrl-holder">
 				<%
 				String loginLabel = "screen-name";
@@ -110,42 +101,7 @@
 
 		</form>
 
-		<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
-
-			<%
-			String openId = ParamUtil.getString(request, "openId");
-			%>
-
-			<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" class="uni-form" method="post" name="fm2">
-
-			<fieldset class="block-labels">
-				<legend><liferay-ui:message key="sign-in-with-an-open-id-provider" /></legend>
-
-				<div class="ctrl-holder">
-					<label for="<portlet:namespace />openId"><liferay-ui:message key="open-id" /></label>
-
-					<input class="openid-login" name="<portlet:namespace />openId" type="text" value="<%= HtmlUtil.escape(openId) %>" />
-				</div>
-
-				<div class="button-holder">
-					<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-				</div>
-			</fieldset>
-
-			</form>
-		</c:if>
-
-		<div>
-			<c:if test="<%= company.isStrangers() %>">
-				<a href="<%= themeDisplay.getURLCreateAccount() %>"><liferay-ui:message key="create-account" /></a>
-			</c:if>
-
-			<c:if test="<%= company.isSendPassword() %>">
-				&nbsp;|&nbsp;
-
-				<a href="<portlet:renderURL><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:renderURL>"><liferay-ui:message key="forgot-password" />?</a>
-			</c:if>
-		</div>
+		<%@ include file="/html/portlet/login/navigation.jsp" %>
 
 		<script type="text/javascript">
 			jQuery(
@@ -172,7 +128,7 @@
 			);
 
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />login);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />login);
 			</c:if>
 		</script>
 	</c:otherwise>

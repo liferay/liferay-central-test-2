@@ -66,14 +66,6 @@
 
 		<action path="/portal/logout" type="com.liferay.portal.action.LogoutAction" />
 
-		<action path="/portal/open_id_request" type="com.liferay.portal.action.OpenIdRequestAction">
-			<forward name="portal.login" path="portal.login" />
-		</action>
-
-		<action path="/portal/open_id_response" type="com.liferay.portal.action.OpenIdResponseAction">
-			<forward name="portal.login" path="portal.login" />
-		</action>
-
 		<action path="/portal/portlet_url" type="com.liferay.portal.action.PortletURLAction" />
 
 		<action path="/portal/render_portlet" type="com.liferay.portal.action.RenderPortletAction">
@@ -1106,6 +1098,10 @@
 			<forward name="portlet.login.login" path="portlet.login.login" />
 		</action>
 
+		<action path="/login/open_id" type="com.liferay.portlet.login.action.OpenIdAction">
+			<forward name="portlet.login.open_id" path="portlet.login.open_id" />
+		</action>
+
 		<!-- Maps -->
 
 		<action path="/maps/view" forward="portlet.maps.view" name="mapsMapsForm" scope="request" />
@@ -1320,12 +1316,6 @@
 		</action>
 
 		<action path="/news/view" forward="portlet.news.view" />
-
-		<!-- OpenID -->
-
-		<action path="/open_id/view" type="com.liferay.portlet.openid.action.ViewAction">
-			<forward name="portlet.open_id.view" path="portlet.open_id.view" />
-		</action>
 
 		<!-- Our Activities -->
 

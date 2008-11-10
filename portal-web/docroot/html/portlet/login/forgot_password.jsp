@@ -1,4 +1,3 @@
-
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -60,6 +59,8 @@ String emailAddress = ParamUtil.getString(request, "emailAddress");
 <input type="submit" value="<liferay-ui:message key="send-new-password" />" />
 
 </form>
+
+<%@ include file="/html/portlet/login/navigation.jsp" %>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.emailAddress);

@@ -87,8 +87,7 @@ public class ForgotPasswordAction extends PortletAction {
 		renderResponse.setTitle(
 			LanguageUtil.get(
 				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-				"forgot-password") +
-			"?");
+				"forgot-password"));
 
 		return mapping.findForward("portlet.login.forgot_password");
 	}

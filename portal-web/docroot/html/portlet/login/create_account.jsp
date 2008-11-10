@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/my_account/init.jsp" %>
+<%@ include file="/html/portlet/login/init.jsp" %>
 
 <%
 String openId = ParamUtil.getString(request, "openId");
@@ -162,6 +162,8 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 </form>
+
+<%@ include file="/html/portlet/login/navigation.jsp" %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

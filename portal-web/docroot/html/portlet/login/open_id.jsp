@@ -22,12 +22,32 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/login/init.jsp" %>
 
-<%@ page import="com.liferay.portal.CookieNotSupportedException" %>
-<%@ page import="com.liferay.portal.NoSuchUserException" %>
-<%@ page import="com.liferay.portal.UserEmailAddressException" %>
-<%@ page import="com.liferay.portal.UserPasswordException" %>
-<%@ page import="com.liferay.portal.action.LoginAction" %>
-<%@ page import="com.liferay.portal.security.auth.AuthException" %>
-<%@ page import="com.liferay.portal.util.OpenIdUtil" %>
+<%
+String openId = ParamUtil.getString(request, "openId");
+%>
+
+<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/open_id" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />openId"><liferay-ui:message key="open-id" /></label>
+
+		<input class="openid-login" name="<portlet:namespace />openId" type="text" value="<%= HtmlUtil.escape(openId) %>" />
+	</div>
+
+	<div class="button-holder">
+		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+	</div>
+</fieldset>
+
+</form>
+
+<%@ include file="/html/portlet/login/navigation.jsp" %>
+
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />openId);
+	</script>
+</c:if>

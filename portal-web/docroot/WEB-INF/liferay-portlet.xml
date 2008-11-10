@@ -971,18 +971,6 @@
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
-		<portlet-name>112</portlet-name>
-		<icon>/html/portlet/open_id/icon.png</icon>
-		<struts-path>open_id</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-open-id</css-class-wrapper>
-		<add-default-resource>true</add-default-resource>
-	</portlet>
-	<portlet>
 		<portlet-name>113</portlet-name>
 		<icon>/html/portlet/portlet_css/icon.png</icon>
 		<struts-path>portlet_css</struts-path>

@@ -70,6 +70,8 @@ public interface Constants {
 
 	public static final String REJECT = "reject";
 
+	public static final String READ = "read";
+
 	public static final String RESET = "reset";
 
 	public static final String RESTORE = "restore";
@@ -93,5 +95,7 @@ public interface Constants {
 	public static final String UPDATE = "update";
 
 	public static final String VIEW = "view";
+
+	public static final String WRITE = "write";
 
 }

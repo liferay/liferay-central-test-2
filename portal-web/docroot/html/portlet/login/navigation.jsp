@@ -22,4 +22,40 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<div class="navigation">
+	<liferay-ui:icon-list>
+		<liferay-ui:icon
+			image="status_online"
+			message="sign-in"
+			url="<%= themeDisplay.getURLSignIn() %>"
+		/>
+
+		<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+			<portlet:renderURL var="openIdURL">
+				<portlet:param name="struts_action" value="/login/open_id" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon
+				message="open-id"
+				src='<%= themeDisplay.getPathThemeImages() + "/common/openid.gif" %>'
+				url="<%= openIdURL %>"
+			/>
+		</c:if>
+
+		<c:if test="<%= company.isStrangers() %>">
+			<liferay-ui:icon
+				image="add_user"
+				message="create-account"
+				url="<%= themeDisplay.getURLCreateAccount().toString() %>"
+			/>
+		</c:if>
+
+		<c:if test="<%= company.isSendPassword() %>">
+			<portlet:renderURL var="forgotPasswordURL">
+				<portlet:param name="struts_action" value="/login/forgot_password" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="help" message="forgot-password" url="<%= forgotPasswordURL %>" />
+		</c:if>
+	</liferay-ui:icon-list>
+</div>

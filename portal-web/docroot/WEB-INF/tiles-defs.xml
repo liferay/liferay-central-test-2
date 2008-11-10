@@ -638,6 +638,10 @@
 		<put name="portlet_content" value="/portlet/login/login.jsp" />
 	</definition>
 
+	<definition name="portlet.login.open_id" extends="portlet.login">
+		<put name="portlet_content" value="/portlet/login/open_id.jsp" />
+	</definition>
+
 	<!-- Maps -->
 
 	<definition name="portlet.maps" extends="portlet" />
@@ -784,14 +788,6 @@
 
 	<definition name="portlet.news.view" extends="portlet.news">
 		<put name="portlet_content" value="/portlet/news/view.jsp" />
-	</definition>
-
-	<!-- OpenID -->
-
-	<definition name="portlet.open_id" extends="portlet" />
-
-	<definition name="portlet.open_id.view" extends="portlet.open_id">
-		<put name="portlet_content" value="/portlet/open_id/view.jsp" />
 	</definition>
 
 	<!-- Our Activities -->
