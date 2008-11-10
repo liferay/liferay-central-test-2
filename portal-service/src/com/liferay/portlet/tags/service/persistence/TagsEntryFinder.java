@@ -46,7 +46,8 @@ public interface TagsEntryFinder {
 
 	public com.liferay.portlet.tags.model.TagsEntry findByG_N_F(long groupId,
 		java.lang.String name, boolean folksonomy)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N_F(
 		long groupId, long classNameId, java.lang.String name,

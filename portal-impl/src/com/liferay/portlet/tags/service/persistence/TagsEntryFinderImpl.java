@@ -217,7 +217,7 @@ public class TagsEntryFinderImpl
 	}
 
 	public TagsEntry findByG_N_F(long groupId, String name, boolean folksonomy)
-		throws SystemException {
+		throws NoSuchEntryException, SystemException {
 
 		name = name.trim().toLowerCase();
 
@@ -257,6 +257,9 @@ public class TagsEntryFinderImpl
 			else {
 				return list.get(0);
 			}
+		}
+		catch (NoSuchEntryException nsee) {
+			throw nsee;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
