@@ -25,6 +25,7 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -43,7 +44,6 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.model.TagsVocabulary;
-import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
@@ -144,8 +144,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
-					userId, groupId, vocabularyName, TagsEntryImpl.TAG,
-					Boolean.TRUE, Boolean.TRUE, null, null);
+					userId, groupId, vocabularyName,
+					TagsEntryConstants.FOLKSONOMY_TAG, Boolean.TRUE,
+					Boolean.TRUE, null, null);
 			}
 			else {
 				throw nsve;
@@ -248,7 +249,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		for (String name : names) {
 			try {
-				getEntry(groupId, name, TagsEntryImpl.TAG);
+				getEntry(groupId, name, TagsEntryConstants.FOLKSONOMY_TAG);
 			}
 			catch (NoSuchEntryException nsee) {
 				addEntryToGroup(
@@ -312,7 +313,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public List<TagsEntry> getAssetEntries(long assetId)
 		throws SystemException {
 
-		return getAssetEntries(assetId, TagsEntryImpl.TAG);
+		return getAssetEntries(assetId, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public List<TagsEntry> getAssetEntries(long assetId, boolean folksonomy)
@@ -322,11 +323,11 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries() throws SystemException {
-		return getEntries(TagsEntryImpl.TAG);
+		return getEntries(TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public List<TagsEntry> getEntries(boolean folksonomy)
-			throws SystemException {
+		throws SystemException {
 
 		return tagsEntryFinder.findByFolksonomy(folksonomy);
 	}
@@ -334,13 +335,15 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public List<TagsEntry> getEntries(String className, long classPK)
 		throws SystemException {
 
-		return getEntries(className, classPK, TagsEntryImpl.TAG);
+		return getEntries(
+			className, classPK, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public List<TagsEntry> getEntries(long classNameId, long classPK)
 		throws SystemException {
 
-		return getEntries(classNameId, classPK, TagsEntryImpl.TAG);
+		return getEntries(
+			classNameId, classPK, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public List<TagsEntry> getEntries(
@@ -371,7 +374,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return tagsEntryFinder.findByG_C_N_F(
-			groupId, classNameId, name, TagsEntryImpl.TAG);
+			groupId, classNameId, name, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public List<TagsEntry> getEntries(
@@ -379,14 +382,15 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return tagsEntryFinder.findByG_C_N_F(
-			groupId, classNameId, name, TagsEntryImpl.TAG, start, end);
+			groupId, classNameId, name,
+			TagsEntryConstants.FOLKSONOMY_TAG, start, end);
 	}
 
 	public int getEntriesSize(long groupId, long classNameId, String name)
 		throws SystemException {
 
 		return tagsEntryFinder.countByG_C_N_F(
-			groupId, classNameId, name, TagsEntryImpl.TAG);
+			groupId, classNameId, name, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public TagsEntry getEntry(long entryId)
@@ -398,7 +402,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry getEntry(long groupId, String name)
 		throws PortalException, SystemException {
 
-		return getEntry(groupId, name, TagsEntryImpl.TAG);
+		return getEntry(groupId, name, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public TagsEntry getEntry(long groupId, String name, boolean folksonomy)
@@ -410,32 +414,25 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public long[] getEntryIds(long groupId, String[] names)
 		throws PortalException, SystemException {
 
-		return getEntryIds(groupId, names, TagsEntryImpl.TAG);
+		return getEntryIds(groupId, names, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public long[] getEntryIds(long groupId, String[] names, boolean folksonomy)
 		throws PortalException, SystemException {
-		List<TagsEntry> list = new ArrayList<TagsEntry>(names.length);
+
+		List<Long> entryIds = new ArrayList<Long>(names.length);
 
 		for (String name : names) {
 			try {
 				TagsEntry entry = getEntry(groupId, name, folksonomy);
 
-				list.add(entry);
+				entryIds.add(entry.getEntryId());
 			}
 			catch (NoSuchEntryException nsee) {
 			}
 		}
 
-		long[] entryIds = new long[list.size()];
-
-		for (int i = 0; i < list.size(); i++) {
-			TagsEntry entry = list.get(i);
-
-			entryIds[i] = entry.getEntryId();
-		}
-
-		return entryIds;
+		return ArrayUtil.toArray(ArrayUtil.toArray(entryIds));
 	}
 
 	public String[] getEntryNames() throws SystemException {
@@ -524,7 +521,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		List<TagsEntry> list = tagsEntryFinder.findByG_N_F_P(
-			groupId, name, TagsEntryImpl.TAG, properties, start, end);
+			groupId, name, TagsEntryConstants.FOLKSONOMY_TAG, properties, start,
+			end);
 
 		return Autocomplete.listToJson(list, "name", "name");
 	}
@@ -554,7 +552,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
 					entry.getUserId(), entry.getGroupId(), vocabularyName,
-					TagsEntryImpl.TAG, Boolean.TRUE, Boolean.TRUE, null, null);
+					TagsEntryConstants.FOLKSONOMY_TAG, Boolean.TRUE,
+					Boolean.TRUE, null, null);
 			}
 			else {
 				throw nsve;
@@ -580,10 +579,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		if (!entry.getName().equals(name)) {
 			try {
-				TagsEntry existingTag = getEntry(
+				TagsEntry existingEntry = getEntry(
 					entry.getGroupId(), name, folksonomy);
 
-				if (existingTag.getEntryId() != entryId) {
+				if (existingEntry.getEntryId() != entryId) {
 					throw new DuplicateEntryException(
 						"A tag entry with the name " + name +
 							" already exists");

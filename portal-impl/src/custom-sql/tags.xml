@@ -106,6 +106,19 @@
 				(TagsVocabulary.folksonomy = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByFolksonomy">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				TagsVocabulary.folksonomy = ?
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByA_F">
 		<![CDATA[
 			SELECT
@@ -123,7 +136,7 @@
 				TagsVocabulary.folksonomy = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByFolksonomy">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F">
 		<![CDATA[
 			SELECT
 				{TagsEntry.*}
@@ -133,7 +146,9 @@
 				TagsVocabulary ON
 					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
 			WHERE
-				TagsVocabulary.folksonomy = ?
+				(TagsEntry.groupId = ?) AND
+				(lower(TagsEntry.name) = ?) AND
+				(TagsVocabulary.folksonomy = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_C_N_F">
@@ -162,21 +177,6 @@
 				(TagsVocabulary.folksonomy = ?)
 			ORDER BY
 				TagsEntry.name ASC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F">
-		<![CDATA[
-			SELECT
-				{TagsEntry.*}
-			FROM
-				TagsEntry
-			INNER JOIN
-				TagsVocabulary ON
-					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
-			WHERE
-				(TagsEntry.groupId = ?) AND
-				(lower(TagsEntry.name) = ?) AND
-				(TagsVocabulary.folksonomy = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F_P">

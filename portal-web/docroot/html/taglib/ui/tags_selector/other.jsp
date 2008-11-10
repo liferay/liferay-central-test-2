@@ -35,7 +35,7 @@ String hiddenInput = (String)request.getAttribute("liferay-ui:tags_selector:hidd
 String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:curTags"));
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
-	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, TagsEntryImpl.CATEGORY);
+	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, TagsEntryConstants.FOLKSONOMY_CATEGORY);
 
 	curTags = ListUtil.toString(entries, "name");
 }

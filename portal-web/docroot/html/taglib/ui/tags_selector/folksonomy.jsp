@@ -39,7 +39,7 @@ String contentCallback = GetterUtil.getString((String)request.getAttribute("life
 boolean suggestible = Validator.isNotNull(contentCallback);
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
-	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, TagsEntryImpl.TAG);
+	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, TagsEntryConstants.FOLKSONOMY_TAG);
 
 	curTags = ListUtil.toString(entries, "name");
 }

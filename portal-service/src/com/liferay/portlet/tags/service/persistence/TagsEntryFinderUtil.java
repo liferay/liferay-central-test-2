@@ -41,15 +41,21 @@ public class TagsEntryFinderUtil {
 		return getFinder().countByG_N_F_P(groupId, name, folksonomy, properties);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByFolksonomy(
+		boolean folksonomy) throws com.liferay.portal.SystemException {
+		return getFinder().findByFolksonomy(folksonomy);
+	}
+
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByA_F(
 		long assetId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByA_F(assetId, folksonomy);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByFolksonomy(
-		boolean folksonomy) throws com.liferay.portal.SystemException {
-		return getFinder().findByFolksonomy(folksonomy);
+	public static com.liferay.portlet.tags.model.TagsEntry findByG_N_F(
+		long groupId, java.lang.String name, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByG_N_F(groupId, name, folksonomy);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N_F(
@@ -65,13 +71,6 @@ public class TagsEntryFinderUtil {
 		return getFinder()
 				   .findByG_C_N_F(groupId, classNameId, name, folksonomy,
 			start, end);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry findByG_N_F(
-		long groupId, java.lang.String name, boolean folksonomy)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException {
-		return getFinder().findByG_N_F(groupId, name, folksonomy);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_F_P(

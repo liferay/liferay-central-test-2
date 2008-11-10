@@ -408,7 +408,6 @@ create index IX_54243AFD on Subscription (userId);
 create index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 create index IX_AB3D8BCB on TagsAsset (companyId);
 
-create index IX_79F971CA on TagsEntry (groupId, name);
 create index IX_EE55ED49 on TagsEntry (parentEntryId, vocabularyId);
 create index IX_28E8954 on TagsEntry (vocabularyId);
 

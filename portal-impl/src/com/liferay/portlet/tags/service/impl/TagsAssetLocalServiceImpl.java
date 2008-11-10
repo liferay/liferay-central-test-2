@@ -56,7 +56,7 @@ import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
 import com.liferay.portlet.tags.util.TagsUtil;
@@ -543,21 +543,21 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		List<TagsEntry> entries = new ArrayList<TagsEntry>(entryNames.length);
 
 		for (int i = 0; i < entryNames.length; i++) {
-			TagsEntry tag = null;
+			TagsEntry entry = null;
 
 			try {
-				tag = tagsEntryLocalService.getEntry(
-					groupId, entryNames[i], TagsEntryImpl.TAG);
+				entry = tagsEntryLocalService.getEntry(
+					groupId, entryNames[i], TagsEntryConstants.FOLKSONOMY_TAG);
 			}
 			catch (NoSuchEntryException nsee) {
-				tag = tagsEntryLocalService.addEntryToGroup(
+				entry = tagsEntryLocalService.addEntryToGroup(
 					user.getUserId(), groupId, null, entryNames[i], null,
 					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
 					Boolean.TRUE, null, null);
 			}
 
-			if (tag != null) {
-				entries.add(tag);
+			if (entry != null) {
+				entries.add(entry);
 			}
 		}
 
@@ -565,10 +565,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		for (int i = 0; i < categoryNames.length; i++) {
 			try {
-				TagsEntry category = tagsEntryLocalService.getEntry(
-					groupId, categoryNames[i], TagsEntryImpl.CATEGORY);
+				TagsEntry entry = tagsEntryLocalService.getEntry(
+					groupId, categoryNames[i],
+					TagsEntryConstants.FOLKSONOMY_CATEGORY);
 
-				entries.add(category);
+				entries.add(entry);
 			}
 			catch (NoSuchEntryException nsee) {
 			}

@@ -32,4 +32,8 @@ public class TagsEntryConstants {
 
 	public static final long DEFAULT_PARENT_ENTRY_ID = 0;
 
+	public static final boolean FOLKSONOMY_CATEGORY = false;
+
+	public static final boolean FOLKSONOMY_TAG = true;
+
 }

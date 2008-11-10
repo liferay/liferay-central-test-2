@@ -56,17 +56,17 @@ public class TagsEntryFinderImpl
 	public static String COUNT_BY_G_N_F_P =
 		TagsEntryFinder.class.getName() + ".countByG_N_F_P";
 
-	public static String FIND_BY_A_F =
-		TagsEntryFinder.class.getName() + ".findByA_F";
-
 	public static String FIND_BY_FOLKSONOMY =
 		TagsEntryFinder.class.getName() + ".findByFolksonomy";
 
-	public static String FIND_BY_G_C_N_F =
-		TagsEntryFinder.class.getName() + ".findByG_C_N_F";
+	public static String FIND_BY_A_F =
+		TagsEntryFinder.class.getName() + ".findByA_F";
 
 	public static String FIND_BY_G_N_F =
 		TagsEntryFinder.class.getName() + ".findByG_N_F";
+
+	public static String FIND_BY_G_C_N_F =
+		TagsEntryFinder.class.getName() + ".findByG_C_N_F";
 
 	public static String FIND_BY_G_N_F_P =
 		TagsEntryFinder.class.getName() + ".findByG_N_F_P";
@@ -157,6 +157,35 @@ public class TagsEntryFinderImpl
 		}
 	}
 
+	public List<TagsEntry> findByFolksonomy(boolean folksonomy)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_FOLKSONOMY);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsEntry", TagsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(folksonomy);
+
+			return (List<TagsEntry>) QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<TagsEntry> findByA_F(long assetId, boolean folksonomy)
 		throws SystemException {
 
@@ -187,15 +216,17 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public List<TagsEntry> findByFolksonomy(boolean folksonomy)
+	public TagsEntry findByG_N_F(long groupId, String name, boolean folksonomy)
 		throws SystemException {
+
+		name = name.trim().toLowerCase();
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_FOLKSONOMY);
+			String sql = CustomSQLUtil.get(FIND_BY_G_N_F);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -203,10 +234,29 @@ public class TagsEntryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+			qPos.add(name);
 			qPos.add(folksonomy);
 
-			return (List<TagsEntry>) QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			List<TagsEntry> list = q.list();
+
+			if (list.size() == 0) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("No TagsEntry exists with the key ");
+				sb.append("{groupId=");
+				sb.append(groupId);
+				sb.append(", name=");
+				sb.append(name);
+				sb.append(", folksonomy=");
+				sb.append(folksonomy);
+				sb.append("}");
+
+				throw new NoSuchEntryException(sb.toString());
+			}
+			else {
+				return list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -250,60 +300,6 @@ public class TagsEntryFinderImpl
 			qPos.add(folksonomy);
 
 			return (List<TagsEntry>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public TagsEntry findByG_N_F(
-			long groupId, String name, boolean folksonomy)
-		throws NoSuchEntryException, SystemException {
-
-		name = name.trim().toLowerCase();
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_N_F);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("TagsEntry", TagsEntryImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(folksonomy);
-
-			List<TagsEntry> list = q.list();
-
-			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("No TagsEntry exists with the key ");
-				sb.append("{groupId=");
-				sb.append(groupId);
-				sb.append(", name=");
-				sb.append(name);
-				sb.append(", folksonomy=");
-				sb.append(folksonomy);
-				sb.append("}");
-
-				throw new NoSuchEntryException(sb.toString());
-			}
-			else {
-				return list.get(0);
-			}
-		}
-		catch (NoSuchEntryException nsee) {
-			throw nsee;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
