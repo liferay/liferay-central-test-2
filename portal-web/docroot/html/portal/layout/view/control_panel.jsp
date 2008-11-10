@@ -80,9 +80,8 @@ if (Validator.isNull(category)) {
 					<td align="right">
 
 						<%
-						String refererGroupDescriptiveName;
-
-						String backURL;
+						String refererGroupDescriptiveName = null;
+						String backURL = null;
 
 						if (themeDisplay.getRefererPlid() > 0) {
 							Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
@@ -98,8 +97,7 @@ if (Validator.isNull(category)) {
 							backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
 						}
 						else {
-							refererGroupDescriptiveName = "Guest";
-
+							refererGroupDescriptiveName = GroupConstants.GUEST;
 							backURL = themeDisplay.getURLPortal() + PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING + "/guest";
 						}
 						%>
