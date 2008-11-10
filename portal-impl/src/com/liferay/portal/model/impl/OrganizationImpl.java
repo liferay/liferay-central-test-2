@@ -22,11 +22,14 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -34,12 +37,17 @@ import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,10 +62,34 @@ import org.apache.commons.logging.LogFactory;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
+	public Set<String> getAvailableReminderQueryQuestions()
+		throws PortalException, SystemException {
+
+		PortletPreferences preferences =
+			PrefsPropsUtil.getOrganizationPreferences(getOrganizationId());
+
+		String[] questionsArray = StringUtil.split(
+			preferences.getValue("reminderQueries", null), StringPool.NEW_LINE);
+
+		return SetUtil.fromArray(questionsArray);
+	}
+
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
 			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES,
 			new Filter(HtmlUtil.unescape(type)));
+	}
+
+	public Organization getParentOrganization()
+		throws PortalException, SystemException {
+
+		if (getParentOrganizationId() ==
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+			return null;
+		}
+
+		return OrganizationLocalServiceUtil.getOrganization(
+			getParentOrganizationId());
 	}
 
 	public static String[] getParentTypes(String type) {

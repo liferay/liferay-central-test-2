@@ -47,13 +47,18 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.TimeZone;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,11 +67,50 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UserImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class UserImpl extends UserModelImpl implements User {
 
 	public UserImpl() {
+	}
+
+	public Set<String> getAvailableReminderQueryQuestions()
+		throws PortalException, SystemException {
+
+		List<Organization> organizations = getOrganizations();
+
+		Set<String> questions = new TreeSet<String>();
+
+		for (Organization organization : organizations) {
+			Set<String> orgQuestions =
+				organization.getAvailableReminderQueryQuestions();
+
+			if (orgQuestions.size() == 0) {
+				Organization parentOrganization =
+					organization.getParentOrganization();
+
+				while ((orgQuestions.size() == 0) &&
+						(parentOrganization != null)) {
+
+					orgQuestions =
+						parentOrganization.getAvailableReminderQueryQuestions();
+
+					parentOrganization =
+						organization.getParentOrganization();
+				}
+			}
+
+			questions.addAll(orgQuestions);
+		}
+
+		if (questions.size() == 0) {
+			questions.addAll(SetUtil.fromArray(
+				PropsUtil.getArray(
+					PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS)));
+		}
+
+		return questions;
 	}
 
 	public Date getBirthday() {
