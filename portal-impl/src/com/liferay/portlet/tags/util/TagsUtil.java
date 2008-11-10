@@ -117,7 +117,7 @@ public class TagsUtil {
 	}
 
 	public static String substitutePropertyVariables(
-			long companyId, String entryName, String s)
+			long groupId, String entryName, String s)
 		throws PortalException, SystemException {
 
 		String result = s;
@@ -126,8 +126,7 @@ public class TagsUtil {
 
 		if (entryName != null) {
 			try {
-				entry = TagsEntryLocalServiceUtil.getEntry(
-					companyId, entryName);
+				entry = TagsEntryLocalServiceUtil.getEntry(groupId, entryName);
 			}
 			catch (NoSuchEntryException nsee) {
 			}

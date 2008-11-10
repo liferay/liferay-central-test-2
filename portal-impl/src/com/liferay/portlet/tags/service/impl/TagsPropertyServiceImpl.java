@@ -44,13 +44,6 @@ public class TagsPropertyServiceImpl extends TagsPropertyServiceBaseImpl {
 			getUserId(), entryId, key, value);
 	}
 
-	public TagsProperty addProperty(String entryName, String key, String value)
-		throws PortalException, SystemException {
-
-		return tagsPropertyLocalService.addProperty(
-			getUserId(), entryName, key, value);
-	}
-
 	public void deleteProperty(long propertyId)
 		throws PortalException, SystemException {
 

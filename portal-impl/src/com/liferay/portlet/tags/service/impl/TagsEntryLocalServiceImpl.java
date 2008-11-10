@@ -35,6 +35,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.tags.DuplicateEntryException;
+import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.NoSuchVocabularyException;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.tags.model.TagsAsset;
@@ -42,6 +43,7 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.model.TagsVocabulary;
+import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
@@ -58,6 +60,7 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  * @author Alvaro del Castillo
  * @author Jorge Ferrer
+ * @author Bruno Farache
  *
  */
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
@@ -110,7 +113,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		name = name.trim().toLowerCase();
 
 		if (Validator.isNull(vocabularyName)) {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
@@ -121,13 +123,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		Date now = new Date();
-
-		validate(name);
-
-		if (hasEntry(groupId, name)) {
-			throw new DuplicateEntryException(
-				"A tag entry with the name " + name + " already exists");
-		}
 
 		long entryId = counterLocalService.increment();
 
@@ -140,18 +135,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setCreateDate(now);
 		entry.setModifiedDate(now);
 
-		if (Validator.isNotNull(parentEntryName)) {
-			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
-				groupId, parentEntryName);
-
-			entry.setParentEntryId(parentEntry.getEntryId());
-		}
-		else {
-			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
-		}
-
-		entry.setName(name);
-
 		TagsVocabulary vocabulary = null;
 
 		try {
@@ -161,8 +144,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
-					userId, groupId, vocabularyName, true, Boolean.TRUE,
-					Boolean.TRUE, null, null);
+					userId, groupId, vocabularyName, TagsEntryImpl.TAG,
+					Boolean.TRUE, Boolean.TRUE, null, null);
 			}
 			else {
 				throw nsve;
@@ -170,6 +153,31 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		entry.setVocabularyId(vocabulary.getVocabularyId());
+
+		boolean folksonomy = vocabulary.isFolksonomy();
+
+		name = name.trim();
+
+		if (folksonomy) {
+			name = name.toLowerCase();
+		}
+
+		if (hasEntry(groupId, name, folksonomy)) {
+			throw new DuplicateEntryException(
+				"A tag entry with the name " + name + " already exists");
+		}
+
+		entry.setName(name);
+
+		if (Validator.isNotNull(parentEntryName)) {
+			TagsEntry parentEntry = getEntry(
+				groupId, parentEntryName, folksonomy);
+
+			entry.setParentEntryId(parentEntry.getEntryId());
+		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+		}
 
 		tagsEntryPersistence.update(entry, false);
 
@@ -239,11 +247,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (String name : names) {
-			name = name.trim().toLowerCase();
-
-			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
-
-			if (entry == null) {
+			try {
+				getEntry(groupId, name, TagsEntryImpl.TAG);
+			}
+			catch (NoSuchEntryException nsee) {
 				addEntryToGroup(
 					userId, groupId, null, name, null,
 					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
@@ -289,21 +296,23 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	public boolean hasEntry(long groupId, String name)
-		throws SystemException {
+	public boolean hasEntry(long groupId, String name, boolean folksonomy)
+		throws PortalException, SystemException {
 
-		if (tagsEntryPersistence.fetchByG_N(groupId, name) == null) {
-			return false;
-		}
-		else {
+		try {
+			getEntry(groupId, name, folksonomy);
+
 			return true;
+		}
+		catch (NoSuchEntryException nsee) {
+			return false;
 		}
 	}
 
 	public List<TagsEntry> getAssetEntries(long assetId)
 		throws SystemException {
 
-		return tagsAssetPersistence.getTagsEntries(assetId);
+		return getAssetEntries(assetId, TagsEntryImpl.TAG);
 	}
 
 	public List<TagsEntry> getAssetEntries(long assetId, boolean folksonomy)
@@ -313,28 +322,25 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries() throws SystemException {
-		return tagsEntryPersistence.findAll();
+		return getEntries(TagsEntryImpl.TAG);
+	}
+
+	public List<TagsEntry> getEntries(boolean folksonomy)
+			throws SystemException {
+
+		return tagsEntryFinder.findByFolksonomy(folksonomy);
 	}
 
 	public List<TagsEntry> getEntries(String className, long classPK)
 		throws SystemException {
 
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return getEntries(classNameId, classPK);
+		return getEntries(className, classPK, TagsEntryImpl.TAG);
 	}
 
 	public List<TagsEntry> getEntries(long classNameId, long classPK)
 		throws SystemException {
 
-		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
-
-		if (asset == null) {
-			return new ArrayList<TagsEntry>();
-		}
-		else {
-			return tagsAssetPersistence.getTagsEntries(asset.getAssetId());
-		}
+		return getEntries(classNameId, classPK, TagsEntryImpl.TAG);
 	}
 
 	public List<TagsEntry> getEntries(
@@ -342,6 +348,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getEntries(classNameId, classPK, folksonomy);
+	}
+
+	public List<TagsEntry> getEntries(
+			long classNameId, long classPK, boolean folksonomy)
+		throws SystemException {
 
 		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
@@ -357,21 +370,23 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return tagsEntryFinder.findByG_C_N(groupId, classNameId, name);
+		return tagsEntryFinder.findByG_C_N_F(
+			groupId, classNameId, name, TagsEntryImpl.TAG);
 	}
 
 	public List<TagsEntry> getEntries(
 			long groupId, long classNameId, String name, int start, int end)
 		throws SystemException {
 
-		return tagsEntryFinder.findByG_C_N(
-			groupId, classNameId, name, start, end);
+		return tagsEntryFinder.findByG_C_N_F(
+			groupId, classNameId, name, TagsEntryImpl.TAG, start, end);
 	}
 
 	public int getEntriesSize(long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return tagsEntryFinder.countByG_C_N(groupId, classNameId, name);
+		return tagsEntryFinder.countByG_C_N_F(
+			groupId, classNameId, name, TagsEntryImpl.TAG);
 	}
 
 	public TagsEntry getEntry(long entryId)
@@ -383,19 +398,32 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry getEntry(long groupId, String name)
 		throws PortalException, SystemException {
 
-		return tagsEntryPersistence.findByG_N(groupId, name);
+		return getEntry(groupId, name, TagsEntryImpl.TAG);
+	}
+
+	public TagsEntry getEntry(long groupId, String name, boolean folksonomy)
+		throws PortalException, SystemException {
+
+		return tagsEntryFinder.findByG_N_F(groupId, name, folksonomy);
 	}
 
 	public long[] getEntryIds(long groupId, String[] names)
-		throws SystemException {
+		throws PortalException, SystemException {
 
+		return getEntryIds(groupId, names, TagsEntryImpl.TAG);
+	}
+
+	public long[] getEntryIds(long groupId, String[] names, boolean folksonomy)
+		throws PortalException, SystemException {
 		List<TagsEntry> list = new ArrayList<TagsEntry>(names.length);
 
 		for (String name : names) {
-			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
+			try {
+				TagsEntry entry = getEntry(groupId, name, folksonomy);
 
-			if (entry != null) {
 				list.add(entry);
+			}
+			catch (NoSuchEntryException nsee) {
 			}
 		}
 
@@ -446,7 +474,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			tagsVocabularyLocalService.getGroupVocabulary(
 				groupId, vocabularyName);
 
-		TagsEntry entry = getEntry(groupId, parentEntryName);
+		TagsEntry entry = getEntry(
+			groupId, parentEntryName, vocabulary.isFolksonomy());
 
 		return tagsEntryPersistence.findByP_V(
 			entry.getEntryId(), vocabulary.getVocabularyId());
@@ -490,35 +519,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		deleteEntry(fromEntryId);
 	}
 
-	public List<TagsEntry> search(
-			long groupId, String name, String[] properties)
-		throws SystemException {
-
-		return tagsEntryFinder.findByG_N_P(groupId, name, properties);
-	}
-
-	public List<TagsEntry> search(
-			long groupId, String name, String[] properties, int start, int end)
-		throws SystemException {
-
-		return tagsEntryFinder.findByG_N_P(
-			groupId, name, properties, start, end);
-	}
-
-	public JSONArray searchAutocomplete(
+	public JSONArray search(
 			long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
 		List<TagsEntry> list = tagsEntryFinder.findByG_N_F_P(
-			groupId, name, true, properties, start, end);
+			groupId, name, TagsEntryImpl.TAG, properties, start, end);
 
 		return Autocomplete.listToJson(list, "name", "name");
-	}
-
-	public int searchCount(long groupId, String name, String[] properties)
-		throws SystemException {
-
-		return tagsEntryFinder.countByG_N_P(groupId, name, properties);
 	}
 
 	public TagsEntry updateEntry(
@@ -528,35 +536,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		// Entry
 
-		name = name.trim().toLowerCase();
-
 		if (Validator.isNull(vocabularyName)) {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
 		}
 
-		validate(name);
-
 		TagsEntry entry = tagsEntryPersistence.findByPrimaryKey(entryId);
 
-		if (!entry.getName().equals(name) &&
-			hasEntry(entry.getGroupId(), name)) {
-
-			throw new DuplicateEntryException();
-		}
-
 		entry.setModifiedDate(new Date());
-
-		if (Validator.isNotNull(parentEntryName)) {
-			TagsEntry parentEntry = getEntry(
-				entry.getGroupId(), parentEntryName);
-
-			entry.setParentEntryId(parentEntry.getEntryId());
-		}
-		else {
-			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
-		}
-
-		entry.setName(name);
 
 		TagsVocabulary vocabulary = null;
 
@@ -568,7 +554,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
 					entry.getUserId(), entry.getGroupId(), vocabularyName,
-					true, Boolean.TRUE, Boolean.TRUE, null, null);
+					TagsEntryImpl.TAG, Boolean.TRUE, Boolean.TRUE, null, null);
 			}
 			else {
 				throw nsve;
@@ -576,6 +562,50 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		entry.setVocabularyId(vocabulary.getVocabularyId());
+
+		boolean folksonomy = vocabulary.isFolksonomy();
+
+		name = name.trim();
+
+		if (folksonomy) {
+			name = name.toLowerCase();
+
+			if (!entry.getName().equals(name) &&
+				hasEntry(entry.getGroupId(), name, folksonomy)) {
+
+				throw new DuplicateEntryException(
+					"A tag entry with the name " + name + " already exists");
+			}
+		}
+
+		if (!entry.getName().equals(name)) {
+			try {
+				TagsEntry existingTag = getEntry(
+					entry.getGroupId(), name, folksonomy);
+
+				if (existingTag.getEntryId() != entryId) {
+					throw new DuplicateEntryException(
+						"A tag entry with the name " + name +
+							" already exists");
+				}
+			}
+			catch (NoSuchEntryException nsee) {
+			}
+		}
+
+		validate(name);
+
+		entry.setName(name);
+
+		if (Validator.isNotNull(parentEntryName)) {
+			TagsEntry parentEntry = getEntry(
+				entry.getGroupId(), parentEntryName, folksonomy);
+
+			entry.setParentEntryId(parentEntry.getEntryId());
+		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+		}
 
 		tagsEntryPersistence.update(entry, false);
 

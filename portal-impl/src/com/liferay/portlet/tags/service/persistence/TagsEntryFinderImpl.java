@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -43,30 +44,35 @@ import java.util.List;
  * <a href="TagsEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class TagsEntryFinderImpl
 	extends BasePersistenceImpl implements TagsEntryFinder {
 
-	public static String COUNT_BY_G_N_P =
-		TagsEntryFinder.class.getName() + ".countByG_N_P";
+	public static String COUNT_BY_G_C_N_F =
+		TagsEntryFinder.class.getName() + ".countByG_C_N_F";
 
-	public static String COUNT_BY_G_C_N =
-		TagsEntryFinder.class.getName() + ".countByG_C_N";
+	public static String COUNT_BY_G_N_F_P =
+		TagsEntryFinder.class.getName() + ".countByG_N_F_P";
 
 	public static String FIND_BY_A_F =
 		TagsEntryFinder.class.getName() + ".findByA_F";
 
-	public static String FIND_BY_G_N_P =
-		TagsEntryFinder.class.getName() + ".findByG_N_P";
+	public static String FIND_BY_FOLKSONOMY =
+		TagsEntryFinder.class.getName() + ".findByFolksonomy";
 
-	public static String FIND_BY_G_C_N =
-		TagsEntryFinder.class.getName() + ".findByG_C_N";
+	public static String FIND_BY_G_C_N_F =
+		TagsEntryFinder.class.getName() + ".findByG_C_N_F";
+
+	public static String FIND_BY_G_N_F =
+		TagsEntryFinder.class.getName() + ".findByG_N_F";
 
 	public static String FIND_BY_G_N_F_P =
 		TagsEntryFinder.class.getName() + ".findByG_N_F_P";
 
-	public int countByG_N_P(long groupId, String name, String[] properties)
+	public int countByG_C_N_F(
+			long groupId, long classNameId, String name, boolean folksonomy)
 		throws SystemException {
 
 		Session session = null;
@@ -74,9 +80,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_N_P);
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(properties));
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_N_F);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -84,10 +88,11 @@ public class TagsEntryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			setJoin(qPos, properties);
 			qPos.add(groupId);
+			qPos.add(classNameId);
 			qPos.add(name);
 			qPos.add(name);
+			qPos.add(folksonomy);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -109,7 +114,8 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public int countByG_C_N(long groupId, long classNameId, String name)
+	public int countByG_N_F_P(
+			long groupId, String name, boolean folksonomy, String[] properties)
 		throws SystemException {
 
 		Session session = null;
@@ -117,7 +123,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_N);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_N_F_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -125,10 +131,11 @@ public class TagsEntryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			setJoin(qPos, properties);
 			qPos.add(groupId);
-			qPos.add(classNameId);
 			qPos.add(name);
 			qPos.add(name);
+			qPos.add(folksonomy);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -180,17 +187,7 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public List<TagsEntry> findByG_N_P(
-			long groupId, String name, String[] properties)
-		throws SystemException {
-
-		return findByG_N_P(
-			groupId, name, properties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List<TagsEntry> findByG_N_P(
-			long groupId, String name, String[] properties, int start,
-			int end)
+	public List<TagsEntry> findByFolksonomy(boolean folksonomy)
 		throws SystemException {
 
 		Session session = null;
@@ -198,9 +195,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_N_P);
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(properties));
+			String sql = CustomSQLUtil.get(FIND_BY_FOLKSONOMY);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -208,12 +203,10 @@ public class TagsEntryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			setJoin(qPos, properties);
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(name);
+			qPos.add(folksonomy);
 
-			return (List<TagsEntry>)QueryUtil.list(q, getDialect(), start, end);
+			return (List<TagsEntry>) QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -223,16 +216,18 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public List<TagsEntry> findByG_C_N(
-			long groupId, long classNameId, String name)
+	public List<TagsEntry> findByG_C_N_F(
+			long groupId, long classNameId, String name, boolean folksonomy)
 		throws SystemException {
 
-		return findByG_C_N(
-			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return findByG_C_N_F(
+			groupId, classNameId, name, folksonomy, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
 	}
 
-	public List<TagsEntry> findByG_C_N(
-			long groupId, long classNameId, String name, int start, int end)
+	public List<TagsEntry> findByG_C_N_F(
+			long groupId, long classNameId, String name, boolean folksonomy,
+			int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -240,7 +235,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_N);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_N_F);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -252,8 +247,63 @@ public class TagsEntryFinderImpl
 			qPos.add(classNameId);
 			qPos.add(name);
 			qPos.add(name);
+			qPos.add(folksonomy);
 
 			return (List<TagsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public TagsEntry findByG_N_F(
+			long groupId, String name, boolean folksonomy)
+		throws NoSuchEntryException, SystemException {
+
+		name = name.trim().toLowerCase();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_N_F);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsEntry", TagsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(folksonomy);
+
+			List<TagsEntry> list = q.list();
+
+			if (list.size() == 0) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("No TagsEntry exists with the key ");
+				sb.append("{groupId=");
+				sb.append(groupId);
+				sb.append(", name=");
+				sb.append(name);
+				sb.append(", folksonomy=");
+				sb.append(folksonomy);
+				sb.append("}");
+
+				throw new NoSuchEntryException(sb.toString());
+			}
+			else {
+				return list.get(0);
+			}
+		}
+		catch (NoSuchEntryException nsee) {
+			throw nsee;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

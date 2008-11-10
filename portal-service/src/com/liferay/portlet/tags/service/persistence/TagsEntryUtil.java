@@ -132,19 +132,6 @@ public class TagsEntryUtil {
 				   .findByVocabularyId_PrevAndNext(entryId, vocabularyId, obc);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry findByG_N(
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException {
-		return getPersistence().findByG_N(groupId, name);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry fetchByG_N(
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_N(groupId, name);
-	}
-
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByP_V(
 		long parentEntryId, long vocabularyId)
 		throws com.liferay.portal.SystemException {
@@ -225,12 +212,6 @@ public class TagsEntryUtil {
 		getPersistence().removeByVocabularyId(vocabularyId);
 	}
 
-	public static void removeByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException {
-		getPersistence().removeByG_N(groupId, name);
-	}
-
 	public static void removeByP_V(long parentEntryId, long vocabularyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByP_V(parentEntryId, vocabularyId);
@@ -243,11 +224,6 @@ public class TagsEntryUtil {
 	public static int countByVocabularyId(long vocabularyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByVocabularyId(vocabularyId);
-	}
-
-	public static int countByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByG_N(groupId, name);
 	}
 
 	public static int countByP_V(long parentEntryId, long vocabularyId)

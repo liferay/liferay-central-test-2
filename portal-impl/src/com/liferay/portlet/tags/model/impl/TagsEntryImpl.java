@@ -37,6 +37,10 @@ import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
  */
 public class TagsEntryImpl extends TagsEntryModelImpl implements TagsEntry {
 
+	public static final boolean CATEGORY = false;
+
+	public static final boolean TAG = true;
+
 	public TagsEntryImpl() {
 	}
 

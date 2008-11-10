@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -33,8 +31,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional
 public interface TagsEntryPersistence {
 	public com.liferay.portlet.tags.model.TagsEntry create(long entryId);
 
@@ -118,15 +115,6 @@ public interface TagsEntryPersistence {
 			com.liferay.portlet.tags.NoSuchEntryException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.tags.model.TagsEntry findByG_N(long groupId,
-		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException;
-
-	public com.liferay.portlet.tags.model.TagsEntry fetchByG_N(long groupId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByP_V(
 		long parentEntryId, long vocabularyId)
 		throws com.liferay.portal.SystemException;
@@ -189,10 +177,6 @@ public interface TagsEntryPersistence {
 	public void removeByVocabularyId(long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException;
-
 	public void removeByP_V(long parentEntryId, long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
@@ -200,10 +184,6 @@ public interface TagsEntryPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByVocabularyId(long vocabularyId)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

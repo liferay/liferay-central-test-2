@@ -238,60 +238,12 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
-		long groupId, java.lang.String name, java.lang.String[] properties)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
-				TagsEntryServiceUtil.search(groupId, name, properties);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
+	public static com.liferay.portal.kernel.json.JSONArray search(
 		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
-				TagsEntryServiceUtil.search(groupId, name, properties, start,
-					end);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws RemoteException {
-		try {
-			com.liferay.portal.kernel.json.JSONArray returnValue = TagsEntryServiceUtil.searchAutocomplete(groupId,
+			com.liferay.portal.kernel.json.JSONArray returnValue = TagsEntryServiceUtil.search(groupId,
 					name, properties, start, end);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int searchCount(long groupId, java.lang.String name,
-		java.lang.String[] properties) throws RemoteException {
-		try {
-			int returnValue = TagsEntryServiceUtil.searchCount(groupId, name,
-					properties);
 
 			return returnValue;
 		}

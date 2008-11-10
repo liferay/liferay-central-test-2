@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -51,8 +49,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tags.service.TagsEntryServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional
 public interface TagsEntryService {
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
 		java.lang.String parentEntryName, java.lang.String name,
@@ -114,23 +111,8 @@ public interface TagsEntryService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long groupId, java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int searchCount(long groupId, java.lang.String name,
-		java.lang.String[] properties)
+	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
+		java.lang.String name, java.lang.String[] properties, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,

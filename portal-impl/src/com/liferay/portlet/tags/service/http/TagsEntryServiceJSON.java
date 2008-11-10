@@ -170,38 +170,11 @@ public class TagsEntryServiceJSON {
 		TagsEntryServiceUtil.mergeEntries(fromEntryId, toEntryId);
 	}
 
-	public static JSONArray search(long groupId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.SystemException {
-		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.search(groupId,
-				name, properties);
-
-		return TagsEntryJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static JSONArray search(long groupId, java.lang.String name,
-		java.lang.String[] properties, int start, int end)
-		throws com.liferay.portal.SystemException {
-		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.search(groupId,
-				name, properties, start, end);
-
-		return TagsEntryJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
+	public static com.liferay.portal.kernel.json.JSONArray search(
 		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
-		com.liferay.portal.kernel.json.JSONArray returnValue = TagsEntryServiceUtil.searchAutocomplete(groupId,
+		com.liferay.portal.kernel.json.JSONArray returnValue = TagsEntryServiceUtil.search(groupId,
 				name, properties, start, end);
-
-		return returnValue;
-	}
-
-	public static int searchCount(long groupId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.SystemException {
-		int returnValue = TagsEntryServiceUtil.searchCount(groupId, name,
-				properties);
 
 		return returnValue;
 	}

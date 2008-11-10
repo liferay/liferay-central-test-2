@@ -51,10 +51,12 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
 import com.liferay.portlet.tags.util.TagsUtil;
@@ -71,6 +73,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="TagsAssetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
@@ -458,6 +461,22 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
+		String[] categoryNames = null;
+
+		return updateAsset(
+			userId, groupId, className, classPK, entryNames, categoryNames,
+			startDate, endDate, publishDate, expirationDate, mimeType, title,
+			description, summary, url, height, width, priority, sync);
+	}
+
+	public TagsAsset updateAsset(
+			long userId, long groupId, String className, long classPK,
+			String[] entryNames, String[] categoryNames, Date startDate,
+			Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, int height, int width, Integer priority, boolean sync)
+		throws PortalException, SystemException {
+
 		// Asset
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -465,6 +484,10 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		if (entryNames == null) {
 			entryNames = new String[0];
+		}
+
+		if (categoryNames == null) {
+			categoryNames = new String[0];
 		}
 
 		title = StringUtil.shorten(title, 300, StringPool.BLANK);
@@ -520,18 +543,35 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		List<TagsEntry> entries = new ArrayList<TagsEntry>(entryNames.length);
 
 		for (int i = 0; i < entryNames.length; i++) {
-			String name = entryNames[i].trim().toLowerCase();
+			TagsEntry tag = null;
 
-			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
-
-			if (entry == null) {
-				entry = tagsEntryLocalService.addEntryToGroup(
+			try {
+				tag = tagsEntryLocalService.getEntry(
+					groupId, entryNames[i], TagsEntryImpl.TAG);
+			}
+			catch (NoSuchEntryException nsee) {
+				tag = tagsEntryLocalService.addEntryToGroup(
 					user.getUserId(), groupId, null, entryNames[i], null,
 					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
 					Boolean.TRUE, null, null);
 			}
 
-			entries.add(entry);
+			if (tag != null) {
+				entries.add(tag);
+			}
+		}
+
+		// Categories
+
+		for (int i = 0; i < categoryNames.length; i++) {
+			try {
+				TagsEntry category = tagsEntryLocalService.getEntry(
+					groupId, categoryNames[i], TagsEntryImpl.CATEGORY);
+
+				entries.add(category);
+			}
+			catch (NoSuchEntryException nsee) {
+			}
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);

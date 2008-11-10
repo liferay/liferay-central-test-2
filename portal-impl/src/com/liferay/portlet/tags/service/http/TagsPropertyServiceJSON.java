@@ -84,16 +84,6 @@ public class TagsPropertyServiceJSON {
 		return TagsPropertyJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addProperty(java.lang.String entryName,
-		java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryName,
-				key, value);
-
-		return TagsPropertyJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

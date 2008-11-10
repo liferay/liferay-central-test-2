@@ -126,29 +126,10 @@ public class TagsEntryServiceUtil {
 		getService().mergeEntries(fromEntryId, toEntryId);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long groupId, java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.SystemException {
-		return getService().search(groupId, name, properties);
-	}
-
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
+	public static com.liferay.portal.kernel.json.JSONArray search(
 		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
 		return getService().search(groupId, name, properties, start, end);
-	}
-
-	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .searchAutocomplete(groupId, name, properties, start, end);
-	}
-
-	public static int searchCount(long groupId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.SystemException {
-		return getService().searchCount(groupId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(

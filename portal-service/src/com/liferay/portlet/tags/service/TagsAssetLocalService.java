@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -51,8 +49,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional
 public interface TagsAssetLocalService {
 	public com.liferay.portlet.tags.model.TagsAsset addTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
@@ -253,6 +250,18 @@ public interface TagsAssetLocalService {
 		java.util.Date expirationDate, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
+		java.lang.Integer priority, boolean sync)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.lang.String[] categoryNames,
+		java.util.Date startDate, java.util.Date endDate,
+		java.util.Date publishDate, java.util.Date expirationDate,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String summary,
+		java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

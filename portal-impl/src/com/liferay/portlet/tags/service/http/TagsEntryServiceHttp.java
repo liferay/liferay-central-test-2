@@ -552,51 +552,7 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = properties;
-
-			if (properties == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"search", new Object[] { paramObj0, paramObj1, paramObj2 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
+	public static com.liferay.portal.kernel.json.JSONArray search(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
 		java.lang.String[] properties, int start, int end)
 		throws com.liferay.portal.SystemException {
@@ -638,102 +594,7 @@ public class TagsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String[] properties, int start, int end)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = properties;
-
-			if (properties == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj3 = new IntegerWrapper(start);
-
-			Object paramObj4 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"searchAutocomplete",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
 			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static int searchCount(HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = properties;
-
-			if (properties == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"searchCount",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

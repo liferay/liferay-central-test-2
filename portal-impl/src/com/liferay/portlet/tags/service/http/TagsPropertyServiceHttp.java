@@ -122,60 +122,6 @@ public class TagsPropertyServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
-		HttpPrincipal httpPrincipal, java.lang.String entryName,
-		java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = entryName;
-
-			if (entryName == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = key;
-
-			if (key == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = value;
-
-			if (value == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsPropertyServiceUtil.class.getName(),
-					"addProperty",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsProperty)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static void deleteProperty(HttpPrincipal httpPrincipal,
 		long propertyId)
 		throws com.liferay.portal.PortalException,

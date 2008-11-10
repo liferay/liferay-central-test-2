@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.tags.PropertyKeyException;
 import com.liferay.portlet.tags.PropertyValueException;
-import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
@@ -70,18 +69,6 @@ public class TagsPropertyLocalServiceImpl
 		tagsPropertyPersistence.update(property, false);
 
 		return property;
-	}
-
-	public TagsProperty addProperty(
-			long userId, String entryName, String key, String value)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		TagsEntry entry = tagsEntryLocalService.getEntry(
-			user.getCompanyId(), entryName);
-
-		return addProperty(userId, entry.getEntryId(), key, value);
 	}
 
 	public void deleteProperties(long entryId) throws SystemException {

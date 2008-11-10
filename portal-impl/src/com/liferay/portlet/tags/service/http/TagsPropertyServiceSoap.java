@@ -97,22 +97,6 @@ public class TagsPropertyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsPropertySoap addProperty(
-		java.lang.String entryName, java.lang.String key, java.lang.String value)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryName,
-					key, value);
-
-			return com.liferay.portlet.tags.model.TagsPropertySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteProperty(long propertyId)
 		throws RemoteException {
 		try {

@@ -31,6 +31,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
+import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.base.TagsEntryServiceBaseImpl;
 import com.liferay.portlet.tags.service.permission.TagsEntryPermission;
 
@@ -44,6 +45,7 @@ import java.util.List;
  * @author Jorge Ferrer
  * @author Alvaro del Castillo
  * @author Eduardo Lundgren
+ * @author Bruno Farache
  *
  */
 public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
@@ -59,8 +61,11 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		if (Validator.isNotNull(parentEntryName)) {
 			long groupId = PortalUtil.getScopeGroupId(plid);
 
-			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
-				groupId, parentEntryName);
+			TagsVocabulary vocabulary = tagsVocabularyPersistence.findByG_N(
+				groupId, vocabularyName);
+
+			TagsEntry parentEntry = tagsEntryLocalService.getEntry(
+				groupId, parentEntryName, vocabulary.isFolksonomy());
 
 			parentEntryId = parentEntry.getEntryId();
 		}
@@ -84,8 +89,11 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		if (Validator.isNotNull(parentEntryName)) {
 			long groupId = PortalUtil.getScopeGroupId(plid);
 
-			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
-				groupId, parentEntryName);
+			TagsVocabulary vocabulary = tagsVocabularyPersistence.findByG_N(
+				groupId, vocabularyName);
+
+			TagsEntry parentEntry = tagsEntryLocalService.getEntry(
+				groupId, parentEntryName, vocabulary.isFolksonomy());
 
 			parentEntryId = parentEntry.getEntryId();
 		}
@@ -169,33 +177,12 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		tagsEntryLocalService.mergeEntries(fromEntryId, toEntryId);
 	}
 
-	public List<TagsEntry> search(
-			long groupId, String name, String[] properties)
-		throws SystemException {
-
-		return tagsEntryLocalService.search(groupId, name, properties);
-	}
-
-	public List<TagsEntry> search(
-		long groupId, String name, String[] properties, int start, int end)
+	public JSONArray search(
+			long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
 		return tagsEntryLocalService.search(
 			groupId, name, properties, start, end);
-	}
-
-	public JSONArray searchAutocomplete(
-			long groupId, String name, String[] properties, int start, int end)
-		throws SystemException {
-
-		return tagsEntryLocalService.searchAutocomplete(
-			groupId, name, properties, start, end);
-	}
-
-	public int searchCount(long groupId, String name, String[] properties)
-		throws SystemException {
-
-		return tagsEntryLocalService.searchCount(groupId, name, properties);
 	}
 
 	public TagsEntry updateEntry(

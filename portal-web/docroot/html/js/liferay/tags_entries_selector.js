@@ -238,7 +238,7 @@ Liferay.TagsEntriesSelector = new Class({
 		var beginning = 0;
 		var end = 20;
 
-		var data = Liferay.Service.Tags.TagsEntry.searchAutocomplete(
+		var data = Liferay.Service.Tags.TagsEntry.search(
 			{
 				groupId: themeDisplay.getScopeGroupId(),
 				name: "%" + term + "%",

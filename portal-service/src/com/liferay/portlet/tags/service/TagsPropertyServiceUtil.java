@@ -52,13 +52,6 @@ public class TagsPropertyServiceUtil {
 		return getService().addProperty(entryId, key, value);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
-		java.lang.String entryName, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().addProperty(entryName, key, value);
-	}
-
 	public static void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -40,7 +40,7 @@ if (mergeUrlTags) {
 
 	String portletTitle = HtmlUtil.unescape(portletDisplay.getTitle());
 
-	portletTitle = TagsUtil.substitutePropertyVariables(company.getCompanyId(), titleEntry, portletTitle);
+	portletTitle = TagsUtil.substitutePropertyVariables(scopeGroupId, titleEntry, portletTitle);
 
 	renderResponse.setTitle(portletTitle);
 }

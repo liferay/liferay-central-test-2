@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -51,8 +49,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional
 public interface TagsPropertyLocalService {
 	public com.liferay.portlet.tags.model.TagsProperty addTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
@@ -97,12 +94,6 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsProperty addProperty(
-		long userId, java.lang.String entryName, java.lang.String key,
-		java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

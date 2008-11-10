@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -51,8 +49,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional
 public interface TagsEntryLocalService {
 	public com.liferay.portlet.tags.model.TagsEntry addTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
@@ -158,8 +155,10 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public boolean hasEntry(long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
+	public boolean hasEntry(long groupId, java.lang.String name,
+		boolean folksonomy)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
@@ -176,6 +175,10 @@ public interface TagsEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		boolean folksonomy) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
@@ -187,6 +190,11 @@ public interface TagsEntryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK, boolean folksonomy)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		long classNameId, long classPK, boolean folksonomy)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -215,8 +223,21 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.tags.model.TagsEntry getEntry(long groupId,
+		java.lang.String name, boolean folksonomy)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long[] getEntryIds(long groupId, java.lang.String[] names)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getEntryIds(long groupId, java.lang.String[] names,
+		boolean folksonomy)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String[] getEntryNames()
@@ -254,23 +275,8 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long groupId, java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int searchCount(long groupId, java.lang.String name,
-		java.lang.String[] properties)
+	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
+		java.lang.String name, java.lang.String[] properties, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,

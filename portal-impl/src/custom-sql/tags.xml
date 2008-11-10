@@ -64,19 +64,7 @@
 				(TagsAsset.viewCount > 0)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_N_P">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				TagsEntry
-			[$JOIN$]
-			WHERE
-				(TagsEntry.groupId = ?) AND
-				(TagsEntry.name LIKE ? OR ? IS NULL)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_C_N">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_C_N_F">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -94,8 +82,28 @@
 							(TagsAsset.groupId = ?) AND
 							(TagsAsset.classNameId = ?)
 					))
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
 			WHERE
-				(TagsEntry.name LIKE ? OR ? IS NULL)
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_N_F_P">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TagsEntry
+			[$JOIN$]
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByA_F">
@@ -115,21 +123,20 @@
 				TagsVocabulary.folksonomy = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_P">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByFolksonomy">
 		<![CDATA[
 			SELECT
 				{TagsEntry.*}
 			FROM
 				TagsEntry
-			[$JOIN$]
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
 			WHERE
-				(TagsEntry.groupId = ?) AND
-				(TagsEntry.name LIKE ? OR ? IS NULL)
-			ORDER BY
-				TagsEntry.name ASC
+				TagsVocabulary.folksonomy = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_C_N">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_C_N_F">
 		<![CDATA[
 			SELECT
 				{TagsEntry.*}
@@ -147,10 +154,29 @@
 							(TagsAsset.groupId = ?) AND
 							(TagsAsset.classNameId = ?)
 					))
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
 			WHERE
-				(TagsEntry.name LIKE ? OR ? IS NULL)
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
 			ORDER BY
 				TagsEntry.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(lower(TagsEntry.name) = ?) AND
+				(TagsVocabulary.folksonomy = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F_P">

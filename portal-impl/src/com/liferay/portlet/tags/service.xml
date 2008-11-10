@@ -107,10 +107,6 @@
 		<finder name="VocabularyId" return-type="Collection">
 			<finder-column name="vocabularyId" />
 		</finder>
-		<finder name="G_N" return-type="TagsEntry">
-			<finder-column name="groupId" />
-			<finder-column name="name" />
-		</finder>
 		<finder name="P_V" return-type="Collection">
 			<finder-column name="parentEntryId" />
 			<finder-column name="vocabularyId" />
