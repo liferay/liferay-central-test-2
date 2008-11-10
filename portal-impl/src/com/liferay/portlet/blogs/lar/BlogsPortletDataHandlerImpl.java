@@ -108,7 +108,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags
+			_entries, _comments, _ratings, _tags, _wordpress
 		};
 	}
 
@@ -135,6 +135,10 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					path);
 
 				importEntry(context, entry);
+			}
+
+			if (context.getBooleanParameter(_NAMESPACE, "wordpress")) {
+				WordpressImporter.importData(context);
 			}
 
 			return null;
@@ -290,5 +294,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
+
+	private static final PortletDataHandlerBoolean _wordpress =
+		new PortletDataHandlerBoolean(_NAMESPACE, "wordpress");
 
 }
