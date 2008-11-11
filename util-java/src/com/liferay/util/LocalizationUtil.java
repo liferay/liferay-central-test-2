@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -351,6 +352,22 @@ public class LocalizationUtil {
 		}
 
 		return xml;
+	}
+
+	public static void setLocalizedPrefsValues (
+			ActionRequest actionRequest, PortletPreferences preferences,
+			String parameter)
+		throws Exception {
+
+		Map<Locale, String> localeTitlesMap =
+			LocalizationUtil.getLocalizedParameter(actionRequest, parameter);
+
+		for (Locale locale : localeTitlesMap.keySet()) {
+			String key = parameter + "_" + LanguageUtil.getLanguageId(locale);
+			String value = localeTitlesMap.get(locale);
+
+			preferences.setValue(key, value);
+		}
 	}
 
 	public static void setPrefsValue(

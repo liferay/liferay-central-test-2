@@ -323,11 +323,12 @@ public class LoginUtil {
 	public static void sendPassword(ActionRequest actionRequest)
 		throws Exception {
 
-		sendPassword(actionRequest, null, null);
+		sendPassword(actionRequest, null, null, null, null);
 	}
 
 	public static void sendPassword(
-			ActionRequest actionRequest, String subject, String body)
+			ActionRequest actionRequest, String fromName,
+			String fromAddress, String subject, String body)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -350,7 +351,7 @@ public class LoginUtil {
 
 		UserLocalServiceUtil.sendPassword(
 			company.getCompanyId(), emailAddress, remoteAddr, remoteHost,
-			userAgent, subject, body);
+			userAgent, fromName, fromAddress, subject, body);
 
 		SessionMessages.add(actionRequest, "request_processed", emailAddress);
 	}

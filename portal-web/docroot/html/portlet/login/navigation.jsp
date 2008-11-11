@@ -50,7 +50,7 @@
 			/>
 		</c:if>
 
-		<c:if test="<%= company.isSendPassword() %>">
+		<c:if test='<%= company.isSendPassword() && GetterUtil.getBoolean(preferences.getValue("emailPasswordSentEnabled",null), true) && PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) %>'>
 			<portlet:renderURL var="forgotPasswordURL">
 				<portlet:param name="struts_action" value="/login/forgot_password" />
 			</portlet:renderURL>

@@ -458,7 +458,8 @@ public interface UserLocalService {
 
 	public void sendPassword(long companyId, java.lang.String emailAddress,
 		java.lang.String remoteAddr, java.lang.String remoteHost,
-		java.lang.String userAgent, java.lang.String subject,
+		java.lang.String userAgent, java.lang.String fromName,
+		java.lang.String fromAddress, java.lang.String subject,
 		java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

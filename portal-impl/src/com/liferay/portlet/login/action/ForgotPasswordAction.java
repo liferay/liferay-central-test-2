@@ -36,7 +36,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.login.util.LoginUtil;
@@ -138,6 +137,8 @@ public class ForgotPasswordAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		PortletPreferences preferences = actionRequest.getPreferences();
+
 		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
 			User user = getUser(actionRequest);
 
@@ -151,14 +152,19 @@ public class ForgotPasswordAction extends PortletAction {
 			CaptchaUtil.check(actionRequest);
 		}
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		String languageId = LanguageUtil.getLanguageId(actionRequest);
+
+		String emailFromName = preferences.getValue(
+			"emailFromName", null);
+		String emailFromAddress = preferences.getValue(
+			"emailFromAddress", null);
 
 		String subject = preferences.getValue(
-			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT, null);
+			"emailPasswordSentSubject_" +languageId, null);
 		String body = preferences.getValue(
-			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY, null);
+			"emailPasswordSentBody_" + languageId, null);
 
-		LoginUtil.sendPassword(actionRequest, subject, body);
+		LoginUtil.sendPassword(actionRequest, emailFromName, emailFromAddress, subject, body);
 
 		sendRedirect(actionRequest, actionResponse);
 	}

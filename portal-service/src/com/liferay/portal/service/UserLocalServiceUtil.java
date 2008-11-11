@@ -608,12 +608,13 @@ public class UserLocalServiceUtil {
 	public static void sendPassword(long companyId,
 		java.lang.String emailAddress, java.lang.String remoteAddr,
 		java.lang.String remoteHost, java.lang.String userAgent,
+		java.lang.String fromName, java.lang.String fromAddress,
 		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
 			.sendPassword(companyId, emailAddress, remoteAddr, remoteHost,
-			userAgent, subject, body);
+			userAgent, fromName, fromAddress, subject, body);
 	}
 
 	public static void setRoleUsers(long roleId, long[] userIds)

@@ -1585,13 +1585,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void sendPassword(
 			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent, String subject, String body)
+			String remoteHost, String userAgent, String fromName,
+			String fromAddress, String subject, String body)
 		throws PortalException, SystemException {
 
 		try {
 			doSendPassword(
 				companyId, emailAddress, remoteAddr, remoteHost, userAgent,
-				subject, body);
+				fromName, fromAddress, subject, body);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -2613,7 +2614,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected void doSendPassword(
 			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent, String subject, String body)
+			String remoteHost, String userAgent, String fromName,
+			String fromAddress, String subject, String body)
 		throws IOException, PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
@@ -2666,10 +2668,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			newPassword = user.getPassword();
 		}
 
-		String fromName = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+		if (Validator.isNull(fromName)) {
+			fromName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
+		}
+
+		if (Validator.isNull(fromAddress)) {
+			fromAddress = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+		}
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();

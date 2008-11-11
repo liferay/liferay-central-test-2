@@ -23,10 +23,13 @@
 package com.liferay.portlet.login.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.util.LocalizationUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -55,8 +58,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		String authType = ParamUtil.getString(actionRequest, "authType");
-
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
@@ -64,7 +65,50 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		preferences.setValue("authType", authType);
+		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
+
+		if (tabs1.equals("general")) {
+			String authType = ParamUtil.getString(actionRequest, "authType");
+
+			preferences.setValue("authType", authType);
+		}
+		else if (tabs1.equals("email-notifications")) {
+			String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
+
+			if (tabs2.equals("general")) {
+				String emailFromName = ParamUtil.getString(
+					actionRequest, "emailFromName");
+				String emailFromAddress = ParamUtil.getString(
+					actionRequest, "emailFromAddress");
+
+				preferences.setValue("emailFromName", emailFromName);
+
+				if (Validator.isNotNull(emailFromAddress)) {
+					if (!Validator.isEmailAddress(emailFromAddress)) {
+						SessionErrors.add(actionRequest, "emailFromAddress");
+					}
+					else {
+						preferences.setValue(
+							"emailFromAddress", emailFromAddress);
+					}
+				}
+				else {
+					preferences.setValue("emailFromAddress", emailFromAddress);
+				}
+			}
+
+			else if (tabs2.equals("password-changed-notification")) {
+				String emailPasswordSentEnabled = ParamUtil.getString(
+					actionRequest, "emailPasswordSentEnabled");
+				preferences.setValue("emailPasswordSentEnabled",
+						emailPasswordSentEnabled);
+
+				LocalizationUtil.setLocalizedPrefsValues (
+					actionRequest, preferences, "emailPasswordSentSubject");
+				LocalizationUtil.setLocalizedPrefsValues (
+					actionRequest, preferences, "emailPasswordSentBody");
+			}
+		}
 
 		preferences.store();
 
