@@ -27,8 +27,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long groupId = ParamUtil.getLong(request, "groupId");
-
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
@@ -59,7 +57,7 @@ headerNames.add("score");
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 try {
-	Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, 0, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, 0, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 	int total = results.getLength();
 
