@@ -278,7 +278,13 @@ public interface BlogsEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords, int start, int end)
+		long groupId, long authorUserId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, long authorUserId,
+		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(long userId,

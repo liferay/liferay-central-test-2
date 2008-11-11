@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -516,8 +517,10 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		Resource resource = resourceLocalService.addResource(
 			companyId, name, scope, primKey);
 
+		long resourceId = resource.getResourceId();
+
 		Permission permission = permissionPersistence.fetchByA_R(
-			actionId, resource.getResourceId());
+			actionId, resourceId);
 
 		if (permission == null) {
 			long permissionId = counterLocalService.increment(
@@ -527,7 +530,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 			permission.setCompanyId(companyId);
 			permission.setActionId(actionId);
-			permission.setResourceId(resource.getResourceId());
+			permission.setResourceId(resourceId);
 
 			permissionPersistence.update(permission, false);
 		}
@@ -535,6 +538,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		rolePersistence.addPermission(roleId, permission);
 
 		PermissionCacheUtil.clearCache();
+
+		SearchEngineUtil.updatePermissionFields(resourceId);
 	}
 
 	public void setRolePermissions(
@@ -567,6 +572,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		rolePersistence.addPermissions(roleId, permissions);
 
 		PermissionCacheUtil.clearCache();
+
+		SearchEngineUtil.updatePermissionFields(resourceId);
 	}
 
 	public void setUserPermissions(

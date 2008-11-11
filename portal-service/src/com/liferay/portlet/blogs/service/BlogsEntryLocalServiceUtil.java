@@ -354,10 +354,20 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords, int start, int end)
+		long groupId, long authorUserId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, groupId, authorUserId, keywords, start,
+			end);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, long authorUserId,
+		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, groupId, userId, keywords, start, end);
+				   .search(companyId, groupId, userId, authorUserId, keywords,
+			start, end);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(

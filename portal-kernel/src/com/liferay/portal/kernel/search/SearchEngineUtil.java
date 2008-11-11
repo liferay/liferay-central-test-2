@@ -39,6 +39,8 @@ public class SearchEngineUtil {
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
+		_searchPermissionChecker.addPermissionFields(companyId, doc);
+
 		getSearchEngine().getWriter().addDocument(companyId, doc);
 	}
 
@@ -94,6 +96,41 @@ public class SearchEngineUtil {
 			companyId, query, sorts, start, end);
 	}
 
+	public static Hits search(
+			long companyId, long userId, Query query, int start, int end)
+		throws SearchException {
+
+		if (userId > 0) {
+			query = _searchPermissionChecker.getPermissionQuery(userId, query);
+		}
+
+		return search(companyId, query, start, end);
+	}
+
+	public static Hits search(
+			long companyId, long userId, Query query, Sort sort, int start,
+			int end)
+		throws SearchException {
+
+		if (userId > 0) {
+			query = _searchPermissionChecker.getPermissionQuery(userId, query);
+		}
+
+		return search(companyId, query, sort, start, end);
+	}
+
+	public static Hits search(
+			long companyId, long userId, Query query, Sort[] sorts, int start,
+			int end)
+		throws SearchException {
+
+		if (userId > 0) {
+			query = _searchPermissionChecker.getPermissionQuery(userId, query);
+		}
+
+		return search(companyId, query, sorts, start, end);
+	}
+
 	public static void unregister(String fromName) {
 		getSearchEngine().unregister(fromName);
 	}
@@ -101,7 +138,13 @@ public class SearchEngineUtil {
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
+		_searchPermissionChecker.addPermissionFields(companyId, doc);
+
 		getSearchEngine().getWriter().updateDocument(companyId, uid, doc);
+	}
+
+	public static void updatePermissionFields(long resourceId) {
+		_searchPermissionChecker.updatePermissionFields(resourceId);
 	}
 
 	public void setDefaultSearchEngineName(String defaultSearchEngineName) {
@@ -112,7 +155,14 @@ public class SearchEngineUtil {
 		_searchEngine = searchEngine;
 	}
 
+	public void setSearchPermissionChecker(
+			SearchPermissionChecker searchPermissionChecker) {
+
+		_searchPermissionChecker = searchPermissionChecker;
+	}
+
 	private static String _defaultSearchEngineName;
 	private static SearchEngine _searchEngine;
+	private static SearchPermissionChecker _searchPermissionChecker;
 
 }

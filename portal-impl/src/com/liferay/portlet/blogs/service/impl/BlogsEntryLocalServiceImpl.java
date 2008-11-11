@@ -581,8 +581,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
+			long companyId, long groupId, long authorUserId, String keywords,
 			int start, int end)
+		throws SystemException {
+
+		long userId = 0;
+
+		return search(
+			companyId, groupId, userId, authorUserId, keywords, start, end);
+	}
+
+	public Hits search(
+			long companyId, long groupId, long userId, long authorUserId,
+			String keywords, int start, int end)
 		throws SystemException {
 
 		try {
@@ -594,8 +605,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 
-			if (userId > 0) {
-				contextQuery.addRequiredTerm(Field.USER_ID, userId);
+			if (authorUserId > 0) {
+				contextQuery.addRequiredTerm(Field.USER_ID, authorUserId);
 			}
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
@@ -615,7 +626,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, userId, fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

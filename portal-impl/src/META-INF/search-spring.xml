@@ -21,6 +21,9 @@
 				<property name="writer" ref="indexWriter.portal" />
 			</bean>
 		</property>
+		<property name="searchPermissionChecker">
+			<bean class="com.liferay.portal.search.Algorithm5SearchPermissionCheckerImpl" />
+		</property>
 	</bean>
 
 	<!-- Lucene search engine -->
