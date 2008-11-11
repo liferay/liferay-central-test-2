@@ -41,6 +41,7 @@
 
 package com.liferay.wsrp.consumer.invoker;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.QNameUtil;
@@ -136,14 +137,20 @@ public class WSRPWindowRequestReader implements WindowRequestReader {
 	}
 
 	public ChannelURLType readURLType(HttpServletRequest request) {
-		String portletAction = request.getParameter(
-			WSRPWindowChannelURL.PORTLET_ACTION);
+		String urlType = ParamUtil.getString(
+			request, WSRPWindowChannelURL.PORTLET_ACTION);
 
-		if (Validator.isNotNull(portletAction)) {
-			return WSRPToContainerMap.mapURLTypeToContainer(portletAction);
+		if (urlType.equals("0")) {
+			return ChannelURLType.RENDER;
+		}
+		else if (urlType.equals("1")) {
+			return ChannelURLType.ACTION;
+		}
+		else if (urlType.equals("2")) {
+			return ChannelURLType.RESOURCE;
 		}
 		else {
-			throw new RuntimeException("Invalid WSRP URL");
+			return ChannelURLType.RENDER;
 		}
 	}
 

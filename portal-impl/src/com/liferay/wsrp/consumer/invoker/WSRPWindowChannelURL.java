@@ -78,7 +78,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 
 	public final static String NEW_WINDOW_STATE = "dt.window.newWindowState";
 
-	public final static String PORTLET_ACTION = "dt.window.portletAction";
+	public final static String PORTLET_ACTION = "p_p_url_type";
 
 	public final static String RESOURCE_CACHE_LEVEL =
 		"wsrp-resourceCacheability";
@@ -177,8 +177,10 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 
 	public void setWindowState(ChannelState windowState) {
 		try {
-			_portletURLImpl.setWindowState(
-				PortletAppEngineUtils.getWindowState(windowState));
+			if (windowState != null) {
+				_portletURLImpl.setWindowState(
+					PortletAppEngineUtils.getWindowState(windowState));
+			}
 		}
 		catch (WindowStateException wse) {
 			_log.error(wse, wse);
