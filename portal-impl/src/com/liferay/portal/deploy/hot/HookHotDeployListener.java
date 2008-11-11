@@ -136,6 +136,9 @@ public class HookHotDeployListener
 
 				portalJspBackupFile.delete();
 			}
+			else if (portalJspFile.exists()) {
+				portalJspFile.delete();
+			}
 		}
 	}
 
