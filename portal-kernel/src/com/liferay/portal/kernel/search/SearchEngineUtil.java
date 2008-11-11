@@ -156,7 +156,7 @@ public class SearchEngineUtil {
 	}
 
 	public void setSearchPermissionChecker(
-			SearchPermissionChecker searchPermissionChecker) {
+		SearchPermissionChecker searchPermissionChecker) {
 
 		_searchPermissionChecker = searchPermissionChecker;
 	}

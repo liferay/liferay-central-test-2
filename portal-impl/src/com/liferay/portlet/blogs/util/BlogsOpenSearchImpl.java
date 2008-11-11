@@ -43,7 +43,7 @@ public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
 		throws Exception {
 
 		return BlogsEntryLocalServiceUtil.search(
-			companyId, 0, 0, keywords, start, end);
+			companyId, 0, 0, 0, keywords, start, end);
 	}
 
 	public String getSearchPath() {

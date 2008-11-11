@@ -581,17 +581,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long authorUserId, String keywords,
-			int start, int end)
-		throws SystemException {
-
-		long userId = 0;
-
-		return search(
-			companyId, groupId, userId, authorUserId, keywords, start, end);
-	}
-
-	public Hits search(
 			long companyId, long groupId, long userId, long authorUserId,
 			String keywords, int start, int end)
 		throws SystemException {

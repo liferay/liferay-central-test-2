@@ -33,8 +33,8 @@ public interface SearchPermissionChecker {
 
 	public void addPermissionFields(long companyId, Document doc);
 
-	public void updatePermissionFields(long resourceId);
-
 	public Query getPermissionQuery(long userId, Query query);
+
+	public void updatePermissionFields(long resourceId);
 
 }

@@ -22,7 +22,7 @@
 			</bean>
 		</property>
 		<property name="searchPermissionChecker">
-			<bean class="com.liferay.portal.search.Algorithm5SearchPermissionCheckerImpl" />
+			<bean class="com.liferay.portal.search.SearchPermissionCheckerImpl" />
 		</property>
 	</bean>
 
