@@ -35,6 +35,7 @@ Set data = new HashSet();
 
 for (int i = 1; i <= maxDayOfMonth; i++) {
 	Calendar tempCal = (Calendar)selCal.clone();
+
 	tempCal.set(Calendar.MONTH, selMonth);
 	tempCal.set(Calendar.DATE, i);
 	tempCal.set(Calendar.YEAR, selYear);
