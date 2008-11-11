@@ -7595,7 +7595,7 @@ Liferay.Service = {
 		if (callback) {
 			jQuery.ajax(
 				{
-					type: 'GET',
+					type: 'POST',
 					url: serviceUrl,
 					data: options,
 					cache: false,
