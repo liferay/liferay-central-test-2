@@ -581,7 +581,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long userId, long authorUserId,
+			long companyId, long groupId, long userId, long ownerUserId,
 			String keywords, int start, int end)
 		throws SystemException {
 
@@ -594,8 +594,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 
-			if (authorUserId > 0) {
-				contextQuery.addRequiredTerm(Field.USER_ID, authorUserId);
+			if (ownerUserId > 0) {
+				contextQuery.addRequiredTerm(Field.USER_ID, ownerUserId);
 			}
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
