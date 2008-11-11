@@ -254,6 +254,10 @@ public class PortalLocalServiceImpl extends PortalLocalServiceBaseImpl {
 			((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
 			(ranUpgradeProcess)) {
 
+			if (!ranUpgradeProcess) {
+				PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
+			}
+
 			String[] verifyProcesses = PropsUtil.getArray(
 				PropsKeys.VERIFY_PROCESSES);
 
