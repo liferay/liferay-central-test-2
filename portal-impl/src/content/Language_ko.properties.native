@@ -301,6 +301,7 @@ action.VIEW_USER=전망 사용자
 800-by-600-pixels=600의 화소에 의하여800
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=지도는 주소를 위해 발견될 수 없었다:
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=페이지는parentable이지 않는 페이지의 아이에 어울릴.
 a-page-cannot-become-a-child-of-itself=페이지는 자체적으로의 아이에 어울릴.
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.

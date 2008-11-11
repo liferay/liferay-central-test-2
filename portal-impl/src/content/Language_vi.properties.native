@@ -82,6 +82,7 @@ model.resource.com.liferay.knowledgebase.model.KBArticle
 ##
 
 INBOX=Inbox
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-may-not-contain-more-than-x-portlets=Một trang không thể có hơn {0} portlets.
 about=About
 access-denied=Từ chối truy nhập.

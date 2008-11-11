@@ -34,6 +34,7 @@ model.resource.com.liferay.knowledgebase.model.KBArticle
 ##
 
 INBOX=Inbox
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-may-not-contain-more-than-x-portlets=Stránka nemůže obsahovat více než {0} aplikací.
 about=O nás
 access-denied=Přístup odmítnut

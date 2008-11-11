@@ -301,6 +301,7 @@ action.VIEW_USER=看法用戶
 800-by-600-pixels=800 由600 個映像點
 INBOX=收信匣
 a-map-could-not-be-found-for-the-address=此地址找不到地圖:
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=頁無法適合不是parentable 頁的孩子。
 a-page-cannot-become-a-child-of-itself=頁無法適合孩子本身。
 a-page-may-not-contain-more-than-x-portlets=一頁不可以超過多於 {0} portlets.

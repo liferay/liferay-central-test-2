@@ -301,6 +301,7 @@ action.VIEW_USER=Vue de l'utilisateur
 800-by-600-pixels=800 par 600 Pixel
 INBOX=Messages reçus
 a-map-could-not-be-found-for-the-address=Aucune carte n'a pu être trouvée pour l'adresse :
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Une page ne peut pas être fille d'une page qui n'a pas de page mère.
 a-page-cannot-become-a-child-of-itself=Une page ne peut pas être fille d'elle elle-même.
 a-page-may-not-contain-more-than-x-portlets=Une page ne peut contenir plus de {0} applications.

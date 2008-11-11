@@ -162,6 +162,7 @@ action.VIEW_USER=Usuari de la Vista
 800-by-600-pixels=800 per 600 pixels
 INBOX=entrants
 a-map-could-not-be-found-for-the-address=No s'ha pogut trobar un mapa per a l'adreça
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Una pàgina no pot escoltar bé a un fill d'una pàgina que no sigui parentat.
 a-page-cannot-become-a-child-of-itself=Una pàgina no pot escoltar bé a un fill d'ell mateix.
 a-page-may-not-contain-more-than-x-portlets=Una pàgina no pot contenir més de {0} portlets.

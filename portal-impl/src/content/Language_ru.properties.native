@@ -138,6 +138,7 @@ action.VIEW=Посмотреть
 
 INBOX=Входящие
 a-map-could-not-be-found-for-the-address=Связь для данного адреса не найдена:
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=A page cannot become a child of a page that is not parentable.
 a-page-cannot-become-a-child-of-itself=Страница не может стать потомком самой себя.
 a-page-may-not-contain-more-than-x-portlets=Страница не может содержать более {0} портлетов.

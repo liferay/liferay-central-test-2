@@ -31,6 +31,7 @@ model.resource.com.liferay.knowledgebase.model.KBArticle
 ## Messages
 ##
 
+a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.
 activity-blogs-add-comment={0} commented on {1}'s blog.
 activity-blogs-add-entry={0} wrote a new blog entry.
