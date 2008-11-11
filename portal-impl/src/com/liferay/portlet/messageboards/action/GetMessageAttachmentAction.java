@@ -23,7 +23,7 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.CompanyConstants;
@@ -105,15 +105,16 @@ public class GetMessageAttachmentAction extends PortletAction {
 		try {
 			MBMessage message = MBMessageServiceUtil.getMessage(messageId);
 
+			String path = message.getAttachmentsDir() + "/" + fileName;
+
 			is = DLLocalServiceUtil.getFileAsStream(
-				message.getCompanyId(), CompanyConstants.SYSTEM,
-				message.getAttachmentsDir() + "/" + fileName);
-
-			byte[] bytes = FileUtil.getBytes(is);
-
+				message.getCompanyId(), CompanyConstants.SYSTEM, path);
+			int contentLength = (int)DLServiceUtil.getFileSize(
+				message.getCompanyId(), CompanyConstants.SYSTEM, path);
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
-			ServletResponseUtil.sendFile(response, fileName, bytes, contentType);
+			ServletResponseUtil.sendFile(
+				response, fileName, is, contentLength, contentType);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

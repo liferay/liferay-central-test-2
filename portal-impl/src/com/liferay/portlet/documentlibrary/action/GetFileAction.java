@@ -217,7 +217,8 @@ public class GetFileAction extends PortletAction {
 			int contentLength = fileEntry.getSize();
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
-			ServletResponseUtil.sendFile(response, fileName, contentLength, is, contentType);
+			ServletResponseUtil.sendFile(
+				response, fileName, is, contentLength, contentType);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

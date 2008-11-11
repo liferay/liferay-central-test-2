@@ -79,9 +79,17 @@ public class PortletResponseUtil {
 			String contentType)
 		throws IOException {
 
+		sendFile(resourceResponse, fileName, is, 0, contentType);
+	}
+
+	public static void sendFile(
+			ResourceResponse resourceResponse, String fileName, InputStream is,
+			int contentLength, String contentType)
+		throws IOException {
+
 		setHeaders(resourceResponse, fileName, contentType);
 
-		write(resourceResponse, is);
+		write(resourceResponse, is, contentLength);
 	}
 
 	public static void write(ResourceResponse resourceResponse, String s)
@@ -130,10 +138,22 @@ public class PortletResponseUtil {
 	public static void write(ResourceResponse resourceResponse, InputStream is)
 		throws IOException {
 
+		write(resourceResponse, is, 0);
+	}
+
+	public static void write(
+			ResourceResponse resourceResponse, InputStream is,
+			int contentLength)
+		throws IOException {
+
 		OutputStream os = null;
 
 		try {
 			if (!resourceResponse.isCommitted()) {
+				if (contentLength > 0) {
+					resourceResponse.setContentLength(contentLength);
+				}
+
 				os = new BufferedOutputStream(
 					resourceResponse.getPortletOutputStream());
 
