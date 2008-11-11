@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -42,10 +43,12 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.portlet.PortletPreferences;
@@ -209,11 +212,20 @@ public class OrganizationImpl
 		return 0;
 	}
 
-	public Set<String> getReminderQueryQuestions() throws SystemException {
+	public Set<String> getReminderQueryQuestions(Locale locale)
+		throws SystemException {
+
+		return getReminderQueryQuestions(LanguageUtil.getLanguageId(locale));
+	}
+
+	public Set<String> getReminderQueryQuestions(String languageId)
+		throws SystemException {
+
 		PortletPreferences preferences = getPreferences();
 
 		String[] questions = StringUtil.split(
-			preferences.getValue("reminder-queries", null),
+			LocalizationUtil.getPrefsValue(
+				preferences, "reminderQueries", languageId, false),
 			StringPool.NEW_LINE);
 
 		return SetUtil.fromArray(questions);

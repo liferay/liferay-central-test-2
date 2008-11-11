@@ -199,7 +199,7 @@ public class LocalizationUtil {
 		return value;
 	}
 
-	public static Map getLocalizedParameter(
+	public static Map<Locale, String> getLocalizedParameter(
 		PortletRequest portletRequest, String param) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -360,7 +360,7 @@ public class LocalizationUtil {
 		throws Exception {
 
 		Map<Locale, String> localeTitlesMap =
-			LocalizationUtil.getLocalizedParameter(actionRequest, parameter);
+			getLocalizedParameter(actionRequest, parameter);
 
 		for (Locale locale : localeTitlesMap.keySet()) {
 			String key = parameter + "_" + LanguageUtil.getLanguageId(locale);

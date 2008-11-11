@@ -52,6 +52,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.util.LocalizationUtil;
 
 import java.util.List;
 
@@ -231,10 +232,13 @@ public class EditOrganizationAction extends PortletAction {
 
 			PortletPreferences preferences = organization.getPreferences();
 
-			String reminderQueries = ParamUtil.getString(
-				actionRequest, "reminderQueries");
+			String reminderQueries = actionRequest.getParameter(
+				"reminderQueries");
 
-			preferences.setValue("reminder-queries", reminderQueries);
+			preferences.setValue("reminderQueries", reminderQueries);
+
+			LocalizationUtil.setLocalizedPrefsValues(
+				actionRequest, preferences, "reminderQueries");
 
 			preferences.store();
 		}

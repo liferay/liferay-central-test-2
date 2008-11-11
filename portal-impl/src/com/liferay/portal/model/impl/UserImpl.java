@@ -357,7 +357,7 @@ public class UserImpl extends UserModelImpl implements User {
 
 		for (Organization organization : organizations) {
 			Set<String> organizationQuestions =
-				organization.getReminderQueryQuestions();
+				organization.getReminderQueryQuestions(getLanguageId());
 
 			if (organizationQuestions.size() == 0) {
 				Organization parentOrganization =
@@ -367,9 +367,11 @@ public class UserImpl extends UserModelImpl implements User {
 						(parentOrganization != null)) {
 
 					organizationQuestions =
-						parentOrganization.getReminderQueryQuestions();
+						parentOrganization.getReminderQueryQuestions(
+							getLanguageId());
 
-					parentOrganization = organization.getParentOrganization();
+					parentOrganization =
+						parentOrganization.getParentOrganization();
 				}
 			}
 

@@ -109,9 +109,9 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 				<%
 				boolean hasCustomQuestion = true;
 
-				String[] questions = PropsUtil.getArray(PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS);
+				Set<String> questions = selUser.getReminderQueryQuestions();
 
-				for (String question : PropsValues.USERS_REMINDER_QUERIES_QUESTIONS) {
+				for (String question : questions) {
 					if (selUser.getReminderQueryQuestion().equals(question)) {
 						hasCustomQuestion = false;
 				%>

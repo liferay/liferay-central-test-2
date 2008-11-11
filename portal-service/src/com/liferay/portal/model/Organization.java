@@ -69,8 +69,11 @@ public interface Organization extends OrganizationModel {
 
 	public int getPublicLayoutsPageCount();
 
-	public java.util.Set<String> getReminderQueryQuestions()
-		throws com.liferay.portal.SystemException;
+	public java.util.Set<String> getReminderQueryQuestions(
+		java.util.Locale locale) throws com.liferay.portal.SystemException;
+
+	public java.util.Set<String> getReminderQueryQuestions(
+		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getSuborganizations()
 		throws com.liferay.portal.SystemException;
