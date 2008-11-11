@@ -36,9 +36,6 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,12 +117,10 @@ public class ExportDataAction extends PortletAction {
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
 		byte[] bytes = sb.toString().getBytes();
-		int contentLength = bytes.length;
 		String fileName = title + ".csv";
-		InputStream is = new ByteArrayInputStream(bytes);
 		String contentType = ContentTypes.APPLICATION_TEXT;
 
-		ServletResponseUtil.sendFile(response, fileName, contentLength, is, contentType);
+		ServletResponseUtil.sendFile(response, fileName, bytes, contentType);
 
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}
