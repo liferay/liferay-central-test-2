@@ -153,6 +153,8 @@ for (int i = 0; i < 7; i++) {
 
 						event = event.toEscapedModel();
 
+						boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
+
 						className = "portlet-section-body results-row";
 						String classHoverName = "portlet-section-body-hover results-row hover";
 
@@ -160,8 +162,6 @@ for (int i = 0; i < 7; i++) {
 							className = "portlet-section-alternate results-row alt";
 							classHoverName = "portlet-section-alternate-hover results-row alt hover";
 						}
-
-						boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
 					%>
 
 						<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
