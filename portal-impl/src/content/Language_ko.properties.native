@@ -847,6 +847,7 @@ calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchas
 calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase=구입의 총계 총계의 백분율에 기초를 두는선박을 산출하십시요
 calculate=산출하십시요
 calendar-of-events=행사 일정표
+calendar=달력
 call=외침
 callback-url=되부름 URL
 cancel-all-uploads=모든 올려주기를 취소하십시요
@@ -3589,6 +3590,7 @@ to-this-location=이 위치에
 to-vocabulary=어휘에
 to=에
 toad=두꺼비
+today-is=오늘은 이다
 today=오늘
 toggle-edit-controls=토글은 통제를 편집한다
 toll-free=자유롭게의 통행세

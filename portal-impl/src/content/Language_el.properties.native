@@ -847,6 +847,7 @@ calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchas
 calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase=Υπολογισμός κόστους αποστολής βασισμένου στο ποσοστό του συνολικού ποσού αγοράς.
 calculate=Υπολογίστε
 calendar-of-events=Ημερολόγιο των γεγονότων
+calendar=Ημερολόγιο
 call=Κλήση
 callback-url=Επανάκληση URL
 cancel-all-uploads=Ακυρώστε όλων φορτώνει
@@ -3589,6 +3590,7 @@ to-this-location=Σε αυτή τη τοποθεσία
 to-vocabulary=Στο λεξιλόγιο
 to=Προς
 toad=Φρύνος
+today-is=Σήμερα είναι
 today=Σήμερα
 toggle-edit-controls=Η τραβέρσα εκδίδει τους ελέγχους
 toll-free=Φόρος ελεύθερος

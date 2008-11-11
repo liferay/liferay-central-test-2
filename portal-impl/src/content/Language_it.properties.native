@@ -847,6 +847,7 @@ calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchas
 calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase=Calcolo delle spese di spedizione in percentuale al costo totale dell'acquisto.
 calculate=Calcola
 calendar-of-events=Calendario degli eventi
+calendar=Calendario
 call=Chiamare
 callback-url=URL di chiamata ripetuta
 cancel-all-uploads=Annulli Tutti i Uploads
@@ -3589,6 +3590,7 @@ to-this-location=A questa sede
 to-vocabulary=A vocabolario
 to=A
 toad=Toad
+today-is=L'oggi è
 today=Oggi
 toggle-edit-controls=Il Cavicchio Casella di modifica
 toll-free=Esente da Tasse

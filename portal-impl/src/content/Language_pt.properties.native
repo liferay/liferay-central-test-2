@@ -847,6 +847,7 @@ calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchas
 calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase=Calcule o transporte baseado em uma porcentagem da quantidade total da compra.
 calculate=Calcule
 calendar-of-events=Calendário dos eventos
+calendar=Calendário
 call=Chamada
 callback-url=URL da rechamada
 cancel-all-uploads=Cancele Todos os Uploads
@@ -3589,6 +3590,7 @@ to-this-location=A esta posição
 to-vocabulary=Ao vocabulário
 to=A
 toad=Sapo
+today-is=Hoje é
 today=Hoje
 toggle-edit-controls=O Toggle Edita Controles
 toll-free=Pedágio Livre

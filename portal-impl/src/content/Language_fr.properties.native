@@ -847,6 +847,7 @@ calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchas
 calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase=Calcul du prix de livraison en se basant sur un pourcentage du prix total d'achat.
 calculate=Calculer
 calendar-of-events=Calendrier des événements
+calendar=Calendrier
 call=Appeler
 callback-url=URL de rappel de service
 cancel-all-uploads=Annuler tous les téléchargements
@@ -3589,6 +3590,7 @@ to-this-location=à cette localisation
 to-vocabulary=Au vocabulaire
 to=à
 toad=Crapaud
+today-is=Aujourd'hui est
 today=Aujourd'hui
 toggle-edit-controls=Le Cabillot Éditent Des Commandes
 toll-free=Gratuit

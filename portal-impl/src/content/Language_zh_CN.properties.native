@@ -847,6 +847,7 @@ calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchas
 calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase=计算以购买总额的百分比为基准的出货。
 calculate=计算
 calendar-of-events=事项日历
+calendar=日历
 call=电话
 callback-url=收回URL
 cancel-all-uploads=取消所有向上作用的负载
@@ -3589,6 +3590,7 @@ to-this-location=对这个地点
 to-vocabulary=对词汇量
 to=至
 toad=蟾蜍
+today-is=今天是
 today=今天
 toggle-edit-controls=乒乓开关编辑控制
 toll-free=免费
