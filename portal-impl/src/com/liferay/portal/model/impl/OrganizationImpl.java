@@ -37,7 +37,8 @@ import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -62,18 +63,6 @@ import org.apache.commons.logging.LogFactory;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
-	public Set<String> getAvailableReminderQueryQuestions()
-		throws PortalException, SystemException {
-
-		PortletPreferences preferences =
-			PrefsPropsUtil.getOrganizationPreferences(getOrganizationId());
-
-		String[] questionsArray = StringUtil.split(
-			preferences.getValue("reminderQueries", null), StringPool.NEW_LINE);
-
-		return SetUtil.fromArray(questionsArray);
-	}
-
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
 			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES,
@@ -85,6 +74,7 @@ public class OrganizationImpl
 
 		if (getParentOrganizationId() ==
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
 			return null;
 		}
 
@@ -172,6 +162,17 @@ public class OrganizationImpl
 		return new GroupImpl();
 	}
 
+	public PortletPreferences getPreferences() throws SystemException {
+		long companyId = getCompanyId();
+		long ownerId = getOrganizationId();
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ORGANIZATION;
+		long plid = PortletKeys.PREFS_PLID_SHARED;
+		String portletId = PortletKeys.LIFERAY_PORTAL;
+
+		return PortletPreferencesLocalServiceUtil.getPreferences(
+			companyId, ownerId, ownerType, plid, portletId);
+	}
+
 	public int getPrivateLayoutsPageCount() {
 		try {
 			Group group = getGroup();
@@ -206,6 +207,16 @@ public class OrganizationImpl
 		}
 
 		return 0;
+	}
+
+	public Set<String> getReminderQueryQuestions() throws SystemException {
+		PortletPreferences preferences = getPreferences();
+
+		String[] questions = StringUtil.split(
+			preferences.getValue("reminder-queries", null),
+			StringPool.NEW_LINE);
+
+		return SetUtil.fromArray(questions);
 	}
 
 	public List<Organization> getSuborganizations() throws SystemException {

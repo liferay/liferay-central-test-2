@@ -51,7 +51,6 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.List;
@@ -225,20 +224,17 @@ public class EditOrganizationAction extends PortletAction {
 
 			// Update organization
 
-			PortletPreferences preferences =
-				PrefsPropsUtil.getOrganizationPreferences(organizationId);
-
-			String reminderQueries = ParamUtil.getString(
-				actionRequest, "reminderQueries");
-
-			preferences.setValue("reminderQueries", reminderQueries);
-
-			// Update organization
-
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
 				recursable, regionId, countryId, statusId, comments, addresses,
 				emailAddresses, orgLabors, phones, websites);
+
+			PortletPreferences preferences = organization.getPreferences();
+
+			String reminderQueries = ParamUtil.getString(
+				actionRequest, "reminderQueries");
+
+			preferences.setValue("reminder-queries", reminderQueries);
 
 			preferences.store();
 		}

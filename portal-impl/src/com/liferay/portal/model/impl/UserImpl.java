@@ -75,44 +75,6 @@ public class UserImpl extends UserModelImpl implements User {
 	public UserImpl() {
 	}
 
-	public Set<String> getAvailableReminderQueryQuestions()
-		throws PortalException, SystemException {
-
-		List<Organization> organizations = getOrganizations();
-
-		Set<String> questions = new TreeSet<String>();
-
-		for (Organization organization : organizations) {
-			Set<String> orgQuestions =
-				organization.getAvailableReminderQueryQuestions();
-
-			if (orgQuestions.size() == 0) {
-				Organization parentOrganization =
-					organization.getParentOrganization();
-
-				while ((orgQuestions.size() == 0) &&
-						(parentOrganization != null)) {
-
-					orgQuestions =
-						parentOrganization.getAvailableReminderQueryQuestions();
-
-					parentOrganization =
-						organization.getParentOrganization();
-				}
-			}
-
-			questions.addAll(orgQuestions);
-		}
-
-		if (questions.size() == 0) {
-			questions.addAll(SetUtil.fromArray(
-				PropsUtil.getArray(
-					PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS)));
-		}
-
-		return questions;
-	}
-
 	public Date getBirthday() {
 		return getContact().getBirthday();
 	}
@@ -384,6 +346,44 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return 0;
+	}
+
+	public Set<String> getReminderQueryQuestions()
+		throws PortalException, SystemException {
+
+		Set<String> questions = new TreeSet<String>();
+
+		List<Organization> organizations = getOrganizations();
+
+		for (Organization organization : organizations) {
+			Set<String> organizationQuestions =
+				organization.getReminderQueryQuestions();
+
+			if (organizationQuestions.size() == 0) {
+				Organization parentOrganization =
+					organization.getParentOrganization();
+
+				while ((organizationQuestions.size() == 0) &&
+						(parentOrganization != null)) {
+
+					organizationQuestions =
+						parentOrganization.getReminderQueryQuestions();
+
+					parentOrganization = organization.getParentOrganization();
+				}
+			}
+
+			questions.addAll(organizationQuestions);
+		}
+
+		if (questions.size() == 0) {
+			Set<String> defaultQuestions = SetUtil.fromArray(
+				PropsUtil.getArray(PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS));
+
+			questions.addAll(defaultQuestions);
+		}
+
+		return questions;
 	}
 
 	public long[] getRoleIds() {

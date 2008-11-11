@@ -49,10 +49,6 @@ package com.liferay.portal.model;
  *
  */
 public interface Organization extends OrganizationModel {
-	public java.util.Set<String> getAvailableReminderQueryQuestions()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Organization getParentOrganization()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -66,9 +62,15 @@ public interface Organization extends OrganizationModel {
 
 	public com.liferay.portal.model.Group getGroup();
 
+	public javax.portlet.PortletPreferences getPreferences()
+		throws com.liferay.portal.SystemException;
+
 	public int getPrivateLayoutsPageCount();
 
 	public int getPublicLayoutsPageCount();
+
+	public java.util.Set<String> getReminderQueryQuestions()
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getSuborganizations()
 		throws com.liferay.portal.SystemException;

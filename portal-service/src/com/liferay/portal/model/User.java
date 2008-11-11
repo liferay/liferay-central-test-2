@@ -49,10 +49,6 @@ package com.liferay.portal.model;
  *
  */
 public interface User extends UserModel {
-	public java.util.Set<String> getAvailableReminderQueryQuestions()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public java.util.Date getBirthday();
 
 	public java.lang.String getCompanyMx();
@@ -103,6 +99,10 @@ public interface User extends UserModel {
 	public int getPrivateLayoutsPageCount();
 
 	public int getPublicLayoutsPageCount();
+
+	public java.util.Set<String> getReminderQueryQuestions()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public long[] getRoleIds();
 
