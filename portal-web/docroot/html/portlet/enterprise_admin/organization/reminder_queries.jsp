@@ -61,7 +61,6 @@ String reminderQueriesValue = StringUtil.merge(reminderQueries, StringPool.NEW_L
 
 				String optionStyle = StringPool.BLANK;
 
-				System.out.println("organization.getReminderQueryQuestions(" + locales[i] + "): " + organization.getReminderQueryQuestions(locales[i]));
 				if (!organization.getReminderQueryQuestions(locales[i]).isEmpty()) {
 					optionStyle = "style=\"font-weight: bold\"";
 				}
