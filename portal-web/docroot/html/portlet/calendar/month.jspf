@@ -81,7 +81,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 		<input type="button" value="<liferay-ui:message key="add-event" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(selMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(selDay) %>" /><portlet:param name="year" value="<%= String.valueOf(selYear) %>" /></portlet:renderURL>';" />
 	</c:if>
 
-	<input type="button" value="<liferay-ui:message key="today" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="month" /><portlet:param name="month" value="<%= String.valueOf(curMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(curDay) %>" /><portlet:param name="year" value="<%= String.valueOf(curYear) %>" /></portlet:renderURL>';" />
+	<input type="button" value="<liferay-ui:message key="today" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="month" value="<%= String.valueOf(curMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(curDay) %>" /><portlet:param name="year" value="<%= String.valueOf(curYear) %>" /></portlet:renderURL>';" />
 </div>
 
 <br />

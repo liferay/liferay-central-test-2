@@ -25,53 +25,16 @@
 <%
 Calendar cal = (Calendar)selCal.clone();
 
+int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+
+cal.add(Calendar.DATE, 1 - dayOfWeek);
+
 DateFormat dateFormatDayOfWeek = new SimpleDateFormat("EEE", locale);
 DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 %>
 
-<table class="lfr-table" width="100%">
-<tr>
-	<td>
-		<table class="lfr-table">
-		<tr>
-			<td>
-
-				<%
-				cal.add(Calendar.DATE, -7);
-				%>
-
-				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_left.png" />
-				</a>
-			</td>
-			<td>
-
-				<%
-				cal.add(Calendar.DATE, 7);
-				%>
-
-				<b><%= dateFormatDate.format(Time.getDate(cal)) %> -
-
-				<%
-				cal.add(Calendar.DATE, 6);
-				%>
-
-				<%= dateFormatDate.format(Time.getDate(cal)) %></b>
-			</td>
-			<td>
-
-				<%
-				cal.add(Calendar.DATE, 1);
-				%>
-
-				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png" />
-				</a>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td align="right">
+<div>
+	<div class="event-selector">
 		<select onChange="location.href = '<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=' + this.value;">
 			<option value=""><liferay-ui:message key="all-events" /></option>
 
@@ -86,143 +49,180 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 			%>
 
 		</select>
-	</td>
-</tr>
-</table>
+	</div>
+
+	<table class="date-selector">
+	<tr>
+		<td>
+
+			<%
+			cal.add(Calendar.DATE, -7);
+			%>
+
+			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
+			<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_left.png" />
+			</a>
+		</td>
+		<td>
+
+			<%
+			cal.add(Calendar.DATE, 7);
+			%>
+
+			<liferay-ui:message key="week-of" />
+
+			<%= dateFormatDate.format(Time.getDate(cal)) %>
+		</td>
+		<td>
+
+			<%
+			cal.add(Calendar.DATE, 7);
+			%>
+
+			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
+			<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png" />
+			</a>
+		</td>
+	</tr>
+	</table>
+</div>
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<div>
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
+		<input type="button" value="<liferay-ui:message key="add-event" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(selMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(selDay) %>" /><portlet:param name="year" value="<%= String.valueOf(selYear) %>" /></portlet:renderURL>';" />
+	</c:if>
 
-<%
-cal = (Calendar)selCal.clone();
+	<input type="button" value="<liferay-ui:message key="today" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="month" value="<%= String.valueOf(curMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(curDay) %>" /><portlet:param name="year" value="<%= String.valueOf(curYear) %>" /></portlet:renderURL>';" />
+</div>
 
-for (int i = 0; i < 7; i++) {
-%>
+<br />
 
-	<tr>
-		<td class="portlet-section-header results-header" colspan="5"></td>
-	</tr>
-	<tr>
-		<td class="portlet-section-header results-header" style="padding-left: 1px;"></td>
+<table class="calendar">
+<thead>
+	<tr class="portlet-section-header results-header">
 
 		<%
-		String className = "portlet-font";
+		cal.add(Calendar.DATE, -7);
 
-		if ((cal.get(Calendar.MONTH) == curMonth) &&
-			(cal.get(Calendar.DATE) == curDay) &&
-			(cal.get(Calendar.YEAR) == curYear)) {
+		for (int i = 0; i < 7;  i++) {
+			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
+		%>
 
-			className = "portlet-section-header results-header";
+			<td align="center" height="25" width="<%= (i == 0 || i == 6) ? "15" : "14" %>%">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+				<%= LanguageUtil.get(pageContext, days[daysIndex]) %>
+				</a>
+			</td>
+
+		<%
+			cal.add(Calendar.DATE, 1);
+		}
+
+		cal.add(Calendar.DATE, -7);
+		%>
+
+	</tr>
+</thead>
+<tbody>
+	<tr>
+
+		<%
+		for (int i = 0; i < 7; i++) {
+			String className = StringPool.BLANK;
+
+			if ((cal.get(Calendar.MONTH) == curMonth) &&
+				(cal.get(Calendar.DATE) == curDay) &&
+				(cal.get(Calendar.YEAR) == curYear)) {
+
+				className = "current-day";
+			}
+			else if ((cal.get(Calendar.MONTH) == selMonth) &&
+					 (cal.get(Calendar.DATE) == selDay) &&
+					 (cal.get(Calendar.YEAR) == selYear)) {
+
+				className = "selected-day";
+			}
+		%>
+
+			<td class="<%= className %>" valign="top" height="325" width="<%= (i == 0 || i == 6) ? "15" : "14" %>%">
+				<table border="0" cellpadding="8" cellspacing="0" width="100%">
+				<tr>
+					<td>
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+						<%= dateFormatMonthAndDay.format(Time.getDate(cal)) %>
+						</a>
+					</td>
+					<td align="right">
+						<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+							<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" />
+							</a>
+						</c:if>
+					</td>
+				</tr>
+				</table>
+
+				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+
+				<%
+				List events = CalEventLocalServiceUtil.getEvents(scopeGroupId, cal, eventType);
+
+				Collections.sort(events, new EventTimeComparator(timeZone, locale));
+
+				for (int j = 0; j < events.size(); j++) {
+					CalEvent event = (CalEvent)events.get(j);
+
+					event = event.toEscapedModel();
+
+					boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
+
+					className = "portlet-section-body results-row";
+					String classHoverName = "portlet-section-body-hover results-row hover";
+
+					if (MathUtil.isEven(j)) {
+						className = "portlet-section-alternate results-row alt";
+						classHoverName = "portlet-section-alternate-hover results-row alt hover";
+					}
+				%>
+
+					<tr class="<%= className %>">
+						<td valign="top">
+							<c:choose>
+								<c:when test="<%= allDay %>">
+									<liferay-ui:message key="all-day" />
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="<%= event.isTimeZoneSensitive() %>">
+											<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
+										</c:when>
+										<c:otherwise>
+											<%= dateFormatTime.format(event.getStartDate()) %>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
+							<%= event.getTitle() %>
+							</a>
+						</td>
+					</tr>
+
+				<%
+				}
+				%>
+
+				</table>
+			</td>
+
+		<%
+		cal.add(Calendar.DATE, 1);
 		}
 		%>
 
-		<td class="<%= className %>" valign="top">
-			<table border="0" cellpadding="8" cellspacing="0">
-			<tr>
-				<td class="<%= className %>" style="font-size: x-small;">
-					<b><%= dateFormatDayOfWeek.format(Time.getDate(cal)) %></b><br />
-
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-					<%= dateFormatMonthAndDay.format(Time.getDate(cal)) %>
-					</a>
-
-					<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
-						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-						<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" />
-						</a>
-					</c:if>
-				</td>
-			</tr>
-			</table>
-		</td>
-		<td class="portlet-section-header results-header" style="padding-left: 1px;"></td>
-		<td valign="top" width="99%">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td>
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-					<%
-					List events = CalEventLocalServiceUtil.getEvents(scopeGroupId, cal, eventType);
-
-					Collections.sort(events, new EventTimeComparator(timeZone, locale));
-
-					for (int j = 0; j < events.size(); j++) {
-						CalEvent event = (CalEvent)events.get(j);
-
-						event = event.toEscapedModel();
-
-						boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
-
-						className = "portlet-section-body results-row";
-						String classHoverName = "portlet-section-body-hover results-row hover";
-
-						if (MathUtil.isEven(j)) {
-							className = "portlet-section-alternate results-row alt";
-							classHoverName = "portlet-section-alternate-hover results-row alt hover";
-						}
-					%>
-
-						<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-							<td style="padding-left: 10px;"></td>
-							<td nowrap valign="top">
-								<c:choose>
-									<c:when test="<%= allDay %>">
-										<liferay-ui:message key="all-day" />
-									</c:when>
-									<c:otherwise>
-										<c:choose>
-											<c:when test="<%= event.isTimeZoneSensitive() %>">
-												<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
-											</c:when>
-											<c:otherwise>
-												<%= dateFormatTime.format(event.getStartDate()) %>
-											</c:otherwise>
-										</c:choose>
-
-										&#150;
-
-										<c:choose>
-											<c:when test="<%= event.isTimeZoneSensitive() %>">
-												<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)) %>
-											</c:when>
-											<c:otherwise>
-												<%= dateFormatTime.format(CalUtil.getEndTime(event)) %>
-											</c:otherwise>
-										</c:choose>
-									</c:otherwise>
-								</c:choose>
-							</td>
-							<td style="padding-left: 10px;"></td>
-							<td valign="top" width="99%">
-								<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
-								<%= event.getTitle() %>
-								</a>
-							</td>
-						</tr>
-
-					<%
-					}
-					%>
-
-					</table>
-				</td>
-			</tr>
-			</table>
-		</td>
-		<td class="portlet-section-header results-header" style="padding-left: 1px;"></td>
 	</tr>
-
-	<c:if test="<%= i + 1 == 7 %>">
-		<tr>
-			<td class="portlet-section-header results-header" colspan="5"></td>
-		</tr>
-	</c:if>
-
-<%
-	cal.add(Calendar.DATE, 1);
-}
-%>
-
+</tbody>
 </table>
