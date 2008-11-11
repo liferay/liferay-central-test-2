@@ -119,11 +119,13 @@ public class ExportDataAction extends PortletAction {
 
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
+		byte[] bytes = sb.toString().getBytes();
+		int contentLength = bytes.length;
 		String fileName = title + ".csv";
-		InputStream is = new ByteArrayInputStream(sb.toString().getBytes());
+		InputStream is = new ByteArrayInputStream(bytes);
 		String contentType = ContentTypes.APPLICATION_TEXT;
 
-		ServletResponseUtil.sendFile(response, fileName, is, contentType);
+		ServletResponseUtil.sendFile(response, fileName, contentLength, is, contentType);
 
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}
