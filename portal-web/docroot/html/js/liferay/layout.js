@@ -100,6 +100,8 @@ Liferay.Layout.Columns = {
 
 		instance._counter = 0;
 
+		instance._placeholderCachedObject = jQuery('<div class="ui-sortable-placeholder"></div>');
+
 		var options = {
 			appendTo: 'body',
 			connectWith: [instance._columns],
@@ -108,7 +110,14 @@ Liferay.Layout.Columns = {
 			handle: instance._handleSelector,
 			items: instance._boxSelector,
 			helper: instance._createHelper,
-			//placeholder: 'portlet-sort-helper',
+			placeholder: {
+				element: function() {
+					return instance._placeholderCachedObject;
+				},
+				update: function(container, p) {
+
+				}
+			},
 			tolerance: 'guess',
 			revert:	false,
 			distance: 2,
@@ -261,14 +270,11 @@ Liferay.Layout.Columns = {
 
 	_onStart: function(event, ui) {
 		var instance = this;
-
+		var helperHeight = ui.helper.outerHeight();
+		var cachedPlaceholder = instance._placeholderCachedObject;
 		instance.startDragging();
 
-		var sortColumns = instance.sortColumns.data('sortable');
-
-		if (sortColumns.refreshPositions) {
-			sortColumns.refreshPositions(true);
-		}
+		cachedPlaceholder.height(helperHeight);
 	},
 
 	_onStop: function(event, ui) {
