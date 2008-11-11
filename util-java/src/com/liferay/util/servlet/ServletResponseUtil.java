@@ -123,9 +123,19 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
+		int contentLength = 0;
+
+		sendFile(response, fileName, contentLength, is, contentType);
+	}
+
+	public static void sendFile(
+			HttpServletResponse response, String fileName, int contentLength, InputStream is,
+			String contentType)
+		throws IOException {
+
 		setHeaders(response, fileName, contentType);
 
-		write(response, is);
+		write(response, is, contentLength);
 	}
 
 	public static void write(HttpServletResponse response, String s)
@@ -185,7 +195,17 @@ public class ServletResponseUtil {
 	public static void write(HttpServletResponse response, InputStream is)
 		throws IOException {
 
+		write(response, is, 0);
+	}
+
+	public static void write(HttpServletResponse response, InputStream is, int contentLength)
+		throws IOException {
+
 		OutputStream os = null;
+
+		if (contentLength > 0) {
+			response.setContentLength(contentLength);
+		}
 
 		try {
 			if (!response.isCommitted()) {
