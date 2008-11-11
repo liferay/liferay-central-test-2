@@ -100,7 +100,7 @@ Liferay.Layout.Columns = {
 
 		instance._counter = 0;
 
-		instance._placeholderCachedObject = jQuery('<div class="ui-sortable-placeholder"></div>');
+		instance._placeholderCachedObject = jQuery('<div class="' + instance._placeHolderClass + '"></div>');
 
 		var options = {
 			appendTo: 'body',
@@ -115,7 +115,6 @@ Liferay.Layout.Columns = {
 					return instance._placeholderCachedObject;
 				},
 				update: function(container, p) {
-
 				}
 			},
 			tolerance: 'guess',
@@ -270,8 +269,10 @@ Liferay.Layout.Columns = {
 
 	_onStart: function(event, ui) {
 		var instance = this;
+
 		var helperHeight = ui.helper.outerHeight();
 		var cachedPlaceholder = instance._placeholderCachedObject;
+
 		instance.startDragging();
 
 		cachedPlaceholder.height(helperHeight);
