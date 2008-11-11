@@ -40,9 +40,11 @@
 <%@ page import="com.liferay.portal.UserIdException" %>
 <%@ page import="com.liferay.portal.UserLockoutException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
+<%@ page import="com.liferay.portal.UserReminderQueryException" %>
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>
 <%@ page import="com.liferay.portal.util.OpenIdUtil" %>
+<%@ page import="com.liferay.portlet.login.action.ForgotPasswordAction" %>
 <%@ page import="com.liferay.portlet.login.util.LoginUtil" %>
 
 <%

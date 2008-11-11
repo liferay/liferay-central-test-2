@@ -25,13 +25,19 @@ package com.liferay.portlet.login.action;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.captcha.CaptchaTextException;
+import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.login.util.LoginUtil;
 
@@ -60,13 +66,30 @@ public class ForgotPasswordAction extends PortletAction {
 		throws Exception {
 
 		try {
-			sendPassword(actionRequest);
+			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+				int step = ParamUtil.getInteger(actionRequest, "step");
+
+				if (step == 1) {
+					if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+						CaptchaUtil.check(actionRequest);
+					}
+
+					getUser(actionRequest);
+				}
+				else {
+					sendPassword(actionRequest, actionResponse);
+				}
+			}
+			else {
+				sendPassword(actionRequest, actionResponse);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof CaptchaTextException ||
 				e instanceof NoSuchUserException ||
 				e instanceof SendPasswordException ||
-				e instanceof UserEmailAddressException) {
+				e instanceof UserEmailAddressException ||
+				e instanceof UserReminderQueryException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -92,11 +115,42 @@ public class ForgotPasswordAction extends PortletAction {
 		return mapping.findForward("portlet.login.forgot_password");
 	}
 
+	protected User getUser(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+
+		User user = UserLocalServiceUtil.getUserByEmailAddress(
+			themeDisplay.getCompanyId(), emailAddress);
+
+		actionRequest.setAttribute(ForgotPasswordAction.class.getName(), user);
+
+		return user;
+	}
+
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
-	protected void sendPassword(ActionRequest actionRequest) throws Exception {
+	protected void sendPassword(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+			User user = getUser(actionRequest);
+
+			String answer = ParamUtil.getString(actionRequest, "answer");
+
+			if (!user.getReminderQueryAnswer().equals(answer)) {
+				throw new UserReminderQueryException();
+			}
+		}
+		else if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+			CaptchaUtil.check(actionRequest);
+		}
+
 		PortletPreferences preferences = actionRequest.getPreferences();
 
 		String subject = preferences.getValue(
@@ -105,6 +159,8 @@ public class ForgotPasswordAction extends PortletAction {
 			PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY, null);
 
 		LoginUtil.sendPassword(actionRequest, subject, body);
+
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;

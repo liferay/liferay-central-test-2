@@ -25,43 +25,79 @@
 <%@ include file="/html/portlet/login/init.jsp" %>
 
 <%
-String emailAddress = ParamUtil.getString(request, "emailAddress");
+User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 %>
 
 <form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL />" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= NoSuchUserException.class %>" message="the-email-address-you-requested-is-not-registered-in-our-database" />
 <liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+<liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="Your answer does not match what is in our database." />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="email-address" />
-	</td>
-	<td>
-		<input name="emailAddress" size="30" type="text" value="<%= HtmlUtil.escape(emailAddress) %>" />
-	</td>
-</tr>
-</table>
+<c:choose>
+	<c:when test="<%= user2 == null%>">
 
-<br />
+		<%
+		String emailAddress = ParamUtil.getString(request, "emailAddress");
+		%>
 
-<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
-	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-		<portlet:param name="struts_action" value="/login/captcha" />
-	</portlet:actionURL>
+		<input name="<portlet:namespace />step" type="hidden" value="1" />
 
-	<liferay-ui:captcha url="<%= captchaURL %>" />
-</c:if>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="email-address" />
+			</td>
+			<td>
+				<input name="<portlet:namespace />emailAddress" size="30" type="text" value="<%= HtmlUtil.escape(emailAddress) %>" />
+			</td>
+		</tr>
+		</table>
 
-<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+		<br />
+
+		<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+			<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+				<portlet:param name="struts_action" value="/login/captcha" />
+			</portlet:actionURL>
+
+			<liferay-ui:captcha url="<%= captchaURL %>" />
+		</c:if>
+
+		<input type="submit" value="<liferay-ui:message key='<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED ? "next" : "send-new-password" %>' />" />
+	</c:when>
+	<c:otherwise>
+		<input name="<portlet:namespace />step" type="hidden" value="2" />
+		<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
+
+		<div class="portlet-msg-info">
+			<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
+		</div>
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" />
+			</td>
+			<td>
+				<input name="<portlet:namespace />answer" type="text" />
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+	</c:otherwise>
+</c:choose>
 
 </form>
 
 <%@ include file="/html/portlet/login/navigation.jsp" %>
 
 <script type="text/javascript">
-	Liferay.Util.focusFormField(document.<portlet:namespace />fm.emailAddress);
+	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (user2 == null) ? "emailAddress" : "answer" %>);
 </script>

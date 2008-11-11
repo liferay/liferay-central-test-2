@@ -23,7 +23,6 @@
 package com.liferay.portlet.login.util;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -341,10 +340,6 @@ public class LoginUtil {
 
 		if (!company.isSendPassword()) {
 			return;
-		}
-
-		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(actionRequest);
 		}
 
 		String emailAddress = ParamUtil.getString(request, "emailAddress");
