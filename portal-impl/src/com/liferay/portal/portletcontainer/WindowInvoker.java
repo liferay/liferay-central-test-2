@@ -73,6 +73,7 @@ import com.sun.portal.container.ChannelURLType;
 import com.sun.portal.container.Container;
 import com.sun.portal.container.ContainerFactory;
 import com.sun.portal.container.ContainerRequest;
+import com.sun.portal.container.ContainerResponse;
 import com.sun.portal.container.ContainerType;
 import com.sun.portal.container.ContainerUtil;
 import com.sun.portal.container.EntityID;
@@ -93,6 +94,7 @@ import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import java.net.URL;
 
@@ -111,6 +113,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
+import javax.portlet.MimeResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -127,8 +130,17 @@ import javax.portlet.WindowState;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.w3c.dom.Element;
 
 /**
  * <a href="WindowInvoker.java.html"><b><i>View Source</i></b></a>
@@ -369,6 +381,21 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			renderResponseImpl.setTitle(title);
 
+			List<String> markupHeaders = _getMarkupHeaders(getMarkupResponse);
+
+			if (markupHeaders != null) {
+				List<String> allMarkupHeaders = (List<String>)
+					request.getAttribute(MimeResponse.MARKUP_HEAD_ELEMENT);
+
+				if (allMarkupHeaders == null) {
+					allMarkupHeaders = new ArrayList<String>();
+				}
+				allMarkupHeaders.addAll(markupHeaders);
+
+				request.setAttribute(
+					MimeResponse.MARKUP_HEAD_ELEMENT, allMarkupHeaders);
+			}
+
 			return title;
 		}
 		catch (Exception e) {
@@ -449,6 +476,23 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 	}
 
+	//TODO move to utility class
+	private static String _convertElementToString(Element element) {
+		try {
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = tFactory.newTransformer();
+			transformer.setOutputProperty(
+				OutputKeys.OMIT_XML_DECLARATION, "yes");
+			StringWriter sw = new StringWriter();
+			transformer.transform(new DOMSource(element), new StreamResult(sw));
+			return sw.toString();
+		}
+		catch (TransformerException ex) {
+			_log.warn(ex.toString());
+		}
+		return null;
+	}
+
 	private Profile _getCCPPProfile(HttpServletRequest request) {
 		if (_profile == null) {
 			_profile = PortalProfileFactory.getCCPPProfile(request);
@@ -483,6 +527,33 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		return locale;
+	}
+
+	private List<String> _getMarkupHeaders(
+		ContainerResponse containerResponse) {
+
+		Map<String, List<Element>> elements =
+				containerResponse.getElementProperties();
+
+		List<Element> markupHeadElements = null;
+
+		if (elements != null) {
+			markupHeadElements = elements.get(
+				MimeResponse.MARKUP_HEAD_ELEMENT);
+		}
+
+		List<String> markupHeaders = null;
+
+		if (markupHeadElements != null
+			&& markupHeadElements.size() > 0) {
+
+			markupHeaders = new ArrayList<String>();
+			for(Element element : markupHeadElements) {
+				markupHeaders.add(_convertElementToString(element));
+			}
+		}
+
+		return markupHeaders;
 	}
 
 	private long _getPlid(PortletRequest portletRequest) {

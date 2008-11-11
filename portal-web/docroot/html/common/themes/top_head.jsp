@@ -71,6 +71,26 @@ if (layout != null) {
 <c:if test="<%= portlets != null %>">
 
 	<%
+
+	List<String> allMarkupHeaders = (List<String>) request.getAttribute(MimeResponse.MARKUP_HEAD_ELEMENT);
+
+	if (allMarkupHeaders != null) {
+
+		for (String markupHeader : allMarkupHeaders) {
+	%>
+
+			<%= markupHeader %>
+
+	<%
+		}
+	}
+	%>
+
+</c:if>
+
+<c:if test="<%= portlets != null %>">
+
+	<%
 	Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
