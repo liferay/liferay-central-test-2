@@ -76,22 +76,8 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=10 Minutes"));
 		selenium.select("_129_lockoutDuration",
 			RuntimeVariables.replace("label=5 Minutes"));
-		selenium.click("//input[@value='Save']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a test password policy!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a test password policy!"));
 	}
 }

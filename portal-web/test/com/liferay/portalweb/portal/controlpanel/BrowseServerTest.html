@@ -4,81 +4,81 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddOrganizationTest</title>
+<title>BrowseServerTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddOrganizationTest</td></tr>
+<tr><td rowspan="1" colspan="3">BrowseServerTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Organizations</td>
+	<td>link=Server</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Organizations</td>
+	<td>link=Server</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Add</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_126_name</td>
-	<td>Selenium</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_126_name</td>
-	<td>Selenium</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_126_type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_126_type</td>
-	<td>label=Regular Organization</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//tr[19]/td[8]/ul/li/strong/span</td>
+	<td>//input[@value='Execute']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[1]/nobr/a</td>
+	<td>//input[@value='Execute']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>commentsLink</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_126_comments</td>
-	<td>This is a test comment!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>link=Log Levels</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Update Categories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=System Properties</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>env.ANT_HOME</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Portal Properties</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>admin.email.from.address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shutdown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@value='Shutdown']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=OpenOffice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_137_enabledCheckbox</td>
 	<td></td>
 </tr>
 

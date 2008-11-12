@@ -52,22 +52,7 @@ public class EditCommunityTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Communities']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test Community 2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Test Community 2"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -134,21 +119,6 @@ public class EditCommunityTest extends BaseTestCase {
 				"This is a second temporary Test Community! This community has been edited."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test Community 2 Edited")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Test Community 2 Edited"));
 	}
 }

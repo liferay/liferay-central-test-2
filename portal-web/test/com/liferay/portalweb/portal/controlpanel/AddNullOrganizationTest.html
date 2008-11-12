@@ -4,26 +4,26 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddNullCommunityTest</title>
+<title>AddNullOrganizationTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddNullCommunityTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullOrganizationTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Community']</td>
+	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Community']</td>
+	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
 	<td></td>
 </tr>
 <tr>
@@ -33,12 +33,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Please enter a valid name.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Communities</td>
+	<td>assertTextNotPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

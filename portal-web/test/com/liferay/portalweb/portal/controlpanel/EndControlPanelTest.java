@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.controlpanel;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
@@ -32,6 +33,23 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class EndControlPanelTest extends BaseTestCase {
 	public void testEndControlPanel() throws Exception {
-		selenium.open("/web/guest/home");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Back to My Community")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

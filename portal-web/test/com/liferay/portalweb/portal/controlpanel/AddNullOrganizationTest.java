@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullOrganizationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginsTest extends BaseTestCase {
-	public void testPlugins() throws Exception {
+public class AddNullOrganizationTest extends BaseTestCase {
+	public void testAddNullOrganization() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Plugins")) {
+				if (selenium.isElementPresent("link=Organizations")) {
 					break;
 				}
 			}
@@ -49,16 +49,16 @@ public class PluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Activities"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Classic"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Freeform"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again. "));
+		assertTrue(selenium.isTextPresent("Please enter a valid name."));
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -46,10 +46,19 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(AddUserGroupTest.class);
 		addTestSuite(ApplyUserGroupTest.class);
 		addTestSuite(AddOrganizationTest.class);
+		addTestSuite(AddNullOrganizationTest.class);
 		addTestSuite(AddPasswordPoliciesTest.class);
 		addTestSuite(SettingsTest.class);
 		addTestSuite(MonitoringTest.class);
 		addTestSuite(PluginsTest.class);
+		addTestSuite(AddServerCategoryTest.class);
+		addTestSuite(EditServerCategoryTest.class);
+		addTestSuite(BrowseServerTest.class);
+		addTestSuite(BrowseServerPluginsTest.class);
+		addTestSuite(BrowseServerInstanceTest.class);
+		addTestSuite(AddServerInstanceTest.class);
+		addTestSuite(EditServerInstanceTest.class);
+
 		addTestSuite(EndControlPanelTest.class);
 	}
 

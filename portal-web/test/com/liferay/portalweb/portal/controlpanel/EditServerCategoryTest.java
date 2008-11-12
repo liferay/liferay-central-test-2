@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditServerCategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginsTest extends BaseTestCase {
-	public void testPlugins() throws Exception {
+public class EditServerCategoryTest extends BaseTestCase {
+	public void testEditServerCategory() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Plugins")) {
+				if (selenium.isElementPresent("link=Update Categories")) {
 					break;
 				}
 			}
@@ -49,16 +49,11 @@ public class PluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Update Categories"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Activities"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Classic"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Freeform"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
+		selenium.select("_137_logLevelCategoryTest!",
+			RuntimeVariables.replace("label=ALL"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

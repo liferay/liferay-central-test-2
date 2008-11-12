@@ -131,22 +131,7 @@ public class AddUser3Test extends BaseTestCase {
 		selenium.type("_125_comments",
 			RuntimeVariables.replace("This is a test comment."));
 		selenium.click("//input[@value='Save']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

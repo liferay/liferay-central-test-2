@@ -71,23 +71,7 @@ public class AddNullCommunityTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Please enter a valid name.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Please enter a valid name."));
 		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
 	}

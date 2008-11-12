@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BrowseServerTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginsTest extends BaseTestCase {
-	public void testPlugins() throws Exception {
+public class BrowseServerTest extends BaseTestCase {
+	public void testBrowseServer() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Plugins")) {
+				if (selenium.isElementPresent("link=Server")) {
 					break;
 				}
 			}
@@ -49,16 +49,57 @@ public class PluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Server"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Activities"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Execute']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Execute']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Classic"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Log Levels"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Freeform"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Update Categories")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=System Properties"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("env.ANT_HOME"));
+		selenium.click(RuntimeVariables.replace("link=Portal Properties"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("admin.email.from.address"));
+		selenium.click(RuntimeVariables.replace("link=Shutdown"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//input[@value='Shutdown']"));
+		selenium.click(RuntimeVariables.replace("link=OpenOffice"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("_137_enabledCheckbox"));
 	}
 }

@@ -26,39 +26,25 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddServerInstanceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginsTest extends BaseTestCase {
-	public void testPlugins() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Plugins")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Plugins"));
+public class AddServerInstanceTest extends BaseTestCase {
+	public void testAddServerInstance() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Instances"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Activities"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Classic"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
+		selenium.typeKeys("_135_webId", RuntimeVariables.replace("test.com"));
+		selenium.type("_135_webId", RuntimeVariables.replace("test.com"));
+		selenium.typeKeys("_135_virtualHost", RuntimeVariables.replace("guest"));
+		selenium.type("_135_virtualHost", RuntimeVariables.replace("guest"));
+		selenium.typeKeys("_135_mx", RuntimeVariables.replace("test.com"));
+		selenium.type("_135_mx", RuntimeVariables.replace("test.com"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Freeform"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=test.com"));
 	}
 }

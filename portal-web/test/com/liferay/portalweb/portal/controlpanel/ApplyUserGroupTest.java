@@ -61,7 +61,7 @@ public class ApplyUserGroupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
+		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}
 }
