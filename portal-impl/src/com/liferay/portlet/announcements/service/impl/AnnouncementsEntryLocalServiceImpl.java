@@ -427,7 +427,7 @@ public class AnnouncementsEntryLocalServiceImpl
 
 				bulkAddresses.add(address);
 			}
-			
+
 			if (announcementsDelivery.isSms()) {
 				String smsSn = user.getContact().getSmsSn();
 
