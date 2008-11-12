@@ -127,27 +127,23 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 		var verticalDirection = this._getDragVerticalDirection();
 		var horizontalDirection = this._getDragHorizontalDirection();
 
+		if (!isOverElement) return false;
+
 		if (this.floating) {
-			if (isOverElement) {
 
-				if (horizontalDirection == false) {
-					return false;
-				}
-
-				var direction = horizontalDirection == "right" ? 2 : 1;
-				return direction;
+			if (!horizontalDirection) {
+				return verticalDirection == "down" ? 2 : 1;
 			}
+
+			return horizontalDirection == "right" ? 2 : 1;
 		}
 		else {
-			if (isOverElement) {
 
-				if (verticalDirection == false) {
-					return false;
-				}
-
-				var direction = verticalDirection == "down" ? 2 : 1;
-				return direction;
+			if (!verticalDirection) {
+				return false;
 			}
+
+			return verticalDirection == "down" ? 2 : 1;
 		}
 
 		return false;
