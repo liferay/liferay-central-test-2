@@ -297,6 +297,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
 					long groupId = GetterUtil.getLong(map.get("groupId"));
+					
+					if (map.get("groupId").equals("@group_id@")) {
+						groupId = context.getGroupId();
+					}
 
 					fileEntry = DLFileEntryLocalServiceUtil.
 						getFileEntryByUuidAndGroupId(uuid, groupId);
@@ -324,7 +328,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
+					_log.warn(e);
 				}
 			}
 
@@ -397,6 +401,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
 					long groupId = GetterUtil.getLong(map.get("groupId"));
+					
+					if (map.get("groupId").equals("@group_id@")) {
+						groupId = context.getGroupId();
+					}
 
 					image = IGImageLocalServiceUtil.getImageByUuidAndGroupId(
 						uuid, groupId);
@@ -446,7 +454,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
+					_log.warn(e);
 				}
 			}
 
