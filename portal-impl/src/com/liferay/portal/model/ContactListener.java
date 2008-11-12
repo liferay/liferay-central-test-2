@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class ContactListener implements ModelListener {
@@ -89,54 +88,6 @@ public class ContactListener implements ModelListener {
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
-		}
-	}
-
-	public void onBeforeAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeAddAssociation");
-		}
-	}
-
-	public void onAfterAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterAddAssociation");
-		}
-	}
-
-	public void onBeforeClearAssociation(
-		Object classPKObj, String association) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeClearAssociation");
-		}
-	}
-
-	public void onAfterClearAssociation(
-		Object classPKObj, String association) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterClearAssociation");
-		}
-	}
-
-	public void onBeforeRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeRemoveAssociation");
-		}
-	}
-
-	public void onAfterRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterRemoveAssociation");
 		}
 	}
 

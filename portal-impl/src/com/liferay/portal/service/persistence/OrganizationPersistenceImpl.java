@@ -2453,28 +2453,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long organizationId, long groupId)
-			throws SystemException {
+		protected void add(long organizationId, long groupId) {
 			if (!_persistenceImpl.containsGroup.contains(organizationId, groupId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(organizationId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
-
 				_sqlUpdate.update(new Object[] {
 						new Long(organizationId), new Long(groupId)
 					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(organizationId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
 			}
 		}
 
@@ -2489,22 +2472,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long organizationId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(organizationId,
-						com.liferay.portal.model.Group.class.getName());
-				}
-			}
-
+		protected void clear(long organizationId) {
 			_sqlUpdate.update(new Object[] { new Long(organizationId) });
-
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(organizationId,
-						com.liferay.portal.model.Group.class.getName());
-				}
-			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2515,36 +2484,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long organizationId, long groupId)
-			throws SystemException {
-			if (_persistenceImpl.containsGroup.contains(organizationId, groupId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(organizationId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(organizationId), new Long(groupId)
-					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(organizationId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
-			}
+		protected void remove(long organizationId, long groupId) {
+			_sqlUpdate.update(new Object[] {
+					new Long(organizationId), new Long(groupId)
+				});
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	protected class ContainsUser {
@@ -2583,28 +2531,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long organizationId, long userId)
-			throws SystemException {
+		protected void add(long organizationId, long userId) {
 			if (!_persistenceImpl.containsUser.contains(organizationId, userId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(organizationId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
-
 				_sqlUpdate.update(new Object[] {
 						new Long(organizationId), new Long(userId)
 					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(organizationId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
 			}
 		}
 
@@ -2619,22 +2550,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long organizationId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(organizationId,
-						com.liferay.portal.model.User.class.getName());
-				}
-			}
-
+		protected void clear(long organizationId) {
 			_sqlUpdate.update(new Object[] { new Long(organizationId) });
-
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(organizationId,
-						com.liferay.portal.model.User.class.getName());
-				}
-			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2645,36 +2562,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Orgs WHERE organizationId = ? AND userId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long organizationId, long userId)
-			throws SystemException {
-			if (_persistenceImpl.containsUser.contains(organizationId, userId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(organizationId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(organizationId), new Long(userId)
-					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(organizationId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
-			}
+		protected void remove(long organizationId, long userId) {
+			_sqlUpdate.update(new Object[] {
+					new Long(organizationId), new Long(userId)
+				});
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Orgs ON (Groups_Orgs.groupId = Group_.groupId) WHERE (Groups_Orgs.organizationId = ?)";

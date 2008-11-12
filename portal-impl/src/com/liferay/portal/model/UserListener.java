@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class UserListener implements ModelListener {
@@ -89,54 +88,6 @@ public class UserListener implements ModelListener {
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
-		}
-	}
-
-	public void onBeforeAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeAddAssociation " + association);
-		}
-	}
-
-	public void onAfterAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterAddAssociation " + association);
-		}
-	}
-
-	public void onBeforeClearAssociation(
-		Object classPKObj, String association) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeClearAssociation " + association);
-		}
-	}
-
-	public void onAfterClearAssociation(
-		Object classPKObj, String association) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterClearAssociation " + association);
-		}
-	}
-
-	public void onBeforeRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeRemoveAssociation " + association);
-		}
-	}
-
-	public void onAfterRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterRemoveAssociation " + association);
 		}
 	}
 

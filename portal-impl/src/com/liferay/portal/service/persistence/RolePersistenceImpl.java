@@ -2333,27 +2333,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long roleId, long groupId) throws SystemException {
+		protected void add(long roleId, long groupId) {
 			if (!_persistenceImpl.containsGroup.contains(roleId, groupId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(roleId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
-
 				_sqlUpdate.update(new Object[] {
 						new Long(roleId), new Long(groupId)
 					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(roleId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
 			}
 		}
 
@@ -2368,22 +2352,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long roleId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(roleId,
-						com.liferay.portal.model.Group.class.getName());
-				}
-			}
-
+		protected void clear(long roleId) {
 			_sqlUpdate.update(new Object[] { new Long(roleId) });
-
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(roleId,
-						com.liferay.portal.model.Group.class.getName());
-				}
-			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2394,36 +2364,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Groups_Roles WHERE roleId = ? AND groupId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long roleId, long groupId)
-			throws SystemException {
-			if (_persistenceImpl.containsGroup.contains(roleId, groupId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(roleId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(roleId), new Long(groupId)
-					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(roleId,
-							com.liferay.portal.model.Group.class.getName(),
-							groupId);
-					}
-				}
-			}
+		protected void remove(long roleId, long groupId) {
+			_sqlUpdate.update(new Object[] { new Long(roleId), new Long(groupId) });
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private RolePersistenceImpl _persistenceImpl;
 	}
 
 	protected class ContainsPermission {
@@ -2462,29 +2409,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long roleId, long permissionId)
-			throws SystemException {
+		protected void add(long roleId, long permissionId) {
 			if (!_persistenceImpl.containsPermission.contains(roleId,
 						permissionId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(roleId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
-				}
-
 				_sqlUpdate.update(new Object[] {
 						new Long(roleId), new Long(permissionId)
 					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(roleId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
-				}
 			}
 		}
 
@@ -2499,22 +2429,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long roleId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(roleId,
-						com.liferay.portal.model.Permission.class.getName());
-				}
-			}
-
+		protected void clear(long roleId) {
 			_sqlUpdate.update(new Object[] { new Long(roleId) });
-
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(roleId,
-						com.liferay.portal.model.Permission.class.getName());
-				}
-			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2525,37 +2441,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Roles_Permissions WHERE roleId = ? AND permissionId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long roleId, long permissionId)
-			throws SystemException {
-			if (_persistenceImpl.containsPermission.contains(roleId,
-						permissionId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(roleId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(roleId), new Long(permissionId)
-					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(roleId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
-				}
-			}
+		protected void remove(long roleId, long permissionId) {
+			_sqlUpdate.update(new Object[] {
+					new Long(roleId), new Long(permissionId)
+				});
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private RolePersistenceImpl _persistenceImpl;
 	}
 
 	protected class ContainsUser {
@@ -2594,27 +2488,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long roleId, long userId) throws SystemException {
+		protected void add(long roleId, long userId) {
 			if (!_persistenceImpl.containsUser.contains(roleId, userId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(roleId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
-
 				_sqlUpdate.update(new Object[] {
 						new Long(roleId), new Long(userId)
 					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(roleId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
 			}
 		}
 
@@ -2629,22 +2507,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long roleId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(roleId,
-						com.liferay.portal.model.User.class.getName());
-				}
-			}
-
+		protected void clear(long roleId) {
 			_sqlUpdate.update(new Object[] { new Long(roleId) });
-
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(roleId,
-						com.liferay.portal.model.User.class.getName());
-				}
-			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2655,36 +2519,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Roles WHERE roleId = ? AND userId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long roleId, long userId)
-			throws SystemException {
-			if (_persistenceImpl.containsUser.contains(roleId, userId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(roleId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(roleId), new Long(userId)
-					});
-
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(roleId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
-				}
-			}
+		protected void remove(long roleId, long userId) {
+			_sqlUpdate.update(new Object[] { new Long(roleId), new Long(userId) });
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private RolePersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Roles ON (Groups_Roles.groupId = Group_.groupId) WHERE (Groups_Roles.roleId = ?)";
