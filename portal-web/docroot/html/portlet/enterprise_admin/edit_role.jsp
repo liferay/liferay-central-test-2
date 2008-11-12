@@ -64,7 +64,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			}
 		</script>
 
-		<form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
+		<form class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 		<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
@@ -73,34 +73,26 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
 		<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-		<table class="lfr-table">
+		<fieldset class="block-labels">
 
-		<c:if test="<%= role != null %>">
-			<tr>
-				<td>
-					<liferay-ui:message key="old-name" />
-				</td>
-				<td>
+			<c:if test="<%= role != null %>">
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="old-name" /></label>
+
 					<%= role.getName() %>
-				</td>
-			</tr>
-		</c:if>
+				</div>
+			</c:if>
 
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %>
-			</td>
-			<td>
+			<div class="ctrl-holder">
+				<label><%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %></label>
+
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
-			</td>
-		</tr>
+			</div>
 
-		<c:if test="<%= role != null %>">
-			<tr>
-				<td>
-					<liferay-ui:message key="title" />
-				</td>
-				<td>
+			<c:if test="<%= role != null %>">
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="title" /></label>
+
 					<table class="lfr-table">
 					<tr>
 						<td>
@@ -126,7 +118,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 									}
 								%>
 
-									<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+									<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
 
 								<%
 								}
@@ -163,22 +155,18 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						</td>
 					</tr>
 					</table>
-				</td>
-			</tr>
-		</c:if>
-		<tr>
-			<td>
-				<liferay-ui:message key="description" />
-			</td>
-			<td>
+				</div>
+			</c:if>
+
+			<div class="ctrl-holder">
+				<label><liferay-ui:message key="description" /></label>
+
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="description" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="type" />
-			</td>
-			<td>
+			</div>
+
+			<div class="ctrl-holder">
+				<label><liferay-ui:message key="type" /></label>
+
 				<c:choose>
 					<c:when test="<%= ((role == null) && (type == 0)) %>">
 						<select name="<portlet:namespace/>type">
@@ -196,34 +184,31 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
 					</c:otherwise>
 				</c:choose>
-			</td>
-		</tr>
+			</div>
 
-		<c:if test="<%= role != null %>">
+			<c:if test="<%= role != null %>">
 
-			<%
-			String[] subtypes = null;
+				<%
+				String[] subtypes = null;
 
-			if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
-				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
-			}
-			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-				subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
-			}
-			else if (role.getType() == RoleConstants.TYPE_REGULAR) {
-				subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
-			}
-			else {
-				subtypes = new String[0];
-			}
-			%>
+				if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
+					subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
+				}
+				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+					subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
+				}
+				else if (role.getType() == RoleConstants.TYPE_REGULAR) {
+					subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
+				}
+				else {
+					subtypes = new String[0];
+				}
+				%>
 
-			<c:if test="<%= subtypes.length > 0 %>">
-				<tr>
-					<td>
-						<liferay-ui:message key="subtype" />
-					</td>
-					<td>
+				<c:if test="<%= subtypes.length > 0 %>">
+					<div class="ctrl-holder">
+						<label><liferay-ui:message key="subtype" /></label>
+
 						<select name="<portlet:namespace/>subtype">
 							<option value=""></option>
 
@@ -238,19 +223,17 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 							%>
 
 						</select>
-					</td>
-				</tr>
+					</div>
+				</c:if>
 			</c:if>
-		</c:if>
 
-		</table>
+			<div class="button-holder">
+				<input type="submit" value="<liferay-ui:message key="save" />" />
 
-		<br />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			</div>
 
-		<input type="submit" value="<liferay-ui:message key="save" />" />
-
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
+		</fieldset>
 		</form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
