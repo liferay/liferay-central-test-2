@@ -28,7 +28,12 @@
 	background: #fff;
 	border: 1px solid #777;
 	font-family: monospace;
+	overflow-x: auto;
 	white-space: pre;
+}
+
+.ie6 .portlet-message-boards .code {
+	width: 100%;
 }
 
 .portlet-message-boards .code-lines {
