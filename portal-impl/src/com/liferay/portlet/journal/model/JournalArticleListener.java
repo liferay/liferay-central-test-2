@@ -32,6 +32,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
+ * @author Raymond Augé
  *
  */
 public class JournalArticleListener implements ModelListener {
@@ -54,6 +55,30 @@ public class JournalArticleListener implements ModelListener {
 
 	public void onAfterUpdate(BaseModel model) {
 		clearCache(model);
+	}
+
+	public void onBeforeAddAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
+	}
+
+	public void onAfterAddAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
+	}
+
+	public void onBeforeClearAssociation(
+		Object classPKObj, String association) {
+	}
+
+	public void onAfterClearAssociation(
+		Object classPKObj, String association) {
+	}
+
+	public void onBeforeRemoveAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
+	}
+
+	public void onAfterRemoveAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
 	}
 
 	protected void clearCache(BaseModel model) {

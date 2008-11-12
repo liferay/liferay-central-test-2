@@ -1995,9 +1995,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						_persistenceImpl = persistenceImpl;
 					}
 
-					protected void add(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
+					protected void add(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
 						if (!_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
+
+							if (_listeners.length > 0) {
+								for (ModelListener listener : _listeners) {
+									listener.onBeforeAddAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
+								}
+							}
+
 							_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+
+							if (_listeners.length > 0) {
+								for (ModelListener listener : _listeners) {
+									listener.onAfterAddAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
+								}
+							}
 						}
 					}
 
@@ -2012,8 +2025,21 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?", new int[] {Types.${entitySqlType}});
 					}
 
-					protected void clear(${entity.PKClassName} ${entity.PKVarName}) {
+					protected void clear(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
+
+						if (_listeners.length > 0) {
+							for (ModelListener listener : _listeners) {
+								listener.onBeforeClearAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName());
+							}
+						}
+
 						_sqlUpdate.update(new Object[] { ${pkVarNameWrapper} });
+
+						if (_listeners.length > 0) {
+							for (ModelListener listener : _listeners) {
+								listener.onAfterClearAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName());
+							}
+						}
 					}
 
 					private SqlUpdate _sqlUpdate;
@@ -2024,13 +2050,31 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					protected Remove${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
 						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?", new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}});
+						_persistenceImpl = persistenceImpl;
 					}
 
-					protected void remove(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
-						_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+					protected void remove(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
+						if (_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
+
+							if (_listeners.length > 0) {
+								for (ModelListener listener : _listeners) {
+									listener.onBeforeRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
+								}
+							}
+
+							_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+
+							if (_listeners.length > 0) {
+								for (ModelListener listener : _listeners) {
+									listener.onAfterRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
+								}
+							}
+
+						}
 					}
 
 					private SqlUpdate _sqlUpdate;
+					private ${entity.name}PersistenceImpl _persistenceImpl;
 
 				}
 			</#if>

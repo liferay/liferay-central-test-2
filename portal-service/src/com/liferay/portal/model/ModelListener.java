@@ -28,6 +28,7 @@ import com.liferay.portal.ModelListenerException;
  * <a href="ModelListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public interface ModelListener {
@@ -49,5 +50,23 @@ public interface ModelListener {
 	public void onBeforeUpdate(BaseModel model) throws ModelListenerException;
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException;
+
+	// Add Association
+
+	public void onBeforeAddAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
+
+	public void onAfterAddAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
+
+	// Clear Association
+
+	public void onBeforeClearAssociation(Object classPKObj, String association) throws ModelListenerException;
+
+	public void onAfterClearAssociation(Object classPKObj, String association) throws ModelListenerException;
+
+	// Remove Association
+
+	public void onBeforeRemoveAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
+
+	public void onAfterRemoveAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
 
 }
