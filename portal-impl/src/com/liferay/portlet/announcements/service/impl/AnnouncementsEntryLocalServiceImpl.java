@@ -427,7 +427,8 @@ public class AnnouncementsEntryLocalServiceImpl
 
 				bulkAddresses.add(address);
 			}
-			else if (announcementsDelivery.isSms()) {
+			
+			if (announcementsDelivery.isSms()) {
 				String smsSn = user.getContact().getSmsSn();
 
 				InternetAddress address = new InternetAddress(
