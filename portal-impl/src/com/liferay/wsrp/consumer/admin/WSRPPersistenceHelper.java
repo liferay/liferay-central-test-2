@@ -164,7 +164,6 @@ public class WSRPPersistenceHelper {
 				portlet.setPortletId(portletId);
 				portlet.setTimestamp(System.currentTimeMillis());
 				portlet.setPortletName(portletId);
-				portlet.setInstanceable(true);
 				portlet.setActive(true);
 				portlet.setRemote(true);
 				portlet.setRemoteConsumerId(wsrpPortlet.getConsumerId());
