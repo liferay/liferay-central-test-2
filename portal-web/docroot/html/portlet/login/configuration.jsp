@@ -136,7 +136,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue='<%= PrefsParamUtil.getBoolean(preferences, request, "emailPasswordSentEnabled") %>' />
+						<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue='<%= PrefsParamUtil.getBoolean(preferences, request, "emailPasswordSentEnabled", true) %>' />
 					</td>
 					<td>
 					</td>
@@ -173,7 +173,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 								}
 							%>
 
-								<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+								<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
 
 							<%
 							}
