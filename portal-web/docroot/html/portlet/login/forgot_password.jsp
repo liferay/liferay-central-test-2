@@ -28,7 +28,7 @@
 User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 %>
 
-<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL />" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
@@ -37,63 +37,57 @@ User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="Your answer does not match what is in our database." />
 
-<c:choose>
-	<c:when test="<%= user2 == null%>">
+<fieldset class="block-labels">
+	<c:choose>
+		<c:when test="<%= user2 == null%>">
 
-		<%
-		String emailAddress = ParamUtil.getString(request, "emailAddress");
-		%>
+			<%
+			String emailAddress = ParamUtil.getString(request, "emailAddress");
+			%>
 
-		<input name="<portlet:namespace />step" type="hidden" value="1" />
+			<input name="<portlet:namespace />step" type="hidden" value="1" />
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="email-address" />
-			</td>
-			<td>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
+
 				<input name="<portlet:namespace />emailAddress" size="30" type="text" value="<%= HtmlUtil.escape(emailAddress) %>" />
-			</td>
-		</tr>
-		</table>
+			</div>
 
-		<br />
+			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+				<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+					<portlet:param name="struts_action" value="/login/captcha" />
+				</portlet:actionURL>
 
-		<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
-			<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-				<portlet:param name="struts_action" value="/login/captcha" />
-			</portlet:actionURL>
+				<div class="ctrl-holder">
+					<liferay-ui:captcha url="<%= captchaURL %>" />
+				</div>
+			</c:if>
 
-			<liferay-ui:captcha url="<%= captchaURL %>" />
-		</c:if>
+			<div class="button-holder">
+				<input type="submit" value="<liferay-ui:message key='<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED ? "next" : "send-new-password" %>' />" />
+			</div>
 
-		<input type="submit" value="<liferay-ui:message key='<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED ? "next" : "send-new-password" %>' />" />
-	</c:when>
-	<c:otherwise>
-		<input name="<portlet:namespace />step" type="hidden" value="2" />
-		<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
+		</c:when>
+		<c:otherwise>
+			<input name="<portlet:namespace />step" type="hidden" value="2" />
+			<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
 
-		<div class="portlet-msg-info">
-			<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
-		</div>
+			<div class="portlet-msg-info">
+				<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
+			</div>
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" />
-			</td>
-			<td>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />answer"><liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" /></label>
+
 				<input name="<portlet:namespace />answer" type="text" />
-			</td>
-		</tr>
-		</table>
+			</div>
 
-		<br />
-
-		<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
-	</c:otherwise>
-</c:choose>
-
+			<div class="button-holder">
+				<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+			</div>
+		</c:otherwise>
+	</c:choose>
+</fieldset>
 </form>
 
 <%@ include file="/html/portlet/login/navigation.jsp" %>

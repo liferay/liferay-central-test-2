@@ -80,13 +80,13 @@
 
 				<label for="<portlet:namespace />login"><liferay-ui:message key="<%= loginLabel %>" /></label>
 
-				<input class="lfr-input-text" name="<portlet:namespace />login" type="text" value="<%= HtmlUtil.escape(login) %>" />
+				<input name="<portlet:namespace />login" type="text" value="<%= HtmlUtil.escape(login) %>" />
 			</div>
 
 			<div class="ctrl-holder">
 				<label for="<portlet:namespace />password"><liferay-ui:message key="password" /></label>
 
-				<input class="lfr-input-text" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
+				<input id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
 
 				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 			</div>
