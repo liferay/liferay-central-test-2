@@ -130,6 +130,7 @@ public class AddUserTest extends BaseTestCase {
 		selenium.click("commentsLink");
 		selenium.type("_125_comments",
 			RuntimeVariables.replace("This is a test comment."));
+		assertTrue(selenium.isTextPresent("(Modified)"));
 		selenium.click("//input[@value='Save']");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

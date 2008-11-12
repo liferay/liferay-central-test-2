@@ -37,6 +37,7 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(AddUserTest.class);
 		addTestSuite(AddUser2Test.class);
 		addTestSuite(AddUser3Test.class);
+		addTestSuite(AddNullUserTest.class);
 		addTestSuite(AddCommunitiesTest.class);
 		addTestSuite(AssignCommunitiesTest.class);
 		addTestSuite(AddTemporaryCommunityTest.class);
