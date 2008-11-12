@@ -444,7 +444,9 @@
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
 		</field>
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>

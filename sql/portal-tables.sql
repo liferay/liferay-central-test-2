@@ -961,7 +961,7 @@ create table Role_ (
 	classNameId LONG,
 	classPK LONG,
 	name VARCHAR(75) null,
-	title VARCHAR(75) null,
+	title STRING null,
 	description STRING null,
 	type_ INTEGER,
 	subtype VARCHAR(75) null
