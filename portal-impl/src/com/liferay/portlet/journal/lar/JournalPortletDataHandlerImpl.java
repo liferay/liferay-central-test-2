@@ -296,9 +296,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
-					long groupId = GetterUtil.getLong(map.get("groupId"));
-					
-					if (map.get("groupId").equals("@group_id@")) {
+
+					String groupIdString = map.get("groupId");
+
+					long groupId = GetterUtil.getLong(groupIdString);
+
+					if (groupIdString.equals("@group_id@")) {
 						groupId = context.getGroupId();
 					}
 
@@ -400,9 +403,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (map.containsKey("uuid")) {
 					String uuid = map.get("uuid");
-					long groupId = GetterUtil.getLong(map.get("groupId"));
-					
-					if (map.get("groupId").equals("@group_id@")) {
+
+					String groupIdString = map.get("groupId");
+
+					long groupId = GetterUtil.getLong(groupIdString);
+
+					if (groupIdString.equals("@group_id@")) {
 						groupId = context.getGroupId();
 					}
 
