@@ -28,6 +28,7 @@ import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
  * <a href="LayoutSetListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Raymond Augé
  *
  */
 public class LayoutSetListener implements ModelListener {
@@ -50,6 +51,30 @@ public class LayoutSetListener implements ModelListener {
 
 	public void onAfterUpdate(BaseModel model) {
 		clearCache(model);
+	}
+
+	public void onBeforeAddAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
+	}
+
+	public void onAfterAddAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
+	}
+
+	public void onBeforeClearAssociation(
+		Object classPKObj, String association) {
+	}
+
+	public void onAfterClearAssociation(
+		Object classPKObj, String association) {
+	}
+
+	public void onBeforeRemoveAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
+	}
+
+	public void onAfterRemoveAssociation(
+		Object classPKObj, String association, Object associationPKObj) {
 	}
 
 	protected void clearCache(BaseModel model) {

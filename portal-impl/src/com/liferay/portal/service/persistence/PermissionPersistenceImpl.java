@@ -2113,11 +2113,28 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long permissionId, long groupId) {
+		protected void add(long permissionId, long groupId)
+			throws SystemException {
 			if (!_persistenceImpl.containsGroup.contains(permissionId, groupId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeAddAssociation(permissionId,
+							com.liferay.portal.model.Group.class.getName(),
+							groupId);
+					}
+				}
+
 				_sqlUpdate.update(new Object[] {
 						new Long(permissionId), new Long(groupId)
 					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterAddAssociation(permissionId,
+							com.liferay.portal.model.Group.class.getName(),
+							groupId);
+					}
+				}
 			}
 		}
 
@@ -2132,8 +2149,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long permissionId) {
+		protected void clear(long permissionId) throws SystemException {
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onBeforeClearAssociation(permissionId,
+						com.liferay.portal.model.Group.class.getName());
+				}
+			}
+
 			_sqlUpdate.update(new Object[] { new Long(permissionId) });
+
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onAfterClearAssociation(permissionId,
+						com.liferay.portal.model.Group.class.getName());
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2144,15 +2175,36 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long permissionId, long groupId) {
-			_sqlUpdate.update(new Object[] {
-					new Long(permissionId), new Long(groupId)
-				});
+		protected void remove(long permissionId, long groupId)
+			throws SystemException {
+			if (_persistenceImpl.containsGroup.contains(permissionId, groupId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeRemoveAssociation(permissionId,
+							com.liferay.portal.model.Group.class.getName(),
+							groupId);
+					}
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(permissionId), new Long(groupId)
+					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterRemoveAssociation(permissionId,
+							com.liferay.portal.model.Group.class.getName(),
+							groupId);
+					}
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
+		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
 	protected class ContainsRole {
@@ -2191,11 +2243,28 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long permissionId, long roleId) {
+		protected void add(long permissionId, long roleId)
+			throws SystemException {
 			if (!_persistenceImpl.containsRole.contains(permissionId, roleId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeAddAssociation(permissionId,
+							com.liferay.portal.model.Role.class.getName(),
+							roleId);
+					}
+				}
+
 				_sqlUpdate.update(new Object[] {
 						new Long(permissionId), new Long(roleId)
 					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterAddAssociation(permissionId,
+							com.liferay.portal.model.Role.class.getName(),
+							roleId);
+					}
+				}
 			}
 		}
 
@@ -2210,8 +2279,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long permissionId) {
+		protected void clear(long permissionId) throws SystemException {
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onBeforeClearAssociation(permissionId,
+						com.liferay.portal.model.Role.class.getName());
+				}
+			}
+
 			_sqlUpdate.update(new Object[] { new Long(permissionId) });
+
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onAfterClearAssociation(permissionId,
+						com.liferay.portal.model.Role.class.getName());
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2222,15 +2305,36 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Roles_Permissions WHERE permissionId = ? AND roleId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long permissionId, long roleId) {
-			_sqlUpdate.update(new Object[] {
-					new Long(permissionId), new Long(roleId)
-				});
+		protected void remove(long permissionId, long roleId)
+			throws SystemException {
+			if (_persistenceImpl.containsRole.contains(permissionId, roleId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeRemoveAssociation(permissionId,
+							com.liferay.portal.model.Role.class.getName(),
+							roleId);
+					}
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(permissionId), new Long(roleId)
+					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterRemoveAssociation(permissionId,
+							com.liferay.portal.model.Role.class.getName(),
+							roleId);
+					}
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
+		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
 	protected class ContainsUser {
@@ -2269,11 +2373,28 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long permissionId, long userId) {
+		protected void add(long permissionId, long userId)
+			throws SystemException {
 			if (!_persistenceImpl.containsUser.contains(permissionId, userId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeAddAssociation(permissionId,
+							com.liferay.portal.model.User.class.getName(),
+							userId);
+					}
+				}
+
 				_sqlUpdate.update(new Object[] {
 						new Long(permissionId), new Long(userId)
 					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterAddAssociation(permissionId,
+							com.liferay.portal.model.User.class.getName(),
+							userId);
+					}
+				}
 			}
 		}
 
@@ -2288,8 +2409,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long permissionId) {
+		protected void clear(long permissionId) throws SystemException {
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onBeforeClearAssociation(permissionId,
+						com.liferay.portal.model.User.class.getName());
+				}
+			}
+
 			_sqlUpdate.update(new Object[] { new Long(permissionId) });
+
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onAfterClearAssociation(permissionId,
+						com.liferay.portal.model.User.class.getName());
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -2300,15 +2435,36 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Permissions WHERE permissionId = ? AND userId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long permissionId, long userId) {
-			_sqlUpdate.update(new Object[] {
-					new Long(permissionId), new Long(userId)
-				});
+		protected void remove(long permissionId, long userId)
+			throws SystemException {
+			if (_persistenceImpl.containsUser.contains(permissionId, userId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeRemoveAssociation(permissionId,
+							com.liferay.portal.model.User.class.getName(),
+							userId);
+					}
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(permissionId), new Long(userId)
+					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterRemoveAssociation(permissionId,
+							com.liferay.portal.model.User.class.getName(),
+							userId);
+					}
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
+		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Permissions ON (Groups_Permissions.groupId = Group_.groupId) WHERE (Groups_Permissions.permissionId = ?)";
