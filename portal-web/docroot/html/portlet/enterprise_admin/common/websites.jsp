@@ -30,25 +30,27 @@ long classPK = (Long)request.getAttribute("websites.classPK");
 
 List<Website> websites = Collections.EMPTY_LIST;
 
-String websitesIndexesParam = ParamUtil.getString(renderRequest, "websitesIndexes");
 int[] websitesIndexes = null;
 
+String websitesIndexesParam = ParamUtil.getString(renderRequest, "websitesIndexes");
+
 if (Validator.isNotNull(websitesIndexesParam)) {
-	websitesIndexes = StringUtil.split(websitesIndexesParam, 0);
 	websites = new ArrayList<Website>();
-	
-	for (int index : websitesIndexes) {
+
+	websitesIndexes = StringUtil.split(websitesIndexesParam, 0);
+
+	for (int websitesIndex : websitesIndexes) {
 		websites.add(new WebsiteImpl());
 	}
 }
 else {
-	websitesIndexes = new int[0];
-
 	if (classPK > 0) {
 		websites = WebsiteServiceUtil.getWebsites(className, classPK);
 
-		for (int i = 0; i < websites.size() ; i++) {
-			websitesIndexes = ArrayUtil.append(websitesIndexes, i);
+		websitesIndexes = new int[websites.size()];
+
+		for (int i = 0; i < websites.size(); i++) {
+			websitesIndexes[i] = i;
 		}
 	}
 
@@ -56,7 +58,12 @@ else {
 		websites = new ArrayList<Website>();
 
 		websites.add(new WebsiteImpl());
-		websitesIndexes = ArrayUtil.append(websitesIndexes, 0);
+
+		websitesIndexes = new int[] {0};
+	}
+
+	if (websitesIndexes == null) {
+		websitesIndexes = new int[0];
 	}
 }
 %>
@@ -72,7 +79,8 @@ else {
 
 	<%
 	for (int i = 0; i < websitesIndexes.length; i++) {
-		int index = websitesIndexes[i];
+		int websitesIndex = websitesIndexes[i];
+
 		Website website = websites.get(i);
 	%>
 
@@ -80,13 +88,13 @@ else {
 			<div class="row-fields">
 
 				<%
-				String fieldParam = "websiteId" + index;
+				String fieldParam = "websiteId" + websitesIndex;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
-				fieldParam = "websiteUrl" + index;
+				fieldParam = "websiteUrl" + websitesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -96,7 +104,7 @@ else {
 				</div>
 
 				<%
-				fieldParam = "websiteTypeId" + index;
+				fieldParam = "websiteTypeId" + websitesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -120,14 +128,14 @@ else {
 				</div>
 
 				<%
-				fieldParam = "websitePrimary" + index;
+				fieldParam = "websitePrimary" + websitesIndex;
 				%>
 
 				<div class="ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input <%= website.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />websitePrimary" type="radio" value="<%= index %>" />
+						<input <%= website.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />websitePrimary" type="radio" value="<%= websitesIndex %>" />
 					</label>
 				</div>
 			</div>
