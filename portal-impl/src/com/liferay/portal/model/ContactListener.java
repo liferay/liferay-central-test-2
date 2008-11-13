@@ -33,16 +33,7 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  * @author Raymond Augé
  *
  */
-public class ContactListener implements ModelListener {
-
-	public void onAfterAddAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onAfterClearAssociation(
-		Object classPK, String associationClassName) {
-	}
+public class ContactListener extends BaseModelListener {
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException {
 		try {
@@ -55,14 +46,6 @@ public class ContactListener implements ModelListener {
 		}
 	}
 
-	public void onAfterRemove(BaseModel model) {
-	}
-
-	public void onAfterRemoveAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
 		try {
 			Contact contact = (Contact)model;
@@ -72,29 +55,6 @@ public class ContactListener implements ModelListener {
 		catch (Exception e) {
 			throw new ModelListenerException(e);
 		}
-	}
-
-	public void onBeforeAddAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onBeforeClearAssociation(
-		Object classPK, String associationClassName) {
-	}
-
-	public void onBeforeCreate(BaseModel model) {
-	}
-
-	public void onBeforeRemove(BaseModel model) {
-	}
-
-	public void onBeforeRemoveAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onBeforeUpdate(BaseModel model) {
 	}
 
 }

@@ -32,54 +32,14 @@ import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
  * @author Raymond Augé
  *
  */
-public class PortletPreferencesListener implements ModelListener {
-
-	public void onAfterAddAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onAfterClearAssociation(
-		Object classPK, String associationClassName) {
-	}
-
-	public void onAfterCreate(BaseModel model) {
-	}
+public class PortletPreferencesListener extends BaseModelListener {
 
 	public void onAfterRemove(BaseModel model) {
 		clearCache(model);
 	}
 
-	public void onAfterRemoveAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
 	public void onAfterUpdate(BaseModel model) {
 		clearCache(model);
-	}
-
-	public void onBeforeAddAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onBeforeClearAssociation(
-		Object classPK, String associationClassName) {
-	}
-
-	public void onBeforeCreate(BaseModel model) {
-	}
-
-	public void onBeforeRemove(BaseModel model) {
-	}
-
-	public void onBeforeRemoveAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onBeforeUpdate(BaseModel model) {
 	}
 
 	protected void clearCache(BaseModel model) {

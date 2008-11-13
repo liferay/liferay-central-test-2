@@ -23,38 +23,65 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
 
 /**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseModelListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
-public class UserListener extends BaseModelListener {
+public class BaseModelListener implements ModelListener {
+
+	public void onAfterAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
+	}
+
+	public void onAfterClearAssociation(
+			Object classPK, String associationClassName)
+		throws ModelListenerException {
+	}
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException {
-		try {
-			User user = (User)model;
+	}
 
-			PortalLDAPUtil.exportToLDAP(user);
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
+	public void onAfterRemove(BaseModel model) throws ModelListenerException {
+	}
+
+	public void onAfterRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
 	}
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
-		try {
-			User user = (User)model;
+	}
 
-			PortalLDAPUtil.exportToLDAP(user);
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
+	public void onBeforeAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
+	}
+
+	public void onBeforeClearAssociation(
+			Object classPK, String associationClassName)
+		throws ModelListenerException {
+	}
+
+	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
+	}
+
+	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
+	}
+
+	public void onBeforeRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
+	}
+
+	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
 	}
 
 }

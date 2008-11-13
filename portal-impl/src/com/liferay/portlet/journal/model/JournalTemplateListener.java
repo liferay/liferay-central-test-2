@@ -23,7 +23,7 @@
 package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
@@ -36,54 +36,14 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  * @author Raymond Augé
  *
  */
-public class JournalTemplateListener implements ModelListener {
-
-	public void onAfterAddAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onAfterClearAssociation(
-		Object classPK, String associationClassName) {
-	}
-
-	public void onAfterCreate(BaseModel model) {
-	}
+public class JournalTemplateListener extends BaseModelListener {
 
 	public void onAfterRemove(BaseModel model) {
 		clearCache(model);
 	}
 
-	public void onAfterRemoveAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
 	public void onAfterUpdate(BaseModel model) {
 		clearCache(model);
-	}
-
-	public void onBeforeAddAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onBeforeClearAssociation(
-		Object classPK, String associationClassName) {
-	}
-
-	public void onBeforeCreate(BaseModel model) {
-	}
-
-	public void onBeforeRemove(BaseModel model) {
-	}
-
-	public void onBeforeRemoveAssociation(
-		Object classPK, String associationClassName,
-		Object associationClassPK) {
-	}
-
-	public void onBeforeUpdate(BaseModel model) {
 	}
 
 	protected void clearCache(BaseModel model) {
