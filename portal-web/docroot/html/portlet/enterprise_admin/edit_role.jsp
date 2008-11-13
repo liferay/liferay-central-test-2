@@ -74,7 +74,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
 		<fieldset class="block-labels">
-
 			<c:if test="<%= role != null %>">
 				<div class="ctrl-holder">
 					<label><liferay-ui:message key="old-name" /></label>
@@ -232,8 +231,8 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 			</div>
-
 		</fieldset>
+
 		</form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
