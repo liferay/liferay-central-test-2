@@ -56,7 +56,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, boolean indexable,
-			String articleURL, String[] tagsEntries, String[] categoriesEntries,
+			String articleURL, String[] tagsCategories, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -71,7 +71,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, false, null, null, null,
-			articleURL, null, tagsEntries, categoriesEntries,
+			articleURL, null, tagsCategories, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -87,8 +87,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
-			PortletPreferences preferences, String[] tagsEntries,
-			String[] categoriesEntries, boolean addCommunityPermissions,
+			PortletPreferences preferences, String[] tagsCategories,
+			String[] tagsEntries, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -103,8 +103,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
-			smallFile, images, articleURL, preferences, tagsEntries,
-			categoriesEntries, addCommunityPermissions, addGuestPermissions);
+			smallFile, images, articleURL, preferences, tagsCategories,
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -117,7 +117,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, boolean indexable,
-			String articleURL, String[] tagsEntries, String[] categoriesEntries,
+			String articleURL, String[] tagsCategories, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -132,8 +132,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, false, null, null, null,
-			articleURL, null, tagsEntries, categoriesEntries,
-			communityPermissions, guestPermissions);
+			articleURL, null, tagsCategories, tagsEntries, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -148,8 +148,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
-			PortletPreferences preferences, String[] tagsEntries,
-			String[] categoriesEntries, String[] communityPermissions,
+			PortletPreferences preferences, String[] tagsCategories,
+			String[] tagsEntries, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -164,8 +164,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
-			smallFile, images, articleURL, preferences, tagsEntries,
-			categoriesEntries, communityPermissions, guestPermissions);
+			smallFile, images, articleURL, preferences, tagsCategories,
+			tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle approveArticle(
@@ -291,7 +291,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
 			String articleURL, PortletPreferences preferences,
-			String[] tagsEntries, String[] categoriesEntries)
+			String[] tagsCategories, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
@@ -306,7 +306,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, categoriesEntries);
+			preferences, tagsCategories, tagsEntries);
 	}
 
 	public JournalArticle updateContent(

@@ -92,8 +92,8 @@ public class JournalArticleServiceSoap {
 		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.lang.String articleURL, java.lang.String[] tagsEntries,
-		java.lang.String[] categoriesEntries, boolean addCommunityPermissions,
+		java.lang.String articleURL, java.lang.String[] tagsCategories,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(groupId,
@@ -105,7 +105,7 @@ public class JournalArticleServiceSoap {
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, indexable, articleURL,
-					tagsEntries, categoriesEntries, addCommunityPermissions,
+					tagsCategories, tagsEntries, addCommunityPermissions,
 					addGuestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
@@ -128,8 +128,8 @@ public class JournalArticleServiceSoap {
 		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.lang.String articleURL, java.lang.String[] tagsEntries,
-		java.lang.String[] categoriesEntries,
+		java.lang.String articleURL, java.lang.String[] tagsCategories,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
@@ -142,7 +142,7 @@ public class JournalArticleServiceSoap {
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, indexable, articleURL,
-					tagsEntries, categoriesEntries, communityPermissions,
+					tagsCategories, tagsEntries, communityPermissions,
 					guestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);

@@ -110,7 +110,7 @@ public interface JournalArticleLocalService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -130,7 +130,7 @@ public interface JournalArticleLocalService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -151,7 +151,7 @@ public interface JournalArticleLocalService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -171,7 +171,7 @@ public interface JournalArticleLocalService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -193,7 +193,7 @@ public interface JournalArticleLocalService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -608,7 +608,7 @@ public interface JournalArticleLocalService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries)
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -620,7 +620,7 @@ public interface JournalArticleLocalService {
 
 	public void updateTagsAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries)
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

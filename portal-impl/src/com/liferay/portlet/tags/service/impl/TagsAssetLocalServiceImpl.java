@@ -471,7 +471,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public TagsAsset updateAsset(
 			long userId, long groupId, String className, long classPK,
-			String[] entryNames, String[] categoryNames, Date startDate,
+			String[] categoryNames, String[] entryNames, Date startDate,
 			Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width, Integer priority, boolean sync)

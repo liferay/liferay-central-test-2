@@ -343,7 +343,7 @@ public class TagsAssetLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		long userId, long groupId, java.lang.String className, long classPK,
-		java.lang.String[] entryNames, java.lang.String[] categoryNames,
+		java.lang.String[] categoryNames, java.lang.String[] entryNames,
 		java.util.Date startDate, java.util.Date endDate,
 		java.util.Date publishDate, java.util.Date expirationDate,
 		java.lang.String mimeType, java.lang.String title,
@@ -354,7 +354,7 @@ public class TagsAssetLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateAsset(userId, groupId, className, classPK,
-			entryNames, categoryNames, startDate, endDate, publishDate,
+			categoryNames, entryNames, startDate, endDate, publishDate,
 			expirationDate, mimeType, title, description, summary, url, height,
 			width, priority, sync);
 	}

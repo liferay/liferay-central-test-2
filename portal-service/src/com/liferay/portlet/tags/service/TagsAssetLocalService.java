@@ -259,7 +259,7 @@ public interface TagsAssetLocalService {
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
 		long groupId, java.lang.String className, long classPK,
-		java.lang.String[] entryNames, java.lang.String[] categoryNames,
+		java.lang.String[] categoryNames, java.lang.String[] entryNames,
 		java.util.Date startDate, java.util.Date endDate,
 		java.util.Date publishDate, java.util.Date expirationDate,
 		java.lang.String mimeType, java.lang.String title,

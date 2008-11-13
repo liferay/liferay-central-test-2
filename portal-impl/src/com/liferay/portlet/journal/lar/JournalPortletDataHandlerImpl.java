@@ -720,6 +720,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		PortletPreferences preferences = null;
 
+		String[] tagsCategories = null;
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -798,8 +799,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
 					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, preferences, tagsEntries,
-					null, addCommunityPermissions, addGuestPermissions);
+					smallFile, images, articleURL, preferences, tagsCategories,
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingArticle = JournalArticleLocalServiceUtil.updateArticle(
@@ -817,8 +818,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
 					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, preferences, tagsEntries,
-					null);
+					smallFile, images, articleURL, preferences, tagsCategories,
+					tagsEntries);
 			}
 		}
 		else {
@@ -833,7 +834,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, neverReview, article.getIndexable(),
 				article.getSmallImage(), article.getSmallImageURL(), smallFile,
-				images, articleURL, preferences, tagsEntries, null,
+				images, articleURL, preferences, tagsCategories, tagsEntries,
 				addCommunityPermissions, addGuestPermissions);
 		}
 
