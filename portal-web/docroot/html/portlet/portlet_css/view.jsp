@@ -70,7 +70,7 @@
 					for (int i = 0; i < locales.length; i++) {
 					%>
 
-						<option value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+						<option value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
 
 					<%
 					}

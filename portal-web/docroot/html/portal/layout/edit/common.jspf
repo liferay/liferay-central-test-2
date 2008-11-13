@@ -68,7 +68,7 @@
 							}
 						%>
 
-							<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>" <%= optionStyle %>><%= locales[i].getDisplayName(locales[i]) %></option>
+							<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>" <%= optionStyle %>><%= locales[i].getDisplayName(locale) %></option>
 
 						<%
 						}

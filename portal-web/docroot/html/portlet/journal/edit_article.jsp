@@ -664,7 +664,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							for (int i = 0; i < locales.length; i++) {
 							%>
 
-								<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+								<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
 
 							<%
 							}
