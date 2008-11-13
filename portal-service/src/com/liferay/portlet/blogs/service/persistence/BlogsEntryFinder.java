@@ -39,15 +39,7 @@ public interface BlogsEntryFinder {
 		long organizationId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findPublishedByOrganizationId(
-		long organizationId, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findPublishedByOrganizationIds(
 		java.util.List<Long> organizationIds, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException;
 

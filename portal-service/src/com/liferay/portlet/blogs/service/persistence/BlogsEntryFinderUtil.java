@@ -47,27 +47,11 @@ public class BlogsEntryFinderUtil {
 				   .findByOrganizationId(organizationId, draft, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findPublishedByOrganizationId(
-		long organizationId, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findPublishedByOrganizationId(organizationId, draft, start,
-			end);
-	}
-
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
 		java.util.List<Long> organizationIds, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByOrganizationIds(organizationIds, draft, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findPublishedByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findPublishedByOrganizationIds(organizationIds, draft,
-			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()

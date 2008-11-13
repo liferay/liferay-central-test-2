@@ -94,36 +94,16 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public List<BlogsEntry> getCompanyEntries(long companyId, int max)
 		throws PortalException, SystemException {
 
-		return getCompanyEntries(companyId, max, false);
-	}
-
-	public List<BlogsEntry> getPublishedCompanyEntries(long companyId, int max)
-		throws PortalException, SystemException {
-
-		return getCompanyEntries(companyId, max, true);
-	}
-
-	private List<BlogsEntry> getCompanyEntries(long companyId, int max, boolean onlyPublished)
-		throws PortalException, SystemException {
-
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
 		while ((entries.size() < max) && listNotExhausted) {
-			List<BlogsEntry> entryList;
-
-			if (onlyPublished) {
-				entryList =	blogsEntryLocalService.getPublishedCompanyEntries(
-						companyId, false, lastIntervalStart,
-						lastIntervalStart + max, new EntryDisplayDateComparator());
-			}
-			else {
-				entryList =	blogsEntryLocalService.getCompanyEntries(
+			List<BlogsEntry> entryList =
+				blogsEntryLocalService.getCompanyEntries(
 					companyId, false, lastIntervalStart,
 					lastIntervalStart + max, new EntryDisplayDateComparator());
-			}
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -150,35 +130,11 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return getCompanyEntriesRSS(
-			companyId, max, type, version, displayStyle, feedURL,
-			entryURL, themeDisplay, false);
-	}
-
-	public String getPublishedCompanyEntriesRSS(
-			long companyId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getCompanyEntriesRSS(
-			companyId, max, type, version, displayStyle, feedURL,
-			entryURL, themeDisplay, true);
-	}
-
-	private String getCompanyEntriesRSS(
-			long companyId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay, boolean onlyPublished)
-		throws PortalException, SystemException {
-
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		String name = company.getName();
 		String description = name;
-		List<BlogsEntry> blogsEntries;
-		if (onlyPublished) blogsEntries = getPublishedCompanyEntries(companyId, max);
-		else blogsEntries = getCompanyEntries(companyId, max);
+		List<BlogsEntry> blogsEntries = getCompanyEntries(companyId, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
@@ -208,36 +164,15 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public List<BlogsEntry> getGroupEntries(long groupId, int max)
 		throws PortalException, SystemException {
 
-		return getGroupEntries(groupId, max, false);
-	}
-
-	public List<BlogsEntry> getPublishedGroupEntries(long groupId, int max)
-		throws PortalException, SystemException {
-
-		return getGroupEntries(groupId, max, true);
-	}
-
-	private List<BlogsEntry> getGroupEntries(long groupId, int max, boolean onlyPublished)
-		throws PortalException, SystemException {
-
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
 		while ((entries.size() < max) && listNotExhausted) {
-			List<BlogsEntry> entryList;
-
-			if (onlyPublished) {
-				entryList = blogsEntryLocalService.getPublishedGroupEntries(
-						groupId, false, lastIntervalStart,
-						lastIntervalStart + max);
-			}
-			else {
-				entryList = blogsEntryLocalService.getGroupEntries(
-					groupId, false, lastIntervalStart,
-					lastIntervalStart + max);
-			}
+			List<BlogsEntry> entryList = blogsEntryLocalService.getGroupEntries(
+				groupId, false, lastIntervalStart,
+				lastIntervalStart + max);
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -264,35 +199,11 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return getGroupEntriesRSS(
-			groupId, max, type, version, displayStyle, feedURL,
-			entryURL, themeDisplay, false);
-	}
-
-	public String getPublishedGroupEntriesRSS(
-			long groupId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getGroupEntriesRSS(
-			groupId, max, type, version, displayStyle, feedURL,
-			entryURL, themeDisplay, true);
-	}
-
-	private String getGroupEntriesRSS(
-			long groupId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay, boolean onlyPublished)
-		throws PortalException, SystemException {
-
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		String name = group.getDescriptiveName();
 		String description = name;
-		List<BlogsEntry> blogsEntries;
-		if (onlyPublished) blogsEntries = getPublishedGroupEntries(groupId, max);
-		else blogsEntries = getGroupEntries(groupId, max);
+		List<BlogsEntry> blogsEntries = getGroupEntries(groupId, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
@@ -302,36 +213,15 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public List<BlogsEntry> getOrganizationEntries(long organizationId, int max)
 		throws PortalException, SystemException {
 
-		return getOrganizationEntries(organizationId, max, false);
-	}
-
-	public List<BlogsEntry> getPublishedOrganizationEntries(long organizationId, int max)
-		throws PortalException, SystemException {
-
-	return getOrganizationEntries(organizationId, max, true);
-}
-
-	private List<BlogsEntry> getOrganizationEntries(long organizationId, int max, boolean onlyPublished)
-		throws PortalException, SystemException {
-
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
 		while ((entries.size() < max) && listNotExhausted) {
-			List<BlogsEntry> entryList;
-
-			if (onlyPublished) {
-				entryList = blogsEntryFinder.findPublishedByOrganizationId(
-						organizationId, false, lastIntervalStart,
-						lastIntervalStart + max);
-			}
-			else {
-				entryList = blogsEntryFinder.findByOrganizationId(
-					organizationId, false, lastIntervalStart,
-					lastIntervalStart + max);
-			}
+			List<BlogsEntry> entryList = blogsEntryFinder.findByOrganizationId(
+				organizationId, false, lastIntervalStart,
+				lastIntervalStart + max);
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -358,34 +248,13 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return getOrganizationEntriesRSS(organizationId, max, type, version,
-				displayStyle, feedURL, entryURL, themeDisplay, false);
-	}
-
-	public String getPublishedOrganizationEntriesRSS(
-			long organizationId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getOrganizationEntriesRSS(organizationId, max, type, version,
-				displayStyle, feedURL, entryURL, themeDisplay, true);
-	}
-
-	private String getOrganizationEntriesRSS(
-			long organizationId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay, boolean onlyPublished)
-		throws PortalException, SystemException {
-
 		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
 
 		String name = organization.getName();
 		String description = name;
-		List<BlogsEntry> blogsEntries;
-		if (onlyPublished)  blogsEntries = getPublishedOrganizationEntries(organizationId, max);
-		else blogsEntries = getOrganizationEntries(organizationId, max);
+		List<BlogsEntry> blogsEntries = getOrganizationEntries(
+			organizationId, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
@@ -490,7 +359,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		catch (FeedException fe) {
 			throw new SystemException(fe);
 		}
-		}
+	}
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.BLOGS_RSS_ABSTRACT_LENGTH));
