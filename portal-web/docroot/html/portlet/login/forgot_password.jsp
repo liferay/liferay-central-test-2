@@ -88,6 +88,7 @@ User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 		</c:otherwise>
 	</c:choose>
 </fieldset>
+
 </form>
 
 <%@ include file="/html/portlet/login/navigation.jsp" %>
