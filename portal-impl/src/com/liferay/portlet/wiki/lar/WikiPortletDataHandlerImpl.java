@@ -360,6 +360,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
 
+		String[] tagsCategories = null;
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -387,8 +388,8 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 						userId, nodeId, existingPage.getTitle(), 0,
 						page.getContent(), page.getSummary(), true,
 						page.getFormat(), page.getParentTitle(),
-						page.getRedirectTitle(), tagsEntries, null, preferences,
-						themeDisplay);
+						page.getRedirectTitle(), tagsCategories, tagsEntries,
+						preferences, themeDisplay);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
@@ -396,7 +397,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 						page.getVersion(), page.getContent(), page.getSummary(),
 						true, page.getFormat(), page.getHead(),
 						page.getParentTitle(), page.getRedirectTitle(),
-						tagsEntries, null, preferences, themeDisplay);
+						tagsCategories, tagsEntries, preferences, themeDisplay);
 				}
 			}
 			else {
@@ -404,8 +405,8 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getSummary(), true,
 					page.getFormat(), page.getHead(), page.getParentTitle(),
-					page.getRedirectTitle(), tagsEntries, null, preferences,
-					themeDisplay);
+					page.getRedirectTitle(), tagsCategories, tagsEntries,
+					preferences, themeDisplay);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&

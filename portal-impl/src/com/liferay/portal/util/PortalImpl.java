@@ -418,10 +418,6 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String[] getCategoriesEntries(PortletRequest portletRequest) {
-		return TagsUtil.getCategoriesEntries(portletRequest);
-	}
-
 	public String getCDNHost() {
 		return _cdnHost;
 	}
@@ -1937,6 +1933,10 @@ public class PortalImpl implements Portal {
 
 	public String[] getSystemRoles() {
 		return _allSystemRoles;
+	}
+
+	public String[] getTagsCategories(PortletRequest portletRequest) {
+		return TagsUtil.getTagsCategories(portletRequest);
 	}
 
 	public String[] getTagsEntries(PortletRequest portletRequest) {

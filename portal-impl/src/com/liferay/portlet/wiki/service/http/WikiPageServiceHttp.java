@@ -827,7 +827,7 @@ public class WikiPageServiceHttp {
 		double version, java.lang.String content, java.lang.String summary,
 		boolean minorEdit, java.lang.String format,
 		java.lang.String parentTitle, java.lang.String redirectTitle,
-		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -875,15 +875,15 @@ public class WikiPageServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = tagsEntries;
+			Object paramObj9 = tagsCategories;
 
-			if (tagsEntries == null) {
+			if (tagsCategories == null) {
 				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj10 = categoriesEntries;
+			Object paramObj10 = tagsEntries;
 
-			if (categoriesEntries == null) {
+			if (tagsEntries == null) {
 				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 

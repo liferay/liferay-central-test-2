@@ -86,8 +86,6 @@ public interface Portal {
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse);
 
-	public String[] getCategoriesEntries(PortletRequest portletRequest);
-
 	public String getCDNHost();
 
 	public String getClassName(long classNameId);
@@ -347,6 +345,8 @@ public interface Portal {
 	public String[] getSystemOrganizationRoles();
 
 	public String[] getSystemRoles();
+
+	public String[] getTagsCategories(PortletRequest portletRequest);
 
 	public String[] getTagsEntries(PortletRequest portletRequest);
 

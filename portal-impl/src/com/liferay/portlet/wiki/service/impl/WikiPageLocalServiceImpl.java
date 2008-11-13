@@ -118,20 +118,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		boolean head = true;
 		String parentTitle = null;
 		String redirectTitle = null;
+		String[] tagsCategories = null;
 		String[] tagsEntries = null;
-		String[] categoriesEntries = null;
 
 		return addPage(
 			uuid, userId, nodeId, title, version, content, summary, minorEdit,
-			format, head, parentTitle, redirectTitle, tagsEntries,
-			categoriesEntries, preferences, themeDisplay);
+			format, head, parentTitle, redirectTitle, tagsCategories,
+			tagsEntries, preferences, themeDisplay);
 	}
 
 	public WikiPage addPage(
 			String uuid, long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
 			boolean head, String parentTitle, String redirectTitle,
-			String[] tagsEntries, String[] categoriesEntries,
+			String[] tagsCategories, String[] tagsEntries,
 			PortletPreferences preferences, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -196,7 +196,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(userId, page, tagsEntries, categoriesEntries);
+		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
 
 		// Indexer
 
@@ -323,18 +323,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String format = page.getFormat();
 		String redirectTitle = page.getRedirectTitle();
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), page.getResourcePrimKey(),
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), page.getResourcePrimKey(),
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		String[] categoriesEntries = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey(),
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
-			format, newParentTitle, redirectTitle, tagsEntries,
-			categoriesEntries, preferences, themeDisplay);
+			format, newParentTitle, redirectTitle, tagsCategories, tagsEntries,
+			preferences, themeDisplay);
 
 		List<WikiPage> oldPages = wikiPagePersistence.findByN_T_H(
 			nodeId, title, false);
@@ -791,6 +790,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String uuid = null;
 		double version = WikiPageImpl.DEFAULT_VERSION;
+		String summary = WikiPageImpl.MOVED + " to " + title;
 		String format = page.getFormat();
 		boolean head = true;
 		String parentTitle = page.getParentTitle();
@@ -798,7 +798,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content =
 			StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
 				StringPool.DOUBLE_CLOSE_BRACKET;
-		String summary = WikiPageImpl.MOVED + " to " + title;
 
 		addPage(
 			uuid, userId, nodeId, title, version, content, summary, false,
@@ -818,15 +817,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), page.getResourcePrimKey(),
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), page.getResourcePrimKey(),
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		String[] categoriesEntries = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey(),
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-
-		updateTagsAsset(userId, page, tagsEntries, categoriesEntries);
+		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
 
 		// Indexer
 
@@ -910,8 +908,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage updatePage(
 			long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
-			String parentTitle, String redirectTitle, String[] tagsEntries,
-			String[] categoriesEntries, PortletPreferences preferences,
+			String parentTitle, String redirectTitle, String[] tagsCategories,
+			String[] tagsEntries, PortletPreferences preferences,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -931,7 +929,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return addPage(
 				null, userId, nodeId, title, WikiPageImpl.DEFAULT_VERSION,
 				content, summary, minorEdit, format, true, parentTitle,
-				redirectTitle, tagsEntries, categoriesEntries, preferences,
+				redirectTitle, tagsCategories, tagsEntries, preferences,
 				themeDisplay);
 		}
 
@@ -1002,7 +1000,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(userId, page, tagsEntries, categoriesEntries);
+		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
 
 		// Indexer
 
@@ -1023,13 +1021,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void updateTagsAsset(
-			long userId, WikiPage page, String[] tagsEntries,
-			String[] categoriesEntries)
+			long userId, WikiPage page, String[] tagsCategories,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		tagsAssetLocalService.updateAsset(
 			userId, page.getNode().getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), tagsEntries, categoriesEntries, null,
+			page.getResourcePrimKey(), tagsCategories, tagsEntries, null,
 			null, null, null, ContentTypes.TEXT_HTML, page.getTitle(), null,
 			null, null, 0, 0, null, false);
 	}

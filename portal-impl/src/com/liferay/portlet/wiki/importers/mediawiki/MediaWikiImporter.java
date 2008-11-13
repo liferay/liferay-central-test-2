@@ -166,6 +166,7 @@ public class MediaWikiImporter implements WikiImporter {
 			long authorUserId = getUserId(userId, node, author, usersMap);
 			String parentTitle = readParentTitle(content);
 			String redirectTitle = readRedirectTitle(content);
+			String[] tagsCategories = null;
 			String[] tagsEntries = readTagsEntries(userId, node, content);
 
 			if (Validator.isNull(redirectTitle)) {
@@ -192,7 +193,7 @@ public class MediaWikiImporter implements WikiImporter {
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
 				content, summary, true, "creole", parentTitle,
-				redirectTitle, tagsEntries, null, null, null);
+				redirectTitle, tagsCategories, tagsEntries, null, null);
 		}
 		catch (Exception e) {
 			throw new PortalException("Error importing page " + title, e);

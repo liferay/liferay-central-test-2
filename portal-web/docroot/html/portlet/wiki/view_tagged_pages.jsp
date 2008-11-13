@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
 String tag = ParamUtil.getString(renderRequest, "tag");
+boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
 
 String title = "pages-with-category-x";
 String description = null;

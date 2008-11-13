@@ -107,8 +107,8 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 			sb.append("</b>");
 		}
 		else {
-			portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 			portletURL.setParameter("tag", entry.getName());
+			portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 
 			sb.append("<a href=\"");
 			sb.append(portletURL.toString());

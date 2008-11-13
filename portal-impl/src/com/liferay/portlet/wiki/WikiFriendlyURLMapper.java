@@ -168,7 +168,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (urlFragments.length >= 1) {
 			String urlFragment0 = urlFragments[0];
 
-			if (urlFragment0.equals("tag") || urlFragment0.equals("category")) {
+			if (urlFragment0.equals("category") || urlFragment0.equals("tag")) {
 				if (urlFragments.length >= 2) {
 					addParam(
 						params, "struts_action", "/wiki/view_tagged_pages");
@@ -181,8 +181,8 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 						folksonomy = TagsEntryConstants.FOLKSONOMY_CATEGORY;
 					}
 
-					addParam(params, "folksonomy", folksonomy);
 					addParam(params, "tag", tag);
+					addParam(params, "folksonomy", folksonomy);
 				}
 			}
 			else {

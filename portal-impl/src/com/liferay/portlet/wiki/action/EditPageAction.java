@@ -300,14 +300,12 @@ public class EditPageAction extends PortletAction {
 		String parentTitle = ParamUtil.getString(actionRequest, "parentTitle");
 		String redirectTitle = null;
 
+		String[] tagsCategories = PortalUtil.getTagsCategories(actionRequest);
 		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
-
-		String[] categoriesEntries = PortalUtil.getCategoriesEntries(
-			actionRequest);
 
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,
-			parentTitle, redirectTitle, tagsEntries, categoriesEntries,
+			parentTitle, redirectTitle, tagsCategories, tagsEntries,
 			preferences, themeDisplay);
 	}
 

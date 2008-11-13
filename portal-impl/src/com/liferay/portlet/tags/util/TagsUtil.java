@@ -81,18 +81,14 @@ public class TagsUtil {
 		CharPool.STAR, CharPool.TILDE
 	};
 
-	public static String[] getCategoriesEntries(PortletRequest portletRequest) {
-		String[] tagsCategories = StringUtil.split(
+	public static String[] getTagsCategories(PortletRequest portletRequest) {
+		return StringUtil.split(
 			ParamUtil.getString(portletRequest, "tagsCategories"));
-
-		return tagsCategories;
 	}
 
 	public static String[] getTagsEntries(PortletRequest portletRequest) {
-		String[] tagsEntries = StringUtil.split(
+		return StringUtil.split(
 			ParamUtil.getString(portletRequest, "tagsEntries"));
-
-		return tagsEntries;
 	}
 
 	public static boolean isValidWord(String word) {

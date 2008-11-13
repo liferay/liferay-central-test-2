@@ -165,16 +165,16 @@ public class WikiPageServiceUtil {
 		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
-		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
-		java.lang.String[] categoriesEntries,
+		java.lang.String redirectTitle, java.lang.String[] tagsCategories,
+		java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updatePage(nodeId, title, version, content, summary,
-			minorEdit, format, parentTitle, redirectTitle, tagsEntries,
-			categoriesEntries, preferences, themeDisplay);
+			minorEdit, format, parentTitle, redirectTitle, tagsCategories,
+			tagsEntries, preferences, themeDisplay);
 	}
 
 	public static WikiPageService getService() {

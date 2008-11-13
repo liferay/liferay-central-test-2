@@ -275,8 +275,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	public WikiPage updatePage(
 			long nodeId, String title, double version, String content,
 			String summary, boolean minorEdit, String format,
-			String parentTitle, String redirectTitle, String[] tagsEntries,
-			String[] categoriesEntries, PortletPreferences preferences,
+			String parentTitle, String redirectTitle, String[] tagsCategories,
+			String[] tagsEntries, PortletPreferences preferences,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -285,7 +285,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		return wikiPageLocalService.updatePage(
 			getUserId(), nodeId, title, version, content, summary, minorEdit,
-			format, parentTitle, redirectTitle, tagsEntries, categoriesEntries,
+			format, parentTitle, redirectTitle, tagsCategories, tagsEntries,
 			preferences, themeDisplay);
 	}
 
