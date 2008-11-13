@@ -37,20 +37,25 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  */
 public class JournalArticleListener implements ModelListener {
 
-	public void onBeforeCreate(BaseModel model) {
+	public void onAfterAddAssociation(
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
+	}
+
+	public void onAfterClearAssociation(
+		Object classPK, String associationClassName) {
 	}
 
 	public void onAfterCreate(BaseModel model) {
-	}
-
-	public void onBeforeRemove(BaseModel model) {
 	}
 
 	public void onAfterRemove(BaseModel model) {
 		clearCache(model);
 	}
 
-	public void onBeforeUpdate(BaseModel model) {
+	public void onAfterRemoveAssociation(
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
 	}
 
 	public void onAfterUpdate(BaseModel model) {
@@ -58,27 +63,26 @@ public class JournalArticleListener implements ModelListener {
 	}
 
 	public void onBeforeAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-	}
-
-	public void onAfterAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
 	}
 
 	public void onBeforeClearAssociation(
-		Object classPKObj, String association) {
+		Object classPK, String associationClassName) {
 	}
 
-	public void onAfterClearAssociation(
-		Object classPKObj, String association) {
+	public void onBeforeCreate(BaseModel model) {
+	}
+
+	public void onBeforeRemove(BaseModel model) {
 	}
 
 	public void onBeforeRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
 	}
 
-	public void onAfterRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
+	public void onBeforeUpdate(BaseModel model) {
 	}
 
 	protected void clearCache(BaseModel model) {

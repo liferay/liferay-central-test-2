@@ -25,9 +25,6 @@ package com.liferay.portal.model;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ContactListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -38,10 +35,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ContactListener implements ModelListener {
 
-	public void onBeforeCreate(BaseModel model) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeCreate");
-		}
+	public void onAfterAddAssociation(
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
+	}
+
+	public void onAfterClearAssociation(
+		Object classPK, String associationClassName) {
 	}
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException {
@@ -49,32 +49,18 @@ public class ContactListener implements ModelListener {
 			Contact contact = (Contact)model;
 
 			PortalLDAPUtil.exportToLDAP(contact);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("onAfterCreate");
-			}
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
 		}
 	}
 
-	public void onBeforeRemove(BaseModel model) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeRemove");
-		}
-	}
-
 	public void onAfterRemove(BaseModel model) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterRemove");
-		}
 	}
 
-	public void onBeforeUpdate(BaseModel model) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeUpdate");
-		}
+	public void onAfterRemoveAssociation(
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
 	}
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
@@ -82,10 +68,6 @@ public class ContactListener implements ModelListener {
 			Contact contact = (Contact)model;
 
 			PortalLDAPUtil.exportToLDAP(contact);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("onAfterUpdate");
-			}
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
@@ -93,53 +75,26 @@ public class ContactListener implements ModelListener {
 	}
 
 	public void onBeforeAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeAddAssociation");
-		}
-	}
-
-	public void onAfterAddAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterAddAssociation");
-		}
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
 	}
 
 	public void onBeforeClearAssociation(
-		Object classPKObj, String association) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeClearAssociation");
-		}
+		Object classPK, String associationClassName) {
 	}
 
-	public void onAfterClearAssociation(
-		Object classPKObj, String association) {
+	public void onBeforeCreate(BaseModel model) {
+	}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterClearAssociation");
-		}
+	public void onBeforeRemove(BaseModel model) {
 	}
 
 	public void onBeforeRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onBeforeRemoveAssociation");
-		}
+		Object classPK, String associationClassName,
+		Object associationClassPK) {
 	}
 
-	public void onAfterRemoveAssociation(
-		Object classPKObj, String association, Object associationPKObj) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onAfterRemoveAssociation");
-		}
+	public void onBeforeUpdate(BaseModel model) {
 	}
-
-	private static Log _log = LogFactory.getLog(ContactListener.class);
 
 }

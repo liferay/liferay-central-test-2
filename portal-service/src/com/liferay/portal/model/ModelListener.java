@@ -33,40 +33,44 @@ import com.liferay.portal.ModelListenerException;
  */
 public interface ModelListener {
 
-	//  Create
+	public void onAfterAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException;
 
-	public void onBeforeCreate(BaseModel model) throws ModelListenerException;
+	public void onAfterClearAssociation(
+			Object classPK, String associationClassName)
+		throws ModelListenerException;
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException;
 
-	// Remove
-
-	public void onBeforeRemove(BaseModel model) throws ModelListenerException;
-
 	public void onAfterRemove(BaseModel model) throws ModelListenerException;
 
-	// Update
-
-	public void onBeforeUpdate(BaseModel model) throws ModelListenerException;
+	public void onAfterRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException;
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException;
 
-	// Add Association
+	public void onBeforeAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException;
 
-	public void onBeforeAddAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
+	public void onBeforeClearAssociation(
+			Object classPK, String associationClassName)
+		throws ModelListenerException;
 
-	public void onAfterAddAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
+	public void onBeforeCreate(BaseModel model) throws ModelListenerException;
 
-	// Clear Association
+	public void onBeforeRemove(BaseModel model) throws ModelListenerException;
 
-	public void onBeforeClearAssociation(Object classPKObj, String association) throws ModelListenerException;
+	public void onBeforeRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException;
 
-	public void onAfterClearAssociation(Object classPKObj, String association) throws ModelListenerException;
-
-	// Remove Association
-
-	public void onBeforeRemoveAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
-
-	public void onAfterRemoveAssociation(Object classPKObj, String association, Object associationPKObj) throws ModelListenerException;
+	public void onBeforeUpdate(BaseModel model) throws ModelListenerException;
 
 }
