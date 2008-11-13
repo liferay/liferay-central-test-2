@@ -28,6 +28,7 @@
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
+boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
 String type = ParamUtil.getString(request, "type");
 String tag = ParamUtil.getString(renderRequest, "tag");
 
@@ -151,7 +152,12 @@ else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
 }
 else if (type.equals("tagged_pages")) {
-	emptyResultsMessage = "there-are-no-pages-with-this-tag";
+	if (folksonomy) {
+		emptyResultsMessage = "there-are-no-pages-with-this-tag";
+	}
+	else {
+		emptyResultsMessage = "there-are-no-pages-with-this-category";
+	}
 }
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
@@ -195,7 +201,7 @@ else if (type.equals("recent_changes")) {
 }
 else if (type.equals("tagged_pages")) {
 	long classNameId = PortalUtil.getClassNameId(WikiPage.class.getName());
-	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, new String[] {tag});
+	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, new String[] {tag}, folksonomy);
 	long[] notEntryIds = new long[0];
 	Date now = new Date();
 

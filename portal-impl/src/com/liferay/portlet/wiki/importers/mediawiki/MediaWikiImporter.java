@@ -192,7 +192,7 @@ public class MediaWikiImporter implements WikiImporter {
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
 				content, summary, true, "creole", parentTitle,
-				redirectTitle, tagsEntries, null, null);
+				redirectTitle, tagsEntries, null, null, null);
 		}
 		catch (Exception e) {
 			throw new PortalException("Error importing page " + title, e);

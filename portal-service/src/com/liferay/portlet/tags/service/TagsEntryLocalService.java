@@ -255,6 +255,19 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getEntryNames(boolean folksonomy)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getEntryNames(java.lang.String className,
+		long classPK, boolean folksonomy)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getEntryNames(long classNameId, long classPK,
+		boolean folksonomy) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
 		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,

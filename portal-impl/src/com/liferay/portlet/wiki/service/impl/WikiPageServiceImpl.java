@@ -276,7 +276,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			long nodeId, String title, double version, String content,
 			String summary, boolean minorEdit, String format,
 			String parentTitle, String redirectTitle, String[] tagsEntries,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			String[] categoriesEntries, PortletPreferences preferences,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -284,8 +285,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		return wikiPageLocalService.updatePage(
 			getUserId(), nodeId, title, version, content, summary, minorEdit,
-			format, parentTitle, redirectTitle, tagsEntries, preferences,
-			themeDisplay);
+			format, parentTitle, redirectTitle, tagsEntries, categoriesEntries,
+			preferences, themeDisplay);
 	}
 
 	protected String exportToRSS(

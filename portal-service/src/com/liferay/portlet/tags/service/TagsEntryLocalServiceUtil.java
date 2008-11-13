@@ -324,6 +324,23 @@ public class TagsEntryLocalServiceUtil {
 		return getService().getEntryNames(classNameId, classPK);
 	}
 
+	public static java.lang.String[] getEntryNames(boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return getService().getEntryNames(folksonomy);
+	}
+
+	public static java.lang.String[] getEntryNames(java.lang.String className,
+		long classPK, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return getService().getEntryNames(className, classPK, folksonomy);
+	}
+
+	public static java.lang.String[] getEntryNames(long classNameId,
+		long classPK, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return getService().getEntryNames(classNameId, classPK, folksonomy);
+	}
+
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
 		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,

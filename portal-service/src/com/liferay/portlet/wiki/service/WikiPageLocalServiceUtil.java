@@ -121,6 +121,7 @@ public class WikiPageLocalServiceUtil {
 		java.lang.String summary, boolean minorEdit, java.lang.String format,
 		boolean head, java.lang.String parentTitle,
 		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
+		java.lang.String[] categoriesEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -128,7 +129,7 @@ public class WikiPageLocalServiceUtil {
 		return getService()
 				   .addPage(uuid, userId, nodeId, title, version, content,
 			summary, minorEdit, format, head, parentTitle, redirectTitle,
-			tagsEntries, preferences, themeDisplay);
+			tagsEntries, categoriesEntries, preferences, themeDisplay);
 	}
 
 	public static void addPageAttachments(long nodeId, java.lang.String title,
@@ -396,6 +397,7 @@ public class WikiPageLocalServiceUtil {
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
 		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
+		java.lang.String[] categoriesEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -403,15 +405,16 @@ public class WikiPageLocalServiceUtil {
 		return getService()
 				   .updatePage(userId, nodeId, title, version, content,
 			summary, minorEdit, format, parentTitle, redirectTitle,
-			tagsEntries, preferences, themeDisplay);
+			tagsEntries, categoriesEntries, preferences, themeDisplay);
 	}
 
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.wiki.model.WikiPage page,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, page, tagsEntries);
+		getService()
+			.updateTagsAsset(userId, page, tagsEntries, categoriesEntries);
 	}
 
 	public static void validateTitle(java.lang.String title)

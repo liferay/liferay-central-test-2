@@ -89,6 +89,12 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 	for (TagsEntry entry : entries) {
 		String entryName = entry.getName();
 
+		boolean folksonomy = TagsEntryConstants.FOLKSONOMY_TAG;
+
+		if (entry.isCategory()) {
+			folksonomy = TagsEntryConstants.FOLKSONOMY_CATEGORY;
+		}
+
 		List<TagsEntry> entryChildren = TagsEntryServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
 
 		sb.append("<ul>");
@@ -101,6 +107,7 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 			sb.append("</b>");
 		}
 		else {
+			portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 			portletURL.setParameter("tag", entry.getName());
 
 			sb.append("<a href=\"");

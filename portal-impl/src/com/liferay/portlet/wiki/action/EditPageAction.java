@@ -302,9 +302,13 @@ public class EditPageAction extends PortletAction {
 
 		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
+		String[] categoriesEntries = PortalUtil.getCategoriesEntries(
+			actionRequest);
+
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,
-			parentTitle, redirectTitle, tagsEntries, preferences, themeDisplay);
+			parentTitle, redirectTitle, tagsEntries, categoriesEntries,
+			preferences, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

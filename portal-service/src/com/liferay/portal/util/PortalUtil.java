@@ -79,6 +79,10 @@ public class PortalUtil {
 		getPortal().copyRequestParameters(actionRequest, actionResponse);
 	}
 
+	public static String[] getCategoriesEntries(PortletRequest portletRequest) {
+		return getPortal().getCategoriesEntries(portletRequest);
+	}
+
 	public static String getCDNHost() {
 		return getPortal().getCDNHost();
 	}

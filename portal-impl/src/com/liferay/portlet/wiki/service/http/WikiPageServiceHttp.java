@@ -827,7 +827,7 @@ public class WikiPageServiceHttp {
 		double version, java.lang.String content, java.lang.String summary,
 		boolean minorEdit, java.lang.String format,
 		java.lang.String parentTitle, java.lang.String redirectTitle,
-		java.lang.String[] tagsEntries,
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -881,16 +881,22 @@ public class WikiPageServiceHttp {
 				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj10 = preferences;
+			Object paramObj10 = categoriesEntries;
 
-			if (preferences == null) {
-				paramObj10 = new NullWrapper("javax.portlet.PortletPreferences");
+			if (categoriesEntries == null) {
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = themeDisplay;
+			Object paramObj11 = preferences;
+
+			if (preferences == null) {
+				paramObj11 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj12 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj11 = new NullWrapper(
+				paramObj12 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -899,7 +905,7 @@ public class WikiPageServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;

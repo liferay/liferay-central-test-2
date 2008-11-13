@@ -25,16 +25,17 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
+boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
 String tag = ParamUtil.getString(renderRequest, "tag");
 
-String title = "pages-with-tag-x";
+String title = "pages-with-category-x";
 String description = null;
 
 try {
-	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, tag);
+	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, tag, folksonomy);
 
-	if (tagsEntry.isCategory()) {
-		title = "pages-with-category-x";
+	if (folksonomy) {
+		title = "pages-with-tag-x";
 	}
 
 	TagsProperty tagsProperty = TagsPropertyLocalServiceUtil.getProperty(tagsEntry.getEntryId(), "description");

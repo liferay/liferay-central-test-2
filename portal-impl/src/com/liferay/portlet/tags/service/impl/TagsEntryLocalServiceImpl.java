@@ -436,19 +436,39 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public String[] getEntryNames() throws SystemException {
-		return getEntryNames(getEntries());
+		return getEntryNames(TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public String[] getEntryNames(String className, long classPK)
 		throws SystemException {
 
-		return getEntryNames(getEntries(className, classPK));
+		return getEntryNames(
+			className, classPK, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public String[] getEntryNames(long classNameId, long classPK)
 		throws SystemException {
 
-		return getEntryNames(getEntries(classNameId, classPK));
+		return getEntryNames(
+			classNameId, classPK, TagsEntryConstants.FOLKSONOMY_TAG);
+	}
+
+	public String[] getEntryNames(boolean folksonomy) throws SystemException {
+		return getEntryNames(getEntries(folksonomy));
+	}
+
+	public String[] getEntryNames(
+			String className, long classPK, boolean folksonomy)
+		throws SystemException {
+
+		return getEntryNames(getEntries(className, classPK, folksonomy));
+	}
+
+	public String[] getEntryNames(
+			long classNameId, long classPK, boolean folksonomy)
+		throws SystemException {
+
+		return getEntryNames(getEntries(classNameId, classPK, folksonomy));
 	}
 
 	public List<TagsEntry> getGroupVocabularyEntries(

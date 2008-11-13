@@ -24,7 +24,6 @@ package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -82,13 +81,18 @@ public class TagsUtil {
 		CharPool.STAR, CharPool.TILDE
 	};
 
-	public static String[] getTagsEntries(PortletRequest portletRequest) {
+	public static String[] getCategoriesEntries(PortletRequest portletRequest) {
 		String[] tagsCategories = StringUtil.split(
 			ParamUtil.getString(portletRequest, "tagsCategories"));
+
+		return tagsCategories;
+	}
+
+	public static String[] getTagsEntries(PortletRequest portletRequest) {
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(portletRequest, "tagsEntries"));
 
-		return ArrayUtil.append(tagsEntries, tagsCategories);
+		return tagsEntries;
 	}
 
 	public static boolean isValidWord(String word) {

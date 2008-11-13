@@ -418,6 +418,10 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public String[] getCategoriesEntries(PortletRequest portletRequest) {
+		return TagsUtil.getCategoriesEntries(portletRequest);
+	}
+
 	public String getCDNHost() {
 		return _cdnHost;
 	}

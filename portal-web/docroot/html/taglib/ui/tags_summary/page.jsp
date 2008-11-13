@@ -46,6 +46,7 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 
 				<%
 				for (TagsEntry entry : entries) {
+					portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 					portletURL.setParameter("tag", entry.getName());
 				%>
 

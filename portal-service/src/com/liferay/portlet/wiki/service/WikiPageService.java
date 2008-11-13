@@ -142,7 +142,7 @@ public interface WikiPageService {
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String summary, boolean minorEdit, java.lang.String format,
 		java.lang.String parentTitle, java.lang.String redirectTitle,
-		java.lang.String[] tagsEntries,
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,

@@ -387,7 +387,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 						userId, nodeId, existingPage.getTitle(), 0,
 						page.getContent(), page.getSummary(), true,
 						page.getFormat(), page.getParentTitle(),
-						page.getRedirectTitle(), tagsEntries, preferences,
+						page.getRedirectTitle(), tagsEntries, null, preferences,
 						themeDisplay);
 				}
 				catch (NoSuchPageException nspe) {
@@ -396,7 +396,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 						page.getVersion(), page.getContent(), page.getSummary(),
 						true, page.getFormat(), page.getHead(),
 						page.getParentTitle(), page.getRedirectTitle(),
-						tagsEntries, preferences, themeDisplay);
+						tagsEntries, null, preferences, themeDisplay);
 				}
 			}
 			else {
@@ -404,7 +404,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getSummary(), true,
 					page.getFormat(), page.getHead(), page.getParentTitle(),
-					page.getRedirectTitle(), tagsEntries, preferences,
+					page.getRedirectTitle(), tagsEntries, null, preferences,
 					themeDisplay);
 			}
 

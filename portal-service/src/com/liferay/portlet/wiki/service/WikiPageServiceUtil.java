@@ -166,6 +166,7 @@ public class WikiPageServiceUtil {
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
 		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
+		java.lang.String[] categoriesEntries,
 		javax.portlet.PortletPreferences preferences,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -173,7 +174,7 @@ public class WikiPageServiceUtil {
 		return getService()
 				   .updatePage(nodeId, title, version, content, summary,
 			minorEdit, format, parentTitle, redirectTitle, tagsEntries,
-			preferences, themeDisplay);
+			categoriesEntries, preferences, themeDisplay);
 	}
 
 	public static WikiPageService getService() {
