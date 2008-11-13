@@ -87,6 +87,7 @@ import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseIm
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 
@@ -112,6 +113,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Bruno Farache
  *
  */
 public class JournalArticleLocalServiceImpl
@@ -130,8 +132,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
 			String articleURL, PortletPreferences preferences,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String[] tagsEntries, String[] categoriesEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
@@ -145,8 +147,8 @@ public class JournalArticleLocalServiceImpl
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+			preferences, tagsEntries, categoriesEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -162,8 +164,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
 			String articleURL, PortletPreferences preferences,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String[] tagsEntries, String[] categoriesEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addArticle(
@@ -175,7 +177,8 @@ public class JournalArticleLocalServiceImpl
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			preferences, tagsEntries, categoriesEntries,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -193,7 +196,8 @@ public class JournalArticleLocalServiceImpl
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
 			PortletPreferences preferences, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] categoriesEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addArticle(
@@ -205,7 +209,8 @@ public class JournalArticleLocalServiceImpl
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			preferences, tagsEntries, categoriesEntries,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -222,8 +227,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
 			String articleURL, PortletPreferences preferences,
-			String[] tagsEntries, String[] communityPermissions,
-			String[] guestPermissions)
+			String[] tagsEntries, String[] categoriesEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
@@ -237,8 +242,8 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, null, null, communityPermissions,
-			guestPermissions);
+			preferences, tagsEntries, categoriesEntries, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -255,8 +260,9 @@ public class JournalArticleLocalServiceImpl
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
 			PortletPreferences preferences, String[] tagsEntries,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] categoriesEntries, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Article
@@ -373,7 +379,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(userId, article, tagsEntries);
+		updateTagsAsset(userId, article, tagsEntries, categoriesEntries);
 
 		// Email
 
@@ -715,9 +721,14 @@ public class JournalArticleLocalServiceImpl
 		// Tags
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			JournalArticle.class.getName(), oldArticle.getResourcePrimKey());
+			JournalArticle.class.getName(), oldArticle.getResourcePrimKey(),
+			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		updateTagsAsset(userId, newArticle, tagsEntries);
+		String[] categoriesEntries = tagsEntryLocalService.getEntryNames(
+			JournalArticle.class.getName(), oldArticle.getResourcePrimKey(),
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
+
+		updateTagsAsset(userId, newArticle, tagsEntries, categoriesEntries);
 
 		return newArticle;
 	}
@@ -1681,7 +1692,7 @@ public class JournalArticleLocalServiceImpl
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
 			String articleURL, PortletPreferences preferences,
-			String[] tagsEntries)
+			String[] tagsEntries, String[] categoriesEntries)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1799,7 +1810,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(userId, article, tagsEntries);
+		updateTagsAsset(userId, article, tagsEntries, categoriesEntries);
 
 		// Email
 
@@ -1853,7 +1864,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void updateTagsAsset(
-			long userId, JournalArticle article, String[] tagsEntries)
+			long userId, JournalArticle article, String[] tagsEntries,
+			String[] categoriesEntries)
 		throws PortalException, SystemException {
 
 		// Get the earliest display date and latest expiration date among
@@ -1868,8 +1880,8 @@ public class JournalArticleLocalServiceImpl
 
 		tagsAssetLocalService.updateAsset(
 			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries, null, null,
-			displayDate, expirationDate, ContentTypes.TEXT_HTML,
+			article.getResourcePrimKey(), tagsEntries, categoriesEntries, null,
+			null, displayDate, expirationDate, ContentTypes.TEXT_HTML,
 			article.getTitle(), article.getDescription(), null, null, 0, 0,
 			null, false);
 	}

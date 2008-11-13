@@ -445,6 +445,9 @@ public class EditArticleAction extends PortletAction {
 
 		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
+		String[] categoriesEntries = PortalUtil.getCategoriesEntries(
+			actionRequest);
+
 		String[] communityPermissions = uploadRequest.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = uploadRequest.getParameterValues(
@@ -472,7 +475,7 @@ public class EditArticleAction extends PortletAction {
 				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 				reviewDateHour, reviewDateMinute, neverReview, indexable,
 				smallImage, smallImageURL, smallFile, images, articleURL,
-				actionRequest.getPreferences(), tagsEntries,
+				actionRequest.getPreferences(), tagsEntries, categoriesEntries,
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
@@ -519,7 +522,7 @@ public class EditArticleAction extends PortletAction {
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
 				neverReview, indexable, smallImage, smallImageURL, smallFile,
 				images, articleURL, actionRequest.getPreferences(),
-				tagsEntries);
+				tagsEntries, categoriesEntries);
 		}
 
 		if (approve) {

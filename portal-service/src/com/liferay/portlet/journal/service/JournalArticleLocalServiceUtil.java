@@ -118,8 +118,8 @@ public class JournalArticleLocalServiceUtil {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -131,8 +131,8 @@ public class JournalArticleLocalServiceUtil {
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+			preferences, tagsEntries, categoriesEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -150,8 +150,8 @@ public class JournalArticleLocalServiceUtil {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -163,8 +163,8 @@ public class JournalArticleLocalServiceUtil {
 			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images,
-			articleURL, preferences, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+			articleURL, preferences, tagsEntries, categoriesEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -183,8 +183,8 @@ public class JournalArticleLocalServiceUtil {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -196,8 +196,8 @@ public class JournalArticleLocalServiceUtil {
 			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images,
-			articleURL, preferences, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+			articleURL, preferences, tagsEntries, categoriesEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -215,7 +215,7 @@ public class JournalArticleLocalServiceUtil {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries,
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -229,7 +229,8 @@ public class JournalArticleLocalServiceUtil {
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsEntries, communityPermissions, guestPermissions);
+			preferences, tagsEntries, categoriesEntries, communityPermissions,
+			guestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -248,7 +249,7 @@ public class JournalArticleLocalServiceUtil {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries,
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -264,8 +265,9 @@ public class JournalArticleLocalServiceUtil {
 			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images,
-			articleURL, preferences, tagsEntries, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			articleURL, preferences, tagsEntries, categoriesEntries,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addArticleResources(long groupId,
@@ -824,7 +826,7 @@ public class JournalArticleLocalServiceUtil {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -836,7 +838,7 @@ public class JournalArticleLocalServiceUtil {
 			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images,
-			articleURL, preferences, tagsEntries);
+			articleURL, preferences, tagsEntries, categoriesEntries);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
@@ -849,10 +851,11 @@ public class JournalArticleLocalServiceUtil {
 
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, article, tagsEntries);
+		getService()
+			.updateTagsAsset(userId, article, tagsEntries, categoriesEntries);
 	}
 
 	public static JournalArticleLocalService getService() {

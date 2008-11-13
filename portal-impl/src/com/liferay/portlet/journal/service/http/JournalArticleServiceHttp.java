@@ -87,8 +87,8 @@ public class JournalArticleServiceHttp {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, java.lang.String articleURL,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -186,9 +186,15 @@ public class JournalArticleServiceHttp {
 				paramObj28 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj29 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj29 = categoriesEntries;
 
-			Object paramObj30 = new BooleanWrapper(addGuestPermissions);
+			if (categoriesEntries == null) {
+				paramObj29 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj30 = new BooleanWrapper(addCommunityPermissions);
+
+			Object paramObj31 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"addArticle",
@@ -200,7 +206,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 
 			Object returnObj = null;
@@ -244,8 +250,8 @@ public class JournalArticleServiceHttp {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -369,9 +375,15 @@ public class JournalArticleServiceHttp {
 				paramObj33 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj34 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj34 = categoriesEntries;
 
-			Object paramObj35 = new BooleanWrapper(addGuestPermissions);
+			if (categoriesEntries == null) {
+				paramObj34 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj35 = new BooleanWrapper(addCommunityPermissions);
+
+			Object paramObj36 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"addArticle",
@@ -384,7 +396,7 @@ public class JournalArticleServiceHttp {
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
-						paramObj34, paramObj35
+						paramObj34, paramObj35, paramObj36
 					});
 
 			Object returnObj = null;
@@ -425,7 +437,7 @@ public class JournalArticleServiceHttp {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, java.lang.String articleURL,
-		java.lang.String[] tagsEntries,
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -525,16 +537,22 @@ public class JournalArticleServiceHttp {
 				paramObj28 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj29 = communityPermissions;
+			Object paramObj29 = categoriesEntries;
 
-			if (communityPermissions == null) {
+			if (categoriesEntries == null) {
 				paramObj29 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj30 = guestPermissions;
+			Object paramObj30 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj30 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj31 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj30 = new NullWrapper("[Ljava.lang.String;");
+				paramObj31 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
@@ -547,7 +565,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 
 			Object returnObj = null;
@@ -591,7 +609,7 @@ public class JournalArticleServiceHttp {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries,
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -717,16 +735,22 @@ public class JournalArticleServiceHttp {
 				paramObj33 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj34 = communityPermissions;
+			Object paramObj34 = categoriesEntries;
 
-			if (communityPermissions == null) {
+			if (categoriesEntries == null) {
 				paramObj34 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj35 = guestPermissions;
+			Object paramObj35 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj35 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj36 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj35 = new NullWrapper("[Ljava.lang.String;");
+				paramObj36 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
@@ -740,7 +764,7 @@ public class JournalArticleServiceHttp {
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
-						paramObj34, paramObj35
+						paramObj34, paramObj35, paramObj36
 					});
 
 			Object returnObj = null;
@@ -1272,7 +1296,7 @@ public class JournalArticleServiceHttp {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		javax.portlet.PortletPreferences preferences,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, java.lang.String[] categoriesEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -1398,6 +1422,12 @@ public class JournalArticleServiceHttp {
 				paramObj34 = new NullWrapper("[Ljava.lang.String;");
 			}
 
+			Object paramObj35 = categoriesEntries;
+
+			if (categoriesEntries == null) {
+				paramObj35 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"updateArticle",
 					new Object[] {
@@ -1409,7 +1439,7 @@ public class JournalArticleServiceHttp {
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
-						paramObj34
+						paramObj34, paramObj35
 					});
 
 			Object returnObj = null;
