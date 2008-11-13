@@ -84,7 +84,7 @@ for (int i = 0; i < locales.length; i++) {
 			for (int i = 0; i < locales.length; i++) {
 			%>
 
-				<option <%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) ? "selected" : "" %> style="padding-left: 26px; margin: 1px 1px 1px 1px;" value="<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>"><%= locales[i].getDisplayName(locale) %></option>
+				<option <%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) ? "selected" : "" %> style="padding-left: 26px; margin: 1px 1px 1px 1px;" value="<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>"><%= locales[i].getDisplayName(locales[i]) %></option>
 
 			<%
 			}
@@ -142,7 +142,7 @@ for (int i = 0; i < locales.length; i++) {
 				</c:when>
 				<c:otherwise>
 					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>">
-					<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locale) %>" title="<%= locales[i].getDisplayName(locale) %>" /></a>
+					<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locales[i]) %>" title="<%= locales[i].getDisplayName(locales[i]) %>" /></a>
 				</c:otherwise>
 			</c:choose>
 

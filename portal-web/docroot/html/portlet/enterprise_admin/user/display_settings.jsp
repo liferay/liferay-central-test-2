@@ -44,10 +44,15 @@ String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId");
 
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
+			Locale languageLocale = locale;
+
 			for (Locale curLocale : locales) {
+				if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
+					languageLocale = curLocale;
+				}
 			%>
 
-				<option <%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) ? "selected" : "" %> value="<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>"><%= curLocale.getDisplayName(locale) %></option>
+				<option <%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) ? "selected" : "" %> value="<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>"><%= curLocale.getDisplayName(languageLocale) %></option>
 
 			<%
 			}
