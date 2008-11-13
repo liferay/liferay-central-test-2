@@ -54,6 +54,7 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -215,12 +216,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
+		Date displayDate = new Date();
+		boolean draft = false;
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
 		while ((entries.size() < max) && listNotExhausted) {
 			List<BlogsEntry> entryList = blogsEntryFinder.findByOrganizationId(
-				organizationId, false, lastIntervalStart,
+				organizationId, displayDate, draft, lastIntervalStart,
 				lastIntervalStart + max);
 
 			Iterator<BlogsEntry> itr = entryList.iterator();

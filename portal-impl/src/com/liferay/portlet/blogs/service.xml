@@ -49,21 +49,24 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="G_D" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="draft" />
-		</finder>
-		<finder name="C_D" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="draft" />
-		</finder>
 		<finder name="G_UT" return-type="BlogsEntry">
 			<finder-column name="groupId" />
 			<finder-column name="urlTitle" />
 		</finder>
-		<finder name="G_U_D" return-type="Collection">
+		<finder name="G_D_D" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+			<finder-column name="draft" />
+		</finder>
+		<finder name="C_D_D" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+			<finder-column name="draft" />
+		</finder>
+		<finder name="G_U_D_D" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+			<finder-column name="displayDate" comparator="&lt;" />
 			<finder-column name="draft" />
 		</finder>
 

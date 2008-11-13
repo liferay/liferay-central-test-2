@@ -28,13 +28,17 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.sql.Timestamp;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,19 +60,22 @@ public class BlogsEntryFinderImpl
 	public static String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
 
-	public int countByOrganizationId(long organizationId, boolean draft)
+	public int countByOrganizationId(
+			long organizationId, Date displayDate, boolean draft)
 		throws SystemException {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(organizationId);
 
-		return countByOrganizationIds(organizationIds, draft);
+		return countByOrganizationIds(organizationIds, displayDate, draft);
 	}
 
 	public int countByOrganizationIds(
-			List<Long> organizationIds, boolean draft)
+			List<Long> organizationIds, Date displayDate, boolean draft)
 		throws SystemException {
+
+		Timestamp displayDate_TS = CalendarUtil.getTimestamp(displayDate);
 
 		Session session = null;
 
@@ -93,6 +100,7 @@ public class BlogsEntryFinderImpl
 				qPos.add(organizationId);
 			}
 
+			qPos.add(displayDate_TS);
 			qPos.add(draft);
 
 			Iterator<Long> itr = q.list().iterator();
@@ -116,19 +124,24 @@ public class BlogsEntryFinderImpl
 	}
 
 	public List<BlogsEntry> findByOrganizationId(
-			long organizationId, boolean draft, int start, int end)
+			long organizationId, Date displayDate, boolean draft, int start,
+			int end)
 		throws SystemException {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(organizationId);
 
-		return findByOrganizationIds(organizationIds, draft, start, end);
+		return findByOrganizationIds(
+			organizationIds, displayDate, draft, start, end);
 	}
 
 	public List<BlogsEntry> findByOrganizationIds(
-			List<Long> organizationIds, boolean draft, int start, int end)
+			List<Long> organizationIds, Date displayDate, boolean draft,
+			int start, int end)
 		throws SystemException {
+
+		Timestamp displayDate_TS = CalendarUtil.getTimestamp(displayDate);
 
 		Session session = null;
 
@@ -153,6 +166,7 @@ public class BlogsEntryFinderImpl
 				qPos.add(organizationId);
 			}
 
+			qPos.add(displayDate_TS);
 			qPos.add(draft);
 
 			return (List<BlogsEntry>)QueryUtil.list(

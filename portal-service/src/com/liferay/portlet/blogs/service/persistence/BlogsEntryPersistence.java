@@ -234,79 +234,6 @@ public interface BlogsEntryPersistence {
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
-		long groupId, boolean draft) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
-		long groupId, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
-		long groupId, boolean draft, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry findByG_D_First(
-		long groupId, boolean draft,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry findByG_D_Last(
-		long groupId, boolean draft,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry[] findByG_D_PrevAndNext(
-		long entryId, long groupId, boolean draft,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
-		long companyId, boolean draft)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
-		long companyId, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
-		long companyId, boolean draft, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry findByC_D_First(
-		long companyId, boolean draft,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry findByC_D_Last(
-		long companyId, boolean draft,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry[] findByC_D_PrevAndNext(
-		long entryId, long companyId, boolean draft,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.blogs.model.BlogsEntry findByG_UT(long groupId,
 		java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException,
@@ -317,39 +244,113 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
-		long groupId, long userId, boolean draft)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_D(
+		long groupId, java.util.Date displayDate, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
-		long groupId, long userId, boolean draft, int start, int end)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_D(
+		long groupId, java.util.Date displayDate, boolean draft, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_D(
+		long groupId, java.util.Date displayDate, boolean draft, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
-		long groupId, long userId, boolean draft, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_First(
-		long groupId, long userId, boolean draft,
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_D_D_First(
+		long groupId, java.util.Date displayDate, boolean draft,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_Last(
-		long groupId, long userId, boolean draft,
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_D_D_Last(
+		long groupId, java.util.Date displayDate, boolean draft,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.blogs.model.BlogsEntry[] findByG_U_D_PrevAndNext(
-		long entryId, long groupId, long userId, boolean draft,
+	public com.liferay.portlet.blogs.model.BlogsEntry[] findByG_D_D_PrevAndNext(
+		long entryId, long groupId, java.util.Date displayDate, boolean draft,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D_D(
+		long companyId, java.util.Date displayDate, boolean draft)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D_D(
+		long companyId, java.util.Date displayDate, boolean draft, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D_D(
+		long companyId, java.util.Date displayDate, boolean draft, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsEntry findByC_D_D_First(
+		long companyId, java.util.Date displayDate, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsEntry findByC_D_D_Last(
+		long companyId, java.util.Date displayDate, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsEntry[] findByC_D_D_PrevAndNext(
+		long entryId, long companyId, java.util.Date displayDate,
+		boolean draft, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D_D(
+		long groupId, long userId, java.util.Date displayDate, boolean draft)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D_D(
+		long groupId, long userId, java.util.Date displayDate, boolean draft,
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D_D(
+		long groupId, long userId, java.util.Date displayDate, boolean draft,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_D_First(
+		long groupId, long userId, java.util.Date displayDate, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_D_Last(
+		long groupId, long userId, java.util.Date displayDate, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsEntry[] findByG_U_D_D_PrevAndNext(
+		long entryId, long groupId, long userId, java.util.Date displayDate,
+		boolean draft, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
@@ -392,17 +393,18 @@ public interface BlogsEntryPersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_D(long groupId, boolean draft)
-		throws com.liferay.portal.SystemException;
-
-	public void removeByC_D(long companyId, boolean draft)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
-	public void removeByG_U_D(long groupId, long userId, boolean draft)
+	public void removeByG_D_D(long groupId, java.util.Date displayDate,
+		boolean draft) throws com.liferay.portal.SystemException;
+
+	public void removeByC_D_D(long companyId, java.util.Date displayDate,
+		boolean draft) throws com.liferay.portal.SystemException;
+
+	public void removeByG_U_D_D(long groupId, long userId,
+		java.util.Date displayDate, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -428,19 +430,20 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByG_D(long groupId, boolean draft)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByC_D(long companyId, boolean draft)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByG_U_D(long groupId, long userId, boolean draft)
+	public int countByG_D_D(long groupId, java.util.Date displayDate,
+		boolean draft) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int countByC_D_D(long companyId, java.util.Date displayDate,
+		boolean draft) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int countByG_U_D_D(long groupId, long userId,
+		java.util.Date displayDate, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

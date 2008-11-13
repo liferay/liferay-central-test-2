@@ -29,18 +29,21 @@ package com.liferay.portlet.blogs.service.persistence;
  *
  */
 public interface BlogsEntryFinder {
-	public int countByOrganizationId(long organizationId, boolean draft)
+	public int countByOrganizationId(long organizationId,
+		java.util.Date displayDate, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public int countByOrganizationIds(java.util.List<Long> organizationIds,
-		boolean draft) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
-		long organizationId, boolean draft, int start, int end)
+		java.util.Date displayDate, boolean draft)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
+		long organizationId, java.util.Date displayDate, boolean draft,
+		int start, int end) throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft, int start, int end)
+		java.util.List<Long> organizationIds, java.util.Date displayDate,
+		boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()

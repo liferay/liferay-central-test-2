@@ -29,29 +29,35 @@ package com.liferay.portlet.blogs.service.persistence;
  *
  */
 public class BlogsEntryFinderUtil {
-	public static int countByOrganizationId(long organizationId, boolean draft)
+	public static int countByOrganizationId(long organizationId,
+		java.util.Date displayDate, boolean draft)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByOrganizationId(organizationId, draft);
+		return getFinder()
+				   .countByOrganizationId(organizationId, displayDate, draft);
 	}
 
 	public static int countByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByOrganizationIds(organizationIds, draft);
+		java.util.List<Long> organizationIds, java.util.Date displayDate,
+		boolean draft) throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .countByOrganizationIds(organizationIds, displayDate, draft);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
-		long organizationId, boolean draft, int start, int end)
-		throws com.liferay.portal.SystemException {
+		long organizationId, java.util.Date displayDate, boolean draft,
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationId(organizationId, draft, start, end);
+				   .findByOrganizationId(organizationId, displayDate, draft,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft, int start, int end)
+		java.util.List<Long> organizationIds, java.util.Date displayDate,
+		boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationIds(organizationIds, draft, start, end);
+				   .findByOrganizationIds(organizationIds, displayDate, draft,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()

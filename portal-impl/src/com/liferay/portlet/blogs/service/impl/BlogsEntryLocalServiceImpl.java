@@ -323,7 +323,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long companyId, boolean draft, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByC_D(companyId, draft, start, end);
+		return blogsEntryPersistence.findByC_D_D(
+			companyId, new Date(), draft, start, end);
 	}
 
 	public List<BlogsEntry> getCompanyEntries(
@@ -331,8 +332,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByC_D(
-			companyId, draft, start, end, obc);
+		return blogsEntryPersistence.findByC_D_D(
+			companyId, new Date(), draft, start, end, obc);
 	}
 
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
@@ -342,7 +343,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public int getCompanyEntriesCount(long companyId, boolean draft)
 		throws SystemException {
 
-		return blogsEntryPersistence.countByC_D(companyId, draft);
+		return blogsEntryPersistence.countByC_D_D(companyId, new Date(), draft);
 	}
 
 	public BlogsEntry[] getEntriesPrevAndNext(long entryId)
@@ -383,7 +384,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long groupId, boolean draft, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_D(groupId, draft, start, end);
+		return blogsEntryPersistence.findByG_D_D(
+			groupId, new Date(), draft, start, end);
 	}
 
 	public List<BlogsEntry> getGroupEntries(
@@ -391,7 +393,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_D(groupId, draft, start, end, obc);
+		return blogsEntryPersistence.findByG_D_D(
+			groupId, new Date(), draft, start, end, obc);
 	}
 
 	public int getGroupEntriesCount(long groupId) throws SystemException {
@@ -401,7 +404,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public int getGroupEntriesCount(long groupId, boolean draft)
 		throws SystemException {
 
-		return blogsEntryPersistence.countByG_D(groupId, draft);
+		return blogsEntryPersistence.countByG_D_D(groupId, new Date(), draft);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
@@ -424,8 +427,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long groupId, long userId, boolean draft, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_U_D(
-			groupId, userId, draft, start, end);
+		return blogsEntryPersistence.findByG_U_D_D(
+			groupId, userId, new Date(), draft, start, end);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
@@ -433,8 +436,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_U_D(
-			groupId, userId, draft, start, end, obc);
+		return blogsEntryPersistence.findByG_U_D_D(
+			groupId, userId, new Date(), draft, start, end, obc);
 	}
 
 	public int getGroupUserEntriesCount(long groupId, long userId)
@@ -447,7 +450,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long groupId, long userId, boolean draft)
 		throws SystemException {
 
-		return blogsEntryPersistence.countByG_U_D(groupId, userId, draft);
+		return blogsEntryPersistence.countByG_U_D_D(
+			groupId, userId, new Date(), draft);
 	}
 
 	public List<BlogsEntry> getNoAssetEntries() throws SystemException {
@@ -459,14 +463,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return blogsEntryFinder.findByOrganizationId(
-			organizationId, draft, start, end);
+			organizationId, new Date(), draft, start, end);
 	}
 
 	public int getOrganizationEntriesCount(long organizationId, boolean draft)
 		throws SystemException {
 
 		return blogsEntryFinder.countByOrganizationId(
-			organizationId, draft);
+			organizationId, new Date(), draft);
 	}
 
 	public String getUrlTitle(long entryId, String title) {

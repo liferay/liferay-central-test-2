@@ -15,6 +15,7 @@
 					(Users_Orgs.userId = User_.userId)
 			WHERE
 				[$ORGANIZATION_ID$] AND
+				(BlogsEntry.displayDate < ?) AND
 				(BlogsEntry.draft = ?)
 		]]>
 	</sql>
@@ -32,6 +33,7 @@
 					(Users_Orgs.userId = User_.userId)
 			WHERE
 				[$ORGANIZATION_ID$] AND
+				(BlogsEntry.displayDate < ?) AND
 				(BlogsEntry.draft = ?)
 			ORDER BY
 				BlogsEntry.displayDate DESC
