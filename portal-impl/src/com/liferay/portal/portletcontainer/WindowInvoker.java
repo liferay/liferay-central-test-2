@@ -153,7 +153,7 @@ import org.w3c.dom.Element;
 public class WindowInvoker extends InvokerPortletImpl {
 
 	public void init(PortletConfig portletConfig) throws PortletException {
-		if (_remotePortlet){
+		if (_remotePortlet) {
 			_portletConfig = portletConfig;
 		}
 		else {
@@ -742,8 +742,16 @@ public class WindowInvoker extends InvokerPortletImpl {
 		containerRequest.setUserID(_remoteUser);
 		containerRequest.setUserPrincipal(_userPrincipal);
 		containerRequest.setLocale(_getLocale(request, portletRequest));
-		containerRequest.setUserInfo(
-			UserInfoFactory.getUserInfo(_remoteUserId, _portletModel));
+		
+		Map userInfoMap = UserInfoFactory.getUserInfo(
+			_remoteUserId, _portletModel);
+		
+		if (_remotePortlet){
+			userInfoMap.remove("user.name.random");
+		}
+		
+		containerRequest.setUserInfo(userInfoMap);
+			
 
 		containerRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
