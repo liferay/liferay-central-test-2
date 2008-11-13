@@ -91,7 +91,7 @@ User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 
 </form>
 
-<%@ include file="/html/portlet/login/navigation.jsp" %>
+<%@ include file="/html/portlet/login/navigation.jspf" %>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (user2 == null) ? "emailAddress" : "answer" %>);

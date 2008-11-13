@@ -106,7 +106,7 @@
 
 		</form>
 
-		<%@ include file="/html/portlet/login/navigation.jsp" %>
+		<%@ include file="/html/portlet/login/navigation.jspf" %>
 
 		<script type="text/javascript">
 			jQuery(

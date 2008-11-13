@@ -163,7 +163,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 </form>
 
-<%@ include file="/html/portlet/login/navigation.jsp" %>
+<%@ include file="/html/portlet/login/navigation.jspf" %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
