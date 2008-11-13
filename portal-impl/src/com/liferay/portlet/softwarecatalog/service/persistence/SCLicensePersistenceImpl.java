@@ -1582,12 +1582,29 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long licenseId, long productEntryId) {
+		protected void add(long licenseId, long productEntryId)
+			throws SystemException {
 			if (!_persistenceImpl.containsSCProductEntry.contains(licenseId,
 						productEntryId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeAddAssociation(licenseId,
+							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+							productEntryId);
+					}
+				}
+
 				_sqlUpdate.update(new Object[] {
 						new Long(licenseId), new Long(productEntryId)
 					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterAddAssociation(licenseId,
+							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+							productEntryId);
+					}
+				}
 			}
 		}
 
@@ -1603,8 +1620,22 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long licenseId) {
+		protected void clear(long licenseId) throws SystemException {
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onBeforeClearAssociation(licenseId,
+						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName());
+				}
+			}
+
 			_sqlUpdate.update(new Object[] { new Long(licenseId) });
+
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onAfterClearAssociation(licenseId,
+						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName());
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -1615,15 +1646,37 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM SCLicenses_SCProductEntries WHERE licenseId = ? AND productEntryId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long licenseId, long productEntryId) {
-			_sqlUpdate.update(new Object[] {
-					new Long(licenseId), new Long(productEntryId)
-				});
+		protected void remove(long licenseId, long productEntryId)
+			throws SystemException {
+			if (_persistenceImpl.containsSCProductEntry.contains(licenseId,
+						productEntryId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeRemoveAssociation(licenseId,
+							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+							productEntryId);
+					}
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(licenseId), new Long(productEntryId)
+					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterRemoveAssociation(licenseId,
+							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+							productEntryId);
+					}
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
+		private SCLicensePersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETSCPRODUCTENTRIES = "SELECT {SCProductEntry.*} FROM SCProductEntry INNER JOIN SCLicenses_SCProductEntries ON (SCLicenses_SCProductEntries.productEntryId = SCProductEntry.productEntryId) WHERE (SCLicenses_SCProductEntries.licenseId = ?)";

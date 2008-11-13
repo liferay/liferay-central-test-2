@@ -1384,11 +1384,28 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long assetId, long entryId) {
+		protected void add(long assetId, long entryId)
+			throws SystemException {
 			if (!_persistenceImpl.containsTagsEntry.contains(assetId, entryId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeAddAssociation(assetId,
+							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+							entryId);
+					}
+				}
+
 				_sqlUpdate.update(new Object[] {
 						new Long(assetId), new Long(entryId)
 					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterAddAssociation(assetId,
+							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+							entryId);
+					}
+				}
 			}
 		}
 
@@ -1403,8 +1420,22 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long assetId) {
+		protected void clear(long assetId) throws SystemException {
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onBeforeClearAssociation(assetId,
+						com.liferay.portlet.tags.model.TagsEntry.class.getName());
+				}
+			}
+
 			_sqlUpdate.update(new Object[] { new Long(assetId) });
+
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onAfterClearAssociation(assetId,
+						com.liferay.portlet.tags.model.TagsEntry.class.getName());
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -1415,14 +1446,36 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long assetId, long entryId) {
-			_sqlUpdate.update(new Object[] { new Long(assetId), new Long(
-						entryId) });
+		protected void remove(long assetId, long entryId)
+			throws SystemException {
+			if (_persistenceImpl.containsTagsEntry.contains(assetId, entryId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeRemoveAssociation(assetId,
+							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+							entryId);
+					}
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(assetId), new Long(entryId)
+					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterRemoveAssociation(assetId,
+							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+							entryId);
+					}
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
+		private TagsAssetPersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETTAGSENTRIES = "SELECT {TagsEntry.*} FROM TagsEntry INNER JOIN TagsAssets_TagsEntries ON (TagsAssets_TagsEntries.entryId = TagsEntry.entryId) WHERE (TagsAssets_TagsEntries.assetId = ?)";

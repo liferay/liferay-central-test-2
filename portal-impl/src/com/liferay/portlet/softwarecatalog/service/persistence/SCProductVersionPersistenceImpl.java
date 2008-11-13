@@ -1428,12 +1428,29 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void add(long productVersionId, long frameworkVersionId) {
+		protected void add(long productVersionId, long frameworkVersionId)
+			throws SystemException {
 			if (!_persistenceImpl.containsSCFrameworkVersion.contains(
 						productVersionId, frameworkVersionId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeAddAssociation(productVersionId,
+							com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.class.getName(),
+							frameworkVersionId);
+					}
+				}
+
 				_sqlUpdate.update(new Object[] {
 						new Long(productVersionId), new Long(frameworkVersionId)
 					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterAddAssociation(productVersionId,
+							com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.class.getName(),
+							frameworkVersionId);
+					}
+				}
 			}
 		}
 
@@ -1449,8 +1466,22 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 					new int[] { Types.BIGINT });
 		}
 
-		protected void clear(long productVersionId) {
+		protected void clear(long productVersionId) throws SystemException {
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onBeforeClearAssociation(productVersionId,
+						com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.class.getName());
+				}
+			}
+
 			_sqlUpdate.update(new Object[] { new Long(productVersionId) });
+
+			if (_listeners.length > 0) {
+				for (ModelListener listener : _listeners) {
+					listener.onAfterClearAssociation(productVersionId,
+						com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.class.getName());
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
@@ -1462,15 +1493,37 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void remove(long productVersionId, long frameworkVersionId) {
-			_sqlUpdate.update(new Object[] {
-					new Long(productVersionId), new Long(frameworkVersionId)
-				});
+		protected void remove(long productVersionId, long frameworkVersionId)
+			throws SystemException {
+			if (_persistenceImpl.containsSCFrameworkVersion.contains(
+						productVersionId, frameworkVersionId)) {
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onBeforeRemoveAssociation(productVersionId,
+							com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.class.getName(),
+							frameworkVersionId);
+					}
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(productVersionId), new Long(frameworkVersionId)
+					});
+
+				if (_listeners.length > 0) {
+					for (ModelListener listener : _listeners) {
+						listener.onAfterRemoveAssociation(productVersionId,
+							com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.class.getName(),
+							frameworkVersionId);
+					}
+				}
+			}
 		}
 
 		private SqlUpdate _sqlUpdate;
+		private SCProductVersionPersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETSCFRAMEWORKVERSIONS = "SELECT {SCFrameworkVersion.*} FROM SCFrameworkVersion INNER JOIN SCFrameworkVersi_SCProductVers ON (SCFrameworkVersi_SCProductVers.frameworkVersionId = SCFrameworkVersion.frameworkVersionId) WHERE (SCFrameworkVersi_SCProductVers.productVersionId = ?)";
