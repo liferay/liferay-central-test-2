@@ -61,12 +61,22 @@ import org.hibernate.SessionFactory;
  */
 public class CounterPersistence extends BasePersistenceImpl {
 
+	public static int getCounterIncrement() {
+		return _COUNTER_INCREMENT;
+	}
+
 	public void afterPropertiesSet() {
 		JobSchedulerUtil.schedule(_connectionHeartbeatJob);
 	}
 
-	public static int getCounterIncrement() {
-		return _COUNTER_INCREMENT;
+	public synchronized Connection getConnection() throws Exception {
+		if ((_connection == null) || _connection.isClosed()) {
+			_connection = getDataSource().getConnection();
+
+			_connection.setAutoCommit(true);
+		}
+
+		return _connection;
 	}
 
 	public void destroy() {
@@ -256,6 +266,10 @@ public class CounterPersistence extends BasePersistenceImpl {
 		}
 	}
 
+	public void setConnectionHeartbeatJob(IntervalJob connectionHeartbeatJob) {
+		_connectionHeartbeatJob = connectionHeartbeatJob;
+	}
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		_sessionFactory = sessionFactory;
 	}
@@ -331,20 +345,6 @@ public class CounterPersistence extends BasePersistenceImpl {
 			name, rangeMin, rangeMax, _COUNTER_INCREMENT);
 
 		return register;
-	}
-
-	public synchronized Connection getConnection() throws Exception {
-		if ((_connection == null) || _connection.isClosed()) {
-			_connection = getDataSource().getConnection();
-
-			_connection.setAutoCommit(true);
-		}
-
-		return _connection;
-	}
-
-	public void setConnectionHeartbeatJob(IntervalJob connectionHeartbeatJob) {
-		_connectionHeartbeatJob = connectionHeartbeatJob;
 	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;

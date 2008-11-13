@@ -45,7 +45,7 @@ public class ConnectionHeartbeatJob implements IntervalJob {
 		PropsValues.COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL * Time.MINUTE;
 
 	public void execute(JobExecutionContext context)
-			throws JobExecutionException {
+		throws JobExecutionException {
 
 		try {
 			sendHeartbeat();
