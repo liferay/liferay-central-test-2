@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -39,8 +41,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,11 +61,17 @@ import org.hibernate.SessionFactory;
  */
 public class CounterPersistence extends BasePersistenceImpl {
 
+	public void afterPropertiesSet() {
+		JobSchedulerUtil.schedule(_connectionHeartbeatJob);
+	}
+
 	public static int getCounterIncrement() {
 		return _COUNTER_INCREMENT;
 	}
 
 	public void destroy() {
+		JobSchedulerUtil.unschedule(_connectionHeartbeatJob);
+
 		DataAccess.cleanUp(_connection);
 	}
 
@@ -327,10 +333,8 @@ public class CounterPersistence extends BasePersistenceImpl {
 		return register;
 	}
 
-	protected Connection getConnection() throws Exception {
-		if ((_connection == null) || _connection.isClosed() ||
-			!isValidConnection()) {
-
+	public synchronized Connection getConnection() throws Exception {
+		if ((_connection == null) || _connection.isClosed()) {
 			_connection = getDataSource().getConnection();
 
 			_connection.setAutoCommit(true);
@@ -339,24 +343,8 @@ public class CounterPersistence extends BasePersistenceImpl {
 		return _connection;
 	}
 
-	protected boolean isValidConnection() {
-		try {
-			PreparedStatement preparedStatement = _connection.prepareStatement(
-				_COUNT_COUNTER);
-
-			preparedStatement.execute();
-		}
-		catch (SQLException sqle) {
-			DataAccess.cleanUp(_connection);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(sqle, sqle);
-			}
-
-			return false;
-		}
-
-		return true;
+	public void setConnectionHeartbeatJob(IntervalJob connectionHeartbeatJob) {
+		_connectionHeartbeatJob = connectionHeartbeatJob;
 	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
@@ -368,8 +356,6 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 	private static final String _NAME = Counter.class.getName();
 
-	private static final String _COUNT_COUNTER = "SELECT COUNT(*) FROM Counter";
-
 	private static final Log _log =
 		LogFactoryUtil.getLog(CounterPersistence.class);
 
@@ -377,6 +363,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 		new HashMap<String, CounterRegister>();
 
 	private Connection _connection;
+	private IntervalJob _connectionHeartbeatJob;
 	private SessionFactory _sessionFactory;
 
 }

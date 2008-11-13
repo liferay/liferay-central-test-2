@@ -255,6 +255,10 @@ public class PropsValues {
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
 
+	public static final long COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsKeys.COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL));
+
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL =
 		PropsUtil.get(PropsKeys.CUSTOM_SQL_FUNCTION_ISNOTNULL);
 
