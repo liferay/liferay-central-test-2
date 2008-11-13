@@ -335,6 +335,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			companyId, draft, start, end, obc);
 	}
 
+	public List<BlogsEntry> getPublishedCompanyEntries(
+			long companyId, boolean draft, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByC_D_Published(
+			companyId, draft, start, end, obc);
+	}
+
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
 		return blogsEntryPersistence.countByCompanyId(companyId);
 	}
@@ -372,6 +381,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByGroupId(groupId, start, end);
 	}
 
+	public List<BlogsEntry> getPublishedGroupEntries(long groupId, int start, int end)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByGroupId_Published(groupId, start, end);
+	}
+
 	public List<BlogsEntry> getGroupEntries(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -386,6 +401,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByG_D(groupId, draft, start, end);
 	}
 
+	public List<BlogsEntry> getPublishedGroupEntries(
+			long groupId, boolean draft, int start, int end)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByG_D_Published(groupId, draft, start, end);
+	}
+
 	public List<BlogsEntry> getGroupEntries(
 			long groupId, boolean draft, int start, int end,
 			OrderByComparator obc)
@@ -398,10 +420,22 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.countByGroupId(groupId);
 	}
 
+	public int getPublishedGroupEntriesCount(long groupId)
+	throws SystemException {
+
+	return blogsEntryPersistence.countByGroupId_Published(groupId);
+}
+
 	public int getGroupEntriesCount(long groupId, boolean draft)
 		throws SystemException {
 
 		return blogsEntryPersistence.countByG_D(groupId, draft);
+	}
+
+	public int getPublishedGroupEntriesCount(long groupId, boolean draft)
+		throws SystemException {
+
+		return blogsEntryPersistence.countByG_D_Published(groupId, draft);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(

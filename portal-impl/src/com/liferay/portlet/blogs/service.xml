@@ -42,6 +42,9 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="GroupId_Published" return-type="Collection" where="displayDate &lt; NOW()">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -53,7 +56,15 @@
 			<finder-column name="groupId" />
 			<finder-column name="draft" />
 		</finder>
+		<finder name="G_D_Published" return-type="Collection" where="displayDate &lt; NOW()">
+			<finder-column name="groupId" />
+			<finder-column name="draft" />
+		</finder>
 		<finder name="C_D" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="draft" />
+		</finder>
+		<finder name="C_D_Published" return-type="Collection" where="displayDate &lt; NOW()">
 			<finder-column name="companyId" />
 			<finder-column name="draft" />
 		</finder>

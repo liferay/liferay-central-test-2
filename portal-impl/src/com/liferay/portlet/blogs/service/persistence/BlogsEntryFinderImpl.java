@@ -53,6 +53,9 @@ public class BlogsEntryFinderImpl
 	public static String FIND_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".findByOrganizationIds";
 
+	public static String FIND_PUBLISHED_BY_ORGANIZATION_IDS =
+		BlogsEntryFinder.class.getName() + ".findPublishedByOrganizationIds";
+
 	public static String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
 
@@ -126,8 +129,33 @@ public class BlogsEntryFinderImpl
 		return findByOrganizationIds(organizationIds, draft, start, end);
 	}
 
+	public List<BlogsEntry> findPublishedByOrganizationId(
+			long organizationId, boolean draft, int start, int end)
+		throws SystemException {
+
+		List<Long> organizationIds = new ArrayList<Long>();
+
+		organizationIds.add(organizationId);
+
+		return findPublishedByOrganizationIds(organizationIds, draft, start, end);
+	}
+
 	public List<BlogsEntry> findByOrganizationIds(
 			List<Long> organizationIds, boolean draft, int start, int end)
+		throws SystemException {
+
+		return findByOrganizationIds(organizationIds, draft, start, end, false);
+	}
+
+	public List<BlogsEntry> findPublishedByOrganizationIds(
+			List<Long> organizationIds, boolean draft, int start, int end)
+		throws SystemException {
+
+		return findByOrganizationIds(organizationIds, draft, start, end, true);
+	}
+
+	private List<BlogsEntry> findByOrganizationIds(
+			List<Long> organizationIds, boolean draft, int start, int end, boolean onlyPublished)
 		throws SystemException {
 
 		Session session = null;
@@ -135,7 +163,9 @@ public class BlogsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
+			String sql;
+			if (onlyPublished) sql = CustomSQLUtil.get(FIND_PUBLISHED_BY_ORGANIZATION_IDS);
+			else sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",

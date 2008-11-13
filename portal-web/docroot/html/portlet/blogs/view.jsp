@@ -48,7 +48,7 @@ if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.BLOGS, A
 	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
 }
 else {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, false);
+	total = BlogsEntryLocalServiceUtil.getPublishedGroupEntriesCount(scopeGroupId, false);
 }
 
 searchContainer.setTotal(total);
@@ -59,7 +59,7 @@ if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.BLOGS, A
 	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 }
 else {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, false, searchContainer.getStart(), searchContainer.getEnd());
+	results = BlogsEntryLocalServiceUtil.getPublishedGroupEntries(scopeGroupId, false, searchContainer.getStart(), searchContainer.getEnd());
 }
 
 searchContainer.setResults(results);

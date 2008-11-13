@@ -104,6 +104,15 @@ public class BlogsEntryServiceJSON {
 		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getPublishedCompanyEntries(long companyId, int max)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getPublishedCompanyEntries(companyId,
+				max);
+
+		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONObject getEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -130,10 +139,29 @@ public class BlogsEntryServiceJSON {
 		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getPublishedGroupEntries(long groupId, int max)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getPublishedGroupEntries(groupId,
+				max);
+
+		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONArray getOrganizationEntries(long organizationId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
+				max);
+
+		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONArray getPublishedOrganizationEntries(
+		long organizationId, int max)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getPublishedOrganizationEntries(organizationId,
 				max);
 
 		return BlogsEntryJSONSerializer.toJSONArray(returnValue);

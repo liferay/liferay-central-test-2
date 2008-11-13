@@ -124,7 +124,7 @@ public class RSSAction extends PortletAction {
 		if (companyId > 0) {
 			feedURL = StringPool.BLANK;
 
-			rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
+			rss = BlogsEntryServiceUtil.getPublishedCompanyEntriesRSS(
 				companyId, max, type, version, displayStyle, feedURL, entryURL,
 				themeDisplay);
 		}
@@ -133,14 +133,14 @@ public class RSSAction extends PortletAction {
 
 			entryURL = feedURL;
 
-			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
+			rss = BlogsEntryServiceUtil.getPublishedGroupEntriesRSS(
 				groupId, max, type, version, displayStyle, feedURL, entryURL,
 				themeDisplay);
 		}
 		else if (organizationId > 0) {
 			feedURL = StringPool.BLANK;
 
-			rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
+			rss = BlogsEntryServiceUtil.getPublishedOrganizationEntriesRSS(
 				organizationId, max, type, version, displayStyle, feedURL,
 				entryURL, themeDisplay);
 		}
@@ -153,7 +153,7 @@ public class RSSAction extends PortletAction {
 
 			entryURL = feedURL;
 
-			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
+			rss = BlogsEntryServiceUtil.getPublishedGroupEntriesRSS(
 				groupId, max, type, version, displayStyle, feedURL, entryURL,
 				themeDisplay);
 		}

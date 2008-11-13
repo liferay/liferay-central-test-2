@@ -1344,6 +1344,13 @@ Liferay.Service.Blogs.BlogsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getPublishedCompanyEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPublishedCompanyEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getEntry";
@@ -1358,9 +1365,23 @@ Liferay.Service.Blogs.BlogsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getPublishedGroupEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPublishedGroupEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getOrganizationEntries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getOrganizationEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getPublishedOrganizationEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPublishedOrganizationEntries";
 
 		return Liferay.Service.ajax(params, callback);
 	},

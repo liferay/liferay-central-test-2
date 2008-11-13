@@ -216,6 +216,14 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getCompanyEntries(companyId, draft, start, end, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getPublishedCompanyEntries(
+		long companyId, boolean draft, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getPublishedCompanyEntries(companyId, draft, start, end, obc);
+	}
+
 	public static int getCompanyEntriesCount(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getService().getCompanyEntriesCount(companyId);
@@ -253,6 +261,12 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getGroupEntries(groupId, start, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getPublishedGroupEntries(
+		long groupId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getPublishedGroupEntries(groupId, start, end);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -264,6 +278,12 @@ public class BlogsEntryLocalServiceUtil {
 		long groupId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService().getGroupEntries(groupId, draft, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getPublishedGroupEntries(
+		long groupId, boolean draft, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getPublishedGroupEntries(groupId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
@@ -278,9 +298,19 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getGroupEntriesCount(groupId);
 	}
 
+	public static int getPublishedGroupEntriesCount(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getPublishedGroupEntriesCount(groupId);
+	}
+
 	public static int getGroupEntriesCount(long groupId, boolean draft)
 		throws com.liferay.portal.SystemException {
 		return getService().getGroupEntriesCount(groupId, draft);
+	}
+
+	public static int getPublishedGroupEntriesCount(long groupId, boolean draft)
+		throws com.liferay.portal.SystemException {
+		return getService().getPublishedGroupEntriesCount(groupId, draft);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(

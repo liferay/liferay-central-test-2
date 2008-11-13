@@ -36,10 +36,10 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 List entries = null;
 
 if (organizationId > 0) {
-	entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
+	entries = BlogsEntryServiceUtil.getPublishedOrganizationEntries(organizationId, max);
 }
 else {
-	entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
+	entries = BlogsEntryServiceUtil.getPublishedCompanyEntries(company.getCompanyId(), max);
 }
 
 int total = entries.size();
