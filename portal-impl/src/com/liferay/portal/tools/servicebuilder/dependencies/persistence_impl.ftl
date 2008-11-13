@@ -1997,7 +1997,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					protected void add(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
 						if (!_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
-
 							if (_listeners.length > 0) {
 								for (ModelListener listener : _listeners) {
 									listener.onBeforeAddAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
@@ -2026,7 +2025,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					}
 
 					protected void clear(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
-
 						if (_listeners.length > 0) {
 							for (ModelListener listener : _listeners) {
 								listener.onBeforeClearAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName());
@@ -2055,7 +2053,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					protected void remove(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
 						if (_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
-
 							if (_listeners.length > 0) {
 								for (ModelListener listener : _listeners) {
 									listener.onBeforeRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
@@ -2069,7 +2066,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 									listener.onAfterRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
 								}
 							}
-
 						}
 					}
 
