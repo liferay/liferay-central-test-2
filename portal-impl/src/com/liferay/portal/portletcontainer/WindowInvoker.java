@@ -742,16 +742,15 @@ public class WindowInvoker extends InvokerPortletImpl {
 		containerRequest.setUserID(_remoteUser);
 		containerRequest.setUserPrincipal(_userPrincipal);
 		containerRequest.setLocale(_getLocale(request, portletRequest));
-		
-		Map userInfoMap = UserInfoFactory.getUserInfo(
+
+		Map<String, String> userInfoMap = UserInfoFactory.getUserInfo(
 			_remoteUserId, _portletModel);
-		
+
 		if (_remotePortlet){
 			userInfoMap.remove("user.name.random");
 		}
-		
+
 		containerRequest.setUserInfo(userInfoMap);
-			
 
 		containerRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
