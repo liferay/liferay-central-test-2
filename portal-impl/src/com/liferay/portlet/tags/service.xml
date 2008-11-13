@@ -203,6 +203,12 @@
 		<column name="description" type="String" />
 		<column name="folksonomy" type="boolean" />
 
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
 		<!-- Finder methods -->
 
 		<finder name="G_N" return-type="TagsVocabulary">

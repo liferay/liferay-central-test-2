@@ -328,17 +328,15 @@ public class TagsVocabularyModelImpl extends BaseModelImpl {
 
 		TagsVocabularyImpl tagsVocabulary = (TagsVocabularyImpl)obj;
 
-		long pk = tagsVocabulary.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < pk) {
-			return -1;
+		value = getName().compareTo(tagsVocabulary.getName());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > pk) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	public boolean equals(Object obj) {
