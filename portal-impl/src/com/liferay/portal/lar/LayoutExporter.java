@@ -323,21 +323,35 @@ public class LayoutExporter {
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
 
-			boolean exportCurPortletData = MapUtil.getBoolean(
-				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
-					rootPortletId);
+			boolean exportCurPortletData = exportPortletData;
+			boolean exportCurPortletSetup = exportPortletSetup;
 
-			boolean exportCurPortletSetup = MapUtil.getBoolean(
-				parameterMap,
-				PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE +
-					rootPortletId);
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				context.getCompanyId(), portletId);
+
+			if (portlet != null) {
+				String portletDataHandlerClass =
+					portlet.getPortletDataHandlerClass();
+
+				if (portletDataHandlerClass != null) {
+					exportCurPortletData = exportPortletData &&
+						MapUtil.getBoolean(
+							parameterMap,
+							PortletDataHandlerKeys.PORTLET_DATA +
+								StringPool.UNDERLINE + rootPortletId);
+
+					exportCurPortletSetup = exportPortletSetup &&
+						MapUtil.getBoolean(
+							parameterMap,
+							PortletDataHandlerKeys.PORTLET_SETUP +
+								StringPool.UNDERLINE + rootPortletId);
+				}
+			}
 
 			_portletExporter.exportPortlet(
 				context, layoutCache, portletId, layout, portletsEl,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
-				exportPortletData & exportCurPortletData,
-				exportPortletSetup & exportCurPortletSetup,
+				exportCurPortletData, exportCurPortletSetup,
 				exportPortletUserPreferences, exportUserPermissions);
 		}
 
