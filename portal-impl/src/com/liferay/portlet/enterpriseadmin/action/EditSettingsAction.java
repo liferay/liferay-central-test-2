@@ -115,10 +115,6 @@ public class EditSettingsAction extends PortletAction {
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			if (!cmd.equals("updateLdap") && !cmd.equals("updateSecurity")) {
-				preferences.store();
-			}
-
 			sendRedirect(actionRequest, actionResponse);
 		}
 		else {
@@ -172,6 +168,8 @@ public class EditSettingsAction extends PortletAction {
 			PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
 		preferences.setValue(
 			PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES, defaultUserGroupNames);
+
+		preferences.store();
 	}
 
 	protected void updateEmails(
@@ -250,6 +248,8 @@ public class EditSettingsAction extends PortletAction {
 					PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, emailFromAddress);
 			}
 		}
+
+		preferences.store();
 	}
 
 	protected void updateLdap(
@@ -368,6 +368,8 @@ public class EditSettingsAction extends PortletAction {
 			actionRequest, "mailHostNames");
 
 		preferences.setValue(PropsKeys.ADMIN_MAIL_HOST_NAMES, mailHostNames);
+
+		preferences.store();
 	}
 
 	protected void updateNtlm(
@@ -444,6 +446,8 @@ public class EditSettingsAction extends PortletAction {
 			PropsKeys.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
 		preferences.setValue(
 			PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
+
+		preferences.store();
 	}
 
 	protected void updateSecurity(ActionRequest actionRequest)

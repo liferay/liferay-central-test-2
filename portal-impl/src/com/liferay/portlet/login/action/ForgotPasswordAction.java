@@ -137,8 +137,6 @@ public class ForgotPasswordAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		PortletPreferences preferences = actionRequest.getPreferences();
-
 		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
 			User user = getUser(actionRequest);
 
@@ -152,17 +150,13 @@ public class ForgotPasswordAction extends PortletAction {
 			CaptchaUtil.check(actionRequest);
 		}
 
-		String languageId = LanguageUtil.getLanguageId(actionRequest);
+		PortletPreferences preferences = actionRequest.getPreferences();
 
-		String emailFromName = preferences.getValue(
-			"emailFromName", null);
+		String emailFromName = preferences.getValue("emailFromName", null);
 		String emailFromAddress = preferences.getValue(
 			"emailFromAddress", null);
-
-		String subject = preferences.getValue(
-			"emailPasswordSentSubject_" +languageId, null);
-		String body = preferences.getValue(
-			"emailPasswordSentBody_" + languageId, null);
+		String subject = preferences.getValue("emailPasswordSentSubject", null);
+		String body = preferences.getValue("emailPasswordSentBody", null);
 
 		LoginUtil.sendPassword(
 			actionRequest, emailFromName, emailFromAddress, subject, body);
