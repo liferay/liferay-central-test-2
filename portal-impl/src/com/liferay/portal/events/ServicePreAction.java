@@ -1047,7 +1047,9 @@ public class ServicePreAction extends Action {
 					sb.append(" pages of group ");
 					sb.append(layout.getGroupId());
 
-					_log.warn(sb.toString());
+					if (_log.isWarnEnabled()) {
+						_log.warn(sb.toString());
+					}
 
 					throw new PrincipalException(sb.toString());
 				}

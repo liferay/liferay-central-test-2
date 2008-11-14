@@ -80,8 +80,6 @@ public class LoginAction extends Action {
 			}
 		}
 
-		String loginRedirect = ParamUtil.getString(request, "redirect");
-
 		String redirect = PortalUtil.getCommunityLoginURL(themeDisplay);
 
 		if (Validator.isNull(redirect)) {
@@ -106,14 +104,19 @@ public class LoginAction extends Action {
 			redirect = HttpUtil.protocolize(redirect, true);
 		}
 
-		if (Validator.isNotNull(loginRedirect)) {
-			String param = PortalUtil.getPortletNamespace(
-				PropsValues.AUTH_LOGIN_PORTLET_NAME) + "redirect";
+		String loginRedirect = ParamUtil.getString(request, "redirect");
 
-			redirect = HttpUtil.setParameter(redirect, param, loginRedirect);
+		if (Validator.isNotNull(loginRedirect)) {
+			String loginPortletNamespace = PortalUtil.getPortletNamespace(
+				PropsValues.AUTH_LOGIN_PORTLET_NAME);
+
+			String loginRedirectParameter = loginPortletNamespace + "redirect";
+
 			redirect = HttpUtil.setParameter(
 				redirect, "p_p_id", PropsValues.AUTH_LOGIN_PORTLET_NAME);
 			redirect = HttpUtil.setParameter(redirect, "p_p_lifecycle", "0");
+			redirect = HttpUtil.setParameter(
+				redirect, loginRedirectParameter, loginRedirect);
 		}
 
 		response.sendRedirect(redirect);

@@ -719,61 +719,15 @@ public class MainServlet extends ActionServlet {
 			Throwable cause = e.getCause();
 
 			if (cause instanceof NoSuchLayoutException) {
-				DynamicServletRequest dynamicRequest =
-					new DynamicServletRequest(request);
-
-				// Reset p_l_id or there will be an infinite loop
-
-				dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
-
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND,
-					(NoSuchLayoutException)cause, dynamicRequest, response);
+				sendError(
+					HttpServletResponse.SC_NOT_FOUND, (Exception)cause, request,
+					response);
 
 				return;
 			}
 			else if (cause instanceof PrincipalException) {
-				if (userId <= 0) {
-					String redirect = request.getContextPath() +
-						Portal.PATH_MAIN + "/portal/login";
-
-					String currentURL = PortalUtil.getCurrentURL(request);
-
-					redirect = HttpUtil.addParameter(
-						redirect, "redirect", currentURL);
-
-					long plid = ParamUtil.getLong(request, "p_l_id");
-
-					if (plid > 0) {
-						try {
-							Layout layout = LayoutLocalServiceUtil.getLayout(
-								plid);
-
-							if (layout.isPrivateLayout()) {
-								plid = LayoutLocalServiceUtil.getDefaultPlid(
-									layout.getGroupId(), false);
-							}
-
-							redirect = HttpUtil.addParameter(
-								redirect, "p_l_id", plid);
-						}
-						catch (Exception e1) {
-						}
-					}
-					response.sendRedirect(redirect);
-				}
-				else {
-					DynamicServletRequest dynamicRequest =
-						new DynamicServletRequest(request);
-
-					// Reset p_l_id or there will be an infinite loop
-
-					dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
-
-					PortalUtil.sendError(
-						HttpServletResponse.SC_UNAUTHORIZED,
-						(PrincipalException)cause, dynamicRequest, response);
-				}
+				processServicePrePrincipalException(
+					cause, userId, request, response);
 
 				return;
 			}
@@ -964,6 +918,60 @@ public class MainServlet extends ActionServlet {
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			PortletURLListenerFactory.create(portletURLListener);
 		}
+	}
+
+	protected void processServicePrePrincipalException(
+			Throwable t, long userId, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
+
+		if (userId > 0) {
+			sendError(
+				HttpServletResponse.SC_UNAUTHORIZED, t, request, response);
+
+			return;
+		}
+
+		String redirect =
+			request.getContextPath() + Portal.PATH_MAIN + "/portal/login";
+
+		String currentURL = PortalUtil.getCurrentURL(request);
+
+		redirect = HttpUtil.addParameter(redirect, "redirect", currentURL);
+
+		long plid = ParamUtil.getLong(request, "p_l_id");
+
+		if (plid > 0) {
+			try {
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				if (layout.isPrivateLayout()) {
+					plid = LayoutLocalServiceUtil.getDefaultPlid(
+						layout.getGroupId(), false);
+				}
+
+				redirect = HttpUtil.addParameter(redirect, "p_l_id", plid);
+			}
+			catch (Exception e1) {
+			}
+		}
+
+		response.sendRedirect(redirect);
+	}
+
+	protected void sendError(
+			int status, Throwable t, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
+
+		DynamicServletRequest dynamicRequest = new DynamicServletRequest(
+			request);
+
+		// Reset p_l_id or there will be an infinite loop
+
+		dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
+
+		PortalUtil.sendError(status, (Exception)t, dynamicRequest, response);
 	}
 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =
