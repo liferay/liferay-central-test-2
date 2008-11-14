@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
@@ -58,8 +59,10 @@ import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
@@ -726,6 +729,51 @@ public class MainServlet extends ActionServlet {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
 					(NoSuchLayoutException)cause, dynamicRequest, response);
+
+				return;
+			}
+			else if (cause instanceof PrincipalException) {
+				if (userId <= 0) {
+					String redirect = request.getContextPath() +
+						Portal.PATH_MAIN + "/portal/login";
+
+					String currentURL = PortalUtil.getCurrentURL(request);
+
+					redirect = HttpUtil.addParameter(
+						redirect, "redirect", currentURL);
+
+					long plid = ParamUtil.getLong(request, "p_l_id");
+
+					if (plid > 0) {
+						try {
+							Layout layout = LayoutLocalServiceUtil.getLayout(
+								plid);
+
+							if (layout.isPrivateLayout()) {
+								plid = LayoutLocalServiceUtil.getDefaultPlid(
+									layout.getGroupId(), false);
+							}
+
+							redirect = HttpUtil.addParameter(
+								redirect, "p_l_id", plid);
+						}
+						catch (Exception e1) {
+						}
+					}
+					response.sendRedirect(redirect);
+				}
+				else {
+					DynamicServletRequest dynamicRequest =
+						new DynamicServletRequest(request);
+
+					// Reset p_l_id or there will be an infinite loop
+
+					dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
+
+					PortalUtil.sendError(
+						HttpServletResponse.SC_UNAUTHORIZED,
+						(PrincipalException)cause, dynamicRequest, response);
+				}
 
 				return;
 			}

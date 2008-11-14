@@ -61,6 +61,7 @@ import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -1048,7 +1049,7 @@ public class ServicePreAction extends Action {
 
 					_log.warn(sb.toString());
 
-					layout = null;
+					throw new PrincipalException(sb.toString());
 				}
 				else if (isViewableCommunity &&
 						!LayoutPermissionUtil.contains(

@@ -23,6 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -79,6 +80,8 @@ public class LoginAction extends Action {
 			}
 		}
 
+		String loginRedirect = ParamUtil.getString(request, "redirect");
+
 		String redirect = PortalUtil.getCommunityLoginURL(themeDisplay);
 
 		if (Validator.isNull(redirect)) {
@@ -101,6 +104,16 @@ public class LoginAction extends Action {
 
 		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) {
 			redirect = HttpUtil.protocolize(redirect, true);
+		}
+
+		if (Validator.isNotNull(loginRedirect)) {
+			String param = PortalUtil.getPortletNamespace(
+				PropsValues.AUTH_LOGIN_PORTLET_NAME) + "redirect";
+
+			redirect = HttpUtil.setParameter(redirect, param, loginRedirect);
+			redirect = HttpUtil.setParameter(
+				redirect, "p_p_id", PropsValues.AUTH_LOGIN_PORTLET_NAME);
+			redirect = HttpUtil.setParameter(redirect, "p_p_lifecycle", "0");
 		}
 
 		response.sendRedirect(redirect);
