@@ -163,7 +163,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 
 											if (className.indexOf('lfr-page-current') > -1) {
 												jQuery(this).removeClass('lfr-page-current');
-											} else {
+											}
+											else {
 												if (className.indexOf('lfr-page-previous') < 0 &&
 													className.indexOf('lfr-page-next') < 0 &&
 													i == pageNumber) {
