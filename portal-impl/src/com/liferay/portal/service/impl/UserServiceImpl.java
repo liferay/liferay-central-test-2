@@ -554,11 +554,17 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		organizationIds = checkOrganizations(userId, organizationIds);
+		if (organizationIds != null) {
+			organizationIds = checkOrganizations(userId, organizationIds);
+		}
 
-		roleIds = checkRoles(userId, roleIds);
+		if (roleIds != null) {
+			roleIds = checkRoles(userId, roleIds);
+		}
 
-		groupIds = checkGroups(userId, groupIds);
+		if (groupIds != null) {
+			groupIds = checkGroups(userId, groupIds);
+		}
 
 		return userLocalService.updateUser(
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
