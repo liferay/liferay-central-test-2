@@ -83,13 +83,13 @@ Set<String> reminderQueries = organization.getReminderQueryQuestions(defaultLoca
 			}
 		%>
 
-			<input type="hidden" id="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" style='display:none; height: 105px; width: 400px;' value="<%= StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE) %>">
+			<input type="hidden" id="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" value="<%= StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE) %>">
 
 		<%
 		}
 		%>
 
-		<textarea id="<portlet:namespace />reminderQueries_temp" name="<portlet:namespace />reminderQueries_temp" onChange="<portlet:namespace />onReminderQueriesChanged();" style="display: none; height: 105px; width: 400px;'"></textarea>
+		<textarea  class="lfr-textarea" id="<portlet:namespace />reminderQueries_temp" name="<portlet:namespace />reminderQueries_temp" onChange="<portlet:namespace />onReminderQueriesChanged();"></textarea>
 	</div>
 </fieldset>
 
