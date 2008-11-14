@@ -168,7 +168,21 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Panel component ---------- */
 
-.lfr-panel {
+.lfr-panel, .lfr-panel-container, .lfr-floating-container {
+	border: 1px solid;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+}
+
+.lfr-panel-container, .lfr-floating-container {
+	background: #fff;
+}
+
+.lfr-floating-container {
+	position: relative;
+}
+
+.lfr-panel-container .lfr-panel {
+	border: none;
 }
 
 .lfr-panel-titlebar {
@@ -184,10 +198,27 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .lfr-panel-titlebar .lfr-panel-title {
 	float: left;
+	margin: 0;
 }
 
-.lfr-panel-titlebar .lfr-tool {
+.lfr-panel-titlebar .lfr-panel-button {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header_toggler_close.png) no-repeat 0 0;
+	display: none;
 	float: right;
+	height: 22px;
+	width: 19px;
+}
+
+.lfr-panel.lfr-collapsible .lfr-has-button .lfr-panel-button {
+	display: block;
+}
+
+.lfr-panel.lfr-collapsed .lfr-panel-titlebar .lfr-panel-button {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header_toggler_open.png);
+}
+
+.lfr-panel-titlebar .lfr-panel-button:hover {
+	background-position: 0 100%;
 }
 
 .lfr-panel.lfr-collapsed .lfr-panel-titlebar {
@@ -195,9 +226,109 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: 0;
 }
 
+.lfr-panel.lfr-collapsible .lfr-has-button {
+	background: #ececec url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
+	border-bottom: 1px solid #cfcfcf;
+	line-height: 1.6;
+	padding: 2px;
+}
+
+.ie6 .lfr-panel.lfr-collapsible .lfr-has-button {
+	height: 1%;
+}
+
+.lfr-panel.lfr-collapsed .lfr-has-button {
+	border-bottom: none;
+}
+
+.lfr-panel-container .lfr-panel.lfr-collapsible .lfr-has-button {
+	border-top: 1px solid #cfcfcf;
+}
+
 .lfr-panel.lfr-collapsed .lfr-panel-content {
 	display: none;
 }
+
+.js .lfr-floating-container {
+	display: none;
+	position: absolute;
+}
+
+.js .lfr-trigger-selected {
+	background-color: #069;
+	color: #fff;
+}
+
+/* ---------- Panel pagination ---------- */
+
+.js .lfr-panel-paging .lfr-panel-content ul {
+	display: none;
+}
+
+.lfr-paging-container {
+	background: #cfd2d5;
+	border-bottom: 1px solid #dcdee0;
+	border-top: 1px solid #dcdee0;
+	text-align: center;
+}
+
+.lfr-panel-content .lfr-paging-container li {
+	display: inline;
+}
+
+.ie .lfr-panel-content .lfr-paging-container li {
+	zoom: 1;
+}
+
+.js .lfr-panel-paging .lfr-panel-content .current-set, .js .lfr-panel-paging .lfr-paging-container ul {
+	display: block;
+	position: relative;
+	visibility: visible;
+}
+
+.js .lfr-panel-paging .lfr-paging-container ul {
+	padding-top: 1px;
+}
+
+.lfr-panel-content .lfr-paging-container li a {
+	background: none;
+	border: 1px solid #CFD2D5;
+	display: inline-block;
+	float: none;
+	padding: 5px 10px;
+	text-align: center;
+	width: auto;
+}
+
+.lfr-panel-content .lfr-paging-container li a:hover {
+	background: #5094d7 url(<%= themeDisplay.getPathThemeImages() %>/application/current_page_bg.png) repeat-x 0 0;
+	border-color: #31659c #396ea8 #4c8ccb;
+	color: #fff;
+	font-weight: bold;
+}
+
+.lfr-panel-content .lfr-paging-container li.lfr-page-current a {
+	background: #99a7b3 url(<%= themeDisplay.getPathThemeImages() %>/application/current_page_hover_bg.png) repeat-x 0 0;
+	border-color: #6b7785 #7c8994 #919fa9;
+	color: #fff;
+	font-weight: bold;
+}
+
+.lfr-panel-content .lfr-paging-container {
+	overflow: hidden;
+}
+
+.ie6 .lfr-panel-content .lfr-paging-container {
+	height: 1%;
+}
+
+/* ---------- Position helper ---------- */
+
+.lfr-position-helper {
+	position: absolute;
+	z-index: 1000;
+}
+
 
 /* ---------- Auto row styles ---------- */
 

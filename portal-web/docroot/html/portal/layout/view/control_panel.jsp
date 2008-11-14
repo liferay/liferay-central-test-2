@@ -77,6 +77,106 @@ if (Validator.isNull(category)) {
 			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
 				<table class="panel-page-content-menu">
 				<tr>
+					<td>
+
+						<%--
+						<style type="text/css">
+							.lfr-group-selector {
+								background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 100% 50%;
+								padding: 2px;
+								padding-right: 20px;
+							}
+						</style>
+						<liferay-ui:message key="select-a-community" />: <a href="javascript: ;" class="lfr-group-selector">Joe Bloggs</a>
+						<div class="lfr-panel-container lfr-floating-container" id="myPanel">
+							<div class="lfr-panel lfr-collapsible">
+								<div class="lfr-panel-titlebar lfr-has-button">
+									<h3 class="lfr-panel-title"><span><liferay-ui:message key="communities" /></span></h3>
+									<a href="javascript: ;" class="lfr-panel-button"></a>
+								</div>
+								<div class="lfr-panel-content">
+									<ul>
+										<li><a href="javascript: ;">Home</a></li>
+										<li><a href="javascript: ;">Sign In</a></li>
+										<li><a href="javascript: ;">Control Panel</a></li>
+										<li><a href="javascript: ;">My Account</a></li>
+										<li><a href="javascript: ;">My Places</a></li>
+										<li><a href="javascript: ;">Ignore</a></li>
+										<li><a href="javascript: ;">Options</a></li>
+									</ul>
+									<ul>
+										<li><a href="javascript: ;">Hello another verysion 1</a></li>
+										<li><a href="javascript: ;">Hello another verysion 2</a></li>
+										<li><a href="javascript: ;">Hello another verysion 3</a></li>
+										<li><a href="javascript: ;">Hello another verysion 4</a></li>
+										<li><a href="javascript: ;">Hello another verysion 5</a></li>
+										<li><a href="javascript: ;">Hello another verysion 6</a></li>
+									</ul>
+									<ul>
+										<li><a href="javascript: ;">links version 1</a></li>
+										<li><a href="javascript: ;">links version 2</a></li>
+										<li><a href="javascript: ;">links version 3</a></li>
+										<li><a href="javascript: ;">links version 4</a></li>
+										<li><a href="javascript: ;">links version 5</a></li>
+									</ul>
+									<ul>
+										<li><a href="javascript: ;">links last 1</a></li>
+										<li><a href="javascript: ;">links last 2</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="lfr-panel lfr-collapsible">
+								<div class="lfr-panel-titlebar lfr-has-button">
+									<h3 class="lfr-panel-title"><span><liferay-ui:message key="organizatons" /></span></h3>
+									<a href="javascript: ;" class="lfr-panel-button"></a>
+								</div>
+								<div class="lfr-panel-content">
+									<ul>
+										<li><a href="javascript: ;">Home</a></li>
+										<li><a href="javascript: ;">Sign In</a></li>
+										<li><a href="javascript: ;">Control Panel</a></li>
+										<li><a href="javascript: ;">My Account</a></li>
+										<li><a href="javascript: ;">My Places</a></li>
+										<li><a href="javascript: ;">Ignore</a></li>
+										<li><a href="javascript: ;">Options</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="lfr-panel lfr-collapsible">
+								<div class="lfr-panel-titlebar lfr-has-button">
+									<h3 class="lfr-panel-title"><span><liferay-ui:message key="user-groups" /></span></h3>
+									<a href="javascript: ;" class="lfr-panel-button"></a>
+								</div>
+								<div class="lfr-panel-content">
+									<ul>
+										<li><a href="javascript: ;">Home</a></li>
+										<li><a href="javascript: ;">Sign In</a></li>
+										<li><a href="javascript: ;">Control Panel</a></li>
+										<li><a href="javascript: ;">My Account</a></li>
+										<li><a href="javascript: ;">My Places</a></li>
+										<li><a href="javascript: ;">Ignore</a></li>
+										<li><a href="javascript: ;">Options</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<script>
+							jQuery(
+								function () {
+									new Liferay.FloatingPanel(
+										{
+											container: '#myPanel',
+											trigger: '.lfr-group-selector',
+											paging: true
+										}
+									);
+								}
+							);
+						</script>
+						--%>
+
+					</td>
 					<td align="right">
 
 						<%

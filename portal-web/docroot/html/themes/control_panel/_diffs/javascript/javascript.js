@@ -48,6 +48,8 @@ Liferay.ControlPanel = {
 	}
 };
 
+Liferay.Util.portletTitleEdit = function(){};
+
 jQuery(
 	function () {
 		Liferay.ControlPanel.init();
