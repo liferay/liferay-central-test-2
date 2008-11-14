@@ -80,8 +80,8 @@ boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enabl
 
 String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(scopeGroupId), "name");
 
-String[] visibleNodes = StringUtil.split(PrefsParamUtil.getString(preferences, request, "visible-nodes", allNodes));
-String[] hiddenNodes = StringUtil.split(PrefsParamUtil.getString(preferences, request, "hidden-nodes", StringPool.BLANK));
+String[] visibleNodes = StringUtil.split(preferences.getValue("visible-nodes", null), allNodes);
+String[] hiddenNodes = StringUtil.split(preferences.getValue("hidden-nodes", null), StringPool.BLANK);
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);

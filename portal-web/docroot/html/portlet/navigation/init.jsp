@@ -33,15 +33,15 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String bulletStyle = PrefsParamUtil.getString(preferences, request, "bullet-style", "1");
-String displayStyle = PrefsParamUtil.getString(preferences, request, "display-style", "1");
+String bulletStyle = GetterUtil.getString(preferences.getValue("bullet-style", null), "1");
+String displayStyle = GetterUtil.getString(preferences.getValue("display-style", null), "1");
 
-String headerType = PrefsParamUtil.getString(preferences, request, "header-type", "root-layout");
+String headerType = GetterUtil.getString(preferences.getValue("header-type", null), "root-layout");
 
-String rootLayoutType = PrefsParamUtil.getString(preferences, request, "root-layout-type", "absolute");
-int rootLayoutLevel = PrefsParamUtil.getInteger(preferences, request, "root-layout-level", 1);
+String rootLayoutType = GetterUtil.getString(preferences.getValue("root-layout-type", null), "absolute");
+int rootLayoutLevel = GetterUtil.getInteger(preferences.getValue("root-layout-level", null), 1);
 
-String includedLayouts = PrefsParamUtil.getString(preferences, request, "included-layouts", "current");
+String includedLayouts = GetterUtil.getString(preferences.getValue("included-layouts", null), "current");
 
-boolean nestedChildren = PrefsParamUtil.getBoolean(preferences, request, "nested-children", true);
+boolean nestedChildren = GetterUtil.getBoolean(preferences.getValue("nested-children", null), true);
 %>

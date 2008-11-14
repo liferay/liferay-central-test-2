@@ -102,7 +102,7 @@ String allFileEntryColumns = defaultFileEntryColumns;
 
 String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultFileEntryColumns));
 
-boolean enableCommentRatings = PrefsParamUtil.getBoolean(preferences, request, "enable-comment-ratings", true);
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
 boolean mergedView = false;
 

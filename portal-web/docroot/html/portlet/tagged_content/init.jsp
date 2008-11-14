@@ -149,7 +149,7 @@ boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enabl
 String defaultMetadataFields = "";
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";
 
-String[] metadataFields = StringUtil.split(PrefsParamUtil.getString(preferences, request, "metadata-fields", defaultMetadataFields));
+String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", null), defaultMetadataFields));
 
 Arrays.sort(entries);
 
