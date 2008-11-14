@@ -33,13 +33,6 @@ if (Validator.isNull(redirect)) {
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
-List<String> tags = new ArrayList<String>();
-
-List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true);
-for (TagsEntry tagsEntry : entries) {
-	tags.add(tagsEntry.getName());
-}
-request.setAttribute("overallTags", tags.toArray(new String[0]));
 //entry = entry.toEscapedModel();
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
@@ -47,6 +40,8 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
+
+TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveEntry(); return false;">

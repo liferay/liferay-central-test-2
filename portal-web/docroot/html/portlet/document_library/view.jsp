@@ -25,8 +25,6 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-List<String> tags = new ArrayList<String>();
-
 String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -346,6 +344,3 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</form>
 	</c:when>
 </c:choose>
-<%
-request.setAttribute("overallTags", tags.toArray(new String[0]));
-%>

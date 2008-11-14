@@ -28,8 +28,10 @@
 if (mergeUrlTags) {
 	String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
-	if ((String[])request.getAttribute("overallTags") != null) {	
-		compilerEntries = (String[])request.getAttribute("overallTags");
+	Set<String> layoutTagsEntries = TagsUtil.getLayoutTagsEntries(request);
+
+	if (!layoutTagsEntries.isEmpty()) {
+		compilerEntries = ArrayUtil.append(compilerEntries, layoutTagsEntries.toArray(new String[layoutTagsEntries.size()]));
 	}
 
 	String titleEntry = null;
@@ -76,9 +78,7 @@ for (String entryName : entries) {
 	String portletId = portletDisplay.getId();
 	%>
 
-	<c:if test="<%= showAddAsset %>">
-		<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
-	</c:if>
+	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
 </form>
 
 <br />
@@ -145,9 +145,6 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 		<%@ include file="/html/portlet/tagged_content/view_dynamic_by_category.jspf" %>
 	</c:when>
 	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNull(category) %>'>
-		<div class="portlet-title">
-			<liferay-ui:message key="related-content" />
-		</div>
 		<%@ include file="/html/portlet/tagged_content/view_dynamic_list.jspf" %>
 	</c:when>
 	<c:when test='<%= selectionStyle.equals("manual") %>'>

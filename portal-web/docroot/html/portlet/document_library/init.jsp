@@ -59,6 +59,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

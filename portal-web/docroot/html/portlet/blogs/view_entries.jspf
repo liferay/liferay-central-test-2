@@ -44,14 +44,10 @@ showSearch = showSearch && (results.size() > 0);
 </c:if>
 
 <%
-List<String> tags = new ArrayList<String>();
-
 for (int i = 0; i < results.size(); i++) {
 	BlogsEntry entry = (BlogsEntry)results.get(i);
-	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true);
-	for (TagsEntry tagsEntry : entries) {
-		tags.add(tagsEntry.getName());
-	}
+
+	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true));
 %>
 
 	<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
@@ -60,7 +56,6 @@ for (int i = 0; i < results.size(); i++) {
 
 <%
 }
-request.setAttribute("overallTags", tags.toArray(new String[0]));
 
 String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/-/blogs/rss";
 

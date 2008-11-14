@@ -91,6 +91,8 @@ PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse
 viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
 TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+
+TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), true));
 %>
 
 <c:choose>
@@ -201,15 +203,6 @@ TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPag
 	folksonomy="<%= true %>"
 	portletURL="<%= taggedPagesURL %>"
 />
-<%
-			List<String> tags = new ArrayList<String>();
-
-			List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), true);
-			for (TagsEntry entry : entries) {
-				tags.add(entry.getName());
-			}
-			request.setAttribute("overallTags", tags.toArray(new String[0]));
-%>
 
 <div>
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>

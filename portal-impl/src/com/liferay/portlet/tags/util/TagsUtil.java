@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -42,9 +43,13 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,6 +85,31 @@ public class TagsUtil {
 		CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON, CharPool.SLASH,
 		CharPool.STAR, CharPool.TILDE
 	};
+
+	public Set<String> addLayoutTagsEntries(
+		HttpServletRequest request, List<TagsEntry> entries) {
+
+		Set<String> layoutTagsEntries = getLayoutTagsEntries(request);
+
+		for (TagsEntry entry : entries) {
+			layoutTagsEntries.add(entry.getName());
+		}
+
+		return layoutTagsEntries;
+	}
+
+	public static Set<String> getLayoutTagsEntries(HttpServletRequest request) {
+		Set<String> entries = (Set<String>)request.getAttribute(
+			WebKeys.TAGS_LAYOUT_ENTRIES);
+
+		if (entries == null) {
+			entries = new HashSet<String>();
+
+			request.setAttribute(WebKeys.TAGS_LAYOUT_ENTRIES, entries);
+		}
+
+		return entries;
+	}
 
 	public static String[] getTagsCategories(PortletRequest portletRequest) {
 		return StringUtil.split(

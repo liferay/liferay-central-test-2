@@ -28,12 +28,6 @@ long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, notEntr
 
 Date now = new Date();
 
-if ((entryIds.length == 0) && (notEntryIds.length == 0)) {
-	long[] tempArray = {-999999};
-
-	entryIds = tempArray;
-}
-
 if (!groupByClass) {
 	int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
 
@@ -77,54 +71,55 @@ if (!groupByClass) {
 		}
 	}
 %>
+
 	<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
+
 <%
 }
 else {
+	int total = 0;
 
-	int grandTotal = 0;
+	for (int groupAssetIndex = 0; groupAssetIndex < _ASSET_TYPES.length; groupAssetIndex++) {
+		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_TYPES[groupAssetIndex])};
 
-	String[] assetTypes = new String[4];
-	assetTypes[0] = BlogsEntry.class.getName();
-	assetTypes[1] = MBMessage.class.getName();
-	assetTypes[2] = DLFileEntry.class.getName();
-	assetTypes[3] = WikiPage.class.getName();
+		int groupTotal = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, groupClassNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
 
-	String[] assetTitles = {"blogs", "threads", "documents", "wiki-pages"};
+		total += groupTotal;
 
-	for (int x = 0; x < assetTypes.length; x++) {
-		long[] cIds = {PortalUtil.getClassNameId(assetTypes[x])};
+		searchContainer.setTotal(groupTotal);
 
-		int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, cIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
-
-		grandTotal += total;
-
-		searchContainer.setTotal(total);
-
-		List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, cIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+		List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, groupClassNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
 		request.setAttribute("view.jsp-results", results);
 
 		if (results.size() > 0) {
-
 %>
-<h3><liferay-ui:message key="<%= assetTitles[x] %>" /></h3>
 
-<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
+			<h3><liferay-ui:message key="<%= _ASSET_TITLES[groupAssetIndex] %>" /></h3>
+
+			<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
+
 <%
 		}
 	}
 
-	if (grandTotal == 0) {
+	if (total == 0) {
 %>
-<style type="text/css">
-	#p_p_id_<%=portletDisplay.getId() %>_ {
-		display: none;
-	}
-</style>
+
+		<style type="text/css">
+			#p_p_id_<%=portletDisplay.getId() %>_ {
+				display: none;
+			}
+		</style>
+
 <%
 	}
 }
+%>
+
+<%!
+private static final String[] _ASSET_TYPES = {BlogsEntry.class.getName(), DLFileEntry.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
+private static final String[] _ASSET_TITLES = {"blogs", "documents", "threads", "wiki-pages"};
 %>

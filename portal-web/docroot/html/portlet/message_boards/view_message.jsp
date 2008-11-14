@@ -294,15 +294,7 @@ else {
 
 	Collections.sort(messages, new MessageCreateDateComparator(true, false));
 
-	List<String> tags = new ArrayList<String>();
-
-	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), firstMessage.getMessageId(), true);
-
-	for (TagsEntry entry : entries) {
-		tags.add(entry.getName());
-	}
-
-	request.setAttribute("overallTags", tags.toArray(new String[0]));
+	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), firstMessage.getMessageId(), true));
 	%>
 
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
