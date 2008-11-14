@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.portlet;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -32,6 +33,9 @@ import java.io.IOException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -80,7 +84,7 @@ public class LiferayPortlet extends GenericPortlet {
 
 		try {
 			Method method = MethodCache.get(
-				getClass().getName(), actionName,
+				_classesMap, _methodsMap, getClass().getName(), actionName,
 				new Class[] {ActionRequest.class, ActionResponse.class});
 
 			method.invoke(this, actionRequest, actionResponse);
@@ -185,5 +189,9 @@ public class LiferayPortlet extends GenericPortlet {
 
 		throw new PortletException("doPrint method not implemented");
 	}
+
+	private Map<String, Class<?>> _classesMap = new HashMap<String, Class<?>>();
+	private Map<MethodKey, Method> _methodsMap =
+		new HashMap<MethodKey, Method>();
 
 }

@@ -24,6 +24,10 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Method;
+
+import java.util.Map;
+
 /**
  * <a href="MethodKey.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,9 +37,26 @@ import java.io.Serializable;
 public class MethodKey implements Serializable {
 
 	public MethodKey(String className, String methodName, Class<?>[] types) {
+		this(null, null, className, methodName, types);
+	}
+
+	public MethodKey(
+		Map<String, Class<?>> classesMap, Map<MethodKey, Method> methodsMap,
+		String className, String methodName, Class<?>[] types) {
+
+		_classesMap = classesMap;
+		_methodsMap = methodsMap;
 		_className = className;
 		_methodName = methodName;
 		_types = types;
+	}
+
+	public Map<String, Class<?>> getClassesMap() {
+		return _classesMap;
+	}
+
+	public Map<MethodKey, Method> getMethodsMap() {
+		return _methodsMap;
 	}
 
 	public String getClassName() {
@@ -94,6 +115,8 @@ public class MethodKey implements Serializable {
 		return _toString;
 	}
 
+	private Map<String, Class<?>> _classesMap;
+	private Map<MethodKey, Method> _methodsMap;
 	private String _className;
 	private String _methodName;
 	private Class<?>[] _types;

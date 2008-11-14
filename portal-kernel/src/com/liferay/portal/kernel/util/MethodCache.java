@@ -38,15 +38,31 @@ public class MethodCache {
 	public static Method get(String className, String methodName)
 		throws ClassNotFoundException, NoSuchMethodException {
 
-		return get(className, methodName, new Class[0]);
+		return get(null, null, className, methodName);
 	}
 
 	public static Method get(
 			String className, String methodName, Class<?>[] parameterTypes)
 		throws ClassNotFoundException, NoSuchMethodException {
 
+		return get(null, null, className, methodName, parameterTypes);
+	}
+
+	public static Method get(
+			Map<String, Class<?>> classesMap, Map<MethodKey, Method> methodsMap,
+			String className, String methodName)
+		throws ClassNotFoundException, NoSuchMethodException {
+
+		return get(className, methodName, new Class[0]);
+	}
+
+	public static Method get(
+			Map<String, Class<?>> classesMap, Map<MethodKey, Method> methodsMap,
+			String className, String methodName, Class<?>[] parameterTypes)
+		throws ClassNotFoundException, NoSuchMethodException {
+
 		MethodKey methodKey = new MethodKey(
-			className, methodName, parameterTypes);
+			classesMap, methodsMap, className, methodName, parameterTypes);
 
 		return get(methodKey);
 	}
@@ -58,21 +74,33 @@ public class MethodCache {
 	}
 
 	private MethodCache() {
-		_classes = new HashMap<String, Class<?>>();
-		_methods = new HashMap<MethodKey, Method>();
+		_classesMap = new HashMap<String, Class<?>>();
+		_methodsMap = new HashMap<MethodKey, Method>();
 	}
 
 	private Method _get(MethodKey methodKey)
 		throws ClassNotFoundException, NoSuchMethodException {
 
-		Method method = _methods.get(methodKey);
+		Map<String, Class<?>> classesMap = methodKey.getClassesMap();
+
+		if (classesMap == null) {
+			classesMap = _classesMap;
+		}
+
+		Map<MethodKey, Method> methodsMap = methodKey.getMethodsMap();
+
+		if (methodsMap == null) {
+			methodsMap = _methodsMap;
+		}
+
+		Method method = methodsMap.get(methodKey);
 
 		if (method == null) {
 			String className = methodKey.getClassName();
 			String methodName = methodKey.getMethodName();
 			Class<?>[] types = methodKey.getTypes();
 
-			Class<?> classObj = _classes.get(className);
+			Class<?> classObj = classesMap.get(className);
 
 			if (classObj == null) {
 				ClassLoader contextClassLoader =
@@ -80,12 +108,12 @@ public class MethodCache {
 
 				classObj = contextClassLoader.loadClass(className);
 
-				_classes.put(className, classObj);
+				classesMap.put(className, classObj);
 			}
 
 			method = classObj.getMethod(methodName, types);
 
-			_methods.put(methodKey, method);
+			methodsMap.put(methodKey, method);
 		}
 
 		return method;
@@ -93,7 +121,7 @@ public class MethodCache {
 
 	private static MethodCache _instance = new MethodCache();
 
-	private Map<String, Class<?>> _classes;
-	private Map<MethodKey, Method> _methods;
+	private Map<String, Class<?>> _classesMap;
+	private Map<MethodKey, Method> _methodsMap;
 
 }
