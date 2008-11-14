@@ -31,6 +31,7 @@ import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -120,9 +121,22 @@ public class ForgotPasswordAction extends PortletAction {
 
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
+		long userId = ParamUtil.getLong(actionRequest, "userId");
 
-		User user = UserLocalServiceUtil.getUserByEmailAddress(
-			themeDisplay.getCompanyId(), emailAddress);
+		User user = null;
+
+		if (Validator.isNotNull(emailAddress)) {
+			user = UserLocalServiceUtil.getUserByEmailAddress(
+				themeDisplay.getCompanyId(), emailAddress);
+		}
+		else if (Validator.isNotNull(screenName)) {
+			user = UserLocalServiceUtil.getUserByScreenName(
+				themeDisplay.getCompanyId(), screenName);
+		}
+		else if (userId > 0) {
+			user = UserLocalServiceUtil.getUserById(userId);
+		}
 
 		actionRequest.setAttribute(ForgotPasswordAction.class.getName(), user);
 

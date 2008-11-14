@@ -26,6 +26,10 @@
 
 <%
 User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
+
+if (Validator.isNull(authType)) {
+	authType = company.getAuthType();
+}
 %>
 
 <form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
@@ -42,15 +46,31 @@ User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 		<c:when test="<%= user2 == null%>">
 
 			<%
-			String emailAddress = ParamUtil.getString(request, "emailAddress");
+			String param = null;
+			String key = null;
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+				param = "emailAddress";
+				key = "email-address";
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+				param = "screenName";
+				key = "screen-name";
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+				param = "userId";
+				key = "email-address";
+			}
+
+			String value = ParamUtil.getString(request, param);
 			%>
 
 			<input name="<portlet:namespace />step" type="hidden" value="1" />
 
 			<div class="ctrl-holder">
-				<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
+				<label for="<portlet:namespace /><%= param %>"><liferay-ui:message key="<%= key %>" /></label>
 
-				<input name="<portlet:namespace />emailAddress" size="30" type="text" value="<%= HtmlUtil.escape(emailAddress) %>" />
+				<input name="<portlet:namespace /><%= param %>" size="30" type="text" value="<%= HtmlUtil.escape(value) %>" />
 			</div>
 
 			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
@@ -68,7 +88,7 @@ User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 			</div>
 
 		</c:when>
-		<c:otherwise>
+		<c:when test="<%= (user2 != null) && Validator.isNotNull(user2.getEmailAddress()) %>">
 			<input name="<portlet:namespace />step" type="hidden" value="2" />
 			<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
 
@@ -84,6 +104,11 @@ User user2 = (User)request.getAttribute(ForgotPasswordAction.class.getName());
 
 			<div class="button-holder">
 				<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="portlet-msg-alert">
+				<liferay-ui:message key="sorry-the-system-cannot-send-you-a-new-password-because-you-have-not-provided-an-email-address" />
 			</div>
 		</c:otherwise>
 	</c:choose>
