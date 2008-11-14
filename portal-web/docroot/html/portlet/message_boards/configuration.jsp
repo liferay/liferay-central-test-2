@@ -462,7 +462,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				</tr>
 
 				<%
-				priorities = LocalizationUtil.getPrefsValues(preferences, "priorities", defaultLanguageId);
+				priorities = LocalizationUtil.getPreferencesValues(preferences, "priorities", defaultLanguageId);
 
 				for (int i = 0; i < 10; i++) {
 					String name = StringPool.BLANK;
@@ -546,7 +546,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 						continue;
 					}
 
-					String[] tempPriorities = LocalizationUtil.getPrefsValues(preferences, "priorities", LocaleUtil.toLanguageId(locales[i]));
+					String[] tempPriorities = LocalizationUtil.getPreferencesValues(preferences, "priorities", LocaleUtil.toLanguageId(locales[i]));
 
 					for (int j = 0; j < 10; j++) {
 						String name = StringPool.BLANK;
@@ -731,7 +731,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<textarea class="lfr-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(preferences, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
+				<textarea class="lfr-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPreferencesValues(preferences, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
 			</td>
 			<td>
 
@@ -742,7 +742,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 					}
 				%>
 
-					<input id="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPrefsValues(preferences, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
+					<input id="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPreferencesValues(preferences, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
 
 				<%
 				}

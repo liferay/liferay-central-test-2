@@ -25,27 +25,28 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 Set<String> reminderQueries = organization.getReminderQueryQuestions(defaultLocale);
-String reminderQueriesValue = StringUtil.merge(reminderQueries, StringPool.NEW_LINE);
 %>
 
 <h3><liferay-ui:message key="reminder-queries" /></h3>
 
 <span class="portlet-msg-info">
-	<liferay-ui:message key="specify-custom-reminder-queries-for-the-users-of-this-organization.-enter-one-question-per-line" />
+	<liferay-ui:message key="specify-custom-reminder-queries-for-the-users-of-this-organization" />
 </span>
 
 <fieldset class="block-labels">
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />reminderQueries"><liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %></label>
-		<textarea name="<portlet:namespace />reminderQueries" style='height: 105px; width: 400px;'><%= reminderQueriesValue %></textarea>
+
+		<textarea class="lfr-textarea" name="<portlet:namespace />reminderQueries"><%= StringUtil.merge(reminderQueries, StringPool.NEW_LINE) %></textarea>
 	</div>
 
 	<div class="ctrl-holder">
@@ -53,6 +54,7 @@ String reminderQueriesValue = StringUtil.merge(reminderQueries, StringPool.NEW_L
 
 		<select id="<portlet:namespace />reminderQueryLanguageId" name="<portlet:namespace />reminderQueryLanguageId" onChange="<portlet:namespace />updateReminderQueriesLanguage();">
 			<option value="" />
+
 			<%
 			for (int i = 0; i < locales.length; i++) {
 				if (locales[i].equals(defaultLocale)) {
@@ -96,13 +98,11 @@ String reminderQueriesValue = StringUtil.merge(reminderQueries, StringPool.NEW_L
 	var lastLanguageId = "<%= currentLanguageId %>";
 
 	function <portlet:namespace />onReminderQueriesChanged() {
-		console.log("changed");
 		reminderQueriesChanged = true;
 	}
 
 	function <portlet:namespace />updateReminderQueriesLanguage() {
 		if (lastLanguageId != "<%= defaultLanguageId %>") {
-			console.log("updateReminderQueriesLanguage");
 			if (reminderQueriesChanged) {
 				var reminderQueriesValue = jQuery("#<portlet:namespace />reminderQueries_temp").attr("value");
 
@@ -110,7 +110,6 @@ String reminderQueriesValue = StringUtil.merge(reminderQueries, StringPool.NEW_L
 					reminderQueriesValue = "";
 				}
 
-				console.log("value: " + reminderQueriesValue);
 				jQuery("#<portlet:namespace />reminderQueries_" + lastLanguageId).attr("value", reminderQueriesValue);
 
 				reminderQueriesChanged = false;
@@ -129,6 +128,7 @@ String reminderQueriesValue = StringUtil.merge(reminderQueries, StringPool.NEW_L
 
 		if (selLanguageId != "") {
 			<portlet:namespace />updateReminderQueriesLanguageTemps(selLanguageId);
+
 			jQuery("#<portlet:namespace />reminderQueries_temp").show();
 		}
 		else {

@@ -200,35 +200,36 @@ public class LocalizationUtil {
 	}
 
 	public static Map<Locale, String> getLocalizedParameter(
-		PortletRequest portletRequest, String param) {
+		PortletRequest portletRequest, String parameter) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		Map<Locale, String> valuesMap = new HashMap<Locale, String>();
+		Map<Locale, String> map = new HashMap<Locale, String>();
 
 		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			String localeParam = param + StringPool.UNDERLINE + languageId;
+			String localeParameter =
+				parameter + StringPool.UNDERLINE + languageId;
 
-			valuesMap.put(
-				locale, ParamUtil.getString(portletRequest, localeParam));
+			map.put(
+				locale, ParamUtil.getString(portletRequest, localeParameter));
 		}
 
-		return valuesMap;
+		return map;
 	}
 
-	public static String getPrefsValue(
+	public static String getPreferencesValue(
 		PortletPreferences preferences, String key, String languageId) {
 
-		return getPrefsValue(preferences, key, languageId, true);
+		return getPreferencesValue(preferences, key, languageId, true);
 	}
 
-	public static String getPrefsValue(
+	public static String getPreferencesValue(
 		PortletPreferences preferences, String key, String languageId,
 		boolean useDefault) {
 
-		String localizedKey = _getPrefsKey(key, languageId);
+		String localizedKey = _getPreferencesKey(key, languageId);
 
 		String value = preferences.getValue(localizedKey, StringPool.BLANK);
 
@@ -239,17 +240,17 @@ public class LocalizationUtil {
 		return value;
 	}
 
-	public static String[] getPrefsValues(
+	public static String[] getPreferencesValues(
 		PortletPreferences preferences, String key, String languageId) {
 
-		return getPrefsValues(preferences, key, languageId, true);
+		return getPreferencesValues(preferences, key, languageId, true);
 	}
 
-	public static String[] getPrefsValues(
+	public static String[] getPreferencesValues(
 		PortletPreferences preferences, String key, String languageId,
 		boolean useDefault) {
 
-		String localizedKey = _getPrefsKey(key, languageId);
+		String localizedKey = _getPreferencesKey(key, languageId);
 
 		String[] values = preferences.getValues(localizedKey, new String[0]);
 
@@ -354,36 +355,38 @@ public class LocalizationUtil {
 		return xml;
 	}
 
-	public static void setLocalizedPrefsValues (
+	public static void setLocalizedPreferencesValues (
 			ActionRequest actionRequest, PortletPreferences preferences,
 			String parameter)
 		throws Exception {
 
-		Map<Locale, String> localeTitlesMap =
-			getLocalizedParameter(actionRequest, parameter);
+		Map<Locale, String> map = getLocalizedParameter(
+			actionRequest, parameter);
 
-		for (Locale locale : localeTitlesMap.keySet()) {
-			String key = parameter + "_" + LanguageUtil.getLanguageId(locale);
-			String value = localeTitlesMap.get(locale);
+		for (Locale locale : map.keySet()) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			String key = parameter + StringPool.UNDERLINE + languageId;
+			String value = map.get(locale);
 
 			preferences.setValue(key, value);
 		}
 	}
 
-	public static void setPrefsValue(
+	public static void setPreferencesValue(
 			PortletPreferences preferences, String key, String languageId,
 			String value)
 		throws Exception {
 
-		preferences.setValue(_getPrefsKey(key, languageId), value);
+		preferences.setValue(_getPreferencesKey(key, languageId), value);
 	}
 
-	public static void setPrefsValues(
+	public static void setPreferencesValues(
 			PortletPreferences preferences, String key, String languageId,
 			String[] values)
 		throws Exception {
 
-		preferences.setValues(_getPrefsKey(key, languageId), values);
+		preferences.setValues(_getPreferencesKey(key, languageId), values);
 	}
 
 	public static String updateLocalization(
@@ -578,7 +581,7 @@ public class LocalizationUtil {
 		return value;
 	}
 
-	private static String _getPrefsKey(String key, String languageId) {
+	private static String _getPreferencesKey(String key, String languageId) {
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
@@ -643,17 +646,17 @@ public class LocalizationUtil {
 
 		if (Validator.isNotNull(xml) && !xml.equals(_EMPTY_ROOT_NODE)) {
 			synchronized (_cache) {
-				Map<Tuple, String> valueMap = _cache.get(xml);
+				Map<Tuple, String> map = _cache.get(xml);
 
-				if (valueMap == null) {
-					valueMap = new HashMap<Tuple, String>();
+				if (map == null) {
+					map = new HashMap<Tuple, String>();
 				}
 
 				Tuple subkey = new Tuple(useDefault, requestedLanguageId);
 
-				valueMap.put(subkey, value);
+				map.put(subkey, value);
 
-				_cache.put(xml, valueMap);
+				_cache.put(xml, map);
 			}
 		}
 	}
@@ -662,11 +665,11 @@ public class LocalizationUtil {
 
 	private static final String _DEFAULT_LOCALE = "default-locale";
 
+	private static final String _EMPTY_ROOT_NODE = "<root />";
+
 	private static final String _LANGUAGE_ID = "language-id";
 
 	private static final String _ROOT = "root";
-
-	private static final String _EMPTY_ROOT_NODE = "<root />";
 
 	private static Log _log = LogFactoryUtil.getLog(LocalizationUtil.class);
 

@@ -87,7 +87,7 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-String[] priorities = LocalizationUtil.getPrefsValues(preferences, "priorities", currentLanguageId);
+String[] priorities = LocalizationUtil.getPreferencesValues(preferences, "priorities", currentLanguageId);
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);

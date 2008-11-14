@@ -237,7 +237,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			preferences.setValue("reminderQueries", reminderQueries);
 
-			LocalizationUtil.setLocalizedPrefsValues(
+			LocalizationUtil.setLocalizedPreferencesValues(
 				actionRequest, preferences, "reminderQueries");
 
 			preferences.store();

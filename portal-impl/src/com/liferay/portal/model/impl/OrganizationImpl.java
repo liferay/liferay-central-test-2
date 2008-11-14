@@ -224,7 +224,7 @@ public class OrganizationImpl
 		PortletPreferences preferences = getPreferences();
 
 		String[] questions = StringUtil.split(
-			LocalizationUtil.getPrefsValue(
+			LocalizationUtil.getPreferencesValue(
 				preferences, "reminderQueries", languageId, false),
 			StringPool.NEW_LINE);
 

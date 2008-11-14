@@ -112,7 +112,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 									String optionStyle = StringPool.BLANK;
 
 									if (Validator.isNotNull(role.getTitle(locales[i], false))) {
-
 										optionStyle = "style=\"font-weight: bold\"";
 									}
 								%>

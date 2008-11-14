@@ -276,7 +276,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				}
 			}
 
-			LocalizationUtil.setPrefsValues(
+			LocalizationUtil.setPreferencesValues(
 				preferences, "priorities", languageId,
 				priorities.toArray(new String[priorities.size()]));
 		}
@@ -322,7 +322,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				ranks[count++] = kvpName + StringPool.EQUAL + kvpValue;
 			}
 
-			LocalizationUtil.setPrefsValues(
+			LocalizationUtil.setPreferencesValues(
 				preferences, "ranks", languageId, ranks);
 		}
 	}
