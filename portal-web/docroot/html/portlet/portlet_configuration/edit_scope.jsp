@@ -32,7 +32,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
-long scopeLayoutId = PrefsParamUtil.getLong(preferences, request, "lfr-scope-layout-id");
+long scopeLayoutId = GetterUtil.getLong(preferences.getValue("lfr-scope-layout-id", null));
 
 Group group = layout.getGroup();
 %>
