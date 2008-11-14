@@ -86,7 +86,7 @@ public class TagsUtil {
 		CharPool.STAR, CharPool.TILDE
 	};
 
-	public Set<String> addLayoutTagsEntries(
+	public static Set<String> addLayoutTagsEntries(
 		HttpServletRequest request, List<TagsEntry> entries) {
 
 		Set<String> layoutTagsEntries = getLayoutTagsEntries(request);
