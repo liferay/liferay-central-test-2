@@ -68,13 +68,16 @@
 			<div class="ctrl-holder">
 
 				<%
-				String loginLabel = "screen-name";
+				String loginLabel = null;
 
 				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 					loginLabel = "email-address";
 				}
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+					loginLabel = "screen-name";
+				}
 				else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-					loginLabel = "user-id";
+					loginLabel = "id";
 				}
 				%>
 
