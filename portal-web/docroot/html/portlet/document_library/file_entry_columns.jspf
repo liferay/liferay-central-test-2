@@ -93,6 +93,11 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 
 			<%
 			List<TagsEntry> tagsEntries = TagsEntryLocalServiceUtil.getEntries(DLFileEntry.class.getName(), fileEntry.getFileEntryId(), true);
+
+			for (TagsEntry tagsEntry : tagsEntries) {
+				%><%=tagsEntry.getName()%> <%
+				tags.add(tagsEntry.getName());
+			}
 			%>
 
 			<liferay-ui:search-container-column-text

@@ -156,4 +156,10 @@ Arrays.sort(entries);
 String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+
+boolean groupByClass = false;
+boolean showAddAsset = true;
+boolean showEditContent = true;
+
 %>
+<%@ include file="/html/portlet/tagged_content/init-ext.jsp" %>

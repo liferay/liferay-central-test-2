@@ -28,18 +28,25 @@ long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, notEntr
 
 Date now = new Date();
 
-int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+if ((entryIds.length == 0) && (notEntryIds.length == 0)) {
+	long[] tempArray = {-999999};
 
-searchContainer.setTotal(total);
+	entryIds = tempArray;
+}
 
-List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+if (!groupByClass) {
+	int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
 
-searchContainer.setResults(results);
+	searchContainer.setTotal(total);
 
-request.setAttribute("view.jsp-results", results);
+	List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
-if (results.size() <= 0) {
-	if (!themeDisplay.isSignedIn()) {
+	searchContainer.setResults(results);
+
+	request.setAttribute("view.jsp-results", results);
+
+	if (results.size() <= 0) {
+		if (!themeDisplay.isSignedIn()) {
 %>
 
 		<style type="text/css">
@@ -49,8 +56,8 @@ if (results.size() <= 0) {
 		</style>
 
 <%
-	}
-	else {
+		}
+		else {
 %>
 
 		<liferay-ui:message key="there-are-no-results" />
@@ -67,66 +74,57 @@ if (results.size() <= 0) {
 		</style>
 
 <%
+		}
 	}
-}
-
-for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-	TagsAsset asset = (TagsAsset)results.get(assetIndex);
-
-	String className = PortalUtil.getClassName(asset.getClassNameId());
-	long classPK = asset.getClassPK();
-
-	String title = asset.getTitle();
-	String summary = StringPool.BLANK;
-	String viewURL = StringPool.BLANK;
-	String viewURLMessage = StringPool.BLANK;
-	String editURL = StringPool.BLANK;
-
-	boolean show = true;
-
-	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
-
-	request.setAttribute("view.jsp-asset", asset);
-
-	request.setAttribute("view.jsp-title", title);
-	request.setAttribute("view.jsp-summary", summary);
-	request.setAttribute("view.jsp-viewURL", viewURL);
-	request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
-
-	request.setAttribute("view.jsp-className", className);
-	request.setAttribute("view.jsp-classPK", new Long(classPK));
-
-	request.setAttribute("view.jsp-show", new Boolean(show));
-
-	try {
 %>
-
-		<c:choose>
-			<c:when test='<%= displayStyle.equals("full-content") %>'>
-				<div>
-					<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
-				</div>
-			</c:when>
-			<c:when test='<%= displayStyle.equals("abstracts") %>'>
-				<div>
-					<liferay-util:include page="/html/portlet/tagged_content/display_abstract.jsp" />
-				</div>
-			</c:when>
-			<c:when test='<%= displayStyle.equals("title-list") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_title_list.jsp" />
-			</c:when>
-			<c:when test='<%= displayStyle.equals("table") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_table.jsp" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
-			</c:otherwise>
-		</c:choose>
-
+	<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
 <%
+}
+else {
+
+	int grandTotal = 0;
+
+	String[] assetTypes = new String[4];
+	assetTypes[0] = BlogsEntry.class.getName();
+	assetTypes[1] = MBMessage.class.getName();
+	assetTypes[2] = DLFileEntry.class.getName();
+	assetTypes[3] = WikiPage.class.getName();
+
+	String[] assetTitles = {"blogs", "threads", "documents", "wiki-pages"};
+
+	for (int x = 0; x < assetTypes.length; x++) {
+		long[] cIds = {PortalUtil.getClassNameId(assetTypes[x])};
+
+		int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, cIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+
+		grandTotal += total;
+
+		searchContainer.setTotal(total);
+
+		List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, cIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+
+		request.setAttribute("view.jsp-results", results);
+
+		if (results.size() > 0) {
+
+%>
+<h3><liferay-ui:message key="<%= assetTitles[x] %>" /></h3>
+
+<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
+<%
+		}
 	}
-	catch (Exception e) {
-		_log.error(e.getMessage());
+
+	if (grandTotal == 0) {
+%>
+<style type="text/css">
+	#p_p_id_<%=portletDisplay.getId() %>_ {
+		display: none;
+	}
+</style>
+<%
 	}
 }
 %>

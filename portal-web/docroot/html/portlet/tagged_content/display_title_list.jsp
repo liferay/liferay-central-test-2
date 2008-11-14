@@ -164,9 +164,11 @@ if (Validator.isNotNull(asset.getUrl())) {
 			</c:otherwise>
 		</c:choose>
 
-		<div class="lfr-meta-actions edit-controls">
-			<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
-		</div>
+		<c:if test="<%= showEditContent %>">
+			<div class="lfr-meta-actions edit-controls">
+				<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+			</div>
+		</c:if>
 
 		<span class="portlet-journal-metadata">
 			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>

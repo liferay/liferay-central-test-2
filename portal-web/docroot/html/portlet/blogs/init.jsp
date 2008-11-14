@@ -36,7 +36,9 @@
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%

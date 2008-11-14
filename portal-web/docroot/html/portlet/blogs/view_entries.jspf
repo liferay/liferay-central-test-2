@@ -44,8 +44,14 @@ showSearch = showSearch && (results.size() > 0);
 </c:if>
 
 <%
+List<String> tags = new ArrayList<String>();
+
 for (int i = 0; i < results.size(); i++) {
 	BlogsEntry entry = (BlogsEntry)results.get(i);
+	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true);
+	for (TagsEntry tagsEntry : entries) {
+		tags.add(tagsEntry.getName());
+	}
 %>
 
 	<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
@@ -54,6 +60,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <%
 }
+request.setAttribute("overallTags", tags.toArray(new String[0]));
 
 String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/-/blogs/rss";
 
@@ -65,5 +72,6 @@ if (Validator.isNotNull(rssURLParams)) {
 <div class="subscribe">
 	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
 </div>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="<%= rssURL %>">
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
