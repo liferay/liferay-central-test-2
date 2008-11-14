@@ -27,13 +27,18 @@
 <%
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
+String reminderQueries = ParamUtil.getString(request, "reminderQueries");
+Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(renderRequest, "reminderQueries");
+
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-Set<String> reminderQueries = organization.getReminderQueryQuestions(defaultLocale);
+if (Validator.isNull(reminderQueries)) {
+	reminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(defaultLocale), StringPool.NEW_LINE);
+}
 %>
 
 <h3><liferay-ui:message key="reminder-queries" /></h3>
@@ -46,7 +51,7 @@ Set<String> reminderQueries = organization.getReminderQueryQuestions(defaultLoca
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />reminderQueries"><liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %></label>
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />reminderQueries"><%= StringUtil.merge(reminderQueries, StringPool.NEW_LINE) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />reminderQueries"><%= reminderQueries %></textarea>
 	</div>
 
 	<div class="ctrl-holder">
@@ -63,7 +68,12 @@ Set<String> reminderQueries = organization.getReminderQueryQuestions(defaultLoca
 
 				String optionStyle = StringPool.BLANK;
 
-				if (!organization.getReminderQueryQuestions(locales[i]).isEmpty()) {
+				String curReminderQueries = reminderQueriesMap.get(locales[i]);
+
+				if (Validator.isNull(curReminderQueries)) {
+					curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
+				}
+				if (Validator.isNotNull(curReminderQueries)) {
 					optionStyle = "style=\"font-weight: bold\"";
 				}
 			%>
@@ -81,9 +91,15 @@ Set<String> reminderQueries = organization.getReminderQueryQuestions(defaultLoca
 			if (locales[i].equals(defaultLocale)) {
 				continue;
 			}
+
+			String curReminderQueries = reminderQueriesMap.get(locales[i]);
+
+			if (Validator.isNull(curReminderQueries)) {
+				curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
+			}
 		%>
 
-			<input type="hidden" id="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" value="<%= StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE) %>">
+			<input type="hidden" id="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" value="<%= curReminderQueries %>" />
 
 		<%
 		}
