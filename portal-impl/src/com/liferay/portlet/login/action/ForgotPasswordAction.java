@@ -119,10 +119,10 @@ public class ForgotPasswordAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long userId = ParamUtil.getLong(actionRequest, "userId");
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
-		String screenName = ParamUtil.getString(actionRequest, "screenName");
-		long userId = ParamUtil.getLong(actionRequest, "userId");
 
 		User user = null;
 

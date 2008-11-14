@@ -46,31 +46,31 @@ if (Validator.isNull(authType)) {
 		<c:when test="<%= user2 == null%>">
 
 			<%
-			String param = null;
-			String key = null;
+			String loginParameter = null;
+			String loginLabel = null;
 
 			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-				param = "emailAddress";
-				key = "email-address";
+				loginParameter = "emailAddress";
+				loginLabel = "email-address";
 			}
 			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-				param = "screenName";
-				key = "screen-name";
+				loginParameter = "screenName";
+				loginLabel = "screen-name";
 			}
 			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-				param = "userId";
-				key = "email-address";
+				loginParameter = "userId";
+				loginLabel = "id";
 			}
 
-			String value = ParamUtil.getString(request, param);
+			String loginValue = ParamUtil.getString(request, loginParameter);
 			%>
 
 			<input name="<portlet:namespace />step" type="hidden" value="1" />
 
 			<div class="ctrl-holder">
-				<label for="<portlet:namespace /><%= param %>"><liferay-ui:message key="<%= key %>" /></label>
+				<label for="<portlet:namespace /><%= loginParameter %>"><liferay-ui:message key="<%= loginLabel %>" /></label>
 
-				<input name="<portlet:namespace /><%= param %>" size="30" type="text" value="<%= HtmlUtil.escape(value) %>" />
+				<input name="<portlet:namespace /><%= loginParameter %>" size="30" type="text" value="<%= HtmlUtil.escape(loginValue) %>" />
 			</div>
 
 			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
@@ -108,7 +108,7 @@ if (Validator.isNull(authType)) {
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-alert">
-				<liferay-ui:message key="sorry-the-system-cannot-send-you-a-new-password-because-you-have-not-provided-an-email-address" />
+				<liferay-ui:message key="the-system-cannot-send-you-a-new-password-because-you-have-not-provided-an-email-address" />
 			</div>
 		</c:otherwise>
 	</c:choose>
