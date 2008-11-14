@@ -334,13 +334,15 @@ public class LayoutExporter {
 					portlet.getPortletDataHandlerClass();
 
 				if (portletDataHandlerClass != null) {
-					exportCurPortletData = exportPortletData &&
+					exportCurPortletData =
+						exportPortletData &&
 						MapUtil.getBoolean(
 							parameterMap,
 							PortletDataHandlerKeys.PORTLET_DATA +
 								StringPool.UNDERLINE + rootPortletId);
 
-					exportCurPortletSetup = exportPortletSetup &&
+					exportCurPortletSetup =
+						exportPortletSetup &&
 						MapUtil.getBoolean(
 							parameterMap,
 							PortletDataHandlerKeys.PORTLET_SETUP +
