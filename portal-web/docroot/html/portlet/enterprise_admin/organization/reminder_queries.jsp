@@ -28,6 +28,11 @@
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
 String reminderQueries = ParamUtil.getString(request, "reminderQueries");
+
+if (Validator.isNull(reminderQueries)) {
+	reminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(defaultLocale), StringPool.NEW_LINE);
+}
+
 Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(renderRequest, "reminderQueries");
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
@@ -35,10 +40,6 @@ Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
-
-if (Validator.isNull(reminderQueries)) {
-	reminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(defaultLocale), StringPool.NEW_LINE);
-}
 %>
 
 <h3><liferay-ui:message key="reminder-queries" /></h3>
@@ -73,6 +74,7 @@ if (Validator.isNull(reminderQueries)) {
 				if (Validator.isNull(curReminderQueries)) {
 					curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
 				}
+
 				if (Validator.isNotNull(curReminderQueries)) {
 					optionStyle = "style=\"font-weight: bold\"";
 				}
