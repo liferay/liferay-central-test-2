@@ -185,15 +185,15 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	border: none;
 }
 
-.lfr-panel-titlebar {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 2px 50%;
+.lfr-panel .lfr-panel-titlebar {
 	margin-bottom: 0.5em;
 	overflow: hidden;
-	padding-left: 15px;
 }
 
 .lfr-panel.lfr-collapsible .lfr-panel-titlebar {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 2px 50%;
 	cursor: pointer;
+	padding-left: 15px;
 }
 
 .lfr-panel-titlebar .lfr-panel-title {
@@ -226,11 +226,16 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: 0;
 }
 
-.lfr-panel.lfr-collapsible .lfr-has-button {
+.lfr-panel .lfr-panel-titlebar {
 	background: #ececec url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
 	border-bottom: 1px solid #cfcfcf;
 	line-height: 1.6;
 	padding: 2px;
+}
+
+.lfr-panel.lfr-collapsible .lfr-has-button {
+	background-image: none;
+	padding-left: 2px;
 }
 
 .ie6 .lfr-panel.lfr-collapsible .lfr-has-button {
@@ -254,9 +259,28 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	position: absolute;
 }
 
+.js .lfr-floating-trigger {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding: 3px;
+	padding-right: 15px;
+	text-decoration: none;
+}
+
 .js .lfr-trigger-selected {
 	background-color: #069;
 	color: #fff;
+}
+
+.lfr-floating-container .col {
+	float: left;
+	margin-right: 10px;
+	width: auto;
+}
+
+.lfr-floating-container .lfr-form-row {
+	border: none;
 }
 
 /* ---------- Panel pagination ---------- */
