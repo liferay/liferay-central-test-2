@@ -87,9 +87,9 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 <liferay-ui:error exception="<%= MailingListOutUserNameException.class %>" message="please-enter-a-valid-outgoing-user-name" />
 
 <div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(parentCategoryId, 0, pageContext, renderRequest, renderResponse) %> &raquo;
+	<%= BreadcrumbsUtil.removeLastClass(MBUtil.getBreadcrumbs(parentCategoryId, 0, pageContext, renderRequest, renderResponse)) %> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((category == null) ? Constants.ADD : Constants.UPDATE) + "-category" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((category == null) ? Constants.ADD : Constants.UPDATE) + "-category" %>' /></span>
 </div>
 
 <table class="lfr-table">

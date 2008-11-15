@@ -186,9 +186,9 @@ if (message != null) {
 %>
 
 <div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %> &raquo;
+	<%= BreadcrumbsUtil.removeLastClass(MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse)) %> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((message == null) ? Constants.ADD : Constants.UPDATE) + "-message" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((message == null) ? Constants.ADD : Constants.UPDATE) + "-message" %>' /></span>
 </div>
 
 <table class="lfr-table">

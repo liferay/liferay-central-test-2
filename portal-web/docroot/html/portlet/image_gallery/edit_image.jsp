@@ -47,9 +47,9 @@ if (image != null) {
 %>
 
 <div class="breadcrumbs">
-	<%= IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse) %> &raquo;
+	<%= BreadcrumbsUtil.removeLastClass(IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse)) %> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((image == null) ? Constants.ADD : Constants.UPDATE) + "-image" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((image == null) ? Constants.ADD : Constants.UPDATE) + "-image" %>' /></span>
 </div>
 
 <c:if test="<%= image != null %>">

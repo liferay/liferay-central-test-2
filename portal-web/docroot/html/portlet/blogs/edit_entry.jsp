@@ -193,9 +193,9 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 <liferay-ui:tags-error />
 
 <div class="breadcrumbs">
-	<span class="first last"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
+	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((entry == null) ? Constants.ADD : Constants.UPDATE) + "-entry" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((entry == null) ? Constants.ADD : Constants.UPDATE) + "-entry" %>' /></span>
 </div>
 
 <table class="lfr-table">

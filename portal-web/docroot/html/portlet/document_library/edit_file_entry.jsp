@@ -170,9 +170,9 @@ portletURL.setParameter("name", name);
 </c:if>
 
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %> &raquo;
+	<%= BreadcrumbsUtil.removeLastClass(DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse)) %> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((fileEntry == null) ? Constants.ADD : Constants.UPDATE) + "-file-entry" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((fileEntry == null) ? Constants.ADD : Constants.UPDATE) + "-file-entry" %>' /></span>
 </div>
 
 <c:if test="<%= fileEntry != null %>">

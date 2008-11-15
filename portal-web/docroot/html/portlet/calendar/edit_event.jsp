@@ -322,9 +322,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
 
 <div class="breadcrumbs">
-	<span class="first last"><a href="<portlet:renderURL />"><liferay-ui:message key="events" /></a></span> &raquo;
+	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="events" /></a></span> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((event == null) ? Constants.ADD : Constants.UPDATE) + "-event" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((event == null) ? Constants.ADD : Constants.UPDATE) + "-event" %>' /></span>
 </div>
 
 <table class="lfr-table">

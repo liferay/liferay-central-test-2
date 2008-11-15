@@ -48,9 +48,9 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 
 <div class="breadcrumbs">
-	<span class="first last"><a href="<portlet:renderURL />"><liferay-ui:message key="nodes" /></a></span> &raquo;
+	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="nodes" /></a></span> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
 </div>
 
 <table class="lfr-table">

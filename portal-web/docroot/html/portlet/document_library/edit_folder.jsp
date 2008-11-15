@@ -70,9 +70,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(parentFolderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %> &raquo;
+	<%= BreadcrumbsUtil.removeLastClass(DLUtil.getBreadcrumbs(parentFolderId, null, rootFolderId, pageContext, renderRequest, renderResponse)) %> &raquo;
 
-	<span class="current-action"><liferay-ui:message key='<%= ((folder == null) ? Constants.ADD : Constants.UPDATE) + "-folder" %>' /></span>
+	<span class="last"><liferay-ui:message key='<%= ((folder == null) ? Constants.ADD : Constants.UPDATE) + "-folder" %>' /></span>
 </div>
 
 <table class="lfr-table">
