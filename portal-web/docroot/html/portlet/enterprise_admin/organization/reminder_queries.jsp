@@ -25,6 +25,12 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String currentLanguageId = LanguageUtil.getLanguageId(request);
+Locale defaultLocale = LocaleUtil.getDefault();
+String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+Locale[] locales = LanguageUtil.getAvailableLocales();
+
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
 String reminderQueries = ParamUtil.getString(request, "reminderQueries");
@@ -34,12 +40,6 @@ if (Validator.isNull(reminderQueries)) {
 }
 
 Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(renderRequest, "reminderQueries");
-
-String currentLanguageId = LanguageUtil.getLanguageId(request);
-Locale defaultLocale = LocaleUtil.getDefault();
-String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
 <h3><liferay-ui:message key="reminder-queries" /></h3>
