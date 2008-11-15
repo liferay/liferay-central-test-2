@@ -279,7 +279,7 @@ if (message != null) {
 	</tr>
 </c:if>
 
-<c:if test="<%= parentMessageId <= 0 %>">
+<c:if test="<%= curParentMessage == null %>">
 
 	<%
 	boolean question = false;
@@ -383,33 +383,35 @@ if (message != null) {
 	</tr>
 </c:if>
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
+<c:if test="<%= (curParentMessage == null) || childrenMessagesTaggable %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td class="lfr-label">
+			<liferay-ui:message key="tags" />
+		</td>
+		<td>
 
-		<%
-		long classPK = 0;
+			<%
+			long classPK = 0;
 
-		if (message != null) {
-			classPK = message.getMessageId();
-		}
-		%>
+			if (message != null) {
+				classPK = message.getMessageId();
+			}
+			%>
 
-		<liferay-ui:tags-selector
-			className="<%= MBMessage.class.getName() %>"
-			classPK="<%= classPK %>"
-			hiddenInput="tagsEntries"
-			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
-		/>
-	</td>
-</tr>
+			<liferay-ui:tags-selector
+				className="<%= MBMessage.class.getName() %>"
+				classPK="<%= classPK %>"
+				hiddenInput="tagsEntries"
+				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
+		</td>
+	</tr>
+</c:if>
 
 <c:if test="<%= message == null %>">
 	<tr>
