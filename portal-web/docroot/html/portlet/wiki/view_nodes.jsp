@@ -47,12 +47,6 @@ List results = WikiNodeLocalServiceUtil.getNodes(scopeGroupId, searchContainer.g
 searchContainer.setResults(results);
 %>
 
-<liferay-ui:tabs
-	names="wikis"
-	url="<%= portletURL.toString() %>"
-	backURL="<%= renderResponse.createRenderURL().toString() %>"
-/>
-
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm">

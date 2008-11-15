@@ -44,13 +44,14 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<liferay-ui:tabs
-	names="wiki"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
+
+<div class="breadcrumbs">
+	<span class="first last"><a href="<portlet:renderURL />"><liferay-ui:message key="nodes" /></a></span> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
+</div>
 
 <table class="lfr-table">
 <tr>
