@@ -138,16 +138,13 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <input name="<portlet:namespace />toFolderId" type="hidden" value="<%= toFolderId %>" />
 <input name="<portlet:namespace />toName" type="hidden" value="<%= toName %>" />
 
-<liferay-ui:tabs
-	names="shortcut"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
 <liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
 
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
+	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((fileShortcut == null) ? Constants.ADD : Constants.UPDATE) + "-short-cut" %>' /></span>
 </div>
 
 <c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">

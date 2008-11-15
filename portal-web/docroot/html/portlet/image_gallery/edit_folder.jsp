@@ -65,19 +65,14 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
-<liferay-ui:tabs
-	names="folder"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
-	<div class="breadcrumbs">
-		<%= IGUtil.getBreadcrumbs(parentFolderId, 0, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+<div class="breadcrumbs">
+	<%= IGUtil.getBreadcrumbs(parentFolderId, 0, pageContext, renderRequest, renderResponse) %> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((folder == null) ? Constants.ADD : Constants.UPDATE) + "-folder" %>' /></span>
+</div>
 
 <table class="lfr-table">
 

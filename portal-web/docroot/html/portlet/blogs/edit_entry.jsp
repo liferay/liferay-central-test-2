@@ -189,13 +189,14 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />draft" type="hidden" value="0" />
 
-<liferay-ui:tabs
-	names="entry"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:tags-error />
+
+<div class="breadcrumbs">
+	<span class="first last"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((entry == null) ? Constants.ADD : Constants.UPDATE) + "-entry" %>' /></span>
+</div>
 
 <table class="lfr-table">
 

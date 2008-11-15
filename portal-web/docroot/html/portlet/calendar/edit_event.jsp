@@ -317,14 +317,15 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />eventId" type="hidden" value="<%= eventId %>" />
 
-<liferay-ui:tabs
-	names="event"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= EventDurationException.class %>" message="please-enter-a-longer-duration" />
 <liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
+
+<div class="breadcrumbs">
+	<span class="first last"><a href="<portlet:renderURL />"><liferay-ui:message key="events" /></a></span> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((event == null) ? Constants.ADD : Constants.UPDATE) + "-event" %>' /></span>
+</div>
 
 <table class="lfr-table">
 <tr>

@@ -46,13 +46,10 @@ if (image != null) {
 }
 %>
 
-<liferay-ui:tabs
-	names="image"
-	backURL="<%= redirect %>"
-/>
-
 <div class="breadcrumbs">
-	<%= IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse) %>
+	<%= IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse) %> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((image == null) ? Constants.ADD : Constants.UPDATE) + "-image" %>' /></span>
 </div>
 
 <c:if test="<%= image != null %>">

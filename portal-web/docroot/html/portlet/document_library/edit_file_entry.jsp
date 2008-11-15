@@ -169,13 +169,10 @@ portletURL.setParameter("name", name);
 	</c:choose>
 </c:if>
 
-<liferay-ui:tabs
-	names="document"
-	backURL="<%= redirect %>"
-/>
-
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
+	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((fileEntry == null) ? Constants.ADD : Constants.UPDATE) + "-file-entry" %>' /></span>
 </div>
 
 <c:if test="<%= fileEntry != null %>">

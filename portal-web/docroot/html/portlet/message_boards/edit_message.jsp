@@ -161,11 +161,6 @@ if ((message != null) && message.isAttachments()) {
 <input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>" />
 <input name="<portlet:namespace />preview" type="hidden" value="" />
 
-<liferay-ui:tabs
-	names="message"
-	backURL="<%= redirect %>"
-/>
-
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
 <liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
@@ -191,7 +186,9 @@ if (message != null) {
 %>
 
 <div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
+	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %> &raquo;
+
+	<span class="current-action"><liferay-ui:message key='<%= ((message == null) ? Constants.ADD : Constants.UPDATE) + "-message" %>' /></span>
 </div>
 
 <table class="lfr-table">
