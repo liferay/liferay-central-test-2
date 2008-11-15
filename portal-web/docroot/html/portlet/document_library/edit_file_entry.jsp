@@ -178,7 +178,7 @@ portletURL.setParameter("name", name);
 <c:if test="<%= fileEntry != null %>">
 	<table class="lfr-table">
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
