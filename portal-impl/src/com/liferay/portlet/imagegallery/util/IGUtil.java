@@ -101,7 +101,7 @@ public class IGUtil {
 				LanguageUtil.get(pageContext, "folders") + "</a>";
 
 		if (folder == null) {
-			return foldersLink;
+			return "<span class=\"first last\">" + foldersLink + "</span>";
 		}
 
 		String breadcrumbs = StringPool.BLANK;
@@ -134,8 +134,13 @@ public class IGUtil {
 						folder.getName() + "</a>";
 
 				if (i == 0) {
-					breadcrumbs =
-						"<span class=\"last\">" + folderLink + "</span>";
+					if (image != null) {
+						breadcrumbs += folderLink;
+					}
+					else {
+						breadcrumbs =
+							"<span class=\"last\">" + folderLink + "</span>";
+					}
 				}
 				else {
 					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
@@ -166,8 +171,8 @@ public class IGUtil {
 				"imageId", String.valueOf(image.getImageId()));
 
 			String imageLink =
-				"<a href=\"" + imageURL.toString() + "\">" +
-					image.getImageId() + "</a>";
+				"<span class=\"last\"><a href=\"" + imageURL.toString() +
+					"\">" + image.getImageId() + "</a></span>";
 
 			breadcrumbs = breadcrumbs + " &raquo; " + imageLink;
 		}

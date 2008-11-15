@@ -207,7 +207,7 @@ public class MBUtil {
 				LanguageUtil.get(pageContext, "categories") + "</a>";
 
 		if (category == null) {
-			return categoriesLink;
+			return "<span class=\"first last\">" + categoriesLink + "</span>";
 		}
 
 		String breadcrumbs = StringPool.BLANK;
@@ -239,8 +239,13 @@ public class MBUtil {
 					category.getName() + "</a>";
 
 			if (i == 0) {
-				breadcrumbs =
-					"<span class=\"last\">" + categoryLink + "</span>";
+				if (message != null) {
+					breadcrumbs += categoryLink;
+				}
+				else {
+					breadcrumbs =
+						"<span class=\"last\">" + categoryLink + "</span>";
+				}
 			}
 			else {
 				breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
@@ -271,8 +276,8 @@ public class MBUtil {
 				"messageId", String.valueOf(message.getMessageId()));
 
 			String messageLink =
-				"<a href=\"" + messageURL.toString() + "\">" +
-					message.getSubject() + "</a>";
+				"<span class=\"last\"><a href=\"" + messageURL.toString() +
+					"\">" + message.getSubject() + "</a></span>";
 
 			breadcrumbs = breadcrumbs + " &raquo; " + messageLink;
 		}

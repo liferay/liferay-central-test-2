@@ -117,7 +117,7 @@ public class DLUtil {
 				LanguageUtil.get(pageContext, "folders") + "</a>";
 
 		if (folder == null) {
-			return foldersLink;
+			return "<span class=\"first last\">" + foldersLink + "</span>";
 		}
 
 		String breadcrumbs = StringPool.BLANK;
@@ -150,8 +150,13 @@ public class DLUtil {
 						folder.getName() + "</a>";
 
 				if (i == 0) {
-					breadcrumbs =
-						"<span class=\"last\">" + folderLink + "</span>";
+					if (fileEntry != null) {
+						breadcrumbs += folderLink;
+					}
+					else {
+						breadcrumbs =
+							"<span class=\"last\">" + folderLink + "</span>";
+					}
 				}
 				else {
 					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
@@ -184,8 +189,8 @@ public class DLUtil {
 			fileEntryURL.setParameter("name", fileEntry.getName());
 
 			String fileEntryLink =
-				"<a href=\"" + fileEntryURL.toString() + "\">" +
-					fileEntry.getName() + "</a>";
+				"<span class=\"last\"><a href=\"" + fileEntryURL.toString() +
+					"\">" + fileEntry.getName() + "</a></span>";
 
 			breadcrumbs = breadcrumbs + " &raquo; " + fileEntryLink;
 		}

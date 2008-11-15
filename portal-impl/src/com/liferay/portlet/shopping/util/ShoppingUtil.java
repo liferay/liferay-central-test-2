@@ -623,7 +623,7 @@ public class ShoppingUtil {
 				LanguageUtil.get(pageContext, "categories") + "</a>";
 
 		if (category == null) {
-			return categoriesLink;
+			return "<span class=\"first last\">" + categoriesLink + "</span>";
 		}
 
 		String breadcrumbs = StringPool.BLANK;

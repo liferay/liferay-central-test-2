@@ -113,7 +113,7 @@ public class BookmarksUtil {
 				LanguageUtil.get(pageContext, "folders") + "</a>";
 
 		if (folder == null) {
-			return foldersLink;
+			return "<span class=\"first last\">" + foldersLink + "</span>";
 		}
 
 		String breadcrumbs = StringPool.BLANK;
@@ -145,8 +145,13 @@ public class BookmarksUtil {
 						folder.getName() + "</a>";
 
 				if (i == 0) {
-					breadcrumbs =
-						"<span class=\"last\">" + folderLink + "</span>";
+					if (entry != null) {
+						breadcrumbs += folderLink;
+					}
+					else {
+						breadcrumbs =
+							"<span class=\"last\">" + folderLink + "</span>";
+					}
 				}
 				else {
 					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
@@ -177,8 +182,8 @@ public class BookmarksUtil {
 				"entryId", String.valueOf(entry.getEntryId()));
 
 			String entryLink =
-				"<a href=\"" + entryURL.toString() + "\">" +
-					entry.getEntryId() + "</a>";
+				"<span class=\"last\"><a href=\"" + entryURL.toString() +
+					"\">" + entry.getEntryId() + "</a></span>";
 
 			breadcrumbs = breadcrumbs + " &raquo; " + entryLink;
 		}
