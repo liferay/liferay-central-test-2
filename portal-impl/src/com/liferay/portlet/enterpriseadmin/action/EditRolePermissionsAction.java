@@ -193,11 +193,11 @@ public class EditRolePermissionsAction extends PortletAction {
 					themeDisplay.getCompanyId(), portletResource, null));
 		}
 
-		for (int i = 0; i < modelResources.length; i++) {
+		for (String modelResource : modelResources) {
 			resourceActionsMap.put(
-				modelResources[i],
+				modelResource,
 				ResourceActionsUtil.getResourceActions(
-					themeDisplay.getCompanyId(), null, modelResources[i]));
+					themeDisplay.getCompanyId(), null, modelResource));
 		}
 
 		for (Map.Entry<String, List<String>> entry :
