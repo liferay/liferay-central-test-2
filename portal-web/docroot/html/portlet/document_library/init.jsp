@@ -98,7 +98,7 @@ String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(preferences, 
 boolean showFileEntriesSearch = PrefsParamUtil.getBoolean(preferences, request, "showFileEntriesSearch", true);
 int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
 
-String defaultFileEntryColumns = "document,size,downloads,locked,action";
+String defaultFileEntryColumns = "name,size,downloads,locked,action";
 String allFileEntryColumns = defaultFileEntryColumns;
 
 String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultFileEntryColumns));
