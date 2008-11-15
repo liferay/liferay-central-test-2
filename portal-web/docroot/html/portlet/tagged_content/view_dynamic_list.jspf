@@ -26,6 +26,10 @@
 long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, entries);
 long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, notEntries);
 
+if (showAllEntriesOnEmptyEntries && (entryIds.length == 0) && (notEntryIds.length == 0)) {
+	entryIds = new long[] {-1};
+}
+
 Date now = new Date();
 
 if (!groupByClass) {
