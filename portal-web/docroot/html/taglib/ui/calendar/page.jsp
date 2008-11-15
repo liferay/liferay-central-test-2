@@ -76,7 +76,7 @@ int weekNumber = 1;
 		}
 		%>
 
-		<tr>
+		<tr class="calendar-header">
 			<th colspan="7">
 				<%= dateFormat.format(selCal.getTime()) %>
 			</th>
