@@ -156,7 +156,7 @@ Arrays.sort(entries);
 String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 
 boolean groupByClass = false;
-boolean showAllEntriesOnEmptyEntries = false;
+boolean allowEmptyResults = false;
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
