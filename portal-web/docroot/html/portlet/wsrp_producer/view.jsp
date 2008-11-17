@@ -362,13 +362,17 @@
 
 				<liferay-ui:tabs names="producer" />
 
-				<c:if test='<%= request.getAttribute("PRODUCER_ADMIN_ERROR") != null && request.getAttribute("PRODUCER_ADMIN_ERROR").equals("PRODUCER_NAME_EXISTS") %>'>
+				<%
+				String producerAdminError = GetterUtil.getString((String)request.getAttribute("PRODUCER_ADMIN_ERROR"));
+				%>
+
+				<c:if test='<%= producerAdminError.equals("PRODUCER_NAME_EXISTS") %>'>
 					<span class="portlet-msg-error">
 						<liferay-ui:message key="producer-name-already-exists" />
 					</span>
 				</c:if>
 
-				<c:if test='<%= request.getAttribute("PRODUCER_ADMIN_ERROR") != null && request.getAttribute("PRODUCER_ADMIN_ERROR").equals("PRODUCER_NAME_INVALID") %>'>
+				<c:if test='<%= producerAdminError.equals("PRODUCER_NAME_INVALID") %>'>
 					<span class="portlet-msg-error">
 						<liferay-ui:message key="producer-name-invalid" />
 					</span>
