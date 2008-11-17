@@ -49,6 +49,7 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(AddOrganizationTest.class);
 		addTestSuite(AddNullOrganizationTest.class);
 		addTestSuite(AddPasswordPoliciesTest.class);
+		addTestSuite(AddNullPasswordPoliciesTest.class);
 		addTestSuite(SettingsTest.class);
 		addTestSuite(MonitoringTest.class);
 		addTestSuite(PluginsTest.class);
@@ -58,6 +59,7 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(BrowseServerPluginsTest.class);
 		addTestSuite(BrowseServerInstanceTest.class);
 		addTestSuite(AddServerInstanceTest.class);
+		addTestSuite(AddNullServerInstanceTest.class);
 		addTestSuite(EditServerInstanceTest.class);
 
 		addTestSuite(EndControlPanelTest.class);
