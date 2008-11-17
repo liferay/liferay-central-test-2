@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-enterprise-admin .uni-form .block-labels textarea {
+	width: 90%;
+}
+
 .portlet-enterprise-admin #header-bottom {
 	background-color: #F6F8FB;
 	height: 34px;
