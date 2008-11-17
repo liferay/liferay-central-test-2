@@ -169,13 +169,11 @@ double version = ParamUtil.getDouble(request, "version");
 
 		<%
 		try {
-			int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
-
 			String languageId = LanguageUtil.getLanguageId(request);
-
+			int page = ParamUtil.getInteger(renderRequest, "page", 1);
 			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, languageId, themeDisplay, articlePage, xmlRequest);
+			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, languageId, themeDisplay, page, xmlRequest);
 
 			String content = articleDisplay.getContent();
 
@@ -188,6 +186,7 @@ double version = ParamUtil.getDouble(request, "version");
 			content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
 
 			PortletURL portletURL = renderResponse.createRenderURL();
+
 			portletURL.setParameter("articleId", articleId);
 			portletURL.setParameter("version", String.valueOf(version));
 		%>
@@ -209,13 +208,14 @@ double version = ParamUtil.getDouble(request, "version");
 
 				<br />
 			</c:if>
+
 		<%
 		}
 		catch (PrincipalException pe) {
 		%>
 
 			<span class="portlet-msg-error">
-			<liferay-ui:message key="you-do-not-have-the-required-permissions" />
+				<liferay-ui:message key="you-do-not-have-the-required-permissions" />
 			</span>
 
 		<%
