@@ -162,7 +162,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			List<JournalArticleImage> articleImages =
 				JournalArticleImageUtil.findByG_A_V(
-					context.getGroupId(), article.getArticleId(),
+					article.getGroupId(), article.getArticleId(),
 					article.getVersion());
 
 			for (JournalArticleImage articleImage : articleImages) {
@@ -199,8 +199,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			String content = article.getContent();
 
 			content = exportDLFileEntries(
-				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks, content);
-			content = exportIGImages(context, igFoldersEl, igImagesEl, content);
+				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks,
+				article.getGroupId(), content);
+			content = exportIGImages(context, igFoldersEl, igImagesEl,
+				article.getGroupId(), content);
 
 			article.setContent(content);
 		}
@@ -236,7 +238,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static String exportDLFileEntries(
 		PortletDataContext context, Element foldersEl, Element fileEntriesEl,
-		Element fileRanks, String content) {
+		Element fileRanks, long entityGroupId, String content) {
 
 		StringBuilder sb = new StringBuilder(content);
 
@@ -302,7 +304,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					long groupId = GetterUtil.getLong(groupIdString);
 
 					if (groupIdString.equals("@group_id@")) {
-						groupId = context.getGroupId();
+						groupId = entityGroupId;
 					}
 
 					fileEntry = DLFileEntryLocalServiceUtil.
@@ -343,14 +345,20 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static String exportIGImages(
 		PortletDataContext context, Element foldersEl, Element imagesEl,
-		String content) {
+		long entityGroupId, String content) {
 
 		StringBuilder sb = new StringBuilder(content);
 
 		int beginPos = content.length();
+		int initialPos = beginPos;
 
 		while (true) {
-			beginPos = content.lastIndexOf("/image/image_gallery?", beginPos);
+			initialPos = beginPos;
+			beginPos = content.lastIndexOf("/image/image_gallery?", initialPos);
+
+			if (beginPos == -1) {
+				beginPos = content.lastIndexOf("@image_path@/image_gallery?", initialPos);
+			}
 
 			if (beginPos == -1) {
 				return sb.toString();
@@ -409,15 +417,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					long groupId = GetterUtil.getLong(groupIdString);
 
 					if (groupIdString.equals("@group_id@")) {
-						groupId = context.getGroupId();
+						groupId = entityGroupId;
 					}
 
 					image = IGImageLocalServiceUtil.getImageByUuidAndGroupId(
 						uuid, groupId);
 				}
 				else if (map.containsKey("image_id") ||
-						 map.containsKey("img_id") ||
-						 map.containsKey("i_id")) {
+						map.containsKey("img_id") ||
+						map.containsKey("i_id")) {
 
 					long imageId = GetterUtil.getLong(map.get("image_id"));
 
@@ -537,8 +545,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			String content = template.getXsl();
 
 			content = exportDLFileEntries(
-				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks, content);
-			content = exportIGImages(context, igFoldersEl, igImagesEl, content);
+				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks,
+				template.getGroupId(), content);
+			content = exportIGImages(context, igFoldersEl, igImagesEl,
+				template.getGroupId(), content);
 
 			content = StringUtil.replace(
 				content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
