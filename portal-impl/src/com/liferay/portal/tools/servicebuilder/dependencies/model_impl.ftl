@@ -298,7 +298,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 	</#if>
 
 	public Object clone() {
-		 ${entity.name}Impl clone = new ${entity.name}Impl();
+		${entity.name}Impl clone = new ${entity.name}Impl();
 
 		<#list entity.regularColList as column>
 			clone.set${column.methodName}(
@@ -431,7 +431,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 	</#list>
 
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
-		private ExpandoBridge _expandoBridge;
+		transient private ExpandoBridge _expandoBridge;
 	</#if>
 
 }
