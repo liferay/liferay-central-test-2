@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.sso.opensso;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.util.CookieUtil;
 
@@ -280,22 +281,11 @@ public class OpenSSOUtil {
 		int responseCode = urlc.getResponseCode();
 
 		if (responseCode == HttpURLConnection.HTTP_OK) {
-			InputStream in = urlc.getInputStream();
-			StringBuffer inbuf = new StringBuffer();
-			InputStreamReader ins = new InputStreamReader(in,"UTF-8");
-			BufferedReader reader = new BufferedReader(ins);
-			String line;
+			String data = StringUtil.read(urlc.getInputStream());
 
-			while((line = reader.readLine()) != null ){
-				inbuf.append(line).append("\n");
-			}
-
-			String data = new String(inbuf);
-
-			if(data.toLowerCase().indexOf("boolean=true") != -1){
+			if (data.toLowerCase().indexOf("boolean=true") != -1){
 				authenticated = true;
 			}
-
 		}
 		else if (_log.isDebugEnabled()) {
 			_log.debug("Authentication response code " + responseCode);

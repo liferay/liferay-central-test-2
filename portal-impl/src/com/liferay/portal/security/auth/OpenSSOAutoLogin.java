@@ -25,6 +25,7 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -97,12 +98,11 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			String screenName = nameValues.get(screenNameAttr);
 			String emailAddress = nameValues.get(emailAddressAttr);
 			String firstName = nameValues.get(firstNameAttr);
-			if (emailAddress == null || emailAddress.equals(StringPool.BLANK)) {
-				throw new AutoLoginException(
-					"Email address cannot be null or empty");
-
-			}
 			String lastName = nameValues.get(lastNameAttr);
+
+			if (Validator.isNull(emailAddress)) {
+				throw new AutoLoginException("Email address is null");
+			}
 
 			User user = null;
 
