@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -167,9 +169,15 @@ double version = ParamUtil.getDouble(request, "version");
 
 		<%
 		try {
+			int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
+
 			String languageId = LanguageUtil.getLanguageId(request);
 
-			String content = JournalArticleServiceUtil.getArticleContent(groupId, articleId, version, languageId, themeDisplay);
+			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
+
+			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, languageId, themeDisplay, articlePage, xmlRequest);
+
+			String content = articleDisplay.getContent();
 
 			RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
 			RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
@@ -178,10 +186,29 @@ double version = ParamUtil.getDouble(request, "version");
 			content = RuntimePortletUtil.processXML(request, content, portletLogic);
 			content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
 			content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
+
+			PortletURL portletURL = renderResponse.createRenderURL();
+			portletURL.setParameter("articleId", articleId);
+			portletURL.setParameter("version", String.valueOf(version));
 		%>
 
-			<%= content %>
+			<div class="journal-content-article">
+				<%= content %>
+		    </div>
 
+			<c:if test="<%= articleDisplay.isPaginate() %>">
+				<liferay-ui:page-iterator
+					cur="<%= articleDisplay.getCurrentPage() %>"
+					curParam='<%= "page" %>'
+					delta="<%= 1 %>"
+					maxPages="<%= 25 %>"
+					total="<%= articleDisplay.getNumberOfPages() %>"
+					type="article"
+					url="<%= portletURL.toString() %>"
+				/>
+
+				<br />
+			</c:if>
 		<%
 		}
 		catch (PrincipalException pe) {
