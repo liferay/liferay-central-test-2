@@ -28,22 +28,12 @@ package com.liferay.portal.kernel.dao.orm;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Type {
+public enum Type {
 
-	public static final Type BOOLEAN  = new TypeImpl("BOOLEAN");
-
-	public static final Type DOUBLE  = new TypeImpl("DOUBLE");
-
-	public static final Type FLOAT  = new TypeImpl("FLOAT");
-
-	public static final Type INTEGER  = new TypeImpl("INTEGER");
-
-	public static final Type LONG = new TypeImpl("LONG");
-
-	public static final Type SHORT  = new TypeImpl("SHORT");
-
-	public static final Type STRING = new TypeImpl("STRING");
-
-	public String getName();
+	BIG_DECIMAL, BIG_INTEGER, BINARY, BLOB, BOOLEAN, BYTE, CALENDAR,
+	CALENDAR_DATE, CHAR_ARRAY, CHARACTER, CHARACTER_ARRAY, CLASS, CLOB,
+	CURRENCY, DATE, DOUBLE, FLOAT, INTEGER, LOCALE, LONG, OBJECT, SERIALIZABLE,
+	SHORT, STRING, TEXT, TIMESTAMP, TIMEZONE, TRUE_FALSE, WRAPPER_BINARY,
+	YES_NO;
 
 }
