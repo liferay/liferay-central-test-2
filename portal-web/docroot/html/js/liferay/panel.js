@@ -1,4 +1,4 @@
-Liferay.Panel = new Class({
+Liferay.Panel = Liferay.Observable.extend({
 	initialize: function(options) {
 		var instance = this;
 
@@ -84,5 +84,7 @@ Liferay.Panel = new Class({
 		if (instance._isAccordion) {
 			currentContainer.siblings('.lfr-panel').addClass('lfr-collapsed');
 		}
+
+		instance.trigger('titleClick');
 	}
 });

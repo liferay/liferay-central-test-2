@@ -60,12 +60,16 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 		instance._container.detachPositionHelper();
 
 		instance._trigger.removeClass('lfr-trigger-selected');
+
+		instance.trigger('hide');
 	},
 
 	onOuterClick: function() {
 		var instance = this;
 
 		instance.hide();
+
+		instance.trigger('outerClick');
 	},
 
 	onTitleClick: function(el) {
@@ -94,6 +98,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 		else {
 			instance.hide(trigger);
 		}
+
+		instance.trigger('triggerClick');
 	},
 
 	paginate: function(currentPanelContent) {
@@ -244,6 +250,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 		if (instance._paging) {
 			instance._setMaxPageHeight();
 		}
+
+		instance.trigger('show');
 	},
 
 	_setMaxPageHeight: function() {
