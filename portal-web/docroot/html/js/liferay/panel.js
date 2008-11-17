@@ -49,6 +49,11 @@ Liferay.Panel = Liferay.Observable.extend({
 				instance._panel.slice(1).addClass('lfr-collapsed');
 			}
 		}
+
+		instance.set('container', instance._container);
+		instance.set('panel', instance._panel);
+		instance.set('panelContent', instance._panelContent);
+		instance.set('panelTitles', instance._panelTitles);
 	},
 
 	makeCollapsible: function() {

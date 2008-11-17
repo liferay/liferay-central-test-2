@@ -52,6 +52,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 				return false;
 			}
 		);
+
+		instance.set('trigger', instance._trigger);
 	},
 
 	hide: function() {
