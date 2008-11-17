@@ -1351,7 +1351,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
 		PortletURL createAccountURL = new PortletURLImpl(
-			request, PortletKeys.LOGIN, plid, PortletRequest.RENDER_PHASE);
+			request, PortletKeys.LOGIN, plid, PortletRequest.ACTION_PHASE);
 
 		createAccountURL.setWindowState(WindowState.MAXIMIZED);
 		createAccountURL.setPortletMode(PortletMode.VIEW);

@@ -41,10 +41,12 @@ import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -84,7 +86,38 @@ public class CreateAccountAction extends PortletAction {
 		throws Exception {
 
 		try {
-			addUser(actionRequest, actionResponse);
+			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+			if (cmd.equals(Constants.ADD)) {
+				addUser(actionRequest, actionResponse);
+			}
+			else {
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)actionRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+				if (Validator.isNotNull(
+					PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
+
+					Layout layout = null;
+
+					for (Layout curLayout : themeDisplay.getLayouts()) {
+						if (curLayout.getFriendlyURL().equals(
+								PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
+							layout = curLayout;
+
+							break;
+						}
+					}
+
+					if (layout != null) {
+						String redirect = PortalUtil.getLayoutURL(
+							layout, themeDisplay);
+
+						sendRedirect(actionRequest, actionResponse, redirect);
+					}
+				}
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof CaptchaTextException ||
