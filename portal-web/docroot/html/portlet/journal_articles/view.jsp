@@ -191,7 +191,7 @@ double version = ParamUtil.getDouble(request, "version");
 
 			<div class="journal-content-article">
 				<%= content %>
-		    </div>
+			</div>
 
 			<c:if test="<%= articleDisplay.isPaginate() %>">
 				<liferay-ui:page-iterator
