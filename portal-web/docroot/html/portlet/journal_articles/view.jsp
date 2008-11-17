@@ -1,5 +1,3 @@
-<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
