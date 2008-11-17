@@ -33,7 +33,9 @@ public interface SearchPermissionChecker {
 
 	public void addPermissionFields(long companyId, Document doc);
 
-	public Query getPermissionQuery(long userId, Query query);
+	public Query getPermissionQuery(
+		long companyId, long groupId, long userId, String className,
+		Query query);
 
 	public void updatePermissionFields(long resourceId);
 

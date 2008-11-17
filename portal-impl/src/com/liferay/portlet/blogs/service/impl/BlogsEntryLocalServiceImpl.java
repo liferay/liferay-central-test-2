@@ -620,7 +620,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, userId, fullQuery, start, end);
+				companyId, groupId, userId, BlogsEntry.class.getName(),
+				fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

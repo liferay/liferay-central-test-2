@@ -23,6 +23,7 @@
 package com.liferay.portal.search;
 
 import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -85,10 +86,14 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 	}
 
-	public Query getPermissionQuery(long userId, Query query) {
+	public Query getPermissionQuery(
+			long companyId, long groupId, long userId, String className,
+			Query query) {
+
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-				return doGetPermissionQuery(userId, query);
+				return doGetPermissionQuery(
+					companyId, groupId, userId, className, query);
 			}
 		}
 		catch (Exception e) {
@@ -125,23 +130,19 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		List<Long> roleIds = new ArrayList<Long>();
 
 		for (Role role : roles) {
-			List<Permission> permissions =
-				PermissionLocalServiceUtil.getRolePermissions(
-					role.getRoleId(), resource.getResourceId());
+			long roleId = role.getRoleId();
 
-			List<String> actions = ResourceActionsUtil.getActions(permissions);
-
-			for (String action : actions) {
-				if (action.equals(ActionKeys.VIEW)) {
-					roleIds.add(role.getRoleId());
-				}
+			if (hasPermission(roleId, resource.getResourceId())) {
+				roleIds.add(roleId);
 			}
 		}
 
 		doc.addKeyword(Field.ROLE_ID, ArrayUtil.toArray(roleIds));
 	}
 
-	protected Query doGetPermissionQuery(long userId, Query query)
+	protected Query doGetPermissionQuery(
+			long companyId, long groupId, long userId, String className,
+			Query query)
 		throws Exception {
 
 		BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
@@ -150,8 +151,39 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		List<Role> roles = RoleLocalServiceUtil.getUserRoles(userId);
 
+		long companyResourceId = 0;
+		long groupResourceId = 0;
+
+		try {
+			Resource companyResource = ResourceLocalServiceUtil.getResource(
+				companyId, className, ResourceConstants.SCOPE_COMPANY,
+				String.valueOf(companyId));
+
+			companyResourceId = companyResource.getResourceId();
+		}
+		catch (NoSuchResourceException nsre) {
+		}
+
+		try {
+			Resource groupResource = ResourceLocalServiceUtil.getResource(
+				companyId, className, ResourceConstants.SCOPE_GROUP,
+				String.valueOf(groupId));
+
+			groupResourceId = groupResource.getResourceId();
+		}
+		catch (NoSuchResourceException nsre) {
+		}
+
 		for (Role role : roles) {
 			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
+				return query;
+			}
+
+			long roleId = role.getRoleId();
+
+			if (hasPermission(roleId, companyResourceId) ||
+				hasPermission(roleId, groupResourceId)) {
+
 				return query;
 			}
 
@@ -173,6 +205,25 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			indexer.reIndex(
 				resource.getName(), GetterUtil.getLong(resource.getPrimKey()));
 		}
+	}
+
+	protected boolean hasPermission(long roleId, long resourceId)
+		throws SystemException {
+
+		if (resourceId == 0) {
+			return false;
+		}
+
+		List<Permission> permissions =
+			PermissionLocalServiceUtil.getRolePermissions(roleId, resourceId);
+
+		List<String> actions = ResourceActionsUtil.getActions(permissions);
+
+		if (actions.contains(ActionKeys.VIEW)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private static Log _log =
