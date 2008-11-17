@@ -94,23 +94,30 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (tabs2.equals("password-changed-notification")) {
 			String emailPasswordSentEnabled = ParamUtil.getString(
 				actionRequest, "emailPasswordSentEnabled");
-			String emailPasswordSentSubject = ParamUtil.getString(
-				actionRequest, "emailPasswordSentSubject");
-			String emailPasswordSentBody = ParamUtil.getString(
-				actionRequest, "emailPasswordSentBody");
+			String languageId = ParamUtil.getString(
+				actionRequest, "languageId");
 
-			preferences.setValue(
-				"emailPasswordSentEnabled", emailPasswordSentEnabled);
-			preferences.setValue(
-				"emailPasswordSentSubject", emailPasswordSentSubject);
-			preferences.setValue(
-				"emailPasswordSentBody", emailPasswordSentBody);
+			String emailPasswordSentSubject = ParamUtil.getString(
+				actionRequest, "emailPasswordSentSubject_" + languageId);
+			String emailPasswordSentBody = ParamUtil.getString(
+				actionRequest, "emailPasswordSentBody_" + languageId);
+
+			preferences.setValue("emailPasswordSentEnabled",
+					emailPasswordSentEnabled);
+			preferences.setValue("emailPasswordSentSubject_" + languageId,
+					emailPasswordSentSubject);
+			preferences.setValue("emailPasswordSentBody_" + languageId,
+					emailPasswordSentBody);
+
+			preferences.store();
 		}
 		else {
 			String emailFromName = ParamUtil.getString(
 				actionRequest, "emailFromName");
 			String emailFromAddress = ParamUtil.getString(
 				actionRequest, "emailFromAddress");
+
+			preferences.setValue("emailFromName", emailFromName);
 
 			if (Validator.isNotNull(emailFromAddress) &&
 				!Validator.isEmailAddress(emailFromAddress)) {
@@ -120,10 +127,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			else {
 				preferences.setValue("emailFromName", emailFromName);
 				preferences.setValue("emailFromAddress", emailFromAddress);
+
+				preferences.store();
 			}
 		}
-
-		preferences.store();
 	}
 
 	protected void updateGeneral(
