@@ -152,7 +152,6 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		List<Role> roles = RoleLocalServiceUtil.getUserRoles(userId);
 
 		long companyResourceId = 0;
-		long groupResourceId = 0;
 
 		try {
 			Resource companyResource = ResourceLocalServiceUtil.getResource(
@@ -163,6 +162,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 		catch (NoSuchResourceException nsre) {
 		}
+
+		long groupResourceId = 0;
 
 		try {
 			Resource groupResource = ResourceLocalServiceUtil.getResource(
@@ -222,8 +223,9 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		if (actions.contains(ActionKeys.VIEW)) {
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	private static Log _log =
