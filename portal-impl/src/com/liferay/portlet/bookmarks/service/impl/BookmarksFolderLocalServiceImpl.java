@@ -319,8 +319,8 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] folderIds, String keywords,
-			int start, int end)
+			long companyId, long groupId, long userId, long[] folderIds,
+			String keywords, int start, int end)
 		throws SystemException {
 
 		try {
@@ -336,10 +336,17 @@ public class BookmarksFolderLocalServiceImpl
 				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long folderId : folderIds) {
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						"folderId", folderId);
+					try {
+						bookmarksFolderService.getFolder(folderId);
 
-					folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
+						TermQuery termQuery = TermQueryFactoryUtil.create(
+							"folderId", folderId);
+
+						folderIdsQuery.add(
+							termQuery, BooleanClauseOccur.SHOULD);
+					}
+					catch (Exception e) {
+					}
 				}
 
 				contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
@@ -362,7 +369,9 @@ public class BookmarksFolderLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, groupId, userId, BookmarksEntry.class.getName(),
+				fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

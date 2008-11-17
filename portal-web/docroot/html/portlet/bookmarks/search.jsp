@@ -87,7 +87,7 @@ headerNames.add(StringPool.BLANK);
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 try {
-	Hits results = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 	int total = results.getLength();
 

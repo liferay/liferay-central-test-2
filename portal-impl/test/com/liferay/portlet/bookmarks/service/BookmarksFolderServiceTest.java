@@ -70,11 +70,12 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		long companyId = entry.getCompanyId();
 		long groupId = entry.getFolder().getGroupId();
+		long userId = 0;
 		long folderId = entry.getFolderId();
 		String keywords = "test";
 
 		Hits hits = BookmarksFolderLocalServiceUtil.search(
-			companyId, groupId, new long[] {folderId}, keywords,
+			companyId, groupId, userId, new long[] {folderId}, keywords,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		assertEquals(1, hits.getLength());
@@ -103,7 +104,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 		Thread.sleep(1000);
 
 		hits = BookmarksFolderLocalServiceUtil.search(
-			companyId, groupId, new long[] {folderId}, keywords,
+			companyId, groupId, userId, new long[] {folderId}, keywords,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		assertEquals(0, hits.getLength());
@@ -116,7 +117,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 		Thread.sleep(1000);
 
 		hits = BookmarksFolderLocalServiceUtil.search(
-			companyId, groupId, null, keywords, 1, 3);
+			companyId, groupId, userId, null, keywords, 1, 3);
 
 		assertEquals(4, hits.getLength());
 		assertEquals(2, hits.getDocs().length);

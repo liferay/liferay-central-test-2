@@ -43,7 +43,7 @@ public class BookmarksOpenSearchImpl extends HitsOpenSearchImpl {
 		throws Exception {
 
 		return BookmarksFolderLocalServiceUtil.search(
-			companyId, 0, null, keywords, start, end);
+			companyId, 0, 0, null, keywords, start, end);
 	}
 
 	public String getSearchPath() {

@@ -237,10 +237,11 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.SystemException {
+		long groupId, long userId, long[] folderIds, java.lang.String keywords,
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, groupId, folderIds, keywords, start, end);
+				   .search(companyId, groupId, userId, folderIds, keywords,
+			start, end);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
