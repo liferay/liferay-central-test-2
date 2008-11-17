@@ -97,6 +97,11 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			String screenName = nameValues.get(screenNameAttr);
 			String emailAddress = nameValues.get(emailAddressAttr);
 			String firstName = nameValues.get(firstNameAttr);
+			if (emailAddress == null || emailAddress.equals(StringPool.BLANK)) {
+				throw new AutoLoginException(
+					"Email address cannot be null or empty");
+
+			}
 			String lastName = nameValues.get(lastNameAttr);
 
 			User user = null;

@@ -132,10 +132,6 @@ public class OpenSSOUtil {
 
 							nameValues.put(name, value);
 						}
-						else {
-							throw new AutoLoginException(
-								"Invalid user attribute: " + line);
-						}
 					}
 				}
 			}
@@ -284,7 +280,22 @@ public class OpenSSOUtil {
 		int responseCode = urlc.getResponseCode();
 
 		if (responseCode == HttpURLConnection.HTTP_OK) {
-			authenticated = true;
+			InputStream in = urlc.getInputStream();
+			StringBuffer inbuf = new StringBuffer();
+			InputStreamReader ins = new InputStreamReader(in,"UTF-8");
+			BufferedReader reader = new BufferedReader(ins);
+			String line;
+
+			while((line = reader.readLine()) != null ){
+				inbuf.append(line).append("\n");
+			}
+
+			String data = new String(inbuf);
+
+			if(data.toLowerCase().indexOf("boolean=true") != -1){
+				authenticated = true;
+			}
+
 		}
 		else if (_log.isDebugEnabled()) {
 			_log.debug("Authentication response code " + responseCode);
