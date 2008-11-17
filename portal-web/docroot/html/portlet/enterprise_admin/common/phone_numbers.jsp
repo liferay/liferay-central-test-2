@@ -30,15 +30,44 @@ long classPK = (Long)request.getAttribute("phones.classPK");
 
 List<Phone> phones = Collections.EMPTY_LIST;
 
-if (classPK > 0) {
-	phones = PhoneServiceUtil.getPhones(className, classPK);
-}
+int[] phonesIndexes = null;
 
-if (phones.isEmpty()) {
+String phonesIndexesParam = ParamUtil.getString(renderRequest, "phonesIndexes");
+
+if (Validator.isNotNull(phonesIndexesParam)) {
 	phones = new ArrayList<Phone>();
 
-	phones.add(new PhoneImpl());
+	phonesIndexes = StringUtil.split(phonesIndexesParam, 0);
+
+	for (int phonesIndex : phonesIndexes) {
+		phones.add(new PhoneImpl());
+	}
 }
+else {
+
+	if (classPK > 0) {
+		phones = PhoneServiceUtil.getPhones(className, classPK);
+
+		phonesIndexes = new int[phones.size()];
+
+		for (int i = 0; i < phones.size() ; i++) {
+			phonesIndexes[i] = i;
+		}
+	}
+
+	if (phones.isEmpty()) {
+		phones = new ArrayList<Phone>();
+
+		phones.add(new PhoneImpl());
+
+		phonesIndexes = new int[]{0};
+	}
+
+	if (phonesIndexes == null) {
+		phonesIndexes = new int[0];
+	}
+}
+
 %>
 
 <liferay-ui:error-marker key="errorSection" value="phoneNumbers" />
@@ -51,7 +80,9 @@ if (phones.isEmpty()) {
 <fieldset class="block-labels">
 
    <%
-	for (int i = 0; i < phones.size(); i++) {
+	for (int i = 0; i < phonesIndexes.length; i++) {
+		int phonesIndex = phonesIndexes[i];
+
 		Phone phone = phones.get(i);
 	%>
 
@@ -59,13 +90,13 @@ if (phones.isEmpty()) {
 			<div class="row-fields">
 
 				<%
-				String fieldParam = "phoneId" + i;
+				String fieldParam = "phoneId" + phonesIndex;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
-				fieldParam = "phoneNumber" + i;
+				fieldParam = "phoneNumber" + phonesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -75,7 +106,7 @@ if (phones.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "phoneExtension" + i;
+				fieldParam = "phoneExtension" + phonesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -85,7 +116,7 @@ if (phones.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "phoneTypeId" + i;
+				fieldParam = "phoneTypeId" + phonesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -109,14 +140,14 @@ if (phones.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "phonePrimary" + i;
+				fieldParam = "phonePrimary" + phonesIndex;
 				%>
 
 				<div class="ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phoneNumberPrimary" type="radio" value="<%= i %>" />
+						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phoneNumberPrimary" type="radio" value="<%= phonesIndex %>" />
 					</label>
 				</div>
 			</div>

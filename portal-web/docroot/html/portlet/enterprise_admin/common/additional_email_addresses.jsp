@@ -30,14 +30,41 @@ long classPK = (Long)request.getAttribute("emailAddresses.classPK");
 
 List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
 
-if (classPK > 0) {
-	emailAddresses = EmailAddressServiceUtil.getEmailAddresses(className, classPK);
-}
+int[] emailAddressesIndexes = null;
 
-if (emailAddresses.isEmpty()) {
+String emailAddressesIndexesParam = ParamUtil.getString(renderRequest, "emailAddressesIndexes");
+
+if (Validator.isNotNull(emailAddressesIndexesParam)) {
 	emailAddresses = new ArrayList<EmailAddress>();
 
-	emailAddresses.add(new EmailAddressImpl());
+	emailAddressesIndexes = StringUtil.split(emailAddressesIndexesParam, 0);
+
+	for (int emailAddressesIndex : emailAddressesIndexes) {
+		emailAddresses.add(new EmailAddressImpl());
+	}
+}
+else {
+	if (classPK > 0) {
+		emailAddresses = EmailAddressServiceUtil.getEmailAddresses(className, classPK);
+
+		emailAddressesIndexes = new int[emailAddresses.size()];
+
+		for (int i = 0; i < emailAddresses.size() ; i++) {
+			emailAddressesIndexes[i] = i;
+		}
+	}
+
+	if (emailAddresses.isEmpty()) {
+		emailAddresses = new ArrayList<EmailAddress>();
+
+		emailAddresses.add(new EmailAddressImpl());
+
+		emailAddressesIndexes = new int[]{0};
+	}
+
+	if (emailAddressesIndexes == null){
+		emailAddressesIndexes = new int[0];
+	}
 }
 %>
 
@@ -51,7 +78,9 @@ if (emailAddresses.isEmpty()) {
 <fieldset class="block-labels">
 
 	<%
-	for (int i = 0; i < emailAddresses.size(); i++) {
+	for (int i = 0; i < emailAddressesIndexes.length; i++) {
+		int emailAddressesIndex = emailAddressesIndexes[i];
+
 		EmailAddress emailAddress = emailAddresses.get(i);
 	%>
 
@@ -59,13 +88,13 @@ if (emailAddresses.isEmpty()) {
 			<div class="row-fields">
 
 				<%
-				String fieldParam = "emailAddressId" + i;
+				String fieldParam = "emailAddressId" + emailAddressesIndex;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 				<%
-				fieldParam = "emailAddressAddress" + i;
+				fieldParam = "emailAddressAddress" + emailAddressesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -75,7 +104,7 @@ if (emailAddresses.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "emailAddressTypeId" + i;
+				fieldParam = "emailAddressTypeId" + emailAddressesIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -99,14 +128,14 @@ if (emailAddresses.isEmpty()) {
 				</div>
 
 				<%
-				fieldParam = "emailAddressPrimary" + i;
+				fieldParam = "emailAddressPrimary" + emailAddressesIndex;
 				%>
 
 				<div class="ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input <%= emailAddress.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />additionalEmailAddressPrimary" type="radio" value="<%= i %>" />
+						<input <%= emailAddress.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />additionalEmailAddressPrimary" type="radio" value="<%= emailAddressesIndex %>" />
 					</label>
 				</div>
 			</div>

@@ -30,14 +30,41 @@ long classPK = (Long)request.getAttribute("addresses.classPK");
 
 List<Address> addresses = Collections.EMPTY_LIST;
 
-if (classPK > 0) {
-	addresses = AddressServiceUtil.getAddresses(className, classPK);
-}
+int[] addressesIndexes = null;
 
-if (addresses.isEmpty()) {
+String addressesIndexesParam = ParamUtil.getString(renderRequest, "addressesIndexes");
+
+if (Validator.isNotNull(addressesIndexesParam)) {
 	addresses = new ArrayList<Address>();
 
-	addresses.add(new AddressImpl());
+	addressesIndexes = StringUtil.split(addressesIndexesParam, 0);
+
+	for (int addressesIndex : addressesIndexes) {
+		addresses.add(new AddressImpl());
+	}
+}
+else {
+	if (classPK > 0) {
+		addresses = AddressServiceUtil.getAddresses(className, classPK);
+
+		addressesIndexes = new int[addresses.size()];
+
+		for (int i = 0; i < addresses.size() ; i++) {
+			addressesIndexes[i] = i;
+		}
+	}
+
+	if (addresses.isEmpty()) {
+		addresses = new ArrayList<Address>();
+
+		addresses.add(new AddressImpl());
+
+		addressesIndexes = new int[]{0};
+	}
+
+	if (addressesIndexes == null) {
+		addressesIndexes = new int[0];
+	}
 }
 %>
 
@@ -55,7 +82,9 @@ if (addresses.isEmpty()) {
 <fieldset class="block-labels">
 
 	<%
-	for (int i = 0; i < addresses.size(); i++) {
+	for (int i = 0; i < addressesIndexes.length; i++) {
+		int addressesIndex = addressesIndexes[i];
+
 		Address address = addresses.get(i);
 	%>
 
@@ -64,13 +93,13 @@ if (addresses.isEmpty()) {
 				<div class="col">
 
 					<%
-					String fieldParam = "addressId" + i;
+					String fieldParam = "addressId" + addressesIndex;
 					%>
 
 					<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 					<%
-					fieldParam = "addressStreet1" + i;
+					fieldParam = "addressStreet1" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -80,7 +109,7 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressStreet2" + i;
+					fieldParam = "addressStreet2" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -90,7 +119,7 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressStreet3" + i;
+					fieldParam = "addressStreet3" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -100,7 +129,7 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressCountryId" + i;
+					fieldParam = "addressCountryId" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -110,7 +139,7 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressRegionId" + i;
+					fieldParam = "addressRegionId" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -123,7 +152,7 @@ if (addresses.isEmpty()) {
 				<div class="col">
 
 					<%
-					fieldParam = "addressTypeId" + i;
+					fieldParam = "addressTypeId" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -147,7 +176,7 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressZip" + i;
+					fieldParam = "addressZip" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -157,7 +186,7 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressCity" + i;
+					fieldParam = "addressCity" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder">
@@ -167,19 +196,19 @@ if (addresses.isEmpty()) {
 					</div>
 
 					<%
-					fieldParam = "addressPrimary" + i;
+					fieldParam = "addressPrimary" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder primary-ctrl">
 						<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 							<liferay-ui:message key="primary" />
 
-							<input <%= address.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />addressPrimary" type="radio" value="<%= i %>" />
+							<input <%= address.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />addressPrimary" type="radio" value="<%= addressesIndex %>" />
 						</label>
 					</div>
 
 					<%
-					fieldParam = "addressMailing" + i;
+					fieldParam = "addressMailing" + addressesIndex;
 					%>
 
 					<div class="ctrl-holder mailing-ctrl">
@@ -199,7 +228,7 @@ if (addresses.isEmpty()) {
 					new Liferay.DynamicSelect(
 						[
 							{
-								select: "<portlet:namespace />addressCountryId<%= i %>",
+								select: "<portlet:namespace />addressCountryId<%= addressesIndex %>",
 								selectId: "countryId",
 								selectDesc: "name",
 								selectVal: "<%= address.getCountryId() %>",
@@ -213,7 +242,7 @@ if (addresses.isEmpty()) {
 								}
 							},
 							{
-								select: "<portlet:namespace />addressRegionId<%= i %>",
+								select: "<portlet:namespace />addressRegionId<%= addressesIndex %>",
 								selectId: "regionId",
 								selectDesc: "name",
 								selectVal: "<%= address.getRegionId() %>",

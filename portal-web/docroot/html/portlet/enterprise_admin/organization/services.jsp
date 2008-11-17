@@ -31,31 +31,75 @@ long organizationId = (organization != null) ? organization.getOrganizationId() 
 
 List<OrgLabor> orgLabors = Collections.EMPTY_LIST;
 
-if (organizationId > 0) {
-	orgLabors = OrgLaborServiceUtil.getOrgLabors(organizationId);
-}
+int[] orgLaborsIndexes = null;
 
-if (orgLabors.isEmpty()) {
+String orgLaborsIndexesParam = ParamUtil.getString(renderRequest, "orgLaborsIndexes");
+
+if (Validator.isNotNull(orgLaborsIndexesParam)) {
 	orgLabors = new ArrayList<OrgLabor>();
 
-	OrgLabor orgLabor = new OrgLaborImpl();
+	orgLaborsIndexes = StringUtil.split(orgLaborsIndexesParam, 0);
 
-	orgLabor.setSunOpen(-1);
-	orgLabor.setSunClose(-1);
-	orgLabor.setMonOpen(-1);
-	orgLabor.setMonClose(-1);
-	orgLabor.setTueOpen(-1);
-	orgLabor.setTueClose(-1);
-	orgLabor.setWedOpen(-1);
-	orgLabor.setWedClose(-1);
-	orgLabor.setThuOpen(-1);
-	orgLabor.setThuClose(-1);
-	orgLabor.setFriOpen(-1);
-	orgLabor.setFriClose(-1);
-	orgLabor.setSatOpen(-1);
-	orgLabor.setSatClose(-1);
+	for (int orgLaborsIndex : orgLaborsIndexes) {
+		OrgLabor orgLabor = new OrgLaborImpl();
 
-	orgLabors.add(orgLabor);
+		orgLabor.setSunOpen(-1);
+		orgLabor.setSunClose(-1);
+		orgLabor.setMonOpen(-1);
+		orgLabor.setMonClose(-1);
+		orgLabor.setTueOpen(-1);
+		orgLabor.setTueClose(-1);
+		orgLabor.setWedOpen(-1);
+		orgLabor.setWedClose(-1);
+		orgLabor.setThuOpen(-1);
+		orgLabor.setThuClose(-1);
+		orgLabor.setFriOpen(-1);
+		orgLabor.setFriClose(-1);
+		orgLabor.setSatOpen(-1);
+		orgLabor.setSatClose(-1);
+
+		orgLabors.add(orgLabor);
+	}
+}
+else {
+	if (organizationId > 0) {
+		orgLabors = OrgLaborServiceUtil.getOrgLabors(organizationId);
+
+		orgLaborsIndexes = new int[orgLabors.size()];
+
+		for (int i = 0; i < orgLabors.size() ; i++) {
+			orgLaborsIndexes[i] = i;
+		}
+	}
+
+	if (orgLabors.isEmpty()) {
+		orgLabors = new ArrayList<OrgLabor>();
+
+		OrgLabor orgLabor = new OrgLaborImpl();
+
+		orgLabor.setSunOpen(-1);
+		orgLabor.setSunClose(-1);
+		orgLabor.setMonOpen(-1);
+		orgLabor.setMonClose(-1);
+		orgLabor.setTueOpen(-1);
+		orgLabor.setTueClose(-1);
+		orgLabor.setWedOpen(-1);
+		orgLabor.setWedClose(-1);
+		orgLabor.setThuOpen(-1);
+		orgLabor.setThuClose(-1);
+		orgLabor.setFriOpen(-1);
+		orgLabor.setFriClose(-1);
+		orgLabor.setSatOpen(-1);
+		orgLabor.setSatClose(-1);
+
+		orgLabors.add(orgLabor);
+
+		orgLaborsIndexes = new int[]{0};
+	}
+
+	if (orgLaborsIndexes == null) {
+		orgLaborsIndexes = new int[0];
+	}
 }
 
 DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
@@ -74,19 +118,19 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 	String[] days = CalendarUtil.getDays(locale);
 	String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 
-	for (int i = 0; i < orgLabors.size(); i++){
-		OrgLabor orgLabor = orgLabors.get(i);
+	for (int i = 0; i < orgLaborsIndexes.length; i++) {
+		int orgLaborsIndex = orgLaborsIndexes[i];
 
 		int[] openArray = new int[paramPrefixes.length];
 
 		for (int j = 0; j < paramPrefixes.length; j++) {
-			openArray[j] = ParamUtil.getInteger(request, paramPrefixes[j] + "Open" + i, BeanPropertiesUtil.getInteger(orgLabor, paramPrefixes[j] + "Open", -1));
+			openArray[j] = ParamUtil.getInteger(request, paramPrefixes[j] + "Open" + orgLaborsIndex, BeanPropertiesUtil.getInteger(orgLabor, paramPrefixes[j] + "Open", -1));
 		}
 
 		int[] closeArray = new int[paramPrefixes.length];
 
 		for (int j = 0; j < paramPrefixes.length; j++) {
-			closeArray[j] = ParamUtil.getInteger(request, paramPrefixes[j] + "Close" + i, BeanPropertiesUtil.getInteger(orgLabor, paramPrefixes[j] + "Close", -1));
+			closeArray[j] = ParamUtil.getInteger(request, paramPrefixes[j] + "Close" + orgLaborsIndex, BeanPropertiesUtil.getInteger(orgLabor, paramPrefixes[j] + "Close", -1));
 		}
 	%>
 
@@ -94,14 +138,14 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 			<div class="row-fields">
 
 				<%
-				String fieldParam = "orgLaborId" + i;
+				String fieldParam = "orgLaborId" + orgLaborsIndex;
 				%>
 
 				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
 
 
 				<%
-				fieldParam = "orgLaborTypeId" + i;
+				fieldParam = "orgLaborTypeId" + orgLaborsIndex;
 				%>
 
 				<div class="ctrl-holder">
@@ -153,7 +197,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 					%>
 
 						<td>
-							<select name="<portlet:namespace /><%= curParam %>Open<%= i %>">
+							<select name="<portlet:namespace /><%= curParam %>Open<%= orgLaborsIndex %>">
 								<option value="-1"></option>
 
 								<%
@@ -197,7 +241,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 					%>
 
 						<td>
-							<select name="<portlet:namespace /><%= curParam %>Close<%= i %>">
+							<select name="<portlet:namespace /><%= curParam %>Close<%= orgLaborsIndex %>">
 								<option value="-1"></option>
 
 								<%
