@@ -222,7 +222,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 
 				<c:choose>
 					<c:when test="<%= !fieldsEditingDisabled %>">
-						<input class="lfr-input-text" id="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>" name="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>" size="50" type="text" value="<%= fieldLabel %>" onchange="jQuery(this).parent().prev().children('.fieldLabel').html(jQuery(this).val())" />
+						<input class="lfr-input-text" id="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>" name="<portlet:namespace/>fieldLabel<%= formFieldsIndex %>" size="50" type="text" value="<%= fieldLabel %>" onchange="jQuery(this).parent().prev().children('.field-label').html(jQuery(this).val())" />
 					</c:when>
 					<c:otherwise>
 						<%= fieldLabel %>
