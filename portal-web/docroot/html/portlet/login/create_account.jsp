@@ -65,28 +65,33 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <fieldset class="block-labels col">
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />firstName"><liferay-ui:message key="first-name" /></label>
+
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
 	</div>
 
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />middleName"><liferay-ui:message key="middle-name" /></label>
+
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
 	</div>
 
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />lastName"><liferay-ui:message key="last-name" /></label>
+
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 	</div>
 
 	<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
 		<div class="ctrl-holder">
 			<label for=""><liferay-ui:message key="screen-name" /></label>
+
 			<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
 		</div>
 	</c:if>
 
 	<div class="ctrl-holder">
 		<label for=""><liferay-ui:message key="email-address" /></label>
+
 		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
 	</div>
 </fieldset>
@@ -96,6 +101,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
 			<div class="ctrl-holder">
 				<label for=""><liferay-ui:message key="birthday" /></label>
+
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
 			</div>
 		</c:when>
@@ -108,6 +114,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
+
 		<select name="<portlet:namespace />male">
 			<option value="1"><liferay-ui:message key="male" /></option>
 			<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>

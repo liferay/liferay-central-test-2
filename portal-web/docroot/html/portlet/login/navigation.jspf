@@ -25,49 +25,73 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
-boolean isRegularSignOn = Validator.isNull(strutsAction) || strutsAction.equals("/login/login");
-boolean isOpenId = strutsAction.equals("/login/open_id");
-boolean isForgotPassword = strutsAction.equals("/login/forgot_password");
-boolean isCreateAccount = strutsAction.equals("/login/create_account");
+boolean showCreateAccountIcon = false;
 
+if (!strutsAction.equals("/login/create_account") && company.isStrangers()) {
+	showCreateAccountIcon = true;
+}
+
+boolean showForgotPasswordIcon = false;
+
+if (!strutsAction.equals("/login/forgot_password") &&
+	company.isSendPassword() &&
+	PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) &&
+	GetterUtil.getBoolean(preferences.getValue("emailPasswordSentEnabled", null), true)) {
+
+	showForgotPasswordIcon = true;
+}
+
+boolean showOpenIdIcon = false;
+
+if (!strutsAction.equals("/login/open_id") && OpenIdUtil.isEnabled(company.getCompanyId())) {
+	showOpenIdIcon = true;
+}
+
+boolean showSignInIcon = false;
+
+if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
+	showSignInIcon = true;
+}
 %>
 
-<div class="navigation">
-	<liferay-ui:icon-list>
-		<c:if test="<%= !isRegularSignOn %>">
-			<liferay-ui:icon
-				image="status_online"
-				message="sign-in"
-				url="<%= themeDisplay.getURLSignIn() %>"
-			/>
-		</c:if>
+<c:if test="<%= showCreateAccountIcon || showForgotPasswordIcon || showOpenIdIcon || showSignInIcon %>">
+	<div class="navigation">
+		<liferay-ui:icon-list>
+			<c:if test="<%= showSignInIcon %>">
+				<liferay-ui:icon
+					image="status_online"
+					message="sign-in"
+					url="<%= themeDisplay.getURLSignIn() %>"
+				/>
+			</c:if>
 
-		<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) && !isOpenId %>">
-			<portlet:renderURL var="openIdURL">
-				<portlet:param name="struts_action" value="/login/open_id" />
-			</portlet:renderURL>
+			<c:if test="<%= showOpenIdIcon %>">
+				<portlet:renderURL var="openIdURL">
+					<portlet:param name="struts_action" value="/login/open_id" />
+				</portlet:renderURL>
 
-			<liferay-ui:icon
-				message="open-id"
-				src='<%= themeDisplay.getPathThemeImages() + "/common/openid.gif" %>'
-				url="<%= openIdURL %>"
-			/>
-		</c:if>
+				<liferay-ui:icon
+					message="open-id"
+					src='<%= themeDisplay.getPathThemeImages() + "/common/openid.gif" %>'
+					url="<%= openIdURL %>"
+				/>
+			</c:if>
 
-		<c:if test="<%= company.isStrangers() && !isCreateAccount %>">
-			<liferay-ui:icon
-				image="add_user"
-				message="create-account"
-				url="<%= themeDisplay.getURLCreateAccount().toString() %>"
-			/>
-		</c:if>
+			<c:if test="<%= showCreateAccountIcon %>">
+				<liferay-ui:icon
+					image="add_user"
+					message="create-account"
+					url="<%= themeDisplay.getURLCreateAccount().toString() %>"
+				/>
+			</c:if>
 
-		<c:if test='<%= company.isSendPassword() && GetterUtil.getBoolean(preferences.getValue("emailPasswordSentEnabled",null), true) && PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) && !isForgotPassword %>'>
-			<portlet:renderURL var="forgotPasswordURL">
-				<portlet:param name="struts_action" value="/login/forgot_password" />
-			</portlet:renderURL>
+			<c:if test='<%= showForgotPasswordIcon %>'>
+				<portlet:renderURL var="forgotPasswordURL">
+					<portlet:param name="struts_action" value="/login/forgot_password" />
+				</portlet:renderURL>
 
-			<liferay-ui:icon image="help" message="forgot-password" url="<%= forgotPasswordURL %>" />
-		</c:if>
-	</liferay-ui:icon-list>
-</div>
+				<liferay-ui:icon image="help" message="forgot-password" url="<%= forgotPasswordURL %>" />
+			</c:if>
+		</liferay-ui:icon-list>
+	</div>
+</c:if>
