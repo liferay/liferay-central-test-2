@@ -78,9 +78,7 @@ if (Validator.isNull(authType)) {
 					<portlet:param name="struts_action" value="/login/captcha" />
 				</portlet:actionURL>
 
-				<div class="ctrl-holder">
-					<liferay-ui:captcha url="<%= captchaURL %>" />
-				</div>
+				<liferay-ui:captcha url="<%= captchaURL %>" />
 			</c:if>
 
 			<div class="button-holder">

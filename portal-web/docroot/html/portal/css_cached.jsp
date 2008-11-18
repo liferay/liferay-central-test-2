@@ -1438,6 +1438,17 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/calendar/event_indicator_current.png);
 }
 
+/* ---------- Taglib captcha ---------- */
+
+.taglib-captcha {
+	margin: 1em 0;
+}
+
+.taglib-captcha .captcha {
+	display: block;
+	margin-bottom: 1em;
+}
+
 /* ---------- Taglib discussion thread ---------- */
 
 .taglib-discussion td img {

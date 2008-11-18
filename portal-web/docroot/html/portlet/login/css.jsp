@@ -22,36 +22,28 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portal.captcha.CaptchaUtil" %>
-
-<%
-String url = (String)request.getAttribute("liferay-ui:captcha:url");
-
-boolean captchaEnabled = false;
-
-if (portletRequest != null) {
-	captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
+.portlet-login .uni-form fieldset {
+	border-width: 0;
+	padding: 0;
 }
-else {
-	captchaEnabled = CaptchaUtil.isEnabled(request);
+
+.portlet-login .uni-form .col {
+	width: auto;
 }
-%>
 
-<c:if test="<%= captchaEnabled %>">
-	<div class="taglib-captcha">
-		<img alt="captcha" class="captcha" src="<%= url %>" />
+.portlet-login .uni-form .button-holder {
+	margin-bottom: 10px;
+}
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="text-verification" />
-			</td>
-			<td>
-				<input name="<%= namespace %>captchaText" size="10" type="text" value="" />
-			</td>
-		</tr>
-		</table>
-	</div>
-</c:if>
+.portlet-login .navigation {
+	background: #eee;
+	border-top: 1px solid #BFBFBF;
+	padding: 10px;
+}
+
+.portlet-login .uni-form .col {
+	margin-bottom: 10px;
+	margin-right: 10px;
+}

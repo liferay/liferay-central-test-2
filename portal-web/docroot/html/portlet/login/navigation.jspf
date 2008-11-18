@@ -22,15 +22,27 @@
  */
 %>
 
+<%
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
+boolean isRegularSignOn = Validator.isNull(strutsAction) || strutsAction.equals("/login/login");
+boolean isOpenId = strutsAction.equals("/login/open_id");
+boolean isForgotPassword = strutsAction.equals("/login/forgot_password");
+boolean isCreateAccount = strutsAction.equals("/login/create_account");
+
+%>
+
 <div class="navigation">
 	<liferay-ui:icon-list>
-		<liferay-ui:icon
-			image="status_online"
-			message="sign-in"
-			url="<%= themeDisplay.getURLSignIn() %>"
-		/>
+		<c:if test="<%= !isRegularSignOn %>">
+			<liferay-ui:icon
+				image="status_online"
+				message="sign-in"
+				url="<%= themeDisplay.getURLSignIn() %>"
+			/>
+		</c:if>
 
-		<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+		<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) && !isOpenId %>">
 			<portlet:renderURL var="openIdURL">
 				<portlet:param name="struts_action" value="/login/open_id" />
 			</portlet:renderURL>
@@ -42,7 +54,7 @@
 			/>
 		</c:if>
 
-		<c:if test="<%= company.isStrangers() %>">
+		<c:if test="<%= company.isStrangers() && !isCreateAccount %>">
 			<liferay-ui:icon
 				image="add_user"
 				message="create-account"
@@ -50,7 +62,7 @@
 			/>
 		</c:if>
 
-		<c:if test='<%= company.isSendPassword() && PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) && GetterUtil.getBoolean(preferences.getValue("emailPasswordSentEnabled", null), true) %>'>
+		<c:if test='<%= company.isSendPassword() && GetterUtil.getBoolean(preferences.getValue("emailPasswordSentEnabled",null), true) && PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) && !isForgotPassword %>'>
 			<portlet:renderURL var="forgotPasswordURL">
 				<portlet:param name="struts_action" value="/login/forgot_password" />
 			</portlet:renderURL>

@@ -39,7 +39,7 @@ birthday.set(Calendar.YEAR, 1970);
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/create_account" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/create_account" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 <input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escape(openId) %>" />
 
@@ -62,105 +62,70 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</span>
 </c:if>
 
-<table class="lfr-table">
-<tr>
-	<td valign="top">
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="first-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="middle-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="last-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
-			</td>
-		</tr>
+<fieldset class="block-labels col">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />firstName"><liferay-ui:message key="first-name" /></label>
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
+	</div>
 
-		<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
-			<tr>
-				<td>
-					<liferay-ui:message key="screen-name" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
-				</td>
-			</tr>
-		</c:if>
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />middleName"><liferay-ui:message key="middle-name" /></label>
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
+	</div>
 
-		<tr>
-			<td>
-				<liferay-ui:message key="email-address" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
-			</td>
-		</tr>
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />lastName"><liferay-ui:message key="last-name" /></label>
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
+	</div>
 
-		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
-				<tr>
-					<td>
-						<liferay-ui:message key="birthday" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
-				<input name="<portlet:namespace />birthdayDay" type="hidden" value="1" />
-				<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970" />
-			</c:otherwise>
-		</c:choose>
+	<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
+		<div class="ctrl-holder">
+			<label for=""><liferay-ui:message key="screen-name" /></label>
+			<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
+		</div>
+	</c:if>
 
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE)) %>">
-			<tr>
-				<td>
-					<liferay-ui:message key="gender" />
-				</td>
-				<td>
-					<select name="<portlet:namespace />male">
-						<option value="1"><liferay-ui:message key="male" /></option>
-						<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
-					</select>
-				</td>
-			</tr>
-		</c:if>
+	<div class="ctrl-holder">
+		<label for=""><liferay-ui:message key="email-address" /></label>
+		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
+	</div>
+</fieldset>
 
-		</table>
-	</td>
+<fieldset class="block-labels col">
+	<c:choose>
+		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
+			<div class="ctrl-holder">
+				<label for=""><liferay-ui:message key="birthday" /></label>
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
+			</div>
+		</c:when>
+		<c:otherwise>
+			<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
+			<input name="<portlet:namespace />birthdayDay" type="hidden" value="1" />
+			<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970" />
+		</c:otherwise>
+	</c:choose>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
+		<select name="<portlet:namespace />male">
+			<option value="1"><liferay-ui:message key="male" /></option>
+			<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
+		</select>
+	</div>
 
 	<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT %>">
-		<td valign="top">
-			<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-				<portlet:param name="struts_action" value="/login/captcha" />
-			</portlet:actionURL>
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+			<portlet:param name="struts_action" value="/login/captcha" />
+		</portlet:actionURL>
 
-			<liferay-ui:captcha url="<%= captchaURL %>" />
-		</td>
+		<liferay-ui:captcha url="<%= captchaURL %>" />
 	</c:if>
-</tr>
-</table>
+</fieldset>
 
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
+<div class="button-holder">
+	<input type="submit" value="<liferay-ui:message key="save" />" />
+</div>
 
 </form>
 
