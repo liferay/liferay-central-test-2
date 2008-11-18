@@ -40,6 +40,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -113,7 +114,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		OrganizationPermissionUtil.check(
 			getPermissionChecker(), organizationId, ActionKeys.ASSIGN_MEMBERS);
 
-		checkUserOrganizationAssignments(userIds);
+		validateOrganizationUsers(userIds);
 
 		userLocalService.addOrganizationUsers(organizationId, userIds);
 	}
@@ -730,36 +731,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return roleIds;
 	}
 
-	protected void checkUserOrganizationAssignments(long[] userIds)
-		throws PortalException, SystemException {
-
-		if (!PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT ||
-			getPermissionChecker().isCompanyAdmin()) {
-			return;
-		}
-
-		List<Organization> manageableOrganizations =
-			organizationService.getManageableOrganizations(
-				getUserId(), ActionKeys.MANAGE_USERS);
-
-		for (long userId : userIds) {
-			boolean allowed = false;
-
-			for (Organization organization : manageableOrganizations) {
-				if (userLocalService.hasOrganizationUser(
-					organization.getOrganizationId(), userId)) {
-					allowed = true;
-
-					break;
-				}
-			}
-
-			if (!allowed) {
-				throw new PrincipalException();
-			}
-		}
-	}
-
 	protected void updateAnnouncementsDeliveries(
 			long userId, List<AnnouncementsDelivery> announcementsDeliveries)
 		throws PortalException, SystemException {
@@ -772,6 +743,40 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				announcementsDelivery.getEmail(),
 				announcementsDelivery.getSms(),
 				announcementsDelivery.getWebsite());
+		}
+	}
+
+	protected void validateOrganizationUsers(long[] userIds)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT ||
+			permissionChecker.isCompanyAdmin()) {
+
+			return;
+		}
+
+		List<Organization> organizations =
+			organizationService.getManageableOrganizations(
+				getUserId(), ActionKeys.MANAGE_USERS);
+
+		for (long userId : userIds) {
+			boolean allowed = false;
+
+			for (Organization organization : organizations) {
+				if (userLocalService.hasOrganizationUser(
+						organization.getOrganizationId(), userId)) {
+
+					allowed = true;
+
+					break;
+				}
+			}
+
+			if (!allowed) {
+				throw new PrincipalException();
+			}
 		}
 	}
 

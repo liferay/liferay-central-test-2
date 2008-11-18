@@ -819,15 +819,13 @@ public interface PropsKeys {
 
 	public static final String OPENOFFICE_SERVER_PORT = "openoffice.server.port";
 
-	public static final String ORGANIZATIONS_TYPES = "organizations.types";
+	public static final String ORGANIZATIONS_ASSIGNMENT_STRICT = "organizations.assignment.strict";
 
 	public static final String ORGANIZATIONS_CHILDREN_TYPES = "organizations.children.types";
 
 	public static final String ORGANIZATIONS_COUNTRY_ENABLED = "organizations.country.enabled";
 
 	public static final String ORGANIZATIONS_COUNTRY_REQUIRED = "organizations.country.required";
-
-	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
 	public static final String ORGANIZATIONS_FORM_ADD_IDENTIFICATION = "organizations.form.add.identification";
 
@@ -841,7 +839,9 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
-	public static final String ORGANIZATIONS_ASSIGNMENT_STRICT = "organizations.assignment.strict";
+	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
+
+	public static final String ORGANIZATIONS_TYPES = "organizations.types";
 
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
@@ -1077,9 +1077,9 @@ public interface PropsKeys {
 
 	public static final String TCK_URL = "tck.url";
 
-	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_ID = "terms.of.use.journal.article.id";
-
 	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID = "terms.of.use.journal.article.group.id";
+
+	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_ID = "terms.of.use.journal.article.id";
 
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
@@ -1107,7 +1107,7 @@ public interface PropsKeys {
 
 	public static final String USERS_DELETE = "users.delete";
 
-	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
+	public static final String USERS_EMAIL_ADDRESS_REQUIRED = "users.email.address.required";
 
 	public static final String USERS_FORM_ADD_IDENTIFICATION = "users.form.add.identification";
 
@@ -1121,6 +1121,8 @@ public interface PropsKeys {
 
 	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
 
+	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
+
 	public static final String USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = "users.reminder.queries.custom.question.enabled";
 
 	public static final String USERS_REMINDER_QUERIES_ENABLED = "users.reminder.queries.enabled";
@@ -1132,8 +1134,6 @@ public interface PropsKeys {
 	public static final String USERS_SCREEN_NAME_GENERATOR = "users.screen.name.generator";
 
 	public static final String USERS_SCREEN_NAME_VALIDATOR = "users.screen.name.validator";
-
-	public static final String USERS_EMAIL_ADDRESS_REQUIRED = "users.email.address.required";
 
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 

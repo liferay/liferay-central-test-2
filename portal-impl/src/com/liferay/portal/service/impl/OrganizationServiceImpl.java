@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.OrgLabor;
@@ -32,6 +33,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -142,7 +144,9 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long userId, String actionId)
 		throws PortalException, SystemException {
 
-		if ((actionId == null) || getPermissionChecker().isCompanyAdmin()) {
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (Validator.isNull(actionId) || permissionChecker.isCompanyAdmin()) {
 			return organizationLocalService.getManageableOrganizations(userId);
 		}
 
@@ -154,8 +158,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		for (Organization userOrganization : userOrganizations) {
 			if (OrganizationPermissionUtil.contains(
-					getPermissionChecker(),
-					userOrganization.getOrganizationId(), actionId)) {
+					permissionChecker, userOrganization.getOrganizationId(),
+					actionId)) {
 
 				manageableOrganizations.add(userOrganization);
 				manageableOrganizations.addAll(

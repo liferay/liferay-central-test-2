@@ -92,7 +92,7 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 	}
 	else if (PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT && !permissionChecker.isCompanyAdmin()) {
-		List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());;
+		List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
 		List<Long> manageableOrganizationIds = new ArrayList<Long>();
 
 		for (Organization manageableOrganization : manageableOrganizations) {
