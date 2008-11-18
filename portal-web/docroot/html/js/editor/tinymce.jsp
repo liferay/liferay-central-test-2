@@ -43,16 +43,16 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			theme : "advanced",
 			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
 			file_browser_callback : "fileBrowserCallback",
+			init_instance_callback : "initInstanceCallback",
 			onchange_callback : "onChangeCallback",
-			plugins : "table,advhr,advimage,advlink,iespell,preview,zoom,flash,searchreplace,print,contextmenu",
+			plugins : "table,advhr,advimage,advlink,iespell,preview,media,searchreplace,print,contextmenu",
 			theme_advanced_buttons1_add_before : "fontselect,fontsizeselect,forecolor,backcolor,separator",
 			theme_advanced_buttons2_add : "separator,flash,advhr,separator,preview,zoom,print",
 			theme_advanced_buttons2_add_before: "cut,copy,paste,search,replace",
 			theme_advanced_buttons3_add_before : "tablecontrols,separator",
 			theme_advanced_disable : "formatselect,styleselect,help",
 			theme_advanced_toolbar_align : "left",
-			theme_advanced_toolbar_location : "top",
-			theme_advanced_path_location : "bottom"
+			theme_advanced_toolbar_location : "top"
 		});
 
 		function init(value) {
@@ -60,15 +60,19 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 		}
 
 		function getHTML() {
-			return tinyMCE.getContent();
+			return tinyMCE.activeEditor.getContent();
 		}
 
 		function setHTML(value) {
-			tinyMCE.setContent(value);
+			tinyMCE.activeEditor.setContent(value);
 		}
 
 		function initEditor() {
 			init(parent.<%= initMethod %>());
+		}
+
+		function initInstanceCallback() {
+			initEditor();
 		}
 
 		function fileBrowserCallback(field_name, url, type) {
@@ -105,7 +109,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 	</script>
 </head>
 
-<body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0" onLoad="initEditor();">
+<body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
 
 <textarea id="textArea" name="textArea" style="height: 100%; width: 100%;"></textarea>
 

@@ -12,7 +12,7 @@
 	<property name="codepress.file" value="codepress-v.0.9.6.zip" />
 
 	<property name="fckeditor.file" value="FCKeditor_2.5.1.zip" />
-	<property name="tinymce.file" value="tinymce_2_1_3.zip" />
+	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
 	<property name="wsrp.file" value="wsrp.zip" />
 
 	<target name="clean" depends="build-common-web.clean">
