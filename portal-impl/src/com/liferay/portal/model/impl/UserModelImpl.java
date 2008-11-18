@@ -835,5 +835,5 @@ public class UserModelImpl extends BaseModelImpl {
 	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

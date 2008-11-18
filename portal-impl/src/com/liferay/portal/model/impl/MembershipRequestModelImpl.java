@@ -375,5 +375,5 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 	private Date _replyDate;
 	private long _replierUserId;
 	private int _statusId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -495,5 +495,5 @@ public class AccountModelImpl extends BaseModelImpl {
 	private String _industry;
 	private String _type;
 	private String _size;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

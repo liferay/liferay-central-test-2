@@ -682,5 +682,5 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 	private long _lockoutDuration;
 	private boolean _requireUnlock;
 	private long _resetFailureCount;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

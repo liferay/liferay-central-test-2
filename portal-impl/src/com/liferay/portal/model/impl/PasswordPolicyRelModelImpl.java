@@ -267,5 +267,5 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	private long _passwordPolicyId;
 	private long _classNameId;
 	private long _classPK;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

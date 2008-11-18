@@ -321,5 +321,5 @@ public class ImageModelImpl extends BaseModelImpl {
 	private int _height;
 	private int _width;
 	private int _size;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

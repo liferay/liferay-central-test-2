@@ -235,5 +235,5 @@ public class ClassNameModelImpl extends BaseModelImpl {
 
 	private long _classNameId;
 	private String _value;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

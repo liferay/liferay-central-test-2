@@ -384,5 +384,5 @@ public class PortletItemModelImpl extends BaseModelImpl {
 	private String _name;
 	private String _portletId;
 	private long _classNameId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

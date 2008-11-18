@@ -264,5 +264,5 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	private long _userTrackerId;
 	private String _path;
 	private Date _pathDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

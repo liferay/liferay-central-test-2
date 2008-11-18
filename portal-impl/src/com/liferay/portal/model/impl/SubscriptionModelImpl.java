@@ -365,5 +365,5 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private String _frequency;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

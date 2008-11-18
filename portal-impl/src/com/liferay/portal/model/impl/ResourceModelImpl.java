@@ -243,5 +243,5 @@ public class ResourceModelImpl extends BaseModelImpl {
 	private long _resourceId;
 	private long _codeId;
 	private String _primKey;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -421,5 +421,5 @@ public class PhoneModelImpl extends BaseModelImpl {
 	private String _extension;
 	private int _typeId;
 	private boolean _primary;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

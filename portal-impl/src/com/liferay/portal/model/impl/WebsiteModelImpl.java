@@ -401,5 +401,5 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	private String _url;
 	private int _typeId;
 	private boolean _primary;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

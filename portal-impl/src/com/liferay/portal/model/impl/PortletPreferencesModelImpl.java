@@ -298,5 +298,5 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	private long _plid;
 	private String _portletId;
 	private String _preferences;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

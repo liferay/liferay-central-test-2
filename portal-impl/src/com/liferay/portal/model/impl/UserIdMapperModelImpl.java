@@ -282,5 +282,5 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	private String _type;
 	private String _description;
 	private String _externalUserId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

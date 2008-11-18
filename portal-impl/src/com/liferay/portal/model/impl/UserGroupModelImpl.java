@@ -278,5 +278,5 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	private long _parentUserGroupId;
 	private String _name;
 	private String _description;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

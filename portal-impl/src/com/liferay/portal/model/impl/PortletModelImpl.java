@@ -283,5 +283,5 @@ public class PortletModelImpl extends BaseModelImpl {
 	private String _portletId;
 	private String _roles;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

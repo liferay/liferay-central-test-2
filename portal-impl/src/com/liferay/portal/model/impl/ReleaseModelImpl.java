@@ -304,5 +304,5 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	private int _buildNumber;
 	private Date _buildDate;
 	private boolean _verified;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

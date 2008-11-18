@@ -435,5 +435,5 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private String _css;
 	private int _pageCount;
 	private String _virtualHost;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

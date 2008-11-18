@@ -283,5 +283,5 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	private long _userId;
 	private Date _createDate;
 	private String _password;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

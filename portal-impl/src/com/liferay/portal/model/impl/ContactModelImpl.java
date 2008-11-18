@@ -765,5 +765,5 @@ public class ContactModelImpl extends BaseModelImpl {
 	private String _jobTitle;
 	private String _jobClass;
 	private String _hoursOfOperation;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

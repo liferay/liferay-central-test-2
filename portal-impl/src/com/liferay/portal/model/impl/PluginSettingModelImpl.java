@@ -303,5 +303,5 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 	private String _pluginType;
 	private String _roles;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

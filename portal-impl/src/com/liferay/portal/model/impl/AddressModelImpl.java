@@ -535,5 +535,5 @@ public class AddressModelImpl extends BaseModelImpl {
 	private int _typeId;
 	private boolean _mailing;
 	private boolean _primary;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

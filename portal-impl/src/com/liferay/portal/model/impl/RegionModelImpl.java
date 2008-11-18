@@ -280,5 +280,5 @@ public class RegionModelImpl extends BaseModelImpl {
 	private String _regionCode;
 	private String _name;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

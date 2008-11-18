@@ -341,5 +341,5 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	private String _remoteAddr;
 	private String _remoteHost;
 	private String _userAgent;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

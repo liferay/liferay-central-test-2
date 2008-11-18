@@ -327,5 +327,5 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private String _props;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

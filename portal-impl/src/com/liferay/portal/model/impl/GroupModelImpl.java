@@ -441,5 +441,5 @@ public class GroupModelImpl extends BaseModelImpl {
 	private String _typeSettings;
 	private String _friendlyURL;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -497,5 +497,5 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	private int _friClose;
 	private int _satOpen;
 	private int _satClose;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -259,5 +259,5 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	private long _companyId;
 	private String _name;
 	private int _scope;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

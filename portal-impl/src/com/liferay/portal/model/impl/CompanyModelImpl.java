@@ -316,5 +316,5 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private String _virtualHost;
 	private String _mx;
 	private long _logoId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

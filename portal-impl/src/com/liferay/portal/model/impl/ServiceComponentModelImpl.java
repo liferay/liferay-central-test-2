@@ -297,5 +297,5 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 	private long _buildNumber;
 	private long _buildDate;
 	private String _data;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

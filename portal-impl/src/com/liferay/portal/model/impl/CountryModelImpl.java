@@ -319,5 +319,5 @@ public class CountryModelImpl extends BaseModelImpl {
 	private String _number;
 	private String _idd;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

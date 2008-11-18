@@ -363,5 +363,5 @@ public class RoleModelImpl extends BaseModelImpl {
 	private String _description;
 	private int _type;
 	private String _subtype;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

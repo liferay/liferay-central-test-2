@@ -623,5 +623,5 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private String _css;
 	private int _priority;
 	private long _dlFolderId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

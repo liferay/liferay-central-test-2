@@ -402,5 +402,5 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	private String _address;
 	private int _typeId;
 	private boolean _primary;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -263,5 +263,5 @@ public class PermissionModelImpl extends BaseModelImpl {
 	private long _companyId;
 	private String _actionId;
 	private long _resourceId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }
