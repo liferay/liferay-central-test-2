@@ -33,8 +33,6 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsKeys;
@@ -355,9 +353,6 @@ public class CounterPersistence extends BasePersistenceImpl {
 		PropsUtil.get(PropsKeys.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
 
 	private static final String _NAME = Counter.class.getName();
-
-	private static final Log _log =
-		LogFactoryUtil.getLog(CounterPersistence.class);
 
 	private static Map<String, CounterRegister> _registerLookup =
 		new HashMap<String, CounterRegister>();
