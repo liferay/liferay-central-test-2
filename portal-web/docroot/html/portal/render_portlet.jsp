@@ -684,7 +684,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	}
 }
 
-if (layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) && !portletDisplay.getId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
 	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 %>
