@@ -147,7 +147,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
 
-		// Name 
+		// Name
 
 		row.addText(image.getNameWithExtension());
 
