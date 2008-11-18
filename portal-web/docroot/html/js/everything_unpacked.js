@@ -6683,25 +6683,18 @@ Liferay.Layout = {
 
 		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
-		jQuery.ajax(
+		Liferay.Popup(
 			{
+				modal: true,
+				position: ['center', 100],
+				title: Liferay.Language.get('layout'),
 				url: url,
-				data: {
+				urlData: {
 					p_l_id: themeDisplay.getPlid(),
 					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					redirect: Liferay.currentURL
 				},
-				success: function(response) {
-					Liferay.Popup(
-						{
-							width: 700,
-							modal: true,
-							message: response,
-							position: ['center', 100],
-							title: Liferay.Language.get('layout')
-						}
-					);
-				}
+				width: 700
 			}
 		);
 	},
@@ -7182,6 +7175,91 @@ Liferay.Layout.FreeForm = {
 
 	_maxZIndex: 99
 };
+Liferay.Observable = new Class({
+	initialize: function() {
+		var instance = this;
+
+		instance._eventObj = jQuery(instance);
+	},
+
+	bind: function(event, handler, scope) {
+		var instance = this;
+
+		if (handler && event) {
+			instance._createEventObj();
+
+			var method = handler;
+
+			if (scope) {
+				method = function(event) {
+					handler.apply(scope || instance, arguments);
+				};
+			}
+
+			instance._eventObj.bind(event, method);
+		}
+
+	},
+
+	get: function(key, defaultValue) {
+		var instance = this;
+
+		var prop = '__' + key;
+		var value = defaultValue;
+
+		if (prop in instance) {
+			value = instance[prop];
+		}
+
+		return value;
+	},
+
+	set: function(key, value) {
+		var instance = this;
+
+		var prop = '__' + key;
+
+		var oldValue = instance[prop];
+
+		if (value != oldValue) {
+			instance[prop] = value;
+
+			instance.trigger('update', [instance, {value: value}]);
+		}
+	},
+
+	trigger: function(event, data){
+		var instance = this;
+
+		if (instance._eventsSuspended == false) {
+			instance._createEventObj();
+
+			instance._eventObj.triggerHandler(event, data);
+		}
+	},
+
+	resumeEvents: function(){
+		var instance = this;
+
+		instance._eventsSuspended = false;
+	},
+
+	suspendEvents: function(){
+		var instance = this;
+
+		instance._eventsSuspended = true;
+	},
+
+	_createEventObj: function() {
+		var instance = this;
+
+		if (!instance._eventObj) {
+			instance._eventObj = jQuery(instance);
+		}
+	},
+
+	_eventsSuspended: false
+});
 Liferay.PortletURL = new Class({
 	initialize: function(lifecycle, params) {
 		var instance = this;
@@ -7414,14 +7492,17 @@ Liferay.AutoFields = new Class({
 
 		var fullContainer = jQuery('<div class="row-container"></div>');
 		var baseContainer = jQuery('<div class="lfr-form-row"></div>');
-		var undoText = Liferay.Language.get('undo-x', ['[$SPAN$]']);
-		undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
 
 		var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row modify-link">' + Liferay.Language.get('delete-row') + '</a></span>');
-		var undoManager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
 
 		instance._baseContainer = fullContainer;
 		instance._idSeed = baseRows.length;
+
+		instance._undoManager = new Liferay.UndoManager(
+			{
+				container: container
+			}
+		);
 
 		if (options.fieldIndexes) {
 			instance._fieldIndexes = jQuery('[@name=' + options.fieldIndexes + ']');
@@ -7457,29 +7538,6 @@ Liferay.AutoFields = new Class({
 		instance._container = container;
 		instance._rowContainer = fullContainer;
 
-		instance._undoManager = undoManager;
-
-		instance._undoItemsLeft = undoManager.find('.items-left');
-		instance._undoButton = undoManager.find('.undo-action');
-		instance._clearUndos = undoManager.find('.clear-undos');
-
-		instance._clearUndos.click(
-			function(event) {
-				instance._undoCache = [];
-				instance._rowContainer.find('.lfr-form-row:hidden').remove();
-
-				Liferay.trigger('updateUndoList');
-			}
-		);
-
-		instance._undoButton.click(
-			function(event) {
-				instance.undoLast();
-			}
-		);
-
-		fullContainer.prepend(undoManager);
-
 		baseRows.each(
 			function(i) {
 				var formRow;
@@ -7508,13 +7566,6 @@ Liferay.AutoFields = new Class({
 
 		container.append(fullContainer);
 
-		Liferay.bind(
-			'updateUndoList',
-			function(event) {
-				instance._updateUndoList();
-			}
-		);
-
 		if (options.sortable){
 			instance._makeSortable(options.sortableHandle);
 		}
@@ -7529,6 +7580,15 @@ Liferay.AutoFields = new Class({
 				var fieldOrder = instance.serialize();
 
 				instance._fieldIndexes.val(fieldOrder);
+			}
+		);
+
+		instance._undoManager.bind(
+			'clearList',
+			function(event) {
+				var hiddenRows = instance._rowContainer.find('.lfr-form-row:hidden');
+
+				hiddenRows.remove();
 			}
 		);
 	},
@@ -7589,21 +7649,11 @@ Liferay.AutoFields = new Class({
 
 		deletedElement.hide();
 
-		instance._queueUndo(deletedElement);
-	},
-
-	undoLast: function() {
-		var instance = this;
-
-		var itemsLeft = instance._undoCache.length;
-
-		if (itemsLeft > 0) {
-			var deletedElement = instance._undoCache.pop();
-
-			deletedElement.show();
-
-			Liferay.trigger('updateUndoList');
-		}
+		instance._undoManager.add(
+			function(stateData) {
+				deletedElement.show();
+			}
+		);
 	},
 
 	serialize: function(filter) {
@@ -7656,14 +7706,6 @@ Liferay.AutoFields = new Class({
 		element.prev().before(element);
 	},
 
-	_queueUndo: function(deletedElement) {
-		var instance = this;
-
-		instance._undoCache.push(deletedElement);
-
-		Liferay.trigger('updateUndoList');
-	},
-
 	_makeSortable: function(sortableHandle) {
 		var instance = this;
 
@@ -7697,30 +7739,6 @@ Liferay.AutoFields = new Class({
 		);
 	},
 
-	_updateUndoList: function() {
-		var instance = this;
-
-		var itemsLeft = instance._undoCache.length;
-		var undoManager = instance._undoManager;
-
-		if (itemsLeft == 1) {
-			undoManager.addClass('queue-single');
-		}
-		else {
-			undoManager.removeClass('queue-single');
-		}
-
-		if (itemsLeft > 0) {
-			undoManager.removeClass('queue-empty');
-		}
-		else {
-			undoManager.addClass('queue-empty');
-		}
-
-		instance._undoItemsLeft.text('(' + itemsLeft + ')');
-	},
-
-	_undoCache: [],
 	_idSeed: 0
 });
 Liferay.ColorPicker = new Class({
@@ -9304,7 +9322,23 @@ Liferay.Navigation = new Class({
 	_enterPage: '',
 	_updateURL: ''
 });
-Liferay.Panel = new Class({
+Liferay.Panel = Liferay.Observable.extend({
+
+	/**
+	 * OPTIONS
+	 *
+	 * Optional
+	 * container {string|object}: A jQuery selector of the panel container if there are multiple panels handled by this one.
+	 * panel {string|object}: A jQuery selector of the panel.
+	 * panelContent {string|object}: A jQuery selector of the content section of the panel.
+	 * header {string|object}: A jQuery selector of the panel's header area.
+	 * titles {string|object}: A jQuery selector of the titles in the panel.
+	 * footer {string|object}: A jQuery selector of the panel's footer area.
+	 * isAccordian {boolean}: Whether or not the panels have accordion behavior (meaning only one panel can be open at a time).
+	 * isCollapsible {boolean}: Whether or not the panel can be collapsed by clicking the title.
+	 *
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 
@@ -9315,7 +9349,7 @@ Liferay.Panel = new Class({
 			header: '.lfr-panel-header',
 			titles: '.lfr-panel-titlebar',
 			footer: '.lfr-panel-footer',
-			accordian: true,
+			isAccordian: true,
 			isCollapsible: true
 		};
 
@@ -9335,7 +9369,7 @@ Liferay.Panel = new Class({
 		instance._header = instance._panel.find(options.header);
 		instance._footer = instance._panel.find(options.footer);
 		instance._panelTitles = instance._panel.find(options.titles);
-		instance._isAccordion = options.accordian;
+		instance._isAccordion = options.isAccordian;
 
 		instance._isCollapsible = options.isCollapsible;
 
@@ -9355,6 +9389,11 @@ Liferay.Panel = new Class({
 				instance._panel.slice(1).addClass('lfr-collapsed');
 			}
 		}
+
+		instance.set('container', instance._container);
+		instance.set('panel', instance._panel);
+		instance.set('panelContent', instance._panelContent);
+		instance.set('panelTitles', instance._panelTitles);
 	},
 
 	makeCollapsible: function() {
@@ -9390,9 +9429,26 @@ Liferay.Panel = new Class({
 		if (instance._isAccordion) {
 			currentContainer.siblings('.lfr-panel').addClass('lfr-collapsed');
 		}
+
+		instance.trigger('titleClick');
 	}
 });
 Liferay.FloatingPanel = Liferay.Panel.extend({
+
+	/**
+	 * OPTIONS
+	 *
+	 * Also inherits all configuration options from Liferay.Panel
+	 *
+	 * Optional
+	 * trigger {string|object}: A jQuery selector of the element that triggers the opening of the floating panel.
+	 * paging {boolean}: Whether or not to add pagination to the panel.
+	 * pagingElements {string}: A jQuery selector of the elements that make up each "page".
+	 * resultsPerPage {number}: The number of results to show per page.
+	 * width {number}: The width of the panel.
+	 *
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 
@@ -9446,6 +9502,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 				return false;
 			}
 		);
+
+		instance.set('trigger', instance._trigger);
 	},
 
 	hide: function() {
@@ -9454,12 +9512,16 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 		instance._container.detachPositionHelper();
 
 		instance._trigger.removeClass('lfr-trigger-selected');
+
+		instance.trigger('hide');
 	},
 
 	onOuterClick: function() {
 		var instance = this;
 
 		instance.hide();
+
+		instance.trigger('outerClick');
 	},
 
 	onTitleClick: function(el) {
@@ -9488,6 +9550,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 		else {
 			instance.hide(trigger);
 		}
+
+		instance.trigger('triggerClick');
 	},
 
 	paginate: function(currentPanelContent) {
@@ -9638,6 +9702,8 @@ Liferay.FloatingPanel = Liferay.Panel.extend({
 		if (instance._paging) {
 			instance._setMaxPageHeight();
 		}
+
+		instance.trigger('show');
 	},
 
 	_setMaxPageHeight: function() {
@@ -10964,6 +11030,136 @@ Liferay.TagsEntriesSelector = new Class({
 
 		tagsEntriesSummary.html(html);
 	}
+});
+Liferay.UndoManager = Liferay.Observable.extend({
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
+	 *
+	 * Optional
+	 * location {string}: The location in the container (top or bottom) where the manager will be added
+	 *
+	 */
+
+	initialize: function(options) {
+		var instance = this;
+
+		var defaults = {
+			container: null,
+			location: 'top'
+		};
+
+		options = jQuery.extend(defaults, options);
+
+		if (options.container) {
+			var undoText = Liferay.Language.get('undo-x', ['[$SPAN$]']);
+			undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
+
+			instance._container = jQuery(options.container);
+			instance._manager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
+
+			instance._undoItemsLeft = instance._manager.find('.items-left');
+			instance._undoButton = instance._manager.find('.undo-action');
+			instance._clearUndos = instance._manager.find('.clear-undos');
+
+			instance.bind('update', instance._updateList);
+
+			instance._clearUndos.click(
+				function(event) {
+					instance._undoCache = [];
+
+					instance.trigger('update');
+					instance.trigger('clearList');
+				}
+			);
+
+			instance._undoButton.click(
+				function(event) {
+					instance.undo(1);
+				}
+			);
+
+			var attachMethod = 'prepend';
+
+			if (options.location != 'top') {
+				attachMethod = 'append';
+			}
+
+			instance._container[attachMethod](instance._manager);
+
+			instance.set('container', instance._container);
+
+			jQuery(window).unload(
+				function(event) {
+					instance._undoCache = [];
+				}
+			);
+		}
+	},
+
+	add: function(handler, stateData) {
+		var instance = this;
+
+		if (handler && typeof handler == 'function') {
+			var undo = {
+				handler: handler,
+				stateData: stateData
+			};
+
+			instance._undoCache.push(undo);
+
+			instance.trigger('update');
+			instance.trigger('add');
+		}
+	},
+
+	undo: function(limit) {
+		var instance = this;
+
+		limit = limit || 1;
+
+		var i = instance._undoCache.length - 1;
+
+		while (limit > 0 && i >= 0) {
+			var undoAction = instance._undoCache.pop();
+
+			undoAction.handler.call(instance, undoAction.stateData);
+
+			limit--;
+			i--;
+		}
+
+		instance.trigger('update');
+		instance.trigger('undo');
+	},
+
+	_updateList: function() {
+		var instance = this;
+
+		var itemsLeft = instance._undoCache.length;
+		var manager = instance._manager;
+
+		if (itemsLeft == 1) {
+			manager.addClass('queue-single');
+		}
+		else {
+			manager.removeClass('queue-single');
+		}
+
+		if (itemsLeft > 0) {
+			manager.removeClass('queue-empty');
+		}
+		else {
+			manager.addClass('queue-empty');
+		}
+
+		instance._undoItemsLeft.text('(' + itemsLeft + ')');
+	},
+
+	_undoCache: []
 });
 Liferay.Upload = new Class({
 
