@@ -334,6 +334,8 @@ public interface DLFileEntryLocalService {
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
 		throws com.liferay.portal.SystemException;
 
+	public void reIndex(long entryId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,

@@ -438,6 +438,11 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
+	public static void reIndex(long entryId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(entryId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,

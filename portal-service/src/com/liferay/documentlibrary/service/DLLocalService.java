@@ -65,7 +65,8 @@ public interface DLLocalService {
 
 	public Hits search(
 			long companyId, String portletId, long groupId,
-			long[] repositoryIds, String keywords, int start, int end)
+			long userId, long[] repositoryIds, String keywords, int start,
+			int end)
 		throws SystemException;
 
 	public void updateFile(

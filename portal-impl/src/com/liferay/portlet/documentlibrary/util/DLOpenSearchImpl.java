@@ -43,7 +43,7 @@ public class DLOpenSearchImpl extends HitsOpenSearchImpl {
 		throws Exception {
 
 		return DLFolderLocalServiceUtil.search(
-			companyId, 0, null, keywords, start, end);
+			companyId, 0, 0, null, keywords, start, end);
 	}
 
 	public String getSearchPath() {

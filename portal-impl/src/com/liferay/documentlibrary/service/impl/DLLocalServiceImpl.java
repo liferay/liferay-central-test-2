@@ -43,6 +43,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -115,7 +117,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public Hits search(
 			long companyId, String portletId, long groupId,
-			long[] repositoryIds, String keywords, int start, int end)
+			long userId, long[] repositoryIds, String keywords, int start,
+			int end)
 		throws SystemException {
 
 		try {
@@ -132,11 +135,17 @@ public class DLLocalServiceImpl implements DLLocalService {
 					BooleanQueryFactoryUtil.create();
 
 				for (long repositoryId : repositoryIds) {
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						"repositoryId", repositoryId);
+					try {
+						DLFolderServiceUtil.getFolder(repositoryId);
 
-					repositoryIdsQuery.add(
-						termQuery, BooleanClauseOccur.SHOULD);
+						TermQuery termQuery = TermQueryFactoryUtil.create(
+								"repositoryId", repositoryId);
+
+						repositoryIdsQuery.add(
+							termQuery, BooleanClauseOccur.SHOULD);
+					}
+					catch (Exception e) {
+					}
 				}
 
 				contextQuery.add(repositoryIdsQuery, BooleanClauseOccur.MUST);
@@ -158,7 +167,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, groupId, userId, DLFileEntry.class.getName(),
+				fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -428,12 +428,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] folderIds, String keywords,
-			int start, int end)
+			long companyId, long groupId, long userId, long[] folderIds,
+			String keywords, int start, int end)
 		throws SystemException {
 
 		return dlLocalService.search(
-			companyId, PortletKeys.DOCUMENT_LIBRARY, groupId, folderIds,
+			companyId, PortletKeys.DOCUMENT_LIBRARY, groupId, userId, folderIds,
 			keywords, start, end);
 	}
 

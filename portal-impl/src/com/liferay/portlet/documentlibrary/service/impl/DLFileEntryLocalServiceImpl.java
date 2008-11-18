@@ -25,8 +25,11 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -678,6 +681,39 @@ public class DLFileEntryLocalServiceImpl
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
 		return dlFileEntryFinder.findByNoAssets();
+	}
+
+	public void reIndex(long entryId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		DLFileEntry entry = dlFileEntryPersistence.fetchByPrimaryKey(entryId);
+
+		if (entry == null) {
+			return;
+		}
+
+		DLFolder folder = entry.getFolder();
+
+		long companyId = entry.getCompanyId();
+		String portletId = PortletKeys.DOCUMENT_LIBRARY;
+		long groupId = folder.getGroupId();
+		long folderId = folder.getFolderId();
+		String fileName = entry.getName();
+		String properties = entry.getLuceneProperties();
+
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			DLFileEntry.class.getName(), entryId);
+
+		try {
+			Indexer.updateFile(
+				companyId, portletId, groupId, folderId, fileName, properties,
+				tagsEntries);
+		}
+		catch (SearchException se) {
+			_log.error("Reindexing " + entryId, se);
+		}
 	}
 
 	public DLFileEntry updateFileEntry(

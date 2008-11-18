@@ -229,6 +229,21 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.PROPERTIES, properties);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
+		DLFileEntry fileEntry = null;
+
+		try {
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				repositoryId, fileName);
+		}
+		catch (Exception e) {
+			throw new SearchException(
+				"File " + fileName + " in repository " + repositoryId +
+					" does not exist in the database");
+		}
+
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
+		doc.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
+
 		doc.addKeyword("repositoryId", repositoryId);
 		doc.addKeyword("path", fileName);
 

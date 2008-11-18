@@ -239,8 +239,8 @@ public interface DLFolderLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.SystemException;
+		long groupId, long userId, long[] folderIds, java.lang.String keywords,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,

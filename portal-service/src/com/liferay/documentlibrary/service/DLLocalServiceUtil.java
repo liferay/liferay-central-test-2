@@ -85,11 +85,13 @@ public class DLLocalServiceUtil {
 
 	public static Hits search(
 			long companyId, String portletId, long groupId,
-			long[] repositoryIds, String keywords, int start, int end)
+			long userId, long[] repositoryIds, String keywords, int start,
+			int end)
 		throws SystemException {
 
 		return _service.search(
-			companyId, portletId, groupId, repositoryIds, keywords, start, end);
+			companyId, portletId, groupId, userId, repositoryIds, keywords,
+			start, end);
 	}
 
 	public static void updateFile(

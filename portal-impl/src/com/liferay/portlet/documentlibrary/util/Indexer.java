@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import javax.portlet.PortletRequest;
@@ -83,7 +85,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public void reIndex(String className, long classPK) {
+	public void reIndex(String className, long classPK) throws SearchException {
+		try {
+			DLFileEntryLocalServiceUtil.reIndex(classPK);
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
@@ -95,6 +103,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[0];
+	private static final String[] _CLASS_NAMES = new String[] {
+		DLFileEntry.class.getName()
+	};
 
 }
