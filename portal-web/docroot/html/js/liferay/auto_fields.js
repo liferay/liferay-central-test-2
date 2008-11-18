@@ -22,14 +22,17 @@ Liferay.AutoFields = new Class({
 
 		var fullContainer = jQuery('<div class="row-container"></div>');
 		var baseContainer = jQuery('<div class="lfr-form-row"></div>');
-		var undoText = Liferay.Language.get('undo-x', ['[$SPAN$]']);
-		undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
 
 		var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row modify-link">' + Liferay.Language.get('delete-row') + '</a></span>');
-		var undoManager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
 
 		instance._baseContainer = fullContainer;
 		instance._idSeed = baseRows.length;
+
+		instance._undoManager = new Liferay.UndoManager(
+			{
+				container: container
+			}
+		);
 
 		if (options.fieldIndexes) {
 			instance._fieldIndexes = jQuery('[@name=' + options.fieldIndexes + ']');
@@ -65,29 +68,6 @@ Liferay.AutoFields = new Class({
 		instance._container = container;
 		instance._rowContainer = fullContainer;
 
-		instance._undoManager = undoManager;
-
-		instance._undoItemsLeft = undoManager.find('.items-left');
-		instance._undoButton = undoManager.find('.undo-action');
-		instance._clearUndos = undoManager.find('.clear-undos');
-
-		instance._clearUndos.click(
-			function(event) {
-				instance._undoCache = [];
-				instance._rowContainer.find('.lfr-form-row:hidden').remove();
-
-				Liferay.trigger('updateUndoList');
-			}
-		);
-
-		instance._undoButton.click(
-			function(event) {
-				instance.undoLast();
-			}
-		);
-
-		fullContainer.prepend(undoManager);
-
 		baseRows.each(
 			function(i) {
 				var formRow;
@@ -116,13 +96,6 @@ Liferay.AutoFields = new Class({
 
 		container.append(fullContainer);
 
-		Liferay.bind(
-			'updateUndoList',
-			function(event) {
-				instance._updateUndoList();
-			}
-		);
-
 		if (options.sortable){
 			instance._makeSortable(options.sortableHandle);
 		}
@@ -137,6 +110,14 @@ Liferay.AutoFields = new Class({
 				var fieldOrder = instance.serialize();
 
 				instance._fieldIndexes.val(fieldOrder);
+			}
+		);
+
+		instance._undoManager.bind('clearList',
+			function(event) {
+				var hiddenRows = instance._rowContainer.find('.lfr-form-row:hidden');
+
+				hiddenRows.remove();
 			}
 		);
 	},
@@ -197,21 +178,11 @@ Liferay.AutoFields = new Class({
 
 		deletedElement.hide();
 
-		instance._queueUndo(deletedElement);
-	},
-
-	undoLast: function() {
-		var instance = this;
-
-		var itemsLeft = instance._undoCache.length;
-
-		if (itemsLeft > 0) {
-			var deletedElement = instance._undoCache.pop();
-
-			deletedElement.show();
-
-			Liferay.trigger('updateUndoList');
-		}
+		instance._undoManager.add(
+			function(stateData) {
+				deletedElement.show();
+			}
+		);
 	},
 
 	serialize: function(filter) {
@@ -264,14 +235,6 @@ Liferay.AutoFields = new Class({
 		element.prev().before(element);
 	},
 
-	_queueUndo: function(deletedElement) {
-		var instance = this;
-
-		instance._undoCache.push(deletedElement);
-
-		Liferay.trigger('updateUndoList');
-	},
-
 	_makeSortable: function(sortableHandle) {
 		var instance = this;
 
@@ -305,29 +268,5 @@ Liferay.AutoFields = new Class({
 		);
 	},
 
-	_updateUndoList: function() {
-		var instance = this;
-
-		var itemsLeft = instance._undoCache.length;
-		var undoManager = instance._undoManager;
-
-		if (itemsLeft == 1) {
-			undoManager.addClass('queue-single');
-		}
-		else {
-			undoManager.removeClass('queue-single');
-		}
-
-		if (itemsLeft > 0) {
-			undoManager.removeClass('queue-empty');
-		}
-		else {
-			undoManager.addClass('queue-empty');
-		}
-
-		instance._undoItemsLeft.text('(' + itemsLeft + ')');
-	},
-
-	_undoCache: [],
 	_idSeed: 0
 });
