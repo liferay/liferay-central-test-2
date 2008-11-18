@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -41,6 +42,7 @@ import org.apache.lucene.index.Term;
  * @author Bruno Farache
  * @author Brian Wing Shun Chan
  * @author Allen Chiang
+ * @author Alex Wallace
  *
  */
 public class LuceneIndexWriterImpl implements IndexWriter {
@@ -110,18 +112,30 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		org.apache.lucene.document.Document luceneDoc =
 			new org.apache.lucene.document.Document();
 
-		Collection<Field> values = doc.getFields().values();
+		Collection<Field> fields = doc.getFields().values();
 
-		for (Field field : values) {
-			if (field.isTokenized()) {
-				for (String value : field.getValues()) {
-					LuceneUtil.addText(luceneDoc, field.getName(), value);
+		for (Field field : fields) {
+			String name = field.getName();
+			boolean tokenized = field.isTokenized();
+			float boost = field.getBoost();
+
+			for (String value : field.getValues()) {
+				if (Validator.isNull(value)) {
+					continue;
 				}
-			}
-			else {
-				for (String value : field.getValues()) {
-					LuceneUtil.addKeyword(luceneDoc, field.getName(), value);
+
+				org.apache.lucene.document.Field luceneField = null;
+
+				if (tokenized) {
+					luceneField = LuceneFields.getText(name, value);
 				}
+				else {
+					luceneField = LuceneFields.getKeyword(name, value);
+				}
+
+				luceneField.setBoost(boost);
+
+				luceneDoc.add(luceneField);
 			}
 		}
 

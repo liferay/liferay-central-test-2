@@ -165,30 +165,6 @@ public class LuceneUtil {
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 	}
 
-	public static void addKeyword(Document doc, String field, double value) {
-		addKeyword(doc, field, String.valueOf(value));
-	}
-
-	public static void addKeyword(Document doc, String field, long value) {
-		addKeyword(doc, field, String.valueOf(value));
-	}
-
-	public static void addKeyword(Document doc, String field, String value) {
-		if (Validator.isNotNull(value)) {
-			doc.add(LuceneFields.getKeyword(field, value));
-		}
-	}
-
-	public static void addKeyword(Document doc, String field, String[] values) {
-		if (values == null) {
-			return;
-		}
-
-		for (int i = 0; i < values.length; i++) {
-			addKeyword(doc, field, values[i]);
-		}
-	}
-
 	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, boolean value) {
 
@@ -342,16 +318,6 @@ public class LuceneUtil {
 
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
-		}
-	}
-
-	public static void addText(Document doc, String field, long value) {
-		addText(doc, field, String.valueOf(value));
-	}
-
-	public static void addText(Document doc, String field, String value) {
-		if (Validator.isNotNull(value)) {
-			doc.add(LuceneFields.getText(field, value));
 		}
 	}
 

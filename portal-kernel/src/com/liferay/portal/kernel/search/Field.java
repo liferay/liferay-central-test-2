@@ -28,6 +28,7 @@ package com.liferay.portal.kernel.search;
  * @author Bruno Farache
  * @author Brian Wing Shun Chan
  * @author Allen Chiang
+ * @author Alex Wallace
  *
  */
 public class Field {
@@ -70,17 +71,27 @@ public class Field {
 
 	public static final String USER_NAME = "userName";
 
-	public Field() {
-	}
-
 	public Field(String name, String value, boolean tokenized) {
 		this(name, new String[] {value}, tokenized);
 	}
 
 	public Field(String name, String[] values, boolean tokenized) {
+		this(name, values, tokenized, 1);
+	}
+
+	public Field(String name, String[] values, boolean tokenized, float boost) {
 		_name = name;
 		_values = values;
 		_tokenized = tokenized;
+		_boost = boost;
+	}
+
+	public float getBoost() {
+		return _boost;
+	}
+
+	public void setBoost(float boost) {
+		_boost = boost;
 	}
 
 	public String getName() {
@@ -120,6 +131,7 @@ public class Field {
 		_values = values;
 	}
 
+	private float _boost;
 	private String _name;
 	private boolean _tokenized;
 	private String[] _values;
