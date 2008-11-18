@@ -25,35 +25,6 @@
 Liferay.Popup = function(options) {
 	var instance = this;
 
-	var cacheDialogHelper = function(obj) {
-		if (!obj.jquery) {
-			obj = jQuery(obj);
-		}
-
-		var cache = obj.data('ui-helper-drag');
-
-		if (!cache) {
-			var cachedObj = obj.clone();
-
-			cachedObj.find('.ui-dialog-content').empty();
-			cachedObj.addClass('ui-proxy');
-
-			cache = obj.data('ui-helper-drag', cachedObj);
-		}
-
-		return cache;
-	};
-
-	var checkExternalClick = function(element) {
-		if (jQuery.datepicker) {
-			jQuery.datepicker._checkExternalClick(
-				{
-					target: element
-				}
-			);
-		}
-	};
-
 	options = options || {};
 
 	if (options.dragHelper === null) {
@@ -221,6 +192,35 @@ Liferay.Popup = function(options) {
 			jQuery(this).remove();
 		}
 	);
+
+	 function cacheDialogHelper(obj) {
+		if (!obj.jquery) {
+			obj = jQuery(obj);
+		}
+
+		var cache = obj.data('ui-helper-drag');
+
+		if (!cache) {
+			var cachedObj = obj.clone();
+
+			cachedObj.find('.ui-dialog-content').empty();
+			cachedObj.addClass('ui-proxy');
+
+			cache = obj.data('ui-helper-drag', cachedObj);
+		}
+
+		return cache;
+	};
+
+	function checkExternalClick(element) {
+		if (jQuery.datepicker) {
+			jQuery.datepicker._checkExternalClick(
+				{
+					target: element
+				}
+			);
+		}
+	};
 
 	return content.dialog(
 		{
