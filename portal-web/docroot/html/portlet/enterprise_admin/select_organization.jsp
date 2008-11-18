@@ -97,7 +97,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 		sb.append("', '");
 		sb.append(UnicodeFormatter.toString(organization.getName()));
 		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(organization.getType()));
+		sb.append(UnicodeFormatter.toString(HtmlUtil.unescape(organization.getType())));
 		sb.append("');");
 		sb.append("window.close();");
 
@@ -139,7 +139,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 			href="<%= rowHREF %>"
 			name="type"
 			orderable="<%= true %>"
-			value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+			value="<%= LanguageUtil.get(pageContext, HtmlUtil.unescape(organization.getType())) %>"
 		/>
 
 		<liferay-ui:search-container-column-text

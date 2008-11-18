@@ -210,7 +210,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 				<liferay-ui:search-container-column-text
 					name="type"
 					orderable="<%= true %>"
-					value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+					value="<%= LanguageUtil.get(pageContext, HtmlUtil.unescape(organization.getType())) %>"
 				/>
 
 				<liferay-ui:search-container-column-text

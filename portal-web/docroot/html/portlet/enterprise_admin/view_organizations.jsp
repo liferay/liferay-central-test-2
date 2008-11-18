@@ -113,7 +113,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 				href="<%= rowURL %>"
 				name="type"
 				orderable="<%= true %>"
-				value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+				value="<%= LanguageUtil.get(pageContext, HtmlUtil.unescape(organization.getType())) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
