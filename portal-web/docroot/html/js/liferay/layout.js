@@ -31,25 +31,18 @@ Liferay.Layout = {
 
 		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
-		jQuery.ajax(
+		Liferay.Popup(
 			{
+				modal: true,
+				position: ['center', 100],
+				title: Liferay.Language.get('layout'),
 				url: url,
-				data: {
+				urlData: {
 					p_l_id: themeDisplay.getPlid(),
 					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					redirect: Liferay.currentURL
 				},
-				success: function(response) {
-					Liferay.Popup(
-						{
-							width: 700,
-							modal: true,
-							message: response,
-							position: ['center', 100],
-							title: Liferay.Language.get('layout')
-						}
-					);
-				}
+				width: 700
 			}
 		);
 	},

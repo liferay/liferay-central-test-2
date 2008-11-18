@@ -182,6 +182,25 @@ Liferay.Popup = function(options) {
 
 	content.appendTo('body');
 
+	if (config.url) {
+		content.bind(
+			'dialogopen',
+			function(event) {
+				config.url = config.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
+
+				jQuery.ajax(
+					{
+						url: config.url,
+						data: config.urlData,
+						success: function(message) {
+							popup.html(message);
+						}
+					}
+				);
+			}
+		);
+	}
+
 	content.bind(
 		'dialogclose',
 		function(event) {
@@ -222,7 +241,7 @@ Liferay.Popup = function(options) {
 		}
 	};
 
-	return content.dialog(
+	var popup = content.dialog(
 		{
 			autoResize: false,
 			dialogClass: className,
@@ -243,6 +262,8 @@ Liferay.Popup = function(options) {
 			close: close
 		}
 	);
+
+	return popup;
 };
 
 jQuery.extend(

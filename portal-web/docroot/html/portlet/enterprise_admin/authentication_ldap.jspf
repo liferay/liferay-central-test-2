@@ -108,13 +108,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <script type="text/javascript">
 	<portlet:namespace/>testSettings = function(type) {
-		var popup = Liferay.Popup(
-			{
-				modal: true,
-				width: 600
-			}
-		);
-
 		var url = null;
 
 		var data = {};
@@ -150,7 +143,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			data.<portlet:namespace />principal = document.<portlet:namespace />fm.<portlet:namespace />principal.value;
 			data.<portlet:namespace />credentials = document.<portlet:namespace />fm.<portlet:namespace />credentials.value;
 
-			jQuery(popup).load(url, data);
+			var popup = Liferay.Popup(
+				{
+					modal: true,
+					url: url,
+					urlData: data,
+					width: 600,
+				}
+			);
+			
 		}
 	}
 
