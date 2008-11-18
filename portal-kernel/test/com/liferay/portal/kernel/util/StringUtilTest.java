@@ -22,13 +22,15 @@
 
 package com.liferay.portal.kernel.util;
 
+import junit.framework.TestCase;
+
 /**
  * <a href="StringUtilTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class StringUtilTest extends BaseTestCase {
+public class StringUtilTest extends TestCase {
 
 	public void testReplaceChar() throws Exception {
 		String original = "127.0.0.1";

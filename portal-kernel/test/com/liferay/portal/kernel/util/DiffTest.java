@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.BaseTestCase;
+import junit.framework.TestCase;
 
 import java.io.StringReader;
 
@@ -35,7 +35,7 @@ import java.util.List;
  * @author Bruno Farache
  *
  */
-public class DiffTest extends BaseTestCase {
+public class DiffTest extends TestCase {
 
 	public void testOne() {
 		StringReader reader1 = new StringReader("liferay");

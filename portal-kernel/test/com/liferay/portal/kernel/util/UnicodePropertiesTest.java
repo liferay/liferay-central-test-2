@@ -22,13 +22,15 @@
 
 package com.liferay.portal.kernel.util;
 
+import junit.framework.TestCase;
+
 /**
  * <a href="UnicodePropertiesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class UnicodePropertiesTest extends BaseTestCase {
+public class UnicodePropertiesTest extends TestCase {
 
 	public void testLength() throws Exception {
 		String key = "hello";
