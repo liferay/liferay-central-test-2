@@ -121,6 +121,8 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 	for (int i = 0; i < orgLaborsIndexes.length; i++) {
 		int orgLaborsIndex = orgLaborsIndexes[i];
 
+		OrgLabor orgLabor = orgLabors.get(i);
+
 		int[] openArray = new int[paramPrefixes.length];
 
 		for (int j = 0; j < paramPrefixes.length; j++) {
