@@ -336,8 +336,19 @@ public class BookmarksFolderLocalServiceImpl
 				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long folderId : folderIds) {
-					BookmarksFolder folder =
-						bookmarksFolderPersistence.fetchByPrimaryKey(folderId);
+					BookmarksFolder folder = null;
+
+					if (userId == 0) {
+						folder = bookmarksFolderPersistence.fetchByPrimaryKey(
+							folderId);
+					}
+					else {
+						try {
+							folder = bookmarksFolderService.getFolder(folderId);
+						}
+						catch (Exception e) {
+						}
+					}
 
 					if (folder == null) {
 						continue;

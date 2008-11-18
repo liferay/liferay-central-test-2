@@ -44,6 +44,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.io.File;
@@ -136,7 +138,24 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 				for (long repositoryId : repositoryIds) {
 					try {
-						DLFolderServiceUtil.getFolder(repositoryId);
+						DLFolder folder = null;
+
+						if (userId == 0) {
+							folder = DLFolderLocalServiceUtil.getDLFolder(
+								repositoryId);
+						}
+						else {
+							try {
+								folder = DLFolderServiceUtil.getFolder(
+									repositoryId);
+							}
+							catch (Exception e) {
+							}
+						}
+
+						if (folder == null) {
+							continue;
+						}
 
 						TermQuery termQuery = TermQueryFactoryUtil.create(
 								"repositoryId", repositoryId);
