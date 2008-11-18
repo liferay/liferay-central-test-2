@@ -118,6 +118,7 @@ for (int i = 0; i < results.size(); i++) {
 	headerNames.clear();
 
 	headerNames.add("thumbnail");
+	headerNames.add("name");
 	headerNames.add("height");
 	headerNames.add("width");
 	headerNames.add("size");
@@ -145,6 +146,10 @@ for (int i = 0; i < results.size(); i++) {
 		// Thumbnail
 
 		row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
+
+		// Name 
+
+		row.addText(image.getNameWithExtension());
 
 		// Statistics
 
