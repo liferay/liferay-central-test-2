@@ -168,7 +168,7 @@ double version = ParamUtil.getDouble(request, "version");
 		<%
 		try {
 			String languageId = LanguageUtil.getLanguageId(request);
-			int page = ParamUtil.getInteger(renderRequest, "page", 1);
+			int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
 			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, languageId, themeDisplay, page, xmlRequest);
@@ -195,8 +195,8 @@ double version = ParamUtil.getDouble(request, "version");
 
 			<c:if test="<%= articleDisplay.isPaginate() %>">
 				<liferay-ui:page-iterator
-					cur="<%= articleDisplay.getCurrentPage() %>"
 					curParam='<%= "page" %>'
+					curValue="<%= articleDisplay.getCurrentPage() %>"
 					delta="<%= 1 %>"
 					maxPages="<%= 25 %>"
 					total="<%= articleDisplay.getNumberOfPages() %>"
