@@ -354,5 +354,5 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 	private int _ratingsTotalEntries;
 	private double _ratingsTotalScore;
 	private double _ratingsAverageScore;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

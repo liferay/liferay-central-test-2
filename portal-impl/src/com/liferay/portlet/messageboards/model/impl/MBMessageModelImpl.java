@@ -464,5 +464,5 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	private String _body;
 	private boolean _attachments;
 	private boolean _anonymous;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

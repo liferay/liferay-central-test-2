@@ -507,5 +507,5 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 	private String _author;
 	private String _repoGroupId;
 	private String _repoArtifactId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

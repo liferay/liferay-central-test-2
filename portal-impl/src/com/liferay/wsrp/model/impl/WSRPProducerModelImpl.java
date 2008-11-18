@@ -440,5 +440,5 @@ public class WSRPProducerModelImpl extends BaseModelImpl {
 	private String _producerProfileMap;
 	private String _registrationProperties;
 	private String _registrationValidatorClass;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

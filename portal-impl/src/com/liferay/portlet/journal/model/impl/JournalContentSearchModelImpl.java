@@ -321,5 +321,5 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	private long _layoutId;
 	private String _portletId;
 	private String _articleId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

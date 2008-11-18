@@ -423,5 +423,5 @@ public class WSRPPortletModelImpl extends BaseModelImpl {
 	private String _consumerId;
 	private String _portletHandle;
 	private String _mimeTypes;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

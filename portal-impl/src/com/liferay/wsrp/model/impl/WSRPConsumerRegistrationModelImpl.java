@@ -467,5 +467,5 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 	private String _registrationProperties;
 	private String _lifetimeTerminationTime;
 	private String _producerKey;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

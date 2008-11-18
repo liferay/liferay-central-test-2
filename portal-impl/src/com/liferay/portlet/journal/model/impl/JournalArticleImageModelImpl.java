@@ -323,5 +323,5 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	private String _elName;
 	private String _languageId;
 	private boolean _tempImage;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

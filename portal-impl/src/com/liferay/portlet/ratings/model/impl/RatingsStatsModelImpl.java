@@ -301,5 +301,5 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 	private int _totalEntries;
 	private double _totalScore;
 	private double _averageScore;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

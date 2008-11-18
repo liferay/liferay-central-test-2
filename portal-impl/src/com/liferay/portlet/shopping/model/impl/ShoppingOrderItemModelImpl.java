@@ -382,5 +382,5 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	private double _price;
 	private int _quantity;
 	private Date _shippedDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

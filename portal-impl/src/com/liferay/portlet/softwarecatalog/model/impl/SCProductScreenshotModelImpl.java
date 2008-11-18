@@ -329,5 +329,5 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 	private long _thumbnailId;
 	private long _fullImageId;
 	private int _priority;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

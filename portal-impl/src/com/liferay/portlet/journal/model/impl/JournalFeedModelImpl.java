@@ -630,5 +630,5 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 	private String _contentField;
 	private String _feedType;
 	private double _feedVersion;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

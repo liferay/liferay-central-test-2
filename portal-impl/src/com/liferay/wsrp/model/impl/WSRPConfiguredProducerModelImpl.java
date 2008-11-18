@@ -510,5 +510,5 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 	private String _identityPropagationType;
 	private long _sdLastModified;
 	private int _entityVersion;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

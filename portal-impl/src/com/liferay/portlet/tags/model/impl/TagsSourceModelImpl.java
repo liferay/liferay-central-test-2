@@ -263,5 +263,5 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 	private long _parentSourceId;
 	private String _name;
 	private String _acronym;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

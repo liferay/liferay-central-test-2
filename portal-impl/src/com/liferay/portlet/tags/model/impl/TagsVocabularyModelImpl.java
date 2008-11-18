@@ -377,5 +377,5 @@ public class TagsVocabularyModelImpl extends BaseModelImpl {
 	private String _name;
 	private String _description;
 	private boolean _folksonomy;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

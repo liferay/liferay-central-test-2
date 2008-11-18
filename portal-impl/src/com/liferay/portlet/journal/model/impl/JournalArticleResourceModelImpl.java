@@ -246,5 +246,5 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 	private long _resourcePrimKey;
 	private long _groupId;
 	private String _articleId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

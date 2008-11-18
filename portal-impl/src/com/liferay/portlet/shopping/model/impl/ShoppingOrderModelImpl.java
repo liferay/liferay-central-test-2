@@ -1191,5 +1191,5 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	private String _ppPayerEmail;
 	private boolean _sendOrderEmail;
 	private boolean _sendShippingEmail;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -558,5 +558,5 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	private boolean _head;
 	private String _parentTitle;
 	private String _redirectTitle;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

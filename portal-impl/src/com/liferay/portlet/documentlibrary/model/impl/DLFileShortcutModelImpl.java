@@ -373,5 +373,5 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 	private long _folderId;
 	private long _toFolderId;
 	private String _toName;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -371,5 +371,5 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	private long _parentEntryId;
 	private String _name;
 	private long _vocabularyId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

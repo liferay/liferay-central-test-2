@@ -514,5 +514,5 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	private int _size;
 	private int _readCount;
 	private String _extraSettings;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

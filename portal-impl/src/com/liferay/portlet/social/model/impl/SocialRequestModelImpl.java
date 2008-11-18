@@ -439,5 +439,5 @@ public class SocialRequestModelImpl extends BaseModelImpl {
 	private String _extraData;
 	private long _receiverUserId;
 	private int _status;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

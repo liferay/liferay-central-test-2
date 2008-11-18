@@ -451,5 +451,5 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 	private String _description;
 	private Date _publishDate;
 	private Date _dueDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

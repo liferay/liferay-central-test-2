@@ -612,5 +612,5 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	private int _width;
 	private double _priority;
 	private int _viewCount;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -389,5 +389,5 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 	private long _parentCategoryId;
 	private String _name;
 	private String _description;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

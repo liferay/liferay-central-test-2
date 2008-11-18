@@ -244,5 +244,5 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 	private long _resourcePrimKey;
 	private long _nodeId;
 	private String _title;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

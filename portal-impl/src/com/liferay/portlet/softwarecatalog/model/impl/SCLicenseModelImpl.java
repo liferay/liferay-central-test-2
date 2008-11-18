@@ -309,5 +309,5 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	private boolean _openSource;
 	private boolean _active;
 	private boolean _recommended;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

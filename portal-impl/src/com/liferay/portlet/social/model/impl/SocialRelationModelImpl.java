@@ -313,5 +313,5 @@ public class SocialRelationModelImpl extends BaseModelImpl {
 	private long _userId1;
 	private long _userId2;
 	private int _type;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

@@ -611,5 +611,5 @@ public class CalEventModelImpl extends BaseModelImpl {
 	private String _remindBy;
 	private int _firstReminder;
 	private int _secondReminder;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

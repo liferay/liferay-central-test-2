@@ -431,5 +431,5 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 	private int _stage;
 	private boolean _completed;
 	private boolean _rejected;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

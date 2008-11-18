@@ -424,5 +424,5 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 	private String _downloadPageURL;
 	private String _directDownloadURL;
 	private boolean _repoStoreArtifact;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

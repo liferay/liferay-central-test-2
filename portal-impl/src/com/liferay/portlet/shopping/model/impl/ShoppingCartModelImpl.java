@@ -397,5 +397,5 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	private String _couponCodes;
 	private int _altShipping;
 	private boolean _insure;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

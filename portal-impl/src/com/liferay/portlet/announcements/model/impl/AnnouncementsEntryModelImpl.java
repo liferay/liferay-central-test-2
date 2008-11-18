@@ -533,5 +533,5 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 	private Date _expirationDate;
 	private int _priority;
 	private boolean _alert;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

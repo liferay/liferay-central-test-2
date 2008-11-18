@@ -399,5 +399,5 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	private String _url;
 	private boolean _active;
 	private int _priority;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

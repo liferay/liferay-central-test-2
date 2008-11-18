@@ -325,5 +325,5 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
 	private boolean _email;
 	private boolean _sms;
 	private boolean _website;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

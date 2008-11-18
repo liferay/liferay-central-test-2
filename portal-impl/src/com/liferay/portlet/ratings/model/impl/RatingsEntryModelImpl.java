@@ -363,5 +363,5 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private double _score;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

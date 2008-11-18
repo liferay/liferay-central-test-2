@@ -417,5 +417,5 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	private String _description;
 	private Date _expirationDate;
 	private Date _lastVoteDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

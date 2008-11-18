@@ -286,5 +286,5 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	private long _userId;
 	private int _messageCount;
 	private Date _lastPostDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

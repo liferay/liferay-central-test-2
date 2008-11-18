@@ -299,5 +299,5 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private long _folderId;
 	private String _name;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

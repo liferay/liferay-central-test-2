@@ -396,5 +396,5 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	private int _type;
 	private String _extraData;
 	private long _receiverUserId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

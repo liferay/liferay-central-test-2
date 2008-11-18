@@ -438,9 +438,9 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
-	public static void reIndex(long entryId)
+	public static void reIndex(long fileEntryId)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(entryId);
+		getService().reIndex(fileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(

@@ -760,5 +760,5 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	private boolean _smallImage;
 	private long _smallImageId;
 	private String _smallImageURL;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

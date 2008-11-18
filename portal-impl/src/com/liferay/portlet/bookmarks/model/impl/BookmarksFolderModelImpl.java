@@ -386,5 +386,5 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 	private long _parentFolderId;
 	private String _name;
 	private String _description;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

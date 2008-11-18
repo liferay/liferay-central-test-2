@@ -394,5 +394,5 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	private String _name;
 	private String _description;
 	private Date _lastPostDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

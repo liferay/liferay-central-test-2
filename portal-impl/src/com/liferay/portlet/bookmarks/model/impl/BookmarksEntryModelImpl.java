@@ -421,5 +421,5 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	private String _comments;
 	private int _visits;
 	private int _priority;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

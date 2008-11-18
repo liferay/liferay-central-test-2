@@ -355,5 +355,5 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 	private long _entryId;
 	private String _key;
 	private String _value;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

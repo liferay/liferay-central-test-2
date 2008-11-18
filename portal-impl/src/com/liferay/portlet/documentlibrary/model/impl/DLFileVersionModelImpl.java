@@ -384,5 +384,5 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	private String _name;
 	private double _version;
 	private int _size;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

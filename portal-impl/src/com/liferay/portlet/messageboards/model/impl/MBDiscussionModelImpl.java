@@ -267,5 +267,5 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	private long _classNameId;
 	private long _classPK;
 	private long _threadId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

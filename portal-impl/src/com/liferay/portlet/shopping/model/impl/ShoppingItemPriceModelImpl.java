@@ -388,5 +388,5 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	private double _shipping;
 	private boolean _useShippingFormula;
 	private int _status;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

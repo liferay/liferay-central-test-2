@@ -825,5 +825,5 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	private boolean _largeImage;
 	private long _largeImageId;
 	private String _largeImageURL;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

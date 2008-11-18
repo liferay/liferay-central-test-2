@@ -293,5 +293,5 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private long _entryId;
 	private int _value;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

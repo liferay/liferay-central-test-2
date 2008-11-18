@@ -346,5 +346,5 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	private long _lastPostByUserId;
 	private Date _lastPostDate;
 	private double _priority;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

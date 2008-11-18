@@ -532,5 +532,5 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	private double _minOrder;
 	private double _discount;
 	private String _discountType;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

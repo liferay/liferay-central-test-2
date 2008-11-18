@@ -478,5 +478,5 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	private boolean _draft;
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

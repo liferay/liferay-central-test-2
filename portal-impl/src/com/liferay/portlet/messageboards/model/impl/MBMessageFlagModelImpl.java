@@ -257,5 +257,5 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 	private long _userId;
 	private long _messageId;
 	private int _flag;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

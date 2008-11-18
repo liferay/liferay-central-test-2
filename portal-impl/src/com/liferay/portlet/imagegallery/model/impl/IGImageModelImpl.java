@@ -429,5 +429,5 @@ public class IGImageModelImpl extends BaseModelImpl {
 	private long _largeImageId;
 	private long _custom1ImageId;
 	private long _custom2ImageId;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

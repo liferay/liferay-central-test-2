@@ -668,5 +668,5 @@ public class MBMailingListModelImpl extends BaseModelImpl {
 	private String _outUserName;
 	private String _outPassword;
 	private boolean _active;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

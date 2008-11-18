@@ -292,5 +292,5 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 	private long _questionId;
 	private String _name;
 	private String _description;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

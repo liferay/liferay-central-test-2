@@ -278,5 +278,5 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 	private long _questionId;
 	private long _choiceId;
 	private Date _voteDate;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }
