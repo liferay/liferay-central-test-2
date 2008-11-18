@@ -171,6 +171,21 @@ public class OrganizationServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.OrganizationSoap[] getManageableOrganizations(
+		long userId, java.lang.String actionId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getManageableOrganizations(userId,
+					actionId);
+
+			return com.liferay.portal.model.OrganizationSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.OrganizationSoap getOrganization(
 		long organizationId) throws RemoteException {
 		try {

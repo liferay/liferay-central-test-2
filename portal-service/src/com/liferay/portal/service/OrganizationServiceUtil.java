@@ -94,6 +94,13 @@ public class OrganizationServiceUtil {
 		getService().deleteOrganization(organizationId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
+		long userId, java.lang.String actionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getManageableOrganizations(userId, actionId);
+	}
+
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,

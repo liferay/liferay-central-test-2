@@ -38,6 +38,7 @@ import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.util.UniqueList;
 
 import java.util.List;
 
@@ -135,6 +136,34 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			getPermissionChecker(), organizationId, ActionKeys.DELETE);
 
 		organizationLocalService.deleteOrganization(organizationId);
+	}
+
+	public List<Organization> getManageableOrganizations(
+			long userId, String actionId)
+		throws PortalException, SystemException {
+
+		if ((actionId == null) || getPermissionChecker().isCompanyAdmin()) {
+			return organizationLocalService.getManageableOrganizations(userId);
+		}
+
+		List<Organization> manageableOrganizations =
+			new UniqueList<Organization>();
+
+		List<Organization> userOrganizations = userPersistence.getOrganizations(
+			userId);
+
+		for (Organization userOrganization : userOrganizations) {
+			if (OrganizationPermissionUtil.contains(
+					getPermissionChecker(),
+					userOrganization.getOrganizationId(), actionId)) {
+
+				manageableOrganizations.add(userOrganization);
+				manageableOrganizations.addAll(
+					userOrganization.getSuborganizations());
+			}
+		}
+
+		return manageableOrganizations;
 	}
 
 	public Organization getOrganization(long organizationId)

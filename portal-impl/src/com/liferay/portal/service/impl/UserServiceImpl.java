@@ -48,6 +48,7 @@ import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
@@ -111,6 +112,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		OrganizationPermissionUtil.check(
 			getPermissionChecker(), organizationId, ActionKeys.ASSIGN_MEMBERS);
+
+		checkUserOrganizationAssignments(userIds);
 
 		userLocalService.addOrganizationUsers(organizationId, userIds);
 	}
@@ -725,6 +728,36 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		return roleIds;
+	}
+
+	protected void checkUserOrganizationAssignments(long[] userIds)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT ||
+			getPermissionChecker().isCompanyAdmin()) {
+			return;
+		}
+
+		List<Organization> manageableOrganizations =
+			organizationService.getManageableOrganizations(
+				getUserId(), ActionKeys.MANAGE_USERS);
+
+		for (long userId : userIds) {
+			boolean allowed = false;
+
+			for (Organization organization : manageableOrganizations) {
+				if (userLocalService.hasOrganizationUser(
+					organization.getOrganizationId(), userId)) {
+					allowed = true;
+
+					break;
+				}
+			}
+
+			if (!allowed) {
+				throw new PrincipalException();
+			}
+		}
 	}
 
 	protected void updateAnnouncementsDeliveries(

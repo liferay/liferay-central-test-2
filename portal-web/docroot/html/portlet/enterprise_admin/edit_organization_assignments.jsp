@@ -91,6 +91,18 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 	if (tabs2.equals("current")) {
 		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 	}
+	else if (PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT && !permissionChecker.isCompanyAdmin()) {
+		List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());;
+		List<Long> manageableOrganizationIds = new ArrayList<Long>();
+
+		for (Organization manageableOrganization : manageableOrganizations) {
+			if (OrganizationPermissionUtil.contains(permissionChecker, manageableOrganization.getOrganizationId(), ActionKeys.MANAGE_USERS)) {
+				manageableOrganizationIds.add(manageableOrganization.getOrganizationId());
+			}
+		}
+
+		userParams.put("usersOrgs", manageableOrganizationIds.toArray(new Long[manageableOrganizationIds.size()]));
+	}
 	%>
 
 	<liferay-ui:search-container-results>

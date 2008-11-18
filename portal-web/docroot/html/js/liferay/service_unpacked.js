@@ -465,6 +465,13 @@ Liferay.Service.Portal.Organization = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getManageableOrganizations: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getManageableOrganizations";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getOrganization: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getOrganization";

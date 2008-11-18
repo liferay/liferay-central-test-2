@@ -138,7 +138,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 							%>
 
 						</select>
-						
+
 						<liferay-ui:icon-help message="change-the-language-and-save-to-enter-the-subject-and-body-in-different-languages" />
 					</td>
 				</tr>

@@ -838,6 +838,10 @@ public class PropsValues {
 	public static final String[] ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS);
 
+	public static final boolean ORGANIZATIONS_ASSIGNMENT_STRICT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.ORGANIZATIONS_ASSIGNMENT_STRICT));
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME =
 		PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_NAME);
 

@@ -841,6 +841,8 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
+	public static final String ORGANIZATIONS_ASSIGNMENT_STRICT = "organizations.assignment.strict";
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
 	public static final String PASSWORDS_DIGEST_ENCODING = "passwords.digest.encoding";

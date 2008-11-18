@@ -122,6 +122,16 @@ public class OrganizationServiceJSON {
 		OrganizationServiceUtil.deleteOrganization(organizationId);
 	}
 
+	public static JSONArray getManageableOrganizations(long userId,
+		java.lang.String actionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getManageableOrganizations(userId,
+				actionId);
+
+		return OrganizationJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONObject getOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
