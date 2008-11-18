@@ -3552,6 +3552,8 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=Dit e-mailadres is tevens uw gebruikersnaam.
 this-event-does-not-repeat=Deze gebeurtenis herhaalt zich niet.
 this-feature-requires-internet-explorer-5.5-and-above=Deze functie vereist Internet Explorer 5,5 en hoger.
+this-field-does-not-have-any-specific-validation=Dit gebied heeft geen specifieke bevestiging.
+this-field-is-mandatory=Dit gebied is verplicht.
 this-folder-is-empty=Deze map is leeg.
 this-form-has-already-been-submitted=Dit formulier is al verstuurd. Versturen wordt weer mogelijk over {0} seconden.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Deze functionaliteit zal slechts werken wanneer u Rich Text opgemaakte e-mails verzendt. Wilt u Rich Text opmaak toestaan?
@@ -3781,6 +3783,7 @@ valid-days=Geldige Dagen
 valid-hours=Geldige Uren
 valid-minutes=Geldige Notulen
 validate-url=Bevestig URL
+validation-error-message=De Foutenmelding van de bevestiging
 validation-script=Het Manuscript van de bevestiging
 validation=Bevestiging
 validator-expected-type-string,-but-instead-received-type-x=Validator verwachte type java.lang.String, maar kreeg type {0}.

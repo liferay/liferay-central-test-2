@@ -3552,6 +3552,8 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=这封电子邮»¶并且将½为您的登入。
 this-event-does-not-repeat=这次事件不重覆。
 this-feature-requires-internet-explorer-5.5-and-above=这个特点要求Internet Explorer 5.5 或以上版本。
+this-field-does-not-have-any-specific-validation=这个领域没有任何具体检验。
+this-field-is-mandatory=这个领域是必须的。
 this-folder-is-empty=这个文件夹是空的。
 this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=这种功能只将运作当您送多文本格式电子邮件。您想要使能多文本格式吗?
@@ -3781,6 +3783,7 @@ valid-days=合法的天
 valid-hours=合法的小时
 valid-minutes=合法的分钟
 validate-url=确认网址
+validation-error-message=检验错误信息
 validation-script=检验剧本
 validation=检验
 validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.

@@ -3552,6 +3552,8 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=Questo indirizzo di posta ti servirà anche come tua login.
 this-event-does-not-repeat=Questo evento non si ripete.
 this-feature-requires-internet-explorer-5.5-and-above=Queste funzionalità richiedono una versione di Internet Explorer 5,5 o superiore.
+this-field-does-not-have-any-specific-validation=Questo campo non ha alcuna convalida specifica.
+this-field-is-mandatory=Questo campo è obbligatorio.
 this-folder-is-empty=Questa cartella è vuota.
 this-form-has-already-been-submitted=Questo form è già stata sottomessa.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Questa funzionalità sarà abilitata soltanto quando invierete l'email con formato RTF. Desiderate permettere la formattazione RCF?
@@ -3781,6 +3783,7 @@ valid-days=Giorni validi
 valid-hours=Ore valide
 valid-minutes=Resoconto valido
 validate-url=URL di Validazione
+validation-error-message=Messaggio di errore di convalida
 validation-script=Scritto di convalida
 validation=Convalida
 validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.

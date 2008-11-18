@@ -3552,6 +3552,8 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=Esta dirección de correo también servirá como su nombre de usuario para acceder al portal.
 this-event-does-not-repeat=Este evento no se repite.
 this-feature-requires-internet-explorer-5.5-and-above=Esta característica requiere tener instalado Internet Explorer 5,5 o superior.
+this-field-does-not-have-any-specific-validation=Este campo no tiene ninguna validación específica.
+this-field-is-mandatory=Este campo es obligatorio.
 this-folder-is-empty=Esta carpeta está vacía.
 this-form-has-already-been-submitted=Este forumulario ya ha sido enviado. El envío será reactivado en {0} segundos.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Esta funcionalidad está disponible sólo cuando se usa formato de texto enriquecido. ¿Desea habilitarlo ahora?
@@ -3781,6 +3783,7 @@ valid-days=Días válidos
 valid-hours=Horas válidas
 valid-minutes=Minutos válidos
 validate-url=Validar URL
+validation-error-message=Mensaje de error de la validación
 validation-script=Script de validación
 validation=Validación
 validator-expected-type-string,-but-instead-received-type-x=El validador esperaba un tipo java.lang.String, pero el tipo recibido es {0}.

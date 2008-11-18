@@ -3552,6 +3552,8 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=Αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου θα χρησιμεύσει επίσης για την  σύνδεσή σας.
 this-event-does-not-repeat=Αυτό το γεγονός δεν επαναλαμβάνει.
 this-feature-requires-internet-explorer-5.5-and-above=Η λειτουργία αυτή απαιτεί Internet Explorer 5.5 και ανώτερο.
+this-field-does-not-have-any-specific-validation=Αυτός ο τομέας δεν έχει οποιαδήποτε συγκεκριμένη επικύρωση.
+this-field-is-mandatory=Αυτός ο τομέας είναι υποχρεωτικός.
 this-folder-is-empty=Ο φάκελος είναι άδειος.
 this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Αυτή η λειτουργία θα λειτουργήσει μόνο όταν στέλνετε RTF email. Θέλετε να επιτρέψετε την πλούσια μορφοποίηση κειμένων;
@@ -3781,6 +3783,7 @@ valid-days=Έγκυρες ημέρες
 valid-hours=Έγκυρες ώρες
 valid-minutes=Έγκυρα πρακτικά
 validate-url=Επικυρώστε URL
+validation-error-message=Μήνυμα λάθους επικύρωσης
 validation-script=Χειρόγραφο επικύρωσης
 validation=Επικύρωση
 validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.

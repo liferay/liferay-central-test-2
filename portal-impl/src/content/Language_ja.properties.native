@@ -3552,6 +3552,8 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=このメールアドレスはログイン時にも使えます。
 this-event-does-not-repeat=このイベントは繰り返しません。
 this-feature-requires-internet-explorer-5.5-and-above=この機能を利用するにはInternet Explorer 5.5以上が必要です。
+this-field-does-not-have-any-specific-validation=この分野に特定の確認がない。
+this-field-is-mandatory=この分野は必須である。
 this-folder-is-empty=このフォルダは空です。
 this-form-has-already-been-submitted=このフォームはすでに投稿済みです。投稿が有効なのは{0}秒間です。
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=この機能はリッチテキスト形式のメール送信時にのみ動作します。リッチテキスト形式を有効にしますか？
@@ -3781,6 +3783,7 @@ valid-days=有効な日
 valid-hours=有効な時間
 valid-minutes=有効な分
 validate-url=妥当性検証URL
+validation-error-message=確認のエラーメッセージ
 validation-script=確認の原稿
 validation=確認
 validator-expected-type-string,-but-instead-received-type-x=バリデータはjava.lang.String形式を期待していますが、{0}形式が入力されました。
