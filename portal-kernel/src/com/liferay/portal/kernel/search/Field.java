@@ -33,9 +33,9 @@ package com.liferay.portal.kernel.search;
  */
 public class Field {
 
-	public static final String COMPANY_ID = "companyId";
-
 	public static final String COMMENTS = "comments";
+
+	public static final String COMPANY_ID = "companyId";
 
 	public static final String CONTENT = "content";
 
@@ -90,24 +90,8 @@ public class Field {
 		return _boost;
 	}
 
-	public void setBoost(float boost) {
-		_boost = boost;
-	}
-
 	public String getName() {
 		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public boolean isTokenized() {
-		return _tokenized;
-	}
-
-	public void setTokenized(boolean type) {
-		_tokenized = type;
 	}
 
 	public String getValue() {
@@ -119,12 +103,28 @@ public class Field {
 		}
 	}
 
-	public void setValue(String value) {
-		setValues(new String[] {value});
-	}
-
 	public String[] getValues() {
 		return _values;
+	}
+
+	public boolean isTokenized() {
+		return _tokenized;
+	}
+
+	public void setBoost(float boost) {
+		_boost = boost;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setTokenized(boolean type) {
+		_tokenized = type;
+	}
+
+	public void setValue(String value) {
+		setValues(new String[] {value});
 	}
 
 	public void setValues(String[] values) {
