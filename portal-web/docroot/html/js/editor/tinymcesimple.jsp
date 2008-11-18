@@ -54,19 +54,15 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			theme_advanced_toolbar_location : "top"
 		});
 
-		function init(value) {
-			setHTML(decodeURIComponent(value));
+		function fileBrowserCallback(field_name, url, type) {
 		}
 
 		function getHTML() {
 			return tinyMCE.activeEditor.getContent();
 		}
 
-		function setHTML(value) {
-			tinyMCE.activeEditor.setContent(value);
-		}
-
-		function fileBrowserCallback(field_name, url, type) {
+		function init(value) {
+			setHTML(decodeURIComponent(value));
 		}
 
 		function initInstanceCallback() {
@@ -100,6 +96,10 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			}
 
 			onChangeCallbackCounter++;
+		}
+
+		function setHTML(value) {
+			tinyMCE.activeEditor.setContent(value);
 		}
 	</script>
 </head>
