@@ -336,17 +336,17 @@ public class BookmarksFolderLocalServiceImpl
 				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long folderId : folderIds) {
-					try {
-						bookmarksFolderService.getFolder(folderId);
+					BookmarksFolder folder =
+						bookmarksFolderPersistence.fetchByPrimaryKey(folderId);
 
-						TermQuery termQuery = TermQueryFactoryUtil.create(
-							"folderId", folderId);
+					if (folder == null) {
+						continue;
+					}
 
-						folderIdsQuery.add(
-							termQuery, BooleanClauseOccur.SHOULD);
-					}
-					catch (Exception e) {
-					}
+					TermQuery termQuery = TermQueryFactoryUtil.create(
+						"folderId", folderId);
+
+					folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 				}
 
 				contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
