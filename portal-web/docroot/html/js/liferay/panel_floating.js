@@ -1,4 +1,19 @@
 Liferay.FloatingPanel = Liferay.Panel.extend({
+
+	/**
+	 * OPTIONS
+	 *
+	 * Also inherits all configuration options from Liferay.Panel
+	 *
+	 * Optional
+	 * trigger {string|object}: A jQuery selector of the element that triggers the opening of the floating panel.
+	 * paging {boolean}: Whether or not to add pagination to the panel.
+	 * pagingElements {string}: A jQuery selector of the elements that make up each "page".
+	 * resultsPerPage {number}: The number of results to show per page.
+	 * width {number}: The width of the panel.
+	 *
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 

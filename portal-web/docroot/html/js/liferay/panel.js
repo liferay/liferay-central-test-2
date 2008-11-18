@@ -1,4 +1,20 @@
 Liferay.Panel = Liferay.Observable.extend({
+
+	/**
+	 * OPTIONS
+	 *
+	 * Optional
+	 * container {string|object}: A jQuery selector of the panel container if there are multiple panels handled by this one.
+	 * panel {string|object}: A jQuery selector of the panel.
+	 * panelContent {string|object}: A jQuery selector of the content section of the panel.
+	 * header {string|object}: A jQuery selector of the panel's header area.
+	 * titles {string|object}: A jQuery selector of the titles in the panel.
+	 * footer {string|object}: A jQuery selector of the panel's footer area.
+	 * isAccordian {boolean}: Whether or not the panels have accordion behavior (meaning only one panel can be open at a time).
+	 * isCollapsible {boolean}: Whether or not the panel can be collapsed by clicking the title.
+	 *
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 
@@ -9,7 +25,7 @@ Liferay.Panel = Liferay.Observable.extend({
 			header: '.lfr-panel-header',
 			titles: '.lfr-panel-titlebar',
 			footer: '.lfr-panel-footer',
-			accordian: true,
+			isAccordian: true,
 			isCollapsible: true
 		};
 
@@ -29,7 +45,7 @@ Liferay.Panel = Liferay.Observable.extend({
 		instance._header = instance._panel.find(options.header);
 		instance._footer = instance._panel.find(options.footer);
 		instance._panelTitles = instance._panel.find(options.titles);
-		instance._isAccordion = options.accordian;
+		instance._isAccordion = options.isAccordian;
 
 		instance._isCollapsible = options.isCollapsible;
 
