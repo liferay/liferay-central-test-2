@@ -997,41 +997,6 @@ li.toggle-expand a {
 
 /* ---------- Portal ---------- */
 
-/* ---------- Portal login ---------- */
-
-.lfr-portal-login {
-}
-
-.lfr-portal-login:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .lfr-portal-login {
-	height: 1%;
-}
-
-.lfr-portal-login form {
-	float: left;
-	margin-right: 10px;
-	width: 300px;
-}
-
-.lfr-portal-login fieldset {
-	padding-top: 0;
-}
-
-.lfr-portal-login .lfr-input-text {
-	width: 150px;
-}
-
-.lfr-portal-login .uni-form legend {
-	padding-top: 0;
-}
-
 /* ---------- Portal notifications styling ---------- */
 
 .popup-alert-notice .notice-date {
