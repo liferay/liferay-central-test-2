@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
@@ -68,8 +67,7 @@ public class OrganizationImpl
 
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
-			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES,
-			new Filter(HtmlUtil.unescape(type)));
+			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES, new Filter(type));
 	}
 
 	public Organization getParentOrganization()
@@ -87,8 +85,7 @@ public class OrganizationImpl
 
 	public static String[] getParentTypes(String type) {
 		String[] types = PropsUtil.getArray(
-			PropsKeys.ORGANIZATIONS_TYPES,
-			new Filter(HtmlUtil.unescape(type)));
+			PropsKeys.ORGANIZATIONS_TYPES, new Filter(type));
 
 		List<String> parentTypes = new ArrayList<String>();
 
@@ -114,8 +111,7 @@ public class OrganizationImpl
 
 	public static boolean isRootable(String type) {
 		return GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.ORGANIZATIONS_ROOTABLE,
-			new Filter(HtmlUtil.unescape(type))));
+			PropsUtil.get(PropsKeys.ORGANIZATIONS_ROOTABLE, new Filter(type)));
 	}
 
 	public OrganizationImpl() {

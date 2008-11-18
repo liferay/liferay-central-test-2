@@ -273,7 +273,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			model.setCompanyId(getCompanyId());
 			model.setParentOrganizationId(getParentOrganizationId());
 			model.setName(HtmlUtil.escape(getName()));
-			model.setType(HtmlUtil.escape(getType()));
+			model.setType(getType());
 			model.setRecursable(getRecursable());
 			model.setRegionId(getRegionId());
 			model.setCountryId(getCountryId());
@@ -370,5 +370,5 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	private long _countryId;
 	private int _statusId;
 	private String _comments;
-	private ExpandoBridge _expandoBridge;
+	private transient ExpandoBridge _expandoBridge;
 }

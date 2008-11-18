@@ -82,7 +82,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		<liferay-ui:search-container-column-text
 			name="type"
-			value="<%= LanguageUtil.get(pageContext, HtmlUtil.unescape(organization.getType())) %>"
+			value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
