@@ -531,7 +531,6 @@ jQuery.fn.init.prototype = jQuery.fn;
 function evalScript( i, elem ) {
 	if ( elem.src )
 		jQuery.ajax({
-			type: "GET",
 			url: elem.src,
 			async: false,
 			dataType: "script"
