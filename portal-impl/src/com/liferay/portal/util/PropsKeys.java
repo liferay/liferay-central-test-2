@@ -235,7 +235,7 @@ public interface PropsKeys {
 	public static final String COMPANY_SECURITY_SEND_PASSWORD = "company.security.send.password";
 
 	public static final String COMPANY_SECURITY_STRANGERS = "company.security.strangers";
-	
+
 	public static final String COMPANY_SECURITY_STRANGERS_URL = "company.security.strangers.url";
 
 	public static final String COMPANY_SECURITY_STRANGERS_VERIFY = "company.security.strangers.verify";

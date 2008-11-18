@@ -239,7 +239,7 @@ public class PropsValues {
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS));
 
 	public static final String COMPANY_SECURITY_STRANGERS_URL =
-			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_URL);
+		PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_URL);
 
 	public static final boolean COMPANY_SECURITY_STRANGERS_VERIFY =
 		GetterUtil.getBoolean(

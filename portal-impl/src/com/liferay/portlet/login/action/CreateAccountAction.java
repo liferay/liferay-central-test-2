@@ -26,6 +26,7 @@ import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredUserException;
@@ -49,6 +50,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -85,38 +87,11 @@ public class CreateAccountAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		try {
-			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		try {
 			if (cmd.equals(Constants.ADD)) {
 				addUser(actionRequest, actionResponse);
-			}
-			else {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
-
-				if (Validator.isNotNull(
-					PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
-
-					Layout layout = null;
-
-					for (Layout curLayout : themeDisplay.getLayouts()) {
-						if (curLayout.getFriendlyURL().equals(
-								PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
-							layout = curLayout;
-
-							break;
-						}
-					}
-
-					if (layout != null) {
-						String redirect = PortalUtil.getLayoutURL(
-							layout, themeDisplay);
-
-						sendRedirect(actionRequest, actionResponse, redirect);
-					}
-				}
 			}
 		}
 		catch (Exception e) {
@@ -141,6 +116,25 @@ public class CreateAccountAction extends PortletAction {
 			else {
 				throw e;
 			}
+		}
+
+		if (Validator.isNull(PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
+			return;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		try {
+			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+				themeDisplay.getScopeGroupId(), false,
+				PropsValues.COMPANY_SECURITY_STRANGERS_URL);
+
+			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+
+			sendRedirect(actionRequest, actionResponse, redirect);
+		}
+		catch (NoSuchLayoutException nsle) {
 		}
 	}
 
