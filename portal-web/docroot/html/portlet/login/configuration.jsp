@@ -62,10 +62,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 			String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
 			String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
 
-			String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + languageId, StringPool.BLANK);
-			String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + languageId, StringPool.BLANK);
+			String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + currentLanguageId, StringPool.BLANK);
+			String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + currentLanguageId, StringPool.BLANK);
 
-			String editorParam = "emailPasswordSentBody_" + languageId;
+			String editorParam = "emailPasswordSentBody_" + currentLanguageId;
 			String editorContent = emailPasswordSentBody;
 			%>
 
@@ -150,7 +150,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<liferay-ui:message key="subject" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />emailPasswordSentSubject_<%= languageId %>" type="text" value="<%= emailPasswordSentSubject %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailPasswordSentSubject_<%= currentLanguageId %>" type="text" value="<%= emailPasswordSentSubject %>" />
 					</td>
 				</tr>
 				<tr>
