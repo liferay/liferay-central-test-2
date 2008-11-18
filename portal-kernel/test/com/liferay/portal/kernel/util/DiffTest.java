@@ -22,12 +22,12 @@
 
 package com.liferay.portal.kernel.util;
 
-import junit.framework.TestCase;
-
 import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 /**
  * <a href="DiffTest.java.html"><b><i>View Source</i></b></a>
