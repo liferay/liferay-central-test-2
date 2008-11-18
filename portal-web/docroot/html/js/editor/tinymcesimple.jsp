@@ -66,15 +66,11 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			tinyMCE.activeEditor.setContent(value);
 		}
 
-		function initEditor() {
-			init(parent.<%= initMethod %>());
+		function fileBrowserCallback(field_name, url, type) {
 		}
 
 		function initInstanceCallback() {
-			initEditor();
-		}
-
-		function fileBrowserCallback(field_name, url, type) {
+			init(parent.<%= initMethod %>());
 		}
 
 		function onChangeCallback(tinyMCE) {
