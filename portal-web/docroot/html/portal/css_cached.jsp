@@ -52,8 +52,14 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	padding: 20px;
 }
 
-.nojs .lfr-js-required {
-	display: none;
+.lfr-js-required {
+	position: absolute;
+	left: -9999em;
+	top: -9999em;
+}
+
+.js .lfr-js-required {
+	position: static;
 }
 
 /* ---------- Add content styles ---------- */
