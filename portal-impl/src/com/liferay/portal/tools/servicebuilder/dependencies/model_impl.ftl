@@ -431,7 +431,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 	</#list>
 
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
-		transient private ExpandoBridge _expandoBridge;
+		private transient ExpandoBridge _expandoBridge;
 	</#if>
 
 }
