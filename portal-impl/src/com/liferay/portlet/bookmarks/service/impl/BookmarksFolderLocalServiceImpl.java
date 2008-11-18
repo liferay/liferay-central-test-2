@@ -336,22 +336,13 @@ public class BookmarksFolderLocalServiceImpl
 				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long folderId : folderIds) {
-					BookmarksFolder folder = null;
-
-					if (userId == 0) {
-						folder = bookmarksFolderPersistence.fetchByPrimaryKey(
-							folderId);
-					}
-					else {
+					if (userId > 0) {
 						try {
-							folder = bookmarksFolderService.getFolder(folderId);
+							bookmarksFolderService.getFolder(folderId);
 						}
 						catch (Exception e) {
+							continue;
 						}
-					}
-
-					if (folder == null) {
-						continue;
 					}
 
 					TermQuery termQuery = TermQueryFactoryUtil.create(

@@ -454,7 +454,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				try {
 					dlService.addFile(
 						companyId, portletId, groupId, repositoryId,
-						dirName + "/" + fileName, StringPool.BLANK,
+						dirName + "/" + fileName, 0, StringPool.BLANK,
 						new String[0], bytes);
 				}
 				catch (DuplicateFileException dfe) {
@@ -1240,7 +1240,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				try {
 					dlService.addFile(
 						companyId, portletId, groupId, repositoryId,
-						dirName + "/" + fileName, StringPool.BLANK,
+						dirName + "/" + fileName, 0, StringPool.BLANK,
 						new String[0], bytes);
 				}
 				catch (DuplicateFileException dfe) {

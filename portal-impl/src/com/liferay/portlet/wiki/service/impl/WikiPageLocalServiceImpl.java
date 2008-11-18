@@ -253,8 +253,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			try {
 				dlService.addFile(
 					companyId, portletId, groupId, repositoryId,
-					dirName + "/" + fileName, StringPool.BLANK, new String[0],
-					bytes);
+					dirName + "/" + fileName, 0, StringPool.BLANK,
+					new String[0], bytes);
 			}
 			catch (DuplicateFileException dfe) {
 			}

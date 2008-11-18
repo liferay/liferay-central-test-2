@@ -84,14 +84,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addText(Field.TITLE, name);
 		doc.addText(Field.DESCRIPTION, description);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addModifiedDate();
 
 		doc.addKeyword("folderId", folderId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, imageId);
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 

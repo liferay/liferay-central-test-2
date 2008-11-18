@@ -54,8 +54,8 @@ public abstract class BaseHook implements Hook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries,
-			File file)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -65,7 +65,7 @@ public abstract class BaseHook implements Hook {
 
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties, tagsEntries, is);
+				fileEntryId, properties, tagsEntries, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
@@ -84,8 +84,8 @@ public abstract class BaseHook implements Hook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries,
-			byte[] bytes)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
 		InputStream is = new ByteArrayInputStream(bytes);
@@ -93,7 +93,7 @@ public abstract class BaseHook implements Hook {
 		try {
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties, tagsEntries, is);
+				fileEntryId, properties, tagsEntries, is);
 		}
 		finally {
 			try {
@@ -107,8 +107,8 @@ public abstract class BaseHook implements Hook {
 
 	public abstract void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries,
-			InputStream is)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public abstract void checkRoot(long companyId) throws SystemException;
@@ -197,7 +197,8 @@ public abstract class BaseHook implements Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, String[] tagsEntries, File file)
+			long fileEntryId, String properties, String[] tagsEntries,
+			File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -207,7 +208,8 @@ public abstract class BaseHook implements Hook {
 
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				versionNumber, sourceFileName, properties, tagsEntries, is);
+				versionNumber, sourceFileName, fileEntryId, properties,
+				tagsEntries, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
@@ -227,7 +229,8 @@ public abstract class BaseHook implements Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, String[] tagsEntries, byte[] bytes)
+			long fileEntryId, String properties, String[] tagsEntries,
+			byte[] bytes)
 		throws PortalException, SystemException {
 
 		InputStream is = new ByteArrayInputStream(bytes);
@@ -235,7 +238,8 @@ public abstract class BaseHook implements Hook {
 		try {
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				versionNumber, sourceFileName, properties, tagsEntries, is);
+				versionNumber, sourceFileName, fileEntryId, properties,
+				tagsEntries, is);
 		}
 		finally {
 			try {
@@ -250,12 +254,13 @@ public abstract class BaseHook implements Hook {
 	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, String[] tagsEntries, InputStream is)
+			long fileEntryId, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException;
 
 	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName)
+			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException;
 
 	private static Log _log = LogFactory.getLog(BaseHook.class);

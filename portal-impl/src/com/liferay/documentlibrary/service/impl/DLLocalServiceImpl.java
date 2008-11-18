@@ -44,8 +44,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.io.File;
@@ -62,8 +60,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries,
-			InputStream is)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, is);
@@ -71,8 +69,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 		Hook hook = HookFactory.getInstance();
 
 		hook.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, properties,
-			tagsEntries, is);
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, tagsEntries, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -138,23 +136,13 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 				for (long repositoryId : repositoryIds) {
 					try {
-						DLFolder folder = null;
-
-						if (userId == 0) {
-							folder = DLFolderLocalServiceUtil.getDLFolder(
-								repositoryId);
-						}
-						else {
+						if (userId > 0) {
 							try {
-								folder = DLFolderServiceUtil.getFolder(
-									repositoryId);
+								DLFolderServiceUtil.getFolder(repositoryId);
 							}
 							catch (Exception e) {
+								continue;
 							}
-						}
-
-						if (folder == null) {
-							continue;
 						}
 
 						TermQuery termQuery = TermQueryFactoryUtil.create(
@@ -198,7 +186,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, String[] tagsEntries, InputStream is)
+			long fileEntryId, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, sourceFileName, is);
@@ -207,7 +196,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, tagsEntries, is);
+			versionNumber, sourceFileName, fileEntryId, properties, tagsEntries,
+			is);
 	}
 
 	public void validate(String fileName, File file) throws PortalException {

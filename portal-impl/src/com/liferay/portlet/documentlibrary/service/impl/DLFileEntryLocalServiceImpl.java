@@ -262,7 +262,7 @@ public class DLFileEntryLocalServiceImpl
 		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name,
-			fileEntry.getLuceneProperties(), tagsEntries, is);
+			fileEntryId, fileEntry.getLuceneProperties(), tagsEntries, is);
 
 		// Resources
 
@@ -683,36 +683,37 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
-	public void reIndex(long entryId) throws SystemException {
+	public void reIndex(long fileEntryId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
-		DLFileEntry entry = dlFileEntryPersistence.fetchByPrimaryKey(entryId);
+		DLFileEntry fileEntry = dlFileEntryPersistence.fetchByPrimaryKey(
+			fileEntryId);
 
-		if (entry == null) {
+		if (fileEntry == null) {
 			return;
 		}
 
-		DLFolder folder = entry.getFolder();
+		DLFolder folder = fileEntry.getFolder();
 
-		long companyId = entry.getCompanyId();
+		long companyId = fileEntry.getCompanyId();
 		String portletId = PortletKeys.DOCUMENT_LIBRARY;
 		long groupId = folder.getGroupId();
 		long folderId = folder.getFolderId();
-		String fileName = entry.getName();
-		String properties = entry.getLuceneProperties();
+		String fileName = fileEntry.getName();
+		String properties = fileEntry.getLuceneProperties();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			DLFileEntry.class.getName(), entryId);
+			DLFileEntry.class.getName(), fileEntryId);
 
 		try {
 			Indexer.updateFile(
-				companyId, portletId, groupId, folderId, fileName, properties,
-				tagsEntries);
+				companyId, portletId, groupId, folderId, fileName, fileEntryId,
+				properties, tagsEntries);
 		}
 		catch (SearchException se) {
-			_log.error("Reindexing " + entryId, se);
+			_log.error("Reindexing " + fileEntryId, se);
 		}
 	}
 
@@ -878,7 +879,8 @@ public class DLFileEntryLocalServiceImpl
 
 			dlService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getGroupId(), folderId, newFolderId, name);
+				folder.getGroupId(), folderId, newFolderId, name,
+				newFileEntryId);
 
 			folderId = newFolderId;
 			folder = newFolder;
@@ -916,7 +918,8 @@ public class DLFileEntryLocalServiceImpl
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getGroupId(), folderId, name, newVersion, name,
-				fileEntry.getLuceneProperties(), tagsEntries, is);
+				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
+				tagsEntries, is);
 
 			return fileEntry;
 		}
@@ -961,7 +964,8 @@ public class DLFileEntryLocalServiceImpl
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name, newVersion, sourceFileName,
-			fileEntry.getLuceneProperties(), tagsEntries, is);
+			fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
+			tagsEntries, is);
 
 		// Folder
 

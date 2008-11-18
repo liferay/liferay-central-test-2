@@ -75,12 +75,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getFileDocument(
-			companyId, portletId, groupId, repositoryId, fileName, properties,
-			tagsEntries);
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, tagsEntries);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -145,7 +146,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			return getFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties, tagsEntries);
+				fileEntry.getFileEntryId(), properties, tagsEntries);
 		}
 		catch (PortalException pe) {
 			throw new SearchException(pe.getMessage());
@@ -157,13 +158,24 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries)
 		throws SearchException {
+
+		if (fileEntryId <= 0) {
+			_log.debug(
+				"Not indexing document " + companyId + " " + portletId + " " +
+					groupId + " " + repositoryId + " " + fileName + " " +
+						fileEntryId);
+
+			return null;
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Indexing document " + companyId + " " + portletId + " " +
-					groupId + " " + repositoryId + " " + fileName);
+					groupId + " " + repositoryId + " " + fileName + " " +
+						fileEntryId);
 		}
 
 		String fileExt = StringPool.BLANK;
@@ -200,8 +212,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Document " + companyId + " " + portletId + " " + groupId +
-						" " + repositoryId + " " + fileName +
-							" does not have any content");
+						" " + repositoryId + " " + fileName + " " +
+							fileEntryId + " does not have any content");
 			}
 
 			return null;
@@ -229,28 +241,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.PROPERTIES, properties);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
-		DLFileEntry fileEntry = null;
-
-		try {
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				repositoryId, fileName);
-		}
-		catch (Exception e) {
-			throw new SearchException(
-				"File " + fileName + " in repository " + repositoryId +
-					" does not exist in the database");
-		}
-
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
-
 		doc.addKeyword("repositoryId", repositoryId);
 		doc.addKeyword("path", fileName);
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
+		doc.addKeyword(Field.ENTRY_CLASS_PK, fileEntryId);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Document " + companyId + " " + portletId + " " + groupId +
-					" " + repositoryId + " " + fileName +
+					" " + repositoryId + " " + fileName + " " + fileEntryId +
 						" indexed successfully");
 		}
 
@@ -268,12 +267,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, String[] tagsEntries)
+			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getFileDocument(
-			companyId, portletId, groupId, repositoryId, fileName, properties,
-			tagsEntries);
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, tagsEntries);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
