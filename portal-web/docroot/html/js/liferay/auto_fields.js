@@ -113,7 +113,8 @@ Liferay.AutoFields = new Class({
 			}
 		);
 
-		instance._undoManager.bind('clearList',
+		instance._undoManager.bind(
+			'clearList',
 			function(event) {
 				var hiddenRows = instance._rowContainer.find('.lfr-form-row:hidden');
 

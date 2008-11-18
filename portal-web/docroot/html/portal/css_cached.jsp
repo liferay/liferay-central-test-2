@@ -284,10 +284,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel .lfr-panel-content .undo-queue {
-	margin: -0.5em 0 10px;
 	border-left: none;
 	border-right: none;
 	border-top: none;
+	margin: -0.5em 0 10px;
 }
 
 /* ---------- Panel pagination ---------- */
