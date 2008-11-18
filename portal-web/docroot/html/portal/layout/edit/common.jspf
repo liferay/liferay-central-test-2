@@ -64,7 +64,7 @@
 								Validator.isNotNull(selLayout.getTypeSettingsProperties().getProperty("meta-keywords_" + LocaleUtil.toLanguageId(locales[i]))) ||
 								Validator.isNotNull(selLayout.getTypeSettingsProperties().getProperty("meta-description_" + LocaleUtil.toLanguageId(locales[i])))) {
 
-								optionStyle = "style=\"font-weight: bold\"";
+								optionStyle = "style=\"font-weight: bold;\"";
 							}
 						%>
 

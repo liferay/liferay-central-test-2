@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.login.action;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -92,22 +93,22 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("password-changed-notification")) {
+			String languageId = LanguageUtil.getLanguageId(actionRequest);
+
 			String emailPasswordSentEnabled = ParamUtil.getString(
 				actionRequest, "emailPasswordSentEnabled");
-			String languageId = ParamUtil.getString(
-				actionRequest, "languageId");
-
 			String emailPasswordSentSubject = ParamUtil.getString(
 				actionRequest, "emailPasswordSentSubject_" + languageId);
 			String emailPasswordSentBody = ParamUtil.getString(
 				actionRequest, "emailPasswordSentBody_" + languageId);
 
-			preferences.setValue("emailPasswordSentEnabled",
-					emailPasswordSentEnabled);
-			preferences.setValue("emailPasswordSentSubject_" + languageId,
-					emailPasswordSentSubject);
-			preferences.setValue("emailPasswordSentBody_" + languageId,
-					emailPasswordSentBody);
+			preferences.setValue(
+				"emailPasswordSentEnabled", emailPasswordSentEnabled);
+			preferences.setValue(
+				"emailPasswordSentSubject_" + languageId,
+				emailPasswordSentSubject);
+			preferences.setValue(
+				"emailPasswordSentBody_" + languageId, emailPasswordSentBody);
 
 			preferences.store();
 		}

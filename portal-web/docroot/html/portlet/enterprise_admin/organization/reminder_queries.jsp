@@ -76,7 +76,7 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 				}
 
 				if (Validator.isNotNull(curReminderQueries)) {
-					optionStyle = "style=\"font-weight: bold\"";
+					optionStyle = "style=\"font-weight: bold;\"";
 				}
 			%>
 

@@ -53,14 +53,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<script type="text/javascript">
 
 			<%
+			String currentLanguageId = LanguageUtil.getLanguageId(request);
 			Locale defaultLocale = LocaleUtil.getDefault();
 			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
 			String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
 			String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
-
-			String languageId = ParamUtil.getString(request, "languageId", defaultLanguageId);
 
 			String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + languageId, StringPool.BLANK);
 			String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + languageId, StringPool.BLANK);
@@ -83,7 +83,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			function <portlet:namespace />updateLanguage() {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
-
 				submitForm(document.<portlet:namespace />fm);
 			}
 		</script>
@@ -120,6 +119,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</td>
 					<td>
 						<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage(this);">
+
 							<%
 							for (int i = 0; i < locales.length; i++) {
 								String optionStyle = StringPool.BLANK;
@@ -127,19 +127,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 								if (Validator.isNotNull(preferences.getValue("emailPasswordSentSubject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
 									Validator.isNotNull(preferences.getValue("emailPasswordSentBody_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
 
-									optionStyle = "style=\"font-weight: bold\"";
+									optionStyle = "style=\"font-weight: bold;\"";
 								}
 							%>
 
-								<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(defaultLocale) %></option>
+								<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(defaultLocale) %></option>
 
 							<%
 							}
 							%>
 
 						</select>
-
-						<liferay-ui:icon-help message="change-the-language-and-save-to-enter-the-subject-and-body-in-different-languages" />
 					</td>
 				</tr>
 				<tr>
@@ -147,19 +145,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<br />
 					</td>
 				</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="subject" />
-						</td>
-						<td>
-							<input class="lfr-input-text" name="<portlet:namespace />emailPasswordSentSubject_<%= languageId %>" type="text" value="<%= emailPasswordSentSubject %>" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<br />
-						</td>
-					</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="subject" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />emailPasswordSentSubject_<%= languageId %>" type="text" value="<%= emailPasswordSentSubject %>" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<br />
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<liferay-ui:message key="body" />

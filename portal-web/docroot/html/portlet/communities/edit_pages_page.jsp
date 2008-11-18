@@ -106,7 +106,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						if (Validator.isNotNull(selLayout.getName(locales[i], false)) ||
 							Validator.isNotNull(selLayout.getTitle(locales[i], false))) {
 
-							optionStyle = "style=\"font-weight: bold\"";
+							optionStyle = "style=\"font-weight: bold;\"";
 						}
 					%>
 
