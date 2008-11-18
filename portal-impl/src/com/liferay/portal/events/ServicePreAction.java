@@ -631,6 +631,31 @@ public class ServicePreAction extends Action {
 			}
 		}
 
+		// If the current group is staging, only users with editorial rights
+		// can access it
+
+		if (group.isStagingGroup()) {
+			if (user.isDefaultUser()) {
+				return false;
+			}
+
+			if (GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.APPROVE_PROPOSAL) ||
+				GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) ||
+				GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) ||
+				GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_STAGING) ||
+				GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+
+				return true;
+			}
+
+			return false;
+		}
+
 		// Most public layouts are viewable
 
 		if (!privateLayout) {
@@ -646,13 +671,6 @@ public class ServicePreAction extends Action {
 			else {
 				return true;
 			}
-		}
-
-		// If the current group is staging, the live group should be checked
-		// for membership instead
-
-		if (group.isStagingGroup()) {
-			groupId = group.getLiveGroupId();
 		}
 
 		// Community or organization layouts are only viewable by users who

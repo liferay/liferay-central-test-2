@@ -51,6 +51,8 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -62,6 +64,7 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -945,7 +948,13 @@ public class MainServlet extends ActionServlet {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-				if (layout.isPrivateLayout()) {
+				if (layout.getGroup().isStagingGroup()) {
+					Group group = GroupLocalServiceUtil.getGroup(
+						layout.getCompanyId(), GroupConstants.GUEST);
+
+					plid = group.getDefaultPublicPlid();
+				}
+				else if (layout.isPrivateLayout()) {
 					plid = LayoutLocalServiceUtil.getDefaultPlid(
 						layout.getGroupId(), false);
 				}
