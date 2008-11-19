@@ -174,4 +174,12 @@ public class DateUtil {
 		return dateFormat;
 	}
 
+	public static Date newDate() {
+		return new Date();
+	}
+
+	public static Date newDate(long date) {
+		return new Date(date);
+	}
+
 }

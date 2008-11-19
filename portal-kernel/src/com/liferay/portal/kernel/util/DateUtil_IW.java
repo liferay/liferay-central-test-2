@@ -72,6 +72,14 @@ public class DateUtil_IW {
 		return DateUtil.getUTCFormat(text);
 	}
 
+	public java.util.Date newDate() {
+		return DateUtil.newDate();
+	}
+
+	public java.util.Date newDate(long date) {
+		return DateUtil.newDate(date);
+	}
+
 	private DateUtil_IW() {
 	}
 
