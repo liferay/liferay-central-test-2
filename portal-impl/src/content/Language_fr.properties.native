@@ -1004,6 +1004,7 @@ connection=Connexion
 consumer-agent=Agent du consommateur
 consumer-registration=Enregistrement du consommateur
 consumer-registrations=Enregistrements du consommateur
+contact-information=L'information de contact
 content-and-layout=Contenu et présentation
 content-background=Fond du contenu
 content-border=Bordure du contenu
