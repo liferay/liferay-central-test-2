@@ -82,6 +82,9 @@ FCKConfig.ToolbarSets["edit-in-place"] = [
 	['OrderedList','UnorderedList','-','Outdent','Indent'],['Source','RemoveFormat'],
 ] ;
 
+FCKConfig.BackgroundBlockerColor = '#000' ;
+FCKConfig.BackgroundBlockerOpacity = 0.70 ;
+
 FCKConfig.BodyClass = 'html-editor <%= cssClasses %>' ;
 FCKConfig.CustomStyles = {};
 FCKConfig.StylesXmlPath = FCKConfig.EditorPath + 'fckstyles.xml' ;
