@@ -38,6 +38,20 @@
 	background: none;
 }
 
+.portlet-calendar .calendar {
+	width: 100%;
+}
+
+.portlet-calendar .calendar td {
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+.portlet-calendar .calendar td td {
+	border-width: 0;
+	padding: 0;
+}
+
 .portlet-calendar .calendar-day {
 	float:left;
 	text-align: center;
