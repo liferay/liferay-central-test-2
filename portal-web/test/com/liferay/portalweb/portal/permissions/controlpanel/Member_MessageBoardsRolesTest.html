@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>Member_MessageBoardsRolesTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Member_MessageBoardsRolesTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Portlet Permissions']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[17]/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scope19VIEW</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_FILE</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryVIEW</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessageVIEW</td>
+	<td>label=Enterprise</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The role permissions were updated.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
