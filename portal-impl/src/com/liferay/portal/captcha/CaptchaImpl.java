@@ -218,13 +218,11 @@ public class CaptchaImpl implements Captcha {
 
 		HttpSession session = request.getSession();
 
-		CaptchaProducer producer = getCaptchaProducer();
-
-		String captchaText = producer.createText();
+		String captchaText = _captchaProducer.createText();
 
 		session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
-		producer.createImage(response.getOutputStream(), captchaText);
+		_captchaProducer.createImage(response.getOutputStream(), captchaText);
 	}
 
 	public void serveImage(
@@ -233,20 +231,14 @@ public class CaptchaImpl implements Captcha {
 
 		PortletSession portletSession = portletRequest.getPortletSession();
 
-		CaptchaProducer producer = getCaptchaProducer();
-
-		String captchaText = producer.createText();
+		String captchaText = _captchaProducer.createText();
 
 		portletSession.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
 
-		producer.createImage(response.getOutputStream(), captchaText);
-	}
-
-	protected CaptchaProducer getCaptchaProducer() {
-		return _captchaProducer;
+		_captchaProducer.createImage(response.getOutputStream(), captchaText);
 	}
 
 	private static Log _log = LogFactory.getLog(CaptchaImpl.class);

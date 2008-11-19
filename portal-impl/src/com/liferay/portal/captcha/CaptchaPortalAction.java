@@ -48,14 +48,12 @@ public class CaptchaPortalAction extends Action {
 
 		try {
 			CaptchaUtil.serveImage(request, response);
-
-			return null;
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
-
-			return null;
 		}
+
+		return null;
 	}
 
 }

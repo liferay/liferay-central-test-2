@@ -41,6 +41,11 @@
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil">
 		<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
 	</bean>
+	<bean id="com.liferay.portal.kernel.captcha.CaptchaUtil" class="com.liferay.portal.kernel.captcha.CaptchaUtil">
+		<property name="captcha">
+			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
 		<property name="sqlUpdateFactory">
 			<bean class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
@@ -200,11 +205,6 @@
 	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil">
 		<property name="calendarFactory">
 			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.captcha.CaptchaUtil" class="com.liferay.portal.kernel.captcha.CaptchaUtil">
-		<property name="captcha">
-			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.DatabaseUtil" class="com.liferay.portal.kernel.util.DatabaseUtil">
