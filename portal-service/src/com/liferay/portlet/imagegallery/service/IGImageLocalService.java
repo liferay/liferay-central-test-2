@@ -95,16 +95,15 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, long folderId, java.lang.String name,
-		java.lang.String description, java.io.File file,
-		java.lang.String contentType,
+		long folderId, java.lang.String name, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long folderId,
-		java.lang.String name, java.lang.String description, java.io.File file,
+		java.lang.String uuid, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -238,7 +237,7 @@ public interface IGImageLocalService {
 	public void reIndex(long imageId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long userId, long imageId, long folderId, java.lang.String name,
+		long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)

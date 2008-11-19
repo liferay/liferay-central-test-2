@@ -78,19 +78,18 @@ import org.apache.commons.logging.LogFactory;
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
-			long userId, long folderId, String name, String description,
-			File file, String contentType, ServiceContext serviceContext)
+			long folderId, String name, String description, File file,
+			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addImage(
-			null, userId, folderId, name, description, file, contentType,
+			null, folderId, name, description, file, contentType,
 			serviceContext);
 	}
 
 	public IGImage addImage(
-			String uuid, long userId, long folderId, String name,
-			String description, File file, String contentType,
-			ServiceContext serviceContext)
+			String uuid, long folderId, String name, String description,
+			File file, String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -110,6 +109,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			validate(folderId, nameWithExtension, file, bytes);
 
+			long userId = serviceContext.getUserId();
 			User user = userPersistence.findByPrimaryKey(userId);
 			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 			RenderedImage renderedImage = ImageProcessorUtil.read(
@@ -448,14 +448,15 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long userId, long imageId, long folderId, String name,
-			String description, File file, String contentType,
-			ServiceContext serviceContext)
+			long imageId, long folderId, String name, String description,
+			File file, String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
 
 			// Image
+
+			long userId = serviceContext.getUserId();
 
 			IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 

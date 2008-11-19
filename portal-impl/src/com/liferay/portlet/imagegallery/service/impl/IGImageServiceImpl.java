@@ -53,8 +53,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
 		return igImageLocalService.addImage(
-			getUserId(), folderId, name, description, file, contentType,
-			serviceContext);
+			folderId, name, description, file, contentType, serviceContext);
 	}
 
 	public void deleteImage(long imageId)
@@ -153,8 +152,8 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 			getPermissionChecker(), imageId, ActionKeys.UPDATE);
 
 		return igImageLocalService.updateImage(
-			getUserId(), imageId, folderId, name, description, file,
-			contentType, serviceContext);
+			imageId, folderId, name, description, file, contentType,
+			serviceContext);
 	}
 
 }

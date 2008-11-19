@@ -104,26 +104,25 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, long folderId, java.lang.String name,
+		long folderId, java.lang.String name, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addImage(folderId, name, description, file, contentType,
+			serviceContext);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String uuid, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addImage(userId, folderId, name, description, file,
-			contentType, serviceContext);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long folderId,
-		java.lang.String name, java.lang.String description, java.io.File file,
-		java.lang.String contentType,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addImage(uuid, userId, folderId, name, description, file,
+				   .addImage(uuid, folderId, name, description, file,
 			contentType, serviceContext);
 	}
 
@@ -300,15 +299,15 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long userId, long imageId, long folderId, java.lang.String name,
+		long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateImage(userId, imageId, folderId, name, description,
-			file, contentType, serviceContext);
+				   .updateImage(imageId, folderId, name, description, file,
+			contentType, serviceContext);
 	}
 
 	public static void updateTagsAsset(long userId,
