@@ -44,32 +44,32 @@ if (!groupByClass) {
 	request.setAttribute("view.jsp-results", results);
 
 	if (results.size() <= 0) {
-		if (!themeDisplay.isSignedIn()) {
+		if (!themeDisplay.isSignedIn() || !showPortletWithNoResults) {
 %>
 
-		<style type="text/css">
-			#p_p_id_<%=portletDisplay.getId() %>_ {
-				display: none;
-			}
-		</style>
+			<style type="text/css">
+				#p_p_id_<%=portletDisplay.getId() %>_ {
+					display: none;
+				}
+			</style>
 
 <%
 		}
 		else {
 %>
 
-		<liferay-ui:message key="there-are-no-results" />
+			<liferay-ui:message key="there-are-no-results" />
 
-		<style type="text/css">
-			#p_p_id_<%=portletDisplay.getId() %>_ {
-				opacity: 0.4;
-			}
+			<style type="text/css">
+				#p_p_id_<%=portletDisplay.getId() %>_ {
+					opacity: 0.4;
+				}
 
-			.ie #p_p_id_<%=portletDisplay.getId() %>_ {
-				filter: alpha(opacity=40);
-				zoom: 1;
-			}
-		</style>
+				.ie #p_p_id_<%=portletDisplay.getId() %>_ {
+					filter: alpha(opacity=40);
+					zoom: 1;
+				}
+			</style>
 
 <%
 		}
@@ -108,18 +108,17 @@ else {
 <%
 		}
 	}
-
-	if (total == 0) {
 %>
 
-		<%--<style type="text/css">
+	<c:if test="<%= (total == 0) && !showPortletWithNoResults %>">
+		<style type="text/css">
 			#p_p_id_<%=portletDisplay.getId() %>_ {
 				display: none;
 			}
-		</style>--%>
+		</style>
+	</c:if>
 
 <%
-	}
 }
 %>
 
