@@ -866,7 +866,7 @@ public class StringUtil {
 	}
 
 	public static String[] split(String s, String delimiter) {
-		if (s == null || delimiter == null) {
+		if (Validator.isNull(s) || Validator.isNull(delimiter)) {
 			return new String[0];
 		}
 
@@ -887,7 +887,9 @@ public class StringUtil {
 
 		List<String> nodeValues = new ArrayList<String>();
 
-		if (delimiter.equals("\n") || delimiter.equals("\r")) {
+		if (delimiter.equals(StringPool.NEW_LINE) ||
+			delimiter.equals(StringPool.RETURN)) {
+
 			try {
 				BufferedReader br = new BufferedReader(new StringReader(s));
 
