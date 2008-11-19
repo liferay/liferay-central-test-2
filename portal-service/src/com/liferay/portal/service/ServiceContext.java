@@ -25,6 +25,7 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+
 import java.io.Serializable;
 
 import java.util.LinkedHashMap;
