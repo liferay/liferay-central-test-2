@@ -96,7 +96,7 @@ if (selContact != null) {
 				<c:when test="<%= PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
 					<%= selUser.getScreenName() %>
 
-					<input name="< portlet:namespace />screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
+					<input name="<portlet:namespace />screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
 				</c:when>
 				<c:otherwise>
 					<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="screenName" />
@@ -186,7 +186,7 @@ if (selContact != null) {
 
 			<%= selUser.getUserId() %>
 
-			<input name="< portlet:namespace />userId" type="hidden" value="<%= selUser.getUserId() %>" />
+			<input name="<portlet:namespace />userId" type="hidden" value="<%= selUser.getUserId() %>" />
 		</div>
 	</c:if>
 
@@ -215,4 +215,10 @@ if (selContact != null) {
 			</select>
 		</div>
 	</c:if>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />jobTitle"><liferay-ui:message key="job-title" /></label>
+
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jobTitle" />
+	</div>
 </fieldset>
