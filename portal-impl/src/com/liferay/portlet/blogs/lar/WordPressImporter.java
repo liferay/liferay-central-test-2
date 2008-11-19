@@ -283,15 +283,15 @@ public class WordPressImporter {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setPlid(context.getPlid());
 		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setUserId(userId);
 
 		BlogsEntry entry = null;
 
 		try {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, title, content.toString(), displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, draft, allowTrackbacks, null,
-				serviceContext);
+				title, content.toString(), displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute, draft,
+				allowTrackbacks, null, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error("Add entry " + title, e);

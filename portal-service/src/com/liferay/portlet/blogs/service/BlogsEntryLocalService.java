@@ -94,7 +94,7 @@ public interface BlogsEntryLocalService {
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
+	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean draft, boolean allowTrackbacks,
@@ -104,7 +104,7 @@ public interface BlogsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String uuid, long userId, java.lang.String title,
+		java.lang.String uuid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
@@ -281,7 +281,7 @@ public interface BlogsEntryLocalService {
 		long groupId, long userId, long ownerUserId, java.lang.String keywords,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(long userId,
+	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean draft,

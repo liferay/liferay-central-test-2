@@ -237,6 +237,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		serviceContext.setPlid(context.getPlid());
 		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setUserId(userId);
 
 		BlogsEntry existingEntry = null;
 
@@ -248,14 +249,14 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEntry == null) {
 				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), userId, entry.getTitle(),
-					entry.getContent(), displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					draft, allowTrackbacks, trackbacks, serviceContext);
+					entry.getUuid(), entry.getTitle(), entry.getContent(),
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, draft, allowTrackbacks,
+					trackbacks, serviceContext);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
-					userId, existingEntry.getEntryId(), entry.getTitle(),
+					existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
 					draft, allowTrackbacks, trackbacks, serviceContext);
@@ -263,10 +264,10 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, entry.getTitle(), entry.getContent(),
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, draft, allowTrackbacks,
-				trackbacks, serviceContext);
+				entry.getTitle(), entry.getContent(), displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, draft, allowTrackbacks, trackbacks,
+				serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
