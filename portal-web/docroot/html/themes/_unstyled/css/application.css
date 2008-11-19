@@ -173,6 +173,9 @@
 .ui-tabs li a, .tabs li span {
 }
 
+.ie6 .ui-tabs li a, .ie6 .tabs li span {
+}
+
 .ui-tabs li a:hover {
 }
 
@@ -183,6 +186,9 @@
 }
 
 .ui-tabs li.current a, .ui-tabs li.current span {
+}
+
+.ie6 .ui-tabs li.current a, .ie6 .ui-tabs li.current span {
 }
 
 .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
@@ -203,7 +209,7 @@
 .ui-tabs-hide {
 }
 
-.ui-tabs .toggle.last {
+.ui-tabs .last.toggle {
 }
 
 /* ---------- Dialog ---------- */
@@ -465,9 +471,6 @@ img.ui-datepicker-trigger {
 }
 
 .treeview ul {
-}
-
-.treeview li {
 }
 
 .treeview .hitarea {

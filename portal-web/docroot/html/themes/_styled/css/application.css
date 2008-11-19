@@ -347,7 +347,7 @@
 	display: none;
 }
 
-.ui-tabs .toggle.last {
+.ui-tabs .last.toggle {
 	float: right;
 }
 
