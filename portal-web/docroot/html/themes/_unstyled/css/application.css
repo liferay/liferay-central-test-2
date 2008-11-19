@@ -33,6 +33,14 @@
 .ui-autocomplete-over, .results-row.hover td {
 }
 
+/* ---------- Breadcrumbs ---------- */
+
+.breadcrumbs {
+}
+
+.breadcrumbs .last {
+}
+
 /* ---------- Dragging/sorting indicators ---------- */
 
 .lfr-grid.dragging {

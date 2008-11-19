@@ -51,6 +51,19 @@
 	background: #A8D6ED;
 }
 
+/* ---------- Breadcrumbs ---------- */
+
+.breadcrumbs {
+	margin-bottom: 1.5em;
+}
+
+.breadcrumbs .last {
+	display: block;
+	font-size: 1.6em;
+	font-weight: bold;
+	margin-top: 0.2em;
+}
+
 /* ---------- Dragging/sorting indicators ---------- */
 
 .lfr-grid.dragging {
