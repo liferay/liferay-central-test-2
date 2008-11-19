@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.captcha.CaptchaUtil" %>
+<%@ page import="com.liferay.portal.kernel.captcha.CaptchaUtil" %>
 
 <%
 String url = (String)request.getAttribute("liferay-ui:captcha:url");

@@ -24,8 +24,8 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.portal.captcha.CaptchaTextException;
-import com.liferay.portal.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.captcha.CaptchaTextException;
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;

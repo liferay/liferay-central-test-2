@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.portal.captcha.CaptchaTextException;
-import com.liferay.portal.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.captcha.CaptchaTextException;
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;

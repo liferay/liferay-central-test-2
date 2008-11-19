@@ -20,50 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.captcha;
+package com.liferay.portal.kernel.captcha;
 
-import com.liferay.portal.kernel.captcha.CaptchaUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="CaptchaPortalAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaTextException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CaptchaPortalAction extends Action {
+public class CaptchaTextException extends PortalException {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
+	public CaptchaTextException() {
+		super();
+	}
 
-		try {
-			HttpSession session = request.getSession();
+	public CaptchaTextException(String msg) {
+		super(msg);
+	}
 
-			String captchaText = CaptchaUtil.createText();
+	public CaptchaTextException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-			session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
-
-			CaptchaUtil.createImage(response.getOutputStream(), captchaText);
-
-			return null;
-		}
-		catch (Exception e) {
-			PortalUtil.sendError(e, request, response);
-
-			return null;
-		}
+	public CaptchaTextException(Throwable cause) {
+		super(cause);
 	}
 
 }

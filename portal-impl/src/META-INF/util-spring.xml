@@ -202,6 +202,11 @@
 			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.captcha.CaptchaUtil" class="com.liferay.portal.kernel.captcha.CaptchaUtil">
+		<property name="captcha">
+			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.DatabaseUtil" class="com.liferay.portal.kernel.util.DatabaseUtil">
 		<property name="database">
 			<bean class="com.liferay.portal.util.DatabaseImpl" />

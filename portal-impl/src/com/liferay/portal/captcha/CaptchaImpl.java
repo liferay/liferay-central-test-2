@@ -22,6 +22,8 @@
 
 package com.liferay.portal.captcha;
 
+import com.liferay.portal.kernel.captcha.Captcha;
+import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -29,6 +31,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
@@ -43,48 +48,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CaptchaUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CaptchaUtil {
+public class CaptchaImpl implements Captcha {
 
-	public static void check(HttpServletRequest request)
-		throws CaptchaTextException {
-
-		_instance._check(request);
-	}
-
-	public static void check(PortletRequest portletRequest)
-		throws CaptchaTextException {
-
-		_instance._check(portletRequest);
-	}
-
-	public static CaptchaProducer getCaptchaProducer() {
-		return _instance._getCaptchaProducer();
-	}
-
-	public static boolean isEnabled(HttpServletRequest request) {
-		return _instance._isEnabled(request);
-	}
-
-	public static boolean isEnabled(PortletRequest portletRequest) {
-		return _instance._isEnabled(portletRequest);
-	}
-
-	private CaptchaUtil() {
+	private CaptchaImpl() {
 		_configuration = ConfigurationFactoryUtil.getConfiguration(
-			CaptchaUtil.class.getClassLoader(), PropsFiles.CAPTCHA);
+			CaptchaImpl.class.getClassLoader(), PropsFiles.CAPTCHA);
 		_captchaProducer = (CaptchaProducer)Helper.ThingFactory.loadImpl(
 			Helper.ThingFactory.CPROD, _configuration.getProperties());
 	}
 
-	private void _check(HttpServletRequest request)
+	public void check(HttpServletRequest request)
 		throws CaptchaTextException {
 
-		if (!_isEnabled(request)) {
+		if (!isEnabled(request)) {
 			return;
 		}
 
@@ -129,10 +110,10 @@ public class CaptchaUtil {
 		}
 	}
 
-	private void _check(PortletRequest portletRequest)
+	public void check(PortletRequest portletRequest)
 		throws CaptchaTextException {
 
-		if (!_isEnabled(portletRequest)) {
+		if (!isEnabled(portletRequest)) {
 			return;
 		}
 
@@ -181,11 +162,15 @@ public class CaptchaUtil {
 		}
 	}
 
-	private CaptchaProducer _getCaptchaProducer() {
-		return _captchaProducer;
+	public void createImage(OutputStream os, String text) throws IOException {
+		getCaptchaProducer().createImage(os, text);
 	}
 
-	private boolean _isEnabled(HttpServletRequest request) {
+	public String createText() {
+		return getCaptchaProducer().createText();
+	}
+
+	public boolean isEnabled(HttpServletRequest request) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession session = request.getSession();
 
@@ -209,7 +194,7 @@ public class CaptchaUtil {
 		}
 	}
 
-	private boolean _isEnabled(PortletRequest portletRequest) {
+	public boolean isEnabled(PortletRequest portletRequest) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			PortletSession portletSession = portletRequest.getPortletSession();
 
@@ -233,9 +218,11 @@ public class CaptchaUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CaptchaUtil.class);
+	protected CaptchaProducer getCaptchaProducer() {
+		return _captchaProducer;
+	}
 
-	private static CaptchaUtil _instance = new CaptchaUtil();
+	private static Log _log = LogFactory.getLog(CaptchaImpl.class);
 
 	private Configuration _configuration;
 	private CaptchaProducer _captchaProducer;

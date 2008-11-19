@@ -24,8 +24,8 @@ package com.liferay.portlet.webform.action;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
-import com.liferay.portal.captcha.CaptchaTextException;
-import com.liferay.portal.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.captcha.CaptchaTextException;
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;

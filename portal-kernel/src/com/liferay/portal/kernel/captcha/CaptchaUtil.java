@@ -20,32 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.captcha;
+package com.liferay.portal.kernel.captcha;
 
-import com.liferay.portal.PortalException;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="CaptchaTextException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CaptchaTextException extends PortalException {
+public class CaptchaUtil {
 
-	public CaptchaTextException() {
-		super();
+	public static void check(HttpServletRequest request)
+		throws CaptchaTextException {
+
+		getCaptcha().check(request);
 	}
 
-	public CaptchaTextException(String msg) {
-		super(msg);
+	public static void check(PortletRequest portletRequest)
+		throws CaptchaTextException {
+
+		getCaptcha().check(portletRequest);
 	}
 
-	public CaptchaTextException(String msg, Throwable cause) {
-		super(msg, cause);
+	public static void createImage(OutputStream os, String text)
+		throws IOException {
+
+		getCaptcha().createImage(os, text);
 	}
 
-	public CaptchaTextException(Throwable cause) {
-		super(cause);
+	public static String createText() {
+		return getCaptcha().createText();
 	}
+
+	public static Captcha getCaptcha() {
+		return _captcha;
+	}
+
+	public static boolean isEnabled(HttpServletRequest request) {
+		return getCaptcha().isEnabled(request);
+	}
+
+	public static boolean isEnabled(PortletRequest portletRequest) {
+		return getCaptcha().isEnabled(portletRequest);
+	}
+
+	public void setCaptcha(Captcha captcha) {
+		_captcha = captcha;
+	}
+
+	private static Captcha _captcha;
 
 }

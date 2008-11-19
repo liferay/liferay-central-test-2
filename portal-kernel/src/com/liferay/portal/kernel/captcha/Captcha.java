@@ -20,50 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.captcha;
+package com.liferay.portal.kernel.captcha;
 
-import com.liferay.portal.kernel.captcha.CaptchaUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="CaptchaPortalAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="Captcha.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CaptchaPortalAction extends Action {
+public interface Captcha {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
+	public void check(HttpServletRequest request)
+		throws CaptchaTextException;
 
-		try {
-			HttpSession session = request.getSession();
+	public void check(PortletRequest portletRequest)
+		throws CaptchaTextException;
 
-			String captchaText = CaptchaUtil.createText();
+	public void createImage(OutputStream os, String text) throws IOException;
 
-			session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
+	public String createText();
 
-			CaptchaUtil.createImage(response.getOutputStream(), captchaText);
+	public boolean isEnabled(HttpServletRequest request);
 
-			return null;
-		}
-		catch (Exception e) {
-			PortalUtil.sendError(e, request, response);
-
-			return null;
-		}
-	}
+	public boolean isEnabled(PortletRequest portletRequest);
 
 }
