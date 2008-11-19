@@ -146,10 +146,10 @@ boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratin
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 
-String defaultMetadataFields = "";
+String defaultMetadataFields = StringPool.BLANK;
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";
 
-String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", null), defaultMetadataFields);
+String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 
 Arrays.sort(entries);
 
