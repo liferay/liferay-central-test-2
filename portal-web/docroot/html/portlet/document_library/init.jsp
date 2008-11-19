@@ -90,13 +90,14 @@ boolean showFoldersSearch = PrefsParamUtil.getBoolean(preferences, request, "sho
 boolean showSubfolders = PrefsParamUtil.getBoolean(preferences, request, "showSubfolders", true);
 int foldersPerPage = PrefsParamUtil.getInteger(preferences, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
 
-String rootPortletId = portletDisplay.getRootPortletId();
-
 String defaultFolderColumns = "folder,num-of-folders,num-of-documents";
 
-if (rootPortletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-	defaultFolderColumns = "folder,num-of-folders,num-of-documents,action";
+String portletId = portletDisplay.getId();
+
+if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+	defaultFolderColumns += ",action";
 }
+
 String allFolderColumns = defaultFolderColumns;
 
 String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "folderColumns", defaultFolderColumns));
@@ -106,8 +107,8 @@ int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEn
 
 String defaultFileEntryColumns = "name,size,downloads,locked";
 
-if (rootPortletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-	defaultFileEntryColumns = "name,size,downloads,locked,action";
+if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+	defaultFileEntryColumns += ",action";
 }
 
 String allFileEntryColumns = defaultFileEntryColumns;
