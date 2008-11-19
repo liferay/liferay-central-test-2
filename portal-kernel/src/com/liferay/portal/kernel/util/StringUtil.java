@@ -866,7 +866,9 @@ public class StringUtil {
 	}
 
 	public static String[] split(String s, String delimiter) {
-		if (Validator.isNull(s) || Validator.isNull(delimiter)) {
+		if ((Validator.isNull(s)) || (delimiter == null) ||
+			(delimiter.equals(StringPool.BLANK))) {
+
 			return new String[0];
 		}
 
