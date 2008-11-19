@@ -53,7 +53,6 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setTagsEntries(null);
 
 		IGImageServiceUtil.addImage(
 			_folder.getFolderId(), name, description, image, contentType,
@@ -61,8 +60,8 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		try {
 			IGImageServiceUtil.addImage(
-				_folder.getFolderId(), name, description, image,
-				contentType, serviceContext);
+				_folder.getFolderId(), name, description, image, contentType,
+				serviceContext);
 
 			fail("Able to add two images of the name " + name);
 		}

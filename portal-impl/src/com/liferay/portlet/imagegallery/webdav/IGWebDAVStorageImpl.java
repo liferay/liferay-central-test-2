@@ -172,7 +172,6 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setTagsEntries(null);
 
 			int status = HttpServletResponse.SC_CREATED;
 
@@ -413,8 +412,6 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String contentType = null;
 
 			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setTagsEntries(null);
 
 			int status = HttpServletResponse.SC_CREATED;
 

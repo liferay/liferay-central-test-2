@@ -196,11 +196,9 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			serviceContext.setPlid(destPlid);
 
 			IGFolder destSubfolder = addFolder(
-				destFolder.getFolderId(), name, description,
-				serviceContext);
+				destFolder.getFolderId(), name, description, serviceContext);
 
-			copyFolder(
-				srcSubfolder, destSubfolder, serviceContext);
+			copyFolder(srcSubfolder, destSubfolder, serviceContext);
 		}
 	}
 

@@ -158,9 +158,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				(serviceContext.getAddGuestPermissions() != null)) {
 
 				addImageResources(
-					folder, image,
-					serviceContext.getAddCommunityPermissions().booleanValue(),
-					serviceContext.getAddGuestPermissions().booleanValue());
+					folder, image, serviceContext.getAddCommunityPermissions(),
+					serviceContext.getAddGuestPermissions());
 			}
 			else {
 				addImageResources(

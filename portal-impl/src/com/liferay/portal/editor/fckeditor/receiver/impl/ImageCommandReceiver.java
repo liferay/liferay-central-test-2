@@ -101,7 +101,6 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setTagsEntries(null);
 
 			IGImageServiceUtil.addImage(
 				folderId, name, description, file, contentType, serviceContext);
