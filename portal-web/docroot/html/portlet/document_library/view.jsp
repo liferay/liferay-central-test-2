@@ -178,7 +178,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</c:if>
 
 		<c:if test="<%= folder != null %>">
-			<br />
+			<c:if test="<%= !mergedView %>">
+				<br />
+			</c:if>
 
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
