@@ -102,6 +102,10 @@ String allFolderColumns = defaultFolderColumns;
 
 String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "folderColumns", defaultFolderColumns));
 
+if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+	folderColumns = ArrayUtil.remove(folderColumns, "action");
+}
+
 boolean showFileEntriesSearch = PrefsParamUtil.getBoolean(preferences, request, "showFileEntriesSearch", true);
 int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
 
@@ -114,6 +118,10 @@ if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 String allFileEntryColumns = defaultFileEntryColumns;
 
 String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultFileEntryColumns));
+
+if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+	folderColumns = ArrayUtil.remove(fileEntryColumns, "action");
+}
 
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 

@@ -238,6 +238,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.getValue(array, pos);
 	}
 
+	public java.lang.String[] remove(java.lang.String[] array,
+		java.lang.String value) {
+		return ArrayUtil.remove(array, value);
+	}
+
 	public java.lang.String[] removeByPrefix(java.lang.String[] array,
 		java.lang.String prefix) {
 		return ArrayUtil.removeByPrefix(array, prefix);

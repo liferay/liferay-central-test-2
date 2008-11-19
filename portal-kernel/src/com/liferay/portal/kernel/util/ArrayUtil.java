@@ -522,12 +522,22 @@ public class ArrayUtil {
 		}
 	}
 
+	public static String[] remove(String[] array, String value) {
+		List<String> list = new ArrayList<String>();
+
+		for (String s : array) {
+			if (!s.equals(value)) {
+				list.add(s);
+			}
+		}
+
+		return list.toArray(new String[list.size()]);
+	}
+
 	public static String[] removeByPrefix(String[] array, String prefix) {
 		List<String> list = new ArrayList<String>();
 
-		for (int i = 0; i < array.length; i++) {
-			String s = array[i];
-
+		for (String s : array) {
 			if (!s.startsWith(prefix)) {
 				list.add(s);
 			}
