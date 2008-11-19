@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGImageServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
@@ -45,8 +46,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 	public IGImage addImage(
 			long folderId, String name, String description, File file,
-			String contentType, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
@@ -54,21 +54,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 		return igImageLocalService.addImage(
 			getUserId(), folderId, name, description, file, contentType,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public IGImage addImage(
-			long folderId, String name, String description, File file,
-			String contentType, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		IGFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
-
-		return igImageLocalService.addImage(
-			getUserId(), folderId, name, description, file, contentType,
-			tagsEntries, communityPermissions, guestPermissions);
+			serviceContext);
 	}
 
 	public void deleteImage(long imageId)
@@ -160,7 +146,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 	public IGImage updateImage(
 			long imageId, long folderId, String name, String description,
-			File file, String contentType, String[] tagsEntries)
+			File file, String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(
@@ -168,7 +154,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 		return igImageLocalService.updateImage(
 			getUserId(), imageId, folderId, name, description, file,
-			contentType, tagsEntries);
+			contentType, serviceContext);
 	}
 
 }

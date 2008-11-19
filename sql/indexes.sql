@@ -121,6 +121,8 @@ create index IX_60214CF6 on IGFolder (companyId);
 create index IX_206498F8 on IGFolder (groupId);
 create index IX_1A605E9F on IGFolder (groupId, parentFolderId);
 create index IX_9BBAFB1E on IGFolder (groupId, parentFolderId, name);
+create index IX_4A0A2B61 on IGFolder (uuid);
+create index IX_E98F8669 on IGFolder (uuid, groupId);
 create index IX_F73C0982 on IGFolder (uuid_);
 create index IX_B10EFD68 on IGFolder (uuid_, groupId);
 
@@ -130,6 +132,7 @@ create index IX_4438CA80 on IGImage (folderId);
 create index IX_BCB13A3F on IGImage (folderId, name);
 create index IX_64F0B572 on IGImage (largeImageId);
 create index IX_D3D32126 on IGImage (smallImageId);
+create index IX_CFB05A12 on IGImage (uuid);
 create index IX_265BB0F1 on IGImage (uuid_);
 
 create index IX_6A925A4D on Image (size_);

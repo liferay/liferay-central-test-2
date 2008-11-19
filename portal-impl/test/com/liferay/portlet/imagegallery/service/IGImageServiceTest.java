@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -47,20 +48,21 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		File image = new File(getClassResource(
 			"com/liferay/portlet/imagegallery/dependencies/" + name).getPath());
 		String contentType = "png";
-		String[] tagsEntries = null;
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setTagsEntries(null);
 
 		IGImageServiceUtil.addImage(
 			_folder.getFolderId(), name, description, image, contentType,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
+			serviceContext);
 
 		try {
 			IGImageServiceUtil.addImage(
 				_folder.getFolderId(), name, description, image,
-				contentType, tagsEntries, addCommunityPermissions,
-				addGuestPermissions);
+				contentType, serviceContext);
 
 			fail("Able to add two images of the name " + name);
 		}
@@ -90,9 +92,16 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		catch (NoSuchFolderException nsfe) {
 		}
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGuestPermissions(addGuestPermissions);
+		serviceContext.setPlid(TestPropsValues.LAYOUT_PLID);
+		serviceContext.setScopeGroupId(groupId);
+
 		_folder = IGFolderServiceUtil.addFolder(
-			TestPropsValues.LAYOUT_PLID, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID,
-			name, description, addCommunityPermissions, addGuestPermissions);
+			IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, name, description,
+			serviceContext);
 	}
 
 	protected void tearDown() throws Exception {

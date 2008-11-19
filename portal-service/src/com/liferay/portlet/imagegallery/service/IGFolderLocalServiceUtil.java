@@ -104,66 +104,25 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFolder(userId, plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
+				   .addFolder(userId, parentFolderId, name, description,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String uuid, long userId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFolder(uuid, userId, plid, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(userId, plid, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String uuid, long userId, long plid, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(uuid, userId, plid, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGFolder addFolderToGroup(
-		java.lang.String uuid, long userId, long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolderToGroup(uuid, userId, groupId, parentFolderId,
-			name, description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+				   .addFolder(uuid, userId, parentFolderId, name, description,
+			serviceContext);
 	}
 
 	public static void addFolderResources(long folderId,

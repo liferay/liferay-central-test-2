@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -61,16 +62,19 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			IGFolder folder = _getFolder(
 				group.getGroupId(), StringPool.SLASH + arg.getCurrentFolder());
 
-			long plid = arg.getPlid();
 			long parentFolderId = folder.getFolderId();
 			String name = arg.getNewFolder();
 			String description = StringPool.BLANK;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setPlid(arg.getPlid());
+			serviceContext.setScopeGroupId(group.getGroupId());
 
 			IGFolderServiceUtil.addFolder(
-				plid, parentFolderId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				parentFolderId, name, description, serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -92,13 +96,15 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			String name = fileName;
 			String description = StringPool.BLANK;
 			String contentType = extension.toLowerCase();
-			String[] tagsEntries = null;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setTagsEntries(null);
 
 			IGImageServiceUtil.addImage(
-				folderId, name, description, file, contentType, tagsEntries,
-				addCommunityPermissions, addGuestPermissions);
+				folderId, name, description, file, contentType, serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

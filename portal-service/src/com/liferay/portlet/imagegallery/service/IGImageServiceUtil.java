@@ -48,26 +48,12 @@ public class IGImageServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long folderId, java.lang.String name, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addImage(folderId, name, description, file, contentType,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long folderId, java.lang.String name, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addImage(folderId, name, description, file, contentType,
-			tagsEntries, communityPermissions, guestPermissions);
+			serviceContext);
 	}
 
 	public static void deleteImage(long imageId)
@@ -125,12 +111,13 @@ public class IGImageServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries)
+		java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateImage(imageId, folderId, name, description, file,
-			contentType, tagsEntries);
+			contentType, serviceContext);
 	}
 
 	public static IGImageService getService() {

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -50,48 +51,29 @@ import org.apache.commons.logging.LogFactory;
 public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 
 	public IGFolder addFolder(
-			long plid, long parentFolderId, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId,
+			getPermissionChecker(), serviceContext.getPlid(), parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
 		return igFolderLocalService.addFolder(
-			getUserId(), plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public IGFolder addFolder(
-			long plid, long parentFolderId, String name, String description,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		IGFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId,
-			ActionKeys.ADD_FOLDER);
-
-		return igFolderLocalService.addFolder(
-			getUserId(), plid, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
+			getUserId(), parentFolderId, name, description, serviceContext);
 	}
 
 	public IGFolder copyFolder(
-			long plid, long sourceFolderId, long parentFolderId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long sourceFolderId, long parentFolderId, String name,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		IGFolder srcFolder = getFolder(sourceFolderId);
 
 		IGFolder destFolder = addFolder(
-			plid, parentFolderId, name, description, addCommunityPermissions,
-			addGuestPermissions);
+			parentFolderId, name, description, serviceContext);
 
-		copyFolder(
-			srcFolder, destFolder, addCommunityPermissions,
-			addGuestPermissions);
+		copyFolder(srcFolder, destFolder, serviceContext);
 
 		return destFolder;
 	}
@@ -162,7 +144,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 
 	protected void copyFolder(
 			IGFolder srcFolder, IGFolder destFolder,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		List<IGImage> srcImages = igImageService.getImages(
@@ -192,11 +174,10 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 
 			String contentType = ContentTypeUtil.getContentType(
 				srcImage.getImageType());
-			String[] tagsEntries = null;
 
 			igImageService.addImage(
 				destFolder.getFolderId(), name, description, file, contentType,
-				tagsEntries, addCommunityPermissions, addGuestPermissions);
+				serviceContext);
 
 			file.delete();
 		}
@@ -211,13 +192,15 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			String name = srcSubfolder.getName();
 			String description = srcSubfolder.getDescription();
 
+			serviceContext.setScopeGroupId(srcFolder.getGroupId());
+			serviceContext.setPlid(destPlid);
+
 			IGFolder destSubfolder = addFolder(
-				destPlid, destFolder.getFolderId(), name, description,
-				addCommunityPermissions, addGuestPermissions);
+				destFolder.getFolderId(), name, description,
+				serviceContext);
 
 			copyFolder(
-				srcSubfolder, destSubfolder, addCommunityPermissions,
-				addGuestPermissions);
+				srcSubfolder, destSubfolder, serviceContext);
 		}
 	}
 

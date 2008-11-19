@@ -82,31 +82,13 @@ import java.rmi.RemoteException;
  */
 public class IGFolderServiceSoap {
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
-					parentFolderId, name, description, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
-					parentFolderId, name, description, communityPermissions,
-					guestPermissions);
+			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(parentFolderId,
+					name, description, serviceContext);
 
 			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}
@@ -118,14 +100,13 @@ public class IGFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap copyFolder(
-		long plid, long sourceFolderId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long sourceFolderId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.copyFolder(plid,
-					sourceFolderId, parentFolderId, name, description,
-					addCommunityPermissions, addGuestPermissions);
+			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.copyFolder(sourceFolderId,
+					parentFolderId, name, description, serviceContext);
 
 			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}

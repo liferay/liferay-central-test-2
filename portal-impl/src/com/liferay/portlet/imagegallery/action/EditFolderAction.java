@@ -25,10 +25,11 @@ package com.liferay.portlet.imagegallery.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -120,8 +121,6 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		long parentFolderId = ParamUtil.getLong(
@@ -132,18 +131,15 @@ public class EditFolderAction extends PortletAction {
 		boolean mergeWithParentFolder = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentFolder");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFolder.class.getName(), actionRequest);
 
 		if (folderId <= 0) {
 
 			// Add folder
 
 			IGFolderServiceUtil.addFolder(
-				layout.getPlid(), parentFolderId, name, description,
-				communityPermissions, guestPermissions);
+				parentFolderId, name, description, serviceContext);
 		}
 		else {
 

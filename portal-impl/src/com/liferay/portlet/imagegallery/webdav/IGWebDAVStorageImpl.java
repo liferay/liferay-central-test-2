@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
@@ -103,15 +104,21 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				}
 			}
 
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+			serviceContext.setAddGuestPermissions(addGuestPermissions);
+			serviceContext.setPlid(plid);
+			serviceContext.setScopeGroupId(groupId);
+
 			if (depth == 0) {
 				IGFolderServiceUtil.addFolder(
-					plid, parentFolderId, name, description,
-					addCommunityPermissions, addGuestPermissions);
+					parentFolderId, name, description, serviceContext);
 			}
 			else {
 				IGFolderServiceUtil.copyFolder(
-					plid, folder.getFolderId(), parentFolderId, name,
-					description, addCommunityPermissions, addGuestPermissions);
+					folder.getFolderId(), parentFolderId, name, description,
+					serviceContext);
 			}
 
 			return status;
@@ -161,9 +168,11 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			FileUtil.write(file, is);
 
-			String[] tagsEntries = null;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setTagsEntries(null);
 
 			int status = HttpServletResponse.SC_CREATED;
 
@@ -175,7 +184,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			IGImageServiceUtil.addImage(
 				parentFolderId, name, description, file, contentType,
-				tagsEntries, addCommunityPermissions, addGuestPermissions);
+				serviceContext);
 
 			return status;
 		}
@@ -312,16 +321,19 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			String[] pathArray = webDavRequest.getPathArray();
 
-			long plid = getPlid(webDavRequest.getGroupId());
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setPlid(getPlid(webDavRequest.getGroupId()));
+			serviceContext.setScopeGroupId(webDavRequest.getGroupId());
 
 			IGFolderServiceUtil.addFolder(
-				plid, parentFolderId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				parentFolderId, name, description, serviceContext);
 
 			String location = StringUtil.merge(pathArray, StringPool.SLASH);
 
@@ -399,7 +411,10 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String description = image.getDescription();
 			File file = null;
 			String contentType = null;
-			String[] tagsEntries = null;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setTagsEntries(null);
 
 			int status = HttpServletResponse.SC_CREATED;
 
@@ -411,7 +426,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			IGImageServiceUtil.updateImage(
 				image.getImageId(), parentFolderId, name, description, file,
-				contentType, tagsEntries);
+				contentType, serviceContext);
 
 			return status;
 		}
@@ -446,9 +461,11 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			FileUtil.write(file, request.getInputStream());
 
 			String contentType = ContentTypeUtil.getContentType(name);
-			String[] tagsEntries = null;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
 
 			try {
 				IGImage image =
@@ -458,17 +475,19 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				long imageId = image.getImageId();
 
 				description = image.getDescription();
-				tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 					IGImage.class.getName(), imageId);
+
+				serviceContext.setTagsEntries(tagsEntries);
 
 				IGImageServiceUtil.updateImage(
 					imageId, parentFolderId, name, description, file,
-					contentType, tagsEntries);
+					contentType, serviceContext);
 			}
 			catch (NoSuchImageException nsie) {
 				IGImageServiceUtil.addImage(
 					parentFolderId, name, description, file, contentType,
-					tagsEntries, addCommunityPermissions, addGuestPermissions);
+					serviceContext);
 			}
 
 			return HttpServletResponse.SC_CREATED;

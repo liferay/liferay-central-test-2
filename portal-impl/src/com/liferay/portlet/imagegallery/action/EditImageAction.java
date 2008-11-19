@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -196,12 +198,8 @@ public class EditImageAction extends PortletAction {
 			}
 		}
 
-		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
-
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			IGImage.class.getName(), actionRequest);
 
 		if (imageId <= 0) {
 
@@ -212,8 +210,7 @@ public class EditImageAction extends PortletAction {
 			}
 
 			IGImage image = IGImageServiceUtil.addImage(
-				folderId, name, description, file, contentType, tagsEntries,
-				communityPermissions, guestPermissions);
+				folderId, name, description, file, contentType, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, IGImage.class.getName(), image.getImageId(), -1);
@@ -228,7 +225,7 @@ public class EditImageAction extends PortletAction {
 
 			IGImageServiceUtil.updateImage(
 				imageId, folderId, name, description, file, contentType,
-				tagsEntries);
+				serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

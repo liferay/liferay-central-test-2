@@ -74,40 +74,25 @@ import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
  *
  */
 public class IGFolderServiceJSON {
-	public static JSONObject addFolder(long plid, long parentFolderId,
+	public static JSONObject addFolder(long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
-				parentFolderId, name, description, addCommunityPermissions,
-				addGuestPermissions);
+		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(parentFolderId,
+				name, description, serviceContext);
 
 		return IGFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFolder(long plid, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
-				parentFolderId, name, description, communityPermissions,
-				guestPermissions);
-
-		return IGFolderJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject copyFolder(long plid, long sourceFolderId,
+	public static JSONObject copyFolder(long sourceFolderId,
 		long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.copyFolder(plid,
-				sourceFolderId, parentFolderId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.copyFolder(sourceFolderId,
+				parentFolderId, name, description, serviceContext);
 
 		return IGFolderJSONSerializer.toJSONObject(returnValue);
 	}

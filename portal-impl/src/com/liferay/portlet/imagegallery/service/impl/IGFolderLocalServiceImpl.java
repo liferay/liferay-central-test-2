@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -65,65 +65,21 @@ import org.apache.commons.logging.LogFactory;
 public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long userId, long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addFolder(
-			null, userId, plid, parentFolderId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			null, userId, parentFolderId, name, description, serviceContext);
 	}
 
 	public IGFolder addFolder(
-			String uuid, long userId, long plid, long parentFolderId,
-			String name, String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String uuid, long userId, long parentFolderId,
+			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		return addFolder(
-			uuid, userId, plid, parentFolderId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public IGFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			null, userId, plid, parentFolderId, name, description, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public IGFolder addFolder(
-			String uuid, long userId, long plid, long parentFolderId,
-			String name, String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
-
-		return addFolderToGroup(
-			uuid, userId, groupId, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public IGFolder addFolderToGroup(
-			String uuid, long userId, long groupId, long parentFolderId,
-			String name, String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		// Folder
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long groupId = serviceContext.getScopeGroupId();
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
@@ -147,15 +103,18 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addFolderResources(
-				folder, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				folder,
+				serviceContext.getAddCommunityPermissions().booleanValue(),
+				serviceContext.getAddGuestPermissions().booleanValue());
 		}
 		else {
-			addFolderResources(folder, communityPermissions, guestPermissions);
+			addFolderResources(
+				folder, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return folder;

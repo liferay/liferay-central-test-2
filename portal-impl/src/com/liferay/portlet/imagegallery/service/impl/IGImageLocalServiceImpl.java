@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -78,46 +79,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
 			long userId, long folderId, String name, String description,
-			File file, String contentType, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			File file, String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addImage(
 			null, userId, folderId, name, description, file, contentType,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			serviceContext);
 	}
 
 	public IGImage addImage(
 			String uuid, long userId, long folderId, String name,
 			String description, File file, String contentType,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addImage(
-			uuid, userId, folderId, name, description, file, contentType,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public IGImage addImage(
-			long userId, long folderId, String name, String description,
-			File file, String contentType, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addImage(
-			null, userId, folderId, name, description, file, contentType,
-			tagsEntries, null, null, communityPermissions, guestPermissions);
-	}
-
-	public IGImage addImage(
-			String uuid, long userId, long folderId, String name,
-			String description, File file, String contentType,
-			String[] tagsEntries, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -181,28 +154,30 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Resources
 
-			if ((addCommunityPermissions != null) &&
-				(addGuestPermissions != null)) {
+			if ((serviceContext.getAddCommunityPermissions() != null) &&
+				(serviceContext.getAddGuestPermissions() != null)) {
 
 				addImageResources(
-					folder, image, addCommunityPermissions.booleanValue(),
-					addGuestPermissions.booleanValue());
+					folder, image,
+					serviceContext.getAddCommunityPermissions().booleanValue(),
+					serviceContext.getAddGuestPermissions().booleanValue());
 			}
 			else {
 				addImageResources(
-					folder, image, communityPermissions, guestPermissions);
+					folder, image, serviceContext.getCommunityPermissions(),
+					serviceContext.getGuestPermissions());
 			}
 
 			// Tags
 
-			updateTagsAsset(userId, image, tagsEntries);
+			updateTagsAsset(userId, image, serviceContext.getTagsEntries());
 
 			// Indexer
 
 			try {
 				Indexer.addImage(
 					image.getCompanyId(), folder.getGroupId(), folderId,
-					imageId, name, description, tagsEntries,
+					imageId, name, description, serviceContext.getTagsEntries(),
 					image.getExpandoBridge());
 			}
 			catch (SearchException se) {
@@ -476,7 +451,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public IGImage updateImage(
 			long userId, long imageId, long folderId, String name,
 			String description, File file, String contentType,
-			String[] tagsEntries)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -525,6 +500,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 
 			// Tags
+
+			String[] tagsEntries = serviceContext.getTagsEntries();
 
 			updateTagsAsset(userId, image, tagsEntries);
 

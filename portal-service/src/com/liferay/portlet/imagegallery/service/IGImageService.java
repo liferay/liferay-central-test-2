@@ -57,17 +57,7 @@ public interface IGImageService {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long folderId, java.lang.String name, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long folderId, java.lang.String name, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -112,7 +102,8 @@ public interface IGImageService {
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries)
+		java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
