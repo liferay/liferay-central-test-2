@@ -150,7 +150,7 @@
 .js .interactive-mode li:hover a:hover, .js .interactive-mode li:hover > a, .js .interactive-mode li:hover > h3 > a {
 }
 
-.ie6 .js .interactive-mode li a:hover {
+.ie6.js .interactive-mode li a:hover {
 }
 
 .js .interactive-mode .my-places ul li a.add-page {

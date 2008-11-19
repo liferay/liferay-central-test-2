@@ -253,7 +253,7 @@
 	color: #FFF;
 }
 
-.ie6 .js .interactive-mode li a:hover {
+.ie6.js .interactive-mode li a:hover {
 	background-color: #828F95;
 	color: #FFF;
 }
