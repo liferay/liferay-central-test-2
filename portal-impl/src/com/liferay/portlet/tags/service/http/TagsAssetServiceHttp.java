@@ -818,7 +818,8 @@ public class TagsAssetServiceHttp {
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
-		long classPK, java.lang.String[] entryNames, java.util.Date startDate,
+		long classPK, java.lang.String[] categoryNames,
+		java.lang.String[] entryNames, java.util.Date startDate,
 		java.util.Date endDate, java.util.Date publishDate,
 		java.util.Date expirationDate, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
@@ -837,74 +838,80 @@ public class TagsAssetServiceHttp {
 
 			Object paramObj2 = new LongWrapper(classPK);
 
-			Object paramObj3 = entryNames;
+			Object paramObj3 = categoryNames;
 
-			if (entryNames == null) {
+			if (categoryNames == null) {
 				paramObj3 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj4 = startDate;
+			Object paramObj4 = entryNames;
 
-			if (startDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
+			if (entryNames == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = endDate;
+			Object paramObj5 = startDate;
 
-			if (endDate == null) {
+			if (startDate == null) {
 				paramObj5 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj6 = publishDate;
+			Object paramObj6 = endDate;
 
-			if (publishDate == null) {
+			if (endDate == null) {
 				paramObj6 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj7 = expirationDate;
+			Object paramObj7 = publishDate;
 
-			if (expirationDate == null) {
+			if (publishDate == null) {
 				paramObj7 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj8 = mimeType;
+			Object paramObj8 = expirationDate;
 
-			if (mimeType == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+			if (expirationDate == null) {
+				paramObj8 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj9 = title;
+			Object paramObj9 = mimeType;
 
-			if (title == null) {
+			if (mimeType == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = description;
+			Object paramObj10 = title;
 
-			if (description == null) {
+			if (title == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = summary;
+			Object paramObj11 = description;
 
-			if (summary == null) {
+			if (description == null) {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = url;
+			Object paramObj12 = summary;
 
-			if (url == null) {
+			if (summary == null) {
 				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj13 = new IntegerWrapper(height);
+			Object paramObj13 = url;
 
-			Object paramObj14 = new IntegerWrapper(width);
+			if (url == null) {
+				paramObj13 = new NullWrapper("java.lang.String");
+			}
 
-			Object paramObj15 = priority;
+			Object paramObj14 = new IntegerWrapper(height);
+
+			Object paramObj15 = new IntegerWrapper(width);
+
+			Object paramObj16 = priority;
 
 			if (priority == null) {
-				paramObj15 = new NullWrapper("java.lang.Integer");
+				paramObj16 = new NullWrapper("java.lang.Integer");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
@@ -913,7 +920,7 @@ public class TagsAssetServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15
+						paramObj14, paramObj15, paramObj16
 					});
 
 			Object returnObj = null;

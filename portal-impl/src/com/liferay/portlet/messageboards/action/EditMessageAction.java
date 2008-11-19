@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -221,8 +220,7 @@ public class EditMessageAction extends PortletAction {
 		boolean anonymous = ParamUtil.getBoolean(actionRequest, "anonymous");
 		double priority = ParamUtil.getDouble(actionRequest, "priority");
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "tagsEntries"));
+		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
 		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");

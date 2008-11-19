@@ -431,42 +431,26 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public TagsAsset updateAsset(
 			long userId, long groupId, String className, long classPK,
-			String[] entryNames)
+			String[] categoryNames, String[] entryNames)
 		throws PortalException, SystemException {
 
 		return updateAsset(
-			userId, groupId, className, classPK, entryNames, null, null, null,
-			null, null, null, null, null, null, 0, 0, null);
+			userId, groupId, className, classPK, categoryNames, entryNames,
+			null, null, null, null, null, null, null, null, null, 0, 0, null);
 	}
 
 	public TagsAsset updateAsset(
 			long userId, long groupId, String className, long classPK,
-			String[] entryNames, Date startDate, Date endDate, Date publishDate,
-			Date expirationDate, String mimeType, String title,
-			String description, String summary, String url, int height,
-			int width, Integer priority)
+			String[] categoryNames, String[] entryNames, Date startDate,
+			Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, int height, int width, Integer priority)
 		throws PortalException, SystemException {
 
 		return updateAsset(
-			userId, groupId, className, classPK, entryNames, startDate,
-			endDate, publishDate, expirationDate, mimeType, title, description,
-			summary, url, height, width, priority, true);
-	}
-
-	public TagsAsset updateAsset(
-			long userId, long groupId, String className, long classPK,
-			String[] entryNames, Date startDate, Date endDate, Date publishDate,
-			Date expirationDate, String mimeType, String title,
-			String description, String summary, String url, int height,
-			int width, Integer priority, boolean sync)
-		throws PortalException, SystemException {
-
-		String[] categoryNames = null;
-
-		return updateAsset(
-			userId, groupId, className, classPK, entryNames, categoryNames,
+			userId, groupId, className, classPK, categoryNames, entryNames,
 			startDate, endDate, publishDate, expirationDate, mimeType, title,
-			description, summary, url, height, width, priority, sync);
+			description, summary, url, height, width, priority, true);
 	}
 
 	public TagsAsset updateAsset(

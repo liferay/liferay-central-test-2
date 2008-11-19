@@ -25,11 +25,11 @@ package com.liferay.portlet.bookmarks.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
@@ -151,8 +151,7 @@ public class EditEntryAction extends PortletAction {
 		String url = ParamUtil.getString(actionRequest, "url");
 		String comments = ParamUtil.getString(actionRequest, "comments");
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "tagsEntries"));
+		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
 		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");

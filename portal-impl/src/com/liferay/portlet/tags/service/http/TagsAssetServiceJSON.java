@@ -207,18 +207,18 @@ public class TagsAssetServiceJSON {
 
 	public static JSONObject updateAsset(long groupId,
 		java.lang.String className, long classPK,
-		java.lang.String[] entryNames, java.util.Date startDate,
-		java.util.Date endDate, java.util.Date publishDate,
-		java.util.Date expirationDate, java.lang.String mimeType,
-		java.lang.String title, java.lang.String description,
-		java.lang.String summary, java.lang.String url, int height, int width,
-		java.lang.Integer priority)
+		java.lang.String[] categoryNames, java.lang.String[] entryNames,
+		java.util.Date startDate, java.util.Date endDate,
+		java.util.Date publishDate, java.util.Date expirationDate,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String summary,
+		java.lang.String url, int height, int width, java.lang.Integer priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(groupId,
-				className, classPK, entryNames, startDate, endDate,
-				publishDate, expirationDate, mimeType, title, description,
-				summary, url, height, width, priority);
+				className, classPK, categoryNames, entryNames, startDate,
+				endDate, publishDate, expirationDate, mimeType, title,
+				description, summary, url, height, width, priority);
 
 		return TagsAssetJSONSerializer.toJSONObject(returnValue);
 	}

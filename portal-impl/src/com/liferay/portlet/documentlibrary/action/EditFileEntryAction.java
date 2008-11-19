@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
@@ -210,8 +209,7 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(uploadRequest, "tagsEntries"));
+		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
 
 		String extraSettings = PropertiesUtil.toString(
 			fileEntryForm.getExtraSettingsProperties());
