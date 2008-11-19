@@ -1775,18 +1775,6 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public long getScopeGroupId(long plid, String portletId) {
-		Layout layout = null;
-
-		try {
-			layout = LayoutLocalServiceUtil.getLayout(plid);
-		}
-		catch (Exception e) {
-		}
-
-		return getScopeGroupId(layout, portletId);
-	}
-
 	public long getScopeGroupId(Layout layout, String portletId) {
 		if (layout == null) {
 			return 0;
