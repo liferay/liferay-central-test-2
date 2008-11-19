@@ -1691,7 +1691,7 @@
 			</preference>
 			<preference>
 				<name>fileEntryColumns</name>
-				<value>document,size</value>
+				<value>name,size</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>
