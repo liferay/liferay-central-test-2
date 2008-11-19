@@ -15,7 +15,7 @@
 		#set ($file_id = "mainLiferayThemeJavaScript")
 	#end
 
-	<script class="lfr-script-file" id="$file_id" src="$file_name" type="text/javascript"></script>
+	<script id="$file_id" src="$file_name" type="text/javascript"></script>
 #end
 
 #macro(language $lang_key)
