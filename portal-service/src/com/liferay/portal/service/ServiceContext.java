@@ -22,8 +22,9 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PortletPreferencesIds;
-
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import java.io.Serializable;
 
 import java.util.LinkedHashMap;
@@ -36,6 +37,14 @@ import java.util.Map;
  *
  */
 public class ServiceContext implements Serializable {
+
+	public ServiceContext() {
+		_addCommunityPermissions = Boolean.FALSE;
+		_addGuestPermissions = Boolean.FALSE;
+		_attributes = new LinkedHashMap<String, Serializable>();
+		_expandoBridgeAttributes = new LinkedHashMap<String, Object>();
+		_userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
+	}
 
 	public Boolean getAddCommunityPermissions() {
 		return _addCommunityPermissions;
@@ -185,14 +194,12 @@ public class ServiceContext implements Serializable {
 		_userId = userId;
 	}
 
-	private Boolean _addCommunityPermissions = Boolean.FALSE;
-	private Boolean _addGuestPermissions = Boolean.FALSE;
-	private Map<String, Serializable> _attributes =
-		new LinkedHashMap<String, Serializable>();
+	private Boolean _addCommunityPermissions;
+	private Boolean _addGuestPermissions;
+	private Map<String, Serializable> _attributes;
 	private String[] _communityPermissions;
 	private long _companyId;
-	private Map<String, Object> _expandoBridgeAttributes =
-		new LinkedHashMap<String, Object>();
+	private Map<String, Object> _expandoBridgeAttributes;
 	private String[] _guestPermissions;
 	private String _languageId;
 	private String _layoutURL;
