@@ -104,23 +104,24 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long parentFolderId, java.lang.String name,
+		long userId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFolder(parentFolderId, name, description, serviceContext);
+				   .addFolder(userId, parentFolderId, name, description,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String uuid, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFolder(uuid, parentFolderId, name, description,
+				   .addFolder(uuid, userId, parentFolderId, name, description,
 			serviceContext);
 	}
 

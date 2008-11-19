@@ -22,9 +22,7 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PortletPreferencesIds;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
 
 import java.io.Serializable;
 
@@ -44,7 +42,6 @@ public class ServiceContext implements Serializable {
 		_addGuestPermissions = Boolean.FALSE;
 		_attributes = new LinkedHashMap<String, Serializable>();
 		_expandoBridgeAttributes = new LinkedHashMap<String, Object>();
-		_userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
 	}
 
 	public Boolean getAddCommunityPermissions() {

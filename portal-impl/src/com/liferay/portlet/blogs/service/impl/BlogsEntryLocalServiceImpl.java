@@ -85,28 +85,28 @@ import org.apache.commons.logging.LogFactory;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			String title, String content, int displayDateMonth,
+			long userId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean draft, boolean allowTrackbacks,
 			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, title, content, displayDateMonth, displayDateDay,
+			null, userId, title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute, draft,
 			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public BlogsEntry addEntry(
-			String uuid, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, ServiceContext serviceContext)
+			String uuid, long userId, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
 
-		long userId = serviceContext.getUserId();
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
 
@@ -627,15 +627,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			long entryId, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, ServiceContext serviceContext)
+			long userId, long entryId, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
 
-		long userId = serviceContext.getUserId();
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		Date displayDate = PortalUtil.getDate(

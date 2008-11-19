@@ -104,21 +104,22 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		long userId, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean draft,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbacks, serviceContext);
+				   .addEntry(userId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, draft, allowTrackbacks, trackbacks,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String uuid, java.lang.String title,
+		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
@@ -126,7 +127,7 @@ public class BlogsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(uuid, title, content, displayDateMonth,
+				   .addEntry(uuid, userId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks,
 			serviceContext);
@@ -361,16 +362,16 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
-		long entryId, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean draft,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		long userId, long entryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateEntry(entryId, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour,
+				   .updateEntry(userId, entryId, title, content,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks,
 			serviceContext);
 	}

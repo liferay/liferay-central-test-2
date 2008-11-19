@@ -123,7 +123,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setPlid(context.getPlid());
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setUserId(userId);
 
 		if ((parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -158,15 +157,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 						parentFolderId, folder.getName(), 2);
 
 					existingFolder = IGFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), parentFolderId, name,
+						folder.getUuid(), userId, parentFolderId, name,
 						folder.getDescription(), serviceContext);
 				}
 				else {
-					existingFolder =
-						IGFolderLocalServiceUtil.updateFolder(
+					existingFolder = IGFolderLocalServiceUtil.updateFolder(
 						existingFolder.getFolderId(), parentFolderId,
-						folder.getName(), folder.getDescription(),
-						false);
+						folder.getName(), folder.getDescription(), false);
 				}
 			}
 			else {
@@ -175,7 +172,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					parentFolderId, folder.getName(), 2);
 
 				existingFolder = IGFolderLocalServiceUtil.addFolder(
-					parentFolderId, name, folder.getDescription(),
+					userId, parentFolderId, name, folder.getDescription(),
 					serviceContext);
 			}
 
@@ -227,7 +224,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setTagsEntries(tagsEntries);
-		serviceContext.setUserId(userId);
 
 		if ((folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == image.getFolderId())) {
@@ -255,20 +251,20 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 						image.getUuid(), context.getGroupId());
 
 					IGImageLocalServiceUtil.updateImage(
-						existingImage.getImageId(), folderId, image.getName(),
-						image.getDescription(), imageFile, image.getImageType(),
-						serviceContext);
+						userId, existingImage.getImageId(), folderId,
+						image.getName(), image.getDescription(), imageFile,
+						image.getImageType(), serviceContext);
 				}
 				catch (NoSuchImageException nsie) {
 					IGImageLocalServiceUtil.addImage(
-						image.getUuid(), folderId, image.getName(),
+						image.getUuid(), userId, folderId, image.getName(),
 						image.getDescription(), imageFile, image.getImageType(),
 						serviceContext);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					folderId, image.getName(), image.getDescription(),
+					userId, folderId, image.getName(), image.getDescription(),
 					imageFile, image.getImageType(), serviceContext);
 			}
 		}

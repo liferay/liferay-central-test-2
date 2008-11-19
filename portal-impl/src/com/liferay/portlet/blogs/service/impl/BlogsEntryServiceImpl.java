@@ -78,9 +78,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			title, content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, draft, allowTrackbacks,
-			trackbacks, serviceContext);
+			getUserId(), title, content, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute, draft,
+			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -275,9 +275,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return blogsEntryLocalService.updateEntry(
-			entryId, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbacks, serviceContext);
+			getUserId(), entryId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			draft, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	protected String exportToRSS(

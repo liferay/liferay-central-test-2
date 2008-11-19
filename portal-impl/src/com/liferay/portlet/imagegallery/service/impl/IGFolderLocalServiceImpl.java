@@ -65,20 +65,19 @@ import org.apache.commons.logging.LogFactory;
 public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder addFolder(
-			long parentFolderId, String name, String description,
+			long userId, long parentFolderId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addFolder(
-			null, parentFolderId, name, description, serviceContext);
+			null, userId, parentFolderId, name, description, serviceContext);
 	}
 
 	public IGFolder addFolder(
-			String uuid, long parentFolderId, String name, String description,
-			ServiceContext serviceContext)
+			String uuid, long userId, long parentFolderId, String name,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long userId = serviceContext.getUserId();
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
