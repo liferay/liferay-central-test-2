@@ -25,15 +25,10 @@ package com.liferay.portal.captcha;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletSession;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,16 +49,7 @@ public class CaptchaPortletAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletSession portletSession = actionRequest.getPortletSession();
-
-			String captchaText = CaptchaUtil.createText();
-
-			portletSession.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
-
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
-
-			CaptchaUtil.createImage(response.getOutputStream(), captchaText);
+			CaptchaUtil.serveImage(actionRequest, actionResponse);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

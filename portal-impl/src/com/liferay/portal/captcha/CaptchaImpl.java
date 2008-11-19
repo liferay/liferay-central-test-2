@@ -28,17 +28,19 @@ import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nl.captcha.servlet.CaptchaProducer;
@@ -162,14 +164,6 @@ public class CaptchaImpl implements Captcha {
 		}
 	}
 
-	public void createImage(OutputStream os, String text) throws IOException {
-		getCaptchaProducer().createImage(os, text);
-	}
-
-	public String createText() {
-		return getCaptchaProducer().createText();
-	}
-
 	public boolean isEnabled(HttpServletRequest request) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession session = request.getSession();
@@ -216,6 +210,39 @@ public class CaptchaImpl implements Captcha {
 		else {
 			return true;
 		}
+	}
+
+	public void serveImage(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
+
+		HttpSession session = request.getSession();
+
+		CaptchaProducer producer = getCaptchaProducer();
+
+		String captchaText = producer.createText();
+
+		session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
+
+		producer.createImage(response.getOutputStream(), captchaText);
+	}
+
+	public void serveImage(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws IOException {
+
+		PortletSession portletSession = portletRequest.getPortletSession();
+
+		CaptchaProducer producer = getCaptchaProducer();
+
+		String captchaText = producer.createText();
+
+		portletSession.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
+
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			portletResponse);
+
+		producer.createImage(response.getOutputStream(), captchaText);
 	}
 
 	protected CaptchaProducer getCaptchaProducer() {

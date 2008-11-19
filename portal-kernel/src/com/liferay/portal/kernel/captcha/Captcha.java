@@ -23,11 +23,12 @@
 package com.liferay.portal.kernel.captcha;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="Captcha.java.html"><b><i>View Source</i></b></a>
@@ -43,12 +44,16 @@ public interface Captcha {
 	public void check(PortletRequest portletRequest)
 		throws CaptchaTextException;
 
-	public void createImage(OutputStream os, String text) throws IOException;
-
-	public String createText();
-
 	public boolean isEnabled(HttpServletRequest request);
 
 	public boolean isEnabled(PortletRequest portletRequest);
+
+	public void serveImage(
+		HttpServletRequest request, HttpServletResponse response)
+		throws IOException;
+
+	public void serveImage(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws IOException;
 
 }

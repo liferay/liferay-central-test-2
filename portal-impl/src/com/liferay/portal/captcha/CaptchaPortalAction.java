@@ -24,11 +24,9 @@ package com.liferay.portal.captcha;
 
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -49,13 +47,7 @@ public class CaptchaPortalAction extends Action {
 		throws Exception {
 
 		try {
-			HttpSession session = request.getSession();
-
-			String captchaText = CaptchaUtil.createText();
-
-			session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
-
-			CaptchaUtil.createImage(response.getOutputStream(), captchaText);
+			CaptchaUtil.serveImage(request, response);
 
 			return null;
 		}

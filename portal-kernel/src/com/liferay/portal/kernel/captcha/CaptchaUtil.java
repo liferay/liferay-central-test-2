@@ -23,11 +23,12 @@
 package com.liferay.portal.kernel.captcha;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="CaptchaUtil.java.html"><b><i>View Source</i></b></a>
@@ -49,16 +50,6 @@ public class CaptchaUtil {
 		getCaptcha().check(portletRequest);
 	}
 
-	public static void createImage(OutputStream os, String text)
-		throws IOException {
-
-		getCaptcha().createImage(os, text);
-	}
-
-	public static String createText() {
-		return getCaptcha().createText();
-	}
-
 	public static Captcha getCaptcha() {
 		return _captcha;
 	}
@@ -69,6 +60,20 @@ public class CaptchaUtil {
 
 	public static boolean isEnabled(PortletRequest portletRequest) {
 		return getCaptcha().isEnabled(portletRequest);
+	}
+
+	public static void serveImage(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
+
+		getCaptcha().serveImage(request, response);
+	}
+
+	public static void serveImage(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws IOException {
+
+		getCaptcha().serveImage(portletRequest, portletResponse);
 	}
 
 	public void setCaptcha(Captcha captcha) {
