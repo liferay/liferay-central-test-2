@@ -112,11 +112,11 @@ else {
 	if (total == 0) {
 %>
 
-		<style type="text/css">
+		<%--<style type="text/css">
 			#p_p_id_<%=portletDisplay.getId() %>_ {
 				display: none;
 			}
-		</style>
+		</style>--%>
 
 <%
 	}
