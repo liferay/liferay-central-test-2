@@ -197,7 +197,7 @@ public class CreateAccountAction extends PortletAction {
 		long[] roleIds = null;
 		long[] userGroupIds = null;
 		boolean sendEmail = true;
-		ServiceContext serviceContext = null;
+		ServiceContext serviceContext = new ServiceContext();
 
 		boolean openIdPending = false;
 

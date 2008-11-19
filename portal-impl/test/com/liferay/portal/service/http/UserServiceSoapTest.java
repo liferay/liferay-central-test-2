@@ -82,7 +82,7 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		long[] roleIds = null;
 		long[] userGroupIds = null;
 		boolean sendMail = false;
-		ServiceContext serviceContext = null;
+		ServiceContext serviceContext = new ServiceContext();
 
 		return getUserServiceSoap().addUser(
 			TestPropsValues.COMPANY_ID, autoPassword,

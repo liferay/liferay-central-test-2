@@ -293,7 +293,7 @@ public class OpenIdAction extends PortletAction {
 			long[] roleIds = null;
 			long[] userGroupIds = null;
 			boolean sendEmail = false;
-			ServiceContext serviceContext = null;
+			ServiceContext serviceContext = new ServiceContext();
 
 			user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,

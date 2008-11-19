@@ -330,7 +330,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			long[] userGroupIds = null;
 			boolean sendEmail = false;
-			ServiceContext serviceContext = null;
+			ServiceContext serviceContext = new ServiceContext();
 
 			userLocalService.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,

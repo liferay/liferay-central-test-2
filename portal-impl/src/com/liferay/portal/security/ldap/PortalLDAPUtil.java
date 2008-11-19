@@ -684,7 +684,7 @@ public class PortalLDAPUtil {
 		long[] roleIds = null;
 		long[] userGroupIds = null;
 		boolean sendEmail = false;
-		ServiceContext serviceContext = null;
+		ServiceContext serviceContext = new ServiceContext();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
