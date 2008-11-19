@@ -95,6 +95,13 @@ public class JournalContentUtil_IW {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
+		long groupId, java.lang.String articleId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay, int page) {
+		return JournalContentUtil.getDisplay(groupId, articleId, languageId,
+			themeDisplay, page);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
 		java.lang.String languageId, java.lang.String xmlRequest) {
 		return JournalContentUtil.getDisplay(groupId, articleId, templateId,
