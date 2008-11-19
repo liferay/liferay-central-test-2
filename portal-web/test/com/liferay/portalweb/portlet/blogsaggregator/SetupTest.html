@@ -1,16 +1,81 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddSecondEntryTest</title>
+<title>SetupTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddSecondEntryTest</td></tr>
+<tr><td rowspan="1" colspan="3">SetupTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>clickAndWait</td>
+	<td>//a[@id="my-community-private-pages"]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id="my-community-private-pages"]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>new_page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>new_page</td>
+	<td>Blogs Test Page</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>new_page</td>
+	<td>Blogs Test Page</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Blogs Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Blogs Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Application</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Application</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id="Collaboration-Blogs"]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id="Collaboration-Blogs"]/p/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -31,12 +96,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_33_title</td>
-	<td>Second Test Entr</td>
+	<td>Test Entr</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_33_title</td>
-	<td>Second Test Entry</td>
+	<td>Test Entry</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -76,12 +141,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//body</td>
-	<td>This is a second test entr</td>
+	<td>This is a test entr</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a second test entry!</td>
+	<td>This is a test entry!</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -100,7 +165,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>link=Second Test Entry</td>
+	<td>link=Test Entry</td>
 	<td></td>
 </tr>
 <tr>

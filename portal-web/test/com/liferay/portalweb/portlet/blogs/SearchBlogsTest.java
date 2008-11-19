@@ -39,8 +39,7 @@ public class SearchBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search Entries']")) {
+				if (selenium.isElementPresent("_33_keywords")) {
 					break;
 				}
 			}
@@ -50,45 +49,14 @@ public class SearchBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_33_keywords", RuntimeVariables.replace("Test Entr"));
 		selenium.type("_33_keywords", RuntimeVariables.replace("Test Entry"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Entries']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("link=Test Entry"));
 		selenium.click(RuntimeVariables.replace("link=\u00ab Back"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("//input[@value='Add Blog Entry']"));
 	}
 }

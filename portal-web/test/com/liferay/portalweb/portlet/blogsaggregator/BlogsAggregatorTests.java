@@ -33,10 +33,12 @@ import com.liferay.portalweb.portal.BaseTests;
 public class BlogsAggregatorTests extends BaseTests {
 
 	public BlogsAggregatorTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(ViewBlogsTest.class);
 		addTestSuite(DisplayStylesTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

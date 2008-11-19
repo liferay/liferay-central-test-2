@@ -68,6 +68,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_33_title", RuntimeVariables.replace("Draft Test"));
 		selenium.type("_33_title", RuntimeVariables.replace("Draft Test"));
 		Thread.sleep(5000);
 
@@ -122,6 +123,9 @@ public class AddDraftEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
+		selenium.typeKeys("//body",
+			RuntimeVariables.replace(
+				"This is a test for the emergenc draft sstem"));
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is a test for the emergency draft system!"));
@@ -177,8 +181,26 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Draft Test"));
+		assertTrue(selenium.isTextPresent(
+				"This is a test for the emergency draft system!"));
 	}
 }

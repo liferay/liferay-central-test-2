@@ -50,7 +50,9 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Blog Entry']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Blog Entry']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,6 +70,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_33_title", RuntimeVariables.replace("Test Entr"));
 		selenium.type("_33_title", RuntimeVariables.replace("Test Entry"));
 		Thread.sleep(5000);
 
@@ -122,10 +125,11 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
+		selenium.typeKeys("//body",
+			RuntimeVariables.replace("This is a test entr"));
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test entry!"));
 		selenium.selectFrame("relative=top");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -145,21 +149,8 @@ public class AddEntryTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=Test Entry"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -33,6 +33,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddEntryCommentTest extends BaseTestCase {
 	public void testAddEntryComment() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=0 Comments")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=0 Comments"));
 		selenium.waitForPageToLoad("30000");
 
@@ -71,27 +87,14 @@ public class AddEntryCommentTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_33_postReplyBody0",
-			RuntimeVariables.replace("This is a test entr comment!"));
+			RuntimeVariables.replace("This is a test entr comment"));
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a test entry comment!"));
 		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=This is a test entry comment!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent(
+				"link=This is a test entry comment!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -39,8 +39,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+				if (selenium.isElementPresent("//div/a/span")) {
 					break;
 				}
 			}
@@ -50,9 +49,6 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click("//div/a/span");
 
 		for (int second = 0;; second++) {

@@ -44,13 +44,14 @@ public class BlogsTests extends BaseTests {
 		addTestSuite(SearchBlogsTest.class);
 		addTestSuite(DeleteSecondCommentTest.class);
 		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
+		addTestSuite(AddNullEntryTest.class);
+		addTestSuite(AddNullTitleTest.class);
 		addTestSuite(AddDraftEntryTest.class);
 		addTestSuite(PublishDraftEntryTest.class);
 		addTestSuite(ConfigureDisplaySettingsTest.class);
 		addTestSuite(DeleteEntryTest.class);
 		addTestSuite(UploadLARFileTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

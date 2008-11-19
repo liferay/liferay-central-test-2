@@ -9,13 +9,18 @@
 <tr><td rowspan="1" colspan="3">DeleteSecondCommentTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Second Test Entry</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Second Test Entry</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
+	<td>//td[5]/nobr/a[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,8 +34,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>This is an edited second entry comment!</td>
 	<td></td>
 </tr>
 

@@ -26,20 +26,21 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditSecondEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullTitleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditSecondEntryTest extends BaseTestCase {
-	public void testEditSecondEntry() throws Exception {
+public class AddNullTitleTest extends BaseTestCase {
+	public void testAddNullTitle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Blog Entry']")) {
 					break;
 				}
 			}
@@ -49,28 +50,9 @@ public class EditSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Blog Entry']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("Second Test Entr"));
-		selenium.type("_33_title", RuntimeVariables.replace("Second Test Entry"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -121,13 +103,13 @@ public class EditSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is an edited second test entr"));
+			RuntimeVariables.replace("This is a test null entr"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is an edited second test entry!"));
+			RuntimeVariables.replace("This is a test null entry!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -148,8 +130,7 @@ public class EditSecondEntryTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -157,7 +138,7 @@ public class EditSecondEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isElementPresent("_33_cancelButton")) {
 					break;
 				}
 			}
@@ -167,9 +148,8 @@ public class EditSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.click(RuntimeVariables.replace("_33_cancelButton"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is an edited second test entry!"));
+		assertFalse(selenium.isElementPresent("link=Test Null Entry"));
 	}
 }

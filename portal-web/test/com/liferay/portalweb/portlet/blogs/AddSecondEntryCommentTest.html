@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AddSecondEntryCommentTest</title>
 </head>
 <body>
@@ -12,7 +9,12 @@
 <tr><td rowspan="1" colspan="3">AddSecondEntryCommentTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
+	<td>waitForElementPresent</td>
+	<td>link=0 Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=0 Comments</td>
 	<td></td>
 </tr>
@@ -47,8 +49,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>This is a second entry comment!</td>
+	<td>assertElementPresent</td>
+	<td>link=This is a second entry comment!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

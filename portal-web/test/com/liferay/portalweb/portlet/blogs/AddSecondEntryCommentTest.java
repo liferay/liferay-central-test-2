@@ -33,8 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondEntryCommentTest extends BaseTestCase {
 	public void testAddSecondEntryComment() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=0 Comments"));
-		selenium.waitForPageToLoad("30000");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=0 Comments")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=0 Comments");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,21 +91,9 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a second entry comment!"));
 		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a second entry comment!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent(
+				"link=This is a second entry comment!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }
