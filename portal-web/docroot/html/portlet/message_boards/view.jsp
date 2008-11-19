@@ -219,10 +219,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<c:if test="<%= (category != null) && (showAddCategoryButton || showSearch) %>">
-			<br />
-		</c:if>
-
 		</form>
 
 		<script type="text/javascript">
@@ -242,6 +238,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</script>
 
 		<c:if test="<%= category != null %>">
+			<br />
+
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />

@@ -433,9 +433,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>
 
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
+			<br />
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
@@ -508,9 +506,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>
 
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
+			<br />
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
@@ -601,9 +597,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<input type="button" value="<liferay-ui:message key="add-license" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>
 
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
+			<br />
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

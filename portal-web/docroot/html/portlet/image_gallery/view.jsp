@@ -227,6 +227,8 @@ List scores = null;
 		</script>
 
 		<c:if test="<%= WebDAVUtil.isViewEnabled(IGWebDAVStorageImpl.class.getName()) %>">
+			<br />
+
 			<table class="lfr-table">
 			<tr>
 				<td>
@@ -265,14 +267,14 @@ List scores = null;
 		</c:if>
 
 		<c:if test="<%= folder != null %>">
-			<br />
-
 			<script type="text/javascript">
 				function <portlet:namespace />viewSlideShow() {
 					var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
 					slideShowWindow.focus();
 				}
 			</script>
+
+			<br />
 
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<liferay-portlet:renderURLParams varImpl="searchURL" />

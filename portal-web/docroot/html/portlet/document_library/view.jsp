@@ -73,6 +73,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<liferay-ui:search-container
 				curParam="cur1"
 				delta="<%= foldersPerPage %>"
+				headerNames="<%= StringUtil.merge(folderColumns) %>"
 				iteratorURL="<%= portletURL %>"
 			>
 				<liferay-ui:search-container-results
@@ -140,6 +141,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</script>
 
 		<c:if test="<%= WebDAVUtil.isViewEnabled(DLWebDAVStorageImpl.class.getName()) %>">
+			<c:if test="<%= showSubfolders %>">
+				<br />
+			</c:if>
+
 			<table class="lfr-table">
 			<tr>
 				<td>
@@ -178,7 +183,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</c:if>
 
 		<c:if test="<%= folder != null %>">
-			<c:if test="<%= !mergedView %>">
+			<c:if test="<%= showSubfolders %>">
 				<br />
 			</c:if>
 
@@ -195,6 +200,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<liferay-ui:search-container
 				curParam="cur2"
 				delta="<%= fileEntriesPerPage %>"
+				headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
 				iteratorURL="<%= portletURL %>"
 			>
 				<liferay-ui:search-container-results>

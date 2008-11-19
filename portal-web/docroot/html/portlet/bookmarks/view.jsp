@@ -204,10 +204,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<liferay-ui:search-iterator />
-
-			<c:if test="<%= (folder != null) && (showAddFolderButton || showSearch) %>">
-				<br />
-			</c:if>
 		</liferay-ui:search-container>
 
 		</form>
@@ -229,6 +225,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</script>
 
 		<c:if test="<%= folder != null %>">
+			<br />
+
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
@@ -382,6 +380,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>
 		<liferay-ui:search-container
+			headerNames="folder,num-of-folders,num-of-entries"
 			iteratorURL="<%= portletURL %>"
 		>
 
