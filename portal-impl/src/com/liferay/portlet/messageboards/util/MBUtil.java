@@ -624,6 +624,7 @@ public class MBUtil {
 		throws Exception {
 
 		String rank = StringPool.BLANK;
+		int rankValue = 0;
 
 		Group group = GroupLocalServiceUtil.getGroup(
 			statsUser.getGroupId());
@@ -645,8 +646,11 @@ public class MBUtil {
 			if (curRankValueKvp.length <= 1) {
 				int kvpPosts = GetterUtil.getInteger(curRankValue);
 
-				if (statsUser.getMessageCount() >= kvpPosts) {
+				if ((statsUser.getMessageCount() >= kvpPosts) &&
+					(kvpPosts > rankValue)) {
+					
 					rank = curRank;
+					rankValue = kvpPosts;
 				}
 
 				continue;
