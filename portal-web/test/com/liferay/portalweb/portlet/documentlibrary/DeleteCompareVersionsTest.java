@@ -74,24 +74,7 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_tabs1TabsBack")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("_20_tabs1TabsBack"));
+		selenium.click(RuntimeVariables.replace("link=Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

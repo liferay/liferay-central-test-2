@@ -106,6 +106,23 @@ public class AddCommentsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Post Reply");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_postReplyBody0")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_20_postReplyBody0",
 			RuntimeVariables.replace("EditCommentsTest!!!"));
 		selenium.type("_20_postReplyBody0",

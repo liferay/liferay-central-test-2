@@ -70,8 +70,8 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
-		selenium.type("password", RuntimeVariables.replace("test"));
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
 

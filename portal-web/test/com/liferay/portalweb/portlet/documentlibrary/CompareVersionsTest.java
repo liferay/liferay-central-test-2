@@ -210,23 +210,7 @@ public class CompareVersionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("1.2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("1.2"));
 		selenium.click("//input[@name='_20_rowIds' and @value='1.0']");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Compare Versions']"));

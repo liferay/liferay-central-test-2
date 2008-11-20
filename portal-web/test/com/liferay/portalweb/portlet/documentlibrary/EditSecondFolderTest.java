@@ -48,7 +48,7 @@ public class EditSecondFolderTest extends BaseTestCase {
 			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
+		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Edit Second Folder Test"));
 	}

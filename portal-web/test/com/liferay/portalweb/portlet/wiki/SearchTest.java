@@ -33,19 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
-		selenium.type("_36_keywords", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Main"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Child Article")) {
+				if (selenium.isElementPresent("_36_keywords")) {
 					break;
 				}
 			}
@@ -54,5 +48,13 @@ public class SearchTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.type("_36_keywords", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Main"));
+		selenium.click(RuntimeVariables.replace("link=Main"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Child Article"));
 	}
 }

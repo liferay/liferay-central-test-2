@@ -33,9 +33,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RememberMeLoginTest extends BaseTestCase {
 	public void testRememberMeLogin() throws Exception {
-		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
-		selenium.type("password", RuntimeVariables.replace("test"));
-		selenium.click("rememberMeCheckbox");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click("_58_rememberMeCheckbox");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -91,7 +91,7 @@ public class AddSecondArticleTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
+				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -111,21 +111,6 @@ public class AddSecondArticleTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a second test article")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("This is a second test article"));
 	}
 }

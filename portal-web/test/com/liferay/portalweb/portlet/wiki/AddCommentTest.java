@@ -34,12 +34,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddCommentTest extends BaseTestCase {
 	public void testAddComment() throws Exception {
 		selenium.click("link=Post Reply");
-		selenium.typeKeys("_36_postReplyBody0",
-			RuntimeVariables.replace("This is a test Post Repl."));
-		selenium.type("_36_postReplyBody0",
-			RuntimeVariables.replace("This is a test Post Reply."));
-		selenium.click(RuntimeVariables.replace("_36_postReplyButton0"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -47,7 +41,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a test Post Reply.")) {
+				if (selenium.isElementPresent("_36_postReplyBody0")) {
 					break;
 				}
 			}
@@ -56,5 +50,13 @@ public class AddCommentTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.typeKeys("_36_postReplyBody0",
+			RuntimeVariables.replace("This is a test Post Repl."));
+		selenium.type("_36_postReplyBody0",
+			RuntimeVariables.replace("This is a test Post Reply."));
+		selenium.click(RuntimeVariables.replace("_36_postReplyButton0"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a test Post Reply."));
 	}
 }

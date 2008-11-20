@@ -99,7 +99,7 @@ public class ConfirmSessionExpireTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Sign in with a regular account.")) {
+				if (selenium.isElementPresent("_58_login")) {
 					break;
 				}
 			}
