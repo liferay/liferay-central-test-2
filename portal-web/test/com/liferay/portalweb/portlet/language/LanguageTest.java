@@ -305,7 +305,7 @@ public class LanguageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"\u30da\u30fc\u30b8\u3092\u52a0\u3048\u306a\u3055\u3044")) {
+							"\u30da\u30fc\u30b8\u306e\u8ffd\u52a0")) {
 					break;
 				}
 			}

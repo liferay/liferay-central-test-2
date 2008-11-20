@@ -35,9 +35,8 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 	public void testGetAppointmentEvents() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Day"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
-			"label=Appointment");
-		selenium.waitForPageToLoad("30000");
+		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
+			RuntimeVariables.replace("label=Appointment"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +76,7 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Appointment")) {
+				if (selenium.isElementPresent("link=Week")) {
 					break;
 				}
 			}
@@ -89,7 +88,7 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Week"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
+		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
 			"label=Appointment");
 		selenium.waitForPageToLoad("30000");
 
@@ -127,7 +126,7 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Month"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
+		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
 			"label=Appointment");
 		selenium.waitForPageToLoad("30000");
 

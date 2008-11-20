@@ -36,7 +36,6 @@ public class LanguageTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(LanguageTest.class);
-		//addTestSuite(InternationalizationChineseTest.class);
 		addTestSuite(InternationalizationJapaneseTest.class);
 		addTestSuite(InternationalizationSpanishTest.class);
 		addTestSuite(InternationalizationVerifyTest.class);
