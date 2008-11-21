@@ -209,7 +209,11 @@ public class PortletAction extends Action {
 		throws IOException {
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			SessionMessages.add(actionRequest, "request_processed");
+			String successMessage = ParamUtil.getString(
+				actionRequest, "successMessage");
+
+			SessionMessages.add(
+				actionRequest, "request_processed", successMessage);
 		}
 
 		if (redirect == null) {

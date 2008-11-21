@@ -22,7 +22,24 @@
  */
 %>
 
-<liferay-ui:success key="request_processed" message="your-request-processed-successfully" />
+<c:if test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
+	<div class="portlet-msg-success">
+
+		<%
+		String successMessage = (String)SessionMessages.get(renderRequest, "request_processed");
+		%>
+
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(successMessage) %>">
+				<%= successMessage %>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:message key="your-request-processed-successfully" />
+			</c:otherwise>
+		</c:choose>
+	</div>
+</c:if>
+
 <liferay-ui:success key='<%= portletConfig.getPortletName() + ".doConfigure" %>' message="you-have-successfully-updated-the-setup" />
 <liferay-ui:success key='<%= portletConfig.getPortletName() + ".doEdit" %>' message="you-have-successfully-updated-your-preferences" />
 
