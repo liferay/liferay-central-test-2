@@ -105,7 +105,7 @@ public class ProducerEntityManagerImpl
 		registrationData.setConsumerName(consumerName);
 		registrationData.setConsumerAgent(PropsUtil.getProperties().getProperty(
 				_CONSUMER_AGENT_KEY, _DEFAULT_CONSUMER_AGENT));
-		
+
 		registrationData.setMethodGetSupported(
 			defaultRegistrationData.isMethodGetSupported());
 

@@ -116,7 +116,7 @@ public class OrganizationLocalServiceImpl
 			null, true);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
-			
+
 			// Role
 
 			Role role = roleLocalService.getRole(
@@ -129,7 +129,7 @@ public class OrganizationLocalServiceImpl
 
 			userPersistence.addOrganization(userId, organizationId);
 		}
-		
+
 		// Resources
 
 		addOrganizationResources(userId, organization);
