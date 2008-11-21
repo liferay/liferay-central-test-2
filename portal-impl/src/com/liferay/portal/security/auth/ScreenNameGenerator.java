@@ -45,7 +45,7 @@ public class ScreenNameGenerator {
 		String screenName = null;
 
 		if (Validator.isNotNull(emailAddress)) {
-			StringUtil.extractFirst(
+			screenName = StringUtil.extractFirst(
 				emailAddress, StringPool.AT).toLowerCase();
 
 			screenName = StringUtil.replace(
