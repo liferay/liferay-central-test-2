@@ -45,7 +45,7 @@ public class MoveThreadTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Categories")) {
+				if (selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory")) {
 					break;
 				}
 			}
@@ -55,24 +55,7 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Categories");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Choose']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click("link=T\u00e9st Cat\u00e9gory");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		selenium.click("_19_addExplanationPost");
@@ -162,7 +145,7 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("category");
+		selenium.selectWindow("name=category");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
