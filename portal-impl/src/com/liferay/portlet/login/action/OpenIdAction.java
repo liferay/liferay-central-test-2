@@ -123,16 +123,16 @@ public class OpenIdAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof OpenIDException) {
+			if (e instanceof DuplicateUserEmailAddressException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
+			}
+			else if (e instanceof OpenIDException) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Error communicating with OpenID provider: " +
 							e.getMessage());
 				}
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
-			}
-			else if (e instanceof DuplicateUserEmailAddressException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
@@ -180,6 +180,9 @@ public class OpenIdAction extends PortletAction {
 			actionRequest);
 		HttpSession session = request.getSession();
 
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
+
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
 
 		ParameterList params = new ParameterList(
@@ -191,9 +194,6 @@ public class OpenIdAction extends PortletAction {
 		if (discovered == null) {
 			return null;
 		}
-
-		ActionResponseImpl actionResponseImpl =
-			(ActionResponseImpl)actionResponse;
 
 		PortletURL portletURL = actionResponseImpl.createActionURL();
 

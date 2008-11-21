@@ -1,8 +1,3 @@
-<%@ page import="org.openid4java.OpenIDException" %>
-<%@ page import="org.openid4java.association.AssociationException" %>
-<%@ page import="org.openid4java.consumer.ConsumerException" %>
-<%@ page import="org.openid4java.discovery.DiscoveryException" %>
-<%@ page import="org.openid4java.message.MessageException" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
