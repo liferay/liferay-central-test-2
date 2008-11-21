@@ -77,9 +77,17 @@ import java.util.Set;
 public class ProducerEntityManagerImpl
 	extends AbstractProducerEntityManager implements ProducerEntityManager {
 
+	public ProducerEntityManagerImpl() {
+		super();
+
+		_consumerAgent = GetterUtil.getString(
+			PropsUtil.get(_CONSUMER_AGENT_KEY), _DEFAULT_CONSUMER_AGENT);
+		_consumerName = GetterUtil.getString(
+			PropsUtil.get(_CONSUMER_NAME_KEY), _DEFAULT_CONSUMER_NAME);
+	}
+
 	public String getConsumerName() {
-		return PropsUtil.getProperties().getProperty(
-				_CONSUMER_NAME_KEY, _DEFAULT_CONSUMER_NAME);
+		return _consumerName;
 	}
 
 	public RegistrationData getDefaultRegistrationData()
@@ -103,8 +111,7 @@ public class ProducerEntityManagerImpl
 		RegistrationData registrationData = new RegistrationData();
 
 		registrationData.setConsumerName(consumerName);
-		registrationData.setConsumerAgent(PropsUtil.getProperties().getProperty(
-				_CONSUMER_AGENT_KEY, _DEFAULT_CONSUMER_AGENT));
+		registrationData.setConsumerAgent(_consumerAgent);
 
 		registrationData.setMethodGetSupported(
 			defaultRegistrationData.isMethodGetSupported());
@@ -392,5 +399,7 @@ public class ProducerEntityManagerImpl
 
 	private String _portalId;
 	private String _namespace;
+	private String _consumerAgent;
+	private String _consumerName;
 
 }
