@@ -307,14 +307,15 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					long groupId = node.getGroupId();
 					String title = page.getTitle();
 					String content = page.getContent();
+					long resourcePrimKey = page.getResourcePrimKey();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						WikiPage.class.getName(), page.getResourcePrimKey());
+						WikiPage.class.getName(), resourcePrimKey);
 
 					try {
 						Indexer.updatePage(
-							companyId, groupId, nodeId, title, content,
-							tagsEntries, page.getExpandoBridge());
+							companyId, groupId, resourcePrimKey, nodeId, title,
+							content, tagsEntries, page.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -331,8 +332,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] nodeIds, String keywords,
-			int start, int end)
+			long companyId, long groupId, long userId, long[] nodeIds,
+			String keywords, int start, int end)
 		throws SystemException {
 
 		try {
@@ -348,8 +349,17 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				BooleanQuery nodeIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long nodeId : nodeIds) {
+					if (userId > 0) {
+						try {
+							wikiNodeService.getNode(nodeId);
+						}
+						catch (Exception e) {
+							continue;
+						}
+					}
+
 					TermQuery termQuery = TermQueryFactoryUtil.create(
-						Field.ENTRY_CLASS_PK, nodeId);
+						"nodeId", nodeId);
 
 					nodeIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 				}
@@ -373,7 +383,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, groupId, userId, WikiPage.class.getName(), fullQuery,
+				start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

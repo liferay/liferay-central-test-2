@@ -190,8 +190,8 @@ public interface WikiNodeLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] nodeIds, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.SystemException;
+		long groupId, long userId, long[] nodeIds, java.lang.String keywords,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public void subscribeNode(long userId, long nodeId)
 		throws com.liferay.portal.PortalException,

@@ -57,8 +57,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.WIKI;
 
 	public static void addPage(
-			long companyId, long groupId, long nodeId, String title,
-			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
+			long companyId, long groupId, long resourcePrimKey, long nodeId,
+			String title, String content, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		try {
@@ -68,8 +69,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		Document doc = getPageDocument(
-			companyId, groupId, nodeId, title, content, tagsEntries,
-			expandoBridge);
+			companyId, groupId, resourcePrimKey, nodeId, title, content,
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -100,8 +101,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getPageDocument(
-		long companyId, long groupId, long nodeId, String title, String content,
-		String[] tagsEntries, ExpandoBridge expandoBridge) {
+		long companyId, long groupId, long resourcePrimKey, long nodeId,
+		String title, String content, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		content = HtmlUtil.extractText(content);
 
@@ -119,8 +121,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.CONTENT, content);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
+		doc.addKeyword("nodeId", nodeId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, nodeId);
+		doc.addKeyword(Field.ENTRY_CLASS_PK, resourcePrimKey);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
@@ -136,13 +139,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updatePage(
-			long companyId, long groupId, long nodeId, String title,
-			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
+			long companyId, long groupId, long resourcePrimKey, long nodeId,
+			String title, String content, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getPageDocument(
-			companyId, groupId, nodeId, title, content, tagsEntries,
-			expandoBridge);
+			companyId, groupId, resourcePrimKey, nodeId, title, content,
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
@@ -166,7 +170,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String nodeId = doc.get(Field.ENTRY_CLASS_PK);
+		String nodeId = doc.get("nodeId");
 
 		portletURL.setParameter("struts_action", "/wiki/view");
 		portletURL.setParameter("nodeId", nodeId);

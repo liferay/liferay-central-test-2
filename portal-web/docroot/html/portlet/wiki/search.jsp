@@ -69,7 +69,7 @@ headerNames.add("score");
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 try {
-	Hits results = WikiNodeLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, nodeIds, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = WikiNodeLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), nodeIds, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 	int total = results.getLength();
 
@@ -88,7 +88,7 @@ try {
 
 		// Node and page
 
-		long curNodeId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+		long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
 		String title = doc.get("title");
 
 		WikiNode curNode = null;

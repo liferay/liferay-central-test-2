@@ -248,10 +248,11 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] nodeIds, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.SystemException {
+		long groupId, long userId, long[] nodeIds, java.lang.String keywords,
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, groupId, nodeIds, keywords, start, end);
+				   .search(companyId, groupId, userId, nodeIds, keywords,
+			start, end);
 	}
 
 	public static void subscribeNode(long userId, long nodeId)

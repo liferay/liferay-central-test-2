@@ -185,8 +185,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		socialActivityLocalService.addActivity(
 			userId, node.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), WikiActivityKeys.ADD_PAGE,
-			StringPool.BLANK, 0);
+			resourcePrimKey, WikiActivityKeys.ADD_PAGE, StringPool.BLANK, 0);
 
 		// Subscriptions
 
@@ -202,8 +201,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		try {
 			Indexer.addPage(
-				page.getCompanyId(), node.getGroupId(), nodeId, title, content,
-				tagsEntries, page.getExpandoBridge());
+				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
+				title, content, tagsEntries, page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + pageId, se);
@@ -776,11 +775,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = pageVersions.get(pageVersions.size() - 1);
 
+		long resourcePrimKey = page.getResourcePrimKey();
+
 		// Page resource
 
 		WikiPageResource wikiPageResource =
-			wikiPageResourcePersistence.findByPrimaryKey(
-				page.getResourcePrimKey());
+			wikiPageResourcePersistence.findByPrimaryKey(resourcePrimKey);
 
 		wikiPageResource.setTitle(newTitle);
 
@@ -818,10 +818,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Tags
 
 		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey(),
+			WikiPage.class.getName(), resourcePrimKey,
 			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey(),
+			WikiPage.class.getName(), resourcePrimKey,
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
 		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
@@ -830,8 +830,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		try {
 			Indexer.updatePage(
-				page.getCompanyId(), page.getNode().getGroupId(), nodeId,
-				newTitle, content, tagsEntries, page.getExpandoBridge());
+				page.getCompanyId(), page.getNode().getGroupId(),
+				resourcePrimKey, nodeId, newTitle, content, tagsEntries,
+				page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + newTitle, se);
@@ -861,12 +862,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content = page.getContent();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey());
+			WikiPage.class.getName(), resourcePrimKey);
 
 		try {
 			Indexer.updatePage(
-				companyId, groupId, nodeId, title, content, tagsEntries,
-				page.getExpandoBridge());
+				companyId, groupId, resourcePrimKey, nodeId, title, content,
+				tagsEntries, page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -1006,8 +1007,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		try {
 			Indexer.updatePage(
-				node.getCompanyId(), node.getGroupId(), nodeId, title, content,
-				tagsEntries, page.getExpandoBridge());
+				node.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
+				title, content, tagsEntries, page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + page.getPrimaryKey(), se);
