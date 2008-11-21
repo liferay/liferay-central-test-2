@@ -30,6 +30,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -558,7 +559,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), category.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), threadId, messageId, subject,
-					body, tagsEntries, message.getExpandoBridge());
+					body, anonymous, tagsEntries, message.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -1132,6 +1133,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long threadId = message.getThreadId();
 		String title = message.getSubject();
 		String content = message.getBody();
+		boolean anonymous = message.isAnonymous();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			MBMessage.class.getName(), messageId);
@@ -1139,7 +1141,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			Document doc = Indexer.getMessageDocument(
 				companyId, groupId, userId, userName, categoryId, threadId,
-				messageId, title, content, tagsEntries,
+				messageId, title, content, anonymous, tagsEntries,
 				message.getExpandoBridge());
 
 			SearchEngineUtil.addDocument(companyId, doc);
@@ -1298,7 +1300,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), category.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), message.getThreadId(), messageId,
-					subject, body, tagsEntries, message.getExpandoBridge());
+					subject, body, message.isAnonymous(), tagsEntries,
+					message.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -1485,6 +1488,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(message.getUserId());
 
+		String emailAddress = user.getEmailAddress();
+		String fullName = user.getFullName();
+
+		if (message.isAnonymous()) {
+			emailAddress = StringPool.BLANK;
+			fullName = LanguageUtil.get(themeDisplay.getLocale(), "anonymous");
+		}
+
 		List<Long> categoryIds = new ArrayList<Long>();
 
 		categoryIds.add(category.getCategoryId());
@@ -1537,8 +1548,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				company.getName(),
 				group.getName(),
 				mailingListAddress,
-				user.getEmailAddress(),
-				user.getFullName(),
+				emailAddress,
+				fullName,
 				portletName
 			});
 
@@ -1560,8 +1571,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				company.getName(),
 				group.getName(),
 				mailingListAddress,
-				user.getEmailAddress(),
-				user.getFullName(),
+				emailAddress,
+				fullName,
 				portletName
 			});
 
@@ -1618,8 +1629,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getBody(),
 				String.valueOf(message.getMessageId()),
 				message.getSubject(),
-				user.getEmailAddress(),
-				user.getFullName(),
+				emailAddress,
+				fullName,
 				company.getVirtualHost(),
 				portletName
 			});
@@ -1657,8 +1668,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				String.valueOf(message.getMessageId()),
 				message.getSubject(),
 				messageURL,
-				user.getEmailAddress(),
-				user.getFullName(),
+				emailAddress,
+				fullName,
 				company.getVirtualHost(),
 				portletName
 			});

@@ -360,6 +360,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					long messageId = message.getMessageId();
 					String title = message.getSubject();
 					String content = message.getBody();
+					boolean anonymous = message.isAnonymous();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						MBMessage.class.getName(), messageId);
@@ -367,8 +368,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					try {
 						Document doc = Indexer.getMessageDocument(
 							companyId, groupId, userId, userName, categoryId,
-							threadId, messageId, title, content, tagsEntries,
-							message.getExpandoBridge());
+							threadId, messageId, title, content, anonymous,
+							tagsEntries, message.getExpandoBridge());
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
@@ -601,8 +602,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 							message.getUserId(), message.getUserName(),
 							toCategoryId, message.getThreadId(),
 							message.getMessageId(), message.getSubject(),
-							message.getBody(), tagsEntries,
-							message.getExpandoBridge());
+							message.getBody(), message.isAnonymous(),
+							tagsEntries, message.getExpandoBridge());
 					}
 				}
 				catch (SearchException se) {

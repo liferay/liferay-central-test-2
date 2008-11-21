@@ -63,12 +63,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addMessage(
 			long companyId, long groupId, long userId, String userName,
 			long categoryId, long threadId, long messageId, String title,
-			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
+			String content, boolean anonymous, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, tagsEntries, expandoBridge);
+			messageId, title, content, anonymous, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -101,7 +102,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getMessageDocument(
 		long companyId, long groupId, long userId, String userName,
 		long categoryId, long threadId, long messageId, String title,
-		String content, String[] tagsEntries, ExpandoBridge expandoBridge) {
+		String content, boolean anonymous, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 
@@ -125,7 +127,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 		doc.addKeyword(Field.USER_ID, userId);
-		doc.addText(Field.USER_NAME, userName);
+
+		if (!anonymous) {
+			doc.addText(Field.USER_NAME, userName);
+		}
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
@@ -152,12 +157,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateMessage(
 			long companyId, long groupId, long userId, String userName,
 			long categoryId, long threadId, long messageId, String title,
-			String content, String[] tagsEntries, ExpandoBridge expandoBridge)
+			String content, boolean anonymous, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, tagsEntries, expandoBridge);
+			messageId, title, content, anonymous, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
