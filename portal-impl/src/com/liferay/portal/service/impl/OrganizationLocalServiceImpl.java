@@ -47,6 +47,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.util.UniqueList;
 
@@ -114,18 +115,21 @@ public class OrganizationLocalServiceImpl
 			userId, Organization.class.getName(), organizationId, null, null, 0,
 			null, true);
 
-		// Role
+		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
+			
+			// Role
 
-		Role role = roleLocalService.getRole(
-			organization.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+			Role role = roleLocalService.getRole(
+				organization.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
-		userGroupRoleLocalService.addUserGroupRoles(
-			userId, group.getGroupId(), new long[] {role.getRoleId()});
+			userGroupRoleLocalService.addUserGroupRoles(
+				userId, group.getGroupId(), new long[] {role.getRoleId()});
 
-		// User
+			// User
 
-		userPersistence.addOrganization(userId, organizationId);
-
+			userPersistence.addOrganization(userId, organizationId);
+		}
+		
 		// Resources
 
 		addOrganizationResources(userId, organization);
