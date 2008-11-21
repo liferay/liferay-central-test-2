@@ -35,8 +35,10 @@ public class RecentBloggersTests extends BaseTests {
 	public RecentBloggersTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(SetupTest.class);
+		addTestSuite(AssertRecentBloggersTest.class);
 		addTestSuite(DisplayStylesTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

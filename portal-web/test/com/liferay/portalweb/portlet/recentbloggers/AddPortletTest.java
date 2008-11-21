@@ -68,5 +68,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isTextPresent("There are no recent bloggers."));
 	}
 }
