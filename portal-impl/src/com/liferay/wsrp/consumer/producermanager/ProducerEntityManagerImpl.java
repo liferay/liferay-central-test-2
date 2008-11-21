@@ -44,6 +44,7 @@ package com.liferay.wsrp.consumer.producermanager;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalServiceUtil;
 
@@ -77,7 +78,8 @@ public class ProducerEntityManagerImpl
 	extends AbstractProducerEntityManager implements ProducerEntityManager {
 
 	public String getConsumerName() {
-		return _DEFAULT_CONSUMER_NAME;
+		return PropsUtil.getProperties().getProperty(
+				_CONSUMER_NAME_KEY, _DEFAULT_CONSUMER_NAME);
 	}
 
 	public RegistrationData getDefaultRegistrationData()
@@ -101,7 +103,9 @@ public class ProducerEntityManagerImpl
 		RegistrationData registrationData = new RegistrationData();
 
 		registrationData.setConsumerName(consumerName);
-		registrationData.setConsumerAgent(_DEFAULT_CONSUMER_AGENT);
+		registrationData.setConsumerAgent(PropsUtil.getProperties().getProperty(
+				_CONSUMER_AGENT_KEY, _DEFAULT_CONSUMER_AGENT));
+		
 		registrationData.setMethodGetSupported(
 			defaultRegistrationData.isMethodGetSupported());
 
@@ -373,6 +377,12 @@ public class ProducerEntityManagerImpl
 
 		return producerEntity;
 	}
+
+	private static final String _CONSUMER_AGENT_KEY =
+		"com.sun.portal.wsrp.consumer.consumeragent";
+
+	private static final String _CONSUMER_NAME_KEY =
+		"com.sun.portal.wsrp.consumer.consumername";
 
 	private static final String _DEFAULT_CONSUMER_AGENT =
 		"Liferay Portal Consumer";
