@@ -20,7 +20,7 @@ Example:
 var Class = function(properties){
 	var klass = function(){
 		for (var p in this){
-			if (this[p]) this[p]._proto_ = this;
+			if (this[p] && typeof this[p] == 'function') this[p]._proto_ = this;
 		}
 		if (arguments[0] != 'noinit' && this.initialize) return this.initialize.apply(this, arguments);
 	};
