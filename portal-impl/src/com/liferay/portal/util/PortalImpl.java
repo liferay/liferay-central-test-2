@@ -2595,7 +2595,7 @@ public class PortalImpl implements Portal {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(PATH_MAIN);
+		sb.append(_pathMain);
 		sb.append("/portal/status?status=");
 		sb.append(status);
 		sb.append("&exception=");
