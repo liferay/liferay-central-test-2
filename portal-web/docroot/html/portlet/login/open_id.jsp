@@ -1,3 +1,8 @@
+<%@ page import="org.openid4java.OpenIDException" %>
+<%@ page import="org.openid4java.association.AssociationException" %>
+<%@ page import="org.openid4java.consumer.ConsumerException" %>
+<%@ page import="org.openid4java.discovery.DiscoveryException" %>
+<%@ page import="org.openid4java.message.MessageException" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -29,6 +34,12 @@ String openId = ParamUtil.getString(request, "openId");
 %>
 
 <form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/open_id" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
+
+<liferay-ui:error exception="<%= AssociationException.class %>" message="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
+<liferay-ui:error exception="<%= ConsumerException.class %>" message="an-error-occurred-while-initializing-the-open-id-consumer" />
+<liferay-ui:error exception="<%= DiscoveryException.class %>" message="an-error-occurred-while-discovering-the-open-id-provider" />
+<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-associated-with-your-open-id-account-is-already-being-used" />
+<liferay-ui:error exception="<%= MessageException.class %>" message="an-error-occurred-while-communicating-with-the-open-id-provider" />
 
 <fieldset class="block-labels">
 	<div class="ctrl-holder">

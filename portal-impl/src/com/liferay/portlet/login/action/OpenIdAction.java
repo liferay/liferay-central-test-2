@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.login.action;
 
+import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -83,6 +84,7 @@ import org.openid4java.message.sreg.SRegResponse;
  * <a href="OpenIdAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OpenIdAction extends PortletAction {
@@ -105,7 +107,16 @@ public class OpenIdAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.READ)) {
-				readOpenIdResponse(themeDisplay, actionRequest);
+				String redirect = readOpenIdResponse(
+					themeDisplay, actionRequest, actionResponse);
+
+				if (Validator.isNull(redirect)) {
+					redirect =
+						PortalUtil.getPortalURL(actionRequest) +
+							themeDisplay.getURLSignIn();
+				}
+
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
 				sendOpenIdRequest(themeDisplay, actionRequest, actionResponse);
@@ -121,7 +132,12 @@ public class OpenIdAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
+			else if (e instanceof DuplicateUserEmailAddressException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
+			}
 			else {
+				_log.error("Error processing the OpenID login", e);
+
 				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}
 		}
@@ -156,7 +172,8 @@ public class OpenIdAction extends PortletAction {
 	}
 
 	protected String readOpenIdResponse(
-			ThemeDisplay themeDisplay, ActionRequest actionRequest)
+			ThemeDisplay themeDisplay, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -165,7 +182,8 @@ public class OpenIdAction extends PortletAction {
 
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
 
-		ParameterList params = new ParameterList(request.getParameterMap());
+		ParameterList params = new ParameterList(
+			actionRequest.getParameterMap());
 
 		DiscoveryInformation discovered =
 			(DiscoveryInformation)session.getAttribute(WebKeys.OPEN_ID_DISCO);
@@ -174,16 +192,17 @@ public class OpenIdAction extends PortletAction {
 			return null;
 		}
 
-		StringBuffer receivingURL = request.getRequestURL();
-		String queryString = request.getQueryString();
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
 
-		if ((queryString != null) && (queryString.length() > 0)) {
-			receivingURL.append(StringPool.QUESTION);
-			receivingURL.append(request.getQueryString());
-		}
+		PortletURL portletURL = actionResponseImpl.createActionURL();
+
+		portletURL.setParameter("struts_action", "/login/open_id");
+		portletURL.setParameter(Constants.CMD, Constants.READ);
+		portletURL.setParameter("saveLastPath", "0");
 
 		VerificationResult verification = manager.verify(
-			receivingURL.toString(), params, discovered);
+			portletURL.toString(), params, discovered);
 
 		Identifier verified = verification.getVerifiedId();
 
@@ -332,7 +351,8 @@ public class OpenIdAction extends PortletAction {
 		PortletURL portletURL = actionResponseImpl.createActionURL();
 
 		portletURL.setParameter("struts_action", "/login/open_id");
-		portletURL.setParameter(Constants.CMD, Constants.UPDATE);
+		portletURL.setParameter(Constants.CMD, Constants.READ);
+		portletURL.setParameter("saveLastPath", "0");
 
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
 
@@ -343,7 +363,7 @@ public class OpenIdAction extends PortletAction {
 		session.setAttribute(WebKeys.OPEN_ID_DISCO, discovered);
 
 		AuthRequest authRequest = manager.authenticate(
-			discovered, portletURL.toString());
+			discovered, portletURL.toString(), themeDisplay.getPortalURL());
 
 		try {
 			UserLocalServiceUtil.getUserByOpenId(openId);
