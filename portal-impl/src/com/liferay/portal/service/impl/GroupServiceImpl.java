@@ -24,10 +24,12 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -98,6 +100,29 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return groupLocalService.getGroup(companyId, name);
+	}
+
+	public List<Group> getManageableGroups(long userId, String actionId)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		List<Group> manageableGroups = groupLocalService.getManageableGroups(
+			userId);
+
+		if (Validator.isNull(actionId) || permissionChecker.isCompanyAdmin()) {
+			return manageableGroups;
+		}
+
+		for (Group group : manageableGroups) {
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),actionId)) {
+
+				manageableGroups.remove(group);
+			}
+		}
+
+		return manageableGroups;
 	}
 
 	public List<Group> getOrganizationsGroups(

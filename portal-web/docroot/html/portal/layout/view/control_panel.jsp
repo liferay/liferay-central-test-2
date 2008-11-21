@@ -45,7 +45,7 @@ if (ppid.equals(PortletKeys.EXPANDO)) {
 String category = PortalUtil.getControlPanelCategory(ppid);
 
 if (Validator.isNull(category)) {
-	category = PortletCategoryKeys.CONTENT;
+	category = "control-panel";
 }
 %>
 
@@ -66,6 +66,11 @@ if (Validator.isNull(category)) {
 	else if (category.equals(PortletCategoryKeys.SERVER)) {
 		panelCategory = "panel-manage-server";
 	}
+	else {
+		panelCategory = "panel-manage-frontpage";
+	}
+
+	Group currentGroup = themeDisplay.getScopeGroup();
 	%>
 
 	<div id="content-wrapper">
@@ -77,7 +82,96 @@ if (Validator.isNull(category)) {
 			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
 				<table class="panel-page-content-menu">
 				<tr>
-					<td></td>
+					<td>
+						<c:choose>
+							<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
+								<h2><liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= currentGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : currentGroup.getDescriptiveName() %></a></h2>
+
+								<div class="lfr-panel-container lfr-floating-container" id="myPanel">
+
+									<%
+									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
+									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.VIEW);
+									%>
+
+									<c:if test="<%= !manageableGroups.isEmpty() %>">
+										<div class="lfr-panel lfr-collapsible">
+											<div class="lfr-panel-titlebar lfr-has-button">
+												<h3 class="lfr-panel-title"><span><liferay-ui:message key="communities" /></span></h3>
+
+												<a href="javascript: ;" class="lfr-panel-button"></a>
+											</div>
+
+											<div class="lfr-panel-content">
+												<ul>
+													<%
+													for (int i = 0; i < manageableGroups.size(); i++) {
+														Group group = manageableGroups.get(i);
+													%>
+
+														<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
+															</ul>
+															<ul>
+														</c:if>
+
+														<li><a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a></li>
+
+													<%
+													}
+													%>
+												</ul>
+
+											</div>
+										</div>
+									</c:if>
+
+									<c:if test="<%= !manageableOrganizations.isEmpty() %>">
+										<div class="lfr-panel lfr-collapsible">
+											<div class="lfr-panel-titlebar lfr-has-button">
+												<h3 class="lfr-panel-title"><span><liferay-ui:message key="organizations" /></span></h3>
+
+												<a href="javascript: ;" class="lfr-panel-button"></a>
+											</div>
+
+											<div class="lfr-panel-content">
+												<ul>
+													<%
+													for (int i = 0; i < manageableOrganizations.size(); i++) {
+														Organization organization = manageableOrganizations.get(i);
+													%>
+
+														<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
+															</ul>
+															<ul>
+														</c:if>
+
+														<li><a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= organization.getName() %></a></li>
+
+													<%
+													}
+													%>
+
+												</ul>
+											</div>
+										</div>
+									</c:if>
+
+								</div>
+
+							</c:when>
+							<c:when test="<%= category.equals(PortletCategoryKeys.PORTAL) %>">
+								<h2>
+									<liferay-ui:message key="portal" />
+									<c:if test="<%= CompanyLocalServiceUtil.getCompaniesCount() > 1 %>">
+										<%= company.getName() %>
+									</c:if>
+								</h2>
+							</c:when>
+							<c:otherwise>
+								<h2><liferay-ui:message key='<%= "category." + category %>' /></h2>
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td align="right">
 
 						<%
@@ -155,3 +249,25 @@ else {
 		</table>
 	</div>
 </c:if>
+
+<style type="text/css">
+	.lfr-group-selector {
+		background: url(<%= themeDisplay.getPathThemeImages()%>/arrows/05_down.png) no-repeat 100% 50%;
+		padding: 2px;
+		padding-right: 20px;
+	}
+</style>
+
+<script>
+	jQuery(
+		function () {
+			new Liferay.FloatingPanel(
+				{
+				container: '#myPanel',
+				trigger: '.lfr-group-selector',
+				paging: true
+				}
+			);
+		}
+	);
+</script>

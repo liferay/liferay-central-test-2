@@ -200,6 +200,13 @@ Liferay.Service.Portal.Group = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getManageableGroups: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getManageableGroups";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getOrganizationsGroups: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getOrganizationsGroups";

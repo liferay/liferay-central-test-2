@@ -23,6 +23,10 @@ body {
 	width: 100%;
 }
 
+.lfr-ctrl-panel h2 {
+	margin: 0;
+}
+
 .lfr-ctrl-panel #content-wrapper {
 	margin: 0;
 	width: auto;

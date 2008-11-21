@@ -89,6 +89,13 @@ public class GroupServiceUtil {
 		return getService().getGroup(companyId, name);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getManageableGroups(
+		long userId, java.lang.String actionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getManageableGroups(userId, actionId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
 		java.util.List<com.liferay.portal.model.Organization> organizations) {
 		return getService().getOrganizationsGroups(organizations);

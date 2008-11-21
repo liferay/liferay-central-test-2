@@ -167,6 +167,13 @@ public class GroupLocalServiceUtil {
 		return getService().getLayoutGroup(companyId, plid);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getManageableGroups(
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getManageableGroups(userId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
 		throws com.liferay.portal.SystemException {
 		return getService().getNullFriendlyURLGroups();

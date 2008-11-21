@@ -75,21 +75,6 @@ if (Validator.isNull(portletTitle)) {
 
 Group group = layout.getGroup();
 
-if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
-	String controlPanelCategory = GetterUtil.getString(PortalUtil.getControlPanelCategory(portletDisplay.getId()));
-
-	if (controlPanelCategory.equals(PortletCategoryKeys.CONTENT)) {
-		Group scopeGroup = themeDisplay.getScopeGroup();
-
-		portletTitle = LanguageUtil.format(pageContext, "x-in-x", new Object[] {portletTitle, scopeGroup.getDescriptiveName()});
-	}
-	else if (controlPanelCategory.equals(PortletCategoryKeys.PORTAL)) {
-		if (CompanyLocalServiceUtil.getCompaniesCount() > 1) {
-			portletTitle = LanguageUtil.format(pageContext, "x-in-x", new Object[] {portletTitle, company.getName()});
-		}
-	}
-}
-
 portletDisplay.setTitle(portletTitle);
 
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);

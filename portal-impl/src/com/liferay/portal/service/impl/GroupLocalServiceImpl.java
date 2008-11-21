@@ -66,6 +66,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.Normalizer;
+import com.liferay.util.UniqueList;
 
 import java.io.File;
 
@@ -432,6 +433,28 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(Layout.class);
 
 		return groupPersistence.findByC_C_C(companyId, classNameId, plid);
+	}
+
+	/**
+	 * Gets a list of groups that a user has access to administrate.
+	 *
+	 * @param userId the user id of the user
+	 * @return a list of groups
+	 */
+	public List<Group> getManageableGroups(long userId)
+		throws PortalException, SystemException {
+
+		List<Group> manageableGroups =new UniqueList<Group>();
+
+		User user = userLocalService.getUser(userId);
+
+		if (user.hasPrivateLayouts() || user.hasPublicLayouts() ) {
+			manageableGroups.add(user.getGroup());
+		}
+
+		manageableGroups.addAll(userPersistence.getGroups(userId));
+
+		return manageableGroups;
 	}
 
 	public List<Group> getNullFriendlyURLGroups() throws SystemException {
