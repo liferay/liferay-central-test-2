@@ -27,8 +27,8 @@
 <%
 User selUser = (User)request.getAttribute("user.selUser");
 
-String languageId = BeanParamUtil.getString(selUser, request, "languageId");
-String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId");
+String languageId = BeanParamUtil.getString(selUser, request, "languageId", user.getLanguageId());
+String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId", user.getTimeZoneId());
 %>
 
 <h3><liferay-ui:message key="display-settings" /></h3>
