@@ -42,10 +42,9 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
-<liferay-ui:tabs
-	names="roles"
-	backURL="<%= redirect %>"
-/>
+<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
+</liferay-util:include>
 
 <c:choose>
 	<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">

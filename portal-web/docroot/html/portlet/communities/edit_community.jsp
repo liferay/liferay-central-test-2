@@ -48,10 +48,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= friendlyURL %>" />
 
-<liferay-ui:tabs
-	names="community"
-	backURL="<%= redirect %>"
-/>
+<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
+</liferay-util:include>
 
 <liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
 <liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />

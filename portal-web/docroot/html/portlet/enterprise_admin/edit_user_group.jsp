@@ -44,10 +44,9 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroupId %>" />
 
-<liferay-ui:tabs
-	names="user-groups"
-	backURL="<%= redirect %>"
-/>
+<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view-all" %>' />
+</liferay-util:include>
 
 <liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />
 <liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="this-is-a-required-user-group" />
