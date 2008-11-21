@@ -127,6 +127,12 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
+		long groupId, long userId, boolean subscribed,
+		boolean includeAnonymous, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGroupThreadsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -137,6 +143,11 @@ public interface MBThreadLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGroupThreadsCount(long groupId, long userId,
 		boolean subscribed) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getGroupThreadsCount(long groupId, long userId,
+		boolean subscribed, boolean includeAnonymous)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBThread getThread(

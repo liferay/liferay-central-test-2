@@ -56,6 +56,9 @@ public class MBThreadFinderImpl
 	public static String COUNT_BY_G_U =
 		MBThreadFinder.class.getName() + ".countByG_U";
 
+	public static String COUNT_BY_G_U_A =
+		MBThreadFinder.class.getName() + ".countByG_U_A";
+
 	public static String COUNT_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".countByS_G_U";
 
@@ -64,6 +67,9 @@ public class MBThreadFinderImpl
 
 	public static String FIND_BY_G_U =
 		MBThreadFinder.class.getName() + ".findByG_U";
+
+	public static String FIND_BY_G_U_A =
+		MBThreadFinder.class.getName() + ".findByG_U_A";
 
 	public static String FIND_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".findByS_G_U";
@@ -186,6 +192,47 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	public int countByG_U_A(
+			long groupId, long userId, boolean anonymous)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByS_G_U(long groupId, long userId) throws SystemException {
 		Session session = null;
 
@@ -271,6 +318,38 @@ public class MBThreadFinderImpl
 
 			qPos.add(groupId);
 			qPos.add(userId);
+
+			return (List<MBThread>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<MBThread> findByG_U_A(
+			long groupId, long userId, boolean anonymous, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_A);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBThread", MBThreadImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
 
 			return (List<MBThread>)QueryUtil.list(
 				q, getDialect(), start, end);

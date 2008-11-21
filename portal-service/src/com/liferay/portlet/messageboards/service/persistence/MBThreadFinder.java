@@ -38,6 +38,9 @@ public interface MBThreadFinder {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByG_U_A(long groupId, long userId, boolean anonymous)
+		throws com.liferay.portal.SystemException;
+
 	public int countByS_G_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -47,6 +50,10 @@ public interface MBThreadFinder {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U(
 		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U_A(
+		long groupId, long userId, boolean anonymous, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U(

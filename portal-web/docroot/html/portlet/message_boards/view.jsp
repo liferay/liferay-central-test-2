@@ -573,7 +573,16 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		List results = null;
 
-		if (tabs1.equals("my_subscriptions")) {
+		if (tabs1.equals("my_posts")) {
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId);
+
+			searchContainer.setTotal(total);
+
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+		}
+		else if (tabs1.equals("my_subscriptions")) {
 			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, true);
 
 			searchContainer.setTotal(total);
@@ -582,12 +591,12 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			searchContainer.setResults(results);
 		}
-		else {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId);
+		else if (tabs1.equals("recent_posts")) {
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, false, false);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, false, false, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
