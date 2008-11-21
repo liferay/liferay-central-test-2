@@ -38,6 +38,7 @@ import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
@@ -478,8 +479,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		String outPassword = null;
 		boolean mailingListActive = false;
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setPlid(context.getPlid());
 
 		if ((parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
 			(parentCategoryId == category.getParentCategoryId())) {
@@ -511,14 +516,13 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingCategory == null) {
 					existingCategory = MBCategoryLocalServiceUtil.addCategory(
-						category.getUuid(), userId, plid, parentCategoryId,
+						category.getUuid(), userId, parentCategoryId,
 						category.getName(), category.getDescription(),
 						emailAddress, inProtocol, inServerName, inServerPort,
 						inUseSSL, inUserName, inPassword, inReadInterval,
 						outEmailAddress, outCustom, outServerName,
 						outServerPort, outUseSSL, outUserName, outPassword,
-						mailingListActive, addCommunityPermissions,
-						addGuestPermissions);
+						mailingListActive, serviceContext);
 				}
 				else {
 					existingCategory =
@@ -534,13 +538,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingCategory = MBCategoryLocalServiceUtil.addCategory(
-					userId, plid, parentCategoryId, category.getName(),
+					userId, parentCategoryId, category.getName(),
 					category.getDescription(), emailAddress, inProtocol,
 					inServerName, inServerPort, inUseSSL, inUserName,
 					inPassword, inReadInterval, outEmailAddress, outCustom,
 					outServerName, outServerPort, outUseSSL, outUserName,
-					outPassword, mailingListActive, addCommunityPermissions,
-					addGuestPermissions);
+					outPassword, mailingListActive, serviceContext);
 			}
 
 			categoryPKs.put(

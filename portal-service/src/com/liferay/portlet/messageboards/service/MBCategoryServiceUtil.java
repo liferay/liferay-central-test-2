@@ -46,7 +46,7 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBCategoryServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,
 		java.lang.String inProtocol, java.lang.String inServerName,
 		int inServerPort, boolean inUseSSL, java.lang.String inUserName,
@@ -54,37 +54,16 @@ public class MBCategoryServiceUtil {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean mailingListActive,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addCategory(plid, parentCategoryId, name, description,
+				   .addCategory(parentCategoryId, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String emailAddress,
-		java.lang.String inProtocol, java.lang.String inServerName,
-		int inServerPort, boolean inUseSSL, java.lang.String inUserName,
-		java.lang.String inPassword, int inReadInterval,
-		java.lang.String outEmailAddress, boolean outCustom,
-		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
-		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addCategory(plid, parentCategoryId, name, description,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, communityPermissions, guestPermissions);
+			mailingListActive, serviceContext);
 	}
 
 	public static void deleteCategory(long categoryId)

@@ -55,7 +55,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface MBCategoryService {
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,
 		java.lang.String inProtocol, java.lang.String inServerName,
 		int inServerPort, boolean inUseSSL, java.lang.String inUserName,
@@ -63,22 +63,8 @@ public interface MBCategoryService {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String emailAddress,
-		java.lang.String inProtocol, java.lang.String inServerName,
-		int inServerPort, boolean inUseSSL, java.lang.String inUserName,
-		java.lang.String inPassword, int inReadInterval,
-		java.lang.String outEmailAddress, boolean outCustom,
-		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
-		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		boolean mailingListActive,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -40,6 +42,7 @@ import com.liferay.portlet.messageboards.MailingListOutEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListOutServerNameException;
 import com.liferay.portlet.messageboards.MailingListOutUserNameException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -196,10 +199,8 @@ public class EditCategoryAction extends PortletAction {
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentCategory");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBCategory.class.getName(), actionRequest);
 
 		if (categoryId <= 0) {
 			if (PropsValues.
@@ -211,12 +212,11 @@ public class EditCategoryAction extends PortletAction {
 			// Add category
 
 			MBCategoryServiceUtil.addCategory(
-				layout.getPlid(), parentCategoryId, name, description,
-				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-				inUserName, inPassword, inReadInterval, outEmailAddress,
-				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-				outPassword, mailingListActive, communityPermissions,
-				guestPermissions);
+				parentCategoryId, name, description, emailAddress, inProtocol,
+				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+				inReadInterval, outEmailAddress, outCustom, outServerName,
+				outServerPort, outUseSSL, outUserName, outPassword,
+				mailingListActive, serviceContext);
 		}
 		else {
 

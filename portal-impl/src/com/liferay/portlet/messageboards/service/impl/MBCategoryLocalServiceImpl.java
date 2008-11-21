@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -66,82 +66,38 @@ import org.apache.commons.logging.LogFactory;
 public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 	public MBCategory addCategory(
-			long userId, long plid, long parentCategoryId, String name,
-			String description, String emailAddress, String inProtocol,
-			String inServerName, int inServerPort, boolean inUseSSL,
-			String inUserName, String inPassword,
-			int inReadInterval, String outEmailAddress, boolean outCustom,
-			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName, String outPassword, boolean mailingListActive,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long userId, long parentCategoryId, String name, String description,
+			String emailAddress, String inProtocol, String inServerName,
+			int inServerPort, boolean inUseSSL, String inUserName,
+			String inPassword, int inReadInterval, String outEmailAddress,
+			boolean outCustom,String outServerName, int outServerPort,
+			boolean outUseSSL,String outUserName, String outPassword,
+			boolean mailingListActive, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addCategory(
-			null, userId, plid, parentCategoryId, name, description,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
+			null, userId, parentCategoryId, name, description, emailAddress,
+			inProtocol, inServerName, inServerPort, inUseSSL,inUserName,
+			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			mailingListActive, serviceContext);
 	}
 
 	public MBCategory addCategory(
-			String uuid, long userId, long plid, long parentCategoryId,
+			String uuid, long userId, long parentCategoryId,
 			String name, String description, String emailAddress,
 			String inProtocol, String inServerName, int inServerPort,
 			boolean inUseSSL, String inUserName, String inPassword,
 			int inReadInterval, String outEmailAddress, boolean outCustom,
 			String outServerName, int outServerPort, boolean outUseSSL,
 			String outUserName, String outPassword, boolean mailingListActive,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addCategory(
-			uuid, userId, plid, parentCategoryId, name, description,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public MBCategory addCategory(
-			long userId, long plid, long parentCategoryId, String name,
-			String description, String emailAddress, String inProtocol,
-			String inServerName, int inServerPort, boolean inUseSSL,
-			String inUserName, String inPassword, int inReadInterval,
-			String outEmailAddress, boolean outCustom, String outServerName,
-			int outServerPort, boolean outUseSSL, String outUserName,
-			String outPassword, boolean mailingListActive,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addCategory(
-			null, userId, plid, parentCategoryId, name, description,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public MBCategory addCategory(
-			String uuid, long userId, long plid, long parentCategoryId,
-			String name, String description, String emailAddress,
-			String inProtocol, String inServerName, int inServerPort,
-			boolean inUseSSL, String inUserName, String inPassword,
-			int inReadInterval, String outEmailAddress, boolean outCustom,
-			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName, String outPassword, boolean mailingListActive,
-			Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
@@ -166,16 +122,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addCategoryResources(
-				category, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				category, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addCategoryResources(
-				category, communityPermissions, guestPermissions);
+				category, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		// Mailing list

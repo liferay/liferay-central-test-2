@@ -82,7 +82,7 @@ import java.rmi.RemoteException;
  */
 public class MBCategoryServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,
 		java.lang.String inProtocol, java.lang.String inServerName,
 		int inServerPort, boolean inUseSSL, java.lang.String inUserName,
@@ -90,45 +90,16 @@ public class MBCategoryServiceSoap {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		boolean mailingListActive,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
-					parentCategoryId, name, description, emailAddress,
-					inProtocol, inServerName, inServerPort, inUseSSL,
-					inUserName, inPassword, inReadInterval, outEmailAddress,
-					outCustom, outServerName, outServerPort, outUseSSL,
-					outUserName, outPassword, mailingListActive,
-					addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String emailAddress,
-		java.lang.String inProtocol, java.lang.String inServerName,
-		int inServerPort, boolean inUseSSL, java.lang.String inUserName,
-		java.lang.String inPassword, int inReadInterval,
-		java.lang.String outEmailAddress, boolean outCustom,
-		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
-		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
-					parentCategoryId, name, description, emailAddress,
-					inProtocol, inServerName, inServerPort, inUseSSL,
-					inUserName, inPassword, inReadInterval, outEmailAddress,
-					outCustom, outServerName, outServerPort, outUseSSL,
-					outUserName, outPassword, mailingListActive,
-					communityPermissions, guestPermissions);
+			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(parentCategoryId,
+					name, description, emailAddress, inProtocol, inServerName,
+					inServerPort, inUseSSL, inUserName, inPassword,
+					inReadInterval, outEmailAddress, outCustom, outServerName,
+					outServerPort, outUseSSL, outUserName, outPassword,
+					mailingListActive, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}

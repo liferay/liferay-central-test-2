@@ -23,8 +23,11 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -97,17 +100,22 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		String outUserName = null;
 		String outPassword = null;
 		boolean mailingListActive = false;
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			TestPropsValues.LAYOUT_PLID);
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(layout.getGroupId());
+		serviceContext.setPlid(layout.getPlid());
 
 		_category = MBCategoryServiceUtil.addCategory(
-			TestPropsValues.LAYOUT_PLID,
 			MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, addCommunityPermissions, addGuestPermissions);
+			mailingListActive, serviceContext);
 	}
 
 	protected void tearDown() throws Exception {

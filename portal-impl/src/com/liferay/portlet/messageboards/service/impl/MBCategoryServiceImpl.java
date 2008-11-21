@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
@@ -41,49 +42,25 @@ import java.util.List;
 public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public MBCategory addCategory(
-			long plid, long parentCategoryId, String name, String description,
+			long parentCategoryId, String name, String description,
 			String emailAddress, String inProtocol, String inServerName,
 			int inServerPort, boolean inUseSSL, String inUserName,
 			String inPassword, int inReadInterval, String outEmailAddress,
 			boolean outCustom, String outServerName, int outServerPort,
 			boolean outUseSSL, String outUserName, String outPassword,
-			boolean mailingListActive, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			boolean mailingListActive, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), plid, parentCategoryId,
+			getPermissionChecker(), serviceContext.getPlid(), parentCategoryId,
 			ActionKeys.ADD_CATEGORY);
 
 		return mbCategoryLocalService.addCategory(
-			getUserId(), plid, parentCategoryId, name, description,
+			getUserId(), parentCategoryId, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public MBCategory addCategory(
-			long plid, long parentCategoryId, String name, String description,
-			String emailAddress, String inProtocol, String inServerName,
-			int inServerPort, boolean inUseSSL, String inUserName,
-			String inPassword, int inReadInterval, String outEmailAddress,
-			boolean outCustom, String outServerName, int outServerPort,
-			boolean outUseSSL, String outUserName, String outPassword,
-			boolean mailingListActive, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), plid, parentCategoryId,
-			ActionKeys.ADD_CATEGORY);
-
-		return mbCategoryLocalService.addCategory(
-			getUserId(), plid, parentCategoryId, name, description,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, communityPermissions, guestPermissions);
+			mailingListActive, serviceContext);
 	}
 
 	public void deleteCategory(long categoryId)
