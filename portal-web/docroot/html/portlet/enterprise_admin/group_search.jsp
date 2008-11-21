@@ -32,16 +32,14 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 %>
 
 <div>
-	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
-
 	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+
+	<input type="submit" value="<liferay-ui:message key="search" />" />
 </div>
 
 <br />
 
 <div>
-	<input type="submit" value="<liferay-ui:message key="search-communities" />" />
-
 	<c:if test="<%= showAddButton && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
 		<input type="button" value="<liferay-ui:message key="add-community" />" onClick="<portlet:namespace />addGroup();" />
 	</c:if>

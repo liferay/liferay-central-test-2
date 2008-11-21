@@ -50,13 +50,19 @@ pageContext.setAttribute("portletURL", portletURL);
 <form action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 
-<c:if test="<%= showTabs1 %>">
-	<liferay-ui:tabs
-		names="communities-owned,communities-joined,available-communities"
-		url="<%= portletURL.toString() %>"
-	/>
-</c:if>
-
+<c:choose>
+	<c:when test="<%= showTabs1 %>">
+		<liferay-ui:tabs
+			names="communities-owned,communities-joined,available-communities"
+			url="<%= portletURL.toString() %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value="view-all" />
+		</liferay-util:include>
+	</c:otherwise>
+</c:choose>
 <%
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 %>
@@ -64,7 +70,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 <liferay-ui:search-form
 	page="/html/portlet/enterprise_admin/group_search.jsp"
 	searchContainer="<%= searchContainer %>"
-	showAddButton="<%= true %>"
+	showAddButton="<%= showTabs1 %>"
 />
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
