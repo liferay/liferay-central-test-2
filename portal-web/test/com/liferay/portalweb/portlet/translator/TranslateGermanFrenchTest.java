@@ -37,22 +37,7 @@ public class TranslateGermanFrenchTest extends BaseTestCase {
 			RuntimeVariables.replace("label=German to French"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Mon nom est un traducteur coulant des Liferay, sous plus de 6 millions de formes de communication.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Mon nom est un traducteur coulant des Liferay, sous plus de 6 millions de formes de communication."));
 	}
 }
