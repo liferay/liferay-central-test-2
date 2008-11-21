@@ -63,6 +63,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		</liferay-util:include>
 	</c:otherwise>
 </c:choose>
+
 <%
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 %>
