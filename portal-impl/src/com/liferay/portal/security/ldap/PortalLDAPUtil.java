@@ -54,6 +54,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -315,15 +316,28 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, String fullDistinguishedName)
 		throws Exception {
 
+		return getGroupAttributes(companyId, ctx, fullDistinguishedName, false);
+	}
+
+	public static Attributes getGroupAttributes(
+			long companyId, LdapContext ctx, String fullDistinguishedName,
+			boolean includeReferenceAttributes)
+		throws Exception {
+
 		Properties groupMappings = getGroupMappings(companyId);
 
-		String[] mappedGroupAttributeIds = {
-			groupMappings.getProperty("groupName"),
-			groupMappings.getProperty("description")
-		};
+		List<String> mappedGroupAttributeIds = new ArrayList<String>();
+
+		mappedGroupAttributeIds.add(groupMappings.getProperty("groupName"));
+		mappedGroupAttributeIds.add(groupMappings.getProperty("description"));
+
+		if (includeReferenceAttributes) {
+			mappedGroupAttributeIds.add(groupMappings.getProperty("user"));
+		}
 
 		return _getAttributes(
-			ctx, fullDistinguishedName, mappedGroupAttributeIds);
+			ctx, fullDistinguishedName,
+			mappedGroupAttributeIds.toArray(new String[0]));
 	}
 
 	public static Properties getGroupMappings(long companyId)
@@ -537,7 +551,8 @@ public class PortalLDAPUtil {
 					SearchResult result = enu.nextElement();
 
 					Attributes attrs = getGroupAttributes(
-						companyId, ctx, getNameInNamespace(companyId, result));
+						companyId, ctx, getNameInNamespace(companyId, result),
+						true);
 
 					importLDAPGroup(companyId, ctx, attrs, true);
 				}
