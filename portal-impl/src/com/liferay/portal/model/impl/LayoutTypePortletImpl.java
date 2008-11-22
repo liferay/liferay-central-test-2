@@ -48,6 +48,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.JS;
 import com.liferay.util.PwdGenerator;
 
 import java.util.ArrayList;
@@ -307,6 +308,8 @@ public class LayoutTypePortletImpl
 	public String addPortletId(
 		long userId, String portletId, String columnId, int columnPos,
 		boolean checkPermission) {
+
+		portletId = JS.getSafeName(portletId);
 
 		Layout layout = getLayout();
 
@@ -999,7 +1002,14 @@ public class LayoutTypePortletImpl
 
 		String selector2 = layout.getFriendlyURL();
 
-		return PropsUtil.getArray(position, new Filter(selector1, selector2));
+		String[] portletIds = PropsUtil.getArray(
+			position, new Filter(selector1, selector2));
+
+		for (int i = 0; i < portletIds.length; i++) {
+			portletIds[i] = JS.getSafeName(portletIds[i]);
+		}
+
+		return portletIds;
 	}
 
 	protected List<Portlet> getStaticPortlets(String position)
