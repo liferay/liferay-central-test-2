@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
 
+import java.util.GregorianCalendar;
+
 /**
  * <a href="UserAttributes.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,9 +44,25 @@ public class UserAttributes {
 
 	public static final String USER_NAME_FULL = "user.name.full";
 
-	// See page 119 of the JSR 168 spec
+	// See page 249 of the JSR 286 spec
 
 	public static final String USER_BDATE = "user.bdate";
+
+	public static final String USER_BDATE_DAY = "user.bdate.ymd.day";
+
+	public static final String USER_BDATE_FRACTIONSECOND = "user.bdate.fractionsecond";
+
+	public static final String USER_BDATE_HOUR = "user.bdate.hms.hour";
+
+	public static final String USER_BDATE_MINUTE = "user.bdate.hms.minute";
+
+	public static final String USER_BDATE_MONTH = "user.bdate.ymd.month";
+
+	public static final String USER_BDATE_SECOND = "user.bdate.hms.second";
+
+	public static final String USER_BDATE_TIMEZONE = "user.bdate.timezone";
+
+	public static final String USER_BDATE_YEAR = "user.bdate.ymd.year";
 
 	public static final String USER_GENDER = "user.gender";
 
@@ -182,6 +200,8 @@ public class UserAttributes {
 
 	public static final String USER_BUSINESS_INFO_ONLINE_URI = "user.business-info.online.uri";
 
+    public static final String USER_LOGIN_ID = "user.login.id";
+
 	public UserAttributes(User user) {
 		_user = user;
 
@@ -216,6 +236,101 @@ public class UserAttributes {
 		else if (name.equals(USER_BDATE)) {
 			return _user.getBirthday().toString();
 		}
+		else if (name.equals(USER_BDATE_DAY)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+	            returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.DATE));
+            }
+
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_FRACTIONSECOND)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+	            returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.MILLISECOND));
+            }
+
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_HOUR)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+	            returnValue = Integer.toString(
+		            _gregorianCalendar.get(GregorianCalendar.HOUR));
+            }
+
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_MINUTE)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+                returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.MINUTE));
+            }
+
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_MONTH)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+                returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.MONTH) + 1);
+            }
+
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_SECOND)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+                returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.SECOND));
+            }
+
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_TIMEZONE)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+                returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.ZONE_OFFSET));
+            }
+            return returnValue;
+		}
+		else if (name.equals(USER_BDATE_YEAR)) {
+			String returnValue = null;
+
+            if (_user.getBirthday() != null) {
+                _gregorianCalendar.setTime(_user.getBirthday());
+
+                returnValue = Integer.toString(
+	                _gregorianCalendar.get(GregorianCalendar.YEAR));
+            }
+
+            return returnValue;
+		}
 		else if (name.equals(USER_GENDER)) {
 			return _user.isMale() ? "male" : "female";
 		}
@@ -244,6 +359,9 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_NAME_NICKNAME)) {
+			return _user.getScreenName();
+		}
+		else if (name.equals(USER_LOGIN_ID)) {
 			return _user.getScreenName();
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_NAME)) {
@@ -458,5 +576,6 @@ public class UserAttributes {
 	private User _user;
 	private Address _homeAddress;
 	private Address _bizAddress;
+	private GregorianCalendar _gregorianCalendar = new GregorianCalendar();
 
 }
