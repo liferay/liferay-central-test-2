@@ -33,6 +33,8 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -46,6 +48,7 @@ import com.liferay.portlet.softwarecatalog.ProductEntryScreenshotsException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
 
@@ -277,20 +280,17 @@ public class EditProductEntryAction extends PortletAction {
 		List<byte[]> thumbnails = getThumbnails(uploadRequest);
 		List<byte[]> fullImages = getFullImages(uploadRequest);
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			SCProductEntry.class.getName(), actionRequest);
 
 		if (productEntryId <= 0) {
 
 			// Add product entry
 
 			SCProductEntryServiceUtil.addProductEntry(
-				layout.getPlid(), name, type, tags, shortDescription,
-				longDescription, pageURL, author, repoGroupId, repoArtifactId,
-				licenseIds, thumbnails, fullImages, communityPermissions,
-				guestPermissions);
+				name, type, tags, shortDescription, longDescription, pageURL,
+				author, repoGroupId, repoArtifactId, licenseIds, thumbnails,
+				fullImages, serviceContext);
 		}
 		else {
 

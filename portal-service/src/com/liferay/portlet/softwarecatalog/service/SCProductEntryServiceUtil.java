@@ -46,38 +46,19 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCProductEntryServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		long plid, java.lang.String name, java.lang.String type,
-		java.lang.String tags, java.lang.String shortDescription,
-		java.lang.String longDescription, java.lang.String pageURL,
-		java.lang.String author, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String name, java.lang.String type, java.lang.String tags,
+		java.lang.String shortDescription, java.lang.String longDescription,
+		java.lang.String pageURL, java.lang.String author,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.util.List<byte[]> thumbnails,
+		java.util.List<byte[]> fullImages,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addProductEntry(plid, name, type, tags, shortDescription,
+				   .addProductEntry(name, type, tags, shortDescription,
 			longDescription, pageURL, author, repoGroupId, repoArtifactId,
-			licenseIds, thumbnails, fullImages, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		long plid, java.lang.String name, java.lang.String type,
-		java.lang.String tags, java.lang.String shortDescription,
-		java.lang.String longDescription, java.lang.String pageURL,
-		java.lang.String author, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addProductEntry(plid, name, type, tags, shortDescription,
-			longDescription, pageURL, author, repoGroupId, repoArtifactId,
-			licenseIds, thumbnails, fullImages, communityPermissions,
-			guestPermissions);
+			licenseIds, thumbnails, fullImages, serviceContext);
 	}
 
 	public static void deleteProductEntry(long productEntryId)

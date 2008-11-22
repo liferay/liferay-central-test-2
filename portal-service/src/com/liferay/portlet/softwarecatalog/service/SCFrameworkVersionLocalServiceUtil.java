@@ -104,40 +104,14 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long userId, long plid, java.lang.String name, java.lang.String url,
-		boolean active, int priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFrameworkVersion(userId, plid, name, url, active,
-			priority, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long userId, long plid, java.lang.String name, java.lang.String url,
-		boolean active, int priority, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFrameworkVersion(userId, plid, name, url, active,
-			priority, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long userId, long plid, java.lang.String name, java.lang.String url,
+		long userId, java.lang.String name, java.lang.String url,
 		boolean active, int priority,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFrameworkVersion(userId, plid, name, url, active,
-			priority, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+				   .addFrameworkVersion(userId, name, url, active, priority,
+			serviceContext);
 	}
 
 	public static void addFrameworkVersionResources(long frameworkVersionId,

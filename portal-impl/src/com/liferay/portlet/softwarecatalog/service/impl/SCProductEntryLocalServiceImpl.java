@@ -44,7 +44,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -87,48 +87,17 @@ public class SCProductEntryLocalServiceImpl
 	extends SCProductEntryLocalServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(
-			long userId, long plid, String name, String type, String tags,
+			long userId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
 			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addProductEntry(
-			userId, plid, name, type, tags, shortDescription, longDescription,
-			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-			thumbnails, fullImages, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public SCProductEntry addProductEntry(
-			long userId, long plid, String name, String type, String tags,
-			String shortDescription, String longDescription, String pageURL,
-			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addProductEntry(
-			userId, plid, name, type, tags, shortDescription, longDescription,
-			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-			thumbnails, fullImages, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public SCProductEntry addProductEntry(
-			long userId, long plid, String name, String type, String tags,
-			String shortDescription, String longDescription, String pageURL,
-			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Product entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		tags = getTags(tags);
 		repoGroupId = repoGroupId.trim().toLowerCase();
 		repoArtifactId = repoArtifactId.trim().toLowerCase();
@@ -163,16 +132,17 @@ public class SCProductEntryLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addProductEntryResources(
-				productEntry, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				productEntry, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addProductEntryResources(
-				productEntry, communityPermissions, guestPermissions);
+				productEntry, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		// Licenses

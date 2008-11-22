@@ -86,38 +86,14 @@ public class SCProductVersionServiceSoap {
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
 		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue =
 				SCProductVersionServiceUtil.addProductVersion(productEntryId,
 					version, changeLog, downloadPageURL, directDownloadURL,
 					testDirectDownloadURL, repoStoreArtifact,
-					frameworkVersionIds, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap addProductVersion(
-		long productEntryId, java.lang.String version,
-		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue =
-				SCProductVersionServiceUtil.addProductVersion(productEntryId,
-					version, changeLog, downloadPageURL, directDownloadURL,
-					testDirectDownloadURL, repoStoreArtifact,
-					frameworkVersionIds, communityPermissions, guestPermissions);
+					frameworkVersionIds, serviceContext);
 
 			return com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap.toSoapModel(returnValue);
 		}

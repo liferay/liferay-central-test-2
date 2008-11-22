@@ -73,39 +73,20 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
  *
  */
 public class SCProductEntryServiceJSON {
-	public static JSONObject addProductEntry(long plid, java.lang.String name,
-		java.lang.String type, java.lang.String tags,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String author,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.List<byte[]> thumbnails,
-		java.util.List<byte[]> fullImages, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(plid,
-				name, type, tags, shortDescription, longDescription, pageURL,
-				author, repoGroupId, repoArtifactId, licenseIds, thumbnails,
-				fullImages, addCommunityPermissions, addGuestPermissions);
-
-		return SCProductEntryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addProductEntry(long plid, java.lang.String name,
+	public static JSONObject addProductEntry(java.lang.String name,
 		java.lang.String type, java.lang.String tags,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String author,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
 		java.util.List<byte[]> fullImages,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(plid,
-				name, type, tags, shortDescription, longDescription, pageURL,
-				author, repoGroupId, repoArtifactId, licenseIds, thumbnails,
-				fullImages, communityPermissions, guestPermissions);
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(name,
+				type, tags, shortDescription, longDescription, pageURL, author,
+				repoGroupId, repoArtifactId, licenseIds, thumbnails,
+				fullImages, serviceContext);
 
 		return SCProductEntryJSONSerializer.toJSONObject(returnValue);
 	}

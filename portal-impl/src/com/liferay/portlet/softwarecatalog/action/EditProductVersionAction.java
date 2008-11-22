@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
@@ -34,6 +36,7 @@ import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionNameException;
 import com.liferay.portlet.softwarecatalog.UnavailableProductVersionDirectDownloadURLException;
+import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -152,10 +155,8 @@ public class EditProductVersionAction extends PortletAction {
 		long[] frameworkVersionIds = ParamUtil.getLongValues(
 			actionRequest, "frameworkVersions");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			SCProductVersion.class.getName(), actionRequest);
 
 		if (productVersionId <= 0) {
 
@@ -164,7 +165,7 @@ public class EditProductVersionAction extends PortletAction {
 			SCProductVersionServiceUtil.addProductVersion(
 				productEntryId, version, changeLog, downloadPageURL,
 				directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-				frameworkVersionIds, communityPermissions, guestPermissions);
+				frameworkVersionIds, serviceContext);
 		}
 		else {
 

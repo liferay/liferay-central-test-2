@@ -24,7 +24,6 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -74,227 +73,94 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
  */
 public class SCProductEntryServiceHttp {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
-		java.lang.String type, java.lang.String tags,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String author,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.List<byte[]> thumbnails,
-		java.util.List<byte[]> fullImages, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = type;
-
-			if (type == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = tags;
-
-			if (tags == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = shortDescription;
-
-			if (shortDescription == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = longDescription;
-
-			if (longDescription == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = pageURL;
-
-			if (pageURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = author;
-
-			if (author == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = repoGroupId;
-
-			if (repoGroupId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = repoArtifactId;
-
-			if (repoArtifactId == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = licenseIds;
-
-			if (licenseIds == null) {
-				paramObj10 = new NullWrapper("[J");
-			}
-
-			Object paramObj11 = thumbnails;
-
-			if (thumbnails == null) {
-				paramObj11 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj12 = fullImages;
-
-			if (fullImages == null) {
-				paramObj12 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj13 = new BooleanWrapper(addCommunityPermissions);
-
-			Object paramObj14 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
-					"addProductEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.softwarecatalog.model.SCProductEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String type, java.lang.String tags,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String author,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
 		java.util.List<byte[]> fullImages,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
+			Object paramObj0 = name;
 
 			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = type;
+
+			if (type == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = type;
+			Object paramObj2 = tags;
 
-			if (type == null) {
+			if (tags == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = tags;
+			Object paramObj3 = shortDescription;
 
-			if (tags == null) {
+			if (shortDescription == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = shortDescription;
+			Object paramObj4 = longDescription;
 
-			if (shortDescription == null) {
+			if (longDescription == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = longDescription;
+			Object paramObj5 = pageURL;
 
-			if (longDescription == null) {
+			if (pageURL == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = pageURL;
+			Object paramObj6 = author;
 
-			if (pageURL == null) {
+			if (author == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = author;
+			Object paramObj7 = repoGroupId;
 
-			if (author == null) {
+			if (repoGroupId == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = repoGroupId;
+			Object paramObj8 = repoArtifactId;
 
-			if (repoGroupId == null) {
+			if (repoArtifactId == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = repoArtifactId;
-
-			if (repoArtifactId == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = licenseIds;
+			Object paramObj9 = licenseIds;
 
 			if (licenseIds == null) {
-				paramObj10 = new NullWrapper("[J");
+				paramObj9 = new NullWrapper("[J");
 			}
 
-			Object paramObj11 = thumbnails;
+			Object paramObj10 = thumbnails;
 
 			if (thumbnails == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = fullImages;
+
+			if (fullImages == null) {
 				paramObj11 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj12 = fullImages;
+			Object paramObj12 = serviceContext;
 
-			if (fullImages == null) {
-				paramObj12 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj13 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj13 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj14 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj14 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj12 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
@@ -302,8 +168,7 @@ public class SCProductEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;

@@ -25,6 +25,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -43,41 +44,21 @@ import java.util.List;
 public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(
-			long plid, String name, String type, String tags,
-			String shortDescription, String longDescription, String pageURL,
-			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String name, String type, String tags, String shortDescription,
+			String longDescription, String pageURL, String author,
+			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			List<byte[]> thumbnails, List<byte[]> fullImages,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
-			ActionKeys.ADD_PRODUCT_ENTRY);
+			getPermissionChecker(), serviceContext.getPlid(),
+			PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
 
 		return scProductEntryLocalService.addProductEntry(
-			getUserId(), plid, name, type, tags, shortDescription,
+			getUserId(), name, type, tags, shortDescription,
 			longDescription, pageURL, author, repoGroupId, repoArtifactId,
-			licenseIds, thumbnails, fullImages, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public SCProductEntry addProductEntry(
-			long plid, String name, String type, String tags,
-			String shortDescription, String longDescription, String pageURL,
-			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
-			ActionKeys.ADD_PRODUCT_ENTRY);
-
-		return scProductEntryLocalService.addProductEntry(
-			getUserId(), plid, name, type, tags, shortDescription,
-			longDescription, pageURL, author, repoGroupId, repoArtifactId,
-			licenseIds, thumbnails, fullImages, communityPermissions,
-			guestPermissions);
+			licenseIds, thumbnails, fullImages, serviceContext);
 	}
 
 	public void deleteProductEntry(long productEntryId)

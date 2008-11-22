@@ -55,16 +55,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface SCFrameworkVersionService {
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long plid, java.lang.String name, java.lang.String url, boolean active,
-		int priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long plid, java.lang.String name, java.lang.String url, boolean active,
-		int priority, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String name, java.lang.String url, boolean active,
+		int priority, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

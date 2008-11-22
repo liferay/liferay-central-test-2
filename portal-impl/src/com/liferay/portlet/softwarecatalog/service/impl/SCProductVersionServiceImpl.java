@@ -25,6 +25,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
@@ -45,8 +46,7 @@ public class SCProductVersionServiceImpl
 			long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
 			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long[] frameworkVersionIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
@@ -55,24 +55,7 @@ public class SCProductVersionServiceImpl
 		return scProductVersionLocalService.addProductVersion(
 			getUserId(), productEntryId, version, changeLog, downloadPageURL,
 			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-			frameworkVersionIds, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public SCProductVersion addProductVersion(
-			long productEntryId, String version, String changeLog,
-			String downloadPageURL, String directDownloadURL,
-			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		SCProductEntryPermission.check(
-			getPermissionChecker(), productEntryId, ActionKeys.UPDATE);
-
-		return scProductVersionLocalService.addProductVersion(
-			getUserId(), productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-			frameworkVersionIds, communityPermissions, guestPermissions);
+			frameworkVersionIds, serviceContext);
 	}
 
 	public void deleteProductVersion(long productVersionId)

@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalServiceBaseImpl;
@@ -46,39 +46,14 @@ public class SCFrameworkVersionLocalServiceImpl
 	extends SCFrameworkVersionLocalServiceBaseImpl {
 
 	public SCFrameworkVersion addFrameworkVersion(
-			long userId, long plid, String name, String url, boolean active,
-			int priority, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addFrameworkVersion(
-			userId, plid, name, url, active, priority,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public SCFrameworkVersion addFrameworkVersion(
-			long userId, long plid, String name, String url, boolean active,
-			int priority, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addFrameworkVersion(
-			userId, plid, name, url, active, priority, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public SCFrameworkVersion addFrameworkVersion(
-			long userId, long plid, String name, String url, boolean active,
-			int priority, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			long userId, String name, String url, boolean active, int priority,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Framework version
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		Date now = new Date();
 
 		validate(name);
@@ -104,16 +79,17 @@ public class SCFrameworkVersionLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addFrameworkVersionResources(
-				frameworkVersion, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				frameworkVersion, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFrameworkVersionResources(
-				frameworkVersion, communityPermissions, guestPermissions);
+				frameworkVersion, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return frameworkVersion;

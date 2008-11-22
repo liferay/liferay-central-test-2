@@ -82,33 +82,13 @@ import java.rmi.RemoteException;
  */
 public class SCFrameworkVersionServiceSoap {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap addFrameworkVersion(
-		long plid, java.lang.String name, java.lang.String url, boolean active,
-		int priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		java.lang.String name, java.lang.String url, boolean active,
+		int priority, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
-				SCFrameworkVersionServiceUtil.addFrameworkVersion(plid, name,
-					url, active, priority, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap addFrameworkVersion(
-		long plid, java.lang.String name, java.lang.String url, boolean active,
-		int priority, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
-				SCFrameworkVersionServiceUtil.addFrameworkVersion(plid, name,
-					url, active, priority, communityPermissions,
-					guestPermissions);
+				SCFrameworkVersionServiceUtil.addFrameworkVersion(name, url,
+					active, priority, serviceContext);
 
 			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModel(returnValue);
 		}

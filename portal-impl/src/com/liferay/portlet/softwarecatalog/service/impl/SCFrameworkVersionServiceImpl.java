@@ -25,6 +25,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
@@ -45,31 +46,16 @@ public class SCFrameworkVersionServiceImpl
 	extends SCFrameworkVersionServiceBaseImpl {
 
 	public SCFrameworkVersion addFrameworkVersion(
-			long plid, String name, String url, boolean active, int priority,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String name, String url, boolean active, int priority,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
-			ActionKeys.ADD_FRAMEWORK_VERSION);
+			getPermissionChecker(), serviceContext.getPlid(),
+			PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION);
 
 		return scFrameworkVersionLocalService.addFrameworkVersion(
-			getUserId(), plid, name, url, active, priority,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public SCFrameworkVersion addFrameworkVersion(
-			long plid, String name, String url, boolean active, int priority,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
-			ActionKeys.ADD_FRAMEWORK_VERSION);
-
-		return scFrameworkVersionLocalService.addFrameworkVersion(
-			getUserId(), plid, name, url, active, priority,
-			communityPermissions, guestPermissions);
+			getUserId(), name, url, active, priority, serviceContext);
 	}
 
 	public void deleteFrameworkVersion(long frameworkVersionId)

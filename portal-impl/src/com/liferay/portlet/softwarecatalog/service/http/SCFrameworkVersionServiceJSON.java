@@ -74,28 +74,14 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
  *
  */
 public class SCFrameworkVersionServiceJSON {
-	public static JSONObject addFrameworkVersion(long plid,
-		java.lang.String name, java.lang.String url, boolean active,
-		int priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addFrameworkVersion(java.lang.String name,
+		java.lang.String url, boolean active, int priority,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
-			SCFrameworkVersionServiceUtil.addFrameworkVersion(plid, name, url,
-				active, priority, addCommunityPermissions, addGuestPermissions);
-
-		return SCFrameworkVersionJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addFrameworkVersion(long plid,
-		java.lang.String name, java.lang.String url, boolean active,
-		int priority, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
-			SCFrameworkVersionServiceUtil.addFrameworkVersion(plid, name, url,
-				active, priority, communityPermissions, guestPermissions);
+			SCFrameworkVersionServiceUtil.addFrameworkVersion(name, url,
+				active, priority, serviceContext);
 
 		return SCFrameworkVersionJSONSerializer.toJSONObject(returnValue);
 	}

@@ -75,110 +75,39 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
  */
 public class SCFrameworkVersionServiceHttp {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String url, boolean active, int priority,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
+			Object paramObj0 = name;
 
 			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = url;
+
+			if (url == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = url;
+			Object paramObj2 = new BooleanWrapper(active);
 
-			if (url == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
+			Object paramObj3 = new IntegerWrapper(priority);
 
-			Object paramObj3 = new BooleanWrapper(active);
+			Object paramObj4 = serviceContext;
 
-			Object paramObj4 = new IntegerWrapper(priority);
-
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
-
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
-					"addFrameworkVersion",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
-		java.lang.String url, boolean active, int priority,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = url;
-
-			if (url == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(active);
-
-			Object paramObj4 = new IntegerWrapper(priority);
-
-			Object paramObj5 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj6 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
 					"addFrameworkVersion",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;

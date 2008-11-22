@@ -46,25 +46,13 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCFrameworkVersionServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long plid, java.lang.String name, java.lang.String url, boolean active,
-		int priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String name, java.lang.String url, boolean active,
+		int priority, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFrameworkVersion(plid, name, url, active, priority,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		long plid, java.lang.String name, java.lang.String url, boolean active,
-		int priority, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFrameworkVersion(plid, name, url, active, priority,
-			communityPermissions, guestPermissions);
+				   .addFrameworkVersion(name, url, active, priority,
+			serviceContext);
 	}
 
 	public static void deleteFrameworkVersion(long frameworkVersionId)

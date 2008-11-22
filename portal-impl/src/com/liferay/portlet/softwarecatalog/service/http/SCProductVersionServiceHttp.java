@@ -79,8 +79,8 @@ public class SCProductVersionServiceHttp {
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean testDirectDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long[] frameworkVersionIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -120,106 +120,18 @@ public class SCProductVersionServiceHttp {
 				paramObj7 = new NullWrapper("[J");
 			}
 
-			Object paramObj8 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj8 = serviceContext;
 
-			Object paramObj9 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
-					"addProductVersion",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.softwarecatalog.model.SCProductVersion)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
-		HttpPrincipal httpPrincipal, long productEntryId,
-		java.lang.String version, java.lang.String changeLog,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean testDirectDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(productEntryId);
-
-			Object paramObj1 = version;
-
-			if (version == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = changeLog;
-
-			if (changeLog == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = downloadPageURL;
-
-			if (downloadPageURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = directDownloadURL;
-
-			if (directDownloadURL == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new BooleanWrapper(testDirectDownloadURL);
-
-			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
-
-			Object paramObj7 = frameworkVersionIds;
-
-			if (frameworkVersionIds == null) {
-				paramObj7 = new NullWrapper("[J");
-			}
-
-			Object paramObj8 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj8 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj9 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"addProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;

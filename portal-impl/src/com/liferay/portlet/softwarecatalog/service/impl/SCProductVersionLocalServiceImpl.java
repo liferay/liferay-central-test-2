@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
@@ -66,39 +67,7 @@ public class SCProductVersionLocalServiceImpl
 			long userId, long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
 			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addProductVersion(
-			userId, productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-			frameworkVersionIds, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public SCProductVersion addProductVersion(
-			long userId, long productEntryId, String version, String changeLog,
-			String downloadPageURL, String directDownloadURL,
-			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addProductVersion(
-			userId, productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-			frameworkVersionIds, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public SCProductVersion addProductVersion(
-			long userId, long productEntryId, String version, String changeLog,
-			String downloadPageURL, String directDownloadURL,
-			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			long[] frameworkVersionIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Product version

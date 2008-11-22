@@ -25,12 +25,13 @@ package com.liferay.portlet.softwarecatalog.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -124,8 +125,6 @@ public class EditFrameworkVersionAction extends PortletAction {
 	protected void updateFrameworkVersion(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long frameworkVersionId = ParamUtil.getLong(
 			actionRequest, "frameworkVersionId");
 
@@ -134,18 +133,15 @@ public class EditFrameworkVersionAction extends PortletAction {
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 		int priority = ParamUtil.getInteger(actionRequest, "priority");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			SCFrameworkVersion.class.getName(), actionRequest);
 
 		if (frameworkVersionId <= 0) {
 
 			// Add framework version
 
 			SCFrameworkVersionServiceUtil.addFrameworkVersion(
-				layout.getPlid(), name, url, active, priority,
-				communityPermissions, guestPermissions);
+				name, url, active, priority, serviceContext);
 		}
 		else {
 
