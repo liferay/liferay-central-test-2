@@ -49,6 +49,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 	</c:if>
 
+	<%--
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= Organization.class.getName() %>"
@@ -59,6 +60,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 
 		<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
 	</c:if>
+	--%>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">

@@ -44,6 +44,7 @@ String tabs1 = (String)objArray[1];
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
+	<%--
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= Group.class.getName() %>"
@@ -54,6 +55,7 @@ String tabs1 = (String)objArray[1];
 
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
+    --%>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
