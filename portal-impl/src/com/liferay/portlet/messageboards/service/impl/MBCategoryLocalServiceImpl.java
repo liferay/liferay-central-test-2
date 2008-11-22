@@ -70,14 +70,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String emailAddress, String inProtocol, String inServerName,
 			int inServerPort, boolean inUseSSL, String inUserName,
 			String inPassword, int inReadInterval, String outEmailAddress,
-			boolean outCustom,String outServerName, int outServerPort,
-			boolean outUseSSL,String outUserName, String outPassword,
+			boolean outCustom, String outServerName, int outServerPort,
+			boolean outUseSSL, String outUserName, String outPassword,
 			boolean mailingListActive, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addCategory(
 			null, userId, parentCategoryId, name, description, emailAddress,
-			inProtocol, inServerName, inServerPort, inUseSSL,inUserName,
+			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive, serviceContext);

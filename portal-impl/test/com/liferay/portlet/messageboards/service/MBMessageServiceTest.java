@@ -100,6 +100,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		String outUserName = null;
 		String outPassword = null;
 		boolean mailingListActive = false;
+
 		Layout layout = LayoutLocalServiceUtil.getLayout(
 			TestPropsValues.LAYOUT_PLID);
 
