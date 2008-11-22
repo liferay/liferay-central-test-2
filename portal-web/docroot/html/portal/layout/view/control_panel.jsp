@@ -104,6 +104,7 @@ if (Validator.isNull(category)) {
 
 											<div class="lfr-panel-content">
 												<ul>
+
 													<%
 													for (int i = 0; i < manageableGroups.size(); i++) {
 														Group group = manageableGroups.get(i);
@@ -114,13 +115,15 @@ if (Validator.isNull(category)) {
 															<ul>
 														</c:if>
 
-														<li><a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a></li>
+														<li>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
+														</li>
 
 													<%
 													}
 													%>
-												</ul>
 
+												</ul>
 											</div>
 										</div>
 									</c:if>
@@ -135,6 +138,7 @@ if (Validator.isNull(category)) {
 
 											<div class="lfr-panel-content">
 												<ul>
+
 													<%
 													for (int i = 0; i < manageableOrganizations.size(); i++) {
 														Organization organization = manageableOrganizations.get(i);
@@ -145,7 +149,9 @@ if (Validator.isNull(category)) {
 															<ul>
 														</c:if>
 
-														<li><a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= organization.getName() %></a></li>
+														<li>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= organization.getName() %></a>
+														</li>
 
 													<%
 													}
@@ -155,13 +161,12 @@ if (Validator.isNull(category)) {
 											</div>
 										</div>
 									</c:if>
-
 								</div>
-
 							</c:when>
 							<c:when test="<%= category.equals(PortletCategoryKeys.PORTAL) %>">
 								<h2>
 									<liferay-ui:message key="portal" />
+
 									<c:if test="<%= CompanyLocalServiceUtil.getCompaniesCount() > 1 %>">
 										<%= company.getName() %>
 									</c:if>

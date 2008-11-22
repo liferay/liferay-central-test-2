@@ -435,16 +435,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByC_C_C(companyId, classNameId, plid);
 	}
 
-	/**
-	 * Gets a list of groups that a user has access to administrate.
-	 *
-	 * @param userId the user id of the user
-	 * @return a list of groups
-	 */
 	public List<Group> getManageableGroups(long userId)
 		throws PortalException, SystemException {
 
-		List<Group> manageableGroups =new UniqueList<Group>();
+		List<Group> manageableGroups = new UniqueList<Group>();
 
 		User user = userLocalService.getUser(userId);
 
