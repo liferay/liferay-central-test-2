@@ -248,7 +248,7 @@
 					(MBCategory.categoryId = MBMessage.categoryId)
 			WHERE
 				(MBCategory.groupId = ?) AND
-				(MBMessage.userId = ?) AND 
+				(MBMessage.userId = ?) AND
 				(MBMessage.anonymous = ?)
 		]]>
 	</sql>
