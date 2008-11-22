@@ -121,9 +121,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.CONTENT, content);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
-		doc.addKeyword("nodeId", nodeId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, resourcePrimKey);
+		doc.addKeyword("nodeId", nodeId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 

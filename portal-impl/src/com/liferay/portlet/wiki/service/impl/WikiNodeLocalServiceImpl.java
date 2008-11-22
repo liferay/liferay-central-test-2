@@ -305,9 +305,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					WikiPage page = pagesItr.next();
 
 					long groupId = node.getGroupId();
+					long resourcePrimKey = page.getResourcePrimKey();
 					String title = page.getTitle();
 					String content = page.getContent();
-					long resourcePrimKey = page.getResourcePrimKey();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						WikiPage.class.getName(), resourcePrimKey);
