@@ -573,7 +573,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		return null;
+		return StringPool.BLANK;
 	}
 
 	public List<Portlet> getControlPanelPortlets(String category)

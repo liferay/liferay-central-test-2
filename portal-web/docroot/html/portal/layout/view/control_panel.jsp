@@ -43,10 +43,7 @@ if (ppid.equals(PortletKeys.EXPANDO)) {
 }
 
 String category = PortalUtil.getControlPanelCategory(ppid);
-
-if (Validator.isNull(category)) {
-	category = "control-panel";
-}
+	if (category == null) category = "";
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
@@ -173,7 +170,14 @@ if (Validator.isNull(category)) {
 								</h2>
 							</c:when>
 							<c:otherwise>
-								<h2><liferay-ui:message key='<%= "category." + category %>' /></h2>
+								<%
+								String title = "control-panel";
+
+								if (Validator.isNotNull(category)) {
+									category = "category." + category;
+								}
+								%>
+								<h2><liferay-ui:message key='<%= title %>' /></h2>
 							</c:otherwise>
 						</c:choose>
 					</td>
