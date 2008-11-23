@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -49,7 +50,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -108,8 +109,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage addPage(
 			long userId, long nodeId, String title, String content,
-			String summary, boolean minorEdit, PortletPreferences preferences,
-			ThemeDisplay themeDisplay)
+			String summary, boolean minorEdit, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		String uuid = null;
@@ -118,21 +118,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		boolean head = true;
 		String parentTitle = null;
 		String redirectTitle = null;
-		String[] tagsCategories = null;
-		String[] tagsEntries = null;
 
 		return addPage(
 			uuid, userId, nodeId, title, version, content, summary, minorEdit,
-			format, head, parentTitle, redirectTitle, tagsCategories,
-			tagsEntries, preferences, themeDisplay);
+			format, head, parentTitle, redirectTitle, serviceContext);
 	}
 
 	public WikiPage addPage(
 			String uuid, long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
 			boolean head, String parentTitle, String redirectTitle,
-			String[] tagsCategories, String[] tagsEntries,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Page
@@ -190,19 +186,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
-			notifySubscribers(node, page, preferences, themeDisplay, false);
+			notifySubscribers(node, page, serviceContext, false);
 		}
 
 		// Tags
 
-		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
+		updateTagsAsset(
+			userId, page, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// Indexer
 
 		try {
 			Indexer.addPage(
 				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				title, content, tagsEntries, page.getExpandoBridge());
+				title, content, serviceContext.getTagsEntries(),
+				page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + pageId, se);
@@ -307,7 +306,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void changeParent(
 			long userId, long nodeId, String title, String newParentTitle,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiPage page = getPage(nodeId, title);
@@ -316,7 +315,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		double version = page.getVersion();
 		String content = page.getContent();
-		String summary = themeDisplay.translate(
+		String summary = LanguageUtil.format(
+			page.getCompanyId(), serviceContext.getLocale(),
 			"changed-parent-from-x", originalParentTitle);
 		boolean minorEdit = false;
 		String format = page.getFormat();
@@ -329,10 +329,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			WikiPage.class.getName(), page.getResourcePrimKey(),
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
+
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
-			format, newParentTitle, redirectTitle, tagsCategories, tagsEntries,
-			preferences, themeDisplay);
+			format, newParentTitle, redirectTitle, serviceContext);
 
 		List<WikiPage> oldPages = wikiPagePersistence.findByN_T_H(
 			nodeId, title, false);
@@ -715,17 +717,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void movePage(
 			long userId, long nodeId, String title, String newTitle,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		movePage(
-			userId, nodeId, title, newTitle, true, preferences, themeDisplay);
+		movePage(userId, nodeId, title, newTitle, true, serviceContext);
 	}
 
 	public void movePage(
 			long userId, long nodeId, String title, String newTitle,
-			boolean strict, PortletPreferences preferences,
-			ThemeDisplay themeDisplay)
+			boolean strict, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		validateTitle(newTitle);
@@ -801,8 +801,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		addPage(
 			uuid, userId, nodeId, title, version, content, summary, false,
-			format, head, parentTitle, redirectTitle, null, null, preferences,
-			themeDisplay);
+			format, head, parentTitle, redirectTitle, serviceContext);
 
 		// Move redirects to point to the page with the new title
 
@@ -876,7 +875,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage revertPage(
 			long userId, long nodeId, String title, double version,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiPage oldPage = getPage(nodeId, title, version);
@@ -884,8 +883,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return updatePage(
 			userId, nodeId, title, 0, oldPage.getContent(),
 			WikiPageImpl.REVERTED + " to " + version, false,
-			oldPage.getFormat(), null, oldPage.getRedirectTitle(), null, null,
-			preferences, themeDisplay);
+			oldPage.getFormat(), null, oldPage.getRedirectTitle(),
+			serviceContext);
 	}
 
 	public void subscribePage(long userId, long nodeId, String title)
@@ -909,9 +908,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage updatePage(
 			long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
-			String parentTitle, String redirectTitle, String[] tagsCategories,
-			String[] tagsEntries, PortletPreferences preferences,
-			ThemeDisplay themeDisplay)
+			String parentTitle, String redirectTitle,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Page
@@ -930,8 +928,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return addPage(
 				null, userId, nodeId, title, WikiPageImpl.DEFAULT_VERSION,
 				content, summary, minorEdit, format, true, parentTitle,
-				redirectTitle, tagsCategories, tagsEntries, preferences,
-				themeDisplay);
+				redirectTitle, serviceContext);
 		}
 
 		double oldVersion = page.getVersion();
@@ -996,19 +993,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
-			notifySubscribers(node, page, preferences, themeDisplay, true);
+			notifySubscribers(node, page, serviceContext, true);
 		}
 
 		// Tags
 
-		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
+		updateTagsAsset(
+			userId, page, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// Indexer
 
 		try {
 			Indexer.updatePage(
 				node.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				title, content, tagsEntries, page.getExpandoBridge());
+				title, content, serviceContext.getTagsEntries(),
+				page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + page.getPrimaryKey(), se);
@@ -1102,9 +1102,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected void notifySubscribers(
-			WikiNode node, WikiPage page, PortletPreferences preferences,
-			ThemeDisplay themeDisplay, boolean update)
+			WikiNode node, WikiPage page, ServiceContext serviceContext,
+			boolean update)
 		throws PortalException, SystemException {
+
+		PortletPreferences preferences = serviceContext.getPortletPreferences();
 
 		if (preferences == null) {
 			long ownerId = node.getGroupId();
@@ -1135,10 +1137,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String pageURL = StringPool.BLANK;
 
-		if (themeDisplay != null) {
-			String portalURL = PortalUtil.getPortalURL(themeDisplay);
-			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+		String portalURL = serviceContext.getPortalURL();
+		String layoutURL = serviceContext.getLayoutURL();
 
+		if (Validator.isNotNull(layoutURL) && Validator.isNotNull(portalURL)) {
 			pageURL =
 				portalURL + layoutURL + "/-/wiki/" + node.getNodeId() + "/" +
 					HttpUtil.encodeURL(page.getTitle());

@@ -37,7 +37,7 @@ import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -295,10 +295,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(node.getUserUuid());
-		long plid = context.getPlid();
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setPlid(context.getPlid());
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		WikiNode existingNode = null;
 
@@ -321,9 +324,8 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingNode == null) {
 				existingNode = WikiNodeLocalServiceUtil.addNode(
-					node.getUuid(), userId, plid, node.getName(),
-					node.getDescription(), addCommunityPermissions,
-					addGuestPermissions);
+					node.getUuid(), userId, node.getName(),
+					node.getDescription(), serviceContext);
 			}
 			else {
 				existingNode = WikiNodeLocalServiceUtil.updateNode(
@@ -344,8 +346,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			existingNode = WikiNodeLocalServiceUtil.addNode(
-				userId, plid, node.getName(), node.getDescription(),
-				addCommunityPermissions, addGuestPermissions);
+				userId, node.getName(), node.getDescription(), serviceContext);
 		}
 
 		nodePKs.put(node.getNodeId(), existingNode.getNodeId());
@@ -360,7 +361,6 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
 
-		String[] tagsCategories = null;
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -368,9 +368,9 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 				WikiPage.class, page.getResourcePrimKey());
 		}
 
-		PortletPreferences preferences = null;
+		ServiceContext serviceContext = new ServiceContext();
 
-		ThemeDisplay themeDisplay = null;
+		serviceContext.setTagsEntries(tagsEntries);
 
 		WikiPage existingPage = null;
 
@@ -388,8 +388,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 						userId, nodeId, existingPage.getTitle(), 0,
 						page.getContent(), page.getSummary(), true,
 						page.getFormat(), page.getParentTitle(),
-						page.getRedirectTitle(), tagsCategories, tagsEntries,
-						preferences, themeDisplay);
+						page.getRedirectTitle(), serviceContext);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
@@ -397,7 +396,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 						page.getVersion(), page.getContent(), page.getSummary(),
 						true, page.getFormat(), page.getHead(),
 						page.getParentTitle(), page.getRedirectTitle(),
-						tagsCategories, tagsEntries, preferences, themeDisplay);
+						serviceContext);
 				}
 			}
 			else {
@@ -405,8 +404,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getSummary(), true,
 					page.getFormat(), page.getHead(), page.getParentTitle(),
-					page.getRedirectTitle(), tagsCategories, tagsEntries,
-					preferences, themeDisplay);
+					page.getRedirectTitle(), serviceContext);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&

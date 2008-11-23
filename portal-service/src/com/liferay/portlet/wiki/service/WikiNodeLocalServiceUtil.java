@@ -104,50 +104,21 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
-		long plid, java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .addNode(userId, plid, name, description,
-			addCommunityPermissions, addGuestPermissions);
+		return getService().addNode(userId, name, description, serviceContext);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String uuid, long userId, long plid, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addNode(uuid, userId, plid, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
-		long plid, java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addNode(userId, plid, name, description,
-			communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String uuid, long userId, long plid, java.lang.String name,
+		java.lang.String uuid, long userId, java.lang.String name,
 		java.lang.String description,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addNode(uuid, userId, plid, name, description,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+				   .addNode(uuid, userId, name, description, serviceContext);
 	}
 
 	public static void addNodeResources(long nodeId,

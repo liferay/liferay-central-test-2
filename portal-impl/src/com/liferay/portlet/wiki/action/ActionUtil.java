@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -74,9 +76,15 @@ public class ActionUtil {
 		if (nodes.size() == 0) {
 			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				WikiNode.class.getName(), renderRequest);
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+
 			node = WikiNodeLocalServiceUtil.addNode(
-				themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,
-				StringPool.BLANK, true, true);
+				themeDisplay.getUserId(), nodeName, StringPool.BLANK,
+				serviceContext);
 		}
 		else {
 			PermissionChecker permissionChecker =
@@ -183,8 +191,11 @@ public class ActionUtil {
 		}
 		catch (NoSuchPageException nspe) {
 			if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
+				ServiceContext serviceContext = new ServiceContext();
+
 				page = WikiPageServiceUtil.addPage(
-					nodeId, title, null, WikiPageImpl.NEW, true, null, null);
+					nodeId, title, null, WikiPageImpl.NEW, true,
+					serviceContext);
 			}
 			else {
 				throw nspe;

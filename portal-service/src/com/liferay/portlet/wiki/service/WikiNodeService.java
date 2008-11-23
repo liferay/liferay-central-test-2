@@ -54,16 +54,9 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface WikiNodeService {
-	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
+	public com.liferay.portlet.wiki.model.WikiNode addNode(
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

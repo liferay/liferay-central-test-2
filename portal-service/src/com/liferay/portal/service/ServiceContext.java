@@ -27,12 +27,16 @@ import com.liferay.portal.model.PortletPreferencesIds;
 import java.io.Serializable;
 
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * <a href="ServiceContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
+ * @author Jorge Ferrer
  *
  */
 public class ServiceContext implements Serializable {
@@ -84,6 +88,10 @@ public class ServiceContext implements Serializable {
 		return _layoutURL;
 	}
 
+	public Locale getLocale() {
+		return _locale;
+	}
+
 	public String getPathMain() {
 		return _pathMain;
 	}
@@ -96,12 +104,20 @@ public class ServiceContext implements Serializable {
 		return _portalURL;
 	}
 
+	public PortletPreferences getPortletPreferences() {
+		return _portletPreferences;
+	}
+
 	public PortletPreferencesIds getPortletPreferencesIds() {
 		return _portletPreferencesIds;
 	}
 
 	public long getScopeGroupId() {
 		return _scopeGroupId;
+	}
+
+	public String[] getTagsCategories() {
+		return _tagsCategories;
 	}
 
 	public String[] getTagsEntries() {
@@ -158,6 +174,10 @@ public class ServiceContext implements Serializable {
 		_layoutURL = layoutURL;
 	}
 
+	public void setLocale(Locale locale) {
+		_locale = locale;
+	}
+
 	public void setPathMain(String pathMain) {
 		_pathMain = pathMain;
 	}
@@ -170,6 +190,11 @@ public class ServiceContext implements Serializable {
 		_portalURL = portalURL;
 	}
 
+	public void setPortletPreferences(PortletPreferences portletPreferences) {
+
+		_portletPreferences = portletPreferences;
+	}
+
 	public void setPortletPreferencesIds(
 		PortletPreferencesIds portletPreferencesIds) {
 
@@ -178,6 +203,10 @@ public class ServiceContext implements Serializable {
 
 	public void setScopeGroupId(long scopeGroupId) {
 		_scopeGroupId = scopeGroupId;
+	}
+
+	public void setTagsCategories(String[] tagsCategories) {
+		_tagsCategories = tagsCategories;
 	}
 
 	public void setTagsEntries(String[] tagsEntries) {
@@ -201,10 +230,13 @@ public class ServiceContext implements Serializable {
 	private String[] _guestPermissions;
 	private String _languageId;
 	private String _layoutURL;
+	private Locale _locale;
 	private String _pathMain;
 	private String _portalURL;
+	private PortletPreferences _portletPreferences;
 	private PortletPreferencesIds _portletPreferencesIds;
 	private long _scopeGroupId;
+	private String[] _tagsCategories;
 	private String[] _tagsEntries;
 	private String _userDisplayURL;
 	private long _plid;

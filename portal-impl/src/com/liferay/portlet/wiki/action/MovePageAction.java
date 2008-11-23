@@ -27,20 +27,20 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -127,10 +127,8 @@ public class MovePageAction extends PortletAction {
 	protected void changeParentPage(ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
@@ -138,21 +136,18 @@ public class MovePageAction extends PortletAction {
 			actionRequest, "newParentTitle");
 
 		WikiPageServiceUtil.changeParent(
-			nodeId, title, newParentTitle, preferences, themeDisplay);
+			nodeId, title, newParentTitle, serviceContext);
 	}
 
 	protected void renamePage(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		String newTitle = ParamUtil.getString(actionRequest, "newTitle");
 
-		WikiPageServiceUtil.movePage(
-			nodeId, title, newTitle, preferences, themeDisplay);
+		WikiPageServiceUtil.movePage(nodeId, title, newTitle, serviceContext);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

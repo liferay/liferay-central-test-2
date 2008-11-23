@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
@@ -72,49 +72,23 @@ import org.apache.commons.logging.LogFactory;
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	public WikiNode addNode(
-			long userId, long plid, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long userId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addNode(
-			null, userId, plid, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			null, userId, name, description, serviceContext);
 	}
 
 	public WikiNode addNode(
-			String uuid, long userId, long plid, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addNode(
-			uuid, userId, plid, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public WikiNode addNode(
-			long userId, long plid, String name, String description,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addNode(
-			null, userId, plid, name, description, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public WikiNode addNode(
-			String uuid, long userId, long plid, String name,
-			String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String uuid, long userId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Node
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		Date now = new Date();
 
 		validate(groupId, name);
@@ -137,15 +111,17 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addNodeResources(
-				node, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				node, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
-			addNodeResources(node, communityPermissions, guestPermissions);
+			addNodeResources(
+				node, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return node;

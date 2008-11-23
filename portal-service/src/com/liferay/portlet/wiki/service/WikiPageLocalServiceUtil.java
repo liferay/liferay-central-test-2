@@ -106,13 +106,12 @@ public class WikiPageLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String summary, boolean minorEdit,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addPage(userId, nodeId, title, content, summary, minorEdit,
-			preferences, themeDisplay);
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
@@ -120,16 +119,14 @@ public class WikiPageLocalServiceUtil {
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String summary, boolean minorEdit, java.lang.String format,
 		boolean head, java.lang.String parentTitle,
-		java.lang.String redirectTitle, java.lang.String[] tagsCategories,
-		java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		java.lang.String redirectTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addPage(uuid, userId, nodeId, title, version, content,
 			summary, minorEdit, format, head, parentTitle, redirectTitle,
-			tagsCategories, tagsEntries, preferences, themeDisplay);
+			serviceContext);
 	}
 
 	public static void addPageAttachments(long nodeId, java.lang.String title,
@@ -182,13 +179,11 @@ public class WikiPageLocalServiceUtil {
 
 	public static void changeParent(long userId, long nodeId,
 		java.lang.String title, java.lang.String newParentTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.changeParent(userId, nodeId, title, newParentTitle, preferences,
-			themeDisplay);
+			.changeParent(userId, nodeId, title, newParentTitle, serviceContext);
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
@@ -343,23 +338,19 @@ public class WikiPageLocalServiceUtil {
 
 	public static void movePage(long userId, long nodeId,
 		java.lang.String title, java.lang.String newTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService()
-			.movePage(userId, nodeId, title, newTitle, preferences, themeDisplay);
+		getService().movePage(userId, nodeId, title, newTitle, serviceContext);
 	}
 
 	public static void movePage(long userId, long nodeId,
 		java.lang.String title, java.lang.String newTitle, boolean strict,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.movePage(userId, nodeId, title, newTitle, strict, preferences,
-			themeDisplay);
+			.movePage(userId, nodeId, title, newTitle, strict, serviceContext);
 	}
 
 	public static void reIndex(long resourcePrimKey)
@@ -369,13 +360,11 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long userId, long nodeId, java.lang.String title, double version,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .revertPage(userId, nodeId, title, version, preferences,
-			themeDisplay);
+				   .revertPage(userId, nodeId, title, version, serviceContext);
 	}
 
 	public static void subscribePage(long userId, long nodeId,
@@ -396,16 +385,14 @@ public class WikiPageLocalServiceUtil {
 		long userId, long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
-		java.lang.String redirectTitle, java.lang.String[] tagsCategories,
-		java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		java.lang.String redirectTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updatePage(userId, nodeId, title, version, content,
 			summary, minorEdit, format, parentTitle, redirectTitle,
-			tagsCategories, tagsEntries, preferences, themeDisplay);
+			serviceContext);
 	}
 
 	public static void updateTagsAsset(long userId,

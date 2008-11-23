@@ -81,11 +81,44 @@ import java.rmi.RemoteException;
  *
  */
 public class WikiPageServiceSoap {
+	public static com.liferay.portlet.wiki.model.WikiPageSoap addPage(
+		long nodeId, java.lang.String title, java.lang.String content,
+		java.lang.String summary, boolean minorEdit,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
+					title, content, summary, minorEdit, serviceContext);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws RemoteException {
 		try {
 			WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void changeParent(long nodeId, java.lang.String title,
+		java.lang.String newParentTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			WikiPageServiceUtil.changeParent(nodeId, title, newParentTitle,
+				serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -200,6 +233,37 @@ public class WikiPageServiceSoap {
 		}
 	}
 
+	public static void movePage(long nodeId, java.lang.String title,
+		java.lang.String newTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			WikiPageServiceUtil.movePage(nodeId, title, newTitle, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageSoap revertPage(
+		long nodeId, java.lang.String title, double version,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
+					title, version, serviceContext);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void subscribePage(long nodeId, java.lang.String title)
 		throws RemoteException {
 		try {
@@ -216,6 +280,27 @@ public class WikiPageServiceSoap {
 		throws RemoteException {
 		try {
 			WikiPageServiceUtil.unsubscribePage(nodeId, title);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageSoap updatePage(
+		long nodeId, java.lang.String title, double version,
+		java.lang.String content, java.lang.String summary, boolean minorEdit,
+		java.lang.String format, java.lang.String parentTitle,
+		java.lang.String redirectTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
+					title, version, content, summary, minorEdit, format,
+					parentTitle, redirectTitle, serviceContext);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

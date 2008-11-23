@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.tags.NoSuchEntryException;
@@ -166,8 +167,11 @@ public class MediaWikiImporter implements WikiImporter {
 			long authorUserId = getUserId(userId, node, author, usersMap);
 			String parentTitle = readParentTitle(content);
 			String redirectTitle = readRedirectTitle(content);
-			String[] tagsCategories = null;
-			String[] tagsEntries = readTagsEntries(userId, node, content);
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setTagsEntries(
+				readTagsEntries(userId, node, content));
 
 			if (Validator.isNull(redirectTitle)) {
 				content = _translator.translate(content);
@@ -187,13 +191,13 @@ public class MediaWikiImporter implements WikiImporter {
 			catch (NoSuchPageException nspe) {
 				page = WikiPageLocalServiceUtil.addPage(
 					authorUserId, node.getNodeId(), title, WikiPageImpl.NEW,
-					null, true, null, null);
+					null, true, serviceContext);
 			}
 
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, summary, true, "creole", parentTitle,
-				redirectTitle, tagsCategories, tagsEntries, null, null);
+				content, summary, true, "creole", parentTitle, redirectTitle,
+				serviceContext);
 		}
 		catch (Exception e) {
 			throw new PortalException("Error importing page " + title, e);
@@ -248,9 +252,11 @@ public class MediaWikiImporter implements WikiImporter {
 				if (WikiPageLocalServiceUtil.getPagesCount(
 						node.getNodeId(), frontPageTitle, true) > 0) {
 
+					ServiceContext serviceContext = new ServiceContext();
+
 					WikiPageLocalServiceUtil.movePage(
 						userId, node.getNodeId(), frontPageTitle,
-						WikiPageImpl.FRONT_PAGE, false, null, null);
+						WikiPageImpl.FRONT_PAGE, false, serviceContext);
 
 				}
 			}
@@ -315,9 +321,11 @@ public class MediaWikiImporter implements WikiImporter {
 					node.getNodeId(), SHARED_IMAGES_TITLE);
 			}
 			catch (NoSuchPageException nspe) {
+				ServiceContext serviceContext = new ServiceContext();
+
 				WikiPageLocalServiceUtil.addPage(
 					userId, node.getNodeId(), SHARED_IMAGES_TITLE,
-					SHARED_IMAGES_CONTENT, null, true, null, null);
+					SHARED_IMAGES_CONTENT, null, true, serviceContext);
 			}
 		}
 

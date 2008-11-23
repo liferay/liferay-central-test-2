@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -45,31 +46,15 @@ import java.util.Map;
 public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 
 	public WikiNode addNode(
-			long plid, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.WIKI,
+			getPermissionChecker(), serviceContext.getPlid(), PortletKeys.WIKI,
 			ActionKeys.ADD_NODE);
 
 		return wikiNodeLocalService.addNode(
-			getUserId(), plid, name, description, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public WikiNode addNode(
-			long plid, String name, String description,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.WIKI,
-			ActionKeys.ADD_NODE);
-
-		return wikiNodeLocalService.addNode(
-			getUserId(), plid, name, description, communityPermissions,
-			guestPermissions);
+			getUserId(), name, description, serviceContext);
 	}
 
 	public void deleteNode(long nodeId)

@@ -57,8 +57,7 @@ public interface WikiPageService {
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
 		java.lang.String title, java.lang.String content,
 		java.lang.String summary, boolean minorEdit,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -69,8 +68,7 @@ public interface WikiPageService {
 
 	public void changeParent(long nodeId, java.lang.String title,
 		java.lang.String newParentTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -118,15 +116,13 @@ public interface WikiPageService {
 
 	public void movePage(long nodeId, java.lang.String title,
 		java.lang.String newTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long nodeId,
 		java.lang.String title, double version,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -142,9 +138,7 @@ public interface WikiPageService {
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String summary, boolean minorEdit, java.lang.String format,
 		java.lang.String parentTitle, java.lang.String redirectTitle,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

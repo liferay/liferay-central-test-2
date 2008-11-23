@@ -29,9 +29,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
@@ -49,7 +50,6 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -201,9 +201,11 @@ public class EditPageAction extends PortletAction {
 			}
 			catch (NoSuchPageException nspe) {
 				if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
+					ServiceContext serviceContext = new ServiceContext();
+
 					page = WikiPageServiceUtil.addPage(
-						nodeId, title, null, WikiPageImpl.NEW, true, null,
-						null);
+						nodeId, title, null, WikiPageImpl.NEW, true,
+						serviceContext);
 				}
 				else {
 					throw nspe;
@@ -252,17 +254,14 @@ public class EditPageAction extends PortletAction {
 	}
 
 	protected void revertPage(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		double version = ParamUtil.getDouble(actionRequest, "version");
 
-		WikiPageServiceUtil.revertPage(
-			nodeId, title, version, preferences, themeDisplay);
+		WikiPageServiceUtil.revertPage(nodeId, title, version, serviceContext);
 	}
 
 	protected void subscribePage(ActionRequest actionRequest) throws Exception {
@@ -284,10 +283,8 @@ public class EditPageAction extends PortletAction {
 	protected WikiPage updatePage(ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
@@ -300,13 +297,9 @@ public class EditPageAction extends PortletAction {
 		String parentTitle = ParamUtil.getString(actionRequest, "parentTitle");
 		String redirectTitle = null;
 
-		String[] tagsCategories = PortalUtil.getTagsCategories(actionRequest);
-		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
-
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,
-			parentTitle, redirectTitle, tagsCategories, tagsEntries,
-			preferences, themeDisplay);
+			parentTitle, redirectTitle, serviceContext);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

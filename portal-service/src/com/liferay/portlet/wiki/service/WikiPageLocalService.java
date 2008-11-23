@@ -94,8 +94,7 @@ public interface WikiPageLocalService {
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String summary, boolean minorEdit,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -104,10 +103,8 @@ public interface WikiPageLocalService {
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String summary, boolean minorEdit, java.lang.String format,
 		boolean head, java.lang.String parentTitle,
-		java.lang.String redirectTitle, java.lang.String[] tagsCategories,
-		java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		java.lang.String redirectTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -142,8 +139,7 @@ public interface WikiPageLocalService {
 
 	public void changeParent(long userId, long nodeId, java.lang.String title,
 		java.lang.String newParentTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -269,15 +265,13 @@ public interface WikiPageLocalService {
 
 	public void movePage(long userId, long nodeId, java.lang.String title,
 		java.lang.String newTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void movePage(long userId, long nodeId, java.lang.String title,
 		java.lang.String newTitle, boolean strict,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -286,8 +280,7 @@ public interface WikiPageLocalService {
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -303,10 +296,8 @@ public interface WikiPageLocalService {
 		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
-		java.lang.String redirectTitle, java.lang.String[] tagsCategories,
-		java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		java.lang.String redirectTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

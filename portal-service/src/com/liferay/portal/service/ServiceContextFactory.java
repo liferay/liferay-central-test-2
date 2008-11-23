@@ -36,6 +36,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import java.util.Map;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,7 @@ public class ServiceContextFactory {
 		serviceContext.setCompanyId(themeDisplay.getCompanyId());
 		serviceContext.setLanguageId(themeDisplay.getLanguageId());
 		serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
+		serviceContext.setLocale(themeDisplay.getLocale());
 		serviceContext.setPathMain(PortalUtil.getPathMain());
 		serviceContext.setPlid(themeDisplay.getPlid());
 		serviceContext.setPortalURL(PortalUtil.getPortalURL(portletRequest));
@@ -94,6 +96,12 @@ public class ServiceContextFactory {
 		serviceContext.setCommunityPermissions(communityPermissions);
 		serviceContext.setGuestPermissions(guestPermissions);
 
+		// Portlet preferences
+
+		PortletPreferences preferences = portletRequest.getPreferences();
+
+		serviceContext.setPortletPreferences(preferences);
+
 		// Portlet preferences ids
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -110,6 +118,12 @@ public class ServiceContextFactory {
 				request, portletId);
 
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
+
+		// Tags categories
+
+		String[] tagsCategories = PortalUtil.getTagsCategories(portletRequest);
+
+		serviceContext.setTagsCategories(tagsCategories);
 
 		// Tags entries
 

@@ -2942,9 +2942,23 @@ Liferay.Service.Wiki.WikiNode = {
 Liferay.Service.Wiki.WikiPage = {
 	serviceClassName: Liferay.Service.Wiki.servicePackage + "WikiPage" + Liferay.Service.classNameSuffix,
 
+	addPage: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addPage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	addPageAttachments: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "addPageAttachments";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	changeParent: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "changeParent";
 
 		return Liferay.Service.ajax(params, callback);
 	},
@@ -2991,6 +3005,20 @@ Liferay.Service.Wiki.WikiPage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	movePage: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "movePage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	revertPage: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "revertPage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	subscribePage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "subscribePage";
@@ -3001,6 +3029,13 @@ Liferay.Service.Wiki.WikiPage = {
 	unsubscribePage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "unsubscribePage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updatePage: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updatePage";
 
 		return Liferay.Service.ajax(params, callback);
 	}

@@ -78,8 +78,7 @@ public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -105,24 +104,18 @@ public class WikiPageServiceHttp {
 
 			Object paramObj4 = new BooleanWrapper(minorEdit);
 
-			Object paramObj5 = preferences;
+			Object paramObj5 = serviceContext;
 
-			if (preferences == null) {
-				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
-			Object paramObj6 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj6 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"addPage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5
 					});
 
 			Object returnObj = null;
@@ -199,8 +192,7 @@ public class WikiPageServiceHttp {
 
 	public static void changeParent(HttpPrincipal httpPrincipal, long nodeId,
 		java.lang.String title, java.lang.String newParentTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -218,24 +210,16 @@ public class WikiPageServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = preferences;
+			Object paramObj3 = serviceContext;
 
-			if (preferences == null) {
-				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
-			Object paramObj4 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"changeParent",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -624,8 +608,7 @@ public class WikiPageServiceHttp {
 
 	public static void movePage(HttpPrincipal httpPrincipal, long nodeId,
 		java.lang.String title, java.lang.String newTitle,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -643,24 +626,16 @@ public class WikiPageServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = preferences;
+			Object paramObj3 = serviceContext;
 
-			if (preferences == null) {
-				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
-			Object paramObj4 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"movePage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -686,8 +661,7 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		double version, javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		double version, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -701,24 +675,16 @@ public class WikiPageServiceHttp {
 
 			Object paramObj2 = new DoubleWrapper(version);
 
-			Object paramObj3 = preferences;
+			Object paramObj3 = serviceContext;
 
-			if (preferences == null) {
-				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
-			Object paramObj4 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"revertPage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
@@ -827,9 +793,7 @@ public class WikiPageServiceHttp {
 		double version, java.lang.String content, java.lang.String summary,
 		boolean minorEdit, java.lang.String format,
 		java.lang.String parentTitle, java.lang.String redirectTitle,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -875,37 +839,18 @@ public class WikiPageServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = tagsCategories;
+			Object paramObj9 = serviceContext;
 
-			if (tagsCategories == null) {
-				paramObj9 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj10 = tagsEntries;
-
-			if (tagsEntries == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj11 = preferences;
-
-			if (preferences == null) {
-				paramObj11 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
-			Object paramObj12 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj12 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
+			if (serviceContext == null) {
+				paramObj9 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"updatePage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;

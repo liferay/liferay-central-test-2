@@ -24,7 +24,6 @@ package com.liferay.portlet.wiki.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -74,100 +73,33 @@ import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
  */
 public class WikiNodeServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
+			Object paramObj0 = name;
 
 			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = description;
+
+			if (description == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = serviceContext;
 
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(addCommunityPermissions);
-
-			Object paramObj4 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"addNode",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.wiki.model.WikiNode)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiNode addNode(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj3 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj4 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj2 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"addNode",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					"addNode", new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 

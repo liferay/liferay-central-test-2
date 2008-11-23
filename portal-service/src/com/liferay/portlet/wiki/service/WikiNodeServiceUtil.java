@@ -45,25 +45,12 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public class WikiNodeServiceUtil {
-	public static com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
+	public static com.liferay.portlet.wiki.model.WikiNode addNode(
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .addNode(plid, name, description, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addNode(plid, name, description, communityPermissions,
-			guestPermissions);
+		return getService().addNode(name, description, serviceContext);
 	}
 
 	public static void deleteNode(long nodeId)

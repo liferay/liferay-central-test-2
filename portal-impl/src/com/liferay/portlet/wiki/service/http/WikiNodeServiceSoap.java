@@ -82,30 +82,12 @@ import java.rmi.RemoteException;
  */
 public class WikiNodeServiceSoap {
 	public static com.liferay.portlet.wiki.model.WikiNodeSoap addNode(
-		long plid, java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
-					name, description, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiNodeSoap addNode(
-		long plid, java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
-					name, description, communityPermissions, guestPermissions);
+			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(name,
+					description, serviceContext);
 
 			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
 		}

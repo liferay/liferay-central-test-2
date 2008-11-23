@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -67,8 +67,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.portlet.PortletPreferences;
-
 /**
  * <a href="WikiPageServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -80,8 +78,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public WikiPage addPage(
 			long nodeId, String title, String content, String summary,
-			boolean minorEdit, PortletPreferences preferences,
-			ThemeDisplay themeDisplay)
+			boolean minorEdit, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -89,7 +86,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		return wikiPageLocalService.addPage(
 			getUserId(), nodeId, title, content, summary, minorEdit,
-			preferences, themeDisplay);
+			serviceContext);
 	}
 
 	public void addPageAttachments(
@@ -105,7 +102,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public void changeParent(
 			long nodeId, String title, String newParentTitle,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -115,8 +112,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		wikiPageLocalService.changeParent(
-			getUserId(), nodeId, title, newParentTitle, preferences,
-			themeDisplay);
+			getUserId(), nodeId, title, newParentTitle, serviceContext);
 	}
 
 	public void deletePage(long nodeId, String title)
@@ -229,7 +225,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public void movePage(
 			long nodeId, String title, String newTitle,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -239,19 +235,19 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		wikiPageLocalService.movePage(
-			getUserId(), nodeId, title, newTitle, preferences, themeDisplay);
+			getUserId(), nodeId, title, newTitle, serviceContext);
 	}
 
 	public WikiPage revertPage(
 			long nodeId, String title, double version,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.revertPage(
-			getUserId(), nodeId, title, version, preferences, themeDisplay);
+			getUserId(), nodeId, title, version, serviceContext);
 	}
 
 	public void subscribePage(long nodeId, String title)
@@ -275,9 +271,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	public WikiPage updatePage(
 			long nodeId, String title, double version, String content,
 			String summary, boolean minorEdit, String format,
-			String parentTitle, String redirectTitle, String[] tagsCategories,
-			String[] tagsEntries, PortletPreferences preferences,
-			ThemeDisplay themeDisplay)
+			String parentTitle, String redirectTitle,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -285,8 +280,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		return wikiPageLocalService.updatePage(
 			getUserId(), nodeId, title, version, content, summary, minorEdit,
-			format, parentTitle, redirectTitle, tagsCategories, tagsEntries,
-			preferences, themeDisplay);
+			format, parentTitle, redirectTitle, serviceContext);
 	}
 
 	protected String exportToRSS(

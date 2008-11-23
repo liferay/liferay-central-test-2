@@ -73,24 +73,13 @@ import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
  *
  */
 public class WikiNodeServiceJSON {
-	public static JSONObject addNode(long plid, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addNode(java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
-				name, description, addCommunityPermissions, addGuestPermissions);
-
-		return WikiNodeJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addNode(long plid, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
-				name, description, communityPermissions, guestPermissions);
+		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(name,
+				description, serviceContext);
 
 		return WikiNodeJSONSerializer.toJSONObject(returnValue);
 	}

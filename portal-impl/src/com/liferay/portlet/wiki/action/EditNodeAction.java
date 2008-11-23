@@ -25,13 +25,14 @@ package com.liferay.portlet.wiki.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
+import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 
@@ -145,25 +146,19 @@ public class EditNodeAction extends PortletAction {
 	}
 
 	protected void updateNode(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiNode.class.getName(), actionRequest);
 
 		if (nodeId <= 0) {
 
 			// Add node
 
-			WikiNodeServiceUtil.addNode(
-				layout.getPlid(), name, description, communityPermissions,
-				guestPermissions);
+			WikiNodeServiceUtil.addNode(name, description, serviceContext);
 		}
 		else {
 
