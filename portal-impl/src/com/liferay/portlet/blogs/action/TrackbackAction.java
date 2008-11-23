@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -121,9 +123,11 @@ public class TrackbackAction extends PortletAction {
 
 		long userId = UserLocalServiceUtil.getDefaultUserId(
 			themeDisplay.getCompanyId());
-		long groupId = themeDisplay.getScopeGroupId();
 		String className = BlogsEntry.class.getName();
 		long classPK = entry.getEntryId();
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
@@ -138,8 +142,8 @@ public class TrackbackAction extends PortletAction {
 				themeDisplay.translate("read-more") + "[/url]";
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			userId, blogName, groupId, className, classPK, threadId,
-			parentMessageId, title, body, themeDisplay);
+			userId, blogName, className, classPK, threadId, parentMessageId,
+			title, body, serviceContext);
 
 		String trackbackUrl =
 			themeDisplay.getPortalURL() +

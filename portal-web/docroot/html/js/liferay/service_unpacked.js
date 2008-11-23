@@ -2105,6 +2105,13 @@ Liferay.Service.MB.MBCategory = {
 Liferay.Service.MB.MBMessage = {
 	serviceClassName: Liferay.Service.MB.servicePackage + "MBMessage" + Liferay.Service.classNameSuffix,
 
+	addDiscussionMessage: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addDiscussionMessage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	addMessage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "addMessage";
@@ -2207,6 +2214,13 @@ Liferay.Service.MB.MBThread = {
 	moveThread: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "moveThread";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	splitThread: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "splitThread";
 
 		return Liferay.Service.ajax(params, callback);
 	}

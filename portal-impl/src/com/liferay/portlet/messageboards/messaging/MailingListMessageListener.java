@@ -31,6 +31,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -215,16 +216,21 @@ public class MailingListMessageListener implements MessageListener {
 
 		String subject = MBUtil.getSubjectWithoutMessageId(mailMessage);
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
 				categoryId, subject, collector.getBody(), collector.getFiles(),
-				anonymous, 0.0, null, true, true);
+				anonymous, 0.0, serviceContext);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
 				categoryId, parentMessage.getThreadId(),
 				parentMessage.getMessageId(), subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, null, true, true);
+				collector.getFiles(), anonymous, 0.0, serviceContext);
 		}
 	}
 

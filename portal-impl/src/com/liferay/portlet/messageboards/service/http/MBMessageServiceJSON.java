@@ -74,16 +74,15 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
  *
  */
 public class MBMessageServiceJSON {
-	public static JSONObject addMessage(long categoryId,
+	public static JSONObject addDiscussionMessage(java.lang.String className,
+		long classPK, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-				subject, body, files, anonymous, priority, tagsEntries,
-				addCommunityPermissions, addGuestPermissions);
+		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(className,
+				classPK, threadId, parentMessageId, subject, body,
+				serviceContext);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
@@ -91,14 +90,12 @@ public class MBMessageServiceJSON {
 	public static JSONObject addMessage(long categoryId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		boolean anonymous, double priority,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-				subject, body, files, anonymous, priority, tagsEntries,
-				communityPermissions, guestPermissions);
+				subject, body, files, anonymous, priority, serviceContext);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
@@ -106,29 +103,13 @@ public class MBMessageServiceJSON {
 	public static JSONObject addMessage(long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean anonymous, double priority,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
-				priority, tagsEntries, addCommunityPermissions,
-				addGuestPermissions);
-
-		return MBMessageJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addMessage(long categoryId, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-				threadId, parentMessageId, subject, body, files, anonymous,
-				priority, tagsEntries, communityPermissions, guestPermissions);
+				priority, serviceContext);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
@@ -193,13 +174,14 @@ public class MBMessageServiceJSON {
 		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
 
-	public static JSONObject updateDiscussionMessage(long groupId,
+	public static JSONObject updateDiscussionMessage(
 		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body)
+		java.lang.String subject, java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
-				className, classPK, messageId, subject, body);
+		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(className,
+				classPK, messageId, subject, body, serviceContext);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
@@ -208,11 +190,11 @@ public class MBMessageServiceJSON {
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
-		java.lang.String[] tagsEntries)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-				subject, body, files, existingFiles, priority, tagsEntries);
+				subject, body, files, existingFiles, priority, serviceContext);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}

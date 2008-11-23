@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -72,13 +73,19 @@ import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
  */
 public class MBBanServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
-		HttpPrincipal httpPrincipal, long plid, long banUserId)
+		HttpPrincipal httpPrincipal, long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(banUserId);
 
-			Object paramObj1 = new LongWrapper(banUserId);
+			Object paramObj1 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj1 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
 					"addBan", new Object[] { paramObj0, paramObj1 });
@@ -109,14 +116,19 @@ public class MBBanServiceHttp {
 		}
 	}
 
-	public static void deleteBan(HttpPrincipal httpPrincipal, long plid,
-		long banUserId)
+	public static void deleteBan(HttpPrincipal httpPrincipal, long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(banUserId);
 
-			Object paramObj1 = new LongWrapper(banUserId);
+			Object paramObj1 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj1 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
 					"deleteBan", new Object[] { paramObj0, paramObj1 });

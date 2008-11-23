@@ -25,7 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.BannedUserException;
 import com.liferay.portlet.messageboards.NoSuchBanException;
@@ -47,11 +47,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
-	public MBBan addBan(long userId, long plid, long banUserId)
+	public MBBan addBan(
+			long userId, long banUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		Date now = new Date();
 
 		long banId = counterLocalService.increment();
@@ -84,8 +85,10 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteBan(long plid, long banUserId) throws SystemException {
-		long groupId = PortalUtil.getScopeGroupId(plid);
+	public void deleteBan(long banUserId, ServiceContext serviceContext)
+		throws SystemException {
+
+		long groupId = serviceContext.getScopeGroupId();
 
 		try {
 			mbBanPersistence.removeByG_B(groupId, banUserId);

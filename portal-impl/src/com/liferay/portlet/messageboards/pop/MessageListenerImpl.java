@@ -32,6 +32,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -160,16 +161,21 @@ public class MessageListenerImpl implements MessageListener {
 
 			PermissionCheckerUtil.setThreadValues(user);
 
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
 					categoryId, subject, collector.getBody(),
-					collector.getFiles(), false, 0.0, null, true, true);
+					collector.getFiles(), false, 0.0, serviceContext);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
 					categoryId, parentMessage.getThreadId(),
 					parentMessage.getMessageId(), subject, collector.getBody(),
-					collector.getFiles(), false, 0.0, null, true, true);
+					collector.getFiles(), false, 0.0, serviceContext);
 			}
 
 			if (_log.isDebugEnabled()) {

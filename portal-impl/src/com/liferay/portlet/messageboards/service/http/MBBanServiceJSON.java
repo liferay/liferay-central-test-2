@@ -73,18 +73,20 @@ import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
  *
  */
 public class MBBanServiceJSON {
-	public static JSONObject addBan(long plid, long banUserId)
+	public static JSONObject addBan(long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(plid,
-				banUserId);
+		com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(banUserId,
+				serviceContext);
 
 		return MBBanJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteBan(long plid, long banUserId)
+	public static void deleteBan(long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBBanServiceUtil.deleteBan(plid, banUserId);
+		MBBanServiceUtil.deleteBan(banUserId, serviceContext);
 	}
 }

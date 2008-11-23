@@ -46,16 +46,17 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBBanServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
-		long plid, long banUserId)
+		long banUserId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addBan(plid, banUserId);
+		return getService().addBan(banUserId, serviceContext);
 	}
 
-	public static void deleteBan(long plid, long banUserId)
+	public static void deleteBan(long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteBan(plid, banUserId);
+		getService().deleteBan(banUserId, serviceContext);
 	}
 
 	public static MBBanService getService() {

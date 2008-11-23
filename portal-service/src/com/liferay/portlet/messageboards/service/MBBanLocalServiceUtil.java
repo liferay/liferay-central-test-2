@@ -104,10 +104,11 @@ public class MBBanLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
-		long userId, long plid, long banUserId)
+		long userId, long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addBan(userId, plid, banUserId);
+		return getService().addBan(userId, banUserId, serviceContext);
 	}
 
 	public static void checkBan(long groupId, long banUserId)
@@ -116,9 +117,10 @@ public class MBBanLocalServiceUtil {
 		getService().checkBan(groupId, banUserId);
 	}
 
-	public static void deleteBan(long plid, long banUserId)
+	public static void deleteBan(long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.SystemException {
-		getService().deleteBan(plid, banUserId);
+		getService().deleteBan(banUserId, serviceContext);
 	}
 
 	public static void deleteBansByBanUserId(long banUserId)

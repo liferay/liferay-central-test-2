@@ -40,7 +40,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -434,7 +433,11 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(ban.getUserUuid());
-		long plid = context.getPlid();
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setPlid(context.getPlid());
 
 		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
 
@@ -443,7 +446,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		if (itr.hasNext()) {
 			User user = itr.next();
 
-			MBBanLocalServiceUtil.addBan(userId, plid, user.getUserId());
+			MBBanLocalServiceUtil.addBan(
+				userId, user.getUserId(), serviceContext);
 		}
 		else {
 			_log.error(
@@ -627,12 +631,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				MBMessage.class, message.getMessageId());
 		}
 
-		PortletPreferences preferences = null;
+		ServiceContext serviceContext = new ServiceContext();
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
-
-		ThemeDisplay themeDisplay = null;
+		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {
@@ -667,26 +671,22 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					MBMessageLocalServiceUtil.updateMessage(
 						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
-						existingFiles, message.getPriority(), tagsEntries,
-						preferences, themeDisplay);
+						existingFiles, message.getPriority(), serviceContext);
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, userName, categoryId,
 						threadId, parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
-						message.getPriority(), tagsEntries, preferences,
-						addCommunityPermissions, addGuestPermissions,
-						themeDisplay);
+						message.getPriority(), serviceContext);
 				}
 			}
 			else {
 				existingMessage = MBMessageLocalServiceUtil.addMessage(
 					userId, userName, categoryId, threadId, parentMessageId,
 					message.getSubject(), message.getBody(), files,
-					message.getAnonymous(), message.getPriority(), tagsEntries,
-					preferences, addCommunityPermissions, addGuestPermissions,
-					themeDisplay);
+					message.getAnonymous(), message.getPriority(),
+					serviceContext);
 			}
 
 			threadPKs.put(message.getThreadId(), existingMessage.getThreadId());

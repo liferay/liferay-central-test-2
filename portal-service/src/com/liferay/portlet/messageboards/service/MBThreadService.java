@@ -59,8 +59,7 @@ public interface MBThreadService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, javax.portlet.PortletPreferences preferences,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

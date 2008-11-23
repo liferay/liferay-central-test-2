@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -482,11 +483,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 			long threadId = MapUtil.getLong(
 				threadPKs, message.getThreadId(), message.getThreadId());
 
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setScopeGroupId(groupId);
+
 			MBMessage newMessage =
 				MBMessageLocalServiceUtil.addDiscussionMessage(
-					userId, message.getUserName(), groupId, classObj.getName(),
+					userId, message.getUserName(), classObj.getName(),
 					((Long)newClassPK).longValue(), threadId,
-					parentMessageId, message.getSubject(), message.getBody());
+					parentMessageId, message.getSubject(), message.getBody(),
+					serviceContext);
 
 			messagePKs.put(message.getMessageId(), newMessage.getMessageId());
 			threadPKs.put(message.getThreadId(), newMessage.getThreadId());

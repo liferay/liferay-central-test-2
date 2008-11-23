@@ -82,10 +82,11 @@ import java.rmi.RemoteException;
  */
 public class MBBanServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBBanSoap addBan(
-		long plid, long banUserId) throws RemoteException {
+		long banUserId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(plid,
-					banUserId);
+			com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(banUserId,
+					serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBBanSoap.toSoapModel(returnValue);
 		}
@@ -96,10 +97,11 @@ public class MBBanServiceSoap {
 		}
 	}
 
-	public static void deleteBan(long plid, long banUserId)
+	public static void deleteBan(long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			MBBanServiceUtil.deleteBan(plid, banUserId);
+			MBBanServiceUtil.deleteBan(banUserId, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

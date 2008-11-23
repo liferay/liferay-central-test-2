@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -49,7 +51,6 @@ import java.util.ArrayList;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -126,7 +127,8 @@ public class SplitThreadAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBThread.class.getName(), actionRequest);
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
@@ -136,7 +138,7 @@ public class SplitThreadAction extends PortletAction {
 		long oldParentMessageId = message.getParentMessageId();
 
 		MBThread newThread = MBThreadServiceUtil.splitThread(
-			messageId, preferences, themeDisplay);
+			messageId, serviceContext);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
 			actionRequest, "addExplanationPost");
@@ -161,11 +163,13 @@ public class SplitThreadAction extends PortletAction {
 					newThreadURL
 				});
 
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+
 			MBMessageServiceUtil.addMessage(
 				message.getCategoryId(), oldThreadId, oldParentMessageId,
 				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
-				false, MBThreadImpl.PRIORITY_NOT_GIVEN, null, preferences, true,
-				true, themeDisplay);
+				false, MBThreadImpl.PRIORITY_NOT_GIVEN, serviceContext);
 		}
 
 		PortletURL portletURL =

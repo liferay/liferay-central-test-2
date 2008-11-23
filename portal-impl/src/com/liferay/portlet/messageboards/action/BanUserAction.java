@@ -25,10 +25,11 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -76,19 +77,21 @@ public class BanUserAction extends PortletAction {
 	}
 
 	protected void banUser(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBBan.class.getName(), actionRequest);
 
 		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
 
-		MBBanServiceUtil.addBan(layout.getPlid(), banUserId);
+		MBBanServiceUtil.addBan(banUserId, serviceContext);
 	}
 
 	protected void unbanUser(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBBan.class.getName(), actionRequest);
 
 		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
 
-		MBBanServiceUtil.deleteBan(layout.getPlid(), banUserId);
+		MBBanServiceUtil.deleteBan(banUserId, serviceContext);
 	}
 
 }

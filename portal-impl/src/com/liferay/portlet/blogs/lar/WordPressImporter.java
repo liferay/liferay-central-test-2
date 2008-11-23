@@ -202,11 +202,14 @@ public class WordPressImporter {
 			commentParentId = messageIdMap.get(commentParentId);
 		}
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(context.getGroupId());
+
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			defaultUser.getUserId(), commentAuthor, context.getGroupId(),
-			BlogsEntry.class.getName(), entry.getEntryId(),
-			messageDisplay.getThread().getThreadId(), commentParentId, null,
-			commentContent);
+			defaultUser.getUserId(), commentAuthor, BlogsEntry.class.getName(),
+			entry.getEntryId(), messageDisplay.getThread().getThreadId(),
+			commentParentId, null, commentContent, serviceContext);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}

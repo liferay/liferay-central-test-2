@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -123,10 +123,9 @@ public class EditDiscussionAction extends PortletAction {
 	protected MBMessage updateMessage(ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
 
-		long groupId = PortalUtil.getScopeGroupId(actionRequest);
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
@@ -145,15 +144,15 @@ public class EditDiscussionAction extends PortletAction {
 			// Add message
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
-				groupId, className, classPK, threadId, parentMessageId, subject,
-				body, themeDisplay);
+				className, classPK, threadId, parentMessageId, subject, body,
+				serviceContext);
 		}
 		else {
 
 			// Update message
 
 			message = MBMessageServiceUtil.updateDiscussionMessage(
-				groupId, className, classPK, messageId, subject, body);
+				className, classPK, messageId, subject, body, serviceContext);
 		}
 
 		return message;

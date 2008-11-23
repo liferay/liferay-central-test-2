@@ -34,11 +34,11 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -57,7 +57,6 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -179,11 +178,6 @@ public class EditMessageAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
-
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
@@ -220,12 +214,8 @@ public class EditMessageAction extends PortletAction {
 		boolean anonymous = ParamUtil.getBoolean(actionRequest, "anonymous");
 		double priority = ParamUtil.getDouble(actionRequest, "priority");
 
-		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
-
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = null;
 
@@ -240,8 +230,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
-					tagsEntries, preferences, communityPermissions,
-					guestPermissions, themeDisplay);
+					serviceContext);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -254,8 +243,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, threadId, parentMessageId, subject, body, files,
-					anonymous, priority, tagsEntries, preferences,
-					communityPermissions, guestPermissions, themeDisplay);
+					anonymous, priority, serviceContext);
 			}
 		}
 		else {
@@ -274,7 +262,7 @@ public class EditMessageAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, subject, body, files, existingFiles, priority,
-				tagsEntries, preferences, themeDisplay);
+				serviceContext);
 
 			if (message.isRoot()) {
 				if (question) {

@@ -28,15 +28,12 @@ import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.portlet.PortletPreferences;
 
 /**
  * <a href="MBMessageServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -147,18 +144,15 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 				new ArrayList<ObjectValuePair<String, byte[]>>();
 			boolean anonymous = false;
 			double priority = 0.0;
-			String[] tagsEntries = null;
-			PortletPreferences preferences = null;
 
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+			ServiceContext serviceContext = new ServiceContext();
 
-			ThemeDisplay themeDisplay = null;
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
 
 			MBMessageServiceUtil.addMessage(
 				_category.getCategoryId(), _subject, body, files, anonymous,
-				priority, tagsEntries, preferences, addCommunityPermissions,
-				addGuestPermissions, themeDisplay);
+				priority, serviceContext);
 		}
 
 		private String _subject;

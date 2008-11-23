@@ -96,5 +96,21 @@ public class MBThreadServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBThreadSoap splitThread(
+		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBThread returnValue = MBThreadServiceUtil.splitThread(messageId,
+					serviceContext);
+
+			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(MBThreadServiceSoap.class);
 }

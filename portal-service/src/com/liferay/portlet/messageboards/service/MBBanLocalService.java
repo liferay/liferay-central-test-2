@@ -92,7 +92,7 @@ public interface MBBanLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
-		long plid, long banUserId)
+		long banUserId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -100,7 +100,8 @@ public interface MBBanLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteBan(long plid, long banUserId)
+	public void deleteBan(long banUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteBansByBanUserId(long banUserId)

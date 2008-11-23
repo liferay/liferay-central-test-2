@@ -25,13 +25,11 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBThreadServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
-
-import javax.portlet.PortletPreferences;
 
 /**
  * <a href="MBThreadServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -56,9 +54,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		return mbThreadLocalService.moveThread(categoryId, threadId);
 	}
 
-	public MBThread splitThread(
-			long messageId, PortletPreferences preferences,
-			ThemeDisplay themeDisplay)
+	public MBThread splitThread(long messageId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -67,8 +63,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			getPermissionChecker(), message.getCategoryId(),
 			ActionKeys.MOVE_THREAD);
 
-		return mbThreadLocalService.splitThread(
-			messageId, preferences, themeDisplay);
+		return mbThreadLocalService.splitThread(messageId, serviceContext);
 	}
 
 }

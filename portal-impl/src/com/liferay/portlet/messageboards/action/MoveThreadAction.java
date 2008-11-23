@@ -26,15 +26,16 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
@@ -46,7 +47,6 @@ import java.util.ArrayList;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -120,11 +120,6 @@ public class MoveThreadAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
-
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
@@ -139,11 +134,13 @@ public class MoveThreadAction extends PortletAction {
 			String subject = ParamUtil.getString(actionRequest, "subject");
 			String body = ParamUtil.getString(actionRequest, "body");
 
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				MBMessage.class.getName(), actionRequest);
+
 			MBMessageServiceUtil.addMessage(
 				categoryId, threadId, thread.getRootMessageId(), subject, body,
 				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
-				MBThreadImpl.PRIORITY_NOT_GIVEN, null, preferences, true, true,
-				themeDisplay);
+				MBThreadImpl.PRIORITY_NOT_GIVEN, serviceContext);
 		}
 
 		PortletURL portletURL =

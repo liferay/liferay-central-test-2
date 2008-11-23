@@ -81,4 +81,14 @@ public class MBThreadServiceJSON {
 
 		return MBThreadJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject splitThread(long messageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.messageboards.model.MBThread returnValue = MBThreadServiceUtil.splitThread(messageId,
+				serviceContext);
+
+		return MBThreadJSONSerializer.toJSONObject(returnValue);
+	}
 }

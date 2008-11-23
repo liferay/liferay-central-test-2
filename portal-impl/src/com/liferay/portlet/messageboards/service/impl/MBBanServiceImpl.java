@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
@@ -38,24 +39,24 @@ import com.liferay.portlet.messageboards.service.base.MBBanServiceBaseImpl;
  */
 public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 
-	public MBBan addBan(long plid, long banUserId)
+	public MBBan addBan(long banUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.MESSAGE_BOARDS,
-			ActionKeys.BAN_USER);
+			getPermissionChecker(), serviceContext.getPlid(),
+			PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER);
 
-		return mbBanLocalService.addBan(getUserId(), plid, banUserId);
+		return mbBanLocalService.addBan(getUserId(), banUserId, serviceContext);
 	}
 
-	public void deleteBan(long plid, long banUserId)
+	public void deleteBan(long banUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.MESSAGE_BOARDS,
-			ActionKeys.BAN_USER);
+			getPermissionChecker(), serviceContext.getPlid(),
+			PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER);
 
-		mbBanLocalService.deleteBan(plid, banUserId);
+		mbBanLocalService.deleteBan(banUserId, serviceContext);
 	}
 
 }

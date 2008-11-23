@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -61,8 +62,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.portlet.PortletPreferences;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -75,25 +74,23 @@ import org.apache.commons.logging.LogFactory;
 public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
-			long groupId, String className, long classPK, long threadId,
-			long parentMessageId, String subject, String body,
-			ThemeDisplay themeDisplay)
+			String className, long classPK, long threadId, long parentMessageId,
+			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
-			getPermissionChecker(), groupId, className, classPK,
-			ActionKeys.ADD_DISCUSSION);
+			getPermissionChecker(), serviceContext.getScopeGroupId(), className,
+			classPK, ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
-			getUserId(), null, groupId, className, classPK, threadId,
-			parentMessageId, subject, body, themeDisplay);
+			getUserId(), null, className, classPK, threadId, parentMessageId,
+			subject, body, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long categoryId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -114,105 +111,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, tagsEntries, null, addCommunityPermissions,
-			addGuestPermissions, null);
-	}
-
-	public MBMessage addMessage(
-			long categoryId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, tagsEntries, null, communityPermissions,
-			guestPermissions, null);
-	}
-
-	public MBMessage addMessage(
-			long categoryId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			PortletPreferences preferences, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, tagsEntries, preferences,
-			addCommunityPermissions, addGuestPermissions, themeDisplay);
-	}
-
-	public MBMessage addMessage(
-			long categoryId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			PortletPreferences preferences, String[] communityPermissions,
-			String[] guestPermissions, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, tagsEntries, preferences, communityPermissions,
-			guestPermissions, themeDisplay);
+			anonymous, priority, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(categoryId, parentMessageId);
@@ -232,97 +138,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, null,
-			addCommunityPermissions, addGuestPermissions, null);
-	}
-
-	public MBMessage addMessage(
-			long categoryId, long threadId, long parentMessageId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		checkReplyToPermission(categoryId, parentMessageId);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, null,
-			communityPermissions, guestPermissions, null);
-	}
-
-	public MBMessage addMessage(
-			long categoryId, long threadId, long parentMessageId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			PortletPreferences preferences, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		checkReplyToPermission(categoryId, parentMessageId);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, preferences,
-			addCommunityPermissions, addGuestPermissions, themeDisplay);
-	}
-
-	public MBMessage addMessage(
-			long categoryId, long threadId, long parentMessageId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, String[] tagsEntries,
-			PortletPreferences preferences, String[] communityPermissions,
-			String[] guestPermissions, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		checkReplyToPermission(categoryId, parentMessageId);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, preferences,
-			communityPermissions, guestPermissions, themeDisplay);
+			subject, body, files, anonymous, priority, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(
@@ -640,13 +456,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage updateDiscussionMessage(
-			long groupId, String className, long classPK, long messageId,
-			String subject, String body)
+			String className, long classPK, long messageId, String subject,
+			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
-			getPermissionChecker(), groupId, className, classPK, messageId,
-			ActionKeys.UPDATE_DISCUSSION);
+			getPermissionChecker(), serviceContext.getScopeGroupId(), className,
+			classPK, messageId, ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(
 			getUserId(), messageId, subject, body);
@@ -655,7 +471,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	public MBMessage updateMessage(
 			long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
-			List<String> existingFiles, double priority, String[] tagsEntries)
+			List<String> existingFiles, double priority,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -682,41 +499,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, subject, body, files, existingFiles,
-			priority, tagsEntries, null, null);
-	}
-
-	public MBMessage updateMessage(
-			long messageId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files,
-			List<String> existingFiles, double priority, String[] tagsEntries,
-			PortletPreferences preferences, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		MBMessage message = mbMessageLocalService.getMessage(messageId);
-
-		MBMessagePermission.check(
-			getPermissionChecker(), messageId, ActionKeys.UPDATE);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), message.getCategoryId(),
-				ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), message.getCategoryId(),
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			MBThread thread = mbThreadLocalService.getThread(
-				message.getThreadId());
-
-			priority = thread.getPriority();
-		}
-
-		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, subject, body, files, existingFiles,
-			priority, tagsEntries, preferences, themeDisplay);
+			priority, serviceContext);
 	}
 
 	protected void checkReplyToPermission(long categoryId, long parentMessageId)
