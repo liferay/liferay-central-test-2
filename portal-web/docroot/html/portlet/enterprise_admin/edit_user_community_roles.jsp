@@ -80,10 +80,10 @@ for (int i = 0; i < groups.size(); i++) {
 			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_group_role_action.jsp");
 		}
 
-		// Row css classname
+		// CSS
 
-		row.setClassName(role.getCssClassName());
-		row.setClassHoverName(role.getCssClassName());
+		row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
+		row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
 
 		// Add result row
 

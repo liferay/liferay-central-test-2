@@ -74,8 +74,8 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 		keyProperty="roleId"
 		modelVar="role"
 	>
-		<liferay-util:param name="className" value="<%= role.getCssClassName() %>" />
-		<liferay-util:param name="classHoverName" value="<%= role.getCssClassName() %>" />
+		<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+		<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
 
 		<%
 		StringBuilder sb = new StringBuilder();

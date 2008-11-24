@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
@@ -41,25 +40,6 @@ import java.util.Locale;
 public class RoleImpl extends RoleModelImpl implements Role {
 
 	public RoleImpl() {
-	}
-
-	public String getCssClassName() {
-		String cssClassName = StringPool.BLANK;
-
-		if (getName().equals(RoleConstants.GUEST)) {
-			cssClassName = "lfr-role-guest";
-		}
-		else if (getType() == RoleConstants.TYPE_REGULAR) {
-			cssClassName = "lfr-role-regular";
-		}
-		else if (getType() == RoleConstants.TYPE_COMMUNITY) {
-			cssClassName = "lfr-role-community";
-		}
-		else if (getType() == RoleConstants.TYPE_ORGANIZATION) {
-			cssClassName = "lfr-role-organization";
-		}
-
-		return "lfr-role " + cssClassName;
 	}
 
 	public String getTitle(Locale locale) {

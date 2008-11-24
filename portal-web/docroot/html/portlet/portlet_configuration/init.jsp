@@ -54,6 +54,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoTable" %>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>

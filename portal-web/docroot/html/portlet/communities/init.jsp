@@ -81,6 +81,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.portlet.tasks.DuplicateReviewUserIdException" %>
 <%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
 <%@ page import="com.liferay.portlet.tasks.NoSuchReviewException" %>

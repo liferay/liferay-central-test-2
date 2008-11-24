@@ -203,10 +203,10 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			row.addText(sb.toString());
 		}
 
-		// Row css classname
+		// CSS
 
-		row.setClassName(role.getCssClassName());
-		row.setClassHoverName(role.getCssClassName());
+		row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
+		row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
 
 		// Add result row
 

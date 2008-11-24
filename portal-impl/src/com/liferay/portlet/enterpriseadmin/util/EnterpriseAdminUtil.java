@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
@@ -90,6 +91,28 @@ import javax.portlet.ActionRequest;
 public class EnterpriseAdminUtil {
 
 	public static final String CUSTOM_QUESTION = "write-my-own-question";
+
+	public static String getCssClassName(Role role) {
+		String cssClassName = StringPool.BLANK;
+
+		String name = role.getName();
+		int type = role.getType();
+
+		if (name.equals(RoleConstants.GUEST)) {
+			cssClassName = "lfr-role-guest";
+		}
+		else if (type == RoleConstants.TYPE_REGULAR) {
+			cssClassName = "lfr-role-regular";
+		}
+		else if (type == RoleConstants.TYPE_COMMUNITY) {
+			cssClassName = "lfr-role-community";
+		}
+		else if (type == RoleConstants.TYPE_ORGANIZATION) {
+			cssClassName = "lfr-role-organization";
+		}
+
+		return "lfr-role " + cssClassName;
+	}
 
 	public static void filterGroups(
 			PermissionChecker permissionChecker, List<Group> groups)
