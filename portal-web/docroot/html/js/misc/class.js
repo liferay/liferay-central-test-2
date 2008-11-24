@@ -77,7 +77,7 @@ Class.prototype = {
 		for (var property in properties){
 			var previous = pr0t0typ3[property];
 			var current = properties[property];
-			if (previous && previous != current) current = previous.parentize(current) || current;
+			if (typeof previous == 'function' && previous && previous != current) current = previous.parentize(current) || current;
 			pr0t0typ3[property] = current;
 		}
 		return new Class(pr0t0typ3);
