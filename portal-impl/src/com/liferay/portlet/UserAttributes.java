@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -240,10 +241,9 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-	            returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.DATE));
+	            returnValue = String.valueOf(_calendar.get(Calendar.DATE));
             }
 
             return returnValue;
@@ -252,10 +252,10 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-	            returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.MILLISECOND));
+	            returnValue = String.valueOf(
+					_calendar.get(Calendar.MILLISECOND));
             }
 
             return returnValue;
@@ -264,10 +264,9 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-	            returnValue = Integer.toString(
-		            _gregorianCalendar.get(GregorianCalendar.HOUR));
+	            returnValue = String.valueOf(_calendar.get(Calendar.HOUR));
             }
 
             return returnValue;
@@ -276,10 +275,9 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-                returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.MINUTE));
+                returnValue = String.valueOf(_calendar.get(Calendar.MINUTE));
             }
 
             return returnValue;
@@ -288,10 +286,9 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-                returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.MONTH) + 1);
+                returnValue = String.valueOf(_calendar.get(Calendar.MONTH) + 1);
             }
 
             return returnValue;
@@ -300,10 +297,9 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-                returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.SECOND));
+                returnValue = String.valueOf(_calendar.get(Calendar.SECOND));
             }
 
             return returnValue;
@@ -312,10 +308,10 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-                returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.ZONE_OFFSET));
+                returnValue = String.valueOf(
+					_calendar.get(Calendar.ZONE_OFFSET));
             }
             return returnValue;
 		}
@@ -323,10 +319,9 @@ public class UserAttributes {
 			String returnValue = null;
 
             if (_user.getBirthday() != null) {
-                _gregorianCalendar.setTime(_user.getBirthday());
+                _calendar.setTime(_user.getBirthday());
 
-                returnValue = Integer.toString(
-	                _gregorianCalendar.get(GregorianCalendar.YEAR));
+                returnValue = String.valueOf(_calendar.get(Calendar.YEAR));
             }
 
             return returnValue;
@@ -576,6 +571,6 @@ public class UserAttributes {
 	private User _user;
 	private Address _homeAddress;
 	private Address _bizAddress;
-	private GregorianCalendar _gregorianCalendar = new GregorianCalendar();
+	private Calendar _calendar = new GregorianCalendar();
 
 }
