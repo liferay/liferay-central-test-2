@@ -113,7 +113,7 @@ else {
 					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
 
 						<%
-						List<ListType> emailAddressTypes = ListTypeServiceUtil.getListTypes(Contact.class.getName() + ListTypeImpl.EMAIL_ADDRESS);
+						List<ListType> emailAddressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.EMAIL_ADDRESS);
 
 						for (ListType suffix : emailAddressTypes) {
 						%>

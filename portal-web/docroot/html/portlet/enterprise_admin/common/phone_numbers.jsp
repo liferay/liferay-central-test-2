@@ -125,7 +125,7 @@ else {
 					<select name="<portlet:namespace /><%= fieldParam %>">
 
 						<%
-						List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(Contact.class.getName() + ListTypeImpl.PHONE);
+						List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.PHONE);
 
 						for (ListType suffix : phoneTypes) {
 						%>
