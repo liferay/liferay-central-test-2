@@ -143,10 +143,11 @@ public class PortalUtil {
 		return getPortal().getControlPanelCategory(portletId);
 	}
 
-	public static List<Portlet> getControlPanelPortlets(String category)
+	public static List<Portlet> getControlPanelPortlets(
+			long companyId, String category)
 		throws SystemException {
 
-		return getPortal().getControlPanelPortlets(category);
+		return getPortal().getControlPanelPortlets(companyId, category);
 	}
 
 	public static String getCurrentURL(HttpServletRequest request) {

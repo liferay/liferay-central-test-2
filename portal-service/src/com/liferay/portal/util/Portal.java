@@ -118,7 +118,8 @@ public interface Portal {
 	public String getControlPanelCategory(String portletId)
 		throws SystemException;
 
-	public List<Portlet> getControlPanelPortlets(String category)
+	public List<Portlet> getControlPanelPortlets(
+			long companyId, String category)
 		throws SystemException;
 
 	public String getCurrentURL(HttpServletRequest request);

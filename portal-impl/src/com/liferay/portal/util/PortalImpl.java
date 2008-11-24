@@ -577,14 +577,15 @@ public class PortalImpl implements Portal {
 		return StringPool.BLANK;
 	}
 
-	public List<Portlet> getControlPanelPortlets(String category)
+	public List<Portlet> getControlPanelPortlets(
+			long companyId, String category)
 		throws SystemException {
 
 		Set<Portlet> portletsSet = new TreeSet<Portlet>(
 			new PortletControlPanelWeightComparator());
 
 		List<Portlet> portletsList = PortletLocalServiceUtil.getPortlets(
-			CompanyThreadLocal.getCompanyId());
+			companyId);
 
 		for (Portlet portlet : portletsList) {
 			if (category.equals(portlet.getControlPanelEntryCategory())) {

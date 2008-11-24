@@ -44,7 +44,7 @@
 
 		cssClass += " " + GetterUtil.getString(SessionClicks.get(request, panelCategory, null), "open");
 
-		List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category);
+		List<Portlet> portlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), category);
 
 		portlets = filterPortlets(permissionChecker, scopeGroupId, category, portlets);
 
