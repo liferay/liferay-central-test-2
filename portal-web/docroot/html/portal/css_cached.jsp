@@ -141,6 +141,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 .lfr-flyout ul {
 	display: none;
 }
+
 .js li.lfr-flyout {
 	display: block;
 	position: relative;
