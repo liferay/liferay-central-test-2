@@ -1,7 +1,3 @@
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoTable" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -151,8 +147,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	List<Role> results = null;
 
 	if (modelResource.equals(ExpandoColumn.class.getName())) {
-		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getExpandoColumn(Long.parseLong(resourcePrimKey));
+		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getExpandoColumn(GetterUtil.getLong(resourcePrimKey));
 		ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getExpandoTable(expandoColumn.getTableId());
+
 		String rootModelResource = expandoTable.getClassName();
 
 		results = ResourceActionsUtil.getRoles(group, rootModelResource);

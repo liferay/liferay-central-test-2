@@ -287,8 +287,9 @@ public class ResourceActionsUtil {
 		};
 
 		if (isPortalModelResource(modelResource)) {
-			if (modelResource.equals(User.class.getName()) ||
-				modelResource.equals(Organization.class.getName())) {
+			if (modelResource.equals(Organization.class.getName()) ||
+				modelResource.equals(User.class.getName())) {
+
 				types = new int[] {
 					RoleConstants.TYPE_REGULAR,
 					RoleConstants.TYPE_ORGANIZATION
