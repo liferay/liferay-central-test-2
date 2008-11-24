@@ -803,6 +803,16 @@ public class PortalImpl implements Portal {
 
 			return getHttpServletRequest(portletRequestWrapper.getRequest());
 		}
+		else if (portletRequest instanceof
+			com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl) {
+
+			com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl
+				portletRequestImpl =
+			(com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl)
+				portletRequest;
+
+			return portletRequestImpl.getHttpServletRequest();
+		}
 		else {
 			throw new RuntimeException(
 				"Unable to get the HTTP servlet request from " +
@@ -830,6 +840,16 @@ public class PortalImpl implements Portal {
 				(PortletResponseWrapper)portletResponse;
 
 			return getHttpServletResponse(portletResponseWrapper.getResponse());
+		}
+		else if (portletResponse instanceof
+			com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl) {
+
+			com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl
+				portletResponseImpl =
+			(com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl)
+				portletResponse;
+
+			return portletResponseImpl.getHttpServletResponse();
 		}
 		else {
 			PortletResponseImpl portletResponseImpl =
@@ -1934,20 +1954,48 @@ public class PortalImpl implements Portal {
 	public UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest) {
 
-		ActionRequestImpl actionRequestImpl = (ActionRequestImpl)actionRequest;
+		if (actionRequest instanceof ActionRequestImpl) {
+			ActionRequestImpl actionRequestImpl =
+				(ActionRequestImpl)actionRequest;
 
-		DynamicServletRequest dynamicRequest =
-			(DynamicServletRequest)actionRequestImpl.getHttpServletRequest();
+			DynamicServletRequest dynamicRequest =
+				(DynamicServletRequest)
+				actionRequestImpl.getHttpServletRequest();
 
-		HttpServletRequestWrapper requestWrapper =
-			(HttpServletRequestWrapper)dynamicRequest.getRequest();
+			 HttpServletRequestWrapper requestWrapper =
+				 (HttpServletRequestWrapper)dynamicRequest.getRequest();
 
-		UploadServletRequest uploadRequest = getUploadServletRequest(
-			requestWrapper);
+			UploadServletRequest uploadRequest = getUploadServletRequest(
+				requestWrapper);
 
-		return new UploadPortletRequestImpl(
-			uploadRequest,
-			PortalUtil.getPortletNamespace(actionRequestImpl.getPortletName()));
+			return new UploadPortletRequestImpl(
+				uploadRequest,
+				PortalUtil.getPortletNamespace(
+				actionRequestImpl.getPortletName()));
+
+		}
+		else {
+
+			com.sun.portal.portletcontainer.portlet.impl.ActionRequestImpl
+				actionRequestImpl =
+				(com.sun.portal.portletcontainer.portlet.impl.ActionRequestImpl)
+				actionRequest;
+
+			HttpServletRequestWrapper requestWrapper =
+				(HttpServletRequestWrapper)
+				actionRequestImpl.getHttpServletRequest();
+
+			UploadServletRequest uploadRequest = getUploadServletRequest(
+				requestWrapper);
+
+			String portletWindowName = (String)actionRequest.getAttribute(
+				"javax.portlet.portletc.portletWindowName");
+
+			return new UploadPortletRequestImpl(
+				uploadRequest,
+				PortalUtil.getPortletNamespace(portletWindowName));
+		}
+
 	}
 
 	public UploadServletRequest getUploadServletRequest(
