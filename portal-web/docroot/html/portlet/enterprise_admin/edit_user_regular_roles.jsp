@@ -66,6 +66,11 @@ for (int i = 0; i < results.size(); i++) {
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_role_action.jsp");
 	}
 
+	// Row css classname
+
+	row.setClassName(role.getCssClassName());
+	row.setClassHoverName(role.getCssClassName());
+
 	// Add result row
 
 	resultRows.add(row);

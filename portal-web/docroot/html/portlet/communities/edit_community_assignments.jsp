@@ -281,6 +281,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 						row.addText(role.getDescription());
 
+						// Row css classname
+
+						row.setClassName(role.getCssClassName());
+						row.setClassHoverName(role.getCssClassName());
+
 						// Add result row
 
 						resultRows.add(row);

@@ -393,6 +393,11 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/role_action.jsp");
 
+				// Row css classname
+
+				row.setClassName(role.getCssClassName());
+				row.setClassHoverName(role.getCssClassName());
+
 				// Add result row
 
 				resultRows.add(row);

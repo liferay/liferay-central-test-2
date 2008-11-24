@@ -153,7 +153,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	if (modelResource.equals(ExpandoColumn.class.getName())) {
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getExpandoColumn(Long.parseLong(resourcePrimKey));
 		ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getExpandoTable(expandoColumn.getTableId());
-	    String rootModelResource = expandoTable.getClassName();
+		String rootModelResource = expandoTable.getClassName();
 
 		results = ResourceActionsUtil.getRoles(group, rootModelResource);
 	}
@@ -208,21 +208,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		// Row css classname
 
-		if (role.getName().equals(RoleConstants.GUEST)) {
-			row.setClassName("lfr-role-guest");
-		}
-		else if (role.getType() == 1) {
-			row.setClassName("lfr-role-regular");
-		}
-		else if (role.getType() == 2) {
-			row.setClassName("lfr-role-community");
-		}
-		else if (role.getType() == 3) {
-			row.setClassName("lfr-role-organization");
-		}
-
-		row.setClassName("lfr-role " + row.getClassName());
-		row.setClassHoverName("lfr-role " + row.getClassName());
+		row.setClassName(role.getCssClassName());
+		row.setClassHoverName(role.getCssClassName());
 
 		// Add result row
 

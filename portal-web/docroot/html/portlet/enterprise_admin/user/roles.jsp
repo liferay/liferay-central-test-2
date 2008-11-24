@@ -70,6 +70,9 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 		keyProperty="roleId"
 		modelVar="role"
 	>
+		<liferay-util:param name="className" value="<%= role.getCssClassName() %>" />
+		<liferay-util:param name="classHoverName" value="<%= role.getCssClassName() %>" />
+
 		<liferay-ui:search-container-column-text
 			name="title"
 			value="<%= role.getTitle(locale) %>"

@@ -49,6 +49,8 @@ package com.liferay.portal.model;
  *
  */
 public interface Role extends RoleModel {
+	public java.lang.String getCssClassName();
+
 	public java.lang.String getTitle(java.util.Locale locale);
 
 	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);

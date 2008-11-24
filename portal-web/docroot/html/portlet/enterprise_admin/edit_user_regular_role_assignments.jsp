@@ -142,6 +142,11 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(role.getDescription(), rowURL);
 
+	// Row css classname
+
+	row.setClassName(role.getCssClassName());
+	row.setClassHoverName(role.getCssClassName());
+
 	// Add result row
 
 	resultRows.add(row);
