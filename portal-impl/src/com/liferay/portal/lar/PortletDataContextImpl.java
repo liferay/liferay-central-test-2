@@ -490,9 +490,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 			MBMessage newMessage =
 				MBMessageLocalServiceUtil.addDiscussionMessage(
 					userId, message.getUserName(), classObj.getName(),
-					((Long)newClassPK).longValue(), threadId,
-					parentMessageId, message.getSubject(), message.getBody(),
-					serviceContext);
+					newClassPK, threadId, parentMessageId, message.getSubject(),
+					message.getBody(), serviceContext);
 
 			messagePKs.put(message.getMessageId(), newMessage.getMessageId());
 			threadPKs.put(message.getThreadId(), newMessage.getThreadId());

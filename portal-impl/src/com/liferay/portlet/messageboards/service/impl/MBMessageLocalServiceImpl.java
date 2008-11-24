@@ -120,10 +120,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long classPK = 0;
 		long threadId = 0;
 		long parentMessageId = 0;
+		ServiceContext serviceContext = new ServiceContext();
 
 		return addDiscussionMessage(
 			userId, userName, className, classPK, threadId, parentMessageId,
-			subject, body, new ServiceContext());
+			subject, body, serviceContext);
 	}
 
 	public MBMessage addDiscussionMessage(
@@ -152,8 +153,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			userId, userName, categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, serviceContext);
 
-		if ((className.equals(BlogsEntry.class.getName())) &&
-			(serviceContext != null)) {
+		if (className.equals(BlogsEntry.class.getName())) {
 
 			// Social
 
@@ -187,8 +187,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (discussion == null) {
 				long discussionId = counterLocalService.increment();
 
-				discussion = mbDiscussionPersistence.create(
-					discussionId);
+				discussion = mbDiscussionPersistence.create(discussionId);
 
 				discussion.setClassNameId(PortalUtil.getClassNameId(className));
 				discussion.setClassPK(classPK);
@@ -1094,7 +1093,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 		List<String> existingFiles = new ArrayList<String>();
 		double priority = 0.0;
-
 		ServiceContext serviceContext = new ServiceContext();
 
 		return updateMessage(

@@ -77,19 +77,19 @@ public class BanUserAction extends PortletAction {
 	}
 
 	protected void banUser(ActionRequest actionRequest) throws Exception {
+		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBBan.class.getName(), actionRequest);
-
-		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
 
 		MBBanServiceUtil.addBan(banUserId, serviceContext);
 	}
 
 	protected void unbanUser(ActionRequest actionRequest) throws Exception {
+		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBBan.class.getName(), actionRequest);
-
-		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
 
 		MBBanServiceUtil.deleteBan(banUserId, serviceContext);
 	}

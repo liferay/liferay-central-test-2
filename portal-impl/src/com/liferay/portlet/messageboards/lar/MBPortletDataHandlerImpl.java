@@ -436,8 +436,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setPlid(context.getPlid());
+		serviceContext.setScopeGroupId(context.getGroupId());
 
 		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
 
@@ -633,9 +633,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setTagsEntries(tagsEntries);
 
 		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&

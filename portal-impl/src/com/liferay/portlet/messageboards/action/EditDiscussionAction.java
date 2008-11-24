@@ -123,9 +123,6 @@ public class EditDiscussionAction extends PortletAction {
 	protected MBMessage updateMessage(ActionRequest actionRequest)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			MBMessage.class.getName(), actionRequest);
-
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
@@ -136,6 +133,9 @@ public class EditDiscussionAction extends PortletAction {
 			actionRequest, "parentMessageId");
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = null;
 

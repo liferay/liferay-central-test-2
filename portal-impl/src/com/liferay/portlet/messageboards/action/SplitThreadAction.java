@@ -127,15 +127,15 @@ public class SplitThreadAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			MBThread.class.getName(), actionRequest);
-
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 		long oldThreadId = message.getThreadId();
 		long oldParentMessageId = message.getParentMessageId();
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBThread.class.getName(), actionRequest);
 
 		MBThread newThread = MBThreadServiceUtil.splitThread(
 			messageId, serviceContext);
