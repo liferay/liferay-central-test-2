@@ -53,7 +53,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 		searchContainer.addRow(rowColumns, groupId);
 		searchContainer.updateDataStore();
 
-		jQuery('.selected .modify-link:button').trigger('change');
+		jQuery('.selected .modify-link').trigger('change');
 	}
 </script>
 
@@ -117,5 +117,5 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input class="modify-link" onclick="<portlet:namespace />openGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openGroupSelector();" %>'/>
 </c:if>

@@ -82,7 +82,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore(organizationId);
 
-		jQuery('.selected .modify-link:button').trigger('change');
+		jQuery('.selected .modify-link').trigger('change');
 	}
 </script>
 
@@ -265,7 +265,7 @@ if (parentOrganization != null) {
 
 <br />
 
-<input class="modify-link" onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
+<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'/>
 
 <script type="text/javascript">
 	jQuery(

@@ -50,7 +50,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 		searchContainer.addRow(rowColumns, userGroupId);
 		searchContainer.updateDataStore();
 
-		jQuery('.selected .modify-link:button').trigger('change');
+		jQuery('.selected .modify-link').trigger('change');
 	}
 </script>
 
@@ -89,5 +89,5 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input class="modify-link" onclick="<portlet:namespace />openUserGroupSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openUserGroupSelector();" %>'/>
 </c:if>

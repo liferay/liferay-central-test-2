@@ -50,7 +50,7 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 		searchContainer.addRow(rowColumns, roleId);
 		searchContainer.updateDataStore();
 
-		jQuery('.selected .modify-link:button').trigger('change');
+		jQuery('.selected .modify-link').trigger('change');
 	}
 </script>
 
@@ -91,5 +91,5 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input class="modify-link" onclick="<portlet:namespace />openRoleSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openRoleSelector();" %>'/>
 </c:if>

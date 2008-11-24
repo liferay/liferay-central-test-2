@@ -54,7 +54,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore();
 
-		jQuery('.selected .modify-link:button').trigger('change');
+		jQuery('.selected .modify-link').trigger('change');
 	}
 </script>
 
@@ -125,5 +125,5 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<input class="modify-link" onclick="<portlet:namespace />openOrganizationSelector();" type="button" value="<liferay-ui:message key="select" />" />
+	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'/>
 </c:if>
