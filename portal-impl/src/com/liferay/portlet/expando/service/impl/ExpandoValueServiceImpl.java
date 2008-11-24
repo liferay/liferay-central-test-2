@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.expando.service.impl;
 
-import java.io.Serializable;
-
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -31,6 +29,8 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.base.ExpandoValueServiceBaseImpl;
 import com.liferay.portlet.expando.service.permission.ExpandoColumnPermission;
+
+import java.io.Serializable;
 
 /**
  * <a href="ExpandoValueServiceImpl.java.html"><b><i>View Source</i></b></a>

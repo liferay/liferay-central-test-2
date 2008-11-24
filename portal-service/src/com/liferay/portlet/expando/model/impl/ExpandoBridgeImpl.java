@@ -43,6 +43,7 @@ import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;

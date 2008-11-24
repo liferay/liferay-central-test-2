@@ -34,6 +34,7 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
+
 import java.util.Map;
 
 import javax.portlet.PortletConfig;

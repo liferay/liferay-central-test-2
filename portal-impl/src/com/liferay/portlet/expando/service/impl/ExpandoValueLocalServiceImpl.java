@@ -35,6 +35,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.portlet.expando.service.base.ExpandoValueLocalServiceBaseImpl;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 

@@ -47,6 +47,7 @@ import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
