@@ -30,6 +30,10 @@ themeDisplay.setIncludeServiceJs(true);
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
+if (Validator.isNull(backURL)) {
+	backURL = themeDisplay.getURLControlPanel();
+}
+
 User selUser = PortalUtil.getSelectedUser(request);
 
 Contact selContact = null;
@@ -150,15 +154,7 @@ String curSection = mainSections[0];
 
 	function <portlet:namespace />saveUser() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (selUser == null) ? Constants.ADD : Constants.UPDATE %>";
-
-		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
-
-		if (location.hash) {
-			redirect += location.hash;
-		}
-
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>&<portlet:namespace />backURL=<%= HttpUtil.encodeURL(backURL) %>&<portlet:namespace />p_u_i_d=";
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 	}
 </script>
