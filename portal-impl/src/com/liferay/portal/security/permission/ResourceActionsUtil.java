@@ -287,7 +287,16 @@ public class ResourceActionsUtil {
 		};
 
 		if (isPortalModelResource(modelResource)) {
-			types = new int[] {RoleConstants.TYPE_REGULAR};
+			if (modelResource.equals(User.class.getName()) ||
+				modelResource.equals(Organization.class.getName())) {
+				types = new int[] {
+					RoleConstants.TYPE_REGULAR,
+					RoleConstants.TYPE_ORGANIZATION
+				};
+			}
+			else {
+				types = new int[] {RoleConstants.TYPE_REGULAR};
+			}
 		}
 		else {
 			if (group.isOrganization()) {
