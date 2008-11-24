@@ -148,13 +148,13 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 			<c:otherwise>
 				<select name="<portlet:namespace />type">
 					<optgroup label="<liferay-ui:message key="presets" />">
-						<option value="PresetSelectionIntegerArray()">Selection of Integer Values</option>
-						<option value="PresetSelectionDoubleArray()">Selection of Decimal Values</option>
-						<option value="PresetSelectionStringArray()">Selection of Text Values</option>
-						<option value="PresetTextBox()">Text Box</option>
-						<option value="PresetTextBoxIndexed()">Text Box - Indexed</option>
-						<option value="PresetTextFieldSecret()">Text Field - Secret</option>
-						<option selected value="PresetTextFieldIndexed()">Text Field - Indexed</option>
+						<option value="PresetSelectionIntegerArray()"><liferay-ui:message key="selection-of-integer-values" /></option>
+						<option value="PresetSelectionDoubleArray()"><liferay-ui:message key="selection-of-decimal-values" /></option>
+						<option value="PresetSelectionStringArray()"><liferay-ui:message key="selection-of-text-values" /></option>
+						<option value="PresetTextBox()"><liferay-ui:message key="text-box" /></option>
+						<option value="PresetTextBoxIndexed()"><liferay-ui:message key="text-box-indexed" /></option>
+						<option value="PresetTextFieldSecret()"><liferay-ui:message key="text-field-secret" /></option>
+						<option selected value="PresetTextFieldIndexed()"><liferay-ui:message key="text-field-indexed" /></option>
 					</optgroup>
 					<optgroup label="<liferay-ui:message key="primitives" />">
 
