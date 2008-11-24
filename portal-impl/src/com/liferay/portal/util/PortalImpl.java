@@ -70,6 +70,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.portletcontainer.HttpServletUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -803,21 +804,17 @@ public class PortalImpl implements Portal {
 
 			return getHttpServletRequest(portletRequestWrapper.getRequest());
 		}
-		else if (portletRequest instanceof
-			com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl) {
 
-			com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl
-				portletRequestImpl =
-			(com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl)
-				portletRequest;
+		HttpServletRequest request = HttpServletUtil.getHttpServletRequest(
+			portletRequest);
 
-			return portletRequestImpl.getHttpServletRequest();
+		if (request != null) {
+			return request;
 		}
-		else {
-			throw new RuntimeException(
-				"Unable to get the HTTP servlet request from " +
-					portletRequest.getClass().getName());
-		}
+
+		throw new RuntimeException(
+			"Unable to get the HTTP servlet request from " +
+				portletRequest.getClass().getName());
 	}
 
 	public HttpServletResponse getHttpServletResponse(
@@ -841,22 +838,18 @@ public class PortalImpl implements Portal {
 
 			return getHttpServletResponse(portletResponseWrapper.getResponse());
 		}
-		else if (portletResponse instanceof
-			com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl) {
 
-			com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl
-				portletResponseImpl =
-			(com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl)
-				portletResponse;
+		HttpServletResponse response = HttpServletUtil.getHttpServletResponse(
+			portletResponse);
 
-			return portletResponseImpl.getHttpServletResponse();
+		if (response != null) {
+			return response;
 		}
-		else {
-			PortletResponseImpl portletResponseImpl =
-				PortletResponseImpl.getPortletResponseImpl(portletResponse);
 
-			return portletResponseImpl.getHttpServletResponse();
-		}
+		PortletResponseImpl portletResponseImpl =
+			PortletResponseImpl.getPortletResponseImpl(portletResponse);
+
+		return portletResponseImpl.getHttpServletResponse();
 	}
 
 	public String getLayoutEditPage(Layout layout) {
