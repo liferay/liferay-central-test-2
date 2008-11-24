@@ -46,6 +46,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -70,11 +71,11 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditExpandoAction extends PortletAction {
 
-	public static Object getValue(
+	public static Serializable getValue(
 			PortletRequest portletRequest, String name, int type)
 		throws PortalException, SystemException {
 
-		Object value = null;
+		Serializable value = null;
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
 			value = ParamUtil.getBoolean(portletRequest, name);
@@ -328,7 +329,8 @@ public class EditExpandoAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		int type = ParamUtil.getInteger(actionRequest, "type");
 
-		Object defaultValue = getValue(actionRequest, "defaultValue", type);
+		Serializable defaultValue = getValue(
+			actionRequest, "defaultValue", type);
 
 		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
 			modelResource, resourcePrimKey);

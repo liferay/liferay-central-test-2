@@ -398,7 +398,7 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.Object getData(java.lang.String className,
+	public java.io.Serializable getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

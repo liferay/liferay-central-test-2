@@ -1761,13 +1761,6 @@ Liferay.Service.Expando.ExpandoValue = {
 		params.serviceMethodName = "addValue";
 
 		return Liferay.Service.ajax(params, callback);
-	},
-
-	getData: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getData";
-
-		return Liferay.Service.ajax(params, callback);
 	}
 };
 

@@ -42,6 +42,7 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -74,7 +75,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		addAttribute(name, type, null);
 	}
 
-	public void addAttribute(String name, int type, Object defaultValue)
+	public void addAttribute(String name, int type, Serializable defaultValue)
 		throws PortalException {
 
 		try {
@@ -102,8 +103,8 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public Object getAttribute(String name) {
-		Object data = null;
+	public Serializable getAttribute(String name) {
+		Serializable data = null;
 
 		try {
 			data = ExpandoValueServiceUtil.getData(
@@ -119,7 +120,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		return data;
 	}
 
-	public Object getAttributeDefault(String name) {
+	public Serializable getAttributeDefault(String name) {
 		try {
 			ExpandoColumn column =
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
@@ -173,8 +174,9 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public Map<String, Object> getAttributes() {
-		Map<String, Object> attributes = new HashMap<String, Object>();
+	public Map<String, Serializable> getAttributes() {
+		Map<String, Serializable> attributes =
+			new HashMap<String, Serializable>();
 
 		List<ExpandoColumn> columns = new ArrayList<ExpandoColumn>();
 
@@ -236,7 +238,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public void setAttribute(String name, Object value) {
+	public void setAttribute(String name, Serializable value) {
 		if (_classPK <= 0) {
 			throw new UnsupportedOperationException();
 		}
@@ -253,7 +255,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public void setAttributeDefault(String name, Object defaultValue) {
+	public void setAttributeDefault(String name, Serializable defaultValue) {
 		try {
 			ExpandoColumn column =
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
@@ -284,7 +286,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public void setAttributes(Map<String, Object> attributes) {
+	public void setAttributes(Map<String, Serializable> attributes) {
 		if (attributes == null) {
 			return;
 		}
@@ -293,7 +295,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 		setIndexEnabled(false);
 
-		for (Map.Entry<String, Object> entry : attributes.entrySet()) {
+		for (Map.Entry<String, Serializable> entry : attributes.entrySet()) {
 			setAttribute(entry.getKey(), entry.getValue());
 		}
 

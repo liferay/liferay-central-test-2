@@ -38,7 +38,7 @@ int type = BeanParamUtil.getInteger(column, request, "type");
 ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
 
 UnicodeProperties properties = new UnicodeProperties(true);
-Object defaultValue = null;
+Serializable defaultValue = null;
 
 if (column != null) {
 	properties = expandoBridge.getAttributeProperties(column.getName());

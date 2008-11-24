@@ -2123,12 +2123,6 @@
 		<parameter name="className" value="com.liferay.portlet.expando.service.http.ExpandoValueServiceSoap"/>
 		<parameter name="wsdlPortType" value="ExpandoValueServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:anyType" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
@@ -2136,7 +2130,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:anyType"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="addValue getData"/>
+		<parameter name="allowedMethods" value="addValue"/>
 		<typeMapping xmlns:ns="http://model.expando.portlet.liferay.com" qname="ns:ExpandoValueSoap" type="java:com.liferay.portlet.expando.model.ExpandoValueSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_IG_IGFolderService" provider="java:RPC" style="rpc" use="encoded">
@@ -2509,26 +2503,29 @@
 	<service name="Portlet_MB_MBBanService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="MBBanServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,urn:http.service.messageboards.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_MB_MBBanService"/>
 		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBBanServiceSoap"/>
 		<parameter name="wsdlPortType" value="MBBanServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addBan" qname="operNS:addBan" returnQName="addBanReturn" returnType="rtns:MBBanSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="banUserId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="deleteBan" qname="operNS:deleteBan" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="banUserId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="deleteBan addBan"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.messageboards.portlet.liferay.com" qname="ns:MBBanSoap" type="java:com.liferay.portlet.messageboards.model.MBBanSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_MB_MBCategoryService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="MBCategoryServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,urn:http.service.messageboards.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,urn:http.service.messageboards.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_MB_MBCategoryService"/>
 		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoap"/>
 		<parameter name="wsdlPortType" value="MBCategoryServiceSoap"/>
@@ -2537,7 +2534,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addCategory" qname="operNS:addCategory" returnQName="addCategoryReturn" returnType="rtns:MBCategorySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentCategoryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
@@ -2557,32 +2553,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outUserName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outPassword" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mailingListActive" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addCategory" qname="operNS:addCategory" returnQName="addCategoryReturn" returnType="rtns:MBCategorySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentCategoryId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inProtocol" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inServerName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inServerPort" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inUseSSL" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inUserName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inPassword" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inReadInterval" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outEmailAddress" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outCustom" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outServerName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outServerPort" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outUseSSL" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outUserName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outPassword" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mailingListActive" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="deleteCategory" qname="operNS:deleteCategory" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
@@ -2627,9 +2598,11 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mergeWithParentCategory" type="tns:boolean"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getCategoriesCount subscribeCategory addCategory deleteCategory unsubscribeCategory getCategory updateCategory getCategories"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.messageboards.portlet.liferay.com" qname="ns:MBCategorySoap" type="java:com.liferay.portlet.messageboards.model.MBCategorySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://model.messageboards.portlet.liferay.com" qname="ns:ArrayOf_tns2_MBCategorySoap" type="java:com.liferay.portlet.messageboards.model.MBCategorySoap[]" innerType="cmp-ns:MBCategorySoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_MB_MBMessageFlagService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com"/>
@@ -2649,7 +2622,7 @@
 	<service name="Portlet_MB_MBMessageService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="MBMessageServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,urn:http.service.messageboards.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
+		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,urn:http.service.messageboards.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_MB_MBMessageService"/>
 		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap"/>
 		<parameter name="wsdlPortType" value="MBMessageServiceSoap"/>
@@ -2666,44 +2639,25 @@
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addMessage" qname="operNS:addMessage" returnQName="addMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="subject" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="body" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addDiscussionMessage" qname="operNS:addDiscussionMessage" returnQName="addDiscussionMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="threadId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentMessageId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="subject" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="body" type="tns:string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addMessage" qname="operNS:addMessage" returnQName="addMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="subject" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="body" type="tns:string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addMessage" qname="operNS:addMessage" returnQName="addMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="subject" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="body" type="tns:string"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="deleteDiscussionMessage" qname="operNS:deleteDiscussionMessage" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
@@ -2732,12 +2686,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="updateDiscussionMessage" qname="operNS:updateDiscussionMessage" returnQName="updateDiscussionMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="subject" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="body" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="updateMessage" qname="operNS:updateMessage" returnQName="updateMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
@@ -2746,18 +2700,21 @@
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="existingFiles" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
-			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="addMessage getMessageDisplay getCategoryMessagesCount subscribeMessage updateMessage deleteMessage deleteDiscussionMessage updateDiscussionMessage getMessage unsubscribeMessage getCategoryMessages"/>
+		<parameter name="allowedMethods" value="addMessage getMessageDisplay getCategoryMessagesCount subscribeMessage updateMessage addDiscussionMessage deleteMessage deleteDiscussionMessage updateDiscussionMessage getMessage unsubscribeMessage getCategoryMessages"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://model.messageboards.portlet.liferay.com" qname="ns:ArrayOf_tns2_MBMessageSoap" type="java:com.liferay.portlet.messageboards.model.MBMessageSoap[]" innerType="cmp-ns:MBMessageSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.messageboards.portlet.liferay.com" qname="ns:MBMessageSoap" type="java:com.liferay.portlet.messageboards.model.MBMessageSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_MB_MBThreadService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="MBThreadServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,urn:http.service.messageboards.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_MB_MBThreadService"/>
 		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap"/>
 		<parameter name="wsdlPortType" value="MBThreadServiceSoap"/>
@@ -2766,7 +2723,14 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="threadId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="moveThread"/>
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="splitThread" qname="operNS:splitThread" returnQName="splitThreadReturn" returnType="rtns:MBThreadSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="splitThread moveThread"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.messageboards.portlet.liferay.com" qname="ns:MBThreadSoap" type="java:com.liferay.portlet.messageboards.model.MBThreadSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_Polls_PollsQuestionService" provider="java:RPC" style="rpc" use="encoded">
@@ -2867,28 +2831,17 @@
 	<service name="Portlet_SC_SCFrameworkVersionService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.softwarecatalog.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="SCFrameworkVersionServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_SC_SCFrameworkVersionService"/>
 		<parameter name="className" value="com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap"/>
 		<parameter name="wsdlPortType" value="SCFrameworkVersionServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="addFrameworkVersion" qname="operNS:addFrameworkVersion" returnQName="addFrameworkVersionReturn" returnType="rtns:SCFrameworkVersionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="addFrameworkVersion" qname="operNS:addFrameworkVersion" returnQName="addFrameworkVersionReturn" returnType="rtns:SCFrameworkVersionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:int"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" name="deleteFrameworkVersion" qname="operNS:deleteFrameworkVersion" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="frameworkVersionId" type="tns:long"></parameter>
@@ -2896,13 +2849,13 @@
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersion" qname="operNS:getFrameworkVersion" returnQName="getFrameworkVersionReturn" returnType="rtns:SCFrameworkVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="frameworkVersionId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns2_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns4_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns2_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns4_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 		</operation>
@@ -2914,9 +2867,11 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:int"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getFrameworkVersion updateFrameworkVersion getFrameworkVersions deleteFrameworkVersion addFrameworkVersion"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:ArrayOf_tns2_SCFrameworkVersionSoap" type="java:com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap[]" innerType="cmp-ns:SCFrameworkVersionSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:ArrayOf_tns4_SCFrameworkVersionSoap" type="java:com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap[]" innerType="cmp-ns:SCFrameworkVersionSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:SCFrameworkVersionSoap" type="java:com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_SC_SCLicenseService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.softwarecatalog.portlet.liferay.com"/>
@@ -2953,13 +2908,12 @@
 	<service name="Portlet_SC_SCProductEntryService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.softwarecatalog.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="SCProductEntryServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_SC_SCProductEntryService"/>
 		<parameter name="className" value="com.liferay.portlet.softwarecatalog.service.http.SCProductEntryServiceSoap"/>
 		<parameter name="wsdlPortType" value="SCProductEntryServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="addProductEntry" qname="operNS:addProductEntry" returnQName="addProductEntryReturn" returnType="rtns:SCProductEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tags" type="tns:string"></parameter>
@@ -2972,25 +2926,7 @@
 			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="licenseIds" type="tns:ArrayOf_xsd_long"></parameter>
 			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="thumbnails" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="fullImages" type="tns:ArrayOf_xsd_anyType"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="addProductEntry" qname="operNS:addProductEntry" returnQName="addProductEntryReturn" returnType="rtns:SCProductEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tags" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="shortDescription" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="longDescription" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pageURL" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="author" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repoGroupId" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repoArtifactId" type="tns:string"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="licenseIds" type="tns:ArrayOf_xsd_long"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="thumbnails" type="tns:ArrayOf_xsd_anyType"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="fullImages" type="tns:ArrayOf_xsd_anyType"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" name="deleteProductEntry" qname="operNS:deleteProductEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="productEntryId" type="tns:long"></parameter>
@@ -3014,15 +2950,18 @@
 			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="fullImages" type="tns:ArrayOf_xsd_anyType"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getProductEntry deleteProductEntry updateProductEntry addProductEntry"/>
-		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:SCProductEntrySoap" type="java:com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 	<service name="Portlet_SC_SCProductVersionService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.softwarecatalog.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="SCProductVersionServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>
 		<parameter name="wsdlServicePort" value="Portlet_SC_SCProductVersionService"/>
 		<parameter name="className" value="com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceSoap"/>
 		<parameter name="wsdlPortType" value="SCProductVersionServiceSoap"/>
@@ -3036,20 +2975,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="testDirectDownloadURL" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repoStoreArtifact" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="frameworkVersionIds" type="tns:ArrayOf_xsd_long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="addProductVersion" qname="operNS:addProductVersion" returnQName="addProductVersionReturn" returnType="rtns:SCProductVersionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="productEntryId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="version" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="changeLog" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="downloadPageURL" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="directDownloadURL" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="testDirectDownloadURL" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repoStoreArtifact" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="frameworkVersionIds" type="tns:ArrayOf_xsd_long"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.softwarecatalog.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" name="deleteProductVersion" qname="operNS:deleteProductVersion" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="productVersionId" type="tns:long"></parameter>
@@ -3057,7 +2983,7 @@
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="getProductVersion" qname="operNS:getProductVersion" returnQName="getProductVersionReturn" returnType="rtns:SCProductVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="productVersionId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getProductVersions" qname="operNS:getProductVersions" returnQName="getProductVersionsReturn" returnType="rtns:ArrayOf_tns2_SCProductVersionSoap" returnItemType="tns2:SCProductVersionSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getProductVersions" qname="operNS:getProductVersions" returnQName="getProductVersionsReturn" returnType="rtns:ArrayOf_tns4_SCProductVersionSoap" returnItemType="tns2:SCProductVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="productEntryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
@@ -3077,9 +3003,11 @@
 		</operation>
 		<parameter name="allowedMethods" value="updateProductVersion getProductVersionsCount getProductVersion getProductVersions deleteProductVersion addProductVersion"/>
 		<typeMapping xmlns:ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:SCProductVersionSoap" type="java:com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:ArrayOf_tns2_SCProductVersionSoap" type="java:com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap[]" innerType="cmp-ns:SCProductVersionSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:cmp-ns="http://model.softwarecatalog.portlet.liferay.com" qname="ns:ArrayOf_tns4_SCProductVersionSoap" type="java:com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap[]" innerType="cmp-ns:SCProductVersionSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_Shopping_ShoppingCategoryService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>
@@ -3663,24 +3591,15 @@
 	<service name="Portlet_Wiki_WikiNodeService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.wiki.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="WikiNodeServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.wiki.portlet.liferay.com,urn:http.service.wiki.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://service.portal.liferay.com,http://model.portal.liferay.com,http://model.wiki.portlet.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.wiki.portlet.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portlet_Wiki_WikiNodeService"/>
 		<parameter name="className" value="com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap"/>
 		<parameter name="wsdlPortType" value="WikiNodeServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addNode" qname="operNS:addNode" returnQName="addNodeReturn" returnType="rtns:WikiNodeSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addNode" qname="operNS:addNode" returnQName="addNodeReturn" returnType="rtns:WikiNodeSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
-			<parameter xmlns:tns="urn:http.service.wiki.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.wiki.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="getNode" qname="operNS:getNode" returnQName="getNodeReturn" returnType="rtns:WikiNodeSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
@@ -3704,13 +3623,15 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="deleteNode updateNode getNode subscribeNode unsubscribeNode addNode"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.wiki.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.wiki.portlet.liferay.com" qname="ns:WikiNodeSoap" type="java:com.liferay.portlet.wiki.model.WikiNodeSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_Wiki_WikiPageService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.wiki.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="WikiPageServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.wiki.portlet.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.wiki.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://service.portal.liferay.com,http://model.portal.liferay.com,http://model.wiki.portlet.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.wiki.portlet.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portlet_Wiki_WikiPageService"/>
 		<parameter name="className" value="com.liferay.portlet.wiki.service.http.WikiPageServiceSoap"/>
 		<parameter name="wsdlPortType" value="WikiPageServiceSoap"/>
@@ -3724,10 +3645,24 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addPage" qname="operNS:addPage" returnQName="addPageReturn" returnType="rtns:WikiPageSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="content" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="summary" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="minorEdit" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="addPageAttachments" qname="operNS:addPageAttachments" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.wiki.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="changeParent" qname="operNS:changeParent" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="newParentTitle" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="deletePage" qname="operNS:deletePage" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
@@ -3763,6 +3698,18 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryURL" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="locale" type="tns:string"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="movePage" qname="operNS:movePage" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="newTitle" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="revertPage" qname="operNS:revertPage" returnQName="revertPageReturn" returnType="rtns:WikiPageSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="version" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="subscribePage" qname="operNS:subscribePage" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
@@ -3771,10 +3718,26 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getNodePages unsubscribePage deletePage getPage getPagesRSS subscribePage addPageAttachments deletePageAttachment getNodePagesRSS"/>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="updatePage" qname="operNS:updatePage" returnQName="updatePageReturn" returnType="rtns:WikiPageSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="version" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="content" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="summary" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="minorEdit" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="format" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentTitle" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="redirectTitle" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getNodePages deletePage unsubscribePage getPage changeParent movePage getPagesRSS addPageAttachments subscribePage updatePage deletePageAttachment revertPage addPage getNodePagesRSS"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.wiki.portlet.liferay.com" qname="ns:WikiPageSoap" type="java:com.liferay.portlet.wiki.model.WikiPageSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.wiki.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.wiki.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.wiki.portlet.liferay.com" xmlns:cmp-ns="http://model.wiki.portlet.liferay.com" qname="ns:ArrayOf_tns2_WikiPageSoap" type="java:com.liferay.portlet.wiki.model.WikiPageSoap[]" innerType="cmp-ns:WikiPageSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<typeMapping xmlns:ns="http://model.wiki.portlet.liferay.com" qname="ns:WikiPageSoap" type="java:com.liferay.portlet.wiki.model.WikiPageSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Version" provider="java:RPC">
 		<parameter name="allowedMethods" value="getVersion"/>

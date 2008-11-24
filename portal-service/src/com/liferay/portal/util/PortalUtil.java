@@ -35,6 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
@@ -195,7 +196,7 @@ public class PortalUtil {
 		return getPortal().getDate(month, day, year, hour, min, timeZone, pe);
 	}
 
-	public static Map<String, Object> getExpandoBridgeAttributes(
+	public static Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException {
 

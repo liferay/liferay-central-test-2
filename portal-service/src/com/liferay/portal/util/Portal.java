@@ -35,6 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
@@ -146,7 +147,7 @@ public interface Portal {
 			PortalException pe)
 		throws PortalException;
 
-	public Map<String, Object> getExpandoBridgeAttributes(
+	public Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException;
 

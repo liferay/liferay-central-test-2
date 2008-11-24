@@ -137,7 +137,7 @@ public class ExpandoValueServiceHttp {
 		}
 	}
 
-	public static java.lang.Object getData(HttpPrincipal httpPrincipal,
+	public static java.io.Serializable getData(HttpPrincipal httpPrincipal,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
@@ -184,7 +184,7 @@ public class ExpandoValueServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return returnObj;
+			return (java.io.Serializable)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

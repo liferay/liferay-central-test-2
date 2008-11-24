@@ -198,6 +198,7 @@
 <%@ page import="com.liferay.util.xml.XMLFormatter" %>
 
 <%@ page import="java.io.ByteArrayInputStream" %>
+<%@ page import="java.io.Serializable" %>
 <%@ page import="java.io.StringReader" %>
 
 <%@ page import="java.math.BigDecimal" %>

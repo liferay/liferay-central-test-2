@@ -298,10 +298,10 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setPlid(context.getPlid());
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setPlid(context.getPlid());
 
 		WikiNode existingNode = null;
 

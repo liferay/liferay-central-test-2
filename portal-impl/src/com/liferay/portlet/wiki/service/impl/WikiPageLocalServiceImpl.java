@@ -51,6 +51,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -316,7 +317,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		double version = page.getVersion();
 		String content = page.getContent();
 		String summary = LanguageUtil.format(
-			page.getCompanyId(), serviceContext.getLocale(),
+			page.getCompanyId(), ServiceContextUtil.getLocale(serviceContext),
 			"changed-parent-from-x", originalParentTitle);
 		boolean minorEdit = false;
 		String format = page.getFormat();
@@ -1106,7 +1107,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			boolean update)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = serviceContext.getPortletPreferences();
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		if (preferences == null) {
 			long ownerId = node.getGroupId();

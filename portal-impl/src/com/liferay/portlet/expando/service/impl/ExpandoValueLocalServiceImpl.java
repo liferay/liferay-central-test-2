@@ -34,6 +34,7 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.portlet.expando.service.base.ExpandoValueLocalServiceBaseImpl;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -904,7 +905,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
-	public Object getData(
+	public Serializable getData(
 			String className, String tableName, String columnName, long classPK)
 		throws PortalException, SystemException {
 

@@ -254,12 +254,12 @@ public class EditPageAction extends PortletAction {
 	}
 
 	protected void revertPage(ActionRequest actionRequest) throws Exception {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			WikiPage.class.getName(), actionRequest);
-
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		double version = ParamUtil.getDouble(actionRequest, "version");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		WikiPageServiceUtil.revertPage(nodeId, title, version, serviceContext);
 	}
@@ -283,9 +283,6 @@ public class EditPageAction extends PortletAction {
 	protected WikiPage updatePage(ActionRequest actionRequest)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			WikiPage.class.getName(), actionRequest);
-
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		double version = ParamUtil.getDouble(actionRequest, "version");
@@ -296,6 +293,9 @@ public class EditPageAction extends PortletAction {
 		String format = ParamUtil.getString(actionRequest, "format");
 		String parentTitle = ParamUtil.getString(actionRequest, "parentTitle");
 		String redirectTitle = null;
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,

@@ -20,43 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.expando.model;
+package com.liferay.portal.service;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.model.PortletPreferencesIds;
+
+import java.util.Locale;
+
+import javax.portlet.PortletPreferences;
 
 /**
- * <a href="ExpandoColumn.java.html"><b><i>View Source</i></b></a>
+ * <a href="ServiceContextUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>ExpandoColumn</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.expando.model.impl.ExpandoColumnImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.expando.model.ExpandoColumnModel
- * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
- * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ * @author Jorge Ferrer
  *
  */
-public interface ExpandoColumn extends ExpandoColumnModel {
-	public java.io.Serializable getDefaultValue();
+public class ServiceContextUtil {
 
-	public java.lang.String getTypeSettings();
+	public static Locale getLocale(ServiceContext serviceContext) {
+		return LocaleUtil.fromLanguageId(serviceContext.getLanguageId());
+	}
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+	public static PortletPreferences getPortletPreferences(
+			ServiceContext serviceContext)
+		throws SystemException {
 
-	public void setTypeSettings(java.lang.String typeSettings);
+		PortletPreferencesIds portletPreferencesIds =
+			serviceContext.getPortletPreferencesIds();
 
-	public void setTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
+		if (portletPreferencesIds == null) {
+			return null;
+		}
+		else {
+			return PortletPreferencesLocalServiceUtil.getPreferences(
+				portletPreferencesIds.getCompanyId(),
+				portletPreferencesIds.getOwnerId(),
+				portletPreferencesIds.getOwnerType(),
+				portletPreferencesIds.getPlid(),
+				portletPreferencesIds.getPortletId());
+		}
+	}
+
 }

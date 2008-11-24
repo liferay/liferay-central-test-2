@@ -51,6 +51,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -251,10 +252,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 
-		if (serviceContext.getPortletPreferences() != null) {
-			if (!MBUtil.isAllowAnonymousPosting(
-					serviceContext.getPortletPreferences())) {
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
+		if (preferences != null) {
+			if (!MBUtil.isAllowAnonymousPosting(preferences)) {
 				if (anonymous || user.isDefaultUser()) {
 					throw new PrincipalException();
 				}
@@ -1371,7 +1373,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		PortletPreferences preferences = serviceContext.getPortletPreferences();
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		if (preferences == null) {
 			long ownerId = category.getGroupId();
@@ -1406,7 +1409,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (message.isAnonymous()) {
 			emailAddress = StringPool.BLANK;
 			fullName = LanguageUtil.get(
-				serviceContext.getLocale(), "anonymous");
+				ServiceContextUtil.getLocale(serviceContext), "anonymous");
 		}
 
 		List<Long> categoryIds = new ArrayList<Long>();

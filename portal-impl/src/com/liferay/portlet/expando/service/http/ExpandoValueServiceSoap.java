@@ -98,21 +98,5 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
-	public static java.lang.Object getData(java.lang.String className,
-		java.lang.String tableName, java.lang.String columnName, long classPK)
-		throws RemoteException {
-		try {
-			java.lang.Object returnValue = ExpandoValueServiceUtil.getData(className,
-					tableName, columnName, classPK);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(ExpandoValueServiceSoap.class);
 }

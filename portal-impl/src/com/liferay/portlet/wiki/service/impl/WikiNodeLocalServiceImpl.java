@@ -76,8 +76,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return addNode(
-			null, userId, name, description, serviceContext);
+		return addNode(null, userId, name, description, serviceContext);
 	}
 
 	public WikiNode addNode(

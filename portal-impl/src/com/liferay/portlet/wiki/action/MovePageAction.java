@@ -127,25 +127,25 @@ public class MovePageAction extends PortletAction {
 	protected void changeParentPage(ActionRequest actionRequest)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			WikiPage.class.getName(), actionRequest);
-
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		String newParentTitle = ParamUtil.getString(
 			actionRequest, "newParentTitle");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		WikiPageServiceUtil.changeParent(
 			nodeId, title, newParentTitle, serviceContext);
 	}
 
 	protected void renamePage(ActionRequest actionRequest) throws Exception {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			WikiPage.class.getName(), actionRequest);
-
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		String newTitle = ParamUtil.getString(actionRequest, "newTitle");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WikiPage.class.getName(), actionRequest);
 
 		WikiPageServiceUtil.movePage(nodeId, title, newTitle, serviceContext);
 	}

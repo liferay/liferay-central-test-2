@@ -28,6 +28,7 @@ import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,7 +46,7 @@ public class ExpandoColumnImpl
 	public ExpandoColumnImpl() {
 	}
 
-	public Object getDefaultValue() {
+	public Serializable getDefaultValue() {
 		try {
 			ExpandoValue value = new ExpandoValueImpl();
 

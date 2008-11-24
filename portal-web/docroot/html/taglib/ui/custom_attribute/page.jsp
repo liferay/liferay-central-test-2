@@ -47,8 +47,8 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 	<%
 	int type = expandoBridge.getAttributeType(name);
-	Object value = expandoBridge.getAttribute(name);
-	Object defaultValue = expandoBridge.getAttributeDefault(name);
+	Serializable value = expandoBridge.getAttribute(name);
+	Serializable defaultValue = expandoBridge.getAttributeDefault(name);
 
 	UnicodeProperties properties = expandoBridge.getAttributeProperties(name);
 

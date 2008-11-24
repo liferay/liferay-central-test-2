@@ -27,15 +27,13 @@ import com.liferay.portal.model.PortletPreferencesIds;
 import java.io.Serializable;
 
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
-
-import javax.portlet.PortletPreferences;
 
 /**
  * <a href="ServiceContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  *
  */
@@ -45,7 +43,7 @@ public class ServiceContext implements Serializable {
 		_addCommunityPermissions = Boolean.FALSE;
 		_addGuestPermissions = Boolean.FALSE;
 		_attributes = new LinkedHashMap<String, Serializable>();
-		_expandoBridgeAttributes = new LinkedHashMap<String, Object>();
+		_expandoBridgeAttributes = new LinkedHashMap<String, Serializable>();
 	}
 
 	public Boolean getAddCommunityPermissions() {
@@ -72,7 +70,7 @@ public class ServiceContext implements Serializable {
 		return _companyId;
 	}
 
-	public Map<String, Object> getExpandoBridgeAttributes() {
+	public Map<String, Serializable> getExpandoBridgeAttributes() {
 		return _expandoBridgeAttributes;
 	}
 
@@ -88,10 +86,6 @@ public class ServiceContext implements Serializable {
 		return _layoutURL;
 	}
 
-	public Locale getLocale() {
-		return _locale;
-	}
-
 	public String getPathMain() {
 		return _pathMain;
 	}
@@ -102,10 +96,6 @@ public class ServiceContext implements Serializable {
 
 	public String getPortalURL() {
 		return _portalURL;
-	}
-
-	public PortletPreferences getPortletPreferences() {
-		return _portletPreferences;
 	}
 
 	public PortletPreferencesIds getPortletPreferencesIds() {
@@ -157,7 +147,7 @@ public class ServiceContext implements Serializable {
 	}
 
 	public void setExpandoBridgeAttributes(
-		Map<String, Object> expandoBridgeAttributes) {
+		Map<String, Serializable> expandoBridgeAttributes) {
 
 		_expandoBridgeAttributes = expandoBridgeAttributes;
 	}
@@ -174,10 +164,6 @@ public class ServiceContext implements Serializable {
 		_layoutURL = layoutURL;
 	}
 
-	public void setLocale(Locale locale) {
-		_locale = locale;
-	}
-
 	public void setPathMain(String pathMain) {
 		_pathMain = pathMain;
 	}
@@ -188,11 +174,6 @@ public class ServiceContext implements Serializable {
 
 	public void setPortalURL(String portalURL) {
 		_portalURL = portalURL;
-	}
-
-	public void setPortletPreferences(PortletPreferences portletPreferences) {
-
-		_portletPreferences = portletPreferences;
 	}
 
 	public void setPortletPreferencesIds(
@@ -226,14 +207,12 @@ public class ServiceContext implements Serializable {
 	private Map<String, Serializable> _attributes;
 	private String[] _communityPermissions;
 	private long _companyId;
-	private Map<String, Object> _expandoBridgeAttributes;
+	private Map<String, Serializable> _expandoBridgeAttributes;
 	private String[] _guestPermissions;
 	private String _languageId;
 	private String _layoutURL;
-	private Locale _locale;
 	private String _pathMain;
 	private String _portalURL;
-	private PortletPreferences _portletPreferences;
 	private PortletPreferencesIds _portletPreferencesIds;
 	private long _scopeGroupId;
 	private String[] _tagsCategories;

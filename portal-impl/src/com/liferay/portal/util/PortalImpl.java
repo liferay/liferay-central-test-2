@@ -117,6 +117,7 @@ import com.liferay.util.WebDirDetector;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -716,11 +717,12 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public Map<String, Object> getExpandoBridgeAttributes(
+	public Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		Map<String, Object> attributes = new HashMap<String, Object>();
+		Map<String, Serializable> attributes =
+			new HashMap<String, Serializable>();
 
 		List<String> names = new ArrayList<String>();
 
@@ -739,7 +741,7 @@ public class PortalImpl implements Portal {
 		for (String name : names) {
 			int type = expandoBridge.getAttributeType(name);
 
-			Object value = EditExpandoAction.getValue(
+			Serializable value = EditExpandoAction.getValue(
 				portletRequest, "ExpandoAttribute(" + name + ")", type);
 
 			attributes.put(name, value);

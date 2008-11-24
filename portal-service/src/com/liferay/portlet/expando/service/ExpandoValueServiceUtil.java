@@ -54,7 +54,7 @@ public class ExpandoValueServiceUtil {
 				   .addValue(className, tableName, columnName, classPK, data);
 	}
 
-	public static java.lang.Object getData(java.lang.String className,
+	public static java.io.Serializable getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

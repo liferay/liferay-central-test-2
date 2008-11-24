@@ -83,14 +83,4 @@ public class ExpandoValueServiceJSON {
 
 		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
 	}
-
-	public static java.lang.Object getData(java.lang.String className,
-		java.lang.String tableName, java.lang.String columnName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		java.lang.Object returnValue = ExpandoValueServiceUtil.getData(className,
-				tableName, columnName, classPK);
-
-		return returnValue;
-	}
 }

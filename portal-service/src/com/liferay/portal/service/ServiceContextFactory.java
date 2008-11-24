@@ -33,10 +33,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +64,6 @@ public class ServiceContextFactory {
 		serviceContext.setCompanyId(themeDisplay.getCompanyId());
 		serviceContext.setLanguageId(themeDisplay.getLanguageId());
 		serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
-		serviceContext.setLocale(themeDisplay.getLocale());
 		serviceContext.setPathMain(PortalUtil.getPathMain());
 		serviceContext.setPlid(themeDisplay.getPlid());
 		serviceContext.setPortalURL(PortalUtil.getPortalURL(portletRequest));
@@ -75,8 +74,9 @@ public class ServiceContextFactory {
 
 		// Expando
 
-		Map<String, Object> attributes = PortalUtil.getExpandoBridgeAttributes(
-			new ExpandoBridgeImpl(className, 0), portletRequest);
+		Map<String, Serializable> attributes =
+			PortalUtil.getExpandoBridgeAttributes(
+				new ExpandoBridgeImpl(className, 0), portletRequest);
 
 		serviceContext.setExpandoBridgeAttributes(attributes);
 
@@ -96,12 +96,6 @@ public class ServiceContextFactory {
 		serviceContext.setCommunityPermissions(communityPermissions);
 		serviceContext.setGuestPermissions(guestPermissions);
 
-		// Portlet preferences
-
-		PortletPreferences preferences = portletRequest.getPreferences();
-
-		serviceContext.setPortletPreferences(preferences);
-
 		// Portlet preferences ids
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -119,15 +113,12 @@ public class ServiceContextFactory {
 
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
-		// Tags categories
+		// Tags
 
 		String[] tagsCategories = PortalUtil.getTagsCategories(portletRequest);
+		String[] tagsEntries = PortalUtil.getTagsEntries(portletRequest);
 
 		serviceContext.setTagsCategories(tagsCategories);
-
-		// Tags entries
-
-		String[] tagsEntries = PortalUtil.getTagsEntries(portletRequest);
 
 		serviceContext.setTagsEntries(tagsEntries);
 

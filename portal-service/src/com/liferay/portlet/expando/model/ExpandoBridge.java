@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
 
+import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -41,18 +42,18 @@ public interface ExpandoBridge {
 
 	public void addAttribute(String name, int type) throws PortalException;
 
-	public void addAttribute(String name, int type, Object defaultValue)
+	public void addAttribute(String name, int type, Serializable defaultValue)
 		throws PortalException;
 
-	public Object getAttribute(String name);
+	public Serializable getAttribute(String name);
 
-	public Object getAttributeDefault(String name);
+	public Serializable getAttributeDefault(String name);
 
 	public Enumeration<String> getAttributeNames();
 
 	public UnicodeProperties getAttributeProperties(String name);
 
-	public Map<String, Object> getAttributes();
+	public Map<String, Serializable> getAttributes();
 
 	public int getAttributeType(String name);
 
@@ -64,14 +65,14 @@ public interface ExpandoBridge {
 
 	public boolean isIndexEnabled();
 
-	public void setAttribute(String name, Object value);
+	public void setAttribute(String name, Serializable value);
 
-	public void setAttributeDefault(String name, Object defaultValue);
+	public void setAttributeDefault(String name, Serializable defaultValue);
 
 	public void setAttributeProperties(
 		String name, UnicodeProperties properties);
 
-	public void setAttributes(Map<String, Object> attributes);
+	public void setAttributes(Map<String, Serializable> attributes);
 
 	public void setAttributes(ServiceContext serviceContext);
 
