@@ -1,4 +1,4 @@
-Liferay.AutoFields = new Class({
+Liferay.AutoFields = Liferay.Observable.extend({
 
 	/**
 	 * OPTIONS
@@ -164,6 +164,7 @@ Liferay.AutoFields = new Class({
 		currentRow.after(clone);
 
 		clone.find('input:text:first').trigger('focus');
+		instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
 	},
 
 	deleteRow: function(el) {
@@ -184,6 +185,8 @@ Liferay.AutoFields = new Class({
 				deletedElement.show();
 			}
 		);
+
+		instance.trigger('deleteRow', {row: deletedElement});
 	},
 
 	serialize: function(filter) {

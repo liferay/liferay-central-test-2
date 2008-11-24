@@ -26,6 +26,8 @@ Liferay.DynamicSelect = new Class({
 				var select = jQuery('#' + id);
 				var selectData = options.selectData;
 
+				select.attr('data-componentType', 'dynamic_select');
+
 				var prevSelectVal = null;
 
 				if (i > 0) {

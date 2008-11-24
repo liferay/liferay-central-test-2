@@ -271,11 +271,56 @@ else {
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.AutoFields(
+			var addresses = new Liferay.AutoFields(
 				{
 					container: '#addresses > fieldset',
 					baseRows: '#addresses > fieldset .lfr-form-row',
 					fieldIndexes: '<portlet:namespace />addressesIndexes'
+				}
+			);
+
+			addresses.bind('addRow',
+				function(event, data) {
+					var row = data.row;
+					var originalRow = data.originalRow;
+					var idSeed = data.idSeed;
+
+					var dynamicSelects = row.find('select[data-componentType=dynamic_select]');
+					dynamicSelects.unbind('change');
+
+					new Liferay.DynamicSelect(
+						[
+							{
+								select: "<portlet:namespace />addressCountryId" + idSeed,
+								selectId: "countryId",
+								selectDesc: "name",
+								selectVal: '',
+								selectData: function(callback) {
+									Liferay.Service.Portal.Country.getCountries(
+										{
+											active: true
+										},
+										callback
+									);
+								}
+							},
+							{
+								select: "<portlet:namespace />addressRegionId" + idSeed,
+								selectId: "regionId",
+								selectDesc: "name",
+								selectVal: '',
+								selectData: function(callback, selectKey) {
+									Liferay.Service.Portal.Region.getRegions(
+										{
+											countryId: selectKey,
+											active: true
+										},
+										callback
+									);
+								}
+							}
+						]
+					);
 				}
 			);
 		}
