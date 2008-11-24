@@ -70,8 +70,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 
 		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Communities']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -98,7 +97,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/nobr/a")) {
+				if (selenium.isElementPresent("//li[4]/nobr/a")) {
 					break;
 				}
 			}
@@ -108,7 +107,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//li[5]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("//li[4]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");

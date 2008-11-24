@@ -51,5 +51,6 @@ public class MonitoringTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Monitoring"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Live Sessions"));
 	}
 }

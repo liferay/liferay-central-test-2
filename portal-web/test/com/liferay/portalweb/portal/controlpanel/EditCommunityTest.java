@@ -39,6 +39,25 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Communities")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_134_name")) {
 					break;
 				}
@@ -49,8 +68,8 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Communities']"));
+		selenium.type("_134_name", RuntimeVariables.replace("Test Community 2"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Community 2"));
 
@@ -60,7 +79,7 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[5]/td[6]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//strong/span")) {
 					break;
 				}
 			}
@@ -70,7 +89,7 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[5]/td[6]/ul/li/strong/span");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

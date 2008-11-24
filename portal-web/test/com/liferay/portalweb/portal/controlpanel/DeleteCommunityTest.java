@@ -39,6 +39,25 @@ public class DeleteCommunityTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Communities")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_134_name")) {
 					break;
 				}
@@ -49,8 +68,9 @@ public class DeleteCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Communities']"));
+		selenium.type("_134_name",
+			RuntimeVariables.replace("Test Community 2 Edited"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Community 2 Edited"));
 
@@ -60,7 +80,7 @@ public class DeleteCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[5]/td[6]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//strong")) {
 					break;
 				}
 			}
@@ -70,14 +90,30 @@ public class DeleteCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[5]/td[6]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[7]/nobr/a"));
+		selenium.click("//strong");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("Test Community 2 Edited"));
-		assertTrue(selenium.isElementPresent("//input[@value='Add Community']"));
 	}
 }

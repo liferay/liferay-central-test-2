@@ -56,14 +56,65 @@ public class BrowseServerPluginsTest extends BaseTestCase {
 		selenium.select("//div[2]/select", "label=4");
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Wiki"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Theme Plugins")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Themes']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Layout Template Plugins")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Layout Templates']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Web Plugins")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
 		selenium.waitForPageToLoad("30000");
 	}

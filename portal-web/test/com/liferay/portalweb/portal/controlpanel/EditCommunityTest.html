@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>EditCommunityTest</title>
 </head>
 <body>
@@ -13,12 +10,27 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_134_name</td>
+	<td>link=Communities</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Search Communities']</td>
+	<td>link=Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_134_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_134_name</td>
+	<td>Test Community 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
 	<td></td>
 </tr>
 <tr>
@@ -28,12 +40,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[6]/ul/li/strong/span</td>
+	<td>//strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[5]/td[6]/ul/li/strong/span</td>
+	<td>//strong/span</td>
 	<td></td>
 </tr>
 <tr>

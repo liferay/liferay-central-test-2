@@ -51,8 +51,42 @@ public class AddOrganizationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Add")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_126_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_126_name", RuntimeVariables.replace("Selenium"));
 		selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
 
@@ -74,17 +108,68 @@ public class AddOrganizationTest extends BaseTestCase {
 
 		selenium.select("_126_type",
 			RuntimeVariables.replace("label=Regular Organization"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[19]/td[8]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("commentsLink")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("commentsLink");
 		selenium.type("_126_comments",
 			RuntimeVariables.replace("This is a test comment!"));
+		selenium.typeKeys("_126_comments",
+			RuntimeVariables.replace("This is a test comment!"));
+		assertTrue(selenium.isTextPresent("Modified"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request processed successfully. "));
 	}
 }

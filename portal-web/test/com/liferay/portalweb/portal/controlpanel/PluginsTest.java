@@ -52,12 +52,63 @@ public class PluginsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Plugins"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Activities"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Theme Plugins")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Classic"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Layout Template Plugins")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Freeform"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Web Plugins")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
 		selenium.waitForPageToLoad("30000");
 	}

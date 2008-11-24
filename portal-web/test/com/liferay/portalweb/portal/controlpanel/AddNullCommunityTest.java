@@ -39,7 +39,7 @@ public class AddNullCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Community']")) {
+				if (selenium.isElementPresent("link=Communities")) {
 					break;
 				}
 			}
@@ -49,8 +49,26 @@ public class AddNullCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Community']"));
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Add")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +90,5 @@ public class AddNullCommunityTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Please enter a valid name."));
-		selenium.click(RuntimeVariables.replace("link=Communities"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -58,7 +58,7 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Community']")) {
+				if (selenium.isElementPresent("link=Add")) {
 					break;
 				}
 			}
@@ -68,8 +68,7 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Community']"));
+		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_134_name",
 			RuntimeVariables.replace("Test Communit 2"));
