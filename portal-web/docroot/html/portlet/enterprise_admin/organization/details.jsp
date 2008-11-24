@@ -187,6 +187,21 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <%
 Organization parentOrganization = null;
 
+if ((parentOrganizationId == OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID && !permissionChecker.isCompanyAdmin())) {
+	List<Organization> manageableOrganizations = new ArrayList<Organization>();
+
+	for (Organization curOrganization : user.getOrganizations()) {
+		if (OrganizationPermissionUtil.contains(permissionChecker, curOrganization.getOrganizationId(), ActionKeys.MANAGE_SUBORGANIZATIONS)) {
+			manageableOrganizations.add(curOrganization);
+		}
+	}
+
+	if (manageableOrganizations.size() == 1) {
+		parentOrganizationId = manageableOrganizations.get(0).getOrganizationId();
+	}
+
+}
+
 if (parentOrganizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 	try {
 		parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
