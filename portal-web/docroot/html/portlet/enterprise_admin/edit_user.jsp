@@ -73,8 +73,18 @@ if (Validator.isNotNull(organizationIds)) {
 
 	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
 }
-else if (selUser != null) {
-	organizations = selUser.getOrganizations();
+else {
+	if (selUser != null) {
+		organizations = selUser.getOrganizations();
+	}
+	else {
+		organizations = OrganizationServiceUtil.getManageableOrganizations(user.getUserId(), ActionKeys.MANAGE_SUBORGANIZATIONS);
+		organizations.addAll(OrganizationServiceUtil.getManageableOrganizations(user.getUserId(), ActionKeys.MANAGE_USERS));
+
+		if (organizations.size() > 1) {
+			organizations = Collections.EMPTY_LIST;
+		}
+	}
 
 	if (filterManageableOrganizations) {
 		EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);

@@ -88,7 +88,7 @@ String category = PortalUtil.getControlPanelCategory(ppid);
 
 									<%
 									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
-									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.VIEW);
+									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
 									%>
 
 									<c:if test="<%= !manageableGroups.isEmpty() %>">

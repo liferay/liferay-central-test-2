@@ -162,6 +162,12 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 					actionId)) {
 
 				manageableOrganizations.add(userOrganization);
+			}
+
+			if (OrganizationPermissionUtil.contains(
+					permissionChecker, userOrganization.getOrganizationId(),
+					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
+
 				manageableOrganizations.addAll(
 					userOrganization.getSuborganizations());
 			}
