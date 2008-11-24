@@ -65,7 +65,7 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = LanguageUtil.get(pageContext, "portlet");
 }
 
-Group group = layout.getGroup();
+Group group = themeDisplay.getScopeGroup();
 long groupId = layout.getGroupId();
 
 Layout selLayout = null;
