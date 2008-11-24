@@ -42,7 +42,7 @@ if (ppid.equals(PortletKeys.EXPANDO)) {
 	}
 }
 
-String category = PortalUtil.getControlPanelCategory(ppid);
+String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid);
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">

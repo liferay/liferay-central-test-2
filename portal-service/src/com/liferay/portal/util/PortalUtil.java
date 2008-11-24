@@ -137,10 +137,11 @@ public class PortalUtil {
 		return getPortal().getComputerName();
 	}
 
-	public static String getControlPanelCategory(String portletId)
+	public static String getControlPanelCategory(
+			long companyId, String portletId)
 		throws SystemException {
 
-		return getPortal().getControlPanelCategory(portletId);
+		return getPortal().getControlPanelCategory(companyId, portletId);
 	}
 
 	public static List<Portlet> getControlPanelPortlets(

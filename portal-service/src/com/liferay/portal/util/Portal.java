@@ -115,7 +115,7 @@ public interface Portal {
 
 	public String getComputerName();
 
-	public String getControlPanelCategory(String portletId)
+	public String getControlPanelCategory(long companyId, String portletId)
 		throws SystemException;
 
 	public List<Portlet> getControlPanelPortlets(

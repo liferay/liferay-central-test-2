@@ -561,11 +561,12 @@ public class PortalImpl implements Portal {
 		return _computerName;
 	}
 
-	public String getControlPanelCategory(String portletId)
+	public String getControlPanelCategory(long companyId, String portletId)
 		throws SystemException {
 
 		for (String category : PortletCategoryKeys.ALL) {
-			List<Portlet> portlets = getControlPanelPortlets(category);
+			List<Portlet> portlets = getControlPanelPortlets(
+				companyId, category);
 
 			for (Portlet portlet : portlets) {
 				if (portlet.getPortletId().equals(portletId)) {

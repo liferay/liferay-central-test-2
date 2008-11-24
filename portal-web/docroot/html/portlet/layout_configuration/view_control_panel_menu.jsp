@@ -38,7 +38,7 @@
 
 		String cssClass = "lfr-component panel-page-category";
 
-		if (category.equals(PortalUtil.getControlPanelCategory(ppid))) {
+		if (category.equals(PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid))) {
 			cssClass += " selected";
 		}
 
