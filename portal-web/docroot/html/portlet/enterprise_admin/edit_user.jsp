@@ -79,6 +79,7 @@ else {
 	}
 	else {
 		organizations = OrganizationServiceUtil.getManageableOrganizations(user.getUserId(), ActionKeys.MANAGE_SUBORGANIZATIONS);
+
 		organizations.addAll(OrganizationServiceUtil.getManageableOrganizations(user.getUserId(), ActionKeys.MANAGE_USERS));
 
 		if (organizations.size() > 1) {
