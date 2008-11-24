@@ -66,7 +66,7 @@ if (Validator.isNull(modelResource)) {
 }
 
 Group group = themeDisplay.getScopeGroup();
-long groupId = layout.getGroupId();
+long groupId = group.getGroupId();
 
 Layout selLayout = null;
 
