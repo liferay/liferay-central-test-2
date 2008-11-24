@@ -91,5 +91,11 @@ List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openRoleSelector();" %>'/>
+	<liferay-ui:icon
+		image="add"
+		message="select"
+		url='<%= "javascript: " + renderResponse.getNamespace() + "openRoleSelector();" %>'
+		label="<%= true %>"
+		cssClass="modify-link"
+	/>
 </c:if>

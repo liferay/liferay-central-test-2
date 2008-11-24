@@ -117,5 +117,11 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openGroupSelector();" %>'/>
+	<liferay-ui:icon
+		image="add"
+		message="select"
+		url='<%= "javascript: " + renderResponse.getNamespace() + "openGroupSelector();" %>'
+		label="<%= true %>"
+		cssClass="modify-link"
+	/>
 </c:if>

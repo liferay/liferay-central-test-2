@@ -125,5 +125,11 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'/>
+	<liferay-ui:icon
+		image="add"
+		message="select"
+		url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
+		label="<%= true %>"
+		cssClass="modify-link"
+	/>
 </c:if>

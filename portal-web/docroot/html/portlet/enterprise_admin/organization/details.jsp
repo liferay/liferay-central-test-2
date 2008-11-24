@@ -265,7 +265,13 @@ if (parentOrganization != null) {
 
 <br />
 
-<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'/>
+<liferay-ui:icon
+	image="add"
+	message="select"
+	url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
+	label="<%= true %>"
+	cssClass="modify-link"
+/>
 
 <script type="text/javascript">
 	jQuery(

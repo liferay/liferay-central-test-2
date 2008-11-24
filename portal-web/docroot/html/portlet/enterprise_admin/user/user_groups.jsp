@@ -89,5 +89,11 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<br />
 
-	<liferay-ui:icon cssClass="modify-link" image="add" label="true" message="select" url='<%= "javascript: " + renderResponse.getNamespace() + "openUserGroupSelector();" %>'/>
+	<liferay-ui:icon
+		image="add"
+		message="select"
+		url='<%= "javascript: " + renderResponse.getNamespace() + "openUserGroupSelector();" %>'
+		label="<%= true %>"
+		cssClass="modify-link"
+	/>
 </c:if>
