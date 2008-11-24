@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -366,12 +365,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 						MBMessage.class.getName(), messageId);
 
 					try {
-						Document doc = Indexer.getMessageDocument(
+						Indexer.updateMessage(
 							companyId, groupId, userId, userName, categoryId,
 							threadId, messageId, title, content, anonymous,
 							tagsEntries, message.getExpandoBridge());
-
-						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + messageId, se);

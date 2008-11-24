@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -1053,12 +1052,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage.class.getName(), messageId);
 
 		try {
-			Document doc = Indexer.getMessageDocument(
+			Indexer.updateMessage(
 				companyId, groupId, userId, userName, categoryId, threadId,
 				messageId, title, content, anonymous, tagsEntries,
 				message.getExpandoBridge());
-
-			SearchEngineUtil.addDocument(companyId, doc);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + messageId, se);
