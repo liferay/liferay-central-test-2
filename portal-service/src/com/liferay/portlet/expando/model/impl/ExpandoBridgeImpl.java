@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
+
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -37,9 +38,8 @@ import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
@@ -91,7 +91,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 					_className);
 			}
 
-			ExpandoColumnServiceUtil.addColumn(
+			ExpandoColumnLocalServiceUtil.addColumn(
 				table.getTableId(), name, type, defaultValue);
 		}
 		catch (Exception e) {
@@ -108,7 +108,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		Serializable data = null;
 
 		try {
-			data = ExpandoValueServiceUtil.getData(
+			data = ExpandoValueLocalServiceUtil.getData(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK);
 		}
@@ -245,7 +245,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 
 		try {
-			ExpandoValueServiceUtil.addValue(
+			ExpandoValueLocalServiceUtil.addValue(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK, value);
 
@@ -262,7 +262,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
 					_className, name);
 
-			ExpandoColumnServiceUtil.updateColumn(
+			ExpandoColumnLocalServiceUtil.updateColumn(
 				column.getColumnId(), column.getName(), column.getType(),
 				defaultValue);
 		}
@@ -279,7 +279,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
 					_className, name);
 
-			ExpandoColumnServiceUtil.updateTypeSettings(
+			ExpandoColumnLocalServiceUtil.updateTypeSettings(
 				column.getColumnId(), properties.toString());
 		}
 		catch (Exception e) {

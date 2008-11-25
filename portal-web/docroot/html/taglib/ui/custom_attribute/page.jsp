@@ -67,13 +67,13 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 	DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 	%>
 
-	<c:if test="<%= !propertyHidden && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.VIEW) %>">
+	<c:if test="<%= !propertyHidden %>">
 		<c:if test="<%= label %>">
 			<label for="<%= randomNamespace %><%= name %>"><%= localizedName %></label>
 		</c:if>
 
 		<c:choose>
-			<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
+			<c:when test="<%= editable %>">
 				<input type="hidden" name="<portlet:namespace />ExpandoAttributeName(<%= name %>)" value="<%= name %>" />
 
 				<c:choose>
