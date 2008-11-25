@@ -182,7 +182,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void deleteUser(long userId) {
+	public void deleteUser(long userId, String companyMx) {
 		try {
 
 			// User

@@ -102,9 +102,9 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
-	public void deleteUser(long userId) {
+	public void deleteUser(long userId, String companyMx) {
 		try {
-			String mailUserId = getMailUserId(userId);
+			String mailUserId = getMailUserId(userId, companyMx);
 
 			PostMethod method = getPostMethod();
 
@@ -196,6 +196,22 @@ public class FuseMailHook implements Hook {
 		sb.append(user.getCompanyMx());
 		sb.append(StringPool.PERIOD);
 		sb.append(user.getUserId());
+
+		String mailUserId = sb.toString();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Mail user id " + mailUserId + " for user id " + userId);
+		}
+
+		return mailUserId;
+	}
+
+	protected String getMailUserId(long userId, String companyMx) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(companyMx);
+		sb.append(StringPool.PERIOD);
+		sb.append(userId);
 
 		String mailUserId = sb.toString();
 

@@ -60,8 +60,8 @@ public class MailServiceUtil {
 		_service.deleteEmailAddress(userId);
 	}
 
-	public static void deleteUser(long userId) {
-		_service.deleteUser(userId);
+	public static void deleteUser(long userId, String companyMx) {
+		_service.deleteUser(userId, companyMx);
 	}
 
 	public static void sendEmail(MailMessage mailMessage) {

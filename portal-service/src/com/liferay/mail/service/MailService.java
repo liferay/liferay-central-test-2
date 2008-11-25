@@ -52,7 +52,7 @@ public interface MailService {
 
 	public void deleteEmailAddress(long userId);
 
-	public void deleteUser(long userId);
+	public void deleteUser(long userId, String companyMx);
 
 	public void sendEmail(MailMessage mailMessage);
 

@@ -109,14 +109,14 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void deleteUser(long userId) {
+	public void deleteUser(long userId, String companyMx) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteUser");
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "deleteUser",
-			new Object[] {new LongWrapper(userId)});
+			new Object[] {new LongWrapper(userId), companyMx});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}

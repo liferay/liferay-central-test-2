@@ -47,7 +47,7 @@ public interface Hook {
 
 	public void deleteEmailAddress(long userId);
 
-	public void deleteUser(long userId);
+	public void deleteUser(long userId, String companyMx);
 
 	public void updateBlocked(long userId, List<String> blocked);
 

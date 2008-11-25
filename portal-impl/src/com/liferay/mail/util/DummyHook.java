@@ -69,7 +69,7 @@ public class DummyHook implements Hook {
 		}
 	}
 
-	public void deleteUser(long userId) {
+	public void deleteUser(long userId, String companyMx) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteUser");
 		}

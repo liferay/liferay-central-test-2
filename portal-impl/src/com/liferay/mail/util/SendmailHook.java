@@ -115,7 +115,7 @@ public class SendmailHook implements Hook {
 		updateEmailAddress(userId, "");
 	}
 
-	public void deleteUser(long userId) {
+	public void deleteUser(long userId, String companyMx) {
 		deleteEmailAddress(userId);
 
 		// Get delete user command

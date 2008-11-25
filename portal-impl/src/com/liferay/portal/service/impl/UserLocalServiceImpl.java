@@ -894,7 +894,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Mail
 
-		mailService.deleteUser(userId);
+		mailService.deleteUser(userId, user.getCompanyMx());
 
 		// Contact
 

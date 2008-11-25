@@ -91,7 +91,7 @@ public class ShellHook implements Hook {
 		);
 	}
 
-	public void deleteUser(long userId) {
+	public void deleteUser(long userId, String companyMx) {
 		execute(
 			new String[] {
 				SHELL_SCRIPT, "deleteUser", String.valueOf(userId)
