@@ -233,16 +233,11 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: 0;
 }
 
-.lfr-panel .lfr-panel-titlebar {
+.lfr-panel .lfr-panel-titlebar, .lfr-panel.lfr-collapsible .lfr-has-button {
 	background: #ececec url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
 	border-bottom: 1px solid #cfcfcf;
 	line-height: 1.6;
 	padding: 2px;
-}
-
-.lfr-panel.lfr-collapsible .lfr-has-button {
-	background-image: none;
-	padding-left: 2px;
 }
 
 .ie6 .lfr-panel.lfr-collapsible .lfr-has-button {
