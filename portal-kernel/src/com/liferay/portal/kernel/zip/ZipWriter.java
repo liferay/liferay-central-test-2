@@ -22,13 +22,16 @@
 
 package com.liferay.portal.kernel.zip;
 
-import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 
 import java.util.zip.ZipEntry;
@@ -42,9 +45,14 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZipWriter implements Serializable {
 
-	public ZipWriter() {
-		_bam = new ByteArrayMaker();
-		_zos = new ZipOutputStream(new BufferedOutputStream(_bam));
+	public ZipWriter() throws SystemException {
+		try {
+			_fcos = new FileCacheOutputStream();
+			_zos = new ZipOutputStream(_fcos);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public void addEntry(String name, StringBuilder sb) throws IOException {
@@ -56,16 +64,27 @@ public class ZipWriter implements Serializable {
 	}
 
 	public void addEntry(String name, byte[] bytes) throws IOException {
+		addEntry(name, new ByteArrayInputStream(bytes));
+	}
+
+	public void addEntry(String name, InputStream is) throws IOException {
 		if (name.startsWith(StringPool.SLASH)) {
 			name = name.substring(1);
+		}
+
+		if (is == null) {
+			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Zipped " + name);
 		}
 
 		ZipEntry entry = new ZipEntry(name);
 
 		_zos.putNextEntry(entry);
 
-		BufferedInputStream bis = new BufferedInputStream(
-			new ByteArrayInputStream(bytes), _BUFFER);
+		BufferedInputStream bis = new BufferedInputStream(is, _BUFFER);
 
 		int count;
 
@@ -74,17 +93,27 @@ public class ZipWriter implements Serializable {
 		}
 
 		bis.close();
+
+		_zos.closeEntry();
 	}
 
 	public byte[] finish() throws IOException {
 		_zos.close();
 
-		return _bam.toByteArray();
+		return _fcos.getBytes();
 	}
+
+	public FileCacheOutputStream finishWithStream() throws IOException {
+		_zos.close();
+
+		return _fcos;
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(ZipWriter.class);
 
 	private static final int _BUFFER = 2048;
 
-	private ByteArrayMaker _bam;
+	private FileCacheOutputStream _fcos;
 	private ZipOutputStream _zos;
 	private byte[] _data = new byte[_BUFFER];
 
