@@ -34,7 +34,14 @@ body {
 
 .lfr-ctrl-panel .panel-page-menu {
 	background-color: #DBE1E3;
+	background-image: url(../images/control_panel/panel_shadow.png);
+	background-position: 100% 0;
+	background-repeat: repeat-y;
 	width: 225px;
+}
+
+.ie6 .lfr-ctrl-panel .panel-page-menu {
+	background-image: none;
 }
 
 .lfr-ctrl-panel .portal-add-content {
@@ -135,6 +142,11 @@ body {
 	font-size: 12px;
 	line-height: 22px;
 	padding: 0 20px;
+}
+
+.lfr-ctrl-panel .panel-page-category .category-portlets a:hover {
+	background-color: #4ea9da;
+	color: #fff;
 }
 
 .js .lfr-ctrl-panel .toggle-menu {
