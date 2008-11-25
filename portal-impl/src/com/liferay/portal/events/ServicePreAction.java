@@ -1209,7 +1209,18 @@ public class ServicePreAction extends Action {
 
 		boolean wapTheme = BrowserSnifferUtil.isWap(request);
 
-		if (layout != null) {
+		if ((layout != null) &&
+			layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+			String themeId = PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID;
+			String colorSchemeId =
+				ColorSchemeImpl.getDefaultRegularColorSchemeId();
+
+			theme = ThemeLocalServiceUtil.getTheme(
+				companyId, themeId, wapTheme);
+			colorScheme = ThemeLocalServiceUtil.getColorScheme(
+				companyId, theme.getThemeId(), colorSchemeId, wapTheme);
+		}
+		else if (layout != null) {
 			if (wapTheme) {
 				theme = layout.getWapTheme();
 				colorScheme = layout.getWapColorScheme();

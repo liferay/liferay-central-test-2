@@ -728,18 +728,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String friendlyURL = getFriendlyURL(
 			PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
-		Layout layout = layoutLocalService.addLayout(
+		layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			PropsValues.CONTROL_PANEL_LAYOUT_NAME, StringPool.BLANK,
 			StringPool.BLANK, LayoutConstants.TYPE_CONTROL_PANEL, false,
 			friendlyURL);
-
-		LayoutSet layoutSet = layout.getLayoutSet();
-
-		layoutSet.setThemeId(PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
-
-		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 	}
 
 	protected void addDefaultGuestPublicLayoutByProperties(Group group)
