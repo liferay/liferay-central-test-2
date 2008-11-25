@@ -279,13 +279,15 @@ else {
 				}
 			);
 
-			addresses.bind('addRow',
+			addresses.bind(
+				'addRow',
 				function(event, data) {
 					var row = data.row;
 					var originalRow = data.originalRow;
 					var idSeed = data.idSeed;
 
 					var dynamicSelects = row.find('select[data-componentType=dynamic_select]');
+
 					dynamicSelects.unbind('change');
 
 					new Liferay.DynamicSelect(

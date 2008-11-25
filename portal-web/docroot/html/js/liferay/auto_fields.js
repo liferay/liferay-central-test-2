@@ -164,6 +164,7 @@ Liferay.AutoFields = Liferay.Observable.extend({
 		currentRow.after(clone);
 
 		clone.find('input:text:first').trigger('focus');
+
 		instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
 	},
 
