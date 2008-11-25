@@ -22,22 +22,48 @@
  */
 %>
 
-<%@ include file="/html/portlet/directory/init.jsp" %>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="first-name"
+	orderable="<%= true %>"
+	property="firstName"
+/>
 
-<%
-UserGroupSearch searchContainer = (UserGroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="last-name"
+	orderable="<%= true %>"
+	property="lastName"
+/>
 
-UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getDisplayTerms();
-%>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="screen-name"
+	orderable="<%= true %>"
+	property="screenName"
+/>
 
-<div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="job-title"
+	orderable="<%= true %>"
+	value="<%= user2.getContact().getJobTitle() %>"
+/>
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-</div>
+<liferay-ui:search-container-column-text
+	buffer="buffer"
+	href="<%= rowURL %>"
+	name="organizations"
+>
 
-<script type="text/javascript">
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</c:if>
-</script>
+	<%
+	List organizations = user2.getOrganizations();
+
+	if (filterManageableOrganizations) {
+		organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
+	}
+
+	buffer.append(ListUtil.toString(organizations, "name", ", "));
+	%>
+
+</liferay-ui:search-container-column-text>

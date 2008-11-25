@@ -25,19 +25,36 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-UserGroupSearch searchContainer = (UserGroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
+Contact selContact = (Contact)request.getAttribute("user.selContact");
 
-UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getDisplayTerms();
+String facebook = selContact.getFacebookSn();
+String mySpace = selContact.getMySpaceSn();
+String twitter = selContact.getTwitterSn();
 %>
 
-<div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+<c:if test="<%= Validator.isNotNull(facebook) || Validator.isNotNull(mySpace) || Validator.isNotNull(twitter) %>">
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-</div>
+	<h3><liferay-ui:message key="social-network" /></h3>
 
-<script type="text/javascript">
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</c:if>
-</script>
+	<dl class="property-list">
+		<c:if test="<%= Validator.isNotNull(facebook)%>">
+			<dt><liferay-ui:message key="facebook" /></dt>
+			<dd><%= facebook %></dd>
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(mySpace)%>">
+			<dt><liferay-ui:message key="myspace" /></dt>
+			<dd>
+				<%= mySpace %>
+			</dd>
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(twitter)%>">
+			<dt><liferay-ui:message key="twitter" /></dt>
+			<dd>
+				<%= twitter %>
+			</dd>
+		</c:if>
+	</dl>
+
+</c:if>

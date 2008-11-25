@@ -25,19 +25,36 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-UserGroupSearch searchContainer = (UserGroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
+String className = (String)request.getAttribute("emailAddresses.className");
+long classPK = (Long)request.getAttribute("emailAddresses.classPK");
 
-UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getDisplayTerms();
+List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
+
+if (classPK > 0) {
+	emailAddresses = EmailAddressServiceUtil.getEmailAddresses(className, classPK);
+}
 %>
 
-<div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+<c:if test="<%= !emailAddresses.isEmpty() %>">
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-</div>
+	<h3><liferay-ui:message key="additional-email-addresses" /></h3>
 
-<script type="text/javascript">
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</c:if>
-</script>
+	<ul class="property-list">
+
+		<%
+		for (int i = 0; i < emailAddresses.size(); i++) {
+			EmailAddress emailAddress = emailAddresses.get(i);
+		%>
+
+			<li class="<%= emailAddress.isPrimary() ? "primary" : "" %>">
+				<a href="mailto:<%= emailAddress.getAddress() %>"><%= emailAddress.getAddress() %></a>
+				 <%= LanguageUtil.get(pageContext, emailAddress.getType().getName()) %>
+			</li>
+
+		<%
+		}
+		%>
+
+	</ul>
+
+</c:if>

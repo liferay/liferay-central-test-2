@@ -2218,7 +2218,7 @@ public class PortalImpl implements Portal {
 				portletURL.setPortletMode(PortletMode.VIEW);
 
 				portletURL.setParameter(
-					"struts_action", "/directory/edit_user");
+					"struts_action", "/directory/view_user");
 				portletURL.setParameter(
 					"p_u_i_d", String.valueOf(user.getUserId()));
 

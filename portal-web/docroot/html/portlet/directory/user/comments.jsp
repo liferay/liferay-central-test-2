@@ -25,19 +25,11 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-UserGroupSearch searchContainer = (UserGroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
-
-UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getDisplayTerms();
+User selUser = (User)request.getAttribute("user.selUser");
 %>
 
-<div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+<c:if test="<%= Validator.isNotNull(selUser.getComments())%>">
+	<h3><liferay-ui:message key="comments" /></h3>
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-</div>
-
-<script type="text/javascript">
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</c:if>
-</script>
+	<%= selUser.getComments() %>
+</c:if>

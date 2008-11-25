@@ -289,13 +289,13 @@
 
 		<!-- Directory -->
 
-		<action path="/directory/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
-			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.directory.edit_organization" />
+		<action path="/directory/view_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
+			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.directory.view_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
 
-		<action path="/directory/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
-			<forward name="portlet.enterprise_admin.edit_user" path="portlet.directory.edit_user" />
+		<action path="/directory/view_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+			<forward name="portlet.enterprise_admin.edit_user" path="portlet.directory.view_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
 

@@ -35,7 +35,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <liferay-ui:search-toggle
 	id="toggle_id_directory_user_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search-users"
+	buttonLabel="search"
 >
 	<table class="lfr-table">
 	<tr>

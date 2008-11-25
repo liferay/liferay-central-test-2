@@ -22,22 +22,18 @@
  */
 %>
 
-<%@ include file="/html/portlet/directory/init.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-UserGroupSearch searchContainer = (UserGroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
-
-UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getDisplayTerms();
+Contact selContact = (Contact)request.getAttribute("user.selContact");
 %>
 
-<div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+<c:if test="<%= Validator.isNotNull(selContact.getSmsSn()) %>">
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-</div>
+	<h3><liferay-ui:message key="sms" /></h3>
 
-<script type="text/javascript">
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</c:if>
-</script>
+	<ul class="property-list">
+		<li><%= selContact.getSmsSn() %></li>
+	</ul>
+
+</c:if>

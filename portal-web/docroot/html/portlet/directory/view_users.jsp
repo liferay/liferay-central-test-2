@@ -25,12 +25,8 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-String exportProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
 List<Organization> manageableOrganizations = null;
-Long[] manageableOrganizationIds = null;
 %>
 
 <liferay-ui:search-container
@@ -48,17 +44,12 @@ Long[] manageableOrganizationIds = null;
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 		long organizationId = searchTerms.getOrganizationId();
-		long roleId = searchTerms.getRoleId();
 		long userGroupId = searchTerms.getUserGroupId();
 
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (organizationId > 0) {
 			userParams.put("usersOrgs", new Long(organizationId));
-		}
-
-		if (roleId > 0) {
-			userParams.put("usersRoles", new Long(roleId));
 		}
 
 		if (userGroupId > 0) {
@@ -77,12 +68,13 @@ Long[] manageableOrganizationIds = null;
 			modelVar="user2"
 		>
 			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
-				<portlet:param name="struts_action" value="/directory/edit_user" />
+				<portlet:param name="struts_action" value="/directory/view_user" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+				<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
 			</liferay-portlet:renderURL>
 
-			<%@ include file="/html/portlet/enterprise_admin/user/search_columns.jspf" %>
+			<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
 		</liferay-ui:search-container-row>
 
 		<%
@@ -93,16 +85,6 @@ Long[] manageableOrganizationIds = null;
 				organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 			}
 			catch (NoSuchOrganizationException nsoe) {
-			}
-		}
-
-		Role role = null;
-
-		if (roleId > 0) {
-			try {
-				role = RoleLocalServiceUtil.getRole(roleId);
-			}
-			catch (NoSuchRoleException nsre) {
 			}
 		}
 
@@ -117,7 +99,7 @@ Long[] manageableOrganizationIds = null;
 		}
 		%>
 
-		<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
+		<c:if test="<%= (organization != null) || (userGroup != null) %>">
 			<br />
 		</c:if>
 
@@ -125,12 +107,6 @@ Long[] manageableOrganizationIds = null;
 			<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
 			<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
-		</c:if>
-
-		<c:if test="<%= role != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
-
-			<liferay-ui:message key="filter-by-role" />: <%= role.getTitle(locale) %><br />
 		</c:if>
 
 		<c:if test="<%= userGroup != null %>">

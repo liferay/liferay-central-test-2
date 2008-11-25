@@ -241,12 +241,12 @@
 
 	<definition name="portlet.directory" extends="portlet" />
 
-	<definition name="portlet.directory.edit_organization" extends="portlet.directory">
-		<put name="portlet_content" value="/portlet/directory/edit_organization.jsp" />
+	<definition name="portlet.directory.view_organization" extends="portlet.directory">
+		<put name="portlet_content" value="/portlet/directory/view_organization.jsp" />
 	</definition>
 
-	<definition name="portlet.directory.edit_user" extends="portlet.directory">
-		<put name="portlet_content" value="/portlet/directory/edit_user.jsp" />
+	<definition name="portlet.directory.view_user" extends="portlet.directory">
+		<put name="portlet_content" value="/portlet/directory/view_user.jsp" />
 	</definition>
 
 	<definition name="portlet.directory.error" extends="portlet.directory">

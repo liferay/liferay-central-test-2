@@ -29,51 +29,53 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 %>
 
 <liferay-ui:search-container
-	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
-	<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+
+	<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<liferay-ui:search-form
-		page="/html/portlet/directory/organization_search.jsp"
+		page="/html/portlet/directory/user_group_search.jsp"
 	/>
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 		<%
-		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap organizationParams = new LinkedHashMap();
-
-		long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-
-		if (parentOrganizationId <= 0) {
-			parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-		}
+		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 		%>
 
-		<liferay-ui:search-container-results>
-			<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
-		</liferay-ui:search-container-results>
+		<liferay-ui:search-container-results
+			results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+			total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+		/>
 
 		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.Organization"
+			className="com.liferay.portal.model.UserGroup"
 			escapedModel="<%= true %>"
-			keyProperty="organizationId"
-			modelVar="organization"
+			keyProperty="userGroupId"
+			modelVar="userGroup"
 		>
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
-				<portlet:param name="struts_action" value="/directory/view_organization" />
-				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
-				<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-			</portlet:renderURL>
+			<liferay-ui:search-container-column-text
+				name="name"
+				orderable="<%= true %>"
+				property="name"
+			/>
 
-			<%@ include file="/html/portlet/directory/organization/search_columns.jspf" %>
+			<liferay-ui:search-container-column-text
+				name="description"
+				orderable="<%= true %>"
+				property="description"
+			/>
 
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/directory/user_group_action.jsp"
+			/>
 		</liferay-ui:search-container-row>
 
 		<div class="separator"><!-- --></div>
 
 		<liferay-ui:search-iterator />
+
 	</c:if>
 </liferay-ui:search-container>
