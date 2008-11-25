@@ -165,6 +165,14 @@ public class HttpImpl implements Http {
 			return null;
 		}
 
+		int anchorPos = url.indexOf(StringPool.POUND);
+		String anchor = StringPool.BLANK;
+
+		if (anchorPos != -1) {
+			anchor = url.substring(anchorPos);
+			url = url.substring (0, anchorPos);
+		}
+
 		if (url.indexOf(StringPool.QUESTION) == -1) {
 			url += StringPool.QUESTION;
 		}
@@ -175,7 +183,7 @@ public class HttpImpl implements Http {
 			url += StringPool.AMPERSAND;
 		}
 
-		return url + name + StringPool.EQUAL + encodeURL(value);
+		return url + name + StringPool.EQUAL + encodeURL(value) + anchor;
 	}
 
 	public String decodeURL(String url) {
@@ -535,6 +543,14 @@ public class HttpImpl implements Http {
 			return url;
 		}
 
+		int anchorPos = url.indexOf(StringPool.POUND);
+		String anchor = StringPool.BLANK;
+
+		if (anchorPos != -1) {
+			anchor = url.substring(anchorPos);
+			url = url.substring (0, anchorPos);
+		}
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(url.substring(0, pos + 1));
@@ -569,7 +585,15 @@ public class HttpImpl implements Http {
 			sb.toString(), StringPool.AMPERSAND + StringPool.AMPERSAND,
 			StringPool.AMPERSAND);
 
-		return url;
+		if (url.endsWith(StringPool.AMPERSAND)) {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		if (url.endsWith(StringPool.QUESTION)) {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		return url + anchor;
 	}
 
 	public String removeProtocol(String url) {
