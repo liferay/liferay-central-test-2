@@ -67,6 +67,7 @@ import com.liferay.util.MapUtil;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -244,6 +245,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
 		try {
 			getZipWriter().addEntry(path, bytes);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public void addZipEntry(String path, InputStream is)
+		throws SystemException {
+
+		try {
+			getZipWriter().addEntry(path, is);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

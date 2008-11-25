@@ -529,6 +529,74 @@ public class LayoutServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsToStream(
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long[] layoutIds, java.util.Map<String, String[]> parameterMap,
+		java.util.Date startDate, java.util.Date endDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+
+			Object paramObj2 = layoutIds;
+
+			if (layoutIds == null) {
+				paramObj2 = new NullWrapper("[J");
+			}
+
+			Object paramObj3 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj3 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj4 = startDate;
+
+			if (startDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj5 = endDate;
+
+			if (endDate == null) {
+				paramObj5 = new NullWrapper("java.util.Date");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"exportLayoutsToStream",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.io.FileCacheOutputStream)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
@@ -586,6 +654,71 @@ public class LayoutServiceHttp {
 			}
 
 			return (byte[])returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoToStream(
+		HttpPrincipal httpPrincipal, long plid, java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(plid);
+
+			Object paramObj1 = portletId;
+
+			if (portletId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj3 = startDate;
+
+			if (startDate == null) {
+				paramObj3 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj4 = endDate;
+
+			if (endDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"exportPortletInfoToStream",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.io.FileCacheOutputStream)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

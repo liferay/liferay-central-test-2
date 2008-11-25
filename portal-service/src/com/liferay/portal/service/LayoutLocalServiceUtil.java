@@ -192,6 +192,17 @@ public class LayoutLocalServiceUtil {
 			parameterMap, startDate, endDate);
 	}
 
+	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsToStream(
+		long groupId, boolean privateLayout, long[] layoutIds,
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .exportLayoutsToStream(groupId, privateLayout, layoutIds,
+			parameterMap, startDate, endDate);
+	}
+
 	public static byte[] exportPortletInfo(long plid,
 		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
@@ -201,6 +212,17 @@ public class LayoutLocalServiceUtil {
 		return getService()
 				   .exportPortletInfo(plid, portletId, parameterMap, startDate,
 			endDate);
+	}
+
+	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoToStream(
+		long plid, java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .exportPortletInfoToStream(plid, portletId, parameterMap,
+			startDate, endDate);
 	}
 
 	public static long getDefaultPlid(long groupId)

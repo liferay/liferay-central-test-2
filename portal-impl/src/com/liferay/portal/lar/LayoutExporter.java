@@ -24,6 +24,7 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -63,6 +64,7 @@ import com.liferay.util.MapUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -90,6 +92,23 @@ import org.apache.commons.logging.LogFactory;
 public class LayoutExporter {
 
 	public byte[] exportLayouts(
+			long groupId, boolean privateLayout, long[] layoutIds,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws PortalException, SystemException {
+
+		FileCacheOutputStream fcos = exportLayoutsToStream(
+			groupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
+
+		try {
+			return fcos.getBytes();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public FileCacheOutputStream exportLayoutsToStream(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -371,12 +390,11 @@ public class LayoutExporter {
 
 		// Look and feel
 
-		byte[] themeZip = null;
+		InputStream themeZip = null;
 
 		try {
 			if (exportTheme) {
-				themeZip = exportTheme(layoutSet);
-
+				themeZip = exportTheme(layoutSet).getFileInputStream();
 			}
 		}
 		catch (IOException ioe) {
@@ -398,7 +416,7 @@ public class LayoutExporter {
 				context.addZipEntry("/theme.zip", themeZip);
 			}
 
-			return zipWriter.finish();
+			return zipWriter.finishWithStream();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -476,7 +494,9 @@ public class LayoutExporter {
 			rolesEl);
 	}
 
-	protected byte[] exportTheme(LayoutSet layoutSet) throws IOException {
+	protected FileCacheOutputStream exportTheme(LayoutSet layoutSet)
+		throws IOException, SystemException {
+
 		Theme theme = layoutSet.getTheme();
 
 		ZipWriter zipWriter = new ZipWriter();
@@ -550,7 +570,7 @@ public class LayoutExporter {
 		exportThemeFiles("javascript", javaScriptPath, zipWriter);
 		exportThemeFiles("templates", templatesPath, zipWriter);
 
-		return zipWriter.finish();
+		return zipWriter.finishWithStream();
 	}
 
 	protected void exportThemeFiles(String path, File dir, ZipWriter zipWriter)

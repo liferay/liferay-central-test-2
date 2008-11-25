@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
@@ -156,6 +157,19 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			endDate);
 	}
 
+	public FileCacheOutputStream exportLayoutsToStream(
+			long groupId, boolean privateLayout, long[] layoutIds,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return layoutLocalService.exportLayoutsToStream(
+			groupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
+	}
+
 	public byte[] exportPortletInfo(
 			long plid, String portletId, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
@@ -168,6 +182,21 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportPortletInfo(
+			plid, portletId, parameterMap, startDate, endDate);
+	}
+
+	public FileCacheOutputStream exportPortletInfoToStream(
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutLocalService.getLayout(plid);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), layout.getGroupId(),
+			ActionKeys.MANAGE_LAYOUTS);
+
+		return layoutLocalService.exportPortletInfoToStream(
 			plid, portletId, parameterMap, startDate, endDate);
 	}
 

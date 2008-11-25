@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 import java.util.Date;
@@ -77,6 +78,8 @@ public interface PortletDataContext extends Serializable {
 	public void addTagsEntries(String className, long classPK, String[] values);
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException;
+
+	public void addZipEntry(String path, InputStream is) throws SystemException;
 
 	public void addZipEntry(String path, Object object) throws SystemException;
 

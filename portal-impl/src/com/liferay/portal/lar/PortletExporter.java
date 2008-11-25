@@ -26,6 +26,7 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -96,6 +97,22 @@ import org.apache.commons.logging.LogFactory;
 public class PortletExporter {
 
 	public byte[] exportPortletInfo(
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
+		throws PortalException, SystemException {
+
+		FileCacheOutputStream fcos = exportPortletInfoToStream(
+			plid, portletId, parameterMap, startDate, endDate);
+
+		try {
+			return fcos.getBytes();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public FileCacheOutputStream exportPortletInfoToStream(
 			long plid, String portletId, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -219,7 +236,7 @@ public class PortletExporter {
 		try {
 			context.addZipEntry("/manifest.xml", doc.formattedString());
 
-			return zipWriter.finish();
+			return zipWriter.finishWithStream();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

@@ -24,6 +24,7 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -126,14 +127,15 @@ public class ExportPagesAction extends PortletAction {
 					new PortalException());
 			}
 
-			byte[] bytes = LayoutServiceUtil.exportLayouts(
-				groupId, privateLayout, actionRequest.getParameterMap(),
+			FileCacheOutputStream fcos = LayoutServiceUtil.exportLayoutsToStream(
+				groupId, privateLayout, null, actionRequest.getParameterMap(),
 				startDate, endDate);
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
-			ServletResponseUtil.sendFile(response, fileName, bytes);
+			ServletResponseUtil.sendFile(
+				response, fileName, fcos.getFileInputStream());
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

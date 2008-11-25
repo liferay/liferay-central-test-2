@@ -30,6 +30,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -66,6 +67,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -336,9 +338,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
+		FileCacheOutputStream fcos = exportLayoutsToStream(
+			groupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
+
+		try {
+	        return fcos.getBytes();
+        }
+        catch (IOException ioe) {
+	       	throw new SystemException(ioe);
+        }
+	}
+
+	public FileCacheOutputStream exportLayoutsToStream(
+			long groupId, boolean privateLayout, long[] layoutIds,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws PortalException, SystemException {
+
 		LayoutExporter layoutExporter = new LayoutExporter();
 
-		return layoutExporter.exportLayouts(
+		return layoutExporter.exportLayoutsToStream(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 	}
@@ -348,9 +367,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
+		FileCacheOutputStream fcos = exportPortletInfoToStream(
+			plid, portletId, parameterMap, startDate, endDate);
+
+		try {
+	        return fcos.getBytes();
+        }
+        catch (IOException ioe) {
+        	throw new SystemException(ioe);
+        }
+	}
+
+	public FileCacheOutputStream exportPortletInfoToStream(
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
+		throws PortalException, SystemException {
+
 		PortletExporter portletExporter = new PortletExporter();
 
-		return portletExporter.exportPortletInfo(
+		return portletExporter.exportPortletInfoToStream(
 			plid, portletId, parameterMap, startDate, endDate);
 	}
 
