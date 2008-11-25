@@ -24,44 +24,68 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-directory #SMS h3 {
-	background-image: url(<%= themeImagesPath %>/common/social_network.png);
+.portlet-directory .section {
+	float: left;
+	margin-left: 10px;
+	width: 47%;
 }
 
-.portlet-directory #additionalEmailAddresses h3 {
+.portlet-directory .section h3 {
+	background: url() no-repeat 0 50%;
+	border-bottom: 1px solid #CCC;
+	line-height: 1.5;
+	margin-bottom: 0.5em;
+	padding-left: 25px;
+}
+
+.portlet-directory .section li {
+	list-style: none;
+	margin: 0;
+	padding-left: 25px;
+}
+
+.portlet-directory .section ul {
+	margin: 0;
+}
+
+.portlet-directory .user-sms h3 {
+	background-image: url(<%= themeImagesPath %>/common/telephone_mobile.png);
+}
+
+.portlet-directory .user-additional-email-addresses h3 {
 	background-image: url(<%= themeImagesPath %>/mail/unread.png);
 }
 
-.portlet-directory #addresses .mailing-name {
+.portlet-directory .user-addresses .mailing-name {
 	display: block;
 	font-style: italic;
 }
 
-.portlet-directory #addresses .primary {
+.portlet-directory .user-addresses .primary {
 	background-position: 3px 5px;
 }
 
-.portlet-directory #addresses h3 {
+.portlet-directory .user-addresses h3 {
 	background-image: url(<%= themeImagesPath %>/dock/home.png);
 }
 
-.portlet-directory #details {
+.portlet-directory .user-details {
 	clear: both;
 }
 
-.portlet-directory #instantMessenger h3 {
-	background-image: url(<%= themeImagesPath %>/common/messenger.png);
+.portlet-directory .user-instant-messenger h3 {
+	background-image: url(<%= themeImagesPath %>/common/conversation.png);
 }
 
-.portlet-directory #phones h3 {
-	background-image: url(<%= themeImagesPath %>/common/phone.png);
+.portlet-directory .user-phones h3 {
+	background-image: url(<%= themeImagesPath %>/common/telephone.png);
 }
 
-.portlet-directory #socialNetwork h3 {
-	background-image: url(<%= themeImagesPath %>/common/social_network.png);
+.portlet-directory .user-social-network h3 {
+	background-image: url(<%= themeImagesPath %>/common/group.png);
 }
 
-.portlet-directory #websites h3 {
+.portlet-directory .user-websites h3 {
 	background-image: url(<%= themeImagesPath %>/common/history.png);
 }
 
@@ -92,15 +116,15 @@
 	overflow: hidden;
 }
 
-.portlet-directory .ie6 .user-information, .ie6 .organization-information {
+.ie6 .portlet-directory .user-information, .ie6 .portlet-directory .organization-information {
 	height: 1%;
 }
 
-.portlet-directory .ie6 {
+.ie6 .portlet-directory {
 	height: 1%;
 }
 
-.portlet-directory .ie6dl.property-list {
+.ie6 .portlet-directory dl.property-list {
 	height: 1%;
 }
 
@@ -135,30 +159,6 @@
 	clear: left;
 	font-weight: bold;
 	min-width: 5em;
-}
-
-.portlet-directory .section h3 {
-	background: url() no-repeat 0 50%;
-	border-bottom: 1px solid #CCC;
-	line-height: 1.5;
-	margin-bottom: 0.5em;
-	padding-left: 25px;
-}
-
-.portlet-directory .section li {
-	list-style: none;
-	margin: 0;
-	padding-left: 25px;
-}
-
-.portlet-directory .section ul {
-	margin: 0;
-}
-
-.portlet-directory .section {
-	float: left;
-	margin-left: 10px;
-	width: 47%;
 }
 
 .portlet-directory .user-information, .organization-information {
