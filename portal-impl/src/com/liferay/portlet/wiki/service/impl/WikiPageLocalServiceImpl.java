@@ -739,7 +739,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Support moving back to a previously moved title
 
 			if (((page.getVersion() == WikiPageImpl.DEFAULT_VERSION) &&
-				 (page.getContent().equals(WikiPageImpl.MOVED))) ||
+				 (page.getContent().length() < 200)) ||
 				!strict) {
 
 				deletePage(nodeId, newTitle);
