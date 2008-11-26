@@ -51,6 +51,15 @@ public class JobSchedulerImpl implements JobScheduler {
 			return;
 		}
 
+		try {
+			if (_scheduler.isShutdown()) {
+				return;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		String jobName =
 			intervalJob.getClass().getName() + StringPool.AT +
 				intervalJob.hashCode();
@@ -99,11 +108,20 @@ public class JobSchedulerImpl implements JobScheduler {
 	}
 
 	public void unschedule(IntervalJob intervalJob) {
+		if (intervalJob == null) {
+			return;
+		}
+
 		try {
-			if (intervalJob == null) {
+			if (_scheduler.isShutdown()) {
 				return;
 			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
+		try {
 			String jobName =
 				intervalJob.getClass().getName() + StringPool.AT +
 					intervalJob.hashCode();
