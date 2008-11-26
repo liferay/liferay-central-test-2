@@ -159,7 +159,7 @@ public class LayoutExporter {
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
 		ZipWriter zipWriter = null;
-		
+
 		try {
 			zipWriter = new ZipWriter();
 		}

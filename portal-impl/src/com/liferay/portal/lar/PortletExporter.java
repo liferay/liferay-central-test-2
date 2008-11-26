@@ -171,7 +171,7 @@ public class PortletExporter {
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
 		ZipWriter zipWriter = null;
-		
+
 		try {
 			zipWriter = new ZipWriter();
 		}

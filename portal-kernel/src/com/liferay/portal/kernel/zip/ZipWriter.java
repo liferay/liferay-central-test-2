@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.zip;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
