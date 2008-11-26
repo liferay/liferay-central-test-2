@@ -529,7 +529,7 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsToStream(
+	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsAsStream(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long[] layoutIds, java.util.Map<String, String[]> parameterMap,
 		java.util.Date startDate, java.util.Date endDate)
@@ -565,7 +565,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayoutsToStream",
+					"exportLayoutsAsStream",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
@@ -662,7 +662,7 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoToStream(
+	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
 		HttpPrincipal httpPrincipal, long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
@@ -696,7 +696,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportPortletInfoToStream",
+					"exportPortletInfoAsStream",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});

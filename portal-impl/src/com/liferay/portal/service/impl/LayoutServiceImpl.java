@@ -157,7 +157,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			endDate);
 	}
 
-	public FileCacheOutputStream exportLayoutsToStream(
+	public FileCacheOutputStream exportLayoutsAsStream(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -165,7 +165,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		return layoutLocalService.exportLayoutsToStream(
+		return layoutLocalService.exportLayoutsAsStream(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 	}
@@ -185,7 +185,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			plid, portletId, parameterMap, startDate, endDate);
 	}
 
-	public FileCacheOutputStream exportPortletInfoToStream(
+	public FileCacheOutputStream exportPortletInfoAsStream(
 			long plid, String portletId, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -196,7 +196,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), layout.getGroupId(),
 			ActionKeys.MANAGE_LAYOUTS);
 
-		return layoutLocalService.exportPortletInfoToStream(
+		return layoutLocalService.exportPortletInfoAsStream(
 			plid, portletId, parameterMap, startDate, endDate);
 	}
 

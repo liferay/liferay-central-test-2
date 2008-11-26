@@ -96,7 +96,7 @@ public class LayoutExporter {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		FileCacheOutputStream fcos = exportLayoutsToStream(
+		FileCacheOutputStream fcos = exportLayoutsAsStream(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
@@ -108,7 +108,7 @@ public class LayoutExporter {
 		}
 	}
 
-	public FileCacheOutputStream exportLayoutsToStream(
+	public FileCacheOutputStream exportLayoutsAsStream(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -158,7 +158,14 @@ public class LayoutExporter {
 		long companyId = layoutSet.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		ZipWriter zipWriter = new ZipWriter();
+		ZipWriter zipWriter = null;
+		
+		try {
+			zipWriter = new ZipWriter();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), startDate,

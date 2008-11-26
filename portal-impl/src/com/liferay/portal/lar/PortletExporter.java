@@ -101,7 +101,7 @@ public class PortletExporter {
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		FileCacheOutputStream fcos = exportPortletInfoToStream(
+		FileCacheOutputStream fcos = exportPortletInfoAsStream(
 			plid, portletId, parameterMap, startDate, endDate);
 
 		try {
@@ -112,7 +112,7 @@ public class PortletExporter {
 		}
 	}
 
-	public FileCacheOutputStream exportPortletInfoToStream(
+	public FileCacheOutputStream exportPortletInfoAsStream(
 			long plid, String portletId, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -170,7 +170,14 @@ public class PortletExporter {
 		long companyId = layout.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		ZipWriter zipWriter = new ZipWriter();
+		ZipWriter zipWriter = null;
+		
+		try {
+			zipWriter = new ZipWriter();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, layout.getGroupId(), parameterMap, new HashSet<String>(),

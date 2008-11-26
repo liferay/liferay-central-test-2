@@ -1211,6 +1211,7 @@ public class ServicePreAction extends Action {
 
 		if ((layout != null) &&
 			layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+
 			String themeId = PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID;
 			String colorSchemeId =
 				ColorSchemeImpl.getDefaultRegularColorSchemeId();

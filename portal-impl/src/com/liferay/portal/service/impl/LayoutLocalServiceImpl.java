@@ -338,7 +338,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		FileCacheOutputStream fcos = exportLayoutsToStream(
+		FileCacheOutputStream fcos = exportLayoutsAsStream(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
@@ -350,14 +350,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
         }
 	}
 
-	public FileCacheOutputStream exportLayoutsToStream(
+	public FileCacheOutputStream exportLayoutsAsStream(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		LayoutExporter layoutExporter = new LayoutExporter();
 
-		return layoutExporter.exportLayoutsToStream(
+		return layoutExporter.exportLayoutsAsStream(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 	}
@@ -367,7 +367,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		FileCacheOutputStream fcos = exportPortletInfoToStream(
+		FileCacheOutputStream fcos = exportPortletInfoAsStream(
 			plid, portletId, parameterMap, startDate, endDate);
 
 		try {
@@ -378,14 +378,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
         }
 	}
 
-	public FileCacheOutputStream exportPortletInfoToStream(
+	public FileCacheOutputStream exportPortletInfoAsStream(
 			long plid, String portletId, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		PortletExporter portletExporter = new PortletExporter();
 
-		return portletExporter.exportPortletInfoToStream(
+		return portletExporter.exportPortletInfoAsStream(
 			plid, portletId, parameterMap, startDate, endDate);
 	}
 

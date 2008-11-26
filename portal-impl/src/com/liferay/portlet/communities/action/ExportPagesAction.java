@@ -127,9 +127,10 @@ public class ExportPagesAction extends PortletAction {
 					new PortalException());
 			}
 
-			FileCacheOutputStream fcos = LayoutServiceUtil.exportLayoutsToStream(
-				groupId, privateLayout, null, actionRequest.getParameterMap(),
-				startDate, endDate);
+			FileCacheOutputStream fcos =
+				LayoutServiceUtil.exportLayoutsAsStream(
+					groupId, privateLayout, null,
+					actionRequest.getParameterMap(), startDate, endDate);
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);

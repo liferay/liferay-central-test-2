@@ -149,7 +149,7 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsToStream(
+	public com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsAsStream(
 		long groupId, boolean privateLayout, long[] layoutIds,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
@@ -162,7 +162,7 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoToStream(
+	public com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
 		long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
