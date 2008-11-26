@@ -143,9 +143,9 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 
 		<%
-		String deleteURL = "javascript: " + renderResponse.getNamespace() + "deleteOrganization('" + organizationId + "');";
+		String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteOrganization('" + organizationId + "');";
 		%>
 
-		<liferay-ui:icon image="delete" url="<%= deleteURL %>" />
+		<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>

@@ -124,10 +124,15 @@ else {
 </div>
 
 <div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">
+
+	<%
+	String taglibMarkAsAnAnswerURL = "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');";
+	%>
+
 	<liferay-ui:icon
 		image="checked"
 		message="mark-as-an-answer"
-		url='<%= "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');" %>'
+		url="<%= taglibMarkAsAnAnswerURL %>"
 		label="<%= true %>"
 	/>
 </div>

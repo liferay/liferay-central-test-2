@@ -174,10 +174,15 @@
 						%>
 
 								<li id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
+
+									<%
+									String taglibMarkAsAnswerURL = "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
+									%>
+
 									<liferay-ui:icon
 										image="checked"
 										message="mark-as-an-answer"
-										url='<%= "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');" %>'
+										url="<%= taglibMarkAsAnswerURL %>"
 										label="<%= true %>"
 									/>
 								</li>

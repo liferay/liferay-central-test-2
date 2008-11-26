@@ -53,13 +53,13 @@ if (availablePluginPackage != null) {
 		</portlet:actionURL>
 
 		<%
-		String jsUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); submitForm(document.hrefFm, '" + updateURL + "');";
+		String taglibUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); submitForm(document.hrefFm, '" + updateURL + "');";
 		%>
 
 		<liferay-ui:icon
 			image="download"
 			message="update"
-			url="<%= jsUpdateURL %>"
+			url="<%= taglibUpdateURL %>"
 		/>
 
 		<c:choose>
@@ -72,13 +72,13 @@ if (availablePluginPackage != null) {
 				</portlet:actionURL>
 
 				<%
-				String jsIgnoreURL = "javascript: submitForm(document.hrefFm, '" + ignoreURL + "');";
+				String taglibIgnoreURL = "javascript: submitForm(document.hrefFm, '" + ignoreURL + "');";
 				%>
 
 				<liferay-ui:icon
 					image="unsubscribe"
 					message="ignore"
-					url="<%= jsIgnoreURL %>"
+					url="<%= taglibIgnoreURL %>"
 				/>
 			</c:when>
 			<c:otherwise>
@@ -90,13 +90,13 @@ if (availablePluginPackage != null) {
 				</portlet:actionURL>
 
 				<%
-				String jsUnignoreURL = "javascript: submitForm(document.hrefFm, '" + unignoreURL + "');";
+				String taglibUnignoreURL = "javascript: submitForm(document.hrefFm, '" + unignoreURL + "');";
 				%>
 
 				<liferay-ui:icon
 					image="subscribe"
 					message="unignore"
-					url="<%= jsUnignoreURL %>"
+					url="<%= taglibUnignoreURL %>"
 				/>
 			</c:otherwise>
 		</c:choose>
@@ -111,13 +111,13 @@ if (availablePluginPackage != null) {
 		</portlet:actionURL>
 
 		<%
-		String jsUninstallURL = "javascript: submitForm(document.hrefFm, '" + uninstallURL + "');";
+		String taglibUninstallURL = "javascript: submitForm(document.hrefFm, '" + uninstallURL + "');";
 		%>
 
 		<liferay-ui:icon
 			image="delete"
 			message="uninstall"
-			url="<%= jsUninstallURL %>"
+			url="<%= taglibUninstallURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>

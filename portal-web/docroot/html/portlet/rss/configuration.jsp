@@ -205,10 +205,10 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			<td>
 
 				<%
-				String jsShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
+				String taglibShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
 				%>
 
-				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= showFeedImage %>" onClick="<%= jsShowFeedImageOnClick %>" />
+				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= showFeedImage %>" onClick="<%= taglibShowFeedImageOnClick %>" />
 			</td>
 		</tr>
 		<tr>

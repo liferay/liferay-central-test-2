@@ -45,32 +45,32 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 	<c:when test="<%= (assetOrder > 0) && !last %>">
 
 		<%
-		String url = "javascript: " + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
+		String taglibDownURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
 		%>
 
-		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= url %>" />
+		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= taglibDownURL %>" />
 
 		<%
-		url = "javascript: " + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
+		String taglibUpURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
 		%>
 
-		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= url %>" />
+		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= taglibUpURL %>" />
 	</c:when>
 	<c:when test="<%= assetOrder == 0 %>">
 
 		<%
-		String url = "javascript: " + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
+		String taglibDownURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
 		%>
 
-		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= url %>" />
+		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= taglibDownURL %>" />
 	</c:when>
 	<c:when test="<%= last %>">
 
 		<%
-		String url = "javascript: " + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
+		String taglibUpURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
 		%>
 
-		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= url %>" />
+		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= taglibUpURL %>" />
 	</c:when>
 </c:choose>
 

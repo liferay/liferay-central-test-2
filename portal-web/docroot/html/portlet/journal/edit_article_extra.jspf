@@ -284,7 +284,11 @@
 
 			<liferay-ui:message key="never-auto-expire" />
 
-			<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
+			<%
+			String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
+			%>
+
+			<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
 
 			<br /><br />
 
@@ -294,7 +298,11 @@
 
 			<liferay-ui:message key="never-review" />
 
-			<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'reviewDate\', this.checked);" %>' />
+			<%
+			String taglibNeverReviewOnClick = renderResponse.getNamespace() + "disableInputDate('reviewDate', this.checked);";
+			%>
+
+			<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick="<%= taglibNeverReviewOnClick %>" />
 		</td>
 	</tr>
 	</table>

@@ -171,7 +171,12 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 			</td>
 			<td style="padding-left: 30px;"></td>
 			<td>
-				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'endDate\', this.checked);" %>' />
+
+				<%
+				String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('endDate', this.checked);";
+				%>
+
+				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
 
 				<liferay-ui:message key="never-expire" />
 			</td>

@@ -109,11 +109,6 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 int i = 0;
 
 MBMessage message = rootMessage;
-
-String postReplyHREF = null;
-String topHREF = null;
-String editHREF = null;
-String deleteHREF = null;
 %>
 
 <tr>
@@ -127,10 +122,10 @@ String deleteHREF = null;
 		<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.ADD_DISCUSSION) %>">
 
 			<%
-			postReplyHREF = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
+			String taglibPostReplyURL = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
 			%>
 
-			<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" label="<%= true %>" />
+			<liferay-ui:icon image="reply" message="post-reply" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
 		</c:if>
 	</td>
 </tr>
@@ -304,42 +299,42 @@ List messages = treeWalker.getMessages();
 						<td>
 
 							<%
-							postReplyHREF = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
+							String taglibPostReplyURL = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
 							%>
 
-							<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" label="<%= true %>" />
+							<liferay-ui:icon image="reply" message="post-reply" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
 						</td>
 					</c:if>
 
 					<c:if test="<%= i > 0 %>">
 
 						<%
-						topHREF = "#" + namespace + "messages_top";
+						String taglibTopURL = "#" + namespace + "messages_top";
 						%>
 
 						<td>
-							<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
+							<liferay-ui:icon image="top" url="<%= taglibTopURL %>" label="<%= true %>" />
 						</td>
 
 						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
 
 							<%
-							editHREF = "javascript: " + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
+							String taglibEditURL = "javascript: " + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
 							%>
 
 							<td>
-								<liferay-ui:icon image="edit" url="<%= editHREF %>" label="<%= true %>" />
+								<liferay-ui:icon image="edit" url="<%= taglibEditURL %>" label="<%= true %>" />
 							</td>
 						</c:if>
 
 						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
 
 							<%
-							deleteHREF = "javascript: " + namespace + "deleteMessage(" + i + ");";
+							String taglibDeleteURL = "javascript: " + namespace + "deleteMessage(" + i + ");";
 							%>
 
 							<td>
-								<liferay-ui:icon-delete url="<%= deleteHREF %>" label="<%= true %>" />
+								<liferay-ui:icon-delete url="<%= taglibDeleteURL %>" label="<%= true %>" />
 							</td>
 						</c:if>
 					</c:if>

@@ -105,7 +105,7 @@ for (int i = 0; i < curActions.size(); i++) {
 				<c:when test="<%= (role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION) %>">
 
 					<%
-					String onClick = "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');";
+					String taglibScopeOnClick = "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');";
 
 					boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
 
@@ -117,7 +117,7 @@ for (int i = 0; i < curActions.size(); i++) {
 					<liferay-ui:input-checkbox
 						param='<%= "scope" + target %>'
 						defaultValue="<%= hasGroupTemplateScope %>"
-						onClick="<%= onClick %>"
+						onClick="<%= taglibScopeOnClick %>"
 						disabled="<%= disabled %>"
 					/>
 

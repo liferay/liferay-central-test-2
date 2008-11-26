@@ -87,9 +87,9 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
 
 		<%
-		String deleteURL = "javascript: " + renderResponse.getNamespace() + "deleteUserGroup('" + userGroup.getUserGroupId() + "');";
+		String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteUserGroup('" + userGroup.getUserGroupId() + "');";
 		%>
 
-		<liferay-ui:icon image="delete" url="<%= deleteURL %>" />
+		<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>

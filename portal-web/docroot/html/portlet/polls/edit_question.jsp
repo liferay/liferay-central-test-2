@@ -136,7 +136,12 @@ if (choiceName > 0) {
 				<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
+
+				<%
+				String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
+				%>
+
+				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
 
 				<liferay-ui:message key="never-expire" />
 			</td>
