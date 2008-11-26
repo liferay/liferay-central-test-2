@@ -42,10 +42,11 @@ import java.io.OutputStream;
 public class FileCacheOutputStream extends OutputStream {
 
 	public FileCacheOutputStream() throws IOException {
-		_temp = File.createTempFile(
+		_tempFile = File.createTempFile(
 			PortalUUIDUtil.generate() + StringPool.DASH, _EXTENSION);
 
-		_bos = new BufferedOutputStream(new FileOutputStream(_temp), _BUFFER);
+		_bos = new BufferedOutputStream(
+			new FileOutputStream(_tempFile), _BUFFER);
 	}
 
 	public void close() throws IOException {
@@ -60,33 +61,33 @@ public class FileCacheOutputStream extends OutputStream {
 		flush();
 		close();
 
-		return FileUtil.getBytes(_temp);
+		return FileUtil.getBytes(_tempFile);
 	}
 
 	public File getFile() throws IOException {
 		flush();
 		close();
 
-		return _temp;
+		return _tempFile;
 	}
 
 	public FileInputStream getFileInputStream() throws IOException {
 		flush();
 		close();
 
-		return new FileInputStream(_temp);
+		return new FileInputStream(_tempFile);
 	}
 
 	public long getSize() throws IOException {
-		return _temp.length();
-	}
-
-	public void write(byte[] b, int off, int len) throws IOException {
-		_bos.write(b, off, len);
+		return _tempFile.length();
 	}
 
 	public void write(byte[] b) throws IOException {
 		_bos.write(b);
+	}
+
+	public void write(byte[] b, int off, int len) throws IOException {
+		_bos.write(b, off, len);
 	}
 
 	public void write(int b) throws IOException {
@@ -94,9 +95,10 @@ public class FileCacheOutputStream extends OutputStream {
 	}
 
 	private static final int _BUFFER = 2048;
+
 	private static final String _EXTENSION = ".fcos";
 
 	protected BufferedOutputStream _bos;
-	protected File _temp;
+	protected File _tempFile;
 
 }
