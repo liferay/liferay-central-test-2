@@ -439,9 +439,7 @@ public class ServicePreAction extends Action {
 					user.getCompanyId(), null, null, groupParams,
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-				for (int i = 0; i < groups.size(); i++) {
-					Group group = groups.get(i);
-
+				for (Group group : groups) {
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						group.getGroupId(), true,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -1209,8 +1207,14 @@ public class ServicePreAction extends Action {
 
 		boolean wapTheme = BrowserSnifferUtil.isWap(request);
 
+		Group group = null;
+
+		if (layout != null) {
+			group = layout.getGroup();
+		}
+
 		if ((layout != null) &&
-			layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+			group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 
 			String themeId = PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID;
 			String colorSchemeId =
@@ -1401,8 +1405,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLHome(urlHome);
 
 		if (layout != null) {
-			Group group = layout.getGroup();
-
 			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				boolean freeformLayout =
 					layoutTypePortlet.getLayoutTemplateId().equals(
