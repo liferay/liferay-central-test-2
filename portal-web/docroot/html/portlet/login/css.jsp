@@ -26,6 +26,7 @@
 
 .portlet-login .uni-form fieldset {
 	border-width: 0;
+	margin-bottom: 0;
 	padding: 0;
 }
 
