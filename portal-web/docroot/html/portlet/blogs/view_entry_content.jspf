@@ -138,7 +138,7 @@
 			</c:choose>
 		</div>
 
-		<portlet:renderURL var="bookmarkURL">
+		<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="bookmarkURL">
 			<portlet:param name="struts_action" value="/blogs/view_entry" />
 			<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 		</portlet:renderURL>
