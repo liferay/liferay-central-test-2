@@ -886,9 +886,6 @@ public class PortalLDAPUtil {
 			}
 		}
 		catch (NoSuchUserException nsue) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Creating new user");
-			}
 
 			// User does not exist so create
 
