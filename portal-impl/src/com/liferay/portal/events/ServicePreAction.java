@@ -579,6 +579,17 @@ public class ServicePreAction extends Action {
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>isViewableGroup</code>.
+	 */
+	protected boolean isViewableCommunity(
+			User user, long groupId, boolean privateLayout,
+			PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
+
+		return isViewableGroup(user, groupId, privateLayout, permissionChecker);
+	}
+
 	protected boolean isViewableGroup(
 			User user, long groupId, boolean privateLayout,
 			PermissionChecker permissionChecker)
@@ -701,10 +712,13 @@ public class ServicePreAction extends Action {
 			}
 
 			if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
-				for (Organization curOrganization : user.getOrganizations()) {
-					for (Organization curAncestor :
-							curOrganization.getAncestors()) {
-						if (groupId == curAncestor.getGroup().getGroupId()) {
+				for (Organization organization : user.getOrganizations()) {
+					for (Organization ancestorOrganization :
+							organization.getAncestors()) {
+
+						if (group.getClassPK() ==
+								ancestorOrganization.getOrganizationId()) {
+
 							return true;
 						}
 					}

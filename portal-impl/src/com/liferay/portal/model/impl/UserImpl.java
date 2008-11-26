@@ -249,8 +249,10 @@ public class UserImpl extends UserModelImpl implements User {
 				myPlaces.add(0, organization.getGroup());
 
 				if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
-					for (Organization ancestor : organization.getAncestors()) {
-						myPlaces.add(0, ancestor.getGroup());
+					for (Organization ancestorOrganization :
+							organization.getAncestors()) {
+
+						myPlaces.add(0, ancestorOrganization.getGroup());
 					}
 				}
 			}
