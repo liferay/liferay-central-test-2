@@ -45,22 +45,9 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZipWriter implements Serializable {
 
-	public ZipWriter() throws SystemException {
-		try {
-			_fcos = new FileCacheOutputStream();
-			_zos = new ZipOutputStream(_fcos);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-	}
-
-	public void addEntry(String name, StringBuilder sb) throws IOException {
-		addEntry(name, sb.toString());
-	}
-
-	public void addEntry(String name, String s) throws IOException {
-		addEntry(name, s.getBytes());
+	public ZipWriter() throws IOException {
+		_fcos = new FileCacheOutputStream();
+		_zos = new ZipOutputStream(_fcos);
 	}
 
 	public void addEntry(String name, byte[] bytes) throws IOException {
@@ -77,7 +64,7 @@ public class ZipWriter implements Serializable {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Zipped " + name);
+			_log.debug("Adding " + name);
 		}
 
 		ZipEntry entry = new ZipEntry(name);
@@ -95,6 +82,14 @@ public class ZipWriter implements Serializable {
 		bis.close();
 
 		_zos.closeEntry();
+	}
+
+	public void addEntry(String name, String s) throws IOException {
+		addEntry(name, s.getBytes());
+	}
+
+	public void addEntry(String name, StringBuilder sb) throws IOException {
+		addEntry(name, sb.toString());
 	}
 
 	public byte[] finish() throws IOException {
