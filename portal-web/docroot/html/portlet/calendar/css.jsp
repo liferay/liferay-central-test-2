@@ -159,3 +159,55 @@
 .portlet-calendar .calendar-current-day.has-events a span {
 	background-image: url(<%= themeImagesPath %>/calendar/event_indicator_current.png);
 }
+
+.portlet-calendar .day-grid {
+	border-top: 2px solid #CCC;
+	margin-left: 50px;
+}
+
+
+.portlet-calendar .day-grid .business-hours {
+	background: #FEFEFE;
+}
+
+.portlet-calendar .day-grid .night-hours {
+	background: #EFEFEF;
+}
+
+.portlet-calendar .day-grid .hour.all-day {
+	border: none;
+	height: auto;
+	min-height: 24px;
+}
+
+.portlet-calendar .day-grid .hour {
+	height: 24px;
+	border-bottom: 1px solid #CCC;
+}
+
+.portlet-calendar .day-grid .hour span {
+	color: #777;
+	display: block;
+	font-size: .8em;
+	font-weight: bold;
+	left: -50px;
+	position: absolute;
+	text-align: right;
+	width: 45px;
+}
+
+.portlet-calendar .day-grid .half {
+	height: 23px;
+	border-bottom: 2px solid #CCC;
+}
+
+.portlet-calendar .day-grid .event-box {
+	background: #F0F5F7;
+	border: 2px solid #AAF;
+	padding: 5px;
+}
+
+.portlet-calendar .day-grid .event-description {
+	border-top: 1px solid #AAF;
+	padding-top: .5em;
+}
