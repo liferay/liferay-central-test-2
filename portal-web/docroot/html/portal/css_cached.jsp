@@ -907,29 +907,29 @@ li.toggle-expand a {
 }
 
 .lfr-upload-container a.browse-button {
-	background-image: url(<%=themeDisplay.getPathThemeImages()%>/dock/add_content.png);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/add_content.png);
 	background-repeat: no-repeat;
 }
 
 .lfr-upload-container a.upload-button {
-	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/top.png);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/top.png);
 	background-repeat: no-repeat;
 }
 
 .lfr-upload-container a.clear-uploads {
-	background-image: url(<%=themeDisplay.getPathThemeImages()%>/portlet/refresh.png);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/portlet/refresh.png);
 	background-repeat: no-repeat;
 }
 
 .lfr-upload-container a.cancel-uploads {
-	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/close.png);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/close.png);
 	background-repeat: no-repeat;
 	float: right;
 	margin-right: 0;
 }
 
 .lfr-upload-container .upload-file {
-	background: #f0faf0 url(<%=themeDisplay.getPathThemeImages()%>/document_library/jpg.png) no-repeat 5px 50%;
+	background: #f0faf0 url(<%= themeDisplay.getPathThemeImages() %>/document_library/jpg.png) no-repeat 5px 50%;
 	border-bottom: 1px solid #ccc;
 	display: block;
 	font-weight: bold;
@@ -948,7 +948,7 @@ li.toggle-expand a {
 }
 
 .lfr-upload-container .cancel-button {
-	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/delete.png);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/delete.png);
 	background-repeat: no-repeat;
 	position: absolute;
 	right: 5px;
@@ -956,7 +956,7 @@ li.toggle-expand a {
 
 .lfr-upload-container .upload-complete {
 	background-color: #E8EEF7;
-	background-image: url(<%=themeDisplay.getPathThemeImages()%>/dock/my_place_current.png);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_place_current.png);
 	font-weight: normal;
 	opacity: 0.6;
 }
@@ -981,7 +981,7 @@ li.toggle-expand a {
 }
 
 .lfr-upload-container .progress {
-	background: #8db2e3 url(<%=themeDisplay.getPathThemeImages()%>/progress_bar/complete_gradient.png) repeat-y 100% 0;
+	background: #8db2e3 url(<%= themeDisplay.getPathThemeImages() %>/progress_bar/complete_gradient.png) repeat-y 100% 0;
 	display: block;
 	height: 15px;
 	width: 0;

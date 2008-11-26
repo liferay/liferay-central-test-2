@@ -41,7 +41,7 @@
 <%@ page import="com.liferay.portlet.messageboards.MessageBodyException" %>
 <%@ page import="com.liferay.portlet.messageboards.MessageSubjectException" %>
 <%@ page import="com.liferay.portlet.messageboards.NoSuchCategoryException" %>
-<%@ page import="com.liferay.portlet.messageboards.NoSuchMailingListException"%>
+<%@ page import="com.liferay.portlet.messageboards.NoSuchMailingListException" %>
 <%@ page import="com.liferay.portlet.messageboards.NoSuchMessageException" %>
 <%@ page import="com.liferay.portlet.messageboards.NoSuchStatsUserException" %>
 <%@ page import="com.liferay.portlet.messageboards.NoSuchThreadException" %>

@@ -43,7 +43,7 @@ if (Validator.isNull(authType)) {
 
 <fieldset class="block-labels">
 	<c:choose>
-		<c:when test="<%= user2 == null%>">
+		<c:when test="<%= user2 == null %>">
 
 			<%
 			String loginParameter = null;

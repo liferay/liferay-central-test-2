@@ -39,7 +39,7 @@ String ym = selContact.getYmSn();
 	<h3><liferay-ui:message key="instant-messenger" /></h3>
 
 	<dl class="property-list">
-		<c:if test="<%= Validator.isNotNull(aim)%>">
+		<c:if test="<%= Validator.isNotNull(aim) %>">
 			<dt>
 				<liferay-ui:message key="aim" />
 			</dt>
@@ -48,7 +48,7 @@ String ym = selContact.getYmSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(icq)%>">
+		<c:if test="<%= Validator.isNotNull(icq) %>">
 			<dt>
 				<liferay-ui:message key="icq" />
 			</dt>
@@ -59,7 +59,7 @@ String ym = selContact.getYmSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(jabber)%>">
+		<c:if test="<%= Validator.isNotNull(jabber) %>">
 			<dt>
 				<liferay-ui:message key="jabber" />
 			</dt>
@@ -68,7 +68,7 @@ String ym = selContact.getYmSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(msn)%>">
+		<c:if test="<%= Validator.isNotNull(msn) %>">
 			<dt>
 				<liferay-ui:message key="msn" />
 			</dt>
@@ -77,7 +77,7 @@ String ym = selContact.getYmSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(skype)%>">
+		<c:if test="<%= Validator.isNotNull(skype) %>">
 			<dt>
 				<liferay-ui:message key="skype" />
 			</dt>
@@ -87,7 +87,7 @@ String ym = selContact.getYmSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(ym)%>">
+		<c:if test="<%= Validator.isNotNull(ym) %>">
 			<dt>
 				<liferay-ui:message key="ym" />
 			</dt>

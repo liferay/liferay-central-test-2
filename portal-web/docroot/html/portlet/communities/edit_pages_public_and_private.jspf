@@ -64,7 +64,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		</div>
 
 		<c:if test="<%= group.isStagingGroup() && (pagesCount > 0) %>">
-			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL %>'); void(''); stagingGroupWindow.focus();" />
 
 			<c:choose>
 				<c:when test="<%= workflowEnabled %>">

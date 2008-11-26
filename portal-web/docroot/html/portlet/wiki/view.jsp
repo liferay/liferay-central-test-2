@@ -146,7 +146,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 <h1 class="page-title">
 	<c:if test="<%= !print %>">
 		<div class="page-actions">
-			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)%>">
+			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<c:if test="<%= followRedirect || (redirectPage == null) %>">
 					<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" />
 				</c:if>

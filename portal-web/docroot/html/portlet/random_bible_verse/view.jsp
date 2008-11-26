@@ -30,7 +30,7 @@ Verse verse = RBVUtil.getVerse(preferences, locale);
 
 <c:choose>
 	<c:when test="<%= verse != null %>">
-		<%= verse.getText()%>
+		<%= verse.getText() %>
 
 		<br /><br />
 

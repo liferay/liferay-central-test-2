@@ -141,7 +141,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 %>
 
 <c:choose>
-	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNotNull(category)%>'>
+	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNotNull(category) %>'>
 		<%@ include file="/html/portlet/tagged_content/view_dynamic_by_category.jspf" %>
 	</c:when>
 	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNull(category) %>'>

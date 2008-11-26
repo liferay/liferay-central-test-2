@@ -270,7 +270,7 @@ else {
 
 <style type="text/css">
 	.lfr-group-selector {
-		background: url(<%= themeDisplay.getPathThemeImages()%>/arrows/05_down.png) no-repeat 100% 50%;
+		background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 100% 50%;
 		padding: 2px;
 		padding-right: 20px;
 	}

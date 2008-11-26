@@ -113,7 +113,7 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 		%>
 
 			<c:if test="<%= Validator.isNotNull(license.getUrl()) %>">
-				<a href="<%= license.getUrl()%>">
+				<a href="<%= license.getUrl() %>">
 			</c:if>
 
 			<%= license.getName() %>

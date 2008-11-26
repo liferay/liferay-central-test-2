@@ -141,7 +141,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </fieldset>
 
 <fieldset class="repository-fields">
-	<legend><%=LanguageUtil.get(pageContext, "repository-fields")%></legend>
+	<legend><%=LanguageUtil.get(pageContext, "repository-fields") %></legend>
 
 	<table class="lfr-table">
 	<tr>

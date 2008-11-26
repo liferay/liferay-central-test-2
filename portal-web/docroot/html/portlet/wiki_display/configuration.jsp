@@ -76,7 +76,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 					WikiPage wikiPage = (WikiPage)pages.get(i);
 				%>
 
-					<option <%= (wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE))) ? "selected" : "" %> value="<%= wikiPage.getTitle()%>"><%= wikiPage.getTitle() %></option>
+					<option <%= (wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE))) ? "selected" : "" %> value="<%= wikiPage.getTitle() %>"><%= wikiPage.getTitle() %></option>
 
 				<%
 				}

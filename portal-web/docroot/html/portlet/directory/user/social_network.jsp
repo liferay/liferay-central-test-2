@@ -36,7 +36,7 @@ String twitter = selContact.getTwitterSn();
 	<h3><liferay-ui:message key="social-network" /></h3>
 
 	<dl class="property-list">
-		<c:if test="<%= Validator.isNotNull(facebook)%>">
+		<c:if test="<%= Validator.isNotNull(facebook) %>">
 			<dt>
 				<liferay-ui:message key="facebook" />
 			</dt>
@@ -45,7 +45,7 @@ String twitter = selContact.getTwitterSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(mySpace)%>">
+		<c:if test="<%= Validator.isNotNull(mySpace) %>">
 			<dt>
 				<liferay-ui:message key="myspace" />
 			</dt>
@@ -54,7 +54,7 @@ String twitter = selContact.getTwitterSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(twitter)%>">
+		<c:if test="<%= Validator.isNotNull(twitter) %>">
 			<dt>
 				<liferay-ui:message key="twitter" />
 			</dt>
