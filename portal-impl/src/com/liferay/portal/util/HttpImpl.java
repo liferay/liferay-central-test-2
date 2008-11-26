@@ -165,12 +165,13 @@ public class HttpImpl implements Http {
 			return null;
 		}
 
-		int anchorPos = url.indexOf(StringPool.POUND);
 		String anchor = StringPool.BLANK;
 
-		if (anchorPos != -1) {
-			anchor = url.substring(anchorPos);
-			url = url.substring (0, anchorPos);
+		int pos = url.indexOf(StringPool.POUND);
+
+		if (pos != -1) {
+			anchor = url.substring(pos);
+			url = url.substring(0, pos);
 		}
 
 		if (url.indexOf(StringPool.QUESTION) == -1) {
@@ -543,12 +544,13 @@ public class HttpImpl implements Http {
 			return url;
 		}
 
-		int anchorPos = url.indexOf(StringPool.POUND);
 		String anchor = StringPool.BLANK;
 
-		if (anchorPos != -1) {
-			anchor = url.substring(anchorPos);
-			url = url.substring (0, anchorPos);
+		int pos = url.indexOf(StringPool.POUND);
+
+		if (pos != -1) {
+			anchor = url.substring(pos);
+			url = url.substring(0, pos);
 		}
 
 		StringBuilder sb = new StringBuilder();
