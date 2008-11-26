@@ -48,44 +48,44 @@
 	margin: 0;
 }
 
-.portlet-directory .user-sms h3 {
+.portlet-directory .sms h3 {
 	background-image: url(<%= themeImagesPath %>/common/telephone_mobile.png);
 }
 
-.portlet-directory .user-additional-email-addresses h3 {
+.portlet-directory .additional-email-addresses h3 {
 	background-image: url(<%= themeImagesPath %>/mail/unread.png);
 }
 
-.portlet-directory .user-addresses .mailing-name {
+.portlet-directory .addresses .mailing-name {
 	display: block;
 	font-style: italic;
 }
 
-.portlet-directory .user-addresses .primary {
+.portlet-directory .addresses .primary {
 	background-position: 3px 5px;
 }
 
-.portlet-directory .user-addresses h3 {
+.portlet-directory .addresses h3 {
 	background-image: url(<%= themeImagesPath %>/dock/home.png);
 }
 
-.portlet-directory .user-details {
+.portlet-directory .details {
 	clear: both;
 }
 
-.portlet-directory .user-instant-messenger h3 {
+.portlet-directory .instant-messenger h3 {
 	background-image: url(<%= themeImagesPath %>/common/conversation.png);
 }
 
-.portlet-directory .user-phones h3 {
+.portlet-directory .phones h3 {
 	background-image: url(<%= themeImagesPath %>/common/telephone.png);
 }
 
-.portlet-directory .user-social-network h3 {
+.portlet-directory .social-network h3 {
 	background-image: url(<%= themeImagesPath %>/common/group.png);
 }
 
-.portlet-directory .user-websites h3 {
+.portlet-directory .websites h3 {
 	background-image: url(<%= themeImagesPath %>/common/history.png);
 }
 

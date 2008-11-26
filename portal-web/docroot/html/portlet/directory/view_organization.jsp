@@ -43,31 +43,31 @@ request.setAttribute("websites.classPK", organizationId);
 <liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
 
 <div class="organization-information">
-	<div class="section" id="details">
+	<div class="section details">
 		<liferay-util:include page="/html/portlet/directory/organization/details.jsp" />
 	</div>
 
-	<div class="section" id="additionalEmailAddresses">
+	<div class="section additional-email-addresses">
 		<liferay-util:include page="/html/portlet/directory/common/additional_email_addresses.jsp" />
 	</div>
 
-	<div class="section" id="websites">
+	<div class="section websites">
 		<liferay-util:include page="/html/portlet/directory/common/websites.jsp" />
 	</div>
 
-	<div class="section" id="addresses">
+	<div class="section addresses">
 		<liferay-util:include page="/html/portlet/directory/organization/addresses.jsp" />
 	</div>
 
-	<div class="section" id="phones">
+	<div class="section phones">
 		<liferay-util:include page="/html/portlet/directory/organization/phone_numbers.jsp" />
 	</div>
 
-	<div class="section" id="services">
+	<div class="section services">
 		<liferay-util:include page="/html/portlet/directory/organization/services.jsp" />
 	</div>
 
-	<div class="section" id="comments">
+	<div class="section comments">
 		<liferay-util:include page="/html/portlet/directory/organization/comments.jsp" />
 	</div>
-</div>
+rm</div>
