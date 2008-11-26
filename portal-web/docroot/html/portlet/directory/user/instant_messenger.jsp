@@ -36,39 +36,51 @@ String ym = selContact.getYmSn();
 %>
 
 <c:if test="<%= Validator.isNotNull(aim) || Validator.isNotNull(icq) || Validator.isNotNull(jabber) || Validator.isNotNull(msn) || Validator.isNotNull(skype) || Validator.isNotNull(ym) %>">
-
 	<h3><liferay-ui:message key="instant-messenger" /></h3>
 
 	<dl class="property-list">
 		<c:if test="<%= Validator.isNotNull(aim)%>">
-			<dt><liferay-ui:message key="aim" /></dt>
-			<dd><%= aim %></dd>
+			<dt>
+				<liferay-ui:message key="aim" />
+			</dt>
+			<dd>
+				<%= aim %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(icq)%>">
-			<dt><liferay-ui:message key="icq" /></dt>
+			<dt>
+				<liferay-ui:message key="icq" />
+			</dt>
 			<dd>
 				<%= icq %>
+
 				<img class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= icq %>&img=5" />
 			</dd>
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(jabber)%>">
-			<dt><liferay-ui:message key="jabber" /></dt>
+			<dt>
+				<liferay-ui:message key="jabber" />
+			</dt>
 			<dd>
 				<%= jabber %>
 			</dd>
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(msn)%>">
-			<dt><liferay-ui:message key="msn" /></dt>
+			<dt>
+				<liferay-ui:message key="msn" />
+			</dt>
 			<dd>
 				<%= msn %>
 			</dd>
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(skype)%>">
-			<dt><liferay-ui:message key="skype" /></dt>
+			<dt>
+				<liferay-ui:message key="skype" />
+			</dt>
 			<dd>
 				<%= skype %>
 				<a href="callto://<%= skype %>"><img alt="<liferay-ui:message key="skype" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= skype %>" /></a>
@@ -76,12 +88,13 @@ String ym = selContact.getYmSn();
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(ym)%>">
-			<dt><liferay-ui:message key="ym" /></dt>
+			<dt>
+				<liferay-ui:message key="ym" />
+			</dt>
 			<dd>
 				<%= ym %>
 				<img class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= ym %>&m=g&t=0" />
 			</dd>
 		</c:if>
 	</dl>
-
 </c:if>

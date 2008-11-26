@@ -31,7 +31,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-ui:search-container
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
-
 	<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<liferay-ui:search-form
@@ -76,6 +75,5 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		<div class="separator"><!-- --></div>
 
 		<liferay-ui:search-iterator />
-
 	</c:if>
 </liferay-ui:search-container>

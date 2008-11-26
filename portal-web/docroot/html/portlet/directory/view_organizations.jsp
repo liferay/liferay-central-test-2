@@ -69,7 +69,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			</portlet:renderURL>
 
 			<%@ include file="/html/portlet/directory/organization/search_columns.jspf" %>
-
 		</liferay-ui:search-container-row>
 
 		<div class="separator"><!-- --></div>

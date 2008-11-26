@@ -26,26 +26,27 @@
 
 <%
 User selUser = PortalUtil.getSelectedUser(request);
+
 Contact selContact =  selUser.getContact();
+
 List<Organization> organizations = selUser.getOrganizations();
 
 request.setAttribute("user.selUser", selUser);
 request.setAttribute("user.selContact", selContact);
 request.setAttribute("user.organizations", organizations);
 request.setAttribute("addresses.className", Contact.class.getName());
-request.setAttribute("emailAddresses.className", Contact.class.getName());
-request.setAttribute("phones.className", Contact.class.getName());
-request.setAttribute("websites.className", Contact.class.getName());
 request.setAttribute("addresses.classPK", selContact.getContactId());
+request.setAttribute("emailAddresses.className", Contact.class.getName());
 request.setAttribute("emailAddresses.classPK", selContact.getContactId());
+request.setAttribute("phones.className", Contact.class.getName());
 request.setAttribute("phones.classPK", selContact.getContactId());
+request.setAttribute("websites.className", Contact.class.getName());
 request.setAttribute("websites.classPK", selContact.getContactId());
 %>
 
 <liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
 
 <div class="user-information">
-
 	<div class="section user-details">
 		<liferay-util:include page="/html/portlet/directory/user/details.jsp" />
 	</div>
@@ -81,5 +82,4 @@ request.setAttribute("websites.classPK", selContact.getContactId());
 	<div class="section user-comments">
 		<liferay-util:include page="/html/portlet/directory/user/comments.jsp" />
 	</div>
-
 </div>

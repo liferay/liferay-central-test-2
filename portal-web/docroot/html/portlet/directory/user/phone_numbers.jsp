@@ -25,9 +25,10 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
+List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
+
 String className = (String)request.getAttribute("phones.className");
 long classPK = (Long)request.getAttribute("phones.classPK");
-List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 
 List<Phone> personalPhones = Collections.EMPTY_LIST;
 List<Phone> organizationPhones = new ArrayList<Phone>();
@@ -42,7 +43,6 @@ for (int i = 0; i < organizations.size(); i++) {
 %>
 
 <c:if test="<%= !personalPhones.isEmpty() || !organizationPhones.isEmpty() %>">
-
 	<h3><liferay-ui:message key="phones" /></h3>
 
 	<c:if test="<%= !organizationPhones.isEmpty() %>">
@@ -50,17 +50,17 @@ for (int i = 0; i < organizations.size(); i++) {
 
 		<ul class="property-list">
 
-			<%
-			for(Phone phone: organizationPhones){
-			%>
+		<%
+		for (Phone phone: organizationPhones) {
+		%>
 
-				<li class="<%= phone.isPrimary() ? "primary" : "" %>">
-					<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
-				</li>
+			<li class="<%= phone.isPrimary() ? "primary" : "" %>">
+				<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
+			</li>
 
-			<%
-			}
-			%>
+		<%
+		}
+		%>
 
 		</ul>
 	</c:if>
@@ -70,17 +70,17 @@ for (int i = 0; i < organizations.size(); i++) {
 
 		<ul class="property-list">
 
-			<%
-			for(Phone phone: personalPhones){
-			%>
+		<%
+		for (Phone phone: personalPhones) {
+		%>
 
-				<li class="<%= phone.isPrimary() ? "primary" : "" %>">
-					<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
-				</li>
+			<li class="<%= phone.isPrimary() ? "primary" : "" %>">
+				<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
+			</li>
 
-			<%
-			}
-			%>
+		<%
+		}
+		%>
 
 		</ul>
 	</c:if>

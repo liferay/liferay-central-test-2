@@ -31,35 +31,50 @@ Organization organization =  (Organization)request.getAttribute(WebKeys.ORGANIZA
 <h2><%= organization.getName() %></h2>
 
 <div class="details">
-
 	<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathThemeImages() %>/control_panel/avatar_organization_small.png" />
 
 	<dl class="property-list">
-		<dt><liferay-ui:message key="type" /></dt>
-		<dd><%= LanguageUtil.get(pageContext, organization.getType()) %></dd>
+		<dt>
+			<liferay-ui:message key="type" />
+		</dt>
+		<dd>
+			<%= LanguageUtil.get(pageContext, organization.getType()) %>
+		</dd>
 
 		<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
-			<dt><liferay-ui:message key="status" /></dt>
-			<dd><%= LanguageUtil.get(pageContext, ListTypeServiceUtil.getListType(organization.getStatusId()).getName()) %></dd>
+			<dt>
+				<liferay-ui:message key="status" />
+			</dt>
+			<dd>
+				<%= LanguageUtil.get(pageContext, ListTypeServiceUtil.getListType(organization.getStatusId()).getName()) %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= organization.getCountryId() > 0 %>">
-			<dt><liferay-ui:message key="country" /></dt>
-
-			<dd><%=  LanguageUtil.get(pageContext, CountryServiceUtil.getCountry(organization.getCountryId()).getName()) %></dd>
+			<dt>
+				<liferay-ui:message key="country" />
+			</dt>
+			<dd>
+				<%= LanguageUtil.get(pageContext, CountryServiceUtil.getCountry(organization.getCountryId()).getName()) %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= organization.getRegionId() > 0 %>">
-			<dt><liferay-ui:message key="region" /></dt>
-
-			<dd><%=  LanguageUtil.get(pageContext, RegionServiceUtil.getRegion(organization.getRegionId()).getName()) %></dd>
+			<dt>
+				<liferay-ui:message key="region" />
+			</dt>
+			<dd>
+				<%= LanguageUtil.get(pageContext, RegionServiceUtil.getRegion(organization.getRegionId()).getName()) %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= organization.getParentOrganization() != null %>">
-			<dt><liferay-ui:message key="parent-organization" /></dt>
-
-			<dd><%=  organization.getParentOrganization().getName() %></dd>
+			<dt>
+				<liferay-ui:message key="parent-organization" />
+			</dt>
+			<dd>
+				<%=  organization.getParentOrganization().getName() %>
+			</dd>
 		</c:if>
 	</dl>
-
 </div>

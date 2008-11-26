@@ -28,22 +28,20 @@
 String className = (String)request.getAttribute("addresses.className");
 long classPK = (Long)request.getAttribute("addresses.classPK");
 
-List<Address> organizationAddresses = Collections.EMPTY_LIST;
+List<Address> addresses = Collections.EMPTY_LIST;
 
 if (classPK > 0) {
-	organizationAddresses = AddressServiceUtil.getAddresses(className, classPK);
+	addresses = AddressServiceUtil.getAddresses(className, classPK);
 }
 %>
 
-<c:if test="<%= !organizationAddresses.isEmpty() %>">
-
+<c:if test="<%= !addresses.isEmpty() %>">
 	<h3><liferay-ui:message key="address" /></h3>
 
 	<ul class="property-list">
 
 	<%
-	for(Address address: organizationAddresses){
-
+	for (Address address: addresses) {
 		String street1 = address.getStreet1();
 		String street2 = address.getStreet2();
 		String street3 = address.getStreet3();
@@ -84,6 +82,5 @@ if (classPK > 0) {
 	}
 	%>
 
-   </ul>
-
+	</ul>
 </c:if>

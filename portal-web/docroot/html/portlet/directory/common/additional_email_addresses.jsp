@@ -36,25 +36,24 @@ if (classPK > 0) {
 %>
 
 <c:if test="<%= !emailAddresses.isEmpty() %>">
-
 	<h3><liferay-ui:message key="additional-email-addresses" /></h3>
 
 	<ul class="property-list">
 
-		<%
-		for (int i = 0; i < emailAddresses.size(); i++) {
-			EmailAddress emailAddress = emailAddresses.get(i);
-		%>
+	<%
+	for (int i = 0; i < emailAddresses.size(); i++) {
+		EmailAddress emailAddress = emailAddresses.get(i);
+	%>
 
-			<li class="<%= emailAddress.isPrimary() ? "primary" : "" %>">
-				<a href="mailto:<%= emailAddress.getAddress() %>"><%= emailAddress.getAddress() %></a>
-				 <%= LanguageUtil.get(pageContext, emailAddress.getType().getName()) %>
-			</li>
+		<li class="<%= emailAddress.isPrimary() ? "primary" : "" %>">
+			<a href="mailto:<%= emailAddress.getAddress() %>"><%= emailAddress.getAddress() %></a>
 
-		<%
-		}
-		%>
+			<%= LanguageUtil.get(pageContext, emailAddress.getType().getName()) %>
+		</li>
+
+	<%
+	}
+	%>
 
 	</ul>
-
 </c:if>

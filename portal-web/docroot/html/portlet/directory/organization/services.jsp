@@ -35,7 +35,6 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 %>
 
 <c:if test="<%= !orgLabors.isEmpty() %>">
-
 	<h3><liferay-ui:message key="services" /></h3>
 
 	<%
@@ -43,7 +42,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 	String[] days = CalendarUtil.getDays(locale);
 	String[] paramPrefixes = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 
-	for (int i = 0; i < orgLabors.size(); i++){
+	for (int i = 0; i < orgLabors.size(); i++) {
 		OrgLabor orgLabor = orgLabors.get(i);
 
 		int[] openArray = new int[paramPrefixes.length];
@@ -61,66 +60,65 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 		<ul class="property-list">
 			<li>
-
 				<h4><%= LanguageUtil.get(pageContext,ListTypeServiceUtil.getListType(orgLabor.getTypeId()).getName()) %></h4>
 
 				<table class="org-labor-table" border="1">
-					<tr>
-						<td class="no-color"></td>
+				<tr>
+					<td class="no-color"></td>
 
-						<%
-						for (String day : days) {
-						%>
+					<%
+					for (String day : days) {
+					%>
 
-							<th>
-								<label><%= day %></label>
-							</th>
+						<th>
+							<label><%= day %></label>
+						</th>
 
-						<%
-						}
-						%>
+					<%
+					}
+					%>
 
-					</tr>
-					<tr>
+				</tr>
+				<tr>
+					<td>
+						<b><liferay-ui:message key="open" /></b>
+					</td>
+
+					<%
+					for (int j = 0; j < days.length; j++) {
+						int curOpen = openArray[j];
+
+					%>
+
 						<td>
-							<b><liferay-ui:message key="open" /></b>
+							<%= curOpen != -1 ? timeFormat.format(curOpen) : "" %>
 						</td>
 
-						<%
-						for (int j = 0; j < days.length; j++) {
-							int curOpen = openArray[j];
+					<%
+					}
+					%>
 
-						%>
+				</tr>
+				<tr>
+					<td>
+						<b><liferay-ui:message key="close" /></b>
+					</td>
 
-							<td>
-								<%= curOpen != -1 ? timeFormat.format(curOpen) : "" %>
-							</td>
+					<%
+					for (int j = 0; j < days.length; j++) {
+						String curParam = paramPrefixes[j];
+						int curClose = closeArray[j];
+					%>
 
-						<%
-						}
-						%>
-
-					</tr>
-					<tr>
 						<td>
-							<b><liferay-ui:message key="close" /></b>
+							<%= curClose != -1 ? timeFormat.format(curClose) : "" %>
 						</td>
 
-						<%
-						for (int j = 0; j < days.length; j++) {
-							String curParam = paramPrefixes[j];
-							int curClose = closeArray[j];
-						%>
+					<%
+					}
+					%>
 
-							<td>
-								<%= curClose != -1 ? timeFormat.format(curClose) : "" %>
-							</td>
-
-						<%
-						}
-						%>
-
-					</tr>
+				</tr>
 				</table>
 			</li>
 		</ul>

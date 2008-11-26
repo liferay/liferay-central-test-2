@@ -25,9 +25,10 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
+List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
+
 String className = (String)request.getAttribute("addresses.className");
 long classPK = (Long)request.getAttribute("addresses.classPK");
-List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 
 List<Address> personalAddresses = Collections.EMPTY_LIST;
 List<Address> organizationAddresses = new ArrayList<Address>();
@@ -42,7 +43,6 @@ for (int i = 0; i < organizations.size(); i++) {
 %>
 
 <c:if test="<%= !personalAddresses.isEmpty() || !organizationAddresses.isEmpty() %>">
-
 	<h3><liferay-ui:message key="address" /></h3>
 
 	<c:if test="<%= !organizationAddresses.isEmpty() %>">
@@ -51,48 +51,47 @@ for (int i = 0; i < organizations.size(); i++) {
 
 			<ul class="property-list">
 
-				<%
-				for(Address address: organizationAddresses){
+			<%
+			for (Address address: organizationAddresses) {
+				String street1 = address.getStreet1();
+				String street2 = address.getStreet2();
+				String street3 = address.getStreet3();
 
-					String street1 = address.getStreet1();
-					String street2 = address.getStreet2();
-					String street3 = address.getStreet3();
+				String zipCode = address.getZip();
+				String city = address.getCity();
 
-					String zipCode = address.getZip();
-					String city = address.getCity();
+				String mailingName = LanguageUtil.get(pageContext, address.getType().getName());
+			%>
 
-					String mailingName = LanguageUtil.get(pageContext, address.getType().getName());
-				%>
+				<li class="<%= address.isPrimary() ? "primary" : "" %>">
+					<em class="mailing-name"><%= mailingName %></em>
 
-					<li class="<%= address.isPrimary() ? "primary" : "" %>">
-						<em class="mailing-name"><%= mailingName %></em>
+					<c:if test="<%= Validator.isNotNull(street1) %>">
+						<%= street1 %><br />
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(street1) %>">
-							<%= street1 %><br />
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(street2) %>">
+						<%= street2 %><br />
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(street2) %>">
-							<%= street2 %><br />
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(street3) %>">
+						<%= street3 %><br />
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(street3) %>">
-							<%= street3 %><br />
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(zipCode) %>">
+						<%= zipCode %>,
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(zipCode) %>">
-							<%= zipCode %>,
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(city) %>">
+						<%= city %>
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(city) %>">
-							<%= city %>
-						</c:if>
+					<c:if test="<%= address.isMailing() %>">(<liferay-ui:message key="mailing" />)</c:if>
+				</li>
 
-						<c:if test="<%= address.isMailing() %>">(<liferay-ui:message key="mailing" />)</c:if>
-					</li>
-
-				<%
-				}
-				%>
+			<%
+			}
+			%>
 
 			</ul>
 		</div>
@@ -104,50 +103,48 @@ for (int i = 0; i < organizations.size(); i++) {
 
 			<ul class="property-list">
 
-				<%
-				for(Address address: personalAddresses){
+			<%
+			for (Address address: personalAddresses) {
+				String street1 = address.getStreet1();
+				String street2 = address.getStreet2();
+				String street3 = address.getStreet3();
 
-					String street1 = address.getStreet1();
-					String street2 = address.getStreet2();
-					String street3 = address.getStreet3();
+				String zipCode = address.getZip();
+				String city = address.getCity();
 
-					String zipCode = address.getZip();
-					String city = address.getCity();
+				String mailingName = LanguageUtil.get(pageContext, address.getType().getName());
+			%>
 
-					String mailingName = LanguageUtil.get(pageContext, address.getType().getName());
-				%>
+				<li class="<%= address.isPrimary() ? "primary" : "" %>">
+					<em class="mailing-name"><%= mailingName %></em>
+					<c:if test="<%= Validator.isNotNull(street1) %>">
+						<%= street1 %><br />
+					</c:if>
 
-					<li class="<%= address.isPrimary() ? "primary" : "" %>">
-						<em class="mailing-name"><%= mailingName %></em>
-						<c:if test="<%= Validator.isNotNull(street1) %>">
-							<%= street1 %><br />
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(street2) %>">
+						<%= street2 %><br />
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(street2) %>">
-							<%= street2 %><br />
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(street3) %>">
+						<%= street3 %><br />
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(street3) %>">
-							<%= street3 %><br />
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(zipCode) %>">
+						<%= zipCode %>,
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(zipCode) %>">
-							<%= zipCode %>,
-						</c:if>
+					<c:if test="<%= Validator.isNotNull(city) %>">
+						<%= city %>
+					</c:if>
 
-						<c:if test="<%= Validator.isNotNull(city) %>">
-							<%= city %>
-						</c:if>
+					<c:if test="<%= address.isMailing() %>">(<liferay-ui:message key="mailing" />)</c:if>
+				</li>
 
-						<c:if test="<%= address.isMailing() %>">(<liferay-ui:message key="mailing" />)</c:if>
-					</li>
-
-				<%
-				}
-				%>
+			<%
+			}
+			%>
 
 			</ul>
 		</div>
 	</c:if>
-
 </c:if>

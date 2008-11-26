@@ -30,9 +30,11 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 
 String organizationsHTML = StringPool.BLANK;
+
 if (!organizations.isEmpty()) {
 	organizationsHTML = organizations.get(0).getName();
 }
+
 for (int i = 1; i<organizations.size(); i++) {
 	organizationsHTML += ", "+ organizations.get(i).getName();
 }
@@ -41,41 +43,59 @@ for (int i = 1; i<organizations.size(); i++) {
 <h2><%= selUser.getFullName() %></h2>
 
 <div class="details">
-
 	<img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' />
 
 	<dl class="property-list">
 		<c:if test="<%= Validator.isNotNull(selUser.getEmailAddress()) %>">
-			<dt><liferay-ui:message key="email-address" /></dt>
-			<dd><%= selUser.getEmailAddress() %></dd>
+			<dt>
+				<liferay-ui:message key="email-address" />
+			</dt>
+			<dd>
+				<%= selUser.getEmailAddress() %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>">
-			<dt><liferay-ui:message key="birthday" /></dt>
-			<dd><%= dateFormatDate.format(selUser.getBirthday()) %></dd>
+			<dt>
+				<liferay-ui:message key="birthday" />
+			</dt>
+			<dd>
+				<%= dateFormatDate.format(selUser.getBirthday()) %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(selContact.getJobTitle()) %>">
-			<dt><liferay-ui:message key="job-title" /></dt>
-			<dd><%= selContact.getJobTitle() %></dd>
+			<dt>
+				<liferay-ui:message key="job-title" />
+			</dt>
+			<dd>
+				<%= selContact.getJobTitle() %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE %>">
-			<dt><liferay-ui:message key="gender" /></dt>
-			<dd><%= LanguageUtil.get(pageContext, selUser.isMale() ? "male" : "female") %></dd>
+			<dt>
+				<liferay-ui:message key="gender" />
+			</dt>
+			<dd>
+				<%= LanguageUtil.get(pageContext, selUser.isMale() ? "male" : "female") %>
+			</dd>
 		</c:if>
 
 		<c:if test="<%= !organizations.isEmpty() %>">
-			<c:choose>
-				<c:when test="<%= organizations.size() > 1 %>">
-					<dt><liferay-ui:message key="organizations" /></dt>
-				</c:when>
-				<c:otherwise>
-					<dt><liferay-ui:message key="organization" /></dt>
-				</c:otherwise>
-			</c:choose>
-			<dd><%= organizationsHTML %></dd>
+			<dt>
+				<c:choose>
+					<c:when test="<%= organizations.size() > 1 %>">
+						<liferay-ui:message key="organizations" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="organization" />
+					</c:otherwise>
+				</c:choose>
+			</dt>
+			<dd>
+				<%= organizationsHTML %>
+			</dd>
 		</c:if>
 	</dl>
-
 </div>

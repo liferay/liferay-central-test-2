@@ -28,31 +28,29 @@
 String className = (String)request.getAttribute("phones.className");
 long classPK = (Long)request.getAttribute("phones.classPK");
 
-List<Phone> organizationPhones = Collections.EMPTY_LIST;
+List<Phone> phones = Collections.EMPTY_LIST;
 
 if (classPK > 0) {
-	organizationPhones = PhoneServiceUtil.getPhones(className, classPK);
+	phones = PhoneServiceUtil.getPhones(className, classPK);
 }
 %>
 
-<c:if test="<%= !organizationPhones.isEmpty() %>">
-
+<c:if test="<%= !phones.isEmpty() %>">
 	<h3><liferay-ui:message key="phones" /></h3>
 
-		<ul class="property-list">
+	<ul class="property-list">
 
-			<%
-			for(Phone phone: organizationPhones){
-			%>
+	<%
+	for (Phone phone: phones) {
+	%>
 
-				<li class="<%= phone.isPrimary() ? "primary" : "" %>">
-					<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
-				</li>
+		<li class="<%= phone.isPrimary() ? "primary" : "" %>">
+			<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
+		</li>
 
-			<%
-			}
-			%>
+	<%
+	}
+	%>
 
-		</ul>
-
+	</ul>
 </c:if>
