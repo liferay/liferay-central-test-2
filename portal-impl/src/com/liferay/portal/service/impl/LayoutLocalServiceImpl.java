@@ -343,11 +343,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			endDate);
 
 		try {
-	        return fcos.getBytes();
-        }
-        catch (IOException ioe) {
-	       	throw new SystemException(ioe);
-        }
+			return fcos.getBytes();
+		}
+		catch (IOException ioe) {
+		   	throw new SystemException(ioe);
+		}
 	}
 
 	public FileCacheOutputStream exportLayoutsAsStream(
@@ -371,11 +371,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			plid, portletId, parameterMap, startDate, endDate);
 
 		try {
-	        return fcos.getBytes();
-        }
-        catch (IOException ioe) {
-        	throw new SystemException(ioe);
-        }
+			return fcos.getBytes();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(
