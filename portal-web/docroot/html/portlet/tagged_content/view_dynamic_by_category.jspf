@@ -89,7 +89,7 @@ if (!itr.hasNext()) {
 %>
 
 		<style type="text/css">
-			#p_p_id_<%=portletDisplay.getId() %>_ {
+			#p_p_id_<%= portletDisplay.getId() %>_ {
 				display: none;
 			}
 		</style>
@@ -102,11 +102,11 @@ if (!itr.hasNext()) {
 		<liferay-ui:message key="there-are-no-results" />
 
 		<style type="text/css">
-			#p_p_id_<%=portletDisplay.getId() %>_ {
+			#p_p_id_<%= portletDisplay.getId() %>_ {
 				opacity: 0.4;
 			}
 
-			.ie #p_p_id_<%=portletDisplay.getId() %>_ {
+			.ie #p_p_id_<%= portletDisplay.getId() %>_ {
 				filter: alpha(opacity=40);
 				zoom: 1;
 			}

@@ -101,8 +101,8 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	</td>
 	<td>
 		<select name="<portlet:namespace />statusId">
-			<option value="<%=MembershipRequestImpl.STATUS_APPROVED %>"><liferay-ui:message key="approve" /></option>
-			<option value="<%=MembershipRequestImpl.STATUS_DENIED %>"><liferay-ui:message key="deny" /></option>
+			<option value="<%= MembershipRequestImpl.STATUS_APPROVED %>"><liferay-ui:message key="approve" /></option>
+			<option value="<%= MembershipRequestImpl.STATUS_DENIED %>"><liferay-ui:message key="deny" /></option>
 		</select>
 	</td>
 </tr>

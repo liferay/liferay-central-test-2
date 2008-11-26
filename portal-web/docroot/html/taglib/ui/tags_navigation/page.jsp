@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/tags_navigation/init.jsp"%>
+<%@ include file="/html/taglib/ui/tags_navigation/init.jsp" %>
 
 <%
 Boolean showCompanyCategories = (Boolean)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories");
