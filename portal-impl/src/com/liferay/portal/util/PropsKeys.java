@@ -841,6 +841,8 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
+	public static final String ORGANIZATIONS_MEMBERSHIP_STRICT = "organizations.membership.strict";
+
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
 	public static final String ORGANIZATIONS_TYPES = "organizations.types";

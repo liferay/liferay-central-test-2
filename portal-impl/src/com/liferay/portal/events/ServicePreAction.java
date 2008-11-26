@@ -53,6 +53,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
@@ -578,7 +579,7 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected boolean isViewableCommunity(
+	protected boolean isViewableGroup(
 			User user, long groupId, boolean privateLayout,
 			PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
@@ -697,6 +698,17 @@ public class ServicePreAction extends Action {
 						permissionChecker, organizationId, ActionKeys.UPDATE)) {
 
 				return true;
+			}
+
+			if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
+				for (Organization curOrganization : user.getOrganizations()) {
+					for (Organization curAncestor :
+							curOrganization.getAncestors()) {
+						if (groupId == curAncestor.getGroup().getGroupId()) {
+							return true;
+						}
+					}
+				}
 			}
 		}
 		else if (group.isUserGroup()) {
@@ -1049,7 +1061,7 @@ public class ServicePreAction extends Action {
 					request.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 				}
 
-				boolean isViewableCommunity = isViewableCommunity(
+				boolean isViewableCommunity = isViewableGroup(
 					user, layout.getGroupId(), layout.isPrivateLayout(),
 					permissionChecker);
 

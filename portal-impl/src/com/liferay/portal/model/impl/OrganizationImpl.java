@@ -65,6 +65,27 @@ import org.apache.commons.logging.LogFactory;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
+	public List<Organization> getAncestors()
+		throws PortalException, SystemException {
+
+		List<Organization> ancestors = new ArrayList<Organization>();
+
+		Organization organization = this;
+
+		while (true) {
+			if (!organization.isRoot()) {
+				organization = organization.getParentOrganization();
+
+				ancestors.add(organization);
+			}
+			else {
+				break;
+			}
+		}
+
+		return ancestors;
+	}
+
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
 			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES, new Filter(type));

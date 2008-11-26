@@ -50,6 +50,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SetUtil;
+import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -225,7 +226,7 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public List<Group> getMyPlaces() {
-		List<Group> myPlaces = new ArrayList<Group>();
+		List<Group> myPlaces = new UniqueList<Group>();
 
 		try {
 			if (isDefaultUser()) {
@@ -246,6 +247,12 @@ public class UserImpl extends UserModelImpl implements User {
 
 			for (Organization organization : userOrgs) {
 				myPlaces.add(0, organization.getGroup());
+
+				if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
+					for (Organization ancestor : organization.getAncestors()) {
+						myPlaces.add(0, ancestor.getGroup());
+					}
+				}
 			}
 
 			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||

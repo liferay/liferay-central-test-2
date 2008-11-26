@@ -843,6 +843,10 @@ public class PropsValues {
 	public static final String[] ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS);
 
+	public static final boolean ORGANIZATIONS_MEMBERSHIP_STRICT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.ORGANIZATIONS_MEMBERSHIP_STRICT));
+
 	public static String[] ORGANIZATIONS_TYPES =
 		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_TYPES);
 
