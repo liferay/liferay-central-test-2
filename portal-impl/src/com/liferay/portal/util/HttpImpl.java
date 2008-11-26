@@ -546,11 +546,11 @@ public class HttpImpl implements Http {
 
 		String anchor = StringPool.BLANK;
 
-		int pos = url.indexOf(StringPool.POUND);
+		int anchorPos = url.indexOf(StringPool.POUND);
 
-		if (pos != -1) {
-			anchor = url.substring(pos);
-			url = url.substring(0, pos);
+		if (anchorPos != -1) {
+			anchor = url.substring(anchorPos);
+			url = url.substring(0, anchorPos);
 		}
 
 		StringBuilder sb = new StringBuilder();
