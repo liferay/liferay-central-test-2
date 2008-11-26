@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 
@@ -72,6 +73,12 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 			portletURL.addParameterIncludedInPath("p_p_id");
 
 			portletURL.addParameterIncludedInPath("struts_action");
+
+			WindowState windowState = portletURL.getWindowState();
+
+			if (windowState.equals(WindowState.MAXIMIZED)) {
+				friendlyURLPath += StringPool.SLASH + windowState;
+			}
 		}
 
 		return friendlyURLPath;
@@ -90,13 +97,16 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		addParam(params, "p_p_id", _PORTLET_ID);
 		addParam(params, "p_p_lifecycle", "0");
-		addParam(params, "p_p_state", WindowState.NORMAL);
 		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);
-		int y = friendlyURLPath.length();
+		int y = friendlyURLPath.indexOf("/", x + 1);
 
-		if ((x + 1) == y) {
+		if (y == -1) {
+			y = friendlyURLPath.length();
+		}
+
+		if ((x + 1) == friendlyURLPath.length()) {
 			addParam(params, "struts_action", "/blogs/view");
 
 			return;
@@ -110,15 +120,13 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			addParam(params, "struts_action", "/blogs/rss");
 		}
-		else if (type.startsWith("trackback/")) {
+		else if (type.equals("trackback")) {
 			addParam(params, "p_p_lifecycle", "1");
 			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
 
 			addParam(params, "struts_action", "/blogs/trackback");
 
-			x = type.indexOf("/");
-
-			type = type.substring(x + 1);
+			type = friendlyURLPath.substring(y + 1);
 
 			addParam(params, getEntryIdParam(type), type);
 		}
@@ -126,6 +134,10 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "struts_action", "/blogs/view_entry");
 
 			addParam(params, getEntryIdParam(type), type);
+		}
+
+		if (friendlyURLPath.indexOf("maximized", x) != -1) {
+			addParam(params, "p_p_state", WindowState.MAXIMIZED);
 		}
 	}
 

@@ -52,7 +52,7 @@ boolean quote = false;
 
 		var nameEl = document.getElementById("<portlet:namespace />categoryName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
 
@@ -66,7 +66,7 @@ boolean quote = false;
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/move_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />moveThread(); return false;">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/message_boards/move_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />moveThread(); return false;">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 
@@ -100,7 +100,7 @@ long breadcrumbsMessageId = message.getMessageId();
 		category = category.toEscapedModel();
 		%>
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
 		<%= category.getName() %></a>
 
 		<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />

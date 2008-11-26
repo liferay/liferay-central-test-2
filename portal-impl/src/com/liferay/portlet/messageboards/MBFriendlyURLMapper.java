@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards;
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -48,10 +49,6 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
-
-		if (!portletURL.getWindowState().equals(WindowState.MAXIMIZED)) {
-			return null;
-		}
 
 		String tabs1 = GetterUtil.getString(portletURL.getParameter("tabs1"));
 		String tabs2 = GetterUtil.getString(portletURL.getParameter("tabs2"));
@@ -78,12 +75,8 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			else {
 				friendlyURLPath = "/message_boards";
 
-				if (Validator.isNotNull(tabs1)) {
-					friendlyURLPath += "/";
-
-					if (!tabs1.equals("categories")) {
-						friendlyURLPath += tabs1;
-					}
+				if (Validator.isNotNull(tabs1) && !tabs1.equals("categories")) {
+					friendlyURLPath += StringPool.SLASH + tabs1;
 				}
 
 				portletURL.addParameterIncludedInPath("tabs1");
@@ -111,6 +104,12 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
+			WindowState windowState = portletURL.getWindowState();
+
+			if (windowState.equals(WindowState.MAXIMIZED)) {
+				friendlyURLPath += StringPool.SLASH + windowState;
+			}
+
 			portletURL.addParameterIncludedInPath("p_p_id");
 
 			portletURL.addParameterIncludedInPath("struts_action");
@@ -132,7 +131,6 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		addParam(params, "p_p_id", _PORTLET_ID);
 		addParam(params, "p_p_lifecycle", "0");
-		//addParam(params, "p_p_state", WindowState.MAXIMIZED);
 		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);
@@ -152,18 +150,24 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			y = friendlyURLPath.length();
 		}
 
+		int z = friendlyURLPath.indexOf("/", y + 1);
+
+		if (z == -1) {
+			z = friendlyURLPath.length();
+		}
+
 		String type = friendlyURLPath.substring(x + 1, y);
 
 		if (type.equals("category")) {
 			String categoryId =
-				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
+				friendlyURLPath.substring(y + 1, z);
 
 			addParam(params, "struts_action", "/message_boards/view");
 			addParam(params, "categoryId", categoryId);
 		}
 		else if (type.equals("message")) {
 			String messageId =
-				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
+				friendlyURLPath.substring(y + 1, z);
 
 			addParam(params, "struts_action", "/message_boards/view_message");
 			addParam(params, "messageId", messageId);
@@ -178,6 +182,10 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		else if (type.equals("search")) {
 			addParam(params, "struts_action", "/message_boards/search");
 			addParam(params, "tabs1", "category");
+		}
+
+		if (friendlyURLPath.indexOf("maximized", x) != -1) {
+			addParam(params, "p_p_state", WindowState.MAXIMIZED);
 		}
 	}
 

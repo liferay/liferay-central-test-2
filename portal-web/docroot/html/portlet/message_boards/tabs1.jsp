@@ -29,8 +29,6 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
 
 PortletURL tabs1URL = renderResponse.createRenderURL();
 
-tabs1URL.setWindowState(WindowState.MAXIMIZED);
-
 tabs1URL.setParameter("struts_action", "/message_boards/view");
 tabs1URL.setParameter("tabs1", tabs1);
 

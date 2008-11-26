@@ -67,6 +67,10 @@ if (treeWalker.isOdd()) {
 			messageURL = portalURL + messageURL;
 		}
 
+		if (windowState.equals(WindowState.MAXIMIZED)) {
+			messageURL += "/maximized";
+		}
+
 		String rowHREF = "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
 
 		if (!themeDisplay.isFacebook()) {

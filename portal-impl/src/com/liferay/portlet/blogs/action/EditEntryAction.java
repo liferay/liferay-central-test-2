@@ -101,6 +101,12 @@ public class EditEntryAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 			boolean updateRedirect = false;
 
+			if (redirect.indexOf(
+					"/blogs/" + oldUrlTitle + "/maximized") != -1) {
+
+				oldUrlTitle += "/maximized";
+			}
+
 			if ((entry != null) && (Validator.isNotNull(oldUrlTitle)) &&
 				(redirect.endsWith("/blogs/" + oldUrlTitle) ||
 				 redirect.indexOf("/blogs/" + oldUrlTitle + "?") != -1)) {
@@ -115,6 +121,10 @@ public class EditEntryAction extends PortletAction {
 					0, pos - oldUrlTitle.length());
 
 				newRedirect += entry.getUrlTitle();
+
+				if (oldUrlTitle.indexOf("/maximized") != -1) {
+					newRedirect += "/maximized";
+				}
 
 				if (pos < redirect.length()) {
 					newRedirect +=

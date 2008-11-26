@@ -56,7 +56,7 @@ boolean quote = false;
 
 		var nameEl = document.getElementById("<portlet:namespace />categoryName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
 
@@ -70,7 +70,7 @@ boolean quote = false;
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/split_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />splitThread(); return false;">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/message_boards/split_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />splitThread(); return false;">
 <input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 

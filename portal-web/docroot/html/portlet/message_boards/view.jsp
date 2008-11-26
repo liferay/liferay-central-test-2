@@ -36,8 +36,6 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCateg
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
@@ -46,7 +44,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/message_boards/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/message_boards/search" /></liferay-portlet:renderURL>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
@@ -95,8 +93,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			row.setRestricted(restricted);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/message_boards/view");
 			rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
@@ -223,7 +219,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<script type="text/javascript">
 			function <portlet:namespace />addCategory() {
-				var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
+				var url = '<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
 
 				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
 					url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm1.<portlet:namespace />keywords.value;
@@ -285,8 +281,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
 				PortletURL rowURL = renderResponse.createRenderURL();
-
-				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/message_boards/view_message");
 				rowURL.setParameter("messageId", String.valueOf(message.getMessageId()));
@@ -409,7 +403,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			<script type="text/javascript">
 				function <portlet:namespace />addMessage() {
-					var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
+					var url = '<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
 
 					if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
 						url += '&<portlet:namespace />subject=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
@@ -486,8 +480,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				row.setRestricted(restricted);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
-
-				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/message_boards/view");
 				rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
@@ -617,8 +609,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
 			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/message_boards/view_message");
 			rowURL.setParameter("messageId", String.valueOf(message.getMessageId()));

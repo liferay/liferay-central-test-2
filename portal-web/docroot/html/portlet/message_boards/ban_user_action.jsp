@@ -32,7 +32,7 @@ MBBan ban = (MBBan)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
+		<portlet:actionURL var="unbanUserURL">
 			<portlet:param name="struts_action" value="/message_boards/ban_user" />
 			<portlet:param name="<%= Constants.CMD %>" value="unban" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
