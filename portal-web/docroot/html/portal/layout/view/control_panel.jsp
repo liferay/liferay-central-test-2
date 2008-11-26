@@ -204,6 +204,15 @@ String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId()
 						else {
 							refererGroupDescriptiveName = GroupConstants.GUEST;
 							backURL = themeDisplay.getURLPortal() + PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING + "/guest";
+
+							if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+								backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
+							}
+
+							if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
+
+								backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
+							}
 						}
 						%>
 
