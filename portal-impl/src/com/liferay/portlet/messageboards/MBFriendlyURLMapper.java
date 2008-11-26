@@ -106,7 +106,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (Validator.isNotNull(friendlyURLPath)) {
 			WindowState windowState = portletURL.getWindowState();
 
-			if (windowState.equals(WindowState.MAXIMIZED)) {
+			if (!windowState.equals(WindowState.NORMAL)) {
 				friendlyURLPath += StringPool.SLASH + windowState;
 			}
 
