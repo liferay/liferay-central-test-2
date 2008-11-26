@@ -2452,7 +2452,7 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-common.jar</file-name>
-		<version>2.0 (trunk 755)</version>
+		<version>2.0 (trunk 764)</version>
 		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
@@ -2463,7 +2463,7 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-consumer.jar</file-name>
-		<version>2.0 (trunk 755)</version>
+		<version>2.0 (trunk 764)</version>
 		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
@@ -2474,7 +2474,7 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-consumer-portlet.jar</file-name>
-		<version>2.0 (trunk 755)</version>
+		<version>2.0 (trunk 764)</version>
 		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
@@ -2485,7 +2485,7 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-producer.jar</file-name>
-		<version>2.0 (trunk 755)</version>
+		<version>2.0 (trunk 764)</version>
 		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
@@ -2496,7 +2496,7 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-producer-portlet.jar</file-name>
-		<version>2.0 (trunk 755)</version>
+		<version>2.0 (trunk 764)</version>
 		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
