@@ -24,71 +24,6 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-directory .section {
-	float: left;
-	margin-left: 10px;
-	width: 47%;
-}
-
-.portlet-directory .section h3 {
-	background: url() no-repeat 0 50%;
-	border-bottom: 1px solid #CCC;
-	line-height: 1.5;
-	margin-bottom: 0.5em;
-	padding-left: 25px;
-}
-
-.portlet-directory .section li {
-	list-style: none;
-	margin: 0;
-	padding-left: 25px;
-}
-
-.portlet-directory .section ul {
-	margin: 0;
-}
-
-.portlet-directory .sms h3 {
-	background-image: url(<%= themeImagesPath %>/common/telephone_mobile.png);
-}
-
-.portlet-directory .additional-email-addresses h3 {
-	background-image: url(<%= themeImagesPath %>/mail/unread.png);
-}
-
-.portlet-directory .addresses .mailing-name {
-	display: block;
-	font-style: italic;
-}
-
-.portlet-directory .addresses .primary {
-	background-position: 3px 5px;
-}
-
-.portlet-directory .addresses h3 {
-	background-image: url(<%= themeImagesPath %>/dock/home.png);
-}
-
-.portlet-directory .details {
-	clear: both;
-}
-
-.portlet-directory .instant-messenger h3 {
-	background-image: url(<%= themeImagesPath %>/common/conversation.png);
-}
-
-.portlet-directory .phones h3 {
-	background-image: url(<%= themeImagesPath %>/common/telephone.png);
-}
-
-.portlet-directory .social-network h3 {
-	background-image: url(<%= themeImagesPath %>/common/group.png);
-}
-
-.portlet-directory .websites h3 {
-	background-image: url(<%= themeImagesPath %>/common/history.png);
-}
-
 .portlet-directory .details .avatar {
 	float: left;
 	width: 100px;
@@ -116,61 +51,6 @@
 	overflow: hidden;
 }
 
-.ie6 .portlet-directory .user-information, .ie6 .portlet-directory .organization-information {
-	height: 1%;
-}
-
-.ie6 .portlet-directory {
-	height: 1%;
-}
-
-.ie6 .portlet-directory dl.property-list {
-	height: 1%;
-}
-
-.portlet-directory .primary {
-	background: #EEE url(<%= themeImagesPath %>/dock/my_place_current.png) no-repeat 3px 50%;
-	color: #020509;
-	font-weight: bold;
-	margin-bottom: 10px;
-	padding: 5px;
-	padding-left: 10px;
-}
-
-.portlet-directory .property-list dd img {
-	vertical-align: middle;
-}
-
-.portlet-directory .property-list dd, .portlet-directory .property-list dd {
-	padding-left: 5px;
-}
-
-.portlet-directory .property-list dt, .portlet-directory .property-list dd, .portlet-directory .property-list li {
-	margin-bottom: 5px;
-}
-
-.portlet-directory .property-list dt, .portlet-directory .property-list dd {
-	float: left;
-	line-height: 1.5;
-	margin: 0;
-}
-
-.portlet-directory .property-list dt {
-	clear: left;
-	font-weight: bold;
-	min-width: 5em;
-}
-
-.portlet-directory .user-information, .organization-information {
-	overflow: hidden;
-}
-
-.portlet-directory dl.property-list {
-	margin-top: 0;
-	overflow: hidden;
-	padding: 0;
-}
-
 .portlet-directory table.org-labor-table td {
 	background-color: #EFEFEF;
 	padding: 5px;
@@ -191,4 +71,132 @@
 	border: 1px solid white;
 	margin-bottom: 30px;
 	margin-top: 10px;
+}
+
+.portlet-directory .primary {
+	background: #EEE url(<%= themeImagesPath %>/dock/my_place_current.png) no-repeat 3px 50%;
+	color: #020509;
+	font-weight: bold;
+	margin-bottom: 10px;
+	padding: 5px;
+	padding-left: 10px;
+}
+
+.portlet-directory dl.property-list {
+	margin-top: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+.portlet-directory .property-list dd img {
+	vertical-align: middle;
+}
+
+.portlet-directory .property-list dd, .portlet-directory .property-list dd {
+	padding-left: 5px;
+}
+
+.portlet-directory ul.property-list li {
+	margin-bottom: 5px;
+}
+
+.portlet-directory .property-list dt, .portlet-directory .property-list dd {
+	float: left;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.portlet-directory .property-list dt {
+	clear: left;
+	font-weight: bold;
+	min-width: 5em;
+}
+
+.portlet-directory .section {
+	float: left;
+	margin-left: 10px;
+	width: 47%;
+}
+
+.portlet-directory .section h3 {
+	background: url() no-repeat 2px 50%;
+	border-bottom: 1px solid #CCC;
+	line-height: 1.5;
+	margin-bottom: 0.5em;
+	padding-left: 25px;
+}
+
+.portlet-directory .section li {
+	list-style: none;
+	margin: 0;
+	padding-left: 25px;
+}
+
+.portlet-directory .section ul {
+	margin: 0;
+}
+
+.portlet-directory .entity-addresses .mailing-name {
+	display: block;
+	font-style: italic;
+}
+
+.portlet-directory .entity-addresses h3 {
+	background-image: url(<%= themeImagesPath %>/dock/home.png);
+}
+
+.portlet-directory .entity-addresses .primary {
+	background-position: 3px 5px;
+}
+
+.portlet-directory .entity-comments h3 {
+	background-image: url(<%= themeImagesPath %>/dock/welcome_message.png);
+}
+
+.portlet-directory .entity-details {
+	clear: both;
+}
+
+.portlet-directory .entity-email-addresses h3 {
+	background-image: url(<%= themeImagesPath %>/mail/unread.png);
+}
+
+.portlet-directory .user-information, .portlet-directory .organization-information {
+	overflow: hidden;
+}
+
+.portlet-directory .entity-instant-messenger h3 {
+	background-image: url(<%= themeImagesPath %>/common/conversation.png);
+}
+
+.portlet-directory .entity-phones h3 {
+	background-image: url(<%= themeImagesPath %>/common/telephone.png);
+}
+
+.portlet-directory .entity-sms h3 {
+	background-image: url(<%= themeImagesPath %>/common/telephone_mobile.png);
+}
+
+.portlet-directory .entity-social-network h3 {
+	background-image: url(<%= themeImagesPath %>/common/group.png);
+}
+
+.portlet-directory .entity-websites h3 {
+	background-image: url(<%= themeImagesPath %>/common/history.png);
+}
+
+.portlet-directory .entity-services h3 {
+	background-image: url(<%= themeImagesPath %>/common/services.png);
+}
+
+.ie6 .portlet-directory {
+	height: 1%;
+}
+
+.ie6 .portlet-directory dl.property-list {
+	height: 1%;
+}
+
+.ie6 .portlet-directory .user-information, .ie6 .portlet-directory .organization-information {
+	height: 1%;
 }
