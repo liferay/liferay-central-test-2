@@ -55,7 +55,7 @@
 
 						<br />
 
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="recentPostsURL">
+						<portlet:renderURL var="recentPostsURL">
 							<portlet:param name="struts_action" value="/message_boards/view" />
 							<portlet:param name="tabs1" value="recent_posts" />
 							<portlet:param name="groupThreadsUserId" value="<%= String.valueOf(userDisplay.getUserId()) %>" />
@@ -74,7 +74,7 @@
 
 							<c:choose>
 								<c:when test="<%= MBBanLocalServiceUtil.hasBan(scopeGroupId, userDisplay.getUserId()) %>">
-									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
+									<portlet:actionURL var="unbanUserURL">
 										<portlet:param name="struts_action" value="/message_boards/ban_user" />
 										<portlet:param name="<%= Constants.CMD %>" value="unban" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -89,7 +89,7 @@
 									/>
 								</c:when>
 								<c:otherwise>
-									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
+									<portlet:actionURL var="banUserURL">
 										<portlet:param name="struts_action" value="/message_boards/ban_user" />
 										<portlet:param name="<%= Constants.CMD %>" value="ban" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -151,8 +151,6 @@
 						<%
 						PortletURL parentMessageURL = renderResponse.createRenderURL();
 
-						parentMessageURL.setWindowState(WindowState.MAXIMIZED);
-
 						parentMessageURL.setParameter("struts_action", "/message_boards/view_message");
 						parentMessageURL.setParameter("messageId", String.valueOf(parentMessage.getMessageId()));
 
@@ -190,7 +188,7 @@
 						%>
 
 						<li>
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
+							<portlet:renderURL var="replyURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
@@ -201,7 +199,7 @@
 							<liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
 						</li>
 						<li>
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
+							<portlet:renderURL var="quoteURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
@@ -439,7 +437,7 @@
 
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
 						<li>
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
@@ -464,7 +462,7 @@
 
 					<c:if test="<%= (message.getParentMessageId() != MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
 						<li>
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="splitThreadURL">
+							<portlet:renderURL var="splitThreadURL">
 								<portlet:param name="struts_action" value="/message_boards/split_thread" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
@@ -480,13 +478,11 @@
 							<%
 							PortletURL categoryURL = renderResponse.createRenderURL();
 
-							categoryURL.setWindowState(WindowState.MAXIMIZED);
-
 							categoryURL.setParameter("struts_action", "/message_boards/view");
 							categoryURL.setParameter("categoryId", String.valueOf(message.getCategoryId()));
 							%>
 
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+							<portlet:actionURL var="deleteURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 								<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />

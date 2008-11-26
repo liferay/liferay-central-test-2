@@ -195,7 +195,7 @@ else {
 		[
 
 		<c:if test="<%= previousThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(previousThread.getRootMessageId()) %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(previousThread.getRootMessageId()) %>" /></portlet:renderURL>">
 		</c:if>
 
 		<liferay-ui:message key="previous" />
@@ -207,7 +207,7 @@ else {
 		|
 
 		<c:if test="<%= nextThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(nextThread.getRootMessageId()) %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(nextThread.getRootMessageId()) %>" /></portlet:renderURL>">
 		</c:if>
 
 		<liferay-ui:message key="next" />
@@ -224,7 +224,7 @@ else {
 		<tr>
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 				<td>
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addMessageURL">
+					<portlet:renderURL var="addMessageURL">
 						<portlet:param name="struts_action" value="/message_boards/edit_message" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
@@ -238,7 +238,7 @@ else {
 				<td>
 					<c:choose>
 						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), message.getThreadId()) %>">
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
+							<portlet:actionURL var="unsubscribeURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -248,7 +248,7 @@ else {
 							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
 						</c:when>
 						<c:otherwise>
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
+							<portlet:actionURL var="subscribeURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -263,7 +263,7 @@ else {
 
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
 				<td>
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editThreadURL">
+					<portlet:renderURL var="editThreadURL">
 						<portlet:param name="struts_action" value="/message_boards/move_thread" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />

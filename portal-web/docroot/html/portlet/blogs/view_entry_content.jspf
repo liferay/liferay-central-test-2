@@ -80,7 +80,7 @@
 				<tr>
 					<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 						<td>
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
+							<portlet:renderURL var="editEntryURL">
 								<portlet:param name="struts_action" value="/blogs/edit_entry" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
