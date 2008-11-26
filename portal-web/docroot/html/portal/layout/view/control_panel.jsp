@@ -210,7 +210,6 @@ String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId()
 							}
 
 							if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
-
 								backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
 							}
 						}
