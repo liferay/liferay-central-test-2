@@ -153,10 +153,10 @@
 		<filter-name>Session Id Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
+	<!--<filter-mapping>
 		<filter-name>Open Session In View Filter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping>-->
 	<filter-mapping>
 		<filter-name>Virtual Host Filter</filter-name>
 		<url-pattern>/*</url-pattern>
