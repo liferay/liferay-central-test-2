@@ -142,8 +142,6 @@ public class ResourceActionsUtil {
 
 		list.addAll(uniqueList);
 
-		Collections.sort(list);
-
 		return list;
 	}
 
