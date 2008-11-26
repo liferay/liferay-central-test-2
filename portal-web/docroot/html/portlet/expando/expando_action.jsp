@@ -47,8 +47,7 @@ String modelResource = (String)row.getParameter("modelResource");
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<!--
-	<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.PERMISSIONS) %>">
+	<%--<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= ExpandoColumn.class.getName() %>"
 			modelResourceDescription="<%= expandoColumn.getName() %>"
@@ -57,8 +56,7 @@ String modelResource = (String)row.getParameter("modelResource");
 		/>
 
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-	</c:if>
-	-->
+	</c:if>--%>
 
 	<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
