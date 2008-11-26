@@ -98,71 +98,82 @@ public class PortalLDAPUtil {
 
 		LdapContext ctx = getContext(companyId);
 
-		if (ctx == null) {
-			return;
-		}
-
-		User user = UserLocalServiceUtil.getUserByContactId(
-			contact.getContactId());
-
-		Properties userMappings = getUserMappings(companyId);
-		Binding binding = getUser(contact.getCompanyId(), user.getScreenName());
-		String name = StringPool.BLANK;
-
-		if (binding == null) {
-
-			// Generate full DN based on user DN
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(userMappings.getProperty("screenName"));
-			sb.append(StringPool.EQUAL);
-			sb.append(user.getScreenName());
-			sb.append(StringPool.COMMA);
-			sb.append(getUsersDN(companyId));
-
-			name = sb.toString();
-
-			// Create new user in LDAP
-
-			LDAPUser ldapUser = (LDAPUser)Class.forName(
-				PropsValues.LDAP_USER_IMPL).newInstance();
-
-			ldapUser.setUser(user);
-
-			ctx.bind(name, ldapUser);
-		}
-		else {
-
-			// Modify existing LDAP user record
-
-			name = getNameInNamespace(companyId, binding);
-
-			Modifications mods = Modifications.getInstance();
-
-			mods.addItem(
-				userMappings.getProperty("firstName"), contact.getFirstName());
-			mods.addItem(
-				userMappings.getProperty("lastName"), contact.getLastName());
-
-			String fullNameMapping = userMappings.getProperty("fullName");
-
-			if (Validator.isNotNull(fullNameMapping)) {
-				mods.addItem(fullNameMapping, contact.getFullName());
+		try {
+			if (ctx == null) {
+				return;
 			}
 
-			String jobTitleMapping = userMappings.getProperty("jobTitle");
+			User user = UserLocalServiceUtil.getUserByContactId(
+				contact.getContactId());
 
-			if (Validator.isNotNull(jobTitleMapping)) {
-				mods.addItem(jobTitleMapping, contact.getJobTitle());
+			Properties userMappings = getUserMappings(companyId);
+			Binding binding = getUser(
+				contact.getCompanyId(), user.getScreenName());
+			String name = StringPool.BLANK;
+
+			if (binding == null) {
+
+				// Generate full DN based on user DN
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(userMappings.getProperty("screenName"));
+				sb.append(StringPool.EQUAL);
+				sb.append(user.getScreenName());
+				sb.append(StringPool.COMMA);
+				sb.append(getUsersDN(companyId));
+
+				name = sb.toString();
+
+				// Create new user in LDAP
+
+				LDAPUser ldapUser = (LDAPUser)Class.forName(
+					PropsValues.LDAP_USER_IMPL).newInstance();
+
+				ldapUser.setUser(user);
+
+				ctx.bind(name, ldapUser);
 			}
+			else {
 
-			ModificationItem[] modItems = mods.getItems();
+				// Modify existing LDAP user record
 
-			ctx.modifyAttributes(name, modItems);
+				name = getNameInNamespace(companyId, binding);
+
+				Modifications mods = Modifications.getInstance();
+
+				mods.addItem(
+					userMappings.getProperty("firstName"),
+					contact.getFirstName());
+				mods.addItem(
+					userMappings.getProperty("lastName"),
+					contact.getLastName());
+
+				String fullNameMapping = userMappings.getProperty("fullName");
+
+				if (Validator.isNotNull(fullNameMapping)) {
+					mods.addItem(fullNameMapping, contact.getFullName());
+				}
+
+				String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+				if (Validator.isNotNull(jobTitleMapping)) {
+					mods.addItem(jobTitleMapping, contact.getJobTitle());
+				}
+
+				ModificationItem[] modItems = mods.getItems();
+
+				ctx.modifyAttributes(name, modItems);
+			}
 		}
-
-		ctx.close();
+		catch (Exception e) {
+			throw e;
+		}
+		finally {
+			if (ctx != null) {
+				ctx.close();
+			}
+		}
 	}
 
 	public static void exportToLDAP(User user) throws Exception {
@@ -174,64 +185,74 @@ public class PortalLDAPUtil {
 
 		LdapContext ctx = getContext(companyId);
 
-		if (ctx == null) {
-			return;
-		}
-
-		Properties userMappings = getUserMappings(companyId);
-		Binding binding = getUser(user.getCompanyId(), user.getScreenName());
-		String name = StringPool.BLANK;
-
-		if (binding == null) {
-
-			// User is not exported until contact is created
-
-		}
-		else {
-
-			// Modify existing LDAP user record
-
-			name = getNameInNamespace(companyId, binding);
-
-			Modifications mods = Modifications.getInstance();
-
-			mods.addItem(
-				userMappings.getProperty("firstName"), user.getFirstName());
-			mods.addItem(
-				userMappings.getProperty("lastName"), user.getLastName());
-
-			String fullNameMapping = userMappings.getProperty("fullName");
-
-			if (Validator.isNotNull(fullNameMapping)) {
-				mods.addItem(fullNameMapping, user.getFullName());
+		try {
+			if (ctx == null) {
+				return;
 			}
 
-			if (user.isPasswordModified() &&
-				Validator.isNotNull(user.getPasswordUnencrypted())) {
+			Properties userMappings = getUserMappings(companyId);
+			Binding binding = getUser(
+				user.getCompanyId(), user.getScreenName());
+			String name = StringPool.BLANK;
+
+			if (binding == null) {
+
+				// User is not exported until contact is created
+
+			}
+			else {
+
+				// Modify existing LDAP user record
+
+				name = getNameInNamespace(companyId, binding);
+
+				Modifications mods = Modifications.getInstance();
 
 				mods.addItem(
-					userMappings.getProperty("password"),
-					user.getPasswordUnencrypted());
-			}
-
-			if (Validator.isNotNull(user.getEmailAddress())) {
+					userMappings.getProperty("firstName"), user.getFirstName());
 				mods.addItem(
-					userMappings.getProperty("emailAddress"),
-					user.getEmailAddress());
+					userMappings.getProperty("lastName"), user.getLastName());
+
+				String fullNameMapping = userMappings.getProperty("fullName");
+
+				if (Validator.isNotNull(fullNameMapping)) {
+					mods.addItem(fullNameMapping, user.getFullName());
+				}
+
+				if (user.isPasswordModified() &&
+					Validator.isNotNull(user.getPasswordUnencrypted())) {
+
+					mods.addItem(
+						userMappings.getProperty("password"),
+						user.getPasswordUnencrypted());
+				}
+
+				if (Validator.isNotNull(user.getEmailAddress())) {
+					mods.addItem(
+						userMappings.getProperty("emailAddress"),
+						user.getEmailAddress());
+				}
+
+				String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+				if (Validator.isNotNull(jobTitleMapping)) {
+					mods.addItem(
+						jobTitleMapping, user.getContact().getJobTitle());
+				}
+
+				ModificationItem[] modItems = mods.getItems();
+
+				ctx.modifyAttributes(name, modItems);
 			}
-
-			String jobTitleMapping = userMappings.getProperty("jobTitle");
-
-			if (Validator.isNotNull(jobTitleMapping)) {
-				mods.addItem(jobTitleMapping, user.getContact().getJobTitle());
-			}
-
-			ModificationItem[] modItems = mods.getItems();
-
-			ctx.modifyAttributes(name, modItems);
 		}
-
-		ctx.close();
+		catch (Exception e) {
+			throw e;
+		}
+		finally {
+			if (ctx != null) {
+				ctx.close();
+			}
+		}
 	}
 
 	public static String getAuthSearchFilter(
@@ -291,6 +312,12 @@ public class PortalLDAPUtil {
 		env.put(
 			Context.REFERRAL,
 			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_REFERRAL));
+
+		// Enable pooling
+
+		env.put("com.sun.jndi.ldap.connect.pool", "true");
+		env.put("com.sun.jndi.ldap.connect.pool.maxsize","50");
+		env.put("com.sun.jndi.ldap.connect.pool.timeout", "10000");
 
 		LogUtil.debug(_log, env);
 
@@ -399,33 +426,45 @@ public class PortalLDAPUtil {
 
 		LdapContext ctx = getContext(companyId);
 
-		if (ctx == null) {
-			return null;
+		NamingEnumeration<SearchResult> enu = null;
+
+		try {
+			if (ctx == null) {
+				return null;
+			}
+
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_DN);
+
+			Properties userMappings = getUserMappings(companyId);
+
+			StringBuilder filter = new StringBuilder();
+
+			filter.append(StringPool.OPEN_PARENTHESIS);
+			filter.append(userMappings.getProperty("screenName"));
+			filter.append(StringPool.EQUAL);
+			filter.append(screenName);
+			filter.append(StringPool.CLOSE_PARENTHESIS);
+
+			SearchControls cons = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+
+			enu = ctx.search(
+				baseDN, filter.toString(), cons);
 		}
-
-		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_DN);
-
-		Properties userMappings = getUserMappings(companyId);
-
-		StringBuilder filter = new StringBuilder();
-
-		filter.append(StringPool.OPEN_PARENTHESIS);
-		filter.append(userMappings.getProperty("screenName"));
-		filter.append(StringPool.EQUAL);
-		filter.append(screenName);
-		filter.append(StringPool.CLOSE_PARENTHESIS);
-
-		SearchControls cons = new SearchControls(
-			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
-
-		NamingEnumeration<SearchResult> enu = ctx.search(
-			baseDN, filter.toString(), cons);
-
-		ctx.close();
+		catch (Exception e) {
+			throw e;
+		}
+		finally {
+			if (ctx != null) {
+				ctx.close();
+			}
+		}
 
 		if (enu.hasMoreElements()) {
 			Binding binding = enu.nextElement();
+
+			enu.close();
 
 			return binding;
 		}
@@ -540,6 +579,8 @@ public class PortalLDAPUtil {
 					importLDAPUser(
 						companyId, ctx, attrs, StringPool.BLANK, true);
 				}
+
+				enu.close();
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
 				NamingEnumeration<SearchResult> enu = getGroups(
@@ -556,6 +597,8 @@ public class PortalLDAPUtil {
 
 					importLDAPGroup(companyId, ctx, attrs, true);
 				}
+
+				enu.close();
 			}
 		}
 		catch (Exception e) {
@@ -843,6 +886,7 @@ public class PortalLDAPUtil {
 			}
 		}
 		catch (NoSuchUserException nsue) {
+			_log.info("Creating new user");
 
 			// User does not exist so create
 
@@ -1015,6 +1059,8 @@ public class PortalLDAPUtil {
 			while (enu.hasMoreElements()) {
 				attrs.put(enu.nextElement());
 			}
+
+			enu.close();
 		}
 		else {
 

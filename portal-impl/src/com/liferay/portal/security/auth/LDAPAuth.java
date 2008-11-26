@@ -234,6 +234,8 @@ public class LDAPAuth implements Authenticator {
 				return authenticateRequired(
 					companyId, userId, emailAddress, DNE);
 			}
+
+			enu.close();
 		}
 		catch (Exception e) {
 			_log.error("Problem accessing LDAP server: " + e.getMessage());
@@ -245,7 +247,9 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		finally {
-			ctx.close();
+			if (ctx != null) {
+				ctx.close();
+			}
 		}
 
 		return SUCCESS;
@@ -264,11 +268,12 @@ public class LDAPAuth implements Authenticator {
 
 		String authMethod = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_AUTH_METHOD);
+		InitialLdapContext innerCtx = null;
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
-				Hashtable<String, String> env =
-					(Hashtable<String, String>)ctx.getEnvironment();
+				Hashtable<String, Object> env =
+					(Hashtable<String, Object>)ctx.getEnvironment();
 
 				env.put(Context.SECURITY_PRINCIPAL, userDN);
 				env.put(Context.SECURITY_CREDENTIALS, password);
@@ -277,11 +282,15 @@ public class LDAPAuth implements Authenticator {
 					PrefsPropsUtil.getString(
 						companyId, PropsKeys.LDAP_REFERRAL));
 
-				ctx = new InitialLdapContext(env, null);
+				// Do not use pooling because principal changes
+
+				env.put("com.sun.jndi.ldap.connect.pool", "false");
+
+				innerCtx = new InitialLdapContext(env, null);
 
 				// Get LDAP bind results
 
-				Control[] responseControls =  ctx.getResponseControls();
+				Control[] responseControls =  innerCtx.getResponseControls();
 
 				ldapAuthResult.setAuthenticated(true);
 				ldapAuthResult.setResponseControl(responseControls);
@@ -298,6 +307,11 @@ public class LDAPAuth implements Authenticator {
 
 				ldapAuthResult.setAuthenticated(false);
 				ldapAuthResult.setErrorMessage(e.getMessage());
+			}
+			finally {
+				if (innerCtx != null) {
+					innerCtx.close();
+				}
 			}
 		}
 		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
