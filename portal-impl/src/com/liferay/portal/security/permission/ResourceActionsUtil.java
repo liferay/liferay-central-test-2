@@ -46,6 +46,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
@@ -81,6 +83,7 @@ public class ResourceActionsUtil {
 	};
 
 	public static final String[] PORTAL_MODEL_RESOURCES = {
+		ExpandoColumn.class.getName(), ExpandoValue.class.getName(),
 		Organization.class.getName(), PasswordPolicy.class.getName(),
 		Role.class.getName(), User.class.getName(), UserGroup.class.getName()
 	};

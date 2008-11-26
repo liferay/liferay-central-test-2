@@ -37,8 +37,9 @@ import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
@@ -90,7 +91,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 					_className);
 			}
 
-			ExpandoColumnLocalServiceUtil.addColumn(
+			ExpandoColumnServiceUtil.addColumn(
 				table.getTableId(), name, type, defaultValue);
 		}
 		catch (Exception e) {
@@ -107,7 +108,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		Serializable data = null;
 
 		try {
-			data = ExpandoValueLocalServiceUtil.getData(
+			data = ExpandoValueServiceUtil.getData(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK);
 		}
@@ -244,7 +245,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 
 		try {
-			ExpandoValueLocalServiceUtil.addValue(
+			ExpandoValueServiceUtil.addValue(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK, value);
 
@@ -261,7 +262,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
 					_className, name);
 
-			ExpandoColumnLocalServiceUtil.updateColumn(
+			ExpandoColumnServiceUtil.updateColumn(
 				column.getColumnId(), column.getName(), column.getType(),
 				defaultValue);
 		}
@@ -278,7 +279,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 				ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
 					_className, name);
 
-			ExpandoColumnLocalServiceUtil.updateTypeSettings(
+			ExpandoColumnServiceUtil.updateTypeSettings(
 				column.getColumnId(), properties.toString());
 		}
 		catch (Exception e) {

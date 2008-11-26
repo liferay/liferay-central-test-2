@@ -144,19 +144,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 	searchContainer.setHeaderNames(headerNames);
 
-	List<Role> results = null;
-
-	if (modelResource.equals(ExpandoColumn.class.getName())) {
-		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getExpandoColumn(GetterUtil.getLong(resourcePrimKey));
-		ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getExpandoTable(expandoColumn.getTableId());
-
-		String rootModelResource = expandoTable.getClassName();
-
-		results = ResourceActionsUtil.getRoles(group, rootModelResource);
-	}
-	else {
-		results = ResourceActionsUtil.getRoles(group, modelResource);
-	}
+	List<Role> results = ResourceActionsUtil.getRoles(group, modelResource);
 
 	searchContainer.setResults(results);
 
