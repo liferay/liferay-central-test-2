@@ -287,23 +287,19 @@ public class ProducerEntityManagerImpl
 
 		String registrationData = getRegistrationDataXMLFromRD(
 			producerEntity.getRegistrationData());
-
 		String registrationContext = getRegistrationContextXMLFromRC(
 			producerEntity.getRegistrationContext());
-
 		String serviceDescription = getServiceDescriptionXMLFromSD(
 			producerEntity.getServiceDescription());
 
 		String lifetimeTerminationTime = null;
 
-		if (producerEntity.getLifetime() != null &&
-				producerEntity.getLifetime().getTerminationTime() != null) {
-			
-			lifetimeTerminationTime =
-					producerEntity.getLifetime()
-						.getTerminationTime().toString();
+		LeaseTime lifetime = producerEntity.getLifetime();
+
+		if ((lifetime != null) && (lifetime.getTerminationTime() != null)) {
+			lifetimeTerminationTime = lifetime.getTerminationTime().toString();
 		}
-		
+
 		try {
 			WSRPConfiguredProducerLocalServiceUtil.addConfiguredProducer(
 				producerEntity.getName(), _portalId, _namespace,
@@ -386,34 +382,31 @@ public class ProducerEntityManagerImpl
 
 		RegistrationData registrationData = getRegistrationDataFromXML(
 			producer.getRegistrationData());
-		
 		RegistrationContext registrationContext = getRegistrationContextFromXML(
 			producer.getRegistrationContext());
-
 		ServiceDescription serviceDescription = getServiceDesctionFromXML(
 			producer.getServiceDescription());
-
 		Map userCategoryMap = getConsumerObjectFactory().getMap(
 			producer.getUserCategoryMapping());
-
 		long sdLastModified = producer.getSdLastModified();
 		String lastModified = String.valueOf(sdLastModified);
 		String identityPropagationType = producer.getIdentityPropagationType();
+
 		LeaseTime leaseTime = null;
-		
+
 		if (Validator.isNotNull(producer.getLifetimeTerminationTime())) {
-			
 			try {
 				XMLGregorianCalendar terminationTime =
 					DatatypeFactory.newInstance().newXMLGregorianCalendar(
 						producer.getLifetimeTerminationTime());
 
 				leaseTime = new LeaseTime();
+
 				leaseTime.setTerminationTime(terminationTime);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
-			}			
+			}
 		}
 
 		ProducerEntity producerEntity = new ProducerEntityImpl(
