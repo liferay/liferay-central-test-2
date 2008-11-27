@@ -29,11 +29,12 @@ int step = ParamUtil.getInteger(request, "step");
 long userId = ParamUtil.getLong(request, "userId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
 portletURL.setParameter("struts_action", "/enterprise_admin/select_community_role");
 portletURL.setParameter("userId", String.valueOf(userId));
 
-long uniqueGroupId = 0;
 User selUser = null;
+long uniqueGroupId = 0;
 
 List<Group> groups = null;
 
@@ -48,6 +49,7 @@ if (step == 1) {
 
 	if (groups.size() == 1) {
 		step = 2;
+
 		uniqueGroupId = groups.get(0).getGroupId();
 	}
 }
@@ -78,6 +80,7 @@ if (step == 1) {
 			searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 		>
 			<liferay-ui:search-container-results>
+
 				<%
 				total = groups.size();
 				results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
@@ -85,6 +88,7 @@ if (step == 1) {
 				pageContext.setAttribute("results", results);
 				pageContext.setAttribute("total", total);
 				%>
+
 			</liferay-ui:search-container-results>
 
 			<liferay-ui:search-container-row
@@ -93,6 +97,7 @@ if (step == 1) {
 				keyProperty="groupId"
 				modelVar="group"
 			>
+
 				<%
 				StringBuilder sb = new StringBuilder();
 
@@ -127,11 +132,11 @@ if (step == 1) {
 
 		<%
 		long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
+
 		Group group = GroupServiceUtil.getGroup(groupId);
 
-		// Breadcrumbs
-
 		portletURL.setParameter("step", "1");
+
 		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; " + group.getDescriptiveName();
 		%>
 
@@ -152,6 +157,7 @@ if (step == 1) {
 			%>
 
 			<liferay-ui:search-container-results>
+
 				<%
 				if (filterManageableRoles) {
 					List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(),  RoleConstants.TYPE_COMMUNITY, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
@@ -169,6 +175,7 @@ if (step == 1) {
 				pageContext.setAttribute("results", results);
 				pageContext.setAttribute("total", total);
 				%>
+
 			</liferay-ui:search-container-results>
 
 			<liferay-ui:search-container-row

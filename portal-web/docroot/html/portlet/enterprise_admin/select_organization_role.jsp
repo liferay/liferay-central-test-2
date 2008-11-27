@@ -29,11 +29,12 @@ int step = ParamUtil.getInteger(request, "step");
 long userId = ParamUtil.getLong(request, "userId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
 portletURL.setParameter("struts_action", "/enterprise_admin/select_organization_role");
 portletURL.setParameter("userId", String.valueOf(userId));
 
-long uniqueOrganizationId = 0;
 User selUser = null;
+long uniqueOrganizationId = 0;
 
 List<Organization> organizations = null;
 
@@ -76,7 +77,7 @@ if (step == 1) {
 		</div>
 
 		<liferay-ui:search-container
-		searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 		>
 			<liferay-ui:search-container-results>
 
@@ -96,6 +97,7 @@ if (step == 1) {
 				keyProperty="organizationId"
 				modelVar="organization"
 			>
+
 				<%
 				StringBuilder sb = new StringBuilder();
 
@@ -172,11 +174,11 @@ if (step == 1) {
 
 		<%
 		long organizationId = ParamUtil.getLong(request, "organizationId", uniqueOrganizationId);
+
 		Organization organization = OrganizationServiceUtil.getOrganization(organizationId);
 
-		// Breadcrumbs
-
 		portletURL.setParameter("step", "1");
+
 		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "organizations") + "</a> &raquo; " + organization.getName();
 		%>
 
@@ -197,6 +199,7 @@ if (step == 1) {
 			%>
 
 			<liferay-ui:search-container-results>
+
 				<%
 				if (filterManageableRoles) {
 
@@ -215,6 +218,7 @@ if (step == 1) {
 				pageContext.setAttribute("results", results);
 				pageContext.setAttribute("total", total);
 				%>
+
 			</liferay-ui:search-container-results>
 
 			<liferay-ui:search-container-row

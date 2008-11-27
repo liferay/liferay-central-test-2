@@ -592,8 +592,8 @@ public class UserServiceSoap {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
-		com.liferay.portal.model.UserGroupRoleSoap[] groupRoles,
+		long[] roleIds,
+		com.liferay.portal.model.UserGroupRoleSoap[] userGroupRoles,
 		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -606,9 +606,9 @@ public class UserServiceSoap {
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-					organizationIds, regularRoleIds,
+					organizationIds, roleIds,
 					com.liferay.portal.model.impl.UserGroupRoleModelImpl.toModels(
-						groupRoles), userGroupIds, serviceContext);
+						userGroupRoles), userGroupIds, serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -636,8 +636,8 @@ public class UserServiceSoap {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
-		com.liferay.portal.model.UserGroupRoleSoap[] groupRoles,
+		long[] roleIds,
+		com.liferay.portal.model.UserGroupRoleSoap[] userGroupRoles,
 		long[] userGroupIds, com.liferay.portal.model.AddressSoap[] addresses,
 		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
 		com.liferay.portal.model.PhoneSoap[] phones,
@@ -654,9 +654,9 @@ public class UserServiceSoap {
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-					organizationIds, regularRoleIds,
+					organizationIds, roleIds,
 					com.liferay.portal.model.impl.UserGroupRoleModelImpl.toModels(
-						groupRoles), userGroupIds,
+						userGroupRoles), userGroupIds,
 					com.liferay.portal.model.impl.AddressModelImpl.toModels(
 						addresses),
 					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(

@@ -533,8 +533,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String aimSn, String facebookSn, String icqSn, String jabberSn,
 			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
 			String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] regularRoleIds,
-			List<UserGroupRole> groupRoles, long[] userGroupIds,
+			long[] organizationIds, long[] roleIds,
+			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -568,12 +568,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			organizationIds = checkOrganizations(userId, organizationIds);
 		}
 
-		if (regularRoleIds != null) {
-			regularRoleIds = checkRoles(userId, regularRoleIds);
+		if (roleIds != null) {
+			roleIds = checkRoles(userId, roleIds);
 		}
 
-		if (groupRoles != null) {
-			groupRoles = checkGroupRoles(userId, groupRoles);
+		if (userGroupRoles != null) {
+			userGroupRoles = checkUserGroupRoles(userId, userGroupRoles);
 		}
 
 		return userLocalService.updateUser(
@@ -583,7 +583,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, regularRoleIds, groupRoles,
+			jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
 			userGroupIds, serviceContext);
 	}
 
@@ -599,8 +599,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String aimSn, String facebookSn, String icqSn, String jabberSn,
 			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
 			String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] regularRoleIds,
-			List<UserGroupRole> groupRoles, long[] userGroupIds,
+			long[] organizationIds, long[] roleIds,
+			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
 			List<Address> addresses, List<EmailAddress> emailAddresses,
 			List<Phone> phones, List<Website> websites,
 			List<AnnouncementsDelivery> announcementsDelivers,
@@ -614,8 +614,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, regularRoleIds,
-			groupRoles, userGroupIds, serviceContext);
+			jobTitle, groupIds, organizationIds, roleIds,
+			userGroupRoles, userGroupIds, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
@@ -637,8 +637,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	protected long[] checkGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		// Add back any groups that the administrator doesn't have the rights to
-		// remove and check that he has the permission to add any new group
+		// Add back any groups that the administrator does not have the rights
+		// to remove and check that he has the permission to add any new group
 
 		List<Group> oldGroups = groupLocalService.getUserGroups(userId);
 		long[] oldGroupIds = new long[oldGroups.size()];
@@ -670,7 +670,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	protected long[] checkOrganizations(long userId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		// Add back any organizations that the administrator doesn't have the
+		// Add back any organizations that the administrator does not have the
 		// rights to remove and check that he has the permission to add any new
 		// organization
 
@@ -708,7 +708,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	protected long[] checkRoles(long userId, long[] roleIds)
 		throws PrincipalException, SystemException {
 
-		// Add back any roles that the administrator doesn't have the rights to
+		// Add back any roles that the administrator does not have the rights to
 		// remove and check that he has the permission to add any new role
 
 		List<Role> oldRoles = roleLocalService.getUserRoles(userId);
@@ -738,11 +738,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return roleIds;
 	}
 
-	protected List<UserGroupRole> checkGroupRoles(
-			long userId, List<UserGroupRole> groupRoles)
+	protected List<UserGroupRole> checkUserGroupRoles(
+			long userId, List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
 
-		for (UserGroupRole userGroupRole : groupRoles) {
+		for (UserGroupRole userGroupRole : userGroupRoles) {
 			if (!GroupPermissionUtil.contains(
 					getPermissionChecker(), userGroupRole.getGroupId(),
 					ActionKeys.ASSIGN_MEMBERS) ||
@@ -754,14 +754,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		// Add back any group roles that the administrator doesn't have the
+		// Add back any group roles that the administrator does not have the
 		// rights to remove
 
 		List<UserGroupRole> previousGroupRoles =
 			userGroupRoleLocalService.getUserGroupRoles(userId);
 
 		for (UserGroupRole userGroupRole : previousGroupRoles) {
-			if (!groupRoles.contains(userGroupRole) &&
+			if (!userGroupRoles.contains(userGroupRole) &&
 			   (!GroupPermissionUtil.contains(
 					getPermissionChecker(), userGroupRole.getGroupId(),
 					ActionKeys.ASSIGN_MEMBERS) ||
@@ -769,11 +769,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					getPermissionChecker(), userGroupRole.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS))) {
 
-				groupRoles.add(userGroupRole);
+				userGroupRoles.add(userGroupRole);
 			}
 		}
 
-		return groupRoles;
+		return userGroupRoles;
 	}
 
 	protected void updateAnnouncementsDeliveries(

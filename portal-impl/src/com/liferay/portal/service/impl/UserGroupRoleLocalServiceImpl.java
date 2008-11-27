@@ -92,6 +92,14 @@ public class UserGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void deleteUserGroupRole(UserGroupRole userGroupRole)
+		throws SystemException {
+
+		userGroupRolePersistence.remove(userGroupRole);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void deleteUserGroupRoles(long userId, long[] groupIds)
 		throws SystemException {
 

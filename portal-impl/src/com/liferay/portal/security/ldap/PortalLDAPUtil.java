@@ -39,6 +39,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -739,8 +740,8 @@ public class PortalLDAPUtil {
 			attrs, userMappings.getProperty("jobTitle"));
 		long[] groupIds = null;
 		long[] organizationIds = null;
-		long[] regularRoleIds = null;
-		List userGroupRoles = null;
+		long[] roleIds = null;
+		List<UserGroupRole> userGroupRoles = null;
 		long[] userGroupIds = null;
 		boolean sendEmail = false;
 		ServiceContext serviceContext = new ServiceContext();
@@ -879,7 +880,7 @@ public class PortalLDAPUtil {
 				contact.getJabberSn(), contact.getMsnSn(),
 				contact.getMySpaceSn(), contact.getSkypeSn(),
 				contact.getTwitterSn(), contact.getYmSn(), jobTitle, groupIds,
-				organizationIds, regularRoleIds, userGroupRoles, userGroupIds,
+				organizationIds, roleIds, userGroupRoles, userGroupIds,
 				serviceContext);
 
 			if (ldapUserModifiedDate != null) {
@@ -904,8 +905,8 @@ public class PortalLDAPUtil {
 					autoScreenName, screenName, emailAddress, openId, locale,
 					firstName, middleName, lastName, prefixId, suffixId, male,
 					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					groupIds, organizationIds, regularRoleIds, userGroupIds,
-					sendEmail, serviceContext);
+					groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+					serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(

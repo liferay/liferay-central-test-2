@@ -87,7 +87,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
 		sb.append("', '");
 		sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
 		sb.append("', '");
-		sb.append("regularRoles");
+		sb.append("roles");
 		sb.append("');");
 		sb.append("window.close();");
 

@@ -95,7 +95,7 @@ public class AdminUtil {
 
 		long[] groupIds = null;
 		long[] organizationIds = null;
-		long[] regularRoleIds = null;
+		long[] roleIds = null;
 		List<UserGroupRole> userGroupRoles = null;
 		long[] userGroupIds = null;
 		ServiceContext serviceContext = new ServiceContext();
@@ -109,7 +109,7 @@ public class AdminUtil {
 			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			contact.getJobTitle(), groupIds, organizationIds, regularRoleIds,
+			contact.getJobTitle(), groupIds, organizationIds, roleIds,
 			userGroupRoles, userGroupIds, serviceContext);
 	}
 

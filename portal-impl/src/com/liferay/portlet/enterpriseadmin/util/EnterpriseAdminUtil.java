@@ -205,29 +205,9 @@ public class EnterpriseAdminUtil {
 		}
 	}
 
-	public static void filterUserGroups(
-		PermissionChecker permissionChecker, List<UserGroup> userGroups) {
-
-		if (permissionChecker.isCompanyAdmin()) {
-			return;
-		}
-
-		Iterator<UserGroup> itr = userGroups.iterator();
-
-		while (itr.hasNext()) {
-			UserGroup userGroup = itr.next();
-
-			if (!UserGroupPermissionUtil.contains(
-					permissionChecker, userGroup.getUserGroupId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-
-				itr.remove();
-			}
-		}
-	}
-
 	public static void filterUserGroupRoles(
-		PermissionChecker permissionChecker, List<UserGroupRole> userGroupRoles)
+			PermissionChecker permissionChecker,
+			List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
 
 		Iterator<UserGroupRole> itr = userGroupRoles.iterator();
@@ -237,8 +217,10 @@ public class EnterpriseAdminUtil {
 
 			Role role = userGroupRole.getRole();
 
-			if (role.getName().equals(RoleConstants.ORGANIZATION_MEMBER) ||
-				role.getName().equals(RoleConstants.COMMUNITY_MEMBER)) {
+			String name = role.getName();
+
+			if (name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+				name.equals(RoleConstants.COMMUNITY_MEMBER)) {
 
 				itr.remove();
 			}
@@ -255,6 +237,27 @@ public class EnterpriseAdminUtil {
 
 			if (!RolePermissionUtil.contains(
 					permissionChecker, userGroupRole.getRoleId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				itr.remove();
+			}
+		}
+	}
+
+	public static void filterUserGroups(
+		PermissionChecker permissionChecker, List<UserGroup> userGroups) {
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return;
+		}
+
+		Iterator<UserGroup> itr = userGroups.iterator();
+
+		while (itr.hasNext()) {
+			UserGroup userGroup = itr.next();
+
+			if (!UserGroupPermissionUtil.contains(
+					permissionChecker, userGroup.getUserGroupId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
 
 				itr.remove();
@@ -643,6 +646,7 @@ public class EnterpriseAdminUtil {
 		for (int i = 0; i < groupRolesGroupIds.length; i++) {
 			if ((groupRolesGroupIds[i] == 0) ||
 				(groupRolesRoleIds[i] == 0)) {
+
 				continue;
 			}
 

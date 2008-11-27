@@ -58,6 +58,10 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteGroup" qname="operNS:deleteGroup" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getManageableGroups" qname="operNS:getManageableGroups" returnQName="getManageableGroupsReturn" returnType="rtns:ArrayOf_tns2_GroupSoap" returnItemType="tns2:GroupSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getOrganizationsGroups" qname="operNS:getOrganizationsGroups" returnQName="getOrganizationsGroupsReturn" returnType="rtns:ArrayOf_tns2_GroupSoap" returnItemType="tns2:GroupSoap" soapAction="">
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="organizations" type="tns:ArrayOf_tns2_OrganizationSoap"></parameter>
 		</operation>
@@ -92,7 +96,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="workflowStages" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="workflowRoleNames" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="search getUserGroupsGroups updateWorkflow hasUserGroup deleteGroup updateFriendlyURL addGroup setRoleGroups updateGroup searchCount getGroup addRoleGroups getOrganizationsGroups unsetRoleGroups"/>
+		<parameter name="allowedMethods" value="search getUserGroupsGroups updateWorkflow hasUserGroup deleteGroup getManageableGroups updateFriendlyURL addGroup setRoleGroups updateGroup searchCount getGroup addRoleGroups getOrganizationsGroups unsetRoleGroups"/>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_GroupSoap" type="java:com.liferay.portal.model.GroupSoap[]" innerType="cmp-ns:GroupSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserGroupSoap" type="java:com.liferay.portal.model.UserGroupSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:GroupSoap" type="java:com.liferay.portal.model.GroupSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

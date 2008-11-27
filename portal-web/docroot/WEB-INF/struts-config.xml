@@ -526,7 +526,7 @@
 
 		<action path="/enterprise_admin/select_organization_role" forward="portlet.enterprise_admin.select_organization_role" />
 
-		<action path="/enterprise_admin/select_role" forward="portlet.enterprise_admin.select_role" />
+		<action path="/enterprise_admin/select_regular_role" forward="portlet.enterprise_admin.select_regular_role" />
 
 		<action path="/enterprise_admin/select_user_group" forward="portlet.enterprise_admin.select_user_group" />
 
@@ -867,14 +867,14 @@
 		</action>
 
 		<action path="/enterprise_admin_users/select_community" forward="portlet.enterprise_admin.select_community" />
-		
+
 		<action path="/enterprise_admin_users/select_community_role" forward="portlet.enterprise_admin.select_community_role" />
 
 		<action path="/enterprise_admin_users/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
 		<action path="/enterprise_admin_users/select_organization_role" forward="portlet.enterprise_admin.select_organization_role" />
 
-		<action path="/enterprise_admin_users/select_role" forward="portlet.enterprise_admin.select_role" />
+		<action path="/enterprise_admin_users/select_regular_role" forward="portlet.enterprise_admin.select_regular_role" />
 
 		<action path="/enterprise_admin_users/select_user_group" forward="portlet.enterprise_admin.select_user_group" />
 
@@ -1211,7 +1211,7 @@
 
 		<action path="/my_account/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
-		<action path="/my_account/select_role" forward="portlet.enterprise_admin.select_role" />
+		<action path="/my_account/select_regular_role" forward="portlet.enterprise_admin.select_regular_role" />
 
 		<action path="/my_account/view" type="com.liferay.portlet.myaccount.action.ViewAction">
 			<forward name="portlet.my_account.edit_user" path="portlet.enterprise_admin.edit_user" />

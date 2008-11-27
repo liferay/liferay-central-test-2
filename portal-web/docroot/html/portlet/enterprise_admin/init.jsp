@@ -177,15 +177,15 @@ if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 boolean filterManageableRoles = true;
-boolean filterManageableUserGroups = true;
 boolean filterManageableUserGroupRoles = true;
+boolean filterManageableUserGroups = true;
 
 if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	filterManageableGroups = false;
 	filterManageableOrganizations = false;
 	filterManageableRoles = false;
-	filterManageableUserGroups = false;
 	filterManageableUserGroupRoles = false;
+	filterManageableUserGroups = false;
 }
 else if (permissionChecker.isCompanyAdmin()) {
 	filterManageableGroups = false;

@@ -1700,8 +1700,8 @@ public class UserServiceHttp {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
-		java.util.List<com.liferay.portal.model.UserGroupRole> groupRoles,
+		long[] roleIds,
+		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
 		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -1891,15 +1891,15 @@ public class UserServiceHttp {
 				paramObj35 = new NullWrapper("[J");
 			}
 
-			Object paramObj36 = regularRoleIds;
+			Object paramObj36 = roleIds;
 
-			if (regularRoleIds == null) {
+			if (roleIds == null) {
 				paramObj36 = new NullWrapper("[J");
 			}
 
-			Object paramObj37 = groupRoles;
+			Object paramObj37 = userGroupRoles;
 
-			if (groupRoles == null) {
+			if (userGroupRoles == null) {
 				paramObj37 = new NullWrapper("java.util.List");
 			}
 
@@ -1974,8 +1974,8 @@ public class UserServiceHttp {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
-		java.util.List<com.liferay.portal.model.UserGroupRole> groupRoles,
+		long[] roleIds,
+		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
 		long[] userGroupIds,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
@@ -2170,15 +2170,15 @@ public class UserServiceHttp {
 				paramObj35 = new NullWrapper("[J");
 			}
 
-			Object paramObj36 = regularRoleIds;
+			Object paramObj36 = roleIds;
 
-			if (regularRoleIds == null) {
+			if (roleIds == null) {
 				paramObj36 = new NullWrapper("[J");
 			}
 
-			Object paramObj37 = groupRoles;
+			Object paramObj37 = userGroupRoles;
 
-			if (groupRoles == null) {
+			if (userGroupRoles == null) {
 				paramObj37 = new NullWrapper("java.util.List");
 			}
 

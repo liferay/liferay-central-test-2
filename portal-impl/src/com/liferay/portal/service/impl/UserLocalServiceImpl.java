@@ -2160,7 +2160,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String aimSn, String facebookSn, String icqSn, String jabberSn,
 			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
 			String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] regularRoleIds,
+			long[] organizationIds, long[] roleIds,
 			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -2293,16 +2293,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		updateOrganizations(userId, organizationIds);
 
-		// Regular roles
+		// Roles
 
-		if (regularRoleIds != null) {
-			userPersistence.setRoles(userId, regularRoleIds);
+		if (roleIds != null) {
+			userPersistence.setRoles(userId, roleIds);
 		}
 
-		// Group roles
+		// User group roles
 
 		if (userGroupRoles != null) {
-
 			List<UserGroupRole> previousUserGroupRoles =
 				userGroupRolePersistence.findByUserId(userId);
 
@@ -2314,13 +2313,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					Role role = roleLocalService.getRole(
 						userGroupRole.getRoleId());
 
-					if (!role.getName().equals(
-							RoleConstants.COMMUNITY_MEMBER) &&
-						!role.getName().equals(
-							RoleConstants.ORGANIZATION_MEMBER)) {
+					String name = role.getName();
 
-						userGroupRoleLocalService.deleteUserGroupRole
-							(userGroupRole);
+					if (!name.equals(RoleConstants.COMMUNITY_MEMBER) &&
+						!name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
+
+						userGroupRoleLocalService.deleteUserGroupRole(
+							userGroupRole);
 					}
 				}
 			}

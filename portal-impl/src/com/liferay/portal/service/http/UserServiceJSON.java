@@ -375,8 +375,8 @@ public class UserServiceJSON {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
-		java.util.List<com.liferay.portal.model.UserGroupRole> groupRoles,
+		long[] roleIds,
+		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
 		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -388,8 +388,8 @@ public class UserServiceJSON {
 				comments, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 				facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-				regularRoleIds, groupRoles, userGroupIds, serviceContext);
+				twitterSn, ymSn, jobTitle, groupIds, organizationIds, roleIds,
+				userGroupRoles, userGroupIds, serviceContext);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
@@ -411,8 +411,8 @@ public class UserServiceJSON {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
-		java.util.List<com.liferay.portal.model.UserGroupRole> groupRoles,
+		long[] roleIds,
+		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
 		long[] userGroupIds,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
@@ -429,10 +429,9 @@ public class UserServiceJSON {
 				comments, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 				facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-				regularRoleIds, groupRoles, userGroupIds, addresses,
-				emailAddresses, phones, websites, announcementsDelivers,
-				serviceContext);
+				twitterSn, ymSn, jobTitle, groupIds, organizationIds, roleIds,
+				userGroupRoles, userGroupIds, addresses, emailAddresses,
+				phones, websites, announcementsDelivers, serviceContext);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}

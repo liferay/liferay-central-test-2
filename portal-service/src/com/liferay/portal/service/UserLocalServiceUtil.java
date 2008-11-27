@@ -826,7 +826,7 @@ public class UserLocalServiceUtil {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] regularRoleIds,
+		long[] roleIds,
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
 		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -839,8 +839,8 @@ public class UserLocalServiceUtil {
 			comments, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
-			ymSn, jobTitle, groupIds, organizationIds, regularRoleIds,
-			userGroupRoles, userGroupIds, serviceContext);
+			ymSn, jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
+			userGroupIds, serviceContext);
 	}
 
 	public static UserLocalService getService() {

@@ -92,26 +92,27 @@ else {
 	}
 }
 
-String regularRoleIds = ParamUtil.getString(request, "regularRolesSearchContainerPrimaryKeys");
+String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
 
-List<Role> regularRoles = Collections.EMPTY_LIST;
+List<Role> roles = Collections.EMPTY_LIST;
 
-if (Validator.isNotNull(regularRoleIds)) {
-	long[] roleIdsArray = StringUtil.split(regularRoleIds, 0L);
+if (Validator.isNotNull(roleIds)) {
+	long[] roleIdsArray = StringUtil.split(roleIds, 0L);
 
-	regularRoles = RoleLocalServiceUtil.getRoles(roleIdsArray);
+	roles = RoleLocalServiceUtil.getRoles(roleIdsArray);
 }
 else if (selUser != null) {
-	regularRoles = selUser.getRoles();
+	roles = selUser.getRoles();
 
 	if (filterManageableRoles) {
-		EnterpriseAdminUtil.filterRoles(permissionChecker, regularRoles);
+		EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 	}
 }
 
 List<UserGroupRole> userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(renderRequest);
-List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
+
 List<UserGroupRole> communityRoles = new ArrayList<UserGroupRole>();
+List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
 
 if (userGroupRoles.isEmpty() && selUser != null) {
 	userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId());
@@ -124,11 +125,11 @@ if (userGroupRoles.isEmpty() && selUser != null) {
 for (UserGroupRole userGroupRole : userGroupRoles) {
 	int roleType = userGroupRole.getRole().getType();
 
-	if (roleType == RoleConstants.TYPE_ORGANIZATION) {
-		organizationRoles.add(userGroupRole);
-	}
-	else if (roleType == RoleConstants.TYPE_COMMUNITY) {
+	if (roleType == RoleConstants.TYPE_COMMUNITY) {
 		communityRoles.add(userGroupRole);
+	}
+	else if (roleType == RoleConstants.TYPE_ORGANIZATION) {
+		organizationRoles.add(userGroupRole);
 	}
 }
 
@@ -209,9 +210,9 @@ String curSection = mainSections[0];
 			request.setAttribute("user.passwordPolicy", passwordPolicy);
 			request.setAttribute("user.groups", groups);
 			request.setAttribute("user.organizations", organizations);
-			request.setAttribute("user.regularRoles", regularRoles);
-			request.setAttribute("user.organizationRoles", organizationRoles);
+			request.setAttribute("user.roles", roles);
 			request.setAttribute("user.communityRoles", communityRoles);
+			request.setAttribute("user.organizationRoles", organizationRoles);
 			request.setAttribute("user.userGroups", userGroups);
 
 			request.setAttribute("addresses.className", Contact.class.getName());
