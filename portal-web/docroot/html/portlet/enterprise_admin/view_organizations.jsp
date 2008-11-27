@@ -53,7 +53,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (filterManageableOrganizations) {
-			List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
+			List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.UPDATE);
 			Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 
 			organizationParams.put("organizations", manageableOrganizationIds);
