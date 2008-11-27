@@ -107,12 +107,15 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 			{ "identityPropagationType", new Integer(Types.VARCHAR) },
 			
 
+			{ "lifetimeTerminationTime", new Integer(Types.VARCHAR) },
+			
+
 			{ "sdLastModified", new Integer(Types.BIGINT) },
 			
 
 			{ "entityVersion", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WSRPConfiguredProducer (configuredProducerId LONG not null primary key,name VARCHAR(75) null,portalId VARCHAR(75) null,namespace VARCHAR(75) null,producerURL VARCHAR(256) null,producerVersion VARCHAR(75) null,producerMarkupURL VARCHAR(256) null,status INTEGER,registrationData TEXT null,registrationContext TEXT null,serviceDescription TEXT null,userCategoryMapping TEXT null,customUserProfile TEXT null,identityPropagationType VARCHAR(75) null,sdLastModified LONG,entityVersion INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table WSRPConfiguredProducer (configuredProducerId LONG not null primary key,name VARCHAR(75) null,portalId VARCHAR(75) null,namespace VARCHAR(75) null,producerURL VARCHAR(256) null,producerVersion VARCHAR(75) null,producerMarkupURL VARCHAR(256) null,status INTEGER,registrationData TEXT null,registrationContext TEXT null,serviceDescription TEXT null,userCategoryMapping TEXT null,customUserProfile TEXT null,identityPropagationType VARCHAR(75) null,lifetimeTerminationTime VARCHAR(75) null,sdLastModified LONG,entityVersion INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table WSRPConfiguredProducer";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -139,6 +142,7 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		model.setUserCategoryMapping(soapModel.getUserCategoryMapping());
 		model.setCustomUserProfile(soapModel.getCustomUserProfile());
 		model.setIdentityPropagationType(soapModel.getIdentityPropagationType());
+		model.setLifetimeTerminationTime(soapModel.getLifetimeTerminationTime());
 		model.setSdLastModified(soapModel.getSdLastModified());
 		model.setEntityVersion(soapModel.getEntityVersion());
 
@@ -356,6 +360,22 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getLifetimeTerminationTime() {
+		return GetterUtil.getString(_lifetimeTerminationTime);
+	}
+
+	public void setLifetimeTerminationTime(String lifetimeTerminationTime) {
+		if (((lifetimeTerminationTime == null) &&
+				(_lifetimeTerminationTime != null)) ||
+				((lifetimeTerminationTime != null) &&
+				(_lifetimeTerminationTime == null)) ||
+				((lifetimeTerminationTime != null) &&
+				(_lifetimeTerminationTime != null) &&
+				!lifetimeTerminationTime.equals(_lifetimeTerminationTime))) {
+			_lifetimeTerminationTime = lifetimeTerminationTime;
+		}
+	}
+
 	public long getSdLastModified() {
 		return _sdLastModified;
 	}
@@ -403,6 +423,8 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 			model.setCustomUserProfile(HtmlUtil.escape(getCustomUserProfile()));
 			model.setIdentityPropagationType(HtmlUtil.escape(
 					getIdentityPropagationType()));
+			model.setLifetimeTerminationTime(HtmlUtil.escape(
+					getLifetimeTerminationTime()));
 			model.setSdLastModified(getSdLastModified());
 			model.setEntityVersion(getEntityVersion());
 
@@ -440,6 +462,7 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 		clone.setUserCategoryMapping(getUserCategoryMapping());
 		clone.setCustomUserProfile(getCustomUserProfile());
 		clone.setIdentityPropagationType(getIdentityPropagationType());
+		clone.setLifetimeTerminationTime(getLifetimeTerminationTime());
 		clone.setSdLastModified(getSdLastModified());
 		clone.setEntityVersion(getEntityVersion());
 
@@ -508,6 +531,7 @@ public class WSRPConfiguredProducerModelImpl extends BaseModelImpl {
 	private String _userCategoryMapping;
 	private String _customUserProfile;
 	private String _identityPropagationType;
+	private String _lifetimeTerminationTime;
 	private long _sdLastModified;
 	private int _entityVersion;
 	private transient ExpandoBridge _expandoBridge;

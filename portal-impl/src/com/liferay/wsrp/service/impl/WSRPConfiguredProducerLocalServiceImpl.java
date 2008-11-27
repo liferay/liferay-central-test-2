@@ -46,7 +46,8 @@ public class WSRPConfiguredProducerLocalServiceImpl
 			String registrationData, String registrationContext,
 			String serviceDescription, String userCategoryMapping,
 			String customUserProfile, String identityPropagationType,
-			long sdLastModified, int entityVersion)
+			String lifetimeTerminationTime, long sdLastModified,
+			int entityVersion)
 		throws SystemException {
 
 		long configuredProducerId = counterLocalService.increment();
@@ -67,6 +68,7 @@ public class WSRPConfiguredProducerLocalServiceImpl
 		configuredProducer.setUserCategoryMapping(userCategoryMapping);
 		configuredProducer.setCustomUserProfile(customUserProfile);
 		configuredProducer.setIdentityPropagationType(identityPropagationType);
+		configuredProducer.setLifetimeTerminationTime(lifetimeTerminationTime);
 		configuredProducer.setSdLastModified(sdLastModified);
 		configuredProducer.setEntityVersion(entityVersion);
 

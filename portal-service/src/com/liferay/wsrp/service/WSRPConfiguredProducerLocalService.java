@@ -104,7 +104,8 @@ public interface WSRPConfiguredProducerLocalService {
 		java.lang.String serviceDescription,
 		java.lang.String userCategoryMapping,
 		java.lang.String customUserProfile,
-		java.lang.String identityPropagationType, long sdLastModified,
+		java.lang.String identityPropagationType,
+		java.lang.String lifetimeTerminationTime, long sdLastModified,
 		int entityVersion) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

@@ -1689,6 +1689,7 @@
 		<property name="userCategoryMapping" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="customUserProfile" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="identityPropagationType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lifetimeTerminationTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sdLastModified" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="entityVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>

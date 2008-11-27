@@ -105,6 +105,10 @@ public interface WSRPConfiguredProducerModel extends BaseModel {
 
 	public void setIdentityPropagationType(String identityPropagationType);
 
+	public String getLifetimeTerminationTime();
+
+	public void setLifetimeTerminationTime(String lifetimeTerminationTime);
+
 	public long getSdLastModified();
 
 	public void setSdLastModified(long sdLastModified);

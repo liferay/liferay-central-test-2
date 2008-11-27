@@ -64,6 +64,7 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 		soapModel.setUserCategoryMapping(model.getUserCategoryMapping());
 		soapModel.setCustomUserProfile(model.getCustomUserProfile());
 		soapModel.setIdentityPropagationType(model.getIdentityPropagationType());
+		soapModel.setLifetimeTerminationTime(model.getLifetimeTerminationTime());
 		soapModel.setSdLastModified(model.getSdLastModified());
 		soapModel.setEntityVersion(model.getEntityVersion());
 
@@ -204,6 +205,14 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 		_identityPropagationType = identityPropagationType;
 	}
 
+	public String getLifetimeTerminationTime() {
+		return _lifetimeTerminationTime;
+	}
+
+	public void setLifetimeTerminationTime(String lifetimeTerminationTime) {
+		_lifetimeTerminationTime = lifetimeTerminationTime;
+	}
+
 	public long getSdLastModified() {
 		return _sdLastModified;
 	}
@@ -234,6 +243,7 @@ public class WSRPConfiguredProducerSoap implements Serializable {
 	private String _userCategoryMapping;
 	private String _customUserProfile;
 	private String _identityPropagationType;
+	private String _lifetimeTerminationTime;
 	private long _sdLastModified;
 	private int _entityVersion;
 }

@@ -23,6 +23,7 @@
 		<column name="userCategoryMapping" type="String" />
 		<column name="customUserProfile" type="String" />
 		<column name="identityPropagationType" type="String" />
+		<column name="lifetimeTerminationTime" type="String" />
 		<column name="sdLastModified" type="long" />
 		<column name="entityVersion" type="int" />
 

@@ -48,6 +48,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalServiceUtil;
 
+import com.sun.portal.wsrp.common.LeaseTime;
 import com.sun.portal.wsrp.common.WSRPVersion;
 import com.sun.portal.wsrp.common.stubs.v2.RegistrationContext;
 import com.sun.portal.wsrp.common.stubs.v2.RegistrationData;
@@ -67,6 +68,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ProducerEntityManagerImpl.java.html"><b><i>View Source</i></b></a>
@@ -280,11 +287,23 @@ public class ProducerEntityManagerImpl
 
 		String registrationData = getRegistrationDataXMLFromRD(
 			producerEntity.getRegistrationData());
+
 		String registrationContext = getRegistrationContextXMLFromRC(
 			producerEntity.getRegistrationContext());
+
 		String serviceDescription = getServiceDescriptionXMLFromSD(
 			producerEntity.getServiceDescription());
 
+		String lifetimeTerminationTime = null;
+
+		if (producerEntity.getLifetime() != null &&
+				producerEntity.getLifetime().getTerminationTime() != null) {
+			
+			lifetimeTerminationTime =
+					producerEntity.getLifetime()
+						.getTerminationTime().toString();
+		}
+		
 		try {
 			WSRPConfiguredProducerLocalServiceUtil.addConfiguredProducer(
 				producerEntity.getName(), _portalId, _namespace,
@@ -294,6 +313,7 @@ public class ProducerEntityManagerImpl
 				producerEntity.getStatus().getValue(), registrationData,
 				registrationContext, serviceDescription, null, null,
 				producerEntity.getIdentityPropagationType(),
+				lifetimeTerminationTime,
 				producerEntity.getServiceDescriptionLastModified(), 1);
 		}
 		catch (Exception e) {
@@ -366,21 +386,41 @@ public class ProducerEntityManagerImpl
 
 		RegistrationData registrationData = getRegistrationDataFromXML(
 			producer.getRegistrationData());
+		
 		RegistrationContext registrationContext = getRegistrationContextFromXML(
 			producer.getRegistrationContext());
+
 		ServiceDescription serviceDescription = getServiceDesctionFromXML(
 			producer.getServiceDescription());
+
 		Map userCategoryMap = getConsumerObjectFactory().getMap(
 			producer.getUserCategoryMapping());
+
 		long sdLastModified = producer.getSdLastModified();
 		String lastModified = String.valueOf(sdLastModified);
 		String identityPropagationType = producer.getIdentityPropagationType();
+		LeaseTime leaseTime = null;
+		
+		if (Validator.isNotNull(producer.getLifetimeTerminationTime())) {
+			
+			try {
+				XMLGregorianCalendar terminationTime =
+					DatatypeFactory.newInstance().newXMLGregorianCalendar(
+						producer.getLifetimeTerminationTime());
+
+				leaseTime = new LeaseTime();
+				leaseTime.setTerminationTime(terminationTime);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}			
+		}
 
 		ProducerEntity producerEntity = new ProducerEntityImpl(
 			id, name, url, producerVersion, producerMarkupURL, entityStatus,
 			registrationData, registrationContext, serviceDescription,
 			userCategoryMap, null, null, sdLastModified, lastModified,
-			producer.getEntityVersion(), identityPropagationType, null);
+			producer.getEntityVersion(), identityPropagationType, leaseTime);
 
 		return producerEntity;
 	}
@@ -396,6 +436,9 @@ public class ProducerEntityManagerImpl
 
 	private static final String _DEFAULT_CONSUMER_NAME =
 		"Liferay WSRP Consumer";
+
+	private static Log _log = LogFactory.getLog(
+		ProducerEntityManagerImpl.class);
 
 	private String _portalId;
 	private String _namespace;

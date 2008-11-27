@@ -85,6 +85,7 @@ public class WSRPConfiguredProducerPersistenceTest
 		newWSRPConfiguredProducer.setUserCategoryMapping(randomString());
 		newWSRPConfiguredProducer.setCustomUserProfile(randomString());
 		newWSRPConfiguredProducer.setIdentityPropagationType(randomString());
+		newWSRPConfiguredProducer.setLifetimeTerminationTime(randomString());
 		newWSRPConfiguredProducer.setSdLastModified(nextLong());
 		newWSRPConfiguredProducer.setEntityVersion(nextInt());
 
@@ -120,6 +121,8 @@ public class WSRPConfiguredProducerPersistenceTest
 			newWSRPConfiguredProducer.getCustomUserProfile());
 		assertEquals(existingWSRPConfiguredProducer.getIdentityPropagationType(),
 			newWSRPConfiguredProducer.getIdentityPropagationType());
+		assertEquals(existingWSRPConfiguredProducer.getLifetimeTerminationTime(),
+			newWSRPConfiguredProducer.getLifetimeTerminationTime());
 		assertEquals(existingWSRPConfiguredProducer.getSdLastModified(),
 			newWSRPConfiguredProducer.getSdLastModified());
 		assertEquals(existingWSRPConfiguredProducer.getEntityVersion(),
@@ -182,6 +185,7 @@ public class WSRPConfiguredProducerPersistenceTest
 		wsrpConfiguredProducer.setUserCategoryMapping(randomString());
 		wsrpConfiguredProducer.setCustomUserProfile(randomString());
 		wsrpConfiguredProducer.setIdentityPropagationType(randomString());
+		wsrpConfiguredProducer.setLifetimeTerminationTime(randomString());
 		wsrpConfiguredProducer.setSdLastModified(nextLong());
 		wsrpConfiguredProducer.setEntityVersion(nextInt());
 
