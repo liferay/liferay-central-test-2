@@ -438,7 +438,10 @@ public class SAXReaderImpl implements SAXReader {
 			reader.setFeature(_FEATURES_DYNAMIC, validate);
 		}
 		catch (Exception e) {
-			_log.warn("XSD validation is diasabled because " + e.getMessage());
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"XSD validation is diasabled because " + e.getMessage());
+			}
 
 			reader = new org.dom4j.io.SAXReader(validate);
 

@@ -68,10 +68,19 @@ public class JobSchedulerImpl implements JobScheduler {
 
 		Date startTime = null;
 
-		if (ServerDetector.getServerId().equals(ServerDetector.TOMCAT_ID)) {
-			startTime = new Date(System.currentTimeMillis() + Time.MINUTE);
+		try {
+			if (ServerDetector.getServerId().equals(ServerDetector.TOMCAT_ID)) {
+				startTime = new Date(System.currentTimeMillis() + Time.MINUTE);
+			}
 		}
-		else {
+		catch (RuntimeException re) {
+
+			// ServerDetector will throw an exception when JobSchedulerImpl is
+			// initialized in a test environment
+
+		}
+
+		if (startTime == null) {
 			startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 3);
 		}
 

@@ -949,15 +949,15 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 
 	<target name="dist">
 		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update" />
+			<arg line="/c svn update --username ${svn.username} --password ${svn.password}" />
 		</exec>
 
 		<exec dir="${lp.source.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update" />
+			<arg line="/c svn update --username ${svn.username} --password ${svn.password}" />
 		</exec>
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update" />
+			<arg line="/c svn update --username ${svn.username} --password ${svn.password}" />
 		</exec>
 
 		<antcall target="clean" />

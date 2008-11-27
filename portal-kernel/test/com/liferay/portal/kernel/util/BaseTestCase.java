@@ -22,44 +22,20 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.util.InitUtil;
+
+import junit.framework.TestCase;
+
 /**
- * <a href="UnicodePropertiesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class UnicodePropertiesTest extends BaseTestCase {
+public class BaseTestCase extends TestCase {
 
-	public void testLength() throws Exception {
-		String key = "hello";
-		String value = "world";
-
-		UnicodeProperties props = new UnicodeProperties();
-
-		props.setProperty(key, value);
-		props.remove(key);
-
-		assertEquals(0, props.getToStringLength());
-	}
-
-	public void testSetNullProperty() throws Exception {
-		UnicodeProperties props = new UnicodeProperties();
-
-		int hashCode = props.hashCode();
-
-		props.setProperty(null, "value");
-
-		assertEquals(
-			"setProperty() of null key must not change properties", hashCode,
-			props.hashCode());
-
-		props.setProperty("key", null);
-		props.setProperty("key", "value");
-		props.setProperty("key", null);
-
-		assertEquals(
-			"setProperty() of null value must remove entry", hashCode,
-			props.hashCode());
+	public BaseTestCase() {
+		InitUtil.initWithSpring();
 	}
 
 }

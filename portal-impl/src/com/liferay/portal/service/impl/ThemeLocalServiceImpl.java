@@ -140,6 +140,14 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		}
 
 		if (theme == null) {
+			if (_themes.isEmpty()) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("No themes are installed");
+				}
+
+				return null;
+			}
+
 			_log.error(
 				"No theme found for default theme id " + themeId +
 					". Returning a random theme.");

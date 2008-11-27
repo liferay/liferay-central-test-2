@@ -40,6 +40,7 @@ import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -169,7 +170,16 @@ public class LayoutTypePortletImpl
 		String themeId = null;
 
 		try {
-			themeId = getLayout().getTheme().getThemeId();
+			Layout layout = getLayout();
+
+			Theme theme = layout.getTheme();
+
+			if (theme != null) {
+				themeId = theme.getThemeId();
+			}
+			else {
+				themeId = layout.getThemeId();
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);

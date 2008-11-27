@@ -191,9 +191,16 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		if ((portlet == null) &&
 			(!portletId.equals(PortletKeys.LIFERAY_PORTAL))) {
 
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Portlet not found for " + companyId + " " + portletId);
+			if (_portletsPool.isEmpty()) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("No portlets are installed");
+				}
+			}
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Portlet not found for " + companyId + " " + portletId);
+				}
 			}
 		}
 

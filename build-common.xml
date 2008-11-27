@@ -3,6 +3,8 @@
 <project name="common" xmlns:antelope="antlib:ise.antelope.tasks">
 	<property name="project.dir" value=".." />
 
+	<property name="test.properties" value="com/liferay/portal/tools/dependencies/portal-tools.properties" />
+
 	<property environment="env" />
 	<property name="env.COMPUTERNAME" value="${env.HOST}" />
 	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}" />
@@ -36,9 +38,9 @@
 
 	<path id="test.classpath">
 		<pathelement path="${classpath}" />
-		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/development" includes="*.jar" excludes="selenium-server.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
-		<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
+		<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="ant.jar" />
 	</path>
 
 	<path id="web.classpath">
@@ -247,7 +249,7 @@ ECJ was automatically installed. Please rerun your task.
 			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
 			<then>
 				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
-					<jvmarg value="-Dexternal-properties=portal-test.properties" />
+					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<classpath refid="test.classpath" />
 					<formatter type="brief" usefile="false" />
 					<formatter type="xml" />
@@ -258,7 +260,7 @@ ECJ was automatically installed. Please rerun your task.
 			</then>
 			<else>
 				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
-					<jvmarg value="-Dexternal-properties=portal-test.properties" />
+					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<classpath refid="test.classpath" />
 					<formatter type="brief" usefile="false" />
 					<formatter type="xml" />
@@ -272,7 +274,7 @@ ECJ was automatically installed. Please rerun your task.
 
 	<target name="test-class" depends="compile,compile-test" if="class">
 		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" outputtoformatters="false" printsummary="on" showoutput="true">
-			<jvmarg value="-Dexternal-properties=portal-test.properties" />
+			<jvmarg value="-Dexternal-properties=${test.properties}" />
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />
 			<formatter type="xml" />
