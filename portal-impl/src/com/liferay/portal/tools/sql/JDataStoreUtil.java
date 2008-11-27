@@ -54,6 +54,7 @@ public class JDataStoreUtil extends FirebirdUtil {
 	}
 
 	protected JDataStoreUtil() {
+		super(TYPE_JDATASTORE);
 	}
 
 	protected String getServerName() {

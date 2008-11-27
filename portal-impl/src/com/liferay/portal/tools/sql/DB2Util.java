@@ -91,6 +91,7 @@ public class DB2Util extends DBUtil {
 	}
 
 	protected DB2Util() {
+		super(TYPE_DB2);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

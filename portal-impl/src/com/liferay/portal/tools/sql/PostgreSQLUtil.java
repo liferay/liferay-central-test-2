@@ -54,6 +54,7 @@ public class PostgreSQLUtil extends DBUtil {
 	}
 
 	protected PostgreSQLUtil() {
+		super(TYPE_POSTGRESQL);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

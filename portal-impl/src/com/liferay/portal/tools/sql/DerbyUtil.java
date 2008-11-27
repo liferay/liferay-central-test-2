@@ -57,6 +57,7 @@ public class DerbyUtil extends DBUtil {
 	}
 
 	protected DerbyUtil() {
+		super(TYPE_DERBY);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

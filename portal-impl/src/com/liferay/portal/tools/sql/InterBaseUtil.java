@@ -35,6 +35,7 @@ public class InterBaseUtil extends FirebirdUtil {
 	}
 
 	protected InterBaseUtil() {
+		super(TYPE_INTERBASE);
 	}
 
 	protected String getServerName() {

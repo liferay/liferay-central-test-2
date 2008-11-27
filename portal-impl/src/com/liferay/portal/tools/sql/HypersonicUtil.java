@@ -53,6 +53,7 @@ public class HypersonicUtil extends DBUtil {
 	}
 
 	protected HypersonicUtil() {
+		super(TYPE_HYPERSONIC);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal) {

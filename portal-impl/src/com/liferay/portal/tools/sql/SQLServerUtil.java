@@ -59,6 +59,7 @@ public class SQLServerUtil extends DBUtil {
 	}
 
 	protected SQLServerUtil() {
+		super(TYPE_SQLSERVER);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

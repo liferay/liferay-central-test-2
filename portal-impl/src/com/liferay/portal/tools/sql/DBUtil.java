@@ -259,6 +259,10 @@ public abstract class DBUtil {
 		return getTemplate()[1];
 	}
 
+	public String getType() {
+		return _type;
+	}
+
 	public void runSQL(String sql)
 		throws IOException, NamingException, SQLException {
 
@@ -434,6 +438,10 @@ public abstract class DBUtil {
 		}
 
 		br.close();
+	}
+
+	protected DBUtil(String type) {
+		_type = type;
 	}
 
 	protected abstract void buildCreateFile(
@@ -781,5 +789,7 @@ public abstract class DBUtil {
 	private static Log _log = LogFactory.getLog(DBUtil.class);
 
 	private static DBUtil _dbUtil;
+
+	private String _type;
 
 }

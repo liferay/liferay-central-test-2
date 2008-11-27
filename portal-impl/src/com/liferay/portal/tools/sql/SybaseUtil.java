@@ -61,6 +61,7 @@ public class SybaseUtil extends DBUtil {
 	}
 
 	protected SybaseUtil() {
+		super(TYPE_SYBASE);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

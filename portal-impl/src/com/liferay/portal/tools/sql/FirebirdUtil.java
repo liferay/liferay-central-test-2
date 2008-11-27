@@ -56,6 +56,11 @@ public class FirebirdUtil extends DBUtil {
 	}
 
 	protected FirebirdUtil() {
+		super(TYPE_FIREBIRD);
+	}
+
+	protected FirebirdUtil(String type) {
+		super(type);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

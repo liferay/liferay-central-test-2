@@ -116,6 +116,7 @@ public class OracleUtil extends DBUtil {
 	}
 
 	protected OracleUtil() {
+		super(TYPE_ORACLE);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

@@ -56,6 +56,7 @@ public class InformixUtil extends DBUtil {
 	}
 
 	protected InformixUtil() {
+		super(TYPE_INFORMIX);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

@@ -55,6 +55,7 @@ public class MySQLUtil extends DBUtil {
 	}
 
 	protected MySQLUtil() {
+		super(TYPE_MYSQL);
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)

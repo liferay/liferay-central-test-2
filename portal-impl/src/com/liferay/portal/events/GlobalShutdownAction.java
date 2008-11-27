@@ -27,6 +27,7 @@ import com.liferay.portal.im.ICQConnector;
 import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
@@ -35,10 +36,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
+
+import java.sql.Connection;
+import java.sql.Statement;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,7 +65,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Instant messenger AIM
 
 		try {
-			_log.debug("Shutting down AIM");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Shutting down AIM");
+			}
 
 			AIMConnector.disconnect();
 		}
@@ -70,7 +77,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Instant messenger ICQ
 
 		try {
-			_log.debug("Shutting down ICQ");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Shutting down ICQ");
+			}
 
 			ICQConnector.disconnect();
 		}
@@ -80,7 +89,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Instant messenger MSN
 
 		try {
-			_log.debug("Shutting down MSN");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Shutting down MSN");
+			}
 
 			MSNConnector.disconnect();
 		}
@@ -90,7 +101,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Instant messenger YM
 
 		try {
-			_log.debug("Shutting down YM");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Shutting down YM");
+			}
 
 			YMConnector.disconnect();
 		}
@@ -100,7 +113,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		// JCR
 
 		try {
-			_log.debug("Shutting down JCR");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Shutting down JCR");
+			}
 
 			JCRFactoryUtil.shutdown();
 		}
@@ -129,6 +144,25 @@ public class GlobalShutdownAction extends SimpleAction {
 			SchedulerEngineUtil.shutdown();
 		}
 		catch (Exception e) {
+		}
+
+		// Hypersonic
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		if (dbUtil.getType().equals(DBUtil.TYPE_HYPERSONIC)) {
+			try {
+				Connection connection = DataAccess.getConnection();
+
+				Statement statement = connection.createStatement();
+
+				statement.executeUpdate("SHUTDOWN");
+
+				statement.close();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		// Reset log to default JDK 1.4 logger. This will allow WARs dependent
