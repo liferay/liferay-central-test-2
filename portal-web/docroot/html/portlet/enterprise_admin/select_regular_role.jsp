@@ -31,7 +31,7 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_role");
+portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role");
 %>
 
 <liferay-ui:search-container
