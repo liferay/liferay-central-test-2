@@ -94,8 +94,6 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	</div>
 </fieldset>
 
-<br />
-
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 </form>

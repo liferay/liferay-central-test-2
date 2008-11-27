@@ -73,8 +73,6 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 	</div>
 </fieldset>
 
-<br />
-
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 </form>
