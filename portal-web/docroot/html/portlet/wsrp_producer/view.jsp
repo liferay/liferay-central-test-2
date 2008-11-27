@@ -139,8 +139,6 @@
 				Set<Map.Entry<String, String>> versions = supportedVersions.entrySet();
 
 				String wsdl = "http://" + renderRequest.getServerName() + ":" + renderRequest.getServerPort() + producerBean.getWsdlURL();
-
-				String producerAdminError = GetterUtil.getString((String)request.getAttribute("PRODUCER_ADMIN_ERROR"));	
 				%>
 
 				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
@@ -150,7 +148,7 @@
 
 				<liferay-ui:tabs names="producer" />
 
-				<c:if test='<%= producerAdminError.equals("PRODUCER_ENABLE_ERROR") %>'>
+				<c:if test='<%= request.getAttribute("PRODUCER_ADMIN_ERROR") != null %>'>
 					<span class="portlet-msg-error">
 						<liferay-ui:message key="disable-producer-for-no-published-portlet" />
 					</span>
