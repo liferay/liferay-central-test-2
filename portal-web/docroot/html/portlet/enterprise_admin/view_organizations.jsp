@@ -82,59 +82,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="name"
-				orderable="<%= true %>"
-				property="name"
-			/>
-
-			<liferay-ui:search-container-column-text
-				buffer="buffer"
-				href="<%= rowURL %>"
-				name="parent-organization"
-			>
-
-				<%
-				if (organization.getParentOrganizationId() > 0) {
-					try {
-						Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-						buffer.append(parentOrganization.getName());
-					}
-					catch (Exception e) {
-					}
-				}
-				%>
-
-			</liferay-ui:search-container-column-text>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="type"
-				orderable="<%= true %>"
-				value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="city"
-				value="<%= organization.getAddress().getCity() %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="region"
-			>
-				<liferay-ui:write bean="<%= organization %>" property="region" />
-			</liferay-ui:search-container-column-text>
-
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="country"
-			>
-				<liferay-ui:write bean="<%= organization %>" property="country" />
-			</liferay-ui:search-container-column-text>
+			<%@ include file="/html/portlet/enterprise_admin/organization/search_columns.jspf" %>
 
 			<liferay-ui:search-container-column-jsp
 				align="right"
