@@ -43,8 +43,8 @@ userGroupRoles.addAll(communityRoles);
 </liferay-util:buffer>
 
 <script type="text/javascript">
-	var <portlet:namespace />groupRolesRoleIds = ['<%= ListUtil.toString(groupRoles, "roleId", "', '") %>'];
-	var <portlet:namespace />groupRolesGroupIds = ['<%= ListUtil.toString(groupRoles, "groupId", "', '") %>'];
+	var <portlet:namespace />groupRolesRoleIds = ['<%= ListUtil.toString(userGroupRoles, "roleId", "', '") %>'];
+	var <portlet:namespace />groupRolesGroupIds = ['<%= ListUtil.toString(userGroupRoles, "groupId", "', '") %>'];
 
 	function <portlet:namespace />openRegularRoleSelector() {
 		<portlet:namespace />openRoleSelector('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_role" /></portlet:renderURL>');
@@ -110,8 +110,8 @@ userGroupRoles.addAll(communityRoles);
 	}
 </script>
 
-<input name="<portlet:namespace />groupRolesRoleIds" type="hidden" value="<%= ListUtil.toString(groupRoles, "roleId") %>" />
-<input name="<portlet:namespace />groupRolesGroupIds" type="hidden" value="<%= ListUtil.toString(groupRoles, "groupId") %>" />
+<input name="<portlet:namespace />groupRolesRoleIds" type="hidden" value="<%= ListUtil.toString(userGroupRoles, "roleId") %>" />
+<input name="<portlet:namespace />groupRolesGroupIds" type="hidden" value="<%= ListUtil.toString(userGroupRoles, "groupId") %>" />
 
 <h3><liferay-ui:message key="regular-roles" /></h3>
 
