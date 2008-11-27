@@ -318,7 +318,9 @@ public class UserServiceUtil {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds,
+		long[] regularRoleIds,
+		java.util.List<com.liferay.portal.model.UserGroupRole> groupRoles,
+		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -329,8 +331,8 @@ public class UserServiceUtil {
 			comments, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
-			ymSn, jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
-			serviceContext);
+			ymSn, jobTitle, groupIds, organizationIds, regularRoleIds,
+			groupRoles, userGroupIds, serviceContext);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
@@ -350,7 +352,9 @@ public class UserServiceUtil {
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String twitterSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds,
+		long[] regularRoleIds,
+		java.util.List<com.liferay.portal.model.UserGroupRole> groupRoles,
+		long[] userGroupIds,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
@@ -366,9 +370,9 @@ public class UserServiceUtil {
 			comments, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
-			ymSn, jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
-			addresses, emailAddresses, phones, websites, announcementsDelivers,
-			serviceContext);
+			ymSn, jobTitle, groupIds, organizationIds, regularRoleIds,
+			groupRoles, userGroupIds, addresses, emailAddresses, phones,
+			websites, announcementsDelivers, serviceContext);
 	}
 
 	public static UserService getService() {

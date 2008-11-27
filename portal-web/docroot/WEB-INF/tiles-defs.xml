@@ -402,8 +402,16 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_community.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.select_community_role" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/select_community_role.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.select_organization" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization.jsp" />
+	</definition>
+
+	<definition name="portlet.enterprise_admin.select_organization_role" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization_role.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_role" extends="portlet.enterprise_admin">

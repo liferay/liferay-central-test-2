@@ -85,6 +85,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
@@ -2159,7 +2160,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String aimSn, String facebookSn, String icqSn, String jabberSn,
 			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
 			String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			long[] organizationIds, long[] regularRoleIds,
+			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -2291,10 +2293,41 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		updateOrganizations(userId, organizationIds);
 
-		// Roles
+		// Regular roles
 
-		if (roleIds != null) {
-			userPersistence.setRoles(userId, roleIds);
+		if (regularRoleIds != null) {
+			userPersistence.setRoles(userId, regularRoleIds);
+		}
+
+		// Group roles
+
+		if (userGroupRoles != null) {
+
+			List<UserGroupRole> previousUserGroupRoles =
+				userGroupRolePersistence.findByUserId(userId);
+
+			for (UserGroupRole userGroupRole : previousUserGroupRoles) {
+				if (userGroupRoles.contains(userGroupRole)) {
+					userGroupRoles.remove(userGroupRole);
+				}
+				else {
+					Role role = roleLocalService.getRole(
+						userGroupRole.getRoleId());
+
+					if (!role.getName().equals(
+							RoleConstants.COMMUNITY_MEMBER) &&
+						!role.getName().equals(
+							RoleConstants.ORGANIZATION_MEMBER)) {
+
+						userGroupRoleLocalService.deleteUserGroupRole
+							(userGroupRole);
+					}
+				}
+			}
+
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				userGroupRoleLocalService.addUserGroupRole(userGroupRole);
+			}
 		}
 
 		// User groups

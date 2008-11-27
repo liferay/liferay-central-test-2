@@ -37,6 +37,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -532,7 +533,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String aimSn, String facebookSn, String icqSn, String jabberSn,
 			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
 			String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			long[] organizationIds, long[] regularRoleIds,
+			List<UserGroupRole> groupRoles, long[] userGroupIds,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -558,16 +560,20 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
+		if (groupIds != null) {
+			groupIds = checkGroups(userId, groupIds);
+		}
+
 		if (organizationIds != null) {
 			organizationIds = checkOrganizations(userId, organizationIds);
 		}
 
-		if (roleIds != null) {
-			roleIds = checkRoles(userId, roleIds);
+		if (regularRoleIds != null) {
+			regularRoleIds = checkRoles(userId, regularRoleIds);
 		}
 
-		if (groupIds != null) {
-			groupIds = checkGroups(userId, groupIds);
+		if (groupRoles != null) {
+			groupRoles = checkGroupRoles(userId, groupRoles);
 		}
 
 		return userLocalService.updateUser(
@@ -577,8 +583,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
-			serviceContext);
+			jobTitle, groupIds, organizationIds, regularRoleIds, groupRoles,
+			userGroupIds, serviceContext);
 	}
 
 	public User updateUser(
@@ -593,7 +599,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String aimSn, String facebookSn, String icqSn, String jabberSn,
 			String msnSn, String mySpaceSn, String skypeSn, String twitterSn,
 			String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			long[] organizationIds, long[] regularRoleIds,
+			List<UserGroupRole> groupRoles, long[] userGroupIds,
 			List<Address> addresses, List<EmailAddress> emailAddresses,
 			List<Phone> phones, List<Website> websites,
 			List<AnnouncementsDelivery> announcementsDelivers,
@@ -607,8 +614,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
-			serviceContext);
+			jobTitle, groupIds, organizationIds, regularRoleIds,
+			groupRoles, userGroupIds, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
@@ -729,6 +736,44 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		return roleIds;
+	}
+
+	protected List<UserGroupRole> checkGroupRoles(
+			long userId, List<UserGroupRole> groupRoles)
+		throws PortalException, SystemException {
+
+		for (UserGroupRole userGroupRole : groupRoles) {
+			if (!GroupPermissionUtil.contains(
+					getPermissionChecker(), userGroupRole.getGroupId(),
+					ActionKeys.ASSIGN_MEMBERS) ||
+				!RolePermissionUtil.contains(
+					getPermissionChecker(), userGroupRole.getRoleId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				throw new PrincipalException();
+			}
+		}
+
+		// Add back any group roles that the administrator doesn't have the
+		// rights to remove
+
+		List<UserGroupRole> previousGroupRoles =
+			userGroupRoleLocalService.getUserGroupRoles(userId);
+
+		for (UserGroupRole userGroupRole : previousGroupRoles) {
+			if (!groupRoles.contains(userGroupRole) &&
+			   (!GroupPermissionUtil.contains(
+					getPermissionChecker(), userGroupRole.getGroupId(),
+					ActionKeys.ASSIGN_MEMBERS) ||
+				!RolePermissionUtil.contains(
+					getPermissionChecker(), userGroupRole.getRoleId(),
+					ActionKeys.ASSIGN_MEMBERS))) {
+
+				groupRoles.add(userGroupRole);
+			}
+		}
+
+		return groupRoles;
 	}
 
 	protected void updateAnnouncementsDeliveries(

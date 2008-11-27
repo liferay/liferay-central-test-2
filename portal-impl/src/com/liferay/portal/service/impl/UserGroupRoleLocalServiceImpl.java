@@ -177,6 +177,12 @@ public class UserGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	public List<UserGroupRole> getUserGroupRoles(long userId)
+		throws SystemException {
+
+		return userGroupRolePersistence.findByUserId(userId);
+	}
+
 	public List<UserGroupRole> getUserGroupRoles(long userId, long groupId)
 		throws SystemException {
 

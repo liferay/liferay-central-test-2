@@ -58,6 +58,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -373,8 +374,10 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "groupsSearchContainerPrimaryKeys"), 0L);
 		long[] organizationIds = StringUtil.split(ParamUtil.getString(
 			actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
-		long[] roleIds = StringUtil.split(ParamUtil.getString(
-			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
+		long[] regularRoleIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "regularRolesSearchContainerPrimaryKeys"), 0L);
+		List<UserGroupRole> userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(
+			actionRequest);
 		long[] userGroupIds = StringUtil.split(ParamUtil.getString(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys"), 0L);
 		boolean sendEmail = true;
@@ -402,9 +405,10 @@ public class EditUserAction extends PortletAction {
 				autoScreenName, screenName, emailAddress, openId,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
-				userGroupIds, sendEmail, addresses, emailAddresses, phones,
-				websites, announcementsDeliveries, serviceContext);
+				birthdayYear, jobTitle, groupIds, organizationIds,
+				regularRoleIds, userGroupIds, sendEmail, addresses,
+				emailAddresses, phones, websites, announcementsDeliveries,
+				serviceContext);
 		}
 		else {
 
@@ -430,9 +434,10 @@ public class EditUserAction extends PortletAction {
 				greeting, comments, firstName, middleName, lastName, prefixId,
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				twitterSn, ymSn, jobTitle, groupIds, organizationIds, roleIds,
-				userGroupIds, addresses, emailAddresses, phones, websites,
-				announcementsDeliveries, serviceContext);
+				twitterSn, ymSn, jobTitle, groupIds, organizationIds,
+				regularRoleIds, userGroupRoles, userGroupIds, addresses,
+				emailAddresses, phones, websites, announcementsDeliveries,
+				serviceContext);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

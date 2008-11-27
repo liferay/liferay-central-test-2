@@ -739,7 +739,8 @@ public class PortalLDAPUtil {
 			attrs, userMappings.getProperty("jobTitle"));
 		long[] groupIds = null;
 		long[] organizationIds = null;
-		long[] roleIds = null;
+		long[] regularRoleIds = null;
+		List userGroupRoles = null;
 		long[] userGroupIds = null;
 		boolean sendEmail = false;
 		ServiceContext serviceContext = new ServiceContext();
@@ -878,7 +879,8 @@ public class PortalLDAPUtil {
 				contact.getJabberSn(), contact.getMsnSn(),
 				contact.getMySpaceSn(), contact.getSkypeSn(),
 				contact.getTwitterSn(), contact.getYmSn(), jobTitle, groupIds,
-				organizationIds, roleIds, userGroupIds, serviceContext);
+				organizationIds, regularRoleIds, userGroupRoles, userGroupIds,
+				serviceContext);
 
 			if (ldapUserModifiedDate != null) {
 				UserLocalServiceUtil.updateModifiedDate(
@@ -902,7 +904,7 @@ public class PortalLDAPUtil {
 					autoScreenName, screenName, emailAddress, openId, locale,
 					firstName, middleName, lastName, prefixId, suffixId, male,
 					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					groupIds, organizationIds, roleIds, userGroupIds,
+					groupIds, organizationIds, regularRoleIds, userGroupIds,
 					sendEmail, serviceContext);
 			}
 			catch (Exception e) {

@@ -37,12 +37,15 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.PhoneImpl;
+import com.liferay.portal.model.impl.UserGroupRoleImpl;
 import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -55,6 +58,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -71,6 +75,7 @@ import com.liferay.portal.util.comparator.UserEmailAddressComparator;
 import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
+import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -79,6 +84,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="EnterpriseAdminUtil.java.html"><b><i>View Source</i></b></a>
@@ -162,10 +168,6 @@ public class EnterpriseAdminUtil {
 	public static void filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
 
-		if (permissionChecker.isCompanyAdmin()) {
-			return;
-		}
-
 		Iterator<Role> itr = roles.iterator();
 
 		while (itr.hasNext()) {
@@ -173,10 +175,28 @@ public class EnterpriseAdminUtil {
 
 			String name = role.getName();
 
-			if (name.equals(RoleConstants.GUEST) ||
+			if (name.equals(RoleConstants.COMMUNITY_MEMBER) ||
+				name.equals(RoleConstants.GUEST) ||
 				name.equals(RoleConstants.OWNER) ||
-				name.equals(RoleConstants.USER) ||
-				!RolePermissionUtil.contains(
+				name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+				name.equals(RoleConstants.USER)) {
+
+				itr.remove();
+			}
+		}
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return;
+		}
+
+		itr = roles.iterator();
+
+		while (itr.hasNext()) {
+			Role role = itr.next();
+
+			String name = role.getName();
+
+			if (!RolePermissionUtil.contains(
 					permissionChecker, role.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
 
@@ -199,6 +219,42 @@ public class EnterpriseAdminUtil {
 
 			if (!UserGroupPermissionUtil.contains(
 					permissionChecker, userGroup.getUserGroupId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				itr.remove();
+			}
+		}
+	}
+
+	public static void filterUserGroupRoles(
+		PermissionChecker permissionChecker, List<UserGroupRole> userGroupRoles)
+		throws PortalException, SystemException {
+
+		Iterator<UserGroupRole> itr = userGroupRoles.iterator();
+
+		while (itr.hasNext()) {
+			UserGroupRole userGroupRole = itr.next();
+
+			Role role = userGroupRole.getRole();
+
+			if (role.getName().equals(RoleConstants.ORGANIZATION_MEMBER) ||
+				role.getName().equals(RoleConstants.COMMUNITY_MEMBER)) {
+
+				itr.remove();
+			}
+		}
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return;
+		}
+
+		itr = userGroupRoles.iterator();
+
+		while (itr.hasNext()) {
+			UserGroupRole userGroupRole = itr.next();
+
+			if (!RolePermissionUtil.contains(
+					permissionChecker, userGroupRole.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS)) {
 
 				itr.remove();
@@ -565,6 +621,41 @@ public class EnterpriseAdminUtil {
 		}
 
 		return orderByComparator;
+	}
+
+	public static List<UserGroupRole> getUserGroupRoles(
+			PortletRequest portletRequest)
+		throws SystemException, PortalException {
+
+		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
+
+		long[] groupRolesRoleIds= StringUtil.split(ParamUtil.getString(
+			portletRequest, "groupRolesRoleIds"), 0L);
+		long[] groupRolesGroupIds= StringUtil.split(ParamUtil.getString(
+			portletRequest, "groupRolesGroupIds"), 0L);
+
+		if (groupRolesGroupIds.length != groupRolesRoleIds.length) {
+			return userGroupRoles;
+		}
+
+		User user = PortalUtil.getSelectedUser(portletRequest);
+
+		for (int i = 0; i < groupRolesGroupIds.length; i++) {
+			if ((groupRolesGroupIds[i] == 0) ||
+				(groupRolesRoleIds[i] == 0)) {
+				continue;
+			}
+
+			UserGroupRole userGroupRole = new UserGroupRoleImpl();
+
+			userGroupRole.setUserId(user.getUserId());
+			userGroupRole.setGroupId(groupRolesGroupIds[i]);
+			userGroupRole.setRoleId(groupRolesRoleIds[i]);
+
+			userGroupRoles.add(userGroupRole);
+		}
+
+		return userGroupRoles;
 	}
 
 	public static OrderByComparator getUserOrderByComparator(

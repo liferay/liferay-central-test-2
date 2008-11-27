@@ -28,12 +28,14 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 
@@ -93,7 +95,8 @@ public class AdminUtil {
 
 		long[] groupIds = null;
 		long[] organizationIds = null;
-		long[] roleIds = null;
+		long[] regularRoleIds = null;
+		List<UserGroupRole> userGroupRoles = null;
 		long[] userGroupIds = null;
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -106,8 +109,8 @@ public class AdminUtil {
 			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			contact.getJobTitle(), groupIds, organizationIds, roleIds,
-			userGroupIds, serviceContext);
+			contact.getJobTitle(), groupIds, organizationIds, regularRoleIds,
+			userGroupRoles, userGroupIds, serviceContext);
 	}
 
 	public static User updateUser(
