@@ -158,6 +158,9 @@ public class PropsValues {
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL));
 
+	public static final String BROWSER_LAUNCHER_URL =
+		PropsUtil.get(PropsKeys.BROWSER_LAUNCHER_URL);
+
 	public static final boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));

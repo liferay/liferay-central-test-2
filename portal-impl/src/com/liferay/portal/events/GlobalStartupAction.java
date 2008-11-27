@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.util.BrowserLauncher;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -206,6 +207,12 @@ public class GlobalStartupAction extends SimpleAction {
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.start();
 		}
+
+		// Launch browser
+
+		Thread browserLauncherThread = new Thread(new BrowserLauncher());
+
+		browserLauncherThread.start();
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);
