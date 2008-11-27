@@ -27,7 +27,7 @@
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_reminder_query" class="uni-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
 <input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
 
 <span class="portlet-msg-info">
 	<liferay-ui:message key="please-choose-a-reminder-query" />
