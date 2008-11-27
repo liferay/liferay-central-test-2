@@ -165,12 +165,11 @@
 	margin-left: 50px;
 }
 
-
-.portlet-calendar .day-grid .business-hours {
+.portlet-calendar .day-grid .business-hour {
 	background: #FEFEFE;
 }
 
-.portlet-calendar .day-grid .night-hours {
+.portlet-calendar .day-grid .night-hour {
 	background: #EFEFEF;
 }
 
@@ -181,14 +180,14 @@
 }
 
 .portlet-calendar .day-grid .hour {
-	height: 24px;
 	border-bottom: 1px solid #CCC;
+	height: 24px;
 }
 
 .portlet-calendar .day-grid .hour span {
 	color: #777;
 	display: block;
-	font-size: .8em;
+	font-size: 0.8em;
 	font-weight: bold;
 	left: -50px;
 	position: absolute;
@@ -196,18 +195,18 @@
 	width: 45px;
 }
 
-.portlet-calendar .day-grid .half {
-	height: 23px;
+.portlet-calendar .day-grid .half-hour {
 	border-bottom: 2px solid #CCC;
+	height: 23px;
 }
 
 .portlet-calendar .day-grid .event-box {
 	background: #F0F5F7;
-	border: 2px solid #AAF;
+	border: 2px solid #828F95;
 	padding: 5px;
 }
 
 .portlet-calendar .day-grid .event-description {
-	border-top: 1px solid #AAF;
+	border-top: 1px solid #AEB8BC;
 	padding-top: .5em;
 }

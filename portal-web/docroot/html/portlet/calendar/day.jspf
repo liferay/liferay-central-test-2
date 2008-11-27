@@ -196,14 +196,14 @@ if (partDayResults.size() > 0) {
 	<%
 	for (int i = 0; i < 24; i++) {
 		String displayTime = ((i % 12) == 0 ? "12" : (i % 12)) + ( i < 12 ? " AM" : " PM");
-		String businessHours = ((i >= 9) && (i < 17)) ? "business-hours" : "night-hours";
+		String businessHours = ((i >= 9) && (i < 17)) ? "business-hour" : "night-hour";
 	%>
 
 		<div class="hour <%= businessHours %>">
 			<span><%= displayTime %></span>
 		</div>
 
-		<div class="half <%= businessHours %>"><!-- --></div>
+		<div class="half-hour <%= businessHours %>"><!-- --></div>
 
 	<%
 	}
