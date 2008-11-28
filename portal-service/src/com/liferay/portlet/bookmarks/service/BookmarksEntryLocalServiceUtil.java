@@ -106,54 +106,23 @@ public class BookmarksEntryLocalServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(userId, folderId, name, url, comments,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(uuid, userId, folderId, name, url, comments,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long userId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(userId, folderId, name, url, comments,
-			tagsEntries, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String uuid, long userId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(uuid, userId, folderId, name, url, comments,
-			tagsEntries, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			serviceContext);
 	}
 
 	public static void addEntryResources(long folderId, long entryId,
@@ -289,12 +258,12 @@ public class BookmarksEntryLocalServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long userId, long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(userId, entryId, folderId, name, url, comments,
-			tagsEntries);
+			serviceContext);
 	}
 
 	public static void updateTagsAsset(long userId,

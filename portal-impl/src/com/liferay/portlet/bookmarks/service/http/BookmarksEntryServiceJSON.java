@@ -75,27 +75,11 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 public class BookmarksEntryServiceJSON {
 	public static JSONObject addEntry(long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
-				name, url, comments, tagsEntries, addCommunityPermissions,
-				addGuestPermissions);
-
-		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addEntry(long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
-				name, url, comments, tagsEntries, communityPermissions,
-				guestPermissions);
+				name, url, comments, serviceContext);
 
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -124,11 +108,11 @@ public class BookmarksEntryServiceJSON {
 
 	public static JSONObject updateEntry(long entryId, long folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.updateEntry(entryId,
-				folderId, name, url, comments, tagsEntries);
+				folderId, name, url, comments, serviceContext);
 
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}

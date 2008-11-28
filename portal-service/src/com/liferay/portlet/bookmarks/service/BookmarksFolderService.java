@@ -55,16 +55,9 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface BookmarksFolderService {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

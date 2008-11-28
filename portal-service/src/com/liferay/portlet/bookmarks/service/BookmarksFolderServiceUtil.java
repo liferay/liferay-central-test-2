@@ -46,25 +46,13 @@ package com.liferay.portlet.bookmarks.service;
  */
 public class BookmarksFolderServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFolder(plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(plid, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
+				   .addFolder(parentFolderId, name, description, serviceContext);
 	}
 
 	public static void deleteFolder(long folderId)

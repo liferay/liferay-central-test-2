@@ -23,11 +23,11 @@
 package com.liferay.portlet.bookmarks.service;
 
 import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 /**
  * <a href="BaseBookmarksServiceTestCase.java.html"><b><i>View Source</i></b>
@@ -44,14 +44,15 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 		String name = "Test Entry";
 		String url = "http://www.liferay.com";
 		String comments = "This is a test entry.";
-		String[] tagsEntries = new String[0];
 
-		boolean addGommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setTagsEntries(new String[0]);
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		return BookmarksEntryServiceUtil.addEntry(
-			folder.getFolderId(), name, url, comments, tagsEntries,
-			addGommunityPermissions, addGuestPermissions);
+			folder.getFolderId(), name, url, comments, serviceContext);
 	}
 
 	protected BookmarksFolder addFolder() throws Exception {
@@ -65,12 +66,14 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
-		boolean addGommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setPlid(plid);
 
 		return BookmarksFolderServiceUtil.addFolder(
-			plid, parentFolderId, name, description, addGommunityPermissions,
-			addGuestPermissions);
+			parentFolderId, name, description, serviceContext);
 	}
 
 }

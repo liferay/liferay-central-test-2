@@ -73,27 +73,13 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
  *
  */
 public class BookmarksFolderServiceJSON {
-	public static JSONObject addFolder(long plid, long parentFolderId,
+	public static JSONObject addFolder(long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(plid,
-				parentFolderId, name, description, addCommunityPermissions,
-				addGuestPermissions);
-
-		return BookmarksFolderJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addFolder(long plid, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(plid,
-				parentFolderId, name, description, communityPermissions,
-				guestPermissions);
+		com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(parentFolderId,
+				name, description, serviceContext);
 
 		return BookmarksFolderJSONSerializer.toJSONObject(returnValue);
 	}

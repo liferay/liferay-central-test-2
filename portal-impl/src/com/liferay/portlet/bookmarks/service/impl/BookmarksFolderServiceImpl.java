@@ -25,6 +25,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
@@ -38,31 +39,16 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermissio
 public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
-			long plid, long parentFolderId, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId,
+			getPermissionChecker(), serviceContext.getPlid(), parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
 		return bookmarksFolderLocalService.addFolder(
-			getUserId(), plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public BookmarksFolder addFolder(
-			long plid, long parentFolderId, String name, String description,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		BookmarksFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId,
-			ActionKeys.ADD_FOLDER);
-
-		return bookmarksFolderLocalService.addFolder(
-			getUserId(), plid, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
+			getUserId(), parentFolderId, name, description, serviceContext);
 	}
 
 	public void deleteFolder(long folderId)

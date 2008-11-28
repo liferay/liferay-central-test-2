@@ -47,25 +47,12 @@ package com.liferay.portlet.bookmarks.service;
 public class BookmarksEntryServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(folderId, name, url, comments, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(folderId, name, url, comments, tagsEntries,
-			communityPermissions, guestPermissions);
+				   .addEntry(folderId, name, url, comments, serviceContext);
 	}
 
 	public static void deleteEntry(long entryId)
@@ -91,12 +78,12 @@ public class BookmarksEntryServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(entryId, folderId, name, url, comments,
-			tagsEntries);
+			serviceContext);
 	}
 
 	public static BookmarksEntryService getService() {

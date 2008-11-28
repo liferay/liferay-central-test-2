@@ -27,10 +27,13 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -129,18 +132,15 @@ public class EditFolderAction extends PortletAction {
 		boolean mergeWithParentFolder = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentFolder");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			BookmarksFolder.class.getName(), actionRequest);
 
 		if (folderId <= 0) {
 
 			// Add folder
 
 			BookmarksFolderServiceUtil.addFolder(
-				layout.getPlid(), parentFolderId, name, description,
-				communityPermissions, guestPermissions);
+				parentFolderId, name, description, serviceContext);
 		}
 		else {
 

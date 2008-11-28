@@ -25,6 +25,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission;
@@ -40,30 +41,14 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
 			long folderId, String name, String url, String comments,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
 
 		return bookmarksEntryLocalService.addEntry(
-			getUserId(), folderId, name, url, comments, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public BookmarksEntry addEntry(
-			long folderId, String name, String url, String comments,
-			String[] tagsEntries, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		BookmarksFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
-
-		return bookmarksEntryLocalService.addEntry(
-			getUserId(), folderId, name, url, comments, tagsEntries,
-			communityPermissions, guestPermissions);
+			getUserId(), folderId, name, url, comments, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -95,14 +80,15 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry updateEntry(
 			long entryId, long folderId, String name, String url,
-			String comments, String[] tagsEntries)
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return bookmarksEntryLocalService.updateEntry(
-			getUserId(), entryId, folderId, name, url, comments, tagsEntries);
+			getUserId(), entryId, folderId, name, url, comments,
+			serviceContext);
 	}
 
 }

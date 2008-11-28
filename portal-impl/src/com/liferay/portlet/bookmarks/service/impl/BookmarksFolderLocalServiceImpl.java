@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -63,51 +63,23 @@ public class BookmarksFolderLocalServiceImpl
 	extends BookmarksFolderLocalServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long userId, long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addFolder(
-			null, userId, plid, parentFolderId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			null, userId, parentFolderId, name, description, serviceContext);
 	}
 
 	public BookmarksFolder addFolder(
-			String uuid, long userId, long plid, long parentFolderId,
-			String name, String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			uuid, userId, plid, parentFolderId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public BookmarksFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			null, userId, plid, parentFolderId, name, description, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public BookmarksFolder addFolder(
-			String uuid, long userId, long plid, long parentFolderId,
-			String name, String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String uuid, long userId, long parentFolderId, String name,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
@@ -131,15 +103,17 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addFolderResources(
-				folder, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				folder, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
-			addFolderResources(folder, communityPermissions, guestPermissions);
+			addFolderResources(
+				folder, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return folder;

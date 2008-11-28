@@ -83,32 +83,12 @@ import java.rmi.RemoteException;
 public class BookmarksEntryServiceSoap {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap addEntry(
 		long folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
-					name, url, comments, tagsEntries, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap addEntry(
-		long folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
-					name, url, comments, tagsEntries, communityPermissions,
-					guestPermissions);
+					name, url, comments, serviceContext);
 
 			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}
@@ -161,10 +141,11 @@ public class BookmarksEntryServiceSoap {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap updateEntry(
 		long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
-		java.lang.String[] tagsEntries) throws RemoteException {
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.updateEntry(entryId,
-					folderId, name, url, comments, tagsEntries);
+					folderId, name, url, comments, serviceContext);
 
 			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}

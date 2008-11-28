@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -60,44 +61,16 @@ public class BookmarksEntryLocalServiceImpl
 
 	public BookmarksEntry addEntry(
 			long userId, long folderId, String name, String url,
-			String comments, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, folderId, name, url, comments, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			null, userId, folderId, name, url, comments, serviceContext);
 	}
 
 	public BookmarksEntry addEntry(
 			String uuid, long userId, long folderId, String name, String url,
-			String comments, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			uuid, userId, folderId, name, url, comments, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public BookmarksEntry addEntry(
-			long userId, long folderId, String name, String url,
-			String comments, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			null, userId, folderId, name, url, comments, tagsEntries, null,
-			null, communityPermissions, guestPermissions);
-	}
-
-	public BookmarksEntry addEntry(
-			String uuid, long userId, long folderId, String name, String url,
-			String comments, String[] tagsEntries,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -132,28 +105,30 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addEntryResources(
-				folder, entry, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				folder, entry, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addEntryResources(
-				folder, entry, communityPermissions, guestPermissions);
+				folder, entry, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		// Tags
 
-		updateTagsAsset(userId, entry, tagsEntries);
+		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
 		try {
 			Indexer.addEntry(
 				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
-				name, url, comments, tagsEntries, entry.getExpandoBridge());
+				name, url, comments, serviceContext.getTagsEntries(),
+				entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + entryId, se);
@@ -381,7 +356,7 @@ public class BookmarksEntryLocalServiceImpl
 
 	public BookmarksEntry updateEntry(
 			long userId, long entryId, long folderId, String name, String url,
-			String comments, String[] tagsEntries)
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -407,15 +382,15 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(userId, entry, tagsEntries);
+		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
 		try {
 			Indexer.updateEntry(
 				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
-				entry.getEntryId(), name, url, comments, tagsEntries,
-				entry.getExpandoBridge());
+				entry.getEntryId(), name, url, comments,
+				serviceContext.getTagsEntries(), entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + entryId, se);

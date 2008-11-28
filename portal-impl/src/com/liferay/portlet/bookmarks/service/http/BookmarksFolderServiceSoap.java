@@ -82,31 +82,13 @@ import java.rmi.RemoteException;
  */
 public class BookmarksFolderServiceSoap {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(plid,
-					parentFolderId, name, description, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap addFolder(
-		long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(plid,
-					parentFolderId, name, description, communityPermissions,
-					guestPermissions);
+			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(parentFolderId,
+					name, description, serviceContext);
 
 			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
 		}

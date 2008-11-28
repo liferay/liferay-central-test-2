@@ -33,6 +33,7 @@ import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
@@ -316,8 +317,11 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				BookmarksEntry.class, entry.getEntryId());
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		if ((folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {
@@ -348,20 +352,18 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					BookmarksEntryLocalServiceUtil.updateEntry(
 						userId, existingEntry.getEntryId(), folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
-						tagsEntries);
+						serviceContext);
 				}
 				catch (NoSuchEntryException nsee) {
 					BookmarksEntryLocalServiceUtil.addEntry(
 						entry.getUuid(), userId, folderId, entry.getName(),
-						entry.getUrl(), entry.getComments(), tagsEntries,
-						addCommunityPermissions, addGuestPermissions);
+						entry.getUrl(), entry.getComments(), serviceContext);
 				}
 			}
 			else {
 				BookmarksEntryLocalServiceUtil.addEntry(
 					userId, folderId, entry.getName(), entry.getUrl(),
-					entry.getComments(), tagsEntries, addCommunityPermissions,
-					addGuestPermissions);
+					entry.getComments(), serviceContext);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -377,12 +379,14 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
-		long plid = context.getPlid();
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setPlid(context.getPlid());
 
 		if ((parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -415,9 +419,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, plid, parentFolderId,
+						folder.getUuid(), userId, parentFolderId,
 						folder.getName(), folder.getDescription(),
-						addCommunityPermissions, addGuestPermissions);
+						serviceContext);
 				}
 				else {
 					existingFolder =
@@ -428,9 +432,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId, folder.getName(),
-					folder.getDescription(), addCommunityPermissions,
-					addGuestPermissions);
+					userId, parentFolderId, folder.getName(),
+					folder.getDescription(), serviceContext);
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());

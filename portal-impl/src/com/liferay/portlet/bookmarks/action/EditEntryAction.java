@@ -27,9 +27,10 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
@@ -151,20 +152,15 @@ public class EditEntryAction extends PortletAction {
 		String url = ParamUtil.getString(actionRequest, "url");
 		String comments = ParamUtil.getString(actionRequest, "comments");
 
-		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
-
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			BookmarksEntry.class.getName(), actionRequest);
 
 		if (entryId <= 0) {
 
 			// Add entry
 
 			BookmarksEntry entry = BookmarksEntryServiceUtil.addEntry(
-				folderId, name, url, comments, tagsEntries,
-				communityPermissions, guestPermissions);
+				folderId, name, url, comments, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, BookmarksEntry.class.getName(),
@@ -175,7 +171,7 @@ public class EditEntryAction extends PortletAction {
 			// Update entry
 
 			BookmarksEntryServiceUtil.updateEntry(
-				entryId, folderId, name, url, comments, tagsEntries);
+				entryId, folderId, name, url, comments, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(
