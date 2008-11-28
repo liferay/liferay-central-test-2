@@ -46,7 +46,7 @@
 
 		List<Portlet> portlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), category);
 
-		portlets = filterPortlets(permissionChecker, scopeGroupId, category, portlets);
+		portlets = filterPortlets(permissionChecker, themeDisplay.getScopeGroup(), category, portlets);
 
 		if (portlets.size() > 0) {
 			String title = null;
@@ -94,19 +94,33 @@
 </div>
 
 <%!
-public static final List<Portlet> filterPortlets(PermissionChecker permissionChecker, Long groupId, String category, List<Portlet> portlets) throws Exception {
-	if (permissionChecker.isCompanyAdmin()) {
-		return portlets;
-	}
-
-	if (category.equals(PortletCategoryKeys.CONTENT) && permissionChecker.isCommunityAdmin(groupId)) {
-		return portlets;
-	}
+public static final List<Portlet> filterPortlets(PermissionChecker permissionChecker, Group group, String category, List<Portlet> portlets) throws Exception {
+	boolean isContentCategory = category.equals(PortletCategoryKeys.CONTENT);
 
 	List<Portlet> filteredPortlets = new ArrayList<Portlet>();
 
-	for (Portlet portlet : portlets) {
-		if ((!category.equals(PortletCategoryKeys.CONTENT) && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
+	if (isContentCategory && group.isLayout()) {
+		for (Portlet portlet : portlets) {
+			if (portlet.isScopeable()) {
+				filteredPortlets.add(portlet);
+			}
+		}
+	}
+	else {
+		filteredPortlets.addAll(portlets);
+	}
+
+	if (permissionChecker.isCompanyAdmin()) {
+		return filteredPortlets;
+	}
+
+	if (category.equals(PortletCategoryKeys.CONTENT) && permissionChecker.isCommunityAdmin(group.getGroupId())) {
+		return filteredPortlets;
+	}
+
+	
+	for (Portlet portlet : filteredPortlets) {
+		if ((isContentCategory && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
 			filteredPortlets.add(portlet);
 		}
 	}
