@@ -29,6 +29,7 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -38,6 +39,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -393,9 +395,18 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public void setUserRoles(long userId, long[] roleIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		userPersistence.setRoles(userId, roleIds);
+
+		User user = userLocalService.getUser(userId);
+
+		Role role = roleLocalService.getRole(
+			user.getCompanyId(), RoleConstants.USER);
+
+		if (!ArrayUtil.contains(roleIds, role.getRoleId())) {
+			userPersistence.addRole(userId, role.getRoleId());
+		}
 
 		PermissionCacheUtil.clearCache();
 	}

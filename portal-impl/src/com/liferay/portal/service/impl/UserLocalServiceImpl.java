@@ -1682,7 +1682,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
+
+		Role role = rolePersistence.findByPrimaryKey(roleId);
+
+		if (role.getName().equals(RoleConstants.USER)) {
+			return;
+		}
 
 		rolePersistence.removeUsers(roleId, userIds);
 
@@ -1697,7 +1703,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetRoleUsers(long roleId, List<User> users)
-		throws SystemException {
+		throws PortalException, SystemException {
+
+		Role role = rolePersistence.findByPrimaryKey(roleId);
+
+		if (role.getName().equals(RoleConstants.USER)) {
+			return;
+		}
 
 		rolePersistence.removeUsers(roleId, users);
 

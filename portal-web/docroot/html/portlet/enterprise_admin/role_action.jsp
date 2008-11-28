@@ -32,6 +32,12 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Role role = (Role)row.getObject();
+
+boolean isSpecialRole = false;
+
+if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleConstants.OWNER) || !role.getName().equals(RoleConstants.USER)) {
+	isSpecialRole = true;
+}
 %>
 
 <liferay-ui:icon-menu>
@@ -45,7 +51,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<c:if test="<%= !role.getName().equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= !isSpecialRole && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= Role.class.getName() %>"
 			modelResourceDescription="<%= role.getTitle(locale) %>"
@@ -66,7 +72,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="define_permissions" url="<%= editRolePermissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !role.getName().equals(RoleConstants.OWNER) && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
+	<c:if test="<%= !isSpecialRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
@@ -76,7 +82,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 	</c:if>
 
-	<c:if test="<%= !role.getName().equals(RoleConstants.OWNER) && (role.getType() == RoleConstants.TYPE_REGULAR) %>">
+	<c:if test="<%= !isSpecialRole && (role.getType() == RoleConstants.TYPE_REGULAR) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="tabs1" value="users" />
