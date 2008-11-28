@@ -89,10 +89,10 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 						<c:choose>
 							<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
 
-							    <%
+								<%
 								String currentGroupLabel = LanguageUtil.get(pageContext, "default");
 
-							    List<Layout> currentGroupLayouts = new ArrayList<Layout>();
+								List<Layout> currentGroupLayouts = new ArrayList<Layout>();
 
 								currentGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(currentGroup.getGroupId(), false));
 								currentGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(currentGroup.getGroupId(), true));
@@ -111,7 +111,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 										<nobr class="lfr-title-scope-selector">
 											<liferay-ui:message key="with-scope" /> <a href="javascript: ;" class="lfr-scope-selector"><%= scopeLayout == null ? currentGroupLabel : scopeLayout.getName(locale) %></a>
 										</nobr>
-								    </c:if>
+									</c:if>
 								</h2>
 
 								<div class="lfr-panel-container lfr-floating-container" id="groupPanel">
