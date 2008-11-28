@@ -717,6 +717,10 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public long getDefaultCompanyId() {
+		return PortalInstances.getDefaultCompanyId();
+	}
+
 	public Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException {

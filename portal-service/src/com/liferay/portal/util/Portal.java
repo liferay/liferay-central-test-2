@@ -147,6 +147,8 @@ public interface Portal {
 			PortalException pe)
 		throws PortalException;
 
+	public long getDefaultCompanyId();
+
 	public Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException;

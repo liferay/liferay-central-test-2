@@ -196,6 +196,10 @@ public class PortalUtil {
 		return getPortal().getDate(month, day, year, hour, min, timeZone, pe);
 	}
 
+	public static long getDefaultCompanyId() {
+		return getPortal().getDefaultCompanyId();
+	}
+
 	public static Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException {
