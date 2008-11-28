@@ -172,8 +172,8 @@ String curSection = mainSections[0];
 		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
 	};
 
-	function <portlet:namespace />saveUser() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (selUser == null) ? Constants.ADD : Constants.UPDATE %>";
+	function <portlet:namespace />saveUser(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 
 		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
 
@@ -258,7 +258,7 @@ String curSection = mainSections[0];
 				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
 				<div class="button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser();" />
+					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('<%= (selUser == null) ? Constants.ADD : Constants.UPDATE %>');" />
 
 					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(backURL) %>';" />
 				</div>
