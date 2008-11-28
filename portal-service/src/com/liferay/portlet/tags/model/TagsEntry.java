@@ -56,4 +56,11 @@ public interface TagsEntry extends TagsEntryModel {
 	public boolean isCategory()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public java.lang.String getParentName()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
 }

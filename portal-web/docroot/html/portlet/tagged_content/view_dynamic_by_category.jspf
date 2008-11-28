@@ -41,7 +41,7 @@ Map<String, List<TagsAsset>> assetsByCategory = new TreeMap<String, List<TagsAss
 List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), total);
 
 for (TagsAsset asset : assets) {
-	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId());
+	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), TagsEntryConstants.FOLKSONOMY_TAG);
 
 	for (TagsEntry assetEntry : assetEntries) {
 		List<TagsProperty> properties = TagsPropertyLocalServiceUtil.getProperties(assetEntry.getEntryId());

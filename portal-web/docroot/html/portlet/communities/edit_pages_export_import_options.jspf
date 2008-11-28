@@ -409,6 +409,12 @@
 
 		<label for="<portlet:namespace /><%= PortletDataHandlerKeys.THEME %>Checkbox"><liferay-ui:message key="theme" /></label> <liferay-ui:icon-help message="export-import-theme-help" />
 	</li>
+
+	<li class="tree-item">
+		<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.CATEGORIES %>" defaultValue="<%= false %>" />
+
+		<label for="<portlet:namespace /><%= PortletDataHandlerKeys.CATEGORIES %>Checkbox"><liferay-ui:message key="categories" /></label> <liferay-ui:icon-help message="export-import-categories-help" />
+	</li>
 </ul>
 
 <br />

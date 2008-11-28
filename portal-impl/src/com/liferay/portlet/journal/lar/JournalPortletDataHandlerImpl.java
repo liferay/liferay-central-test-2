@@ -180,6 +180,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			context.addTagsCategories(
+				JournalArticle.class, article.getResourcePrimKey());
+		}
+
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.addComments(
 				JournalArticle.class, article.getResourcePrimKey());
@@ -734,6 +739,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String[] tagsCategories = null;
 		String[] tagsEntries = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			tagsCategories = context.getTagsCategories(
+				JournalArticle.class, article.getResourcePrimKey());
+		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
@@ -1308,14 +1318,14 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
-			_comments, _ratings, _tags
+			_categories, _comments, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_articles, _structuresTemplatesAndFeeds, _images, _comments,
-			_ratings, _tags
+			_articles, _structuresTemplatesAndFeeds, _images, _categories,
+			_comments, _ratings, _tags
 		};
 	}
 
@@ -1634,6 +1644,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _images =
 		new PortletDataHandlerBoolean(_NAMESPACE, "images");
+
+	private static final PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");

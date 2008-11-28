@@ -200,6 +200,49 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), entries);
 	}
 
+	public void addTagsCategories(Class<?> classObj, long classPK)
+		throws PortalException, SystemException {
+
+		TagsAsset tagsAsset = null;
+
+		try {
+			tagsAsset = TagsAssetLocalServiceUtil.getAsset(
+				classObj.getName(), classPK);
+		}
+		catch (NoSuchAssetException nsae) {
+
+			// LEP-4979
+
+			return;
+		}
+
+		List<TagsEntry> categoriesList = tagsAsset.getCategories();
+
+		if (categoriesList.size() == 0) {
+			return;
+		}
+
+		String[] categories = new String[categoriesList.size()];
+
+		Iterator<TagsEntry> itr = categoriesList.iterator();
+
+		for (int i = 0; itr.hasNext(); i++) {
+			TagsEntry tagsEntry = itr.next();
+
+			categories[i] = tagsEntry.getName();
+		}
+
+		_tagsCategoriesMap.put(
+			getPrimaryKeyString(classObj, classPK), categories);
+	}
+
+	public void addTagsCategories(
+			String className, long classPK, String[] values) {
+
+		_tagsCategoriesMap.put(
+			getPrimaryKeyString(className, classPK), values);
+	}
+
 	public void addTagsEntries(Class<?> classObj, long classPK)
 		throws PortalException, SystemException {
 
@@ -216,24 +259,23 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		List<TagsEntry> tagsEntriesList = tagsAsset.getEntries();
+		List<TagsEntry> tagsList = tagsAsset.getTags();
 
-		if (tagsEntriesList.size() == 0) {
+		if (tagsList.size() == 0) {
 			return;
 		}
 
-		String[] tagsEntries = new String[tagsEntriesList.size()];
+		String[] tags = new String[tagsList.size()];
 
-		Iterator<TagsEntry> itr = tagsEntriesList.iterator();
+		Iterator<TagsEntry> itr = tagsList.iterator();
 
 		for (int i = 0; itr.hasNext(); i++) {
 			TagsEntry tagsEntry = itr.next();
 
-			tagsEntries[i] = tagsEntry.getName();
+			tags[i] = tagsEntry.getName();
 		}
 
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK), tagsEntries);
+		_tagsEntriesMap.put(getPrimaryKeyString(classObj, classPK), tags);
 	}
 
 	public void addTagsEntries(
@@ -387,6 +429,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Date getStartDate() {
 		return _startDate;
+	}
+
+	public Map<String, String[]> getTagsCategories() {
+		return _tagsCategoriesMap;
+	}
+
+	public String[] getTagsCategories(Class<?> classObj, long classPK) {
+		return _tagsCategoriesMap.get(
+			getPrimaryKeyString(classObj, classPK));
 	}
 
 	public Map<String, String[]> getTagsEntries() {
@@ -662,6 +713,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, String[]> _parameterMap;
 	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
 		new HashMap<String, List<RatingsEntry>>();
+	private Map<String, String[]> _tagsCategoriesMap =
+		new HashMap<String, String[]>();
 	private Map<String, String[]> _tagsEntriesMap =
 		new HashMap<String, String[]>();
 	private Set<String> _notUniquePerLayout = new HashSet<String>();

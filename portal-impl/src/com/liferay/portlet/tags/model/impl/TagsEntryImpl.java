@@ -24,8 +24,13 @@ package com.liferay.portlet.tags.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsVocabulary;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
 
 /**
@@ -33,11 +38,33 @@ import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Bruno Farache
  *
  */
 public class TagsEntryImpl extends TagsEntryModelImpl implements TagsEntry {
 
 	public TagsEntryImpl() {
+	}
+
+	public String getParentName() throws PortalException, SystemException {
+		String name = StringPool.BLANK;
+
+		if (getParentEntryId() == TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID) {
+			return name;
+		}
+
+		try {
+			name = TagsEntryLocalServiceUtil.getEntry(
+				getParentEntryId()).getName();
+		}
+		catch (NoSuchEntryException nsee) {
+		}
+
+		return name;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", StringPool.BLANK);
 	}
 
 	public TagsVocabulary getVocabulary()

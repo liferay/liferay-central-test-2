@@ -118,7 +118,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
 		}
 
-		if (properties != null) {
+		if (properties == null) {
 			properties = new String[0];
 		}
 
@@ -308,12 +308,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		catch (NoSuchEntryException nsee) {
 			return false;
 		}
-	}
-
-	public List<TagsEntry> getAssetEntries(long assetId)
-		throws SystemException {
-
-		return getAssetEntries(assetId, TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 	public List<TagsEntry> getAssetEntries(long assetId, boolean folksonomy)

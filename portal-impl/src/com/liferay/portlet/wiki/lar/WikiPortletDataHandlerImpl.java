@@ -119,13 +119,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _attachments, _comments, _tags
+			_nodesAndPages, _attachments, _categories, _comments, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _attachments, _comments, _tags
+			_nodesAndPages, _attachments, _categories, _comments, _tags
 		};
 	}
 
@@ -250,6 +250,11 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			page.setUserUuid(page.getUserUuid());
 
+			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+				context.addTagsCategories(
+					WikiPage.class, page.getResourcePrimKey());
+			}
+
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 				context.addComments(WikiPage.class, page.getResourcePrimKey());
 			}
@@ -361,7 +366,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
 
+		String[] tagsCategories = null;
 		String[] tagsEntries = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			tagsCategories = context.getTagsCategories(
+				WikiPage.class, page.getResourcePrimKey());
+		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
@@ -370,6 +381,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setTagsCategories(tagsCategories);
 		serviceContext.setTagsEntries(tagsEntries);
 
 		WikiPage existingPage = null;
@@ -491,6 +503,9 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _attachments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "attachments");
+
+	private static final PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");

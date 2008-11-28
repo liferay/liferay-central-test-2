@@ -214,11 +214,6 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
-		long assetId) throws com.liferay.portal.SystemException {
-		return getService().getAssetEntries(assetId);
-	}
-
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
 		long assetId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
 		return getService().getAssetEntries(assetId, folksonomy);

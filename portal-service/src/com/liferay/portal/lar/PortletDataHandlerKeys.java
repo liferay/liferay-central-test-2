@@ -30,6 +30,8 @@ package com.liferay.portal.lar;
  */
 public class PortletDataHandlerKeys {
 
+	public static final String CATEGORIES = "CATEGORIES";
+
 	public static final String DATA_STRATEGY = "DATA_STRATEGY";
 
 	public static final String DATA_STRATEGY_COPY_AS_NEW =

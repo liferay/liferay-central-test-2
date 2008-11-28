@@ -186,9 +186,10 @@ public class PortletImporter {
 
 		context.setImportGroupId(importGroupId);
 
-		// Read comments, ratings, and tags to make them available to the data
-		// handlers through the context
+		// Read categories, comments, ratings, and tags to make them available
+		// to the data handlers through the context
 
+		readCategories(context, root);
 		readComments(context, root);
 		readRatings(context, root);
 		readTags(context, root);
@@ -611,6 +612,37 @@ public class PortletImporter {
 
 				context.addRatingsEntries(
 					className, new Long(classPK), ratings);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	protected void readCategories(PortletDataContext context, Element parentEl)
+		throws SystemException {
+
+		try {
+			String xml = context.getZipEntryAsString(
+				context.getImportRootPath() + "/categories.xml");
+
+			Document doc = SAXReaderUtil.read(xml);
+
+			Element root = doc.getRootElement();
+
+			List<Element> assets = root.elements("asset");
+
+			for (Element asset : assets) {
+				String className = GetterUtil.getString(
+					asset.attributeValue("class-name"));
+				long classPK = GetterUtil.getLong(
+					asset.attributeValue("class-pk"));
+				String entries = GetterUtil.getString(
+					asset.attributeValue("entries"));
+
+				context.addTagsCategories(
+					className, new Long(classPK),
+					StringUtil.split(entries, ","));
 			}
 		}
 		catch (Exception e) {

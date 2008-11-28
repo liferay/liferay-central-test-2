@@ -49,4 +49,6 @@ package com.liferay.portlet.tags.model;
  *
  */
 public interface TagsVocabulary extends TagsVocabularyModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
 }

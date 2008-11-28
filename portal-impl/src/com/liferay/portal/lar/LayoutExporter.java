@@ -60,14 +60,21 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityContextPool;
+import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
+import com.liferay.portlet.tags.model.TagsVocabulary;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
 import com.liferay.util.MapUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,6 +120,8 @@ public class LayoutExporter {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
+		boolean exportCategories = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.CATEGORIES);
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
@@ -129,6 +138,7 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.THEME);
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Export categories " + exportCategories);
 			_log.debug("Export permissions " + exportPermissions);
 			_log.debug("Export user permissions " + exportUserPermissions);
 			_log.debug("Export portlet data " + exportPortletData);
@@ -383,6 +393,14 @@ public class LayoutExporter {
 				exportPortletUserPreferences, exportUserPermissions);
 		}
 
+		// Categories
+
+		if (exportCategories) {
+			exportGroupCategories(context);
+		}
+
+		_portletExporter.exportCategories(context, root);
+
 		// Comments
 
 		_portletExporter.exportComments(context, root);
@@ -427,6 +445,46 @@ public class LayoutExporter {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+	}
+
+	protected void exportGroupCategories(PortletDataContext context)
+		throws SystemException {
+
+		try {
+			Document doc = SAXReaderUtil.createDocument();
+
+			Element root = doc.addElement("categories-hierarchy");
+
+			List<TagsVocabulary> vocabularies =
+				TagsVocabularyLocalServiceUtil.getGroupVocabularies(
+					context.getGroupId(),
+					TagsEntryConstants.FOLKSONOMY_CATEGORY);
+
+			for (TagsVocabulary vocabulary : vocabularies) {
+				Element vocabularyEl = root.addElement("vocabulary");
+
+				String name = vocabulary.getName();
+
+				vocabularyEl.addAttribute("name", name);
+
+				vocabularyEl.addAttribute("userUuid", vocabulary.getUserUuid());
+
+				List<TagsEntry> categories =
+					TagsEntryLocalServiceUtil.getGroupVocabularyEntries(
+						context.getGroupId(), name);
+
+				orderCategories(
+					categories, vocabularyEl,
+					TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/categories-hierarchy.xml",
+				doc.formattedString());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
@@ -614,6 +672,35 @@ public class LayoutExporter {
 		sb.append(image.getType());
 
 		return sb.toString();
+	}
+
+	protected void orderCategories(
+			List<TagsEntry> categories, Element root, long parentEntryId)
+		throws PortalException, SystemException {
+
+		List<TagsEntry> parents = new ArrayList<TagsEntry>();
+
+		Iterator<TagsEntry> itr = categories.iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry category = itr.next();
+
+			if (category.getParentEntryId() == parentEntryId) {
+				Element categoryEl = root.addElement("category");
+
+				categoryEl.addAttribute("name", category.getName());
+				categoryEl.addAttribute(
+					"parentEntryName", category.getParentName());
+				categoryEl.addAttribute("userUuid", category.getUserUuid());
+
+				parents.add(category);
+				itr.remove();
+			}
+		}
+
+		for (TagsEntry parent : parents) {
+			orderCategories(categories, root, parent.getEntryId());
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutExporter.class);

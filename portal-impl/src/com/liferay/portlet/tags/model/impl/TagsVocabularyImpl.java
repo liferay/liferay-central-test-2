@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.tags.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.model.TagsVocabulary;
 
 /**
@@ -34,6 +37,10 @@ public class TagsVocabularyImpl
 	extends TagsVocabularyModelImpl implements TagsVocabulary {
 
 	public TagsVocabularyImpl() {
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", StringPool.BLANK);
 	}
 
 }

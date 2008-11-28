@@ -78,6 +78,11 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.tags.DuplicateEntryException;
+import com.liferay.portlet.tags.DuplicateVocabularyException;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MapUtil;
 
@@ -121,6 +126,8 @@ public class LayoutImporter {
 			Boolean.TRUE.booleanValue());
 		boolean deletePortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
+		boolean importCategories = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.CATEGORIES);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
@@ -146,6 +153,7 @@ public class LayoutImporter {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete portlet data " + deletePortletData);
+			_log.debug("Import categories " + importCategories);
 			_log.debug("Import permissions " + importPermissions);
 			_log.debug("Import user permissions " + importUserPermissions);
 			_log.debug("Import portlet data " + importPortletData);
@@ -282,9 +290,14 @@ public class LayoutImporter {
 			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
 			wapTheme);
 
-		// Read comments, ratings, and tags to make them available to the data
-		// handlers through the context
+		// Read categories, comments, ratings, and tags to make them available
+		// to the data handlers through the context
 
+		if (importCategories) {
+			importGroupCategories(context);
+		}
+
+		_portletImporter.readCategories(context, root);
 		_portletImporter.readComments(context, root);
 		_portletImporter.readRatings(context, root);
 		_portletImporter.readTags(context, root);
@@ -735,6 +748,71 @@ public class LayoutImporter {
 		}
 
 		return actions;
+	}
+
+	protected void importGroupCategories(PortletDataContext context)
+		throws SystemException {
+
+		try {
+			String xml = context.getZipEntryAsString(
+				context.getImportRootPath() + "/categories-hierarchy.xml");
+
+			Document doc = SAXReaderUtil.read(xml);
+
+			Element root = doc.getRootElement();
+
+			List<Element> vocabularies = root.elements("vocabulary");
+
+			for (Element vocabularyEl : vocabularies) {
+				String vocabularyName = GetterUtil.getString(
+					vocabularyEl.attributeValue("name"));
+
+				String userUuid = GetterUtil.getString(
+					vocabularyEl.attributeValue("userUuid"));
+
+				boolean addCommunityPermissions = true;
+				boolean addGuestPermissions = true;
+
+				String[] communityPermissions = null;
+				String[] guestPermissions = null;
+
+				try {
+					TagsVocabularyLocalServiceUtil.addVocabularyToGroup(
+						context.getUserId(userUuid), context.getGroupId(),
+						vocabularyName, TagsEntryConstants.FOLKSONOMY_CATEGORY,
+						addCommunityPermissions, addGuestPermissions,
+						communityPermissions, guestPermissions);
+				}
+				catch (DuplicateVocabularyException dve) {
+				}
+
+				List<Element> categories = vocabularyEl.elements("category");
+
+				for (Element category : categories) {
+					String categoryName = GetterUtil.getString(
+						category.attributeValue("name"));
+
+					String parentEntryName = GetterUtil.getString(
+						category.attributeValue("parentEntryName"));
+
+					String[] properties = null;
+
+					try {
+						TagsEntryLocalServiceUtil.addEntryToGroup(
+							context.getUserId(userUuid), context.getGroupId(),
+							parentEntryName, categoryName, vocabularyName,
+							properties, addCommunityPermissions,
+							addGuestPermissions, communityPermissions,
+							guestPermissions);
+					}
+					catch (DuplicateEntryException dee) {
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	protected void importGroupPermissions(

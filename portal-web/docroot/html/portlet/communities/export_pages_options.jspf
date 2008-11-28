@@ -318,6 +318,12 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 				</c:choose>
 			</ul>
 		</li>
+
+		<li class="tree-item">
+			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.CATEGORIES %>" defaultValue="<%= false %>" />
+
+			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.CATEGORIES %>Checkbox"><liferay-ui:message key="categories" /></label> <liferay-ui:icon-help message="export-import-categories-help" />
+		</li>
 	</ul>
 </div>
 

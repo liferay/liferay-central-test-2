@@ -25,6 +25,7 @@ package com.liferay.portlet.tags.model.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.util.List;
@@ -40,8 +41,14 @@ public class TagsAssetImpl extends TagsAssetModelImpl implements TagsAsset {
 	public TagsAssetImpl() {
 	}
 
-	public List<TagsEntry> getEntries() throws SystemException {
-		return TagsEntryLocalServiceUtil.getAssetEntries(getAssetId());
+	public List<TagsEntry> getCategories() throws SystemException {
+		return TagsEntryLocalServiceUtil.getAssetEntries(
+			getAssetId(), TagsEntryConstants.FOLKSONOMY_CATEGORY);
+	}
+
+	public List<TagsEntry> getTags() throws SystemException {
+		return TagsEntryLocalServiceUtil.getAssetEntries(
+			getAssetId(), TagsEntryConstants.FOLKSONOMY_TAG);
 	}
 
 }

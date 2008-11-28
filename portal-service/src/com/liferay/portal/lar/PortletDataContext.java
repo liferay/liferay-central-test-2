@@ -72,6 +72,12 @@ public interface PortletDataContext extends Serializable {
 	public void addRatingsEntries(
 		String className, long classPK, List<RatingsEntry> entries);
 
+	public void addTagsCategories(Class<?> classObj, long classPK)
+		throws PortalException, SystemException;
+
+	public void addTagsCategories(
+			String className, long classPK, String[] values);
+
 	public void addTagsEntries(Class<?> classObj, long classPK)
 		throws PortalException, SystemException;
 
@@ -131,6 +137,10 @@ public interface PortletDataContext extends Serializable {
 	public String getRootPath();
 
 	public Date getStartDate();
+
+	public Map<String, String[]> getTagsCategories();
+
+	public String[] getTagsCategories(Class<?> classObj, long classPK);
 
 	public Map<String, String[]> getTagsEntries();
 
