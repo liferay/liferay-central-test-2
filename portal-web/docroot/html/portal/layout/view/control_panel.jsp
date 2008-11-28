@@ -43,6 +43,7 @@ if (ppid.equals(PortletKeys.EXPANDO)) {
 }
 
 String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid);
+List<Layout> scopeLayouts = new ArrayList<Layout>();
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
@@ -66,7 +67,13 @@ String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId()
 		panelCategory = "panel-manage-frontpage";
 	}
 
+	Layout scopeLayout = null;
 	Group currentGroup = themeDisplay.getScopeGroup();
+
+	if (currentGroup.isLayout()){
+		scopeLayout = LayoutLocalServiceUtil.getLayout(currentGroup.getClassPK());
+		currentGroup = scopeLayout.getGroup();
+	}
 	%>
 
 	<div id="content-wrapper">
@@ -81,9 +88,33 @@ String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId()
 					<td>
 						<c:choose>
 							<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
-								<h2><liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= currentGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : currentGroup.getDescriptiveName() %></a></h2>
 
-								<div class="lfr-panel-container lfr-floating-container" id="myPanel">
+							    <%
+								String currentGroupLabel = LanguageUtil.get(pageContext, "default");
+
+							    List<Layout> currentGroupLayouts = new ArrayList<Layout>();
+
+								currentGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(currentGroup.getGroupId(), false));
+								currentGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(currentGroup.getGroupId(), true));
+
+								for (Layout currentGroupLayout : currentGroupLayouts) {
+									if (currentGroupLayout.hasScopeGroup()) {
+										scopeLayouts.add(currentGroupLayout);
+									}
+								}
+								%>
+
+								<h2>
+									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= currentGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : currentGroup.getDescriptiveName() %></a>
+
+									<c:if test="<%= !scopeLayouts.isEmpty() %>">
+										<nobr class="lfr-title-scope-selector">
+											<liferay-ui:message key="with-scope" /> <a href="javascript: ;" class="lfr-scope-selector"><%= scopeLayout == null ? currentGroupLabel : scopeLayout.getName(locale) %></a>
+										</nobr>
+								    </c:if>
+								</h2>
+
+								<div class="lfr-panel-container lfr-floating-container" id="groupPanel">
 
 									<%
 									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
@@ -158,6 +189,31 @@ String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId()
 										</div>
 									</c:if>
 								</div>
+
+							<c:if test="<%= !scopeLayouts.isEmpty() %>">
+								<div class="lfr-panel-container lfr-floating-container" id="scopePanel">
+									<div class="lfr-panel-content">
+
+										<ul>
+											<li>
+												<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", currentGroup.getGroupId()) %>"><%= currentGroupLabel %></a>
+											</li>
+
+											<%
+											for (Layout curScopeLayout : scopeLayouts) {
+											%>
+
+												<li>
+													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
+												</li>
+
+											<%
+											}
+											%>
+
+										  </ul>
+									</div>
+								</c:if>
 							</c:when>
 							<c:when test="<%= category.equals(PortletCategoryKeys.PORTAL) %>">
 								<h2>
@@ -216,7 +272,7 @@ String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId()
 						%>
 
 						<div>
-							<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a>
+							<nobr><a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a></nobr>
 						</div>
 
 					</td>
@@ -268,24 +324,32 @@ else {
 	</div>
 </c:if>
 
-<style type="text/css">
-	.lfr-group-selector {
-		background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 100% 50%;
-		padding: 2px;
-		padding-right: 20px;
-	}
-</style>
+<c:if test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
+	<script>
+		jQuery(
+			function () {
+				new Liferay.FloatingPanel(
+					{
+					container: '#groupPanel',
+					trigger: '.lfr-group-selector',
+					paging: true
+					}
+				);
+			}
+		);
 
-<script>
-	jQuery(
-		function () {
-			new Liferay.FloatingPanel(
-				{
-				container: '#myPanel',
-				trigger: '.lfr-group-selector',
-				paging: true
+		<c:if test="<%= !scopeLayouts.isEmpty() %>">
+			jQuery(
+				function () {
+					new Liferay.FloatingPanel(
+						{
+						container: '#scopePanel',
+						trigger: '.lfr-scope-selector',
+						paging: true
+						}
+					);
 				}
 			);
-		}
-	);
-</script>
+		</c:if>
+	</script>
+</c:if>
