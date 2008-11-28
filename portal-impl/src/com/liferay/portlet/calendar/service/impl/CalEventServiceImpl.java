@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -43,51 +44,26 @@ import java.io.File;
 public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 
 	public CalEvent addEvent(
-			long plid, String title, String description, int startDateMonth,
+			String title, String description, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
 			boolean allDay, boolean timeZoneSensitive, String type,
 			boolean repeating, TZSRecurrence recurrence, String remindBy,
 			int firstReminder, int secondReminder,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.CALENDAR,
-			ActionKeys.ADD_EVENT);
+			getPermissionChecker(), serviceContext.getPlid(),
+			PortletKeys.CALENDAR, ActionKeys.ADD_EVENT);
 
 		return calEventLocalService.addEvent(
-			getUserId(), plid, title, description, startDateMonth, startDateDay,
+			getUserId(), title, description, startDateMonth, startDateDay,
 			startDateYear, startDateHour, startDateMinute, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
 			timeZoneSensitive, type, repeating, recurrence, remindBy,
-			firstReminder, secondReminder, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public CalEvent addEvent(
-			long plid, String title, String description, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int endDateMonth, int endDateDay,
-			int endDateYear, int durationHour, int durationMinute,
-			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, TZSRecurrence recurrence, String remindBy,
-			int firstReminder, int secondReminder,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.CALENDAR,
-			ActionKeys.ADD_EVENT);
-
-		return calEventLocalService.addEvent(
-			getUserId(), plid, title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
-			firstReminder, secondReminder, communityPermissions,
-			guestPermissions);
+			firstReminder, secondReminder, serviceContext);
 	}
 
 	public void deleteEvent(long eventId)

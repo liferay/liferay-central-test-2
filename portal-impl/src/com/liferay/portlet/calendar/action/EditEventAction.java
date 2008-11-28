@@ -35,6 +35,8 @@ import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -43,6 +45,7 @@ import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.NoSuchEventException;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 
 import java.util.ArrayList;
@@ -396,22 +399,19 @@ public class EditEventAction extends PortletAction {
 		int secondReminder = ParamUtil.getInteger(
 			actionRequest, "secondReminder");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CalEvent.class.getName(), actionRequest);
 
 		if (eventId <= 0) {
 
 			// Add event
 
 			CalEventServiceUtil.addEvent(
-				layout.getPlid(), title, description, startDateMonth,
-				startDateDay, startDateYear, startDateHour, startDateMinute,
-				endDateMonth, endDateDay, endDateYear, durationHour,
-				durationMinute, allDay, timeZoneSensitive, type, repeating,
-				recurrence, remindBy, firstReminder, secondReminder,
-				communityPermissions, guestPermissions);
+				title, description, startDateMonth, startDateDay, startDateYear,
+				startDateHour, startDateMinute, endDateMonth, endDateDay,
+				endDateYear, durationHour, durationMinute, allDay,
+				timeZoneSensitive, type, repeating, recurrence, remindBy,
+				firstReminder, secondReminder, serviceContext);
 		}
 		else {
 

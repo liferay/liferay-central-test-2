@@ -73,7 +73,7 @@ import com.liferay.portlet.calendar.service.CalEventServiceUtil;
  *
  */
 public class CalEventServiceJSON {
-	public static JSONObject addEvent(long plid, java.lang.String title,
+	public static JSONObject addEvent(java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -81,39 +81,15 @@ public class CalEventServiceJSON {
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(plid,
-				title, description, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute, endDateMonth,
-				endDateDay, endDateYear, durationHour, durationMinute, allDay,
+		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(title,
+				description, startDateMonth, startDateDay, startDateYear,
+				startDateHour, startDateMinute, endDateMonth, endDateDay,
+				endDateYear, durationHour, durationMinute, allDay,
 				timeZoneSensitive, type, repeating, recurrence, remindBy,
-				firstReminder, secondReminder, addCommunityPermissions,
-				addGuestPermissions);
-
-		return CalEventJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addEvent(long plid, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(plid,
-				title, description, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute, endDateMonth,
-				endDateDay, endDateYear, durationHour, durationMinute, allDay,
-				timeZoneSensitive, type, repeating, recurrence, remindBy,
-				firstReminder, secondReminder, communityPermissions,
-				guestPermissions);
+				firstReminder, secondReminder, serviceContext);
 
 		return CalEventJSONSerializer.toJSONObject(returnValue);
 	}

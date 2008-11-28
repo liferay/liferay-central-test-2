@@ -33,6 +33,7 @@ import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
@@ -221,8 +222,11 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			endDateYear = endCal.get(Calendar.YEAR);
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setPlid(plid);
 
 		CalEvent existingEvent = null;
 
@@ -234,7 +238,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEvent == null) {
 				CalEventLocalServiceUtil.addEvent(
-					event.getUuid(), userId, plid, event.getTitle(),
+					event.getUuid(), userId, event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
 					endDateDay, endDateYear, event.getDurationHour(),
@@ -242,8 +246,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 					event.getTimeZoneSensitive(), event.getType(),
 					event.getRepeating(), event.getRecurrenceObj(),
 					event.getRemindBy(), event.getFirstReminder(),
-					event.getSecondReminder(), addCommunityPermissions,
-					addGuestPermissions);
+					event.getSecondReminder(), serviceContext);
 			}
 			else {
 				CalEventLocalServiceUtil.updateEvent(
@@ -260,15 +263,14 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		else {
 			CalEventLocalServiceUtil.addEvent(
-				userId, plid, event.getTitle(), event.getDescription(),
+				userId, event.getTitle(), event.getDescription(),
 				startDateMonth, startDateDay, startDateYear, startDateHour,
 				startDateMinute, endDateMonth, endDateDay, endDateYear,
 				event.getDurationHour(), event.getDurationMinute(),
 				event.getAllDay(), event.getTimeZoneSensitive(),
 				event.getType(), event.getRepeating(), event.getRecurrenceObj(),
 				event.getRemindBy(), event.getFirstReminder(),
-				event.getSecondReminder(), addCommunityPermissions,
-				addGuestPermissions);
+				event.getSecondReminder(), serviceContext);
 		}
 	}
 
