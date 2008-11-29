@@ -47,9 +47,9 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setTagsEntries(new String[0]);
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setTagsEntries(new String[0]);
 
 		return BookmarksEntryServiceUtil.addEntry(
 			folder.getFolderId(), name, url, comments, serviceContext);

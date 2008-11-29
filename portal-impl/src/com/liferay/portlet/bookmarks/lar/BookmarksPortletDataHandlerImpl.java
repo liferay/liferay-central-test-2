@@ -319,9 +319,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setTagsEntries(tagsEntries);
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		if ((folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {
