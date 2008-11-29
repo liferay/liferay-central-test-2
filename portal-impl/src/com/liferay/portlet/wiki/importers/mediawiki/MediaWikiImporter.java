@@ -519,9 +519,14 @@ public class MediaWikiImporter implements WikiImporter {
 						node.getCompanyId(), categoryName);
 				}
 				catch (NoSuchEntryException nsee) {
-					tagsEntry = TagsEntryLocalServiceUtil.addEntryToGroup(
-						userId, node.getGroupId(), null, categoryName, null,
-						null, Boolean.TRUE, Boolean.TRUE, null, null);
+					ServiceContext serviceContext = new ServiceContext();
+
+					serviceContext.setAddCommunityPermissions(true);
+					serviceContext.setAddGuestPermissions(true);
+					serviceContext.setScopeGroupId(node.getGroupId());
+
+					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
+						userId, null, categoryName, null, null, serviceContext);
 				}
 
 				if (Validator.isNotNull(description)) {
@@ -615,9 +620,14 @@ public class MediaWikiImporter implements WikiImporter {
 					node.getCompanyId(), categoryName);
 			}
 			catch (NoSuchEntryException nsee) {
-				tagsEntry = TagsEntryLocalServiceUtil.addEntryToGroup(
-					userId, node.getGroupId(), null, categoryName, null, null,
-					Boolean.TRUE, Boolean.TRUE, null, null);
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGuestPermissions(true);
+				serviceContext.setScopeGroupId(node.getGroupId());
+
+				tagsEntry = TagsEntryLocalServiceUtil.addEntry(
+					userId, null, categoryName, null, null, serviceContext);
 			}
 
 			tagsEntries.add(tagsEntry.getName());

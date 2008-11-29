@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.tags.DuplicateEntryException;
@@ -66,53 +67,15 @@ import java.util.Set;
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 	public TagsEntry addEntry(
-			long userId, long plid, String parentEntryName, String name,
+			long userId, String parentEntryName, String name,
 			String vocabularyName, String[] properties,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			userId, plid, parentEntryName, name, vocabularyName, properties,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public TagsEntry addEntry(
-			long userId, long plid, String parentEntryName, String name,
-			String vocabularyName, String[] properties,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			userId, plid, parentEntryName, name, vocabularyName, properties,
-			null, null, communityPermissions, guestPermissions);
-	}
-
-	public TagsEntry addEntry(
-			long userId, long plid, String parentEntryName, String name,
-			String vocabularyName, String[] properties,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
-
-		return addEntryToGroup(
-			userId, groupId, parentEntryName, name, vocabularyName, properties,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public TagsEntry addEntryToGroup(
-			long userId, long groupId, String parentEntryName, String name,
-			String vocabularyName, String[] properties,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long groupId = serviceContext.getScopeGroupId();
 
 		if (Validator.isNull(vocabularyName)) {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
@@ -143,10 +106,15 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
-				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
-					userId, groupId, vocabularyName,
-					TagsEntryConstants.FOLKSONOMY_TAG, Boolean.TRUE,
-					Boolean.TRUE, null, null);
+				ServiceContext vocabularyServiceContext = new ServiceContext();
+
+				vocabularyServiceContext.setAddCommunityPermissions(true);
+				vocabularyServiceContext.setAddGuestPermissions(true);
+				vocabularyServiceContext.setScopeGroupId(groupId);
+
+				vocabulary = tagsVocabularyLocalService.addVocabulary(
+					userId, vocabularyName, TagsEntryConstants.FOLKSONOMY_TAG,
+					vocabularyServiceContext);
 			}
 			else {
 				throw nsve;
@@ -184,15 +152,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addEntryResources(
-				entry, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				entry, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
-			addEntryResources(entry, communityPermissions, guestPermissions);
+			addEntryResources(
+				entry, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		// Properties
@@ -252,10 +222,15 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 				getEntry(groupId, name, TagsEntryConstants.FOLKSONOMY_TAG);
 			}
 			catch (NoSuchEntryException nsee) {
-				addEntryToGroup(
-					userId, groupId, null, name, null,
-					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
-					Boolean.TRUE, null, null);
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGuestPermissions(true);
+				serviceContext.setScopeGroupId(groupId);
+
+				addEntry(
+					userId, null, name, null,
+					PropsValues.TAGS_PROPERTIES_DEFAULT, serviceContext);
 			}
 		}
 	}
@@ -564,10 +539,15 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
-				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
-					entry.getUserId(), entry.getGroupId(), vocabularyName,
-					TagsEntryConstants.FOLKSONOMY_TAG, Boolean.TRUE,
-					Boolean.TRUE, null, null);
+				ServiceContext vocabularyServiceContext = new ServiceContext();
+
+				vocabularyServiceContext.setAddCommunityPermissions(true);
+				vocabularyServiceContext.setAddGuestPermissions(true);
+				vocabularyServiceContext.setScopeGroupId(entry.getGroupId());
+
+				vocabulary = tagsVocabularyLocalService.addVocabulary(
+					userId, vocabularyName, TagsEntryConstants.FOLKSONOMY_TAG,
+					vocabularyServiceContext);
 			}
 			else {
 				throw nsve;

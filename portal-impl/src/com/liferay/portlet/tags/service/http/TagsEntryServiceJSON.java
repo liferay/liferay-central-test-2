@@ -74,29 +74,14 @@ import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
  *
  */
 public class TagsEntryServiceJSON {
-	public static JSONObject addEntry(long plid,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public static JSONObject addEntry(java.lang.String parentEntryName,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				parentEntryName, name, vocabularyName, properties,
-				addCommunityPermissions, addGuestPermissions);
-
-		return TagsEntryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addEntry(long plid,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				parentEntryName, name, vocabularyName, properties,
-				communityPermissions, guestPermissions);
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(parentEntryName,
+				name, vocabularyName, properties, serviceContext);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}

@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -534,10 +535,15 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 					groupId, entryNames[i], TagsEntryConstants.FOLKSONOMY_TAG);
 			}
 			catch (NoSuchEntryException nsee) {
-				entry = tagsEntryLocalService.addEntryToGroup(
-					user.getUserId(), groupId, null, entryNames[i], null,
-					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
-					Boolean.TRUE, null, null);
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGuestPermissions(true);
+				serviceContext.setScopeGroupId(groupId);
+
+				entry = tagsEntryLocalService.addEntry(
+					user.getUserId(), null, entryNames[i], null,
+					PropsValues.TAGS_PROPERTIES_DEFAULT, serviceContext);
 			}
 
 			if (entry != null) {

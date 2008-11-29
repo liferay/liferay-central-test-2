@@ -104,60 +104,14 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long plid, java.lang.String parentEntryName,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(userId, plid, parentEntryName, name,
-			vocabularyName, properties, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long plid, java.lang.String parentEntryName,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(userId, plid, parentEntryName, name,
-			vocabularyName, properties, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long plid, java.lang.String parentEntryName,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(userId, plid, parentEntryName, name,
-			vocabularyName, properties, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntryToGroup(
-		long userId, long groupId, java.lang.String parentEntryName,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntryToGroup(userId, groupId, parentEntryName, name,
-			vocabularyName, properties, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+				   .addEntry(userId, parentEntryName, name, vocabularyName,
+			properties, serviceContext);
 	}
 
 	public static void addEntryResources(

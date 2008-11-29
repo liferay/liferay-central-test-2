@@ -54,18 +54,10 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface TagsEntryService {
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(
 		java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

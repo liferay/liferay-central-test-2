@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.tags.model.TagsVocabulary;
@@ -45,31 +46,15 @@ import java.util.List;
 public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 
 	public TagsVocabulary addVocabulary(
-			long plid, String name, boolean folksonomy,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String name, boolean folksonomy, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
-			ActionKeys.ADD_VOCABULARY);
+			getPermissionChecker(), serviceContext.getPlid(),
+			PortletKeys.TAGS_ADMIN, ActionKeys.ADD_VOCABULARY);
 
 		return tagsVocabularyLocalService.addVocabulary(
-			getUserId(), plid, name, folksonomy, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public TagsVocabulary addVocabulary(
-			long plid, String name, boolean folksonomy,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
-			ActionKeys.ADD_VOCABULARY);
-
-		return tagsVocabularyLocalService.addVocabulary(
-			getUserId(), plid, name, folksonomy, communityPermissions,
-			guestPermissions);
+			getUserId(), name, folksonomy, serviceContext);
 	}
 
 	public void deleteVocabulary(long vocabularyId)

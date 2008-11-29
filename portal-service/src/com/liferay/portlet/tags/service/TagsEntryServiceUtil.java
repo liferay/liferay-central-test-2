@@ -45,27 +45,15 @@ package com.liferay.portlet.tags.service;
  *
  */
 public class TagsEntryServiceUtil {
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(plid, parentEntryName, name, vocabularyName,
-			properties, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(plid, parentEntryName, name, vocabularyName,
-			properties, communityPermissions, guestPermissions);
+				   .addEntry(parentEntryName, name, vocabularyName, properties,
+			serviceContext);
 	}
 
 	public static void deleteEntry(long entryId)

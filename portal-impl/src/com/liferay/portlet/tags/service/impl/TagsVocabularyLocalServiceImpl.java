@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.tags.DuplicateVocabularyException;
 import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.base.TagsVocabularyLocalServiceBaseImpl;
@@ -46,48 +46,14 @@ public class TagsVocabularyLocalServiceImpl
 	extends TagsVocabularyLocalServiceBaseImpl {
 
 	public TagsVocabulary addVocabulary(
-			long userId, long plid, String name, boolean folksonomy,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addVocabulary(
-			userId, plid, name, folksonomy,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public TagsVocabulary addVocabulary(
-			long userId, long plid, String name, boolean folksonomy,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addVocabulary(
-			userId, plid, name, folksonomy, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public TagsVocabulary addVocabulary(
-			long userId, long plid, String name, boolean folksonomy,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
-
-		return addVocabularyToGroup(
-			userId, groupId, name, folksonomy, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
-	}
-
-	public TagsVocabulary addVocabularyToGroup(
-			long userId, long groupId, String name, boolean folksonomy,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			long userId, String name, boolean folksonomy,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Vocabulary
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long groupId = serviceContext.getScopeGroupId();
 		name = name.trim();
 		Date now = new Date();
 
@@ -114,16 +80,17 @@ public class TagsVocabularyLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if ((serviceContext.getAddCommunityPermissions() != null) &&
+			(serviceContext.getAddGuestPermissions() != null)) {
 
 			addVocabularyResources(
-				vocabulary, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				vocabulary, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addVocabularyResources(
-				vocabulary, communityPermissions, guestPermissions);
+				vocabulary, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return vocabulary;

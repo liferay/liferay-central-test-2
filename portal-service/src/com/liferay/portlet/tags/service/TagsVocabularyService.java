@@ -55,15 +55,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface TagsVocabularyService {
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, java.lang.String name, boolean folksonomy,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, java.lang.String name, boolean folksonomy,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String name, boolean folksonomy,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

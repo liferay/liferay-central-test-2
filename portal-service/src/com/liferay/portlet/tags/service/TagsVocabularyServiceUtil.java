@@ -46,24 +46,11 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsVocabularyServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, java.lang.String name, boolean folksonomy,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String name, boolean folksonomy,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .addVocabulary(plid, name, folksonomy,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, java.lang.String name, boolean folksonomy,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addVocabulary(plid, name, folksonomy, communityPermissions,
-			guestPermissions);
+		return getService().addVocabulary(name, folksonomy, serviceContext);
 	}
 
 	public static void deleteVocabulary(long vocabularyId)

@@ -104,52 +104,12 @@ public class TagsVocabularyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long plid, java.lang.String name, boolean folksonomy,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, java.lang.String name, boolean folksonomy,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addVocabulary(userId, plid, name, folksonomy,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long plid, java.lang.String name, boolean folksonomy,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addVocabulary(userId, plid, name, folksonomy,
-			communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long plid, java.lang.String name, boolean folksonomy,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addVocabulary(userId, plid, name, folksonomy,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabularyToGroup(
-		long userId, long groupId, java.lang.String name, boolean folksonomy,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addVocabularyToGroup(userId, groupId, name, folksonomy,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+				   .addVocabulary(userId, name, folksonomy, serviceContext);
 	}
 
 	public static void addVocabularyResources(

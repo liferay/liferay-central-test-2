@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsValues;
@@ -246,10 +247,15 @@ public class UpgradeTags extends UpgradeProcess {
 					groupId, vocabularyName);
 			}
 			catch (NoSuchVocabularyException nsve) {
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGuestPermissions(true);
+				serviceContext.setScopeGroupId(groupId);
+
 				vocabulary =
-					TagsVocabularyLocalServiceUtil.addVocabularyToGroup(
-						userId, groupId, vocabularyName, true, Boolean.TRUE,
-						Boolean.TRUE, null, null);
+					TagsVocabularyLocalServiceUtil.addVocabulary(
+						userId, vocabularyName, true, serviceContext);
 			}
 
 			_vocabulariesMap.put(key, vocabulary);

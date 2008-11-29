@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsVocabulary;
@@ -51,16 +51,14 @@ import java.util.List;
 public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 	public TagsEntry addEntry(
-			long plid, String parentEntryName, String name,
-			String vocabularyName, String[] properties,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String parentEntryName, String name, String vocabularyName,
+			String[] properties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		long parentEntryId = TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID;
+		long groupId = serviceContext.getScopeGroupId();
 
 		if (Validator.isNotNull(parentEntryName)) {
-			long groupId = PortalUtil.getScopeGroupId(plid);
-
 			TagsVocabulary vocabulary = tagsVocabularyPersistence.findByG_N(
 				groupId, vocabularyName);
 
@@ -71,39 +69,12 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		}
 
 		TagsEntryPermission.check(
-			getPermissionChecker(), plid, parentEntryId, ActionKeys.ADD_ENTRY);
+			getPermissionChecker(), serviceContext.getPlid(), parentEntryId,
+			ActionKeys.ADD_ENTRY);
 
 		return tagsEntryLocalService.addEntry(
-			getUserId(), plid, parentEntryName, name, vocabularyName,
-			properties, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public TagsEntry addEntry(
-			long plid, String parentEntryName, String name,
-			String vocabularyName, String[] properties,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		long parentEntryId = TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID;
-
-		if (Validator.isNotNull(parentEntryName)) {
-			long groupId = PortalUtil.getScopeGroupId(plid);
-
-			TagsVocabulary vocabulary = tagsVocabularyPersistence.findByG_N(
-				groupId, vocabularyName);
-
-			TagsEntry parentEntry = tagsEntryLocalService.getEntry(
-				groupId, parentEntryName, vocabulary.isFolksonomy());
-
-			parentEntryId = parentEntry.getEntryId();
-		}
-
-		TagsEntryPermission.check(
-			getPermissionChecker(), plid, parentEntryId, ActionKeys.ADD_ENTRY);
-
-		return tagsEntryLocalService.addEntry(
-			getUserId(), plid, parentEntryName, name, vocabularyName,
-			properties, communityPermissions, guestPermissions);
+			getUserId(), parentEntryName, name, vocabularyName, properties,
+			serviceContext);
 	}
 
 	public void deleteEntry(long entryId)

@@ -651,26 +651,18 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var communityPermission = instance._getPermissionsEnabled('entry', 'community');
 		var guestPermission = instance._getPermissionsEnabled('entry', 'guest');
 
-		var serviceParameterTypes = [
-			'long',
-			'java.lang.String',
-			'java.lang.String',
-			'java.lang.String',
-			'[Ljava.lang.String;',
-			'[Ljava.lang.String;',
-			'[Ljava.lang.String;'
-		].join(',');
-
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
-				plid: themeDisplay.getPlid(),
 				parentEntryName: null,
 				name: entryName,
 				vocabulary: vocabulary,
 				properties: [],
-				communityPermissions: communityPermission,
-				guestPermissions: guestPermission,
-				serviceParameterTypes: serviceParameterTypes
+				serviceContext: jQuery.toJSON({
+					plid: themeDisplay.getPlid(),
+					scopeGroupId: themeDisplay.getScopeGroupId(),
+					addCommunityPermissions: communityPermission,
+					addGuestPermissions: guestPermission
+				})
 			},
 			function(message) {
 				var exception = message.exception;
@@ -748,22 +740,16 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var communityPermission = instance._getPermissionsEnabled('vocabulary', 'community');
 		var guestPermission = instance._getPermissionsEnabled('vocabulary', 'guest');
 
-		var serviceParameterTypes = [
-			'long',
-			'java.lang.String',
-			'boolean',
-			'[Ljava.lang.String;',
-			'[Ljava.lang.String;'
-		].join(',');
-
 		Liferay.Service.Tags.TagsVocabulary.addVocabulary(
 			{
-				plid: themeDisplay.getPlid(),
 				name: vocabulary,
 				folksonomy: folksonomy,
-				communityPermissions: communityPermission,
-				guestPermissions: guestPermission,
-				serviceParameterTypes: serviceParameterTypes
+				serviceContext: jQuery.toJSON({
+					plid: themeDisplay.getPlid(),
+					scopeGroupId: themeDisplay.getScopeGroupId(),
+					addCommunityPermissions: communityPermission,
+					addGuestPermissions: guestPermission
+				})
 			},
 			function(message) {
 				var exception = message.exception;

@@ -74,24 +74,13 @@ import com.liferay.portlet.tags.service.TagsVocabularyServiceUtil;
  *
  */
 public class TagsVocabularyServiceJSON {
-	public static JSONObject addVocabulary(long plid, java.lang.String name,
-		boolean folksonomy, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addVocabulary(java.lang.String name,
+		boolean folksonomy,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(plid,
-				name, folksonomy, addCommunityPermissions, addGuestPermissions);
-
-		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addVocabulary(long plid, java.lang.String name,
-		boolean folksonomy, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(plid,
-				name, folksonomy, communityPermissions, guestPermissions);
+		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(name,
+				folksonomy, serviceContext);
 
 		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
 	}

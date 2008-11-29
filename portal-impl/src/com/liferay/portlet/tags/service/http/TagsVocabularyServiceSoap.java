@@ -82,30 +82,12 @@ import java.rmi.RemoteException;
  */
 public class TagsVocabularyServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsVocabularySoap addVocabulary(
-		long plid, java.lang.String name, boolean folksonomy,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String name, boolean folksonomy,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(plid,
-					name, folksonomy, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabularySoap addVocabulary(
-		long plid, java.lang.String name, boolean folksonomy,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(plid,
-					name, folksonomy, communityPermissions, guestPermissions);
+			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(name,
+					folksonomy, serviceContext);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
 		}

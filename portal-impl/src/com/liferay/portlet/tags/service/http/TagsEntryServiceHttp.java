@@ -24,7 +24,6 @@ package com.liferay.portlet.tags.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -75,128 +74,48 @@ import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
  */
 public class TagsEntryServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, java.lang.String parentEntryName,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = parentEntryName;
+			Object paramObj0 = parentEntryName;
 
 			if (parentEntryName == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = vocabularyName;
 
-			if (name == null) {
+			if (vocabularyName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = vocabularyName;
-
-			if (vocabularyName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = properties;
+			Object paramObj3 = properties;
 
 			if (properties == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj4 = serviceContext;
 
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"addEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = parentEntryName;
-
-			if (parentEntryName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = vocabularyName;
-
-			if (vocabularyName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = properties;
-
-			if (properties == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj5 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj6 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
 					"addEntry",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;

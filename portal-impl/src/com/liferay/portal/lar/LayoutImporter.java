@@ -70,6 +70,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -770,18 +771,16 @@ public class LayoutImporter {
 				String userUuid = GetterUtil.getString(
 					vocabularyEl.attributeValue("userUuid"));
 
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
+				ServiceContext serviceContext = new ServiceContext();
 
-				String[] communityPermissions = null;
-				String[] guestPermissions = null;
+				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGuestPermissions(true);
+				serviceContext.setScopeGroupId(context.getGroupId());
 
 				try {
-					TagsVocabularyLocalServiceUtil.addVocabularyToGroup(
-						context.getUserId(userUuid), context.getGroupId(),
-						vocabularyName, TagsEntryConstants.FOLKSONOMY_CATEGORY,
-						addCommunityPermissions, addGuestPermissions,
-						communityPermissions, guestPermissions);
+					TagsVocabularyLocalServiceUtil.addVocabulary(
+						context.getUserId(userUuid), vocabularyName,
+						TagsEntryConstants.FOLKSONOMY_CATEGORY, serviceContext);
 				}
 				catch (DuplicateVocabularyException dve) {
 				}
@@ -798,12 +797,10 @@ public class LayoutImporter {
 					String[] properties = null;
 
 					try {
-						TagsEntryLocalServiceUtil.addEntryToGroup(
-							context.getUserId(userUuid), context.getGroupId(),
-							parentEntryName, categoryName, vocabularyName,
-							properties, addCommunityPermissions,
-							addGuestPermissions, communityPermissions,
-							guestPermissions);
+						TagsEntryLocalServiceUtil.addEntry(
+							context.getUserId(userUuid), parentEntryName,
+							categoryName, vocabularyName, properties,
+							serviceContext);
 					}
 					catch (DuplicateEntryException dee) {
 					}
