@@ -95,11 +95,11 @@
 
 <%!
 public static final List<Portlet> filterPortlets(PermissionChecker permissionChecker, Group group, String category, List<Portlet> portlets) throws Exception {
-	boolean isContentCategory = category.equals(PortletCategoryKeys.CONTENT);
-
 	List<Portlet> filteredPortlets = new ArrayList<Portlet>();
 
-	if (isContentCategory && group.isLayout()) {
+	boolean contentCategory = category.equals(PortletCategoryKeys.CONTENT);
+
+	if (contentCategory && group.isLayout()) {
 		for (Portlet portlet : portlets) {
 			if (portlet.isScopeable()) {
 				filteredPortlets.add(portlet);
@@ -118,9 +118,8 @@ public static final List<Portlet> filterPortlets(PermissionChecker permissionChe
 		return filteredPortlets;
 	}
 
-	
 	for (Portlet portlet : filteredPortlets) {
-		if ((isContentCategory && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
+		if ((contentCategory && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
 			filteredPortlets.add(portlet);
 		}
 	}
