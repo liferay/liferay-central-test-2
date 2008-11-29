@@ -43,6 +43,7 @@ if (ppid.equals(PortletKeys.EXPANDO)) {
 }
 
 String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid);
+
 List<Layout> scopeLayouts = new ArrayList<Layout>();
 %>
 
@@ -68,11 +69,11 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 	}
 
 	Layout scopeLayout = null;
-	Group currentGroup = themeDisplay.getScopeGroup();
+	Group curGroup = themeDisplay.getScopeGroup();
 
-	if (currentGroup.isLayout()){
-		scopeLayout = LayoutLocalServiceUtil.getLayout(currentGroup.getClassPK());
-		currentGroup = scopeLayout.getGroup();
+	if (curGroup.isLayout()){
+		scopeLayout = LayoutLocalServiceUtil.getLayout(curGroup.getClassPK());
+		curGroup = scopeLayout.getGroup();
 	}
 	%>
 
@@ -90,26 +91,26 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 							<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
 
 								<%
-								String currentGroupLabel = LanguageUtil.get(pageContext, "default");
+								String curGroupLabel = LanguageUtil.get(pageContext, "default");
 
-								List<Layout> currentGroupLayouts = new ArrayList<Layout>();
+								List<Layout> curGroupLayouts = new ArrayList<Layout>();
 
-								currentGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(currentGroup.getGroupId(), false));
-								currentGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(currentGroup.getGroupId(), true));
+								curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), false));
+								curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), true));
 
-								for (Layout currentGroupLayout : currentGroupLayouts) {
-									if (currentGroupLayout.hasScopeGroup()) {
-										scopeLayouts.add(currentGroupLayout);
+								for (Layout curGroupLayout : curGroupLayouts) {
+									if (curGroupLayout.hasScopeGroup()) {
+										scopeLayouts.add(curGroupLayout);
 									}
 								}
 								%>
 
 								<h2>
-									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= currentGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : currentGroup.getDescriptiveName() %></a>
+									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : curGroup.getDescriptiveName() %></a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
 										<nobr class="lfr-title-scope-selector">
-											<liferay-ui:message key="with-scope" /> <a href="javascript: ;" class="lfr-scope-selector"><%= scopeLayout == null ? currentGroupLabel : scopeLayout.getName(locale) %></a>
+											<liferay-ui:message key="with-scope" /> <a href="javascript: ;" class="lfr-scope-selector"><%= (scopeLayout == null) ? curGroupLabel : scopeLayout.getName(locale) %></a>
 										</nobr>
 									</c:if>
 								</h2>
@@ -190,28 +191,28 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 									</c:if>
 								</div>
 
-							<c:if test="<%= !scopeLayouts.isEmpty() %>">
-								<div class="lfr-panel-container lfr-floating-container" id="scopePanel">
-									<div class="lfr-panel-content">
-
-										<ul>
-											<li>
-												<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", currentGroup.getGroupId()) %>"><%= currentGroupLabel %></a>
-											</li>
-
-											<%
-											for (Layout curScopeLayout : scopeLayouts) {
-											%>
-
+								<c:if test="<%= !scopeLayouts.isEmpty() %>">
+									<div class="lfr-panel-container lfr-floating-container" id="scopePanel">
+										<div class="lfr-panel-content">
+											<ul>
 												<li>
-													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
+													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><%= curGroupLabel %></a>
 												</li>
 
-											<%
-											}
-											%>
+												<%
+												for (Layout curScopeLayout : scopeLayouts) {
+												%>
 
-										  </ul>
+													<li>
+														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
+													</li>
+
+												<%
+												}
+												%>
+
+											</ul>
+										</div>
 									</div>
 								</c:if>
 							</c:when>
@@ -330,9 +331,9 @@ else {
 			function () {
 				new Liferay.FloatingPanel(
 					{
-					container: '#groupPanel',
-					trigger: '.lfr-group-selector',
-					paging: true
+						container: '#groupPanel',
+						trigger: '.lfr-group-selector',
+						paging: true
 					}
 				);
 			}
@@ -343,9 +344,9 @@ else {
 				function () {
 					new Liferay.FloatingPanel(
 						{
-						container: '#scopePanel',
-						trigger: '.lfr-scope-selector',
-						paging: true
+							container: '#scopePanel',
+							trigger: '.lfr-scope-selector',
+							paging: true
 						}
 					);
 				}
