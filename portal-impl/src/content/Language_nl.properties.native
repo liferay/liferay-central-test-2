@@ -106,7 +106,7 @@ javax.portlet.title.8=Agenda
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Notitieblok
 javax.portlet.title.98=Software catalogus
-javax.portlet.title.99=Tag beheer
+javax.portlet.title.99=Markeringen en Categorieën
 javax.portlet.title.9=Beheerder
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=Het Artikel van de Kennisbank
 model.resource.com.liferay.portal.model.Group=Groep
 model.resource.com.liferay.portal.model.Layout=Pagina
 model.resource.com.liferay.portal.model.Location=Locatie
@@ -1431,6 +1431,7 @@ expired=Vervallen
 export-data=De Gegevens van de uitvoer
 export-date-range-help=Laat de datumwaaier toe om een ondergroep van de uit te voeren gegevens te specificeren. Alle gegevens zullen worden uitgevoerd indien gecre�ërd of gewijzigd op of na de begindatum en vóór de einddatum.
 export-enabled=Sta exporteren toe
+export-import-categories-help=Wanneer geselecteerd, zullen alle categorieën worden uitgevoerd of worden ingevoerd, houdend hun hiërarchie. Tijdens de invoer, zullen de dubbele categorieën niet gecreërd worden als een categorie met zelfde naam reeds bestaat.
 export-import-permissions-assigned-to-users-help=Door de complexiteit van het rechten systeem kan het exporteren of importeren van gebruikersrechten veel tijd kosten. Exporteer alleen als het echt nodig is.
 export-import-permissions-help=De rechten die toegekend zijn aan de geëxporteerde pagina's en individuele portlets zullen worden meegenomen als deze optie aan staat.
 export-import-portlet-permissions-help=De toestemmingen die voor het uitgevoerde portletvenster zullen worden toegewezen worden omvat als deze optie wordt gecontroleerd.
@@ -1590,6 +1591,7 @@ grace-limit-help=Dit bepaalt het aantal keren dat een gebruiker kan inloggen nad
 grace-limit=Limiet
 graduation=Schaalverdeling
 greeting=Begroeting
+group-by-tags-within-tags-set=Groep door Markeringen binnen Geplaatste Markeringen
 group-id=Groep ID
 group-import-search-filter=Groep importeer zoekfilter
 group-mapping=Groepsafbeelding
@@ -2286,8 +2288,10 @@ order-email=Bestellings e-mail
 order=Bestelling
 ordered-list=Bestellings lijst
 orders=Bestellingen
+organization-address=Het Adres van de organisatie
 organization-information=De Informatie van de organisatie
 organization-or-community=Gemeenschap of Organisatie
+organization-phones=De Telefoons van de organisatie
 organization-profile=Organisatie profiel
 organization-roles=Organisatierollen
 organization=Organisatie
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=Toestemmingen die aan Rollen worden toegewezen
 permissions-assigned-to-users=Rechten toegekend aan gebruikers
 permissions=Rechten
 person=Persoon
+personal-address=Persoonlijk Adres
+personal-phones=Persoonlijke telefoons
 personal=Persoonlijk
 personalize-pages=Personaliseer pagina's
 phone-number=Telefoonnummer
@@ -2973,7 +2979,6 @@ select-article=Selecteer het artikel
 select-asset=Selecteer asset
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Selecteer tenminste één community voor elke actie met als scope <i>communities</i>.
 select-box=Selecteer vak
-select-by-tags-category=Selecteer de tag categorie
 select-categories=Selecteer Categorieën
 select-content=Selecteer de inhoud
 select-date=Selecteer een datum

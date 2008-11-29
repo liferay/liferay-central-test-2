@@ -106,7 +106,7 @@ javax.portlet.title.8=カレンダー
 javax.portlet.title.90=ポータル
 javax.portlet.title.97=メモ
 javax.portlet.title.98=プラグインカタログ
-javax.portlet.title.99=タグの管理
+javax.portlet.title.99=札および部門
 javax.portlet.title.9=システム管理
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=知識ベースの記事
 model.resource.com.liferay.portal.model.Group=コミュニティ
 model.resource.com.liferay.portal.model.Layout=ページ
 model.resource.com.liferay.portal.model.Location=支部
@@ -1431,6 +1431,7 @@ expired=公開終了
 export-data=輸出データ
 export-date-range-help=日付の範囲がデータのサブセットを輸出するために指定することを可能にしなさい。 すべてのデータは開始日にまたは後にそして終了日の前に作成されたらか、または変更されて輸出される。
 export-enabled=エクスポートを有効
+export-import-categories-help=選ばれたとき、階層を保つすべての部門は輸出されるか、または輸入される。 輸入の間に、重複した部門は同じ名前の部門が既にあれば作成されない。
 export-import-permissions-assigned-to-users-help=Due to the granularity of the permission system, exporting or importing user permissions can increase processing time significantly. Do not export them unless it is absolutely necessary.
 export-import-permissions-help=The permissions assigned for the exported pages and individual portlet windows will be included if this option is checked.
 export-import-portlet-permissions-help=輸出されたportletの窓に割り当てられた許可はこの選択が点検されれば含まれている。
@@ -1590,6 +1591,7 @@ grace-limit-help=新しいパスワードを入力するためにパスワード
 grace-limit=猶予回数
 graduation=卒業
 greeting=あいさつ
+group-by-tags-within-tags-set=札内のTagsによるグループは置いた
 group-id=グループID
 group-import-search-filter=グループインポート検索フィルタ
 group-mapping=グループマッピング
@@ -2286,8 +2288,10 @@ order-email=注文メール
 order=注文
 ordered-list=数字リスト
 orders=注文
+organization-address=構成住所
 organization-information=構成情報
 organization-or-community=コミュニティか構成
+organization-phones=構成は電話をかける
 organization-profile=組織プロフィール
 organization-roles=組織ロール
 organization=組織
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=許可は役割に割り当てた
 permissions-assigned-to-users=ユーザへの配属権限
 permissions=権限設定
 person=個人
+personal-address=個人的な住所
+personal-phones=個人的な電話
 personal=個人
 personalize-pages=個人用ページ
 phone-number=電話番号
@@ -2973,7 +2979,6 @@ select-article=記事の選択
 select-asset=データの選択
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=セレクトボックス
-select-by-tags-category=タグのカテゴリの指定
 select-categories=部門を選びなさい
 select-content=コンテンツの選択
 select-date=日時の選択

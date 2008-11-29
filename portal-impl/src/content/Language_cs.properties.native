@@ -22,7 +22,7 @@ category.development=Vývoj
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=
 
 ##
 ## Action names

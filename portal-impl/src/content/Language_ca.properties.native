@@ -106,7 +106,6 @@ javax.portlet.title.8=Agenda
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Nota ràpida
 javax.portlet.title.98=Catàleg de programari
-javax.portlet.title.99=Administració d'etiquetes
 javax.portlet.title.9=Administració
 
 ##
@@ -151,7 +150,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=
 model.resource.com.liferay.portal.model.Group=Communitat
 model.resource.com.liferay.portal.model.Layout=Pàgina
 model.resource.com.liferay.portal.model.Location=Localització
@@ -2804,7 +2803,6 @@ select-article=Selecciona un article
 select-asset=Selecciona un bé
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Seleccioneu almenys una comunitat per a cada acció amb abast <i>Communities</i>.
 select-box=Selecciona una caixa
-select-by-tags-category=Selecciona per categories d'etiquetes
 select-content=Selecciona el contingut
 select-date=Selecciona la data
 select-either-a-public-node-or-a-private-node=Seleccioneu un node públic o privat

@@ -106,7 +106,7 @@ javax.portlet.title.8=Calendrier
 javax.portlet.title.90=Portail
 javax.portlet.title.97=Note rapide
 javax.portlet.title.98=Catalogue de logiciels
-javax.portlet.title.99=Administration des étiquettes
+javax.portlet.title.99=Étiquettes et catégories
 javax.portlet.title.9=Administration du portail
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=Article de base de connaissance
 model.resource.com.liferay.portal.model.Group=Communauté
 model.resource.com.liferay.portal.model.Layout=Page
 model.resource.com.liferay.portal.model.Location=Localisation
@@ -1431,6 +1431,7 @@ expired=Déprécié
 export-data=Données d'exportation
 export-date-range-help=Permettez à la gamme de date de spécifier un sous-ensemble des données pour exporter. Toutes les données seront exportées si créé ou modifié ou après à la date de début et avant la date de fin.
 export-enabled=L'exportation est activée
+export-import-categories-help=Quand choisies, toutes les catégories seront exportées ou importées, gardant leur hiérarchie. Pendant l'importation, des catégories doubles ne seront pas créées si une catégorie avec le même nom existe déjà.
 export-import-permissions-assigned-to-users-help=En raison de la granularité du système de permission, l'exportation ou l'importation des permissions d'utilisateurs peut augmenter la durée de la transformation de manière significative. Ne l'exportez pas à moins que cela soit absolument nécessaire.
 export-import-permissions-help=Les permissions assignées sur les pages exportées et les différentes fenêtres de l'application seront incluses si cette option est activée.
 export-import-portlet-permissions-help=Les permissions assignées pour la fenêtre exportée de portlet seront incluses si cette option est vérifiée.
@@ -1590,6 +1591,7 @@ grace-limit-help=Ceci détermine le nombre de fois qu'un utilisateur peut se con
 grace-limit=Durée de vie
 graduation=Diplôme
 greeting=Salutation
+group-by-tags-within-tags-set=Groupe par Tags dans des étiquettes réglées
 group-id=Identifiant du groupe
 group-import-search-filter=Filtre De Recherche D'Importation De Groupe
 group-mapping=Association de groupe
@@ -2286,8 +2288,10 @@ order-email=Email de commande
 order=Commande
 ordered-list=Liste Commandée
 orders=Commandes
+organization-address=Adresse d'organisation
 organization-information=L'information d'organisation
 organization-or-community=La Communauté ou organisation
+organization-phones=Téléphones d'organisation
 organization-profile=Profil D'Organisation
 organization-roles=Rôles D'Organisation
 organization=Organisation
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=Permissions assignées aux rôles
 permissions-assigned-to-users=Permissions assignées aux utilisateurs
 permissions=Permissions
 person=Personne
+personal-address=Adresse personnelle
+personal-phones=Téléphones personnels
 personal=Personnel
 personalize-pages=Personnaliser les pages
 phone-number=Numéro de téléphone
@@ -2973,7 +2979,6 @@ select-article=Sélectionner un article
 select-asset=Sélectionner un capital
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Sélectionner au moins une communauté pour chaque action dont la portée est la <i>Communauté</i>.
 select-box=Sélectionner une boîte
-select-by-tags-category=Sélectionner par catégorie d'étiquettes
 select-categories=Choisissez les catégories
 select-content=Sélectionner un contenu
 select-date=Sélectionner une date

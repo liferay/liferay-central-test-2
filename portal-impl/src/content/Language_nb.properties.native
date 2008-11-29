@@ -86,7 +86,6 @@ javax.portlet.title.8=Kalender
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Post-it lapp
 javax.portlet.title.98=Programvarekatalog
-javax.portlet.title.99=Tagg-behandling
 javax.portlet.title.9=Administrasjon
 
 ##
@@ -123,7 +122,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=
 model.resource.com.liferay.portal.model.Group=Gruppe
 model.resource.com.liferay.portal.model.Layout=Side
 model.resource.com.liferay.portal.model.Location=Sted
@@ -2397,7 +2396,6 @@ select-article=Velg artikkel
 select-asset=Velg innhold
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Velg minst en gruppe for hver handling med rekkevidde satt til <i>grupper</i>.
 select-box=Velg rute
-select-by-tags-category=Velg via "tag" kategori
 select-content=Velg innhold
 select-date=Velg dato
 select-either-a-public-node-or-a-private-node=Velg enten en offentlig eller en privat "node"

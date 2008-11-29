@@ -106,7 +106,7 @@ javax.portlet.title.8=Ημερολόγιο
 javax.portlet.title.90=Πύλη
 javax.portlet.title.97=Γρήγορη σημείωση
 javax.portlet.title.98=Κατάλογος λογισμικού
-javax.portlet.title.99=Ετικέττες Admin
+javax.portlet.title.99=Ετικέττες και κατηγορίες
 javax.portlet.title.9=Διαχείρηση
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=Άρθρο βάσεων γνώσεων
 model.resource.com.liferay.portal.model.Group=Κοινότητα
 model.resource.com.liferay.portal.model.Layout=Σελίδα
 model.resource.com.liferay.portal.model.Location=Θέση
@@ -1431,6 +1431,7 @@ expired=Ληγμένος
 export-data=Στοιχεία εξαγωγής
 export-date-range-help=Επιτρέψτε στη σειρά ημερομηνίας για να διευκρινίσετε ένα υποσύνολο των στοιχείων που εξάγουν. Όλα τα στοιχεία θα εξαχθούν εάν δημιουργούνται ή τροποποιημένος σε ή μετά από τη μέρα έναρξης και πριν από την ημερομηνία λήξης.
 export-enabled=Εξαγωγή που επιτρέπεται
+export-import-categories-help=Όταν επιλέγονται, όλες οι κατηγορίες θα εξαχθούν ή θα εισαχθούν, κρατώντας την ιεραρχία τους. Κατά τη διάρκεια της εισαγωγής, οι διπλές κατηγορίες δεν θα δημιουργηθούν εάν μια κατηγορία με το ίδιο όνομα υπάρξει ήδη.
 export-import-permissions-assigned-to-users-help=Λόγω στην κοκκοποίηση του συστήματος άδειας, οι άδειες χρηστών εξαγωγής ή εισαγωγής μπορούν να αυξήσουν το χρόνο επεξεργασίας σημαντικά. Μην τους εξάγετε εκτός αν είναι απολύτως απαραίτητο.
 export-import-permissions-help=Οι άδειες που ορίζονται επιλογή για τις εξαγόμενες σελίδες και τα μεμονωμένα παράθυρα portlet θα περιληφθούν εάν αυτή η ελέγχεται.
 export-import-portlet-permissions-help=Οι άδειες που ορίζονται επιλογή για το εξαγόμενο παράθυρο portlet θα περιληφθούν εάν αυτή η ελέγχεται.
@@ -1590,6 +1591,7 @@ grace-limit-help=Αυτό καθορίζει τον αριθμό χρόνων π
 grace-limit=Όριο επιείκειας
 graduation=Αποφοίτηση
 greeting=Χαιρετισμός
+group-by-tags-within-tags-set=Ομάδα από τις ετικέττες μέσα στις ετικέττες καθορισμένες
 group-id=Ταυτότητα ομάδας
 group-import-search-filter=Φίλτρο αναζήτησης εισαγωγών ομάδας
 group-mapping=Χαρτογράφηση ομάδας
@@ -2286,8 +2288,10 @@ order-email=Ηλεκτρονικό ταχυδρομείο παραγγελίας
 order=Παραγγελία
 ordered-list=Διαταγμένος κατάλογος
 orders=Παραγγελίες
+organization-address=Διεύθυνση οργάνωσης
 organization-information=Πληροφορίες οργάνωσης
 organization-or-community=Κοινότητα ή οργάνωση
+organization-phones=Τηλέφωνα οργάνωσης
 organization-profile=Σχεδιάγραμμα οργάνωσης
 organization-roles=Ρόλοι οργάνωσης
 organization=Οργανισμός
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=Άδειες που ορίζονται στους 
 permissions-assigned-to-users=Αδειες που ορίζονται στους χρήστες
 permissions=Αδειες
 person=Πρόσωπο
+personal-address=Προσωπική διεύθυνση
+personal-phones=Προσωπικά τηλέφωνα
 personal=Προσωπικό
 personalize-pages=Εξατομίκευση Σελίδων
 phone-number=Αριθμός Τηλεφώνου
@@ -2973,7 +2979,6 @@ select-article=Επιλέξτε το άρθρο
 select-asset=Επιλέξτε το προτέρημα
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=Επιλέξτε το κιβώτιο
-select-by-tags-category=Επιλέξτε από την κατηγορία ετικεττών
 select-categories=Επιλέξτε τις κατηγορίες
 select-content=Επιλέξτε το περιεχόμενο
 select-date=Επιλέξτε την ημερομηνία

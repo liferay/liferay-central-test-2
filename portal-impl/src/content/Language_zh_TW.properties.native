@@ -106,7 +106,7 @@ javax.portlet.title.8=日曆
 javax.portlet.title.90=門
 javax.portlet.title.97=快的筆記
 javax.portlet.title.98=軟體編目
-javax.portlet.title.99=標記Admin
+javax.portlet.title.99=標記和類別
 javax.portlet.title.9=管理者
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=群組
 model.resource.com.liferay.portal.model.Layout=設計
 model.resource.com.liferay.portal.model.Location=地點
@@ -1431,6 +1431,7 @@ expired=到期
 export-data=出口數據
 export-date-range-help=使日期範圍指定數據的一個子集出口。 所有數據將被出口，如果創造或修改在或在起始日期以后和在结束日期之前。
 export-enabled=出口使能
+export-import-categories-help=当選擇，所有類別將被出口或被進口，保留他們的階層。 在進口期間，如果與同樣名字的一個類別已經存在，複製類別不會被創造。
 export-import-permissions-assigned-to-users-help=由於允許系統的粒度, 出口或進口用戶允許可能極大增加處理時間。不要出口他們除非它是absolutely 必要的。
 export-import-permissions-help=允許被分配為被出口的頁和各自的portlet 窗口將是包括的如果這個選擇被檢查。
 export-import-portlet-permissions-help=如果這個選擇被檢查，為被出口的portlet窗口分配的允許將是包括的。
@@ -1590,6 +1591,7 @@ grace-limit-help=這確定用戶能登錄的次數在他們的密碼到期了之
 grace-limit=雍容極限
 graduation=畢業
 greeting=問候
+group-by-tags-within-tags-set=小組在被設置的標記之內的Tags
 group-id=小組身份證
 group-import-search-filter=小組進口查尋過濾器
 group-mapping=小組映射
@@ -2286,8 +2288,10 @@ order-email=命令電子郵件
 order=命令
 ordered-list=被定□的名單
 orders=命令
+organization-address=組織地址
 organization-information=組織信息
 organization-or-community=公共或組織
+organization-phones=組織電話
 organization-profile=組織外形
 organization-roles=組織角色
 organization=組織
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=允許被分配到角色
 permissions-assigned-to-users=允許被分配到用戶
 permissions=允許
 person=人
+personal-address=個人地址
+personal-phones=個人電話
 personal=個人
 personalize-pages=個人化頁
 phone-number=電話號碼
@@ -2973,7 +2979,6 @@ select-article=選擇文章
 select-asset=選擇財產
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=選擇箱子
-select-by-tags-category=選擇由Tags Category
 select-categories=選擇類別
 select-content=選擇內容
 select-date=選擇日期

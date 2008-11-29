@@ -50,7 +50,7 @@ javax.portlet.title.9=Yönetim
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=
 
 ##
 ## Action names

@@ -106,7 +106,7 @@ javax.portlet.title.8=日历
 javax.portlet.title.90=门户
 javax.portlet.title.97=便笺
 javax.portlet.title.98=软体目录
-javax.portlet.title.99=标记管理
+javax.portlet.title.99=标记和类别
 javax.portlet.title.9=管理
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=群组
 model.resource.com.liferay.portal.model.Layout=布局
 model.resource.com.liferay.portal.model.Location=地点
@@ -1431,6 +1431,7 @@ expired=到期
 export-data=出口数据
 export-date-range-help=使日期范围指定数据的一个子集出口。 所有数据将被出口，如果创造或修改在或在起始日期以后和在结束日期之前。
 export-enabled=出口使能
+export-import-categories-help=当选择，所有类别将被出口或被进口，保留他们的阶层。 在进口期间，如果与同样名字的一个类别已经存在，复制类别不会被创造。
 export-import-permissions-assigned-to-users-help=由于允许系统的粒度, 出口或进口用户允许可能极大增加处理时间。不要出口他们除非它是绝对必要的。
 export-import-permissions-help=允许被分配为被出口的页和各自的portlet 窗口将是包括的如果这个选择被检查。
 export-import-portlet-permissions-help=如果这个选择被检查，为被出口的portlet窗口分配的允许将是包括的。
@@ -1590,6 +1591,7 @@ grace-limit-help=这确定用户能登录的次数在他们的密码到期了之
 grace-limit=雍容极限
 graduation=毕业
 greeting=问候
+group-by-tags-within-tags-set=小组在被设置的标记之内的Tags
 group-id=小组身份证
 group-import-search-filter=小组进口查寻过滤器
 group-mapping=小组映射
@@ -2286,8 +2288,10 @@ order-email=命令电子邮件
 order=命令
 ordered-list=被定□的名单
 orders=命令
+organization-address=组织地址
 organization-information=组织信息
 organization-or-community=社区或组织
+organization-phones=组织电话
 organization-profile=组织外形
 organization-roles=组织角色
 organization=组织
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=允许被分配到角色
 permissions-assigned-to-users=允许被分配到用户
 permissions=允许
 person=人
+personal-address=个人地址
+personal-phones=个人电话
 personal=个人
 personalize-pages=个人化页
 phone-number=电话号码
@@ -2973,7 +2979,6 @@ select-article=选择文章
 select-asset=选择财产
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=选择箱子
-select-by-tags-category=选择由Tags Category
 select-categories=选择类别
 select-content=选择内容
 select-date=选择日期

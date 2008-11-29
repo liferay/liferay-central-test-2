@@ -106,7 +106,7 @@ javax.portlet.title.8=Calendário
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Nota Rápida
 javax.portlet.title.98=Catálogo Do Software
-javax.portlet.title.99=Tag Admin
+javax.portlet.title.99=Tag e categorias
 javax.portlet.title.9=Admin
 
 ##
@@ -151,7 +151,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=Artigo da base de conhecimento
 model.resource.com.liferay.portal.model.Group=Comunidade
 model.resource.com.liferay.portal.model.Layout=Página
 model.resource.com.liferay.portal.model.Location=Posição
@@ -1431,6 +1431,7 @@ expired=Expirado
 export-data=Dados da exportação
 export-date-range-help=Permita a escala da data de especific um subconjunto dos dados para exportar. Todos os dados serão exportados se criado ou modificado ou após na data de início e antes da data de extremidade.
 export-enabled=A Exportação Permitiu
+export-import-categories-help=Quando selecionadas, todas as categorias serão exportadas ou importadas, mantendo sua hierarquia. Durante a importação, as categorias duplicadas não serão criadas se uma categoria com o mesmo nome já existe.
 export-import-permissions-assigned-to-users-help=devido ao granularity do sistema da permissão, exportar ou importar permissões do usuário podem aumentar o tempo processando significativamente. Não os exporte a menos que for absolutamente necessário.
 export-import-permissions-help=As permissões atribuídas para as páginas exportadas e as janelas individuais do portlet serão incluídas se esta opção for verificada.
 export-import-portlet-permissions-help=As permissões atribuídas para a janela exportada do portlet serão incluídas se esta opção é verific.
@@ -1590,6 +1591,7 @@ grace-limit-help=Isto determina o número das épocas um início de uma sessão 
 grace-limit=Limite Do Grace
 graduation=Graduação
 greeting=Cumprimento
+group-by-tags-within-tags-set=O grupo por Tag dentro dos Tag ajustou-se
 group-id=Grupo Id
 group-import-search-filter=Filtro Da Busca Da Importação Do Grupo
 group-mapping=Traçar Do Grupo
@@ -2286,8 +2288,10 @@ order-email=Email Da Ordem
 order=Ordem
 ordered-list=Lista Requisitada
 orders=Ordens
+organization-address=Endereço da organização
 organization-information=Informação da organização
 organization-or-community=A comunidade ou organização
+organization-phones=Telefones da organização
 organization-profile=Perfil Da Organização
 organization-roles=Papéis Da Organização
 organization=Organização
@@ -2370,6 +2374,8 @@ permissions-assigned-to-roles=Permissões atribuídas aos papéis
 permissions-assigned-to-users=Permissões atribuídas aos usuários
 permissions=Permissões
 person=Pessoa
+personal-address=Endereço pessoal
+personal-phones=Telefones pessoais
 personal=Pessoal
 personalize-pages=Personalize Páginas
 phone-number=Número De Telefone
@@ -2973,7 +2979,6 @@ select-article=Selecione O Artigo
 select-asset=Selecione O Recurso
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=Selecione A Caixa
-select-by-tags-category=Selecione por Tag Categoria
 select-categories=Selecione categorias
 select-content=Selecione O �?ndice
 select-date=Selecione A Data

@@ -74,7 +74,6 @@ javax.portlet.title.8=الرزنامة
 javax.portlet.title.90=الموقع
 javax.portlet.title.97=ملاحظات
 javax.portlet.title.98=كتالوج البرمجيات
-javax.portlet.title.99=إدارة التصنيفات
 javax.portlet.title.9=إدارة الموقع
 
 ##
@@ -110,7 +109,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle
+model.resource.com.liferay.knowledgebase.model.KBArticle=
 model.resource.com.liferay.portal.model.Group=مجتمع
 model.resource.com.liferay.portal.model.Layout=تصميم
 model.resource.com.liferay.portal.model.Location=موقع
