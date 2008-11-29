@@ -52,6 +52,6 @@ public interface TagsAsset extends TagsAssetModel {
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getCategories()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTags()
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries()
 		throws com.liferay.portal.SystemException;
 }

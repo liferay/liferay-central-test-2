@@ -305,6 +305,7 @@ public class PortletExporter {
 				String path = getCommentsPath(context, comment[0], comment[1]);
 
 				Element asset = root.addElement("asset");
+
 				asset.addAttribute("path", path);
 				asset.addAttribute("class-name", comment[0]);
 				asset.addAttribute("class-pk", comment[1]);

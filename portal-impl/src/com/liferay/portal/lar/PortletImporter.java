@@ -599,19 +599,20 @@ public class PortletImporter {
 				List<ObjectValuePair<String, byte[]>> entries =
 					context.getZipFolderEntries(path);
 
-				List<RatingsEntry> ratings = new ArrayList<RatingsEntry>();
+				List<RatingsEntry> ratingsEntries =
+					new ArrayList<RatingsEntry>();
 
 				for (ObjectValuePair<String, byte[]> entry : entries) {
 					if (entry.getValue().length > 0) {
 						RatingsEntry rating = (RatingsEntry)context.fromXML(
 							entry.getValue());
 
-						ratings.add(rating);
+						ratingsEntries.add(rating);
 					}
 				}
 
 				context.addRatingsEntries(
-					className, new Long(classPK), ratings);
+					className, new Long(classPK), ratingsEntries);
 			}
 		}
 		catch (Exception e) {
@@ -641,8 +642,7 @@ public class PortletImporter {
 					asset.attributeValue("entries"));
 
 				context.addTagsCategories(
-					className, new Long(classPK),
-					StringUtil.split(entries, ","));
+					className, new Long(classPK), StringUtil.split(entries));
 			}
 		}
 		catch (Exception e) {
@@ -672,8 +672,7 @@ public class PortletImporter {
 					asset.attributeValue("entries"));
 
 				context.addTagsEntries(
-					className, new Long(classPK),
-					StringUtil.split(entries, ","));
+					className, new Long(classPK), StringUtil.split(entries));
 			}
 		}
 		catch (Exception e) {

@@ -24,8 +24,10 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
@@ -174,14 +176,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addRatingsEntries(Class<?> classObj, long classPK)
 		throws SystemException {
 
-		List<RatingsEntry> entries = RatingsEntryLocalServiceUtil.getEntries(
-			classObj.getName(), classPK);
+		List<RatingsEntry> ratingsEntries =
+			RatingsEntryLocalServiceUtil.getEntries(
+				classObj.getName(), classPK);
 
-		if (entries.size() == 0) {
+		if (ratingsEntries.size() == 0) {
 			return;
 		}
 
-		Iterator<RatingsEntry> itr = entries.iterator();
+		Iterator<RatingsEntry> itr = ratingsEntries.iterator();
 
 		while (itr.hasNext()) {
 			RatingsEntry entry = itr.next();
@@ -190,14 +193,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		_ratingsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK), entries);
+			getPrimaryKeyString(classObj, classPK), ratingsEntries);
 	}
 
 	public void addRatingsEntries(
-		String className, long classPK, List<RatingsEntry> entries) {
+		String className, long classPK, List<RatingsEntry> ratingsEntries) {
 
 		_ratingsEntriesMap.put(
-			getPrimaryKeyString(className, classPK), entries);
+			getPrimaryKeyString(className, classPK), ratingsEntries);
 	}
 
 	public void addTagsCategories(Class<?> classObj, long classPK)
@@ -216,31 +219,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		List<TagsEntry> categoriesList = tagsAsset.getCategories();
+		List<TagsEntry> tagsCategories = tagsAsset.getCategories();
 
-		if (categoriesList.size() == 0) {
+		if (tagsCategories.size() == 0) {
 			return;
 		}
 
-		String[] categories = new String[categoriesList.size()];
-
-		Iterator<TagsEntry> itr = categoriesList.iterator();
-
-		for (int i = 0; itr.hasNext(); i++) {
-			TagsEntry tagsEntry = itr.next();
-
-			categories[i] = tagsEntry.getName();
-		}
-
 		_tagsCategoriesMap.put(
-			getPrimaryKeyString(classObj, classPK), categories);
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(ListUtil.toString(tagsCategories, "name")));
 	}
 
 	public void addTagsCategories(
-			String className, long classPK, String[] values) {
+		String className, long classPK, String[] tagsCategories) {
 
 		_tagsCategoriesMap.put(
-			getPrimaryKeyString(className, classPK), values);
+			getPrimaryKeyString(className, classPK), tagsCategories);
 	}
 
 	public void addTagsEntries(Class<?> classObj, long classPK)
@@ -259,29 +253,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		List<TagsEntry> tagsList = tagsAsset.getTags();
+		List<TagsEntry> tagsEntries = tagsAsset.getEntries();
 
-		if (tagsList.size() == 0) {
+		if (tagsEntries.size() == 0) {
 			return;
 		}
 
-		String[] tags = new String[tagsList.size()];
-
-		Iterator<TagsEntry> itr = tagsList.iterator();
-
-		for (int i = 0; itr.hasNext(); i++) {
-			TagsEntry tagsEntry = itr.next();
-
-			tags[i] = tagsEntry.getName();
-		}
-
-		_tagsEntriesMap.put(getPrimaryKeyString(classObj, classPK), tags);
+		_tagsEntriesMap.put(
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(ListUtil.toString(tagsEntries, "name")));
 	}
 
 	public void addTagsEntries(
-		String className, long classPK, String[] values) {
+		String className, long classPK, String[] tagsEntries) {
 
-		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
+		_tagsEntriesMap.put(
+			getPrimaryKeyString(className, classPK), tagsEntries);
 	}
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
@@ -565,19 +552,19 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Class<?> classObj, long classPK, long newClassPK)
 		throws PortalException, SystemException {
 
-		List<RatingsEntry> entries = _ratingsEntriesMap.get(
+		List<RatingsEntry> ratingsEntries = _ratingsEntriesMap.get(
 			getPrimaryKeyString(classObj, classPK));
 
-		if (entries == null) {
+		if (ratingsEntries == null) {
 			return;
 		}
 
-		for (RatingsEntry entry : entries) {
-			long userId = getUserId(entry.getUserUuid());
+		for (RatingsEntry ratingsEntry : ratingsEntries) {
+			long userId = getUserId(ratingsEntry.getUserUuid());
 
 			RatingsEntryLocalServiceUtil.updateEntry(
 				userId, classObj.getName(), ((Long)newClassPK).longValue(),
-				entry.getScore());
+				ratingsEntry.getScore());
 		}
 	}
 

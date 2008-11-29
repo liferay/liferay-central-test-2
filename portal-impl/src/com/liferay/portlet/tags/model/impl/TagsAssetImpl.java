@@ -46,7 +46,7 @@ public class TagsAssetImpl extends TagsAssetModelImpl implements TagsAsset {
 			getAssetId(), TagsEntryConstants.FOLKSONOMY_CATEGORY);
 	}
 
-	public List<TagsEntry> getTags() throws SystemException {
+	public List<TagsEntry> getEntries() throws SystemException {
 		return TagsEntryLocalServiceUtil.getAssetEntries(
 			getAssetId(), TagsEntryConstants.FOLKSONOMY_TAG);
 	}

@@ -396,7 +396,7 @@ public class LayoutExporter {
 		// Categories
 
 		if (exportCategories) {
-			exportGroupCategories(context);
+			exportCategories(context);
 		}
 
 		_portletExporter.exportCategories(context, root);
@@ -448,7 +448,7 @@ public class LayoutExporter {
 		}
 	}
 
-	protected void exportGroupCategories(PortletDataContext context)
+	protected void exportCategories(PortletDataContext context)
 		throws SystemException {
 
 		try {
@@ -456,26 +456,26 @@ public class LayoutExporter {
 
 			Element root = doc.addElement("categories-hierarchy");
 
-			List<TagsVocabulary> vocabularies =
+			List<TagsVocabulary> tagsVocabularies =
 				TagsVocabularyLocalServiceUtil.getGroupVocabularies(
 					context.getGroupId(),
 					TagsEntryConstants.FOLKSONOMY_CATEGORY);
 
-			for (TagsVocabulary vocabulary : vocabularies) {
+			for (TagsVocabulary tagsVocabulary : tagsVocabularies) {
 				Element vocabularyEl = root.addElement("vocabulary");
 
-				String name = vocabulary.getName();
+				String name = tagsVocabulary.getName();
 
 				vocabularyEl.addAttribute("name", name);
+				vocabularyEl.addAttribute(
+					"userUuid", tagsVocabulary.getUserUuid());
 
-				vocabularyEl.addAttribute("userUuid", vocabulary.getUserUuid());
-
-				List<TagsEntry> categories =
+				List<TagsEntry> tagsCategories =
 					TagsEntryLocalServiceUtil.getGroupVocabularyEntries(
 						context.getGroupId(), name);
 
 				orderCategories(
-					categories, vocabularyEl,
+					tagsCategories, vocabularyEl,
 					TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
 			}
 
@@ -675,31 +675,34 @@ public class LayoutExporter {
 	}
 
 	protected void orderCategories(
-			List<TagsEntry> categories, Element root, long parentEntryId)
+			List<TagsEntry> tagsCategories, Element parentEl,
+			long parentEntryId)
 		throws PortalException, SystemException {
 
-		List<TagsEntry> parents = new ArrayList<TagsEntry>();
+		List<TagsEntry> tagsParentCategories = new ArrayList<TagsEntry>();
 
-		Iterator<TagsEntry> itr = categories.iterator();
+		Iterator<TagsEntry> itr = tagsCategories.iterator();
 
 		while (itr.hasNext()) {
-			TagsEntry category = itr.next();
+			TagsEntry tagsCategory = itr.next();
 
-			if (category.getParentEntryId() == parentEntryId) {
-				Element categoryEl = root.addElement("category");
+			if (tagsCategory.getParentEntryId() == parentEntryId) {
+				Element categoryEl = parentEl.addElement("category");
 
-				categoryEl.addAttribute("name", category.getName());
+				categoryEl.addAttribute("name", tagsCategory.getName());
 				categoryEl.addAttribute(
-					"parentEntryName", category.getParentName());
-				categoryEl.addAttribute("userUuid", category.getUserUuid());
+					"parentEntryName", tagsCategory.getParentName());
+				categoryEl.addAttribute("userUuid", tagsCategory.getUserUuid());
 
-				parents.add(category);
+				tagsParentCategories.add(tagsCategory);
+
 				itr.remove();
 			}
 		}
 
-		for (TagsEntry parent : parents) {
-			orderCategories(categories, root, parent.getEntryId());
+		for (TagsEntry tagsParentCategory : tagsParentCategories) {
+			orderCategories(
+				tagsCategories, parentEl, tagsParentCategory.getEntryId());
 		}
 	}
 

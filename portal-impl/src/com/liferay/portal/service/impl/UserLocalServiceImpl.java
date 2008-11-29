@@ -2807,8 +2807,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new LinkedHashMap<String, String[]>();
 
 		parameterMap.put(
-				PortletDataHandlerKeys.CATEGORIES,
-				new String[] {Boolean.TRUE.toString()});
+			PortletDataHandlerKeys.CATEGORIES,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
 			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});

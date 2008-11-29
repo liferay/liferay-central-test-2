@@ -295,7 +295,7 @@ public class LayoutImporter {
 		// to the data handlers through the context
 
 		if (importCategories) {
-			importGroupCategories(context);
+			importCategories(context);
 		}
 
 		_portletImporter.readCategories(context, root);
@@ -751,7 +751,7 @@ public class LayoutImporter {
 		return actions;
 	}
 
-	protected void importGroupCategories(PortletDataContext context)
+	protected void importCategories(PortletDataContext context)
 		throws SystemException {
 
 		try {
@@ -767,7 +767,6 @@ public class LayoutImporter {
 			for (Element vocabularyEl : vocabularies) {
 				String vocabularyName = GetterUtil.getString(
 					vocabularyEl.attributeValue("name"));
-
 				String userUuid = GetterUtil.getString(
 					vocabularyEl.attributeValue("userUuid"));
 
@@ -790,10 +789,8 @@ public class LayoutImporter {
 				for (Element category : categories) {
 					String categoryName = GetterUtil.getString(
 						category.attributeValue("name"));
-
 					String parentEntryName = GetterUtil.getString(
 						category.attributeValue("parentEntryName"));
-
 					String[] properties = null;
 
 					try {

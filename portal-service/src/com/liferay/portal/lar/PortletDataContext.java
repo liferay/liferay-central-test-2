@@ -70,18 +70,19 @@ public interface PortletDataContext extends Serializable {
 		throws SystemException;
 
 	public void addRatingsEntries(
-		String className, long classPK, List<RatingsEntry> entries);
+		String className, long classPK, List<RatingsEntry> ratingsEntries);
 
 	public void addTagsCategories(Class<?> classObj, long classPK)
 		throws PortalException, SystemException;
 
 	public void addTagsCategories(
-			String className, long classPK, String[] values);
+			String className, long classPK, String[] tagsCategories);
 
 	public void addTagsEntries(Class<?> classObj, long classPK)
 		throws PortalException, SystemException;
 
-	public void addTagsEntries(String className, long classPK, String[] values);
+	public void addTagsEntries(
+		String className, long classPK, String[] tagsEntries);
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException;
 
