@@ -141,8 +141,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		return portletTitle;
 	}
 
-	protected void updateScope(
-			ActionRequest actionRequest, Portlet portlet)
+	protected void updateScope(ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
