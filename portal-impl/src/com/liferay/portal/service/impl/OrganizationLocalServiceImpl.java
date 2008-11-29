@@ -118,15 +118,6 @@ public class OrganizationLocalServiceImpl
 			userId, Organization.class.getName(), organizationId, null, null, 0,
 			null, true);
 
-		// Expando
-
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = organization.getExpandoBridge();
-
-		expandoBridge.setIndexEnabled(false);
-		expandoBridge.setAttributes(serviceContext);
-
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
 
 			// Role
@@ -145,6 +136,12 @@ public class OrganizationLocalServiceImpl
 		// Resources
 
 		addOrganizationResources(userId, organization);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = organization.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return organization;
 	}
@@ -529,6 +526,8 @@ public class OrganizationLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Organization
+
 		parentOrganizationId = getParentOrganizationId(
 			companyId, parentOrganizationId);
 		recursable = true;
@@ -553,11 +552,8 @@ public class OrganizationLocalServiceImpl
 
 		// Expando
 
-		UserIndexer.setEnabled(false);
-
 		ExpandoBridge expandoBridge = organization.getExpandoBridge();
 
-		expandoBridge.setIndexEnabled(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		return organization;
