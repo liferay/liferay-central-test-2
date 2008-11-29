@@ -44,7 +44,9 @@ for (TagsAsset asset : assets) {
 	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), TagsEntryConstants.FOLKSONOMY_TAG);
 
 	for (TagsEntry assetEntry : assetEntries) {
-		if (assetEntry.getVocabulary().getName().equals(category)) {
+		TagsVocabulary vocabulary = assetEntry.getVocabulary();
+
+		if (vocabulary.getName().equals(category)) {
 			String tagLabel = null;
 
 			try {

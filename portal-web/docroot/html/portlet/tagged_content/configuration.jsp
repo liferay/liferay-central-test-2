@@ -300,7 +300,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:message key="group-by-tags-within" />
+						<liferay-ui:message key="group-by-tags-within-tags-set" />
 
 						<select name="<portlet:namespace />category">
 							<option value=""><liferay-ui:message key="none" /></option>
