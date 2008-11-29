@@ -83,6 +83,7 @@
 		<show-portlet-access-denied>true</show-portlet-access-denied>
 		<show-portlet-inactive>true</show-portlet-inactive>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -339,6 +340,7 @@
 		<control-panel-entry-weight>3.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -590,6 +592,7 @@
 		<struts-path>recent_documents</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -957,6 +960,7 @@
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -994,6 +998,7 @@
 		<struts-path>recent_bloggers</struts-path>
 		<configuration-action-class>com.liferay.portlet.recentbloggers.action.ConfigurationActionImpl</configuration-action-class>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1006,6 +1011,7 @@
 		<configuration-action-class>com.liferay.portlet.blogsaggregator.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
