@@ -50,6 +50,8 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.util.LocalizationUtil;
@@ -210,6 +212,9 @@ public class EditOrganizationAction extends PortletAction {
 		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Organization.class.getName(), actionRequest);
+
 		Organization organization = null;
 
 		if (organizationId <= 0) {
@@ -219,7 +224,7 @@ public class EditOrganizationAction extends PortletAction {
 			organization = OrganizationServiceUtil.addOrganization(
 				parentOrganizationId, name, type, recursable, regionId,
 				countryId, statusId, comments, addresses, emailAddresses,
-				orgLabors, phones, websites);
+				orgLabors, phones, websites, serviceContext);
 		}
 		else {
 
@@ -228,7 +233,7 @@ public class EditOrganizationAction extends PortletAction {
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
 				recursable, regionId, countryId, statusId, comments, addresses,
-				emailAddresses, orgLabors, phones, websites);
+				emailAddresses, orgLabors, phones, websites, serviceContext);
 
 			PortletPreferences preferences = organization.getPreferences();
 

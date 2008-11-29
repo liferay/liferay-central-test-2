@@ -90,11 +90,13 @@ public class OrganizationServiceJSON {
 
 	public static JSONObject addOrganization(long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
-		long regionId, long countryId, int statusId, java.lang.String comments)
+		long regionId, long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
-				name, type, recursable, regionId, countryId, statusId, comments);
+				name, type, recursable, regionId, countryId, statusId,
+				comments, serviceContext);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
@@ -106,12 +108,14 @@ public class OrganizationServiceJSON {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites)
+		java.util.List<com.liferay.portal.model.Website> websites,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
 				name, type, recursable, regionId, countryId, statusId,
-				comments, addresses, emailAddresses, orgLabors, phones, websites);
+				comments, addresses, emailAddresses, orgLabors, phones,
+				websites, serviceContext);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
@@ -180,12 +184,13 @@ public class OrganizationServiceJSON {
 	public static JSONObject updateOrganization(long organizationId,
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments)
+		long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId, comments);
+				countryId, statusId, comments, serviceContext);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
@@ -198,13 +203,14 @@ public class OrganizationServiceJSON {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites)
+		java.util.List<com.liferay.portal.model.Website> websites,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 				parentOrganizationId, name, type, recursable, regionId,
 				countryId, statusId, comments, addresses, emailAddresses,
-				orgLabors, phones, websites);
+				orgLabors, phones, websites, serviceContext);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}

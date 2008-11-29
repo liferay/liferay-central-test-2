@@ -34,6 +34,7 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -78,7 +79,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments)
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!OrganizationPermissionUtil.contains(
@@ -94,7 +95,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments);
+			regionId, countryId, statusId, comments, serviceContext);
 	}
 
 	public Organization addOrganization(
@@ -102,12 +103,13 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			boolean recursable, long regionId, long countryId, int statusId,
 			String comments, List<Address> addresses,
 			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
-			List<Phone> phones, List<Website> websites)
+			List<Phone> phones, List<Website> websites,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Organization organization = addOrganization(
 			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments);
+			statusId, comments, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Organization.class.getName(), organization.getOrganizationId(),
@@ -231,7 +233,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments)
+			int statusId, String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		OrganizationPermissionUtil.check(
@@ -239,7 +241,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		return organizationLocalService.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
-			name, type, recursable, regionId, countryId, statusId, comments);
+			name, type, recursable, regionId, countryId, statusId, comments,
+			serviceContext);
 	}
 
 	public Organization updateOrganization(
@@ -247,12 +250,13 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			String type, boolean recursable, long regionId, long countryId,
 			int statusId, String comments, List<Address> addresses,
 			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
-			List<Phone> phones, List<Website> websites)
+			List<Phone> phones, List<Website> websites,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Organization organization = updateOrganization(
 			organizationId, parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments);
+			regionId, countryId, statusId, comments, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Organization.class.getName(), organizationId, addresses);

@@ -154,7 +154,8 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
-		long regionId, long countryId, int statusId, java.lang.String comments)
+		long regionId, long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -186,11 +187,18 @@ public class OrganizationServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj8 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -227,7 +235,8 @@ public class OrganizationServiceHttp {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites)
+		java.util.List<com.liferay.portal.model.Website> websites,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -289,12 +298,19 @@ public class OrganizationServiceHttp {
 				paramObj12 = new NullWrapper("java.util.List");
 			}
 
+			Object paramObj13 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj13 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
+						paramObj10, paramObj11, paramObj12, paramObj13
 					});
 
 			Object returnObj = null;
@@ -624,7 +640,8 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long organizationId,
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments)
+		long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -658,11 +675,18 @@ public class OrganizationServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj9 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj9 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -700,7 +724,8 @@ public class OrganizationServiceHttp {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites)
+		java.util.List<com.liferay.portal.model.Website> websites,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -764,12 +789,20 @@ public class OrganizationServiceHttp {
 				paramObj13 = new NullWrapper("java.util.List");
 			}
 
+			Object paramObj14 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj14 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14
 					});
 
 			Object returnObj = null;

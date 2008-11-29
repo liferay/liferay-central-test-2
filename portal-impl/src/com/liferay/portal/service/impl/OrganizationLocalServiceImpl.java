@@ -44,11 +44,14 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
+import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
@@ -78,7 +81,7 @@ public class OrganizationLocalServiceImpl
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments)
+			int statusId, String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -114,6 +117,15 @@ public class OrganizationLocalServiceImpl
 		Group group = groupLocalService.addGroup(
 			userId, Organization.class.getName(), organizationId, null, null, 0,
 			null, true);
+
+		// Expando
+
+		UserIndexer.setEnabled(false);
+
+		ExpandoBridge expandoBridge = organization.getExpandoBridge();
+
+		expandoBridge.setIndexEnabled(false);
+		expandoBridge.setAttributes(serviceContext);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
 
@@ -513,7 +525,8 @@ public class OrganizationLocalServiceImpl
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, String type, boolean recursable, long regionId,
-			long countryId, int statusId, String comments)
+			long countryId, int statusId, String comments,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		parentOrganizationId = getParentOrganizationId(
@@ -537,6 +550,15 @@ public class OrganizationLocalServiceImpl
 		organization.setComments(comments);
 
 		organizationPersistence.update(organization, false);
+
+		// Expando
+
+		UserIndexer.setEnabled(false);
+
+		ExpandoBridge expandoBridge = organization.getExpandoBridge();
+
+		expandoBridge.setIndexEnabled(false);
+		expandoBridge.setAttributes(serviceContext);
 
 		return organization;
 	}
