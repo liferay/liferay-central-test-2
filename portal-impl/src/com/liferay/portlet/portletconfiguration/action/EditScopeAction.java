@@ -36,6 +36,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 
@@ -45,8 +46,11 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import javax.servlet.ServletContext;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -81,7 +85,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (cmd.equals(Constants.SAVE)) {
-			updateScope(actionRequest, portletConfig, portlet);
+			updateScope(actionRequest, portlet);
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -111,13 +115,22 @@ public class EditScopeAction extends EditConfigurationAction {
 	}
 
 	protected String getPortletTitle(
-		ThemeDisplay themeDisplay, PortletConfig portletConfig,
+		PortletRequest portletRequest, Portlet portlet,
 		PortletPreferences preferences) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String portletTitle = PortletConfigurationUtil.getPortletTitle(
 			preferences, themeDisplay.getLanguageId());
 
 		if (Validator.isNull(portletTitle)) {
+			ServletContext servletContext =
+				(ServletContext)portletRequest.getAttribute(WebKeys.CTX);
+
+			PortletConfig portletConfig = PortletConfigFactory.create(
+				portlet, servletContext);
+
 			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
 				themeDisplay.getLocale());
 
@@ -129,8 +142,7 @@ public class EditScopeAction extends EditConfigurationAction {
 	}
 
 	protected void updateScope(
-			ActionRequest actionRequest, PortletConfig portletConfig,
-			Portlet portlet)
+			ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -145,8 +157,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		long scopeLayoutId = ParamUtil.getLong(actionRequest, "scopeLayoutId");
 		long oldScopeLayoutId = GetterUtil.getLong(
 			preferences.getValue("lfr-scope-layout-id", null));
-		String title = getPortletTitle(
-			themeDisplay, portletConfig, preferences);
+		String title = getPortletTitle(actionRequest, portlet, preferences);
 		String newTitle = title;
 
 		// Remove old scope suffix from the title if present
