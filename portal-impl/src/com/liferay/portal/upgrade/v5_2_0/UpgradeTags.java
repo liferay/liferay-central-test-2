@@ -253,9 +253,8 @@ public class UpgradeTags extends UpgradeProcess {
 				serviceContext.setAddGuestPermissions(true);
 				serviceContext.setScopeGroupId(groupId);
 
-				vocabulary =
-					TagsVocabularyLocalServiceUtil.addVocabulary(
-						userId, vocabularyName, true, serviceContext);
+				vocabulary = TagsVocabularyLocalServiceUtil.addVocabulary(
+					userId, vocabularyName, true, serviceContext);
 			}
 
 			_vocabulariesMap.put(key, vocabulary);

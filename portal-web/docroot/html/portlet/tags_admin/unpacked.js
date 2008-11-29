@@ -657,12 +657,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 				name: entryName,
 				vocabulary: vocabulary,
 				properties: [],
-				serviceContext: jQuery.toJSON({
-					plid: themeDisplay.getPlid(),
-					scopeGroupId: themeDisplay.getScopeGroupId(),
-					addCommunityPermissions: communityPermission,
-					addGuestPermissions: guestPermission
-				})
+				serviceContext: jQuery.toJSON(
+					{
+						addCommunityPermissions: communityPermission,
+						addGuestPermissions: guestPermission,
+						plid: themeDisplay.getPlid(),
+						scopeGroupId: themeDisplay.getScopeGroupId()
+					}
+				)
 			},
 			function(message) {
 				var exception = message.exception;
@@ -744,12 +746,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 			{
 				name: vocabulary,
 				folksonomy: folksonomy,
-				serviceContext: jQuery.toJSON({
-					plid: themeDisplay.getPlid(),
-					scopeGroupId: themeDisplay.getScopeGroupId(),
-					addCommunityPermissions: communityPermission,
-					addGuestPermissions: guestPermission
-				})
+				serviceContext: jQuery.toJSON(
+					{
+						addCommunityPermissions: communityPermission,
+						addGuestPermissions: guestPermission,
+						plid: themeDisplay.getPlid(),
+						scopeGroupId: themeDisplay.getScopeGroupId()
+					}
+				)
 			},
 			function(message) {
 				var exception = message.exception;
