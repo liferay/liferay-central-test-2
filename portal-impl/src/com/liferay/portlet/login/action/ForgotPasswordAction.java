@@ -165,6 +165,7 @@ public class ForgotPasswordAction extends PortletAction {
 		}
 
 		PortletPreferences preferences = actionRequest.getPreferences();
+
 		String languageId = LanguageUtil.getLanguageId(actionRequest);
 
 		String emailFromName = preferences.getValue("emailFromName", null);
