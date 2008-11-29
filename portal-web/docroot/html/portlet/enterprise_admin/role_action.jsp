@@ -33,15 +33,17 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Role role = (Role)row.getObject();
 
-boolean isSpecialRole = false;
+String name = role.getName();
 
-if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleConstants.OWNER) || !role.getName().equals(RoleConstants.USER)) {
-	isSpecialRole = true;
+boolean unassignableRole = false;
+
+if (name.equals(RoleConstants.GUEST) || !name.equals(RoleConstants.OWNER) || !name.equals(RoleConstants.USER)) {
+	unassignableRole = true;
 }
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE) %>">
+	<c:if test="<%= !PortalUtil.isSystemRole(name) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
@@ -51,7 +53,7 @@ if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleCon
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<c:if test="<%= !isSpecialRole && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= !unassignableRole && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= Role.class.getName() %>"
 			modelResourceDescription="<%= role.getTitle(locale) %>"
@@ -62,7 +64,7 @@ if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleCon
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !role.getName().equals(RoleConstants.ADMINISTRATOR) && !role.getName().equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !role.getName().equals(RoleConstants.COMMUNITY_OWNER) && !role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !role.getName().equals(RoleConstants.ORGANIZATION_OWNER) && !role.getName().equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
+	<c:if test="<%= !name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
@@ -72,7 +74,7 @@ if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleCon
 		<liferay-ui:icon image="define_permissions" url="<%= editRolePermissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !isSpecialRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
+	<c:if test="<%= !unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
@@ -82,7 +84,7 @@ if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleCon
 		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 	</c:if>
 
-	<c:if test="<%= !isSpecialRole && (role.getType() == RoleConstants.TYPE_REGULAR) %>">
+	<c:if test="<%= !unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="tabs1" value="users" />
@@ -92,7 +94,7 @@ if (role.getName().equals(RoleConstants.GUEST) || !role.getName().equals(RoleCon
 		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 	</c:if>
 
-	<c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DELETE) %>">
+	<c:if test="<%= !PortalUtil.isSystemRole(name) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DELETE) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
