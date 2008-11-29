@@ -44,40 +44,36 @@ for (TagsAsset asset : assets) {
 	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), TagsEntryConstants.FOLKSONOMY_TAG);
 
 	for (TagsEntry assetEntry : assetEntries) {
-		List<TagsProperty> properties = TagsPropertyLocalServiceUtil.getProperties(assetEntry.getEntryId());
+		if (assetEntry.getVocabulary().getName().equals(category)) {
+			String tagLabel = null;
 
-		for (TagsProperty property : properties) {
-			if (property.getKey().equals("category") && property.getValue().equals(category)) {
-				String tagLabel = null;
+			try {
+				TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), themeDisplay.getLanguageId());
 
+				tagLabel = descriptionProperty.getValue();
+			}
+			catch (NoSuchPropertyException nspee1) {
 				try {
-					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), themeDisplay.getLanguageId());
+					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "en_US");
 
 					tagLabel = descriptionProperty.getValue();
 				}
-				catch (NoSuchPropertyException nspee1) {
-					try {
-						TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "en_US");
-
-						tagLabel = descriptionProperty.getValue();
-					}
-					catch (NoSuchPropertyException nspee2) {
-						tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
-					}
+				catch (NoSuchPropertyException nspee2) {
+					tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
 				}
-
-				List assetsList = assetsByCategory.get(tagLabel);
-
-				if (assetsList == null) {
-					assetsList = new ArrayList();
-
-					assetsByCategory.put(tagLabel, assetsList);
-				}
-
-				assetsList.add(asset);
-
-				break;
 			}
+
+			List assetsList = assetsByCategory.get(tagLabel);
+
+			if (assetsList == null) {
+				assetsList = new ArrayList();
+
+				assetsByCategory.put(tagLabel, assetsList);
+			}
+
+			assetsList.add(asset);
+
+			break;
 		}
 	}
 }
@@ -125,7 +121,7 @@ while (itr.hasNext()) {
 	request.setAttribute("view.jsp-results", results);
 %>
 
-	<p class="journal-content-tag-label"><%= tagLabel %></p>
+	<h3 class="journal-content-tag-label"><%= tagLabel %></h3>
 
 	<div class="journal-content-tag-entries">
 

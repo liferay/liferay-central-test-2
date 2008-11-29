@@ -300,18 +300,18 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:message key="select-by-tags-category" />
+						<liferay-ui:message key="group-by-tags-within" />
 
 						<select name="<portlet:namespace />category">
 							<option value=""><liferay-ui:message key="none" /></option>
 
 							<%
-							List<TagsProperty> categories = TagsPropertyLocalServiceUtil.getPropertyValues(scopeGroupId, "category");
+							List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, true);
 
-							for (TagsProperty property : categories) {
+							for (TagsVocabulary vocabulary : vocabularies) {
 							%>
 
-								<option <%= category.equals(property.getValue()) ? "selected" : "" %> value="<%= property.getValue() %>"><%= property.getValue() %></option>
+								<option <%= category.equals(vocabulary.getName()) ? "selected" : "" %> value="<%= vocabulary.getName() %>"><%= vocabulary.getName() %></option>
 
 							<%
 							}
