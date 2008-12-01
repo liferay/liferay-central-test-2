@@ -51,7 +51,7 @@ public class PanelContainerTag extends BodyTagSupport {
 		request.setAttribute("liferay-ui:panel-container:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:panel-container:panel-count", new IntegerWrapper());
- 
+
 		return EVAL_BODY_BUFFERED;
 	}
 

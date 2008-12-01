@@ -50,7 +50,7 @@ public class PanelTag extends BodyTagSupport {
  		request.setAttribute("liferay-ui:panel:persistState", _persistState);
  		request.setAttribute("liferay-ui:panel:extended", _extended);
  		request.setAttribute("liferay-ui:panel:cssClass", _cssClass);
- 
+
 		return EVAL_BODY_BUFFERED;
 	}
 
