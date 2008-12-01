@@ -175,7 +175,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Panel component ---------- */
 
-.lfr-panel, .lfr-panel-container, .lfr-floating-container {
+.lfr-panel.lfr-extended, .lfr-panel-container, .lfr-floating-container {
 	border: 1px solid;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 }
@@ -216,7 +216,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	width: 19px;
 }
 
-.lfr-panel.lfr-collapsible .lfr-has-button .lfr-panel-button {
+.lfr-extended.lfr-collapsible .lfr-panel-button {
 	display: block;
 }
 
@@ -233,22 +233,22 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: 0;
 }
 
-.lfr-panel .lfr-panel-titlebar, .lfr-panel.lfr-collapsible .lfr-has-button {
+.lfr-panel.lfr-extended .lfr-panel-titlebar {
 	background: #ececec url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
 	border-bottom: 1px solid #cfcfcf;
 	line-height: 1.6;
 	padding: 2px;
 }
 
-.ie6 .lfr-panel.lfr-collapsible .lfr-has-button {
+.ie6 .lfr-extended.lfr-collapsible .lfr-panel-titlebar {
 	height: 1%;
 }
 
-.lfr-panel.lfr-collapsed .lfr-has-button {
+.lfr-extended.lfr-collapsed .lfr-panel-titlebar {
 	border-bottom: none;
 }
 
-.lfr-panel-container .lfr-panel.lfr-collapsible .lfr-has-button {
+.lfr-panel-container .lfr-extended.lfr-collapsible .lfr-panel-titlebar {
 	border-top: 1px solid #cfcfcf;
 }
 
