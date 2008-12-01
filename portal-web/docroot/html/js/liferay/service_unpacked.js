@@ -62,6 +62,41 @@ Liferay.Service.Portal.Company = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getCompanyById: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyById";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyByLogoId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyByLogoId";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyByMx: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyByMx";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyByVirtualHost: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyByVirtualHost";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyByWebId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyByWebId";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateCompany: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateCompany";

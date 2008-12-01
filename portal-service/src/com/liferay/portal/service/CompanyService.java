@@ -24,6 +24,7 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -55,6 +56,33 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface CompanyService {
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Company getCompanyById(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Company getCompanyByLogoId(long logoId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Company getCompanyByMx(java.lang.String mx)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Company getCompanyByVirtualHost(
+		java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Company getCompanyByWebId(
+		java.lang.String webId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

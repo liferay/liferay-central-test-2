@@ -53,6 +53,41 @@ public class CompanyServiceUtil {
 		return getService().addCompany(webId, virtualHost, mx);
 	}
 
+	public static com.liferay.portal.model.Company getCompanyById(
+		long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCompanyById(companyId);
+	}
+
+	public static com.liferay.portal.model.Company getCompanyByLogoId(
+		long logoId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCompanyByLogoId(logoId);
+	}
+
+	public static com.liferay.portal.model.Company getCompanyByMx(
+		java.lang.String mx)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCompanyByMx(mx);
+	}
+
+	public static com.liferay.portal.model.Company getCompanyByVirtualHost(
+		java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCompanyByVirtualHost(virtualHost);
+	}
+
+	public static com.liferay.portal.model.Company getCompanyByWebId(
+		java.lang.String webId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCompanyByWebId(webId);
+	}
+
 	public static com.liferay.portal.model.Company updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,

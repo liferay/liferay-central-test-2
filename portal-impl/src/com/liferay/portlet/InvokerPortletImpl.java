@@ -655,7 +655,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)actionResponse;
 
-		List<ActionFilter> actionFilters = 
+		List<ActionFilter> actionFilters =
 			_allActionFilters.get(_getPortletId(portletResponse));
 
 		invoke(
@@ -672,7 +672,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)eventResponse;
 
-		List<EventFilter> eventFilters = 
+		List<EventFilter> eventFilters =
 			_allEventFilters.get(_getPortletId(portletResponse));
 
 		invoke(
@@ -689,7 +689,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)renderResponse;
 
-		List<RenderFilter> renderFilters = 
+		List<RenderFilter> renderFilters =
 			_allRenderFilters.get(_getPortletId(portletResponse));
 
 		invoke(

@@ -82,6 +82,47 @@ public class CompanyServiceJSON {
 		return CompanyJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject getCompanyById(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyById(companyId);
+
+		return CompanyJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getCompanyByLogoId(long logoId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByLogoId(logoId);
+
+		return CompanyJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getCompanyByMx(java.lang.String mx)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByMx(mx);
+
+		return CompanyJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getCompanyByVirtualHost(
+		java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByVirtualHost(virtualHost);
+
+		return CompanyJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getCompanyByWebId(java.lang.String webId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByWebId(webId);
+
+		return CompanyJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,

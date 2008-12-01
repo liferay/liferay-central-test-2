@@ -96,6 +96,76 @@ public class CompanyServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.CompanySoap getCompanyById(
+		long companyId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyById(companyId);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CompanySoap getCompanyByLogoId(
+		long logoId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByLogoId(logoId);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CompanySoap getCompanyByMx(
+		java.lang.String mx) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByMx(mx);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CompanySoap getCompanyByVirtualHost(
+		java.lang.String virtualHost) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByVirtualHost(virtualHost);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CompanySoap getCompanyByWebId(
+		java.lang.String webId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.getCompanyByWebId(webId);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.CompanySoap updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws RemoteException {

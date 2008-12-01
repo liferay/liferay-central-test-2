@@ -49,6 +49,30 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		return companyLocalService.addCompany(webId, virtualHost, mx);
 	}
 
+	public Company getCompanyById(long companyId)
+		throws PortalException, SystemException {
+
+		return companyLocalService.getCompanyById(companyId);
+	}
+
+	public Company getCompanyByLogoId(long logoId)
+		throws PortalException, SystemException {
+
+		return companyLocalService.getCompanyByLogoId(logoId);
+	}
+
+	public Company getCompanyByMx(String mx)
+		throws PortalException, SystemException {
+
+		return companyLocalService.getCompanyByMx(mx);
+	}
+
+	public Company getCompanyByVirtualHost(String virtualHost)
+		throws PortalException, SystemException {
+
+		return companyLocalService.getCompanyByVirtualHost(virtualHost);
+	}
+
 	public Company getCompanyByWebId(String webId)
 		throws PortalException, SystemException {
 
