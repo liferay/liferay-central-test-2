@@ -83,7 +83,7 @@ public abstract class MimeResponseImpl
 		}
 
 		if (_contentType == null) {
-			throw new IllegalStateException();
+			setContentType(_portletRequestImpl.getResponseContentType());
 		}
 
 		_calledGetPortletOutputStream = true;
@@ -97,7 +97,7 @@ public abstract class MimeResponseImpl
 		}
 
 		if (_contentType == null) {
-			throw new IllegalStateException();
+			setContentType(_portletRequestImpl.getResponseContentType());
 		}
 
 		_calledGetWriter = true;
