@@ -25,7 +25,7 @@ Liferay.Panel = Liferay.Observable.extend({
 			header: '.lfr-panel-header',
 			titles: '.lfr-panel-titlebar',
 			footer: '.lfr-panel-footer',
-			accordion: true,
+			accordion: false,
 			collapsible: true,
 			persistState: false
 		};
