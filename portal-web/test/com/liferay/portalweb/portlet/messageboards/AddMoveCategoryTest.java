@@ -26,74 +26,23 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddReplyMessageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddMoveCategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddReplyMessageTest extends BaseTestCase {
-	public void testAddReplyMessage() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//a[text()='Reply']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//a[text()='Reply']"));
+public class AddMoveCategoryTest extends BaseTestCase {
+	public void testAddMoveCategory() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_textArea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace(
-				"This is a t\u00e9st r\u00e9pl m\u00e9ssag\u00e9!"));
-		selenium.type("_19_textArea",
-			RuntimeVariables.replace(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Category']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_name", RuntimeVariables.replace("Sujr"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Sujr"));
 	}
 }

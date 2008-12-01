@@ -60,22 +60,6 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_19_subject")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent("_19_textArea")) {
 					break;
 				}
@@ -109,21 +93,6 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a second reply message.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("This is a second reply message."));
 	}
 }

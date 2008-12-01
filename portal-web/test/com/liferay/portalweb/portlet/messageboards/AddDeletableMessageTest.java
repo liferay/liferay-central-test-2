@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddDeletableMessageTest extends BaseTestCase {
 	public void testAddDeletableMessage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Post New Thread']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
@@ -65,8 +82,6 @@ public class AddDeletableMessageTest extends BaseTestCase {
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
 				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,8 +89,7 @@ public class AddDeletableMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -84,5 +98,10 @@ public class AddDeletableMessageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
 	}
 }

@@ -33,23 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RecentPostsTest extends BaseTestCase {
 	public void testRecentPosts() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Recent Posts"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
-		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
-		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!")) {
+				if (selenium.isElementPresent("link=Recent Posts")) {
 					break;
 				}
 			}
@@ -58,5 +48,36 @@ public class RecentPostsTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Recent Posts"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		assertTrue(selenium.isElementPresent(
+				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
 	}
 }

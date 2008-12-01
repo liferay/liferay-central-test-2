@@ -39,7 +39,7 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/a[1]")) {
+				if (selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//td[1]/div/a[1]"));
+		selenium.click(RuntimeVariables.replace("link=T\u00e9st Cat\u00e9gory"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,9 +70,6 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Messages']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,7 +78,7 @@ public class SearchTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=T\u00e9st M\u00e9ssag\u00e9")) {
+							"//input[@value='Search Messages']")) {
 					break;
 				}
 			}
@@ -92,40 +89,8 @@ public class SearchTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st M\u00e9ssag\u00e9"));
+				"//input[@value='Search Messages']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a second reply message.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
 	}
 }

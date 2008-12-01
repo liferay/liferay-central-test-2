@@ -33,11 +33,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditMessageTest extends BaseTestCase {
 	public void testEditMessage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//b")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[3]/td[1]/a/b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[7]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -45,7 +58,7 @@ public class EditMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/nobr/a")) {
+				if (selenium.isElementPresent("//b")) {
 					break;
 				}
 			}
@@ -55,47 +68,8 @@ public class EditMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_19_subject",
-			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Edited"));
-		selenium.type("_19_textArea",
-			RuntimeVariables.replace("This is edited test M\u00e9ssag\u00e9!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("T\u00e9st M\u00e9ssag\u00e9 Edited")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"This is edited test M\u00e9ssag\u00e9!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -104,7 +78,7 @@ public class EditMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id='navigation']/ul/li[1]/a/span")) {
+							"link=T\u00e9st M\u00e9ssag\u00e9")) {
 					break;
 				}
 			}
@@ -113,5 +87,77 @@ public class EditMessageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Edit")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_19_subject")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_19_subject",
+			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Edited"));
+		selenium.type("_19_subject",
+			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Edited"));
+		selenium.typeKeys("_19_textArea",
+			RuntimeVariables.replace("This is edited test M\u00e9ssag\u00e9"));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("This is edited test M\u00e9ssag\u00e9!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("T\u00e9st M\u00e9ssag\u00e9 Edited"));
+		assertTrue(selenium.isTextPresent(
+				"This is edited test M\u00e9ssag\u00e9!"));
+		selenium.click(RuntimeVariables.replace("link=Categories"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

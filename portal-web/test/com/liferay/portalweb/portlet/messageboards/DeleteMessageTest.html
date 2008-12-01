@@ -1,6 +1,9 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
 <title>DeleteMessageTest</title>
 </head>
 <body>
@@ -9,28 +12,13 @@
 <tr><td rowspan="1" colspan="3">DeleteMessageTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Tést Catégory Editéd</td>
+	<td>clickAndWait</td>
+	<td>link=Categories</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tést Catégory Editéd</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//b</td>
+	<td>link=Sujr</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,13 +27,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[6]/table/tbody/tr[2]/td/ul[2]/li[5]/nobr/a[2]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>//div[6]/table/tbody/tr[2]/td/ul[2]/li[5]/nobr/a[2]</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
@@ -60,12 +43,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tést Méssagé to bé Délétéd</td>
+	<td>link=Moved to Sujr</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>This thréad has béén movéd back!</td>
+	<td>assertTextPresent</td>
+	<td>Trust and paths will be straightened.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>This méssagé will bé délétéd!</td>
 	<td></td>
 </tr>
 

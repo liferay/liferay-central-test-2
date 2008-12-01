@@ -51,6 +51,24 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Post New Thread']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
@@ -71,8 +89,9 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_19_subject",
+			RuntimeVariables.replace("Null Test Entr"));
+		selenium.type("_19_subject", RuntimeVariables.replace("Null Test Entry"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,8 +99,7 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have entered invalid data. Please try again.")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -91,7 +109,30 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid message."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=\u00ab Back")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=\u00ab Back"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Null Test Entry"));
 	}
 }

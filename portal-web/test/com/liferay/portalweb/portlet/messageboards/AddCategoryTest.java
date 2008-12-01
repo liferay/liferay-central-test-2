@@ -33,6 +33,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCategoryTest extends BaseTestCase {
 	public void testAddCategory() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Add Category']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
@@ -61,8 +77,6 @@ public class AddCategoryTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gor!"));
 		selenium.type("_19_description",
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +84,7 @@ public class AddCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//b")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -79,5 +93,11 @@ public class AddCategoryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("T\u00e9st Cat\u00e9gory"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

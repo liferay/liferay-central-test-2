@@ -4,42 +4,27 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddReplyMessageTest</title>
+<title>AddMoveCategoryTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddReplyMessageTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddMoveCategoryTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//a[text()='Reply']</td>
+	<td>clickAndWait</td>
+	<td>link=Categories</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[text()='Reply']</td>
+	<td>//input[@value='Add Category']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_19_textArea</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_19_textArea</td>
-	<td>This is a tést répl méssagé!</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_19_textArea</td>
-	<td>This is a tést réply méssagé!</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>_19_name</td>
+	<td>Sujr</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -48,7 +33,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This is a tést réply méssagé!</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Sujr</td>
 	<td></td>
 </tr>
 

@@ -33,6 +33,14 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SplitThreadTest extends BaseTestCase {
 	public void testSplitThread() throws Exception {
+		selenium.click(RuntimeVariables.replace("_19_tabs1TabsBack"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +59,8 @@ public class SplitThreadTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Split Thread"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Click OK to create a new thread with the following messages."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,8 +68,7 @@ public class SplitThreadTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Click OK to create a new thread with the following messages.")) {
+				if (selenium.isElementPresent("//input[@value='OK']")) {
 					break;
 				}
 			}
@@ -71,72 +80,12 @@ public class SplitThreadTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='OK']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent(
-							"This is a t\u00e9st m\u00e9ssag\u00e9!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a second reply message.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a third reply message.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertFalse(selenium.isTextPresent(
+				"This is a t\u00e9st m\u00e9ssag\u00e9!"));
+		assertTrue(selenium.isTextPresent(
+				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
+		assertTrue(selenium.isTextPresent("This is a second reply message."));
+		assertTrue(selenium.isTextPresent("This is a third reply message."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -157,39 +106,8 @@ public class SplitThreadTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=T\u00e9st Subcat\u00e9gory"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=T\u00e9st M\u00e9ssag\u00e9")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=RE: T\u00e9st M\u00e9ssag\u00e9")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		assertTrue(selenium.isElementPresent(
+				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
 	}
 }

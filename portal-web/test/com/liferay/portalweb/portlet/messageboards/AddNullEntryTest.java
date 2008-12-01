@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddReplyMessageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddReplyMessageTest extends BaseTestCase {
-	public void testAddReplyMessage() throws Exception {
+public class AddNullEntryTest extends BaseTestCase {
+	public void testAddNullEntry() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//a[text()='Reply']")) {
+				if (selenium.isElementPresent("//b")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//a[text()='Reply']"));
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -58,7 +58,8 @@ public class AddReplyMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_19_textArea")) {
+				if (selenium.isElementPresent(
+							"//input[@value='Post New Thread']")) {
 					break;
 				}
 			}
@@ -68,12 +69,29 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace(
-				"This is a t\u00e9st r\u00e9pl m\u00e9ssag\u00e9!"));
-		selenium.type("_19_textArea",
-			RuntimeVariables.replace(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Post New Thread']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_19_subject")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_19_subject",
+			RuntimeVariables.replace("Null Test Entr"));
+		selenium.type("_19_subject", RuntimeVariables.replace("Null Test Entry"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -94,6 +112,27 @@ public class AddReplyMessageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid message."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Cancel']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Null Test Entry"));
 	}
 }

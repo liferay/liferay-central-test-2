@@ -74,8 +74,6 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a third repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a third reply message."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +81,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a third reply message.")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -92,5 +90,9 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a third reply message."));
 	}
 }

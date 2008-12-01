@@ -33,31 +33,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveThreadTest extends BaseTestCase {
 	public void testMoveThread() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st Subcat\u00e9gory"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d! "));
 		selenium.click(RuntimeVariables.replace("link=Move Thread"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=category");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=T\u00e9st Cat\u00e9gory");
-		selenium.click("//input[@value='Choose']");
-		selenium.selectWindow("null");
 		selenium.click("_19_addExplanationPost");
 
 		for (int second = 0;; second++) {
@@ -76,73 +63,9 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_subject",
-			RuntimeVariables.replace(
-				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED"));
-		selenium.type("_19_subject",
-			RuntimeVariables.replace(
-				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED"));
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace(
-				"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d."));
+		selenium.type("_19_subject", RuntimeVariables.replace("Moved to Sujr"));
 		selenium.type("_19_textArea",
-			RuntimeVariables.replace(
-				"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Move Thread']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Move Thread']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=T\u00e9st Subcat\u00e9gory")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Move Thread"));
-		selenium.waitForPageToLoad("30000");
+			RuntimeVariables.replace("Trust and paths will be straightened."));
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=category");
@@ -153,7 +76,7 @@ public class MoveThreadTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Choose']")) {
+				if (selenium.isElementPresent("link=Categories")) {
 					break;
 				}
 			}
@@ -163,70 +86,22 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Categories"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
-		selenium.click("_19_addExplanationPost");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_textArea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_19_subject",
-			RuntimeVariables.replace("Mov\u00e9 it back!"));
-		selenium.type("_19_subject",
-			RuntimeVariables.replace("Mov\u00e9 it back!"));
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace(
-				"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!"));
-		selenium.type("_19_textArea",
-			RuntimeVariables.replace(
-				"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Move Thread']"));
+		assertTrue(selenium.isElementPresent("link=Sujr"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value=\"Move Thread\"]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=S\u00e9cond T\u00e9st Subcat\u00e9gory")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Mov\u00e9 it back!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=Sujr"));
+		assertTrue(selenium.isElementPresent(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+		assertTrue(selenium.isTextPresent(
+				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d! "));
+		assertTrue(selenium.isTextPresent(
+				"Trust and paths will be straightened. "));
+		assertFalse(selenium.isElementPresent("link=T\u00e9st Subcat\u00e9gory"));
+		assertFalse(selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory"));
 	}
 }
