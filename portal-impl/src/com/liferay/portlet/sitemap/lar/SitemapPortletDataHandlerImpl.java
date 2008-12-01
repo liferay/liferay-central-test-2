@@ -45,8 +45,9 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			preferences.setValue("rootPlid", "0");
-			preferences.setValue("displayDepth", "0");
+			preferences.setValue("root-layout-id", StringPool.BLANK);
+			preferences.setValue("display-depth", StringPool.BLANK);
+			preferences.setValue("show-hidden-pages", StringPool.BLANK);
 
 			return preferences;
 		}
