@@ -51,10 +51,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebDAVServlet extends HttpServlet {
 
- 	public void service(
- 		HttpServletRequest request, HttpServletResponse response) {
+	public void service(
+		HttpServletRequest request, HttpServletResponse response) {
 
- 		PermissionChecker permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		int status = HttpServletResponse.SC_PRECONDITION_FAILED;
 
@@ -163,6 +163,11 @@ public class WebDAVServlet extends HttpServlet {
 	protected boolean isIgnoredResource(HttpServletRequest request) {
 		String[] pathArray = WebDAVUtil.getPathArray(
 			request.getPathInfo(), true);
+
+		if ((pathArray == null) || (pathArray.length <= 0)) {
+			return false;
+		}
+
 		String resourceName = pathArray[pathArray.length - 1];
 
 		for (String ignore : PropsValues.WEBDAV_IGNORE) {
