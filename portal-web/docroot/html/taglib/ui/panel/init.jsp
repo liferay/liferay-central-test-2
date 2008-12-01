@@ -44,15 +44,13 @@ if (Validator.isNotNull(id) && id.indexOf(randomNamespace) == -1) {
 if (Validator.isNotNull(panelCount)) {
 	id += panelCount.increment();
 	Boolean containerExtended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
-	
+
 	if (Validator.isNotNull(containerExtended)) {
 		extended = containerExtended;
 	}
 }
 
 cssClass = "lfr-panel " + cssClass;
-
-String panelTitle = LanguageUtil.get(pageContext, title);
 
 if (collapsible) {
 	cssClass += " lfr-collapsible";

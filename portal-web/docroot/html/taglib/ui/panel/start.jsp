@@ -28,7 +28,7 @@
 	<div class="lfr-panel-titlebar">
 		<h3 class="lfr-panel-title">
 			<span>
-				<%= panelTitle %>
+				<%= title %>
 			</span>
 		</h3>
 
