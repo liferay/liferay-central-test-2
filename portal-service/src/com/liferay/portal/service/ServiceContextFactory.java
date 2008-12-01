@@ -24,7 +24,6 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.PortletPreferencesIds;
@@ -37,7 +36,6 @@ import java.io.Serializable;
 
 import java.util.Map;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -103,7 +101,7 @@ public class ServiceContextFactory {
 			portletRequest);
 
 		String portletId = PortalUtil.getPortletId(portletRequest);
-		
+
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 				request, portletId);
