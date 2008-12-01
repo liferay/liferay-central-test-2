@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -38,7 +38,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import com.liferay.util.MapUtil;
@@ -65,28 +64,18 @@ public class DLDisplayPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			preferences.setValue(
-				"rootFolderId",
-				String.valueOf(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID));
-			preferences.setValue("showBreadcrumbs", Boolean.TRUE.toString());
-			preferences.setValue("showFoldersSearch", Boolean.TRUE.toString());
-			preferences.setValue("showSubfolders", Boolean.TRUE.toString());
-			preferences.setValue(
-				"foldersPerPage",
-				String.valueOf(SearchContainer.DEFAULT_DELTA));
-			preferences.setValue(
-				"folderColumns", "folder,num-of-folders,num-of-documents");
-			preferences.setValue(
-				"showFileEntriesSearch", Boolean.TRUE.toString());
-			preferences.setValue(
-				"fileEntriesPerPage",
-				String.valueOf(SearchContainer.DEFAULT_DELTA));
-			preferences.setValue(
-				"fileEntryColumns", "name,size,downloads,locked");
-			preferences.setValue("showBreadcrumbs", Boolean.TRUE.toString());
-			preferences.setValue("showBreadcrumbs", Boolean.TRUE.toString());
-			preferences.setValue(
-				"enableCommentRatings", Boolean.TRUE.toString());
+			preferences.setValue("rootFolderId", StringPool.BLANK);
+			preferences.setValue("showBreadcrumbs", StringPool.BLANK);
+			preferences.setValue("showFoldersSearch", StringPool.BLANK);
+			preferences.setValue("showSubfolders", StringPool.BLANK);
+			preferences.setValue("foldersPerPage", StringPool.BLANK);
+			preferences.setValue("folderColumns", StringPool.BLANK);
+			preferences.setValue("showFileEntriesSearch", StringPool.BLANK);
+			preferences.setValue("fileEntriesPerPage", StringPool.BLANK);
+			preferences.setValue("fileEntryColumns", StringPool.BLANK);
+			preferences.setValue("showBreadcrumbs", StringPool.BLANK);
+			preferences.setValue("showBreadcrumbs", StringPool.BLANK);
+			preferences.setValue("enableCommentRatings", StringPool.BLANK);
 
 			return preferences;
 		}
