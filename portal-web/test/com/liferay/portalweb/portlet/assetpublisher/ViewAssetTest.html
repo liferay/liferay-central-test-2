@@ -4,51 +4,51 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddPageTest</title>
+<title>ViewAssetTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPageTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewAssetTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>link=AP Setup Test Article</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>link=AP Setup Test Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is an AP setup test article!</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div/a/span</td>
+	<td>link=Back</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div/a/span</td>
+	<td>clickAndWait</td>
+	<td>link=Back</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>new_page</td>
+	<td>link=AP Setup Test Entry</td>
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>new_page</td>
-	<td>Asset Publisher Test Page</td>
+	<td>clickAndWait</td>
+	<td>link=AP Setup Test Entry</td>
+	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>new_page</td>
-	<td>Asset Publisher Test Page</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Save</td>
+	<td>assertTextPresent</td>
+	<td>This is an AP setup test entry!</td>
 	<td></td>
 </tr>
 <tr>

@@ -4,61 +4,71 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddPageTest</title>
+<title>SelectAssetTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPageTest</td></tr>
+<tr><td rowspan="1" colspan="3">SelectAssetTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div/a/span</td>
+	<td>_86_assetType</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div/a/span</td>
-	<td></td>
+	<td>selectAndWait</td>
+	<td>_86_assetType</td>
+	<td>label=Blogs Entry</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>new_page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>new_page</td>
-	<td>Asset Publisher Test Page</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>new_page</td>
-	<td>Asset Publisher Test Page</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Asset Publisher Test Page</td>
+	<td>link=AP Setup Test Entry</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Asset Publisher Test Page</td>
+	<td>link=AP Setup Test Entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=AP Setup Test Entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have successfully updated the setup.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=AP Setup Test Entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=AP Setup Test Entry 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=AP Setup Test Article</td>
 	<td></td>
 </tr>
 

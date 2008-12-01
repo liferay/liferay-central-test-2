@@ -33,10 +33,16 @@ import com.liferay.portalweb.portal.BaseTests;
 public class AssetPublisherTests extends BaseTests {
 
 	public AssetPublisherTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditConfigurationTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(ViewAssetTest.class);
+		addTestSuite(AddAssetTest.class);
+		addTestSuite(EditDynamicConfigurationTest.class);
+		addTestSuite(EditManualConfigurationTest.class);
+		addTestSuite(SelectAssetTest.class);
+		addTestSuite(RemoveAssetTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }
