@@ -33,13 +33,11 @@ import com.liferay.portal.lar.PortletDataException;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
-
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
-
 import com.liferay.util.MapUtil;
 
 import java.util.List;
@@ -51,7 +49,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="DLDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  *
@@ -73,9 +72,7 @@ public class DLDisplayPortletDataHandlerImpl implements PortletDataHandler {
 			preferences.setValue("showFileEntriesSearch", StringPool.BLANK);
 			preferences.setValue("fileEntriesPerPage", StringPool.BLANK);
 			preferences.setValue("fileEntryColumns", StringPool.BLANK);
-			preferences.setValue("showBreadcrumbs", StringPool.BLANK);
-			preferences.setValue("showBreadcrumbs", StringPool.BLANK);
-			preferences.setValue("enableCommentRatings", StringPool.BLANK);
+			preferences.setValue("enable-comment-ratings", StringPool.BLANK);
 
 			return preferences;
 		}
@@ -263,6 +260,7 @@ public class DLDisplayPortletDataHandlerImpl implements PortletDataHandler {
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log = LogFactory.getLog(DLPortletDataHandlerImpl.class);
+	private static Log _log =
+		LogFactory.getLog(DLDisplayPortletDataHandlerImpl.class);
 
 }
