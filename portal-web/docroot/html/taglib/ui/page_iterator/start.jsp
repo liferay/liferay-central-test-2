@@ -85,7 +85,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			var delta = jQuery("option:selected", box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= deltaURL %><%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
+				var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
 
 				location.href = href;
 			}
