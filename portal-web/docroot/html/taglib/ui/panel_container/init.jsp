@@ -26,16 +26,12 @@
 
 <%
 String id = (String)request.getAttribute("liferay-ui:panel-container:id");
-String cssClass = (String)request.getAttribute("liferay-ui:panel-container:cssClass");
+boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:accordion"));
+boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:persistState"));
 Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
-Boolean accordion = (Boolean)request.getAttribute("liferay-ui:panel-container:accordion");
-Boolean persistState = (Boolean)request.getAttribute("liferay-ui:panel-container:persistState");
+String cssClass = (String)request.getAttribute("liferay-ui:panel-container:cssClass");
 
-String randomNamespace = portletResponse.getNamespace();
-
-if (Validator.isNotNull(id) && id.indexOf(randomNamespace) == -1) {
-	id = randomNamespace + id;
+if (Validator.isNotNull(cssClass)) {
+	cssClass = "lfr-panel-container " + cssClass;
 }
-
-cssClass = "lfr-panel-container " + cssClass;
 %>

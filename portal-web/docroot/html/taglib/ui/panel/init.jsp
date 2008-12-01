@@ -27,36 +27,31 @@
 <%
 String title = (String)request.getAttribute("liferay-ui:panel:title");
 String id = (String)request.getAttribute("liferay-ui:panel:id");
-Boolean collapsible = (Boolean)request.getAttribute("liferay-ui:panel:collapsible");
+boolean collapsible = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:collapsible"));
 String defaultState = (String)request.getAttribute("liferay-ui:panel:defaultState");
-Boolean persistState = (Boolean)request.getAttribute("liferay-ui:panel:persistState");
+boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:persistState"));
+boolean extended = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:extended"));
 String cssClass = (String)request.getAttribute("liferay-ui:panel:cssClass");
-Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel:extended");
-
-String randomNamespace = portletResponse.getNamespace();
 
 IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:panel-container:panel-count");
 
-if (Validator.isNotNull(id) && id.indexOf(randomNamespace) == -1) {
-	id = randomNamespace + id;
-}
-
-if (Validator.isNotNull(panelCount)) {
+if (panelCount != null) {
 	id += panelCount.increment();
-	Boolean containerExtended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
 
-	if (Validator.isNotNull(containerExtended)) {
-		extended = containerExtended;
+	Boolean panelContainerExtended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
+
+	if (panelContainerExtended != null) {
+		extended = panelContainerExtended.booleanValue();
 	}
 }
+
+String panelState = GetterUtil.getString(SessionClicks.get(request, id, null), defaultState);
 
 cssClass = "lfr-panel " + cssClass;
 
 if (collapsible) {
 	cssClass += " lfr-collapsible";
 }
-
-String panelState = GetterUtil.getString(SessionClicks.get(request, id, null), defaultState);
 
 if (!panelState.equals("open")) {
 	cssClass += " lfr-collapsed";
@@ -65,5 +60,4 @@ if (!panelState.equals("open")) {
 if (extended) {
 	cssClass += " lfr-extended";
 }
-
 %>

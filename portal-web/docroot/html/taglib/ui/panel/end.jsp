@@ -27,7 +27,7 @@
 	</div>
 </div>
 
-<c:if test="<%= Validator.isNotNull(id) && collapsible && Validator.isNull(panelCount) %>">
+<c:if test="<%= collapsible && (panelCount != null) %>">
 	<script type="text/javascript">
 		jQuery(
 			function () {

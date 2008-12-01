@@ -44,9 +44,13 @@ public class PanelContainerTag extends BodyTagSupport {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:panel-container:id", _id);
-		request.setAttribute("liferay-ui:panel-container:accordion", _extended);
-		request.setAttribute("liferay-ui:panel-container:persistState", _persistState);
+		request.setAttribute(
+			"liferay-ui:panel-container:id", _id);
+		request.setAttribute(
+			"liferay-ui:panel-container:accordion", String.valueOf(_accordion));
+		request.setAttribute(
+			"liferay-ui:panel-container:persistState",
+			String.valueOf(_persistState));
 		request.setAttribute("liferay-ui:panel-container:extended", _extended);
 		request.setAttribute("liferay-ui:panel-container:cssClass", _cssClass);
 		request.setAttribute(
@@ -136,37 +140,39 @@ public class PanelContainerTag extends BodyTagSupport {
 		_endPage = endPage;
 	}
 
-	public void setId (String id) {
+	public void setId(String id) {
 	    _id = id;
 	}
 
-	public void setAccordion (Boolean accordion) {
+	public void setAccordion(boolean accordion) {
 	    _accordion = accordion;
 	}
 
-	public void setPersistState (Boolean persistState) {
+	public void setPersistState(boolean persistState) {
 	    _persistState = persistState;
 	}
 
-	public void setExtended (Boolean extended) {
+	public void setExtended(Boolean extended) {
 	    _extended = extended;
 	}
 
-	public void setCssClass (String cssClass) {
+	public void setCssClass(String cssClass) {
 	    _cssClass = cssClass;
 	}
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/panel_container/start.jsp";
 
-	private static final String _END_PAGE = "/html/taglib/ui/panel_container/end.jsp";
+	private static final String _END_PAGE =
+		"/html/taglib/ui/panel_container/end.jsp";
 
 	private String _startPage;
 	private String _endPage;
-	private String _id = "";
-	private Boolean _accordion = false;
-	private Boolean _persistState = false;
+	private String _id;
+	private boolean _accordion;
+	private boolean _persistState;
 	private Boolean _extended;
- 	private String _cssClass = "";
+ 	private String _cssClass = StringPool.BLANK;
  	private String _bodyContentString = StringPool.BLANK;
+
 }

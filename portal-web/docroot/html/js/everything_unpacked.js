@@ -9340,8 +9340,8 @@ Liferay.Panel = Liferay.Observable.extend({
 	 * header {string|object}: A jQuery selector of the panel's header area.
 	 * titles {string|object}: A jQuery selector of the titles in the panel.
 	 * footer {string|object}: A jQuery selector of the panel's footer area.
-	 * isAccordian {boolean}: Whether or not the panels have accordion behavior (meaning only one panel can be open at a time).
-	 * isCollapsible {boolean}: Whether or not the panel can be collapsed by clicking the title.
+	 * accordion {boolean}: Whether or not the panels have accordion behavior (meaning only one panel can be open at a time).
+	 * collapsible {boolean}: Whether or not the panel can be collapsed by clicking the title.
 	 *
 	 */
 
@@ -9355,8 +9355,9 @@ Liferay.Panel = Liferay.Observable.extend({
 			header: '.lfr-panel-header',
 			titles: '.lfr-panel-titlebar',
 			footer: '.lfr-panel-footer',
-			isAccordian: true,
-			isCollapsible: true
+			accordion: false,
+			collapsible: true,
+			persistState: false
 		};
 
 		options = jQuery.extend(defaults, options);
@@ -9375,11 +9376,12 @@ Liferay.Panel = Liferay.Observable.extend({
 		instance._header = instance._panel.find(options.header);
 		instance._footer = instance._panel.find(options.footer);
 		instance._panelTitles = instance._panel.find(options.titles);
-		instance._isAccordion = options.isAccordian;
+		instance._accordion = options.accordion;
 
-		instance._isCollapsible = options.isCollapsible;
+		instance._collapsible = options.collapsible;
+		instance._persistState = options.persistState;
 
-		if (instance._isCollapsible) {
+		if (instance._collapsible) {
 			instance.makeCollapsible();
 
 			instance._panelTitles.disableSelection();
@@ -9391,7 +9393,7 @@ Liferay.Panel = Liferay.Observable.extend({
 
 			var collapsedPanels = instance._panel.filter('.lfr-collapsed');
 
-			if (instance._isAccordion && !collapsedPanels.length) {
+			if (instance._accordion && !collapsedPanels.length) {
 				instance._panel.slice(1).addClass('lfr-collapsed');
 			}
 		}
@@ -9407,8 +9409,10 @@ Liferay.Panel = Liferay.Observable.extend({
 
 		instance._panelTitles.each(
 			function(i, n) {
-				if (this.className && this.className.indexOf('lfr-has-button') > -1) {
-					var title = jQuery(this);
+				var title = jQuery(this);
+				var panel = title.parents('.lfr-panel:first');
+
+				if (panel.hasClass('lfr-extended')) {
 					var toggler = title.find('.lfr-panel-button');
 
 					if (!toggler.length) {
@@ -9432,11 +9436,47 @@ Liferay.Panel = Liferay.Observable.extend({
 
 		currentContainer.toggleClass('lfr-collapsed');
 
-		if (instance._isAccordion) {
-			currentContainer.siblings('.lfr-panel').addClass('lfr-collapsed');
+		if (instance._accordion) {
+			var siblings = currentContainer.siblings('.lfr-panel');
+
+			siblings.each(
+				function (i, n) {
+					if (this.id) {
+						instance._saveState(this.id, 'closed');
+					}
+
+					jQuery(this).addClass('lfr-collapsed');
+				}
+			);
 		}
 
+		var panelId = currentContainer.attr('id');
+		var state = 'open';
+
+		if (currentContainer.hasClass('lfr-collapsed')) {
+			state = 'closed';
+		}
+
+		instance._saveState(panelId, state);
+
 		instance.trigger('titleClick');
+	},
+
+	_saveState: function (id, state) {
+		var instance = this;
+
+		if (instance._persistState) {
+			var data = {};
+
+			data[id] = state;
+
+			jQuery.ajax(
+				{
+					url: themeDisplay.getPathMain() + '/portal/session_click',
+					data: data
+				}
+			);
+		}
 	}
 });
 Liferay.FloatingPanel = Liferay.Panel.extend({

@@ -43,12 +43,15 @@ public class PanelTag extends BodyTagSupport {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:panel:collapsible", _collapsible);
  		request.setAttribute("liferay-ui:panel:id", _id);
  		request.setAttribute("liferay-ui:panel:title", _title);
+		request.setAttribute(
+			"liferay-ui:panel:collapsible", String.valueOf(_collapsible));
  		request.setAttribute("liferay-ui:panel:defaultState", _defaultState);
- 		request.setAttribute("liferay-ui:panel:persistState", _persistState);
- 		request.setAttribute("liferay-ui:panel:extended", _extended);
+ 		request.setAttribute(
+			"liferay-ui:panel:persistState", String.valueOf(_persistState));
+ 		request.setAttribute(
+			"liferay-ui:panel:extended", String.valueOf(_extended));
  		request.setAttribute("liferay-ui:panel:cssClass", _cssClass);
 
 		return EVAL_BODY_BUFFERED;
@@ -109,47 +112,47 @@ public class PanelTag extends BodyTagSupport {
 		_endPage = endPage;
 	}
 
-	public void setId (String id) {
+	public void setId(String id) {
 	    _id = id;
 	}
 
- 	public void setTitle (String title) {
+ 	public void setTitle(String title) {
 	    _title = title;
 	}
 
-	public void setCollapsible (Boolean collapsible) {
+	public void setCollapsible(boolean collapsible) {
 	    _collapsible = collapsible;
 	}
 
- 	public void setDefaultState (String defaultState) {
+ 	public void setDefaultState(String defaultState) {
 	    _defaultState = defaultState;
 	}
 
-	public void setPersistState (Boolean persistState) {
+	public void setPersistState(boolean persistState) {
 	    _persistState = persistState;
 	}
 
-	public void setExtended (Boolean extended) {
+	public void setExtended(boolean extended) {
 	    _extended = extended;
 	}
 
-	public void setCssClass (String cssClass) {
+	public void setCssClass(String cssClass) {
 	    _cssClass = cssClass;
 	}
 
-	private static final String _START_PAGE =
-		"/html/taglib/ui/panel/start.jsp";
+	private static final String _START_PAGE = "/html/taglib/ui/panel/start.jsp";
 
 	private static final String _END_PAGE = "/html/taglib/ui/panel/end.jsp";
 
 	private String _startPage;
 	private String _endPage;
- 	private String _id = "";
- 	private String _title = "panel";
-	private Boolean _collapsible = true;
+ 	private String _id;
+ 	private String _title;
+	private boolean _collapsible = true;
  	private String _defaultState = "open";
-	private Boolean _persistState = true;
-	private Boolean _extended = false;
- 	private String _cssClass = "";
+	private boolean _persistState = true;
+	private boolean _extended;
+ 	private String _cssClass = StringPool.BLANK;
  	private String _bodyContentString = StringPool.BLANK;
+
 }
