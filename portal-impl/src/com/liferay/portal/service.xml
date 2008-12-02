@@ -1172,6 +1172,10 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+
+		<!-- Transactions -->
+
+		<tx-required>getResourceCode</tx-required>		
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 
