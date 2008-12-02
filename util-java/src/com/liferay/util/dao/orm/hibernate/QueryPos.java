@@ -154,4 +154,5 @@ public class QueryPos {
 	private Query _query;
 	private int _pos;
 
+
 }
