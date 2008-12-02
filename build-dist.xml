@@ -960,9 +960,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 			<arg line="/c svn update --username ${svn.username} --password ${svn.password}" />
 		</exec>
 
-		<antcall target="clean" />
-		<antcall target="start" />
-		<antcall target="deploy" />
+		<antcall target="all" />
 
 		<delete dir="${lp.plugins.dir}/dist" />
 
