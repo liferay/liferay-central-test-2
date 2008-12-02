@@ -44,7 +44,7 @@ body {
 	background-image: none;
 }
 
-.lfr-ctrl-panel .portal-add-content {
+.lfr-ctrl-panel .portal-add-content, .lfr-ctrl-panel .portal-add-content .lfr-panel-container {
 	background: none;
 }
 
