@@ -236,8 +236,8 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel.lfr-extended .lfr-panel-titlebar {
-	background: #ececec url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
-	border-bottom: 1px solid #cfcfcf;
+	background: #d6d6d6 url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
+	border-bottom: 1px solid #cdcdcd;
 	line-height: 1.6;
 	padding: 2px;
 }
@@ -251,7 +251,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel-container .lfr-extended.lfr-collapsible .lfr-panel-titlebar {
-	border-top: 1px solid #cfcfcf;
+	border-top: 1px solid #cecece;
 }
 
 .lfr-panel.lfr-collapsed .lfr-panel-content {
