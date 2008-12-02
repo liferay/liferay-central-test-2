@@ -29,57 +29,57 @@
 </h1>
 
 <div class="portal-add-content">
+	<liferay-ui:panel-container id="panel-manage-container" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+		
+		<%
+		String ppid = layoutTypePortlet.getStateMaxPortletId();
 
-<liferay-ui:panel-container id="panel-manage-container" extended="<%= Boolean.TRUE %>" persistState="true">
-	
-	<%
-	String ppid = layoutTypePortlet.getStateMaxPortletId();
+		for (String category : PortletCategoryKeys.ALL) {
+			String panelCategory = "panel-manage-" + category;
 
-	for (String category : PortletCategoryKeys.ALL) {
-		String panelCategory = "panel-manage-" + category;
+			String cssClass = "lfr-component panel-page-category";
 
-		String cssClass = "lfr-component panel-page-category";
+			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), category);
 
-		List<Portlet> portlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), category);
+			portlets = filterPortlets(permissionChecker, themeDisplay.getScopeGroup(), category, portlets);
 
-		portlets = filterPortlets(permissionChecker, themeDisplay.getScopeGroup(), category, portlets);
+			if (portlets.size() > 0) {
+				String title = null;
 
-		if (portlets.size() > 0) {
-			String title = null;
+				if (category.equals(PortletCategoryKeys.MY)) {
+					title = StringUtil.shorten(user.getFullName(), 25);
+				}
+				else {
+					title = LanguageUtil.get(pageContext, "category." + category);
+				}
+		%>
 
-			if (category.equals(PortletCategoryKeys.MY)) {
-				title = StringUtil.shorten(user.getFullName(), 25);
-			}
-			else {
-				title = LanguageUtil.get(pageContext, "category." + category);
-			}
-	%>
+				<liferay-ui:panel id="<%= panelCategory %>" title="<%= title %>" collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>" cssClass="<%= cssClass %>">
+					<ul class="category-portlets">
 
-			<liferay-ui:panel id="<%= panelCategory %>" title="<%= title %>" collapsible="true" persistState="true" extended="true" cssClass="<%= cssClass %>">
-				<ul class="category-portlets">
+						<%
+						for (Portlet portlet : portlets) {
+							if (!portlet.isInstanceable()) {
+						%>
 
-					<%
-					for (Portlet portlet : portlets) {
-						if (!portlet.isInstanceable()) {
-					%>
-							<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
-								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
-							</li>
+								<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
+									<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+								</li>
 
-					<%
+						<%
+							}
 						}
-					}
-					%>
+						%>
 
-				</ul>
-			</liferay-ui:panel>
+					</ul>
+				</liferay-ui:panel>
 
-	<%
+		<%
+			}
 		}
-	}
-	%>
-</liferay-ui:panel-container>
+		%>
 
+	</liferay-ui:panel-container>
 </div>
 
 <%!
