@@ -121,7 +121,7 @@ body {
 	padding-left: 5px;
 }
 
-.ie6 .lfr-ctrl-panel .panel-page-category  .lfr-panel-titlebar {
+.ie6 .lfr-ctrl-panel .panel-page-category .lfr-panel-titlebar {
 	padding-bottom: 5px;
 }
 
@@ -152,7 +152,7 @@ body {
 }
 
 .lfr-ctrl-panel .panel-page-category .category-portlets a:hover {
-	background-color: #4ea9da;
+	background-color: #4EA9DA;
 	color: #fff;
 }
 
