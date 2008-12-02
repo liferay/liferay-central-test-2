@@ -33,7 +33,7 @@ import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
- * <a href="FloatingContainer.java.html"><b><i>View Source</i></b></a>
+ * <a href="PanelFloatingContainerTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -172,43 +172,43 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 	}
 
 	public void setId(String id) {
-	    _id = id;
+		_id = id;
 	}
 
 	public void setTrigger(String trigger) {
-	    _trigger = trigger;
+		_trigger = trigger;
 	}
 
 	public void setAccordion(boolean accordion) {
-	    _accordion = accordion;
+		_accordion = accordion;
 	}
 
 	public void setPersistState(boolean persistState) {
-	    _persistState = persistState;
+		_persistState = persistState;
 	}
 
 	public void setPaging(boolean paging) {
-	    _paging = paging;
+		_paging = paging;
 	}
 
 	public void setPagingElements(String pagingElements) {
-	    _pagingElements = pagingElements;
+		_pagingElements = pagingElements;
 	}
 
 	public void setResultsPerPage(int resultsPerPage) {
-	    _resultsPerPage = resultsPerPage;
+		_resultsPerPage = resultsPerPage;
 	}
 
 	public void setWidth(int width) {
-	    _width = width;
+		_width = width;
 	}
 
 	public void setExtended(Boolean extended) {
-	    _extended = extended;
+		_extended = extended;
 	}
 
 	public void setCssClass(String cssClass) {
-	    _cssClass = cssClass;
+		_cssClass = cssClass;
 	}
 
 	private static final String _START_PAGE =

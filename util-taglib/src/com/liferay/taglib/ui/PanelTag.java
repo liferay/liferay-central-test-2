@@ -113,31 +113,31 @@ public class PanelTag extends BodyTagSupport {
 	}
 
 	public void setId(String id) {
-	    _id = id;
+		_id = id;
 	}
 
  	public void setTitle(String title) {
-	    _title = title;
+		_title = title;
 	}
 
 	public void setCollapsible(boolean collapsible) {
-	    _collapsible = collapsible;
+		_collapsible = collapsible;
 	}
 
  	public void setDefaultState(String defaultState) {
-	    _defaultState = defaultState;
+		_defaultState = defaultState;
 	}
 
 	public void setPersistState(boolean persistState) {
-	    _persistState = persistState;
+		_persistState = persistState;
 	}
 
 	public void setExtended(boolean extended) {
-	    _extended = extended;
+		_extended = extended;
 	}
 
 	public void setCssClass(String cssClass) {
-	    _cssClass = cssClass;
+		_cssClass = cssClass;
 	}
 
 	private static final String _START_PAGE = "/html/taglib/ui/panel/start.jsp";

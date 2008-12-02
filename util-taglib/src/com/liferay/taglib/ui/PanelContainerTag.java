@@ -141,23 +141,23 @@ public class PanelContainerTag extends BodyTagSupport {
 	}
 
 	public void setId(String id) {
-	    _id = id;
+		_id = id;
 	}
 
 	public void setAccordion(boolean accordion) {
-	    _accordion = accordion;
+		_accordion = accordion;
 	}
 
 	public void setPersistState(boolean persistState) {
-	    _persistState = persistState;
+		_persistState = persistState;
 	}
 
 	public void setExtended(Boolean extended) {
-	    _extended = extended;
+		_extended = extended;
 	}
 
 	public void setCssClass(String cssClass) {
-	    _cssClass = cssClass;
+		_cssClass = cssClass;
 	}
 
 	private static final String _START_PAGE =
