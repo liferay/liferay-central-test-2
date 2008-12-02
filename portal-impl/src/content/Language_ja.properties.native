@@ -3102,6 +3102,7 @@ show-feed-item-author=ショーの供給項目著者
 show-feed-published-date=フィード発信日付を表示
 show-feed-title=フィードタイトルを表示
 show-guestbook=ゲストブックを表示する
+show-hidden-pages=ショーによって隠されるページ
 show-image=画像を表示する
 show-item-description-when-browsing-a-category=カテゴリの検索時に商品の説明を表示しますか？
 show-item-prices-when-browsing-a-category=カテゴリの検索時に商品の価格を表示しますか？
