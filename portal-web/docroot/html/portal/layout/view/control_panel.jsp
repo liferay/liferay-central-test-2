@@ -114,86 +114,67 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 										</nobr>
 									</c:if>
 								</h2>
-
-								<div class="lfr-panel-container lfr-floating-container" id="groupPanel">
-
+								<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>" pagingElements="ul" resultsPerPage="1">
 									<%
 									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
 									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
 									%>
 
 									<c:if test="<%= !manageableGroups.isEmpty() %>">
-										<div class="lfr-panel lfr-collapsible">
-											<div class="lfr-panel-titlebar lfr-has-button">
-												<h3 class="lfr-panel-title"><span><liferay-ui:message key="communities" /></span></h3>
+										<liferay-ui:panel id="communityPanel" title="<%= LanguageUtil.get(pageContext, "my-community") %>" collapsible="true" persistState="true" extended="true">
+											<ul>
 
-												<a href="javascript: ;" class="lfr-panel-button"></a>
-											</div>
+												<%
+												for (int i = 0; i < manageableGroups.size(); i++) {
+													Group group = manageableGroups.get(i);
+												%>
 
-											<div class="lfr-panel-content">
-												<ul>
+													<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
+														</ul>
+														<ul>
+													</c:if>
 
-													<%
-													for (int i = 0; i < manageableGroups.size(); i++) {
-														Group group = manageableGroups.get(i);
-													%>
+													<li>
+														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
+													</li>
 
-														<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
-															</ul>
-															<ul>
-														</c:if>
+												<%
+												}
+												%>
 
-														<li>
-															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
-														</li>
-
-													<%
-													}
-													%>
-
-												</ul>
-											</div>
-										</div>
+											</ul>
+										</liferay-ui:panel>
 									</c:if>
-
 									<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-										<div class="lfr-panel lfr-collapsible">
-											<div class="lfr-panel-titlebar lfr-has-button">
-												<h3 class="lfr-panel-title"><span><liferay-ui:message key="organizations" /></span></h3>
+										<liferay-ui:panel id="organizationsPanel" title="<%= LanguageUtil.get(pageContext, "organizations") %>" collapsible="true" persistState="true" extended="true">
+											<ul>
 
-												<a href="javascript: ;" class="lfr-panel-button"></a>
-											</div>
+												<%
+												for (int i = 0; i < manageableOrganizations.size(); i++) {
+													Organization organization = manageableOrganizations.get(i);
+												%>
 
-											<div class="lfr-panel-content">
-												<ul>
+													<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
+														</ul>
+														<ul>
+													</c:if>
 
-													<%
-													for (int i = 0; i < manageableOrganizations.size(); i++) {
-														Organization organization = manageableOrganizations.get(i);
-													%>
+													<li>
+														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= organization.getName() %></a>
+													</li>
 
-														<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
-															</ul>
-															<ul>
-														</c:if>
+												<%
+												}
+												%>
 
-														<li>
-															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= organization.getName() %></a>
-														</li>
-
-													<%
-													}
-													%>
-
-												</ul>
-											</div>
-										</div>
+											</ul>
+										</liferay-ui:panel>
 									</c:if>
-								</div>
+								</liferay-ui:panel-floating-container>
 
-								<c:if test="<%= !scopeLayouts.isEmpty() %>">
-									<div class="lfr-panel-container lfr-floating-container" id="scopePanel">
-										<div class="lfr-panel-content">
+								<c:if test="<%= !scopeLayouts.isEmpty()%>">
+									<liferay-ui:panel-floating-container id="scopePanel" trigger=".lfr-scope-selector">
+										<liferay-ui:panel id="" title="">
 											<ul>
 												<li>
 													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><%= curGroupLabel %></a>
@@ -212,8 +193,8 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 												%>
 
 											</ul>
-										</div>
-									</div>
+										</liferay-ui:panel>
+									</liferay-ui:panel-floating-container>
 								</c:if>
 							</c:when>
 							<c:when test="<%= category.equals(PortletCategoryKeys.PORTAL) %>">
@@ -323,34 +304,4 @@ else {
 		</tr>
 		</table>
 	</div>
-</c:if>
-
-<c:if test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
-	<script>
-		jQuery(
-			function () {
-				new Liferay.FloatingPanel(
-					{
-						container: '#groupPanel',
-						trigger: '.lfr-group-selector',
-						paging: true
-					}
-				);
-			}
-		);
-
-		<c:if test="<%= !scopeLayouts.isEmpty() %>">
-			jQuery(
-				function () {
-					new Liferay.FloatingPanel(
-						{
-							container: '#scopePanel',
-							trigger: '.lfr-scope-selector',
-							paging: true
-						}
-					);
-				}
-			);
-		</c:if>
-	</script>
 </c:if>
