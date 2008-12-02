@@ -63,54 +63,41 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 			<c:if test="<%= colorSchemes.size() > 0 %>">
 
 				<%
-				String panelCssClass = StringPool.BLANK;
 				String panelId = renderResponse.getNamespace() + "colorSchemes";
-				String panelViewState = GetterUtil.getString(SessionClicks.get(request, panelId, null), "closed");
-
-				if (panelViewState.equalsIgnoreCase("closed")) {
-					panelCssClass = "lfr-collapsed";
-				}
 				%>
 
-				<div class="lfr-panel lfr-collapsible <%= panelCssClass %>" id="<%= panelId %>">
-					<h4 class="lfr-panel-titlebar">
-						<span class="lfr-panel-title">
-							<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>
-						</span>
-					</h4>
-					<div class="lfr-panel-content">
-						<ul class="lfr-component lfr-theme-list">
+				<liferay-ui:panel id="<%= panelId %>" title="<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>" collapsible="true" persistState="true" extended="false">
+					<ul class="lfr-component lfr-theme-list">
 
-							<%
-							Iterator<ColorScheme> itr = colorSchemes.iterator();
+						<%
+						Iterator<ColorScheme> itr = colorSchemes.iterator();
 
-							while (itr.hasNext()) {
-								ColorScheme curColorScheme = itr.next();
+						while (itr.hasNext()) {
+							ColorScheme curColorScheme = itr.next();
 
-								String cssClass = StringPool.BLANK;
+							String cssClass = StringPool.BLANK;
 
-								if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
-									cssClass = "selected-color-scheme";
-								}
-							%>
-
-								<li class="<%= cssClass %>">
-									<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= curColorScheme.getColorSchemeId() %>', '');">
-										<span class="theme-title">
-											<%= curColorScheme.getName() %>
-										</span>
-
-										<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getContextPath() %><%= selColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
-									</a>
-								</li>
-
-							<%
+							if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
+								cssClass = "selected-color-scheme";
 							}
-							%>
+						%>
 
-						</ul>
-					</div>
-				</div>
+							<li class="<%= cssClass %>">
+								<a class="theme-entry" href="javascript: ;" onclick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= curColorScheme.getColorSchemeId() %>', '');">
+									<span class="theme-title">
+										<%= curColorScheme.getName() %>
+									</span>
+
+									<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getContextPath() %><%= selColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
+								</a>
+							</li>
+
+						<%
+						}
+						%>
+
+					</ul>
+				</liferay-ui:panel>
 			</c:if>
 		</div>
 	</div>
