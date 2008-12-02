@@ -129,7 +129,7 @@ public class Encryptor {
 		return decryptRaw(key, encryptedBytes);
 	}
 
-	public static String decryptRaw(Key key, byte[] encryptedBytes)
+	public static byte[] decrypt(Key key, byte[] encryptedBytes)
 		throws EncryptorException {
 
 		try {
@@ -140,6 +140,20 @@ public class Encryptor {
 			cipher.init(Cipher.DECRYPT_MODE, key);
 
 			byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+
+			return decryptedBytes;
+		}
+		catch (Exception e) {
+			throw new EncryptorException(e);
+		}
+	}
+
+	public static String decryptRaw(Key key, byte[] encryptedBytes)
+		throws EncryptorException {
+
+		try {
+
+			byte[] decryptedBytes = decrypt(key, encryptedBytes);
 
 			String decryptedString = new String(decryptedBytes, ENCODING);
 
@@ -166,7 +180,7 @@ public class Encryptor {
 		return Base64.encode(encryptedBytes);
 	}
 
-	public static byte[] encryptRaw(Key key, String plainText)
+	public static byte[] encrypt(Key key, byte[] plainBytes)
 		throws EncryptorException {
 
 		try {
@@ -176,10 +190,22 @@ public class Encryptor {
 
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 
-			byte[] decryptedBytes = plainText.getBytes(ENCODING);
-			byte[] encryptedBytes = cipher.doFinal(decryptedBytes);
+			byte[] encryptedBytes = cipher.doFinal(plainBytes);
 
 			return encryptedBytes;
+		}
+		catch (Exception e) {
+			throw new EncryptorException(e);
+		}
+	}
+
+	public static byte[] encryptRaw(Key key, String plainText)
+		throws EncryptorException {
+
+		try {
+			byte[] decryptedBytes = plainText.getBytes(ENCODING);
+			
+			return encrypt(key, decryptedBytes);
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
