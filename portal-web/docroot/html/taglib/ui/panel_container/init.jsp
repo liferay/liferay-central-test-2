@@ -30,8 +30,4 @@ boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:persistState"));
 Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
 String cssClass = (String)request.getAttribute("liferay-ui:panel-container:cssClass");
-
-if (Validator.isNotNull(cssClass)) {
-	cssClass = "lfr-panel-container " + cssClass;
-}
 %>

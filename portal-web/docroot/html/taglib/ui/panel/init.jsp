@@ -47,8 +47,6 @@ if (panelCount != null) {
 
 String panelState = GetterUtil.getString(SessionClicks.get(request, id, null), defaultState);
 
-cssClass = "lfr-panel " + cssClass;
-
 if (collapsible) {
 	cssClass += " lfr-collapsible";
 }

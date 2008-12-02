@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/ui/panel/init.jsp" %>
 
-<div class="<%= cssClass %>" id="<%= id %>">
+<div class="lfr-panel <%= cssClass %>" id="<%= id %>">
 	<div class="lfr-panel-titlebar">
 		<div class="lfr-panel-title">
 			<span>
