@@ -126,10 +126,10 @@ public class Encryptor {
 
 		byte[] encryptedBytes = Base64.decode(encryptedString);
 
-		return decryptRaw(key, encryptedBytes);
+		return decryptUnencodedAsString(key, encryptedBytes);
 	}
 
-	public static byte[] decrypt(Key key, byte[] encryptedBytes)
+	public static byte[] decryptUnencodedAsBytes(Key key, byte[] encryptedBytes)
 		throws EncryptorException {
 
 		try {
@@ -139,25 +139,22 @@ public class Encryptor {
 
 			cipher.init(Cipher.DECRYPT_MODE, key);
 
-			byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-
-			return decryptedBytes;
+			return cipher.doFinal(encryptedBytes);
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
 		}
 	}
 
-	public static String decryptRaw(Key key, byte[] encryptedBytes)
+	public static String decryptUnencodedAsString(
+			Key key, byte[] encryptedBytes)
 		throws EncryptorException {
 
 		try {
+			byte[] decryptedBytes = decryptUnencodedAsBytes(
+				key, encryptedBytes);
 
-			byte[] decryptedBytes = decrypt(key, encryptedBytes);
-
-			String decryptedString = new String(decryptedBytes, ENCODING);
-
-			return decryptedString;
+			return new String(decryptedBytes, ENCODING);
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
@@ -175,12 +172,12 @@ public class Encryptor {
 	public static String encrypt(Key key, String plainText)
 		throws EncryptorException {
 
-		byte[] encryptedBytes = encryptRaw(key, plainText);
+		byte[] encryptedBytes = encryptUnencoded(key, plainText);
 
 		return Base64.encode(encryptedBytes);
 	}
 
-	public static byte[] encrypt(Key key, byte[] plainBytes)
+	public static byte[] encryptUnencoded(Key key, byte[] plainBytes)
 		throws EncryptorException {
 
 		try {
@@ -190,22 +187,20 @@ public class Encryptor {
 
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 
-			byte[] encryptedBytes = cipher.doFinal(plainBytes);
-
-			return encryptedBytes;
+			return cipher.doFinal(plainBytes);
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
 		}
 	}
 
-	public static byte[] encryptRaw(Key key, String plainText)
+	public static byte[] encryptUnencoded(Key key, String plainText)
 		throws EncryptorException {
 
 		try {
 			byte[] decryptedBytes = plainText.getBytes(ENCODING);
-			
-			return encrypt(key, decryptedBytes);
+
+			return encryptUnencoded(key, decryptedBytes);
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
