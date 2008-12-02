@@ -30,7 +30,7 @@
 
 <div class="portal-add-content">
 	<liferay-ui:panel-container id="panel-manage-container" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
-		
+
 		<%
 		String ppid = layoutTypePortlet.getStateMaxPortletId();
 

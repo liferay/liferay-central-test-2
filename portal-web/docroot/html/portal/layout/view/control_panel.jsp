@@ -123,7 +123,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 									%>
 
 									<c:if test="<%= !manageableGroups.isEmpty() %>">
-										<liferay-ui:panel id="communityPanel" title="<%= LanguageUtil.get(pageContext, "my-community") %>" collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+										<liferay-ui:panel id="communityPanel" title='<%= LanguageUtil.get(pageContext, "my-community") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>
 
 												<%
@@ -148,7 +148,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 										</liferay-ui:panel>
 									</c:if>
 									<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-										<liferay-ui:panel id="organizationsPanel" title="<%= LanguageUtil.get(pageContext, "organizations") %>" collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+										<liferay-ui:panel id="organizationsPanel" title='<%= LanguageUtil.get(pageContext, "organizations") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>
 
 												<%
@@ -174,7 +174,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 									</c:if>
 								</liferay-ui:panel-floating-container>
 
-								<c:if test="<%= !scopeLayouts.isEmpty()%>">
+								<c:if test="<%= !scopeLayouts.isEmpty() %>">
 									<liferay-ui:panel-floating-container id="scopePanel" trigger=".lfr-scope-selector">
 										<liferay-ui:panel id="" title="">
 											<ul>
