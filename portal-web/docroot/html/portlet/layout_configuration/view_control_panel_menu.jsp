@@ -30,6 +30,8 @@
 
 <div class="portal-add-content">
 
+<liferay-ui:panel-container id="panel-manage-container" extended="<%= Boolean.TRUE %>" persistState="true">
+	
 	<%
 	String ppid = layoutTypePortlet.getStateMaxPortletId();
 
@@ -37,12 +39,6 @@
 		String panelCategory = "panel-manage-" + category;
 
 		String cssClass = "lfr-component panel-page-category";
-
-		if (category.equals(PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid))) {
-			cssClass += " selected";
-		}
-
-		cssClass += " " + GetterUtil.getString(SessionClicks.get(request, panelCategory, null), "open");
 
 		List<Portlet> portlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), category);
 
@@ -59,37 +55,30 @@
 			}
 	%>
 
-			<div class="<%= cssClass %>" id="<%= panelCategory %>">
-				<ul>
-					<li>
-						<h2>
-							<span><%= title %></span>
-						</h2>
+			<liferay-ui:panel id="<%= panelCategory %>" title="<%= title %>" collapsible="true" persistState="true" extended="true" cssClass="<%= cssClass %>">
+				<ul class="category-portlets">
 
-						<ul class="category-portlets">
+					<%
+					for (Portlet portlet : portlets) {
+						if (!portlet.isInstanceable()) {
+					%>
+							<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
+								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+							</li>
 
-							<%
-							for (Portlet portlet : portlets) {
-								if (!portlet.isInstanceable()) {
-							%>
-									<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
-										<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
-									</li>
+					<%
+						}
+					}
+					%>
 
-							<%
-								}
-							}
-							%>
-
-						</ul>
-					</li>
 				</ul>
-			</div>
+			</liferay-ui:panel>
 
 	<%
 		}
 	}
 	%>
+</liferay-ui:panel-container>
 
 </div>
 

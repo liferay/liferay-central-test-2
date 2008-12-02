@@ -73,7 +73,7 @@ body {
 	font-weight: bold;
 }
 
-.lfr-ctrl-panel .panel-page-content.panel-page-frontpage h2 {
+.lfr-ctrl-panel .panel-page-content.panel-page-frontpage .lfr-panel-titlebar {
 	margin-top: 0;
 }
 
@@ -97,29 +97,31 @@ body {
 	margin: 0;
 }
 
-.lfr-ctrl-panel .lfr-add-content h2 {
+.lfr-ctrl-panel .lfr-add-content .lfr-panel-titlebar {
 	background: url(../images/arrows/05_down.png) no-repeat 5px 50%;
 	font-size: 14px;
 }
 
-.lfr-ctrl-panel .lfr-add-content h2 span {
+.lfr-ctrl-panel .lfr-add-content .lfr-panel-titlebar span {
 	display: block;
 	line-height: 26px;
 	margin: 0 5px 0 0;
 }
 
-.lfr-ctrl-panel .panel-page-category h2 {
-	font-size: 14px;
+.lfr-ctrl-panel .lfr-panel-titlebar {
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1.3;
 	margin: 0;
 	overflow: hidden;
-	padding: 3px 0;
 }
 
-.js .lfr-ctrl-panel .panel-page-category h2 {
-	cursor: pointer;
+.lfr-ctrl-panel .lfr-panel-title {
+	line-height: 1.5;
+	padding-left: 5px;
 }
 
-.ie6 .lfr-ctrl-panel .panel-page-category h2 {
+.ie6 .lfr-ctrl-panel .panel-page-category  .lfr-panel-titlebar {
 	padding-bottom: 5px;
 }
 
@@ -128,7 +130,12 @@ body {
 }
 
 .lfr-ctrl-panel .panel-page-category {
+	border-width: 0;
+}
+
+.lfr-ctrl-panel .panel-page-category .lfr-panel-titlebar {
 	background: transparent url(../images/common/category_bg.png) repeat-x scroll 0 0;
+	border-bottom-width: 0;
 	margin: 0;
 }
 
@@ -145,7 +152,7 @@ body {
 }
 
 .lfr-ctrl-panel .panel-page-category .category-portlets a:hover {
-	background-color: #4EA9DA;
+	background-color: #4ea9da;
 	color: #fff;
 }
 
@@ -156,11 +163,6 @@ body {
 	height: 20px;
 	padding: 0;
 	width: 20px;
-}
-
-.lfr-ctrl-panel .panel-page-category h2 span {
-	float: left;
-	line-height: 20px;
 }
 
 .js .lfr-ctrl-panel .panel-page-category.closed .toggle-menu {
@@ -219,7 +221,7 @@ body {
 
 /* ---------- Manage portal ---------- */
 
-.lfr-ctrl-panel #panel-manage-portal {
+.lfr-ctrl-panel #panel-manage-portal .lfr-panel-titlebar {
 	background: url(../images/common/category_portal_bg.png) repeat-x 0 0;
 }
 
@@ -237,7 +239,7 @@ body {
 
 /* ---------- Manage server ---------- */
 
-.lfr-ctrl-panel #panel-manage-server {
+.lfr-ctrl-panel #panel-manage-server .lfr-panel-titlebar {
 	background: url(../images/common/category_server_bg.png) repeat-x 0 0;
 }
 
