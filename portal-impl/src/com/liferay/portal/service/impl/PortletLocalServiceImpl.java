@@ -1195,9 +1195,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		boolean validate = PropsValues.PORTLET_XML_VALIDATE;
-
-		Document doc = SAXReaderUtil.read(xml, validate);
+		Document doc = SAXReaderUtil.read(
+			xml, PropsValues.PORTLET_XML_VALIDATE);
 
 		Element root = doc.getRootElement();
 
