@@ -501,7 +501,7 @@
 
 		<!-- Transactions -->
 
-		<tx-required>getFriendlyURLLayout</tx-required>		
+		<tx-required>getFriendlyURLLayout</tx-required>
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 
@@ -1179,7 +1179,7 @@
 
 		<!-- Transactions -->
 
-		<tx-required>getResourceCode</tx-required>		
+		<tx-required>getResourceCode</tx-required>
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 
