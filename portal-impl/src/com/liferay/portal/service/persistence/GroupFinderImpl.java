@@ -403,7 +403,24 @@ public class GroupFinderImpl
 			params = new LinkedHashMap<String, Object>();
 		}
 
-		Long userId = (Long)params.get("usersGroups");
+		if (name != null && name.trim().length() == 0) {
+			name = null;
+		}
+
+		if (description != null && description.trim().length() == 0) {
+			description = null;
+		}
+
+		Object userIdObj = params.get("usersGroups");
+
+		Long userId = null;
+
+		if (userIdObj instanceof java.lang.String) {
+			userId = new Long((String)userIdObj);
+		}
+		else if (userIdObj instanceof java.lang.Long) {
+			userId = (Long)params.get("usersGroups");
+		}
 
 		LinkedHashMap<String, Object> params1 = params;
 
