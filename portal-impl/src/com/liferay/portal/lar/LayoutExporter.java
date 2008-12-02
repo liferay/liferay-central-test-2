@@ -126,10 +126,6 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
-		boolean exportPortletData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
-		boolean exportPortletSetup = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
@@ -141,8 +137,6 @@ public class LayoutExporter {
 			_log.debug("Export categories " + exportCategories);
 			_log.debug("Export permissions " + exportPermissions);
 			_log.debug("Export user permissions " + exportUserPermissions);
-			_log.debug("Export portlet data " + exportPortletData);
-			_log.debug("Export portlet setup " + exportPortletSetup);
 			_log.debug(
 				"Export portlet archived setups " +
 					exportPortletArchivedSetups);
@@ -351,7 +345,6 @@ public class LayoutExporter {
 				portletIds.entrySet()) {
 
 			String portletId = (String)portletIdsEntry.getValue()[0];
-			String rootPortletId = PortletConstants.getRootPortletId(portletId);
 			long plid = (Long)portletIdsEntry.getValue()[1];
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
@@ -359,37 +352,13 @@ public class LayoutExporter {
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
 
-			boolean exportCurPortletData = exportPortletData;
-			boolean exportCurPortletSetup = exportPortletSetup;
-
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				context.getCompanyId(), portletId);
-
-			if (portlet != null) {
-				String portletDataHandlerClass =
-					portlet.getPortletDataHandlerClass();
-
-				if (portletDataHandlerClass != null) {
-					exportCurPortletData =
-						exportPortletData &&
-						MapUtil.getBoolean(
-							parameterMap,
-							PortletDataHandlerKeys.PORTLET_DATA +
-								StringPool.UNDERLINE + rootPortletId);
-
-					exportCurPortletSetup =
-						exportPortletSetup &&
-						MapUtil.getBoolean(
-							parameterMap,
-							PortletDataHandlerKeys.PORTLET_SETUP +
-								StringPool.UNDERLINE + rootPortletId);
-				}
-			}
+			boolean[] exportPortletControls = getExportPortletControls(
+				context.getCompanyId(), portletId, context, parameterMap);
 
 			_portletExporter.exportPortlet(
 				context, layoutCache, portletId, layout, portletsEl,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
-				exportCurPortletData, exportCurPortletSetup,
+				exportPortletControls[0], exportPortletControls[1],
 				exportPortletUserPreferences, exportUserPermissions);
 		}
 
@@ -658,6 +627,91 @@ public class LayoutExporter {
 					path + "/" + file.getName(), FileUtil.getBytes(file));
 			}
 		}
+	}
+
+	/**
+	 * Check for PORTLET_DATA and PORTLET_SETUP export controls for a given
+	 * portlet during LAR export and Staging publish
+	 *
+	 * @param		companyId
+	 * @param		portletId
+	 * @param		context
+	 * @param		parameterMap
+	 * @return		an array containing two booleans, the first specifies if
+	 * 				portlet data will be exported, the second specifies if
+	 * 				portlet preferences will be exported
+	 * @throws SystemException
+	 */
+	protected boolean[] getExportPortletControls(
+			long companyId, String portletId, PortletDataContext context,
+			Map<String, String[]> parameterMap)
+		throws SystemException {
+
+		boolean exportPortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean exportPortletDataAll = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL);
+		boolean exportPortletSetup = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Export portlet data " + exportPortletData);
+			_log.debug("Export all portlet data " + exportPortletDataAll);
+			_log.debug("Export portlet setup " + exportPortletSetup);
+		}
+
+		boolean exportCurPortletData = exportPortletData;
+		boolean exportCurPortletSetup = exportPortletSetup;
+
+		// If PORTLET_DATA_ALL is true, this means that Staging has just been
+		// activated and all data and setup must be exported, there is no
+		// portlet export control to check in this case
+
+		if (exportPortletDataAll) {
+			exportCurPortletData = true;
+			exportCurPortletSetup = true;
+		}
+		else {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, portletId);
+
+			if (portlet != null) {
+				String portletDataHandlerClass =
+					portlet.getPortletDataHandlerClass();
+
+				// Checking if the portlet has a data handler, if it doesn't,
+				// the default values are the ones set in PORTLET_DATA and
+				// PORTLET_SETUP, if it has a data handler, iterate over each
+				// portlet export control
+
+				if (portletDataHandlerClass != null) {
+					String rootPortletId = PortletConstants.getRootPortletId(
+						portletId);
+
+					// PORTLET_DATA and the PORTLET_DATA for this specific
+					// data handler must be true
+
+					exportCurPortletData =
+						exportPortletData &&
+						MapUtil.getBoolean(
+							parameterMap,
+							PortletDataHandlerKeys.PORTLET_DATA +
+								StringPool.UNDERLINE + rootPortletId);
+
+					// PORTLET_DATA and the PORTLET_SETUP for this specific
+					// data handler must be true
+
+					exportCurPortletSetup =
+						exportPortletData &&
+						MapUtil.getBoolean(
+							parameterMap,
+							PortletDataHandlerKeys.PORTLET_SETUP +
+								StringPool.UNDERLINE + rootPortletId);
+				}
+			}
+		}
+
+		return new boolean[] {exportCurPortletData, exportCurPortletSetup};
 	}
 
 	protected String getLayoutIconPath(

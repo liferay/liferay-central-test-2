@@ -264,6 +264,11 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
 
 											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
+												<li class="<%= renderResponse.getNamespace() %>handler-control">
+													<input <%= checked %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" type="checkbox" />
+
+													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>"><liferay-ui:message key="setup" /></label>
+												</li>
 												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
 											</ul>
 										</li>

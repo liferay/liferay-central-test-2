@@ -122,7 +122,12 @@ public class PortletExporter {
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
-		boolean exportPortletData = true;
+
+		boolean exportPortletData = MapUtil.getBoolean(
+			parameterMap,
+			PortletDataHandlerKeys.PORTLET_DATA + "_" +
+			PortletConstants.getRootPortletId(portletId));
+
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
@@ -673,30 +678,6 @@ public class PortletExporter {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Exporting data for " + portletId);
-		}
-
-		Map<String, String[]> parameterMap = context.getParameterMap();
-
-		boolean exportData = false;
-
-		if (MapUtil.getBoolean(
-				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + "_" +
-					portlet.getRootPortletId()) ||
-			MapUtil.getBoolean(
-				parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
-
-			exportData = true;
-		}
-
-		if (!exportData) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Not exporting data for " + portletId +
-						" because it was not selected by the user");
-			}
-
-			return;
 		}
 
 		String data = null;
