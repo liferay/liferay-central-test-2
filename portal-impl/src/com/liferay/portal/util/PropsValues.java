@@ -948,6 +948,10 @@ public class PropsValues {
 	public static final String PORTLET_VIRTUAL_PATH =
 		PropsUtil.get(PropsKeys.PORTLET_VIRTUAL_PATH);
 
+	public static final boolean PORTLET_XML_VALIDATE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.PORTLET_XML_VALIDATE));
+
 	public static final boolean PREFERENCE_VALIDATE_ON_STARTUP =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PREFERENCE_VALIDATE_ON_STARTUP));

@@ -917,6 +917,8 @@ public interface PropsKeys {
 
 	public static final String PORTLET_VIRTUAL_PATH = "portlet.virtual.path";
 
+	public static final String PORTLET_XML_VALIDATE = "portlet.xml.validate";
+
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";
 
 	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
