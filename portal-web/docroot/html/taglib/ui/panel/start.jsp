@@ -26,13 +26,13 @@
 
 <div class="<%= cssClass %>" id="<%= id %>">
 	<div class="lfr-panel-titlebar">
-		<h3 class="lfr-panel-title">
+		<div class="lfr-panel-title">
 			<span>
 				<%= title %>
 			</span>
-		</h3>
+		</div>
 
-		<c:if test="<%= extended %>">
+		<c:if test="<%= extended && collapsible %>">
 			<a href="javascript: ;" class="lfr-panel-button"></a>
 		</c:if>
 	</div>

@@ -205,6 +205,8 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .lfr-panel-titlebar .lfr-panel-title {
 	float: left;
+	font-size: 1.2em;
+	font-weight: bold;
 	margin: 0;
 }
 

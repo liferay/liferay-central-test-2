@@ -36,7 +36,7 @@ String cssClass = (String)request.getAttribute("liferay-ui:panel:cssClass");
 IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:panel-container:panel-count");
 
 if (panelCount != null) {
-	id += panelCount.increment();
+	panelCount.increment();
 
 	Boolean panelContainerExtended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
 
