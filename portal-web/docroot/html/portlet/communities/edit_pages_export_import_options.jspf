@@ -125,7 +125,7 @@
 			<li class="tree-item">
 				<c:choose>
 					<c:when test='<%= tabs4.equals("import") %>'>
-						<input checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataStrategies');" type="checkbox" />
+						<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataStrategies');" type="checkbox" />
 
 						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>"><liferay-ui:message key="data" /></label>
 
@@ -170,7 +170,7 @@
 					<c:otherwise>
 						<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="true" />
 
-						<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
+						<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
 
 						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>Checkbox"><liferay-ui:message key="data" /></label>
 
@@ -323,13 +323,13 @@
 
 													<br />
 
-													<input checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" type="checkbox" />
+													<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" type="checkbox" />
 
 													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>"><liferay-ui:message key="setup" /></label>
 
 													<br />
 
-													<input checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>');" type="checkbox" />
+													<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>');" type="checkbox" />
 
 													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><liferay-ui:message key="data" /></label>
 

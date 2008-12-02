@@ -269,6 +269,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
 													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>"><liferay-ui:message key="setup" /></label>
 												</li>
+
 												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
 											</ul>
 										</li>

@@ -629,19 +629,6 @@ public class LayoutExporter {
 		}
 	}
 
-	/**
-	 * Check for PORTLET_DATA and PORTLET_SETUP export controls for a given
-	 * portlet during LAR export and Staging publish
-	 *
-	 * @param		companyId
-	 * @param		portletId
-	 * @param		context
-	 * @param		parameterMap
-	 * @return		an array containing two booleans, the first specifies if
-	 * 				portlet data will be exported, the second specifies if
-	 * 				portlet preferences will be exported
-	 * @throws SystemException
-	 */
 	protected boolean[] getExportPortletControls(
 			long companyId, String portletId, PortletDataContext context,
 			Map<String, String[]> parameterMap)
@@ -663,9 +650,9 @@ public class LayoutExporter {
 		boolean exportCurPortletData = exportPortletData;
 		boolean exportCurPortletSetup = exportPortletSetup;
 
-		// If PORTLET_DATA_ALL is true, this means that Staging has just been
-		// activated and all data and setup must be exported, there is no
-		// portlet export control to check in this case
+		// If PORTLET_DATA_ALL is true, this means that staging has just been
+		// activated and all data and setup must be exported. There is no
+		// portlet export control to check in this case.
 
 		if (exportPortletDataAll) {
 			exportCurPortletData = true;
@@ -681,8 +668,8 @@ public class LayoutExporter {
 
 				// Checking if the portlet has a data handler, if it doesn't,
 				// the default values are the ones set in PORTLET_DATA and
-				// PORTLET_SETUP, if it has a data handler, iterate over each
-				// portlet export control
+				// PORTLET_SETUP. If it has a data handler, iterate over each
+				// portlet export control.
 
 				if (portletDataHandlerClass != null) {
 					String rootPortletId = PortletConstants.getRootPortletId(
