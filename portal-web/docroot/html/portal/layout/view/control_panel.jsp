@@ -114,14 +114,16 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 										</nobr>
 									</c:if>
 								</h2>
-								<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>" pagingElements="ul" resultsPerPage="1">
+
+								<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
+
 									<%
 									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
 									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
 									%>
 
 									<c:if test="<%= !manageableGroups.isEmpty() %>">
-										<liferay-ui:panel id="communityPanel" title="<%= LanguageUtil.get(pageContext, "my-community") %>" collapsible="true" persistState="true" extended="true">
+										<liferay-ui:panel id="communityPanel" title="<%= LanguageUtil.get(pageContext, "my-community") %>" collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>
 
 												<%
@@ -146,7 +148,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 										</liferay-ui:panel>
 									</c:if>
 									<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-										<liferay-ui:panel id="organizationsPanel" title="<%= LanguageUtil.get(pageContext, "organizations") %>" collapsible="true" persistState="true" extended="true">
+										<liferay-ui:panel id="organizationsPanel" title="<%= LanguageUtil.get(pageContext, "organizations") %>" collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>
 
 												<%
