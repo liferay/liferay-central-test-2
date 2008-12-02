@@ -32,8 +32,8 @@
 			</span>
 		</div>
 
-		<c:if test="<%= extended && collapsible %>">
-			<a href="javascript: ;" class="lfr-panel-button"></a>
+		<c:if test="<%= collapsible && extended %>">
+			<a class="lfr-panel-button" href="javascript: ;"></a>
 		</c:if>
 	</div>
 
