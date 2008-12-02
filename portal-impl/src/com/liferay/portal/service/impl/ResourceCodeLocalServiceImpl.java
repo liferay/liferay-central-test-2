@@ -70,7 +70,7 @@ public class ResourceCodeLocalServiceImpl
 				resourceCode.setName(name);
 				resourceCode.setScope(scope);
 
-				resourceCodePersistence.update(resourceCode, false);
+				resourceCodePersistence.update(resourceCode, true);
 			}
 
 			_resourceCodes.put(key, resourceCode);
