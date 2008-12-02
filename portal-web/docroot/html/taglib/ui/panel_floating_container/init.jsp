@@ -31,16 +31,8 @@ boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:persistState"));
 boolean paging = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:paging"));
 String pagingElements = (String)request.getAttribute("liferay-ui:panel-floating-container:pagingElements");
-int resultsPerPage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:panel-floating-container:resultsPerPage"), 1);
+int resultsPerPage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:panel-floating-container:resultsPerPage"));
 int width = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:panel-floating-container:width"));
 Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-floating-container:extended");
 String cssClass = (String)request.getAttribute("liferay-ui:panel-floating-container:cssClass");
-
-if (paging && resultsPerPage < 1) {
-	resultsPerPage = 1;
-}
-
-if (width < 300) {
-	width = 300;
-}
 %>

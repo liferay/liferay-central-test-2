@@ -49,16 +49,27 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 		request.setAttribute(
 			"liferay-ui:panel-floating-container:trigger", _trigger);
 		request.setAttribute(
-			"liferay-ui:panel-floating-container:accordion", String.valueOf(_accordion));
+			"liferay-ui:panel-floating-container:accordion",
+			String.valueOf(_accordion));
 		request.setAttribute(
 			"liferay-ui:panel-floating-container:persistState",
 			String.valueOf(_persistState));
-		request.setAttribute("liferay-ui:panel-floating-container:paging", String.valueOf(_paging));
-		request.setAttribute("liferay-ui:panel-floating-container:pagingElements", _pagingElements);
-		request.setAttribute("liferay-ui:panel-floating-container:resultsPerPage", String.valueOf(_resultsPerPage));
-		request.setAttribute("liferay-ui:panel-floating-container:width", String.valueOf(_width));
-		request.setAttribute("liferay-ui:panel-floating-container:extended", _extended);
-		request.setAttribute("liferay-ui:panel-floating-container:cssClass", _cssClass);
+		request.setAttribute(
+			"liferay-ui:panel-floating-container:paging",
+			String.valueOf(_paging));
+		request.setAttribute(
+			"liferay-ui:panel-floating-container:pagingElements",
+			_pagingElements);
+		request.setAttribute(
+			"liferay-ui:panel-floating-container:resultsPerPage",
+			String.valueOf(_resultsPerPage));
+		request.setAttribute(
+			"liferay-ui:panel-floating-container:width",
+			String.valueOf(_width));
+		request.setAttribute(
+			"liferay-ui:panel-floating-container:extended", _extended);
+		request.setAttribute(
+			"liferay-ui:panel-floating-container:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:panel-container:panel-count", new IntegerWrapper());
 
@@ -108,15 +119,24 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 			}
 
 			request.removeAttribute("liferay-ui:panel-floating-container:id");
-			request.removeAttribute("liferay-ui:panel-floating-container:trigger");
-			request.removeAttribute("liferay-ui:panel-floating-container:accordion");
-			request.removeAttribute("liferay-ui:panel-floating-container:persistState");
-			request.removeAttribute("liferay-ui:panel-floating-container:paging");
-			request.removeAttribute("liferay-ui:panel-floating-container:pagingElements");
-			request.removeAttribute("liferay-ui:panel-floating-container:resultsPerPage");
-			request.removeAttribute("liferay-ui:panel-floating-container:width");
-			request.removeAttribute("liferay-ui:panel-floating-container:extended");
-			request.removeAttribute("liferay-ui:panel-floating-container:cssClass");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:trigger");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:accordion");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:persistState");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:paging");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:pagingElements");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:resultsPerPage");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:width");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:extended");
+			request.removeAttribute(
+				"liferay-ui:panel-floating-container:cssClass");
 
 			return EVAL_PAGE;
 		}
@@ -204,9 +224,9 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 	private boolean _accordion;
 	private boolean _persistState;
 	private boolean _paging;
-	private String _pagingElements;
-	private int _resultsPerPage;
-	private int _width;
+	private String _pagingElements = "ul";
+	private int _resultsPerPage = 1;
+	private int _width = 300;
 	private Boolean _extended;
  	private String _cssClass = StringPool.BLANK;
  	private String _bodyContentString = StringPool.BLANK;
