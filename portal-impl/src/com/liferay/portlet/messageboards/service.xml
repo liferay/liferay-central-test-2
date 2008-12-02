@@ -331,6 +331,10 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+
+		<!-- Transactions -->
+
+		<tx-required>getStatsUser</tx-required>
 	</entity>
 	<entity name="MBThread" local-service="true" remote-service="true">
 

@@ -147,6 +147,10 @@
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
+
+		<!-- Transactions -->
+
+		<tx-required>getPage</tx-required>
 	</entity>
 	<entity name="WikiPageResource" local-service="true" remote-service="false">
 

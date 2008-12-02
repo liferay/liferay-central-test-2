@@ -498,6 +498,10 @@
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
+
+		<!-- Transactions -->
+
+		<tx-required>getFriendlyURLLayout</tx-required>		
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 
