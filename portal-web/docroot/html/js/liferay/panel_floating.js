@@ -1,4 +1,4 @@
-Liferay.FloatingPanel = Liferay.Panel.extend({
+Liferay.PanelFloating = Liferay.Panel.extend({
 
 	/**
 	 * OPTIONS
