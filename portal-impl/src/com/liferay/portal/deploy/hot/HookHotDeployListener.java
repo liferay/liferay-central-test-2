@@ -872,6 +872,8 @@ public class HookHotDeployListener
 	private class AutoLoginsContainer {
 
 		public void registerAutoLogin(AutoLogin autoLogin) {
+			AutoLoginFilter.registerAutoLogin(autoLogin);
+
 			_autoLogins.add(autoLogin);
 		}
 
