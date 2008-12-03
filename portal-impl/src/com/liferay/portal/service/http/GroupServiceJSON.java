@@ -141,6 +141,15 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONObject getUserGroup(long companyId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Group returnValue = GroupServiceUtil.getUserGroup(companyId,
+				userId);
+
+		return GroupJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONArray getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups) {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserGroupsGroups(userGroups);

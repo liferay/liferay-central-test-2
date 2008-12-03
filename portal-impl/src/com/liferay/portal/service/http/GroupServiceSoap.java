@@ -196,6 +196,21 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.GroupSoap getUserGroup(
+		long companyId, long userId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getUserGroup(companyId,
+					userId);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.GroupSoap[] getUserGroupsGroups(
 		com.liferay.portal.model.UserGroupSoap[] userGroups)
 		throws RemoteException {

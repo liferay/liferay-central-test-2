@@ -418,6 +418,44 @@ public class GroupServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Group getUserGroup(
+		HttpPrincipal httpPrincipal, long companyId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new LongWrapper(userId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
+					"getUserGroup", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Group)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		HttpPrincipal httpPrincipal,
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
