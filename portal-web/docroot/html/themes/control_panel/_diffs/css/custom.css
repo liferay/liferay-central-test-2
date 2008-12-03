@@ -46,6 +46,7 @@ body {
 
 .lfr-ctrl-panel .portal-add-content, .lfr-ctrl-panel .portal-add-content .lfr-panel-container {
 	background: none;
+	border-width: 0;
 }
 
 .lfr-ctrl-panel .user-greeting {
