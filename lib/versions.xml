@@ -2230,7 +2230,7 @@
 	</library>
 	<library>
 		<file-name>portal/spring.jar</file-name>
-		<version>2.5.5</version>
+		<version>2.5.6</version>
 		<project-name>Spring</project-name>
 		<project-url>http://www.springframework.org</project-url>
 		<licenses>
@@ -2242,7 +2242,7 @@
 	</library>
 	<library>
 		<file-name>portal/spring-test.jar</file-name>
-		<version>2.5.5</version>
+		<version>2.5.6</version>
 		<project-name>Spring</project-name>
 		<project-url>http://www.springframework.org</project-url>
 		<licenses>
@@ -2254,7 +2254,7 @@
 	</library>
 	<library>
 		<file-name>portal/spring-webmvc.jar</file-name>
-		<version>2.5.5</version>
+		<version>2.5.6</version>
 		<project-name>Spring</project-name>
 		<project-url>http://www.springframework.org</project-url>
 		<licenses>
