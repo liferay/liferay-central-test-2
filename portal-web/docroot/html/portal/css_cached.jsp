@@ -995,6 +995,25 @@ li.toggle-expand a {
 
 /* ---------- Portal ---------- */
 
+/* ---------- Page settings styling ---------- */
+
+.page-extra-settings .lfr-panel-titlebar .lfr-panel-title {
+	font-size: 1em;
+	padding: 0.5em 0;
+}
+
+.page-extra-settings .lfr-extended .lfr-panel-titlebar {
+	line-height: 1;
+}
+
+.page-extra-settings .lfr-extended .lfr-panel-titlebar {
+	line-height: 1;
+}
+
+.page-extra-settings .lfr-extended .lfr-panel-content {
+	padding: 5px;
+}
+
 /* ---------- Portal notifications styling ---------- */
 
 .popup-alert-notice .notice-date {
