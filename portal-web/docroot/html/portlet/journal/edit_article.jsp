@@ -834,67 +834,63 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 		<br />
 
-		<table class="journal-edit-article-extra">
-		<tr class="portlet-section-header results-header">
-			<td>
-				<b><liferay-ui:message key="abstract" /></b>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
+		<% 
+		String abstractId = portletDisplay.getNamespace() + "abstract";
+		String abstractTitle = LanguageUtil.get(pageContext, "abstract");
+		%>
 
-					<%
-					String[] imageExtensions = PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
-					%>
+		<liferay-ui:panel id="<%= abstractId %>" title="<%= abstractTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+			<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
-					<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
-				</liferay-ui:error>
+				<%
+				String[] imageExtensions = PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
+				%>
 
-				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+			</liferay-ui:error>
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="description" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="small-image-url" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImageURL" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="use-small-image" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImage" />
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		</table>
+			<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="description" />
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="small-image-url" />
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImageURL" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
+				</td>
+				<td>
+					<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="use-small-image" />
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImage" />
+				</td>
+			</tr>
+			</table>
+		</liferay-ui:panel>
 
 		<br />
 

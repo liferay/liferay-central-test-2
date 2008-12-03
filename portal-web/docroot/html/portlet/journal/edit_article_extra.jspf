@@ -22,101 +22,29 @@
  */
 %>
 
+<%
+String workflowId = portletDisplay.getNamespace() + "workflow";
+String workflowTitle = LanguageUtil.get(pageContext, "workflow");
+
+String formPresentationId = portletDisplay.getNamespace() + "formPresentation";
+String formPresentationTitle = LanguageUtil.get(pageContext, "form-and-presentation");
+
+String categorizationId = portletDisplay.getNamespace() + "categorization";
+String categorizationTitle = LanguageUtil.get(pageContext, "categorization");
+
+String scheduleId = portletDisplay.getNamespace() + "schedule";
+String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
+%>
+
 <liferay-ui:toggle-area
 	id="toggle_id_journal_edit_article_extra"
 	showMessage='<%= LanguageUtil.get(pageContext, "advanced") + " &raquo;" %>'
 	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "basic") %>'
 	align="right"
 >
-	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header results-header">
-		<td>
-			<b><liferay-ui:message key="workflow" /></b>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<c:if test="<%= article != null %>">
-				<liferay-ui:message key="version" />
 
-				<select onChange="<portlet:namespace />changeVersionView(this.value);">
-
-					<%
-					List<JournalArticle> articleVersions = JournalArticleLocalServiceUtil.getArticles(article.getGroupId(), article.getArticleId());
-
-					for (JournalArticle curArticle : articleVersions) {
-
-					%>
-
-						<option <%= (curArticle.getVersion() == article.getVersion()) ? "selected" : "" %> value="<%= curArticle.getVersion() %>"><%= curArticle.getVersion() %></option>
-
-					<%
-					}
-					%>
-
-				</select>
-
-				<br /><br />
-			</c:if>
-
-			<liferay-ui:message key="status" />
-
-			<%
-			String status = null;
-
-			if (article == null) {
-				status = "new";
-			}
-			else if (article.isExpired()) {
-				status = "expired";
-			}
-			else if (article.isApproved()) {
-				status = "approved";
-			}
-			else {
-				status = "not-approved";
-			}
-			%>
-
-			<b class="journal-article-status journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></b>
-
-			<c:if test="<%= article != null %>">
-				<br /><br />
-
-				<nobr>
-					<liferay-ui:message key="increment-version-on-save" />
-
-					<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
-				</nobr>
-
-				<br /><br />
-
-				<c:if test="<%= !article.isApproved() && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
-					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
-				</c:if>
-
-				<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-					<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
-				</c:if>
-
-				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
-				</c:if>
-			</c:if>
-		</td>
-	</tr>
-	</table>
-
-	<br />
-
-	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header results-header">
-		<td>
-			<b><liferay-ui:message key="form-and-presentation" /></b>
-		</td>
-	</tr>
-	<tr>
-		<td>
+	<liferay-ui:panel-container id="<%= portletDisplay.getNamespace() + "journalExtras" %>" persistState="<%= true %>" extended="<%= Boolean.FALSE %>" cssClass="journal-extras">
+		<liferay-ui:panel id="<%= formPresentationId %>" title="<%= formPresentationTitle %>" defaultState="open" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:message key="structure" />
 
 			<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
@@ -187,20 +115,79 @@
 					</liferay-ui:table-iterator>
 				</c:otherwise>
 			</c:choose>
-		</td>
-	</tr>
-	</table>
+		</liferay-ui:panel>
 
-	<br />
+		<liferay-ui:panel id="<%= workflowId %>" title="<%= workflowTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+			<c:if test="<%= article != null %>">
+				<liferay-ui:message key="version" />
 
-	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header results-header">
-		<td>
-			<b><liferay-ui:message key="categorization" /></b>
-		</td>
-	</tr>
-	<tr>
-		<td>
+				<select onChange="<portlet:namespace />changeVersionView(this.value);">
+
+					<%
+					List<JournalArticle> articleVersions = JournalArticleLocalServiceUtil.getArticles(article.getGroupId(), article.getArticleId());
+
+					for (JournalArticle curArticle : articleVersions) {
+
+					%>
+
+						<option <%= (curArticle.getVersion() == article.getVersion()) ? "selected" : "" %> value="<%= curArticle.getVersion() %>"><%= curArticle.getVersion() %></option>
+
+					<%
+					}
+					%>
+
+				</select>
+
+				<br /><br />
+			</c:if>
+
+			<liferay-ui:message key="status" />
+
+			<%
+			String status = null;
+
+			if (article == null) {
+				status = "new";
+			}
+			else if (article.isExpired()) {
+				status = "expired";
+			}
+			else if (article.isApproved()) {
+				status = "approved";
+			}
+			else {
+				status = "not-approved";
+			}
+			%>
+
+			<b class="journal-article-status journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></b>
+
+			<c:if test="<%= article != null %>">
+				<br /><br />
+
+				<nobr>
+					<liferay-ui:message key="increment-version-on-save" />
+
+					<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
+				</nobr>
+
+				<br /><br />
+
+				<c:if test="<%= !article.isApproved() && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
+					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
+				</c:if>
+
+				<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
+					<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
+				</c:if>
+
+				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
+					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
+				</c:if>
+			</c:if>
+		</liferay-ui:panel>
+
+		<liferay-ui:panel id="<%= categorizationId %>" title="<%= categorizationTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
 			<liferay-ui:message key="type" /><br />
@@ -255,20 +242,9 @@
 			<liferay-ui:message key="searchable" />
 
 			<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="indexable" />
-		</td>
-	</tr>
-	</table>
+		</liferay-ui:panel>
 
-	<br />
-
-	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header results-header">
-		<td>
-			<b><liferay-ui:message key="schedule" /></b>
-		</td>
-	</tr>
-	<tr>
-		<td>
+		<liferay-ui:panel id="<%= scheduleId %>" title="<%= scheduleTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 			<liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 
@@ -303,7 +279,6 @@
 			%>
 
 			<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick="<%= taglibNeverReviewOnClick %>" />
-		</td>
-	</tr>
-	</table>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 </liferay-ui:toggle-area>

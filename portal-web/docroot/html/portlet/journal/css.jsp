@@ -76,3 +76,29 @@
 	text-align: right;
 	width: 40px;
 }
+
+.portlet-journal .lfr-panel-titlebar .lfr-panel-title {
+	border-bottom: 1px solid #ccc;
+	float: none;
+	position: relative;
+	top: -0.5em;
+}
+
+.portlet-journal .lfr-panel-titlebar .lfr-panel-title span {
+	background: #fff;
+	padding: 0 8px 0 4px;
+	position: relative;
+	top: 0.55em;
+}
+
+.portlet-journal .lfr-panel-content {
+	padding: 10px;
+}
+
+.portlet-journal .journal-extras {
+	border-width: 0;
+}
+
+.portlet-journal .journal-extras .lfr-panel {
+	margin-bottom: 1em;
+}
