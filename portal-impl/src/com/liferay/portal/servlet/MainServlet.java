@@ -901,9 +901,9 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-    protected synchronized RequestProcessor getRequestProcessor(
+	protected synchronized RequestProcessor getRequestProcessor(
 			ModuleConfig moduleConfig)
-        throws ServletException {
+		throws ServletException {
 
 		ServletContext servletContext = getServletContext();
 
