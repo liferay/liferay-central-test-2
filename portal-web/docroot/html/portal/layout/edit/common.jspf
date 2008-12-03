@@ -36,7 +36,6 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 
 <liferay-ui:panel-container id="<%= userSettingsId %>" persistState="<%= true %>" extended="<%= Boolean.TRUE %>" cssClass="page-extra-settings">
 	<liferay-ui:panel id="<%= metaTagsId %>" title="<%= metaTagsTitle %>" defaultState="closed">
-
 		<table class="lfr-table">
 		<tr>
 			<td></td>
@@ -175,11 +174,9 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 			</td>
 		</tr>
 		</table>
-
 	</liferay-ui:panel>
 
-	<liferay-ui:panel id="<%= javascriptId %>" title="<%= javascriptTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= Boolean.TRUE %>">
-
+	<liferay-ui:panel id="<%= javascriptId %>" title="<%= javascriptTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= true %>">
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -216,61 +213,61 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 			</td>
 		</tr>
 		</table>
-
 	</liferay-ui:panel>
 
-<c:if test="<%= PortalUtil.isLayoutSitemapable(selLayout) %>">
+	<c:if test="<%= PortalUtil.isLayoutSitemapable(selLayout) %>">
 
-<%
-	String sitemapId = portletDisplay.getNamespace() + "sitemap";
-	String sitemapTitle = LanguageUtil.get(pageContext, "sitemap-protocol");
-%>
-
-	<liferay-ui:panel id="<%= metaTagsId %>" title="<%= metaTagsTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= Boolean.TRUE %>">
 		<%
-		boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);
-		String changeFrequency = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
+		String sitemapId = portletDisplay.getNamespace() + "sitemap";
+		String sitemapTitle = LanguageUtil.get(pageContext, "sitemap-protocol");
 		%>
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="include" />
-			</td>
-			<td>
-				<select name="TypeSettingsProperties(sitemap-include)">
-					<option <%= (include) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-					<option <%= (!include) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="page-priority" /> (0.0 - 1.0)
-			</td>
-			<td>
-				<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="change-frequency" />
-			</td>
-			<td>
-				<select name="TypeSettingsProperties(sitemap-changefreq)">
-					<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><liferay-ui:message key="always" /></option>
-					<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><liferay-ui:message key="hourly" /></option>
-					<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><liferay-ui:message key="daily" /></option>
-					<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><liferay-ui:message key="weekly" /></option>
-					<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><liferay-ui:message key="monthly" /></option>
-					<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><liferay-ui:message key="yearly" /></option>
-					<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><liferay-ui:message key="never" /></option>
-				</select>
-			</td>
-		</tr>
-		</table>
-	</liferay-ui:panel>
-</c:if>
+		<liferay-ui:panel id="<%= metaTagsId %>" title="<%= metaTagsTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= true %>">
+
+			<%
+			boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);
+			String changeFrequency = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
+			%>
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="include" />
+				</td>
+				<td>
+					<select name="TypeSettingsProperties(sitemap-include)">
+						<option <%= (include) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+						<option <%= (!include) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="page-priority" /> (0.0 - 1.0)
+				</td>
+				<td>
+					<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="change-frequency" />
+				</td>
+				<td>
+					<select name="TypeSettingsProperties(sitemap-changefreq)">
+						<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><liferay-ui:message key="always" /></option>
+						<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><liferay-ui:message key="hourly" /></option>
+						<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><liferay-ui:message key="daily" /></option>
+						<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><liferay-ui:message key="weekly" /></option>
+						<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><liferay-ui:message key="monthly" /></option>
+						<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><liferay-ui:message key="yearly" /></option>
+						<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><liferay-ui:message key="never" /></option>
+					</select>
+				</td>
+			</tr>
+			</table>
+		</liferay-ui:panel>
+	</c:if>
 </liferay-ui:panel-container>
 
 <script type="text/javascript">
