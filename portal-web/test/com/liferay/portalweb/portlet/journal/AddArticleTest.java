@@ -49,8 +49,8 @@ public class AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Article']");
-		Thread.sleep(5000);
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -126,7 +126,7 @@ public class AddArticleTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a test Journal Article!"));
+			RuntimeVariables.replace("This is a test Journal Article"));
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test Journal Article!"));
 		selenium.selectFrame("relative=top");
@@ -164,9 +164,10 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_15_reviewDateMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Save and Approve']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_15_description",
+			RuntimeVariables.replace("Test Description"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("Test Description!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -174,7 +175,8 @@ public class AddArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Article']")) {
+				if (selenium.isElementPresent(
+							"//input[@value='Save and Approve']")) {
 					break;
 				}
 			}
@@ -183,5 +185,31 @@ public class AddArticleTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Save and Approve']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Articles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
 	}
 }

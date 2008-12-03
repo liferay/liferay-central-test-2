@@ -55,7 +55,24 @@ public class SearchBlogsTest extends BaseTestCase {
 				"//input[@value='Search Entries']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
-		selenium.click(RuntimeVariables.replace("link=\u00ab Back"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Add Blog Entry']"));
 	}

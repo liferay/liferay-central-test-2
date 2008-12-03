@@ -51,21 +51,6 @@ public class AddStructuresTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Structure']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_15_newStructureId", RuntimeVariables.replace("Test"));
-		selenium.type("_15_name",
-			RuntimeVariables.replace("Test Journal Structure"));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("This is a test Journal Structure!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Test"));
-		selenium.select("_15_structure_el0_type",
-			RuntimeVariables.replace("label=Text"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +58,7 @@ public class AddStructuresTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Journal Structure")) {
+				if (selenium.isElementPresent("//input[@value='Add Structure']")) {
 					break;
 				}
 			}
@@ -83,7 +68,89 @@ public class AddStructuresTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Structure']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_newStructureId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_15_newStructureId", RuntimeVariables.replace("Test"));
+		selenium.type("_15_newStructureId", RuntimeVariables.replace("Test"));
+		selenium.typeKeys("_15_name",
+			RuntimeVariables.replace("Test Journal Structure"));
+		selenium.type("_15_name",
+			RuntimeVariables.replace("Test Journal Structure"));
+		selenium.typeKeys("_15_description",
+			RuntimeVariables.replace("This is a test Journal Structure"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("This is a test Journal Structure!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_structure_el0_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_15_structure_el0_name",
+			RuntimeVariables.replace("Itp"));
+		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Itp"));
+		selenium.select("_15_structure_el0_type",
+			RuntimeVariables.replace("label=Link to Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_structure_el0_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_15_structure_el0_name",
+			RuntimeVariables.replace("title"));
+		selenium.type("_15_structure_el0_name",
+			RuntimeVariables.replace("title"));
+		selenium.select("_15_structure_el0_type",
+			RuntimeVariables.replace("label=Text"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Journal Structure"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

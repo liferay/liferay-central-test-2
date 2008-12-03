@@ -39,7 +39,7 @@ public class WorkflowTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Articles")) {
+				if (selenium.isElementPresent("link=Test Journal Article 2")) {
 					break;
 				}
 			}
@@ -49,9 +49,9 @@ public class WorkflowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace("Link=Test Journal Article 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("Link=Test Journal Article 2");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,22 +87,10 @@ public class WorkflowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("Link=Not Approved")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("Link=1.1"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

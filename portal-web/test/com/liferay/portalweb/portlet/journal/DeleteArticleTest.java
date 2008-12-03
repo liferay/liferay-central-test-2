@@ -39,7 +39,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Articles")) {
+				if (selenium.isElementPresent("link=1.1")) {
 					break;
 				}
 			}
@@ -49,14 +49,9 @@ public class DeleteArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Articles"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=1.1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +59,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=1.1")) {
+				if (selenium.isElementPresent("//input[@value='Delete']")) {
 					break;
 				}
 			}
@@ -73,5 +68,13 @@ public class DeleteArticleTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent("link=1.1"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

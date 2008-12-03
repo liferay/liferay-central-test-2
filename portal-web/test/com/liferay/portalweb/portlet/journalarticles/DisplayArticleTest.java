@@ -26,21 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DisplayArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class DisplayArticleTest extends BaseTestCase {
+	public void testDisplayArticle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
 			}
@@ -50,8 +49,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +58,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div/a/span")) {
+				if (selenium.isElementPresent("_86_groupId")) {
 					break;
 				}
 			}
@@ -70,7 +68,11 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div/a/span");
+		selenium.select("_86_groupId",
+			RuntimeVariables.replace("label=My Community"));
+		selenium.select("_86_type", RuntimeVariables.replace("label=Test"));
+		selenium.select("_86_pageURL", RuntimeVariables.replace("label=Normal"));
+		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +80,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new_page")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -88,11 +90,10 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Journal Articles Test Page"));
-		selenium.type("new_page",
-			RuntimeVariables.replace("Journal Articles Test Page"));
-		selenium.click("link=Save");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,7 +101,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Journal Articles Test Page")) {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
 					break;
 				}
 			}
@@ -110,8 +111,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Journal Articles Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

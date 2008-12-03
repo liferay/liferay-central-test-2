@@ -42,12 +42,14 @@ public class JournalTests extends BaseTests {
 		addTestSuite(ExpireArticleTest.class);
 		addTestSuite(DeleteArticleTest.class);
 		addTestSuite(AddStructuresTest.class);
+		addTestSuite(AddTemplateTest.class);
 		//addTestSuite(AddFeedTest.class);
-		addTestSuite(SearchTest.class);
+		addTestSuite(SearchArticleTest.class);
 		addTestSuite(RecentPageTest.class);
-		addTestSuite(AddBlankArticleTest.class);
+		//addTestSuite(AddNullArticleTest.class);
+		addTestSuite(AddNullTitleTest.class);
 		addTestSuite(CancelPopupTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

@@ -39,7 +39,7 @@ public class ExpireArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Articles")) {
+				if (selenium.isElementPresent("link=1.1")) {
 					break;
 				}
 			}
@@ -49,26 +49,9 @@ public class ExpireArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace("link=1.1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=1.1");
 		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,22 +69,10 @@ public class ExpireArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Expire']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Expired")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("//input[@value='Expire']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Expired"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

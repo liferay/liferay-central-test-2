@@ -4,61 +4,81 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>UploadLARFileTest</title>
+<title>AddTemplateTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">UploadLARFileTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddTemplateTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>link=Templates</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>link=Templates</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Export / Import</td>
+	<td>//input[@value='Add Template']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Export / Import</td>
+	<td>//input[@value='Add Template']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Import</td>
+	<td>_15_newTemplateId</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Import</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_86_importFileName</td>
-	<td></td>
+	<td>typeKeys</td>
+	<td>_15_newTemplateId</td>
+	<td>Test</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_86_importFileName</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\blogs\Blogs-Selenium.portlet.lar</td>
+	<td>_15_newTemplateId</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_15_name</td>
+	<td>Test Journal Template</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_name</td>
+	<td>Test Journal Template</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_15_description</td>
+	<td>This is a test journal template!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_description</td>
+	<td>This is a test journal template!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_xsl</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\journal\Template.htm</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//input[@value='Import']</td>
+	<td>save-and-continue</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Import']</td>
+	<td>save-and-continue</td>
 	<td></td>
 </tr>
 <tr>
@@ -68,17 +88,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Return to Full Page</td>
+	<td>//input[@value='Cancel']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>//input[@value='Cancel']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Entry</td>
+	<td>assertTextPresent</td>
+	<td>Test Journal Template</td>
 	<td></td>
 </tr>
 

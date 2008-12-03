@@ -20,26 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator;
+package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TearDownTest extends BaseTestCase {
-	public void testTearDown() throws Exception {
+public class SearchArticleTest extends BaseTestCase {
+	public void testSearchArticle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=BA Setup Test Page")) {
+				if (selenium.isElementPresent("link=Articles")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=BA Setup Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Articles"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -58,7 +58,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("link=Advanced \u00bb")) {
 					break;
 				}
 			}
@@ -68,13 +68,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Delete"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isElementPresent("link=BA Setup Test Entry"));
+		selenium.click("link=Advanced \u00bb");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +76,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Remove']")) {
+				if (selenium.isElementPresent("_15_searchArticleId")) {
 					break;
 				}
 			}
@@ -92,70 +86,14 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Remove']");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent(
-				"//input[@value='Add Blog Entry']"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.typeKeys("_15_searchArticleId",
+			RuntimeVariables.replace("Test"));
+		selenium.type("_15_searchArticleId", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_15_searchArticleId", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -163,7 +101,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Page")) {
+				if (selenium.isElementPresent("_15_version")) {
 					break;
 				}
 			}
@@ -173,69 +111,12 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Delete']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=BA Setup Test Page"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.type("_15_version", RuntimeVariables.replace("1.0"));
 		selenium.click(RuntimeVariables.replace(
-				"link=Blogs Aggregator Test Page"));
+				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
+		selenium.type("_15_version", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -243,7 +124,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("_15_version")) {
 					break;
 				}
 			}
@@ -253,10 +134,12 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.type("_15_version", RuntimeVariables.replace("1.1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_displayStyle",
-			RuntimeVariables.replace("label=Abstract"));
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_15_version", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -264,7 +147,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("_15_title")) {
 					break;
 				}
 			}
@@ -274,10 +157,234 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.type("_15_title", RuntimeVariables.replace("Test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_15_title", RuntimeVariables.replace("Test1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_15_title", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_15_description", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_15_description", RuntimeVariables.replace("test1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_15_description", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_15_content", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_15_content", RuntimeVariables.replace("test1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_15_content", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_type")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_15_type",
+			RuntimeVariables.replace("label=Announcements"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_type")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_15_type", RuntimeVariables.replace("label=Blogs"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.select("_15_type", RuntimeVariables.replace("label="));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_status")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_15_status", RuntimeVariables.replace("label=Approved"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_status")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_15_status",
+			RuntimeVariables.replace("label=Not Approved"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.select("_15_status", RuntimeVariables.replace("label="));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=\u00ab Basic")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=\u00ab Basic");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -297,147 +404,5 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Remove']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//img[@alt='Remove']");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		assertFalse(selenium.isTextPresent("There are no blogs."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Page"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Delete']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Blogs Aggregator Test Page"));
 	}
 }

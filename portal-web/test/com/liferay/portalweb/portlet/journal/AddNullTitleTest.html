@@ -4,47 +4,22 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddSecondEntryTest</title>
+<title>AddNullTitleTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddSecondEntryTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullTitleTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Blogs Test Page</td>
+	<td>//input[@value='Add Article']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Blogs Test Page</td>
+	<td>//input[@value='Add Article']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Blog Entry']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Blog Entry']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_33_title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_33_title</td>
-	<td>Second Test Entr</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_33_title</td>
-	<td>Second Test Entry</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -53,7 +28,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_33_editor</td>
+	<td>_15_editor</td>
 	<td></td>
 </tr>
 <tr>
@@ -68,12 +43,12 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_33_editor"]</td>
+	<td>//iframe[@id='_15_editor']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
+	<td>//iframe[@id='FCKeditor1___Frame']</td>
 	<td></td>
 </tr>
 <tr>
@@ -84,12 +59,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//body</td>
-	<td>This is a second test entr</td>
+	<td>This is a test null article</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a second test entry!</td>
+	<td>This is a test null article!</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -98,22 +73,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_33_saveButton</td>
+	<td>//input[@value='Save and Approve']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>_33_saveButton</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Second Test Entry</td>
+	<td>//input[@value='Save and Approve']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>Please enter a valid name.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Cancel']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Cancel']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Null Test Article</td>
 	<td></td>
 </tr>
 

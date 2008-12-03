@@ -76,6 +76,6 @@ public class DisplayStylesTest extends BaseTestCase {
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("This is a test entry!"));
+		assertFalse(selenium.isTextPresent("This is a BA setup test entry!"));
 	}
 }

@@ -39,7 +39,7 @@ public class ApproveArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Articles")) {
+				if (selenium.isElementPresent("link=1.1")) {
 					break;
 				}
 			}
@@ -49,9 +49,8 @@ public class ApproveArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace("link=1.1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=1.1");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -72,22 +71,8 @@ public class ApproveArticleTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Approve']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertFalse(selenium.isElementPresent("link=Not Approved"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -20,27 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journal;
+package com.liferay.portalweb.portlet.journalarticles;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchTest extends BaseTestCase {
-	public void testSearch() throws Exception {
+public class ViewArticleTest extends BaseTestCase {
+	public void testViewArticle() throws Exception {
+		assertTrue(selenium.isElementPresent("link=JA Setup Test Article"));
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"toggle_id_journal_article_searchkeywords")) {
+				if (selenium.isElementPresent("link=JA Setup Test Article")) {
 					break;
 				}
 			}
@@ -50,29 +51,8 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("toggle_id_journal_article_searchkeywords",
-			RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("link=JA Setup Test Article"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test Journal Article")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a JA setup test article!"));
 	}
 }

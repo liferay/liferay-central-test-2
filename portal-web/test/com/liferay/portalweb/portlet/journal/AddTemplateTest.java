@@ -20,29 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journalarticles;
+package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddJournalArticlesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddTemplateTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddJournalArticlesTest extends BaseTestCase {
-	public void testAddJournalArticles() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
-
+public class AddTemplateTest extends BaseTestCase {
+	public void testAddTemplate() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_groupId")) {
+				if (selenium.isElementPresent("link=Templates")) {
 					break;
 				}
 			}
@@ -52,29 +49,7 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
-		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
-		selenium.select("_86_pageURL", RuntimeVariables.replace("label=Normal"));
-		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Templates"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -83,8 +58,7 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Infoworld's BOSSIE awards demonstrate open source's progress")) {
+				if (selenium.isElementPresent("//input[@value='Add Template']")) {
 					break;
 				}
 			}
@@ -95,7 +69,7 @@ public class AddJournalArticlesTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Infoworld's BOSSIE awards demonstrate open source's progress"));
+				"//input[@value='Add Template']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -104,8 +78,7 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Infoworld's BOSSIE awards demonstrate open source's progress")) {
+				if (selenium.isElementPresent("_15_newTemplateId")) {
 					break;
 				}
 			}
@@ -114,5 +87,60 @@ public class AddJournalArticlesTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.typeKeys("_15_newTemplateId", RuntimeVariables.replace("Test"));
+		selenium.type("_15_newTemplateId", RuntimeVariables.replace("Test"));
+		selenium.typeKeys("_15_name",
+			RuntimeVariables.replace("Test Journal Template"));
+		selenium.type("_15_name",
+			RuntimeVariables.replace("Test Journal Template"));
+		selenium.typeKeys("_15_description",
+			RuntimeVariables.replace("This is a test journal template!"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("This is a test journal template!"));
+		selenium.type("_15_xsl",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\journal\\Template.htm"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("save-and-continue")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("save-and-continue"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Cancel']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Journal Template"));
 	}
 }

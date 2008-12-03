@@ -39,6 +39,27 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent(
+							"//a[@id=\"my-community-private-pages\"]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//div/a/span")) {
 					break;
 				}

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -39,7 +39,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("link=Templates")) {
 					break;
 				}
 			}
@@ -49,13 +49,68 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.click(RuntimeVariables.replace("link=Templates"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_rowIds")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_15_rowIds");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Delete']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+						   .matches("^Are you sure you want to delete the selected templates[\\s\\S]$"));
+		assertTrue(selenium.isTextPresent("No templates were found."));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isElementPresent("link=Test Entry"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +118,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Structures")) {
 					break;
 				}
 			}
@@ -73,7 +128,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -82,7 +137,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_pageDisplayStyle")) {
+				if (selenium.isElementPresent("_15_rowIds")) {
 					break;
 				}
 			}
@@ -92,8 +147,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_pageDisplayStyle",
-			RuntimeVariables.replace("label=Full Content"));
+		selenium.click("_15_rowIds");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -101,7 +155,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("//strong/span")) {
 					break;
 				}
 			}
@@ -111,10 +165,93 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Delete']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected structures[\\s\\S]$"));
+		assertTrue(selenium.isTextPresent("No structures were found."));
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Articles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_allRowIds")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_15_allRowIds");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Delete']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected articles[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent("link=Test Journal Article"));
+		assertFalse(selenium.isElementPresent("link=Test Journal Article 2"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -154,8 +291,7 @@ public class TearDownTest extends BaseTestCase {
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent(
-				"//input[@value='Add Blog Entry']"));
+		assertFalse(selenium.isElementPresent("//input[@value='Add Article']"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -276,6 +412,6 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Blogs Test Page"));
+		assertFalse(selenium.isElementPresent("link=Journal Test Page"));
 	}
 }

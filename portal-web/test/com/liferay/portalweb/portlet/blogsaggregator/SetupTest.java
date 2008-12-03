@@ -33,10 +33,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SetupTest extends BaseTestCase {
 	public void testSetup() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,6 +49,10 @@ public class SetupTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -89,8 +89,8 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Blogs Test Page"));
-		selenium.type("new_page", RuntimeVariables.replace("Blogs Test Page"));
+			RuntimeVariables.replace("BA Setup Test Page"));
+		selenium.type("new_page", RuntimeVariables.replace("BA Setup Test Page"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -99,7 +99,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isElementPresent("link=BA Setup Test Page")) {
 					break;
 				}
 			}
@@ -109,7 +109,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.click(RuntimeVariables.replace("link=BA Setup Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -186,8 +186,10 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title", RuntimeVariables.replace("Test Entr"));
-		selenium.type("_33_title", RuntimeVariables.replace("Test Entry"));
+		selenium.typeKeys("_33_title",
+			RuntimeVariables.replace("BA Setup Test Entr"));
+		selenium.type("_33_title",
+			RuntimeVariables.replace("BA Setup Test Entry"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -242,9 +244,9 @@ public class SetupTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a test entr"));
+			RuntimeVariables.replace("This is a BA setup test entr"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a test entry!"));
+			RuntimeVariables.replace("This is a BA setup test entry!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -265,7 +267,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Entry"));
+		assertTrue(selenium.isElementPresent("link=BA Setup Test Entry"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}

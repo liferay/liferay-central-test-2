@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RecentPageTest extends BaseTestCase {
 	public void testRecentPage() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Recent"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Journal Structure")) {
+				if (selenium.isElementPresent("link=Recent")) {
 					break;
 				}
 			}
@@ -52,6 +49,9 @@ public class RecentPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Recent"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Journal Structure"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

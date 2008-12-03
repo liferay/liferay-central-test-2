@@ -33,11 +33,61 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CancelPopupTest extends BaseTestCase {
 	public void testCancelPopup() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Structures")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Add Structure']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Structure']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_editorButton")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("_15_editorButton");
 
 		for (int second = 0;; second++) {
@@ -58,9 +108,27 @@ public class CancelPopupTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//div[@class=\"ui-dialog-container\"]"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Cancel' and @type='button' and @onclick='Liferay.Popup.close(this);']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(
 			"//input[@value='Cancel' and @type='button' and @onclick='Liferay.Popup.close(this);']");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("_15_xsdContent"));
 
 		for (int second = 0;; second++) {

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddBlankArticleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullTitleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddBlankArticleTest extends BaseTestCase {
-	public void testAddBlankArticle() throws Exception {
+public class AddNullTitleTest extends BaseTestCase {
+	public void testAddNullTitle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +51,7 @@ public class AddBlankArticleTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +59,7 @@ public class AddBlankArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_title")) {
+				if (selenium.isElementPresent("_15_editor")) {
 					break;
 				}
 			}
@@ -74,7 +75,7 @@ public class AddBlankArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_description")) {
+				if (selenium.isElementPresent("FCKeditor1___Frame")) {
 					break;
 				}
 			}
@@ -84,9 +85,30 @@ public class AddBlankArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("_15_editor");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//textarea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.selectFrame("//iframe[@id='_15_editor']");
+		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
+		selenium.selectFrame("//iframe");
+		selenium.typeKeys("//body",
+			RuntimeVariables.replace("This is a test null article"));
+		selenium.type("//body",
+			RuntimeVariables.replace("This is a test null article!"));
 		selenium.selectFrame("relative=top");
-		Thread.sleep(3000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -105,7 +127,10 @@ public class AddBlankArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save and Approve']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Save and Approve']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please enter a valid name."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -113,8 +138,7 @@ public class AddBlankArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have entered invalid data. Please try again. ")) {
+				if (selenium.isElementPresent("//input[@value='Cancel']")) {
 					break;
 				}
 			}
@@ -124,7 +148,27 @@ public class AddBlankArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Articles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Null Test Article"));
 	}
 }
