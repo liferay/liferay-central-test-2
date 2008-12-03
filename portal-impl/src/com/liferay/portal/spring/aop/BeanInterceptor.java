@@ -34,14 +34,15 @@ import org.aopalliance.intercept.MethodInvocation;
 public class BeanInterceptor implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			if ((_classLoader != null) &&
 				(contextClassLoader != _classLoader)) {
 
-				Thread.currentThread().setContextClassLoader(_classLoader);
+				currentThread.setContextClassLoader(_classLoader);
 			}
 
 			return invocation.proceed();
@@ -58,8 +59,7 @@ public class BeanInterceptor implements MethodInterceptor {
 			if ((_classLoader != null) &&
 				(contextClassLoader != _classLoader)) {
 
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}

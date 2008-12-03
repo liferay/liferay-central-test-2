@@ -55,8 +55,9 @@ public class MethodInvoker {
 			   InstantiationException, InvocationTargetException,
 			   NoSuchFieldException, NoSuchMethodException {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		String className = methodWrapper.getClassName();
 		String methodName = methodWrapper.getMethodName();

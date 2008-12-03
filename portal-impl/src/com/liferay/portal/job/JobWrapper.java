@@ -53,17 +53,18 @@ public class JobWrapper implements StatefulJob {
 					intervalJobClass.getName()).newInstance();
 			}
 
+			Thread currentThread = Thread.currentThread();
+
 			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
+				currentThread.getContextClassLoader();
 
 			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
+				currentThread.setContextClassLoader(_classLoader);
 
 				_job.execute(new JobExecutionContextImpl(context));
 			}
 			finally {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 		catch (Exception e) {

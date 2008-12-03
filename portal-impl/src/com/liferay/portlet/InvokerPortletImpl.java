@@ -186,15 +186,16 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 	public void destroy() {
 		if (_destroyable) {
+			Thread currentThread = Thread.currentThread();
+
 			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
+				currentThread.getContextClassLoader();
 
 			ClassLoader portletClassLoader = getPortletClassLoader();
 
 			try {
 				if (portletClassLoader != null) {
-					Thread.currentThread().setContextClassLoader(
-						portletClassLoader);
+					currentThread.setContextClassLoader(portletClassLoader);
 				}
 
 				removePortletFilters();
@@ -203,8 +204,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			}
 			finally {
 				if (portletClassLoader != null) {
-					Thread.currentThread().setContextClassLoader(
-						contextClassLoader);
+					currentThread.setContextClassLoader(contextClassLoader);
 				}
 			}
 		}
@@ -236,23 +236,22 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	public void init(PortletConfig portletConfig) throws PortletException {
 		_portletConfigImpl = (PortletConfigImpl)portletConfig;
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		ClassLoader portletClassLoader = getPortletClassLoader();
 
 		try {
 			if (portletClassLoader != null) {
-				Thread.currentThread().setContextClassLoader(
-					portletClassLoader);
+				currentThread.setContextClassLoader(portletClassLoader);
 			}
 
 			_portlet.init(portletConfig);
 		}
 		finally {
 			if (portletClassLoader != null) {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 

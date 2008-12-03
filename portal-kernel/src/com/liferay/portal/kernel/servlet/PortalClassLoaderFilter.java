@@ -47,17 +47,18 @@ import javax.servlet.ServletResponse;
 public class PortalClassLoaderFilter implements Filter, PortalInitable {
 
 	public void destroy() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			_filter.destroy();
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
@@ -66,17 +67,18 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 			FilterChain filterChain)
 		throws IOException, ServletException {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			_filter.doFilter(servletRequest, servletResponse, filterChain);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

@@ -136,11 +136,12 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 
 		// LEP-2057
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			VelocityContextPool.remove(servletContextName);
@@ -151,7 +152,7 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 			LastModifiedJavaScript.clear();
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		if (_log.isInfoEnabled()) {

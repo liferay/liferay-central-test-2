@@ -86,7 +86,9 @@ public class DoubleClickController implements Serializable {
 						wait();
 					}
 					catch (InterruptedException ie) {
-						Thread.currentThread().interrupt();
+						Thread currentThread = Thread.currentThread();
+
+						currentThread.interrupt();
 					}
 				}
 			}

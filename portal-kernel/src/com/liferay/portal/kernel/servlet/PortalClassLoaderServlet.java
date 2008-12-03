@@ -46,17 +46,18 @@ public class PortalClassLoaderServlet
 	extends HttpServlet implements PortalInitable {
 
 	public void destroy() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			_servlet.destroy();
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
@@ -67,13 +68,14 @@ public class PortalClassLoaderServlet
 	}
 
 	public void portalInit() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(portalClassLoader);
+			currentThread.setContextClassLoader(portalClassLoader);
 
 			String servletClass = _servletConfig.getInitParameter(
 				"servlet-class");
@@ -87,7 +89,7 @@ public class PortalClassLoaderServlet
 			_log.error(e, e);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
@@ -95,17 +97,18 @@ public class PortalClassLoaderServlet
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			_servlet.service(request, response);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

@@ -109,7 +109,9 @@ public abstract class BaseFilter implements Filter {
 		if (log.isDebugEnabled()) {
 			startTime = System.currentTimeMillis();
 
-			threadName = Thread.currentThread().getName();
+			Thread currentThread = Thread.currentThread();
+
+			threadName = currentThread.getName();
 
 			depther = (String)request.getAttribute(_DEPTHER);
 

@@ -55,11 +55,12 @@ public class WriteTag extends IncludeTag {
 
 		Object returnObj = null;
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -72,7 +73,7 @@ public class WriteTag extends IncludeTag {
 			_log.error(e, e);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		if (returnObj != null) {

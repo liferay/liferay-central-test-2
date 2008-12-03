@@ -50,10 +50,14 @@ public class PortletContextListener
 	implements PortalInitable, ServletContextListener {
 
 	public void contextDestroyed(ServletContextEvent event) {
+		ServletContext servletContext = event.getServletContext();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+			new HotDeployEvent(servletContext, contextClassLoader));
 
 		try {
 			if (!_bindLiferayPool) {
@@ -82,8 +86,11 @@ public class PortletContextListener
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
-		_classLoader = Thread.currentThread().getContextClassLoader();
 		_servletContext = event.getServletContext();
+
+		Thread currentThread = Thread.currentThread();
+
+		_classLoader = currentThread.getContextClassLoader();
 
 		PortalInitableUtil.init(this);
 	}
@@ -135,8 +142,8 @@ public class PortletContextListener
 	private static Log _log =
 		LogFactoryUtil.getLog(PortletContextListener.class);
 
-	private ClassLoader _classLoader;
 	private ServletContext _servletContext;
+	private ClassLoader _classLoader;
 	private boolean _bindLiferayPool;
 
 }

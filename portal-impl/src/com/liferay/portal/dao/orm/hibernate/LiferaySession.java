@@ -87,21 +87,22 @@ public class LiferaySession implements Session {
 	 * @deprecated
 	 */
 	public Connection connection() throws HibernateException {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			ClassLoader portalClassLoader =
 				PortalClassLoaderUtil.getClassLoader();
 
-			Thread.currentThread().setContextClassLoader(portalClassLoader);
+			currentThread.setContextClassLoader(portalClassLoader);
 
 			Connection connection = _session.connection();
 
 			return connection;
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

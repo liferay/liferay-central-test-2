@@ -39,7 +39,9 @@ public class Log4jServletContextListener implements ServletContextListener {
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
-		LogFactory.release(Thread.currentThread().getContextClassLoader());
+		Thread currentThread = Thread.currentThread();
+
+		LogFactory.release(currentThread.getContextClassLoader());
 	}
 
 }

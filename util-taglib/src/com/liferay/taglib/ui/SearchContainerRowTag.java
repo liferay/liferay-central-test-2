@@ -258,8 +258,10 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 
 		if (isEscapedModel()) {
 			try {
+				Thread currentThread = Thread.currentThread();
+
 				ClassLoader contextClassLoader =
-					Thread.currentThread().getContextClassLoader();
+					currentThread.getContextClassLoader();
 
 				Class<?> classObj = contextClassLoader.loadClass(_className);
 

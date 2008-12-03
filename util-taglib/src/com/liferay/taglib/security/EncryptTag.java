@@ -42,11 +42,12 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class EncryptTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -62,18 +63,19 @@ public class EncryptTag extends TagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		return EVAL_BODY_INCLUDE;
 	}
 
 	public int doEndTag() throws JspException {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -85,7 +87,7 @@ public class EncryptTag extends TagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		return EVAL_PAGE;

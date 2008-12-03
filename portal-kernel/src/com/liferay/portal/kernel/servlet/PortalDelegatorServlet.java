@@ -90,19 +90,20 @@ public class PortalDelegatorServlet extends HttpServlet {
 				"No servlet registred for context " + paths[1]);
 		}
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			ClassLoader delegateClassLoader =
 				delegate.getClass().getClassLoader();
 
-			Thread.currentThread().setContextClassLoader(delegateClassLoader);
+			currentThread.setContextClassLoader(delegateClassLoader);
 
 			delegate.service(request, response);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

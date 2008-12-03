@@ -46,11 +46,12 @@ public class ToggleValueTag extends TagSupport {
 			String id, PageContext pageContext, HttpServletRequest request)
 		throws Exception {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -65,7 +66,7 @@ public class ToggleValueTag extends TagSupport {
 			throw e;
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

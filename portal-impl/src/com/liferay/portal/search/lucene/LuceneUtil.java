@@ -630,11 +630,12 @@ public class LuceneUtil {
 	private Directory _getLuceneDirJdbc(long companyId) {
 		JdbcDirectory directory = null;
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			String tableName = _getTableName(companyId);
@@ -670,7 +671,7 @@ public class LuceneUtil {
 			}
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		return directory;

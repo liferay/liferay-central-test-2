@@ -39,7 +39,9 @@ public class NamedThreadFactory implements ThreadFactory {
 			_group = securityManager.getThreadGroup();
 		}
 		else {
-			_group = Thread.currentThread().getThreadGroup();
+			Thread currentThread = Thread.currentThread();
+
+			_group = currentThread.getThreadGroup();
 		}
 
 		_name = name;

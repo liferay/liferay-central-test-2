@@ -42,16 +42,17 @@ public class InvokerSimpleAction extends SimpleAction {
 	}
 
 	public void run(String[] ids) throws ActionException {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
 
-		Thread.currentThread().setContextClassLoader(_classLoader);
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		currentThread.setContextClassLoader(_classLoader);
 
 		try {
 			_simpleAction.run(ids);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

@@ -38,11 +38,12 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class DefineObjectsTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -54,7 +55,7 @@ public class DefineObjectsTag extends TagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		return SKIP_BODY;

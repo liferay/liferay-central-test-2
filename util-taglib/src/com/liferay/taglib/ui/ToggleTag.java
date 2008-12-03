@@ -65,11 +65,12 @@ public class ToggleTag extends IncludeTag {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			Object idWrapper = id;
@@ -125,7 +126,7 @@ public class ToggleTag extends IncludeTag {
 			throw e;
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

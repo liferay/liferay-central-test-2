@@ -319,8 +319,9 @@ public abstract class DBUtil {
 	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException {
 
-		ClassLoader classLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader classLoader = currentThread.getContextClassLoader();
 
 		InputStream is = classLoader.getResourceAsStream(
 			"com/liferay/portal/tools/sql/dependencies/" + path);
@@ -364,8 +365,10 @@ public abstract class DBUtil {
 
 					String includeFileName = line.substring(pos + 1);
 
+					Thread currentThread = Thread.currentThread();
+
 					ClassLoader classLoader =
-						Thread.currentThread().getContextClassLoader();
+						currentThread.getContextClassLoader();
 
 					InputStream is = classLoader.getResourceAsStream(
 						"com/liferay/portal/tools/sql/dependencies/" +

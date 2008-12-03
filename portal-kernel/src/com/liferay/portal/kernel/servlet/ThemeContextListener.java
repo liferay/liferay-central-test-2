@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -38,17 +39,25 @@ import javax.servlet.ServletContextListener;
 public class ThemeContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {
+		ServletContext servletContext = event.getServletContext();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+			new HotDeployEvent(servletContext, contextClassLoader));
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
+		ServletContext servletContext = event.getServletContext();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+			new HotDeployEvent(servletContext, contextClassLoader));
 	}
 
 }

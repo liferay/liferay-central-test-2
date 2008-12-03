@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 
+import javax.servlet.ServletContext;
+
 /**
  * <a href="PortletClassInvoker.java.html"><b><i>View Source</i></b></a>
  *
@@ -142,16 +144,18 @@ public class PortletClassInvoker {
 		PortletBag portletBag = PortletBagPool.get(portletId);
 
 		if (portletBag != null) {
-			portletClassLoader =
-				(ClassLoader)portletBag.getServletContext().getAttribute(
-					PortletServlet.PORTLET_CLASS_LOADER);
+			ServletContext servletContext = portletBag.getServletContext();
+
+			portletClassLoader = (ClassLoader)servletContext.getAttribute(
+				PortletServlet.PORTLET_CLASS_LOADER);
 		}
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(portletClassLoader);
+			currentThread.setContextClassLoader(portletClassLoader);
 
 			MethodWrapper methodWrapper = new MethodWrapper(
 				className, methodName, args);
@@ -159,7 +163,7 @@ public class PortletClassInvoker {
 			return MethodInvoker.invoke(methodWrapper, newInstance);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

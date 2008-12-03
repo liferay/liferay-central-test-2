@@ -452,12 +452,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			if (contextClassLoader != portalClassLoader) {
-				Thread.currentThread().setContextClassLoader(portalClassLoader);
+				currentThread.setContextClassLoader(portalClassLoader);
 			}
 
 			Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -470,8 +471,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 		finally {
 			if (contextClassLoader != portalClassLoader) {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}

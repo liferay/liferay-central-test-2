@@ -77,8 +77,10 @@ public class InitUtil {
 		// Shared class loader
 
 		try {
+			Thread currentThread = Thread.currentThread();
+
 			PortalClassLoaderUtil.setClassLoader(
-				Thread.currentThread().getContextClassLoader());
+				currentThread.getContextClassLoader());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

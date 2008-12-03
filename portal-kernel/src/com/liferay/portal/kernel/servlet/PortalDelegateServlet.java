@@ -51,8 +51,10 @@ public class PortalDelegateServlet extends HttpServlet {
 		}
 
 		try {
+			Thread currentThread = Thread.currentThread();
+
 			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
+				currentThread.getContextClassLoader();
 
 			HttpServlet servlet = (HttpServlet)contextClassLoader.loadClass(
 				servletClass).newInstance();

@@ -96,8 +96,10 @@ public class AutoDeployDir {
 
 		if (_interval > 0) {
 			try {
+				Thread currentThread = Thread.currentThread();
+
 				_scanner = new AutoDeployScanner(
-					Thread.currentThread().getThreadGroup(),
+					currentThread.getThreadGroup(),
 					AutoDeployScanner.class.getName(), this);
 
 				_scanner.start();

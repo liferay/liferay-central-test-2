@@ -55,11 +55,12 @@ public class ClassLoaderProxy {
 	}
 
 	public Object invoke(String methodName, Object[] args) throws Throwable {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(_classLoader);
+			currentThread.setContextClassLoader(_classLoader);
 
 			Class<?> classObj = Class.forName(
 				_obj.getClass().getName(), true, _classLoader);
@@ -140,7 +141,7 @@ public class ClassLoaderProxy {
 			throw t;
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

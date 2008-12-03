@@ -103,11 +103,12 @@ public class PortalClassInvoker {
 			boolean newInstance)
 		throws Exception {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -116,7 +117,7 @@ public class PortalClassInvoker {
 			return MethodInvoker.invoke(methodWrapper, newInstance);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

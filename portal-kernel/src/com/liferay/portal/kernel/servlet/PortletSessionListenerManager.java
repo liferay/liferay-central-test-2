@@ -52,8 +52,9 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 	}
 
 	public void sessionCreated(HttpSessionEvent event) {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			Iterator<HttpSessionListener> itr = _listeners.iterator();
@@ -64,14 +65,13 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 				ClassLoader listenerClassLoader =
 					listener.getClass().getClassLoader();
 
-				Thread.currentThread().setContextClassLoader(
-					listenerClassLoader);
+				currentThread.setContextClassLoader(listenerClassLoader);
 
 				listener.sessionCreated(event);
 			}
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

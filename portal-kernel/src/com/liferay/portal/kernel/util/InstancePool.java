@@ -82,8 +82,10 @@ public class InstancePool {
 						e1);
 				}
 
+				Thread currentThread = Thread.currentThread();
+
 				ClassLoader contextClassLoader =
-					Thread.currentThread().getContextClassLoader();
+					currentThread.getContextClassLoader();
 
 				try {
 					Class<?> classObj = contextClassLoader.loadClass(className);

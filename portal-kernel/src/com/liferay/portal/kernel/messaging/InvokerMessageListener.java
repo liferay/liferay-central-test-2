@@ -60,16 +60,17 @@ public class InvokerMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
 
-		Thread.currentThread().setContextClassLoader(_classLoader);
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		currentThread.setContextClassLoader(_classLoader);
 
 		try {
 			_messageListener.receive(message);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

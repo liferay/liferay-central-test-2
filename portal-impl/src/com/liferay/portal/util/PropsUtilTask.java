@@ -36,16 +36,17 @@ public class PropsUtilTask extends Task {
 	public void execute() throws BuildException {
 		ClassLoader antClassLoader = getClass().getClassLoader();
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(antClassLoader);
+			currentThread.setContextClassLoader(antClassLoader);
 
 			getProject().setUserProperty(_result, PropsUtil.get(_key));
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

@@ -103,8 +103,10 @@ public class MethodCache {
 			Class<?> classObj = classesMap.get(className);
 
 			if (classObj == null) {
+				Thread currentThread = Thread.currentThread();
+
 				ClassLoader contextClassLoader =
-					Thread.currentThread().getContextClassLoader();
+					currentThread.getContextClassLoader();
 
 				classObj = contextClassLoader.loadClass(className);
 

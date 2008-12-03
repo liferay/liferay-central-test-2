@@ -61,11 +61,12 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 		Object returnObj = null;
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(
+			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
 			Object windowStateWrapper = windowState;
@@ -181,7 +182,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			throw e;
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		if (returnObj != null) {
