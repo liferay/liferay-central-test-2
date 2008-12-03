@@ -131,6 +131,12 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getOrganizationsGroups(organizations);
 	}
 
+	public Group getUserGroup(long companyId, long userId) 
+		throws PortalException, SystemException {
+
+		return groupLocalService.getUserGroup(companyId, userId);
+	}
+
 	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups) {
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
