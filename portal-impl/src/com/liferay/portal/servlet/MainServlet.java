@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -118,6 +119,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.action.RequestProcessor;
+import org.apache.struts.config.ControllerConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesUtilImpl;
 
@@ -896,6 +899,41 @@ public class MainServlet extends ActionServlet {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+    protected synchronized RequestProcessor getRequestProcessor(
+			ModuleConfig moduleConfig)
+        throws ServletException {
+
+		ServletContext servletContext = getServletContext();
+
+		String key = Globals.REQUEST_PROCESSOR_KEY + moduleConfig.getPrefix();
+
+		RequestProcessor processor =
+			(RequestProcessor)servletContext.getAttribute(key);
+
+		if (processor == null) {
+			ControllerConfig controllerConfig =
+				moduleConfig.getControllerConfig();
+
+			String processorClass = controllerConfig.getProcessorClass();
+
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			try {
+				processor = (RequestProcessor)classLoader.loadClass(
+					processorClass).newInstance();
+			}
+			catch (Exception e) {
+				throw new ServletException(e);
+			}
+
+			processor.init(this, moduleConfig);
+
+			servletContext.setAttribute(key, processor);
+		}
+
+		return processor;
 	}
 
 	protected void initPortletApp(
