@@ -37,7 +37,7 @@ String name = role.getName();
 
 boolean unassignableRole = false;
 
-if (name.equals(RoleConstants.GUEST) || !name.equals(RoleConstants.OWNER) || !name.equals(RoleConstants.USER)) {
+if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name.equals(RoleConstants.USER)) {
 	unassignableRole = true;
 }
 %>
