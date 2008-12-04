@@ -834,7 +834,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 		<br />
 
-		<% 
+		<%
 		String abstractId = portletDisplay.getNamespace() + "abstract";
 		String abstractTitle = LanguageUtil.get(pageContext, "abstract");
 		%>

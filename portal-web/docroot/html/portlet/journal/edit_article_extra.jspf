@@ -42,7 +42,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "basic") %>'
 	align="right"
 >
-	<liferay-ui:panel-container id="<%= portletDisplay.getNamespace() + "journalExtras" %>" persistState="<%= true %>" extended="<%= Boolean.FALSE %>" cssClass="journal-extras">
+	<liferay-ui:panel-container id='<%= portletDisplay.getNamespace() + "journalExtras" %>' persistState="<%= true %>" extended="<%= Boolean.FALSE %>" cssClass="journal-extras">
 		<liferay-ui:panel id="<%= formPresentationId %>" title="<%= formPresentationTitle %>" defaultState="open" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:message key="structure" />
 
