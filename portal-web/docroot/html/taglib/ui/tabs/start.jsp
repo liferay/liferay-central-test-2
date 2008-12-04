@@ -55,7 +55,7 @@ if (url != null) {
 		url = url.substring(0, x) + url.substring(y, url.length());
 	}
 
-	// Strip training &
+	// Strip trailing &
 
 	if (url.endsWith("&")) {
 		url = url.substring(0, url.length() - 1);
