@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -93,7 +92,7 @@ public class ViewArticleContentAction extends Action {
 			String output = null;
 
 			if (cmd.equals(Constants.PREVIEW)) {
-				uploadRequest = new UploadServletRequestImpl(request);
+				uploadRequest = PortalUtil.getUploadServletRequest(request);
 
 				String title = ParamUtil.getString(uploadRequest, "title");
 				String description = ParamUtil.getString(

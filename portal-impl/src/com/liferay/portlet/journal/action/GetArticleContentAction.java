@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -50,7 +51,10 @@ public class GetArticleContentAction extends Action {
 		throws Exception {
 
 		try {
-			String xml = ParamUtil.getString(request, "xml");
+			UploadServletRequest uploadRequest =
+				PortalUtil.getUploadServletRequest(request);
+
+			String xml = ParamUtil.getString(uploadRequest, "xml");
 
 			xml = JournalUtil.formatXML(xml);
 
