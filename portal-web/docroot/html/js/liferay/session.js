@@ -64,6 +64,7 @@ Liferay.Session = {
 		var timeDiff = 0;
 
 		clearTimeout(instance._stateCheck);
+
 		if (sessionState == 'expired') {
 			instance.expire();
 		}
@@ -76,6 +77,7 @@ Liferay.Session = {
 				}
 				else {
 					newWaitTime = (instance.sessionTimeoutWarning - timeDiff) + 10000;
+
 					instance._stateCheck = setTimeout(
 						function() {
 							instance.checkState();
