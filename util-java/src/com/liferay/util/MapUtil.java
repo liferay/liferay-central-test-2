@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -143,7 +144,54 @@ public class MapUtil {
 		for (int i = 0; i < params.length; i++) {
 			String[] kvp = StringUtil.split(params[i], delimiter);
 
-			map.put(kvp[0], kvp[1]);
+			if (kvp.length == 2) {
+				map.put(kvp[0], kvp[1]);
+			}
+			else if (kvp.length == 3) {
+				String type = kvp[2];
+
+				if (type.equalsIgnoreCase("boolean") ||
+					type.equals(Boolean.class.getName())) {
+
+					map.put(kvp[0], new Boolean(kvp[1]));
+				}
+				else if (type.equalsIgnoreCase("double") ||
+					type.equals(Double.class.getName())) {
+
+					map.put(kvp[0], new Double(kvp[1]));
+				}
+				else if (type.equalsIgnoreCase("int") ||
+					type.equals(Integer.class.getName())) {
+
+					map.put(kvp[0], new Integer(kvp[1]));
+				}
+				else if (type.equalsIgnoreCase("long") ||
+					type.equals(Long.class.getName())) {
+
+					map.put(kvp[0], new Long(kvp[1]));
+				}
+				else if (type.equalsIgnoreCase("short") ||
+					type.equals(Short.class.getName())) {
+
+					map.put(kvp[0], new Short(kvp[1]));
+				}
+				else if (type.equals(String.class.getName())) {
+					map.put(kvp[0], kvp[1]);
+				}
+				else {
+					try {
+						Class klass = Class.forName(type);
+						Constructor stringConstructor = 
+							klass.getConstructor(new Class[]{String.class});
+
+						map.put(kvp[0], stringConstructor.newInstance(kvp[1]));
+					} catch (Exception ex) {					
+						// Error creating an object of the class.
+						// Skipping the value
+
+					}
+				}
+			}
 		}
 
 		return map;
