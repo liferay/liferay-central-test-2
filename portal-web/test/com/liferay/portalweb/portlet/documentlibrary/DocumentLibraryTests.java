@@ -40,7 +40,6 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(AddDocumentTest.class);
 		addTestSuite(AddCommentsTest.class);
 		addTestSuite(EditCommentsTest.class);
-		addTestSuite(DeleteCommentsTest.class);
 		addTestSuite(CompareVersionsTest.class);
 		addTestSuite(DeleteCompareVersionsTest.class);
  		addTestSuite(SearchTest.class);
@@ -48,8 +47,10 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(AddSecondFolderTest.class);
 		addTestSuite(AddSecondSubfolderTest.class);
 		addTestSuite(MoveDocumentTest.class);
+		addTestSuite(AssertCommentMoveTest.class);
+		addTestSuite(DeleteCommentsTest.class);
 		addTestSuite(EditSecondFolderTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

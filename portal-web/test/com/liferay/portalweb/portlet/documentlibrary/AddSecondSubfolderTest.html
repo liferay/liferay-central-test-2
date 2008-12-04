@@ -13,12 +13,17 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Another</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Another</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
 </tr>
 <tr>
@@ -27,9 +32,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>_20_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_20_name</td>
+	<td>Second Test Subfolder</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_20_name</td>
-	<td>Another1</td>
+	<td>Second Test Subfolder</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_20_description</td>
+	<td>This is a second test subfolder!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_20_description</td>
+	<td>This is a second test subfolder!</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -43,17 +68,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Second Test Subfolder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Another1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

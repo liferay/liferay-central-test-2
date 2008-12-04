@@ -51,7 +51,30 @@ public class AddSecondFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name", RuntimeVariables.replace("Another"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_20_name",
+			RuntimeVariables.replace("Second Test Folder"));
+		selenium.type("_20_name", RuntimeVariables.replace("Second Test Folder"));
+		selenium.typeKeys("_20_description",
+			RuntimeVariables.replace("This is a second test folder!"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This is a second test folder!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,8 +94,8 @@ public class AddSecondFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Second Test Folder"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Another"));
 	}
 }

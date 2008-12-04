@@ -13,12 +13,17 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test Folder</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Folder</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
 </tr>
 <tr>
@@ -42,13 +47,33 @@
 	<td>Test Subfolder</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_20_description</td>
+	<td>This is a test subfolder!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_20_description</td>
+	<td>This is a test subfolder!</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test Subfolder</td>
+	<td>assertTextPresent</td>
+	<td>Test Subfolder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

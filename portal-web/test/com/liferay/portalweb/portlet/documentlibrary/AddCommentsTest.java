@@ -124,9 +124,9 @@ public class AddCommentsTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_20_postReplyBody0",
-			RuntimeVariables.replace("EditCommentsTest!!!"));
+			RuntimeVariables.replace("CommentsTest!!!"));
 		selenium.type("_20_postReplyBody0",
-			RuntimeVariables.replace("EditCommentsTest!!!"));
+			RuntimeVariables.replace("CommentsTest!!!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -146,21 +146,8 @@ public class AddCommentsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("EditCommentsTest!!!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("CommentsTest!!!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -13,22 +13,32 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test Folder</td>
+	<td>//span[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Folder</td>
+	<td>//span[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test Subfolder</td>
+	<td>//tr[4]/td[1]/a[2]/b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Subfolder</td>
+	<td>//tr[4]/td[1]/a[2]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,6 +49,11 @@
 <tr>
 	<td>click</td>
 	<td>//td[5]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/ul/li[2]/nobr/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -78,17 +93,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Another</td>
+	<td>link=Second Test Folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Another</td>
+	<td>link=Second Test Folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Another1</td>
+	<td>link=Second Test Subfolder</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,8 +122,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>link=Second Test Subfolder</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>_20_folderName</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
@@ -137,17 +157,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Another</td>
+	<td>waitForElementPresent</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Another1</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForElementPresent</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Test Document.txt<br />This is a test document!</td>
 	<td></td>
 </tr>
@@ -159,6 +189,11 @@
 <tr>
 	<td>click</td>
 	<td>//td[5]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/ul/li[2]/nobr/a</td>
 	<td></td>
 </tr>
 <tr>

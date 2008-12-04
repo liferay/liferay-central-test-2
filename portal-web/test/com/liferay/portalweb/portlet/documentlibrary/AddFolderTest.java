@@ -33,20 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_name", RuntimeVariables.replace("Test Folder"));
-		selenium.type("_20_name", RuntimeVariables.replace("Test Folder"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Folder")) {
+				if (selenium.isElementPresent("//input[@value='Add Folder']")) {
 					break;
 				}
 			}
@@ -55,5 +48,53 @@ public class AddFolderTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_20_name", RuntimeVariables.replace("Test Folder"));
+		selenium.type("_20_name", RuntimeVariables.replace("Test Folder"));
+		selenium.typeKeys("_20_description",
+			RuntimeVariables.replace("This is a test folder!"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This is a test folder!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Folder"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

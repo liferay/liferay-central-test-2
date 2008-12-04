@@ -68,9 +68,9 @@ public class EditCommentsTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_20_editBody1",
-			RuntimeVariables.replace("This comment has been edited!"));
+			RuntimeVariables.replace("Edited comments test!!!"));
 		selenium.type("_20_editBody1",
-			RuntimeVariables.replace("This comment has been edited!"));
+			RuntimeVariables.replace("Edited comments test!!!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,6 +90,8 @@ public class EditCommentsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_20_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This comment has been edited!"));
+		assertTrue(selenium.isTextPresent("Edited comments test!!!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

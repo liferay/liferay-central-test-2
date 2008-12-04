@@ -33,23 +33,92 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditSecondFolderTest extends BaseTestCase {
 	public void testEditSecondFolder() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Another"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//nobr/a"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[4]/ul/li/strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/nobr/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Edit Second Folder Test"));
+			RuntimeVariables.replace("Edited Second Folder Test"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("Edit Second Folder Test"));
+			RuntimeVariables.replace("Edited Second Folder Test"));
 		selenium.typeKeys("_20_description",
 			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This second folder was edited!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Edited Second Folder Test"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Edit Second Folder Test"));
 	}
 }
