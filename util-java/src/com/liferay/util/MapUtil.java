@@ -184,12 +184,12 @@ public class MapUtil {
 				}
 				else {
 					try {
-						Class klass = Class.forName(type);
+						Class classObj = Class.forName(type);
 
-						Constructor stringConstructor =  klass.getConstructor(
+						Constructor constructor = classObj.getConstructor(
 							new Class[] {String.class});
 
-						map.put(kvp[0], stringConstructor.newInstance(kvp[1]));
+						map.put(kvp[0], constructor.newInstance(kvp[1]));
 					}
 					catch (Exception e) {
 						_log.error(e, e);
