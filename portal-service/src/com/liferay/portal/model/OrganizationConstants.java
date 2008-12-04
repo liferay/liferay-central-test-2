@@ -34,7 +34,7 @@ public class OrganizationConstants {
 
 	public static final int ANY_PARENT_ORGANIZATION_ID = -1;
 
-	public static final String TYPE_REGULAR = "regular";
+	public static final String TYPE_REGULAR = "regular-organization";
 
 	public static final String TYPE_LOCATION = "location";
 
