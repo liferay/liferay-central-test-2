@@ -104,10 +104,10 @@ if (MathUtil.isEven(count.getValue())) {
 
 			<c:if test="<%= hasSiblings.booleanValue() %>">
 				<td>
-					<liferay-ui:icon image="../arrows/01_up" message="up" url='<%= "javascript: <portlet:namespace />moveElement(true, " + count.getValue() + ");" %>' />
+					<liferay-ui:icon image="../arrows/01_up" message="up" url='<%= "javascript: " + renderResponse.getNamespace() + "moveElement(true, " + count.getValue() + ");" %>' />
 				</td>
 				<td>
-					<liferay-ui:icon image="../arrows/01_down" message="down" url='<%= "javascript: <portlet:namespace />moveElement(false, " + count.getValue() + ");" %>' />
+					<liferay-ui:icon image="../arrows/01_down" message="down" url='<%= "javascript: " + renderResponse.getNamespace() + "moveElement(false, " + count.getValue() + ");" %>' />
 				</td>
 			</c:if>
 		</tr>
