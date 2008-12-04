@@ -83,6 +83,13 @@ int tabIndex = 1;
 <script type="text/javascript">
 	var xmlIndent = "  ";
 
+	function <portlet:namespace />downloadStructureContent() {
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_structure_content";
+		document.<portlet:namespace />fm2.target = "_self";
+		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getXsd();
+		document.<portlet:namespace />fm2.submit();
+	}
+
 	function <portlet:namespace />getXsd(cmd, elCount) {
 		if (cmd == null) {
 			cmd = "add";
@@ -188,21 +195,21 @@ int tabIndex = 1;
 	}
 
 	function <portlet:namespace />editElement(cmd, elCount) {
-		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />xsd";
-		document.<portlet:namespace />fm.<portlet:namespace />xsd.value = <portlet:namespace />getXsd(cmd, elCount);
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
+		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd(cmd, elCount);
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />moveElement(moveUp, elCount) {
-		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />xsd";
-		document.<portlet:namespace />fm.<portlet:namespace />move_up.value = moveUp;
-		document.<portlet:namespace />fm.<portlet:namespace />move_depth.value = elCount;
-		document.<portlet:namespace />fm.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
+		document.<portlet:namespace />fm1.<portlet:namespace />move_up.value = moveUp;
+		document.<portlet:namespace />fm1.<portlet:namespace />move_depth.value = elCount;
+		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />removeParentStructure() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentStructureId.value = "";
+		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = "";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
 
@@ -213,23 +220,23 @@ int tabIndex = 1;
 	}
 
 	function <portlet:namespace />saveAndContinueStructure() {
-		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "1";
+		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
 		<portlet:namespace />saveStructure();
 	}
 
 	function <portlet:namespace />saveStructure(addAnother) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= structure == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= structure == null ? Constants.ADD : Constants.UPDATE %>";
 
 		<c:if test="<%= structure == null %>">
-			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = document.<portlet:namespace />fm.<portlet:namespace />newStructureId.value;
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = document.<portlet:namespace />fm1.<portlet:namespace />newStructureId.value;
 		</c:if>
 
-		document.<portlet:namespace />fm.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />selectStructure(parentStructureId, parentStructureName) {
-		document.<portlet:namespace />fm.<portlet:namespace />parentStructureId.value = parentStructureId;
+		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = parentStructureId;
 
 		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
 
@@ -240,7 +247,11 @@ int tabIndex = 1;
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveStructure(); return false;">
+<form method="post" name="<portlet:namespace />fm2">
+<input name="xml" type="hidden" value="" />
+</form>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveStructure(); return false;">
 <input name="scroll" type="hidden" value="" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
@@ -430,12 +441,12 @@ int tabIndex = 1;
 <input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
 
 <c:if test="<%= structure != null %>">
-	<input type="button" value="<liferay-ui:message key="download" />" onClick="location.href = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';" />
+	<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadStructureContent();" />
 </c:if>
 
-<br />
+<br /><br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="taglib-search-iterator">
 
 <%
 Document doc = SAXReaderUtil.read(xsd);
@@ -472,10 +483,10 @@ tabIndex = tabIndexWrapper.getValue();
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
 	</c:if>

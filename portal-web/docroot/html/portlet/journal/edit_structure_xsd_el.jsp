@@ -36,18 +36,19 @@ IntegerWrapper count = (IntegerWrapper)request.getAttribute(WebKeys.JOURNAL_STRU
 Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH);
 Boolean hasSiblings = (Boolean)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_SIBLINGS);
 IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX);
+
+String className = "portlet-section-alternate results-row alt";
+
+if (MathUtil.isEven(count.getValue())) {
+	className = "portlet-section-body results-row";
+}
 %>
 
-<tr>
+<tr class="<%= className %>">
 	<td>
 		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>" />
 
-		<img border="0" height="10" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="lfr-table">
 		<tr>
 			<c:if test="<%= depth.intValue() > 0 %>">
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= depth.intValue() * 50 %>" /></td>
@@ -56,7 +57,6 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 			<td>
 				<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
 			</td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10" /></td>
 			<td>
 				<c:choose>
 					<c:when test='<%= parentElType.equals("list") || parentElType.equals("multi-list") %>'>
@@ -81,41 +81,31 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 			</td>
 
 			<c:if test='<%= !parentElType.equals("list") && !parentElType.equals("multi-list") %>'>
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 				<td>
-					<a href="javascript: <portlet:namespace />editElement('add', <%= count.getValue() %>);">
-					<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" vspace="0" width="16" />
-					</a>
+					<%
+					String taglibAddURL = "javascript: " + renderResponse.getNamespace() + "editElement('add', " + count.getValue() + ");";
+					%>
+
+					<liferay-ui:icon image="../arrows/01_plus" message="add" url="<%= taglibAddURL %>" />
 				</td>
 			</c:if>
 
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
+			<c:if test="<%= el.elements().size() == 0 %>">
+				<td>
+					<%
+					String taglibRemoveURL = "javascript: " + renderResponse.getNamespace() + "editElement('remove', " + count.getValue() + ");";
+					%>
 
-			<c:choose>
-				<c:when test="<%= el.elements().size() == 0 %>">
-					<td>
-						<a href="javascript: <portlet:namespace />editElement('remove', <%= count.getValue() %>);">
-						<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<liferay-ui:message key="remove" />" vspace="0" width="16" />
-						</a>
-					</td>
-				</c:when>
-				<c:otherwise>
-					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="9" /></td>
-				</c:otherwise>
-			</c:choose>
+					<liferay-ui:icon image="../arrows/01_minus" message="remove" url="<%= taglibRemoveURL %>" />
+				</td>
+			</c:if>
 
 			<c:if test="<%= hasSiblings.booleanValue() %>">
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10" /></td>
 				<td>
-					<a href="javascript: <portlet:namespace />moveElement(true, <%= count.getValue() %>);">
-					<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<liferay-ui:message key="up" />" vspace="0" width="16" />
-					</a>
+					<liferay-ui:icon image="../arrows/01_up" message="up" url='<%= "javascript: <portlet:namespace />moveElement(true, " + count.getValue() + ");" %>' />
 				</td>
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 				<td>
-					<a href="javascript: <portlet:namespace />moveElement(false, <%= count.getValue() %>);">
-					<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<liferay-ui:message key="down" />" vspace="0" width="16" />
-					</a>
+					<liferay-ui:icon image="../arrows/01_down" message="down" url='<%= "javascript: <portlet:namespace />moveElement(false, " + count.getValue() + ");" %>' />
 				</td>
 			</c:if>
 		</tr>

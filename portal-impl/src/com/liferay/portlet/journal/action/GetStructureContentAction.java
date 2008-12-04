@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -38,12 +37,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="GetArticleContentAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetStructureContentAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GetArticleContentAction extends Action {
+public class GetStructureContentAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -51,14 +50,11 @@ public class GetArticleContentAction extends Action {
 		throws Exception {
 
 		try {
-			UploadServletRequest uploadRequest =
-				PortalUtil.getUploadServletRequest(request);
-
-			String xml = ParamUtil.getString(uploadRequest, "xml");
+			String xml = ParamUtil.getString(request, "xml");
 
 			xml = JournalUtil.formatXML(xml);
 
-			String fileName = "article.xml";
+			String fileName = "structure.xml";
 			byte[] bytes = xml.getBytes();
 
 			ServletResponseUtil.sendFile(

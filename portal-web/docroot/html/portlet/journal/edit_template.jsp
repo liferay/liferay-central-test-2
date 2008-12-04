@@ -83,8 +83,17 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />downloadTemplateContent() {
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_template_content";
+		document.<portlet:namespace />fm2.target = "_self";
+		document.<portlet:namespace />fm2.xslContent.value = document.<portlet:namespace />fm1.<portlet:namespace />xslContent.value;
+		document.<portlet:namespace />fm2.formatXsl.value = document.<portlet:namespace />fm1.<portlet:namespace />formatXsl.value;
+		document.<portlet:namespace />fm2.langType.value = document.<portlet:namespace />fm1.<portlet:namespace />langType.value;
+		document.<portlet:namespace />fm2.submit();
+	}
+
 	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
 
 		var nameEl = document.getElementById("<portlet:namespace />structureName");
 
@@ -95,22 +104,22 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	}
 
 	function <portlet:namespace />saveAndContinueTemplate() {
-		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "1";
+		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
 		<portlet:namespace />saveTemplate();
 	}
 
 	function <portlet:namespace />saveTemplate() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= template == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= template == null ? Constants.ADD : Constants.UPDATE %>";
 
 		<c:if test="<%= template == null %>">
-			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = document.<portlet:namespace />fm.<portlet:namespace />newTemplateId.value;
+			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = document.<portlet:namespace />fm1.<portlet:namespace />newTemplateId.value;
 		</c:if>
 
-		submitForm(document.<portlet:namespace />fm);
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />selectStructure(structureId, structureName) {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 
 		var nameEl = document.getElementById("<portlet:namespace />structureName");
 
@@ -121,7 +130,13 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveTemplate(); return false;">
+<form method="post" name="<portlet:namespace />fm2">
+<input name="xslContent" type="hidden" value="" />
+<input name="formatXsl" type="hidden" value="" />
+<input name="langType" type="hidden" value="" />
+</form>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveTemplate(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escape(originalRedirect) %>" />
@@ -326,7 +341,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
 
 		<c:if test="<%= template != null %>">
-			<input type="button" value="<liferay-ui:message key="download" />" onClick="location.href = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
+			<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadTemplateContent();" />
 		</c:if>
 	</td>
 </tr>
@@ -401,7 +416,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <script type="text/javascript">
 	Liferay.Util.inlineEditor(
 		{
-			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value,
+			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm1.<portlet:namespace />langType.value,
 			button: '#<portlet:namespace />editorButton',
 			textarea: '<portlet:namespace />xslContent'
 		}
@@ -410,10 +425,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
 	</c:if>

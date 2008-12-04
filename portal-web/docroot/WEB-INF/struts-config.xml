@@ -994,7 +994,11 @@
 
 		<action path="/journal/get_structure" type="com.liferay.portlet.journal.action.GetStructureAction" />
 
+		<action path="/journal/get_structure_content" type="com.liferay.portlet.journal.action.GetStructureContentAction" />
+
 		<action path="/journal/get_template" type="com.liferay.portlet.journal.action.GetTemplateAction" />
+
+		<action path="/journal/get_template_content" type="com.liferay.portlet.journal.action.GetTemplateContentAction" />
 
 		<action path="/journal/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 

@@ -62,7 +62,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 	}
 
 	function <portlet:namespace />updateStructureXsd() {
-		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />xsd";
+		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
 
 		var xsdContent = jQuery('input[@name=<portlet:namespace />xsd]');
 		var content = '';
@@ -80,7 +80,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		Liferay.Popup.close(document.<portlet:namespace />editorForm);
 
-		submitForm(document.<portlet:namespace />fm);
+		submitForm(document.<portlet:namespace />fm1);
 	}
 </script>
 
