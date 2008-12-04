@@ -129,8 +129,8 @@ public class LayoutCache {
 					OrganizationLocalServiceUtil.search(
 						companyId,
 						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,
-						OrganizationConstants.TYPE_REGULAR_ORGANIZATION, null, null, null,
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+						OrganizationConstants.TYPE_REGULAR_ORGANIZATION, null,
+						null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 				for (int i = 0; i < organizations.size(); i++) {
 					Organization organization = organizations.get(i);
