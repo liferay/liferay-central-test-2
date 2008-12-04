@@ -27,9 +27,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Constructor;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
@@ -181,14 +185,14 @@ public class MapUtil {
 				else {
 					try {
 						Class klass = Class.forName(type);
-						Constructor stringConstructor = 
-							klass.getConstructor(new Class[]{String.class});
+
+						Constructor stringConstructor =  klass.getConstructor(
+							new Class[] {String.class});
 
 						map.put(kvp[0], stringConstructor.newInstance(kvp[1]));
-					} catch (Exception ex) {					
-						// Error creating an object of the class.
-						// Skipping the value
-
+					}
+					catch (Exception e) {
+						_log.error(e, e);
 					}
 				}
 			}
@@ -196,5 +200,7 @@ public class MapUtil {
 
 		return map;
 	}
+
+	private static Log _log = LogFactory.getLog(MapUtil.class);
 
 }
