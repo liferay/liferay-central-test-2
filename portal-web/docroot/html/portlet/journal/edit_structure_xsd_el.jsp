@@ -82,6 +82,7 @@ if (MathUtil.isEven(count.getValue())) {
 
 			<c:if test='<%= !parentElType.equals("list") && !parentElType.equals("multi-list") %>'>
 				<td>
+
 					<%
 					String taglibAddURL = "javascript: " + renderResponse.getNamespace() + "editElement('add', " + count.getValue() + ");";
 					%>
@@ -92,6 +93,7 @@ if (MathUtil.isEven(count.getValue())) {
 
 			<c:if test="<%= el.elements().size() == 0 %>">
 				<td>
+
 					<%
 					String taglibRemoveURL = "javascript: " + renderResponse.getNamespace() + "editElement('remove', " + count.getValue() + ");";
 					%>
