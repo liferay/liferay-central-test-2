@@ -92,6 +92,7 @@
 }
 
 .portlet-journal .lfr-panel-content {
+	background-color: #F0F5F7;
 	padding: 10px;
 }
 
