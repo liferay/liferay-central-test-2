@@ -1160,7 +1160,7 @@ li.toggle-expand a {
 	padding: 2px 0 2px 20px;
 }
 
-.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-icons, .js .controls-hidden .lfr-admin-visibility {
+.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-icons, .js .controls-hidden .lfr-configurator-visibility {
 	display: none;
 }
 
