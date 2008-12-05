@@ -169,10 +169,6 @@ Liferay.PortletURL = new Class({
 jQuery.extend(
 	Liferay.PortletURL,
 	{
-		createRenderURL: function() {
-			return new Liferay.PortletURL('RENDER_PHASE');
-		},
-
 		createActionURL: function() {
 			return new Liferay.PortletURL('ACTION_PHASE');
 		},
@@ -199,6 +195,10 @@ jQuery.extend(
 			portletURL.setParameter('resourcePrimKey', resourcePrimKey);
 
 			return portletURL;
+		},
+
+		createRenderURL: function() {
+			return new Liferay.PortletURL('RENDER_PHASE');
 		},
 
 		createResourceURL: function() {
