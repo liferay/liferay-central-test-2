@@ -103,6 +103,9 @@ public interface WSRPProducerLocalService {
 		java.lang.String registrationValidatorClass)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteProducer(com.liferay.wsrp.model.WSRPProducer producer)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.wsrp.model.WSRPProducer getProducer(
 		java.lang.String instanceName)

@@ -138,7 +138,7 @@ public class ProducerManagerImpl implements ProducerManager {
 				WSRPProducer producerModel =
 					WSRPProducerLocalServiceUtil.getProducer(instanceName);
 
-				WSRPProducerLocalServiceUtil.deleteWSRPProducer(producerModel);
+				WSRPProducerLocalServiceUtil.deleteProducer(producerModel);
 			}
 		}
 		catch (Exception e) {

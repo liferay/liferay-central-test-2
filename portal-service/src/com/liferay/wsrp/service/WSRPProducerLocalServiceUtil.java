@@ -118,6 +118,12 @@ public class WSRPProducerLocalServiceUtil {
 			registrationValidatorClass);
 	}
 
+	public static void deleteProducer(
+		com.liferay.wsrp.model.WSRPProducer producer)
+		throws com.liferay.portal.SystemException {
+		getService().deleteProducer(producer);
+	}
+
 	public static com.liferay.wsrp.model.WSRPProducer getProducer(
 		java.lang.String instanceName)
 		throws com.liferay.portal.PortalException,

@@ -68,13 +68,11 @@ public class WSRPProducerLocalServiceImpl
 		wsrpProducerPersistence.update(producer, false);
 	}
 
-	public void deleteWSRPProducer(WSRPProducer wsrpProducer)
-		throws SystemException {
-
+	public void deleteProducer(WSRPProducer producer) throws SystemException {
 		wsrpConsumerRegistrationPersistence.removeByProducerKey(
-			wsrpProducer.getInstanceName());
-		
-		wsrpProducerPersistence.remove(wsrpProducer);
+			producer.getInstanceName());
+
+		wsrpProducerPersistence.remove(producer);
 	}
 
 	public WSRPProducer getProducer(String instanceName)
