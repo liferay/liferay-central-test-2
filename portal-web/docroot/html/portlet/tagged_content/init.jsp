@@ -158,7 +158,6 @@ Arrays.sort(entries);
 
 String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 
-boolean showPortletWithNoResults = false;
 boolean groupByClass = false;
 boolean allowEmptyResults = false;
 

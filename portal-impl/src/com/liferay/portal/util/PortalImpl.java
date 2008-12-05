@@ -82,6 +82,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DBUtil;
@@ -2541,7 +2542,37 @@ public class PortalImpl implements Portal {
 
 			requestDispatcher.include(request, stringResponse);
 
-			sb.append(stringResponse.getString());
+			boolean showPortlet = true;
+
+			Boolean portletConfiguratorVisibility =
+				(Boolean)request.getAttribute(
+					WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
+
+			if (portletConfiguratorVisibility != null) {
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)request.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+				try {
+					if (!PortletPermissionUtil.contains(
+							themeDisplay.getPermissionChecker(),
+							portlet.getPortletId(),
+							ActionKeys.CONFIGURATION)) {
+
+						showPortlet = false;
+					}
+				}
+				catch (Exception e) {
+					throw new ServletException(e);
+				}
+
+				request.removeAttribute(
+					WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
+			}
+
+			if (showPortlet) {
+				sb.append(stringResponse.getString());
+			}
 		}
 		else {
 

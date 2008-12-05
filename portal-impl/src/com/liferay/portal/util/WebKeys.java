@@ -253,6 +253,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTLET_STRUTS_PROCESSOR = "PORTLET_STRUTS_PROCESSOR";
 
+	public static final String PORTLET_CONFIGURATOR_VISIBILITY = "PORTLET_CONFIGURATOR_VISIBILITY";
+
 	public static final String REFERER = "referer";
 
 	public static final String RENDER_PORTLET = "RENDER_PORTLET";

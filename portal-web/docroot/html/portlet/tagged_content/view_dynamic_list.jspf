@@ -44,37 +44,13 @@ if (!groupByClass) {
 	request.setAttribute("view.jsp-results", results);
 
 	if (results.size() <= 0) {
-		if (!themeDisplay.isSignedIn() || !showPortletWithNoResults) {
-%>
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+	%>
+		<liferay-ui:message key="there-are-no-results" />
 
-			<style type="text/css">
-				#p_p_id_<%= portletDisplay.getId() %>_ {
-					display: none;
-				}
-			</style>
-
-<%
-		}
-		else {
-%>
-
-			<liferay-ui:message key="there-are-no-results" />
-
-			<style type="text/css">
-				#p_p_id_<%= portletDisplay.getId() %>_ {
-					opacity: 0.4;
-				}
-
-				.ie #p_p_id_<%= portletDisplay.getId() %>_ {
-					filter: alpha(opacity=40);
-					zoom: 1;
-				}
-			</style>
-
-<%
-		}
+	<%
 	}
-%>
+	%>
 
 	<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
 
@@ -108,17 +84,10 @@ else {
 <%
 		}
 	}
-%>
 
-	<c:if test="<%= (total == 0) && !showPortletWithNoResults %>">
-		<style type="text/css">
-			#p_p_id_<%= portletDisplay.getId() %>_ {
-				display: none;
-			}
-		</style>
-	</c:if>
-
-<%
+	if (total == 0) {
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, ActionKeys.CONFIGURATION);
+	}
 }
 %>
 

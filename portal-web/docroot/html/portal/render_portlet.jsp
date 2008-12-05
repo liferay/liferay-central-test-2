@@ -663,10 +663,17 @@ if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
 // Render portlet
 
 boolean portletException = false;
+Boolean portletVisibility = null;
 
 if (portlet.isActive() && access && supportsMimeType) {
 	try {
 		invokerPortlet.render(renderRequestImpl, renderResponseImpl);
+
+		portletVisibility = (Boolean)renderRequestImpl.getAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
+
+		if (portletVisibility != null) {
+			request.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, portletVisibility);
+		}
 
 		if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 			renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringResponse);
@@ -699,6 +706,7 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	}
 
 	String freeformStyles = StringPool.BLANK;
+	String cssClasses = StringPool.BLANK;
 
 	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
 		StringBuilder sb = new StringBuilder();
@@ -718,9 +726,17 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 
 		freeformStyles = sb.toString();
 	}
+
+	if (portletVisibility != null) {
+		cssClasses += " lfr-configurator-visibility ";
+	}
+
+	if (portletDisplay.isStateMin()) {
+		cssClasses += " portlet-minimized ";
+	}
 	%>
 
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= (portletDisplay.isStateMin()) ? "portlet-minimized" : "" %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= cssClasses %><%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 

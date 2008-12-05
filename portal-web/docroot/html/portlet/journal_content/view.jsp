@@ -94,10 +94,16 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					<br />
 				</c:if>
 			</c:when>
-			<c:when test="<%= portletDisplay.isShowConfigurationIcon() %>">
+			<c:otherwise>
+				<%
+				renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+				%>
+
 				<br />
 
-				<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
+				<div class="portlet-msg-info">
+					<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
+				</div>
 
 				<br />
 
@@ -110,7 +116,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 					<br />
 				</c:if>
-			</c:when>
+			</c:otherwise>
 		</c:choose>
 
 		<%

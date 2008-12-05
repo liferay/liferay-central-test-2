@@ -1159,7 +1159,7 @@ li.toggle-expand a {
 	padding: 2px 0 2px 20px;
 }
 
-.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-icons {
+.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-icons, .js .controls-hidden .lfr-admin-visibility {
 	display: none;
 }
 
@@ -1214,6 +1214,15 @@ li.toggle-expand a {
 
 .portlet-minimized .portlet-content-container {
 	display: none;
+}
+
+.lfr-configurator-visibility {
+	opacity: 0.5;
+}
+
+.ie .lfr-configurator-visibility {
+	filter: alpha(opacity=50);
+	zoom: 1;
 }
 
 /* ---------- Liferay forms ---------- */

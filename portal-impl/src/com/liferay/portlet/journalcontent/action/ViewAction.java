@@ -100,13 +100,6 @@ public class ViewAction extends PortletAction {
 		}
 		else {
 			renderRequest.removeAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
-
-			// Don't decorate this portlet if there is no content. This will
-			// prevent end users from seeing empty portlets from expired
-			// articles. Administrators can still see the portlet and either
-			// remove the portlet or select a new article.
-
-			renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 		}
 
 		return mapping.findForward("portlet.journal_content.view");
