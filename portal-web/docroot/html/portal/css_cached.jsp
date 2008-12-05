@@ -182,6 +182,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .lfr-panel-container, .lfr-floating-container {
 	background: #fff;
+	clear: both;
 }
 
 .lfr-floating-container {
