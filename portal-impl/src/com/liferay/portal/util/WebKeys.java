@@ -105,7 +105,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_ARTICLE_CONTENT = "JOURNAL_ARTICLE_CONTENT";
 
-	public static final String JOURNAL_ARTICLE_CONTENT_DOC = "JOURNAL_ARTICLE_CONTENT_DOC";
+	public static final String JOURNAL_ARTICLE_CONTENT_EL = "JOURNAL_ARTICLE_CONTENT_EL";
 
 	public static final String JOURNAL_ARTICLE_DISPLAY = "JOURNAL_ARTICLE_DISPLAY";
 
@@ -123,11 +123,25 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_STRUCTURE_EL = "JOURNAL_STRUCTURE_EL";
 
+	public static final String JOURNAL_STRUCTURE_EL_CONTENT = "JOURNAL_STRUCTURE_EL_CONTENT";
+
 	public static final String JOURNAL_STRUCTURE_EL_COUNT = "JOURNAL_STRUCTURE_EL_COUNT";
 
 	public static final String JOURNAL_STRUCTURE_EL_DEPTH = "JOURNAL_STRUCTURE_EL_DEPTH";
 
+	public static final String JOURNAL_STRUCTURE_EL_INSTANCE_ID = "JOURNAL_STRUCTURE_EL_INSTANCE_ID";
+
+	public static final String JOURNAL_STRUCTURE_EL_LANGUAGE_ID = "JOURNAL_STRUCTURE_EL_LANGUAGE_ID";
+
+	public static final String JOURNAL_STRUCTURE_EL_NAME = "JOURNAL_STRUCTURE_EL_NAME";
+
+	public static final String JOURNAL_STRUCTURE_EL_REPEATABLE = "JOURNAL_STRUCTURE_EL_REPEATABLE";
+
+	public static final String JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE = "JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE";
+
 	public static final String JOURNAL_STRUCTURE_EL_SIBLINGS = "JOURNAL_STRUCTURE_EL_SIBLINGS";
+
+	public static final String JOURNAL_STRUCTURE_EL_TYPE = "JOURNAL_STRUCTURE_EL_TYPE";
 
 	public static final String JOURNAL_TEMPLATE = "JOURNAL_TEMPLATE";
 

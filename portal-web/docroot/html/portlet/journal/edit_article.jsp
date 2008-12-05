@@ -165,7 +165,13 @@ Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 String content = null;
 
 if (article != null) {
-	content = article.getContentByLocale(languageId);
+	content = ParamUtil.getString(request, "content");
+
+	if (Validator.isNull(content)) {
+		content = article.getContent();
+	}
+
+	content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), languageId);
 }
 else {
 	content = ParamUtil.getString(request, "content");
@@ -226,6 +232,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		if (<portlet:namespace />contentChangedFlag) {
 			if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
 				document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+				document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 			}
 			else {
 				if (!confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-switch-the-languages-view") %>")) {
@@ -239,11 +246,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 					return;
 				}
+				else {
+					document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
+				}
 			}
+		}
+		else {
+			document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
 		}
 
 		document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value;
-		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 		submitForm(document.<portlet:namespace />fm1);
 	}
 
@@ -253,6 +265,49 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 	function <portlet:namespace />contentChanged() {
 		<portlet:namespace />contentChangedFlag = true;
+	}
+
+	function <portlet:namespace />createSubelement(i) {
+		var xsd = "";
+
+		var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
+		var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
+		var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
+		var elContent = document.getElementById("<portlet:namespace />structure_el" + i + "_content");
+		var elLanguage = document.getElementById("<portlet:namespace />structure_el" + i + "_localized");
+
+		if ((elDepth != null) && (elName != null) && (elType != null)) {
+			var elDepthValue = Number(elDepth.value);
+			var elInstanceIdValue = <portlet:namespace />generateInstanceId();
+			var elNameValue = elName.value;
+			var elTypeValue = elType.value;
+			var elContentValue = "";
+			var elLanguageValue = elLanguage.value;
+
+			xsd = "<dynamic-element instance-id='" + elInstanceIdValue + "' name='" + elNameValue + "' type='" + elTypeValue + "'><dynamic-content></dynamic-content>";
+
+			for (var j = 1;; j++) {
+				var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + j) + "_depth");
+
+				if (nextElDepth != null) {
+					var nextElDepthValue = Number(nextElDepth.value);
+
+					if ((elDepthValue + 1) == nextElDepthValue) {
+						xsd += <portlet:namespace />createSubelement(i + j);
+					}
+					else {
+						break;
+					}
+				}
+				else {
+					break;
+				}
+			}
+
+			xsd += "</dynamic-element>";
+		}
+
+		return xsd;
 	}
 
 	function <portlet:namespace />deleteArticle() {
@@ -278,6 +333,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.<portlet:namespace />fm2.submit();
 	}
 
+	function <portlet:namespace />editElement(cmd, elCount) {
+		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent(cmd, elCount);
+		submitForm(document.<portlet:namespace />fm1);
+	}
+
 	function <portlet:namespace />editorContentChanged(text) {
 		<portlet:namespace />contentChanged();
 	}
@@ -287,7 +347,21 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		submitForm(document.<portlet:namespace />fm1);
 	}
 
-	function <portlet:namespace />getArticleContent() {
+	function <portlet:namespace />generateInstanceId() {
+		var instanceId = "";
+
+		var key = "<%= PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3 %>";
+
+		for (var i = 0; i < 8; i++) {
+			var pos = Math.floor(Math.random() * key.length);
+
+			instanceId += key.substring(pos, pos + 1);
+		}
+
+		return instanceId;
+	}
+
+	function <portlet:namespace />getArticleContent(cmd, elCount) {
 		<c:choose>
 			<c:when test="<%= structure == null %>">
 				return window.<portlet:namespace />editor.getHTML();
@@ -328,6 +402,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 				for (i = 0; i >= 0; i++) {
 					var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
+					var elInstanceId = document.getElementById("<portlet:namespace />structure_el" + i + "_instanceId");
 					var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
 					var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
 					var elContent = document.getElementById("<portlet:namespace />structure_el" + i + "_content");
@@ -335,10 +410,20 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 					if ((elDepth != null) && (elName != null) && (elType != null)) {
 						var elDepthValue = elDepth.value;
+						var elInstanceIdValue = elInstanceId.value;
 						var elNameValue = elName.value;
 						var elTypeValue = elType.value;
 						var elContentValue = "";
 						var elLanguageValue = elLanguage.value;
+
+						if (elCount == i) {
+							if (cmd == "add") {
+								xsd += <portlet:namespace />createSubelement(i);
+							}
+							else if (cmd == "remove") {
+								continue;
+							}
+						}
 
 						if ((elTypeValue == "text") || (elTypeValue == "text_box") || (elTypeValue == "image_gallery") || (elTypeValue == "document_library") || (elTypeValue == "link_to_layout")) {
 							elContentValue = elContent.value;
@@ -397,7 +482,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							}
 						}
 
-						xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "'><dynamic-content";
+						xsd += "<dynamic-element instance-id='" + elInstanceIdValue + "' name='" + elNameValue + "' type='" + elTypeValue + "'><dynamic-content";
 
 						if (stillLocalized && (elLanguageValue != null) && (elLanguageValue != "false") && (elLanguageValue != "")) {
 							xsd += " language-id='" + elLanguageValue + "'";
@@ -408,7 +493,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
 
 						if (nextElDepth != null) {
-							nextElDepthValue = nextElDepth.value;
+							var nextElDepthValue = nextElDepth.value;
 
 							if (elDepthValue == nextElDepthValue) {
 								xsd += "</dynamic-element>";
@@ -805,7 +890,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<%
 				}
 
-				_format(groupId, contentDoc, xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request);
+				_format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request);
 				%>
 
 				</table>
@@ -949,33 +1034,108 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 </c:if>
 
 <%!
-private void _format(long groupId, Document contentDoc, Element root, IntegerWrapper count, Integer depth, PageContext pageContext, HttpServletRequest req) throws Exception {
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";
+
+private void _format(long groupId, Element contentParentElement, Element xsdParentElement, IntegerWrapper count, Integer depth, PageContext pageContext, HttpServletRequest request) throws Exception {
 	depth = new Integer(depth.intValue() + 1);
 
-	Iterator itr = root.elements().iterator();
+	String languageId = LanguageUtil.getLanguageId(request);
 
-	while (itr.hasNext()) {
-		Element el = (Element)itr.next();
+	List<Element> xsdElements = xsdParentElement.elements();
 
-		req.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, String.valueOf(groupId));
+	for (Element xsdElement : xsdElements) {
+		String elName = xsdElement.attributeValue("name", StringPool.BLANK);
+		String elType = xsdElement.attributeValue("type", StringPool.BLANK);
+		boolean elRepeatable = GetterUtil.getBoolean(xsdElement.attributeValue("repeatable"));
 
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, el);
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
+		List<Element> elSiblings = null;
 
-		req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_DOC, contentDoc);
+		List<Element> contentElements = contentParentElement.elements();
 
-		pageContext.include("/html/portlet/journal/edit_article_content_xsd_el.jsp");
+		for (Element contentElement : contentElements) {
+			if (elName.equals(contentElement.attributeValue("name", StringPool.BLANK))) {
+				elSiblings = _getSiblings(contentParentElement, elName);
 
-		count.increment();
+				break;
+			}
+		}
 
-		String elType = el.attributeValue("type", StringPool.BLANK);
+		if (elSiblings == null) {
+			elSiblings = new ArrayList<Element>();
 
-		if (!elType.equals("list") && !elType.equals("multi-list")) {
-			_format(groupId, contentDoc, el, count, depth, pageContext, req);
+			Element contentElement = SAXReaderUtil.createElement("dynamic-element");
+
+			contentElement.addAttribute("instance-id", PwdGenerator.getPassword());
+			contentElement.addAttribute("name", elName);
+			contentElement.addAttribute("type", elType);
+
+			contentElement.add(SAXReaderUtil.createElement("dynamic-content"));
+
+			elSiblings.add(contentElement);
+		}
+
+		for (int i = 0; i < elSiblings.size(); i++) {
+			Element contentElement = elSiblings.get(i);
+
+			String elInstanceId = contentElement.attributeValue("instance-id");
+
+			String elContent = GetterUtil.getString(contentElement.elementText("dynamic-content"));
+
+			if (!elType.equals("text_area")) {
+				elContent = HtmlUtil.toInputSafe(elContent);
+			}
+
+			String elLanguageId = StringPool.BLANK;
+
+			Element dynamicContentEl = contentElement.element("dynamic-content");
+
+			if (dynamicContentEl != null) {
+				elLanguageId = dynamicContentEl.attributeValue("language-id", StringPool.BLANK);
+			}
+			else {
+				elLanguageId = languageId;
+			}
+
+			request.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, String.valueOf(groupId));
+
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, xsdElement);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
+
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INSTANCE_ID, elInstanceId);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME, elName);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE, elType);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE, String.valueOf(elRepeatable));
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE, (i == 0) ? "1" : "0");
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT, elContent);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_LANGUAGE_ID, elLanguageId);
+
+			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL, contentElement);
+
+			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el.jsp");
+
+			count.increment();
+
+			if (!elType.equals("list") && !elType.equals("multi-list")) {
+				_format(groupId, contentElement, xsdElement, count, depth, pageContext, request);
+			}
 		}
 	}
 }
 
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";
+private List<Element> _getSiblings(Element element, String name) {
+	List<Element> elements = new ArrayList<Element>();
+
+	Iterator<Element> itr = element.elements().iterator();
+
+	while (itr.hasNext()) {
+		Element curElement = itr.next();
+
+		if (name.equals(curElement.attributeValue("name", StringPool.BLANK))) {
+			elements.add(curElement);
+		}
+	}
+
+	return elements;
+}
 %>

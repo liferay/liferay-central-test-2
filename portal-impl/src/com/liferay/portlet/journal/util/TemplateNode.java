@@ -66,6 +66,10 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		getOptions().addAll(options);
 	}
 
+	public void appendSibling(TemplateNode sibling) {
+		_siblings.add(sibling);
+	}
+
 	public TemplateNode getChild(String name) {
 		return _children.get(name);
 	}
@@ -84,6 +88,10 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	public List<String> getOptions() {
 		return (List<String>)get("options");
+	}
+
+	public List<TemplateNode> getSiblings() {
+		return _siblings;
 	}
 
 	public String getType() {
@@ -109,5 +117,6 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	private Map<String, TemplateNode> _children =
 		new LinkedHashMap<String, TemplateNode>();
+	private List<TemplateNode> _siblings = new ArrayList<TemplateNode>();
 
 }

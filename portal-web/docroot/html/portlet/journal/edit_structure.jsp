@@ -105,27 +105,29 @@ int tabIndex = 1;
 			var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
 			var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
 			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
+			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
 
-			if ((elDepth != null) && (elName != null) && (elType != null)) {
+			if ((elDepth != null) && (elName != null) && (elType != null) && (elRepeatable != null)) {
 				var elDepthValue = elDepth.value;
 				var elNameValue = encodeURIComponent(elName.value);
 				var elTypeValue = encodeURIComponent(elType.value);
+				var elRepeatableValue = elRepeatable.checked;
 
 				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
 					for (var j = 0; j <= elDepthValue; j++) {
 						xsd += xmlIndent;
 					}
 
-					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "'>";
+					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' repeatable='" + elRepeatableValue + "'>";
 
 					if ((cmd == "add") && (elCount == i)) {
-						xsd += "<dynamic-element name='' type=''></dynamic-element>\n";
+						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
 					}
 
 					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
 
 					if (nextElDepth != null) {
-						nextElDepthValue = nextElDepth.value;
+						var nextElDepthValue = nextElDepth.value;
 
 						if (elDepthValue == nextElDepthValue) {
 							for (var j = 0; j < elDepthValue; j++) {
@@ -167,7 +169,7 @@ int tabIndex = 1;
 					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
 
 					if (nextElDepth != null) {
-						nextElDepthValue = nextElDepth.value;
+						var nextElDepthValue = nextElDepth.value;
 
 						if (elDepthValue > nextElDepthValue) {
 							var depthDiff = elDepthValue - nextElDepthValue;

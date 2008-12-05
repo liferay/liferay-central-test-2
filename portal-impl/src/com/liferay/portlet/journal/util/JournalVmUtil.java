@@ -183,6 +183,9 @@ public class JournalVmUtil {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
 
+		Map<String, TemplateNode> prototypeNodes =
+			new HashMap<String, TemplateNode>();
+
 		for (Element el : parent.elements("dynamic-element")) {
 			Element content = el.element("dynamic-content");
 
@@ -212,7 +215,17 @@ public class JournalVmUtil {
 				}
 			}
 
-			nodes.add(node);
+			TemplateNode prototypeNode = prototypeNodes.get(name);
+
+			if (prototypeNode == null) {
+				prototypeNode = node;
+
+				prototypeNodes.put(name, prototypeNode);
+
+				nodes.add(node);
+			}
+
+			prototypeNode.appendSibling(node);
 		}
 
 		return nodes;

@@ -25,6 +25,7 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -32,6 +33,7 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
@@ -106,7 +108,7 @@ public class VerifyJournal extends VerifyProcess {
 			long groupId = article.getGroupId();
 			String articleId = article.getArticleId();
 			double version = article.getVersion();
-			//String structureId = article.getStructureId();
+			String structureId = article.getStructureId();
 
 			if (article.getResourcePrimKey() <= 0) {
 				article =
@@ -142,14 +144,17 @@ public class VerifyJournal extends VerifyProcess {
 
 			String newContent = HtmlUtil.replaceMsWordCharacters(content);
 
-			/*if (Validator.isNotNull(structureId)) {
-				JournalStructure structure =
+			if (Validator.isNotNull(structureId)) {
+				newContent = JournalUtil.addDynamicElementInstanceId(
+					newContent);
+
+				/*JournalStructure structure =
 					JournalStructureLocalServiceUtil.getStructure(
 						groupId, structureId);
 
 				newContent = JournalUtil.removeOldContent(
-					newContent, structure.getXsd());
-			}*/
+					newContent, structure.getXsd());*/
+			}
 
 			if (!content.equals(newContent)) {
 				JournalArticleLocalServiceUtil.updateContent(

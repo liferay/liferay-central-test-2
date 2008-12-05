@@ -64,6 +64,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.LocalizationUtil;
+import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -95,6 +96,25 @@ public class JournalUtil {
 	public static final int MAX_STACK_SIZE = 20;
 
 	public static final String XML_INDENT = "  ";
+
+	public static String addDynamicElementInstanceId(String content) {
+		try {
+			if (content.indexOf(" instance-id=\"") == -1) {
+				Document doc = SAXReaderUtil.read(content);
+
+				Element root = doc.getRootElement();
+
+				_addDynamicElementInstanceId(root);
+
+				content = formatXML(doc);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return content;
+	}
 
 	public static void addRecentArticle(
 		PortletRequest portletRequest, JournalArticle article) {
@@ -662,37 +682,31 @@ public class JournalUtil {
 		return tokens;
 	}
 
-	public static String mergeLocaleContent(
-		String curContent, String newContent, String xsd) {
+	public static String mergeArticleContent(
+		String curContent, String newContent) {
 
 		try {
-			Document curContentDoc = SAXReaderUtil.read(curContent);
-			Document newContentDoc = SAXReaderUtil.read(newContent);
-			Document xsdDoc = SAXReaderUtil.read(xsd);
+			Document curDocument = SAXReaderUtil.read(curContent);
+			Document newDocument = SAXReaderUtil.read(newContent);
 
-			Element curContentRoot = curContentDoc.getRootElement();
-			Element newContentRoot = newContentDoc.getRootElement();
-			Element xsdRoot = xsdDoc.getRootElement();
+			Element curRoot = curDocument.getRootElement();
+			Element newRoot = newDocument.getRootElement();
 
-			curContentRoot.addAttribute(
+			curRoot.addAttribute(
 				"default-locale",
-				newContentRoot.attributeValue("default-locale"));
-			curContentRoot.addAttribute(
+				newRoot.attributeValue("default-locale"));
+			curRoot.addAttribute(
 				"available-locales",
-				newContentRoot.attributeValue("available-locales"));
+				newRoot.attributeValue("available-locales"));
 
-			Stack<String> path = new Stack<String>();
-
-			path.push(xsdRoot.getName());
-
-			_mergeLocaleContent(
-				path, curContentDoc, newContentDoc, xsdRoot,
+			_mergeArticleContent(
+				curDocument, newRoot,
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
-			curContent = formatXML(curContentDoc);
+			curContent = JournalUtil.formatXML(curDocument);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return curContent;
@@ -726,7 +740,7 @@ public class JournalUtil {
 			content = formatXML(doc);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return content;
@@ -774,7 +788,7 @@ public class JournalUtil {
 			content = formatXML(contentDoc);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return content;
@@ -952,127 +966,150 @@ public class JournalUtil {
 		return output;
 	}
 
-	private static void _mergeLocaleContent(
-			Stack<String> path, Document curDoc, Document newDoc, Element xsdEl,
-			String defaultLocale)
-		throws PortalException, SystemException {
+	private static void _addDynamicElementInstanceId(Element root) {
+		Iterator<Element> itr = root.elements().iterator();
 
-		String elPath = "";
+		while (itr.hasNext()) {
+			Element element = itr.next();
 
-		for (int i = 0; i < path.size(); i++) {
-			elPath += "/" + path.elementAt(i);
+			if (!element.getName().equals("dynamic-element")) {
+				continue;
+			}
+
+			String instanceId = element.attributeValue("instance-id");
+
+			if (Validator.isNull(instanceId)) {
+				element.addAttribute("instance-id", PwdGenerator.getPassword());
+			}
+
+			_addDynamicElementInstanceId(element);
 		}
+	}
 
-		for (int i = 0; i < xsdEl.nodeCount(); i++) {
-			Node xsdNode = xsdEl.node(i);
+	private static Element _getElementByInstanceId(
+		Document document, String instanceId) {
 
-			if ((xsdNode instanceof Element) &&
-				(xsdNode.getName().equals("dynamic-element"))) {
+		XPath xPathSelector = SAXReaderUtil.createXPath(
+			"//dynamic-element[@instance-id='" + instanceId + "']");
 
-				_mergeLocaleContent(
-					path, curDoc, newDoc, (Element)xsdNode, defaultLocale,
-					elPath);
+		List<Node> nodes = xPathSelector.selectNodes(document);
+
+		if (nodes.size() == 1) {
+			return (Element)nodes.get(0);
+		}
+		else {
+			return null;
+		}
+	}
+
+	private static void _mergeArticleContent(
+			Document curDocument, Element newParentElement,
+			String defaultLocale)
+		throws Exception {
+
+		List<Element> newElements = newParentElement.elements(
+			"dynamic-element");
+
+		for (int i = 0; i < newElements.size(); i++) {
+			Element newElement = newElements.get(i);
+
+			_mergeArticleContent(
+				curDocument, newParentElement, newElement, i, defaultLocale);
+		}
+	}
+
+	private static void _mergeArticleContent(
+			Document curDocument, Element newParentElement, Element newElement,
+			int pos, String defaultLocale)
+		throws Exception {
+
+		_mergeArticleContent(curDocument, newElement, defaultLocale);
+
+		String instanceId = newElement.attributeValue("instance-id");
+
+		Element curElement = _getElementByInstanceId(curDocument, instanceId);
+
+		if (curElement != null) {
+			_mergeArticleContent(curElement, newElement, defaultLocale);
+		}
+		else {
+			String parentInstanceId = newParentElement.attributeValue(
+				"instance-id");
+
+			if (Validator.isNull(parentInstanceId)) {
+				Element curRoot = curDocument.getRootElement();
+
+				List<Element> curRootElements = curRoot.elements();
+
+				curRootElements.add(pos, newElement.createCopy());
+			}
+			else {
+				Element curParentElement = _getElementByInstanceId(
+					curDocument, parentInstanceId);
+
+				if (curParentElement != null) {
+					List<Element> curParentElements =
+						curParentElement.elements();
+
+					curParentElements.add(pos, newElement.createCopy());
+				}
 			}
 		}
 	}
 
-	private static void _mergeLocaleContent(
-			Stack<String> path, Document curDoc, Document newDoc, Element xsdEl,
-			String defaultLocale, String elPath)
-		throws PortalException, SystemException {
+	private static void _mergeArticleContent(
+		Element curElement, Element newElement, String defaultLocale) {
 
-		String name = xsdEl.attributeValue("name");
+		Element newContentElement = newElement.elements(
+			"dynamic-content").get(0);
 
-		String localPath = "dynamic-element[@name='" + name + "']";
+		String newLanguageId = newContentElement.attributeValue("language-id");
+		String newValue = newContentElement.getText();
 
-		String fullPath = elPath + "/" + localPath;
+		List<Element> curContentElements = curElement.elements(
+			"dynamic-content");
 
-		XPath xPathSelector = SAXReaderUtil.createXPath(fullPath);
+		if (Validator.isNull(newLanguageId)) {
+			for (Element curContentElement : curContentElements) {
+				curContentElement.detach();
+			}
 
-		List<Node> curNodes = xPathSelector.selectNodes(curDoc);
-
-		Element newEl = (Element)xPathSelector.selectNodes(newDoc).get(0);
-
-		if (curNodes.size() > 0) {
-			Element curEl = (Element)curNodes.get(0);
-
-			List<Element> curDynamicContents = curEl.elements(
+			Element curContentElement = SAXReaderUtil.createElement(
 				"dynamic-content");
 
-			Element newContentEl = newEl.element("dynamic-content");
+			curContentElement.addCDATA(newValue);
 
-			String newContentLanguageId = newContentEl.attributeValue(
-				"language-id", StringPool.BLANK);
-
-			if (newContentLanguageId.equals(StringPool.BLANK)) {
-				for (int k = curDynamicContents.size() - 1; k >= 0 ; k--) {
-					Element curContentEl = curDynamicContents.get(k);
-
-					String curContentLanguageId = curContentEl.attributeValue(
-						"language-id", StringPool.BLANK);
-
-					if ((curEl.attributeValue("type").equals("image")) &&
-						(!curContentLanguageId.equals(defaultLocale) &&
-						 !curContentLanguageId.equals(StringPool.BLANK))) {
-
-						long id = GetterUtil.getLong(
-							curContentEl.attributeValue("id"));
-
-						ImageLocalServiceUtil.deleteImage(id);
-					}
-
-					curContentEl.detach();
-				}
-
-				curEl.content().add(newContentEl.createCopy());
-			}
-			else {
-				boolean match = false;
-
-				for (int k = curDynamicContents.size() - 1; k >= 0 ; k--) {
-					Element curContentEl = curDynamicContents.get(k);
-
-					String curContentLanguageId = curContentEl.attributeValue(
-						"language-id", StringPool.BLANK);
-
-					if ((newContentLanguageId.equals(curContentLanguageId)) ||
-						(newContentLanguageId.equals(defaultLocale) &&
-						 curContentLanguageId.equals(StringPool.BLANK))) {
-
-						curContentEl.detach();
-
-						curEl.content().add(k, newContentEl.createCopy());
-
-						match = true;
-					}
-
-					if (curContentLanguageId.equals(StringPool.BLANK)) {
-						curContentEl.addAttribute("language-id", defaultLocale);
-					}
-				}
-
-				if (!match) {
-					curEl.content().add(newContentEl.createCopy());
-				}
-			}
+			curElement.add(curContentElement);
 		}
 		else {
-			xPathSelector = SAXReaderUtil.createXPath(elPath);
+			boolean alreadyExists = false;
 
-			Element parentEl =
-				(Element)xPathSelector.selectNodes(curDoc).get(0);
+			for (Element curContentElement : curContentElements) {
+				String curLanguageId = curContentElement.attributeValue(
+					"language-id");
 
-			parentEl.content().add(newEl.createCopy());
-		}
+				if (newLanguageId.equals(curLanguageId)) {
+					alreadyExists = true;
 
-		String type = xsdEl.attributeValue("type", StringPool.BLANK);
+					curContentElement.clearContent();
+					curContentElement.addCDATA(newValue);
 
-		if (!type.equals("list") && !type.equals("multi-list")) {
-			path.push(localPath);
+					break;
+				}
+			}
 
-			_mergeLocaleContent(path, curDoc, newDoc, xsdEl, defaultLocale);
+			if (!alreadyExists) {
+				Element curContentElement = curContentElements.get(0);
 
-			path.pop();
+				String curLanguageId = curContentElement.attributeValue(
+					"language-id");
+
+				if (Validator.isNull(curLanguageId)) {
+					curContentElement.detach();
+				}
+
+				curElement.add(newContentElement.createCopy());
+			}
 		}
 	}
 

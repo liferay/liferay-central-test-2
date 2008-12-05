@@ -29,6 +29,7 @@ Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 
 String elName = JS.decodeURIComponent(el.attributeValue("name", StringPool.BLANK));
 String elType = JS.decodeURIComponent(el.attributeValue("type", StringPool.BLANK));
+boolean repeatable = GetterUtil.getBoolean(el.attributeValue("repeatable"));
 
 String parentElType = java.net.URLDecoder.decode(el.getParent().attributeValue("type", StringPool.BLANK));
 
@@ -81,6 +82,9 @@ if (MathUtil.isEven(count.getValue())) {
 			</td>
 
 			<c:if test='<%= !parentElType.equals("list") && !parentElType.equals("multi-list") %>'>
+				<td>
+					<input <%= repeatable ? "checked" : "" %> id="<portlet:namespace />structure_el<%= count.getValue() %>_repeatable" tabindex="<%= tabIndex.getValue() %>" type="checkbox" /> <liferay-ui:message key="repeatable" />
+				</td>
 				<td>
 
 					<%

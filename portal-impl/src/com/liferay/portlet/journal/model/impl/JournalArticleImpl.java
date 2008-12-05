@@ -56,6 +56,17 @@ public class JournalArticleImpl
 	public static final String[] TYPES =
 		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_TYPES);
 
+	public static String getContentByLocale(
+		String content, boolean templateDriven, String languageId){
+
+		LocaleTransformerListener listener = new LocaleTransformerListener();
+
+		listener.setTemplateDriven(templateDriven);
+		listener.setLanguageId(languageId);
+
+		return listener.onXml(content);
+	}
+
 	public JournalArticleImpl() {
 	}
 
@@ -69,12 +80,7 @@ public class JournalArticleImpl
 	}
 
 	public String getContentByLocale(String languageId){
-		LocaleTransformerListener listener = new LocaleTransformerListener();
-
-		listener.setTemplateDriven(isTemplateDriven());
-		listener.setLanguageId(languageId);
-
-		return listener.onXml(getContent());
+		return getContentByLocale(getContent(), isTemplateDriven(), languageId);
 	}
 
 	public String getDefaultLocale() {
