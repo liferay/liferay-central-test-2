@@ -68,6 +68,15 @@ public class WSRPProducerLocalServiceImpl
 		wsrpProducerPersistence.update(producer, false);
 	}
 
+	public void deleteWSRPProducer(WSRPProducer wsrpProducer)
+		throws SystemException {
+
+		wsrpConsumerRegistrationPersistence.removeByProducerKey(
+			wsrpProducer.getInstanceName());
+		
+		wsrpProducerPersistence.remove(wsrpProducer);
+	}
+
 	public WSRPProducer getProducer(String instanceName)
 		throws PortalException, SystemException {
 
