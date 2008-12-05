@@ -158,7 +158,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		friendlyURL = getFriendlyURL(layoutId, friendlyURL);
+		String layoutName = localeNamesMap.get(LocaleUtil.getDefault());
+		friendlyURL = getFriendlyURL(
+			groupId, privateLayout, layoutId, layoutName, friendlyURL);
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
@@ -721,7 +723,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
-		friendlyURL = getFriendlyURL(layout.getLayoutId(), friendlyURL);
+		friendlyURL = getFriendlyURL(
+			layout.getGroupId(), layout.getPrivateLayout(),
+			layout.getLayoutId(), StringPool.BLANK, friendlyURL);
 
 		validateFriendlyURL(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
@@ -759,7 +763,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		friendlyURL = getFriendlyURL(layoutId, friendlyURL);
+		friendlyURL = getFriendlyURL(
+			groupId, privateLayout, layoutId, StringPool.BLANK, friendlyURL);
 
 		validate(
 			groupId, privateLayout, layoutId, parentLayoutId, type, hidden,
@@ -1040,15 +1045,41 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected String getFriendlyURL(String friendlyURL) {
 		friendlyURL = GetterUtil.getString(friendlyURL);
+		friendlyURL = friendlyURL.replaceAll(
+			StringPool.SPACE, StringPool.BLANK);
+		friendlyURL = friendlyURL.toLowerCase();
 
-		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
+		return Normalizer.normalizeToAscii(friendlyURL);
 	}
 
-	protected String getFriendlyURL(long layoutId, String friendlyURL) {
+	protected String getFriendlyURL(
+			long groupId, boolean privateLayout, long layoutId,
+			String layoutName, String friendlyURL)
+		throws PortalException, SystemException {
+
 		friendlyURL = getFriendlyURL(friendlyURL);
 
 		if (Validator.isNull(friendlyURL)) {
-			friendlyURL = StringPool.SLASH + layoutId;
+			friendlyURL = StringPool.SLASH + getFriendlyURL(layoutName);
+
+			if (LayoutImpl.validateFriendlyURL(friendlyURL) != -1) {
+				friendlyURL = StringPool.SLASH + layoutId;
+			}
+			else {
+				String baseFriendlyURL = friendlyURL;
+
+				for (int i = 1;; i++) {
+					try {
+						validateFriendlyURL(
+							groupId, privateLayout, layoutId, friendlyURL);
+
+						break;
+					}
+					catch (LayoutFriendlyURLException lfue) {
+						friendlyURL = baseFriendlyURL + i;
+					}
+				}
+			}
 		}
 
 		return friendlyURL;
