@@ -39,22 +39,6 @@ public class AddItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Music")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent("//td[1]/a")) {
 					break;
 				}
@@ -86,6 +70,23 @@ public class AddItemTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_34_sku")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_34_sku", RuntimeVariables.replace("1111"));
 		selenium.type("_34_name", RuntimeVariables.replace("Jona Lyons - Wheel"));
 		selenium.type("_34_description",
@@ -115,24 +116,8 @@ public class AddItemTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Jona Lyons - Wheel")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

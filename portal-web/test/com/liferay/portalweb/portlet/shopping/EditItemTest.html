@@ -13,17 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//td[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
+	<td>//strong/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,8 +22,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[1]/nobr/a/img</td>
+	<td>//img[@alt='Edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -57,13 +52,23 @@
 	<td>$2.50</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>$11.99</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,18 +77,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>$11.99</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Return to Full Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Configuration']</td>
 	<td></td>
 </tr>
 

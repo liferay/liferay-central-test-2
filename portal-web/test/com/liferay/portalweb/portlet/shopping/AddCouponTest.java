@@ -51,13 +51,43 @@ public class AddCouponTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Coupons"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Add Coupon']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Coupon']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_34_autoCodeCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("_34_autoCodeCheckbox");
-		selenium.type("_34_name",
-			RuntimeVariables.replace("Super Best Liferay Friend Discount"));
-		selenium.type("_34_name",
-			RuntimeVariables.replace("Liferay Friends and Family Discount"));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("Friends and Family Discount"));
 		selenium.type("_34_description",
@@ -83,21 +113,8 @@ public class AddCouponTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Friends and Family Discount")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Friends and Family Discount"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

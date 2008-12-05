@@ -33,9 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondItemTest extends BaseTestCase {
 	public void testAddSecondItem() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -82,8 +96,6 @@ public class AddSecondItemTest extends BaseTestCase {
 				"Noted guitarist and performer (for one) lays down how to thrash with the might battle axe of music."));
 		selenium.type("_34_price0", RuntimeVariables.replace("$16.99"));
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("200"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,7 +103,7 @@ public class AddSecondItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("How to Play Guitar - for Dummies.")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -101,6 +113,11 @@ public class AddSecondItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("How to Play Guitar - for Dummies."));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

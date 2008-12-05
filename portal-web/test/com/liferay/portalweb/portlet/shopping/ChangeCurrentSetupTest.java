@@ -51,7 +51,6 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Archived");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +58,27 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Setup")) {
+				if (selenium.isElementPresent("link=Archived")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Archived"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Setup"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Current")) {
 					break;
 				}
 			}
@@ -71,6 +90,23 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Current"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Shipping Calculation")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Shipping Calculation"));
 		selenium.waitForPageToLoad("30000");
 
@@ -94,30 +130,29 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Flat Amount"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace("99999"));
 		selenium.type("_86_shipping1", RuntimeVariables.replace("10020"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"You have successfully updated the setup.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,7 +160,7 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("$10,020.00")) {
+				if (selenium.isElementPresent("link=Cart")) {
 					break;
 				}
 			}
@@ -135,6 +170,9 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("$10,020.00"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

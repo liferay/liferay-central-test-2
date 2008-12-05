@@ -69,8 +69,6 @@ public class ConfigureStateTaxTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_taxRate", RuntimeVariables.replace("7.750%"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,8 +76,7 @@ public class ConfigureStateTaxTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have successfully updated the setup.")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -89,6 +86,10 @@ public class ConfigureStateTaxTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

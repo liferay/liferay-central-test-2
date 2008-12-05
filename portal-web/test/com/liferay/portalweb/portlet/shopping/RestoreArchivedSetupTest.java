@@ -70,6 +70,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Archived"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Setup"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,23 +78,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Setup")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Restore")) {
+				if (selenium.isElementPresent("//strong/span")) {
 					break;
 				}
 			}
@@ -104,12 +89,6 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//nobr/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -117,7 +96,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("$11.99 ")) {
+				if (selenium.isElementPresent("//nobr/a")) {
 					break;
 				}
 			}
@@ -127,6 +106,32 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("//nobr/a"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Cart")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("$11.99"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

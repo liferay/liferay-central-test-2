@@ -39,6 +39,25 @@ public class CheckoutTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("link=Cart")) {
 					break;
 				}
@@ -118,6 +137,8 @@ public class CheckoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_34_comments",
+			RuntimeVariables.replace("Please take care of my order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
 
@@ -139,38 +160,8 @@ public class CheckoutTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("1234 Sesame Street")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("In Stock")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("1234 Sesame Street"));
+		assertTrue(selenium.isTextPresent("In Stock"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -190,23 +181,7 @@ public class CheckoutTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Finished']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Thank you for your purchase.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Thank you for your purchase."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

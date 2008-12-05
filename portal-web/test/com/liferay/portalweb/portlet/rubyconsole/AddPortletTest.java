@@ -68,7 +68,5 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		assertTrue(selenium.isElementPresent("//input[@value='Execute']"));
 	}
 }

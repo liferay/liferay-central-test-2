@@ -4,46 +4,46 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeleteTemporaryCouponTest</title>
+<title>AddNullCouponTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeleteTemporaryCouponTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullCouponTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[4]/td[7]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//tr[4]/td[7]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[2]/ul/li[2]/nobr/a/img</td>
+	<td>link=Coupons</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[2]/nobr/a/img</td>
+	<td>link=Coupons</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Add Coupon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Coupon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Temporary Coupon</td>
+	<td>You have entered invalid data. Please try again.</td>
 	<td></td>
 </tr>
 <tr>

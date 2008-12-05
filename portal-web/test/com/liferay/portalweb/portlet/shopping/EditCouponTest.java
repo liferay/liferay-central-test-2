@@ -33,9 +33,59 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditCouponTest extends BaseTestCase {
 	public void testEditCoupon() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@alt='Edit']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_34_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_34_name", RuntimeVariables.replace("Family Discount"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Discount for family only!"));
@@ -58,21 +108,9 @@ public class EditCouponTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Family Discount")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Family Discount"));
+		assertFalse(selenium.isTextPresent("Friends and Family Discount"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

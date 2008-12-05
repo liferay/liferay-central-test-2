@@ -39,7 +39,7 @@ public class AddThirdItemToCartTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/a")) {
+				if (selenium.isElementPresent("//td[1]/a")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddThirdItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//td[2]/a"));
+		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 
@@ -94,40 +94,9 @@ public class AddThirdItemToCartTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add to Shopping Cart']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Update Cart']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -74,45 +74,13 @@ public class SearchCouponsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Coupons']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent("Family Discount")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertFalse(selenium.isTextPresent("Family Discount"));
 		selenium.select("discountType",
 			RuntimeVariables.replace("label=Percentage"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Coupons']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Family Discount")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Family Discount"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

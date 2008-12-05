@@ -12,11 +12,6 @@
 <tr><td rowspan="1" colspan="3">AddItemTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Music</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//td[1]/a</td>
 	<td></td>
@@ -34,6 +29,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Item']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_34_sku</td>
 	<td></td>
 </tr>
 <tr>
@@ -87,13 +87,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Jona Lyons - Wheel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

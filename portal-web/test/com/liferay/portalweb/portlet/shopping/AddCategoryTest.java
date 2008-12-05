@@ -69,11 +69,12 @@ public class AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_34_name", RuntimeVariables.replace("Audio Center"));
 		selenium.type("_34_name", RuntimeVariables.replace("Audio Center"));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,7 +82,7 @@ public class AddCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Audio Center")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -90,5 +91,11 @@ public class AddCategoryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Audio Center"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

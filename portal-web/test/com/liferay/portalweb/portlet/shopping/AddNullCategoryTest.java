@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SaveCurrentSetupTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullCategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SaveCurrentSetupTest extends BaseTestCase {
-	public void testSaveCurrentSetup() throws Exception {
+public class AddNullCategoryTest extends BaseTestCase {
+	public void testAddNullCategory() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("//input[@value='Add Category']")) {
 					break;
 				}
 			}
@@ -49,45 +49,9 @@ public class SaveCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Archived")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Archived"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_86_name", RuntimeVariables.replace("Test Setup"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,7 +72,7 @@ public class SaveCurrentSetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"You have entered invalid data. Please try again."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

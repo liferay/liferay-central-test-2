@@ -69,12 +69,14 @@ public class AddSecondCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_34_name", RuntimeVariables.replace("Video"));
 		selenium.type("_34_name", RuntimeVariables.replace("Video"));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace(
+				"VHS, DVD, BETA, LaserDisc, Bluray, HD-DVD. All in stock! All the time!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"VHS, DVD, BETA, LaserDisc, Bluray, HD-DVD. All in stock! All the time!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +84,7 @@ public class AddSecondCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Video")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -91,5 +93,11 @@ public class AddSecondCategoryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Video"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

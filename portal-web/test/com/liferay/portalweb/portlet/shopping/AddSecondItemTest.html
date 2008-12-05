@@ -12,13 +12,13 @@
 <tr><td rowspan="1" colspan="3">AddSecondItemTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>waitForElementPresent</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//tr[4]/td[1]/a</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,13 +62,23 @@
 	<td>200</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>How to Play Guitar - for Dummies.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>

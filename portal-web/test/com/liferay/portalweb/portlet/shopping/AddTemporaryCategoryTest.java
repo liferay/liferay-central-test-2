@@ -69,11 +69,12 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_34_name", RuntimeVariables.replace("Horses"));
 		selenium.type("_34_name", RuntimeVariables.replace("Horses"));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace("Horses for sale here!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Horses for sale here!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,7 +82,7 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Horses")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -90,5 +91,11 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Horses"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

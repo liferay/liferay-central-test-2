@@ -68,41 +68,11 @@ public class RemoveItemFromCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Empty Cart']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent("Jona Lyons - Wheel")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("//input[@value='Empty Cart']"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Jona Lyons - Wheel"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -51,22 +51,7 @@ public class ConfirmOrderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Orders"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Joe Bloggs")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Joe Bloggs"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,23 +71,7 @@ public class ConfirmOrderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Checkout"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Please take care of my order.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Please take care of my order."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

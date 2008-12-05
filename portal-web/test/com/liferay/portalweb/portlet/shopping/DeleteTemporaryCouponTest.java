@@ -33,11 +33,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteTemporaryCouponTest extends BaseTestCase {
 	public void testDeleteTemporaryCoupon() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Coupons"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -72,59 +67,13 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[2]/ul/li[2]/nobr/a/img");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[2]/nobr/a/img"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent("Temporary Coupon")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertFalse(selenium.isTextPresent("Temporary Coupon"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

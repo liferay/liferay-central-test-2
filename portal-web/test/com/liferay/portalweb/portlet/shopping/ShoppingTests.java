@@ -40,6 +40,7 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(AddTemporaryCategoryTest.class);
 		addTestSuite(DeleteTemporaryCategoryTest.class);
 		addTestSuite(AddSecondCategoryTest.class);
+		addTestSuite(AddNullCategoryTest.class);
 		addTestSuite(AddItemTest.class);
 		addTestSuite(EditItemTest.class);
 		addTestSuite(AddTemporaryItemTest.class);
@@ -47,13 +48,13 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(AddSecondItemTest.class);
 		addTestSuite(SearchItemsTest.class);
 		addTestSuite(MoveItemTest.class);
-		addTestSuite(AddBlankItemTest.class);
+		addTestSuite(AddNullItemTest.class);
 		addTestSuite(AddCouponTest.class);
 		addTestSuite(EditCouponTest.class);
-		addTestSuite(AddBlankCouponTest.class);
 		addTestSuite(AddTemporaryCouponTest.class);
 		addTestSuite(DeleteTemporaryCouponTest.class);
 		addTestSuite(SearchCouponsTest.class);
+		addTestSuite(AddNullCouponTest.class);
 		addTestSuite(AddItemToCartTest.class);
 		addTestSuite(ConfirmCartTest.class);
 		addTestSuite(RemoveItemFromCartTest.class);
@@ -78,7 +79,7 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(SaveCurrentSetupTest.class);
 		addTestSuite(ChangeCurrentSetupTest.class);
 		addTestSuite(RestoreArchivedSetupTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

@@ -39,26 +39,7 @@ public class EditItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//td[1]/a"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("//strong/span")) {
 					break;
 				}
 			}
@@ -69,7 +50,24 @@ public class EditItemTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a/img"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@alt='Edit']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,8 +89,6 @@ public class EditItemTest extends BaseTestCase {
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("250"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$11.99"));
 		selenium.type("_34_shipping0", RuntimeVariables.replace("$2.50"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,7 +96,27 @@ public class EditItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("$11.99")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("$11.99"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[2]/a")) {
 					break;
 				}
 			}
@@ -112,40 +128,8 @@ public class EditItemTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//td[2]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("$11.99")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("$11.99"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }
