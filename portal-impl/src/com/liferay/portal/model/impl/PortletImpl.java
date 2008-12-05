@@ -2676,6 +2676,26 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Returns true if the portlet is an undeployed portlet
+	 *
+	 * @return		true if the portlet is a placeholder of an undeployed
+	 *				portlet
+	 */
+	public boolean isUndeployedPortlet() {
+		return _undeployedPortlet;
+	}
+
+	/**
+	 * Set to true if the portlet is an undeployed portlet
+	 *
+	 * @param		undeployedPortlet boolean value for whether the portlet is
+	 *				an undeployed portlet
+	 */
+	public void setUndeployedPortlet(boolean undeployedPortlet) {
+		_undeployedPortlet = undeployedPortlet;
+	}
+
+	/**
 	 * Creates and returns a copy of this object.
 	 *
 	 * @return		a copy of this object
@@ -3193,5 +3213,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlets.
 	 */
 	private boolean _staticPortletStart;
+
+	/**
+	 * True if the portlet is an undeployed portlet
+	 */
+	private boolean _undeployedPortlet = false;
 
 }

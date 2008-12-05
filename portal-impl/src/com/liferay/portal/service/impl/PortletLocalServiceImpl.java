@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -59,6 +60,7 @@ import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.util.bridges.jsp.JSPPortlet;
 import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
 
 import com.sun.portal.wsrp.common.WSRPConfig;
@@ -197,10 +199,45 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
+				if (_log.isInfoEnabled()) {
+					_log.info(
 						"Portlet not found for " + companyId + " " + portletId);
 				}
+
+				portlet = new PortletImpl(CompanyConstants.SYSTEM, portletId);
+
+				portlet.setTimestamp(System.currentTimeMillis());
+
+				portlet.setActive(true);
+				portlet.setPortletApp(_getPortletApp(StringPool.BLANK));
+
+				portlet.setPortletName(portletId);
+				portlet.setDisplayName(portletId);
+
+				if (portletId.indexOf("_INSTANCE_") != -1) {
+					portlet.setInstanceable(true);
+				}
+
+				portlet.setPortletClass(JSPPortlet.class.getName());
+
+				Set<String> mimeTypeModes = new HashSet<String>();
+
+				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
+
+				portlet.getPortletModes().put(
+					ContentTypes.TEXT_HTML, mimeTypeModes);
+
+				portlet.setPortletInfo(
+					new PortletInfo(portletId, portletId, portletId));
+
+				Map<String, String> initParams = portlet.getInitParams();
+
+				initParams.put(
+					"view-jsp", "/html/portal/undeployed_portlet.jsp");
+
+				portlet.setUndeployedPortlet(true);
+
+				companyPortletsPool.put(portletId, portlet);
 			}
 		}
 

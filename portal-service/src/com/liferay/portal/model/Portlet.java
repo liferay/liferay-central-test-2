@@ -503,6 +503,10 @@ public interface Portlet extends PortletModel {
 
 	public boolean isStaticEnd();
 
+	public boolean isUndeployedPortlet();
+
+	public void setUndeployedPortlet(boolean undeployedPortlet);
+
 	public java.lang.Object clone();
 
 	public int compareTo(java.lang.Object obj);
