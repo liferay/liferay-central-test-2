@@ -889,22 +889,26 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (Validator.isNull(friendlyURL)) {
 			friendlyURL = StringPool.SLASH + getFriendlyURL(name);
 
-			if (LayoutImpl.validateFriendlyURL(friendlyURL) != -1) {
-				friendlyURL = StringPool.SLASH + classPK;
-			}
-			else {
-				String baseFriendlyURL = friendlyURL;
+			String baseFriendlyURL = friendlyURL;
 
-				for (int i = 1;; i++) {
-					try {
-						validateFriendlyURL(
-							groupId, companyId, classPK, classNameId,
-							friendlyURL);
+			for (int i = 1;; i++) {
+				try {
+					validateFriendlyURL(
+						groupId, companyId, classPK, classNameId,
+						friendlyURL);
+
+					break;
+				}
+				catch (GroupFriendlyURLException gfue) {
+					int type = gfue.getType();
+
+					if (type == GroupFriendlyURLException.DUPLICATE) {
+						friendlyURL = baseFriendlyURL + i;
+					}
+					else {
+						friendlyURL = StringPool.SLASH + classPK;
 
 						break;
-					}
-					catch (GroupFriendlyURLException e) {
-						friendlyURL = baseFriendlyURL + i;
 					}
 				}
 			}

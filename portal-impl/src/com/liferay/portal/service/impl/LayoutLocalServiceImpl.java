@@ -1062,21 +1062,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (Validator.isNull(friendlyURL)) {
 			friendlyURL = StringPool.SLASH + getFriendlyURL(layoutName);
 
-			if (LayoutImpl.validateFriendlyURL(friendlyURL) != -1) {
-				friendlyURL = StringPool.SLASH + layoutId;
-			}
-			else {
-				String baseFriendlyURL = friendlyURL;
+			String baseFriendlyURL = friendlyURL;
 
-				for (int i = 1;; i++) {
-					try {
-						validateFriendlyURL(
-							groupId, privateLayout, layoutId, friendlyURL);
+			for (int i = 1;; i++) {
+				try {
+					validateFriendlyURL(
+						groupId, privateLayout, layoutId, friendlyURL);
+
+					break;
+				}
+				catch (LayoutFriendlyURLException lfue) {
+					int type = lfue.getType();
+
+					if (type == LayoutFriendlyURLException.DUPLICATE) {
+						friendlyURL = baseFriendlyURL + i;
+					}
+					else {
+						friendlyURL = StringPool.SLASH + layoutId;
 
 						break;
-					}
-					catch (LayoutFriendlyURLException lfue) {
-						friendlyURL = baseFriendlyURL + i;
 					}
 				}
 			}
