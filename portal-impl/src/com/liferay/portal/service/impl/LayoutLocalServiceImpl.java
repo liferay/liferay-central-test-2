@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.lar.LayoutImporter;
@@ -158,9 +159,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		String layoutName = localeNamesMap.get(LocaleUtil.getDefault());
+		String friendlyName = localeNamesMap.get(LocaleUtil.getDefault());
 		friendlyURL = getFriendlyURL(
-			groupId, privateLayout, layoutId, layoutName, friendlyURL);
+			groupId, privateLayout, layoutId, friendlyName, friendlyURL);
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
@@ -1045,8 +1046,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected String getFriendlyURL(String friendlyURL) {
 		friendlyURL = GetterUtil.getString(friendlyURL);
-		friendlyURL = friendlyURL.replaceAll(
-			StringPool.SPACE, StringPool.BLANK);
+		friendlyURL = StringUtil.replace(
+			friendlyURL, StringPool.SPACE, StringPool.BLANK);
 		friendlyURL = friendlyURL.toLowerCase();
 
 		return Normalizer.normalizeToAscii(friendlyURL);
@@ -1054,15 +1055,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected String getFriendlyURL(
 			long groupId, boolean privateLayout, long layoutId,
-			String layoutName, String friendlyURL)
+			String friendlyName, String friendlyURL)
 		throws PortalException, SystemException {
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
 		if (Validator.isNull(friendlyURL)) {
-			friendlyURL = StringPool.SLASH + getFriendlyURL(layoutName);
+			friendlyURL = StringPool.SLASH + getFriendlyURL(friendlyName);
 
-			String baseFriendlyURL = friendlyURL;
+			String originalFriendlyURL = friendlyURL;
 
 			for (int i = 1;; i++) {
 				try {
@@ -1071,11 +1072,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 					break;
 				}
-				catch (LayoutFriendlyURLException lfue) {
-					int type = lfue.getType();
+				catch (LayoutFriendlyURLException lfurle) {
+					int type = lfurle.getType();
 
 					if (type == LayoutFriendlyURLException.DUPLICATE) {
-						friendlyURL = baseFriendlyURL + i;
+						friendlyURL = originalFriendlyURL + i;
 					}
 					else {
 						friendlyURL = StringPool.SLASH + layoutId;
