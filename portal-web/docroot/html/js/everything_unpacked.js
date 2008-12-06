@@ -7431,10 +7431,6 @@ Liferay.PortletURL = new Class({
 jQuery.extend(
 	Liferay.PortletURL,
 	{
-		createRenderURL: function() {
-			return new Liferay.PortletURL('RENDER_PHASE');
-		},
-
 		createActionURL: function() {
 			return new Liferay.PortletURL('ACTION_PHASE');
 		},
@@ -7461,6 +7457,10 @@ jQuery.extend(
 			portletURL.setParameter('resourcePrimKey', resourcePrimKey);
 
 			return portletURL;
+		},
+
+		createRenderURL: function() {
+			return new Liferay.PortletURL('RENDER_PHASE');
 		},
 
 		createResourceURL: function() {
@@ -9997,6 +9997,7 @@ Liferay.Session = {
 		var timeDiff = 0;
 
 		clearTimeout(instance._stateCheck);
+
 		if (sessionState == 'expired') {
 			instance.expire();
 		}
@@ -10009,6 +10010,7 @@ Liferay.Session = {
 				}
 				else {
 					newWaitTime = (instance.sessionTimeoutWarning - timeDiff) + 10000;
+
 					instance._stateCheck = setTimeout(
 						function() {
 							instance.checkState();
