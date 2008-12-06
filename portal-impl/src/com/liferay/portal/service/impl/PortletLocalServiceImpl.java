@@ -208,17 +208,16 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portlet.setTimestamp(System.currentTimeMillis());
 
-				portlet.setActive(true);
 				portlet.setPortletApp(_getPortletApp(StringPool.BLANK));
 
 				portlet.setPortletName(portletId);
 				portlet.setDisplayName(portletId);
-
-				if (portletId.indexOf("_INSTANCE_") != -1) {
-					portlet.setInstanceable(true);
-				}
-
 				portlet.setPortletClass(JSPPortlet.class.getName());
+
+				Map<String, String> initParams = portlet.getInitParams();
+
+				initParams.put(
+					"view-jsp", "/html/portal/undeployed_portlet.jsp");
 
 				Set<String> mimeTypeModes = new HashSet<String>();
 
@@ -230,11 +229,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portlet.setPortletInfo(
 					new PortletInfo(portletId, portletId, portletId));
 
-				Map<String, String> initParams = portlet.getInitParams();
+				if (portletId.indexOf("_INSTANCE_") != -1) {
+					portlet.setInstanceable(true);
+				}
 
-				initParams.put(
-					"view-jsp", "/html/portal/undeployed_portlet.jsp");
-
+				portlet.setActive(true);
 				portlet.setUndeployedPortlet(true);
 
 				companyPortletsPool.put(portletId, portlet);

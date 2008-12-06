@@ -503,6 +503,8 @@ public interface Portlet extends PortletModel {
 
 	public boolean isStaticEnd();
 
+	public boolean getUndeployedPortlet();
+
 	public boolean isUndeployedPortlet();
 
 	public void setUndeployedPortlet(boolean undeployedPortlet);

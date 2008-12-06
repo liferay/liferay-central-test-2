@@ -29,5 +29,5 @@ renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE
 %>
 
 <div class="portlet-msg-info">
-	<liferay-ui:message key="this-portlet-has-been-undeployed-please-redeploy-it-or-remove-it-from-the-page" />
+	<liferay-ui:message key="this-portlet-has-been-undeployed.-please-redeploy-it-or-remove-it-from-the-page" />
 </div>
