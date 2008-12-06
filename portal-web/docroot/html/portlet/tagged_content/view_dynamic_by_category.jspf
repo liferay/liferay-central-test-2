@@ -86,7 +86,7 @@ if (!itr.hasNext()) {
 	renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 %>
 
-		<liferay-ui:message key="there-are-no-results" />
+	<liferay-ui:message key="there-are-no-results" />
 
 <%
 }

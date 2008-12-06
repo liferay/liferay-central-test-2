@@ -95,6 +95,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				</c:if>
 			</c:when>
 			<c:otherwise>
+
 				<%
 				renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 				%>

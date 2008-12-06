@@ -245,6 +245,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTLET_CATEGORY_PATH = "PORTLET_CATEGORY_PATH";
 
+	public static final String PORTLET_CONFIGURATOR_VISIBILITY = "PORTLET_CONFIGURATOR_VISIBILITY";
+
 	public static final String PORTLET_CONTENT = "PORTLET_CONTENT";
 
 	public static final String PORTLET_DECORATE = "PORTLET_DECORATE";
@@ -266,8 +268,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String PORTLET_STRUTS_FORWARD = "PORTLET_STRUTS_FORWARD";
 
 	public static final String PORTLET_STRUTS_PROCESSOR = "PORTLET_STRUTS_PROCESSOR";
-
-	public static final String PORTLET_CONFIGURATOR_VISIBILITY = "PORTLET_CONFIGURATOR_VISIBILITY";
 
 	public static final String REFERER = "referer";
 

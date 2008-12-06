@@ -728,15 +728,15 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	}
 
 	if (portletVisibility != null) {
-		cssClasses += " lfr-configurator-visibility ";
+		cssClasses += " lfr-configurator-visibility";
 	}
 
 	if (portletDisplay.isStateMin()) {
-		cssClasses += " portlet-minimized ";
+		cssClasses += " portlet-minimized";
 	}
 	%>
 
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= cssClasses %><%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= cssClasses %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 

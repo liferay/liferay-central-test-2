@@ -46,6 +46,7 @@ if (!groupByClass) {
 	if (results.size() <= 0) {
 		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 	%>
+
 		<liferay-ui:message key="there-are-no-results" />
 
 	<%
@@ -86,7 +87,7 @@ else {
 	}
 
 	if (total == 0) {
-		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, ActionKeys.CONFIGURATION);
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 	}
 }
 %>

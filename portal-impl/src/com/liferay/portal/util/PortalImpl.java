@@ -2549,15 +2549,13 @@ public class PortalImpl implements Portal {
 					WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
 
 			if (portletConfiguratorVisibility != null) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)request.getAttribute(
-						WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 				try {
 					if (!PortletPermissionUtil.contains(
 							themeDisplay.getPermissionChecker(),
-							portlet.getPortletId(),
-							ActionKeys.CONFIGURATION)) {
+							portlet.getPortletId(), ActionKeys.CONFIGURATION)) {
 
 						showPortlet = false;
 					}
