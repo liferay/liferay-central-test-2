@@ -3595,6 +3595,7 @@ this-page-has-no-links=此页面没有链接。
 this-page-is-currently-redirected-to-x=此页面当前重定向到 {0}。
 this-page-is-empty-edit-it-to-add-some-text=这个页面是空的。编辑它增加一些文本。
 this-page-is-part-of-an-inactive-portlet=本页面是不活动的portlet 的一部分。
+this-portlet-has-been-undeployed.-please-redeploy-it-or-remove-it-from-the-page=这portlet undeployed。 请调遣它或从页去除它。
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=本portlet没有增加到活动页面。先发布页面。
 this-portlet-is-inactive=这个portlet 是不活动的。
 this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first=这个portlet被放置的页面不存在于活动站点。先发布页面。

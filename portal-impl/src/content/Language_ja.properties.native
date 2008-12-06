@@ -3595,6 +3595,7 @@ this-page-has-no-links=このページにはリンクがありません
 this-page-is-currently-redirected-to-x=このページは {0} へリダイレクトします。
 this-page-is-empty-edit-it-to-add-some-text=このページは未記入です。テキストを追加してください。
 this-page-is-part-of-an-inactive-portlet=このページは利用できないポートレットの一部です。
+this-portlet-has-been-undeployed.-please-redeploy-it-or-remove-it-from-the-page=このportletはundeployed。 それを転用するか、またはページから取除きなさい。
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=このポートレットは公開されたページには追加されていません。最初にページを公開してください。
 this-portlet-is-inactive=このポートレットは利用できません。
 this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first=This portlet is placed in a page that does not exist in the live site. 最初にページを公開してください。
