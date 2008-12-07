@@ -95,18 +95,7 @@ public class ProducerImpl extends AbstractProducer {
 
 		String registrationProperties = null;
 
-		String lifeTime = null;
-
-		if (registrationRecord.getLifetime() != null) {
-			LeaseTime leaseTime = registrationRecord.getLifetime();
-
-			XMLGregorianCalendar terminationTime =
-				leaseTime.getTerminationTime();
-
-			if (terminationTime != null) {
-				lifeTime = terminationTime.toXMLFormat();
-			}
-		}
+		String lifeTime = getLifeTimeString(registrationRecord.getLifetime());
 
 		try {
 			WSRPConsumerRegistrationLocalServiceUtil.addConsumerRegistration(
@@ -309,16 +298,40 @@ public class ProducerImpl extends AbstractProducer {
 		_producerModel.setPortalId(portalId);
 	}
 
-	public void setRegistrationLifetime(
-		String registrationHandle, LeaseTime lifetime) {
+	public void setRegistrationLifetime (
+			String registrationHandle, LeaseTime lifetime)
+		throws ProducerException {
 
-		throw new UnsupportedOperationException();
+		String lifeTime = getLifeTimeString(lifetime);
+		try {
+			WSRPConsumerRegistration consumerRegistration =
+				getConsumerRegistrationByHandle(registrationHandle);
+
+			consumerRegistration.setLifetimeTerminationTime(lifeTime);
+
+			WSRPConsumerRegistrationLocalServiceUtil.
+					updateWSRPConsumerRegistration(consumerRegistration);
+		} catch (Exception e) {
+			throw new ProducerException(e.getMessage());
+		}	
 	}
 
 	public void setRegistrationStatus(
-		String registrationHandle, boolean value) {
+		String registrationHandle, boolean value) throws ProducerException {
 
-		throw new UnsupportedOperationException();
+		try {
+			WSRPConsumerRegistration consumerRegistration =
+				getConsumerRegistrationByHandle(registrationHandle);
+
+			if (value != consumerRegistration.getStatus()) {
+				consumerRegistration.setStatus(value);
+
+				WSRPConsumerRegistrationLocalServiceUtil.
+					updateWSRPConsumerRegistration(consumerRegistration);
+			}
+		} catch (Exception e) {
+			throw new ProducerException(e.getMessage());
+		}
 	}
 
 	public void setRegistrationValidatorClassName(String validatorClassName) {
@@ -370,6 +383,21 @@ public class ProducerImpl extends AbstractProducer {
 		return registrationRecord;
 	}
 
+	private String getLifeTimeString(LeaseTime leaseTime) {
+		String lifeTime = null;
+
+		if (leaseTime != null) {
+			XMLGregorianCalendar terminationTime =
+				leaseTime.getTerminationTime();
+
+			if (terminationTime != null) {
+				lifeTime = terminationTime.toXMLFormat();
+			}
+		}
+		
+		return lifeTime;
+	}
+	
 	private WSRPProducer _producerModel;
 
 }
