@@ -527,6 +527,16 @@
 
 				<liferay-ui:tabs names="consumer-registration" />
 
+				<%
+				String producerAdminError = GetterUtil.getString((String)request.getAttribute("PRODUCER_ADMIN_ERROR"));
+				%>
+
+				<c:if test='<%= producerAdminError.equals("CONSUMER_REGIS_FAILED") %>'>
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="consumer-registration-failed" />
+					</span>
+				</c:if>
+
 				<table class="lfr-table">
 				<tr>
 					<td>
