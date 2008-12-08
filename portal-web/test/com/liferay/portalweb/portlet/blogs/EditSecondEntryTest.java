@@ -33,6 +33,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditSecondEntryTest extends BaseTestCase {
 	public void testEditSecondEntry() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");

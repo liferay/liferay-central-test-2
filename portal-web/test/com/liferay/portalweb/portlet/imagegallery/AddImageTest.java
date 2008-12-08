@@ -114,6 +114,7 @@ public class AddImageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
 	}
 }
