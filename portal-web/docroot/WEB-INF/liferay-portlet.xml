@@ -400,6 +400,7 @@
 		<control-panel-entry-weight>8.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -511,6 +512,7 @@
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
