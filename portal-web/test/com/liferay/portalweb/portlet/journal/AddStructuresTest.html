@@ -39,12 +39,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_15_newStructureId</td>
-	<td>Test</td>
+	<td>test</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_15_newStructureId</td>
-	<td>Test</td>
+	<td>test</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
@@ -59,62 +59,57 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_15_description</td>
-	<td>This is a test Journal Structure</td>
+	<td>This is a test journal structure!</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_15_description</td>
-	<td>This is a test Journal Structure!</td>
+	<td>This is a test journal structure!</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Row']</td>
+	<td>waitForElementPresent</td>
+	<td>_15_editorButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_15_editorButton</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>_15_xsdContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_xsdContent</td>
+	<td><root>\n  <dynamic-element name='title' type='text'></dynamic-element>\n  <dynamic-element name='Itp' type='link_to_layout'></dynamic-element>\n</root></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>_15_structure_el0_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_15_structure_el0_name</td>
-	<td>Itp</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_15_structure_el0_name</td>
-	<td>Itp</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_15_structure_el0_type</td>
-	<td>label=Link to Page</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Row']</td>
+	<td>assertElementPresent</td>
+	<td>_15_structure_el1_name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_15_structure_el0_name</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_15_structure_el0_name</td>
-	<td>title</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_15_structure_el0_name</td>
-	<td>title</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_15_structure_el0_type</td>
-	<td>label=Text</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

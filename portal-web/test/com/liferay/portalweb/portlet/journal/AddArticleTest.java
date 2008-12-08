@@ -164,8 +164,23 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_15_reviewDateMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.typeKeys("_15_description",
-			RuntimeVariables.replace("Test Description"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Test Description!"));
 
