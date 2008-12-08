@@ -99,8 +99,8 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="structure_image_<%= elInstanceId + "_" + elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>" size="75" type="file" onChange="<portlet:namespace />contentChanged();" />
 
 								<c:if test="<%= Validator.isNotNull(elContent) %>">
-									<span style="font-size: xx-small; margin-left: 15px;">
-									[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />image_<%= elName %>'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+									<span style="margin-left: 15px;">
+										[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />image_<%= elInstanceId + "_" + elName %>'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 									</span>
 								</c:if>
 							</c:if>
@@ -235,18 +235,18 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					<c:if test='<%= elType.equals("image") && Validator.isNotNull(elContent) %>'>
 						<tr>
 							<td>
-								<input id="structure_image_<%= elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>_current" type="hidden" value="<%= elContent %>" />
+								<input id="structure_image_<%= elInstanceId + "_" + elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>_current" type="hidden" value="<%= elContent %>" />
 
-								<div id="<portlet:namespace />image_<%= elName %>" style="border: 1px dotted; display: none; overflow: scroll; overflow-x: scroll; overflow-y: scroll; padding: 4px; width: 500px;">
+								<div id="<portlet:namespace />image_<%= elInstanceId + "_" + elName %>" style="border: 1px dotted; display: none; overflow: scroll; overflow-x: scroll; overflow-y: scroll; padding: 4px; width: 500px;">
 									<table>
 									<tr>
 										<td>
-											<img name="<portlet:namespace />image_<%= elName %>_img" hspace="0" src="<%= themeDisplay.getPathContext() + elContent %>" vspace="0" />
+											<img name="<portlet:namespace />image_<%= elInstanceId + "_" + elName %>_img" hspace="0" src="<%= themeDisplay.getPathContext() + elContent %>" vspace="0" />
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />setImageDeleteState(this, '<portlet:namespace />structure_el<%= count.getValue() %>_delete_state', '<portlet:namespace />image_<%= elName %>_img', '<portlet:namespace />structure_el<%= count.getValue() %>_content');" />
+											<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />setImageDeleteState(this, '<portlet:namespace />structure_el<%= count.getValue() %>_delete_state', '<portlet:namespace />image_<%= elInstanceId + "_" + elName %>_img', '<portlet:namespace />structure_el<%= count.getValue() %>_content');" />
 										</td>
 									</tr>
 									</table>
