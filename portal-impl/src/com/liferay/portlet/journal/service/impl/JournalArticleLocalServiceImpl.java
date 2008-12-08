@@ -2163,7 +2163,7 @@ public class JournalArticleLocalServiceImpl
 				continue;
 			}
 
-			byte[] bytes = images.get(elName + elLanguage);
+			byte[] bytes = images.get(elInstanceId + "_" + elName + elLanguage);
 
 			if (bytes != null && (bytes.length > 0)) {
 				dynamicContent.setText(elContent);

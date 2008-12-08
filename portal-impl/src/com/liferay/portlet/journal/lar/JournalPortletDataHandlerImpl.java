@@ -1537,8 +1537,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
+		sb.append(articleImage.getElInstanceId());
+		sb.append(StringPool.UNDERLINE);
 		sb.append(articleImage.getElName());
-		sb.append(articleImage.getLanguageId());
+
+		if (Validator.isNotNull(articleImage.getLanguageId())) {
+			sb.append(StringPool.UNDERLINE);
+			sb.append(articleImage.getLanguageId());
+		}
+
 		sb.append(StringPool.PERIOD);
 		sb.append(image.getType());
 
