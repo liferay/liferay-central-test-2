@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.upgrade.v5_2_0.UpgradeJournal;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeOrganization;
 import com.liferay.portal.upgrade.v5_2_0.UpgradePortletPermissions;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
@@ -48,6 +49,7 @@ public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeJournal.class);
 		upgrade(UpgradeOrganization.class);
 		upgrade(UpgradePortletPermissions.class);
 		upgrade(UpgradeTags.class);

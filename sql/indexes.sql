@@ -147,7 +147,7 @@ create index IX_3463D95B on JournalArticle (uuid_, groupId);
 
 create index IX_3B51BB68 on JournalArticleImage (groupId);
 create index IX_158B526F on JournalArticleImage (groupId, articleId, version);
-create index IX_D67292FC on JournalArticleImage (groupId, articleId, version, elName, languageId);
+create index IX_103D6207 on JournalArticleImage (groupId, articleId, version, elInstanceId, elName, languageId);
 create index IX_D4121315 on JournalArticleImage (tempImage);
 
 create index IX_F8433677 on JournalArticleResource (groupId);

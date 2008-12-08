@@ -839,6 +839,7 @@
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="articleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="elInstanceId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="elName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="languageId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="tempImage" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />

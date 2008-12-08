@@ -1991,6 +1991,7 @@ public class JournalArticleLocalServiceImpl
 		for (Node imageNode : imageNodes) {
 			Element imageEl = (Element)imageNode;
 
+			String instanceId = imageEl.attributeValue("instance-id");
 			String name = imageEl.attributeValue("name");
 
 			List<Element> dynamicContentEls = imageEl.elements(
@@ -2013,7 +2014,7 @@ public class JournalArticleLocalServiceImpl
 
 				imageId = journalArticleImageLocalService.getArticleImageId(
 					newArticle.getGroupId(), newArticle.getArticleId(),
-					newArticle.getVersion(), name, languageId);
+					newArticle.getVersion(), instanceId, name, languageId);
 
 				ImageLocalServiceUtil.updateImage(
 					imageId, oldImage.getTextObj());
@@ -2069,13 +2070,15 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		for (Element el : root.elements()) {
+			String elInstanceId = el.attributeValue(
+				"instance-id", StringPool.BLANK);
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
 			if (elType.equals("image")) {
 				formatImage(
-					groupId, articleId, version, incrementVersion, el, elName,
-					images);
+					groupId, articleId, version, incrementVersion, el,
+					elInstanceId, elName, images);
 			}
 			/*else if (elType.equals("text_area")) {
 				Element dynamicContent = el.element("dynamic-content");
@@ -2104,8 +2107,8 @@ public class JournalArticleLocalServiceImpl
 
 	protected void formatImage(
 			long groupId, String articleId, double version,
-			boolean incrementVersion, Element el, String elName,
-			Map<String, byte[]> images)
+			boolean incrementVersion, Element el, String elInstanceId,
+			String elName, Map<String, byte[]> images)
 		throws PortalException, SystemException {
 
 		List<Element> imageContents = el.elements("dynamic-content");
@@ -2120,7 +2123,8 @@ public class JournalArticleLocalServiceImpl
 
 			long imageId =
 				journalArticleImageLocalService.getArticleImageId(
-					groupId, articleId, version, elName, elLanguage);
+					groupId, articleId, version, elInstanceId, elName,
+					elLanguage);
 
 			double oldVersion = MathUtil.format(version - 0.1, 1, 1);
 
@@ -2129,7 +2133,8 @@ public class JournalArticleLocalServiceImpl
 			if ((oldVersion >= 1) && incrementVersion) {
 				oldImageId =
 					journalArticleImageLocalService.getArticleImageId(
-						groupId, articleId, oldVersion, elName, elLanguage);
+						groupId, articleId, oldVersion, elInstanceId, elName,
+						elLanguage);
 			}
 
 			String elContent =
@@ -2150,7 +2155,8 @@ public class JournalArticleLocalServiceImpl
 
 				long defaultImageId =
 					journalArticleImageLocalService.getArticleImageId(
-						groupId, articleId, version, elName, defaultElLanguage);
+						groupId, articleId, version, elInstanceId, elName,
+						defaultElLanguage);
 
 				imageLocalService.deleteImage(defaultImageId);
 
@@ -2226,7 +2232,8 @@ public class JournalArticleLocalServiceImpl
 
 			long defaultImageId =
 				journalArticleImageLocalService.getArticleImageId(
-					groupId, articleId, version, elName, defaultElLanguage);
+					groupId, articleId, version, elInstanceId, elName,
+					defaultElLanguage);
 
 			Image defaultImage = imageLocalService.getImage(defaultImageId);
 

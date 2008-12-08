@@ -74,6 +74,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		newJournalArticleImage.setGroupId(nextLong());
 		newJournalArticleImage.setArticleId(randomString());
 		newJournalArticleImage.setVersion(nextDouble());
+		newJournalArticleImage.setElInstanceId(randomString());
 		newJournalArticleImage.setElName(randomString());
 		newJournalArticleImage.setLanguageId(randomString());
 		newJournalArticleImage.setTempImage(randomBoolean());
@@ -90,6 +91,8 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 			newJournalArticleImage.getArticleId());
 		assertEquals(existingJournalArticleImage.getVersion(),
 			newJournalArticleImage.getVersion());
+		assertEquals(existingJournalArticleImage.getElInstanceId(),
+			newJournalArticleImage.getElInstanceId());
 		assertEquals(existingJournalArticleImage.getElName(),
 			newJournalArticleImage.getElName());
 		assertEquals(existingJournalArticleImage.getLanguageId(),
@@ -143,6 +146,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		journalArticleImage.setGroupId(nextLong());
 		journalArticleImage.setArticleId(randomString());
 		journalArticleImage.setVersion(nextDouble());
+		journalArticleImage.setElInstanceId(randomString());
 		journalArticleImage.setElName(randomString());
 		journalArticleImage.setLanguageId(randomString());
 		journalArticleImage.setTempImage(randomBoolean());

@@ -224,23 +224,24 @@ public class JournalArticleImageUtil {
 			version, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_E_L(
+	public static com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_E_E_L(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String elName, java.lang.String languageId)
+		java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException {
 		return getPersistence()
-				   .findByG_A_V_E_L(groupId, articleId, version, elName,
-			languageId);
+				   .findByG_A_V_E_E_L(groupId, articleId, version,
+			elInstanceId, elName, languageId);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_L(
+	public static com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_E_L(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String elName, java.lang.String languageId)
-		throws com.liferay.portal.SystemException {
+		java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .fetchByG_A_V_E_L(groupId, articleId, version, elName,
-			languageId);
+				   .fetchByG_A_V_E_E_L(groupId, articleId, version,
+			elInstanceId, elName, languageId);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(
@@ -286,13 +287,15 @@ public class JournalArticleImageUtil {
 		getPersistence().removeByG_A_V(groupId, articleId, version);
 	}
 
-	public static void removeByG_A_V_E_L(long groupId,
-		java.lang.String articleId, double version, java.lang.String elName,
+	public static void removeByG_A_V_E_E_L(long groupId,
+		java.lang.String articleId, double version,
+		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException {
 		getPersistence()
-			.removeByG_A_V_E_L(groupId, articleId, version, elName, languageId);
+			.removeByG_A_V_E_E_L(groupId, articleId, version, elInstanceId,
+			elName, languageId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -314,12 +317,13 @@ public class JournalArticleImageUtil {
 		return getPersistence().countByG_A_V(groupId, articleId, version);
 	}
 
-	public static int countByG_A_V_E_L(long groupId,
-		java.lang.String articleId, double version, java.lang.String elName,
+	public static int countByG_A_V_E_E_L(long groupId,
+		java.lang.String articleId, double version,
+		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .countByG_A_V_E_L(groupId, articleId, version, elName,
-			languageId);
+				   .countByG_A_V_E_E_L(groupId, articleId, version,
+			elInstanceId, elName, languageId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

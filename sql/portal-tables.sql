@@ -474,6 +474,7 @@ create table JournalArticleImage (
 	groupId LONG,
 	articleId VARCHAR(75) null,
 	version DOUBLE,
+	elInstanceId VARCHAR(75) null,
 	elName VARCHAR(75) null,
 	languageId VARCHAR(75) null,
 	tempImage BOOLEAN

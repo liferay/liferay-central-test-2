@@ -96,7 +96,8 @@ public interface JournalArticleImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addArticleImageId(long articleImageId, long groupId,
-		java.lang.String articleId, double version, java.lang.String elName,
+		java.lang.String articleId, double version,
+		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -104,9 +105,13 @@ public interface JournalArticleImageLocalService {
 	public void deleteArticleImage(long articleImageId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteArticleImage(long groupId, java.lang.String articleId,
-		double version, java.lang.String elName, java.lang.String languageId)
+	public void deleteArticleImage(
+		com.liferay.portlet.journal.model.JournalArticleImage articleImage)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteArticleImage(long groupId, java.lang.String articleId,
+		double version, java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
 	public void deleteImages(long groupId, java.lang.String articleId,
 		double version)
@@ -121,13 +126,14 @@ public interface JournalArticleImageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getArticleImageId(long groupId, java.lang.String articleId,
-		double version, java.lang.String elName, java.lang.String languageId)
-		throws com.liferay.portal.SystemException;
+		double version, java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getArticleImageId(long groupId, java.lang.String articleId,
-		double version, java.lang.String elName, java.lang.String languageId,
-		boolean tempImage) throws com.liferay.portal.SystemException;
+		double version, java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId, boolean tempImage)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getArticleImages(

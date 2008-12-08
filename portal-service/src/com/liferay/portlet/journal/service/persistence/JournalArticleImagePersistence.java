@@ -191,16 +191,17 @@ public interface JournalArticleImagePersistence {
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_E_L(
+	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_E_E_L(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String elName, java.lang.String languageId)
+		java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	public com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_L(
+	public com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_E_L(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String elName, java.lang.String languageId)
-		throws com.liferay.portal.SystemException;
+		java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
@@ -234,8 +235,9 @@ public interface JournalArticleImagePersistence {
 	public void removeByG_A_V(long groupId, java.lang.String articleId,
 		double version) throws com.liferay.portal.SystemException;
 
-	public void removeByG_A_V_E_L(long groupId, java.lang.String articleId,
-		double version, java.lang.String elName, java.lang.String languageId)
+	public void removeByG_A_V_E_E_L(long groupId, java.lang.String articleId,
+		double version, java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
@@ -254,9 +256,9 @@ public interface JournalArticleImagePersistence {
 		double version) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByG_A_V_E_L(long groupId, java.lang.String articleId,
-		double version, java.lang.String elName, java.lang.String languageId)
-		throws com.liferay.portal.SystemException;
+	public int countByG_A_V_E_E_L(long groupId, java.lang.String articleId,
+		double version, java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;

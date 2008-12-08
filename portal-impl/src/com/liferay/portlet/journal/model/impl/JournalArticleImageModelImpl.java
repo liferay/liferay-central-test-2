@@ -76,6 +76,9 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 			{ "version", new Integer(Types.DOUBLE) },
 			
 
+			{ "elInstanceId", new Integer(Types.VARCHAR) },
+			
+
 			{ "elName", new Integer(Types.VARCHAR) },
 			
 
@@ -84,7 +87,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 			{ "tempImage", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elInstanceId VARCHAR(75) null,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticleImage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -100,6 +103,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		model.setGroupId(soapModel.getGroupId());
 		model.setArticleId(soapModel.getArticleId());
 		model.setVersion(soapModel.getVersion());
+		model.setElInstanceId(soapModel.getElInstanceId());
 		model.setElName(soapModel.getElName());
 		model.setLanguageId(soapModel.getLanguageId());
 		model.setTempImage(soapModel.getTempImage());
@@ -179,6 +183,19 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getElInstanceId() {
+		return GetterUtil.getString(_elInstanceId);
+	}
+
+	public void setElInstanceId(String elInstanceId) {
+		if (((elInstanceId == null) && (_elInstanceId != null)) ||
+				((elInstanceId != null) && (_elInstanceId == null)) ||
+				((elInstanceId != null) && (_elInstanceId != null) &&
+				!elInstanceId.equals(_elInstanceId))) {
+			_elInstanceId = elInstanceId;
+		}
+	}
+
 	public String getElName() {
 		return GetterUtil.getString(_elName);
 	}
@@ -233,6 +250,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setArticleId(HtmlUtil.escape(getArticleId()));
 			model.setVersion(getVersion());
+			model.setElInstanceId(HtmlUtil.escape(getElInstanceId()));
 			model.setElName(HtmlUtil.escape(getElName()));
 			model.setLanguageId(HtmlUtil.escape(getLanguageId()));
 			model.setTempImage(getTempImage());
@@ -261,6 +279,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		clone.setGroupId(getGroupId());
 		clone.setArticleId(getArticleId());
 		clone.setVersion(getVersion());
+		clone.setElInstanceId(getElInstanceId());
 		clone.setElName(getElName());
 		clone.setLanguageId(getLanguageId());
 		clone.setTempImage(getTempImage());
@@ -320,6 +339,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	private long _groupId;
 	private String _articleId;
 	private double _version;
+	private String _elInstanceId;
 	private String _elName;
 	private String _languageId;
 	private boolean _tempImage;

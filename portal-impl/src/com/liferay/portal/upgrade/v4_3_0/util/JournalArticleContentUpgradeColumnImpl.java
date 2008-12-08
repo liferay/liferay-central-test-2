@@ -137,9 +137,10 @@ public class JournalArticleContentUpgradeColumnImpl
 
 			Element dynamicContent = el.element("dynamic-content");
 
+			String elInstanceId = StringPool.BLANK;
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
-			String elLanguage = "";
+			String elLanguage = StringPool.BLANK;
 
 			if (dynamicContent != null) {
 				elLanguage = dynamicContent.attributeValue(
@@ -178,8 +179,8 @@ public class JournalArticleContentUpgradeColumnImpl
 						long articleImageId = GetterUtil.getLong(newImageId);
 
 						JournalArticleImageLocalServiceUtil.addArticleImageId(
-							articleImageId, groupId, articleId, version, elName,
-							elLanguage);
+							articleImageId, groupId, articleId, version,
+							elInstanceId, elName, elLanguage);
 					}
 				}
 			}

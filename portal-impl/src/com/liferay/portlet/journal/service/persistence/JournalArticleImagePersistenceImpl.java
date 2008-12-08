@@ -1037,11 +1037,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalArticleImage findByG_A_V_E_L(long groupId, String articleId,
-		double version, String elName, String languageId)
-		throws NoSuchArticleImageException, SystemException {
-		JournalArticleImage journalArticleImage = fetchByG_A_V_E_L(groupId,
-				articleId, version, elName, languageId);
+	public JournalArticleImage findByG_A_V_E_E_L(long groupId,
+		String articleId, double version, String elInstanceId, String elName,
+		String languageId) throws NoSuchArticleImageException, SystemException {
+		JournalArticleImage journalArticleImage = fetchByG_A_V_E_E_L(groupId,
+				articleId, version, elInstanceId, elName, languageId);
 
 		if (journalArticleImage == null) {
 			StringBuilder msg = new StringBuilder();
@@ -1055,6 +1055,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 			msg.append(", ");
 			msg.append("version=" + version);
+
+			msg.append(", ");
+			msg.append("elInstanceId=" + elInstanceId);
 
 			msg.append(", ");
 			msg.append("elName=" + elName);
@@ -1074,21 +1077,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		return journalArticleImage;
 	}
 
-	public JournalArticleImage fetchByG_A_V_E_L(long groupId, String articleId,
-		double version, String elName, String languageId)
-		throws SystemException {
+	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
+		String articleId, double version, String elInstanceId, String elName,
+		String languageId) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleImageModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleImage.class.getName();
-		String finderMethodName = "fetchByG_A_V_E_L";
+		String finderMethodName = "fetchByG_A_V_E_E_L";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
 				Double.class.getName(), String.class.getName(),
-				String.class.getName()
+				String.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				articleId, new Double(version),
+				
+				elInstanceId,
 				
 				elName,
 				
@@ -1130,6 +1135,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
+				if (elInstanceId == null) {
+					query.append("elInstanceId IS NULL");
+				}
+				else {
+					query.append("elInstanceId = ?");
+				}
+
+				query.append(" AND ");
+
 				if (elName == null) {
 					query.append("elName IS NULL");
 				}
@@ -1159,6 +1173,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				}
 
 				qPos.add(version);
+
+				if (elInstanceId != null) {
+					qPos.add(elInstanceId);
+				}
 
 				if (elName != null) {
 					qPos.add(elName);
@@ -1333,11 +1351,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByG_A_V_E_L(long groupId, String articleId,
-		double version, String elName, String languageId)
+	public void removeByG_A_V_E_E_L(long groupId, String articleId,
+		double version, String elInstanceId, String elName, String languageId)
 		throws NoSuchArticleImageException, SystemException {
-		JournalArticleImage journalArticleImage = findByG_A_V_E_L(groupId,
-				articleId, version, elName, languageId);
+		JournalArticleImage journalArticleImage = findByG_A_V_E_E_L(groupId,
+				articleId, version, elInstanceId, elName, languageId);
 
 		remove(journalArticleImage);
 	}
@@ -1573,20 +1591,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByG_A_V_E_L(long groupId, String articleId, double version,
-		String elName, String languageId) throws SystemException {
+	public int countByG_A_V_E_E_L(long groupId, String articleId,
+		double version, String elInstanceId, String elName, String languageId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleImageModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleImage.class.getName();
-		String finderMethodName = "countByG_A_V_E_L";
+		String finderMethodName = "countByG_A_V_E_E_L";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
 				Double.class.getName(), String.class.getName(),
-				String.class.getName()
+				String.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				articleId, new Double(version),
+				
+				elInstanceId,
 				
 				elName,
 				
@@ -1629,6 +1650,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
+				if (elInstanceId == null) {
+					query.append("elInstanceId IS NULL");
+				}
+				else {
+					query.append("elInstanceId = ?");
+				}
+
+				query.append(" AND ");
+
 				if (elName == null) {
 					query.append("elName IS NULL");
 				}
@@ -1658,6 +1688,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				}
 
 				qPos.add(version);
+
+				if (elInstanceId != null) {
+					qPos.add(elInstanceId);
+				}
 
 				if (elName != null) {
 					qPos.add(elName);

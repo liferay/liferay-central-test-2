@@ -1,6 +1,8 @@
 alter table ExpandoColumn add defaultData STRING null;
 alter table ExpandoColumn add typeSettings TEXT null;
 
+alter table JournalArticleImage add elInstanceId VARCHAR(75) null;
+
 alter table JournalStructure add parentStructureId VARCHAR(75);
 
 create table MBMailingList (

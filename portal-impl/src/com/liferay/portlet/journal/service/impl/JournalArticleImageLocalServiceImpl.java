@@ -43,7 +43,7 @@ public class JournalArticleImageLocalServiceImpl
 
 	public void addArticleImageId(
 			long articleImageId, long groupId, String articleId, double version,
-			String elName, String languageId)
+			String elInstanceId, String elName, String languageId)
 		throws PortalException, SystemException {
 
 		if (articleImageId <= 0) {
@@ -51,8 +51,8 @@ public class JournalArticleImageLocalServiceImpl
 		}
 
 		JournalArticleImage articleImage =
-			journalArticleImagePersistence.fetchByG_A_V_E_L(
-				groupId, articleId, version, elName, languageId);
+			journalArticleImagePersistence.fetchByG_A_V_E_E_L(
+				groupId, articleId, version, elInstanceId, elName, languageId);
 
 		if (articleImage == null) {
 			articleImage = journalArticleImagePersistence.create(
@@ -61,6 +61,7 @@ public class JournalArticleImageLocalServiceImpl
 			articleImage.setGroupId(groupId);
 			articleImage.setArticleId(articleId);
 			articleImage.setVersion(version);
+			articleImage.setElInstanceId(elInstanceId);
 			articleImage.setElName(elName);
 			articleImage.setLanguageId(languageId);
 			articleImage.setTempImage(false);
@@ -76,20 +77,39 @@ public class JournalArticleImageLocalServiceImpl
 
 	public void deleteArticleImage(long articleImageId) throws SystemException {
 		try {
-			journalArticleImagePersistence.remove(articleImageId);
+			JournalArticleImage articleImage =
+				journalArticleImagePersistence.findByPrimaryKey(
+					articleImageId);
+
+			deleteArticleImage(articleImage);
 		}
 		catch (NoSuchArticleImageException nsaie) {
 		}
 	}
 
-	public void deleteArticleImage(
-			long groupId, String articleId, double version, String elName,
-			String languageId)
+	public void deleteArticleImage(JournalArticleImage articleImage)
 		throws SystemException {
 
 		try {
-			journalArticleImagePersistence.removeByG_A_V_E_L(
-				groupId, articleId, version, elName, languageId);
+			imageLocalService.deleteImage(articleImage.getArticleImageId());
+		}
+		catch (PortalException pe) {
+		}
+
+		journalArticleImagePersistence.remove(articleImage);
+	}
+
+	public void deleteArticleImage(
+			long groupId, String articleId, double version, String elInstanceId,
+			String elName, String languageId)
+		throws SystemException {
+
+		try {
+			JournalArticleImage articleImage =
+				journalArticleImagePersistence.findByG_A_V_E_E_L(
+				groupId, articleId, version, elInstanceId, elName, languageId);
+
+			deleteArticleImage(articleImage);
 		}
 		catch (NoSuchArticleImageException nsaie) {
 		}
@@ -102,9 +122,7 @@ public class JournalArticleImageLocalServiceImpl
 				journalArticleImagePersistence.findByG_A_V(
 					groupId, articleId, version)) {
 
-			imageLocalService.deleteImage(articleImage.getArticleImageId());
-
-			journalArticleImagePersistence.remove(articleImage);
+			deleteArticleImage(articleImage);
 		}
 	}
 
@@ -115,22 +133,23 @@ public class JournalArticleImageLocalServiceImpl
 	}
 
 	public long getArticleImageId(
-			long groupId, String articleId, double version, String elName,
-			String languageId)
+			long groupId, String articleId, double version, String elInstanceId,
+			String elName, String languageId)
 		throws SystemException {
 
 		return getArticleImageId(
-			groupId, articleId, version, elName, languageId, false);
+			groupId, articleId, version, elInstanceId, elName, languageId,
+			false);
 	}
 
 	public long getArticleImageId(
-			long groupId, String articleId, double version, String elName,
-			String languageId, boolean tempImage)
+			long groupId, String articleId, double version, String elInstanceId,
+			String elName, String languageId, boolean tempImage)
 		throws SystemException {
 
 		JournalArticleImage articleImage =
-			journalArticleImagePersistence.fetchByG_A_V_E_L(
-				groupId, articleId, version, elName, languageId);
+			journalArticleImagePersistence.fetchByG_A_V_E_E_L(
+				groupId, articleId, version, elInstanceId, elName, languageId);
 
 		if (articleImage == null) {
 			long articleImageId = counterLocalService.increment();
@@ -141,6 +160,7 @@ public class JournalArticleImageLocalServiceImpl
 			articleImage.setGroupId(groupId);
 			articleImage.setArticleId(articleId);
 			articleImage.setVersion(version);
+			articleImage.setElInstanceId(elInstanceId);
 			articleImage.setElName(elName);
 			articleImage.setLanguageId(languageId);
 			articleImage.setTempImage(tempImage);

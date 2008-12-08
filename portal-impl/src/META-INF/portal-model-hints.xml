@@ -940,6 +940,7 @@
 		<field name="groupId" type="long" />
 		<field name="articleId" type="String" />
 		<field name="version" type="double" />
+		<field name="elInstanceId" type="String" />
 		<field name="elName" type="String" />
 		<field name="languageId" type="String" />
 		<field name="tempImage" type="boolean" />

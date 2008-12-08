@@ -65,6 +65,10 @@ public interface JournalArticleImageModel extends BaseModel {
 
 	public void setVersion(double version);
 
+	public String getElInstanceId();
+
+	public void setElInstanceId(String elInstanceId);
+
 	public String getElName();
 
 	public void setElName(String elName);

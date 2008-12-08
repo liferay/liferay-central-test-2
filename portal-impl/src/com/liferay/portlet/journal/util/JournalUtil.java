@@ -55,6 +55,7 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
@@ -64,7 +65,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.LocalizationUtil;
-import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -96,25 +96,6 @@ public class JournalUtil {
 	public static final int MAX_STACK_SIZE = 20;
 
 	public static final String XML_INDENT = "  ";
-
-	public static String addDynamicElementInstanceId(String content) {
-		try {
-			if (content.indexOf(" instance-id=\"") == -1) {
-				Document doc = SAXReaderUtil.read(content);
-
-				Element root = doc.getRootElement();
-
-				_addDynamicElementInstanceId(root);
-
-				content = formatXML(doc);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return content;
-	}
 
 	public static void addRecentArticle(
 		PortletRequest portletRequest, JournalArticle article) {
@@ -699,9 +680,10 @@ public class JournalUtil {
 				"available-locales",
 				newRoot.attributeValue("available-locales"));
 
-			_mergeArticleContent(
+			_mergeArticleContentUpdate(
 				curDocument, newRoot,
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
+			_mergeArticleContentDelete(curRoot, newDocument);
 
 			curContent = JournalUtil.formatXML(curDocument);
 		}
@@ -966,26 +948,6 @@ public class JournalUtil {
 		return output;
 	}
 
-	private static void _addDynamicElementInstanceId(Element root) {
-		Iterator<Element> itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element element = itr.next();
-
-			if (!element.getName().equals("dynamic-element")) {
-				continue;
-			}
-
-			String instanceId = element.attributeValue("instance-id");
-
-			if (Validator.isNull(instanceId)) {
-				element.addAttribute("instance-id", PwdGenerator.getPassword());
-			}
-
-			_addDynamicElementInstanceId(element);
-		}
-	}
-
 	private static Element _getElementByInstanceId(
 		Document document, String instanceId) {
 
@@ -1002,7 +964,49 @@ public class JournalUtil {
 		}
 	}
 
-	private static void _mergeArticleContent(
+	private static void _mergeArticleContentDelete(
+			Element curParentElement, Document newDocument)
+		throws Exception {
+
+		List<Element> curElements = curParentElement.elements(
+			"dynamic-element");
+
+		for (int i = 0; i < curElements.size(); i++) {
+			Element curElement = curElements.get(i);
+
+			_mergeArticleContentDelete(curElement, newDocument);
+
+			String instanceId = curElement.attributeValue("instance-id");
+
+			Element newElement = _getElementByInstanceId(
+				newDocument, instanceId);
+
+			if (newElement == null) {
+				curElement.detach();
+
+				String type = curElement.attributeValue("type");
+
+				if (type.equals("image")) {
+					_mergeArticleContentDeleteImages(
+						curElement.elements("dynamic-content"));
+				}
+			}
+		}
+	}
+
+	private static void _mergeArticleContentDeleteImages(List<Element> elements)
+		throws Exception {
+
+		for (Element element : elements) {
+			long articleImageId = GetterUtil.getLong(
+				element.attributeValue("id"));
+
+			JournalArticleImageLocalServiceUtil.deleteArticleImage(
+				articleImageId);
+		}
+	}
+
+	private static void _mergeArticleContentUpdate(
 			Document curDocument, Element newParentElement,
 			String defaultLocale)
 		throws Exception {
@@ -1013,24 +1017,24 @@ public class JournalUtil {
 		for (int i = 0; i < newElements.size(); i++) {
 			Element newElement = newElements.get(i);
 
-			_mergeArticleContent(
+			_mergeArticleContentUpdate(
 				curDocument, newParentElement, newElement, i, defaultLocale);
 		}
 	}
 
-	private static void _mergeArticleContent(
+	private static void _mergeArticleContentUpdate(
 			Document curDocument, Element newParentElement, Element newElement,
 			int pos, String defaultLocale)
 		throws Exception {
 
-		_mergeArticleContent(curDocument, newElement, defaultLocale);
+		_mergeArticleContentUpdate(curDocument, newElement, defaultLocale);
 
 		String instanceId = newElement.attributeValue("instance-id");
 
 		Element curElement = _getElementByInstanceId(curDocument, instanceId);
 
 		if (curElement != null) {
-			_mergeArticleContent(curElement, newElement, defaultLocale);
+			_mergeArticleContentUpdate(curElement, newElement, defaultLocale);
 		}
 		else {
 			String parentInstanceId = newParentElement.attributeValue(
@@ -1057,7 +1061,7 @@ public class JournalUtil {
 		}
 	}
 
-	private static void _mergeArticleContent(
+	private static void _mergeArticleContentUpdate(
 		Element curElement, Element newElement, String defaultLocale) {
 
 		Element newContentElement = newElement.elements(

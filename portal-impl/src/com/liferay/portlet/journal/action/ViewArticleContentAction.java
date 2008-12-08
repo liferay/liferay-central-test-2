@@ -192,6 +192,8 @@ public class ViewArticleContentAction extends Action {
 
 			Element dynamicContent = el.element("dynamic-content");
 
+			String elInstanceId = el.attributeValue(
+				"instance-id", StringPool.BLANK);
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 			String elContent = StringPool.BLANK;
@@ -216,8 +218,8 @@ public class ViewArticleContentAction extends Action {
 				if ((bytes != null) && (bytes.length > 0)) {
 					long imageId =
 						JournalArticleImageLocalServiceUtil.getArticleImageId(
-							groupId, previewArticleId, version, elName,
-							elLanguage, true);
+							groupId, previewArticleId, version, elInstanceId,
+							elName, elLanguage, true);
 
 					String token = ImageServletTokenUtil.getToken(imageId);
 
@@ -231,8 +233,8 @@ public class ViewArticleContentAction extends Action {
 					if (Validator.isNotNull(articleId)) {
 						long imageId = JournalArticleImageLocalServiceUtil.
 							getArticleImageId(
-								groupId, articleId, version, elName,
-								elLanguage);
+								groupId, articleId, version, elInstanceId,
+								elName, elLanguage);
 
 						String token = ImageServletTokenUtil.getToken(imageId);
 
