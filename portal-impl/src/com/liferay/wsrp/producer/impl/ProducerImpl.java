@@ -95,7 +95,7 @@ public class ProducerImpl extends AbstractProducer {
 
 		String registrationProperties = null;
 
-		String lifeTime = getLifeTimeString(registrationRecord.getLifetime());
+		String lifetime = getLifeTimeString(registrationRecord.getLifetime());
 
 		try {
 			WSRPConsumerRegistrationLocalServiceUtil.addConsumerRegistration(
@@ -103,7 +103,7 @@ public class ProducerImpl extends AbstractProducer {
 				true, registrationHandle, registrationRecord.getConsumerAgent(),
 				registrationRecord.isMethodGetSupported(), consumerModes,
 				consumerWindowStates, consumerUserScopes, customUserProfileData,
-				registrationProperties, lifeTime,
+				registrationProperties, lifetime,
 				_producerModel.getInstanceName());
 		}
 		catch (Exception e) {
@@ -298,26 +298,28 @@ public class ProducerImpl extends AbstractProducer {
 		_producerModel.setPortalId(portalId);
 	}
 
-	public void setRegistrationLifetime (
-			String registrationHandle, LeaseTime lifetime)
+	public void setRegistrationLifetime(
+			String registrationHandle, LeaseTime leaseTime)
 		throws ProducerException {
 
-		String lifeTime = getLifeTimeString(lifetime);
+		String lifetime = getLifeTimeString(leaseTime);
+
 		try {
 			WSRPConsumerRegistration consumerRegistration =
 				getConsumerRegistrationByHandle(registrationHandle);
 
-			consumerRegistration.setLifetimeTerminationTime(lifeTime);
+			consumerRegistration.setLifetimeTerminationTime(lifetime);
 
 			WSRPConsumerRegistrationLocalServiceUtil.
-					updateWSRPConsumerRegistration(consumerRegistration);
-		} catch (Exception e) {
+				updateWSRPConsumerRegistration(consumerRegistration);
+		}
+		catch (Exception e) {
 			throw new ProducerException(e.getMessage());
-		}	
+		}
 	}
 
-	public void setRegistrationStatus(
-		String registrationHandle, boolean value) throws ProducerException {
+	public void setRegistrationStatus(String registrationHandle, boolean value)
+		throws ProducerException {
 
 		try {
 			WSRPConsumerRegistration consumerRegistration =
@@ -329,7 +331,8 @@ public class ProducerImpl extends AbstractProducer {
 				WSRPConsumerRegistrationLocalServiceUtil.
 					updateWSRPConsumerRegistration(consumerRegistration);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new ProducerException(e.getMessage());
 		}
 	}
@@ -360,6 +363,21 @@ public class ProducerImpl extends AbstractProducer {
 		}
 	}
 
+	protected String getLifeTimeString(LeaseTime leaseTime) {
+		String lifetime = null;
+
+		if (leaseTime != null) {
+			XMLGregorianCalendar terminationTime =
+				leaseTime.getTerminationTime();
+
+			if (terminationTime != null) {
+				lifetime = terminationTime.toXMLFormat();
+			}
+		}
+
+		return lifetime;
+	}
+
 	protected WSRPProducer getProducerModel() {
 		return _producerModel;
 	}
@@ -383,21 +401,6 @@ public class ProducerImpl extends AbstractProducer {
 		return registrationRecord;
 	}
 
-	private String getLifeTimeString(LeaseTime leaseTime) {
-		String lifeTime = null;
-
-		if (leaseTime != null) {
-			XMLGregorianCalendar terminationTime =
-				leaseTime.getTerminationTime();
-
-			if (terminationTime != null) {
-				lifeTime = terminationTime.toXMLFormat();
-			}
-		}
-		
-		return lifeTime;
-	}
-	
 	private WSRPProducer _producerModel;
 
 }
