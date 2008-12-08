@@ -206,10 +206,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 		String jUserName = (String)session.getAttribute("j_username");
 
 		if ((remoteUser == null) && (jUserName == null)) {
-			for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
-				AutoLogin autoLogin = (AutoLogin)InstancePool.get(
-					autoLoginHook);
-
+			for (AutoLogin autoLogin : _autoLogins) {
 				try {
 					String[] credentials = autoLogin.login(request, response);
 
