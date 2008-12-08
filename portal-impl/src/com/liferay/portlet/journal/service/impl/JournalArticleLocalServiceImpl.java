@@ -1879,10 +1879,10 @@ public class JournalArticleLocalServiceImpl
 
 		tagsAssetLocalService.updateAsset(
 			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsCategories, tagsEntries, null,
-			null, displayDate, expirationDate, ContentTypes.TEXT_HTML,
-			article.getTitle(), article.getDescription(), null, null, 0, 0,
-			null, false);
+			article.getResourcePrimKey(), tagsCategories, tagsEntries,
+			article.getApproved(), null, null, displayDate, expirationDate,
+			ContentTypes.TEXT_HTML, article.getTitle(),
+			article.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	protected void checkStructure(JournalArticle article)

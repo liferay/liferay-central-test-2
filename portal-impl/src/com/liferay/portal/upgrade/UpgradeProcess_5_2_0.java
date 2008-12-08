@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v5_2_0.UpgradeOrganization;
 import com.liferay.portal.upgrade.v5_2_0.UpgradePortletPermissions;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeTags;
+import com.liferay.portal.upgrade.v5_2_0.UpgradeTagsAssets;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,6 +51,7 @@ public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 		upgrade(UpgradeOrganization.class);
 		upgrade(UpgradePortletPermissions.class);
 		upgrade(UpgradeTags.class);
+		upgrade(UpgradeTagsAssets.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_5_2_0.class);

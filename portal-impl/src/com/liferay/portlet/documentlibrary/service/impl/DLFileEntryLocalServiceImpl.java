@@ -985,8 +985,9 @@ public class DLFileEntryLocalServiceImpl
 		tagsAssetLocalService.updateAsset(
 			userId, fileEntry.getFolder().getGroupId(),
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId(), null,
-			tagsEntries, null, null, null, null, mimeType, fileEntry.getTitle(),
-			fileEntry.getDescription(), null, null, 0, 0, null, false);
+			tagsEntries, true, null, null, null, null, mimeType,
+			fileEntry.getTitle(), fileEntry.getDescription(), null, null, 0, 0,
+			null, false);
 	}
 
 	protected long getFolderId(long companyId, long folderId)

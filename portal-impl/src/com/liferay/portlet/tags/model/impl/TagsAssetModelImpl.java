@@ -94,6 +94,9 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			{ "classPK", new Integer(Types.BIGINT) },
 			
 
+			{ "visible", new Integer(Types.BOOLEAN) },
+			
+
 			{ "startDate", new Integer(Types.TIMESTAMP) },
 			
 
@@ -132,7 +135,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 
 			{ "viewCount", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table TagsAsset";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -153,6 +156,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
+		model.setVisible(soapModel.getVisible());
 		model.setStartDate(soapModel.getStartDate());
 		model.setEndDate(soapModel.getEndDate());
 		model.setPublishDate(soapModel.getPublishDate());
@@ -305,6 +309,20 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+		}
+	}
+
+	public boolean getVisible() {
+		return _visible;
+	}
+
+	public boolean isVisible() {
+		return _visible;
+	}
+
+	public void setVisible(boolean visible) {
+		if (visible != _visible) {
+			_visible = visible;
 		}
 	}
 
@@ -482,6 +500,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
+			model.setVisible(getVisible());
 			model.setStartDate(getStartDate());
 			model.setEndDate(getEndDate());
 			model.setPublishDate(getPublishDate());
@@ -525,6 +544,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
+		clone.setVisible(getVisible());
 		clone.setStartDate(getStartDate());
 		clone.setEndDate(getEndDate());
 		clone.setPublishDate(getPublishDate());
@@ -599,6 +619,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	private Date _modifiedDate;
 	private long _classNameId;
 	private long _classPK;
+	private boolean _visible;
 	private Date _startDate;
 	private Date _endDate;
 	private Date _publishDate;

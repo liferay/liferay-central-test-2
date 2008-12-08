@@ -1294,6 +1294,7 @@ create table TagsAsset (
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
+	visible BOOLEAN,
 	startDate DATE null,
 	endDate DATE null,
 	publishDate DATE null,

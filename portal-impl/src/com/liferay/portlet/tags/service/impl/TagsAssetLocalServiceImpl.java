@@ -437,27 +437,28 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		return updateAsset(
 			userId, groupId, className, classPK, categoryNames, entryNames,
-			null, null, null, null, null, null, null, null, null, 0, 0, null);
+			true, null, null, null, null, null, null, null, null, null, 0, 0,
+			null);
 	}
 
 	public TagsAsset updateAsset(
 			long userId, long groupId, String className, long classPK,
-			String[] categoryNames, String[] entryNames, Date startDate,
-			Date endDate, Date publishDate, Date expirationDate,
+			String[] categoryNames, String[] entryNames, boolean visible,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width, Integer priority)
 		throws PortalException, SystemException {
 
 		return updateAsset(
 			userId, groupId, className, classPK, categoryNames, entryNames,
-			startDate, endDate, publishDate, expirationDate, mimeType, title,
-			description, summary, url, height, width, priority, true);
+			visible, startDate, endDate, publishDate, expirationDate, mimeType,
+			title, description, summary, url, height, width, priority, true);
 	}
 
 	public TagsAsset updateAsset(
 			long userId, long groupId, String className, long classPK,
-			String[] categoryNames, String[] entryNames, Date startDate,
-			Date endDate, Date publishDate, Date expirationDate,
+			String[] categoryNames, String[] entryNames, boolean visible,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
@@ -493,6 +494,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setCreateDate(now);
 			asset.setClassNameId(classNameId);
 			asset.setClassPK(classPK);
+			asset.setVisible(visible);
 			asset.setPublishDate(publishDate);
 			asset.setExpirationDate(expirationDate);
 
@@ -505,6 +507,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		asset.setGroupId(groupId);
 		asset.setModifiedDate(now);
+		asset.setVisible(visible);
 		asset.setStartDate(startDate);
 		asset.setEndDate(endDate);
 		asset.setPublishDate(publishDate);

@@ -406,7 +406,7 @@ public class BookmarksEntryLocalServiceImpl
 		tagsAssetLocalService.updateAsset(
 			userId, entry.getFolder().getGroupId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(), null,
-			tagsEntries, null, null, null, null, ContentTypes.TEXT_PLAIN,
+			tagsEntries, true, null, null, null, null, ContentTypes.TEXT_PLAIN,
 			entry.getName(), entry.getComments(), null, entry.getUrl(), 0, 0,
 			null, false);
 	}

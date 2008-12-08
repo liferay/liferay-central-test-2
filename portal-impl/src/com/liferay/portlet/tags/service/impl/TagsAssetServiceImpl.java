@@ -191,16 +191,16 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 	public TagsAsset updateAsset(
 			long groupId, String className, long classPK,
-			String[] categoryNames, String[] entryNames, Date startDate,
-			Date endDate, Date publishDate, Date expirationDate,
+			String[] categoryNames, String[] entryNames, boolean visible,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width, Integer priority)
 		throws PortalException, SystemException {
 
 		return tagsAssetLocalService.updateAsset(
 			getUserId(), groupId, className, classPK, categoryNames, entryNames,
-			startDate, endDate, publishDate, expirationDate, mimeType, title,
-			description, summary, url, height, width, priority);
+			visible, startDate, endDate, publishDate, expirationDate, mimeType,
+			title, description, summary, url, height, width, priority);
 	}
 
 	protected String exportToRSS(

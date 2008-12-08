@@ -59,6 +59,7 @@ public class TagsAssetSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
+		soapModel.setVisible(model.getVisible());
 		soapModel.setStartDate(model.getStartDate());
 		soapModel.setEndDate(model.getEndDate());
 		soapModel.setPublishDate(model.getPublishDate());
@@ -167,6 +168,18 @@ public class TagsAssetSoap implements Serializable {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
+	}
+
+	public boolean getVisible() {
+		return _visible;
+	}
+
+	public boolean isVisible() {
+		return _visible;
+	}
+
+	public void setVisible(boolean visible) {
+		_visible = visible;
 	}
 
 	public Date getStartDate() {
@@ -282,6 +295,7 @@ public class TagsAssetSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _classNameId;
 	private long _classPK;
+	private boolean _visible;
 	private Date _startDate;
 	private Date _endDate;
 	private Date _publishDate;

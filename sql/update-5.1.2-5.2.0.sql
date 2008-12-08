@@ -36,11 +36,15 @@ alter table Organization_ add type_ VARCHAR(75);
 alter table Role_ add title STRING null;
 alter table Role_ add subtype VARCHAR(75);
 
+alter table TagsAsset add visible BOOLEAN null;
+
 alter table TagsEntry add groupId LONG;
 alter table TagsEntry add parentEntryId LONG;
 alter table TagsEntry add vocabularyId LONG;
 
 COMMIT_TRANSACTION;
+
+update TagsAsset set visible = true;
 
 update TagsEntry set groupId = 0;
 update TagsEntry set parentEntryId = 0;

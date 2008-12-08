@@ -1551,6 +1551,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
+		<field name="visible" type="boolean" />
 		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
 		<field name="publishDate" type="Date" />

@@ -89,6 +89,12 @@ public interface TagsAssetModel extends BaseModel {
 
 	public void setClassPK(long classPK);
 
+	public boolean getVisible();
+
+	public boolean isVisible();
+
+	public void setVisible(boolean visible);
+
 	public Date getStartDate();
 
 	public void setStartDate(Date startDate);

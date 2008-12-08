@@ -82,6 +82,7 @@ public class TagsAssetJSONSerializer {
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("classNameId", model.getClassNameId());
 		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("visible", model.getVisible());
 
 		Date startDate = model.getStartDate();
 

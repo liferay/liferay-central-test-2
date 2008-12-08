@@ -137,7 +137,7 @@ public interface TagsAssetService {
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long groupId,
 		java.lang.String className, long classPK,
 		java.lang.String[] categoryNames, java.lang.String[] entryNames,
-		java.util.Date startDate, java.util.Date endDate,
+		boolean visible, java.util.Date startDate, java.util.Date endDate,
 		java.util.Date publishDate, java.util.Date expirationDate,
 		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String summary,

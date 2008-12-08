@@ -79,6 +79,7 @@ public class TagsAssetPersistenceTest extends BasePersistenceTestCase {
 		newTagsAsset.setModifiedDate(nextDate());
 		newTagsAsset.setClassNameId(nextLong());
 		newTagsAsset.setClassPK(nextLong());
+		newTagsAsset.setVisible(randomBoolean());
 		newTagsAsset.setStartDate(nextDate());
 		newTagsAsset.setEndDate(nextDate());
 		newTagsAsset.setPublishDate(nextDate());
@@ -110,6 +111,7 @@ public class TagsAssetPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingTagsAsset.getClassNameId(),
 			newTagsAsset.getClassNameId());
 		assertEquals(existingTagsAsset.getClassPK(), newTagsAsset.getClassPK());
+		assertEquals(existingTagsAsset.getVisible(), newTagsAsset.getVisible());
 		assertEquals(existingTagsAsset.getStartDate(),
 			newTagsAsset.getStartDate());
 		assertEquals(existingTagsAsset.getEndDate(), newTagsAsset.getEndDate());
@@ -179,6 +181,7 @@ public class TagsAssetPersistenceTest extends BasePersistenceTestCase {
 		tagsAsset.setModifiedDate(nextDate());
 		tagsAsset.setClassNameId(nextLong());
 		tagsAsset.setClassPK(nextLong());
+		tagsAsset.setVisible(randomBoolean());
 		tagsAsset.setStartDate(nextDate());
 		tagsAsset.setEndDate(nextDate());
 		tagsAsset.setPublishDate(nextDate());

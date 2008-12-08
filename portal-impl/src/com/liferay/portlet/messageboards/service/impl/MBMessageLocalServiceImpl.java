@@ -1297,7 +1297,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		tagsAssetLocalService.updateAsset(
 			userId, message.getCategory().getGroupId(),
 			MBMessage.class.getName(), message.getMessageId(), null,
-			tagsEntries, null, null, null, null, ContentTypes.TEXT_HTML,
+			tagsEntries, true, null, null, null, null, ContentTypes.TEXT_HTML,
 			message.getSubject(), null, null, null, 0, 0, null, false);
 	}
 
