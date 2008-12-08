@@ -107,11 +107,11 @@ int tabIndex = 1;
 			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
 			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
 
-			if ((elDepth != null) && (elName != null) && (elType != null) && (elRepeatable != null)) {
+			if ((elDepth != null) && (elName != null) && (elType != null)) {
 				var elDepthValue = elDepth.value;
 				var elNameValue = encodeURIComponent(elName.value);
 				var elTypeValue = encodeURIComponent(elType.value);
-				var elRepeatableValue = elRepeatable.checked;
+				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
 
 				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
 					for (var j = 0; j <= elDepthValue; j++) {
