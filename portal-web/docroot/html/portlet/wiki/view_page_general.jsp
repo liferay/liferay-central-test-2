@@ -298,7 +298,7 @@ int count = 0;
 					<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" label="<%= true %>" />
 				</c:if>
 
-				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
+				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
 
 					<%
 					PortletURL movePageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
