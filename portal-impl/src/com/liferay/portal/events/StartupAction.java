@@ -87,6 +87,15 @@ public class StartupAction extends SimpleAction {
 		}
 	}
 
+	protected void deleteTemporaryImages()
+		throws IOException, NamingException, SQLException {
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
+	}
+
 	protected void doRun(String[] ids) throws PortalException, SystemException {
 
 		// Print release information
@@ -320,15 +329,6 @@ public class StartupAction extends SimpleAction {
 		// Update release
 
 		ReleaseLocalServiceUtil.updateRelease(verified);
-	}
-
-	protected void deleteTemporaryImages()
-		throws IOException, NamingException, SQLException {
-
-		DBUtil dbUtil = DBUtil.getInstance();
-
-		dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
-		dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
