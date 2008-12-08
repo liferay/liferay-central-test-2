@@ -61,8 +61,9 @@ public class UpgradeTags extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			updateGroupId();
-			updateCategory();
+			updateGroupIds();
+			updateCategories();
+			updateAssets();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -263,7 +264,42 @@ public class UpgradeTags extends UpgradeProcess {
 		return vocabulary.getVocabularyId();
 	}
 
-	protected void updateCategory() throws Exception {
+	protected void updateAssets() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select resourcePrimKey from JournalArticle where approved " +
+					"= ?");
+
+			ps.setBoolean(1, false);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long resourcePrimKey = rs.getLong("resourcePrimKey");
+
+				ps = con.prepareStatement(
+					"update TagsAsset set visible = ? where classPK = ?");
+
+				ps.setBoolean(1, false);
+				ps.setLong(2, resourcePrimKey);
+
+				ps.executeUpdate();
+
+				ps.close();
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateCategories() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -315,7 +351,7 @@ public class UpgradeTags extends UpgradeProcess {
 		}
 	}
 
-	protected void updateGroupId() throws Exception {
+	protected void updateGroupIds() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

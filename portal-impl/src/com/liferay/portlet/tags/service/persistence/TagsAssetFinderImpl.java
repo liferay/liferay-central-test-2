@@ -159,7 +159,7 @@ public class TagsAssetFinderImpl
 
 			sb.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
 			sb.append("FROM TagsAsset WHERE");
-			sb.append(" visible = ?");
+			sb.append(" (visible = ?)");
 
 			if (entryIds.length > 0) {
 				sb.append(" AND TagsAsset.assetId IN (");
@@ -292,7 +292,7 @@ public class TagsAssetFinderImpl
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql += " AND visible = ?";
+			sql += " AND (visible = ?)";
 
 			sql = getDates(sql, publishDate, expirationDate);
 
@@ -366,7 +366,7 @@ public class TagsAssetFinderImpl
 
 			sb.append("SELECT {TagsAsset.*} ");
 			sb.append("FROM TagsAsset WHERE");
-			sb.append(" visible = ?");
+			sb.append(" (visible = ?)");
 
 			if (excludeZeroViewCount) {
 				sb.append(" AND (TagsAsset.viewCount > 0)");
@@ -446,7 +446,7 @@ public class TagsAssetFinderImpl
 
 			sb.append("SELECT DISTINCT {TagsAsset.*} ");
 			sb.append("FROM TagsAsset WHERE");
-			sb.append(" visible = ?");
+			sb.append(" (visible = ?)");
 
 			if (entryIds.length > 0) {
 				sb.append(" AND TagsAsset.assetId IN (");
@@ -601,7 +601,7 @@ public class TagsAssetFinderImpl
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql += " AND visible = ?";
+			sql += " AND (visible = ?)";
 
 			sql = getDates(sql, publishDate, expirationDate);
 
@@ -686,7 +686,7 @@ public class TagsAssetFinderImpl
 			sql = StringUtil.replace(
 				sql, "(TagsAsset.classNameId = ?)", sb.toString());
 
-			sql += " AND visible = ?";
+			sql += " AND (visible = ?)";
 
 			sb = new StringBuilder();
 
