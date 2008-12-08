@@ -43,7 +43,6 @@ import java.util.List;
  * <a href="GroupServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Karthik Sudarshan
  *
  */
 public class GroupServiceImpl extends GroupServiceBaseImpl {
@@ -156,14 +155,6 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
 			params);
 
-		if (name != null && name.trim().length() == 0) {
-			name = null;
-		}
-
-		if (description != null && description.trim().length() == 0) {
-			description = null;
-		}
-
 		return groupLocalService.search(
 			companyId, name, description, paramsObj, start, end);
 	}
@@ -174,14 +165,6 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
 			params);
-
-		if (name != null && name.trim().length() == 0) {
-			name = null;
-		}
-
-		if (description != null && description.trim().length() == 0) {
-			description = null;
-		}
 
 		return groupLocalService.searchCount(
 			companyId, name, description, paramsObj);
