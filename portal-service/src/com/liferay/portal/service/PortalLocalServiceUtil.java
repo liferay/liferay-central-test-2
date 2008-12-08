@@ -45,12 +45,6 @@ package com.liferay.portal.service;
  *
  */
 public class PortalLocalServiceUtil {
-	public static void startup(java.lang.String[] ids)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().startup(ids);
-	}
-
 	public static PortalLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("PortalLocalService is not set");
