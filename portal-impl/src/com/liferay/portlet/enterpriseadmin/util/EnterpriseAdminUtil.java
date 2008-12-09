@@ -130,9 +130,7 @@ public class EnterpriseAdminUtil {
 			return;
 		}
 
-		if (groups instanceof UnmodifiableList) {
-			groups = ListUtil.copy(groups);
-		}
+		groups = ListUtil.copy(groups);
 
 		Iterator<Group> itr = groups.iterator();
 
@@ -157,9 +155,7 @@ public class EnterpriseAdminUtil {
 			return;
 		}
 
-		if (organizations instanceof UnmodifiableList) {
-			organizations = ListUtil.copy(organizations);
-		}
+		organizations = ListUtil.copy(organizations);
 
 		Iterator<Organization> itr = organizations.iterator();
 
@@ -178,9 +174,7 @@ public class EnterpriseAdminUtil {
 	public static void filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
 
-		if (roles instanceof UnmodifiableList) {
-			roles = ListUtil.copy(roles);
-		}
+		roles = ListUtil.copy(roles);
 
 		Iterator<Role> itr = roles.iterator();
 
@@ -224,9 +218,7 @@ public class EnterpriseAdminUtil {
 			List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
 
-		if (userGroupRoles instanceof UnmodifiableList) {
-			userGroupRoles = ListUtil.copy(userGroupRoles);
-		}
+		userGroupRoles = ListUtil.copy(userGroupRoles);
 
 		Iterator<UserGroupRole> itr = userGroupRoles.iterator();
 
@@ -269,9 +261,7 @@ public class EnterpriseAdminUtil {
 			return;
 		}
 
-		if (userGroups instanceof UnmodifiableList) {
-			userGroups = ListUtil.copy(userGroups);
-		}
+		userGroups = ListUtil.copy(userGroups);
 
 		Iterator<UserGroup> itr = userGroups.iterator();
 

@@ -50,7 +50,7 @@ public class UnmodifiableList<E> implements List<E> {
 		_list = list;
 	}
 
-	public boolean add(E o) {
+	public boolean add(E element) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
@@ -58,11 +58,11 @@ public class UnmodifiableList<E> implements List<E> {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
-	public boolean addAll(Collection<? extends E> coll) {
+	public boolean addAll(Collection<? extends E> collection) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
-	public boolean addAll(int index, Collection<? extends E> coll) {
+	public boolean addAll(int index, Collection<? extends E> collection) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
@@ -70,16 +70,16 @@ public class UnmodifiableList<E> implements List<E> {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
-	public boolean contains(Object o) {
-		return _list.contains(o);
+	public boolean contains(Object object) {
+		return _list.contains(object);
 	}
 
-	public boolean containsAll(Collection<?> coll) {
-		return _list.containsAll(coll);
+	public boolean containsAll(Collection<?> collection) {
+		return _list.containsAll(collection);
 	}
 
-	public boolean equals(Object o) {
-		return _list.equals(o);
+	public boolean equals(Object object) {
+		return _list.equals(object);
 	}
 
 	public E get(int index) {
@@ -90,8 +90,8 @@ public class UnmodifiableList<E> implements List<E> {
 		return _list.hashCode();
 	}
 
-	public int indexOf(Object o) {
-		return _list.indexOf(o);
+	public int indexOf(Object object) {
+		return _list.indexOf(object);
 	}
 
 	public boolean isEmpty() {
@@ -100,19 +100,21 @@ public class UnmodifiableList<E> implements List<E> {
 
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
-			Iterator<? extends E> i = _list.iterator();
+
+			Iterator<? extends E> itr = _list.iterator();
 
 			public boolean hasNext() {
-				return i.hasNext();
+				return itr.hasNext();
 			}
 
 			public E next() {
-				return i.next();
+				return itr.next();
 			}
 
 			public void remove() {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
+
 		};
 	}
 
@@ -126,9 +128,10 @@ public class UnmodifiableList<E> implements List<E> {
 
 	public ListIterator<E> listIterator(final int index) {
 		return new ListIterator<E>() {
+
 			ListIterator<? extends E> itr = _list.listIterator(index);
 
-			public void add(E o) {
+			public void add(E element) {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
 
@@ -160,9 +163,10 @@ public class UnmodifiableList<E> implements List<E> {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
 
-			public void set(E o) {
+			public void set(E element) {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
+
 		};
 	}
 
@@ -170,15 +174,15 @@ public class UnmodifiableList<E> implements List<E> {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
-	public boolean remove(Object o) {
+	public boolean remove(Object object) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
-	public boolean removeAll(Collection<?> coll) {
+	public boolean removeAll(Collection<?> collection) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
-	public boolean retainAll(Collection<?> coll) {
+	public boolean retainAll(Collection<?> collection) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
@@ -198,7 +202,7 @@ public class UnmodifiableList<E> implements List<E> {
 		return _list.toArray();
 	}
 
-	public <T> T[] toArray(T[] a) {
+	public T<T>[] toArray(T[] a) {
 		return _list.toArray(a);
 	}
 
@@ -206,9 +210,9 @@ public class UnmodifiableList<E> implements List<E> {
 		return _list.toString();
 	}
 
-	private List<? extends E> _list;
-
 	private static final String _MESSAGE =
 		"Please make a copy of this read-only list before modifying it.";
+
+	private List<? extends E> _list;
 
 }

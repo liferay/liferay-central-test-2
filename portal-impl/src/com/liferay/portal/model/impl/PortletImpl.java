@@ -1964,7 +1964,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			}
 		}
 
-		String[] array = linkedRoles.toArray(new String[0]);
+		String[] array = linkedRoles.toArray(new String[linkedRoles.size()]);
 
 		Arrays.sort(array);
 

@@ -177,25 +177,10 @@ public class ListUtil {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
 
-	/**
-	 * Takes a given list and returns a list with the data fully sorted.  This
-	 * function handles classes that are of type
-	 * <code>com.liferay.portal.kernel.util.UnmodifiableList</code> and copies
-	 * it before sorting.
-	 *
-	 * @param list The list to be sorted.  Its data will be modified unless it
-	 * is unmodifiable.
-	 * @return A sorted list.  If the original list is modifiable, its data is
-	 * changed and returned.  Otherwise, a new list will be instantiated and
-	 * returned.
-	 */
 	public static List sort(List list) {
 		return sort(list, null);
 	}
 
-	/**
-	 * @see #sort(List)
-	 */
 	public static List sort(List list, Comparator comparator) {
 		if (list instanceof UnmodifiableList) {
 			list = new ArrayList(list);

@@ -176,9 +176,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (entries instanceof UnmodifiableList) {
-			entries = ListUtil.copy(entries);
-		}
+		entries = ListUtil.copy(entries);
 
 		Iterator<TagsEntry> itr = entries.iterator();
 

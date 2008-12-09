@@ -38,6 +38,7 @@ for (int i = 0; i < depth; i++) {
 List<WikiPage> childPages = parentPage.getChildPages();
 
 childPages.remove(wikiPage);
+
 childPages = ListUtil.sort(childPages);
 %>
 

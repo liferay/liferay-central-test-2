@@ -112,9 +112,7 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (vocabularies instanceof UnmodifiableList) {
-			vocabularies = ListUtil.copy(vocabularies);
-		}
+		vocabularies = ListUtil.copy(vocabularies);
 
 		Iterator<TagsVocabulary> itr = vocabularies.iterator();
 
