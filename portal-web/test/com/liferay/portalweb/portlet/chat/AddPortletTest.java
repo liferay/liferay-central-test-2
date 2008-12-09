@@ -48,6 +48,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("link=Chat (0)"));
+		assertTrue(selenium.isTextPresent("Online Friends (0)"));
+		assertTrue(selenium.isElementPresent("//div[1]/span"));
 	}
 }
