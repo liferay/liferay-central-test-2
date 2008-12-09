@@ -35,6 +35,7 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -289,7 +290,8 @@ public class MBThreadFinderImpl
 
 			qPos.add(groupId);
 
-			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<MBThread>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -33,6 +33,7 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -110,8 +111,8 @@ public class TasksProposalFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return (List<TasksProposal>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<TasksProposal>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

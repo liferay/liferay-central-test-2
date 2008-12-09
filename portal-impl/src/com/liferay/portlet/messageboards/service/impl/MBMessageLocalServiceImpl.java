@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -87,7 +88,6 @@ import com.liferay.portlet.social.model.SocialActivity;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
@@ -1013,10 +1013,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long threadId, Comparator<MBMessage> comparator)
 		throws SystemException {
 
-		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
-			threadId);
-
-		Collections.sort(messages, comparator);
+		List<MBMessage> messages = ListUtil.sort(
+			mbMessagePersistence.findByThreadId(threadId), comparator);
 
 		return messages;
 	}

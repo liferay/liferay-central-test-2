@@ -38,6 +38,7 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -206,7 +207,8 @@ public class WikiPageFinderImpl
 			qPos.add(createDate);
 			qPos.add(true);
 
-			return (List<WikiPage>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<WikiPage>)QueryUtil.list(
+				q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -228,7 +230,7 @@ public class WikiPageFinderImpl
 
 			q.addEntity("WikiPage", WikiPageImpl.class);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

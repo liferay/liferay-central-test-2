@@ -121,9 +121,8 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 			}
 		}
 
-		List<WikiPage> childPages = WikiPageLocalServiceUtil.getChildren(node.getNodeId(), true, StringPool.BLANK);
+		List<WikiPage> childPages = ListUtil.sort(WikiPageLocalServiceUtil.getChildren(node.getNodeId(), true, StringPool.BLANK), null);
 
-		Collections.sort(childPages);
 		childPages.remove(wikiPage);
 		%>
 

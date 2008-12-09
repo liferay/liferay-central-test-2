@@ -147,7 +147,7 @@ MBMessage message = rootMessage;
 </table>
 
 <%
-List messages = treeWalker.getMessages();
+List messages = ListUtil.sort(treeWalker.getMessages(), new MessageCreateDateComparator(true, false));
 %>
 
 <c:if test="<%= messages.size() > 1 %>">
@@ -206,8 +206,6 @@ List messages = treeWalker.getMessages();
 	<table class="lfr-table" width="100%">
 
 	<%
-	Collections.sort(messages, new MessageCreateDateComparator(true, false));
-
 	for (i = 1; i < messages.size(); i++) {
 		message = (MBMessage)messages.get(i);
 	%>

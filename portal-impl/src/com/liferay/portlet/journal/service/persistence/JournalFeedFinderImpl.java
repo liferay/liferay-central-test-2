@@ -37,6 +37,7 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -233,8 +234,8 @@ public class JournalFeedFinderImpl
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
-			return (List<JournalFeed>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<JournalFeed>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

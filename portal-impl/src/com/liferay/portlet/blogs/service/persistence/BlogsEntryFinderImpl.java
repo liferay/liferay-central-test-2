@@ -38,6 +38,7 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -169,8 +170,8 @@ public class BlogsEntryFinderImpl
 			qPos.add(displayDate_TS);
 			qPos.add(draft);
 
-			return (List<BlogsEntry>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<BlogsEntry>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -192,7 +193,7 @@ public class BlogsEntryFinderImpl
 
 			q.addEntity("BlogsEntry", BlogsEntryImpl.class);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

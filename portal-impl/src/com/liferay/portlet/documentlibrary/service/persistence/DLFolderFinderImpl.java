@@ -33,6 +33,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -230,7 +231,7 @@ public class DLFolderFinderImpl
 				models.add(obj);
 			}
 
-			return models;
+			return Collections.unmodifiableList(models);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -312,7 +313,7 @@ public class DLFolderFinderImpl
 				models.add(obj);
 			}
 
-			return models;
+			return Collections.unmodifiableList(models);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

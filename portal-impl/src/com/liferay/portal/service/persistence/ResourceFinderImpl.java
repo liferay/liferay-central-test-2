@@ -31,6 +31,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -65,7 +66,7 @@ public class ResourceFinderImpl
 
 			qPos.add(name);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -94,7 +95,7 @@ public class ResourceFinderImpl
 			qPos.add(companyId);
 			qPos.add(primKey);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

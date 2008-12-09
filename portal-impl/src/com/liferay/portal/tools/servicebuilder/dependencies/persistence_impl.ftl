@@ -440,7 +440,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
-						return list;
+						return Collections.unmodifiableList(list);
 					}
 					catch (Exception e) {
 						throw processException(e);
@@ -450,7 +450,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					}
 				}
 				else {
-					return (List<${entity.name}>)result;
+					return Collections.unmodifiableList((List<${entity.name}>)result);
 				}
 			}
 
@@ -607,7 +607,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
-						return list;
+						return Collections.unmodifiableList(list);
 					}
 					catch (Exception e) {
 						throw processException(e);
@@ -617,7 +617,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					}
 				}
 				else {
-					return (List<${entity.name}>)result;
+					return Collections.unmodifiableList((List<${entity.name}>)result);
 				}
 			}
 
@@ -1054,7 +1054,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 			dynamicQuery.compile(session);
 
-			return dynamicQuery.list();
+			return Collections.unmodifiableList(dynamicQuery.list());
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1074,7 +1074,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 			dynamicQuery.compile(session);
 
-			return dynamicQuery.list();
+			return Collections.unmodifiableList(dynamicQuery.list());
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1142,7 +1142,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
-				return list;
+				return Collections.unmodifiableList(list);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1152,7 +1152,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			}
 		}
 		else {
-			return (List<${entity.name}>)result;
+			return Collections.unmodifiableList((List<${entity.name}>)result);
 		}
 	}
 

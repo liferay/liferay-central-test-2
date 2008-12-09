@@ -37,6 +37,7 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -175,8 +176,8 @@ public class TagsEntryFinderImpl
 
 			qPos.add(folksonomy);
 
-			return (List<TagsEntry>) QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			return Collections.unmodifiableList((List<TagsEntry>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -205,8 +206,8 @@ public class TagsEntryFinderImpl
 			qPos.add(assetId);
 			qPos.add(folksonomy);
 
-			return (List<TagsEntry>) QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			return Collections.unmodifiableList((List<TagsEntry>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -302,7 +303,8 @@ public class TagsEntryFinderImpl
 			qPos.add(name);
 			qPos.add(folksonomy);
 
-			return (List<TagsEntry>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<TagsEntry>)QueryUtil.list(
+				q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -347,7 +349,8 @@ public class TagsEntryFinderImpl
 			qPos.add(name);
 			qPos.add(folksonomy);
 
-			return (List<TagsEntry>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<TagsEntry>)QueryUtil.list(
+				q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

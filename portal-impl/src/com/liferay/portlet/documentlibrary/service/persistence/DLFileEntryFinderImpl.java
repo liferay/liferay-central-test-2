@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -212,8 +213,8 @@ public class DLFileEntryFinderImpl
 
 			qPos.add(groupId);
 
-			return (List<DLFileEntry>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<DLFileEntry>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -235,7 +236,7 @@ public class DLFileEntryFinderImpl
 
 			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -275,8 +276,8 @@ public class DLFileEntryFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return (List<DLFileEntry>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<DLFileEntry>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

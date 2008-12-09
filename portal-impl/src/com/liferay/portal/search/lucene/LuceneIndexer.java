@@ -23,6 +23,7 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
@@ -32,7 +33,6 @@ import com.liferay.portal.util.comparator.PortletLuceneComparator;
 
 import java.io.IOException;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -109,7 +109,7 @@ public class LuceneIndexer implements Runnable {
 			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
 				_companyId);
 
-			Collections.sort(portlets, new PortletLuceneComparator());
+			portlets = ListUtil.sort(portlets, new PortletLuceneComparator());
 
 			for (Portlet portlet : portlets) {
 				if (!portlet.isActive()) {

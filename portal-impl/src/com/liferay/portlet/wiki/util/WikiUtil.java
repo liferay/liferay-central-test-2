@@ -293,9 +293,7 @@ public class WikiUtil {
 			}
 		}
 
-		Collections.sort(nodes, new VisibleNodesComparator(visibleNodes));
-
-		return nodes;
+		return ListUtil.sort(nodes, new VisibleNodesComparator(visibleNodes));
 	}
 
 	public static String processContent(String content) {

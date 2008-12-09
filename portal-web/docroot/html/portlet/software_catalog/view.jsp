@@ -140,7 +140,7 @@ portletURL.setParameter("tabs1", tabs1);
 			docComparator.addOrderBy("type");
 		}
 
-		Collections.sort(results, docComparator);
+		results = ListUtil.sort(results, docComparator);
 
 		int total = results.size();
 

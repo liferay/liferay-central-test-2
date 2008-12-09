@@ -33,9 +33,7 @@ String curPortletResource = (String)request.getAttribute("edit_role_permissions.
 String curModelResource = (String)request.getAttribute("edit_role_permissions.jsp-curModelResource");
 String curModelResourceName = (String)request.getAttribute("edit_role_permissions.jsp-curModelResourceName");
 
-List curActions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), curPortletResource, curModelResource);
-
-Collections.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
+List curActions = ListUtil.sort(ResourceActionsUtil.getResourceActions(company.getCompanyId(), curPortletResource, curModelResource), new ActionComparator(company.getCompanyId(), locale));
 %>
 
 <table class="lfr-table">

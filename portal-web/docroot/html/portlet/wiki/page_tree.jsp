@@ -35,10 +35,9 @@ for (int i = 0; i < depth; i++) {
 	preface += "- ";
 }
 
-List<WikiPage> childPages = parentPage.getChildPages();
+List<WikiPage> childPages = ListUtil.sort(parentPage.getChildPages());
 
 childPages.remove(wikiPage);
-Collections.sort(childPages);
 %>
 
 <option <%= parentPage.getTitle().equals(wikiPage.getParentTitle()) ? "selected" : "" %> value="<%= parentPage.getTitle() %>"><%= preface + parentPage.getTitle() %></option>

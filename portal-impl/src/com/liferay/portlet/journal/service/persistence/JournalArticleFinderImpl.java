@@ -41,6 +41,7 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -284,7 +285,7 @@ public class JournalArticleFinderImpl
 			qPos.add(expirationDateGT_TS);
 			qPos.add(expirationDateLT_TS);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -347,7 +348,7 @@ public class JournalArticleFinderImpl
 			qPos.add(reviewDateGT_TS);
 			qPos.add(reviewDateLT_TS);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -541,8 +542,8 @@ public class JournalArticleFinderImpl
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			return (List<JournalArticle>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<JournalArticle>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

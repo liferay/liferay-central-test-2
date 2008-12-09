@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.impl.ExpandoRowImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -113,8 +114,8 @@ public class ExpandoRowFinderImpl
 			qPos.add(classNameId);
 			qPos.add(tableName);
 
-			return (List<ExpandoRow>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<ExpandoRow>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -35,6 +35,7 @@ import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -119,8 +120,8 @@ public class PasswordPolicyFinderImpl
 			qPos.add(name);
 			qPos.add(name);
 
-			return (List<PasswordPolicy>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<PasswordPolicy>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

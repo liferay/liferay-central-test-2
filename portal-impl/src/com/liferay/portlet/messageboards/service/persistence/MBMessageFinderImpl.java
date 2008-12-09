@@ -36,6 +36,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -217,7 +218,8 @@ public class MBMessageFinderImpl
 
 			qPos.add(groupId);
 
-			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<MBMessage>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -239,7 +241,7 @@ public class MBMessageFinderImpl
 
 			q.addEntity("MBMessage", MBMessageImpl.class);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -326,7 +328,8 @@ public class MBMessageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<MBMessage>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -355,7 +358,7 @@ public class MBMessageFinderImpl
 			qPos.add(classNameId);
 			qPos.add(classPK);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

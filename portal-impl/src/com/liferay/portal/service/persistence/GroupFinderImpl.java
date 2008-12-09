@@ -55,6 +55,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -313,7 +314,7 @@ public class GroupFinderImpl
 
 			q.addEntity("Group_", GroupImpl.class);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -570,7 +571,7 @@ public class GroupFinderImpl
 					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
 					finderMethodName, finderParams, finderArgs, groups);
 
-				return groups;
+				return Collections.unmodifiableList(groups);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -580,7 +581,7 @@ public class GroupFinderImpl
 			}
 		}
 		else {
-			return (List<Group>)result;
+			return Collections.unmodifiableList((List<Group>)result);
 		}
 	}
 

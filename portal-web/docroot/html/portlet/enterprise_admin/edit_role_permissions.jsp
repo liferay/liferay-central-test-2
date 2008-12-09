@@ -426,7 +426,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 			searchContainer.setHeaderNames(headerNames);
 
-			Collections.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
+			modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
 
 			List resultRows = searchContainer.getResultRows();
 
@@ -545,9 +545,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
-
-		Collections.sort(portlets, new PortletTitleComparator(application, locale));
+		List portlets = ListUtil.sort(PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false), new PortletTitleComparator(application, locale));
 
 		int total = portlets.size();
 

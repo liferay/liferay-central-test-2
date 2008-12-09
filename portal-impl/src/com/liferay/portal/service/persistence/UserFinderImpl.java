@@ -38,6 +38,7 @@ import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -272,7 +273,7 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 
 			qPos.add(type);
 
-			return q.list();
+			return Collections.unmodifiableList(q.list());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -360,7 +361,8 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 				qPos.add(active);
 			}
 
-			return (List<User>)QueryUtil.list(q, getDialect(), start, end);
+			return Collections.unmodifiableList((List<User>)
+				QueryUtil.list(q, getDialect(), start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
