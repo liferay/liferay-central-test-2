@@ -156,7 +156,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			}
 		}
 
-		Collections.sort(rightList, new KeyValuePairComparator(false, true));
+		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 		%>
 
 		<liferay-ui:input-move-boxes
@@ -234,7 +234,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			}
 		}
 
-		Collections.sort(rightList, new KeyValuePairComparator(false, true));
+		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 		%>
 
 		<liferay-ui:input-move-boxes

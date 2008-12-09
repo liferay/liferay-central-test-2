@@ -466,7 +466,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 					}
 				}
 
-				Collections.sort(rightList, new KeyValuePairComparator(false, true));
+				rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 
 				%>
 

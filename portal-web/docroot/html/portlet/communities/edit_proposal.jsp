@@ -250,7 +250,7 @@ for (int i = 2; i <= workflowStages; i++) {
 						}
 					}
 
-					Collections.sort(leftList, new KeyValuePairComparator(false, true));
+					leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 					// Right list
 
@@ -273,7 +273,7 @@ for (int i = 2; i <= workflowStages; i++) {
 						}
 					}
 
-					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
 					<liferay-ui:input-move-boxes
@@ -401,7 +401,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 List<TasksReview> results = TasksReviewLocalServiceUtil.getReviews(proposal.getProposalId());
 
-Collections.sort(results, new ReviewUserNameComparator(true));
+results = ListUtil.sort(results, new ReviewUserNameComparator(true));
 
 int total = results.size();
 

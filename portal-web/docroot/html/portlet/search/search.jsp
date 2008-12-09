@@ -51,6 +51,8 @@ else {
 <%
 List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
+portlets = ListUtil.copy(portlets);
+
 Iterator itr = portlets.iterator();
 
 while (itr.hasNext()) {
@@ -68,7 +70,7 @@ while (itr.hasNext()) {
 	}
 }
 
-Collections.sort(portlets, new PortletTitleComparator(application, locale));
+portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
 if (Validator.isNotNull(primarySearch)) {
 	for (int i = 0; i < portlets.size(); i++) {

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
@@ -55,7 +56,6 @@ import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServi
 import java.io.File;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -240,9 +240,7 @@ public class EditProductEntryAction extends PortletAction {
 			}
 		}
 
-		Collections.sort(parameterNames);
-
-		return parameterNames;
+		return ListUtil.sort(parameterNames);
 	}
 
 	protected List<byte[]> getThumbnails(UploadPortletRequest uploadRequest)

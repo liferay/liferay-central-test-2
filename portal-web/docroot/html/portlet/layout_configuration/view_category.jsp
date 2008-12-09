@@ -49,7 +49,7 @@ if (Validator.isNotNull(oldCategoryPath)) {
 
 List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
-Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
+categories = ListUtil.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
 
 List portlets = new ArrayList();
 
@@ -81,7 +81,7 @@ while (itr.hasNext()) {
 	}
 }
 
-Collections.sort(portlets, new PortletTitleComparator(application, locale));
+portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
 if ((categories.size() > 0) || (portlets.size() > 0)) {
 %>

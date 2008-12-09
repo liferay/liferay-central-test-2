@@ -35,7 +35,7 @@ String curModelResourceName = (String)request.getAttribute("edit_role_permission
 
 List curActions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), curPortletResource, curModelResource);
 
-Collections.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
+curActions = ListUtil.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
 %>
 
 <table class="lfr-table">

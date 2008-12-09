@@ -297,7 +297,7 @@ else {
 
 	messages.addAll(treeWalker.getMessages());
 
-	Collections.sort(messages, new MessageCreateDateComparator(true, false));
+	messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
 
 	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), firstMessage.getMessageId(), true));
 	%>

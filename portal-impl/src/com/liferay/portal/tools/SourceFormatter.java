@@ -283,7 +283,7 @@ public class SourceFormatter {
 			}
 		}
 
-		Collections.sort(importsList);
+		importsList = ListUtil.sort(importsList);
 
 		StringBuilder sb = new StringBuilder();
 

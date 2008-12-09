@@ -38,7 +38,6 @@ import com.liferay.portal.util.comparator.PortletTitleComparator;
 import com.liferay.portlet.PortletConfigFactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.MissingResourceException;
@@ -100,7 +99,7 @@ public class PortletLister {
 			List<PortletCategory> categories, long parentId, int depth)
 		throws PortalException, SystemException {
 
-		Collections.sort(
+		categories = ListUtil.sort(
 			categories,
 			new PortletCategoryComparator(
 				_user.getCompanyId(), _user.getLocale()));
@@ -203,7 +202,7 @@ public class PortletLister {
 			}
 		}
 
-		Collections.sort(
+		portlets = ListUtil.sort(
 			portlets,
 			new PortletTitleComparator(
 				_user.getCompanyId(), _user.getLocale()));

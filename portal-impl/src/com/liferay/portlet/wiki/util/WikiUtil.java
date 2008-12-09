@@ -280,6 +280,8 @@ public class WikiUtil {
 
 		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
+		nodes = ListUtil.sort(nodes, new VisibleNodesComparator(visibleNodes));
+
 		Iterator<WikiNode> itr = nodes.iterator();
 
 		while (itr.hasNext()) {
@@ -292,8 +294,6 @@ public class WikiUtil {
 				itr.remove();
 			}
 		}
-
-		Collections.sort(nodes, new VisibleNodesComparator(visibleNodes));
 
 		return nodes;
 	}

@@ -52,7 +52,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
-Collections.sort(portlets, new PortletTitleComparator(application, locale));
+portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
 int total = portlets.size();
 

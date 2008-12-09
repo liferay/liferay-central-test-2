@@ -25,6 +25,8 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -173,6 +175,10 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (entries instanceof UnmodifiableList) {
+			entries = ListUtil.copy(entries);
+		}
 
 		Iterator<TagsEntry> itr = entries.iterator();
 

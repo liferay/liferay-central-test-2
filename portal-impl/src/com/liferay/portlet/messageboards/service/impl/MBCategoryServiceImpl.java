@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -87,6 +88,8 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 		List<MBCategory> categories = mbCategoryLocalService.getCategories(
 			groupId, parentCategoryId, start, end);
+
+		categories = ListUtil.copy(categories);
 
 		Iterator<MBCategory> itr = categories.iterator();
 

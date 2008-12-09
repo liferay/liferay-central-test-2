@@ -206,7 +206,7 @@ List messages = treeWalker.getMessages();
 	<table class="lfr-table" width="100%">
 
 	<%
-	Collections.sort(messages, new MessageCreateDateComparator(true, false));
+	messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
 
 	for (i = 1; i < messages.size(); i++) {
 		message = (MBMessage)messages.get(i);

@@ -35,7 +35,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -212,9 +211,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		List<ColorScheme> colorSchemes = ListUtil.fromCollection(
 			_colorSchemesMap.values());
 
-		Collections.sort(colorSchemes);
-
-		return colorSchemes;
+		return ListUtil.sort(colorSchemes);
 	}
 
 	public Map<String, ColorScheme> getColorSchemesMap() {

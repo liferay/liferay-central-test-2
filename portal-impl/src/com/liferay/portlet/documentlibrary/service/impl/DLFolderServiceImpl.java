@@ -29,6 +29,7 @@ import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -179,6 +180,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		List<DLFolder> folders = dlFolderLocalService.getFolders(
 			groupId, parentFolderId);
+
+		folders = ListUtil.copy(folders);
 
 		Iterator<DLFolder> itr = folders.iterator();
 

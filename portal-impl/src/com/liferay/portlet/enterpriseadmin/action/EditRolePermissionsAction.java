@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,7 +45,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -206,7 +206,7 @@ public class EditRolePermissionsAction extends PortletAction {
 			String selResource = entry.getKey();
 			List<String> actions = entry.getValue();
 
-			Collections.sort(
+			actions = ListUtil.sort(
 				actions,
 				new ActionComparator(
 					themeDisplay.getCompanyId(), themeDisplay.getLocale()));

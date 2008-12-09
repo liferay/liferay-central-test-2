@@ -40,6 +40,8 @@ public interface DynamicQuery {
 
 	public List list();
 
+	public List list(boolean unmodifiable);
+
 	public void setLimit(int start, int end);
 
 	public DynamicQuery setProjection(Projection projection);

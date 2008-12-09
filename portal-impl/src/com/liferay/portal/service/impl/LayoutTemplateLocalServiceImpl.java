@@ -46,7 +46,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -490,11 +489,7 @@ public class LayoutTemplateLocalServiceImpl
 				context, new PrintWriter(new StringWriter()),
 				LayoutTemplateLocalServiceImpl.class.getName(), content);
 
-			List<String> columns = processor.getColumns();
-
-			Collections.sort(columns);
-
-			return columns;
+			return ListUtil.sort(processor.getColumns());
 		}
 		catch (Exception e) {
 			_log.error(e);

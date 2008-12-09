@@ -38,7 +38,6 @@ import java.io.InputStreamReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -105,7 +104,7 @@ public class PluginsEnvironmentBuilder {
 					jars.add("util-java.jar");
 					jars.add("util-taglib.jar");
 
-					Collections.sort(jars);
+					jars = ListUtil.sort(jars);
 
 					updateLibIgnores(
 						libDir, jars.toArray(new String[jars.size()]));
@@ -163,7 +162,7 @@ public class PluginsEnvironmentBuilder {
 		portalJars.add("commons-logging.jar");
 		portalJars.add("log4j.jar");
 
-		Collections.sort(portalJars);
+		portalJars = ListUtil.sort(portalJars);
 
 		String[] customJarsArray = libDir.list(new GlobFilenameFilter("*.jar"));
 
@@ -172,7 +171,7 @@ public class PluginsEnvironmentBuilder {
 		if (customJarsArray != null) {
 			customJars = ListUtil.toList(customJarsArray);
 
-			Collections.sort(customJars);
+			customJars = ListUtil.sort(customJars);
 
 			for (String jar : portalJars) {
 				customJars.remove(jar);

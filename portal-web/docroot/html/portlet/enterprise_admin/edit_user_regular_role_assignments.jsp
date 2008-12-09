@@ -94,6 +94,8 @@ if (tabs2.equals("current")) {
 
 List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_REGULAR), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
+results = ListUtil.copy(results);
+
 Iterator itr = results.iterator();
 
 while (itr.hasNext()) {

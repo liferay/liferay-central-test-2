@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.util;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +68,7 @@ public class MakerStats {
 
 		list.addAll(_map.values());
 
-		Collections.sort(list);
+		list = ListUtil.sort(list);
 
 		int maxSize = 0;
 		int sampleSize = 0;

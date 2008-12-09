@@ -24,10 +24,12 @@ package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -128,6 +130,10 @@ public class EnterpriseAdminUtil {
 			return;
 		}
 
+		if (groups instanceof UnmodifiableList) {
+			groups = ListUtil.copy(groups);
+		}
+
 		Iterator<Group> itr = groups.iterator();
 
 		while (itr.hasNext()) {
@@ -151,6 +157,10 @@ public class EnterpriseAdminUtil {
 			return;
 		}
 
+		if (organizations instanceof UnmodifiableList) {
+			organizations = ListUtil.copy(organizations);
+		}
+
 		Iterator<Organization> itr = organizations.iterator();
 
 		while (itr.hasNext()) {
@@ -167,6 +177,10 @@ public class EnterpriseAdminUtil {
 
 	public static void filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
+
+		if (roles instanceof UnmodifiableList) {
+			roles = ListUtil.copy(roles);
+		}
 
 		Iterator<Role> itr = roles.iterator();
 
@@ -210,6 +224,10 @@ public class EnterpriseAdminUtil {
 			List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
 
+		if (userGroupRoles instanceof UnmodifiableList) {
+			userGroupRoles = ListUtil.copy(userGroupRoles);
+		}
+
 		Iterator<UserGroupRole> itr = userGroupRoles.iterator();
 
 		while (itr.hasNext()) {
@@ -249,6 +267,10 @@ public class EnterpriseAdminUtil {
 
 		if (permissionChecker.isCompanyAdmin()) {
 			return;
+		}
+
+		if (userGroups instanceof UnmodifiableList) {
+			userGroups = ListUtil.copy(userGroups);
 		}
 
 		Iterator<UserGroup> itr = userGroups.iterator();

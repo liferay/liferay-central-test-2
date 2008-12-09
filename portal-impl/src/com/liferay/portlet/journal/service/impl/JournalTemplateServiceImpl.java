@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.base.JournalTemplateServiceBaseImpl;
@@ -115,6 +116,8 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 		List<JournalTemplate> list =
 			journalTemplateLocalService.getStructureTemplates(
 				groupId, structureId);
+
+		list = ListUtil.copy(list);
 
 		Iterator<JournalTemplate> itr = list.iterator();
 

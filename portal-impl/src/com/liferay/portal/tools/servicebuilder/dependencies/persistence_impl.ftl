@@ -1134,10 +1134,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				Query q = session.createQuery(query.toString());
 
-				List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
+				List<${entity.name}> list = null;
 
 				if (obc == null) {
+					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);

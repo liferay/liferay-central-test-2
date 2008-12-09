@@ -68,7 +68,7 @@ while (itr1.hasNext()) {
 	}
 }
 
-Collections.sort(portletsList, new PortletTitleComparator(application, locale));
+portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 
 String tabs4Names = "export,import";
 

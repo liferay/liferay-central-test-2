@@ -60,7 +60,7 @@ import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -1964,9 +1964,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			}
 		}
 
-		Collections.sort(linkedRoles);
+		String[] array = linkedRoles.toArray(new String[0]);
 
-		setRolesArray(linkedRoles.toArray(new String[linkedRoles.size()]));
+		Arrays.sort(array);
+
+		setRolesArray(array);
 	}
 
 	/**

@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -41,7 +42,6 @@ import com.liferay.portal.util.PropsUtil;
 import java.sql.Connection;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -103,9 +103,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 				list.add(counter.getName());
 			}
 
-			Collections.sort(list);
-
-			return list;
+			return ListUtil.sort(list);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -25,6 +25,7 @@ package com.liferay.portlet.words.util;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portlet.words.ScramblerException;
 import com.liferay.util.jazzy.BasicSpellCheckListener;
@@ -90,7 +91,7 @@ public class WordsUtil {
 			ContentUtil.get("com/liferay/portlet/words/dependencies/words.txt"),
 			"\n"));
 
-		_dictionaryList = Collections.unmodifiableList(_dictionaryList);
+		_dictionaryList = new UnmodifiableList(_dictionaryList);
 
 		_dictionarySet = new HashSet<String>(_dictionaryList.size());
 

@@ -111,7 +111,7 @@ while (itr.hasNext()) {
 	}
 }
 
-Collections.sort(partDayResults, new EventTimeComparator(timeZone, locale));
+partDayResults = ListUtil.sort(partDayResults, new EventTimeComparator(timeZone, locale));
 
 List<List<CalEvent>> sortedResults = new ArrayList<List<CalEvent>>();
 

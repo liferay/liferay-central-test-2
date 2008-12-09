@@ -52,7 +52,6 @@ import com.liferay.util.ContextReplace;
 import com.liferay.util.Version;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -169,9 +168,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		List<Theme> themes = ListUtil.fromCollection(
 			_getThemes(companyId).values());
 
-		Collections.sort(themes);
-
-		return themes;
+		return ListUtil.sort(themes);
 	}
 
 	public List<Theme> getThemes(

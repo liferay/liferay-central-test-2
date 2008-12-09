@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.util.List;
 
@@ -86,7 +88,18 @@ public class DynamicQueryImpl implements DynamicQuery {
 	}
 
 	public List list() {
-		return _criteria.list();
+		return list(true);
+	}
+
+	public List list(boolean unmodifiable) {
+		List list = _criteria.list();
+
+		if (unmodifiable) {
+			return new UnmodifiableList(list);
+		}
+		else {
+			return ListUtil.copy(list);
+		}
 	}
 
 	public void setLimit(int start, int end) {

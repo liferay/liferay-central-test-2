@@ -24,6 +24,7 @@ package com.liferay.portlet.randombibleverse.util;
 
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -116,7 +117,7 @@ public class RBVUtil {
 			_verses.add(verse.attributeValue("location"));
 		}
 
-		_verses = Collections.unmodifiableList(_verses);
+		_verses = new UnmodifiableList(_verses);
 	}
 
 	private Bible _getBible(PortletPreferences preferences, Locale locale) {

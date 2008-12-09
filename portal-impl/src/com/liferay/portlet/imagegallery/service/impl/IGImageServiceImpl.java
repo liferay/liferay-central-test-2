@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -128,6 +129,8 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<IGImage> images = igImageLocalService.getImages(folderId);
+
+		images = ListUtil.copy(images);
 
 		Iterator<IGImage> itr = images.iterator();
 

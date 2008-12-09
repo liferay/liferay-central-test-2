@@ -28,6 +28,7 @@ import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -178,6 +179,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		List<DLFileEntry> fileEntries = dlFileEntryLocalService.getFileEntries(
 			folderId);
+
+		fileEntries = ListUtil.copy(fileEntries);
 
 		Iterator<DLFileEntry> itr = fileEntries.iterator();
 

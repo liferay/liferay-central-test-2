@@ -41,7 +41,11 @@ public interface Query {
 
 	public Iterator iterate() throws ORMException;
 
+	public Iterator iterate(boolean modifiable) throws ORMException;
+
 	public List list() throws ORMException;
+
+	public List list(boolean unmodifiable) throws ORMException;
 
 	public ScrollableResults scroll() throws ORMException;
 

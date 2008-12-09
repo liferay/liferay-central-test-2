@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -113,6 +114,8 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 
 		List<IGFolder> folders = igFolderLocalService.getFolders(
 			groupId, parentFolderId);
+
+		folders = ListUtil.copy(folders);
 
 		Iterator<IGFolder> itr = folders.iterator();
 

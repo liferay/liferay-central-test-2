@@ -25,11 +25,11 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.PluginPackageNameAndContextComparator;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Version;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,10 +118,8 @@ public class LocalPluginPackageRepository {
 
 		pluginPackages.addAll(_pluginPackages.values());
 
-		Collections.sort(
+		return ListUtil.sort(
 			pluginPackages, new PluginPackageNameAndContextComparator());
-
-		return pluginPackages;
 	}
 
 	public void removePluginPackage(PluginPackage pluginPackage) {

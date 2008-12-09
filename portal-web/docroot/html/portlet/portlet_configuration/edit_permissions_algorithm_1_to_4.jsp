@@ -435,7 +435,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
 
-					Collections.sort(leftList, new KeyValuePairComparator(false, true));
+					leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 					// Right list
 
@@ -449,7 +449,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						}
 					}
 
-					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
 					<div class="assign-permissions">
@@ -631,7 +631,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
 
-					Collections.sort(leftList, new KeyValuePairComparator(false, true));
+					leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 					// Right list
 
@@ -645,7 +645,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						}
 					}
 
-					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
 					<div class="assign-permissions">
@@ -800,7 +800,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
 
-					Collections.sort(leftList, new KeyValuePairComparator(false, true));
+					leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 					// Right list
 
@@ -814,7 +814,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						}
 					}
 
-					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
 					<div class="assign-permissions">
@@ -984,7 +984,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						}
 					}
 
-					Collections.sort(leftList, new KeyValuePairComparator(false, true));
+					leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 					// Right list
 
@@ -1005,7 +1005,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						}
 					}
 
-					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
 					<div class="assign-permissions">
@@ -1052,7 +1052,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 				leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 			}
 
-			Collections.sort(leftList, new KeyValuePairComparator(false, true));
+			leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 			// Right list
 
@@ -1066,7 +1066,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 				}
 			}
 
-			Collections.sort(rightList, new KeyValuePairComparator(false, true));
+			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 			%>
 
 			<div class="assign-permissions">
@@ -1112,7 +1112,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 				}
 			}
 
-			Collections.sort(leftList, new KeyValuePairComparator(false, true));
+			leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 			// Right list
 
@@ -1128,7 +1128,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 				}
 			}
 
-			Collections.sort(rightList, new KeyValuePairComparator(false, true));
+			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 			%>
 
 			<div class="assign-permissions">
@@ -1166,7 +1166,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 						<%
 						List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 
-						Collections.sort(actions, new ActionComparator(company.getCompanyId(), locale));
+						actions = ListUtil.sort(actions, new ActionComparator(company.getCompanyId(), locale));
 
 						for (int i = 0; i < actions.size(); i++) {
 							String actionId = (String)actions.get(i);

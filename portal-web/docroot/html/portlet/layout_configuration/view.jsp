@@ -58,7 +58,7 @@
 
 				List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
-				Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
+				categories = ListUtil.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
 
 				Iterator itr = categories.iterator();
 

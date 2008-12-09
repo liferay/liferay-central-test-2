@@ -324,7 +324,7 @@
 							}
 						}
 
-						Collections.sort(leftList, new KeyValuePairComparator(false, true));
+						leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 						// Right list
 
@@ -338,7 +338,7 @@
 							}
 						}
 
-						Collections.sort(rightList, new KeyValuePairComparator(false, true));
+						rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 						%>
 
 						<liferay-ui:input-move-boxes

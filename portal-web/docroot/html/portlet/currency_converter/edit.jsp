@@ -38,7 +38,7 @@ for (int i = 0; i < symbols.length; i++) {
 	leftList.add(new KeyValuePair(symbols[i], LanguageUtil.get(pageContext, "currency." + symbols[i])));
 }
 
-//Collections.sort(leftList, new KeyValuePairComparator(false, true));
+//leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
 
 // Right list
 
@@ -59,7 +59,7 @@ while (itr.hasNext()) {
 	}
 }
 
-Collections.sort(rightList, new KeyValuePairComparator(false, true));
+rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 %>
 
 <liferay-ui:input-move-boxes

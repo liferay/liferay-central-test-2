@@ -80,7 +80,6 @@ import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -507,9 +506,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
-		Collections.sort(links);
-
-		return links;
+		return ListUtil.sort(links);
 	}
 
 	public List<WikiPage> getNoAssetPages() throws SystemException {
@@ -548,7 +545,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
-		Collections.sort(orphans);
+		orphans = ListUtil.sort(orphans);
 
 		return orphans;
 	}

@@ -25,9 +25,9 @@ package com.liferay.portal.pop;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -135,7 +135,7 @@ public class POPServerUtil {
 			_log.debug("Listeners size " + _listeners.size());
 		}
 
-		return Collections.unmodifiableList(_listeners);
+		return new UnmodifiableList(_listeners);
 	}
 
 	private void _start() {

@@ -281,7 +281,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			}
 		}
 
-		Collections.sort(permissionsDisplay);
+		permissionsDisplay = ListUtil.sort(permissionsDisplay);
 
 		int total = permissionsDisplay.size();
 
@@ -426,7 +426,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 			searchContainer.setHeaderNames(headerNames);
 
-			Collections.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
+			modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
 
 			List resultRows = searchContainer.getResultRows();
 
@@ -547,7 +547,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
-		Collections.sort(portlets, new PortletTitleComparator(application, locale));
+		portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
 		int total = portlets.size();
 

@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.io.Serializable;
 
@@ -69,8 +71,12 @@ public class SQLQueryImpl implements SQLQuery {
 	}
 
 	public Iterator iterate() throws ORMException {
+		return iterate(true);
+	}
+
+	public Iterator iterate(boolean unmodifiable) throws ORMException {
 		try {
-			return _sqlQuery.iterate();
+			return list(unmodifiable).iterator();
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);
@@ -78,8 +84,19 @@ public class SQLQueryImpl implements SQLQuery {
 	}
 
 	public List list() throws ORMException {
+		return list(true);
+	}
+
+	public List list(boolean unmodifiable) throws ORMException {
 		try {
-			return _sqlQuery.list();
+			List list = _sqlQuery.list();
+
+			if (unmodifiable) {
+				return new UnmodifiableList(_sqlQuery.list());
+			}
+			else {
+				return ListUtil.copy(list);
+			}
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);

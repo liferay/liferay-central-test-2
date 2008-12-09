@@ -25,6 +25,8 @@ package com.liferay.portal.dao.orm.hibernate;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.io.Serializable;
 
@@ -55,8 +57,12 @@ public class QueryImpl implements Query {
 	}
 
 	public Iterator iterate() throws ORMException {
+		return iterate(true);
+	}
+
+	public Iterator iterate(boolean unmodifiable) throws ORMException {
 		try {
-			return _query.iterate();
+			return list(unmodifiable).iterator();
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);
@@ -64,8 +70,19 @@ public class QueryImpl implements Query {
 	}
 
 	public List list() throws ORMException {
+		return list(true);
+	}
+
+	public List list(boolean unmodifiable) throws ORMException {
 		try {
-			return _query.list();
+			List list = _query.list();
+
+			if (unmodifiable) {
+				return new UnmodifiableList(list);
+			}
+			else {
+				return ListUtil.copy(list);
+			}
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);

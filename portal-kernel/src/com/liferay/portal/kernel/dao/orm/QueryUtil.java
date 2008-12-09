@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Randomizer;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,21 +45,35 @@ public class QueryUtil {
 	public static Iterator<?> iterate(
 		Query query, Dialect dialect, int start, int end) {
 
+		return iterate(query, dialect, start, end, true);
+	}
+
+	public static Iterator<?> iterate(
+		Query query, Dialect dialect, int start, int end,
+		boolean unmodifiable) {
+
 		return list(query, dialect, start, end).iterator();
 	}
 
 	public static List<?> list(
 		Query query, Dialect dialect, int start, int end) {
 
+		return list(query, dialect, start, end, true);
+	}
+
+	public static List<?> list(
+		Query query, Dialect dialect, int start, int end,
+		boolean unmodifiable) {
+
 		if ((start == ALL_POS) && (end == ALL_POS)) {
-			return query.list();
+			return query.list(unmodifiable);
 		}
 		else {
 			if (dialect.supportsLimit()) {
 				query.setMaxResults(end - start);
 				query.setFirstResult(start);
 
-				return query.list();
+				return query.list(unmodifiable);
 			}
 			else {
 				List<Object> list = new ArrayList<Object>();
@@ -77,7 +92,12 @@ public class QueryUtil {
 					}
 				}
 
-				return list;
+				if (unmodifiable) {
+					return new UnmodifiableList(list);
+				}
+				else {
+					return list;
+				}
 			}
 		}
 	}
@@ -85,12 +105,19 @@ public class QueryUtil {
 	public static List<?> randomList(
 		Query query, Dialect dialect, int total, int num) {
 
+		return randomList(query, dialect, total, num, true);
+	}
+
+	public static List<?> randomList(
+		Query query, Dialect dialect, int total, int num,
+		boolean unmodifiable) {
+
 		if ((total == 0) || (num == 0)) {
 			return new ArrayList<Object>();
 		}
 
 		if (num >= total) {
-			return list(query, dialect, ALL_POS, ALL_POS);
+			return list(query, dialect, ALL_POS, ALL_POS, true);
 		}
 
 		int[] scrollIds = Randomizer.getInstance().nextInt(total, num);
@@ -109,7 +136,12 @@ public class QueryUtil {
 			}
 		}
 
-		return list;
+		if (unmodifiable) {
+			return new UnmodifiableList(list);
+		}
+		else {
+			return list;
+		}
 	}
 
 	public static Comparable<?>[] getPrevAndNext(

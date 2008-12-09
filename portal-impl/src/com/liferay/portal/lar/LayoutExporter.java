@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -442,6 +443,8 @@ public class LayoutExporter {
 				List<TagsEntry> tagsCategories =
 					TagsEntryLocalServiceUtil.getGroupVocabularyEntries(
 						context.getGroupId(), name);
+
+				tagsCategories = ListUtil.copy(tagsCategories);
 
 				orderCategories(
 					tagsCategories, vocabularyEl,

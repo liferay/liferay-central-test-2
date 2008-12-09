@@ -535,7 +535,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 					results.add(entry.getValue());
 				}
 
-				Collections.sort(results, new UserTrackerModifiedDateComparator());
+				results = ListUtil.sort(results, new UserTrackerModifiedDateComparator());
 
 				List resultRows = searchContainer.getResultRows();
 
