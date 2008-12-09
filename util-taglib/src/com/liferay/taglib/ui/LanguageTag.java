@@ -114,8 +114,8 @@ public class LanguageTag extends IncludeTag {
 			StringServletResponse stringResponse = getServletResponse();
 
 			doTag(
-				_formName, _formAction, _name, _languageIds, _displayStyle,
-				servletContext, request, stringResponse);
+				getPage(), _formName, _formAction, _name, _languageIds,
+				_displayStyle, servletContext, request, stringResponse);
 
 			pageContext.getOut().print(stringResponse.getString());
 

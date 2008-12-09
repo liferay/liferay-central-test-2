@@ -73,7 +73,9 @@ public class PngImageTag extends IncludeTag {
 			HttpServletRequest request = getServletRequest();
 			StringServletResponse response = getServletResponse();
 
-			doTag(_image, _height, _width, servletContext, request, response);
+			doTag(
+				getPage(), _image, _height, _width, servletContext, request,
+				response);
 
 			pageContext.getOut().print(response.getString());
 

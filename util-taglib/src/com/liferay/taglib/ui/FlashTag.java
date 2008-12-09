@@ -103,10 +103,10 @@ public class FlashTag extends IncludeTag {
 			StringServletResponse stringResponse = getServletResponse();
 
 			doTag(
-				_align, _allowScriptAccess, _base, _bgcolor, _devicefont,
-				_flashvars, _height, _id, _loop, _menu, _movie, _play, _quality,
-				_salign, _scale, _swliveconnect, _version, _width, _wmode,
-				servletContext, request, stringResponse);
+				getPage(), _align, _allowScriptAccess, _base, _bgcolor,
+				_devicefont, _flashvars, _height, _id, _loop, _menu, _movie,
+				_play, _quality, _salign, _scale, _swliveconnect, _version,
+				_width, _wmode, servletContext, request, stringResponse);
 
 			pageContext.getOut().print(stringResponse.getString());
 

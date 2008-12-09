@@ -67,7 +67,7 @@ public class StagingTag extends IncludeTag {
 			HttpServletRequest request = getServletRequest();
 			StringServletResponse response = getServletResponse();
 
-			doTag(servletContext, request, response);
+			doTag(getPage(), servletContext, request, response);
 
 			pageContext.getOut().print(response.getString());
 

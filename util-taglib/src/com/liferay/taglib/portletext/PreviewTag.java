@@ -78,8 +78,8 @@ public class PreviewTag extends IncludeTag {
 			StringServletResponse response = getServletResponse();
 
 			doTag(
-				_portletName, _queryString, _width, servletContext, request,
-				response);
+				getPage(), _portletName, _queryString, _width, servletContext,
+				request, response);
 
 			pageContext.getOut().print(response.getString());
 
