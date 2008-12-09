@@ -351,26 +351,28 @@ numberFormat.setMinimumIntegerDigits(2);
 				Runtime runtime = Runtime.getRuntime();
 
 				numberFormat = NumberFormat.getInstance(locale);
+
+				long usedMemory = runtime.totalMemory() - runtime.freeMemory();
 				%>
 
 				<div>
 
 					<%
-					DefaultValueDataset dataset = new DefaultValueDataset(runtime.freeMemory() * 100 / runtime.totalMemory());
+					DefaultValueDataset dataset = new DefaultValueDataset(usedMemory * 100 / runtime.totalMemory());
 
 					MeterPlot plot = _getMeterPlot(dataset, pageContext);
 
-					JFreeChart chart = _getChart(LanguageUtil.get(pageContext, "free-memory") + " / " + LanguageUtil.get(pageContext, "total-memory"), plot);
+					JFreeChart chart = _getChart(LanguageUtil.get(pageContext, "used-memory") + " / " + LanguageUtil.get(pageContext, "total-memory"), plot);
 					%>
 
 					<img border="0" src="<%= themeDisplay.getPathContext() %>/display_chart?filename=<%= ServletUtilities.saveChartAsPNG(chart, 280, 180, null, null) %>" />
 
 					<%
-					dataset = new DefaultValueDataset(runtime.freeMemory() * 100 / runtime.maxMemory());
+					dataset = new DefaultValueDataset(usedMemory * 100 / runtime.maxMemory());
 
 					plot = _getMeterPlot(dataset, pageContext);
 
-					chart = _getChart(LanguageUtil.get(pageContext, "free-memory") + " / " + LanguageUtil.get(pageContext, "maximum-memory"), plot);
+					chart = _getChart(LanguageUtil.get(pageContext, "used-memory") + " / " + LanguageUtil.get(pageContext, "maximum-memory"), plot);
 					%>
 
 					<img border="0" src="<%= themeDisplay.getPathContext() %>/display_chart?filename=<%= ServletUtilities.saveChartAsPNG(chart, 280, 180, null, null) %>" />
@@ -381,10 +383,10 @@ numberFormat.setMinimumIntegerDigits(2);
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<liferay-ui:message key="free-memory" />:
+						<liferay-ui:message key="used-memory" />:
 					</td>
 					<td>
-						<%= numberFormat.format(runtime.freeMemory()) %> <liferay-ui:message key="bytes" />
+						<%= numberFormat.format(usedMemory) %> <liferay-ui:message key="bytes" />
 					</td>
 				</tr>
 				<tr>
