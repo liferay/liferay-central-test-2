@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
 List results = (List)request.getAttribute("view.jsp-results");
@@ -52,7 +52,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 
 	PortletURL entryURL = renderResponse.createRenderURL();
 
-	entryURL.setParameter("struts_action", "/tagged_content/view_content");
+	entryURL.setParameter("struts_action", "/asset_publisher/view_content");
 	entryURL.setParameter("redirect", currentURL);
 	entryURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
@@ -123,7 +123,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		PortletURL articleURL = renderResponse.createRenderURL();
 
-		articleURL.setParameter("struts_action", "/tagged_content/view_content");
+		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
 		articleURL.setParameter("redirect", currentURL);
 		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 

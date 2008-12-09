@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.taggedcontent.action;
+package com.liferay.portlet.assetpublisher.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
@@ -115,7 +115,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		return "/html/portlet/tagged_content/configuration.jsp";
+		return "/html/portlet/asset_publisher/configuration.jsp";
 	}
 
 	protected void moveSelectionDown(

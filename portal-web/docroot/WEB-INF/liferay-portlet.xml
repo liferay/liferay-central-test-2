@@ -862,9 +862,9 @@
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
-		<icon>/html/portlet/tagged_content/icon.png</icon>
-		<struts-path>tagged_content</struts-path>
-		<configuration-action-class>com.liferay.portlet.taggedcontent.action.ConfigurationActionImpl</configuration-action-class>
+		<icon>/html/portlet/asset_publisher/icon.png</icon>
+		<struts-path>asset_publisher</struts-path>
+		<configuration-action-class>com.liferay.portlet.assetpublisher.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

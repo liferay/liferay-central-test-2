@@ -330,7 +330,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
-		<struts-path>tagged_content</struts-path>
+		<struts-path>asset_publisher</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

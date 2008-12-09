@@ -125,6 +125,18 @@
 		<put name="portlet_content" value="/portlet/announcements/view.jsp" />
 	</definition>
 
+	<!-- Asset Publisher -->
+
+	<definition name="portlet.asset_publisher" extends="portlet" />
+
+	<definition name="portlet.asset_publisher.view" extends="portlet.asset_publisher">
+		<put name="portlet_content" value="/portlet/asset_publisher/view.jsp" />
+	</definition>
+
+	<definition name="portlet.asset_publisher.view_content" extends="portlet.asset_publisher">
+		<put name="portlet_content" value="/portlet/asset_publisher/view_content.jsp" />
+	</definition>
+
 	<!-- Blogs -->
 
 	<definition name="portlet.blogs" extends="portlet" />
@@ -1106,18 +1118,6 @@
 
 	<definition name="portlet.stocks.view" extends="portlet.stocks">
 		<put name="portlet_content" value="/portlet/stocks/view.jsp" />
-	</definition>
-
-	<!-- Tagged Content -->
-
-	<definition name="portlet.tagged_content" extends="portlet" />
-
-	<definition name="portlet.tagged_content.view" extends="portlet.tagged_content">
-		<put name="portlet_content" value="/portlet/tagged_content/view.jsp" />
-	</definition>
-
-	<definition name="portlet.tagged_content.view_content" extends="portlet.tagged_content">
-		<put name="portlet_content" value="/portlet/tagged_content/view_content.jsp" />
 	</definition>
 
 	<!-- Tags Admin -->

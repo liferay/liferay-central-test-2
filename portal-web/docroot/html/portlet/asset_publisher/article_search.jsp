@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
 ArticleSearch searchContainer = (ArticleSearch)request.getAttribute("liferay-ui:search:searchContainer");

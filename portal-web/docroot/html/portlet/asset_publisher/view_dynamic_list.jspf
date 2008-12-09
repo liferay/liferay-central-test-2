@@ -53,7 +53,7 @@ if (!groupByClass) {
 	}
 	%>
 
-	<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
+	<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 
 <%
 }
@@ -80,7 +80,7 @@ else {
 
 			<h3><liferay-ui:message key="<%= _ASSET_TITLES[groupAssetIndex] %>" /></h3>
 
-			<%@ include file="/html/portlet/tagged_content/view_dynamic_list_asset.jspf" %>
+			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 
 <%
 		}

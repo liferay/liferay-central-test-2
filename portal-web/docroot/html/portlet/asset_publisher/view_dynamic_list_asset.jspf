@@ -33,19 +33,19 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 		<c:choose>
 			<c:when test='<%= displayStyle.equals("full-content") %>'>
 				<div>
-					<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
+					<liferay-util:include page="/html/portlet/asset_publisher/display_full_content.jsp" />
 				</div>
 			</c:when>
 			<c:when test='<%= displayStyle.equals("abstracts") %>'>
 				<div>
-					<liferay-util:include page="/html/portlet/tagged_content/display_abstract.jsp" />
+					<liferay-util:include page="/html/portlet/asset_publisher/display_abstract.jsp" />
 				</div>
 			</c:when>
 			<c:when test='<%= displayStyle.equals("title-list") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_title_list.jsp" />
+				<liferay-util:include page="/html/portlet/asset_publisher/display_title_list.jsp" />
 			</c:when>
 			<c:when test='<%= displayStyle.equals("table") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_table.jsp" />
+				<liferay-util:include page="/html/portlet/asset_publisher/display_table.jsp" />
 			</c:when>
 			<c:otherwise>
 				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>

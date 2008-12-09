@@ -1483,11 +1483,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
-		<display-name>Tagged Content</display-name>
+		<display-name>Asset Publisher</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/tagged_content/view</value>
+			<value>/asset_publisher/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
 List results = (List)request.getAttribute("view.jsp-results");
@@ -66,7 +66,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			<br />
 
 			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/tagged_content/edit_entry_discussion" />
+				<portlet:param name="struts_action" value="/asset_publisher/edit_entry_discussion" />
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
@@ -121,7 +121,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			<br />
 
 			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/tagged_content/edit_file_entry_discussion" />
+				<portlet:param name="struts_action" value="/asset_publisher/edit_file_entry_discussion" />
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
@@ -200,7 +200,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 				PortletURL articlePageURL = renderResponse.createRenderURL();
 
-				articlePageURL.setParameter("struts_action", "/tagged_content/view_content");
+				articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
 				articlePageURL.setParameter("redirect", pageRedirect);
 				articlePageURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 				articlePageURL.setParameter("cur", String.valueOf(cur));
@@ -235,7 +235,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				<br />
 
 				<portlet:actionURL var="discussionURL">
-					<portlet:param name="struts_action" value="/tagged_content/edit_article_discussion" />
+					<portlet:param name="struts_action" value="/asset_publisher/edit_article_discussion" />
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
@@ -310,7 +310,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			<br />
 
 			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/tagged_content/edit_page_discussion" />
+				<portlet:param name="struts_action" value="/asset_publisher/edit_page_discussion" />
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
@@ -331,11 +331,11 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 <c:if test="<%= show %>">
 	<div class="portlet-journal-metadata">
-		<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
 	</div>
 
 	<div class="lfr-meta-actions edit-controls">
-		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
 	</div>
 
 	<c:if test="<%= (assetIndex + 1) < results.size() %>">
@@ -344,5 +344,5 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 </c:if>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.display_full_content.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.display_full_content.jsp");
 %>

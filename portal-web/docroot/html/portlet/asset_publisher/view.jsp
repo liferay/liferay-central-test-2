@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
 if (mergeUrlTags) {
@@ -78,7 +78,7 @@ for (String entryName : entries) {
 	String portletId = portletDisplay.getId();
 	%>
 
-	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+	<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 </form>
 
 <br />
@@ -142,13 +142,13 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 <c:choose>
 	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNotNull(category) %>'>
-		<%@ include file="/html/portlet/tagged_content/view_dynamic_by_category.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/view_dynamic_by_category.jspf" %>
 	</c:when>
 	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNull(category) %>'>
-		<%@ include file="/html/portlet/tagged_content/view_dynamic_list.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/view_dynamic_list.jspf" %>
 	</c:when>
 	<c:when test='<%= selectionStyle.equals("manual") %>'>
-		<%@ include file="/html/portlet/tagged_content/view_manual.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/view_manual.jspf" %>
 	</c:when>
 </c:choose>
 
@@ -157,5 +157,5 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 </c:if>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.view.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.view.jsp");
 %>

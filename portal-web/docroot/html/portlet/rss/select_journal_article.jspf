@@ -43,7 +43,7 @@ ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 %>
 
 <liferay-ui:search-form
-	page="/html/portlet/tagged_content/article_search.jsp"
+	page="/html/portlet/asset_publisher/article_search.jsp"
 	searchContainer="<%= searchContainer %>"
 />
 

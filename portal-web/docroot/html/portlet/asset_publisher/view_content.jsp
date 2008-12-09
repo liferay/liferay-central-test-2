@@ -22,38 +22,19 @@
  */
 %>
 
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
+
 <%
-int total = manualEntries.length;
+String redirect = ParamUtil.getString(request, "redirect");
 
-searchContainer.setTotal(total);
+long assetId = ParamUtil.getLong(renderRequest, "assetId");
 
-List results = ListUtil.fromArray(manualEntries);
+List results = new ArrayList();
 
-int end = (manualEntries.length < searchContainer.getEnd()) ? manualEntries.length : searchContainer.getEnd();
+int assetIndex = 0;
 
-results = results.subList(searchContainer.getStart(), end);
-
-searchContainer.setResults(results);
-
-request.setAttribute("view.jsp-results", results);
-
-for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-	String assetEntry = (String)results.get(assetIndex);
-
-	Document assetDoc = SAXReaderUtil.read(assetEntry);
-
-	Element root = assetDoc.getRootElement();
-
-	long assetId = GetterUtil.getLong(root.element("asset-id").getText());
-
-	TagsAsset asset = null;
-
-	try {
-		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
-	}
-	catch (NoSuchAssetException nsae) {
-		continue;
-	}
+try {
+	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
@@ -65,6 +46,8 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	String editURL = StringPool.BLANK;
 
 	boolean show = true;
+
+	request.setAttribute("view.jsp-results", results);
 
 	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
 
@@ -79,32 +62,23 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	request.setAttribute("view.jsp-classPK", new Long(classPK));
 
 	request.setAttribute("view.jsp-show", new Boolean(show));
-
-	try {
 %>
 
-		<c:choose>
-			<c:when test='<%= displayStyle.equals("full-content") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
-			</c:when>
-			<c:when test='<%= displayStyle.equals("abstracts") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_abstract.jsp" />
-			</c:when>
-			<c:when test='<%= displayStyle.equals("title-list") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_title_list.jsp" />
-			</c:when>
-			<c:when test='<%= displayStyle.equals("table") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_table.jsp" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
-			</c:otherwise>
-		</c:choose>
+	<div align="right">
+		&laquo; <a href="<%= HtmlUtil.escape(redirect) %>"><liferay-ui:message key="back" /></a>
+	</div>
+
+	<div>
+		<liferay-util:include page="/html/portlet/asset_publisher/display_full_content.jsp" />
+	</div>
 
 <%
-	}
-	catch (Exception e) {
-		_log.error(e.getMessage());
-	}
 }
+catch (Exception e) {
+	_log.error(e.getMessage());
+}
+%>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.view_content.jsp");
 %>

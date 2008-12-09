@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2");
@@ -119,7 +119,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						String portletId = portletResource;
 						%>
 
-						<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+						<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
 						<select name="<portlet:namespace/>assetType" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
 							<option value=""><liferay-ui:message key="select-existing" />...</option>
@@ -242,7 +242,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 							// Action
 
-							row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/tagged_content/asset_selection_action.jsp");
+							row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/asset_publisher/asset_selection_action.jsp");
 
 							// Add result row
 
@@ -259,7 +259,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 					</liferay-ui:section>
 					<liferay-ui:section>
-						<%@ include file="/html/portlet/tagged_content/display_settings.jspf" %>
+						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 
 						<br />
 
@@ -359,7 +359,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						</select>
 					</liferay-ui:section>
 					<liferay-ui:section>
-						<%@ include file="/html/portlet/tagged_content/display_settings.jspf" %>
+						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 					</liferay-ui:section>
 				</liferay-ui:tabs>
 
@@ -378,7 +378,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_blogs_entry.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_blogs_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(BookmarksEntry.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= BookmarksEntry.class.getName() %>" />
@@ -387,7 +387,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_bookmarks_entry.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_bookmarks_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(DLFileEntry.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= DLFileEntry.class.getName() %>" />
@@ -396,7 +396,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_document_library_file_entry.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_document_library_file_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(IGImage.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= IGImage.class.getName() %>" />
@@ -405,7 +405,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_image_gallery_image_entry.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_image_gallery_image_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
@@ -414,7 +414,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_journal_article.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_journal_article.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(MBMessage.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= MBMessage.class.getName() %>" />
@@ -423,7 +423,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_message_boards_message.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_message_boards_message.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(WikiPage.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= WikiPage.class.getName() %>" />
@@ -432,7 +432,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_wiki_page.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/select_wiki_page.jspf" %>
 	</c:when>
 </c:choose>
 

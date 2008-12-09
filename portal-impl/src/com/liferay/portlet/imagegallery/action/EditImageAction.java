@@ -42,7 +42,7 @@ import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
-import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 
 import java.io.File;

@@ -22,39 +22,8 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
-
 <%
-List results = (List)request.getAttribute("view.jsp-results");
-
-int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
-
-TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
-
-String title = (String)request.getAttribute("view.jsp-title");
-String summary = (String)request.getAttribute("view.jsp-summary");
-String viewURL = (String)request.getAttribute("view.jsp-viewURL");
-String viewURLMessage = (String)request.getAttribute("view.jsp-viewURLMessage");
-
-String className = (String)request.getAttribute("view.jsp-className");
-long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
-
-boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
-
-if (className.equals(BlogsEntry.class.getName())) {
-	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
-
-	if (Validator.isNull(title)) {
-		title = entry.getTitle();
-	}
-
-	summary = entry.getTitle();
-
-	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId();
-
-	viewURLMessage = "read-more";
-}
-else if (className.equals(BookmarksEntry.class.getName())) {
+if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
 	if (Validator.isNull(title)) {
@@ -117,7 +86,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		PortletURL articleURL = renderResponse.createRenderURL();
 
-		articleURL.setParameter("struts_action", "/tagged_content/view_content");
+		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
 		articleURL.setParameter("redirect", currentURL);
 		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
@@ -129,18 +98,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 		show = false;
 	}
 }
-else if (className.equals(MBMessage.class.getName())) {
-	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
-
-	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId();
-}
-else if (className.equals(WikiPage.class.getName())) {
-	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
-
-	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
-
-	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey();
-}
 
 // URLs set through the asset override automatically generated URLs
 
@@ -150,30 +107,43 @@ if (Validator.isNotNull(asset.getUrl())) {
 %>
 
 <c:if test="<%= assetIndex == 0 %>">
-	<ul>
+	<table class="taglib-search-iterator">
+	<tr class="portlet-section-header results-header">
+		<td>
+			<liferay-ui:message key="title" />
+		</td>
+		<td>
+			<liferay-ui:message key="view-count" />
+		</td>
+	</tr>
 </c:if>
 
 <c:if test="<%= show %>">
-	<li>
-		<c:choose>
-			<c:when test="<%= Validator.isNotNull(viewURL) %>">
-				<a href="<%= viewURL %>"><%= title %></a>
-			</c:when>
-			<c:otherwise>
-				<%= title %>
-			</c:otherwise>
-		</c:choose>
+	<%
+		String style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\"";
+		if (assetIndex%2 == 0) {
+			style = "class=\"portlet-section-alternate results-row alt\" onmouseover=\"this.className = 'portlet-section-alternate-hover results-row alt hover';\" onmouseout=\"this.className = 'portlet-section-alternate results-row alt';\"";
+		}
+	%>
+	<tr <%= style %>>
+		<td>
+			<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
 
-		<div class="lfr-meta-actions edit-controls">
-			<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
-		</div>
-
-		<span class="portlet-journal-metadata">
-			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
-		</span>
-	</li>
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(viewURL) %>">
+					<a href="<%= viewURL %>"><%= title %></a>
+				</c:when>
+				<c:otherwise>
+					<%= title %>
+				</c:otherwise>
+			</c:choose>
+		</td>
+		<td>
+			<%= asset.getViewCount() %>
+		</td>
+	</tr>
 </c:if>
 
 <c:if test="<%= (assetIndex + 1) == results.size() %>">
-	</ul>
+	</table>
 </c:if>

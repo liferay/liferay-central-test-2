@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
 List results = (List)request.getAttribute("view.jsp-results");
@@ -142,7 +142,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		PortletURL articleURL = renderResponse.createRenderURL();
 
-		articleURL.setParameter("struts_action", "/tagged_content/view_content");
+		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
 		articleURL.setParameter("redirect", currentURL);
 		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
@@ -181,7 +181,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 		</c:choose>
 
 		<div class="portlet-journal-metadata">
-			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
+			<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
 		</div>
 
 		<p class="portlet-journal-summary">
@@ -198,7 +198,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 	<div class="lfr-meta-actions edit-controls">
 		<br />
 
-		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+		<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
 	</div>
 
 	<c:if test="<%= (assetIndex + 1) < results.size() %>">
