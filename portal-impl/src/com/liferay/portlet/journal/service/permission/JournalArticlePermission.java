@@ -74,7 +74,7 @@ public class JournalArticlePermission {
 
 		if (permissionChecker.hasOwnerPermission(
 				article.getCompanyId(), JournalArticle.class.getName(),
-				article.getPrimaryKey(), article.getUserId(), actionId)) {
+				article.getResourcePrimKey(), article.getUserId(), actionId)) {
 
 			return true;
 		}
