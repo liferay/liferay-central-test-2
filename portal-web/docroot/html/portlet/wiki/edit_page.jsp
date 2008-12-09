@@ -244,54 +244,59 @@ if (Validator.isNull(redirect)) {
 </c:if>
 
 <c:if test="<%= editable %>">
-	<c:if test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
-		<table class="lfr-table">
+	<table class="lfr-table">
 
-		<c:if test="<%= editTitle %>">
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="title" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
-				</td>
-			</tr>
-		</c:if>
-
+	<c:if test="<%= editTitle %>">
 		<tr>
 			<td class="lfr-label">
-				<liferay-ui:message key="format" />
+				<liferay-ui:message key="title" />
 			</td>
 			<td>
-				<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
-
-					<%
-					for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
-					%>
-
-						<option <%= format.equals(WikiPageImpl.FORMATS[i]) ? "selected" : "" %> value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></option>
-
-					<%
-					}
-					%>
-
-				</select>
+				<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
 			</td>
 		</tr>
+	</c:if>
 
-		<c:if test="<%= Validator.isNotNull(parentTitle) %>">
+	<c:if test="<%= Validator.isNotNull(parentTitle) %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="parent" />
+			</td>
+			<td>
+				<%= parentTitle %>
+			</td>
+		</tr>
+	</c:if>
+
+	<c:choose>
+		<c:when test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
 			<tr>
-				<td>
-					<liferay-ui:message key="parent" />
+				<td class="lfr-label">
+					<liferay-ui:message key="format" />
 				</td>
 				<td>
-					<%= parentTitle %>
+					<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
+
+						<%
+						for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
+						%>
+
+							<option <%= format.equals(WikiPageImpl.FORMATS[i]) ? "selected" : "" %> value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
 				</td>
 			</tr>
-		</c:if>
+		</c:when>
+		<c:otherwise>
+			<input name="<portlet:namespace />format" type="hidden" value="<%= format %>" />
+		</c:otherwise>
+	</c:choose>
 
-		</table>
-	</c:if>
+	</table>
 
 	<br />
 
