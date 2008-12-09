@@ -609,13 +609,14 @@ public class EditPagesAction extends PortletAction {
 		String css = ParamUtil.getString(actionRequest, "css");
 		boolean wapTheme = ParamUtil.getBoolean(actionRequest, "wapTheme");
 
-		updateLookAndFeel(
-			companyId, liveGroupId, privateLayout, layoutId, themeId,
-			colorSchemeId, css, wapTheme);
-
 		if (stagingGroupId > 0) {
 			updateLookAndFeel(
 				companyId, stagingGroupId, privateLayout, layoutId, themeId,
+				colorSchemeId, css, wapTheme);
+		}
+		else {
+			updateLookAndFeel(
+				companyId, liveGroupId, privateLayout, layoutId, themeId,
 				colorSchemeId, css, wapTheme);
 		}
 	}
