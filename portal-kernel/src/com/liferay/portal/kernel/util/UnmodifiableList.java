@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.kernel.util;
 
 import java.util.Collection;
@@ -29,12 +30,15 @@ import java.util.ListIterator;
 /**
  * <a href="UnmodifiableList.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- *
- * This is a read-only wrapper around any <code>java.util.List</code>.  Query
- * operations will "read through" to the specified list.  Attempts to modify the
+ * <p>
+ * This is a read-only wrapper around any <code>java.util.List</code>. Query
+ * operations will "read through" to the specified list. Attempts to modify the
  * list directly or via its iterator will result in a
  * <code>java.lang.UnsupportedOperationException</code>.
+ * </p>
+ *
+ * @author Alexander Chow
+ *
  */
 public class UnmodifiableList<E> implements List<E> {
 
