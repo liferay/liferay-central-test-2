@@ -194,6 +194,8 @@ public class LayoutImporter {
 			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
 			zipReader);
 
+		context.setPrivateLayout(privateLayout);
+
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupConstants.GUEST);
 

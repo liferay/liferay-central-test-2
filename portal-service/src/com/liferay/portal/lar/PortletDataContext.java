@@ -137,6 +137,10 @@ public interface PortletDataContext extends Serializable {
 
 	public String getRootPath();
 
+	public long getScopeGroupId();
+
+	public long getScopeLayoutId();
+
 	public Date getStartDate();
 
 	public Map<String, String[]> getTagsCategories();
@@ -187,15 +191,25 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean isPathNotProcessed(String path);
 
+	public boolean isPrivateLayout();
+
 	public boolean isWithinDateRange(Date modifiedDate);
 
 	public void putNotUniquePerLayout(String portletId);
+
+	public void setGroupId(long groupId);
 
 	public void setImportGroupId(long importGroupId);
 
 	public void setOldPlid(long oldPlid);
 
 	public void setPlid(long plid);
+
+	public void setPrivateLayout(boolean privateLayout);
+
+	public void setScopeGroupId(long scopeGroupId);
+
+	public void setScopeLayoutId(long scopeLayoutId);
 
 	public String toXML(Object object);
 

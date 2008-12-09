@@ -124,6 +124,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		_companyId = companyId;
 		_groupId = groupId;
+		_scopeGroupId = groupId;
 		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
 		_dataStrategy =  null;
@@ -411,7 +412,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getRootPath() {
-		return ROOT_PATH_GROUPS + getGroupId();
+		return ROOT_PATH_GROUPS + getScopeGroupId();
+	}
+
+	public long getScopeGroupId() {
+		return _scopeGroupId;
+	}
+
+	public long getScopeLayoutId() {
+		return _scopeLayoutId;
 	}
 
 	public Date getStartDate() {
@@ -572,6 +581,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return !addPrimaryKey(String.class, path);
 	}
 
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
 	public boolean isWithinDateRange(Date modifiedDate) {
 		if (!hasDateRange()) {
 			return true;
@@ -594,12 +607,28 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_importGroupId = importGroupId;
 	}
 
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setOldPlid(long oldPlid) {
 		_oldPlid = oldPlid;
 	}
 
 	public void setPlid(long plid) {
 		_plid = plid;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
+
+	public void setScopeGroupId(long scopeGroupId) {
+		_scopeGroupId = scopeGroupId;
+	}
+
+	public void setScopeLayoutId(long scopeLayoutId) {
+		_scopeLayoutId = scopeLayoutId;
 	}
 
 	public String toXML(Object object) {
@@ -685,6 +714,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _importGroupId;
 	private long _oldPlid;
 	private long _plid;
+	private boolean _privateLayout;
+	private long _scopeGroupId;
+	private long _scopeLayoutId;
 	private Set<String> _primaryKeys;
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
 		new HashMap<String, Map<?, ?>>();
