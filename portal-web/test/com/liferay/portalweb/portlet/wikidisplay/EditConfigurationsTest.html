@@ -1,6 +1,9 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
 <title>EditConfigurationsTest</title>
 </head>
 <body>
@@ -9,14 +12,39 @@
 <tr><td rowspan="1" colspan="3">EditConfigurationsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Configuration']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='Configuration']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_86_nodeId</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>_86_nodeId</td>
 	<td>label=Main</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -29,8 +57,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Test Wiki Article</td>
+	<td>assertTextPresent</td>
+	<td>WD Setup Wiki Test Article</td>
 	<td></td>
 </tr>
 

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SetupTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class SetupTest extends BaseTestCase {
+	public void testSetup() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -89,9 +89,8 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Wiki Displa Test Page"));
-		selenium.type("new_page",
-			RuntimeVariables.replace("Wiki Display Test Page"));
+			RuntimeVariables.replace("WD Setup Test Page"));
+		selenium.type("new_page", RuntimeVariables.replace("WD Setup Test Page"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -100,7 +99,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Wiki Display Test Page")) {
+				if (selenium.isElementPresent("link=WD Setup Test Page")) {
 					break;
 				}
 			}
@@ -110,7 +109,107 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.click(RuntimeVariables.replace("link=WD Setup Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Add Application")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Add Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[@id='Wiki-Wiki']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@id='Wiki-Wiki']/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=This page is empty. Edit it to add some text.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=This page is empty. Edit it to add some text."));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_36_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_36_content",
+			RuntimeVariables.replace(
+				"==WD Setup Wiki Test Article==\n\n*This is a WD wiki test article!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
+		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

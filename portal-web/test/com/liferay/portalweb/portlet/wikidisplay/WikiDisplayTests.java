@@ -33,10 +33,11 @@ import com.liferay.portalweb.portal.BaseTests;
 public class WikiDisplayTests extends BaseTests {
 
 	public WikiDisplayTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(EditConfigurationsTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }
