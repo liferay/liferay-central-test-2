@@ -39,7 +39,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -415,8 +414,7 @@ public class TagsAssetFinderImpl
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return Collections.unmodifiableList((List<TagsAsset>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -534,8 +532,7 @@ public class TagsAssetFinderImpl
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return Collections.unmodifiableList((List<TagsAsset>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -655,8 +652,7 @@ public class TagsAssetFinderImpl
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return Collections.unmodifiableList((List<TagsAsset>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

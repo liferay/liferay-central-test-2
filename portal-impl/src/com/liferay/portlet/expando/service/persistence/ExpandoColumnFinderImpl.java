@@ -32,7 +32,6 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.impl.ExpandoColumnImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -112,7 +111,7 @@ public class ExpandoColumnFinderImpl
 			qPos.add(classNameId);
 			qPos.add(tableName);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

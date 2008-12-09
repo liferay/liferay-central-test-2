@@ -36,7 +36,6 @@ import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -151,8 +150,8 @@ public class BlogsStatsUserFinderImpl
 				qPos.add(organizationId);
 			}
 
-			return Collections.unmodifiableList((List<BlogsStatsUser>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<BlogsStatsUser>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -34,7 +34,6 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -359,9 +358,8 @@ public class ShoppingItemFinderImpl
 			qPos.add(true);
 			qPos.add(true);
 
-			return Collections.unmodifiableList((List<ShoppingItem>)
-				QueryUtil.randomList(
-					q, getDialect(), countByFeatured, numOfItems));
+			return (List<ShoppingItem>)QueryUtil.randomList(
+				q, getDialect(), countByFeatured, numOfItems);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -426,8 +424,8 @@ public class ShoppingItemFinderImpl
 			qPos.add(keywords);
 			qPos.add(keywords);
 
-			return Collections.unmodifiableList((List<ShoppingItem>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<ShoppingItem>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -489,8 +487,8 @@ public class ShoppingItemFinderImpl
 			qPos.add(true);
 			qPos.add(true);
 
-			return Collections.unmodifiableList((List<ShoppingItem>)
-				QueryUtil.randomList(q, getDialect(), countBySale, numOfItems));
+			return (List<ShoppingItem>)QueryUtil.randomList(
+				q, getDialect(), countBySale, numOfItems);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

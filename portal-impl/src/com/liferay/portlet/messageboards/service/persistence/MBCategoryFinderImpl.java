@@ -34,7 +34,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -112,8 +111,8 @@ public class MBCategoryFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<MBCategory>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<MBCategory>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

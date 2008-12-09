@@ -41,7 +41,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -220,7 +219,7 @@ public class AnnouncementsEntryFinderImpl
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateLT_TS);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -272,8 +271,8 @@ public class AnnouncementsEntryFinderImpl
 			qPos.add(userId);
 			qPos.add(AnnouncementsFlagImpl.HIDDEN);
 
-			return Collections.unmodifiableList((List<AnnouncementsEntry>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<AnnouncementsEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -324,8 +323,8 @@ public class AnnouncementsEntryFinderImpl
 			qPos.add(userId);
 			qPos.add(AnnouncementsFlagImpl.HIDDEN);
 
-			return Collections.unmodifiableList((List<AnnouncementsEntry>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<AnnouncementsEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

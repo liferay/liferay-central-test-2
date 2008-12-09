@@ -37,7 +37,6 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -196,8 +195,8 @@ public class ShoppingOrderFinderImpl
 			qPos.add(shippingEmailAddress);
 			qPos.add(ppPaymentStatus);
 
-			return Collections.unmodifiableList((List<ShoppingOrder>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<ShoppingOrder>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

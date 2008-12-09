@@ -40,7 +40,6 @@ import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -685,7 +684,7 @@ public class PermissionFinderImpl
 					finderClassNameCacheEnabled, finderClassName,
 					finderMethodName, finderParams, finderArgs, permissions);
 
-				return Collections.unmodifiableList(permissions);
+				return permissions;
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -695,7 +694,7 @@ public class PermissionFinderImpl
 			}
 		}
 		else {
-			return Collections.unmodifiableList((List<Permission>)result);
+			return (List<Permission>)result;
 		}
 	}
 
@@ -718,7 +717,7 @@ public class PermissionFinderImpl
 			qPos.add(groupId);
 			qPos.add(resourceId);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -746,7 +745,7 @@ public class PermissionFinderImpl
 			qPos.add(roleId);
 			qPos.add(resourceId);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -775,7 +774,7 @@ public class PermissionFinderImpl
 			qPos.add(userId);
 			qPos.add(resourceId);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -806,7 +805,7 @@ public class PermissionFinderImpl
 			qPos.add(groupId);
 			qPos.add(resourceId);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -839,7 +838,7 @@ public class PermissionFinderImpl
 			qPos.add(userId);
 			qPos.add(resourceId);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -873,7 +872,7 @@ public class PermissionFinderImpl
 			qPos.add(scope);
 			qPos.add(primKey);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -906,7 +905,7 @@ public class PermissionFinderImpl
 			qPos.add(scope);
 			qPos.add(primKey);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

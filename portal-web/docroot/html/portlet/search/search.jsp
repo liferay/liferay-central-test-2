@@ -49,7 +49,7 @@ else {
 <br /><br />
 
 <%
-List portlets = ListUtil.sort(PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false), new PortletTitleComparator(application, locale));
+List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
 Iterator itr = portlets.iterator();
 
@@ -67,6 +67,8 @@ while (itr.hasNext()) {
 		}
 	}
 }
+
+Collections.sort(portlets, new PortletTitleComparator(application, locale));
 
 if (Validator.isNotNull(primarySearch)) {
 	for (int i = 0; i < portlets.size(); i++) {

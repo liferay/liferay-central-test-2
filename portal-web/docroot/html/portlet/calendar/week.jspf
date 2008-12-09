@@ -167,7 +167,9 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 				<%
-				List events = ListUtil.sort(CalEventLocalServiceUtil.getEvents(scopeGroupId, cal, eventType), new EventTimeComparator(timeZone, locale));
+				List events = CalEventLocalServiceUtil.getEvents(scopeGroupId, cal, eventType);
+
+				Collections.sort(events, new EventTimeComparator(timeZone, locale));
 
 				for (int j = 0; j < events.size(); j++) {
 					CalEvent event = (CalEvent)events.get(j);

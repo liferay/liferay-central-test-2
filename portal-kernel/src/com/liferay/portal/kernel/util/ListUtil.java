@@ -30,7 +30,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -176,27 +175,6 @@ public class ListUtil {
 
 	public static List fromString(String s) {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
-	}
-
-	/**
-	 * Takes a given list and returns a new list with the data fully sorted.
-	 * As compared to <code>java.util.Collections.sortList()</code>, this
-	 * function minimizes the need for an extra garbage collection.
-	 *
-	 * @param list List to be sorted.  The list's data is not modified by this
-	 * method.
-	 * @param comparator Comparator used to sort data.  The use of a
-	 * <code>null</code> comparator is valid.
-	 * @return A sorted copy of the list.
-	 */
-	public static List sort(List list, Comparator comparator) {
-		Object[] a = list.toArray();
-
-		Arrays.sort(a, comparator);
-
-		List result = new PrepopulatedList(a);
-
-		return result;
 	}
 
 	public static List subList(List list, int start, int end) {

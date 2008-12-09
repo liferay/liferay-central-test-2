@@ -34,7 +34,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class CalEventFinderImpl
 			qPos.add(timeZoneSensitive);
 			qPos.add(false);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -106,7 +105,7 @@ public class CalEventFinderImpl
 
 			qPos.add(CalEventImpl.REMIND_BY_NONE);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

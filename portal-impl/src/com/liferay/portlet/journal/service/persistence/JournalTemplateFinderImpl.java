@@ -37,7 +37,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -302,8 +301,8 @@ public class JournalTemplateFinderImpl
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
-			return Collections.unmodifiableList((List<JournalTemplate>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<JournalTemplate>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

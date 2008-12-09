@@ -35,7 +35,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -203,8 +202,8 @@ public class BookmarksEntryFinderImpl
 
 			qPos.add(groupId);
 
-			return Collections.unmodifiableList((List<BookmarksEntry>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<BookmarksEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -226,7 +225,7 @@ public class BookmarksEntryFinderImpl
 
 			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -303,8 +302,8 @@ public class BookmarksEntryFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<BookmarksEntry>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<BookmarksEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

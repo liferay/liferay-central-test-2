@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -213,8 +212,8 @@ public class ExpandoValueFinderImpl
 			qPos.add(tableName);
 			qPos.add(columnName);
 
-			return Collections.unmodifiableList((List<ExpandoValue>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<ExpandoValue>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -246,8 +245,8 @@ public class ExpandoValueFinderImpl
 			qPos.add(tableName);
 			qPos.add(classPK);
 
-			return Collections.unmodifiableList((List<ExpandoValue>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<ExpandoValue>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -312,8 +311,8 @@ public class ExpandoValueFinderImpl
 			qPos.add(columnName);
 			qPos.add(data);
 
-			return Collections.unmodifiableList((List<ExpandoValue>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<ExpandoValue>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

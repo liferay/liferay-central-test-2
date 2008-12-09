@@ -37,7 +37,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -420,7 +419,7 @@ public class OrganizationFinderImpl
 				organizations.add(organization);
 			}
 
-			return Collections.unmodifiableList(organizations);
+			return organizations;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -754,7 +753,7 @@ public class OrganizationFinderImpl
 				organizations.add(organization);
 			}
 
-			return Collections.unmodifiableList(organizations);
+			return organizations;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

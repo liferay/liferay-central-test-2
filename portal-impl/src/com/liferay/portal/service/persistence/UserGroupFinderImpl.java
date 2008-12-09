@@ -40,7 +40,6 @@ import com.liferay.portal.model.impl.UserGroupModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -218,8 +217,8 @@ public class UserGroupFinderImpl
 			qPos.add(description);
 			qPos.add(description);
 
-			return Collections.unmodifiableList((List<UserGroup>)QueryUtil.list(
-				q, getDialect(), start, end));
+			return (List<UserGroup>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

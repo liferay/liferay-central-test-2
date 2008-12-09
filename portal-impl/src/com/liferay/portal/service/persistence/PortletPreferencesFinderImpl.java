@@ -31,7 +31,6 @@ import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -65,7 +64,7 @@ public class PortletPreferencesFinderImpl
 
 			qPos.add(portletId);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -34,7 +34,6 @@ import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -458,8 +457,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(groupId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -488,8 +487,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(groupId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -518,8 +517,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(organizationId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -548,8 +547,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(organizationId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -577,8 +576,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -608,8 +607,8 @@ public class SocialActivityFinderImpl
 			qPos.add(userId);
 			qPos.add(type);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -638,8 +637,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -685,7 +684,7 @@ public class SocialActivityFinderImpl
 				socialActivities.add(socialActivity);
 			}
 
-			return Collections.unmodifiableList(socialActivities);
+			return socialActivities;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -714,8 +713,8 @@ public class SocialActivityFinderImpl
 
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<SocialActivity>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<SocialActivity>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

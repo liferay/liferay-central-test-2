@@ -47,9 +47,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -149,12 +146,9 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			return null;
 		}
 		catch (Exception e) {
-_log.error("\n\n\nBlah:	" + e.getClass().getName());
-
 			throw new WebDAVException(e);
 		}
 	}
-private static Log _log = LogFactory.getLog(JournalWebDAVStorageImpl.class);
 
 	public List<Resource> getResources(WebDAVRequest webDavRequest)
 		throws WebDAVException {

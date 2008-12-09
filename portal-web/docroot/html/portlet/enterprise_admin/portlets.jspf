@@ -50,7 +50,9 @@ if (showReindexButton) {
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List<Portlet> portlets = ListUtil.sort(PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false), new PortletTitleComparator(application, locale));
+List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+
+Collections.sort(portlets, new PortletTitleComparator(application, locale));
 
 int total = portlets.size();
 

@@ -35,7 +35,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -205,8 +204,7 @@ public class IGImageFinderImpl
 
 			qPos.add(groupId);
 
-			return Collections.unmodifiableList((List<IGImage>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -228,7 +226,7 @@ public class IGImageFinderImpl
 
 			q.addEntity("IGImage", IGImageImpl.class);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -305,8 +303,7 @@ public class IGImageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<IGImage>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

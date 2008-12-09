@@ -33,7 +33,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -115,8 +114,8 @@ public class DLFileRankFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return Collections.unmodifiableList((List<DLFileRank>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<DLFileRank>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

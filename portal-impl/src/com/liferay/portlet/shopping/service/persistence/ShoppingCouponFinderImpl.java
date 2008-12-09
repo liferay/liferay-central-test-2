@@ -34,7 +34,6 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -133,8 +132,8 @@ public class ShoppingCouponFinderImpl
 			qPos.add(discountType);
 			qPos.add(discountType);
 
-			return Collections.unmodifiableList((List<ShoppingCoupon>)
-				QueryUtil.list(q, getDialect(), start, end));
+			return (List<ShoppingCoupon>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

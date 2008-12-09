@@ -35,7 +35,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,7 +65,7 @@ public class LayoutFinderImpl
 
 			q.addEntity("Layout", LayoutImpl.class);
 
-			return Collections.unmodifiableList(q.list());
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -123,7 +122,7 @@ public class LayoutFinderImpl
 						LayoutSoap.toSoapModel(layout), preferencesPortletId));
 			}
 
-			return Collections.unmodifiableList(layoutReferences);
+			return layoutReferences;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
