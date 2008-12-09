@@ -267,8 +267,8 @@ public class ConfigurationImpl
 
 		String protocol = url.getProtocol();
 
-		if (protocol.equals("jar") || protocol.equals("wsjar") ||
-			protocol.equals("zip")) {
+		if (protocol.equals("jar") || protocol.equals("vfszip") ||
+			protocol.equals("wsjar") || protocol.equals("zip")) {
 
 			name = url.toExternalForm();
 		}
