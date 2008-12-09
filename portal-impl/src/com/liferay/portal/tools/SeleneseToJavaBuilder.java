@@ -199,7 +199,12 @@ public class SeleneseToJavaBuilder {
 			String param2 = fixParam(params[1]);
 			String param3 = fixParam(params[2]);
 
-			if (param1.equals("assertConfirmation")) {
+			if (param1.equals("assertChecked")) {
+				sb.append("assertTrue(selenium.isChecked(");
+				sb.append(param2);
+				sb.append("));");
+			}
+			else if (param1.equals("assertConfirmation")) {
 				param2 = StringUtil.replace(param2, "?", "[\\\\s\\\\S]");
 
 				sb.append("assertTrue(selenium.getConfirmation().matches(\"^");
