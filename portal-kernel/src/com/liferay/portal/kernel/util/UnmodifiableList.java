@@ -202,7 +202,7 @@ public class UnmodifiableList<E> implements List<E> {
 		return _list.toArray();
 	}
 
-	public T<T>[] toArray(T[] a) {
+	public <T> T[] toArray(T[] a) {
 		return _list.toArray(a);
 	}
 
