@@ -20,27 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journalcontentsearch;
+package com.liferay.portalweb.portlet.journalcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteReplyTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class DeleteReplyTest extends BaseTestCase {
+	public void testDeleteReply() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Journal Content Search Test Page")) {
+				if (selenium.isElementPresent("link=Journal Content Test Page")) {
 					break;
 				}
 			}
@@ -51,7 +50,7 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Journal Content Search Test Page"));
+				"link=Journal Content Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
 			}
@@ -70,41 +69,12 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"CMS-JournalContentSearch\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id=\"CMS-JournalContentSearch\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertFalse(selenium.isElementPresent("This is an edited JC reply!"));
 	}
 }

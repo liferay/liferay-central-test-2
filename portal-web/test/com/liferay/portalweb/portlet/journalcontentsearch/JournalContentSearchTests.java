@@ -33,10 +33,12 @@ import com.liferay.portalweb.portal.BaseTests;
 public class JournalContentSearchTests extends BaseTests {
 
 	public JournalContentSearchTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		//addTestSuite(SearchPortletTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(SearchPortletTest.class);
+		addTestSuite(SearchNullPortletTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

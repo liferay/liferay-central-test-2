@@ -4,46 +4,66 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddPortletTest</title>
+<title>EditReplyTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPortletTest</td></tr>
+<tr><td rowspan="1" colspan="3">EditReplyTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Journal Content Search Test Page</td>
+	<td>link=Journal Content Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Journal Content Search Test Page</td>
+	<td>link=Journal Content Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Add Application</td>
+	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Add Application</td>
+	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id="CMS-JournalContentSearch"]</td>
+	<td>//tr[2]/td/div/textarea</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id="CMS-JournalContentSearch"]/p/a</td>
-	<td></td>
+	<td>typeKeys</td>
+	<td>//tr[2]/td/div/textarea</td>
+	<td>This is an edited JC repl</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/td/div/textarea</td>
+	<td>This is an edited JC reply!</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>//tr[2]/td/input[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[2]/td/input[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=This is an edited JC reply!</td>
 	<td></td>
 </tr>
 

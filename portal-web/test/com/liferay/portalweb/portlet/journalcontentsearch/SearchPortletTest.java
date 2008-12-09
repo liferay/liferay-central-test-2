@@ -39,6 +39,105 @@ public class SearchPortletTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent(
+							"link=Journal Content Search Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Journal Content Search Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Configuration")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_type")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_86_type",
+			RuntimeVariables.replace("label=Announcements"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_77_keywords")) {
 					break;
 				}
@@ -49,9 +148,8 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_77_keywords", RuntimeVariables.replace("test"));
 		selenium.type("_77_keywords", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +157,27 @@ public class SearchPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Journal Article 3")) {
+				if (selenium.isElementPresent("//input[@type='image']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("JCS Setup Test Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
 					break;
 				}
 			}

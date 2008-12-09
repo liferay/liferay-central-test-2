@@ -20,27 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journalcontentsearch;
+package com.liferay.portalweb.portlet.journalcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditReplyTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class EditReplyTest extends BaseTestCase {
+	public void testEditReply() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Journal Content Search Test Page")) {
+				if (selenium.isElementPresent("link=Journal Content Test Page")) {
 					break;
 				}
 			}
@@ -51,7 +50,7 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Journal Content Search Test Page"));
+				"link=Journal Content Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
 			}
@@ -70,7 +69,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Application");
+		selenium.click("link=Edit");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,8 +77,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"CMS-JournalContentSearch\"]")) {
+				if (selenium.isElementPresent("//tr[2]/td/div/textarea")) {
 					break;
 				}
 			}
@@ -89,7 +87,10 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"CMS-JournalContentSearch\"]/p/a");
+		selenium.typeKeys("//tr[2]/td/div/textarea",
+			RuntimeVariables.replace("This is an edited JC repl"));
+		selenium.type("//tr[2]/td/div/textarea",
+			RuntimeVariables.replace("This is an edited JC reply!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -97,7 +98,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("//tr[2]/td/input[1]")) {
 					break;
 				}
 			}
@@ -106,5 +107,11 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//tr[2]/td/input[1]"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=This is an edited JC reply!"));
 	}
 }

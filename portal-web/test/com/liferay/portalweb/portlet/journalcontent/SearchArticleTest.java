@@ -39,7 +39,7 @@ public class SearchArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Select Article']")) {
+				if (selenium.isElementPresent("link=Journal Content Test Page")) {
 					break;
 				}
 			}
@@ -50,7 +50,7 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//img[@title='Select Article']"));
+				"link=Journal Content Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -59,8 +59,7 @@ public class SearchArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"toggle_id_journal_article_searchkeywords")) {
+				if (selenium.isElementPresent("link=Configuration")) {
 					break;
 				}
 			}
@@ -70,11 +69,51 @@ public class SearchArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("toggle_id_journal_article_searchkeywords",
-			RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Advanced \u00bb")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Advanced \u00bb");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_searchArticleId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_86_searchArticleId",
+			RuntimeVariables.replace("Test"));
+		selenium.type("_86_searchArticleId", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_86_searchArticleId", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +121,7 @@ public class SearchArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Journal Article 3")) {
+				if (selenium.isElementPresent("_86_version")) {
 					break;
 				}
 			}
@@ -92,25 +131,182 @@ public class SearchArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Test Journal Article 3"));
+		selenium.type("_86_version", RuntimeVariables.replace("1.0"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test Journal Content Article"));
+		selenium.type("_86_version", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_version")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_version", RuntimeVariables.replace("1.1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_86_version", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_title", RuntimeVariables.replace("Test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test Journal Content Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_title", RuntimeVariables.replace("Test1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_86_title", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_description", RuntimeVariables.replace("Test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test Journal Content Article"));
+		selenium.type("_86_description", RuntimeVariables.replace("Test1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.type("_86_description", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_content", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test Journal Content Article"));
+		selenium.type("_86_content", RuntimeVariables.replace(""));
+		selenium.select("_86_type",
+			RuntimeVariables.replace("label=Announcements"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test Journal Content Article"));
+		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.select("_86_type",
+			RuntimeVariables.replace("label=Announcements"));
+		selenium.select("//select[@name='_86_groupId']",
+			RuntimeVariables.replace("label=Guest"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("No articles were found."));
+		selenium.select("//select[@name='_86_groupId']",
+			RuntimeVariables.replace("label=My Community"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test Journal Content Article"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a third journal article!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"This is a test journal content article!"));
 	}
 }

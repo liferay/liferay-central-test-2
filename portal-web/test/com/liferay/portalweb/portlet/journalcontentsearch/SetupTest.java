@@ -20,26 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journalcontent;
+package com.liferay.portalweb.portlet.journalcontentsearch;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddArticleThroughConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SetupTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddArticleThroughConfigurationTest extends BaseTestCase {
-	public void testAddArticleThroughConfiguration() throws Exception {
+public class SetupTest extends BaseTestCase {
+	public void testSetup() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Journal Content Test Page")) {
+				if (selenium.isElementPresent(
+							"//a[@id=\"my-community-private-pages\"]")) {
 					break;
 				}
 			}
@@ -50,7 +51,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Journal Content Test Page"));
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -59,7 +60,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isElementPresent("//div/a/span")) {
 					break;
 				}
 			}
@@ -69,8 +70,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//div/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +78,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Article']")) {
+				if (selenium.isElementPresent("new_page")) {
 					break;
 				}
 			}
@@ -88,7 +88,103 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Article']");
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("JCS Setup Test Page"));
+		selenium.type("new_page",
+			RuntimeVariables.replace("JCS Setup Test Page"));
+		selenium.click("link=Save");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=JCS Setup Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=JCS Setup Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Add Application")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Add Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id=\"CMS-JournalContent\"]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@id=\"CMS-JournalContent\"]/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Select an existing article or add an article to be displayed in this portlet.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@alt='Add Article']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//img[@alt='Add Article']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -107,9 +203,9 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_15_title",
-			RuntimeVariables.replace("Test Journal Content Article"));
+			RuntimeVariables.replace("JCS Setup Test Article"));
 		selenium.type("_15_title",
-			RuntimeVariables.replace("Test Journal Content Article"));
+			RuntimeVariables.replace("JCS Setup Test Article"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -164,9 +260,9 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a test journal content article!"));
+			RuntimeVariables.replace("This is a JCS setup test article!"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a test journal content article!"));
+			RuntimeVariables.replace("This is a JCS setup test article!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -205,7 +301,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		}
 
 		selenium.type("_15_description",
-			RuntimeVariables.replace("Test Description."));
+			RuntimeVariables.replace("JCS Setup Test Description."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -227,49 +323,6 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=Test Journal Content Article")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"link=Test Journal Content Article"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Test Journal Content Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is a test journal content article!"));
+		assertTrue(selenium.isTextPresent("This is a JCS setup test article!"));
 	}
 }

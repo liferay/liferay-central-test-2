@@ -20,27 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journalcontentsearch;
+package com.liferay.portalweb.portlet.journalcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigureSettingsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class ConfigureSettingsTest extends BaseTestCase {
+	public void testConfigureSettings() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Journal Content Search Test Page")) {
+				if (selenium.isElementPresent("link=Journal Content Test Page")) {
 					break;
 				}
 			}
@@ -51,7 +50,7 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Journal Content Search Test Page"));
+				"link=Journal Content Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("//img[@title='Select Article']")) {
 					break;
 				}
 			}
@@ -70,7 +69,11 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Application");
+		selenium.click(RuntimeVariables.replace(
+				"//img[@title='Select Article']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_86_enableRatingsCheckbox");
+		selenium.click("_86_enableCommentsCheckbox");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,7 +82,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"CMS-JournalContentSearch\"]")) {
+							"link=Test Journal Content Article")) {
 					break;
 				}
 			}
@@ -89,7 +92,9 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"CMS-JournalContentSearch\"]/p/a");
+		selenium.click(RuntimeVariables.replace(
+				"link=Test Journal Content Article"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -97,7 +102,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
 					break;
 				}
 			}
@@ -106,5 +111,12 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This is a test journal content article!"));
+		assertTrue(selenium.isTextPresent("Your Rating"));
+		assertTrue(selenium.isElementPresent("link=Post Reply"));
 	}
 }
