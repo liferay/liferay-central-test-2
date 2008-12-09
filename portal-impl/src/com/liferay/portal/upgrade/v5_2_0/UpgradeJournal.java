@@ -156,6 +156,10 @@ public class UpgradeJournal extends UpgradeProcess {
 			long articleImageId = GetterUtil.getLong(
 				element.attributeValue("id"));
 
+			if (articleImageId <= 0) {
+				continue;
+			}
+
 			JournalArticleImage articleImage =
 				JournalArticleImageLocalServiceUtil.getArticleImage(
 					articleImageId);
