@@ -42,17 +42,17 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <script type="text/javascript">
-function <portlet:namespace />renamePage() {
-	document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "rename";
+	function <portlet:namespace />changeParent() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "changeParent";
 
-	submitForm(document.<portlet:namespace />fm);
-}
+		submitForm(document.<portlet:namespace />fm);
+	}
 
-function <portlet:namespace />changeParent() {
-	document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "changeParent";
+	function <portlet:namespace />renamePage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "rename";
 
-	submitForm(document.<portlet:namespace />fm);
-}
+		submitForm(document.<portlet:namespace />fm);
+	}
 </script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
@@ -142,6 +142,7 @@ function <portlet:namespace />changeParent() {
 				<liferay-ui:message key="new-parent" />
 			</td>
 			<td>
+
 				<%
 				boolean newParentAvailable = true;
 
@@ -157,22 +158,25 @@ function <portlet:namespace />changeParent() {
 				}
 				else {
 				%>
-				<select name="<portlet:namespace />newParentTitle">
-					<option <%= Validator.isNull(wikiPage.getParentTitle()) ? "selected" : "" %> value="">(<liferay-ui:message key="none" />)</option>
 
-					<%
-					for (WikiPage childPage : childPages) {
-						request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
-						request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
-						request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
-					%>
+					<select name="<portlet:namespace />newParentTitle">
+						<option <%= Validator.isNull(wikiPage.getParentTitle()) ? "selected" : "" %> value="">(<liferay-ui:message key="none" />)</option>
 
-						<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
+						<%
+						for (WikiPage childPage : childPages) {
+							request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
+							request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
+							request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
+						%>
 
-					<%
-					}
-					%>
-				</select>
+							<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
+
+						<%
+						}
+						%>
+
+					</select>
+
 				<%
 				}
 				%>
@@ -186,7 +190,9 @@ function <portlet:namespace />changeParent() {
 		<%
 		if (newParentAvailable) {
 		%>
+
 			<input type="button" value="<liferay-ui:message key="change-parent" />" onClick="<portlet:namespace />changeParent()" />
+
 		<%
 		}
 		%>

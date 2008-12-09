@@ -105,11 +105,11 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
+
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
-
-		WikiPagePermission.check(
-			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		wikiPageLocalService.changeParent(
 			getUserId(), nodeId, title, newParentTitle, serviceContext);
@@ -228,11 +228,11 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
+
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
-
-		WikiPagePermission.check(
-			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		wikiPageLocalService.movePage(
 			getUserId(), nodeId, title, newTitle, serviceContext);
