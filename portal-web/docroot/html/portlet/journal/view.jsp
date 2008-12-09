@@ -474,7 +474,7 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
-					<td>
+					<td colspan="2">
 						<%= LanguageUtil.format(pageContext, "last-x-articles", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
@@ -498,9 +498,20 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 					}
 				%>
 
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editArticleURL">
+						<portlet:param name="struts_action" value="/journal/edit_article" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+						<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+						<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+					</portlet:renderURL>
+
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" /><portlet:param name="articleId" value="<%= article.getArticleId() %>" /><portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" /></portlet:renderURL>"><%= article.getArticleId() %></a>
+						<td>
+							<a href="<%= editArticleURL %>"><%= article.getArticleId() %></a>
+						</td>
+						<td>
+							<a href="<%= editArticleURL %>"><%= article.getTitle() %></a>
 						</td>
 					</tr>
 
@@ -513,7 +524,7 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
-					<td>
+					<td colspan="2">
 						<%= LanguageUtil.format(pageContext, "last-x-structures", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
@@ -537,9 +548,19 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 					}
 				%>
 
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editStructureURL">
+						<portlet:param name="struts_action" value="/journal/edit_structure" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
+						<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
+					</portlet:renderURL>
+
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" /><portlet:param name="structureId" value="<%= structure.getStructureId() %>" /></portlet:renderURL>"><%= structure.getName() %></a>
+						<td>
+							<a href="<%= editStructureURL %>"><%= structure.getId() %></a>
+						</td>
+						<td>
+							<a href="<%= editStructureURL %>"><%= structure.getName() %></a>
 						</td>
 					</tr>
 
@@ -552,7 +573,7 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
-					<td>
+					<td colspan="2">
 						<%= LanguageUtil.format(pageContext, "last-x-templates", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
@@ -576,9 +597,19 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 					}
 				%>
 
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL">
+						<portlet:param name="struts_action" value="/journal/edit_template" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
+						<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
+					</portlet:renderURL>
+
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" /><portlet:param name="templateId" value="<%= template.getTemplateId() %>" /></portlet:renderURL>"><%= template.getName() %></a>
+						<td>
+							<a href="<%= editTemplateURL %>"><%= template.getId() %></a>
+						</td>
+						<td>
+							<a href="<%= editTemplateURL %>"><%= template.getName() %></a>
 						</td>
 					</tr>
 
