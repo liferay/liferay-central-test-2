@@ -55,8 +55,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 
 		selenium.type("toggle_id_directory_organization_searchkeywords",
 			RuntimeVariables.replace("Liferay"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Organizations']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

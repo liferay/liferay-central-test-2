@@ -35,12 +35,11 @@ public class SearchUsersTest extends BaseTestCase {
 	public void testSearchUsers() throws Exception {
 		selenium.type("toggle_id_directory_user_searchkeywords",
 			RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Users']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Test"));
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(""));
+		assertTrue(selenium.isTextPresent(""));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

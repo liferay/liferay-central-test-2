@@ -59,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Search Users']")) {
+				if (selenium.isElementPresent("//input[@value='Search']")) {
 					break;
 				}
 			}
