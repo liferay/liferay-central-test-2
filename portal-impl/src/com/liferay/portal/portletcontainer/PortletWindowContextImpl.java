@@ -179,8 +179,9 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getLocaleString() {
-		ThemeDisplay themeDisplay = _getThemeDisplay();
-		
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		Locale locale = themeDisplay.getLocale();
 
 		if (locale == null) {
@@ -445,7 +446,8 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		List<Portlet> portlets = new ArrayList<Portlet>();
 
 		try {
-			ThemeDisplay themeDisplay = _getThemeDisplay();
+			ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			List<Layout> layouts = themeDisplay.getLayouts();
 
@@ -533,13 +535,6 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		}
 
 		return portlets;
-	}
-
-	private ThemeDisplay _getThemeDisplay() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		return themeDisplay;
 	}
 
 	private static Log _log = LogFactory.getLog(PortletWindowContextImpl.class);
