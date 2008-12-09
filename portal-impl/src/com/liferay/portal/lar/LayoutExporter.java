@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -61,7 +60,6 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsVocabulary;
@@ -302,37 +300,12 @@ public class LayoutExporter {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				long scopeGroupId = groupId;
-
 				for (String portletId : layoutTypePortlet.getPortletIds()) {
-					javax.portlet.PortletPreferences jxPrefs =
-						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-							layout, portletId);
-
-					long scopeLayoutId = GetterUtil.getLong(
-						jxPrefs.getValue("lfr-scope-layout-id", null));
-
-					if (scopeLayoutId != 0) {
-						Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-							groupId, layout.isPrivateLayout(), scopeLayoutId);
-
-						Group scopeGroup = scopeLayout.getScopeGroup();
-
-						if (scopeGroup != null) {
-							scopeGroupId = scopeGroup.getGroupId();
-						}
-					}
-
 					String key = PortletPermissionUtil.getPrimaryKey(
 						layout.getPlid(), portletId);
 
 					portletIds.put(
-						key,
-						new Object[] {
-							portletId, layout.getPlid(), scopeGroupId,
-							scopeLayoutId
-						}
-					);
+						key, new Object[] {portletId, layout.getPlid()});
 				}
 			}
 
@@ -373,15 +346,11 @@ public class LayoutExporter {
 
 			String portletId = (String)portletIdsEntry.getValue()[0];
 			long plid = (Long)portletIdsEntry.getValue()[1];
-			long scopeGroupId = (Long)portletIdsEntry.getValue()[2];
-			long scopeLayoutId = (Long)portletIdsEntry.getValue()[3];
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
-			context.setScopeGroupId(scopeGroupId);
-			context.setScopeLayoutId(scopeLayoutId);
 
 			boolean[] exportPortletControls = getExportPortletControls(
 				context.getCompanyId(), portletId, context, parameterMap);

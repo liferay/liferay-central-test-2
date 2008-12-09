@@ -28,7 +28,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -183,30 +182,12 @@ public class PortletExporter {
 			throw new SystemException(ioe);
 		}
 
-		long scopeGroupId = layout.getGroupId();
-
-		javax.portlet.PortletPreferences jxPrefs =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portletId);
-
-		long scopeLayoutId = GetterUtil.getLong(
-			jxPrefs.getValue("lfr-scope-layout-id", null));
-
-		if (scopeLayoutId != 0) {
-			Group scopeGroup = layout.getScopeGroup();
-
-			if (scopeGroup != null) {
-				scopeGroupId = scopeGroup.getGroupId();
-			}
-		}
-
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, scopeGroupId, parameterMap, new HashSet<String>(),
+			companyId, layout.getGroupId(), parameterMap, new HashSet<String>(),
 			startDate, endDate, zipWriter);
 
 		context.setPlid(plid);
 		context.setOldPlid(plid);
-		context.setScopeLayoutId(scopeLayoutId);
 
 		// Build compatibility
 
@@ -228,7 +209,7 @@ public class PortletExporter {
 		}
 
 		header.addAttribute("type", "portlet");
-		header.addAttribute("group-id", String.valueOf(scopeGroupId));
+		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
 		header.addAttribute(
 			"private-layout", String.valueOf(layout.isPrivateLayout()));
 		header.addAttribute(
@@ -524,8 +505,6 @@ public class PortletExporter {
 			return;
 		}
 
-		String key = portletId + StringPool.AT + context.getScopeLayoutId();
-
 		if ((!portlet.isInstanceable()) &&
 			(!portlet.isPreferencesUniquePerLayout()) &&
 			(context.hasNotUniquePerLayout(portletId))) {
@@ -541,8 +520,6 @@ public class PortletExporter {
 		portletEl.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 		portletEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
-		portletEl.addAttribute(
-			"scope-layout-id", String.valueOf(context.getScopeLayoutId()));
 
 		// Data
 
@@ -552,8 +529,8 @@ public class PortletExporter {
 
 		if (exportPortletData) {
 			if (!portlet.isPreferencesUniquePerLayout()) {
-				if (!context.hasNotUniquePerLayout(key)) {
-					context.putNotUniquePerLayout(key);
+				if (!context.hasNotUniquePerLayout(portletId)) {
+					context.putNotUniquePerLayout(portletId);
 
 					exportPortletData(
 						context, portlet, layout, jxPrefs, portletEl);
@@ -702,10 +679,6 @@ public class PortletExporter {
 
 		String data = null;
 
-		long groupId = context.getGroupId();
-
-		context.setGroupId(context.getScopeGroupId());
-
 		try {
 			data = (String)PortletClassInvoker.invoke(
 				portletId, portletDataHandlerClass, "exportData", context,
@@ -713,9 +686,6 @@ public class PortletExporter {
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
-		}
-		finally {
-			context.setGroupId(groupId);
 		}
 
 		if (Validator.isNull(data)) {

@@ -54,7 +54,18 @@ Group group = layout.getGroup();
 	<td>
 		<select name="<portlet:namespace />scopeLayoutId">
 
-			<option <%= (scopeLayoutId == 0) ? "selected" : "" %> value="0"> <liferay-ui:message key="default" /></option>
+			<%
+			String currentGroupLabel = "current-community";
+
+			if (group.isOrganization()) {
+				currentGroupLabel = "current-organization";
+			}
+			else if (group.isUser()) {
+				currentGroupLabel = "current-user";
+			}
+			%>
+
+			<option <%= (scopeLayoutId == 0) ? "selected" : "" %> value="0"> <liferay-ui:message key="<%= currentGroupLabel %>" /> (<%= group.getDescriptiveName() %>)</option>
 			<option <%= (scopeLayoutId == layout.getLayoutId()) ? "selected" : "" %> value="<%= layout.getLayoutId() %>"><liferay-ui:message key="current-page" /> (<%= HtmlUtil.escape(layout.getName(locale)) %>)</option>
 
 			<%

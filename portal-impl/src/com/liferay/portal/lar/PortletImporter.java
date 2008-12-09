@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -56,7 +55,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -128,7 +126,6 @@ public class PortletImporter {
 			strategy, zipReader);
 
 		context.setPlid(plid);
-		context.setPrivateLayout(layout.isPrivateLayout());
 
 		// Zip
 
@@ -224,7 +221,8 @@ public class PortletImporter {
 		// Portlet preferences
 
 		importPortletPreferences(
-			context, layout, portletId, portletEl, importPortletSetup,
+			context, layout.getCompanyId(), layout.getGroupId(), plid,
+			portletId, portletEl, importPortletSetup,
 			importPortletArchivedSetups, importUserPreferences);
 
 		// Portlet data
@@ -396,33 +394,6 @@ public class PortletImporter {
 			_log.debug("Importing data for " + portletId);
 		}
 
-		// Layout scope
-
-		long groupId = context.getGroupId();
-
-		long scopeLayoutId = context.getScopeLayoutId();
-
-		if (scopeLayoutId > 0) {
-			scopeLayoutId = GetterUtil.getLong(
-				portletDataRefEl.getParent().attributeValue("scope-layout-id"));
-		}
-
-		if (scopeLayoutId > 0) {
-			try {
-				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-					context.getGroupId(), context.isPrivateLayout(),
-					scopeLayoutId);
-
-				if (scopeLayout.hasScopeGroup()) {
-					Group scopeGroup = scopeLayout.getScopeGroup();
-
-					context.setGroupId(scopeGroup.getGroupId());
-				}
-			}
-			catch (PortalException pe) {
-			}
-		}
-
 		PortletPreferencesImpl preferencesImpl = null;
 
 		if (portletPreferences != null) {
@@ -443,9 +414,6 @@ public class PortletImporter {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-		finally {
-			context.setGroupId(groupId);
-		}
 
 		if (preferencesImpl == null) {
 			return null;
@@ -455,24 +423,12 @@ public class PortletImporter {
 	}
 
 	protected void importPortletPreferences(
-			PortletDataContext context, Layout layout, String portletId,
-			Element parentEl, boolean importPortletSetup,
+			PortletDataContext context, long companyId, long groupId, long plid,
+			String portletId, Element parentEl, boolean importPortletSetup,
 			boolean importPortletArchivedSetups, boolean importUserPreferences)
 		throws PortalException, SystemException {
 
-		long companyId = layout.getCompanyId();
-		long groupId =  layout.getGroupId();
-		long plid = layout.getPlid();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
-
-		javax.portlet.PortletPreferences jxPrefs =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portletId);
-
-		long scopeLayoutId = GetterUtil.getLong(
-			jxPrefs.getValue("lfr-scope-layout-id", null));
-
-		context.setScopeLayoutId(scopeLayoutId);
 
 		List<Element> preferencesEls = parentEl.elements("portlet-preferences");
 
@@ -578,20 +534,6 @@ public class PortletImporter {
 				PortletPreferencesUtil.update(portletPreferences, true);
 			}
 		}
-
-		jxPrefs = PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-			layout, portletId);
-
-		try {
-			jxPrefs.setValue(
-				"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
-
-			jxPrefs.store();
-		}
-		catch (Exception e) {
-			throw new PortalException(e);
-		}
-
 	}
 
 	protected void readComments(PortletDataContext context, Element parentEl)
