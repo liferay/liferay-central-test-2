@@ -89,8 +89,8 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Blogs Test Page"));
-		selenium.type("new_page", RuntimeVariables.replace("Blogs Test Page"));
+			RuntimeVariables.replace("RB Setup Test Page"));
+		selenium.type("new_page", RuntimeVariables.replace("RB Setup Test Page"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -99,7 +99,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isElementPresent("link=RB Setup Test Page")) {
 					break;
 				}
 			}
@@ -109,7 +109,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.click(RuntimeVariables.replace("link=RB Setup Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -186,10 +186,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("Recent Bloggers Test"));
-		selenium.type("_33_title",
-			RuntimeVariables.replace("Recent Bloggers Test"));
+		selenium.typeKeys("_33_title", RuntimeVariables.replace("RB Test Entr"));
+		selenium.type("_33_title", RuntimeVariables.replace("RB Test Entry"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -244,9 +242,9 @@ public class SetupTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a test for Recent Bloggers!"));
+			RuntimeVariables.replace("This is a RB setup test entr"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a test for Recent Bloggers!"));
+			RuntimeVariables.replace("This is a RB setup test entry!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -267,7 +265,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Recent Bloggers Test"));
+		assertTrue(selenium.isElementPresent("link=RB Test Entry"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}
