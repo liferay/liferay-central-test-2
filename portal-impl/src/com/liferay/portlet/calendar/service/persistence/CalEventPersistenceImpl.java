@@ -1548,11 +1548,17 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<CalEvent> list = null;
 
 				if (obc == null) {
+					list = (List<CalEvent>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<CalEvent>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

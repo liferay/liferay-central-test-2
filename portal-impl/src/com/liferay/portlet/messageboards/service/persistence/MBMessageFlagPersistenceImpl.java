@@ -1180,11 +1180,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBMessageFlag> list = null;
 
 				if (obc == null) {
+					list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

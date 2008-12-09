@@ -890,11 +890,17 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<SCLicense> list = null;
 
 				if (obc == null) {
+					list = (List<SCLicense>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<SCLicense>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

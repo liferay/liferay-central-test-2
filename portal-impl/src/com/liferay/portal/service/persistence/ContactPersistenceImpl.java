@@ -566,11 +566,17 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Contact> list = (List<Contact>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Contact> list = null;
 
 				if (obc == null) {
+					list = (List<Contact>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Contact>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

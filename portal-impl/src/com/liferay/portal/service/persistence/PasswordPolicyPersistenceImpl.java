@@ -567,11 +567,17 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<PasswordPolicy> list = (List<PasswordPolicy>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<PasswordPolicy> list = null;
 
 				if (obc == null) {
+					list = (List<PasswordPolicy>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<PasswordPolicy>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

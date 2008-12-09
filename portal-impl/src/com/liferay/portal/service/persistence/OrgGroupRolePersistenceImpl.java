@@ -802,11 +802,17 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<OrgGroupRole> list = null;
 
 				if (obc == null) {
+					list = (List<OrgGroupRole>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<OrgGroupRole>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

@@ -467,11 +467,17 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<WikiPageResource> list = (List<WikiPageResource>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<WikiPageResource> list = null;
 
 				if (obc == null) {
+					list = (List<WikiPageResource>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<WikiPageResource>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

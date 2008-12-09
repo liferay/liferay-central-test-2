@@ -610,11 +610,17 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingItemField> list = (List<ShoppingItemField>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<ShoppingItemField> list = null;
 
 				if (obc == null) {
+					list = (List<ShoppingItemField>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<ShoppingItemField>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

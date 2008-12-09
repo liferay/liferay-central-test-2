@@ -1921,11 +1921,17 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<DLFolder> list = null;
 
 				if (obc == null) {
+					list = (List<DLFolder>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<DLFolder>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

@@ -599,11 +599,17 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBThread> list = null;
 
 				if (obc == null) {
+					list = (List<MBThread>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBThread>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

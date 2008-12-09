@@ -1249,11 +1249,17 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<TagsProperty> list = null;
 
 				if (obc == null) {
+					list = (List<TagsProperty>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<TagsProperty>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

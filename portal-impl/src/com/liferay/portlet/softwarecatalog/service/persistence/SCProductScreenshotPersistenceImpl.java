@@ -915,11 +915,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductScreenshot> list = (List<SCProductScreenshot>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<SCProductScreenshot> list = null;
 
 				if (obc == null) {
+					list = (List<SCProductScreenshot>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<SCProductScreenshot>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

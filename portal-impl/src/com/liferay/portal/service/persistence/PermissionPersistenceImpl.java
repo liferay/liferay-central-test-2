@@ -727,11 +727,17 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Permission> list = (List<Permission>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Permission> list = null;
 
 				if (obc == null) {
+					list = (List<Permission>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Permission>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

@@ -350,11 +350,17 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsSource> list = (List<TagsSource>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<TagsSource> list = null;
 
 				if (obc == null) {
+					list = (List<TagsSource>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<TagsSource>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

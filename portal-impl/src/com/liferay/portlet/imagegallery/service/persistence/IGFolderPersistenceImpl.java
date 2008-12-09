@@ -1628,11 +1628,17 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<IGFolder> list = null;
 
 				if (obc == null) {
+					list = (List<IGFolder>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<IGFolder>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

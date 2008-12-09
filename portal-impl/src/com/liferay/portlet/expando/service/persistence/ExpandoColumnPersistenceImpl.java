@@ -715,11 +715,17 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ExpandoColumn> list = (List<ExpandoColumn>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<ExpandoColumn> list = null;
 
 				if (obc == null) {
+					list = (List<ExpandoColumn>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<ExpandoColumn>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

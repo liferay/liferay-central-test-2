@@ -722,11 +722,17 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<RatingsEntry> list = (List<RatingsEntry>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<RatingsEntry> list = null;
 
 				if (obc == null) {
+					list = (List<RatingsEntry>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<RatingsEntry>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

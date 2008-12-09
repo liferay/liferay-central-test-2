@@ -1024,11 +1024,17 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileRank> list = (List<DLFileRank>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<DLFileRank> list = null;
 
 				if (obc == null) {
+					list = (List<DLFileRank>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<DLFileRank>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

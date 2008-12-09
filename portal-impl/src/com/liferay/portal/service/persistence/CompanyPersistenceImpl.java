@@ -723,11 +723,17 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Company> list = (List<Company>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Company> list = null;
 
 				if (obc == null) {
+					list = (List<Company>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Company>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

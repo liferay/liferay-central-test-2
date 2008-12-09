@@ -1041,11 +1041,17 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBMailingList> list = (List<MBMailingList>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBMailingList> list = null;
 
 				if (obc == null) {
+					list = (List<MBMailingList>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBMailingList>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

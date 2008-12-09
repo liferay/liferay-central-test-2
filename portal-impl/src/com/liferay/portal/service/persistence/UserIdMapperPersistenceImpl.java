@@ -803,11 +803,17 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserIdMapper> list = (List<UserIdMapper>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<UserIdMapper> list = null;
 
 				if (obc == null) {
+					list = (List<UserIdMapper>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<UserIdMapper>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

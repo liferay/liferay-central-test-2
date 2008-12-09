@@ -1220,11 +1220,17 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBStatsUser> list = null;
 
 				if (obc == null) {
+					list = (List<MBStatsUser>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBStatsUser>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

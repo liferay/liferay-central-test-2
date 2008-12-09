@@ -883,11 +883,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<BookmarksEntry> list = null;
 
 				if (obc == null) {
+					list = (List<BookmarksEntry>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<BookmarksEntry>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

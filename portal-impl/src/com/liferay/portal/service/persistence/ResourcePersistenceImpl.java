@@ -674,11 +674,17 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Resource> list = (List<Resource>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Resource> list = null;
 
 				if (obc == null) {
+					list = (List<Resource>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Resource>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

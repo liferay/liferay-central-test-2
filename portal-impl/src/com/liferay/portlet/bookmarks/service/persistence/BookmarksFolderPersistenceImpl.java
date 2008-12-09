@@ -1517,11 +1517,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<BookmarksFolder> list = (List<BookmarksFolder>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<BookmarksFolder> list = null;
 
 				if (obc == null) {
+					list = (List<BookmarksFolder>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<BookmarksFolder>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

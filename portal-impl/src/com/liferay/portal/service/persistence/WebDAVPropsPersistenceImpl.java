@@ -456,11 +456,17 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<WebDAVProps> list = (List<WebDAVProps>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<WebDAVProps> list = null;
 
 				if (obc == null) {
+					list = (List<WebDAVProps>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<WebDAVProps>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

@@ -582,11 +582,17 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserTrackerPath> list = (List<UserTrackerPath>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<UserTrackerPath> list = null;
 
 				if (obc == null) {
+					list = (List<UserTrackerPath>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<UserTrackerPath>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

@@ -732,11 +732,17 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<SCProductVersion> list = null;
 
 				if (obc == null) {
+					list = (List<SCProductVersion>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<SCProductVersion>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

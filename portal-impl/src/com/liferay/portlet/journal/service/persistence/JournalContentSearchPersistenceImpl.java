@@ -1991,11 +1991,17 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<JournalContentSearch> list = null;
 
 				if (obc == null) {
+					list = (List<JournalContentSearch>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<JournalContentSearch>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

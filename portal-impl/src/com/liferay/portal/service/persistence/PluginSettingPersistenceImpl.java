@@ -714,11 +714,17 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<PluginSetting> list = (List<PluginSetting>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<PluginSetting> list = null;
 
 				if (obc == null) {
+					list = (List<PluginSetting>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<PluginSetting>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

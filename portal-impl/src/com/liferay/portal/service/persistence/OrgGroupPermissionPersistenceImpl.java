@@ -816,11 +816,17 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgGroupPermission> list = (List<OrgGroupPermission>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<OrgGroupPermission> list = null;
 
 				if (obc == null) {
+					list = (List<OrgGroupPermission>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<OrgGroupPermission>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

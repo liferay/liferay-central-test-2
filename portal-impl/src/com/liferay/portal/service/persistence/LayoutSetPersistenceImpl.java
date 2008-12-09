@@ -771,11 +771,17 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<LayoutSet> list = null;
 
 				if (obc == null) {
+					list = (List<LayoutSet>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<LayoutSet>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

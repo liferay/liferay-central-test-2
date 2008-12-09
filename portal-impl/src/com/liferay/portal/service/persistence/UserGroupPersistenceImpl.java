@@ -993,11 +993,17 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserGroup> list = (List<UserGroup>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<UserGroup> list = null;
 
 				if (obc == null) {
+					list = (List<UserGroup>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<UserGroup>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

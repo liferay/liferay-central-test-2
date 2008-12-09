@@ -852,11 +852,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Role> list = (List<Role>)QueryUtil.list(q, getDialect(),
-						start, end);
+				List<Role> list = null;
 
 				if (obc == null) {
+					list = (List<Role>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Role>)QueryUtil.list(q, getDialect(), start,
+							end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

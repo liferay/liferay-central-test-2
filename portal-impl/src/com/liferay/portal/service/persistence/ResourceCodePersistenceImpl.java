@@ -946,11 +946,17 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<ResourceCode> list = null;
 
 				if (obc == null) {
+					list = (List<ResourceCode>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<ResourceCode>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

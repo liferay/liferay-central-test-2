@@ -1534,11 +1534,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<UserGroupRole> list = null;
 
 				if (obc == null) {
+					list = (List<UserGroupRole>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<UserGroupRole>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

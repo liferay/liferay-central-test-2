@@ -1851,11 +1851,17 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<TasksReview> list = null;
 
 				if (obc == null) {
+					list = (List<TasksReview>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<TasksReview>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

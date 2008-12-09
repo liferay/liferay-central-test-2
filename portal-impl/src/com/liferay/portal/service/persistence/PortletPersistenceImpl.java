@@ -671,11 +671,17 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Portlet> list = (List<Portlet>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Portlet> list = null;
 
 				if (obc == null) {
+					list = (List<Portlet>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Portlet>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

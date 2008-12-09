@@ -608,11 +608,17 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ListType> list = (List<ListType>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<ListType> list = null;
 
 				if (obc == null) {
+					list = (List<ListType>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<ListType>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

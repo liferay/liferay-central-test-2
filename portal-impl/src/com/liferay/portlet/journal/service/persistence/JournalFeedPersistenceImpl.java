@@ -1096,11 +1096,17 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<JournalFeed> list = null;
 
 				if (obc == null) {
+					list = (List<JournalFeed>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<JournalFeed>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

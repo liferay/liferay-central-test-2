@@ -1533,11 +1533,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<IGImage> list = null;
 
 				if (obc == null) {
+					list = (List<IGImage>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<IGImage>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

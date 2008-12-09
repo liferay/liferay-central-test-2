@@ -729,11 +729,17 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<AnnouncementsFlag> list = null;
 
 				if (obc == null) {
+					list = (List<AnnouncementsFlag>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<AnnouncementsFlag>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

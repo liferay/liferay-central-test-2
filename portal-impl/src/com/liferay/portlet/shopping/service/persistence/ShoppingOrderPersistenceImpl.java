@@ -1130,11 +1130,17 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingOrder> list = (List<ShoppingOrder>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<ShoppingOrder> list = null;
 
 				if (obc == null) {
+					list = (List<ShoppingOrder>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<ShoppingOrder>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

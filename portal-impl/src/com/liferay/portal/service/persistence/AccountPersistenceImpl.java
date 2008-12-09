@@ -343,11 +343,17 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Account> list = (List<Account>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Account> list = null;
 
 				if (obc == null) {
+					list = (List<Account>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Account>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

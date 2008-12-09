@@ -604,11 +604,17 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<PasswordTracker> list = (List<PasswordTracker>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<PasswordTracker> list = null;
 
 				if (obc == null) {
+					list = (List<PasswordTracker>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<PasswordTracker>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

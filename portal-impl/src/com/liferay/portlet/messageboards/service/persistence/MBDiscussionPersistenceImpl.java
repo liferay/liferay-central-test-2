@@ -779,11 +779,17 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBDiscussion> list = (List<MBDiscussion>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBDiscussion> list = null;
 
 				if (obc == null) {
+					list = (List<MBDiscussion>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBDiscussion>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

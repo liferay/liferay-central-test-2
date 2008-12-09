@@ -2822,11 +2822,17 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<JournalArticle> list = null;
 
 				if (obc == null) {
+					list = (List<JournalArticle>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<JournalArticle>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

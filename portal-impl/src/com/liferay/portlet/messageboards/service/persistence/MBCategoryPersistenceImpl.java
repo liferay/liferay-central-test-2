@@ -1510,11 +1510,17 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBCategory> list = null;
 
 				if (obc == null) {
+					list = (List<MBCategory>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBCategory>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

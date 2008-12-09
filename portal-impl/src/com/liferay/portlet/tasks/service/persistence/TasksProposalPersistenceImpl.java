@@ -992,11 +992,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<TasksProposal> list = null;
 
 				if (obc == null) {
+					list = (List<TasksProposal>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<TasksProposal>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

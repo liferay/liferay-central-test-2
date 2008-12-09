@@ -2408,11 +2408,17 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<SocialActivity> list = null;
 
 				if (obc == null) {
+					list = (List<SocialActivity>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<SocialActivity>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

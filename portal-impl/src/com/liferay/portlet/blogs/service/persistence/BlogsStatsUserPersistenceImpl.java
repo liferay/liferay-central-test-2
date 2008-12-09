@@ -1490,11 +1490,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<BlogsStatsUser> list = null;
 
 				if (obc == null) {
+					list = (List<BlogsStatsUser>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<BlogsStatsUser>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

@@ -1020,11 +1020,17 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<TagsVocabulary> list = null;
 
 				if (obc == null) {
+					list = (List<TagsVocabulary>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<TagsVocabulary>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

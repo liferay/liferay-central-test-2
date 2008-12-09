@@ -733,11 +733,17 @@ public class WSRPConsumerRegistrationPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<WSRPConsumerRegistration> list = (List<WSRPConsumerRegistration>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<WSRPConsumerRegistration> list = null;
 
 				if (obc == null) {
+					list = (List<WSRPConsumerRegistration>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<WSRPConsumerRegistration>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

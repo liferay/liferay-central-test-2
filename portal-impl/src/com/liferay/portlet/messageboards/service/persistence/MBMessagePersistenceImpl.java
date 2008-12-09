@@ -1914,11 +1914,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<MBMessage> list = null;
 
 				if (obc == null) {
+					list = (List<MBMessage>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBMessage>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

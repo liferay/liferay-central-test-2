@@ -1115,11 +1115,17 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
-						start, end);
+				List<MBBan> list = null;
 
 				if (obc == null) {
+					list = (List<MBBan>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<MBBan>)QueryUtil.list(q, getDialect(), start,
+							end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,

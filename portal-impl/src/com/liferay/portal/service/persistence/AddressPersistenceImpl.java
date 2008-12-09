@@ -2031,11 +2031,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<Address> list = null;
 
 				if (obc == null) {
+					list = (List<Address>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
 					Collections.sort(list);
+				}
+				else {
+					list = (List<Address>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
 
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
