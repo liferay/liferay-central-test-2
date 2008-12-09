@@ -225,6 +225,26 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\"));");
 			}
+			else if (param1.equals("assertSelectOptions")) {
+				String[] expectedArray = StringUtil.split(param3);
+
+				sb.append("String[] actualArray = ");
+				sb.append("selenium.getSelectOptions(\"");
+				sb.append(param2);
+				sb.append("\");");
+
+				sb.append("assertEquals(");
+				sb.append(expectedArray.length);
+				sb.append(", actualArray.length);");
+
+				for (int i = 0; i < expectedArray.length; i++) {
+					sb.append("assertEquals(\"");
+					sb.append(expectedArray[i]);
+					sb.append("\", actualArray[");
+					sb.append(i);
+					sb.append("]);");
+				}
+			}
 			else if (param1.equals("assertTextPresent") ||
 					 param1.equals("assertTextNotPresent")) {
 
