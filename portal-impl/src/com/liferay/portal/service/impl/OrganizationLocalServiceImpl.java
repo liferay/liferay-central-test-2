@@ -361,6 +361,13 @@ public class OrganizationLocalServiceImpl
 		return userPersistence.getOrganizations(userId);
 	}
 
+	public List<Organization> getUserOrganizations(
+			long userId, int start, int end)
+		throws SystemException {
+
+		return userPersistence.getOrganizations(userId, start, end);
+	}
+
 	public int getUserOrganizationsCount(long userId) throws SystemException {
 		return userPersistence.getOrganizationsSize(userId);
 	}

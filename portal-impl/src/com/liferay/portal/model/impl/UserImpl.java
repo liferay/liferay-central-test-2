@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -226,11 +227,23 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public List<Group> getMyPlaces() {
+		return getMyPlaces(QueryUtil.ALL_POS);
+	}
+
+	public List<Group> getMyPlaces(int max) {
 		List<Group> myPlaces = new UniqueList<Group>();
 
 		try {
 			if (isDefaultUser()) {
 				return myPlaces;
+			}
+
+			int start = QueryUtil.ALL_POS;
+			int end = QueryUtil.ALL_POS;
+
+			if (max != QueryUtil.ALL_POS) {
+				start = 0;
+				end = max;
 			}
 
 			LinkedHashMap<String, Object> groupParams =
@@ -240,10 +253,11 @@ public class UserImpl extends UserModelImpl implements User {
 			//groupParams.put("pageCount", StringPool.BLANK);
 
 			myPlaces = GroupLocalServiceUtil.search(
-				getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
+				getCompanyId(), null, null, groupParams, start, end);
 
-			List<Organization> userOrgs = getOrganizations();
+			List<Organization> userOrgs =
+				OrganizationLocalServiceUtil.getUserOrganizations(
+					getUserId(), start, end);
 
 			for (Organization organization : userOrgs) {
 				myPlaces.add(0, organization.getGroup());
@@ -263,6 +277,10 @@ public class UserImpl extends UserModelImpl implements User {
 				Group userGroup = getGroup();
 
 				myPlaces.add(0, userGroup);
+			}
+
+			if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
+				myPlaces = ListUtil.subList(myPlaces, start, end);
 			}
 		}
 		catch (Exception e) {

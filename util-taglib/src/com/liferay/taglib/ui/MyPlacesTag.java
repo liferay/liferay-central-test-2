@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -47,13 +48,23 @@ public class MyPlacesTag extends IncludeTag {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, servletContext, request, response);
+		doTag(_PAGE, _MAX, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, ServletContext servletContext,
+			int max, ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
+
+		doTag(_PAGE, max, servletContext, request, response);
+	}
+
+	public static void doTag(
+			String page, int max, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
+
+		request.setAttribute("liferay-ui:my_places:max", String.valueOf(max));
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
@@ -67,7 +78,7 @@ public class MyPlacesTag extends IncludeTag {
 			HttpServletRequest request = getServletRequest();
 			StringServletResponse stringResponse = getServletResponse();
 
-			doTag(servletContext, request, stringResponse);
+			doTag(getPage(), _max, servletContext, request, stringResponse);
 
 			pageContext.getOut().print(stringResponse.getString());
 
@@ -78,10 +89,18 @@ public class MyPlacesTag extends IncludeTag {
 		}
 	}
 
+	public void setMax(int max) {
+		_max = max;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/my_places/page.jsp";
+
+	private static final int _MAX = QueryUtil.ALL_POS;
+
+	private int _max = _MAX;
 
 }

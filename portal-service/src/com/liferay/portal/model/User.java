@@ -84,6 +84,8 @@ public interface User extends UserModel {
 
 	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
 
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces(int max);
+
 	public long[] getOrganizationIds();
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations();

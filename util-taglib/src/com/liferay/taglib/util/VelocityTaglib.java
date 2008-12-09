@@ -489,6 +489,14 @@ public class VelocityTaglib {
 		return _stringResponse.getString();
 	}
 
+	public String myPlaces(int max) throws Exception {
+		_stringResponse.recycle();
+
+		MyPlacesTag.doTag(max, _servletContext, _request, _stringResponse);
+
+		return _stringResponse.getString();
+	}
+
 	public String permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey)

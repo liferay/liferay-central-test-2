@@ -27,7 +27,9 @@
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 
 <%
-List<Group> myPlaces = user.getMyPlaces();
+int max = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:my_places:max"));
+
+List<Group> myPlaces = user.getMyPlaces(max);
 %>
 
 <c:if test="<%= myPlaces.size() > 0 %>">
