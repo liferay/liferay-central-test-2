@@ -39,23 +39,7 @@ public class ConfigurePortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Folder")) {
+				if (selenium.isElementPresent("//b")) {
 					break;
 				}
 			}
@@ -79,7 +63,7 @@ public class ConfigurePortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"You have successfully updated the setup. ")) {
+							"You have successfully updated the setup.")) {
 					break;
 				}
 			}

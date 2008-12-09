@@ -62,7 +62,7 @@ public class SearchPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Document")) {
+				if (selenium.isElementPresent("link=DLD Setup Test Folder")) {
 					break;
 				}
 			}

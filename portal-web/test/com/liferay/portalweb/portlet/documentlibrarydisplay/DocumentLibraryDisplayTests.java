@@ -33,11 +33,12 @@ import com.liferay.portalweb.portal.BaseTests;
 public class DocumentLibraryDisplayTests extends BaseTests {
 
 	public DocumentLibraryDisplayTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(ConfigurePortletTest.class);
 		addTestSuite(SearchPortletTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }
