@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
@@ -51,6 +52,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="JSONServiceAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Karthik Sudarshan
  *
  */
 public class JSONServiceAction extends JSONAction {
@@ -129,9 +131,6 @@ public class JSONServiceAction extends JSONAction {
 					request, classObj, methodName, serviceParameters[i],
 					parameterTypes[i]);
 
-				if (args[i] == null) {
-					return null;
-				}
 			}
 
 			try {
@@ -242,7 +241,14 @@ public class JSONServiceAction extends JSONAction {
 			return JSONFactoryUtil.deserialize(jsonObject);
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
-			return ParamUtil.getString(request, parameter);
+			String value = ParamUtil.getString(request, parameter);
+
+			if (Validator.isNull(value)) {
+				return null;
+			}
+			else {
+				return value;
+			}
 		}
 		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
 			return StringUtil.split(ParamUtil.getString(request, parameter));
