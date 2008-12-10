@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Company;
@@ -527,7 +528,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				}
 			}
 
-			eventsPool.put(key, events);
+			eventsPool.put(key, new UnmodifiableList(events));
 		}
 
 		return events;
@@ -582,7 +583,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (events == null) {
 			events = calEventPersistence.findByG_R(groupId, true);
 
-			eventsPool.put(key, events);
+			eventsPool.put(key, new UnmodifiableList(events));
 		}
 
 		return events;
