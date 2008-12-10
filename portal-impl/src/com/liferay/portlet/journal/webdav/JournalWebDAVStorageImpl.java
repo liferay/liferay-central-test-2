@@ -127,15 +127,6 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					catch (NoSuchStructureException nsse) {
 						return null;
 					}
-					catch (Exception ex) {
-						Throwable cause = ex.getCause();
-						if (cause != null &&
-								cause instanceof NoSuchStructureException) {
-							return null;
-						}
-
-						throw new WebDAVException(ex);
-					}
 				}
 				else if (type.equals(_TYPE_TEMPLATES)) {
 					try {
@@ -148,15 +139,6 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					}
 					catch (NoSuchTemplateException nste) {
 						return null;
-					}
-					catch (Exception ex) {
-						Throwable cause = ex.getCause();
-						if (cause != null &&
-								cause instanceof NoSuchTemplateException) {
-							return null;
-						}
-
-						throw new WebDAVException(ex);
 					}
 				}
 			}
