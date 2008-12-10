@@ -2471,6 +2471,9 @@
 				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-993.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/wsrp-consumer-portlet.jar</file-name>
@@ -2493,6 +2496,9 @@
 				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-993.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/wsrp-producer-portlet.jar</file-name>
