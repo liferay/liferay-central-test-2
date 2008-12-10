@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.jndi.JNDIUtil;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,7 +40,16 @@ public class JndiObjectFactoryBean
 	extends org.springframework.jndi.JndiObjectFactoryBean {
 
 	protected Object lookup() throws NamingException {
-		return JNDIUtil.lookup(new InitialContext(), getJndiName());
+		try {
+			return JNDIUtil.lookup(new InitialContext(), getJndiName());
+		}
+		catch (Exception e) {
+			_log.error("Unable to lookup " + getJndiName());
+
+			return null;
+		}
 	}
+
+	private static Log _log = LogFactory.getLog(JndiObjectFactoryBean.class);
 
 }
