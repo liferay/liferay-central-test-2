@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/login/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1");
-String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs1 = ParamUtil.getString(request, "tabs1", "general");
+String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 String redirect = ParamUtil.getString(request, "redirect");
 %>
