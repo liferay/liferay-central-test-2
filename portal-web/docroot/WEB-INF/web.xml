@@ -472,7 +472,7 @@
 	<listener>
 		<listener-class>com.liferay.portal.servlet.SharedSessionAttributeListener</listener-class>
 	</listener>
-	<listener>
+	<!--<listener>
 		<listener-class>com.sun.portal.container.service.ServiceManagerContextListenerImpl</listener-class>
 	</listener>
 	<listener>
@@ -480,7 +480,7 @@
 	</listener>
 	<listener>
 		<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-	</listener>
+	</listener>-->
 	<servlet>
 		<servlet-name>Main Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.MainServlet</servlet-class>
