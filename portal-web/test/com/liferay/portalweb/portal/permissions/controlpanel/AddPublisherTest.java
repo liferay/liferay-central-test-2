@@ -87,7 +87,7 @@ public class AddPublisherTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[6]/input[2]")) {
+				if (selenium.isElementPresent("//div[@id='roles']/nobr/a[2]")) {
 					break;
 				}
 			}
@@ -97,9 +97,9 @@ public class AddPublisherTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[6]/input[2]");
-		selenium.waitForPopUp("role", RuntimeVariables.replace("30000"));
+		selenium.click("//div[@id='roles']/nobr/a[2]");
 		Thread.sleep(5000);
+		selenium.waitForPopUp("role", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=role");
 
 		for (int second = 0;; second++) {

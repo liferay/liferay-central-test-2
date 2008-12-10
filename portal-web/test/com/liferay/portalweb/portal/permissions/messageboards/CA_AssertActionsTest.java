@@ -87,7 +87,8 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Message Boards Permissions Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
 		selenium.click("//td[5]/ul/li/strong/span");
