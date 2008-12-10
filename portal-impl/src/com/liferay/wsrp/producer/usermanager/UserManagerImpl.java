@@ -155,6 +155,7 @@ public class UserManagerImpl implements UserManager{
 
 		themeDisplay.setCompany(PortalUtil.getCompany(request));
 		themeDisplay.setUser(themeDisplay.getDefaultUser());
+		themeDisplay.setLocale(request.getLocale());
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			PortalInstances.getCompanyId(request), GroupConstants.GUEST);
