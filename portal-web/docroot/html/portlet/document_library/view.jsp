@@ -147,7 +147,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<table class="lfr-table">
 			<tr>
-				<td>
+				<td class="lfr-label">
 					<liferay-ui:message key="webdav-url" />
 				</td>
 				<td>
