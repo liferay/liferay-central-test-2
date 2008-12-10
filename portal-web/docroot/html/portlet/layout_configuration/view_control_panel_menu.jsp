@@ -107,9 +107,13 @@ public static final List<Portlet> filterPortlets(PermissionChecker permissionChe
 		return filteredPortlets;
 	}
 
-	for (Portlet portlet : filteredPortlets) {
-		if ((contentCategory && portlet.hasAddPortletPermission(permissionChecker.getUserId())) || isShowPortlet(permissionChecker, portlet)) {
-			filteredPortlets.add(portlet);
+	Iterator<Portlet> itr = filteredPortlets.iterator();
+
+	while (itr.hasNext()) {
+		Portlet portlet = itr.next();
+
+		if (!(contentCategory && portlet.hasAddPortletPermission(permissionChecker.getUserId())) && !isShowPortlet(permissionChecker, portlet)) {
+			itr.remove();
 		}
 	}
 
