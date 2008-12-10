@@ -130,7 +130,6 @@ public class JSONServiceAction extends JSONAction {
 				args[i] = getArgValue(
 					request, classObj, methodName, serviceParameters[i],
 					parameterTypes[i]);
-
 			}
 
 			try {
