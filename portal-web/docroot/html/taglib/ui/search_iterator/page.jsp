@@ -97,17 +97,23 @@ List<String> primaryKeys = new ArrayList<String>();
 				}
 			}
 
+			String cssClass = "";
+
 			if (orderCurrentHeader) {
+				cssClass = "sort-column";
+
 				if (orderByType.equals("asc")) {
 					orderByType = "desc";
 				}
 				else {
 					orderByType = "asc";
 				}
+
+				cssClass += " sort-" + orderByType;
 			}
 		%>
 
-			<th class="col-<%= i + 1 %>"
+			<th class="col-<%= i + 1 %> <%= cssClass %>"
 
 				<%--
 
@@ -120,33 +126,28 @@ List<String> primaryKeys = new ArrayList<String>();
 					width="95%"
 				</c:if>
 			>
+				
 				<c:if test="<%= orderKey != null %>">
-					<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
+					<span class="result-column-name">
+						<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
 				</c:if>
 
-				<c:if test="<%= orderCurrentHeader %>">
-					<i>
-				</c:if>
+					<%
+					String headerNameValue = LanguageUtil.get(pageContext, headerName);
+					%>
 
-				<%
-				String headerNameValue = LanguageUtil.get(pageContext, headerName);
-				%>
-
-				<c:choose>
-					<c:when test="<%= Validator.isNull(headerNameValue) %>">
-						<%= StringPool.NBSP %>
-					</c:when>
-					<c:otherwise>
-						<%= headerNameValue %>
-					</c:otherwise>
-				</c:choose>
-
-				<c:if test="<%= orderCurrentHeader %>">
-					</i>
-				</c:if>
+					<c:choose>
+						<c:when test="<%= Validator.isNull(headerNameValue) %>">
+							<%= StringPool.NBSP %>
+						</c:when>
+						<c:otherwise>
+							<%= headerNameValue %>
+						</c:otherwise>
+					</c:choose>
 
 				<c:if test="<%= orderKey != null %>">
-					</a>
+						</a>
+					</span>
 				</c:if>
 			</th>
 

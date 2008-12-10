@@ -38,6 +38,16 @@
 	color: #FFF;
 }
 
+.results-header .sort-column .result-column-name {
+	background: url(../images/arrows/06_up.png) no-repeat 100% 50%;
+	font-style: italic;
+	padding-right: 15px;
+}
+
+.results-header .sort-desc .result-column-name {
+	background-image: url(../images/arrows/06_down.png);
+}
+
 .ui-autocomplete-even, .results-row td {
 	background: #F0F5F7;
 	padding: 5px 10px;

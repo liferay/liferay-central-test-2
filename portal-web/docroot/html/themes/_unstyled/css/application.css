@@ -24,6 +24,12 @@
 .results-header th a, .results-header td a {
 }
 
+.results-header .sort-column .result-column-name {
+}
+
+.results-header .sort-desc .result-column-name {
+}
+
 .ui-autocomplete-even, .results-row td {
 }
 
