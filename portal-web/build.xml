@@ -189,6 +189,26 @@
 					</if>
 				</then>
 			</elseif>
+			<elseif>
+				<equals arg1="${app.server.version}" arg2="5.0" />
+				<then>
+					<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+					<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-logging-spi.jar;${app.server.deploy.dir}/jbossweb.sar/jasper-jdt.jar;${app.server.deploy.dir}/jbossweb.sar/jbossweb.jar;${app.server.dir}/common/lib/el-api.jar" />
+
+					<if>
+						<not>
+							<available file="${classpath.jsp}" />
+						</not>
+						<then>
+							<antcall target="compile-common-lib" />
+
+							<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.deploy.dir}/jbossweb.sar/jstl.jar" dest="${classpath.jsp}" />
+						</then>
+					</if>
+				</then>
+			</elseif>
 		</if>
 
 		<antcall target="compile-common-jsp">
