@@ -191,6 +191,20 @@
 
 	#set ($community_name = $page_group.getDescriptiveName())
 
+	#if	($page_group.getName() == "Guest")
+		#set ($css_class = $css_class + " guest-community")
+	#end
+
+	#if	($layout.isPublicLayout())
+		#set ($css_class = $css_class + " public-page")
+	#else
+		#set ($css_class = $css_class + " private-page")
+	#end
+
+	#if	($page_group.isUser() && $layout.isPrivateLayout())
+		#set ($community_name = $languageUtil.get($company_id, $locale, "my-community"))
+	#end
+
 	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), "ACTION_PHASE"))
 
 	$my_places_portlet_url.setWindowState("normal")

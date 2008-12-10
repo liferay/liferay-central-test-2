@@ -30,6 +30,7 @@ body {
 
 #banner h1.logo {
 	display: block;
+	float: left;
 	font-size: 2em;
 	left: 5%;
 	margin: 25px 0 0;
@@ -38,11 +39,33 @@ body {
 }
 
 #banner .logo a {
+	float: left;
 	text-decoration: none;
 }
 
 .ie6 #banner .logo {
 	zoom: 1;
+}
+
+.current-community {
+	background: url(../images/dock/my_places_public.png) no-repeat 15px 50%;
+	border-left: 1px solid #D3DADD;
+	color: #D3DADD;
+	display: block;
+	float: left;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin: 0 0 0 20px;
+	padding: 20px;
+	padding-left: 40px;
+}
+
+.guest-community .current-community {
+	display: none;
+}
+
+.private-page .current-community {
+	background-image: url(../images/dock/my_places_private.png);
 }
 
 /* ---------- Main navigation ---------- */

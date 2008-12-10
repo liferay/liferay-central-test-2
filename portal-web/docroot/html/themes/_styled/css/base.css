@@ -194,6 +194,10 @@ body.staging {
 	margin: 0;
 }
 
+.current-community {
+	display: none;
+}
+
 /* ---------- Alerts and popups ---------- */
 
 .alert-background {
