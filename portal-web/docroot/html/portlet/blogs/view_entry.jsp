@@ -87,3 +87,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 		ratingsEnabled="<%= enableCommentRatings %>"
 	/>
 </c:if>
+
+<%
+PortalUtil.setPageSubtitle(entry.getTitle(), request);
+%>

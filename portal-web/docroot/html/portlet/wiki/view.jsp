@@ -291,3 +291,9 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		Liferay.Util.focusFormField(document.<portlet:namespace />fmSearch.<portlet:namespace />keywords);
 	</script>
 </c:if>
+
+<%
+if (wikiPage != null) {
+	PortalUtil.setPageSubtitle(wikiPage.getTitle(), request);
+}
+%>
