@@ -54,26 +54,9 @@ public class EditServerCategoryTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("CategoryTest!"));
 		selenium.select("_137_logLevelCategoryTest!",
 			RuntimeVariables.replace("label=ALL"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
 	}
 }

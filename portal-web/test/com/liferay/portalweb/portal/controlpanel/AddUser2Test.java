@@ -62,7 +62,7 @@ public class AddUser2Test extends BaseTestCase {
 		selenium.typeKeys("_125_middleName", RuntimeVariables.replace("lenn"));
 		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
 		selenium.typeKeys("_125_lastName", RuntimeVariables.replace("nium02"));
-		selenium.type("_125_lastName", RuntimeVariables.replace("niunium02m01"));
+		selenium.type("_125_lastName", RuntimeVariables.replace("nium02"));
 		selenium.select("_125_suffixId", RuntimeVariables.replace("label=PhD."));
 		selenium.select("_125_birthdayMonth",
 			RuntimeVariables.replace("label=September"));
@@ -131,7 +131,8 @@ public class AddUser2Test extends BaseTestCase {
 		selenium.type("_125_comments",
 			RuntimeVariables.replace("This is a test comment."));
 		assertTrue(selenium.isTextPresent("(Modified)"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}

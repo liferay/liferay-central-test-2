@@ -39,6 +39,25 @@ public class ApplyUserGroupTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=User Groups")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=User Groups"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//strong/span")) {
 					break;
 				}
@@ -63,5 +82,8 @@ public class ApplyUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("selen01"));
+		assertTrue(selenium.isTextPresent("selen02"));
+		assertTrue(selenium.isTextPresent("selen03"));
 	}
 }

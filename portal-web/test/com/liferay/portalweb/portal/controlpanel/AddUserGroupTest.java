@@ -58,5 +58,7 @@ public class AddUserGroupTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a selenium user group."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully. "));
 	}
 }

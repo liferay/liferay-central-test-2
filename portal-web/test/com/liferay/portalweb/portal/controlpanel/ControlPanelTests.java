@@ -38,13 +38,22 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(AddUser2Test.class);
 		addTestSuite(AddUser3Test.class);
 		addTestSuite(AddNullUserTest.class);
+		addTestSuite(AddInvalidUserSNTest.class);
+		addTestSuite(AddDuplicateUserSNTest.class);
+		addTestSuite(AddNullUserEmailTest.class);
+		addTestSuite(AddInvalidUserEmailTest.class);
+		addTestSuite(AddDuplicateUserEmailTest.class);
 		addTestSuite(AddCommunitiesTest.class);
+		addTestSuite(AddNullCommunityTest.class);
+		addTestSuite(AddInvalidCommunityNameTest.class);
+		addTestSuite(AddDuplicateCommunityNameTest.class);
 		addTestSuite(AssignCommunitiesTest.class);
 		addTestSuite(AddTemporaryCommunityTest.class);
 		addTestSuite(EditCommunityTest.class);
 		addTestSuite(DeleteCommunityTest.class);
-		addTestSuite(AddNullCommunityTest.class);
+		addTestSuite(DeleteInvalidCommunityTest.class);
 		addTestSuite(AddUserGroupTest.class);
+		addTestSuite(AddNullUserGroupTest.class);
 		addTestSuite(ApplyUserGroupTest.class);
 		addTestSuite(AddOrganizationTest.class);
 		addTestSuite(AddNullOrganizationTest.class);
@@ -59,9 +68,12 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(BrowseServerPluginsTest.class);
 		addTestSuite(BrowseServerInstanceTest.class);
 		addTestSuite(AddServerInstanceTest.class);
-		addTestSuite(AddNullServerInstanceTest.class);
+		addTestSuite(AddNullServerInstanceWebIDTest.class);
+		addTestSuite(AddDuplicateServerInstanceWebIDTest.class);
+		addTestSuite(AddNullServerInstanceVHTest.class);
+		addTestSuite(AddInvalidServerInstanceVHTest.class);
+		addTestSuite(AddNullServerInstanceMDTest.class);
 		addTestSuite(EditServerInstanceTest.class);
-
 		addTestSuite(EndControlPanelTest.class);
 	}
 
