@@ -1382,7 +1382,7 @@
 	</library>
 	<library>
 		<file-name>portal/hibernate3.jar</file-name>
-		<version>3.2.6</version>
+		<version>3.3.1</version>
 		<project-name>Hibernate</project-name>
 		<project-url>http://www.hibernate.org</project-url>
 		<licenses>
@@ -1392,7 +1392,7 @@
 		</licenses>
 		<comments>
 			This includes a public patch from HHH-2470 to fix a bad memory leak
-			in Hibernate 3.2.5.
+			in Hibernate.
 		</comments>
 	</library>
 	<library>

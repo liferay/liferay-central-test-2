@@ -45,6 +45,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.jdbc.Work;
 import org.hibernate.stat.SessionStatistics;
 
 /**
@@ -158,6 +159,10 @@ public class LiferaySession implements Session {
 
 	public Connection disconnect() throws HibernateException {
 		return _session.disconnect();
+	}
+
+	public void doWork(Work work) throws HibernateException {
+		_session.doWork(work);
 	}
 
 	public Filter enableFilter(String filterName) {
