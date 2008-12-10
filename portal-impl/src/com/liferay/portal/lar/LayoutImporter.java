@@ -67,7 +67,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -972,7 +971,7 @@ public class LayoutImporter {
 			portletActions);
 
 		importPermissions_5(
-			layoutCache, companyId, groupId, userId, resource.getResourceId(),
+			layoutCache, companyId, userId, resource.getResourceId(),
 			permissionsEl);
 	}
 
@@ -999,7 +998,7 @@ public class LayoutImporter {
 	}
 
 	protected void importPermissions_5(
-			LayoutCache layoutCache, long companyId, long groupId, long userId,
+			LayoutCache layoutCache, long companyId, long userId,
 			long resourceId, Element permissionsEl)
 		throws PortalException, SystemException {
 
@@ -1020,9 +1019,9 @@ public class LayoutImporter {
 
 			List<String> actions = getActions(roleEl);
 
-			PermissionServiceUtil.setRolePermissions(
-				role.getRoleId(), groupId,
-				actions.toArray(new String[actions.size()]), resourceId);
+			PermissionLocalServiceUtil.setRolePermissions(
+				role.getRoleId(), actions.toArray(new String[actions.size()]),
+				resourceId);
 		}
 	}
 
@@ -1095,7 +1094,7 @@ public class LayoutImporter {
 			portletActions);
 
 		importPermissions_5(
-			layoutCache, companyId, groupId, userId, resource.getResourceId(),
+			layoutCache, companyId, userId, resource.getResourceId(),
 			permissionsEl);
 	}
 
