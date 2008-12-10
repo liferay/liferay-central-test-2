@@ -91,8 +91,6 @@ public class PortalWebTestSuite extends BaseTests {
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTests.class);
 		addTestSuite(ControlPanelTests.class);
-		//addTestSuite(EnterpriseAdminTests.class);
-		//addTestSuite(AdminTests.class);
 		addTestSuite(AnnouncementsTests.class);
 		addTestSuite(BibleGatewayTests.class);
 		addTestSuite(BlogsTests.class);
@@ -101,7 +99,6 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(BookmarksTests.class);
 		addTestSuite(BreadcrumbTests.class);
 		addTestSuite(CalendarTests.class);
-		//addTestSuite(CommunitiesTests.class);
 		addTestSuite(CurrencyConverterTests.class);
 		addTestSuite(DictionaryTests.class);
 		addTestSuite(DirectoryTests.class);

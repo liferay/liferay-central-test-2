@@ -84,6 +84,10 @@ plugins.includes=${plugins.includes}</echo>
 		</antcall>
 
 		<antcall target="test-tomcat-runtime">
+			<param name="test.class" value="ControlPanelTestSuite" />
+		</antcall>
+
+		<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="PermissionsTestSuite" />
 		</antcall>
 
