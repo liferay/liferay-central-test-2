@@ -1794,6 +1794,16 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/technorati.png);
 }
 
+/* ---------- Taglib tags summary ---------- */
+
+.taglib-tags-summary .tag {
+	background: #DFF4FF none repeat scroll 0 0;
+	border: 1px solid #A7CEDF;
+	margin-bottom: 3px;
+	margin-right: 3px;
+	padding: 3px 6px 3px 6px;
+}
+
 /* ---------- Taglib user display ---------- */
 
 .taglib-user-display .user-details .user-name {

@@ -58,7 +58,19 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 
 			</c:when>
 			<c:otherwise>
-				<%= ListUtil.toString(entries, "name", StringPool.COMMA_AND_SPACE) %>
+
+				<%
+				for (int i=0; i< entries.size(); i++) {
+				%>
+
+					<span class="tag">
+						<%= entries.get(i).getName() %>
+					</span>
+
+				<%
+				}
+				%>
+
 			</c:otherwise>
 		</c:choose>
 	</div>

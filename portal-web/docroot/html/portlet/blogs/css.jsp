@@ -32,6 +32,9 @@
 }
 
 .portlet-blogs .entry-author {
+	color:#999999;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .portlet-blogs .entry-body {
@@ -40,9 +43,19 @@
 .portlet-blogs .entry-content {
 }
 
+.portlet-blogs .entry-date {
+	color: #999999;
+	font-weight: bold;
+}
+
+.portlet-blogs .entry-tags {
+	color:#999999;
+	margin-bottom: 10px;
+}
+
 .portlet-blogs .entry-title {
 	display: block;
-	font-size: 1.2em;
+	font-size: 1.5em;
 	font-weight: bold;
 }
 

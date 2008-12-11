@@ -42,15 +42,6 @@
 				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 			</portlet:renderURL>
 
-			<div class="entry-date">
-
-				<%
-				DateFormat entryDisplayDateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, locale);
-				%>
-
-				<%= entryDisplayDateFormat.format(entry.getDisplayDate()) %>
-			</div>
-
 			<div class="entry-title">
 
 			<c:choose>
@@ -68,10 +59,12 @@
 				<liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>
 			</div>
 
-			<liferay-ui:tags-summary
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-			/>
+			<div class="entry-tags">
+				<liferay-ui:tags-summary
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= entry.getEntryId() %>"
+				/>
+			</div>
 		</div>
 
 		<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
@@ -144,6 +137,15 @@
 		</portlet:renderURL>
 
 		<div class="entry-footer">
+			<div class="entry-date">
+
+				<%
+				DateFormat entryDisplayDateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, locale);
+				%>
+
+				<%= entryDisplayDateFormat.format(entry.getDisplayDate()) %>
+			</div>
+
 			<liferay-ui:social-bookmarks
 				url="<%= bookmarkURL.toString() %>"
 				title="<%= entry.getTitle() %>"
