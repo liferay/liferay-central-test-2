@@ -707,7 +707,7 @@ public class BaseDeployer {
 			boolean success = warUpdater.preparePortlet(
 				srcFile, sunTempDir.toString());
 
-			if (success){
+			if (success) {
 				File sunSrcFile = new File(
 					sunTempDir + File.separator + srcFile.getName());
 

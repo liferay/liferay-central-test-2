@@ -147,7 +147,7 @@ public class ProducerEntityManagerImpl
 		WSRPConfiguredProducer configuredProducer = getConfiguredProducer(
 			producerEntityId);
 
-		if (configuredProducer == null){
+		if (configuredProducer == null) {
 			throw new WSRPConsumerException(
 				"No configured producer exists for producer entity id " +
 					producerEntityId);
@@ -165,7 +165,7 @@ public class ProducerEntityManagerImpl
 					_portalId, _namespace);
 
 			for (WSRPConfiguredProducer configuredProducer :
-					configuredProducers){
+					configuredProducers) {
 
 				producerEntityIds.add(
 					String.valueOf(
@@ -351,7 +351,7 @@ public class ProducerEntityManagerImpl
 		}
 	}
 
-	protected String getGlobalRegistrationDataXML(){
+	protected String getGlobalRegistrationDataXML() {
 		return null;
 	}
 

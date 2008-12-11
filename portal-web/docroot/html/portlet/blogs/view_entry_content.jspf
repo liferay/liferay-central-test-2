@@ -43,16 +43,14 @@
 			</portlet:renderURL>
 
 			<div class="entry-title">
-
-			<c:choose>
-				<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-					<%= entry.getTitle() %>
-				</c:when>
-				<c:otherwise>
-					<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
-				</c:otherwise>
-			</c:choose>
-
+				<c:choose>
+					<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+						<%= entry.getTitle() %>
+					</c:when>
+					<c:otherwise>
+						<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div class="entry-author">

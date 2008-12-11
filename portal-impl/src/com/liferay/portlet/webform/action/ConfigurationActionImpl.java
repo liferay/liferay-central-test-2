@@ -160,7 +160,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				String fieldLabel = ParamUtil.getString(
 					actionRequest, "fieldLabel" + formFieldsIndex);
 
-				if (Validator.isNull(fieldLabel)){
+				if (Validator.isNull(fieldLabel)) {
 					continue;
 				}
 

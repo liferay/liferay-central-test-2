@@ -1267,7 +1267,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 				recur.getMonthDayList().add(monthDay);
 			}
-			else if (recurrence.getByDay() != null){
+			else if (recurrence.getByDay() != null) {
 				DayAndPosition[] byDay = recurrence.getByDay();
 
 				WeekDay weekDay = toICalWeekDay(byDay[0].getDayOfWeek());
@@ -1296,7 +1296,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return recur;
 	}
 
-	protected VEvent toICalVEvent(CalEvent event, TimeZone timeZone){
+	protected VEvent toICalVEvent(CalEvent event, TimeZone timeZone) {
 		VEvent vEvent = new VEvent();
 
 		PropertyList eventProps = vEvent.getProperties();
@@ -1417,7 +1417,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		recurrence.setWeekStart(Calendar.SUNDAY);
 
-		if (recur.getInterval() > 1){
+		if (recur.getInterval() > 1) {
 			recurrence.setInterval(recur.getInterval());
 		}
 

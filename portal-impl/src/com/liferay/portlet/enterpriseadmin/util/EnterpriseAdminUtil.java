@@ -302,7 +302,7 @@ public class EnterpriseAdminUtil {
 
 			if (Validator.isNull(street1) && Validator.isNull(street2) &&
 				Validator.isNull(street3) && Validator.isNull(city) &&
-				Validator.isNull(zip)){
+				Validator.isNull(zip)) {
 
 				continue;
 			}
@@ -318,7 +318,7 @@ public class EnterpriseAdminUtil {
 
 			boolean primary = false;
 
-			if (addressesIndex == addressPrimary){
+			if (addressesIndex == addressPrimary) {
 				primary = true;
 			}
 
@@ -360,7 +360,7 @@ public class EnterpriseAdminUtil {
 			String address = ParamUtil.getString(
 				actionRequest, "emailAddressAddress" + emailAddressesIndex);
 
-			if (Validator.isNull(address)){
+			if (Validator.isNull(address)) {
 				continue;
 			}
 
@@ -369,7 +369,7 @@ public class EnterpriseAdminUtil {
 
 			boolean primary = false;
 
-			if (emailAddressesIndex == emailAddressPrimary){
+			if (emailAddressesIndex == emailAddressPrimary) {
 				primary = true;
 			}
 
@@ -459,7 +459,7 @@ public class EnterpriseAdminUtil {
 			int typeId = ParamUtil.getInteger(
 				actionRequest, "orgLaborTypeId" + orgLaborsIndex, -1);
 
-			if (typeId == -1){
+			if (typeId == -1) {
 				continue;
 			}
 
@@ -559,7 +559,7 @@ public class EnterpriseAdminUtil {
 			String extension = ParamUtil.getString(
 				actionRequest, "phoneExtension" + phonesIndex);
 
-			if (Validator.isNull(number) && Validator.isNull(extension)){
+			if (Validator.isNull(number) && Validator.isNull(extension)) {
 				continue;
 			}
 
@@ -568,7 +568,7 @@ public class EnterpriseAdminUtil {
 
 			boolean primary = false;
 
-			if (phonesIndex == phonePrimary){
+			if (phonesIndex == phonePrimary) {
 				primary = true;
 			}
 
@@ -722,7 +722,7 @@ public class EnterpriseAdminUtil {
 			String url = ParamUtil.getString(
 				actionRequest, "websiteUrl" + websitesIndex);
 
-			if (Validator.isNull(url)){
+			if (Validator.isNull(url)) {
 				continue;
 			}
 
@@ -731,7 +731,7 @@ public class EnterpriseAdminUtil {
 
 			boolean primary = false;
 
-			if (websitesIndex == websitePrimary){
+			if (websitesIndex == websitePrimary) {
 				primary = true;
 			}
 

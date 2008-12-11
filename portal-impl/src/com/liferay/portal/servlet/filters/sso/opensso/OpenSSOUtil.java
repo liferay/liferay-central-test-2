@@ -283,7 +283,7 @@ public class OpenSSOUtil {
 		if (responseCode == HttpURLConnection.HTTP_OK) {
 			String data = StringUtil.read(urlc.getInputStream());
 
-			if (data.toLowerCase().indexOf("boolean=true") != -1){
+			if (data.toLowerCase().indexOf("boolean=true") != -1) {
 				authenticated = true;
 			}
 		}

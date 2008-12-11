@@ -755,7 +755,7 @@ public abstract class DBUtil {
 
 		for (int i = 0; i < TEMPLATE.length; i++) {
 			if (TEMPLATE[i].equals("##") ||
-				TEMPLATE[i].equals("'01/01/1970'")){
+				TEMPLATE[i].equals("'01/01/1970'")) {
 
 				template = template.replaceAll(TEMPLATE[i], actual[i]);
 			}

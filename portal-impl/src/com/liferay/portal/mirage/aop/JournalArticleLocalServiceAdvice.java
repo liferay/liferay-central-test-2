@@ -125,7 +125,7 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 			}
 			else if (methodName.equals("getArticlesCount") ||
 					 methodName.equals("searchCount")||
-					 methodName.equals("getTemplateArticlesCount")){
+					 methodName.equals("getTemplateArticlesCount")) {
 
 				contentService.contentSearchCount(searchCriteriaInvoker);
 			}

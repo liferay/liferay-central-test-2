@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class InitColumnProcessor {
 
-	public InitColumnProcessor(){
+	public InitColumnProcessor() {
 		_columns = new ArrayList<String>();
 	}
 

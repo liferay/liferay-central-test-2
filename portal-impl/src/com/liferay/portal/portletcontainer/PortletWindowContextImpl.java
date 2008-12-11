@@ -491,8 +491,8 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portletDescriptorHolder;
 	}
 
-	protected Portlet getPortletModel(String portletWindowName){
-		if (portletWindowName.equalsIgnoreCase(_portlet.getPortletId())){
+	protected Portlet getPortletModel(String portletWindowName) {
+		if (portletWindowName.equalsIgnoreCase(_portlet.getPortletId())) {
 			return _portlet;
 		}
 
@@ -500,9 +500,9 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 			List<Portlet> remotePortlets = getAllPortletWindows(
 				PortletType.REMOTE);
 
-			for (Portlet portlet : remotePortlets){
+			for (Portlet portlet : remotePortlets) {
 				if (portlet.isRemote() &&
-					portletWindowName.equals(portlet.getPortletId())){
+					portletWindowName.equals(portlet.getPortletId())) {
 
 					return portlet;
 				}

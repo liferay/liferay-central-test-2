@@ -77,7 +77,7 @@ public class ExportDataAction extends PortletAction {
 			String fieldLabel = preferences.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
-			if (Validator.isNull(fieldLabel)){
+			if (Validator.isNull(fieldLabel)) {
 				break;
 			}
 

@@ -60,11 +60,11 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 			<c:otherwise>
 
 				<%
-				for (int i=0; i< entries.size(); i++) {
+				for (TagsEntry entry : entries) {
 				%>
 
 					<span class="tag">
-						<%= entries.get(i).getName() %>
+						<%= entry.getName() %>
 					</span>
 
 				<%
