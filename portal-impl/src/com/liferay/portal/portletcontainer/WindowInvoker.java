@@ -746,7 +746,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 		Map<String, String> userInfoMap = UserInfoFactory.getUserInfo(
 			_remoteUserId, _portletModel);
 
-		if (_remotePortlet){
+		if (_remotePortlet && userInfoMap != null){
 			userInfoMap.remove("user.name.random");
 		}
 
