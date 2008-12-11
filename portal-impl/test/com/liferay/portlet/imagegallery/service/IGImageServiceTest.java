@@ -23,9 +23,10 @@
 package com.liferay.portlet.imagegallery.service;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -72,17 +73,19 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		long groupId = PortalUtil.getScopeGroupId(TestPropsValues.LAYOUT_PLID);
-
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			TestPropsValues.LAYOUT_PLID);
+
 		try {
 			_folder = IGFolderServiceUtil.getFolder(
-				groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, name);
+				layout.getGroupId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID,
+				name);
 
 			IGFolderServiceUtil.deleteFolder(_folder.getFolderId());
 
@@ -95,8 +98,8 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
-		serviceContext.setPlid(TestPropsValues.LAYOUT_PLID);
-		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setScopeGroupId(layout.getGroupId());
+		serviceContext.setPlid(layout.getPlid());
 
 		_folder = IGFolderServiceUtil.addFolder(
 			IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, name, description,

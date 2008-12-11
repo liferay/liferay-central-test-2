@@ -22,7 +22,9 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -62,15 +64,18 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 	}
 
 	protected BookmarksFolder addFolder(long parentFolderId) throws Exception {
-		long plid = TestPropsValues.LAYOUT_PLID;
 		String name = "Test Folder";
 		String description = "This is a test folder.";
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			TestPropsValues.LAYOUT_PLID);
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setPlid(plid);
+		serviceContext.setScopeGroupId(layout.getGroupId());
+		serviceContext.setPlid(layout.getPlid());
 
 		return BookmarksFolderServiceUtil.addFolder(
 			parentFolderId, name, description, serviceContext);
