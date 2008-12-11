@@ -171,7 +171,7 @@ double version = ParamUtil.getDouble(request, "version");
 			int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
 			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, languageId, themeDisplay, articlePage, xmlRequest);
+			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
 
 			String content = articleDisplay.getContent();
 

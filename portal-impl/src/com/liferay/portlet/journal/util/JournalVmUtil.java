@@ -73,8 +73,8 @@ public class JournalVmUtil {
 			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
 	public static String transform(
-			Map<String, String> tokens, String languageId, String xml,
-			String script)
+			Map<String, String> tokens, String articleMode, String languageId,
+			String xml, String script)
 		throws TransformException {
 
 		StringWriter output = new StringWriter();
@@ -112,6 +112,7 @@ public class JournalVmUtil {
 			context.put("companyId", String.valueOf(companyId));
 			context.put("groupId", String.valueOf(groupId));
 			context.put("journalTemplatesPath", journalTemplatesPath);
+			context.put("articleMode", articleMode);
 			context.put("locale", LocaleUtil.fromLanguageId(languageId));
 			context.put(
 				"permissionChecker",

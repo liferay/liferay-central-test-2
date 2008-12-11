@@ -187,6 +187,14 @@ type = ParamUtil.getString(request, "type", type);
 	</tr>
 	<tr>
 		<td>
+			<liferay-ui:message key="enable-print" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enablePrint" defaultValue="<%= enablePrint %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>

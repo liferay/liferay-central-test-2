@@ -156,7 +156,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 			</div>
 		</c:if>
 
-		<c:if test="<%= (articleDisplay != null) && (enableConversions || enableRatings || enableComments) %>">
+		<c:if test="<%= (articleDisplay != null) && (enableConversions || enablePrint || enableRatings || enableComments) %>">
 			<div class="lfr-meta-actions article-controls">
 				<c:if test="<%= enableConversions %>">
 
@@ -189,6 +189,28 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						%>
 
 					</liferay-ui:icon-list>
+				</c:if>
+
+				<c:if test="<%= enablePrint %>">
+
+					<%
+					PortletURL printPageURL = renderResponse.createRenderURL();
+
+					printPageURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
+					printPageURL.setParameter("struts_action", "/journal_content/view");
+					printPageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
+					printPageURL.setParameter("articleId", articleDisplay.getArticleId());
+					printPageURL.setParameter("articleMode", Constants.PRINT);
+					%>
+
+					<script type="text/javascript">
+						function <portlet:namespace />printPage() {
+							window.open('<%= printPageURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
+						}
+					</script>
+
+					<liferay-ui:icon image="print" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
 				</c:if>
 
 				<c:if test="<%= enableRatings %>">

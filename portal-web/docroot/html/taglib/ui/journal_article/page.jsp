@@ -53,7 +53,7 @@ if (articleResourcePrimKey > 0) {
 	articleId = articleResource.getArticleId();
 }
 
-JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, templateId, languageId, themeDisplay, articlePage, xmlRequest);
+JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 %>
 
 <c:if test="<%= articleDisplay != null %>">

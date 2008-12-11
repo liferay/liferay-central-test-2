@@ -67,6 +67,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String[] extensions = actionRequest.getParameterValues("extensions");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
+		boolean enablePrint = ParamUtil.getBoolean(
+			actionRequest, "enablePrint");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
@@ -85,6 +87,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		preferences.setValues("extensions", extensions);
+		preferences.setValue("enable-print", String.valueOf(enablePrint));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(

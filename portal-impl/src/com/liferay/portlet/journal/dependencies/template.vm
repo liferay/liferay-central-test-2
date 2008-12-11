@@ -37,6 +37,11 @@
 ## $linkToPage.getUrl() - The URL that links to the selected page in the current
 ##                        community, organization, etc.
 ##
-## Additionally, the variable $journalTemplatesPath can be used to include
+## The variable $journalTemplatesPath can be used to include
 ## another Journal template, e.g. #parse ("$journalTemplatesPath/LAYOUT-PARENT")
+##
+## The variable $articleMode specifies which mode the article is being viewed,
+## for example, #if ($articleMode == "print") - checks if the user clicked on
+## the print icon, this way a different content can be displayed depending on
+## it.
 ##

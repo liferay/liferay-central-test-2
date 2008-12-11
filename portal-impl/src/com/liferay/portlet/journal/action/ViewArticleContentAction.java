@@ -149,7 +149,7 @@ public class ViewArticleContentAction extends Action {
 				article.setDisplayDate(displayDate);
 
 				output = JournalArticleLocalServiceUtil.getArticleContent(
-					article, templateId, languageId, themeDisplay);
+					article, templateId, null, languageId, themeDisplay);
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(

@@ -53,6 +53,8 @@ public class JournalContentUtil {
 
 	public static String ARTICLE_SEPARATOR = "_ARTICLE_";
 
+	public static String ARTICLE_MODE_SEPARATOR = "_ARTICLE_MODE_";
+
 	public static String TEMPLATE_SEPARATOR = "_TEMPLATE_";
 
 	public static String LANGUAGE_SEPARATOR = "_LANGUAGE_";
@@ -75,42 +77,47 @@ public class JournalContentUtil {
 	}
 
 	public static String getContent(
-		long groupId, String articleId, String languageId, String xmlRequest) {
-
-		return getContent(
-			groupId, articleId, null, languageId, null, xmlRequest);
-	}
-
-	public static String getContent(
-		long groupId, String articleId, String languageId,
-		ThemeDisplay themeDisplay) {
-
-		return getContent(groupId, articleId, null, languageId, themeDisplay);
-	}
-
-	public static String getContent(
-		long groupId, String articleId, String templateId, String languageId,
+		long groupId, String articleId, String articleMode, String languageId,
 		String xmlRequest) {
 
 		return getContent(
-			groupId, articleId, templateId, languageId, null, xmlRequest);
+			groupId, articleId, null, articleMode, languageId, null,
+			xmlRequest);
 	}
 
 	public static String getContent(
-		long groupId, String articleId, String templateId, String languageId,
+		long groupId, String articleId, String articleMode, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		return getContent(
-			groupId, articleId, templateId, languageId, themeDisplay, null);
+			groupId, articleId, null, articleMode, languageId, themeDisplay);
 	}
 
 	public static String getContent(
-		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, String xmlRequest) {
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, String xmlRequest) {
+
+		return getContent(
+			groupId, articleId, templateId, articleMode, languageId, null,
+			xmlRequest);
+	}
+
+	public static String getContent(
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, ThemeDisplay themeDisplay) {
+
+		return getContent(
+			groupId, articleId, templateId, articleMode, languageId,
+			themeDisplay, null);
+	}
+
+	public static String getContent(
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, ThemeDisplay themeDisplay, String xmlRequest) {
 
 		JournalArticleDisplay articleDisplay = getDisplay(
-			groupId, articleId, templateId, languageId, themeDisplay, 1,
-			xmlRequest);
+			groupId, articleId, templateId, articleMode, languageId,
+			themeDisplay, 1, xmlRequest);
 
 		if (articleDisplay != null) {
 			return articleDisplay.getContent();
@@ -121,46 +128,53 @@ public class JournalContentUtil {
 	}
 
 	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String languageId, String xmlRequest) {
-
-		return getDisplay(
-			groupId, articleId, null, languageId, null, 1, xmlRequest);
-	}
-
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String languageId,
-		ThemeDisplay themeDisplay) {
-
-		return getDisplay(groupId, articleId, languageId, themeDisplay, 1);
-	}
-
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String languageId,
-		ThemeDisplay themeDisplay, int page) {
-
-		return getDisplay(
-			groupId, articleId, null, languageId, themeDisplay, page, null);
-	}
-
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String templateId, String languageId,
+		long groupId, String articleId, String articleMode, String languageId,
 		String xmlRequest) {
 
 		return getDisplay(
-			groupId, articleId, templateId, languageId, null, 1, xmlRequest);
+			groupId, articleId, null, articleMode, languageId, null, 1,
+			xmlRequest);
 	}
 
 	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String templateId, String languageId,
+		long groupId, String articleId, String articleMode, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		return getDisplay(
-			groupId, articleId, templateId, languageId, themeDisplay, 1, null);
+			groupId, articleId, articleMode, languageId, themeDisplay, 1);
 	}
 
 	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, int page, String xmlRequest) {
+		long groupId, String articleId, String articleMode, String languageId,
+		ThemeDisplay themeDisplay, int page) {
+
+		return getDisplay(
+			groupId, articleId, null, articleMode, languageId, themeDisplay,
+			page, null);
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, String xmlRequest) {
+
+		return getDisplay(
+			groupId, articleId, templateId, articleMode, languageId, null, 1,
+			xmlRequest);
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, ThemeDisplay themeDisplay) {
+
+		return getDisplay(
+			groupId, articleId, templateId, articleMode, languageId,
+			themeDisplay, 1, null);
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, ThemeDisplay themeDisplay, int page,
+		String xmlRequest) {
 
 		StopWatch stopWatch = null;
 
@@ -174,15 +188,15 @@ public class JournalContentUtil {
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		String key = _encodeKey(
-			groupId, articleId, templateId, languageId, page);
+			groupId, articleId, templateId, articleMode, languageId, page);
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
 
 		if (articleDisplay == null) {
 			articleDisplay = _getArticleDisplay(
-				groupId, articleId, templateId, languageId, page, xmlRequest,
-				themeDisplay);
+				groupId, articleId, templateId, articleMode, languageId, page,
+				xmlRequest, themeDisplay);
 
 			if ((articleDisplay != null) && articleDisplay.isCacheable()) {
 				String groupKey = _encodeGroupKey(
@@ -206,12 +220,12 @@ public class JournalContentUtil {
 	private static String _encodeGroupKey(
 		long groupId, String articleId, String templateId) {
 
-		return _encodeKey(groupId, articleId, templateId, null, 0);
+		return _encodeKey(groupId, articleId, templateId, null, null, 0);
 	}
 
 	private static String _encodeKey(
-		long groupId, String articleId, String templateId, String languageId,
-		int page) {
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, int page) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -222,6 +236,11 @@ public class JournalContentUtil {
 		sb.append(articleId);
 		sb.append(TEMPLATE_SEPARATOR);
 		sb.append(templateId);
+
+		if (Validator.isNotNull(articleMode)) {
+			sb.append(ARTICLE_MODE_SEPARATOR);
+			sb.append(articleMode);
+		}
 
 		if (Validator.isNotNull(languageId)) {
 			sb.append(LANGUAGE_SEPARATOR);
@@ -237,8 +256,9 @@ public class JournalContentUtil {
 	}
 
 	private static JournalArticleDisplay _getArticleDisplay(
-		long groupId, String articleId, String templateId, String languageId,
-		int page, String xmlRequest, ThemeDisplay themeDisplay) {
+		long groupId, String articleId, String templateId, String articleMode,
+		String languageId, int page, String xmlRequest,
+		ThemeDisplay themeDisplay) {
 
 		try {
 			if (_log.isInfoEnabled()) {
@@ -248,8 +268,8 @@ public class JournalContentUtil {
 			}
 
 			return JournalArticleLocalServiceUtil.getArticleDisplay(
-				groupId, articleId, templateId, languageId, page, xmlRequest,
-				themeDisplay);
+				groupId, articleId, templateId, articleMode, languageId, page,
+				xmlRequest, themeDisplay);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

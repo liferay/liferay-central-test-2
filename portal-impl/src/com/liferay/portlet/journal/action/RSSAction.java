@@ -291,7 +291,7 @@ public class RSSAction extends PortletAction {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
 					feed.getGroupId(), article.getArticleId(),
-					rendererTemplateId, languageId, themeDisplay, 1,
+					rendererTemplateId, null, languageId, themeDisplay, 1,
 					_XML_REQUUEST);
 
 			if (articleDisplay != null) {

@@ -57,6 +57,7 @@ String articleId = GetterUtil.getString(preferences.getValue("article-id", Strin
 String templateId = GetterUtil.getString(preferences.getValue("template-id", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
 String[] extensions = preferences.getValues("extensions", null);
+boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enable-print", null));
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));

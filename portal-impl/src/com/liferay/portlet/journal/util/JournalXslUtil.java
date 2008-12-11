@@ -54,8 +54,8 @@ import javax.xml.transform.stream.StreamSource;
 public class JournalXslUtil {
 
 	public static String transform(
-			Map<String, String> tokens, String languageId, String xml,
-			String script)
+			Map<String, String> tokens, String articleMode, String languageId,
+			String xml, String script)
 		throws Exception {
 
 		ByteArrayMaker bam = new ByteArrayMaker();
@@ -94,6 +94,7 @@ public class JournalXslUtil {
 			transformer.setParameter("groupId", String.valueOf(groupId));
 			transformer.setParameter(
 				"journalTemplatesPath", journalTemplatesPath);
+			transformer.setParameter("articleMode", articleMode);
 			transformer.setParameter("locale", locale);
 			transformer.setParameter(
 				"permissionChecker",

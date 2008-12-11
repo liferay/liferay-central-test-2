@@ -216,7 +216,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
 
 		return journalArticleLocalService.getArticleContent(
-			groupId, articleId, languageId, themeDisplay);
+			groupId, articleId, null, languageId, themeDisplay);
 	}
 
 	public String getArticleContent(
@@ -228,7 +228,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
 
 		return journalArticleLocalService.getArticleContent(
-			groupId, articleId, version, languageId, themeDisplay);
+			groupId, articleId, version, null, languageId, themeDisplay);
 	}
 
 	public void deleteArticle(

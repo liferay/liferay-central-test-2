@@ -157,7 +157,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 		int articlePage = ParamUtil.getInteger(request, "page", 1);
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, languageId, themeDisplay, articlePage, xmlRequest);
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 
 		if (articleDisplay == null) {
 

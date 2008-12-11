@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -831,14 +832,18 @@ public class JournalUtil {
 	}
 
 	public static String transform(
-			Map<String, String> tokens, String languageId, String xml,
-			String script, String langType)
+			Map<String, String> tokens, String articleMode, String languageId,
+			String xml, String script, String langType)
 		throws Exception {
 
 		// Setup Listeners
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Language " + languageId);
+		}
+
+		if (Validator.isNull(articleMode)) {
+			articleMode = Constants.VIEW;
 		}
 
 		if (_logTokens.isDebugEnabled()) {
@@ -917,10 +922,12 @@ public class JournalUtil {
 			output = LocalizationUtil.getLocalization(xml, languageId);
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
-			output = JournalVmUtil.transform(tokens, languageId, xml, script);
+			output = JournalVmUtil.transform(
+				tokens, articleMode, languageId, xml, script);
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
-			output = JournalXslUtil.transform(tokens, languageId, xml, script);
+			output = JournalXslUtil.transform(
+				tokens, articleMode, languageId, xml, script);
 		}
 
 		// Postprocess output

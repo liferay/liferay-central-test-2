@@ -79,6 +79,8 @@ public class ViewAction extends PortletAction {
 				preferences.getValue("template-id", StringPool.BLANK));
 		}
 
+		String articleMode = ParamUtil.getString(renderRequest, "articleMode");
+
 		String languageId = LanguageUtil.getLanguageId(renderRequest);
 
 		int page = ParamUtil.getInteger(renderRequest, "page", 1);
@@ -90,8 +92,8 @@ public class ViewAction extends PortletAction {
 
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			articleDisplay = JournalContentUtil.getDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay,
-				page, xmlRequest);
+				groupId, articleId, templateId, articleMode, languageId,
+				themeDisplay, page, xmlRequest);
 		}
 
 		if (articleDisplay != null) {
