@@ -38,7 +38,7 @@
 	<target name="build-dist-geronimo-tomcat">
 		<delete dir="${app.server.geronimo-tomcat.dir}" />
 
-		<unzip src="${app.server.parent.dir}/geronimo-tomcat-2.1.1.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/geronimo-tomcat-2.1.3.zip" dest="${app.server.parent.dir}" />
 
 		<ant dir="sql" target="rebuild-derby" inheritAll="false" />
 
@@ -279,12 +279,33 @@
 	<target name="build-dist-jboss-tomcat">
 		<antcall target="build-dist-jboss-tomcat-4.0" />
 		<antcall target="build-dist-jboss-tomcat-4.2" />
+		<antcall target="build-dist-jboss-tomcat-5.0" />
 	</target>
 
 	<target name="build-dist-jboss-tomcat-4.0">
 		<delete dir="${app.server.jboss-tomcat.dir}" />
 
 		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.0.5.zip" dest="${app.server.parent.dir}" />
+
+		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat
+
+app.server.jboss-tomcat.version=4.0
+app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.0.5
+app.server.jboss-tomcat.classes.global.dir=${app.server.jboss-tomcat.instance.dir}/lib/ext
+app.server.jboss-tomcat.lib.global.dir=${app.server.jboss-tomcat.instance.dir}/lib/ext
+</echo>
+
+		<delete dir="${project.dir}/portal-web/classes" />
+
+		<ant target="deploy" inheritAll="false" />
+
+		<delete file="app.server.${user.name}.properties" />
+	</target>
+
+	<target name="build-dist-jboss-tomcat-4.2">
+		<delete dir="${app.server.parent.dir}/jboss-tomcat-4.2.3" />
+
+		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.2.3.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
 
@@ -295,15 +316,17 @@
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
-	<target name="build-dist-jboss-tomcat-4.2">
-		<delete dir="${app.server.parent.dir}/jboss-tomcat-4.2.2" />
+	<target name="build-dist-jboss-tomcat-5.0">
+		<delete dir="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
 
-		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.2.2.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/jboss-tomcat-5.0.0.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat
 
-app.server.jboss-tomcat.version=4.2
-app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
+app.server.jboss-tomcat.version=5.0
+app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-5.0.0
+app.server.jboss-tomcat.classes.global.dir=${app.server.jboss-tomcat.instance.dir}/lib
+app.server.jboss-tomcat.lib.global.dir=${app.server.jboss-tomcat.instance.dir}/lib
 </echo>
 
 		<delete dir="${project.dir}/portal-web/classes" />
@@ -330,7 +353,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	<target name="build-dist-jonas-jetty">
 		<delete dir="${app.server.jonas-jetty.dir}" />
 
-		<unzip src="${app.server.parent.dir}/jonas-jetty-4.8.6.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/jonas-jetty-4.10.3.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
 
@@ -344,7 +367,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	<target name="build-dist-jonas-tomcat">
 		<delete dir="${app.server.jonas-tomcat.dir}" />
 
-		<unzip src="${app.server.parent.dir}/jonas-tomcat-4.8.6.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/jonas-tomcat-4.10.3.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
 
@@ -490,7 +513,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	<target name="build-dist-tomcat-5.5">
 		<delete dir="${app.server.tomcat.dir}" />
 
-		<unzip src="${app.server.parent.dir}/tomcat-5.5.26.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/tomcat-5.5.27.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
@@ -502,14 +525,14 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	</target>
 
 	<target name="build-dist-tomcat-6.0">
-		<delete dir="${app.server.parent.dir}/tomcat-6.0.16" />
+		<delete dir="${app.server.parent.dir}/tomcat-6.0.18" />
 
-		<unzip src="${app.server.parent.dir}/tomcat-6.0.16.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/tomcat-6.0.18.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat
 
 app.server.tomcat.version=6.0
-app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.16
+app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.18
 app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/lib
 app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/lib/ext
@@ -613,13 +636,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.2/server/default/deploy" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.3/server/default/deploy" />
 			<param name="deployer.app.server.type" value="jboss-tomcat" />
 		</antcall>
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jboss-tomcat-4.2" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.2" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.3" />
 		</antcall>
 	</target>
 
@@ -937,13 +960,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.16/webapps" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.18/webapps" />
 			<param name="deployer.app.server.type" value="tomcat" />
 		</antcall>
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat-6.0" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.16" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.18" />
 		</antcall>
 	</target>
 

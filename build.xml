@@ -418,7 +418,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="j2ee-management.jar"
+						includes="commons-logging.jar,j2ee-management.jar,webservices-tools.jar"
 					/>
 				</delete>
 			</then>

@@ -64,6 +64,9 @@
 				<import>classes</import>
 			</dependency>-->
 		</dependencies>
+		<hidden-classes>
+			<filter>javax.xml.bind</filter>
+		</hidden-classes>
 		<inverse-classloading />
 	</environment>
 	<context-root>/</context-root>
