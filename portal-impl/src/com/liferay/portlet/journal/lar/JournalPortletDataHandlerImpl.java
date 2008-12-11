@@ -1583,7 +1583,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(context.getImportPortletPath(PortletKeys.JOURNAL));
+		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
 		sb.append("/structures/");
 		sb.append(structureId);
 		sb.append(".xml");
@@ -1596,7 +1596,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(context.getImportPortletPath(PortletKeys.JOURNAL));
+		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/");
 		sb.append(templateId);
 		sb.append(".xml");

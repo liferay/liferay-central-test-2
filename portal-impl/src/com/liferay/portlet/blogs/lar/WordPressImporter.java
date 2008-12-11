@@ -112,7 +112,7 @@ public class WordPressImporter {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(context.getImportPortletPath(PortletKeys.BLOGS));
+		sb.append(context.getSourcePortletPath(PortletKeys.BLOGS));
 		sb.append(StringPool.SLASH);
 		sb.append(fileName);
 

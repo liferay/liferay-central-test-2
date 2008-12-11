@@ -730,7 +730,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(context.getImportPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append(context.getSourcePortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/folders/");
 		sb.append(folderId);
 		sb.append(".xml");

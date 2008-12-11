@@ -293,7 +293,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(context.getImportPortletPath(PortletKeys.BOOKMARKS));
+		sb.append(context.getSourcePortletPath(PortletKeys.BOOKMARKS));
 		sb.append("/folders/");
 		sb.append(folderId);
 		sb.append(".xml");

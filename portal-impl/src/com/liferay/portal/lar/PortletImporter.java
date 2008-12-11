@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -55,6 +56,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -126,6 +128,7 @@ public class PortletImporter {
 			strategy, zipReader);
 
 		context.setPlid(plid);
+		context.setPrivateLayout(layout.isPrivateLayout());
 
 		// Zip
 
@@ -181,10 +184,10 @@ public class PortletImporter {
 
 		// Import GroupId
 
-		long importGroupId = GetterUtil.getLong(
+		long sourceGroupId = GetterUtil.getLong(
 			header.attributeValue("group-id"));
 
-		context.setImportGroupId(importGroupId);
+		context.setSourceGroupId(sourceGroupId);
 
 		// Read categories, comments, ratings, and tags to make them available
 		// to the data handlers through the context
@@ -221,9 +224,9 @@ public class PortletImporter {
 		// Portlet preferences
 
 		importPortletPreferences(
-			context, layout.getCompanyId(), layout.getGroupId(), plid,
+			context, layout.getCompanyId(), layout.getGroupId(), layout,
 			portletId, portletEl, importPortletSetup,
-			importPortletArchivedSetups, importUserPreferences);
+			importPortletArchivedSetups, importUserPreferences, true);
 
 		// Portlet data
 
@@ -315,6 +318,9 @@ public class PortletImporter {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+		finally {
+			context.setGroupId(context.getScopeGroupId());
+		}
 
 		if (preferencesImpl == null) {
 			return null;
@@ -394,6 +400,33 @@ public class PortletImporter {
 			_log.debug("Importing data for " + portletId);
 		}
 
+		// Layout scope
+
+		long groupId = context.getGroupId();
+
+		long scopeLayoutId = context.getScopeLayoutId();
+
+		if (scopeLayoutId == 0) {
+			scopeLayoutId = GetterUtil.getLong(
+				portletDataRefEl.getParent().attributeValue("scope-layout-id"));
+		}
+
+		if (scopeLayoutId > 0) {
+			try {
+				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+					context.getGroupId(), context.isPrivateLayout(),
+					scopeLayoutId);
+
+				if (scopeLayout.hasScopeGroup()) {
+					Group scopeGroup = scopeLayout.getScopeGroup();
+
+					context.setGroupId(scopeGroup.getGroupId());
+				}
+			}
+			catch (PortalException pe) {
+			}
+		}
+
 		PortletPreferencesImpl preferencesImpl = null;
 
 		if (portletPreferences != null) {
@@ -414,6 +447,9 @@ public class PortletImporter {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+		finally {
+			context.setGroupId(groupId);
+		}
 
 		if (preferencesImpl == null) {
 			return null;
@@ -423,12 +459,30 @@ public class PortletImporter {
 	}
 
 	protected void importPortletPreferences(
-			PortletDataContext context, long companyId, long groupId, long plid,
-			String portletId, Element parentEl, boolean importPortletSetup,
-			boolean importPortletArchivedSetups, boolean importUserPreferences)
+			PortletDataContext context, long companyId, long groupId,
+			Layout layout, String portletId, Element parentEl,
+			boolean importPortletSetup, boolean importPortletArchivedSetups,
+			boolean importUserPreferences, boolean preserveScopeLayoutId)
 		throws PortalException, SystemException {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
+		long plid = 0;
+		long scopeLayoutId = 0;
+
+		if (layout != null) {
+			plid = layout.getPlid();
+
+			if (preserveScopeLayoutId && (portletId != null)) {
+				javax.portlet.PortletPreferences jxPrefs =
+					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+						layout, portletId);
+
+				scopeLayoutId = GetterUtil.getLong(
+					jxPrefs.getValue("lfr-scope-layout-id", null));
+
+				context.setScopeLayoutId(scopeLayoutId);
+			}
+		}
 
 		List<Element> preferencesEls = parentEl.elements("portlet-preferences");
 
@@ -534,6 +588,25 @@ public class PortletImporter {
 				PortletPreferencesUtil.update(portletPreferences, true);
 			}
 		}
+
+		if (preserveScopeLayoutId && (layout != null)) {
+			javax.portlet.PortletPreferences jxPrefs =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
+
+			try {
+				jxPrefs.setValue(
+					"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
+
+				jxPrefs.store();
+			}
+			catch (Exception e) {
+				throw new PortalException(e);
+			}
+			finally {
+				context.setScopeLayoutId(scopeLayoutId);
+			}
+		}
 	}
 
 	protected void readComments(PortletDataContext context, Element parentEl)
@@ -541,7 +614,11 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getImportRootPath() + "/comments.xml");
+				context.getSourceRootPath() + "/comments.xml");
+
+			if (xml == null) {
+				return;
+			}
 
 			Document doc = SAXReaderUtil.read(xml);
 
@@ -582,7 +659,11 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getImportRootPath() + "/ratings.xml");
+				context.getSourceRootPath() + "/ratings.xml");
+
+			if (xml == null) {
+				return;
+			}
 
 			Document doc = SAXReaderUtil.read(xml);
 
@@ -625,7 +706,11 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getImportRootPath() + "/categories.xml");
+				context.getSourceRootPath() + "/categories.xml");
+
+			if (xml == null) {
+				return;
+			}
 
 			Document doc = SAXReaderUtil.read(xml);
 
@@ -655,7 +740,11 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getImportRootPath() + "/tags.xml");
+				context.getSourceRootPath() + "/tags.xml");
+
+			if (xml == null) {
+				return;
+			}
 
 			Document doc = SAXReaderUtil.read(xml);
 

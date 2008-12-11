@@ -193,6 +193,8 @@ public class LayoutImporter {
 			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
 			zipReader);
 
+		context.setPrivateLayout(privateLayout);
+
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupConstants.GUEST);
 
@@ -244,10 +246,10 @@ public class LayoutImporter {
 
 		// Import GroupId
 
-		long importGroupId = GetterUtil.getLong(
+		long sourceGroupId = GetterUtil.getLong(
 			header.attributeValue("group-id"));
 
-		context.setImportGroupId(importGroupId);
+		context.setSourceGroupId(sourceGroupId);
 
 		// Look and feel
 
@@ -587,8 +589,9 @@ public class LayoutImporter {
 
 			_portletImporter.importPortletPreferences(
 				context, layoutSet.getCompanyId(), layout.getGroupId(),
-				layout.getPlid(), null, portletEl, importPortletSetup,
-				importPortletArchivedSetups, importPortletUserPreferences);
+				layout, null, portletEl, importPortletSetup,
+				importPortletArchivedSetups, importPortletUserPreferences,
+				false);
 
 			// Portlet data
 
@@ -613,7 +616,7 @@ public class LayoutImporter {
 							layout.getPlid(), portletId);
 
 					importPortletPermissions_5(
-						layoutCache, companyId, importGroupId, userId,
+						layoutCache, companyId, sourceGroupId, userId,
 						resourceName, resourcePrimKey, permissionsEl);
 				}
 				else {
@@ -626,9 +629,9 @@ public class LayoutImporter {
 			// Archived setups
 
 			_portletImporter.importPortletPreferences(
-				context, layoutSet.getCompanyId(), groupId, 0, null, portletEl,
-				importPortletSetup, importPortletArchivedSetups,
-				importPortletUserPreferences);
+				context, layoutSet.getCompanyId(), groupId, null, null,
+				portletEl, importPortletSetup, importPortletArchivedSetups,
+				importPortletUserPreferences, false);
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
 
@@ -755,7 +758,7 @@ public class LayoutImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getImportRootPath() + "/categories-hierarchy.xml");
+				context.getSourceRootPath() + "/categories-hierarchy.xml");
 
 			Document doc = SAXReaderUtil.read(xml);
 

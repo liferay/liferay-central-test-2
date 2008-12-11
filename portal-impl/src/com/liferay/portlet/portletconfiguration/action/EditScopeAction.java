@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -162,22 +163,26 @@ public class EditScopeAction extends EditConfigurationAction {
 		// Remove old scope suffix from the title if present
 
 		if (oldScopeLayoutId > 0) {
-			Layout oldScopeLayout = LayoutLocalServiceUtil.getLayout(
-				layout.getGroupId(), layout.isPrivateLayout(),
-				oldScopeLayoutId);
+			try {
+				Layout oldScopeLayout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					oldScopeLayoutId);
 
-			StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new StringBuilder();
 
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(oldScopeLayout.getName(themeDisplay.getLocale()));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(oldScopeLayout.getName(themeDisplay.getLocale()));
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			String suffix = sb.toString();
+				String suffix = sb.toString();
 
-			if (newTitle.endsWith(suffix)) {
-				newTitle = newTitle.substring(
-					0, title.length() - suffix.length());
+				if (newTitle.endsWith(suffix)) {
+					newTitle = newTitle.substring(
+						0, title.length() - suffix.length());
+				}
+			}
+			catch (NoSuchLayoutException nsle) {
 			}
 		}
 

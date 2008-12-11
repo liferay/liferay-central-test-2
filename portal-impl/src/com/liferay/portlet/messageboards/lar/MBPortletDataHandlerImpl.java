@@ -734,7 +734,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(context.getImportPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append(context.getSourcePortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/categories/");
 		sb.append(categoryId);
 		sb.append(".xml");
