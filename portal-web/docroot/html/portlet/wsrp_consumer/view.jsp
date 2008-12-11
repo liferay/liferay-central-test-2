@@ -176,9 +176,19 @@
 
 				<liferay-ui:tabs names="producer" />
 
-				<c:if test='<%= request.getAttribute("CONSUMER_ADMIN_ERROR") != null %>'>
+				<%
+				String consumerAdminError = GetterUtil.getString((String)request.getAttribute("CONSUMER_ADMIN_ERROR"));
+				%>
+
+				<c:if test="<%= consumerAdminError.equals("DUPLICATE_CONSUMER_NAME") %>" > 
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="you-have-entered-invalid-data" />
+						<liferay-ui:message key="consumer-name-already-exists" />
+					</span>
+				</c:if>
+
+				<c:if test="<%= consumerAdminError.equals("CONSUMER_CREATION_FAILED") %>" > 
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="consumer-creation-failed" />
 					</span>
 				</c:if>
 
@@ -591,12 +601,22 @@
 
 				<liferay-ui:tabs names="portlet" />
 
-				<c:if test='<%= request.getAttribute("CONSUMER_ADMIN_ERROR") != null %>'>
+				<%
+				String consumerAdminError = GetterUtil.getString((String)request.getAttribute("CONSUMER_ADMIN_ERROR"));
+				%>
+
+				<c:if test="<%= consumerAdminError.equals("DUPLICATE_PORTLET_NAME") %>" > 
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="you-have-entered-invalid-data" />
+						<liferay-ui:message key="remote-portlet-name-already-exists" />
 					</span>
 				</c:if>
 
+				<c:if test="<%= consumerAdminError.equals("CHANNEL_CREATION_FAILED") %>" > 
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="failed-to-install-remote-portlet" />
+					</span>
+				</c:if>
+				
 				<table class="lfr-table">
 				<tr>
 					<td>

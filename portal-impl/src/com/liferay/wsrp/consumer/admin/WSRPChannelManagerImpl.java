@@ -50,6 +50,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import com.sun.portal.wsrp.common.WSRPConfig;
+import com.sun.portal.wsrp.common.WSRPMBeanException;
 import com.sun.portal.wsrp.common.stubs.v2.LocalizedString;
 import com.sun.portal.wsrp.common.stubs.v2.MarkupType;
 import com.sun.portal.wsrp.common.stubs.v2.PortletDescription;
@@ -73,16 +74,19 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WSRPChannelManagerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Rajesh Thiagarajan
+ * @author Manish Gupta
  *
  */
 public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 
 	public void createWSRPChannel(
 		String channelName, String consumerId, String producerEntityId,
-		String portletHandle) {
+		String portletHandle) throws WSRPMBeanException {
 
 		try {
 			String portletId = PortalUtil.getJsSafePortletId(channelName);
+
+			_verifyDuplicateId(portletId);
 
 			Portlet portlet = new PortletImpl(
 				CompanyConstants.SYSTEM, portletId);
@@ -104,8 +108,8 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 			PortletLocalServiceUtil.deployRemotePortlet(portlet);
 
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (WSRPConsumerException e) {
+			throw new WSRPMBeanException(e.getMessage());
 		}
 	}
 
@@ -270,6 +274,22 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 			WSRPPersistenceHelper.getInstance();
 
 		persistenceHelper.addWSRPPortlet(remotePortlet);
+	}
+
+	private void _verifyDuplicateId(String portletId)
+		throws WSRPConsumerException {
+
+		try {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				CompanyConstants.SYSTEM, portletId);
+
+			if (portlet.isRemote()) {
+				throw new WSRPConsumerException("DUPLICATE_PORTLET_NAME");
+			}
+		}
+		catch (SystemException e) {
+			throw new WSRPConsumerException("SYSTEM_FAILURE");
+		}
 	}
 
 	private static final String _DEFAULT_KEYWORD = "WSRP";
