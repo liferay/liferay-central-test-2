@@ -72,6 +72,10 @@ public class LocaleUtil {
 	}
 
 	private Locale _fromLanguageId(String languageId) {
+		if (languageId == null) {
+			return _locale;
+		}
+
 		Locale locale = null;
 
 		try {

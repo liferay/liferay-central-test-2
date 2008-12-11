@@ -131,7 +131,9 @@ public class ModelHintsImpl implements ModelHints {
 			xml = StringUtil.read(classLoader, source);
 		}
 		catch (Exception e) {
-			_log.warn("Cannot load " + source);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Cannot load " + source);
+			}
 		}
 
 		if (xml == null) {

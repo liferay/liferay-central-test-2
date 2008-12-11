@@ -181,7 +181,7 @@ public class LocalizationUtil {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+				_log.warn(e, e);
 			}
 		}
 		finally {
@@ -301,7 +301,9 @@ public class LocalizationUtil {
 				}
 			}
 
-			if (availableLocales.indexOf(requestedLanguageId) != -1) {
+			if ((availableLocales != null) &&
+				(availableLocales.indexOf(requestedLanguageId) != -1)) {
+
 				availableLocales = StringUtil.remove(
 					availableLocales, requestedLanguageId, StringPool.COMMA);
 
@@ -331,7 +333,7 @@ public class LocalizationUtil {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+				_log.warn(e, e);
 			}
 		}
 		finally {
@@ -490,7 +492,7 @@ public class LocalizationUtil {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+				_log.warn(e, e);
 			}
 		}
 		finally {
@@ -612,7 +614,7 @@ public class LocalizationUtil {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+				_log.warn(e, e);
 			}
 		}
 		finally {
