@@ -832,7 +832,7 @@ public class JournalUtil {
 	}
 
 	public static String transform(
-			Map<String, String> tokens, String articleMode, String languageId,
+			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script, String langType)
 		throws Exception {
 
@@ -842,8 +842,8 @@ public class JournalUtil {
 			_log.debug("Language " + languageId);
 		}
 
-		if (Validator.isNull(articleMode)) {
-			articleMode = Constants.VIEW;
+		if (Validator.isNull(viewMode)) {
+			viewMode = Constants.VIEW;
 		}
 
 		if (_logTokens.isDebugEnabled()) {
@@ -923,11 +923,11 @@ public class JournalUtil {
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
 			output = JournalVmUtil.transform(
-				tokens, articleMode, languageId, xml, script);
+				tokens, viewMode, languageId, xml, script);
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
 			output = JournalXslUtil.transform(
-				tokens, articleMode, languageId, xml, script);
+				tokens, viewMode, languageId, xml, script);
 		}
 
 		// Postprocess output

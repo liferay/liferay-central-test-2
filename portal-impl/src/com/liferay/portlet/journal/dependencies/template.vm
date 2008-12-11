@@ -25,6 +25,9 @@
 ## $main-text.getType()     - The type "text-area"
 ## $main-text.getChildren() - A collection with two nodes (sub-image and
 ##                            sub-text) that can be used in the #foreach clause
+## $main-text.getSiblings() - A collection of elements with the name
+##                            "main-text". This will only return more than one
+##                            element if this element is repeatable.
 ##
 ## One special accessor exists for elements of type "multi-list":
 ##
@@ -40,8 +43,7 @@
 ## The variable $journalTemplatesPath can be used to include
 ## another Journal template, e.g. #parse ("$journalTemplatesPath/LAYOUT-PARENT")
 ##
-## The variable $articleMode specifies which mode the article is being viewed,
-## for example, #if ($articleMode == "print") - checks if the user clicked on
-## the print icon, this way a different content can be displayed depending on
-## it.
+## The variable $viewMode specifies which mode the article is being viewed in.
+## For example, if $viewMode evaluates to "print", that means the user clicked
+## the print icon to view this article.
 ##

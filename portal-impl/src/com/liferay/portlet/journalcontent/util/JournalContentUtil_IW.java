@@ -43,91 +43,91 @@ public class JournalContentUtil_IW {
 	}
 
 	public java.lang.String getContent(long groupId,
-		java.lang.String articleId, java.lang.String articleMode,
+		java.lang.String articleId, java.lang.String viewMode,
 		java.lang.String languageId, java.lang.String xmlRequest) {
-		return JournalContentUtil.getContent(groupId, articleId, articleMode,
+		return JournalContentUtil.getContent(groupId, articleId, viewMode,
 			languageId, xmlRequest);
 	}
 
 	public java.lang.String getContent(long groupId,
-		java.lang.String articleId, java.lang.String articleMode,
+		java.lang.String articleId, java.lang.String viewMode,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return JournalContentUtil.getContent(groupId, articleId, articleMode,
+		return JournalContentUtil.getContent(groupId, articleId, viewMode,
 			languageId, themeDisplay);
 	}
 
 	public java.lang.String getContent(long groupId,
 		java.lang.String articleId, java.lang.String templateId,
-		java.lang.String articleMode, java.lang.String languageId,
+		java.lang.String viewMode, java.lang.String languageId,
 		java.lang.String xmlRequest) {
 		return JournalContentUtil.getContent(groupId, articleId, templateId,
-			articleMode, languageId, xmlRequest);
+			viewMode, languageId, xmlRequest);
 	}
 
 	public java.lang.String getContent(long groupId,
 		java.lang.String articleId, java.lang.String templateId,
-		java.lang.String articleMode, java.lang.String languageId,
+		java.lang.String viewMode, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		return JournalContentUtil.getContent(groupId, articleId, templateId,
-			articleMode, languageId, themeDisplay);
+			viewMode, languageId, themeDisplay);
 	}
 
 	public java.lang.String getContent(long groupId,
 		java.lang.String articleId, java.lang.String templateId,
-		java.lang.String articleMode, java.lang.String languageId,
+		java.lang.String viewMode, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String xmlRequest) {
 		return JournalContentUtil.getContent(groupId, articleId, templateId,
-			articleMode, languageId, themeDisplay, xmlRequest);
+			viewMode, languageId, themeDisplay, xmlRequest);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
-		long groupId, java.lang.String articleId, java.lang.String articleMode,
+		long groupId, java.lang.String articleId, java.lang.String viewMode,
 		java.lang.String languageId, java.lang.String xmlRequest) {
-		return JournalContentUtil.getDisplay(groupId, articleId, articleMode,
+		return JournalContentUtil.getDisplay(groupId, articleId, viewMode,
 			languageId, xmlRequest);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
-		long groupId, java.lang.String articleId, java.lang.String articleMode,
+		long groupId, java.lang.String articleId, java.lang.String viewMode,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return JournalContentUtil.getDisplay(groupId, articleId, articleMode,
+		return JournalContentUtil.getDisplay(groupId, articleId, viewMode,
 			languageId, themeDisplay);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
-		long groupId, java.lang.String articleId, java.lang.String articleMode,
+		long groupId, java.lang.String articleId, java.lang.String viewMode,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay, int page) {
-		return JournalContentUtil.getDisplay(groupId, articleId, articleMode,
+		return JournalContentUtil.getDisplay(groupId, articleId, viewMode,
 			languageId, themeDisplay, page);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
-		java.lang.String articleMode, java.lang.String languageId,
+		java.lang.String viewMode, java.lang.String languageId,
 		java.lang.String xmlRequest) {
 		return JournalContentUtil.getDisplay(groupId, articleId, templateId,
-			articleMode, languageId, xmlRequest);
+			viewMode, languageId, xmlRequest);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
-		java.lang.String articleMode, java.lang.String languageId,
+		java.lang.String viewMode, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		return JournalContentUtil.getDisplay(groupId, articleId, templateId,
-			articleMode, languageId, themeDisplay);
+			viewMode, languageId, themeDisplay);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
-		java.lang.String articleMode, java.lang.String languageId,
+		java.lang.String viewMode, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay, int page,
 		java.lang.String xmlRequest) {
 		return JournalContentUtil.getDisplay(groupId, articleId, templateId,
-			articleMode, languageId, themeDisplay, page, xmlRequest);
+			viewMode, languageId, themeDisplay, page, xmlRequest);
 	}
 
 	private JournalContentUtil_IW() {

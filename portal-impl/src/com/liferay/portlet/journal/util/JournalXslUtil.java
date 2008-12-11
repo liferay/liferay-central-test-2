@@ -54,7 +54,7 @@ import javax.xml.transform.stream.StreamSource;
 public class JournalXslUtil {
 
 	public static String transform(
-			Map<String, String> tokens, String articleMode, String languageId,
+			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script)
 		throws Exception {
 
@@ -94,7 +94,7 @@ public class JournalXslUtil {
 			transformer.setParameter("groupId", String.valueOf(groupId));
 			transformer.setParameter(
 				"journalTemplatesPath", journalTemplatesPath);
-			transformer.setParameter("articleMode", articleMode);
+			transformer.setParameter("viewMode", viewMode);
 			transformer.setParameter("locale", locale);
 			transformer.setParameter(
 				"permissionChecker",

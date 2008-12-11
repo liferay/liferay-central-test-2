@@ -201,7 +201,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					printPageURL.setParameter("struts_action", "/journal_content/view");
 					printPageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
 					printPageURL.setParameter("articleId", articleDisplay.getArticleId());
-					printPageURL.setParameter("articleMode", Constants.PRINT);
+					printPageURL.setParameter("viewMode", Constants.PRINT);
 					%>
 
 					<script type="text/javascript">
@@ -210,7 +210,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						}
 					</script>
 
-					<liferay-ui:icon image="print" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
+					<liferay-ui:icon image="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
 				</c:if>
 
 				<c:if test="<%= enableRatings %>">

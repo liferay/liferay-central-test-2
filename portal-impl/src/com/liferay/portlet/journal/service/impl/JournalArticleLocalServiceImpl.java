@@ -925,43 +925,42 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public String getArticleContent(
-			long groupId, String articleId, String articleMode,
-			String languageId, ThemeDisplay themeDisplay)
+			long groupId, String articleId, String viewMode, String languageId,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getArticleContent(
-			groupId, articleId, null, articleMode, languageId, themeDisplay);
+			groupId, articleId, null, viewMode, languageId, themeDisplay);
 	}
 
 	public String getArticleContent(
-			long groupId, String articleId, String articleMode,
-			String templateId, String languageId, ThemeDisplay themeDisplay)
+			long groupId, String articleId, String viewMode, String templateId,
+			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			groupId, articleId, templateId, articleMode, languageId,
-			themeDisplay);
+			groupId, articleId, templateId, viewMode, languageId, themeDisplay);
 
 		return articleDisplay.getContent();
 	}
 
 	public String getArticleContent(
-			long groupId, String articleId, double version, String articleMode,
+			long groupId, String articleId, double version, String viewMode,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getArticleContent(
-			groupId, articleId, version, null, articleMode, languageId,
+			groupId, articleId, version, null, viewMode, languageId,
 			themeDisplay);
 	}
 
 	public String getArticleContent(
-			long groupId, String articleId, double version, String articleMode,
+			long groupId, String articleId, double version, String viewMode,
 			String templateId, String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			groupId, articleId, version, templateId, articleMode, languageId,
+			groupId, articleId, version, templateId, viewMode, languageId,
 			themeDisplay);
 
 		if (articleDisplay == null) {
@@ -973,13 +972,12 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public String getArticleContent(
-			JournalArticle article, String templateId, String articleMode,
+			JournalArticle article, String templateId, String viewMode,
 			String languageId, ThemeDisplay themeDisplay)
 		throws SystemException {
 
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			article, templateId, articleMode, languageId, 1, null,
-			themeDisplay);
+			article, templateId, viewMode, languageId, 1, null, themeDisplay);
 
 		if (articleDisplay == null) {
 			return StringPool.BLANK;
@@ -990,63 +988,62 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
-			long groupId, String articleId, String articleMode,
-			String languageId, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getArticleDisplay(
-			groupId, articleId, null, articleMode, languageId, themeDisplay);
-	}
-
-	public JournalArticleDisplay getArticleDisplay(
-			long groupId, String articleId, String articleMode,
-			String languageId, int page, String xmlRequest,
+			long groupId, String articleId, String viewMode, String languageId,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, null, articleMode, languageId, page, xmlRequest,
+			groupId, articleId, null, viewMode, languageId, themeDisplay);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, String viewMode, String languageId,
+			int page, String xmlRequest, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getArticleDisplay(
+			groupId, articleId, null, viewMode, languageId, page, xmlRequest,
 			themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
-			long groupId, String articleId, String templateId,
-			String articleMode, String languageId, ThemeDisplay themeDisplay)
+			long groupId, String articleId, String templateId, String viewMode,
+			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleDisplay(
-			groupId, articleId, article.getVersion(), templateId, articleMode,
+			groupId, articleId, article.getVersion(), templateId, viewMode,
 			languageId, themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
-			long groupId, String articleId, String templateId,
-			String articleMode, String languageId, int page, String xmlRequest,
+			long groupId, String articleId, String templateId, String viewMode,
+			String languageId, int page, String xmlRequest,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleDisplay(
-			groupId, articleId, article.getVersion(), templateId, articleMode,
+			groupId, articleId, article.getVersion(), templateId, viewMode,
 			languageId, page, xmlRequest, themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, double version, String templateId,
-			String articleMode, String languageId, ThemeDisplay themeDisplay)
+			String viewMode, String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, articleMode, languageId, 1,
+			groupId, articleId, version, templateId, viewMode, languageId, 1,
 			null, themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, double version, String templateId,
-			String articleMode, String languageId, int page, String xmlRequest,
+			String viewMode, String languageId, int page, String xmlRequest,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -1068,12 +1065,12 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return getArticleDisplay(
-			article, templateId, articleMode, languageId, page, xmlRequest,
+			article, templateId, viewMode, languageId, page, xmlRequest,
 			themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
-			JournalArticle article, String templateId, String articleMode,
+			JournalArticle article, String templateId, String viewMode,
 			String languageId, int page, String xmlRequest,
 			ThemeDisplay themeDisplay)
 		throws SystemException {
@@ -1215,7 +1212,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			content = JournalUtil.transform(
-				tokens, articleMode, languageId, xml, script, langType);
+				tokens, viewMode, languageId, xml, script, langType);
 
 			if (!pageFlow) {
 				String[] pieces = StringUtil.split(content, _TOKEN_PAGE_BREAK);

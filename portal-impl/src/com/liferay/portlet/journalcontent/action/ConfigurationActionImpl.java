@@ -65,10 +65,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			actionRequest, "showAvailableLocales");
 		String[] extensions = actionRequest.getParameterValues("extensions");
-		boolean enableRatings = ParamUtil.getBoolean(
-			actionRequest, "enableRatings");
 		boolean enablePrint = ParamUtil.getBoolean(
 			actionRequest, "enablePrint");
+		boolean enableRatings = ParamUtil.getBoolean(
+			actionRequest, "enableRatings");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
