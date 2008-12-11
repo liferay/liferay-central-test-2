@@ -1431,6 +1431,7 @@ expiration-enabled=有効期限の設定
 expiration=期限切れ
 expire=期限の設定
 expired=公開終了
+export-calendar=輸出カレンダー
 export-data=データをエクスポート
 export-date-range-help=データーの一部をエクスポートするために、日付け範囲の指定を有効にします。もし、開始日後や終了日前に作成や変更されると、すべてのデーターがエクスポートされます。
 export-enabled=エクスポートを有効

@@ -1431,6 +1431,7 @@ expiration-enabled=L'Expiration est active
 expiration=Échéance
 expire=Déprécier
 expired=Déprécié
+export-calendar=Calendrier d'exportation
 export-data=Données d'exportation
 export-date-range-help=Permettez à la gamme de date de spécifier un sous-ensemble des données pour exporter. Toutes les données seront exportées si créé ou modifié ou après à la date de début et avant la date de fin.
 export-enabled=L'exportation est activée

@@ -1431,6 +1431,7 @@ expiration-enabled=失效使能
 expiration=逾期
 expire=到期
 expired=到期
+export-calendar=出口日曆
 export-data=出口數據
 export-date-range-help=使日期範圍指定數據的一個子集出口。 所有數據將被出口，如果創造或修改在或在起始日期以后和在结束日期之前。
 export-enabled=出口使能

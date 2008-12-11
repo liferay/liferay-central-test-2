@@ -1431,6 +1431,7 @@ expiration-enabled=启用失效功能
 expiration=失效
 expire=失效
 expired=失效
+export-calendar=出口日历
 export-data=导出数据
 export-date-range-help=启用日期范围以指定要导出的数据的子集。所有在开始日期或以后、结束日期之前创建或修改的数据都将导出。
 export-enabled=启用导出功能

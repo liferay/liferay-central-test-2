@@ -1431,6 +1431,7 @@ expiration-enabled=A Expiração Permitiu
 expiration=Expiração
 expire=Expire
 expired=Expirado
+export-calendar=Calendário da exportação
 export-data=Dados da exportação
 export-date-range-help=Permita a escala da data de especific um subconjunto dos dados para exportar. Todos os dados serão exportados se criado ou modificado ou após na data de início e antes da data de extremidade.
 export-enabled=A Exportação Permitiu

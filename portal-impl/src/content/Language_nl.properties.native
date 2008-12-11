@@ -1431,6 +1431,7 @@ expiration-enabled=Verval ingeschakeld
 expiration=Verval
 expire=Verval
 expired=Vervallen
+export-calendar=De Kalender van de uitvoer
 export-data=De Gegevens van de uitvoer
 export-date-range-help=Laat de datumwaaier toe om een ondergroep van de uit te voeren gegevens te specificeren. Alle gegevens zullen worden uitgevoerd indien gecre�ërd of gewijzigd op of na de begindatum en vóór de einddatum.
 export-enabled=Sta exporteren toe
