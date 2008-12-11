@@ -186,7 +186,7 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		}
 		catch (CMSException cmse) {
 			throw new TemplateNotFoundException(
-				cmse.getErrorCode(), cmse.getMessage());
+				cmse.getErrorCode(), cmse.getMessage(), cmse.getCause());
 		}
 
 		TemplateInvoker templateInvoker = (TemplateInvoker)template;
