@@ -97,7 +97,7 @@ List<String> primaryKeys = new ArrayList<String>();
 				}
 			}
 
-			String cssClass = "";
+			String cssClass = StringPool.BLANK;
 
 			if (orderCurrentHeader) {
 				cssClass = "sort-column";
@@ -126,7 +126,7 @@ List<String> primaryKeys = new ArrayList<String>();
 					width="95%"
 				</c:if>
 			>
-				
+
 				<c:if test="<%= orderKey != null %>">
 					<span class="result-column-name">
 						<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
