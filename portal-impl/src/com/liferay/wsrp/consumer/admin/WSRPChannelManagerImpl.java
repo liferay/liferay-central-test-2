@@ -80,13 +80,14 @@ import org.apache.commons.logging.LogFactory;
 public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 
 	public void createWSRPChannel(
-		String channelName, String consumerId, String producerEntityId,
-		String portletHandle) throws WSRPMBeanException {
+			String channelName, String consumerId, String producerEntityId,
+			String portletHandle)
+		throws WSRPMBeanException {
 
 		try {
 			String portletId = PortalUtil.getJsSafePortletId(channelName);
 
-			_verifyDuplicateId(portletId);
+			validatePortletId(portletId);
 
 			Portlet portlet = new PortletImpl(
 				CompanyConstants.SYSTEM, portletId);
@@ -108,8 +109,8 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 			PortletLocalServiceUtil.deployRemotePortlet(portlet);
 
 		}
-		catch (WSRPConsumerException e) {
-			throw new WSRPMBeanException(e.getMessage());
+		catch (WSRPConsumerException wsrpce) {
+			throw new WSRPMBeanException(wsrpce.getMessage());
 		}
 	}
 
@@ -276,7 +277,7 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 		persistenceHelper.addWSRPPortlet(remotePortlet);
 	}
 
-	private void _verifyDuplicateId(String portletId)
+	protected void validatePortletId(String portletId)
 		throws WSRPConsumerException {
 
 		try {
@@ -287,7 +288,7 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 				throw new WSRPConsumerException("DUPLICATE_PORTLET_NAME");
 			}
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 			throw new WSRPConsumerException("SYSTEM_FAILURE");
 		}
 	}
