@@ -355,8 +355,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
 
 			if (groups.size() > 0) {
-				roles = RoleLocalServiceUtil.getUserRelatedRoles(
-					userId, groups);
+				roles.addAll(
+					RoleLocalServiceUtil.getUserRelatedRoles(userId, groups));
 			}
 			else {
 				roles.addAll(RoleLocalServiceUtil.getUserRoles(userId));
