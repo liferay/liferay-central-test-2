@@ -110,7 +110,7 @@
 			dir="${app.server.parent.dir}"
 			fork="true"
 			input="tools/servers/glassfish/input.txt"
-			jar="${app.server.parent.dir}/glassfish-installer-v2ur2-b04-${glassfish.os}.jar"
+			jar="${app.server.parent.dir}/glassfish-installer-v2.1-b60a-${glassfish.os}.jar"
 			maxmemory="256m"
 		>
 			<arg value="-console" />
