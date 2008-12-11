@@ -122,7 +122,7 @@ public class DerbyUtil extends DBUtil {
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
 		" blob", " smallint", " timestamp",
 		" double", " integer", " bigint",
-		" long varchar", " clob", " varchar",
+		" varchar(4000)", " clob", " varchar",
 		" generated always as identity", "commit"
 	};
 
