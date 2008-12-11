@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -148,7 +149,13 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (Validator.isNull(actionId) || permissionChecker.isCompanyAdmin()) {
+		if (permissionChecker.isCompanyAdmin()) {
+			return organizationLocalService.search(
+				permissionChecker.getCompanyId(), 0, null, null, null, null,
+				null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		}
+
+		if (Validator.isNull(actionId)) {
 			return organizationLocalService.getManageableOrganizations(userId);
 		}
 

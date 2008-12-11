@@ -123,7 +123,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 									%>
 
 									<c:if test="<%= !manageableGroups.isEmpty() %>">
-										<liferay-ui:panel id="communityPanel" title='<%= LanguageUtil.get(pageContext, "my-community") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+										<liferay-ui:panel id="communityPanel" title='<%= LanguageUtil.get(pageContext, "communities") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>
 
 												<%
