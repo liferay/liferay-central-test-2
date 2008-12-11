@@ -513,8 +513,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public boolean hasNotUniquePerLayout(String portletId) {
-		return _notUniquePerLayout.contains(portletId);
+	public boolean hasNotUniquePerLayout(String dataKey) {
+		return _notUniquePerLayout.contains(dataKey);
 	}
 
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
@@ -600,8 +600,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public void putNotUniquePerLayout(String portletId) {
-		_notUniquePerLayout.add(portletId);
+	public void putNotUniquePerLayout(String dataKey) {
+		_notUniquePerLayout.add(dataKey);
 	}
 
 	public void setGroupId(long groupId) {

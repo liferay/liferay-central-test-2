@@ -473,12 +473,12 @@ public class PortletImporter {
 			plid = layout.getPlid();
 
 			if (preserveScopeLayoutId && (portletId != null)) {
-				javax.portlet.PortletPreferences jxPrefs =
+				javax.portlet.PortletPreferences jxPreferences =
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
 				scopeLayoutId = GetterUtil.getLong(
-					jxPrefs.getValue("lfr-scope-layout-id", null));
+					jxPreferences.getValue("lfr-scope-layout-id", null));
 
 				context.setScopeLayoutId(scopeLayoutId);
 			}
@@ -590,15 +590,15 @@ public class PortletImporter {
 		}
 
 		if (preserveScopeLayoutId && (layout != null)) {
-			javax.portlet.PortletPreferences jxPrefs =
+			javax.portlet.PortletPreferences jxPreferences =
 				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 					layout, portletId);
 
 			try {
-				jxPrefs.setValue(
+				jxPreferences.setValue(
 					"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
 
-				jxPrefs.store();
+				jxPreferences.store();
 			}
 			catch (Exception e) {
 				throw new PortalException(e);

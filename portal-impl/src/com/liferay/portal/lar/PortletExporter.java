@@ -185,12 +185,12 @@ public class PortletExporter {
 
 		long scopeGroupId = layout.getGroupId();
 
-		javax.portlet.PortletPreferences jxPrefs =
+		javax.portlet.PortletPreferences jxPreferences =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portletId);
 
 		long scopeLayoutId = GetterUtil.getLong(
-			jxPrefs.getValue("lfr-scope-layout-id", null));
+			jxPreferences.getValue("lfr-scope-layout-id", null));
 
 		if (scopeLayoutId != 0) {
 			Group scopeGroup = layout.getScopeGroup();
@@ -524,8 +524,6 @@ public class PortletExporter {
 			return;
 		}
 
-		String key = portletId + StringPool.AT + context.getScopeLayoutId();
-
 		if ((!portlet.isInstanceable()) &&
 			(!portlet.isPreferencesUniquePerLayout()) &&
 			(context.hasNotUniquePerLayout(portletId))) {
@@ -546,21 +544,25 @@ public class PortletExporter {
 
 		// Data
 
-		javax.portlet.PortletPreferences jxPrefs =
+		javax.portlet.PortletPreferences jxPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				layout, portletId, StringPool.BLANK);
 
 		if (exportPortletData) {
 			if (!portlet.isPreferencesUniquePerLayout()) {
-				if (!context.hasNotUniquePerLayout(key)) {
-					context.putNotUniquePerLayout(key);
+				String dataKey =
+					portletId + StringPool.AT + context.getScopeLayoutId();
+
+				if (!context.hasNotUniquePerLayout(dataKey)) {
+					context.putNotUniquePerLayout(dataKey);
 
 					exportPortletData(
-						context, portlet, layout, jxPrefs, portletEl);
+						context, portlet, layout, jxPreferences, portletEl);
 				}
 			}
 			else {
-				exportPortletData(context, portlet, layout, jxPrefs, portletEl);
+				exportPortletData(
+					context, portlet, layout, jxPreferences, portletEl);
 			}
 		}
 

@@ -111,14 +111,6 @@ public interface PortletDataContext extends Serializable {
 
 	public long getGroupId();
 
-	public long getSourceGroupId();
-
-	public String getSourceLayoutPath(long layoutId);
-
-	public String getSourcePortletPath(String portletId);
-
-	public String getSourceRootPath();
-
 	public String getLayoutPath(long layoutId);
 
 	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj);
@@ -140,6 +132,14 @@ public interface PortletDataContext extends Serializable {
 	public long getScopeGroupId();
 
 	public long getScopeLayoutId();
+
+	public long getSourceGroupId();
+
+	public String getSourceLayoutPath(long layoutId);
+
+	public String getSourcePortletPath(String portletId);
+
+	public String getSourceRootPath();
 
 	public Date getStartDate();
 
@@ -177,7 +177,7 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean hasDateRange();
 
-	public boolean hasNotUniquePerLayout(String portletId);
+	public boolean hasNotUniquePerLayout(String dataKey);
 
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey);
 
@@ -195,11 +195,9 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean isWithinDateRange(Date modifiedDate);
 
-	public void putNotUniquePerLayout(String portletId);
+	public void putNotUniquePerLayout(String dataKey);
 
 	public void setGroupId(long groupId);
-
-	public void setSourceGroupId(long sourceGroupId);
 
 	public void setOldPlid(long oldPlid);
 
@@ -210,6 +208,8 @@ public interface PortletDataContext extends Serializable {
 	public void setScopeGroupId(long scopeGroupId);
 
 	public void setScopeLayoutId(long scopeLayoutId);
+
+	public void setSourceGroupId(long sourceGroupId);
 
 	public String toXML(Object object);
 

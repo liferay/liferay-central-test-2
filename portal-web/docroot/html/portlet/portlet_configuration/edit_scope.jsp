@@ -53,7 +53,6 @@ Group group = layout.getGroup();
 	</td>
 	<td>
 		<select name="<portlet:namespace />scopeLayoutId">
-
 			<option <%= (scopeLayoutId == 0) ? "selected" : "" %> value="0"> <liferay-ui:message key="default" /></option>
 			<option <%= (scopeLayoutId == layout.getLayoutId()) ? "selected" : "" %> value="<%= layout.getLayoutId() %>"><liferay-ui:message key="current-page" /> (<%= HtmlUtil.escape(layout.getName(locale)) %>)</option>
 

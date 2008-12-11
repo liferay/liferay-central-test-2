@@ -306,12 +306,12 @@ public class LayoutExporter {
 				long scopeGroupId = groupId;
 
 				for (String portletId : layoutTypePortlet.getPortletIds()) {
-					javax.portlet.PortletPreferences jxPrefs =
+					javax.portlet.PortletPreferences jxPreferences =
 						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 							layout, portletId);
 
 					long scopeLayoutId = GetterUtil.getLong(
-						jxPrefs.getValue("lfr-scope-layout-id", null));
+						jxPreferences.getValue("lfr-scope-layout-id", null));
 
 					if (scopeLayoutId != 0) {
 						Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
