@@ -209,7 +209,7 @@ public class JournalContentUtil {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"getDisplay for {" + groupId + ", " + articleId + ", " +
-					templateId + ", " + viewMode ", " + languageId + ", " +
+					templateId + ", " + viewMode + ", " + languageId + ", " +
 						page + "} takes " + stopWatch.getTime() + " ms");
 		}
 
