@@ -31,7 +31,7 @@
 String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
 boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_summary:folksonomy"));
-String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_summary:message"), "tags");
+String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_summary:message"), StringPool.BLANK);
 LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
 
 List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, folksonomy);
@@ -50,7 +50,7 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 					portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 				%>
 
-					<a href="<%= portletURL.toString() %>"><%= entry.getName() %></a>
+					<a class="tag" href="<%= portletURL.toString() %>"><%= entry.getName() %></a>
 
 				<%
 				}

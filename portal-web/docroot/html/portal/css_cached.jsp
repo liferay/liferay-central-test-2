@@ -1720,13 +1720,10 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .js .taglib-social-bookmarks .show-bookmarks {
-	background: #D3DADD url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_right.png) no-repeat 2px 50%;
 	display: block;
-	padding-left: 15px;
 }
 
 .js .taglib-social-bookmarks.visible .show-bookmarks {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png);
 }
 
 .js .taglib-social-bookmarks ul {
@@ -1797,11 +1794,11 @@ fieldset:last-child, .uni-form fieldset:last-child {
 /* ---------- Taglib tags summary ---------- */
 
 .taglib-tags-summary .tag {
-	background: #DFF4FF none repeat scroll 0 0;
-	border: 1px solid #A7CEDF;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/blogs/tag_blue.png) no-repeat 0 50%;
+	color: #A7CEDF;
 	margin-bottom: 3px;
 	margin-right: 3px;
-	padding: 3px 6px 3px 6px;
+	padding: 2px 5px 2px 20px;
 }
 
 /* ---------- Taglib user display ---------- */
