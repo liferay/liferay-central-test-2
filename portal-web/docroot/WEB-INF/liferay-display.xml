@@ -20,9 +20,6 @@
 		<portlet id="118" />
 		<portlet id="122" />
 	</category>
-	<category name="category.social">
-		<portlet id="116" />
-	</category>
 	<category name="category.collaboration">
 		<portlet id="8" />
 		<portlet id="19" />
@@ -76,6 +73,9 @@
 	<category name="category.shopping">
 		<portlet id="34" />
 		<portlet id="67" />
+	</category>
+	<category name="category.social">
+		<portlet id="116" />
 	</category>
 	<category name="category.tools">
 		<portlet id="2" />

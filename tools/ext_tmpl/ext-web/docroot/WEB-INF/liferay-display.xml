@@ -75,6 +75,9 @@
 		<portlet id="34" />
 		<portlet id="67" />
 	</category>
+	<category name="category.social">
+		<portlet id="116" />
+	</category>
 	<category name="category.tools">
 		<portlet id="2" />
 		<portlet id="3" />
