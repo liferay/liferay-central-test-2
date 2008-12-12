@@ -52,11 +52,7 @@ public class ListUtil {
 			return null;
 		}
 
-		List copy = new ArrayList(master.size());
-
-		copy(master, copy);
-
-		return copy;
+		return new ArrayList(master);
 	}
 
 	public static void copy(List master, List copy) {
@@ -183,7 +179,7 @@ public class ListUtil {
 
 	public static List sort(List list, Comparator comparator) {
 		if (list instanceof UnmodifiableList) {
-			list = new ArrayList(list);
+			list = copy(list);
 		}
 
 		Collections.sort(list, comparator);
