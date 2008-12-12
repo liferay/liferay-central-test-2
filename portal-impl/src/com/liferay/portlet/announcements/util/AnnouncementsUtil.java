@@ -90,8 +90,10 @@ public class AnnouncementsUtil {
 		// Role announcements
 
 		if (groupsList.size() > 0) {
-			List<Role> roles = ListUtil.copy(
-				RoleLocalServiceUtil.getUserRelatedRoles(userId, groupsList));
+			List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
+				userId, groupsList);
+
+			roles = ListUtil.copy(roles);
 
 			for (Group group : groupsList) {
 				roles.addAll(
