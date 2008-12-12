@@ -20,6 +20,9 @@
 		<portlet id="118" />
 		<portlet id="122" />
 	</category>
+	<category name="category.social">
+		<portlet id="116" />
+	</category>
 	<category name="category.collaboration">
 		<portlet id="8" />
 		<portlet id="19" />
