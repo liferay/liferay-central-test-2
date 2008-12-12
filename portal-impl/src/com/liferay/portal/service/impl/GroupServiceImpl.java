@@ -24,7 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -35,6 +34,7 @@ import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.MapUtil;
 
 import java.util.LinkedHashMap;
@@ -110,8 +110,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		if (permissionChecker.isCompanyAdmin()) {
 			return groupLocalService.search(
-				permissionChecker.getCompanyId(), null, null, null,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				permissionChecker.getCompanyId(), null, null, null, 0,
+				PropsValues.CONTROL_PANEL_NAVIGATION_COMMUNITIES_MAX);
 		}
 
 		List<Group> manageableGroups = groupLocalService.getManageableGroups(

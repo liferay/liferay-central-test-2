@@ -244,6 +244,10 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SECURITY_STRANGERS_WITH_MX = "company.security.strangers.with.mx";
 
+	public static final String CONTROL_PANEL_NAVIGATION_COMMUNITIES_MAX = "control.panel.navigation.communities.max";
+
+	public static final String CONTROL_PANEL_NAVIGATION_ORGANIZATIONS_MAX = "control.panel.navigation.organizations.max";
+
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
 
 	public static final String CONTROL_PANEL_LAYOUT_NAME = "control.panel.layout.name";

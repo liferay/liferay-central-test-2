@@ -24,7 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -41,6 +40,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.util.UniqueList;
 
@@ -152,7 +152,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		if (permissionChecker.isCompanyAdmin()) {
 			return organizationLocalService.search(
 				permissionChecker.getCompanyId(), 0, null, null, null, null,
-				null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				null, 0,
+				PropsValues.CONTROL_PANEL_NAVIGATION_ORGANIZATIONS_MAX);
 		}
 
 		if (Validator.isNull(actionId)) {
