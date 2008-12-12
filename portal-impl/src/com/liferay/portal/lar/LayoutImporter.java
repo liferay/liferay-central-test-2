@@ -616,8 +616,8 @@ public class LayoutImporter {
 							layout.getPlid(), portletId);
 
 					importPortletPermissions_5(
-						layoutCache, companyId, sourceGroupId, userId,
-						resourceName, resourcePrimKey, permissionsEl);
+						layoutCache, companyId, groupId, userId, resourceName,
+						resourcePrimKey, permissionsEl);
 				}
 				else {
 					importPortletPermissions_4(
