@@ -23,6 +23,7 @@
 package com.liferay.portlet.announcements.util;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
@@ -89,8 +90,8 @@ public class AnnouncementsUtil {
 		// Role announcements
 
 		if (groupsList.size() > 0) {
-			List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
-				userId, groupsList);
+			List<Role> roles = ListUtil.copy(
+				RoleLocalServiceUtil.getUserRelatedRoles(userId, groupsList));
 
 			for (Group group : groupsList) {
 				roles.addAll(
