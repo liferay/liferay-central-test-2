@@ -1794,7 +1794,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 /* ---------- Taglib tags summary ---------- */
 
 .taglib-tags-summary .tag {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/blogs/tag_blue.png) no-repeat 0 50%;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/tag.png) no-repeat 0 50%;
 	color: #A7CEDF;
 	margin-bottom: 3px;
 	margin-right: 3px;

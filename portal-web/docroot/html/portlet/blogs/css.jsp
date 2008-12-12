@@ -33,8 +33,8 @@
 
 .portlet-blogs .entry-author {
 	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 50%;
-	border-right: 1px solid #999999;
-	color: #999999;
+	border-right: 1px solid #999;
+	color: #999;
 	float: left;
 	font-weight: bold;
 	margin-right: 10px;
@@ -51,7 +51,7 @@
 
 .portlet-blogs .entry-date {
 	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
-	color: #999999;
+	color: #999;
 	margin-bottom: 1em;
 	padding-left: 25px;
 }
@@ -85,7 +85,7 @@
 }
 
 .portlet-blogs .stats {
-	color: #999999;
+	color: #999;
 }
 
 .portlet-blogs .subscribe {
