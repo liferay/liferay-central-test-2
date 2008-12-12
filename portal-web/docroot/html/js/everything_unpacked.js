@@ -11763,7 +11763,7 @@ Liferay.Upload = new Class({
 
 		instance._buttonPlaceHolder = jQuery('<div id="' + instance._buttonPlaceHolderId + '"></div>');
 
-		instance._container.append(instance._buttonPlaceHolder);
+		jQuery(document.body).append(instance._buttonPlaceHolder);
 
 		instance._uploader = new SWFUpload({
 			upload_url: instance._uploadFile,
