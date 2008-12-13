@@ -67,7 +67,7 @@
 			<li class="my-places">
 				<a>$my_places_text</a>
 
-				$theme.myPlaces($getterUtil.getInteger($propsUtil.get("theme.myplaces.max"), 10))
+				$theme.myPlaces($my_places_limit)
 			</li>
 		#end
 	</ul>
