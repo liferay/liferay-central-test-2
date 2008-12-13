@@ -3,18 +3,35 @@
 /* ---------- Base styles ---------- */
 
 body {
+	background: #E3E8E8;
 	font-size: 11px;
 }
 
 /* ---------- Main content body ---------- */
 
 #wrapper {
-	background: none;
+	background: transparent url(../images/common/body_bg.png) repeat-x scroll 0 0;
+	padding-top: 20px;
 }
 
 #content-wrapper {
+	background: #fff;
+	border: 5px solid #fff;
 	margin: 20px auto;
 	width: 976px;
+}
+
+/* ---------- Banner ---------- */
+
+#banner {
+	margin: 0 auto;
+	width: 976px;
+}
+
+#banner h1.logo a {
+	background: url(../images/common/company_logo.png) no-repeat 0 50%;
+	color: #fff;
+	padding-left: 35px;
 }
 
 /* ---------- Control panel ---------- */
@@ -50,12 +67,12 @@ body {
 }
 
 .lfr-ctrl-panel .user-greeting {
-	background: transparent url(../images/common/admin.png) no-repeat 8px 50%;
-	font-size: 12px;
-	line-height: 34px;
-	margin: 0;
-	padding: 0;
-	padding-left: 30px;
+	display: none;
+}
+
+#panel-manage-my .lfr-panel-title span {
+	background: transparent url(../images/common/admin.png) no-repeat 0 50%;
+	padding-left: 25px;
 }
 
 .lfr-ctrl-panel .user-greeting .sign-out {
