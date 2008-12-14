@@ -33,12 +33,16 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  */
 public class ServerDetector {
 
+	public static final String PRODUCT_NAME_PROPERTY = "product.name";
+
 	public static final String GERONIMO_CLASS =
 		"/org/apache/geronimo/system/main/Daemon.class";
 
 	public static final String GERONIMO_ID = "geronimo";
 
 	public static final String GLASSFISH_ID = "glassfish";
+
+	public static final String GLASSFISH_V3_ID = "GlassFish/v3";
 
 	public static final String GLASSFISH_SYSTEM_PROPERTY =
 		"com.sun.aas.instanceRoot";
@@ -188,6 +192,20 @@ public class ServerDetector {
 		}
 
 		return sd._glassfish.booleanValue();
+	}
+
+	public static boolean isGlassfishV3() {
+
+		if (!isGlassfish()) {
+			return false;
+		}
+		String value = System.getProperty(PRODUCT_NAME_PROPERTY);
+
+		if (GLASSFISH_V3_ID.equalsIgnoreCase(value)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean isJBoss() {

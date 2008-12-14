@@ -400,9 +400,23 @@
 							file="tools/servers/glassfish/domain.xml.2"
 							overwrite="yes"
 						/>
+						<delete>
+							<fileset
+							dir="${app.server.lib.portal.dir}"
+							includes="jsr109-impl.jar,jaxb.jar,webservices.jar,javax.ejb.jar,gf-ejb-connector.jar,ejb-container.jar"
+						    />
+						</delete>
 					</else>
 				</if>
 			</then>
+			<else>
+			    <delete>
+				<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="jsr109-impl.jar,jaxb.jar,webservices.jar,javax.ejb.jar,gf-ejb-connector.jar,ejb-container.jar"
+					/>
+				</delete>
+			</else>
 		</if>
 
 		<if>

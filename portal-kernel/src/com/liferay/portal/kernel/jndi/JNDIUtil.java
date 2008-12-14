@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.naming.Context;
+import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
 /**
@@ -51,7 +52,15 @@ public class JNDIUtil {
 			location = "java:comp/env/" + location;
 		}
 
-		return lookup(ctx, location, false);
+		try {
+			return lookup(ctx, location, false);
+		} catch (NameNotFoundException n1) {
+			if (location.equals("java:comp/env/mail/MailSession") &&
+					ServerDetector.isGlassfishV3()) {
+				return null;
+			}
+			throw n1;
+		}
 	}
 
 	public static Object lookup(Context ctx, String location, boolean cache)
