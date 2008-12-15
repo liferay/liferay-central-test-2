@@ -796,32 +796,20 @@ public class WindowInvoker extends InvokerPortletImpl {
 	private void _updatePortletModeAndState(
 		HttpServletRequest request, List<EntityID> eventUpdatedPortlets) {
 
-		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-			User user = themeDisplay.getUser();
-			Layout layout = themeDisplay.getLayout();
+		User user = themeDisplay.getUser();
+		Layout layout = themeDisplay.getLayout();
 
-			for (EntityID entityID : eventUpdatedPortlets) {
-				PortalUtil.updatePortletMode(
-					entityID.getPortletWindowName(), user, layout,
-					PortletMode.VIEW, request);
+		for (EntityID entityID : eventUpdatedPortlets) {
+			PortalUtil.updatePortletMode(
+				entityID.getPortletWindowName(), user, layout, PortletMode.VIEW,
+				request);
 
-				PortalUtil.updateWindowState(
-					entityID.getPortletWindowName(), user, layout,
-					WindowState.NORMAL, request);
-			}
-		}
-		catch (PortalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(pe, pe);
-			}
-		}
-		catch (SystemException se) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(se, se);
-			}
+			PortalUtil.updateWindowState(
+				entityID.getPortletWindowName(), user, layout,
+				WindowState.NORMAL, request);
 		}
 	}
 
