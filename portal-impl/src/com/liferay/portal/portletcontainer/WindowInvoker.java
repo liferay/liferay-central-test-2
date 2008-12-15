@@ -41,7 +41,6 @@
 
 package com.liferay.portal.portletcontainer;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
