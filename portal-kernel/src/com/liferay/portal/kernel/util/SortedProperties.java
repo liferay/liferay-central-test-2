@@ -46,7 +46,7 @@ public class SortedProperties extends Properties {
 	}
 
 	public SortedProperties(Properties properties) {
-		super();
+		this();
 
 		Enumeration<String> enu =
 			(Enumeration<String>)properties.propertyNames();
