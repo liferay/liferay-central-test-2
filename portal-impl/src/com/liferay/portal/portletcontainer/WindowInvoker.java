@@ -41,6 +41,7 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -49,6 +50,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
@@ -289,6 +291,13 @@ public class WindowInvoker extends InvokerPortletImpl {
 				}
 				else {
 					actionResponseImpl.setPortletMode(currentPortletMode);
+				}
+
+				List<EntityID> eventUpdatedPortlets =
+					executeActionResponse.getEventUpdatedPortlets();
+
+				if (eventUpdatedPortlets != null) {
+					_updatePortletModeAndState(request, eventUpdatedPortlets);
 				}
 			}
 		}
@@ -782,6 +791,34 @@ public class WindowInvoker extends InvokerPortletImpl {
 			JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
 		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
+	}
+
+	private void _updatePortletModeAndState(
+		HttpServletRequest request, List<EntityID> eventUpdatedPortlets) {
+
+		try {
+			User user = PortalUtil.getUser(request);
+			Layout layout = (Layout) request.getAttribute(WebKeys.LAYOUT);
+
+			for (EntityID entityID : eventUpdatedPortlets) {
+
+				PortalUtil.updatePortletMode(
+					entityID.getPortletWindowName(), user, layout,
+					PortletMode.VIEW, request);
+
+				PortalUtil.updateWindowState(
+					entityID.getPortletWindowName(), user, layout,
+					WindowState.NORMAL, request);
+			}
+		}
+		catch (PortalException pe) {
+			_log.warn(
+				"Exception while updating portlet mode during eventing", pe);
+		}
+		catch (SystemException se) {
+			_log.warn(
+				"Exception while updating portlet mode during eventing", se);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(WindowInvoker.class);
