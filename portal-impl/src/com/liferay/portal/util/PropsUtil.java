@@ -65,6 +65,12 @@ public class PropsUtil {
 		return _instance._getProperties();
 	}
 
+	public static Properties getProperties(
+		String prefix, boolean removePrefix) {
+
+		return _instance._getProperties(prefix, removePrefix);
+	}
+
 	public static void removeProperties(Properties properties) {
 		_instance._removeProperties(properties);
 	}
@@ -111,6 +117,10 @@ public class PropsUtil {
 
 	private Properties _getProperties() {
 		return _configuration.getProperties();
+	}
+
+	private Properties _getProperties(String prefix, boolean removePrefix) {
+		return _configuration.getProperties(prefix, removePrefix);
 	}
 
 	private void _removeProperties(Properties properties) {

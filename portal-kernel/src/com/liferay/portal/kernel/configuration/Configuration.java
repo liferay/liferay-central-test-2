@@ -46,6 +46,8 @@ public interface Configuration {
 
 	public Properties getProperties();
 
+	public Properties getProperties(String prefix, boolean removePrefix);
+
 	public void removeProperties(Properties properties);
 
 	public void set(String key, String value);

@@ -36,6 +36,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -187,6 +188,31 @@ public class ConfigurationImpl
 		}
 
 		return properties;
+	}
+
+	public Properties getProperties(String prefix, boolean removePrefix) {
+		Properties subProperties = new Properties();
+
+		Properties allProperties = getProperties();
+
+		Enumeration<String> enu =
+			(Enumeration<String>)allProperties.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = enu.nextElement();
+
+			if (key.startsWith(prefix)) {
+				String value = allProperties.getProperty(key);
+
+				if (removePrefix) {
+					key = key.substring(prefix.length());
+				}
+
+				subProperties.setProperty(key, value);
+			}
+		}
+
+		return subProperties;
 	}
 
 	public void removeProperties(Properties properties) {
