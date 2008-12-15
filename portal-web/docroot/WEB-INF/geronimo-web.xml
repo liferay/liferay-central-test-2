@@ -70,10 +70,6 @@
 			</role>
 		</role-mappings>
 	</security>
-	<resource-ref>
-		<ref-name>jdbc/LiferayPool</ref-name>
-		<resource-link>LiferayPool</resource-link>
-	</resource-ref>
 	<gbean name="PortalRealm" class="org.apache.geronimo.security.realm.GenericSecurityRealm">
 		<attribute name="realmName">PortalRealm</attribute>
 		<reference name="ServerInfo">

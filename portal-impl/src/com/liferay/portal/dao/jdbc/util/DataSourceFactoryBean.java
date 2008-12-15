@@ -20,46 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.mail.util;
+package com.liferay.portal.dao.jdbc.util;
 
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Properties;
 
-import javax.mail.Session;
+import javax.sql.DataSource;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.factory.config.AbstractFactoryBean;
+
 /**
- * <a href="MailSessionFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataSourceFactoryBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MailSessionFactory {
+public class DataSourceFactoryBean extends AbstractFactoryBean {
 
-	public static Session getInstance() {
-		Properties properties = PropsUtil.getProperties(
-			_MAIL_SESSION_PREFIX, true);
+	public Class getObjectType() {
+		return DataSource.class;
+	}
 
-		Session session = Session.getInstance(properties);
+	public void setPropertyPrefix(String propertyPrefix) {
+		_propertyPrefix = propertyPrefix;
+	}
+
+	protected Object createInstance() throws Exception {
+		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
+
+		BasicDataSource dataSource = new BasicDataSource();
+
+		dataSource.setDriverClassName(properties.getProperty("driver"));
+		dataSource.setUrl(properties.getProperty("url"));
+		dataSource.setUsername(properties.getProperty("username"));
+		dataSource.setPassword(properties.getProperty("password"));
 
 		if (_log.isDebugEnabled()) {
-			session.setDebug(true);
-
 			SortedProperties sortedProperties = new SortedProperties(
-				session.getProperties());
+				properties);
+
+			_log.debug("Properties for prefix " + _propertyPrefix);
 
 			sortedProperties.list(System.out);
 		}
 
-		return session;
+		return dataSource;
 	}
 
-	private static final String _MAIL_SESSION_PREFIX = "mail.session.";
+	private static Log _log = LogFactory.getLog(DataSourceFactoryBean.class);
 
-	private static Log _log = LogFactory.getLog(MailSessionFactory.class);
+	private String _propertyPrefix;
 
 }

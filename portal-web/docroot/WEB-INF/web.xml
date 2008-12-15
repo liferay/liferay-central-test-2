@@ -899,12 +899,6 @@
 			<taglib-location>/WEB-INF/tld/struts-tiles-el.tld</taglib-location>
 		</taglib>
 	</jsp-config>
-	<resource-ref>
-		<res-ref-name>jdbc/LiferayPool</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-		<res-sharing-scope>Shareable</res-sharing-scope>
-	</resource-ref>
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>/c/portal/protected</web-resource-name>

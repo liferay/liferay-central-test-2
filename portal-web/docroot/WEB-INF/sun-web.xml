@@ -3,9 +3,5 @@
 
 <sun-web-app>
 	<context-root>/</context-root>
-	<resource-ref>
-		<res-ref-name>jdbc/LiferayPool</res-ref-name>
-		<jndi-name>jdbc/LiferayPool</jndi-name>
-	</resource-ref>
 	<class-loader delegate="true" />
 </sun-web-app>

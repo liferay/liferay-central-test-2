@@ -40,7 +40,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.mail.util.MailSessionFactory">
+	<category name="com.liferay.mail.util.MailSessionFactoryBean">
 		<priority value="ERROR" />
 	</category>
 
@@ -53,6 +53,10 @@
 	</category>
 
 	<category name="com.liferay.portal.dao.jdbc.aop">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
 		<priority value="ERROR" />
 	</category>
 

@@ -15,13 +15,13 @@
 	</bean>
 	<bean name="dynamicDataSourceTargetSource" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTargetSource">
 		<property name="readDataSource">
-			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="jdbc/LiferayReadPool" />
+			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+				<property name="propertyPrefix" value="jdbc.read." />
 			</bean>
 		</property>
 		<property name="writeDataSource">
-			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="jdbc/LiferayWritePool" />
+			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+				<property name="propertyPrefix" value="jdbc.write." />
 			</bean>
 		</property>
 	</bean>

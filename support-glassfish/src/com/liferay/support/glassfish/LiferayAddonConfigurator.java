@@ -48,26 +48,12 @@ import com.sun.appserv.addons.ConfigurationContext;
 import com.sun.appserv.addons.Configurator;
 import com.sun.appserv.addons.InstallationContext;
 import com.sun.jbi.management.internal.support.JarFactory;
-import com.sun.org.apache.xpath.internal.XPathAPI;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import java.util.Properties;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * <a href="LiferayAddonConfigurator.java.html"><b><i>View Source</i></b></a>
@@ -172,15 +158,6 @@ public class LiferayAddonConfigurator implements Configurator {
 		props.store(fos, "");
 
 		fos.close();
-
-		ConfigurationType configurationType = cc.getConfigurationType();
-
-		if (configurationType == ConfigurationType.DAS) {
-			configureDomainXml(
-				rootDir + "/lib/dtds",
-				new File(domainDir + "/config/domain.xml"),
-				new File(tmpDir + "/update-domain.xml"));
-		}
 	}
 
 	protected void doUnconfigure(ConfigurationContext cc) throws Exception {
@@ -222,99 +199,6 @@ public class LiferayAddonConfigurator implements Configurator {
 
 		if (ct == ConfigurationType.DAS) {
 		}
-	}
-
-	protected void configureDomainXml(
-			String dtdDir, File curDomainXmlFile, File newDomainXmlFile)
-		throws Exception {
-
-		DocumentBuilderFactory documentBuilderFactory =
-			DocumentBuilderFactory.newInstance();
-
-		documentBuilderFactory.setValidating(false);
-
-		DocumentBuilder documentBuilder =
-			documentBuilderFactory.newDocumentBuilder();
-
-		DTDResolver dtdResolver = new DTDResolver(dtdDir);
-
-		documentBuilder.setEntityResolver(dtdResolver);
-		documentBuilder.setErrorHandler(dtdResolver);
-
-		Document curDomainXmlDoc = documentBuilder.parse(curDomainXmlFile);
-
-		Node curResourcesNode = XPathAPI.selectSingleNode(
-			curDomainXmlDoc, "/domain/resources");
-
-		Node curJdbcResourceNode = XPathAPI.selectSingleNode(
-			curDomainXmlDoc, "/domain/resources/jdbc-resource");
-
-		Node curJdbcConnectionPoolNode = XPathAPI.selectSingleNode(
-			curDomainXmlDoc, "/domain/resources/jdbc-connection-pool");
-
-		Node curServerNode = XPathAPI.selectSingleNode(
-			curDomainXmlDoc, "/domain/servers/server[@name='server']");
-
-		Node curResourceRefNode = XPathAPI.selectSingleNode(
-			curDomainXmlDoc, "/domain/servers/*/resource-ref[last()]");
-
-		Document newDomainXmlDoc = documentBuilder.parse(newDomainXmlFile);
-
-		Node newJdbcResourceNode = XPathAPI.selectSingleNode(
-			newDomainXmlDoc, "/domain/resources/jdbc-resource");
-
-		Node newMailResourceNode = XPathAPI.selectSingleNode(
-			newDomainXmlDoc, "/domain/resources/mail-resource");
-
-		Node newJdbcConnectionPoolNode = XPathAPI.selectSingleNode(
-			newDomainXmlDoc, "/domain/resources/jdbc-connection-pool");
-
-		Node newLiferayPoolResourceRefNode = XPathAPI.selectSingleNode(
-			newDomainXmlDoc,
-			"/domain/servers/*/resource-ref[@ref='jdbc/LiferayPool']");
-
-		curResourcesNode.insertBefore(
-			curDomainXmlDoc.importNode(newJdbcResourceNode, true),
-			curJdbcResourceNode);
-
-		curResourcesNode.insertBefore(
-			curDomainXmlDoc.importNode(newMailResourceNode, true),
-			curJdbcConnectionPoolNode);
-
-		curResourcesNode.insertBefore(
-			curDomainXmlDoc.importNode(newJdbcConnectionPoolNode, true),
-			curJdbcConnectionPoolNode);
-
-		curServerNode.insertBefore(
-			curDomainXmlDoc.importNode(newLiferayPoolResourceRefNode, true),
-			curResourceRefNode);
-
-		LiferayAddonUtil.copyFile(
-			curDomainXmlFile,
-			new File(
-				curDomainXmlFile + ".bak." + LiferayAddonUtil.getTimestamp()));
-
-		Document curDoc = curResourcesNode.getOwnerDocument();
-
-		Source input = new DOMSource(curDoc);
-
-		Result output = new StreamResult(
-			new FileOutputStream(curDomainXmlFile));
-
-		TransformerFactory transformerFactory =
-			TransformerFactory.newInstance();
-
-		Transformer transformer = transformerFactory.newTransformer();
-
-		transformer.setOutputProperty(
-			OutputKeys.DOCTYPE_PUBLIC, curDoc.getDoctype().getPublicId());
-		transformer.setOutputProperty(
-			OutputKeys.DOCTYPE_SYSTEM, curDoc.getDoctype().getSystemId());
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-
-		transformer.transform(input, output);
 	}
 
 }

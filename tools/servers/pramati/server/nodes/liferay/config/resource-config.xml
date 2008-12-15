@@ -62,12 +62,6 @@
             </datasource--><!--
                 These are the default values that are taken by the datasource if the corresponding value is not mentioned for the datasource. All the default values to be configured are optional.
             -->
-         <datasource connection-factory="jdbc/LiferayPool" description="No Description" name="LiferayPool" transaction-participation="true">
-            <pool-properties cache-size="" connection-request-timeout-seconds="10" idle-timeout-seconds="300" initial-pool-size="1" max-pool-size="20" min-pool-size="5" refresh-interval-seconds="300"/>
-            <connection-initialization db-retrials="0" db-retry-interval-millis="0"/>
-            <connection-validation class="" on-acquire="false" on-release="false" sql=""/>
-            <connection-tracking enable="false"/>
-         </datasource>
          <default-properties cache-size="20" connection-request-timeout-seconds="10" idle-timeout-seconds="300" initial-pool-size="1" max-pool-size="20" min-pool-size="5" refresh-interval-seconds="300"/>
       </datasources><!-- Connection Factory Properties --><!-- The 'connection-factories' Element encloses the definitions for all the connection
              factories. To define a connection factory add the 'connection-factory' Element with
@@ -88,10 +82,6 @@
             </connection-factory--><!--connection-factory name="JMS_CLOUDSCAPE_CF1" description="JMSCloudscapeCF" classname="COM.cloudscape.core.JDBCDriver" url="jdbc:cloudscape:$TEMPLATES_DIR/jmsdb" authorized-by="Container">
                 <login-parameters user="" password="" mask-password="false"/>
             </connection-factory-->
-         <connection-factory authorized-by="container" classname="org.hsqldb.jdbcDriver" classpath="" description="No Description" name="jdbc/LiferayPool" url="jdbc:hsqldb:lportal">
-            <login-parameters mask-password="true" password="" user="sa"/>
-            <properties/>
-         </connection-factory>
       </connection-factories><!-- Clustered DataSource Properties --><!-- The 'datasource-clusters' Element encloses the definitions for all the datasource
              clusters. To define a datasource cluster add the 'datasource-cluster' Element with
              the appropriate properties

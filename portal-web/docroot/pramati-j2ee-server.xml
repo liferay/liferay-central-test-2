@@ -17,11 +17,6 @@
 		<name>/</name>
 		<module-name>liferay-portal.war</module-name>
 		<prefer-deployed-web-classes>false</prefer-deployed-web-classes>
-		<resource-mapping>
-			<resource-name>jdbc/LiferayPool</resource-name>
-			<resource-type>javax.sql.DataSource</resource-type>
-			<resource-link>LiferayPool</resource-link>
-		</resource-mapping>
 	</web-module>
 	<role-mapping>
 		<module-name>liferay-portal.war</module-name>
