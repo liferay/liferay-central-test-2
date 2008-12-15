@@ -24,6 +24,14 @@
 
 <%@ include file="/html/portlet/tags_navigation/init.jsp" %>
 
+<%
+boolean folksonomy = true;
+
+if (portletName.equals(PortletKeys.TAGS_CATEGORIES_NAVIGATION)) {
+	folksonomy = false;
+}
+%>
 <liferay-ui:tags-navigation
 	showCompanyCategories="<%= showCompanyCategories %>"
+	folksonomy="<%= folksonomy %>"
 />

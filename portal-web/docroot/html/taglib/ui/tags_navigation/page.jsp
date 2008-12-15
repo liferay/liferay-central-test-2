@@ -25,6 +25,7 @@
 <%@ include file="/html/taglib/ui/tags_navigation/init.jsp" %>
 
 <%
+Boolean folksonomy = (Boolean)request.getAttribute("liferay-ui:tags-navigation:folksonomy");
 Boolean showCompanyCategories = (Boolean)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories");
 
 String tag = ParamUtil.getString(renderRequest, "tag");
@@ -32,41 +33,43 @@ String tag = ParamUtil.getString(renderRequest, "tag");
 List<TagsVocabulary> vocabularies = null;
 
 if (showCompanyCategories.booleanValue()) {
-	vocabularies = TagsVocabularyServiceUtil.getCompanyVocabularies(company.getCompanyId(), false);
+	vocabularies = TagsVocabularyServiceUtil.getCompanyVocabularies(company.getCompanyId(), folksonomy);
 }
 else {
-	vocabularies = TagsVocabularyServiceUtil.getGroupVocabularies(scopeGroupId, false);
+	vocabularies = TagsVocabularyServiceUtil.getGroupVocabularies(scopeGroupId, folksonomy);
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
-<div class="taglib-tags-navigation" id="<%= namespace %>taglibTagsNavigation">
+<liferay-ui:panel-container id='<%= namespace + "taglibTagsNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-tags-navigation">
 
 	<%
-	StringBuilder sb = new StringBuilder();
+	for (int i = 0; i < vocabularies.size(); i++) {
+		TagsVocabulary vocabulary = vocabularies.get(i);
 
-	sb.append("<ul class='treeview'>");
-
-	for (TagsVocabulary vocabulary : vocabularies) {
 		String vocabularyName = vocabulary.getName();
-
-		sb.append("<li class='vocabulary-name'>");
-		sb.append("<span>");
-		sb.append(vocabularyName);
-		sb.append("</span>");
-
-		List<TagsEntry> entries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
-
-		_buildNavigation(entries, vocabularyName, tag, portletURL, sb);
-	}
-
-	sb.append("</li>");
-	sb.append("</ul>");
 	%>
 
-	<%= sb.toString() %>
-</div>
+		<c:choose>
+			<c:when test="<%= vocabularies.size() == 1 %>">
+
+				<%= _buildVocabularyNavigation(vocabulary, tag, portletURL) %>
+
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:panel id='<%= namespace + "taglibTagsNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+
+					<%= _buildVocabularyNavigation(vocabulary, tag, portletURL) %>
+
+				</liferay-ui:panel>
+			</c:otherwise>
+		</c:choose>
+	<%
+	}
+	%>
+
+</liferay-ui:panel-container>
 
 <script type="text/javascript">
 	jQuery(document).ready(
@@ -97,7 +100,6 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 
 		List<TagsEntry> entryChildren = TagsEntryServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
 
-		sb.append("<ul>");
 		sb.append("<li>");
 		sb.append("<span>");
 
@@ -119,10 +121,39 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 
 		sb.append("</span>");
 
-		_buildNavigation(entryChildren, vocabularyName, tag, portletURL, sb);
+		if (!entryChildren.isEmpty()) {
+			sb.append("<ul>");
+
+			_buildNavigation(entryChildren, vocabularyName, tag, portletURL, sb);
+
+			sb.append("</ul>");
+		}
 
 		sb.append("</li>");
-		sb.append("</ul>");
 	}
+}
+
+private String _buildVocabularyNavigation(TagsVocabulary vocabulary, String tag, PortletURL portletURL) throws Exception {
+	StringBuilder sb = new StringBuilder();
+
+	sb.append("<ul class='");
+
+	if (vocabulary.isFolksonomy()) {
+		sb.append("tagscloud");
+	}
+	else {
+		sb.append("treeview");
+	}
+
+	sb.append("'>");
+
+	List<TagsEntry> entries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabulary.getName());
+
+	_buildNavigation(entries, vocabulary.getName(), tag, portletURL, sb);
+
+	sb.append("</ul>");
+	sb.append("<br style='clear: both' />");
+
+	return sb.toString();
 }
 %>
