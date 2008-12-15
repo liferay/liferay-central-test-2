@@ -67,7 +67,7 @@
 			<li class="my-places">
 				<a>$my_places_text</a>
 
-				$theme.myPlaces($my_places_limit)
+				$theme.myPlaces()
 			</li>
 		#end
 	</ul>

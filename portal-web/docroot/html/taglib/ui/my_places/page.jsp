@@ -29,6 +29,10 @@
 <%
 int max = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:my_places:max"));
 
+if (max <= 0) {
+	max = PropsValues.MY_PLACES_MAX_ELEMENTS;
+}
+
 List<Group> myPlaces = user.getMyPlaces(max);
 %>
 

@@ -111,7 +111,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		if (permissionChecker.isCompanyAdmin()) {
 			return groupLocalService.search(
 				permissionChecker.getCompanyId(), null, null, null, 0,
-				PropsValues.CONTROL_PANEL_NAVIGATION_COMMUNITIES_MAX);
+				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 		}
 
 		List<Group> manageableGroups = groupLocalService.getManageableGroups(

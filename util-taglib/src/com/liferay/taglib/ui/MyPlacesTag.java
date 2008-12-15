@@ -99,8 +99,6 @@ public class MyPlacesTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/my_places/page.jsp";
 
-	private static final int _MAX = QueryUtil.ALL_POS;
-
-	private int _max = _MAX;
+	private int _max;
 
 }

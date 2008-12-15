@@ -153,7 +153,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			return organizationLocalService.search(
 				permissionChecker.getCompanyId(), 0, null, null, null, null,
 				null, 0,
-				PropsValues.CONTROL_PANEL_NAVIGATION_ORGANIZATIONS_MAX);
+				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
 		}
 
 		if (Validator.isNull(actionId)) {

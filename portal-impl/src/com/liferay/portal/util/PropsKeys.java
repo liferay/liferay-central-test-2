@@ -244,15 +244,15 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SECURITY_STRANGERS_WITH_MX = "company.security.strangers.with.mx";
 
-	public static final String CONTROL_PANEL_NAVIGATION_COMMUNITIES_MAX = "control.panel.navigation.communities.max";
-
-	public static final String CONTROL_PANEL_NAVIGATION_ORGANIZATIONS_MAX = "control.panel.navigation.organizations.max";
-
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
 
 	public static final String CONTROL_PANEL_LAYOUT_NAME = "control.panel.layout.name";
 
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = "control.panel.layout.regular.theme.id";
+
+	public static final String CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES = "control.panel.navigation.max.communities";
+
+	public static final String CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS = "control.panel.navigation.max.organizations";
 
 	public static final String COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL = "counter.connection.heartbeat.job.interval";
 
@@ -778,6 +778,8 @@ public interface PropsKeys {
 	public static final String MSN_LOGIN = "msn.login";
 
 	public static final String MSN_PASSWORD = "msn.password";
+
+	public static final String MY_PLACES_MAX_ELEMENTS = "my.places.max.elements";
 
 	public static final String MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.community.private.sites.with.no.layouts";
 

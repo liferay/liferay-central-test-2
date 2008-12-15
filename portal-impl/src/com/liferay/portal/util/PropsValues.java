@@ -252,15 +252,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
-	public static final int CONTROL_PANEL_NAVIGATION_COMMUNITIES_MAX =
-		GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_COMMUNITIES_MAX));
-
-	public static final int CONTROL_PANEL_NAVIGATION_ORGANIZATIONS_MAX =
-		GetterUtil.getInteger(
-			PropsUtil.get(
-				PropsKeys.CONTROL_PANEL_NAVIGATION_ORGANIZATIONS_MAX));
-
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
@@ -269,6 +260,14 @@ public class PropsValues {
 
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
+
+	public static final int CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES));
+
+	public static final int CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS =
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
+			CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS));
 
 	public static final long COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL =
 		GetterUtil.getLong(
@@ -751,6 +750,9 @@ public class PropsValues {
 	public static final long MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL =
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
+
+	public static final int MY_PLACES_MAX_ELEMENTS =
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.MY_PLACES_MAX_ELEMENTS));
 
 	public static boolean
 		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS =
