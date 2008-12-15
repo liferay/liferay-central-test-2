@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
