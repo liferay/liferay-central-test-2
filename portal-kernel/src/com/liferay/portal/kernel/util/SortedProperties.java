@@ -45,6 +45,21 @@ public class SortedProperties extends Properties {
 		_names = new TreeSet<String>();
 	}
 
+	public SortedProperties(Properties properties) {
+		super();
+
+		Enumeration<String> enu =
+			(Enumeration<String>)properties.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = enu.nextElement();
+
+			String value = properties.getProperty(key);
+
+			setProperty(key, value);
+		}
+	}
+
 	public void list(PrintStream out) {
 		System.out.println("-- listing properties --");
 
