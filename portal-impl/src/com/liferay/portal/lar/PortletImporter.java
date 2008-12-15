@@ -22,7 +22,6 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
@@ -250,19 +249,19 @@ public class PortletImporter {
 		throws SystemException {
 
 		try {
+			long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+
 			PortletPreferences portletPreferences =
 				PortletPreferencesUtil.findByO_O_P_P(
-					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
-					portletId);
+					ownerId, ownerType, plid, portletId);
 
 			String xml = deletePortletData(
 				context, portletId, portletPreferences);
 
 			if (xml != null) {
-				portletPreferences.setPreferences(xml);
-
-				PortletPreferencesUtil.update(portletPreferences, false);
+				PortletPreferencesLocalServiceUtil.updatePreferences(
+					ownerId, ownerType, plid, portletId, xml);
 			}
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
@@ -345,19 +344,19 @@ public class PortletImporter {
 		throws SystemException {
 
 		try {
+			long ownerId =PortletKeys. PREFS_OWNER_ID_DEFAULT;
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+
 			PortletPreferences portletPreferences =
 				PortletPreferencesUtil.findByO_O_P_P(
-					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
-					portletId);
+					ownerId, ownerType, plid, portletId);
 
 			String xml = importPortletData(
 				context, portletId, portletPreferences, portletDataRefEl);
 
 			if (xml != null) {
-				portletPreferences.setPreferences(xml);
-
-				PortletPreferencesUtil.update(portletPreferences, false);
+				PortletPreferencesLocalServiceUtil.updatePreferences(
+					ownerId, ownerType, plid, portletId, xml);
 			}
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
@@ -564,28 +563,8 @@ public class PortletImporter {
 					ownerId = defaultUserId;
 				}
 
-				PortletPreferences preferences =
-					PortletPreferencesUtil.fetchByO_O_P_P(
-						ownerId, ownerType, plid, portletId);
-
-				if (preferences != null) {
-					PortletPreferencesLocalServiceUtil.deletePortletPreferences(
-						ownerId, ownerType, plid, portletId);
-				}
-
-				long portletPreferencesId = CounterLocalServiceUtil.increment();
-
-				PortletPreferences portletPreferences =
-					PortletPreferencesUtil.create(portletPreferencesId);
-
-				portletPreferences.setOwnerId(ownerId);
-				portletPreferences.setOwnerType(ownerType);
-				portletPreferences.setPlid(plid);
-				portletPreferences.setPortletId(portletId);
-
-				portletPreferences.setPreferences(xml);
-
-				PortletPreferencesUtil.update(portletPreferences, true);
+				PortletPreferencesLocalServiceUtil.updatePreferences(
+					ownerId, ownerType, plid, portletId, xml);
 			}
 		}
 

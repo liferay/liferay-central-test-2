@@ -209,6 +209,19 @@ public class PortletPreferencesLocalServiceImpl
 			javax.portlet.PortletPreferences preferences)
 		throws SystemException {
 
+		PortletPreferencesImpl preferencesImpl =
+			(PortletPreferencesImpl)preferences;
+
+		String xml = PortletPreferencesSerializer.toXML(preferencesImpl);
+
+		return updatePreferences(ownerId, ownerType, plid, portletId, xml);
+	}
+
+	public PortletPreferences updatePreferences(
+			long ownerId, int ownerType, long plid, String portletId,
+			String xml)
+		throws SystemException {
+
 		PortletPreferences portletPreferences =
 			portletPreferencesPersistence.fetchByO_O_P_P(
 				ownerId, ownerType, plid, portletId);
@@ -224,11 +237,6 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferences.setPlid(plid);
 			portletPreferences.setPortletId(portletId);
 		}
-
-		PortletPreferencesImpl preferencesImpl =
-			(PortletPreferencesImpl)preferences;
-
-		String xml = PortletPreferencesSerializer.toXML(preferencesImpl);
 
 		portletPreferences.setPreferences(xml);
 
