@@ -6,8 +6,4 @@
 		<res-ref-name>jdbc/LiferayPool</res-ref-name>
 		<jndi-name>jdbc/LiferayPool</jndi-name>
 	</resource-ref>
-	<resource-ref>
-		<res-ref-name>mail/MailSession</res-ref-name>
-		<jndi-name>mail-borland://&amp;amp;mail.host=localhost</jndi-name>
-	</resource-ref>
 </web-app>

@@ -273,10 +273,6 @@ public class LiferayAddonConfigurator implements Configurator {
 			newDomainXmlDoc,
 			"/domain/servers/*/resource-ref[@ref='jdbc/LiferayPool']");
 
-		Node newMailSessionResourceRefNode = XPathAPI.selectSingleNode(
-			newDomainXmlDoc,
-			"/domain/servers/*/resource-ref[@ref='mail/MailSession']");
-
 		curResourcesNode.insertBefore(
 			curDomainXmlDoc.importNode(newJdbcResourceNode, true),
 			curJdbcResourceNode);
@@ -291,10 +287,6 @@ public class LiferayAddonConfigurator implements Configurator {
 
 		curServerNode.insertBefore(
 			curDomainXmlDoc.importNode(newLiferayPoolResourceRefNode, true),
-			curResourceRefNode);
-
-		curServerNode.insertBefore(
-			curDomainXmlDoc.importNode(newMailSessionResourceRefNode, true),
 			curResourceRefNode);
 
 		LiferayAddonUtil.copyFile(

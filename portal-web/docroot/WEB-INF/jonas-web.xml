@@ -6,9 +6,5 @@
 		<res-ref-name>jdbc/LiferayPool</res-ref-name>
 		<jndi-name>jdbc/LiferayPool</jndi-name>
 	</jonas-resource>
-	<jonas-resource>
-		<res-ref-name>mail/MailSession</res-ref-name>
-		<jndi-name>mail/MailSession</jndi-name>
-	</jonas-resource>
 	<context-root>/</context-root>
 </jonas-web-app>

@@ -6,8 +6,4 @@
 		<res-ref-name>jdbc/LiferayPool</res-ref-name>
 		<jndi-name>jdbc/LiferayPool</jndi-name>
 	</resource-ref>
-	<resource-ref>
-		<res-ref-name>mail/MailSession</res-ref-name>
-		<jndi-name>mail/MailSession</jndi-name>
-	</resource-ref>
 </jrun-web-app>

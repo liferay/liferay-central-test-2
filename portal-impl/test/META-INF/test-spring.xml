@@ -16,8 +16,4 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="mailSession" class="javax.mail.Session" factory-method="getInstance">
-		<constructor-arg ref="mailSessionProperties" />
-	</bean>
-	<bean id="mailSessionProperties" class="java.util.Properties" />
 </beans>

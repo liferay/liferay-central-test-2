@@ -117,19 +117,6 @@
 		maxActive="20"
 	/>-->
 
-	<!-- Mail -->
-
-	<Resource
-		name="mail/MailSession"
-		auth="Container"
-		type="javax.mail.Session"
-		mail.imap.host="localhost"
-		mail.pop3.host="localhost"
-		mail.smtp.host="localhost"
-		mail.store.protocol="imap"
-		mail.transport.protocol="smtp"
-	/>
-
 	<!-- JAAS -->
 
 	<Realm

@@ -24,7 +24,6 @@ package com.liferay.portal.kernel.jndi;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.HashMap;
@@ -44,12 +43,6 @@ public class JNDIUtil {
 
 	public static Object lookup(Context ctx, String location)
 		throws NamingException {
-
-		if (ServerDetector.isGlassfish() &&
-			location.equals("mail/MailSession")){
-
-			location = "java:comp/env/" + location;
-		}
 
 		return lookup(ctx, location, false);
 	}

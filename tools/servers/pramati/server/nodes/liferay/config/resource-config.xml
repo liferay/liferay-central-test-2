@@ -120,9 +120,6 @@
             --><!--mail-resource name="PramatiMail" host="mail.pramati.com" description="No Description" test="false">
                 <login-parameters mail-id="pramati@pramati.com" user="pramati" password="515411" mask-password="false" />
               </mail-resource-->
-         <mail-resource description="No Description" host="localhost" name="mail/MailSession" test="false">
-            <login-parameters mail-id="test@pramati.com" mask-password="true" password="" user=""/>
-         </mail-resource>
       </mail-resources><!-- URL Resource Properties --><!--
             The 'url-resources' Element encloses the definitions for all the url resources. To define a url resource add the 'url-resource' Element with the appropriate properties
         -->

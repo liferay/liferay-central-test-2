@@ -737,8 +737,6 @@ public interface PropsKeys {
 
 	public static final String MAIL_MX_UPDATE = "mail.mx.update";
 
-	public static final String MAIL_SMTP_DEBUG = "mail.smtp.debug";
-
 	public static final String MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING = "message.boards.anonymous.posting.enabled";
 
 	public static final String MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED = "message.boards.anonymous.posting.enabled";
