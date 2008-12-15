@@ -98,6 +98,8 @@ public class MyPlacesTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/my_places/page.jsp";
 
-	private int _max;
+	private static final int _MAX = 0;
+
+	private int _max = _MAX;
 
 }
