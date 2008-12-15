@@ -104,6 +104,10 @@ public class SortedProperties extends Properties {
 		return super.remove(key);
 	}
 
+	public Object setProperty(String key, String value) {
+		return put(key, value);
+	}
+
 	private Set<String> _names;
 
 }
