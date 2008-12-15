@@ -24,7 +24,6 @@ package com.liferay.mail.util;
 
 import com.liferay.portal.util.PropsUtil;
 
-import java.util.Enumeration;
 import java.util.Properties;
 
 import javax.mail.Session;
@@ -41,25 +40,10 @@ import org.apache.commons.logging.LogFactory;
 public class MailSessionFactory {
 
 	public static Session getInstance() {
-		Properties mailProperties = new Properties();
+		Properties properties = PropsUtil.getProperties(
+			_MAIL_SESSION_PREFIX, true);
 
-		Properties portalProperties = PropsUtil.getProperties();
-
-		Enumeration<String> enu =
-			(Enumeration<String>)portalProperties.propertyNames();
-
-		while (enu.hasMoreElements()) {
-			String key = enu.nextElement();
-
-			if (key.startsWith(_MAIL_SESSION_PREFIX)) {
-				String value = portalProperties.getProperty(key);
-
-				mailProperties.setProperty(
-					key.substring(_MAIL_SESSION_PREFIX.length()), value);
-			}
-		}
-
-		Session session = Session.getInstance(mailProperties);
+		Session session = Session.getInstance(properties);
 
 		if (_log.isDebugEnabled()) {
 			session.setDebug(true);
