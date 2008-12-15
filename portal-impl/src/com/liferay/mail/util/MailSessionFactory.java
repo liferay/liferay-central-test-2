@@ -22,6 +22,7 @@
 
 package com.liferay.mail.util;
 
+import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Properties;
@@ -48,7 +49,10 @@ public class MailSessionFactory {
 		if (_log.isDebugEnabled()) {
 			session.setDebug(true);
 
-			session.getProperties().list(System.out);
+			SortedProperties sortedProperties = new SortedProperties(
+				session.getProperties());
+
+			sortedProperties.list(System.out);
 		}
 
 		return session;
