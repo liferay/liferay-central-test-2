@@ -30,7 +30,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.v4_4_0.UpgradeLayout;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -45,6 +44,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeSitemap.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeSitemap extends UpgradeProcess {
@@ -57,6 +57,26 @@ public class UpgradeSitemap extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
+		}
+	}
+
+	protected void deletePortletPreferences(long portletPreferencesId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"delete from PortletPreferences where portletPreferencesId = " +
+					portletPreferencesId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
@@ -75,32 +95,53 @@ public class UpgradeSitemap extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long portletPreferencesId = rs.getLong("portletPreferencesId");
 				long ownerId = rs.getLong("ownerId");
 				int ownerType = rs.getInt("ownerType");
 				long plid = rs.getLong("plid");
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				try {
+					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-				String newPreferences = upgradePreferences(
-					layout.getCompanyId(), ownerId, ownerType, plid, portletId,
-					preferences);
+					String newPreferences = upgradePreferences(
+						layout.getCompanyId(), ownerId, ownerType, plid,
+						portletId, preferences);
 
-				ps = con.prepareStatement(
-					"update PortletPreferences set preferences = ? where " +
-						"plid = " + plid + " and portletId = ?");
-
-				ps.setString(1, newPreferences);
-				ps.setString(2, portletId);
-
-				ps.executeUpdate();
-
-				ps.close();
+					updatePortletPreferences(
+						portletPreferencesId, newPreferences);
+				}
+				catch (NoSuchLayoutException nsle) {
+					deletePortletPreferences(portletPreferencesId);
+				}
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePortletPreferences(
+			long portletPreferencesId, String preferences)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update PortletPreferences set preferences = ? where " +
+					"portletPreferencesId = " + portletPreferencesId);
+
+			ps.setString(1, preferences);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
@@ -132,6 +173,6 @@ public class UpgradeSitemap extends UpgradeProcess {
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeLayout.class);
+	private static Log _log = LogFactory.getLog(UpgradeSitemap.class);
 
 }

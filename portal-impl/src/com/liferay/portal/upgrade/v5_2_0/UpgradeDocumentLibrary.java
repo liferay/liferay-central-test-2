@@ -44,6 +44,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
  *
  * @author Samuel Kong
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
@@ -56,6 +57,26 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
+		}
+	}
+
+	protected void deletePortletPreferences(long portletPreferencesId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"delete from PortletPreferences where portletPreferencesId = " +
+					portletPreferencesId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
@@ -82,33 +103,46 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				Layout layout = null;
-
 				try {
-					layout = LayoutLocalServiceUtil.getLayout(plid);
+					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+					String newPreferences = upgradePreferences(
+						layout.getCompanyId(), ownerId, ownerType, plid,
+						portletId, preferences);
+
+					updatePortletPreferences(
+						portletPreferencesId, newPreferences);
 				}
 				catch (NoSuchLayoutException nsle) {
-					continue;
+					deletePortletPreferences(portletPreferencesId);
 				}
-
-				String newPreferences = upgradePreferences(
-					layout.getCompanyId(), ownerId, ownerType, plid, portletId,
-					preferences);
-
-				ps = con.prepareStatement(
-					"update PortletPreferences set preferences = ? where " +
-						"portletPreferencesId = ?");
-
-				ps.setString(1, newPreferences);
-				ps.setLong(2, portletPreferencesId);
-
-				ps.executeUpdate();
-
-				ps.close();
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePortletPreferences(
+			long portletPreferencesId, String preferences)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update PortletPreferences set preferences = ? where " +
+					"portletPreferencesId = " + portletPreferencesId);
+
+			ps.setString(1, preferences);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
