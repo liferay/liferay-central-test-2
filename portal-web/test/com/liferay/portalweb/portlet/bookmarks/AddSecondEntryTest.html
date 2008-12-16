@@ -10,6 +10,26 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>//input[@value='Add Entry']</td>
 	<td></td>
 </tr>
@@ -24,14 +44,34 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>_28_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_28_name</td>
+	<td>Test Bookmark 2</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_28_name</td>
-	<td>Another Test Bookmark</td>
+	<td>Test Bookmark 2</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_28_url</td>
+	<td>http://www.digg.com</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_28_url</td>
 	<td>http://www.digg.com</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_28_comments</td>
+	<td>This is a test bookmark that will be deleted!</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -44,8 +84,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=exact:http://www.digg.com</td>
+	<td>assertElementPresent</td>
+	<td>link=http://www.digg.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

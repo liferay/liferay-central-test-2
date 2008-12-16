@@ -33,24 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Folder"));
-		selenium.type("_28_name", RuntimeVariables.replace("Test Folder"));
-		selenium.typeKeys("_28_description",
-			RuntimeVariables.replace("This is a test folder!"));
-		selenium.type("_28_description",
-			RuntimeVariables.replace("This is a test folder!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//b")) {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -59,5 +48,39 @@ public class AddFolderTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_28_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Folder"));
+		selenium.type("_28_name", RuntimeVariables.replace("Test Folder"));
+		selenium.typeKeys("_28_description",
+			RuntimeVariables.replace("This is a test folder!"));
+		selenium.type("_28_description",
+			RuntimeVariables.replace("This is a test folder!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Folder"));
+		assertTrue(selenium.isTextPresent("This is a test folder!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -39,7 +39,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,64 +88,10 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(10000);
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Entries']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Bookmark")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_28_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Bookmark"));
+		assertTrue(selenium.isElementPresent("link=Test Bookmark 2"));
 	}
 }

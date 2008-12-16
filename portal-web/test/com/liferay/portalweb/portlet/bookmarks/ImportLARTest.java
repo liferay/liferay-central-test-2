@@ -39,6 +39,25 @@ public class ImportLARTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
@@ -108,8 +127,7 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-Selenium.portlet.lar"));
-		selenium.click("_86_DELETE_PORTLET_DATA");
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-LAR.portlet.lar"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -129,25 +147,7 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

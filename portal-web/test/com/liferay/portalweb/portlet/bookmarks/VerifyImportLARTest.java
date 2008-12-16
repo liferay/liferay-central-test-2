@@ -33,15 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class VerifyImportLARTest extends BaseTestCase {
 	public void testVerifyImportLAR() throws Exception {
-		assertTrue(selenium.isElementPresent("//b"));
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a test folder!")) {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -51,31 +49,14 @@ public class VerifyImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Folder"));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//b")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Test Subfolder"));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Bookmark"));
-		assertTrue(selenium.isElementPresent(
-				"link=exact:http://www.liferay.com"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

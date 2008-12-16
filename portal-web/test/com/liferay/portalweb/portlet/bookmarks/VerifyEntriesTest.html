@@ -9,18 +9,28 @@
 <tr><td rowspan="1" colspan="3">VerifyEntriesTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=My Entries</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=exact:http://www.digg.com</td>
+	<td>assertElementPresent</td>
+	<td>link=http://www.digg.com</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=exact:http://www.liferay.com</td>
+	<td>assertElementPresent</td>
+	<td>link=http://www.liferay.com</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,23 +39,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=exact:http://www.digg.com</td>
+	<td>assertElementPresent</td>
+	<td>link=http://www.digg.com</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=exact:http://www.liferay.com</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Folders</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
+	<td>assertElementPresent</td>
+	<td>link=http://www.liferay.com</td>
 	<td></td>
 </tr>
 

@@ -20,32 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.bookmarks;
+package com.liferay.portalweb.portlet.breadcrumb;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyDisplayStyleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[1]/a/span"));
+public class VerifyDisplayStyleTest extends BaseTestCase {
+	public void testVerifyDisplayStyle() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/div/div/div/ul/li/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//div[2]/div/div/div/ul/li/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent(
+				"Breadcrumb Test Page \u00bb Child Test Page"));
+		assertTrue(selenium.isElementPresent("//div[2]/div/div/a"));
 	}
 }

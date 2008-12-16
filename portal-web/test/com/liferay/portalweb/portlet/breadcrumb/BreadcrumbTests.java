@@ -35,7 +35,16 @@ public class BreadcrumbTests extends BaseTests {
 	public BreadcrumbTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(AddChildPageTest.class);
+		addTestSuite(AddPortletToChildTest.class);
+		addTestSuite(AssertBreadCrumbPresentTest.class);
+		addTestSuite(AddContentToChildTest.class);
+		addTestSuite(AssertContentPresentTest.class);
+		addTestSuite(ConfigureDisplayStyleTest.class);
+		addTestSuite(VerifyDisplayStyleTest.class);
+		addTestSuite(ImportLARFileTest.class);
+		addTestSuite(VerifyImportLARFileTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

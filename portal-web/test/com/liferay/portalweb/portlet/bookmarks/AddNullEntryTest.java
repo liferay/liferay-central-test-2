@@ -20,32 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.breadcrumb;
+package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[1]/a/span"));
+public class AddNullEntryTest extends BaseTestCase {
+	public void testAddNullEntry() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
 	}
 }

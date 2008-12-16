@@ -33,7 +33,31 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveEntryTest extends BaseTestCase {
 	public void testMoveEntry() throws Exception {
-		selenium.click("//strong/span");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[4]/td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,8 +104,7 @@ public class MoveEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"p_p_id_28_\"]/div/form/div[1]/a[1]")) {
+				if (selenium.isElementPresent("link=Folders")) {
 					break;
 				}
 			}
@@ -131,41 +154,11 @@ public class MoveEntryTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertFalse(selenium.isElementPresent("link=http://www.digg.com"));
 		selenium.click(RuntimeVariables.replace("link=Test Folder"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=exact:http://www.digg.com")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 	}
 }

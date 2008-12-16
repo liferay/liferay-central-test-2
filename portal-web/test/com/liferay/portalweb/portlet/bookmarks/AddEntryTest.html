@@ -9,6 +9,21 @@
 <tr><td rowspan="1" colspan="3">AddEntryTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//b</td>
 	<td></td>
@@ -19,9 +34,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>_28_name</td>
+	<td></td>
+</tr>
+<tr>
 	<td>typeKeys</td>
 	<td>_28_name</td>
 	<td>Test Bookmark</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_28_name</td>
+	<td>Test Bookmark</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_28_url</td>
+	<td>http://www.liferay.com</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -44,8 +74,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=http://www.liferay.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

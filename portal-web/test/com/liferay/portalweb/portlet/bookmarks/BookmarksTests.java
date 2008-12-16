@@ -40,13 +40,24 @@ public class BookmarksTests extends BaseTests {
 		addTestSuite(AddEntryTest.class);
 		addTestSuite(AddSecondEntryTest.class);
 		addTestSuite(VerifyEntriesTest.class);
+		addTestSuite(SearchEntriesTest.class);
+		addTestSuite(SearchNullEntriesTest.class);
 		addTestSuite(MoveEntryTest.class);
 		addTestSuite(DeleteEntryTest.class);
-		addTestSuite(SearchEntriesTest.class);
+		addTestSuite(EditFolderTest.class);
+		addTestSuite(EditSubfolderTest.class);
+		addTestSuite(EditEntryTest.class);
+		addTestSuite(CombineToParentFolderTest.class);
+		addTestSuite(AddNullFolderTest.class);
+		addTestSuite(AddNullSubfolderTest.class);
+		addTestSuite(AddNullEntryTest.class);
+		addTestSuite(AddNullURLTest.class);
+		//addTestSuite(AddNullTitleTest.class);
+		addTestSuite(AddIncorrectURLTest.class);
 		addTestSuite(DeleteAllTest.class);
 		addTestSuite(ImportLARTest.class);
 		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTestEdit.class);
 
 	}
 

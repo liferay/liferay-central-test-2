@@ -33,27 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddEntryTest extends BaseTestCase {
 	public void testAddEntry() throws Exception {
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Bookmark"));
-		selenium.type("_28_url",
-			RuntimeVariables.replace("http://www.liferay.com"));
-		selenium.typeKeys("_28_comments",
-			RuntimeVariables.replace("This is a test bookmark!"));
-		selenium.type("_28_comments",
-			RuntimeVariables.replace("This is a test bookmark!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=http://www.liferay.com")) {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -62,5 +48,46 @@ public class AddEntryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_28_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Bookmark"));
+		selenium.type("_28_name", RuntimeVariables.replace("Test Bookmark"));
+		selenium.typeKeys("_28_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.type("_28_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.typeKeys("_28_comments",
+			RuntimeVariables.replace("This is a test bookmark!"));
+		selenium.type("_28_comments",
+			RuntimeVariables.replace("This is a test bookmark!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteEntryTest extends BaseTestCase {
 	public void testDeleteEntry() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Test Folder"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another Test Bookmark")) {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -52,27 +49,35 @@ public class DeleteEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[6]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
+		selenium.click("//td[6]/ul/li/strong");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/ul/li[3]/nobr/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertFalse(selenium.isElementPresent("link=http://www.digg.com"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }
