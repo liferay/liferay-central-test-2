@@ -282,7 +282,7 @@ public class HookHotDeployListener
 
 			List<String> customJsps = new ArrayList<String>();
 
-			String webDir = WebDirDetector.getRootDir(portletClassLoader);
+			String webDir = servletContext.getRealPath("/");
 
 			getCustomJsps(servletContext, webDir, customJspDir, customJsps);
 
