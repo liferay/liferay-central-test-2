@@ -608,11 +608,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 		</antcall>
 	</target>
 
-	<target name="zip-jboss">
-		<antcall target="zip-jboss-jetty" />
-		<antcall target="zip-jboss-tomcat" />
-	</target>
-
 	<target name="zip-jboss-jetty">
 		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version}.zip" failonerror="false" />
 
@@ -1029,7 +1024,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 		<antcall target="zip-api" />
 		<antcall target="zip-ext" />
 		<antcall target="zip-geronimo-tomcat" />
-		<antcall target="zip-jboss" />
+		<antcall target="zip-jboss-jetty" />
+		<antcall target="zip-jboss-tomcat" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
