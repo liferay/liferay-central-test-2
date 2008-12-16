@@ -609,6 +609,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 	</target>
 
 	<target name="zip-jboss">
+		<antcall target="zip-jboss-jetty" />
+		<antcall target="zip-jboss-tomcat" />
+	</target>
+
+	<target name="zip-jboss-jetty">
 		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
@@ -620,7 +625,14 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 			<param name="zip.executable.file" value="liferay-portal-jboss-jetty-4.0" />
 			<param name="zip.executable.dir" value="${app.server.jboss-jetty.dir}" />
 		</antcall>
+	</target>
 
+	<target name="zip-jboss-tomcat">
+		<antcall target="zip-jboss-tomcat-4.0" />
+		<antcall target="zip-jboss-tomcat-4.2" />
+	</target>
+
+	<target name="zip-jboss-tomcat-4.0">
 		<delete file="dist/liferay-portal-jboss-tomcat-4.0-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
@@ -632,7 +644,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 			<param name="zip.executable.file" value="liferay-portal-jboss-tomcat-4.0" />
 			<param name="zip.executable.dir" value="${app.server.jboss-tomcat.dir}" />
 		</antcall>
+	</target>
 
+	<target name="zip-jboss-tomcat-4.2">
 		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
