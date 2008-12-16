@@ -292,9 +292,9 @@ public class TagsAssetFinderImpl
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql += " AND (visible = ?)";
-
 			sql = getDates(sql, publishDate, expirationDate);
+
+			sql += " AND (visible = ?)";
 
 			if (groupId > 0) {
 				sql += " AND (TagsAsset.groupId = ?)";
@@ -315,9 +315,9 @@ public class TagsAssetFinderImpl
 			setEntryIds(qPos, entryIds);
 			setEntryIds(qPos, notEntryIds);
 
-			qPos.add(true);
-
 			setDates(qPos, publishDate, expirationDate);
+
+			qPos.add(true);
 
 			if (groupId > 0) {
 				setGroupId(qPos, groupId);
