@@ -55,7 +55,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.WebDirDetector;
 
 import java.io.File;
 import java.io.InputStream;
@@ -282,7 +281,7 @@ public class HookHotDeployListener
 
 			List<String> customJsps = new ArrayList<String>();
 
-			String webDir = servletContext.getRealPath("/");
+			String webDir = servletContext.getRealPath(StringPool.SLASH);
 
 			getCustomJsps(servletContext, webDir, customJspDir, customJsps);
 
