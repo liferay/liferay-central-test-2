@@ -30,7 +30,7 @@
 		%>
 
 		<c:choose>
-			<c:when test="<%= Validator.isNotNull(successMessage) %>">
+			<c:when test='<%= Validator.isNotNull(successMessage) && !successMessage.equals("request_processed") %>'>
 				<%= successMessage %>
 			</c:when>
 			<c:otherwise>
