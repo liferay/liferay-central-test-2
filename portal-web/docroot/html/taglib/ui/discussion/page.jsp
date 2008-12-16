@@ -125,7 +125,7 @@ MBMessage message = rootMessage;
 			String taglibPostReplyURL = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
 			%>
 
-			<liferay-ui:icon image="reply" message="post-reply" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
+			<liferay-ui:icon image="reply" message="add-comment" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
 		</c:if>
 	</td>
 </tr>

@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -193,7 +194,6 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 	className="<%= WikiPage.class.getName() %>"
 	classPK="<%= wikiPage.getResourcePrimKey() %>"
 	folksonomy="<%= false %>"
-	message="categories"
 	portletURL="<%= taggedPagesURL %>"
 />
 
@@ -201,6 +201,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 	className="<%= WikiPage.class.getName() %>"
 	classPK="<%= wikiPage.getResourcePrimKey() %>"
 	folksonomy="<%= true %>"
+	message="tags"
 	portletURL="<%= taggedPagesURL %>"
 />
 
@@ -209,31 +210,9 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 </div>
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
-	<div class="page-actions">
-
-		<%
-		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
-		%>
-
-		<c:choose>
-			<c:when test="<%= asset.getViewCount() == 1 %>">
-				<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
-			</c:when>
-			<c:when test="<%= asset.getViewCount() > 1 %>">
-				<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
-			</c:when>
-		</c:choose>
-
-		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" method="get" label="<%= true %>" />
-	</div>
-
-	<c:if test="<%= (childPages.size() > 0) || WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
-		<div class="separator"><!-- --></div>
-	</c:if>
-
 	<c:if test="<%= childPages.size() > 0 %>">
 		<div class="child-pages">
-			<h3><liferay-ui:message key="children" /></h3>
+			<h3><liferay-ui:message key="children-pages" /></h3>
 
 			<ul class="child-pages">
 
@@ -258,16 +237,42 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		</div>
 	</c:if>
 
-	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
-		<div class="page-actions">
-			<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" label="<%= true %>" />
-		</div>
-	</c:if>
+	<div class="page-actions">
+
+		<%
+		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+		%>
+
+		<c:choose>
+			<c:when test="<%= asset.getViewCount() == 1 %>">
+				<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
+			</c:when>
+			<c:when test="<%= asset.getViewCount() > 1 %>">
+				<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
+			</c:when>
+		</c:choose>
+
+		<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
+			<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" method="get" label="<%= true %>" />,
+		</c:if>
+
+		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" method="get" label="<%= true %>" />
+	</div>
 
 	<c:if test="<%= enableComments %>">
 		<br />
 
-		<liferay-ui:tabs names="comments" />
+		<%
+		int discussionMessagesCount = 0;
+
+		if (wikiPage != null) {
+			discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(WikiPage.class.getName()), wikiPage.getResourcePrimKey());
+		}
+		%>
+
+		<c:if test="<%= discussionMessagesCount > 0 %>">
+			<liferay-ui:tabs names="comments" />
+		</c:if>
 
 		<portlet:actionURL var="discussionURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
