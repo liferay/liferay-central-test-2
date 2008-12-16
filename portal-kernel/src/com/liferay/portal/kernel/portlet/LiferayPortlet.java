@@ -68,7 +68,9 @@ public class LiferayPortlet extends GenericPortlet {
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		actionResponse.sendRedirect(redirect);
+		if (Validator.isNotNull(redirect)) {
+			actionResponse.sendRedirect(redirect);
+		}
 	}
 
 	protected boolean callActionMethod(
