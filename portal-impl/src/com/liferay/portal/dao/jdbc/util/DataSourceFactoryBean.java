@@ -25,10 +25,12 @@ package com.liferay.portal.dao.jdbc.util;
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.util.PropsUtil;
 
+import java.util.Enumeration;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -56,10 +58,16 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 
 		BasicDataSource dataSource = new BasicDataSource();
 
-		dataSource.setDriverClassName(properties.getProperty("driver"));
-		dataSource.setUrl(properties.getProperty("url"));
-		dataSource.setUsername(properties.getProperty("username"));
-		dataSource.setPassword(properties.getProperty("password"));
+		Enumeration<String> enu =
+			(Enumeration<String>)properties.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = enu.nextElement();
+
+			String value = properties.getProperty(key);
+
+			BeanUtils.setProperty(dataSource, key, value);
+		}
 
 		if (_log.isDebugEnabled()) {
 			SortedProperties sortedProperties = new SortedProperties(
