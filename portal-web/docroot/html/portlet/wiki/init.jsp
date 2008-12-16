@@ -30,6 +30,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
