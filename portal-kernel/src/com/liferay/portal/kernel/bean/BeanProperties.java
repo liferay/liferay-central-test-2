@@ -52,6 +52,8 @@ public interface BeanProperties {
 
 	public String getString(Object bean, String param);
 
-	public String getString(Object bean, String param, String defaultValue) ;
+	public String getString(Object bean, String param, String defaultValue);
+
+	public void setProperty(Object bean, String param, Object value);
 
 }

@@ -181,6 +181,15 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public void setProperty(Object bean, String param, Object value) {
+		try {
+			PropertyUtils.setProperty(bean, param, value);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
+
 	private static Log _log = LogFactory.getLog(BeanPropertiesImpl.class);
 
 }
