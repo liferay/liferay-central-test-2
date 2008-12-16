@@ -314,7 +314,6 @@ public class TagsAssetFinderImpl
 
 			setEntryIds(qPos, entryIds);
 			setEntryIds(qPos, notEntryIds);
-
 			setDates(qPos, publishDate, expirationDate);
 
 			qPos.add(true);
