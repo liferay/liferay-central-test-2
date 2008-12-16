@@ -603,6 +603,17 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
+		// All users can retrieve CSS and JavaScript
+
+		if ((path != null) &&
+			(path.equals(_PATH_PORTAL_CSS) ||
+			 path.equals(_PATH_PORTAL_CSS_CACHED) ||
+			 path.equals(_PATH_PORTAL_JAVASCRIPT) ||
+			 path.equals(_PATH_PORTAL_JAVASCRIPT_CACHED))) {
+
+			return path;
+		}
+
 		// Authenticated users can always log out
 
 		if (((remoteUser != null) || (user != null)) && (path != null) &&
@@ -616,17 +627,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		if (((remoteUser != null) || (user != null)) && (path != null) &&
 			(path.equals(_PATH_PORTAL_EXPIRE_SESSION) ||
 			 path.equals(_PATH_PORTAL_EXTEND_SESSION))) {
-
-			return path;
-		}
-
-		// Authenticated users can retrieve CSS and JavaScript
-
-		if (((remoteUser != null) || (user != null)) && (path != null) &&
-			(path.equals(_PATH_PORTAL_CSS) ||
-			 path.equals(_PATH_PORTAL_CSS_CACHED) ||
-			 path.equals(_PATH_PORTAL_JAVASCRIPT) ||
-			 path.equals(_PATH_PORTAL_JAVASCRIPT_CACHED))) {
 
 			return path;
 		}
