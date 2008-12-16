@@ -25,10 +25,9 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryServiceUtil" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
@@ -41,15 +40,13 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 %>
 
 <%
-for (int i = 0; i < vocabularies.size(); i++) {
-	TagsVocabulary vocabulary = vocabularies.get(i);
-
+for (TagsVocabulary vocabulary : vocabularies) {
 	String vocabularyName = vocabulary.getName();
 
-	List<TagsEntry> curEntries = _filterEntries(entries, vocabulary);
+	List<TagsEntry> vocabularyEntries = _filterEntries(entries, vocabulary);
 %>
 
-	<c:if test="<%= curEntries.size() > 0 %>">
+	<c:if test="<%= vocabularyEntries.size() > 0 %>">
 		<div class="taglib-tags-summary">
 			<%= vocabularyName %>:
 
@@ -57,7 +54,7 @@ for (int i = 0; i < vocabularies.size(); i++) {
 				<c:when test="<%= portletURL != null %>">
 
 					<%
-					for (TagsEntry entry : curEntries) {
+					for (TagsEntry entry : vocabularyEntries) {
 						portletURL.setParameter("tag", entry.getName());
 						portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 					%>
@@ -72,7 +69,7 @@ for (int i = 0; i < vocabularies.size(); i++) {
 				<c:otherwise>
 
 					<%
-					for (TagsEntry entry : curEntries) {
+					for (TagsEntry entry : vocabularyEntries) {
 					%>
 
 						<span class="category">
@@ -95,9 +92,9 @@ for (int i = 0; i < vocabularies.size(); i++) {
 private List<TagsEntry> _filterEntries(List<TagsEntry> entries, TagsVocabulary vocabulary) {
 	List<TagsEntry> filteredEntries = new ArrayList<TagsEntry>();
 
-	for (TagsEntry curEntry : entries) {
-		if (curEntry.getVocabularyId() == vocabulary.getVocabularyId()) {
-			filteredEntries.add(curEntry);
+	for (TagsEntry entry : entries) {
+		if (entry.getVocabularyId() == vocabulary.getVocabularyId()) {
+			filteredEntries.add(entry);
 		}
 	}
 
