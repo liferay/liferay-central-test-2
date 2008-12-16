@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_2_0;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -81,7 +82,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				Layout layout = null;
+
+				try {
+					layout = LayoutLocalServiceUtil.getLayout(plid);
+				}
+				catch (NoSuchLayoutException nsle) {
+					continue;
+				}
 
 				String newPreferences = upgradePreferences(
 					layout.getCompanyId(), ownerId, ownerType, plid, portletId,
