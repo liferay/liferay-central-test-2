@@ -35,12 +35,6 @@ String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
 
 List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, folksonomy);
-
-String cssClass = "tag";
-
-if (!folksonomy) {
-	cssClass = "category";
-}
 %>
 
 <c:if test="<%= entries.size() > 0 %>">
@@ -56,7 +50,7 @@ if (!folksonomy) {
 					portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 				%>
 
-					<a class="<%= cssClass %>" href="<%= portletURL.toString() %>"><%= entry.getName() %></a>
+					<a class="tag" href="<%= portletURL.toString() %>"><%= entry.getName() %></a>
 
 				<%
 				}
@@ -69,7 +63,7 @@ if (!folksonomy) {
 				for (TagsEntry entry : entries) {
 				%>
 
-					<span class="<%= cssClass %>">
+					<span class="tag">
 						<%= entry.getName() %>
 					</span>
 

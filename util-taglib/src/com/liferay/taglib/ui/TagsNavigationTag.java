@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Alvaro del Castillo
  * @author Eduardo Lundgren
- * @author Jorge Ferrer
  *
  */
 public class TagsNavigationTag extends IncludeTag {
@@ -41,17 +40,10 @@ public class TagsNavigationTag extends IncludeTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute(
-			"liferay-ui:tags-navigation:folksonomy", _folksonomy);
-
-		request.setAttribute(
 			"liferay-ui:tags-navigation:showCompanyCategories",
 			_showCompanyCategories);
 
 		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setFolksonomy(boolean folksonomy) {
-		_folksonomy = folksonomy;
 	}
 
 	public void setShowCompanyCategories(boolean showCompanyCategories) {
@@ -65,7 +57,6 @@ public class TagsNavigationTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/tags_navigation/page.jsp";
 
-	private boolean _folksonomy;
 	private boolean _showCompanyCategories;
 
 }

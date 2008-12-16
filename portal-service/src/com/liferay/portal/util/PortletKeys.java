@@ -154,10 +154,6 @@ public class PortletKeys {
 
 	public static final String TAGS_COMPILER = "103";
 
-	public static final String TAGS_CATEGORIES_NAVIGATION = "122";
-
-	public static final String TAGS_NAVIGATION = "141";
-
 	public static final String TASKS = "122";
 
 	public static final String UPDATE_MANAGER = "104";

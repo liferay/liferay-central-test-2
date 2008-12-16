@@ -1626,10 +1626,6 @@
 
 		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
 
-		<!-- Tags Categories Navigation -->
-
-		<action path="/tags_categories_navigation/view" forward="portlet.tags_navigation.view" />
-
 		<!-- Tags Navigation -->
 
 		<action path="/tags_navigation/view" forward="portlet.tags_navigation.view" />

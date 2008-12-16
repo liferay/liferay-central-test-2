@@ -55,7 +55,6 @@ else if (type.equals("recent_changes")) {
 else if (type.equals("tagged_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_tagged_pages");
 	portletURL.setParameter("tag", tag);
-	portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
 }
 
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
