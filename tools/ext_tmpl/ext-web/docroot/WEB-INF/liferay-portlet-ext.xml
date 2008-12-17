@@ -69,11 +69,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>12</portlet-name>
-		<struts-path>stocks</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>15</portlet-name>
 		<struts-path>journal</struts-path>
 		<include>true</include>

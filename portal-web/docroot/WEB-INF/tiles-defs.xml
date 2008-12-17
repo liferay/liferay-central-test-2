@@ -1108,18 +1108,6 @@
 		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
 	</definition>
 
-	<!-- Stocks -->
-
-	<definition name="portlet.stocks" extends="portlet" />
-
-	<definition name="portlet.stocks.edit" extends="portlet.stocks">
-		<put name="portlet_content" value="/portlet/stocks/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.stocks.view" extends="portlet.stocks">
-		<put name="portlet_content" value="/portlet/stocks/view.jsp" />
-	</definition>
-
 	<!-- Tags Admin -->
 
 	<definition name="portlet.tags_admin" extends="portlet" />

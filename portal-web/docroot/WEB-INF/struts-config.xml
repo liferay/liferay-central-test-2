@@ -1610,14 +1610,6 @@
 
 		<action path="/site_map/view" forward="portlet.site_map.view" />
 
-		<!-- Stocks -->
-
-		<action path="/stocks/edit" type="com.liferay.portlet.stocks.action.EditPreferencesAction">
-			<forward name="portlet.stocks.edit" path="portlet.stocks.edit" />
-		</action>
-
-		<action path="/stocks/view" forward="portlet.stocks.view" />
-
 		<!-- Tags -->
 
 		<action path="/tags/rss" type="com.liferay.portlet.tags.action.RSSAction" />
