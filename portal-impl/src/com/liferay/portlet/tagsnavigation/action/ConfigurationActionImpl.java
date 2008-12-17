@@ -78,7 +78,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		return "/html/portlet/tags_navigation/configuration.jsp";
+		return "/html/portlet/tags_entries_navigation/configuration.jsp";
 	}
 
 }

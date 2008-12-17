@@ -1327,7 +1327,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>141</portlet-name>
-		<icon>/html/portlet/tags_navigation/icon.png</icon>
+		<icon>/html/portlet/tags_entries_navigation/icon.png</icon>
 		<struts-path>tags_entries_navigation</struts-path>
 		<configuration-action-class>com.liferay.portlet.tagsnavigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
