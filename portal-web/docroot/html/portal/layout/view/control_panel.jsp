@@ -211,7 +211,11 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 							<c:otherwise>
 
 								<%
-								String title = "control-panel";
+								String title = category;
+
+								if (category.equals(PortletCategoryKeys.MY)) {
+									title = user.getFullName();
+								}
 
 								if (Validator.isNotNull(category)) {
 									category = "category." + category;
