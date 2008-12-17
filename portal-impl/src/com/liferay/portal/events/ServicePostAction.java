@@ -50,7 +50,7 @@ public class ServicePostAction extends Action {
 			// Make sure this is called only once per full request, ignore
 			// requests spawned by the portlet
 
-			//String requestURI = GetterUtil.getString(req.getRequestURI());
+			//String requestURI = GetterUtil.getString(request.getRequestURI());
 
 			// Doesn't this cause a memory leak?
 
