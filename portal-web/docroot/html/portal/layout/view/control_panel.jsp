@@ -42,6 +42,10 @@ if (ppid.equals(PortletKeys.EXPANDO)) {
 	}
 }
 
+if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
+	ppid = PortletKeys.ADMIN_PLUGINS;
+}
+
 String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid);
 
 List<Layout> scopeLayouts = new ArrayList<Layout>();
