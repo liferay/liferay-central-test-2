@@ -2356,12 +2356,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>showCompanyCategories</name>
+			<name>folksonomy</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>folksonomy</name>
+			<name>showCompanyCategories</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

@@ -31,7 +31,8 @@ if (portletName.equals(PortletKeys.TAGS_CATEGORIES_NAVIGATION)) {
 	folksonomy = false;
 }
 %>
+
 <liferay-ui:tags-navigation
-	showCompanyCategories="<%= showCompanyCategories %>"
 	folksonomy="<%= folksonomy %>"
+	showCompanyCategories="<%= showCompanyCategories %>"
 />

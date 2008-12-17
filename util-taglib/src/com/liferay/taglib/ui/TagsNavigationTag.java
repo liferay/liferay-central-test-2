@@ -41,11 +41,11 @@ public class TagsNavigationTag extends IncludeTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute(
-			"liferay-ui:tags-navigation:folksonomy", _folksonomy);
-
+			"liferay-ui:tags-navigation:folksonomy",
+			String.valueOf(_folksonomy));
 		request.setAttribute(
 			"liferay-ui:tags-navigation:showCompanyCategories",
-			_showCompanyCategories);
+			String.valueOf(_showCompanyCategories));
 
 		return EVAL_BODY_BUFFERED;
 	}

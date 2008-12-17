@@ -410,7 +410,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>122</portlet-name>
-		<struts-path>tags_navigation</struts-path>
+		<struts-path>tags_categories_navigation</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
@@ -501,6 +501,11 @@
 	<portlet>
 		<portlet-name>140</portlet-name>
 		<struts-path>my_pages</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>141</portlet-name>
+		<struts-path>tags_entries_navigation</struts-path>
 		<include>true</include>
 	</portlet>
 	-->

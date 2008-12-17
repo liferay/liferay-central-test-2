@@ -25,8 +25,8 @@
 <%@ include file="/html/taglib/ui/tags_navigation/init.jsp" %>
 
 <%
-Boolean folksonomy = (Boolean)request.getAttribute("liferay-ui:tags-navigation:folksonomy");
-Boolean showCompanyCategories = (Boolean)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories");
+boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags-navigation:folksonomy"));
+boolean showCompanyCategories = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories"));
 
 String tag = ParamUtil.getString(renderRequest, "tag");
 
@@ -53,15 +53,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 		<c:choose>
 			<c:when test="<%= vocabularies.size() == 1 %>">
-
 				<%= _buildVocabularyNavigation(vocabulary, tag, portletURL) %>
-
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:panel id='<%= namespace + "taglibTagsNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
-
 					<%= _buildVocabularyNavigation(vocabulary, tag, portletURL) %>
-
 				</liferay-ui:panel>
 			</c:otherwise>
 		</c:choose>
@@ -78,10 +74,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 			if (treeview.treeview) {
 				treeview.treeview(
-				{
-					animated: 'fast'
-				}
-						);
+					{
+						animated: 'fast'
+					}
+				);
 
 				jQuery.ui.disableSelection(treeview);
 			}
@@ -90,7 +86,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 </script>
 
 <%!
-private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, String tag, PortletURL portletURL, StringBuilder sb) throws Exception {
+private void _buildEntriesNavigation(List<TagsEntry> entries, String vocabularyName, String tag, PortletURL portletURL, StringBuilder sb) throws Exception {
 	for (TagsEntry entry : entries) {
 		String entryName = entry.getName();
 
@@ -126,7 +122,7 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 		if (!entryChildren.isEmpty()) {
 			sb.append("<ul>");
 
-			_buildNavigation(entryChildren, vocabularyName, tag, portletURL, sb);
+			_buildEntriesNavigation(entryChildren, vocabularyName, tag, portletURL, sb);
 
 			sb.append("</ul>");
 		}
@@ -138,7 +134,7 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, St
 private String _buildVocabularyNavigation(TagsVocabulary vocabulary, String tag, PortletURL portletURL) throws Exception {
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<ul class='");
+	sb.append("<ul class=\"");
 
 	if (vocabulary.isFolksonomy()) {
 		sb.append("tag-cloud");
@@ -147,14 +143,14 @@ private String _buildVocabularyNavigation(TagsVocabulary vocabulary, String tag,
 		sb.append("treeview");
 	}
 
-	sb.append("'>");
+	sb.append("\">");
 
 	List<TagsEntry> entries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabulary.getName());
 
-	_buildNavigation(entries, vocabulary.getName(), tag, portletURL, sb);
+	_buildEntriesNavigation(entries, vocabulary.getName(), tag, portletURL, sb);
 
 	sb.append("</ul>");
-	sb.append("<br style='clear: both' />");
+	sb.append("<br style=\"clear: both;\" />");
 
 	return sb.toString();
 }
