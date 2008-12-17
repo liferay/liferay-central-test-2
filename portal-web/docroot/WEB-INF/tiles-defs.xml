@@ -1118,10 +1118,10 @@
 
 	<!-- Tags Navigation -->
 
-	<definition name="portlet.tags_navigation" extends="portlet" />
+	<definition name="portlet.tags_entries_navigation" extends="portlet" />
 
-	<definition name="portlet.tags_navigation.view" extends="portlet.tags_navigation">
-		<put name="portlet_content" value="/portlet/tags_navigation/view.jsp" />
+	<definition name="portlet.tags_entries_navigation.view" extends="portlet.tags_entries_navigation">
+		<put name="portlet_content" value="/portlet/tags_entries_navigation/view.jsp" />
 	</definition>
 
 	<!-- Update Manager -->

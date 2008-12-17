@@ -867,6 +867,25 @@ img.ui-datepicker-trigger {
 	padding-bottom: 3px;
 }
 
+/* ---------- Tagscloud ---------- */
+
+.tag-cloud {
+	list-style: none;
+	margin: 0 1em 0 0;
+	padding: 0 1em 0.5em 1em;
+	white-space: normal;
+}
+
+.tag-cloud li {
+	display: inline;
+	float: left;
+	list-style: none;
+	margin: 0 1em 0 0;
+}
+
+.tag-cloud a {
+	white-space: nowrap;
+}
 /* ---------- Treeview ---------- */
 
 .treeview {

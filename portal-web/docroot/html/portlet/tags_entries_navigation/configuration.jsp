@@ -22,8 +22,24 @@
  */
 %>
 
-<%@ include file="/html/portlet/tags_navigation/init.jsp" %>
+<%@ include file="/html/portlet/tags_entries_navigation/init.jsp" %>
 
-<liferay-ui:tags-navigation
-	showCompanyCategories="<%= showCompanyCategories %>"
-/>
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:input-checkbox param="showCompanyCategories" defaultValue="<%= showCompanyCategories %>" />
+	</td>
+	<td>
+		<liferay-ui:message key="show-all-categories" />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+
+</form>

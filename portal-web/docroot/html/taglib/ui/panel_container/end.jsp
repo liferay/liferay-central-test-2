@@ -27,15 +27,17 @@
 </div>
 
 <script type="text/javascript">
-	jQuery(
-		function () {
-			new Liferay.Panel(
-				{
-					container: '#<%= id %>',
-					accordion: <%= accordion %>,
-					persistState: <%= persistState %>
-				}
-			);
-		}
-	);
+	if (Liferay.Panel) {
+		jQuery(
+			function () {
+				new Liferay.Panel(
+					{
+						container: '#<%= id %>',
+						accordion: <%= accordion %>,
+						persistState: <%= persistState %>
+					}
+				);
+			}
+		);
+	}
 </script>

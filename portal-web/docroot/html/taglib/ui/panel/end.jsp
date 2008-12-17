@@ -29,16 +29,18 @@
 
 <c:if test="<%= collapsible && (panelCount == null) %>">
 	<script type="text/javascript">
-		jQuery(
-			function () {
-				new Liferay.Panel(
-					{
-						panel: '#<%= id %>',
-						collapsible: <%= collapsible  %>,
-						persistState: <%= persistState %>
-					}
-				);
-			}
-		);
+		if (Liferay.Panel) {
+			jQuery(
+				function () {
+					new Liferay.Panel(
+						{
+							panel: '#<%= id %>',
+							collapsible: <%= collapsible  %>,
+							persistState: <%= persistState %>
+						}
+					);
+				}
+			);
+		}
 	</script>
 </c:if>

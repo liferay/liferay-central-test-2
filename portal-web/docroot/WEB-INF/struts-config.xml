@@ -1618,9 +1618,13 @@
 
 		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
 
-		<!-- Tags Navigation -->
+		<!-- Tags Categories Navigation -->
 
-		<action path="/tags_navigation/view" forward="portlet.tags_navigation.view" />
+		<action path="/tags_categories_navigation/view" forward="portlet.tags_entries_navigation.view" />
+
+		<!-- Tags Entries Navigation -->
+
+		<action path="/tags_entries_navigation/view" forward="portlet.tags_entries_navigation.view" />
 
 		<!-- Update Manager -->
 
