@@ -36,12 +36,15 @@ boolean nestedChildren = true;
 
 String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
 
-if ((displayStyleDefinition != null) && (displayStyleDefinition.length == 4)) {
+if (displayStyleDefinition != null && displayStyleDefinition.length != 0) {
 	headerType = displayStyleDefinition[0];
 	rootLayoutType = displayStyleDefinition[1];
 	rootLayoutLevel = GetterUtil.getInteger(displayStyleDefinition[2]);
 	includedLayouts = displayStyleDefinition[3];
-	nestedChildren = GetterUtil.getBoolean(displayStyleDefinition[4]);
+
+	if (displayStyleDefinition.length > 4) {
+		nestedChildren = GetterUtil.getBoolean(displayStyleDefinition[4]);
+	}
 }
 else {
 	headerType = (String)request.getAttribute("liferay-ui:navigation:headerType");
