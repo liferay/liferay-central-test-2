@@ -59,6 +59,7 @@ import java.util.Map;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 import javax.servlet.RequestDispatcher;
@@ -147,6 +148,28 @@ public class VelocityTaglib {
 			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
+	public String breadcrumb() throws Exception {
+		_stringResponse.recycle();
+
+		BreadcrumbTag.doTag(_servletContext, _request, _stringResponse);
+
+		return _stringResponse.getString();
+	}
+
+	public String breadcrumb(
+			String page, Layout selLayout, String selLayoutParam,
+			PortletURL portletURL, int displayStyle)
+		throws Exception {
+
+		_stringResponse.recycle();
+
+		BreadcrumbTag.doTag(
+			page, selLayout, selLayoutParam, portletURL, displayStyle,
+			_servletContext, _request, _stringResponse);
+
+		return _stringResponse.getString();
+	}
+
 	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}
@@ -155,15 +178,6 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		IconBackTag.doTag(_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String breadcrumb() throws Exception {
-		_stringResponse.recycle();
-
-		BreadcrumbTag.doTag(
-			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}

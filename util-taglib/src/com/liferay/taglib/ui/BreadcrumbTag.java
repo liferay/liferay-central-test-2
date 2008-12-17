@@ -22,10 +22,11 @@
 
 package com.liferay.taglib.ui;
 
-import java.io.IOException;
-
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.model.Layout;
 import com.liferay.taglib.util.IncludeTag;
+
+import java.io.IOException;
 
 import javax.portlet.PortletURL;
 
@@ -34,6 +35,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
  * <a href="BreadcrumbTag.java.html"><b><i>View Source</i></b></a>
@@ -48,13 +50,24 @@ public class BreadcrumbTag extends IncludeTag {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, servletContext, request, response);
+		doTag(
+			_PAGE, null, null, null, _DISPLAY_STYLE, servletContext, request,
+			response);
 	}
 
 	public static void doTag(
-			String page, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response)
+			String page, Layout selLayout, String selLayoutParam,
+			PortletURL portletURL, int displayStyle,
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
+
+		request.setAttribute("liferay-ui:breadcrumb:selLayout", selLayout);
+		request.setAttribute(
+			"liferay-ui:breadcrumb:selLayoutParam", selLayoutParam);
+		request.setAttribute("liferay-ui:breadcrumb:portletURL", portletURL);
+		request.setAttribute(
+			"liferay-ui:breadcrumb:displayStyle", String.valueOf(displayStyle));
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
@@ -62,19 +75,23 @@ public class BreadcrumbTag extends IncludeTag {
 		requestDispatcher.include(request, response);
 	}
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+	public int doEndTag() throws JspException {
+		try {
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
-		request.setAttribute("liferay-ui:breadcrumb:selLayout", _selLayout);
-		request.setAttribute(
-			"liferay-ui:breadcrumb:selLayoutParam", _selLayoutParam);
-		request.setAttribute("liferay-ui:breadcrumb:portletURL", _portletURL);
-		request.setAttribute(
-			"liferay-ui:breadcrumb:displayStyle",
-			String.valueOf(_displayStyle));
+			doTag(
+				getPage(), _selLayout, _selLayoutParam, _portletURL,
+				_displayStyle, servletContext, request, stringResponse);
 
-		return EVAL_BODY_BUFFERED;
+			pageContext.getOut().print(stringResponse.getString());
+
+			return EVAL_PAGE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setSelLayout(Layout selLayout) {
@@ -99,9 +116,11 @@ public class BreadcrumbTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
 
+	private static final int _DISPLAY_STYLE = 0;
+
 	private Layout _selLayout;
 	private String _selLayoutParam;
 	private PortletURL _portletURL;
-	private int _displayStyle = 1;
+	private int _displayStyle = _DISPLAY_STYLE;
 
 }
