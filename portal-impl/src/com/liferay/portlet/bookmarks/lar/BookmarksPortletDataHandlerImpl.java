@@ -386,7 +386,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setPlid(context.getPlid());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if ((parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
