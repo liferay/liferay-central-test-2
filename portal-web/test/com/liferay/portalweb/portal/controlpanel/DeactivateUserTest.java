@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeactivateUserTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddOrganizationTest extends BaseTestCase {
-	public void testAddOrganization() throws Exception {
+public class DeactivateUserTest extends BaseTestCase {
+	public void testDeactivateUser() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Organizations")) {
+				if (selenium.isElementPresent("link=Users")) {
 					break;
 				}
 			}
@@ -49,12 +49,8 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_126_name", RuntimeVariables.replace("Selenium"));
-		selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +58,7 @@ public class AddOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_126_type")) {
+				if (selenium.isElementPresent("link=Advanced \u00bb")) {
 					break;
 				}
 			}
@@ -72,19 +68,15 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_126_type",
-			RuntimeVariables.replace("label=Regular Organization"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click("link=Advanced \u00bb");
+		selenium.type("_125_screenName", RuntimeVariables.replace("selenium03"));
+		selenium.click(RuntimeVariables.replace("//div[3]/input"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("commentsLink");
-		selenium.type("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		selenium.typeKeys("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		assertTrue(selenium.isTextPresent("Modified"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("link=Deactivate"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));
+		selenium.click("link=\u00ab Basic");
 	}
 }

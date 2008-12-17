@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginsConfigurationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddOrganizationTest extends BaseTestCase {
-	public void testAddOrganization() throws Exception {
+public class PluginsConfigurationTest extends BaseTestCase {
+	public void testPluginsConfiguration() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Organizations")) {
+				if (selenium.isElementPresent("link=Plugins Configuration")) {
 					break;
 				}
 			}
@@ -49,42 +49,16 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.click(RuntimeVariables.replace("link=Plugins Configuration"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		assertTrue(selenium.isTextPresent("Activities"));
+		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_126_name", RuntimeVariables.replace("Selenium"));
-		selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_126_type")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_126_type",
-			RuntimeVariables.replace("label=Regular Organization"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		assertTrue(selenium.isTextPresent("Classic"));
+		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("commentsLink");
-		selenium.type("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		selenium.typeKeys("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		assertTrue(selenium.isTextPresent("Modified"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		assertTrue(selenium.isTextPresent("Freeform"));
+		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BrowseServerPluginsInstallationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginsTest extends BaseTestCase {
-	public void testPlugins() throws Exception {
+public class BrowseServerPluginsInstallationTest extends BaseTestCase {
+	public void testBrowseServerPluginsInstallation() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Plugins")) {
+				if (selenium.isElementPresent("link=Plugins Installation")) {
 					break;
 				}
 			}
@@ -49,15 +49,21 @@ public class PluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins"));
+		selenium.click(RuntimeVariables.replace("link=Plugins Installation"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Activities"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Install More Portlets']"));
+		selenium.select("//div[2]/select", "label=4");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Wiki"));
 		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Classic"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Install More Themes']"));
 		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Freeform"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Install More Layout Templates']"));
 		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
 		selenium.waitForPageToLoad("30000");
 	}

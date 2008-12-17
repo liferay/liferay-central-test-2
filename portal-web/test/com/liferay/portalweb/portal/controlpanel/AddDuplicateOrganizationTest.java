@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddDuplicateOrganizationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddOrganizationTest extends BaseTestCase {
-	public void testAddOrganization() throws Exception {
+public class AddDuplicateOrganizationTest extends BaseTestCase {
+	public void testAddDuplicateOrganization() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -76,15 +76,9 @@ public class AddOrganizationTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Regular Organization"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("commentsLink");
-		selenium.type("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		selenium.typeKeys("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		assertTrue(selenium.isTextPresent("Modified"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"You have entered invalid data. Please try again. "));
+		assertTrue(selenium.isTextPresent(
+				"The organization name is already taken. "));
 	}
 }

@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchUserTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddOrganizationTest extends BaseTestCase {
-	public void testAddOrganization() throws Exception {
+public class SearchUserTest extends BaseTestCase {
+	public void testSearchUser() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Organizations")) {
+				if (selenium.isElementPresent("link=Users")) {
 					break;
 				}
 			}
@@ -49,42 +49,14 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+			RuntimeVariables.replace("selenium"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_126_name", RuntimeVariables.replace("Selenium"));
-		selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_126_type")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_126_type",
-			RuntimeVariables.replace("label=Regular Organization"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("commentsLink");
-		selenium.type("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		selenium.typeKeys("_126_comments",
-			RuntimeVariables.replace("This is a test comment!"));
-		assertTrue(selenium.isTextPresent("Modified"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("selenium01"));
+		assertTrue(selenium.isTextPresent("selenium02"));
+		assertTrue(selenium.isTextPresent("selenium03"));
 	}
 }

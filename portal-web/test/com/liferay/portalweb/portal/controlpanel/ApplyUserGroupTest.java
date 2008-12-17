@@ -84,6 +84,5 @@ public class ApplyUserGroupTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("selen01"));
 		assertTrue(selenium.isTextPresent("selen02"));
-		assertTrue(selenium.isTextPresent("selen03"));
 	}
 }

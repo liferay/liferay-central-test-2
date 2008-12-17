@@ -4,81 +4,71 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddOrganizationTest</title>
+<title>DeleteUserTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddOrganizationTest</td></tr>
+<tr><td rowspan="1" colspan="3">DeleteUserTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Organizations</td>
+	<td>link=Users</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Organizations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Add</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_126_name</td>
-	<td>Selenium</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_126_name</td>
-	<td>Selenium</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_126_type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_126_type</td>
-	<td>label=Regular Organization</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>link=Users</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>commentsLink</td>
+	<td>link=Advanced »</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_126_comments</td>
-	<td>This is a test comment!</td>
+	<td>_125_screenName</td>
+	<td>selenium03</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_126_comments</td>
-	<td>This is a test comment!</td>
+	<td>select</td>
+	<td>_125_active</td>
+	<td>label=No</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Modified</td>
+	<td>clickAndWait</td>
+	<td>//div[3]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=« Basic</td>
 	<td></td>
 </tr>
 

@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="BrowseServerPluginsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteUserTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BrowseServerPluginsTest extends BaseTestCase {
-	public void testBrowseServerPlugins() throws Exception {
+public class DeleteUserTest extends BaseTestCase {
+	public void testDeleteUser() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/div[2]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("link=Users")) {
 					break;
 				}
 			}
@@ -49,22 +49,38 @@ public class BrowseServerPluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/div[2]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"//input[@value='Install More Portlets']"));
-		selenium.select("//div[2]/select", "label=4");
+		selenium.click("link=Advanced \u00bb");
+		selenium.type("_125_screenName", RuntimeVariables.replace("selenium03"));
+		selenium.select("_125_active", RuntimeVariables.replace("label=No"));
+		selenium.click(RuntimeVariables.replace("//div[3]/input"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Wiki"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"//input[@value='Install More Themes']"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"//input[@value='Install More Layout Templates']"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click("link=\u00ab Basic");
 	}
 }
