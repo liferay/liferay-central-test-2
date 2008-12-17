@@ -148,7 +148,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		<div class="page-actions">
 			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<c:if test="<%= followRedirect || (redirectPage == null) %>">
-					<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editPageURL.toString() %>" />
+					<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" label="<%= true %>" />
 				</c:if>
 			</c:if>
 
@@ -158,9 +158,9 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 			viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
 			%>
 
-			<liferay-ui:icon image="history" label="<%= true %>" message="details" url="<%= viewPageDetailsURL.toString() %>" method="get" />
+			<liferay-ui:icon image="history" message="details" url="<%= viewPageDetailsURL.toString() %>" method="get" label="<%= true %>" />
 
-			<liferay-ui:icon image="print" label="<%= true %>" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
+			<liferay-ui:icon image="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' label="<%= true %>" />
 		</div>
 	</c:if>
 
