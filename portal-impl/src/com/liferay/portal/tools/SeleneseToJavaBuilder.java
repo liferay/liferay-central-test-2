@@ -161,12 +161,6 @@ public class SeleneseToJavaBuilder {
 
 		sb.append("public void " + testMethodName + "() throws Exception {");
 
-		sb.append("int label = 1;");
-
-		sb.append("while (label >= 1) {");
-		sb.append("switch (label) {");
-		sb.append("case 1:");
-
 		String xml = FileUtil.read(basedir + "/" + file);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
@@ -221,6 +215,14 @@ public class SeleneseToJavaBuilder {
 					label = labels.put(param2, String.valueOf(labelCount));
 				}
 			}
+		}
+
+		if (labels.size() > 0) {
+			sb.append("int label = 1;");
+
+			sb.append("while (label >= 1) {");
+			sb.append("switch (label) {");
+			sb.append("case 1:");
 		}
 
 		x = 0;
@@ -514,10 +516,12 @@ public class SeleneseToJavaBuilder {
 			}
 		}
 
-		sb.append("case 100:");
-		sb.append("label = -1;");
-		sb.append("}");
-		sb.append("}");
+		if (labels.size() > 0) {
+			sb.append("case 100:");
+			sb.append("label = -1;");
+			sb.append("}");
+			sb.append("}");
+		}
 
 		sb.append("}");
 		sb.append("}");
