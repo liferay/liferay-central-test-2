@@ -22,12 +22,18 @@
 
 package com.liferay.taglib.ui;
 
+import java.io.IOException;
+
 import com.liferay.portal.model.Layout;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletURL;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="BreadcrumbTag.java.html"><b><i>View Source</i></b></a>
@@ -36,6 +42,25 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class BreadcrumbTag extends IncludeTag {
+
+	public static void doTag(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
+
+		doTag(_PAGE, servletContext, request, response);
+	}
+
+	public static void doTag(
+			String page, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
+
+		requestDispatcher.include(request, response);
+	}
 
 	public int doStartTag() {
 		HttpServletRequest request =

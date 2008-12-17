@@ -46,6 +46,7 @@ import com.liferay.taglib.security.PermissionsURLTag;
 import com.liferay.taglib.theme.LayoutIconTag;
 import com.liferay.taglib.theme.MetaTagsTag;
 import com.liferay.taglib.theme.WrapPortletTag;
+import com.liferay.taglib.ui.BreadcrumbTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
 import com.liferay.taglib.ui.LanguageTag;
 import com.liferay.taglib.ui.MyPlacesTag;
@@ -154,6 +155,15 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		IconBackTag.doTag(_servletContext, _request, _stringResponse);
+
+		return _stringResponse.getString();
+	}
+
+	public String breadcrumb() throws Exception {
+		_stringResponse.recycle();
+
+		BreadcrumbTag.doTag(
+			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
