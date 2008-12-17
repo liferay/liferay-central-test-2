@@ -838,7 +838,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subject = String.valueOf(classPK);
 			//String body = subject;
 
-			message = addDiscussionMessage(userId, null, subject, subject);
+			message = addDiscussionMessage(
+				userId, null, className, classPK, 0,
+				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID,
+				subject, subject, new ServiceContext());
 
 			long discussionId = counterLocalService.increment();
 
