@@ -2160,6 +2160,8 @@ public class PortalImpl implements Portal {
 			}
 		}
 
+		String strutsAction = getStrutsAction(request);
+
 		HttpSession session = request.getSession();
 
 		userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
@@ -2168,6 +2170,20 @@ public class PortalImpl implements Portal {
 			request.setAttribute(WebKeys.USER_ID, userIdObj);
 
 			return userIdObj.longValue();
+		}
+		else if (strutsAction.equals("/document_library/edit_file_entry") ||
+				 strutsAction.equals("/image_gallery/edit_image")) {
+
+			String doAsUserIdString = ParamUtil.getString(
+				request, "doAsUserId");
+
+			try {
+				return getDoAsUserId(request, doAsUserIdString);
+			}
+			catch (Exception e) {
+				_log.error("Unable to impersonate user " + doAsUserIdString, e);
+				return 0;
+			}
 		}
 		else {
 			return 0;
