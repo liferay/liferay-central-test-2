@@ -72,7 +72,9 @@ public class DialectDetector {
 						"Liferay is configured to use Hypersonic as its " +
 							"database. Do NOT use Hypersonic in production. " +
 								"Hypersonic is an embedded database useful " +
-									"for development and demo'ing purposes.");
+									"for development and demo'ing purposes. " +
+										"The database settings can be " +
+											"changed in portal.properties");
 				}
 			}
 
