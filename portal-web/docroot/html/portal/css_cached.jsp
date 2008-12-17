@@ -113,6 +113,19 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	padding-left: 20px;
 }
 
+.lfr-add-more-app {
+	border-top: 1px solid #ccc;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+.lfr-add-more-app a {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/add_content.png) no-repeat 0 50%;
+	display: block;
+	font-weight: bold;
+	padding-left: 20px;
+}
+
 .lfr-content-category {
 	padding-left: 10px;
 	padding-top: 3px;

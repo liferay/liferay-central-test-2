@@ -72,6 +72,23 @@
 				}
 				%>
 
+				<c:if test="<%= permissionChecker.isOmniadmin() %>">
+
+					<%
+					Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.CONTROL_PANEL);
+					long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+					PortletURLImpl pluginsURL = new PortletURLImpl(request, PortletKeys.PLUGIN_INSTALLER, controlPanelPlid, PortletRequest.RENDER_PHASE);
+
+					pluginsURL.setWindowState(WindowState.MAXIMIZED);
+					pluginsURL.setPortletMode(PortletMode.VIEW);
+					pluginsURL.setRefererPlid(plid);
+					%>
+
+					<p class="lfr-add-more-app">
+						<a href="<%= pluginsURL.toString() %>"><liferay-ui:message key="install-more-applications" /></a>
+					</p>
+				</c:if>
+
 				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 					<p class="portlet-msg-info">
 						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
