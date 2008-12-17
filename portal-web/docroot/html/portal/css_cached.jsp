@@ -113,14 +113,14 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	padding-left: 20px;
 }
 
-.lfr-add-more-app {
+.lfr-install-more {
 	border-top: 1px solid #ccc;
-	margin-top: 10px;
+	margin: 10px 0 0;
 	padding-top: 10px;
 }
 
-.lfr-add-more-app a {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/add_content.png) no-repeat 0 50%;
+.lfr-install-more a {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/install_more.png) no-repeat 0 50%;
 	display: block;
 	font-weight: bold;
 	padding-left: 20px;
