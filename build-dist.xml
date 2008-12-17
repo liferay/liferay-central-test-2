@@ -755,18 +755,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 	</target>
 
 	<target name="zip-portal-war">
+		<antcall target="zip-portal-war-2.4" />
+		<antcall target="zip-portal-war-2.3" />
+		<antcall target="zip-portal-war-2.4-with-dependencies" />
+		<antcall target="zip-portal-war-2.3-with-dependencies" />
+	</target>
 
-		<!-- Servlet 2.4 WAR -->
-
-		<delete file="dist/liferay-portal-${lp.version}.war" failonerror="false" />
-
-		<zip
-			basedir="${app.server.portal.dir}"
-			destfile="dist/liferay-portal-${lp.version}.war"
-		/>
-
-		<!-- Servlet 2.3 WAR -->
-
+	<target name="zip-portal-war-2.3">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
@@ -797,9 +792,18 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 			destfile="dist/liferay-portal-${lp.version}-servlet23.war"
 			update="yes"
 		/>
+	</target>
 
-		<!-- Servlet 2.3 WAR with dependencies -->
+	<target name="zip-portal-war-2.4">
+		<delete file="dist/liferay-portal-${lp.version}.war" failonerror="false" />
 
+		<zip
+			basedir="${app.server.portal.dir}"
+			destfile="dist/liferay-portal-${lp.version}.war"
+		/>
+	</target>
+
+	<target name="zip-portal-war-2.3-with-dependencies">
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
@@ -820,9 +824,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 			destfile="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war"
 			update="yes"
 		/>
+	</target>
 
-		<!-- Servlet 2.4 WAR with dependencies -->
-
+	<target name="zip-portal-war-2.4-with-dependencies">
 		<delete file="${tstamp.value}/WEB-INF/web.xml" />
 
 		<delete file="dist/liferay-portal-${lp.version}-with-dependencies.war" failonerror="false" />
