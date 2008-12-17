@@ -226,7 +226,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setPlid(plid);
+		serviceContext.setScopeGroupId(context.getGroupId());
 
 		CalEvent existingEvent = null;
 
