@@ -32,7 +32,7 @@ String tag = ParamUtil.getString(renderRequest, "tag");
 
 List<TagsVocabulary> vocabularies = null;
 
-if (showCompanyCategories.booleanValue()) {
+if (showCompanyCategories) {
 	vocabularies = TagsVocabularyServiceUtil.getCompanyVocabularies(company.getCompanyId(), folksonomy);
 }
 else {
