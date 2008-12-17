@@ -257,7 +257,7 @@ public class WikiUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getLayout().getGroupId();
+		long groupId = themeDisplay.getScopeGroupId();
 
 		String allNodes = ListUtil.toString(
 			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
