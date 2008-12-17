@@ -247,6 +247,7 @@
 		<!-- Transactions -->
 
 		<tx-required>getMessageDisplay</tx-required>
+		<tx-required>getDiscussionMessageDisplay</tx-required>
 	</entity>
 	<entity name="MBMessageFlag" local-service="true" remote-service="true">
 
