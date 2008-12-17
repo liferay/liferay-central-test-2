@@ -105,8 +105,8 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Resources
 
-		if ((serviceContext.getAddCommunityPermissions() != null) &&
-			(serviceContext.getAddGuestPermissions() != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addEntryResources(
 				folder, entry, serviceContext.getAddCommunityPermissions(),

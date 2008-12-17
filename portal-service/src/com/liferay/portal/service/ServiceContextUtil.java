@@ -23,7 +23,9 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PortletPreferencesIds;
 
 import java.util.Locale;
@@ -39,6 +41,42 @@ import javax.portlet.PortletPreferences;
  *
  */
 public class ServiceContextUtil {
+
+	public static Object deserialize(JSONObject jsonObject) {
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(
+			jsonObject.getBoolean("addCommunityPermissions"));
+		serviceContext.setAddGuestPermissions(
+			jsonObject.getBoolean("addGuestPermissions"));
+		serviceContext.setCompanyId(jsonObject.getLong("companyId"));
+
+		String[] guestPermissions = StringUtil.split(
+			jsonObject.getString("guestPermissions"));
+		String[] communityPermissions = StringUtil.split(
+			jsonObject.getString("communityPermissions"));
+
+		serviceContext.setCommunityPermissions(communityPermissions);
+		serviceContext.setGuestPermissions(guestPermissions);
+
+		serviceContext.setLayoutURL(jsonObject.getString("layoutURL"));
+		serviceContext.setPathMain(jsonObject.getString("pathMain"));
+		serviceContext.setPlid(jsonObject.getLong("plid"));
+		serviceContext.setPortalURL(jsonObject.getString("portalURL"));
+		serviceContext.setScopeGroupId(jsonObject.getLong("scopeGroupId"));
+		serviceContext.setUserDisplayURL(
+			jsonObject.getString("userDisplayURL"));
+
+		String[] tagsCategories = StringUtil.split(
+			jsonObject.getString("tagsCategories"));
+		String[] tagsEntries = StringUtil.split(
+			jsonObject.getString("tagsEntries"));
+
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
+
+		return serviceContext;
+	}
 
 	public static Locale getLocale(ServiceContext serviceContext) {
 		return LocaleUtil.fromLanguageId(serviceContext.getLanguageId());

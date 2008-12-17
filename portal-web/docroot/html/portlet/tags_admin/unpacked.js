@@ -651,6 +651,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var communityPermission = instance._getPermissionsEnabled('entry', 'community');
 		var guestPermission = instance._getPermissionsEnabled('entry', 'guest');
 
+		var serviceParameterTypes = [
+			'java.lang.String',
+			'java.lang.String',
+			'java.lang.String',
+			'[Ljava.lang.String;',
+			'com.liferay.portal.service.ServiceContext'
+		].join(',');
+
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
 				parentEntryName: null,
@@ -659,12 +667,13 @@ Liferay.Portlet.TagsAdmin = new Class({
 				properties: [],
 				serviceContext: jQuery.toJSON(
 					{
-						addCommunityPermissions: communityPermission,
-						addGuestPermissions: guestPermission,
+						communityPermissions: communityPermission,
+						guestPermissions: guestPermission,
 						plid: themeDisplay.getPlid(),
 						scopeGroupId: themeDisplay.getScopeGroupId()
 					}
-				)
+				),
+				serviceParameterTypes: serviceParameterTypes
 			},
 			function(message) {
 				var exception = message.exception;
@@ -748,8 +757,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 				folksonomy: folksonomy,
 				serviceContext: jQuery.toJSON(
 					{
-						addCommunityPermissions: communityPermission,
-						addGuestPermissions: guestPermission,
+						communityPermissions: communityPermission,
+						guestPermissions: guestPermission,
 						plid: themeDisplay.getPlid(),
 						scopeGroupId: themeDisplay.getScopeGroupId()
 					}

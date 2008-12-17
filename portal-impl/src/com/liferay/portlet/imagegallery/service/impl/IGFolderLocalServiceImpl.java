@@ -103,8 +103,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((serviceContext.getAddCommunityPermissions() != null) &&
-			(serviceContext.getAddGuestPermissions() != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addFolderResources(
 				folder, serviceContext.getAddCommunityPermissions(),

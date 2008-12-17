@@ -79,8 +79,8 @@ public class SCFrameworkVersionLocalServiceImpl
 
 		// Resources
 
-		if ((serviceContext.getAddCommunityPermissions() != null) &&
-			(serviceContext.getAddGuestPermissions() != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addFrameworkVersionResources(
 				frameworkVersion, serviceContext.getAddCommunityPermissions(),

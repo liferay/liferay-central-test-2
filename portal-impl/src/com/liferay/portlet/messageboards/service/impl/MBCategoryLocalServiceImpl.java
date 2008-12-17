@@ -121,8 +121,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((serviceContext.getAddCommunityPermissions() != null) &&
-			(serviceContext.getAddGuestPermissions() != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addCategoryResources(
 				category, serviceContext.getAddCommunityPermissions(),

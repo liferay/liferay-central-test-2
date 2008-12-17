@@ -259,6 +259,9 @@ public class EditEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BlogsEntry.class.getName(), actionRequest);
 
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
 		BlogsEntry entry = null;
 		String oldUrlTitle = StringPool.BLANK;
 

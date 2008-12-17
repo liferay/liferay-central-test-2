@@ -80,8 +80,8 @@ public class TagsVocabularyLocalServiceImpl
 
 		// Resources
 
-		if ((serviceContext.getAddCommunityPermissions() != null) &&
-			(serviceContext.getAddGuestPermissions() != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addVocabularyResources(
 				vocabulary, serviceContext.getAddCommunityPermissions(),

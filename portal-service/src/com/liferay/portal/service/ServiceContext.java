@@ -40,17 +40,15 @@ import java.util.Map;
 public class ServiceContext implements Serializable {
 
 	public ServiceContext() {
-		_addCommunityPermissions = Boolean.FALSE;
-		_addGuestPermissions = Boolean.FALSE;
 		_attributes = new LinkedHashMap<String, Serializable>();
 		_expandoBridgeAttributes = new LinkedHashMap<String, Serializable>();
 	}
 
-	public Boolean getAddCommunityPermissions() {
+	public boolean getAddCommunityPermissions() {
 		return _addCommunityPermissions;
 	}
 
-	public Boolean getAddGuestPermissions() {
+	public boolean getAddGuestPermissions() {
 		return _addGuestPermissions;
 	}
 
@@ -122,11 +120,11 @@ public class ServiceContext implements Serializable {
 		return _userId;
 	}
 
-	public void setAddCommunityPermissions(Boolean addCommunityPermissions) {
+	public void setAddCommunityPermissions(boolean addCommunityPermissions) {
 		_addCommunityPermissions = addCommunityPermissions;
 	}
 
-	public void setAddGuestPermissions(Boolean addGuestPermissions) {
+	public void setAddGuestPermissions(boolean addGuestPermissions) {
 		_addGuestPermissions = addGuestPermissions;
 	}
 
@@ -202,8 +200,8 @@ public class ServiceContext implements Serializable {
 		_userId = userId;
 	}
 
-	private Boolean _addCommunityPermissions;
-	private Boolean _addGuestPermissions;
+	private boolean _addCommunityPermissions;
+	private boolean _addGuestPermissions;
 	private Map<String, Serializable> _attributes;
 	private String[] _communityPermissions;
 	private long _companyId;
