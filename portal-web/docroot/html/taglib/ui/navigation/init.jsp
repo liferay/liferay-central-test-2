@@ -36,7 +36,7 @@ boolean nestedChildren = true;
 
 String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
 
-if (displayStyleDefinition != null && displayStyleDefinition.length != 0) {
+if ((displayStyleDefinition != null) && (displayStyleDefinition.length != 0)) {
 	headerType = displayStyleDefinition[0];
 	rootLayoutType = displayStyleDefinition[1];
 	rootLayoutLevel = GetterUtil.getInteger(displayStyleDefinition[2]);
