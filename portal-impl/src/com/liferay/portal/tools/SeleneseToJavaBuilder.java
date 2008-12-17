@@ -32,6 +32,9 @@ import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
@@ -158,6 +161,12 @@ public class SeleneseToJavaBuilder {
 
 		sb.append("public void " + testMethodName + "() throws Exception {");
 
+		sb.append("int label = 1;");
+
+		sb.append("while (label >= 1) {");
+		sb.append("switch (label) {");
+		sb.append("case 1:");
+
 		String xml = FileUtil.read(basedir + "/" + file);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
@@ -176,6 +185,10 @@ public class SeleneseToJavaBuilder {
 		y = xml.indexOf("</tbody>");
 
 		xml = xml.substring(x, y + 8);
+
+		Map<String, String> labels = new HashMap<String, String>();
+
+		int labelCount = 1;
 
 		x = 0;
 		y = 0;
@@ -199,7 +212,52 @@ public class SeleneseToJavaBuilder {
 			String param2 = fixParam(params[1]);
 			String param3 = fixParam(params[2]);
 
-			if (param1.equals("assertChecked")) {
+			if (param1.equals("label")) {
+				String label = labels.get(param2);
+
+				if (label == null) {
+					labelCount++;
+
+					label = labels.put(param2, String.valueOf(labelCount));
+				}
+			}
+		}
+
+		x = 0;
+		y = 0;
+
+		while (true) {
+			x = xml.indexOf("<tr>", x);
+			y = xml.indexOf("\n</tr>", x);
+
+			if ((x == -1) || (y == -1)) {
+				break;
+			}
+
+			x += 6;
+			y++;
+
+			String step = xml.substring(x, y);
+
+			String[] params = getParams(step);
+
+			String param1 = params[0];
+			String param2 = fixParam(params[1]);
+			String param3 = fixParam(params[2]);
+
+			if (param1.equals("addSelection") || param1.equals("select") ||
+				param1.equals("type") || param1.equals("typeKeys") ||
+				param1.equals("waitForPopUp")) {
+
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", RuntimeVariables.replace(\"");
+				sb.append(param3);
+				sb.append("\"));");
+			}
+			else if (param1.equals("assertChecked")) {
 				sb.append("assertTrue(selenium.isChecked(");
 				sb.append(param2);
 				sb.append("));");
@@ -294,22 +352,30 @@ public class SeleneseToJavaBuilder {
 				sb.append(param1);
 				sb.append("();");
 			}
+			else if (param1.equals("gotoIf")) {
+				String conditional = StringUtil.replace(
+					param2, new String[] {"${", "}"}, new String[] {"", ""});
+
+				sb.append("if (");
+				sb.append(conditional);
+				sb.append(") {");
+				sb.append("label =");
+				sb.append(labels.get(param3));
+				sb.append(";");
+				sb.append("continue;");
+				sb.append("}");
+			}
+			else if (param1.equals("label")) {
+				String label = labels.get(param2);
+
+				sb.append("case ");
+				sb.append(label);
+				sb.append(":");
+			}
 			else if (param1.equals("pause")) {
 				sb.append("Thread.sleep(");
 				sb.append(param2);
 				sb.append(");");
-			}
-			else if (param1.equals("addSelection") || param1.equals("select") ||
-					 param1.equals("type") || param1.equals("typeKeys") ||
-					 param1.equals("waitForPopUp")) {
-
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", RuntimeVariables.replace(\"");
-				sb.append(param3);
-				sb.append("\"));");
 			}
 			else if (param1.equals("selectAndWait")) {
 				sb.append("selenium.select(\"");
@@ -318,6 +384,21 @@ public class SeleneseToJavaBuilder {
 				sb.append(param3);
 				sb.append("\");");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
+			}
+			else if (param1.equals("store")) {
+				sb.append("boolean ");
+				sb.append(param3);
+				sb.append(" = ");
+
+				if (param2.startsWith("eval(")) {
+					String eval = param2.substring(5, param2.length() - 1);
+
+					eval = StringUtil.replace(eval, "'", "\"");
+
+					sb.append(eval);
+				}
+
+				sb.append(";");
 			}
 			else if (param1.equals("storeText")) {
 				sb.append("String ");
@@ -432,6 +513,11 @@ public class SeleneseToJavaBuilder {
 				System.out.println(param1 + " was not translated");
 			}
 		}
+
+		sb.append("case 100:");
+		sb.append("label = -1;");
+		sb.append("}");
+		sb.append("}");
 
 		sb.append("}");
 		sb.append("}");
