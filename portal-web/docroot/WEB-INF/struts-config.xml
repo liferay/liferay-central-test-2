@@ -1723,9 +1723,9 @@
 			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_attachments" />
 		</action>
 
-		<action path="/wiki/view_page_general" type="com.liferay.portlet.wiki.action.ViewPageAction">
+		<action path="/wiki/view_page_details" type="com.liferay.portlet.wiki.action.ViewPageAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_general" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_details" />
 		</action>
 
 		<action path="/wiki/view_page_history" type="com.liferay.portlet.wiki.action.ViewPageAction">
@@ -1798,9 +1798,9 @@
 			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_attachments" />
 		</action>
 
-		<action path="/wiki_display/view_page_general" type="com.liferay.portlet.wiki.action.ViewPageAction">
+		<action path="/wiki_display/view_page_details" type="com.liferay.portlet.wiki.action.ViewPageAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_general" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_details" />
 		</action>
 
 		<action path="/wiki_display/view_page_history" type="com.liferay.portlet.wiki.action.ViewPageAction">

@@ -148,19 +148,19 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		<div class="page-actions">
 			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<c:if test="<%= followRedirect || (redirectPage == null) %>">
-					<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" />
+					<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editPageURL.toString() %>" />
 				</c:if>
 			</c:if>
 
-			<liferay-ui:icon image="print" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
-
 			<%
-			PortletURL viewPageGeneralURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+			PortletURL viewPageDetailsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-			viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
+			viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
 			%>
 
-			<liferay-ui:icon image="history" message="properties" url="<%= viewPageGeneralURL.toString() %>" method="get" />
+			<liferay-ui:icon image="history" label="<%= true %>" message="details" url="<%= viewPageDetailsURL.toString() %>" method="get" />
+
+			<liferay-ui:icon image="print" label="<%= true %>" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
 		</div>
 	</c:if>
 
@@ -211,7 +211,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
 	<c:if test="<%= childPages.size() > 0 %>">
 		<div class="child-pages">
-			<h3><liferay-ui:message key="children-pages" /></h3>
+			<h2><liferay-ui:message key="children-pages" /></h2>
 
 			<ul class="child-pages">
 

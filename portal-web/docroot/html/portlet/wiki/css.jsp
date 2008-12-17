@@ -153,6 +153,15 @@
 	text-decoration: underline;
 }
 
+.portlet-wiki .page-title .page-actions {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.portlet-wiki .page-title .page-actions img {
+	margin-left: 5px;
+}
+
 .portlet-wiki .page-info {
 	width: 100%;
 }

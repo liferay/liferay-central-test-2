@@ -24,14 +24,6 @@
 
 <c:if test="<%= Validator.isNotNull(title) %>">
 	<h1 class="page-title">
-		<c:choose>
-			<c:when test="<%= wikiPage != null %>">
-				<a class="return-to-page" href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= String.valueOf(node.getName()) %>" /><portlet:param name="title" value="<%= title %>" /></portlet:renderURL>">
-				<%= title %></a>
-			</c:when>
-			<c:otherwise>
-				<%= title %>
-			</c:otherwise>
-		</c:choose>
+		<%= title %>
 	</h1>
 </c:if>

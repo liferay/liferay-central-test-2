@@ -30,36 +30,66 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String title = wikiPage.getTitle();
 
-PortletURL viewPageGeneralURL = renderResponse.createRenderURL();
+PortletURL editPageURL = renderResponse.createRenderURL();
 
-viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
-viewPageGeneralURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageGeneralURL.setParameter("title", wikiPage.getTitle());
+editPageURL.setParameter("struts_action", "/wiki/edit_page");
+editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+editPageURL.setParameter("title", title);
 
-PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
+PortletURL viewPageDetailsURL = renderResponse.createRenderURL();
+
+viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
+viewPageDetailsURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageDetailsURL.setParameter("title", wikiPage.getTitle());
+
+PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
 viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
 
-PortletURL viewPageIncomingLinksURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
+PortletURL viewPageIncomingLinksURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
 viewPageIncomingLinksURL.setParameter("struts_action", "/wiki/view_page_incoming_links");
 
-PortletURL viewPageOutgoingLinksURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
+PortletURL viewPageOutgoingLinksURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
 viewPageOutgoingLinksURL.setParameter("struts_action", "/wiki/view_page_outgoing_links");
 
-PortletURL attachmentsURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
+PortletURL attachmentsURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
 attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
+
+PortletURL viewPageURL = renderResponse.createRenderURL();
+
+viewPageURL.setParameter("struts_action", "/wiki/view");
+viewPageURL.setParameter("nodeName", node.getName());
+viewPageURL.setParameter("title", wikiPage.getTitle());
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<liferay-ui:tabs
-	names="general,history,incoming-links,outgoing-links,attachments"
-	url0="<%= viewPageGeneralURL.toString() %>"
-	url1="<%= viewPageHistoryURL.toString() %>"
-	url2="<%= viewPageIncomingLinksURL.toString() %>"
-	url3="<%= viewPageOutgoingLinksURL.toString() %>"
-	url4="<%= attachmentsURL.toString() %>"
-/>
+<c:choose>
+	<c:when test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+		<liferay-ui:tabs
+			names="content,details,history,incoming-links,outgoing-links,attachments"
+			url0="<%= editPageURL.toString() %>"
+			url1="<%= viewPageDetailsURL.toString() %>"
+			url2="<%= viewPageHistoryURL.toString() %>"
+			url3="<%= viewPageIncomingLinksURL.toString() %>"
+			url4="<%= viewPageOutgoingLinksURL.toString() %>"
+			url5="<%= attachmentsURL.toString() %>"
+			backURL="<%= viewPageURL.toString() %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="details,history,incoming-links,outgoing-links,attachments"
+			url0="<%= viewPageDetailsURL.toString() %>"
+			url1="<%= viewPageHistoryURL.toString() %>"
+			url2="<%= viewPageIncomingLinksURL.toString() %>"
+			url3="<%= viewPageOutgoingLinksURL.toString() %>"
+			url4="<%= attachmentsURL.toString() %>"
+			backURL="<%= viewPageURL.toString() %>"
+		/>
+	</c:otherwise>
+</c:choose>

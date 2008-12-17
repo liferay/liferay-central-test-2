@@ -54,7 +54,7 @@ editPageURL.setParameter("title", wikiPage.getTitle());
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <liferay-util:include page="/html/portlet/wiki/page_tabs.jsp">
-	<liferay-util:param name="tabs1" value="general" />
+	<liferay-util:param name="tabs1" value="details" />
 </liferay-util:include>
 
 <%

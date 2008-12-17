@@ -134,7 +134,16 @@ if (Validator.isNull(redirect)) {
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<%@ include file="/html/portlet/wiki/page_name.jspf" %>
+<c:choose>
+	<c:when test="<%= !newPage %>">
+		<liferay-util:include page="/html/portlet/wiki/page_tabs.jsp">
+			<liferay-util:param name="tabs1" value="content" />
+		</liferay-util:include>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/html/portlet/wiki/page_name.jspf" %>
+	</c:otherwise>
+</c:choose>
 
 <c:if test="<%= preview %>">
 
