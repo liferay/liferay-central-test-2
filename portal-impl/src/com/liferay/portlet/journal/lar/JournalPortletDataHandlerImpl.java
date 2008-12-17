@@ -357,14 +357,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		int beginPos = content.length();
 
 		while (true) {
-			int initialPos = beginPos;
-
-			beginPos = content.lastIndexOf("/image/image_gallery?", initialPos);
-
-			if (beginPos == -1) {
-				beginPos = content.lastIndexOf(
-					"@image_path@/image_gallery?", initialPos);
-			}
+			beginPos = content.lastIndexOf("/image_gallery?", beginPos);
 
 			if (beginPos == -1) {
 				return sb.toString();
@@ -467,7 +460,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				}
 
 				String newParameters =
-					"@image_path@/image_gallery?uuid=" + image.getUuid() +
+					"/image_gallery?uuid=" + image.getUuid() +
 						"&amp;groupId=@group_id@&amp;t=" + timestamp;
 
 				sb.replace(beginPos, endPos, newParameters);
