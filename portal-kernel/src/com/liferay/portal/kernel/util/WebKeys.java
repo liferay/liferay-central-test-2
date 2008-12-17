@@ -32,6 +32,10 @@ public interface WebKeys {
 
 	public static final String CTX = "CTX";
 
+	public static final String LAYOUT = "LAYOUT";
+
+	public static final String LAYOUTS = "LAYOUTS";
+
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
 
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
