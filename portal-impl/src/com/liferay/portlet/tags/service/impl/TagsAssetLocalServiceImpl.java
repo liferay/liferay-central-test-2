@@ -629,7 +629,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return asset;
 	}
 
-	public TagsAsset updateAssetVisibility(
+	public TagsAsset updateVisible(
 			String className, long classPK, boolean visible)
 		throws PortalException, SystemException {
 

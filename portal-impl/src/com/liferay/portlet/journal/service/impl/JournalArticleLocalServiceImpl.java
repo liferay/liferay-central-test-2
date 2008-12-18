@@ -468,7 +468,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		tagsAssetLocalService.updateAssetVisibility(
+		tagsAssetLocalService.updateVisible(
 			JournalArticle.class.getName(), article.getResourcePrimKey(), true);
 
 		// Email
@@ -887,6 +887,12 @@ public class JournalArticleLocalServiceImpl
 		article.setExpired(true);
 
 		journalArticlePersistence.update(article, false);
+
+		// Tags
+
+		tagsAssetLocalService.updateVisible(
+			JournalArticle.class.getName(), article.getResourcePrimKey(),
+			false);
 
 		// Indexer
 

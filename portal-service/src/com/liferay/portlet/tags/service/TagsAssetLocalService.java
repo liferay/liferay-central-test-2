@@ -258,7 +258,7 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsAsset updateAssetVisibility(
+	public com.liferay.portlet.tags.model.TagsAsset updateVisible(
 		java.lang.String className, long classPK, boolean visible)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
