@@ -86,7 +86,7 @@
 					pluginsURL.setRefererPlid(plid);
 					%>
 
-					<p class="lfr-add-more-app">
+					<p class="lfr-install-more">
 						<a href="<%= pluginsURL.toString() %>"><liferay-ui:message key="install-more-applications" /></a>
 					</p>
 				</c:if>
