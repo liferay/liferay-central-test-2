@@ -79,7 +79,7 @@ public abstract class PortalClassLoaderServletContextListener
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader =currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			currentThread.setContextClassLoader(
