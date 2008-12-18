@@ -47,8 +47,4 @@
 	);
 </script>
 
-<%
-String bodyText = HtmlUtil.escape(GetterUtil.getString(body));
-%>
-
-<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"><%= bodyText %></textarea>
+<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"><%= HtmlUtil.escape(GetterUtil.getString(body)) %></textarea>
