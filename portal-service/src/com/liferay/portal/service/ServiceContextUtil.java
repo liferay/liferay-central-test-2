@@ -45,20 +45,9 @@ public class ServiceContextUtil {
 	public static Object deserialize(JSONObject jsonObject) {
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(
-			jsonObject.getBoolean("addCommunityPermissions"));
-		serviceContext.setAddGuestPermissions(
-			jsonObject.getBoolean("addGuestPermissions"));
+		// Theme display
+
 		serviceContext.setCompanyId(jsonObject.getLong("companyId"));
-
-		String[] guestPermissions = StringUtil.split(
-			jsonObject.getString("guestPermissions"));
-		String[] communityPermissions = StringUtil.split(
-			jsonObject.getString("communityPermissions"));
-
-		serviceContext.setCommunityPermissions(communityPermissions);
-		serviceContext.setGuestPermissions(guestPermissions);
-
 		serviceContext.setLayoutURL(jsonObject.getString("layoutURL"));
 		serviceContext.setPathMain(jsonObject.getString("pathMain"));
 		serviceContext.setPlid(jsonObject.getLong("plid"));
@@ -66,6 +55,22 @@ public class ServiceContextUtil {
 		serviceContext.setScopeGroupId(jsonObject.getLong("scopeGroupId"));
 		serviceContext.setUserDisplayURL(
 			jsonObject.getString("userDisplayURL"));
+
+		// Permissions
+
+		String[] communityPermissions = StringUtil.split(
+			jsonObject.getString("communityPermissions"));
+		String[] guestPermissions = StringUtil.split(
+			jsonObject.getString("guestPermissions"));
+
+		serviceContext.setAddCommunityPermissions(
+			jsonObject.getBoolean("addCommunityPermissions"));
+		serviceContext.setAddGuestPermissions(
+			jsonObject.getBoolean("addGuestPermissions"));
+		serviceContext.setCommunityPermissions(communityPermissions);
+		serviceContext.setGuestPermissions(guestPermissions);
+
+		// Tags
 
 		String[] tagsCategories = StringUtil.split(
 			jsonObject.getString("tagsCategories"));
