@@ -28,10 +28,9 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PreferencesValidator;
-import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,19 +59,11 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortalPreferences getPortalPreferences(
-			ActionRequest actionRequest)
+			PortletRequest portletRequest)
 		throws SystemException {
 
 		return getPortletPreferencesFactory().getPortalPreferences(
-			actionRequest);
-	}
-
-	public static PortalPreferences getPortalPreferences(
-			RenderRequest renderRequest)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().getPortalPreferences(
-			renderRequest);
+			portletRequest);
 	}
 
 	public static PortletPreferences getPortletPreferences(
@@ -129,33 +120,18 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferences getPortletSetup(
-			ActionRequest actionRequest)
+			PortletRequest portletRequest)
 		throws SystemException {
 
-		return getPortletPreferencesFactory().getPortletSetup(actionRequest);
+		return getPortletPreferencesFactory().getPortletSetup(portletRequest);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			ActionRequest actionRequest, String portletId)
+			PortletRequest portletRequest, String portletId)
 		throws SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			actionRequest, portletId);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			RenderRequest renderRequest)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(renderRequest);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			RenderRequest renderRequest, String portletId)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			renderRequest, portletId);
+			portletRequest, portletId);
 	}
 
 	public static PortletPreferences getPreferences(

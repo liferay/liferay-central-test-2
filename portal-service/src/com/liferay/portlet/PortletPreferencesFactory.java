@@ -28,10 +28,9 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PreferencesValidator;
-import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -50,10 +49,7 @@ public interface PortletPreferencesFactory {
 	public PortalPreferences getPortalPreferences(HttpServletRequest request)
 		throws SystemException;
 
-	public PortalPreferences getPortalPreferences(ActionRequest actionRequest)
-		throws SystemException;
-
-	public PortalPreferences getPortalPreferences(RenderRequest renderRequest)
+	public PortalPreferences getPortalPreferences(PortletRequest portletRequest)
 		throws SystemException;
 
 	public PortletPreferences getPortletPreferences(
@@ -81,18 +77,11 @@ public interface PortletPreferencesFactory {
 			String defaultPreferences)
 		throws SystemException;
 
-	public PortletPreferences getPortletSetup(ActionRequest actionRequest)
+	public PortletPreferences getPortletSetup(PortletRequest portletRequest)
 		throws SystemException;
 
 	public PortletPreferences getPortletSetup(
-			ActionRequest actionRequest, String portletId)
-		throws SystemException;
-
-	public PortletPreferences getPortletSetup(RenderRequest renderRequest)
-		throws SystemException;
-
-	public PortletPreferences getPortletSetup(
-			RenderRequest renderRequest, String portletId)
+			PortletRequest portletRequest, String portletId)
 		throws SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest request);

@@ -50,11 +50,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PreferencesValidator;
-import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -129,20 +127,11 @@ public class PortletPreferencesFactoryImpl
 		return portalPrefs;
 	}
 
-	public PortalPreferences getPortalPreferences(ActionRequest actionRequest)
+	public PortalPreferences getPortalPreferences(PortletRequest portletRequest)
 		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		return getPortalPreferences(request);
-	}
-
-	public PortalPreferences getPortalPreferences(RenderRequest renderRequest)
-		throws SystemException {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+			portletRequest);
 
 		return getPortalPreferences(request);
 	}
@@ -354,42 +343,22 @@ public class PortletPreferencesFactoryImpl
 		return getPortletSetup(layout, portletId, defaultPreferences);
 	}
 
-	public PortletPreferences getPortletSetup(ActionRequest actionRequest)
+	public PortletPreferences getPortletSetup(PortletRequest portletRequest)
 		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-		String portletId = PortalUtil.getPortletId(actionRequest);
+			portletRequest);
+		String portletId = PortalUtil.getPortletId(portletRequest);
 
 		return getPortletSetup(request, portletId);
 	}
 
 	public PortletPreferences getPortletSetup(
-			ActionRequest actionRequest, String portletId)
+			PortletRequest portletRequest, String portletId)
 		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		return getPortletSetup(request, portletId);
-	}
-
-	public PortletPreferences getPortletSetup(RenderRequest renderRequest)
-		throws SystemException {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-		String portletId = PortalUtil.getPortletId(renderRequest);
-
-		return getPortletSetup(request, portletId);
-	}
-
-	public PortletPreferences getPortletSetup(
-			RenderRequest renderRequest, String portletId)
-		throws SystemException {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+			portletRequest);
 
 		return getPortletSetup(request, portletId);
 	}
