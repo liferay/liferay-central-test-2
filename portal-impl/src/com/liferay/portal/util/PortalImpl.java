@@ -2138,14 +2138,30 @@ public class PortalImpl implements Portal {
 			return userIdObj.longValue();
 		}
 
-		if (!PropsValues.PORTAL_JAAS_ENABLE &&
-			PropsValues.PORTAL_IMPERSONATION_ENABLE) {
+		String path = GetterUtil.getString(request.getPathInfo());
+		String strutsAction = getStrutsAction(request);
+		String actionName = _getPortletParam(request, "actionName");
+
+		boolean alwaysAllowDoAsUser = false;
+
+		if (path.equals("/portal/fckeditor") ||
+			strutsAction.equals("/document_library/edit_file_entry") ||
+			strutsAction.equals("/image_gallery/edit_image") ||
+			strutsAction.equals("/wiki/edit_page_attachment") ||
+			actionName.equals("addFile")) {
+
+			alwaysAllowDoAsUser = true;
+		}
+
+		if ((!PropsValues.PORTAL_JAAS_ENABLE &&
+			PropsValues.PORTAL_IMPERSONATION_ENABLE) || alwaysAllowDoAsUser) {
 
 			String doAsUserIdString = ParamUtil.getString(
 				request, "doAsUserId");
 
 			try {
-				long doAsUserId = getDoAsUserId(request, doAsUserIdString);
+				long doAsUserId = getDoAsUserId(
+					request, doAsUserIdString, alwaysAllowDoAsUser);
 
 				if (doAsUserId > 0) {
 					if (_log.isDebugEnabled()) {
@@ -2916,7 +2932,8 @@ public class PortalImpl implements Portal {
 	}
 
 	protected long getDoAsUserId(
-			HttpServletRequest request, String doAsUserIdString)
+			HttpServletRequest request, String doAsUserIdString,
+			boolean alwaysAllowDoAsUser)
 		throws Exception {
 
 		if (Validator.isNull(doAsUserIdString)) {
@@ -2940,35 +2957,6 @@ public class PortalImpl implements Portal {
 			}
 
 			return 0;
-		}
-
-		String path = GetterUtil.getString(request.getPathInfo());
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("doAsUserId path " + path);
-		}
-
-		String strutsAction = getStrutsAction(request);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Struts action " + strutsAction);
-		}
-
-		String actionName = _getPortletParam(request, "actionName");
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Action name " + actionName);
-		}
-
-		boolean alwaysAllowDoAsUser = false;
-
-		if (path.equals("/portal/fckeditor") ||
-			strutsAction.equals("/document_library/edit_file_entry") ||
-			strutsAction.equals("/image_gallery/edit_image") ||
-			strutsAction.equals("/wiki/edit_page_attachment") ||
-			actionName.equals("addFile")) {
-
-			alwaysAllowDoAsUser = true;
 		}
 
 		if (_log.isDebugEnabled()) {
