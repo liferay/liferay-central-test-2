@@ -203,8 +203,11 @@ public class JSONServiceAction extends JSONAction {
 
 		String parameterTypeName = parameterType.getName();
 
-		if (parameterTypeName.equals("boolean") ||
-			parameterTypeName.equals(Boolean.class.getName())) {
+		if (Validator.isNull(ParamUtil.getString(request, parameter))) {
+			return null;
+		}
+		else if (parameterTypeName.equals("boolean") ||
+				 parameterTypeName.equals(Boolean.class.getName())) {
 
 			return Boolean.valueOf(ParamUtil.getBoolean(request, parameter));
 		}
@@ -241,14 +244,7 @@ public class JSONServiceAction extends JSONAction {
 			return ServiceContextUtil.deserialize(jsonObject);
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
-			String value = ParamUtil.getString(request, parameter);
-
-			if (Validator.isNull(value)) {
-				return null;
-			}
-			else {
-				return value;
-			}
+			return ParamUtil.getString(request, parameter);
 		}
 		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
 			return StringUtil.split(ParamUtil.getString(request, parameter));
