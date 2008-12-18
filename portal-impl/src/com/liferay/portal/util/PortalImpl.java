@@ -2154,7 +2154,8 @@ public class PortalImpl implements Portal {
 		}
 
 		if ((!PropsValues.PORTAL_JAAS_ENABLE &&
-			PropsValues.PORTAL_IMPERSONATION_ENABLE) || alwaysAllowDoAsUser) {
+			  PropsValues.PORTAL_IMPERSONATION_ENABLE) ||
+			(alwaysAllowDoAsUser)) {
 
 			String doAsUserIdString = ParamUtil.getString(
 				request, "doAsUserId");
