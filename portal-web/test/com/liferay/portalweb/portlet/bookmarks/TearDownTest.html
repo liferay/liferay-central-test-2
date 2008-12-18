@@ -19,14 +19,44 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//b</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//b'))</td>
+	<td>TestFolderAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TestFolderAvailable}</td>
+	<td>No Test Folder</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//b</td>
 	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//b'))</td>
+	<td>TestSubfolderAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TestSubfolderAvailable}</td>
+	<td>No Test Subfolder</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//strong/span'))</td>
+	<td>TestEntryAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TestEntryAvailable}</td>
+	<td>No Test Entry</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -56,6 +86,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>No Test Entry</td>
 	<td></td>
 </tr>
 <tr>
@@ -91,6 +126,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>No Test Subfolder</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,6 +171,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>No Test Folder</td>
 	<td></td>
 </tr>
 <tr>
