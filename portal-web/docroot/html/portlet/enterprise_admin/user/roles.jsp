@@ -164,7 +164,7 @@ userGroupRoles.addAll(organizationRoles);
 
 <c:choose>
 	<c:when test="<%= organizations.isEmpty() %>">
-		<liferay-ui:message key="this-user-does-not-belong-to-any-organization-to-which-an-organization-role-can-be-assigned" />
+		<liferay-ui:message key="this-user-does-not-belong-to-an-organization-to-which-an-organization-role-can-be-assigned" />
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:search-container
@@ -222,7 +222,7 @@ userGroupRoles.addAll(organizationRoles);
 
 <c:choose>
 	<c:when test="<%= groups.isEmpty() %>">
-		<liferay-ui:message key="this-user-does-not-belong-to-any-community-to-which-a-community-role-can-be-assigned" />
+		<liferay-ui:message key="this-user-does-not-belong-to-a-community-to-which-a-community-role-can-be-assigned" />
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:search-container
