@@ -94,6 +94,10 @@ String defaultFolderColumns = "folder,num-of-folders,num-of-documents";
 
 String portletId = portletDisplay.getId();
 
+if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	portletId = portletResource;
+}
+
 if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	defaultFolderColumns += ",action";
 }
