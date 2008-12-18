@@ -37,19 +37,18 @@
 				}
 			);
 
-			<c:choose>
-				<c:when test="<%= quote && Validator.isNull(body) && (curParentMessage != null) %>">
-					var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
-					var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
+			<c:if test="<%= quote && Validator.isNull(body) && (curParentMessage != null) %>">
+				var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
+				var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
 
-					<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
-				</c:when>
-				<c:otherwise>
-					<portlet:namespace />bbCode.setHTML("<%= UnicodeFormatter.toString(GetterUtil.getString(body)) %>");
-				</c:otherwise>
-			</c:choose>
+				<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
+			</c:if>
 		}
 	);
 </script>
 
-<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"></textarea>
+<%
+String bodyText = HtmlUtil.escape(GetterUtil.getString(body));
+%>
+
+<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"><%= bodyText %></textarea>
