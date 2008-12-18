@@ -68,13 +68,16 @@ public class DialectDetector {
 
 			if (dbName.startsWith("HSQL")) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Liferay is configured to use Hypersonic as its " +
-							"database. Do NOT use Hypersonic in production. " +
-								"Hypersonic is an embedded database useful " +
-									"for development and demo'ing purposes. " +
-										"The database settings can be " +
-											"changed in portal.properties");
+					StringBuilder sb = new StringBuilder();
+
+					sb.append("Liferay is configured to use Hypersonic as ");
+					sb.append("its database. Do NOT use Hypersonic in ");
+					sb.append("production. Hypersonic is an embedded ");
+					sb.append("database useful for development and demo'ing ");
+					sb.append("purposes. The database settings can be ");
+					sb.append("changed in portal.properties.");
+
+					_log.warn(sb.toString());
 				}
 			}
 
