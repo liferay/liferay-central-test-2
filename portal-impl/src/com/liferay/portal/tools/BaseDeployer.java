@@ -764,7 +764,8 @@ public class BaseDeployer {
 	protected String getDisplayName(File srcFile) {
 		String displayName = srcFile.getName();
 
-		if (StringUtil.endsWith(displayName, ".war")) {
+		if (StringUtil.endsWith(displayName, ".war") ||
+			StringUtil.endsWith(displayName, ".xml")) {
 			displayName = displayName.substring(0, displayName.length() - 4);
 		}
 
