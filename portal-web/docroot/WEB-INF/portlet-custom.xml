@@ -197,46 +197,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>12</portlet-name>
-		<display-name>Stocks</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>edit-action</name>
-			<value>/stocks/edit</value>
-		</init-param>
-		<init-param>
-			<name>edit-guest-action</name>
-			<value>/stocks/edit</value>
-		</init-param>
-		<init-param>
-			<name>view-action</name>
-			<value>/stocks/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>edit_guest</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>symbols</name>
-				<value>MOT</value>
-				<value>NOK</value>
-				<value>SBUX</value>
-				<value>YHOO</value>
-			</preference>
-			<preferences-validator>com.liferay.portlet.stocks.StocksPreferencesValidator</preferences-validator>
-		</portlet-preferences>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>15</portlet-name>
 		<display-name>Journal</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
