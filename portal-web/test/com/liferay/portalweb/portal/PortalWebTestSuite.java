@@ -67,7 +67,6 @@ import com.liferay.portalweb.portlet.rss.RSSTests;
 import com.liferay.portalweb.portlet.search.SearchTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
 import com.liferay.portalweb.portlet.softwarecatalog.SoftwareCatalogTests;
-import com.liferay.portalweb.portlet.stocks.StocksTests;
 import com.liferay.portalweb.portlet.tagsadmin.TagsAdminTests;
 import com.liferay.portalweb.portlet.translator.TranslatorTests;
 import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
@@ -140,7 +139,6 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(SMSTextMessengerTests.class);
 		addTestSuite(SoftwareCatalogTests.class);
 		//addTestSuite(StagingTests.class);
-		addTestSuite(StocksTests.class);
 		addTestSuite(TagsAdminTests.class);
 		addTestSuite(TranslatorTests.class);
 		addTestSuite(UnitConverterTests.class);
