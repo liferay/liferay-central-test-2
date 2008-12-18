@@ -766,6 +766,7 @@ public class BaseDeployer {
 
 		if (StringUtil.endsWith(displayName, ".war") ||
 			StringUtil.endsWith(displayName, ".xml")) {
+
 			displayName = displayName.substring(0, displayName.length() - 4);
 		}
 
