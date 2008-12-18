@@ -466,6 +466,11 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
+		// Tags
+
+		tagsAssetLocalService.updateAssetVisibility(
+			JournalArticle.class.getName(), article.getResourcePrimKey(), true);
+
 		// Email
 
 		try {

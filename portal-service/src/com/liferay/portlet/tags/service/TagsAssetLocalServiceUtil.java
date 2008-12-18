@@ -344,6 +344,13 @@ public class TagsAssetLocalServiceUtil {
 			url, height, width, priority, sync);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAsset updateAssetVisibility(
+		java.lang.String className, long classPK, boolean visible)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateAssetVisibility(className, classPK, visible);
+	}
+
 	public static void validate(java.lang.String className,
 		java.lang.String[] entryNames)
 		throws com.liferay.portal.PortalException {

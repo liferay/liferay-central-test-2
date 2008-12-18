@@ -629,6 +629,21 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return asset;
 	}
 
+	public TagsAsset updateAssetVisibility(
+			String className, long classPK, boolean visible)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		TagsAsset asset = tagsAssetPersistence.findByC_C(classNameId, classPK);
+
+		asset.setVisible(visible);
+
+		tagsAssetPersistence.update(asset, false);
+
+		return asset;
+	}
+
 	public void validate(String className, String[] entryNames)
 		throws PortalException {
 
