@@ -203,7 +203,9 @@ public class JSONServiceAction extends JSONAction {
 
 		String parameterTypeName = parameterType.getName();
 
-		if (Validator.isNull(ParamUtil.getString(request, parameter))) {
+		String value = ParamUtil.getString(request, parameter);
+
+		if (Validator.isNull(value)) {
 			return null;
 		}
 		else if (parameterTypeName.equals("boolean") ||
@@ -235,8 +237,6 @@ public class JSONServiceAction extends JSONAction {
 			return new Date(ParamUtil.getLong(request, parameter));
 		}
 		else if (parameterTypeName.equals(ServiceContext.class.getName())) {
-			String value = ParamUtil.getString(request, parameter);
-
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
 
 			jsonObject.put("javaClass", ServiceContext.class.getName());
@@ -244,10 +244,10 @@ public class JSONServiceAction extends JSONAction {
 			return ServiceContextUtil.deserialize(jsonObject);
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
-			return ParamUtil.getString(request, parameter);
+			return value;
 		}
 		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
-			return StringUtil.split(ParamUtil.getString(request, parameter));
+			return StringUtil.split(value);
 		}
 		else {
 			_log.error(
