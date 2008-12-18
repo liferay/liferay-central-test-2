@@ -96,5 +96,3 @@ alter table WikiPage add summary STRING null;
 COMMIT_TRANSACTION;
 
 update WikiPage set modifiedDate = createDate;
-
-@include quartz-tables.sql
