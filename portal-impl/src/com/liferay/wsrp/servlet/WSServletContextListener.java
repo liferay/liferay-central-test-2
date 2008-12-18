@@ -23,17 +23,12 @@
 package com.liferay.wsrp.servlet;
 
 import com.liferay.portal.kernel.servlet.ServletContextListenerExecutor;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
+
+import javax.servlet.ServletContextListener;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 
 /**
  * <a href="WSServletContextListener.java.html"><b><i>View Source</i></b></a>
