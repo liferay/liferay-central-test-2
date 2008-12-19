@@ -24,6 +24,7 @@ package com.liferay.portlet.myplaces.action;
 
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -65,30 +66,20 @@ public class ViewAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(request, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+		String privateLayoutParam = request.getParameter("privateLayout");
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
-			1);
+		String redirect = getRedirect(
+			themeDisplay, groupId, privateLayoutParam);
 
-		String redirect = themeDisplay.getPathMain();
-
-		if (layouts.size() > 0) {
-			Layout layout = layouts.get(0);
-
-			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
-		}
-		else {
+		if (redirect == null) {
 			redirect = ParamUtil.getString(request, "redirect");
 
 			SessionErrors.add(
 				request, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
-					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
-						"}"));
+					"{groupId=" + groupId + ",privateLayout=" +
+						privateLayoutParam + "}"));
 		}
-
-		// Send redirect
 
 		response.sendRedirect(redirect);
 
@@ -104,31 +95,20 @@ public class ViewAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
+		String privateLayoutParam = actionRequest.getParameter("privateLayout");
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
-			1);
+		String redirect = getRedirect(
+			themeDisplay, groupId, privateLayoutParam);
 
-		String redirect = themeDisplay.getPathMain();
-
-		if (layouts.size() > 0) {
-			Layout layout = layouts.get(0);
-
-			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
-		}
-		else {
+		if (redirect == null) {
 			redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			SessionErrors.add(
 				actionRequest, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
-					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
-						"}"));
+					"{groupId=" + groupId + ",privateLayout=" +
+						privateLayoutParam + "}"));
 		}
-
-		// Send redirect
 
 		actionResponse.sendRedirect(redirect);
 	}
@@ -139,6 +119,44 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward("portlet.my_places.view");
+	}
+
+	protected List<Layout> getLayouts(long groupId, boolean privateLayout)
+		throws Exception {
+
+		return LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
+			1);
+	}
+
+	protected String getRedirect(
+			ThemeDisplay themeDisplay, long groupId, String privateLayoutParam)
+		throws Exception {
+
+		List<Layout> layouts = null;
+
+		if (privateLayoutParam == null) {
+			layouts = getLayouts(groupId, false);
+
+			if (layouts.size() == 0) {
+				layouts = getLayouts(groupId, true);
+			}
+		}
+		else {
+			boolean privateLayout = GetterUtil.getBoolean(privateLayoutParam);
+
+			layouts = getLayouts(groupId, privateLayout);
+		}
+
+		String redirect = null;
+
+		if (layouts.size() > 0) {
+			Layout layout = layouts.get(0);
+
+			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+		}
+
+		return redirect;
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
