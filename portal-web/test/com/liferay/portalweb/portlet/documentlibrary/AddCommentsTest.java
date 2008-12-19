@@ -95,7 +95,7 @@ public class AddCommentsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Post Reply")) {
+				if (selenium.isElementPresent("link=Add Comment")) {
 					break;
 				}
 			}
@@ -105,7 +105,7 @@ public class AddCommentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Post Reply");
+		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

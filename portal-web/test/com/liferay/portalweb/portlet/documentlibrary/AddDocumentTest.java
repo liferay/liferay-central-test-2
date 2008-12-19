@@ -71,6 +71,7 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Document']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -89,7 +90,6 @@ public class AddDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Use the classic uploader.");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -153,7 +153,7 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent(
-				"Test Document.txt\nThis is a test document!"));
+		assertTrue(selenium.isTextPresent("Test Document.txt"));
+		assertTrue(selenium.isTextPresent("This is a test document!"));
 	}
 }
