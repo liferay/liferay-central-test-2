@@ -58,6 +58,24 @@ public class SetTimezoneTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("displaySettingsLink")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("displaySettingsLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_2_timeZoneId")) {
 					break;
 				}
@@ -89,7 +107,7 @@ public class SetTimezoneTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

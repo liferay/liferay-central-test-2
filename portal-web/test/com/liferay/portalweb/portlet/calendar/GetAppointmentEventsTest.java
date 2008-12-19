@@ -36,7 +36,8 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Day"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
-			RuntimeVariables.replace("label=Appointment"));
+			"label=Appointment");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,22 +62,6 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 
 			try {
 				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Week")) {
 					break;
 				}
 			}

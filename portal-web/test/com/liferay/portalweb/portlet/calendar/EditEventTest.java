@@ -66,7 +66,8 @@ public class EditEventTest extends BaseTestCase {
 		}
 
 		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
-		selenium.click("//div[2]/ul/li[1]/nobr/a");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/img"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -92,21 +93,6 @@ public class EditEventTest extends BaseTestCase {
 		selenium.select("_8_startDateAmPm", RuntimeVariables.replace("label=AM"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edited Test Event")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=Edited Test Event"));
 	}
 }

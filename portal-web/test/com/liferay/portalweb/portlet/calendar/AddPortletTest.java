@@ -32,16 +32,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]")) {
+				if (selenium.isElementPresent("link=Add Application")) {
 					break;
 				}
 			}
@@ -51,8 +48,26 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
+		selenium.click("link=Add Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='Collaboration-Calendar']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@id='Collaboration-Calendar']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

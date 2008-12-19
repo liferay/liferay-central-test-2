@@ -59,21 +59,6 @@ public class AddTemporaryEventTest extends BaseTestCase {
 		selenium.select("_8_type", RuntimeVariables.replace("label=Appointment"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("Link=Temporary Event")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("Link=Temporary Event"));
 	}
 }
