@@ -117,9 +117,8 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.LayoutSet updateLookAndFeel(long groupId,
-		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String css, boolean wapTheme)
+	public void updateLookAndFeel(long groupId, java.lang.String themeId,
+		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

@@ -137,14 +137,13 @@ public class LayoutSetLocalServiceUtil {
 		getService().updateLogo(groupId, privateLayout, logo, file);
 	}
 
-	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
-		long groupId, java.lang.String themeId, java.lang.String colorSchemeId,
+	public static void updateLookAndFeel(long groupId,
+		java.lang.String themeId, java.lang.String colorSchemeId,
 		java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .updateLookAndFeel(groupId, themeId, colorSchemeId, css,
-			wapTheme);
+		getService()
+			.updateLookAndFeel(groupId, themeId, colorSchemeId, css, wapTheme);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(

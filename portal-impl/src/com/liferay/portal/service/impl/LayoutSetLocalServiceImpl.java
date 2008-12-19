@@ -150,7 +150,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		}
 	}
 
-	public LayoutSet updateLookAndFeel(
+	public void updateLookAndFeel(
 			long groupId, String themeId, String colorSchemeId, String css,
 			boolean wapTheme)
 		throws PortalException, SystemException {
