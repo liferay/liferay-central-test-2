@@ -451,7 +451,8 @@ Liferay.Upload = new Class({
 					{
 						left: buttonOffset.left,
 						position: 'absolute',
-						top: buttonOffset.top
+						top: buttonOffset.top,
+						zIndex: 100000
 					}
 				);
 
