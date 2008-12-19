@@ -51,8 +51,7 @@ public class SearchBlogsTest extends BaseTestCase {
 
 		selenium.typeKeys("_33_keywords", RuntimeVariables.replace("Test Entr"));
 		selenium.type("_33_keywords", RuntimeVariables.replace("Test Entry"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Entries']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
 

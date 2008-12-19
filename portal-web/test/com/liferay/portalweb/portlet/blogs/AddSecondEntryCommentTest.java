@@ -49,7 +49,8 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=0 Comments");
+		selenium.click(RuntimeVariables.replace("link=0 Comments"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -57,7 +58,7 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Post Reply")) {
+				if (selenium.isElementPresent("link=Add Comment")) {
 					break;
 				}
 			}
@@ -67,7 +68,7 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Post Reply");
+		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
