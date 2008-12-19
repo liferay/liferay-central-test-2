@@ -82,7 +82,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_pageDisplayStyle")) {
+				if (selenium.isElementPresent("_86_pageDelta")) {
 					break;
 				}
 			}
@@ -92,6 +92,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
 		selenium.select("_86_pageDisplayStyle",
 			RuntimeVariables.replace("label=Full Content"));
 
