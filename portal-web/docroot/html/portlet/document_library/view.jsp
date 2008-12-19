@@ -140,48 +140,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 		</script>
 
-		<c:if test="<%= WebDAVUtil.isViewEnabled(DLWebDAVStorageImpl.class.getName()) %>">
-			<c:if test="<%= showSubfolders %>">
-				<br />
-			</c:if>
-
-			<table class="lfr-table">
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="webdav-url" />
-				</td>
-				<td>
-
-					<%
-					StringBuffer sb = new StringBuffer();
-
-					if (folder != null) {
-						DLFolder curFolder = folder;
-
-						while (true) {
-							sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
-							sb.insert(0, StringPool.SLASH);
-
-							if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-								break;
-							}
-							else {
-								curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-							}
-						}
-					}
-
-					Group group = layout.getGroup();
-					%>
-
-					<liferay-ui:input-resource
-						url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
-					/>
-				</td>
-			</tr>
-			</table>
-		</c:if>
-
 		<c:if test="<%= folder != null %>">
 			<c:if test="<%= showSubfolders %>">
 				<br />
@@ -311,6 +269,46 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</script>
 			</c:if>
+		</c:if>
+
+		<c:if test="<%= WebDAVUtil.isViewEnabled(DLWebDAVStorageImpl.class.getName()) %>">
+			<br />
+
+			<table class="lfr-table">
+			<tr>
+				<td class="lfr-label">
+					<liferay-ui:message key="webdav-url" />
+				</td>
+				<td>
+
+					<%
+					StringBuffer sb = new StringBuffer();
+
+					if (folder != null) {
+						DLFolder curFolder = folder;
+
+						while (true) {
+							sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+							sb.insert(0, StringPool.SLASH);
+
+							if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+								break;
+							}
+							else {
+								curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+							}
+						}
+					}
+
+					Group group = layout.getGroup();
+					%>
+
+					<liferay-ui:input-resource
+						url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
+					/>
+				</td>
+			</tr>
+			</table>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>

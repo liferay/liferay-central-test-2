@@ -226,46 +226,6 @@ List scores = null;
 			</c:if>
 		</script>
 
-		<c:if test="<%= WebDAVUtil.isViewEnabled(IGWebDAVStorageImpl.class.getName()) %>">
-			<br />
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="webdav-url" />
-				</td>
-				<td>
-
-					<%
-					StringBuffer sb = new StringBuffer();
-
-					if (folder != null) {
-						IGFolder curFolder = folder;
-
-						while (true) {
-							sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
-							sb.insert(0, StringPool.SLASH);
-
-							if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-								break;
-							}
-							else {
-								curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-							}
-						}
-					}
-
-					Group group = layout.getGroup();
-					%>
-
-					<liferay-ui:input-resource
-						url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
-					/>
-				</td>
-			</tr>
-			</table>
-		</c:if>
-
 		<c:if test="<%= folder != null %>">
 			<script type="text/javascript">
 				function <portlet:namespace />viewSlideShow() {
@@ -331,6 +291,46 @@ List scores = null;
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</script>
 			</c:if>
+		</c:if>
+
+		<c:if test="<%= WebDAVUtil.isViewEnabled(IGWebDAVStorageImpl.class.getName()) %>">
+			<br />
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="webdav-url" />
+				</td>
+				<td>
+
+					<%
+					StringBuffer sb = new StringBuffer();
+
+					if (folder != null) {
+						IGFolder curFolder = folder;
+
+						while (true) {
+							sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+							sb.insert(0, StringPool.SLASH);
+
+							if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+								break;
+							}
+							else {
+								curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+							}
+						}
+					}
+
+					Group group = layout.getGroup();
+					%>
+
+					<liferay-ui:input-resource
+						url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
+					/>
+				</td>
+			</tr>
+			</table>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-images") || tabs1.equals("recent-images") %>'>
