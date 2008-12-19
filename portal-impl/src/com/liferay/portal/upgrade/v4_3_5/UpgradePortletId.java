@@ -45,7 +45,9 @@ import org.apache.commons.logging.LogFactory;
 public class UpgradePortletId extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+		Log log = getLog();
+
+		log.info("Upgrading");
 
 		try {
 			doUpgrade();
@@ -59,8 +61,10 @@ public class UpgradePortletId extends UpgradeProcess {
 
 		// This is only tested to work on instanceable portlets
 
-		for (int i = 0; i < _PORTLET_IDS.length; i++) {
-			String[] portletIds = _PORTLET_IDS[i];
+		String[][] portletIdsArray = getPortletIdsArray();
+
+		for (int i = 0; i < portletIdsArray.length; i++) {
+			String[] portletIds = portletIdsArray[i];
 
 			String oldRootPortletId = portletIds[0];
 			String newRootPortletId = portletIds[1];
@@ -69,6 +73,27 @@ public class UpgradePortletId extends UpgradeProcess {
 			upgradeResource(oldRootPortletId, newRootPortletId);
 			upgradeResourceCode(oldRootPortletId, newRootPortletId);
 		}
+	}
+
+	protected Log getLog() {
+		return _log;
+	}
+
+	protected String[][] getPortletIdsArray() {
+		return new String[][] {
+			new String[] {
+				"94",
+				"1_WAR_googleadsenseportlet"
+			},
+			new String[] {
+				"95",
+				"1_WAR_googlegadgetportlet"
+			},
+			new String[] {
+				"96",
+				"1_WAR_googlemapsportlet"
+			}
+		};
 	}
 
 	protected void upgradeLayout(
@@ -202,21 +227,6 @@ public class UpgradePortletId extends UpgradeProcess {
 
 		return StringUtil.replace(typeSettings, oldPortletId, newPortletId);
 	}
-
-	private static final String[][] _PORTLET_IDS = new String[][] {
-		new String[] {
-			"94",
-			"google_adsense_portlet_WAR_googleadsenseportlet"
-		},
-		new String[] {
-			"95",
-			"google_gadget_portlet_WAR_googlegadgetportlet"
-		},
-		new String[] {
-			"96",
-			"google_maps_portlet_WAR_googlemapsportlet"
-		}
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradePortletId.class);
 

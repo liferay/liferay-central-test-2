@@ -20,44 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
-
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeJournal;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeOrganization;
-import com.liferay.portal.upgrade.v5_2_0.UpgradePortletId;
-import com.liferay.portal.upgrade.v5_2_0.UpgradePortletPermissions;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeTags;
+package com.liferay.portal.upgrade.v5_2_0;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_5_2_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradePortletId.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_5_2_0 extends UpgradeProcess {
+public class UpgradePortletId
+	extends com.liferay.portal.upgrade.v4_3_5.UpgradePortletId {
 
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_2_0_BUILD_NUMBER;
+	protected Log getLog() {
+		return _log;
 	}
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeDocumentLibrary.class);
-		upgrade(UpgradeJournal.class);
-		upgrade(UpgradeOrganization.class);
-		upgrade(UpgradePortletId.class);
-		upgrade(UpgradePortletPermissions.class);
-		upgrade(UpgradeTags.class);
+	protected String[][] getPortletIdsArray() {
+		return new String[][] {
+			new String[] {
+				"109",
+				"1_WAR_webformportlet"
+			},
+			new String[] {
+				"google_adsense_portlet_WAR_googleadsenseportlet",
+				"1_WAR_googleadsenseportlet"
+			},
+			new String[] {
+				"google_gadget_portlet_WAR_googlegadgetportlet",
+				"1_WAR_googlegadgetportlet"
+			},
+			new String[] {
+				"google_maps_portlet_WAR_googlemapsportlet",
+				"1_WAR_googlemapsportlet"
+			}
+		};
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_2_0.class);
+	private static Log _log = LogFactory.getLog(UpgradePortletId.class);
 
 }
