@@ -85,6 +85,7 @@ public class AssertLARImportTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Test Subfolder 2"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
 
 		for (int second = 0;; second++) {

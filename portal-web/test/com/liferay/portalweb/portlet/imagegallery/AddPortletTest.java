@@ -40,7 +40,8 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id=\"CMS-ImageGallery\"]")) {
+				if (selenium.isElementPresent(
+							"//div[@id='ContentManagement-ImageGallery']/p/a")) {
 					break;
 				}
 			}
@@ -50,7 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"CMS-ImageGallery\"]/p/a");
+		selenium.click("//div[@id='ContentManagement-ImageGallery']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
