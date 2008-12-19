@@ -151,6 +151,17 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	}
 
 	public LayoutSet updateLookAndFeel(
+			long groupId, String themeId, String colorSchemeId, String css,
+			boolean wapTheme)
+		throws PortalException, SystemException {
+
+		updateLookAndFeel(
+			groupId, false, themeId, colorSchemeId, css, wapTheme);
+		updateLookAndFeel(
+			groupId, true, themeId, colorSchemeId, css, wapTheme);
+	}
+
+	public LayoutSet updateLookAndFeel(
 			long groupId, boolean privateLayout, String themeId,
 			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
