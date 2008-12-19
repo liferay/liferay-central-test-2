@@ -754,6 +754,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			CalendarOutputter calOutput = new CalendarOutputter();
 
+			if (cal.getComponents().isEmpty()) {
+				calOutput.setValidating(false);
+			}
+
 			calOutput.output(cal, os);
 
 			return file;
