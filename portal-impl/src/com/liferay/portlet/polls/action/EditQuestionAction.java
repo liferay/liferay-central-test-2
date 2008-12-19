@@ -28,8 +28,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -206,20 +209,17 @@ public class EditQuestionAction extends PortletAction {
 			}
 		}
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			BookmarksEntry.class.getName(), actionRequest);
 
 		if (questionId <= 0) {
 
 			// Add question
 
 			PollsQuestionServiceUtil.addQuestion(
-				layout.getPlid(), title, description, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, choices,
-				communityPermissions, guestPermissions);
+				title, description, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				neverExpire, choices, serviceContext);
 		}
 		else {
 
@@ -228,7 +228,7 @@ public class EditQuestionAction extends PortletAction {
 			PollsQuestionServiceUtil.updateQuestion(
 				questionId, title, description, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, choices);
+				expirationDateMinute, neverExpire, choices, serviceContext);
 		}
 	}
 

@@ -104,86 +104,34 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, long plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, java.lang.String title, java.lang.String description,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addQuestion(userId, plid, title, description,
+				   .addQuestion(userId, title, description,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			addCommunityPermissions, addGuestPermissions);
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String uuid, long userId, long plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addQuestion(uuid, userId, plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, long plid, java.lang.String title,
+		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addQuestion(userId, plid, title, description,
+				   .addQuestion(uuid, userId, title, description,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, long plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addQuestion(userId, plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String uuid, long userId, long plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addQuestion(uuid, userId, plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+			serviceContext);
 	}
 
 	public static void addQuestionResources(long questionId,
@@ -286,13 +234,15 @@ public class PollsQuestionLocalServiceUtil {
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateQuestion(userId, questionId, title, description,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices);
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			serviceContext);
 	}
 
 	public static PollsQuestionLocalService getService() {

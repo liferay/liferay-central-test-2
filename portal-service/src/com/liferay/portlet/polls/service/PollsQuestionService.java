@@ -55,21 +55,11 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface PollsQuestionService {
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long plid, java.lang.String title, java.lang.String description,
+		java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long plid, java.lang.String title, java.lang.String description,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -87,7 +77,8 @@ public interface PollsQuestionService {
 		long questionId, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

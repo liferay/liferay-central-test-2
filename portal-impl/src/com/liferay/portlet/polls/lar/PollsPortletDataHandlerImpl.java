@@ -34,6 +34,7 @@ import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchChoiceException;
@@ -357,8 +358,11 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setPlid(plid);
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		PollsQuestion existingQuestion = null;
 
@@ -370,10 +374,10 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingQuestion == null) {
 				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-					question.getUuid(), userId, plid, question.getTitle(),
+					question.getUuid(), userId, question.getTitle(),
 					question.getDescription(), expirationMonth, expirationDay,
 					expirationYear, expirationHour, expirationMinute,
-					neverExpire, addCommunityPermissions, addGuestPermissions);
+					neverExpire, null, serviceContext);
 			}
 			else {
 				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
@@ -385,10 +389,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		else {
 			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-				userId, plid, question.getTitle(), question.getDescription(),
+				userId, question.getTitle(), question.getDescription(),
 				expirationMonth, expirationDay, expirationYear, expirationHour,
-				expirationMinute, neverExpire, addCommunityPermissions,
-				addGuestPermissions);
+				expirationMinute, neverExpire, null, serviceContext);
 		}
 
 		questionPKs.put(

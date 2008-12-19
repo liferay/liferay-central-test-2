@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.QuestionDescriptionException;
@@ -50,84 +51,31 @@ public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			long userId, long plid, String title, String description,
+			long userId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			List<PollsChoice> choices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addQuestion(
-			null, userId, plid, title, description, expirationDateMonth,
+			null, userId, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, null,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 	public PollsQuestion addQuestion(
-			String uuid, long userId, long plid, String title,
-			String description, int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addQuestion(
-			uuid, userId, plid, title, description, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, null,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public PollsQuestion addQuestion(
-			long userId, long plid, String title, String description,
+			String uuid, long userId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addQuestion(
-			null, userId, plid, title, description, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, choices,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public PollsQuestion addQuestion(
-			long userId, long plid, String title, String description,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addQuestion(
-			null, userId, plid, title, description, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, choices, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public PollsQuestion addQuestion(
-			String uuid, long userId, long plid, String title,
-			String description, int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			List<PollsChoice> choices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Question
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 
 		Date expirationDate = null;
 
@@ -161,16 +109,17 @@ public class PollsQuestionLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addQuestionResources(
-				question, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				question, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addQuestionResources(
-				question, communityPermissions, guestPermissions);
+				question, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		// Choices
@@ -304,7 +253,7 @@ public class PollsQuestionLocalServiceImpl
 		return updateQuestion(
 			userId, questionId, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, null);
+			expirationDateMinute, neverExpire, null, null);
 	}
 
 	public PollsQuestion updateQuestion(
@@ -312,7 +261,7 @@ public class PollsQuestionLocalServiceImpl
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices)
+			List<PollsChoice> choices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Question

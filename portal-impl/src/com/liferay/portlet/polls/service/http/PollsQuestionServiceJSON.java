@@ -73,36 +73,18 @@ import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
  *
  */
 public class PollsQuestionServiceJSON {
-	public static JSONObject addQuestion(long plid, java.lang.String title,
+	public static JSONObject addQuestion(java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
-				title, description, expirationDateMonth, expirationDateDay,
+		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(title,
+				description, expirationDateMonth, expirationDateDay,
 				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices, addCommunityPermissions,
-				addGuestPermissions);
-
-		return PollsQuestionJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addQuestion(long plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
-				title, description, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices, communityPermissions, guestPermissions);
+				neverExpire, choices, serviceContext);
 
 		return PollsQuestionJSONSerializer.toJSONObject(returnValue);
 	}
@@ -125,13 +107,14 @@ public class PollsQuestionServiceJSON {
 		java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.updateQuestion(questionId,
 				title, description, expirationDateMonth, expirationDateDay,
 				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices);
+				neverExpire, choices, serviceContext);
 
 		return PollsQuestionJSONSerializer.toJSONObject(returnValue);
 	}

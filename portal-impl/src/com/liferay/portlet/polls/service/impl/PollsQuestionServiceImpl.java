@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.model.PollsChoice;
@@ -43,43 +44,21 @@ import java.util.List;
 public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			long plid, String title, String description,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String title, String description, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour,int expirationDateMinute,
+			boolean neverExpire, List<PollsChoice> choices,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.POLLS,
+			getPermissionChecker(), serviceContext.getPlid(), PortletKeys.POLLS,
 			ActionKeys.ADD_QUESTION);
 
 		return pollsQuestionLocalService.addQuestion(
-			getUserId(), plid, title, description, expirationDateMonth,
+			getUserId(), title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, choices,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public PollsQuestion addQuestion(
-			long plid, String title, String description,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.POLLS,
-			ActionKeys.ADD_QUESTION);
-
-		return pollsQuestionLocalService.addQuestion(
-			getUserId(), plid, title, description, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, choices, communityPermissions,
-			guestPermissions);
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 	public void deleteQuestion(long questionId)
@@ -105,7 +84,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices)
+			List<PollsChoice> choices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PollsQuestionPermission.check(
@@ -114,7 +93,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 		return pollsQuestionLocalService.updateQuestion(
 			getUserId(), questionId, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, choices);
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 }

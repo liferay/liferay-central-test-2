@@ -82,43 +82,19 @@ import java.rmi.RemoteException;
  */
 public class PollsQuestionServiceSoap {
 	public static com.liferay.portlet.polls.model.PollsQuestionSoap addQuestion(
-		long plid, java.lang.String title, java.lang.String description,
+		java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		com.liferay.portlet.polls.model.PollsChoiceSoap[] choices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
-					title, description, expirationDateMonth, expirationDateDay,
+			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(title,
+					description, expirationDateMonth, expirationDateDay,
 					expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire,
 					com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl.toModels(
-						choices), addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.polls.model.PollsQuestionSoap addQuestion(
-		long plid, java.lang.String title, java.lang.String description,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		com.liferay.portlet.polls.model.PollsChoiceSoap[] choices,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
-					title, description, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire,
-					com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl.toModels(
-						choices), communityPermissions, guestPermissions);
+						choices), serviceContext);
 
 			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
 		}
@@ -159,7 +135,8 @@ public class PollsQuestionServiceSoap {
 		long questionId, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		com.liferay.portlet.polls.model.PollsChoiceSoap[] choices)
+		com.liferay.portlet.polls.model.PollsChoiceSoap[] choices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.updateQuestion(questionId,
@@ -167,7 +144,7 @@ public class PollsQuestionServiceSoap {
 					expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire,
 					com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl.toModels(
-						choices));
+						choices), serviceContext);
 
 			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
 		}
