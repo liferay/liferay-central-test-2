@@ -303,7 +303,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 									for (String curDefaultValue : (String[])defaultValue) {
 									%>
 
-										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= curDefaultValue %></option>
+										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= LanguageUtil.get(pageContext, curDefaultValue) %></option>
 
 									<%
 									}
