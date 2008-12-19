@@ -83,7 +83,9 @@ for (TagsAsset asset : assets) {
 Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().iterator();
 
 if (!itr.hasNext()) {
-	renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+	if (!showPortletWithNoResults) {
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+	}
 %>
 
 	<liferay-ui:message key="there-are-no-results" />
