@@ -184,7 +184,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			Theme theme = itr.next();
 
-			if (theme.getThemeId().equals("controlpanel") ||
+			if ((theme.getThemeId().equals("controlpanel")) ||
 				(!theme.isGroupAvailable(groupId)) ||
 				(theme.isWapTheme() != wapTheme)) {
 
