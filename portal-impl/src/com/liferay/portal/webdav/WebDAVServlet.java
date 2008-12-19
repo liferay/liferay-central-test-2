@@ -96,7 +96,7 @@ public class WebDAVServlet extends HttpServlet {
 
 			// Process the method
 
-			WebDAVRequest webDavRequest = new WebDAVRequest(
+			WebDAVRequest webDavRequest = new WebDAVRequestImpl(
 				storage, request, response, permissionChecker);
 
 			if (_log.isInfoEnabled()) {
@@ -157,7 +157,11 @@ public class WebDAVServlet extends HttpServlet {
 				"Invalid WebDAV path " + request.getPathInfo());
 		}
 
-		return (WebDAVStorage)InstancePool.get(storageClass);
+		WebDAVStorage storage = (WebDAVStorage)InstancePool.get(storageClass);
+
+		storage.setToken(WebDAVUtil.getStorageToken(storageClass));
+
+		return storage;
 	}
 
 	protected boolean isIgnoredResource(HttpServletRequest request) {

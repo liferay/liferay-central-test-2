@@ -30,14 +30,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="WebDAVRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebDAVRequestImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WebDAVRequest {
+public class WebDAVRequestImpl implements WebDAVRequest {
 
-	public WebDAVRequest(
+	public WebDAVRequestImpl(
 			WebDAVStorage storage, HttpServletRequest request,
 			HttpServletResponse response, PermissionChecker permissionChecker)
 		throws WebDAVException {

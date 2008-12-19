@@ -86,6 +86,8 @@ public interface WebDAVStorage {
 
 	public void setRootPath(String rootPath);
 
+	public void setToken(String token);
+
 	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
 		throws WebDAVException;
 

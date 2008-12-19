@@ -63,7 +63,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	}
 
 	public String getToken() {
-		return WebDAVUtil.getStorageToken(getClass().getName());
+		return _token;
 	}
 
 	public boolean isAvailable(WebDAVRequest webDavRequest)
@@ -125,6 +125,10 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		_rootPath = rootPath;
 	}
 
+	public void setToken(String token) {
+		_token = token;
+	}
+
 	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
 		throws WebDAVException {
 
@@ -136,5 +140,6 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	}
 
 	private String _rootPath;
+	private String _token;
 
 }
