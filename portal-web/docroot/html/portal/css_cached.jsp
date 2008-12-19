@@ -76,6 +76,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 .portal-add-content .portlet-msg-info {
 	color: #333;
 	margin-bottom: 0;
+	margin-top: 10px;
 }
 
 .portal-add-content .lfr-portlet-used a {

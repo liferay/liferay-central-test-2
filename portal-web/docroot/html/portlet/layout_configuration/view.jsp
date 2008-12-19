@@ -72,6 +72,12 @@
 				}
 				%>
 
+				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<p class="portlet-msg-info">
+						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
+					</p>
+				</c:if>
+
 				<c:if test="<%= permissionChecker.isOmniadmin() %>">
 
 					<%
@@ -88,12 +94,6 @@
 
 					<p class="lfr-install-more">
 						<a href="<%= pluginsURL.toString() %>"><liferay-ui:message key="install-more-applications" /></a>
-					</p>
-				</c:if>
-
-				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-					<p class="portlet-msg-info">
-						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
 					</p>
 				</c:if>
 
