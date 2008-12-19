@@ -65,7 +65,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 						WikiNode curNode = (WikiNode)nodes.get(i);
 					%>
 
-						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= curNode.getName() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>"><nobr><%= curNode.getName() %></nobr></a>
+						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= curNode.getName() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>"><span class="nobr"><%= curNode.getName() %></span></a>
 
 					<%
 					}
@@ -88,33 +88,33 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 				frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 				%>
 
-				<a href="<%= frontPageURL.toString() %>"><nobr><%= WikiPageImpl.FRONT_PAGE %></nobr></a>
+				<a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageImpl.FRONT_PAGE %></span></a>
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
 				%>
 
-				| <a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="recent-changes" /></nobr></a>
+				| <a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="recent-changes" /></span></a>
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_all_pages");
 				%>
 
-				| <a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="all-pages" /></nobr></a>
+				| <a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="all-pages" /></span></a>
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
 				%>
 
-				| <a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="orphan-pages" /></nobr></a>
+				| <a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></a>
 
 				&nbsp;
 
-				<nobr>
+				<span class="nobr">
 					<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
 					<input type="submit" value="<liferay-ui:message key="search" />" />
-				</nobr>
+				</span>
 
 				</form>
 			</td>

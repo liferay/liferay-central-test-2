@@ -164,11 +164,11 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			<c:if test="<%= article != null %>">
 				<br /><br />
 
-				<nobr>
+				<span class="nobr">
 					<liferay-ui:message key="increment-version-on-save" />
 
 					<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
-				</nobr>
+				</span>
 
 				<br /><br />
 

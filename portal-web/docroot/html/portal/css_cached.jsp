@@ -1891,3 +1891,7 @@ img.avatar {
 td.stretch {
 	width: 99%;
 }
+
+.nobr {
+	white-space: nowrap;
+}

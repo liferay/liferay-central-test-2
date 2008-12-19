@@ -113,9 +113,9 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : curGroup.getDescriptiveName() %></a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
-										<nobr class="lfr-title-scope-selector">
+										<span class="nobr lfr-title-scope-selector">
 											<liferay-ui:message key="with-scope" /> <a href="javascript: ;" class="lfr-scope-selector"><%= (scopeLayout == null) ? curGroupLabel : scopeLayout.getName(locale) %></a>
-										</nobr>
+										</span>
 									</c:if>
 								</h2>
 
@@ -264,7 +264,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 						%>
 
 						<div>
-							<nobr><a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a></nobr>
+							<span class="nobr"><a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a></span>
 						</div>
 
 					</td>
