@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class OldEntriesTest extends BaseTestCase {
 	public void testOldEntries() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Entries"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Hide']")) {
+				if (selenium.isElementPresent("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -52,28 +49,12 @@ public class OldEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//img[@alt='Hide']");
 		selenium.click(RuntimeVariables.replace("link=Old Entries"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"This is a high priority announcement!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This is the highest priority announcement!"));
 	}
 }

@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>EditAnnoucementTest</title>
+<title>AddHighestPriorityAnnouncementTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">EditAnnoucementTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddHighestPriorityAnnouncementTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -23,33 +23,58 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
+	<td>link=Manage Entries</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Edit</td>
+	<td>link=Manage Entries</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>_84_distributionScope</td>
+	<td>label=General</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Entry']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>_84_title</td>
-	<td>This Test General Annoucement has been edited.</td>
+	<td>Highest Priorit Announcement</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_84_title</td>
-	<td>This Test General Annoucement has been edited.</td>
+	<td>Highest Priority Announcement</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_84_url</td>
+	<td>www.lifera.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_url</td>
+	<td>www.liferay.com</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>_84_content</td>
-	<td>Hello Everone! This is test has been edited.</td>
+	<td>This is the highest priorit announcement!</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_84_content</td>
-	<td>Hello Everyone! This is test has been edited.</td>
+	<td>This is the highest priority announcement!</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_84_priority</td>
+	<td>label=Highest</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -57,13 +82,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Entries</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
-	<td>link=This Test General Annoucement has been edited.</td>
+	<td>link=Highest Priority Announcement</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Hello Everyone! This is test has been edited.</td>
+	<td>This is the highest priority announcement!</td>
 	<td></td>
 </tr>
 

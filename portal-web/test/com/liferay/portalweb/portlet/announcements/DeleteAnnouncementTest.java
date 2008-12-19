@@ -33,17 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteAnnouncementTest extends BaseTestCase {
 	public void testDeleteAnnouncement() throws Exception {
-		selenium.click("link=Delete");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Test General Announcement")) {
+				if (selenium.isElementPresent("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -53,7 +49,12 @@ public class DeleteAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent("link=Test General Announcement"));
 	}
 }

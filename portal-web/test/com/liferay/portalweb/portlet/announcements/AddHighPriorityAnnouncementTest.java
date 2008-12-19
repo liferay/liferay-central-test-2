@@ -39,6 +39,25 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Announcements Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("link=Manage Entries")) {
 					break;
 				}
@@ -55,48 +74,23 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_84_title",
+			RuntimeVariables.replace("High Priorit Announcement"));
 		selenium.type("_84_title",
 			RuntimeVariables.replace("High Priority Announcement"));
+		selenium.typeKeys("_84_url", RuntimeVariables.replace("www.lifera.com"));
 		selenium.type("_84_url", RuntimeVariables.replace("www.liferay.com"));
-		selenium.type("_84_content", RuntimeVariables.replace("Medium"));
+		selenium.typeKeys("_84_content",
+			RuntimeVariables.replace("This is a high priorit announcement!"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a high priority announcement!"));
 		selenium.select("_84_priority", RuntimeVariables.replace("label=High"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Entries");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=High Priority Announcement")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='navigation']/ul/li[1]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("link=Entries"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=High Priority Announcement"));
+		assertTrue(selenium.isTextPresent(
+				"This is a high priority announcement!"));
 	}
 }

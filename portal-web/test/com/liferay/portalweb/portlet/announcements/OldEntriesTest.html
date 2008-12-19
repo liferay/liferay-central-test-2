@@ -12,13 +12,13 @@
 <tr><td rowspan="1" colspan="3">OldEntriesTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Entries</td>
+	<td>waitForElementPresent</td>
+	<td>link=Announcements Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Hide']</td>
+	<td>clickAndWait</td>
+	<td>link=Announcements Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,13 +32,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>This is a high priority announcement!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>assertTextPresent</td>
+	<td>This is the highest priority announcement!</td>
 	<td></td>
 </tr>
 

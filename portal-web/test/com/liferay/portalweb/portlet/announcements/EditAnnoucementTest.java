@@ -39,6 +39,25 @@ public class EditAnnoucementTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Announcements Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
@@ -51,30 +70,23 @@ public class EditAnnoucementTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_84_title",
+			RuntimeVariables.replace(
+				"This Test General Annoucement has been edited."));
 		selenium.type("_84_title",
 			RuntimeVariables.replace(
 				"This Test General Annoucement has been edited."));
+		selenium.typeKeys("_84_content",
+			RuntimeVariables.replace(
+				"Hello Everone! This is test has been edited."));
 		selenium.type("_84_content",
 			RuntimeVariables.replace(
 				"Hello Everyone! This is test has been edited."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=This Test General Annoucement has been edited.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent(
+				"link=This Test General Annoucement has been edited."));
+		assertTrue(selenium.isTextPresent(
+				"Hello Everyone! This is test has been edited."));
 	}
 }

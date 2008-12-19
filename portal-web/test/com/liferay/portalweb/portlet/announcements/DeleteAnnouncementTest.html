@@ -12,7 +12,17 @@
 <tr><td rowspan="1" colspan="3">DeleteAnnouncementTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
+	<td>link=Announcements Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Announcements Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Delete</td>
 	<td></td>
 </tr>
@@ -22,13 +32,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test General Announcement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

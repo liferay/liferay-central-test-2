@@ -39,6 +39,25 @@ public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Announcements Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("link=Manage Entries")) {
 					break;
 				}
@@ -55,11 +74,34 @@ public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_84_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_84_title",
+			RuntimeVariables.replace("Medium Priorit Announcement"));
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Medium Priority Announcement"));
+		selenium.typeKeys("_84_url", RuntimeVariables.replace("www.Lifera.com"));
 		selenium.type("_84_url", RuntimeVariables.replace("www.Liferay.com"));
+		selenium.typeKeys("_84_content",
+			RuntimeVariables.replace("This is a medium priorit announcement!"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a medium priority announcement!"));
+		selenium.select("_84_priority", RuntimeVariables.replace("label=Medium"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Entries"));
