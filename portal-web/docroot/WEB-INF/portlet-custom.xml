@@ -1555,67 +1555,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>109</portlet-name>
-		<display-name>Web Form</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/web_form/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>title</name>
-				<value>Suggestions</value>
-			</preference>
-			<preference>
-				<name>description</name>
-				<value>Your input is valuable to us. Please send us your suggestions.</value>
-			</preference>
-			<preference>
-				<name>subject</name>
-				<value>Suggestions</value>
-			</preference>
-			<preference>
-				<name>saveToDatabase</name>
-				<value>true</value>
-			</preference>
-			<preference>
-				<name>fieldLabel1</name>
-				<value>Name</value>
-			</preference>
-			<preference>
-				<name>fieldType1</name>
-				<value>text</value>
-			</preference>
-			<preference>
-				<name>fieldLabel2</name>
-				<value>Rating</value>
-			</preference>
-			<preference>
-				<name>fieldType2</name>
-				<value>options</value>
-			</preference>
-			<preference>
-				<name>fieldOptions2</name>
-				<value>Excellent,Good,Satisfactory,Poor</value>
-			</preference>
-			<preference>
-				<name>fieldLabel3</name>
-				<value>Comments</value>
-			</preference>
-			<preference>
-				<name>fieldType3</name>
-				<value>textarea</value>
-			</preference>
-		</portlet-preferences>
-	</portlet>
-	<portlet>
 		<portlet-name>110</portlet-name>
 		<display-name>Document Library Display</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

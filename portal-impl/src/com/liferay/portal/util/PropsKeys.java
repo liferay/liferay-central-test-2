@@ -1177,8 +1177,6 @@ public interface PropsKeys {
 
 	public static final String VIRTUAL_HOSTS_IGNORE_PATHS = "virtual.hosts.ignore.paths";
 
-	public static final String WEB_FORM_PORTLET_VALIDATION_SCRIPT_ENABLED = "web.form.portlet.validation.script.enabled";
-
 	public static final String WEB_SERVER_DISPLAY_NODE = "web.server.display.node";
 
 	public static final String WEB_SERVER_HOST = "web.server.host";

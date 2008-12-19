@@ -928,19 +928,6 @@
 		<css-class-wrapper>portlet-page-ratings</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>109</portlet-name>
-		<icon>/html/portlet/web_form/icon.png</icon>
-		<struts-path>web_form</struts-path>
-		<configuration-action-class>com.liferay.portlet.webform.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<instanceable>true</instanceable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-web-form</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>110</portlet-name>
 		<icon>/html/portlet/document_library/icon.png</icon>
 		<struts-path>document_library_display</struts-path>
