@@ -32,25 +32,29 @@
 	<br /><br />
 
 	<input type="button" value="<liferay-ui:message key="export" />" onClick="document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/calendar/export_events" /></portlet:actionURL>'; document.<portlet:namespace />fm.submit();" />
-
-	<br /><br />
 </c:if>
 
-<liferay-ui:tabs
-	names="import"
-/>
+<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.EXPORT_ALL_EVENTS) %>">
+		<br /><br />
+	</c:if>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="file" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
-	</td>
-</tr>
-</table>
+	<liferay-ui:tabs
+		names="import"
+	/>
 
-<br />
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="file" />
+		</td>
+		<td>
+			<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
+		</td>
+	</tr>
+	</table>
 
-<input type="button" value="<liferay-ui:message key="import" />" onClick="document.<portlet:namespace />fm.encoding = 'multipart/form-data'; document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/import_events" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>'; document.<portlet:namespace />fm.submit();" />
+	<br />
+
+	<input type="button" value="<liferay-ui:message key="import" />" onClick="document.<portlet:namespace />fm.encoding = 'multipart/form-data'; document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/import_events" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>'; document.<portlet:namespace />fm.submit();" />
+</c:if>

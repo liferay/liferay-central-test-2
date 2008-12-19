@@ -46,7 +46,11 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String tabs1Names = "summary,day,week,month,year,events,export-import";
+String tabs1Names = "summary,day,week,month,year,events";
+
+if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.EXPORT_ALL_EVENTS) || PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT)) {
+	tabs1Names += ",export-import";
+}
 
 String[] tabs1NamesArray = StringUtil.split(tabs1Names);
 
