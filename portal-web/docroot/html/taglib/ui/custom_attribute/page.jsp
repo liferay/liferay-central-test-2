@@ -300,10 +300,16 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 									<%
 									String[] curValue = (String[])value;
 
+									String paramValue = ParamUtil.getString(request, "ExpandoAttribute(" + name + ")");
+
+									if (Validator.isNotNull(paramValue)) {
+										curValue = new String[]{paramValue};
+									}
+
 									for (String curDefaultValue : (String[])defaultValue) {
 									%>
 
-										<option <%= (curValue.length > 0) && (curDefaultValue == curValue[0]) ? "selected" : "" %>><%= LanguageUtil.get(pageContext, curDefaultValue) %></option>
+										<option <%= (curValue.length > 0) && (curDefaultValue.equals(curValue[0])) ? "selected" : "" %> value="<%= curDefaultValue %>"><%= LanguageUtil.get(pageContext, curDefaultValue) %></option>
 
 									<%
 									}
@@ -326,22 +332,39 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 					<c:otherwise>
 
 						<%
+						String paramValue = ParamUtil.getString(request, "ExpandoAttribute(" + name + ")");
+
+						if (Validator.isNotNull(paramValue)) {
+							value = paramValue;
+						}
+
 						if (Validator.isNull(String.valueOf(value))) {
 							value = defaultValue;
 						}
 						%>
 
-						<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
-							style="
-								<c:if test="<%= (propertyHeight > 0) %>">
-									height: <%= propertyHeight %>;
-								</c:if>
-
-								<c:if test="<%= (propertyWidth > 0) %>">
-									width: <%= propertyWidth %>;
-								</c:if>"
-							type="<%= propertySecret ? "password" : "text" %>" value="<%= value %>"
-						/>
+						<c:choose>
+							<c:when test="<%= (propertyHeight > 0) %>">
+								<textarea class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
+									style="
+										<c:if test="<%= (propertyHeight > 0) %>">
+											height: <%= propertyHeight %>;
+										</c:if>
+										<c:if test="<%= (propertyWidth > 0) %>">
+											width: <%= propertyWidth %>;
+										</c:if>"
+								><%= value %></textarea>
+							</c:when>
+							<c:otherwise>
+								<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
+									style="
+										<c:if test="<%= (propertyWidth > 0) %>">
+											width: <%= propertyWidth %>;
+										</c:if>"
+									type="<%= propertySecret ? "password" : "text" %>" value="<%= value %>"
+								/>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 				</c:choose>
 			</c:when>
