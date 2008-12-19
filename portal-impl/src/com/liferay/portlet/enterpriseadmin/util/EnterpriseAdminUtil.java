@@ -121,17 +121,17 @@ public class EnterpriseAdminUtil {
 		return "lfr-role " + cssClassName;
 	}
 
-	public static void filterGroups(
+	public static List<Group> filterGroups(
 			PermissionChecker permissionChecker, List<Group> groups)
 		throws PortalException, SystemException {
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return;
+			return groups;
 		}
 
-		groups = ListUtil.copy(groups);
+		List<Group> filteredGroups = ListUtil.copy(groups);
 
-		Iterator<Group> itr = groups.iterator();
+		Iterator<Group> itr = filteredGroups.iterator();
 
 		while (itr.hasNext()) {
 			Group group = itr.next();
@@ -143,20 +143,22 @@ public class EnterpriseAdminUtil {
 				itr.remove();
 			}
 		}
+
+		return filteredGroups;
 	}
 
-	public static void filterOrganizations(
+	public static List<Organization> filterOrganizations(
 			PermissionChecker permissionChecker,
 			List<Organization> organizations)
 		throws PortalException, SystemException {
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return;
+			return organizations;
 		}
 
-		organizations = ListUtil.copy(organizations);
+		List<Organization> filteredOrganizations = ListUtil.copy(organizations);
 
-		Iterator<Organization> itr = organizations.iterator();
+		Iterator<Organization> itr = filteredOrganizations.iterator();
 
 		while (itr.hasNext()) {
 			Organization organization = itr.next();
@@ -168,14 +170,16 @@ public class EnterpriseAdminUtil {
 				itr.remove();
 			}
 		}
+
+		return filteredOrganizations;
 	}
 
-	public static void filterRoles(
+	public static List<Role> filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
 
-		roles = ListUtil.copy(roles);
+		List<Role> filteredRoles = ListUtil.copy(roles);
 
-		Iterator<Role> itr = roles.iterator();
+		Iterator<Role> itr = filteredRoles.iterator();
 
 		while (itr.hasNext()) {
 			Role role = itr.next();
@@ -193,10 +197,10 @@ public class EnterpriseAdminUtil {
 		}
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return;
+			return filteredRoles;
 		}
 
-		itr = roles.iterator();
+		itr = filteredRoles.iterator();
 
 		while (itr.hasNext()) {
 			Role role = itr.next();
@@ -210,16 +214,19 @@ public class EnterpriseAdminUtil {
 				itr.remove();
 			}
 		}
+
+		return filteredRoles;
 	}
 
-	public static void filterUserGroupRoles(
+	public static List<UserGroupRole> filterUserGroupRoles(
 			PermissionChecker permissionChecker,
 			List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
 
-		userGroupRoles = ListUtil.copy(userGroupRoles);
+		List<UserGroupRole> filteredUserGroupRoles =
+			ListUtil.copy(userGroupRoles);
 
-		Iterator<UserGroupRole> itr = userGroupRoles.iterator();
+		Iterator<UserGroupRole> itr = filteredUserGroupRoles.iterator();
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = itr.next();
@@ -236,10 +243,10 @@ public class EnterpriseAdminUtil {
 		}
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return;
+			return filteredUserGroupRoles;
 		}
 
-		itr = userGroupRoles.iterator();
+		itr = filteredUserGroupRoles.iterator();
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = itr.next();
@@ -251,18 +258,20 @@ public class EnterpriseAdminUtil {
 				itr.remove();
 			}
 		}
+
+		return filteredUserGroupRoles;
 	}
 
-	public static void filterUserGroups(
+	public static List<UserGroup> filterUserGroups(
 		PermissionChecker permissionChecker, List<UserGroup> userGroups) {
 
 		if (permissionChecker.isCompanyAdmin()) {
-			return;
+			return userGroups;
 		}
 
-		userGroups = ListUtil.copy(userGroups);
+		List<UserGroup> filteredUserGroups = ListUtil.copy(userGroups);
 
-		Iterator<UserGroup> itr = userGroups.iterator();
+		Iterator<UserGroup> itr = filteredUserGroups.iterator();
 
 		while (itr.hasNext()) {
 			UserGroup userGroup = itr.next();
@@ -274,6 +283,8 @@ public class EnterpriseAdminUtil {
 				itr.remove();
 			}
 		}
+
+		return filteredUserGroups;
 	}
 
 	public static List<Address> getAddresses(ActionRequest actionRequest) {
