@@ -33,64 +33,27 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchOrganizationsTest extends BaseTestCase {
 	public void testSearchOrganizations() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Directory Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"toggle_id_directory_organization_searchkeywords")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("toggle_id_directory_organization_searchkeywords",
-			RuntimeVariables.replace("Liferay"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Liferay, Inc.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View Users")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Liferay, Inc.");
+		selenium.click("link=Advanced \u00bb");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,24 +71,75 @@ public class SearchOrganizationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.type("_11_name", RuntimeVariables.replace("Test"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"toggle_id_directory_user_searchkeywords")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_name", RuntimeVariables.replace("Test1"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_name", RuntimeVariables.replace(""));
+		selenium.type("_11_street", RuntimeVariables.replace("Test"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_street", RuntimeVariables.replace("Test1"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_street", RuntimeVariables.replace(""));
+		selenium.type("_11_city", RuntimeVariables.replace("Diamond"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_city", RuntimeVariables.replace("Diamond1"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_city", RuntimeVariables.replace(""));
+		selenium.type("_11_zip", RuntimeVariables.replace("11111"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_zip", RuntimeVariables.replace("111111"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.type("_11_zip", RuntimeVariables.replace(""));
+		selenium.select("_11_type",
+			RuntimeVariables.replace("label=Regular Organization"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.select("_11_type", RuntimeVariables.replace("label=Location"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.select("_11_type", RuntimeVariables.replace("label=Any"));
+		selenium.select("_11_countryId",
+			RuntimeVariables.replace("label=United States"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.select("_11_countryId",
+			RuntimeVariables.replace("label=United Kingdom"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.select("_11_countryId",
+			RuntimeVariables.replace("label=United States"));
+		Thread.sleep(5000);
+		selenium.select("_11_regionId",
+			RuntimeVariables.replace("label=California"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Diamond Bar"));
+		selenium.select("_11_regionId", RuntimeVariables.replace("label=Hawaii"));
+		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Diamond Bar"));
+		selenium.select("_11_countryId", RuntimeVariables.replace("label="));
+		selenium.click("link=\u00ab Basic");
 	}
 }

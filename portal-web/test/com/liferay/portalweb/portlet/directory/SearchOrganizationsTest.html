@@ -12,38 +12,23 @@
 <tr><td rowspan="1" colspan="3">SearchOrganizationsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Directory Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Directory Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>toggle_id_directory_organization_searchkeywords</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>toggle_id_directory_organization_searchkeywords</td>
-	<td>Liferay</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Search']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Liferay, Inc.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=View Users</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>link=Liferay, Inc.</td>
+	<td>link=Advanced »</td>
 	<td></td>
 </tr>
 <tr>
@@ -52,13 +37,258 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>_11_name</td>
+	<td>Test</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>//div[2]/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>toggle_id_directory_user_searchkeywords</td>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_name</td>
+	<td>Test1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_street</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_street</td>
+	<td>Test1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_street</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_city</td>
+	<td>Diamond</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_city</td>
+	<td>Diamond1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_city</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_zip</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_zip</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_11_zip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_type</td>
+	<td>label=Regular Organization</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_type</td>
+	<td>label=Location</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_type</td>
+	<td>label=Any</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_countryId</td>
+	<td>label=United States</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_countryId</td>
+	<td>label=United Kingdom</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_countryId</td>
+	<td>label=United States</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_regionId</td>
+	<td>label=California</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_regionId</td>
+	<td>label=Hawaii</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Diamond Bar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_11_countryId</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=« Basic</td>
 	<td></td>
 </tr>
 

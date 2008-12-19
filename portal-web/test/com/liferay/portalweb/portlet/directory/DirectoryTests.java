@@ -33,11 +33,14 @@ import com.liferay.portalweb.portal.BaseTests;
 public class DirectoryTests extends BaseTests {
 
 	public DirectoryTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(SearchUsersTest.class);
 		addTestSuite(SearchOrganizationsTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(SearchUserGroupsTest.class);
+		addTestSuite(AssertCorrectUserInUserGroupTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }
