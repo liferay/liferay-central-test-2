@@ -121,7 +121,7 @@ public class SetupTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id='CMS-DocumentLibrary']/p/a")) {
+							"//div[@id='ContentManagement-DocumentLibrary']/p/a")) {
 					break;
 				}
 			}
@@ -131,7 +131,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='CMS-DocumentLibrary']/p/a");
+		selenium.click("//div[@id='ContentManagement-DocumentLibrary']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -234,6 +234,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Document']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -298,6 +299,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent("DLD Test Document.txt"));
 	}
 }
