@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class AddDocumentTest extends BaseTestCase {
+	public void testAddDocument() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -59,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("//select")) {
 					break;
 				}
 			}
@@ -69,7 +69,17 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Application");
+		selenium.select("//select", "label=Document Library Document");
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=AP Setup DL Test Folder"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Document']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Use the classic uploader.");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,8 +87,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"ContentManagement-AssetPublisher\"]")) {
+				if (selenium.isElementPresent("_20_file")) {
 					break;
 				}
 			}
@@ -88,22 +97,16 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"ContentManagement-AssetPublisher\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.type("_20_file",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\AP_test_document_2.txt"));
+		selenium.typeKeys("_20_title",
+			RuntimeVariables.replace("AP Setup Test Document 2"));
+		selenium.type("_20_title",
+			RuntimeVariables.replace("AP Setup Test Document 2"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=AP Setup Test Document 2.txt"));
 	}
 }

@@ -39,6 +39,26 @@ public class EditManualConfigurationTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Asset Publisher Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
@@ -89,8 +109,12 @@ public class EditManualConfigurationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=AP Setup Test Entry"));
-		assertFalse(selenium.isElementPresent("link=AP Setup Test Entry 2"));
-		assertFalse(selenium.isElementPresent("link=AP Setup Test Article"));
+		assertFalse(selenium.isTextPresent("AP Setup Test Entry"));
+		assertFalse(selenium.isTextPresent("AP Setup Test Bookmark"));
+		assertFalse(selenium.isTextPresent("AP Setup Test Document"));
+		assertFalse(selenium.isElementPresent("//img[@alt='Edit Image']"));
+		assertFalse(selenium.isTextPresent("AP Setup Test Article"));
+		assertFalse(selenium.isTextPresent("AP Setup MB Test Thread"));
+		assertFalse(selenium.isTextPresent("AP Setup Test Wiki"));
 	}
 }

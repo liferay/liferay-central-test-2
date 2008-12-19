@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddPortletTest</title>
+<title>ViewWikiTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPortletTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewWikiTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -22,28 +22,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Add Application</td>
+	<td>clickAndWait</td>
+	<td>link=FrontPage</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Add Application</td>
+	<td>assertTextPresent</td>
+	<td>AP Setup Test Wiki</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id="ContentManagement-AssetPublisher"]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id="ContentManagement-AssetPublisher"]/p/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Configuration</td>
+	<td>assertTextPresent</td>
+	<td>This is an AP setup test wiki.</td>
 	<td></td>
 </tr>
 
