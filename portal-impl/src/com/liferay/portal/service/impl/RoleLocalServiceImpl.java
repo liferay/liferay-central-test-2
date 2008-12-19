@@ -429,7 +429,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		validate(roleId, role.getCompanyId(), name);
 
 		if (PortalUtil.isSystemRole(role.getName())) {
-			throw new RequiredRoleException();
+			name = role.getName();
+			subtype = null;
 		}
 
 		role.setName(name);
