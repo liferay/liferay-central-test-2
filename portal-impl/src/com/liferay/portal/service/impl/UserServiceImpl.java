@@ -742,34 +742,37 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long userId, List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
 
-		for (UserGroupRole userGroupRole : userGroupRoles) {
-			if (!GroupPermissionUtil.contains(
-					getPermissionChecker(), userGroupRole.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS) ||
-				!RolePermissionUtil.contains(
-					getPermissionChecker(), userGroupRole.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-
-				throw new PrincipalException();
-			}
-		}
-
 		// Add back any group roles that the administrator does not have the
 		// rights to remove
 
-		List<UserGroupRole> previousGroupRoles =
+		List<UserGroupRole> oldUserGroupRoles =
 			userGroupRoleLocalService.getUserGroupRoles(userId);
 
-		for (UserGroupRole userGroupRole : previousGroupRoles) {
-			if (!userGroupRoles.contains(userGroupRole) &&
-			   (!GroupPermissionUtil.contains(
-					getPermissionChecker(), userGroupRole.getGroupId(),
+		for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
+			if (!userGroupRoles.contains(oldUserGroupRole) &&
+				(!GroupPermissionUtil.contains(
+					getPermissionChecker(), oldUserGroupRole.getGroupId(),
 					ActionKeys.ASSIGN_MEMBERS) ||
-				!RolePermissionUtil.contains(
-					getPermissionChecker(), userGroupRole.getRoleId(),
+				 !RolePermissionUtil.contains(
+					getPermissionChecker(), oldUserGroupRole.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS))) {
 
-				userGroupRoles.add(userGroupRole);
+				userGroupRoles.add(oldUserGroupRole);
+			}
+		}
+
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			if (!oldUserGroupRoles.contains(userGroupRole)) {
+
+				if (!GroupPermissionUtil.contains(
+						getPermissionChecker(), userGroupRole.getGroupId(),
+						ActionKeys.ASSIGN_MEMBERS) ||
+					!RolePermissionUtil.contains(
+						getPermissionChecker(), userGroupRole.getRoleId(),
+						ActionKeys.ASSIGN_MEMBERS)) {
+
+					throw new PrincipalException();
+				}
 			}
 		}
 
