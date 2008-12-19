@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class TearDownTest extends BaseTestCase {
+	public void testTearDown() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -60,7 +60,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("//img[@alt='Remove']")) {
 					break;
 				}
 			}
@@ -70,7 +70,10 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Application");
+		selenium.click("//img[@alt='Remove']");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent("//input[@value='Convert']"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,8 +81,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Finance-CurrencyConverter\"]")) {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/a/span")) {
 					break;
 				}
 			}
@@ -89,7 +91,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"Finance-CurrencyConverter\"]/p/a");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -97,7 +100,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_16_to")) {
+				if (selenium.isElementPresent("link=Manage Pages")) {
 					break;
 				}
 			}
@@ -106,5 +109,39 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//li[2]/ul/li[3]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent(
+				"link=Currency Converter Test Page"));
 	}
 }

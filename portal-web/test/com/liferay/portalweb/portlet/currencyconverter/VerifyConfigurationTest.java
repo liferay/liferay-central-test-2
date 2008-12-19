@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewGraphsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyConfigurationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewGraphsTest extends BaseTestCase {
-	public void testViewGraphs() throws Exception {
+public class VerifyConfigurationTest extends BaseTestCase {
+	public void testVerifyConfiguration() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,13 +53,8 @@ public class ViewGraphsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Currency Converter Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Convert']"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=1y"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=2y"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=3m"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Korean Won"));
 	}
 }

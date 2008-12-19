@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewGraphsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReConfigurePreferencesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewGraphsTest extends BaseTestCase {
-	public void testViewGraphs() throws Exception {
+public class ReConfigurePreferencesTest extends BaseTestCase {
+	public void testReConfigurePreferences() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,13 +53,49 @@ public class ViewGraphsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Currency Converter Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Convert']"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Preferences")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Preferences"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=1y"));
+		selenium.addSelection("_16_current_actions",
+			RuntimeVariables.replace("label=Korean Won"));
+		selenium.click("//div/table/tbody/tr/td[2]/a[1]/img");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=2y"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=3m"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated your preferences."));
 	}
 }

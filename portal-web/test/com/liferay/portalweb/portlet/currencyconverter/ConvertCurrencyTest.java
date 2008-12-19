@@ -33,17 +33,14 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ConvertCurrencyTest extends BaseTestCase {
 	public void testConvertCurrency() throws Exception {
-		selenium.select("_16_to", RuntimeVariables.replace("label=BHD"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Convert']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isTextPresent("BHD")) {
+				if (selenium.isElementPresent(
+							"link=Currency Converter Test Page")) {
 					break;
 				}
 			}
@@ -52,5 +49,17 @@ public class ConvertCurrencyTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Currency Converter Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_16_number", RuntimeVariables.replace("2.5"));
+		selenium.select("_16_from", RuntimeVariables.replace("label=KRW"));
+		selenium.select("_16_to", RuntimeVariables.replace("label=BHD"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Convert']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("2.5"));
+		assertTrue(selenium.isTextPresent("KRW"));
+		assertTrue(selenium.isTextPresent("BHD"));
 	}
 }

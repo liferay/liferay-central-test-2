@@ -26,26 +26,76 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurePreferencesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
+public class ConfigurePreferencesTest extends BaseTestCase {
+	public void testConfigurePreferences() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Currency Converter Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[1]/a/span"));
+				"link=Currency Converter Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Preferences")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Preferences"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+		selenium.addSelection("_16_available_actions",
+			RuntimeVariables.replace("label=Korean Won"));
+		selenium.click("//div/table/tbody/tr/td[2]/a[2]/img");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated your preferences."));
 	}
 }
