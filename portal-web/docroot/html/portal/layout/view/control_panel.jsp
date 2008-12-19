@@ -264,7 +264,9 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 						%>
 
 						<div>
-							<span class="nobr"><a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a></span>
+							<span class="nobr">
+								<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a>
+							</span>
 						</div>
 
 					</td>
