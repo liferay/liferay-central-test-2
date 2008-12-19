@@ -359,6 +359,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		ServiceContext serviceContext = new ServiceContext();
+
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setPlid(plid);
