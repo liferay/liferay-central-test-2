@@ -69,12 +69,12 @@
 				String layoutName = rootLayout.getName(themeDisplay.getLocale());
 				%>
 
-				<h3>
+				<h2>
 					<a href="<%= layoutURL %>" <%= target %>><%= layoutName %></a>
-				</h3>
+				</h2>
 			</c:when>
 			<c:when test='<%= headerType.equals("portlet-title") %>'>
-				<h3><%= themeDisplay.getPortletDisplay().getTitle() %></h3>
+				<h2><%= themeDisplay.getPortletDisplay().getTitle() %></h2>
 			</c:when>
 			<c:when test='<%= headerType.equals("breadcrumb") %>'>
 				<liferay-ui:breadcrumb />
