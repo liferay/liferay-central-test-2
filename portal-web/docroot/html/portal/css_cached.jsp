@@ -1263,10 +1263,6 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	margin-bottom: 0;
 }
 
-.uni-form .portlet-msg-error{
-	margin:20px auto 0px;
-}
-
 /* ---------- Separator ---------- */
 
 .separator {
