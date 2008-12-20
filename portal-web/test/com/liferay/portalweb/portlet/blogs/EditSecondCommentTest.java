@@ -39,7 +39,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[4]/nobr/a[2]")) {
+				if (selenium.isElementPresent("//td[4]/span/a[2]")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[4]/nobr/a[2]");
+		selenium.click("//td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -58,7 +58,7 @@ public class DeleteSecondCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[5]/nobr/a[2]")) {
+				if (selenium.isElementPresent("//td[5]/span/a[2]")) {
 					break;
 				}
 			}
@@ -68,7 +68,7 @@ public class DeleteSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//td[5]/nobr/a[2]"));
+		selenium.click(RuntimeVariables.replace("//td[5]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
