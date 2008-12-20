@@ -59,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Post Reply")) {
+				if (selenium.isElementPresent("link=Add Comment")) {
 					break;
 				}
 			}
