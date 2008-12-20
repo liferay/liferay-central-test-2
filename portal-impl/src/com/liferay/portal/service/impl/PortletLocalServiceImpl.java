@@ -1005,6 +1005,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						portlet.elementText(
 							"social-request-interpreter-class"),
 							portletModel.getSocialRequestInterpreterClass()));
+				portletModel.setWebDAVStorageToken(GetterUtil.getString(
+					portlet.elementText("webdav-storage-token"),
+					portletModel.getWebDAVStorageToken()));
+				portletModel.setWebDAVStorageClass(GetterUtil.getString(
+					portlet.elementText("webdav-storage-class"),
+					portletModel.getWebDAVStorageClass()));
 				portletModel.setControlPanelEntryCategory(GetterUtil.getString(
 					portlet.elementText("control-panel-entry-category"),
 					portletModel.getControlPanelEntryCategory()));

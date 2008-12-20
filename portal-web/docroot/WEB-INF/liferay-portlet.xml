@@ -139,6 +139,8 @@
 		<scheduler-class>com.liferay.portlet.journal.job.JournalScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.journal.JournalFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
+		<webdav-storage-token>journal</webdav-storage-token>
+		<webdav-storage-class>com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl</webdav-storage-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
@@ -198,6 +200,8 @@
 		<indexer-class>com.liferay.portlet.documentlibrary.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl</portlet-data-handler-class>
+		<webdav-storage-token>document_library</webdav-storage-token>
+		<webdav-storage-class>com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl</webdav-storage-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
@@ -323,6 +327,8 @@
 		<indexer-class>com.liferay.portlet.imagegallery.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.imagegallery.util.IGOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl</portlet-data-handler-class>
+		<webdav-storage-token>image_gallery</webdav-storage-token>
+		<webdav-storage-class>com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl</webdav-storage-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>3.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>

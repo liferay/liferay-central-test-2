@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
@@ -66,6 +67,7 @@ public class PortletBagImpl implements PortletBag {
 		MessageListener popMessageListenerInstance,
 		SocialActivityInterpreter socialActivityInterpreterInstance,
 		SocialRequestInterpreter socialRequestInterpreterInstance,
+		WebDAVStorage webDAVStorageInstance,
 		ControlPanelEntry controlPanelEntryInstance,
 		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
@@ -84,6 +86,7 @@ public class PortletBagImpl implements PortletBag {
 		_popMessageListenerInstance = popMessageListenerInstance;
 		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
+		_webDAVStorageInstance = webDAVStorageInstance;
 		_controlPanelEntryInstance = controlPanelEntryInstance;
 		_preferencesValidatorInstance = preferencesValidatorInstance;
 		_resourceBundles = resourceBundles;
@@ -149,6 +152,10 @@ public class PortletBagImpl implements PortletBag {
 		return _socialRequestInterpreterInstance;
 	}
 
+	public WebDAVStorage getWebDAVStorageInstance() {
+		return _webDAVStorageInstance;
+	}
+
 	public ControlPanelEntry getControlPanelEntryInstance() {
 		return _controlPanelEntryInstance;
 	}
@@ -187,6 +194,7 @@ public class PortletBagImpl implements PortletBag {
 	private MessageListener _popMessageListenerInstance;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;
+	private WebDAVStorage _webDAVStorageInstance;
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private PreferencesValidator _preferencesValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;

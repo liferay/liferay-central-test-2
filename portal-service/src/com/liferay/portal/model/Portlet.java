@@ -172,6 +172,16 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portlet.social.model.SocialRequestInterpreter getSocialRequestInterpreterInstance();
 
+	public java.lang.String getWebDAVStorageToken();
+
+	public void setWebDAVStorageToken(java.lang.String webDAVStorageToken);
+
+	public java.lang.String getWebDAVStorageClass();
+
+	public void setWebDAVStorageClass(java.lang.String webDAVStorageClass);
+
+	public com.liferay.portal.webdav.WebDAVStorage getWebDAVStorageInstance();
+
 	public java.lang.String getControlPanelEntryCategory();
 
 	public void setControlPanelEntryCategory(

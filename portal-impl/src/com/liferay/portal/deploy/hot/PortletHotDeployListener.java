@@ -62,6 +62,8 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.PortletBagImpl;
@@ -172,6 +174,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		SocialRequestInterpreterLocalServiceUtil.deleteRequestInterpreter(
 			portlet.getSocialRequestInterpreterInstance());
+
+		WebDAVUtil.deleteStorage(portlet.getWebDAVStorageInstance());
 
 		PortletInstanceFactory.destroy(portlet);
 
@@ -493,6 +497,17 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				socialRequestInterpreterInstance);
 		}
 
+		WebDAVStorage webDAVStorageInstance = null;
+
+		if (Validator.isNotNull(portlet.getWebDAVStorageClass())) {
+			webDAVStorageInstance = (WebDAVStorage)portletClassLoader.loadClass(
+				portlet.getWebDAVStorageClass()).newInstance();
+
+			webDAVStorageInstance.setToken(portlet.getWebDAVStorageToken());
+
+			WebDAVUtil.addStorage(webDAVStorageInstance);
+		}
+
 		ControlPanelEntry controlPanelEntryInstance = null;
 
 		if (Validator.isNotNull(portlet.getControlPanelEntryClass())) {
@@ -550,8 +565,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			schedulerInstance, friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			popMessageListenerInstance, socialActivityInterpreterInstance,
-			socialRequestInterpreterInstance, controlPanelEntryInstance,
-			preferencesValidatorInstance, resourceBundles);
+			socialRequestInterpreterInstance, webDAVStorageInstance,
+			controlPanelEntryInstance, preferencesValidatorInstance,
+			resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

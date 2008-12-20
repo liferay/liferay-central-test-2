@@ -54,6 +54,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
+import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -132,7 +133,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String friendlyURLMapperClass, String urlEncoderClass,
 		String portletDataHandlerClass, String portletLayoutListenerClass,
 		String popMessageListenerClass, String socialActivityInterpreterClass,
-		String socialRequestInterpreterClass, String controlPanelEntryCategory,
+		String socialRequestInterpreterClass, String webDAVStorageToken,
+		String webDAVStorageClass, String controlPanelEntryCategory,
 		double controlPanelEntryWeight, String controlPanelClass,
 		String defaultPreferences, String preferencesValidator,
 		boolean preferencesCompanyWide, boolean preferencesUniquePerLayout,
@@ -184,6 +186,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_popMessageListenerClass = popMessageListenerClass;
 		_socialActivityInterpreterClass = socialActivityInterpreterClass;
 		_socialRequestInterpreterClass = socialRequestInterpreterClass;
+		_webDAVStorageToken = webDAVStorageToken;
+		_webDAVStorageClass = webDAVStorageClass;
 		_controlPanelEntryCategory = controlPanelEntryCategory;
 		_controlPanelEntryWeight = controlPanelEntryWeight;
 		_controlPanelEntryClass = controlPanelClass;
@@ -833,9 +837,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the activity interpreter instance of the portlet.
+	 * Gets the name of the social activity interpreter instance of the portlet.
 	 *
-	 * @return		the name of the activity interpreter instance of the portlet
+	 * @return		the name of the social activity interpreter instance of the
+	 *				portlet
 	 */
 	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
 		if (Validator.isNull(getSocialActivityInterpreterClass())) {
@@ -876,9 +881,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the request interpreter instance of the portlet.
+	 * Gets the name of the social request interpreter instance of the portlet.
 	 *
-	 * @return		the name of the request interpreter instance of the portlet
+	 * @return		the name of the social request interpreter instance of the
+	 *				portlet
 	 */
 	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
 		if (Validator.isNull(getSocialRequestInterpreterClass())) {
@@ -894,6 +900,65 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		return (SocialRequestInterpreter)InstancePool.get(
 			getSocialRequestInterpreterClass());
+	}
+
+	/**
+	 * Gets the name of the WebDAV storage token of the portlet.
+	 *
+	 * @return		the name of the WebDAV storage token of the portlet
+	 */
+	public String getWebDAVStorageToken() {
+		return _webDAVStorageToken;
+	}
+
+	/**
+	 * Sets the name of the WebDAV storage token of the portlet.
+	 *
+	 * @param		webDAVStorageToken the name of the WebDAV storage token of
+	 *				the portlet
+	 */
+	public void setWebDAVStorageToken(String webDAVStorageToken) {
+		_webDAVStorageToken = webDAVStorageToken;
+	}
+
+	/**
+	 * Gets the name of the WebDAV storage class of the portlet.
+	 *
+	 * @return		the name of the WebDAV storage class of the portlet
+	 */
+	public String getWebDAVStorageClass() {
+		return _webDAVStorageClass;
+	}
+
+	/**
+	 * Sets the name of the WebDAV storage class of the portlet.
+	 *
+	 * @param		webDAVStorageClass the name of the WebDAV storage class of
+	 *				the portlet
+	 */
+	public void setWebDAVStorageClass(String webDAVStorageClass) {
+		_webDAVStorageClass = webDAVStorageClass;
+	}
+
+	/**
+	 * Gets the name of the WebDAV storage instance of the portlet.
+	 *
+	 * @return		the name of the WebDAV storage instance of the portlet
+	 */
+	public WebDAVStorage getWebDAVStorageInstance() {
+		if (Validator.isNull(getWebDAVStorageClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getWebDAVStorageInstance();
+		}
+
+		return (WebDAVStorage)InstancePool.get(
+			getWebDAVStorageClass());
 	}
 
 	/**
@@ -2722,7 +2787,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getFriendlyURLMapperClass(), getURLEncoderClass(),
 			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
 			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
-			getSocialRequestInterpreterClass(), getControlPanelEntryCategory(),
+			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
+			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
 			getDefaultPreferences(), getPreferencesValidator(),
 			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
@@ -2883,6 +2949,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the social request interpreter class of the portlet.
 	 */
 	private String _socialRequestInterpreterClass;
+
+ 	/**
+	 * The name of the WebDAV storage token of the portlet.
+	 */
+	private String _webDAVStorageToken;
+
+ 	/**
+	 * The name of the WebDAV storage class of the portlet.
+	 */
+	private String _webDAVStorageClass;
 
 	/**
 	 * The default preferences of the portlet.

@@ -1191,14 +1191,6 @@ public interface PropsKeys {
 
 	public static final String WEBDAV_LITMUS = "webdav.litmus";
 
-	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class";
-
-	public static final String WEBDAV_STORAGE_SHOW_EDIT_URL = "webdav.storage.show.edit.url";
-
-	public static final String WEBDAV_STORAGE_SHOW_VIEW_URL = "webdav.storage.show.view.url";
-
-	public static final String WEBDAV_STORAGE_TOKENS = "webdav.storage.tokens";
-
 	public static final String WIDGET_SERVLET_MAPPING = "widget.servlet.mapping";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";

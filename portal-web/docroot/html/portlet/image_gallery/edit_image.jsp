@@ -108,42 +108,38 @@ if (image != null) {
 			/>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="webdav-url" />
+		</td>
+		<td>
 
-	<c:if test="<%= WebDAVUtil.isEditEnabled(IGWebDAVStorageImpl.class.getName()) %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="webdav-url" />
-			</td>
-			<td>
+			<%
+			StringBuffer sb = new StringBuffer();
 
-				<%
-				StringBuffer sb = new StringBuffer();
+			while (true) {
+				sb.insert(0, HttpUtil.encodeURL(folder.getName(), true));
+				sb.insert(0, StringPool.SLASH);
 
-				while (true) {
-					sb.insert(0, HttpUtil.encodeURL(folder.getName(), true));
-					sb.insert(0, StringPool.SLASH);
-
-					if (folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-						break;
-					}
-					else {
-						folder = IGFolderLocalServiceUtil.getFolder(folder.getParentFolderId());
-					}
+				if (folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					break;
 				}
+				else {
+					folder = IGFolderLocalServiceUtil.getFolder(folder.getParentFolderId());
+				}
+			}
 
-				sb.append(StringPool.SLASH);
-				sb.append(HttpUtil.encodeURL(image.getNameWithExtension(), true));
+			sb.append(StringPool.SLASH);
+			sb.append(HttpUtil.encodeURL(image.getNameWithExtension(), true));
 
-				Group group = layout.getGroup();
-				%>
+			Group group = layout.getGroup();
+			%>
 
-				<liferay-ui:input-resource
-					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
-				/>
-			</td>
-		</tr>
-	</c:if>
-
+			<liferay-ui:input-resource
+				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
+			/>
+		</td>
+	</tr>
 	</table>
 
 	<br />

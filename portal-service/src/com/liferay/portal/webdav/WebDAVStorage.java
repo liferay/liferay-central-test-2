@@ -56,6 +56,8 @@ public interface WebDAVStorage {
 
 	public String getRootPath();
 
+	public String getToken();
+
 	public boolean isAvailable(WebDAVRequest webDavRequest)
 		throws WebDAVException;
 

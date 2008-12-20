@@ -83,6 +83,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
+import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
@@ -419,6 +421,34 @@ public class MainServlet extends ActionServlet {
 
 				SocialRequestInterpreterLocalServiceUtil.
 					addRequestInterpreter(socialRequestInterpreter);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// WebDAV storage
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("WebDAV storage");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				WebDAVStorage webDAVStorage =
+					portlet.getWebDAVStorageInstance();
+
+				if (!portlet.isActive() || (webDAVStorage == null)) {
+					continue;
+				}
+
+				webDAVStorage.setToken(portlet.getWebDAVStorageToken());
+
+				WebDAVUtil.addStorage(webDAVStorage);
 			}
 		}
 		catch (Exception e) {

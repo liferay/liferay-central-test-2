@@ -24,7 +24,6 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -140,26 +139,24 @@ public class WebDAVServlet extends HttpServlet {
 		String[] pathArray = WebDAVUtil.getPathArray(
 			request.getPathInfo(), true);
 
-		String storageClass = null;
+		WebDAVStorage storage = null;
 
 		if (pathArray.length == 1) {
-			storageClass = CompanyWebDAVStorageImpl.class.getName();
+			storage = (WebDAVStorage)InstancePool.get(
+				CompanyWebDAVStorageImpl.class.getName());
 		}
 		else if (pathArray.length == 2) {
-			storageClass = GroupWebDAVStorageImpl.class.getName();
+			storage = (WebDAVStorage)InstancePool.get(
+				GroupWebDAVStorageImpl.class.getName());
 		}
 		else if (pathArray.length >= 3) {
-			storageClass = WebDAVUtil.getStorageClass(pathArray[2]);
+			storage = WebDAVUtil.getStorage(pathArray[2]);
 		}
 
-		if (Validator.isNull(storageClass)) {
+		if (storage == null) {
 			throw new WebDAVException(
 				"Invalid WebDAV path " + request.getPathInfo());
 		}
-
-		WebDAVStorage storage = (WebDAVStorage)InstancePool.get(storageClass);
-
-		storage.setToken(WebDAVUtil.getStorageToken(storageClass));
 
 		return storage;
 	}

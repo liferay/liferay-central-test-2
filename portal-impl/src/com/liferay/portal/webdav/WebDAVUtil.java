@@ -23,12 +23,10 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
@@ -37,14 +35,10 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,6 +62,14 @@ public class WebDAVUtil {
 	public static final int SC_LOCKED = 423;
 
 	public static final String TOKEN_PREFIX = "opaquelocktoken:";
+
+	public static void addStorage(WebDAVStorage storage) {
+		_instance._addStorage(storage);
+	}
+
+	public static void deleteStorage(WebDAVStorage storage) {
+		_instance._deleteStorage(storage);
+	}
 
 	public static String fixPath(String path) {
 		if (path.endsWith(StringPool.SLASH)) {
@@ -230,12 +232,8 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static String getStorageClass(String token) {
-		return _instance._getStorageClass(token);
-	}
-
-	public static String getStorageToken(String className) {
-		return _instance._getStorageToken(className);
+	public static WebDAVStorage getStorage(String token) {
+		return _instance._getStorage(token);
 	}
 
 	public static Collection<String> getStorageTokens() {
@@ -283,80 +281,30 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static boolean isEditEnabled(String className) {
-		return _instance._isEditEnabled(className);
-	}
-
-	public static boolean isEnabled(String className) {
-		return _instance._isEnabled(className);
-	}
-
 	public static boolean isOverwrite(HttpServletRequest request) {
 		return _instance._isOverwrite(request);
 	}
 
-	public static boolean isViewEnabled(String className) {
-		return _instance._isViewEnabled(className);
-	}
-
 	private WebDAVUtil() {
-		_storageMap = new HashMap<String, String>();
-		_storageEditUrls = new HashSet<String>();
-		_storageViewUrls = new HashSet<String>();
+		_storageMap = new TreeMap<String, WebDAVStorage>();
+	}
 
-		String[] tokens = PropsUtil.getArray(PropsKeys.WEBDAV_STORAGE_TOKENS);
+	private void _addStorage(WebDAVStorage storage) {
+		_storageMap.put(storage.getToken(), storage);
+	}
 
-		for (String token: tokens) {
-			Filter filter = new Filter(token);
-
-			String className = PropsUtil.get(
-				PropsKeys.WEBDAV_STORAGE_CLASS, filter);
-
-			if (Validator.isNotNull(className)) {
-				_storageMap.put(className, token);
-
-				boolean editUrl = GetterUtil.getBoolean(PropsUtil.get(
-					PropsKeys.WEBDAV_STORAGE_SHOW_EDIT_URL, filter));
-				boolean viewUrl = GetterUtil.getBoolean(PropsUtil.get(
-					PropsKeys.WEBDAV_STORAGE_SHOW_VIEW_URL, filter));
-
-				if (editUrl) {
-					_storageEditUrls.add(className);
-				}
-
-				if (viewUrl) {
-					_storageViewUrls.add(className);
-				}
-			}
+	private void _deleteStorage(WebDAVStorage storage) {
+		if (storage != null) {
+			_storageMap.remove(storage.getToken());
 		}
 	}
 
-	private String _getStorageClass(String token) {
-		if (_storageMap.containsValue(token)) {
-			for (String key : _storageMap.keySet()) {
-				if (_storageMap.get(key).equals(token)) {
-					return key;
-				}
-			}
-		}
-
-		return null;
-	}
-
-	private String _getStorageToken(String className) {
-		return _storageMap.get(className);
+	private WebDAVStorage _getStorage(String token) {
+		return _storageMap.get(token);
 	}
 
 	private Collection<String> _getStorageTokens() {
-		return _storageMap.values();
-	}
-
-	private boolean _isEditEnabled(String className) {
-		return _isEnabled(className) && _storageEditUrls.contains(className);
-	}
-
-	private boolean _isEnabled(String className) {
-		return _storageMap.containsKey(className);
+		return _storageMap.keySet();
 	}
 
 	private boolean _isOverwrite(HttpServletRequest request) {
@@ -370,18 +318,10 @@ public class WebDAVUtil {
 		}
 	}
 
-	private boolean _isViewEnabled(String className) {
-		return _isEnabled(className) && _storageViewUrls.contains(className);
-	}
-
 	private static Log _log = LogFactory.getLog(WebDAVUtil.class);
 
 	private static WebDAVUtil _instance = new WebDAVUtil();
 
-	private final Set<String> _storageEditUrls;
-
-	private final Set<String> _storageViewUrls;
-
-	private final Map<String, String> _storageMap;
+	private Map<String, WebDAVStorage> _storageMap;
 
 }

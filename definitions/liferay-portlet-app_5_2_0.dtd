@@ -22,13 +22,13 @@ open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, pop-message-listener-class?,
 social-activity-interpreter-class?, social-request-interpreter-class?,
-control-panel-entry-category?, control-panel-entry-weight?,
-control-panel-entry-class?, preferences-company-wide?,
-preferences-unique-per-layout?, preferences-owned-by-group?,
-use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-pop-up-print?, layout-cacheable?, instanceable?, scopeable?,
-user-principal-strategy?, private-request-attributes?,
+webdav-storage-token?, webdav-storage-class?, control-panel-entry-category?,
+control-panel-entry-weight?, control-panel-entry-class?,
+preferences-company-wide?, preferences-unique-per-layout?,
+preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
+show-portlet-inactive?, action-url-redirect?, restore-current-view?,
+maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
+scopeable?, user-principal-strategy?, private-request-attributes?,
 private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
 header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
 footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
@@ -216,6 +216,27 @@ See:
 http://docs.liferay.com/portal/5.2/javadocs/portal-service/com/liferay/portlet/social/model/SocialRequestInterpreter.html
 -->
 <!ELEMENT social-request-interpreter-class (#PCDATA)>
+
+<!--
+The webdav-storage-token value is the WebDAV directory name for data managed by
+this portlet.
+
+See:
+
+http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
+-->
+<!ELEMENT webdav-storage-token (#PCDATA)>
+
+<!--
+The webdav-storage-class value must be a class that implements
+com.liferay.portal.webdav.WebDAVStorage and allows data to be exposed via the
+WebDAV protocol.
+
+See:
+
+http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
+-->
+<!ELEMENT webdav-storage-class (#PCDATA)>
 
 <!--
 Set the control-panel-entry-category value to "my", "content", "portal" or
