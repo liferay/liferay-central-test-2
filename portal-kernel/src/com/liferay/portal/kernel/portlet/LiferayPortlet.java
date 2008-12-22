@@ -62,7 +62,7 @@ public class LiferayPortlet extends GenericPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		if (!hasPermissionActionRequest(actionRequest)) {
+		if (!isProcessActionRequest(actionRequest)) {
 			return;
 		}
 
@@ -85,7 +85,7 @@ public class LiferayPortlet extends GenericPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
-		if (!hasPermissionResourceRequest(resourceRequest)) {
+		if (!isProcessResourceRequest(resourceRequest)) {
 			return;
 		}
 
@@ -131,7 +131,7 @@ public class LiferayPortlet extends GenericPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (!hasPermissionRenderRequest(renderRequest)) {
+		if (!isProcessRenderRequest(renderRequest)) {
 			renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 
 			return;
@@ -219,27 +219,25 @@ public class LiferayPortlet extends GenericPortlet {
 		throw new PortletException("doPrint method not implemented");
 	}
 
-	protected boolean hasPermissionActionRequest(ActionRequest actionRequest) {
-		return hasPermissionPortletRequest(actionRequest);
+	protected boolean isProcessActionRequest(ActionRequest actionRequest) {
+		return isProcessPortletRequest(actionRequest);
 	}
 
-	protected boolean hasPermissionPortletRequest(
-		PortletRequest portletRequest) {
-
-		return _PERMISSION_PORTLET_REQUEST;
+	protected boolean isProcessPortletRequest(PortletRequest portletRequest) {
+		return _PROCESS_PORTLET_REQUEST;
 	}
 
-	protected boolean hasPermissionRenderRequest(RenderRequest renderRequest) {
-		return hasPermissionPortletRequest(renderRequest);
+	protected boolean isProcessRenderRequest(RenderRequest renderRequest) {
+		return isProcessPortletRequest(renderRequest);
 	}
 
-	protected boolean hasPermissionResourceRequest(
+	protected boolean isProcessResourceRequest(
 		ResourceRequest resourceRequest) {
 
-		return hasPermissionPortletRequest(resourceRequest);
+		return isProcessPortletRequest(resourceRequest);
 	}
 
-	private static final boolean _PERMISSION_PORTLET_REQUEST = true;
+	private static final boolean _PROCESS_PORTLET_REQUEST = true;
 
 	private Map<String, Class<?>> _classesMap = new HashMap<String, Class<?>>();
 	private Map<MethodKey, Method> _methodsMap =
