@@ -730,7 +730,7 @@
 	</library>
 	<library>
 		<file-name>global/container.jar</file-name>
-		<version>2.0 (trunk 802)</version>
+		<version>2.0 (trunk 803)</version>
 		<project-name>Portlet Container</project-name>
 		<project-url>https://portlet-container.dev.java.net</project-url>
 		<licenses>
@@ -752,7 +752,7 @@
 	</library>
 	<library>
 		<file-name>global/portlet-container.jar</file-name>
-		<version>2.0 (trunk 802)</version>
+		<version>2.0 (trunk 803)</version>
 		<project-name>Portlet Container</project-name>
 		<project-url>https://portlet-container.dev.java.net</project-url>
 		<licenses>

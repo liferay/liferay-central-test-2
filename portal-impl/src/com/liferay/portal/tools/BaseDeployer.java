@@ -418,6 +418,20 @@ public class BaseDeployer {
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
+		//add Sun portlet container entries, if portlet container impl is sun.
+
+		if ((PropsValues.PORTLET_CONTAINER_IMPL_SUN) &&
+			(this instanceof PortletDeployer)) {
+
+			Properties props = new Properties();
+
+			props.setProperty(PortletWarUpdater.ADD_WEB_XML, "true");
+
+			PortletWarUpdater warUpdater = new PortletWarUpdater(props);
+
+			warUpdater.preparePortlet(displayName, srcFile);
+		}
+
 		rewriteFiles(srcFile);
 
 		mergeDirectory(mergeDir, srcFile);
@@ -690,46 +704,11 @@ public class BaseDeployer {
 			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +
 				Time.getTimestamp());
 
-		if ((PropsValues.PORTLET_CONTAINER_IMPL_SUN) &&
-			(this instanceof PortletDeployer)) {
+		ExpandTask.expand(srcFile, tempDir);
 
-			File sunTempDir = new File(
-				SystemProperties.get(SystemProperties.TMP_DIR) +
-					File.separator + "sun" + File.separator +
-						Time.getTimestamp());
-
-			Properties props = new Properties();
-
-			props.setProperty(PortletWarUpdater.ADD_WEB_XML, "true");
-
-			PortletWarUpdater warUpdater = new PortletWarUpdater(props);
-
-			boolean success = warUpdater.preparePortlet(
-				srcFile, sunTempDir.toString());
-
-			if (success) {
-				File sunSrcFile = new File(
-					sunTempDir + File.separator + srcFile.getName());
-
-				ExpandTask.expand(sunSrcFile, tempDir);
-			}
-			else {
-				ExpandTask.expand(srcFile, tempDir);
-			}
-
-			deployDirectory(
-				tempDir, mergeDir, deployDir, displayName, overwrite,
-				pluginPackage);
-
-			DeleteTask.deleteDirectory(sunTempDir);
-		}
-		else {
-			ExpandTask.expand(srcFile, tempDir);
-
-			deployDirectory(
-				tempDir, mergeDir, deployDir, displayName, overwrite,
-				pluginPackage);
-		}
+		deployDirectory(
+		tempDir, mergeDir, deployDir, displayName, overwrite,
+		pluginPackage);
 
 		DeleteTask.deleteDirectory(tempDir);
 
