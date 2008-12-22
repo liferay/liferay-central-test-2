@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddTemplateTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddTemplateTest extends BaseTestCase {
-	public void testAddTemplate() throws Exception {
+public class ImportLARTest extends BaseTestCase {
+	public void testImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +51,11 @@ public class AddTemplateTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Templates"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Export / Import"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +64,7 @@ public class AddTemplateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Template']")) {
+				if (selenium.isElementPresent("_86_importFileName")) {
 					break;
 				}
 			}
@@ -70,79 +74,13 @@ public class AddTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Template']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_newTemplateId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_15_newTemplateId", RuntimeVariables.replace("Test"));
-		selenium.type("_15_newTemplateId", RuntimeVariables.replace("Test"));
-		selenium.typeKeys("_15_name",
-			RuntimeVariables.replace("Test Web Content Template"));
-		selenium.type("_15_name",
-			RuntimeVariables.replace("Test Web Content Template"));
-		selenium.typeKeys("_15_description",
-			RuntimeVariables.replace("This is a test web content!"));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("This is a test web content!"));
-		selenium.type("_15_xsl",
+		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontent\\Template.htm"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("save-and-continue")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("save-and-continue"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontent\\WebContent-LAR.portlet.lar"));
+		selenium.click("_86_DELETE_PORTLET_DATA");
+		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Cancel']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Web Content Template"));
 	}
 }

@@ -22,37 +22,44 @@
 
 package com.liferay.portalweb.portlet.webcontent;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="WebContentTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WebContentTests extends BaseTests {
+public class VerifyImportLARTest extends BaseTestCase {
+	public void testVerifyImportLAR() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public WebContentTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddArticle2Test.class);
-		addTestSuite(WorkflowTest.class);
-		addTestSuite(ApproveArticleTest.class);
-		addTestSuite(ExpireArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(AddTemplateTest.class);
-		//addTestSuite(AddFeedTest.class);
-		addTestSuite(SearchArticleTest.class);
-		addTestSuite(RecentPageTest.class);
-		//addTestSuite(AddNullArticleTest.class);
-		addTestSuite(AddNullTitleTest.class);
-		addTestSuite(CancelPopupTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+			try {
+				if (selenium.isElementPresent("link=Web Content Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article 2"));
+		selenium.click(RuntimeVariables.replace("link=Structures"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
+		selenium.click(RuntimeVariables.replace("link=Templates"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Web Content Template"));
 	}
-
 }

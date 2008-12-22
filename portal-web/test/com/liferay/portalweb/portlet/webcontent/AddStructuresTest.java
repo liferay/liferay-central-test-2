@@ -102,65 +102,8 @@ public class AddStructuresTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test web content structure!"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test web content structure!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_editorButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("_15_editorButton");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_xsdContent")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_15_xsdContent",
-			RuntimeVariables.replace(
-				"&lt;root&gt;\n &lt;dynamic-element name='title' type='text'&gt;&lt;/dynamic-element&gt;\n &lt;dynamic-element name='Itp' type='link_to_layout'&gt;&lt;/dynamic-element&gt;\n&lt;/root&gt;"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Update']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Update']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_15_structure_el0_name"));
-		assertTrue(selenium.isElementPresent("_15_structure_el1_name"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -168,7 +111,7 @@ public class AddStructuresTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("_15_structure_el0_name")) {
 					break;
 				}
 			}
@@ -178,12 +121,40 @@ public class AddStructuresTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_15_structure_el0_name",
+			RuntimeVariables.replace("Itp"));
+		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Itp"));
+		selenium.select("_15_structure_el0_type",
+			RuntimeVariables.replace("label=Link to Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_structure_el0_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_15_structure_el0_name",
+			RuntimeVariables.replace("title"));
+		selenium.type("_15_structure_el0_name",
+			RuntimeVariables.replace("title"));
+		selenium.select("_15_structure_el0_type",
+			RuntimeVariables.replace("label=Text"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -67,6 +67,7 @@ import com.liferay.portalweb.portlet.tagsadmin.TagsAdminTests;
 import com.liferay.portalweb.portlet.translator.TranslatorTests;
 import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
 import com.liferay.portalweb.portlet.updatemanager.UpdateManagerTests;
+import com.liferay.portalweb.portlet.webcontent.WebContentTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.WebContentDisplayTests;
 import com.liferay.portalweb.portlet.webcontentlist.WebContentListTests;
 import com.liferay.portalweb.portlet.webcontentsearch.WebContentSearchTests;
@@ -138,7 +139,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(TranslatorTests.class);
 		addTestSuite(UnitConverterTests.class);
 		addTestSuite(UpdateManagerTests.class);
-		//addTestSuite(WebContentTests.class);
+		addTestSuite(WebContentTests.class);
 		addTestSuite(WebContentDisplayTests.class);
 		addTestSuite(WebContentListTests.class);
 		addTestSuite(WebContentSearchTests.class);
