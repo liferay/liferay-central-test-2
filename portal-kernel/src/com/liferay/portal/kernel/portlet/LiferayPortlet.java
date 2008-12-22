@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -131,6 +132,8 @@ public class LiferayPortlet extends GenericPortlet {
 		throws IOException, PortletException {
 
 		if (!hasPermissionRenderRequest(renderRequest)) {
+			renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
+
 			return;
 		}
 
