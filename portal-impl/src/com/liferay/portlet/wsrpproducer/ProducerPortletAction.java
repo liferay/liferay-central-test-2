@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,9 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -41,25 +38,22 @@
  *
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
-%>
 
-<%@ include file="/html/portlet/wsrp_producer/init.jsp" %>
+package com.liferay.portlet.wsrpproducer;
 
-<%
-String producerId = ParamUtil.getString(request, "producerId");
+import com.sun.portal.wsrp.producer.portlets.AdminPortletAction;
 
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+/**
+ * <a href="ProducerPortletAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Manish Gupta
+ *
+ */
+public interface ProducerPortletAction extends AdminPortletAction{
 
-ConsumerRegistrationBean consumerRegistrationBean = (ConsumerRegistrationBean)row.getObject();
-%>
+	public static final int GET_REGISTRATION_PROPERTIES = 14;
+	public static final int ADD_REGISTRATION_PROPERTY = 15;
+	public static final int REMOVE_REGISTRATION_PROPERTY = 16;
+	public static final int SAVE_REGISTRATION_PROPERTY = 17;
 
-<liferay-ui:icon-menu>
-	<portlet:actionURL var="deleteURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(ProducerPortletAction.DELETE_CONSUMER_REGISTRATION) %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="producerId" value="<%= producerId %>" />
-		<portlet:param name="selectedConsumerRegistrations" value="<%= consumerRegistrationBean.getRegistrationHandle() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</liferay-ui:icon-menu>
+}

@@ -53,7 +53,7 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 
 <liferay-ui:icon-menu>
 	<portlet:actionURL var="editURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(ProducerPortletAction.GET_DETAILS) %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
@@ -61,7 +61,7 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
 	<portlet:actionURL var="consumerRegistrationsURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" />
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(ProducerPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" />
 		<portlet:param name="tabs1" value="consumer-registrations" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
@@ -69,8 +69,17 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 
 	<liferay-ui:icon image="permissions" message="consumer-registrations" url="<%= consumerRegistrationsURL %>" />
 
+	<portlet:actionURL var="registrationPropertiesURL">
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(ProducerPortletAction.GET_REGISTRATION_PROPERTIES) %>" />
+		<portlet:param name="tabs1" value="registration-properties" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon image="attributes" message="registration-properties" url="<%= registrationPropertiesURL %>" />
+
 	<portlet:actionURL var="deleteURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(ProducerPortletAction.DELETE) %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="selectedProducers" value="<%= producerBean.getProducerKey() %>" />
 	</portlet:actionURL>
