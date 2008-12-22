@@ -42,8 +42,11 @@ import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.WindowState;
 
 /**
@@ -58,6 +61,10 @@ public class LiferayPortlet extends GenericPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
+		if (!hasPermissionActionRequest(actionRequest)) {
+			return;
+		}
+
 		if (!callActionMethod(actionRequest, actionResponse)) {
 			return;
 		}
@@ -71,6 +78,17 @@ public class LiferayPortlet extends GenericPortlet {
 		if (Validator.isNotNull(redirect)) {
 			actionResponse.sendRedirect(redirect);
 		}
+	}
+
+	public void serveResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws IOException, PortletException {
+
+		if (!hasPermissionResourceRequest(resourceRequest)) {
+			return;
+		}
+
+		super.serveResource(resourceRequest, resourceResponse);
 	}
 
 	protected boolean callActionMethod(
@@ -112,41 +130,47 @@ public class LiferayPortlet extends GenericPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
+		if (!hasPermissionRenderRequest(renderRequest)) {
+			return;
+		}
+
 		WindowState state = renderRequest.getWindowState();
 
-		if (!state.equals(WindowState.MINIMIZED)) {
-			PortletMode mode = renderRequest.getPortletMode();
+		if (state.equals(WindowState.MINIMIZED)) {
+			return;
+		}
 
-			if (mode.equals(PortletMode.VIEW)) {
-				doView(renderRequest, renderResponse);
-			}
-			else if (mode.equals(LiferayPortletMode.ABOUT)) {
-				doAbout(renderRequest, renderResponse);
-			}
-			else if (mode.equals(LiferayPortletMode.CONFIG)) {
-				doConfig(renderRequest, renderResponse);
-			}
-			else if (mode.equals(PortletMode.EDIT)) {
-				doEdit(renderRequest, renderResponse);
-			}
-			else if (mode.equals(LiferayPortletMode.EDIT_DEFAULTS)) {
-				doEditDefaults(renderRequest, renderResponse);
-			}
-			else if (mode.equals(LiferayPortletMode.EDIT_GUEST)) {
-				doEditGuest(renderRequest, renderResponse);
-			}
-			else if (mode.equals(PortletMode.HELP)) {
-				doHelp(renderRequest, renderResponse);
-			}
-			else if (mode.equals(LiferayPortletMode.PREVIEW)) {
-				doPreview(renderRequest, renderResponse);
-			}
-			else if (mode.equals(LiferayPortletMode.PRINT)) {
-				doPrint(renderRequest, renderResponse);
-			}
-			else {
-				throw new PortletException(mode.toString());
-			}
+		PortletMode mode = renderRequest.getPortletMode();
+
+		if (mode.equals(PortletMode.VIEW)) {
+			doView(renderRequest, renderResponse);
+		}
+		else if (mode.equals(LiferayPortletMode.ABOUT)) {
+			doAbout(renderRequest, renderResponse);
+		}
+		else if (mode.equals(LiferayPortletMode.CONFIG)) {
+			doConfig(renderRequest, renderResponse);
+		}
+		else if (mode.equals(PortletMode.EDIT)) {
+			doEdit(renderRequest, renderResponse);
+		}
+		else if (mode.equals(LiferayPortletMode.EDIT_DEFAULTS)) {
+			doEditDefaults(renderRequest, renderResponse);
+		}
+		else if (mode.equals(LiferayPortletMode.EDIT_GUEST)) {
+			doEditGuest(renderRequest, renderResponse);
+		}
+		else if (mode.equals(PortletMode.HELP)) {
+			doHelp(renderRequest, renderResponse);
+		}
+		else if (mode.equals(LiferayPortletMode.PREVIEW)) {
+			doPreview(renderRequest, renderResponse);
+		}
+		else if (mode.equals(LiferayPortletMode.PRINT)) {
+			doPrint(renderRequest, renderResponse);
+		}
+		else {
+			throw new PortletException(mode.toString());
 		}
 	}
 
@@ -191,6 +215,28 @@ public class LiferayPortlet extends GenericPortlet {
 
 		throw new PortletException("doPrint method not implemented");
 	}
+
+	protected boolean hasPermissionActionRequest(ActionRequest actionRequest) {
+		return hasPermissionPortletRequest(actionRequest);
+	}
+
+	protected boolean hasPermissionPortletRequest(
+		PortletRequest portletRequest) {
+
+		return _PERMISSION_PORTLET_REQUEST;
+	}
+
+	protected boolean hasPermissionRenderRequest(RenderRequest renderRequest) {
+		return hasPermissionPortletRequest(renderRequest);
+	}
+
+	protected boolean hasPermissionResourceRequest(
+		ResourceRequest resourceRequest) {
+
+		return hasPermissionPortletRequest(resourceRequest);
+	}
+
+	private static final boolean _PERMISSION_PORTLET_REQUEST = true;
 
 	private Map<String, Class<?>> _classesMap = new HashMap<String, Class<?>>();
 	private Map<MethodKey, Method> _methodsMap =
