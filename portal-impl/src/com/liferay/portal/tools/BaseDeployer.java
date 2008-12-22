@@ -418,18 +418,17 @@ public class BaseDeployer {
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
-		//add Sun portlet container entries, if portlet container impl is sun.
-
 		if ((PropsValues.PORTLET_CONTAINER_IMPL_SUN) &&
 			(this instanceof PortletDeployer)) {
 
-			Properties props = new Properties();
+			Properties properties = new Properties();
 
-			props.setProperty(PortletWarUpdater.ADD_WEB_XML, "true");
+			properties.setProperty(PortletWarUpdater.ADD_WEB_XML, "true");
 
-			PortletWarUpdater warUpdater = new PortletWarUpdater(props);
+			PortletWarUpdater portletWarUpdater = new PortletWarUpdater(
+				properties);
 
-			warUpdater.preparePortlet(displayName, srcFile);
+			portletWarUpdater.preparePortlet(displayName, srcFile);
 		}
 
 		rewriteFiles(srcFile);
@@ -707,8 +706,8 @@ public class BaseDeployer {
 		ExpandTask.expand(srcFile, tempDir);
 
 		deployDirectory(
-		tempDir, mergeDir, deployDir, displayName, overwrite,
-		pluginPackage);
+			tempDir, mergeDir, deployDir, displayName, overwrite,
+			pluginPackage);
 
 		DeleteTask.deleteDirectory(tempDir);
 
