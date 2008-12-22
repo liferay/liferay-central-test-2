@@ -83,7 +83,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				int pos = Collections.binarySearch(
 					permissions, actionId, new PermissionActionIdComparator());
 
-				if (pos != -1) {
+				if (pos >= 0) {
 					return true;
 				}
 			}
