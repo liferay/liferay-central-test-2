@@ -114,7 +114,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[2]/nobr/a")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -124,7 +124,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[2]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -342,7 +342,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[2]/nobr/a")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -352,7 +352,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[2]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Document.txt"));
 
