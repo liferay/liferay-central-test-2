@@ -42,6 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResourceCodeLocalServiceImpl
 	extends ResourceCodeLocalServiceBaseImpl {
 
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public ResourceCode getResourceCode(long codeId)
 		throws PortalException, SystemException {
 
