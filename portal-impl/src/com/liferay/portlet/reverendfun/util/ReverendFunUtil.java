@@ -105,7 +105,7 @@ public class ReverendFunUtil {
 		catch (Exception e) {
 		}
 
-		String currentDate = _dates.get(1);
+		String currentDate = _dates.get(0);
 
 		return currentDate;
 	}
