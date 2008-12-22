@@ -273,41 +273,27 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		<br />
 
-		<table class="lfr-table">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="webdav-url" />
-			</td>
-			<td>
+		<%
+		StringBuffer sb = new StringBuffer();
 
-				<%
-				StringBuffer sb = new StringBuffer();
+		if (folder != null) {
+			DLFolder curFolder = folder;
 
-				if (folder != null) {
-					DLFolder curFolder = folder;
+			while (true) {
+				sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+				sb.insert(0, StringPool.SLASH);
 
-					while (true) {
-						sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
-						sb.insert(0, StringPool.SLASH);
-
-						if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-							break;
-						}
-						else {
-							curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-						}
-					}
+				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					break;
 				}
+				else {
+					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+				}
+			}
+		}
+		%>
 
-				Group group = layout.getGroup();
-				%>
-
-				<liferay-ui:input-resource
-					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
-				/>
-			</td>
-		</tr>
-		</table>
+		<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>
 

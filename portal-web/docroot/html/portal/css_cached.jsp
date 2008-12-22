@@ -1834,6 +1834,42 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/conversation.png);
 }
 
+/* ---------- Taglib webdav ---------- */
+
+.js .taglib-webdav.visible {
+	background: #F0F5F7;
+}
+
+.js .taglib-webdav .show-webdav {
+	display: block;
+}
+
+.js .taglib-webdav.visible .show-webdav {
+}
+
+.js .taglib-webdav table {
+	border: 1px solid #828F95;
+	border-left: none;
+	border-right: none;
+	display: none;
+}
+
+.js .taglib-webdav.visible table {
+	display: block;
+}
+
+.taglib-webdav table:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .taglib-webdav table {
+	height: 1%;
+}
+
 /* ---------- jQuery plugins ---------- */
 
 /* ---------- Tabs ---------- */
