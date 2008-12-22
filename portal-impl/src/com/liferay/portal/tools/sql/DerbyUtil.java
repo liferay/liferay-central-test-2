@@ -30,6 +30,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="DerbyUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -106,6 +109,11 @@ public class DerbyUtil extends DBUtil {
 				line.startsWith(ALTER_COLUMN_NAME)) {
 
 				line = "-- " + line;
+
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"This statement is not supported by Derby: " + line);
+				}
 			}
 
 			sb.append(line);
@@ -127,5 +135,6 @@ public class DerbyUtil extends DBUtil {
 	};
 
 	private static DerbyUtil _instance = new DerbyUtil();
+	private static Log _log = LogFactory.getLog(DBUtil.class);
 
 }
