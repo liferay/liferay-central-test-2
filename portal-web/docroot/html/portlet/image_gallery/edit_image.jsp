@@ -130,7 +130,7 @@ if (image != null) {
 			}
 
 			sb.append(StringPool.SLASH);
-			sb.append(HttpUtil.encodeURL(image.getNameWithExtension(), true));
+			sb.append(image.getNameWithExtension());
 
 			Group group = layout.getGroup();
 			%>

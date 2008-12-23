@@ -303,7 +303,7 @@ portletURL.setParameter("name", name);
 			}
 
 			sb.append(StringPool.SLASH);
-			sb.append(HttpUtil.encodeURL(titleWithExtension, true));
+			sb.append(titleWithExtension);
 
 			Group group = layout.getGroup();
 			%>
