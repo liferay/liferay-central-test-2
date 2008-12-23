@@ -367,6 +367,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			ClassLoader portletClassLoader, Iterator<Portlet> portletsItr)
 		throws Exception {
 
+		PortletInstanceFactory.clear(portlet);
+
 		Class<?> portletClass = null;
 
 		try {
