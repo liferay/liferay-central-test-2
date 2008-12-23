@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="RoleDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -42,12 +42,12 @@ public class RoleDisplayTerms extends DisplayTerms {
 
 	public static final String TYPE = "type";
 
-	public RoleDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public RoleDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		name = ParamUtil.getString(renderRequest, NAME);
-		description = ParamUtil.getString(renderRequest, DESCRIPTION);
-		type = ParamUtil.getInteger(renderRequest, TYPE);
+		name = ParamUtil.getString(portletRequest, NAME);
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
+		type = ParamUtil.getInteger(portletRequest, TYPE);
 	}
 
 	public String getName() {

@@ -24,7 +24,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="PasswordPolicySearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -34,10 +34,10 @@ import javax.portlet.RenderRequest;
  */
 public class PasswordPolicySearchTerms extends PasswordPolicyDisplayTerms {
 
-	public PasswordPolicySearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public PasswordPolicySearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		name = DAOParamUtil.getLike(renderRequest, NAME);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
 	}
 
 }

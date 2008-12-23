@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,11 +70,11 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 		"no-organizations-were-found";
 
 	public OrganizationSearch(
-		RenderRequest renderRequest, PortletURL iteratorURL) {
+		PortletRequest portletRequest, PortletURL iteratorURL) {
 
 		super(
-			renderRequest, new OrganizationDisplayTerms(renderRequest),
-			new OrganizationSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new OrganizationDisplayTerms(portletRequest),
+			new OrganizationSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		OrganizationDisplayTerms displayTerms =
@@ -101,12 +101,12 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
-					renderRequest);
+					portletRequest);
 
 			String orderByCol = ParamUtil.getString(
-				renderRequest, "orderByCol");
+				portletRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
-				renderRequest, "orderByType");
+				portletRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

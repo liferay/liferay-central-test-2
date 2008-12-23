@@ -24,7 +24,7 @@ package com.liferay.portal.kernel.dao.search;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,10 +48,10 @@ public class DisplayTerms {
 		andOperator = ParamUtil.getBoolean(request, AND_OPERATOR, true);
 	}
 
-	public DisplayTerms(RenderRequest renderRequest) {
-		keywords = ParamUtil.getString(renderRequest, KEYWORDS);
-		advancedSearch = ParamUtil.getBoolean(renderRequest, ADVANCED_SEARCH);
-		andOperator = ParamUtil.getBoolean(renderRequest, AND_OPERATOR, true);
+	public DisplayTerms(PortletRequest portletRequest) {
+		keywords = ParamUtil.getString(portletRequest, KEYWORDS);
+		advancedSearch = ParamUtil.getBoolean(portletRequest, ADVANCED_SEARCH);
+		andOperator = ParamUtil.getBoolean(portletRequest, AND_OPERATOR, true);
 	}
 
 	public String getKeywords() {

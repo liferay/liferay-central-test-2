@@ -28,8 +28,8 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="OrderSearch.java.html"><b><i>View Source</i></b></a>
@@ -51,10 +51,10 @@ public class OrderSearch extends SearchContainer<ShoppingOrder> {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-orders-were-found";
 
-	public OrderSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+	public OrderSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
 		super(
-			renderRequest, new OrderDisplayTerms(renderRequest),
-			new OrderSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new OrderDisplayTerms(portletRequest),
+			new OrderSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		OrderDisplayTerms displayTerms =

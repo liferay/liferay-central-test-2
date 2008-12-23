@@ -28,8 +28,8 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="TemplateSearch.java.html"><b><i>View Source</i></b></a>
@@ -49,10 +49,12 @@ public class TemplateSearch extends SearchContainer<JournalTemplate> {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-templates-were-found";
 
-	public TemplateSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+	public TemplateSearch(
+		PortletRequest portletRequest, PortletURL iteratorURL) {
+
 		super(
-			renderRequest, new TemplateDisplayTerms(renderRequest),
-			new TemplateSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new TemplateDisplayTerms(portletRequest),
+			new TemplateSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		TemplateDisplayTerms displayTerms =

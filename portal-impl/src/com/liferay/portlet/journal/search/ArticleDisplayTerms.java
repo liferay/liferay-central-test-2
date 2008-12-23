@@ -30,7 +30,7 @@ import com.liferay.portal.util.WebKeys;
 
 import java.util.Date;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="ArticleDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -64,22 +64,22 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public static final String STATUS = "status";
 
-	public ArticleDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public ArticleDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		groupId = themeDisplay.getScopeGroupId();
-		articleId = ParamUtil.getString(renderRequest, ARTICLE_ID);
-		version = ParamUtil.getDouble(renderRequest, VERSION);
-		title = ParamUtil.getString(renderRequest, TITLE);
-		description = ParamUtil.getString(renderRequest, DESCRIPTION);
-		content = ParamUtil.getString(renderRequest, CONTENT);
-		type = ParamUtil.getString(renderRequest, TYPE);
-		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
-		templateId = ParamUtil.getString(renderRequest, TEMPLATE_ID);
-		status = ParamUtil.getString(renderRequest, STATUS);
+		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
+		version = ParamUtil.getDouble(portletRequest, VERSION);
+		title = ParamUtil.getString(portletRequest, TITLE);
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
+		content = ParamUtil.getString(portletRequest, CONTENT);
+		type = ParamUtil.getString(portletRequest, TYPE);
+		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
+		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
+		status = ParamUtil.getString(portletRequest, STATUS);
 	}
 
 	public long getGroupId() {

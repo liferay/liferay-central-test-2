@@ -25,7 +25,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="UserDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -53,18 +53,18 @@ public class UserDisplayTerms extends DisplayTerms {
 
 	public static final String USER_GROUP_ID = "userGroupId";
 
-	public UserDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public UserDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		firstName = ParamUtil.getString(renderRequest, FIRST_NAME);
-		middleName = ParamUtil.getString(renderRequest, MIDDLE_NAME);
-		lastName = ParamUtil.getString(renderRequest, LAST_NAME);
-		screenName = ParamUtil.getString(renderRequest, SCREEN_NAME);
-		emailAddress = ParamUtil.getString(renderRequest, EMAIL_ADDRESS);
-		active = ParamUtil.getBoolean(renderRequest, ACTIVE, true);
-		organizationId = ParamUtil.getLong(renderRequest, ORGANIZATION_ID);
-		roleId = ParamUtil.getLong(renderRequest, ROLE_ID);
-		userGroupId = ParamUtil.getLong(renderRequest, USER_GROUP_ID);
+		firstName = ParamUtil.getString(portletRequest, FIRST_NAME);
+		middleName = ParamUtil.getString(portletRequest, MIDDLE_NAME);
+		lastName = ParamUtil.getString(portletRequest, LAST_NAME);
+		screenName = ParamUtil.getString(portletRequest, SCREEN_NAME);
+		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
+		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
+		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);
+		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
+		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);
 	}
 
 	public String getFirstName() {

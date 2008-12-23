@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,11 +66,11 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 		"no-password-policies-were-found";
 
 	public PasswordPolicySearch(
-		RenderRequest renderRequest, PortletURL iteratorURL) {
+		PortletRequest portletRequest, PortletURL iteratorURL) {
 
 		super(
-			renderRequest, new PasswordPolicyDisplayTerms(renderRequest),
-			new PasswordPolicySearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new PasswordPolicyDisplayTerms(portletRequest),
+			new PasswordPolicySearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		PasswordPolicyDisplayTerms displayTerms =
@@ -82,12 +82,12 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
-					renderRequest);
+					portletRequest);
 
 			String orderByCol = ParamUtil.getString(
-				renderRequest, "orderByCol");
+				portletRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
-				renderRequest, "orderByType");
+				portletRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

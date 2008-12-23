@@ -29,7 +29,7 @@ import com.liferay.portal.util.WebKeys;
 
 import java.util.Date;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="ArticleSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -39,22 +39,22 @@ import javax.portlet.RenderRequest;
  */
 public class ArticleSearchTerms extends ArticleDisplayTerms {
 
-	public ArticleSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public ArticleSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		groupId = themeDisplay.getScopeGroupId();
-		articleId = DAOParamUtil.getLike(renderRequest, ARTICLE_ID);
-		version = ParamUtil.getDouble(renderRequest, VERSION);
-		title = DAOParamUtil.getLike(renderRequest, TITLE);
-		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
-		content = DAOParamUtil.getLike(renderRequest, CONTENT);
-		type = DAOParamUtil.getString(renderRequest, TYPE);
-		structureId = DAOParamUtil.getString(renderRequest, STRUCTURE_ID);
-		templateId = DAOParamUtil.getString(renderRequest, TEMPLATE_ID);
-		status = ParamUtil.getString(renderRequest, STATUS);
+		articleId = DAOParamUtil.getLike(portletRequest, ARTICLE_ID);
+		version = ParamUtil.getDouble(portletRequest, VERSION);
+		title = DAOParamUtil.getLike(portletRequest, TITLE);
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		content = DAOParamUtil.getLike(portletRequest, CONTENT);
+		type = DAOParamUtil.getString(portletRequest, TYPE);
+		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
+		templateId = DAOParamUtil.getString(portletRequest, TEMPLATE_ID);
+		status = ParamUtil.getString(portletRequest, STATUS);
 	}
 
 	public void setGroupId(long groupId) {

@@ -28,8 +28,8 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="StructureSearch.java.html"><b><i>View Source</i></b></a>
@@ -50,11 +50,11 @@ public class StructureSearch extends SearchContainer<JournalStructure> {
 		"no-structures-were-found";
 
 	public StructureSearch(
-		RenderRequest renderRequest, PortletURL iteratorURL) {
+		PortletRequest portletRequest, PortletURL iteratorURL) {
 
 		super(
-			renderRequest, new StructureDisplayTerms(renderRequest),
-			new StructureSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new StructureDisplayTerms(portletRequest),
+			new StructureSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		StructureDisplayTerms displayTerms =

@@ -25,7 +25,7 @@ package com.liferay.portlet.shopping.search;
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="CouponSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -35,12 +35,12 @@ import javax.portlet.RenderRequest;
  */
 public class CouponSearchTerms extends CouponDisplayTerms {
 
-	public CouponSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public CouponSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		code = DAOParamUtil.getLike(renderRequest, CODE);
-		discountType = DAOParamUtil.getString(renderRequest, DISCOUNT_TYPE);
-		active = ParamUtil.getBoolean(renderRequest, ACTIVE, true);
+		code = DAOParamUtil.getLike(portletRequest, CODE);
+		discountType = DAOParamUtil.getString(portletRequest, DISCOUNT_TYPE);
+		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
 	}
 
 }

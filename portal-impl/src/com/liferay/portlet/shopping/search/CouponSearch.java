@@ -28,8 +28,8 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="CouponSearch.java.html"><b><i>View Source</i></b></a>
@@ -52,10 +52,10 @@ public class CouponSearch extends SearchContainer<ShoppingCoupon> {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-coupons-were-found";
 
-	public CouponSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+	public CouponSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
 		super(
-			renderRequest, new CouponDisplayTerms(renderRequest),
-			new CouponSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new CouponDisplayTerms(portletRequest),
+			new CouponSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		CouponDisplayTerms displayTerms =

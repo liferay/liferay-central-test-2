@@ -25,7 +25,7 @@ package com.liferay.portlet.shopping.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="OrderDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -45,14 +45,14 @@ public class OrderDisplayTerms extends DisplayTerms {
 
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
-	public OrderDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public OrderDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		number = ParamUtil.getString(renderRequest, NUMBER);
-		status = ParamUtil.getString(renderRequest, STATUS);
-		firstName = ParamUtil.getString(renderRequest, FIRST_NAME);
-		lastName = ParamUtil.getString(renderRequest, LAST_NAME);
-		emailAddress = ParamUtil.getString(renderRequest, EMAIL_ADDRESS);
+		number = ParamUtil.getString(portletRequest, NUMBER);
+		status = ParamUtil.getString(portletRequest, STATUS);
+		firstName = ParamUtil.getString(portletRequest, FIRST_NAME);
+		lastName = ParamUtil.getString(portletRequest, LAST_NAME);
+		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
 	}
 
 	public String getNumber() {

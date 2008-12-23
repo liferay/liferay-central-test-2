@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="FeedSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -36,16 +36,16 @@ import javax.portlet.RenderRequest;
  */
 public class FeedSearchTerms extends FeedDisplayTerms {
 
-	public FeedSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public FeedSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		groupId = themeDisplay.getScopeGroupId();
-		feedId = ParamUtil.getString(renderRequest, FEED_ID);
-		name = ParamUtil.getString(renderRequest, NAME);
-		description = ParamUtil.getString(renderRequest, DESCRIPTION);
+		feedId = ParamUtil.getString(portletRequest, FEED_ID);
+		name = ParamUtil.getString(portletRequest, NAME);
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
 }

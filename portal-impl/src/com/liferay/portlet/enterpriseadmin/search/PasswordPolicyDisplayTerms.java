@@ -25,7 +25,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="PasswordPolicyDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -37,10 +37,10 @@ public class PasswordPolicyDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";
 
-	public PasswordPolicyDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public PasswordPolicyDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		name = ParamUtil.getString(renderRequest, NAME);
+		name = ParamUtil.getString(portletRequest, NAME);
 	}
 
 	public String getName() {

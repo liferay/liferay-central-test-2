@@ -25,7 +25,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="OrganizationSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -35,18 +35,18 @@ import javax.portlet.RenderRequest;
  */
 public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 
-	public OrganizationSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public OrganizationSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		type = DAOParamUtil.getString(renderRequest, TYPE);
-		name = DAOParamUtil.getLike(renderRequest, NAME);
-		street = DAOParamUtil.getLike(renderRequest, STREET);
-		city = DAOParamUtil.getLike(renderRequest, CITY);
-		zip = DAOParamUtil.getLike(renderRequest, ZIP);
-		regionId = ParamUtil.getLong(renderRequest, REGION_ID);
-		countryId = ParamUtil.getLong(renderRequest, COUNTRY_ID);
+		type = DAOParamUtil.getString(portletRequest, TYPE);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
+		street = DAOParamUtil.getLike(portletRequest, STREET);
+		city = DAOParamUtil.getLike(portletRequest, CITY);
+		zip = DAOParamUtil.getLike(portletRequest, ZIP);
+		regionId = ParamUtil.getLong(portletRequest, REGION_ID);
+		countryId = ParamUtil.getLong(portletRequest, COUNTRY_ID);
 		parentOrganizationId = ParamUtil.getLong(
-			renderRequest, PARENT_ORGANIZATION_ID);
+			portletRequest, PARENT_ORGANIZATION_ID);
 	}
 
 	public Long getRegionIdObj() {

@@ -25,7 +25,7 @@ package com.liferay.portlet.shopping.search;
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="OrderSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -35,14 +35,14 @@ import javax.portlet.RenderRequest;
  */
 public class OrderSearchTerms extends OrderDisplayTerms {
 
-	public OrderSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public OrderSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		number = DAOParamUtil.getLike(renderRequest, NUMBER);
-		status = DAOParamUtil.getString(renderRequest, STATUS);
-		firstName = DAOParamUtil.getLike(renderRequest, FIRST_NAME);
-		lastName = DAOParamUtil.getLike(renderRequest, LAST_NAME);
-		emailAddress = DAOParamUtil.getLike(renderRequest, EMAIL_ADDRESS);
+		number = DAOParamUtil.getLike(portletRequest, NUMBER);
+		status = DAOParamUtil.getString(portletRequest, STATUS);
+		firstName = DAOParamUtil.getLike(portletRequest, FIRST_NAME);
+		lastName = DAOParamUtil.getLike(portletRequest, LAST_NAME);
+		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
 	}
 
 	public String getStatus() {

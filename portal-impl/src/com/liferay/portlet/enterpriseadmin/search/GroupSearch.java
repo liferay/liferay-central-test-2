@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,10 +65,10 @@ public class GroupSearch extends SearchContainer<Group> {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-communities-were-found";
 
-	public GroupSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+	public GroupSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
 		super(
-			renderRequest, new GroupDisplayTerms(renderRequest),
-			new GroupSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new GroupDisplayTerms(portletRequest),
+			new GroupSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		GroupDisplayTerms displayTerms = (GroupDisplayTerms)getDisplayTerms();
@@ -81,12 +81,12 @@ public class GroupSearch extends SearchContainer<Group> {
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
-					renderRequest);
+					portletRequest);
 
 			String orderByCol = ParamUtil.getString(
-				renderRequest, "orderByCol");
+				portletRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
-				renderRequest, "orderByType");
+				portletRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

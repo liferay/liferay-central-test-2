@@ -25,7 +25,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="GroupDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -39,11 +39,11 @@ public class GroupDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public GroupDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public GroupDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		name = ParamUtil.getString(renderRequest, NAME);
-		description = ParamUtil.getString(renderRequest, DESCRIPTION);
+		name = ParamUtil.getString(portletRequest, NAME);
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
 	public String getName() {

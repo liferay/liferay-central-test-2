@@ -39,8 +39,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -74,14 +74,17 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-articles-were-found";
 
-	public ArticleSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+	public ArticleSearch(
+		PortletRequest portletRequest, PortletURL iteratorURL) {
+
 		super(
-			renderRequest, new ArticleDisplayTerms(renderRequest),
-			new ArticleSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new ArticleDisplayTerms(portletRequest),
+			new ArticleSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
-		PortletConfig portletConfig = (PortletConfig)renderRequest.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig =
+			(PortletConfig)portletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		ArticleDisplayTerms displayTerms =
 			(ArticleDisplayTerms)getDisplayTerms();
@@ -118,12 +121,12 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
-					renderRequest);
+					portletRequest);
 
 			String orderByCol = ParamUtil.getString(
-				renderRequest, "orderByCol");
+				portletRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
-				renderRequest, "orderByType");
+				portletRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

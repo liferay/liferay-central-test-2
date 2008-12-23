@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="StructureSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -36,16 +36,16 @@ import javax.portlet.RenderRequest;
  */
 public class StructureSearchTerms extends StructureDisplayTerms {
 
-	public StructureSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public StructureSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		groupId = themeDisplay.getScopeGroupId();
-		structureId = DAOParamUtil.getLike(renderRequest, STRUCTURE_ID);
-		name = DAOParamUtil.getLike(renderRequest, NAME);
-		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
+		structureId = DAOParamUtil.getLike(portletRequest, STRUCTURE_ID);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 	}
 
 }

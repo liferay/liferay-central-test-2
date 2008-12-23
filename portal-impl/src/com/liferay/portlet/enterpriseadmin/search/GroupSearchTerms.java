@@ -24,7 +24,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="GroupSearchTerms.java.html"><b><i>View Source</i></b></a>
@@ -34,11 +34,11 @@ import javax.portlet.RenderRequest;
  */
 public class GroupSearchTerms extends GroupDisplayTerms {
 
-	public GroupSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public GroupSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		name = DAOParamUtil.getLike(renderRequest, NAME);
-		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 	}
 
 }

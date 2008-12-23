@@ -28,8 +28,8 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="FeedSearch.java.html"><b><i>View Source</i></b></a>
@@ -48,10 +48,10 @@ public class FeedSearch extends SearchContainer<JournalFeed> {
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-feeds-were-found";
 
-	public FeedSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+	public FeedSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
 		super(
-			renderRequest, new FeedDisplayTerms(renderRequest),
-			new FeedSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new FeedDisplayTerms(portletRequest),
+			new FeedSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		FeedDisplayTerms displayTerms = (FeedDisplayTerms)getDisplayTerms();

@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="TemplateDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -47,17 +47,17 @@ public class TemplateDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public TemplateDisplayTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public TemplateDisplayTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		groupId = themeDisplay.getScopeGroupId();
-		templateId = ParamUtil.getString(renderRequest, TEMPLATE_ID);
-		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
-		name = ParamUtil.getString(renderRequest, NAME);
-		description = ParamUtil.getString(renderRequest, DESCRIPTION);
+		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
+		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
+		name = ParamUtil.getString(portletRequest, NAME);
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
 	public long getGroupId() {
