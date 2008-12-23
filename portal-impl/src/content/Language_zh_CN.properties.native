@@ -2689,6 +2689,7 @@ proceed-to-the-next-step-to-define-permissions-on-the-x-portlet-itself=继续下
 proceed=继续
 processing-login=登录处理中，请稍候
 producer-id=生成方 ID
+producer-is-disabled-because-it-does-not-have-any-published-portlet=因为它没有任何出版portlets，生产商是残疾。
 producer-name=生成方名字
 producer=一个生成方
 producers=多个生成方

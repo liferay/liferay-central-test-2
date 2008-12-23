@@ -2689,6 +2689,7 @@ proceed-to-the-next-step-to-define-permissions-on-the-x-portlet-itself=Continue 
 proceed=Continuar
 processing-login=Autenticando...
 producer-id=Identificador del productor
+producer-is-disabled-because-it-does-not-have-any-published-portlet=El productor es lisiado porque no tiene ninguna portlets publicada.
 producer-name=Nombre del productor
 producer=Productor
 producers=Productores

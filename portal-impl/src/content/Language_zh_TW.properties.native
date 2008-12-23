@@ -2689,6 +2689,7 @@ proceed-to-the-next-step-to-define-permissions-on-the-x-portlet-itself=Proceed t
 proceed=進行
 processing-login=處理登入中, 請稍後
 producer-id=生產商ID
+producer-is-disabled-because-it-does-not-have-any-published-portlet=因為它沒有任何出版portlets，生產商是殘疾。
 producer-name=生產商名字
 producer=生產商
 producers=生產商

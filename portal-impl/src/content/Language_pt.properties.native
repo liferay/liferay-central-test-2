@@ -2689,6 +2689,7 @@ proceed-to-the-next-step-to-define-permissions-on-the-x-portlet-itself=Proceed t
 proceed=Prosiga
 processing-login=Processando o início de uma sessão
 producer-id=Identificação do produtor
+producer-is-disabled-because-it-does-not-have-any-published-portlet=O produtor é deficiente porque não tem nenhuma portlets publicada.
 producer-name=Nome do produtor
 producer=Produtor
 producers=Produtores
