@@ -49,6 +49,10 @@ import javax.servlet.ServletContext;
  */
 public class PortletInstanceFactory {
 
+	public static void clear(Portlet portlet) {
+		_instance._clear(portlet);
+	}
+
 	public static InvokerPortlet create(
 			Portlet portlet, ServletContext servletContext)
 		throws PortletException {
@@ -74,6 +78,42 @@ public class PortletInstanceFactory {
 
 	private PortletInstanceFactory() {
 		_pool = new ConcurrentHashMap<String, Map<String, InvokerPortlet>>();
+	}
+
+	private void _clear(Portlet portlet) {
+		Map<String, InvokerPortlet> portletInstances = _pool.get(
+			portlet.getRootPortletId());
+
+		if (portletInstances != null) {
+			Iterator<Map.Entry<String, InvokerPortlet>> itr =
+				portletInstances.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry<String, InvokerPortlet> entry = itr.next();
+
+				String portletId = entry.getKey();
+				InvokerPortlet invokerPortletInstance = entry.getValue();
+
+				if (PortletConstants.getInstanceId(portletId) == null) {
+					invokerPortletInstance.destroy();
+
+					break;
+				}
+			}
+		}
+
+		_pool.remove(portlet.getRootPortletId());
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(
+				portlet.getRootPortletId());
+
+			if (portletBag != null) {
+				portletBag.removePortletInstance();
+			}
+		}
 	}
 
 	private InvokerPortlet _create(
@@ -179,39 +219,7 @@ public class PortletInstanceFactory {
 	}
 
 	private void _destroy(Portlet portlet) {
-		Map<String, InvokerPortlet> portletInstances = _pool.get(
-			portlet.getRootPortletId());
-
-		if (portletInstances != null) {
-			Iterator<Map.Entry<String, InvokerPortlet>> itr =
-				portletInstances.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry<String, InvokerPortlet> entry = itr.next();
-
-				String portletId = entry.getKey();
-				InvokerPortlet invokerPortletInstance = entry.getValue();
-
-				if (PortletConstants.getInstanceId(portletId) == null) {
-					invokerPortletInstance.destroy();
-
-					break;
-				}
-			}
-		}
-
-		_pool.remove(portlet.getRootPortletId());
-
-		PortletApp portletApp = portlet.getPortletApp();
-
-		if (portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(
-				portlet.getRootPortletId());
-
-			if (portletBag != null) {
-				portletBag.removePortletInstance();
-			}
-		}
+		_clear(portlet);
 
 		PortletConfigFactory.destroy(portlet);
 		PortletContextFactory.destroy(portlet);

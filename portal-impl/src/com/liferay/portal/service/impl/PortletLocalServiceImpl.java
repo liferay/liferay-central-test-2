@@ -59,6 +59,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.bridges.jsp.JSPPortlet;
 import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
@@ -468,6 +469,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				Portlet portlet = _getPortletsPool().get(portletId);
 
 				portlets.add(portlet);
+
+				PortletInstanceFactory.clear(portlet);
 			}
 		}
 		catch (Exception e) {
