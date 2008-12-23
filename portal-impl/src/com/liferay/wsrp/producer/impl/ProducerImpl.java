@@ -56,9 +56,9 @@ import com.sun.portal.wsrp.producer.AbstractProducer;
 import com.sun.portal.wsrp.producer.ProducerException;
 import com.sun.portal.wsrp.producer.ProducerVersion;
 import com.sun.portal.wsrp.producer.ProfileMapManager;
-import com.sun.portal.wsrp.producer.impl.file.RegistrationPropertiesHelper;
 import com.sun.portal.wsrp.producer.registration.RegistrationRecord;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -116,12 +116,7 @@ public class ProducerImpl extends AbstractProducer {
 	public void addRegistrationPropertyDescription(
 		PropertyDescription propertyDescription) {
 
-		String registrationProperties =
-			RegistrationPropertiesHelper.addRegistrationProperty(
-				_producerModel.getRegistrationProperties(),
-					propertyDescription);
-
-		_producerModel.setRegistrationProperties(registrationProperties);
+		throw new UnsupportedOperationException();
 	}
 
 	public String getNamespace() {
@@ -176,11 +171,7 @@ public class ProducerImpl extends AbstractProducer {
 	public Set<PropertyDescription> getRegistrationPropertyDescriptions(
 		Set<String> desiredLocales) {
 
-		Set<PropertyDescription> propDescriptions =
-				RegistrationPropertiesHelper.getRegistrationPropertiesFromXML(
-					_producerModel.getRegistrationProperties());
-
-		return propDescriptions;
+		return Collections.EMPTY_SET;
 	}
 
 	public RegistrationRecord getRegistrationRecord(String registrationHandle)
@@ -257,42 +248,14 @@ public class ProducerImpl extends AbstractProducer {
 		return validRegistration;
 	}
 
-	public void modifyRegistration(RegistrationRecord registrationRecord)
-		throws ProducerException{
-
-		WSRPConsumerRegistration consumerRegistration =
-			getConsumerRegistrationByHandle(
-				registrationRecord.getRegistrationHandle());
-
-		consumerRegistration.setConsumerModes(StringUtil.merge(
-			registrationRecord.getConsumerModes())) ;
-		consumerRegistration.setConsumerWindowStates(StringUtil.merge(
-			registrationRecord.getConsumerWindowStates()));
-		consumerRegistration.setCustomUserProfileData(StringUtil.merge(
-			registrationRecord.getCustomUserProfileData()));
-		consumerRegistration.setConsumerUserScopes(StringUtil.merge(
-			registrationRecord.getConsumerUserScopes()));
-
-		consumerRegistration.setLifetimeTerminationTime(
-				getLifeTimeString(registrationRecord.getLifetime()));
-
-		try {
-			WSRPConsumerRegistrationLocalServiceUtil.
-				updateWSRPConsumerRegistration(consumerRegistration);
-		}
-		catch (Exception e) {
-			throw new ProducerException(e);
-		}
+	public void modifyRegistration(RegistrationRecord registrationRecord) {
+		throw new UnsupportedOperationException();
 	}
 
 	public void removeRegistrationPropertyDescriptions(
 		Set<String> propertyNames) {
 
-		String newRegistrationProperties =
-			RegistrationPropertiesHelper.removeRegistrationProperties(
-				_producerModel.getRegistrationProperties(),	propertyNames);
-
-		_producerModel.setRegistrationProperties(newRegistrationProperties);
+		throw new UnsupportedOperationException();
 	}
 
 	public void removeRegistrations(Set<String> registrationHandles)
