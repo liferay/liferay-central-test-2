@@ -79,7 +79,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.portlet.PortletPreferences;
 
@@ -581,6 +580,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			path);
 
 		long userId = context.getUserId(article.getUserUuid());
+
+		User user = UserLocalServiceUtil.getUser(userId);
+
 		long groupId = context.getGroupId();
 
 		String articleId = article.getArticleId();
@@ -612,10 +614,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		String parentTemplateId = MapUtil.getString(
 			templateIds, article.getTemplateId(), article.getTemplateId());
 
-		User user = UserLocalServiceUtil.getUser(userId);
-
-		TimeZone timeZone = user.getTimeZone();
-
 		Date displayDate = article.getDisplayDate();
 
 		int displayDateMonth = 0;
@@ -625,7 +623,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		int displayDateMinute = 0;
 
 		if (displayDate != null) {
-			Calendar displayCal = CalendarFactoryUtil.getCalendar(timeZone);
+			Calendar displayCal = CalendarFactoryUtil.getCalendar(
+				user.getTimeZone());
 
 			displayCal.setTime(displayDate);
 
@@ -650,7 +649,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		boolean neverExpire = true;
 
 		if (expirationDate != null) {
-			Calendar expirationCal = CalendarFactoryUtil.getCalendar(timeZone);
+			Calendar expirationCal = CalendarFactoryUtil.getCalendar(
+				user.getTimeZone());
 
 			expirationCal.setTime(expirationDate);
 
@@ -676,7 +676,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		boolean neverReview = true;
 
 		if (reviewDate != null) {
-			Calendar reviewCal = CalendarFactoryUtil.getCalendar(timeZone);
+			Calendar reviewCal = CalendarFactoryUtil.getCalendar(
+				user.getTimeZone());
 
 			reviewCal.setTime(reviewDate);
 
