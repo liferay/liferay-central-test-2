@@ -314,6 +314,7 @@ abstract-without-title=タイトルなしの概要
 abstract=概要
 abstracts=概要
 access-denied=アクセス拒否
+access-from-my-desktop=私の卓上からのアクセス。
 accessed-urls=アクセスしたURL
 account-created-notification=アカウント作成通知
 account-name=アカウント名
