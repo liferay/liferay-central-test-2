@@ -291,7 +291,7 @@ portletURL.setParameter("name", name);
 			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 			while (true) {
-				sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+				sb.insert(0, curFolder.getName());
 				sb.insert(0, StringPool.SLASH);
 
 				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
