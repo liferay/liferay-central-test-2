@@ -40,7 +40,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]")) {
+							"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]")) {
 					break;
 				}
 			}
@@ -51,7 +51,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]"));
+				"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

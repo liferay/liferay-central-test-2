@@ -40,7 +40,7 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]")) {
+							"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]")) {
 					break;
 				}
 			}
@@ -51,7 +51,7 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]"));
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

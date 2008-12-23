@@ -36,7 +36,6 @@ public class AddJavaScriptTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_88_title_en_US", RuntimeVariables.replace("Home"));
-		selenium.click("//tr[3]/td[2]/span/a/span[1]");
 		selenium.type("TypeSettingsProperties(javascript-1)",
 			RuntimeVariables.replace(
 				"&lt;script type=\"text/javascript\"&gt; \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n&lt;/script&gt;"));
@@ -59,8 +58,6 @@ public class AddJavaScriptTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.click("//tr[3]/td[2]/span/a/span[1]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
