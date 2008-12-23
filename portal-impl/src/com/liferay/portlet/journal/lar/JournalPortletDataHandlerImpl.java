@@ -42,6 +42,8 @@ import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
@@ -77,6 +79,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.portlet.PortletPreferences;
 
@@ -109,6 +112,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Karthik Sudarshan
  *
  * @see com.liferay.portal.lar.PortletDataHandler
  * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
@@ -608,6 +612,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		String parentTemplateId = MapUtil.getString(
 			templateIds, article.getTemplateId(), article.getTemplateId());
 
+		User user = UserLocalServiceUtil.getUser(userId);
+
+		TimeZone timeZone = user.getTimeZone();
+
 		Date displayDate = article.getDisplayDate();
 
 		int displayDateMonth = 0;
@@ -617,7 +625,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		int displayDateMinute = 0;
 
 		if (displayDate != null) {
-			Calendar displayCal = CalendarFactoryUtil.getCalendar();
+			Calendar displayCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 			displayCal.setTime(displayDate);
 
@@ -642,7 +650,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		boolean neverExpire = true;
 
 		if (expirationDate != null) {
-			Calendar expirationCal = CalendarFactoryUtil.getCalendar();
+			Calendar expirationCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 			expirationCal.setTime(expirationDate);
 
@@ -668,7 +676,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		boolean neverReview = true;
 
 		if (reviewDate != null) {
-			Calendar reviewCal = CalendarFactoryUtil.getCalendar();
+			Calendar reviewCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 			reviewCal.setTime(reviewDate);
 
