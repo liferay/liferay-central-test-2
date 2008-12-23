@@ -182,23 +182,21 @@ public class PortletInstanceFactory {
 		Map<String, InvokerPortlet> portletInstances = _pool.get(
 			portlet.getRootPortletId());
 
-		if (portletInstances == null) {
-			return;
-		}
+		if (portletInstances != null) {
+			Iterator<Map.Entry<String, InvokerPortlet>> itr =
+				portletInstances.entrySet().iterator();
 
-		Iterator<Map.Entry<String, InvokerPortlet>> itr =
-			portletInstances.entrySet().iterator();
+			while (itr.hasNext()) {
+				Map.Entry<String, InvokerPortlet> entry = itr.next();
 
-		while (itr.hasNext()) {
-			Map.Entry<String, InvokerPortlet> entry = itr.next();
+				String portletId = entry.getKey();
+				InvokerPortlet invokerPortletInstance = entry.getValue();
 
-			String portletId = entry.getKey();
-			InvokerPortlet invokerPortletInstance = entry.getValue();
+				if (PortletConstants.getInstanceId(portletId) == null) {
+					invokerPortletInstance.destroy();
 
-			if (PortletConstants.getInstanceId(portletId) == null) {
-				invokerPortletInstance.destroy();
-
-				break;
+					break;
+				}
 			}
 		}
 
@@ -210,7 +208,9 @@ public class PortletInstanceFactory {
 			PortletBag portletBag = PortletBagPool.get(
 				portlet.getRootPortletId());
 
-			portletBag.removePortletInstance();
+			if (portletBag != null) {
+				portletBag.removePortletInstance();
+			}
 		}
 
 		PortletConfigFactory.destroy(portlet);
