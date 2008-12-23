@@ -150,7 +150,7 @@
 
 				<c:if test='<%= request.getAttribute("PRODUCER_ADMIN_ERROR") != null %>'>
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="disable-producer-for-no-published-portlet" />
+						<liferay-ui:message key="producer-is-disabled-because-it-does-not-have-any-published-portlets" />
 					</span>
 				</c:if>
 
