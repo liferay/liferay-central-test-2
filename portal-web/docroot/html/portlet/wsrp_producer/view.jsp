@@ -144,6 +144,7 @@
 				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 				<input name="<portlet:namespace /><%= Constants.ACTION %>" type="hidden" value="<%= AdminPortletAction.UPDATE %>" />
 				<input name="<portlet:namespace />producerKey" type="hidden" value="<%= producerBean.getProducerKey() %>" />
+				<input name="<portlet:namespace /><%= AdminPortletConstants.PRESERVE_REG_PROPERTIES %>" type="hidden" value="true" />
 				<input name="<portlet:namespace />publishedPortletString" type="hidden" value="" />
 
 				<liferay-ui:tabs names="producer" />
@@ -720,6 +721,156 @@
 						</tr>
 					</tbody>
 				</c:if>
+				</table>
+
+				<br />
+
+				<input type="submit" value="<liferay-ui:message key="save" />" />
+
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+
+				</form>
+			</c:when>
+			<c:when test="<%= action == AdminPortletAction.GET_REGISTRATION_PROPERTIES %>">
+				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
+
+				<liferay-ui:tabs
+					names="producers,registration-properties"
+					url0="<%= renderResponse.createRenderURL().toString() %>"
+					url1="<%= currentURL %>"
+				/>
+
+				<%
+				String producerId = ParamUtil.getString(request, AdminPortletConstants.PRODUCERID);
+				String producerAdminError = GetterUtil.getString((String)request.getAttribute("PRODUCER_ADMIN_ERROR"));
+				%>
+
+				<c:if test='<%= producerAdminError.equals("OPERATION_FAILED") %>'>
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="operation-failed" />
+					</span>
+				</c:if>
+
+				<b><%= HtmlUtil.escape(producerId) %></b>
+
+				<br /><br />
+
+				<div>
+					<input type="button" value="<liferay-ui:message key="Add Registration Property" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.ADD_REGISTRATION_PROPERTY) %>" /><portlet:param name="<%= AdminPortletConstants.PRODUCERID %>" value="<%= HtmlUtil.escape(producerId) %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>';" />
+				</div>
+
+				<br />
+
+				<%
+				ProducerBean producerBean = (ProducerBean)portletSession.getAttribute("producerBean");
+				List<String> registrationPropertyDescriptions = producerBean.getRegistrationPropertyDescriptions();
+
+				SearchContainer searchContainer = new SearchContainer();
+
+				List<String> headerNames = new ArrayList<String>();
+
+				headerNames.add("name");
+				headerNames.add("description");
+				headerNames.add(StringPool.BLANK);
+
+				searchContainer.setHeaderNames(headerNames);
+				searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
+
+				List<String> results = null;
+
+				if (registrationPropertyDescriptions != null) {
+					results = registrationPropertyDescriptions;
+				}
+				else {
+					results = Collections.EMPTY_LIST;
+				}
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					String registrationPropertyDescription = results.get(i);
+
+					String[] propertyArray = registrationPropertyDescription.split(StringPool.EQUAL);
+
+					String propertyName = propertyArray[0];
+					String propertyDescription = propertyArray[1];
+
+					ResultRow row = new ResultRow(propertyName, propertyName, i);
+
+					// Name
+
+					row.addText(propertyName);
+
+					// Description
+
+					row.addText(propertyDescription);
+
+					// Action
+
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wsrp_producer/registration_property_action.jsp");
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+
+				</form>
+			</c:when>
+			<c:when test="<%= action == AdminPortletAction.ADD_REGISTRATION_PROPERTY %>">
+				<%
+				String producerId = ParamUtil.getString(request, AdminPortletConstants.PRODUCERID);
+				%>
+				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
+				<input name="<portlet:namespace />action" type="hidden" value="<%= AdminPortletAction.SAVE_REGISTRATION_PROPERTY %>" />
+				<input name="<portlet:namespace /><%= AdminPortletConstants.PRODUCERID %>" type="hidden" value="<%= HtmlUtil.escape(producerId) %>" />
+				<input name="<portlet:namespace />tabs1" type="hidden" value="registration-properties" />
+
+				<liferay-ui:tabs names="producer" />
+
+				<%
+				String producerAdminError = GetterUtil.getString((String)request.getAttribute("PRODUCER_ADMIN_ERROR"));
+				%>
+
+				<c:if test='<%= producerAdminError.equals("INVALID_PROPERTY_DATA") %>'>
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="registration-property-name-and-description-are-mandatory" />
+					</span>
+				</c:if>
+
+				<c:if test='<%= producerAdminError.equals("DUPLICATE_PROPERTY_NAME") %>'>
+					<span class="portlet-msg-error">
+						<liferay-ui:message key="registration-property-name-already-exists" />
+					</span>
+				</c:if>
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="producer-name" />
+					</td>
+					<td>
+						<b><%= ParamUtil.getString(request, AdminPortletConstants.PRODUCERID) %></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="Property Name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />property_name" type="text" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="description" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />property_desc" type="text" value="" />
+					</td>
+				</tr>
 				</table>
 
 				<br />

@@ -46,42 +46,19 @@
 <%@ include file="/html/portlet/wsrp_producer/init.jsp" %>
 
 <%
+String producerId = ParamUtil.getString(request, "producerId");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
+String propertyName = (String)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:actionURL var="editURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_DETAILS) %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-
-	<portlet:actionURL var="consumerRegistrationsURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.LIST_CONSUMER_REGISTRATIONS) %>" />
-		<portlet:param name="tabs1" value="consumer-registrations" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon image="permissions" message="consumer-registrations" url="<%= consumerRegistrationsURL %>" />
-
-	<portlet:actionURL var="registrationPropertiesURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_REGISTRATION_PROPERTIES) %>" />
-		<portlet:param name="tabs1" value="registration-properties" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon image="attributes" message="registration-properties" url="<%= registrationPropertiesURL %>" />
-
 	<portlet:actionURL var="deleteURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="selectedProducers" value="<%= producerBean.getProducerKey() %>" />
+		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.REMOVE_REGISTRATION_PROPERTY) %>" />
+		<portlet:param name="tabs1" value="registration-properties" />
+		<portlet:param name="producerId" value="<%= producerId %>" />
+		<portlet:param name="selectedRegistrationProperty" value="<%= propertyName %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
