@@ -181,14 +181,16 @@ public class ImageServlet extends HttpServlet {
 		}
 
 		if (imageId <= 0) {
-			Long companyId = ParamUtil.getLong(request, "companyId");
+			long companyId = ParamUtil.getLong(request, "companyId");
 			String screenName = ParamUtil.getString(request, "screenName");
 
 			try {
-				User user = UserLocalServiceUtil.getUserByScreenName(
-					companyId, screenName);
+				if (Validator.isNotNull(screenName)) {
+					User user = UserLocalServiceUtil.getUserByScreenName(
+						companyId, screenName);
 
-				imageId = user.getPortraitId();
+					imageId = user.getPortraitId();
+				}
 			}
 			catch (Exception e) {
 			}
