@@ -96,7 +96,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//nobr/a")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -106,7 +106,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//nobr/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
