@@ -185,7 +185,7 @@ public class ImageServlet extends HttpServlet {
 			String screenName = ParamUtil.getString(request, "screenName");
 
 			try {
-				if (Validator.isNotNull(screenName)) {
+				if ((companyId > 0) && Validator.isNotNull(screenName)) {
 					User user = UserLocalServiceUtil.getUserByScreenName(
 						companyId, screenName);
 
