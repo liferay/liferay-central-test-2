@@ -41,7 +41,6 @@
 
 package com.liferay.portal.portletcontainer;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
@@ -662,49 +661,26 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 	private List<String> _getRoles(HttpServletRequest request) {
 		if (_remoteUserId <= 0) {
-			return Collections.emptyList();
-		}
-
-		long companyId = PortalUtil.getCompanyId(request);
-
-		List<Role> roles = null;
-
-		try {
-			List<Role> tmpRoles = RoleLocalServiceUtil.getRoles(companyId);
-			if (tmpRoles != null) {
-				roles = new ArrayList<Role>(tmpRoles);
-			}
-		}
-		catch (SystemException se) {
-			_log.error(se);
-		}
-
-		if (roles == null || roles.isEmpty()) {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<Role> userRoles = null;
-
 		try {
-			userRoles = RoleLocalServiceUtil.getUserRoles(_remoteUserId);
-		}
-		catch (SystemException se) {
-			_log.error(se);
-		}
+			long companyId = PortalUtil.getCompanyId(request);
 
-		if (userRoles == null || userRoles.isEmpty()) {
-			return Collections.EMPTY_LIST;
-		}
-		else {
+			List<Role> roles = RoleLocalServiceUtil.getUserRoles(_remoteUserId);
+
 			List<String> roleNames = new ArrayList<String>(roles.size());
-
-			roles.retainAll(userRoles);
 
 			for (Role role : roles) {
 				roleNames.add(role.getName());
 			}
 
 			return roleNames;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return Collections.EMPTY_LIST;
 		}
 	}
 
