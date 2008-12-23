@@ -30,8 +30,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -172,9 +174,23 @@ public class ImageServlet extends HttpServlet {
 
 		if (imageId <= 0) {
 			imageId = ParamUtil.getLong(request, "img_id");
+		}
 
-			if (imageId <= 0) {
-				imageId = ParamUtil.getLong(request, "i_id");
+		if (imageId <= 0) {
+			imageId = ParamUtil.getLong(request, "i_id");
+		}
+
+		if (imageId <= 0) {
+			Long companyId = ParamUtil.getLong(request, "companyId");
+			String screenName = ParamUtil.getString(request, "screenName");
+
+			try {
+				User user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
+
+				imageId = user.getPortraitId();
+			}
+			catch (Exception e) {
 			}
 		}
 
