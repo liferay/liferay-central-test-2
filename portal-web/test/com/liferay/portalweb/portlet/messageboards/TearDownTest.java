@@ -33,6 +33,26 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class TearDownTest extends BaseTestCase {
 	public void testTearDown() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {

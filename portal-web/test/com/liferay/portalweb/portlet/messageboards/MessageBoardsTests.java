@@ -53,6 +53,9 @@ public class MessageBoardsTests extends BaseTests {
 		addTestSuite(DeleteMessageTest.class);
 		addTestSuite(EditCategoryTest.class);
 		addTestSuite(EditMessageTest.class);
+		addTestSuite(DeleteAllTest.class);
+		addTestSuite(ImportLARTest.class);
+		addTestSuite(VerifyImportLARTest.class);
 		addTestSuite(TearDownTest.class);
 	}
 
