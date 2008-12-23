@@ -235,6 +235,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portlet.setActive(true);
 				portlet.setUndeployedPortlet(true);
+
+				companyPortletsPool.put(portletId, portlet);
 			}
 		}
 
