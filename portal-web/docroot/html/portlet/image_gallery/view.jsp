@@ -302,7 +302,7 @@ List scores = null;
 			IGFolder curFolder = folder;
 
 			while (true) {
-				sb.insert(0, curFolder.getName());
+				sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
 				sb.insert(0, StringPool.SLASH);
 
 				if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
