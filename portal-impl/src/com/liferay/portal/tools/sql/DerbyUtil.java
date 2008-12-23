@@ -134,7 +134,8 @@ public class DerbyUtil extends DBUtil {
 		" generated always as identity", "commit"
 	};
 
-	private static DerbyUtil _instance = new DerbyUtil();
 	private static Log _log = LogFactory.getLog(DBUtil.class);
+
+	private static DerbyUtil _instance = new DerbyUtil();
 
 }
