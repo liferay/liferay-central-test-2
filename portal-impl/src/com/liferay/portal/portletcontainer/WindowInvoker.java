@@ -670,7 +670,10 @@ public class WindowInvoker extends InvokerPortletImpl {
 		List<Role> roles = null;
 
 		try {
-			roles = RoleLocalServiceUtil.getRoles(companyId);
+			List<Role> tmpRoles = RoleLocalServiceUtil.getRoles(companyId);
+			if (tmpRoles != null) {
+				roles = new ArrayList<Role>(tmpRoles);
+			}
 		}
 		catch (SystemException se) {
 			_log.error(se);
@@ -679,8 +682,23 @@ public class WindowInvoker extends InvokerPortletImpl {
 		if (roles == null || roles.isEmpty()) {
 			return Collections.EMPTY_LIST;
 		}
+
+		List<Role> userRoles = null;
+
+		try {
+			userRoles = RoleLocalServiceUtil.getUserRoles(_remoteUserId);
+		}
+		catch (SystemException se) {
+			_log.error(se);
+		}
+
+		if (userRoles == null || userRoles.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
 		else {
 			List<String> roleNames = new ArrayList<String>(roles.size());
+
+			roles.retainAll(userRoles);
 
 			for (Role role : roles) {
 				roleNames.add(role.getName());
