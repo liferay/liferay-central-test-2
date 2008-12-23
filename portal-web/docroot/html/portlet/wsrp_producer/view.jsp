@@ -381,7 +381,7 @@
 
 				<c:if test='<%= producerAdminError.equals("PRODUCER_NAME_INVALID") %>'>
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="producer-name-invalid" />
+						<liferay-ui:message key="producer-name-is-invalid" />
 					</span>
 				</c:if>
 
@@ -534,7 +534,7 @@
 
 				<c:if test='<%= producerAdminError.equals("CONSUMER_REGIS_FAILED") %>'>
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="consumer-registration-failed" />
+						<liferay-ui:message key="failed-to-register-consumer" />
 					</span>
 				</c:if>
 
@@ -732,6 +732,11 @@
 				</form>
 			</c:when>
 			<c:when test="<%= action == AdminPortletAction.GET_REGISTRATION_PROPERTIES %>">
+
+				<%
+				String producerId = ParamUtil.getString(request, "producerId");
+				%>
+
 				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 
 				<liferay-ui:tabs
@@ -741,13 +746,12 @@
 				/>
 
 				<%
-				String producerId = ParamUtil.getString(request, AdminPortletConstants.PRODUCERID);
 				String producerAdminError = GetterUtil.getString((String)request.getAttribute("PRODUCER_ADMIN_ERROR"));
 				%>
 
 				<c:if test='<%= producerAdminError.equals("OPERATION_FAILED") %>'>
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="operation-failed" />
+						<liferay-ui:message key="failed-to-get-registration-properties" />
 					</span>
 				</c:if>
 
@@ -756,13 +760,14 @@
 				<br /><br />
 
 				<div>
-					<input type="button" value="<liferay-ui:message key="Add Registration Property" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.ADD_REGISTRATION_PROPERTY) %>" /><portlet:param name="<%= AdminPortletConstants.PRODUCERID %>" value="<%= HtmlUtil.escape(producerId) %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>';" />
+					<input type="button" value="<liferay-ui:message key="add-registration-property" />" onClick="location.href = '<portlet:actionURL><portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.ADD_REGISTRATION_PROPERTY) %>" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="producerId" value="<%= HtmlUtil.escape(producerId) %>" /></portlet:actionURL>';" />
 				</div>
 
 				<br />
 
 				<%
 				ProducerBean producerBean = (ProducerBean)portletSession.getAttribute("producerBean");
+
 				List<String> registrationPropertyDescriptions = producerBean.getRegistrationPropertyDescriptions();
 
 				SearchContainer searchContainer = new SearchContainer();
@@ -820,13 +825,15 @@
 				</form>
 			</c:when>
 			<c:when test="<%= action == AdminPortletAction.ADD_REGISTRATION_PROPERTY %>">
+
 				<%
-				String producerId = ParamUtil.getString(request, AdminPortletConstants.PRODUCERID);
+				String producerId = ParamUtil.getString(request, "producerId");
 				%>
+
 				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 				<input name="<portlet:namespace />action" type="hidden" value="<%= AdminPortletAction.SAVE_REGISTRATION_PROPERTY %>" />
-				<input name="<portlet:namespace /><%= AdminPortletConstants.PRODUCERID %>" type="hidden" value="<%= HtmlUtil.escape(producerId) %>" />
 				<input name="<portlet:namespace />tabs1" type="hidden" value="registration-properties" />
+				<input name="<portlet:namespace />producerId" type="hidden" value="<%= HtmlUtil.escape(producerId) %>" />
 
 				<liferay-ui:tabs names="producer" />
 
@@ -836,7 +843,7 @@
 
 				<c:if test='<%= producerAdminError.equals("INVALID_PROPERTY_DATA") %>'>
 					<span class="portlet-msg-error">
-						<liferay-ui:message key="registration-property-name-and-description-are-mandatory" />
+						<liferay-ui:message key="registration-property-name-and-description-are-required" />
 					</span>
 				</c:if>
 
@@ -852,15 +859,15 @@
 						<liferay-ui:message key="producer-name" />
 					</td>
 					<td>
-						<b><%= ParamUtil.getString(request, AdminPortletConstants.PRODUCERID) %></b>
+						<b><%= producerId %></b>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="Property Name" />
+						<liferay-ui:message key="property-name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />property_name" type="text" value="" />
+						<input class="lfr-input-text" name="<portlet:namespace />property_name" type="text" />
 					</td>
 				</tr>
 				<tr>
@@ -868,7 +875,7 @@
 						<liferay-ui:message key="description" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />property_desc" type="text" value="" />
+						<input class="lfr-input-text" name="<portlet:namespace />property_desc" type="text" />
 					</td>
 				</tr>
 				</table>

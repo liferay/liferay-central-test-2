@@ -176,11 +176,8 @@ public class ProducerImpl extends AbstractProducer {
 	public Set<PropertyDescription> getRegistrationPropertyDescriptions(
 		Set<String> desiredLocales) {
 
-		Set<PropertyDescription> propDescriptions =
-				RegistrationPropertiesHelper.getRegistrationPropertiesFromXML(
-					_producerModel.getRegistrationProperties());
-
-		return propDescriptions;
+		return RegistrationPropertiesHelper.getRegistrationPropertiesFromXML(
+			_producerModel.getRegistrationProperties());
 	}
 
 	public RegistrationRecord getRegistrationRecord(String registrationHandle)
@@ -264,16 +261,16 @@ public class ProducerImpl extends AbstractProducer {
 			getConsumerRegistrationByHandle(
 				registrationRecord.getRegistrationHandle());
 
-		consumerRegistration.setConsumerModes(StringUtil.merge(
-			registrationRecord.getConsumerModes())) ;
-		consumerRegistration.setConsumerWindowStates(StringUtil.merge(
-			registrationRecord.getConsumerWindowStates()));
-		consumerRegistration.setCustomUserProfileData(StringUtil.merge(
-			registrationRecord.getCustomUserProfileData()));
-		consumerRegistration.setConsumerUserScopes(StringUtil.merge(
-			registrationRecord.getConsumerUserScopes()));
+		consumerRegistration.setConsumerModes(
+			StringUtil.merge(registrationRecord.getConsumerModes())) ;
+		consumerRegistration.setCustomUserProfileData(
+			StringUtil.merge(registrationRecord.getCustomUserProfileData()));
+		consumerRegistration.setConsumerUserScopes(
+			StringUtil.merge(registrationRecord.getConsumerUserScopes()));
+		consumerRegistration.setConsumerWindowStates(
+			StringUtil.merge(registrationRecord.getConsumerWindowStates()));
 		consumerRegistration.setLifetimeTerminationTime(
-				getLifeTimeString(registrationRecord.getLifetime()));
+			getLifeTimeString(registrationRecord.getLifetime()));
 
 		try {
 			WSRPConsumerRegistrationLocalServiceUtil.
@@ -287,11 +284,11 @@ public class ProducerImpl extends AbstractProducer {
 	public void removeRegistrationPropertyDescriptions(
 		Set<String> propertyNames) {
 
-		String newRegistrationProperties =
+		String registrationProperties =
 			RegistrationPropertiesHelper.removeRegistrationProperties(
 				_producerModel.getRegistrationProperties(), propertyNames);
 
-		_producerModel.setRegistrationProperties(newRegistrationProperties);
+		_producerModel.setRegistrationProperties(registrationProperties);
 	}
 
 	public void removeRegistrations(Set<String> registrationHandles)
