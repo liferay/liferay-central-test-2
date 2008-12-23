@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -45,10 +44,6 @@ public class WebDAVTagUtil {
 		throws JspException {
 
 		try {
-			if (Validator.isNull(path)) {
-				return;
-			}
-
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
