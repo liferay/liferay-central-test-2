@@ -47,12 +47,17 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.portletcontainer.PortletWindowContextImpl;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import com.sun.portal.container.PortletWindowContext;
@@ -60,6 +65,7 @@ import com.sun.portal.wsrp.common.WSRPSpecKeys;
 import com.sun.portal.wsrp.common.stubs.v2.UserContext;
 import com.sun.portal.wsrp.producer.Producer;
 import com.sun.portal.wsrp.producer.ProducerException;
+import com.sun.portal.wsrp.producer.filter.ProducerThreadLocalizer;
 import com.sun.portal.wsrp.producer.usermanager.UserManager;
 
 import java.util.List;
@@ -171,9 +177,26 @@ public class UserManagerImpl implements UserManager{
 		}
 
 		themeDisplay.setLayout(layout);
+		themeDisplay.setScopeGroupId(layout.getGroupId());
+
+		PermissionChecker permissionChecker = (PermissionChecker)Class.forName(
+			PropsValues.PERMISSIONS_CHECKER).newInstance();
+
+		permissionChecker.init(themeDisplay.getUser(), true);
+
+		themeDisplay.setPermissionChecker(permissionChecker);
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 		request.setAttribute(WebKeys.LAYOUT, layout);
+		request.setAttribute(WebKeys.CTX, ProducerThreadLocalizer.getContext());
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+		long companyId = PortalInstances.getCompanyId(request);
+		CompanyThreadLocal.setCompanyId(companyId);
+
+		long userId = themeDisplay.getUser().getUserId();
+		PrincipalThreadLocal.setName(String.valueOf(userId));
 	}
 
 	private static final String _IS_WSRP_REQUEST = "is.wsrp.request";
