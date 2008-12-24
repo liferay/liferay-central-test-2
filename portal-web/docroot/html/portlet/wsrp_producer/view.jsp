@@ -458,7 +458,7 @@
 
 				<liferay-ui:tabs
 					names="producers,consumer-registrations"
-					url0="<%= redirect %>"
+					url0="<%= renderResponse.createRenderURL().toString() %>"
 					url1="<%= currentURL %>"
 				/>
 
@@ -525,6 +525,7 @@
 				<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 				<input name="action" type="hidden" value="<%= AdminPortletAction.CREATE_CONSUMER_REGISTRATION %>" />
 				<input name="producerId" type="hidden" value="<%= HtmlUtil.escape(producerId) %>" />
+				<input name="<portlet:namespace />tabs1" type="hidden" value="consumer-registrations" />
 
 				<liferay-ui:tabs names="consumer-registration" />
 
