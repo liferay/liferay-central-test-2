@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.dao.search.TextSearchEntry;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
@@ -73,6 +74,10 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 				}
 			}
 
+			if (_translate) {
+				_value = LanguageUtil.get(pageContext, _value);
+			}
+
 			if (index <= -1) {
 				index = row.getEntries().size();
 			}
@@ -101,6 +106,7 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			_property = null;
 			_target = null;
 			_title = null;
+			_translate = false;
 			valign = SearchEntry.DEFAULT_VALIGN;
 			_value = null;
 		}
@@ -228,6 +234,10 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 		_title = title;
 	}
 
+	public void setTranslate(boolean translate) {
+		_translate = translate;
+	}
+
 	public void setValue(String value) {
 		_value = value;
 	}
@@ -240,6 +250,7 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 	private StringBuilder _sb;
 	private String _target;
 	private String _title;
+	private boolean _translate;
 	private String _value;
 
 }

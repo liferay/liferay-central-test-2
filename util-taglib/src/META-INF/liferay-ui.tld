@@ -1804,6 +1804,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>translate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>valign</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
