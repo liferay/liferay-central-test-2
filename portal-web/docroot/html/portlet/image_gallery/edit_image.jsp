@@ -116,13 +116,9 @@ if (image != null) {
 
 			<%
 			StringBuffer sb = new StringBuffer();
-			String pathname = null;
 
 			while (true) {
-				pathname = HttpUtil.encodeURL(folder.getName());
-				pathname = StringUtil.replace(pathname, StringPool.PLUS, StringPool.SPACE);
-
-				sb.insert(0, pathname);
+				sb.insert(0, HttpUtil.encodeURL(folder.getName()));
 				sb.insert(0, StringPool.SLASH);
 
 				if (folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
@@ -133,11 +129,8 @@ if (image != null) {
 				}
 			}
 
-			pathname = HttpUtil.encodeURL(image.getNameWithExtension());
-			pathname = StringUtil.replace(pathname, StringPool.PLUS, StringPool.SPACE);
-
 			sb.append(StringPool.SLASH);
-			sb.append(pathname);
+			sb.append(HttpUtil.encodeURL(image.getNameWithExtension()));
 
 			Group group = layout.getGroup();
 			%>
