@@ -588,7 +588,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		try {
 			byte[] bytes = null;
-			
+
 			if ((file != null) && file.exists()) {
 				bytes = FileUtil.getBytes(file);
 			}
@@ -610,7 +610,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		try {
 			byte[] bytes = null;
-			
+
 			if (is != null) {
 				bytes = FileUtil.getBytes(is);
 			}
