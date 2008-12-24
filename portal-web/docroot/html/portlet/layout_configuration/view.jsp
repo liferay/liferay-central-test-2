@@ -43,7 +43,7 @@
 
 				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 					<div class="portal-add-content-search">
-						<span id="portal_add_content_title"><liferay-ui:message key="search-application-searches-as-you-type" /></span>
+						<span id="portal_add_content_title"><liferay-ui:message key="search-applications-searches-as-you-type" /></span>
 
 						<input class="lfr-auto-focus" id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
 					</div>
