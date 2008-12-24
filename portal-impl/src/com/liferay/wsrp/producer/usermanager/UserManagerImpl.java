@@ -186,17 +186,19 @@ public class UserManagerImpl implements UserManager{
 
 		themeDisplay.setPermissionChecker(permissionChecker);
 
-		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
-		request.setAttribute(WebKeys.LAYOUT, layout);
-		request.setAttribute(WebKeys.CTX, ProducerThreadLocalizer.getContext());
-
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 		long companyId = PortalInstances.getCompanyId(request);
+
 		CompanyThreadLocal.setCompanyId(companyId);
 
-		long userId = themeDisplay.getUser().getUserId();
+		long userId = themeDisplay.getUserId();
+
 		PrincipalThreadLocal.setName(String.valueOf(userId));
+
+		request.setAttribute(WebKeys.CTX, ProducerThreadLocalizer.getContext());
+		request.setAttribute(WebKeys.LAYOUT, layout);
+		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 	}
 
 	private static final String _IS_WSRP_REQUEST = "is.wsrp.request";
