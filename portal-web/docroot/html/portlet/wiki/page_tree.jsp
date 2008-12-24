@@ -35,7 +35,7 @@ for (int i = 0; i < depth; i++) {
 	preface += "- ";
 }
 
-List<WikiPage> childPages = parentPage.getChildPages();
+List<WikiPage> childPages = ListUtil.copy(parentPage.getChildPages());
 
 childPages.remove(wikiPage);
 
