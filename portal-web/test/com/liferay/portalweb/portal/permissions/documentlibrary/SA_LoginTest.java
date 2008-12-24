@@ -20,32 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_BlogRolesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_LoginTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Member_BlogRolesTest extends BaseTestCase {
-	public void testMember_BlogRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portlet Permissions']"));
+public class SA_LoginTest extends BaseTestCase {
+	public void testSA_Login() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_58_login")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[10]/td/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_128_scope33VIEW",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}
 }

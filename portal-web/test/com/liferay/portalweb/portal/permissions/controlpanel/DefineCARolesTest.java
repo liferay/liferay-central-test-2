@@ -43,7 +43,7 @@ public class DefineCARolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[3]/nobr/a")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -53,7 +53,7 @@ public class DefineCARolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portlet Permissions']"));
