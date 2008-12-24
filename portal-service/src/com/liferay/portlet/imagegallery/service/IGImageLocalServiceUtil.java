@@ -127,6 +127,19 @@ public class IGImageLocalServiceUtil {
 			contentType, serviceContext);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String contentType, java.lang.String fileName,
+		java.io.InputStream is,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addImage(uuid, userId, folderId, name, description,
+			contentType, fileName, is, serviceContext);
+	}
+
 	public static void addImageResources(long folderId, long imageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,

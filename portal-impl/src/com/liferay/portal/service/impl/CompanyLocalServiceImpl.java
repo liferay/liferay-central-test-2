@@ -65,6 +65,7 @@ import com.liferay.util.Normalizer;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -545,17 +546,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
-		Company company = companyPersistence.findByPrimaryKey(companyId);
+		imageLocalService.updateImage(getLogoId(companyId), file);
+	}
 
-		long logoId = company.getLogoId();
+	public void updateLogo(long companyId, InputStream is)
+		throws PortalException, SystemException {
 
-		if (logoId <= 0) {
-			logoId = counterLocalService.increment();
-
-			company.setLogoId(logoId);
-		}
-
-		imageLocalService.updateImage(logoId, file);
+		imageLocalService.updateImage(getLogoId(companyId), is);
 	}
 
 	public void updateSecurity(
@@ -597,6 +594,22 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		catch (PortletException pe) {
 			throw new SystemException(pe);
 		}
+	}
+
+	protected long getLogoId (long companyId)
+		throws PortalException, SystemException {
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		long logoId = company.getLogoId();
+
+		if (logoId <= 0) {
+			logoId = counterLocalService.increment();
+
+			company.setLogoId(logoId);
+		}
+
+		return logoId;
 	}
 
 	protected String getVirtualHost(String virtualHost) {
