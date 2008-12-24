@@ -23,7 +23,10 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -41,9 +44,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WebDAVUtil.java.html"><b><i>View Source</i></b></a>
@@ -69,6 +69,13 @@ public class WebDAVUtil {
 
 	public static void deleteStorage(WebDAVStorage storage) {
 		_instance._deleteStorage(storage);
+	}
+
+	public static String encodeURL(String url) {
+		url = HttpUtil.encodeURL(url);
+		url = StringUtil.replace(url, StringPool.PLUS, StringPool.SPACE);
+
+		return url;
 	}
 
 	public static String fixPath(String path) {
@@ -318,7 +325,7 @@ public class WebDAVUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WebDAVUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(WebDAVUtil.class);
 
 	private static WebDAVUtil _instance = new WebDAVUtil();
 
