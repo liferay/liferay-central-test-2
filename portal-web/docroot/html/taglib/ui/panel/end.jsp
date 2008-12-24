@@ -32,13 +32,15 @@
 		if (Liferay.Panel) {
 			jQuery(
 				function () {
-					new Liferay.Panel(
+					var panel = new Liferay.Panel(
 						{
 							panel: '#<%= id %>',
 							collapsible: <%= collapsible  %>,
 							persistState: <%= persistState %>
 						}
 					);
+
+					Liferay.Panel.register('<%= id %>', panel);
 				}
 			);
 		}

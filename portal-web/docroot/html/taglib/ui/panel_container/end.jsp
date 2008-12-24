@@ -30,13 +30,15 @@
 	if (Liferay.Panel) {
 		jQuery(
 			function () {
-				new Liferay.Panel(
+				var panel = new Liferay.Panel(
 					{
 						container: '#<%= id %>',
 						accordion: <%= accordion %>,
 						persistState: <%= persistState %>
 					}
 				);
+
+				Liferay.Panel.register('<%= id %>', panel);
 			}
 		);
 	}

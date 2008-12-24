@@ -149,3 +149,22 @@ Liferay.Panel = Liferay.Observable.extend({
 		}
 	}
 });
+
+jQuery.extend(
+	Liferay.Panel,
+	{
+		get: function(id) {
+			var instance = this;
+
+			return instance[instance._prefix + id];
+		},
+
+		register: function(id, panel) {
+			var instance = this;
+
+			instance[instance._prefix + id] = panel;
+		},
+
+		_prefix: '__'
+	}
+);

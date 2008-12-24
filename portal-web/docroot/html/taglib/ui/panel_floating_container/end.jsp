@@ -29,7 +29,7 @@
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.PanelFloating(
+			var panel = new Liferay.PanelFloating(
 				{
 					container: '#<%= id %>',
 					trigger: '<%= trigger %>',
@@ -41,6 +41,8 @@
 					width: <%= width %>
 				}
 			);
+
+			Liferay.Panel.register('<%= id %>', panel);
 		}
 	);
 </script>
