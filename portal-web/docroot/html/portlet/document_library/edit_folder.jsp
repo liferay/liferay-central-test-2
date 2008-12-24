@@ -147,7 +147,10 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 				DLFolder curFolder = folder;
 
 				while (true) {
-					sb.insert(0, HttpUtil.encodeURL(curFolder.getName()));
+					String pathname = HttpUtil.encodeURL(curFolder.getName());
+					pathname = StringUtil.replace(pathname, StringPool.PLUS, StringPool.SPACE);
+
+					sb.insert(0, pathname);
 					sb.insert(0, StringPool.SLASH);
 
 					if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {

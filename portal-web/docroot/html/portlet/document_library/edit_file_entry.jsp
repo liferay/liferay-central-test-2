@@ -287,11 +287,15 @@ portletURL.setParameter("name", name);
 
 			<%
 			StringBuffer sb = new StringBuffer();
+			String pathname = null;
 
 			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 			while (true) {
-				sb.insert(0, HttpUtil.encodeURL(curFolder.getName()));
+				pathname = HttpUtil.encodeURL(curFolder.getName());
+				pathname = StringUtil.replace(pathname, StringPool.PLUS, StringPool.SPACE);
+
+				sb.insert(0, pathname);
 				sb.insert(0, StringPool.SLASH);
 
 				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
@@ -302,8 +306,11 @@ portletURL.setParameter("name", name);
 				}
 			}
 
+			pathname = HttpUtil.encodeURL(titleWithExtension);
+			pathname = StringUtil.replace(pathname, StringPool.PLUS, StringPool.SPACE);
+
 			sb.append(StringPool.SLASH);
-			sb.append(HttpUtil.encodeURL(titleWithExtension));
+			sb.append(pathname);
 
 			Group group = layout.getGroup();
 			%>
