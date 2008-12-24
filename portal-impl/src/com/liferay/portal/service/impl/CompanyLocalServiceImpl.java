@@ -546,13 +546,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
-		imageLocalService.updateImage(getLogoId(companyId), file);
+		long logoId = getLogoId(companyId);
+
+		imageLocalService.updateImage(logoId, file);
 	}
 
 	public void updateLogo(long companyId, InputStream is)
 		throws PortalException, SystemException {
 
-		imageLocalService.updateImage(getLogoId(companyId), is);
+		long logoId = getLogoId(companyId);
+
+		imageLocalService.updateImage(logoId, is);
 	}
 
 	public void updateSecurity(

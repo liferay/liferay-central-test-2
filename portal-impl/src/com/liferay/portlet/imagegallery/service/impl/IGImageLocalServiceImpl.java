@@ -98,11 +98,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			String fileName = file.getName();
 			byte[] bytes = FileUtil.getBytes(file);
 
-			return addImage (uuid, userId, folderId, name,description,
-			contentType, fileName, bytes, serviceContext);
+			return addImage (
+				uuid, userId, folderId, name,description, contentType, fileName,
+				bytes, serviceContext);
 		}
 		catch (IOException ioe) {
-			throw new SystemException(ioe);
+			throw new ImageSizeException(ioe);
 		}
 	}
 
@@ -115,12 +116,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		try {
 			byte[] bytes = FileUtil.getBytes(is);
 
-			return addImage (uuid, userId, folderId, name,description,
-			contentType, fileName, bytes, serviceContext);
+			return addImage (
+				uuid, userId, folderId, name,description, contentType, fileName,
+				bytes, serviceContext);
 
 		}
 		catch (IOException ioe) {
-			throw new SystemException (ioe);
+			throw new ImageSizeException (ioe);
 		}
 	}
 
@@ -499,7 +501,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 			RenderedImage renderedImage = ImageProcessorUtil.read(
 				bytes).getRenderedImage();
-
 			Date now = new Date();
 
 			long imageId = counterLocalService.increment();
@@ -733,17 +734,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				throw new DuplicateImageNameException();
 			}
 		}
-	}
-
-	protected void validate(
-			long folderId, String nameWithExtension, File file, byte[] bytes)
-		throws PortalException, SystemException {
-
-		String fileName = StringPool.BLANK;
-		if (file != null) {
-			fileName = file.getName();
-		}
-		validate(folderId, nameWithExtension, fileName, bytes);
 	}
 
 	protected void validate(
