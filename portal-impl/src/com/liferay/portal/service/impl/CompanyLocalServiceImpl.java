@@ -543,6 +543,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 	}
 
+	public void updateLogo(long companyId, byte[] bytes)
+		throws PortalException, SystemException {
+
+		long logoId = getLogoId(companyId);
+
+		imageLocalService.updateImage(logoId, bytes);
+	}
+
 	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
@@ -600,7 +608,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected long getLogoId (long companyId)
+	protected long getLogoId(long companyId)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -611,6 +619,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			logoId = counterLocalService.increment();
 
 			company.setLogoId(logoId);
+
+			companyPersistence.update(company, false);
 		}
 
 		return logoId;

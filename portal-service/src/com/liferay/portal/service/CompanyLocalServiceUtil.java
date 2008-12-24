@@ -210,6 +210,12 @@ public class CompanyLocalServiceUtil {
 		getService().updateDisplay(companyId, languageId, timeZoneId);
 	}
 
+	public static void updateLogo(long companyId, byte[] bytes)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateLogo(companyId, bytes);
+	}
+
 	public static void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
