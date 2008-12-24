@@ -45,13 +45,13 @@ public interface Hook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, File file)
+			String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, byte[] bytes)
+			String[] tagsEntries, File file)
 		throws PortalException, SystemException;
 
 	public void addFile(
@@ -114,14 +114,14 @@ public interface Hook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, String[] tagsEntries,
-			File file)
+			byte[] bytes)
 		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, String[] tagsEntries,
-			byte[] bytes)
+			File file)
 		throws PortalException, SystemException;
 
 	public void updateFile(

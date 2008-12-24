@@ -89,6 +89,28 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
+			long userId, long folderId, String name, String description,
+			String fileName, byte[] bytes, String contentType,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addImage(
+			null, userId, folderId, name, description, fileName, bytes,
+			contentType, serviceContext);
+	}
+
+	public IGImage addImage(
+			long userId, long folderId, String name, String description,
+			String fileName, InputStream is, String contentType,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addImage(
+			null, userId, folderId, name, description, fileName, is,
+			contentType, serviceContext);
+	}
+
+	public IGImage addImage(
 			String uuid, long userId, long folderId, String name,
 			String description, File file, String contentType,
 			ServiceContext serviceContext)
@@ -98,9 +120,111 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			String fileName = file.getName();
 			byte[] bytes = FileUtil.getBytes(file);
 
-			return addImage (
-				uuid, userId, folderId, name,description, contentType, fileName,
-				bytes, serviceContext);
+			return addImage(
+				uuid, userId, folderId, name, description, fileName, bytes,
+				contentType, serviceContext);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public IGImage addImage(
+			String uuid, long userId, long folderId, String name,
+			String description, String fileName, byte[] bytes,
+			String contentType, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+
+			// Image
+
+			String extension = FileUtil.getExtension(fileName);
+
+			if (Validator.isNotNull(name) &&
+				StringUtil.endsWith(name, extension)) {
+
+				name = FileUtil.stripExtension(name);
+			}
+
+			String nameWithExtension = name + StringPool.PERIOD + extension;
+
+			validate(folderId, nameWithExtension, fileName, bytes);
+
+			User user = userPersistence.findByPrimaryKey(userId);
+			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
+			RenderedImage renderedImage = ImageProcessorUtil.read(
+				bytes).getRenderedImage();
+			Date now = new Date();
+
+			long imageId = counterLocalService.increment();
+
+			if (Validator.isNull(name)) {
+				name = String.valueOf(imageId);
+			}
+
+			IGImage image = igImagePersistence.create(imageId);
+
+			image.setUuid(uuid);
+			image.setCompanyId(user.getCompanyId());
+			image.setUserId(user.getUserId());
+			image.setCreateDate(now);
+			image.setModifiedDate(now);
+			image.setFolderId(folderId);
+			image.setName(name);
+			image.setDescription(description);
+			image.setSmallImageId(counterLocalService.increment());
+			image.setLargeImageId(counterLocalService.increment());
+
+			if (PropsValues.IG_IMAGE_CUSTOM_1_MAX_DIMENSION > 0) {
+				image.setCustom1ImageId(counterLocalService.increment());
+			}
+
+			if (PropsValues.IG_IMAGE_CUSTOM_2_MAX_DIMENSION > 0) {
+				image.setCustom2ImageId(counterLocalService.increment());
+			}
+
+			igImagePersistence.update(image, false);
+
+			// Images
+
+			saveImages(
+				image.getLargeImageId(), renderedImage, image.getSmallImageId(),
+				image.getCustom1ImageId(), image.getCustom2ImageId(), bytes,
+				contentType);
+
+			// Resources
+
+			if (serviceContext.getAddCommunityPermissions() ||
+				serviceContext.getAddGuestPermissions()) {
+
+				addImageResources(
+					folder, image, serviceContext.getAddCommunityPermissions(),
+					serviceContext.getAddGuestPermissions());
+			}
+			else {
+				addImageResources(
+					folder, image, serviceContext.getCommunityPermissions(),
+					serviceContext.getGuestPermissions());
+			}
+
+			// Tags
+
+			updateTagsAsset(userId, image, serviceContext.getTagsEntries());
+
+			// Indexer
+
+			try {
+				Indexer.addImage(
+					image.getCompanyId(), folder.getGroupId(), folderId,
+					imageId, name, description, serviceContext.getTagsEntries(),
+					image.getExpandoBridge());
+			}
+			catch (SearchException se) {
+				_log.error("Indexing " + imageId, se);
+			}
+
+			return image;
 		}
 		catch (IOException ioe) {
 			throw new ImageSizeException(ioe);
@@ -109,20 +233,19 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
 			String uuid, long userId, long folderId, String name,
-			String description, String contentType, String fileName,
-			InputStream is, ServiceContext serviceContext)
+			String description, String fileName, InputStream is,
+			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
 			byte[] bytes = FileUtil.getBytes(is);
 
-			return addImage (
-				uuid, userId, folderId, name,description, contentType, fileName,
-				bytes, serviceContext);
-
+			return addImage(
+				uuid, userId, folderId, name, description, fileName, bytes,
+				contentType, serviceContext);
 		}
 		catch (IOException ioe) {
-			throw new ImageSizeException (ioe);
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -385,7 +508,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage updateImage(
 			long userId, long imageId, long folderId, String name,
-			String description, File file, String contentType,
+			String description, byte[] bytes, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -398,12 +521,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			IGFolder folder = getFolder(image, folderId);
 
 			RenderedImage renderedImage = null;
-			byte[] bytes = null;
 
-			if ((file != null) && file.exists()) {
+			if (bytes != null) {
 				renderedImage = ImageProcessorUtil.read(
-					file).getRenderedImage();
-				bytes = FileUtil.getBytes(file);
+					bytes).getRenderedImage();
 
 				validate(bytes);
 			}
@@ -459,6 +580,50 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
+	public IGImage updateImage(
+			long userId, long imageId, long folderId, String name,
+			String description, File file, String contentType,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			byte[] bytes = null;
+			
+			if ((file != null) && file.exists()) {
+				bytes = FileUtil.getBytes(file);
+			}
+
+			return updateImage(
+				userId, imageId, folderId, name, description, bytes,
+				contentType, serviceContext);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public IGImage updateImage(
+			long userId, long imageId, long folderId, String name,
+			String description, InputStream is, String contentType,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			byte[] bytes = null;
+			
+			if (is != null) {
+				bytes = FileUtil.getBytes(is);
+			}
+
+			return updateImage(
+				userId, imageId, folderId, name, description, bytes,
+				contentType, serviceContext);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
 	public void updateTagsAsset(
 			long userId, IGImage image, String[] tagsEntries)
 		throws PortalException, SystemException {
@@ -474,107 +639,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.getImageId(), null, tagsEntries, true, null, null, null, null,
 			largeImage.getType(), null, image.getDescription(), null, null,
 			largeImage.getHeight(), largeImage.getWidth(), null, false);
-	}
-
-	protected IGImage addImage (String uuid, long userId, long folderId,
-			String name, String description, String contentType,
-			String fileName, byte[] bytes, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		try {
-
-			// Image
-
-			String extension = FileUtil.getExtension(fileName);
-
-			if (Validator.isNotNull(name) &&
-				StringUtil.endsWith(name, extension)) {
-
-				name = FileUtil.stripExtension(name);
-			}
-
-			String nameWithExtension = name + StringPool.PERIOD + extension;
-
-			validate(folderId, nameWithExtension, fileName, bytes);
-
-			User user = userPersistence.findByPrimaryKey(userId);
-			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
-			RenderedImage renderedImage = ImageProcessorUtil.read(
-				bytes).getRenderedImage();
-			Date now = new Date();
-
-			long imageId = counterLocalService.increment();
-
-			if (Validator.isNull(name)) {
-				name = String.valueOf(imageId);
-			}
-
-			IGImage image = igImagePersistence.create(imageId);
-
-			image.setUuid(uuid);
-			image.setCompanyId(user.getCompanyId());
-			image.setUserId(user.getUserId());
-			image.setCreateDate(now);
-			image.setModifiedDate(now);
-			image.setFolderId(folderId);
-			image.setName(name);
-			image.setDescription(description);
-			image.setSmallImageId(counterLocalService.increment());
-			image.setLargeImageId(counterLocalService.increment());
-
-			if (PropsValues.IG_IMAGE_CUSTOM_1_MAX_DIMENSION > 0) {
-				image.setCustom1ImageId(counterLocalService.increment());
-			}
-
-			if (PropsValues.IG_IMAGE_CUSTOM_2_MAX_DIMENSION > 0) {
-				image.setCustom2ImageId(counterLocalService.increment());
-			}
-
-			igImagePersistence.update(image, false);
-
-			// Images
-
-			saveImages(
-				image.getLargeImageId(), renderedImage, image.getSmallImageId(),
-				image.getCustom1ImageId(), image.getCustom2ImageId(), bytes,
-				contentType);
-
-			// Resources
-
-			if (serviceContext.getAddCommunityPermissions() ||
-				serviceContext.getAddGuestPermissions()) {
-
-				addImageResources(
-					folder, image, serviceContext.getAddCommunityPermissions(),
-					serviceContext.getAddGuestPermissions());
-			}
-			else {
-				addImageResources(
-					folder, image, serviceContext.getCommunityPermissions(),
-					serviceContext.getGuestPermissions());
-			}
-
-			// Tags
-
-			updateTagsAsset(userId, image, serviceContext.getTagsEntries());
-
-			// Indexer
-
-			try {
-				Indexer.addImage(
-					image.getCompanyId(), folder.getGroupId(), folderId,
-					imageId, name, description, serviceContext.getTagsEntries(),
-					image.getExpandoBridge());
-			}
-			catch (SearchException se) {
-				_log.error("Indexing " + imageId, se);
-			}
-
-			return image;
-		}
-		catch (IOException ioe) {
-			throw new ImageSizeException(ioe);
-		}
 	}
 
 	protected IGFolder getFolder(IGImage image, long folderId)

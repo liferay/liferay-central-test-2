@@ -103,6 +103,22 @@ public interface IGImageLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		long userId, long folderId, java.lang.String name,
+		java.lang.String description, java.lang.String fileName, byte[] bytes,
+		java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		long userId, long folderId, java.lang.String name,
+		java.lang.String description, java.lang.String fileName,
+		java.io.InputStream is, java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String description, java.io.File file,
 		java.lang.String contentType,
@@ -113,8 +129,16 @@ public interface IGImageLocalService {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String contentType, java.lang.String fileName,
-		java.io.InputStream is,
+		java.lang.String fileName, byte[] bytes, java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String fileName, java.io.InputStream is,
+		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -248,7 +272,23 @@ public interface IGImageLocalService {
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long folderId, java.lang.String name,
+		java.lang.String description, byte[] bytes,
+		java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
+		long userId, long imageId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
+		java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
+		long userId, long imageId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.InputStream is,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,

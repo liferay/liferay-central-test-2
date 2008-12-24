@@ -55,6 +55,29 @@ public abstract class BaseHook implements Hook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
+			String[] tagsEntries, byte[] bytes)
+		throws PortalException, SystemException {
+
+		InputStream is = new ByteArrayInputStream(bytes);
+
+		try {
+			addFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				fileEntryId, properties, tagsEntries, is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
+	}
+
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
 			String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
@@ -75,29 +98,6 @@ public abstract class BaseHook implements Hook {
 				if (is != null) {
 					is.close();
 				}
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
-		}
-	}
-
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, byte[] bytes)
-		throws PortalException, SystemException {
-
-		InputStream is = new ByteArrayInputStream(bytes);
-
-		try {
-			addFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, tagsEntries, is);
-		}
-		finally {
-			try {
-				is.close();
 			}
 			catch (IOException ioe) {
 				_log.error(ioe);
@@ -198,6 +198,31 @@ public abstract class BaseHook implements Hook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, String[] tagsEntries,
+			byte[] bytes)
+		throws PortalException, SystemException {
+
+		InputStream is = new ByteArrayInputStream(bytes);
+
+		try {
+			updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, sourceFileName, fileEntryId, properties,
+				tagsEntries, is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, String[] tagsEntries,
 			File file)
 		throws PortalException, SystemException {
 
@@ -219,31 +244,6 @@ public abstract class BaseHook implements Hook {
 				if (is != null) {
 					is.close();
 				}
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			byte[] bytes)
-		throws PortalException, SystemException {
-
-		InputStream is = new ByteArrayInputStream(bytes);
-
-		try {
-			updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				versionNumber, sourceFileName, fileEntryId, properties,
-				tagsEntries, is);
-		}
-		finally {
-			try {
-				is.close();
 			}
 			catch (IOException ioe) {
 				_log.error(ioe);
