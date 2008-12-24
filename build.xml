@@ -377,30 +377,16 @@
 						includes="ccpp.jar,log4j.jar,xercesImpl.jar"
 					/>
 				</copy>
-
-				<delete>
-					<fileset
-						dir="${app.server.lib.portal.dir}"
-						includes="webservices-api.jar,webservices-extra.jar,webservices-extra-api.jar,webservices-rt.jar,webservices-tools.jar"
-					/>
-				</delete>
-
 				<if>
-					<equals arg1="${app.server.version}" arg2="3" />
+					<equals arg1="${app.server.version}" arg2="2" />
 					<then>
-						<copy
-							tofile="${app.server.dir}/domains/domain1/config/domain.xml"
-							file="tools/servers/glassfish/domain.xml.3"
-							overwrite="yes"
-						/>
+						<delete>
+							<fileset
+							dir="${app.server.lib.portal.dir}"
+							includes="webservices.jar,jaxb.jar"
+							/>
+						</delete>
 					</then>
-					<else>
-						<copy
-							tofile="${app.server.dir}/domains/domain1/config/domain.xml"
-							file="tools/servers/glassfish/domain.xml.2"
-							overwrite="yes"
-						/>
-					</else>
 				</if>
 			</then>
 		</if>
@@ -418,7 +404,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="commons-logging.jar,j2ee-management.jar,webservices-tools.jar"
+						includes="commons-logging.jar,j2ee-management.jar,webservices.jar,jaxb.jar"
 					/>
 				</delete>
 			</then>
