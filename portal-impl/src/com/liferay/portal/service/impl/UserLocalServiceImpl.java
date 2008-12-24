@@ -2117,6 +2117,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			portraitId = counterLocalService.increment();
 
 			user.setPortraitId(portraitId);
+
+			userPersistence.update(user, false);
 		}
 
 		imageLocalService.updateImage(portraitId, bytes);
