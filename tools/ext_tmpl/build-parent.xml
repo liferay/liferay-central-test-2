@@ -204,16 +204,21 @@
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/portal"
-						includes="log4j.jar,xercesImpl.jar"
+						includes="ccpp.jar,log4j.jar,xercesImpl.jar"
 					/>
 				</copy>
 
-				<delete>
-					<fileset
-						dir="${app.server.lib.portal.dir}"
-						includes="webservices-api.jar,webservices-extra.jar,webservices-extra-api.jar,webservices-rt.jar,webservices-tools.jar"
-					/>
-				</delete>
+				<if>
+					<equals arg1="${app.server.version}" arg2="2" />
+					<then>
+						<delete>
+							<fileset
+								dir="${app.server.lib.portal.dir}"
+								includes="jaxb.jar,webservices.jar"
+							/>
+						</delete>
+					</then>
+				</if>
 			</then>
 		</if>
 
@@ -230,7 +235,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="commons-logging.jar,j2ee-management.jar,webservices-tools.jar"
+						includes="commons-logging.jar,j2ee-management.jar,jaxb.jar,webservices.jar"
 					/>
 				</delete>
 			</then>

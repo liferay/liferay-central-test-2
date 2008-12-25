@@ -254,8 +254,7 @@
 				<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/urlrewrite.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/webservices-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/webservices-rt.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/webservices.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/wsrp-consumer.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/wsrp-producer.jar" dest="${classpath.jsp}" />
 			</then>

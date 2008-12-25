@@ -377,13 +377,14 @@
 						includes="ccpp.jar,log4j.jar,xercesImpl.jar"
 					/>
 				</copy>
+
 				<if>
 					<equals arg1="${app.server.version}" arg2="2" />
 					<then>
 						<delete>
 							<fileset
-							dir="${app.server.lib.portal.dir}"
-							includes="webservices.jar,jaxb.jar"
+								dir="${app.server.lib.portal.dir}"
+								includes="jaxb.jar,webservices.jar"
 							/>
 						</delete>
 					</then>
@@ -404,7 +405,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="commons-logging.jar,j2ee-management.jar,webservices.jar,jaxb.jar"
+						includes="commons-logging.jar,j2ee-management.jar,jaxb.jar,webservices.jar"
 					/>
 				</delete>
 			</then>
