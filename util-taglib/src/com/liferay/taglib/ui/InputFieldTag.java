@@ -24,6 +24,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import java.text.Format;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -47,6 +49,7 @@ public class InputFieldTag extends IncludeTag {
 			"liferay-ui:input-field:defaultValue", _defaultValue);
 		request.setAttribute(
 			"liferay-ui:input-field:disabled", String.valueOf(_disabled));
+		request.setAttribute("liferay-ui:input-field:format", _format);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -79,6 +82,10 @@ public class InputFieldTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
+	public void setFormat(Format format) {
+		_format = format;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -92,5 +99,6 @@ public class InputFieldTag extends IncludeTag {
 	private String _fieldParam;
 	private Object _defaultValue;
 	private boolean _disabled;
+	private Format _format;
 
 }

@@ -26,6 +26,8 @@
 
 <%@ page import="com.liferay.portal.model.impl.BaseModelImpl" %>
 
+<%@ page import="java.text.Format" %>
+
 <%
 String formName = (String)request.getAttribute("liferay-ui:input-field:formName");
 String model = (String)request.getAttribute("liferay-ui:input-field:model");
@@ -34,6 +36,7 @@ String field = (String)request.getAttribute("liferay-ui:input-field:field");
 String fieldParam = (String)request.getAttribute("liferay-ui:input-field:fieldParam");
 Object defaultValue = request.getAttribute("liferay-ui:input-field:defaultValue");
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-field:disabled"));
+Format format = (Format)request.getAttribute("liferay-ui:input-field:format");
 
 String type = ModelHintsUtil.getType(model, field);
 Map<String, String> hints = ModelHintsUtil.getHints(model, field);
@@ -221,10 +224,24 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			}
 
 			if (type.equals("double")) {
-				value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
+				double doubleValue = BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString));
+
+				if (format != null) {
+					value = format.format(doubleValue);
+				}
+				else {
+					value = String.valueOf(doubleValue);
+				}
 			}
 			else if (type.equals("int")) {
-				value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
+				int intValue = BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString));
+
+				if (format != null) {
+					value = format.format(intValue);
+				}
+				else {
+					value = String.valueOf(intValue);
+				}
 			}
 			else {
 				value = BeanParamUtil.getString(bean, request, field, defaultString);
