@@ -92,7 +92,7 @@ import org.apache.commons.lang.time.StopWatch;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- *
+ * @author Sandeep Soni *
  */
 public class PluginPackageUtil {
 
@@ -659,6 +659,8 @@ public class PluginPackageUtil {
 
 					pluginsXmlURL = sb.toString();
 
+					getFileMethod.releaseConnection();
+					
 					getFileMethod = new GetMethod(pluginsXmlURL);
 
 					responseCode = client.executeMethod(
