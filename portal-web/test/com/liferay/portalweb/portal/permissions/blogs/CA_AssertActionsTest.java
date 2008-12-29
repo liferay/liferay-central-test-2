@@ -56,8 +56,8 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
 		selenium.click(RuntimeVariables.replace("link=Test Entry 1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//td[4]/nobr/a[2]"));
-		assertTrue(selenium.isElementPresent("//td[5]/nobr/a[2]"));
+		assertTrue(selenium.isElementPresent("//td[4]/span/a[2]"));
+		assertTrue(selenium.isElementPresent("//td[5]/span/a[2]"));
 		selenium.click(RuntimeVariables.replace("_33_tabs1TabsBack"));
 		selenium.waitForPageToLoad("30000");
 	}

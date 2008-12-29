@@ -49,7 +49,7 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//input[@value='Search Entries']"));
+		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
 		assertTrue(selenium.isElementPresent("link=Test Entry 1"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));

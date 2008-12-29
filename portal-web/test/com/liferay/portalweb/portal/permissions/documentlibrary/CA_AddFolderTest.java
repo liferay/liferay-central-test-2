@@ -33,6 +33,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddFolderTest extends BaseTestCase {
 	public void testCA_AddFolder() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");

@@ -39,8 +39,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search Entries']")) {
+				if (selenium.isElementPresent("//input[@value='Search']")) {
 					break;
 				}
 			}
@@ -62,7 +61,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_postReplyBody0")) {
+				if (selenium.isElementPresent("_33_postReplyBody1")) {
 					break;
 				}
 			}
@@ -72,11 +71,11 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_postReplyBody0",
+		selenium.typeKeys("_33_postReplyBody1",
 			RuntimeVariables.replace("Member Comment Test"));
-		selenium.type("_33_postReplyBody0",
+		selenium.type("_33_postReplyBody1",
 			RuntimeVariables.replace("Member Comment Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
+		selenium.click(RuntimeVariables.replace("_33_postReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Comment"));
 		assertTrue(selenium.isTextPresent("Member Comment Test"));
