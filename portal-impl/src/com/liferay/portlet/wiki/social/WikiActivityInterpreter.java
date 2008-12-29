@@ -23,6 +23,8 @@
 package com.liferay.portlet.wiki.social;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -65,14 +67,31 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Title
 
 		String title = StringPool.BLANK;
-
-		if (activityType == WikiActivityKeys.ADD_PAGE) {
-			title = themeDisplay.translate(
-				"activity-wiki-add-page", creatorUserName);
+		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
+			if (activityType == WikiActivityKeys.ADD_PAGE) {
+				title = themeDisplay.translate(
+					"activity-wiki-add-page", creatorUserName);
+			}
+			else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
+				title = themeDisplay.translate(
+					"activity-wiki-update-page", creatorUserName);
+			}
 		}
-		else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
-			title = themeDisplay.translate(
-				"activity-wiki-update-page", creatorUserName);
+		else {
+			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
+
+			String groupName = group.getName();
+
+			if (activityType == WikiActivityKeys.ADD_PAGE) {
+				title = themeDisplay.translate(
+					"activity-wiki-add-page-in",
+					new Object[] {creatorUserName, groupName});
+			}
+			else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
+				title = themeDisplay.translate(
+					"activity-wiki-update-page-in",
+					new Object[] {creatorUserName, groupName});
+			}
 		}
 
 		// Body

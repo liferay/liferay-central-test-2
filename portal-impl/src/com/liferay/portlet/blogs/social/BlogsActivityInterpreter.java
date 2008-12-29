@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -80,14 +82,33 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String title = StringPool.BLANK;
 
-		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
-			title = themeDisplay.translate(
-				"activity-blogs-add-comment",
-				new Object[] {creatorUserName, receiverUserName});
+		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
+			if (activityType == BlogsActivityKeys.ADD_COMMENT) {
+				title = themeDisplay.translate(
+					"activity-blogs-add-comment",
+					new Object[] {creatorUserName, receiverUserName});
+			}
+			else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
+				title = themeDisplay.translate(
+					"activity-blogs-add-entry", creatorUserName);
+			}
 		}
-		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			title = themeDisplay.translate(
-				"activity-blogs-add-entry", creatorUserName);
+		else {
+			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
+
+			String groupName = group.getName();
+
+			if (activityType == BlogsActivityKeys.ADD_COMMENT) {
+				title = themeDisplay.translate(
+					"activity-blogs-add-comment-in",
+					new Object[] {creatorUserName, receiverUserName,
+						groupName});
+			}
+			else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
+				title = themeDisplay.translate(
+					"activity-blogs-add-entry-in",
+					new Object[] {creatorUserName, groupName});
+			}
 		}
 
 		// Body

@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -67,19 +69,44 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String title = StringPool.BLANK;
 
-		if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
-			title = themeDisplay.translate(
-				"activity-tasks-add-proposal", creatorUserName);
+		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
+			if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
+				title = themeDisplay.translate(
+					"activity-tasks-add-proposal", creatorUserName);
+			}
+			else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
+				title = themeDisplay.translate(
+					"activity-tasks-assign-proposal",
+					new Object[] {creatorUserName, receiverUserName});
+			}
+			else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
+				title = themeDisplay.translate(
+					"activity-tasks-review-proposal",
+					new Object[] {creatorUserName, receiverUserName});
+			}
 		}
-		else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
-			title = themeDisplay.translate(
-				"activity-tasks-assign-proposal",
-				new Object[] {creatorUserName, receiverUserName});
-		}
-		else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
-			title = themeDisplay.translate(
-				"activity-tasks-review-proposal",
-				new Object[] {creatorUserName, receiverUserName});
+		else {
+			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
+
+			String groupName = group.getName();
+
+			if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
+				title = themeDisplay.translate(
+					"activity-tasks-add-proposal-in",
+					new Object[] {creatorUserName, groupName});
+			}
+			else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
+				title = themeDisplay.translate(
+					"activity-tasks-assign-proposal-in",
+					new Object[] {creatorUserName, receiverUserName,
+						groupName});
+			}
+			else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
+				title = themeDisplay.translate(
+					"activity-tasks-review-proposal-in",
+					new Object[] {creatorUserName, receiverUserName,
+						groupName});
+			}
 		}
 
 		// Body

@@ -23,6 +23,8 @@
 package com.liferay.portlet.calendar.social;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
@@ -64,13 +66,31 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String title = StringPool.BLANK;
 
-		if (activityType == CalendarActivityKeys.ADD_EVENT) {
-			title = themeDisplay.translate(
-				"activity-calendar-add-event", creatorUserName);
+		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
+			if (activityType == CalendarActivityKeys.ADD_EVENT) {
+				title = themeDisplay.translate(
+					"activity-calendar-add-event", creatorUserName);
+			}
+			else if (activityType == CalendarActivityKeys.UPDATE_EVENT) {
+				title = themeDisplay.translate(
+					"activity-calendar-update-event", creatorUserName);
+			}
 		}
-		else if (activityType == CalendarActivityKeys.UPDATE_EVENT) {
-			title = themeDisplay.translate(
-				"activity-calendar-update-event", creatorUserName);
+		else {
+			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
+
+			String groupName = group.getName();
+
+			if (activityType == CalendarActivityKeys.ADD_EVENT) {
+				title = themeDisplay.translate(
+					"activity-calendar-add-event-in",
+					new Object[] {creatorUserName, groupName});
+			}
+			else if (activityType == CalendarActivityKeys.UPDATE_EVENT) {
+				title = themeDisplay.translate(
+					"activity-calendar-update-event-in",
+					new Object[] {creatorUserName, groupName});
+			}
 		}
 
 		// Body
