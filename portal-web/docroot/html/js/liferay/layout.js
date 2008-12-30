@@ -428,8 +428,7 @@ Liferay.Layout.FreeForm = {
 		);
 
 		if ((parseInt(portlet.style.top) + parseInt(portlet.style.left)) == 0) {
-
-			if(portlet.columnPos == undefined){
+			if (portlet.columnPos == undefined) {
 				portlet.columnPos = 0;
 			}
 
