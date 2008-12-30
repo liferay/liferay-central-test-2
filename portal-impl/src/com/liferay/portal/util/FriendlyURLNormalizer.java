@@ -62,8 +62,11 @@ public class FriendlyURLNormalizer {
 
 		friendlyURL = new String(charArray);
 
-		friendlyURL = StringUtil.replace(
-			friendlyURL, StringPool.DASH + StringPool.DASH, StringPool.DASH);
+		while (friendlyURL.contains(StringPool.DASH + StringPool.DASH)) {
+			friendlyURL = StringUtil.replace(
+				friendlyURL, StringPool.DASH + StringPool.DASH,
+				StringPool.DASH);
+		}
 
 		if (friendlyURL.startsWith(StringPool.DASH)) {
 			friendlyURL = friendlyURL.substring(1, friendlyURL.length());
