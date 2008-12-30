@@ -22,11 +22,21 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.util.PropsKeys" %>
+<%@ page import="com.liferay.portal.util.PropsUtil" %>
 
 <%
+long plid = ParamUtil.getLong(request, "p_l_id");
+String mainPath = ParamUtil.getString(request, "p_main_path");
+String doAsUserId = ParamUtil.getString(request, "doAsUserId");
+String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
+
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 %>
@@ -46,6 +56,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			init_instance_callback : "initInstanceCallback",
 			onchange_callback : "onChangeCallback",
 			plugins : "table,advhr,advimage,advlink,iespell,preview,media,searchreplace,print,contextmenu",
+			relative_urls : false,
 			theme_advanced_buttons1_add_before : "fontselect,fontsizeselect,forecolor,backcolor,separator",
 			theme_advanced_buttons2_add : "separator,media,advhr,separator,preview,print",
 			theme_advanced_buttons2_add_before: "cut,copy,paste,search,replace",
@@ -55,7 +66,59 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			theme_advanced_toolbar_location : "top"
 		});
 
-		function fileBrowserCallback(field_name, url, type) {
+		function fileBrowserCallback(field_name, url, type, win) {
+			var type = type.toLowerCase();
+
+			if (type != "image") {
+				return false;
+			}
+
+			var basepath = "";
+
+			if (document.location.protocol == "file:") {
+				basepath = decodeURIComponent(document.location.pathname.substr(1));
+				basepath = basepath.replace(/\\/gi, "/");
+
+				var sFullProtocol = document.location.href.match(/^(file\:\/{2,3})/)[1];
+
+				if (<%= BrowserSnifferUtil.isOpera(request) %>) {
+					sFullProtocol += "localhost/";
+				}
+
+				basepath = sFullProtocol + basepath.substring(0, basepath.lastIndexOf("/") + 1);
+			}
+			else {
+				basepath = document.location.protocol + "//" + document.location.host + document.location.pathname.substring(0, document.location.pathname.lastIndexOf("/") + 1);
+			}
+
+			var connector = basepath + "fckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>&Type=Image";
+
+			var height = 0;
+			var width = 0;
+
+			try {
+				height = screen.height * 0.7;
+				width = screen.width * 0.7;
+			}
+			catch (e) {
+				height = 600;
+				width = 800;
+			}
+
+			window.SetUrl = function(fileUrl) {
+				win.document.forms[0].elements[field_name].value = fileUrl;
+				win.focus();
+			}
+
+			tinyMCE.activeEditor.windowManager.open({
+				file : connector,
+				width : width,
+				height : height,
+				resizable : "yes",
+				close_previous : "no"
+			});
+
+			return false;
 		}
 
 		function getHTML() {
