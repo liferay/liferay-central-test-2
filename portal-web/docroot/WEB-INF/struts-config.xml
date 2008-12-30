@@ -1248,6 +1248,11 @@
 			<forward name="portlet.my_account.view" path="portlet.my_account.view" />
 		</action>
 
+		<action path="/my_account/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
+			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
 		<!-- My Pages -->
 
 		<action path="/my_pages/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
