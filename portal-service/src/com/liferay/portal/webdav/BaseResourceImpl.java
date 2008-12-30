@@ -25,6 +25,7 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.InputStream;
@@ -76,10 +77,12 @@ public class BaseResourceImpl implements Resource {
 		_href = parentPath;
 
 		if (Validator.isNotNull(name)) {
-			name = HttpUtil.encodeURL(name, true);
-
 			_href += StringPool.SLASH + name;
 		}
+
+		_href = StringUtil.replace(_href, StringPool.SLASH, _TEMP_SLASH);
+		_href = HttpUtil.encodeURL(_href, true);
+		_href = StringUtil.replace(_href, _TEMP_SLASH, StringPool.SLASH);
 
 		_displayName = displayName;
 
@@ -159,6 +162,8 @@ public class BaseResourceImpl implements Resource {
 	public InputStream getContentAsStream() throws WebDAVException {
 		return null;
 	}
+
+	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
 
 	private static DateFormat _createDateFormatter =
 		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
