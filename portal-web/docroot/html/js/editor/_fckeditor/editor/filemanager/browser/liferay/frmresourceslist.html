@@ -91,6 +91,7 @@ function OpenFile( fileUrl )
 {
 	window.top.opener.SetUrl( encodeURI( fileUrl ).replace( '#', '%23' ) ) ;
 	window.top.close() ;
+	window.top.opener.focus() ;
 }
 
 function LoadResources( resourceType, folderPath )
