@@ -59,13 +59,13 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.portlet.communities.util.StagingUtil;
-import com.liferay.util.Normalizer;
 import com.liferay.util.UniqueList;
 
 import java.io.File;
@@ -874,12 +874,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
-		friendlyURL = GetterUtil.getString(friendlyURL);
-		friendlyURL = StringUtil.replace(
-			friendlyURL, StringPool.SPACE, StringPool.BLANK);
-		friendlyURL = friendlyURL.toLowerCase();
-
-		return Normalizer.normalizeToAscii(friendlyURL);
+		return FriendlyURLNormalizer.normalize(friendlyURL);
 	}
 
 	protected String getFriendlyURL(

@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.lar.LayoutImporter;
@@ -55,6 +54,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -63,7 +63,6 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.util.Normalizer;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -1045,12 +1044,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
-		friendlyURL = GetterUtil.getString(friendlyURL);
-		friendlyURL = StringUtil.replace(
-			friendlyURL, StringPool.SPACE, StringPool.BLANK);
-		friendlyURL = friendlyURL.toLowerCase();
-
-		return Normalizer.normalizeToAscii(friendlyURL);
+		return FriendlyURLNormalizer.normalize(friendlyURL);
 	}
 
 	protected String getFriendlyURL(

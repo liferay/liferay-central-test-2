@@ -82,6 +82,7 @@ import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.CookieKeys;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
@@ -91,7 +92,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.Normalizer;
 
 import java.io.File;
 
@@ -481,7 +481,7 @@ public class ServicePreAction extends Action {
 	protected String getFriendlyURL(String friendlyURL) {
 		friendlyURL = GetterUtil.getString(friendlyURL);
 
-		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
+		return FriendlyURLNormalizer.normalize(friendlyURL);
 	}
 
 	protected Object[] getViewableLayouts(

@@ -55,13 +55,13 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.Normalizer;
 
 import java.io.File;
 import java.io.IOException;
@@ -627,7 +627,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	protected String getVirtualHost(String virtualHost) {
-		return Normalizer.normalizeToAscii(virtualHost.trim().toLowerCase());
+		return FriendlyURLNormalizer.normalize(virtualHost);
 	}
 
 	protected void validate(String name) throws PortalException {

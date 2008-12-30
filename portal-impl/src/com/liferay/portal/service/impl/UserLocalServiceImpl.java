@@ -99,6 +99,7 @@ import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -111,7 +112,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.Normalizer;
 import com.liferay.util.SetUtil;
 
 import java.io.ByteArrayInputStream;
@@ -2857,7 +2857,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected String getScreenName(String screenName) {
-		return Normalizer.normalizeToAscii(screenName.trim().toLowerCase());
+		return FriendlyURLNormalizer.normalize(screenName);
 	}
 
 	protected void populateQuery(

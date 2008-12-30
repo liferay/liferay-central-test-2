@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -45,6 +44,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.EntryContentException;
@@ -54,7 +54,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
-import com.liferay.util.Normalizer;
 import com.liferay.util.SetUtil;
 
 import java.io.IOException;
@@ -482,7 +481,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return urlTitle;
 		}
 
-		title = Normalizer.normalizeToAscii(title);
+		title = FriendlyURLNormalizer.normalize(title);
 
 		char[] urlTitleCharArray = title.toCharArray();
 
@@ -494,9 +493,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if ((oldChar == CharPool.DASH) ||
 				(Validator.isChar(oldChar)) || (Validator.isDigit(oldChar))) {
 
-			}
-			else if (ArrayUtil.contains(_URL_TITLE_REPLACE_CHARS, oldChar)) {
-				newChar = CharPool.DASH;
 			}
 			else {
 				return urlTitle;
@@ -942,10 +938,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			throw new EntryContentException();
 		}
 	}
-
-	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
-		' ', '.', ',', '/', '\\', '\'', '\"'
-	};
 
 	private static Log _log =
 		LogFactory.getLog(BlogsEntryLocalServiceImpl.class);
