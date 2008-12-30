@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.social;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -67,36 +68,39 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String title = StringPool.BLANK;
+		String groupName = StringPool.BLANK;
 
-		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
-			if (activityType == MBActivityKeys.ADD_MESSAGE) {
-				title = themeDisplay.translate(
-					"activity-message-boards-add-message", creatorUserName);
-			}
-			else if (activityType == MBActivityKeys.REPLY_MESSAGE) {
-				title = themeDisplay.translate(
-					"activity-message-boards-reply-message",
-					new Object[] {creatorUserName, receiverUserName});
-			}
-		}
-		else {
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
 			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
 
-			String groupName = group.getName();
-
-			if (activityType == MBActivityKeys.ADD_MESSAGE) {
-				title = themeDisplay.translate(
-					"activity-message-boards-add-message-in",
-					new Object[] {creatorUserName, groupName});
-			}
-			else if (activityType == MBActivityKeys.REPLY_MESSAGE) {
-				title = themeDisplay.translate(
-					"activity-message-boards-reply-message-in",
-					new Object[] {creatorUserName, receiverUserName,
-						groupName});
-			}
+			groupName = group.getDescriptiveName();
 		}
+
+		String titlePattern = null;
+		Object[] titleArguments = null;
+
+		if (activityType == MBActivityKeys.ADD_MESSAGE) {
+			titlePattern = "activity-message-boards-add-message";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+		else if (activityType == MBActivityKeys.REPLY_MESSAGE) {
+			titlePattern = "activity-message-boards-reply-message";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {
+				creatorUserName, receiverUserName, groupName
+			};
+		}
+
+		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 

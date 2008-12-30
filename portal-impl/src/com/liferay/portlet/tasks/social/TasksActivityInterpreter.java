@@ -67,47 +67,50 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String title = StringPool.BLANK;
+		String groupName = StringPool.BLANK;
 
-		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
-			if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
-				title = themeDisplay.translate(
-					"activity-tasks-add-proposal", creatorUserName);
-			}
-			else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
-				title = themeDisplay.translate(
-					"activity-tasks-assign-proposal",
-					new Object[] {creatorUserName, receiverUserName});
-			}
-			else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
-				title = themeDisplay.translate(
-					"activity-tasks-review-proposal",
-					new Object[] {creatorUserName, receiverUserName});
-			}
-		}
-		else {
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
 			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
 
-			String groupName = group.getName();
-
-			if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
-				title = themeDisplay.translate(
-					"activity-tasks-add-proposal-in",
-					new Object[] {creatorUserName, groupName});
-			}
-			else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
-				title = themeDisplay.translate(
-					"activity-tasks-assign-proposal-in",
-					new Object[] {creatorUserName, receiverUserName,
-						groupName});
-			}
-			else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
-				title = themeDisplay.translate(
-					"activity-tasks-review-proposal-in",
-					new Object[] {creatorUserName, receiverUserName,
-						groupName});
-			}
+			groupName = group.getDescriptiveName();
 		}
+
+		String titlePattern = null;
+		Object[] titleArguments = null;
+
+		if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
+			titlePattern = "activity-tasks-add-proposal";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+		else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
+			titlePattern = "activity-tasks-assign-proposal";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {
+				creatorUserName, receiverUserName, groupName
+			};
+		}
+		else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
+			titlePattern = "activity-tasks-review-proposal";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {
+				creatorUserName, receiverUserName, groupName
+			};
+		}
+
+		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 

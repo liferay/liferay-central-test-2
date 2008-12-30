@@ -80,36 +80,39 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String title = StringPool.BLANK;
+		String groupName = StringPool.BLANK;
 
-		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
-			if (activityType == BlogsActivityKeys.ADD_COMMENT) {
-				title = themeDisplay.translate(
-					"activity-blogs-add-comment",
-					new Object[] {creatorUserName, receiverUserName});
-			}
-			else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-				title = themeDisplay.translate(
-					"activity-blogs-add-entry", creatorUserName);
-			}
-		}
-		else {
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
 			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
 
-			String groupName = group.getName();
-
-			if (activityType == BlogsActivityKeys.ADD_COMMENT) {
-				title = themeDisplay.translate(
-					"activity-blogs-add-comment-in",
-					new Object[] {creatorUserName, receiverUserName,
-						groupName});
-			}
-			else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-				title = themeDisplay.translate(
-					"activity-blogs-add-entry-in",
-					new Object[] {creatorUserName, groupName});
-			}
+			groupName = group.getDescriptiveName();
 		}
+
+		String titlePattern = null;
+		Object[] titleArguments = null;
+
+		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
+			titlePattern = "activity-blogs-add-comment";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {
+				creatorUserName, receiverUserName, groupName
+			};
+		}
+		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
+			titlePattern = "activity-blogs-add-entry";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+
+		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 

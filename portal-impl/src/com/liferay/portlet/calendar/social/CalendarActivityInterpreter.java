@@ -23,6 +23,7 @@
 package com.liferay.portlet.calendar.social;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -64,34 +65,37 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String title = StringPool.BLANK;
+		String groupName = StringPool.BLANK;
 
-		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
-			if (activityType == CalendarActivityKeys.ADD_EVENT) {
-				title = themeDisplay.translate(
-					"activity-calendar-add-event", creatorUserName);
-			}
-			else if (activityType == CalendarActivityKeys.UPDATE_EVENT) {
-				title = themeDisplay.translate(
-					"activity-calendar-update-event", creatorUserName);
-			}
-		}
-		else {
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
 			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
 
-			String groupName = group.getName();
-
-			if (activityType == CalendarActivityKeys.ADD_EVENT) {
-				title = themeDisplay.translate(
-					"activity-calendar-add-event-in",
-					new Object[] {creatorUserName, groupName});
-			}
-			else if (activityType == CalendarActivityKeys.UPDATE_EVENT) {
-				title = themeDisplay.translate(
-					"activity-calendar-update-event-in",
-					new Object[] {creatorUserName, groupName});
-			}
+			groupName = group.getDescriptiveName();
 		}
+
+		String titlePattern = null;
+		Object[] titleArguments = null;
+
+		if (activityType == CalendarActivityKeys.ADD_EVENT) {
+			titlePattern = "activity-calendar-add-event";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+		else if (activityType == CalendarActivityKeys.UPDATE_EVENT) {
+			titlePattern = "activity-calendar-update-event";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+
+		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 

@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.social;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -66,34 +67,37 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String title = StringPool.BLANK;
+		String groupName = StringPool.BLANK;
 
-		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
-			if (activityType == WikiActivityKeys.ADD_PAGE) {
-				title = themeDisplay.translate(
-					"activity-wiki-add-page", creatorUserName);
-			}
-			else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
-				title = themeDisplay.translate(
-					"activity-wiki-update-page", creatorUserName);
-			}
-		}
-		else {
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
 			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
 
-			String groupName = group.getName();
-
-			if (activityType == WikiActivityKeys.ADD_PAGE) {
-				title = themeDisplay.translate(
-					"activity-wiki-add-page-in",
-					new Object[] {creatorUserName, groupName});
-			}
-			else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
-				title = themeDisplay.translate(
-					"activity-wiki-update-page-in",
-					new Object[] {creatorUserName, groupName});
-			}
+			groupName = group.getDescriptiveName();
 		}
+
+		String titlePattern = null;
+		Object[] titleArguments = null;
+
+		if (activityType == WikiActivityKeys.ADD_PAGE) {
+			titlePattern = "activity-wiki-add-page";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+		else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
+			titlePattern = "activity-wiki-update-page";
+
+			if (Validator.isNotNull(groupName)) {
+				titlePattern += "-in";
+			}
+
+			titleArguments = new Object[] {creatorUserName, groupName};
+		}
+
+		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 
