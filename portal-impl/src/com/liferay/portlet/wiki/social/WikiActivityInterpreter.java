@@ -67,6 +67,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Title
 
 		String title = StringPool.BLANK;
+
 		if (activity.getGroupId() == themeDisplay.getScopeGroupId()) {
 			if (activityType == WikiActivityKeys.ADD_PAGE) {
 				title = themeDisplay.translate(
