@@ -50,6 +50,7 @@ import com.liferay.wsrp.service.WSRPConsumerRegistrationLocalServiceUtil;
 
 import com.sun.portal.wsrp.common.KeyGenerator;
 import com.sun.portal.wsrp.common.LeaseTime;
+import com.sun.portal.wsrp.common.WSRPFactory;
 import com.sun.portal.wsrp.common.stubs.v2.PropertyDescription;
 import com.sun.portal.wsrp.common.stubs.v2.RegistrationData;
 import com.sun.portal.wsrp.producer.AbstractProducer;
@@ -84,26 +85,16 @@ public class ProducerImpl extends AbstractProducer {
 
 		String registrationHandle = KeyGenerator.generateKey();
 
-		String consumerModes = StringUtil.merge(
-			registrationRecord.getConsumerModes());
-		String consumerWindowStates = StringUtil.merge(
-			registrationRecord.getConsumerWindowStates());
-		String customUserProfileData = StringUtil.merge(
-			registrationRecord.getCustomUserProfileData());
-		String consumerUserScopes = StringUtil.merge(
-			registrationRecord.getConsumerUserScopes());
-
-		String registrationProperties = null;
-
 		String lifetime = getLifeTimeString(registrationRecord.getLifetime());
 
 		try {
+			String registrationData =
+				WSRPFactory.getInstance().getRegistrationDataXML(
+					registrationRecord.getRegistrationData());
+
 			WSRPConsumerRegistrationLocalServiceUtil.addConsumerRegistration(
-				registrationRecord.getConsumerName(),
-				true, registrationHandle, registrationRecord.getConsumerAgent(),
-				registrationRecord.isMethodGetSupported(), consumerModes,
-				consumerWindowStates, consumerUserScopes, customUserProfileData,
-				registrationProperties, lifetime,
+				registrationRecord.getConsumerName(), true,
+				registrationHandle, registrationData, lifetime,
 				_producerModel.getInstanceName());
 		}
 		catch (Exception e) {
@@ -261,18 +252,14 @@ public class ProducerImpl extends AbstractProducer {
 			getConsumerRegistrationByHandle(
 				registrationRecord.getRegistrationHandle());
 
-		consumerRegistration.setConsumerModes(
-			StringUtil.merge(registrationRecord.getConsumerModes())) ;
-		consumerRegistration.setCustomUserProfileData(
-			StringUtil.merge(registrationRecord.getCustomUserProfileData()));
-		consumerRegistration.setConsumerUserScopes(
-			StringUtil.merge(registrationRecord.getConsumerUserScopes()));
-		consumerRegistration.setConsumerWindowStates(
-			StringUtil.merge(registrationRecord.getConsumerWindowStates()));
-		consumerRegistration.setLifetimeTerminationTime(
-			getLifeTimeString(registrationRecord.getLifetime()));
-
 		try {
+			consumerRegistration.setRegistrationData(
+				WSRPFactory.getInstance().getRegistrationDataXML(
+					registrationRecord.getRegistrationData()));
+
+			consumerRegistration.setLifetimeTerminationTime(
+				getLifeTimeString(registrationRecord.getLifetime()));
+
 			WSRPConsumerRegistrationLocalServiceUtil.
 				updateWSRPConsumerRegistration(consumerRegistration);
 		}
@@ -416,22 +403,23 @@ public class ProducerImpl extends AbstractProducer {
 	}
 
 	protected RegistrationRecord getRegistrationRecord(
-		WSRPConsumerRegistration consumerRegistration) {
+			WSRPConsumerRegistration consumerRegistration)
+		throws ProducerException {
 
-		RegistrationData registrationData = new RegistrationData();
+		try {
+			RegistrationData registrationData =
+				WSRPFactory.getInstance().getRegistrationData(
+					consumerRegistration.getRegistrationData());
 
-		registrationData.setConsumerAgent(
-			consumerRegistration.getConsumerAgent());
-		registrationData.setConsumerName(
-			consumerRegistration.getConsumerName());
-		registrationData.setMethodGetSupported(
-			consumerRegistration.getMethodGetSupported());
+			RegistrationRecord registrationRecord = new RegistrationRecord(
+				consumerRegistration.getRegistrationHandle(),
+				consumerRegistration.getStatus(), registrationData, null);
 
-		RegistrationRecord registrationRecord = new RegistrationRecord(
-			consumerRegistration.getRegistrationHandle(),
-			consumerRegistration.getStatus(), registrationData, null);
-
-		return registrationRecord;
+			return registrationRecord;
+		}
+		catch (Exception e) {
+			throw new ProducerException(e);
+		}
 	}
 
 	private WSRPProducer _producerModel;

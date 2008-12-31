@@ -75,13 +75,7 @@ public class WSRPConsumerRegistrationPersistenceTest
 		newWSRPConsumerRegistration.setConsumerName(randomString());
 		newWSRPConsumerRegistration.setStatus(randomBoolean());
 		newWSRPConsumerRegistration.setRegistrationHandle(randomString());
-		newWSRPConsumerRegistration.setConsumerAgent(randomString());
-		newWSRPConsumerRegistration.setMethodGetSupported(randomBoolean());
-		newWSRPConsumerRegistration.setConsumerModes(randomString());
-		newWSRPConsumerRegistration.setConsumerWindowStates(randomString());
-		newWSRPConsumerRegistration.setConsumerUserScopes(randomString());
-		newWSRPConsumerRegistration.setCustomUserProfileData(randomString());
-		newWSRPConsumerRegistration.setRegistrationProperties(randomString());
+		newWSRPConsumerRegistration.setRegistrationData(randomString());
 		newWSRPConsumerRegistration.setLifetimeTerminationTime(randomString());
 		newWSRPConsumerRegistration.setProducerKey(randomString());
 
@@ -97,20 +91,8 @@ public class WSRPConsumerRegistrationPersistenceTest
 			newWSRPConsumerRegistration.getStatus());
 		assertEquals(existingWSRPConsumerRegistration.getRegistrationHandle(),
 			newWSRPConsumerRegistration.getRegistrationHandle());
-		assertEquals(existingWSRPConsumerRegistration.getConsumerAgent(),
-			newWSRPConsumerRegistration.getConsumerAgent());
-		assertEquals(existingWSRPConsumerRegistration.getMethodGetSupported(),
-			newWSRPConsumerRegistration.getMethodGetSupported());
-		assertEquals(existingWSRPConsumerRegistration.getConsumerModes(),
-			newWSRPConsumerRegistration.getConsumerModes());
-		assertEquals(existingWSRPConsumerRegistration.getConsumerWindowStates(),
-			newWSRPConsumerRegistration.getConsumerWindowStates());
-		assertEquals(existingWSRPConsumerRegistration.getConsumerUserScopes(),
-			newWSRPConsumerRegistration.getConsumerUserScopes());
-		assertEquals(existingWSRPConsumerRegistration.getCustomUserProfileData(),
-			newWSRPConsumerRegistration.getCustomUserProfileData());
-		assertEquals(existingWSRPConsumerRegistration.getRegistrationProperties(),
-			newWSRPConsumerRegistration.getRegistrationProperties());
+		assertEquals(existingWSRPConsumerRegistration.getRegistrationData(),
+			newWSRPConsumerRegistration.getRegistrationData());
 		assertEquals(existingWSRPConsumerRegistration.getLifetimeTerminationTime(),
 			newWSRPConsumerRegistration.getLifetimeTerminationTime());
 		assertEquals(existingWSRPConsumerRegistration.getProducerKey(),
@@ -165,13 +147,7 @@ public class WSRPConsumerRegistrationPersistenceTest
 		wsrpConsumerRegistration.setConsumerName(randomString());
 		wsrpConsumerRegistration.setStatus(randomBoolean());
 		wsrpConsumerRegistration.setRegistrationHandle(randomString());
-		wsrpConsumerRegistration.setConsumerAgent(randomString());
-		wsrpConsumerRegistration.setMethodGetSupported(randomBoolean());
-		wsrpConsumerRegistration.setConsumerModes(randomString());
-		wsrpConsumerRegistration.setConsumerWindowStates(randomString());
-		wsrpConsumerRegistration.setConsumerUserScopes(randomString());
-		wsrpConsumerRegistration.setCustomUserProfileData(randomString());
-		wsrpConsumerRegistration.setRegistrationProperties(randomString());
+		wsrpConsumerRegistration.setRegistrationData(randomString());
 		wsrpConsumerRegistration.setLifetimeTerminationTime(randomString());
 		wsrpConsumerRegistration.setProducerKey(randomString());
 

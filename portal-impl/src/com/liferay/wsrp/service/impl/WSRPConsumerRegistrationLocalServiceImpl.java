@@ -42,10 +42,7 @@ public class WSRPConsumerRegistrationLocalServiceImpl
 
 	public void addConsumerRegistration(
 			String consumerName, boolean status, String registrationHandle,
-			String consumerAgent, boolean methodGetSupported,
-			String consumerModes, String consumerWindowStates,
-			String consumerUserScopes, String customUserProfileData,
-			String registrationProperties, String lifetimeTerminationTime,
+			String registrationData, String lifetimeTerminationTime,
 			String producerKey)
 		throws SystemException {
 
@@ -57,13 +54,7 @@ public class WSRPConsumerRegistrationLocalServiceImpl
 		consumerRegistration.setConsumerName(consumerName);
 		consumerRegistration.setStatus(status);
 		consumerRegistration.setRegistrationHandle(registrationHandle);
-		consumerRegistration.setConsumerAgent(consumerAgent);
-		consumerRegistration.setMethodGetSupported(methodGetSupported);
-		consumerRegistration.setConsumerModes(consumerModes);
-		consumerRegistration.setConsumerWindowStates(consumerWindowStates);
-		consumerRegistration.setConsumerUserScopes(consumerUserScopes);
-		consumerRegistration.setCustomUserProfileData(customUserProfileData);
-		consumerRegistration.setRegistrationProperties(registrationProperties);
+		consumerRegistration.setRegistrationData(registrationData);
 		consumerRegistration.setLifetimeTerminationTime(
 			lifetimeTerminationTime);
 		consumerRegistration.setProducerKey(producerKey);

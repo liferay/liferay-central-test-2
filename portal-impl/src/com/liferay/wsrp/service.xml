@@ -49,13 +49,7 @@
 		<column name="consumerName" type="String" />
 		<column name="status" type="boolean" />
 		<column name="registrationHandle" type="String" />
-		<column name="consumerAgent" type="String" />
-		<column name="methodGetSupported" type="boolean" />
-		<column name="consumerModes" type="String" />
-		<column name="consumerWindowStates" type="String" />
-		<column name="consumerUserScopes" type="String" />
-		<column name="customUserProfileData" type="String" />
-		<column name="registrationProperties" type="String" />
+		<column name="registrationData" type="String" />
 		<column name="lifetimeTerminationTime" type="String" />
 		<column name="producerKey" type="String" />
 

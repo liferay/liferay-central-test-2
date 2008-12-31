@@ -1603,13 +1603,7 @@ create table WSRPConsumerRegistration (
 	consumerName VARCHAR(100) null,
 	status BOOLEAN,
 	registrationHandle VARCHAR(75) null,
-	consumerAgent VARCHAR(200) null,
-	methodGetSupported BOOLEAN,
-	consumerModes VARCHAR(200) null,
-	consumerWindowStates VARCHAR(200) null,
-	consumerUserScopes VARCHAR(200) null,
-	customUserProfileData VARCHAR(75) null,
-	registrationProperties STRING null,
+	registrationData TEXT null,
 	lifetimeTerminationTime VARCHAR(75) null,
 	producerKey VARCHAR(75) null
 );

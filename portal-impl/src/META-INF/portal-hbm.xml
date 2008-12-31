@@ -1703,13 +1703,7 @@
 		<property name="consumerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="registrationHandle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="consumerAgent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="methodGetSupported" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="consumerModes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="consumerWindowStates" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="consumerUserScopes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="customUserProfileData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="registrationProperties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="registrationData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lifetimeTerminationTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="producerKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>

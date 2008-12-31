@@ -97,11 +97,7 @@ public interface WSRPConsumerRegistrationLocalService {
 
 	public void addConsumerRegistration(java.lang.String consumerName,
 		boolean status, java.lang.String registrationHandle,
-		java.lang.String consumerAgent, boolean methodGetSupported,
-		java.lang.String consumerModes, java.lang.String consumerWindowStates,
-		java.lang.String consumerUserScopes,
-		java.lang.String customUserProfileData,
-		java.lang.String registrationProperties,
+		java.lang.String registrationData,
 		java.lang.String lifetimeTerminationTime, java.lang.String producerKey)
 		throws com.liferay.portal.SystemException;
 

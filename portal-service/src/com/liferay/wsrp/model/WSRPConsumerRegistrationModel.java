@@ -67,35 +67,9 @@ public interface WSRPConsumerRegistrationModel extends BaseModel {
 
 	public void setRegistrationHandle(String registrationHandle);
 
-	public String getConsumerAgent();
+	public String getRegistrationData();
 
-	public void setConsumerAgent(String consumerAgent);
-
-	public boolean getMethodGetSupported();
-
-	public boolean isMethodGetSupported();
-
-	public void setMethodGetSupported(boolean methodGetSupported);
-
-	public String getConsumerModes();
-
-	public void setConsumerModes(String consumerModes);
-
-	public String getConsumerWindowStates();
-
-	public void setConsumerWindowStates(String consumerWindowStates);
-
-	public String getConsumerUserScopes();
-
-	public void setConsumerUserScopes(String consumerUserScopes);
-
-	public String getCustomUserProfileData();
-
-	public void setCustomUserProfileData(String customUserProfileData);
-
-	public String getRegistrationProperties();
-
-	public void setRegistrationProperties(String registrationProperties);
+	public void setRegistrationData(String registrationData);
 
 	public String getLifetimeTerminationTime();
 

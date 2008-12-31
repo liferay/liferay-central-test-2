@@ -77,25 +77,7 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 			{ "registrationHandle", new Integer(Types.VARCHAR) },
 			
 
-			{ "consumerAgent", new Integer(Types.VARCHAR) },
-			
-
-			{ "methodGetSupported", new Integer(Types.BOOLEAN) },
-			
-
-			{ "consumerModes", new Integer(Types.VARCHAR) },
-			
-
-			{ "consumerWindowStates", new Integer(Types.VARCHAR) },
-			
-
-			{ "consumerUserScopes", new Integer(Types.VARCHAR) },
-			
-
-			{ "customUserProfileData", new Integer(Types.VARCHAR) },
-			
-
-			{ "registrationProperties", new Integer(Types.VARCHAR) },
+			{ "registrationData", new Integer(Types.CLOB) },
 			
 
 			{ "lifetimeTerminationTime", new Integer(Types.VARCHAR) },
@@ -103,7 +85,7 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 
 			{ "producerKey", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WSRPConsumerRegistration (consumerRegistrationId LONG not null primary key,consumerName VARCHAR(100) null,status BOOLEAN,registrationHandle VARCHAR(75) null,consumerAgent VARCHAR(200) null,methodGetSupported BOOLEAN,consumerModes VARCHAR(200) null,consumerWindowStates VARCHAR(200) null,consumerUserScopes VARCHAR(200) null,customUserProfileData VARCHAR(75) null,registrationProperties STRING null,lifetimeTerminationTime VARCHAR(75) null,producerKey VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WSRPConsumerRegistration (consumerRegistrationId LONG not null primary key,consumerName VARCHAR(100) null,status BOOLEAN,registrationHandle VARCHAR(75) null,registrationData TEXT null,lifetimeTerminationTime VARCHAR(75) null,producerKey VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table WSRPConsumerRegistration";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -120,13 +102,7 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 		model.setConsumerName(soapModel.getConsumerName());
 		model.setStatus(soapModel.getStatus());
 		model.setRegistrationHandle(soapModel.getRegistrationHandle());
-		model.setConsumerAgent(soapModel.getConsumerAgent());
-		model.setMethodGetSupported(soapModel.getMethodGetSupported());
-		model.setConsumerModes(soapModel.getConsumerModes());
-		model.setConsumerWindowStates(soapModel.getConsumerWindowStates());
-		model.setConsumerUserScopes(soapModel.getConsumerUserScopes());
-		model.setCustomUserProfileData(soapModel.getCustomUserProfileData());
-		model.setRegistrationProperties(soapModel.getRegistrationProperties());
+		model.setRegistrationData(soapModel.getRegistrationData());
 		model.setLifetimeTerminationTime(soapModel.getLifetimeTerminationTime());
 		model.setProducerKey(soapModel.getProducerKey());
 
@@ -212,103 +188,16 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getConsumerAgent() {
-		return GetterUtil.getString(_consumerAgent);
+	public String getRegistrationData() {
+		return GetterUtil.getString(_registrationData);
 	}
 
-	public void setConsumerAgent(String consumerAgent) {
-		if (((consumerAgent == null) && (_consumerAgent != null)) ||
-				((consumerAgent != null) && (_consumerAgent == null)) ||
-				((consumerAgent != null) && (_consumerAgent != null) &&
-				!consumerAgent.equals(_consumerAgent))) {
-			_consumerAgent = consumerAgent;
-		}
-	}
-
-	public boolean getMethodGetSupported() {
-		return _methodGetSupported;
-	}
-
-	public boolean isMethodGetSupported() {
-		return _methodGetSupported;
-	}
-
-	public void setMethodGetSupported(boolean methodGetSupported) {
-		if (methodGetSupported != _methodGetSupported) {
-			_methodGetSupported = methodGetSupported;
-		}
-	}
-
-	public String getConsumerModes() {
-		return GetterUtil.getString(_consumerModes);
-	}
-
-	public void setConsumerModes(String consumerModes) {
-		if (((consumerModes == null) && (_consumerModes != null)) ||
-				((consumerModes != null) && (_consumerModes == null)) ||
-				((consumerModes != null) && (_consumerModes != null) &&
-				!consumerModes.equals(_consumerModes))) {
-			_consumerModes = consumerModes;
-		}
-	}
-
-	public String getConsumerWindowStates() {
-		return GetterUtil.getString(_consumerWindowStates);
-	}
-
-	public void setConsumerWindowStates(String consumerWindowStates) {
-		if (((consumerWindowStates == null) && (_consumerWindowStates != null)) ||
-				((consumerWindowStates != null) &&
-				(_consumerWindowStates == null)) ||
-				((consumerWindowStates != null) &&
-				(_consumerWindowStates != null) &&
-				!consumerWindowStates.equals(_consumerWindowStates))) {
-			_consumerWindowStates = consumerWindowStates;
-		}
-	}
-
-	public String getConsumerUserScopes() {
-		return GetterUtil.getString(_consumerUserScopes);
-	}
-
-	public void setConsumerUserScopes(String consumerUserScopes) {
-		if (((consumerUserScopes == null) && (_consumerUserScopes != null)) ||
-				((consumerUserScopes != null) && (_consumerUserScopes == null)) ||
-				((consumerUserScopes != null) && (_consumerUserScopes != null) &&
-				!consumerUserScopes.equals(_consumerUserScopes))) {
-			_consumerUserScopes = consumerUserScopes;
-		}
-	}
-
-	public String getCustomUserProfileData() {
-		return GetterUtil.getString(_customUserProfileData);
-	}
-
-	public void setCustomUserProfileData(String customUserProfileData) {
-		if (((customUserProfileData == null) &&
-				(_customUserProfileData != null)) ||
-				((customUserProfileData != null) &&
-				(_customUserProfileData == null)) ||
-				((customUserProfileData != null) &&
-				(_customUserProfileData != null) &&
-				!customUserProfileData.equals(_customUserProfileData))) {
-			_customUserProfileData = customUserProfileData;
-		}
-	}
-
-	public String getRegistrationProperties() {
-		return GetterUtil.getString(_registrationProperties);
-	}
-
-	public void setRegistrationProperties(String registrationProperties) {
-		if (((registrationProperties == null) &&
-				(_registrationProperties != null)) ||
-				((registrationProperties != null) &&
-				(_registrationProperties == null)) ||
-				((registrationProperties != null) &&
-				(_registrationProperties != null) &&
-				!registrationProperties.equals(_registrationProperties))) {
-			_registrationProperties = registrationProperties;
+	public void setRegistrationData(String registrationData) {
+		if (((registrationData == null) && (_registrationData != null)) ||
+				((registrationData != null) && (_registrationData == null)) ||
+				((registrationData != null) && (_registrationData != null) &&
+				!registrationData.equals(_registrationData))) {
+			_registrationData = registrationData;
 		}
 	}
 
@@ -355,16 +244,7 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 			model.setConsumerName(HtmlUtil.escape(getConsumerName()));
 			model.setStatus(getStatus());
 			model.setRegistrationHandle(HtmlUtil.escape(getRegistrationHandle()));
-			model.setConsumerAgent(HtmlUtil.escape(getConsumerAgent()));
-			model.setMethodGetSupported(getMethodGetSupported());
-			model.setConsumerModes(HtmlUtil.escape(getConsumerModes()));
-			model.setConsumerWindowStates(HtmlUtil.escape(
-					getConsumerWindowStates()));
-			model.setConsumerUserScopes(HtmlUtil.escape(getConsumerUserScopes()));
-			model.setCustomUserProfileData(HtmlUtil.escape(
-					getCustomUserProfileData()));
-			model.setRegistrationProperties(HtmlUtil.escape(
-					getRegistrationProperties()));
+			model.setRegistrationData(HtmlUtil.escape(getRegistrationData()));
 			model.setLifetimeTerminationTime(HtmlUtil.escape(
 					getLifetimeTerminationTime()));
 			model.setProducerKey(HtmlUtil.escape(getProducerKey()));
@@ -393,13 +273,7 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 		clone.setConsumerName(getConsumerName());
 		clone.setStatus(getStatus());
 		clone.setRegistrationHandle(getRegistrationHandle());
-		clone.setConsumerAgent(getConsumerAgent());
-		clone.setMethodGetSupported(getMethodGetSupported());
-		clone.setConsumerModes(getConsumerModes());
-		clone.setConsumerWindowStates(getConsumerWindowStates());
-		clone.setConsumerUserScopes(getConsumerUserScopes());
-		clone.setCustomUserProfileData(getCustomUserProfileData());
-		clone.setRegistrationProperties(getRegistrationProperties());
+		clone.setRegistrationData(getRegistrationData());
 		clone.setLifetimeTerminationTime(getLifetimeTerminationTime());
 		clone.setProducerKey(getProducerKey());
 
@@ -458,13 +332,7 @@ public class WSRPConsumerRegistrationModelImpl extends BaseModelImpl {
 	private String _consumerName;
 	private boolean _status;
 	private String _registrationHandle;
-	private String _consumerAgent;
-	private boolean _methodGetSupported;
-	private String _consumerModes;
-	private String _consumerWindowStates;
-	private String _consumerUserScopes;
-	private String _customUserProfileData;
-	private String _registrationProperties;
+	private String _registrationData;
 	private String _lifetimeTerminationTime;
 	private String _producerKey;
 	private transient ExpandoBridge _expandoBridge;

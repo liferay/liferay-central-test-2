@@ -1738,22 +1738,8 @@
 		</field>
 		<field name="status" type="boolean" />
 		<field name="registrationHandle" type="String" />
-		<field name="consumerAgent" type="String">
-			<hint name="max-length">200</hint>
-		</field>
-		<field name="methodGetSupported" type="boolean" />
-		<field name="consumerModes" type="String">
-			<hint name="max-length">200</hint>
-		</field>
-		<field name="consumerWindowStates" type="String">
-			<hint name="max-length">200</hint>
-		</field>
-		<field name="consumerUserScopes" type="String">
-			<hint name="max-length">200</hint>
-		</field>
-		<field name="customUserProfileData" type="String" />
-		<field name="registrationProperties" type="String">
-			<hint name="max-length">4000</hint>
+		<field name="registrationData" type="String">
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="lifetimeTerminationTime" type="String" />
 		<field name="producerKey" type="String" />

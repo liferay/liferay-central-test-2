@@ -54,13 +54,7 @@ public class WSRPConsumerRegistrationSoap implements Serializable {
 		soapModel.setConsumerName(model.getConsumerName());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setRegistrationHandle(model.getRegistrationHandle());
-		soapModel.setConsumerAgent(model.getConsumerAgent());
-		soapModel.setMethodGetSupported(model.getMethodGetSupported());
-		soapModel.setConsumerModes(model.getConsumerModes());
-		soapModel.setConsumerWindowStates(model.getConsumerWindowStates());
-		soapModel.setConsumerUserScopes(model.getConsumerUserScopes());
-		soapModel.setCustomUserProfileData(model.getCustomUserProfileData());
-		soapModel.setRegistrationProperties(model.getRegistrationProperties());
+		soapModel.setRegistrationData(model.getRegistrationData());
 		soapModel.setLifetimeTerminationTime(model.getLifetimeTerminationTime());
 		soapModel.setProducerKey(model.getProducerKey());
 
@@ -125,64 +119,12 @@ public class WSRPConsumerRegistrationSoap implements Serializable {
 		_registrationHandle = registrationHandle;
 	}
 
-	public String getConsumerAgent() {
-		return _consumerAgent;
+	public String getRegistrationData() {
+		return _registrationData;
 	}
 
-	public void setConsumerAgent(String consumerAgent) {
-		_consumerAgent = consumerAgent;
-	}
-
-	public boolean getMethodGetSupported() {
-		return _methodGetSupported;
-	}
-
-	public boolean isMethodGetSupported() {
-		return _methodGetSupported;
-	}
-
-	public void setMethodGetSupported(boolean methodGetSupported) {
-		_methodGetSupported = methodGetSupported;
-	}
-
-	public String getConsumerModes() {
-		return _consumerModes;
-	}
-
-	public void setConsumerModes(String consumerModes) {
-		_consumerModes = consumerModes;
-	}
-
-	public String getConsumerWindowStates() {
-		return _consumerWindowStates;
-	}
-
-	public void setConsumerWindowStates(String consumerWindowStates) {
-		_consumerWindowStates = consumerWindowStates;
-	}
-
-	public String getConsumerUserScopes() {
-		return _consumerUserScopes;
-	}
-
-	public void setConsumerUserScopes(String consumerUserScopes) {
-		_consumerUserScopes = consumerUserScopes;
-	}
-
-	public String getCustomUserProfileData() {
-		return _customUserProfileData;
-	}
-
-	public void setCustomUserProfileData(String customUserProfileData) {
-		_customUserProfileData = customUserProfileData;
-	}
-
-	public String getRegistrationProperties() {
-		return _registrationProperties;
-	}
-
-	public void setRegistrationProperties(String registrationProperties) {
-		_registrationProperties = registrationProperties;
+	public void setRegistrationData(String registrationData) {
+		_registrationData = registrationData;
 	}
 
 	public String getLifetimeTerminationTime() {
@@ -205,13 +147,7 @@ public class WSRPConsumerRegistrationSoap implements Serializable {
 	private String _consumerName;
 	private boolean _status;
 	private String _registrationHandle;
-	private String _consumerAgent;
-	private boolean _methodGetSupported;
-	private String _consumerModes;
-	private String _consumerWindowStates;
-	private String _consumerUserScopes;
-	private String _customUserProfileData;
-	private String _registrationProperties;
+	private String _registrationData;
 	private String _lifetimeTerminationTime;
 	private String _producerKey;
 }
