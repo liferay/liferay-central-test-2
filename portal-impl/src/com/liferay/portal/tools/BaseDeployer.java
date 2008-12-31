@@ -75,6 +75,7 @@ import org.apache.oro.io.GlobFilenameFilter;
  * <a href="BaseDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
  *
  */
 public class BaseDeployer {
@@ -495,11 +496,16 @@ public class BaseDeployer {
 
 				WarTask.war(srcFile, tempDir, "WEB-INF/web.xml", webXml);
 
-				if (!tempDir.renameTo(deployDir)) {
-					WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
+				if (ServerDetector.isGlassfish()) {
+					JSR88Deployer.deploy(
+						displayName, tempDir, deployDir.getName());
+				} else {
+					if (!tempDir.renameTo(deployDir)) {
+						WarTask.war(
+							srcFile, deployDir, "WEB-INF/web.xml", webXml);
+					}
+					DeleteTask.deleteDirectory(tempDir);
 				}
-
-				DeleteTask.deleteDirectory(tempDir);
 			}
 			else {
 
