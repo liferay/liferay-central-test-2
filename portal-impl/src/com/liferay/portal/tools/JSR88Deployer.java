@@ -69,7 +69,7 @@ public class JSR88Deployer {
 		
 		String jsr88DeployEnabled = PropsUtil.get(
 				appServerId + StringPool.PERIOD + 
-				PropsKeys.JSR88_DEPLOYMENT_ENABLED);
+				PropsKeys.JSR88_DEPLOYMENT_ENABLED) + StringPool.BLANK;
 		
 		if (jsr88DeployEnabled.equalsIgnoreCase("true")) {
 			File tempDirWar = new File(
