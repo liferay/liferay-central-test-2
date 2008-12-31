@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ant.DeleteTask;
+import com.liferay.util.ant.WarTask;
 
 import java.io.File;
 
@@ -61,21 +62,37 @@ import java.util.Properties;
 
 public class JSR88Deployer {
 
-	public static void deploy(String displayName, File tempDir,
-			String fileName) throws Exception {
+	public static void deploy(String displayName, File srcFile, File tempDir, 
+			File deployDir, File webXml) throws Exception {
 
-		File tempDirWar = new File(tempDir.getParent(), fileName);
+		String appServerId = GetterUtil.getString(ServerDetector.getServerId());
+		
+		String jsr88DeployEnabled = PropsUtil.get(
+				appServerId + StringPool.PERIOD + 
+				PropsKeys.JSR88_DEPLOYMENT_ENABLED);
+		
+		if (jsr88DeployEnabled.equalsIgnoreCase("true")) {
+			File tempDirWar = new File(
+				tempDir.getParent(), deployDir.getName());
 
-		if (tempDirWar.exists()) {
-			tempDirWar.delete();
-		}
+			if (tempDirWar.exists()) {
+				tempDirWar.delete();
+			}
 
-		boolean success = tempDir.renameTo(tempDirWar);
+			boolean success = tempDir.renameTo(tempDirWar);
 
-		if (success) {
-			_doJsr88Deploy(displayName, tempDirWar);
+			if (success) {
+				_doJsr88Deploy(displayName, tempDirWar);
+			} else {
+				_doJsr88Deploy(displayName, tempDir);
+			}
 		} else {
-			_doJsr88Deploy(displayName, tempDir);
+			// Do the normal appserver AutoDeploy
+			if (!tempDir.renameTo(deployDir)) {
+				WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
+			}
+
+			DeleteTask.deleteDirectory(tempDir);			
 		}
 	}
 

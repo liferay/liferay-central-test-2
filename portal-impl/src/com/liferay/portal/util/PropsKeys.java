@@ -521,6 +521,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 	
+	public static final String JSR88_DEPLOYMENT_ENABLED = "jsr88.deployment.enabled";
+	
 	public static final String JSR88_DF_CLASSNAME = "jsr88.df.classname";
 	
 	public static final String JSR88_DM_ID = "jsr88.dm.id";

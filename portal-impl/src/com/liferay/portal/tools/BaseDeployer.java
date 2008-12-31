@@ -496,16 +496,8 @@ public class BaseDeployer {
 
 				WarTask.war(srcFile, tempDir, "WEB-INF/web.xml", webXml);
 
-				if (ServerDetector.isGlassfish()) {
-					JSR88Deployer.deploy(
-						displayName, tempDir, deployDir.getName());
-				} else {
-					if (!tempDir.renameTo(deployDir)) {
-						WarTask.war(
-							srcFile, deployDir, "WEB-INF/web.xml", webXml);
-					}
-					DeleteTask.deleteDirectory(tempDir);
-				}
+				JSR88Deployer.deploy(
+						displayName, srcFile, tempDir, deployDir,webXml);
 			}
 			else {
 
