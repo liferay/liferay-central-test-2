@@ -29,8 +29,11 @@ import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
+
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -56,11 +59,21 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 		return _dialect;
 	}
 
+	public ModelListener[] getListeners() {
+		return listeners;
+	}
+
 	public Session openSession() throws ORMException {
 		return _sessionFactory.openSession();
 	}
 
 	public void registerListener(ModelListener listener) {
+		List<ModelListener> listenersList = ListUtil.fromArray(listeners);
+
+		listenersList.add(listener);
+
+		listeners = listenersList.toArray(
+			new ModelListener[listenersList.size()]);
 	}
 
 	public SystemException processException(Exception e) {
@@ -88,7 +101,15 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 	}
 
 	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listenersList = ListUtil.fromArray(listeners);
+
+		listenersList.remove(listener);
+
+		listeners = listenersList.toArray(
+			new ModelListener[listenersList.size()]);
 	}
+
+	protected ModelListener[] listeners = new ModelListener[0];
 
 	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);
 

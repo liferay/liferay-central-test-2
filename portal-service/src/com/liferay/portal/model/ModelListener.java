@@ -38,10 +38,6 @@ public interface ModelListener {
 			Object associationClassPK)
 		throws ModelListenerException;
 
-	public void onAfterClearAssociation(
-			Object classPK, String associationClassName)
-		throws ModelListenerException;
-
 	public void onAfterCreate(BaseModel model) throws ModelListenerException;
 
 	public void onAfterRemove(BaseModel model) throws ModelListenerException;
@@ -56,10 +52,6 @@ public interface ModelListener {
 	public void onBeforeAddAssociation(
 			Object classPK, String associationClassName,
 			Object associationClassPK)
-		throws ModelListenerException;
-
-	public void onBeforeClearAssociation(
-			Object classPK, String associationClassName)
 		throws ModelListenerException;
 
 	public void onBeforeCreate(BaseModel model) throws ModelListenerException;

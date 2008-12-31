@@ -2051,6 +2051,8 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
+		context.put(
+			"referenceList", _mergeReferenceList(entity.getReferenceList()));
 
 		// Content
 

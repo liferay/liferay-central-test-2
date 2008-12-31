@@ -32,6 +32,8 @@ import com.liferay.portal.model.ModelListener;
  */
 public interface BasePersistence {
 
+	public ModelListener[] getListeners();
+
 	public void registerListener(ModelListener listener);
 
 	public void unregisterListener(ModelListener listener);

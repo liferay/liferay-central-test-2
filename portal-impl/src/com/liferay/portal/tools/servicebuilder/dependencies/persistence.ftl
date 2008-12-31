@@ -4,11 +4,12 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.util.Date;
 
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})
-public interface ${entity.name}Persistence {
+public interface ${entity.name}Persistence extends BasePersistence {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
