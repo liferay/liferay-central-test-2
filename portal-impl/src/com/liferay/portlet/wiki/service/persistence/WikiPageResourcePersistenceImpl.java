@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -105,18 +105,14 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPageResource remove(WikiPageResource wikiPageResource)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(wikiPageResource);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(wikiPageResource);
 		}
 
 		wikiPageResource = removeImpl(wikiPageResource);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(wikiPageResource);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(wikiPageResource);
 		}
 
 		return wikiPageResource;
@@ -184,27 +180,23 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = wikiPageResource.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(wikiPageResource);
-				}
-				else {
-					listener.onBeforeUpdate(wikiPageResource);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(wikiPageResource);
+			}
+			else {
+				listener.onBeforeUpdate(wikiPageResource);
 			}
 		}
 
 		wikiPageResource = updateImpl(wikiPageResource, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(wikiPageResource);
-				}
-				else {
-					listener.onAfterUpdate(wikiPageResource);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(wikiPageResource);
+			}
+			else {
+				listener.onAfterUpdate(wikiPageResource);
 			}
 		}
 
@@ -645,22 +637,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -668,14 +644,14 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -683,6 +659,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
+	protected com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence;
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
+	protected com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence;
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
+	protected com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence;
 	private static Log _log = LogFactory.getLog(WikiPageResourcePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

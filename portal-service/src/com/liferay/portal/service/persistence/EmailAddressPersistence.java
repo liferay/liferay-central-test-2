@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface EmailAddressPersistence {
+public interface EmailAddressPersistence extends BasePersistence {
 	public com.liferay.portal.model.EmailAddress create(long emailAddressId);
 
 	public com.liferay.portal.model.EmailAddress remove(long emailAddressId)
@@ -324,10 +324,4 @@ public interface EmailAddressPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -37,7 +38,6 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -114,18 +114,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public SCFrameworkVersion remove(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(scFrameworkVersion);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(scFrameworkVersion);
 		}
 
 		scFrameworkVersion = removeImpl(scFrameworkVersion);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(scFrameworkVersion);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(scFrameworkVersion);
 		}
 
 		return scFrameworkVersion;
@@ -203,27 +199,23 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = scFrameworkVersion.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(scFrameworkVersion);
-				}
-				else {
-					listener.onBeforeUpdate(scFrameworkVersion);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(scFrameworkVersion);
+			}
+			else {
+				listener.onBeforeUpdate(scFrameworkVersion);
 			}
 		}
 
 		scFrameworkVersion = updateImpl(scFrameworkVersion, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(scFrameworkVersion);
-				}
-				else {
-					listener.onAfterUpdate(scFrameworkVersion);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(scFrameworkVersion);
+			}
+			else {
+				listener.onAfterUpdate(scFrameworkVersion);
 			}
 		}
 
@@ -1829,22 +1821,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1852,14 +1828,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -1873,6 +1849,20 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		removeSCProductVersion = new RemoveSCProductVersion(this);
 	}
 
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	protected ContainsSCProductVersion containsSCProductVersion;
 	protected AddSCProductVersion addSCProductVersion;
 	protected ClearSCProductVersions clearSCProductVersions;
@@ -1921,24 +1911,32 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (!_persistenceImpl.containsSCProductVersion.contains(
 						frameworkVersionId, productVersionId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(frameworkVersionId,
-							com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
-							productVersionId);
-					}
+				ModelListener[] scProductVersionListeners = scProductVersionPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(frameworkVersionId,
+						com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
+						productVersionId);
+				}
+
+				for (ModelListener listener : scProductVersionListeners) {
+					listener.onBeforeAddAssociation(productVersionId,
+						SCFrameworkVersion.class.getName(), frameworkVersionId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(frameworkVersionId), new Long(productVersionId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(frameworkVersionId,
-							com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
-							productVersionId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(frameworkVersionId,
+						com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
+						productVersionId);
+				}
+
+				for (ModelListener listener : scProductVersionListeners) {
+					listener.onAfterAddAssociation(productVersionId,
+						SCFrameworkVersion.class.getName(), frameworkVersionId);
 				}
 			}
 		}
@@ -1956,19 +1954,46 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long frameworkVersionId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(frameworkVersionId,
-						com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName());
+			ModelListener[] scProductVersionListeners = scProductVersionPersistence.getListeners();
+
+			List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions =
+				null;
+
+			if ((listeners.length > 0) ||
+					(scProductVersionListeners.length > 0)) {
+				scProductVersions = getSCProductVersions(frameworkVersionId);
+
+				for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(frameworkVersionId,
+							com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
+							scProductVersion.getPrimaryKey());
+					}
+
+					for (ModelListener listener : scProductVersionListeners) {
+						listener.onBeforeRemoveAssociation(scProductVersion.getPrimaryKey(),
+							SCFrameworkVersion.class.getName(),
+							frameworkVersionId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(frameworkVersionId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(frameworkVersionId,
-						com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName());
+			if ((listeners.length > 0) ||
+					(scProductVersionListeners.length > 0)) {
+				for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(frameworkVersionId,
+							com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
+							scProductVersion.getPrimaryKey());
+					}
+
+					for (ModelListener listener : scProductVersionListeners) {
+						listener.onBeforeRemoveAssociation(scProductVersion.getPrimaryKey(),
+							SCFrameworkVersion.class.getName(),
+							frameworkVersionId);
+					}
 				}
 			}
 		}
@@ -1989,24 +2014,32 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (_persistenceImpl.containsSCProductVersion.contains(
 						frameworkVersionId, productVersionId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(frameworkVersionId,
-							com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
-							productVersionId);
-					}
+				ModelListener[] scProductVersionListeners = scProductVersionPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(frameworkVersionId,
+						com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
+						productVersionId);
+				}
+
+				for (ModelListener listener : scProductVersionListeners) {
+					listener.onBeforeRemoveAssociation(productVersionId,
+						SCFrameworkVersion.class.getName(), frameworkVersionId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(frameworkVersionId), new Long(productVersionId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(frameworkVersionId,
-							com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
-							productVersionId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(frameworkVersionId,
+						com.liferay.portlet.softwarecatalog.model.SCProductVersion.class.getName(),
+						productVersionId);
+				}
+
+				for (ModelListener listener : scProductVersionListeners) {
+					listener.onAfterRemoveAssociation(productVersionId,
+						SCFrameworkVersion.class.getName(), frameworkVersionId);
 				}
 			}
 		}
@@ -2019,5 +2052,4 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	private static final String _SQL_GETSCPRODUCTVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ?";
 	private static final String _SQL_CONTAINSSCPRODUCTVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ? AND productVersionId = ?";
 	private static Log _log = LogFactory.getLog(SCFrameworkVersionPersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

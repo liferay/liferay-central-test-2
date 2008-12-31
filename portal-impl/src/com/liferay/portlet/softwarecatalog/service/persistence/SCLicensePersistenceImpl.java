@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -37,7 +38,6 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -111,18 +111,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public SCLicense remove(SCLicense scLicense) throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(scLicense);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(scLicense);
 		}
 
 		scLicense = removeImpl(scLicense);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(scLicense);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(scLicense);
 		}
 
 		return scLicense;
@@ -199,27 +195,23 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = scLicense.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(scLicense);
-				}
-				else {
-					listener.onBeforeUpdate(scLicense);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(scLicense);
+			}
+			else {
+				listener.onBeforeUpdate(scLicense);
 			}
 		}
 
 		scLicense = updateImpl(scLicense, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(scLicense);
-				}
-				else {
-					listener.onAfterUpdate(scLicense);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(scLicense);
+			}
+			else {
+				listener.onAfterUpdate(scLicense);
 			}
 		}
 
@@ -1502,22 +1494,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1525,14 +1501,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -1546,6 +1522,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		removeSCProductEntry = new RemoveSCProductEntry(this);
 	}
 
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence;
 	protected ContainsSCProductEntry containsSCProductEntry;
 	protected AddSCProductEntry addSCProductEntry;
 	protected ClearSCProductEntries clearSCProductEntries;
@@ -1592,24 +1578,32 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (!_persistenceImpl.containsSCProductEntry.contains(licenseId,
 						productEntryId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(licenseId,
-							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
-							productEntryId);
-					}
+				ModelListener[] scProductEntryListeners = scProductEntryPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(licenseId,
+						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+						productEntryId);
+				}
+
+				for (ModelListener listener : scProductEntryListeners) {
+					listener.onBeforeAddAssociation(productEntryId,
+						SCLicense.class.getName(), licenseId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(licenseId), new Long(productEntryId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(licenseId,
-							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
-							productEntryId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(licenseId,
+						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+						productEntryId);
+				}
+
+				for (ModelListener listener : scProductEntryListeners) {
+					listener.onAfterAddAssociation(productEntryId,
+						SCLicense.class.getName(), licenseId);
 				}
 			}
 		}
@@ -1627,19 +1621,42 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long licenseId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(licenseId,
-						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName());
+			ModelListener[] scProductEntryListeners = scProductEntryPersistence.getListeners();
+
+			List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries =
+				null;
+
+			if ((listeners.length > 0) || (scProductEntryListeners.length > 0)) {
+				scProductEntries = getSCProductEntries(licenseId);
+
+				for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(licenseId,
+							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+							scProductEntry.getPrimaryKey());
+					}
+
+					for (ModelListener listener : scProductEntryListeners) {
+						listener.onBeforeRemoveAssociation(scProductEntry.getPrimaryKey(),
+							SCLicense.class.getName(), licenseId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(licenseId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(licenseId,
-						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName());
+			if ((listeners.length > 0) || (scProductEntryListeners.length > 0)) {
+				for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(licenseId,
+							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+							scProductEntry.getPrimaryKey());
+					}
+
+					for (ModelListener listener : scProductEntryListeners) {
+						listener.onBeforeRemoveAssociation(scProductEntry.getPrimaryKey(),
+							SCLicense.class.getName(), licenseId);
+					}
 				}
 			}
 		}
@@ -1659,24 +1676,32 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (_persistenceImpl.containsSCProductEntry.contains(licenseId,
 						productEntryId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(licenseId,
-							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
-							productEntryId);
-					}
+				ModelListener[] scProductEntryListeners = scProductEntryPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(licenseId,
+						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+						productEntryId);
+				}
+
+				for (ModelListener listener : scProductEntryListeners) {
+					listener.onBeforeRemoveAssociation(productEntryId,
+						SCLicense.class.getName(), licenseId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(licenseId), new Long(productEntryId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(licenseId,
-							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
-							productEntryId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(licenseId,
+						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
+						productEntryId);
+				}
+
+				for (ModelListener listener : scProductEntryListeners) {
+					listener.onAfterRemoveAssociation(productEntryId,
+						SCLicense.class.getName(), licenseId);
 				}
 			}
 		}
@@ -1689,5 +1714,4 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	private static final String _SQL_GETSCPRODUCTENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE licenseId = ?";
 	private static final String _SQL_CONTAINSSCPRODUCTENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE licenseId = ? AND productEntryId = ?";
 	private static Log _log = LogFactory.getLog(SCLicensePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

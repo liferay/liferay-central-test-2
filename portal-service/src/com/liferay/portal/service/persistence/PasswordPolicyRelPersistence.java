@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface PasswordPolicyRelPersistence {
+public interface PasswordPolicyRelPersistence extends BasePersistence {
 	public com.liferay.portal.model.PasswordPolicyRel create(
 		long passwordPolicyRelId);
 
@@ -149,10 +149,4 @@ public interface PasswordPolicyRelPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

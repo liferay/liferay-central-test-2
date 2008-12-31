@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ReleasePersistence {
+public interface ReleasePersistence extends BasePersistence {
 	public com.liferay.portal.model.Release create(long releaseId);
 
 	public com.liferay.portal.model.Release remove(long releaseId)
@@ -109,10 +109,4 @@ public interface ReleasePersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

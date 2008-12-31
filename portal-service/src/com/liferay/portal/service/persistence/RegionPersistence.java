@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface RegionPersistence {
+public interface RegionPersistence extends BasePersistence {
 	public com.liferay.portal.model.Region create(long regionId);
 
 	public com.liferay.portal.model.Region remove(long regionId)
@@ -233,10 +233,4 @@ public interface RegionPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

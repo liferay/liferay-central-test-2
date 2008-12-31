@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface OrgGroupPermissionPersistence {
+public interface OrgGroupPermissionPersistence extends BasePersistence {
 	public com.liferay.portal.model.OrgGroupPermission create(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK);
 
@@ -195,10 +195,4 @@ public interface OrgGroupPermissionPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

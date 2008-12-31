@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourceCodeException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -101,18 +101,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public ResourceCode remove(ResourceCode resourceCode)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(resourceCode);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(resourceCode);
 		}
 
 		resourceCode = removeImpl(resourceCode);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(resourceCode);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(resourceCode);
 		}
 
 		return resourceCode;
@@ -180,27 +176,23 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = resourceCode.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(resourceCode);
-				}
-				else {
-					listener.onBeforeUpdate(resourceCode);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(resourceCode);
+			}
+			else {
+				listener.onBeforeUpdate(resourceCode);
 			}
 		}
 
 		resourceCode = updateImpl(resourceCode, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(resourceCode);
-				}
-				else {
-					listener.onAfterUpdate(resourceCode);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(resourceCode);
+			}
+			else {
+				listener.onAfterUpdate(resourceCode);
 			}
 		}
 
@@ -1287,22 +1279,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1310,14 +1286,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -1325,6 +1301,87 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
+	protected com.liferay.portal.service.persistence.AccountPersistence accountPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
+	protected com.liferay.portal.service.persistence.AddressPersistence addressPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ClassNamePersistence.impl")
+	protected com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ContactPersistence.impl")
+	protected com.liferay.portal.service.persistence.ContactPersistence contactPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CountryPersistence.impl")
+	protected com.liferay.portal.service.persistence.CountryPersistence countryPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.EmailAddressPersistence.impl")
+	protected com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
+	protected com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
+	protected com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")
+	protected com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")
+	protected com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl")
+	protected com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl")
+	protected com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgLaborPersistence.impl")
+	protected com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl")
+	protected com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl")
+	protected com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl")
+	protected com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionPersistence.impl")
+	protected com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
+	protected com.liferay.portal.service.persistence.PhonePersistence phonePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
+	protected com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletPersistence portletPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
+	protected com.liferay.portal.service.persistence.RegionPersistence regionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ReleasePersistence.impl")
+	protected com.liferay.portal.service.persistence.ReleasePersistence releasePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
+	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
+	protected com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
+	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
+	protected com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
+	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
+	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
 	private static Log _log = LogFactory.getLog(ResourceCodePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

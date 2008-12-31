@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface LayoutPersistence {
+public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout create(long plid);
 
 	public com.liferay.portal.model.Layout remove(long plid)
@@ -392,10 +392,4 @@ public interface LayoutPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

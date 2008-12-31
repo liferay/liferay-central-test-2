@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * <a href="ExpandoValuePersistence.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +36,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ExpandoValuePersistence {
+public interface ExpandoValuePersistence extends BasePersistence {
 	public com.liferay.portlet.expando.model.ExpandoValue create(long valueId);
 
 	public com.liferay.portlet.expando.model.ExpandoValue remove(long valueId)
@@ -399,10 +400,4 @@ public interface ExpandoValuePersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

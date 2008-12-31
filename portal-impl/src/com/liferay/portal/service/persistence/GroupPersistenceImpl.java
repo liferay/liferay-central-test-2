@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -38,7 +39,6 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -108,18 +108,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Group remove(Group group) throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(group);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(group);
 		}
 
 		group = removeImpl(group);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(group);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(group);
 		}
 
 		return group;
@@ -234,27 +230,23 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	public Group update(Group group, boolean merge) throws SystemException {
 		boolean isNew = group.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(group);
-				}
-				else {
-					listener.onBeforeUpdate(group);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(group);
+			}
+			else {
+				listener.onBeforeUpdate(group);
 			}
 		}
 
 		group = updateImpl(group, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(group);
-				}
-				else {
-					listener.onAfterUpdate(group);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(group);
+			}
+			else {
+				listener.onAfterUpdate(group);
 			}
 		}
 
@@ -3035,22 +3027,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -3058,14 +3034,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -3103,6 +3079,130 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		removeUser = new RemoveUser(this);
 	}
 
+	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
+	protected com.liferay.portal.service.persistence.AccountPersistence accountPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
+	protected com.liferay.portal.service.persistence.AddressPersistence addressPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ClassNamePersistence.impl")
+	protected com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ContactPersistence.impl")
+	protected com.liferay.portal.service.persistence.ContactPersistence contactPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CountryPersistence.impl")
+	protected com.liferay.portal.service.persistence.CountryPersistence countryPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.EmailAddressPersistence.impl")
+	protected com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
+	protected com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
+	protected com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")
+	protected com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")
+	protected com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl")
+	protected com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl")
+	protected com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrgLaborPersistence.impl")
+	protected com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl")
+	protected com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl")
+	protected com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl")
+	protected com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionPersistence.impl")
+	protected com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
+	protected com.liferay.portal.service.persistence.PhonePersistence phonePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
+	protected com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletPersistence portletPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
+	protected com.liferay.portal.service.persistence.RegionPersistence regionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ReleasePersistence.impl")
+	protected com.liferay.portal.service.persistence.ReleasePersistence releasePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
+	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
+	protected com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
+	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
+	protected com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
+	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
+	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
+	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
+	protected com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence;
+	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl")
+	protected com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence;
+	@BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl")
+	protected com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
+	protected com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence;
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
+	protected com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl")
+	protected com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence;
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl")
+	protected com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence;
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
+	protected com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence;
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
+	protected com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence;
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl")
+	protected com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence;
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl")
+	protected com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence;
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl")
+	protected com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence;
+	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl")
+	protected com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
+	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
+	protected com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence;
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
+	protected com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence;
 	protected ContainsOrganization containsOrganization;
 	protected AddOrganization addOrganization;
 	protected ClearOrganizations clearOrganizations;
@@ -3164,24 +3264,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (!_persistenceImpl.containsOrganization.contains(groupId,
 						organizationId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(groupId,
-							com.liferay.portal.model.Organization.class.getName(),
-							organizationId);
-					}
+				ModelListener[] organizationListeners = organizationPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(groupId,
+						com.liferay.portal.model.Organization.class.getName(),
+						organizationId);
+				}
+
+				for (ModelListener listener : organizationListeners) {
+					listener.onBeforeAddAssociation(organizationId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(organizationId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(groupId,
-							com.liferay.portal.model.Organization.class.getName(),
-							organizationId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(groupId,
+						com.liferay.portal.model.Organization.class.getName(),
+						organizationId);
+				}
+
+				for (ModelListener listener : organizationListeners) {
+					listener.onAfterAddAssociation(organizationId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3198,19 +3306,41 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long groupId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(groupId,
-						com.liferay.portal.model.Organization.class.getName());
+			ModelListener[] organizationListeners = organizationPersistence.getListeners();
+
+			List<com.liferay.portal.model.Organization> organizations = null;
+
+			if ((listeners.length > 0) || (organizationListeners.length > 0)) {
+				organizations = getOrganizations(groupId);
+
+				for (com.liferay.portal.model.Organization organization : organizations) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(groupId,
+							com.liferay.portal.model.Organization.class.getName(),
+							organization.getPrimaryKey());
+					}
+
+					for (ModelListener listener : organizationListeners) {
+						listener.onBeforeRemoveAssociation(organization.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(groupId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(groupId,
-						com.liferay.portal.model.Organization.class.getName());
+			if ((listeners.length > 0) || (organizationListeners.length > 0)) {
+				for (com.liferay.portal.model.Organization organization : organizations) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(groupId,
+							com.liferay.portal.model.Organization.class.getName(),
+							organization.getPrimaryKey());
+					}
+
+					for (ModelListener listener : organizationListeners) {
+						listener.onBeforeRemoveAssociation(organization.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 		}
@@ -3230,24 +3360,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (_persistenceImpl.containsOrganization.contains(groupId,
 						organizationId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(groupId,
-							com.liferay.portal.model.Organization.class.getName(),
-							organizationId);
-					}
+				ModelListener[] organizationListeners = organizationPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(groupId,
+						com.liferay.portal.model.Organization.class.getName(),
+						organizationId);
+				}
+
+				for (ModelListener listener : organizationListeners) {
+					listener.onBeforeRemoveAssociation(organizationId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(organizationId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(groupId,
-							com.liferay.portal.model.Organization.class.getName(),
-							organizationId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(groupId,
+						com.liferay.portal.model.Organization.class.getName(),
+						organizationId);
+				}
+
+				for (ModelListener listener : organizationListeners) {
+					listener.onAfterRemoveAssociation(organizationId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3296,24 +3434,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (!_persistenceImpl.containsPermission.contains(groupId,
 						permissionId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(groupId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
+				ModelListener[] permissionListeners = permissionPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(groupId,
+						com.liferay.portal.model.Permission.class.getName(),
+						permissionId);
+				}
+
+				for (ModelListener listener : permissionListeners) {
+					listener.onBeforeAddAssociation(permissionId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(permissionId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(groupId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(groupId,
+						com.liferay.portal.model.Permission.class.getName(),
+						permissionId);
+				}
+
+				for (ModelListener listener : permissionListeners) {
+					listener.onAfterAddAssociation(permissionId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3330,19 +3476,41 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long groupId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(groupId,
-						com.liferay.portal.model.Permission.class.getName());
+			ModelListener[] permissionListeners = permissionPersistence.getListeners();
+
+			List<com.liferay.portal.model.Permission> permissions = null;
+
+			if ((listeners.length > 0) || (permissionListeners.length > 0)) {
+				permissions = getPermissions(groupId);
+
+				for (com.liferay.portal.model.Permission permission : permissions) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(groupId,
+							com.liferay.portal.model.Permission.class.getName(),
+							permission.getPrimaryKey());
+					}
+
+					for (ModelListener listener : permissionListeners) {
+						listener.onBeforeRemoveAssociation(permission.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(groupId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(groupId,
-						com.liferay.portal.model.Permission.class.getName());
+			if ((listeners.length > 0) || (permissionListeners.length > 0)) {
+				for (com.liferay.portal.model.Permission permission : permissions) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(groupId,
+							com.liferay.portal.model.Permission.class.getName(),
+							permission.getPrimaryKey());
+					}
+
+					for (ModelListener listener : permissionListeners) {
+						listener.onBeforeRemoveAssociation(permission.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 		}
@@ -3362,24 +3530,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (_persistenceImpl.containsPermission.contains(groupId,
 						permissionId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(groupId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
+				ModelListener[] permissionListeners = permissionPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(groupId,
+						com.liferay.portal.model.Permission.class.getName(),
+						permissionId);
+				}
+
+				for (ModelListener listener : permissionListeners) {
+					listener.onBeforeRemoveAssociation(permissionId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(permissionId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(groupId,
-							com.liferay.portal.model.Permission.class.getName(),
-							permissionId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(groupId,
+						com.liferay.portal.model.Permission.class.getName(),
+						permissionId);
+				}
+
+				for (ModelListener listener : permissionListeners) {
+					listener.onAfterRemoveAssociation(permissionId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3426,24 +3602,30 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 		protected void add(long groupId, long roleId) throws SystemException {
 			if (!_persistenceImpl.containsRole.contains(groupId, roleId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(groupId,
-							com.liferay.portal.model.Role.class.getName(),
-							roleId);
-					}
+				ModelListener[] roleListeners = rolePersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(groupId,
+						com.liferay.portal.model.Role.class.getName(), roleId);
+				}
+
+				for (ModelListener listener : roleListeners) {
+					listener.onBeforeAddAssociation(roleId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(roleId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(groupId,
-							com.liferay.portal.model.Role.class.getName(),
-							roleId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(groupId,
+						com.liferay.portal.model.Role.class.getName(), roleId);
+				}
+
+				for (ModelListener listener : roleListeners) {
+					listener.onAfterAddAssociation(roleId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3460,19 +3642,41 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long groupId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(groupId,
-						com.liferay.portal.model.Role.class.getName());
+			ModelListener[] roleListeners = rolePersistence.getListeners();
+
+			List<com.liferay.portal.model.Role> roles = null;
+
+			if ((listeners.length > 0) || (roleListeners.length > 0)) {
+				roles = getRoles(groupId);
+
+				for (com.liferay.portal.model.Role role : roles) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(groupId,
+							com.liferay.portal.model.Role.class.getName(),
+							role.getPrimaryKey());
+					}
+
+					for (ModelListener listener : roleListeners) {
+						listener.onBeforeRemoveAssociation(role.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(groupId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(groupId,
-						com.liferay.portal.model.Role.class.getName());
+			if ((listeners.length > 0) || (roleListeners.length > 0)) {
+				for (com.liferay.portal.model.Role role : roles) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(groupId,
+							com.liferay.portal.model.Role.class.getName(),
+							role.getPrimaryKey());
+					}
+
+					for (ModelListener listener : roleListeners) {
+						listener.onBeforeRemoveAssociation(role.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 		}
@@ -3491,24 +3695,30 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		protected void remove(long groupId, long roleId)
 			throws SystemException {
 			if (_persistenceImpl.containsRole.contains(groupId, roleId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(groupId,
-							com.liferay.portal.model.Role.class.getName(),
-							roleId);
-					}
+				ModelListener[] roleListeners = rolePersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(groupId,
+						com.liferay.portal.model.Role.class.getName(), roleId);
+				}
+
+				for (ModelListener listener : roleListeners) {
+					listener.onBeforeRemoveAssociation(roleId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(roleId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(groupId,
-							com.liferay.portal.model.Role.class.getName(),
-							roleId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(groupId,
+						com.liferay.portal.model.Role.class.getName(), roleId);
+				}
+
+				for (ModelListener listener : roleListeners) {
+					listener.onAfterRemoveAssociation(roleId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3557,24 +3767,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (!_persistenceImpl.containsUserGroup.contains(groupId,
 						userGroupId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(groupId,
-							com.liferay.portal.model.UserGroup.class.getName(),
-							userGroupId);
-					}
+				ModelListener[] userGroupListeners = userGroupPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(groupId,
+						com.liferay.portal.model.UserGroup.class.getName(),
+						userGroupId);
+				}
+
+				for (ModelListener listener : userGroupListeners) {
+					listener.onBeforeAddAssociation(userGroupId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(userGroupId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(groupId,
-							com.liferay.portal.model.UserGroup.class.getName(),
-							userGroupId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(groupId,
+						com.liferay.portal.model.UserGroup.class.getName(),
+						userGroupId);
+				}
+
+				for (ModelListener listener : userGroupListeners) {
+					listener.onAfterAddAssociation(userGroupId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3591,19 +3809,41 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long groupId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(groupId,
-						com.liferay.portal.model.UserGroup.class.getName());
+			ModelListener[] userGroupListeners = userGroupPersistence.getListeners();
+
+			List<com.liferay.portal.model.UserGroup> userGroups = null;
+
+			if ((listeners.length > 0) || (userGroupListeners.length > 0)) {
+				userGroups = getUserGroups(groupId);
+
+				for (com.liferay.portal.model.UserGroup userGroup : userGroups) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(groupId,
+							com.liferay.portal.model.UserGroup.class.getName(),
+							userGroup.getPrimaryKey());
+					}
+
+					for (ModelListener listener : userGroupListeners) {
+						listener.onBeforeRemoveAssociation(userGroup.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(groupId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(groupId,
-						com.liferay.portal.model.UserGroup.class.getName());
+			if ((listeners.length > 0) || (userGroupListeners.length > 0)) {
+				for (com.liferay.portal.model.UserGroup userGroup : userGroups) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(groupId,
+							com.liferay.portal.model.UserGroup.class.getName(),
+							userGroup.getPrimaryKey());
+					}
+
+					for (ModelListener listener : userGroupListeners) {
+						listener.onBeforeRemoveAssociation(userGroup.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 		}
@@ -3622,24 +3862,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		protected void remove(long groupId, long userGroupId)
 			throws SystemException {
 			if (_persistenceImpl.containsUserGroup.contains(groupId, userGroupId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(groupId,
-							com.liferay.portal.model.UserGroup.class.getName(),
-							userGroupId);
-					}
+				ModelListener[] userGroupListeners = userGroupPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(groupId,
+						com.liferay.portal.model.UserGroup.class.getName(),
+						userGroupId);
+				}
+
+				for (ModelListener listener : userGroupListeners) {
+					listener.onBeforeRemoveAssociation(userGroupId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(userGroupId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(groupId,
-							com.liferay.portal.model.UserGroup.class.getName(),
-							userGroupId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(groupId,
+						com.liferay.portal.model.UserGroup.class.getName(),
+						userGroupId);
+				}
+
+				for (ModelListener listener : userGroupListeners) {
+					listener.onAfterRemoveAssociation(userGroupId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3686,24 +3934,30 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 		protected void add(long groupId, long userId) throws SystemException {
 			if (!_persistenceImpl.containsUser.contains(groupId, userId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(groupId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
+				ModelListener[] userListeners = userPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(groupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener listener : userListeners) {
+					listener.onBeforeAddAssociation(userId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(userId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(groupId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(groupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener listener : userListeners) {
+					listener.onAfterAddAssociation(userId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3720,19 +3974,41 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long groupId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(groupId,
-						com.liferay.portal.model.User.class.getName());
+			ModelListener[] userListeners = userPersistence.getListeners();
+
+			List<com.liferay.portal.model.User> users = null;
+
+			if ((listeners.length > 0) || (userListeners.length > 0)) {
+				users = getUsers(groupId);
+
+				for (com.liferay.portal.model.User user : users) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(groupId,
+							com.liferay.portal.model.User.class.getName(),
+							user.getPrimaryKey());
+					}
+
+					for (ModelListener listener : userListeners) {
+						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(groupId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(groupId,
-						com.liferay.portal.model.User.class.getName());
+			if ((listeners.length > 0) || (userListeners.length > 0)) {
+				for (com.liferay.portal.model.User user : users) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(groupId,
+							com.liferay.portal.model.User.class.getName(),
+							user.getPrimaryKey());
+					}
+
+					for (ModelListener listener : userListeners) {
+						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+							Group.class.getName(), groupId);
+					}
 				}
 			}
 		}
@@ -3751,24 +4027,30 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		protected void remove(long groupId, long userId)
 			throws SystemException {
 			if (_persistenceImpl.containsUser.contains(groupId, userId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(groupId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
+				ModelListener[] userListeners = userPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(groupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener listener : userListeners) {
+					listener.onBeforeRemoveAssociation(userId,
+						Group.class.getName(), groupId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(groupId), new Long(userId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(groupId,
-							com.liferay.portal.model.User.class.getName(),
-							userId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(groupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener listener : userListeners) {
+					listener.onAfterRemoveAssociation(userId,
+						Group.class.getName(), groupId);
 				}
 			}
 		}
@@ -3793,5 +4075,4 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE groupId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE groupId = ? AND userId = ?";
 	private static Log _log = LogFactory.getLog(GroupPersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

@@ -23,13 +23,13 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -100,18 +100,14 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public TagsSource remove(TagsSource tagsSource) throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(tagsSource);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(tagsSource);
 		}
 
 		tagsSource = removeImpl(tagsSource);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(tagsSource);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(tagsSource);
 		}
 
 		return tagsSource;
@@ -178,27 +174,23 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tagsSource.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(tagsSource);
-				}
-				else {
-					listener.onBeforeUpdate(tagsSource);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(tagsSource);
+			}
+			else {
+				listener.onBeforeUpdate(tagsSource);
 			}
 		}
 
 		tagsSource = updateImpl(tagsSource, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(tagsSource);
-				}
-				else {
-					listener.onAfterUpdate(tagsSource);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(tagsSource);
+			}
+			else {
+				listener.onAfterUpdate(tagsSource);
 			}
 		}
 
@@ -440,22 +432,6 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -463,14 +439,14 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -478,6 +454,15 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence tagsVocabularyPersistence;
 	private static Log _log = LogFactory.getLog(TagsSourcePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

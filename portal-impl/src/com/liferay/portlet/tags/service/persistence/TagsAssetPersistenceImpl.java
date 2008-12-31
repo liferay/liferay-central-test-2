@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -37,7 +38,6 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -111,18 +111,14 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public TagsAsset remove(TagsAsset tagsAsset) throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(tagsAsset);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(tagsAsset);
 		}
 
 		tagsAsset = removeImpl(tagsAsset);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(tagsAsset);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(tagsAsset);
 		}
 
 		return tagsAsset;
@@ -199,27 +195,23 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tagsAsset.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(tagsAsset);
-				}
-				else {
-					listener.onBeforeUpdate(tagsAsset);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(tagsAsset);
+			}
+			else {
+				listener.onBeforeUpdate(tagsAsset);
 			}
 		}
 
 		tagsAsset = updateImpl(tagsAsset, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(tagsAsset);
-				}
-				else {
-					listener.onAfterUpdate(tagsAsset);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(tagsAsset);
+			}
+			else {
+				listener.onAfterUpdate(tagsAsset);
 			}
 		}
 
@@ -1305,22 +1297,6 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1328,14 +1304,14 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -1349,6 +1325,38 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		removeTagsEntry = new RemoveTagsEntry(this);
 	}
 
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence tagsVocabularyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
+	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl")
+	protected com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl")
+	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
+	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
+	protected com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence;
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
+	protected com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence;
 	protected ContainsTagsEntry containsTagsEntry;
 	protected AddTagsEntry addTagsEntry;
 	protected ClearTagsEntries clearTagsEntries;
@@ -1393,24 +1401,32 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		protected void add(long assetId, long entryId)
 			throws SystemException {
 			if (!_persistenceImpl.containsTagsEntry.contains(assetId, entryId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeAddAssociation(assetId,
-							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
-							entryId);
-					}
+				ModelListener[] tagsEntryListeners = tagsEntryPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeAddAssociation(assetId,
+						com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener listener : tagsEntryListeners) {
+					listener.onBeforeAddAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(assetId), new Long(entryId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterAddAssociation(assetId,
-							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
-							entryId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterAddAssociation(assetId,
+						com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener listener : tagsEntryListeners) {
+					listener.onAfterAddAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
 				}
 			}
 		}
@@ -1427,19 +1443,41 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long assetId) throws SystemException {
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onBeforeClearAssociation(assetId,
-						com.liferay.portlet.tags.model.TagsEntry.class.getName());
+			ModelListener[] tagsEntryListeners = tagsEntryPersistence.getListeners();
+
+			List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries = null;
+
+			if ((listeners.length > 0) || (tagsEntryListeners.length > 0)) {
+				tagsEntries = getTagsEntries(assetId);
+
+				for (com.liferay.portlet.tags.model.TagsEntry tagsEntry : tagsEntries) {
+					for (ModelListener listener : listeners) {
+						listener.onBeforeRemoveAssociation(assetId,
+							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+							tagsEntry.getPrimaryKey());
+					}
+
+					for (ModelListener listener : tagsEntryListeners) {
+						listener.onBeforeRemoveAssociation(tagsEntry.getPrimaryKey(),
+							TagsAsset.class.getName(), assetId);
+					}
 				}
 			}
 
 			_sqlUpdate.update(new Object[] { new Long(assetId) });
 
-			if (_listeners.length > 0) {
-				for (ModelListener listener : _listeners) {
-					listener.onAfterClearAssociation(assetId,
-						com.liferay.portlet.tags.model.TagsEntry.class.getName());
+			if ((listeners.length > 0) || (tagsEntryListeners.length > 0)) {
+				for (com.liferay.portlet.tags.model.TagsEntry tagsEntry : tagsEntries) {
+					for (ModelListener listener : listeners) {
+						listener.onAfterRemoveAssociation(assetId,
+							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+							tagsEntry.getPrimaryKey());
+					}
+
+					for (ModelListener listener : tagsEntryListeners) {
+						listener.onBeforeRemoveAssociation(tagsEntry.getPrimaryKey(),
+							TagsAsset.class.getName(), assetId);
+					}
 				}
 			}
 		}
@@ -1458,24 +1496,32 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		protected void remove(long assetId, long entryId)
 			throws SystemException {
 			if (_persistenceImpl.containsTagsEntry.contains(assetId, entryId)) {
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onBeforeRemoveAssociation(assetId,
-							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
-							entryId);
-					}
+				ModelListener[] tagsEntryListeners = tagsEntryPersistence.getListeners();
+
+				for (ModelListener listener : listeners) {
+					listener.onBeforeRemoveAssociation(assetId,
+						com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener listener : tagsEntryListeners) {
+					listener.onBeforeRemoveAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
 				}
 
 				_sqlUpdate.update(new Object[] {
 						new Long(assetId), new Long(entryId)
 					});
 
-				if (_listeners.length > 0) {
-					for (ModelListener listener : _listeners) {
-						listener.onAfterRemoveAssociation(assetId,
-							com.liferay.portlet.tags.model.TagsEntry.class.getName(),
-							entryId);
-					}
+				for (ModelListener listener : listeners) {
+					listener.onAfterRemoveAssociation(assetId,
+						com.liferay.portlet.tags.model.TagsEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener listener : tagsEntryListeners) {
+					listener.onAfterRemoveAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
 				}
 			}
 		}
@@ -1488,5 +1534,4 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	private static final String _SQL_GETTAGSENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ?";
 	private static final String _SQL_CONTAINSTAGSENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?";
 	private static Log _log = LogFactory.getLog(TagsAssetPersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

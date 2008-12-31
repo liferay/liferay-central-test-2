@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface UserPersistence {
+public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User create(long userId);
 
 	public com.liferay.portal.model.User remove(long userId)
@@ -707,10 +707,4 @@ public interface UserPersistence {
 	public void setUserGroups(long pk,
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

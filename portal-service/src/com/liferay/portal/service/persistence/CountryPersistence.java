@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface CountryPersistence {
+public interface CountryPersistence extends BasePersistence {
 	public com.liferay.portal.model.Country create(long countryId);
 
 	public com.liferay.portal.model.Country remove(long countryId)
@@ -198,10 +198,4 @@ public interface CountryPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * <a href="TasksReviewPersistence.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +36,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface TasksReviewPersistence {
+public interface TasksReviewPersistence extends BasePersistence {
 	public com.liferay.portlet.tasks.model.TasksReview create(long reviewId);
 
 	public com.liferay.portlet.tasks.model.TasksReview remove(long reviewId)
@@ -340,10 +341,4 @@ public interface TasksReviewPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

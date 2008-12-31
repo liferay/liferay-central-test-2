@@ -303,16 +303,6 @@ public class SCProductVersionUtil {
 		getPersistence().setSCFrameworkVersions(pk, scFrameworkVersions);
 	}
 
-	public static void registerListener(
-		com.liferay.portal.model.ModelListener listener) {
-		getPersistence().registerListener(listener);
-	}
-
-	public static void unregisterListener(
-		com.liferay.portal.model.ModelListener listener) {
-		getPersistence().unregisterListener(listener);
-	}
-
 	public static SCProductVersionPersistence getPersistence() {
 		return _persistence;
 	}

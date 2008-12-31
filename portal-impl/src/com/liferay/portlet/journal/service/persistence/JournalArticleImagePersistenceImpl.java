@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -105,18 +105,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(journalArticleImage);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(journalArticleImage);
 		}
 
 		journalArticleImage = removeImpl(journalArticleImage);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(journalArticleImage);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(journalArticleImage);
 		}
 
 		return journalArticleImage;
@@ -184,27 +180,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalArticleImage.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(journalArticleImage);
-				}
-				else {
-					listener.onBeforeUpdate(journalArticleImage);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(journalArticleImage);
+			}
+			else {
+				listener.onBeforeUpdate(journalArticleImage);
 			}
 		}
 
 		journalArticleImage = updateImpl(journalArticleImage, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(journalArticleImage);
-				}
-				else {
-					listener.onAfterUpdate(journalArticleImage);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(journalArticleImage);
+			}
+			else {
+				listener.onAfterUpdate(journalArticleImage);
 			}
 		}
 
@@ -1790,22 +1782,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1813,14 +1789,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -1828,6 +1804,21 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
 	private static Log _log = LogFactory.getLog(JournalArticleImagePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

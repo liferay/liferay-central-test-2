@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -109,18 +109,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticle remove(JournalArticle journalArticle)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(journalArticle);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(journalArticle);
 		}
 
 		journalArticle = removeImpl(journalArticle);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(journalArticle);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(journalArticle);
 		}
 
 		return journalArticle;
@@ -188,27 +184,23 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = journalArticle.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(journalArticle);
-				}
-				else {
-					listener.onBeforeUpdate(journalArticle);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(journalArticle);
+			}
+			else {
+				listener.onBeforeUpdate(journalArticle);
 			}
 		}
 
 		journalArticle = updateImpl(journalArticle, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(journalArticle);
-				}
-				else {
-					listener.onAfterUpdate(journalArticle);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(journalArticle);
+			}
+			else {
+				listener.onAfterUpdate(journalArticle);
 			}
 		}
 
@@ -3765,22 +3757,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -3788,14 +3764,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -3803,6 +3779,37 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
+	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
+	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
+	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
+	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence;
 	private static Log _log = LogFactory.getLog(JournalArticlePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

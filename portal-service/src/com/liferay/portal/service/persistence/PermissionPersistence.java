@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface PermissionPersistence {
+public interface PermissionPersistence extends BasePersistence {
 	public com.liferay.portal.model.Permission create(long permissionId);
 
 	public com.liferay.portal.model.Permission remove(long permissionId)
@@ -346,10 +346,4 @@ public interface PermissionPersistence {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

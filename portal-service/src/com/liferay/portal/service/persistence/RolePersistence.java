@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface RolePersistence {
+public interface RolePersistence extends BasePersistence {
 	public com.liferay.portal.model.Role create(long roleId);
 
 	public com.liferay.portal.model.Role remove(long roleId)
@@ -367,10 +367,4 @@ public interface RolePersistence {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

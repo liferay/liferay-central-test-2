@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * <a href="SCProductEntryPersistence.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +36,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface SCProductEntryPersistence {
+public interface SCProductEntryPersistence extends BasePersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry create(
 		long productEntryId);
 
@@ -321,10 +322,4 @@ public interface SCProductEntryPersistence {
 	public void setSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface CompanyPersistence {
+public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company create(long companyId);
 
 	public com.liferay.portal.model.Company remove(long companyId)
@@ -174,10 +174,4 @@ public interface CompanyPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

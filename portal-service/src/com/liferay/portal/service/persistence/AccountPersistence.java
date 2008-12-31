@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface AccountPersistence {
+public interface AccountPersistence extends BasePersistence {
 	public com.liferay.portal.model.Account create(long accountId);
 
 	public com.liferay.portal.model.Account remove(long accountId)
@@ -109,10 +109,4 @@ public interface AccountPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

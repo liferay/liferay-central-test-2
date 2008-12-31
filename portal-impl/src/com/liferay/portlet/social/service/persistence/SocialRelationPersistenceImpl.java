@@ -23,6 +23,7 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -110,18 +110,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRelation remove(SocialRelation socialRelation)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(socialRelation);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(socialRelation);
 		}
 
 		socialRelation = removeImpl(socialRelation);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(socialRelation);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(socialRelation);
 		}
 
 		return socialRelation;
@@ -189,27 +185,23 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = socialRelation.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(socialRelation);
-				}
-				else {
-					listener.onBeforeUpdate(socialRelation);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(socialRelation);
+			}
+			else {
+				listener.onBeforeUpdate(socialRelation);
 			}
 		}
 
 		socialRelation = updateImpl(socialRelation, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(socialRelation);
-				}
-				else {
-					listener.onAfterUpdate(socialRelation);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(socialRelation);
+			}
+			else {
+				listener.onAfterUpdate(socialRelation);
 			}
 		}
 
@@ -3175,22 +3167,6 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -3198,14 +3174,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -3213,6 +3189,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl")
+	protected com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence;
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl")
+	protected com.liferay.portlet.social.service.persistence.SocialRequestPersistence socialRequestPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactory.getLog(SocialRelationPersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

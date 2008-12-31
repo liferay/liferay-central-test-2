@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface OrgLaborPersistence {
+public interface OrgLaborPersistence extends BasePersistence {
 	public com.liferay.portal.model.OrgLabor create(long orgLaborId);
 
 	public com.liferay.portal.model.OrgLabor remove(long orgLaborId)
@@ -152,10 +152,4 @@ public interface OrgLaborPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

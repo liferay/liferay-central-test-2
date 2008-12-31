@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface PasswordTrackerPersistence {
+public interface PasswordTrackerPersistence extends BasePersistence {
 	public com.liferay.portal.model.PasswordTracker create(
 		long passwordTrackerId);
 
@@ -153,10 +153,4 @@ public interface PasswordTrackerPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

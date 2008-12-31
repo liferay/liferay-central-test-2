@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface PortletItemPersistence {
+public interface PortletItemPersistence extends BasePersistence {
 	public com.liferay.portal.model.PortletItem create(long portletItemId);
 
 	public com.liferay.portal.model.PortletItem remove(long portletItemId)
@@ -216,10 +216,4 @@ public interface PortletItemPersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

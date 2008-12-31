@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * <a href="TagsAssetPersistence.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +36,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface TagsAssetPersistence {
+public interface TagsAssetPersistence extends BasePersistence {
 	public com.liferay.portlet.tags.model.TagsAsset create(long assetId);
 
 	public com.liferay.portlet.tags.model.TagsAsset remove(long assetId)
@@ -233,10 +234,4 @@ public interface TagsAssetPersistence {
 	public void setTagsEntries(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
 		throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

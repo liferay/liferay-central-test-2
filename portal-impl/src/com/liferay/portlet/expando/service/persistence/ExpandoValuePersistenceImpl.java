@@ -23,6 +23,7 @@
 package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -103,18 +103,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue remove(ExpandoValue expandoValue)
 		throws SystemException {
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onBeforeRemove(expandoValue);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onBeforeRemove(expandoValue);
 		}
 
 		expandoValue = removeImpl(expandoValue);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				listener.onAfterRemove(expandoValue);
-			}
+		for (ModelListener listener : listeners) {
+			listener.onAfterRemove(expandoValue);
 		}
 
 		return expandoValue;
@@ -182,27 +178,23 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = expandoValue.isNew();
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(expandoValue);
-				}
-				else {
-					listener.onBeforeUpdate(expandoValue);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(expandoValue);
+			}
+			else {
+				listener.onBeforeUpdate(expandoValue);
 			}
 		}
 
 		expandoValue = updateImpl(expandoValue, merge);
 
-		if (_listeners.length > 0) {
-			for (ModelListener listener : _listeners) {
-				if (isNew) {
-					listener.onAfterCreate(expandoValue);
-				}
-				else {
-					listener.onAfterUpdate(expandoValue);
-				}
+		for (ModelListener listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(expandoValue);
+			}
+			else {
+				listener.onAfterUpdate(expandoValue);
 			}
 		}
 
@@ -2952,22 +2944,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -2975,14 +2951,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listeners = new ArrayList<ModelListener>();
+				List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listeners.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener)Class.forName(
 							listenerClassName).newInstance());
 				}
 
-				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -2990,6 +2966,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence expandoColumnPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence expandoRowPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence expandoTablePersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactory.getLog(ExpandoValuePersistenceImpl.class);
-	private ModelListener[] _listeners = new ModelListener[0];
 }

@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  */
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ImagePersistence {
+public interface ImagePersistence extends BasePersistence {
 	public com.liferay.portal.model.Image create(long imageId);
 
 	public com.liferay.portal.model.Image remove(long imageId)
@@ -147,10 +147,4 @@ public interface ImagePersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
-
-	public void registerListener(
-		com.liferay.portal.model.ModelListener listener);
-
-	public void unregisterListener(
-		com.liferay.portal.model.ModelListener listener);
 }

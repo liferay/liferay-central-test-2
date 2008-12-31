@@ -224,16 +224,6 @@ public class LayoutSetUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void registerListener(
-		com.liferay.portal.model.ModelListener listener) {
-		getPersistence().registerListener(listener);
-	}
-
-	public static void unregisterListener(
-		com.liferay.portal.model.ModelListener listener) {
-		getPersistence().unregisterListener(listener);
-	}
-
 	public static LayoutSetPersistence getPersistence() {
 		return _persistence;
 	}

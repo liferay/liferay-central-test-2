@@ -129,16 +129,6 @@ public class TagsSourceUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void registerListener(
-		com.liferay.portal.model.ModelListener listener) {
-		getPersistence().registerListener(listener);
-	}
-
-	public static void unregisterListener(
-		com.liferay.portal.model.ModelListener listener) {
-		getPersistence().unregisterListener(listener);
-	}
-
 	public static TagsSourcePersistence getPersistence() {
 		return _persistence;
 	}
