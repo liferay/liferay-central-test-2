@@ -46,7 +46,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.tools.BaseDeployer;
+import com.liferay.portal.tools.deploy.BaseDeployer;
 import com.liferay.portal.upload.ProgressInputStream;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalUtil;

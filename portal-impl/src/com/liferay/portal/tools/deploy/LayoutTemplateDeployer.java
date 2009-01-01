@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.util.InitUtil;
 
