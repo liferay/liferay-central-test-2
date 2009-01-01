@@ -94,12 +94,12 @@ public class ProducerImpl extends AbstractProducer {
 			WSRPConsumerRegistrationLocalServiceUtil.addConsumerRegistration(
 				registrationRecord.getConsumerName(), true, registrationHandle,
 				registrationData, lifetime, _producerModel.getInstanceName());
+
+			return registrationHandle;
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
 		}
-
-		return registrationHandle;
 	}
 
 	public void addRegistrationPropertyDescription(
