@@ -83,19 +83,17 @@ public class ProducerImpl extends AbstractProducer {
 	public String addRegistration(RegistrationRecord registrationRecord)
 		throws ProducerException {
 
-		String registrationHandle = KeyGenerator.generateKey();
-
-		String lifetime = getLifeTimeString(registrationRecord.getLifetime());
-
 		try {
+			String registrationHandle = KeyGenerator.generateKey();
 			String registrationData =
 				WSRPFactory.getInstance().getRegistrationDataXML(
 					registrationRecord.getRegistrationData());
+			String lifetime =
+				getLifeTimeString(registrationRecord.getLifetime());
 
 			WSRPConsumerRegistrationLocalServiceUtil.addConsumerRegistration(
-				registrationRecord.getConsumerName(), true,
-				registrationHandle, registrationData, lifetime,
-				_producerModel.getInstanceName());
+				registrationRecord.getConsumerName(), true, registrationHandle,
+				registrationData, lifetime, _producerModel.getInstanceName());
 		}
 		catch (Exception e) {
 			throw new ProducerException(e);
@@ -256,7 +254,6 @@ public class ProducerImpl extends AbstractProducer {
 			consumerRegistration.setRegistrationData(
 				WSRPFactory.getInstance().getRegistrationDataXML(
 					registrationRecord.getRegistrationData()));
-
 			consumerRegistration.setLifetimeTerminationTime(
 				getLifeTimeString(registrationRecord.getLifetime()));
 
