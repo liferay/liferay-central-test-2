@@ -62,8 +62,8 @@ public class CompressionStream extends ServletOutputStream {
 
 			ByteArrayMaker compressedContent = new ByteArrayMaker();
 
-			GZIPOutputStream gzipOutput =
-				new GZIPOutputStream(compressedContent);
+			GZIPOutputStream gzipOutput = new GZIPOutputStream(
+				compressedContent);
 
 			gzipOutput.write(baos.toByteArray());
 			gzipOutput.finish();
