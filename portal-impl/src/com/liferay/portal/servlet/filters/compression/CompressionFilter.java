@@ -123,12 +123,6 @@ public class CompressionFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws IOException, ServletException {
 
-javax.servlet.ServletContext servletContext = getFilterConfig().getServletContext();
-
-System.out.println("## request url " + request.getRequestURL());
-System.out.println("## request uri " + request.getRequestURI());
-System.out.println("## path info " + request.getPathInfo());
-System.out.println("## real path " + servletContext.getRealPath(request.getRequestURI()));
 		String completeURL = HttpUtil.getCompleteURL(request);
 
 		if (isCompress(request) && !isInclude(request) &&
