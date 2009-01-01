@@ -51,7 +51,6 @@ import com.liferay.util.ant.CopyTask;
 import com.liferay.util.ant.DeleteTask;
 import com.liferay.util.ant.ExpandTask;
 import com.liferay.util.ant.UpToDateTask;
-import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.sun.portal.portletcontainer.warupdater.PortletWarUpdater;
@@ -490,17 +489,7 @@ public class BaseDeployer {
 			}
 
 			if (!unpackWar || appServerType.equals("websphere")) {
-				File tempDir = new File(
-					SystemProperties.get(SystemProperties.TMP_DIR) +
-						File.separator + Time.getTimestamp());
-
-				WarTask.war(srcFile, tempDir, "WEB-INF/web.xml", webXml);
-
-				if (!tempDir.renameTo(deployDir)) {
-					WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
-				}
-
-				DeleteTask.deleteDirectory(tempDir);
+				JEEDeploymentUtil.deployDirectory(srcFile, deployDir, webXml);
 			}
 			else {
 
