@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -61,6 +61,11 @@ public class PropsUtil_IW {
 
 	public java.util.Properties getProperties() {
 		return PropsUtil.getProperties();
+	}
+
+	public java.util.Properties getProperties(java.lang.String prefix,
+		boolean removePrefix) {
+		return PropsUtil.getProperties(prefix, removePrefix);
 	}
 
 	public void removeProperties(java.util.Properties properties) {
