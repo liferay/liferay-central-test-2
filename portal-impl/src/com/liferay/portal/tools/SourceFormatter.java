@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -467,6 +467,17 @@ public class SourceFormatter {
 
 			line = StringUtil.trimTrailing(line);
 
+			line = StringUtil.replace(
+				line,
+				new String[] {
+					"* Copyright (c) 2000-2008 Liferay, Inc.",
+					"* Copyright 2008 Sun Microsystems Inc."
+				},
+				new String[] {
+					"* Copyright (c) 2000-2009 Liferay, Inc.",
+					"* Copyright 2009 Sun Microsystems Inc."
+				});
+
 			sb.append(line);
 			sb.append("\n");
 
@@ -531,6 +542,17 @@ public class SourceFormatter {
 				},
 				new String[] {
 					"<br />", "\" />", "\">", "@ page import", "\" %>", ") %>"
+				});
+
+			newContent = StringUtil.replace(
+				newContent,
+				new String[] {
+					"* Copyright (c) 2000-2008 Liferay, Inc.",
+					"* Copyright 2008 Sun Microsystems Inc."
+				},
+				new String[] {
+					"* Copyright (c) 2000-2009 Liferay, Inc.",
+					"* Copyright 2009 Sun Microsystems Inc."
 				});
 
 			if (files[i].endsWith(".jsp")) {
@@ -765,12 +787,18 @@ public class SourceFormatter {
 		ds.setIncludes(
 			new String[] {
 				"**\\com\\liferay\\portal\\service\\ServiceContext*.java",
+				"**\\model\\BaseModel.java",
+				"**\\model\\impl\\BaseModelImpl.java",
+				"**\\service\\base\\PrincipalBean.java",
 				"**\\service\\http\\*HttpTest.java",
 				"**\\service\\http\\*SoapTest.java",
+				"**\\service\\http\\TunnelUtil.java",
 				"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
 				"**\\service\\permission\\*.java",
 				"**\\service\\persistence\\BasePersistence.java",
+				"**\\service\\persistence\\BatchSession*.java",
 				"**\\service\\persistence\\*FinderImpl.java",
+				"**\\service\\persistence\\impl\\BasePersistenceImpl.java",
 				"**\\portal-impl\\test\\**\\*.java",
 				"**\\portal-service\\**\\liferay\\counter\\**.java",
 				"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
