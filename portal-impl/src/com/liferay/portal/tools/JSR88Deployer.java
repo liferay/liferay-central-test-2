@@ -41,6 +41,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -113,6 +114,7 @@ public class JSR88Deployer {
 			appServerId + StringPool.PERIOD + PropsKeys.JSR88_DM_USER);
 		String adminPwd  = PropsUtil.get(
 			appServerId + StringPool.PERIOD + PropsKeys.JSR88_DM_PASSWORD);
+		adminPwd = new String(Base64.decode(adminPwd));
 		String dfClassName  = PropsUtil.get(
 			appServerId + StringPool.PERIOD + PropsKeys.JSR88_DF_CLASSNAME);
 
