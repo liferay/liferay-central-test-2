@@ -41,6 +41,9 @@
 
 package com.liferay.wsrp.producer.usermanager;
 
+import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -69,6 +72,7 @@ import com.sun.portal.wsrp.producer.filter.ProducerThreadLocalizer;
 import com.sun.portal.wsrp.producer.usermanager.UserManager;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.PortletRequest;
 
@@ -153,15 +157,34 @@ public class UserManagerImpl implements UserManager{
 	protected void initializeLiferayRequest(HttpServletRequest request)
 		throws Exception {
 
+		// Company
+
+		Company company = PortalUtil.getCompany(request);
+
+		String imagePath = PortalUtil.getPathImage();
+
+		// Company logo
+
+		String companyLogo =
+			imagePath + "/company_logo?img_id=" + company.getLogoId() + "&t=" +
+				ImageServletTokenUtil.getToken(company.getLogoId());
+
+		// Locale
+
+		Locale locale = request.getLocale();
+
 		// Manually create a ThemeDisplay object. Do not use the factory unless
 		// you manually recycle the object or else there will be a memory leak.
 
 		//ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
-		themeDisplay.setCompany(PortalUtil.getCompany(request));
+		themeDisplay.setCompany(company);
+		themeDisplay.setCompanyLogo(companyLogo);
 		themeDisplay.setUser(themeDisplay.getDefaultUser());
-		themeDisplay.setLocale(request.getLocale());
+		themeDisplay.setLocale(locale);
+		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
+		themeDisplay.setSecure(request.isSecure());
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			PortalInstances.getCompanyId(request), GroupConstants.GUEST);
@@ -176,6 +199,7 @@ public class UserManagerImpl implements UserManager{
 			layout = layouts.get(0);
 		}
 
+		themeDisplay.setPathImage(imagePath);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setScopeGroupId(layout.getGroupId());
 
