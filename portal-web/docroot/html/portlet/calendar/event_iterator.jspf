@@ -36,8 +36,10 @@ searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-events-on-this-day");
 
 List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, selCal, eventType);
+searchContainer.setTotal(results.size());
 
 results = ListUtil.sort(results, new EventTimeComparator(timeZone, locale));
+searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
 
