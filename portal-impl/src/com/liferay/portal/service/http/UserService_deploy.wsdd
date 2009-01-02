@@ -107,6 +107,12 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteUser" qname="operNS:deleteUser" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getGroupUserIds" qname="operNS:getGroupUserIds" returnQName="getGroupUserIdsReturn" returnType="rtns:ArrayOf_xsd_long" returnItemType="tns2:long" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getRoleUserIds" qname="operNS:getRoleUserIds" returnQName="getRoleUserIdsReturn" returnType="rtns:ArrayOf_xsd_long" returnItemType="tns2:long" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserByEmailAddress" qname="operNS:getUserByEmailAddress" returnQName="getUserByEmailAddressReturn" returnType="rtns:UserSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>
@@ -287,7 +293,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userGroupIds" type="tns:ArrayOf_xsd_long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updatePortrait hasRoleUser setRoleUsers unsetGroupUsers unsetPasswordPolicyUsers unsetUserGroupUsers getUserByScreenName getUserIdByScreenName updateScreenName addUser unsetRoleUsers updatePassword addRoleUsers deleteUser getDefaultUserId getUserByEmailAddress updateReminderQuery addGroupUsers updateEmailAddress updateOpenId unsetOrganizationUsers getUserIdByEmailAddress addPasswordPolicyUsers hasGroupUser addOrganizationUsers updateOrganizations updateAgreedToTermsOfUse deleteRoleUser addUserGroupUsers getUserById updateLockout updateActive setUserGroupUsers updateUser"/>
+		<parameter name="allowedMethods" value="getGroupUserIds getRoleUserIds updatePortrait hasRoleUser setRoleUsers unsetGroupUsers unsetPasswordPolicyUsers unsetUserGroupUsers getUserByScreenName getUserIdByScreenName updateScreenName addUser unsetRoleUsers updatePassword addRoleUsers deleteUser getDefaultUserId getUserByEmailAddress updateReminderQuery addGroupUsers updateEmailAddress updateOpenId unsetOrganizationUsers getUserIdByEmailAddress addPasswordPolicyUsers hasGroupUser addOrganizationUsers updateOrganizations updateAgreedToTermsOfUse deleteRoleUser addUserGroupUsers getUserById updateLockout updateActive setUserGroupUsers updateUser"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserGroupRoleSoap" type="java:com.liferay.portal.model.UserGroupRoleSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_AddressSoap" type="java:com.liferay.portal.model.AddressSoap[]" innerType="cmp-ns:AddressSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

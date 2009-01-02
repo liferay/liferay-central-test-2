@@ -143,6 +143,16 @@ public class UserServiceUtil {
 		return getService().getDefaultUserId(companyId);
 	}
 
+	public static long[] getGroupUserIds(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupUserIds(groupId);
+	}
+
+	public static long[] getRoleUserIds(long roleId)
+		throws com.liferay.portal.SystemException {
+		return getService().getRoleUserIds(roleId);
+	}
+
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		long companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,

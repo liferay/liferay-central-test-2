@@ -121,6 +121,14 @@ public interface UserService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getGroupUserIds(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getRoleUserIds(long roleId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.User getUserByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,

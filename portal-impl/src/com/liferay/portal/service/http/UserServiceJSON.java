@@ -173,6 +173,20 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
+	public static long[] getGroupUserIds(long groupId)
+		throws com.liferay.portal.SystemException {
+		long[] returnValue = UserServiceUtil.getGroupUserIds(groupId);
+
+		return returnValue;
+	}
+
+	public static long[] getRoleUserIds(long roleId)
+		throws com.liferay.portal.SystemException {
+		long[] returnValue = UserServiceUtil.getRoleUserIds(roleId);
+
+		return returnValue;
+	}
+
 	public static JSONObject getUserByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,

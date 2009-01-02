@@ -257,6 +257,30 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.getDefaultUserId(companyId);
 	}
 
+	public long[] getGroupUserIds(long groupId) throws SystemException {
+		List<User> groupUsers = userLocalService.getGroupUsers(groupId);
+
+		long[] userIds = new long[groupUsers.size()];
+
+		for (int i = 0, length = groupUsers.size(); i < length; i++) {
+			userIds[i] = groupUsers.get(i).getUserId();
+		}
+
+		return userIds;
+	}
+
+	public long[] getRoleUserIds(long roleId) throws SystemException {
+		List<User> roleUsers = userLocalService.getRoleUsers(roleId);
+
+		long[] userIds = new long[roleUsers.size()];
+
+		for (int i = 0, length = roleUsers.size(); i < length; i++) {
+			userIds[i] = roleUsers.get(i).getUserId();
+		}
+
+		return userIds;
+	}
+
 	public User getUserByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
@@ -753,7 +777,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				(!GroupPermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getGroupId(),
 					ActionKeys.ASSIGN_MEMBERS) ||
-				 !RolePermissionUtil.contains(
+				!RolePermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS))) {
 
