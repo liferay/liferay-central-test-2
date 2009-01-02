@@ -204,6 +204,9 @@ public class WordPressImporter {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setPlid(context.getPlid());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
@@ -239,6 +242,12 @@ public class WordPressImporter {
 			SAXReaderUtil.createQName("encoded", _NS_CONTENT));
 
 		content = content.replaceAll("\\n", "\n<br/>");
+
+		// LPS-1425
+
+		if (Validator.isNull(content)) {
+			content = "<br/>";
+		}
 
 		String dateText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("post_date_gmt", _NS_WP));
@@ -285,16 +294,16 @@ public class WordPressImporter {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setPlid(context.getPlid());
+		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setTagsEntries(tagsEntries);
 
 		BlogsEntry entry = null;
 
 		try {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, title, content.toString(), displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, draft, allowTrackbacks, null,
-				serviceContext);
+				userId, title, content, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute, draft,
+				allowTrackbacks, null, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error("Add entry " + title, e);
