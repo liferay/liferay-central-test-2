@@ -55,6 +55,10 @@ if (event != null) {
 	}
 }
 
+endDate.set(Calendar.HOUR_OF_DAY, 23);
+endDate.set(Calendar.MINUTE, 59);
+endDate.set(Calendar.SECOND, 59);
+
 String durationHour = String.valueOf(BeanParamUtil.getInteger(event, request, "durationHour", 1));
 String durationMinute = String.valueOf(BeanParamUtil.getInteger(event, request, "durationMinute"));
 String type = BeanParamUtil.getString(event, request, "type");
@@ -722,6 +726,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <script type="text/javascript">
 	<portlet:namespace />init();
+
+	document.<portlet:namespace />fm.<portlet:namespace />endDateHour.disabled = true;
+	document.<portlet:namespace />fm.<portlet:namespace />endDateMinute.disabled = true;
+	document.<portlet:namespace />fm.<portlet:namespace />endDateAmPm.disabled = true;
 </script>
 
 <%!
