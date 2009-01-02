@@ -97,9 +97,9 @@ public class AddTemplateTest extends BaseTestCase {
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Web Content Template"));
 		selenium.typeKeys("_15_description",
-			RuntimeVariables.replace("This is a test web content!"));
+			RuntimeVariables.replace("This is a test web content template!"));
 		selenium.type("_15_description",
-			RuntimeVariables.replace("This is a test web content!"));
+			RuntimeVariables.replace("This is a test web content template!"));
 		selenium.type("_15_xsl",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontent\\Template.htm"));

@@ -60,7 +60,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_rowIds")) {
+				if (selenium.isElementPresent("_15_allRowIds")) {
 					break;
 				}
 			}
@@ -70,25 +70,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_15_rowIds");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//strong/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//strong/span");
+		selenium.click("_15_allRowIds");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -139,7 +121,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_rowIds")) {
+				if (selenium.isElementPresent("_15_allRowIds")) {
 					break;
 				}
 			}
@@ -149,25 +131,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_15_rowIds");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//strong/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//strong/span");
+		selenium.click("_15_allRowIds");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

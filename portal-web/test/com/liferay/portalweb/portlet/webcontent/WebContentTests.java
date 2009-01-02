@@ -45,6 +45,8 @@ public class WebContentTests extends BaseTests {
 		addTestSuite(AddTemplateTest.class);
 		//addTestSuite(AddFeedTest.class);
 		addTestSuite(SearchArticleTest.class);
+		addTestSuite(SearchStructuresTest.class);
+		addTestSuite(SearchTemplateTest.class);
 		addTestSuite(RecentPageTest.class);
 		//addTestSuite(AddNullArticleTest.class);
 		addTestSuite(AddNullTitleTest.class);

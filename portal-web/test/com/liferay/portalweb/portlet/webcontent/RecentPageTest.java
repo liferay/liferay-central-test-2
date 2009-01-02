@@ -53,8 +53,10 @@ public class RecentPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Recent"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Structure"));
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article 2"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Structure"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Template"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
