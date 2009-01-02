@@ -413,6 +413,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		if (_isMinimized(renderRequest)) {
 			renderResponse.setTitle(_portletModel.getDisplayName());
+
 			return;
 		}
 
