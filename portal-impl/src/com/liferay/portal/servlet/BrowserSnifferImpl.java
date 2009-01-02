@@ -294,9 +294,9 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	}
 
 	public boolean isWapXhtml(HttpServletRequest request) {
-		String userAgent = getUserAgent(request);
+		String accept = getAcceptHeader(request);
 
-		if (userAgent.indexOf("wap.xhtml") != -1) {
+		if (accept.indexOf("wap.xhtml") != -1) {
 			return true;
 		}
 
@@ -332,9 +332,9 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	}
 
 	public boolean isWml(HttpServletRequest request) {
-		String userAgent = getUserAgent(request);
+		String accept = getAcceptHeader(request);
 
-		if (userAgent.indexOf("wap.wml") != -1) {
+		if (accept.indexOf("wap.wml") != -1) {
 			return true;
 		}
 
@@ -353,6 +353,20 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 
 		return userAgent;
+	}
+	
+	protected String getAcceptHeader(HttpServletRequest request) {
+		String accept = StringPool.BLANK;
+
+		if (request != null) {
+			String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
+
+			if (acceptHeader != null) {
+				accept = acceptHeader.toLowerCase();
+			}
+		}
+
+		return accept;
 	}
 
 }
