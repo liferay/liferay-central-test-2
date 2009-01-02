@@ -31,24 +31,27 @@ import java.util.Comparator;
  * </b></a>
  *
  * @author Jorge Ferrer
+ * @author Minhchau Dang
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletControlPanelWeightComparator
 	implements Comparator<Portlet> {
 
 	public int compare(Portlet portlet1, Portlet portlet2) {
+		double portletWeight1 = portlet1.getControlPanelEntryWeight();
+		double portletWeight2 = portlet2.getControlPanelEntryWeight();
 
-		double portlet1Weight = portlet1.getControlPanelEntryWeight();
-		double portlet2Weight = portlet2.getControlPanelEntryWeight();
+		int value = Double.compare(portletWeight1, portletWeight2);
 
-		if (portlet1Weight != portlet2Weight) {
-			return Double.compare(portlet1Weight, portlet2Weight);
+		if (value != 0) {
+			return value;
 		}
 
-		String portlet1Id = portlet1.getPortletId();
-		String portlet2Id = portlet2.getPortletId();
+		String portletId1 = portlet1.getPortletId();
+		String portletId2 = portlet2.getPortletId();
 
-		return portlet1Id.compareTo(portlet2Id);
+		return portletId1.compareTo(portletId2);
 	}
 
 }
