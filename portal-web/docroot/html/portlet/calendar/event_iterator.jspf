@@ -23,8 +23,6 @@
 %>
 
 <%
-PortletURL iteratorURL = PortletURLUtil.clone(portletURL, renderResponse);
-
 List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("time");
@@ -32,22 +30,16 @@ headerNames.add("title");
 headerNames.add("type");
 headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, iteratorURL, headerNames, null);
-searchContainer.setEmptyResultsMessage("there-are-no-events-on-this-day");
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-events-on-this-day");
 
 List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, selCal, eventType);
-int totalSize = results.size();
-searchContainer.setTotal(totalSize);
 
 results = ListUtil.sort(results, new EventTimeComparator(timeZone, locale));
-int paginationStart = searchContainer.getStart();
-int paginationEnd = searchContainer.getEnd();
 
-if(paginationEnd > totalSize ){
-	paginationEnd = totalSize;
-}
+searchContainer.setTotal(results.size());
 
-results = results.subList(paginationStart,paginationEnd);
+results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
 searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
