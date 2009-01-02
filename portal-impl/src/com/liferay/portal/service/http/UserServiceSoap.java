@@ -266,6 +266,20 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static long[] getOrganizationUserIds(long organizationId)
+		throws RemoteException {
+		try {
+			long[] returnValue = UserServiceUtil.getOrganizationUserIds(organizationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static long[] getRoleUserIds(long roleId) throws RemoteException {
 		try {
 			long[] returnValue = UserServiceUtil.getRoleUserIds(roleId);

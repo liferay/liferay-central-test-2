@@ -125,6 +125,10 @@ public interface UserService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getOrganizationUserIds(long organizationId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException;
 

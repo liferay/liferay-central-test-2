@@ -960,6 +960,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user.getUserId();
 	}
 
+	public long[] getGroupUserIds(long groupId) throws SystemException {
+		return getUserIds(getGroupUsers(groupId));
+	}
+
 	public List<User> getGroupUsers(long groupId) throws SystemException {
 		return groupPersistence.getUsers(groupId);
 	}
@@ -985,6 +989,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		return userFinder.findByNoAnnouncementsDeliveries(type);
+	}
+
+	public long[] getOrganizationUserIds(long organizationId)
+		throws SystemException {
+
+		return getUserIds(getOrganizationUsers(organizationId));
 	}
 
 	public List<User> getOrganizationUsers(long organizationId)
@@ -1056,6 +1066,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				companyId, groupId, name, primKey, actionId, firstName,
 				middleName, lastName, emailAddress, andOperator);
 		}
+	}
+
+	public long[] getRoleUserIds(long roleId) throws SystemException {
+		return getUserIds(getRoleUsers(roleId));
 	}
 
 	public List<User> getRoleUsers(long roleId) throws SystemException {
@@ -2858,6 +2872,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected String getScreenName(String screenName) {
 		return FriendlyURLNormalizer.normalize(screenName);
+	}
+
+	protected long[] getUserIds(List<User> users) {
+		long[] userIds = new long[users.size()];
+
+		for (int i = 0; i < users.size(); i++) {
+			User user = users.get(i);
+
+			userIds[i] = user.getUserId();
+		}
+
+		return userIds;
 	}
 
 	protected void populateQuery(

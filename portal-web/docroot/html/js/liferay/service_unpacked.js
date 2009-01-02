@@ -1028,6 +1028,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getOrganizationUserIds: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getOrganizationUserIds";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getRoleUserIds: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getRoleUserIds";

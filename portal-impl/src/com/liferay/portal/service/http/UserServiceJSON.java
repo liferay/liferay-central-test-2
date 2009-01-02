@@ -180,6 +180,13 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
+	public static long[] getOrganizationUserIds(long organizationId)
+		throws com.liferay.portal.SystemException {
+		long[] returnValue = UserServiceUtil.getOrganizationUserIds(organizationId);
+
+		return returnValue;
+	}
+
 	public static long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException {
 		long[] returnValue = UserServiceUtil.getRoleUserIds(roleId);

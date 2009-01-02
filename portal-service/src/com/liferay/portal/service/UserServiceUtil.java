@@ -148,6 +148,11 @@ public class UserServiceUtil {
 		return getService().getGroupUserIds(groupId);
 	}
 
+	public static long[] getOrganizationUserIds(long organizationId)
+		throws com.liferay.portal.SystemException {
+		return getService().getOrganizationUserIds(organizationId);
+	}
+
 	public static long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException {
 		return getService().getRoleUserIds(roleId);

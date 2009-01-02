@@ -757,6 +757,36 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static long[] getOrganizationUserIds(HttpPrincipal httpPrincipal,
+		long organizationId) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"getOrganizationUserIds", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (long[])returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static long[] getRoleUserIds(HttpPrincipal httpPrincipal, long roleId)
 		throws com.liferay.portal.SystemException {
 		try {

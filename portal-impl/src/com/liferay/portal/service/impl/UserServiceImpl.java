@@ -258,27 +258,17 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	public long[] getGroupUserIds(long groupId) throws SystemException {
-		List<User> groupUsers = userLocalService.getGroupUsers(groupId);
+		return userLocalService.getGroupUserIds(groupId);
+	}
 
-		long[] userIds = new long[groupUsers.size()];
+	public long[] getOrganizationUserIds(long organizationId)
+		throws SystemException {
 
-		for (int i = 0, length = groupUsers.size(); i < length; i++) {
-			userIds[i] = groupUsers.get(i).getUserId();
-		}
-
-		return userIds;
+		return userLocalService.getOrganizationUserIds(organizationId);
 	}
 
 	public long[] getRoleUserIds(long roleId) throws SystemException {
-		List<User> roleUsers = userLocalService.getRoleUsers(roleId);
-
-		long[] userIds = new long[roleUsers.size()];
-
-		for (int i = 0, length = roleUsers.size(); i < length; i++) {
-			userIds[i] = roleUsers.get(i).getUserId();
-		}
-
-		return userIds;
+		return userLocalService.getRoleUserIds(roleId);
 	}
 
 	public User getUserByEmailAddress(long companyId, String emailAddress)

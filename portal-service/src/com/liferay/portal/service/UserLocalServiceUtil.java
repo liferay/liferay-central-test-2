@@ -276,6 +276,11 @@ public class UserLocalServiceUtil {
 		return getService().getDefaultUserId(companyId);
 	}
 
+	public static long[] getGroupUserIds(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupUserIds(groupId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> getGroupUsers(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getService().getGroupUsers(groupId);
@@ -295,6 +300,11 @@ public class UserLocalServiceUtil {
 	public static java.util.List<com.liferay.portal.model.User> getNoAnnouncementsDeliveries(
 		java.lang.String type) throws com.liferay.portal.SystemException {
 		return getService().getNoAnnouncementsDeliveries(type);
+	}
+
+	public static long[] getOrganizationUserIds(long organizationId)
+		throws com.liferay.portal.SystemException {
+		return getService().getOrganizationUserIds(organizationId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
@@ -336,6 +346,11 @@ public class UserLocalServiceUtil {
 		return getService()
 				   .getPermissionUsersCount(companyId, groupId, name, primKey,
 			actionId, firstName, middleName, lastName, emailAddress, andOperator);
+	}
+
+	public static long[] getRoleUserIds(long roleId)
+		throws com.liferay.portal.SystemException {
+		return getService().getRoleUserIds(roleId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(

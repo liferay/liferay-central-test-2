@@ -207,6 +207,10 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getGroupUserIds(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getGroupUsers(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -222,6 +226,10 @@ public interface UserLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getNoAnnouncementsDeliveries(
 		java.lang.String type) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getOrganizationUserIds(long organizationId)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
@@ -251,6 +259,10 @@ public interface UserLocalService {
 		java.lang.String actionId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
