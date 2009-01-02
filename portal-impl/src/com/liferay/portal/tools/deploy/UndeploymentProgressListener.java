@@ -22,44 +22,12 @@
 
 package com.liferay.portal.tools.deploy;
 
-import javax.enterprise.deploy.spi.status.ProgressEvent;
-import javax.enterprise.deploy.spi.status.ProgressListener;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UndeploymentProgressListener.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Sandeep Soni
+ *
  */
-
-public class UndeploymentProgressListener implements ProgressListener{
-
-	UndeploymentProgressListener(
-		JSR88DeploymentHandler driver, String warContext) {
-		_handler = driver;
-		_warContext = warContext;
-	}
-
-	public void handleProgressEvent(ProgressEvent event) {
-		_log.info(event.getDeploymentStatus().getMessage());
-
-		if (event.getDeploymentStatus().isCompleted()) {
-			_handler.setError(false);
-			_handler.setAppUndeployed(true);
-		}
-		else if (event.getDeploymentStatus().isFailed()) {
-			_handler.setError(true);
-			_handler.setAppUndeployed(false);
-		}
-	}
-
-	private JSR88DeploymentHandler _handler;
-	private String _warContext;
-
-	private static Log _log = LogFactory.getLog(
-		UndeploymentProgressListener.class);
+public class UndeploymentProgressListener {
 }

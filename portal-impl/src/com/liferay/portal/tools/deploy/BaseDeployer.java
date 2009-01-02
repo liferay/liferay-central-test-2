@@ -75,7 +75,6 @@ import org.apache.oro.io.GlobFilenameFilter;
  * <a href="BaseDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Sandeep Soni
  *
  */
 public class BaseDeployer {
@@ -490,8 +489,7 @@ public class BaseDeployer {
 			}
 
 			if (!unpackWar || appServerType.equals("websphere")) {
-				JEEDeploymentUtil.deployDirectory(
-					displayName,srcFile, deployDir, webXml);
+				JEEDeploymentUtil.deployDirectory(srcFile, deployDir, webXml);
 			}
 			else {
 
