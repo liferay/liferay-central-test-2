@@ -746,7 +746,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		String portalURL = serviceContext.getPortalURL();
-
 		String layoutURL = serviceContext.getLayoutURL();
 
 		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
@@ -853,7 +852,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		String portalURL = serviceContext.getPortalURL();
-
 		String layoutURL = serviceContext.getLayoutURL();
 
 		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL)) {
