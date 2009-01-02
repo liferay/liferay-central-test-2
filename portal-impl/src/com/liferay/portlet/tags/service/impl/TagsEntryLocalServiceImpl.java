@@ -401,7 +401,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			}
 		}
 
-		return ArrayUtil.toArray(ArrayUtil.toArray(entryIds));
+		return ArrayUtil.toArray(entryIds.toArray(new Long[entryIds.size()]));
 	}
 
 	public String[] getEntryNames() throws SystemException {

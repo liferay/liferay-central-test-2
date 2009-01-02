@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchPermissionChecker;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -137,7 +136,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			}
 		}
 
-		doc.addKeyword(Field.ROLE_ID, ArrayUtil.toArray(roleIds));
+		doc.addKeyword(
+			Field.ROLE_ID, roleIds.toArray(new Long[roleIds.size()]));
 	}
 
 	protected Query doGetPermissionQuery(
