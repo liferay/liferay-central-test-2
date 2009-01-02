@@ -241,12 +241,12 @@ public class WordPressImporter {
 		String content = entryEl.elementText(
 			SAXReaderUtil.createQName("encoded", _NS_CONTENT));
 
-		content = content.replaceAll("\\n", "\n<br/>");
+		content = content.replaceAll("\\n", "\n<br />");
 
 		// LPS-1425
 
 		if (Validator.isNull(content)) {
-			content = "<br/>";
+			content = "<br />";
 		}
 
 		String dateText = entryEl.elementTextTrim(
