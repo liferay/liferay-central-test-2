@@ -383,6 +383,21 @@ public class ArrayUtil {
 		}
 	}
 
+	public static boolean contains(byte[] array, byte value) {
+		if ((array == null) || (array.length == 0)) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
 	public static boolean contains(char[] array, char value) {
 		if ((array == null) || (array.length == 0)) {
 			return false;
@@ -556,6 +571,26 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static Byte[] toArray(byte[] array) {
+		Byte[] newArray = new Byte[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = Byte.valueOf(array[i]);
+		}
+
+		return newArray;
+	}
+
+	public static Character[] toArray(char[] array) {
+		Character[] newArray = new Character[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = Character.valueOf(array[i]);
+		}
+
+		return newArray;
+	}
+
 	public static Double[] toArray(double[] array) {
 		Double[] newArray = new Double[array.length];
 
@@ -611,6 +646,26 @@ public class ArrayUtil {
 
 		for (int i = 0; i < array.length; i++) {
 			newArray[i] = array[i].booleanValue();
+		}
+
+		return newArray;
+	}
+
+	public static byte[] toArray(Byte[] array) {
+		byte[] newArray = new byte[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].byteValue();
+		}
+
+		return newArray;
+	}
+
+	public static char[] toArray(Character[] array) {
+		char[] newArray = new char[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].charValue();
 		}
 
 		return newArray;
@@ -727,6 +782,26 @@ public class ArrayUtil {
 	}
 
 	public static String[] toStringArray(boolean[] array) {
+		String[] newArray = new String[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = String.valueOf(array[i]);
+		}
+
+		return newArray;
+	}
+
+	public static String[] toStringArray(byte[] array) {
+		String[] newArray = new String[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = String.valueOf(array[i]);
+		}
+
+		return newArray;
+	}
+
+	public static String[] toStringArray(char[] array) {
 		String[] newArray = new String[array.length];
 
 		for (int i = 0; i < array.length; i++) {

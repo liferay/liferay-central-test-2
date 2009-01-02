@@ -197,6 +197,10 @@ public class ArrayUtil_IW {
 		return ArrayUtil.contains(array, value);
 	}
 
+	public boolean contains(byte[] array, byte value) {
+		return ArrayUtil.contains(array, value);
+	}
+
 	public boolean contains(char[] array, char value) {
 		return ArrayUtil.contains(array, value);
 	}
@@ -252,6 +256,14 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
+	public java.lang.Byte[] toArray(byte[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public java.lang.Character[] toArray(char[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
 	public java.lang.Double[] toArray(double[] array) {
 		return ArrayUtil.toArray(array);
 	}
@@ -273,6 +285,14 @@ public class ArrayUtil_IW {
 	}
 
 	public boolean[] toArray(java.lang.Boolean[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public byte[] toArray(java.lang.Byte[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public char[] toArray(java.lang.Character[] array) {
 		return ArrayUtil.toArray(array);
 	}
 
@@ -321,6 +341,14 @@ public class ArrayUtil_IW {
 	}
 
 	public java.lang.String[] toStringArray(boolean[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(byte[] array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
+	public java.lang.String[] toStringArray(char[] array) {
 		return ArrayUtil.toStringArray(array);
 	}
 
