@@ -294,7 +294,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	}
 
 	public boolean isWapXhtml(HttpServletRequest request) {
-		String accept = getAcceptHeader(request);
+		String accept = getAccept(request);
 
 		if (accept.indexOf("wap.xhtml") != -1) {
 			return true;
@@ -332,7 +332,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	}
 
 	public boolean isWml(HttpServletRequest request) {
-		String accept = getAcceptHeader(request);
+		String accept = getAccept(request);
 
 		if (accept.indexOf("wap.wml") != -1) {
 			return true;
@@ -341,7 +341,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return false;
 	}
 
-	protected String getAcceptHeader(HttpServletRequest request) {
+	protected String getAccept(HttpServletRequest request) {
 		String accept = StringPool.BLANK;
 
 		if (request != null) {
