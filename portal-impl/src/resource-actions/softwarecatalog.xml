@@ -51,12 +51,8 @@
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>UPDATE</action-key>
 		</guest-unsupported>
@@ -79,7 +75,6 @@
 			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
-			<action-key>ADD_PRODUCT_VERSION</action-key>
 			<action-key>UPDATE</action-key>
 		</guest-unsupported>
 	</model-resource>
