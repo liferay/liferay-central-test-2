@@ -341,20 +341,6 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return false;
 	}
 
-	protected String getUserAgent(HttpServletRequest request) {
-		String userAgent = StringPool.BLANK;
-
-		if (request != null) {
-			String userAgentHeader = request.getHeader(HttpHeaders.USER_AGENT);
-
-			if (userAgentHeader != null) {
-				userAgent = userAgentHeader.toLowerCase();
-			}
-		}
-
-		return userAgent;
-	}
-	
 	protected String getAcceptHeader(HttpServletRequest request) {
 		String accept = StringPool.BLANK;
 
@@ -367,6 +353,20 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 
 		return accept;
+	}
+
+	protected String getUserAgent(HttpServletRequest request) {
+		String userAgent = StringPool.BLANK;
+
+		if (request != null) {
+			String userAgentHeader = request.getHeader(HttpHeaders.USER_AGENT);
+
+			if (userAgentHeader != null) {
+				userAgent = userAgentHeader.toLowerCase();
+			}
+		}
+
+		return userAgent;
 	}
 
 }
