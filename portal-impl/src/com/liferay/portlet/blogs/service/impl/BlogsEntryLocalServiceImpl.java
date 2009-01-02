@@ -745,23 +745,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(serviceContext.getPortalURL()) &&
-			Validator.isNull(serviceContext.getLayoutURL())) {
-
-			return;
-		}
-
-		Group group = groupPersistence.findByPrimaryKey(entry.getGroupId());
-
 		String portalURL = serviceContext.getPortalURL();
 
-		if ((portalURL.indexOf("://localhost") != -1) ||
+		String layoutURL = serviceContext.getLayoutURL();
+
+		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
+			(portalURL.indexOf("://localhost") != -1) ||
 			(portalURL.indexOf("://127.0.0.1") != -1)) {
 
 			return;
 		}
 
-		String layoutURL = serviceContext.getLayoutURL();
+		Group group = groupPersistence.findByPrimaryKey(entry.getGroupId());
 
 		StringBuilder sb = new StringBuilder();
 
@@ -857,9 +852,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws SystemException {
 
-		if (Validator.isNull(serviceContext.getPortalURL()) &&
-			Validator.isNull(serviceContext.getLayoutURL())) {
+		String portalURL = serviceContext.getPortalURL();
 
+		String layoutURL = serviceContext.getLayoutURL();
+
+		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL)) {
 			return;
 		}
 
@@ -868,9 +865,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String excerpt = StringUtil.shorten(
 			HtmlUtil.extractText(entry.getContent()),
 			PropsValues.BLOGS_TRACKBACK_EXCERPT_LENGTH);
-		String url =
-			serviceContext.getPortalURL() + serviceContext.getLayoutURL()
-				+ "/-/blogs/" + entry.getUrlTitle();
+		String url = portalURL + layoutURL + "/-/blogs/" + entry.getUrlTitle();
 
 		parts.put("title", entry.getTitle());
 		parts.put("excerpt", excerpt);
