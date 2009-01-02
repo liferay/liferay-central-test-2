@@ -46,8 +46,26 @@ if (upperCaseLetters) {
 
 String newPassword = StringPool.BLANK;
 
+boolean containsNumbers = true;
+boolean containsLowerCaseLetters = true;
+boolean containsUpperCaseLetters = true;
+
 try {
-	newPassword = PwdGenerator.getPassword(key, length);
+	do {
+		newPassword = PwdGenerator.getPassword(key, length);
+
+		if (numbers) {
+			containsNumbers = Validator.isNotNull(StringUtil.extractDigits(newPassword));
+		}
+
+		if (lowerCaseLetters) {
+			containsLowerCaseLetters = !newPassword.equals(newPassword.toUpperCase());
+		}
+
+		if (upperCaseLetters) {
+			containsUpperCaseLetters = !newPassword.equals(newPassword.toLowerCase());
+		}
+	} while (!containsNumbers || !containsLowerCaseLetters || !containsUpperCaseLetters);
 }
 catch (Exception e) {
 }
