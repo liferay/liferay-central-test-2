@@ -49,6 +49,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.portletcontainer.PortletWindowContextImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -57,6 +58,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -89,7 +91,6 @@ import javax.servlet.http.HttpServletRequest;
 public class UserManagerImpl implements UserManager{
 
 	public UserManagerImpl(Producer producer) {
-		//_producer = producer;
 	}
 
 	public void createConsumerUserStore(String registrationHandle) {
@@ -161,6 +162,10 @@ public class UserManagerImpl implements UserManager{
 
 		Company company = PortalUtil.getCompany(request);
 
+		CompanyThreadLocal.setCompanyId(company.getCompanyId());
+
+		// Paths
+
 		String imagePath = PortalUtil.getPathImage();
 
 		// Company logo
@@ -169,22 +174,26 @@ public class UserManagerImpl implements UserManager{
 			imagePath + "/company_logo?img_id=" + company.getLogoId() + "&t=" +
 				ImageServletTokenUtil.getToken(company.getLogoId());
 
+		// User
+
+		User user = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
+
+		PrincipalThreadLocal.setName(String.valueOf(user.getUserId()));
+
+		// Permission checker
+
+		PermissionChecker permissionChecker = (PermissionChecker)Class.forName(
+			PropsValues.PERMISSIONS_CHECKER).newInstance();
+
+		permissionChecker.init(user, true);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
 		// Locale
 
 		Locale locale = request.getLocale();
 
-		// Manually create a ThemeDisplay object. Do not use the factory unless
-		// you manually recycle the object or else there will be a memory leak.
-
-		//ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
-		themeDisplay.setCompany(company);
-		themeDisplay.setCompanyLogo(companyLogo);
-		themeDisplay.setUser(themeDisplay.getDefaultUser());
-		themeDisplay.setLocale(locale);
-		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
-		themeDisplay.setSecure(request.isSecure());
+		// Layouts
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			PortalInstances.getCompanyId(request), GroupConstants.GUEST);
@@ -199,26 +208,22 @@ public class UserManagerImpl implements UserManager{
 			layout = layouts.get(0);
 		}
 
-		themeDisplay.setPathImage(imagePath);
+		// Manually create a ThemeDisplay object. Do not use the factory unless
+		// you manually recycle the object or else there will be a memory leak.
+
+		//ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		themeDisplay.setCompany(company);
+		themeDisplay.setCompanyLogo(companyLogo);
+		themeDisplay.setUser(user);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setScopeGroupId(layout.getGroupId());
-
-		PermissionChecker permissionChecker = (PermissionChecker)Class.forName(
-			PropsValues.PERMISSIONS_CHECKER).newInstance();
-
-		permissionChecker.init(themeDisplay.getUser(), true);
-
 		themeDisplay.setPermissionChecker(permissionChecker);
-
-		PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-		long companyId = PortalInstances.getCompanyId(request);
-
-		CompanyThreadLocal.setCompanyId(companyId);
-
-		long userId = themeDisplay.getUserId();
-
-		PrincipalThreadLocal.setName(String.valueOf(userId));
+		themeDisplay.setLocale(locale);
+		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
+		themeDisplay.setSecure(request.isSecure());
+		themeDisplay.setPathImage(imagePath);
 
 		request.setAttribute(WebKeys.CTX, ProducerThreadLocalizer.getContext());
 		request.setAttribute(WebKeys.LAYOUT, layout);
@@ -228,7 +233,5 @@ public class UserManagerImpl implements UserManager{
 	private static final String _IS_WSRP_REQUEST = "is.wsrp.request";
 
 	private static final String _PORTAL_ID = "com.sun.portal.portlet.id";
-
-	//private Producer _producer = null;
 
 }
