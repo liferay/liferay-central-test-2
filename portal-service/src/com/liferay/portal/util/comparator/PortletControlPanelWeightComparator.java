@@ -37,9 +37,18 @@ public class PortletControlPanelWeightComparator
 	implements Comparator<Portlet> {
 
 	public int compare(Portlet portlet1, Portlet portlet2) {
-		return Double.compare(
-			portlet1.getControlPanelEntryWeight(),
-			portlet2.getControlPanelEntryWeight());
+
+		double portlet1Weight = portlet1.getControlPanelEntryWeight();
+		double portlet2Weight = portlet2.getControlPanelEntryWeight();
+
+		if (portlet1Weight != portlet2Weight) {
+			return Double.compare(portlet1Weight, portlet2Weight);
+		}
+
+		String portlet1Id = portlet1.getPortletId();
+		String portlet2Id = portlet2.getPortletId();
+
+		return portlet1Id.compareTo(portlet2Id);
 	}
 
 }
