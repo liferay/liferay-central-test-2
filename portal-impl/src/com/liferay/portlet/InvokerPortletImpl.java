@@ -34,6 +34,8 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.deploy.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
 
@@ -409,6 +411,11 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			stopWatch.start();
 		}
 
+		if (_isMinimized(renderRequest)) {
+			renderResponse.setTitle(_portletModel.getDisplayName());
+			return;
+		}
+
 		String remoteUser = renderRequest.getRemoteUser();
 
 		if ((remoteUser == null) || (_expCache == null) ||
@@ -739,6 +746,16 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			portletResponseImpl.getPortlet();
 
 		return portlet.getPortletId();
+	}
+
+	private boolean _isMinimized(RenderRequest request) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
+
+		return layoutTypePortlet.hasStateMinPortletId(_portletId);
 	}
 
 	private static Log _log = LogFactory.getLog(InvokerPortletImpl.class);
