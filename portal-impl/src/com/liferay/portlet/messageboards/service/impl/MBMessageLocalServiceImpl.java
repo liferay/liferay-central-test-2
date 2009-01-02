@@ -1368,7 +1368,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ServiceContext serviceContext, boolean update)
 		throws PortalException, SystemException {
 
-		if (category.isDiscussion()) {
+		String portalURL = serviceContext.getPortalURL();
+		String layoutURL = serviceContext.getLayoutURL();
+
+		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
+			category.isDiscussion()) {
+
 			return;
 		}
 
@@ -1418,14 +1423,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String messageURL = StringPool.BLANK;
 
-		String portalURL = serviceContext.getPortalURL();
-		String layoutURL = serviceContext.getLayoutURL();
-
-		if (Validator.isNotNull(portalURL) && Validator.isNotNull(layoutURL)) {
-			messageURL =
-				portalURL + layoutURL + "/-/message_boards/message/" +
-					message.getMessageId();
-		}
+		messageURL =
+			portalURL + layoutURL + "/-/message_boards/message/" +
+				message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.MESSAGE_BOARDS, user);
