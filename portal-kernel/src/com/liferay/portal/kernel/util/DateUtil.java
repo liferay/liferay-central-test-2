@@ -100,6 +100,7 @@ public class DateUtil {
 
 		while (CalendarUtil.beforeByDay(startCal.getTime(), endCal.getTime())) {
 			startCal.add(Calendar.DAY_OF_MONTH, 1);
+
 			daysBetween++;
 		}
 
