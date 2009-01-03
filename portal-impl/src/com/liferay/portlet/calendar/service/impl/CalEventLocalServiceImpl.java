@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.DateFormats;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,7 +47,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.ModelHintsConstants;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -842,25 +840,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Title
 
-		Map<String, String> hints = ModelHintsUtil.getHints(
-				CalEvent.class.getName(), "title");
-
-		int maxLength = GetterUtil.getInteger(
-			ModelHintsConstants.TEXT_MAX_LENGTH);
-
-		if (hints != null) {
-			maxLength = GetterUtil.getInteger(
-				hints.get("max-length"), maxLength);
-		}
-
 		String title = StringPool.BLANK;
 
 		if (event.getSummary() != null) {
-			title = event.getSummary().getValue();
-
-			if (title.length() > maxLength) {
-				title = title.substring(0, maxLength);
-			}
+			title = ModelHintsUtil.trimString(
+				CalEvent.class.getName(), "title",
+				event.getSummary().getValue());
 		}
 
 		// Description
