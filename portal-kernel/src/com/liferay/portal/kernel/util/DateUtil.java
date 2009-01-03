@@ -84,22 +84,23 @@ public class DateUtil {
 	public static int getDaysBetween(
 		Date startDate, Date endDate, TimeZone timeZone) {
 
+		int offset = timeZone.getRawOffset();
+
 		Calendar startCal = new GregorianCalendar(timeZone);
 
 		startCal.setTime(startDate);
+		startCal.add(Calendar.MILLISECOND, offset);
 
 		Calendar endCal = new GregorianCalendar(timeZone);
 
 		endCal.setTime(endDate);
+		endCal.add(Calendar.MILLISECOND, offset);
 
 		int daysBetween = 0;
 
-		while (startCal.before(endCal)) {
+		while (CalendarUtil.beforeByDay(startCal.getTime(), endCal.getTime())) {
 			startCal.add(Calendar.DAY_OF_MONTH, 1);
-
-			if (startCal.before(endCal)) {
-				daysBetween++;
-			}
+			daysBetween++;
 		}
 
 		return daysBetween;
