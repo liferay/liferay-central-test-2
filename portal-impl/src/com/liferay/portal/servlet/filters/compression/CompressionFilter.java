@@ -26,15 +26,20 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.util.SystemProperties;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -132,7 +137,7 @@ public class CompressionFilter extends BasePortalFilter {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Compressing " + completeURL);
 			}
-
+			
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
 			CompressionResponse compressionResponse = new CompressionResponse(
@@ -143,6 +148,24 @@ public class CompressionFilter extends BasePortalFilter {
 				filterChain);
 
 			compressionResponse.finishResponse();
+			
+			// creating cache
+			
+			String requestURI = request.getRequestURI();
+
+			File realFile = new File(
+				getFilterConfig().getServletContext().getRealPath(requestURI));
+			
+			if (realFile.exists()) {
+				
+				File tempFile = new File(
+						SystemProperties.get(SystemProperties.TMP_DIR) + 
+							"/liferay/filter_cache" + requestURI + ".gz");
+
+				FileUtil.write(tempFile,
+					compressionResponse.getOutputStream().getCompressedBytes());
+			}
+
 		}
 		else {
 			if (_log.isDebugEnabled()) {

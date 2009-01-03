@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletOutputStream;
@@ -39,6 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  *
  */
 public class CompressionStream extends ServletOutputStream {
@@ -58,17 +58,7 @@ public class CompressionStream extends ServletOutputStream {
 		}
 
 		if (_bufferedOutput instanceof ByteArrayMaker) {
-			ByteArrayMaker baos = (ByteArrayMaker)_bufferedOutput;
-
-			ByteArrayMaker compressedContent = new ByteArrayMaker();
-
-			GZIPOutputStream gzipOutput = new GZIPOutputStream(
-				compressedContent);
-
-			gzipOutput.write(baos.toByteArray());
-			gzipOutput.finish();
-
-			byte[] compressedBytes = compressedContent.toByteArray();
+			byte[] compressedBytes = getCompressedBytes();
 
 			_response.setContentLength(compressedBytes.length);
 			_response.addHeader(_CONTENT_ENCODING, _GZIP);
@@ -99,6 +89,29 @@ public class CompressionStream extends ServletOutputStream {
 		_bufferedOutput.flush();
 	}
 
+	public byte[] getCompressedBytes() throws IOException {
+		
+		if (compressedBytes != null) {
+			return compressedBytes;
+		}
+		
+		if (_bufferedOutput instanceof ByteArrayMaker) {
+			ByteArrayMaker baos = (ByteArrayMaker)_bufferedOutput;
+
+			ByteArrayMaker compressedContent = new ByteArrayMaker();
+
+			GZIPOutputStream gzipOutput = new GZIPOutputStream(
+				compressedContent);
+
+			gzipOutput.write(baos.toByteArray());
+			gzipOutput.finish();
+
+			compressedBytes = compressedContent.toByteArray();
+		}
+		
+		return compressedBytes;
+	}
+	
 	public void write(int b) throws IOException {
 		if (_closed) {
 			throw new IOException();
@@ -145,6 +158,7 @@ public class CompressionStream extends ServletOutputStream {
 
 	private static Log _log = LogFactoryUtil.getLog(CompressionStream.class);
 
+	private byte[] compressedBytes = null;
 	private HttpServletResponse _response = null;
 	private ServletOutputStream _output = null;
 	private OutputStream _bufferedOutput = null;

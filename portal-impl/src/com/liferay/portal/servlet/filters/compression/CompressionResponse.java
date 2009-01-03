@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -37,6 +36,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
  *
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  *
  */
 public class CompressionResponse extends HttpServletResponseWrapper {
@@ -66,7 +66,7 @@ public class CompressionResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public ServletOutputStream getOutputStream() throws IOException {
+	public CompressionStream getOutputStream() throws IOException {
 		if (_writer != null) {
 			throw new IllegalStateException();
 		}
@@ -96,12 +96,12 @@ public class CompressionResponse extends HttpServletResponseWrapper {
 		return _writer;
 	}
 
-	private ServletOutputStream _createOutputStream() throws IOException {
+	private CompressionStream _createOutputStream() throws IOException {
 		return new CompressionStream(_response);
 	}
 
 	private HttpServletResponse _response = null;
-	private ServletOutputStream _stream = null;
+	private CompressionStream _stream = null;
 	private PrintWriter _writer = null;
 
 }
