@@ -248,8 +248,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 			int[] values = StringUtil.split(value, 0);
 
+			int offset = values[0];
+			int height = values[1];
+			int width = values[2];
+
 			ThemeSpriteImage themeSpriteImage = new ThemeSpriteImage(
-				spriteFileName, key, values[0], values[1], values[2]);
+				spriteFileName, key, offset, height, width);
 
 			_themeSpriteImagesMap.put(key, themeSpriteImage);
 		}

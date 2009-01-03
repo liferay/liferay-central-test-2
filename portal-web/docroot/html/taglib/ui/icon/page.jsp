@@ -42,8 +42,6 @@ if (!target.equals("_self")) {
 }
 
 if (themeDisplay.isThemeImagesFastLoad()) {
-	ThemeSpriteImage themeSpriteImage = null;
-
 	String imageFileName = StringUtil.replace(src, "common/../", "");
 
 	String imagesPath = theme.getContextPath() + theme.getImagesPath();
@@ -51,7 +49,7 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 	if (imageFileName.startsWith(imagesPath)) {
 		imageFileName = imageFileName.substring(imagesPath.length() + 1);
 
-		themeSpriteImage = theme.getThemeSpriteImage(imageFileName);
+		ThemeSpriteImage themeSpriteImage = theme.getThemeSpriteImage(imageFileName);
 
 		if (themeSpriteImage != null) {
 			src = themeDisplay.getPathThemeImages() + "/spacer.png";

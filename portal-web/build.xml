@@ -844,7 +844,6 @@
 					fork="true"
 					newenvironment="true"
 				>
-					<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 					<jvmarg value="-Dcom.sun.media.jai.disableMediaLib=true" />
 					<jvmarg value="-Dimages.input.dir=@{module.name}/images" />
 					<jvmarg value="-Dimages.output.file=@{module.name}/images/icons.png" />
