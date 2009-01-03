@@ -65,6 +65,8 @@ if (layout != null) {
 			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
 		}
 	}
+
+	request.setAttribute(WebKeys.LAYOUT_PORTLETS, portlets);
 }
 %>
 

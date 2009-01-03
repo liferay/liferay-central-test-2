@@ -155,6 +155,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
 
+	public static final String LAYOUT_PORTLETS = "LAYOUT_PORTLETS";
+
 	public static final String LAYOUT_TEMPLATE_CONTENT = "LAYOUT_TEMPLATE_CONTENT";
 
 	public static final String LIVE_SESSION_USERS = "LIVE_SESSION_USERS";

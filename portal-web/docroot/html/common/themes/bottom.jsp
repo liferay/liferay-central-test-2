@@ -74,15 +74,7 @@
 </c:if>
 
 <%
-List<Portlet> portlets = null;
-
-if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
-	portlets = layoutTypePortlet.getAllPortlets();
-
-	if (layoutTypePortlet.hasStateMaxPortletId(PortletKeys.PORTLET_CONFIGURATION)) {
-		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
-	}
-}
+List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORTLETS);
 %>
 
 <c:if test="<%= portlets != null %>">
@@ -210,12 +202,6 @@ if (layout != null) {
 }
 %>
 
-<c:if test="<%= PropsValues.WEB_SERVER_DISPLAY_NODE %>">
-	<div class="portlet-msg-info">
-		<liferay-ui:message key="node" />: <%= PortalUtil.getComputerName() %>
-	</div>
-</c:if>
-
-<form action="" method="post" name="hrefFm"></form>
+<%@ include file="/html/common/themes/session_timeout.jspf" %>
 
 <liferay-util:include page="/html/common/themes/bottom-ext.jsp" />

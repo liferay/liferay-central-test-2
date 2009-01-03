@@ -22,10 +22,37 @@
  */
 %>
 
-<%@ page contentType="text/html; charset=UTF-8" %>
+<c:if test="<%= themeDisplay.isSignedIn() && !PropsValues.SESSION_DISABLED %>">
 
-<%
+	<%
+	String autoRememberMe = CookieKeys.getCookie(request, CookieKeys.REMEMBER_ME);
+	%>
 
-// This file is deprecated.
+	<c:if test="<%= Validator.isNull(autoRememberMe) %>">
+		<script type="text/javascript">
 
-%>
+			<%
+			int sessionTimeout = PropsValues.SESSION_TIMEOUT;
+			int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
+			int sessionTimeoutWarning = PropsValues.SESSION_TIMEOUT_WARNING;
+			int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
+			int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
+
+			Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
+
+			sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
+			%>
+
+			<c:if test="<%= sessionTimeoutWarning > 0 %>">
+				Liferay.Session.init(
+					{
+						autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
+						timeout: <%= sessionTimeout %>,
+						timeoutWarning: <%= sessionTimeoutWarning %>,
+						redirectOnExpiration: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
+					}
+				);
+			</c:if>
+		</script>
+	</c:if>
+</c:if>

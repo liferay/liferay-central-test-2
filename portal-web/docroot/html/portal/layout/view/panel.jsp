@@ -82,3 +82,5 @@ else {
 		</table>
 	</div>
 </c:if>
+
+<%@ include file="/html/portal/layout/view/common.jspf" %>
