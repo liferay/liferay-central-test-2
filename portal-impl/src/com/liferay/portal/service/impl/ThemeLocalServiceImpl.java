@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -51,11 +52,14 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.Version;
 
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -666,6 +670,16 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 						servletContextName, servletContext, null,
 						customEl, false, themeId, pluginPackage);
 				}
+			}
+
+			InputStream is = servletContext.getResourceAsStream(
+				imagesPath + "/icons.properties");
+
+			if (is != null) {
+				Properties properties = PropertiesUtil.load(
+					StringUtil.read(is));
+
+				themeModel.setThemeSpriteImages("/icons.png", properties);
 			}
 		}
 

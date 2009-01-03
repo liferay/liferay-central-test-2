@@ -1286,6 +1286,8 @@ public class ServicePreAction extends Action {
 
 		boolean themeCssFastLoad = ParamUtil.getBoolean(
 			request, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
+		boolean themeImagesFastLoad = ParamUtil.getBoolean(
+			request, "images_fast_load", PropsValues.THEME_IMAGES_FAST_LOAD);
 
 		boolean themeJsBarebone = PropsValues.JAVASCRIPT_BAREBONE_ENABLED;
 
@@ -1350,6 +1352,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);
+		themeDisplay.setThemeImagesFastLoad(themeImagesFastLoad);
 		themeDisplay.setThemeJsBarebone(themeJsBarebone);
 		themeDisplay.setThemeJsFastLoad(themeJsFastLoad);
 		themeDisplay.setServerName(request.getServerName());

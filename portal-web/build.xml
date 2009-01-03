@@ -837,6 +837,21 @@
 				>
 					<arg line="--type css -o @{module.name}/css/everything_packed.css @{module.name}/css/everything_unpacked.css" />
 				</java>
+
+				<java
+					classname="com.liferay.portal.tools.ImagesBuilder"
+					classpathref="project.classpath"
+					fork="true"
+					newenvironment="true"
+				>
+					<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+					<jvmarg value="-Dcom.sun.media.jai.disableMediaLib=true" />
+					<jvmarg value="-Dimages.input.dir=@{module.name}/images" />
+					<jvmarg value="-Dimages.output.file=@{module.name}/images/icons.png" />
+					<jvmarg value="-Dimages.properties.file=@{module.name}/images/icons.properties" />
+					<jvmarg value="-Dimages.max.height=16" />
+					<jvmarg value="-Dimages.max.width=16" />
+				</java>
 			</sequential>
 		</for>
 	</target>

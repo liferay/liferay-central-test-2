@@ -24,10 +24,12 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.ThemeSpriteImage;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
@@ -36,6 +38,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -227,6 +230,31 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	public ThemeSpriteImage getThemeSpriteImage(String fileName) {
+		return _themeSpriteImagesMap.get(fileName);
+	}
+
+	public void setThemeSpriteImages(
+		String spriteFileName, Properties properties) {
+
+		Iterator<Map.Entry<Object, Object>> itr =
+			properties.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> entry = itr.next();
+
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			int[] values = StringUtil.split(value, 0);
+
+			ThemeSpriteImage themeSpriteImage = new ThemeSpriteImage(
+				spriteFileName, key, values[0], values[1], values[2]);
+
+			_themeSpriteImagesMap.put(key, themeSpriteImage);
+		}
+	}
+
 	public String getServletContextName() {
 		return _servletContextName;
 	}
@@ -415,6 +443,8 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private boolean _wapTheme;
 	private Map<String, ColorScheme> _colorSchemesMap =
 		new HashMap<String, ColorScheme>();
+	private Map<String, ThemeSpriteImage> _themeSpriteImagesMap =
+		new HashMap<String, ThemeSpriteImage>();
 	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
 	private boolean _loadFromServletContext;

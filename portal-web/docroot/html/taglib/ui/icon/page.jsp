@@ -40,6 +40,26 @@ String targetHtml = StringPool.BLANK;
 if (!target.equals("_self")) {
 	targetHtml = "target=\"" + target + "\"";
 }
+
+if (themeDisplay.isThemeImagesFastLoad()) {
+	ThemeSpriteImage themeSpriteImage = null;
+
+	String imageFileName = StringUtil.replace(src, "common/../", "");
+
+	String imagesPath = theme.getContextPath() + theme.getImagesPath();
+
+	if (imageFileName.startsWith(imagesPath)) {
+		imageFileName = imageFileName.substring(imagesPath.length() + 1);
+
+		themeSpriteImage = theme.getThemeSpriteImage(imageFileName);
+
+		if (themeSpriteImage != null) {
+			src = themeDisplay.getPathThemeImages() + "/spacer.png";
+
+			details += " style=\"background-image: url('" + themeDisplay.getPathThemeImages() + themeSpriteImage.getSpriteFileName() + "'); background-position: 0px -" + themeSpriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + themeSpriteImage.getHeight() + "px; width: " + themeSpriteImage.getWidth() + "px;\"";
+		}
+	}
+}
 %>
 
 <c:choose>
