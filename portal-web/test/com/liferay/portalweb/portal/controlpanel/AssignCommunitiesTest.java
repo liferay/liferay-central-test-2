@@ -97,7 +97,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/nobr/a")) {
+				if (selenium.isElementPresent("link=Assign Members")) {
 					break;
 				}
 			}
@@ -107,7 +107,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//li[4]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");

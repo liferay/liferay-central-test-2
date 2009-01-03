@@ -69,7 +69,7 @@ public class ApplyUserGroupTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//li[4]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");

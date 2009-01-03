@@ -39,7 +39,7 @@ public class AddServerCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Server")) {
+				if (selenium.isElementPresent("link=Server Administration")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddServerCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Server"));
+		selenium.click(RuntimeVariables.replace("link=Server Administration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Log Levels"));
 		selenium.waitForPageToLoad("30000");

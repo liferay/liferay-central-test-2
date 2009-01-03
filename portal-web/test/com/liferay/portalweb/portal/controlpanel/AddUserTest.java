@@ -76,6 +76,23 @@ public class AddUserTest extends BaseTestCase {
 		selenium.type("_125_password1", RuntimeVariables.replace("test"));
 		selenium.type("_125_password2", RuntimeVariables.replace("test"));
 		selenium.click("addressesLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_addressStreet10")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_125_addressStreet10",
 			RuntimeVariables.replace("123 Liferay Ln."));
 		selenium.select("_125_addressCountryId0",

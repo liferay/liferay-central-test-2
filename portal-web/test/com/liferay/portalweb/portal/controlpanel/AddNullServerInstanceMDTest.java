@@ -39,7 +39,7 @@ public class AddNullServerInstanceMDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Instances")) {
+				if (selenium.isElementPresent("link=Portal Instances")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddNullServerInstanceMDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Instances"));
+		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
@@ -59,6 +59,6 @@ public class AddNullServerInstanceMDTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid mail domain. "));
+		assertTrue(selenium.isTextPresent("Please enter a valid mail domain."));
 	}
 }

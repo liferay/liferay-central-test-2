@@ -97,7 +97,7 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/nobr/a")) {
+				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
 			}
@@ -107,7 +107,7 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -39,7 +39,7 @@ public class AddInvalidServerInstanceVHTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Instances")) {
+				if (selenium.isElementPresent("link=Portal Instances")) {
 					break;
 				}
 			}
@@ -49,16 +49,16 @@ public class AddInvalidServerInstanceVHTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Instances"));
+		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_135_webId", RuntimeVariables.replace("testtest.com"));
-		selenium.type("_135_virtualHost", RuntimeVariables.replace("Invalid ID"));
+		selenium.type("_135_virtualHost", RuntimeVariables.replace("!@#$"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid virtual host. "));
+		assertTrue(selenium.isTextPresent("Please enter a valid virtual host."));
 	}
 }
