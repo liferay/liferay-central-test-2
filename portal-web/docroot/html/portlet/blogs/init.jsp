@@ -82,30 +82,23 @@ StringBuilder rssURLParams = new StringBuilder();
 
 if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
 	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
-		rssURLParams.append("max=");
+		rssURLParams.append("&max=");
 		rssURLParams.append(rssDelta);
-		rssURLParams.append("&");
 	}
 
 	if (!rssFormatType.equals(RSSUtil.DEFAULT_TYPE)) {
-		rssURLParams.append("type=");
+		rssURLParams.append("&type=");
 		rssURLParams.append(rssFormatType);
-		rssURLParams.append("&");
 	}
 
 	if (rssFormatVersion != RSSUtil.DEFAULT_VERSION) {
-		rssURLParams.append("version=");
+		rssURLParams.append("&version=");
 		rssURLParams.append(rssFormatVersion);
-		rssURLParams.append("&");
 	}
 
 	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
-		rssURLParams.append("displayStyle=");
+		rssURLParams.append("&displayStyle=");
 		rssURLParams.append(rssDisplayStyle);
-	}
-
-	if ((rssURLParams.lastIndexOf("&")) == (rssURLParams.length() - 1)) {
-		rssURLParams = rssURLParams.deleteCharAt(rssURLParams.length() - 1);
 	}
 }
 
