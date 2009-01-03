@@ -273,7 +273,6 @@
 #end
 
 #set ($bottom_ext_include = "$dir_include/common/themes/bottom.jsp")
-#set ($footer_ext_include = "$dir_include/common/themes/footer.jsp")
 #set ($content_include = "$dir_include$tilesContent")
 #set ($session_timeout_include = "$dir_include/common/themes/session_timeout.jsp")
 #set ($sound_alerts_include = "$dir_include/common/themes/sound_alerts.jsp")

@@ -66,8 +66,6 @@ if (layout != null) {
 		}
 	}
 }
-
-request.setAttribute("portlets", portlets);
 %>
 
 <c:if test="<%= portlets != null %>">
@@ -199,6 +197,34 @@ request.setAttribute("portlets", portlets);
 	%>
 
 				<script src="<%= headerPortalJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
+
+	<%
+			}
+		}
+	}
+
+	Set<String> headerPortletJavaScriptPaths = new LinkedHashSet<String>();
+
+	for (Portlet portlet : portlets) {
+		List<String> headerPortletJavaScriptList = portlet.getHeaderPortletJavaScript();
+
+		for (String headerPortletJavaScript : headerPortletJavaScriptList) {
+			String headerPortletJavaScriptPath = portlet.getContextPath() + headerPortletJavaScript;
+
+			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
+				if (!PropsValues.JAVASCRIPT_FAST_LOAD && headerPortletJavaScriptPath.endsWith("packed.js")) {
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(headerPortletJavaScriptPath.substring(0, headerPortletJavaScriptPath.length() - 9));
+					sb.append("unpacked.js");
+
+					headerPortletJavaScriptPath = sb.toString();
+				}
+
+				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
+	%>
+
+				<script src="<%= headerPortletJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
 
 	<%
 			}

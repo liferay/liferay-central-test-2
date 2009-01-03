@@ -10,6 +10,7 @@
 	$theme.include($top_head_include)
 
 	#css ($css_main_file)
+	#js ($js_main_file)
 
 	<script type="text/javascript">
 		// <![CDATA[
@@ -84,6 +85,3 @@ $theme.include($sound_alerts_include)
 </body>
 
 </html>
-
-#js ($js_main_file)
-$theme.include($footer_ext_include)

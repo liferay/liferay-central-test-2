@@ -24,10 +24,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%
-List<Portlet> portlets = (List<Portlet>)request.getAttribute("portlets");
-%>
-
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
 	<script type="text/javascript">
 		jQuery.datepicker.setDefaults(
@@ -72,6 +68,22 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute("portlets");
 		);
 	</script>
 </c:if>
+
+<c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
+	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+</c:if>
+
+<%
+List<Portlet> portlets = null;
+
+if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+	portlets = layoutTypePortlet.getAllPortlets();
+
+	if (layoutTypePortlet.hasStateMaxPortletId(PortletKeys.PORTLET_CONFIGURATION)) {
+		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
+	}
+}
+%>
 
 <c:if test="<%= portlets != null %>">
 
