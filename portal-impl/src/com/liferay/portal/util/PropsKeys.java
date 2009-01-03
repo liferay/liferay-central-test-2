@@ -467,7 +467,7 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
 
-	public static final String JOURNAL_ARTICLE_VIEW_PERMISSION_CHECKS_ENABLED = "journal.article.view.permission.checks.enabled";
+	public static final String JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED = "journal.article.view.permission.check.enabled";
 
 	public static final String JOURNAL_ARTICLES_PAGE_DELTA_VALUES = "journal.articles.page.delta.values";
 

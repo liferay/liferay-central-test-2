@@ -511,10 +511,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION));
 
-	public static final boolean JOURNAL_ARTICLE_VIEW_PERMISSION_CHECKS_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(
-				PropsKeys.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECKS_ENABLED));
+	public static final boolean JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED));
 
 	public static final boolean JOURNAL_CONTENT_SEARCH_SHOW_LISTED =
 		GetterUtil.getBoolean(

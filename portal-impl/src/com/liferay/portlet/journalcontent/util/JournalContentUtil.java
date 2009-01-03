@@ -210,16 +210,16 @@ public class JournalContentUtil {
 		}
 
 		try {
-			if (PropsValues.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECKS_ENABLED &&
+			if ((PropsValues.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED) &&
 				(articleDisplay != null) && (themeDisplay != null) &&
-				!JournalArticlePermission.contains(
+				(!JournalArticlePermission.contains(
 					themeDisplay.getPermissionChecker(), groupId, articleId,
-					ActionKeys.VIEW)) {
+					ActionKeys.VIEW))) {
 
 				articleDisplay = null;
 			}
 		}
-		catch (Exception se) {
+		catch (Exception e) {
 		}
 
 		if (_log.isDebugEnabled()) {

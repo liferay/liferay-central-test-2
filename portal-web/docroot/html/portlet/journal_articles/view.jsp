@@ -175,7 +175,6 @@ double version = ParamUtil.getDouble(request, "version");
 
 		<c:choose>
 			<c:when test="<%= articleDisplay != null %>">
-
 				<div class="journal-content-article">
 					<%= articleDisplay.getContent() %>
 				</div>
@@ -210,6 +209,5 @@ double version = ParamUtil.getDouble(request, "version");
 				</span>
 			</c:otherwise>
 		</c:choose>
-
 	</c:otherwise>
 </c:choose>
