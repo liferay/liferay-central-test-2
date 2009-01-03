@@ -37,7 +37,7 @@ import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.MapUtil;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -115,21 +115,22 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 		}
 
-		List<Group> groups = groupLocalService.getManageableGroups(
+		List<Group> manageableGroups = groupLocalService.getManageableGroups(
 			userId);
-		List<Group> manageableGroups = new ArrayList<Group>(groups);
 
 		if (Validator.isNull(actionId) || permissionChecker.isCompanyAdmin()) {
 			return manageableGroups;
 		}
 
-		
-		
-		for (Group group : groups) {
+		Iterator<Group> itr = manageableGroups.iterator();
+
+		while (itr.hasNext()) {
+			Group group = itr.next();
+
 			if (!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),actionId)) {
 
-				manageableGroups.remove(group);
+				itr.remove();
 			}
 		}
 
