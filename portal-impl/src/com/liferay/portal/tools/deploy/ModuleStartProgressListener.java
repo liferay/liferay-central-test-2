@@ -20,6 +20,25 @@
  * SOFTWARE.
  */
 
+/**
+ * The contents of this file are subject to the terms of the Common Development
+ * and Distribution License (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the License at http://www.sun.com/cddl/cddl.html and
+ * legal/CDDLv1.0.txt. See the License for the specific language governing
+ * permission and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL Header Notice in each file
+ * and include the License file at legal/CDDLv1.0.txt.
+ *
+ * If applicable, add the following below the CDDL Header, with the fields
+ * enclosed by brackets [] replaced by your own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2009 Sun Microsystems Inc. All rights reserved.
+ */
+
 package com.liferay.portal.tools.deploy;
 
 import javax.enterprise.deploy.spi.status.ProgressEvent;
@@ -29,19 +48,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UndeploymentProgressListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="JSR88DeploymentHandler.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Sandeep Soni
+ *
  */
 
-public class UndeploymentProgressListener implements ProgressListener {
+public class ModuleStartProgressListener implements ProgressListener {
 
-	UndeploymentProgressListener(
-		JSR88DeploymentHandler driver, String warContext) {
+	ModuleStartProgressListener(JSR88DeploymentHandler driver) {
 		_handler = driver;
-		_warContext = warContext;
 	}
 
 	public void handleProgressEvent(ProgressEvent event) {
@@ -49,18 +65,13 @@ public class UndeploymentProgressListener implements ProgressListener {
 
 		if (event.getDeploymentStatus().isCompleted()) {
 			_handler.setError(false);
-			_handler.setAppUndeployed(true);
-		}
-		else if (event.getDeploymentStatus().isFailed()) {
-			_handler.setError(true);
-			_handler.setAppUndeployed(false);
+			_handler.setAppStarted(true);
 		}
 	}
 
 	private JSR88DeploymentHandler _handler;
-	private String _warContext;
 
 	private static Log _log = LogFactory.getLog(
-		UndeploymentProgressListener.class);
+		ModuleStartProgressListener.class);
 
 }
