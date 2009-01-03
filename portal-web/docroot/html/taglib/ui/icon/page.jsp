@@ -54,7 +54,7 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 		if (themeSpriteImage != null) {
 			src = themeDisplay.getPathThemeImages() + "/spacer.png";
 
-			details += " style=\"background-image: url('" + themeDisplay.getPathThemeImages() + themeSpriteImage.getSpriteFileName() + "'); background-position: 0px -" + themeSpriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + themeSpriteImage.getHeight() + "px; width: " + themeSpriteImage.getWidth() + "px;\"";
+			details += " style=\"background-image: url('" + themeDisplay.getPathThemeImages() + themeSpriteImage.getSpriteFileName() + "'); background-position: 50% -" + themeSpriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + themeSpriteImage.getHeight() + "px; width: " + themeSpriteImage.getWidth() + "px;\"";
 		}
 	}
 }
