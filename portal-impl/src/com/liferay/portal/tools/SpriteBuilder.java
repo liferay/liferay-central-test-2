@@ -60,84 +60,97 @@ import javax.media.jai.operator.LookupDescriptor;
 import javax.media.jai.operator.MosaicDescriptor;
 import javax.media.jai.operator.TranslateDescriptor;
 
-import org.apache.tools.ant.DirectoryScanner;
-
 /**
- * <a href="ImagesBuilder.java.html"><b><i>View Source</i></b></a>
+ * <a href="SpriteBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImagesBuilder {
+public class SpriteBuilder {
 
 	public static void main(String[] args) {
-		File inputDir = new File(System.getProperty("images.input.dir"));
-		File outputFile = new File(
-			System.getProperty("images.output.file"));
-		File propertiesFile = new File(
-			System.getProperty("images.properties.file"));
+		File inputDir = new File(System.getProperty("sprite.input.dir"));
+		String outputFileName = System.getProperty("sprite.output.file");
+		String propertiesFileName = System.getProperty(
+			"sprite.properties.file");
 		int maxHeight = GetterUtil.getInteger(
-			System.getProperty("images.max.height"));
+			System.getProperty("sprite.max.height"));
 		int maxWidth = GetterUtil.getInteger(
-			System.getProperty("images.max.width"));
+			System.getProperty("sprite.max.width"));
 
-		new ImagesBuilder(
-			inputDir, outputFile, propertiesFile, maxHeight, maxWidth);
+		new SpriteBuilder(
+			inputDir, outputFileName, propertiesFileName, maxHeight, maxWidth);
 	}
 
-	public ImagesBuilder(
-		File inputDir, File outputFile, File propertiesFile, int maxHeight,
-		int maxWidth) {
+	public SpriteBuilder(
+		File inputDir, String outputFileName, String propertiesFileName,
+		int maxHeight, int maxWidth) {
 
 		try {
-			buildImages(
-				inputDir, outputFile, propertiesFile, maxHeight, maxWidth);
+			_inputDir = inputDir;
+			_outputFileName = outputFileName;
+			_propertiesFileName = propertiesFileName;
+			_maxHeight = maxHeight;
+			_maxWidth = maxWidth;
+
+			buildImages(inputDir);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void buildImages(
-			File inputDir, File outputFile, File propertiesFile, int maxHeight,
-			int maxWidth)
-		throws Exception {
+	public void buildImages(File dir) throws Exception {
+		List<File> images = new ArrayList<File>();
 
-		DirectoryScanner ds = new DirectoryScanner();
+		File[] files = dir.listFiles();
 
-		ds.setBasedir(inputDir);
-		ds.setIncludes(new String[] {"**\\*.png"});
+		for (File file : files) {
+			if (file.isDirectory()) {
+				buildImages(file);
+			}
+			else if (file.getName().endsWith(".png")) {
+				images.add(file);
+			}
+		}
 
-		ds.scan();
+		if (images.size() <= 1) {
+			return;
+		}
 
 		List<RenderedImage> renderedImages = new ArrayList<RenderedImage>();
 
 		Properties properties = new SortedProperties();
 
-		String[] files = ds.getIncludedFiles();
-
 		float x = 0;
 		float y = 0;
 
-		for (int i = 0; i < files.length; i++) {
-			String file = files[i];
+		for (File file : images) {
+			String fileName = file.getName();
+
+			if (fileName.equals(_outputFileName)) {
+				continue;
+			}
 
 			RenderedOp renderedOp = FileLoadDescriptor.create(
-				inputDir + "/" + file, null, null, null);
+				file.toString(), null, null, null);
 
 			RenderedImage renderedImage = convert(renderedOp);
 
 			int height = renderedImage.getHeight();
 			int width = renderedImage.getWidth();
 
-			if ((height <= maxHeight) && (width <= maxWidth)) {
+			if ((height <= _maxHeight) && (width <= _maxWidth)) {
 				renderedImage = TranslateDescriptor.create(
 					renderedImage, x, y, null, null);
 
 				renderedImages.add(renderedImage);
 
 				String key = StringUtil.replace(
-					file, StringPool.BACK_SLASH, StringPool.SLASH);
+					file.toString(), StringPool.BACK_SLASH, StringPool.SLASH);
+
+				key = key.substring(_inputDir.toString().length() + 1);
+
 				String value = (int)y + "," + height + "," + width;
 
 				properties.setProperty(key, value);
@@ -146,14 +159,22 @@ public class ImagesBuilder {
 			}
 		}
 
+		if (renderedImages.size() <= 1) {
+			return;
+		}
+
 		RenderedOp renderedOp = MosaicDescriptor.create(
 			(RenderedImage[])renderedImages.toArray(
 				new RenderedImage[renderedImages.size()]),
 			MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null, null);
 
-		ImageIO.write(renderedOp, "png", outputFile);
+		ImageIO.write(
+			renderedOp, "png",
+			new File(dir.toString() + "/" + _outputFileName));
 
-		_fileUtil.write(propertiesFile, PropertiesUtil.toString(properties));
+		_fileUtil.write(
+			dir.toString() + "/" + _propertiesFileName,
+			PropertiesUtil.toString(properties));
 	}
 
 	public RenderedImage convert(RenderedOp renderedOp) throws Exception {
@@ -317,5 +338,11 @@ public class ImagesBuilder {
 	private static final int _NUM_OF_BANDS = 4;
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
+
+	private File _inputDir;
+	private String _outputFileName;
+	private String _propertiesFileName;
+	private int _maxHeight;
+	private int _maxWidth;
 
 }

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -51,8 +52,6 @@ import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.Version;
-
-import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -672,18 +671,37 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				}
 			}
 
-			InputStream is = servletContext.getResourceAsStream(
-				imagesPath + "/icons.properties");
-
-			if (is != null) {
-				Properties properties = PropertiesUtil.load(
-					StringUtil.read(is));
-
-				themeModel.setThemeSpriteImages("/icons.png", properties);
-			}
+			_setThemeSpriteImages(servletContext, themeModel, imagesPath);
 		}
 
 		return themeIds;
+	}
+
+	private void _setThemeSpriteImages(
+			ServletContext servletContext, Theme theme, String resourcePath)
+		throws Exception {
+
+		Set<String> resourcePaths = servletContext.getResourcePaths(
+			resourcePath);
+
+		for (String curResourcePath : resourcePaths) {
+			if (curResourcePath.endsWith(StringPool.SLASH)) {
+				_setThemeSpriteImages(servletContext, theme, curResourcePath);
+			}
+			else if (curResourcePath.endsWith(".sprite")) {
+				Properties properties = PropertiesUtil.load(
+					StringUtil.read(
+						servletContext.getResourceAsStream(curResourcePath)));
+
+				String spriteFileName =
+					curResourcePath.substring(
+						theme.getImagesPath().length(),
+						curResourcePath.length() - 7) +
+					".png";
+
+				theme.setThemeSpriteImages(spriteFileName, properties);
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeLocalServiceImpl.class);

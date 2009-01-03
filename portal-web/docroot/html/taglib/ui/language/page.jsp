@@ -141,8 +141,11 @@ for (int i = 0; i < locales.length; i++) {
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>">
-					<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locales[i]) %>" title="<%= locales[i].getDisplayName(locales[i]) %>" /></a>
+					<liferay-ui:icon
+						image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
+						message="<%= locales[i].getDisplayName(locales[i]) %>"
+						url='<%= formAction + "&" + name + "=" + locales[i].getLanguage() + "_" + locales[i].getCountry() %>'
+					/>
 				</c:otherwise>
 			</c:choose>
 
