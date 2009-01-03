@@ -185,7 +185,9 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				</c:if>
 			</c:if>
 
-			<%= articleDisplay.getContent() %>
+			<div class="journal-content-article">
+				<%= articleDisplay.getContent() %>
+			</div>
 
 			<c:if test="<%= articleDisplay.isPaginate() %>">
 

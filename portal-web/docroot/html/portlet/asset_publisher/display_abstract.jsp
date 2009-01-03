@@ -195,13 +195,6 @@ if (Validator.isNotNull(asset.getUrl())) {
 		</c:if>
 	</div>
 
-	<div class="lfr-meta-actions edit-controls">
-		<br />
+	<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
 
-		<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
-	</div>
-
-	<c:if test="<%= (assetIndex + 1) < results.size() %>">
-		<div class="separator"><!-- --></div>
-	</c:if>
 </c:if>

@@ -70,18 +70,11 @@ for (String entryName : entries) {
 	catch (NoSuchPropertyException nspe) {
 	}
 }
+
+String portletId = portletDisplay.getId();
 %>
 
-<form name="<portlet:namespace/>fm">
-
-	<%
-	String portletId = portletDisplay.getId();
-	%>
-
-	<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-</form>
-
-<br />
+<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
 <%
 if (showQueryLogic) {
