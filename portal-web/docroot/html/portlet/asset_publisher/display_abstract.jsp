@@ -196,5 +196,4 @@ if (Validator.isNotNull(asset.getUrl())) {
 	</div>
 
 	<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
-
 </c:if>
