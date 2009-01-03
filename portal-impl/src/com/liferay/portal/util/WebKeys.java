@@ -62,6 +62,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String COMPANY = "COMPANY";
 
 	public static final String COMPANY_ID = "COMPANY_ID";
+	
+	public static final String COMPRESSED_BYTES = "COMPRESSED_BYTES";
 
 	public static final String CONFIGURATION_ACTION_PATH = "CONFIGURATION_ACTION_PATH";
 

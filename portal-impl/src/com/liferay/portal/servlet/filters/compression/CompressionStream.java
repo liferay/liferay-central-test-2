@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletOutputStream;
@@ -90,11 +91,11 @@ public class CompressionStream extends ServletOutputStream {
 	}
 
 	public byte[] getCompressedBytes() throws IOException {
-		
+
 		if (compressedBytes != null) {
 			return compressedBytes;
 		}
-		
+
 		if (_bufferedOutput instanceof ByteArrayMaker) {
 			ByteArrayMaker baos = (ByteArrayMaker)_bufferedOutput;
 
@@ -108,10 +109,10 @@ public class CompressionStream extends ServletOutputStream {
 
 			compressedBytes = compressedContent.toByteArray();
 		}
-		
+
 		return compressedBytes;
 	}
-	
+
 	public void write(int b) throws IOException {
 		if (_closed) {
 			throw new IOException();

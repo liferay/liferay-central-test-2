@@ -22,6 +22,14 @@
 
 package com.liferay.portal.servlet.filters.cache;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.util.SystemProperties;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -30,13 +38,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.SystemProperties;
 
 /**
  * <a href="CacheFilter.java.html"><b><i>View Source</i></b></a>
@@ -61,39 +62,53 @@ public class CacheFilter extends BasePortalFilter {
 		File realFile = new File(
 			getFilterConfig().getServletContext().getRealPath(requestURI));
 
-		if (!tempFile.exists() || 
+		if (!tempFile.exists() ||
 			tempFile.lastModified() < realFile.lastModified()) {
-			
+
 			if (_log.isDebugEnabled()) {
 				_log.debug("Compressing " + completeURL);
 			}
-			
+
 			processFilter(
 					CacheFilter.class, request, response, filterChain);
+
+			// creating cache
+
+			if (realFile.exists()) {
+				byte[] compressedBytes =
+					(byte[])request.getAttribute(WebKeys.COMPRESSED_BYTES);
+
+				tempFile = new File(
+						SystemProperties.get(SystemProperties.TMP_DIR) +
+							"/liferay/filter_cache" + requestURI + ".gz");
+
+				FileUtil.write(tempFile, compressedBytes);
+			}
+
 		}
 		else {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Not compressing " + completeURL);
 			}
-			
+
 			byte[] compressedBytes = FileUtil.getBytes(tempFile);
 			ServletOutputStream output = response.getOutputStream();
-			
+
 			response.setContentLength(compressedBytes.length);
 			response.addHeader(_CONTENT_ENCODING, _GZIP);
-			
+
 			output.write(compressedBytes);
 			output.flush();
 			output.close();
 		}
-	
+
 	}
 
 	private static final String _CONTENT_ENCODING = "Content-Encoding";
 
 	private static final String _GZIP = "gzip";
-	
+
 	private static Log _log = LogFactoryUtil.getLog(CacheFilter.class);
 
 }
