@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
@@ -144,10 +143,6 @@ public class CompressionFilter extends BasePortalFilter {
 				filterChain);
 
 			compressionResponse.finishResponse();
-
-			request.setAttribute(WebKeys.COMPRESSED_BYTES,
-					compressionResponse.getOutputStream().getCompressedBytes());
-
 		}
 		else {
 			if (_log.isDebugEnabled()) {
