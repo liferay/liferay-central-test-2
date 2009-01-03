@@ -27,9 +27,12 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 
 import java.util.Map;
 import java.util.Set;
@@ -204,6 +207,19 @@ public class JournalContentUtil {
 				MultiVMPoolUtil.put(
 					_cache, key, _groups, groupKey, articleDisplay);
 			}
+		}
+
+		try {
+			if (PropsValues.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECKS_ENABLED &&
+				(articleDisplay != null) && (themeDisplay != null) &&
+				!JournalArticlePermission.contains(
+					themeDisplay.getPermissionChecker(), groupId, articleId,
+					ActionKeys.VIEW)) {
+
+				articleDisplay = null;
+			}
+		}
+		catch (Exception se) {
 		}
 
 		if (_log.isDebugEnabled()) {

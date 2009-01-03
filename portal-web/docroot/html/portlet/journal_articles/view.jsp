@@ -166,59 +166,50 @@ double version = ParamUtil.getDouble(request, "version");
 	<c:otherwise>
 
 		<%
-		try {
-			String languageId = LanguageUtil.getLanguageId(request);
-			int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
-			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
+		String languageId = LanguageUtil.getLanguageId(request);
+		int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
+		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
-
-			String content = articleDisplay.getContent();
-
-			RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
-			RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
-			RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
-
-			content = RuntimePortletUtil.processXML(request, content, portletLogic);
-			content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
-			content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
-
-			PortletURL portletURL = renderResponse.createRenderURL();
-
-			portletURL.setParameter("articleId", articleId);
-			portletURL.setParameter("version", String.valueOf(version));
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
 		%>
 
-			<div class="journal-content-article">
-				<%= content %>
-			</div>
+		<c:choose>
+			<c:when test="<%= articleDisplay != null %>">
 
-			<c:if test="<%= articleDisplay.isPaginate() %>">
-				<liferay-ui:page-iterator
-					cur="<%= articleDisplay.getCurrentPage() %>"
-					curParam='<%= "page" %>'
-					delta="<%= 1 %>"
-					maxPages="<%= 25 %>"
-					total="<%= articleDisplay.getNumberOfPages() %>"
-					type="article"
-					url="<%= portletURL.toString() %>"
-				/>
+				<div class="journal-content-article">
+					<%= articleDisplay.getContent() %>
+				</div>
 
-				<br />
-			</c:if>
+				<c:if test="<%= articleDisplay.isPaginate() %>">
 
-		<%
-		}
-		catch (PrincipalException pe) {
-		%>
+					<%
+					PortletURL portletURL = renderResponse.createRenderURL();
 
-			<span class="portlet-msg-error">
-				<liferay-ui:message key="you-do-not-have-the-required-permissions" />
-			</span>
+					portletURL.setParameter("articleId", articleId);
+					portletURL.setParameter("version", String.valueOf(version));
+					%>
 
-		<%
-		}
-		%>
+					<br />
+
+					<liferay-ui:page-iterator
+						cur="<%= articleDisplay.getCurrentPage() %>"
+						curParam='<%= "page" %>'
+						delta="<%= 1 %>"
+						maxPages="<%= 25 %>"
+						total="<%= articleDisplay.getNumberOfPages() %>"
+						type="article"
+						url="<%= portletURL.toString() %>"
+					/>
+
+					<br />
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<span class="portlet-msg-error">
+					<liferay-ui:message key="you-do-not-have-the-required-permissions" />
+				</span>
+			</c:otherwise>
+		</c:choose>
 
 	</c:otherwise>
 </c:choose>
