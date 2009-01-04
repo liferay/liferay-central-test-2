@@ -110,11 +110,11 @@ public class ThemeDeployer extends BaseDeployer {
 		sb.append("</init-param>");
 		sb.append("<init-param>");
 		sb.append("<param-name>Cache-Control</param-name>");
-		sb.append("<param-value>max-age=172801, public</param-value>");
+		sb.append("<param-value>max-age=315360000, public</param-value>");
 		sb.append("</init-param>");
 		sb.append("<init-param>");
 		sb.append("<param-name>Expires</param-name>");
-		sb.append("<param-value>172801</param-value>");
+		sb.append("<param-value>315360000</param-value>");
 		sb.append("</init-param>");
 		sb.append("</filter>");
 
