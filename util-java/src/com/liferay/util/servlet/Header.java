@@ -68,6 +68,18 @@ public class Header {
 		_type = type;
 	}
 
+	public String toString() {
+		if (_type == _dateValue) {
+			return String.valueOf(_intValue);
+		}
+		else if (_type == _dateValue) {
+			return String.valueOf(_intValue);
+		}
+		else {
+			return _stringValue;
+		}
+	}
+
 	private int _intValue;
 	private long _dateValue;
 	private String _stringValue;

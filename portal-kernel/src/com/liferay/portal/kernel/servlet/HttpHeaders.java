@@ -44,6 +44,8 @@ public interface HttpHeaders {
 
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 
+	public static final String CONTENT_ENCODING = "Content-Encoding";
+
 	public static final String CONTENT_ID = "Content-ID";
 
 	public static final String CONTENT_TYPE = "Content-Type";

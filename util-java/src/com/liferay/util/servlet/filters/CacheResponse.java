@@ -103,6 +103,18 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
+	public String getHeader(String name) {
+		List<Header> values = _headers.get(name);
+
+		if ((values == null) || values.isEmpty()) {
+			return null;
+		}
+
+		Header header = values.get(0);
+
+		return header.toString();
+	}
+
 	public void finishResponse() {
 		try {
 			if (_writer != null) {

@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.compression;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.IOException;
@@ -71,7 +72,7 @@ public class CompressionStream extends ServletOutputStream {
 			byte[] compressedBytes = compressedContent.toByteArray();
 
 			_response.setContentLength(compressedBytes.length);
-			_response.addHeader(_CONTENT_ENCODING, _GZIP);
+			_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 
 			_output.write(compressedBytes);
 			_output.flush();
@@ -138,8 +139,6 @@ public class CompressionStream extends ServletOutputStream {
 
 	public void reset() {
 	}
-
-	private static final String _CONTENT_ENCODING = "Content-Encoding";
 
 	private static final String _GZIP = "gzip";
 
