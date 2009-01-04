@@ -153,25 +153,39 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		jQuery('.permissions-entries-btn').click(
 			function() {
-				var portletURL = instance._createPermissionURL(
-					'com.liferay.portlet.tags.model.TagsEntry',
-					instance._selectedEntryName,
-					instance._selectedEntryId
-				);
+				var entryName = instance._selectedEntryName;
+				var entryId = instance._selectedEntryId;
 
-				submitForm(document.hrefFm, portletURL.toString());
+				if (entryName && entryId) {
+					var portletURL = instance._createPermissionURL(
+						'com.liferay.portlet.tags.model.TagsEntry',
+						entryName,
+						entryId
+					);
+					submitForm(document.hrefFm, portletURL.toString());
+				}
+				else {
+					instance._showToolBarEntrySection();
+				}
 			}
 		);
 
 		jQuery('.permissions-vocabulary-btn').click(
 			function() {
-				var portletURL = instance._createPermissionURL(
-					'com.liferay.portlet.tags.model.TagsVocabulary',
-					instance._selectedVocabularyName,
-					instance._selectedVocabularyId
-				);
+				var vocabularyName = instance._selectedVocabularyName;
+				var vocabularyId = instance._selectedVocabularyId;
 
-				submitForm(document.hrefFm, portletURL.toString());
+				if (vocabularyName && vocabularyId) {
+					var portletURL = instance._createPermissionURL(
+						'com.liferay.portlet.tags.model.TagsVocabulary',
+						vocabularyName,
+						vocabularyId
+					);
+					submitForm(document.hrefFm, portletURL.toString());
+				}
+				else {
+					instance._showToolBarVocabularySection();
+				}
 			}
 		);
 
