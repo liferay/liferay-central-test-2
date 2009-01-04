@@ -88,8 +88,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
-		virtualHost = getVirtualHost(virtualHost);
-
 		if ((Validator.isNull(webId)) ||
 			(webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) ||
 			(companyPersistence.fetchByWebId(webId) != null)) {
@@ -387,8 +385,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company getCompanyByVirtualHost(String virtualHost)
 		throws PortalException, SystemException {
 
-		virtualHost = getVirtualHost(virtualHost);
-
 		return companyPersistence.findByVirtualHost(virtualHost);
 	}
 
@@ -454,7 +450,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company updateCompany(long companyId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
-		virtualHost = getVirtualHost(virtualHost);
+		//virtualHost = getVirtualHost(virtualHost);
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
@@ -479,7 +475,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
-		virtualHost = getVirtualHost(virtualHost);
 		Date now = new Date();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -626,10 +621,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return logoId;
 	}
 
-	protected String getVirtualHost(String virtualHost) {
-		return FriendlyURLNormalizer.normalize(virtualHost);
-	}
-
 	protected void validate(String name) throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new AccountNameException();
@@ -643,7 +634,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyVirtualHostException();
 		}
 		else if (virtualHost.equals(PortalInstances.DEFAULT_VIRTUAL_HOST) &&
-				 !webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+				!webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 
 			throw new CompanyVirtualHostException();
 		}
