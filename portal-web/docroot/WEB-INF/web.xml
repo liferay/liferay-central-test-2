@@ -401,6 +401,12 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Compression Filter</filter-name>
+		<url-pattern>/language/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Compression Filter</filter-name>
 		<url-pattern>/user/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
