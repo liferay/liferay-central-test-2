@@ -84,7 +84,9 @@ public class CacheFilter extends BasePortalFilter {
 
 			File realFile = new File(realPath);
 
-			if (tempDataFile.lastModified() > realFile.lastModified()) {
+			if ((!realFile.exists()) ||
+				(tempDataFile.lastModified() > realFile.lastModified())) {
+
 				retrieveFromCache = true;
 			}
 		}
