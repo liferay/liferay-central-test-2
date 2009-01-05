@@ -160,8 +160,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 					var portletURL = instance._createPermissionURL(
 						'com.liferay.portlet.tags.model.TagsEntry',
 						entryName,
-						entryId
-					);
+						entryId);
+
 					submitForm(document.hrefFm, portletURL.toString());
 				}
 				else {
@@ -179,8 +179,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 					var portletURL = instance._createPermissionURL(
 						'com.liferay.portlet.tags.model.TagsVocabulary',
 						vocabularyName,
-						vocabularyId
-					);
+						vocabularyId);
+
 					submitForm(document.hrefFm, portletURL.toString());
 				}
 				else {
