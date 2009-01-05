@@ -84,7 +84,7 @@
 	<library>
 		<file-name>development/deployment.jar</file-name>
 		<version>1.1</version>
-		<project-name>J2EE Deployment Library</project-name>
+		<project-name>J2EE Application Deployment Library</project-name>
 		<project-url>http://java.sun.com/j2ee/tools/deployment</project-url>
 		<licenses>
 			<license>

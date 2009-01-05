@@ -41,6 +41,7 @@
 
 package com.liferay.portal.tools.deploy;
 
+import javax.enterprise.deploy.spi.status.DeploymentStatus;
 import javax.enterprise.deploy.spi.status.ProgressEvent;
 import javax.enterprise.deploy.spi.status.ProgressListener;
 
@@ -48,30 +49,33 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="JSR88DeploymentHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="StartProgressListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Sandeep Soni
+ * @author Brian Wing Shun Chan
  *
  */
+public class StartProgressListener implements ProgressListener {
 
-public class ModuleStartProgressListener implements ProgressListener {
-
-	ModuleStartProgressListener(JSR88DeploymentHandler driver) {
-		_handler = driver;
+	public StartProgressListener(DeploymentHandler deploymentHandler) {
+		deploymentHandler = deploymentHandler;
 	}
 
-	public void handleProgressEvent(ProgressEvent event) {
-		_log.info(event.getDeploymentStatus().getMessage());
+	public void handleProgressEvent(ProgressEvent progressEvent) {
+		DeploymentStatus deploymentStatus = progressEvent.getDeploymentStatus();
 
-		if (event.getDeploymentStatus().isCompleted()) {
-			_handler.setError(false);
-			_handler.setAppStarted(true);
+		if (_log.isInfoEnabled()) {
+			_log.info(deploymentStatus.getMessage());
+		}
+
+		if (deploymentStatus.isCompleted()) {
+			deploymentHandler.setError(false);
+			deploymentHandler.setStarted(true);
 		}
 	}
 
-	private JSR88DeploymentHandler _handler;
+	private static Log _log = LogFactory.getLog(StartProgressListener.class);
 
-	private static Log _log = LogFactory.getLog(
-		ModuleStartProgressListener.class);
+	private DeploymentHandler deploymentHandler;
 
 }

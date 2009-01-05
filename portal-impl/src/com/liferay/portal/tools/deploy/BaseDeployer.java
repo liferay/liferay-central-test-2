@@ -51,6 +51,7 @@ import com.liferay.util.ant.CopyTask;
 import com.liferay.util.ant.DeleteTask;
 import com.liferay.util.ant.ExpandTask;
 import com.liferay.util.ant.UpToDateTask;
+import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.sun.portal.portletcontainer.warupdater.PortletWarUpdater;
@@ -450,79 +451,111 @@ public class BaseDeployer {
 
 		updateWebXml(webXml, srcFile, displayName, pluginPackage);
 
-		if ((deployDir != null) && !baseDir.equals(destDir)) {
-			updateDeployDirectory(srcFile);
+		if ((deployDir == null) || baseDir.equals(destDir)) {
+			return;
+		}
 
-			String excludes = StringPool.BLANK;
+		updateDeployDirectory(srcFile);
 
-			if (appServerType.startsWith("jboss")) {
-				excludes += "**/WEB-INF/lib/log4j.jar,";
+		String excludes = StringPool.BLANK;
+
+		if (appServerType.startsWith("jboss")) {
+			excludes += "**/WEB-INF/lib/log4j.jar,";
+		}
+		else if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
+			String[] libs = FileUtil.listFiles(tomcatLibDir);
+
+			for (int i = 0; i < libs.length; i++) {
+				excludes += "**/WEB-INF/lib/" + libs[i] + ",";
 			}
-			else if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
-				String[] libs = FileUtil.listFiles(tomcatLibDir);
 
-				for (int i = 0; i < libs.length; i++) {
-					excludes += "**/WEB-INF/lib/" + libs[i] + ",";
-				}
+			File contextXml = new File(srcFile + "/META-INF/context.xml");
 
-				File contextXml = new File(srcFile + "/META-INF/context.xml");
+			if (contextXml.exists()) {
+				String content = FileUtil.read(contextXml);
 
-				if (contextXml.exists()) {
-					String content = FileUtil.read(contextXml);
-
-					if (content.indexOf(_PORTAL_CLASS_LOADER) != -1) {
-						excludes += "**/WEB-INF/lib/util-bridges.jar,";
-						excludes += "**/WEB-INF/lib/util-java.jar,";
-						excludes += "**/WEB-INF/lib/util-taglib.jar,";
-					}
-				}
-
-				try {
-
-					// LEP-2990
-
-					Class.forName("javax.el.ELContext");
-
-					excludes += "**/WEB-INF/lib/el-api.jar,";
-				}
-				catch (ClassNotFoundException cnfe) {
+				if (content.indexOf(_PORTAL_CLASS_LOADER) != -1) {
+					excludes += "**/WEB-INF/lib/util-bridges.jar,";
+					excludes += "**/WEB-INF/lib/util-java.jar,";
+					excludes += "**/WEB-INF/lib/util-taglib.jar,";
 				}
 			}
 
-			if (!unpackWar || appServerType.equals("websphere")) {
-				JEEDeploymentUtil.deployDirectory(
-					displayName,srcFile, deployDir, webXml);
+			try {
+
+				// LEP-2990
+
+				Class.forName("javax.el.ELContext");
+
+				excludes += "**/WEB-INF/lib/el-api.jar,";
+			}
+			catch (ClassNotFoundException cnfe) {
+			}
+		}
+
+		if (!unpackWar || appServerType.equals("websphere")) {
+			File tempDir = new File(
+				SystemProperties.get(SystemProperties.TMP_DIR) +
+					File.separator + Time.getTimestamp());
+
+			WarTask.war(srcFile, tempDir, "WEB-INF/web.xml", webXml);
+
+			if (isJEEDeploymentEnabled()) {
+				File tempWarDir = new File(
+					tempDir.getParent(), deployDir.getName());
+
+				if (tempWarDir.exists()) {
+					tempWarDir.delete();
+				}
+
+				if (!tempDir.renameTo(tempWarDir)) {
+					tempWarDir = tempDir;
+				}
+
+				DeploymentHandler deploymentHandler = getDeploymentHandler();
+
+				deploymentHandler.deploy(tempWarDir, displayName);
+
+				deploymentHandler.releaseDeploymentManager();
+
+				DeleteTask.deleteDirectory(tempWarDir);
 			}
 			else {
-
-				// The deployer might only copy files that have been modified.
-				// However, the deployer always copies and overwrites web.xml
-				// after the other files have been copied because application
-				// servers usually detect that a WAR has been modified based on
-				// the web.xml time stamp.
-
-				excludes += "**/WEB-INF/web.xml";
-
-				CopyTask.copyDirectory(
-					srcFile, deployDir, StringPool.BLANK, excludes, overwrite,
-					true);
-
-				CopyTask.copyDirectory(
-					srcFile, deployDir, "**/WEB-INF/web.xml", StringPool.BLANK,
-					true, false);
-
-				if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
-
-					// See org.apache.catalina.startup.HostConfig to see how
-					// Tomcat checks to make sure that web.xml was modified 5
-					// seconds after WEB-INF
-
-					File deployWebXml = new File(
-						deployDir + "/WEB-INF/web.xml");
-
-					deployWebXml.setLastModified(
-						System.currentTimeMillis() + (Time.SECOND * 6));
+				if (!tempDir.renameTo(deployDir)) {
+					WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
 				}
+
+				DeleteTask.deleteDirectory(tempDir);
+			}
+		}
+		else {
+
+			// The deployer might only copy files that have been modified.
+			// However, the deployer always copies and overwrites web.xml after
+			// the other files have been copied because application servers
+			// usually detect that a WAR has been modified based on the web.xml
+			// timestamp.
+
+			excludes += "**/WEB-INF/web.xml";
+
+			CopyTask.copyDirectory(
+				srcFile, deployDir, StringPool.BLANK, excludes, overwrite,
+				true);
+
+			CopyTask.copyDirectory(
+				srcFile, deployDir, "**/WEB-INF/web.xml", StringPool.BLANK,
+				true, false);
+
+			if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
+
+				// See org.apache.catalina.startup.HostConfig to see how Tomcat
+				// checks to make sure that web.xml was modified 5 seconds after
+				// WEB-INF
+
+				File deployWebXml = new File(deployDir + "/WEB-INF/web.xml");
+
+				deployWebXml.setLastModified(
+					System.currentTimeMillis() + (Time.SECOND * 6));
 			}
 		}
 	}
@@ -750,6 +783,17 @@ public class BaseDeployer {
 		return displayName;
 	}
 
+	protected DeploymentHandler getDeploymentHandler() {
+		String prefix = "auto.deploy." + ServerDetector.getServerId() + ".jee.";
+
+		String dmId = PropsUtil.get(prefix + "dm.id");
+		String dmUser =  PropsUtil.get(prefix + "dm.user");
+		String dmPassword =  PropsUtil.get(prefix + "dm.passwd");
+		String dfClassName = PropsUtil.get(prefix + "df.classname");
+
+		return new DeploymentHandler(dmId, dmUser, dmPassword, dfClassName);
+	}
+
 	protected String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
@@ -931,6 +975,12 @@ public class BaseDeployer {
 		}
 
 		return sb.toString();
+	}
+
+	protected boolean isJEEDeploymentEnabled() {
+		return GetterUtil.getBoolean(
+			"auto.deploy." + ServerDetector.getServerId() +
+				".jee.deployment.enabled");
 	}
 
 	protected void mergeDirectory(File mergeDir, File targetDir) {

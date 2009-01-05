@@ -25,7 +25,7 @@ package com.liferay.portal.tools.deploy;
 import javax.enterprise.deploy.shared.ModuleType;
 import javax.enterprise.deploy.spi.DeploymentManager;
 import javax.enterprise.deploy.spi.TargetModuleID;
-import javax.enterprise.deploy.spi.exceptions.TargetException;
+import javax.enterprise.deploy.spi.status.DeploymentStatus;
 import javax.enterprise.deploy.spi.status.ProgressEvent;
 import javax.enterprise.deploy.spi.status.ProgressListener;
 import javax.enterprise.deploy.spi.status.ProgressObject;
@@ -40,62 +40,64 @@ import org.apache.commons.logging.LogFactory;
  * @author Sandeep Soni
  *
  */
-
 public class DeploymentProgressListener implements ProgressListener {
 
-	DeploymentProgressListener(
-		JSR88DeploymentHandler driver, String warContext) {
-		_handler = driver;
+	public DeploymentProgressListener(
+		DeploymentHandler deploymentHandler, String warContext) {
+
+		_deploymentHandler = deploymentHandler;
 		_warContext = warContext;
-		_deployManager = _handler.getDeploymentManager();
+		_deploymentManager = _deploymentHandler.getDeploymentManager();
 	}
 
-	public void handleProgressEvent(ProgressEvent event) {
-		_log.info(event.getDeploymentStatus().getMessage());
+	public void handleProgressEvent(ProgressEvent progressEvent) {
+		DeploymentStatus deploymentStatus = progressEvent.getDeploymentStatus();
 
-		if (event.getDeploymentStatus().isCompleted()) {
+		if (_log.isInfoEnabled()) {
+			_log.info(deploymentStatus.getMessage());
+		}
+
+		if (deploymentStatus.isCompleted()) {
 			try {
-				TargetModuleID[] ids = _deployManager.getNonRunningModules(
-					ModuleType.WAR, _deployManager.getTargets());
+				TargetModuleID[] targetModuleIDs =
+					_deploymentManager.getNonRunningModules(
+						ModuleType.WAR, _deploymentManager.getTargets());
 
-				TargetModuleID[] myIDs = new TargetModuleID[1];
-
-				for (TargetModuleID id : ids) {
-					if (_warContext.equals(id.getModuleID())) {
-						myIDs[0] = id;
-						ProgressObject startProgress =
-							_deployManager.start(myIDs);
-
-						startProgress.addProgressListener(
-							new ModuleStartProgressListener(_handler));
+				for (TargetModuleID targetModuleID : targetModuleIDs) {
+					if (!_warContext.equals(targetModuleID.getModuleID())) {
+						continue;
 					}
-				}
 
-				_handler.setError(false);
-				_handler.setAppStarted(true);
+					ProgressObject startProgress = _deploymentManager.start(
+						new TargetModuleID[] {targetModuleID});
+
+					startProgress.addProgressListener(
+						new StartProgressListener(_deploymentHandler));
+
+					_deploymentHandler.setError(false);
+					_deploymentHandler.setStarted(true);
+
+					break;
+				}
 			}
-			catch (IllegalStateException ise) {
-				_log.warn(ise);
-				_handler.setError(true);
-				_handler.setAppStarted(false);
-			}
-			catch (TargetException te) {
-				_log.warn(te);
-				_handler.setError(true);
-				_handler.setAppStarted(false);
+			catch (Exception e) {
+				_log.error(e, e);
+
+				_deploymentHandler.setError(true);
+				_deploymentHandler.setStarted(false);
 			}
 		}
-		else if (event.getDeploymentStatus().isFailed()) {
-			_handler.setError(true);
-			_handler.setAppStarted(false);
+		else if (deploymentStatus.isFailed()) {
+			_deploymentHandler.setError(true);
+			_deploymentHandler.setStarted(false);
 		}
 	}
 
-	private DeploymentManager _deployManager;
-	private JSR88DeploymentHandler _handler;
-	private String _warContext;
+	private static Log _log =
+		LogFactory.getLog(DeploymentProgressListener.class);
 
-	private static Log _log = LogFactory.getLog(
-		DeploymentProgressListener.class);
+	private DeploymentHandler _deploymentHandler;
+	private String _warContext;
+	private DeploymentManager _deploymentManager;
 
 }
