@@ -58,7 +58,9 @@ public class DynamicDataSourceTransactionInterceptor
 			transactionAttributeSource.getTransactionAttribute(
 				targetMethod, targetClass);
 
-		if (transactionAttribute.isReadOnly()) {
+		if ((transactionAttribute != null) &&
+			transactionAttribute.isReadOnly()) {
+
 			_dynamicDataSourceTargetSource.setOperation(Operation.READ);
 		}
 		else {
