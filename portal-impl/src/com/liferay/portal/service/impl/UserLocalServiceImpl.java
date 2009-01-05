@@ -54,6 +54,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
@@ -2888,7 +2889,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void populateQuery(
 			BooleanQuery contextQuery, BooleanQuery searchQuery,
 			LinkedHashMap<String, Object> params, boolean andSearch)
-		throws Exception {
+		throws ParseException {
 
 		if (params == null) {
 			return;
@@ -2918,7 +2919,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			BooleanQuery contextQuery, BooleanQuery searchQuery,
 			ExpandoBridge expandoBridge, Set<String> attributeNames,
 			String key, Object value, boolean andSearch)
-		throws Exception {
+		throws ParseException {
 
 		if (key.equals("usersRoles")) {
 			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
