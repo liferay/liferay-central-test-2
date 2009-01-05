@@ -237,10 +237,9 @@ public class ServletResponseUtil {
 			response.setContentType(contentType);
 		}
 
-		response.setProperty(
+		response.setHeader(
 			HttpHeaders.CACHE_CONTROL, HttpHeaders.CACHE_CONTROL_PUBLIC_VALUE);
-		response.setProperty(
-			HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_PUBLIC_VALUE);
+		response.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_PUBLIC_VALUE);
 
 		if (Validator.isNotNull(fileName)) {
 			String contentDisposition =
