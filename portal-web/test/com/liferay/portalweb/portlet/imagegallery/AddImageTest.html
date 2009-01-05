@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AddImageTest</title>
 </head>
 <body>
@@ -11,6 +8,21 @@
 <thead>
 <tr><td rowspan="1" colspan="3">AddImageTest</td></tr>
 </thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Image Gallery Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Image Gallery Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//b</td>
@@ -47,9 +59,9 @@
 	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\imagegallery\test_image.jpg</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>typeKeys</td>
 	<td>_31_name</td>
-	<td></td>
+	<td>test_image</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -57,14 +69,14 @@
 	<td>test_image</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_31_description</td>
+	<td>This is the Lifera logo!</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_31_description</td>
 	<td>This is the Liferay logo!</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -79,6 +91,11 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//img[@alt='Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>test_image</td>
 	<td></td>
 </tr>
 

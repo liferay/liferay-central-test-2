@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteFoldersTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteFoldersTest extends BaseTestCase {
-	public void testDeleteFolders() throws Exception {
+public class TearDownTest extends BaseTestCase {
+	public void testTearDown() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -60,10 +60,10 @@ public class DeleteFoldersTest extends BaseTestCase {
 						"link=Image Gallery Test Page"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean TestFolderAPresent = selenium.isElementPresent(
+				boolean TestFolderCPresent = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");
 
-				if (!TestFolderAPresent) {
+				if (!TestFolderCPresent) {
 					label = 2;
 
 					continue;
@@ -98,10 +98,10 @@ public class DeleteFoldersTest extends BaseTestCase {
 
 			case 2:
 
-				boolean TestFolderBPresent = selenium.isElementPresent(
+				boolean TestFolderDPresent = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");
 
-				if (!TestFolderBPresent) {
+				if (!TestFolderDPresent) {
 					label = 3;
 
 					continue;
@@ -138,6 +138,46 @@ public class DeleteFoldersTest extends BaseTestCase {
 				assertFalse(selenium.isTextPresent("This is a test folder!"));
 				assertFalse(selenium.isTextPresent(
 						"This is a second test folder."));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//img[@alt='Remove']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click("//img[@alt='Remove']");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				assertFalse(selenium.isElementPresent(
+						"//input[@value='Add Folder']"));
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//li[2]/ul/li[3]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertFalse(selenium.isElementPresent(
+						"link=Image Gallery Test Page"));
 
 			case 100:
 				label = -1;

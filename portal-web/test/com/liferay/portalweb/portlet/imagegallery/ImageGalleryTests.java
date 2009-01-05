@@ -47,7 +47,7 @@ public class ImageGalleryTests extends BaseTests {
 		addTestSuite(UploadLARFileTest.class);
 		addTestSuite(AssertLARImportTest.class);
 		addTestSuite(ImageEdittingTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

@@ -39,7 +39,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Subfolder 2")) {
+				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,11 @@ public class ImageEdittingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Test Subfolder 2"));
+		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,12 +91,12 @@ public class ImageEdittingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click("link=X");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -39,7 +39,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
@@ -70,11 +70,18 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Folder 2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test Folder 2"));
+		selenium.typeKeys("_31_description",
+			RuntimeVariables.replace("This is a second test folder."));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a second test folder."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test Folder 2"));
+		assertTrue(selenium.isTextPresent("This is a second test folder."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -114,29 +121,18 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_31_name",
+			RuntimeVariables.replace("Test Subfolder 2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder 2"));
+		selenium.typeKeys("_31_description",
+			RuntimeVariables.replace("This is a second test subfolder."));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a second test subfolder."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//b")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test Subfolder 2"));
+		assertTrue(selenium.isTextPresent("This is a second test subfolder."));
 	}
 }

@@ -39,7 +39,7 @@ public class SearchPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,5 +73,27 @@ public class SearchPortletTest extends BaseTestCase {
 				"//input[@value='Search Images']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_31_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_31_keywords", RuntimeVariables.replace("liferay1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Images']"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("//img[@alt='Image']"));
 	}
 }
