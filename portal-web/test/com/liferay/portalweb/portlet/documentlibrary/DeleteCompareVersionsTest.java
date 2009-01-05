@@ -39,6 +39,50 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[5]/ul/li/strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Edit")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
@@ -80,7 +124,5 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=1.0"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

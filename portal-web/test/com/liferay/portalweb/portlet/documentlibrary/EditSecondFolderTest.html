@@ -9,13 +9,13 @@
 <tr><td rowspan="1" colspan="3">EditSecondFolderTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
+	<td>waitForElementPresent</td>
 	<td>link=Document Library Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[4]/ul/li/strong/span</td>
+	<td>clickAndWait</td>
+	<td>link=Document Library Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,13 +59,13 @@
 	<td>This second folder was edited!</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -75,7 +75,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>This second folder was edited!</td>
 	<td></td>
 </tr>
 

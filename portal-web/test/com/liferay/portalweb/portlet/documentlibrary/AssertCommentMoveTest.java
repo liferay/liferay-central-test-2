@@ -33,18 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertCommentMoveTest extends BaseTestCase {
 	public void testAssertCommentMove() throws Exception {
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[5]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -54,6 +49,13 @@ public class AssertCommentMoveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -94,6 +96,5 @@ public class AssertCommentMoveTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Comments"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited comments test!!!"));
-		Thread.sleep(5000);
 	}
 }

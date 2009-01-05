@@ -39,7 +39,7 @@ public class AddSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//b")) {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -49,25 +49,11 @@ public class AddSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Subfolder']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("//td[1]/a[2]"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
@@ -94,27 +80,11 @@ public class AddSubfolderTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test subfolder!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a test subfolder!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Subfolder"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test Subfolder"));
+		assertTrue(selenium.isTextPresent("This is a test subfolder!"));
 	}
 }

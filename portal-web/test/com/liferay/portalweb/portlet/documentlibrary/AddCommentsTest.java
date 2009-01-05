@@ -39,7 +39,7 @@ public class AddCommentsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[5]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,14 @@ public class AddCommentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -127,23 +134,6 @@ public class AddCommentsTest extends BaseTestCase {
 			RuntimeVariables.replace("CommentsTest!!!"));
 		selenium.type("_20_postReplyBody0",
 			RuntimeVariables.replace("CommentsTest!!!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Reply']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("CommentsTest!!!"));

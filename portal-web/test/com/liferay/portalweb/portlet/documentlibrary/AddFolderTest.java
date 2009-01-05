@@ -39,7 +39,7 @@ public class AddFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Folder']")) {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -49,6 +49,9 @@ public class AddFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 
@@ -74,27 +77,11 @@ public class AddFolderTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test folder!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a test folder!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Folder"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test Folder"));
+		assertTrue(selenium.isTextPresent("This is a test folder!"));
 	}
 }

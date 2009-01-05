@@ -33,17 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditSecondFolderTest extends BaseTestCase {
 	public void testEditSecondFolder() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -53,6 +49,9 @@ public class EditSecondFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -98,27 +97,11 @@ public class EditSecondFolderTest extends BaseTestCase {
 			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This second folder was edited!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Edited Second Folder Test"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Edited Second Folder Test"));
+		assertTrue(selenium.isTextPresent("This second folder was edited!"));
 	}
 }

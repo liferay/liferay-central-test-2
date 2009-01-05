@@ -33,21 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CompareVersionsTest extends BaseTestCase {
 	public void testCompareVersions() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -57,7 +49,14 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -332,7 +331,5 @@ public class CompareVersionsTest extends BaseTestCase {
 				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("CompareVersionsTest"));
-		selenium.click(RuntimeVariables.replace("_20_tabs1TabsBack"));
-		selenium.waitForPageToLoad("30000");
 	}
 }
