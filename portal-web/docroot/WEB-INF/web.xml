@@ -397,10 +397,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter</filter-name>
-		<url-pattern>*.ico</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Cache Filter</filter-name>
 		<url-pattern>*.js</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
