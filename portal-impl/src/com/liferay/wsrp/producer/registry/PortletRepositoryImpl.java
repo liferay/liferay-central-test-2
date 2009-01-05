@@ -254,7 +254,7 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 			MarkupType markupType = new MarkupType();
 
 			markupType.getWindowStates().addAll(_WSRP_STATES);
-			markupType.getModes().addAll(_WSRP_MODES);
+			markupType.getModes().addAll(portletModesMap.get(mimeType));
 			markupType.setMimeType(mimeType);
 
 			markupTypes.add(markupType);
