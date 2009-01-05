@@ -30,6 +30,8 @@ package com.liferay.portal.kernel.servlet;
  */
 public interface HttpHeaders {
 
+	// Names
+
 	public static final String ACCEPT = "ACCEPT";
 
 	public static final String ACCEPT_ENCODING = "Accept-Encoding";
@@ -37,8 +39,6 @@ public interface HttpHeaders {
 	public static final String AUTHORIZATION = "Authorization";
 
 	public static final String CACHE_CONTROL = "Cache-Control";
-
-	public static final String CLOSE = "close";
 
 	public static final String CONNECTION = "Connection";
 
@@ -62,10 +62,31 @@ public interface HttpHeaders {
 
 	public static final String PRAGMA = "Pragma";
 
-	public static final String PUBLIC = "public";
-
 	public static final String USER_AGENT = "User-Agent";
 
 	public static final String WWW_AUTHENTICATE = "WWW-Authenticate";
+
+	// Values
+
+	public static final String CONNECTION_CLOSE_VALUE = "close";
+
+	public static final String CACHE_CONTROL_DEFAULT_VALUE =
+		"max-age=315360000, public";
+
+	public static final String CACHE_CONTROL_PUBLIC_VALUE = "public";
+
+	/**
+	 * @deprecated Use <code>CONNECTION_CLOSE_VALUE</code>.
+	 */
+	public static final String CLOSE = CONNECTION_CLOSE_VALUE;
+
+	public static final String EXPIRES_DEFAULT_VALUE = "315360000";
+
+	public static final String PRAGMA_PUBLIC_VALUE = "public";
+
+	/**
+	 * @deprecated Use <code>CACHE_CONTROL_PUBLIC_VALUE</code>.
+	 */
+	public static final String PUBLIC = CACHE_CONTROL_PUBLIC_VALUE;
 
 }

@@ -383,11 +383,21 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter</filter-name>
+		<url-pattern>/language/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Cache Filter</filter-name>
 		<url-pattern>*.css</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter</filter-name>
 		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Cache Filter</filter-name>
+		<url-pattern>*.ico</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter</filter-name>

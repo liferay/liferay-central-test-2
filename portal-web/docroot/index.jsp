@@ -40,7 +40,7 @@ if (!request.isRequestedSessionIdFromCookie()) {
 }
 
 response.setHeader(HttpHeaders.LOCATION, mainPath);
-response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CLOSE);
+response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
 
 response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 %>

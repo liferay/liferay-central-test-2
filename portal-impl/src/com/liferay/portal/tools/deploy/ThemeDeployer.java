@@ -23,6 +23,7 @@
 package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
@@ -110,11 +111,15 @@ public class ThemeDeployer extends BaseDeployer {
 		sb.append("</init-param>");
 		sb.append("<init-param>");
 		sb.append("<param-name>Cache-Control</param-name>");
-		sb.append("<param-value>max-age=315360000, public</param-value>");
+		sb.append("<param-value>");
+		sb.append(HttpHeaders.CACHE_CONTROL_DEFAULT_VALUE);
+		sb.append("</param-value>");
 		sb.append("</init-param>");
 		sb.append("<init-param>");
 		sb.append("<param-name>Expires</param-name>");
-		sb.append("<param-value>315360000</param-value>");
+		sb.append("<param-value>");
+		sb.append(HttpHeaders.EXPIRES_DEFAULT_VALUE);
+		sb.append("</param-value>");
 		sb.append("</init-param>");
 		sb.append("</filter>");
 

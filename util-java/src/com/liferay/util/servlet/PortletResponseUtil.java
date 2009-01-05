@@ -186,8 +186,9 @@ public class PortletResponseUtil {
 		}
 
 		resourceResponse.setProperty(
-			HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
-		resourceResponse.setProperty(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
+			HttpHeaders.CACHE_CONTROL, HttpHeaders.CACHE_CONTROL_PUBLIC_VALUE);
+		resourceResponse.setProperty(
+			HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_PUBLIC_VALUE);
 
 		if (Validator.isNotNull(fileName)) {
 			String contentDisposition =
