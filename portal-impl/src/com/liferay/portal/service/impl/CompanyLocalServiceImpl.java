@@ -55,7 +55,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
-import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -87,6 +86,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		// Company
+
+		virtualHost = virtualHost.trim().toLowerCase();
 
 		if ((Validator.isNull(webId)) ||
 			(webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) ||
@@ -385,6 +386,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company getCompanyByVirtualHost(String virtualHost)
 		throws PortalException, SystemException {
 
+		virtualHost = virtualHost.trim().toLowerCase();
+
 		return companyPersistence.findByVirtualHost(virtualHost);
 	}
 
@@ -450,7 +453,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company updateCompany(long companyId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
-		//virtualHost = getVirtualHost(virtualHost);
+		virtualHost = virtualHost.trim().toLowerCase();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
@@ -475,6 +478,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
+		virtualHost = virtualHost.trim().toLowerCase();
 		Date now = new Date();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -634,7 +638,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyVirtualHostException();
 		}
 		else if (virtualHost.equals(PortalInstances.DEFAULT_VIRTUAL_HOST) &&
-				!webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+				 !webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 
 			throw new CompanyVirtualHostException();
 		}
