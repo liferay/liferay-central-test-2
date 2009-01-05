@@ -1042,14 +1042,14 @@ public class DLFileEntryLocalServiceImpl
 		String extension = FileUtil.getExtension(name);
 
 		try {
-			String titleWithException = title;
+			String titleWithExtension = title;
 
 			if (Validator.isNotNull(extension)) {
-				titleWithException += StringPool.PERIOD + extension;
+				titleWithExtension += StringPool.PERIOD + extension;
 			}
 
 			dlFolderLocalService.getFolder(
-				groupId, newFolderId, titleWithException);
+				groupId, folderId, titleWithExtension);
 
 			throw new DuplicateFolderNameException();
 		}
@@ -1088,14 +1088,14 @@ public class DLFileEntryLocalServiceImpl
 		String extension = FileUtil.getExtension(name);
 
 		try {
-			String titleWithException = title;
+			String titleWithExtension = title;
 
 			if (Validator.isNotNull(extension)) {
-				titleWithException += StringPool.PERIOD + extension;
+				titleWithExtension += StringPool.PERIOD + extension;
 			}
 
 			dlFolderLocalService.getFolder(
-				groupId, folderId, titleWithException);
+				groupId, folderId, titleWithExtension);
 
 			throw new DuplicateFolderNameException();
 		}
