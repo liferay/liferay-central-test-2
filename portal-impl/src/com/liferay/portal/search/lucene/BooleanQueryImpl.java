@@ -43,7 +43,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 		_booleanQuery = new org.apache.lucene.search.BooleanQuery();
 	}
 
-	public void add(Query query, BooleanClauseOccur occur) {
+	public void add(Query query, BooleanClauseOccur occur) throws Exception {
 		_booleanQuery.add(
 			QueryTranslator.translate(query),
 			BooleanClauseOccurTranslator.translate(occur));

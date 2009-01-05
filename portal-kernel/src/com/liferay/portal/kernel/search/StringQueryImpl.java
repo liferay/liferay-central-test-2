@@ -20,44 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.search.lucene;
-
-import com.liferay.portal.kernel.search.Query;
-import com.liferay.portal.kernel.search.StringQueryImpl;
-import com.liferay.portal.kernel.util.StringPool;
-
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+package com.liferay.portal.kernel.search;
 
 /**
- * <a href="QueryTranslator.java.html"><b><i>View Source</i></b></a>
+ * <a href="StringQueryImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
-public class QueryTranslator {
+public class StringQueryImpl implements Query {
 
-	public static org.apache.lucene.search.Query translate(Query query)
-		throws ParseException {
-
-		if (query instanceof BooleanQueryImpl) {
-			return ((BooleanQueryImpl)query).getBooleanQuery();
-		}
-		else if (query instanceof LuceneQueryImpl) {
-			return ((LuceneQueryImpl)query).getQuery();
-		}
-		else if (query instanceof StringQueryImpl) {
-			QueryParser parser = new QueryParser(
-				StringPool.BLANK, LuceneUtil.getAnalyzer());
-
-			return parser.parse(query.toString());
-		}
-		else if (query instanceof TermQueryImpl) {
-			return ((TermQueryImpl)query).getTermQuery();
-		}
-		else {
-			return null;
-		}
+	public StringQueryImpl(String query) {
+		_query = query;
 	}
+
+	public String toString() {
+		return _query;
+	}
+
+	private String _query;
 
 }

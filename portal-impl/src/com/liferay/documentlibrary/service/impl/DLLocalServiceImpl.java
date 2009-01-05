@@ -146,7 +146,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 						}
 
 						TermQuery termQuery = TermQueryFactoryUtil.create(
-								"repositoryId", repositoryId);
+							"repositoryId", repositoryId);
 
 						repositoryIdsQuery.add(
 							termQuery, BooleanClauseOccur.SHOULD);
