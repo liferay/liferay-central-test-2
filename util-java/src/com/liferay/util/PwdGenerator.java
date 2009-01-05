@@ -22,7 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -67,38 +66,39 @@ public class PwdGenerator {
 
 		StringBuilder sb = new StringBuilder();
 
-		boolean checkKey1 = key.contains(KEY1);
-		boolean checkKey2 = key.contains(KEY2);
-		boolean checkKey3 = key.contains(KEY3);
+		for (int i = 0; i < length; i++) {
+			sb.append(key.charAt((int)(Math.random() * key.length())));
+		}
 
-		boolean usesKey1 = true;
-		boolean usesKey2 = true;
-		boolean usesKey3 = true;
+		String password = sb.toString();
 
-		String password = StringPool.BLANK;
+		if (!useAllKeys) {
+			return password;
+		}
 
-		do {
-			for (int i = 0; i < length; i++) {
-				sb.append(key.charAt((int)(Math.random() * key.length())));
+		boolean invalidPassword = false;
+
+		if (key.contains(KEY1)) {
+			if (Validator.isNull(StringUtil.extractDigits(password))) {
+				invalidPassword = true;
 			}
+		}
 
-			password = sb.toString();
-
-			if (checkKey1) {
-				usesKey1 = Validator.isNotNull(
-								StringUtil.extractDigits(password));
+		if (key.contains(KEY2)) {
+			if (password.equals(password.toLowerCase())) {
+				invalidPassword = true;
 			}
+		}
 
-			if (checkKey2) {
-				usesKey2 = !password.equals(password.toLowerCase());
+		if (key.contains(KEY3)) {
+			if (password.equals(password.toUpperCase())) {
+				invalidPassword = true;
 			}
+		}
 
-			if (checkKey3) {
-				usesKey3 = !password.equals(password.toUpperCase());
-			}
-
-			sb.setLength(0);
-		} while (useAllKeys && (!usesKey1 || !usesKey2 || !usesKey3));
+		if (invalidPassword) {
+			return _getPassword(key, length, useAllKeys);
+		}
 
 		return password;
 	}
