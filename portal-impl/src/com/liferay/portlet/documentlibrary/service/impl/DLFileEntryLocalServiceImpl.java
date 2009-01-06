@@ -859,6 +859,9 @@ public class DLFileEntryLocalServiceImpl
 
 			resourcePersistence.update(resource, false);
 
+			tagsAssetLocalService.deleteAsset(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			fileEntry = newFileEntry;
 
 			List<DLFileVersion> fileVersions =
