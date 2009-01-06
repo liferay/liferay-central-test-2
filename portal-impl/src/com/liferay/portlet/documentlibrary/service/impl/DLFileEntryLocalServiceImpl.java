@@ -850,20 +850,6 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileEntryPersistence.remove(fileEntry);
 
-			Resource resource = resourceLocalService.getResource(
-					fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-					ResourceConstants.SCOPE_INDIVIDUAL,
-					String.valueOf(fileEntry.getPrimaryKey()));
-
-			resource.setPrimKey(String.valueOf(newFileEntryId));
-
-			resourcePersistence.update(resource, false);
-
-			tagsAssetLocalService.deleteAsset(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-			fileEntry = newFileEntry;
-
 			List<DLFileVersion> fileVersions =
 				dlFileVersionPersistence.findByF_N(folderId, name);
 
@@ -890,13 +876,32 @@ public class DLFileEntryLocalServiceImpl
 			dlFileShortcutLocalService.updateFileShortcuts(
 				folderId, name, newFolderId, name);
 
+			// File
+
 			dlService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getGroupId(), folderId, newFolderId, name,
 				newFileEntryId);
 
+			// Resources
+
+			Resource resource = resourceLocalService.getResource(
+				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(fileEntry.getPrimaryKey()));
+
+			resource.setPrimKey(String.valueOf(newFileEntryId));
+
+			resourcePersistence.update(resource, false);
+
+			// Tags
+
+			tagsAssetLocalService.deleteAsset(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			folderId = newFolderId;
 			folder = newFolder;
+			fileEntry = newFileEntry;
 
 			// Message boards
 
