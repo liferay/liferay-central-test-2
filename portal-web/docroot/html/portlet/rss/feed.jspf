@@ -45,9 +45,20 @@ catch (Exception e) {
 			<%
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(HttpUtil.getProtocol(feed.getLink()));
-			sb.append(Http.PROTOCOL_DELIMITER);
-			sb.append(HttpUtil.getDomain(feed.getLink()));
+			String feedLink = feed.getLink();
+
+			if (!HttpUtil.hasDomain(feedLink)) {
+				sb.append(HttpUtil.getProtocol(url));
+				sb.append(Http.PROTOCOL_DELIMITER);
+				sb.append(HttpUtil.getDomain(url));
+
+				feedLink = sb.toString() + feed.getLink();
+			}
+			else {
+				sb.append(HttpUtil.getProtocol(feed.getLink()));
+				sb.append(Http.PROTOCOL_DELIMITER);
+				sb.append(HttpUtil.getDomain(feed.getLink()));
+			}
 
 			String baseURL = sb.toString();
 
@@ -55,17 +66,35 @@ catch (Exception e) {
 			String description = feed.getDescription();
 
 			SyndImage feedImage = feed.getImage();
+
+			String feedImageLink = StringPool.BLANK;
+
+			String feedImageURL = StringPool.BLANK;
+
+			if (feedImage != null) {
+				feedImageLink = feedImage.getLink();
+
+				if (!HttpUtil.hasDomain(feedImageLink)) {
+					feedImageLink = baseURL + feedImageLink;
+				}
+
+				feedImageURL = feedImage.getUrl();
+
+				if (!HttpUtil.hasDomain(feedImageURL)) {
+					feedImageURL = baseURL + feedImageURL;
+				}
+			}
 			%>
 
 			<c:if test="<%= showFeedTitle %>">
 				<div class="feed-title">
-					<a href="<%= feed.getLink() %>" target="_new"><%= title %></a>
+					<a href="<%= feedLink %>" target="_new"><%= title %></a>
 				</div>
 			</c:if>
 
 			<c:if test="<%= (publishedDate != null) && showFeedPublishedDate %>">
 				<div class="feed-published-date feed-date">
-					<a href="<%= feed.getLink() %>" target="_new"><%= dateFormatDateTime.format(publishedDate) %></a>
+					<a href="<%= feedLink %>" target="_new"><%= dateFormatDateTime.format(publishedDate) %></a>
 				</div>
 			</c:if>
 
@@ -77,7 +106,7 @@ catch (Exception e) {
 
 			<c:if test="<%= (feedImage != null) && showFeedImage %>">
 				<div class="feed-image-<%= feedImageAlignment %>">
-					<a href="<%= feedImage.getLink() %>" target="_new" title="<%= feedImage.getTitle() %>"><img alt="<%= feedImage.getDescription() %>" src="<%= feedImage.getUrl() %>" /></a>
+					<a href="<%= feedImageLink %>" target="_new" title="<%= feedImage.getTitle() %>"><img alt="<%= feedImage.getDescription() %>" src="<%= feedImageURL %>" /></a>
 				</div>
 			</c:if>
 
@@ -101,12 +130,18 @@ catch (Exception e) {
 					else {
 						contents.add(content);
 					}
+
+					String entryLink = entry.getLink();
+
+					if (Validator.isNotNull(entryLink) && !HttpUtil.hasDomain(entryLink)) {
+						entryLink = baseURL + entryLink;
+					}
 				%>
 
 					<div class="feed-entry">
 						<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "minus" : "plus" %>.png' />
 
-						<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
+						<span class="feed-entry-title"><a href="<%= entryLink %>" target="_new"><%= entry.getTitle() %></a></span>
 
 						<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "" : "display: none;" %>'>
 							<c:if test="<%= entry.getPublishedDate() != null %>">
