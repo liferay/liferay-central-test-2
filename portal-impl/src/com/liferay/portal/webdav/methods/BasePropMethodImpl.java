@@ -22,6 +22,7 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.xml.Document;
@@ -34,6 +35,7 @@ import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.DocUtil;
 
 import java.util.Arrays;
@@ -41,6 +43,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -251,7 +255,7 @@ public abstract class BasePropMethodImpl implements Method {
 			propstat, "status", WebDAVUtil.DAV_URI, "HTTP/1.1 404 Not Found");
 	}
 
-	protected String getResponseXML(
+	protected int writeResponseXML(
 			WebDAVRequest webDavRequest, Set<Tuple> props)
 		throws Exception {
 
@@ -271,28 +275,41 @@ public abstract class BasePropMethodImpl implements Method {
 		if (resource != null) {
 			addResponse(
 				storage, webDavRequest, resource, props, multistatus, depth);
-		}
-		else {
-			String path = storage.getRootPath() + webDavRequest.getPath();
 
-			if (_log.isWarnEnabled()) {
-				_log.warn("No resource found for " + path);
+			String xml = doc.formattedString(StringPool.FOUR_SPACES);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Response XML\n" + xml);
 			}
 
-			addResponse(path, multistatus);
+			// Must set the status prior to writing the XML
+
+			HttpServletResponse response =
+				webDavRequest.getHttpServletResponse();
+
+			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
+			response.setContentType(ContentTypes.TEXT_XML_UTF8);
+
+			try {
+				ServletResponseUtil.write(response, xml);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+
+			return -1;
 		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"No resource found for " + storage.getRootPath() +
+					webDavRequest.getPath());
+			}
 
-		return getResponseXML(doc);
-	}
-
-	protected String getResponseXML(Document doc) throws Exception {
-		String xml = doc.formattedString(StringPool.FOUR_SPACES);
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Response XML\n" + xml);
+			return HttpServletResponse.SC_NOT_FOUND;
 		}
-
-		return xml;
 	}
 
 	private static final String _ALLPROPS = "allprops";

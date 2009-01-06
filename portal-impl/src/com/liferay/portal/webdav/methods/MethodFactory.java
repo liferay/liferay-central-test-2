@@ -32,11 +32,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MethodFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class maps WebDAV methods specified by RFC 4918 to
+ * <code>com.liferay.portal.webdav.methods.Method</code> classes to service the
+ * needs of each WebDAV request.
+ * </p>
  *
  * @author Brian Wing Shun Chan
  *
@@ -51,10 +54,6 @@ public class MethodFactory {
 
 	private MethodFactory() {
 		_methods = new HashMap<String, Object>();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Delete method implementation " + _DELETE_METHOD_IMPL);
-		}
 
 		_methods.put("COPY", InstancePool.get(_COPY_METHOD_IMPL));
 		_methods.put("DELETE", InstancePool.get(_DELETE_METHOD_IMPL));
@@ -73,22 +72,11 @@ public class MethodFactory {
 	private Method _create(HttpServletRequest request) throws WebDAVException {
 		String method = request.getMethod();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Get method " + method);
-		}
-
 		Method methodImpl = (Method)_methods.get(method.toUpperCase());
 
 		if (methodImpl == null) {
 			throw new WebDAVException(
 				"Method " + method + " is not implemented");
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Method " + method + " is mapped to " +
-						methodImpl.getClass().getName());
-			}
 		}
 
 		return methodImpl;
@@ -141,8 +129,6 @@ public class MethodFactory {
 	private static final String _UNLOCK_METHOD_IMPL = GetterUtil.getString(
 		PropsUtil.get(MethodFactory.class.getName() + ".UNLOCK"),
 		UnlockMethodImpl.class.getName());
-
-	private static Log _log = LogFactory.getLog(MethodFactory.class);
 
 	private static MethodFactory _instance = new MethodFactory();
 

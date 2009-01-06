@@ -24,6 +24,7 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -99,7 +100,10 @@ public class WebDAVServlet extends HttpServlet {
 				storage, request, response, permissionChecker);
 
 			if (_log.isInfoEnabled()) {
-				_log.info(request.getMethod() + " " + request.getRequestURI());
+				_log.info(
+					request.getHeader("User-agent") + StringPool.SPACE +
+					request.getMethod() + StringPool.SPACE +
+					request.getRequestURI());
 			}
 
 			status = method.process(webDavRequest);

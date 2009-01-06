@@ -22,7 +22,6 @@
 
 package com.liferay.portal.webdav.methods;
 
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
@@ -35,7 +34,6 @@ import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.util.HashSet;
@@ -59,30 +57,9 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			HttpServletResponse response =
-				webDavRequest.getHttpServletResponse();
-
 			Set<Tuple> props = getProps(webDavRequest);
 
-			String xml = getResponseXML(webDavRequest, props);
-
-			response.setContentType(ContentTypes.TEXT_XML_UTF8);
-			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Status code " + WebDAVUtil.SC_MULTI_STATUS);
-			}
-
-			try {
-				ServletResponseUtil.write(response, xml);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
-				}
-			}
-
-			return -1;
+			return writeResponseXML(webDavRequest, props);
 		}
 		catch (InvalidRequestException ire) {
 			return HttpServletResponse.SC_BAD_REQUEST;

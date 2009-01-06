@@ -158,7 +158,7 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
-			if ((file == null) || (file.length() == 0)) {
+			if (file == null) {
 				throw new FileSizeException();
 			}
 		}
