@@ -671,13 +671,13 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				}
 			}
 
-			_setThemeSpriteImages(servletContext, themeModel, imagesPath);
+			_setSpriteImages(servletContext, themeModel, imagesPath);
 		}
 
 		return themeIds;
 	}
 
-	private void _setThemeSpriteImages(
+	private void _setSpriteImages(
 			ServletContext servletContext, Theme theme, String resourcePath)
 		throws Exception {
 
@@ -686,7 +686,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 		for (String curResourcePath : resourcePaths) {
 			if (curResourcePath.endsWith(StringPool.SLASH)) {
-				_setThemeSpriteImages(servletContext, theme, curResourcePath);
+				_setSpriteImages(servletContext, theme, curResourcePath);
 			}
 			else if (curResourcePath.endsWith(".sprite")) {
 				Properties properties = PropertiesUtil.load(
@@ -699,7 +699,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 						curResourcePath.length() - 7) +
 					".png";
 
-				theme.setThemeSpriteImages(spriteFileName, properties);
+				theme.setSpriteImages(spriteFileName, properties);
 			}
 		}
 	}

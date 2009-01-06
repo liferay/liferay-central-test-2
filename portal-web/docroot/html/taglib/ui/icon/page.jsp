@@ -42,20 +42,45 @@ if (!target.equals("_self")) {
 }
 
 if (themeDisplay.isThemeImagesFastLoad()) {
+	SpriteImage spriteImage = null;
+	String spriteFileName = null;
+
 	String imageFileName = StringUtil.replace(src, "common/../", "");
 
 	String imagesPath = theme.getContextPath() + theme.getImagesPath();
 
 	if (imageFileName.startsWith(imagesPath)) {
-		imageFileName = imageFileName.substring(imagesPath.length() + 1);
+		imageFileName = imageFileName.substring(imagesPath.length());
 
-		ThemeSpriteImage themeSpriteImage = theme.getThemeSpriteImage(imageFileName);
+		spriteImage = theme.getSpriteImage(imageFileName);
 
-		if (themeSpriteImage != null) {
-			src = themeDisplay.getPathThemeImages() + "/spacer.png";
-
-			details += " style=\"background-image: url('" + themeDisplay.getPathThemeImages() + themeSpriteImage.getSpriteFileName() + "'); background-position: 50% -" + themeSpriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + themeSpriteImage.getHeight() + "px; width: " + themeSpriteImage.getWidth() + "px;\"";
+		if (spriteImage != null) {
+			spriteFileName = themeDisplay.getPathThemeImages() + spriteImage.getSpriteFileName();
 		}
+	}
+
+	if (spriteImage == null) {
+		Portlet portlet = (Portlet)request.getAttribute("liferay-portlet:icon_portlet:portlet");
+
+		if (portlet == null) {
+			portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+		}
+
+		if (portlet != null) {
+			PortletApp portletApp = portlet.getPortletApp();
+
+			spriteImage = portletApp.getSpriteImage(src);
+
+			if (spriteImage != null) {
+				spriteFileName = portlet.getContextPath() + spriteImage.getSpriteFileName();
+			}
+		}
+	}
+
+	if (spriteImage != null) {
+		src = themeDisplay.getPathThemeImages() + "/spacer.png";
+
+		details += " style=\"background-image: url('" + spriteFileName + "'); background-position: 50% -" + spriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + spriteImage.getHeight() + "px; width: " + spriteImage.getWidth() + "px;\"";
 	}
 }
 %>

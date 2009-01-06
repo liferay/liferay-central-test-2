@@ -219,7 +219,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		List<Portlet> portlets = PortletLocalServiceUtil.initWAR(
-			servletContextName, xmls, event.getPluginPackage());
+			servletContextName, servletContext, xmls, event.getPluginPackage());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

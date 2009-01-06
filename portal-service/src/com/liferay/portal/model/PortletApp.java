@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import java.io.Serializable;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -67,6 +68,10 @@ public interface PortletApp extends Serializable {
 	public Set<PortletURLListener> getPortletURLListeners();
 
 	public Map<String, String[]> getContainerRuntimeOptions();
+
+	public SpriteImage getSpriteImage(String fileName);
+
+	public void setSpriteImages(String spriteFileName, Properties properties);
 
 	public boolean isWARFile();
 

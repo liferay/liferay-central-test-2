@@ -25,14 +25,14 @@ package com.liferay.portal.model;
 import java.io.Serializable;
 
 /**
- * <a href="ThemeSpriteImage.java.html"><b><i>View Source</i></b></a>
+ * <a href="SpriteImage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeSpriteImage implements Serializable {
+public class SpriteImage implements Serializable {
 
-	public ThemeSpriteImage(
+	public SpriteImage(
 		String spriteFileName, String imageFileName, int offset, int height,
 		int width) {
 

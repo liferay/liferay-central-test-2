@@ -28,7 +28,9 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -80,6 +82,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
+
+import javax.servlet.ServletContext;
 
 import javax.xml.namespace.QName;
 
@@ -318,7 +322,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public void initEAR(String[] xmls, PluginPackage pluginPackage) {
+	public void initEAR(
+		ServletContext servletContext, String[] xmls,
+		PluginPackage pluginPackage) {
 
 		// Clear pools every time initEAR is called. See LEP-5452.
 
@@ -336,8 +342,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Set<String> portletIds = _readPortletXML(
 				xmls[0], portletsPool, servletURLPatterns, pluginPackage);
 
-			portletIds.addAll(_readPortletXML(
-				xmls[1], portletsPool, servletURLPatterns, pluginPackage));
+			portletIds.addAll(
+				_readPortletXML(
+					xmls[1], portletsPool, servletURLPatterns, pluginPackage));
 
 			Set<String> liferayPortletIds =
 				_readLiferayPortletXML(xmls[2], portletsPool);
@@ -400,6 +407,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			// Remote portlets
 
 			_initRemotePortlets();
+
+			// Sprite images
+
+			PortletApp portletApp = _getPortletApp(StringPool.BLANK);
+
+			_setSpriteImages(servletContext, portletApp, StringPool.SLASH);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -407,7 +420,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public List<Portlet> initWAR(
-		String servletContextName, String[] xmls, PluginPackage pluginPackage) {
+		String servletContextName, ServletContext servletContext, String[] xmls,
+		PluginPackage pluginPackage) {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
 
@@ -420,9 +434,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				servletContextName, xmls[0], portletsPool, servletURLPatterns,
 				pluginPackage);
 
-			portletIds.addAll(_readPortletXML(
-				servletContextName, xmls[1], portletsPool, servletURLPatterns,
-				pluginPackage));
+			portletIds.addAll(
+				_readPortletXML(
+					servletContextName, xmls[1], portletsPool,
+					servletURLPatterns, pluginPackage));
 
 			Set<String> liferayPortletIds = _readLiferayPortletXML(
 				servletContextName, xmls[2], portletsPool);
@@ -472,6 +487,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				PortletInstanceFactory.clear(portlet);
 			}
+
+			// Sprite images
+
+			PortletApp portletApp = _getPortletApp(servletContextName);
+
+			_setSpriteImages(servletContext, portletApp, StringPool.SLASH);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1683,6 +1704,38 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		return servletURLPatterns;
 
+	}
+
+	private void _setSpriteImages(
+			ServletContext servletContext, PortletApp portletApp,
+			String resourcePath)
+		throws Exception {
+
+		Set<String> resourcePaths = servletContext.getResourcePaths(
+			resourcePath);
+
+		for (String curResourcePath : resourcePaths) {
+			if (Validator.isNull(portletApp.getServletContextName())) {
+				if (curResourcePath.equals("/html/themes/")) {
+					continue;
+				}
+			}
+
+			if (curResourcePath.endsWith(StringPool.SLASH)) {
+				_setSpriteImages(servletContext, portletApp, curResourcePath);
+			}
+			else if (curResourcePath.endsWith(".sprite")) {
+				Properties properties = PropertiesUtil.load(
+					StringUtil.read(
+						servletContext.getResourceAsStream(curResourcePath)));
+
+				String spriteFileName =
+					curResourcePath.substring(0, curResourcePath.length() - 7) +
+						".png";
+
+				portletApp.setSpriteImages(spriteFileName, properties);
+			}
+		}
 	}
 
 	private static final String _WSRP_CATEGORY = "category.wsrp";

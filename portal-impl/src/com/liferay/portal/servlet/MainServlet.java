@@ -213,7 +213,8 @@ public class MainServlet extends ActionServlet {
 					"/WEB-INF/web.xml"))
 			};
 
-			PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
+			PortletLocalServiceUtil.initEAR(
+				servletContext, xmls, pluginPackage);
 
 			portlets = PortletLocalServiceUtil.getPortlets();
 

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.model.SpriteImage;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.model.ThemeSpriteImage;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
@@ -230,11 +230,11 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
-	public ThemeSpriteImage getThemeSpriteImage(String fileName) {
-		return _themeSpriteImagesMap.get(fileName);
+	public SpriteImage getSpriteImage(String fileName) {
+		return _spriteImagesMap.get(fileName);
 	}
 
-	public void setThemeSpriteImages(
+	public void setSpriteImages(
 		String spriteFileName, Properties properties) {
 
 		Iterator<Map.Entry<Object, Object>> itr =
@@ -252,10 +252,10 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 			int height = values[1];
 			int width = values[2];
 
-			ThemeSpriteImage themeSpriteImage = new ThemeSpriteImage(
+			SpriteImage spriteImage = new SpriteImage(
 				spriteFileName, key, offset, height, width);
 
-			_themeSpriteImagesMap.put(key, themeSpriteImage);
+			_spriteImagesMap.put(key, spriteImage);
 		}
 	}
 
@@ -447,8 +447,8 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private boolean _wapTheme;
 	private Map<String, ColorScheme> _colorSchemesMap =
 		new HashMap<String, ColorScheme>();
-	private Map<String, ThemeSpriteImage> _themeSpriteImagesMap =
-		new HashMap<String, ThemeSpriteImage>();
+	private Map<String, SpriteImage> _spriteImagesMap =
+		new HashMap<String, SpriteImage>();
 	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
 	private boolean _loadFromServletContext;

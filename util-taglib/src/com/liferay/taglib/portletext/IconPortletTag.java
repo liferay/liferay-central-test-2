@@ -56,12 +56,18 @@ public class IconPortletTag extends IconTag {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		request.setAttribute("liferay-portlet:icon_portlet:portlet", portlet);
+		try {
+			request.setAttribute(
+				"liferay-portlet:icon_portlet:portlet", portlet);
 
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
+			RequestDispatcher requestDispatcher =
+				servletContext.getRequestDispatcher(page);
 
-		requestDispatcher.include(request, response);
+			requestDispatcher.include(request, response);
+		}
+		finally {
+			request.removeAttribute("liferay-portlet:icon_portlet:portlet");
+		}
 	}
 
 	public int doEndTag() throws JspException {

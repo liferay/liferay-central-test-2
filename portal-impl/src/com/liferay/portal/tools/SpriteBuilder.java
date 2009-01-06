@@ -43,6 +43,7 @@ import java.awt.image.SampleModel;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -70,6 +71,8 @@ public class SpriteBuilder {
 
 	public static void main(String[] args) {
 		File inputDir = new File(System.getProperty("sprite.input.dir"));
+		String[] inputDirExcludes = StringUtil.split(
+			System.getProperty("sprite.input.dir.excludes"));
 		String outputFileName = System.getProperty("sprite.output.file");
 		String propertiesFileName = System.getProperty(
 			"sprite.properties.file");
@@ -79,19 +82,23 @@ public class SpriteBuilder {
 			System.getProperty("sprite.max.width"));
 
 		new SpriteBuilder(
-			inputDir, outputFileName, propertiesFileName, maxHeight, maxWidth);
+			inputDir, inputDirExcludes, outputFileName, propertiesFileName,
+			maxHeight, maxWidth);
 	}
 
 	public SpriteBuilder(
-		File inputDir, String outputFileName, String propertiesFileName,
-		int maxHeight, int maxWidth) {
+		File inputDir, String[] inputDirExcludes, String outputFileName,
+		String propertiesFileName, int maxHeight, int maxWidth) {
 
 		try {
 			_inputDir = inputDir;
+			_inputDirExcludes = inputDirExcludes;
 			_outputFileName = outputFileName;
 			_propertiesFileName = propertiesFileName;
 			_maxHeight = maxHeight;
 			_maxWidth = maxWidth;
+
+			Arrays.sort(_inputDirExcludes);
 
 			buildImages(inputDir);
 		}
@@ -107,6 +114,21 @@ public class SpriteBuilder {
 
 		for (File file : files) {
 			if (file.isDirectory()) {
+				if (file.getName().equals(".svn")) {
+					continue;
+				}
+
+				if (_inputDirExcludes.length > 0) {
+					String dirName = file.toString();
+
+					dirName = StringUtil.replace(
+						dirName, StringPool.BACK_SLASH, StringPool.SLASH);
+
+					if (Arrays.binarySearch(_inputDirExcludes, dirName) >= 0) {
+						continue;
+					}
+				}
+
 				buildImages(file);
 			}
 			else if (file.getName().endsWith(".png")) {
@@ -149,7 +171,7 @@ public class SpriteBuilder {
 				String key = StringUtil.replace(
 					file.toString(), StringPool.BACK_SLASH, StringPool.SLASH);
 
-				key = key.substring(_inputDir.toString().length() + 1);
+				key = key.substring(_inputDir.toString().length());
 
 				String value = (int)y + "," + height + "," + width;
 
@@ -340,6 +362,7 @@ public class SpriteBuilder {
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private File _inputDir;
+	private String[] _inputDirExcludes;
 	private String _outputFileName;
 	private String _propertiesFileName;
 	private int _maxHeight;

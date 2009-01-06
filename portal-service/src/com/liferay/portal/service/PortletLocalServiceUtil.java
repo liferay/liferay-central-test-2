@@ -156,15 +156,19 @@ public class PortletLocalServiceUtil {
 		return getService().hasPortlet(companyId, portletId);
 	}
 
-	public static void initEAR(java.lang.String[] xmls,
+	public static void initEAR(javax.servlet.ServletContext servletContext,
+		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		getService().initEAR(xmls, pluginPackage);
+		getService().initEAR(servletContext, xmls, pluginPackage);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> initWAR(
-		java.lang.String servletContextName, java.lang.String[] xmls,
+		java.lang.String servletContextName,
+		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		return getService().initWAR(servletContextName, xmls, pluginPackage);
+		return getService()
+				   .initWAR(servletContextName, servletContext, xmls,
+			pluginPackage);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(

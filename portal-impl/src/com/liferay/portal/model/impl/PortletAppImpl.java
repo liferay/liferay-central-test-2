@@ -23,17 +23,21 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.model.SpriteImage;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.xml.XMLConstants;
@@ -129,6 +133,35 @@ public class PortletAppImpl implements PortletApp {
 		return _containerRuntimeOptions;
 	}
 
+	public SpriteImage getSpriteImage(String fileName) {
+		return _spriteImagesMap.get(fileName);
+	}
+
+	public void setSpriteImages(
+		String spriteFileName, Properties properties) {
+
+		Iterator<Map.Entry<Object, Object>> itr =
+			properties.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> entry = itr.next();
+
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			int[] values = StringUtil.split(value, 0);
+
+			int offset = values[0];
+			int height = values[1];
+			int width = values[2];
+
+			SpriteImage spriteImage = new SpriteImage(
+				spriteFileName, key, offset, height, width);
+
+			_spriteImagesMap.put(key, spriteImage);
+		}
+	}
+
 	public boolean isWARFile() {
 		return _warFile;
 	}
@@ -157,6 +190,8 @@ public class PortletAppImpl implements PortletApp {
 			new HashMap<String, PortletURLListener>();
 	private Map<String, String[]> _containerRuntimeOptions =
 		new HashMap<String, String[]>();
+	private Map<String, SpriteImage> _spriteImagesMap =
+		new HashMap<String, SpriteImage>();
 	private boolean _warFile;
 
 }

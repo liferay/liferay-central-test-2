@@ -397,6 +397,7 @@
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
+		<antcall target="build-sprite" />
 		<antcall target="build-tinymce" />
 		<antcall target="build-wsrp" />
 
@@ -772,6 +773,23 @@
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg line="test" />
+		</java>
+	</target>
+
+	<target name="build-sprite">
+		<java
+			classname="com.liferay.portal.tools.SpriteBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dcom.sun.media.jai.disableMediaLib=true" />
+			<jvmarg value="-Dsprite.input.dir=docroot" />
+			<jvmarg value="-Dsprite.input.dir.excludes=docroot/html/js,docroot/html/themes" />
+			<jvmarg value="-Dsprite.output.file=packed.png" />
+			<jvmarg value="-Dsprite.properties.file=packed.sprite" />
+			<jvmarg value="-Dsprite.max.height=16" />
+			<jvmarg value="-Dsprite.max.width=16" />
 		</java>
 	</target>
 

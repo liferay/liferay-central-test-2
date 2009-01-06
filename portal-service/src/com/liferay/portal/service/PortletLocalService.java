@@ -132,11 +132,13 @@ public interface PortletLocalService {
 	public boolean hasPortlet(long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException;
 
-	public void initEAR(java.lang.String[] xmls,
+	public void initEAR(javax.servlet.ServletContext servletContext,
+		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public java.util.List<com.liferay.portal.model.Portlet> initWAR(
-		java.lang.String servletContextName, java.lang.String[] xmls,
+		java.lang.String servletContextName,
+		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
