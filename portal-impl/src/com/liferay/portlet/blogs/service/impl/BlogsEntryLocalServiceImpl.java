@@ -481,7 +481,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return urlTitle;
 		}
 
-		title = FriendlyURLNormalizer.normalize(title, false);
+		title = FriendlyURLNormalizer.normalize(
+			title, _URL_TITLE_REPLACE_CHARS);
 
 		char[] urlTitleCharArray = title.toCharArray();
 
@@ -931,6 +932,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			throw new EntryContentException();
 		}
 	}
+
+	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
+		'.', '/'
+	};
 
 	private static Log _log =
 		LogFactory.getLog(BlogsEntryLocalServiceImpl.class);

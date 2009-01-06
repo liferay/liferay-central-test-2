@@ -39,10 +39,10 @@ import com.liferay.util.Normalizer;
 public class FriendlyURLNormalizer {
 
 	public static String normalize(String friendlyURL) {
-		return normalize(friendlyURL, _DEFAULT_ALLOW_SLASH);
+		return normalize(friendlyURL, null);
 	}
 
-	public static String normalize(String friendlyURL, boolean allowSlash) {
+	public static String normalize(String friendlyURL, char[] replaceChars) {
 		if (Validator.isNull(friendlyURL)) {
 			return friendlyURL;
 		}
@@ -58,11 +58,10 @@ public class FriendlyURLNormalizer {
 
 			char newChar = oldChar;
 
-			if (ArrayUtil.contains(_REPLACE_CHARS, oldChar)) {
-				newChar = CharPool.DASH;
-			}
+			if (ArrayUtil.contains(_REPLACE_CHARS, oldChar) ||
+				((replaceChars != null) &&
+				 ArrayUtil.contains(replaceChars, oldChar))) {
 
-			if (!allowSlash && (oldChar == CharPool.SLASH)) {
 				newChar = CharPool.DASH;
 			}
 
@@ -90,10 +89,8 @@ public class FriendlyURLNormalizer {
 		return friendlyURL;
 	}
 
-	private static final boolean _DEFAULT_ALLOW_SLASH = true;
-
 	private static final char[] _REPLACE_CHARS = new char[] {
-		' ', '.', ',', '\\', '\'', '\"', '(', ')', '{', '}'
+		' ', ',', '\\', '\'', '\"', '(', ')', '{', '}'
 	};
 
 }
