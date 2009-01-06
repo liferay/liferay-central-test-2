@@ -39,6 +39,10 @@ public class InfrastructureUtil {
 		return _dataSource;
 	}
 
+	public static Object getDynamicDataSourceTargetSource() {
+		return _dynamicDataSourceTargetSource;
+	}
+
 	public static Session getMailSession() {
 		return _mailSession;
 	}
@@ -47,11 +51,18 @@ public class InfrastructureUtil {
 		_dataSource = dataSource;
 	}
 
+	public void setDynamicDataSourceTargetSource(
+		Object dynamicDataSourceTargetSource) {
+
+		_dynamicDataSourceTargetSource = dynamicDataSourceTargetSource;
+	}
+
 	public void setMailSession(Session mailSession) {
 		_mailSession = mailSession;
 	}
 
-	private static Session _mailSession;
 	private static DataSource _dataSource;
+	private static Object _dynamicDataSourceTargetSource;
+	private static Session _mailSession;
 
 }
