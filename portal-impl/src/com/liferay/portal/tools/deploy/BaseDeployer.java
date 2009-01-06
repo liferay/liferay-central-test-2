@@ -978,9 +978,11 @@ public class BaseDeployer {
 	}
 
 	protected boolean isJEEDeploymentEnabled() {
-		return GetterUtil.getBoolean(
+		String deploymentEnabled = PropsUtil.get(
 			"auto.deploy." + ServerDetector.getServerId() +
 				".jee.deployment.enabled");
+
+		return GetterUtil.getBoolean(deploymentEnabled);
 	}
 
 	protected void mergeDirectory(File mergeDir, File targetDir) {

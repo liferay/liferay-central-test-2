@@ -53,12 +53,13 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Sandeep Soni
  * @author Brian Wing Shun Chan
+ * @author Deepak Gothe
  *
  */
 public class StartProgressListener implements ProgressListener {
 
 	public StartProgressListener(DeploymentHandler deploymentHandler) {
-		deploymentHandler = deploymentHandler;
+		_deploymentHandler = deploymentHandler;
 	}
 
 	public void handleProgressEvent(ProgressEvent progressEvent) {
@@ -69,13 +70,13 @@ public class StartProgressListener implements ProgressListener {
 		}
 
 		if (deploymentStatus.isCompleted()) {
-			deploymentHandler.setError(false);
-			deploymentHandler.setStarted(true);
+			_deploymentHandler.setError(false);
+			_deploymentHandler.setStarted(true);
 		}
 	}
 
 	private static Log _log = LogFactory.getLog(StartProgressListener.class);
 
-	private DeploymentHandler deploymentHandler;
+	private DeploymentHandler _deploymentHandler;
 
 }
