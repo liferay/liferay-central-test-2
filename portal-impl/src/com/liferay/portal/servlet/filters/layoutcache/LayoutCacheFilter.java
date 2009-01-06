@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -395,6 +396,13 @@ public class LayoutCacheFilter extends BasePortalFilter {
 				processFilter(
 					LayoutCacheFilter.class, request, cacheResponse,
 					filterChain);
+
+				String contentType = cacheResponse.getHeader(
+					HttpHeaders.CONTENT_TYPE);
+
+				if (Validator.isNotNull(contentType)) {
+					cacheResponse.setContentType(contentType);
+				}
 
 				data = new CacheResponseData(
 					cacheResponse.getData(), cacheResponse.getContentType(),
