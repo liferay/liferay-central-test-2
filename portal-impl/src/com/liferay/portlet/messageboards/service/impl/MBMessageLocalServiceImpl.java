@@ -153,7 +153,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			userId, userName, categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, serviceContext);
 
-		if (className.equals(BlogsEntry.class.getName())) {
+		if (className.equals(BlogsEntry.class.getName()) &&
+			parentMessageId != MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
 
 			// Social
 
@@ -189,7 +190,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				discussion = mbDiscussionPersistence.create(discussionId);
 
-				discussion.setClassNameId(PortalUtil.getClassNameId(className));
+				discussion.setClassNameId(classNameId);
 				discussion.setClassPK(classPK);
 			}
 
