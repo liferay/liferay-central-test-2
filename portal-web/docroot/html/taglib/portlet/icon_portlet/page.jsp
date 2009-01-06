@@ -24,6 +24,24 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<c:if test="<%= portletDisplay.isShowPortletIcon() %>">
-	<img alt="" src="<%= portletDisplay.getURLPortlet() %>" />
+<%
+Portlet portlet = (Portlet)request.getAttribute("liferay-portlet:icon_portlet:portlet");
+
+boolean showPortletIcon = true;
+String message = null;
+String src = null;
+
+if (portlet != null) {
+	message = PortalUtil.getPortletTitle(portlet, application, locale);
+	src = portlet.getContextPath() + portlet.getIcon();
+}
+else {
+	showPortletIcon = portletDisplay.isShowPortletIcon();
+	message = portletDisplay.getTitle();
+	src = portletDisplay.getURLPortlet();
+}
+%>
+
+<c:if test="<%= showPortletIcon %>">
+	<liferay-ui:icon message="<%= message %>" src="<%= src %>" />
 </c:if>

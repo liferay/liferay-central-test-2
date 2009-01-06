@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.model.Portlet;
 import com.liferay.taglib.ui.IconTag;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
  * <a href="IconPortletTag.java.html"><b><i>View Source</i></b></a>
@@ -45,18 +48,41 @@ public class IconPortletTag extends IconTag {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, servletContext, request, response);
+		doTag(_PAGE, null, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, ServletContext servletContext,
+			String page, Portlet portlet, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
+
+		request.setAttribute("liferay-portlet:icon_portlet:portlet", portlet);
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
 
 		requestDispatcher.include(request, response);
+	}
+
+	public int doEndTag() throws JspException {
+		try {
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse response = getServletResponse();
+
+			doTag(getPage(), _portlet, servletContext, request, response);
+
+			pageContext.getOut().print(response.getString());
+
+			return EVAL_PAGE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+	}
+
+	public void setPortlet(Portlet portlet) {
+		_portlet = portlet;
 	}
 
 	protected String getDefaultPage() {
@@ -65,5 +91,7 @@ public class IconPortletTag extends IconTag {
 
 	private static final String _PAGE =
 		"/html/taglib/portlet/icon_portlet/page.jsp";
+
+	private Portlet _portlet;
 
 }

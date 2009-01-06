@@ -25,6 +25,7 @@ package com.liferay.taglib.util;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
@@ -336,10 +337,11 @@ public class VelocityTaglib {
 		return _stringResponse.getString();
 	}
 
-	public String iconPortlet(String page) throws Exception {
+	public String iconPortlet(String page, Portlet portlet) throws Exception {
 		_stringResponse.recycle();
 
-		IconPortletTag.doTag(page, _servletContext, _request, _stringResponse);
+		IconPortletTag.doTag(
+			page, portlet, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
