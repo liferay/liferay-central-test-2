@@ -899,10 +899,6 @@ public class DLFileEntryLocalServiceImpl
 			tagsAssetLocalService.deleteAsset(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-			folderId = newFolderId;
-			folder = newFolder;
-			fileEntry = newFileEntry;
-
 			// Message boards
 
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
@@ -914,6 +910,10 @@ public class DLFileEntryLocalServiceImpl
 
 				mbDiscussionPersistence.update(discussion, false);
 			}
+
+			folderId = newFolderId;
+			folder = newFolder;
+			fileEntry = newFileEntry;
 		}
 
 		// Tags
