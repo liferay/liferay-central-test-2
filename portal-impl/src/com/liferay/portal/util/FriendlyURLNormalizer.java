@@ -38,11 +38,15 @@ import com.liferay.util.Normalizer;
  */
 public class FriendlyURLNormalizer {
 
+	public static final int ALLOW_NONE = 0;
+	public static final int ALLOW_SLASH = 1;
+	public static final int ALLOW_PERIOD = 2;
+
 	public static String normalize(String friendlyURL) {
-		return normalize(friendlyURL, _DEFAULT_ALLOW_SLASH);
+		return normalize(friendlyURL, ALLOW_SLASH);
 	}
 
-	public static String normalize(String friendlyURL, boolean allowSlash) {
+	public static String normalize(String friendlyURL, int allowFlags) {
 		if (Validator.isNull(friendlyURL)) {
 			return friendlyURL;
 		}
@@ -62,7 +66,15 @@ public class FriendlyURLNormalizer {
 				newChar = CharPool.DASH;
 			}
 
-			if (!allowSlash && (oldChar == CharPool.SLASH)) {
+			if ((oldChar == CharPool.SLASH) &&
+				(!checkAllowFlag(ALLOW_SLASH, allowFlags))) {
+
+				newChar = CharPool.DASH;
+			}
+
+			if ((oldChar == CharPool.PERIOD) &&
+				(!checkAllowFlag(ALLOW_PERIOD, allowFlags))) {
+
 				newChar = CharPool.DASH;
 			}
 
@@ -90,10 +102,16 @@ public class FriendlyURLNormalizer {
 		return friendlyURL;
 	}
 
-	private static final boolean _DEFAULT_ALLOW_SLASH = true;
+	protected static boolean checkAllowFlag(int flag, int allowFlags) {
+		if ((allowFlags & flag) == flag) {
+			return true;
+		}
+
+		return false;
+	}
 
 	private static final char[] _REPLACE_CHARS = new char[] {
-		' ', '.', ',', '\\', '\'', '\"', '(', ')', '{', '}'
+		' ', ',', '\\', '\'', '\"', '(', ')', '{', '}'
 	};
 
 }

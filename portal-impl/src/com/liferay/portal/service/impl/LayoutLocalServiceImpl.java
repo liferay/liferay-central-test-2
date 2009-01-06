@@ -348,7 +348,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return fcos.getBytes();
 		}
 		catch (IOException ioe) {
-		   	throw new SystemException(ioe);
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -1044,7 +1044,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
-		return FriendlyURLNormalizer.normalize(friendlyURL);
+		return FriendlyURLNormalizer.normalize(
+			friendlyURL,
+			FriendlyURLNormalizer.ALLOW_SLASH |
+			FriendlyURLNormalizer.ALLOW_PERIOD);
 	}
 
 	protected String getFriendlyURL(
