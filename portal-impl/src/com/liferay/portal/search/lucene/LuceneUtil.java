@@ -23,6 +23,7 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -252,6 +253,10 @@ public class LuceneUtil {
 
 			booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
 		}
+	}
+
+	public static void addModifiedDate(Document doc) {
+		doc.add(LuceneFields.getDate(Field.MODIFIED));
 	}
 
 	public static void addTerm(

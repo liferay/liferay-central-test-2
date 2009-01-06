@@ -473,8 +473,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), category.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), threadId, messageId, subject,
-					body, anonymous, message.getModifiedDate(),
-					serviceContext.getTagsEntries(),
+					body, anonymous, serviceContext.getTagsEntries(),
 					message.getExpandoBridge());
 			}
 		}
@@ -1051,7 +1050,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String title = message.getSubject();
 		String content = message.getBody();
 		boolean anonymous = message.isAnonymous();
-		Date modifiedDate = message.getModifiedDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			MBMessage.class.getName(), messageId);
@@ -1059,7 +1057,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			Indexer.updateMessage(
 				companyId, groupId, userId, userName, categoryId, threadId,
-				messageId, title, content, anonymous, modifiedDate, tagsEntries,
+				messageId, title, content, anonymous, tagsEntries,
 				message.getExpandoBridge());
 		}
 		catch (SearchException se) {
@@ -1215,7 +1213,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), message.getThreadId(), messageId,
 					subject, body, message.isAnonymous(),
-					message.getModifiedDate(), serviceContext.getTagsEntries(),
+					serviceContext.getTagsEntries(),
 					message.getExpandoBridge());
 			}
 		}

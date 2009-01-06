@@ -44,7 +44,6 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -606,7 +605,7 @@ public class JCRHook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, new Date(), tagsEntries);
+				fileEntryId, properties, tagsEntries);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);

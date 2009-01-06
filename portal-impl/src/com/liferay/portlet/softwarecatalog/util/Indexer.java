@@ -98,6 +98,8 @@ public class Indexer
 
 		doc.addUID(PORTLET_ID, productEntryId);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
@@ -109,7 +111,7 @@ public class Indexer
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
-		doc.addModifiedDate(modifiedDate);
+		doc.addDate("modifiedDate", modifiedDate);
 		doc.addKeyword("version", version);
 		doc.addKeyword("type", type);
 		doc.addText("shortDescription", shortDescription);

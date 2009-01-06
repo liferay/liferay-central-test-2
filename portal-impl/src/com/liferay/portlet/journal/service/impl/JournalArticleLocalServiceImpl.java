@@ -1564,8 +1564,9 @@ public class JournalArticleLocalServiceImpl
 			long companyId, long groupId, String keywords, int start, int end)
 		throws SystemException {
 
-		return search(
-			companyId, groupId, keywords, Sort.SORT_BY_MODIFIED, start, end);
+		Sort sort = new Sort("displayDate", Sort.LONG_TYPE, true);
+
+		return search(companyId, groupId, keywords, sort, start, end);
 	}
 
 	public Hits search(

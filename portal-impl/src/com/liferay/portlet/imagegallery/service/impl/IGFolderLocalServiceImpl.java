@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -282,7 +281,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					long imageId = image.getImageId();
 					String name = image.getName();
 					String description = image.getDescription();
-					Date modifiedDate = image.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						IGImage.class.getName(), imageId);
@@ -290,8 +288,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					try {
 						Indexer.updateImage(
 							companyId, groupId, folderId, imageId, name,
-							description, modifiedDate, tagsEntries,
-							image.getExpandoBridge());
+							description, tagsEntries, image.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + imageId, se);
@@ -350,8 +347,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(
-				companyId, fullQuery, Sort.SORT_BY_MODIFIED, start, end);
+			return SearchEngineUtil.search(companyId, fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

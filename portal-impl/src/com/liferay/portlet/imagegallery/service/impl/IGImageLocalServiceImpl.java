@@ -217,8 +217,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			try {
 				Indexer.addImage(
 					image.getCompanyId(), folder.getGroupId(), folderId,
-					imageId, name, description, image.getModifiedDate(),
-					serviceContext.getTagsEntries(), image.getExpandoBridge());
+					imageId, name, description, serviceContext.getTagsEntries(),
+					image.getExpandoBridge());
 			}
 			catch (SearchException se) {
 				_log.error("Indexing " + imageId, se);
@@ -492,7 +492,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		long folderId = folder.getFolderId();
 		String name = image.getName();
 		String description = image.getDescription();
-		Date modifiedDate = image.getModifiedDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			IGImage.class.getName(), imageId);
@@ -500,8 +499,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		try {
 			Indexer.updateImage(
 				companyId, groupId, folderId, imageId, name,
-				description, modifiedDate, tagsEntries,
-				image.getExpandoBridge());
+				description, tagsEntries, image.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + imageId, se);
@@ -569,8 +567,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				Indexer.updateImage(
 					image.getCompanyId(), folder.getGroupId(),
 					folder.getFolderId(), imageId, name, description,
-					image.getModifiedDate(), tagsEntries,
-					image.getExpandoBridge());
+					tagsEntries, image.getExpandoBridge());
 			}
 			catch (SearchException se) {
 				_log.error("Indexing " + imageId, se);

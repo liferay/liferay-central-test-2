@@ -36,8 +36,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
-import java.util.Date;
-
 import javax.portlet.PortletURL;
 
 /**
@@ -54,13 +52,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String name, String description, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String name, String description, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
-			modifiedDate, tagsEntries, expandoBridge);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -73,8 +71,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getImageDocument(
 		long companyId, long groupId, long folderId, long imageId,
-		String name, String description, Date modifiedDate,
-		String[] tagsEntries, ExpandoBridge expandoBridge) {
+		String name, String description, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();
 
@@ -86,8 +84,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addText(Field.TITLE, name);
 		doc.addText(Field.DESCRIPTION, description);
-		doc.addModifiedDate(modifiedDate);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+
+		doc.addModifiedDate();
 
 		doc.addKeyword("folderId", folderId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
@@ -108,13 +107,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String name, String description, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String name, String description, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
-			modifiedDate, tagsEntries, expandoBridge);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

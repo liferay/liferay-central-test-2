@@ -42,7 +42,6 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -82,7 +81,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, new Date(), tagsEntries);
+			properties, tagsEntries);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -147,8 +146,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			return getFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntry.getFileEntryId(), properties,
-				fileEntry.getModifiedDate(),  tagsEntries);
+				fileEntry.getFileEntryId(), properties, tagsEntries);
 		}
 		catch (PortalException pe) {
 			throw new SearchException(pe.getMessage());
@@ -161,7 +159,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsEntries)
+			String[] tagsEntries)
 		throws SearchException {
 
 		if (fileEntryId <= 0) {
@@ -225,6 +223,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(portletId, repositoryId, fileName);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, portletId);
 		doc.addKeyword(Field.GROUP_ID, groupId);
@@ -239,7 +239,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		doc.addText(Field.PROPERTIES, properties);
-		doc.addModifiedDate(modifiedDate);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword("repositoryId", repositoryId);
@@ -269,12 +268,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsEntries)
+			String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsEntries);
+			properties, tagsEntries);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

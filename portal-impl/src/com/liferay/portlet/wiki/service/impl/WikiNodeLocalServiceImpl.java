@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -284,7 +283,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					long resourcePrimKey = page.getResourcePrimKey();
 					String title = page.getTitle();
 					String content = page.getContent();
-					Date modifiedDate = page.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						WikiPage.class.getName(), resourcePrimKey);
@@ -292,8 +290,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					try {
 						Indexer.updatePage(
 							companyId, groupId, resourcePrimKey, nodeId, title,
-							content, modifiedDate, tagsEntries,
-							page.getExpandoBridge());
+							content, tagsEntries, page.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -363,7 +360,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 			return SearchEngineUtil.search(
 				companyId, groupId, userId, WikiPage.class.getName(), fullQuery,
-				Sort.SORT_BY_MODIFIED, start, end);
+				start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -41,8 +41,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import java.util.Date;
-
 import javax.portlet.PortletURL;
 
 /**
@@ -60,8 +58,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addPage(
 			long companyId, long groupId, long resourcePrimKey, long nodeId,
-			String title, String content, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String title, String content, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		try {
@@ -72,7 +70,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = getPageDocument(
 			companyId, groupId, resourcePrimKey, nodeId, title, content,
-			modifiedDate, tagsEntries, expandoBridge);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -104,7 +102,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getPageDocument(
 		long companyId, long groupId, long resourcePrimKey, long nodeId,
-		String title, String content, Date modifiedDate, String[] tagsEntries,
+		String title, String content, String[] tagsEntries,
 		ExpandoBridge expandoBridge) {
 
 		content = HtmlUtil.extractText(content);
@@ -113,13 +111,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, nodeId, title);
 
+		doc.addModifiedDate();
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
-		doc.addModifiedDate(modifiedDate);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
@@ -141,13 +140,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updatePage(
 			long companyId, long groupId, long resourcePrimKey, long nodeId,
-			String title, String content, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String title, String content, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getPageDocument(
 			companyId, groupId, resourcePrimKey, nodeId, title, content,
-			modifiedDate, tagsEntries, expandoBridge);
+			tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

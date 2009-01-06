@@ -221,8 +221,8 @@ public class DocumentImpl implements Document {
 		_fields.put(name, new Field(name, values, false));
 	}
 
-	public void addModifiedDate(Date modifiedDate) {
-		addDate(Field.MODIFIED, modifiedDate);
+	public void addModifiedDate() {
+		addDate(Field.MODIFIED, new Date());
 	}
 
 	public void addText(String name, String value) {

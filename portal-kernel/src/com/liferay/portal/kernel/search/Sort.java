@@ -30,9 +30,6 @@ package com.liferay.portal.kernel.search;
  */
 public class Sort {
 
-	public static final Sort SORT_BY_MODIFIED =
-		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true);
-
 	public static final int AUTO_TYPE = 2;
 
 	public static final int CUSTOM_TYPE = 9;

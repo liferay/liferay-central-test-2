@@ -45,7 +45,6 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -334,7 +333,7 @@ public class S3Hook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, new Date(), tagsEntries);
+				fileEntryId, properties, tagsEntries);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);

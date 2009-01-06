@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -444,8 +443,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(
-				companyId, fullQuery, Sort.SORT_BY_MODIFIED, start, end);
+			return SearchEngineUtil.search(companyId, fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
