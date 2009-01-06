@@ -130,8 +130,8 @@ public class ProducerImpl extends AbstractProducer {
 		return _producerModel.getInstanceName();
 	}
 
-	public ProfileMapManager getProfileMapManager() {
-		throw new UnsupportedOperationException();
+	public ProfileMapManager getProfileMapManager() throws ProducerException {
+		return  new ProfileMapManagerImpl();
 	}
 
 	public LeaseTime getRegistrationLifetime(String registrationHandle)

@@ -46,6 +46,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.portletcontainer.WindowInvokerUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.wsrp.producer.impl.ProfileMapManagerImpl;
 
 import com.sun.portal.container.EntityID;
 import com.sun.portal.container.service.EventHolder;
@@ -59,6 +60,7 @@ import com.sun.portal.wsrp.common.stubs.v2.MarkupType;
 import com.sun.portal.wsrp.common.stubs.v2.ParameterDescription;
 import com.sun.portal.wsrp.common.stubs.v2.PropertyList;
 import com.sun.portal.wsrp.common.stubs.v2.UserContext;
+import com.sun.portal.wsrp.producer.Producer;
 import com.sun.portal.wsrp.producer.ProducerException;
 import com.sun.portal.wsrp.producer.driver.PortletRegistry;
 import com.sun.portal.wsrp.producer.driver.ResourceName;
@@ -67,6 +69,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -76,6 +79,9 @@ import java.util.Set;
 import javax.portlet.PortletPreferences;
 
 import javax.xml.namespace.QName;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletRepositoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -87,7 +93,7 @@ import javax.xml.namespace.QName;
  */
 public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 
-	public PortletRepositoryImpl() throws ProducerException {
+	public PortletRepositoryImpl(Producer producer) throws ProducerException {
 		if (_portlets == null) {
 			_portlets = PortletLocalServiceUtil.getPortlets();
 		}
@@ -101,10 +107,11 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		}
 	}
 
-	public PortletRepositoryImpl(String portalId, String orgDN)
+	public PortletRepositoryImpl(Producer producer, String portalId,
+			String orgDN)
 		throws ProducerException {
 
-		this();
+		this(producer);
 	}
 
 	public void cloneChannel(
@@ -445,7 +452,69 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 	public List<ItemDescription> getUserProfileItems(
 		String portletName, Set<String> locales) {
 
-		return Collections.EMPTY_LIST;
+		Set<String> userAttributes = null;
+
+		try {
+			Portlet portlet = _getPortlet(portletName);
+
+			userAttributes = portlet.getPortletApp().getUserAttributes();
+		}
+		catch (Exception e) {
+			_log.error(e.getMessage(), e);
+		}
+
+		if ((userAttributes == null) || userAttributes.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+
+		ProfileMapManagerImpl profileMapManager = new ProfileMapManagerImpl();
+		Map<String,String> portletMap = null;
+
+		try {
+			portletMap = profileMapManager.getPortletMap();
+		}
+		catch (ProducerException ex) {
+			_log.warn(ex.getMessage(), ex);
+
+			return Collections.EMPTY_LIST;
+		}
+
+		List<ItemDescription> userProfiles = new ArrayList<ItemDescription>();
+
+		String resourcePrefix =
+			portletName + SEPARATOR + USERINFO_DESCRIPTION + SEPARATOR;
+
+		int i = 0;
+
+		Iterator<String> iterator = userAttributes.iterator();
+
+		while (iterator.hasNext()) {
+			String userAttribute = iterator.next();
+
+			String wsrpAttribute = portletMap.get(userAttribute);
+
+			if (wsrpAttribute != null ) {
+				LocalizedString localizedString = new LocalizedString();
+
+				localizedString.setLang(
+					WSRPUtility.toXMLLang(getDefaultLocale().toString()));
+
+				localizedString.setResourceName(
+					resourcePrefix + userAttribute + SEPARATOR + i);
+
+				localizedString.setValue(wsrpAttribute);
+
+				ItemDescription itemDescription = new ItemDescription();
+				itemDescription.setDescription(localizedString);
+				itemDescription.setItemName(wsrpAttribute);
+
+				userProfiles.add(itemDescription);
+
+				i++;
+			}
+		}
+
+		return userProfiles;
 	}
 
 	public boolean isCloneSupported() {
@@ -473,6 +542,8 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 	private static final List<String> _WSRP_STATES =
 		Arrays.asList(
 			new String[] {"wsrp:maximized", "wsrp:minimized", "wsrp:normal"});
+
+	private static Log _log = LogFactory.getLog(PortletRepositoryImpl.class);
 
 	private List<Portlet> _portlets = null;
 	private PortletDescriptorHolder _portletDescriptionHolder = null;

@@ -66,6 +66,7 @@ import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.UserInfoFactory;
 import com.liferay.wsrp.consumer.invoker.WSRPWindowInvoker;
+import com.liferay.wsrp.producer.impl.ProfileMapManagerImpl;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
@@ -91,6 +92,7 @@ import com.sun.portal.container.WindowRequestReader;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
 import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
+import com.sun.portal.wsrp.producer.ProducerException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -106,6 +108,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ccpp.Profile;
 
@@ -749,7 +752,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 			_remoteUserId, _portletModel);
 
 		if (_remotePortlet && (userInfoMap != null)) {
-			userInfoMap.remove("user.name.random");
+			userInfoMap = _processUserInfoMap(userInfoMap);
 		}
 
 		containerRequest.setUserInfo(userInfoMap);
@@ -763,6 +766,38 @@ public class WindowInvoker extends InvokerPortletImpl {
 		containerRequest.setAttribute(
 			PortletRequestConstants.ESCAPE_XML_VALUE,
 			Boolean.valueOf(PropsValues.PORTLET_URL_ESCAPE_XML));
+	}
+
+	private Map<String, String> _processUserInfoMap(
+		Map<String,String> portletMap) {
+
+		Map<String,String> wsrpUserMap = new HashMap<String,String>();
+
+		ProfileMapManagerImpl profileMapManager = new ProfileMapManagerImpl();
+
+		Map<String,String> wsrpDefaultUserMap = null;
+
+		try {
+			wsrpDefaultUserMap = profileMapManager.getPortletMap();
+		}
+		catch (ProducerException ex) {
+			_log.warn(ex.toString(),ex);
+
+			return portletMap;
+		}
+
+		Set<String> keys = portletMap.keySet();
+
+		for(String key : keys) {
+			String wsrpKey = wsrpDefaultUserMap.get(key);
+
+			if (key != null) {
+				String value = portletMap.get(key);
+				wsrpUserMap.put(wsrpKey, value);
+			}
+		}
+
+		return wsrpUserMap;
 	}
 
 	private void _setPortletAttributes(
