@@ -23,9 +23,14 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -46,6 +51,13 @@ public abstract class BaseFilter implements Filter {
 
 	public void init(FilterConfig filterConfig) {
 		_filterConfig = filterConfig;
+
+		String urlRegexPattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-pattern"));
+
+		if (Validator.isNotNull(urlRegexPattern)) {
+			_urlRegexPattern = Pattern.compile(urlRegexPattern);
+		}
 	}
 
 	public void doFilter(
@@ -67,7 +79,15 @@ public abstract class BaseFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest)servletRequest;
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-		if (isFilterEnabled()) {
+		boolean filterEnabled = isFilterEnabled();
+
+		if (filterEnabled && (_urlRegexPattern != null)) {
+			Matcher matcher = _urlRegexPattern.matcher(request.getRequestURL());
+
+			filterEnabled = matcher.matches();
+		}
+
+		if (filterEnabled) {
 			processFilter(request, response, filterChain);
 		}
 		else {
@@ -156,5 +176,6 @@ public abstract class BaseFilter implements Filter {
 	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
+	private Pattern _urlRegexPattern;
 
 }
