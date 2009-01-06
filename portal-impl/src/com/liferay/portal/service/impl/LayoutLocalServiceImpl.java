@@ -348,7 +348,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return fcos.getBytes();
 		}
 		catch (IOException ioe) {
-		   	throw new SystemException(ioe);
+			throw new SystemException(ioe);
 		}
 	}
 
