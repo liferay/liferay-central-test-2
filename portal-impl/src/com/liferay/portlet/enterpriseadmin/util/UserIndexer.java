@@ -67,8 +67,6 @@ public class UserIndexer implements Indexer {
 
 		doc.addUID(PORTLET_ID, String.valueOf(userId));
 
-		doc.addModifiedDate();
-
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.USER_ID, userId);

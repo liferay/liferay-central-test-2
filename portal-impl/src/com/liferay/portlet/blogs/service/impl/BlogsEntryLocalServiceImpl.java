@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -178,7 +179,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				Indexer.addEntry(
 					entry.getCompanyId(), entry.getGroupId(), userId,
 					entry.getUserName(), entryId, title, content,
-					serviceContext.getTagsEntries(), entry.getExpandoBridge());
+					displayDate, serviceContext.getTagsEntries(),
+					entry.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -525,6 +527,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String userName = entry.getUserName();
 		String title = entry.getTitle();
 		String content = entry.getContent();
+		Date displayDate = entry.getDisplayDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			BlogsEntry.class.getName(), entryId);
@@ -532,7 +535,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, userId, userName, entryId, title, content,
-				tagsEntries, entry.getExpandoBridge());
+				displayDate, tagsEntries, entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);
@@ -556,6 +559,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				long entryId = entry.getEntryId();
 				String title = entry.getTitle();
 				String content = entry.getContent();
+				Date displayDate = entry.getDisplayDate();
 
 				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 					BlogsEntry.class.getName(), entryId);
@@ -563,7 +567,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				try {
 					Indexer.updateEntry(
 						companyId, groupId, userId, userName, entryId, title,
-						content, tagsEntries, entry.getExpandoBridge());
+						content, displayDate, tagsEntries,
+						entry.getExpandoBridge());
 				}
 				catch (SearchException se) {
 					_log.error("Reindexing " + entryId, se);
@@ -615,7 +620,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			return SearchEngineUtil.search(
 				companyId, groupId, userId, BlogsEntry.class.getName(),
-				fullQuery, start, end);
+				fullQuery, Sort.SORT_BY_MODIFIED, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -683,7 +688,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				Indexer.updateEntry(
 					entry.getCompanyId(), entry.getGroupId(), userId,
 					entry.getUserName(), entryId, title, content,
-					serviceContext.getTagsEntries(), entry.getExpandoBridge());
+					displayDate, serviceContext.getTagsEntries(),
+					entry.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {

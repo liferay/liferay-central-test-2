@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -284,7 +285,7 @@ public class FileSystemHook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, tagsEntries);
+				fileEntryId, properties, new Date(), tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();

@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -176,7 +177,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 			return SearchEngineUtil.search(
 				companyId, groupId, userId, DLFileEntry.class.getName(),
-				fullQuery, start, end);
+				fullQuery, Sort.SORT_BY_MODIFIED, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

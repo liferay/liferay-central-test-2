@@ -99,7 +99,7 @@ public interface Document {
 
 	public void addKeyword(String name, String[] values);
 
-	public void addModifiedDate();
+	public void addModifiedDate(Date modifiedDate);
 
 	public void addText(String name, String value);
 

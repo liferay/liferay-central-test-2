@@ -93,8 +93,6 @@ public class PluginPackageIndexer implements Indexer {
 
 		doc.addUID(PORTLET_ID, moduleId);
 
-		doc.addModifiedDate();
-
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
 
@@ -104,7 +102,7 @@ public class PluginPackageIndexer implements Indexer {
 		doc.addKeyword("moduleId", moduleId);
 		doc.addKeyword("artifactId", moduleIdObj.getArtifactId());
 		doc.addKeyword("version", version);
-		doc.addDate("modifiedDate", modifiedDate);
+		doc.addModifiedDate(modifiedDate);
 		doc.addText("author", author);
 		doc.addKeyword("type", types.toArray(new String[0]));
 		doc.addKeyword("tag", tags.toArray(new String[0]));

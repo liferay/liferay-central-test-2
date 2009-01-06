@@ -200,8 +200,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.addPage(
 				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				title, content, serviceContext.getTagsEntries(),
-				page.getExpandoBridge());
+				title, content, page.getModifiedDate(),
+				serviceContext.getTagsEntries(), page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + pageId, se);
@@ -828,8 +828,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.updatePage(
 				page.getCompanyId(), page.getNode().getGroupId(),
-				resourcePrimKey, nodeId, newTitle, content, tagsEntries,
-				page.getExpandoBridge());
+				resourcePrimKey, nodeId, newTitle, content,
+				page.getModifiedDate(), tagsEntries, page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + newTitle, se);
@@ -857,6 +857,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long nodeId = node.getNodeId();
 		String title = page.getTitle();
 		String content = page.getContent();
+		Date modifiedDate = page.getModifiedDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey);
@@ -864,7 +865,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.updatePage(
 				companyId, groupId, resourcePrimKey, nodeId, title, content,
-				tagsEntries, page.getExpandoBridge());
+				modifiedDate, tagsEntries, page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -1005,8 +1006,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.updatePage(
 				node.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				title, content, serviceContext.getTagsEntries(),
-				page.getExpandoBridge());
+				title, content, page.getModifiedDate(),
+				serviceContext.getTagsEntries(), page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + page.getPrimaryKey(), se);

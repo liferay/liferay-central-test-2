@@ -704,6 +704,7 @@ public class DLFileEntryLocalServiceImpl
 		long folderId = folder.getFolderId();
 		String fileName = fileEntry.getName();
 		String properties = fileEntry.getLuceneProperties();
+		Date modifiedDate = fileEntry.getModifiedDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			DLFileEntry.class.getName(), fileEntryId);
@@ -711,7 +712,7 @@ public class DLFileEntryLocalServiceImpl
 		try {
 			Indexer.updateFile(
 				companyId, portletId, groupId, folderId, fileName, fileEntryId,
-				properties, tagsEntries);
+				properties, modifiedDate, tagsEntries);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + fileEntryId, se);

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -360,6 +361,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					String title = message.getSubject();
 					String content = message.getBody();
 					boolean anonymous = message.isAnonymous();
+					Date modifiedDate = message.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						MBMessage.class.getName(), messageId);
@@ -368,7 +370,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 						Indexer.updateMessage(
 							companyId, groupId, userId, userName, categoryId,
 							threadId, messageId, title, content, anonymous,
-							tagsEntries, message.getExpandoBridge());
+							modifiedDate, tagsEntries,
+							message.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + messageId, se);
@@ -433,7 +436,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, fullQuery, Sort.SORT_BY_MODIFIED, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -600,7 +604,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 							toCategoryId, message.getThreadId(),
 							message.getMessageId(), message.getSubject(),
 							message.getBody(), message.isAnonymous(),
-							tagsEntries, message.getExpandoBridge());
+							message.getModifiedDate(), tagsEntries,
+							message.getExpandoBridge());
 					}
 				}
 				catch (SearchException se) {

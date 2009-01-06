@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -1263,7 +1264,8 @@ public class PluginPackageUtil {
 			}
 
 			return SearchEngineUtil.search(
-				CompanyConstants.SYSTEM, fullQuery, start, end);
+				CompanyConstants.SYSTEM, fullQuery, Sort.SORT_BY_MODIFIED,
+				start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

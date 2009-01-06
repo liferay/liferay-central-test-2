@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -269,6 +270,7 @@ public class BookmarksFolderLocalServiceImpl
 					String name = entry.getName();
 					String url = entry.getUrl();
 					String comments = entry.getComments();
+					Date modifiedDate = entry.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						BookmarksEntry.class.getName(), entryId);
@@ -276,7 +278,8 @@ public class BookmarksFolderLocalServiceImpl
 					try {
 						Indexer.updateEntry(
 							companyId, groupId, folderId, entryId, name, url,
-							comments, tagsEntries, entry.getExpandoBridge());
+							comments, modifiedDate, tagsEntries,
+							entry.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + entryId, se);
@@ -347,7 +350,7 @@ public class BookmarksFolderLocalServiceImpl
 
 			return SearchEngineUtil.search(
 				companyId, groupId, userId, BookmarksEntry.class.getName(),
-				fullQuery, start, end);
+				fullQuery, Sort.SORT_BY_MODIFIED, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
