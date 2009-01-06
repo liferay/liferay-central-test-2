@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -848,6 +849,15 @@ public class DLFileEntryLocalServiceImpl
 			dlFileEntryPersistence.update(newFileEntry, false);
 
 			dlFileEntryPersistence.remove(fileEntry);
+
+			Resource resource = resourceLocalService.getResource(
+					fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL,
+					String.valueOf(fileEntry.getPrimaryKey()));
+
+			resource.setPrimKey(String.valueOf(newFileEntryId));
+
+			resourcePersistence.update(resource, false);
 
 			fileEntry = newFileEntry;
 
