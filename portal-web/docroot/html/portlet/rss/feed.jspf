@@ -68,7 +68,6 @@ catch (Exception e) {
 			SyndImage feedImage = feed.getImage();
 
 			String feedImageLink = StringPool.BLANK;
-
 			String feedImageURL = StringPool.BLANK;
 
 			if (feedImage != null) {
@@ -118,6 +117,12 @@ catch (Exception e) {
 				for (int j = 0; j < entries.size(); j++) {
 					SyndEntry entry = (SyndEntry)entries.get(j);
 
+					String entryLink = entry.getLink();
+
+					if (Validator.isNotNull(entryLink) && !HttpUtil.hasDomain(entryLink)) {
+						entryLink = baseURL + entryLink;
+					}
+
 					String author = entry.getAuthor();
 
 					SyndContent content = entry.getDescription();
@@ -129,12 +134,6 @@ catch (Exception e) {
 					}
 					else {
 						contents.add(content);
-					}
-
-					String entryLink = entry.getLink();
-
-					if (Validator.isNotNull(entryLink) && !HttpUtil.hasDomain(entryLink)) {
-						entryLink = baseURL + entryLink;
 					}
 				%>
 
