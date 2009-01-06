@@ -2643,7 +2643,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createSpringDynamicDataSourceXml() throws Exception {
-		if (Validator.isNull(_springHibernateFileName)) {
+		if (Validator.isNull(_springDynamicDataSourceFileName)) {
 			return;
 		}
 
@@ -3676,8 +3676,8 @@ public class ServiceBuilder {
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;
-	private String _springDynamicDataSourceFileName;
 	private String _springBaseFileName;
+	private String _springDynamicDataSourceFileName;
 	private String _springHibernateFileName;
 	private String _springInfrastructureFileName;
 	private String _apiDir;
