@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Normalizer;
 
 /**
@@ -38,6 +39,10 @@ import com.liferay.util.Normalizer;
 public class FriendlyURLNormalizer {
 
 	public static String normalize(String friendlyURL) {
+		if (Validator.isNull(friendlyURL)) {
+			return friendlyURL;
+		}
+
 		friendlyURL = GetterUtil.getString(friendlyURL);
 		friendlyURL = friendlyURL.toLowerCase();
 		friendlyURL = Normalizer.normalizeToAscii(friendlyURL);
@@ -72,10 +77,6 @@ public class FriendlyURLNormalizer {
 
 		if (friendlyURL.endsWith(StringPool.DASH)) {
 			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
-		}
-
-		if (!friendlyURL.startsWith(StringPool.SLASH)) {
-			friendlyURL = StringPool.SLASH + friendlyURL;
 		}
 
 		return friendlyURL;
