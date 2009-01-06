@@ -42,8 +42,6 @@ public class FriendlyURLNormalizer {
 		friendlyURL = friendlyURL.toLowerCase();
 		friendlyURL = Normalizer.normalizeToAscii(friendlyURL);
 
-		boolean startsWithSlash = friendlyURL.startsWith(StringPool.SLASH);
-
 		char[] charArray = friendlyURL.toCharArray();
 
 		for (int i = 0; i < charArray.length; i++) {
@@ -76,7 +74,7 @@ public class FriendlyURLNormalizer {
 			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
-		if (startsWithSlash) {
+		if (!friendlyURL.startsWith(StringPool.SLASH)) {
 			friendlyURL = StringPool.SLASH + friendlyURL;
 		}
 
@@ -84,7 +82,7 @@ public class FriendlyURLNormalizer {
 	}
 
 	private static final char[] _REPLACE_CHARS = new char[] {
-		' ', '.', ',', '/', '\\', '\'', '\"', '(', ')', '{', '}'
+		' ', '.', ',', '\\', '\'', '\"', '(', ')', '{', '}'
 	};
 
 }
