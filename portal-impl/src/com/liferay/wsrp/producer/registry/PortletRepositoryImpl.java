@@ -44,6 +44,7 @@ package com.liferay.wsrp.producer.registry;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.portletcontainer.WindowInvokerUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.wsrp.producer.impl.ProfileMapManagerImpl;
@@ -62,6 +63,7 @@ import com.sun.portal.wsrp.common.stubs.v2.PropertyList;
 import com.sun.portal.wsrp.common.stubs.v2.UserContext;
 import com.sun.portal.wsrp.producer.Producer;
 import com.sun.portal.wsrp.producer.ProducerException;
+import com.sun.portal.wsrp.producer.ProfileMapManager;
 import com.sun.portal.wsrp.producer.driver.PortletRegistry;
 import com.sun.portal.wsrp.producer.driver.ResourceName;
 
@@ -105,13 +107,6 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		catch (Exception e) {
 			throw new ProducerException(e);
 		}
-	}
-
-	public PortletRepositoryImpl(Producer producer, String portalId,
-			String orgDN)
-		throws ProducerException {
-
-		this(producer);
 	}
 
 	public void cloneChannel(
@@ -263,16 +258,16 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 			markupType.getWindowStates().addAll(_WSRP_STATES);
 
 			Set<String> modes = portletModesMap.get(mimeType);
-			
+
 			for (String mode : modes) {
-				if (mode.equalsIgnoreCase("view")) {
-					markupType.getModes().add("wsrp:view");
-				}
-				else if (mode.equalsIgnoreCase("edit")) {
+				if (mode.equalsIgnoreCase("edit")) {
 					markupType.getModes().add("wsrp:edit");
 				}
 				else if (mode.equalsIgnoreCase("help")) {
 					markupType.getModes().add("wsrp:help");
+				}
+				else if (mode.equalsIgnoreCase("view")) {
+					markupType.getModes().add("wsrp:view");
 				}
 			}
 
@@ -466,66 +461,57 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 	public List<ItemDescription> getUserProfileItems(
 		String portletName, Set<String> locales) {
 
-		Set<String> userAttributes = null;
+		List<ItemDescription> userProfiles = new ArrayList<ItemDescription>();
 
 		try {
 			Portlet portlet = _getPortlet(portletName);
 
-			userAttributes = portlet.getPortletApp().getUserAttributes();
-		}
-		catch (Exception e) {
-			_log.error(e.getMessage(), e);
-		}
+			PortletApp portletApp = portlet.getPortletApp();
 
-		if ((userAttributes == null) || userAttributes.isEmpty()) {
-			return Collections.EMPTY_LIST;
-		}
+			Set<String> userAttributes = portletApp.getUserAttributes();
 
-		ProfileMapManagerImpl profileMapManager = new ProfileMapManagerImpl();
-		Map<String,String> portletMap = null;
+			ProfileMapManager profileMapManager = new ProfileMapManagerImpl();
 
-		try {
-			portletMap = profileMapManager.getPortletMap();
-		}
-		catch (ProducerException ex) {
-			_log.warn(ex.getMessage(), ex);
+			Map<String, String> wsrpDefaultUserInfoMap =
+				profileMapManager.getPortletMap();
 
-			return Collections.EMPTY_LIST;
-		}
+			String resourcePrefix =
+				portletName + SEPARATOR + USERINFO_DESCRIPTION + SEPARATOR;
 
-		List<ItemDescription> userProfiles = new ArrayList<ItemDescription>();
+			int i = 0;
 
-		String resourcePrefix =
-			portletName + SEPARATOR + USERINFO_DESCRIPTION + SEPARATOR;
+			Iterator<String> itr = userAttributes.iterator();
 
-		int i = 0;
+			while (itr.hasNext()) {
+				String userAttribute = itr.next();
 
-		Iterator<String> iterator = userAttributes.iterator();
+				String wsrpUserAttribute = wsrpDefaultUserInfoMap.get(
+					userAttribute);
 
-		while (iterator.hasNext()) {
-			String userAttribute = iterator.next();
+				if (wsrpUserAttribute == null ) {
+					continue;
+				}
 
-			String wsrpAttribute = portletMap.get(userAttribute);
-
-			if (wsrpAttribute != null ) {
 				LocalizedString localizedString = new LocalizedString();
 
 				localizedString.setLang(
 					WSRPUtility.toXMLLang(getDefaultLocale().toString()));
-
 				localizedString.setResourceName(
 					resourcePrefix + userAttribute + SEPARATOR + i);
-
-				localizedString.setValue(wsrpAttribute);
+				localizedString.setValue(wsrpUserAttribute);
 
 				ItemDescription itemDescription = new ItemDescription();
+
 				itemDescription.setDescription(localizedString);
-				itemDescription.setItemName(wsrpAttribute);
+				itemDescription.setItemName(wsrpUserAttribute);
 
 				userProfiles.add(itemDescription);
 
 				i++;
 			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		return userProfiles;

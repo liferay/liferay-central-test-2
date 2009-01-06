@@ -369,22 +369,13 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public Map<String, String> getUserInfoMap(String portletWindowName) {
-		Set<String> userAttributes = null;
-
-		try {
-			userAttributes = _portlet.getPortletApp().getUserAttributes();
-		}
-		catch (Exception e) {
-			_log.error(e.getMessage(), e);
-		}
-
-		if ((userAttributes == null) || userAttributes.isEmpty()) {
-			return Collections.EMPTY_MAP;
-		}
-
 		Map<String, String> userInfo = new HashMap<String, String>();
 
-		for(String userAttribute : userAttributes) {
+		PortletApp portletApp = _portlet.getPortletApp();
+
+		Set<String> userAttributes = portletApp.getUserAttributes();
+
+		for (String userAttribute : userAttributes) {
 			userInfo.put(userAttribute, userAttribute);
 		}
 

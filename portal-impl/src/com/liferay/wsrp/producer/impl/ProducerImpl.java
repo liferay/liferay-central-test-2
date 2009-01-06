@@ -72,6 +72,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <a href="ProducerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Manish Gupta
+ * @author Brian Wing Shun Chan
  *
  */
 public class ProducerImpl extends AbstractProducer {
@@ -130,8 +131,8 @@ public class ProducerImpl extends AbstractProducer {
 		return _producerModel.getInstanceName();
 	}
 
-	public ProfileMapManager getProfileMapManager() throws ProducerException {
-		return  new ProfileMapManagerImpl();
+	public ProfileMapManager getProfileMapManager() {
+		return new ProfileMapManagerImpl();
 	}
 
 	public LeaseTime getRegistrationLifetime(String registrationHandle)

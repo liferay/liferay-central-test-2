@@ -92,7 +92,7 @@ import com.sun.portal.container.WindowRequestReader;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
 import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
-import com.sun.portal.wsrp.producer.ProducerException;
+import com.sun.portal.wsrp.producer.ProfileMapManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -769,35 +769,36 @@ public class WindowInvoker extends InvokerPortletImpl {
 	}
 
 	private Map<String, String> _processUserInfoMap(
-		Map<String,String> portletMap) {
+		Map<String, String> userInfoMap) {
 
-		Map<String,String> wsrpUserMap = new HashMap<String,String>();
-
-		ProfileMapManagerImpl profileMapManager = new ProfileMapManagerImpl();
-
-		Map<String,String> wsrpDefaultUserMap = null;
+		Map<String, String> wsrpUserInfoMap = userInfoMap;
 
 		try {
-			wsrpDefaultUserMap = profileMapManager.getPortletMap();
-		}
-		catch (ProducerException ex) {
-			_log.warn(ex.toString(),ex);
+			wsrpUserInfoMap = new HashMap<String, String>();
 
-			return portletMap;
-		}
+			ProfileMapManager profileMapManager = new ProfileMapManagerImpl();
 
-		Set<String> keys = portletMap.keySet();
+			Map<String, String> wsrpDefaultUserInfoMap =
+				profileMapManager.getPortletMap();
 
-		for(String key : keys) {
-			String wsrpKey = wsrpDefaultUserMap.get(key);
+			Set<String> userAttributes = userInfoMap.keySet();
 
-			if (key != null) {
-				String value = portletMap.get(key);
-				wsrpUserMap.put(wsrpKey, value);
+			for (String userAttribute : userAttributes) {
+				String wsrpUserAttribute = wsrpDefaultUserInfoMap.get(
+					userAttribute);
+
+				if (wsrpUserAttribute != null) {
+					String value = userInfoMap.get(userAttribute);
+
+					wsrpUserInfoMap.put(wsrpUserAttribute, value);
+				}
 			}
 		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
-		return wsrpUserMap;
+		return wsrpUserInfoMap;
 	}
 
 	private void _setPortletAttributes(
