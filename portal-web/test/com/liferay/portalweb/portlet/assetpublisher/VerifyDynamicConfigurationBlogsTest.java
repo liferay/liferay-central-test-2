@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="RemoveJournalTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyDynamicConfigurationBlogsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RemoveJournalTest extends BaseTestCase {
-	public void testRemoveJournal() throws Exception {
+public class VerifyDynamicConfigurationBlogsTest extends BaseTestCase {
+	public void testVerifyDynamicConfigurationBlogs() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,51 +52,6 @@ public class RemoveJournalTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Delete']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=AP Setup Test Article"));
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("AP Setup Test Article"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Entry"));
 	}
 }

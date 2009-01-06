@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddJournalTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemoveWebContentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddJournalTest extends BaseTestCase {
-	public void testAddJournal() throws Exception {
+public class RemoveWebContentTest extends BaseTestCase {
+	public void testRemoveWebContent() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -59,7 +59,7 @@ public class AddJournalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//select")) {
+				if (selenium.isElementPresent("link=Configuration")) {
 					break;
 				}
 			}
@@ -69,7 +69,7 @@ public class AddJournalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=Web Article");
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -78,7 +78,7 @@ public class AddJournalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_title")) {
+				if (selenium.isElementPresent("//img[@alt='Delete']")) {
 					break;
 				}
 			}
@@ -88,89 +88,15 @@ public class AddJournalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_15_title",
-			RuntimeVariables.replace("AP Setup Test Article 2"));
-		selenium.type("_15_title",
-			RuntimeVariables.replace("AP Setup Test Article 2"));
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_editor")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.selectFrame("//iframe[@id='_15_editor']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is an AP setup second test article!"));
-		selenium.type("//body",
-			RuntimeVariables.replace("This is an AP setup second test article!"));
-		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Save and Approve']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Save and Approve']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=AP Setup Test Article 2"));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent("link=AP Setup Test Article"));
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("AP Setup Test Article"));
 	}
 }

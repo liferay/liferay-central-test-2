@@ -135,7 +135,6 @@ public class SelectBookmarkTest extends BaseTestCase {
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("AP Setup Test Bookmark"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Bookmark"));
 	}
 }

@@ -133,7 +133,6 @@ public class SelectDocumentTest extends BaseTestCase {
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("AP Setup Test Document"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Document"));
 	}
 }

@@ -97,6 +97,6 @@ public class RemoveImageTest extends BaseTestCase {
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//div[2]/nobr/a/img"));
+		assertFalse(selenium.isElementPresent("link=View"));
 	}
 }

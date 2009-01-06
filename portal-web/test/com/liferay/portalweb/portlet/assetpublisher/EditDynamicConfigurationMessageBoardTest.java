@@ -131,9 +131,5 @@ public class EditDynamicConfigurationMessageBoardTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("AP Setup MB Test Thread"));
-		assertFalse(selenium.isTextPresent("AP Setup Test Entry"));
 	}
 }

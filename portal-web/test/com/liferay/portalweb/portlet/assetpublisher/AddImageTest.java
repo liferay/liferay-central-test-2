@@ -77,6 +77,7 @@ public class AddImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,7 +96,6 @@ public class AddImageTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Use the classic uploader.");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -122,6 +122,7 @@ public class AddImageTest extends BaseTestCase {
 			RuntimeVariables.replace("AP Setup Test Image 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent("AP Setup Test Image 2"));
 	}
 }

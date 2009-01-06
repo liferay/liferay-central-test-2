@@ -26,13 +26,14 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectJournalTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyDynamicConfigurationBookmarkTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SelectJournalTest extends BaseTestCase {
-	public void testSelectJournal() throws Exception {
+public class VerifyDynamicConfigurationBookmarkTest extends BaseTestCase {
+	public void testVerifyDynamicConfigurationBookmark()
+		throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,69 +53,6 @@ public class SelectJournalTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_assetType")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_86_assetType", "label=Web Article");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=AP Setup Test Article")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Article"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=AP Setup Test Article"));
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("AP Setup Test Article"));
-		assertTrue(selenium.isTextPresent("This is an AP setup test article!"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Bookmark"));
 	}
 }

@@ -115,6 +115,5 @@ public class SelectBlogsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("AP Setup Test Entry"));
-		assertTrue(selenium.isTextPresent("This is an AP setup test entry!"));
 	}
 }

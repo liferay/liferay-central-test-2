@@ -78,9 +78,5 @@ public class EditDisplayToFullContentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is an AP setup test entry!"));
-		assertTrue(selenium.isElementPresent("//div[4]/img"));
 	}
 }

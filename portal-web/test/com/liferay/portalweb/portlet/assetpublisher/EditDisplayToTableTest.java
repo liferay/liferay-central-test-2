@@ -78,9 +78,5 @@ public class EditDisplayToTableTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=AP Setup Test Entry"));
-		assertFalse(selenium.isElementPresent("//img[@alt='Edit Page']"));
 	}
 }

@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SetupTest</title>
 </head>
 <body>
@@ -167,16 +164,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=AP Setup Test Entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//div/a/span</td>
 	<td></td>
@@ -264,11 +251,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,16 +289,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=AP Setup Test Bookmark</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//div/a/span</td>
 	<td></td>
@@ -407,13 +379,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>waitForElementPresent</td>
+	<td>link=AP Setup DL Test Folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//b</td>
+	<td>link=AP Setup DL Test Folder</td>
 	<td></td>
 </tr>
 <tr>
@@ -462,8 +434,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>AP Setup Test Document.txt</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -554,11 +526,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -612,8 +579,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Showing 1 result.</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -634,12 +601,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>new_page</td>
-	<td>AP Setup Journal Test Page</td>
+	<td>AP Setup Web Content Test Page</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>new_page</td>
-	<td>AP Setup Journal Test Page</td>
+	<td>AP Setup Web Content Test Page</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -648,12 +615,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=AP Setup Journal Test Page</td>
+	<td>link=AP Setup Web Content Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=AP Setup Journal Test Page</td>
+	<td>link=AP Setup Web Content Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -668,12 +635,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id="ContentManagement-WebContent"]</td>
+	<td>//div[@id='ContentManagement-WebContent']/p/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id="ContentManagement-WebContent"]/p/a</td>
+	<td>//div[@id='ContentManagement-WebContent']/p/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -759,26 +726,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save and Approve']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Articles</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Articles</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=AP Setup Test Article</td>
 	<td></td>
 </tr>
 <tr>
@@ -912,11 +859,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>AP Setup MB Test Thread</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//div/a/span</td>
 	<td></td>
@@ -978,18 +920,103 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=This page is empty. Edit it to add some text.</td>
+	<td>//img[@alt='Manage Wikis']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=This page is empty. Edit it to add some text.</td>
+	<td>//img[@alt='Manage Wikis']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//tr[4]/td[4]/ul/li/strong/span'))</td>
+	<td>ExtraMainPage</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${ExtraMainPage}</td>
+	<td>No Extra Page</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[4]/td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_36_content</td>
+	<td>//body/div[2]/ul/li[6]/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//body/div[2]/ul/li[6]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>No Extra Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[3]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[5]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Page']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_36_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_36_title</td>
+	<td>AP Setup Test Wiki Page</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_title</td>
+	<td>AP Setup Test Wiki Page</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -999,16 +1026,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is an AP setup test wiki.</td>
 	<td></td>
 </tr>
 
