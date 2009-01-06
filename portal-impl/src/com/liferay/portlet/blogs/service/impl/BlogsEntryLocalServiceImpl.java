@@ -481,8 +481,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return urlTitle;
 		}
 
-		title = FriendlyURLNormalizer.normalize(
-			title, FriendlyURLNormalizer.ALLOW_NONE);
+		title = FriendlyURLNormalizer.normalize(title, false);
 
 		char[] urlTitleCharArray = title.toCharArray();
 
