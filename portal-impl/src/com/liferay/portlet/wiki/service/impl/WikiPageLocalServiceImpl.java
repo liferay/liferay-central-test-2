@@ -827,12 +827,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
+			WikiNode node = page.getNode();
+
 			Indexer.updatePage(
-				page.getCompanyId(), page.getNode().getGroupId(),
-				resourcePrimKey, nodeId, newTitle, page.getContent(),
-				tagsEntries, page.getExpandoBridge());
-			Indexer.deletePage(
-				page.getCompanyId(), page.getNode().getGroupId(), title);
+				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
+				newTitle, page.getContent(), tagsEntries,
+				page.getExpandoBridge());
+
+			Indexer.deletePage(page.getCompanyId(), node.getGroupId(), title);
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + newTitle, se);
