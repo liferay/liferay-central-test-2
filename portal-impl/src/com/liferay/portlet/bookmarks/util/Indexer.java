@@ -35,6 +35,8 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
+import java.util.Date;
+
 import javax.portlet.PortletURL;
 
 /**
@@ -51,13 +53,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String name, String url, String comments, String[] tagsEntries,
-			ExpandoBridge expandoBridge)
+			String name, String url, String comments, Date modifiedDate,
+			String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
-			tagsEntries, expandoBridge);
+			modifiedDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -70,14 +72,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getEntryDocument(
 		long companyId, long groupId, long folderId, long entryId, String name,
-		String url, String comments, String[] tagsEntries,
+		String url, String comments, Date modifiedDate, String[] tagsEntries,
 		ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();
 
 		doc.addUID(PORTLET_ID, entryId);
 
-		doc.addModifiedDate();
+		doc.addModifiedDate(modifiedDate);
 
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
@@ -107,13 +109,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String name, String url, String comments, String[] tagsEntries,
-			ExpandoBridge expandoBridge)
+			String name, String url, String comments, Date modifiedDate,
+			String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
-			tagsEntries, expandoBridge);
+			modifiedDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

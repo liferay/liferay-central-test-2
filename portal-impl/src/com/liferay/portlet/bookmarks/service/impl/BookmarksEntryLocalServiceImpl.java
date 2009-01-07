@@ -127,8 +127,8 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.addEntry(
 				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
-				name, url, comments, serviceContext.getTagsEntries(),
-				entry.getExpandoBridge());
+				name, url, comments, entry.getModifiedDate(),
+				serviceContext.getTagsEntries(), entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + entryId, se);
@@ -340,6 +340,7 @@ public class BookmarksEntryLocalServiceImpl
 		String name = entry.getName();
 		String url = entry.getUrl();
 		String comments = entry.getComments();
+		Date modifiedDate = entry.getModifiedDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			BookmarksEntry.class.getName(), entryId);
@@ -347,7 +348,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, folderId, entryId, name, url,
-				comments, tagsEntries, entry.getExpandoBridge());
+				comments, modifiedDate, tagsEntries, entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);
@@ -390,7 +391,8 @@ public class BookmarksEntryLocalServiceImpl
 			Indexer.updateEntry(
 				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
 				entry.getEntryId(), name, url, comments,
-				serviceContext.getTagsEntries(), entry.getExpandoBridge());
+				entry.getModifiedDate(), serviceContext.getTagsEntries(),
+				entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + entryId, se);

@@ -269,6 +269,7 @@ public class BookmarksFolderLocalServiceImpl
 					String name = entry.getName();
 					String url = entry.getUrl();
 					String comments = entry.getComments();
+					Date modifiedDate = entry.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						BookmarksEntry.class.getName(), entryId);
@@ -276,7 +277,8 @@ public class BookmarksFolderLocalServiceImpl
 					try {
 						Indexer.updateEntry(
 							companyId, groupId, folderId, entryId, name, url,
-							comments, tagsEntries, entry.getExpandoBridge());
+							comments, modifiedDate, tagsEntries,
+							entry.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + entryId, se);
