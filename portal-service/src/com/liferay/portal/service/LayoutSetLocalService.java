@@ -117,6 +117,11 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
+		java.io.InputStream is)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void updateLookAndFeel(long groupId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException,

@@ -43,6 +43,9 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.List;
 
@@ -125,6 +128,22 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, boolean logo, File file)
 		throws PortalException, SystemException {
 
+		InputStream is = null;
+
+		try{
+			is = new FileInputStream(file);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+
+		updateLogo(groupId, privateLayout, logo, is);
+	}
+
+	public void updateLogo(
+			long groupId, boolean privateLayout, boolean logo, InputStream is)
+		throws PortalException, SystemException {
+
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
@@ -143,7 +162,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		layoutSetPersistence.update(layoutSet, false);
 
 		if (logo) {
-			imageLocalService.updateImage(layoutSet.getLogoId(), file);
+			imageLocalService.updateImage(layoutSet.getLogoId(), is);
 		}
 		else {
 			imageLocalService.deleteImage(layoutSet.getLogoId());
