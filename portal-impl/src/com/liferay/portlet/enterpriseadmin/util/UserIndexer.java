@@ -210,7 +210,7 @@ public class UserIndexer implements Indexer {
 	private static long[] _getAncestorOrganizationIds(
 		long userId, long[] organizationIds) {
 
-		List<Organization> ancestors = new ArrayList<Organization>();
+		List<Organization> ancestorOrganizations = new ArrayList<Organization>();
 
 		for (long organizationId : organizationIds) {
 			try {
@@ -218,19 +218,20 @@ public class UserIndexer implements Indexer {
 					OrganizationLocalServiceUtil.getOrganization(
 						organizationId);
 
-				ancestors.addAll(organization.getAncestors());
+				ancestorOrganizations.addAll(organization.getAncestors());
 			}
 			catch (Exception e) {
 				_log.error("Error while indexing user " + userId, e);
 			}
 		}
 
-		long[] ancestorOrganizationIds = new long[ancestors.size()];
+		long[] ancestorOrganizationIds = new long[ancestorOrganizations.size()];
 
-		for (int i = 0; i < ancestors.size(); i++) {
-			Organization organization = ancestors.get(i);
+		for (int i = 0; i < ancestorOrganizations.size(); i++) {
+			Organization ancestorOrganization = ancestorOrganizations.get(i);
 
-			ancestorOrganizationIds[i] = organization.getOrganizationId();
+			ancestorOrganizationIds[i] =
+				ancestorOrganization.getOrganizationId();
 		}
 
 		return ancestorOrganizationIds;
