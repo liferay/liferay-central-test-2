@@ -61,11 +61,6 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	JournalTemplate template = (JournalTemplate)results.get(i);
 
-	// Display only templates with structures - see LPS-1373
-	if (Validator.isNull(template.getStructureId())) {
-		continue;
-	}
-
 	ResultRow row = new ResultRow(template, template.getId(), i);
 
 	StringBuilder sb = new StringBuilder();
