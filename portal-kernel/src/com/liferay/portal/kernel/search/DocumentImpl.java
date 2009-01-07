@@ -222,7 +222,11 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addModifiedDate() {
-		addDate(Field.MODIFIED, new Date());
+		addModifiedDate(new Date());
+	}
+
+	public void addModifiedDate(Date modifiedDate) {
+		addDate(Field.MODIFIED, modifiedDate);
 	}
 
 	public void addText(String name, String value) {

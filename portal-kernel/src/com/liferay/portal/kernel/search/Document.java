@@ -101,6 +101,8 @@ public interface Document {
 
 	public void addModifiedDate();
 
+	public void addModifiedDate(Date modifiedDate);
+
 	public void addText(String name, String value);
 
 	public void addUID(String portletId, long field1);
