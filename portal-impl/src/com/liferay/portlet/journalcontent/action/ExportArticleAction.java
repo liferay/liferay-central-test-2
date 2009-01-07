@@ -133,7 +133,7 @@ public class ExportArticleAction extends PortletAction {
 
 			for (int i = 2; i <= pages; i++) {
 				articleDisplay = JournalContentUtil.getDisplay(
-					groupId, articleId, null, languageId, themeDisplay, i);
+					groupId, articleId, "export", languageId, themeDisplay, i);
 
 				sb.append(articleDisplay.getContent());
 			}
