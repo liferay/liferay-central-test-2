@@ -259,7 +259,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	public String getPortletWindowTitle(
 		String portletWindowName, String locale) {
 
-		return _portlet.getDisplayName();
+		return null;
 	}
 
 	public PortletPreferences getPreferences(
