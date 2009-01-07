@@ -200,8 +200,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.addPage(
 				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				title, content, serviceContext.getTagsEntries(),
-				page.getExpandoBridge());
+				title, content, page.getModifiedDate(),
+				serviceContext.getTagsEntries(), page.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + pageId, se);
@@ -831,8 +831,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			Indexer.updatePage(
 				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				newTitle, page.getContent(), tagsEntries,
-				page.getExpandoBridge());
+				newTitle, page.getContent(), page.getModifiedDate(),
+				tagsEntries, page.getExpandoBridge());
 
 			Indexer.deletePage(page.getCompanyId(), node.getGroupId(), title);
 		}
@@ -862,6 +862,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long nodeId = node.getNodeId();
 		String title = page.getTitle();
 		String content = page.getContent();
+		Date modifiedDate = page.getModifiedDate();
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey);
@@ -870,7 +871,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (Validator.isNull(page.getRedirectTitle())) {
 				Indexer.updatePage(
 					companyId, groupId, resourcePrimKey, nodeId, title, content,
-					tagsEntries, page.getExpandoBridge());
+					modifiedDate, tagsEntries, page.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -1013,8 +1014,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (Validator.isNull(page.getRedirectTitle())) {
 				Indexer.updatePage(
 					node.getCompanyId(), node.getGroupId(), resourcePrimKey,
-					nodeId, title, content, serviceContext.getTagsEntries(),
-					page.getExpandoBridge());
+					nodeId, title, content, page.getModifiedDate(),
+					serviceContext.getTagsEntries(), page.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {

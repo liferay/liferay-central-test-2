@@ -360,6 +360,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					String title = message.getSubject();
 					String content = message.getBody();
 					boolean anonymous = message.isAnonymous();
+					Date modifiedDate = message.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						MBMessage.class.getName(), messageId);
@@ -368,7 +369,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 						Indexer.updateMessage(
 							companyId, groupId, userId, userName, categoryId,
 							threadId, messageId, title, content, anonymous,
-							tagsEntries, message.getExpandoBridge());
+							modifiedDate, tagsEntries,
+							message.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + messageId, se);
@@ -600,7 +602,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 							toCategoryId, message.getThreadId(),
 							message.getMessageId(), message.getSubject(),
 							message.getBody(), message.isAnonymous(),
-							tagsEntries, message.getExpandoBridge());
+							message.getModifiedDate(), tagsEntries,
+							message.getExpandoBridge());
 					}
 				}
 				catch (SearchException se) {

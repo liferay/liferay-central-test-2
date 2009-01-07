@@ -283,6 +283,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					long resourcePrimKey = page.getResourcePrimKey();
 					String title = page.getTitle();
 					String content = page.getContent();
+					Date modifiedDate = page.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						WikiPage.class.getName(), resourcePrimKey);
@@ -290,7 +291,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					try {
 						Indexer.updatePage(
 							companyId, groupId, resourcePrimKey, nodeId, title,
-							content, tagsEntries, page.getExpandoBridge());
+							content, modifiedDate, tagsEntries,
+							page.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + page.getPrimaryKey(), se);

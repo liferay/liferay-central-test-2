@@ -101,7 +101,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, articleId);
 
-		doc.addModifiedDate();
+		doc.addModifiedDate(displayDate);
 
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
@@ -116,7 +116,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.ENTRY_CLASS_PK, articleId);
 		doc.addKeyword("version", version);
 		doc.addKeyword("type", type);
-		doc.addDate("displayDate", displayDate);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 

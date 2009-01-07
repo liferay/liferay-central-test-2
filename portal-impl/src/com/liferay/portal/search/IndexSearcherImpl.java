@@ -24,7 +24,6 @@ package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
@@ -43,7 +42,7 @@ public class IndexSearcherImpl implements IndexSearcher {
 	public Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
-		return search(companyId, query, _DEFAULT_SORT, start, end);
+		return search(companyId, query, null, start, end);
 	}
 
 	public Hits search(
@@ -69,9 +68,5 @@ public class IndexSearcherImpl implements IndexSearcher {
 			throw new SearchException(e);
 		}
 	}
-
-	private static final Sort[] _DEFAULT_SORT = new Sort[] {
-		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
-	};
 
 }

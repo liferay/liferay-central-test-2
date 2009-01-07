@@ -42,6 +42,7 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -81,7 +82,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, tagsEntries);
+			properties, new Date(), tagsEntries);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -146,7 +147,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			return getFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntry.getFileEntryId(), properties, tagsEntries);
+				fileEntry.getFileEntryId(), properties,
+				fileEntry.getModifiedDate(),  tagsEntries);
 		}
 		catch (PortalException pe) {
 			throw new SearchException(pe.getMessage());
@@ -159,7 +161,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries)
+			Date modifiedDate, String[] tagsEntries)
 		throws SearchException {
 
 		if (fileEntryId <= 0) {
@@ -223,7 +225,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(portletId, repositoryId, fileName);
 
-		doc.addModifiedDate();
+		doc.addModifiedDate(modifiedDate);
 
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, portletId);
@@ -271,9 +273,22 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] tagsEntries)
 		throws SearchException {
 
+		Date now = new Date();
+
+		updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, now, tagsEntries);
+	}
+
+	public static void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, String[] tagsEntries)
+		throws SearchException {
+
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, tagsEntries);
+			properties, modifiedDate, tagsEntries);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

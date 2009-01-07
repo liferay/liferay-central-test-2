@@ -37,6 +37,8 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
+import java.util.Date;
+
 import javax.portlet.PortletURL;
 
 /**
@@ -54,13 +56,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addEntry(
 			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, String[] tagsEntries,
-			ExpandoBridge expandoBridge)
+			long entryId, String title, String content, Date displayDate,
+			String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, userId, userName, entryId, title, content,
-			tagsEntries, expandoBridge);
+			displayDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -73,8 +75,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getEntryDocument(
 		long companyId, long groupId, long userId, String userName,
-		long entryId, String title, String content, String[] tagsEntries,
-		ExpandoBridge expandoBridge) {
+		long entryId, String title, String content, Date displayDate,
+		String[] tagsEntries, ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 		content = HtmlUtil.extractText(content);
@@ -83,7 +85,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, entryId);
 
-		doc.addModifiedDate();
+		doc.addModifiedDate(displayDate);
 
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
@@ -113,13 +115,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateEntry(
 			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, String[] tagsEntries,
-			ExpandoBridge expandoBridge)
+			long entryId, String title, String content, Date displayDate,
+			String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, userId, userName, entryId, title, content,
-			tagsEntries, expandoBridge);
+			displayDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

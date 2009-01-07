@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Time;
 
 import java.io.IOException;
@@ -93,17 +92,6 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				QueryTranslator.translate(query), luceneSort);
 
 			hits = subset(luceneHits, start, end);
-		}
-		catch (RuntimeException re) {
-
-			// Trying to sort on a field when there are no results throws a
-			// RuntimeException that should not be rethrown
-
-			String msg = GetterUtil.getString(re.getMessage());
-
-			if (!msg.endsWith("does not appear to be indexed")) {
-				throw re;
-			}
 		}
 		catch (Exception e) {
 			if (e instanceof BooleanQuery.TooManyClauses ||

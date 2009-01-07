@@ -77,7 +77,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		return getSearchEngine().getSearcher().search(
-			companyId, query, start, end);
+			companyId, query, _DEFAULT_SORT, start, end);
 	}
 
 	public static Hits search(
@@ -106,7 +106,7 @@ public class SearchEngineUtil {
 				companyId, groupId, userId, className, query);
 		}
 
-		return search(companyId, query, start, end);
+		return search(companyId, query, _DEFAULT_SORT, start, end);
 	}
 
 	public static Hits search(
@@ -168,5 +168,9 @@ public class SearchEngineUtil {
 	private static String _defaultSearchEngineName;
 	private static SearchEngine _searchEngine;
 	private static SearchPermissionChecker _searchPermissionChecker;
+
+	private static final Sort[] _DEFAULT_SORT = new Sort[] {
+		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
+	};
 
 }

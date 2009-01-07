@@ -281,6 +281,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					long imageId = image.getImageId();
 					String name = image.getName();
 					String description = image.getDescription();
+					Date modifiedDate = image.getModifiedDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						IGImage.class.getName(), imageId);
@@ -288,7 +289,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					try {
 						Indexer.updateImage(
 							companyId, groupId, folderId, imageId, name,
-							description, tagsEntries, image.getExpandoBridge());
+							description, modifiedDate, tagsEntries,
+							image.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + imageId, se);
