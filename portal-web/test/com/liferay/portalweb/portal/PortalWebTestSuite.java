@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal;
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.session.SessionExpirationTests;
 import com.liferay.portalweb.portlet.announcements.AnnouncementsTests;
+import com.liferay.portalweb.portlet.assetpublisher.AssetPublisherTests;
 import com.liferay.portalweb.portlet.biblegateway.BibleGatewayTests;
 import com.liferay.portalweb.portlet.blogs.BlogsTests;
 import com.liferay.portalweb.portlet.blogsaggregator.BlogsAggregatorTests;
@@ -88,7 +89,7 @@ public class PortalWebTestSuite extends BaseTests {
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTests.class);
 		addTestSuite(AnnouncementsTests.class);
-		//addTestSuite(AssetPublisherTests.class);
+		addTestSuite(AssetPublisherTests.class);
 		addTestSuite(BibleGatewayTests.class);
 		addTestSuite(BlogsTests.class);
 		addTestSuite(BlogsAggregatorTests.class);
