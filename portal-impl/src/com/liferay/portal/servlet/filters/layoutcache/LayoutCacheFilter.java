@@ -320,15 +320,14 @@ public class LayoutCacheFilter extends BasePortalFilter {
 
 			return true;
 		}
-		else {
-			String plid = ParamUtil.getString(request, "p_l_id");
 
-			if (Validator.isNotNull(plid)) {
-				return true;
-			}
-			else {
-				return false;
-			}
+		String plid = ParamUtil.getString(request, "p_l_id");
+
+		if (Validator.isNotNull(plid)) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
@@ -344,6 +343,10 @@ public class LayoutCacheFilter extends BasePortalFilter {
 	}
 
 	protected boolean isSignedIn(HttpServletRequest request) {
+		if (_pattern == _PATTERN_RESOURCE) {
+			return true;
+		}
+
 		long userId = PortalUtil.getUserId(request);
 		String remoteUser = request.getRemoteUser();
 
