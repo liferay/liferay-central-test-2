@@ -193,7 +193,6 @@ if (layout != null) {
 		<script type="text/javascript">
 			var pageTracker = _gat._getTracker("<%= googleAnalyticsId %>");
 
-			pageTracker._initData();
 			pageTracker._trackPageview();
 		</script>
 
