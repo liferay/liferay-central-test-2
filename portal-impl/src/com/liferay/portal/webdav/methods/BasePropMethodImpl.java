@@ -282,13 +282,13 @@ public abstract class BasePropMethodImpl implements Method {
 				_log.info("Response XML\n" + xml);
 			}
 
-			// Must set the status prior to writing the XML
+			// Set the status prior to writing the XML
 
 			HttpServletResponse response =
 				webDavRequest.getHttpServletResponse();
 
-			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
+			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
 			try {
 				ServletResponseUtil.write(response, xml);
@@ -305,7 +305,7 @@ public abstract class BasePropMethodImpl implements Method {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"No resource found for " + storage.getRootPath() +
-					webDavRequest.getPath());
+						webDavRequest.getPath());
 			}
 
 			return HttpServletResponse.SC_NOT_FOUND;

@@ -35,12 +35,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * <a href="MethodFactory.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This class maps WebDAV methods specified by RFC 4918 to
- * <code>com.liferay.portal.webdav.methods.Method</code> classes to service the
- * needs of each WebDAV request.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  */
