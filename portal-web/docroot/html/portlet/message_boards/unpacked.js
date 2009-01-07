@@ -39,8 +39,6 @@ if (!Liferay.Editor.bbCode) {
 			var field = textarea[0];
 			var value = textarea.val();
 
-			textarea.trigger('focus');
-
 			if (Liferay.Browser.isIe()) {
 				var sel = document.selection.createRange();
 
@@ -75,6 +73,8 @@ if (!Liferay.Editor.bbCode) {
 			else {
 				field.value += begTag + content + endTag;
 			}
+
+			textarea.trigger('focus');
 		},
 
 		setHTML: function(content) {
