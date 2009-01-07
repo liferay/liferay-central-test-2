@@ -136,6 +136,16 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getManageableOrganizations(long userId,
+		java.lang.String actionId, boolean recurse)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getManageableOrganizations(userId,
+				actionId, recurse);
+
+		return OrganizationJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONObject getOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

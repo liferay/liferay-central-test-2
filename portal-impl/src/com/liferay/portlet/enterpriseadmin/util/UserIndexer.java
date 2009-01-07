@@ -31,15 +31,21 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletURL;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserIndexer.java.html"><b><i>View Source</i></b></a>
@@ -82,6 +88,9 @@ public class UserIndexer implements Indexer {
 		doc.addKeyword("active", active);
 		doc.addKeyword("groupIds", groupIds);
 		doc.addKeyword("organizationIds", organizationIds);
+		doc.addKeyword(
+			"ancestorOrganizationIds",
+			_getAncestorOrganizationIds(userId, organizationIds));
 		doc.addKeyword("roleIds", roleIds);
 		doc.addKeyword("userGroupIds", userGroupIds);
 
@@ -198,10 +207,40 @@ public class UserIndexer implements Indexer {
 		}
 	}
 
+	private static long[] _getAncestorOrganizationIds(
+		long userId, long[] organizationIds) {
+
+		List<Organization> ancestors = new ArrayList<Organization>();
+
+		for (long organizationId : organizationIds) {
+			try {
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				ancestors.addAll(organization.getAncestors());
+			}
+			catch (Exception e) {
+				_log.error("Error while indexing user " + userId, e);
+			}
+		}
+
+		long[] ancestorOrganizationIds = new long[ancestors.size()];
+
+		for (int i = 0; i < ancestors.size(); i++) {
+			Organization organization = ancestors.get(i);
+
+			ancestorOrganizationIds[i] = organization.getOrganizationId();
+		}
+
+		return ancestorOrganizationIds;
+	}
+
 	private static final String[] _CLASS_NAMES = new String[] {
 		User.class.getName()
 	};
 
 	private static UserIndexerEnabled _enabled = new UserIndexerEnabled();
+	private static Log _log = LogFactory.getLog(UserIndexer.class);
 
 }

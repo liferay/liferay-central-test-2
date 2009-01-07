@@ -147,6 +147,13 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long userId, String actionId)
 		throws PortalException, SystemException {
 
+		return getManageableOrganizations(userId, actionId, true);
+	}
+
+	public List<Organization> getManageableOrganizations(
+			long userId, String actionId, boolean recurse)
+		throws PortalException, SystemException {
+
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (permissionChecker.isCompanyAdmin()) {
@@ -174,7 +181,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 				manageableOrganizations.add(userOrganization);
 			}
 
-			if (OrganizationPermissionUtil.contains(
+			if (recurse && OrganizationPermissionUtil.contains(
 					permissionChecker, userOrganization.getOrganizationId(),
 					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
 

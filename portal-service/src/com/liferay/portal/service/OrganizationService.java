@@ -95,6 +95,12 @@ public interface OrganizationService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
+		long userId, java.lang.String actionId, boolean recurse)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,

@@ -103,6 +103,13 @@ public class OrganizationServiceUtil {
 		return getService().getManageableOrganizations(userId, actionId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
+		long userId, java.lang.String actionId, boolean recurse)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getManageableOrganizations(userId, actionId, recurse);
+	}
+
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,

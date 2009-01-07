@@ -2935,6 +2935,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 				for (long organizationId : values) {
 					usersOrgsQuery.addTerm("organizationIds", organizationId);
+					usersOrgsQuery.addTerm(
+						"ancestorOrganizationIds", organizationId);
 				}
 
 				contextQuery.add(usersOrgsQuery, BooleanClauseOccur.MUST);

@@ -31,7 +31,7 @@ List<Organization> manageableOrganizations = null;
 Long[] manageableOrganizationIds = null;
 
 if (filterManageableOrganizations) {
-	manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.UPDATE);
+	manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.UPDATE, false);
 	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 }
 %>
