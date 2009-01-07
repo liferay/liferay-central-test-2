@@ -109,6 +109,13 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		}
 	}
 
+	public PortletRepositoryImpl(
+			Producer producer, String portalID, String namespace)
+		throws ProducerException {
+
+		this(producer);
+	}
+
 	public void cloneChannel(
 		UserContext userContext, String newName, String existingChannel,
 		String registrationHandle) {

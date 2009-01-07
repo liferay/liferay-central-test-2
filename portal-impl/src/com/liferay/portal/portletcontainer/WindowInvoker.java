@@ -771,7 +771,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 	private Map<String, String> _processUserInfoMap(
 		Map<String, String> userInfoMap) {
 
-		Map<String, String> wsrpUserInfoMap = userInfoMap;
+		Map<String, String> wsrpUserInfoMap = null;
 
 		try {
 			wsrpUserInfoMap = new HashMap<String, String>();
@@ -795,7 +795,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.warn(e, e);
+			wsrpUserInfoMap = userInfoMap;
 		}
 
 		return wsrpUserInfoMap;
