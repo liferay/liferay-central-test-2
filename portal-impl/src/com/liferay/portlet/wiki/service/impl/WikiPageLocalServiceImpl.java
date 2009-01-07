@@ -440,6 +440,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Cache
 
+		clearPageCache(page);
 		clearReferralsCache(page);
 	}
 

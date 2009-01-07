@@ -35,6 +35,7 @@ import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -127,6 +128,10 @@ public class EditNodeAction extends PortletAction {
 		WikiCacheThreadLocal.setClearCache(false);
 
 		WikiNodeServiceUtil.deleteNode(nodeId);
+
+		WikiCacheUtil.clearCache(nodeId);
+
+		WikiCacheThreadLocal.setClearCache(true);
 	}
 
 	protected void subscribeNode(ActionRequest actionRequest)
