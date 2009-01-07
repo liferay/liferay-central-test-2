@@ -1397,6 +1397,7 @@ end-by=Beëindigd op
 end-date=Einddatum
 end=Eind
 english=Engels
+enrollment-url=Inschrijving URL
 enter-a-blank-entry-to-disable-email-forwarding=Laat het veld leeg om het doorsturen van e-mails uit te schakelen.
 enter-a-blank-paypal-email-address-to-disable-paypal=Laat het PayPal e-mailadres leeg om PayPal uit te schakelen. Selecteer de te accepteren creditcards om betalingen met creditcards in te schakelen. Betaling zal niet vereist worden als PayPal en/of creditcards niet ingeschakeld zijn.
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=Ga een lijstpunt in. Klik annuleren of verlaten het leeg om de lijst te beëindigen.

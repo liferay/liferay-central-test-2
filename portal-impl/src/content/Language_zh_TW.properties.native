@@ -1397,6 +1397,7 @@ end-by=..前結束
 end-date=結束日期
 end=末端
 english=英語
+enrollment-url=註冊URL
 enter-a-blank-entry-to-disable-email-forwarding=輸入一個空白的項目使電子郵件取消轉信功能。
 enter-a-blank-paypal-email-address-to-disable-paypal=輸入一封空白的PayPal 電子郵件使PayPal 中止服務。選擇被接受的信用卡記錄付款使用信用卡。付款不會必需如果PayPal 是殘疾的並且沒有被接受的信用卡。
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=進入名單項目。點擊取消或任它空白結束名單。

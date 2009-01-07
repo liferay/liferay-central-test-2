@@ -1397,6 +1397,7 @@ end-by=Terminar antes de
 end-date=Fecha final
 end=Final
 english=Inglés
+enrollment-url=URL de la inscripción
 enter-a-blank-entry-to-disable-email-forwarding=Introduzca una entrada en blanco para deshabilitar la redirección de correo.
 enter-a-blank-paypal-email-address-to-disable-paypal=Introduzca una direccion PayPal vacía para deshabilitar PayPal. Seleccione las tarjetas de crédito aceptadas para registrar pagos usando tarjetas de crédito. Los pagos no serán requeridos si PayPal está deshabilitado y no se aceptan tarjetas de crédito.
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=Introduzca un elemento de la lista. Pulse cancelar o déjelo en blanco para terminar la lista.

@@ -1397,6 +1397,7 @@ end-by=Extremidade perto
 end-date=Data Da Extremidade
 end=Extremidade
 english=Inglês
+enrollment-url=URL do registro
 enter-a-blank-entry-to-disable-email-forwarding=Incorpore uma entrada em branco para incapacitar o forwarding do email.
 enter-a-blank-paypal-email-address-to-disable-paypal=Incorpore um email address em branco de PayPal para incapacitar PayPal. Selecione os cartões de crédito aceitados para gravar pagamentos usando cartões de crédito. Os pagamentos não estarão requeridos se PayPal for disabled e não houver nenhum cartão de crédito aceitado.
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=Incorpore um artigo da lista. Estale o cancelamento ou deixe-o em branco para terminar a lista.

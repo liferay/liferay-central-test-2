@@ -1397,6 +1397,7 @@ end-by=Finisci entro
 end-date=Data di Fine
 end=Estremità
 english=Inglese
+enrollment-url=URL di iscrizione
 enter-a-blank-entry-to-disable-email-forwarding=Inserire uno spazio bianco per disabilitare l'inoltro della email.
 enter-a-blank-paypal-email-address-to-disable-paypal=Inserire uno spazio bianco nell'indirizzo di email di PayPal per disabilitare PayPal. Selezionare le carte di credito elencate per registrare i pagamenti con carta di credito. I pagamenti non saranno richiesti se PayPal è disabilitato e non ci sono carte di credito elencate.
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=Entri in un articolo della lista. Scatti l'annullamento o lascilo in bianco per concludere la lista.

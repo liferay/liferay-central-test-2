@@ -1397,6 +1397,7 @@ end-by=次の日時で終了
 end-date=終了日時
 end=終了
 english=英語
+enrollment-url=登録URL
 enter-a-blank-entry-to-disable-email-forwarding=メール転送を無効にするには空白のエントリを入力してください。
 enter-a-blank-paypal-email-address-to-disable-paypal=PayPalメールアドレスを空欄にするとPayPalを無効にできます。クレジットカードによる支払いを計上するためには利用可能なクレジットカードを選択します。PayPalが無効な状態で、かつ利用可能なクレジットカードが無い場合、支払いは要求されません。
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=リストアイテムを入力してください。キャンセルをクリックするかリストの最後まで空欄にしてください。

@@ -1397,6 +1397,7 @@ end-by=Fini le
 end-date=Date de fin
 end=Fin
 english=Anglais
+enrollment-url=URL d'inscription
 enter-a-blank-entry-to-disable-email-forwarding=Effacez le champ pour désactiver le transfert de courriel.
 enter-a-blank-paypal-email-address-to-disable-paypal=Effacez l'adresse courriel PayPal pour neutraliser PayPal. Choisissez les cartes de crédit admises pour enregistrer des paiements en utilisant des cartes de crédit. Aucun paiement ne sera exigé si PayPal est désactivé s'il n'y a aucune carte de crédit admise.
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=Écrivez un article de liste. Cliquez l'annulation ou laissez-la blanche pour finir la liste.

@@ -1397,6 +1397,7 @@ end-by=此前结束
 end-date=结束日期
 end=结束
 english=英语
+enrollment-url=注册URL
 enter-a-blank-entry-to-disable-email-forwarding=输入空条目以禁用电子邮件转发功能。
 enter-a-blank-paypal-email-address-to-disable-paypal=输入空白的 PayPal 电子邮件以禁用 PayPal。选择接受的信用卡记录使用信用卡的付款。如果 PayPal 被禁用并且没有可接受的信用卡，付款将不是必需的。
 enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list=输入列表项目。单击“取消”或将其留空以结束列表。
