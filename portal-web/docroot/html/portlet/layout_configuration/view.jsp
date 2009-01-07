@@ -63,7 +63,7 @@
 				Iterator itr = categories.iterator();
 
 				while (itr.hasNext()) {
-					PortletCategory category = (PortletCategory) itr.next();
+					PortletCategory category = (PortletCategory)itr.next();
 
 					if (category.getName().equals("category.hidden")) {
 						continue;
