@@ -210,7 +210,8 @@ public class UserIndexer implements Indexer {
 	private static long[] _getAncestorOrganizationIds(
 		long userId, long[] organizationIds) {
 
-		List<Organization> ancestorOrganizations = new ArrayList<Organization>();
+		List<Organization> ancestorOrganizations =
+			new ArrayList<Organization>();
 
 		for (long organizationId : organizationIds) {
 			try {
