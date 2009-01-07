@@ -344,7 +344,7 @@ public class LayoutCacheFilter extends BasePortalFilter {
 
 	protected boolean isSignedIn(HttpServletRequest request) {
 		if (_pattern == _PATTERN_RESOURCE) {
-			return true;
+			return false;
 		}
 
 		long userId = PortalUtil.getUserId(request);
