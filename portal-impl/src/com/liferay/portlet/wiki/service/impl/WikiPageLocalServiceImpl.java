@@ -828,8 +828,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.updatePage(
 				page.getCompanyId(), page.getNode().getGroupId(),
-				resourcePrimKey, nodeId, newTitle, content, tagsEntries,
-				page.getExpandoBridge());
+				resourcePrimKey, nodeId, newTitle, page.getContent(),
+				tagsEntries, page.getExpandoBridge());
+			Indexer.deletePage(
+				page.getCompanyId(), page.getNode().getGroupId(), title);
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + newTitle, se);
@@ -862,9 +864,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			WikiPage.class.getName(), resourcePrimKey);
 
 		try {
-			Indexer.updatePage(
-				companyId, groupId, resourcePrimKey, nodeId, title, content,
-				tagsEntries, page.getExpandoBridge());
+			if (Validator.isNull(page.getRedirectTitle())) {
+				Indexer.updatePage(
+					companyId, groupId, resourcePrimKey, nodeId, title, content,
+					tagsEntries, page.getExpandoBridge());
+			}
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -1003,10 +1007,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.updatePage(
-				node.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
-				title, content, serviceContext.getTagsEntries(),
-				page.getExpandoBridge());
+			if (Validator.isNull(page.getRedirectTitle())) {
+				Indexer.updatePage(
+					node.getCompanyId(), node.getGroupId(), resourcePrimKey,
+					nodeId, title, content, serviceContext.getTagsEntries(),
+					page.getExpandoBridge());
+			}
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + page.getPrimaryKey(), se);
