@@ -59,7 +59,7 @@ Liferay.Notice = new Class({
 	setClosing: function() {
 		var instance = this;
 
-		var staticAlerts = jQuery('.popup-alert-notice, .popup-alert-warning').not('[@dynamic=true]');
+		var staticAlerts = jQuery('.popup-alert-notice, .popup-alert-warning').not('[dynamic=true]');
 
 		if (staticAlerts.length) {
 			instance._useCloseButton = true;

@@ -598,7 +598,7 @@ Liferay.PortletCSS = {
 	_languageClasses: function(key, value, removeClass) {
 		var instance = this;
 
-		var option = instance._portletLanguage.find('option[@value=' + key + ']');
+		var option = instance._portletLanguage.find('option[value=' + key + ']');
 
 		if (removeClass) {
 			option.removeClass('focused');
@@ -1266,7 +1266,7 @@ Liferay.PortletCSS = {
 		var instance = this;
 
 		if (value != '') {
-			obj.find('option[@value=' + value + ']').attr('selected', 'selected');
+			obj.find('option[value=' + value + ']').attr('selected', 'selected');
 		}
 	},
 

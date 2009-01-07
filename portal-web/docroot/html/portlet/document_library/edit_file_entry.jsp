@@ -85,9 +85,9 @@ portletURL.setParameter("name", name);
 
 <script type="text/javascript">
 	function <portlet:namespace />compare() {
-		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
-		var sourceVersion = jQuery('input[@name="<portlet:namespace />sourceVersion"]');
-		var targetVersion = jQuery('input[@name="<portlet:namespace />targetVersion"]');
+		var rowIds = jQuery('input[name=<portlet:namespace />rowIds]:checked');
+		var sourceVersion = jQuery('input[name="<portlet:namespace />sourceVersion"]');
+		var targetVersion = jQuery('input[name="<portlet:namespace />targetVersion"]');
 
 		if (rowIds.length == 1) {
 			sourceVersion.val(rowIds[0].value);
@@ -101,7 +101,7 @@ portletURL.setParameter("name", name);
 	}
 
 	function <portlet:namespace />initRowsChecked() {
-		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]');
+		var rowIds = jQuery('input[name=<portlet:namespace />rowIds]');
 
 		var found = 0;
 
@@ -124,7 +124,7 @@ portletURL.setParameter("name", name);
 	}
 
 	function <portlet:namespace />updateRowsChecked(element) {
-		var rowsChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
+		var rowsChecked = jQuery('input[name=<portlet:namespace />rowIds]:checked');
 
 		if (rowsChecked.length > 2) {
 			if (rowsChecked[2] == element) {
@@ -140,7 +140,7 @@ portletURL.setParameter("name", name);
 		function() {
 			<portlet:namespace />initRowsChecked();
 
-			jQuery('input[@name=<portlet:namespace />rowIds]').click(
+			jQuery('input[name=<portlet:namespace />rowIds]').click(
 				function() {
 					<portlet:namespace />updateRowsChecked(this);
 				}

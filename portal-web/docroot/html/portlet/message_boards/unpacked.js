@@ -315,7 +315,7 @@ if (!Liferay.Editor.bbCode) {
 				instance._location.html(html);
 			}
 
-			var emoticonButton = instance._location.find('.lfr-button[@buttonId=emoticons]');
+			var emoticonButton = instance._location.find('.lfr-button[buttonId=emoticons]');
 			var hoveringOver = false;
 			var offsetHeight = 0;
 			var offsetWidth = 0;

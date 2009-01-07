@@ -318,7 +318,7 @@
 						else {
 							layoutOptions = {
 								boxSelector: '.portlet-boundary',
-								columnSelector: 'div[@id^=layout-column_]',
+								columnSelector: 'div[id^=layout-column_]',
 								freeForm: true
 							};
 						}

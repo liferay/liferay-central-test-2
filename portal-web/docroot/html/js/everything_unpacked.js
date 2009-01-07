@@ -7509,7 +7509,7 @@ Liferay.AutoFields = Liferay.Observable.extend({
 		);
 
 		if (options.fieldIndexes) {
-			instance._fieldIndexes = jQuery('[@name=' + options.fieldIndexes + ']');
+			instance._fieldIndexes = jQuery('[name=' + options.fieldIndexes + ']');
 
 			if (!instance._fieldIndexes.length) {
 				instance._fieldIndexes = jQuery('<input name="' + options.fieldIndexes + '" type="hidden" />')
@@ -8020,7 +8020,7 @@ Liferay.DynamicSelect = new Class({
 		selectOptions = selectOptions.join('');
 
 		select.html(selectOptions);
-		select.find('option[@value=' + selectVal + ']').attr('selected', 'selected');
+		select.find('option[value=' + selectVal + ']').attr('selected', 'selected');
 
 		if (Liferay.Browser.isIe()) {
 			select.css('width', 'auto');
@@ -8461,7 +8461,7 @@ var LayoutConfiguration = {
 		var instance = this;
 
 		var popup = jQuery('#portal_add_content');
-		var item = popup.find('.lfr-portlet-item[@plid=' + portletData.plid + '][@portletId=' + portletData.portletId + '][@instanceable=false]');
+		var item = popup.find('.lfr-portlet-item[plid=' + portletData.plid + '][portletId=' + portletData.portletId + '][instanceable=false]');
 
 		if (item.is('.lfr-portlet-used')) {
 			item.removeClass('lfr-portlet-used');
@@ -8663,7 +8663,7 @@ Liferay.Notice = new Class({
 	setClosing: function() {
 		var instance = this;
 
-		var staticAlerts = jQuery('.popup-alert-notice, .popup-alert-warning').not('[@dynamic=true]');
+		var staticAlerts = jQuery('.popup-alert-notice, .popup-alert-warning').not('[dynamic=true]');
 
 		if (staticAlerts.length) {
 			instance._useCloseButton = true;
@@ -10276,7 +10276,7 @@ Liferay.TagsCategoriesSelector = new Class({
 		var value = curTagsCategories.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagCategoryPopup).attr('checked', false);
+			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagCategoryPopup).attr('checked', false);
 		}
 
 		instance._update();
@@ -10338,7 +10338,7 @@ Liferay.TagsCategoriesSelector = new Class({
 			function() {
 				instance._curTagsCategories = instance._curTagsCategories.length ? instance._curTagsCategories : [];
 
-				container.find('input[@type=checkbox]').each(
+				container.find('input[type=checkbox]').each(
 					function() {
 						var currentIndex = instance._curTagsCategories.indexOf(this.value);
 						if (this.checked) {
@@ -10652,7 +10652,7 @@ Liferay.TagsEntriesSelector = new Class({
 									curTagsEntries.push(n);
 
 									if (instance._popupVisible) {
-										jQuery('input[@type=checkbox][@value$=' + n + ']', instance.selectTagEntryPopup).attr('checked', true);
+										jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagEntryPopup).attr('checked', true);
 									}
 								}
 							}
@@ -10715,7 +10715,7 @@ Liferay.TagsEntriesSelector = new Class({
 		var value = curTagsEntries.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagEntryPopup).attr('checked', false);
+			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagEntryPopup).attr('checked', false);
 		}
 
 		instance._update();
@@ -10735,7 +10735,7 @@ Liferay.TagsEntriesSelector = new Class({
 			function() {
 				instance._curTagsEntries = instance._curTagsEntries.length ? instance._curTagsEntries : [];
 
-				container.find('input[@type=checkbox]').each(
+				container.find('input[type=checkbox]').each(
 					function() {
 						var currentIndex = instance._curTagsEntries.indexOf(this.value);
 						if (this.checked) {
@@ -11756,7 +11756,7 @@ Liferay.Upload = new Class({
 		var instance = this;
 
 		if (!instance._fallbackIframe) {
-			instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
+			instance._fallbackIframe = instance._fallbackContainer.find('iframe[id$=-iframe]');
 
 			var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
 

@@ -53,7 +53,7 @@ else {
 
 <script type="text/javascript">
 	function <portlet:namespace />getEditorContent() {
-		var xslContent = jQuery('input[@name=<portlet:namespace />xslContent]');
+		var xslContent = jQuery('input[name=<portlet:namespace />xslContent]');
 		var content = decodeURIComponent(xslContent.val());
 
 		if (content == "") {
@@ -83,7 +83,7 @@ else {
 	}
 
 	function <portlet:namespace />updateTemplateXsl() {
-		var xslContent = jQuery('input[@name=<portlet:namespace />xslContent]');
+		var xslContent = jQuery('input[name=<portlet:namespace />xslContent]');
 		var content = '';
 
 		<c:choose>

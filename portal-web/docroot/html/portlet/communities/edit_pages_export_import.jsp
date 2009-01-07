@@ -142,9 +142,9 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 <script type="text/javascript">
 	jQuery(
 		function() {
-			jQuery('.<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])').parent().parent().parent('.<portlet:namespace />handler-control').children('.<portlet:namespace />handler-control').hide();
+			jQuery('.<portlet:namespace />handler-control input[type=checkbox]:not([checked])').parent().parent().parent('.<portlet:namespace />handler-control').children('.<portlet:namespace />handler-control').hide();
 
-			jQuery('.<portlet:namespace />handler-control input[@type=checkbox]').unbind('click.liferay').bind(
+			jQuery('.<portlet:namespace />handler-control input[type=checkbox]').unbind('click.liferay').bind(
 				'click.liferay',
 				function() {
 					var input = jQuery(this).parents('.<portlet:namespace />handler-control:first');

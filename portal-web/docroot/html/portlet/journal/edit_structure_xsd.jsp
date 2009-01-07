@@ -64,7 +64,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 	function <portlet:namespace />updateStructureXsd() {
 		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
 
-		var xsdContent = jQuery('input[@name=<portlet:namespace />xsd]');
+		var xsdContent = jQuery('input[name=<portlet:namespace />xsd]');
 		var content = '';
 
 		<c:choose>

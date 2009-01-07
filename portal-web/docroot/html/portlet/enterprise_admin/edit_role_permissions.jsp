@@ -488,8 +488,8 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 				function() {
 					var form = jQuery("#<portlet:namespace />fm");
 
-					var allBox = form.find("input[@name=<portlet:namespace />actionAllBox]");
-					var inputs = form.find("input[@type=checkbox]").not(allBox);
+					var allBox = form.find("input[name=<portlet:namespace />actionAllBox]");
+					var inputs = form.find("input[type=checkbox]").not(allBox);
 
 					var inputsCount = inputs.length;
 

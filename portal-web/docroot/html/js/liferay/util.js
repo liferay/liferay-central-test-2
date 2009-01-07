@@ -162,19 +162,19 @@ Liferay.Util = {
 	},
 
 	check: function(form, name, checked) {
-		jQuery('input[@name=' + name + ']:checkbox',form).attr('checked', checked);
+		jQuery('input[name=' + name + ']:checkbox',form).attr('checked', checked);
 	},
 
 	checkAll: function(form, name, allBox) {
 		var inputs;
 
 		if (Liferay.Util.isArray(name)) {
-			var names = 'input[@name='+ name.join(']:checkbox,input[@name=') + ']:checkbox';
+			var names = 'input[name='+ name.join(']:checkbox,input[name=') + ']:checkbox';
 
 			inputs = jQuery(names, form);
 		}
 		else {
-			inputs = jQuery('input[@name=' + name + ']:checkbox', form);
+			inputs = jQuery('input[name=' + name + ']:checkbox', form);
 		}
 
 		inputs.attr('checked', allBox.checked);
@@ -186,12 +186,12 @@ Liferay.Util = {
 		var inputs;
 
 		if (Liferay.Util.isArray(name)) {
-			var names = 'input[@name='+ name.join(']:checkbox,input[@name=') + ']:checkbox';
+			var names = 'input[name='+ name.join(']:checkbox,input[name=') + ']:checkbox';
 
 			inputs = jQuery(names, form);
 		}
 		else {
-			inputs = jQuery('input[@name=' + name + ']:checkbox', form);
+			inputs = jQuery('input[name=' + name + ']:checkbox', form);
 		}
 
 		inputs = inputs.not(allBox);
@@ -541,7 +541,7 @@ Liferay.Util = {
 
 	listChecked: function(form) {
 		var s = [];
-		var inputs = jQuery('input[@value!=]:checked:checkbox', form);
+		var inputs = jQuery('input[value!=]:checked:checkbox', form);
 
 		inputs.each(
 			function() {
@@ -554,7 +554,7 @@ Liferay.Util = {
 
 	listCheckedExcept: function(form, except) {
 		var s = [];
-		var inputs = jQuery('input[@value!=][@name!="' + except + '"]:checked:checkbox', form);
+		var inputs = jQuery('input[value!=][name!="' + except + '"]:checked:checkbox', form);
 
 		inputs.each(
 			function() {
@@ -574,7 +574,7 @@ Liferay.Util = {
 			return '';
 		}
 
-		var opts = jQuery(box).find('option[@value!=]');
+		var opts = jQuery(box).find('option[value!=]');
 
 		opts.each(
 			function() {
@@ -592,7 +592,7 @@ Liferay.Util = {
 
 	listUncheckedExcept: function(form, except) {
 		var s = [];
-		var inputs = jQuery('input[@value!=][@name!="' + except + '"]:checkbox:not(:checked)', form);
+		var inputs = jQuery('input[value!=][name!="' + except + '"]:checkbox:not(:checked)', form);
 
 		inputs.each(
 			function() {
@@ -696,7 +696,7 @@ Liferay.Util = {
 			selectEl.find('option:selected').remove();
 		}
 		else {
-			selectEl.find('option[@value=' + value + ']:selected').remove();
+			selectEl.find('option[value=' + value + ']:selected').remove();
 		}
 	},
 
@@ -754,7 +754,7 @@ Liferay.Util = {
 			var el = jQuery('#' + elString);
 
 			if (!el.length) {
-				el = jQuery('textarea[@name=' + elString + ']');
+				el = jQuery('textarea[name=' + elString + ']');
 			}
 
 			if (el.length) {
@@ -885,7 +885,7 @@ Liferay.Util = {
 	},
 
 	setSelectedValue: function(col, value) {
-		jQuery('option[@value=' + value + ']', col).attr('selected', true);
+		jQuery('option[value=' + value + ']', col).attr('selected', true);
 	},
 
 	showCapsLock: function(event, span) {
@@ -1151,7 +1151,7 @@ function submitForm(form, action, singleSubmit) {
 		if ((singleSubmit == null) || singleSubmit) {
 			Liferay.Util.submitCountdown++;
 
-			var inputs = jQuery('input[@type=button], input[@type=reset], input[@type=submit]', form);
+			var inputs = jQuery('input[type=button], input[type=reset], input[type=submit]', form);
 
 			inputs.attr('disabled', true);
 			inputs.fadeTo(50, 0.5);

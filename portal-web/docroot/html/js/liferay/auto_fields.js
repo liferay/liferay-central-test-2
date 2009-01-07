@@ -35,7 +35,7 @@ Liferay.AutoFields = Liferay.Observable.extend({
 		);
 
 		if (options.fieldIndexes) {
-			instance._fieldIndexes = jQuery('[@name=' + options.fieldIndexes + ']');
+			instance._fieldIndexes = jQuery('[name=' + options.fieldIndexes + ']');
 
 			if (!instance._fieldIndexes.length) {
 				instance._fieldIndexes = jQuery('<input name="' + options.fieldIndexes + '" type="hidden" />')

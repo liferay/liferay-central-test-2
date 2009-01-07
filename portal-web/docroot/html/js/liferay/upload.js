@@ -522,7 +522,7 @@ Liferay.Upload = new Class({
 		var instance = this;
 
 		if (!instance._fallbackIframe) {
-			instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
+			instance._fallbackIframe = instance._fallbackContainer.find('iframe[id$=-iframe]');
 
 			var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
 

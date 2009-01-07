@@ -47,7 +47,7 @@ Liferay.TagsCategoriesSelector = new Class({
 		var value = curTagsCategories.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagCategoryPopup).attr('checked', false);
+			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagCategoryPopup).attr('checked', false);
 		}
 
 		instance._update();
@@ -109,7 +109,7 @@ Liferay.TagsCategoriesSelector = new Class({
 			function() {
 				instance._curTagsCategories = instance._curTagsCategories.length ? instance._curTagsCategories : [];
 
-				container.find('input[@type=checkbox]').each(
+				container.find('input[type=checkbox]').each(
 					function() {
 						var currentIndex = instance._curTagsCategories.indexOf(this.value);
 						if (this.checked) {

@@ -464,7 +464,7 @@ Liferay.Tree = new Class({
 			}
 		}
 		else {
-			jQuery('img.select-state[@src*=checked]', treeEl).each(
+			jQuery('img.select-state[src*=checked]', treeEl).each(
 				function(event) {
 					instance._fixParentsOfSelected(this.parentNode);
 				}
@@ -573,8 +573,8 @@ Liferay.Tree = new Class({
 	},
 
 	_hasSelectedChildren: function(currentLi) {
-		var checkedChildren = jQuery('> ul > li > img.select-state[@src*=checked]', currentLi);
-		var checkedCheckedChildren = jQuery('> ul > li > img.select-state[@src*=child_checked]', currentLi);
+		var checkedChildren = jQuery('> ul > li > img.select-state[src*=checked]', currentLi);
+		var checkedCheckedChildren = jQuery('> ul > li > img.select-state[src*=child_checked]', currentLi);
 
 		if (checkedChildren.size() > 0 || checkedCheckedChildren.size() > 0) {
 			return true;
@@ -619,7 +619,7 @@ Liferay.Tree = new Class({
 			}
 			else if (type == 'delete') {
 				var tabLayoutId = item[0]._LFR_layoutId;
-				var treeBranch = tree.find('li[@nodeId=' + tabLayoutId + ']');
+				var treeBranch = tree.find('li[nodeId=' + tabLayoutId + ']');
 
 				treeBranch.remove();
 			}

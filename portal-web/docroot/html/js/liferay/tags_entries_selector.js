@@ -92,7 +92,7 @@ Liferay.TagsEntriesSelector = new Class({
 									curTagsEntries.push(n);
 
 									if (instance._popupVisible) {
-										jQuery('input[@type=checkbox][@value$=' + n + ']', instance.selectTagEntryPopup).attr('checked', true);
+										jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagEntryPopup).attr('checked', true);
 									}
 								}
 							}
@@ -155,7 +155,7 @@ Liferay.TagsEntriesSelector = new Class({
 		var value = curTagsEntries.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagEntryPopup).attr('checked', false);
+			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagEntryPopup).attr('checked', false);
 		}
 
 		instance._update();
@@ -175,7 +175,7 @@ Liferay.TagsEntriesSelector = new Class({
 			function() {
 				instance._curTagsEntries = instance._curTagsEntries.length ? instance._curTagsEntries : [];
 
-				container.find('input[@type=checkbox]').each(
+				container.find('input[type=checkbox]').each(
 					function() {
 						var currentIndex = instance._curTagsEntries.indexOf(this.value);
 						if (this.checked) {

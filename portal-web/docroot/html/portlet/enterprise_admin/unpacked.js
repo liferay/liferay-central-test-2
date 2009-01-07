@@ -29,7 +29,7 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 		);
 
 		if (options.modifiedSections) {
-			instance._modifiedSections = jQuery('[@name=' + options.modifiedSections+ ']');
+			instance._modifiedSections = jQuery('[name=' + options.modifiedSections+ ']');
 
 			if (!instance._modifiedSections.length) {
 				instance._modifiedSections = jQuery('<input name="' + options.modifiedSections+ '" type="hidden" />')
@@ -68,7 +68,7 @@ Liferay.EnterpriseAdmin.FormNavigator = new Class({
 	_revealSection: function(id, currentNavItem) {
 		var instance = this;
 
-		var li = currentNavItem || instance._navigation.find('[@href$=' + id + ']').parent();
+		var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
 
 		id = id.split('#');
 
