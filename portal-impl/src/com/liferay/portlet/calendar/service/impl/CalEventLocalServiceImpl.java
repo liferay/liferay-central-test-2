@@ -122,9 +122,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
- * @author Ganesh Ram
  * @author Samuel Kong
- * 
+ * @author Ganesh Ram
  *
  */
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
@@ -1006,7 +1005,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return false;
 	}
 
-	protected void remindUser(CalEvent event, User user,Calendar startDate) {
+	protected void remindUser(CalEvent event, User user, Calendar startDate) {
 		String remindBy = event.getRemindBy();
 
 		if (remindBy.equals(CalEventImpl.REMIND_BY_NONE)) {
@@ -1143,7 +1142,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			(diff ==
 				(event.getSecondReminder() / CheckEventJob.INTERVAL))) {
 
-			remindUser(event, user,startDate);
+			remindUser(event, user, startDate);
 		}
 	}
 
