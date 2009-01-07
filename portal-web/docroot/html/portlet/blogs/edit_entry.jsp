@@ -169,7 +169,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 				function() {
 					<portlet:namespace />clearSaveDraftIntervalId();
 
-					location.href = '<%= HtmlUtil.escape(redirect) %>';
+					location.href = '<%= UnicodeFormatter.toString(redirect) %>';
 				}
 			);
 
