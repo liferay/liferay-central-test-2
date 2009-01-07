@@ -42,48 +42,6 @@
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
 	</cache>
 	<cache
-		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
-		maxElementsInMemory="10000"
-		eternal="false"
-        timeToIdleSeconds="600"
-		overflowToDisk="false"
-	>
-        <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
-			propertySeparator=","
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
-	</cache>
-	<cache
-		name="com.liferay.portlet.journalcontent.util.JournalContentUtil"
-		maxElementsInMemory="1000"
-		eternal="false"
-		timeToLiveSeconds="3600"
-		overflowToDisk="false"
-	>
-        <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
-			propertySeparator=","
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
-	</cache>
-	<cache
-		name="com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil"
-		maxElementsInMemory="1000"
-		eternal="false"
-		timeToLiveSeconds="3600"
-		overflowToDisk="false"
-	>
-        <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
-			propertySeparator=","
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
-	</cache>
-	<cache
 		name="com.liferay.portal.security.permission.PermissionCacheUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
@@ -102,6 +60,48 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+        <cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
+		maxElementsInMemory="1000"
+		eternal="false"
+		timeToLiveSeconds="3600"
+		overflowToDisk="false"
+	>
+        <cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
+		maxElementsInMemory="10000"
+		eternal="false"
+        timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+        <cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portlet.journalcontent.util.JournalContentUtil"
+		maxElementsInMemory="1000"
+		eternal="false"
+		timeToLiveSeconds="3600"
 		overflowToDisk="false"
 	>
         <cacheEventListenerFactory

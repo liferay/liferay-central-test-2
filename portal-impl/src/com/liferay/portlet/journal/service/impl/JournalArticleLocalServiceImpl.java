@@ -56,7 +56,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -564,7 +564,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		for (long companyId : companyIds) {
-			LayoutCacheUtil.clearCache(companyId);
+			CacheUtil.clearCache(companyId);
 		}
 
 		articles = journalArticleFinder.findByReviewDate(

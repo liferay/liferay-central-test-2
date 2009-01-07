@@ -22,7 +22,7 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
 /**
  * <a href="LayoutSetListener.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +45,7 @@ public class LayoutSetListener extends BaseModelListener {
 		LayoutSet layoutSet = (LayoutSet)model;
 
 		if (!layoutSet.isPrivateLayout()) {
-			LayoutCacheUtil.clearCache(layoutSet.getCompanyId());
+			CacheUtil.clearCache(layoutSet.getCompanyId());
 		}
 	}
 

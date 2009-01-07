@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.layoutcache;
+package com.liferay.portal.servlet.filters.cache;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
@@ -35,15 +35,15 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="LayoutCacheUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Michael Young
  *
  */
-public class LayoutCacheUtil {
+public class CacheUtil {
 
-	public static String CACHE_NAME = LayoutCacheUtil.class.getName();
+	public static String CACHE_NAME = CacheUtil.class.getName();
 
 	public static void clearCache() {
 		MultiVMPoolUtil.clear(CACHE_NAME);
@@ -108,7 +108,7 @@ public class LayoutCacheUtil {
 		return sb.toString();
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutCacheUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(CacheUtil.class);
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 

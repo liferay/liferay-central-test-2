@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.layoutcache;
+package com.liferay.portal.servlet.filters.cache;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -64,17 +64,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="LayoutCacheFilter.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Javier de Ros
  * @author Raymond Augé
  *
  */
-public class LayoutCacheFilter extends BasePortalFilter {
+public class CacheFilter extends BasePortalFilter {
 
-	public static final String SKIP_FILTER =
-		LayoutCacheFilter.class + "SKIP_FILTER";
+	public static final String SKIP_FILTER = CacheFilter.class + "SKIP_FILTER";
 
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
@@ -86,7 +85,7 @@ public class LayoutCacheFilter extends BasePortalFilter {
 			(_pattern != _PATTERN_LAYOUT) &&
 			(_pattern != _PATTERN_RESOURCE)) {
 
-			_log.error("Layout cache pattern is invalid");
+			_log.error("Cache pattern is invalid");
 		}
 	}
 
@@ -253,12 +252,14 @@ public class LayoutCacheFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isCacheable(long companyId, HttpServletRequest request) {
-		if (_pattern == _PATTERN_RESOURCE) {
-			return true;
-		}
+	protected boolean isCacheableData(
+		long companyId, HttpServletRequest request) {
 
 		try {
+			if (_pattern == _PATTERN_RESOURCE) {
+				return true;
+			}
+
 			long plid = getPlid(
 				companyId, request.getPathInfo(), request.getServletPath(),
 				ParamUtil.getLong(request, "p_l_id"));
@@ -294,9 +295,36 @@ public class LayoutCacheFilter extends BasePortalFilter {
 					}
 				}
 			}
+
+			return true;
 		}
 		catch (Exception e) {
 			return false;
+		}
+	}
+
+	protected boolean isCacheableRequest(HttpServletRequest request) {
+		String portletId = ParamUtil.getString(request, "p_p_id");
+
+		if (Validator.isNotNull(portletId)) {
+			return false;
+		}
+
+		if ((_pattern == _PATTERN_FRIENDLY) || (_pattern == _PATTERN_LAYOUT)) {
+			long userId = PortalUtil.getUserId(request);
+			String remoteUser = request.getRemoteUser();
+
+			if ((userId > 0) || Validator.isNotNull(remoteUser)) {
+				return false;
+			}
+		}
+
+		if (_pattern == _PATTERN_LAYOUT) {
+			String plid = ParamUtil.getString(request, "p_l_id");
+
+			if (Validator.isNull(plid)) {
+				return false;
+			}
 		}
 
 		return true;
@@ -314,57 +342,12 @@ public class LayoutCacheFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isLayout(HttpServletRequest request) {
-		if ((_pattern == _PATTERN_FRIENDLY) ||
-			(_pattern == _PATTERN_RESOURCE)) {
-
-			return true;
-		}
-
-		String plid = ParamUtil.getString(request, "p_l_id");
-
-		if (Validator.isNotNull(plid)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	protected boolean isPortletRequest(HttpServletRequest request) {
-		String portletId = ParamUtil.getString(request, "p_p_id");
-
-		if (Validator.isNull(portletId)) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	protected boolean isSignedIn(HttpServletRequest request) {
-		if (_pattern == _PATTERN_RESOURCE) {
-			return false;
-		}
-
-		long userId = PortalUtil.getUserId(request);
-		String remoteUser = request.getRemoteUser();
-
-		if ((userId <= 0) && (remoteUser == null)) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws IOException, ServletException {
 
-		if (!isPortletRequest(request) && isLayout(request) &&
-			!isSignedIn(request) && !isInclude(request) &&
+		if (isCacheableRequest(request) && !isInclude(request) &&
 			!isAlreadyFiltered(request)) {
 
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
@@ -373,32 +356,30 @@ public class LayoutCacheFilter extends BasePortalFilter {
 
 			long companyId = PortalInstances.getCompanyId(request);
 
-			CacheResponseData data = LayoutCacheUtil.getCacheResponseData(
+			CacheResponseData data = CacheUtil.getCacheResponseData(
 				companyId, key);
 
 			if (data == null) {
-				if (!isCacheable(companyId, request)) {
+				if (!isCacheableData(companyId, request)) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Layout is not cacheable " + key);
+						_log.debug("Request is not cacheable " + key);
 					}
 
 					processFilter(
-						LayoutCacheFilter.class, request, response,
-						filterChain);
+						CacheFilter.class, request, response, filterChain);
 
 					return;
 				}
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Caching layout " + key);
+					_log.info("Caching request " + key);
 				}
 
 				CacheResponse cacheResponse = new CacheResponse(
 					response, StringPool.UTF8);
 
 				processFilter(
-					LayoutCacheFilter.class, request, cacheResponse,
-					filterChain);
+					CacheFilter.class, request, cacheResponse, filterChain);
 
 				String contentType = cacheResponse.getHeader(
 					HttpHeaders.CONTENT_TYPE);
@@ -419,7 +400,7 @@ public class LayoutCacheFilter extends BasePortalFilter {
 				}
 
 				if (data.getData().length > 0) {
-					LayoutCacheUtil.putCacheResponseData(companyId, key, data);
+					CacheUtil.putCacheResponseData(companyId, key, data);
 				}
 			}
 			else {
@@ -437,11 +418,10 @@ public class LayoutCacheFilter extends BasePortalFilter {
 		}
 		else {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Did not request a layout");
+				_log.debug("Request is not cacheable");
 			}
 
-			processFilter(
-				LayoutCacheFilter.class, request, response, filterChain);
+			processFilter(CacheFilter.class, request, response, filterChain);
 		}
 	}
 
@@ -457,7 +437,7 @@ public class LayoutCacheFilter extends BasePortalFilter {
 
 	private static final String _BROWSER_TYPE_OTHER = "other";
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutCacheFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(CacheFilter.class);
 
 	private int _pattern;
 

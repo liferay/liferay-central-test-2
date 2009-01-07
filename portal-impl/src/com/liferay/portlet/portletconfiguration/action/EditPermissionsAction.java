@@ -39,7 +39,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -196,7 +196,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			if (resource.getPrimKey().startsWith(
 					layout.getPlid() + PortletConstants.LAYOUT_SEPARATOR)) {
 
-				LayoutCacheUtil.clearCache(layout.getCompanyId());
+				CacheUtil.clearCache(layout.getCompanyId());
 			}
 		}
 	}

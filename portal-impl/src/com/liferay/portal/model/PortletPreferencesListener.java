@@ -23,7 +23,7 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
 /**
  * <a href="PortletPreferencesListener.java.html"><b><i>View Source</i></b></a>
@@ -50,11 +50,11 @@ public class PortletPreferencesListener extends BaseModelListener {
 				preferences.getPlid());
 
 			if (!layout.isPrivateLayout()) {
-				LayoutCacheUtil.clearCache(layout.getCompanyId());
+				CacheUtil.clearCache(layout.getCompanyId());
 			}
 		}
 		catch (Exception e) {
-			LayoutCacheUtil.clearCache();
+			CacheUtil.clearCache();
 		}
 	}
 

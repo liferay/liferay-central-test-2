@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.servlet.ImageServletToken;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
@@ -68,7 +68,7 @@ public class ImageServletTokenImpl implements ImageServletToken {
 
 		// Layout cache
 
-		LayoutCacheUtil.clearCache();
+		CacheUtil.clearCache();
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {

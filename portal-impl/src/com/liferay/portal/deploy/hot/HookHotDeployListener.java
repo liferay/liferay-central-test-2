@@ -47,7 +47,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.util.PortalInstances;
@@ -805,7 +805,7 @@ public class HookHotDeployListener
 			LanguageUtil.init();
 		}
 
-		LayoutCacheUtil.clearCache();
+		CacheUtil.clearCache();
 	}
 
 	private static final String[] _PROPS_KEYS_EVENTS = new String[] {

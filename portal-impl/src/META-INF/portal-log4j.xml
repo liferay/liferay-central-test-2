@@ -308,15 +308,15 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.cache">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.compression">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.servlet.filters.doubleclick">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.servlet.filters.layoutcache">
 		<priority value="ERROR" />
 	</category>
 

@@ -24,7 +24,7 @@ package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.BaseModelListener;
-import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
@@ -55,7 +55,7 @@ public class JournalArticleListener extends BaseModelListener {
 
 		JournalArticleModel article = (JournalArticleModel)model;
 
-		LayoutCacheUtil.clearCache(article.getCompanyId());
+		CacheUtil.clearCache(article.getCompanyId());
 	}
 
 }
