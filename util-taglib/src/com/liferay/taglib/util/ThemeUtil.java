@@ -25,6 +25,8 @@ package com.liferay.taglib.util;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.velocity.VelocityContext;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -43,14 +45,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 
 /**
  * <a href="ThemeUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
+ * @author Raymond Augé
  *
  */
 public class ThemeUtil {
@@ -162,7 +163,7 @@ public class ThemeUtil {
 
 		String source = sb.toString();
 
-		if (!Velocity.resourceExists(source)) {
+		if (!VelocityEngineUtil.resourceExists(source)) {
 			_log.error(source + " does not exist");
 
 			return null;
@@ -170,18 +171,8 @@ public class ThemeUtil {
 
 		StringWriter sw = new StringWriter();
 
-		VelocityContext velocityContext = null;
-
-		// LEP-6865
-
-		if (_innerVelocityContext == null) {
-			velocityContext = new VelocityContext();
-
-			_innerVelocityContext = velocityContext;
-		}
-		else {
-			velocityContext = new VelocityContext(_innerVelocityContext);
-		}
+		VelocityContext velocityContext =
+			VelocityEngineUtil.getWrappedStandardToolsContext();
 
 		// Velocity variables
 
@@ -207,7 +198,7 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		Velocity.mergeTemplate(source, StringPool.UTF8, velocityContext, sw);
+		VelocityEngineUtil.mergeTemplate(source, velocityContext, sw);
 
 		// Print output
 
@@ -240,7 +231,5 @@ public class ThemeUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeUtil.class);
-
-	private static VelocityContext _innerVelocityContext;
 
 }

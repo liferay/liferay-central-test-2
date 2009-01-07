@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,40 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portal/init.jsp" %>
+package com.liferay.portal.velocity;
 
-<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
+import com.liferay.portal.kernel.velocity.VelocityContext;
 
-<%
-boolean layoutMaximized = layoutTypePortlet.hasStateMax();
+/**
+ * <a href="VelocityContextImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ *
+ */
+public class VelocityContextImpl implements VelocityContext {
 
-if (!layoutMaximized) {
-	String content = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String contentId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
-%>
-
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, contentId, content) %>
-
-<%
-}
-else {
-	String content = null;
-	String contentId = null;
-
-	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "exclusive";
+	public VelocityContextImpl() {
+		_velocityContext = new org.apache.velocity.VelocityContext();
 	}
-	else {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "max";
+
+	public VelocityContextImpl(
+		org.apache.velocity.VelocityContext velocityContext) {
+
+		_velocityContext =
+			new org.apache.velocity.VelocityContext(velocityContext);
 	}
-%>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], contentId, content) %>
+	public Object get(String key) {
+		return _velocityContext.get(key);
+	}
 
-<%
+	public org.apache.velocity.VelocityContext getWrappedVelocityContext() {
+		return _velocityContext;
+	}
+
+	public void put(String key, Object value) {
+		_velocityContext.put(key, value);
+	}
+
+	private org.apache.velocity.VelocityContext _velocityContext;
+
 }
-%>

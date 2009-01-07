@@ -49,9 +49,10 @@
 <%
 try {
 	String content = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT);
+	String contentId = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT_ID);
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, contentId, content) %>
 
 <%
 }

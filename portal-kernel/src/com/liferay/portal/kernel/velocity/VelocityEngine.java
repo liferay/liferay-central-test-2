@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,40 +19,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portal/init.jsp" %>
+package com.liferay.portal.kernel.velocity;
 
-<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
+import java.io.IOException;
+import java.io.Writer;
 
-<%
-boolean layoutMaximized = layoutTypePortlet.hasStateMax();
+import com.liferay.portal.SystemException;
 
-if (!layoutMaximized) {
-	String content = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String contentId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
-%>
+/**
+ * <a href="VelocityEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ *
+ */
+public interface VelocityEngine {
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, contentId, content) %>
+	public void flushTemplate(String resource);
 
-<%
+	public void init();
+
+	public VelocityContext getEmptyContext();
+
+	public VelocityContext getRestrictedToolsContext();
+
+	public VelocityContext getStandardToolsContext();
+
+	public VelocityContext getWrappedRestrictedToolsContext();
+
+	public VelocityContext getWrappedStandardToolsContext();
+
+	public boolean mergeTemplate(
+			String templateId, VelocityContext context, Writer writer)
+		throws SystemException, IOException;
+
+	public boolean mergeTemplate(
+			String templateId, String template, VelocityContext context,
+			Writer writer)
+		throws SystemException, IOException;
+
+	public boolean resourceExists(String resource);
+
 }
-else {
-	String content = null;
-	String contentId = null;
-
-	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "exclusive";
-	}
-	else {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "max";
-	}
-%>
-
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], contentId, content) %>
-
-<%
-}
-%>

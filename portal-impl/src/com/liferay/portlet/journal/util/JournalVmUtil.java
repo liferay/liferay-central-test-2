@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.velocity.VelocityContext;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -36,11 +38,8 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
-import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.CDATAUtil;
@@ -53,8 +52,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.VelocityException;
 
@@ -68,10 +65,6 @@ import org.apache.velocity.exception.VelocityException;
  */
 public class JournalVmUtil {
 
-	public static final String[] _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES =
-		PropsUtil.getArray(
-			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
-
 	public static String transform(
 			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script)
@@ -82,7 +75,8 @@ public class JournalVmUtil {
 		boolean load = false;
 
 		try {
-			VelocityContext context = new VelocityContext();
+			VelocityContext velocityContext =
+				VelocityEngineUtil.getWrappedRestrictedToolsContext();
 
 			Document doc = SAXReaderUtil.read(xml);
 
@@ -91,16 +85,17 @@ public class JournalVmUtil {
 			List<TemplateNode> nodes = _extractDynamicContents(root);
 
 			for (TemplateNode node : nodes) {
-				context.put(node.getName(), node);
+				velocityContext.put(node.getName(), node);
 			}
 
-			context.put("xmlRequest", root.element("request").asXML());
-			context.put(
+			velocityContext.put("xmlRequest", root.element("request").asXML());
+			velocityContext.put(
 				"request", _insertRequestVariables(root.element("request")));
 
 			long companyId = GetterUtil.getLong(tokens.get("company_id"));
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 			long groupId = GetterUtil.getLong(tokens.get("group_id"));
+			String templateId = tokens.get("template_id");
 			String journalTemplatesPath =
 				VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
 					companyId + StringPool.SLASH + groupId;
@@ -108,43 +103,45 @@ public class JournalVmUtil {
 				PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 					StringPool.UNDERLINE;
 
-			context.put("company", company);
-			context.put("companyId", String.valueOf(companyId));
-			context.put("groupId", String.valueOf(groupId));
-			context.put("journalTemplatesPath", journalTemplatesPath);
-			context.put("viewMode", viewMode);
-			context.put("locale", LocaleUtil.fromLanguageId(languageId));
-			context.put(
+			velocityContext.put("company", company);
+			velocityContext.put("companyId", String.valueOf(companyId));
+			velocityContext.put("groupId", String.valueOf(groupId));
+			velocityContext.put("journalTemplatesPath", journalTemplatesPath);
+			velocityContext.put("viewMode", viewMode);
+			velocityContext.put(
+				"locale", LocaleUtil.fromLanguageId(languageId));
+			velocityContext.put(
 				"permissionChecker",
 				PermissionThreadLocal.getPermissionChecker());
-			context.put("randomNamespace", randomNamespace);
-
-			VelocityVariables.insertHelperUtilities(
-				context, _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+			velocityContext.put("randomNamespace", randomNamespace);
 
 			script = _injectEditInPlace(xml, script);
 
 			try {
-				load = Velocity.evaluate(
-					context, output, JournalVmUtil.class.getName(), script);
+				String scriptId = templateId + groupId + companyId;
+
+				load = VelocityEngineUtil.mergeTemplate(
+					scriptId, script, velocityContext, output);
 			}
 			catch (VelocityException ve) {
-				context.put("exception", ve.getMessage());
-				context.put("script", script);
+				velocityContext.put("exception", ve.getMessage());
+				velocityContext.put("script", script);
 
 				if (ve instanceof ParseErrorException) {
 					ParseErrorException pe = (ParseErrorException)ve;
 
-					context.put("column", new Integer(pe.getColumnNumber()));
-					context.put("line", new Integer(pe.getLineNumber()));
+					velocityContext.put(
+						"column", new Integer(pe.getColumnNumber()));
+					velocityContext.put(
+						"line", new Integer(pe.getLineNumber()));
 				}
 
 				String errorTemplate = ContentUtil.get(
 					PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY);
 
-				load = Velocity.evaluate(
-					context, output, JournalVmUtil.class.getName(),
-					errorTemplate);
+				load = VelocityEngineUtil.mergeTemplate(
+					PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY, errorTemplate,
+					velocityContext, output);
 			}
 		}
 		catch (Exception e) {

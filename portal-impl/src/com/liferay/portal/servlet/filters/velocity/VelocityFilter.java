@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.velocity.VelocityContext;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Theme;
@@ -45,7 +47,6 @@ import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.Locale;
@@ -57,9 +58,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 
 /**
  * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
@@ -102,10 +100,12 @@ public class VelocityFilter extends BasePortalFilter {
 			processFilter(
 				VelocityFilter.class, request, cacheResponse, filterChain);
 
-			VelocityContext context = new VelocityContext();
+			VelocityContext velocityContext =
+				VelocityEngineUtil.getWrappedStandardToolsContext();
 
-			StringReader reader = new StringReader(
-				new String(cacheResponse.getData()));
+			String content = new String(cacheResponse.getData());
+			String contentId = completeURL;
+
 			StringWriter writer = new StringWriter();
 
 			ThemeDisplay themeDisplay = null;
@@ -155,12 +155,12 @@ public class VelocityFilter extends BasePortalFilter {
 
 				// Velocity variables
 
-				VelocityVariables.insertVariables(context, request);
+				VelocityVariables.insertVariables(velocityContext, request);
 
 				// Evaluate template
 
-				Velocity.evaluate(
-					context, writer, VelocityFilter.class.getName(), reader);
+				VelocityEngineUtil.mergeTemplate(
+					contentId, content, velocityContext, writer);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

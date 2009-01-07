@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -61,6 +62,12 @@ public class JournalTemplateListener extends BaseModelListener {
 		// Velocity cache
 
 		LiferayResourceCacheUtil.clear();
+
+		// Velocity template cache
+
+		VelocityEngineUtil.flushTemplate(
+			template.getTemplateId() + template.getGroupId() +
+			template.getCompanyId());
 	}
 
 }

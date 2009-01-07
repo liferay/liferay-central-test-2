@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,40 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portal/init.jsp" %>
+package com.liferay.portal.kernel.velocity;
 
-<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
+/**
+ * <a href="VelocityContext.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ *
+ */
+public interface VelocityContext {
 
-<%
-boolean layoutMaximized = layoutTypePortlet.hasStateMax();
+	public Object get(String key);
 
-if (!layoutMaximized) {
-	String content = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String contentId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
-%>
+	public void put(String key, Object value);
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, contentId, content) %>
-
-<%
 }
-else {
-	String content = null;
-	String contentId = null;
-
-	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "exclusive";
-	}
-	else {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "max";
-	}
-%>
-
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], contentId, content) %>
-
-<%
-}
-%>
