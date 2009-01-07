@@ -99,13 +99,9 @@ public class WebDAVServlet extends HttpServlet {
 				storage, request, response, permissionChecker);
 
 			if (_log.isInfoEnabled()) {
-				String requestURI = request.getRequestURI();
-				String method = request.getMethod();
-				String userAgent = request.getHeader("User-agent");
-
-				_log.info("Request URI " + requestURI);
-				_log.info("Method " + method);
-				_log.info("User agent " + userAgent);
+				_log.info("Request URI " + request.getRequestURI());
+				_log.info("Method " + request.getMethod());
+				_log.info("User agent " + request.getHeader("User-agent"));
 			}
 
 			status = method.process(webDavRequest);
