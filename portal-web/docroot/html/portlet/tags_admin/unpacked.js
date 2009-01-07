@@ -724,10 +724,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 						errorKey = 'that-tag-already-exists';
 					}
 					else if (exception.indexOf('EntryNameException') > -1) {
-						errorKey = 'one-of-your-fields-contain-invalid-characters';
+						errorKey = 'one-of-your-fields-contains-invalid-characters';
 					}
 					else if (exception.indexOf('NoSuchVocabularyException') > -1) {
-						errorKey = 'that-vocabulary-does-not-exists';
+						errorKey = 'that-vocabulary-does-not-exist';
 					}
 					else if (exception.indexOf('auth.PrincipalException') > -1) {
 						errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
@@ -810,7 +810,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 						errorKey = 'that-vocabulary-already-exists';
 					}
 					else if (exception.indexOf('VocabularyNameException') > -1) {
-						errorKey = 'one-of-your-fields-contain-invalid-characters';
+						errorKey = 'one-of-your-fields-contains-invalid-characters';
 					}
 					else if (exception.indexOf('NoSuchVocabularyException') > -1) {
 						errorKey = 'that-parent-vocabulary-does-not-exist';
@@ -1445,7 +1445,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 						instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
 					}
 					else if (exception.indexOf('Exception') > -1) {
-						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
+						instance._sendMessage('error', 'one-of-your-fields-contains-invalid-characters');
 					}
 				}
 
