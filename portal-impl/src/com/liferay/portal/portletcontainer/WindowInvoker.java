@@ -486,20 +486,28 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 	}
 
-	//TODO move to utility class
 	private static String _convertElementToString(Element element) {
 		try {
-			TransformerFactory tFactory = TransformerFactory.newInstance();
-			Transformer transformer = tFactory.newTransformer();
+			TransformerFactory transformerFactory =
+				TransformerFactory.newInstance();
+
+			Transformer transformer = transformerFactory.newTransformer();
+
 			transformer.setOutputProperty(
 				OutputKeys.OMIT_XML_DECLARATION, "yes");
+
 			StringWriter sw = new StringWriter();
+
 			transformer.transform(new DOMSource(element), new StreamResult(sw));
+
 			return sw.toString();
 		}
-		catch (TransformerException ex) {
-			_log.warn(ex.toString());
+		catch (TransformerException te) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(te, te);
+			}
 		}
+
 		return null;
 	}
 
@@ -542,25 +550,24 @@ public class WindowInvoker extends InvokerPortletImpl {
 	private List<String> _getMarkupHeaders(
 		ContainerResponse containerResponse) {
 
-		Map<String, List<Element>> elements =
-				containerResponse.getElementProperties();
+		Map<String, List<Element>> elementProperties =
+			containerResponse.getElementProperties();
 
-		List<Element> markupHeadElements = null;
-
-		if (elements != null) {
-			markupHeadElements = elements.get(
-				MimeResponse.MARKUP_HEAD_ELEMENT);
+		if (elementProperties == null) {
+			return null;
 		}
 
-		List<String> markupHeaders = null;
+		List<Element> markupHeadElements = elementProperties.get(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
 
-		if (markupHeadElements != null
-			&& markupHeadElements.size() > 0) {
+		if ((markupHeadElements == null) || markupHeadElements.isEmpty()) {
+			return null;
+		}
 
-			markupHeaders = new ArrayList<String>();
-			for(Element element : markupHeadElements) {
-				markupHeaders.add(_convertElementToString(element));
-			}
+		List<String> markupHeaders = new ArrayList<String>();
+
+		for (Element markupHeadElement : markupHeadElements) {
+			markupHeaders.add(_convertElementToString(markupHeadElement));
 		}
 
 		return markupHeaders;
@@ -795,7 +802,10 @@ public class WindowInvoker extends InvokerPortletImpl {
 			}
 		}
 		catch (Exception e) {
-			_log.warn(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+
 			wsrpUserInfoMap = userInfoMap;
 		}
 
