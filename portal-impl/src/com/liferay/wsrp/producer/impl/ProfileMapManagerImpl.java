@@ -166,13 +166,16 @@ public class ProfileMapManagerImpl implements ProfileMapManager {
 		_portletMap.put(
 			"user.business-info.postal.city", "businessInfo/postal/city");
 		_portletMap.put(
-			"user.business-info.postal.stateprov", "businessInfo/postal/stateprov");
+			"user.business-info.postal.stateprov",
+			"businessInfo/postal/stateprov");
 		_portletMap.put(
-			"user.business-info.postal.postalcode", "businessInfo/postal/postalcode");
+			"user.business-info.postal.postalcode",
+			"businessInfo/postal/postalcode");
 		_portletMap.put(
 			"user.business-info.postal.country", "businessInfo/postal/country");
 		_portletMap.put(
-			"user.business-info.postal.organization", "businessInfo/postal/organization");
+			"user.business-info.postal.organization",
+			"businessInfo/postal/organization");
 		_portletMap.put(
 			"user.business-info.telecom.telephone.intcode",
 			"businessInfo/telecom/telephone/intcode");
