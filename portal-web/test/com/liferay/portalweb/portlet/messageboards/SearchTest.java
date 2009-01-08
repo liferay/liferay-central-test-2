@@ -91,6 +91,7 @@ public class SearchTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Messages']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		assertTrue(selenium.isElementPresent(
+				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
 	}
 }
