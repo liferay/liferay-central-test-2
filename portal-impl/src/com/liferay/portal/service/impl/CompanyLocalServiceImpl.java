@@ -136,7 +136,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
 			}
 
-			String homeURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
+			String homeURL = null;
 			String name = webId;
 			String legalName = null;
 			String legalId = null;

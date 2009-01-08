@@ -779,7 +779,13 @@ public class PortalImpl implements Portal {
 
 		Company company = getCompany(request);
 
-		return portalURL + _pathContext + company.getHomeURL();
+		String homeURL = company.getHomeURL();
+
+		if (Validator.isNull(homeURL)) {
+			homeURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
+		}
+
+		return portalURL + _pathContext + homeURL;
 	}
 
 	public String getHost(HttpServletRequest request) {
