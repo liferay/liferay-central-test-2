@@ -31,6 +31,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.base.PollsQuestionServiceBaseImpl;
+import com.liferay.portlet.polls.service.permission.PollsPermission;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
 import java.util.List;
@@ -51,9 +52,8 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(), PortletKeys.POLLS,
-			ActionKeys.ADD_QUESTION);
+		PollsPermission.check(getPermissionChecker(), 
+			serviceContext.getScopeGroupId(), ActionKeys.ADD_QUESTION);
 
 		return pollsQuestionLocalService.addQuestion(
 			getUserId(), title, description, expirationDateMonth,

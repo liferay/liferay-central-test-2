@@ -330,7 +330,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws SystemException, PortalException {
 
 		long userId = context.getUserId(question.getUserUuid());
-		long plid = context.getPlid();
 
 		Date expirationDate = question.getExpirationDate();
 
@@ -362,7 +361,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setPlid(plid);
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		PollsQuestion existingQuestion = null;
