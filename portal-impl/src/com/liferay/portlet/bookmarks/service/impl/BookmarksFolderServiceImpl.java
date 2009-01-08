@@ -44,8 +44,8 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
-			getPermissionChecker(), serviceContext.getPlid(), parentFolderId,
-			ActionKeys.ADD_FOLDER);
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			parentFolderId, ActionKeys.ADD_FOLDER);
 
 		return bookmarksFolderLocalService.addFolder(
 			getUserId(), parentFolderId, name, description, serviceContext);

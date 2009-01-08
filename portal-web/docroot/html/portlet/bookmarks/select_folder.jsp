@@ -112,7 +112,7 @@ for (int i = 0; i < results.size(); i++) {
 	resultRows.add(row);
 }
 
-boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 %>
 
 <c:if test="<%= showAddFolderButton %>">

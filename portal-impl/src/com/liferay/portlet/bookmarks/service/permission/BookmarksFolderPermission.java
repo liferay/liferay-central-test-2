@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
@@ -42,11 +40,11 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 public class BookmarksFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, long folderId,
+			PermissionChecker permissionChecker, long groupId, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, folderId, actionId)) {
+		if (!contains(permissionChecker, groupId, folderId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -72,13 +70,13 @@ public class BookmarksFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, long folderId,
+			PermissionChecker permissionChecker, long groupId, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		if (folderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			return PortletPermissionUtil.contains(
-				permissionChecker, plid, PortletKeys.BOOKMARKS, actionId);
+			return BookmarksPermission.contains(
+				permissionChecker, groupId, actionId);
 		}
 		else {
 			return contains(permissionChecker, folderId, actionId);

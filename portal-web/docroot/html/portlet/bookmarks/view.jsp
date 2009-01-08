@@ -48,9 +48,25 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
+<%
+String tabsNames = "folders,my-entries,recent-entries";
+
+if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
+	tabsNames += ",permissions";
+}
+%>
+
+<liferay-security:permissionsURL
+	modelResource="com.liferay.portlet.bookmarks"
+	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+	var="permissionsURL"
+/>
+
 <liferay-ui:tabs
-	names="folders,my-entries,recent-entries"
+	names="<%= tabsNames %>"
 	url="<%= portletURL.toString() %>"
+	url3="<%= permissionsURL %>"
 />
 
 <c:choose>
@@ -181,7 +197,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</liferay-ui:search-container-row>
 
 			<%
-			boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+			boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 			boolean showSearch = (results.size() > 0);
 			%>
 

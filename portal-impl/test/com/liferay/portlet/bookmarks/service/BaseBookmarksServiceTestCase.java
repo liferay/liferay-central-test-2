@@ -75,7 +75,6 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(layout.getGroupId());
-		serviceContext.setPlid(layout.getPlid());
 
 		return BookmarksFolderServiceUtil.addFolder(
 			parentFolderId, name, description, serviceContext);
