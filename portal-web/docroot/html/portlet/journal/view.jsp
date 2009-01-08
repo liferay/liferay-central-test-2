@@ -86,10 +86,10 @@ portletURL.setParameter("tabs1", tabs1);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
 <%
-String tabsNames = "articles,structures,templates,feeds,recent";
+String tabs1Names = "articles,structures,templates,feeds,recent";
 
 if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-	tabsNames += ",permissions";
+	tabs1Names += ",permissions";
 }
 %>
 
@@ -101,7 +101,7 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 />
 
 <liferay-ui:tabs
-	names="<%= tabsNames %>"
+	names="<%= tabs1Names %>"
 	url="<%= portletURL.toString() %>"
 	url5="<%= permissionsURL %>"
 />

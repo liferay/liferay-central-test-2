@@ -49,10 +49,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 <input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 <%
-String tabsNames = "folders,my-entries,recent-entries";
+String tabs1Names = "folders,my-entries,recent-entries";
 
 if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-	tabsNames += ",permissions";
+	tabs1Names += ",permissions";
 }
 %>
 
@@ -64,7 +64,7 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 />
 
 <liferay-ui:tabs
-	names="<%= tabsNames %>"
+	names="<%= tabs1Names %>"
 	url="<%= portletURL.toString() %>"
 	url3="<%= permissionsURL %>"
 />

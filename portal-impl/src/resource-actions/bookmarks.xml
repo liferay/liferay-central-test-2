@@ -13,7 +13,7 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
-		<guest-unsupported/>
+		<guest-unsupported />
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.bookmarks</model-name>

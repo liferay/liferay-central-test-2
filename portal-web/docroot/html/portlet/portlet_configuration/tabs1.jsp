@@ -101,41 +101,41 @@ scopeURL.setParameter("portletResource", portletResource);
 
 int pos = 0;
 
-String tabsNames = StringPool.BLANK;
+String tabs1Names = StringPool.BLANK;
 
 if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
-	tabsNames += ",setup";
+	tabs1Names += ",setup";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, configurationURL.toString());
 }
 
 if (portlet.hasMultipleMimeTypes()) {
-	tabsNames += ",supported-clients";
+	tabs1Names += ",supported-clients";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, supportedClientsURL.toString());
 }
 
-tabsNames += ",permissions";
+tabs1Names += ",permissions";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
 
-tabsNames += ",export-import";
+tabs1Names += ",export-import";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
 
-tabsNames += ",sharing";
+tabs1Names += ",sharing";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, sharingURL.toString());
 
 if (portlet.isScopeable()) {
-	tabsNames += ",scope";
+	tabs1Names += ",scope";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, scopeURL.toString());
 }
 
-if (tabsNames.startsWith(",")) {
-	tabsNames = tabsNames.substring(1);
+if (tabs1Names.startsWith(",")) {
+	tabs1Names = tabs1Names.substring(1);
 }
 %>
 
-<liferay-ui:tabs names="<%= tabsNames %>" />
+<liferay-ui:tabs names="<%= tabs1Names %>" />

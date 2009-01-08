@@ -51,10 +51,10 @@ List scores = null;
 <input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 <%
-String tabsNames = "folders,my-images,recent-images";
+String tabs1Names = "folders,my-images,recent-images";
 
 if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-	tabsNames += ",permissions";
+	tabs1Names += ",permissions";
 }
 %>
 
@@ -66,7 +66,7 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 />
 
 <liferay-ui:tabs
-	names="<%= tabsNames %>"
+	names="<%= tabs1Names %>"
 	url="<%= portletURL.toString() %>"
 	url3="<%= permissionsURL %>"
 />
