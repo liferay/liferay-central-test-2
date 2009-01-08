@@ -4,7 +4,6 @@
 	<portlet-resource>
 		<portlet-name>25</portlet-name>
 		<supports>
-			<action-key>ADD_QUESTION</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
@@ -14,9 +13,6 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ADD_QUESTION</action-key>
-		</guest-unsupported>
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.polls</model-name>
