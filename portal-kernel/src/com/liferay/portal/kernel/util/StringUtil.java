@@ -307,21 +307,6 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static String insert(String s, String text, int offset) {
-		if ((s == null) || (text == null)) {
-			return null;
-		}
-
-		try {
-			StringBuilder sb = new StringBuilder(s);
-			sb.insert(offset, text);
-			return sb.toString();
-		}
-		catch (StringIndexOutOfBoundsException siobe) {
-			return null;
-		}
-	}
-
 	public static String lowerCase(String s) {
 		if (s == null) {
 			return null;
