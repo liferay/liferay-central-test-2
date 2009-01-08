@@ -145,13 +145,13 @@ public class TrackbackAction extends PortletAction {
 			userId, blogName, className, classPK, threadId, parentMessageId,
 			title, body, serviceContext);
 
-		String trackbackUrl =
+		String entryURL =
 			themeDisplay.getPortalURL() +
-				PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" +
+				PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/" +
 					entry.getUrlTitle();
 
 		TrackbackVerifierUtil.addNewPost(
-			message.getMessageId(), url, trackbackUrl);
+			message.getMessageId(), url, entryURL);
 
 		sendSuccess(actionResponse);
 	}

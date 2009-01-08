@@ -46,9 +46,9 @@ import org.apache.commons.logging.LogFactory;
 public class TrackbackVerifierUtil {
 
 	public static void addNewPost(
-		long messageId, String url, String trackbackUrl) {
+		long messageId, String url, String entryUrl) {
 
-		_trackbacks.add(new Tuple(messageId, url, trackbackUrl));
+		_trackbacks.add(new Tuple(messageId, url, entryUrl));
 	}
 
 	public static void verifyNewPosts() {
@@ -61,9 +61,9 @@ public class TrackbackVerifierUtil {
 
 			long messageId = (Long)tuple.getObject(0);
 			String url = (String)tuple.getObject(1);
-			String trackbackUrl = (String)tuple.getObject(2);
+			String entryUrl = (String)tuple.getObject(2);
 
-			_verifyPost(messageId, url, trackbackUrl);
+			_verifyPost(messageId, url, entryUrl);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class TrackbackVerifierUtil {
 		throws Exception {
 
 		long messageId = message.getMessageId();
-		String trackbackURL = "/-/blogs/trackback/" + entry.getUrlTitle();
+		String entryURL = "/-/blogs/" + entry.getUrlTitle();
 		String body = message.getBody();
 		String url = null;
 
@@ -94,18 +94,18 @@ public class TrackbackVerifierUtil {
 				companyId);
 
 			if (userId == defaultUserId) {
-				_verifyPost(messageId, url, trackbackURL);
+				_verifyPost(messageId, url, entryURL);
 			}
 		}
 	}
 
 	private static void _verifyPost(
-		long messageId, String url, String trackbackURL) {
+		long messageId, String url, String entryURL) {
 
 		try {
 			String result = HttpUtil.URLtoString(url);
 
-			if (result.contains(trackbackURL)) {
+			if (result.contains(entryURL)) {
 				return;
 			}
 		}
