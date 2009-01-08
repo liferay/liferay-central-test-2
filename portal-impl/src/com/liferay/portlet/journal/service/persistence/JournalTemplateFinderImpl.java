@@ -117,15 +117,7 @@ public class JournalTemplateFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				String replaceWith =
-					"structureId != ? AND structureId IS NOT NULL";
-
-				if (CustomSQLUtil.isVendorOracle()) {
-					replaceWith = "structureId IS NOT NULL";
-				}
-
-				sql = StringUtil.replace(
-					sql, "structureId = ? [$AND_OR_NULL_CHECK$]", replaceWith);
+				sql = replaceStructureIdComparator(sql);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -310,6 +302,20 @@ public class JournalTemplateFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected String replaceStructureIdComparator(String sql) {
+		String replaceWith =
+			"(structureId != ? AND structureId IS NOT NULL) AND";
+
+		if (CustomSQLUtil.isVendorOracle()) {
+			replaceWith = "(structureId IS NOT NULL) AND";
+		}
+
+		return StringUtil.replace(
+			sql,
+			"(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]",
+			replaceWith);
 	}
 
 }
