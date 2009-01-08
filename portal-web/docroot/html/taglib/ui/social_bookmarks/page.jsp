@@ -24,44 +24,44 @@
 
 <%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
 
-<%
-if( typesArray.length > 0 ) {
+<c:if test="<%= typesArray.length > 0 %>">
+
+	<%
 	String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
-%>
+	%>
 
-<div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">
-	<a class="show-bookmarks" href="javascript: ;"><liferay-ui:message key="add-this-to" /><img alt="delicious" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png" width="10" /> <img alt="digg" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png" width="10" /> <img alt="furl" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png" width="10" /></a>
+	<div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">
+		<a class="show-bookmarks" href="javascript: ;"><liferay-ui:message key="add-this-to" /><img alt="delicious" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png" width="10" /> <img alt="digg" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png" width="10" /> <img alt="furl" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png" width="10" /></a>
 
-	<ul class="lfr-component">
+		<ul class="lfr-component">
 
-		<%
-		for (int i = 0; i < typesArray.length; i++) {
-		%>
+			<%
+			for (int i = 0; i < typesArray.length; i++) {
+			%>
 
-			<li>
-				<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-			</li>
+				<li>
+					<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
+				</li>
 
-		<%
-		}
-		%>
+			<%
+			}
+			%>
 
-	</ul>
-</div>
+		</ul>
+	</div>
 
-<script>
-	jQuery(
-		function () {
-			var socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
-			var linkSocialBookmarks = socialBookmarks.find('.show-bookmarks');
+	<script>
+		jQuery(
+			function () {
+				var socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
+				var linkSocialBookmarks = socialBookmarks.find('.show-bookmarks');
 
-			linkSocialBookmarks.click(
-				function(event) {
-					socialBookmarks.toggleClass('visible');
-				}
-			);
-		}
-	);
-</script>
-
-<% } %>
+				linkSocialBookmarks.click(
+					function(event) {
+						socialBookmarks.toggleClass('visible');
+					}
+				);
+			}
+		);
+	</script>
+</c:if>
