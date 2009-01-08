@@ -173,37 +173,6 @@ public class ThemeDeployer extends BaseDeployer {
 		sb.append("<url-pattern>*.js</url-pattern>");
 		sb.append("</filter-mapping>");
 
-		// VelocityFilter
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Velocity Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.velocity.VelocityFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("<init-param>");
-		sb.append("<param-name>pattern</param-name>");
-		sb.append("<param-value>(.+)/css/main.css(.+)</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		/*sb.append("<filter-mapping>");
-		sb.append("<filter-name>Velocity Filter</filter-name>");
-		sb.append("<url-pattern>*.css</url-pattern>");
-
-		if (webXmlVersion > 2.3) {
-			sb.append("<dispatcher>FORWARD</dispatcher>");
-			sb.append("<dispatcher>INCLUDE</dispatcher>");
-			sb.append("<dispatcher>REQUEST</dispatcher>");
-		}
-
-		sb.append("</filter-mapping>");*/
-
 		// ThemeContextListener
 
 		sb.append("<listener>");
