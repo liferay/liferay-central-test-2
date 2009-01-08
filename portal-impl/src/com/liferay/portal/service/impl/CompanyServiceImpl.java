@@ -90,9 +90,10 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 	}
 
 	public Company updateCompany(
-			long companyId, String virtualHost, String mx, String name,
-			String legalName, String legalId, String legalType, String sicCode,
-			String tickerSymbol, String industry, String type, String size)
+			long companyId, String virtualHost, String mx, String urlHome,
+			String name, String legalName, String legalId, String legalType,
+			String sicCode, String tickerSymbol, String industry, String type,
+			String size)
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
@@ -102,8 +103,8 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		}
 
 		return companyLocalService.updateCompany(
-			companyId, virtualHost, mx, name, legalName, legalId, legalType,
-			sicCode, tickerSymbol, industry, type, size);
+			companyId, virtualHost, mx, urlHome, name, legalName, legalId,
+			legalType, sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public void updateDisplay(

@@ -2044,6 +2044,16 @@ public class PortalImpl implements Portal {
 		return UP_TIME;
 	}
 
+	public String getURLHome(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		String portalURL = getPortalURL(request);
+		String contextPath = getPathContext();
+		Company company = getCompany(request);
+
+		return portalURL + contextPath + company.getUrlHome();
+	}
+
 	public String getURLWithSessionId(String url, String sessionId) {
 		if (!PropsValues.SESSION_ENABLE_URL_WITH_SESSION_ID) {
 			return url;

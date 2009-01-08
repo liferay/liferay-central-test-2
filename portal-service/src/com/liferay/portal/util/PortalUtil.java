@@ -618,6 +618,12 @@ public class PortalUtil {
 		return getPortal().getUptime();
 	}
 
+	public static String getURLHome(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return getPortal().getURLHome(request);
+	}
+
 	public static String getURLWithSessionId(String url, String sessionId) {
 		return getPortal().getURLWithSessionId(url, sessionId);
 	}

@@ -220,6 +220,8 @@ public interface PropsKeys {
 
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT = "communities.email.membership.request.subject";
 
+	public static final String COMPANY_DEFAULT_URL_HOME = "company.default.url.home";
+
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
 
 	public static final String COMPANY_LOGIN_PREPOPULATE_DOMAIN = "company.login.prepopulate.domain";

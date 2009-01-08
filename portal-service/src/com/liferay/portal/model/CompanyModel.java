@@ -76,5 +76,9 @@ public interface CompanyModel extends BaseModel {
 
 	public void setLogoId(long logoId);
 
+	public String getUrlHome();
+
+	public void setUrlHome(String urlHome);
+
 	public Company toEscapedModel();
 }

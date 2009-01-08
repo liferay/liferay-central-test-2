@@ -81,9 +81,12 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "mx", new Integer(Types.VARCHAR) },
 			
 
-			{ "logoId", new Integer(Types.BIGINT) }
+			{ "logoId", new Integer(Types.BIGINT) },
+			
+
+			{ "urlHome", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG,urlHome STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -102,6 +105,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		model.setVirtualHost(soapModel.getVirtualHost());
 		model.setMx(soapModel.getMx());
 		model.setLogoId(soapModel.getLogoId());
+		model.setUrlHome(soapModel.getUrlHome());
 
 		return model;
 	}
@@ -212,6 +216,19 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getUrlHome() {
+		return GetterUtil.getString(_urlHome);
+	}
+
+	public void setUrlHome(String urlHome) {
+		if (((urlHome == null) && (_urlHome != null)) ||
+				((urlHome != null) && (_urlHome == null)) ||
+				((urlHome != null) && (_urlHome != null) &&
+				!urlHome.equals(_urlHome))) {
+			_urlHome = urlHome;
+		}
+	}
+
 	public Company toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Company)this;
@@ -229,6 +246,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
 			model.setMx(HtmlUtil.escape(getMx()));
 			model.setLogoId(getLogoId());
+			model.setUrlHome(HtmlUtil.escape(getUrlHome()));
 
 			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
 					new Class[] { Company.class },
@@ -257,6 +275,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		clone.setVirtualHost(getVirtualHost());
 		clone.setMx(getMx());
 		clone.setLogoId(getLogoId());
+		clone.setUrlHome(getUrlHome());
 
 		return clone;
 	}
@@ -316,5 +335,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private String _virtualHost;
 	private String _mx;
 	private long _logoId;
+	private String _urlHome;
 	private transient ExpandoBridge _expandoBridge;
 }

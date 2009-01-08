@@ -206,6 +206,9 @@ public class PropsValues {
 	public static final boolean COMMONS_POOL_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.COMMONS_POOL_ENABLED));
 
+	public static final String COMPANY_DEFAULT_HOME_URL =
+		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_URL_HOME);
+
 	public static final String COMPANY_DEFAULT_WEB_ID =
 		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID);
 

@@ -133,6 +133,7 @@
 		<column name="virtualHost" type="String" />
 		<column name="mx" type="String" />
 		<column name="logoId" type="long" />
+		<column name="urlHome" type="String" />
 
 		<!-- Finder methods -->
 

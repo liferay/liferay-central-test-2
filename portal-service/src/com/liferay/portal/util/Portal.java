@@ -360,6 +360,9 @@ public interface Portal {
 
 	public Date getUptime();
 
+	public String getURLHome(HttpServletRequest request)
+		throws PortalException, SystemException;
+
 	public String getURLWithSessionId(String url, String sessionId);
 
 	public User getUser(HttpServletRequest request)

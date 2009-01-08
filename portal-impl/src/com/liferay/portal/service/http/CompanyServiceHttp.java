@@ -370,10 +370,11 @@ public class CompanyServiceHttp {
 	public static com.liferay.portal.model.Company updateCompany(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String name, java.lang.String legalName,
-		java.lang.String legalId, java.lang.String legalType,
-		java.lang.String sicCode, java.lang.String tickerSymbol,
-		java.lang.String industry, java.lang.String type, java.lang.String size)
+		java.lang.String urlHome, java.lang.String name,
+		java.lang.String legalName, java.lang.String legalId,
+		java.lang.String legalType, java.lang.String sicCode,
+		java.lang.String tickerSymbol, java.lang.String industry,
+		java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -391,58 +392,64 @@ public class CompanyServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = name;
+			Object paramObj3 = urlHome;
 
-			if (name == null) {
+			if (urlHome == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = legalName;
+			Object paramObj4 = name;
 
-			if (legalName == null) {
+			if (name == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = legalId;
+			Object paramObj5 = legalName;
 
-			if (legalId == null) {
+			if (legalName == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = legalType;
+			Object paramObj6 = legalId;
 
-			if (legalType == null) {
+			if (legalId == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = sicCode;
+			Object paramObj7 = legalType;
 
-			if (sicCode == null) {
+			if (legalType == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = tickerSymbol;
+			Object paramObj8 = sicCode;
 
-			if (tickerSymbol == null) {
+			if (sicCode == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = industry;
+			Object paramObj9 = tickerSymbol;
 
-			if (industry == null) {
+			if (tickerSymbol == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = type;
+			Object paramObj10 = industry;
 
-			if (type == null) {
+			if (industry == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = size;
+			Object paramObj11 = type;
+
+			if (type == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = size;
 
 			if (size == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
+				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
@@ -450,7 +457,7 @@ public class CompanyServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;
