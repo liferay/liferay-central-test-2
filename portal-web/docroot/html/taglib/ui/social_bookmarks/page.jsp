@@ -25,7 +25,8 @@
 <%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+if( typesArray.length > 0 ) {
+	String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 %>
 
 <div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">
@@ -62,3 +63,5 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 		}
 	);
 </script>
+
+<% } %>
