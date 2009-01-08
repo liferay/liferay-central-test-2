@@ -37,12 +37,6 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-String trackbackURL = PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" + entry.getUrlTitle();
-
-if (!HttpUtil.hasDomain(trackbackURL)) {
-	trackbackURL = themeDisplay.getPortalURL() + trackbackURL;
-}
-
 pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
@@ -72,7 +66,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 		<liferay-ui:message key="trackback-url" />:
 
 		<liferay-ui:input-resource
-			url="<%= trackbackURL %>"
+			url='<%= themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" + entry.getUrlTitle() %>'
 		/>
 
 		<br /><br />

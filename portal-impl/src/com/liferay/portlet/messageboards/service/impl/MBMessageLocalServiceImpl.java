@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -1425,12 +1424,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		categoryIds.add(category.getCategoryId());
 		categoryIds.addAll(category.getAncestorCategoryIds());
 
-		String messageURL =
-			layoutURL + "/-/message_boards/message/" + message.getMessageId();
+		String messageURL = StringPool.BLANK;
 
-		if (!HttpUtil.hasDomain(messageURL)) {
-			messageURL = portalURL + messageURL;
-		}
+		messageURL =
+			portalURL + layoutURL + "/-/message_boards/message/" +
+				message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.MESSAGE_BOARDS, user);
@@ -1646,13 +1644,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		String portalURL = serviceContext.getPortalURL();
+		String layoutURL = serviceContext.getLayoutURL();
 
 		String blogsEntryURL =
-			serviceContext.getLayoutURL() + "/-/blogs/" + entry.getUrlTitle();
-
-		if (!HttpUtil.hasDomain(blogsEntryURL)) {
-			blogsEntryURL = portalURL + blogsEntryURL;
-		}
+			portalURL + layoutURL + "/-/blogs/" + entry.getUrlTitle();
 
 		User blogsUser = userPersistence.findByPrimaryKey(entry.getUserId());
 		User commentsUser = userPersistence.findByPrimaryKey(userId);

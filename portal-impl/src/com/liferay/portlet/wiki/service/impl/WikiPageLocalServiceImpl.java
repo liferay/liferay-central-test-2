@@ -1150,12 +1150,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String layoutURL = serviceContext.getLayoutURL();
 
 		if (Validator.isNotNull(layoutURL) && Validator.isNotNull(portalURL)) {
-			if (!HttpUtil.hasDomain(layoutURL)) {
-				pageURL = portalURL;
-			}
-
-			pageURL +=
-				layoutURL + "/-/wiki/" + node.getNodeId() + "/" +
+			pageURL =
+				portalURL + layoutURL + "/-/wiki/" + node.getNodeId() + "/" +
 					HttpUtil.encodeURL(page.getTitle());
 		}
 

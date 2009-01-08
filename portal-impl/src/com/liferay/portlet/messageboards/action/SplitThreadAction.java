@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -152,11 +151,8 @@ public class SplitThreadAction extends PortletAction {
 			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
 			String newThreadURL =
-				layoutURL + "/message_boards/message/" + message.getMessageId();
-
-			if (!HttpUtil.hasDomain(newThreadURL)) {
-				newThreadURL = portalURL + newThreadURL;
-			}
+				portalURL + layoutURL + "/message_boards/message/" +
+					message.getMessageId();
 
 			body = StringUtil.replace(
 				body,
