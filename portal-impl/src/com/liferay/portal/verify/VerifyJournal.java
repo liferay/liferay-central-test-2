@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -48,6 +50,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class VerifyJournal extends VerifyProcess {
 
+	public static final long DEFAULT_GROUP_ID = 14;
+
+	public static final int NUM_OF_ARTICLES = GetterUtil.getInteger(
+		PropsUtil.get(VerifyOracle.class.getName()), 5);
+
 	public void verify() throws VerifyException {
 		_log.info("Verifying");
 
@@ -59,7 +66,120 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
+	protected void verifyOracleNewLine() throws Exception {
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		if (!dbUtil.getType().equals(DBUtil.TYPE_ORACLE)) {
+			return;
+		}
+
+		// This is a workaround for a limitation in Oracle sqlldr's inability
+		// insert new line characters for long varchar columns. See
+		// http://forums.liferay.com/index.php?showtopic=2761&hl=oracle for more
+		// information. Check several articles because some articles may not
+		// have new lines.
+
+		boolean checkNewLine = false;
+
+		List<JournalArticle> articles = null;
+
+		if (NUM_OF_ARTICLES <= 0) {
+			checkNewLine = true;
+
+			articles = JournalArticleLocalServiceUtil.getArticles(
+				DEFAULT_GROUP_ID);
+		}
+		else {
+			articles = JournalArticleLocalServiceUtil.getArticles(
+				DEFAULT_GROUP_ID, 0, NUM_OF_ARTICLES);
+		}
+
+		for (JournalArticle article : articles) {
+			String content = article.getContent();
+
+			if ((content != null) && (content.indexOf("\\n") != -1)) {
+				articles = JournalArticleLocalServiceUtil.getArticles(
+					DEFAULT_GROUP_ID);
+
+				for (int j = 0; j < articles.size(); j++) {
+					article = articles.get(j);
+
+					JournalArticleLocalServiceUtil.checkNewLine(
+						article.getGroupId(), article.getArticleId(),
+						article.getVersion());
+				}
+
+				checkNewLine = true;
+
+				break;
+			}
+		}
+
+		// Only process this once
+
+		if (!checkNewLine) {
+			if (_log.isInfoEnabled()) {
+				_log.debug("Do not fix oracle new line");
+			}
+
+			return;
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info("Fix oracle new line");
+			}
+		}
+
+		List<JournalStructure> structures =
+			JournalStructureLocalServiceUtil.getStructures(
+				DEFAULT_GROUP_ID, 0, 1);
+
+		if (structures.size() == 1) {
+			JournalStructure structure = structures.get(0);
+
+			String xsd = structure.getXsd();
+
+			if ((xsd != null) && (xsd.indexOf("\\n") != -1)) {
+				structures = JournalStructureLocalServiceUtil.getStructures(
+					DEFAULT_GROUP_ID);
+
+				for (int i = 0; i < structures.size(); i++) {
+					structure = structures.get(i);
+
+					JournalStructureLocalServiceUtil.checkNewLine(
+						structure.getGroupId(), structure.getStructureId());
+				}
+			}
+		}
+
+		List<JournalTemplate> templates =
+			JournalTemplateLocalServiceUtil.getTemplates(
+				DEFAULT_GROUP_ID, 0, 1);
+
+		if (templates.size() == 1) {
+			JournalTemplate template = templates.get(0);
+
+			String xsl = template.getXsl();
+
+			if ((xsl != null) && (xsl.indexOf("\\n") != -1)) {
+				templates = JournalTemplateLocalServiceUtil.getTemplates(
+					DEFAULT_GROUP_ID);
+
+				for (int i = 0; i < templates.size(); i++) {
+					template = templates.get(i);
+
+					JournalTemplateLocalServiceUtil.checkNewLine(
+						template.getGroupId(), template.getTemplateId());
+				}
+			}
+		}
+	}
+
 	protected void verifyJournal() throws Exception {
+
+		// Oracle new line
+
+		verifyOracleNewLine();
 
 		// Structures
 

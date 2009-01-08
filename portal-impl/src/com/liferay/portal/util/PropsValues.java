@@ -282,6 +282,9 @@ public class PropsValues {
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL =
 		PropsUtil.get(PropsKeys.CUSTOM_SQL_FUNCTION_ISNULL);
 
+	public static final String DATABASE_MYSQL_ENGINE =
+		PropsUtil.get(PropsKeys.DATABASE_MYSQL_ENGINE);
+
 	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX =
 		PropsUtil.get(PropsKeys.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX);
 

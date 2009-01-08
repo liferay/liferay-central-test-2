@@ -24,6 +24,7 @@ package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -97,12 +98,17 @@ public class MySQLUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
+		boolean createTable = false;
+
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
+			if (StringUtil.startsWith(line, "create table")) {
+				createTable = true;
+			}
+			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
@@ -116,6 +122,16 @@ public class MySQLUtil extends DBUtil {
 					"alter table @table@ change column @old-column@ " +
 						"@new-column@ @type@;",
 					REWORD_TEMPLATE, template);
+			}
+
+			int pos = line.indexOf(";");
+
+			if (createTable && (pos != -1)) {
+				createTable = false;
+
+				line =
+					line.substring(0, pos) + " engine " +
+						PropsValues.DATABASE_MYSQL_ENGINE + line.substring(pos);
 			}
 
 			sb.append(line);
