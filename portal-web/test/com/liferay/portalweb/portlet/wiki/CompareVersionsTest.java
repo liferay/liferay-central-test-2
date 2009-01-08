@@ -33,41 +33,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CompareVersionsTest extends BaseTestCase {
 	public void testCompareVersions() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//h1/div/nobr[3]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[3]/a/img"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=History")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_36_rowIds");
@@ -93,43 +64,7 @@ public class CompareVersionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Oh NOES! I've made a minor change. Please revert this!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=History")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=History"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Oh NOES! I've made a minor change. Please revert this!"));
 	}
 }

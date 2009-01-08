@@ -10,7 +10,17 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Add Child Page</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Second Edited Wiki Test</td>
 	<td></td>
 </tr>
 <tr>
@@ -22,6 +32,11 @@
 	<td>waitForElementPresent</td>
 	<td>_36_title</td>
 	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_36_title</td>
+	<td>Delete Me!</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -29,27 +44,17 @@
 	<td>Delete Me!</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_36_content</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_36_content</td>
 	<td>== Delete Me! ==<br /><br />=== Reasons Why to Delete Me ===<br /><br />#This is a test.<br />#I don't like Star Wars.<br />#I put my left sock on before my right sock.</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Delete Me!</td>
 	<td></td>
 </tr>
@@ -59,7 +64,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Reasons Why to Delete Me</td>
 	<td></td>
 </tr>

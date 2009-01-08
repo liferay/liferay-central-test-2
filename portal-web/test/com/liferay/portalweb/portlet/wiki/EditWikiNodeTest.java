@@ -39,7 +39,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Second Wiki Test")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -48,6 +48,12 @@ public class EditWikiNodeTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Manage Wikis']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +61,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -65,8 +71,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a/img"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -85,30 +90,18 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_36_name",
+			RuntimeVariables.replace("Second Edited Wiki Test"));
 		selenium.type("_36_name",
 			RuntimeVariables.replace("Second Edited Wiki Test"));
+		selenium.typeKeys("_36_description",
+			RuntimeVariables.replace("This is a second edited test wiki!"));
 		selenium.type("_36_description",
 			RuntimeVariables.replace("This is a second edited test wiki!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Second Edited Wiki Test"));
 	}
 }

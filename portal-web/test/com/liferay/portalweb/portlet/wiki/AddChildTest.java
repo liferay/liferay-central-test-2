@@ -33,8 +33,27 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddChildTest extends BaseTestCase {
 	public void testAddChild() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
@@ -42,6 +61,8 @@ public class AddChildTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Children"));
-		assertTrue(selenium.isElementPresent("link=Test"));
+		selenium.click(RuntimeVariables.replace("link=Test"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Child Article"));
 	}
 }

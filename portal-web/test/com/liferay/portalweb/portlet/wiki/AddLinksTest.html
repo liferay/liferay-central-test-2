@@ -10,12 +10,22 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//h1/div/nobr[1]/a/img</td>
+	<td>link=Wiki Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h1/div/nobr[1]/a/img</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Second Edited Wiki Test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -26,16 +36,16 @@
 <tr>
 	<td>type</td>
 	<td>_36_content</td>
-	<td><<TableOfContents>><br /><br />== This is a second test article ==<br /><br />====Yes this is a second test article ====<br /><br />I love Liferay! This Wiki has been EDITED!<br /><br />[[Link Me 1]]<br />[[Link Me 2]]</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>&lt;&lt;TableOfContents&gt;&gt;<br /><br />== This is a second test article ==<br /><br />====Yes this is a second test article ====<br /><br />I love Liferay! This Wiki has been EDITED!<br /><br />[[Link Me 1]]<br />[[Link Me 2]]</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -49,13 +59,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//h1/div/nobr[1]/a/img</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//h1/div/nobr[1]/a/img</td>
+	<td>//img[@alt='Edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,18 +74,18 @@
 	<td>Hi Administrator! Hope you are well! Please link me to another page!<br /><br />-testing<br /><br />[[FrontPage]]<br /><br />[[Link Me 2]]</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id="portlet-wrapper-36"]/div[2]/div/div/div[4]/div/p[2]/a</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//p[2]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -94,13 +99,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//h1/div/nobr[1]/a/img</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//h1/div/nobr[1]/a/img</td>
+	<td>//img[@alt='Edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,13 +114,13 @@
 	<td>Hi Administrator!<br /><br />I made another mistake! Oh me. Please link this article to another!<br /><br />-rj<br /><br />[[FrontPage]]<br /><br />[[Link Me 1]]</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

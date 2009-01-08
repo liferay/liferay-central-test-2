@@ -33,6 +33,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddArticleTest extends BaseTestCase {
 	public void testAddArticle() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=This page is empty. Edit it to add some text."));
 		selenium.waitForPageToLoad("30000");
@@ -59,6 +77,5 @@ public class AddArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Wiki Article"));
-		assertTrue(selenium.isTextPresent("this is italics"));
 	}
 }

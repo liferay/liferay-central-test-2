@@ -39,7 +39,7 @@ public class AddWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/nobr/a/img")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,25 +49,10 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//td[1]/nobr/a/img"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Wiki']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("//img[@alt='Manage Wikis']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Wiki']"));
 		selenium.waitForPageToLoad("30000");
 
@@ -87,43 +72,17 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_36_name",
+			RuntimeVariables.replace("Second Wiki Test"));
 		selenium.type("_36_name", RuntimeVariables.replace("Second Wiki Test"));
+		selenium.typeKeys("_36_description",
+			RuntimeVariables.replace("This is a second test wiki!"));
 		selenium.type("_36_description",
 			RuntimeVariables.replace("This is a second test wiki!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Second Wiki Test")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Second Wiki Test"));
 	}
 }

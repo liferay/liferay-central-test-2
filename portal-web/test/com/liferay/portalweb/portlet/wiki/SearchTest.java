@@ -39,6 +39,25 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_36_keywords")) {
 					break;
 				}
@@ -49,12 +68,15 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("test"));
 		selenium.type("_36_keywords", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Main"));
-		selenium.click(RuntimeVariables.replace("link=Main"));
+		assertTrue(selenium.isElementPresent("link=Test"));
+		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("test1"));
+		selenium.type("_36_keywords", RuntimeVariables.replace("test1"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Child Article"));
+		assertFalse(selenium.isElementPresent("link=Test"));
 	}
 }

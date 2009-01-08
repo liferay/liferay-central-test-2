@@ -39,7 +39,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//h1/div/nobr[3]/a/img")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,8 +49,13 @@ public class DeleteArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[3]/a/img"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Recent Changes"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +63,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("//div[2]/ul/li[6]/a")) {
 					break;
 				}
 			}
@@ -68,24 +73,12 @@ public class DeleteArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[6]/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("link=Delete Me!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertFalse(selenium.isElementPresent("link=Delete Me!"));
 	}
 }

@@ -39,7 +39,7 @@ public class EditSecondArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//h1/div/nobr[1]/a/img")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,8 +49,11 @@ public class EditSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectWindow("null");
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,59 +74,12 @@ public class EditSecondArticleTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"I love Liferay! This Wiki has been EDITED!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent(
+				"I love Liferay! This Wiki has been EDITED!"));
 	}
 }

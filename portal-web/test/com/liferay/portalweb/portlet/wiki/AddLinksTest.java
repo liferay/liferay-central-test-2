@@ -39,7 +39,7 @@ public class AddLinksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//h1/div/nobr[1]/a/img")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,11 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,26 +74,11 @@ public class AddLinksTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,24 +98,7 @@ public class AddLinksTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//h1/div/nobr[1]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -148,42 +120,11 @@ public class AddLinksTest extends BaseTestCase {
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing\n\n[[FrontPage]]\n\n[[Link Me 2]]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-36\"]/div[2]/div/div/div[4]/div/p[2]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("//p[2]/a"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -203,24 +144,7 @@ public class AddLinksTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//h1/div/nobr[1]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -242,24 +166,9 @@ public class AddLinksTest extends BaseTestCase {
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj\n\n[[FrontPage]]\n\n[[Link Me 1]]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

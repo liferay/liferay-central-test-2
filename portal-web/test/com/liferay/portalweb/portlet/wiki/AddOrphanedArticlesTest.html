@@ -10,7 +10,17 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Add Child Page</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Second Edited Wiki Test</td>
 	<td></td>
 </tr>
 <tr>
@@ -24,9 +34,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_36_content</td>
-	<td></td>
+	<td>typeKeys</td>
+	<td>_36_title</td>
+	<td>Link Me 1</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,22 +49,17 @@
 	<td>Hi Administrator! Hope you are well! Please link me to another page!<br /><br />-testing</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Link Me 1</td>
 	<td></td>
 </tr>
@@ -74,9 +79,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_36_content</td>
-	<td></td>
+	<td>typeKeys</td>
+	<td>_36_title</td>
+	<td>Link Me 2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -89,22 +94,17 @@
 	<td>Hi Administrator!<br /><br />I made another mistake! Oh me. Please link this article to another!<br /><br />-rj</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Link Me 2</td>
 	<td></td>
 </tr>

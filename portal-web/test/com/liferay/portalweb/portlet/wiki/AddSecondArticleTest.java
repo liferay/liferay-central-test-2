@@ -39,7 +39,7 @@ public class AddSecondArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Second Edited Wiki Test")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,26 +49,10 @@ public class AddSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=This page is empty. Edit it to add some text.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"link=This page is empty. Edit it to add some text."));
 		selenium.waitForPageToLoad("30000");
@@ -92,23 +76,6 @@ public class AddSecondArticleTest extends BaseTestCase {
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a second test article"));

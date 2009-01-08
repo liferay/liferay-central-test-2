@@ -10,17 +10,17 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[1]/nobr/a/img</td>
+	<td>link=Wiki Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//td[1]/nobr/a/img</td>
+	<td>link=Wiki Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Wiki']</td>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Manage Wikis']</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,6 +32,11 @@
 	<td>waitForElementPresent</td>
 	<td>_36_name</td>
 	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_36_name</td>
+	<td>Second Wiki Test</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,14 +44,14 @@
 	<td>Second Wiki Test</td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>_36_description</td>
 	<td>This is a second test wiki!</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>type</td>
+	<td>_36_description</td>
+	<td>This is a second test wiki!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -54,7 +59,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>link=Second Wiki Test</td>
 	<td></td>
 </tr>

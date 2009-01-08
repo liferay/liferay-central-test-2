@@ -38,8 +38,8 @@ public class WikiTests extends BaseTests {
 		addTestSuite(AddArticleTest.class);
 		addTestSuite(AddChildTest.class);
 		addTestSuite(AddCommentTest.class);
-		addTestSuite(SearchTest.class);
 		addTestSuite(EditCommentTest.class);
+		addTestSuite(SearchTest.class);
 		addTestSuite(AddWikiNodeTest.class);
 		addTestSuite(EditWikiNodeTest.class);
 		addTestSuite(AddSecondArticleTest.class);
@@ -55,7 +55,7 @@ public class WikiTests extends BaseTests {
 		addTestSuite(VerifyOrphanedPagesTest.class);
 		addTestSuite(AddLinksTest.class);
 		addTestSuite(VerifyNoOrphanedPagesTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

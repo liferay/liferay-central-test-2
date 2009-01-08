@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
@@ -32,41 +33,130 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
 
-			try {
-				if (selenium.isElementPresent("//div[@id=\"Wiki-Wiki\"]")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Wiki Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click("//div[@id=\"Wiki-Wiki\"]/p/a");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("link=Add Application")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isTextPresent(
-							"This page is empty. Edit it to add some text.")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click("link=Add Application");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//div[@id=\"Wiki-Wiki\"]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click("//div[@id=\"Wiki-Wiki\"]/p/a");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//img[@alt='Manage Wikis']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"//img[@alt='Manage Wikis']"));
+				selenium.waitForPageToLoad("30000");
+
+				boolean ExtraPage = selenium.isElementPresent(
+						"//tr[4]/td[4]/ul/li/strong/span");
+
+				if (!ExtraPage) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//div[2]/ul/li[6]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[6]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 2:
+				selenium.click(RuntimeVariables.replace("link=Main"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
 		}
 	}
 }

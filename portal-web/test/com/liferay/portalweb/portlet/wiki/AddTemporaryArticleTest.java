@@ -39,7 +39,7 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Child Page")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,6 +49,10 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
 
@@ -68,80 +72,16 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_36_title", RuntimeVariables.replace("Delete Me!"));
 		selenium.type("_36_title", RuntimeVariables.replace("Delete Me!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_36_content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"== Delete Me! ==\n\n=== Reasons Why to Delete Me ===\n\n#This is a test.\n#I don't like Star Wars.\n#I put my left sock on before my right sock."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Delete Me!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("link=Delete Me!"));
 		selenium.click(RuntimeVariables.replace("link=Delete Me!"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Reasons Why to Delete Me")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Reasons Why to Delete Me"));
 	}
 }

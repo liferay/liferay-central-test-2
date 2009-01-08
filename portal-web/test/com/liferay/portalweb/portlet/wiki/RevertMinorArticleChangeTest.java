@@ -39,7 +39,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Second Edited Wiki Test")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,62 +49,14 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//h1/div/nobr[3]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[3]/a/img"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=History")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=1.3 (minor-edit)")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -124,24 +76,9 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Revert"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=1.4"));
 		selenium.click(RuntimeVariables.replace("link=FrontPage"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent(

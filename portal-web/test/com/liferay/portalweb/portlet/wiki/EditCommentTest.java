@@ -39,7 +39,7 @@ public class EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=FrontPage")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,42 +49,9 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=FrontPage"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a test Post Reply.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Edit");
+		selenium.click("//td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,24 +92,8 @@ public class EditCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_36_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("This is a test edited post reply!"));
 	}
 }

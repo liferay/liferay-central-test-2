@@ -33,23 +33,11 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MinorArticleChangeTest extends BaseTestCase {
 	public void testMinorArticleChange() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//h1/div/nobr[1]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,25 +58,12 @@ public class MinorArticleChangeTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent(
+				"Oh NOES! I've made a minor change. Please revert this!"));
 	}
 }

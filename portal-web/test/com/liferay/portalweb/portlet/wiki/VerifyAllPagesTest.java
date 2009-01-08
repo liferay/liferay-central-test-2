@@ -39,7 +39,7 @@ public class VerifyAllPagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=All Pages")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,13 +49,14 @@ public class VerifyAllPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=All Pages"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
 		assertTrue(selenium.isElementPresent("link=Link Me 1"));
 		assertTrue(selenium.isElementPresent("link=1.4"));
-		assertTrue(selenium.isElementPresent("link=Second Edited Wiki Test"));
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

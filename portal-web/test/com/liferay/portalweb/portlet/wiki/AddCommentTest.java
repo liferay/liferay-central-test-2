@@ -33,7 +33,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCommentTest extends BaseTestCase {
 	public void testAddComment() throws Exception {
-		selenium.click("link=Post Reply");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -57,6 +75,8 @@ public class AddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test Post Reply."));
 		selenium.click(RuntimeVariables.replace("_36_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("This is a test Post Reply."));
 	}
 }

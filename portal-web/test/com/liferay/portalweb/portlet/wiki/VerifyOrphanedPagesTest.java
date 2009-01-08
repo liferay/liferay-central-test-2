@@ -39,7 +39,7 @@ public class VerifyOrphanedPagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Orphan Pages")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -49,12 +49,14 @@ public class VerifyOrphanedPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Orphan Pages"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=1.4"));
 		assertTrue(selenium.isElementPresent("link=Link Me 1"));
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
-		selenium.click(RuntimeVariables.replace("link=FrontPage"));
-		selenium.waitForPageToLoad("30000");
 	}
 }
