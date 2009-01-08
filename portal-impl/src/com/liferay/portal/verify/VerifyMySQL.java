@@ -24,11 +24,12 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import com.liferay.portal.util.PropsValues;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
