@@ -312,11 +312,11 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.servlet.filters.compression">
+	<category name="com.liferay.portal.servlet.filters.doubleclick">
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.servlet.filters.doubleclick">
+	<category name="com.liferay.portal.servlet.filters.gzip">
 		<priority value="ERROR" />
 	</category>
 

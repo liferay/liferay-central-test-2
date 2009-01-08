@@ -139,7 +139,7 @@ public class VerifyProperties extends VerifyProcess {
 	private static final String[][] _MIGRATED_SYSTEM_KEYS = new String[][] {
 		new String[] {
 			"com.liferay.filters.compression.CompressionFilter",
-			"com.liferay.portal.servlet.filters.compression.CompressionFilter"
+			"com.liferay.portal.servlet.filters.gzip.GZipFilter"
 		},
 		new String[] {
 			"com.liferay.filters.doubleclick.DoubleClickFilter",
@@ -232,6 +232,10 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"amazon.license.3",
 			"amazon.access.key.id"
+		},
+		new String[] {
+			"com.liferay.portal.servlet.filters.compression.CompressionFilter",
+			"com.liferay.portal.servlet.filters.gzip.GZipFilter"
 		},
 		new String[] {
 			"default.guest.friendly.url",

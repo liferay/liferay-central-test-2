@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.servlet.filters.compression.CompressionFilter;
+import com.liferay.portal.servlet.filters.gzip.GZipFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.util.FacebookUtil;
@@ -70,8 +70,7 @@ public class FacebookServlet extends HttpServlet {
 
 				request.setAttribute(
 					WebKeys.FACEBOOK_CANVAS_PAGE_URL, facebookCanvasPageURL);
-				request.setAttribute(
-					CompressionFilter.SKIP_FILTER, Boolean.TRUE);
+				request.setAttribute(GZipFilter.SKIP_FILTER, Boolean.TRUE);
 
 				ServletContext servletContext = getServletContext();
 

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.compression;
+package com.liferay.portal.servlet.filters.gzip;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -36,15 +36,15 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="CompressionStream.java.html"><b><i>View Source</i></b></a>
+ * <a href="GZipStream.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
  *
  */
-public class CompressionStream extends ServletOutputStream {
+public class GZipStream extends ServletOutputStream {
 
-	public CompressionStream(HttpServletResponse response) throws IOException {
+	public GZipStream(HttpServletResponse response) throws IOException {
 		super();
 
 		_response = response;
@@ -142,7 +142,7 @@ public class CompressionStream extends ServletOutputStream {
 
 	private static final String _GZIP = "gzip";
 
-	private static Log _log = LogFactoryUtil.getLog(CompressionStream.class);
+	private static Log _log = LogFactoryUtil.getLog(GZipStream.class);
 
 	private HttpServletResponse _response = null;
 	private ServletOutputStream _output = null;

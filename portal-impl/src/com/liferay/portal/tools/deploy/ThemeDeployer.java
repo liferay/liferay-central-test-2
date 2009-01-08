@@ -96,6 +96,30 @@ public class ThemeDeployer extends BaseDeployer {
 
 		sb.append(extraContent);
 
+		// GZipFilter
+
+		sb.append("<filter>");
+		sb.append("<filter-name>GZip Filter</filter-name>");
+		sb.append("<filter-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>filter-class</param-name>");
+		sb.append("<param-value>");
+		sb.append("com.liferay.portal.servlet.filters.gzip.GZipFilter");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
+
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>GZip Filter</filter-name>");
+		sb.append("<url-pattern>*.css</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>GZip Filter</filter-name>");
+		sb.append("<url-pattern>*.js</url-pattern>");
+		sb.append("</filter-mapping>");
+
 		// HeaderFilter
 
 		sb.append("<filter>");
@@ -146,31 +170,6 @@ public class ThemeDeployer extends BaseDeployer {
 		sb.append("<filter-mapping>");
 		sb.append("<filter-name>Header Filter</filter-name>");
 		sb.append("<url-pattern>*.png</url-pattern>");
-		sb.append("</filter-mapping>");
-
-		// CompressionFilter
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Compression Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append(
-			"com.liferay.portal.servlet.filters.compression.CompressionFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Compression Filter</filter-name>");
-		sb.append("<url-pattern>*.css</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Compression Filter</filter-name>");
-		sb.append("<url-pattern>*.js</url-pattern>");
 		sb.append("</filter-mapping>");
 
 		// ThemeContextListener
