@@ -50,8 +50,9 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PollsPermission.check(getPermissionChecker(), 
-			serviceContext.getScopeGroupId(), ActionKeys.ADD_QUESTION);
+		PollsPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_QUESTION);
 
 		return pollsQuestionLocalService.addQuestion(
 			getUserId(), title, description, expirationDateMonth,

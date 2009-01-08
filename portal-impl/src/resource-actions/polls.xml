@@ -13,6 +13,7 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
+		<guest-unsupported />
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.polls</model-name>

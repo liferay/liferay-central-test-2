@@ -73,7 +73,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 					"ADD_ARTICLE", "ADD_FEED", "ADD_STRUCTURE", "ADD_TEMPLATE",
 					"APPROVE_ARTICLE"
 				});
-			
+
 			updatePortletPermissions(
 				"25", "com.liferay.portlet.polls",
 				new String[] {"ADD_QUESTION"});
