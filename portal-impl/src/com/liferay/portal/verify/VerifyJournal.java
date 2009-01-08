@@ -52,8 +52,7 @@ public class VerifyJournal extends VerifyProcess {
 
 	public static final long DEFAULT_GROUP_ID = 14;
 
-	public static final int NUM_OF_ARTICLES = GetterUtil.getInteger(
-		PropsUtil.get(VerifyOracle.class.getName()), 5);
+	public static final int NUM_OF_ARTICLES = 5;
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying");
