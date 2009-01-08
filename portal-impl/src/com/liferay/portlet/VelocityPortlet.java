@@ -24,10 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.velocity.VelocityContext;
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.velocity.VelocityContextImpl;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portal.velocity.VelocityVariables;
 
@@ -49,6 +46,8 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.context.Context;
 import org.apache.velocity.io.VelocityWriter;
 import org.apache.velocity.runtime.RuntimeSingleton;
 import org.apache.velocity.util.SimplePool;
@@ -163,10 +162,10 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
-	protected VelocityContext getVelocityContext(
+	protected Context getContext(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		VelocityContext context = VelocityEngineUtil.getWrappedStandardToolsContext();
+		Context context = new VelocityContext();
 
 		context.put("portletConfig", getPortletConfig());
 		context.put("portletContext", getPortletContext());
@@ -198,6 +197,8 @@ public class VelocityPortlet extends GenericPortlet {
 			context.put("resourceResponse", portletResponse);
 		}
 
+		VelocityVariables.insertHelperUtilities((VelocityContext)context, null);
+
 		return context;
 	}
 
@@ -220,13 +221,13 @@ public class VelocityPortlet extends GenericPortlet {
 		throws Exception {
 
 		mergeTemplate(
-			template, getVelocityContext(portletRequest, portletResponse),
+			template, getContext(portletRequest, portletResponse),
 			portletRequest, portletResponse);
 	}
 
 	protected void mergeTemplate(
-			Template template, VelocityContext velocityContext,
-			PortletRequest portletRequest, PortletResponse portletResponse)
+			Template template, Context context, PortletRequest portletRequest,
+			PortletResponse portletResponse)
 		throws Exception {
 
 		if (portletResponse instanceof MimeResponse) {
@@ -259,12 +260,7 @@ public class VelocityPortlet extends GenericPortlet {
 				velocityWriter.recycle(output);
 			}
 
-			VelocityContextImpl velocityContextImpl =
-				(VelocityContextImpl)velocityContext;
-
-			template.merge(
-				velocityContextImpl.getWrappedVelocityContext(),
-				velocityWriter);
+			template.merge(context, velocityWriter);
 		}
 		finally {
 			try {

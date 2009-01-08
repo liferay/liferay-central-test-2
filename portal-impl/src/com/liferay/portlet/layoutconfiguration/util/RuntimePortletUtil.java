@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.velocity.VelocityContext;
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -58,12 +56,14 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 
 /**
  * <a href="RuntimePortletUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug�
  *
  */
 public class RuntimePortletUtil {
@@ -190,18 +190,17 @@ public class RuntimePortletUtil {
 	public static String processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String templateId, String content)
+			String content)
 		throws Exception {
 
 		return processTemplate(
-			servletContext, request, response, pageContext, null, templateId,
-			content);
+			servletContext, request, response, pageContext, null, content);
 	}
 
 	public static String processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String portletId, String templateId, String content)
+			String portletId, String content)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
@@ -211,8 +210,18 @@ public class RuntimePortletUtil {
 		TemplateProcessor processor = new TemplateProcessor(
 			servletContext, request, response, portletId);
 
-		VelocityContext velocityContext =
-			VelocityEngineUtil.getWrappedStandardToolsContext();
+		VelocityContext velocityContext = null;
+
+		// LEP-6865
+
+		if (_innerVelocityContext == null) {
+			velocityContext = new VelocityContext();
+
+			_innerVelocityContext = velocityContext;
+		}
+		else {
+			velocityContext = new VelocityContext(_innerVelocityContext);
+		}
 
 		velocityContext.put("processor", processor);
 
@@ -239,8 +248,9 @@ public class RuntimePortletUtil {
 		StringWriter sw = new StringWriter();
 
 		try {
-			VelocityEngineUtil.mergeTemplate(
-				templateId, content, velocityContext, sw);
+			Velocity.evaluate(
+				velocityContext, sw, RuntimePortletUtil.class.getName(),
+				content);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -361,5 +371,7 @@ public class RuntimePortletUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(RuntimePortletUtil.class);
+
+	private static VelocityContext _innerVelocityContext;
 
 }

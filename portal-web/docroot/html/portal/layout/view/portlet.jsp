@@ -29,38 +29,33 @@ if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive() || themeDisplay
 	String ppid = ParamUtil.getString(request, "p_p_id");
 
 	String content = null;
-	String contentId = null;
 
 	if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "exclusive";
 	}
 	else if (themeDisplay.isStatePopUp() || themeDisplay.isWidget()) {
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "pop_up";
 	}
 	else {
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
 		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "max";
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, contentId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
 
 <%
 }
 else {
 	String content = LayoutTemplateLocalServiceUtil.getContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String contentId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
 %>
 
 	<c:if test="<%= PropsValues.TAGS_COMPILER_ENABLED %>">
 		<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
 	</c:if>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, contentId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
 
 <%
 }

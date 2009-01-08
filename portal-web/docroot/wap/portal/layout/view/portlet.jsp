@@ -31,28 +31,24 @@ boolean layoutMaximized = layoutTypePortlet.hasStateMax();
 
 if (!layoutMaximized) {
 	String content = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String contentId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, contentId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
 
 <%
 }
 else {
 	String content = null;
-	String contentId = null;
 
 	if (themeDisplay.isStateExclusive()) {
 		content = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "exclusive";
 	}
 	else {
 		content = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
-		contentId = theme.getThemeId() + "_STANDARD_" + "max";
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], contentId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], content) %>
 
 <%
 }

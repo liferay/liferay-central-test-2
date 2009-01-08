@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
@@ -49,6 +48,7 @@ import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.portal.verify.VerifyProcess;
 
 import java.io.IOException;
@@ -57,15 +57,17 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.runtime.RuntimeConstants;
 
 /**
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
- * @author Raymond Augé
  *
  */
 public class StartupAction extends SimpleAction {
@@ -115,7 +117,45 @@ public class StartupAction extends SimpleAction {
 
 		// Velocity
 
-		VelocityEngineUtil.init();
+		LiferayResourceLoader.setListeners(PropsUtil.getArray(
+			PropsKeys.VELOCITY_ENGINE_RESOURCE_LISTENERS));
+
+		ExtendedProperties props = new ExtendedProperties();
+
+		props.setProperty(RuntimeConstants.RESOURCE_LOADER, "servlet");
+
+		props.setProperty(
+			"servlet." + RuntimeConstants.RESOURCE_LOADER + ".class",
+			LiferayResourceLoader.class.getName());
+
+		props.setProperty(
+			RuntimeConstants.RESOURCE_MANAGER_CLASS,
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER));
+
+		props.setProperty(
+			RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
+
+		props.setProperty(
+			"velocimacro.library",
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
+
+		props.setProperty(
+			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER));
+
+		props.setProperty(
+			"runtime.log.logsystem.log4j.category",
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER_CATEGORY));
+
+		Velocity.setExtendedProperties(props);
+
+		try {
+			Velocity.init();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		// Disable database caching before upgrade
 

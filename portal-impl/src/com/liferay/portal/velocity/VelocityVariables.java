@@ -43,7 +43,6 @@ import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
-import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
@@ -87,6 +86,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.tools.generic.DateTool;
 import org.apache.velocity.tools.generic.EscapeTool;
 import org.apache.velocity.tools.generic.IteratorTool;
@@ -99,7 +99,6 @@ import org.apache.velocity.tools.generic.SortTool;
  * <a href="VelocityVariables.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class VelocityVariables {
@@ -474,6 +473,10 @@ public class VelocityVariables {
 			"pageTitle", request.getAttribute(WebKeys.PAGE_TITLE));
 		velocityContext.put(
 			"pageSubtitle", request.getAttribute(WebKeys.PAGE_SUBTITLE));
+
+		// Helper utilities
+
+		insertHelperUtilities(velocityContext, null);
 
 		// Insert custom vm variables
 
