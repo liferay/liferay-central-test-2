@@ -31,6 +31,12 @@ PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(r
 
 String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(preferences));
 String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(preferences));
+
+String pageURL = PortalUtil.getLayoutURL(layout, themeDisplay);
+
+if (!HttpUtil.hasDomain(pageURL)) {
+	pageURL = themeDisplay.getPortalURL() + pageURL;
+}
 %>
 
 <script type="text/javascript">
@@ -110,7 +116,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 		<b>[$PAGE_URL$]</b>
 	</td>
 	<td>
-		<%= themeDisplay.getPortalURL() %><%= PortalUtil.getLayoutURL(layout, themeDisplay) %>
+		<%= pageURL %>
 	</td>
 </tr>
 <tr>

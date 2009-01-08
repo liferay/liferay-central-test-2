@@ -766,8 +766,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		StringBuilder sb = new StringBuilder();
 
 		String name = group.getDescriptiveName();
-		String url = portalURL + layoutURL + "/-/blogs";
-		String changesURL = portalURL + layoutURL + "/-/blogs/rss";
+
+		String url = layoutURL + "/-/blogs";
+
+		if (!HttpUtil.hasDomain(url)) {
+			url = portalURL + url;
+		}
+
+		String changesURL = url + "/rss";
 
 		sb.append("http://blogsearch.google.com/ping?name=");
 		sb.append(HttpUtil.encodeURL(name));
@@ -869,7 +875,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String excerpt = StringUtil.shorten(
 			HtmlUtil.extractText(entry.getContent()),
 			PropsValues.BLOGS_TRACKBACK_EXCERPT_LENGTH);
-		String url = portalURL + layoutURL + "/-/blogs/" + entry.getUrlTitle();
+
+		String url = layoutURL + "/-/blogs/" + entry.getUrlTitle();
+
+		if (!HttpUtil.hasDomain(url)) {
+			url = portalURL + url;
+		}
 
 		parts.put("title", entry.getTitle());
 		parts.put("excerpt", excerpt);

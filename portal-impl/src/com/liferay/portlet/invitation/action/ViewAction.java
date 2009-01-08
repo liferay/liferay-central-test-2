@@ -26,6 +26,7 @@ import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -109,8 +110,11 @@ public class ViewAction extends PortletAction {
 
 		String portalURL = PortalUtil.getPortalURL(actionRequest);
 
-		String pageURL =
-			portalURL + PortalUtil.getLayoutURL(layout, themeDisplay);
+		String pageURL = PortalUtil.getLayoutURL(layout, themeDisplay);
+
+		if (!HttpUtil.hasDomain(pageURL)) {
+			pageURL = portalURL + pageURL;
+		}
 
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(

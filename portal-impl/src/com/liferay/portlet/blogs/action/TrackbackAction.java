@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -146,9 +147,12 @@ public class TrackbackAction extends PortletAction {
 			title, body, serviceContext);
 
 		String entryURL =
-			themeDisplay.getPortalURL() +
-				PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/" +
-					entry.getUrlTitle();
+			PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/" +
+				entry.getUrlTitle();
+
+		if (!HttpUtil.hasDomain(entryURL)) {
+			entryURL = themeDisplay.getPortalURL() + entryURL;
+		}
 
 		TrackbackVerifierUtil.addNewPost(
 			message.getMessageId(), url, entryURL);

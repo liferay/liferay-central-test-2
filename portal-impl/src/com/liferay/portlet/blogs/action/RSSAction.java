@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -147,9 +148,11 @@ public class RSSAction extends PortletAction {
 		else if (layout != null) {
 			groupId = layout.getGroupId();
 
-			feedURL =
-				themeDisplay.getURLPortal() +
-					PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/rss";
+			feedURL = PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/rss";
+
+			if (!HttpUtil.hasDomain(feedURL)) {
+				feedURL = themeDisplay.getURLPortal() + feedURL;
+			}
 
 			entryURL = feedURL;
 

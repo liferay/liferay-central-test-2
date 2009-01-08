@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -655,8 +654,8 @@ public class PortletURLImpl
 			// the portal URL if the virtual host URL starts with "http://" or
 			// "https://".
 
-			if (!_layoutFriendlyURL.startsWith(Http.HTTP_WITH_SLASH) &&
-				!_layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
+			if (Validator.isNotNull(_layoutFriendlyURL) &&
+				!HttpUtil.hasDomain(_layoutFriendlyURL)) {
 
 				sb.append(portalURL);
 			}

@@ -57,6 +57,10 @@ for (int i = 0; i < results.size(); i++) {
 
 String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/-/blogs/rss";
 
+if (HttpUtil.hasDomain(rssURL)) {
+	rssURL = HttpUtil.removeDomain(rssURL);
+}
+
 if (rssURLParams.length() > 0) {
 	rssURL += "?" + rssURLParams.substring(1);
 }

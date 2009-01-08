@@ -62,6 +62,10 @@ public class DoAsURLTagUtil extends TagSupport {
 			String doAsURL = PortalUtil.getLayoutURL(
 				layout, themeDisplay, false);
 
+			if (HttpUtil.hasDomain(doAsURL)) {
+				doAsURL = HttpUtil.removeDomain(doAsURL);
+			}
+
 			if (doAsUserId <= 0) {
 				doAsUserId = company.getDefaultUser().getUserId();
 			}
