@@ -85,7 +85,7 @@ public class OrganizationFinderImpl
 
 	public int countByKeywords(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String keywords,
+			String parentOrganizationIdComparator, String keywords,
 			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
@@ -107,21 +107,21 @@ public class OrganizationFinderImpl
 		}
 
 		return countByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			names, type, streets, cities, zips, regionId, countryId, params,
 			andOperator);
 	}
 
 	public int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String name, String type,
+			String parentOrganizationIdComparator, String name, String type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws SystemException {
 
 		return countByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			new String[] {name}, type, new String[] {street},
 			new String[] {city}, new String[] {zip}, regionId, countryId,
 			params, andOperator);
@@ -129,7 +129,7 @@ public class OrganizationFinderImpl
 
 	public int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String[] names,
+			String parentOrganizationIdComparator, String[] names,
 			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
@@ -149,7 +149,7 @@ public class OrganizationFinderImpl
 
 				return countByPermissions(
 					companyId, parentOrganizationId,
-					parentOrganizationComparator, names, type, streets,
+					parentOrganizationIdComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
 					groupId.longValue(), andOperator);
 			}
@@ -200,7 +200,7 @@ public class OrganizationFinderImpl
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
-				parentOrganizationComparator);
+				parentOrganizationIdComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -255,7 +255,7 @@ public class OrganizationFinderImpl
 
 	public List<Organization> findByKeywords(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String keywords,
+			String parentOrganizationIdComparator, String keywords,
 			String type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
@@ -278,21 +278,21 @@ public class OrganizationFinderImpl
 		}
 
 		return findByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			names, type, streets, cities, zips, regionId, countryId, params,
 			andOperator, start, end, obc);
 	}
 
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String name, String type,
+			String parentOrganizationIdComparator, String name, String type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			new String[] {name}, type, new String[] {street},
 			new String[] {city}, new String[] {zip}, regionId, countryId,
 			params, andOperator, start, end, obc);
@@ -300,7 +300,7 @@ public class OrganizationFinderImpl
 
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String[] names,
+			String parentOrganizationIdComparator, String[] names,
 			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
@@ -320,7 +320,7 @@ public class OrganizationFinderImpl
 
 				return findByPermissions(
 					companyId, parentOrganizationId,
-					parentOrganizationComparator, names, type, streets,
+					parentOrganizationIdComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
 					groupId.longValue(), andOperator, start, end, obc);
 			}
@@ -371,7 +371,7 @@ public class OrganizationFinderImpl
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
-				parentOrganizationComparator);
+				parentOrganizationIdComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -431,7 +431,7 @@ public class OrganizationFinderImpl
 
 	protected int countByPermissions(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String[] names,
+			String parentOrganizationIdComparator, String[] names,
 			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
 			boolean andOperator)
@@ -497,7 +497,7 @@ public class OrganizationFinderImpl
 				sql, "[$WHERE$]", getWhere("orgGroupPermission"));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
-				parentOrganizationComparator);
+				parentOrganizationIdComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			sb = new StringBuilder();
@@ -596,7 +596,7 @@ public class OrganizationFinderImpl
 
 	protected List<Organization> findByPermissions(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String[] names,
+			String parentOrganizationIdComparator, String[] names,
 			String type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
 			boolean andOperator, int start, int end, OrderByComparator obc)
@@ -662,7 +662,7 @@ public class OrganizationFinderImpl
 				sql, "[$WHERE$]", getWhere("orgGroupPermission"));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
-				parentOrganizationComparator);
+				parentOrganizationIdComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			sb = new StringBuilder();

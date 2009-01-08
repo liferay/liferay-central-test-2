@@ -30,7 +30,7 @@ package com.liferay.portal.service.persistence;
  */
 public interface OrganizationFinder {
 	public int countByKeywords(long companyId, long parentOrganizationId,
-		java.lang.String parentOrganizationComparator,
+		java.lang.String parentOrganizationIdComparator,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params)
@@ -38,7 +38,7 @@ public interface OrganizationFinder {
 
 	public int countByC_PO_N_T_S_C_Z_R_C(long companyId,
 		long parentOrganizationId,
-		java.lang.String parentOrganizationComparator, java.lang.String name,
+		java.lang.String parentOrganizationIdComparator, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
@@ -47,7 +47,7 @@ public interface OrganizationFinder {
 
 	public int countByC_PO_N_T_S_C_Z_R_C(long companyId,
 		long parentOrganizationId,
-		java.lang.String parentOrganizationComparator,
+		java.lang.String parentOrganizationIdComparator,
 		java.lang.String[] names, java.lang.String type,
 		java.lang.String[] streets, java.lang.String[] cities,
 		java.lang.String[] zips, java.lang.Long regionId,
@@ -57,7 +57,7 @@ public interface OrganizationFinder {
 
 	public java.util.List<com.liferay.portal.model.Organization> findByKeywords(
 		long companyId, long parentOrganizationId,
-		java.lang.String parentOrganizationComparator,
+		java.lang.String parentOrganizationIdComparator,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
@@ -66,7 +66,7 @@ public interface OrganizationFinder {
 
 	public java.util.List<com.liferay.portal.model.Organization> findByC_PO_N_T_S_C_Z_R_C(
 		long companyId, long parentOrganizationId,
-		java.lang.String parentOrganizationComparator, java.lang.String name,
+		java.lang.String parentOrganizationIdComparator, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
@@ -76,7 +76,7 @@ public interface OrganizationFinder {
 
 	public java.util.List<com.liferay.portal.model.Organization> findByC_PO_N_T_S_C_Z_R_C(
 		long companyId, long parentOrganizationId,
-		java.lang.String parentOrganizationComparator,
+		java.lang.String parentOrganizationIdComparator,
 		java.lang.String[] names, java.lang.String type,
 		java.lang.String[] streets, java.lang.String[] cities,
 		java.lang.String[] zips, java.lang.Long regionId,

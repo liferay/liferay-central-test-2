@@ -412,16 +412,16 @@ public class OrganizationLocalServiceImpl
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		String parentOrganizationComparator = StringPool.EQUAL;
+		String parentOrganizationIdComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
-			parentOrganizationComparator = StringPool.NOT_EQUAL;
+			parentOrganizationIdComparator = StringPool.NOT_EQUAL;
 		}
 
 		return organizationFinder.findByKeywords(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			keywords, type, regionId, countryId, params, start, end,
 			obc);
 	}
@@ -447,16 +447,16 @@ public class OrganizationLocalServiceImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		String parentOrganizationComparator = StringPool.EQUAL;
+		String parentOrganizationIdComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
-			parentOrganizationComparator = StringPool.NOT_EQUAL;
+			parentOrganizationIdComparator = StringPool.NOT_EQUAL;
 		}
 
 		return organizationFinder.findByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			name, type, street, city, zip, regionId, countryId, params,
 			andOperator, start, end, obc);
 	}
@@ -467,16 +467,16 @@ public class OrganizationLocalServiceImpl
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
-		String parentOrganizationComparator = StringPool.EQUAL;
+		String parentOrganizationIdComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
-			parentOrganizationComparator = StringPool.NOT_EQUAL;
+			parentOrganizationIdComparator = StringPool.NOT_EQUAL;
 		}
 
 		return organizationFinder.countByKeywords(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			keywords, type, regionId, countryId, params);
 	}
 
@@ -487,16 +487,16 @@ public class OrganizationLocalServiceImpl
 			boolean andOperator)
 		throws SystemException {
 
-		String parentOrganizationComparator = StringPool.EQUAL;
+		String parentOrganizationIdComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
-			parentOrganizationComparator = StringPool.NOT_EQUAL;
+			parentOrganizationIdComparator = StringPool.NOT_EQUAL;
 		}
 
 		return organizationFinder.countByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationComparator,
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			name, type, street, city, zip, regionId, countryId, params,
 			andOperator);
 	}
