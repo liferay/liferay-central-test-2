@@ -127,7 +127,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 			<tr>
 				<td class="lfr-label">
-					<liferay-ui:message key="inherit" />
+					<liferay-ui:message key="copy-parent" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="inheritFromParentLayoutId" defaultValue="false" />
