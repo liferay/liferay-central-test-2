@@ -63,13 +63,13 @@
 				Iterator itr = categories.iterator();
 
 				while (itr.hasNext()) {
-					PortletCategory portletCategory = (PortletCategory)itr.next();
+					PortletCategory curPortletCategory = (PortletCategory)itr.next();
 
-					if (portletCategory.getName().equals("category.hidden")) {
+					if (curPortletCategory.getName().equals("category.hidden")) {
 						continue;
 					}
 
-					request.setAttribute(WebKeys.PORTLET_CATEGORY, portletCategory);
+					request.setAttribute(WebKeys.PORTLET_CATEGORY, curPortletCategory);
 				%>
 
 					<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
