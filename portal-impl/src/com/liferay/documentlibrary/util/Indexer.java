@@ -77,12 +77,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries)
+			Date modifiedDate, String[] tagsEntries)
 		throws SearchException {
 
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, new Date(), tagsEntries);
+			properties, modifiedDate, tagsEntries);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -265,19 +265,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addUID(portletId, repositoryId, fileName);
 
 		return doc.get(Field.UID);
-	}
-
-	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries)
-		throws SearchException {
-
-		Date now = new Date();
-
-		updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, now, tagsEntries);
 	}
 
 	public static void updateFile(

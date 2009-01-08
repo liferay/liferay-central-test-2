@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,7 +81,7 @@ public class FileSystemHook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, InputStream is)
+			Date modifiedDate, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -95,7 +96,7 @@ public class FileSystemHook extends BaseHook {
 
 			Indexer.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, tagsEntries);
+				fileEntryId, properties, modifiedDate, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
@@ -268,8 +269,8 @@ public class FileSystemHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			InputStream is)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -284,7 +285,7 @@ public class FileSystemHook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, tagsEntries);
+				fileEntryId, properties, modifiedDate, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();

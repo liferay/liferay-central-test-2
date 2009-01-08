@@ -39,12 +39,6 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
  */
 public class IndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, Query query, int start, int end)
-		throws SearchException {
-
-		return search(companyId, query, null, start, end);
-	}
-
 	public Hits search(
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {

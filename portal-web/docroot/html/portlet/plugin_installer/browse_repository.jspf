@@ -194,7 +194,7 @@ try {
 		String pluginPackageGroupId = doc.get("groupId");
 		String pluginPackageArtifactId = doc.get("artifactId");
 		String pluginPackageAvailableVersion = doc.get("version");
-		Date pluginPackageModifiedDate = doc.getDate("modifiedDate");
+		Date pluginPackageModifiedDate = doc.getDate(Field.MODIFIED);
 		String pluginPackageTags = StringUtil.merge(doc.getValues("tag"), StringPool.COMMA + StringPool.SPACE);
 		String pluginPackageShortDescription = doc.get("shortDescription");
 		String pluginPackageChangeLog = doc.get("changeLog");

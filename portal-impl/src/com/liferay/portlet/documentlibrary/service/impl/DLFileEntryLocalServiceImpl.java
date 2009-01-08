@@ -263,7 +263,8 @@ public class DLFileEntryLocalServiceImpl
 		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name,
-			fileEntryId, fileEntry.getLuceneProperties(), tagsEntries, is);
+			fileEntryId, fileEntry.getLuceneProperties(),
+			fileEntry.getModifiedDate(), tagsEntries, is);
 
 		// Resources
 
@@ -938,7 +939,7 @@ public class DLFileEntryLocalServiceImpl
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getGroupId(), folderId, name, newVersion, name,
 				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-				tagsEntries, is);
+				fileEntry.getModifiedDate(), tagsEntries, is);
 
 			return fileEntry;
 		}
@@ -984,7 +985,7 @@ public class DLFileEntryLocalServiceImpl
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name, newVersion, sourceFileName,
 			fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-			tagsEntries, is);
+			fileEntry.getModifiedDate(), tagsEntries, is);
 
 		// Folder
 

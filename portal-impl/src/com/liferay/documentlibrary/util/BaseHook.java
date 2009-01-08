@@ -36,6 +36,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -55,7 +57,7 @@ public abstract class BaseHook implements Hook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, byte[] bytes)
+			Date modifiedDate, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
 		InputStream is = new ByteArrayInputStream(bytes);
@@ -63,7 +65,7 @@ public abstract class BaseHook implements Hook {
 		try {
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, tagsEntries, is);
+				fileEntryId, properties, modifiedDate, tagsEntries, is);
 		}
 		finally {
 			try {
@@ -78,7 +80,7 @@ public abstract class BaseHook implements Hook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, File file)
+			Date modifiedDate, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -88,7 +90,7 @@ public abstract class BaseHook implements Hook {
 
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, tagsEntries, is);
+				fileEntryId, properties, modifiedDate, tagsEntries, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
@@ -108,7 +110,7 @@ public abstract class BaseHook implements Hook {
 	public abstract void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, InputStream is)
+			Date modifiedDate, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public abstract void checkRoot(long companyId) throws SystemException;
@@ -197,8 +199,8 @@ public abstract class BaseHook implements Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			byte[] bytes)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
 		InputStream is = new ByteArrayInputStream(bytes);
@@ -207,7 +209,7 @@ public abstract class BaseHook implements Hook {
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				versionNumber, sourceFileName, fileEntryId, properties,
-				tagsEntries, is);
+				modifiedDate, tagsEntries, is);
 		}
 		finally {
 			try {
@@ -222,8 +224,8 @@ public abstract class BaseHook implements Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			File file)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -234,7 +236,7 @@ public abstract class BaseHook implements Hook {
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				versionNumber, sourceFileName, fileEntryId, properties,
-				tagsEntries, is);
+				modifiedDate, tagsEntries, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
@@ -254,8 +256,8 @@ public abstract class BaseHook implements Hook {
 	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			InputStream is)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public abstract void updateFile(

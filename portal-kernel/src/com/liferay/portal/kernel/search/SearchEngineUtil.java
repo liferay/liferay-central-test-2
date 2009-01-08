@@ -165,12 +165,12 @@ public class SearchEngineUtil {
 		_searchPermissionChecker = searchPermissionChecker;
 	}
 
-	private static String _defaultSearchEngineName;
-	private static SearchEngine _searchEngine;
-	private static SearchPermissionChecker _searchPermissionChecker;
-
 	private static final Sort[] _DEFAULT_SORT = new Sort[] {
 		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
 	};
+
+	private static String _defaultSearchEngineName;
+	private static SearchEngine _searchEngine;
+	private static SearchPermissionChecker _searchPermissionChecker;
 
 }

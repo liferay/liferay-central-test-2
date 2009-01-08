@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.search.Hits;
 import java.io.File;
 import java.io.InputStream;
 
+import java.util.Date;
+
 /**
  * <a href="DLLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,12 +42,12 @@ public class DLLocalServiceUtil {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, InputStream is)
+			Date modifiedDate, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		_service.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, tagsEntries, is);
+			properties, modifiedDate, tagsEntries, is);
 	}
 
 	public static void checkRoot(long companyId) throws SystemException {
@@ -97,14 +99,14 @@ public class DLLocalServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			InputStream is)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties, tagsEntries,
-			is);
+			versionNumber, sourceFileName, fileEntryId, properties,
+			modifiedDate, tagsEntries, is);
 	}
 
 	public static void validate(String fileName, File file)

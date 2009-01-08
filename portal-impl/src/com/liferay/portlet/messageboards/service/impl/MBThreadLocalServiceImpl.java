@@ -469,7 +469,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			dlService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				newAttachmentsDir + "/" + name, 0, StringPool.BLANK,
-				new String[0], fileBytes);
+				message.getModifiedDate(), new String[0], fileBytes);
 
 			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
 		}

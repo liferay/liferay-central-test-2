@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.search.SearchException;
 import java.io.File;
 import java.io.InputStream;
 
+import java.util.Date;
+
 /**
  * <a href="Hook.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,19 +47,19 @@ public interface Hook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, byte[] bytes)
+			Date modifiedDate, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, File file)
+			Date modifiedDate, String[] tagsEntries, File file)
 		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			String[] tagsEntries, InputStream is)
+			Date modifiedDate, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -113,22 +115,22 @@ public interface Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			byte[] bytes)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			File file)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, File file)
 		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, String[] tagsEntries,
-			InputStream is)
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public void updateFile(

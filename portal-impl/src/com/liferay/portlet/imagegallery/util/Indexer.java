@@ -80,6 +80,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addUID(PORTLET_ID, imageId);
 
+		doc.addModifiedDate(modifiedDate);
+
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
@@ -87,8 +89,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.TITLE, name);
 		doc.addText(Field.DESCRIPTION, description);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
-
-		doc.addModifiedDate(modifiedDate);
 
 		doc.addKeyword("folderId", folderId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
