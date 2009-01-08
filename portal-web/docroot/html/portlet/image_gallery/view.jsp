@@ -50,9 +50,25 @@ List scores = null;
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
+<%
+String tabsNames = "folders,my-images,recent-images";
+
+if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
+	tabsNames += ",permissions";
+}
+%>
+
+<liferay-security:permissionsURL
+	modelResource="com.liferay.portlet.imagegallery"
+	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+	var="permissionsURL"
+/>
+
 <liferay-ui:tabs
-	names="folders,my-images,recent-images"
+	names="<%= tabsNames %>"
 	url="<%= portletURL.toString() %>"
+	url3="<%= permissionsURL %>"
 />
 
 <c:choose>
@@ -184,7 +200,7 @@ List scores = null;
 			resultRows.add(row);
 		}
 
-		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 		boolean showSearch = (results.size() > 0);
 		%>
 

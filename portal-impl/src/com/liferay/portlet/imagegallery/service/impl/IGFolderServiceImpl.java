@@ -47,6 +47,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="IGFolderServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
@@ -57,8 +58,8 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
-			getPermissionChecker(), serviceContext.getPlid(), parentFolderId,
-			ActionKeys.ADD_FOLDER);
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			parentFolderId, ActionKeys.ADD_FOLDER);
 
 		return igFolderLocalService.addFolder(
 			getUserId(), parentFolderId, name, description, serviceContext);
@@ -185,9 +186,6 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			file.delete();
 		}
 
-		long destPlid = layoutLocalService.getDefaultPlid(
-			destFolder.getGroupId());
-
 		List<IGFolder> srcSubfolders = getFolders(
 			srcFolder.getGroupId(), srcFolder.getFolderId());
 
@@ -196,7 +194,6 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			String description = srcSubfolder.getDescription();
 
 			serviceContext.setScopeGroupId(srcFolder.getGroupId());
-			serviceContext.setPlid(destPlid);
 
 			IGFolder destSubfolder = addFolder(
 				destFolder.getFolderId(), name, description, serviceContext);

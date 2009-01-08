@@ -60,6 +60,10 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				new String[] {"ADD_FOLDER"});
 
 			updatePortletPermissions(
+				"31", "com.liferay.portlet.imagegallery",
+				new String[] {"ADD_FOLDER"});
+
+			updatePortletPermissions(
 				"15", "com.liferay.portlet.journal",
 				new String[] {
 					"ADD_ARTICLE", "ADD_FEED", "ADD_STRUCTURE", "ADD_TEMPLATE",

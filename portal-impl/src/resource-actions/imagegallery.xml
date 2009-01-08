@@ -19,6 +19,20 @@
 		</guest-unsupported>
 	</portlet-resource>
 	<model-resource>
+		<model-name>com.liferay.portlet.imagegallery</model-name>
+		<portlet-ref>
+			<portlet-name>31</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ADD_FOLDER</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ADD_FOLDER</action-key>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
 		<model-name>com.liferay.portlet.imagegallery.model.IGFolder</model-name>
 		<portlet-ref>
 			<portlet-name>31</portlet-name>

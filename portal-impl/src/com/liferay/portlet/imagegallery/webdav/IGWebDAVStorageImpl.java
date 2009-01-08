@@ -90,7 +90,6 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			IGFolder folder = (IGFolder)resource.getModel();
 
 			long groupId = WebDAVUtil.getGroupId(destination);
-			long plid = getPlid(groupId);
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = folder.getDescription();
 			boolean addCommunityPermissions = true;
@@ -108,7 +107,6 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 			serviceContext.setAddGuestPermissions(addGuestPermissions);
-			serviceContext.setPlid(plid);
 			serviceContext.setScopeGroupId(groupId);
 
 			if (depth == 0) {
