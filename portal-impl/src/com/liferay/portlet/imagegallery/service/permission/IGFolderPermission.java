@@ -74,7 +74,6 @@ public class IGFolderPermission {
 		throws PortalException, SystemException {
 
 		if (folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-
 			return IGPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
