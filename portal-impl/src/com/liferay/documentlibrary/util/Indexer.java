@@ -148,7 +148,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			return getFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntry.getFileEntryId(), properties,
-				fileEntry.getModifiedDate(),  tagsEntries);
+				fileEntry.getModifiedDate(), tagsEntries);
 		}
 		catch (PortalException pe) {
 			throw new SearchException(pe.getMessage());
