@@ -58,8 +58,8 @@ public class CompanyJSONSerializer {
 		jsonObj.put("key", model.getKey());
 		jsonObj.put("virtualHost", model.getVirtualHost());
 		jsonObj.put("mx", model.getMx());
+		jsonObj.put("homeURL", model.getHomeURL());
 		jsonObj.put("logoId", model.getLogoId());
-		jsonObj.put("urlHome", model.getUrlHome());
 
 		return jsonObj;
 	}

@@ -81,12 +81,12 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "mx", new Integer(Types.VARCHAR) },
 			
 
-			{ "logoId", new Integer(Types.BIGINT) },
+			{ "homeURL", new Integer(Types.VARCHAR) },
 			
 
-			{ "urlHome", new Integer(Types.VARCHAR) }
+			{ "logoId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG,urlHome STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,homeURL VARCHAR(75) null,logoId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -104,8 +104,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 		model.setKey(soapModel.getKey());
 		model.setVirtualHost(soapModel.getVirtualHost());
 		model.setMx(soapModel.getMx());
+		model.setHomeURL(soapModel.getHomeURL());
 		model.setLogoId(soapModel.getLogoId());
-		model.setUrlHome(soapModel.getUrlHome());
 
 		return model;
 	}
@@ -206,6 +206,19 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getHomeURL() {
+		return GetterUtil.getString(_homeURL);
+	}
+
+	public void setHomeURL(String homeURL) {
+		if (((homeURL == null) && (_homeURL != null)) ||
+				((homeURL != null) && (_homeURL == null)) ||
+				((homeURL != null) && (_homeURL != null) &&
+				!homeURL.equals(_homeURL))) {
+			_homeURL = homeURL;
+		}
+	}
+
 	public long getLogoId() {
 		return _logoId;
 	}
@@ -213,19 +226,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public void setLogoId(long logoId) {
 		if (logoId != _logoId) {
 			_logoId = logoId;
-		}
-	}
-
-	public String getUrlHome() {
-		return GetterUtil.getString(_urlHome);
-	}
-
-	public void setUrlHome(String urlHome) {
-		if (((urlHome == null) && (_urlHome != null)) ||
-				((urlHome != null) && (_urlHome == null)) ||
-				((urlHome != null) && (_urlHome != null) &&
-				!urlHome.equals(_urlHome))) {
-			_urlHome = urlHome;
 		}
 	}
 
@@ -245,8 +245,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 			model.setKey(HtmlUtil.escape(getKey()));
 			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
 			model.setMx(HtmlUtil.escape(getMx()));
+			model.setHomeURL(HtmlUtil.escape(getHomeURL()));
 			model.setLogoId(getLogoId());
-			model.setUrlHome(HtmlUtil.escape(getUrlHome()));
 
 			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
 					new Class[] { Company.class },
@@ -274,8 +274,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 		clone.setKey(getKey());
 		clone.setVirtualHost(getVirtualHost());
 		clone.setMx(getMx());
+		clone.setHomeURL(getHomeURL());
 		clone.setLogoId(getLogoId());
-		clone.setUrlHome(getUrlHome());
 
 		return clone;
 	}
@@ -334,7 +334,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private String _key;
 	private String _virtualHost;
 	private String _mx;
+	private String _homeURL;
 	private long _logoId;
-	private String _urlHome;
 	private transient ExpandoBridge _expandoBridge;
 }

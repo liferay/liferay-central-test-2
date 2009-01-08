@@ -97,7 +97,7 @@ public class CompanyServiceUtil {
 
 	public static com.liferay.portal.model.Company updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String urlHome, java.lang.String name,
+		java.lang.String homeURL, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
 		java.lang.String tickerSymbol, java.lang.String industry,
@@ -105,7 +105,7 @@ public class CompanyServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateCompany(companyId, virtualHost, mx, urlHome, name,
+				   .updateCompany(companyId, virtualHost, mx, homeURL, name,
 			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
 			type, size);
 	}

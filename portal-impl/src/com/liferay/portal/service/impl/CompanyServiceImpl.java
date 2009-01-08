@@ -90,7 +90,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 	}
 
 	public Company updateCompany(
-			long companyId, String virtualHost, String mx, String urlHome,
+			long companyId, String virtualHost, String mx, String homeURL,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
 			String size)
@@ -103,7 +103,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		}
 
 		return companyLocalService.updateCompany(
-			companyId, virtualHost, mx, urlHome, name, legalName, legalId,
+			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 			legalType, sicCode, tickerSymbol, industry, type, size);
 	}
 

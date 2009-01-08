@@ -1429,7 +1429,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLCurrent(currentURL);
 
-		String urlHome = PortalUtil.getURLHome(request);
+		String urlHome = PortalUtil.getHomeURL(request);
 
 		themeDisplay.setURLHome(urlHome);
 

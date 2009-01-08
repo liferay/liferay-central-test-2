@@ -183,8 +183,8 @@ create table Company (
 	key_ TEXT null,
 	virtualHost VARCHAR(75) null,
 	mx VARCHAR(75) null,
-	logoId LONG,
-	urlHome STRING null
+	homeURL VARCHAR(75) null,
+	logoId LONG
 );
 
 create table Contact_ (

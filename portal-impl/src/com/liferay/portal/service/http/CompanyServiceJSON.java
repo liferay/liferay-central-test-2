@@ -135,7 +135,7 @@ public class CompanyServiceJSON {
 
 	public static JSONObject updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String urlHome, java.lang.String name,
+		java.lang.String homeURL, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
 		java.lang.String tickerSymbol, java.lang.String industry,
@@ -143,7 +143,7 @@ public class CompanyServiceJSON {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-				virtualHost, mx, urlHome, name, legalName, legalId, legalType,
+				virtualHost, mx, homeURL, name, legalName, legalId, legalType,
 				sicCode, tickerSymbol, industry, type, size);
 
 		return CompanyJSONSerializer.toJSONObject(returnValue);

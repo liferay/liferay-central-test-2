@@ -33,13 +33,13 @@
 // To work around this issue, we use a URL without a session id for meta-refresh
 // and rely on the load event on the body element to properly rewrite the URL.
 
-String mainPath = PortalUtil.getPathMain();
+String homeURL = PortalUtil.getHomeURL(request);
 
 if (!request.isRequestedSessionIdFromCookie()) {
-	mainPath = PortalUtil.getURLWithSessionId(mainPath, session.getId());
+	homeURL = PortalUtil.getURLWithSessionId(homeURL, session.getId());
 }
 
-response.setHeader(HttpHeaders.LOCATION, mainPath);
+response.setHeader(HttpHeaders.LOCATION, homeURL);
 response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
 
 response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
@@ -48,10 +48,10 @@ response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 <html>
 <head>
 	<title></title>
-	<meta content="1; url=<%= PortalUtil.getPathMain() %>" http-equiv="refresh" />
+	<meta content="1; url=<%= homeURL %>" http-equiv="refresh" />
 </head>
 
-<body onload="javascript: location.replace('<%= mainPath %>')">
+<body onload="javascript: location.replace('<%= homeURL %>')">
 
 <!--
 The numbers below are used to fill up space so that this works properly in IE.

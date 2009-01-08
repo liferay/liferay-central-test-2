@@ -75,8 +75,8 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		newCompany.setKey(randomString());
 		newCompany.setVirtualHost(randomString());
 		newCompany.setMx(randomString());
+		newCompany.setHomeURL(randomString());
 		newCompany.setLogoId(nextLong());
-		newCompany.setUrlHome(randomString());
 
 		_persistence.update(newCompany, false);
 
@@ -89,8 +89,8 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingCompany.getVirtualHost(),
 			newCompany.getVirtualHost());
 		assertEquals(existingCompany.getMx(), newCompany.getMx());
+		assertEquals(existingCompany.getHomeURL(), newCompany.getHomeURL());
 		assertEquals(existingCompany.getLogoId(), newCompany.getLogoId());
-		assertEquals(existingCompany.getUrlHome(), newCompany.getUrlHome());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -139,8 +139,8 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		company.setKey(randomString());
 		company.setVirtualHost(randomString());
 		company.setMx(randomString());
+		company.setHomeURL(randomString());
 		company.setLogoId(nextLong());
-		company.setUrlHome(randomString());
 
 		_persistence.update(company, false);
 

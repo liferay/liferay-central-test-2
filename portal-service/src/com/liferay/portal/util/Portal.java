@@ -155,6 +155,9 @@ public interface Portal {
 
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
+	public String getHomeURL(HttpServletRequest request)
+		throws PortalException, SystemException;
+
 	public String getHost(HttpServletRequest request);
 
 	public String getHost(PortletRequest portletRequest);
@@ -359,9 +362,6 @@ public interface Portal {
 		HttpServletRequest request);
 
 	public Date getUptime();
-
-	public String getURLHome(HttpServletRequest request)
-		throws PortalException, SystemException;
 
 	public String getURLWithSessionId(String url, String sessionId);
 

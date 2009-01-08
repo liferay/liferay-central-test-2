@@ -132,8 +132,8 @@
 		<column name="key" type="String" />
 		<column name="virtualHost" type="String" />
 		<column name="mx" type="String" />
+		<column name="homeURL" type="String" />
 		<column name="logoId" type="long" />
-		<column name="urlHome" type="String" />
 
 		<!-- Finder methods -->
 

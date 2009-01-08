@@ -212,6 +212,12 @@ public class PortalUtil {
 		return getPortal().getFirstPageLayoutTypes(pageContext);
 	}
 
+	public static String getHomeURL(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return getPortal().getHomeURL(request);
+	}
+
 	public static String getHost(HttpServletRequest request) {
 		return getPortal().getHost(request);
 	}
@@ -616,12 +622,6 @@ public class PortalUtil {
 
 	public static Date getUptime() {
 		return getPortal().getUptime();
-	}
-
-	public static String getURLHome(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		return getPortal().getURLHome(request);
 	}
 
 	public static String getURLWithSessionId(String url, String sessionId) {

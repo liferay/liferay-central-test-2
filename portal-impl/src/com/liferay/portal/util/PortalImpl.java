@@ -772,6 +772,16 @@ public class PortalImpl implements Portal {
 		return sb.substring(0, sb.length() - 2);
 	}
 
+	public String getHomeURL(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		String portalURL = getPortalURL(request);
+
+		Company company = getCompany(request);
+
+		return portalURL + _pathContext + company.getHomeURL();
+	}
+
 	public String getHost(HttpServletRequest request) {
 		request = getOriginalServletRequest(request);
 
@@ -2042,16 +2052,6 @@ public class PortalImpl implements Portal {
 
 	public Date getUptime() {
 		return UP_TIME;
-	}
-
-	public String getURLHome(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		String portalURL = getPortalURL(request);
-		String contextPath = getPathContext();
-		Company company = getCompany(request);
-
-		return portalURL + contextPath + company.getUrlHome();
 	}
 
 	public String getURLWithSessionId(String url, String sessionId) {

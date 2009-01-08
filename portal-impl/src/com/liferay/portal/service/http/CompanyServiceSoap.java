@@ -184,14 +184,14 @@ public class CompanyServiceSoap {
 
 	public static com.liferay.portal.model.CompanySoap updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String urlHome, java.lang.String name,
+		java.lang.String homeURL, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
 		java.lang.String tickerSymbol, java.lang.String industry,
 		java.lang.String type, java.lang.String size) throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-					virtualHost, mx, urlHome, name, legalName, legalId,
+					virtualHost, mx, homeURL, name, legalName, legalId,
 					legalType, sicCode, tickerSymbol, industry, type, size);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);

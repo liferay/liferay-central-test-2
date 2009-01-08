@@ -251,7 +251,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 						}
 						else {
 							refererGroupDescriptiveName = GroupConstants.GUEST;
-							backURL = themeDisplay.getURLHome();
+							backURL = themeDisplay.getHomeURL();
 
 							if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 								backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());

@@ -136,7 +136,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
 			}
 
-			String urlHome = PropsValues.COMPANY_DEFAULT_HOME_URL;
+			String homeURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
 			String name = webId;
 			String legalName = null;
 			String legalId = null;
@@ -165,7 +165,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			companyPersistence.update(company, false);
 
 			updateCompany(
-				companyId, virtualHost, mx, urlHome, name, legalName, legalId,
+				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 				legalType, sicCode, tickerSymbol, industry, type, size);
 
 			// Demo settings
@@ -472,7 +472,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company updateCompany(
-			long companyId, String virtualHost, String mx, String urlHome,
+			long companyId, String virtualHost, String mx, String homeURL,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
 			String size)
@@ -494,7 +494,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 		}
 
-		company.setUrlHome(urlHome);
+		company.setHomeURL(homeURL);
 
 		companyPersistence.update(company, false);
 

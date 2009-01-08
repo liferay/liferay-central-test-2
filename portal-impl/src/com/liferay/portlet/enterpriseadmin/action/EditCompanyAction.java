@@ -91,7 +91,7 @@ public class EditCompanyAction extends PortletAction {
 
 		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
 		String mx = ParamUtil.getString(actionRequest, "mx");
-		String urlHome = ParamUtil.getString(actionRequest, "urlHome");
+		String homeURL = ParamUtil.getString(actionRequest, "homeURL");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String legalName = ParamUtil.getString(actionRequest, "legalName");
 		String legalId = ParamUtil.getString(actionRequest, "legalId");
@@ -104,7 +104,7 @@ public class EditCompanyAction extends PortletAction {
 		String size = ParamUtil.getString(actionRequest, "size");
 
 		CompanyServiceUtil.updateCompany(
-			companyId, virtualHost, mx, urlHome, name, legalName, legalId,
+			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 			legalType, sicCode, tickerSymbol, industry, type, size);
 	}
 
