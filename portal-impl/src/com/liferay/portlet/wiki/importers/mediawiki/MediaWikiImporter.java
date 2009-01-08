@@ -592,7 +592,7 @@ public class MediaWikiImporter implements WikiImporter {
 		while (itr.hasNext()) {
 			Element namespace = itr.next();
 
-			if (!namespace.attribute("key").equals("0")) {
+			if (!namespace.attribute("key").getData().equals("0")) {
 				namespaces.add(namespace.getText());
 			}
 		}
