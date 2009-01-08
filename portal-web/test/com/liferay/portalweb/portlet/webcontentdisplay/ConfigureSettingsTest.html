@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ConfigureSettingsTest</title>
 </head>
 <body>
@@ -22,13 +19,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@title='Select Article']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//img[@title='Select Article']</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
@@ -43,16 +35,6 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Web Content Display Test Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Web Content Display Test Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
 	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
@@ -63,7 +45,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This is a web content display test article!</td>
+	<td>This is a WCD Setup Test Entry!</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,8 +54,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Add Comment</td>
+	<td>assertElementPresent</td>
+	<td>link=Add Comment</td>
 	<td></td>
 </tr>
 

@@ -33,14 +33,17 @@ import com.liferay.portalweb.portal.BaseTests;
 public class WebContentDisplayTests extends BaseTests {
 
 	public WebContentDisplayTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleThroughConfigurationTest.class);
+		addTestSuite(SelectArticleTest.class);
+		addTestSuite(VerifySelectedArticleTest.class);
 		addTestSuite(ConfigureSettingsTest.class);
 		addTestSuite(CheckRatingTest.class);
 		addTestSuite(AddCommentTest.class);
 		addTestSuite(EditCommentTest.class);
 		addTestSuite(DeleteCommentTest.class);
+		addTestSuite(AddArticleThroughConfigurationTest.class);
 		addTestSuite(SearchArticleTest.class);
 		addTestSuite(TearDownTest.class);
 	}

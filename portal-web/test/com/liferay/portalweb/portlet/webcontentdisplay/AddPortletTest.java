@@ -97,8 +97,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Select an existing article or add an article to be displayed in this portlet.")) {
+				if (selenium.isElementPresent("link=Configuration")) {
 					break;
 				}
 			}

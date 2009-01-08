@@ -89,9 +89,9 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("WCS Setup Test Page"));
+			RuntimeVariables.replace("WCS Setup Test PageA"));
 		selenium.type("new_page",
-			RuntimeVariables.replace("WCS Setup Test Page"));
+			RuntimeVariables.replace("WCS Setup Test PageA"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -100,7 +100,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=WCS Setup Test Page")) {
+				if (selenium.isElementPresent("link=WCS Setup Test PageA")) {
 					break;
 				}
 			}
@@ -110,7 +110,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=WCS Setup Test Page"));
+		selenium.click(RuntimeVariables.replace("link=WCS Setup Test PageA"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -138,7 +138,7 @@ public class SetupTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"ContentManagement-WebContentDisplay\"]")) {
+							"//div[@id='ContentManagement-WebContent']/p/a")) {
 					break;
 				}
 			}
@@ -148,7 +148,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"ContentManagement-WebContentDisplay\"]/p/a");
+		selenium.click("//div[@id='ContentManagement-WebContent']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -156,8 +156,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Select an existing article or add an article to be displayed in this portlet.")) {
+				if (selenium.isElementPresent("//input[@value='Add Article']")) {
 					break;
 				}
 			}
@@ -167,23 +166,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Add Article']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//img[@alt='Add Article']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -323,6 +306,125 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a WCS setup test article!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div/a/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("new_page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("WCS Setup Test PageB"));
+		selenium.type("new_page",
+			RuntimeVariables.replace("WCS Setup Test PageB"));
+		selenium.click("link=Save");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=WCS Setup Test PageB")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=WCS Setup Test PageB"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Add Application")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Add Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='ContentManagement-WebContentDisplay']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@id='ContentManagement-WebContentDisplay']/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Configuration")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=WCS Setup Test Article"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Displaying Content"));
 	}
 }

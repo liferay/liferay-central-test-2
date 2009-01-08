@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SelectArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddCommentTest extends BaseTestCase {
-	public void testAddComment() throws Exception {
+public class SelectArticleTest extends BaseTestCase {
+	public void testSelectArticle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,49 +53,10 @@ public class AddCommentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Comment");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("//textarea",
-			RuntimeVariables.replace("This is a test WCD comment"));
-		selenium.type("//textarea",
-			RuntimeVariables.replace("This is a test WCD comment!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//tr[3]/td/input[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//tr[3]/td/input[1]"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=This is a test WCD comment!"));
+		selenium.click(RuntimeVariables.replace("link=WCD Setup Test Entry"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Displaying Content"));
 	}
 }

@@ -136,8 +136,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Web Content Display Test Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.type("_86_version", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -183,8 +182,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Web Content Display Test Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -229,8 +227,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Web Content Display Test Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.type("_86_description", RuntimeVariables.replace("Test1"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
@@ -258,16 +255,14 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Web Content Display Test Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.type("_86_content", RuntimeVariables.replace(""));
 		selenium.select("_86_type",
 			RuntimeVariables.replace("label=Announcements"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Web Content Display Test Article"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
@@ -286,11 +281,6 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Web Content Display Test Article"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is a web content display test article!"));
+		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 	}
 }

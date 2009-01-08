@@ -53,49 +53,10 @@ public class ConfigureSettingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@title='Select Article']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//img[@title='Select Article']"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_86_enableRatingsCheckbox");
 		selenium.click("_86_enableCommentsCheckbox");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=Web Content Display Test Article")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Test Article"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -115,9 +76,8 @@ public class ConfigureSettingsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is a web content display test article!"));
+		assertTrue(selenium.isTextPresent("This is a WCD Setup Test Entry!"));
 		assertTrue(selenium.isTextPresent("Your Rating"));
-		assertTrue(selenium.isTextPresent("Add Comment"));
+		assertTrue(selenium.isElementPresent("link=Add Comment"));
 	}
 }
