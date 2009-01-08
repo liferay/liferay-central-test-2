@@ -95,7 +95,9 @@ public class VerifyMySQL extends VerifyProcess {
 				String tableName = rs.getString("Name");
 				String engine = rs.getString("Engine");
 
-				if (!engine.equals(PropsValues.DATABASE_MYSQL_ENGINE)) {
+				if (!engine.equalsIgnoreCase(
+						PropsValues.DATABASE_MYSQL_ENGINE)) {
+
 					alterTableEngine(tableName);
 				}
 			}
