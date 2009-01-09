@@ -306,7 +306,6 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setPlid(context.getPlid());
 
 		WikiNode existingNode = null;
 

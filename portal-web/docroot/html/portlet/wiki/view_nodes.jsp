@@ -95,12 +95,26 @@ for (int i = 0; i < results.size(); i++) {
 	resultRows.add(row);
 }
 
-boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.WIKI, ActionKeys.ADD_NODE);
+boolean showAddNodeButton = WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
-<c:if test="<%= showAddNodeButton %>">
+<c:if test="<%= showAddNodeButton || showPermissionsButton %>">
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+		<c:if test="<%= showAddNodeButton %>">
+			<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+		</c:if>
+
+		<c:if test="<%= showPermissionsButton %>">
+			<liferay-security:permissionsURL
+				modelResource="com.liferay.portlet.wiki"
+				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+				var="permissionsURL"
+			/>
+
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+		</c:if>
 	</div>
 
 	<br />

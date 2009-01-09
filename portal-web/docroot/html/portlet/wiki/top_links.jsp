@@ -45,7 +45,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 	<div class="top-links">
 		<table class="lfr-table">
 		<tr>
-			<c:if test="<%= themeDisplay.isSignedIn() && PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.WIKI, ActionKeys.ADD_NODE) %>">
+			<c:if test="<%= themeDisplay.isSignedIn() && (WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE) || GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) %>">
 				<td valign="top" width="16">
 
 					<%

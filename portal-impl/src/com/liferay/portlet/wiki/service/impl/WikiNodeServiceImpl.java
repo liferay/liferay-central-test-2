@@ -26,11 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.base.WikiNodeServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
+import com.liferay.portlet.wiki.service.permission.WikiPermission;
 
 import java.io.File;
 
@@ -49,8 +48,8 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(), PortletKeys.WIKI,
+		WikiPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.ADD_NODE);
 
 		return wikiNodeLocalService.addNode(
