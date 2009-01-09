@@ -34,11 +34,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>5</portlet-name>
-		<struts-path>news</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>6</portlet-name>
 		<struts-path>reverend_fun</struts-path>
 		<include>true</include>

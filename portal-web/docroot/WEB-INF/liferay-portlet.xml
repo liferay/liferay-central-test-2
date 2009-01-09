@@ -35,20 +35,6 @@
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
-		<portlet-name>5</portlet-name>
-		<icon>/html/icons/news.png</icon>
-		<struts-path>news</struts-path>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<maximize-edit>true</maximize-edit>
-		<instanceable>true</instanceable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-		<css-class-wrapper>portlet-news</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>6</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>reverend_fun</struts-path>

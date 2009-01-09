@@ -406,18 +406,6 @@ ${exception.message}
 		</java>
 	</target>
 
-	<target name="build-newscategories" if="release.info">
-		<java
-			classname="com.liferay.portlet.news.tools.NewsCategoriesBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
-		</java>
-	</target>
-
 	<target name="build-releaseinfo" if="release.info">
 		<java
 			classname="com.liferay.portal.tools.ReleaseInfoBuilder"

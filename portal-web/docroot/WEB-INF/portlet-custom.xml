@@ -39,47 +39,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>5</portlet-name>
-		<display-name>News</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>edit-action</name>
-			<value>/news/edit</value>
-		</init-param>
-		<init-param>
-			<name>edit-guest-action</name>
-			<value>/news/edit</value>
-		</init-param>
-		<init-param>
-			<name>view-action</name>
-			<value>/news/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>edit_guest</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>sel-feeds</name>
-				<value>c=Top%20stories</value>
-				<value>c=International%20relations%20news</value>
-			</preference>
-			<preference>
-				<name>articles-per-news</name>
-				<value>4</value>
-			</preference>
-		</portlet-preferences>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>6</portlet-name>
 		<display-name>Reverend Fun</display-name>
 		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
