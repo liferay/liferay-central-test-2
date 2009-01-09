@@ -56,6 +56,10 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 
 		try {
 			updatePortletPermissions(
+				"33", "com.liferay.portlet.blogs",
+				new String[] {"ADD_ENTRY"});
+
+			updatePortletPermissions(
 				"28", "com.liferay.portlet.bookmarks",
 				new String[] {"ADD_FOLDER"});
 

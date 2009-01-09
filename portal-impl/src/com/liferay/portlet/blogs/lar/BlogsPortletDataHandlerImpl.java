@@ -234,7 +234,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setPlid(context.getPlid());
 		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setTagsEntries(tagsEntries);
 

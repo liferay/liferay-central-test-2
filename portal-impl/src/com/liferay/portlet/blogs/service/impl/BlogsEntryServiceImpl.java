@@ -33,15 +33,14 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 import com.liferay.util.RSSUtil;
 
@@ -73,8 +72,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(), PortletKeys.BLOGS,
+		BlogsPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(

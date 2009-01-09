@@ -37,14 +37,14 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(scopeGroupId) %>" />
 
 <%
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
 int total = 0;
 
-if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
 	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
 }
 else {
@@ -55,7 +55,7 @@ searchContainer.setTotal(total);
 
 List results = null;
 
-if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
 	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 }
 else {
