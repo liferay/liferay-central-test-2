@@ -806,6 +806,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 									%>
 
 								</select>
+								<c:if test="<%= article == null %>">
+									<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
+								</c:if>
 							</td>
 						</tr>
 						</table>
