@@ -69,7 +69,7 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 
 	<liferay-ui:icon image="permissions" message="consumer-registrations" url="<%= consumerRegistrationsURL %>" />
 
-	<c:if test='<%= producerBean.getRequiresRegistration() == true %>'>
+	<c:if test="<%= producerBean.getRequiresRegistration() %>">
 		<portlet:actionURL var="registrationPropertiesURL">
 			<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_REGISTRATION_PROPERTIES) %>" />
 			<portlet:param name="tabs1" value="registration-properties" />
@@ -79,7 +79,6 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 
 		<liferay-ui:icon image="attributes" message="registration-properties" url="<%= registrationPropertiesURL %>" />
 	</c:if>
-	
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
