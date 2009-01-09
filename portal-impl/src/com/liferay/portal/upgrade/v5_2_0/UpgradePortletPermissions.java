@@ -79,6 +79,10 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				});
 
 			updatePortletPermissions(
+				"19", "com.liferay.portlet.messageboards",
+				new String[] {"ADD_CATEGORY", "BAN_USER"});
+
+			updatePortletPermissions(
 				"25", "com.liferay.portlet.polls",
 				new String[] {"ADD_QUESTION"});
 		}

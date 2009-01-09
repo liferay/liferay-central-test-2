@@ -436,7 +436,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setPlid(context.getPlid());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
@@ -461,7 +460,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(category.getUserUuid());
-		long plid = context.getPlid();
 		long parentCategoryId = MapUtil.getLong(
 			categoryPKs, category.getParentCategoryId(),
 			category.getParentCategoryId());
@@ -488,7 +486,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setPlid(context.getPlid());
 
 		if ((parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
 			(parentCategoryId == category.getParentCategoryId())) {

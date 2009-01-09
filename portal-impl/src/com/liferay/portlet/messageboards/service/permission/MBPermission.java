@@ -20,42 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.service.impl;
+package com.liferay.portlet.messageboards.service.permission;
 
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.messageboards.model.MBBan;
-import com.liferay.portlet.messageboards.service.base.MBBanServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.permission.MBPermission;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="MBBanServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class MBBanServiceImpl extends MBBanServiceBaseImpl {
+public class MBPermission {
 
-	public MBBan addBan(long banUserId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+	public static void check(
+			PermissionChecker permissionChecker, long groupId, String actionId)
+		throws PortalException {
 
-		MBPermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
-			ActionKeys.BAN_USER);
-
-		return mbBanLocalService.addBan(getUserId(), banUserId, serviceContext);
+		if (!contains(permissionChecker, groupId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
-	public void deleteBan(long banUserId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+	public static boolean contains(
+		PermissionChecker permissionChecker, long groupId, String actionId) {
 
-		MBPermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
-			ActionKeys.BAN_USER);
-
-		mbBanLocalService.deleteBan(banUserId, serviceContext);
+		return permissionChecker.hasPermission(
+			groupId, "com.liferay.portlet.messageboards", groupId, actionId);
 	}
 
 }

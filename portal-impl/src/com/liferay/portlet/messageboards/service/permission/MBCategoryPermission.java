@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
@@ -43,11 +41,11 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 public class MBCategoryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, long categoryId,
+			PermissionChecker permissionChecker, long groupId, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, categoryId, actionId)) {
+		if (!contains(permissionChecker, groupId, categoryId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -73,13 +71,12 @@ public class MBCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, long categoryId,
+			PermissionChecker permissionChecker, long groupId, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		if (categoryId == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			return PortletPermissionUtil.contains(
-				permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, actionId);
+			return MBPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
 			return contains(permissionChecker, categoryId, actionId);

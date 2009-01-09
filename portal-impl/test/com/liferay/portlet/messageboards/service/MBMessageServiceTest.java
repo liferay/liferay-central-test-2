@@ -106,7 +106,6 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(layout.getGroupId());
-		serviceContext.setPlid(layout.getPlid());
 
 		_category = MBCategoryServiceUtil.addCategory(
 			MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, name, description,

@@ -53,8 +53,8 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), serviceContext.getPlid(), parentCategoryId,
-			ActionKeys.ADD_CATEGORY);
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return mbCategoryLocalService.addCategory(
 			getUserId(), parentCategoryId, name, description,

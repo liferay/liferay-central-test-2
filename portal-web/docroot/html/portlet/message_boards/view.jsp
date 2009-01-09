@@ -191,7 +191,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			resultRows.add(row);
 		}
 
-		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, plid, categoryId, ActionKeys.ADD_CATEGORY);
+		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
 		showSearch = showSearch && (results.size() > 0);
 		%>
 
