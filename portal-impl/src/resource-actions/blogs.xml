@@ -23,8 +23,8 @@
 		<supports>
 			<action-key>ADD_ENTRY</action-key>
 		</supports>
-		<community-defaults/>
-		<guest-defaults/>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_ENTRY</action-key>
 		</guest-unsupported>

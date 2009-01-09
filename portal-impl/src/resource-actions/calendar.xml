@@ -24,8 +24,8 @@
 			<action-key>ADD_EVENT</action-key>
 			<action-key>EXPORT_ALL_EVENTS</action-key>
 		</supports>
-		<community-defaults/>
-		<guest-defaults/>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_EVENT</action-key>
 		</guest-unsupported>

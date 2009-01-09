@@ -24,10 +24,11 @@
 
 <%
 boolean showAddEntryButton = BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 showSearch = showSearch && (results.size() > 0);
 %>
 
-<c:if test="<%= showAddEntryButton || showSearch %>">
+<c:if test="<%= showAddEntryButton || showPermissionsButton || showSearch %>">
 	<div class="portlet-toolbar search-form">
 		<c:if test="<%= showSearch %>">
 			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -38,7 +39,8 @@ showSearch = showSearch && (results.size() > 0);
 		<c:if test="<%= showAddEntryButton %>">
 			<input type="button" value="<liferay-ui:message key="add-blog-entry" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
-		<c:if test="<%= (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) %>">
+
+		<c:if test="<%= showPermissionsButton %>">
 			<liferay-security:permissionsURL
 				modelResource="com.liferay.portlet.blogs"
 				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"

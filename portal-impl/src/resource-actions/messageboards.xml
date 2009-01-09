@@ -24,8 +24,8 @@
 			<action-key>ADD_CATEGORY</action-key>
 			<action-key>BAN_USER</action-key>
 		</supports>
-		<community-defaults/>
-		<guest-defaults/>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_CATEGORY</action-key>
 		</guest-unsupported>
