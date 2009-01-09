@@ -60,6 +60,12 @@ public class SortedProperties extends Properties {
 		}
 	}
 
+	public void clear() {
+		super.clear();
+
+		_names.clear();
+	}
+
 	public void list(PrintStream out) {
 		System.out.println("-- listing properties --");
 
