@@ -48,7 +48,7 @@
 
 <%
 try {
-	String velocityTemplateId = (String)request.getAttribute(WebKeys.VELOCITY_TEMPLATE_ID);
+	String velocityTemplateId = (String)request.getAttribute(WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID);
 	String velocityTemplateContent = (String)request.getAttribute(WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT);
 %>
 
