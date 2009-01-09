@@ -53,86 +53,10 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Director Setup Test Page"));
-		selenium.type("new_page",
-			RuntimeVariables.replace("Directory Setup Test Page"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Directory Setup Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"link=Directory Setup Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Add Application")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Undefined-EnterpriseAdmin']/p/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id='Undefined-EnterpriseAdmin']/p/a");
+		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -160,7 +84,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_79_screenName")) {
+				if (selenium.isElementPresent("_125_screenName")) {
 					break;
 				}
 			}
@@ -170,26 +94,24 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_79_screenName", RuntimeVariables.replace("TestSN1"));
-		selenium.type("_79_screenName", RuntimeVariables.replace("TestSN1"));
-		selenium.typeKeys("_79_emailAddress",
+		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("TestSN1"));
+		selenium.type("_125_screenName", RuntimeVariables.replace("TestSN1"));
+		selenium.typeKeys("_125_emailAddress",
 			RuntimeVariables.replace("TestEMail1@lifera.com"));
-		selenium.type("_79_emailAddress",
+		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("TestEMail1@liferay.com"));
-		selenium.typeKeys("_79_firstName",
+		selenium.typeKeys("_125_firstName",
 			RuntimeVariables.replace("TestFirst1"));
-		selenium.type("_79_firstName", RuntimeVariables.replace("TestFirst1"));
-		selenium.typeKeys("_79_middleName",
+		selenium.type("_125_firstName", RuntimeVariables.replace("TestFirst1"));
+		selenium.typeKeys("_125_middleName",
 			RuntimeVariables.replace("TestMiddle1"));
-		selenium.type("_79_middleName", RuntimeVariables.replace("TestMiddle1"));
-		selenium.typeKeys("_79_lastName", RuntimeVariables.replace("TestLast1"));
-		selenium.type("_79_lastName", RuntimeVariables.replace("TestLast1"));
+		selenium.type("_125_middleName", RuntimeVariables.replace("TestMiddle1"));
+		selenium.typeKeys("_125_lastName", RuntimeVariables.replace("TestLast1"));
+		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -217,7 +139,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_79_screenName")) {
+				if (selenium.isElementPresent("_125_screenName")) {
 					break;
 				}
 			}
@@ -227,26 +149,24 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_79_screenName", RuntimeVariables.replace("TestSN2"));
-		selenium.type("_79_screenName", RuntimeVariables.replace("TestSN2"));
-		selenium.typeKeys("_79_emailAddress",
+		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("TestSN2"));
+		selenium.type("_125_screenName", RuntimeVariables.replace("TestSN2"));
+		selenium.typeKeys("_125_emailAddress",
 			RuntimeVariables.replace("TestEMail2@lifera.com"));
-		selenium.type("_79_emailAddress",
+		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("TestEMail2@liferay.com"));
-		selenium.typeKeys("_79_firstName",
+		selenium.typeKeys("_125_firstName",
 			RuntimeVariables.replace("TestFirst2"));
-		selenium.type("_79_firstName", RuntimeVariables.replace("TestFirst2"));
-		selenium.typeKeys("_79_middleName",
+		selenium.type("_125_firstName", RuntimeVariables.replace("TestFirst2"));
+		selenium.typeKeys("_125_middleName",
 			RuntimeVariables.replace("TestMiddle2"));
-		selenium.type("_79_middleName", RuntimeVariables.replace("TestMiddle2"));
-		selenium.typeKeys("_79_lastName", RuntimeVariables.replace("TestLast2"));
-		selenium.type("_79_lastName", RuntimeVariables.replace("TestLast2"));
+		selenium.type("_125_middleName", RuntimeVariables.replace("TestMiddle2"));
+		selenium.typeKeys("_125_lastName", RuntimeVariables.replace("TestLast2"));
+		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -276,7 +196,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_79_name")) {
+				if (selenium.isElementPresent("_126_name")) {
 					break;
 				}
 			}
@@ -286,9 +206,9 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_79_name",
+		selenium.typeKeys("_126_name",
 			RuntimeVariables.replace("Test Organization"));
-		selenium.type("_79_name", RuntimeVariables.replace("Test Organization"));
+		selenium.type("_126_name", RuntimeVariables.replace("Test Organization"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("addressesLink");
@@ -299,7 +219,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_79_addressStreet10")) {
+				if (selenium.isElementPresent("_126_addressStreet10")) {
 					break;
 				}
 			}
@@ -309,27 +229,25 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_79_addressStreet10",
+		selenium.typeKeys("_126_addressStreet10",
 			RuntimeVariables.replace("12345 Test Street"));
-		selenium.type("_79_addressStreet10",
+		selenium.type("_126_addressStreet10",
 			RuntimeVariables.replace("12345 Test Street"));
-		selenium.typeKeys("_79_addressZip0", RuntimeVariables.replace("11111"));
-		selenium.type("_79_addressZip0", RuntimeVariables.replace("11111"));
-		selenium.typeKeys("_79_addressCity0",
+		selenium.typeKeys("_126_addressZip0", RuntimeVariables.replace("11111"));
+		selenium.type("_126_addressZip0", RuntimeVariables.replace("11111"));
+		selenium.typeKeys("_126_addressCity0",
 			RuntimeVariables.replace("Diamond Bar"));
-		selenium.type("_79_addressCity0",
+		selenium.type("_126_addressCity0",
 			RuntimeVariables.replace("Diamond Bar"));
-		selenium.select("_79_addressCountryId0",
+		selenium.select("_126_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));
 		Thread.sleep(5000);
-		selenium.select("_79_addressRegionId0",
+		selenium.select("_126_addressRegionId0",
 			RuntimeVariables.replace("label=California"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=User Groups"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -359,7 +277,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_79_name")) {
+				if (selenium.isElementPresent("_127_name")) {
 					break;
 				}
 			}
@@ -369,12 +287,12 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_79_name",
+		selenium.typeKeys("_127_name",
 			RuntimeVariables.replace("Test User Group"));
-		selenium.type("_79_name", RuntimeVariables.replace("Test User Group"));
-		selenium.typeKeys("_79_description",
+		selenium.type("_127_name", RuntimeVariables.replace("Test User Group"));
+		selenium.typeKeys("_127_description",
 			RuntimeVariables.replace("This is a test user group!"));
-		selenium.type("_79_description",
+		selenium.type("_127_description",
 			RuntimeVariables.replace("This is a test user group!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
@@ -426,8 +344,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"toggle_id_enterprise_admin_user_searchkeywords")) {
+				if (selenium.isElementPresent("_127_keywords")) {
 					break;
 				}
 			}
@@ -437,17 +354,18 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
+		selenium.typeKeys("_127_keywords",
 			RuntimeVariables.replace("TestFirst2"));
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("TestFirst2"));
+		selenium.type("_127_keywords", RuntimeVariables.replace("TestFirst2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_79_allRowIds");
+		selenium.click("_127_allRowIds");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.waitForPageToLoad("30000");
 	}
 }
