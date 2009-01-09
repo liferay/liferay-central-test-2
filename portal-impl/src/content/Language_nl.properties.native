@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Soft
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Software catalogus product licentie
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Software catalogus product
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Software catalogus product versie
+model.resource.com.liferay.portlet.softwarecatalog=De Catalogus van de software
 model.resource.com.liferay.portlet.tags.model.TagsEntry=De Ingang van markeringen
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=De Woordenschat van markeringen
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=Het Voorstel van de taak

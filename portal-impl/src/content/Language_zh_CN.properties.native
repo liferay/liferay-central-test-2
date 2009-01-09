@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=软�
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=软件分类产品许可协议
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=软件分类产品条目
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=软件分类产品版本
+model.resource.com.liferay.portlet.softwarecatalog=软件编目
 model.resource.com.liferay.portlet.tags.model.TagsEntry=标签条目
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=标签词汇表
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=任务提案

@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Έκ
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Αδεια προϊόντων καταλόγων λογισμικού
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Είσοδος προϊόντων καταλόγων λογισμικού
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Έκδοση προϊόντων καταλόγων λογισμικού
+model.resource.com.liferay.portlet.softwarecatalog=Κατάλογος λογισμικού
 model.resource.com.liferay.portlet.tags.model.TagsEntry=Είσοδος ετικεττών
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=Λεξιλόγιο ετικεττών
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=Πρόταση στόχου

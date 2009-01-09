@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=軟�
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=軟體編目產品執照
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=軟體編目產品詞條
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=軟體編目產品版本
+model.resource.com.liferay.portlet.softwarecatalog=軟件編目
 model.resource.com.liferay.portlet.tags.model.TagsEntry=標記詞條
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=標記詞彙量
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=任務提案

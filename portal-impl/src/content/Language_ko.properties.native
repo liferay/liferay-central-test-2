@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=소�
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=소프트웨어 카탈로그 제품 면허
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=소프트웨어 카탈로그 제품 입장
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=소프트웨어 카탈로그 제품 버전
+model.resource.com.liferay.portlet.softwarecatalog=소프트웨어 카탈로그
 model.resource.com.liferay.portlet.tags.model.TagsEntry=꼬리표 입장
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=꼬리표 어휘
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=업무 계획안

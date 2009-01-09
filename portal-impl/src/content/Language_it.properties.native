@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Vers
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Licenza Prodotto Catalogo Software
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Elemento Prodotto Catalogo Software
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Versione Prodotto Catalogo Software
+model.resource.com.liferay.portlet.softwarecatalog=Catalogo del software
 model.resource.com.liferay.portlet.tags.model.TagsEntry=Entrata delle modifiche
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=Vocabolario delle modifiche
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=Proposta Di Operazione

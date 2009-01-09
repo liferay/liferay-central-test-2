@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Soft
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Softwarekatalog Produktlizenz
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Softwarekatalog Produkteinträge
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Softwarekatalog Produktversion
+model.resource.com.liferay.portlet.softwarecatalog=Software-Katalog
 model.resource.com.liferay.portlet.tags.model.TagsEntry=Umbau-Eintragung
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=Umbau-Wortschatz
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=Aufgabe Antrag

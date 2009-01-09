@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=プ�
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=プラグインカタログのプラグインのライセンス
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=プラグインカタログのプラグインエントリ
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=プラグインカタログのプラグインのバージョン
+model.resource.com.liferay.portlet.softwarecatalog=ソフトウェアカタログ
 model.resource.com.liferay.portlet.tags.model.TagsEntry=タグの項目
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=タグの用語
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=タスクの提案

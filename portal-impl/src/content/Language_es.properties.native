@@ -192,6 +192,7 @@ model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Vers
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Licencia del producto
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Producto software
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Versión del producto software
+model.resource.com.liferay.portlet.softwarecatalog=Catálogo del software
 model.resource.com.liferay.portlet.tags.model.TagsEntry=Etiqueta
 model.resource.com.liferay.portlet.tags.model.TagsVocabulary=Vocabulario de etiquetas
 model.resource.com.liferay.portlet.tasks.model.TasksProposal=Propuesta de tarea
