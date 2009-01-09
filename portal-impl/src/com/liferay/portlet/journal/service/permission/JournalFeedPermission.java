@@ -38,10 +38,10 @@ import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 public class JournalFeedPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long feedId, String actionId)
+			PermissionChecker permissionChecker, long id, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, feedId, actionId)) {
+		if (!contains(permissionChecker, id, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -91,7 +91,7 @@ public class JournalFeedPermission {
 
 		if (permissionChecker.hasOwnerPermission(
 				feed.getCompanyId(), JournalFeed.class.getName(),
-				feed.getPrimaryKey(), feed.getUserId(), actionId)) {
+				feed.getId(), feed.getUserId(), actionId)) {
 
 			return true;
 		}

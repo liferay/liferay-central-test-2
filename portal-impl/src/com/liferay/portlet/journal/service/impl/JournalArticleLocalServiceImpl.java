@@ -1325,6 +1325,38 @@ public class JournalArticleLocalServiceImpl
 		return articles.get(0);
 	}
 
+	public JournalArticle getLatestArticle(long resourcePrimKey)
+		throws PortalException, SystemException {
+
+		return getLatestArticle(resourcePrimKey, (Boolean)null);
+	}
+
+	public JournalArticle getLatestArticle(
+			long resourcePrimKey, Boolean approved)
+		throws PortalException, SystemException {
+
+		// Get the latest article that is approved, if none are approved, get
+		// the latest unapproved article
+
+		JournalArticle article = null;
+
+		if (approved == null) {
+			try {
+				article = journalArticleFinder.findByR_A(resourcePrimKey, true);
+			}
+			catch (NoSuchArticleException nsae) {
+				article = journalArticleFinder.findByR_A(
+					resourcePrimKey, false);
+			}
+		}
+		else {
+			article = journalArticleFinder.findByR_A(
+				resourcePrimKey, approved.booleanValue());
+		}
+
+		return article;
+	}
+
 	public JournalArticle getLatestArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
@@ -1459,11 +1491,12 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = null;
 
 		try {
-			article = journalArticleFinder.findByR_D(
-				resourcePrimKey, new Date());
+			article = getLatestArticle(resourcePrimKey, Boolean.TRUE);
 		}
-		catch (NoSuchArticleException nsae) {
-			return;
+		catch (Exception e) {
+			if (e instanceof NoSuchArticleException) {
+				return;
+			}
 		}
 
 		if (!article.isApproved() || !article.isIndexable()) {

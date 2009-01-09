@@ -33,9 +33,19 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
  * <a href="JournalTemplatePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalTemplatePermission {
+
+	public static void check(
+			PermissionChecker permissionChecker, long id, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, id, actionId)) {
+			throw new PrincipalException();
+		}
+	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId,
@@ -58,6 +68,16 @@ public class JournalTemplatePermission {
 	}
 
 	public static boolean contains(
+			PermissionChecker permissionChecker, long id, String actionId)
+		throws PortalException, SystemException {
+
+		JournalTemplate template =
+			JournalTemplateLocalServiceUtil.getTemplate(id);
+
+		return contains(permissionChecker, template, actionId);
+	}
+
+	public static boolean contains(
 			PermissionChecker permissionChecker, long groupId,
 			String templateId, String actionId)
 		throws PortalException, SystemException {
@@ -74,7 +94,7 @@ public class JournalTemplatePermission {
 
 		if (permissionChecker.hasOwnerPermission(
 				template.getCompanyId(), JournalTemplate.class.getName(),
-				template.getPrimaryKey(), template.getUserId(), actionId)) {
+				template.getId(), template.getUserId(), actionId)) {
 
 			return true;
 		}

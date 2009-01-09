@@ -39,11 +39,40 @@ import com.liferay.portal.service.base.PermissionServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
+import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.service.permission.CalEventPermission;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalFeed;
+import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
+import com.liferay.portlet.journal.service.permission.JournalFeedPermission;
+import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
+import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
+import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission;
+import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 
 /**
  * <a href="PermissionServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class PermissionServiceImpl extends PermissionServiceBaseImpl {
@@ -212,8 +241,53 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			String primKey)
 		throws PortalException, SystemException {
 
-		if (name.equals(Group.class.getName())) {
+		if (name.equals(BlogsEntry.class.getName())) {
+			BlogsEntryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(BookmarksFolder.class.getName())) {
+			BookmarksFolderPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(CalEvent.class.getName())) {
+			CalEventPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(DLFolder.class.getName())) {
+			DLFolderPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(Group.class.getName())) {
 			GroupPermissionUtil.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(IGFolder.class.getName())) {
+			IGFolderPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(JournalArticle.class.getName())) {
+			JournalArticlePermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(JournalFeed.class.getName())) {
+			JournalFeedPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(JournalStructure.class.getName())) {
+			JournalStructurePermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(JournalTemplate.class.getName())) {
+			JournalTemplatePermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
@@ -226,6 +300,26 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				permissionChecker, layout.getGroupId(),
 				ActionKeys.MANAGE_LAYOUTS);
 		}
+		else if (name.equals(MBCategory.class.getName())) {
+			MBCategoryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(PollsQuestion.class.getName())) {
+			PollsQuestionPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(SCProductEntry.class.getName())) {
+			SCProductEntryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(SCFrameworkVersion.class.getName())) {
+			SCFrameworkVersionPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
 		else if (name.equals(User.class.getName())) {
 			long userId = GetterUtil.getLong(primKey);
 
@@ -233,6 +327,11 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 			UserPermissionUtil.check(
 				permissionChecker, userId, user.getOrganizationIds(),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(WikiNode.class.getName())) {
+			WikiNodePermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
@@ -246,12 +345,9 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				pos + PortletConstants.LAYOUT_SEPARATOR.length(),
 				primKey.length());
 
-			if (!PortletPermissionUtil.contains(
-					permissionChecker, plid, portletId,
-					ActionKeys.CONFIGURATION)) {
-
-				throw new PrincipalException();
-			}
+			PortletPermissionUtil.check(
+				permissionChecker, plid, portletId,
+				ActionKeys.CONFIGURATION);
 		}
 		else if (!permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.PERMISSIONS) &&

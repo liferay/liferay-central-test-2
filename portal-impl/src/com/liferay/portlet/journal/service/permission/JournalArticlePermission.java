@@ -33,9 +33,20 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
  * <a href="JournalArticlePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalArticlePermission {
+
+	public static void check(
+			PermissionChecker permissionChecker, long resourcePrimKey,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, resourcePrimKey, actionId)) {
+			throw new PrincipalException();
+		}
+	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, String articleId,
@@ -55,6 +66,17 @@ public class JournalArticlePermission {
 		if (!contains(permissionChecker, article, actionId)) {
 			throw new PrincipalException();
 		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long resourcePrimKey,
+			String actionId)
+		throws PortalException, SystemException {
+
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.getLatestArticle(resourcePrimKey);
+
+		return contains(permissionChecker, article, actionId);
 	}
 
 	public static boolean contains(

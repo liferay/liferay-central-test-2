@@ -604,6 +604,20 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
+		long resourcePrimKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getLatestArticle(resourcePrimKey);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
+		long resourcePrimKey, java.lang.Boolean approved)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getLatestArticle(resourcePrimKey, approved);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -49,6 +50,7 @@ import java.util.List;
  * <a href="JournalArticleFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalArticleFinderImpl
@@ -351,6 +353,69 @@ public class JournalArticleFinderImpl
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalArticle findByR_A(
+			long resourcePrimKey, boolean approved)
+		throws NoSuchArticleException, SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+			query.append("resourcePrimKey = ?");
+
+			query.append(" AND ");
+
+			query.append("approved = ?");
+
+			query.append(" ");
+
+			query.append("ORDER BY ");
+
+			query.append("articleId ASC, ");
+			query.append("version DESC");
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(resourcePrimKey);
+			qPos.add(approved);
+
+			List<JournalArticle> list = q.list();
+
+			if (list.size() == 0) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("No JournalArticle exists with the key ");
+				sb.append("{resourcePrimKey=");
+				sb.append(resourcePrimKey);
+				sb.append(", approved=");
+				sb.append(approved);
+				sb.append("}");
+
+				throw new NoSuchArticleException(sb.toString());
+			}
+			else {
+				return list.get(0);
+			}
+		}
+		catch (NoSuchArticleException nsae) {
+			throw nsae;
+		}
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);

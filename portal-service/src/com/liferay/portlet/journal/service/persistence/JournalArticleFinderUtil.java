@@ -120,6 +120,13 @@ public class JournalArticleFinderUtil {
 		return getFinder().findByReviewDate(reviewDateLT, reviewDateGT);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle findByR_A(
+		long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getFinder().findByR_A(resourcePrimKey, approved);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle findByR_D(
 		long resourcePrimKey, java.util.Date displayDate)
 		throws com.liferay.portal.SystemException,

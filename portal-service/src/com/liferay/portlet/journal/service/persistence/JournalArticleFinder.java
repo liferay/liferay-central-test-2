@@ -86,6 +86,11 @@ public interface JournalArticleFinder {
 		java.util.Date reviewDateLT, java.util.Date reviewDateGT)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticle findByR_A(
+		long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
 	public com.liferay.portlet.journal.model.JournalArticle findByR_D(
 		long resourcePrimKey, java.util.Date displayDate)
 		throws com.liferay.portal.SystemException,
