@@ -776,23 +776,6 @@
 		</java>
 	</target>
 
-	<target name="build-sprite">
-		<java
-			classname="com.liferay.portal.tools.SpriteBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dcom.sun.media.jai.disableMediaLib=true" />
-			<jvmarg value="-Dsprite.input.dir=docroot" />
-			<jvmarg value="-Dsprite.input.dir.excludes=docroot/html/js,docroot/html/themes" />
-			<jvmarg value="-Dsprite.output.file=packed.png" />
-			<jvmarg value="-Dsprite.properties.file=packed.sprite" />
-			<jvmarg value="-Dsprite.max.height=16" />
-			<jvmarg value="-Dsprite.max.width=16" />
-		</java>
-	</target>
-
 	<target name="build-themes">
 		<for param="module.name">
 			<path>
@@ -854,20 +837,6 @@
 					newenvironment="true"
 				>
 					<arg line="--type css -o @{module.name}/css/everything_packed.css @{module.name}/css/everything_unpacked.css" />
-				</java>
-
-				<java
-					classname="com.liferay.portal.tools.SpriteBuilder"
-					classpathref="project.classpath"
-					fork="true"
-					newenvironment="true"
-				>
-					<jvmarg value="-Dcom.sun.media.jai.disableMediaLib=true" />
-					<jvmarg value="-Dsprite.input.dir=@{module.name}/images" />
-					<jvmarg value="-Dsprite.output.file=packed.png" />
-					<jvmarg value="-Dsprite.properties.file=packed.sprite" />
-					<jvmarg value="-Dsprite.max.height=16" />
-					<jvmarg value="-Dsprite.max.width=16" />
 				</java>
 			</sequential>
 		</for>

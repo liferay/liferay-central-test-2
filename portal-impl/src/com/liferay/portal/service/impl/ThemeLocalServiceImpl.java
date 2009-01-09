@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -50,9 +49,12 @@ import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
+import com.liferay.portal.tools.SpriteBuilder;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.Version;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -674,7 +676,9 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				}
 			}
 
-			_setSpriteImages(servletContext, themeModel, imagesPath);
+			if (!themeModel.isWapTheme()) {
+				_setSpriteImages(servletContext, themeModel, imagesPath);
+			}
 		}
 
 		return themeIds;
@@ -687,24 +691,37 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		Set<String> resourcePaths = servletContext.getResourcePaths(
 			resourcePath);
 
+		List<File> images = new ArrayList<File>(resourcePaths.size());
+
 		for (String curResourcePath : resourcePaths) {
 			if (curResourcePath.endsWith(StringPool.SLASH)) {
 				_setSpriteImages(servletContext, theme, curResourcePath);
 			}
-			else if (curResourcePath.endsWith(".sprite")) {
-				Properties properties = PropertiesUtil.load(
-					StringUtil.read(
-						servletContext.getResourceAsStream(curResourcePath)));
-
-				String spriteFileName =
-					curResourcePath.substring(
-						theme.getImagesPath().length(),
-						curResourcePath.length() - 7) +
-					".png";
-
-				theme.setSpriteImages(spriteFileName, properties);
+			else if (curResourcePath.endsWith(".png")) {
+				images.add(
+					new File(servletContext.getRealPath(curResourcePath)));
 			}
 		}
+
+		String spriteFileName = ".sprite.png";
+		String spritePropertiesFileName = ".sprite.properties";
+		String spritePropertiesRootPath = servletContext.getRealPath(
+			theme.getImagesPath());
+
+		Properties spriteProperties = SpriteBuilder.buildSprite(
+			images, spriteFileName, spritePropertiesFileName,
+			spritePropertiesRootPath, 16, 16);
+
+		if (spriteProperties == null) {
+			return;
+		}
+
+		spriteFileName =
+			resourcePath.substring(
+				theme.getImagesPath().length(), resourcePath.length()) +
+			spriteFileName;
+
+		theme.setSpriteImages(spriteFileName, spriteProperties);
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeLocalServiceImpl.class);

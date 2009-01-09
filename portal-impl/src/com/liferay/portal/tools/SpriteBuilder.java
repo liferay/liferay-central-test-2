@@ -23,12 +23,12 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.awt.Point;
 import java.awt.Transparency;
@@ -41,9 +41,9 @@ import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 
 import java.io.File;
+import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -69,90 +69,64 @@ import javax.media.jai.operator.TranslateDescriptor;
  */
 public class SpriteBuilder {
 
-	public static void main(String[] args) {
-		File inputDir = new File(System.getProperty("sprite.input.dir"));
-		String[] inputDirExcludes = StringUtil.split(
-			System.getProperty("sprite.input.dir.excludes"));
-		String outputFileName = System.getProperty("sprite.output.file");
-		String propertiesFileName = System.getProperty(
-			"sprite.properties.file");
-		int maxHeight = GetterUtil.getInteger(
-			System.getProperty("sprite.max.height"));
-		int maxWidth = GetterUtil.getInteger(
-			System.getProperty("sprite.max.width"));
-
-		new SpriteBuilder(
-			inputDir, inputDirExcludes, outputFileName, propertiesFileName,
-			maxHeight, maxWidth);
+	static {
+		System.setProperty("com.sun.media.jai.disableMediaLib", "true");
 	}
 
-	public SpriteBuilder(
-		File inputDir, String[] inputDirExcludes, String outputFileName,
-		String propertiesFileName, int maxHeight, int maxWidth) {
+	public static Properties buildSprite(
+			List<File> images, String spriteFileName,
+			String spritePropertiesFileName, String spritePropertiesRootPath,
+			int maxHeight, int maxWidth)
+		throws IOException {
 
-		try {
-			_inputDir = inputDir;
-			_inputDirExcludes = inputDirExcludes;
-			_outputFileName = outputFileName;
-			_propertiesFileName = propertiesFileName;
-			_maxHeight = maxHeight;
-			_maxWidth = maxWidth;
-
-			Arrays.sort(_inputDirExcludes);
-
-			buildImages(inputDir);
+		if (images.size() < 1) {
+			return null;
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	public void buildImages(File dir) throws Exception {
-		List<File> images = new ArrayList<File>();
+		File dir = images.get(0).getParentFile();
 
-		File[] files = dir.listFiles();
+		File spritePropertiesFile = new File(
+			dir.toString() + "/" + spritePropertiesFileName);
 
-		for (File file : files) {
-			if (file.isDirectory()) {
-				if (file.getName().equals(".svn")) {
-					continue;
+		boolean build = false;
+
+		long lastModified = 0;
+
+		if (spritePropertiesFile.exists()) {
+			lastModified = spritePropertiesFile.lastModified();
+
+			for (File image : images) {
+				if (image.lastModified() > lastModified) {
+					build = true;
+
+					break;
 				}
-
-				if (_inputDirExcludes.length > 0) {
-					String dirName = file.toString();
-
-					dirName = StringUtil.replace(
-						dirName, StringPool.BACK_SLASH, StringPool.SLASH);
-
-					if (Arrays.binarySearch(_inputDirExcludes, dirName) >= 0) {
-						continue;
-					}
-				}
-
-				buildImages(file);
-			}
-			else if (file.getName().endsWith(".png")) {
-				images.add(file);
 			}
 		}
+		else {
+			build = true;
+		}
 
-		if (images.size() <= 1) {
-			return;
+		if (!build) {
+			String spritePropertiesString = FileUtil.read(spritePropertiesFile);
+
+			if (Validator.isNull(spritePropertiesString)) {
+				return null;
+			}
+			else {
+				return PropertiesUtil.load(spritePropertiesString);
+			}
 		}
 
 		List<RenderedImage> renderedImages = new ArrayList<RenderedImage>();
 
-		Properties properties = new SortedProperties();
+		Properties spriteProperties = new SortedProperties();
 
 		float x = 0;
 		float y = 0;
 
 		for (File file : images) {
 			String fileName = file.getName();
-
-			if (fileName.equals(_outputFileName)) {
-				continue;
-			}
 
 			RenderedOp renderedOp = FileLoadDescriptor.create(
 				file.toString(), null, null, null);
@@ -162,7 +136,7 @@ public class SpriteBuilder {
 			int height = renderedImage.getHeight();
 			int width = renderedImage.getWidth();
 
-			if ((height <= _maxHeight) && (width <= _maxWidth)) {
+			if ((height <= maxHeight) && (width <= maxWidth)) {
 				renderedImage = TranslateDescriptor.create(
 					renderedImage, x, y, null, null);
 
@@ -171,35 +145,48 @@ public class SpriteBuilder {
 				String key = StringUtil.replace(
 					file.toString(), StringPool.BACK_SLASH, StringPool.SLASH);
 
-				key = key.substring(_inputDir.toString().length());
+				key = key.substring(
+					spritePropertiesRootPath.toString().length());
 
 				String value = (int)y + "," + height + "," + width;
 
-				properties.setProperty(key, value);
+				spriteProperties.setProperty(key, value);
 
 				y += renderedOp.getHeight();
 			}
 		}
 
 		if (renderedImages.size() <= 1) {
-			return;
+			renderedImages.clear();
+			spriteProperties.clear();
+		}
+		else {
+			RenderedOp renderedOp = MosaicDescriptor.create(
+				(RenderedImage[])renderedImages.toArray(
+					new RenderedImage[renderedImages.size()]),
+				MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null,
+				null);
+
+			File spriteFile = new File(dir.toString() + "/" + spriteFileName);
+
+			ImageIO.write(renderedOp, "png", spriteFile);
+
+			if (lastModified > 0) {
+				spriteFile.setLastModified(lastModified);
+			}
 		}
 
-		RenderedOp renderedOp = MosaicDescriptor.create(
-			(RenderedImage[])renderedImages.toArray(
-				new RenderedImage[renderedImages.size()]),
-			MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null, null);
+		FileUtil.write(
+			spritePropertiesFile, PropertiesUtil.toString(spriteProperties));
 
-		ImageIO.write(
-			renderedOp, "png",
-			new File(dir.toString() + "/" + _outputFileName));
+		if (lastModified > 0) {
+			spritePropertiesFile.setLastModified(lastModified);
+		}
 
-		_fileUtil.write(
-			dir.toString() + "/" + _propertiesFileName,
-			PropertiesUtil.toString(properties));
+		return spriteProperties;
 	}
 
-	public RenderedImage convert(RenderedOp renderedOp) throws Exception {
+	public static RenderedImage convert(RenderedOp renderedOp) {
 		RenderedImage renderedImage = renderedOp;
 
 		int height = renderedOp.getHeight();
@@ -300,9 +287,8 @@ public class SpriteBuilder {
 		return renderedImage;
 	}
 
-	public RenderedImage createRenderedImage(
-			RenderedOp renderedOp, int height, int width, DataBuffer dataBuffer)
-		throws Exception {
+	public static RenderedImage createRenderedImage(
+		RenderedOp renderedOp, int height, int width, DataBuffer dataBuffer) {
 
 		SampleModel sampleModel =
 			RasterFactory.createPixelInterleavedSampleModel(
@@ -327,7 +313,7 @@ public class SpriteBuilder {
 		return tiledImage;
 	}
 
-	public void printImage(PlanarImage planarImage) {
+	public static void printImage(PlanarImage planarImage) {
 		SampleModel sampleModel = planarImage.getSampleModel();
 
 		int height = planarImage.getHeight();
@@ -358,14 +344,5 @@ public class SpriteBuilder {
 	}
 
 	private static final int _NUM_OF_BANDS = 4;
-
-	private static FileImpl _fileUtil = FileImpl.getInstance();
-
-	private File _inputDir;
-	private String[] _inputDirExcludes;
-	private String _outputFileName;
-	private String _propertiesFileName;
-	private int _maxHeight;
-	private int _maxWidth;
 
 }

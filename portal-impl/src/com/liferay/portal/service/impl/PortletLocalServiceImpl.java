@@ -29,9 +29,7 @@ import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -53,6 +51,7 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
+import com.liferay.portal.tools.SpriteBuilder;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -69,6 +68,8 @@ import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
 
 import com.sun.portal.wsrp.common.WSRPConfig;
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -415,7 +416,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			PortletApp portletApp = _getPortletApp(StringPool.BLANK);
 
-			_setSpriteImages(servletContext, portletApp, StringPool.SLASH);
+			_setSpriteImages(servletContext, portletApp, "/html/icons");
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -493,9 +494,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Sprite images
 
-			PortletApp portletApp = _getPortletApp(servletContextName);
+			//PortletApp portletApp = _getPortletApp(servletContextName);
 
-			_setSpriteImages(servletContext, portletApp, StringPool.SLASH);
+			//_setSpriteImages(servletContext, portletApp, StringPool.SLASH);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1720,28 +1721,35 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Set<String> resourcePaths = servletContext.getResourcePaths(
 			resourcePath);
 
-		for (String curResourcePath : resourcePaths) {
-			if (Validator.isNull(portletApp.getServletContextName())) {
-				if (curResourcePath.equals("/html/themes/")) {
-					continue;
-				}
-			}
+		List<File> images = new ArrayList<File>(resourcePaths.size());
 
+		for (String curResourcePath : resourcePaths) {
 			if (curResourcePath.endsWith(StringPool.SLASH)) {
 				_setSpriteImages(servletContext, portletApp, curResourcePath);
 			}
-			else if (curResourcePath.endsWith(".sprite")) {
-				Properties properties = PropertiesUtil.load(
-					StringUtil.read(
-						servletContext.getResourceAsStream(curResourcePath)));
-
-				String spriteFileName =
-					curResourcePath.substring(0, curResourcePath.length() - 7) +
-						".png";
-
-				portletApp.setSpriteImages(spriteFileName, properties);
+			else if (curResourcePath.endsWith(".png")) {
+				images.add(
+					new File(servletContext.getRealPath(curResourcePath)));
 			}
 		}
+
+		String spriteFileName = ".sprite.png";
+		String spritePropertiesFileName = ".sprite.properties";
+		String spritePropertiesRootPath = servletContext.getRealPath(
+			StringPool.SLASH);
+
+		Properties spriteProperties = SpriteBuilder.buildSprite(
+			images, spriteFileName, spritePropertiesFileName,
+			spritePropertiesRootPath, 16, 16);
+
+		if (spriteProperties == null) {
+			return;
+		}
+
+		spriteFileName =
+			resourcePath.substring(0, resourcePath.length()) + spriteFileName;
+
+		portletApp.setSpriteImages(spriteFileName, spriteProperties);
 	}
 
 	private static final String _WSRP_CATEGORY = "category.wsrp";

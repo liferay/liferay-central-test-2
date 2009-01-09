@@ -109,7 +109,8 @@ public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public SpriteImage getSpriteImage(String fileName);
 
-	public void setSpriteImages(String spriteFileName, Properties properties);
+	public void setSpriteImages(
+		String spriteFileName, Properties spriteProperties);
 
 	public String getServletContextName();
 
