@@ -25,6 +25,7 @@ package com.liferay.portlet.nestedportlets.action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.LayoutTemplateConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
@@ -77,8 +78,8 @@ public class ViewAction extends PortletAction {
 			"layout-template-id",
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
-		String content = StringPool.BLANK;
 		String velocityTemplateId = StringPool.BLANK;
+		String velocityTemplateContent = StringPool.BLANK;
 
 		if (Validator.isNotNull(layoutTemplateId)) {
 			Theme theme = themeDisplay.getTheme();
@@ -87,15 +88,18 @@ public class ViewAction extends PortletAction {
 				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 					layoutTemplateId, false, theme.getThemeId());
 
-			content = renameTemplateColumnsAndIds(
-				layoutTemplate.getContent(), portlet);
 			velocityTemplateId =
-				theme.getThemeId() + "_CUSTOM_" + layoutTemplateId;
+				theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR +
+					layoutTemplateId;
+			velocityTemplateContent = renameTemplateColumnsAndIds(
+				layoutTemplate.getContent(), portlet);
 		}
 
-		renderRequest.setAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT, content);
 		renderRequest.setAttribute(
-			WebKeys.VELOCITY_TEMPLATE_ID, velocityTemplateId);
+			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID, velocityTemplateId);
+		renderRequest.setAttribute(
+			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT,
+			velocityTemplateContent);
 
 		return mapping.findForward("portlet.nested_portlets.view");
 	}

@@ -63,11 +63,9 @@ public class JournalTemplateListener extends BaseModelListener {
 
 		LiferayResourceCacheUtil.clear();
 
-		// Velocity template cache
-
 		VelocityEngineUtil.flushTemplate(
 			template.getCompanyId() + template.getGroupId() +
-			template.getTemplateId());
+				template.getTemplateId());
 	}
 
 }

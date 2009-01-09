@@ -30,29 +30,29 @@
 boolean layoutMaximized = layoutTypePortlet.hasStateMax();
 
 if (!layoutMaximized) {
-	String content = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String velocityTemplateId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
+	String velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR + layoutTypePortlet.getLayoutTemplateId();
+	String velocityTemplateContent = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, velocityTemplateContent) %>
 
 <%
 }
 else {
-	String content = null;
 	String velocityTemplateId = null;
+	String velocityTemplateContent = null;
 
 	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "exclusive";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
 	}
 	else {
-		content = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "max";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], velocityTemplateId, velocityTemplateContent) %>
 
 <%
 }

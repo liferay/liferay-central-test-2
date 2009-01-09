@@ -136,11 +136,13 @@ public class JournalVmUtil {
 						"line", new Integer(pe.getLineNumber()));
 				}
 
-				String errorTemplate = ContentUtil.get(
+				String velocityTemplateId =
+					PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY;
+				String velocityTemplateContent = ContentUtil.get(
 					PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY);
 
 				load = VelocityEngineUtil.mergeTemplate(
-					PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY, errorTemplate,
+					velocityTemplateId, velocityTemplateContent,
 					velocityContext, output);
 			}
 		}

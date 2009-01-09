@@ -157,8 +157,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LAYOUT_PORTLETS = "LAYOUT_PORTLETS";
 
-	public static final String LAYOUT_TEMPLATE_CONTENT = "LAYOUT_TEMPLATE_CONTENT";
-
 	public static final String LIVE_SESSION_USERS = "LIVE_SESSION_USERS";
 
 	public static final String LIVE_USER_TRACKERS = "LIVE_USER_TRACKERS";
@@ -208,6 +206,10 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE = "MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE";
 
 	public static final String MESSAGE_BOARDS_TREE_WALKER_THREAD = "MESSAGE_BOARDS_TREE_WALKER_THREAD";
+
+	public static final String NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT = "NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT";
+
+	public static final String NESTED_PORTLET_VELOCITY_TEMPLATE_ID = "NESTED_PORTLET_VELOCITY_TEMPLATE_ID";
 
 	public static final String NOTES_LIST = "NOTES_LIST";
 
@@ -342,8 +344,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String USER_PASSWORD = "USER_PASSWORD";
 
 	public static final String USERS_NOTIFIED = "USERS_NOTIFIED";
-
-	public static final String VELOCITY_TEMPLATE_ID = "VELOCITY_TEMPLATE_ID";
 
 	public static final String VIRTUAL_HOST_LAYOUT_SET = "VIRTUAL_HOST_LAYOUT_SET";
 

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.velocity;
 
-import java.io.IOException;
-import java.io.Writer;
-
-import org.apache.commons.collections.ExtendedProperties;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
-
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -37,6 +29,16 @@ import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngine;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
+
+import java.io.IOException;
+import java.io.Writer;
+
+import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
+import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
 /**
  * <a href="VelocityEngineImpl.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +52,10 @@ public class VelocityEngineImpl implements VelocityEngine {
 	}
 
 	public void flushTemplate(String resource) {
-		StringResourceLoader.getRepository().removeStringResource(resource);
+		StringResourceRepository stringResourceRepository =
+			StringResourceLoader.getRepository();
+
+		stringResourceRepository.removeStringResource(resource);
 	}
 
 	public VelocityContext getEmptyContext() {
@@ -78,58 +83,55 @@ public class VelocityEngineImpl implements VelocityEngine {
 	public void init() {
 		_velocityEngine = new org.apache.velocity.app.VelocityEngine();
 
-		LiferayResourceLoader.setListeners(PropsUtil.getArray(
-			PropsKeys.VELOCITY_ENGINE_RESOURCE_LISTENERS));
+		LiferayResourceLoader.setListeners(
+			PropsValues.VELOCITY_ENGINE_RESOURCE_LISTENERS);
 
-		ExtendedProperties props = new ExtendedProperties();
+		ExtendedProperties extendedProperties = new ExtendedProperties();
 
-		props.setProperty(
-			org.apache.velocity.app.VelocityEngine.RESOURCE_LOADER,
-			"string,servlet");
+		extendedProperties.setProperty(_RESOURCE_LOADER, "string,servlet");
 
-		props.setProperty(
-			"string." + org.apache.velocity.app.VelocityEngine.RESOURCE_LOADER +
-				".class",
+		extendedProperties.setProperty(
+			"string." + _RESOURCE_LOADER + ".class",
 			StringResourceLoader.class.getName());
 
-		props.setProperty(
-			"servlet." +
-				org.apache.velocity.app.VelocityEngine.RESOURCE_LOADER +
-					".class",
+		extendedProperties.setProperty(
+			"servlet." + _RESOURCE_LOADER + ".class",
 			LiferayResourceLoader.class.getName());
 
-		props.setProperty(
+		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.RESOURCE_MANAGER_CLASS,
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER));
 
-		props.setProperty(
+		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.RESOURCE_MANAGER_CACHE_CLASS,
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
 
-		props.setProperty(
+		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.VM_LIBRARY,
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
 
-		props.setProperty(
+		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.RUNTIME_LOG_LOGSYSTEM_CLASS,
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER));
 
-		props.setProperty(
+		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.RUNTIME_LOG_LOGSYSTEM +
 				".log4j.category",
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER_CATEGORY));
 
-		_velocityEngine.setExtendedProperties(props);
+		_velocityEngine.setExtendedProperties(extendedProperties);
 
 		try {
 			_velocityEngine.init();
 
 			_restrictedToolsContext = new VelocityContextImpl();
-			_standardToolsContext = new VelocityContextImpl();
 
 			VelocityVariables.insertHelperUtilities(
 				_restrictedToolsContext,
-				_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+				PropsValues.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+
+			_standardToolsContext = new VelocityContextImpl();
+
 			VelocityVariables.insertHelperUtilities(
 				_standardToolsContext, null);
 		}
@@ -139,23 +141,33 @@ public class VelocityEngineImpl implements VelocityEngine {
 	}
 
 	public boolean mergeTemplate(
-			String templateId, VelocityContext velocityContext, Writer writer)
-		throws SystemException, IOException {
-
-		return mergeTemplate(templateId, null, velocityContext, writer);
-	}
-
-	public boolean mergeTemplate(
-			String velocityTemplateId, String template, VelocityContext velocityContext,
+			String velocityTemplateId, VelocityContext velocityContext,
 			Writer writer)
 		throws SystemException, IOException {
 
-		try {
-			if (Validator.isNotNull(template) && !resourceExists(velocityTemplateId)) {
-				StringResourceLoader.getRepository().putStringResource(
-					velocityTemplateId, template);
+		return mergeTemplate(velocityTemplateId, null, velocityContext, writer);
+	}
 
-				_log.debug("Added " + velocityTemplateId + " to the Velocity template repository");
+	public boolean mergeTemplate(
+			String velocityTemplateId, String velocityTemplateContent,
+			VelocityContext velocityContext, Writer writer)
+		throws SystemException, IOException {
+
+		try {
+			if (Validator.isNotNull(velocityTemplateContent) &&
+				!resourceExists(velocityTemplateId)) {
+
+				StringResourceRepository stringResourceRepository =
+					StringResourceLoader.getRepository();
+
+				stringResourceRepository.putStringResource(
+					velocityTemplateId, velocityTemplateContent);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Added " + velocityTemplateId +
+							" to the Velocity template repository");
+				}
 			}
 
 			VelocityContextImpl velocityContextImpl =
@@ -177,15 +189,13 @@ public class VelocityEngineImpl implements VelocityEngine {
 		return _velocityEngine.resourceExists(resource);
 	}
 
-	private static final String[] _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES =
-		PropsUtil.getArray(
-			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+	private static final String _RESOURCE_LOADER =
+		org.apache.velocity.app.VelocityEngine.RESOURCE_LOADER;
 
 	private static final Log _log = LogFactory.getLog(VelocityEngineImpl.class);
 
 	private VelocityContextImpl _restrictedToolsContext;
 	private VelocityContextImpl _standardToolsContext;
-
 	private org.apache.velocity.app.VelocityEngine _velocityEngine;
 
 }

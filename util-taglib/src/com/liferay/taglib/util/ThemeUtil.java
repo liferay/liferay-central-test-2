@@ -169,7 +169,7 @@ public class ThemeUtil {
 			return null;
 		}
 
-		StringWriter sw = new StringWriter();
+		StringWriter stringWriter = new StringWriter();
 
 		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
@@ -198,11 +198,11 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		VelocityEngineUtil.mergeTemplate(source, velocityContext, sw);
+		VelocityEngineUtil.mergeTemplate(source, velocityContext, stringWriter);
 
 		// Print output
 
-		String output = sw.toString();
+		String output = stringWriter.toString();
 
 		if (write) {
 			pageContext.getOut().print(output);

@@ -190,21 +190,22 @@ public class RuntimePortletUtil {
 	public static String processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String velocityTemplateId, String content)
+			String velocityTemplateId, String velocityTemplateContent)
 		throws Exception {
 
 		return processTemplate(
-			servletContext, request, response, pageContext, null, velocityTemplateId,
-			content);
+			servletContext, request, response, pageContext, null,
+			velocityTemplateId, velocityTemplateContent);
 	}
 
 	public static String processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String portletId, String velocityTemplateId, String content)
+			String portletId, String velocityTemplateId,
+			String velocityTemplateContent)
 		throws Exception {
 
-		if (Validator.isNull(content)) {
+		if (Validator.isNull(velocityTemplateContent)) {
 			return StringPool.BLANK;
 		}
 
@@ -236,11 +237,12 @@ public class RuntimePortletUtil {
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
 
-		StringWriter sw = new StringWriter();
+		StringWriter stringWriter = new StringWriter();
 
 		try {
 			VelocityEngineUtil.mergeTemplate(
-				velocityTemplateId, content, velocityContext, sw);
+				velocityTemplateId, velocityTemplateContent, velocityContext,
+				stringWriter);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -248,7 +250,7 @@ public class RuntimePortletUtil {
 			throw e;
 		}
 
-		String output = sw.toString();
+		String output = stringWriter.toString();
 
 		Map<String, String> columnsMap = processor.getColumnsMap();
 

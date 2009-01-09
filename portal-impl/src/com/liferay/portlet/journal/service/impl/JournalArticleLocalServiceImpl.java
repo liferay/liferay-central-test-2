@@ -1109,6 +1109,11 @@ public class JournalArticleLocalServiceImpl
 			"article_resource_pk",
 			String.valueOf(article.getResourcePrimKey()));
 
+		if (article.isTemplateDriven()) {
+			tokens.put("structure_id", article.getStructureId());
+			tokens.put("template_id", article.getTemplateId());
+		}
+
 		String xml = article.getContent();
 
 		try {
@@ -1117,9 +1122,6 @@ public class JournalArticleLocalServiceImpl
 			Element root = null;
 
 			if (article.isTemplateDriven()) {
-				tokens.put("structure_id", article.getStructureId());
-				tokens.put("template_id", article.getTemplateId());
-
 				doc = SAXReaderUtil.read(xml);
 
 				root = doc.getRootElement();

@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.velocity;
 
+import com.liferay.portal.SystemException;
+
 import java.io.IOException;
 import java.io.Writer;
-
-import com.liferay.portal.SystemException;
 
 /**
  * <a href="VelocityEngine.java.html"><b><i>View Source</i></b></a>
@@ -50,12 +50,13 @@ public interface VelocityEngine {
 	public VelocityContext getWrappedStandardToolsContext();
 
 	public boolean mergeTemplate(
-			String velocityTemplateId, VelocityContext context, Writer writer)
+			String velocityTemplateId, VelocityContext velocityContext,
+			Writer writer)
 		throws SystemException, IOException;
 
 	public boolean mergeTemplate(
-			String velocityTemplateId, String template, VelocityContext context,
-			Writer writer)
+			String velocityTemplateId, String velocityTemplateContent,
+			VelocityContext velocityContext, Writer writer)
 		throws SystemException, IOException;
 
 	public boolean resourceExists(String resource);

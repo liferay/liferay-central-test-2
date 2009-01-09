@@ -20,41 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.velocity;
-
-import com.liferay.portal.kernel.velocity.VelocityContext;
+package com.liferay.portal.model;
 
 /**
- * <a href="VelocityContextImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutTemplateConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class VelocityContextImpl implements VelocityContext {
+public class LayoutTemplateConstants {
 
-	public VelocityContextImpl() {
-		_velocityContext = new org.apache.velocity.VelocityContext();
-	}
+	public static final String CUSTOM_SEPARATOR = "_CUSTOM_";
 
-	public VelocityContextImpl(
-		org.apache.velocity.VelocityContext velocityContext) {
-
-		_velocityContext = new org.apache.velocity.VelocityContext(
-			velocityContext);
-	}
-
-	public Object get(String key) {
-		return _velocityContext.get(key);
-	}
-
-	public org.apache.velocity.VelocityContext getWrappedVelocityContext() {
-		return _velocityContext;
-	}
-
-	public void put(String key, Object value) {
-		_velocityContext.put(key, value);
-	}
-
-	private org.apache.velocity.VelocityContext _velocityContext;
+	public static final String STANDARD_SEPARATOR = "_STANDARD_";
 
 }

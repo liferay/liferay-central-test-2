@@ -37,26 +37,26 @@
 if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
 	String ppid = ParamUtil.getString(request, "p_p_id");
 
-	String content = null;
 	String velocityTemplateId = null;
+	String velocityTemplateContent = null;
 
 	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "exclusive";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
 	}
 	else if (themeDisplay.isStatePopUp()) {
-		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "pop_up";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
 	else {
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "max";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, velocityTemplateContent) %>
 
 <%
 }

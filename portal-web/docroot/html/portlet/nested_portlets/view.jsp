@@ -48,11 +48,11 @@
 
 <%
 try {
-	String content = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT);
 	String velocityTemplateId = (String)request.getAttribute(WebKeys.VELOCITY_TEMPLATE_ID);
+	String velocityTemplateContent = (String)request.getAttribute(WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT);
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, velocityTemplateContent) %>
 
 <%
 }

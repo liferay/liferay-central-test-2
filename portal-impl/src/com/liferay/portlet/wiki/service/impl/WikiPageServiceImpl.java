@@ -42,7 +42,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
@@ -64,11 +63,9 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * <a href="WikiPageServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -397,8 +394,9 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));
 
-		String velocityTemplateId = "com/liferay/portlet/wiki/dependencies/rss.vm";
-		String template = ContentUtil.get(velocityTemplateId);
+		String velocityTemplateId =
+			"com/liferay/portlet/wiki/dependencies/rss.vm";
+		String velocityTemplateContent = ContentUtil.get(velocityTemplateId);
 
 		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
@@ -412,12 +410,13 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		velocityContext.put("targetResults", diffResults[1]);
 
 		try {
-			StringWriter writer = new StringWriter();
+			StringWriter stringWriter = new StringWriter();
 
 			VelocityEngineUtil.mergeTemplate(
-				velocityTemplateId, template, velocityContext, writer);
+				velocityTemplateId, velocityTemplateContent, velocityContext,
+				stringWriter);
 
-			return writer.toString();
+			return stringWriter.toString();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

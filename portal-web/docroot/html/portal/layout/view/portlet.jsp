@@ -28,39 +28,39 @@
 if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || themeDisplay.isWidget() || layoutTypePortlet.hasStateMax()) {
 	String ppid = ParamUtil.getString(request, "p_p_id");
 
-	String content = null;
 	String velocityTemplateId = null;
+	String velocityTemplateContent = null;
 
 	if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "exclusive";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
 	}
 	else if (themeDisplay.isStatePopUp() || themeDisplay.isWidget()) {
-		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "pop_up";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
 	else {
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "max";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
+		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, velocityTemplateContent) %>
 
 <%
 }
 else {
-	String content = LayoutTemplateLocalServiceUtil.getContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-	String velocityTemplateId = theme.getThemeId() + "_CUSTOM_" + layoutTypePortlet.getLayoutTemplateId();
+	String velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR + layoutTypePortlet.getLayoutTemplateId();
+	String velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
 %>
 
 	<c:if test="<%= PropsValues.TAGS_COMPILER_ENABLED %>">
 		<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
 	</c:if>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, velocityTemplateContent) %>
 
 <%
 }

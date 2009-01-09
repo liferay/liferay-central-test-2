@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.LayoutTemplateConstants;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
@@ -409,9 +410,20 @@ public class LayoutTemplateLocalServiceImpl
 						layoutTemplateModel.getTemplatePath());
 			}
 			else {
-				String velocityTemplateId =
-					themeId + (standard ? "_STANDARD_" : "_CUSTOM_") +
-						layoutTemplateModel.getLayoutTemplateId();
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(themeId);
+
+				if (standard) {
+					sb.append(LayoutTemplateConstants.STANDARD_SEPARATOR);
+				}
+				else {
+					sb.append(LayoutTemplateConstants.CUSTOM_SEPARATOR);
+				}
+
+				sb.append(layoutTemplateId);
+
+				String velocityTemplateId = sb.toString();
 
 				layoutTemplateModel.setContent(content);
 				layoutTemplateModel.setColumns(
@@ -472,41 +484,54 @@ public class LayoutTemplateLocalServiceImpl
 
 		if (standard) {
 			VelocityEngineUtil.flushTemplate(
-				"null_STANDARD_" + layoutTemplateId);
+				"null" + LayoutTemplateConstants.STANDARD_SEPARATOR +
+					layoutTemplateId);
 
 			_warStandard.remove(layoutTemplateId);
 		}
 		else {
 			VelocityEngineUtil.flushTemplate(
-				"null_CUSTOM_" + layoutTemplateId);
+				"null" + LayoutTemplateConstants.CUSTOM_SEPARATOR +
+					layoutTemplateId);
 
 			_warCustom.remove(layoutTemplateId);
 		}
 	}
 
 	public void uninstallLayoutTemplates(String themeId) {
-		for (Map.Entry<String, LayoutTemplate> entry :
-			 	_getThemesStandard(themeId).entrySet()){
-
-			VelocityEngineUtil.flushTemplate(
-				themeId + "_STANDARD_" +
-					entry.getValue().getLayoutTemplateId());
-		}
-
-		_getThemesStandard(themeId).clear();
+		Map<String, LayoutTemplate> _themesStandard =
+			_getThemesStandard(themeId);
 
 		for (Map.Entry<String, LayoutTemplate> entry :
-			 	_getThemesCustom(themeId).entrySet()){
+				_themesStandard.entrySet()) {
+
+			LayoutTemplate layoutTemplate = entry.getValue();
 
 			VelocityEngineUtil.flushTemplate(
-				themeId + "_CUSTOM_" +
-					entry.getValue().getLayoutTemplateId());
+				themeId + LayoutTemplateConstants.STANDARD_SEPARATOR +
+					layoutTemplate.getLayoutTemplateId());
 		}
 
-		_getThemesCustom(themeId).clear();
+		_themesStandard.clear();
+
+		Map<String, LayoutTemplate> _themesCustom = _getThemesCustom(themeId);
+
+		for (Map.Entry<String, LayoutTemplate> entry :
+				_themesCustom.entrySet()) {
+
+			LayoutTemplate layoutTemplate = entry.getValue();
+
+			VelocityEngineUtil.flushTemplate(
+				themeId + LayoutTemplateConstants.CUSTOM_SEPARATOR +
+					layoutTemplate.getLayoutTemplateId());
+		}
+
+		_themesCustom.clear();
 	}
 
-	private List<String> _getColumns(String velocityTemplateId, String content) {
+	private List<String> _getColumns(
+		String velocityTemplateId, String velocityTemplateContent) {
+
 		try {
 			InitColumnProcessor processor = new InitColumnProcessor();
 
@@ -516,7 +541,7 @@ public class LayoutTemplateLocalServiceImpl
 			velocityContext.put("processor", processor);
 
 			VelocityEngineUtil.mergeTemplate(
-				velocityTemplateId, content, velocityContext,
+				velocityTemplateId, velocityTemplateContent, velocityContext,
 				new PrintWriter(new StringWriter()));
 
 			return ListUtil.sort(processor.getColumns());
@@ -564,7 +589,7 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	private Map<String, LayoutTemplate> _getThemesCustom(String themeId) {
-		String key = themeId + _CUSTOM_SEPARATOR;
+		String key = themeId + LayoutTemplateConstants.CUSTOM_SEPARATOR;
 
 		Map<String, LayoutTemplate> layoutTemplates = _themes.get(key);
 
@@ -578,7 +603,7 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	private Map<String, LayoutTemplate> _getThemesStandard(String themeId) {
-		String key = themeId + _STANDARD_SEPARATOR;
+		String key = themeId + LayoutTemplateConstants.STANDARD_SEPARATOR;
 
 		Map<String, LayoutTemplate> layoutTemplates = _themes.get(key);
 
@@ -590,10 +615,6 @@ public class LayoutTemplateLocalServiceImpl
 
 		return layoutTemplates;
 	}
-
-	private static final String _STANDARD_SEPARATOR = "_STANDARD_";
-
-	private static final String _CUSTOM_SEPARATOR = "_CUSTOM_";
 
 	private static Log _log =
 		LogFactory.getLog(LayoutTemplateLocalServiceImpl.class);

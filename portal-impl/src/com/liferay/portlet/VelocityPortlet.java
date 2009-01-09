@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.velocity.VelocityContextImpl;
 import com.liferay.portal.velocity.VelocityResourceListener;
-import com.liferay.portal.velocity.VelocityVariables;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -163,10 +162,24 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
+	protected Template getTemplate(String name) throws Exception {
+		return RuntimeSingleton.getTemplate(
+			_portletContextName + VelocityResourceListener.SERVLET_SEPARATOR +
+				StrutsUtil.TEXT_HTML_DIR + name, StringPool.UTF8);
+	}
+
+	protected Template getTemplate(String name, String encoding)
+		throws Exception {
+
+		return RuntimeSingleton.getTemplate(
+			StrutsUtil.TEXT_HTML_DIR + name, encoding);
+	}
+
 	protected VelocityContext getVelocityContext(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		VelocityContext context = VelocityEngineUtil.getWrappedStandardToolsContext();
+		VelocityContext context =
+			VelocityEngineUtil.getWrappedStandardToolsContext();
 
 		context.put("portletConfig", getPortletConfig());
 		context.put("portletContext", getPortletContext());
@@ -199,19 +212,6 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 
 		return context;
-	}
-
-	protected Template getTemplate(String name) throws Exception {
-		return RuntimeSingleton.getTemplate(
-			_portletContextName + VelocityResourceListener.SERVLET_SEPARATOR +
-				StrutsUtil.TEXT_HTML_DIR + name, StringPool.UTF8);
-	}
-
-	protected Template getTemplate(String name, String encoding)
-		throws Exception {
-
-		return RuntimeSingleton.getTemplate(
-			StrutsUtil.TEXT_HTML_DIR + name, encoding);
 	}
 
 	protected void mergeTemplate(
