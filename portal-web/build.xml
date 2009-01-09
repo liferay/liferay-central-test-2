@@ -397,7 +397,6 @@
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
-		<antcall target="build-sprite" />
 		<antcall target="build-tinymce" />
 		<antcall target="build-wsrp" />
 
