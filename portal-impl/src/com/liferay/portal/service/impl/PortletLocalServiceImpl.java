@@ -23,6 +23,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.image.SpriteProcessorUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
@@ -51,7 +52,6 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
-import com.liferay.portal.tools.SpriteBuilder;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -1738,7 +1738,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		String spritePropertiesRootPath = servletContext.getRealPath(
 			StringPool.SLASH);
 
-		Properties spriteProperties = SpriteBuilder.buildSprite(
+		Properties spriteProperties = SpriteProcessorUtil.generate(
 			images, spriteFileName, spritePropertiesFileName,
 			spritePropertiesRootPath, 16, 16);
 

@@ -93,6 +93,11 @@
 			<bean class="com.liferay.portal.image.ImageProcessorImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.image.SpriteProcessorUtil" class="com.liferay.portal.kernel.image.SpriteProcessorUtil">
+		<property name="spriteProcessor">
+			<bean class="com.liferay.portal.image.SpriteProcessorImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.json.JSONFactoryUtil" class="com.liferay.portal.kernel.json.JSONFactoryUtil">
 		<property name="JSONFactory">
 			<bean class="com.liferay.portal.json.JSONFactoryImpl" />

@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.image.SpriteProcessorUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -49,7 +50,6 @@ import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
-import com.liferay.portal.tools.SpriteBuilder;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.Version;
@@ -708,7 +708,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		String spritePropertiesRootPath = servletContext.getRealPath(
 			theme.getImagesPath());
 
-		Properties spriteProperties = SpriteBuilder.buildSprite(
+		Properties spriteProperties = SpriteProcessorUtil.generate(
 			images, spriteFileName, spritePropertiesFileName,
 			spritePropertiesRootPath, 16, 16);
 

@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.image;
 
+import com.liferay.portal.kernel.image.SpriteProcessor;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -62,18 +63,18 @@ import javax.media.jai.operator.MosaicDescriptor;
 import javax.media.jai.operator.TranslateDescriptor;
 
 /**
- * <a href="SpriteBuilder.java.html"><b><i>View Source</i></b></a>
+ * <a href="SpriteProcessorImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SpriteBuilder {
+public class SpriteProcessorImpl implements SpriteProcessor {
 
 	static {
 		System.setProperty("com.sun.media.jai.disableMediaLib", "true");
 	}
 
-	public static Properties buildSprite(
+	public Properties generate(
 			List<File> images, String spriteFileName,
 			String spritePropertiesFileName, String spritePropertiesRootPath,
 			int maxHeight, int maxWidth)
@@ -186,7 +187,7 @@ public class SpriteBuilder {
 		return spriteProperties;
 	}
 
-	public static RenderedImage convert(RenderedOp renderedOp) {
+	protected RenderedImage convert(RenderedOp renderedOp) {
 		RenderedImage renderedImage = renderedOp;
 
 		int height = renderedOp.getHeight();
@@ -287,7 +288,7 @@ public class SpriteBuilder {
 		return renderedImage;
 	}
 
-	public static RenderedImage createRenderedImage(
+	protected RenderedImage createRenderedImage(
 		RenderedOp renderedOp, int height, int width, DataBuffer dataBuffer) {
 
 		SampleModel sampleModel =
@@ -313,7 +314,7 @@ public class SpriteBuilder {
 		return tiledImage;
 	}
 
-	public static void printImage(PlanarImage planarImage) {
+	protected void printImage(PlanarImage planarImage) {
 		SampleModel sampleModel = planarImage.getSampleModel();
 
 		int height = planarImage.getHeight();
