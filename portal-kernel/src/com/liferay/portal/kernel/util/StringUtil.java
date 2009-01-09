@@ -307,19 +307,24 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static String insert(String s, String text, int offset) {
-		if ((s == null) || (text == null)) {
+	public static String insert(String s, String insert, int offset) {
+		if (s == null) {
 			return null;
 		}
 
-		try {
-			StringBuilder sb = new StringBuilder(s);
-			sb.insert(offset, text);
-			return sb.toString();
+		if (insert == null) {
+			return s;
 		}
-		catch (StringIndexOutOfBoundsException siobe) {
-			return null;
+
+		if (offset > s.length()) {
+			offset = s.length();
 		}
+
+		StringBuilder sb = new StringBuilder(s);
+
+		sb.insert(offset, insert);
+
+		return sb.toString();
 	}
 
 	public static String lowerCase(String s) {

@@ -118,7 +118,7 @@ public class JournalTemplateFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				sql = replaceStructureIdComparator(sql, false);
+				sql = replaceStructureIdComparator(sql);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -241,7 +241,7 @@ public class JournalTemplateFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				sql = replaceStructureIdComparator(sql, true);
+				sql = replaceStructureIdComparator(sql);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -293,29 +293,27 @@ public class JournalTemplateFinderImpl
 		}
 	}
 
-	protected String replaceStructureIdComparator(
-		String sql, boolean isFinderQuery) {
-
-		String insertText =
-			"structureId != ? AND structureId IS NOT NULL";
+	protected String replaceStructureIdComparator(String sql) {
+		String insertSQL = "structureId != ? AND structureId IS NOT NULL";
 
 		if (CustomSQLUtil.isVendorOracle()) {
-			insertText = "structureId IS NOT NULL";
+			insertSQL = "structureId IS NOT NULL";
 		}
 
-		insertText = StringUtil.add(" AND (", insertText, StringPool.BLANK);
-		insertText = StringUtil.add(insertText, ") ", StringPool.BLANK);
+		insertSQL = " AND (" + insertSQL + ") ";
 
-		String textToBeReplaced =
+		String removeSQL =
 			"(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]";
 
-		sql = StringUtil.replace(sql, textToBeReplaced, "");
+		sql = StringUtil.replace(sql, removeSQL, StringPool.BLANK);
 
-		if (isFinderQuery) {
-			sql = StringUtil.insert(sql, insertText, sql.indexOf("ORDER"));
+		int pos = sql.indexOf("ORDER BY");
+
+		if (pos == -1) {
+			sql = sql + insertSQL;
 		}
 		else {
-			sql = StringUtil.add(sql, insertText, StringPool.BLANK);
+			sql = StringUtil.insert(sql, insertSQL, pos);
 		}
 
 		return sql;
