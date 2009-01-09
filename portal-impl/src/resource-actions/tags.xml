@@ -4,20 +4,32 @@
 	<portlet-resource>
 		<portlet-name>99</portlet-name>
 		<supports>
-			<action-key>ADD_ENTRY</action-key>
-			<action-key>ADD_VOCABULARY</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
-			<action-key>ADD_ENTRY</action-key>
-			<action-key>ADD_VOCABULARY</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</portlet-resource>
+	<model-resource>
+		<model-name>com.liferay.portlet.tags</model-name>
+		<portlet-ref>
+			<portlet-name>99</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ADD_ENTRY</action-key>
+			<action-key>ADD_VOCABULARY</action-key>
+		</supports>
+		<community-defaults/>
+		<guest-defaults/>
+		<guest-unsupported>
+			<action-key>ADD_ENTRY</action-key>
+			<action-key>ADD_VOCABULARY</action-key>
+		</guest-unsupported>
+	</model-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.tags.model.TagsEntry</model-name>
 		<portlet-ref>

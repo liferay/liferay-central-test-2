@@ -51,9 +51,22 @@
 			</div>
 
 			<div class="vocabulary-actions">
-				<input type="button" class="add-vocabulary-btn" name="add-vocabulary-btn" value="<liferay-ui:message key="add-tag-set" />" id="add-vocabulary-btn">
-				<input type="button" class="add-entry-btn" name="add-entry-btn" value="<liferay-ui:message key="add-tag" />" id="add-entry-btn">
+				<c:if test="<%= TagsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_VOCABULARY) %>">
+					<input type="button" class="add-vocabulary-btn" name="add-vocabulary-btn" value="<liferay-ui:message key="add-tag-set" />" id="add-vocabulary-btn">
+				</c:if>
+				<c:if test="<%= TagsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY) %>">
+					<input type="button" class="add-entry-btn" name="add-entry-btn" value="<liferay-ui:message key="add-tag" />" id="add-entry-btn">
+				</c:if>
+				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) %>">
+					<liferay-security:permissionsURL
+						modelResource="com.liferay.portlet.tags"
+						modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+						resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+						var="permissionsURL"
+					/>
 
+					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+				</c:if>
 				<div class="lfr-floating-panel entry-toolbar-section">
 					<div class="direction-indicator"></div>
 					<div class="panel-content">

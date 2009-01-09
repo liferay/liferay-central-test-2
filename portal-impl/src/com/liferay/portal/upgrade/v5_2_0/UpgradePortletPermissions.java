@@ -95,6 +95,10 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				new String[] {"ADD_FRAMEWORK_VERSION", "ADD_PRODUCT_ENTRY"});
 
 			updatePortletPermissions(
+				"99", "com.liferay.portlet.tags",
+				new String[] {"ADD_ENTRY", "ADD_VOCABULARY"});
+
+			updatePortletPermissions(
 				"36", "com.liferay.portlet.wiki",
 				new String[] {"ADD_NODE"});
 		}

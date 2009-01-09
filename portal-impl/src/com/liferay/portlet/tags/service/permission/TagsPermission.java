@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,10 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portlet.tags.service.permission;
 
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
-<%@ page import="com.liferay.portlet.tags.service.permission.TagsPermission" %>
+import com.liferay.portal.PortalException;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
+
+/**
+ * <a href="TagsPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ *
+ */
+public class TagsPermission {
+
+	public static void check(
+			PermissionChecker permissionChecker, long groupId, String actionId)
+		throws PortalException {
+
+		if (!contains(permissionChecker, groupId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long groupId, String actionId) {
+
+		return permissionChecker.hasPermission(
+			groupId, "com.liferay.portlet.tags", groupId, actionId);
+	}
+
+}

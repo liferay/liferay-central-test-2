@@ -683,7 +683,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 					{
 						communityPermissions: communityPermission,
 						guestPermissions: guestPermission,
-						plid: themeDisplay.getPlid(),
 						scopeGroupId: themeDisplay.getScopeGroupId()
 					}
 				),
@@ -773,7 +772,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 					{
 						communityPermissions: communityPermission,
 						guestPermissions: guestPermission,
-						plid: themeDisplay.getPlid(),
 						scopeGroupId: themeDisplay.getScopeGroupId()
 					}
 				)

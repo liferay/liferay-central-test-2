@@ -26,8 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
@@ -41,11 +39,11 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 public class TagsEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, long entryId,
+			PermissionChecker permissionChecker, long groupId, long entryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, entryId, actionId)) {
+		if (!contains(permissionChecker, groupId, entryId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -70,13 +68,13 @@ public class TagsEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, long entryId,
+			PermissionChecker permissionChecker, long groupId, long entryId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		if (entryId == TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID) {
-			return PortletPermissionUtil.contains(
-				permissionChecker, plid, PortletKeys.TAGS_ADMIN, actionId);
+			return TagsPermission.contains(
+				permissionChecker, groupId, actionId);
 		}
 		else {
 			return contains(permissionChecker, entryId, actionId);

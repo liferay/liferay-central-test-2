@@ -28,10 +28,9 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.base.TagsVocabularyServiceBaseImpl;
+import com.liferay.portlet.tags.service.permission.TagsPermission;
 import com.liferay.portlet.tags.service.permission.TagsVocabularyPermission;
 
 import java.util.Iterator;
@@ -50,9 +49,9 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 			String name, boolean folksonomy, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(),
-			PortletKeys.TAGS_ADMIN, ActionKeys.ADD_VOCABULARY);
+		TagsPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_VOCABULARY);
 
 		return tagsVocabularyLocalService.addVocabulary(
 			getUserId(), name, folksonomy, serviceContext);

@@ -70,8 +70,8 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		}
 
 		TagsEntryPermission.check(
-			getPermissionChecker(), serviceContext.getPlid(), parentEntryId,
-			ActionKeys.ADD_ENTRY);
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			parentEntryId, ActionKeys.ADD_ENTRY);
 
 		return tagsEntryLocalService.addEntry(
 			getUserId(), parentEntryName, name, vocabularyName, properties,
