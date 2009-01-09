@@ -138,10 +138,8 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 				return;
 			}
 
-			PortletLocalServiceUtil.destroyPortlet(portlet);
-
 			PortletInstanceFactory.destroy(portlet);
-			
+
 			WSRPPersistenceHelper persistenceHelper =
 				WSRPPersistenceHelper.getInstance();
 
