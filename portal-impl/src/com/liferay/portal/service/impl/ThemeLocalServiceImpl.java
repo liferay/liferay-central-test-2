@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -505,6 +506,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			}
 		}
 
+		long timestamp = ServletContextUtil.getLastModified(servletContext);
+
 		Iterator<Element> itr1 = root.elements("theme").iterator();
 
 		while (itr1.hasNext()) {
@@ -536,7 +539,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				_themes.put(themeId, themeModel);
 			}
 
-			themeModel.setTimestamp(System.currentTimeMillis());
+			themeModel.setTimestamp(timestamp);
 
 			PluginSetting pluginSetting =
 				PluginSettingLocalServiceUtil.getDefaultPluginSetting();

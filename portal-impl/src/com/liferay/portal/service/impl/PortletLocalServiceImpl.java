@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -340,11 +341,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			List<String> servletURLPatterns = _readWebXML(xmls[4]);
 
 			Set<String> portletIds = _readPortletXML(
-				xmls[0], portletsPool, servletURLPatterns, pluginPackage);
+				servletContext, xmls[0], portletsPool, servletURLPatterns,
+				pluginPackage);
 
 			portletIds.addAll(
 				_readPortletXML(
-					xmls[1], portletsPool, servletURLPatterns, pluginPackage));
+					servletContext, xmls[1], portletsPool, servletURLPatterns,
+					pluginPackage));
 
 			Set<String> liferayPortletIds =
 				_readLiferayPortletXML(xmls[2], portletsPool);
@@ -431,12 +434,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			List<String> servletURLPatterns = _readWebXML(xmls[3]);
 
 			Set<String> portletIds = _readPortletXML(
-				servletContextName, xmls[0], portletsPool, servletURLPatterns,
-				pluginPackage);
+				servletContextName, servletContext, xmls[0], portletsPool,
+				servletURLPatterns, pluginPackage);
 
 			portletIds.addAll(
 				_readPortletXML(
-					servletContextName, xmls[1], portletsPool,
+					servletContextName, servletContext, xmls[1], portletsPool,
 					servletURLPatterns, pluginPackage));
 
 			Set<String> liferayPortletIds = _readLiferayPortletXML(
@@ -1240,19 +1243,20 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private Set<String> _readPortletXML(
-			String xml, Map<String, Portlet> portletsPool,
-			List<String> servletURLPatterns, PluginPackage pluginPackage)
+			ServletContext servletContext, String xml,
+			Map<String, Portlet> portletsPool, List<String> servletURLPatterns,
+			PluginPackage pluginPackage)
 		throws Exception {
 
 		return _readPortletXML(
-			StringPool.BLANK, xml, portletsPool, servletURLPatterns,
-			pluginPackage);
+			StringPool.BLANK, servletContext, xml, portletsPool,
+			servletURLPatterns, pluginPackage);
 	}
 
 	private Set<String> _readPortletXML(
-			String servletContextName, String xml,
-			Map<String, Portlet> portletsPool, List<String> servletURLPatterns,
-			PluginPackage pluginPackage)
+			String servletContextName, ServletContext servletContext,
+			String xml, Map<String, Portlet> portletsPool,
+			List<String> servletURLPatterns, PluginPackage pluginPackage)
 		throws Exception {
 
 		Set<String> portletIds = new HashSet<String>();
@@ -1342,6 +1346,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				name, values.toArray(new String[values.size()]));
 		}
 
+		long timestamp = ServletContextUtil.getLastModified(servletContext);
+
 		itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
@@ -1374,7 +1380,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletsPool.put(portletId, portletModel);
 			}
 
-			portletModel.setTimestamp(System.currentTimeMillis());
+			portletModel.setTimestamp(timestamp);
 
 			portletModel.setPluginPackage(pluginPackage);
 			portletModel.setPortletApp(portletApp);
