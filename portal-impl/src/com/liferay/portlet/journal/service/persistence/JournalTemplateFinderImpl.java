@@ -45,6 +45,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Prakash Reddy
  *
  */
 public class JournalTemplateFinderImpl
@@ -117,7 +118,7 @@ public class JournalTemplateFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				sql = replaceStructureIdComparator(sql);
+				sql = replaceStructureIdComparator(sql, false);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -141,6 +142,14 @@ public class JournalTemplateFinderImpl
 
 			qPos.add(templateIds, 2);
 
+			if (structureIdComparator.equals(StringPool.EQUAL)) {
+				qPos.add(structureId);
+				qPos.add(structureId);
+			}
+
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				if (CustomSQLUtil.isVendorOracle()) {
 				}
@@ -148,16 +157,6 @@ public class JournalTemplateFinderImpl
 					qPos.add(structureId);
 				}
 			}
-			else {
-				qPos.add(structureId);
-			}
-
-			if (structureIdComparator.equals(StringPool.EQUAL)) {
-				qPos.add(structureId);
-			}
-
-			qPos.add(names, 2);
-			qPos.add(descriptions, 2);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -242,15 +241,7 @@ public class JournalTemplateFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				String replaceWith =
-					"structureId != ? AND structureId IS NOT NULL";
-
-				if (CustomSQLUtil.isVendorOracle()) {
-					replaceWith = "structureId IS NOT NULL";
-				}
-
-				sql = StringUtil.replace(
-					sql, "structureId = ? [$AND_OR_NULL_CHECK$]", replaceWith);
+				sql = replaceStructureIdComparator(sql, true);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -275,6 +266,14 @@ public class JournalTemplateFinderImpl
 
 			qPos.add(templateIds, 2);
 
+			if (structureIdComparator.equals(StringPool.EQUAL)) {
+				qPos.add(structureId);
+				qPos.add(structureId);
+			}
+
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				if (CustomSQLUtil.isVendorOracle()) {
 				}
@@ -282,16 +281,6 @@ public class JournalTemplateFinderImpl
 					qPos.add(structureId);
 				}
 			}
-			else {
-				qPos.add(structureId);
-			}
-
-			if (structureIdComparator.equals(StringPool.EQUAL)) {
-				qPos.add(structureId);
-			}
-
-			qPos.add(names, 2);
-			qPos.add(descriptions, 2);
 
 			return (List<JournalTemplate>)QueryUtil.list(
 				q, getDialect(), start, end);
@@ -304,18 +293,32 @@ public class JournalTemplateFinderImpl
 		}
 	}
 
-	protected String replaceStructureIdComparator(String sql) {
-		String replaceWith =
-			"(structureId != ? AND structureId IS NOT NULL) AND";
+	protected String replaceStructureIdComparator(
+		String sql, boolean isFinderQuery) {
+
+		String insertText =
+			"structureId != ? AND structureId IS NOT NULL";
 
 		if (CustomSQLUtil.isVendorOracle()) {
-			replaceWith = "(structureId IS NOT NULL) AND";
+			insertText = "structureId IS NOT NULL";
 		}
 
-		return StringUtil.replace(
-			sql,
-			"(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]",
-			replaceWith);
+		insertText = StringUtil.add(" AND (", insertText, StringPool.BLANK);
+		insertText = StringUtil.add(insertText, ") ", StringPool.BLANK);
+
+		String textToBeReplaced =
+			"(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]";
+
+		sql = StringUtil.replace(sql, textToBeReplaced, "");
+
+		if (isFinderQuery) {
+			sql = StringUtil.insert(sql, insertText, sql.indexOf("ORDER"));
+		}
+		else {
+			sql = StringUtil.add(sql, insertText, StringPool.BLANK);
+		}
+
+		return sql;
 	}
 
 }
