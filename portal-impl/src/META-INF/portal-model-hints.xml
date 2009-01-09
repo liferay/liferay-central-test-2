@@ -80,7 +80,9 @@
 		</field>
 		<field name="virtualHost" type="String" />
 		<field name="mx" type="String" />
-		<field name="homeURL" type="String" />
+		<field name="homeURL" type="String">
+			<hint name="max-length">1024</hint>
+		</field>
 		<field name="logoId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Contact">

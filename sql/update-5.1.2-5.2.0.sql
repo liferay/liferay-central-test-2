@@ -1,4 +1,4 @@
-alter table Company add homeURL STRING null;
+alter table Company add homeURL VARCHAR(1024) null;
 
 alter table ExpandoColumn add defaultData STRING null;
 alter table ExpandoColumn add typeSettings TEXT null;
