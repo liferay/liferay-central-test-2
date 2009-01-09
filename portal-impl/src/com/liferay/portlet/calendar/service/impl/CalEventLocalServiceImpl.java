@@ -431,10 +431,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return exportICal4j(toICalCalendar(userId, events), null);
 	}
 
-	public File exportGroupEvents(long userId, long plid, String fileName)
+	public File exportGroupEvents(long userId, long groupId, String fileName)
 		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		List<CalEvent> events = calEventPersistence.findByGroupId(groupId);
 
@@ -613,7 +611,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void importICal4j(long userId, long plid, File file)
+	public void importICal4j(long userId, long groupId, File file)
 		throws PortalException, SystemException {
 
 		try {
@@ -628,7 +626,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			while (itr.hasNext()) {
 				VEvent vEvent = itr.next();
 
-				importICal4j(userId, plid, vEvent);
+				importICal4j(userId, groupId, vEvent);
 			}
 		}
 		catch (IOException ioe) {
@@ -819,7 +817,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	protected void importICal4j(
-			long userId, long plid, VEvent event)
+			long userId, long groupId, VEvent event)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -981,7 +979,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setPlid(plid);
+		serviceContext.setScopeGroupId(groupId);
 
 		addEvent(
 			userId, title, description, startDate.get(Calendar.MONTH),

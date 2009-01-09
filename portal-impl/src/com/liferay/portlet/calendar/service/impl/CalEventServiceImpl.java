@@ -27,11 +27,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.base.CalEventServiceBaseImpl;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
+import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import java.io.File;
 
@@ -54,9 +53,9 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(),
-			PortletKeys.CALENDAR, ActionKeys.ADD_EVENT);
+		CalendarPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_EVENT);
 
 		return calEventLocalService.addEvent(
 			getUserId(), title, description, startDateMonth, startDateDay,
@@ -84,15 +83,14 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		return calEventLocalService.exportEvent(getUserId(), eventId);
 	}
 
-	public File exportGroupEvents(long plid, String fileName)
+	public File exportGroupEvents(long groupId, String fileName)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.CALENDAR,
-			ActionKeys.EXPORT_ALL_EVENTS);
+		CalendarPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.EXPORT_ALL_EVENTS);
 
 		return calEventLocalService.exportGroupEvents(
-			getUserId(), plid, fileName);
+			getUserId(), groupId, fileName);
 	}
 
 	public CalEvent getEvent(long eventId)
@@ -104,14 +102,13 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		return calEventLocalService.getEvent(eventId);
 	}
 
-	public void importICal4j(long plid, File file)
+	public void importICal4j(long groupId, File file)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.CALENDAR,
-			ActionKeys.ADD_EVENT);
+		CalendarPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_EVENT);
 
-		calEventLocalService.importICal4j(getUserId(), plid, file);
+		calEventLocalService.importICal4j(getUserId(), groupId, file);
 	}
 
 	public CalEvent updateEvent(

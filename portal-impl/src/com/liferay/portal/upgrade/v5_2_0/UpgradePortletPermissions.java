@@ -60,6 +60,10 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				new String[] {"ADD_FOLDER"});
 
 			updatePortletPermissions(
+				"8", "com.liferay.portlet.calendar",
+				new String[] {"ADD_EVENT", "EXPORT_ALL_EVENTS"});
+
+			updatePortletPermissions(
 				"20", "com.liferay.portlet.documentlibrary",
 				new String[] {"ADD_FOLDER"});
 

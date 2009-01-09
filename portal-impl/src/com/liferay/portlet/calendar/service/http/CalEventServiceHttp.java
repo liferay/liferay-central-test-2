@@ -259,11 +259,11 @@ public class CalEventServiceHttp {
 	}
 
 	public static java.io.File exportGroupEvents(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String fileName)
+		long groupId, java.lang.String fileName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = fileName;
 
@@ -336,12 +336,12 @@ public class CalEventServiceHttp {
 		}
 	}
 
-	public static void importICal4j(HttpPrincipal httpPrincipal, long plid,
+	public static void importICal4j(HttpPrincipal httpPrincipal, long groupId,
 		java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = file;
 

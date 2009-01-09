@@ -37,8 +37,28 @@ tabs1URL.setParameter("day", String.valueOf(selDay));
 tabs1URL.setParameter("year", String.valueOf(selYear));
 %>
 
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	url="<%= tabs1URL.toString() %>"
-	value="<%= tabs1 %>"
+<liferay-security:permissionsURL
+	modelResource="com.liferay.portlet.calendar"
+	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+	var="permissionsURL"
 />
+
+<c:choose>
+	<c:when test="<%= (CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.EXPORT_ALL_EVENTS) || CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT)) %>">
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			url="<%= tabs1URL.toString() %>"
+			url7="<%= permissionsURL %>"
+			value="<%= tabs1 %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			url="<%= tabs1URL.toString() %>"
+			url6="<%= permissionsURL %>"
+			value="<%= tabs1 %>"
+		/>
+	</c:otherwise>
+</c:choose>

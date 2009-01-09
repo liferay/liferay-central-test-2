@@ -24,10 +24,11 @@ package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 
 import java.io.File;
@@ -58,11 +59,13 @@ public class ImportEventsAction extends PortletAction {
 			UploadPortletRequest uploadRequest =
 				PortalUtil.getUploadPortletRequest(actionRequest);
 
-			Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CalEvent.class.getName(), actionRequest);
 
 			File file = uploadRequest.getFile("file");
 
-			CalEventServiceUtil.importICal4j(layout.getPlid(), file);
+			CalEventServiceUtil.importICal4j(
+				serviceContext.getScopeGroupId(), file);
 
 			sendRedirect(actionRequest, actionResponse);
 		}

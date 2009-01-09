@@ -75,7 +75,8 @@ public interface CalEventService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.io.File exportGroupEvents(long plid, java.lang.String fileName)
+	public java.io.File exportGroupEvents(long groupId,
+		java.lang.String fileName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -84,7 +85,7 @@ public interface CalEventService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void importICal4j(long plid, java.io.File file)
+	public void importICal4j(long groupId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

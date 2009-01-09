@@ -79,7 +79,7 @@ public class ExportEventsAction extends PortletAction {
 			}
 			else {
 				file = CalEventServiceUtil.exportGroupEvents(
-					themeDisplay.getPlid(), exportFileName);
+					themeDisplay.getScopeGroupId(), exportFileName);
 			}
 
 			is = new BufferedInputStream(new FileInputStream(file));

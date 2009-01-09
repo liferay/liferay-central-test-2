@@ -33,6 +33,7 @@
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 <%@ page import="com.liferay.portlet.calendar.model.impl.CalEventImpl" %>
 <%@ page import="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.calendar.service.permission.CalendarPermission" %>
 <%@ page import="com.liferay.portlet.calendar.service.permission.CalEventPermission" %>
 <%@ page import="com.liferay.portlet.calendar.util.CalUtil" %>
 <%@ page import="com.liferay.portlet.calendar.util.comparator.EventTimeComparator" %>
@@ -48,8 +49,12 @@ if (Validator.isNotNull(portletResource)) {
 
 String tabs1Names = "summary,day,week,month,year,events";
 
-if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.EXPORT_ALL_EVENTS) || PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT)) {
+if (CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.EXPORT_ALL_EVENTS) || CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT)) {
 	tabs1Names += ",export-import";
+}
+
+if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
+	tabs1Names += ",permissions";
 }
 
 String[] tabs1NamesArray = StringUtil.split(tabs1Names);

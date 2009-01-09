@@ -83,7 +83,7 @@ dateFormatDate = new SimpleDateFormat("MMMMM d, yyyy", locale);
 <br />
 
 <div>
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
+	<c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT) %>">
 		<input type="button" value="<liferay-ui:message key="add-event" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(selMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(selDay) %>" /><portlet:param name="year" value="<%= String.valueOf(selYear) %>" /></portlet:renderURL>';" />
 	</c:if>
 

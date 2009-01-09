@@ -180,7 +180,6 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(event.getUserUuid());
-		long plid = context.getPlid();
 
 		Date startDate = event.getStartDate();
 
