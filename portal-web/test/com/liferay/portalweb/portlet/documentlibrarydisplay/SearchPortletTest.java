@@ -40,7 +40,7 @@ public class SearchPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@class=\"portlet-content-container\"]/div[1]/form[1]/div[1]/input[1]")) {
+							"link=Document Library Display Test Page")) {
 					break;
 				}
 			}
@@ -50,10 +50,8 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//div[@class=\"portlet-content-container\"]/div[1]/form[1]/div[1]/input[1]",
-			RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search File Entries']"));
+				"link=Document Library Display Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -62,7 +60,7 @@ public class SearchPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=DLD Setup Test Folder")) {
+				if (selenium.isElementPresent("//div/input[1]")) {
 					break;
 				}
 			}
@@ -72,7 +70,34 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.type("//div/input[1]", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search File Entries']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=DLD Setup Test Folder"));
+		assertTrue(selenium.isElementPresent("link=DLD Test Document"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[11]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input[11]", RuntimeVariables.replace("test1"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search File Entries']"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=DLD Setup Test Folder"));
+		assertFalse(selenium.isElementPresent("link=DLD Test Document"));
 	}
 }

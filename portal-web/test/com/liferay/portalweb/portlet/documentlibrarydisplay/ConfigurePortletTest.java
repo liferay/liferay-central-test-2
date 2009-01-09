@@ -39,7 +39,8 @@ public class ConfigurePortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//b")) {
+				if (selenium.isElementPresent(
+							"link=Document Library Display Test Page")) {
 					break;
 				}
 			}
@@ -49,48 +50,19 @@ public class ConfigurePortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Display Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_86_showBreadcrumbsCheckbox");
 		selenium.click("_86_showFoldersSearchCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"You have successfully updated the setup.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@class=\"portlet-content-container\"]/div[1]/form[1]/div[1]/input[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("//div/input[1]"));
 	}
 }

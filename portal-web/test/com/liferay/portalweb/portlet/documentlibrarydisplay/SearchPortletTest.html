@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SearchPortletTest</title>
 </head>
 <body>
@@ -13,12 +10,22 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class="portlet-content-container"]/div[1]/form[1]/div[1]/input[1]</td>
+	<td>link=Document Library Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Document Library Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div/input[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>//div[@class="portlet-content-container"]/div[1]/form[1]/div[1]/input[1]</td>
+	<td>//div/input[1]</td>
 	<td>test</td>
 </tr>
 <tr>
@@ -27,13 +34,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=DLD Setup Test Folder</td>
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>link=DLD Test Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[11]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[11]</td>
+	<td>test1</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>//input[@value='Search File Entries']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=DLD Setup Test Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=DLD Test Document</td>
 	<td></td>
 </tr>
 
