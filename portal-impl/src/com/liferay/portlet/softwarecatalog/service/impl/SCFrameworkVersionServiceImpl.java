@@ -26,11 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission;
+import com.liferay.portlet.softwarecatalog.service.permission.SCPermission;
 
 import java.util.List;
 
@@ -50,9 +49,9 @@ public class SCFrameworkVersionServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(),
-			PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION);
+		SCPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_FRAMEWORK_VERSION);
 
 		return scFrameworkVersionLocalService.addFrameworkVersion(
 			getUserId(), name, url, active, priority, serviceContext);

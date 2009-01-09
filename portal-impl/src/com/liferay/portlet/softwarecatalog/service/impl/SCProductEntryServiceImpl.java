@@ -26,10 +26,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryServiceBaseImpl;
+import com.liferay.portlet.softwarecatalog.service.permission.SCPermission;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
 
 import java.util.List;
@@ -51,9 +50,9 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), serviceContext.getPlid(),
-			PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		SCPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_PRODUCT_ENTRY);
 
 		return scProductEntryLocalService.addProductEntry(
 			getUserId(), name, type, tags, shortDescription,

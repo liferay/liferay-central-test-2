@@ -28,17 +28,26 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "products");
 
 String tabs1Values = "products";
+int tabs1Count = 1;
 
 if (themeDisplay.isSignedIn()) {
 	tabs1Values += ",my_products";
+	tabs1Count++;
 }
 
 if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
 	tabs1Values += ",licenses";
+	tabs1Count++;
 }
 
-if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
+if (SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FRAMEWORK_VERSION)) {
 	tabs1Values += ",framework_versions";
+	tabs1Count++;
+}
+
+if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
+	tabs1Values += ",permissions";
+	tabs1Count++;
 }
 
 String tabs1Names = StringUtil.replace(tabs1Values, StringPool.UNDERLINE, StringPool.DASH);
@@ -57,11 +66,45 @@ portletURL.setParameter("tabs1", tabs1);
 <form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	tabsValues="<%= tabs1Values %>"
-	portletURL="<%= portletURL %>"
+<liferay-security:permissionsURL
+	modelResource="com.liferay.portlet.softwarecatalog"
+	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+	var="permissionsURL"
 />
+<c:choose>
+	<c:when test='<%= !tabs1Values.endsWith(",permissions") %>'>
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			tabsValues="<%= tabs1Values %>"
+			portletURL="<%= portletURL %>"
+		/>
+	</c:when>
+	<c:when test="<%= tabs1Count == 3 %>">
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			tabsValues="<%= tabs1Values %>"
+			portletURL="<%= portletURL %>"
+			url2="<%= permissionsURL %>"
+		/>
+	</c:when>
+	<c:when test="<%= tabs1Count == 4 %>">
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			tabsValues="<%= tabs1Values %>"
+			portletURL="<%= portletURL %>"
+			url3="<%= permissionsURL %>"
+		/>
+	</c:when>
+	<c:when test="<%= tabs1Count == 5 %>">
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			tabsValues="<%= tabs1Values %>"
+			portletURL="<%= portletURL %>"
+			url4="<%= permissionsURL %>"
+		/>
+	</c:when>
+</c:choose>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("products") %>'>
@@ -240,7 +283,7 @@ portletURL.setParameter("tabs1", tabs1);
 			resultRows.add(row);
 		}
 
-		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		boolean showAddProductEntryButton = SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<div>
@@ -425,7 +468,7 @@ portletURL.setParameter("tabs1", tabs1);
 			resultRows.add(row);
 		}
 
-		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		boolean showAddProductEntryButton = SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<c:if test="<%= showAddProductEntryButton %>">
@@ -501,7 +544,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
+		<c:if test="<%= SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
 			<div>
 				<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>

@@ -68,6 +68,7 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermission" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCPermission" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.util.SCUtil" %>
 
