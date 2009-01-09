@@ -104,11 +104,27 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
+
+boolean showAddPollButton = PollsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
-<c:if test="<%= PollsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION) %>">
+<c:if test="<%= showAddPollButton || showPermissionsButton %>">
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-question" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+		<c:if test="<%= showAddPollButton %>">
+			<input type="button" value="<liferay-ui:message key="add-question" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+		</c:if>
+
+		<c:if test="<%= showPermissionsButton %>">
+			<liferay-security:permissionsURL
+				modelResource="com.liferay.portlet.polls"
+				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+				var="permissionsURL"
+			/>
+
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+		</c:if>
 	</div>
 
 	<br />
