@@ -24,8 +24,8 @@
 			<action-key>ADD_FRAMEWORK_VERSION</action-key>
 			<action-key>ADD_PRODUCT_ENTRY</action-key>
 		</supports>
-		<community-defaults/>
-		<guest-defaults/>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_FRAMEWORK_VERSION</action-key>
 			<action-key>ADD_PRODUCT_ENTRY</action-key>
