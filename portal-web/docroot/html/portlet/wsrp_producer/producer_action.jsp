@@ -69,14 +69,17 @@ ProducerElementBean producerBean = (ProducerElementBean)row.getObject();
 
 	<liferay-ui:icon image="permissions" message="consumer-registrations" url="<%= consumerRegistrationsURL %>" />
 
-	<portlet:actionURL var="registrationPropertiesURL">
-		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_REGISTRATION_PROPERTIES) %>" />
-		<portlet:param name="tabs1" value="registration-properties" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
-	</portlet:actionURL>
+	<c:if test='<%= producerBean.getRequiresRegistration() == true %>'>
+		<portlet:actionURL var="registrationPropertiesURL">
+			<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.GET_REGISTRATION_PROPERTIES) %>" />
+			<portlet:param name="tabs1" value="registration-properties" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="producerId" value="<%= producerBean.getProducerKey() %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon image="attributes" message="registration-properties" url="<%= registrationPropertiesURL %>" />
+		<liferay-ui:icon image="attributes" message="registration-properties" url="<%= registrationPropertiesURL %>" />
+	</c:if>
+	
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="<%= Constants.ACTION %>" value="<%= String.valueOf(AdminPortletAction.DELETE) %>" />
