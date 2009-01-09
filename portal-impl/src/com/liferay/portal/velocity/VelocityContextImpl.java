@@ -20,54 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.velocity;
 
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
-import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.BaseModelListener;
-import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.velocity.LiferayResourceCacheUtil;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.portal.kernel.velocity.VelocityContext;
 
 /**
- * <a href="JournalTemplateListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="VelocityContextImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Jon Steer
  * @author Raymond Augé
  *
  */
-public class JournalTemplateListener extends BaseModelListener {
+public class VelocityContextImpl implements VelocityContext {
 
-	public void onAfterRemove(BaseModel model) {
-		clearCache(model);
+	public VelocityContextImpl() {
+		_velocityContext = new org.apache.velocity.VelocityContext();
 	}
 
-	public void onAfterUpdate(BaseModel model) {
-		clearCache(model);
+	public VelocityContextImpl(
+		org.apache.velocity.VelocityContext velocityContext) {
+
+		_velocityContext =
+			new org.apache.velocity.VelocityContext(velocityContext);
 	}
 
-	protected void clearCache(BaseModel model) {
-
-		// Journal content
-
-		JournalContentUtil.clearCache();
-
-		// Layout cache
-
-		JournalTemplateModel template = (JournalTemplateModel)model;
-
-		CacheUtil.clearCache(template.getCompanyId());
-
-		// Velocity cache
-
-		LiferayResourceCacheUtil.clear();
-
-		// Velocity template cache
-
-		VelocityEngineUtil.flushTemplate(
-			template.getCompanyId() + template.getGroupId() +
-			template.getTemplateId());
+	public Object get(String key) {
+		return _velocityContext.get(key);
 	}
+
+	public org.apache.velocity.VelocityContext getWrappedVelocityContext() {
+		return _velocityContext;
+	}
+
+	public void put(String key, Object value) {
+		_velocityContext.put(key, value);
+	}
+
+	private org.apache.velocity.VelocityContext _velocityContext;
 
 }

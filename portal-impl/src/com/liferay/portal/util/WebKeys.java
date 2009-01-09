@@ -343,6 +343,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String USERS_NOTIFIED = "USERS_NOTIFIED";
 
+	public static final String VELOCITY_TEMPLATE_ID = "VELOCITY_TEMPLATE_ID";
+
 	public static final String VIRTUAL_HOST_LAYOUT_SET = "VIRTUAL_HOST_LAYOUT_SET";
 
 	public static final String VM_VARIABLES = "VM_VARIABLES";

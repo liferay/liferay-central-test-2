@@ -20,54 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.kernel.velocity;
 
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
-import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.BaseModelListener;
-import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.velocity.LiferayResourceCacheUtil;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import java.io.IOException;
+import java.io.Writer;
+
+import com.liferay.portal.SystemException;
 
 /**
- * <a href="JournalTemplateListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="VelocityEngine.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Jon Steer
  * @author Raymond Augé
  *
  */
-public class JournalTemplateListener extends BaseModelListener {
+public interface VelocityEngine {
 
-	public void onAfterRemove(BaseModel model) {
-		clearCache(model);
-	}
+	public void flushTemplate(String resource);
 
-	public void onAfterUpdate(BaseModel model) {
-		clearCache(model);
-	}
+	public void init();
 
-	protected void clearCache(BaseModel model) {
+	public VelocityContext getEmptyContext();
 
-		// Journal content
+	public VelocityContext getRestrictedToolsContext();
 
-		JournalContentUtil.clearCache();
+	public VelocityContext getStandardToolsContext();
 
-		// Layout cache
+	public VelocityContext getWrappedRestrictedToolsContext();
 
-		JournalTemplateModel template = (JournalTemplateModel)model;
+	public VelocityContext getWrappedStandardToolsContext();
 
-		CacheUtil.clearCache(template.getCompanyId());
+	public boolean mergeTemplate(
+			String velocityTemplateId, VelocityContext context, Writer writer)
+		throws SystemException, IOException;
 
-		// Velocity cache
+	public boolean mergeTemplate(
+			String velocityTemplateId, String template, VelocityContext context,
+			Writer writer)
+		throws SystemException, IOException;
 
-		LiferayResourceCacheUtil.clear();
-
-		// Velocity template cache
-
-		VelocityEngineUtil.flushTemplate(
-			template.getCompanyId() + template.getGroupId() +
-			template.getTemplateId());
-	}
+	public boolean resourceExists(String resource);
 
 }

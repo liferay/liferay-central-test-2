@@ -33,6 +33,8 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.velocity.VelocityContext;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ContentUtil;
@@ -59,6 +61,7 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
 import java.io.StringReader;
+import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +75,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Raymond Augé
  *
  */
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
@@ -393,21 +397,27 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));
 
-		String template = ContentUtil.get(
-			"com/liferay/portlet/wiki/dependencies/rss.vm");
+		String velocityTemplateId = "com/liferay/portlet/wiki/dependencies/rss.vm";
+		String template = ContentUtil.get(velocityTemplateId);
 
-		Map<String, Object> variables = new HashMap<String, Object>();
+		VelocityContext velocityContext =
+			VelocityEngineUtil.getWrappedStandardToolsContext();
 
-		variables.put("companyId", companyId);
-		variables.put("contextLine", Diff.CONTEXT_LINE);
-		variables.put("diffUtil", new DiffUtil());
-		variables.put("languageUtil", LanguageUtil.getLanguage());
-		variables.put("locale", locale);
-		variables.put("sourceResults", diffResults[0]);
-		variables.put("targetResults", diffResults[1]);
+		velocityContext.put("companyId", companyId);
+		velocityContext.put("contextLine", Diff.CONTEXT_LINE);
+		velocityContext.put("diffUtil", new DiffUtil());
+		velocityContext.put("languageUtil", LanguageUtil.getLanguage());
+		velocityContext.put("locale", locale);
+		velocityContext.put("sourceResults", diffResults[0]);
+		velocityContext.put("targetResults", diffResults[1]);
 
 		try {
-			return VelocityUtil.evaluate(template, variables);
+			StringWriter writer = new StringWriter();
+
+			VelocityEngineUtil.mergeTemplate(
+				velocityTemplateId, template, velocityContext, writer);
+
+			return writer.toString();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.velocity.VelocityContext;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -57,8 +59,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 
 /**
  * <a href="LayoutTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -67,6 +67,7 @@ import org.apache.velocity.app.Velocity;
  * @author Ivica Cardic
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
 */
 public class LayoutTemplateLocalServiceImpl
@@ -408,8 +409,13 @@ public class LayoutTemplateLocalServiceImpl
 						layoutTemplateModel.getTemplatePath());
 			}
 			else {
+				String velocityTemplateId =
+					themeId + (standard ? "_STANDARD_" : "_CUSTOM_") +
+						layoutTemplateModel.getLayoutTemplateId();
+
 				layoutTemplateModel.setContent(content);
-				layoutTemplateModel.setColumns(_getColumns(content));
+				layoutTemplateModel.setColumns(
+					_getColumns(velocityTemplateId, content));
 			}
 
 			if (Validator.isNull(layoutTemplateModel.getWapTemplatePath())) {
@@ -465,29 +471,53 @@ public class LayoutTemplateLocalServiceImpl
 		String layoutTemplateId, boolean standard) {
 
 		if (standard) {
+			VelocityEngineUtil.flushTemplate(
+				"null_STANDARD_" + layoutTemplateId);
+
 			_warStandard.remove(layoutTemplateId);
 		}
 		else {
+			VelocityEngineUtil.flushTemplate(
+				"null_CUSTOM_" + layoutTemplateId);
+
 			_warCustom.remove(layoutTemplateId);
 		}
 	}
 
 	public void uninstallLayoutTemplates(String themeId) {
+		for (Map.Entry<String, LayoutTemplate> entry :
+			 	_getThemesStandard(themeId).entrySet()){
+
+			VelocityEngineUtil.flushTemplate(
+				themeId + "_STANDARD_" +
+					entry.getValue().getLayoutTemplateId());
+		}
+
 		_getThemesStandard(themeId).clear();
+
+		for (Map.Entry<String, LayoutTemplate> entry :
+			 	_getThemesCustom(themeId).entrySet()){
+
+			VelocityEngineUtil.flushTemplate(
+				themeId + "_CUSTOM_" +
+					entry.getValue().getLayoutTemplateId());
+		}
+
 		_getThemesCustom(themeId).clear();
 	}
 
-	private List<String> _getColumns(String content) {
+	private List<String> _getColumns(String velocityTemplateId, String content) {
 		try {
 			InitColumnProcessor processor = new InitColumnProcessor();
 
-			VelocityContext context = new VelocityContext();
+			VelocityContext velocityContext =
+				VelocityEngineUtil.getStandardToolsContext();
 
-			context.put("processor", processor);
+			velocityContext.put("processor", processor);
 
-			Velocity.evaluate(
-				context, new PrintWriter(new StringWriter()),
-				LayoutTemplateLocalServiceImpl.class.getName(), content);
+			VelocityEngineUtil.mergeTemplate(
+				velocityTemplateId, content, velocityContext,
+				new PrintWriter(new StringWriter()));
 
 			return ListUtil.sort(processor.getColumns());
 		}

@@ -277,21 +277,25 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 <%
 if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
 	String content = null;
+	String velocityTemplateId = null;
 
 	if (themeDisplay.isStateExclusive()) {
 		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
+		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "exclusive";
 	}
 	else if (themeDisplay.isStatePopUp()) {
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
+		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "pop_up";
 	}
 	else {
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
 		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
+		velocityTemplateId = theme.getThemeId() + "_STANDARD_" + "max";
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
 
 <%
 }

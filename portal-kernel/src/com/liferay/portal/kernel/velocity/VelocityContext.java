@@ -20,54 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
-
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
-import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.BaseModelListener;
-import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.velocity.LiferayResourceCacheUtil;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+package com.liferay.portal.kernel.velocity;
 
 /**
- * <a href="JournalTemplateListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="VelocityContext.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Jon Steer
  * @author Raymond Augé
  *
  */
-public class JournalTemplateListener extends BaseModelListener {
+public interface VelocityContext {
 
-	public void onAfterRemove(BaseModel model) {
-		clearCache(model);
-	}
+	public Object get(String key);
 
-	public void onAfterUpdate(BaseModel model) {
-		clearCache(model);
-	}
-
-	protected void clearCache(BaseModel model) {
-
-		// Journal content
-
-		JournalContentUtil.clearCache();
-
-		// Layout cache
-
-		JournalTemplateModel template = (JournalTemplateModel)model;
-
-		CacheUtil.clearCache(template.getCompanyId());
-
-		// Velocity cache
-
-		LiferayResourceCacheUtil.clear();
-
-		// Velocity template cache
-
-		VelocityEngineUtil.flushTemplate(
-			template.getCompanyId() + template.getGroupId() +
-			template.getTemplateId());
-	}
+	public void put(String key, Object value);
 
 }

@@ -53,6 +53,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Berentey Zsolt
  * @author Jorge Ferrer
+ * @author Raymond Augé
  *
  */
 public class ViewAction extends PortletAction {
@@ -77,6 +78,7 @@ public class ViewAction extends PortletAction {
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		String content = StringPool.BLANK;
+		String velocityTemplateId = StringPool.BLANK;
 
 		if (Validator.isNotNull(layoutTemplateId)) {
 			Theme theme = themeDisplay.getTheme();
@@ -87,9 +89,13 @@ public class ViewAction extends PortletAction {
 
 			content = renameTemplateColumnsAndIds(
 				layoutTemplate.getContent(), portlet);
+			velocityTemplateId =
+				theme.getThemeId() + "_CUSTOM_" + layoutTemplateId;
 		}
 
 		renderRequest.setAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT, content);
+		renderRequest.setAttribute(
+			WebKeys.VELOCITY_TEMPLATE_ID, velocityTemplateId);
 
 		return mapping.findForward("portlet.nested_portlets.view");
 	}
