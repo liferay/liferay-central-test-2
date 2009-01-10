@@ -1,1 +1,108 @@
-Liferay.EnterpriseAdmin={};Liferay.EnterpriseAdmin.FormNavigator=new Class({initialize:function(B){var A=this;A._container=jQuery(B.container);A._navigation=A._container.find(".form-navigation");A._sections=A._container.find(".form-section");A._navigation.find("li a").click(function(D){var C=jQuery(this.parentNode);if(!C.is(".selected")){A._revealSection(this.href,C);var E=this.href.split("#");if(E[1]){location.hash=E[1]}}return false});if(B.modifiedSections){A._modifiedSections=jQuery("[name="+B.modifiedSections+"]");if(!A._modifiedSections.length){A._modifiedSections=jQuery("<input name=\""+B.modifiedSections+"\" type=\"hidden\" />");A._container.append(A._modifiedSections)}}else{A._modifiedSections=jQuery([])}if(B.defaultModifiedSections){A._modifiedSectionsArray=B.defaultModifiedSections}else{A._modifiedSectionsArray=[]}A._revealSection(location.hash);A._container.find("input, select, textarea, .modify-link").change(function(C){A._trackChanges(this)});Liferay.bind("submitForm",function(D,E){var C=jQuery(E.form);A._modifiedSections.val(A._modifiedSectionsArray.join(","))})},_revealSection:function(E,C){var B=this;var A=C||B._navigation.find("[href$="+E+"]").parent();E=E.split("#");if(!E[1]){return }E="#"+E[1];var D=jQuery(E);B._navigation.find(".selected").removeClass("selected");B._sections.removeClass("selected");D.addClass("selected");A.addClass("selected")},_trackChanges:function(B){var A=this;var D=jQuery(B).parents(".form-section:first").attr("id");var C=jQuery("#"+D+"Link");C.parent().addClass("section-modified");A._addModifiedSection(D)},_addModifiedSection:function(B){var A=this;if(jQuery.inArray(B,A._modifiedSectionsArray)==-1){A._modifiedSectionsArray.push(B)}}})
+Liferay.EnterpriseAdmin = {
+}
+
+Liferay.EnterpriseAdmin.FormNavigator = new Class({
+	initialize: function(options) {
+		var instance = this;
+
+		instance._container = jQuery(options.container);
+
+		instance._navigation = instance._container.find('.form-navigation');
+		instance._sections = instance._container.find('.form-section');
+
+		instance._navigation.find('li a').click(
+			function(event) {
+				var li = jQuery(this.parentNode);
+
+				if (!li.is('.selected')) {
+					instance._revealSection(this.href, li);
+
+					var currentSection = this.href.split('#');
+
+					if (currentSection[1]) {
+						location.hash = currentSection[1];
+					}
+				}
+
+				return false;
+			}
+		);
+
+		if (options.modifiedSections) {
+			instance._modifiedSections = jQuery('[name=' + options.modifiedSections+ ']');
+
+			if (!instance._modifiedSections.length) {
+				instance._modifiedSections = jQuery('<input name="' + options.modifiedSections+ '" type="hidden" />')
+				instance._container.append(instance._modifiedSections);
+			}
+		}
+		else {
+			instance._modifiedSections = jQuery([]);
+		}
+
+		if (options.defaultModifiedSections) {
+			instance._modifiedSectionsArray = options.defaultModifiedSections;
+		}
+		else {
+			instance._modifiedSectionsArray = [];
+		}
+
+		instance._revealSection(location.hash);
+
+		instance._container.find('input, select, textarea, .modify-link').change(
+			function(event) {
+				instance._trackChanges(this);
+			}
+		);
+
+		Liferay.bind(
+			'submitForm',
+			function(event, data) {
+				var form = jQuery(data.form);
+
+				instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
+			}
+		);
+	},
+
+	_revealSection: function(id, currentNavItem) {
+		var instance = this;
+
+		var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
+
+		id = id.split('#');
+
+		if (!id[1]) {
+			return;
+		}
+
+		id = '#' + id[1];
+
+		var section = jQuery(id);
+
+		instance._navigation.find('.selected').removeClass('selected');
+		instance._sections.removeClass('selected');
+
+		section.addClass('selected');
+		li.addClass('selected');
+	},
+
+	_trackChanges: function(el) {
+		var instance = this;
+
+		var currentSection = jQuery(el).parents('.form-section:first').attr('id');
+
+		var currentSectionLink = jQuery('#' + currentSection + 'Link');
+		currentSectionLink.parent().addClass('section-modified');
+
+		instance._addModifiedSection(currentSection);
+	},
+
+	_addModifiedSection: function (section) {
+		var instance = this;
+
+		if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
+			instance._modifiedSectionsArray.push(section);
+		}
+	}
+});

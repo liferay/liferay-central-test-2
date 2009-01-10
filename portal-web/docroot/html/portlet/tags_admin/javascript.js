@@ -1,1 +1,1477 @@
-Liferay.Portlet.TagsAdmin=new Class({initialize:function(N){var P=this;var Q=jQuery(P._entryScopeClass);P.portletId=N;P._container=jQuery(".vocabulary-container");jQuery(".vocabulary-close").click(function(){P._unselectAllEntries();P._closeEditSection()});jQuery(".vocabulary-save-properties").click(function(){P._saveProperties()});P._portletMessageContainer=jQuery("<div class=\"lfr-message-response\" id=\"vocabulary-messages\" />");P._entryMessageContainer=jQuery("<div class=\"lfr-message-response\" id=\"vocabulary-entry-messages\" />");P._portletMessageContainer.hide();P._entryMessageContainer.hide();P._container.before(P._portletMessageContainer);Q.before(P._entryMessageContainer);var O=jQuery(".vocabulary-buttons");var K=jQuery(".vocabulary-toolbar");var B=function(T){T=Liferay.Language.get(T);K.find(".vocabulary-label").html(T);K.find(".add-entry-btn").val(T)};var L=function(T){T=Liferay.Language.get(T);K.find(".vocabulary-parent-label").html(T)};var A=function(T){T=Liferay.Language.get(T);K.find(".add-vocabulary-btn").val(T)};var M=function(T){T=Liferay.Language.get(T);jQuery(".vocabulary-delete-list-button").val(T)};var E=function(T){T=Liferay.Language.get(T);jQuery("#vocabulary-select-search option[value=vocabularies]").html(T)};var S=function(T){T=Liferay.Language.get(T);jQuery(".vocabulary-toolbar-section .panel-content label:first").html(T)};var G=function(T){T=Liferay.Language.get(T);jQuery(".vocabulary-list-container .results-header").html(T)};var I=function(T){T=Liferay.Language.get(T);jQuery(".vocabulary-entries-container .results-header").html(T)};var R=function(T){T=Liferay.Language.get(T);jQuery(".vocabulary-edit-entry .results-header").html(T)};var F=function(T){T=Liferay.Language.get(T);jQuery(".permissions-vocabulary-btn").val(T)};var H=function(T){T=Liferay.Language.get(T);jQuery(".permissions-entries-btn").val(T)};var J=function(T){O.find(".button").removeClass("selected");jQuery(T).addClass("selected")};O.find(".tags-sets").click(function(T){P._selectedVocabulary="tag";B("add-tag");R("edit-tag");I("tags");H("edit-tag-permissions");E("tag-sets");L("to-tag-set");S("add-tag-set");M("delete-tag-set");G("tag-sets");F("edit-tag-set-permissions");A("add-tag-set");J(this);P._loadData();P._hideToolbarSections()});O.find(".categories").click(function(T){P._selectedVocabulary="category";B("add-category");R("edit-category");I("categories");H("edit-category-permissions");E("categories");L("to-vocabulary");S("add-vocabulary");M("delete-vocabulary");G("Vocabulary");F("edit-vocabulary-permissions");A("add-vocabulary");J(this);P._loadData();P._hideToolbarSections()});K.find(".add-vocabulary-btn").click(function(T){P._showToolBarVocabularySection()});K.find(".add-entry-btn").click(function(T){P._showToolBarEntrySection()});jQuery(".permissions-entries-btn").click(function(){var V=P._selectedEntryName;var U=P._selectedEntryId;if(V&&U){var T=P._createPermissionURL("com.liferay.portlet.tags.model.TagsEntry",V,U);submitForm(document.hrefFm,T.toString())}else{P._showToolBarEntrySection()}});jQuery(".permissions-vocabulary-btn").click(function(){var V=P._selectedVocabularyName;var T=P._selectedVocabularyId;if(V&&T){var U=P._createPermissionURL("com.liferay.portlet.tags.model.TagsVocabulary",V,T);submitForm(document.hrefFm,U.toString())}else{P._showToolBarVocabularySection()}});jQuery("#vocabulary-search-bar").change(function(T){jQuery("#vocabulary-search-input").focus();P._reloadSearch()});var C=function(){var V=jQuery(".vocabulary-actions");var U=V.find(".vocabulary-entry-name").val();var T=V.find(".vocabulary-select-list option:selected").text();P._hideAllMessages();P._addEntry(U,T)};var D=function(){var V=jQuery(".vocabulary-actions");var U=V.find(".vocabulary-name");var T=U.val();P._hideAllMessages();P._addVocabulary(T)};jQuery("input.entry-save-button").click(C);jQuery("input.vocabulary-save-button").click(D);jQuery(".vocabulary-actions input").keyup(function(U){if(U.keyCode==13){var T=jQuery(this);if(T.is(".vocabulary-entry-name")){C()}else{if(T.is(".vocabulary-name")){D()}}return false}});jQuery("input.vocabulary-delete-entries-button").click(function(){if(confirm(Liferay.Language.get("are-you-sure-you-want-to-delete-this-entry"))){P._deleteEntry(P._selectedEntryId,function(U){var T=U.exception;if(!T){P._closeEditSection();P._hideToolbarSections();P._displayVocabularyEntries(P._selectedVocabularyName)}else{if(T.indexOf("auth.PrincipalException")>-1){P._sendMessage("error","you-do-not-have-permission-to-access-the-requested-resource")}}})}});jQuery("input.vocabulary-delete-list-button").click(function(){if(confirm(Liferay.Language.get("are-you-sure-you-want-to-delete-this-list"))){P._deleteVocabulary(P._selectedVocabularyId,function(U){var T=U.exception;if(!T){P._closeEditSection();P._hideToolbarSections();P._loadData()}else{if(T.indexOf("auth.PrincipalException")>-1){P._sendMessage("error","you-do-not-have-permission-to-access-the-requested-resource")}}})}});jQuery(".close-panel").click(function(){P._hideToolbarSections()});jQuery(".lfr-floating-panel input:text").keyup(function(U){var T=27;var V=U.keyCode;if(V==T){P._hideToolbarSections()}});P._loadData()},_createPermissionURL:function(B,D,E){var A=this;var C=Liferay.PortletURL.createPermissionURL(A.portletId,B,D,E);return C},_displayCategoriesVocabularyEntries:function(E,K){var J=this;var D=[];var I=jQuery(J._entryScopeClass);var H={sortOn:"li",distance:10,dropOn:"span.folder",dropHoverClass:"hover-folder",drop:function(M,N){N.droppable=jQuery(this).parent();J._merge(M,N);var L=jQuery("#vocabulary-treeview");setTimeout(function(){L.find(":not(span)").removeClass();L.find("div").remove();L.removeData("toggler");L.treeview()},100)}};D.push("<div class=\"vocabulary-treeview-container lfr-component\"><ul id=\"vocabulary-treeview\" class=\"filetree\">");J._buildCategoryTreeview(E,D,0);D.push("</ul></div>");I.html(D.join(""));J._reloadSearch();var B=jQuery("#vocabulary-treeview");var A=jQuery(J._entryListClass);A.click(function(M){var L=J._getEntryId(this);var N=jQuery(".vocabulary-edit");J._selectEntry(L);J._showSection(N);M.stopPropagation()});B.treeview().tree(H);var G=jQuery(J._vocabularyScopeClass);var F=jQuery("li",G);var C=B.data("tree").identifier;F.droppable({accept:".vocabulary-category-item",tolerance:"pointer",hoverClass:"active-area",scope:C,cssNamespace:false,drop:function(L,M){M.droppable=jQuery(this);J._merge(L,M)}});if(K){K()}},_displayFolksonomiesVocabularyEntries:function(B,F){var A=this;var C=[];var E=jQuery(A._entryScopeClass);C.push("<ul>");jQuery.each(B,function(G){C.push("<li class=\"vocabulary-item results-row\" ");C.push("data-entry=\"");C.push(this.name);C.push("\" data-entryId=\"");C.push(this.entryId);C.push("\"><span><a href=\"javascript: ;\">");C.push(this.name);C.push("</a></span>");C.push("</li>")});C.push("</ul>");if(!B.length){C=[];A._sendMessage("info","no-entries-were-found","#vocabulary-entry-messages",true)}E.html(C.join(""));A._reloadSearch();var D=jQuery(A._entryListClass);D.mousedown(function(){var G=A._getEntryId(this);var H=jQuery(".vocabulary-edit");A._selectEntry(G);A._showSection(H)});D.draggable({appendTo:"body",cssNamespace:false,cursor:"move",distance:3,ghosting:false,helper:function(J,K){var H=jQuery(this);var G=H.width();var I=H.clone();I.css({width:G});I.addClass("portlet-tags-admin-helper");return I},opacity:0.7,scope:"vocabulary-item-scope",scroll:"auto",zIndex:1000});D.droppable({accept:".vocabulary-item",cssNamespace:false,drop:function(G,H){H.droppable=jQuery(this);A._merge(G,H)},hoverClass:"active-area",scope:"vocabulary-item-scope",tolerance:"pointer"});A._alternateRows();if(F){F()}},_displayList:function(C,E){var A=this;var B=[];var D=jQuery(A._vocabularyScopeClass);A._showLoading(".vocabulary-entries, .vocabulary-list");B.push("<ul>");A._getVocabularies(C,function(I){jQuery.each(I,function(K){B.push("<li");B.push(" class=\"vocabulary-category results-row");if(K==0){B.push(" selected ")}B.push("\" data-vocabulary=\"");B.push(this.name);B.push("\" data-vocabularyId=\"");B.push(this.vocabularyId);B.push("\"><span><a href=\"javascript: ;\">");B.push(this.name);B.push("</a></span>");B.push("</li>")});B.push("</ul>");D.html(B.join(""));var G=jQuery(A._vocabularyListClass+":first");var H=A._getVocabularyName(G);var F=A._getVocabularyId(G);A._selectedVocabularyName=H;A._selectedVocabularyId=F;A._feedVocabularySelect(I,F);var J=jQuery("li",D);J.mousedown(function(L){var K=A._getVocabularyId(this);A._selectVocabulary(K)});J.droppable({accept:".vocabulary-item",cssNamespace:false,drop:function(K,L){L.droppable=jQuery(this);A._merge(K,L)},hoverClass:"active-area",scroll:"auto",scope:"vocabulary-item-scope",tolerance:"pointer"});jQuery("li span a",D).editable(function(P,O){var N=P;var L=A._selectedVocabularyId;var M=(A._selectedVocabulary=="tag");var K=jQuery(this).parents("li:first");K.attr("data-vocabulary",P);A._updateVocabulary(L,N,M,function(R){var Q=R.exception;if(Q){if(Q.indexOf("auth.PrincipalException")>-1){A._sendMessage("error","you-do-not-have-permission-to-access-the-requested-resource")}}else{A._displayList(M,function(){var S=A._selectVocabulary(R.vocabularyId);A._displayVocabularyEntries(A._selectedVocabularyName)})}});return P},{cssclass:"vocabulary-edit-vocabulary",data:function(L,K){return L},height:"15px",width:"200px",onblur:"ignore",submit:Liferay.Language.get("save"),select:false,type:"text",event:"dblclick"});if(E){E()}})},_displayProperties:function(B){var A=this;A._getProperties(B,function(D){if(!D.length){D=[{key:"",value:""}]}var E=D.length;var C=jQuery("div.vocabulary-property-row").length;if(C>E){return }jQuery.each(D,function(){var F=jQuery("div.vocabulary-property-row:last");A._addProperty(F,this.key,this.value)})})},_displayVocabularyEntries:function(B,C){var A=this;jQuery("#vocabulary-entry-messages").hide();A._getVocabularyEntries(B,function(D){if(!A._selectedVocabulary||A._selectedVocabulary=="tag"){A._displayFolksonomiesVocabularyEntries(D,C)}if(A._selectedVocabulary=="category"){A._displayCategoriesVocabularyEntries(D,C)}})},_addEntry:function(D,C,G){var A=this;var E=A._getPermissionsEnabled("entry","community");var F=A._getPermissionsEnabled("entry","guest");var B=["java.lang.String","java.lang.String","java.lang.String","[Ljava.lang.String;","com.liferay.portal.service.ServiceContext"].join(",");Liferay.Service.Tags.TagsEntry.addEntry({parentEntryName:null,name:D,vocabulary:C,properties:[],serviceContext:jQuery.toJSON({communityPermissions:E,guestPermissions:F,plid:themeDisplay.getPlid(),scopeGroupId:themeDisplay.getScopeGroupId()}),serviceParameterTypes:B},function(J){var I=J.exception;if(!I&&J.entryId){A._sendMessage("success","your-request-processed-successfully");A._selectVocabulary(J.vocabularyId);A._displayVocabularyEntries(A._selectedVocabularyName,function(){var K=A._selectEntry(J.entryId);if(K.length){jQuery(A._entryScopeClass).scrollTo(K)}A._showSection(".vocabulary-edit")});A._resetActionValues();A._hideToolbarSections();if(G){G(D,C)}}else{var H="";if(I.indexOf("DuplicateEntryException")>-1){H="that-tag-already-exists"}else{if(I.indexOf("EntryNameException")>-1){H="one-of-your-fields-contains-invalid-characters"}else{if(I.indexOf("NoSuchVocabularyException")>-1){H="that-vocabulary-does-not-exist"}else{if(I.indexOf("auth.PrincipalException")>-1){H="you-do-not-have-permission-to-access-the-requested-resource"}}}}if(H){A._sendMessage("error",H)}}})},_addProperty:function(F,D,E){var B=this;var A=jQuery("div.vocabulary-property-row:last");var C=A.clone();C.find(".property-key").val(D);C.find(".property-value").val(E);C.insertAfter(F);C.show();if(!D&&!E){C.find("input:first").addClass("lfr-auto-focus")}B._attachPropertyIconEvents(C)},_addVocabulary:function(C,F){var A=this;var B=(A._selectedVocabulary=="tag");var D=A._getPermissionsEnabled("vocabulary","community");var E=A._getPermissionsEnabled("vocabulary","guest");Liferay.Service.Tags.TagsVocabulary.addVocabulary({name:C,folksonomy:B,serviceContext:jQuery.toJSON({communityPermissions:D,guestPermissions:E,plid:themeDisplay.getPlid(),scopeGroupId:themeDisplay.getScopeGroupId()})},function(I){var H=I.exception;if(!I.exception){A._sendMessage("success","your-request-processed-successfully");A._displayList(B,function(){var J=A._selectVocabulary(I.vocabularyId);A._displayVocabularyEntries(A._selectedVocabularyName);if(J.length){jQuery(A._vocabularyScopeClass).scrollTo(J)}});A._resetActionValues();if(F){F(C)}}else{var G="";if(H.indexOf("DuplicateVocabularyException")>-1){G="that-vocabulary-already-exists"}else{if(H.indexOf("VocabularyNameException")>-1){G="one-of-your-fields-contains-invalid-characters"}else{if(H.indexOf("NoSuchVocabularyException")>-1){G="that-parent-vocabulary-does-not-exist"}else{if(H.indexOf("auth.PrincipalException")>-1){G="you-do-not-have-permission-to-access-the-requested-resource"}}}}if(G){A._sendMessage("error",G)}}})},_alternateRows:function(){var A=this;var B=jQuery(A._entryScopeClass);jQuery("li",B).removeClass("alt");jQuery("li:odd",B).addClass("alt")},_attachPropertyIconEvents:function(B){var A=this;var C=jQuery(B);C.find(".add-property").click(function(){A._addProperty(B,"","")});C.find(".delete-property").click(function(){A._removeProperty(B)})},_buildCategoryTreeview:function(B,C,E){var A=this;var D=A._filterCategory(B,E);jQuery.each(D,function(G){var H=this.entryId;var F=this.name;var I=A._filterCategory(B,H).length;C.push("<li");C.push(" class=\"vocabulary-category-item\"");C.push(" data-entry=\"");C.push(this.name);C.push("\" data-entryId=\"");C.push(this.entryId);C.push("\"><span class=\"folder\">");C.push(F);C.push("</span>");if(I){C.push("<ul>");A._buildCategoryTreeview(B,C,H);C.push("</ul>")}C.push("</li>")});return D.length},_buildProperties:function(){var A=this;var B=[];jQuery(".vocabulary-property-row:visible").each(function(F,H){var C=jQuery(this);var E=C.find("input.property-key").val();var G=C.find("input.property-value").val();var D=["0",":",E,":",G,","].join("");B.push(D)});return B.join("")},_closeEditSection:function(){var A=this;A._hideSection(".vocabulary-edit");jQuery(A._layoutContainerCells).width("auto")},_deleteEntry:function(B,C){var A=this;Liferay.Service.Tags.TagsEntry.deleteEntry({entryId:B},C)},_deleteVocabulary:function(B,C){var A=this;Liferay.Service.Tags.TagsVocabulary.deleteVocabulary({entryId:B},C)},_feedVocabularySelect:function(E,D){var B=this;var A=jQuery("select.vocabulary-select-list");var C=[];jQuery.each(E,function(F){var G=(this.vocabularyId==D);C.push("<option");C.push(G?" selected ":"");C.push(" value=\"");C.push(this.vocabularyId);C.push("\">");C.push(this.name);C.push("</option>")});A.html(C.join(""))},_filterCategory:function(B,C){var A=this;return jQuery.grep(B,function(E,D){return(E.parentEntryId==C)})},_getEntry:function(B){var A=this;return jQuery("li[data-entryId="+B+"]")},_getEntryId:function(B){var A=this;return jQuery(B).attr("data-entryId")},_getEntryName:function(B){var A=this;return jQuery(B).attr("data-entry")},_getPermissionsEnabled:function(D,C){var A=[];var E=jQuery("."+D+"-permissions-actions");var B=E.find("[name$="+C+"Permissions]:checked");A=B.fieldValue().join(",");return A},_getProperties:function(B,C){var A=this;Liferay.Service.Tags.TagsProperty.getProperties({entryId:B},C)},_getVocabularies:function(B,C){var A=this;Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies({groupId:themeDisplay.getScopeGroupId(),folksonomy:B},C)},_getVocabulary:function(B){var A=this;return jQuery("li[data-vocabularyId="+B+"]")},_getVocabularyEntries:function(B,C){var A=this;A._showLoading(A._entryScopeClass);Liferay.Service.Tags.TagsEntry.getGroupVocabularyEntries({groupId:themeDisplay.getScopeGroupId(),name:B},C)},_getVocabularyId:function(B){var A=this;return jQuery(B).attr("data-vocabularyId")},_getVocabularyName:function(B){var A=this;return jQuery(B).attr("data-vocabulary")},_hideAllMessages:function(){var A=this;A._container.find(".lfr-message-response").hide()},_hideLoading:function(B){var A=this;A._container.find("div.loading-animation").remove()},_hideSection:function(B){var A=this;jQuery(B).parent().removeClass("vocabulary-editing-tag")},_hideToolbarSections:function(){jQuery(".vocabulary-toolbar-section, .entry-toolbar-section").hide()},_loadData:function(){var A=this;var B=(A._selectedVocabulary=="tag");A._closeEditSection();A._displayList(B,function(){A._displayVocabularyEntries(A._selectedVocabularyName,function(){var C=A._getEntryId(A._entryListClass+":first")})})},_merge:function(B,M){var P=this;var Q=M.draggable;var I=M.droppable;var H=P._getEntryId(Q);var K=P._getEntryName(Q);var D=P._getEntryId(I);var C=P._getEntryName(I);var E=P._getVocabularyId(I);var G=P._getVocabularyName(I);var F=(P._selectedVocabulary=="tag");var N=!!G;var L=N?G:C;var A={SOURCE:P._getEntryName(Q),DESTINATION:L};var O=Liferay.Language.get("are-you-sure-you-want-to-merge-x-into-x",["[$SOURCE$]","[$DESTINATION$]"]).replace(/\[\$(SOURCE|DESTINATION)\$\]/gm,function(U,S,R,T){return A[S]});if(!F||confirm(O)){if(P._selectedVocabulary=="tag"){if(N){var J=P._buildProperties();P._updateEntry(H,K,null,J,G);P._displayVocabularyEntries(P._selectedVocabularyName)}else{P._mergeEntries(H,D,function(){Q.remove();P._selectEntry(D);P._alternateRows()})}}else{if(P._selectedVocabulary=="category"){var J=P._buildProperties();G=G||P._selectedVocabularyName;parentEntryName=N?null:C;P._updateEntry(H,K,parentEntryName,J,G)}}}},_mergeEntries:function(B,A,C){Liferay.Service.Tags.TagsEntry.mergeEntries({fromEntryId:B,toEntryId:A},C)},_reloadSearch:function(){var A=this;var C={};var E=jQuery("#vocabulary-select-search").val();var B=jQuery("#vocabulary-search-input");var G=jQuery(A._entryListClass);var F=jQuery(A._vocabularyListClass);B.unbind("keyup");if(/vocabularies/.test(E)){C={list:F,filter:jQuery("a",F)}}else{var D="span";if(A._selectedVocabulary=="tag"){D="span a"}C={list:G,filter:jQuery(D,G)}}B.liveSearch(C)},_removeProperty:function(B){var A=this;if(jQuery("div.vocabulary-property-row").length>2){B.remove()}},_resetActionValues:function(){var A=this;jQuery(".vocabulary-actions input:text").val("");jQuery(".vocabulary-actions .vocabulary-toolbar-section").hide()},_saveProperties:function(){var A=this;var E=A._selectedEntryId;var F=jQuery("input.entry-name").val()||A._selectedEntryName;var B=null;var D=A._buildProperties();var C=A._selectedVocabularyName;A._updateEntry(E,F,B,D,C);A._displayVocabularyEntries(A._selectedVocabularyName)},_selectCurrentVocabulary:function(C){var A=this;var B=jQuery("select.vocabulary-select-list option[value=\""+C+"\"]");B.attr("selected","selected")},_selectEntry:function(C){var B=this;var E=B._getEntry(C);var C=B._getEntryId(E);var D=B._getEntryName(E);B._selectedEntryId=C;B._selectedEntryName=D;if(E.is(".selected")||!C){return E}B._unselectAllEntries();E.addClass("selected");var F=jQuery(".vocabulary-edit");var A=F.find("input.entry-name");A.val(D);B._displayProperties(C);B._selectedEntry=E;return E},_selectVocabulary:function(B){var A=this;var D=A._getVocabulary(B);var C=A._getVocabularyName(D);var B=A._getVocabularyId(D);if(D.is(".selected")){return D}A._hideAllMessages();A._selectedVocabularyName=C;A._selectedVocabularyId=B;A._selectCurrentVocabulary(B);A._unselectAllVocabularies();A._closeEditSection();D.addClass("selected");A._displayVocabularyEntries(A._selectedVocabularyName);return D},_sendMessage:function(E,C,B,D){var A=this;var B=jQuery(B||"#vocabulary-messages");var F=Liferay.Language.get(C);var G="portlet-msg-"+E;clearTimeout(A._messageTimeout);B.removeClass("portlet-msg-error portlet-msg-success");B.addClass(G).html(F).fadeIn("fast");if(!D){A._messageTimeout=setTimeout(function(){B.fadeOut("slow")},7000)}},_showLoading:function(B){var A=this;jQuery(B).html("<div class=\"loading-animation\" />")},_showSection:function(C){var A=this;var B=jQuery(C);if(!B.is(":visible")){B.parent().addClass("vocabulary-editing-tag");B.find("input:first").focus();jQuery(A._layoutContainerCells).width("33%")}},_showToolBarEntrySection:function(){var B=this;var E=jQuery(".vocabulary-toolbar");var A=E.find(".entry-toolbar-section");var D=jQuery(".add-entry-btn");var C=E.find(".vocabulary-toolbar-section");if(!B._selectedVocabularyName){B._resetActionValues();jQuery(".entry-toolbar-section").hide();B._sendMessage("info",Liferay.Language.get("you-must-first-add-a-vocabulary"));B._positionToolbarSection(D,A);B._showToolBarVocabularySection();return }B._positionToolbarSection(D,A);A.show().find(".vocabulary-entry-name").focus();C.hide()},_showToolBarVocabularySection:function(){var B=this;var E=jQuery(".vocabulary-toolbar");var A=E.find(".entry-toolbar-section");var D=jQuery(".add-vocabulary-btn");var C=E.find(".vocabulary-toolbar-section");B._positionToolbarSection(D,C);C.show().find(".vocabulary-name").focus();A.hide()},_positionToolbarSection:function(C,H){var J=C.offset();var F=jQuery(".vocabulary-container");var I=H.find(".direction-indicator");var G=C.outerHeight();var E=C.outerWidth();var D=H.outerHeight();var B=H.outerWidth();var A=E/2;J.left+=(E-B);J.top+=(G+25);H.css({left:J.left,top:J.top});I.css({right:A})},_unselectAllEntries:function(){var A=this;jQuery(A._entryListClass).removeClass("selected");jQuery("div.vocabulary-property-row:gt(0)").remove()},_unselectAllVocabularies:function(){var A=this;jQuery(A._vocabularyListClass).removeClass("selected")},_updateEntry:function(F,D,C,E,B,G){var A=this;Liferay.Service.Tags.TagsEntry.updateEntry({entryId:F,parentEntryName:C,name:D,vocabularyName:B,properties:E},function(I){var H=I.exception;if(!H){var J=A._selectedEntry.find("> span > a");if(!J.length){J.find("> span")}A._selectedEntry.attr("data-entry",D);J.text(D);A._closeEditSection()}else{if(H.indexOf("NoSuchVocabularyException")>-1){A._sendMessage("error","that-vocabulary-does-not-exist")}else{if(H.indexOf("NoSuchEntryException")>-1){A._sendMessage("error","that-parent-category-does-not-exist")}else{if(H.indexOf("auth.PrincipalException")>-1){A._sendMessage("error","you-do-not-have-permission-to-access-the-requested-resource")}else{if(H.indexOf("Exception")>-1){A._sendMessage("error","one-of-your-fields-contains-invalid-characters")}}}}}if(G){G(I)}})},_updateVocabulary:function(A,C,B,D){Liferay.Service.Tags.TagsVocabulary.updateVocabulary({vocabularyId:A,name:C,folksonomy:B},D)},_entryListClass:".vocabulary-entries li",_entryScopeClass:".vocabulary-entries",_layoutContainerCells:".portlet-tags-admin .vocabulary-content td",_selectedEntryName:null,_selectedVocabulary:"tag",_selectedVocabularyId:null,_selectedVocabularyName:null,_vocabularyListClass:".vocabulary-list li",_vocabularyScopeClass:".vocabulary-list"})
+Liferay.Portlet.TagsAdmin = new Class({
+	initialize: function(portletId) {
+		var instance = this;
+
+		var childrenContainer = jQuery(instance._entryScopeClass);
+
+		instance.portletId = portletId;
+		instance._container = jQuery('.vocabulary-container');
+
+		jQuery('.vocabulary-close').click(
+			function() {
+				instance._unselectAllEntries();
+				instance._closeEditSection();
+			}
+		);
+
+		jQuery('.vocabulary-save-properties').click(
+			function() {
+				instance._saveProperties();
+			}
+		);
+
+		instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-messages" />');
+		instance._entryMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-entry-messages" />');
+
+		instance._portletMessageContainer.hide();
+		instance._entryMessageContainer.hide();
+
+		instance._container.before(instance._portletMessageContainer);
+		childrenContainer.before(instance._entryMessageContainer);
+
+		var buttons = jQuery('.vocabulary-buttons')
+		var toolbar = jQuery('.vocabulary-toolbar');
+
+		var changeAddLabel = function(label) {
+			label = Liferay.Language.get(label);
+			toolbar.find('.vocabulary-label').html(label);
+			toolbar.find('.add-entry-btn').val(label);
+		};
+
+		var changeToLabel = function(label) {
+			label = Liferay.Language.get(label);
+			toolbar.find('.vocabulary-parent-label').html(label);
+		};
+
+		var changeVocaularyAddLabel = function(label) {
+			label = Liferay.Language.get(label);
+			toolbar.find('.add-vocabulary-btn').val(label);
+		};
+
+		var changeVocabularyDeleteBtnLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-delete-list-button').val(label);
+		};
+
+		var changeSearchSelectLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('#vocabulary-select-search option[value=vocabularies]').html(label);
+		};
+
+		var changeToolbarSectionLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-toolbar-section .panel-content label:first').html(label);
+		};
+
+		var changeVocabularyHeaderLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-list-container .results-header').html(label);
+		};
+
+		var changeEntryHeaderLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-entries-container .results-header').html(label);
+		};
+
+		var changeEditEntryHeaderLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-edit-entry .results-header').html(label);
+		};
+
+		var changeVocabularyPermissionButtonsLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('.permissions-vocabulary-btn').val(label);
+		};
+
+		var changeEntryPermissionButtonsLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('.permissions-entries-btn').val(label);
+		};
+
+		var selectButton = function(button) {
+			buttons.find('.button').removeClass('selected');
+			jQuery(button).addClass('selected');
+		};
+
+		buttons.find('.tags-sets').click(
+			function(event) {
+				instance._selectedVocabulary = 'tag';
+
+				changeAddLabel('add-tag');
+				changeEditEntryHeaderLabel('edit-tag');
+				changeEntryHeaderLabel('tags');
+				changeEntryPermissionButtonsLabels('edit-tag-permissions');
+				changeSearchSelectLabels('tag-sets');
+				changeToLabel('to-tag-set');
+				changeToolbarSectionLabels('add-tag-set');
+				changeVocabularyDeleteBtnLabel('delete-tag-set');
+				changeVocabularyHeaderLabel('tag-sets');
+				changeVocabularyPermissionButtonsLabels('edit-tag-set-permissions');
+				changeVocaularyAddLabel('add-tag-set');
+
+				selectButton(this);
+
+				instance._loadData();
+				instance._hideToolbarSections();
+			}
+		);
+
+		buttons.find('.categories').click(
+			function(event) {
+				instance._selectedVocabulary = 'category';
+
+				changeAddLabel('add-category');
+				changeEditEntryHeaderLabel('edit-category');
+				changeEntryHeaderLabel('categories');
+				changeEntryPermissionButtonsLabels('edit-category-permissions');
+				changeSearchSelectLabels('categories');
+				changeToLabel('to-vocabulary');
+				changeToolbarSectionLabels('add-vocabulary');
+				changeVocabularyDeleteBtnLabel('delete-vocabulary');
+				changeVocabularyHeaderLabel('Vocabulary');
+				changeVocabularyPermissionButtonsLabels('edit-vocabulary-permissions');
+				changeVocaularyAddLabel('add-vocabulary');
+
+				selectButton(this);
+
+				instance._loadData();
+				instance._hideToolbarSections();
+			}
+		);
+
+		toolbar.find('.add-vocabulary-btn').click(
+			function (event) {
+				instance._showToolBarVocabularySection();
+			}
+		);
+
+		toolbar.find('.add-entry-btn').click(
+			function (event) {
+				instance._showToolBarEntrySection();
+			}
+		);
+
+		jQuery('.permissions-entries-btn').click(
+			function() {
+				var entryName = instance._selectedEntryName;
+				var entryId = instance._selectedEntryId;
+
+				if (entryName && entryId) {
+					var portletURL = instance._createPermissionURL(
+						'com.liferay.portlet.tags.model.TagsEntry',
+						entryName,
+						entryId);
+
+					submitForm(document.hrefFm, portletURL.toString());
+				}
+				else {
+					instance._showToolBarEntrySection();
+				}
+			}
+		);
+
+		jQuery('.permissions-vocabulary-btn').click(
+			function() {
+				var vocabularyName = instance._selectedVocabularyName;
+				var vocabularyId = instance._selectedVocabularyId;
+
+				if (vocabularyName && vocabularyId) {
+					var portletURL = instance._createPermissionURL(
+						'com.liferay.portlet.tags.model.TagsVocabulary',
+						vocabularyName,
+						vocabularyId);
+
+					submitForm(document.hrefFm, portletURL.toString());
+				}
+				else {
+					instance._showToolBarVocabularySection();
+				}
+			}
+		);
+
+		jQuery('#vocabulary-search-bar').change(
+			function(event) {
+				jQuery('#vocabulary-search-input').focus();
+				instance._reloadSearch();
+			}
+		);
+
+		var addEntry = function() {
+			var actionScope = jQuery('.vocabulary-actions');
+			var entryName = actionScope.find('.vocabulary-entry-name').val();
+			var vocabularyName = actionScope.find('.vocabulary-select-list option:selected').text();
+
+			instance._hideAllMessages();
+			instance._addEntry(entryName, vocabularyName);
+		};
+
+		var addVocabulary = function() {
+			var actionScope = jQuery('.vocabulary-actions');
+			var inputVocabularyName = actionScope.find('.vocabulary-name');
+			var newVocabulary = inputVocabularyName.val();
+
+			instance._hideAllMessages();
+			instance._addVocabulary(newVocabulary);
+		};
+
+		jQuery('input.entry-save-button').click(addEntry);
+		jQuery('input.vocabulary-save-button').click(addVocabulary);
+
+		jQuery('.vocabulary-actions input').keyup(
+			function(event) {
+				if (event.keyCode == 13) {
+					var input = jQuery(this);
+
+					if (input.is('.vocabulary-entry-name')) {
+						addEntry();
+					}
+					else if (input.is('.vocabulary-name')) {
+						addVocabulary();
+					}
+
+					return false;
+				}
+			}
+		);
+
+		jQuery('input.vocabulary-delete-entries-button').click(
+			function() {
+				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-entry'))) {
+					instance._deleteEntry(
+						instance._selectedEntryId,
+						function(message) {
+							var exception = message.exception;
+
+							if (!exception) {
+								instance._closeEditSection();
+								instance._hideToolbarSections();
+								instance._displayVocabularyEntries(instance._selectedVocabularyName);
+							}
+							else {
+								if (exception.indexOf('auth.PrincipalException') > -1) {
+									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+								}
+							}
+						}
+					);
+				}
+			}
+		);
+
+		jQuery('input.vocabulary-delete-list-button').click(
+			function() {
+				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
+					instance._deleteVocabulary(
+						instance._selectedVocabularyId,
+						function(message) {
+							var exception = message.exception;
+							if (!exception) {
+								instance._closeEditSection();
+								instance._hideToolbarSections();
+								instance._loadData();
+							}
+							else {
+								if (exception.indexOf('auth.PrincipalException') > -1) {
+									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+								}
+							}
+						}
+					);
+				}
+			}
+		);
+
+		jQuery('.close-panel').click(
+			function() {
+				instance._hideToolbarSections();
+			}
+		);
+
+		jQuery('.lfr-floating-panel input:text').keyup(
+			function(event) {
+				var ESC_KEY_CODE = 27;
+				var keyCode = event.keyCode;
+
+				if (keyCode == ESC_KEY_CODE) {
+					instance._hideToolbarSections();
+				}
+			}
+		);
+
+		instance._loadData();
+	},
+
+	_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
+		var instance = this;
+
+		var portletURL = Liferay.PortletURL.createPermissionURL(
+			instance.portletId, modelResource, modelResourceDescription, resourcePrimKey);
+
+		return portletURL;
+	},
+
+	_displayCategoriesVocabularyEntries: function(entries, callback) {
+		var instance = this;
+
+		var buffer = [];
+		var childrenList = jQuery(instance._entryScopeClass);
+
+		var treeOptions = {
+			sortOn: 'li',
+			distance: 10,
+			dropOn: 'span.folder',
+			dropHoverClass: 'hover-folder',
+			drop: function(event, ui) {
+				ui.droppable = jQuery(this).parent();
+				instance._merge(event, ui);
+
+				var categoryTree = jQuery('#vocabulary-treeview');
+
+				setTimeout(
+					function() {
+						categoryTree.find(':not(span)').removeClass();
+						categoryTree.find('div').remove();
+						categoryTree.removeData('toggler');
+						categoryTree.treeview();
+				}, 100);
+			}
+		};
+
+		buffer.push('<div class="vocabulary-treeview-container lfr-component"><ul id="vocabulary-treeview" class="filetree">');
+		instance._buildCategoryTreeview(entries, buffer, 0);
+		buffer.push('</ul></div>');
+
+		childrenList.html(buffer.join(''));
+
+		instance._reloadSearch();
+
+		var categoryTree = jQuery('#vocabulary-treeview');
+		var	entryList = jQuery(instance._entryListClass);
+
+		entryList.click(
+			function(event) {
+				var entryId = instance._getEntryId(this);
+				var editContainer = jQuery('.vocabulary-edit');
+
+				instance._selectEntry(entryId);
+				instance._showSection(editContainer);
+
+				event.stopPropagation();
+			}
+		);
+
+		categoryTree.treeview().tree(treeOptions);
+
+		var list = jQuery(instance._vocabularyScopeClass);
+		var listLinks = jQuery('li', list);
+		var treeScope = categoryTree.data('tree').identifier;
+
+		listLinks.droppable(
+			{
+				accept: '.vocabulary-category-item',
+				tolerance: 'pointer',
+				hoverClass:	'active-area',
+				scope: treeScope,
+				cssNamespace: false,
+				drop: function(event, ui) {
+					ui.droppable = jQuery(this);
+					instance._merge(event, ui);
+				}
+			}
+		);
+
+		if (callback) {
+			callback();
+		}
+	},
+
+	_displayFolksonomiesVocabularyEntries: function(entries, callback) {
+		var instance = this;
+
+		var buffer = [];
+		var childrenList = jQuery(instance._entryScopeClass);
+
+		buffer.push('<ul>');
+
+		jQuery.each(
+			entries,
+			function(i) {
+				buffer.push('<li class="vocabulary-item results-row" ');
+				buffer.push('data-entry="');
+				buffer.push(this.name);
+				buffer.push('" data-entryId="');
+				buffer.push(this.entryId);
+				buffer.push('"><span><a href="javascript: ;">');
+				buffer.push(this.name);
+				buffer.push('</a></span>');
+				buffer.push('</li>');
+			}
+		);
+
+		buffer.push('</ul>');
+
+		if (!entries.length) {
+			buffer = [];
+			instance._sendMessage('info', 'no-entries-were-found', '#vocabulary-entry-messages', true);
+		}
+
+		childrenList.html(buffer.join(''));
+
+		instance._reloadSearch();
+
+		var	entryList = jQuery(instance._entryListClass);
+
+		entryList.mousedown(
+			function() {
+				var entryId = instance._getEntryId(this);
+				var editContainer = jQuery('.vocabulary-edit');
+
+				instance._selectEntry(entryId);
+				instance._showSection(editContainer);
+			}
+		);
+
+		entryList.draggable(
+			{
+				appendTo: 'body',
+				cssNamespace: false,
+				cursor: 'move',
+				distance: 3,
+				ghosting: false,
+				helper: function(event, ui) {
+					var drag = jQuery(this);
+					var width = drag.width();
+					var helper = drag.clone();
+
+					helper.css(
+						{
+							width: width
+						}
+					);
+
+					helper.addClass('portlet-tags-admin-helper');
+
+					return helper;
+				},
+				opacity: 0.7,
+				scope: 'vocabulary-item-scope',
+				scroll: 'auto',
+				zIndex: 1000
+			}
+		);
+
+		entryList.droppable(
+			{
+				accept: '.vocabulary-item',
+				cssNamespace: false,
+				drop: function(event, ui) {
+					ui.droppable = jQuery(this);
+					instance._merge(event, ui);
+				},
+				hoverClass:	'active-area',
+				scope: 'vocabulary-item-scope',
+				tolerance: 'pointer'
+			}
+		);
+
+		instance._alternateRows();
+
+		if (callback) {
+			callback();
+		}
+	},
+
+	_displayList: function(folksonomy, callback) {
+		var instance = this;
+
+		var buffer = [];
+		var list = jQuery(instance._vocabularyScopeClass);
+
+		instance._showLoading('.vocabulary-entries, .vocabulary-list');
+
+		buffer.push('<ul>');
+
+		instance._getVocabularies(
+			folksonomy,
+			function(vocabularies) {
+				jQuery.each(
+					vocabularies,
+					function(i) {
+						buffer.push('<li');
+						buffer.push(' class="vocabulary-category results-row');
+
+						if (i == 0){
+							buffer.push(' selected ');
+						}
+
+						buffer.push('" data-vocabulary="');
+						buffer.push(this.name);
+						buffer.push('" data-vocabularyId="');
+						buffer.push(this.vocabularyId);
+						buffer.push('"><span><a href="javascript: ;">');
+						buffer.push(this.name);
+						buffer.push('</a></span>');
+						buffer.push('</li>');
+					}
+				);
+
+				buffer.push('</ul>');
+
+				list.html(buffer.join(''));
+
+				var firstVocabulary = jQuery(instance._vocabularyListClass + ':first');
+				var vocabularyName = instance._getVocabularyName(firstVocabulary);
+				var vocabularyId = instance._getVocabularyId(firstVocabulary);
+
+				instance._selectedVocabularyName = vocabularyName;
+				instance._selectedVocabularyId = vocabularyId;
+				instance._feedVocabularySelect(vocabularies, vocabularyId);
+
+				var listLinks = jQuery('li', list);
+
+				listLinks.mousedown(
+					function(event) {
+						var vocabularyId = instance._getVocabularyId(this);
+
+						instance._selectVocabulary(vocabularyId);
+					}
+				);
+
+				listLinks.droppable(
+					{
+						accept: '.vocabulary-item',
+						cssNamespace: false,
+						drop: function(event, ui) {
+							ui.droppable = jQuery(this);
+							instance._merge(event, ui);
+						},
+						hoverClass:	'active-area',
+						scroll: 'auto',
+						scope: 'vocabulary-item-scope',
+						tolerance: 'pointer'
+					}
+				);
+
+				jQuery('li span a', list).editable(
+					function(value, settings) {
+						var vocabularyName = value;
+						var vocabularyId = instance._selectedVocabularyId;
+						var folksonomy = (instance._selectedVocabulary == 'tag');
+						var li = jQuery(this).parents('li:first');
+
+						li.attr('data-vocabulary', value);
+
+						instance._updateVocabulary(
+							vocabularyId,
+							vocabularyName,
+							folksonomy,
+							function(message) {
+								var exception = message.exception;
+								if (exception) {
+									if (exception.indexOf('auth.PrincipalException') > -1) {
+										instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+									}
+								}
+								else {
+									instance._displayList(
+										folksonomy,
+										function() {
+											var vocabulary = instance._selectVocabulary(message.vocabularyId);
+
+											instance._displayVocabularyEntries(instance._selectedVocabularyName);
+										}
+									);
+								}
+							}
+						);
+
+						return value;
+					},
+					{
+						cssclass: 'vocabulary-edit-vocabulary',
+						data: function(value, settings) {
+							// var instance = this;
+
+							return value;
+						},
+
+						height: '15px',
+						width: '200px',
+						onblur: 'ignore',
+						submit: Liferay.Language.get('save'),
+						select: false,
+						type: 'text',
+						event: 'dblclick'
+					}
+				);
+
+				if (callback) {
+					callback();
+				}
+			}
+		);
+	},
+
+	_displayProperties: function(entryId) {
+		var instance = this;
+
+		instance._getProperties(
+			entryId,
+			function(properties) {
+				if (!properties.length){
+					properties = [{ key: '', value: '' }];
+				}
+
+				var total = properties.length;
+				var totalRendered = jQuery('div.vocabulary-property-row').length;
+
+				if (totalRendered > total) {
+					return;
+				}
+
+				jQuery.each(
+					properties,
+					function() {
+						var baseProperty = jQuery('div.vocabulary-property-row:last');
+
+						instance._addProperty(baseProperty, this.key, this.value);
+					}
+				);
+			}
+		);
+	},
+
+	_displayVocabularyEntries: function(vocabulary, callback) {
+		var instance = this;
+
+		jQuery('#vocabulary-entry-messages').hide();
+
+		instance._getVocabularyEntries(
+			vocabulary,
+			function(entries) {
+				if (!instance._selectedVocabulary || instance._selectedVocabulary == 'tag') {
+					instance._displayFolksonomiesVocabularyEntries(entries, callback);
+				}
+
+				if (instance._selectedVocabulary == 'category') {
+					instance._displayCategoriesVocabularyEntries(entries, callback);
+				}
+			}
+		);
+	},
+
+	_addEntry: function(entryName, vocabulary, callback) {
+		var instance = this;
+		var communityPermission = instance._getPermissionsEnabled('entry', 'community');
+		var guestPermission = instance._getPermissionsEnabled('entry', 'guest');
+
+		var serviceParameterTypes = [
+			'java.lang.String',
+			'java.lang.String',
+			'java.lang.String',
+			'[Ljava.lang.String;',
+			'com.liferay.portal.service.ServiceContext'
+		].join(',');
+
+		Liferay.Service.Tags.TagsEntry.addEntry(
+			{
+				parentEntryName: null,
+				name: entryName,
+				vocabulary: vocabulary,
+				properties: [],
+				serviceContext: jQuery.toJSON(
+					{
+						communityPermissions: communityPermission,
+						guestPermissions: guestPermission,
+						scopeGroupId: themeDisplay.getScopeGroupId()
+					}
+				),
+				serviceParameterTypes: serviceParameterTypes
+			},
+			function(message) {
+				var exception = message.exception;
+
+				if (!exception && message.entryId) {
+					instance._sendMessage('success', 'your-request-processed-successfully');
+
+					instance._selectVocabulary(message.vocabularyId);
+
+					instance._displayVocabularyEntries(
+						instance._selectedVocabularyName,
+						function() {
+							var entry = instance._selectEntry(message.entryId);
+
+							if (entry.length){
+								jQuery(instance._entryScopeClass).scrollTo(entry);
+							}
+
+							instance._showSection('.vocabulary-edit');
+						}
+					);
+
+					instance._resetActionValues();
+					instance._hideToolbarSections();
+
+					if (callback) {
+						callback(entryName, vocabulary);
+					}
+				}
+				else {
+					var errorKey = '';
+
+					if (exception.indexOf('DuplicateEntryException') > -1) {
+						errorKey = 'that-tag-already-exists';
+					}
+					else if (exception.indexOf('EntryNameException') > -1) {
+						errorKey = 'one-of-your-fields-contains-invalid-characters';
+					}
+					else if (exception.indexOf('NoSuchVocabularyException') > -1) {
+						errorKey = 'that-vocabulary-does-not-exist';
+					}
+					else if (exception.indexOf('auth.PrincipalException') > -1) {
+						errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
+					}
+					if (errorKey) {
+						instance._sendMessage('error', errorKey);
+					}
+				}
+			}
+		);
+	},
+
+	_addProperty: function(baseNode, key, value) {
+		var instance = this;
+
+		var baseProperty = jQuery('div.vocabulary-property-row:last');
+		var newProperty = baseProperty.clone();
+
+		newProperty.find('.property-key').val(key);
+		newProperty.find('.property-value').val(value);
+		newProperty.insertAfter(baseNode);
+		newProperty.show();
+
+		if (!key && !value) {
+			newProperty.find('input:first').addClass('lfr-auto-focus');
+		}
+
+		instance._attachPropertyIconEvents(newProperty);
+	},
+
+	_addVocabulary: function(vocabulary, callback) {
+		var instance = this;
+
+		var folksonomy = (instance._selectedVocabulary == 'tag');
+		var communityPermission = instance._getPermissionsEnabled('vocabulary', 'community');
+		var guestPermission = instance._getPermissionsEnabled('vocabulary', 'guest');
+
+		Liferay.Service.Tags.TagsVocabulary.addVocabulary(
+			{
+				name: vocabulary,
+				folksonomy: folksonomy,
+				serviceContext: jQuery.toJSON(
+					{
+						communityPermissions: communityPermission,
+						guestPermissions: guestPermission,
+						scopeGroupId: themeDisplay.getScopeGroupId()
+					}
+				)
+			},
+			function(message) {
+				var exception = message.exception;
+
+				if (!message.exception) {
+					instance._sendMessage('success', 'your-request-processed-successfully');
+
+					instance._displayList(
+						folksonomy,
+						function() {
+							var vocabulary = instance._selectVocabulary(message.vocabularyId);
+
+							instance._displayVocabularyEntries(instance._selectedVocabularyName);
+
+							if (vocabulary.length) {
+								jQuery(instance._vocabularyScopeClass).scrollTo(vocabulary);
+							}
+						}
+					);
+
+					instance._resetActionValues();
+
+					if (callback) {
+						callback(vocabulary);
+					}
+				}
+				else {
+					var errorKey = '';
+
+					if (exception.indexOf('DuplicateVocabularyException') > -1) {
+						errorKey = 'that-vocabulary-already-exists';
+					}
+					else if (exception.indexOf('VocabularyNameException') > -1) {
+						errorKey = 'one-of-your-fields-contains-invalid-characters';
+					}
+					else if (exception.indexOf('NoSuchVocabularyException') > -1) {
+						errorKey = 'that-parent-vocabulary-does-not-exist';
+					}
+					else if (exception.indexOf('auth.PrincipalException') > -1) {
+						errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
+					}
+
+					if (errorKey) {
+						instance._sendMessage('error', errorKey);
+					}
+				}
+			}
+		);
+	},
+
+	_alternateRows: function() {
+		var instance = this;
+
+		var entriesScope = jQuery(instance._entryScopeClass);
+
+		jQuery('li', entriesScope).removeClass('alt');
+		jQuery('li:odd', entriesScope).addClass('alt');
+	},
+
+	_attachPropertyIconEvents: function(property) {
+		var instance = this;
+
+		var row = jQuery(property);
+
+		row.find('.add-property').click(
+			function() {
+				instance._addProperty(property, '', '');
+			}
+		);
+
+		row.find('.delete-property').click(
+			function() {
+				instance._removeProperty(property);
+			}
+		);
+	},
+
+	_buildCategoryTreeview: function(entries, buffer, parentId) {
+		var instance = this;
+
+		var children = instance._filterCategory(entries, parentId);
+
+		jQuery.each(
+			children,
+			function(i) {
+				var entryId = this.entryId;
+				var name = this.name;
+				var hasChild = instance._filterCategory(entries, entryId).length;
+
+				buffer.push('<li');
+				buffer.push(' class="vocabulary-category-item"');
+				buffer.push(' data-entry="');
+				buffer.push(this.name);
+				buffer.push('" data-entryId="');
+				buffer.push(this.entryId);
+
+				buffer.push('"><span class="folder">');
+				buffer.push(name);
+				buffer.push('</span>');
+
+				if (hasChild) {
+					buffer.push('<ul>');
+
+					instance._buildCategoryTreeview(entries, buffer, entryId);
+
+					buffer.push('</ul>');
+				}
+
+				buffer.push('</li>');
+			}
+		);
+
+		return children.length;
+	},
+
+	_buildProperties: function() {
+		var instance = this;
+
+		var buffer = [];
+
+		jQuery('.vocabulary-property-row:visible').each(
+			function(i, o) {
+				var propertyRow = jQuery(this);
+				var key = propertyRow.find('input.property-key').val();
+				var value = propertyRow.find('input.property-value').val();
+				var rowValue = ['0', ':', key, ':', value, ','].join('');
+
+				buffer.push(rowValue);
+			}
+		);
+
+		return buffer.join('');
+	},
+
+	_closeEditSection: function() {
+		var instance = this;
+
+		instance._hideSection('.vocabulary-edit');
+		jQuery(instance._layoutContainerCells).width('auto');
+	},
+
+	_deleteEntry: function(entryId, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsEntry.deleteEntry(
+			{
+				entryId: entryId
+			},
+			callback
+		);
+	},
+
+	_deleteVocabulary: function(vocabularyId, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsVocabulary.deleteVocabulary(
+			{
+				entryId: vocabularyId
+			},
+			callback
+		);
+	},
+
+	_feedVocabularySelect: function(vocabularies, defaultValue) {
+		var instance = this;
+
+		var select = jQuery('select.vocabulary-select-list');
+		var buffer = [];
+
+		jQuery.each(
+			vocabularies,
+			function(i) {
+				var selected = (this.vocabularyId == defaultValue);
+
+				buffer.push('<option');
+				buffer.push(selected ? ' selected ' : '');
+				buffer.push(' value="');
+				buffer.push(this.vocabularyId);
+				buffer.push('">');
+				buffer.push(this.name);
+				buffer.push('</option>');
+			}
+		);
+
+		select.html(buffer.join(''));
+	},
+
+	_filterCategory: function(entries, parentId) {
+		var instance = this;
+
+		return jQuery.grep(
+			entries,
+			function(item, i) {
+				return (item.parentEntryId == parentId);
+			}
+		);
+	},
+
+	_getEntry: function(entryId) {
+		var instance = this;
+
+		return jQuery('li[data-entryId=' + entryId + ']')
+	},
+
+	_getEntryId: function(exp) {
+		var instance = this;
+
+		return jQuery(exp).attr('data-entryId');
+	},
+
+	_getEntryName: function(exp) {
+		var instance = this;
+
+		return jQuery(exp).attr('data-entry');
+	},
+
+	_getPermissionsEnabled: function(vocabularyType, type) {
+		var buffer = [];
+		var permissionsActions = jQuery('.'+vocabularyType+'-permissions-actions');
+		var permissions = permissionsActions.find('[name$='+type+'Permissions]:checked');
+
+		buffer = permissions.fieldValue().join(',');
+
+		return buffer;
+	},
+
+	_getProperties: function(entryId, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsProperty.getProperties(
+			{
+				entryId: entryId
+			},
+			callback
+		);
+	},
+
+	_getVocabularies: function(folksonomy, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies(
+			{
+				groupId: themeDisplay.getScopeGroupId(),
+				folksonomy: folksonomy
+			},
+			callback
+		);
+	},
+
+	_getVocabulary: function(vocabularyId) {
+		var instance = this;
+
+		return jQuery('li[data-vocabularyId=' + vocabularyId + ']')
+	},
+
+	_getVocabularyEntries: function(vocabulary, callback) {
+		var instance = this;
+
+		instance._showLoading(instance._entryScopeClass);
+
+		Liferay.Service.Tags.TagsEntry.getGroupVocabularyEntries(
+			{
+				groupId: themeDisplay.getScopeGroupId(),
+				name: vocabulary
+			},
+			callback
+		);
+	},
+
+	_getVocabularyId: function(exp) {
+		var instance = this;
+
+		return jQuery(exp).attr('data-vocabularyId');
+	},
+
+	_getVocabularyName: function(exp) {
+		var instance = this;
+
+		return jQuery(exp).attr('data-vocabulary');
+	},
+
+	_hideAllMessages: function() {
+		var instance = this;
+
+		instance._container.find('.lfr-message-response').hide();
+	},
+
+	_hideLoading: function(exp) {
+		var instance = this;
+
+		instance._container.find('div.loading-animation').remove();
+	},
+
+	_hideSection: function(exp) {
+		var instance = this;
+
+		jQuery(exp).parent().removeClass('vocabulary-editing-tag');
+	},
+
+	_hideToolbarSections: function(){
+		jQuery('.vocabulary-toolbar-section, .entry-toolbar-section').hide();
+	},
+
+	_loadData: function() {
+		var instance = this;
+
+		var folksonomy = (instance._selectedVocabulary == 'tag');
+
+		instance._closeEditSection();
+
+		instance._displayList(
+			folksonomy,
+			function() {
+				instance._displayVocabularyEntries(
+					instance._selectedVocabularyName,
+					function() {
+						var entryId = instance._getEntryId(instance._entryListClass + ':first');
+					}
+				);
+			}
+		);
+	},
+
+	_merge: function(event, ui) {
+		var instance = this;
+
+		var draggable = ui.draggable;
+		var droppable = ui.droppable;
+		var fromEntryId = instance._getEntryId(draggable);
+		var fromEntryName = instance._getEntryName(draggable);
+		var toEntryId = instance._getEntryId(droppable);
+		var toEntryName = instance._getEntryName(droppable);
+		var vocabularyId = instance._getVocabularyId(droppable);
+		var vocabularyName = instance._getVocabularyName(droppable);
+		var folksonomy = (instance._selectedVocabulary == 'tag');
+
+		var isChangingVocabulary = !!vocabularyName;
+		var destination = isChangingVocabulary ? vocabularyName : toEntryName;
+
+		var tagText = {
+			SOURCE: instance._getEntryName(draggable),
+			DESTINATION: destination
+		};
+
+		var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x', ['[$SOURCE$]', '[$DESTINATION$]']).replace(
+			/\[\$(SOURCE|DESTINATION)\$\]/gm,
+			function(completeMatch, match, index, str) {
+				return tagText[match];
+			}
+		);
+
+		if (!folksonomy || confirm(mergeText)) {
+			if (instance._selectedVocabulary == 'tag') {
+				if (isChangingVocabulary) {
+					var properties = instance._buildProperties();
+					instance._updateEntry(fromEntryId, fromEntryName, null, properties, vocabularyName);
+					instance._displayVocabularyEntries(instance._selectedVocabularyName);
+				}
+				else {
+					instance._mergeEntries(
+						fromEntryId,
+						toEntryId,
+						function() {
+							draggable.remove();
+							instance._selectEntry(toEntryId);
+							instance._alternateRows();
+						}
+					);
+				}
+			}
+			else if (instance._selectedVocabulary == 'category') {
+				var properties = instance._buildProperties();
+
+				vocabularyName = vocabularyName || instance._selectedVocabularyName;
+				parentEntryName = isChangingVocabulary ? null : toEntryName;
+
+				instance._updateEntry(fromEntryId, fromEntryName, parentEntryName, properties, vocabularyName);
+			}
+		}
+	},
+
+	_mergeEntries: function(fromId, toId, callback) {
+		Liferay.Service.Tags.TagsEntry.mergeEntries(
+			{
+				fromEntryId: fromId,
+				toEntryId: toId
+			},
+			callback
+		);
+	},
+
+	_reloadSearch: function() {
+		var	instance = this;
+		var options = {};
+		var selected = jQuery('#vocabulary-select-search').val();
+		var input = jQuery('#vocabulary-search-input');
+		var entryList = jQuery(instance._entryListClass);
+		var vocabularyList = jQuery(instance._vocabularyListClass);
+
+		input.unbind('keyup');
+
+		if (/vocabularies/.test(selected)) {
+			options = {
+				list: vocabularyList,
+				filter: jQuery('a', vocabularyList)
+			};
+		}
+		else {
+			var filter = 'span';
+
+			if (instance._selectedVocabulary == 'tag') {
+				filter = 'span a';
+			}
+
+			options = {
+				list: entryList,
+				filter: jQuery(filter, entryList)
+			};
+		}
+
+		input.liveSearch(options);
+	},
+
+	_removeProperty: function(property) {
+		var instance = this;
+
+		if (jQuery('div.vocabulary-property-row').length > 2) {
+			property.remove();
+		}
+	},
+
+	_resetActionValues: function() {
+		var instance = this;
+
+		jQuery('.vocabulary-actions input:text').val('');
+		jQuery('.vocabulary-actions .vocabulary-toolbar-section').hide();
+	},
+
+	_saveProperties: function() {
+		var instance = this;
+
+		var entryId = instance._selectedEntryId;
+		var entryName = jQuery('input.entry-name').val() || instance._selectedEntryName;
+		var parentCategoryName = null;
+		var properties = instance._buildProperties();
+		var vocabularyName = instance._selectedVocabularyName;
+
+		instance._updateEntry(entryId, entryName, parentCategoryName, properties, vocabularyName);
+		instance._displayVocabularyEntries(instance._selectedVocabularyName);
+	},
+
+	_selectCurrentVocabulary: function(value) {
+		var instance = this;
+
+		var option = jQuery('select.vocabulary-select-list option[value="' + value + '"]');
+		option.attr('selected', 'selected');
+	},
+
+	_selectEntry: function(entryId) {
+		var instance = this;
+
+		var entry = instance._getEntry(entryId);
+		var entryId = instance._getEntryId(entry);
+		var entryName = instance._getEntryName(entry);
+
+		instance._selectedEntryId = entryId;
+		instance._selectedEntryName = entryName;
+
+		if (entry.is('.selected') || !entryId) {
+			return entry;
+		}
+
+		instance._unselectAllEntries();
+		entry.addClass('selected');
+
+		var editContainer = jQuery('.vocabulary-edit');
+		var entryNameField = editContainer.find('input.entry-name');
+
+		entryNameField.val(entryName);
+		instance._displayProperties(entryId);
+
+		instance._selectedEntry = entry;
+
+		return entry;
+	},
+
+	_selectVocabulary: function(vocabularyId) {
+		var instance = this;
+
+		var vocabulary = instance._getVocabulary(vocabularyId);
+		var vocabularyName = instance._getVocabularyName(vocabulary);
+		var vocabularyId = instance._getVocabularyId(vocabulary);
+
+		if (vocabulary.is('.selected')) {
+			return vocabulary;
+		}
+
+		instance._hideAllMessages();
+		instance._selectedVocabularyName = vocabularyName;
+		instance._selectedVocabularyId = vocabularyId;
+		instance._selectCurrentVocabulary(vocabularyId);
+
+		instance._unselectAllVocabularies();
+		instance._closeEditSection();
+
+		vocabulary.addClass('selected');
+		instance._displayVocabularyEntries(instance._selectedVocabularyName);
+
+		return vocabulary;
+	},
+
+	_sendMessage: function(type, key, output, noAutoHide) {
+		var instance = this;
+
+		var output = jQuery(output || '#vocabulary-messages');
+		var message = Liferay.Language.get(key);
+		var typeClass = 'portlet-msg-' + type;
+
+		clearTimeout(instance._messageTimeout);
+
+		output.removeClass('portlet-msg-error portlet-msg-success');
+		output.addClass(typeClass).html(message).fadeIn('fast');
+
+		if (!noAutoHide) {
+			instance._messageTimeout = setTimeout(
+				function() {
+					output.fadeOut('slow');
+				}, 7000);
+		}
+	},
+
+	_showLoading: function(container) {
+		var instance = this;
+
+		jQuery(container).html('<div class="loading-animation" />');
+	},
+
+	_showSection: function(exp) {
+		var instance = this;
+
+		var element = jQuery(exp);
+
+		if (!element.is(':visible')) {
+			element.parent().addClass('vocabulary-editing-tag');
+			element.find('input:first').focus();
+			jQuery(instance._layoutContainerCells).width('33%');
+		}
+	},
+
+	_showToolBarEntrySection: function(){
+		var instance = this;
+
+		var toolbar = jQuery('.vocabulary-toolbar');
+		var entryToolbarSection = toolbar.find('.entry-toolbar-section');
+		var entryToolbarButton = jQuery('.add-entry-btn');
+		var vocabularyToolbarSection = toolbar.find('.vocabulary-toolbar-section');
+
+		if (!instance._selectedVocabularyName) {
+			instance._resetActionValues();
+
+			jQuery('.entry-toolbar-section').hide();
+
+			instance._sendMessage("info", Liferay.Language.get('you-must-first-add-a-vocabulary'));
+			instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
+			instance._showToolBarVocabularySection();
+
+			return;
+		}
+
+		instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
+
+		entryToolbarSection.show().find('.vocabulary-entry-name').focus();
+		vocabularyToolbarSection.hide();
+	},
+
+	_showToolBarVocabularySection: function(){
+		var instance = this;
+
+		var toolbar = jQuery('.vocabulary-toolbar');
+		var entryToolbarSection = toolbar.find('.entry-toolbar-section');
+		var vocabularyToolbarButton = jQuery('.add-vocabulary-btn');
+		var vocabularyToolbarSection = toolbar.find('.vocabulary-toolbar-section');
+
+		instance._positionToolbarSection(vocabularyToolbarButton, vocabularyToolbarSection);
+
+		vocabularyToolbarSection.show().find('.vocabulary-name').focus();
+		entryToolbarSection.hide();
+	},
+
+	_positionToolbarSection: function(referenceElement, section){
+		var btnOffset = referenceElement.offset();
+		var vocabularyContainer = jQuery('.vocabulary-container');
+		var indicator = section.find('.direction-indicator');
+
+		var refHeight = referenceElement.outerHeight();
+		var refWidth = referenceElement.outerWidth();
+		var sectionHeight = section.outerHeight();
+		var sectionWidth = section.outerWidth();
+
+		var indicatorPosition = refWidth / 2;
+
+		btnOffset.left += (refWidth - sectionWidth);
+		btnOffset.top += (refHeight + 25);
+
+		section.css(
+			{
+				left: btnOffset.left,
+				top: btnOffset.top
+			}
+		);
+
+		indicator.css(
+			{
+				right: indicatorPosition
+			}
+		);
+	},
+
+	_unselectAllEntries: function() {
+		var instance = this;
+
+		jQuery(instance._entryListClass).removeClass('selected');
+		jQuery('div.vocabulary-property-row:gt(0)').remove();
+	},
+
+	_unselectAllVocabularies: function() {
+		var instance = this;
+
+		jQuery(instance._vocabularyListClass).removeClass('selected');
+	},
+
+	_updateEntry: function(entryId, name, parentEntryName, properties, vocabularyName, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsEntry.updateEntry(
+			{
+				entryId: entryId,
+				parentEntryName: parentEntryName,
+				name: name,
+				vocabularyName: vocabularyName,
+				properties: properties
+			},
+			function(message) {
+				var exception = message.exception;
+
+				if (!exception) {
+					var selectedText = instance._selectedEntry.find('> span > a');
+
+					if (!selectedText.length) {
+						selectedText.find('> span');
+					}
+
+					instance._selectedEntry.attr('data-entry', name);
+					selectedText.text(name);
+
+					instance._closeEditSection();
+				}
+				else {
+					if (exception.indexOf('NoSuchVocabularyException') > -1) {
+						instance._sendMessage('error', 'that-vocabulary-does-not-exist');
+					}
+					else if (exception.indexOf('NoSuchEntryException') > -1) {
+						instance._sendMessage('error', 'that-parent-category-does-not-exist');
+					}
+					else if (exception.indexOf('auth.PrincipalException') > -1) {
+						instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+					}
+					else if (exception.indexOf('Exception') > -1) {
+						instance._sendMessage('error', 'one-of-your-fields-contains-invalid-characters');
+					}
+				}
+
+				if (callback) {
+					callback(message);
+				}
+			}
+		);
+	},
+
+	_updateVocabulary: function(vocabularyId, vocabularyName, folksonomy, callback) {
+		Liferay.Service.Tags.TagsVocabulary.updateVocabulary(
+			{
+				vocabularyId: vocabularyId,
+				name: vocabularyName,
+				folksonomy: folksonomy
+			},
+			callback
+		);
+	},
+
+	_entryListClass: '.vocabulary-entries li',
+	_entryScopeClass: '.vocabulary-entries',
+	_layoutContainerCells: '.portlet-tags-admin .vocabulary-content td',
+	_selectedEntryName: null,
+	_selectedVocabulary: 'tag',
+	_selectedVocabularyId: null,
+	_selectedVocabularyName: null,
+	_vocabularyListClass: '.vocabulary-list li',
+	_vocabularyScopeClass: '.vocabulary-list'
+});
