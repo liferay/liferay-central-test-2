@@ -201,7 +201,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		/>
 	</liferay-ui:search-container-row>
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.EXPANDO, ActionKeys.ADD_EXPANDO) %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_EXPANDO) %>">
 		<div>
 			<input type="button" value="<liferay-ui:message key="add-custom-attribute" />" onClick="<portlet:namespace />addExpando();" />
 		</div>

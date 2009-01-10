@@ -88,14 +88,14 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 	PortletURL addURL = null;
 
 	if (assetType.equals(BlogsEntry.class.getName())) {
-		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+		if (BlogsPermissions.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 			addURL = new PortletURLImpl(renderRequestImpl, PortletKeys.BLOGS, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 			addURL.setParameter("struts_action", "/blogs/edit_entry");
 		}
 	}
 	else if (assetType.equals(BookmarksEntry.class.getName())) {
-		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY)) {
+		if (BookmarksPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 			addURL = new PortletURLImpl(renderRequestImpl, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 			addURL.setParameter("struts_action", "/bookmarks/edit_entry");
@@ -103,7 +103,7 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 		}
 	}
 	else if (assetType.equals(DLFileEntry.class.getName())) {
-		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY)) {
+		if (DLPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 			addURL = new PortletURLImpl(renderRequestImpl, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 			addURL.setParameter("struts_action", "/document_library/edit_file_entry");
@@ -112,7 +112,7 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 		}
 	}
 	else if (assetType.equals(IGImage.class.getName())) {
-		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE)) {
+		if (IGPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_IMAGE)) {
 			addURL = new PortletURLImpl(renderRequestImpl, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 			addURL.setParameter("struts_action", "/image_gallery/edit_image");
@@ -121,7 +121,7 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 		}
 	}
 	else if (assetType.equals(JournalArticle.class.getName())) {
-		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE)) {
+		if (JournalPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ARTICLE)) {
 			addURL = new PortletURLImpl(renderRequestImpl, PortletKeys.JOURNAL, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 			addURL.setParameter("struts_action", "/journal/edit_article");

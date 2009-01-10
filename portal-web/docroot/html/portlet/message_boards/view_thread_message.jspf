@@ -69,7 +69,7 @@
 							label="<%= true %>"
 						/>
 
-						<c:if test="<%= (userDisplay != null) && (user.getUserId() != userDisplay.getUserId()) && PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
+						<c:if test="<%= (userDisplay != null) && (user.getUserId() != userDisplay.getUserId()) && MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
 							<br />
 
 							<c:choose>

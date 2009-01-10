@@ -65,6 +65,7 @@
 <%@ page import="com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %>
+<%@ page import="com.liferay.portlet.messageboards.service.permission.MBPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %>
