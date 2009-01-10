@@ -88,7 +88,7 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 	PortletURL addURL = null;
 
 	if (assetType.equals(BlogsEntry.class.getName())) {
-		if (BlogsPermissions.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
+		if (BlogsPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 			addURL = new PortletURLImpl(renderRequestImpl, PortletKeys.BLOGS, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 			addURL.setParameter("struts_action", "/blogs/edit_entry");
